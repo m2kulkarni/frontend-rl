@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Kōrin Mokkō — Atelier of Joinery & Paper</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), serif;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* ---------- Page wrapper ---------- */
+  .page {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 56px 72px 0;
+    position: relative;
+  }
+
+  /* ---------- Background wagara texture ---------- */
+  .wagara-bg {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.10;
+    background-image: url("svg/seigaiha-waves.svg");
+    background-size: 280px 280px;
+    background-repeat: repeat;
+    mix-blend-mode: multiply;
+  }
+  .page > * { position: relative; z-index: 1; }
+
+  /* ---------- Masthead ---------- */
+  .masthead {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: end;
+    gap: 32px;
+    padding-bottom: 14px;
+  }
+  .masthead .mark-jp {
+    font-family: var(--font-display), serif;
+    font-size: 42px;
+    color: var(--primary);
+    letter-spacing: 0.04em;
+    line-height: 1;
+  }
+  .masthead .mark-en {
+    font-family: var(--font-body), serif;
+    font-size: 11px;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--text);
+    padding-bottom: 6px;
+  }
+  .masthead .estd {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 12px;
+    color: var(--text);
+    text-align: right;
+    line-height: 1.5;
+    padding-bottom: 6px;
+    letter-spacing: 0.04em;
+  }
+  .estd .seal {
+    display: inline-block;
+    color: var(--secondary);
+    font-style: normal;
+    font-family: var(--font-display), serif;
+    border: 1.5px solid var(--secondary);
+    padding: 2px 6px;
+    margin-left: 8px;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+  }
+
+  /* ---------- Navigation ---------- */
+  nav.primary {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    border-top: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+    padding: 14px 0;
+    margin-top: 8px;
+  }
+  nav.primary .roundel {
+    width: 40px;
+    height: 40px;
+    display: block;
+  }
+  nav.primary ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex-end;
+    gap: 36px;
+  }
+  nav.primary a {
+    font-family: var(--font-body), serif;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--text);
+    text-decoration: none;
+  }
+  nav.primary a[aria-current="page"] {
+    color: var(--secondary);
+    border-bottom: 1px solid var(--secondary);
+    padding-bottom: 2px;
+  }
+  nav.primary a:hover { color: var(--primary); }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr 220px;
+    grid-template-rows: 80px 1fr 1fr;
+    min-height: 560px;
+    margin-top: 64px;
+    position: relative;
+  }
+  .hero .roundel-large {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    width: 180px;
+    height: 180px;
+    align-self: center;
+    justify-self: center;
+    opacity: 0.85;
+  }
+  .hero .vertical-title {
+    grid-column: 3 / 4;
+    grid-row: 1 / 4;
+    writing-mode: vertical-rl;
+    font-family: var(--font-display), serif;
+    font-size: 64px;
+    line-height: 1.05;
+    color: var(--primary);
+    letter-spacing: 0.18em;
+    justify-self: end;
+    align-self: start;
+    padding-top: 12px;
+    padding-right: 12px;
+  }
+  .hero .vertical-title .sub {
+    font-size: 18px;
+    letter-spacing: 0.5em;
+    color: var(--text);
+    margin-left: 28px;
+    font-family: var(--font-body), serif;
+  }
+  .hero .intro {
+    grid-column: 1 / 2;
+    grid-row: 3 / 4;
+    align-self: end;
+    max-width: 360px;
+    border-left: 1px solid var(--ornament);
+    padding: 6px 0 6px 22px;
+  }
+  .hero .intro p {
+    margin: 0 0 10px;
+    font-size: 14px;
+    line-height: 1.85;
+  }
+  .hero .intro p.lead {
+    font-family: var(--font-display), serif;
+    font-size: 17px;
+    color: var(--primary);
+    letter-spacing: 0.04em;
+    line-height: 1.6;
+    margin-bottom: 14px;
+  }
+  .hero .cinnabar-seal {
+    position: absolute;
+    bottom: 24px;
+    left: 380px;
+    width: 54px;
+    height: 54px;
+    background: var(--secondary);
+    color: var(--surface);
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 0.02em;
+    transform: rotate(-3deg);
+    box-shadow: 1px 1px 0 rgba(12,12,12,0.15);
+  }
+
+  /* ---------- Statement section ---------- */
+  .statement {
+    margin-top: 96px;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 40px;
+    align-items: start;
+    position: relative;
+  }
+  .statement::before {
+    content: "";
+    grid-column: 1 / -1;
+    border-top: 1px solid var(--ornament);
+    margin-bottom: 28px;
+  }
+  .statement .label {
+    grid-column: 1 / 2;
+    grid-row: 2;
+    font-family: var(--font-body), serif;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--text);
+    padding-top: 8px;
+  }
+  .statement .label .num {
+    display: block;
+    font-family: var(--font-display), serif;
+    font-size: 32px;
+    color: var(--primary);
+    margin-bottom: 8px;
+    letter-spacing: 0.05em;
+  }
+  .statement .body {
+    grid-column: 2 / 3;
+    grid-row: 2;
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    line-height: 1.75;
+    color: var(--text);
+    letter-spacing: 0.03em;
+  }
+  .statement .body em {
+    color: var(--primary);
+    font-style: normal;
+  }
+  .statement .divider {
+    grid-column: 3 / 4;
+    grid-row: 2;
+    align-self: start;
+    width: 100%;
+    height: 90px;
+    overflow: hidden;
+    opacity: 0.18;
+  }
+  .statement .divider svg { width: 100%; height: auto; transform: translateY(-12px); }
+
+  /* ---------- Commissions ---------- */
+  .commissions {
+    margin-top: 110px;
+    margin-bottom: 96px;
+  }
+  .commissions header {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    align-items: end;
+    margin-bottom: 28px;
+  }
+  .commissions h2 {
+    font-family: var(--font-display), serif;
+    font-size: 30px;
+    margin: 0;
+    color: var(--primary);
+    letter-spacing: 0.06em;
+    font-weight: normal;
+  }
+  .commissions h2 .small {
+    display: block;
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--text);
+    letter-spacing: 0.02em;
+    margin-top: 6px;
+  }
+  .commissions .meta-right {
+    text-align: right;
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 12px;
+    color: var(--text);
+  }
+  .commissions .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  .card {
+    background: var(--surface);
+    padding: 32px 28px 28px;
+    position: relative;
+    border-top: 1px solid var(--ornament);
+  }
+  .card .umebachi {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 14px;
+    height: 14px;
+  }
+  .card .index {
+    font-family: var(--font-body), serif;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .card h3 {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    color: var(--primary);
+    margin: 0 0 4px;
+    letter-spacing: 0.04em;
+    font-weight: normal;
+    line-height: 1.3;
+  }
+  .card .jp {
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    color: var(--text);
+    margin-bottom: 14px;
+    letter-spacing: 0.08em;
+  }
+  .card .rule {
+    border: none;
+    border-top: 1px solid var(--ornament);
+    margin: 14px 0 12px;
+  }
+  .card .meta {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--text);
+    margin-bottom: 14px;
+  }
+  .card .meta b {
+    font-style: normal;
+    font-weight: normal;
+    color: var(--primary);
+  }
+  .card p.desc {
+    font-size: 13px;
+    line-height: 1.75;
+    margin: 0 0 18px;
+  }
+  .card .stage {
+    font-family: var(--font-body), serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text);
+    border-top: 1px solid var(--ornament);
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .card .stage .price { color: var(--primary); }
+
+  /* ---------- Footer ---------- */
+  footer.site {
+    position: relative;
+    margin-top: 80px;
+    background: var(--bg);
+    padding: 56px 72px 28px;
+    border-top: 1px solid rgba(12,12,12,0.2);
+  }
+  footer.site::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 60px;
+    background-image: url("svg/seigaiha-waves.svg");
+    background-size: 200px 200px;
+    background-repeat: repeat-x;
+    opacity: 0.08;
+    pointer-events: none;
+  }
+  .foot-grid {
+    max-width: 1320px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 200px 1fr 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .foot-grid .seal {
+    width: 130px;
+    height: 130px;
+  }
+  .foot-col {
+    font-family: var(--font-body), serif;
+    font-size: 12px;
+    line-height: 1.9;
+  }
+  .foot-col h4 {
+    font-family: var(--font-display), serif;
+    font-size: 15px;
+    color: var(--primary);
+    margin: 0 0 10px;
+    letter-spacing: 0.1em;
+    font-weight: normal;
+    border-bottom: 1px solid var(--ornament);
+    padding-bottom: 6px;
+    writing-mode: horizontal-tb;
+  }
+  .foot-col p { margin: 0 0 8px; }
+  .foot-col em { color: var(--primary); font-style: italic; }
+  .attribution {
+    max-width: 1320px;
+    margin: 36px auto 0;
+    border-top: 1px solid rgba(12,12,12,0.25);
+    padding-top: 14px;
+    font-family: var(--font-body), serif;
+    font-size: 11px;
+    color: var(--text);
+    display: flex;
+    justify-content: space-between;
+    letter-spacing: 0.04em;
+  }
+</style>
+</head>
+<body>
+
+<div class="wagara-bg" aria-hidden="true"></div>
+
+<div class="page">
+
+  <header class="masthead">
+    <div class="mark-jp">光琳木工</div>
+    <div class="mark-en">Kōrin Mokkō &nbsp;·&nbsp; Atelier of Joinery &amp; Paper</div>
+    <div class="estd">
+      Founded Bunsei 4 — Nishijin, Kyōto
+      <span class="seal">印</span>
+    </div>
+  </header>
+
+  <nav class="primary" aria-label="Primary">
+    <!-- Tsuru-no-maru roundel anchor -->
+    <svg class="roundel" viewBox="0 0 688 688" aria-hidden="true">
+      <circle cx="344" cy="344" r="338" fill="none" stroke="#0c0c0c" stroke-width="3"/>
+      <circle cx="344" cy="344" r="312" fill="none" stroke="#0c0c0c" stroke-width="1"/>
+      <g transform="translate(344 344) scale(0.42) translate(-344 -344)">
+        <path d="M344 120 c-46 0 -90 18 -122 50 -28 28 -42 64 -42 100 0 12 4 24 10 34 -22 8 -40 26 -50 50 -8 20 -8 42 0 62 -28 12 -50 38 -58 70 -8 32 0 66 22 92 -16 24 -22 54 -16 82 6 30 24 56 50 72 -8 28 -2 58 16 82 18 24 46 38 76 38 12 0 24 -2 36 -6 14 22 38 36 64 38 4 24 16 46 36 60 18 14 40 22 62 22 24 0 46 -8 64 -22 18 -14 30 -36 34 -60 26 -2 50 -16 64 -38 12 4 24 6 36 6 30 0 58 -14 76 -38 18 -24 24 -54 16 -82 26 -16 44 -42 50 -72 6 -28 0 -58 -16 -82 22 -26 30 -60 22 -92 -8 -32 -30 -58 -58 -70 8 -20 8 -42 0 -62 -10 -24 -28 -42 -50 -50 6 -10 10 -22 10 -34 0 -36 -14 -72 -42 -100 -32 -32 -76 -50 -122 -50 -28 0 -54 8 -76 22 -22 -14 -48 -22 -76 -22 -2 0 -4 0 -6 0 z" fill="#0c0c0c" opacity="0.85"/>
+      </g>
+    </svg>
+    <ul>
+      <li><a href="page-1.html" aria-current="page">Atelier</a></li>
+      <li><a href="page-2.html">The Workshop</a></li>
+      <li><a href="page-3.html">Commissions</a></li>
+      <li><a href="page-4.html">Materials &amp; Method</a></li>
+      <li><a href="page-5.html">Apprenticeship</a></li>
+      <li><a href="page-6.html">Visit</a></li>
+    </ul>
+  </nav>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero">
+
+    <div class="vertical-title" aria-hidden="false">
+      光&nbsp;琳&nbsp;木&nbsp;工
+      <span class="sub">Kōrin&nbsp;·&nbsp;Mokkō</span>
+    </div>
+
+    <!-- Tsuru-no-maru large roundel -->
+    <svg class="roundel-large" viewBox="0 0 688 688" aria-hidden="true">
+      <circle cx="344" cy="344" r="338" fill="none" stroke="#1c3a5e" stroke-width="2"/>
+      <circle cx="344" cy="344" r="298" fill="none" stroke="#1c3a5e" stroke-width="0.8"/>
+      <circle cx="344" cy="344" r="262" fill="none" stroke="#1c3a5e" stroke-width="0.6" opacity="0.5"/>
+      <g transform="translate(344 344) scale(0.55) translate(-344 -344)" fill="#1c3a5e">
+        <path d="M344 100 c-30 0 -58 8 -82 22 -24 -14 -52 -22 -82 -22 -50 0 -94 22 -120 58 -22 30 -28 70 -16 104 -28 14 -48 40 -54 72 -6 30 4 62 26 84 -22 24 -32 56 -26 88 6 32 26 60 56 74 -10 30 -4 62 16 86 22 26 56 40 90 36 14 24 38 40 66 44 6 28 22 52 46 66 22 14 48 18 72 12 8 22 26 38 50 42 12 30 36 52 68 58 -4 24 0 50 14 70 16 22 40 36 68 36 4 0 8 0 12 0 -4 -10 -8 -22 -8 -34 0 -38 30 -68 68 -68 8 0 16 2 22 4 -8 -28 -2 -58 16 -80 22 -28 58 -42 92 -34 -8 -28 -2 -58 18 -80 18 -22 46 -34 74 -34 -10 -30 -2 -64 22 -86 22 -22 56 -30 86 -22 -12 -32 -4 -68 22 -92 24 -22 58 -28 88 -18 -8 -34 8 -70 40 -88 26 -16 60 -16 86 0 -2 -36 22 -68 56 -78 30 -10 64 0 84 24 8 -32 38 -56 72 -56 32 0 60 22 70 52 22 -22 56 -30 84 -18 z" opacity="0.9"/>
+        <circle cx="344" cy="344" r="40" fill="#e34234"/>
+      </g>
+    </svg>
+
+    <div class="intro">
+      <p class="lead">Joiners, paper-makers, and lacquer-finishers, working by hand for the houses and temples of Kyōto.</p>
+      <p>We make shoji, ranma, paper lanterns, and small chests of kiri and zelkova, fitted to the rooms they will occupy and to the seasons that will pass through them.</p>
+      <p>Restoration of machiya joinery is undertaken upon written commission. New work is accepted from the third month of the year.</p>
+    </div>
+
+    <div class="cinnabar-seal" aria-label="Cinnabar studio seal">光琳</div>
+  </section>
+
+  <!-- ===================== STATEMENT ===================== -->
+  <section class="statement">
+    <div class="label">
+      <span class="num">壱</span>
+      The House
+    </div>
+    <div class="body">
+      Founded <em>Bunsei 4 (1821)</em> in the Nishijin ward of Kyōto, two blocks south of the Imamiya shrine. <em>Six artisans, one apprentice, one cat.</em> The forge for our chisels is shared with the smith Watanabe of Murasakino; our paper is drawn from the Kurotani vats by hand each winter.
+    </div>
+    <div class="divider" aria-hidden="true">
+      <svg viewBox="0 0 600 200" preserveAspectRatio="xMidYMid slice">
+        <use href="#sayagata-frag"/>
+        <g stroke="#0c0c0c" stroke-width="1.6" fill="none">
+          <polygon points="501.6,151 551.1,101.7 500.8,51.4 451.3,100.9 350.9,0.5 300.4,51 350.4,101 401,151"/>
+          <polyline points="0,180 100,80 200,180 300,80 400,180 500,80 600,180"/>
+          <polyline points="0,80 100,-20 200,80"/>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ===================== COMMISSIONS ===================== -->
+  <section class="commissions">
+    <header>
+      <h2>
+        Current Commissions
+        <span class="small">Three works presently on the bench &nbsp;·&nbsp; Tenpō era references on file</span>
+      </h2>
+      <div class="meta-right">
+        Updated, ninth month, second week<br>
+        Workshop open by appointment, Tue–Sat
+      </div>
+    </header>
+
+    <div class="grid">
+
+      <!-- CARD 1 -->
+      <article class="card">
+        <svg class="umebachi" viewBox="0 0 688 688" aria-hidden="true">
+          <rect width="688" height="688" fill="#0c0c0c"/>
+          <g fill="#f5efde">
+            <circle cx="344" cy="344" r="74"/>
+            <circle cx="344" cy="180" r="92"/>
+            <circle cx="200" cy="280" r="92"/>
+            <circle cx="488" cy="280" r="92"/>
+            <circle cx="248" cy="468" r="92"/>
+            <circle cx="440" cy="468" r="92"/>
+          </g>
+        </svg>
+        <div class="index">No. 一 &nbsp; Gion</div>
+        <h3>Shoji Renewal,<br>Tachibana Residence</h3>
+        <div class="jp">祇園 橘邸 障子改修</div>
+        <hr class="rule">
+        <div class="meta">
+          <b>Materials:</b> Yoshino sugi frames, Kurotani kōzo paper, hand-planed kumiko in asanoha pattern.<br>
+          <b>Began:</b> sixth month, Reiwa 6.<br>
+          <b>Site:</b> Hanami-kōji, Higashiyama-ku.
+        </div>
+        <p class="desc">Twenty-four panels for the front parlour and back tea-room of a 1903 machiya. The kumiko is being relaid to match the surviving ranma carved by the previous owner's grandfather.</p>
+        <div class="stage">
+          <span>In planing</span>
+          <span class="price">¥ 1,840,000</span>
+        </div>
+      </article>
+
+      <!-- CARD 2 -->
+      <article class="card">
+        <svg class="umebachi" viewBox="0 0 688 688" aria-hidden="true">
+          <rect width="688" height="688" fill="#0c0c0c"/>
+          <g fill="#f5efde">
+            <circle cx="344" cy="344" r="74"/>
+            <circle cx="344" cy="180" r="92"/>
+            <circle cx="200" cy="280" r="92"/>
+            <circle cx="488" cy="280" r="92"/>
+            <circle cx="248" cy="468" r="92"/>
+            <circle cx="440" cy="468" r="92"/>
+          </g>
+        </svg>
+        <div class="index">No. 二 &nbsp; Daitoku-ji</div>
+        <h3>Paper-Lantern Set,<br>Kohō-an Teahouse</h3>
+        <div class="jp">大徳寺 孤篷庵 行灯</div>
+        <hr class="rule">
+        <div class="meta">
+          <b>Materials:</b> kiri-wood ribs, two-ply gampi paper, persimmon-tannin sealing.<br>
+          <b>Began:</b> fourth month, Reiwa 6.<br>
+          <b>Quantity:</b> a pair, plus one spare.</div>
+        <p class="desc">Andon for the engawa of the Kohō-an annexe, sized to the ash-stand to the left of the entrance. Ribs split, not sawn; paper hung in single sheets without seam toward the guest.</p>
+        <div class="stage">
+          <span>Pasting</span>
+          <span class="price">¥ 620,000</span>
+        </div>
+      </article>
+
+      <!-- CARD 3 -->
+      <article class="card">
+        <svg class="umebachi" viewBox="0 0 688 688" aria-hidden="true">
+          <rect width="688" height="688" fill="#0c0c0c"/>
+          <g fill="#f5efde">
+            <circle cx="344" cy="344" r="74"/>
+            <circle cx="344" cy="180" r="92"/>
+            <circle cx="200" cy="280" r="92"/>
+            <circle cx="488" cy="280" r="92"/>
+            <circle cx="248" cy="468" r="92"/>
+            <circle cx="440" cy="468" r="92"/>
+          </g>
+        </svg>
+        <div class="index">No. 三 &nbsp; Private</div>
+        <h3>Kiri-Wood<br>Document Chest</h3>
+        <div class="jp">桐 文箱 一棹</div>
+        <hr class="rule">
+        <div class="meta">
+          <b>Materials:</b> 38-year Aizu kiri, blackened iron fittings by Watanabe-shi.<br>
+          <b>Began:</b> seventh month, Reiwa 6.<br>
+          <b>Dimensions:</b> 96 × 42 × 38 cm, four drawers.
+        </div>
+        <p class="desc">A scholar's chest for letters and small scrolls, ordered by a calligrapher in Ōmihachiman. Joinery without nails throughout. Drawers fitted to slide upon a single breath of warm air.</p>
+        <div class="stage">
+          <span>Awaiting fittings</span>
+          <span class="price">¥ 480,000</span>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+</div>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="site">
+  <div class="foot-grid">
+    <!-- Kiri seal -->
+    <svg class="seal" viewBox="0 0 345 326" aria-hidden="true">
+      <circle cx="172" cy="163" r="158" fill="none" stroke="#0c0c0c" stroke-width="1.4"/>
+      <circle cx="172" cy="163" r="142" fill="none" stroke="#0c0c0c" stroke-width="0.6"/>
+      <g fill="#0c0c0c" transform="translate(0,0)">
+        <ellipse cx="172" cy="80" rx="9" ry="38"/>
+        <ellipse cx="120" cy="100" rx="8" ry="34" transform="rotate(-22 120 100)"/>
+        <ellipse cx="224" cy="100" rx="8" ry="34" transform="rotate(22 224 100)"/>
+        <path d="M120 145 q52 -30 104 0 v90 q-52 30 -104 0 z" fill="none" stroke="#0c0c0c" stroke-width="1.6"/>
+        <circle cx="172" cy="190" r="6"/>
+        <path d="M150 200 v60 M172 200 v68 M194 200 v60" stroke="#0c0c0c" stroke-width="1.4" fill="none"/>
+        <path d="M138 240 q34 18 68 0" stroke="#0c0c0c" stroke-width="1.2" fill="none"/>
+      </g>
+    </svg>
+
+    <div class="foot-col">
+      <h4>光琳木工</h4>
+      <p><em>Kōrin Mokkō</em></p>
+      <p>Atelier of Joinery, Paper, and Lacquer-finish</p>
+      <p>Established Bunsei 4 &nbsp;·&nbsp; 1821</p>
+    </div>
+
+    <div class="foot-col">
+      <h4>所在地 — Address</h4>
+      <p>Nishijin, 二上ル<br>Imadegawa-dōri, Kamigyō-ku</p>
+      <p>Kyōto-shi 602-8222<br>Japan</p>
+      <p><em>By appointment only</em></p>
+    </div>
+
+    <div class="foot-col">
+      <h4>連絡 — Contact</h4>
+      <p>Tel. 075 — 441 — 2807<br>(workshop bell, after 9:00)</p>
+      <p>fumi@korin-mokko.kyoto</p>
+      <p><em>Letters preferred for first commissions.</em></p>
+    </div>
+  </div>
+
+  <div class="attribution">
+    <span>Kamon SVG renderings — tsuru-no-maru, umebachi, kiri, seigaiha, sayagata — drawn after public-domain mon references, redrawn for this site by the studio, 2024.</span>
+    <span>© 光琳木工 Reiwa 6</span>
+  </div>
+</footer>
+
+</body>
+</html>

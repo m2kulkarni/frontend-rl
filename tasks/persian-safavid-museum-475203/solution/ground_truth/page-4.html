@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>The Royal Kitābkhāna — Manuscripts and Albums</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  /* ---------- Base ---------- */
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Garamond, serif;
+    font-size: 16px;
+    line-height: 1.65;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* ---------- Header strip ---------- */
+  .topbar {
+    background: var(--primary);
+    color: var(--bg);
+    text-align: center;
+    padding: 10px 0 8px;
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.35em;
+    font-size: 11px;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--accent);
+  }
+  .topbar .seal {
+    color: var(--accent);
+    margin: 0 14px;
+  }
+
+  /* ---------- Navigation ---------- */
+  nav.primary {
+    background: var(--bg);
+    border-top: 1px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
+    padding: 14px 0;
+    text-align: center;
+  }
+  nav.primary ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0;
+  }
+  nav.primary li {
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--primary);
+    padding: 0 18px;
+    position: relative;
+  }
+  nav.primary li + li::before {
+    content: "❋";
+    color: var(--accent);
+    position: absolute;
+    left: -7px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 9px;
+  }
+  nav.primary a { padding: 4px 2px; display: inline-block; }
+  nav.primary a[aria-current="page"] {
+    border-bottom: 1.5px solid var(--accent);
+    color: var(--text-emphasis);
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    text-align: center;
+    padding: 70px 40px 50px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--accent);
+    overflow: hidden;
+  }
+  .hero::before, .hero::after {
+    content: "";
+    position: absolute;
+    top: 30px; bottom: 30px;
+    width: 1px;
+    background: var(--primary);
+    opacity: 0.5;
+  }
+  .hero::before { left: 60px; }
+  .hero::after  { right: 60px; }
+
+  .hero-eyebrow {
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.4em;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 18px;
+  }
+  .hero h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 52px;
+    line-height: 1.15;
+    margin: 0 auto 8px;
+    color: var(--primary);
+    max-width: 900px;
+    letter-spacing: 0.02em;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--text-emphasis);
+    font-size: 0.7em;
+    display: block;
+    margin-top: 8px;
+    letter-spacing: 0.06em;
+  }
+  .hero .lede {
+    max-width: 640px;
+    margin: 22px auto 0;
+    font-size: 17px;
+    color: var(--text);
+    font-style: italic;
+  }
+  .hero-arch {
+    width: 280px;
+    height: 200px;
+    margin: 28px auto 0;
+    display: block;
+    color: var(--primary);
+  }
+
+  /* ---------- Divider ---------- */
+  .divider {
+    display: block;
+    margin: 0 auto;
+    width: 380px;
+    height: 22px;
+    color: var(--ornament);
+  }
+  .divider svg { display: block; width: 100%; height: 100%; }
+  .divider svg path { fill: var(--ornament); }
+
+  /* ---------- Main layout ---------- */
+  main {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 60px 60px 80px;
+  }
+
+  .feature-grid {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 64px;
+    align-items: start;
+  }
+
+  /* ---------- Article ---------- */
+  article h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    color: var(--primary);
+    font-size: 28px;
+    text-align: center;
+    margin: 0 0 6px;
+    letter-spacing: 0.05em;
+  }
+  article h2 .ord {
+    display: block;
+    color: var(--accent);
+    font-size: 11px;
+    letter-spacing: 0.5em;
+    margin-bottom: 6px;
+  }
+  article h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    color: var(--primary);
+    font-size: 21px;
+    margin: 44px 0 4px;
+    text-align: center;
+    letter-spacing: 0.04em;
+  }
+  article h3 small {
+    display: block;
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--secondary);
+    letter-spacing: 0.04em;
+    margin-top: 4px;
+    font-weight: normal;
+  }
+  article p {
+    margin: 0 0 16px;
+    text-align: justify;
+    hyphens: auto;
+  }
+  article p.dropcap::first-letter {
+    font-family: var(--font-display), serif;
+    font-size: 58px;
+    float: left;
+    line-height: 0.9;
+    padding: 6px 10px 0 0;
+    color: var(--text-emphasis);
+  }
+  article em.acc { color: var(--text-emphasis); font-style: italic; }
+  article .pull {
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+    margin: 26px 40px;
+    padding: 18px 0;
+    font-family: var(--font-display), serif;
+    font-size: 19px;
+    text-align: center;
+    color: var(--primary);
+    line-height: 1.4;
+    letter-spacing: 0.02em;
+  }
+  article .pull span {
+    display: block;
+    color: var(--accent);
+    margin: 8px 0 4px;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+  }
+
+  .section-rule {
+    text-align: center;
+    margin: 38px 0 30px;
+  }
+  .section-rule svg {
+    width: 260px; height: 16px;
+    color: var(--accent);
+  }
+  .section-rule svg path { fill: var(--accent); }
+
+  /* ---------- Aside / reserve list ---------- */
+  aside.reserve {
+    border: 1px solid var(--primary);
+    background: #f7eed9;
+    padding: 0;
+    position: relative;
+  }
+  aside.reserve .crest {
+    text-align: center;
+    padding: 20px 18px 6px;
+    background: var(--primary);
+    color: var(--bg);
+    border-bottom: 2px solid var(--accent);
+  }
+  aside.reserve .crest .label {
+    font-family: var(--font-display), serif;
+    font-size: 10px;
+    letter-spacing: 0.45em;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+  aside.reserve .crest h2 {
+    font-family: var(--font-display), serif;
+    font-size: 18px;
+    margin: 6px 0 14px;
+    color: var(--bg);
+    letter-spacing: 0.08em;
+    line-height: 1.3;
+  }
+  aside.reserve .seal-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: -22px;
+    margin-bottom: 8px;
+  }
+  aside.reserve .seal-wrap .seal-svg {
+    width: 50px; height: 50px;
+    background: var(--bg);
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    padding: 4px;
+    color: var(--primary);
+  }
+
+  aside.reserve ol {
+    list-style: none;
+    counter-reset: folio;
+    margin: 14px 0 0;
+    padding: 0 22px 18px;
+  }
+  aside.reserve li {
+    counter-increment: folio;
+    padding: 14px 0 14px 38px;
+    border-bottom: 1px dotted var(--surface);
+    position: relative;
+    font-size: 13.5px;
+    line-height: 1.45;
+  }
+  aside.reserve li::before {
+    content: counter(folio, upper-roman) ".";
+    position: absolute;
+    left: 0; top: 14px;
+    font-family: var(--font-display), serif;
+    color: var(--accent);
+    font-size: 13px;
+    letter-spacing: 0.05em;
+  }
+  aside.reserve li:last-child { border-bottom: none; }
+  aside.reserve li .ftitle {
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+    font-size: 14px;
+    display: block;
+    letter-spacing: 0.02em;
+  }
+  aside.reserve li .fmeta {
+    color: var(--secondary);
+    font-style: italic;
+    font-size: 12px;
+    display: block;
+    margin: 2px 0 4px;
+  }
+  aside.reserve li .facc {
+    color: var(--text-emphasis);
+    font-family: var(--font-display), serif;
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+  }
+
+  aside.reserve .footnote {
+    background: var(--primary);
+    color: var(--bg);
+    padding: 14px 18px;
+    font-size: 11px;
+    text-align: center;
+    font-style: italic;
+    letter-spacing: 0.04em;
+    border-top: 1px solid var(--accent);
+  }
+
+  /* ---------- Marginalia row ---------- */
+  .marginalia {
+    margin-top: 70px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 36px;
+    text-align: center;
+  }
+  .marginalia .card {
+    position: relative;
+    padding: 40px 26px 28px;
+    border: 1px solid var(--primary);
+    background: #f7eed9;
+  }
+  .marginalia .card::before, .marginalia .card::after {
+    content: "";
+    position: absolute;
+    width: 24px; height: 24px;
+    border: 1px solid var(--secondary);
+    top: 6px;
+  }
+  .marginalia .card::before {
+    left: 6px;
+    border-right: none;
+    border-bottom: none;
+  }
+  .marginalia .card::after {
+    right: 6px;
+    border-left: none;
+    border-bottom: none;
+  }
+  .marginalia .card h4 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    color: var(--primary);
+    font-size: 16px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 6px;
+  }
+  .marginalia .card .date {
+    color: var(--accent);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    font-family: var(--font-display), serif;
+    margin-bottom: 14px;
+    display: block;
+  }
+  .marginalia .card p {
+    font-size: 13.5px;
+    line-height: 1.55;
+    margin: 0;
+    text-align: left;
+  }
+
+  /* ---------- Colophon ---------- */
+  .colophon {
+    margin-top: 70px;
+    text-align: center;
+    padding: 36px 80px;
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+  }
+  .colophon p {
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.12em;
+    color: var(--primary);
+    line-height: 1.7;
+    margin: 0;
+  }
+  .colophon .signoff {
+    margin-top: 14px;
+    color: var(--text-emphasis);
+    font-style: italic;
+    font-family: var(--font-body), serif;
+    letter-spacing: 0;
+    font-size: 13px;
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    background: var(--primary);
+    color: var(--bg);
+    padding: 56px 60px 28px;
+    margin-top: 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  footer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("svg/girih-tessellation-2.svg");
+    background-size: 800px;
+    opacity: 0.05;
+    pointer-events: none;
+  }
+  footer .fcols {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+    text-align: center;
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  footer h5 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin: 0 0 14px;
+  }
+  footer p {
+    font-size: 13px;
+    line-height: 1.6;
+    margin: 0 0 6px;
+    color: var(--bg);
+  }
+  footer .seal-foot {
+    width: 56px; height: 56px;
+    margin: 0 auto 8px;
+    color: var(--accent);
+  }
+  footer .tail {
+    text-align: center;
+    margin-top: 36px;
+    padding-top: 18px;
+    position: relative;
+  }
+  footer .tail::before {
+    content: "";
+    display: block;
+    width: 240px;
+    height: 1px;
+    background: var(--accent);
+    margin: 0 auto 18px;
+  }
+  footer .tail .ornament {
+    color: var(--accent);
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.5em;
+  }
+  footer .tail .copy {
+    margin-top: 14px;
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--bg);
+    opacity: 0.85;
+  }
+
+  /* girih spandrel small */
+  .spandrel {
+    width: 36px; height: 36px;
+    color: var(--secondary);
+  }
+</style>
+</head>
+<body>
+
+<!-- Top header -->
+<div class="topbar">
+  <span>Dār al-Naqsh</span>
+  <span class="seal">✦</span>
+  <span>Museum of Safavid Ornament</span>
+  <span class="seal">✦</span>
+  <span>Isfahan</span>
+</div>
+
+<!-- Primary Navigation -->
+<nav class="primary" aria-label="Primary">
+  <ul>
+    <li><a href="page-1.html">Entrance</a></li>
+    <li><a href="page-2.html">Collection</a></li>
+    <li><a href="page-3.html">Exhibition</a></li>
+    <li><a href="page-4.html" aria-current="page">Kitābkhāna</a></li>
+    <li><a href="page-5.html">Visit</a></li>
+    <li><a href="page-6.html">About</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<header class="hero">
+  <div class="hero-eyebrow">Feature ❋ Folio IV ❋ Manuscripts &amp; Albums</div>
+  <h1>The Royal Kitābkhāna<em>— Manuscripts &amp; Albums of the Safavid Court —</em></h1>
+  <p class="lede">Within the painted walls of Tabriz, Qazvin and Isfahan, a single workshop sustained the most ambitious illustrated book of the Islamic world: the <em>Shāhnāma</em> of Shah Tahmasp, begun c. 1522 and pursued for nearly three decades by hands trained from Herat to Shiraz.</p>
+
+  <!-- Hero arch -->
+  <svg class="hero-arch" viewBox="120 250 480 480" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+    <g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
+      <path d="M 397 277 L 339 376 c -8 14 -32 50 -89 70 c -57 20 -100 87 -99 153 c 54 0 3 0 62 0 c 0 0 -2 -66 63 -94 c 50 -22 83 -42 114 -89"/>
+      <path d="M 258 439 l 25 58"/>
+      <path d="M 355 351 l 41 24 l 1 35"/>
+      <path d="M 397 277 L 455 376 c 8 14 32 50 89 70 c 57 20 100 87 99 153 c -54 0 -3 0 -62 0 c 0 0 2 -66 -63 -94 c -50 -22 -83 -42 -114 -89"/>
+      <path d="M 536 439 l -25 58"/>
+      <path d="M 439 351 l -41 24 l -1 35"/>
+    </g>
+    <g stroke="var(--accent)" stroke-width="1" fill="none">
+      <path d="M 397 590 v 140"/>
+    </g>
+    <text x="397" y="660" text-anchor="middle" font-family="Marcellus" font-size="14" fill="var(--accent)" letter-spacing="6">دارالنقش</text>
+  </svg>
+</header>
+
+<!-- Divider -->
+<div style="background:var(--bg); padding:30px 0 0; text-align:center;">
+  <svg class="divider" viewBox="0 0 438 19" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+    <use href="#div-pattern"/>
+  </svg>
+</div>
+
+<main>
+<div class="feature-grid">
+
+  <!-- ARTICLE -->
+  <article>
+    <h2><span class="ord">— I —</span>The Workshop &amp; the Book</h2>
+
+    <p class="dropcap">No object survives Safavid taste so completely as the illustrated book. Begun in Tabriz around <em class="acc">1522</em> at the order of the young Shah Tahmasp I, the so-called <em>Houghton Shāhnāma</em> assembled, over more than two decades, two hundred and fifty-eight miniatures across seven hundred and fifty-nine folios. It is the largest royal painting cycle of pre-modern Iran, and the foundational document of the Safavid <em>kitābkhāna</em> — at once library, scriptorium and academy of ornament.</p>
+
+    <p>Tahmasp had been raised in Herat, where the late Timurid master <em>Bihzād</em> still presided over a workshop bequeathed to the Safavids in 1510. When the prince returned to Tabriz in 1522, he carried with him both the Herati conventions — meticulous architectural framing, a flat gold sky, modest figural scale — and the painters trained in them. Joined to the Türkmen sensibility already at work in the western capital, this collision produced what scholars now call the <em>Tabriz school of the second decade</em>: hot in palette, vertiginous in landscape, populated by demons and shahs alike.</p>
+
+    <div class="pull">
+      <span>— Marginal note, fol. 60v —</span>
+      “The painter Sulṭān Muḥammad has depicted a scene the like of which the revolving heavens have not seen.”
+    </div>
+
+    <p>The administrative head of the workshop was the calligrapher <em>Mīr ʿAlī al-Ḥusaynī</em>, but the painted programme answered to two presiding talents: <em class="acc">Sulṭān Muḥammad</em>, a Türkmen-trained master whose <em>Court of Gayumars</em> (fol. 20v) anchors the book's opening, and the Herati-trained <em class="acc">Āqā Mīrak</em>, who carried Bihzādian decorum into the densest court scenes. By the late 1530s the dual idiom had hardened into a unified Safavid manner — the manner that would reach Qazvin under Tahmasp's nephew Ibrāhīm Mīrzā and, later, the studios of Isfahan.</p>
+
+    <div class="section-rule">
+      <svg viewBox="0 0 438 19" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><use href="#div-pattern"/></svg>
+    </div>
+
+    <h3>II. Sulṭān Muḥammad's Brush<small>— from the demon-haunted skies of Tabriz —</small></h3>
+
+    <p>If a single painter defines the early <em>kitābkhāna</em>, it is Sulṭān Muḥammad. His <em>Court of Gayumars</em> — the first illustrated folio of the Tahmasp <em>Shāhnāma</em> — depicts the primordial king on his leopard-skin throne, encircled by a court clothed in the very pelts of the leopards they have tamed. The picture's astonishment lies not in its narrative content but in its surface: rocks dissolve into the faces of <em>dīvs</em>, clouds curdle into dragons, and gold ground becomes a vibrating field rather than a backdrop. The eye is given no rest, and is meant to be given none.</p>
+
+    <p>Contemporary critics were emphatic. Dūst-Muḥammad, writing his celebrated preface to the Bahrām Mīrzā album in <em class="acc">1544</em>, named Sulṭān Muḥammad <em>nādir al-zamān</em> — “the rarity of the age.” The painter is documented in the <em>kitābkhāna</em> from c. 1505 until at least 1543, by which date he was supervising the illumination of the great <em>Khamsa</em> of Niẓāmī now in the British Library (Or. 2265). His brushwork — described by Dūst-Muḥammad as <em>mū-yi qalam</em>, a hair of a pen — is recognisable across both books in the small flickering highlights that animate every robe and rock.</p>
+
+    <h3>III. From Herat to Tabriz<small>— the migration of Bihzādian conventions —</small></h3>
+
+    <p>The other current in the early Safavid book is the Herati. Bihzād himself, appointed head of the royal library in <em class="acc">1522</em>, may have produced little new work in Tabriz before his death around 1535, but his pupils — Shaykh-Zāda, Mīr Sayyid ʿAlī, and the prodigious Āqā Mīrak — transmitted his vocabulary intact. From Bihzād they inherited the calibrated geometry of architectural settings (a palace courtyard built from tile-panels that echo real Herati practice), the careful spacing of figures so that none overlap, and the trick of cropping a horseman or a servant against the picture's edge to imply continuation beyond the frame.</p>
+
+    <p>What changed in Tabriz was scale and temperature. Herat had favoured intimate page-sizes and a cool ground; the Safavid royal page is larger, hotter, and more crowded. Bihzādian compositional discipline survives, but it is overlaid with a Türkmen love of swirling cloud-bands, of vermillion and lapis pressed against one another without modulation. By the time the workshop migrated to Qazvin under Tahmasp's later patronage (the capital moved in <em class="acc">1548</em>), this synthesis had become canonical: it is the manner of the <em>Haft Awrang</em> of Jāmī, completed for Ibrāhīm Mīrzā at Mashhad between 1556 and 1565.</p>
+
+    <div class="pull">
+      <span>— Dūst-Muḥammad, 1544 —</span>
+      “Whatever has issued from the pen of Āqā Mīrak the eye of admiration has read as a chapter of paradise.”
+    </div>
+
+    <h3>IV. The Single Page &amp; the Album<small>— Riza-yi Abbasi and the figural study —</small></h3>
+
+    <p>By the time of <em class="acc">Shah Abbas I</em> (r. 1588–1629), the great cyclical manuscript had given way to a different ambition. The royal <em>kitābkhāna</em>, now installed at Isfahan around the new Maydān-e Naqsh-e Jahān, increasingly produced single sheets — drawings, tinted studies, calligraphic specimens — gathered into the bound albums known as <em>muraqqaʿ</em>. These were objects of connoisseurship, leafed through in private rather than read aloud at court. Their economy was different: a single figure on a single page, framed by gold-flecked margins and a narrow band of Persian verse.</p>
+
+    <p>The decisive figure of this turn is <em class="acc">Riżā-yi ʿAbbāsī</em> (d. 1635), the painter most closely associated with Shah Abbas's personal taste. His mature manner — long-limbed youths in plum or saffron robes, leaning against a single tuft of grass, drawn with a calligraphic line that varies its weight from gossamer to ink-loaded — abandoned the crowded <em>Shāhnāma</em> stage entirely. A signed sheet of <em>1598</em> in our own reserve (see Folio VII opposite) shows the formula at its purest: an unnamed page-boy holds a wine-cup; the rest of the paper is blank but for a sprig of narcissus and Riżā's own signature in a corner. Patron and painter alike were satisfied.</p>
+
+    <p>The <em>muraqqaʿ</em> assembled under Abbas — most notably the <em>Gulshan</em> album, dispersed since the eighteenth century but partially reconstructable from fragments in Tehran, Berlin and our own Folio II — is the connoisseur's reply to the cyclical manuscript. Where the Tahmasp <em>Shāhnāma</em> had argued the legitimacy of kingship through a thousand-year story, the Abbasi album argued the legitimacy of taste itself: an ordered juxtaposition of Bihzād, Sulṭān Muḥammad, Mīr ʿAlī's calligraphy, and Riżā's own line. To open it, even now, is to be addressed as a connoisseur. That address — at once intimate and severe — is the <em>kitābkhāna</em>'s lasting bequest to us.</p>
+
+    <div class="section-rule">
+      <svg viewBox="0 0 438 19" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><use href="#div-pattern"/></svg>
+    </div>
+  </article>
+
+  <!-- ASIDE -->
+  <aside class="reserve" aria-label="Folios in reserve">
+    <div class="crest">
+      <div class="label">Reserve Holdings</div>
+      <h2>Eight Folios<br>in the Museum's<br>Reserve</h2>
+    </div>
+    <div class="seal-wrap">
+      <svg class="seal-svg" viewBox="0 0 1500 1500" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <g fill="currentColor" stroke="currentColor" stroke-width="20">
+          <polygon points="750,200 880,500 1200,540 960,760 1020,1080 750,920 480,1080 540,760 300,540 620,500"/>
+          <circle cx="750" cy="750" r="120" fill="var(--accent)" stroke="none"/>
+        </g>
+      </svg>
+    </div>
+    <ol>
+      <li>
+        <span class="ftitle">The Court of Gayumars</span>
+        <span class="fmeta">Tabriz, c. 1522–25 · attrib. Sulṭān Muḥammad</span>
+        Detached folio, opaque watercolour, ink and gold on paper. <span class="facc">Acc. DN.MS.014</span>
+      </li>
+      <li>
+        <span class="ftitle">Bahrām Gūr Hunting Onagers</span>
+        <span class="fmeta">Tabriz, c. 1530 · circle of Mīr Muṣawwir</span>
+        From a dispersed <em>Khamsa</em> of Niẓāmī. <span class="facc">Acc. DN.MS.027</span>
+      </li>
+      <li>
+        <span class="ftitle">Khusraw Discovers Shīrīn Bathing</span>
+        <span class="fmeta">Tabriz / Qazvin, c. 1539–43 · Āqā Mīrak</span>
+        Reattributed 1971 by S. C. Welch. <span class="facc">Acc. DN.MS.041</span>
+      </li>
+      <li>
+        <span class="ftitle">Majnūn in the Wilderness</span>
+        <span class="fmeta">Qazvin, c. 1556 · Shaykh-Muḥammad</span>
+        From the <em>Haft Awrang</em> of Ibrāhīm Mīrzā. <span class="facc">Acc. DN.MS.063</span>
+      </li>
+      <li>
+        <span class="ftitle">A Princely Reception</span>
+        <span class="fmeta">Qazvin, c. 1576 · Ṣiyāwush Beg</span>
+        Folio from the dispersed <em>Shāhnāma</em> of Ismāʿīl II. <span class="facc">Acc. DN.MS.082</span>
+      </li>
+      <li>
+        <span class="ftitle">Calligraphic Page in <em>Nastaʿlīq</em></span>
+        <span class="fmeta">Qazvin, dated 1582 · Mīr ʿAlī al-Ḥusaynī (copy)</span>
+        Mounted in a Gulshan album leaf, gold-flecked margins. <span class="facc">Acc. DN.MS.099</span>
+      </li>
+      <li>
+        <span class="ftitle">Youth Holding a Wine-Cup</span>
+        <span class="fmeta">Isfahan, signed and dated 1598 · Riżā-yi ʿAbbāsī</span>
+        Tinted drawing, the artist's hallmark long line. <span class="facc">Acc. DN.MS.108</span>
+      </li>
+      <li>
+        <span class="ftitle">A Seated Dervish</span>
+        <span class="fmeta">Isfahan, c. 1630 · attrib. Muʿīn Muṣawwir</span>
+        Late Riżā workshop; verse panel by Mīr ʿImād. <span class="facc">Acc. DN.MS.124</span>
+      </li>
+    </ol>
+    <div class="footnote">Reserve consultation by appointment — Curator of Manuscripts, Mon &amp; Thu, 10–13.</div>
+  </aside>
+
+</div>
+
+<!-- Marginalia -->
+<section class="marginalia" aria-label="Marginalia">
+  <div class="card">
+    <h4>The Workshop</h4>
+    <span class="date">Tabriz · 1522</span>
+    <p>Bihzād installed as <em>kitābdār</em>; the prince Tahmasp commissions a <em>Shāhnāma</em> of unprecedented scale. Painters from Herat and Türkmen Tabriz collaborate side by side under a single roof.</p>
+  </div>
+  <div class="card">
+    <h4>The Album</h4>
+    <span class="date">Tabriz · 1544</span>
+    <p>Dūst-Muḥammad composes his preface to the Bahrām Mīrzā <em>muraqqaʿ</em> — the earliest known critical history of Persian painting, and the source for nearly every name we still use.</p>
+  </div>
+  <div class="card">
+    <h4>The Single Sheet</h4>
+    <span class="date">Isfahan · c. 1598</span>
+    <p>Riżā-yi ʿAbbāsī, working at the new capital, signs a tinted drawing of a youth with a cup. The cyclical manuscript yields to the connoisseur's page; collecting itself becomes an art.</p>
+  </div>
+</section>
+
+<!-- Colophon -->
+<section class="colophon" aria-label="Colophon">
+  <p>Prepared by the Office of the Curator of Manuscripts<br>
+  for the Spring Quarto, Yazd 1403 / 2024.<br>
+  Bibliography on request: Welch (1972, 1979); Soudavar (1992);<br>Canby (2014); Roxburgh (2005).</p>
+  <p class="signoff">— and the painters' names be remembered.</p>
+</section>
+
+</main>
+
+<!-- Footer -->
+<footer>
+  <div class="fcols">
+    <div>
+      <h5>Visiting Hours</h5>
+      <p>Tuesday — Sunday<br>09 : 00 — 17 : 30</p>
+      <p>Manuscript Reserve<br>by appointment, Mon &amp; Thu</p>
+      <p>Closed on Nowrūz<br>(20–24 March)</p>
+    </div>
+    <div>
+      <h5>Address</h5>
+      <p>Dār al-Naqsh<br>South arcade, Maydān-e Naqsh-e Jahān<br>Isfahan 81377, Iran</p>
+      <p>+98 31 3221 4400<br>kitabkhana@dar-al-naqsh.ir</p>
+    </div>
+    <div>
+      <h5>The Seal</h5>
+      <svg class="seal-foot" viewBox="0 0 1500 1500" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <g fill="none" stroke="currentColor" stroke-width="40">
+          <polygon points="750,180 920,520 1290,560 1010,790 1080,1160 750,970 420,1160 490,790 210,560 580,520"/>
+        </g>
+        <circle cx="750" cy="750" r="100" fill="currentColor"/>
+      </svg>
+      <p>Eight-pointed star of the Maydān,<br>granted by royal firman, 1602.</p>
+    </div>
+  </div>
+  <div class="tail">
+    <div class="ornament">❋ ❋ ❋</div>
+    <div class="copy">© MCDXXIV / 2024 · Dār al-Naqsh, Museum of Safavid Ornament · Isfahan</div>
+  </div>
+</footer>
+
+<!-- Hidden divider svg pattern, referenced via <use> -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="div-pattern" viewBox="0 0 438 19">
+      <g>
+        <path d="M0,9.4 c40,0 90,-1 140,-3 c20,-1 35,-2 45,-4 l1,1 c-10,2 -25,3 -45,4 c-50,2 -100,3 -141,3 z"/>
+        <path d="M0,9.4 c40,0 90,1 140,3 c20,1 35,2 45,4 l-1,1 c-10,-2 -25,-3 -45,-4 c-50,-2 -100,-3 -141,-3 z"/>
+        <path d="M438,9.4 c-40,0 -90,-1 -140,-3 c-20,-1 -35,-2 -45,-4 l-1,1 c10,2 25,3 45,4 c50,2 100,3 141,3 z"/>
+        <path d="M438,9.4 c-40,0 -90,1 -140,3 c-20,1 -35,2 -45,4 l-1,-1 c10,-2 25,-3 45,-4 c50,-2 100,-3 141,-3 z"/>
+        <circle cx="219" cy="9.4" r="5" fill="none" stroke="currentColor" stroke-width="1.2"/>
+        <circle cx="169" cy="9.4" r="2"/>
+        <circle cx="269" cy="9.4" r="2"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+</body>
+</html>

@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Trattoria Aventina — Cucina Romana on the Aventine Hill</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    line-height: 1.65;
+    font-size: 16px;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* ============ NAV ============ */
+  .top-bar {
+    padding: 28px 0 0;
+    text-align: center;
+    background: var(--bg);
+  }
+  .wordmark-roundel {
+    display: inline-block;
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    border: 1.5px solid var(--ornament);
+    line-height: 60px;
+    font-family: var(--font-display), serif;
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: 0.04em;
+    color: var(--ornament);
+    position: relative;
+    margin-bottom: 14px;
+  }
+  .wordmark-roundel::before,
+  .wordmark-roundel::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 80px;
+    height: 1px;
+    background: var(--ornament);
+    transform: translateY(-50%);
+  }
+  .wordmark-roundel::before { right: 100%; margin-right: 18px; }
+  .wordmark-roundel::after { left: 100%; margin-left: 18px; }
+
+  nav.primary {
+    text-align: center;
+    padding: 6px 0 16px;
+  }
+  nav.primary ul {
+    list-style: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  nav.primary li {
+    display: inline-flex;
+    align-items: center;
+  }
+  nav.primary a {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    padding: 8px 18px;
+    color: var(--primary);
+    display: inline-block;
+    line-height: 1;
+  }
+  nav.primary a[aria-current="page"] {
+    border-bottom: 1px solid var(--secondary);
+    padding-bottom: 6px;
+  }
+  .vine-sep {
+    width: 14px; height: 14px;
+    display: inline-block;
+    color: var(--secondary);
+    opacity: 0.85;
+  }
+  .vine-sep svg { width: 100%; height: 100%; fill: currentColor; }
+
+  /* Greek-key meander cornice */
+  .cornice {
+    width: 100%;
+    height: 28px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 165 44' preserveAspectRatio='xMidYMid meet'><g fill='%231a1a1a'><path d='M10 41.75L10 10 41.75 10 41.75 29.05 29.05 29.05 29.05 35.4 48.1 35.4 48.1 41.75 22.7 41.75 22.7 22.7 35.4 22.7 35.4 16.35 16.35 16.35 16.35 41.75z'/><path d='M48.1 41.75L48.1 10 79.85 10 79.85 29.05 67.15 29.05 67.15 35.4 86.2 35.4 86.2 41.75 60.8 41.75 60.8 22.7 73.5 22.7 73.5 16.35 54.45 16.35 54.45 41.75z'/><path d='M86.2 41.75L86.2 10 117.95 10 117.95 29.05 105.25 29.05 105.25 35.4 124.3 35.4 124.3 41.75 98.9 41.75 98.9 22.7 111.6 22.7 111.6 16.35 92.55 16.35 92.55 41.75z'/><path d='M124.3 41.75L124.3 10 156.05 10 156.05 29.05 143.35 29.05 143.35 35.4 162.4 35.4 162.4 41.75 137 41.75 137 22.7 149.7 22.7 149.7 16.35 130.65 16.35 130.65 41.75z'/></g></svg>");
+    background-repeat: repeat-x;
+    background-size: auto 28px;
+    background-position: center;
+    border-top: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    padding: 80px 40px 100px;
+    text-align: center;
+    position: relative;
+  }
+  .hero-laurel {
+    position: relative;
+    display: inline-block;
+    padding: 90px 140px;
+  }
+  .hero-laurel .laurel-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  .hero-laurel .laurel-svg svg {
+    width: 100%; height: 100%;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.32em;
+    font-size: 0.72rem;
+    color: var(--accent);
+    margin-bottom: 28px;
+  }
+  .hero h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 4.4rem;
+    line-height: 1.05;
+    color: var(--primary);
+    margin: 0 auto 24px;
+    max-width: 14ch;
+  }
+  .hero h1 .amp {
+    display: block;
+    font-size: 2.2rem;
+    letter-spacing: 0.08em;
+    margin-top: 6px;
+    color: var(--accent);
+  }
+  .hero-rule {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    margin: 18px auto 22px;
+  }
+  .hero-rule span {
+    width: 80px; height: 1px;
+    background: var(--ornament);
+    display: inline-block;
+  }
+  .hero-rule .dot {
+    width: 6px; height: 6px;
+    background: var(--secondary);
+    transform: rotate(45deg);
+  }
+  .hero-tagline {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 1.25rem;
+    letter-spacing: 0.04em;
+    color: var(--primary);
+    margin-bottom: 32px;
+  }
+  .hero-meta {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    font-size: 0.72rem;
+  }
+  .hero-meta span { margin: 0 14px; }
+
+  /* ============ DIVIDER ============ */
+  .divider {
+    text-align: center;
+    margin: 40px 0 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    padding: 0 40px;
+  }
+  .divider .line {
+    flex: 0 1 360px;
+    height: 1px;
+    background: var(--ornament);
+  }
+  .divider .label {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.32em;
+    font-size: 0.78rem;
+    color: var(--primary);
+  }
+  .divider .accent {
+    width: 8px; height: 8px;
+    background: var(--accent);
+    transform: rotate(45deg);
+  }
+
+  /* ============ FEATURE CARDS ============ */
+  .features {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 20px 40px 80px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 36px;
+  }
+  .card {
+    position: relative;
+    background: var(--surface);
+    padding: 78px 32px 36px;
+    margin-top: 50px;
+    /* meander border via layered borders */
+    border: 1.5px solid var(--ornament);
+    outline: 1px solid var(--ornament);
+    outline-offset: 4px;
+  }
+  .card-seal {
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 92px; height: 92px;
+    background: var(--bg);
+    border-radius: 50%;
+    border: 1.5px solid var(--ornament);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+  }
+  .card-seal svg {
+    width: 100%; height: 100%;
+  }
+  .card-seal-num {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display), serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+  }
+  .card h3 {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 1.35rem;
+    text-align: center;
+    margin-bottom: 8px;
+    color: var(--primary);
+  }
+  .card .h3-rules {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 22px;
+  }
+  .card .h3-rules span {
+    width: 40px; height: 1px;
+    background: var(--ornament);
+  }
+  .card .h3-rules .gold {
+    width: 6px; height: 6px;
+    background: var(--secondary);
+    transform: rotate(45deg);
+  }
+  .card .meta {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 0.7rem;
+    color: var(--accent);
+    margin-bottom: 18px;
+  }
+  .card p {
+    text-align: justify;
+    hyphens: auto;
+    font-size: 0.97rem;
+    color: var(--text);
+  }
+  .card p .leadin {
+    font-variant: small-caps;
+    text-transform: lowercase;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    margin-right: 4px;
+  }
+  .card .signature {
+    margin-top: 22px;
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 0.92rem;
+    color: var(--primary);
+    border-top: 1px solid var(--ornament);
+    padding-top: 14px;
+  }
+  .card .signature small {
+    display: block;
+    font-style: normal;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 0.62rem;
+    color: var(--text);
+    margin-top: 4px;
+  }
+
+  /* ============ INVITATION BAND ============ */
+  .invitation {
+    background: var(--bg);
+    padding: 80px 40px;
+    text-align: center;
+    border-top: 1.5px solid var(--ornament);
+    border-bottom: 1.5px solid var(--ornament);
+    position: relative;
+  }
+  .invitation::before,
+  .invitation::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    height: 28px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 165 44' preserveAspectRatio='xMidYMid meet'><g fill='%231a1a1a'><path d='M10 41.75L10 10 41.75 10 41.75 29.05 29.05 29.05 29.05 35.4 48.1 35.4 48.1 41.75 22.7 41.75 22.7 22.7 35.4 22.7 35.4 16.35 16.35 16.35 16.35 41.75z'/><path d='M48.1 41.75L48.1 10 79.85 10 79.85 29.05 67.15 29.05 67.15 35.4 86.2 35.4 86.2 41.75 60.8 41.75 60.8 22.7 73.5 22.7 73.5 16.35 54.45 16.35 54.45 41.75z'/><path d='M86.2 41.75L86.2 10 117.95 10 117.95 29.05 105.25 29.05 105.25 35.4 124.3 35.4 124.3 41.75 98.9 41.75 98.9 22.7 111.6 22.7 111.6 16.35 92.55 16.35 92.55 41.75z'/><path d='M124.3 41.75L124.3 10 156.05 10 156.05 29.05 143.35 29.05 143.35 35.4 162.4 35.4 162.4 41.75 137 41.75 137 22.7 149.7 22.7 149.7 16.35 130.65 16.35 130.65 41.75z'/></g></svg>");
+    background-repeat: repeat-x;
+    background-size: auto 28px;
+    background-position: center;
+  }
+  .invitation::before { top: 0; }
+  .invitation::after { bottom: 0; }
+  .invitation-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 30px 0;
+  }
+  .invitation .eyebrow {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.36em;
+    font-size: 0.7rem;
+    color: var(--accent);
+    margin-bottom: 18px;
+  }
+  .invitation h2 {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-weight: 700;
+    font-size: 2.6rem;
+    line-height: 1.15;
+    color: var(--primary);
+    margin-bottom: 22px;
+  }
+  .invitation p {
+    max-width: 560px;
+    margin: 0 auto 28px;
+    font-size: 1.05rem;
+  }
+  .invitation .hours-grid {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin: 28px 0 36px;
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 0.74rem;
+  }
+  .invitation .hours-grid div span {
+    display: block;
+    font-family: var(--font-body), serif;
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 0.95rem;
+    color: var(--accent);
+    margin-top: 4px;
+    font-style: italic;
+  }
+  .btn {
+    display: inline-block;
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.24em;
+    font-size: 0.78rem;
+    padding: 16px 38px;
+    border: 1.5px solid var(--primary);
+    color: var(--primary);
+    background: transparent;
+    transition: background 0.2s;
+  }
+  .btn:hover { background: var(--primary); color: var(--bg); }
+  .btn.gold-rule {
+    border-bottom: 3px double var(--secondary);
+  }
+
+  /* ============ FOOTER ============ */
+  footer {
+    background: var(--bg);
+    padding-top: 0;
+    margin-top: 60px;
+  }
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 40px 30px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    text-align: center;
+  }
+  .footer-col h4 {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    font-size: 0.78rem;
+    margin-bottom: 14px;
+    color: var(--primary);
+  }
+  .footer-col p, .footer-col address {
+    font-style: normal;
+    font-size: 0.92rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    line-height: 1.9;
+  }
+  .tailpiece {
+    text-align: center;
+    padding: 20px 0 50px;
+    color: var(--secondary);
+    font-size: 1.4rem;
+    letter-spacing: 0.6em;
+  }
+  .tailpiece-rule {
+    width: 120px;
+    height: 1px;
+    background: var(--secondary);
+    margin: 0 auto 14px;
+  }
+
+  /* roundel utility */
+  .seal-mini {
+    width: 100%; height: 100%;
+    color: var(--ornament);
+  }
+
+</style>
+</head>
+<body>
+
+<!-- Top bar with wordmark roundel and nav -->
+<header class="top-bar">
+  <div class="wordmark-roundel" aria-hidden="true">TA</div>
+  <nav class="primary" aria-label="Primary">
+    <ul>
+      <li><a href="page-1.html" aria-current="page">Home</a></li>
+      <li aria-hidden="true"><span class="vine-sep"><svg viewBox="0 0 200 200"><path d="M43.6 11c-1.8 0-3.6.1-5.4.3-7 .7-13.9 2.8-19.1 7.5s-8.2 12-7.7 21c.5 9 4.3 16.1 10.2 20.3 5.9 4.2 13.3 5.5 21 5.2 15.4-.7 32.8-8 45.8-18.3 1.4-1.1 2.8-2 4.2-3.1 4.3 6.7 7.6 14.8 9.3 24.1-7.5-5.1-21-10.5-35.6 1.5-22.1 18.2-25 12.9-45.3-2.1-2.9 36 15 54.6 44.6 52.5 0 0-13.9 4.3-3.6 26.4 6 12.9 8.4 20.1 6.6 25.2-12.8 2.3-15.8 7.8-5.6 12.7 45.1 10 65.7-27.5 68.7-66 45.4 0 52.9-31.8 52.5-50.4-8.2 11.1-22.2 11.1-32.9 2.5-9.9-7.9-21.7-16.2-39-1.1-1.7-11.7-5.7-22.1-11.2-30.7 19.4-11.4 38.7-14.5 52.5-10.8 5.5 1.4 9.5 4.1 12.4 7-9 8.4-11.8 26.4 2.3 27 18.9.9 21-15.5 13.6-27.1-5.4-8.5-16.4-13.2-25.7-16.6C150.7-1 128.5 3.1 107 16.1c-5.2-5.7-11.1-10.2-17.7-13C82.2.2 71.7-2.6 61-3.2c-1.8-.1-3.6-.1-5.4-.1z"/></svg></span></li>
+      <li><a href="page-2.html">Carta</a></li>
+      <li aria-hidden="true"><span class="vine-sep"><svg viewBox="0 0 200 200"><path d="M43.6 11c-1.8 0-3.6.1-5.4.3-7 .7-13.9 2.8-19.1 7.5s-8.2 12-7.7 21c.5 9 4.3 16.1 10.2 20.3 5.9 4.2 13.3 5.5 21 5.2 15.4-.7 32.8-8 45.8-18.3 1.4-1.1 2.8-2 4.2-3.1 4.3 6.7 7.6 14.8 9.3 24.1z"/></svg></span></li>
+      <li><a href="page-3.html">Cellar</a></li>
+      <li aria-hidden="true"><span class="vine-sep"><svg viewBox="0 0 200 200"><path d="M43.6 11c-1.8 0-3.6.1-5.4.3-7 .7-13.9 2.8-19.1 7.5s-8.2 12-7.7 21c.5 9 4.3 16.1 10.2 20.3 5.9 4.2 13.3 5.5 21 5.2 15.4-.7 32.8-8 45.8-18.3 1.4-1.1 2.8-2 4.2-3.1z"/></svg></span></li>
+      <li><a href="page-4.html">House</a></li>
+      <li aria-hidden="true"><span class="vine-sep"><svg viewBox="0 0 200 200"><path d="M43.6 11c-1.8 0-3.6.1-5.4.3-7 .7-13.9 2.8-19.1 7.5s-8.2 12-7.7 21c.5 9 4.3 16.1 10.2 20.3z"/></svg></span></li>
+      <li><a href="page-5.html">Visit</a></li>
+      <li aria-hidden="true"><span class="vine-sep"><svg viewBox="0 0 200 200"><path d="M43.6 11c-1.8 0-3.6.1-5.4.3-7 .7-13.9 2.8-19.1 7.5s-8.2 12-7.7 21z"/></svg></span></li>
+      <li><a href="page-6.html">Reservations</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="cornice" role="presentation"></div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-laurel">
+    <div class="laurel-svg" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 324 296" preserveAspectRatio="xMidYMid meet">
+        <g fill="#1a1a1a" opacity="0.85">
+          <path d="M141.7-2.6c-11 4.9-23.4 9.5-30 22.6-4.7 7.1-4.8 16.4-8.1 24.2 6.1-6.5 15.6-13.2 21-20.7 6-9.5 9.1-18 17.1-26.1zm164.5 0c8.1 8 11.2 16.6 17.2 26.1 5.4 7.6 14.9 14.2 21 20.7-3.3-7.8-3.4-17-8.1-24.2-6.7-13.1-19-17.7-30.1-22.6zM111.9 14.4c-5.6 1.6-10.6 5.5-14.6 11-9.1 10.8-10.6 25-6.9 42 1.3 4.5-.5 8.7-.3 13 2.7-6.2 5.7-11.9 11.6-15.9 13.1-8.4 16.7-12.8 20.1-20.7 3.9-9.3 4.7-10.7 4.8-19-3.8 12-15.3 17-23 25.2-4 4.4-7.2 9.6-9 15l-.3-.3c1-4.8 2.9-9.1 4-13.8 3.5-12.7 2.8-27.9 13.7-36.5zm223.7 0c10.9 8.5 10.2 23.8 13.7 36.5 1.1 4.7 3 9 4 13.8l-.3.3c-1.8-5.4-5-10.6-9-15-7.8-8.1-19.2-13.2-23.1-25.2.1 8.4.8 9.7 4.8 19 3.4 7.9 7 12.4 20.1 20.7 5.9 4 8.9 9.7 11.6 15.9.3-4.2-1.6-8.4-.3-13 3.8-17.1 2.2-31.2-6.9-42-3.9-5.6-9-9.4-14.6-11zM88.6 38.1c-.3-.1-.4.2-.7.3-7.6 11-14.3 19.3-13.9 34.1-1 18.2 10.5 34.8 11.7 51.9 1.7-13.1 10.8-22.4 18.3-32.6-1 4.4-2.1 8.6-4.1 12.4-8.2 14-16.4 30.7-10.7 48.7-.1.2-.3.4-.5.3-2.3-5.9-2.7-12.7-4.3-19.1C80.5 117.2 68.9 103.1 72.3 83.6c-1.8 4.2-2.5 9-3.4 13.6-2 12-3 19.3-.1 30.3 3.5 13.8 18.4 28.9 24.5 41.5l.8.7c-.9-6.8-1.3-14.2.4-20.7 2.6-10.4 9.7-20.6 11.7-31.4 1-8.4-1.3-17.8-2.2-25.9 2.7-3.7 5.2-7.5 7.1-11.6 2.5-6.2 1.4-15.1 2.2-21.9-1 2.9-2.7 5.4-4.7 7.8-9 9.4-19.5 19-21.4 32.6-.3 1.9-.4 3.9-.9 5.8-.4.2-.4-.3-.6-.4l1.1-16.8c.4-16.5-6.6-34.7 1.8-49.1zm270.7 0c8.4 14.4 1.5 32.7 1.8 49.1l1.1 16.8c-.2.1-.2.6-.6.4-.5-1.9-.6-3.9-.9-5.8-2-13.6-12.4-23.2-21.5-32.6-1.9-2.4-3.7-4.9-4.7-7.8.7 6.8-.3 15.6 2.2 21.9 1.9 4.1 4.4 7.9 7.1 11.6-.9 8.1-3.2 17.5-2.2 25.9 2 10.8 9.1 20.9 11.7 31.4 1.7 6.5 1.3 13.9.4 20.7l.8-.7c6-12.6 20.9-27.8 24.5-41.5 2.9-11 1.9-18.3-.1-30.3-.9-4.6-1.7-9.4-3.4-13.6 3.4 19.5-8.2 33.6-12 50.6-1.6 6.3-2 13.1-4.3 19.1-.2.1-.4-.1-.5-.3 5.7-18-2.5-34.7-10.7-48.7-2-3.8-3.1-8-4.1-12.4 7.5 10.2 16.6 19.5 18.3 32.6 1.2-17.2 12.7-33.7 11.7-51.9.3-14.8-6.3-23.1-13.9-34.1-.3-.1-.4-.4-.7-.3z"/>
+        </g>
+      </svg>
+    </div>
+    <div class="hero-eyebrow">Anno Domini · MMXIV</div>
+    <h1>Trattoria<br>Aventina</h1>
+    <div class="hero-rule" aria-hidden="true">
+      <span></span><span class="dot"></span><span></span>
+    </div>
+    <p class="hero-tagline">Cucina Romana since MMXIV.</p>
+    <div class="hero-meta">
+      <span>Via di Santa Sabina · 14</span>
+      <span>·</span>
+      <span>Aventino · Roma</span>
+    </div>
+  </div>
+</section>
+
+<div class="cornice" role="presentation"></div>
+
+<!-- DIVIDER -->
+<div class="divider">
+  <span class="line"></span>
+  <span class="accent" aria-hidden="true"></span>
+  <span class="label">Tria Capita Domus</span>
+  <span class="accent" aria-hidden="true"></span>
+  <span class="line"></span>
+</div>
+
+<!-- THREE FEATURE CARDS -->
+<section class="features" aria-label="The three pillars of the house">
+
+  <article class="card">
+    <div class="card-seal" aria-hidden="true">
+      <svg viewBox="0 0 118 118" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="59" cy="59" r="54" fill="none" stroke="#1a1a1a" stroke-width="0.8"/>
+        <circle cx="59" cy="59" r="48" fill="none" stroke="#c9a23a" stroke-width="0.6"/>
+        <g fill="#1a1a1a" opacity="0.7">
+          <ellipse cx="59" cy="14" rx="3" ry="6"/>
+          <ellipse cx="59" cy="104" rx="3" ry="6"/>
+          <ellipse cx="14" cy="59" rx="6" ry="3"/>
+          <ellipse cx="104" cy="59" rx="6" ry="3"/>
+          <ellipse cx="27" cy="27" rx="4" ry="5" transform="rotate(-45 27 27)"/>
+          <ellipse cx="91" cy="27" rx="4" ry="5" transform="rotate(45 91 27)"/>
+          <ellipse cx="27" cy="91" rx="4" ry="5" transform="rotate(45 27 91)"/>
+          <ellipse cx="91" cy="91" rx="4" ry="5" transform="rotate(-45 91 91)"/>
+        </g>
+      </svg>
+      <span class="card-seal-num">I</span>
+    </div>
+    <h3>La Cucina</h3>
+    <div class="h3-rules" aria-hidden="true">
+      <span></span><span class="gold"></span><span></span>
+    </div>
+    <p class="meta">Chef Lucia Ferri</p>
+    <p>
+      <span class="leadin">In the kitchen,</span>Chef Lucia Ferri commands a brigade of seven, cooking the four pillars of cucina romana — cacio e pepe, gricia, amatriciana, carbonara — alongside the slow trades of coda alla vaccinara and abbacchio scottadito. Pasta is rolled by hand each morning at five, the guanciale cured upstairs, and Tuesday brings the only quinto-quarto tasting in the rione. Lucia trained at Checchino dal 1887 and at Da Cesare al Casaletto before bringing her ledger of nonna recipes to the Aventine in 2014.
+    </p>
+    <div class="signature">
+      Tonnarelli, rigatoni, fettuccine — fatti a mano
+      <small>Daily · from 17:00</small>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="card-seal" aria-hidden="true">
+      <svg viewBox="0 0 118 118" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="59" cy="59" r="54" fill="none" stroke="#1a1a1a" stroke-width="0.8"/>
+        <circle cx="59" cy="59" r="48" fill="none" stroke="#c9a23a" stroke-width="0.6"/>
+        <g fill="#1a1a1a" opacity="0.7">
+          <ellipse cx="59" cy="14" rx="3" ry="6"/>
+          <ellipse cx="59" cy="104" rx="3" ry="6"/>
+          <ellipse cx="14" cy="59" rx="6" ry="3"/>
+          <ellipse cx="104" cy="59" rx="6" ry="3"/>
+          <ellipse cx="27" cy="27" rx="4" ry="5" transform="rotate(-45 27 27)"/>
+          <ellipse cx="91" cy="27" rx="4" ry="5" transform="rotate(45 91 27)"/>
+          <ellipse cx="27" cy="91" rx="4" ry="5" transform="rotate(45 27 91)"/>
+          <ellipse cx="91" cy="91" rx="4" ry="5" transform="rotate(-45 91 91)"/>
+        </g>
+      </svg>
+      <span class="card-seal-num">II</span>
+    </div>
+    <h3>Il Cellario</h3>
+    <div class="h3-rules" aria-hidden="true">
+      <span></span><span class="gold"></span><span></span>
+    </div>
+    <p class="meta">Lazio &amp; Campania</p>
+    <p>
+      <span class="leadin">Below the dining room,</span>a barrel-vaulted cellar holds two hundred and forty references, weighted unapologetically toward the natural growers of Lazio and Campania. Cesanese del Piglio from Damiano Ciolli, Frascati Superiore from Casale Marchese, Aglianico del Vulture from Cantine del Notaio, and the long, salty Fianos of Pierluigi Zampaglione. Sommelier Marco Devoto pours fourteen bottles by the glass each evening, none above twelve euro, and keeps a standing list of the house amari beside.
+    </p>
+    <div class="signature">
+      240 references · 14 by the glass
+      <small>Cellar tours · Saturdays 16:30</small>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="card-seal" aria-hidden="true">
+      <svg viewBox="0 0 118 118" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="59" cy="59" r="54" fill="none" stroke="#1a1a1a" stroke-width="0.8"/>
+        <circle cx="59" cy="59" r="48" fill="none" stroke="#c9a23a" stroke-width="0.6"/>
+        <g fill="#1a1a1a" opacity="0.7">
+          <ellipse cx="59" cy="14" rx="3" ry="6"/>
+          <ellipse cx="59" cy="104" rx="3" ry="6"/>
+          <ellipse cx="14" cy="59" rx="6" ry="3"/>
+          <ellipse cx="104" cy="59" rx="6" ry="3"/>
+          <ellipse cx="27" cy="27" rx="4" ry="5" transform="rotate(-45 27 27)"/>
+          <ellipse cx="91" cy="27" rx="4" ry="5" transform="rotate(45 91 27)"/>
+          <ellipse cx="27" cy="91" rx="4" ry="5" transform="rotate(45 27 91)"/>
+          <ellipse cx="91" cy="91" rx="4" ry="5" transform="rotate(-45 91 91)"/>
+        </g>
+      </svg>
+      <span class="card-seal-num">III</span>
+    </div>
+    <h3>La Sala</h3>
+    <div class="h3-rules" aria-hidden="true">
+      <span></span><span class="gold"></span><span></span>
+    </div>
+    <p class="meta">Via di Santa Sabina, 14</p>
+    <p>
+      <span class="leadin">Built into the hill,</span>the room is a single travertine vault discovered behind a plaster wall during the 2013 restoration — likely a fragment of a third-century horreum once attached to the basilica above. Forty-two seats, oil-lamp sconces, white linen, and a long communal table beneath the keystone. Above ground, six tables on a quiet terrace look across to the orange grove of the Savello and, on clear evenings, to the dome of Saint Peter's beyond the Tiber.
+    </p>
+    <div class="signature">
+      42 seats inside · 6 on the terrace
+      <small>Aventino · Roma · I Municipio</small>
+    </div>
+  </article>
+
+</section>
+
+<!-- INVITATION BAND -->
+<section class="invitation">
+  <div class="invitation-inner">
+    <div class="eyebrow">Convivium · Cenam Petite</div>
+    <h2>Reserve a Table for Dinner</h2>
+    <p>
+      The trattoria opens for dinner only, Tuesday through Sunday. The kitchen takes its rest on Mondays. We seat at two services — early at seven, late at half past nine — and ask that bookings be made at least one day in advance, particularly for parties greater than four.
+    </p>
+    <div class="hours-grid">
+      <div>Mar – Ven<span>19:00 &nbsp;·&nbsp; 21:30</span></div>
+      <div>Sab – Dom<span>12:30 &nbsp;·&nbsp; 19:00 &nbsp;·&nbsp; 21:30</span></div>
+      <div>Lun<span>chiuso</span></div>
+    </div>
+    <a class="btn gold-rule" href="page-6.html">Reserve a Table</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="cornice" role="presentation"></div>
+  <div class="footer-inner">
+    <div class="footer-col">
+      <h4>Address</h4>
+      <address>
+        Trattoria Aventina<br>
+        Via di Santa Sabina, 14<br>
+        00153 Roma · Italia
+      </address>
+    </div>
+    <div class="footer-col">
+      <h4>Hours</h4>
+      <p>
+        Martedì — Domenica<br>
+        Cena · 19:00 — 23:00<br>
+        Pranzo · Sabato &amp; Domenica
+      </p>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p>
+        +39 06 5743 921<br>
+        prenotazioni@aventina.roma<br>
+        Anno fundationis · MMXIV
+      </p>
+    </div>
+  </div>
+  <div class="tailpiece-rule"></div>
+  <div class="tailpiece" aria-hidden="true">❦ · ❦ · ❦</div>
+</footer>
+
+</body>
+</html>

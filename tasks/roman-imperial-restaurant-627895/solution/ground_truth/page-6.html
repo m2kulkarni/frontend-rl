@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Reservations | Trattoria Aventina</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    font-size: 16px;
+    line-height: 1.65;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* ---------- Display & Caps ---------- */
+  .caps {
+    font-family: var(--font-display), "Times New Roman", serif;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-weight: 600;
+  }
+  .smallcaps {
+    font-variant: small-caps;
+    letter-spacing: 0.08em;
+  }
+
+  /* ---------- Top wordmark roundel ---------- */
+  .wordmark {
+    text-align: center;
+    padding: 32px 0 12px;
+  }
+  .wordmark-roundel {
+    display: inline-block;
+    width: 76px;
+    height: 76px;
+    border: 1.5px solid var(--ornament);
+    border-radius: 50%;
+    line-height: 76px;
+    font-family: var(--font-display), serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: 0.02em;
+    position: relative;
+  }
+  .wordmark-roundel::before,
+  .wordmark-roundel::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 80px;
+    height: 1px;
+    background: var(--ornament);
+  }
+  .wordmark-roundel::before { right: calc(100% + 14px); }
+  .wordmark-roundel::after  { left:  calc(100% + 14px); }
+  .wordmark-name {
+    margin-top: 18px;
+    font-family: var(--font-display), serif;
+    font-size: 0.95rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+  }
+  .wordmark-tag {
+    margin-top: 4px;
+    font-size: 0.7rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ornament);
+    opacity: 0.7;
+  }
+
+  /* ---------- Navigation ---------- */
+  nav.primary {
+    text-align: center;
+    padding: 18px 0 10px;
+  }
+  nav.primary ul {
+    list-style: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+  }
+  nav.primary li {
+    display: inline-flex;
+    align-items: center;
+  }
+  nav.primary a {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    padding: 6px 14px;
+    color: var(--primary);
+    position: relative;
+  }
+  nav.primary a[aria-current="page"] {
+    border-bottom: 1px solid var(--secondary);
+  }
+  nav.primary .vine {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    opacity: 0.55;
+  }
+  nav.primary .vine svg { width: 100%; height: 100%; fill: var(--ornament); }
+
+  /* ---------- Meander cornice ---------- */
+  .meander-cornice {
+    width: 100%;
+    height: 22px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 165 44'><g fill='%231a1a1a'><path d='M0,42 L0,10 32,10 32,29 29,29 29,35 48,35 48,42 23,42 23,23 35,23 35,17 16,17 16,42 Z'/><path d='M48,42 L48,10 80,10 80,29 67,29 67,35 86,35 86,42 61,42 61,23 73,23 73,17 54,17 54,42 Z'/><path d='M86,42 L86,10 118,10 118,29 105,29 105,35 124,35 124,42 99,42 99,23 111,23 111,17 92,17 92,42 Z'/><path d='M124,42 L124,10 156,10 156,29 143,29 143,35 162,35 162,42 137,42 137,23 149,23 149,17 130,17 130,42 Z'/></g></svg>");
+    background-repeat: repeat-x;
+    background-size: 165px 44px;
+    background-position: center;
+  }
+  .meander-thin {
+    border-top: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+    height: 24px;
+    margin: 0 auto;
+  }
+
+  /* ---------- Page header ---------- */
+  header.page-head {
+    border-bottom: 1px solid var(--ornament);
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    text-align: center;
+    padding: 72px 24px 56px;
+    position: relative;
+  }
+  .hero-eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.4em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .hero h1 {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-weight: 700;
+    font-size: 4rem;
+    line-height: 1;
+    margin-bottom: 22px;
+  }
+  .hero h1 .ampersand {
+    font-style: italic;
+    text-transform: none;
+    color: var(--accent);
+    font-weight: 400;
+    letter-spacing: 0;
+  }
+  .hero-rule {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin: 14px auto 22px;
+    max-width: 460px;
+  }
+  .hero-rule::before,
+  .hero-rule::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--ornament);
+  }
+  .hero-rule .dot {
+    width: 6px; height: 6px;
+    background: var(--secondary);
+    transform: rotate(45deg);
+  }
+  .hero-sub {
+    max-width: 620px;
+    margin: 0 auto;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--text);
+  }
+  .hero-sub .lead {
+    font-variant: small-caps;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  /* ---------- Reservation panel with wreath ---------- */
+  .reserve-section {
+    padding: 40px 24px 80px;
+    display: flex;
+    justify-content: center;
+  }
+  .reserve-frame {
+    position: relative;
+    width: 880px;
+    background: var(--surface);
+    padding: 70px 90px 60px;
+    border: 1.5px solid var(--ornament);
+    outline: 1px solid var(--ornament);
+    outline-offset: 6px;
+  }
+  .reserve-frame::before,
+  .reserve-frame::after {
+    content: "";
+    position: absolute;
+    left: 14px; right: 14px;
+    height: 18px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 165 44'><g fill='%231a1a1a'><path d='M0,42 L0,10 32,10 32,29 29,29 29,35 48,35 48,42 23,42 23,23 35,23 35,17 16,17 16,42 Z'/><path d='M48,42 L48,10 80,10 80,29 67,29 67,35 86,35 86,42 61,42 61,23 73,23 73,17 54,17 54,42 Z'/><path d='M86,42 L86,10 118,10 118,29 105,29 105,35 124,35 124,42 99,42 99,23 111,23 111,17 92,17 92,42 Z'/><path d='M124,42 L124,10 156,10 156,29 143,29 143,35 162,35 162,42 137,42 137,23 149,23 149,17 130,17 130,42 Z'/></g></svg>");
+    background-repeat: repeat-x;
+    background-size: 110px 22px;
+  }
+  .reserve-frame::before { top: -2px; }
+  .reserve-frame::after  { bottom: -2px; }
+
+  .wreath-seal {
+    position: absolute;
+    top: -88px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 180px;
+    height: 180px;
+    background: var(--bg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .wreath-seal svg.wreath {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .wreath-seal .seal-inner {
+    width: 96px;
+    height: 96px;
+    border: 1px solid var(--ornament);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg);
+    z-index: 2;
+    position: relative;
+  }
+  .wreath-seal .seal-inner .roman {
+    font-family: var(--font-display), serif;
+    font-size: 1.15rem;
+    letter-spacing: 0.14em;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .wreath-seal .seal-inner .seal-sub {
+    font-size: 0.55rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    margin-top: 4px;
+    color: var(--ornament);
+  }
+
+  .panel-title {
+    text-align: center;
+    margin-top: 18px;
+  }
+  .panel-title h2 {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-weight: 700;
+    font-size: 1.55rem;
+  }
+  .panel-title .flank {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 12px;
+    margin-bottom: 6px;
+  }
+  .panel-title .flank::before,
+  .panel-title .flank::after {
+    content: "";
+    width: 90px;
+    height: 1px;
+    background: var(--ornament);
+  }
+  .panel-title .flank span {
+    font-size: 0.7rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    font-weight: 700;
+  }
+  .panel-intro {
+    text-align: center;
+    max-width: 580px;
+    margin: 14px auto 36px;
+    font-size: 0.98rem;
+  }
+  .panel-intro .lead {
+    font-variant: small-caps;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  /* ---------- Form ---------- */
+  form.reservation {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px 36px;
+    margin-top: 18px;
+  }
+  .field { display: flex; flex-direction: column; }
+  .field.full { grid-column: 1 / -1; }
+  .field label {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 0.7rem;
+    color: var(--primary);
+    margin-bottom: 8px;
+  }
+  .field label .num {
+    color: var(--secondary);
+    margin-right: 8px;
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: 0;
+  }
+  .field input,
+  .field select,
+  .field textarea {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--ornament);
+    padding: 10px 2px 10px;
+    font-family: var(--font-body), serif;
+    font-size: 1rem;
+    color: var(--text);
+    outline: none;
+    border-radius: 0;
+  }
+  .field textarea {
+    border: 1px solid var(--ornament);
+    padding: 12px;
+    min-height: 110px;
+    resize: vertical;
+    line-height: 1.6;
+  }
+  .field .hint {
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    color: var(--ornament);
+    opacity: 0.65;
+    margin-top: 6px;
+    font-style: italic;
+  }
+  .submit-row {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 18px;
+    gap: 10px;
+  }
+  button.seal-btn {
+    background: var(--primary);
+    color: var(--bg);
+    border: none;
+    padding: 16px 56px;
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.32em;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+  }
+  button.seal-btn::before,
+  button.seal-btn::after {
+    content: "❖";
+    color: var(--secondary);
+    margin: 0 14px;
+    font-size: 0.6rem;
+    vertical-align: middle;
+  }
+  .submit-note {
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ornament);
+    opacity: 0.7;
+  }
+
+  /* ---------- Policy & contact strip ---------- */
+  .policy-strip {
+    margin: 0 auto;
+    max-width: 1120px;
+    padding: 0 40px 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+  .policy-card {
+    border: 1.5px solid var(--ornament);
+    padding: 44px 36px 36px;
+    position: relative;
+    background: var(--surface);
+  }
+  .policy-card::before {
+    content: "";
+    position: absolute;
+    top: -1px; left: 14px; right: 14px;
+    height: 14px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 165 44'><g fill='%231a1a1a'><path d='M0,42 L0,10 32,10 32,29 29,29 29,35 48,35 48,42 23,42 23,23 35,23 35,17 16,17 16,42 Z'/><path d='M48,42 L48,10 80,10 80,29 67,29 67,35 86,35 86,42 61,42 61,23 73,23 73,17 54,17 54,42 Z'/><path d='M86,42 L86,10 118,10 118,29 105,29 105,35 124,35 124,42 99,42 99,23 111,23 111,17 92,17 92,42 Z'/><path d='M124,42 L124,10 156,10 156,29 143,29 143,35 162,35 162,42 137,42 137,23 149,23 149,17 130,17 130,42 Z'/></g></svg>");
+    background-repeat: repeat-x;
+    background-size: 90px 18px;
+  }
+  .policy-card h3 {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 1rem;
+    text-align: center;
+    margin-bottom: 14px;
+    font-weight: 700;
+  }
+  .policy-card .flank-mini {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    margin-bottom: 18px;
+  }
+  .policy-card .flank-mini::before,
+  .policy-card .flank-mini::after {
+    content: ""; width: 36px; height: 1px; background: var(--secondary);
+  }
+  .policy-card .flank-mini span {
+    width: 5px; height: 5px; background: var(--accent); transform: rotate(45deg);
+  }
+  .policy-card p {
+    font-size: 0.93rem;
+    text-align: justify;
+    margin-bottom: 12px;
+  }
+  .policy-card p .lead-sc {
+    font-variant: small-caps;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .policy-card .menu-line {
+    text-align: center;
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px dotted var(--ornament);
+    font-variant: small-caps;
+    letter-spacing: 0.1em;
+    font-size: 0.88rem;
+  }
+  .policy-card .menu-line .price {
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  .contact-card .contact-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 14px 0;
+    border-bottom: 1px dotted var(--ornament);
+  }
+  .contact-card .contact-line:last-child { border-bottom: none; }
+  .contact-card .contact-line .label {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 0.7rem;
+    color: var(--ornament);
+  }
+  .contact-card .contact-line .value {
+    font-size: 1rem;
+    font-variant: small-caps;
+    letter-spacing: 0.06em;
+  }
+  .contact-card .contact-line .value strong {
+    font-weight: 700;
+  }
+
+  /* ---------- Section divider ---------- */
+  .divider {
+    text-align: center;
+    padding: 30px 0 20px;
+  }
+  .divider .meander-cornice { max-width: 720px; margin: 0 auto; height: 18px;}
+
+  /* ---------- Footer ---------- */
+  footer.page-foot {
+    margin-top: 40px;
+    border-top: 1px solid var(--ornament);
+  }
+  footer .frieze-cornice {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 165 44'><g fill='%231a1a1a'><path d='M0,42 L0,10 32,10 32,29 29,29 29,35 48,35 48,42 23,42 23,23 35,23 35,17 16,17 16,42 Z'/><path d='M48,42 L48,10 80,10 80,29 67,29 67,35 86,35 86,42 61,42 61,23 73,23 73,17 54,17 54,42 Z'/><path d='M86,42 L86,10 118,10 118,29 105,29 105,35 124,35 124,42 99,42 99,23 111,23 111,17 92,17 92,42 Z'/><path d='M124,42 L124,10 156,10 156,29 143,29 143,35 162,35 162,42 137,42 137,23 149,23 149,17 130,17 130,42 Z'/></g></svg>");
+    background-repeat: repeat-x;
+    background-size: 165px 44px;
+    height: 26px;
+  }
+  footer .foot-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+    padding: 50px 60px 30px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.72rem;
+  }
+  footer .foot-cols h4 {
+    font-family: var(--font-display), serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.32em;
+    margin-bottom: 14px;
+    color: var(--accent);
+  }
+  footer .foot-cols p {
+    line-height: 1.9;
+  }
+  footer .tailpiece {
+    text-align: center;
+    padding: 0 0 36px;
+    color: var(--secondary);
+    font-size: 1.4rem;
+    letter-spacing: 0.4em;
+  }
+  footer .tailpiece .glyph {
+    display: inline-block;
+    transform: translateY(-2px);
+  }
+
+  /* SVG vine inline color */
+  .vine svg path { fill: var(--ornament); }
+</style>
+</head>
+<body>
+
+<header class="page-head">
+  <div class="wordmark">
+    <div class="wordmark-roundel">TA</div>
+    <div class="wordmark-name">Trattoria Aventina</div>
+    <div class="wordmark-tag">Cucina Romana · Aventino · MMXIV</div>
+  </div>
+
+  <nav class="primary" aria-label="Primary">
+    <ul>
+      <li><a href="page-1.html">Domus</a></li>
+      <li class="vine" aria-hidden="true">
+        <svg viewBox="0 0 200 200"><path d="M43.583 11.011c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.7375-13.935 2.7947-19.156 7.4688-5.221 4.674-8.1987 12.003-7.6875 21 0.5114 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937z"/></svg>
+      </li>
+      <li><a href="page-2.html">La Carta</a></li>
+      <li class="vine" aria-hidden="true">
+        <svg viewBox="0 0 200 200"><path d="M43.583 11.011c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.7375-13.935 2.7947-19.156 7.4688-5.221 4.674-8.1987 12.003-7.6875 21 0.5114 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406z"/></svg>
+      </li>
+      <li><a href="page-3.html">La Cantina</a></li>
+      <li class="vine" aria-hidden="true">
+        <svg viewBox="0 0 200 200"><path d="M43.583 11.011c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.7375-13.935 2.7947-19.156 7.4688z"/></svg>
+      </li>
+      <li><a href="page-4.html">La Casa</a></li>
+      <li class="vine" aria-hidden="true">
+        <svg viewBox="0 0 200 200"><path d="M43.583 11.011c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.7375-13.935 2.7947-19.156 7.4688z"/></svg>
+      </li>
+      <li><a href="page-5.html">Visita</a></li>
+      <li class="vine" aria-hidden="true">
+        <svg viewBox="0 0 200 200"><path d="M43.583 11.011c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.7375-13.935 2.7947-19.156 7.4688z"/></svg>
+      </li>
+      <li><a href="page-6.html" aria-current="page">Prenotazioni</a></li>
+    </ul>
+  </nav>
+
+  <div class="meander-cornice" aria-hidden="true"></div>
+</header>
+
+<section class="hero">
+  <div class="hero-eyebrow">Pars VI · Tabula Reservationis</div>
+  <h1>Reserve <span class="ampersand">a</span> Table</h1>
+  <div class="hero-rule"><span class="dot"></span></div>
+  <p class="hero-sub">
+    <span class="lead">Per favore.</span> The dining room on Via di Santa Sabina seats forty-two guests across two intimate vaults. We hold tables nightly from Tuesday through Sunday, and observe a quiet riposo each Monday. Inscribe your particulars below and our maître d', Signora Falconieri, will reply within one working day.
+  </p>
+</section>
+
+<section class="reserve-section">
+  <div class="reserve-frame">
+
+    <div class="wreath-seal" aria-hidden="true">
+      <svg class="wreath" viewBox="0 0 323 295" preserveAspectRatio="xMidYMid meet">
+        <g fill="none" stroke="#1a1a1a" stroke-width="1.2" transform="translate(0,0)">
+          <ellipse cx="161" cy="147" rx="135" ry="125"/>
+          <ellipse cx="161" cy="147" rx="120" ry="110" stroke-dasharray="2 4"/>
+        </g>
+        <g fill="#1a1a1a" transform="translate(-64,20)">
+          <path d="M141.7 -18.6c-11 4.8-23.4 9.5-30.1 22.6-4.7 7.1-4.8 16.4-8.1 24.1 6.1-6.5 15.6-13.2 21-20.7 6-9.5 9.1-18 17.2-26zM306.2 -18.6c8.1 8 11.2 16.6 17.2 26 5.4 7.6 14.9 14.2 21 20.7-3.3-7.8-3.4-17-8.1-24.1-6.7-13.2-19-17.8-30.1-22.6zM111.9 -1.6c-5.6 1.6-10.6 5.5-14.6 11-9.1 10.8-10.7 25-6.9 42 1.3 4.5-0.5 8.7-0.3 13 2.7-6.2 5.7-11.9 11.6-15.9 13.1-8.4 16.7-12.8 20.1-20.8 3.9-9.3 4.7-10.7 4.8-19-3.8 12-15.3 17.1-23.1 25.2-4 4.4-7.2 9.6-9 15l-0.3-0.3c1-4.8 2.9-9.1 4-13.8 3.5-12.7 2.8-28 13.7-36.4zM335.6 -1.6c10.9 8.5 10.2 23.8 13.7 36.4 1.1 4.7 3 9 4 13.8l-0.3 0.3c-1.8-5.4-5-10.6-9-15-7.8-8.1-19.2-13.2-23.1-25.2 0.1 8.4 0.8 9.7 4.8 19 3.4 7.9 7 12.4 20.1 20.8 5.9 4 8.9 9.7 11.6 15.9 0.3-4.2-1.6-8.4-0.3-13 3.8-17.1 2.2-31.2-6.9-42-3.9-5.6-8.9-9.4-14.6-11z"/>
+          <ellipse cx="161" cy="147" rx="2" ry="6" transform="rotate(15 161 147)"/>
+          <ellipse cx="161" cy="147" rx="2" ry="6" transform="rotate(45 161 147)"/>
+          <ellipse cx="161" cy="147" rx="2" ry="6" transform="rotate(75 161 147)"/>
+          <ellipse cx="161" cy="147" rx="2" ry="6" transform="rotate(105 161 147)"/>
+          <ellipse cx="161" cy="147" rx="2" ry="6" transform="rotate(135 161 147)"/>
+          <ellipse cx="161" cy="147" rx="2" ry="6" transform="rotate(165 161 147)"/>
+          <ellipse cx="161" cy="147" rx="2" ry="6" transform="rotate(195 161 147)"/>
+          <ellipse cx="161" cy="147" rx="2" ry="6" transform="rotate(225 161 147)"/>
+          <ellipse cx="161" cy="147" rx="2" ry="6" transform="rotate(255 161 147)"/>
+          <ellipse cx="161" cy="147" rx="2" ry="6" transform="rotate(285 161 147)"/>
+          <ellipse cx="161" cy="147" rx="2" ry="6" transform="rotate(315 161 147)"/>
+          <ellipse cx="161" cy="147" rx="2" ry="6" transform="rotate(345 161 147)"/>
+        </g>
+      </svg>
+      <div class="seal-inner">
+        <div class="roman">SPQR</div>
+        <div class="seal-sub">Aventino</div>
+      </div>
+    </div>
+
+    <div class="panel-title">
+      <h2>Tabula Reservationis</h2>
+      <div class="flank"><span>Booking Tablet</span></div>
+    </div>
+
+    <p class="panel-intro">
+      <span class="lead">Inscribe ye below.</span> Tables held for fifteen minutes past the appointed hour. For parties greater than eight, kindly write directly to the maître d'.
+    </p>
+
+    <form class="reservation" novalidate>
+      <div class="field full">
+        <label for="r-name"><span class="num">I.</span>Nomen — Full Name</label>
+        <input type="text" id="r-name" name="name" placeholder="Marcus Aurelius Antoninus" autocomplete="name">
+      </div>
+
+      <div class="field">
+        <label for="r-party"><span class="num">II.</span>Convivium — Party Size</label>
+        <select id="r-party" name="party">
+          <option>2 — Duo</option>
+          <option>3 — Tres</option>
+          <option>4 — Quattuor</option>
+          <option>5 — Quinque</option>
+          <option>6 — Sex</option>
+          <option>7 — Septem</option>
+          <option>8 — Octo</option>
+        </select>
+        <span class="hint">From two to eight guests.</span>
+      </div>
+
+      <div class="field">
+        <label for="r-phone"><span class="num">III.</span>Telephonum — Telephone</label>
+        <input type="tel" id="r-phone" name="phone" placeholder="+39 ___ _______">
+        <span class="hint">For confirmation and any same-day notice.</span>
+      </div>
+
+      <div class="field">
+        <label for="r-date"><span class="num">IV.</span>Dies — Date</label>
+        <input type="text" id="r-date" name="date" placeholder="Saturday, 14 June 2025">
+        <span class="hint">Closed Mondays. Tuesday–Sunday.</span>
+      </div>
+
+      <div class="field">
+        <label for="r-time"><span class="num">V.</span>Hora — Time</label>
+        <input type="text" id="r-time" name="time" placeholder="20:30">
+        <span class="hint">Service: 19:30 — 23:00.</span>
+      </div>
+
+      <div class="field full">
+        <label for="r-note"><span class="num">VI.</span>Nota — A Note to the Kitchen</label>
+        <textarea id="r-note" name="note" placeholder="Allergies, an anniversary, the desire for the Menù del Console (kindly request 48 hours hence), a corner table by the lemon tree…"></textarea>
+      </div>
+
+      <div class="submit-row">
+        <button type="button" class="seal-btn">Inscribe Reservation</button>
+        <span class="submit-note">A reply by Signora Falconieri within one day</span>
+      </div>
+    </form>
+  </div>
+</section>
+
+<div class="divider" aria-hidden="true">
+  <div class="meander-cornice"></div>
+</div>
+
+<section class="policy-strip">
+  <article class="policy-card">
+    <h3>De Consuetudine — House Policy</h3>
+    <div class="flank-mini"><span></span></div>
+    <p>
+      <span class="lead-sc">Cancellation.</span> Tables may be released without charge until twenty-four hours before the appointed seating. Within that window a courtesy of forty euro per guest is retained, payable upon arrival or by bank transfer; we ask this both to honour the kitchen's market shopping at Testaccio and to offer the seat to the next guest on the list.
+    </p>
+    <p>
+      <span class="lead-sc">Children.</span> Children of all ages are warmly welcomed at the early seating from 19:30 to 21:00. Half-portions of cacio e pepe and rigatoni al pomodoro are prepared on request, without surcharge.
+    </p>
+    <p>
+      <span class="lead-sc">Attire.</span> Smart, unfussy. The Aventino is a hill of cypresses and orange gardens; come as one comes to a long Sunday lunch.
+    </p>
+    <div class="menu-line">
+      Menù del Console — six courses · <span class="price">€85 per guest</span> · 48 hours' notice
+    </div>
+  </article>
+
+  <article class="policy-card contact-card">
+    <h3>Alia Via — Other Means</h3>
+    <div class="flank-mini"><span></span></div>
+    <p style="text-align:center; margin-bottom:22px;">
+      <span class="lead-sc">Per chi preferisce la voce.</span> Should the tablet above prove uncongenial, our reservations desk is staffed from eleven in the morning until eleven at night.
+    </p>
+
+    <div class="contact-line">
+      <span class="label">Telephonum</span>
+      <span class="value"><strong>+39 06 5746 218</strong></span>
+    </div>
+    <div class="contact-line">
+      <span class="label">Epistula</span>
+      <span class="value"><strong>prenotazioni@trattoriaventina.it</strong></span>
+    </div>
+    <div class="contact-line">
+      <span class="label">Hospes</span>
+      <span class="value">Sig.ra Liviana Falconieri</span>
+    </div>
+    <div class="contact-line">
+      <span class="label">Address</span>
+      <span class="value">Via di Santa Sabina 14, Roma</span>
+    </div>
+    <div class="contact-line">
+      <span class="label">Hours of Reply</span>
+      <span class="value">Mar–Dom · 11:00 — 23:00</span>
+    </div>
+
+    <p style="text-align:center; margin-top:22px; font-size:0.82rem;" class="smallcaps">
+      Private dining for ten to twenty-six guests is arranged in the lower vault, the <em>Sala dei Consoli</em>, by separate correspondence.
+    </p>
+  </article>
+</section>
+
+<footer class="page-foot">
+  <div class="frieze-cornice" aria-hidden="true"></div>
+  <div class="foot-cols">
+    <div>
+      <h4>Address</h4>
+      <p>Via di Santa Sabina, 14<br>00153 Roma RM<br>Rione Aventino</p>
+    </div>
+    <div>
+      <h4>Hours</h4>
+      <p>Tue–Sun · 12:30 — 14:30<br>Tue–Sun · 19:30 — 23:00<br>Closed Mondays</p>
+    </div>
+    <div>
+      <h4>Attribution</h4>
+      <p>Founded MMXIV by the<br>Falconieri family · Roma</p>
+    </div>
+  </div>
+  <div class="tailpiece"><span class="glyph">❦ · ❖ · ❦</span></div>
+</footer>
+
+</body>
+</html>

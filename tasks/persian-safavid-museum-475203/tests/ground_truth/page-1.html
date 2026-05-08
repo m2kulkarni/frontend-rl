@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Dār al-Naqsh — Museum of Safavid Ornament</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  /* ============ Page foundation ============ */
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    font-size: 17px;
+    line-height: 1.65;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  a { color: var(--primary); text-decoration: none; }
+
+  .axis {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 64px;
+  }
+
+  /* ============ Header band ============ */
+  .top-band {
+    background: var(--primary);
+    color: var(--bg);
+    text-align: center;
+    padding: 10px 0;
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+  }
+  .top-band span { color: var(--accent); }
+
+  /* ============ Navigation ============ */
+  nav.primary {
+    background: var(--bg);
+    border-top: 1px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
+    padding: 18px 0;
+  }
+  nav.primary ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    flex-wrap: wrap;
+  }
+  nav.primary li {
+    display: flex;
+    align-items: center;
+  }
+  nav.primary a {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.12em;
+    font-size: 14px;
+    color: var(--primary);
+    padding: 4px 18px;
+    display: inline-block;
+  }
+  nav.primary a[aria-current="page"] {
+    border-bottom: 1px solid var(--accent);
+    color: var(--text-emphasis);
+  }
+  nav.primary .palmette {
+    color: var(--accent);
+    font-size: 10px;
+    line-height: 1;
+  }
+
+  .wordmark {
+    text-align: center;
+    padding: 38px 0 22px;
+  }
+  .wordmark h1 {
+    font-family: var(--font-display), serif;
+    font-size: 38px;
+    letter-spacing: 0.18em;
+    color: var(--primary);
+    margin: 0;
+    text-transform: uppercase;
+  }
+  .wordmark .arabic-tag {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    color: var(--text-emphasis);
+    font-size: 15px;
+    letter-spacing: 0.1em;
+    margin-top: 6px;
+  }
+  .wordmark .seal-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    margin-top: 14px;
+    color: var(--accent);
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+  }
+  .wordmark .seal-line::before,
+  .wordmark .seal-line::after {
+    content: "";
+    width: 110px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  /* ============ Hero iwan ============ */
+  .iwan {
+    position: relative;
+    margin: 30px auto 0;
+    max-width: 920px;
+    padding: 24px 24px 0;
+  }
+  .iwan-frame {
+    position: relative;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(42,138,138,0.08) 0%, transparent 60%),
+      var(--bg);
+    border: 1px solid var(--primary);
+    padding: 0;
+  }
+  .iwan-arch {
+    position: relative;
+    height: 520px;
+    overflow: hidden;
+    background: var(--primary);
+    color: var(--bg);
+    text-align: center;
+    clip-path: path("M 0,520 L 0,180 C 0,180 120,40 460,20 C 800,40 920,180 920,180 L 920,520 Z");
+  }
+  /* Ornamental tile field within arch */
+  .iwan-arch::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(201,162,58,0.18) 0 2px, transparent 3px),
+      radial-gradient(circle at 80% 30%, rgba(201,162,58,0.18) 0 2px, transparent 3px),
+      radial-gradient(circle at 50% 60%, rgba(42,138,138,0.22) 0 3px, transparent 4px),
+      repeating-linear-gradient(60deg, rgba(42,138,138,0.10) 0 1px, transparent 1px 28px),
+      repeating-linear-gradient(-60deg, rgba(201,162,58,0.10) 0 1px, transparent 1px 28px);
+  }
+  .iwan-inner {
+    position: relative;
+    z-index: 2;
+    padding: 70px 70px 0;
+  }
+  .iwan-eyebrow {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.4em;
+    color: var(--accent);
+    font-size: 13px;
+    margin-bottom: 18px;
+  }
+  .iwan-title {
+    font-family: var(--font-display), serif;
+    font-size: 46px;
+    line-height: 1.15;
+    letter-spacing: 0.06em;
+    margin: 0 0 22px;
+    color: var(--bg);
+  }
+  .iwan-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .iwan-rule {
+    width: 220px;
+    height: 1px;
+    background: var(--accent);
+    margin: 22px auto;
+  }
+  .iwan-sub {
+    font-family: var(--font-body), serif;
+    font-size: 17px;
+    line-height: 1.7;
+    color: rgba(242,229,204,0.92);
+    max-width: 540px;
+    margin: 0 auto;
+  }
+  .iwan-sub .em-oxblood {
+    color: #f0b8a8;
+    font-style: italic;
+  }
+  /* spandrel arabesque hints */
+  .spandrel {
+    position: absolute;
+    top: 0;
+    width: 180px;
+    height: 180px;
+    z-index: 3;
+    pointer-events: none;
+    opacity: 0.85;
+  }
+  .spandrel.left  { left: 0; }
+  .spandrel.right { right: 0; transform: scaleX(-1); }
+  .spandrel svg { width: 100%; height: 100%; }
+
+  /* arch ogee silhouette overlay (decorative outline at very top) */
+  .ogee-cap {
+    position: absolute;
+    top: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 360px;
+    height: auto;
+    z-index: 4;
+    pointer-events: none;
+  }
+  .ogee-cap svg path { stroke: var(--accent); }
+
+  /* ============ Divider ============ */
+  .divider {
+    display: flex;
+    justify-content: center;
+    margin: 56px 0 40px;
+    color: var(--ornament);
+  }
+  .divider svg {
+    width: 380px;
+    height: auto;
+    fill: var(--ornament);
+  }
+
+  /* ============ Mission statement ============ */
+  .mission {
+    text-align: center;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  .mission h2 {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.32em;
+    font-size: 14px;
+    color: var(--secondary);
+    margin: 0 0 18px;
+  }
+  .mission p {
+    font-size: 19px;
+    line-height: 1.8;
+    color: var(--text);
+    margin: 0 0 14px;
+  }
+  .mission p .accent {
+    color: var(--text-emphasis);
+    font-style: italic;
+  }
+  .mission .signature {
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.25em;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-top: 24px;
+  }
+
+  /* ============ Cards / Medallions ============ */
+  .features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin: 70px 0 30px;
+  }
+  .card {
+    position: relative;
+    background: var(--bg);
+    padding: 28px 26px 32px;
+    border: 1px solid var(--primary);
+    text-align: center;
+    overflow: hidden;
+  }
+  .card::before {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border: 1px solid var(--accent);
+    pointer-events: none;
+  }
+  .card-arch {
+    position: relative;
+    height: 200px;
+    margin: 6px auto 18px;
+    background: var(--primary);
+    color: var(--bg);
+    clip-path: path("M 0,200 L 0,90 C 0,90 50,10 175,5 C 300,10 350,90 350,90 L 350,200 Z");
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .card-arch::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 50% 70%, rgba(42,138,138,0.4) 0 26px, transparent 28px),
+      radial-gradient(circle at 50% 70%, rgba(201,162,58,0.55) 0 8px, transparent 10px),
+      repeating-linear-gradient(45deg, rgba(201,162,58,0.10) 0 1px, transparent 1px 16px),
+      repeating-linear-gradient(-45deg, rgba(42,138,138,0.10) 0 1px, transparent 1px 16px);
+  }
+  .card-arch .roman {
+    position: relative;
+    z-index: 2;
+    font-family: var(--font-display), serif;
+    font-size: 34px;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+  }
+  /* spandrel girih corners on card */
+  .card-spandrel {
+    position: absolute;
+    top: 4px;
+    width: 38px;
+    height: 38px;
+    z-index: 3;
+    color: var(--secondary);
+  }
+  .card-spandrel.l { left: 4px; }
+  .card-spandrel.r { right: 4px; transform: scaleX(-1); }
+  .card-spandrel svg { width: 100%; height: 100%; fill: var(--secondary); }
+
+  .card h3 {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    font-size: 16px;
+    letter-spacing: 0.16em;
+    color: var(--primary);
+    margin: 0 0 4px;
+    line-height: 1.3;
+  }
+  .card .gallery-tag {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--text-emphasis);
+    margin-bottom: 14px;
+  }
+  .card p {
+    font-size: 15px;
+    line-height: 1.7;
+    text-align: left;
+    margin: 0 0 16px;
+  }
+  .card .meta {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid var(--accent);
+    padding-top: 12px;
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--secondary);
+  }
+  .card:hover { border-color: var(--text-emphasis); }
+  .card:hover::before { border-color: var(--text-emphasis); }
+
+  /* ============ Founding band ============ */
+  .founding {
+    margin: 80px auto 60px;
+    text-align: center;
+    max-width: 820px;
+    padding: 40px 60px;
+    border-top: 1px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
+    position: relative;
+  }
+  .founding::before, .founding::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 14px; height: 14px;
+    background: var(--accent);
+    transform: translateX(-50%) rotate(45deg);
+  }
+  .founding::before { top: -8px; }
+  .founding::after  { bottom: -8px; }
+
+  .founding h2 {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin: 0 0 14px;
+  }
+  .founding p {
+    font-size: 16px;
+    line-height: 1.8;
+    margin: 0 0 10px;
+  }
+  .founding p .em {
+    color: var(--text-emphasis);
+    font-style: italic;
+  }
+  .founding .patron-line {
+    margin-top: 18px;
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.28em;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  /* ============ Footer ============ */
+  footer {
+    margin-top: 60px;
+    background: var(--primary);
+    color: var(--bg);
+    position: relative;
+    overflow: hidden;
+  }
+  footer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(30deg, rgba(201,162,58,0.08) 0 1px, transparent 1px 36px),
+      repeating-linear-gradient(-30deg, rgba(201,162,58,0.08) 0 1px, transparent 1px 36px),
+      repeating-linear-gradient(90deg, rgba(42,138,138,0.10) 0 1px, transparent 1px 72px);
+    opacity: 0.7;
+    pointer-events: none;
+  }
+  .footer-inner {
+    position: relative;
+    z-index: 2;
+    padding: 60px 64px 24px;
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+  .foot-cols {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 60px;
+    align-items: start;
+    text-align: center;
+  }
+  .foot-cols h4 {
+    font-family: var(--font-display), serif;
+    color: var(--accent);
+    font-size: 12px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+  }
+  .foot-cols p {
+    font-size: 14px;
+    line-height: 1.7;
+    margin: 0 0 6px;
+    color: rgba(242,229,204,0.9);
+  }
+  .seal-mark {
+    width: 110px;
+    height: 110px;
+    margin: 0 auto 8px;
+    color: var(--accent);
+  }
+  .seal-mark svg { width: 100%; height: 100%; }
+  .tailpiece {
+    text-align: center;
+    margin-top: 50px;
+    padding-top: 22px;
+    border-top: 1px solid var(--accent);
+    position: relative;
+  }
+  .tailpiece .glyph {
+    font-family: var(--font-display), serif;
+    color: var(--accent);
+    font-size: 22px;
+    letter-spacing: 0.5em;
+    margin-bottom: 10px;
+  }
+  .tailpiece .copy {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.22em;
+    font-size: 11px;
+    color: var(--bg);
+  }
+
+  /* small girih SVG used as palmette glyph */
+  .glyph-star {
+    display: inline-block;
+    width: 8px; height: 8px;
+    background: var(--accent);
+    transform: rotate(45deg);
+    margin: 0 2px;
+  }
+</style>
+</head>
+<body>
+
+<div class="top-band">
+  Dār al-Naqsh <span>✦</span> Museum of Safavid Ornament <span>✦</span> Isfahan &amp; Maydān-e Naqsh-e Jahān
+</div>
+
+<nav class="primary" aria-label="Primary">
+  <ul>
+    <li><a href="page-1.html" aria-current="page">Threshold</a></li>
+    <li class="palmette" aria-hidden="true">❖</li>
+    <li><a href="page-2.html">Permanent Collection</a></li>
+    <li class="palmette" aria-hidden="true">❖</li>
+    <li><a href="page-3.html">The Inner Dome</a></li>
+    <li class="palmette" aria-hidden="true">❖</li>
+    <li><a href="page-4.html">Royal Kitābkhāna</a></li>
+    <li class="palmette" aria-hidden="true">❖</li>
+    <li><a href="page-5.html">Visit</a></li>
+    <li class="palmette" aria-hidden="true">❖</li>
+    <li><a href="page-6.html">About</a></li>
+  </ul>
+</nav>
+
+<header class="wordmark">
+  <h1>Dār al-Naqsh</h1>
+  <div class="arabic-tag">— The House of Pattern —</div>
+  <div class="seal-line">Museum of Safavid Ornament · Founded 1962</div>
+</header>
+
+<section class="iwan" aria-label="Hero iwan">
+  <div class="iwan-frame">
+    <!-- ogee cap from arch-ogee.svg motif -->
+    <div class="ogee-cap" aria-hidden="true">
+      <svg viewBox="140 250 500 360" xmlns="http://www.w3.org/2000/svg">
+        <g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
+          <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+          <path d="m 250,430.58 24.75248,58.41585"/>
+          <path d="m 347.0297,342.46119 41.58416,23.76238 0.9901,35.64356"/>
+        </g>
+        <g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" transform="matrix(-1,0,0,1,777.88071,-0.2972181)">
+          <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+          <path d="m 250,430.58 24.75248,58.41585"/>
+          <path d="m 347.0297,342.46119 41.58416,23.76238 0.9901,35.64356"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="spandrel left" aria-hidden="true">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <g fill="none" stroke="#c9a23a" stroke-width="0.8">
+          <path d="M0,0 L100,0 L100,100 C 100,55 55,10 0,10 Z" fill="rgba(201,162,58,0.12)" stroke="none"/>
+          <circle cx="30" cy="30" r="14"/>
+          <circle cx="30" cy="30" r="22"/>
+          <path d="M30,8 L30,52 M8,30 L52,30 M14,14 L46,46 M46,14 L14,46"/>
+          <path d="M60,15 Q72,30 60,45 Q48,30 60,15 Z"/>
+          <path d="M75,30 Q85,42 75,54 Q65,42 75,54 Z" />
+        </g>
+      </svg>
+    </div>
+    <div class="spandrel right" aria-hidden="true">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <g fill="none" stroke="#c9a23a" stroke-width="0.8">
+          <path d="M0,0 L100,0 L100,100 C 100,55 55,10 0,10 Z" fill="rgba(201,162,58,0.12)" stroke="none"/>
+          <circle cx="30" cy="30" r="14"/>
+          <circle cx="30" cy="30" r="22"/>
+          <path d="M30,8 L30,52 M8,30 L52,30 M14,14 L46,46 M46,14 L14,46"/>
+          <path d="M60,15 Q72,30 60,45 Q48,30 60,15 Z"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="iwan-arch">
+      <div class="iwan-inner">
+        <div class="iwan-eyebrow">— Threshold of the Museum —</div>
+        <h2 class="iwan-title">The Workshop of the<br><em>World, 1501–1736</em></h2>
+        <div class="iwan-rule"></div>
+        <p class="iwan-sub">
+          Beneath cobalt vaults and turquoise spandrels, Dār al-Naqsh gathers the surviving
+          ornament of the Safavid centuries — <span class="em-oxblood">tilework, lacquer, and the
+          illuminated page</span> — and presents them as one continuous craft of the line.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider" aria-hidden="true">
+  <svg viewBox="0 0 437.999 18.893" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,9.445c0,0,37.005-0.063,73.998-0.829c18.495-0.386,36.989-0.949,50.831-1.785c6.919-0.414,12.677-0.906,16.663-1.46c1.99-0.28,3.539-0.582,4.535-0.878c0.502-0.146,0.844-0.297,1.049-0.405c0.157-0.107,0.238-0.162,0.238-0.162l0.42-0.287l0.656,0.656l-0.369,0.338c0,0-0.154,0.142-0.456,0.324c-0.291,0.154-0.714,0.331-1.256,0.484c-1.085,0.314-2.667,0.608-4.686,0.879c-4.037,0.533-9.811,0.985-16.745,1.354c-13.868,0.744-32.369,1.183-50.87,1.443C37.003,9.632,0,9.445,0,9.445z"/>
+    <path d="M148,3.906c0,0,0.163,0.156,0.448,0.429c0.142,0.148,0.317,0.279,0.518,0.437c0.194,0.163,0.429,0.339,0.709,0.519c0.536,0.379,1.212,0.761,1.951,1.146c0.741,0.383,1.557,0.749,2.387,1.084c1.662,0.667,3.38,1.215,4.691,1.531c0.655,0.163,1.208,0.271,1.597,0.327c0.389,0.059,0.616,0.066,0.616,0.066s-0.226,0.008-0.62-0.023c-0.395-0.029-0.956-0.099-1.624-0.218c-1.338-0.227-3.101-0.655-4.83-1.214c-0.864-0.28-1.719-0.596-2.506-0.936c-0.786-0.342-1.514-0.688-2.11-1.05c-0.593-0.33-1.12-0.719-1.417-0.958c-0.303-0.252-0.477-0.396-0.477-0.396l-0.385-0.32l0.691-0.77L148,3.906z"/>
+    <path d="M437.999,9.445c0,0-37.004,0.187-74.007-0.329c-18.501-0.261-37.002-0.699-50.869-1.443c-6.935-0.368-12.708-0.82-16.745-1.354c-2.019-0.271-3.601-0.565-4.687-0.879c-0.541-0.153-0.965-0.33-1.256-0.484c-0.302-0.183-0.456-0.324-0.456-0.324l-0.369-0.338l0.656-0.656l0.42,0.287c0,0,0.081,0.055,0.238,0.162c0.204,0.108,0.546,0.26,1.048,0.405c0.996,0.296,2.545,0.598,4.535,0.878c3.986,0.554,9.744,1.046,16.663,1.46C327.011,7.667,345.506,8.23,364,8.616C400.994,9.382,437.999,9.445,437.999,9.445z"/>
+    <path d="M290.667,4.65c0,0-0.173,0.144-0.477,0.396c-0.296,0.239-0.823,0.628-1.417,0.958c-0.596,0.361-1.323,0.708-2.109,1.05c-0.788,0.34-1.643,0.655-2.507,0.936c-1.729,0.559-3.491,0.987-4.83,1.214c-0.668,0.119-1.229,0.188-1.624,0.218c-0.395,0.031-0.62,0.023-0.62,0.023s0.227-0.008,0.615-0.066c0.39-0.057,0.942-0.164,1.597-0.327c1.312-0.316,3.029-0.864,4.691-1.531c0.83-0.335,1.646-0.701,2.387-1.084c0.739-0.385,1.415-0.767,1.951-1.146c0.279-0.18,0.515-0.356,0.709-0.519c0.2-0.158,0.376-0.289,0.518-0.437c0.285-0.273,0.448-0.429,0.448-0.429l0.361-0.346l0.691,0.77L290.667,4.65z"/>
+    <circle cx="219" cy="9.445" r="6" fill="none" stroke="currentColor" stroke-width="0.6"/>
+    <path d="M219,3 L221,9.445 L219,16 L217,9.445 Z"/>
+  </svg>
+</div>
+
+<section class="axis mission" aria-label="Mission">
+  <h2>· Of the Museum's Mission ·</h2>
+  <p>
+    Dār al-Naqsh is devoted to the ornamental arts of <span class="accent">Safavid Iran</span>,
+    from the accession of Shah Ismāʿīl in 1501 to the fall of Sultan Husayn in 1736. Across
+    four galleries and a working library, the museum gathers and interprets the <em>tilework</em>
+    of Isfahan's great squares, the <em>lacquer pen-cases</em> and book-bindings of the royal
+    workshops, and the illuminated <em>manuscript arts</em> — among them the dispersed folios of
+    the Shāhnāma-yi Shāhī.
+  </p>
+  <p>
+    Our holdings are arranged not by reign but by hand — the cutter of cuerda seca tile, the
+    binder, the gilder of margins — so that the visitor may follow a single line as it travels
+    from the spandrel to the page.
+  </p>
+  <div class="signature">— Curatorial Statement, edition of 2024 —</div>
+</section>
+
+<section class="axis" aria-label="Featured galleries">
+  <div class="features">
+
+    <article class="card">
+      <div class="card-spandrel l" aria-hidden="true">
+        <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+          <g fill="none" stroke="currentColor" stroke-width="0.8">
+            <path d="M0,0 L40,0 L40,40 C 40,20 20,0 0,0 Z" fill="currentColor" opacity="0.18" stroke="none"/>
+            <path d="M10,10 L20,2 L30,10 L30,20 L20,28 L10,20 Z"/>
+            <path d="M14,14 L20,8 L26,14 L26,20 L20,26 L14,20 Z"/>
+            <circle cx="20" cy="14" r="2"/>
+          </g>
+        </svg>
+      </div>
+      <div class="card-spandrel r" aria-hidden="true">
+        <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+          <g fill="none" stroke="currentColor" stroke-width="0.8">
+            <path d="M0,0 L40,0 L40,40 C 40,20 20,0 0,0 Z" fill="currentColor" opacity="0.18" stroke="none"/>
+            <path d="M10,10 L20,2 L30,10 L30,20 L20,28 L10,20 Z"/>
+            <path d="M14,14 L20,8 L26,14 L26,20 L20,26 L14,20 Z"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="card-arch"><span class="roman">I</span></div>
+      <h3>The Cobalt Field</h3>
+      <div class="gallery-tag">Tile Programs of Isfahan</div>
+      <p>
+        Cuerda-seca and haft-rang panels lifted from the Masjid-i Shāh and the Lutfullāh
+        cycle, displayed at the height of the original dado. A long bench permits study
+        of the cobalt ground at one arm's reach.
+      </p>
+      <div class="meta"><span>Gallery I</span><span>1611–1638</span></div>
+    </article>
+
+    <article class="card">
+      <div class="card-spandrel l" aria-hidden="true">
+        <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+          <g fill="none" stroke="currentColor" stroke-width="0.8">
+            <path d="M0,0 L40,0 L40,40 C 40,20 20,0 0,0 Z" fill="currentColor" opacity="0.18" stroke="none"/>
+            <path d="M10,10 L20,2 L30,10 L30,20 L20,28 L10,20 Z"/>
+            <path d="M14,14 L20,8 L26,14 L26,20 L20,26 L14,20 Z"/>
+          </g>
+        </svg>
+      </div>
+      <div class="card-spandrel r" aria-hidden="true">
+        <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+          <g fill="none" stroke="currentColor" stroke-width="0.8">
+            <path d="M0,0 L40,0 L40,40 C 40,20 20,0 0,0 Z" fill="currentColor" opacity="0.18" stroke="none"/>
+            <path d="M10,10 L20,2 L30,10 L30,20 L20,28 L10,20 Z"/>
+            <path d="M14,14 L20,8 L26,14 L26,20 L20,26 L14,20 Z"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="card-arch"><span class="roman">II</span></div>
+      <h3>Brushes of the Royal Kitābkhāna</h3>
+      <div class="gallery-tag">Manuscripts &amp; Albums</div>
+      <p>
+        Folios attributed to Sulṭān Muḥammad, Mīr Sayyid ʿAlī, and the workshop of Riza
+        ʿAbbāsī — gathered with their gilded margins, ruled cartouches, and the
+        single-figure studies that defined a century of looking.
+      </p>
+      <div class="meta"><span>Gallery II</span><span>1522–1620</span></div>
+    </article>
+
+    <article class="card">
+      <div class="card-spandrel l" aria-hidden="true">
+        <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+          <g fill="none" stroke="currentColor" stroke-width="0.8">
+            <path d="M0,0 L40,0 L40,40 C 40,20 20,0 0,0 Z" fill="currentColor" opacity="0.18" stroke="none"/>
+            <path d="M10,10 L20,2 L30,10 L30,20 L20,28 L10,20 Z"/>
+            <path d="M14,14 L20,8 L26,14 L26,20 L20,26 L14,20 Z"/>
+          </g>
+        </svg>
+      </div>
+      <div class="card-spandrel r" aria-hidden="true">
+        <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+          <g fill="none" stroke="currentColor" stroke-width="0.8">
+            <path d="M0,0 L40,0 L40,40 C 40,20 20,0 0,0 Z" fill="currentColor" opacity="0.18" stroke="none"/>
+            <path d="M10,10 L20,2 L30,10 L30,20 L20,28 L10,20 Z"/>
+            <path d="M14,14 L20,8 L26,14 L26,20 L20,26 L14,20 Z"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="card-arch"><span class="roman">III</span></div>
+      <h3>Chehel Sotūn</h3>
+      <div class="gallery-tag">Mirrors &amp; Verandas</div>
+      <p>
+        A reconstructed corner of the talar — wooden columns, mirrored ceilings, and
+        the great wall-paintings of court receptions — interprets the open pavilion
+        as the Safavid emblem of welcome.
+      </p>
+      <div class="meta"><span>Gallery III</span><span>1647–1706</span></div>
+    </article>
+
+  </div>
+</section>
+
+<div class="divider" aria-hidden="true">
+  <svg viewBox="0 0 437.999 18.893" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,9.445c0,0,37.003-0.312,74.011,0.079c18.504,0.198,37.009,0.574,50.89,1.271c6.941,0.346,12.724,0.779,16.785,1.302c2.033,0.267,3.633,0.556,4.762,0.879c0.562,0.156,1.026,0.347,1.36,0.523c0.367,0.218,0.571,0.418,0.565,0.405l0.46,0.953l-0.85,0.851l-1.025-0.39c-0.011-0.004-0.022-0.003-0.129-0.081c-0.162-0.085-0.463-0.224-0.944-0.365c-0.952-0.288-2.484-0.594-4.459-0.879c-3.961-0.564-9.711-1.076-16.623-1.514c-13.828-0.882-32.319-1.508-50.811-1.956C37.006,9.634,0,9.445,0,9.445z"/>
+    <path d="M437.999,9.445c0,0-37.006,0.188-73.993,1.079c-18.492,0.448-36.983,1.074-50.812,1.956c-6.911,0.438-12.661,0.949-16.622,1.514c-1.976,0.285-3.507,0.591-4.459,0.879c-0.481,0.142-0.782,0.28-0.944,0.365c-0.106,0.078-0.117,0.077-0.129,0.081l-1.024,0.39l-0.851-0.851l0.461-0.953c-0.006,0.013,0.198-0.188,0.564-0.405c0.334-0.177,0.799-0.367,1.36-0.523c1.13-0.323,2.729-0.612,4.763-0.879c4.062-0.522,9.844-0.956,16.785-1.302c13.881-0.697,32.386-1.073,50.89-1.271C400.996,9.134,437.999,9.445,437.999,9.445z"/>
+    <circle cx="219" cy="9.445" r="5" fill="currentColor"/>
+    <circle cx="170" cy="9.445" r="2"/>
+    <circle cx="268" cy="9.445" r="2"/>
+  </svg>
+</div>
+
+<section class="axis founding" aria-label="Founding">
+  <h2>Of the Founding</h2>
+  <p>
+    Dār al-Naqsh was established in <span class="em">1962</span> by the
+    <span class="em">Aqa-Riza Foundation</span>, formed in memory of the painter and
+    calligrapher Riza ʿAbbāsī, that the ornament of the Safavid centuries might be
+    studied in the city of its making. The first galleries opened in a converted
+    caravanserai on the western flank of the Maydān; the present halls, raised in
+    1978, follow the proportions of the Lutfullāh dome at half-scale.
+  </p>
+  <p>
+    The collection numbers some <span class="em">2,140 objects</span> across tile,
+    paint, paper, lacquer, and textile, of which roughly one third is on continuous
+    view. The remainder rotates by season, by the hand of the curator on duty.
+  </p>
+  <div class="patron-line">— Aqa-Riza Foundation · Isfahan · Tehran · Paris —</div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="foot-cols">
+      <div>
+        <h4>Visiting Hours</h4>
+        <p>Tuesday – Sunday</p>
+        <p>09:00 – 17:30</p>
+        <p>Friday until 19:00</p>
+        <p style="margin-top:10px; color:var(--accent); font-style:italic;">Closed Mondays &amp; Nowrūz week</p>
+      </div>
+
+      <div>
+        <div class="seal-mark" aria-hidden="true">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <g fill="none" stroke="currentColor" stroke-width="1">
+              <circle cx="50" cy="50" r="46"/>
+              <circle cx="50" cy="50" r="38"/>
+              <polygon points="50,12 58,38 86,38 64,54 72,80 50,64 28,80 36,54 14,38 42,38" fill="currentColor" opacity="0.85" stroke="none"/>
+              <polygon points="50,22 56,40 74,40 60,52 66,70 50,60 34,70 40,52 26,40 44,40" fill="none" stroke="#1e3a5f" stroke-width="0.6"/>
+            </g>
+          </svg>
+        </div>
+        <h4>Dār al-Naqsh</h4>
+        <p style="font-family:var(--font-display); letter-spacing:0.18em; font-size:11px; text-transform:uppercase;">— Star Seal of the Foundation —</p>
+      </div>
+
+      <div>
+        <h4>Contact &amp; Address</h4>
+        <p>Maydān-e Naqsh-e Jahān</p>
+        <p>Western Arcade, No. 14</p>
+        <p>Isfahan 81367, Iran</p>
+        <p style="margin-top:10px;">+98 31 3220 4412</p>
+        <p>curator@dar-al-naqsh.ir</p>
+      </div>
+    </div>
+
+    <div class="tailpiece">
+      <div class="glyph">✦ ❖ ✦</div>
+      <div class="copy">© 1962 – 2024 · The Aqa-Riza Foundation · Dār al-Naqsh, Isfahan</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

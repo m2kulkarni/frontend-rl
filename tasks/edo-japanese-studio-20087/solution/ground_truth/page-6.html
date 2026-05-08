@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Visit the Atelier — Kōrin Mokkō</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), serif;
+    margin: 0;
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  /* ============ MASTHEAD ============ */
+  .masthead {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 56px 80px 0 80px;
+    align-items: end;
+  }
+  .masthead h1 {
+    font-family: var(--font-display), serif;
+    font-size: 44px;
+    font-weight: 400;
+    margin: 0;
+    letter-spacing: 0.04em;
+    color: var(--text);
+  }
+  .masthead .ja {
+    font-family: var(--font-display), serif;
+    font-size: 18px;
+    color: var(--text);
+    margin-top: 8px;
+    letter-spacing: 0.3em;
+    opacity: 0.7;
+  }
+  .masthead .tag {
+    text-align: right;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--text);
+    opacity: 0.75;
+    padding-bottom: 6px;
+  }
+
+  /* ============ NAV ============ */
+  .nav-wrap {
+    margin: 30px 80px 0 80px;
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    align-items: center;
+    gap: 24px;
+  }
+  .mark-roundel {
+    width: 56px;
+    height: 56px;
+    border: 1px solid var(--ornament);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface);
+  }
+  .mark-roundel svg { width: 40px; height: 40px; }
+  .nav {
+    border-top: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+    padding: 12px 0;
+    text-align: right;
+  }
+  .nav a {
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-decoration: none;
+    color: var(--text);
+    margin-left: 36px;
+    font-variant: small-caps;
+  }
+  .nav a[aria-current="page"] {
+    color: var(--secondary);
+    border-bottom: 1px solid var(--secondary);
+    padding-bottom: 2px;
+  }
+
+  /* ============ HERO / INTRO ============ */
+  .hero {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    margin: 80px 80px 120px 80px;
+    gap: 60px;
+    position: relative;
+    min-height: 360px;
+  }
+  .hero-left {
+    /* deliberate emptiness — left third nearly bare */
+    padding-top: 120px;
+    position: relative;
+  }
+  .hero-kanji {
+    font-family: var(--font-display), serif;
+    font-size: 88px;
+    line-height: 1;
+    color: var(--text);
+    writing-mode: vertical-rl;
+    letter-spacing: 0.1em;
+    margin-left: 40px;
+    opacity: 0.92;
+  }
+  .hero-right {
+    padding-top: 30px;
+  }
+  .hero-eyebrow {
+    font-style: italic;
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    margin-bottom: 18px;
+    opacity: 0.7;
+  }
+  .hero-right h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 46px;
+    line-height: 1.2;
+    margin: 0 0 28px 0;
+    max-width: 540px;
+  }
+  .hero-right p {
+    max-width: 520px;
+    font-size: 15.5px;
+  }
+  .hero-seal {
+    position: absolute;
+    right: -10px;
+    top: -20px;
+    width: 78px;
+    height: 78px;
+    background: var(--secondary);
+    color: var(--surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display), serif;
+    font-size: 26px;
+    letter-spacing: 0.05em;
+    line-height: 1;
+    transform: rotate(-4deg);
+    box-shadow: 0 0 0 2px var(--secondary);
+  }
+  .hero-seal::before {
+    content: "";
+    position: absolute;
+    inset: 4px;
+    border: 1px solid rgba(245,239,222,0.5);
+  }
+  .hero-seal span {
+    position: relative;
+    text-align: center;
+  }
+
+  /* background wagara on hero */
+  .hero-bg {
+    position: absolute;
+    right: -60px;
+    bottom: -40px;
+    width: 320px;
+    height: 320px;
+    opacity: 0.10;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ============ DIVIDER ============ */
+  .divider {
+    margin: 0 80px;
+    border-top: 1px solid var(--ornament);
+    position: relative;
+    height: 1px;
+  }
+  .divider::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: -4px;
+    width: 8px;
+    height: 8px;
+    background: var(--ornament);
+    transform: translateX(-50%) rotate(45deg);
+  }
+
+  /* ============ HOURS / ADDRESS GRID ============ */
+  .info-grid {
+    display: grid;
+    grid-template-columns: 4fr 1fr 5fr;
+    margin: 100px 80px 100px 80px;
+    gap: 40px;
+  }
+  .info-card {
+    background: var(--surface);
+    padding: 36px 36px 40px 36px;
+    border-top: 1px solid var(--ornament);
+    position: relative;
+  }
+  .info-card .kamon-corner {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 14px;
+    height: 14px;
+    opacity: 0.85;
+  }
+  .info-card h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 24px;
+    margin: 0 0 6px 0;
+    letter-spacing: 0.04em;
+  }
+  .info-card .meta {
+    font-style: italic;
+    font-size: 12px;
+    opacity: 0.7;
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(12,12,12,0.3);
+  }
+  .info-card dl {
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    row-gap: 12px;
+    column-gap: 16px;
+    font-size: 14px;
+  }
+  .info-card dt {
+    font-style: italic;
+    opacity: 0.7;
+  }
+  .info-card dd {
+    margin: 0;
+  }
+  .info-card.address dd { font-feature-settings: "palt"; }
+
+  .info-spacer {
+    /* the deliberately empty middle column */
+    position: relative;
+  }
+  .info-spacer .vmark {
+    font-family: var(--font-display), serif;
+    writing-mode: vertical-rl;
+    font-size: 14px;
+    letter-spacing: 0.6em;
+    color: var(--text);
+    opacity: 0.55;
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .closure-list {
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(12,12,12,0.3);
+    font-size: 13.5px;
+  }
+  .closure-list strong {
+    display: block;
+    font-weight: 400;
+    font-style: italic;
+    opacity: 0.7;
+    margin-bottom: 6px;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .closure-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .closure-list li {
+    padding: 4px 0;
+    border-bottom: 1px dotted rgba(12,12,12,0.2);
+  }
+  .closure-list li:last-child { border-bottom: none; }
+  .closure-list .seal {
+    color: var(--secondary);
+    font-family: var(--font-display), serif;
+    margin-right: 8px;
+  }
+
+  /* ============ MAP SECTION ============ */
+  .map-section {
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    margin: 60px 80px 100px 80px;
+    gap: 60px;
+    align-items: start;
+  }
+  .map-figure {
+    background: var(--surface);
+    border-top: 1px solid var(--ornament);
+    padding: 24px 28px 28px 28px;
+    position: relative;
+  }
+  .map-figure .kamon-corner {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 14px;
+    height: 14px;
+  }
+  .map-figure h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 22px;
+    margin: 0 0 4px 0;
+  }
+  .map-figure .meta {
+    font-style: italic;
+    font-size: 12px;
+    opacity: 0.7;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(12,12,12,0.3);
+  }
+  .map-svg {
+    width: 100%;
+    height: 380px;
+    display: block;
+  }
+  .map-caption {
+    font-size: 12px;
+    font-style: italic;
+    opacity: 0.7;
+    margin-top: 14px;
+    text-align: right;
+  }
+
+  .map-side {
+    padding-top: 60px;
+  }
+  .map-side .eyebrow {
+    font-style: italic;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-bottom: 14px;
+  }
+  .map-side h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 30px;
+    margin: 0 0 22px 0;
+    line-height: 1.3;
+  }
+  .map-side p {
+    font-size: 14.5px;
+    margin: 0 0 18px 0;
+  }
+  .map-side ol {
+    list-style: none;
+    padding: 0;
+    margin: 28px 0 0 0;
+    counter-reset: step;
+  }
+  .map-side ol li {
+    counter-increment: step;
+    padding: 12px 0 12px 44px;
+    border-top: 1px solid rgba(12,12,12,0.25);
+    position: relative;
+    font-size: 14px;
+  }
+  .map-side ol li:last-child { border-bottom: 1px solid rgba(12,12,12,0.25); }
+  .map-side ol li::before {
+    content: counter(step, lower-roman) ".";
+    position: absolute;
+    left: 0;
+    top: 12px;
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    opacity: 0.6;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+  }
+
+  /* ============ WRITE-AHEAD BAND ============ */
+  .write-band {
+    margin: 0 80px 120px 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    background: var(--surface);
+    border-top: 1px solid var(--ornament);
+    position: relative;
+  }
+  .write-band::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 700 700'><defs><g id='C1'><path d='M 1,210 V 100 A 98,98 0 0 1 100,1 98,98 0 0 1 199,100 V 210' fill='none' stroke='%230c0c0c' stroke-width='2'/><path d='M 175,210 V 100 A 75,75 0 0 0 100,25 75,75 0 0 0 25,100 V 210' fill='none' stroke='%230c0c0c' stroke-width='1'/></g></defs><g id='C4'><use href='%23C1'/><use href='%23C1' transform='translate(200,0)'/><use href='%23C1' transform='translate(400,0)'/><use href='%23C1' transform='translate(600,0)'/></g><use href='%23C4' transform='translate(-100,100)'/><use href='%23C4' transform='translate(0,200)'/><use href='%23C4' transform='translate(-100,300)'/></svg>");
+    background-size: 360px;
+    background-repeat: repeat;
+    opacity: 0.10;
+    pointer-events: none;
+  }
+  .write-band > * { position: relative; padding: 40px 36px; }
+  .write-band .write-intro {
+    border-right: 1px solid rgba(12,12,12,0.2);
+  }
+  .write-band .write-contact {
+    border-right: 1px solid rgba(12,12,12,0.2);
+  }
+  .write-band h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 22px;
+    margin: 0 0 12px 0;
+  }
+  .write-band .meta {
+    font-style: italic;
+    font-size: 12px;
+    opacity: 0.7;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(12,12,12,0.25);
+  }
+  .write-band p { font-size: 14px; margin: 0 0 12px 0; }
+  .write-band .tel {
+    font-family: var(--font-display), serif;
+    font-size: 26px;
+    letter-spacing: 0.05em;
+    margin: 4px 0 6px 0;
+  }
+  .write-band .small {
+    font-size: 12px;
+    font-style: italic;
+    opacity: 0.7;
+  }
+  .write-band address {
+    font-style: normal;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* ============ FOOTER ============ */
+  footer {
+    background: var(--bg);
+    margin-top: 60px;
+    padding: 60px 80px 28px 80px;
+    position: relative;
+    border-top: 1px solid rgba(12,12,12,0.15);
+  }
+  footer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 700 700'><defs><g id='C1'><path d='M 1,210 V 100 A 98,98 0 0 1 100,1 98,98 0 0 1 199,100 V 210' fill='none' stroke='%230c0c0c' stroke-width='2'/><path d='M 175,210 V 100 A 75,75 0 0 0 100,25 75,75 0 0 0 25,100 V 210' fill='none' stroke='%230c0c0c' stroke-width='1'/></g></defs><g id='C4'><use href='%23C1'/><use href='%23C1' transform='translate(200,0)'/><use href='%23C1' transform='translate(400,0)'/><use href='%23C1' transform='translate(600,0)'/></g><use href='%23C4' transform='translate(-100,100)'/></svg>");
+    background-size: 280px;
+    background-repeat: repeat-x;
+    opacity: 0.08;
+    pointer-events: none;
+  }
+  .footer-inner {
+    display: grid;
+    grid-template-columns: 160px 1fr 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+    position: relative;
+  }
+  .footer-seal {
+    width: 130px;
+    height: 130px;
+    opacity: 0.85;
+  }
+  .footer-col h4 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 16px;
+    margin: 0 0 10px 0;
+    letter-spacing: 0.1em;
+    border-bottom: 1px solid rgba(12,12,12,0.3);
+    padding-bottom: 8px;
+  }
+  .footer-col p, .footer-col address {
+    font-size: 12.5px;
+    line-height: 1.7;
+    font-style: normal;
+    margin: 0;
+  }
+  .footer-col.vert {
+    writing-mode: horizontal-tb;
+    max-width: 220px;
+  }
+  .attribution {
+    margin-top: 50px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(12,12,12,0.2);
+    font-size: 11px;
+    color: var(--text);
+    opacity: 0.7;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /* hand-drawn map styles */
+  .map-svg .land { fill: #e8dcb8; }
+  .map-svg .river { fill: none; stroke: #1c3a5e; stroke-width: 1.6; opacity: 0.6; }
+  .map-svg .road { fill: none; stroke: #0c0c0c; stroke-width: 0.8; opacity: 0.7; }
+  .map-svg .road-major { fill: none; stroke: #0c0c0c; stroke-width: 1.4; opacity: 0.85; }
+  .map-svg .label { font-family: var(--font-body), serif; font-size: 11px; fill: #0c0c0c; font-style: italic; }
+  .map-svg .label-jp { font-family: var(--font-display), serif; font-size: 12px; fill: #0c0c0c; }
+  .map-svg .landmark { fill: #f5efde; stroke: #0c0c0c; stroke-width: 0.8; }
+  .map-svg .atelier-mark { fill: var(--secondary); }
+  .map-svg .atelier-ring { fill: none; stroke: var(--secondary); stroke-width: 1.2; }
+  .map-svg .compass { fill: #0c0c0c; }
+  .map-svg .ne-arrow { fill: none; stroke: #0c0c0c; stroke-width: 1; }
+
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div>
+    <h1>Kōrin Mokkō</h1>
+    <div class="ja">光琳木工 ・ 紙と漆の工房</div>
+  </div>
+  <div class="tag">Atelier of Joinery, Paper &amp; Lacquer — Kyoto, est. since the late Shōwa</div>
+</header>
+
+<div class="nav-wrap">
+  <div class="mark-roundel" aria-hidden="true">
+    <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="344" cy="344" r="320" fill="none" stroke="#0c0c0c" stroke-width="14"/>
+      <g transform="translate(94,94) scale(0.72)">
+        <path d="M344,80 C420,140 460,220 460,310 C460,400 420,470 344,540 C268,470 228,400 228,310 C228,220 268,140 344,80 Z" fill="none" stroke="#0c0c0c" stroke-width="10"/>
+        <circle cx="344" cy="310" r="40" fill="#0c0c0c"/>
+        <path d="M250,440 Q344,520 438,440" fill="none" stroke="#0c0c0c" stroke-width="8"/>
+      </g>
+    </svg>
+  </div>
+  <nav class="nav" aria-label="Primary">
+    <a href="page-1.html">Atelier</a>
+    <a href="page-2.html">Workshop</a>
+    <a href="page-3.html">Commissions</a>
+    <a href="page-4.html">Materials</a>
+    <a href="page-5.html">Apprenticeship</a>
+    <a href="page-6.html" aria-current="page">Visit</a>
+  </nav>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg" aria-hidden="true">
+    <svg viewBox="0 0 700 700" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <g id="hc1"><path d="M 1,210 V 100 A 98,98 0 0 1 100,1 98,98 0 0 1 199,100 V 210" fill="none" stroke="#0c0c0c" stroke-width="2"/><path d="M 175,210 V 100 A 75,75 0 0 0 100,25 75,75 0 0 0 25,100 V 210" fill="none" stroke="#0c0c0c" stroke-width="1"/></g>
+      </defs>
+      <use href="#hc1"/><use href="#hc1" x="200"/><use href="#hc1" x="400"/>
+      <use href="#hc1" x="-100" y="100"/><use href="#hc1" x="100" y="100"/><use href="#hc1" x="300" y="100"/>
+      <use href="#hc1" y="200"/><use href="#hc1" x="200" y="200"/><use href="#hc1" x="400" y="200"/>
+      <use href="#hc1" x="-100" y="300"/><use href="#hc1" x="100" y="300"/><use href="#hc1" x="300" y="300"/>
+      <use href="#hc1" y="400"/><use href="#hc1" x="200" y="400"/><use href="#hc1" x="400" y="400"/>
+    </svg>
+  </div>
+  <div class="hero-left">
+    <div class="hero-kanji">訪 ね る</div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-eyebrow">Visit ・ 案内</div>
+    <h2>To call upon the workshop, write ahead — and walk the six minutes from Imadegawa.</h2>
+    <p>The atelier is a converted machiya on a quiet lane in Kamigyō, between the Horikawa and the Kamo rivers. We keep regular hours Tuesday through Saturday, but receive visitors only by prior arrangement so that no plane is set down mid-stroke. A letter, a postcard, or a telephone call — any of these will reach us.</p>
+    <div class="hero-seal" aria-hidden="true"><span>来訪<br>之印</span></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- HOURS / ADDRESS -->
+<section class="info-grid">
+  <article class="info-card address">
+    <svg class="kamon-corner" viewBox="0 0 688 688" aria-hidden="true"><rect width="688" height="688" fill="#0c0c0c"/><circle cx="344" cy="344" r="280" fill="#f5efde"/><circle cx="344" cy="180" r="70" fill="#0c0c0c"/><circle cx="180" cy="344" r="70" fill="#0c0c0c"/><circle cx="508" cy="344" r="70" fill="#0c0c0c"/><circle cx="344" cy="508" r="70" fill="#0c0c0c"/><circle cx="344" cy="344" r="60" fill="#0c0c0c"/></svg>
+    <h3>The Atelier</h3>
+    <div class="meta">Address &amp; bearing — 工房所在地</div>
+    <dl>
+      <dt>Number</dt><dd>412-3</dd>
+      <dt>Block</dt><dd>Daikoku-chō (大黒町)</dd>
+      <dt>Ward</dt><dd>Kamigyō-ku, Kyoto-shi</dd>
+      <dt>Postal</dt><dd>〒602-8418</dd>
+      <dt>From</dt><dd>Imadegawa Stn. (Karasuma line) — six minutes' walk west</dd>
+      <dt>Between</dt><dd>the Horikawa &amp; the Kamo</dd>
+    </dl>
+  </article>
+
+  <div class="info-spacer" aria-hidden="true">
+    <div class="vmark">時 と 所</div>
+  </div>
+
+  <article class="info-card">
+    <svg class="kamon-corner" viewBox="0 0 688 688" aria-hidden="true"><rect width="688" height="688" fill="#0c0c0c"/><circle cx="344" cy="344" r="280" fill="#f5efde"/><circle cx="344" cy="180" r="70" fill="#0c0c0c"/><circle cx="180" cy="344" r="70" fill="#0c0c0c"/><circle cx="508" cy="344" r="70" fill="#0c0c0c"/><circle cx="344" cy="508" r="70" fill="#0c0c0c"/><circle cx="344" cy="344" r="60" fill="#0c0c0c"/></svg>
+    <h3>Hours of Reception</h3>
+    <div class="meta">Open by appointment — 開館時間</div>
+    <dl>
+      <dt>Tuesday</dt><dd>9:00 — 16:00</dd>
+      <dt>Wednesday</dt><dd>9:00 — 16:00</dd>
+      <dt>Thursday</dt><dd>9:00 — 16:00</dd>
+      <dt>Friday</dt><dd>9:00 — 16:00</dd>
+      <dt>Saturday</dt><dd>9:00 — 16:00</dd>
+      <dt>Sunday — Monday</dt><dd>Closed (rest days)</dd>
+    </dl>
+    <div class="closure-list">
+      <strong>Annual closures — 休業</strong>
+      <ul>
+        <li><span class="seal">⬢</span>Bon period · 13 — 16 August</li>
+        <li><span class="seal">⬢</span>New Year · 28 December — 4 January</li>
+      </ul>
+    </div>
+  </article>
+</section>
+
+<!-- MAP -->
+<section class="map-section">
+  <figure class="map-figure">
+    <svg class="kamon-corner" viewBox="0 0 688 688" aria-hidden="true"><rect width="688" height="688" fill="#0c0c0c"/><circle cx="344" cy="344" r="280" fill="#f5efde"/><circle cx="344" cy="180" r="70" fill="#0c0c0c"/><circle cx="180" cy="344" r="70" fill="#0c0c0c"/><circle cx="508" cy="344" r="70" fill="#0c0c0c"/><circle cx="344" cy="508" r="70" fill="#0c0c0c"/><circle cx="344" cy="344" r="60" fill="#0c0c0c"/></svg>
+    <h3>Hand-drawn Locator</h3>
+    <div class="meta">Kamigyō-ku, between the Horikawa &amp; the Kamo — 略図</div>
+    <svg class="map-svg" viewBox="0 0 700 380" xmlns="http://www.w3.org/2000/svg" aria-label="Hand-drawn map of the atelier between the Horikawa and Kamo rivers">
+      <rect class="land" x="0" y="0" width="700" height="380"/>
+
+      <!-- Horikawa (west) -->
+      <path class="river" d="M 110,5 C 105,80 118,160 108,240 C 102,300 115,340 110,380"/>
+      <path class="river" d="M 118,5 C 113,80 126,160 116,240 C 110,300 123,340 118,380" style="opacity:0.3"/>
+      <text class="label-jp" x="60" y="200" transform="rotate(-90 60 200)">堀 川</text>
+      <text class="label" x="78" y="370">Horikawa</text>
+
+      <!-- Kamo (east) -->
+      <path class="river" d="M 600,5 C 595,80 612,150 600,230 C 590,300 608,340 600,380"/>
+      <path class="river" d="M 612,5 C 607,80 624,150 612,230 C 602,300 620,340 612,380" style="opacity:0.3"/>
+      <text class="label-jp" x="640" y="180" transform="rotate(-90 640 180)">鴨 川</text>
+      <text class="label" x="630" y="370">Kamogawa</text>
+
+      <!-- Major streets -->
+      <line class="road-major" x1="0" y1="120" x2="700" y2="120"/>
+      <text class="label" x="20" y="115">Imadegawa-dōri 今出川通</text>
+
+      <line class="road-major" x1="0" y1="260" x2="700" y2="260"/>
+      <text class="label" x="20" y="255">Marutamachi-dōri 丸太町通</text>
+
+      <line class="road-major" x1="350" y1="0" x2="350" y2="380"/>
+      <text class="label" x="356" y="14">Karasuma-dōri 烏丸通</text>
+
+      <!-- Minor streets -->
+      <line class="road" x1="0" y1="170" x2="700" y2="170"/>
+      <line class="road" x1="0" y1="210" x2="700" y2="210"/>
+      <line class="road" x1="220" y1="0" x2="220" y2="380"/>
+      <line class="road" x1="470" y1="0" x2="470" y2="380"/>
+
+      <!-- Imadegawa Station -->
+      <rect class="landmark" x="338" y="108" width="24" height="24"/>
+      <circle cx="350" cy="120" r="3" fill="#0c0c0c"/>
+      <text class="label" x="368" y="105">Imadegawa Stn. ◉</text>
+      <text class="label" x="368" y="118" style="opacity:0.7">subway · Karasuma line</text>
+
+      <!-- Nishijin Textile Museum -->
+      <rect class="landmark" x="200" y="155" width="40" height="22"/>
+      <text class="label-jp" x="206" y="170">西陣</text>
+      <text class="label" x="160" y="190">Nishijin Textile Museum</text>
+
+      <!-- Atelier marker (cinnabar) -->
+      <g>
+        <circle class="atelier-ring" cx="280" cy="195" r="14"/>
+        <circle class="atelier-mark" cx="280" cy="195" r="6"/>
+        <line x1="280" y1="195" x2="280" y2="120" stroke="#e34234" stroke-width="0.8" stroke-dasharray="2 2"/>
+      </g>
+      <text class="label-jp" x="294" y="200" style="fill:#e34234">光琳木工</text>
+      <text class="label" x="294" y="214" style="fill:#e34234">Kōrin Mokkō · 412-3 Daikoku-chō</text>
+
+      <!-- Walking path -->
+      <path d="M 350,120 L 320,140 L 305,160 L 290,180 L 280,195" fill="none" stroke="#0c0c0c" stroke-width="1.4" stroke-dasharray="4 3"/>
+      <text class="label" x="310" y="148" style="opacity:0.8">six min. walk</text>
+
+      <!-- Compass rose -->
+      <g transform="translate(640,40)">
+        <circle r="18" fill="none" stroke="#0c0c0c" stroke-width="0.8"/>
+        <polygon points="0,-16 3,0 0,16 -3,0" class="compass"/>
+        <text class="label" x="-3" y="-22">N</text>
+      </g>
+
+      <!-- decorative cardinal markings -->
+      <text class="label-jp" x="20" y="22" style="opacity:0.6">北</text>
+      <text class="label-jp" x="20" y="368" style="opacity:0.6">南</text>
+    </svg>
+    <div class="map-caption">Schematic only — not to scale. Drawn by the workshop, ink on kraft.</div>
+  </figure>
+
+  <aside class="map-side">
+    <div class="eyebrow">Finding the door · 道順</div>
+    <h3>Six minutes west, then a quiet turn into Daikoku-chō.</h3>
+    <p>The simplest approach is to leave Imadegawa subway station by Exit 6, cross Karasuma-dōri, and walk west along Imadegawa-dōri keeping the Nishijin quarter on your right. The atelier is two streets south of the textile museum, behind a noren of unbleached hemp.</p>
+    <ol>
+      <li>Exit 6 of Imadegawa Station; walk west on Imadegawa-dōri for three minutes.</li>
+      <li>At the second small crossing past the bus stop, turn south.</li>
+      <li>Pass the Nishijin Textile Museum on your right, continue 80 metres.</li>
+      <li>Look for a kuro-shikkui wall &amp; an indigo noren — the workshop is the second machiya.</li>
+    </ol>
+  </aside>
+</section>
+
+<!-- WRITE-AHEAD -->
+<section class="write-band">
+  <div class="write-intro">
+    <h3>Writing Ahead</h3>
+    <div class="meta">A request before the visit — 御来訪に先立ちて</div>
+    <p>So that the work may be set down with care, we ask all visitors to send a brief note one or two weeks in advance. Mention the date you would prefer, the number in your party, and — if you are coming with a commission in mind — a few lines on the room or the object you imagine.</p>
+    <p class="small">Replies are written by hand and posted within four working days.</p>
+  </div>
+  <div class="write-contact">
+    <h3>By Telephone</h3>
+    <div class="meta">Workshop line, attended in working hours — 工房直通</div>
+    <p class="tel">075 — 432 — 1867</p>
+    <p class="small">Tuesday to Saturday, 9:00 — 16:00. Outside these hours please leave a message; we return calls in the order received.</p>
+    <p class="small">For overseas callers: <br>+81 75 432 1867</p>
+  </div>
+  <div class="write-post">
+    <h3>By Post</h3>
+    <div class="meta">A letter is always welcome — 手紙にて</div>
+    <address>
+      Kōrin Mokkō<br>
+      光琳木工 工房宛<br>
+      412-3 Daikoku-chō,<br>
+      Kamigyō-ku, Kyoto-shi<br>
+      〒602-8418 JAPAN
+    </address>
+    <p class="small" style="margin-top:14px">Postcards from far places are pinned to the entry beam — please write if you wish yours to remain anonymous.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-seal" aria-hidden="true">
+      <svg viewBox="0 0 345 326" xmlns="http://www.w3.org/2000/svg" width="130" height="130">
+        <g transform="scale(0.95) translate(8,8)" fill="#0c0c0c">
+          <ellipse cx="170" cy="80" rx="14" ry="50"/>
+          <ellipse cx="120" cy="95" rx="12" ry="42" transform="rotate(-22 120 95)"/>
+          <ellipse cx="220" cy="95" rx="12" ry="42" transform="rotate(22 220 95)"/>
+          <rect x="155" y="60" width="6" height="70" fill="#f5efde"/>
+          <rect x="105" y="80" width="5" height="55" fill="#f5efde" transform="rotate(-22 107 107)"/>
+          <rect x="225" y="80" width="5" height="55" fill="#f5efde" transform="rotate(22 227 107)"/>
+          <circle cx="170" cy="180" r="6"/>
+          <path d="M 100,200 Q 170,170 240,200 Q 230,260 170,290 Q 110,260 100,200 Z" fill="none" stroke="#0c0c0c" stroke-width="3"/>
+          <path d="M 130,210 Q 170,195 210,210" fill="none" stroke="#0c0c0c" stroke-width="1.5"/>
+          <path d="M 140,235 Q 170,220 200,235" fill="none" stroke="#0c0c0c" stroke-width="1.5"/>
+          <path d="M 150,260 Q 170,250 190,260" fill="none" stroke="#0c0c0c" stroke-width="1.5"/>
+        </g>
+      </svg>
+    </div>
+    <div class="footer-col vert">
+      <h4>Kōrin Mokkō</h4>
+      <p>光琳木工<br>Atelier of Joinery,<br>Paper &amp; Lacquer<br>est. late Shōwa</p>
+    </div>
+    <div class="footer-col vert">
+      <h4>Address</h4>
+      <address>
+        412-3 Daikoku-chō<br>
+        Kamigyō-ku, Kyoto-shi<br>
+        〒602-8418 Japan<br>
+        Tel · 075 432 1867
+      </address>
+    </div>
+    <div class="footer-col vert">
+      <h4>Pages</h4>
+      <p>
+        <a href="page-1.html" style="color:inherit;text-decoration:none;display:block">Atelier — home</a>
+        <a href="page-2.html" style="color:inherit;text-decoration:none;display:block">The Workshop</a>
+        <a href="page-3.html" style="color:inherit;text-decoration:none;display:block">Commissions &amp; Works</a>
+        <a href="page-4.html" style="color:inherit;text-decoration:none;display:block">Materials &amp; Method</a>
+        <a href="page-5.html" style="color:inherit;text-decoration:none;display:block">Apprenticeship</a>
+      </p>
+    </div>
+  </div>
+  <div class="attribution">
+    <span>© Kōrin Mokkō, Kyoto. All joinery, paper and lacquer photographed in-house.</span>
+    <span>Kamon SVG renderings (tsuru, kiri, umebachi, sayagata, seigaiha) after public-domain mon traditions.</span>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Visit — Hours and Location | Trattoria Aventina</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    line-height: 1.65;
+    font-size: 16px;
+  }
+  a { color: var(--text); text-decoration: none; }
+
+  /* ---------- TOP NAV ---------- */
+  .top-nav {
+    padding: 28px 0 0;
+    text-align: center;
+    background: var(--bg);
+  }
+  .wordmark {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 18px;
+  }
+  .wordmark-roundel {
+    width: 64px; height: 64px;
+    border: 1.5px solid var(--ornament);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .wordmark-roundel::before {
+    content: "";
+    position: absolute; inset: 5px;
+    border: 1px solid var(--secondary);
+    border-radius: 50%;
+  }
+  .wordmark-roundel span {
+    font-family: var(--font-display), serif;
+    font-weight: 700;
+    font-size: 1.4rem;
+    letter-spacing: 0.05em;
+  }
+  .wordmark-name {
+    font-family: var(--font-display), serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+  }
+  nav.primary {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    padding: 6px 0 14px;
+  }
+  nav.primary a {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    padding: 4px 2px;
+  }
+  nav.primary a[aria-current="page"] {
+    border-bottom: 1px solid var(--secondary);
+  }
+  nav.primary .vine {
+    width: 14px; height: 14px;
+    opacity: 0.55;
+    fill: var(--ornament);
+  }
+
+  /* ---------- MEANDER CORNICE ---------- */
+  .meander-cornice {
+    width: 100%;
+    height: 28px;
+    border-top: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 165 44' preserveAspectRatio='xMidYMid meet'><g fill='%231a1a1a'><path d='M10 41.75L10 10 41.75 10 41.75 29.05 29.05 29.05 29.05 35.4 48.1 35.4 48.1 41.75 22.7 41.75 22.7 22.7 35.4 22.7 35.4 16.35 16.35 16.35 16.35 41.75z'/><path d='M48.1 41.75L48.1 10 79.85 10 79.85 29.05 67.15 29.05 67.15 35.4 86.2 35.4 86.2 41.75 60.8 41.75 60.8 22.7 73.5 22.7 73.5 16.35 54.45 16.35 54.45 41.75z'/><path d='M86.2 41.75L86.2 10 117.95 10 117.95 29.05 105.25 29.05 105.25 35.4 124.3 35.4 124.3 41.75 98.9 41.75 98.9 22.7 111.6 22.7 111.6 16.35 92.55 16.35 92.55 41.75z'/><path d='M124.3 41.75L124.3 10 156.05 10 156.05 29.05 143.35 29.05 143.35 35.4 162.4 35.4 162.4 41.75 137 41.75 137 22.7 149.7 22.7 149.7 16.35 130.65 16.35 130.65 41.75z'/></g></svg>");
+    background-repeat: repeat-x;
+    background-size: auto 100%;
+    background-position: center;
+  }
+
+  /* ---------- PAGE FRAME ---------- */
+  main {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 56px 60px 40px;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    text-align: center;
+    position: relative;
+    padding: 30px 0 48px;
+  }
+  .hero-wreath {
+    position: relative;
+    display: inline-block;
+    padding: 60px 80px 60px;
+  }
+  .hero-wreath svg.wreath {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 520px; height: auto;
+    pointer-events: none;
+    opacity: 0.92;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-display), serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 18px;
+  }
+  h1.hero-title {
+    font-family: var(--font-display), serif;
+    font-weight: 700;
+    font-size: 3.2rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin: 0 0 16px;
+    line-height: 1.05;
+  }
+  .hero-sub {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--text);
+    max-width: 560px;
+    margin: 0 auto;
+    letter-spacing: 0.02em;
+  }
+  .hairline-rule {
+    display: flex; align-items: center; justify-content: center;
+    gap: 14px;
+    margin: 22px 0;
+  }
+  .hairline-rule::before, .hairline-rule::after {
+    content: "";
+    width: 80px;
+    height: 1px;
+    background: var(--ornament);
+  }
+  .hairline-rule .diamond {
+    width: 8px; height: 8px;
+    background: var(--secondary);
+    transform: rotate(45deg);
+  }
+
+  /* ---------- SECTION DIVIDER ---------- */
+  .section-divider {
+    display: flex;
+    justify-content: center;
+    margin: 56px 0;
+  }
+  .section-divider svg {
+    width: 280px; height: auto;
+    opacity: 0.85;
+  }
+
+  /* ---------- AXIAL VISIT BLOCK ---------- */
+  .visit-axial {
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  .axial-label {
+    font-family: var(--font-display), serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+  .axial-content {
+    font-family: var(--font-display), serif;
+    font-size: 1.6rem;
+    letter-spacing: 0.06em;
+    line-height: 1.4;
+    margin: 0;
+  }
+  .axial-content.tall {
+    font-size: 1.35rem;
+  }
+  .axial-block {
+    margin: 0 auto 56px;
+  }
+
+  /* ---------- HOURS TABLE ---------- */
+  .hours-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    max-width: 580px;
+    border-top: 1px solid var(--ornament);
+  }
+  .hours-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 14px 4px;
+    border-bottom: 1px solid rgba(26,26,26,0.18);
+    font-family: var(--font-body), serif;
+  }
+  .hours-list .day {
+    font-family: var(--font-display), serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+  .hours-list .time {
+    font-family: var(--font-body), serif;
+    font-size: 1rem;
+    color: var(--text);
+  }
+  .hours-list .closed {
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  /* ---------- CARDS GRID ---------- */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 36px;
+    margin-top: 28px;
+  }
+  .card {
+    background: var(--surface);
+    position: relative;
+    padding: 70px 30px 32px;
+    border: 1.5px solid var(--ornament);
+    background-image:
+      linear-gradient(to right, var(--ornament) 0, var(--ornament) 100%),
+      linear-gradient(to right, var(--ornament) 0, var(--ornament) 100%),
+      linear-gradient(to bottom, var(--ornament) 0, var(--ornament) 100%),
+      linear-gradient(to bottom, var(--ornament) 0, var(--ornament) 100%);
+    background-repeat: no-repeat;
+    background-size: 14px 1px, 14px 1px, 1px 14px, 1px 14px;
+    background-position: 7px 7px, calc(100% - 7px) 7px, 7px 7px, calc(100% - 7px) 7px;
+  }
+  .card::before, .card::after {
+    /* inner 0.5px ghost rule for double-frame look */
+    content: "";
+    position: absolute;
+    left: 7px; right: 7px; top: 7px; bottom: 7px;
+    border: 0.5px solid rgba(26,26,26,0.35);
+    pointer-events: none;
+  }
+  .card-seal {
+    position: absolute;
+    top: -34px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 64px; height: 64px;
+    background: var(--bg);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    border: 1.5px solid var(--ornament);
+    z-index: 2;
+  }
+  .card-seal::before {
+    content: "";
+    position: absolute; inset: 4px;
+    border: 1px solid var(--secondary);
+    border-radius: 50%;
+  }
+  .card-seal span {
+    font-family: var(--font-display), serif;
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+    color: var(--ornament);
+    font-weight: 700;
+    z-index: 1;
+  }
+  .card h3 {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 0.95rem;
+    letter-spacing: 0.22em;
+    margin: 0 0 14px;
+    display: flex; align-items: center; justify-content: center;
+    gap: 12px;
+  }
+  .card h3::before, .card h3::after {
+    content: "";
+    flex: 0 0 28px;
+    height: 1px;
+    background: var(--ornament);
+  }
+  .card p {
+    text-align: justify;
+    margin: 0 0 12px;
+    font-size: 0.95rem;
+  }
+  .card p:last-child { margin-bottom: 0; }
+  .lead-in {
+    font-variant: small-caps;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    font-weight: 600;
+  }
+
+  /* ---------- MAP SKETCH ---------- */
+  .map-block {
+    text-align: center;
+    margin: 0 auto;
+    max-width: 920px;
+  }
+  .map-frame {
+    border: 1.5px solid var(--ornament);
+    background: var(--surface);
+    padding: 28px;
+    position: relative;
+  }
+  .map-frame::before {
+    content: "";
+    position: absolute; inset: 8px;
+    border: 0.5px solid rgba(26,26,26,0.35);
+    pointer-events: none;
+  }
+  .map-caption {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    font-size: 0.78rem;
+    margin-top: 18px;
+    color: var(--ornament);
+  }
+  .map-caption .small {
+    display: block;
+    font-style: italic;
+    font-family: var(--font-body), serif;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    font-size: 0.95rem;
+    color: var(--text);
+    margin-top: 6px;
+  }
+  svg.map-svg {
+    width: 100%;
+    height: 360px;
+    display: block;
+  }
+
+  /* ---------- PRACTICAL NOTES ---------- */
+  .notes-block {
+    margin-top: 64px;
+    text-align: center;
+  }
+  .notes-title {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    letter-spacing: 0.28em;
+    margin: 0 0 6px;
+  }
+  .notes-sub {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    color: var(--accent);
+    margin-bottom: 36px;
+  }
+
+  /* ---------- TAILPIECE ---------- */
+  .tailpiece {
+    text-align: center;
+    margin: 64px 0 24px;
+  }
+  .tailpiece svg {
+    width: 36px; height: 36px;
+    fill: var(--secondary);
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    margin-top: 40px;
+    background: var(--bg);
+  }
+  .footer-frieze {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 50px 60px 28px;
+    text-align: center;
+  }
+  .footer-frieze h4 {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    letter-spacing: 0.28em;
+    margin: 0 0 12px;
+  }
+  .footer-frieze p {
+    margin: 0;
+    font-family: var(--font-body), serif;
+    font-size: 0.92rem;
+    line-height: 1.6;
+  }
+  .footer-tail {
+    text-align: center;
+    padding: 0 0 32px;
+  }
+  .footer-tail svg {
+    width: 32px; height: 32px;
+    fill: var(--secondary);
+  }
+  .footer-attrib {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    padding-bottom: 36px;
+    color: var(--ornament);
+  }
+
+  /* hide visually but keep accessible */
+  .sr { position: absolute; left: -9999px; }
+</style>
+</head>
+<body>
+
+<header class="top-nav">
+  <div class="wordmark">
+    <div class="wordmark-roundel" aria-hidden="true"><span>TA</span></div>
+    <div class="wordmark-name">Trattoria Aventina</div>
+  </div>
+  <nav class="primary" aria-label="Primary">
+    <a href="page-1.html">Casa</a>
+    <svg class="vine" viewBox="0 0 200 200" aria-hidden="true"><path d="M43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312" transform="translate(0 -852.36) scale(1)"/></svg>
+    <a href="page-2.html">Carta</a>
+    <svg class="vine" viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="6"/></svg>
+    <a href="page-3.html">Cellar</a>
+    <svg class="vine" viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="6"/></svg>
+    <a href="page-4.html">House</a>
+    <svg class="vine" viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="6"/></svg>
+    <a href="page-5.html" aria-current="page">Visit</a>
+    <svg class="vine" viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="6"/></svg>
+    <a href="page-6.html">Reservations</a>
+  </nav>
+</header>
+
+<div class="meander-cornice" role="presentation"></div>
+
+<main>
+
+  <section class="hero">
+    <div class="hero-wreath">
+      <svg class="wreath" viewBox="0 0 323 295" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g fill="none" stroke="#1a1a1a" stroke-width="1.2">
+          <ellipse cx="161.5" cy="147.5" rx="150" ry="135"/>
+          <ellipse cx="161.5" cy="147.5" rx="142" ry="127" stroke="#c9a23a" stroke-width="0.8"/>
+        </g>
+        <g fill="#1a1a1a">
+          <!-- left laurel leaves -->
+          <g transform="translate(15,140)">
+            <path d="M0,0 q-8,-14 -22,-12 q12,4 14,16 q4,12 18,10 z"/>
+            <path d="M5,30 q-10,-14 -24,-10 q12,6 12,18 q6,10 20,6 z"/>
+            <path d="M10,-30 q-10,-14 -24,-12 q14,6 14,18 q4,10 18,8 z"/>
+            <path d="M14,-60 q-10,-12 -24,-10 q14,4 14,16 q4,10 18,8 z"/>
+            <path d="M22,60 q-10,-14 -24,-8 q12,4 12,16 q6,10 20,4 z"/>
+          </g>
+          <g transform="translate(308,140) scale(-1,1)">
+            <path d="M0,0 q-8,-14 -22,-12 q12,4 14,16 q4,12 18,10 z"/>
+            <path d="M5,30 q-10,-14 -24,-10 q12,6 12,18 q6,10 20,6 z"/>
+            <path d="M10,-30 q-10,-14 -24,-12 q14,6 14,18 q4,10 18,8 z"/>
+            <path d="M14,-60 q-10,-12 -24,-10 q14,4 14,16 q4,10 18,8 z"/>
+            <path d="M22,60 q-10,-14 -24,-8 q12,4 12,16 q6,10 20,4 z"/>
+          </g>
+          <!-- top tie ribbon -->
+          <g transform="translate(161,18)">
+            <path d="M-12,0 q12,-8 24,0 q-6,4 -12,4 q-6,0 -12,-4z"/>
+            <circle cx="0" cy="6" r="3" fill="#a93226"/>
+          </g>
+          <!-- bottom tie -->
+          <g transform="translate(161,278)">
+            <path d="M-12,0 q12,8 24,0 q-6,-4 -12,-4 q-6,0 -12,4z"/>
+            <circle cx="0" cy="-6" r="3" fill="#a93226"/>
+          </g>
+        </g>
+      </svg>
+      <div class="hero-eyebrow">Pagina V &nbsp;·&nbsp; Visitateci</div>
+      <h1 class="hero-title">Visit<br>the House</h1>
+      <div class="hairline-rule"><span class="diamond"></span></div>
+      <p class="hero-sub">Hours, location, and travel notes for guests of Trattoria Aventina, perched above the Tiber on the quiet south face of the Aventine Hill.</p>
+    </div>
+  </section>
+
+  <div class="section-divider" aria-hidden="true">
+    <svg viewBox="0 0 165 44" preserveAspectRatio="xMidYMid meet"><g fill="#1a1a1a">
+      <path d="M10 41.75L10 10 41.75 10 41.75 29.05 29.05 29.05 29.05 35.4 48.1 35.4 48.1 41.75 22.7 41.75 22.7 22.7 35.4 22.7 35.4 16.35 16.35 16.35 16.35 41.75z"/>
+      <path d="M48.1 41.75L48.1 10 79.85 10 79.85 29.05 67.15 29.05 67.15 35.4 86.2 35.4 86.2 41.75 60.8 41.75 60.8 22.7 73.5 22.7 73.5 16.35 54.45 16.35 54.45 41.75z"/>
+      <path d="M86.2 41.75L86.2 10 117.95 10 117.95 29.05 105.25 29.05 105.25 35.4 124.3 35.4 124.3 41.75 98.9 41.75 98.9 22.7 111.6 22.7 111.6 16.35 92.55 16.35 92.55 41.75z"/>
+      <path d="M124.3 41.75L124.3 10 156.05 10 156.05 29.05 143.35 29.05 143.35 35.4 162.4 35.4 162.4 41.75 137 41.75 137 22.7 149.7 22.7 149.7 16.35 130.65 16.35 130.65 41.75z"/>
+    </g></svg>
+  </div>
+
+  <section class="visit-axial">
+
+    <div class="axial-block">
+      <div class="axial-label">Address</div>
+      <p class="axial-content">
+        Via di Santa Sabina, 47<br>
+        00153 Roma — Rione XII, Aventino
+      </p>
+    </div>
+
+    <div class="axial-block">
+      <div class="axial-label">Telephone</div>
+      <p class="axial-content tall">+39 06 4742 1147</p>
+    </div>
+
+    <div class="axial-block">
+      <div class="axial-label">Hours of Service</div>
+      <ul class="hours-list">
+        <li><span class="day">Monday</span><span class="time closed">Chiuso — Closed</span></li>
+        <li><span class="day">Tuesday</span><span class="time">19:00 — 23:30</span></li>
+        <li><span class="day">Wednesday</span><span class="time">19:00 — 23:30</span></li>
+        <li><span class="day">Thursday</span><span class="time">19:00 — 23:30</span></li>
+        <li><span class="day">Friday</span><span class="time">19:00 — 23:30</span></li>
+        <li><span class="day">Saturday</span><span class="time">19:00 — 23:30</span></li>
+        <li><span class="day">Sunday</span><span class="time">12:30 — 15:00 &nbsp;·&nbsp; 19:00 — 22:30</span></li>
+      </ul>
+    </div>
+
+  </section>
+
+  <div class="section-divider" aria-hidden="true">
+    <svg viewBox="0 0 165 44" preserveAspectRatio="xMidYMid meet"><g fill="#1a1a1a">
+      <path d="M10 41.75L10 10 41.75 10 41.75 29.05 29.05 29.05 29.05 35.4 48.1 35.4 48.1 41.75 22.7 41.75 22.7 22.7 35.4 22.7 35.4 16.35 16.35 16.35 16.35 41.75z"/>
+      <path d="M48.1 41.75L48.1 10 79.85 10 79.85 29.05 67.15 29.05 67.15 35.4 86.2 35.4 86.2 41.75 60.8 41.75 60.8 22.7 73.5 22.7 73.5 16.35 54.45 16.35 54.45 41.75z"/>
+      <path d="M86.2 41.75L86.2 10 117.95 10 117.95 29.05 105.25 29.05 105.25 35.4 124.3 35.4 124.3 41.75 98.9 41.75 98.9 22.7 111.6 22.7 111.6 16.35 92.55 16.35 92.55 41.75z"/>
+      <path d="M124.3 41.75L124.3 10 156.05 10 156.05 29.05 143.35 29.05 143.35 35.4 162.4 35.4 162.4 41.75 137 41.75 137 22.7 149.7 22.7 149.7 16.35 130.65 16.35 130.65 41.75z"/>
+    </g></svg>
+  </div>
+
+  <section class="map-block" aria-label="Map of the Aventine Hill">
+    <div class="notes-block" style="margin-top:0;">
+      <h2 class="notes-title">The Aventine Hill</h2>
+      <p class="notes-sub">a sketch of the seventh hill of Rome</p>
+    </div>
+    <div class="map-frame">
+      <svg class="map-svg" viewBox="0 0 900 360" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <pattern id="hatch" patternUnits="userSpaceOnUse" width="6" height="6">
+            <path d="M0,6 L6,0" stroke="#1a1a1a" stroke-width="0.4" opacity="0.35"/>
+          </pattern>
+        </defs>
+        <!-- River Tiber -->
+        <path d="M0,260 C120,240 220,290 340,270 C470,248 560,300 700,275 C780,260 850,290 900,275 L900,360 L0,360 Z"
+              fill="url(#hatch)" stroke="#1a1a1a" stroke-width="0.8"/>
+        <text x="120" y="320" font-family="Playfair Display, serif" font-style="italic" font-size="14" fill="#1a1a1a">Fiume Tevere</text>
+
+        <!-- Aventine Hill contours -->
+        <g fill="none" stroke="#1a1a1a" stroke-width="0.9">
+          <path d="M260,200 C320,120 480,100 580,140 C660,170 700,210 680,240 C620,260 360,260 280,240 C260,230 250,215 260,200 Z"/>
+          <path d="M290,200 C340,140 470,125 560,160 C620,180 650,210 640,230"/>
+          <path d="M330,195 C370,160 460,150 540,170 C580,180 610,200 600,220"/>
+          <path d="M380,190 C410,175 470,170 530,180"/>
+        </g>
+
+        <!-- Trees / cypress glyphs -->
+        <g fill="#1a1a1a">
+          <path d="M310,150 q-5,-18 0,-30 q5,12 0,30 z M308,150 h4 v6 h-4 z"/>
+          <path d="M380,130 q-5,-20 0,-32 q5,12 0,32 z M378,130 h4 v6 h-4 z"/>
+          <path d="M460,118 q-5,-22 0,-34 q5,14 0,34 z M458,118 h4 v6 h-4 z"/>
+          <path d="M540,128 q-5,-20 0,-32 q5,12 0,32 z M538,128 h4 v6 h-4 z"/>
+          <path d="M610,150 q-5,-18 0,-30 q5,12 0,30 z M608,150 h4 v6 h-4 z"/>
+        </g>
+
+        <!-- Santa Sabina basilica icon -->
+        <g transform="translate(440,118)" fill="#1a1a1a">
+          <rect x="-22" y="0" width="44" height="22" fill="none" stroke="#1a1a1a"/>
+          <polygon points="-22,0 0,-14 22,0" fill="none" stroke="#1a1a1a"/>
+          <rect x="-3" y="6" width="6" height="16" fill="none" stroke="#1a1a1a"/>
+          <line x1="0" y1="-22" x2="0" y2="-14"/>
+          <circle cx="0" cy="-24" r="2"/>
+        </g>
+        <text x="408" y="92" font-family="Playfair Display, serif" font-size="11" letter-spacing="2" fill="#1a1a1a">S. SABINA</text>
+
+        <!-- Trattoria seal marker -->
+        <g transform="translate(495,148)">
+          <circle r="14" fill="#f5f0e6" stroke="#a93226" stroke-width="1.4"/>
+          <circle r="10" fill="none" stroke="#c9a23a" stroke-width="0.8"/>
+          <text y="4" text-anchor="middle" font-family="Playfair Display, serif" font-size="11" font-weight="700" fill="#1a1a1a">TA</text>
+        </g>
+        <text x="475" y="180" font-family="Playfair Display, serif" font-size="10" letter-spacing="2.5" fill="#a93226">VIA DI S. SABINA 47</text>
+
+        <!-- Circo Massimo -->
+        <g transform="translate(720,210)" fill="none" stroke="#1a1a1a" stroke-width="0.9">
+          <ellipse cx="0" cy="0" rx="60" ry="14"/>
+          <line x1="-50" y1="0" x2="50" y2="0" stroke-dasharray="3 3"/>
+        </g>
+        <text x="678" y="240" font-family="Playfair Display, serif" font-size="10" letter-spacing="2" fill="#1a1a1a">CIRCO MASSIMO</text>
+        <g transform="translate(720,200)">
+          <rect x="-6" y="-6" width="12" height="12" fill="#f5f0e6" stroke="#1a1a1a"/>
+          <text y="3" text-anchor="middle" font-family="Playfair Display, serif" font-size="9" font-weight="700" fill="#1a1a1a">M</text>
+        </g>
+
+        <!-- Roads -->
+        <g stroke="#1a1a1a" stroke-width="0.5" fill="none" stroke-dasharray="4 3">
+          <path d="M495,148 C540,160 620,180 720,200"/>
+          <path d="M495,148 C460,140 430,128 410,120"/>
+        </g>
+
+        <!-- Compass rose -->
+        <g transform="translate(830,60)" fill="#1a1a1a">
+          <circle r="18" fill="none" stroke="#1a1a1a"/>
+          <polygon points="0,-16 3,0 0,16 -3,0" fill="#1a1a1a"/>
+          <polygon points="-16,0 0,3 16,0 0,-3" fill="none" stroke="#1a1a1a"/>
+          <text y="-22" text-anchor="middle" font-family="Playfair Display, serif" font-size="9" font-weight="700">N</text>
+        </g>
+
+        <!-- frame label -->
+        <text x="40" y="40" font-family="Playfair Display, serif" font-size="11" letter-spacing="3" fill="#1a1a1a">AVENTINUS — RIONE XII</text>
+      </svg>
+    </div>
+    <div class="map-caption">
+      A line drawing of the Aventine
+      <span class="small">Drawn after the cadastral plates of 1872, with present-day reference points.</span>
+    </div>
+  </section>
+
+  <div class="section-divider" aria-hidden="true">
+    <svg viewBox="0 0 165 44" preserveAspectRatio="xMidYMid meet"><g fill="#1a1a1a">
+      <path d="M10 41.75L10 10 41.75 10 41.75 29.05 29.05 29.05 29.05 35.4 48.1 35.4 48.1 41.75 22.7 41.75 22.7 22.7 35.4 22.7 35.4 16.35 16.35 16.35 16.35 41.75z"/>
+      <path d="M48.1 41.75L48.1 10 79.85 10 79.85 29.05 67.15 29.05 67.15 35.4 86.2 35.4 86.2 41.75 60.8 41.75 60.8 22.7 73.5 22.7 73.5 16.35 54.45 16.35 54.45 41.75z"/>
+      <path d="M86.2 41.75L86.2 10 117.95 10 117.95 29.05 105.25 29.05 105.25 35.4 124.3 35.4 124.3 41.75 98.9 41.75 98.9 22.7 111.6 22.7 111.6 16.35 92.55 16.35 92.55 41.75z"/>
+      <path d="M124.3 41.75L124.3 10 156.05 10 156.05 29.05 143.35 29.05 143.35 35.4 162.4 35.4 162.4 41.75 137 41.75 137 22.7 149.7 22.7 149.7 16.35 130.65 16.35 130.65 41.75z"/>
+    </g></svg>
+  </div>
+
+  <section class="notes-block" aria-label="Practical notes">
+    <h2 class="notes-title">Travel & Arrival</h2>
+    <p class="notes-sub">three notes for the prudent guest</p>
+
+    <div class="cards-grid">
+
+      <article class="card">
+        <div class="card-seal" aria-hidden="true"><span>M</span></div>
+        <h3>By Metro</h3>
+        <p><span class="lead-in">Linea B</span> serves the Aventine at Circo Massimo, the nearest station, six minutes on foot from our door. Exit toward Via del Circo Massimo, cross beneath the umbrella pines, and ascend Clivo dei Publicii. The climb is gentle and ends at the Giardino degli Aranci.</p>
+        <p>Trains run from 05:30 until 23:30 on weeknights, until 01:30 on Friday and Saturday. A single B.I.T. ticket at €1,50 covers the journey from Termini in under nine minutes.</p>
+      </article>
+
+      <article class="card">
+        <div class="card-seal" aria-hidden="true"><span>P</span></div>
+        <h3>By Carriage</h3>
+        <p><span class="lead-in">Parking</span> on the Aventine is residents-only along Via di Santa Sabina and the surrounding viali. Visitors are best served by the paid garage at Lungotevere Aventino, beside the Bocca della Verità, a level walk of nine minutes.</p>
+        <p>Taxi standsits at Piazza Albania and at the foot of Via Marmorata. We are pleased to telephone a return car after dinner; ask any member of the dining-room staff and a vehicle is rarely longer than ten minutes away.</p>
+      </article>
+
+      <article class="card">
+        <div class="card-seal" aria-hidden="true"><span>A</span></div>
+        <h3>Accessibility</h3>
+        <p><span class="lead-in">The dining room</span> sits at street level, entered by a single 4 cm threshold. The interior is one continuous floor and accommodates wheelchairs at four tables; please mention your needs at booking and we will reserve accordingly.</p>
+        <p>An accessible water-closet is provided. Guide and assistance dogs are welcome throughout the house. For guests of limited mobility we suggest arrival by taxi to the door, as the surrounding streets are cobbled in sampietrini.</p>
+      </article>
+
+    </div>
+  </section>
+
+  <div class="tailpiece" aria-hidden="true">
+    <svg viewBox="0 0 200 200"><path d="M43.6,11c-1.8,0-3.6,0.1-5.3,0.3c-7.1,0.7-14,2.8-19.2,7.5c-5.2,4.7-8.2,12-7.7,21c0.5,9,4.3,16.1,10.2,20.3c5.9,4.2,13.3,5.5,21,5.2c15.5-0.7,32.8-8,45.8-18.3c1.4-1.1,2.8-2,4.3-3.1c4.3,6.7,7.6,14.8,9.3,24.1c-7.5-5.1-21-10.5-35.7,1.5c-22.1,18.2-25,12.9-45.3-2.1c-2.9,36.1,15,54.6,44.7,52.5c0,0-14,4.3-3.6,26.4c6,12.9,8.4,20.1,6.6,25.2c-12.8,2.3-15.8,7.8-5.6,12.7c45.1,10,65.7-27.5,68.7-66c45.4,0,52.9-31.8,52.5-50.4c-8.2,11.1-22.2,11.1-32.9,2.5c-9.9-7.9-21.7-16.2-39-1.1C111.3,53.1,107.3,42.6,101.8,34c19.4-11.4,38.7-14.5,52.5-10.8c5.5,1.4,9.5,4.1,12.4,7c-9,8.4-11.8,26.4,2.3,27c18.9,0.9,21-15.5,13.6-27.1c-5.4-8.5-16.4-13.2-25.7-16.6C139.4,8.9,117.2,13,95.7,26C90.5,20.3,84.5,15.8,78,13C70.9,10.1,60.5,7.3,49.7,6.7c-1.8-0.1-3.6-0.1-5.4-0.1l-0.7,4.4z"/></svg>
+  </div>
+
+</main>
+
+<div class="meander-cornice" role="presentation"></div>
+
+<footer>
+  <div class="footer-frieze">
+    <div>
+      <h4>Address</h4>
+      <p>Via di Santa Sabina, 47<br>00153 Roma — Aventino<br>+39 06 4742 1147</p>
+    </div>
+    <div>
+      <h4>Hours</h4>
+      <p>Tue – Sat &nbsp; 19:00 — 23:30<br>Sun &nbsp; 12:30 — 15:00 &nbsp;·&nbsp; 19:00 — 22:30<br>Lunedì chiuso</p>
+    </div>
+    <div>
+      <h4>Of the House</h4>
+      <p>Trattoria Aventina, founded MMXIV<br>Cucina Romana, contemporanea<br>prenotazioni@trattoriaventina.it</p>
+    </div>
+  </div>
+  <div class="footer-tail" aria-hidden="true">
+    <svg viewBox="0 0 100 100"><g fill="#c9a23a"><circle cx="50" cy="50" r="4"/><path d="M50,50 Q30,40 20,50 Q30,60 50,50 Z"/><path d="M50,50 Q70,40 80,50 Q70,60 50,50 Z"/><path d="M50,50 Q40,30 50,20 Q60,30 50,50 Z"/><path d="M50,50 Q40,70 50,80 Q60,70 50,50 Z"/></g></svg>
+  </div>
+  <div class="footer-attrib">S · P · Q · R &nbsp;·&nbsp; Trattoria Aventina &nbsp;·&nbsp; MMXXIV</div>
+</footer>
+
+</body>
+</html>

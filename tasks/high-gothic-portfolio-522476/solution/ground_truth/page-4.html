@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>The Workshop and Its Hands — Atelier of Gautier de Soissons</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Garamond, serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.55;
+    background-image:
+      radial-gradient(circle at 12% 20%, rgba(139,21,56,0.04) 0, transparent 40%),
+      radial-gradient(circle at 88% 80%, rgba(30,58,95,0.04) 0, transparent 40%);
+  }
+
+  /* ---------- NAV ARCADE ---------- */
+  .arcade-nav {
+    padding: 2.2em 0 0;
+    background-color: var(--bg);
+  }
+  .arcade-nav ul {
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    width: 90%;
+    max-width: 1200px;
+  }
+  .arcade-nav li {
+    flex: 0 0 auto;
+    width: 180px;
+    height: 95px;
+    position: relative;
+  }
+  .arcade-nav a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: var(--ornament);
+    font-variant: small-caps;
+    letter-spacing: 0.12em;
+    font-size: 0.78rem;
+    position: relative;
+    text-align: center;
+  }
+  .arcade-nav .niche {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .arcade-nav .niche svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .arcade-nav .niche path {
+    fill: none;
+    stroke: var(--ornament);
+    stroke-width: 1.5;
+  }
+  .arcade-nav .label {
+    position: absolute;
+    bottom: 18px;
+    left: 0;
+    right: 0;
+    text-align: center;
+  }
+  .arcade-nav a[aria-current="page"] {
+    color: var(--bg);
+  }
+  .arcade-nav a[aria-current="page"] .niche path {
+    fill: var(--primary);
+    stroke: var(--primary);
+  }
+  .gold-rule {
+    width: 90%;
+    max-width: 1200px;
+    height: 2px;
+    margin: 0.4em auto 0;
+    background: linear-gradient(to right,
+      transparent 0%,
+      var(--accent) 8%,
+      var(--accent) 92%,
+      transparent 100%);
+  }
+
+  /* ---------- HERO / TITLE ---------- */
+  .page-head {
+    text-align: center;
+    padding: 3.5em 1em 2em;
+    position: relative;
+  }
+  .page-head .seal {
+    width: 88px;
+    height: 88px;
+    margin: 0 auto 0.6em;
+    color: var(--secondary);
+  }
+  .page-head .seal svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+  }
+  .page-head h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 3.4rem;
+    color: var(--primary);
+    margin: 0.1em 0 0.2em;
+    letter-spacing: 0.01em;
+    line-height: 1.05;
+  }
+  .page-head .subtitle {
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--text);
+    max-width: 38em;
+    margin: 0.4em auto 0;
+  }
+
+  /* ---------- BODY LAYOUT ---------- */
+  .vellum {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 1em 2em 3em;
+  }
+
+  /* The Account — narrow column, mirrors cathedral nave proportion */
+  .account {
+    max-width: 18em;
+    margin: 0 auto;
+    padding: 1em 0 2em;
+    text-align: justify;
+    hyphens: auto;
+    font-size: 1.02rem;
+  }
+  .account p {
+    margin: 0 0 1em;
+    text-indent: 1.6em;
+  }
+  .account p:first-of-type {
+    text-indent: 0;
+  }
+  .account p:first-of-type::first-letter {
+    font-family: var(--font-display), serif;
+    font-size: 4.2rem;
+    float: left;
+    color: var(--primary);
+    line-height: 0.85;
+    padding: 0.08em 0.12em 0 0;
+    margin-right: 0.04em;
+  }
+
+  .section-heading {
+    font-family: var(--font-display), serif;
+    color: var(--secondary);
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 400;
+    margin: 0.4em 0 0.2em;
+    letter-spacing: 0.02em;
+  }
+  .section-rule {
+    width: 60%;
+    height: 1px;
+    margin: 0 auto 1.2em;
+    background: var(--accent);
+    max-width: 320px;
+  }
+
+  /* Divider with oak-leaf */
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 3em auto;
+    max-width: 540px;
+    color: var(--ornament);
+  }
+  .divider::before,
+  .divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--accent);
+    opacity: 0.8;
+  }
+  .divider svg {
+    width: 38px;
+    height: 38px;
+    margin: 0 1em;
+    fill: var(--ornament);
+  }
+
+  /* ---------- HANDS OF THE WORKSHOP — pointed-arch cards ---------- */
+  .hands-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.4em 3em;
+    margin: 1.4em 0 0;
+    padding: 0 2em;
+  }
+  .hand-card {
+    position: relative;
+    padding: 0;
+  }
+  .arch-frame {
+    position: relative;
+    background: var(--bg);
+    padding: 4.2em 2.2em 2em;
+    text-align: center;
+  }
+  .arch-frame::before {
+    /* pointed-arch outline using clip-path / svg overlay */
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 100%;
+    background:
+      linear-gradient(var(--bg), var(--bg)) padding-box;
+    border: 1.5px solid var(--ornament);
+    border-radius: 50% 50% 0 0 / 28% 28% 0 0;
+    pointer-events: none;
+  }
+  .arch-frame::after {
+    /* inner thin gold rule via top quatrefoil region */
+    content: "";
+    position: absolute;
+    left: 18%;
+    right: 18%;
+    top: 3.4em;
+    height: 1px;
+    background: var(--accent);
+  }
+  .arch-frame .quatrefoil {
+    position: absolute;
+    top: 0.7em;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 36px;
+    height: 36px;
+    color: var(--primary);
+    z-index: 2;
+  }
+  .arch-frame .quatrefoil svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+  }
+  .hand-card h3 {
+    font-family: var(--font-display), serif;
+    color: var(--secondary);
+    font-weight: 400;
+    font-size: 1.55rem;
+    margin: 0 0 0.1em;
+    position: relative;
+    z-index: 1;
+  }
+  .hand-card .role {
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--text);
+    margin: 0 0 0.6em;
+    position: relative;
+    z-index: 1;
+  }
+  .hand-card .body {
+    text-align: justify;
+    hyphens: auto;
+    font-size: 0.96rem;
+    max-width: 18em;
+    margin: 0.6em auto 0;
+    position: relative;
+    z-index: 1;
+  }
+  .hand-card .body::first-letter {
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+    font-size: 2.4rem;
+    float: left;
+    line-height: 0.9;
+    padding: 0.08em 0.1em 0 0;
+  }
+
+  /* ---------- ROLL — listing of indentured persons ---------- */
+  .roll {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 1em 2em 1em;
+    border-left: 1px solid var(--accent);
+    border-right: 1px solid var(--accent);
+    background:
+      repeating-linear-gradient(
+        to bottom,
+        transparent 0,
+        transparent 1.6em,
+        rgba(58,38,24,0.05) 1.6em,
+        rgba(58,38,24,0.05) 1.61em
+      );
+  }
+  .roll table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.98rem;
+  }
+  .roll caption {
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+    font-size: 1.5rem;
+    padding-bottom: 0.4em;
+  }
+  .roll th, .roll td {
+    padding: 0.55em 0.6em;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px dotted rgba(58,38,24,0.3);
+  }
+  .roll th {
+    font-variant: small-caps;
+    letter-spacing: 0.08em;
+    color: var(--secondary);
+    font-weight: 600;
+    font-size: 0.85rem;
+    border-bottom: 1px solid var(--accent);
+  }
+  .roll td.year {
+    font-variant: small-caps;
+    color: var(--primary);
+    white-space: nowrap;
+  }
+  .roll td.name {
+    font-style: italic;
+  }
+
+  /* ---------- THE RULE (closing seal) ---------- */
+  .rule-block {
+    margin: 4em auto 3em;
+    max-width: 720px;
+    text-align: center;
+    position: relative;
+    padding: 3em 2em;
+  }
+  .rule-block .bg-quatre {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.07;
+    pointer-events: none;
+  }
+  .rule-block .bg-quatre svg {
+    width: 320px;
+    height: 320px;
+  }
+  .rule-block blockquote {
+    margin: 0;
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+    font-size: 2rem;
+    line-height: 1.25;
+    position: relative;
+    z-index: 1;
+  }
+  .rule-block .attribution {
+    margin-top: 1em;
+    font-style: italic;
+    color: var(--secondary);
+    font-size: 1rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ---------- FOOTER ARCADE ---------- */
+  footer {
+    margin-top: 3em;
+    padding: 2.4em 2em 2em;
+    background: var(--bg);
+    border-top: 1px solid var(--accent);
+  }
+  .footer-arcade {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 980px;
+    margin: 0 auto 1.4em;
+    gap: 0;
+  }
+  .footer-arcade .farch {
+    flex: 0 0 auto;
+    width: 110px;
+    height: 80px;
+    position: relative;
+  }
+  .footer-arcade .farch svg.outline {
+    width: 100%; height: 100%;
+    display: block;
+  }
+  .footer-arcade .farch svg.outline path {
+    fill: none;
+    stroke: var(--primary);
+    stroke-width: 1.4;
+  }
+  .footer-arcade .farch .ornament {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%,-30%);
+    width: 28px;
+    height: 28px;
+    color: var(--ornament);
+  }
+  .footer-arcade .farch .ornament svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+  }
+  .footer-meta {
+    text-align: center;
+    color: var(--text);
+  }
+  .footer-meta .name {
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+    font-size: 1.5rem;
+    margin: 0;
+  }
+  .footer-meta .addr {
+    font-style: italic;
+    margin: 0.3em 0 0.3em;
+  }
+  .footer-meta .year {
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    color: var(--secondary);
+    font-size: 0.85rem;
+  }
+
+  /* fleur-de-lis (footer ornament) — inline svg path */
+  .fleur path { fill: currentColor; }
+
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ARCADE ============ -->
+<nav class="arcade-nav" aria-label="Primary">
+  <ul>
+    <li>
+      <a href="page-1.html">
+        <span class="niche" aria-hidden="true">
+          <svg viewBox="0 0 180 95" preserveAspectRatio="none">
+            <path d="M10,93 L10,40 Q10,8 90,8 Q170,8 170,40 L170,93"/>
+          </svg>
+        </span>
+        <span class="label">Atelier</span>
+      </a>
+    </li>
+    <li>
+      <a href="page-2.html">
+        <span class="niche" aria-hidden="true">
+          <svg viewBox="0 0 180 95" preserveAspectRatio="none">
+            <path d="M10,93 L10,40 Q10,8 90,8 Q170,8 170,40 L170,93"/>
+          </svg>
+        </span>
+        <span class="label">Works in Glass</span>
+      </a>
+    </li>
+    <li>
+      <a href="page-3.html">
+        <span class="niche" aria-hidden="true">
+          <svg viewBox="0 0 180 95" preserveAspectRatio="none">
+            <path d="M10,93 L10,40 Q10,8 90,8 Q170,8 170,40 L170,93"/>
+          </svg>
+        </span>
+        <span class="label">Books &amp; Illuminations</span>
+      </a>
+    </li>
+    <li>
+      <a href="page-4.html" aria-current="page">
+        <span class="niche" aria-hidden="true">
+          <svg viewBox="0 0 180 95" preserveAspectRatio="none">
+            <path d="M10,93 L10,40 Q10,8 90,8 Q170,8 170,40 L170,93"/>
+          </svg>
+        </span>
+        <span class="label">The Workshop</span>
+      </a>
+    </li>
+    <li>
+      <a href="page-5.html">
+        <span class="niche" aria-hidden="true">
+          <svg viewBox="0 0 180 95" preserveAspectRatio="none">
+            <path d="M10,93 L10,40 Q10,8 90,8 Q170,8 170,40 L170,93"/>
+          </svg>
+        </span>
+        <span class="label">Of Commissions</span>
+      </a>
+    </li>
+    <li>
+      <a href="page-6.html">
+        <span class="niche" aria-hidden="true">
+          <svg viewBox="0 0 180 95" preserveAspectRatio="none">
+            <path d="M10,93 L10,40 Q10,8 90,8 Q170,8 170,40 L170,93"/>
+          </svg>
+        </span>
+        <span class="label">To Find Us</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+<div class="gold-rule"></div>
+
+<!-- ============ PAGE HEAD ============ -->
+<header class="page-head">
+  <div class="seal" aria-hidden="true">
+    <svg viewBox="0 0 592 592" xmlns="http://www.w3.org/2000/svg">
+      <path transform="translate(-4,-4)scale(0.15,0.15)" d="M1778.9,3200A120.9263,120.9263 0 0,1 1657.97,3320.93A120.9263,120.9263 0 0,1 1537.04,3200A221.5096,221.5096 0 0,0 1456.32,3371.02A221.5096,221.5096 0 0,0 1677.83,3592.53A221.5096,221.5096 0 0,0 1818.61,3542.03A362.779,362.779 0 0,0 2000,3856.21A362.779,362.779 0 0,0 2181.39,3542.03A221.5096,221.5096 0 0,0 2322.17,3592.53A221.5096,221.5096 0 0,0 2543.68,3371.02A221.5096,221.5096 0 0,0 2462.96,3200A120.9263,120.9263 0 0,1 2342.03,3320.93A120.9263,120.9263 0 0,1 2221.1,3200V2221.1H3200A120.9263,120.9263 0 0,1 3320.93,2342.03A120.9263,120.9263 0 0,1 3200,2462.96A221.5096,221.5096 0 0,0 3371.02,2543.68A221.5096,221.5096 0 0,0 3592.53,2322.17A221.5096,221.5096 0 0,0 3542.03,2181.39A362.779,362.779 0 0,0 3856.21,2000A362.779,362.779 0 0,0 3542.03,1818.61A221.5096,221.5096 0 0,0 3592.53,1677.83A221.5096,221.5096 0 0,0 3371.02,1456.32A221.5096,221.5096 0 0,0 3200,1537.04A120.9263,120.9263 0 0,1 3320.93,1657.97A120.9263,120.9263 0 0,1 3200,1778.9H2221.1V800A120.9263,120.9263 0 0,1 2342.03,679.073A120.9263,120.9263 0 0,1 2462.96,800A221.5096,221.5096 0 0,0 2543.68,628.984A221.5096,221.5096 0 0,0 2322.17,407.475A221.5096,221.5096 0 0,0 2181.39,457.969A362.779,362.779 0 0,0 2000,143.793A362.779,362.779 0 0,0 1818.61,457.969A221.5096,221.5096 0 0,0 1677.83,407.475A221.5096,221.5096 0 0,0 1456.32,628.984A221.5096,221.5096 0 0,0 1537.04,800A120.9263,120.9263 0 0,1 1657.97,679.073A120.9263,120.9263 0 0,1 1778.9,800V1778.9H800A120.9263,120.9263 0 0,1 679.073,1657.97A120.9263,120.9263 0 0,1 800,1537.04A221.5096,221.5096 0 0,0 628.984,1456.32A221.5096,221.5096 0 0,0 407.475,1677.83A221.5096,221.5096 0 0,0 457.969,1818.61A362.779,362.779 0 0,0 143.793,2000A362.779,362.779 0 0,0 457.969,2181.39A221.5096,221.5096 0 0,0 407.475,2322.17A221.5096,221.5096 0 0,0 628.984,2543.68A221.5096,221.5096 0 0,0 800,2462.96A120.9263,120.9263 0 0,1 679.073,2342.03A120.9263,120.9263 0 0,1 800,2221.1H1778.9Z"/>
+    </svg>
+  </div>
+  <h1>The Workshop and Its Hands</h1>
+  <p class="subtitle">An accounting, in his own hand, of the master Gautier de Soissons; of those bound and free who labour beside him; and of the rule by which all work is measured.</p>
+</header>
+
+<main class="vellum">
+
+  <!-- ============ THE ACCOUNT ============ -->
+  <section aria-labelledby="account-heading">
+    <h2 class="section-heading" id="account-heading">Of the Master, His Beginning</h2>
+    <div class="section-rule" aria-hidden="true"></div>
+
+    <div class="account">
+      <p>
+        In the year of Our Lord one thousand two hundred and fifty-one, upon the eve of the feast of Saint Médard, I, Gautier, son of Aymon the wool-fuller, was born within the walls of Soissons, hard by the abbey-church of Saint-Jean-des-Vignes. My mother set in my hand, before I could grasp it, a fragment of blue glass that had fallen from the workshop next our door; and so the colour cobalt has stood between me and all common sights from that day forth.
+      </p>
+      <p>
+        At thirteen years, in the autumn of 1264, my father bound me by indenture for seven years to Master Renaud, glazier of Reims, who held his bench within sight of that great cathedral then rising stone by stone. Under his rule I learned to grind the oxide, to score the table, to leaden a quarry, and at last to draw the cartoon. He was a hard man and a just one, and he beat my knuckles with the lathekin when my line wavered. I bless his name nightly.
+      </p>
+      <p>
+        In the year 1271 I took the rank of journeyman, and walked seven winters between the workshops of Chartres, Beauvais, and Amiens, carrying my satchel of pigments and my small panel of trial-glass. In 1278, by the grace of the Confraternity of Saint Luke and the seal of Master Renaud, I was made free of my apprenticeship and granted leave to set up my own bench. That bench, by the favour of the Chapter of Notre-Dame, I established within the parish of Saint-Pierre-le-Vieux at Soissons, where it stands yet, in the rue des Cordeliers.
+      </p>
+      <p>
+        I am now in my forty-third year, and the hand has not yet betrayed me. Of what I have learned, the half I owe to Master Renaud; the other half to the saints whose faces I have copied a thousand times, until I came to know their features as those of my own household.
+      </p>
+    </div>
+  </section>
+
+  <!-- divider -->
+  <div class="divider" aria-hidden="true">
+    <svg viewBox="110 124 40 40" xmlns="http://www.w3.org/2000/svg">
+      <path transform="translate(-110.4 -124.4)" d="m 130 130 q 5 4 8 12 q -2 -1 -5 -1 q 3 4 4 10 q -4 -2 -8 -3 q 1 6 0 10 q -3 -4 -7 -6 q 0 4 -2 8 q -2 -8 1 -16 q 3 -8 9 -14 z"/>
+    </svg>
+  </div>
+
+  <!-- ============ HANDS — CARDS ============ -->
+  <section aria-labelledby="hands-heading">
+    <h2 class="section-heading" id="hands-heading">The Hands of This House</h2>
+    <div class="section-rule" aria-hidden="true"></div>
+
+    <div class="hands-grid">
+
+      <!-- Card: Journeyman Glazier I -->
+      <article class="hand-card">
+        <div class="arch-frame">
+          <span class="quatrefoil" aria-hidden="true">
+            <svg viewBox="0 0 600 600">
+              <g transform="translate(300,300)scale(0.87)rotate(45)">
+                <circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/>
+                <circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/>
+                <rect x="-232" y="-232" width="464" height="464"/>
+              </g>
+            </svg>
+          </span>
+          <h3>Perrin de Laon</h3>
+          <p class="role">Journeyman Glazier &middot; of seven years' service</p>
+          <p class="body">Perrin came to me in the spring of 1287, freed of his bond at the workshop of Master Aubert of Laon. His hand at the lead-knife is the surest in the house; it is he who sets the came of every great panel before the firing. He keeps the second bench by the south window, and is paid two sous and four deniers the week, with bread and the use of the south room.</p>
+        </div>
+      </article>
+
+      <!-- Card: Journeyman Glazier II -->
+      <article class="hand-card">
+        <div class="arch-frame">
+          <span class="quatrefoil" aria-hidden="true">
+            <svg viewBox="0 0 600 600">
+              <g transform="translate(300,300)scale(0.87)rotate(45)">
+                <circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/>
+                <circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/>
+                <rect x="-232" y="-232" width="464" height="464"/>
+              </g>
+            </svg>
+          </span>
+          <h3>Joscelin of Beauvais</h3>
+          <p class="role">Journeyman Glazier &middot; cartoonist of figures</p>
+          <p class="body">Of all my hands, Joscelin draws the saintly visage with most tenderness; he learned of Master Aimery, whom I knew at Beauvais. He is given charge of all faces, hands, and drapery upon the cartoon, and his wage is the same as Perrin's, with two further deniers in respect of his draughtsmanship. He keeps a small chamber above the parchmenter's room.</p>
+        </div>
+      </article>
+
+      <!-- Card: Illuminator I -->
+      <article class="hand-card">
+        <div class="arch-frame">
+          <span class="quatrefoil" aria-hidden="true">
+            <svg viewBox="0 0 600 600">
+              <g transform="translate(300,300)scale(0.87)rotate(45)">
+                <circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/>
+                <circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/>
+                <rect x="-232" y="-232" width="464" height="464"/>
+              </g>
+            </svg>
+          </span>
+          <h3>Dame Aalis la Brodère</h3>
+          <p class="role">Illuminator &middot; mistress of the gold-leaf</p>
+          <p class="body">Widow of a goldsmith of Reims, Dame Aalis came to this house in 1284 and has not left it. She lays the leaf upon the bole, burnishes it with the dog's tooth, and there is no finer field of gold within forty leagues. She is paid in silver weekly, takes the table with my own family, and has the keeping of the great press of pigments under lock and key.</p>
+        </div>
+      </article>
+
+      <!-- Card: Illuminator II -->
+      <article class="hand-card">
+        <div class="arch-frame">
+          <span class="quatrefoil" aria-hidden="true">
+            <svg viewBox="0 0 600 600">
+              <g transform="translate(300,300)scale(0.87)rotate(45)">
+                <circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/>
+                <circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/>
+                <rect x="-232" y="-232" width="464" height="464"/>
+              </g>
+            </svg>
+          </span>
+          <h3>Brother Hervé</h3>
+          <p class="role">Illuminator &middot; of historiated initials</p>
+          <p class="body">Brother Hervé is loaned to us by the abbey of Saint-Médard, four days the week, that he may set the great initial letters and the marginal beasts of our books of hours. He labours in silence, takes neither wage nor bread of us, but a candle is lit before Saint Christopher each Sunday in his name, by the order of his Prior.</p>
+        </div>
+      </article>
+
+      <!-- Card: Illuminator III -->
+      <article class="hand-card">
+        <div class="arch-frame">
+          <span class="quatrefoil" aria-hidden="true">
+            <svg viewBox="0 0 600 600">
+              <g transform="translate(300,300)scale(0.87)rotate(45)">
+                <circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/>
+                <circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/>
+                <rect x="-232" y="-232" width="464" height="464"/>
+              </g>
+            </svg>
+          </span>
+          <h3>Mahaut de Compiègne</h3>
+          <p class="role">Illuminator &middot; of borders and diaper-grounds</p>
+          <p class="body">Mahaut, daughter of the late Master Eudes, has been three years at our bench. She paints the diaper-grounds in cobalt and madder, the vine-rinceaux of the border, and the rinceau of the bas-de-page. Her wage is one sou the week, and her father's old satchel of brushes is kept for her in the cupboard by the press.</p>
+        </div>
+      </article>
+
+      <!-- Card: Parchmenter -->
+      <article class="hand-card">
+        <div class="arch-frame">
+          <span class="quatrefoil" aria-hidden="true">
+            <svg viewBox="0 0 600 600">
+              <g transform="translate(300,300)scale(0.87)rotate(45)">
+                <circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/>
+                <circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/>
+                <rect x="-232" y="-232" width="464" height="464"/>
+              </g>
+            </svg>
+          </span>
+          <h3>Old Robin</h3>
+          <p class="role">Parchmenter &middot; of the back-yard tannery</p>
+          <p class="body">Robin came to this craft before I came to my mother's milk. He keeps the lime-pits in the back yard, scrapes the calf-skin and the kid, stretches it upon the herse, and pounces it for our scribes. He says nothing to anyone, but his hand has prepared every leaf of every book that has left this door these eleven years past.</p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- divider -->
+  <div class="divider" aria-hidden="true">
+    <svg viewBox="110 124 40 40" xmlns="http://www.w3.org/2000/svg">
+      <path transform="translate(-110.4 -124.4)" d="m 130 130 q 5 4 8 12 q -2 -1 -5 -1 q 3 4 4 10 q -4 -2 -8 -3 q 1 6 0 10 q -3 -4 -7 -6 q 0 4 -2 8 q -2 -8 1 -16 q 3 -8 9 -14 z"/>
+    </svg>
+  </div>
+
+  <!-- ============ ROLL OF APPRENTICES ============ -->
+  <section aria-labelledby="apprentices-heading">
+    <h2 class="section-heading" id="apprentices-heading">The Apprentices, Bound by Indenture</h2>
+    <div class="section-rule" aria-hidden="true"></div>
+
+    <div class="roll">
+      <table>
+        <caption>Inscribed in the workshop's roll, kept under the master's seal</caption>
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Bound</th>
+            <th scope="col">Free in</th>
+            <th scope="col">Charge</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name">Guillot, son of Gautier the master</td>
+            <td class="year">A.D. MCCLXXXVIII</td>
+            <td class="year">MCCXCV</td>
+            <td>Glazier's bench; grinding of pigments; the lathekin</td>
+          </tr>
+          <tr>
+            <td class="name">Thibaut of Noyon</td>
+            <td class="year">A.D. MCCLXXXIX</td>
+            <td class="year">MCCXCVI</td>
+            <td>Cartoonist's bench; cutting of glass; carriage of leads</td>
+          </tr>
+          <tr>
+            <td class="name">Jehannot the orphan, of Saint-Crépin</td>
+            <td class="year">A.D. MCCXCI</td>
+            <td class="year">MCCXCVIII</td>
+            <td>Illuminator's bench; ruling of vellum; mixing of egg-glair</td>
+          </tr>
+          <tr>
+            <td class="name">Adeline, daughter of Robin the parchmenter</td>
+            <td class="year">A.D. MCCXCII</td>
+            <td class="year">MCCXCIX</td>
+            <td>Pouncing of skins; sweeping of benches; gilding under Aalis</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ THE RULE ============ -->
+  <section class="rule-block" aria-labelledby="rule-heading">
+    <div class="bg-quatre" aria-hidden="true">
+      <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(300,300)scale(0.87)rotate(45)" fill="var(--primary)">
+          <circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/>
+          <circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/>
+          <rect x="-232" y="-232" width="464" height="464"/>
+          <g fill="var(--bg)">
+            <circle cx="-195.16" r="157"/><circle cx="195.16" r="157"/>
+            <circle cy="195.16" r="157"/><circle cy="-195.16" r="157"/>
+            <rect x="-226" y="-226" width="452" height="452"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+    <h2 id="rule-heading" class="section-heading" style="margin-top:0">The Rule of the House</h2>
+    <div class="section-rule"></div>
+    <blockquote>
+      &ldquo;No work leaves these doors that would shame the saint to whom it is given.&rdquo;
+    </blockquote>
+    <p class="attribution">— set above the great press, in the master's hand, MCCLXXIX</p>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="footer-arcade" aria-hidden="true">
+    <!-- 7 arches: alternate fleur-de-lis, cross-flory, fleur-de-lis, cross-flory, fleur-de-lis, cross-flory, fleur-de-lis -->
+    <!-- arch 1 fleur -->
+    <div class="farch">
+      <svg class="outline" viewBox="0 0 110 80" preserveAspectRatio="none"><path d="M8,78 L8,36 Q8,6 55,6 Q102,6 102,36 L102,78"/></svg>
+      <span class="ornament fleur">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <path d="M50 8 C 46 22, 38 30, 30 32 C 38 36, 44 44, 44 56 L 36 56 C 36 50, 32 46, 26 46 C 20 46, 16 52, 18 60 C 22 56, 28 56, 30 62 L 22 62 L 22 70 L 78 70 L 78 62 L 70 62 C 72 56, 78 56, 82 60 C 84 52, 80 46, 74 46 C 68 46, 64 50, 64 56 L 56 56 C 56 44, 62 36, 70 32 C 62 30, 54 22, 50 8 Z M 38 62 L 62 62 L 62 66 L 38 66 Z"/>
+        </svg>
+      </span>
+    </div>
+    <!-- arch 2 cross-flory -->
+    <div class="farch">
+      <svg class="outline" viewBox="0 0 110 80" preserveAspectRatio="none"><path d="M8,78 L8,36 Q8,6 55,6 Q102,6 102,36 L102,78"/></svg>
+      <span class="ornament">
+        <svg viewBox="0 0 592 592" xmlns="http://www.w3.org/2000/svg">
+          <path transform="translate(-4,-4)scale(0.15,0.15)" d="M1778.9,3200A120.9263,120.9263 0 0,1 1657.97,3320.93A120.9263,120.9263 0 0,1 1537.04,3200A221.5096,221.5096 0 0,0 1456.32,3371.02A221.5096,221.5096 0 0,0 1677.83,3592.53A221.5096,221.5096 0 0,0 1818.61,3542.03A362.779,362.779 0 0,0 2000,3856.21A362.779,362.779 0 0,0 2181.39,3542.03A221.5096,221.5096 0 0,0 2322.17,3592.53A221.5096,221.5096 0 0,0 2543.68,3371.02A221.5096,221.5096 0 0,0 2462.96,3200A120.9263,120.9263 0 0,1 2342.03,3320.93A120.9263,120.9263 0 0,1 2221.1,3200V2221.1H3200A120.9263,120.9263 0 0,1 3320.93,2342.03A120.9263,120.9263 0 0,1 3200,2462.96A221.5096,221.5096 0 0,0 3371.02,2543.68A221.5096,221.5096 0 0,0 3592.53,2322.17A221.5096,221.5096 0 0,0 3542.03,2181.39A362.779,362.779 0 0,0 3856.21,2000A362.779,362.779 0 0,0 3542.03,1818.61A221.5096,221.5096 0 0,0 3592.53,1677.83A221.5096,221.5096 0 0,0 3371.02,1456.32A221.5096,221.5096 0 0,0 3200,1537.04A120.9263,120.9263 0 0,1 3320.93,1657.97A120.9263,120.9263 0 0,1 3200,1778.9H2221.1V800A120.9263,120.9263 0 0,1 2342.03,679.073A120.9263,120.9263 0 0,1 2462.96,800A221.5096,221.5096 0 0,0 2543.68,628.984A221.5096,221.5096 0 0,0 2322.17,407.475A221.5096,221.5096 0 0,0 2181.39,457.969A362.779,362.779 0 0,0 2000,143.793A362.779,362.779 0 0,0 1818.61,457.969A221.5096,221.5096 0 0,0 1677.83,407.475A221.5096,221.5096 0 0,0 1456.32,628.984A221.5096,221.5096 0 0,0 1537.04,800A120.9263,120.9263 0 0,1 1657.97,679.073A120.9263,120.9263 0 0,1 1778.9,800V1778.9H800A120.9263,120.9263 0 0,1 679.073,1657.97A120.9263,120.9263 0 0,1 800,1537.04A221.5096,221.5096 0 0,0 628.984,1456.32A221.5096,221.5096 0 0,0 407.475,1677.83A221.5096,221.5096 0 0,0 457.969,1818.61A362.779,362.779 0 0,0 143.793,2000A362.779,362.779 0 0,0 457.969,2181.39A221.5096,221.5096 0 0,0 407.475,2322.17A221.5096,221.5096 0 0,0 628.984,2543.68A221.5096,221.5096 0 0,0 800,2462.96A120.9263,120.9263 0 0,1 679.073,2342.03A120.9263,120.9263 0 0,1 800,2221.1H1778.9Z"/>
+        </svg>
+      </span>
+    </div>
+    <!-- arch 3 fleur -->
+    <div class="farch">
+      <svg class="outline" viewBox="0 0 110 80" preserveAspectRatio="none"><path d="M8,78 L8,36 Q8,6 55,6 Q102,6 102,36 L102,78"/></svg>
+      <span class="ornament fleur">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <path d="M50 8 C 46 22, 38 30, 30 32 C 38 36, 44 44, 44 56 L 36 56 C 36 50, 32 46, 26 46 C 20 46, 16 52, 18 60 C 22 56, 28 56, 30 62 L 22 62 L 22 70 L 78 70 L 78 62 L 70 62 C 72 56, 78 56, 82 60 C 84 52, 80 46, 74 46 C 68 46, 64 50, 64 56 L 56 56 C 56 44, 62 36, 70 32 C 62 30, 54 22, 50 8 Z M 38 62 L 62 62 L 62 66 L 38 66 Z"/>
+        </svg>
+      </span>
+    </div>
+    <!-- arch 4 cross-flory -->
+    <div class="farch">
+      <svg class="outline" viewBox="0 0 110 80" preserveAspectRatio="none"><path d="M8,78 L8,36 Q8,6 55,6 Q102,6 102,36 L102,78"/></svg>
+      <span class="ornament">
+        <svg viewBox="0 0 592 592" xmlns="http://www.w3.org/2000/svg">
+          <path transform="translate(-4,-4)scale(0.15,0.15)" d="M1778.9,3200A120.9263,120.9263 0 0,1 1657.97,3320.93A120.9263,120.9263 0 0,1 1537.04,3200A221.5096,221.5096 0 0,0 1456.32,3371.02A221.5096,221.5096 0 0,0 1677.83,3592.53A221.5096,221.5096 0 0,0 1818.61,3542.03A362.779,362.779 0 0,0 2000,3856.21A362.779,362.779 0 0,0 2181.39,3542.03A221.5096,221.5096 0 0,0 2322.17,3592.53A221.5096,221.5096 0 0,0 2543.68,3371.02A221.5096,221.5096 0 0,0 2462.96,3200A120.9263,120.9263 0 0,1 2342.03,3320.93A120.9263,120.9263 0 0,1 2221.1,3200V2221.1H3200A120.9263,120.9263 0 0,1 3320.93,2342.03A120.9263,120.9263 0 0,1 3200,2462.96A221.5096,221.5096 0 0,0 3371.02,2543.68A221.5096,221.5096 0 0,0 3592.53,2322.17A221.5096,221.5096 0 0,0 3542.03,2181.39A362.779,362.779 0 0,0 3856.21,2000A362.779,362.779 0 0,0 3542.03,1818.61A221.5096,221.5096 0 0,0 3592.53,1677.83A221.5096,221.5096 0 0,0 3371.02,1456.32A221.5096,221.5096 0 0,0 3200,1537.04A120.9263,120.9263 0 0,1 3320.93,1657.97A120.9263,120.9263 0 0,1 3200,1778.9H2221.1V800A120.9263,120.9263 0 0,1 2342.03,679.073A120.9263,120.9263 0 0,1 2462.96,800A221.5096,221.5096 0 0,0 2543.68,628.984A221.5096,221.5096 0 0,0 2322.17,407.475A221.5096,221.5096 0 0,0 2181.39,457.969A362.779,362.779 0 0,0 2000,143.793A362.779,362.779 0 0,0 1818.61,457.969A221.5096,221.5096 0 0,0 1677.83,407.475A221.5096,221.5096 0 0,0 1456.32,628.984A221.5096,221.5096 0 0,0 1537.04,800A120.9263,120.9263 0 0,1 1657.97,679.073A120.9263,120.9263 0 0,1 1778.9,800V1778.9H800A120.9263,120.9263 0 0,1 679.073,1657.97A120.9263,120.9263 0 0,1 800,1537.04A221.5096,221.5096 0 0,0 628.984,1456.32A221.5096,221.5096 0 0,0 407.475,1677.83A221.5096,221.5096 0 0,0 457.969,1818.61A362.779,362.779 0 0,0 143.793,2000A362.779,362.779 0 0,0 457.969,2181.39A221.5096,221.5096 0 0,0 407.475,2322.17A221.5096,221.5096 0 0,0 628.984,2543.68A221.5096,221.5096 0 0,0 800,2462.96A120.9263,120.9263 0 0,1 679.073,2342.03A120.9263,120.9263 0 0,1 800,2221.1H1778.9Z"/>
+        </svg>
+      </span>
+    </div>
+    <!-- arch 5 fleur -->
+    <div class="farch">
+      <svg class="outline" viewBox="0 0 110 80" preserveAspectRatio="none"><path d="M8,78 L8,36 Q8,6 55,6 Q102,6 102,36 L102,78"/></svg>
+      <span class="ornament fleur">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <path d="M50 8 C 46 22, 38 30, 30 32 C 38 36, 44 44, 44 56 L 36 56 C 36 50, 32 46, 26 46 C 20 46, 16 52, 18 60 C 22 56, 28 56, 30 62 L 22 62 L 22 70 L 78 70 L 78 62 L 70 62 C 72 56, 78 56, 82 60 C 84 52, 80 46, 74 46 C 68 46, 64 50, 64 56 L 56 56 C 56 44, 62 36, 70 32 C 62 30, 54 22, 50 8 Z M 38 62 L 62 62 L 62 66 L 38 66 Z"/>
+        </svg>
+      </span>
+    </div>
+    <!-- arch 6 cross-flory -->
+    <div class="farch">
+      <svg class="outline" viewBox="0 0 110 80" preserveAspectRatio="none"><path d="M8,78 L8,36 Q8,6 55,6 Q102,6 102,36 L102,78"/></svg>
+      <span class="ornament">
+        <svg viewBox="0 0 592 592" xmlns="http://www.w3.org/2000/svg">
+          <path transform="translate(-4,-4)scale(0.15,0.15)" d="M1778.9,3200A120.9263,120.9263 0 0,1 1657.97,3320.93A120.9263,120.9263 0 0,1 1537.04,3200A221.5096,221.5096 0 0,0 1456.32,3371.02A221.5096,221.5096 0 0,0 1677.83,3592.53A221.5096,221.5096 0 0,0 1818.61,3542.03A362.779,362.779 0 0,0 2000,3856.21A362.779,362.779 0 0,0 2181.39,3542.03A221.5096,221.5096 0 0,0 2322.17,3592.53A221.5096,221.5096 0 0,0 2543.68,3371.02A221.5096,221.5096 0 0,0 2462.96,3200A120.9263,120.9263 0 0,1 2342.03,3320.93A120.9263,120.9263 0 0,1 2221.1,3200V2221.1H3200A120.9263,120.9263 0 0,1 3320.93,2342.03A120.9263,120.9263 0 0,1 3200,2462.96A221.5096,221.5096 0 0,0 3371.02,2543.68A221.5096,221.5096 0 0,0 3592.53,2322.17A221.5096,221.5096 0 0,0 3542.03,2181.39A362.779,362.779 0 0,0 3856.21,2000A362.779,362.779 0 0,0 3542.03,1818.61A221.5096,221.5096 0 0,0 3592.53,1677.83A221.5096,221.5096 0 0,0 3371.02,1456.32A221.5096,221.5096 0 0,0 3200,1537.04A120.9263,120.9263 0 0,1 3320.93,1657.97A120.9263,120.9263 0 0,1 3200,1778.9H2221.1V800A120.9263,120.9263 0 0,1 2342.03,679.073A120.9263,120.9263 0 0,1 2462.96,800A221.5096,221.5096 0 0,0 2543.68,628.984A221.5096,221.5096 0 0,0 2322.17,407.475A221.5096,221.5096 0 0,0 2181.39,457.969A362.779,362.779 0 0,0 2000,143.793A362.779,362.779 0 0,0 1818.61,457.969A221.5096,221.5096 0 0,0 1677.83,407.475A221.5096,221.5096 0 0,0 1456.32,628.984A221.5096,221.5096 0 0,0 1537.04,800A120.9263,120.9263 0 0,1 1657.97,679.073A120.9263,120.9263 0 0,1 1778.9,800V1778.9H800A120.9263,120.9263 0 0,1 679.073,1657.97A120.9263,120.9263 0 0,1 800,1537.04A221.5096,221.5096 0 0,0 628.984,1456.32A221.5096,221.5096 0 0,0 407.475,1677.83A221.5096,221.5096 0 0,0 457.969,1818.61A362.779,362.779 0 0,0 143.793,2000A362.779,362.779 0 0,0 457.969,2181.39A221.5096,221.5096 0 0,0 407.475,2322.17A221.5096,221.5096 0 0,0 628.984,2543.68A221.5096,221.5096 0 0,0 800,2462.96A120.9263,120.9263 0 0,1 679.073,2342.03A120.9263,120.9263 0 0,1 800,2221.1H1778.9Z"/>
+        </svg>
+      </span>
+    </div>
+    <!-- arch 7 fleur -->
+    <div class="farch">
+      <svg class="outline" viewBox="0 0 110 80" preserveAspectRatio="none"><path d="M8,78 L8,36 Q8,6 55,6 Q102,6 102,36 L102,78"/></svg>
+      <span class="ornament fleur">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <path d="M50 8 C 46 22, 38 30, 30 32 C 38 36, 44 44, 44 56 L 36 56 C 36 50, 32 46, 26 46 C 20 46, 16 52, 18 60 C 22 56, 28 56, 30 62 L 22 62 L 22 70 L 78 70 L 78 62 L 70 62 C 72 56, 78 56, 82 60 C 84 52, 80 46, 74 46 C 68 46, 64 50, 64 56 L 56 56 C 56 44, 62 36, 70 32 C 62 30, 54 22, 50 8 Z M 38 62 L 62 62 L 62 66 L 38 66 Z"/>
+        </svg>
+      </span>
+    </div>
+  </div>
+
+  <div class="footer-meta">
+    <p class="name">Atelier of Gautier de Soissons</p>
+    <p class="addr">Rue des Cordeliers, in the parish of Saint-Pierre-le-Vieux, Soissons</p>
+    <p class="year">Founded in the year of Our Lord &middot; MCCLXXVIII</p>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Current Exhibition: The Inner Dome — Dār al-Naqsh</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  /* ---------- Reset-ish locals ---------- */
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), "EB Garamond", Georgia, serif;
+    font-size: 17px;
+    line-height: 1.65;
+  }
+  a { color: var(--primary); text-decoration: none; }
+
+  /* ---------- Header strip ---------- */
+  .topstrip {
+    background: var(--primary);
+    color: var(--bg);
+    text-align: center;
+    padding: 8px 0 6px;
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+  }
+  .topstrip span { opacity: 0.85; }
+
+  /* ---------- Nav ---------- */
+  .navwrap {
+    background: var(--bg);
+    border-top: 1px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
+  }
+  .navinner {
+    border-top: 1px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
+    margin: 3px 0;
+    padding: 14px 0;
+    text-align: center;
+  }
+  nav.primary {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    font-size: 14px;
+  }
+  nav.primary a {
+    color: var(--primary);
+    padding: 0 4px;
+    text-transform: lowercase;
+  }
+  nav.primary a[aria-current="page"] {
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 2px;
+    color: var(--text-emphasis);
+  }
+  nav.primary .sep {
+    color: var(--accent);
+    margin: 0 14px;
+    font-size: 12px;
+  }
+
+  /* ---------- Page frame ---------- */
+  main {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 80px;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    text-align: center;
+    padding: 60px 0 30px;
+  }
+  .hero .kicker {
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 18px;
+  }
+  .hero h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 54px;
+    line-height: 1.15;
+    margin: 0 0 12px;
+    color: var(--primary);
+    letter-spacing: 0.02em;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--text-emphasis);
+  }
+  .hero .subtitle {
+    font-family: var(--font-display), serif;
+    font-size: 18px;
+    letter-spacing: 0.12em;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .hero .dates {
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-top: 22px;
+  }
+
+  /* ---------- Arch frame containing hero seal ---------- */
+  .arch-stage {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    margin: 30px auto 0;
+  }
+  .arch-stage .ogee {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .arch-stage .ogee path,
+  .arch-stage .ogee g {
+    stroke: var(--primary) !important;
+  }
+  .arch-stage .seal {
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -42%);
+  }
+  .arch-stage .arch-caption {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--primary);
+    text-align: center;
+    width: 80%;
+  }
+
+  /* ---------- Divider ---------- */
+  .divider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 50px 0 30px;
+  }
+  .divider svg {
+    width: 360px;
+    height: auto;
+  }
+  .divider svg path { fill: var(--accent); }
+
+  /* ---------- Wall text section ---------- */
+  .walltext {
+    max-width: 760px;
+    margin: 0 auto;
+    text-align: justify;
+    hyphens: auto;
+  }
+  .walltext h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    text-align: center;
+    font-size: 28px;
+    color: var(--primary);
+    letter-spacing: 0.06em;
+    margin: 0 0 8px;
+  }
+  .walltext .label {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 28px;
+  }
+  .walltext p {
+    margin: 0 0 18px;
+  }
+  .walltext p:first-of-type::first-letter {
+    font-family: var(--font-display), serif;
+    font-size: 56px;
+    float: left;
+    line-height: 0.9;
+    padding: 6px 10px 0 0;
+    color: var(--text-emphasis);
+  }
+  .walltext em.attrib { color: var(--text-emphasis); font-style: italic; }
+
+  /* ---------- Object list ---------- */
+  .objects {
+    margin-top: 40px;
+  }
+  .objects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px 26px;
+    margin-top: 30px;
+  }
+  .obj-card {
+    position: relative;
+    background: var(--bg);
+    border: 1.5px solid var(--primary);
+    padding: 28px 22px 24px;
+    text-align: center;
+    transition: border-color 0.2s;
+  }
+  .obj-card::before,
+  .obj-card::after {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border: 1px solid var(--accent);
+  }
+  .obj-card::before { top: 4px; left: 4px; border-right: none; border-bottom: none; }
+  .obj-card::after { bottom: 4px; right: 4px; border-left: none; border-top: none; }
+  .obj-card:hover { border-color: var(--text-emphasis); }
+  .obj-card .num {
+    font-family: var(--font-display), serif;
+    color: var(--accent);
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    margin-bottom: 10px;
+  }
+  .obj-card h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 14px;
+    color: var(--primary);
+    margin: 0 0 8px;
+    line-height: 1.3;
+  }
+  .obj-card .meta {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.5;
+  }
+  .obj-card .lender {
+    font-style: italic;
+    color: var(--text-emphasis);
+    font-size: 12px;
+    margin-top: 10px;
+    display: block;
+  }
+
+  /* ---------- Pigment / two-column ---------- */
+  .twocol {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    margin-top: 30px;
+    text-align: justify;
+  }
+  .twocol h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 24px;
+    color: var(--primary);
+    margin: 0 0 6px;
+    text-align: left;
+  }
+  .twocol .label {
+    font-family: var(--font-display), serif;
+    font-size: 10px;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 18px;
+    display: block;
+  }
+  .pigment-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 18px 0 10px;
+    font-size: 14px;
+  }
+  .pigment-table th, .pigment-table td {
+    text-align: left;
+    padding: 8px 6px;
+    border-bottom: 1px dotted var(--surface);
+  }
+  .pigment-table th {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--primary);
+    border-bottom: 1px solid var(--primary);
+  }
+  .pigment-table td.swatch {
+    width: 20px;
+  }
+  .pigment-table td.swatch span {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 1px solid var(--text);
+    vertical-align: middle;
+  }
+
+  /* ---------- Curator note ---------- */
+  .curator {
+    margin-top: 60px;
+    background: var(--bg);
+    border: 1px solid var(--primary);
+    position: relative;
+    padding: 50px 70px 46px;
+  }
+  .curator::before, .curator::after {
+    content: "";
+    position: absolute;
+    border: 1px solid var(--accent);
+  }
+  .curator::before {
+    top: 8px; left: 8px; right: 8px; bottom: 8px;
+    pointer-events: none;
+  }
+  .curator h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    text-align: center;
+    font-size: 26px;
+    color: var(--primary);
+    margin: 0 0 6px;
+  }
+  .curator .label {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 24px;
+  }
+  .curator p {
+    text-align: justify;
+    margin: 0 0 16px;
+  }
+  .curator .signature {
+    text-align: right;
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    margin-top: 24px;
+    color: var(--text-emphasis);
+  }
+  .curator .signature small {
+    display: block;
+    font-style: normal;
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-top: 4px;
+  }
+
+  /* ---------- Visit panel ---------- */
+  .visit-panel {
+    margin: 60px auto 30px;
+    text-align: center;
+    padding: 30px 0;
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+  }
+  .visit-panel h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 20px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    color: var(--primary);
+  }
+  .visit-panel .row {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    font-size: 14px;
+  }
+  .visit-panel .row > div b {
+    display: block;
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    color: var(--text-emphasis);
+    letter-spacing: 0.12em;
+    margin-bottom: 4px;
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    margin-top: 80px;
+    background: var(--primary);
+    color: var(--bg);
+    position: relative;
+    overflow: hidden;
+    padding: 60px 80px 30px;
+  }
+  footer .pattern-bg {
+    position: absolute;
+    inset: 0;
+    opacity: 0.07;
+    pointer-events: none;
+  }
+  footer .pattern-bg svg {
+    width: 100%;
+    height: 100%;
+  }
+  footer .fcols {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+    text-align: center;
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+  footer h4 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 13px;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 14px;
+  }
+  footer p { margin: 4px 0; font-size: 14px; line-height: 1.55; }
+  footer .star {
+    width: 90px; height: 90px; margin: 0 auto 12px;
+  }
+  footer .star svg { width: 100%; height: 100%; }
+  footer .tailpiece {
+    position: relative;
+    text-align: center;
+    margin-top: 50px;
+    padding-top: 24px;
+  }
+  footer .tailpiece::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 220px;
+    height: 1px;
+    background: var(--accent);
+  }
+  footer .tailpiece .gloss {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    font-size: 13px;
+    margin-bottom: 8px;
+  }
+  footer .copyr {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.24em;
+    font-size: 11px;
+    color: var(--bg);
+    opacity: 0.85;
+  }
+
+  /* small inline palmette */
+  .palmette {
+    display: inline-block;
+    vertical-align: middle;
+    width: 10px;
+    height: 10px;
+    background: var(--accent);
+    transform: rotate(45deg);
+    margin: 0 2px;
+  }
+</style>
+</head>
+<body>
+
+<div class="topstrip">
+  <span>Dār al-Naqsh</span> &nbsp;·&nbsp; Museum of Safavid Ornament &nbsp;·&nbsp; <span>Isfahan Reference Collection</span>
+</div>
+
+<div class="navwrap">
+  <div class="navinner">
+    <nav class="primary" aria-label="Primary">
+      <a href="page-1.html">Entrance</a>
+      <span class="sep">❖</span>
+      <a href="page-2.html">Permanent Collection</a>
+      <span class="sep">❖</span>
+      <a href="page-3.html" aria-current="page">Current Exhibition</a>
+      <span class="sep">❖</span>
+      <a href="page-4.html">The Kitābkhāna</a>
+      <span class="sep">❖</span>
+      <a href="page-5.html">Visit</a>
+      <span class="sep">❖</span>
+      <a href="page-6.html">About</a>
+    </nav>
+  </div>
+</div>
+
+<main>
+
+  <section class="hero">
+    <div class="kicker">Gallery III · Spring–Autumn 1402 SH</div>
+    <h1>The Inner Dome</h1>
+    <div class="subtitle">Light, Pattern, and the <em>Sheikh Lotfollah</em> Tradition</div>
+    <div class="dates">14 March — 22 September</div>
+
+    <div class="arch-stage" aria-hidden="true">
+      <svg class="ogee" viewBox="147 244 500 550" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(8.199085,-11.874106)" fill="none" stroke-width="3.125" stroke-linecap="round">
+          <g>
+            <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+            <path d="m 250,430.58 24.75248,58.41585"/>
+            <path d="m 347.0297,342.46119 41.58416,23.76238 0.9901,35.64356"/>
+            <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+          </g>
+          <g transform="matrix(-1,0,0,1,777.88071,-0.2972181)">
+            <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+            <path d="m 250,430.58 24.75248,58.41585"/>
+            <path d="m 347.0297,342.46119 41.58416,23.76238 0.9901,35.64356"/>
+            <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+          </g>
+        </g>
+      </svg>
+      <div class="seal">
+        <!-- Centerpiece star seal -->
+        <svg viewBox="0 0 1500 1500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+          <g fill="#1e3a5f" stroke="#0f1f3d" stroke-width="6" stroke-linejoin="round">
+            <polygon points="750,90 870,420 1200,300 1080,630 1410,750 1080,870 1200,1200 870,1080 750,1410 630,1080 300,1200 420,870 90,750 420,630 300,300 630,420"/>
+          </g>
+          <g fill="#c9a23a" stroke="#0f1f3d" stroke-width="4">
+            <polygon points="750,300 825,540 1065,540 870,690 945,930 750,780 555,930 630,690 435,540 675,540"/>
+          </g>
+          <circle cx="750" cy="750" r="80" fill="#7a1f2e" stroke="#0f1f3d" stroke-width="4"/>
+        </svg>
+      </div>
+      <div class="arch-caption">After the apex of the Sheikh Lotfollah dome ✦ Isfahan, 1028 AH / 1619 CE</div>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true">
+    <svg viewBox="0 0 437.999 18.893" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,9.445c0,0,37.005-0.063,73.998-0.829c18.495-0.386,36.989-0.949,50.831-1.785c6.919-0.414,12.677-0.906,16.663-1.46c1.99-0.28,3.539-0.582,4.535-0.878c0.502-0.146,0.844-0.297,1.049-0.405c0.157-0.107,0.238-0.162,0.238-0.162l0.42-0.287l0.656,0.656l-0.369,0.338c0,0-0.154,0.142-0.456,0.324c-0.291,0.154-0.714,0.331-1.256,0.484c-1.085,0.314-2.667,0.608-4.686,0.879c-4.037,0.533-9.811,0.985-16.745,1.354c-13.868,0.744-32.369,1.183-50.87,1.443C37.003,9.632,0,9.445,0,9.445z"/>
+      <circle cx="219" cy="9.4" r="6" fill="none" stroke="currentColor" stroke-width="1.2"/>
+      <circle cx="219" cy="9.4" r="2.5"/>
+      <path d="M437.999,9.445c0,0-37.004,0.187-74.007-0.329c-18.501-0.261-37.002-0.699-50.869-1.443c-6.935-0.368-12.708-0.82-16.745-1.354c-2.019-0.271-3.601-0.565-4.687-0.879c-0.541-0.153-0.965-0.33-1.256-0.484c-0.302-0.183-0.456-0.324-0.456-0.324l-0.369-0.338l0.656-0.656l0.42,0.287c0,0,0.081,0.055,0.238,0.162c0.204,0.108,0.546,0.26,1.048,0.405c0.996,0.296,2.545,0.598,4.535,0.878c3.986,0.554,9.744,1.046,16.663,1.46C327.011,7.667,345.506,8.23,364,8.616C400.994,9.382,437.999,9.445,437.999,9.445z"/>
+    </svg>
+  </div>
+
+  <section class="walltext">
+    <h2>Wall Text · Gallery III</h2>
+    <div class="label">Introduction to the Exhibition</div>
+    <p>Completed in the year 1028 AH (1619 CE) under the master builder <em class="attrib">Muḥammad Riḍā ibn Ustād Ḥusayn Bannā Iṣfahānī</em>, the inner dome of the Sheikh Lotfollah mosque on the eastern flank of the Maydān-e Naqsh-e Jahān remains one of the most concentrated demonstrations of geometry and devotional intent in the Safavid corpus. Its surface is governed by a single radiating arabesque — a network of cream lozenges set against an indigo ground, contracting toward the apex where a sunburst of gold tessellation receives the light admitted from the perforated drum. From below, the dome appears to inhale.</p>
+    <p>This exhibition traces how that single ceiling reorganised the visual logic of interior programs across the seventeenth century. Designers working for Shāh ʿAbbās I, and later for Shāh Ṣafī and Shāh ʿAbbās II, returned again and again to its proposition: that pattern is not applied to architecture but is the means by which architecture admits light. The lozenge net of Sheikh Lotfollah migrates, in the decades after 1619, into the soffits of the Chehel Sotūn pavilion, into the spandrels of the Madrasa-yi Mādar-i Shāh, and onto the lacquered binding-boards that the royal kitābkhāna sent abroad as diplomatic gifts.</p>
+    <p>Twelve loaned tiles, drawn principally from the Sheikh Lotfollah conservation reserves and from three private waqf collections in Isfahan and Kashan, anchor the gallery. A short technical section presents new pigment analysis carried out jointly by Dār al-Naqsh and the Iran National Heritage Laboratories: it confirms — for the first time on this scale — that the cobalt blue of the dome's interior was sourced almost entirely from the village of Qamsar, south of Kashan, rather than imported via Hormuz as long supposed.</p>
+  </section>
+
+  <div class="divider" aria-hidden="true">
+    <svg viewBox="0 0 437.999 18.893" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,9.445c0,0,37.005-0.063,73.998-0.829c18.495-0.386,36.989-0.949,50.831-1.785c6.919-0.414,12.677-0.906,16.663-1.46c1.99-0.28,3.539-0.582,4.535-0.878c0.502-0.146,0.844-0.297,1.049-0.405c0.157-0.107,0.238-0.162,0.238-0.162l0.42-0.287l0.656,0.656l-0.369,0.338c0,0-0.154,0.142-0.456,0.324c-0.291,0.154-0.714,0.331-1.256,0.484c-1.085,0.314-2.667,0.608-4.686,0.879c-4.037,0.533-9.811,0.985-16.745,1.354c-13.868,0.744-32.369,1.183-50.87,1.443C37.003,9.632,0,9.445,0,9.445z"/>
+      <circle cx="219" cy="9.4" r="6" fill="none" stroke="currentColor" stroke-width="1.2"/>
+      <circle cx="219" cy="9.4" r="2.5"/>
+      <path d="M437.999,9.445c0,0-37.004,0.187-74.007-0.329c-18.501-0.261-37.002-0.699-50.869-1.443c-6.935-0.368-12.708-0.82-16.745-1.354c-2.019-0.271-3.601-0.565-4.687-0.879c-0.541-0.153-0.965-0.33-1.256-0.484c-0.302-0.183-0.456-0.324-0.456-0.324l-0.369-0.338l0.656-0.656l0.42,0.287c0,0,0.081,0.055,0.238,0.162c0.204,0.108,0.546,0.26,1.048,0.405c0.996,0.296,2.545,0.598,4.535,0.878c3.986,0.554,9.744,1.046,16.663,1.46C327.011,7.667,345.506,8.23,364,8.616C400.994,9.382,437.999,9.445,437.999,9.445z"/>
+    </svg>
+  </div>
+
+  <section class="objects">
+    <h2 style="font-family:var(--font-display),serif;font-weight:400;text-align:center;font-size:28px;color:var(--primary);letter-spacing:0.06em;margin:0 0 8px;">Object List</h2>
+    <div class="label" style="text-align:center;font-family:var(--font-display),serif;font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:var(--secondary);margin-bottom:18px;">Twelve Loaned Tiles · Catalogue Nos. III.1 – III.12</div>
+
+    <div class="objects-grid">
+
+      <article class="obj-card">
+        <div class="num">— I —</div>
+        <h3>Cuerda Seca Lozenge, Apex Field</h3>
+        <div class="meta">Glazed stonepaste, 1619 CE<br>32.4 × 18.6 cm</div>
+        <span class="lender">Sheikh Lotfollah Conservation Reserve, inv. SL.1.04</span>
+      </article>
+
+      <article class="obj-card">
+        <div class="num">— II —</div>
+        <h3>Cobalt Arabesque Spandrel</h3>
+        <div class="meta">Underglaze painted, c. 1620<br>41.0 × 41.0 cm</div>
+        <span class="lender">Sheikh Lotfollah Conservation Reserve, inv. SL.2.17</span>
+      </article>
+
+      <article class="obj-card">
+        <div class="num">— III —</div>
+        <h3>Drum Inscription Fragment</h3>
+        <div class="meta">Thuluth in white over lapis, 1619<br>27.1 × 84.5 cm</div>
+        <span class="lender">Mūza-yi Chehel Sotūn, Isfahan, inv. CS.A.221</span>
+      </article>
+
+      <article class="obj-card">
+        <div class="num">— IV —</div>
+        <h3>Turquoise Star Tile</h3>
+        <div class="meta">Mosaic faience (muʿarraq), c. 1619<br>23.0 × 23.0 cm</div>
+        <span class="lender">Waqf Mīr Findiriskī, Isfahan</span>
+      </article>
+
+      <article class="obj-card">
+        <div class="num">— V —</div>
+        <h3>Octagonal Girih Module</h3>
+        <div class="meta">Stonepaste with gilt highlights<br>19.5 × 19.5 cm</div>
+        <span class="lender">Waqf Khwāja Naṣīr, Kashan</span>
+      </article>
+
+      <article class="obj-card">
+        <div class="num">— VI —</div>
+        <h3>Ogee Border, South Iwan</h3>
+        <div class="meta">Cuerda seca on stonepaste, 1620<br>62.0 × 14.2 cm</div>
+        <span class="lender">Sheikh Lotfollah Conservation Reserve, inv. SL.4.09</span>
+      </article>
+
+      <article class="obj-card">
+        <div class="num">— VII —</div>
+        <h3>Palmette Soffit Tile</h3>
+        <div class="meta">Polychrome glaze, c. 1622<br>34.7 × 22.3 cm</div>
+        <span class="lender">Mūza-yi Hasht Behesht, Isfahan</span>
+      </article>
+
+      <article class="obj-card">
+        <div class="num">— VIII —</div>
+        <h3>Sunburst Apex Fragment</h3>
+        <div class="meta">Gilt over cobalt, 1619<br>diam. 36.0 cm</div>
+        <span class="lender">Sheikh Lotfollah Conservation Reserve, inv. SL.0.01</span>
+      </article>
+
+      <article class="obj-card">
+        <div class="num">— IX —</div>
+        <h3>Mihrab Niche Tile</h3>
+        <div class="meta">Lustreware revival, c. 1635<br>29.8 × 19.0 cm</div>
+        <span class="lender">Private collection, Isfahan</span>
+      </article>
+
+      <article class="obj-card">
+        <div class="num">— X —</div>
+        <h3>Frieze with Khaṭāʾī Vine</h3>
+        <div class="meta">Underglaze, c. 1640<br>78.0 × 15.0 cm</div>
+        <span class="lender">Madrasa-yi Mādar-i Shāh, study loan</span>
+      </article>
+
+      <article class="obj-card">
+        <div class="num">— XI —</div>
+        <h3>Tile, Lozenge Net Iteration</h3>
+        <div class="meta">Stonepaste, Kashan workshop, 1645<br>28.5 × 28.5 cm</div>
+        <span class="lender">Waqf Khwāja Naṣīr, Kashan</span>
+      </article>
+
+      <article class="obj-card">
+        <div class="num">— XII —</div>
+        <h3>Drum Window Surround</h3>
+        <div class="meta">Pierced and glazed stonepaste<br>52.4 × 38.0 cm</div>
+        <span class="lender">Sheikh Lotfollah Conservation Reserve, inv. SL.6.03</span>
+      </article>
+
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true">
+    <svg viewBox="0 0 437.999 18.893" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,9.445c0,0,37.005-0.063,73.998-0.829c18.495-0.386,36.989-0.949,50.831-1.785c6.919-0.414,12.677-0.906,16.663-1.46c1.99-0.28,3.539-0.582,4.535-0.878c0.502-0.146,0.844-0.297,1.049-0.405c0.157-0.107,0.238-0.162,0.238-0.162l0.42-0.287l0.656,0.656l-0.369,0.338c0,0-0.154,0.142-0.456,0.324c-0.291,0.154-0.714,0.331-1.256,0.484c-1.085,0.314-2.667,0.608-4.686,0.879c-4.037,0.533-9.811,0.985-16.745,1.354c-13.868,0.744-32.369,1.183-50.87,1.443C37.003,9.632,0,9.445,0,9.445z"/>
+      <circle cx="219" cy="9.4" r="6" fill="none" stroke="currentColor" stroke-width="1.2"/>
+      <circle cx="219" cy="9.4" r="2.5"/>
+      <path d="M437.999,9.445c0,0-37.004,0.187-74.007-0.329c-18.501-0.261-37.002-0.699-50.869-1.443c-6.935-0.368-12.708-0.82-16.745-1.354c-2.019-0.271-3.601-0.565-4.687-0.879c-0.541-0.153-0.965-0.33-1.256-0.484c-0.302-0.183-0.456-0.324-0.456-0.324l-0.369-0.338l0.656-0.656l0.42,0.287c0,0,0.081,0.055,0.238,0.162c0.204,0.108,0.546,0.26,1.048,0.405c0.996,0.296,2.545,0.598,4.535,0.878c3.986,0.554,9.744,1.046,16.663,1.46C327.011,7.667,345.506,8.23,364,8.616C400.994,9.382,437.999,9.445,437.999,9.445z"/>
+    </svg>
+  </div>
+
+  <section class="twocol">
+    <div>
+      <h2>Pigment Analysis</h2>
+      <span class="label">The Cobalt of Qamsar</span>
+      <p>Spectroscopic study of nine apex fragments (catalogue Nos. III.1, III.2, III.6, III.8, and five non-displayed sherds) was completed in winter 1401 SH at the Iran National Heritage Laboratories under the supervision of Dr. Farhād Behnām. Trace-element ratios — particularly the As/Co and Ni/Co ratios — closely match ore samples from the cobalt-bearing zone above the village of <em class="attrib">Qamsar</em>, in the highlands south of Kashan.</p>
+      <p>Earlier scholarship had assumed Safavid cobalt was largely imported via Hormuz from Saxon or Yunnanese sources. The Qamsar attribution forces a revision: by 1619, royal workshops were drawing pigment from a domestic mountain source no more than five days' caravan journey from Isfahan, fired in conjunction with locally calcined tin-lead opacifier.</p>
+      <table class="pigment-table">
+        <thead>
+          <tr><th></th><th>Pigment</th><th>Source</th><th>Use</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="swatch"><span style="background:#1e3a5f"></span></td><td>Cobalt Blue</td><td>Qamsar, Kashan</td><td>Ground field</td></tr>
+          <tr><td class="swatch"><span style="background:#2a8a8a"></span></td><td>Copper Turquoise</td><td>Anārak</td><td>Spandrel filets</td></tr>
+          <tr><td class="swatch"><span style="background:#c9a23a"></span></td><td>Lead-Tin Gold</td><td>Local calcination</td><td>Apex highlights</td></tr>
+          <tr><td class="swatch"><span style="background:#7a1f2e"></span></td><td>Iron Oxblood</td><td>Yazd region</td><td>Calligraphic accents</td></tr>
+          <tr><td class="swatch"><span style="background:#f2e5cc;border-color:#888"></span></td><td>Tin-Opacified White</td><td>Workshop ground</td><td>Lozenge interiors</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div>
+      <h2>Method &amp; Display</h2>
+      <span class="label">A Note on the Hang</span>
+      <p>The twelve loaned tiles are mounted along a single curving wall whose radius approximates the inner profile of the Sheikh Lotfollah dome at one-quarter scale. Visitors enter beneath a low pendentive of plain cream plaster and pass into the gallery as the radius opens above them; tile labels are recessed into the dado so as not to interrupt the field of pattern when seen from the central axis.</p>
+      <p>Lighting is held at <em class="attrib">75 lux</em> on the painted surfaces and warmed slightly toward 2700 K to approximate the late-afternoon condition under which the dome's drum windows admit their fullest illumination. The ambient sound, recorded on site at the morning prayer of 19 Khordād 1401, plays at a level that does not overrun conversation.</p>
+      <p>Conservation note: tile III.8, the apex fragment, is shown horizontally rather than mounted vertically, in conformity with the loan agreement reached with the Sheikh Lotfollah trust. A pointed-arch viewing aperture frames the visitor's first encounter with the object, recapitulating in miniature the geometry of its original setting.</p>
+    </div>
+  </section>
+
+  <section class="curator">
+    <h2>Curator's Note</h2>
+    <div class="label">By Dr. Shirin Mahdavi · Senior Curator of Architectural Ornament</div>
+    <p>I have wanted to make this exhibition for fifteen years. The inner dome of Sheikh Lotfollah is, for those of us who grew up walking the Maydān, less a building than a measure — the standard against which one privately judges every later interior, every claim of "Safavid revival," every architect's fond return to lozenge and palmette. To bring twelve of its tiles into a gallery is therefore an act of some delicacy. They were made to be seen at a distance of twenty-eight metres, from below, in the rotational drift of the eye that geometry rewards. Held instead at arm's length, in steady museum light, they ask a different question of us.</p>
+    <p>What this exhibition proposes is that the dome's afterlife — its diffusion through pavilions, madrasas, manuscript bindings, garden tile-work — was not a matter of motif being copied. It was a matter of a problem being inherited. The problem is how a flat, pressed, fired surface can persuade a viewer that pattern is breathing. Master Muḥammad Riḍā solved it once, in 1619, with a contraction toward the apex and a single warming pass of gold. His successors, working under the more attenuated patronage of the later seventeenth century, returned to that solution as one returns to a teacher's correction: not to repeat it, but to understand what it had asked.</p>
+    <p>I am grateful to the Sheikh Lotfollah trust, to the families holding the Mīr Findiriskī and Khwāja Naṣīr waqfs, and to my colleagues at the National Heritage Laboratories. The cobalt of Qamsar — long suspected, now confirmed — is, in its way, the quietest revelation of the show.</p>
+    <div class="signature">
+      Dr. Shirin Mahdavi
+      <small>Isfahan, 22 Esfand 1401</small>
+    </div>
+  </section>
+
+  <section class="visit-panel">
+    <h3>Plan Your Visit to Gallery III</h3>
+    <div class="row">
+      <div><b>On View</b>14 March – 22 September</div>
+      <div><b>Hours</b>Sat – Thu, 09:00 – 17:00</div>
+      <div><b>Admission</b>250,000 IRR · Members free</div>
+      <div><b>Curator's Walk</b>First Friday, 11:00</div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="pattern-bg" aria-hidden="true">
+    <svg viewBox="0 0 1600 1200" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <g fill="none" stroke="#c9a23a" stroke-width="2">
+        <path d="M193,732 L300,656 L339,780 L444,857 L339,932 L299,812 Z"/>
+        <path d="M948,579 L909,456 L805,380 L673,380 L715,503 L820,579 Z"/>
+        <path d="M296,809 L337,931 L297,1054 L191,1131 L153,1007 L193,884 Z"/>
+        <path d="M571,704 L441,705 L337,629 L295,506 L336,380 L437,305 L570,305 L676,380 L717,506 L675,628 Z"/>
+        <path d="M1455,834 L1335,796 L1264,696 L1192,795 L1075,834 L1146,934 L1147,1059 L1264,1021 L1383,1059 L1383,936 Z"/>
+        <path d="M1552,327 L1432,289 L1361,189 L1289,288 L1172,327 L1243,427 L1244,552 L1361,514 L1480,552 L1480,428 Z"/>
+        <path d="M65,180 L104,303 L208,379 L339,379 L297,256 L193,180 Z"/>
+        <path d="M954,191 L915,314 L811,390 L679,390 L721,267 L826,191 Z"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="fcols">
+    <div>
+      <h4>Visiting Hours</h4>
+      <p>Saturday – Thursday<br>09:00 – 17:00</p>
+      <p>Friday<br>14:00 – 19:00</p>
+      <p>Closed on national days of mourning</p>
+    </div>
+    <div>
+      <div class="star" aria-hidden="true">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <g fill="none" stroke="#c9a23a" stroke-width="1.6" stroke-linejoin="round">
+            <polygon points="50,5 60,30 88,28 75,52 95,72 67,72 58,96 50,75 42,96 33,72 5,72 25,52 12,28 40,30"/>
+            <polygon points="50,20 57,38 76,40 64,55 78,70 58,68 50,85 42,68 22,70 36,55 24,40 43,38"/>
+            <circle cx="50" cy="50" r="6"/>
+          </g>
+        </svg>
+      </div>
+      <h4>Dār al-Naqsh</h4>
+      <p>Maydān-e Naqsh-e Jahān, eastern arcade<br>Isfahan, Iran 81367</p>
+      <p>+98 31 3221 4419<br>kitabkhana@dar-al-naqsh.ir</p>
+    </div>
+    <div>
+      <h4>Friends of the Museum</h4>
+      <p>Annual membership · 4,800,000 IRR<br>Patrons' Circle · 28,000,000 IRR</p>
+      <p>Members receive priority access to curator's walks and the annual Nowrūz reception in Gallery I.</p>
+    </div>
+  </div>
+
+  <div class="tailpiece">
+    <div class="gloss">— bi-yād-i ustādān —</div>
+    <div class="copyr">© 1401 SH · Dār al-Naqsh, Museum of Safavid Ornament · All rights reserved</div>
+  </div>
+</footer>
+
+</body>
+</html>

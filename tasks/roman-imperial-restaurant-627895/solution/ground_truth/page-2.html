@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>The Carta — Menu | Trattoria Aventina</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    font-size: 16px;
+    line-height: 1.65;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* ---------- NAV ---------- */
+  .site-header {
+    padding: 32px 0 0;
+    text-align: center;
+    background: var(--bg);
+  }
+  .wordmark {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 14px;
+    display: block;
+    border-radius: 50%;
+    border: 1.5px solid var(--ornament);
+    position: relative;
+    background: var(--bg);
+  }
+  .wordmark::before {
+    content: "TA";
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display), serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: 0.08em;
+    color: var(--primary);
+  }
+  .wordmark::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -6px;
+    transform: translateX(-50%);
+    width: 24px;
+    height: 1px;
+    background: var(--secondary);
+  }
+  nav.primary {
+    text-align: center;
+    padding: 4px 0 18px;
+  }
+  nav.primary ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  nav.primary li {
+    display: inline-flex;
+    align-items: center;
+  }
+  nav.primary a {
+    font-family: var(--font-display), serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    color: var(--primary);
+    padding: 6px 18px;
+    display: inline-block;
+  }
+  nav.primary a[aria-current="page"] {
+    border-bottom: 1px solid var(--secondary);
+  }
+  nav.primary .vine {
+    width: 14px;
+    height: 14px;
+    opacity: 0.65;
+    color: var(--ornament);
+  }
+
+  /* Greek-key cornice */
+  .meander-cornice {
+    width: 100%;
+    height: 22px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='1000 364 16511 4447' preserveAspectRatio='xMidYMid'><g fill='%231a1a1a'><path d='M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z'/><path d='M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z'/><path d='M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z'/><path d='M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z'/><path d='M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z'/></g></svg>");
+    background-repeat: repeat-x;
+    background-size: auto 22px;
+    border-top: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    text-align: center;
+    padding: 72px 40px 48px;
+    position: relative;
+  }
+  .hero-frame {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 40px 50px;
+  }
+  .hero-frame .wreath {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 540px;
+    height: 480px;
+    opacity: 0.18;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .hero-frame > * { position: relative; z-index: 1; }
+  .eyebrow {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    letter-spacing: 0.32em;
+    color: var(--accent);
+    margin: 0 0 14px;
+  }
+  h1.hero-title {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 4rem;
+    letter-spacing: 0.12em;
+    line-height: 1;
+    margin: 0 0 8px;
+    color: var(--primary);
+  }
+  .hero-rule {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin: 22px auto 28px;
+  }
+  .hero-rule::before, .hero-rule::after {
+    content: "";
+    width: 120px;
+    height: 1px;
+    background: var(--secondary);
+  }
+  .hero-rule .diamond {
+    width: 8px;
+    height: 8px;
+    background: var(--secondary);
+    transform: rotate(45deg);
+  }
+  .hero-note {
+    max-width: 640px;
+    margin: 0 auto;
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: var(--text);
+  }
+  .hero-note .lead-in {
+    font-variant: small-caps;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+  }
+  .hero-meta {
+    margin-top: 24px;
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 0.28em;
+    color: var(--primary);
+  }
+
+  /* Section divider */
+  .divider {
+    text-align: center;
+    margin: 36px auto 12px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+  }
+  .divider::before, .divider::after {
+    content: "";
+    width: 180px;
+    height: 1px;
+    background: var(--ornament);
+  }
+  .divider svg {
+    width: 22px;
+    height: 22px;
+    color: var(--accent);
+  }
+
+  /* ---------- CARTA SECTIONS ---------- */
+  main {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 24px 40px 0;
+  }
+  .legend {
+    text-align: center;
+    margin: 30px auto 60px;
+    max-width: 760px;
+    padding: 18px 24px;
+    border-top: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+    font-size: 0.92rem;
+  }
+  .legend-title {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 0.72rem;
+    margin-bottom: 8px;
+    color: var(--primary);
+  }
+  .legend-marks {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 22px;
+    color: var(--text);
+  }
+  .legend-marks span sup {
+    color: var(--secondary);
+    font-weight: 700;
+    margin-right: 4px;
+    font-family: var(--font-display), serif;
+  }
+
+  .carta-section {
+    margin-bottom: 64px;
+    position: relative;
+  }
+  .section-card {
+    background: var(--surface);
+    border: 1.5px solid var(--ornament);
+    padding: 70px 56px 48px;
+    position: relative;
+  }
+  /* meander inner border */
+  .section-card::before {
+    content: "";
+    position: absolute;
+    inset: 8px;
+    border: 1px solid var(--ornament);
+    pointer-events: none;
+  }
+  .section-card::after {
+    content: "";
+    position: absolute;
+    top: -1px; left: -1px; right: -1px;
+    height: 14px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='1000 364 16511 4447' preserveAspectRatio='xMidYMid'><g fill='%231a1a1a'><path d='M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z'/><path d='M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z'/><path d='M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z'/><path d='M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z'/><path d='M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z'/></g></svg>");
+    background-repeat: repeat-x;
+    background-size: auto 14px;
+    opacity: 0.85;
+  }
+
+  .section-seal {
+    position: absolute;
+    top: -42px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 84px;
+    height: 84px;
+    background: var(--bg);
+    border: 1.5px solid var(--ornament);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+  }
+  .section-seal svg {
+    width: 70px;
+    height: 70px;
+    color: var(--secondary);
+  }
+  .section-seal .roman {
+    position: absolute;
+    font-family: var(--font-display), serif;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    color: var(--primary);
+  }
+
+  .section-title {
+    text-align: center;
+    margin: 0 0 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+  }
+  .section-title h2 {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    font-weight: 700;
+    font-size: 2rem;
+    margin: 0;
+    color: var(--primary);
+  }
+  .section-title::before, .section-title::after {
+    content: "";
+    width: 90px;
+    height: 1px;
+    background: var(--ornament);
+  }
+  .section-subtitle {
+    text-align: center;
+    font-style: italic;
+    color: var(--text);
+    margin: 6px 0 36px;
+    font-size: 0.95rem;
+    letter-spacing: 0.04em;
+  }
+  .section-subtitle .accent {
+    color: var(--accent);
+    font-style: normal;
+    font-variant: small-caps;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+  }
+
+  /* dish list */
+  .dishes {
+    list-style: none;
+    margin: 0;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .dishes.two-col {
+    grid-template-columns: 1fr 1fr;
+    gap: 28px 56px;
+  }
+  .dish {
+    border-bottom: 1px dotted rgba(26,26,26,0.25);
+    padding-bottom: 18px;
+  }
+  .dish:last-child { border-bottom: none; }
+  .dish-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 14px;
+    margin-bottom: 6px;
+  }
+  .dish-name {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--primary);
+  }
+  .dish-name sup {
+    color: var(--secondary);
+    font-weight: 700;
+    margin-left: 6px;
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+  }
+  .dish-price {
+    font-family: var(--font-display), serif;
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--primary);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .dish-price::before {
+    content: "·";
+    margin-right: 10px;
+    color: var(--secondary);
+  }
+  .dish-desc {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text);
+    text-align: justify;
+    margin: 0;
+  }
+  .dish-desc .lead {
+    font-variant: small-caps;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+  }
+
+  /* closing tailpiece */
+  .tailpiece {
+    text-align: center;
+    margin: 72px auto 48px;
+    color: var(--secondary);
+  }
+  .tailpiece svg {
+    width: 36px;
+    height: 36px;
+  }
+  .tailpiece-line {
+    margin-top: 12px;
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.32em;
+    font-size: 0.72rem;
+    color: var(--primary);
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer.site-footer {
+    margin-top: 32px;
+    background: var(--bg);
+    border-top: 1px solid var(--ornament);
+  }
+  .footer-cornice {
+    width: 100%;
+    height: 22px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='1000 364 16511 4447' preserveAspectRatio='xMidYMid'><g fill='%231a1a1a'><path d='M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z'/><path d='M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z'/><path d='M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z'/><path d='M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z'/><path d='M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z'/></g></svg>");
+    background-repeat: repeat-x;
+    background-size: auto 22px;
+  }
+  .footer-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    text-align: center;
+    padding: 48px 80px 30px;
+    gap: 24px;
+  }
+  .footer-cols h4 {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    font-size: 0.72rem;
+    color: var(--primary);
+    margin: 0 0 14px;
+  }
+  .footer-cols p {
+    margin: 0;
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: var(--text);
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+  }
+  .footer-tail {
+    text-align: center;
+    padding-bottom: 36px;
+    color: var(--secondary);
+  }
+  .footer-tail svg {
+    width: 32px;
+    height: 32px;
+  }
+  .footer-tail .attr {
+    margin-top: 10px;
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    font-size: 0.7rem;
+    color: var(--primary);
+  }
+
+  /* Reusable inline SVG sizing */
+  .vine-glyph { display: inline-block; vertical-align: middle; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="page-1.html" class="wordmark" aria-label="Trattoria Aventina"></a>
+  <nav class="primary" aria-label="Primary">
+    <ul>
+      <li><a href="page-1.html">Osteria</a></li>
+      <li><svg class="vine vine-glyph" viewBox="0 0 200 200" aria-hidden="true"><path fill="currentColor" d="M43.5 11c-1.8 0-3.6.1-5.3.3-7 .7-13.9 2.8-19.2 7.5s-8.2 12-7.7 21c.5 9 4.3 16.1 10.2 20.3 5.9 4.2 13.3 5.5 21 5.2 15.5-.7 32.8-8 45.8-18.3 1.4-1.1 2.8-2 4.3-3.1 4.3 6.7 7.6 14.8 9.3 24.1-7.5-5.1-21-10.5-35.7 1.5-22.1 18.2-25 12.9-45.3-2.1-2.9 36.1 15 54.6 44.7 52.5 0 0-14 4.3-3.6 26.4 6 12.9 8.4 20.1 6.6 25.2-12.8 2.3-15.8 7.8-5.6 12.7 45.1 10 65.7-27.5 68.7-66 45.4 0 52.9-31.8 52.5-50.4-8.2 11.1-22.2 11.1-32.9 2.5-9.9-7.9-21.7-16.2-39-1.1-1.7-11.7-5.7-22.1-11.2-30.7 19.4-11.4 38.7-14.5 52.5-10.8 5.5 1.4 9.5 4.1 12.4 7-9 8.4-11.8 26.4 2.3 27 18.9.9 21-15.5 13.6-27.1-5.4-8.5-16.4-13.2-25.7-16.6-17.5-4.6-39.7-.6-61.3 12.5-5.2-5.7-11.1-10.2-17.7-13C70.7 12.4 60.2 9.6 49.5 9.1c-1.8-.1-3.6-.1-6 0z"/></svg></li>
+      <li><a href="page-2.html" aria-current="page">The Carta</a></li>
+      <li><svg class="vine vine-glyph" viewBox="0 0 200 200" aria-hidden="true"><path fill="currentColor" d="M43.5 11c-1.8 0-3.6.1-5.3.3-7 .7-13.9 2.8-19.2 7.5s-8.2 12-7.7 21c.5 9 4.3 16.1 10.2 20.3 5.9 4.2 13.3 5.5 21 5.2 15.5-.7 32.8-8 45.8-18.3 1.4-1.1 2.8-2 4.3-3.1 4.3 6.7 7.6 14.8 9.3 24.1-7.5-5.1-21-10.5-35.7 1.5-22.1 18.2-25 12.9-45.3-2.1-2.9 36.1 15 54.6 44.7 52.5 0 0-14 4.3-3.6 26.4 6 12.9 8.4 20.1 6.6 25.2-12.8 2.3-15.8 7.8-5.6 12.7 45.1 10 65.7-27.5 68.7-66 45.4 0 52.9-31.8 52.5-50.4-8.2 11.1-22.2 11.1-32.9 2.5-9.9-7.9-21.7-16.2-39-1.1-1.7-11.7-5.7-22.1-11.2-30.7 19.4-11.4 38.7-14.5 52.5-10.8 5.5 1.4 9.5 4.1 12.4 7-9 8.4-11.8 26.4 2.3 27 18.9.9 21-15.5 13.6-27.1-5.4-8.5-16.4-13.2-25.7-16.6-17.5-4.6-39.7-.6-61.3 12.5-5.2-5.7-11.1-10.2-17.7-13C70.7 12.4 60.2 9.6 49.5 9.1c-1.8-.1-3.6-.1-6 0z"/></svg></li>
+      <li><a href="page-3.html">The Cellar</a></li>
+      <li><svg class="vine vine-glyph" viewBox="0 0 200 200" aria-hidden="true"><path fill="currentColor" d="M43.5 11c-1.8 0-3.6.1-5.3.3-7 .7-13.9 2.8-19.2 7.5s-8.2 12-7.7 21c.5 9 4.3 16.1 10.2 20.3 5.9 4.2 13.3 5.5 21 5.2 15.5-.7 32.8-8 45.8-18.3 1.4-1.1 2.8-2 4.3-3.1 4.3 6.7 7.6 14.8 9.3 24.1-7.5-5.1-21-10.5-35.7 1.5-22.1 18.2-25 12.9-45.3-2.1-2.9 36.1 15 54.6 44.7 52.5 0 0-14 4.3-3.6 26.4 6 12.9 8.4 20.1 6.6 25.2-12.8 2.3-15.8 7.8-5.6 12.7 45.1 10 65.7-27.5 68.7-66 45.4 0 52.9-31.8 52.5-50.4-8.2 11.1-22.2 11.1-32.9 2.5-9.9-7.9-21.7-16.2-39-1.1-1.7-11.7-5.7-22.1-11.2-30.7 19.4-11.4 38.7-14.5 52.5-10.8 5.5 1.4 9.5 4.1 12.4 7-9 8.4-11.8 26.4 2.3 27 18.9.9 21-15.5 13.6-27.1-5.4-8.5-16.4-13.2-25.7-16.6-17.5-4.6-39.7-.6-61.3 12.5-5.2-5.7-11.1-10.2-17.7-13C70.7 12.4 60.2 9.6 49.5 9.1c-1.8-.1-3.6-.1-6 0z"/></svg></li>
+      <li><a href="page-4.html">The House</a></li>
+      <li><svg class="vine vine-glyph" viewBox="0 0 200 200" aria-hidden="true"><path fill="currentColor" d="M43.5 11c-1.8 0-3.6.1-5.3.3-7 .7-13.9 2.8-19.2 7.5s-8.2 12-7.7 21c.5 9 4.3 16.1 10.2 20.3 5.9 4.2 13.3 5.5 21 5.2 15.5-.7 32.8-8 45.8-18.3 1.4-1.1 2.8-2 4.3-3.1 4.3 6.7 7.6 14.8 9.3 24.1-7.5-5.1-21-10.5-35.7 1.5-22.1 18.2-25 12.9-45.3-2.1-2.9 36.1 15 54.6 44.7 52.5 0 0-14 4.3-3.6 26.4 6 12.9 8.4 20.1 6.6 25.2-12.8 2.3-15.8 7.8-5.6 12.7 45.1 10 65.7-27.5 68.7-66 45.4 0 52.9-31.8 52.5-50.4-8.2 11.1-22.2 11.1-32.9 2.5-9.9-7.9-21.7-16.2-39-1.1-1.7-11.7-5.7-22.1-11.2-30.7 19.4-11.4 38.7-14.5 52.5-10.8 5.5 1.4 9.5 4.1 12.4 7-9 8.4-11.8 26.4 2.3 27 18.9.9 21-15.5 13.6-27.1-5.4-8.5-16.4-13.2-25.7-16.6-17.5-4.6-39.7-.6-61.3 12.5-5.2-5.7-11.1-10.2-17.7-13C70.7 12.4 60.2 9.6 49.5 9.1c-1.8-.1-3.6-.1-6 0z"/></svg></li>
+      <li><a href="page-5.html">Visit</a></li>
+      <li><svg class="vine vine-glyph" viewBox="0 0 200 200" aria-hidden="true"><path fill="currentColor" d="M43.5 11c-1.8 0-3.6.1-5.3.3-7 .7-13.9 2.8-19.2 7.5s-8.2 12-7.7 21c.5 9 4.3 16.1 10.2 20.3 5.9 4.2 13.3 5.5 21 5.2 15.5-.7 32.8-8 45.8-18.3 1.4-1.1 2.8-2 4.3-3.1 4.3 6.7 7.6 14.8 9.3 24.1-7.5-5.1-21-10.5-35.7 1.5-22.1 18.2-25 12.9-45.3-2.1-2.9 36.1 15 54.6 44.7 52.5 0 0-14 4.3-3.6 26.4 6 12.9 8.4 20.1 6.6 25.2-12.8 2.3-15.8 7.8-5.6 12.7 45.1 10 65.7-27.5 68.7-66 45.4 0 52.9-31.8 52.5-50.4-8.2 11.1-22.2 11.1-32.9 2.5-9.9-7.9-21.7-16.2-39-1.1-1.7-11.7-5.7-22.1-11.2-30.7 19.4-11.4 38.7-14.5 52.5-10.8 5.5 1.4 9.5 4.1 12.4 7-9 8.4-11.8 26.4 2.3 27 18.9.9 21-15.5 13.6-27.1-5.4-8.5-16.4-13.2-25.7-16.6-17.5-4.6-39.7-.6-61.3 12.5-5.2-5.7-11.1-10.2-17.7-13C70.7 12.4 60.2 9.6 49.5 9.1c-1.8-.1-3.6-.1-6 0z"/></svg></li>
+      <li><a href="page-6.html">Reservations</a></li>
+    </ul>
+  </nav>
+  <div class="meander-cornice" aria-hidden="true"></div>
+</header>
+
+<section class="hero">
+  <div class="hero-frame">
+    <svg class="wreath" viewBox="0 0 323 295" aria-hidden="true">
+      <g fill="none" stroke="#1a1a1a" stroke-width="0.8" opacity="0.9">
+        <ellipse cx="161" cy="148" rx="150" ry="130"/>
+      </g>
+      <g fill="#1a1a1a" opacity="0.55">
+        <path d="M30 148 q15-30 40-40 q-10 25 -25 45 z"/>
+        <path d="M50 90 q20-25 50-30 q-15 22 -35 40 z"/>
+        <path d="M90 50 q22-15 50-15 q-15 18 -38 30 z"/>
+        <path d="M150 30 q28-3 55 5 q-22 12 -50 14 z"/>
+        <path d="M210 38 q25 3 48 18 q-25 5 -50 0 z"/>
+        <path d="M260 65 q22 14 38 38 q-26 -2 -45 -15 z"/>
+        <path d="M290 110 q12 22 13 50 q-22 -12 -33 -32 z"/>
+        <path d="M293 165 q-2 25 -15 50 q-18 -18 -22 -42 z"/>
+        <path d="M270 220 q-15 22 -38 38 q-12 -22 -10 -45 z"/>
+        <path d="M225 258 q-22 12 -50 15 q -2 -22 12 -42 z"/>
+        <path d="M165 273 q-28 0 -55 -10 q15 -18 42 -22 z"/>
+        <path d="M105 260 q-25 -10 -42 -30 q22 -8 45 -2 z"/>
+        <path d="M58 220 q-18 -20 -25 -45 q22 0 38 15 z"/>
+        <path d="M30 165 q -2 -10 0 -22 q15 5 22 15 z"/>
+      </g>
+    </svg>
+    <p class="eyebrow">Trattoria Aventina</p>
+    <h1 class="hero-title">The Carta</h1>
+    <div class="hero-rule" aria-hidden="true"><span class="diamond"></span></div>
+    <p class="hero-note">
+      <span class="lead-in">A Roman table, by season.</span> Our carta is rewritten each Friday after the morning at <em>Mercato di Testaccio</em>, where we choose what the week will hold — agretti in March, puntarelle in November, the first artichokes of February. Pasta is hand-rolled before service every day on the marble counter you can see from the dining room. Bread is baked at four; broth is begun at six.
+    </p>
+    <p class="hero-meta">Spring Carta · MMXXV · Chef Lorenzo Fanti</p>
+  </div>
+</section>
+
+<main>
+
+  <!-- LEGEND -->
+  <div class="legend" aria-label="Allergen and dietary marks">
+    <div class="legend-title">Marks of the Table</div>
+    <div class="legend-marks">
+      <span><sup>I</sup> Vegetarian</span>
+      <span><sup>II</sup> Contains gluten</span>
+      <span><sup>III</sup> Contains dairy</span>
+      <span><sup>IV</sup> Contains egg</span>
+      <span><sup>V</sup> Contains fish</span>
+      <span><sup>VI</sup> Contains shellfish</span>
+      <span><sup>VII</sup> Contains nuts</span>
+    </div>
+  </div>
+
+  <!-- ANTIPASTI -->
+  <section class="carta-section" aria-labelledby="antipasti-title">
+    <article class="section-card">
+      <div class="section-seal" aria-hidden="true">
+        <svg viewBox="0 0 117 118" fill="none" stroke="currentColor" stroke-width="1.2">
+          <circle cx="58.5" cy="59" r="48"/>
+          <circle cx="58.5" cy="59" r="42" stroke-dasharray="2 4"/>
+        </svg>
+        <span class="roman">I</span>
+      </div>
+      <div class="section-title"><h2 id="antipasti-title">Antipasti</h2></div>
+      <p class="section-subtitle"><span class="accent">Primo passo —</span> small plates to begin, served on warm ceramic.</p>
+
+      <ul class="dishes two-col">
+        <li class="dish">
+          <div class="dish-head">
+            <span class="dish-name">Carciofi alla Giudia <sup>I</sup></span>
+            <span class="dish-price">14</span>
+          </div>
+          <p class="dish-desc"><span class="lead">Twice-fried artichoke —</span> Romanesco artichoke from the Lazio coast, opened like a flower, fried in olive oil from Sabina, finished with sea salt and a single drop of lemon.</p>
+        </li>
+        <li class="dish">
+          <div class="dish-head">
+            <span class="dish-name">Suppli al Telefono <sup>II,III,IV</sup></span>
+            <span class="dish-price">9</span>
+          </div>
+          <p class="dish-desc"><span class="lead">Roman rice croquette —</span> arborio cooked in tomato and beef ragù, a heart of fior di latte that pulls into long strings when you break it open.</p>
+        </li>
+        <li class="dish">
+          <div class="dish-head">
+            <span class="dish-name">Fiori di Zucca <sup>I,II,III,V</sup></span>
+            <span class="dish-price">12</span>
+          </div>
+          <p class="dish-desc"><span class="lead">Stuffed zucchini blossoms —</span> with mozzarella di bufala and a single anchovy from Cetara, dipped in a beer batter and fried until just translucent.</p>
+        </li>
+        <li class="dish">
+          <div class="dish-head">
+            <span class="dish-name">Puntarelle alla Romana <sup>I,V</sup></span>
+            <span class="dish-price">11</span>
+          </div>
+          <p class="dish-desc"><span class="lead">Curled chicory —</span> dressed at the table with garlic, anchovy, white wine vinegar, and Sabina olive oil. Served only while the season holds.</p>
+        </li>
+        <li class="dish">
+          <div class="dish-head">
+            <span class="dish-name">Vignarola <sup>I</sup></span>
+            <span class="dish-price">13</span>
+          </div>
+          <p class="dish-desc"><span class="lead">Spring vegetable stew —</span> fava, peas, artichoke and Romaine braised together with mint and spring onion. The dish that signals April has arrived.</p>
+        </li>
+        <li class="dish">
+          <div class="dish-head">
+            <span class="dish-name">Tonnarelli di Pane <sup>II,III</sup></span>
+            <span class="dish-price">8</span>
+          </div>
+          <p class="dish-desc"><span class="lead">Bread of the house —</span> sourdough loaf baked at sixteen-hundred each afternoon, served warm with cultured butter and Trapani salt.</p>
+        </li>
+      </ul>
+    </article>
+  </section>
+
+  <!-- PRIMI -->
+  <section class="carta-section" aria-labelledby="primi-title">
+    <article class="section-card">
+      <div class="section-seal" aria-hidden="true">
+        <svg viewBox="0 0 117 118" fill="none" stroke="currentColor" stroke-width="1.2">
+          <circle cx="58.5" cy="59" r="48"/>
+          <circle cx="58.5" cy="59" r="42" stroke-dasharray="2 4"/>
+        </svg>
+        <span class="roman">II</span>
+      </div>
+      <div class="section-title"><h2 id="primi-title">Primi</h2></div>
+      <p class="section-subtitle"><span class="accent">La pasta —</span> rolled by hand each morning on the marble counter.</p>
+
+      <ul class="dishes two-col">
+        <li class="dish">
+          <div class="dish-head">
+            <span class="dish-name">Cacio e Pepe <sup>II,III,IV</sup></span>
+            <span class="dish-price">18</span>
+          </div>
+          <p class="dish-desc"><span class="lead">Tonnarelli —</span> Pecorino Romano DOP aged twelve months, Sarawak black pepper toasted to order, finished tableside with the pasta water that gives the sauce its silver sheen.</p>
+        </li>
+        <li class="dish">
+          <div class="dish-head">
+            <span class="dish-name">Carbonara <sup>II,III,IV</sup></span>
+            <span class="dish-price">19</span>
+          </div>
+          <p class="dish-desc"><span class="lead">Rigatoni —</span> guanciale from Amatrice rendered slowly, yolks from Az. Agr. Paganelli, Pecorino Romano, no cream — and never any. The way it has always been done.</p>
+        </li>
+        <li class="dish">
+          <div class="dish-head">
+            <span class="dish-name">Amatriciana <sup>II,III</sup></span>
+            <span class="dish-price">19</span>
+          </div>
+          <p class="dish-desc"><span class="lead">Bucatini —</span> San Marzano tomato, guanciale, white wine, Pecorino. Cooked in a heavy iron pan until the sauce clings to every strand.</p>
+        </li>
+        <li class="dish">
+          <div class="dish-head">
+            <span class="dish-name">Gricia <sup>II,III,IV</sup></span>
+            <span class="dish-price">18</span>
+          </div>
+          <p class="dish-desc"><span class="lead">Mezze maniche —</span> the elder of the Roman pastas: guanciale, Pecorino, pepper. No tomato, no onion. A study in three ingredients.</p>
+        </li>
+        <li class="dish">
+          <div class="dish-head">
+            <span class="dish-name">Gnocchi al Sugo di Coda <sup>II,III,IV</sup></span>
+            <span class="dish-price">22</span>
+          </div>
+          <p class="dish-desc"><span class="lead">Thursday gnocchi —</span> potato gnocchi rolled to order, dressed with oxtail braised five hours with celery, cocoa, and pine nut. Served only on Thursdays, by Roman tradition.</p>
+        </li>
+        <li class="dish">
+          <div class="dish-head">
+            <span class="dish-name">Tonnarelli ai Ricci di Mare <sup>II,IV,V,VI</sup></span>
+            <span class="dish-price">28</span>
+          </div>
+          <p class="dish-desc"><span class="lead">Sea urchin from Civitavecchia —</span> tossed warm with butter, lemon zest, and a thread of bottarga di muggine. Limited to twelve plates a service.</p>
+        </li>
+        <li class="dish">
+          <div class="dish-head">
+            <span class="dish-name">Fettuccine ai Funghi <sup>I,II,III,IV</sup></span>
+            <span class="dish-price">21</span>
+          </div>
+          <p class="dish-desc"><span class="lead">Wild mushroom —</span> egg fettuccine cut wide, porcini and chiodini foraged in the Aniene valley, butter, thyme, a dusting of aged Parmigiano.</p>
+        </li>
+        <li class="dish">
+          <div class="dish-head">
+            <span class="dish-name">Minestra di Arzilla <sup>II,V</sup></span>
+            <span class="dish-price">17</span>
+          </div>
+          <p class="dish-desc"><span class="lead">Skate and broccoli broth —</span> the old Roman Friday soup: skate wing, romanesco broccoli, anchovy, broken pasta. Served in a deep bowl with a spoon for the broth.</p>
+        </li>
+      </ul>
+    </article>
+  </section>
+
+  <!-- SECONDI -->
+  <section class="carta-section" aria-labelledby="secondi-title">
+    <article class="section-card">
+      <div class="section-seal" aria-hidden="true">
+        <svg viewBox="0 0 117 118" fill="none" stroke="currentColor" stroke-width="1.2">
+          <circle cx="58.5" cy="59" r="48"/>
+          <circle cx="58.5" cy="59" r="42" stroke-dasharray="2 4"/>
+        </svg>
+        <span class="roman">III</span>
+      </div>
+      <div class="section-title"><h2 id="secondi-title">Secondi</h2></div>
+      <p class="section-subtitle"><span class="accent">Il piatto forte —</span> meat, fish, and the deep cuts of the Roman quinto quarto.</p>
+
+      <ul class="dishes two-col">
+        <li class="dish">
+          <div class="dish-head">
+            <span class="dish-name">Saltimbocca alla Romana <sup>III</sup></span>
+            <span class="dish-price">26</span>
+          </div>
+          <p class="dish-desc"><span class="lead">Veal, sage, prosciutto —</span> three thin escalopes pinned with toothpicks, seared in butter and finished with a splash of Frascati. Served with a wedge of lemon and nothing else.</p>
+        </li>
+        <li class="dish">
+          <div class="dish-head">
+            <span class="dish-name">Coda alla Vaccinara <sup>III</sup></span>
+            <span class="dish-price">28</span>
+          </div>
+          <p class="dish-desc"><span class="lead">Oxtail of the butchers —</span> braised five hours in tomato, celery, dark cocoa, and pine nuts, in the manner of the men who once worked the Mattatoio across the river.</p>
+        </li>
+        <li class="dish">
+          <div class="dish-head">
+            <span class="dish-name">Abbacchio Scottadito</span>
+            <span class="dish-price">29</span>
+          </div>
+          <p class="dish-desc"><span class="lead">Spring lamb chops —</span> grilled over wood embers, rosemary, salt, lemon — eaten with the fingers, hot enough to scorch them, as the name promises.</p>
+        </li>
+        <li class="dish">
+          <div class="dish-head">
+            <span class="dish-name">Trippa alla Romana <sup>III</sup></span>
+            <span class="dish-price">22</span>
+          </div>
+          <p class="dish-desc"><span class="lead">Saturday tripe —</span> beef honeycomb tripe simmered with tomato, mint, and Pecorino. Served only on Saturdays. Order it once and you understand.</p>
+        </li>
+        <li class="dish">
+          <div class="dish-head">
+            <span class="dish-name">Baccalà in Guazzetto <sup>V</sup></span>
+            <span class="dish-price">25</span>
+          </div>
+          <p class="dish-desc"><span class="lead">Salt cod —</span> soaked three days, gently stewed with tomato, raisins, pine nuts, and a single bay leaf. Served with grilled country bread.</p>
+        </li>
+        <li class="dish">
+          <div class="dish-head">
+            <span class="dish-name">Pollo coi Peperoni</span>
+            <span class="dish-price">23</span>
+          </div>
+          <p class="dish-desc"><span class="lead">Ferragosto chicken —</span> free-range bird from Tuscia, browned with garlic, tomato, white wine, and yellow and red peppers stewed until they melt.</p>
+        </li>
+        <li class="dish">
+          <div class="dish-head">
+            <span class="dish-name">Cicoria Ripassata <sup>I</sup></span>
+            <span class="dish-price">7</span>
+          </div>
+          <p class="dish-desc"><span class="lead">Side of bitter greens —</span> wild chicory boiled, then taken back through the pan with garlic, chili, and oil. The proper accompaniment to anything from the grill.</p>
+        </li>
+        <li class="dish">
+          <div class="dish-head">
+            <span class="dish-name">Patate al Forno <sup>I</sup></span>
+            <span class="dish-price">7</span>
+          </div>
+          <p class="dish-desc"><span class="lead">Roast potatoes —</span> Viterbo potatoes cut in irregular wedges, rosemary, sea salt, roasted on a heavy tray until the corners are dark.</p>
+        </li>
+      </ul>
+    </article>
+  </section>
+
+  <!-- DOLCI -->
+  <section class="carta-section" aria-labelledby="dolci-title">
+    <article class="section-card">
+      <div class="section-seal" aria-hidden="true">
+        <svg viewBox="0 0 117 118" fill="none" stroke="currentColor" stroke-width="1.2">
+          <circle cx="58.5" cy="59" r="48"/>
+          <circle cx="58.5" cy="59" r="42" stroke-dasharray="2 4"/>
+        </svg>
+        <span class="roman">IV</span>
+      </div>
+      <div class="section-title"><h2 id="dolci-title">Dolci</h2></div>
+      <p class="section-subtitle"><span class="accent">L'ultimo —</span> the closing line of the meal, kept short on purpose.</p>
+
+      <ul class="dishes two-col">
+        <li class="dish">
+          <div class="dish-head">
+            <span class="dish-name">Tiramisù della Casa <sup>II,III,IV</sup></span>
+            <span class="dish-price">10</span>
+          </div>
+          <p class="dish-desc"><span class="lead">House tiramisù —</span> savoiardi from Roscioli, mascarpone whipped to order, espresso pulled at the bar, a single dust of cocoa from Modica. No liqueur.</p>
+        </li>
+        <li class="dish">
+          <div class="dish-head">
+            <span class="dish-name">Maritozzo con la Panna <sup>II,III,IV</sup></span>
+            <span class="dish-price">8</span>
+          </div>
+          <p class="dish-desc"><span class="lead">Roman cream bun —</span> a sweet bread split through the middle and packed with cold whipped cream from the Apennines. Eaten with both hands.</p>
+        </li>
+        <li class="dish">
+          <div class="dish-head">
+            <span class="dish-name">Crostata di Visciole <sup>II,III,IV</sup></span>
+            <span class="dish-price">9</span>
+          </div>
+          <p class="dish-desc"><span class="lead">Sour cherry tart —</span> short pastry filled with ricotta from the Monti Sabini and visciole conserve made by Sora Lella in September. A lattice top, baked dark.</p>
+        </li>
+        <li class="dish">
+          <div class="dish-head">
+            <span class="dish-name">Panna Cotta al Miele <sup>III,VII</sup></span>
+            <span class="dish-price">9</span>
+          </div>
+          <p class="dish-desc"><span class="lead">Honey panna cotta —</span> set the night before with chestnut honey from Cassino, finished with a few crushed Avellino hazelnuts and a thread of saba.</p>
+        </li>
+        <li class="dish">
+          <div class="dish-head">
+            <span class="dish-name">Sorbetto al Limone</span>
+            <span class="dish-price">7</span>
+          </div>
+          <p class="dish-desc"><span class="lead">Amalfi lemon sorbet —</span> spun fresh in the morning, served in a chilled coupe with a small pour of cold prosecco for those who want it.</p>
+        </li>
+        <li class="dish">
+          <div class="dish-head">
+            <span class="dish-name">Formaggi e Mostarda <sup>III,VII</sup></span>
+            <span class="dish-price">14</span>
+          </div>
+          <p class="dish-desc"><span class="lead">Three Lazio cheeses —</span> Pecorino Romano DOP, Caciofiore della Campagna Romana, Marzolina di capra, with our own quince mostarda and walnut bread.</p>
+        </li>
+      </ul>
+    </article>
+  </section>
+
+  <!-- TAILPIECE -->
+  <div class="tailpiece">
+    <svg viewBox="0 0 200 200" aria-hidden="true"><path fill="currentColor" d="M43.5 11c-1.8 0-3.6.1-5.3.3-7 .7-13.9 2.8-19.2 7.5s-8.2 12-7.7 21c.5 9 4.3 16.1 10.2 20.3 5.9 4.2 13.3 5.5 21 5.2 15.5-.7 32.8-8 45.8-18.3 1.4-1.1 2.8-2 4.3-3.1 4.3 6.7 7.6 14.8 9.3 24.1-7.5-5.1-21-10.5-35.7 1.5-22.1 18.2-25 12.9-45.3-2.1-2.9 36.1 15 54.6 44.7 52.5 0 0-14 4.3-3.6 26.4 6 12.9 8.4 20.1 6.6 25.2-12.8 2.3-15.8 7.8-5.6 12.7 45.1 10 65.7-27.5 68.7-66 45.4 0 52.9-31.8 52.5-50.4-8.2 11.1-22.2 11.1-32.9 2.5-9.9-7.9-21.7-16.2-39-1.1-1.7-11.7-5.7-22.1-11.2-30.7 19.4-11.4 38.7-14.5 52.5-10.8 5.5 1.4 9.5 4.1 12.4 7-9 8.4-11.8 26.4 2.3 27 18.9.9 21-15.5 13.6-27.1-5.4-8.5-16.4-13.2-25.7-16.6-17.5-4.6-39.7-.6-61.3 12.5-5.2-5.7-11.1-10.2-17.7-13C70.7 12.4 60.2 9.6 49.5 9.1c-1.8-.1-3.6-.1-6 0z"/></svg>
+    <div class="tailpiece-line">Servizio &amp; coperto · 3 €</div>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-cornice" aria-hidden="true"></div>
+  <div class="footer-cols">
+    <div>
+      <h4>Indirizzo</h4>
+      <p>Via di Santa Sabina 14<br>00153 Roma · Aventino</p>
+    </div>
+    <div>
+      <h4>Orari</h4>
+      <p>Mar–Sab · 12.30–14.30 · 19.30–23.00<br>Domenica · pranzo solo · 12.30–15.00</p>
+    </div>
+    <div>
+      <h4>Contatto</h4>
+      <p>+39 06 5783 422<br>tavolo@aventina.roma</p>
+    </div>
+  </div>
+  <div class="footer-tail">
+    <svg viewBox="0 0 200 200" aria-hidden="true"><path fill="currentColor" d="M43.5 11c-1.8 0-3.6.1-5.3.3-7 .7-13.9 2.8-19.2 7.5s-8.2 12-7.7 21c.5 9 4.3 16.1 10.2 20.3 5.9 4.2 13.3 5.5 21 5.2 15.5-.7 32.8-8 45.8-18.3 1.4-1.1 2.8-2 4.3-3.1 4.3 6.7 7.6 14.8 9.3 24.1-7.5-5.1-21-10.5-35.7 1.5-22.1 18.2-25 12.9-45.3-2.1-2.9 36.1 15 54.6 44.7 52.5 0 0-14 4.3-3.6 26.4 6 12.9 8.4 20.1 6.6 25.2-12.8 2.3-15.8 7.8-5.6 12.7 45.1 10 65.7-27.5 68.7-66 45.4 0 52.9-31.8 52.5-50.4-8.2 11.1-22.2 11.1-32.9 2.5-9.9-7.9-21.7-16.2-39-1.1-1.7-11.7-5.7-22.1-11.2-30.7 19.4-11.4 38.7-14.5 52.5-10.8 5.5 1.4 9.5 4.1 12.4 7-9 8.4-11.8 26.4 2.3 27 18.9.9 21-15.5 13.6-27.1-5.4-8.5-16.4-13.2-25.7-16.6-17.5-4.6-39.7-.6-61.3 12.5-5.2-5.7-11.1-10.2-17.7-13C70.7 12.4 60.2 9.6 49.5 9.1c-1.8-.1-3.6-.1-6 0z"/></svg>
+    <div class="attr">Trattoria Aventina · MMXXV · Cucina Romana</div>
+  </div>
+</footer>
+
+</body>
+</html>

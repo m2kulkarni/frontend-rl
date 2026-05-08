@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>The Menu | Kalasha</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), sans-serif;
+    margin: 0;
+    line-height: 1.55;
+  }
+
+  /* ============ MASTHEAD ============ */
+  .masthead {
+    background: var(--bg);
+    border-bottom: 2px solid var(--secondary);
+    position: relative;
+  }
+  .gopuram-tiers {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 14px;
+  }
+  .tier {
+    background: var(--secondary);
+    height: 6px;
+    margin-bottom: 3px;
+  }
+  .tier-1 { width: 180px; }
+  .tier-2 { width: 280px; }
+  .tier-3 { width: 420px; }
+  .tier-4 { width: 600px; height: 8px; background: var(--accent); }
+
+  .masthead-title {
+    text-align: center;
+    padding: 22px 0 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+  }
+  .masthead-title h1 {
+    font-family: var(--font-display), serif;
+    font-size: 38px;
+    letter-spacing: 0.32em;
+    margin: 0;
+    color: var(--primary);
+    text-transform: uppercase;
+  }
+  .masthead-title .lotus-glyph {
+    width: 42px;
+    height: 32px;
+    flex-shrink: 0;
+  }
+  .masthead-tagline {
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    padding-bottom: 14px;
+  }
+
+  /* ============ NAV BAND ============ */
+  .nav-band {
+    background: var(--secondary);
+    padding: 14px 0;
+    border-top: 3px double var(--accent);
+    border-bottom: 3px double var(--accent);
+  }
+  .nav-band ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0;
+  }
+  .nav-band li {
+    display: flex;
+    align-items: center;
+  }
+  .nav-band a {
+    color: var(--bg);
+    text-decoration: none;
+    font-family: var(--font-body), sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    padding: 0 22px;
+  }
+  .nav-band a[aria-current="page"] {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 6px;
+  }
+  .nav-band .dot {
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  /* ============ HERO FRAME ============ */
+  .hero-frame {
+    width: 100%;
+    overflow: hidden;
+    background: var(--bg);
+    padding: 18px 0 8px;
+  }
+  .hero-frame svg {
+    width: 100%;
+    height: 60px;
+    display: block;
+  }
+
+  /* ============ PAGE HEADER ============ */
+  .page-header {
+    text-align: center;
+    padding: 30px 60px 20px;
+    background: var(--bg);
+    position: relative;
+  }
+  .page-header .eyebrow {
+    font-family: var(--font-body);
+    font-size: 11px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    margin: 0 0 10px;
+  }
+  .page-header h2 {
+    font-family: var(--font-display), serif;
+    font-size: 56px;
+    letter-spacing: 0.18em;
+    margin: 0 0 14px;
+    color: var(--primary);
+    text-transform: uppercase;
+  }
+  .page-header .header-note {
+    max-width: 720px;
+    margin: 0 auto;
+    font-size: 14px;
+    color: var(--primary);
+    font-style: italic;
+  }
+  .page-header .header-note strong {
+    color: var(--secondary);
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 12px;
+  }
+
+  /* ============ DIVIDER ============ */
+  .divider {
+    width: 100%;
+    height: 70px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+  }
+  .divider svg {
+    width: 1100px;
+    height: 70px;
+  }
+
+  /* ============ MENU GRID ============ */
+  .menu-section {
+    padding: 30px 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .section-head {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+  .section-head .roman {
+    font-family: var(--font-display);
+    font-size: 14px;
+    color: var(--accent);
+    letter-spacing: 0.4em;
+    margin-bottom: 6px;
+  }
+  .section-head h3 {
+    font-family: var(--font-display), serif;
+    font-size: 36px;
+    letter-spacing: 0.22em;
+    margin: 0;
+    color: var(--secondary);
+    text-transform: uppercase;
+    display: inline-block;
+    padding: 0 30px;
+    position: relative;
+  }
+  .section-head h3::before,
+  .section-head h3::after {
+    content: "✦";
+    color: var(--accent);
+    font-size: 18px;
+    margin: 0 18px;
+    vertical-align: middle;
+  }
+  .section-head .sub {
+    font-size: 12px;
+    color: var(--text-emphasis);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-top: 8px;
+    font-style: italic;
+  }
+
+  .menu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .menu-grid.single {
+    grid-template-columns: 1fr;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  /* ============ MENU CARD ============ */
+  .card {
+    position: relative;
+    background: var(--surface);
+    border: 2px solid var(--secondary);
+    padding: 4px;
+  }
+  .card-inner {
+    border: 1px solid var(--accent);
+    padding: 22px 26px;
+    position: relative;
+  }
+  /* Stepped corner notches */
+  .card::before, .card::after,
+  .card-inner::before, .card-inner::after {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background: var(--bg);
+    border: 2px solid var(--secondary);
+  }
+  .card::before { top: -8px; left: -8px; }
+  .card::after { top: -8px; right: -8px; }
+  .card-inner::before {
+    bottom: -10px; left: -10px;
+    width: 14px; height: 14px;
+    background: var(--bg);
+    border: 2px solid var(--secondary);
+  }
+  .card-inner::after {
+    bottom: -10px; right: -10px;
+    width: 14px; height: 14px;
+    background: var(--bg);
+    border: 2px solid var(--secondary);
+  }
+
+  .card-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 14px;
+    border-bottom: 1px dashed var(--accent);
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+  }
+  .card-name {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    flex: 1;
+  }
+  .card-lotus {
+    width: 18px;
+    height: 14px;
+    flex-shrink: 0;
+    transform: translateY(2px);
+  }
+  .card h4 {
+    font-family: var(--font-display), serif;
+    font-size: 20px;
+    letter-spacing: 0.08em;
+    margin: 0;
+    color: var(--primary);
+  }
+  .price {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    color: var(--secondary);
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+  }
+  .subtitle {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    font-weight: 700;
+    margin: 0 0 8px;
+  }
+  .card p.desc {
+    margin: 0 0 10px;
+    font-size: 14px;
+    color: var(--text);
+  }
+  .provenance {
+    font-size: 12px;
+    font-style: italic;
+    color: var(--text-emphasis);
+    border-left: 2px solid var(--accent);
+    padding-left: 10px;
+    margin: 0;
+  }
+
+  /* ============ QUOTE BAND ============ */
+  .quote-band {
+    background: var(--surface);
+    border-top: 6px double var(--secondary);
+    border-bottom: 6px double var(--secondary);
+    padding: 30px 80px;
+    margin: 30px 0;
+    text-align: center;
+    position: relative;
+  }
+  .quote-band blockquote {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    color: var(--text-emphasis);
+    font-style: italic;
+    margin: 0;
+    letter-spacing: 0.04em;
+  }
+  .quote-band cite {
+    display: block;
+    margin-top: 12px;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    font-style: normal;
+  }
+
+  /* ============ FOOTER ============ */
+  footer {
+    background: var(--bg);
+    border-top: 4px solid var(--secondary);
+    margin-top: 30px;
+  }
+  .arcade {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    border-bottom: 2px solid var(--primary);
+    padding: 0;
+    background: var(--surface);
+  }
+  .bay {
+    border-right: 1px solid var(--primary);
+    height: 110px;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  .bay:last-child { border-right: none; }
+  .bay-arch {
+    width: 80%;
+    height: 90px;
+    border: 2px solid var(--primary);
+    border-bottom: none;
+    border-radius: 50% 50% 0 0 / 60% 60% 0 0;
+    position: relative;
+  }
+  .bay-arch::before {
+    content: "";
+    position: absolute;
+    top: 8px; left: 8px; right: 8px; bottom: 0;
+    border: 1px solid var(--secondary);
+    border-bottom: none;
+    border-radius: 50% 50% 0 0 / 60% 60% 0 0;
+  }
+  .bay-arch::after {
+    content: "";
+    position: absolute;
+    top: 16px; left: 16px; right: 16px; bottom: 0;
+    border: 1px solid var(--accent);
+    border-bottom: none;
+    border-radius: 50% 50% 0 0 / 60% 60% 0 0;
+  }
+  .bay-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface);
+  }
+  .bay-center .om {
+    width: 60px;
+    height: 60px;
+  }
+  .bay-flank {
+    align-items: center;
+  }
+  .bay-flank .lotus-flank {
+    width: 50px;
+    height: 38px;
+    margin-bottom: 18px;
+  }
+
+  .footer-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 36px 80px;
+    gap: 0;
+  }
+  .footer-col {
+    padding: 0 30px;
+    border-right: 2px solid var(--secondary);
+    text-align: center;
+  }
+  .footer-col:last-child { border-right: none; }
+  .footer-col h5 {
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin: 0 0 10px;
+  }
+  .footer-col p {
+    margin: 4px 0;
+    font-size: 13px;
+    color: var(--primary);
+  }
+  .footer-credit {
+    text-align: center;
+    padding: 16px 0 24px;
+    font-style: italic;
+    color: var(--text-emphasis);
+    font-size: 13px;
+    background: var(--surface);
+    border-top: 1px solid var(--accent);
+  }
+
+  /* Lotus motif as inline reusable */
+  .lotus-mini {
+    display: inline-block;
+    vertical-align: middle;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ MASTHEAD ============ -->
+<header class="masthead">
+  <div class="gopuram-tiers">
+    <div class="tier tier-1"></div>
+    <div class="tier tier-2"></div>
+    <div class="tier tier-3"></div>
+    <div class="tier tier-4"></div>
+  </div>
+  <div class="masthead-title">
+    <svg class="lotus-glyph" viewBox="0 0 383 301" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <g transform="translate(-230,-334) matrix(2.67,-2.67,2.67,2.67,0,0)" fill="#e34234" stroke="#c9a23a" stroke-width="0.4">
+        <path d="m -20.53,171.71 c -34.71,-2.79 -17.62,27.45 -17.62,27.55 15.03,2.78 22.76,5.84 25.92,-13.57 -0.46,-11.45 -4.59,-10.27 -8.30,-13.98 z"/>
+        <path d="m -20.45,178.15 c 28.93,-16.20 12.77,-50.05 12.72,-50.14 -12.88,9.60 -28.18,18.48 -22.26,37.23 1.96,5.71 6.34,11.64 9.54,12.91 z"/>
+        <path d="M -18.19,180.41 C -1.99,151.48 31.85,167.65 31.95,167.69 22.35,180.57 13.47,195.87 -5.28,189.96 -10.99,188.00 -16.93,183.61 -18.19,180.41 Z"/>
+        <path d="m -23.07,175.54 c 1.44,-33.12 38.95,-33.93 39.05,-33.93 -2.77,15.82 -6.60,35.73 -26.00,38.89 -12.11,1.00 -9.34,-1.25 -13.04,-4.96 z"/>
+        <ellipse cx="113.19" cy="136.40" rx="20.77" ry="4.88" transform="rotate(45)" fill="#c9a23a"/>
+      </g>
+    </svg>
+    <h1>Kalasha</h1>
+    <svg class="lotus-glyph" viewBox="0 0 383 301" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <g transform="translate(-230,-334) matrix(2.67,-2.67,2.67,2.67,0,0)" fill="#e34234" stroke="#c9a23a" stroke-width="0.4">
+        <path d="m -20.53,171.71 c -34.71,-2.79 -17.62,27.45 -17.62,27.55 15.03,2.78 22.76,5.84 25.92,-13.57 -0.46,-11.45 -4.59,-10.27 -8.30,-13.98 z"/>
+        <path d="m -20.45,178.15 c 28.93,-16.20 12.77,-50.05 12.72,-50.14 -12.88,9.60 -28.18,18.48 -22.26,37.23 1.96,5.71 6.34,11.64 9.54,12.91 z"/>
+        <path d="M -18.19,180.41 C -1.99,151.48 31.85,167.65 31.95,167.69 22.35,180.57 13.47,195.87 -5.28,189.96 -10.99,188.00 -16.93,183.61 -18.19,180.41 Z"/>
+        <path d="m -23.07,175.54 c 1.44,-33.12 38.95,-33.93 39.05,-33.93 -2.77,15.82 -6.60,35.73 -26.00,38.89 -12.11,1.00 -9.34,-1.25 -13.04,-4.96 z"/>
+        <ellipse cx="113.19" cy="136.40" rx="20.77" ry="4.88" transform="rotate(45)" fill="#c9a23a"/>
+      </g>
+    </svg>
+  </div>
+  <div class="masthead-tagline">A Chettinad Kitchen &nbsp;·&nbsp; Bangalore &nbsp;·&nbsp; Established 2019</div>
+
+  <nav class="nav-band" aria-label="Primary">
+    <ul>
+      <li><a href="page-1.html">Home</a></li>
+      <li><span class="dot" aria-hidden="true"></span></li>
+      <li><a href="page-2.html" aria-current="page">The Menu</a></li>
+      <li><span class="dot" aria-hidden="true"></span></li>
+      <li><a href="page-3.html">Our Story</a></li>
+      <li><span class="dot" aria-hidden="true"></span></li>
+      <li><a href="page-4.html">Visit &amp; Reservations</a></li>
+      <li><span class="dot" aria-hidden="true"></span></li>
+      <li><a href="page-5.html">Feast Days</a></li>
+      <li><span class="dot" aria-hidden="true"></span></li>
+      <li><a href="page-6.html">Press &amp; Notes</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- ============ HERO FRAME (twin peacocks band) ============ -->
+<div class="hero-frame" aria-hidden="true">
+  <svg viewBox="0 0 313 29" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+    <g fill="#e34234">
+      <path d="M 8.8,28.2 C 4.5,26.8 1.6,23.5 1.0,19.0 C 0.4,14.5 2.4,9.5 6.5,6.6 C 10.6,3.7 16.5,3.0 22.0,4.5 C 30.0,6.7 36.0,11.0 39.0,15.0 C 39.5,12.5 41.5,10.5 44.5,9.5 C 48.5,8.0 53.0,7.5 57.5,8.0 C 62.0,8.5 67.0,10.0 70.5,12.0 C 73.0,11.0 76.5,10.0 80.0,10.0 C 86.0,10.0 92.0,11.5 96.5,13.5 C 100.5,12.0 105.0,11.0 110.0,11.0 C 116.5,11.0 122.5,12.5 127.0,14.5 C 131.0,13.0 136.0,12.0 141.0,12.5 C 145.0,13.0 148.5,14.5 151.5,16.5 C 154.5,14.5 158.0,13.0 162.0,12.5 C 167.0,12.0 172.0,13.0 176.0,14.5 C 180.5,12.5 186.5,11.0 193.0,11.0 C 198.0,11.0 202.5,12.0 206.5,13.5 C 211.0,11.5 217.0,10.0 223.0,10.0 C 226.5,10.0 230.0,11.0 232.5,12.0 C 236.0,10.0 241.0,8.5 245.5,8.0 C 250.0,7.5 254.5,8.0 258.5,9.5 C 261.5,10.5 263.5,12.5 274.0,15.0 C 277.0,11.0 282.9,3.7 287.0,4.5 C 296.5,3.0 302.4,3.7 306.5,6.6 C 310.6,9.5 312.6,14.5 312.0,19.0 C 311.4,23.5 308.5,26.8 304.2,28.2 C 300.0,29.5 294.0,28.5 156.5,28.5 C 19.0,28.5 13.0,29.5 8.8,28.2 Z"/>
+    </g>
+    <g fill="#c9a23a">
+      <circle cx="156.5" cy="14.5" r="3"/>
+      <circle cx="80" cy="16" r="2"/>
+      <circle cx="232" cy="16" r="2"/>
+      <circle cx="40" cy="18" r="1.5"/>
+      <circle cx="273" cy="18" r="1.5"/>
+    </g>
+  </svg>
+</div>
+
+<!-- ============ PAGE HEADER ============ -->
+<section class="page-header">
+  <p class="eyebrow">Bill of Fare &nbsp;·&nbsp; Lunch &amp; Dinner</p>
+  <h2>The Menu</h2>
+  <p class="header-note">
+    <strong>A Note from the Kitchen —</strong> All midday meals are served on fresh banana leaf, in the manner of Karaikudi households. Rice is from the Thanjavur delta; cold-pressed gingelly oil is sourced from Virudhunagar; palm jaggery and cane jaggery arrive each fortnight from Tirunelveli. Spice blends are stone-ground in our kitchen on Wednesdays. Vegetarian, jain, and gluten-conscious adaptations available on request.
+  </p>
+</section>
+
+<!-- ============ DIVIDER ============ -->
+<div class="divider" aria-hidden="true">
+  <svg viewBox="150 0 350 250" xmlns="http://www.w3.org/2000/svg">
+    <g fill="#e34234" stroke="#c9a23a" stroke-width="0.5">
+      <path d="M 175,125 L 487,125 L 487,120 L 175,120 Z"/>
+      <path d="M 175,135 L 487,135 L 487,140 L 175,140 Z"/>
+      <circle cx="200" cy="130" r="6"/>
+      <circle cx="240" cy="130" r="4"/>
+      <circle cx="280" cy="130" r="6"/>
+      <circle cx="320" cy="130" r="8" fill="#c9a23a"/>
+      <circle cx="360" cy="130" r="6"/>
+      <circle cx="400" cy="130" r="4"/>
+      <circle cx="440" cy="130" r="6"/>
+      <path d="M 320,110 Q 315,125 320,140 Q 325,125 320,110 Z" fill="#076b88"/>
+      <path d="M 320,115 Q 310,130 320,145 Q 330,130 320,115 Z" fill="none" stroke="#076b88"/>
+    </g>
+  </svg>
+</div>
+
+<!-- ============ TIFFIN ============ -->
+<section class="menu-section">
+  <div class="section-head">
+    <div class="roman">I</div>
+    <h3>Tiffin</h3>
+    <div class="sub">Morning &amp; Evening · Light Plates</div>
+  </div>
+  <div class="menu-grid">
+
+    <article class="card">
+      <div class="card-inner">
+        <div class="card-head">
+          <div class="card-name">
+            <svg class="card-lotus" viewBox="0 0 60 50" aria-hidden="true"><path d="M30 5 Q15 20 30 45 Q45 20 30 5 Z M10 25 Q25 30 30 45 M50 25 Q35 30 30 45" fill="#e34234" stroke="#c9a23a" stroke-width="1"/></svg>
+            <h4>Idli &amp; Sambar</h4>
+          </div>
+          <div class="price">₹180</div>
+        </div>
+        <p class="subtitle">Steamed · Served Three</p>
+        <p class="desc">Three pillow-soft idlis from a 14-hour fermented batter, ladled with drumstick-shallot sambar and a duo of chutneys — coconut-mint and roasted-tomato.</p>
+        <p class="provenance">Idli rice milled in Thanjavur · soaked in iron pots overnight.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-inner">
+        <div class="card-head">
+          <div class="card-name">
+            <svg class="card-lotus" viewBox="0 0 60 50" aria-hidden="true"><path d="M30 5 Q15 20 30 45 Q45 20 30 5 Z M10 25 Q25 30 30 45 M50 25 Q35 30 30 45" fill="#e34234" stroke="#c9a23a" stroke-width="1"/></svg>
+            <h4>Ghee Podi Dosai</h4>
+          </div>
+          <div class="price">₹260</div>
+        </div>
+        <p class="subtitle">Crisp · Cast-Iron Griddle</p>
+        <p class="desc">A crackling, paper-thin dosai brushed with milagai podi and a generous pour of cultured ghee. Plated with sambar and a spoon of warm coconut chutney.</p>
+        <p class="provenance">Stone-ground podi · cultured ghee from Erode dairies.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-inner">
+        <div class="card-head">
+          <div class="card-name">
+            <svg class="card-lotus" viewBox="0 0 60 50" aria-hidden="true"><path d="M30 5 Q15 20 30 45 Q45 20 30 5 Z M10 25 Q25 30 30 45 M50 25 Q35 30 30 45" fill="#e34234" stroke="#c9a23a" stroke-width="1"/></svg>
+            <h4>Kuzhi Paniyaram</h4>
+          </div>
+          <div class="price">₹220</div>
+        </div>
+        <p class="subtitle">Skillet-Cast · Eight Pieces</p>
+        <p class="desc">Eight golden domes from leftover dosai batter, studded with curry leaf, mustard, and shallot. Served with gun-powder tomato thokku and cooling coconut chutney.</p>
+        <p class="provenance">Cast in our seasoned brass paniyaram pan · gingelly oil from Virudhunagar.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-inner">
+        <div class="card-head">
+          <div class="card-name">
+            <svg class="card-lotus" viewBox="0 0 60 50" aria-hidden="true"><path d="M30 5 Q15 20 30 45 Q45 20 30 5 Z M10 25 Q25 30 30 45 M50 25 Q35 30 30 45" fill="#e34234" stroke="#c9a23a" stroke-width="1"/></svg>
+            <h4>Kal Dosai &amp; Kara Chutney</h4>
+          </div>
+          <div class="price">₹240</div>
+        </div>
+        <p class="subtitle">Stone-Griddle · Three Pieces</p>
+        <p class="desc">Thick, lacy dosais cooked slow on the stone tawa, plated with a fiery kara chutney of dried red chilli, shallot, and tamarind, finished with curry-leaf tempering.</p>
+        <p class="provenance">Tamarind from Tirunelveli · sun-dried Guntur chillies.</p>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============ DIVIDER ============ -->
+<div class="divider" aria-hidden="true">
+  <svg viewBox="150 0 350 250" xmlns="http://www.w3.org/2000/svg">
+    <g fill="#e34234" stroke="#c9a23a" stroke-width="0.5">
+      <path d="M 175,125 L 487,125 L 487,120 L 175,120 Z"/>
+      <path d="M 175,135 L 487,135 L 487,140 L 175,140 Z"/>
+      <circle cx="200" cy="130" r="6"/>
+      <circle cx="240" cy="130" r="4"/>
+      <circle cx="280" cy="130" r="6"/>
+      <circle cx="320" cy="130" r="8" fill="#c9a23a"/>
+      <circle cx="360" cy="130" r="6"/>
+      <circle cx="400" cy="130" r="4"/>
+      <circle cx="440" cy="130" r="6"/>
+      <path d="M 320,110 Q 315,125 320,140 Q 325,125 320,110 Z" fill="#076b88"/>
+    </g>
+  </svg>
+</div>
+
+<!-- ============ MEALS ============ -->
+<section class="menu-section">
+  <div class="section-head">
+    <div class="roman">II</div>
+    <h3>Meals · Sappadu</h3>
+    <div class="sub">Served on Banana Leaf · Lunch Only</div>
+  </div>
+  <div class="menu-grid">
+
+    <article class="card">
+      <div class="card-inner">
+        <div class="card-head">
+          <div class="card-name">
+            <svg class="card-lotus" viewBox="0 0 60 50" aria-hidden="true"><path d="M30 5 Q15 20 30 45 Q45 20 30 5 Z M10 25 Q25 30 30 45 M50 25 Q35 30 30 45" fill="#e34234" stroke="#c9a23a" stroke-width="1"/></svg>
+            <h4>Karaikudi Virundhu Sappadu</h4>
+          </div>
+          <div class="price">₹680</div>
+        </div>
+        <p class="subtitle">Heritage Plate · Eleven Items</p>
+        <p class="desc">A weekday feast in the Karaikudi tradition — ponni rice, vatha kuzhambu, more kuzhambu, two poriyals, kootu, urulai varuval, appalam, fresh curd, mango pickle, and paal payasam to close. Refills of rice, sambar, rasam, curd.</p>
+        <p class="provenance">Hand-pounded ponni rice from Mannargudi · banana leaf from Theni.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-inner">
+        <div class="card-head">
+          <div class="card-name">
+            <svg class="card-lotus" viewBox="0 0 60 50" aria-hidden="true"><path d="M30 5 Q15 20 30 45 Q45 20 30 5 Z M10 25 Q25 30 30 45 M50 25 Q35 30 30 45" fill="#e34234" stroke="#c9a23a" stroke-width="1"/></svg>
+            <h4>Sunday Elai Sappadu</h4>
+          </div>
+          <div class="price">₹820</div>
+        </div>
+        <p class="subtitle">Sundays Only · Fifteen Items</p>
+        <p class="desc">Our elaborate Sunday spread — kollu rasam, paruppu urundai kuzhambu, three seasonal poriyals, ennai kathirikai, vazhaipoo vadai, mor kuzhambu, beetroot pachadi, adhirasam, and paal payasam. Served twelve to three.</p>
+        <p class="provenance">Heirloom millets from Sivagangai · jaggery from Tirunelveli pans.</p>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============ QUOTE BAND ============ -->
+<aside class="quote-band">
+  <blockquote>“In Chettinad, a meal is a procession — rice arrives first, then thirteen small dignities, each with its own moment on the leaf.”</blockquote>
+  <cite>— Chef Meenakshi Alagappan, Head Kitchen</cite>
+</aside>
+
+<!-- ============ KUZHAMBU & VARUVAL ============ -->
+<section class="menu-section">
+  <div class="section-head">
+    <div class="roman">III</div>
+    <h3>Kuzhambu &amp; Varuval</h3>
+    <div class="sub">Slow-Cooked · À La Carte</div>
+  </div>
+  <div class="menu-grid">
+
+    <article class="card">
+      <div class="card-inner">
+        <div class="card-head">
+          <div class="card-name">
+            <svg class="card-lotus" viewBox="0 0 60 50" aria-hidden="true"><path d="M30 5 Q15 20 30 45 Q45 20 30 5 Z M10 25 Q25 30 30 45 M50 25 Q35 30 30 45" fill="#e34234" stroke="#c9a23a" stroke-width="1"/></svg>
+            <h4>Chettinad Kozhi Varuval</h4>
+          </div>
+          <div class="price">₹520</div>
+        </div>
+        <p class="subtitle">Pepper-Roast Chicken · Dry</p>
+        <p class="desc">Country chicken stir-fried with our signature varuval masala — black pepper, fennel, kalpasi stone-flower, and curry leaf — until each piece is dark, glossy, and clinging with spice.</p>
+        <p class="provenance">Free-range birds from a farm near Kanchipuram · kalpasi from the Kolli Hills.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-inner">
+        <div class="card-head">
+          <div class="card-name">
+            <svg class="card-lotus" viewBox="0 0 60 50" aria-hidden="true"><path d="M30 5 Q15 20 30 45 Q45 20 30 5 Z M10 25 Q25 30 30 45 M50 25 Q35 30 30 45" fill="#e34234" stroke="#c9a23a" stroke-width="1"/></svg>
+            <h4>Meen Kuzhambu</h4>
+          </div>
+          <div class="price">₹540</div>
+        </div>
+        <p class="subtitle">Tamarind Fish Curry · Coastal</p>
+        <p class="desc">Seer fish simmered in a clay pot with tamarind, fenugreek, shallot, and gingelly oil. The gravy is intentionally thin, stained terracotta-red — best the next day, sharper the morning after.</p>
+        <p class="provenance">Day-boat seer from Rameswaram · tamarind from Tirunelveli groves.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-inner">
+        <div class="card-head">
+          <div class="card-name">
+            <svg class="card-lotus" viewBox="0 0 60 50" aria-hidden="true"><path d="M30 5 Q15 20 30 45 Q45 20 30 5 Z M10 25 Q25 30 30 45 M50 25 Q35 30 30 45" fill="#e34234" stroke="#c9a23a" stroke-width="1"/></svg>
+            <h4>Ennai Kathirikai</h4>
+          </div>
+          <div class="price">₹360</div>
+        </div>
+        <p class="subtitle">Stuffed Brinjal · Gingelly-Oil Braise</p>
+        <p class="desc">Small purple brinjals slit and stuffed with a roasted coconut-sesame masala, then braised low in gingelly oil until the skins blister and the gravy turns mahogany.</p>
+        <p class="provenance">Cold-pressed gingelly oil from a Virudhunagar mill · brinjal from Hosur farms.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-inner">
+        <div class="card-head">
+          <div class="card-name">
+            <svg class="card-lotus" viewBox="0 0 60 50" aria-hidden="true"><path d="M30 5 Q15 20 30 45 Q45 20 30 5 Z M10 25 Q25 30 30 45 M50 25 Q35 30 30 45" fill="#e34234" stroke="#c9a23a" stroke-width="1"/></svg>
+            <h4>Mutton Sukka Varuval</h4>
+          </div>
+          <div class="price">₹620</div>
+        </div>
+        <p class="subtitle">Pepper Mutton · Dry-Spiced</p>
+        <p class="desc">Bone-in mutton slow-cooked, then tossed dry with freshly pounded pepper, curry leaf, and grated coconut. Plated with a wedge of lime and slivered shallot.</p>
+        <p class="provenance">Goat from a Dharmapuri butcher · Tellicherry pepper, single-estate.</p>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============ DIVIDER ============ -->
+<div class="divider" aria-hidden="true">
+  <svg viewBox="150 0 350 250" xmlns="http://www.w3.org/2000/svg">
+    <g fill="#e34234" stroke="#c9a23a" stroke-width="0.5">
+      <path d="M 175,125 L 487,125 L 487,120 L 175,120 Z"/>
+      <path d="M 175,135 L 487,135 L 487,140 L 175,140 Z"/>
+      <circle cx="200" cy="130" r="6"/>
+      <circle cx="240" cy="130" r="4"/>
+      <circle cx="280" cy="130" r="6"/>
+      <circle cx="320" cy="130" r="8" fill="#c9a23a"/>
+      <circle cx="360" cy="130" r="6"/>
+      <circle cx="400" cy="130" r="4"/>
+      <circle cx="440" cy="130" r="6"/>
+    </g>
+  </svg>
+</div>
+
+<!-- ============ SWEETS ============ -->
+<section class="menu-section">
+  <div class="section-head">
+    <div class="roman">IV</div>
+    <h3>Sweets · Inippu</h3>
+    <div class="sub">To Close the Leaf</div>
+  </div>
+  <div class="menu-grid">
+
+    <article class="card">
+      <div class="card-inner">
+        <div class="card-head">
+          <div class="card-name">
+            <svg class="card-lotus" viewBox="0 0 60 50" aria-hidden="true"><path d="M30 5 Q15 20 30 45 Q45 20 30 5 Z M10 25 Q25 30 30 45 M50 25 Q35 30 30 45" fill="#e34234" stroke="#c9a23a" stroke-width="1"/></svg>
+            <h4>Paal Payasam</h4>
+          </div>
+          <div class="price">₹180</div>
+        </div>
+        <p class="subtitle">Milk-Rice Pudding · Warm or Cold</p>
+        <p class="desc">Whole milk reduced for three hours over low flame with a small handful of jeerakasala rice and cane sugar, finished with cardamom and golden cashew.</p>
+        <p class="provenance">A2 milk from a Hosur dairy cooperative · jeerakasala from Wayanad.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-inner">
+        <div class="card-head">
+          <div class="card-name">
+            <svg class="card-lotus" viewBox="0 0 60 50" aria-hidden="true"><path d="M30 5 Q15 20 30 45 Q45 20 30 5 Z M10 25 Q25 30 30 45 M50 25 Q35 30 30 45" fill="#e34234" stroke="#c9a23a" stroke-width="1"/></svg>
+            <h4>Adhirasam</h4>
+          </div>
+          <div class="price">₹120</div>
+        </div>
+        <p class="subtitle">Jaggery Disc · Two Pieces</p>
+        <p class="desc">Sun-dried rice flour kneaded with thick jaggery syrup and dry ginger, deep-fried in gingelly oil to a dark, chewy disc with a crackled rim. The Chettiar wedding sweet.</p>
+        <p class="provenance">Palm jaggery from Tirunelveli · made fresh on Fridays.</p>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="arcade" aria-hidden="true">
+    <div class="bay bay-flank">
+      <svg class="lotus-flank" viewBox="0 0 60 50" aria-hidden="true"><path d="M30 5 Q15 20 30 45 Q45 20 30 5 Z M10 25 Q25 30 30 45 M50 25 Q35 30 30 45" fill="#e34234" stroke="#c9a23a" stroke-width="1.5"/></svg>
+      <div class="bay-arch"></div>
+    </div>
+    <div class="bay">
+      <div class="bay-arch"></div>
+    </div>
+    <div class="bay bay-center">
+      <svg class="om" viewBox="0 0 356 367" aria-hidden="true"><path d="M 90,354 C 51,340 23,305 12,258 C 7,237 6,201 10,201 C 11,201 15,211 18,223 C 25,249 37,273 48,285 C 67,305 114,313 140,301 C 161,291 170,268 161,246 C 154,229 138,224 108,228 C 108,228 90,208 84,173 L 103,175 C 125,177 142,172 151,161 C 159,150 159,146 150,135 C 137,120 113,124 64,149 L 40,109 L 50,101 C 76,81 120,72 146,80 C 169,87 186,118 181,143 C 178,160 164,184 154,191 L 144,197 L 157,203 C 179,213 192,205 208,174 C 229,132 244,121 276,121 C 292,120 297,122 308,130 C 336,149 351,190 348,236 C 344,294 316,329 275,329 C 253,329 238,321 227,303 C 216,286 212,254 218,240 C 220,233 221,233 221,238 C 221,248 233,264 243,270 C 269,283 306,266 321,235 C 332,211 326,165 311,157 C 307,155 299,153 293,153 C 279,153 269,163 254,190 C 248,199 240,210 234,216 C 225,224 222,225 204,225 L 184,225 L 190,240 C 200,260 199,294 190,314 C 181,332 161,350 145,355 C 129,359 104,358 90,354 z M 165,75 C 156,60 151,32 157,32 C 164,47 178,61 194,70 C 221,83 249,78 279,54 C 286,48 292,44 293,45 C 300,57 313,66 317,80 C 317,85 293,101 274,109 C 226,122 193,117 165,75 z M 189,40 L 220,6 L 255,38 C 243,48 235,63 221,70 C 210,63 195,53 189,40 z" fill="#e34234"/></svg>
+    </div>
+    <div class="bay">
+      <div class="bay-arch"></div>
+    </div>
+    <div class="bay bay-flank">
+      <svg class="lotus-flank" viewBox="0 0 60 50" aria-hidden="true"><path d="M30 5 Q15 20 30 45 Q45 20 30 5 Z M10 25 Q25 30 30 45 M50 25 Q35 30 30 45" fill="#e34234" stroke="#c9a23a" stroke-width="1.5"/></svg>
+      <div class="bay-arch"></div>
+    </div>
+  </div>
+
+  <div class="footer-cols">
+    <div class="footer-col">
+      <h5>Address</h5>
+      <p>Kalasha</p>
+      <p>14, Lavelle Bagh Lane</p>
+      <p>off Lavelle Road</p>
+      <p>Bangalore 560 001</p>
+    </div>
+    <div class="footer-col">
+      <h5>Hours</h5>
+      <p>Tiffin · 7.30 to 10.30 am</p>
+      <p>Lunch · 12 noon to 3 pm</p>
+      <p>Dinner · 7 to 10.30 pm</p>
+      <p>Closed Tuesday afternoons</p>
+    </div>
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <p>+91 80 4123 9988</p>
+      <p>reserve@kalasha.kitchen</p>
+      <p>Reservations advised</p>
+      <p>for parties above four</p>
+    </div>
+  </div>
+
+  <div class="footer-credit">
+    A kitchen kept by Chef Meenakshi Alagappan &amp; the cooks of the Karaikudi line · Bangalore, since 2019
+  </div>
+</footer>
+
+</body>
+</html>

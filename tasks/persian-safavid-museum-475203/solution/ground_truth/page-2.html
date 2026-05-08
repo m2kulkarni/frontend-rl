@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Permanent Collection — Dār al-Naqsh</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  /* ---------- Base ---------- */
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    font-size: 17px;
+    line-height: 1.65;
+  }
+  a { color: var(--primary); text-decoration: none; }
+  em.accent { color: var(--text-emphasis); font-style: normal; font-weight: 600; }
+
+  /* ---------- Top header strip ---------- */
+  .top-strip {
+    background: var(--primary);
+    color: var(--bg);
+    text-align: center;
+    padding: 10px 0 8px;
+    letter-spacing: 0.18em;
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+  .top-strip .ar {
+    font-size: 14px;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+    margin-right: 14px;
+  }
+
+  /* ---------- Nav band ---------- */
+  .navwrap {
+    background: var(--bg);
+    border-top: 1px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
+    padding: 14px 0 12px;
+  }
+  .navwrap nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    flex-wrap: wrap;
+  }
+  .navwrap nav a {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    text-transform: lowercase;
+    letter-spacing: 0.14em;
+    font-size: 14px;
+    color: var(--primary);
+    padding: 4px 18px;
+    position: relative;
+  }
+  .navwrap nav a[aria-current="page"] {
+    border-bottom: 1px solid var(--accent);
+    color: var(--text-emphasis);
+  }
+  .navwrap nav .palmette {
+    color: var(--accent);
+    font-size: 11px;
+    line-height: 1;
+    user-select: none;
+  }
+
+  /* ---------- Page main rails ---------- */
+  main {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 80px;
+  }
+
+  /* ---------- Hero / page title ---------- */
+  .hero {
+    position: relative;
+    text-align: center;
+    padding: 64px 0 36px;
+  }
+  .hero .archframe {
+    position: absolute;
+    top: 24px; left: 50%;
+    transform: translateX(-50%);
+    width: 560px;
+    height: 480px;
+    color: var(--primary);
+    opacity: 0.10;
+    pointer-events: none;
+  }
+  .hero .archframe svg { width: 100%; height: 100%; }
+  .hero .kicker {
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+  .hero h1 {
+    font-family: var(--font-display), serif;
+    font-size: 54px;
+    font-weight: 400;
+    color: var(--primary);
+    margin: 0 0 8px;
+    letter-spacing: 0.04em;
+    line-height: 1.05;
+  }
+  .hero h1 .amp {
+    color: var(--accent);
+    font-style: italic;
+  }
+  .hero .subtitle {
+    font-style: italic;
+    color: var(--text);
+    max-width: 640px;
+    margin: 14px auto 0;
+    font-size: 17px;
+  }
+  .hero .seal {
+    width: 64px; height: 64px;
+    margin: 22px auto 0;
+    color: var(--accent);
+  }
+
+  /* ---------- Section dividers ---------- */
+  .divider {
+    display: flex;
+    justify-content: center;
+    margin: 40px 0;
+    color: var(--ornament);
+  }
+  .divider svg {
+    width: 360px;
+    height: 18px;
+    fill: var(--ornament);
+  }
+
+  /* ---------- Intro band ---------- */
+  .intro {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 0 24px;
+  }
+  .intro h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 22px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin: 0 0 14px;
+  }
+  .intro p { margin: 0 0 12px; }
+
+  /* ---------- Halls index strip ---------- */
+  .halls-axis {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin: 30px 0 10px;
+  }
+  .hall-tab {
+    text-align: center;
+    border: 1px solid var(--primary);
+    padding: 14px 8px;
+    background: var(--bg);
+    position: relative;
+  }
+  .hall-tab .roman {
+    font-family: var(--font-display), serif;
+    color: var(--accent);
+    letter-spacing: 0.3em;
+    font-size: 12px;
+  }
+  .hall-tab .name {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 13px;
+    color: var(--primary);
+    margin-top: 4px;
+  }
+
+  /* ---------- Hall card (ogee arch) ---------- */
+  .hall {
+    margin: 56px 0;
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    gap: 56px;
+    align-items: start;
+  }
+  .hall.flip { grid-template-columns: 1fr 360px; }
+  .hall.flip .arch-card { order: 2; }
+  .hall.flip .hall-text { order: 1; text-align: right; }
+
+  .arch-card {
+    position: relative;
+    width: 360px;
+    height: 440px;
+    margin: 0 auto;
+  }
+  .arch-card .arch-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    color: var(--primary);
+  }
+  .arch-card .arch-svg svg { width: 100%; height: 100%; display: block; }
+  .arch-card .inner {
+    position: absolute;
+    top: 38px; left: 38px; right: 38px; bottom: 60px;
+    border: 1px solid var(--accent);
+    background:
+      radial-gradient(ellipse at center, rgba(42,138,138,0.08) 0%, transparent 70%),
+      var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+  }
+  .arch-card .plate {
+    text-align: center;
+  }
+  .arch-card .plate .roman {
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.3em;
+    color: var(--secondary);
+    font-size: 13px;
+  }
+  .arch-card .plate .obj {
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+    font-size: 22px;
+    margin: 8px 0 6px;
+    line-height: 1.2;
+    letter-spacing: 0.04em;
+  }
+  .arch-card .plate .place {
+    font-style: italic;
+    color: var(--text);
+    font-size: 14px;
+  }
+  .arch-card .plate .acc {
+    margin-top: 14px;
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+  }
+  /* corner spandrel girih fragment */
+  .arch-card .spandrel {
+    position: absolute;
+    width: 46px;
+    height: 46px;
+    color: var(--secondary);
+  }
+  .arch-card .spandrel.tl { top: 6px; left: 6px; }
+  .arch-card .spandrel.tr { top: 6px; right: 6px; transform: scaleX(-1); }
+  .arch-card .spandrel svg { width: 100%; height: 100%; opacity: 0.7; }
+
+  .hall-text {
+    padding-top: 12px;
+  }
+  .hall-text .roman-num {
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.4em;
+    color: var(--accent);
+  }
+  .hall-text h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 32px;
+    color: var(--primary);
+    margin: 6px 0 4px;
+    letter-spacing: 0.03em;
+    line-height: 1.15;
+  }
+  .hall-text .arabic {
+    font-family: var(--font-display), serif;
+    color: var(--secondary);
+    letter-spacing: 0.05em;
+    font-size: 15px;
+    margin-bottom: 16px;
+  }
+  .hall-text p { margin: 0 0 14px; }
+
+  .hall-text dl {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    row-gap: 6px;
+    column-gap: 14px;
+    margin: 18px 0 0;
+    padding: 14px 0 0;
+    border-top: 1px solid rgba(30,58,95,0.25);
+    font-size: 14px;
+  }
+  .hall.flip .hall-text dl { direction: rtl; }
+  .hall.flip .hall-text dl > * { direction: ltr; text-align: right; }
+  .hall-text dt {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 11px;
+    color: var(--text-emphasis);
+    padding-top: 2px;
+  }
+  .hall-text dd { margin: 0; }
+
+  /* mini divider between halls */
+  .mini-div {
+    text-align: center;
+    color: var(--accent);
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.5em;
+    font-size: 12px;
+    margin: 30px 0 0;
+  }
+
+  /* ---------- Acquisitions table ---------- */
+  .ledger {
+    margin: 60px auto 30px;
+    max-width: 980px;
+    border: 1px solid var(--primary);
+    padding: 32px 40px 28px;
+    background:
+      linear-gradient(var(--bg), var(--bg));
+    position: relative;
+  }
+  .ledger:before, .ledger:after {
+    content: "";
+    position: absolute;
+    left: 8px; right: 8px;
+    height: 1px;
+    background: var(--accent);
+  }
+  .ledger:before { top: 8px; }
+  .ledger:after { bottom: 8px; }
+  .ledger h2 {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 22px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin: 0 0 6px;
+  }
+  .ledger .sub {
+    text-align: center;
+    font-style: italic;
+    color: var(--secondary);
+    margin: 0 0 22px;
+    font-size: 14px;
+  }
+  table.ledger-tbl {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  table.ledger-tbl th {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 11px;
+    color: var(--text-emphasis);
+    text-align: left;
+    border-bottom: 1px solid var(--primary);
+    padding: 8px 6px;
+    font-weight: 400;
+  }
+  table.ledger-tbl td {
+    padding: 10px 6px;
+    border-bottom: 1px dotted rgba(30,58,95,0.3);
+    vertical-align: top;
+  }
+  table.ledger-tbl tr:last-child td { border-bottom: none; }
+  table.ledger-tbl td.inv {
+    font-family: var(--font-display), serif;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+  }
+
+  /* ---------- Curatorial note ---------- */
+  .curator {
+    text-align: center;
+    max-width: 720px;
+    margin: 30px auto 60px;
+    font-style: italic;
+    color: var(--text);
+  }
+  .curator .sig {
+    display: block;
+    margin-top: 12px;
+    font-style: normal;
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-size: 12px;
+    color: var(--text-emphasis);
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    background: var(--primary);
+    color: var(--bg);
+    margin-top: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  footer .girih-bg {
+    position: absolute;
+    inset: 0;
+    opacity: 0.08;
+    pointer-events: none;
+    background-image: url("svg/girih-tessellation-2.svg");
+    background-size: 600px;
+  }
+  footer .inner {
+    position: relative;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 56px 80px 28px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+    text-align: center;
+  }
+  footer h4 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    font-size: 13px;
+    color: var(--accent);
+    margin: 0 0 14px;
+  }
+  footer p { margin: 4px 0; font-size: 14px; line-height: 1.6; color: var(--bg); }
+  footer .seal {
+    width: 70px; height: 70px;
+    margin: 0 auto 8px;
+    color: var(--accent);
+  }
+  footer .tail {
+    position: relative;
+    text-align: center;
+    padding: 18px 0 22px;
+    border-top: 1px solid var(--accent);
+    margin: 0 80px;
+  }
+  footer .tail .orn {
+    font-family: var(--font-display), serif;
+    color: var(--accent);
+    letter-spacing: 0.5em;
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+  footer .tail small {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.2em;
+    color: var(--bg);
+    font-size: 11px;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- ======== Top header strip ======== -->
+<div class="top-strip">
+  <span class="ar">دار النقش</span>
+  Dār al-Naqsh &nbsp;·&nbsp; Museum of Safavid Ornament &nbsp;·&nbsp; Isfahan
+</div>
+
+<!-- ======== Navigation ======== -->
+<div class="navwrap">
+  <nav aria-label="Primary">
+    <a href="page-1.html">Entrance</a>
+    <span class="palmette">❖</span>
+    <a href="page-2.html" aria-current="page">Permanent Collection</a>
+    <span class="palmette">❖</span>
+    <a href="page-3.html">Current Exhibition</a>
+    <span class="palmette">❖</span>
+    <a href="page-4.html">Royal Kitābkhāna</a>
+    <span class="palmette">❖</span>
+    <a href="page-5.html">Visit</a>
+    <span class="palmette">❖</span>
+    <a href="page-6.html">About</a>
+  </nav>
+</div>
+
+<main>
+
+  <!-- ======== Hero ======== -->
+  <section class="hero">
+    <div class="archframe" aria-hidden="true">
+      <svg viewBox="147 244 500 550" xmlns="http://www.w3.org/2000/svg">
+        <g fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" transform="translate(8.2,-11.9)">
+          <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+          <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+          <g transform="matrix(-1,0,0,1,777.88071,-0.297)">
+            <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+            <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+    <div class="kicker">Galleries I — IV</div>
+    <h1>The Permanent <span class="amp">&amp;</span> Founding Collection</h1>
+    <p class="subtitle">Four halls disposed along the central axis of the museum, devoted to the principal ornamental arts of Safavid Iran, 1501–1736 — assembled from acquisitions, bequests, and long-term deposits of the Naqsh-e Jahān Trust.</p>
+  </section>
+
+  <!-- divider -->
+  <div class="divider" aria-hidden="true">
+    <svg viewBox="0 0 437.999 18.893" xmlns="http://www.w3.org/2000/svg">
+      <use href="svg/arabesque-filet-divider.svg#root"/>
+      <path d="M0,9.445c0,0,37.005-0.063,73.998-0.829c18.495-0.386,36.989-0.949,50.831-1.785c6.919-0.414,12.677-0.906,16.663-1.46c1.99-0.28,3.539-0.582,4.535-0.878c0.502-0.146,0.844-0.297,1.049-0.405c0.157-0.107,0.238-0.162,0.238-0.162l0.42-0.287l0.656,0.656l-0.369,0.338c0,0-0.154,0.142-0.456,0.324c-0.291,0.154-0.714,0.331-1.256,0.484c-1.085,0.314-2.667,0.608-4.686,0.879c-4.037,0.533-9.811,0.985-16.745,1.354c-13.868,0.744-32.369,1.183-50.87,1.443C37.003,9.632,0,9.445,0,9.445z"/>
+      <circle cx="219" cy="9.4" r="6" fill="none" stroke="currentColor" stroke-width="1.4"/>
+      <circle cx="219" cy="9.4" r="2.4"/>
+      <path d="M437.999,9.445c0,0-37.004,0.187-74.007-0.329c-18.501-0.261-37.002-0.699-50.869-1.443c-6.935-0.368-12.708-0.82-16.745-1.354c-2.019-0.271-3.601-0.565-4.687-0.879c-0.541-0.153-0.965-0.33-1.256-0.484c-0.302-0.183-0.456-0.324-0.456-0.324l-0.369-0.338l0.656-0.656l0.42,0.287c0,0,0.081,0.055,0.238,0.162c0.204,0.108,0.546,0.26,1.048,0.405c0.996,0.296,2.545,0.598,4.535,0.878c3.986,0.554,9.744,1.046,16.663,1.46C327.011,7.667,345.506,8.23,364,8.616C400.994,9.382,437.999,9.445,437.999,9.445z"/>
+    </svg>
+  </div>
+
+  <!-- ======== Intro ======== -->
+  <section class="intro">
+    <h2>An Index of the Halls</h2>
+    <p>The collection of Dār al-Naqsh is arranged along a single ivory axis running from the entrance vestibule to the rear courtyard. Each of its four halls treats one of the foremost ornamental disciplines that flourished under the patronage of Shāh Ismāʿīl, Shāh Ṭahmāsp, and — most particularly — <em class="accent">Shāh ʿAbbās the Great</em>, whose remaking of Isfahan in the late sixteenth century gave shape to the period style.</p>
+    <p>Representative objects are noted below; full provenance and accession years follow in the <em>ledger of acquisitions</em>.</p>
+  </section>
+
+  <!-- halls axis tabs -->
+  <div class="halls-axis">
+    <div class="hall-tab"><div class="roman">I</div><div class="name">Tilework &amp; Mosaic</div></div>
+    <div class="hall-tab"><div class="roman">II</div><div class="name">Manuscript &amp; Album</div></div>
+    <div class="hall-tab"><div class="roman">III</div><div class="name">Carpet &amp; Textile</div></div>
+    <div class="hall-tab"><div class="roman">IV</div><div class="name">Architectural Fragment</div></div>
+  </div>
+
+  <!-- ======== Hall I — Tilework ======== -->
+  <section class="hall">
+    <div class="arch-card">
+      <div class="arch-svg" aria-hidden="true">
+        <svg viewBox="147 244 500 550" xmlns="http://www.w3.org/2000/svg">
+          <g fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" transform="translate(8.2,-11.9)">
+            <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+            <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+            <g transform="matrix(-1,0,0,1,777.88071,-0.297)">
+              <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+              <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <div class="spandrel tl" aria-hidden="true">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <g fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M50 8 L70 30 L92 50 L70 70 L50 92 L30 70 L8 50 L30 30 Z"/>
+            <path d="M50 26 L62 38 L74 50 L62 62 L50 74 L38 62 L26 50 L38 38 Z"/>
+            <path d="M50 8 L50 92 M8 50 L92 50 M22 22 L78 78 M22 78 L78 22"/>
+          </g>
+        </svg>
+      </div>
+      <div class="spandrel tr" aria-hidden="true">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <g fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M50 8 L70 30 L92 50 L70 70 L50 92 L30 70 L8 50 L30 30 Z"/>
+            <path d="M50 26 L62 38 L74 50 L62 62 L50 74 L38 62 L26 50 L38 38 Z"/>
+            <path d="M50 8 L50 92 M8 50 L92 50 M22 22 L78 78 M22 78 L78 22"/>
+          </g>
+        </svg>
+      </div>
+      <div class="inner">
+        <div class="plate">
+          <div class="roman">Hall I · Object 1</div>
+          <div class="obj">Haft-rang Dado Panel</div>
+          <div class="place">Masjid-e Shāh, Isfahan, c. 1620</div>
+          <div class="acc">Acc. 1948 · Inv. T-014</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hall-text">
+      <div class="roman-num">HALL · I</div>
+      <h3>Tilework &amp; Mosaic</h3>
+      <div class="arabic">kāshī-kārī &nbsp;·&nbsp; کاشی‌کاری</div>
+      <p>The first hall traces the Safavid revolution in architectural ceramic, from the ascetic <em>banna’i</em> brickwork of Tabriz to the great <em>haft-rang</em> ("seven-colour") fields developed in Isfahan after 1598. Cobalt and turquoise dominate the palette, set against ivory <em>kāshī</em>, with manganese aubergine and a measured oxblood reserved — as in the original buildings — for emphasized inscriptions.</p>
+      <p>At the centre of the hall stands a <em class="accent">haft-rang panel from the Masjid-e Shāh dado</em>, recovered during the 1932 conservation campaign and entered into the collection through the Maydān Trust. Its split-leaf arabesque, signed in the lower border by the workshop of <em>Ustād Muḥammad Riẓā Imāmī</em>, is the touchstone of the gallery.</p>
+      <dl>
+        <dt>Centrepiece</dt><dd>Haft-rang dado panel, Masjid-e Shāh, c. 1620</dd>
+        <dt>Holdings</dt><dd>74 panels · 312 individual tiles</dd>
+        <dt>Period</dt><dd>1501 – 1736</dd>
+        <dt>Acquired</dt><dd>1932 – 2011</dd>
+      </dl>
+    </div>
+  </section>
+
+  <div class="mini-div">❖ ❖ ❖</div>
+
+  <!-- ======== Hall II — Manuscript ======== -->
+  <section class="hall flip">
+    <div class="hall-text">
+      <div class="roman-num">HALL · II</div>
+      <h3>Manuscript &amp; Album</h3>
+      <div class="arabic">muraqqaʿ &nbsp;·&nbsp; مرقّع</div>
+      <p>The second hall presents the painted folio and the bound <em>muraqqaʿ</em> album: the great Safavid invention by which finished paintings, calligraphic exercises, and even European prints were assembled into the patron's private gallery. The room is lit low, the cases shallow, and pages are rotated quarterly to preserve their gold and lapis.</p>
+      <p>The keystone is a single folio <em class="accent">attributed to Riẓā-yi ʿAbbāsī (c. 1605)</em> — a seated youth holding a wine-cup, the contour drawn in a fluid, calligraphic line that became the model for the next two generations of Isfahani painters. The folio entered the Dār al-Naqsh in 1961 as part of the Mostofī bequest, accompanied by four further leaves from the same dispersed album.</p>
+      <dl>
+        <dt>Centrepiece</dt><dd>Folio attr. Riẓā-yi ʿAbbāsī, c. 1605</dd>
+        <dt>Holdings</dt><dd>9 bound MSS · 186 single folios</dd>
+        <dt>Calligraphers</dt><dd>Mīr ʿImād, ʿAlī Riẓā, others</dd>
+        <dt>Acquired</dt><dd>1961 (Mostofī bequest), with later additions</dd>
+      </dl>
+    </div>
+
+    <div class="arch-card">
+      <div class="arch-svg" aria-hidden="true">
+        <svg viewBox="147 244 500 550" xmlns="http://www.w3.org/2000/svg">
+          <g fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" transform="translate(8.2,-11.9)">
+            <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+            <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+            <g transform="matrix(-1,0,0,1,777.88071,-0.297)">
+              <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+              <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <div class="spandrel tl" aria-hidden="true">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <g fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M50 8 L70 30 L92 50 L70 70 L50 92 L30 70 L8 50 L30 30 Z"/>
+            <path d="M50 26 L62 38 L74 50 L62 62 L50 74 L38 62 L26 50 L38 38 Z"/>
+            <path d="M50 8 L50 92 M8 50 L92 50 M22 22 L78 78 M22 78 L78 22"/>
+          </g>
+        </svg>
+      </div>
+      <div class="spandrel tr" aria-hidden="true">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <g fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M50 8 L70 30 L92 50 L70 70 L50 92 L30 70 L8 50 L30 30 Z"/>
+            <path d="M50 26 L62 38 L74 50 L62 62 L50 74 L38 62 L26 50 L38 38 Z"/>
+            <path d="M50 8 L50 92 M8 50 L92 50 M22 22 L78 78 M22 78 L78 22"/>
+          </g>
+        </svg>
+      </div>
+      <div class="inner">
+        <div class="plate">
+          <div class="roman">Hall II · Object 1</div>
+          <div class="obj">Seated Youth with Wine-Cup</div>
+          <div class="place">Attr. Riẓā-yi ʿAbbāsī, Isfahan, c. 1605</div>
+          <div class="acc">Acc. 1961 · Inv. M-103</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="mini-div">❖ ❖ ❖</div>
+
+  <!-- ======== Hall III — Carpet ======== -->
+  <section class="hall">
+    <div class="arch-card">
+      <div class="arch-svg" aria-hidden="true">
+        <svg viewBox="147 244 500 550" xmlns="http://www.w3.org/2000/svg">
+          <g fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" transform="translate(8.2,-11.9)">
+            <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+            <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+            <g transform="matrix(-1,0,0,1,777.88071,-0.297)">
+              <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+              <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <div class="spandrel tl" aria-hidden="true">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <g fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M50 8 L70 30 L92 50 L70 70 L50 92 L30 70 L8 50 L30 30 Z"/>
+            <path d="M50 26 L62 38 L74 50 L62 62 L50 74 L38 62 L26 50 L38 38 Z"/>
+            <path d="M50 8 L50 92 M8 50 L92 50 M22 22 L78 78 M22 78 L78 22"/>
+          </g>
+        </svg>
+      </div>
+      <div class="spandrel tr" aria-hidden="true">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <g fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M50 8 L70 30 L92 50 L70 70 L50 92 L30 70 L8 50 L30 30 Z"/>
+            <path d="M50 26 L62 38 L74 50 L62 62 L50 74 L38 62 L26 50 L38 38 Z"/>
+            <path d="M50 8 L50 92 M8 50 L92 50 M22 22 L78 78 M22 78 L78 22"/>
+          </g>
+        </svg>
+      </div>
+      <div class="inner">
+        <div class="plate">
+          <div class="roman">Hall III · Object 1</div>
+          <div class="obj">Polonaise Carpet Fragment</div>
+          <div class="place">Kashan, early 17th century</div>
+          <div class="acc">Acc. 1974 · Inv. C-027</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hall-text">
+      <div class="roman-num">HALL · III</div>
+      <h3>Carpet &amp; Textile</h3>
+      <div class="arabic">qālī-bāfī &nbsp;·&nbsp; قالی‌بافی</div>
+      <p>Hall III gathers the great court textiles of the seventeenth century: silk velvets and lampas from Yazd and Kashan, embroidered <em>termeh</em> from Isfahan, and the silk-and-silver-thread carpets which Europeans, mistaking their origin, called "Polonaise". The hall is hung in shallow daylight, the most fugitive pieces protected by linen veils.</p>
+      <p>The principal object is a <em class="accent">Polonaise carpet fragment, Kashan, early 17th century</em>, woven on a silk warp with brocaded silver-gilt thread now darkened to a soft grey. It preserves a complete corner cartouche and a portion of the floral lattice; comparable pieces survive in Krakow, Vienna, and the Gulbenkian. Acquired at auction in Geneva in 1974 with funds from the Avicenna Society.</p>
+      <dl>
+        <dt>Centrepiece</dt><dd>Polonaise carpet fragment, Kashan, early 17th c.</dd>
+        <dt>Holdings</dt><dd>23 carpets &amp; fragments · 41 textiles</dd>
+        <dt>Materials</dt><dd>Silk, wool, silver-gilt thread</dd>
+        <dt>Acquired</dt><dd>1974 (Avicenna Society)</dd>
+      </dl>
+    </div>
+  </section>
+
+  <div class="mini-div">❖ ❖ ❖</div>
+
+  <!-- ======== Hall IV — Architectural Fragment ======== -->
+  <section class="hall flip">
+    <div class="hall-text">
+      <div class="roman-num">HALL · IV</div>
+      <h3>Architectural Fragment</h3>
+      <div class="arabic">pāra-ye miʿmārī &nbsp;·&nbsp; پارهٔ معماری</div>
+      <p>The final hall is the most intimate, devoted to the smaller members of Safavid building: carved stucco <em>muqarnas</em> cells, plaster cartouches from demolished pavilions, fragments of marble inscription, and — at its centre — the wooden bracketry of the urban house. Each piece is mounted at the height it originally occupied, so that the visitor walks beneath them as in a vanished room.</p>
+      <p>The presiding object is a <em class="accent">carved teak column-bracket from a private Isfahani residence</em>, datable on stylistic grounds to c. 1660 and removed before the 1968 demolition of a merchant house in the Jūbāra quarter. Its split-palmette scroll is closely related to the brackets of the ʿĀlī Qāpū's <em>tālār</em>; the piece entered the museum in 1969, the gift of the Khalili family.</p>
+      <dl>
+        <dt>Centrepiece</dt><dd>Teak column-bracket, Isfahan (Jūbāra), c. 1660</dd>
+        <dt>Holdings</dt><dd>118 stucco · 47 stone · 12 wood</dd>
+        <dt>Provenance</dt><dd>Demolitions, excavations, deposits</dd>
+        <dt>Acquired</dt><dd>1969 (Khalili gift), with later additions</dd>
+      </dl>
+    </div>
+
+    <div class="arch-card">
+      <div class="arch-svg" aria-hidden="true">
+        <svg viewBox="147 244 500 550" xmlns="http://www.w3.org/2000/svg">
+          <g fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" transform="translate(8.2,-11.9)">
+            <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+            <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+            <g transform="matrix(-1,0,0,1,777.88071,-0.297)">
+              <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+              <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <div class="spandrel tl" aria-hidden="true">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <g fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M50 8 L70 30 L92 50 L70 70 L50 92 L30 70 L8 50 L30 30 Z"/>
+            <path d="M50 26 L62 38 L74 50 L62 62 L50 74 L38 62 L26 50 L38 38 Z"/>
+            <path d="M50 8 L50 92 M8 50 L92 50 M22 22 L78 78 M22 78 L78 22"/>
+          </g>
+        </svg>
+      </div>
+      <div class="spandrel tr" aria-hidden="true">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <g fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M50 8 L70 30 L92 50 L70 70 L50 92 L30 70 L8 50 L30 30 Z"/>
+            <path d="M50 26 L62 38 L74 50 L62 62 L50 74 L38 62 L26 50 L38 38 Z"/>
+            <path d="M50 8 L50 92 M8 50 L92 50 M22 22 L78 78 M22 78 L78 22"/>
+          </g>
+        </svg>
+      </div>
+      <div class="inner">
+        <div class="plate">
+          <div class="roman">Hall IV · Object 1</div>
+          <div class="obj">Carved Teak Column-Bracket</div>
+          <div class="place">Isfahan, Jūbāra quarter, c. 1660</div>
+          <div class="acc">Acc. 1969 · Inv. A-058</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- divider -->
+  <div class="divider" aria-hidden="true">
+    <svg viewBox="0 0 437.999 18.893" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,9.445c0,0,37.005-0.063,73.998-0.829c18.495-0.386,36.989-0.949,50.831-1.785c6.919-0.414,12.677-0.906,16.663-1.46c1.99-0.28,3.539-0.582,4.535-0.878c0.502-0.146,0.844-0.297,1.049-0.405c0.157-0.107,0.238-0.162,0.238-0.162l0.42-0.287l0.656,0.656l-0.369,0.338c0,0-0.154,0.142-0.456,0.324c-0.291,0.154-0.714,0.331-1.256,0.484c-1.085,0.314-2.667,0.608-4.686,0.879c-4.037,0.533-9.811,0.985-16.745,1.354c-13.868,0.744-32.369,1.183-50.87,1.443C37.003,9.632,0,9.445,0,9.445z"/>
+      <circle cx="219" cy="9.4" r="6" fill="none" stroke="currentColor" stroke-width="1.4"/>
+      <circle cx="219" cy="9.4" r="2.4"/>
+      <path d="M437.999,9.445c0,0-37.004,0.187-74.007-0.329c-18.501-0.261-37.002-0.699-50.869-1.443c-6.935-0.368-12.708-0.82-16.745-1.354c-2.019-0.271-3.601-0.565-4.687-0.879c-0.541-0.153-0.965-0.33-1.256-0.484c-0.302-0.183-0.456-0.324-0.456-0.324l-0.369-0.338l0.656-0.656l0.42,0.287c0,0,0.081,0.055,0.238,0.162c0.204,0.108,0.546,0.26,1.048,0.405c0.996,0.296,2.545,0.598,4.535,0.878c3.986,0.554,9.744,1.046,16.663,1.46C327.011,7.667,345.506,8.23,364,8.616C400.994,9.382,437.999,9.445,437.999,9.445z"/>
+    </svg>
+  </div>
+
+  <!-- ======== Ledger of acquisitions ======== -->
+  <section class="ledger">
+    <h2>Ledger of Founding Acquisitions</h2>
+    <p class="sub">Provenance and accession years of the principal centrepieces</p>
+    <table class="ledger-tbl">
+      <thead>
+        <tr>
+          <th style="width:90px;">Inv.</th>
+          <th>Object</th>
+          <th>Date / Place</th>
+          <th>Provenance</th>
+          <th style="width:90px;">Acc.</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="inv">T-014</td>
+          <td>Haft-rang dado panel, workshop of Imāmī</td>
+          <td>c. 1620 · Masjid-e Shāh, Isfahan</td>
+          <td>Recovered 1932 conservation; deposit of Maydān-e Naqsh-e Jahān Trust</td>
+          <td class="inv">1948</td>
+        </tr>
+        <tr>
+          <td class="inv">M-103</td>
+          <td>Folio: Seated Youth with Wine-Cup</td>
+          <td>c. 1605 · attr. Riẓā-yi ʿAbbāsī, Isfahan</td>
+          <td>Mostofī family album; bequest of H. Mostofī, Tehran</td>
+          <td class="inv">1961</td>
+        </tr>
+        <tr>
+          <td class="inv">C-027</td>
+          <td>"Polonaise" carpet fragment, silk &amp; silver-gilt</td>
+          <td>early 17th c. · Kashan</td>
+          <td>Acquired at auction, Geneva, with Avicenna Society funds</td>
+          <td class="inv">1974</td>
+        </tr>
+        <tr>
+          <td class="inv">A-058</td>
+          <td>Carved teak column-bracket, palmette scroll</td>
+          <td>c. 1660 · Isfahan, Jūbāra quarter</td>
+          <td>Removed prior to 1968 demolition; gift of the Khalili family</td>
+          <td class="inv">1969</td>
+        </tr>
+        <tr>
+          <td class="inv">T-049</td>
+          <td>Cuerda-seca star tile, cobalt &amp; turquoise</td>
+          <td>16th c. · Tabriz</td>
+          <td>Excavation finds, Blue Mosque vicinity; long-term loan, Tabriz Museum</td>
+          <td class="inv">1956</td>
+        </tr>
+        <tr>
+          <td class="inv">M-211</td>
+          <td>Calligraphic album-page, nastaʿlīq</td>
+          <td>1587 · signed Mīr ʿImād al-Ḥasanī</td>
+          <td>Purchased, Sotheby's London, with Trust endowment</td>
+          <td class="inv">1989</td>
+        </tr>
+        <tr>
+          <td class="inv">C-061</td>
+          <td>Silk velvet panel with figural cartouches</td>
+          <td>c. 1640 · Yazd</td>
+          <td>Anonymous donor, in memory of Ostād Ahmadi</td>
+          <td class="inv">2003</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- curator note -->
+  <p class="curator">
+    "The plan of the four halls follows, deliberately, the cross-axial logic of the Chahār-bāgh: each discipline a quadrant, and the centre kept empty for the visitor."
+    <span class="sig">— Dr. Pārī Ḥusaynī, Keeper of the Permanent Collection</span>
+  </p>
+
+</main>
+
+<!-- ======== Footer ======== -->
+<footer>
+  <div class="girih-bg" aria-hidden="true"></div>
+  <div class="inner">
+    <div>
+      <h4>Visiting Hours</h4>
+      <p>Tuesday – Sunday</p>
+      <p>09:00 — 17:30</p>
+      <p>Friday late opening to 21:00</p>
+      <p>Closed Mondays &amp; Nowrūz</p>
+    </div>
+    <div>
+      <div class="seal" aria-hidden="true">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <g fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M50 5 L62 28 L88 32 L70 50 L88 68 L62 72 L50 95 L38 72 L12 68 L30 50 L12 32 L38 28 Z"/>
+            <circle cx="50" cy="50" r="14"/>
+            <path d="M50 36 L50 64 M36 50 L64 50 M40 40 L60 60 M40 60 L60 40"/>
+          </g>
+        </svg>
+      </div>
+      <h4>Contact &amp; Address</h4>
+      <p>Dār al-Naqsh</p>
+      <p>off Maydān-e Naqsh-e Jahān</p>
+      <p>Isfahan, Iran</p>
+      <p>collection@darnaqsh.museum &nbsp;·&nbsp; +98 31 32 22 41 70</p>
+    </div>
+    <div>
+      <h4>Membership</h4>
+      <p>Friends of Dār al-Naqsh</p>
+      <p>Annual: 1,200,000 IRR</p>
+      <p>Patron: 8,000,000 IRR</p>
+      <p>kitabkhana@darnaqsh.museum</p>
+    </div>
+  </div>
+  <div class="tail">
+    <div class="orn">❖ ✦ ❖</div>
+    <small>© MMXXIV · Dār al-Naqsh, Museum of Safavid Ornament · Isfahan</small>
+  </div>
+</footer>
+
+</body>
+</html>

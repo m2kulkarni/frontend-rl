@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Works in Glass — The Atelier of Gautier de Soissons</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Garamond, serif;
+    margin: 0;
+    line-height: 1.55;
+    font-size: 17px;
+  }
+  a { color: inherit; }
+
+  /* ============ NAVIGATION ARCADE ============ */
+  .nav-arcade {
+    width: 100%;
+    background: var(--bg);
+    padding: 1.4em 0 0;
+    border-bottom: none;
+  }
+  .nav-arcade ul {
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    max-width: 1180px;
+  }
+  .nav-arcade li {
+    flex: 0 0 auto;
+    width: 200px;
+    position: relative;
+    text-align: center;
+  }
+  .nav-niche {
+    display: block;
+    text-decoration: none;
+    color: var(--text);
+    position: relative;
+    height: 110px;
+    padding-top: 64px;
+  }
+  .nav-niche svg {
+    position: absolute;
+    inset: 0 0 auto 0;
+    margin: auto;
+    width: 90px;
+    height: 110px;
+    display: block;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .nav-niche .arch-bg {
+    fill: var(--bg);
+    stroke: var(--ornament);
+    stroke-width: 2;
+  }
+  .nav-niche[aria-current="page"] .arch-bg {
+    fill: var(--primary);
+    stroke: var(--primary);
+  }
+  .nav-niche span {
+    position: relative;
+    z-index: 2;
+    display: block;
+    font-variant: small-caps;
+    letter-spacing: 0.14em;
+    font-size: 0.78rem;
+    line-height: 1;
+    padding-top: 6px;
+    color: var(--text);
+  }
+  .nav-niche[aria-current="page"] span {
+    color: var(--bg);
+  }
+  .gold-rule {
+    height: 2px;
+    background: var(--accent);
+    width: 92%;
+    margin: 0.4em auto 0;
+    border: none;
+  }
+  .gold-rule.thin {
+    height: 1px;
+    width: 60%;
+    margin: 1em auto 1.6em;
+  }
+
+  /* ============ HEADER / TITLE ============ */
+  .page-head {
+    text-align: center;
+    padding: 3.5em 1em 1.5em;
+    position: relative;
+  }
+  .page-head h1 {
+    font-family: var(--font-display), 'UnifrakturMaguntia', serif;
+    font-weight: 400;
+    font-size: 4.2rem;
+    margin: 0 0 0.1em;
+    color: var(--primary);
+    letter-spacing: 0.02em;
+    line-height: 1;
+  }
+  .page-head .subtitle {
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--text);
+    margin: 0.3em 0 0;
+  }
+  .page-head .imprimatur {
+    display: inline-block;
+    margin-top: 1.2em;
+    font-variant: small-caps;
+    letter-spacing: 0.22em;
+    font-size: 0.78rem;
+    color: var(--secondary);
+  }
+
+  /* ============ INTRODUCTORY COLUMN ============ */
+  .preface {
+    max-width: 18em;
+    margin: 0 auto 2.5em;
+    text-align: justify;
+    font-size: 0.98rem;
+  }
+  .preface .dropcap::first-letter {
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+    float: left;
+    font-size: 4.2em;
+    line-height: 0.85;
+    padding: 0.05em 0.12em 0 0;
+    color: var(--primary);
+  }
+
+  /* divider with motif */
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.2em;
+    max-width: 700px;
+    margin: 0 auto 2.4em;
+  }
+  .divider::before,
+  .divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--accent);
+  }
+  .divider svg {
+    width: 38px;
+    height: 38px;
+    flex: 0 0 auto;
+  }
+  .divider svg path { fill: var(--ornament); }
+
+  /* ============ GALLERY OF CARDS ============ */
+  .gallery {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2em 4em;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3em 4em;
+  }
+  .glass-card {
+    position: relative;
+    padding: 0 1.4em 1.6em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .arch-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 5 / 7;
+    max-width: 380px;
+    margin: 0 auto;
+  }
+  .arch-frame .frame-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    pointer-events: none;
+  }
+  .arch-frame .tympanum {
+    position: absolute;
+    top: 14%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 64px;
+    height: 64px;
+    z-index: 4;
+  }
+  .arch-frame .tympanum svg {
+    width: 100%;
+    height: 100%;
+  }
+  .arch-frame .tympanum svg path {
+    fill: var(--secondary);
+  }
+  .arch-glass {
+    position: absolute;
+    inset: 6% 9% 4% 9%;
+    background:
+      radial-gradient(ellipse at 50% 15%, rgba(201,162,58,0.35), transparent 55%),
+      linear-gradient(180deg, var(--primary) 0%, #2a4a72 35%, var(--secondary) 70%, #5a0f24 100%);
+    clip-path: path("M 50% 0 Q 100% 0 100% 50% L 100% 100% L 0 100% L 0 50% Q 0 0 50% 0");
+    /* fallback shape via SVG mask below */
+  }
+  .glass-illustration {
+    position: absolute;
+    inset: 6% 9% 4% 9%;
+    z-index: 2;
+    overflow: hidden;
+  }
+  .glass-illustration svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .card-body {
+    padding: 1.4em 0.4em 0;
+    text-align: center;
+    width: 100%;
+    max-width: 340px;
+  }
+  .card-body h2 {
+    font-family: var(--font-display), serif;
+    color: var(--secondary);
+    font-weight: 400;
+    font-size: 1.85rem;
+    margin: 0;
+    line-height: 1.05;
+    letter-spacing: 0.01em;
+  }
+  .card-body .place {
+    font-style: italic;
+    font-size: 0.92rem;
+    margin: 0.4em 0 0.6em;
+    color: var(--text);
+  }
+  .card-body .gold-line {
+    width: 60%;
+    height: 1px;
+    background: var(--accent);
+    border: none;
+    margin: 0.6em auto 0.9em;
+  }
+  .card-body p.descr {
+    text-align: left;
+    font-size: 0.94rem;
+    margin: 0.6em 0 0;
+  }
+  .card-body p.descr::first-letter {
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+    float: left;
+    font-size: 3.2em;
+    line-height: 0.85;
+    padding: 0.05em 0.1em 0 0;
+  }
+  .card-meta {
+    margin-top: 1em;
+    border-top: 1px solid var(--accent);
+    padding-top: 0.7em;
+    font-size: 0.82rem;
+    text-align: left;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.25em 0.8em;
+  }
+  .card-meta dt {
+    font-variant: small-caps;
+    letter-spacing: 0.12em;
+    color: var(--primary);
+    font-weight: 600;
+  }
+  .card-meta dd { margin: 0; }
+  .glaziers-mark {
+    display: inline-block;
+    width: 14px; height: 14px;
+    vertical-align: -2px;
+    margin-right: 4px;
+  }
+  .glaziers-mark svg { width: 100%; height: 100%; }
+  .glaziers-mark svg path { fill: var(--ornament); }
+
+  /* ============ COLOPHON / CLOSING NOTE ============ */
+  .colophon {
+    max-width: 18em;
+    margin: 1em auto 4em;
+    text-align: center;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--text);
+  }
+  .colophon .seal {
+    display: block;
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 0.8em;
+  }
+  .colophon .seal svg path { fill: var(--secondary); }
+
+  /* ============ FOOTER ARCADE ============ */
+  footer.site-foot {
+    border-top: 1px solid var(--accent);
+    padding: 2.2em 1em 2em;
+    background: var(--bg);
+  }
+  .foot-arcade {
+    display: flex;
+    justify-content: center;
+    max-width: 980px;
+    margin: 0 auto 1.2em;
+  }
+  .foot-arcade .foot-niche {
+    width: 130px;
+    height: 100px;
+    position: relative;
+  }
+  .foot-arcade svg.arch {
+    width: 100%; height: 100%;
+    display: block;
+  }
+  .foot-arcade .arch-bg {
+    fill: var(--bg);
+    stroke: var(--primary);
+    stroke-width: 2;
+  }
+  .foot-arcade .ornament-inner {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 8px;
+  }
+  .foot-arcade .ornament-inner svg {
+    width: 36px;
+    height: 36px;
+  }
+  .foot-arcade .ornament-inner svg path { fill: var(--ornament); }
+
+  .foot-text {
+    text-align: center;
+    margin-top: 0.6em;
+  }
+  .foot-text .name {
+    font-family: var(--font-display), serif;
+    font-size: 1.7rem;
+    color: var(--primary);
+    line-height: 1;
+    margin: 0;
+  }
+  .foot-text .addr {
+    font-style: italic;
+    font-size: 0.95rem;
+    margin: 0.3em 0;
+  }
+  .foot-text .year {
+    font-variant: small-caps;
+    letter-spacing: 0.22em;
+    font-size: 0.8rem;
+    color: var(--secondary);
+    margin-top: 0.35em;
+  }
+
+  /* SVG fleur-de-lis (small inline) */
+  .fleur-de-lis path { fill: var(--ornament); }
+</style>
+</head>
+<body>
+
+<!-- =========================== NAV =========================== -->
+<nav class="nav-arcade" aria-label="Principal">
+  <ul>
+    <li>
+      <a class="nav-niche" href="page-1.html">
+        <svg viewBox="0 0 90 110" preserveAspectRatio="none" aria-hidden="true">
+          <path class="arch-bg" d="M 4 108 L 4 50 Q 4 4 45 4 Q 86 4 86 50 L 86 108 Z"/>
+        </svg>
+        <span>Atelier</span>
+      </a>
+    </li>
+    <li>
+      <a class="nav-niche" href="page-2.html" aria-current="page">
+        <svg viewBox="0 0 90 110" preserveAspectRatio="none" aria-hidden="true">
+          <path class="arch-bg" d="M 4 108 L 4 50 Q 4 4 45 4 Q 86 4 86 50 L 86 108 Z"/>
+        </svg>
+        <span>Glass</span>
+      </a>
+    </li>
+    <li>
+      <a class="nav-niche" href="page-3.html">
+        <svg viewBox="0 0 90 110" preserveAspectRatio="none" aria-hidden="true">
+          <path class="arch-bg" d="M 4 108 L 4 50 Q 4 4 45 4 Q 86 4 86 50 L 86 108 Z"/>
+        </svg>
+        <span>Books</span>
+      </a>
+    </li>
+    <li>
+      <a class="nav-niche" href="page-4.html">
+        <svg viewBox="0 0 90 110" preserveAspectRatio="none" aria-hidden="true">
+          <path class="arch-bg" d="M 4 108 L 4 50 Q 4 4 45 4 Q 86 4 86 50 L 86 108 Z"/>
+        </svg>
+        <span>Workshop</span>
+      </a>
+    </li>
+    <li>
+      <a class="nav-niche" href="page-5.html">
+        <svg viewBox="0 0 90 110" preserveAspectRatio="none" aria-hidden="true">
+          <path class="arch-bg" d="M 4 108 L 4 50 Q 4 4 45 4 Q 86 4 86 50 L 86 108 Z"/>
+        </svg>
+        <span>Commissions</span>
+      </a>
+    </li>
+    <li>
+      <a class="nav-niche" href="page-6.html">
+        <svg viewBox="0 0 90 110" preserveAspectRatio="none" aria-hidden="true">
+          <path class="arch-bg" d="M 4 108 L 4 50 Q 4 4 45 4 Q 86 4 86 50 L 86 108 Z"/>
+        </svg>
+        <span>To Visit</span>
+      </a>
+    </li>
+  </ul>
+  <hr class="gold-rule">
+</nav>
+
+<!-- =========================== HEAD =========================== -->
+<header class="page-head">
+  <h1>Works in Glass</h1>
+  <p class="subtitle">Lights wrought for choir, chapel, and refectory in the year of Our Lord MCCXC and after</p>
+  <div class="imprimatur">— Liber Vitri · Folio II —</div>
+</header>
+
+<!-- preface -->
+<section class="preface">
+  <p class="dropcap">Herein are set down three commissions executed in the painted light, each conceived after the manner of the great cathedral builders, each leaded with English calme and fired in the small kiln above the cloister at Soissons. The cobalt is drawn from the Meuse valley, near Givet, where the cobaltite ore is calcined with sand and potash by Brother Bernard of Dinant; the madder from beds maintained at the priory of Origny; the gold-yellow is silver stain, lately learned from a Picard glazier returning from Chartres.</p>
+</section>
+
+<div class="divider" aria-hidden="true">
+  <svg viewBox="110 124 40 40" preserveAspectRatio="xMidYMid meet">
+    <use href="#oak-leaf"/>
+  </svg>
+  <svg viewBox="0 0 600 600" preserveAspectRatio="xMidYMid meet" style="width:30px;height:30px;">
+    <use href="#cross-flory"/>
+  </svg>
+  <svg viewBox="110 124 40 40" preserveAspectRatio="xMidYMid meet">
+    <use href="#oak-leaf"/>
+  </svg>
+</div>
+
+<!-- =========================== GALLERY =========================== -->
+<main class="gallery">
+
+  <!-- ============== CARD I — TREE OF JESSE ============== -->
+  <article class="glass-card">
+    <div class="arch-frame">
+      <!-- glass illustration: Tree of Jesse, simplified -->
+      <div class="glass-illustration">
+        <svg viewBox="0 0 200 280" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <clipPath id="lancet1">
+              <path d="M 100 0 Q 196 0 196 96 L 196 276 L 4 276 L 4 96 Q 4 0 100 0 Z"/>
+            </clipPath>
+          </defs>
+          <g clip-path="url(#lancet1)">
+            <!-- background cobalt field -->
+            <rect width="200" height="280" fill="#1e3a5f"/>
+            <!-- leading grid -->
+            <g stroke="#0a0a0a" stroke-width="2" fill="none">
+              <line x1="0" y1="60" x2="200" y2="60"/>
+              <line x1="0" y1="120" x2="200" y2="120"/>
+              <line x1="0" y1="180" x2="200" y2="180"/>
+              <line x1="0" y1="230" x2="200" y2="230"/>
+            </g>
+            <!-- vine of Jesse -->
+            <g fill="none" stroke="#c9a23a" stroke-width="2.5">
+              <path d="M 100 270 Q 60 240 100 200 Q 140 160 100 130 Q 60 100 100 70 Q 130 40 100 20"/>
+              <path d="M 100 235 Q 70 220 55 205"/>
+              <path d="M 100 235 Q 130 220 145 205"/>
+              <path d="M 100 175 Q 70 160 55 145"/>
+              <path d="M 100 175 Q 130 160 145 145"/>
+              <path d="M 100 115 Q 70 100 55 85"/>
+              <path d="M 100 115 Q 130 100 145 85"/>
+            </g>
+            <!-- recumbent Jesse -->
+            <g>
+              <ellipse cx="100" cy="262" rx="50" ry="10" fill="#8b1538"/>
+              <circle cx="70" cy="258" r="8" fill="#f4ecd8"/>
+              <rect x="60" y="265" width="80" height="6" fill="#c9a23a"/>
+            </g>
+            <!-- medallion figures: kings/prophets in quatrefoils -->
+            <g>
+              <circle cx="100" cy="205" r="18" fill="#8b1538" stroke="#0a0a0a" stroke-width="2"/>
+              <circle cx="100" cy="205" r="11" fill="#f4ecd8"/>
+              <circle cx="100" cy="200" r="4" fill="#3a2618"/>
+              <path d="M 92 213 L 100 207 L 108 213 Z" fill="#3a2618"/>
+              <!-- crown -->
+              <path d="M 92 195 L 95 190 L 100 193 L 105 190 L 108 195 Z" fill="#c9a23a"/>
+            </g>
+            <g>
+              <circle cx="100" cy="145" r="18" fill="#8b1538" stroke="#0a0a0a" stroke-width="2"/>
+              <circle cx="100" cy="145" r="11" fill="#f4ecd8"/>
+              <circle cx="100" cy="140" r="4" fill="#3a2618"/>
+              <path d="M 92 153 L 100 147 L 108 153 Z" fill="#3a2618"/>
+              <path d="M 92 135 L 95 130 L 100 133 L 105 130 L 108 135 Z" fill="#c9a23a"/>
+            </g>
+            <g>
+              <circle cx="100" cy="85" r="18" fill="#8b1538" stroke="#0a0a0a" stroke-width="2"/>
+              <circle cx="100" cy="85" r="11" fill="#f4ecd8"/>
+              <circle cx="100" cy="80" r="4" fill="#3a2618"/>
+              <path d="M 92 93 L 100 87 L 108 93 Z" fill="#3a2618"/>
+              <path d="M 92 75 L 95 70 L 100 73 L 105 70 L 108 75 Z" fill="#c9a23a"/>
+            </g>
+            <!-- Virgin & Child at apex -->
+            <g>
+              <circle cx="100" cy="32" r="14" fill="#1e3a5f" stroke="#c9a23a" stroke-width="2"/>
+              <circle cx="100" cy="32" r="9" fill="#f4ecd8"/>
+              <circle cx="100" cy="29" r="3" fill="#3a2618"/>
+            </g>
+            <!-- side flora -->
+            <g fill="#c9a23a">
+              <circle cx="40" cy="120" r="3"/><circle cx="160" cy="120" r="3"/>
+              <circle cx="40" cy="180" r="3"/><circle cx="160" cy="180" r="3"/>
+              <circle cx="40" cy="60" r="3"/><circle cx="160" cy="60" r="3"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <!-- arch frame (outline) -->
+      <svg class="frame-svg" viewBox="0 0 200 280" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M 100 0 Q 196 0 196 96 L 196 276 L 4 276 L 4 96 Q 4 0 100 0 Z"
+              fill="none" stroke="#0a0a0a" stroke-width="3"/>
+        <path d="M 100 8 Q 188 8 188 96 L 188 268 L 12 268 L 12 96 Q 12 8 100 8 Z"
+              fill="none" stroke="#0a0a0a" stroke-width="1"/>
+      </svg>
+      <!-- tympanum quatrefoil -->
+      <div class="tympanum" aria-hidden="true">
+        <svg viewBox="0 0 600 600"><use href="#cross-flory"/></svg>
+      </div>
+    </div>
+
+    <div class="card-body">
+      <h2>The Tree of Jesse</h2>
+      <div class="place">North aisle, Collegiate Church of Saint-Yved · Braine · Anno Domini MCCLXXXIX</div>
+      <hr class="gold-line">
+      <p class="descr">Set in three lancets above the tomb of the lord Robert of Dreux, the vine springs from the loins of recumbent Jesse and ascends through fourteen crowned kings of Judah to the Virgin enthroned at the apex. The cartoon was drawn upon whitened oak boards in the lower workshop and reduced into eighty-three pieces of pot-metal glass, leaded with English calme of two pieds the rod.</p>
+
+      <dl class="card-meta">
+        <dt>Dimensions</dt>
+        <dd>Each lancet: 11 pieds 4 pouces high × 2 pieds 7 pouces wide (du Roi)</dd>
+        <dt>Pieces</dt>
+        <dd>Two hundred forty-nine, of which forty-six in cobalt</dd>
+        <dt>Glaziers' marks</dt>
+        <dd>
+          <span class="glaziers-mark"><svg viewBox="0 0 10 10"><path d="M1 9 L5 1 L9 9 Z"/></svg></span>Gautier de Soissons, mag.;
+          <span class="glaziers-mark"><svg viewBox="0 0 10 10"><path d="M2 2 L8 2 L8 8 L2 8 Z M5 2 L5 8 M2 5 L8 5"/></svg></span>Aubert le Verrier
+        </dd>
+        <dt>Cobalt</dt>
+        <dd>Smalt of Givet, third firing — a deep azure approaching black in the deepest grounds, drawn from the Meuse smelters of Brother Bernard.</dd>
+        <dt>Delivered</dt>
+        <dd>Feast of Saint Martin, MCCLXXXIX · price LXXX livres parisis</dd>
+      </dl>
+    </div>
+  </article>
+
+  <!-- ============== CARD II — SAINT ELIGIUS ============== -->
+  <article class="glass-card">
+    <div class="arch-frame">
+      <div class="glass-illustration">
+        <svg viewBox="0 0 200 280" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <clipPath id="lancet2">
+              <path d="M 100 0 Q 196 0 196 96 L 196 276 L 4 276 L 4 96 Q 4 0 100 0 Z"/>
+            </clipPath>
+          </defs>
+          <g clip-path="url(#lancet2)">
+            <rect width="200" height="280" fill="#8b1538"/>
+            <!-- leading grid -->
+            <g stroke="#0a0a0a" stroke-width="2" fill="none">
+              <line x1="0" y1="50" x2="200" y2="50"/>
+              <line x1="0" y1="100" x2="200" y2="100"/>
+              <line x1="0" y1="200" x2="200" y2="200"/>
+              <line x1="0" y1="245" x2="200" y2="245"/>
+            </g>
+            <!-- inner cobalt panel where saint stands -->
+            <rect x="20" y="50" width="160" height="195" fill="#1e3a5f"/>
+            <!-- forge and anvil -->
+            <g>
+              <rect x="50" y="180" width="100" height="35" fill="#3a2618"/>
+              <rect x="58" y="170" width="84" height="14" fill="#c9a23a"/>
+              <!-- flames -->
+              <path d="M 70 170 Q 75 155 80 170 Q 85 158 90 170 Q 95 152 100 170" fill="none" stroke="#c9a23a" stroke-width="2"/>
+              <path d="M 100 170 Q 105 158 110 170 Q 115 155 120 170 Q 125 158 130 170" fill="none" stroke="#c9a23a" stroke-width="2"/>
+            </g>
+            <!-- Saint Eligius -->
+            <g>
+              <!-- robe -->
+              <path d="M 100 80 L 80 170 L 120 170 Z" fill="#c9a23a"/>
+              <path d="M 100 80 L 88 170 L 112 170 Z" fill="#f4ecd8"/>
+              <!-- head -->
+              <circle cx="100" cy="80" r="15" fill="#f4ecd8" stroke="#0a0a0a" stroke-width="1.5"/>
+              <!-- halo -->
+              <circle cx="100" cy="78" r="20" fill="none" stroke="#c9a23a" stroke-width="2"/>
+              <!-- features -->
+              <circle cx="95" cy="78" r="1.5" fill="#3a2618"/>
+              <circle cx="105" cy="78" r="1.5" fill="#3a2618"/>
+              <path d="M 96 86 Q 100 88 104 86" fill="none" stroke="#3a2618" stroke-width="1"/>
+              <!-- hammer arm -->
+              <path d="M 100 100 L 130 130 L 138 145" stroke="#f4ecd8" stroke-width="6" fill="none"/>
+              <rect x="132" y="138" width="14" height="8" fill="#3a2618"/>
+              <!-- tongs holding hot piece on anvil -->
+              <path d="M 100 110 L 75 165" stroke="#3a2618" stroke-width="3" fill="none"/>
+              <circle cx="73" cy="167" r="3" fill="#c9a23a"/>
+            </g>
+            <!-- inscription band -->
+            <rect x="20" y="245" width="160" height="25" fill="#0a0a0a"/>
+            <g fill="#c9a23a" font-family="serif" font-size="10" text-anchor="middle">
+              <text x="100" y="262">·S· ELIGIVS·EPS·</text>
+            </g>
+            <!-- canopy at top -->
+            <g fill="#c9a23a">
+              <path d="M 60 50 L 100 20 L 140 50 Z" stroke="#0a0a0a" stroke-width="1.5"/>
+              <circle cx="100" cy="35" r="4"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <svg class="frame-svg" viewBox="0 0 200 280" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M 100 0 Q 196 0 196 96 L 196 276 L 4 276 L 4 96 Q 4 0 100 0 Z"
+              fill="none" stroke="#0a0a0a" stroke-width="3"/>
+        <path d="M 100 8 Q 188 8 188 96 L 188 268 L 12 268 L 12 96 Q 12 8 100 8 Z"
+              fill="none" stroke="#0a0a0a" stroke-width="1"/>
+      </svg>
+      <div class="tympanum" aria-hidden="true">
+        <svg viewBox="0 0 600 600"><use href="#cross-flory"/></svg>
+      </div>
+    </div>
+
+    <div class="card-body">
+      <h2>Saint Eligius at the Forge</h2>
+      <div class="place">Single lancet, Chapel of the Goldsmiths' Guild · Noyon · Anno Domini MCCXCI</div>
+      <hr class="gold-line">
+      <p class="descr">Commissioned by Master Renaud Boursier, provost of the Confraternity of Saint Eloi at Noyon, this single lancet stands above the eastern altar where the goldsmiths gather upon the kalends of December. The saint is shown at his anvil in the act of striking the chalice of King Clotaire, his tongs holding the metal still ruddy from the coals. The ground is laid in the deep madder reserved for the upper register, with the figure-field in cobalt of Givet.</p>
+
+      <dl class="card-meta">
+        <dt>Dimensions</dt>
+        <dd>9 pieds 2 pouces high × 2 pieds 4 pouces wide (du Roi)</dd>
+        <dt>Pieces</dt>
+        <dd>One hundred eleven, of which the saint's robe alone in seven shades of silver-stain yellow</dd>
+        <dt>Glaziers' marks</dt>
+        <dd>
+          <span class="glaziers-mark"><svg viewBox="0 0 10 10"><path d="M1 9 L5 1 L9 9 Z"/></svg></span>Gautier de Soissons, mag.;
+          <span class="glaziers-mark"><svg viewBox="0 0 10 10"><path d="M5 1 L9 5 L5 9 L1 5 Z"/></svg></span>Jehannot d'Orchies, apprentice of the third year
+        </dd>
+        <dt>Cobalt</dt>
+        <dd>Meuse smalt, second firing — somewhat lighter than that of Braine, suited to the smaller field; bartered at the fair of Provins for one mark of fine silver per livre.</dd>
+        <dt>Delivered</dt>
+        <dd>Vigil of Saint Eloi, MCCXCI · price XLII livres tournois</dd>
+      </dl>
+    </div>
+  </article>
+
+</main>
+
+<!-- second row: oculus alone, centered -->
+<main class="gallery" style="grid-template-columns: 1fr; max-width: 540px; margin-top:-1em;">
+  <article class="glass-card">
+    <div class="arch-frame" style="aspect-ratio: 5/6;">
+      <div class="glass-illustration">
+        <svg viewBox="0 0 200 240" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <clipPath id="oculus-lancet">
+              <path d="M 100 0 Q 196 0 196 96 L 196 236 L 4 236 L 4 96 Q 4 0 100 0 Z"/>
+            </clipPath>
+          </defs>
+          <g clip-path="url(#oculus-lancet)">
+            <rect width="200" height="240" fill="#1e3a5f"/>
+            <!-- the wheel itself, as if mounted -->
+            <g transform="translate(100,120)">
+              <circle r="92" fill="#8b1538"/>
+              <circle r="86" fill="#1e3a5f"/>
+              <!-- spokes -->
+              <g stroke="#c9a23a" stroke-width="3" fill="none">
+                <line x1="-86" y1="0" x2="86" y2="0"/>
+                <line x1="0" y1="-86" x2="0" y2="86"/>
+                <line x1="-61" y1="-61" x2="61" y2="61"/>
+                <line x1="-61" y1="61" x2="61" y2="-61"/>
+              </g>
+              <!-- outer rim ornament -->
+              <circle r="86" fill="none" stroke="#0a0a0a" stroke-width="2"/>
+              <circle r="78" fill="none" stroke="#c9a23a" stroke-width="1"/>
+              <!-- four figures at cardinal points: Regno, Regnabo, Regnavi, Sum sine regno -->
+              <!-- top: regnabo -->
+              <g>
+                <circle cy="-60" r="14" fill="#f4ecd8" stroke="#0a0a0a" stroke-width="1.5"/>
+                <circle cy="-63" r="3" fill="#3a2618"/>
+                <path d="M -7 -50 L 0 -56 L 7 -50 Z" fill="#3a2618"/>
+                <path d="M -8 -68 L -5 -73 L 0 -70 L 5 -73 L 8 -68 Z" fill="#c9a23a"/>
+              </g>
+              <!-- right: regno (king at apex) -->
+              <g>
+                <circle cx="60" r="14" fill="#f4ecd8" stroke="#0a0a0a" stroke-width="1.5"/>
+                <circle cx="60" cy="-3" r="3" fill="#3a2618"/>
+                <path d="M 53 7 L 60 1 L 67 7 Z" fill="#3a2618"/>
+                <path d="M 52 -8 L 55 -13 L 60 -10 L 65 -13 L 68 -8 Z" fill="#c9a23a"/>
+              </g>
+              <!-- bottom: sum sine regno -->
+              <g>
+                <circle cy="60" r="14" fill="#f4ecd8" stroke="#0a0a0a" stroke-width="1.5"/>
+                <circle cy="57" r="3" fill="#3a2618"/>
+                <path d="M -7 70 L 0 64 L 7 70 Z" fill="#3a2618"/>
+              </g>
+              <!-- left: regnavi (falling) -->
+              <g>
+                <circle cx="-60" r="14" fill="#f4ecd8" stroke="#0a0a0a" stroke-width="1.5"/>
+                <circle cx="-60" cy="-3" r="3" fill="#3a2618"/>
+                <path d="M -67 7 L -60 1 L -53 7 Z" fill="#3a2618"/>
+              </g>
+              <!-- Fortune at hub -->
+              <circle r="20" fill="#c9a23a" stroke="#0a0a0a" stroke-width="2"/>
+              <circle r="14" fill="#8b1538"/>
+              <circle r="6" fill="#f4ecd8"/>
+              <circle cy="-2" r="2" fill="#3a2618"/>
+            </g>
+            <!-- corner spandrels filled with vine -->
+            <g fill="#c9a23a">
+              <circle cx="20" cy="40" r="5"/>
+              <circle cx="180" cy="40" r="5"/>
+              <circle cx="20" cy="200" r="5"/>
+              <circle cx="180" cy="200" r="5"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <svg class="frame-svg" viewBox="0 0 200 240" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M 100 0 Q 196 0 196 96 L 196 236 L 4 236 L 4 96 Q 4 0 100 0 Z"
+              fill="none" stroke="#0a0a0a" stroke-width="3"/>
+        <path d="M 100 8 Q 188 8 188 96 L 188 228 L 12 228 L 12 96 Q 12 8 100 8 Z"
+              fill="none" stroke="#0a0a0a" stroke-width="1"/>
+      </svg>
+      <div class="tympanum" aria-hidden="true">
+        <svg viewBox="0 0 600 600"><use href="#cross-flory"/></svg>
+      </div>
+    </div>
+
+    <div class="card-body" style="max-width: 420px;">
+      <h2>The Wheel of Fortune</h2>
+      <div class="place">Oculus, refectory of the Abbey of Longpont · Anno Domini MCCXCIV</div>
+      <hr class="gold-line">
+      <p class="descr">Commanded by Dom Hugues de Pierrefonds, abbot of Longpont, to be set in the western wall of the new refectory above the lectern, that the brethren might consider, at every meal, the inconstancy of worldly estate. Four figures turn upon the wheel: <em>Regnabo</em> ascending, <em>Regno</em> crowned at the height, <em>Regnavi</em> cast down, and <em>Sum sine regno</em> ground beneath. The hub is occupied by Lady Fortune herself, blindfolded — though, as it pleases the abbot, the blindfold is rendered here as a band of silver-stain rather than the customary white.</p>
+
+      <dl class="card-meta">
+        <dt>Dimensions</dt>
+        <dd>Diameter: 6 pieds 8 pouces (du Roi); set within a stone-traceried oculus of eight foils</dd>
+        <dt>Pieces</dt>
+        <dd>One hundred ninety-six, all leaded radially from the central hub; the rim alone in twenty-four segments of madder.</dd>
+        <dt>Glaziers' marks</dt>
+        <dd>
+          <span class="glaziers-mark"><svg viewBox="0 0 10 10"><path d="M1 9 L5 1 L9 9 Z"/></svg></span>Gautier de Soissons, mag.;
+          <span class="glaziers-mark"><svg viewBox="0 0 10 10"><path d="M5 0 L10 5 L5 10 L0 5 Z M5 3 L7 5 L5 7 L3 5 Z"/></svg></span>Pierres li Bouvier, painter of heads;
+          <span class="glaziers-mark"><svg viewBox="0 0 10 10"><path d="M0 5 L10 5 M5 0 L5 10"/></svg></span>Margot la Plommière, leader
+        </dd>
+        <dt>Cobalt</dt>
+        <dd>Meuse smalt, first firing — the most costly grade, called <em>azur de Givet supérieur</em>; reserved for the four cardinal grounds because the diurnal light at Longpont, falling steeply westward, would silver any thinner blue.</dd>
+        <dt>Delivered</dt>
+        <dd>Octave of the Assumption, MCCXCIV · price CXX livres parisis, with twelve sols added for the sworn carter who bore the panels by river from Soissons</dd>
+      </dl>
+    </div>
+  </article>
+</main>
+
+<!-- closing colophon -->
+<div class="colophon">
+  <span class="seal" aria-hidden="true">
+    <svg viewBox="0 0 600 600"><use href="#cross-flory"/></svg>
+  </span>
+  Of the cobalt — let it be known that the Meuse valley, between Givet and Dinant, yields an ore which, calcined with potash and fine sand of the Aisne, produces a blue darker by half than that of Saxe; the master prefers it for all grounds in figure-glass, and will accept no commission below twenty livres in which it cannot be used.
+</div>
+
+<hr class="gold-rule thin">
+
+<!-- =========================== FOOTER =========================== -->
+<footer class="site-foot">
+  <div class="foot-arcade" aria-hidden="true">
+    <!-- 7 niches alternating fleur / cross -->
+    <div class="foot-niche">
+      <svg class="arch" viewBox="0 0 90 100" preserveAspectRatio="none">
+        <path class="arch-bg" d="M 4 98 L 4 45 Q 4 4 45 4 Q 86 4 86 45 L 86 98 Z"/>
+      </svg>
+      <div class="ornament-inner">
+        <svg viewBox="0 0 20 20" class="fleur-de-lis">
+          <path d="M10 1 C 10 4, 8 5, 8 7 C 8 9, 10 9, 10 9 C 10 9, 12 9, 12 7 C 12 5, 10 4, 10 1 Z M 4 8 C 6 9, 8 10, 9 12 L 9 16 L 4 14 Z M 16 8 C 14 9, 12 10, 11 12 L 11 16 L 16 14 Z M 6 13 L 14 13 L 14 15 L 6 15 Z"/>
+        </svg>
+      </div>
+    </div>
+    <div class="foot-niche">
+      <svg class="arch" viewBox="0 0 90 100" preserveAspectRatio="none">
+        <path class="arch-bg" d="M 4 98 L 4 45 Q 4 4 45 4 Q 86 4 86 45 L 86 98 Z"/>
+      </svg>
+      <div class="ornament-inner">
+        <svg viewBox="0 0 600 600"><use href="#cross-flory"/></svg>
+      </div>
+    </div>
+    <div class="foot-niche">
+      <svg class="arch" viewBox="0 0 90 100" preserveAspectRatio="none">
+        <path class="arch-bg" d="M 4 98 L 4 45 Q 4 4 45 4 Q 86 4 86 45 L 86 98 Z"/>
+      </svg>
+      <div class="ornament-inner">
+        <svg viewBox="0 0 20 20" class="fleur-de-lis">
+          <path d="M10 1 C 10 4, 8 5, 8 7 C 8 9, 10 9, 10 9 C 10 9, 12 9, 12 7 C 12 5, 10 4, 10 1 Z M 4 8 C 6 9, 8 10, 9 12 L 9 16 L 4 14 Z M 16 8 C 14 9, 12 10, 11 12 L 11 16 L 16 14 Z M 6 13 L 14 13 L 14 15 L 6 15 Z"/>
+        </svg>
+      </div>
+    </div>
+    <div class="foot-niche">
+      <svg class="arch" viewBox="0 0 90 100" preserveAspectRatio="none">
+        <path class="arch-bg" d="M 4 98 L 4 45 Q 4 4 45 4 Q 86 4 86 45 L 86 98 Z"/>
+      </svg>
+      <div class="ornament-inner">
+        <svg viewBox="0 0 600 600"><use href="#cross-flory"/></svg>
+      </div>
+    </div>
+    <div class="foot-niche">
+      <svg class="arch" viewBox="0 0 90 100" preserveAspectRatio="none">
+        <path class="arch-bg" d="M 4 98 L 4 45 Q 4 4 45 4 Q 86 4 86 45 L 86 98 Z"/>
+      </svg>
+      <div class="ornament-inner">
+        <svg viewBox="0 0 20 20" class="fleur-de-lis">
+          <path d="M10 1 C 10 4, 8 5, 8 7 C 8 9, 10 9, 10 9 C 10 9, 12 9, 12 7 C 12 5, 10 4, 10 1 Z M 4 8 C 6 9, 8 10, 9 12 L 9 16 L 4 14 Z M 16 8 C 14 9, 12 10, 11 12 L 11 16 L 16 14 Z M 6 13 L 14 13 L 14 15 L 6 15 Z"/>
+        </svg>
+      </div>
+    </div>
+    <div class="foot-niche">
+      <svg class="arch" viewBox="0 0 90 100" preserveAspectRatio="none">
+        <path class="arch-bg" d="M 4 98 L 4 45 Q 4 4 45 4 Q 86 4 86 45 L 86 98 Z"/>
+      </svg>
+      <div class="ornament-inner">
+        <svg viewBox="0 0 600 600"><use href="#cross-flory"/></svg>
+      </div>
+    </div>
+    <div class="foot-niche">
+      <svg class="arch" viewBox="0 0 90 100" preserveAspectRatio="none">
+        <path class="arch-bg" d="M 4 98 L 4 45 Q 4 4 45 4 Q 86 4 86 45 L 86 98 Z"/>
+      </svg>
+      <div class="ornament-inner">
+        <svg viewBox="0 0 20 20" class="fleur-de-lis">
+          <path d="M10 1 C 10 4, 8 5, 8 7 C 8 9, 10 9, 10 9 C 10 9, 12 9, 12 7 C 12 5, 10 4, 10 1 Z M 4 8 C 6 9, 8 10, 9 12 L 9 16 L 4 14 Z M 16 8 C 14 9, 12 10, 11 12 L 11 16 L 16 14 Z M 6 13 L 14 13 L 14 15 L 6 15 Z"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div class="foot-text">
+    <p class="name">Atelier of Gautier de Soissons</p>
+    <p class="addr">Rue des Cordeliers, in the parish of Saint-Pierre-au-Parvis, Soissons</p>
+    <p class="year">Founded · M · CC · LXXVI ·</p>
+  </div>
+</footer>
+
+<!-- ======== reusable inline SVG defs (referenced via <use>) ======== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="cross-flory" viewBox="0 0 600 600">
+      <path transform="translate(-4,-4)scale(0.15,0.15)" d="M1778.9,3200A120.9263,120.9263 0 0,1 1657.97,3320.93A120.9263,120.9263 0 0,1 1537.04,3200 A221.5096,221.5096 0 0,0 1456.32,3371.02A221.5096,221.5096 0 0,0 1677.83,3592.53A221.5096,221.5096 0 0,0 1818.61,3542.03 A362.779,362.779 0 0,0 2000,3856.21A362.779,362.779 0 0,0 2181.39,3542.03 A221.5096,221.5096 0 0,0 2322.17,3592.53A221.5096,221.5096 0 0,0 2543.68,3371.02A221.5096,221.5096 0 0,0 2462.96,3200 A120.9263,120.9263 0 0,1 2342.03,3320.93A120.9263,120.9263 0 0,1 2221.1,3200V2221.1H3200 A120.9263,120.9263 0 0,1 3320.93,2342.03A120.9263,120.9263 0 0,1 3200,2462.96 A221.5096,221.5096 0 0,0 3371.02,2543.68A221.5096,221.5096 0 0,0 3592.53,2322.17A221.5096,221.5096 0 0,0 3542.03,2181.39 A362.779,362.779 0 0,0 3856.21,2000A362.779,362.779 0 0,0 3542.03,1818.61 A221.5096,221.5096 0 0,0 3592.53,1677.83A221.5096,221.5096 0 0,0 3371.02,1456.32A221.5096,221.5096 0 0,0 3200,1537.04 A120.9263,120.9263 0 0,1 3320.93,1657.97A120.9263,120.9263 0 0,1 3200,1778.9H2221.1V800 A120.9263,120.9263 0 0,1 2342.03,679.073A120.9263,120.9263 0 0,1 2462.96,800 A221.5096,221.5096 0 0,0 2543.68,628.984A221.5096,221.5096 0 0,0 2322.17,407.475A221.5096,221.5096 0 0,0 2181.39,457.969 A362.779,362.779 0 0,0 2000,143.793A362.779,362.779 0 0,0 1818.61,457.969 A221.5096,221.5096 0 0,0 1677.83,407.475A221.5096,221.5096 0 0,0 1456.32,628.984A221.5096,221.5096 0 0,0 1537.04,800 A120.9263,120.9263 0 0,1 1657.97,679.073A120.9263,120.9263 0 0,1 1778.9,800V1778.9H800 A120.9263,120.9263 0 0,1 679.073,1657.97A120.9263,120.9263 0 0,1 800,1537.04 A221.5096,221.5096 0 0,0 628.984,1456.32A221.5096,221.5096 0 0,0 407.475,1677.83A221.5096,221.5096 0 0,0 457.969,1818.61 A362.779,362.779 0 0,0 143.793,2000A362.779,362.779 0 0,0 457.969,2181.39 A221.5096,221.5096 0 0,0 407.475,2322.17A221.5096,221.5096 0 0,0 628.984,2543.68A221.5096,221.5096 0 0,0 800,2462.96 A120.9263,120.9263 0 0,1 679.073,2342.03A120.9263,120.9263 0 0,1 800,2221.1H1778.9Z"/>
+    </symbol>
+    <symbol id="oak-leaf" viewBox="110 124 40 40">
+      <path d="M 130 128 L 132 134 L 138 132 L 136 138 L 142 140 L 136 142 L 138 148 L 132 146 L 130 152 L 128 146 L 122 148 L 124 142 L 118 140 L 124 138 L 122 132 L 128 134 Z M 130 152 L 130 160" stroke="#0a0a0a" stroke-width="1" fill="#0a0a0a"/>
+    </symbol>
+  </defs>
+</svg>
+
+</body>
+</html>

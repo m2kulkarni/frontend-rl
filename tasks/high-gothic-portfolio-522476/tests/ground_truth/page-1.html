@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Atelier of Gautier de Soissons — Maker of Glass and Illuminated Books</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  /* ---------- Page foundation ---------- */
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Garamond, serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.55;
+    font-size: 16px;
+  }
+  a { color: var(--primary); text-decoration: none; }
+  h1, h2, h3 { font-family: var(--font-display), serif; font-weight: 400; margin: 0; }
+
+  /* ---------- Parchment background (subtle quatrefoil pattern at edges) ---------- */
+  .parchment-edge {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 600 600'><g transform='translate(300,300)scale(0.87)rotate(45)'><circle cx='-195.16' r='163'/><circle cx='195.16' r='163'/><circle cy='195.16' r='163'/><circle cy='-195.16' r='163'/><rect x='-232' y='-232' width='464' height='464'/><g fill='%23f4ecd8'><circle cx='-195.16' r='157'/><circle cx='195.16' r='157'/><circle cy='195.16' r='157'/><circle cy='-195.16' r='157'/><rect x='-226' y='-226' width='452' height='452'/></g><circle cx='-195.16' r='144'/><circle cx='195.16' r='144'/><circle cy='195.16' r='144'/><circle cy='-195.16' r='144'/><rect x='-213' y='-213' width='426' height='426'/><g fill='%23f4ecd8'><circle cx='-195.16' r='138'/><circle cx='195.16' r='138'/><circle cy='195.16' r='138'/><circle cy='-195.16' r='138'/><rect x='-207' y='-207' width='414' height='414'/></g></g></svg>");
+  }
+
+  /* ---------- Navigation: arcade of pointed-arch niches ---------- */
+  .nav-arcade {
+    position: relative;
+    z-index: 2;
+    padding: 1.4em 0 0;
+    background: var(--bg);
+  }
+  .nav-arcade ul {
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    max-width: 1200px;
+  }
+  .nav-arcade li { flex: 0 0 auto; }
+  .nav-niche {
+    display: block;
+    position: relative;
+    width: 175px;
+    height: 110px;
+    text-align: center;
+    color: var(--ornament);
+  }
+  .nav-niche .arch-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .nav-niche .arch-svg path,
+  .nav-niche .arch-svg polygon {
+    fill: none;
+    stroke: var(--ornament);
+    stroke-width: 1.6;
+  }
+  .nav-niche[aria-current="page"] .arch-fill {
+    fill: var(--primary);
+  }
+  .nav-niche[aria-current="page"] .nav-label {
+    color: var(--bg);
+  }
+  .nav-label {
+    position: absolute;
+    left: 0; right: 0;
+    bottom: 14px;
+    font-family: var(--font-body), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.12em;
+    font-size: 0.78em;
+    color: var(--ornament);
+  }
+  .gold-rule {
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto;
+    margin-top: -2px;
+    max-width: 1320px;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.15);
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    z-index: 1;
+    padding: 3.5em 1em 2.5em;
+    text-align: center;
+  }
+  .hero-arch {
+    position: relative;
+    width: 520px;
+    height: 640px;
+    margin: 0 auto;
+  }
+  .hero-arch .arch-frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .hero-arch .arch-frame svg { width: 100%; height: 100%; display: block; }
+  .hero-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 6em 4em 2em;
+    box-sizing: border-box;
+  }
+  .hero-seal {
+    width: 130px;
+    height: 130px;
+    margin-bottom: 1em;
+  }
+  .hero-seal svg { width: 100%; height: 100%; }
+  .hero-seal svg path { fill: var(--ornament); }
+  .hero-title {
+    font-family: var(--font-display), serif;
+    font-size: 2.6em;
+    color: var(--secondary);
+    line-height: 1.05;
+    margin: 0.1em 0 0.5em;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.04);
+  }
+  .hero-legend {
+    font-style: italic;
+    color: var(--text);
+    font-size: 0.95em;
+    max-width: 22em;
+    line-height: 1.5;
+  }
+  .hero-legend::before,
+  .hero-legend::after {
+    content: "❦";
+    color: var(--accent);
+    margin: 0 0.6em;
+    font-style: normal;
+  }
+
+  /* ---------- Section divider ---------- */
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1em auto 2.5em;
+    max-width: 900px;
+    gap: 1em;
+  }
+  .divider .line {
+    flex: 1;
+    height: 1px;
+    background: var(--accent);
+  }
+  .divider .ornament {
+    width: 42px;
+    height: 42px;
+  }
+  .divider .ornament svg { width: 100%; height: 100%; }
+  .divider .ornament svg path { fill: var(--ornament); }
+
+  /* ---------- Commission panels ---------- */
+  .commissions {
+    position: relative;
+    z-index: 1;
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 1em 2em 3em;
+  }
+  .commissions h2 {
+    text-align: center;
+    font-size: 2em;
+    color: var(--primary);
+    margin-bottom: 0.2em;
+  }
+  .commissions .eyebrow {
+    text-align: center;
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    color: var(--text-emphasis);
+    font-size: 0.85em;
+    margin-bottom: 0.4em;
+  }
+  .panel-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.4em;
+    margin-top: 1em;
+  }
+  .panel {
+    position: relative;
+    padding: 0;
+  }
+  .panel-arch {
+    position: relative;
+    height: 520px;
+  }
+  .panel-arch svg.arch-outline {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .panel-arch svg.arch-outline path,
+  .panel-arch svg.arch-outline polygon,
+  .panel-arch svg.arch-outline line {
+    fill: none;
+    stroke: var(--ornament);
+    stroke-width: 1.7;
+  }
+  .quatrefoil {
+    position: absolute;
+    top: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 64px;
+    height: 64px;
+  }
+  .quatrefoil svg { width: 100%; height: 100%; }
+  .quatrefoil svg g { fill: var(--secondary); }
+  .quatrefoil svg g[fill="#ffffff"] { fill: var(--bg); }
+
+  .panel-body {
+    position: absolute;
+    top: 130px;
+    left: 38px;
+    right: 38px;
+    bottom: 30px;
+    display: flex;
+    flex-direction: column;
+  }
+  .panel-title {
+    font-family: var(--font-display), serif;
+    color: var(--secondary);
+    font-size: 1.55em;
+    line-height: 1.05;
+    margin: 0 0 0.4em;
+    text-align: center;
+  }
+  .panel-meta {
+    text-align: center;
+    font-style: italic;
+    color: var(--text);
+    font-size: 0.82em;
+    margin-bottom: 0.6em;
+  }
+  .panel-rule {
+    height: 1px;
+    background: var(--accent);
+    width: 70%;
+    margin: 0.4em auto 1em;
+  }
+  .panel-text {
+    font-size: 0.92em;
+    color: var(--text);
+    text-align: justify;
+    hyphens: auto;
+  }
+  .panel-text::first-letter {
+    font-family: var(--font-display), serif;
+    font-size: 3.2em;
+    color: var(--primary);
+    float: left;
+    line-height: 0.85;
+    padding: 0.05em 0.08em 0 0;
+  }
+  .panel-foot {
+    margin-top: auto;
+    padding-top: 0.8em;
+    text-align: center;
+    font-variant: small-caps;
+    letter-spacing: 0.12em;
+    font-size: 0.78em;
+    color: var(--text-emphasis);
+  }
+
+  /* ---------- Closing column ---------- */
+  .closing {
+    position: relative;
+    z-index: 1;
+    max-width: 18em;
+    margin: 1em auto 4em;
+    padding: 2em 0;
+    text-align: justify;
+    hyphens: auto;
+  }
+  .closing h3 {
+    text-align: center;
+    color: var(--primary);
+    font-size: 1.6em;
+    margin-bottom: 0.6em;
+  }
+  .closing p { font-size: 0.98em; }
+  .closing p:first-of-type::first-letter {
+    font-family: var(--font-display), serif;
+    font-size: 3.4em;
+    color: var(--primary);
+    float: left;
+    line-height: 0.85;
+    padding: 0.05em 0.1em 0 0;
+  }
+  .closing .colophon {
+    text-align: center;
+    font-style: italic;
+    color: var(--text-emphasis);
+    margin-top: 1.4em;
+    font-size: 0.9em;
+  }
+
+  /* ---------- Footer arcade ---------- */
+  footer {
+    position: relative;
+    z-index: 1;
+    margin-top: 2em;
+    padding: 2em 1em 2.4em;
+    border-top: 1px solid var(--accent);
+    background: var(--bg);
+  }
+  .footer-arcade {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    max-width: 1100px;
+    margin: 0 auto 1.4em;
+  }
+  .footer-niche {
+    width: 130px;
+    height: 90px;
+    position: relative;
+  }
+  .footer-niche svg.arch {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .footer-niche svg.arch path {
+    fill: none;
+    stroke: var(--primary);
+    stroke-width: 1.4;
+  }
+  .footer-niche .ornament-mark {
+    position: absolute;
+    left: 50%;
+    top: 56%;
+    transform: translate(-50%, -50%);
+    font-size: 1.6em;
+    color: var(--ornament);
+    line-height: 1;
+  }
+  .footer-text {
+    text-align: center;
+    line-height: 1.5;
+  }
+  .footer-text .name {
+    font-family: var(--font-display), serif;
+    font-size: 1.5em;
+    color: var(--ornament);
+  }
+  .footer-text .place {
+    font-style: italic;
+    color: var(--text);
+    margin-top: 0.2em;
+  }
+  .footer-text .year {
+    font-variant: small-caps;
+    letter-spacing: 0.2em;
+    color: var(--text-emphasis);
+    margin-top: 0.4em;
+    font-size: 0.85em;
+  }
+
+  /* ---------- Reusable arch SVG path (for nav, panels, footer) ---------- */
+</style>
+</head>
+<body>
+
+<div class="parchment-edge" aria-hidden="true"></div>
+
+<!-- ============ NAVIGATION ============ -->
+<nav class="nav-arcade" aria-label="Principal">
+  <ul>
+    <li>
+      <a class="nav-niche" href="page-1.html" aria-current="page">
+        <svg class="arch-svg" viewBox="0 0 175 110" preserveAspectRatio="none">
+          <path class="arch-fill" d="M 8 108 L 8 60 Q 8 8 87.5 4 Q 167 8 167 60 L 167 108 Z"/>
+        </svg>
+        <span class="nav-label">Atelier</span>
+      </a>
+    </li>
+    <li>
+      <a class="nav-niche" href="page-2.html">
+        <svg class="arch-svg" viewBox="0 0 175 110" preserveAspectRatio="none">
+          <path d="M 8 108 L 8 60 Q 8 8 87.5 4 Q 167 8 167 60 L 167 108 Z"/>
+        </svg>
+        <span class="nav-label">Works in Glass</span>
+      </a>
+    </li>
+    <li>
+      <a class="nav-niche" href="page-3.html">
+        <svg class="arch-svg" viewBox="0 0 175 110" preserveAspectRatio="none">
+          <path d="M 8 108 L 8 60 Q 8 8 87.5 4 Q 167 8 167 60 L 167 108 Z"/>
+        </svg>
+        <span class="nav-label">Books &amp; Limning</span>
+      </a>
+    </li>
+    <li>
+      <a class="nav-niche" href="page-4.html">
+        <svg class="arch-svg" viewBox="0 0 175 110" preserveAspectRatio="none">
+          <path d="M 8 108 L 8 60 Q 8 8 87.5 4 Q 167 8 167 60 L 167 108 Z"/>
+        </svg>
+        <span class="nav-label">The Workshop</span>
+      </a>
+    </li>
+    <li>
+      <a class="nav-niche" href="page-5.html">
+        <svg class="arch-svg" viewBox="0 0 175 110" preserveAspectRatio="none">
+          <path d="M 8 108 L 8 60 Q 8 8 87.5 4 Q 167 8 167 60 L 167 108 Z"/>
+        </svg>
+        <span class="nav-label">Commissions</span>
+      </a>
+    </li>
+    <li>
+      <a class="nav-niche" href="page-6.html">
+        <svg class="arch-svg" viewBox="0 0 175 110" preserveAspectRatio="none">
+          <path d="M 8 108 L 8 60 Q 8 8 87.5 4 Q 167 8 167 60 L 167 108 Z"/>
+        </svg>
+        <span class="nav-label">To Find Us</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+<div class="gold-rule"></div>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-arch">
+    <div class="arch-frame" aria-hidden="true">
+      <svg viewBox="0 0 500 640" preserveAspectRatio="none">
+        <!-- Outer pointed arch -->
+        <path d="M 30 638 L 30 320 Q 30 30 250 14 Q 470 30 470 320 L 470 638 Z"
+              fill="none" stroke="var(--ornament)" stroke-width="2.4"/>
+        <!-- Inner arch -->
+        <path d="M 60 628 L 60 330 Q 60 60 250 46 Q 440 60 440 330 L 440 628 Z"
+              fill="none" stroke="var(--ornament)" stroke-width="1.2"/>
+        <!-- Gold rule between -->
+        <path d="M 45 628 L 45 325 Q 45 45 250 30 Q 455 45 455 325 L 455 628 Z"
+              fill="none" stroke="var(--accent)" stroke-width="1"/>
+        <!-- Capital ornaments -->
+        <line x1="60" y1="350" x2="30" y2="350" stroke="var(--ornament)" stroke-width="1.4"/>
+        <line x1="440" y1="350" x2="470" y2="350" stroke="var(--ornament)" stroke-width="1.4"/>
+        <line x1="60" y1="355" x2="30" y2="355" stroke="var(--accent)" stroke-width="0.8"/>
+        <line x1="440" y1="355" x2="470" y2="355" stroke="var(--accent)" stroke-width="0.8"/>
+        <!-- Crockets at apex -->
+        <circle cx="250" cy="14" r="5" fill="var(--ornament)"/>
+        <circle cx="250" cy="30" r="3" fill="var(--accent)"/>
+      </svg>
+    </div>
+    <div class="hero-content">
+      <div class="hero-seal" aria-label="Workshop mark, a cross flory">
+        <svg viewBox="0 0 592 592" xmlns="http://www.w3.org/2000/svg">
+          <path transform="translate(-4,-4)scale(0.15,0.15)" d="M1778.9,3200A120.9263,120.9263 0 0,1 1657.97,3320.93A120.9263,120.9263 0 0,1 1537.04,3200A221.5096,221.5096 0 0,0 1456.32,3371.02A221.5096,221.5096 0 0,0 1677.83,3592.53A221.5096,221.5096 0 0,0 1818.61,3542.03A362.779,362.779 0 0,0 2000,3856.21A362.779,362.779 0 0,0 2181.39,3542.03A221.5096,221.5096 0 0,0 2322.17,3592.53A221.5096,221.5096 0 0,0 2543.68,3371.02A221.5096,221.5096 0 0,0 2462.96,3200A120.9263,120.9263 0 0,1 2342.03,3320.93A120.9263,120.9263 0 0,1 2221.1,3200V2221.1H3200A120.9263,120.9263 0 0,1 3320.93,2342.03A120.9263,120.9263 0 0,1 3200,2462.96A221.5096,221.5096 0 0,0 3371.02,2543.68A221.5096,221.5096 0 0,0 3592.53,2322.17A221.5096,221.5096 0 0,0 3542.03,2181.39A362.779,362.779 0 0,0 3856.21,2000A362.779,362.779 0 0,0 3542.03,1818.61A221.5096,221.5096 0 0,0 3592.53,1677.83A221.5096,221.5096 0 0,0 3371.02,1456.32A221.5096,221.5096 0 0,0 3200,1537.04A120.9263,120.9263 0 0,1 3320.93,1657.97A120.9263,120.9263 0 0,1 3200,1778.9H2221.1V800A120.9263,120.9263 0 0,1 2342.03,679.073A120.9263,120.9263 0 0,1 2462.96,800A221.5096,221.5096 0 0,0 2543.68,628.984A221.5096,221.5096 0 0,0 2322.17,407.475A221.5096,221.5096 0 0,0 2181.39,457.969A362.779,362.779 0 0,0 2000,143.793A362.779,362.779 0 0,0 1818.61,457.969A221.5096,221.5096 0 0,0 1677.83,407.475A221.5096,221.5096 0 0,0 1456.32,628.984A221.5096,221.5096 0 0,0 1537.04,800A120.9263,120.9263 0 0,1 1657.97,679.073A120.9263,120.9263 0 0,1 1778.9,800V1778.9H800A120.9263,120.9263 0 0,1 679.073,1657.97A120.9263,120.9263 0 0,1 800,1537.04A221.5096,221.5096 0 0,0 628.984,1456.32A221.5096,221.5096 0 0,0 407.475,1677.83A221.5096,221.5096 0 0,0 457.969,1818.61A362.779,362.779 0 0,0 143.793,2000A362.779,362.779 0 0,0 457.969,2181.39A221.5096,221.5096 0 0,0 407.475,2322.17A221.5096,221.5096 0 0,0 628.984,2543.68A221.5096,221.5096 0 0,0 800,2462.96A120.9263,120.9263 0 0,1 679.073,2342.03A120.9263,120.9263 0 0,1 800,2221.1H1778.9Z" fill="var(--ornament)"/>
+        </svg>
+      </div>
+      <h1 class="hero-title">Atelier of<br>Gautier de Soissons</h1>
+      <p class="hero-legend">Atelier fondé en l'an de grâce MCCLXXXIV, rue des Verriers, Soissons</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECTION DIVIDER ============ -->
+<div class="divider" aria-hidden="true">
+  <span class="line"></span>
+  <span class="ornament">
+    <svg viewBox="0 0 39.26 39.90" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="19.6" cy="19.9" r="2.4" fill="var(--ornament)"/>
+      <circle cx="6" cy="19.9" r="1.6" fill="var(--accent)"/>
+      <circle cx="33" cy="19.9" r="1.6" fill="var(--accent)"/>
+      <path d="M 19.6 6 Q 13 13 13 19.9 Q 13 27 19.6 33 Q 26 27 26 19.9 Q 26 13 19.6 6 Z" fill="var(--secondary)"/>
+    </svg>
+  </span>
+  <span class="line"></span>
+</div>
+
+<!-- ============ COMMISSIONS ============ -->
+<section class="commissions">
+  <p class="eyebrow">Of the Hands now Engaged</p>
+  <h2>Commissions Presently Undertaken</h2>
+
+  <div class="panel-row">
+
+    <!-- Panel 1: Senlis -->
+    <article class="panel">
+      <div class="panel-arch">
+        <svg class="arch-outline" viewBox="0 0 340 520" preserveAspectRatio="none">
+          <path d="M 12 518 L 12 260 Q 12 18 170 8 Q 328 18 328 260 L 328 518 Z"/>
+          <path d="M 28 510 L 28 268 Q 28 32 170 22 Q 312 32 312 268 L 312 510 Z" stroke="var(--accent)" stroke-width="0.8"/>
+        </svg>
+        <div class="quatrefoil" aria-hidden="true">
+          <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+            <g transform="translate(300,300)scale(0.87)rotate(45)">
+              <circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/>
+              <circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/>
+              <rect x="-232" y="-232" width="464" height="464"/>
+              <g fill="#ffffff">
+                <circle cx="-195.16" r="138"/><circle cx="195.16" r="138"/>
+                <circle cy="195.16" r="138"/><circle cy="-195.16" r="138"/>
+                <rect x="-207" y="-207" width="414" height="414"/>
+              </g>
+            </g>
+          </svg>
+        </div>
+        <div class="panel-body">
+          <h3 class="panel-title">A Cycle of Clerestory Lights<br>for Our Lady at Senlis</h3>
+          <p class="panel-meta">Lady Chapel · seven lancets · begun Pentecost MCCCIV</p>
+          <div class="panel-rule"></div>
+          <p class="panel-text">Commanded by the Chapter of the cathedral church of Senlis, seven tall lancets in the manner of the eastern apse: the Tree of Jesse rising on the dexter side, the Coronation of the Virgin filling the centre, and the Five Joys disposed at the sinister. The cartoons have been laid down upon the whitened table, and the master glazier Jehan le Vert prepares the cobalt pot-metal sent from the Rhine.</p>
+          <p class="panel-foot">Delivery — Saint Michael's Day, MCCCV</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- Panel 2: Book of Hours -->
+    <article class="panel">
+      <div class="panel-arch">
+        <svg class="arch-outline" viewBox="0 0 340 520" preserveAspectRatio="none">
+          <path d="M 12 518 L 12 260 Q 12 18 170 8 Q 328 18 328 260 L 328 518 Z"/>
+          <path d="M 28 510 L 28 268 Q 28 32 170 22 Q 312 32 312 268 L 312 510 Z" stroke="var(--accent)" stroke-width="0.8"/>
+        </svg>
+        <div class="quatrefoil" aria-hidden="true">
+          <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+            <g transform="translate(300,300)scale(0.87)rotate(45)">
+              <circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/>
+              <circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/>
+              <rect x="-232" y="-232" width="464" height="464"/>
+              <g fill="#ffffff">
+                <circle cx="-195.16" r="138"/><circle cx="195.16" r="138"/>
+                <circle cy="195.16" r="138"/><circle cy="-195.16" r="138"/>
+                <rect x="-207" y="-207" width="414" height="414"/>
+              </g>
+            </g>
+          </svg>
+        </div>
+        <div class="panel-body">
+          <h3 class="panel-title">A Book of Hours for the Countess of Vermandois</h3>
+          <p class="panel-meta">CXLIV folios · vellum · Use of Soissons</p>
+          <div class="panel-rule"></div>
+          <p class="panel-text">Madame Eléonore, Countess of Vermandois, has bespoke a small book to lie open upon her prie-dieu: the Hours of the Virgin in the Use of Soissons, the Penitential Psalms, and an Office of the Dead set after her late lord. Twelve full miniatures shall stand at the great divisions, and the calendar receive a labour of the months in burnished gold against madder grounds. The hand is text-quadrata of Brother Aymeric.</p>
+          <p class="panel-foot">Bound by Candlemas — XL livres tournois</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- Panel 3: Saint-Quentin -->
+    <article class="panel">
+      <div class="panel-arch">
+        <svg class="arch-outline" viewBox="0 0 340 520" preserveAspectRatio="none">
+          <path d="M 12 518 L 12 260 Q 12 18 170 8 Q 328 18 328 260 L 328 518 Z"/>
+          <path d="M 28 510 L 28 268 Q 28 32 170 22 Q 312 32 312 268 L 312 510 Z" stroke="var(--accent)" stroke-width="0.8"/>
+        </svg>
+        <div class="quatrefoil" aria-hidden="true">
+          <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+            <g transform="translate(300,300)scale(0.87)rotate(45)">
+              <circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/>
+              <circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/>
+              <rect x="-232" y="-232" width="464" height="464"/>
+              <g fill="#ffffff">
+                <circle cx="-195.16" r="138"/><circle cx="195.16" r="138"/>
+                <circle cy="195.16" r="138"/><circle cy="-195.16" r="138"/>
+                <rect x="-207" y="-207" width="414" height="414"/>
+              </g>
+            </g>
+          </svg>
+        </div>
+        <div class="panel-body">
+          <h3 class="panel-title">Restoration of the Damaged Rose at Saint-Quentin</h3>
+          <p class="panel-meta">North transept · twelve foils · injured by tempest of MCCCIII</p>
+          <div class="panel-rule"></div>
+          <p class="panel-text">In the night of Saint Bartholomew the great hailstorm shattered the tracery of the north rose, and the cobalt ground of the upper foils lies broken upon the pavement. The Chapter of Saint-Quentin has retained the atelier to draw the missing figures anew — three angels, the prophet Isaias, and the lamb of the Apocalypse — and to refire those panels which yet hold their lead. Old glass shall be matched grain-for-grain.</p>
+          <p class="panel-foot">In progress · second year of labour</p>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============ DIVIDER ============ -->
+<div class="divider" aria-hidden="true">
+  <span class="line"></span>
+  <span class="ornament">
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <path fill="var(--secondary)" d="M100 30 Q 70 70 100 110 Q 130 70 100 30 Z"/>
+      <circle cx="100" cy="130" r="14" fill="var(--ornament)"/>
+      <circle cx="100" cy="130" r="6" fill="var(--accent)"/>
+    </svg>
+  </span>
+  <span class="line"></span>
+</div>
+
+<!-- ============ CLOSING ============ -->
+<section class="closing">
+  <h3>Of the Crafts We Practise</h3>
+  <p>The atelier accepts work in glass, in vellum, and in painted panel, after the manner of the northern schools and the masters of Chartres. Cartoons for windows are drawn full-scale upon whited oaken tables; the cames are cast in our own foundry behind the rue des Verriers; the colours are ground each morning in oil of walnut and bound with gum of cherry.</p>
+  <p>For books we keep the calf-skin in lime water through the autumn months and finish vellum to a satin nap by Lent. Gold is laid upon a gesso of bole and burnished with the tooth of a wolf. Pigments are won from lapis lazuli, from madder root, from the verdigris that gathers on copper plates above vinegar.</p>
+  <p class="colophon">— Gautier de Soissons,<br>Magister Vitrearius et Illuminator</p>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="footer-arcade" aria-hidden="true">
+    <div class="footer-niche">
+      <svg class="arch" viewBox="0 0 130 90" preserveAspectRatio="none">
+        <path d="M 6 88 L 6 50 Q 6 8 65 4 Q 124 8 124 50 L 124 88 Z"/>
+      </svg>
+      <span class="ornament-mark">⚜</span>
+    </div>
+    <div class="footer-niche">
+      <svg class="arch" viewBox="0 0 130 90" preserveAspectRatio="none">
+        <path d="M 6 88 L 6 50 Q 6 8 65 4 Q 124 8 124 50 L 124 88 Z"/>
+      </svg>
+      <span class="ornament-mark">✠</span>
+    </div>
+    <div class="footer-niche">
+      <svg class="arch" viewBox="0 0 130 90" preserveAspectRatio="none">
+        <path d="M 6 88 L 6 50 Q 6 8 65 4 Q 124 8 124 50 L 124 88 Z"/>
+      </svg>
+      <span class="ornament-mark">⚜</span>
+    </div>
+    <div class="footer-niche">
+      <svg class="arch" viewBox="0 0 130 90" preserveAspectRatio="none">
+        <path d="M 6 88 L 6 50 Q 6 8 65 4 Q 124 8 124 50 L 124 88 Z"/>
+      </svg>
+      <span class="ornament-mark">✠</span>
+    </div>
+    <div class="footer-niche">
+      <svg class="arch" viewBox="0 0 130 90" preserveAspectRatio="none">
+        <path d="M 6 88 L 6 50 Q 6 8 65 4 Q 124 8 124 50 L 124 88 Z"/>
+      </svg>
+      <span class="ornament-mark">⚜</span>
+    </div>
+    <div class="footer-niche">
+      <svg class="arch" viewBox="0 0 130 90" preserveAspectRatio="none">
+        <path d="M 6 88 L 6 50 Q 6 8 65 4 Q 124 8 124 50 L 124 88 Z"/>
+      </svg>
+      <span class="ornament-mark">✠</span>
+    </div>
+    <div class="footer-niche">
+      <svg class="arch" viewBox="0 0 130 90" preserveAspectRatio="none">
+        <path d="M 6 88 L 6 50 Q 6 8 65 4 Q 124 8 124 50 L 124 88 Z"/>
+      </svg>
+      <span class="ornament-mark">⚜</span>
+    </div>
+  </div>
+  <div class="footer-text">
+    <div class="name">Atelier of Gautier de Soissons</div>
+    <div class="place">rue des Verriers, paroisse de Saint-Pierre-au-Parvis, cité de Soissons</div>
+    <div class="year">Fondé · M · CC · LXXXIV</div>
+  </div>
+</footer>
+
+</body>
+</html>

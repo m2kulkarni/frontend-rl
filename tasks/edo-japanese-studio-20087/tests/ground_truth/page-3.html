@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Commissions & Works — Kōrin Mokkō</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.7;
+  }
+
+  /* ============ Masthead ============ */
+  .masthead {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 56px 80px 0 80px;
+    align-items: end;
+  }
+  .masthead-mark {
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    writing-mode: vertical-rl;
+    color: var(--text);
+    opacity: 0.7;
+  }
+  .masthead-title {
+    text-align: right;
+    font-family: var(--font-display), serif;
+    font-size: 42px;
+    line-height: 1.2;
+    letter-spacing: 0.04em;
+    color: var(--primary);
+    margin: 0;
+    font-weight: 400;
+  }
+  .masthead-title small {
+    display: block;
+    font-family: var(--font-body), serif;
+    font-size: 12px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin-top: 14px;
+    opacity: 0.65;
+  }
+
+  /* ============ Navigation ============ */
+  nav.primary {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    margin: 36px 80px 0 80px;
+    border-top: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+    padding: 14px 0;
+  }
+  .tsuru-mark {
+    width: 44px;
+    height: 44px;
+    display: block;
+  }
+  .tsuru-mark svg { width: 100%; height: 100%; }
+  nav.primary ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex-end;
+    gap: 36px;
+  }
+  nav.primary a {
+    font-family: var(--font-body), serif;
+    font-size: 11px;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: var(--text);
+    text-decoration: none;
+    font-variant: small-caps;
+  }
+  nav.primary a[aria-current="page"] {
+    color: var(--secondary);
+    border-bottom: 1px solid var(--secondary);
+    padding-bottom: 4px;
+  }
+  nav.primary a:hover { color: var(--primary); }
+
+  /* ============ Page Title Block ============ */
+  .page-intro {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    margin: 88px 80px 0 80px;
+    align-items: start;
+    gap: 60px;
+    position: relative;
+  }
+  .page-intro-meta {
+    font-family: var(--font-body), serif;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--text);
+    opacity: 0.7;
+    padding-top: 20px;
+  }
+  .page-intro-meta .seal {
+    display: inline-block;
+    margin-top: 28px;
+    padding: 6px 12px;
+    border: 1.5px solid var(--secondary);
+    color: var(--secondary);
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    transform: rotate(-4deg);
+    background: var(--bg);
+  }
+  .page-intro h1 {
+    font-family: var(--font-display), serif;
+    font-size: 78px;
+    line-height: 0.95;
+    margin: 0;
+    color: var(--primary);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  }
+  .page-intro h1 .han {
+    display: block;
+    font-size: 32px;
+    color: var(--text);
+    margin-top: 16px;
+    letter-spacing: 0.18em;
+  }
+  .page-intro-blurb {
+    font-size: 14px;
+    line-height: 1.85;
+    color: var(--text);
+    padding-top: 12px;
+  }
+  .page-intro-blurb::before {
+    content: "";
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--ornament);
+    margin-bottom: 18px;
+  }
+
+  /* ============ Background pattern (seigaiha) ============ */
+  .seigaiha-ground {
+    position: absolute;
+    right: 0;
+    top: 380px;
+    width: 480px;
+    height: 320px;
+    opacity: 0.10;
+    background-image: url("svg/seigaiha-waves.svg");
+    background-size: 240px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ============ Sayagata divider ============ */
+  .divider {
+    margin: 96px 80px 60px 80px;
+    display: grid;
+    grid-template-columns: 1fr auto 3fr;
+    align-items: center;
+    gap: 28px;
+  }
+  .divider .rule { height: 1px; background: var(--ornament); }
+  .divider .glyph {
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.5em;
+    color: var(--text);
+    opacity: 0.7;
+  }
+
+  /* ============ Works gallery ============ */
+  .works {
+    margin: 0 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .work {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 64px;
+    border-top: 1px solid var(--ornament);
+    padding: 52px 0 56px 0;
+    background: var(--surface);
+    padding-left: 36px;
+    padding-right: 36px;
+    position: relative;
+  }
+  .work + .work {
+    margin-top: 28px;
+  }
+  /* asymmetric offsets */
+  .work:nth-child(1) { margin-right: 220px; }
+  .work:nth-child(2) { margin-left: 140px; margin-right: 60px; }
+  .work:nth-child(3) { margin-right: 280px; margin-left: 20px; }
+  .work:nth-child(4) { margin-left: 180px; margin-right: 0; }
+
+  .work-kamon {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 14px;
+    height: 14px;
+    opacity: 0.85;
+  }
+  .work-num {
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.4em;
+    color: var(--text);
+    opacity: 0.55;
+    margin-bottom: 18px;
+  }
+  .work-title {
+    font-family: var(--font-display), serif;
+    font-size: 44px;
+    line-height: 1.05;
+    color: var(--primary);
+    font-weight: 400;
+    margin: 0;
+    letter-spacing: 0.02em;
+  }
+  .work-title-en {
+    display: block;
+    font-family: var(--font-body), serif;
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin-top: 16px;
+    opacity: 0.7;
+  }
+  .work-body p.lede {
+    font-size: 15px;
+    line-height: 1.85;
+    margin: 0 0 22px 0;
+    max-width: 640px;
+  }
+  .work-rule {
+    width: 64px;
+    height: 1px;
+    background: var(--ornament);
+    margin: 22px 0 14px 0;
+  }
+  .work-meta {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 24px;
+    row-gap: 8px;
+    font-size: 12px;
+    font-style: italic;
+    font-family: var(--font-body), serif;
+    line-height: 1.5;
+    max-width: 640px;
+  }
+  .work-meta dt {
+    font-style: normal;
+    font-variant: small-caps;
+    letter-spacing: 0.22em;
+    color: var(--text);
+    opacity: 0.6;
+    text-transform: lowercase;
+  }
+  .work-meta dd {
+    margin: 0;
+    color: var(--text);
+  }
+
+  /* ============ Coda / Inquiries ============ */
+  .coda {
+    margin: 120px 80px 80px 80px;
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .coda-left {
+    text-align: left;
+  }
+  .coda-left .kanji {
+    font-family: var(--font-display), serif;
+    font-size: 56px;
+    color: var(--primary);
+    line-height: 1;
+    letter-spacing: 0.1em;
+  }
+  .coda-left .en {
+    margin-top: 22px;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+  .coda-right {
+    border-top: 1px solid var(--ornament);
+    padding-top: 28px;
+    font-size: 13px;
+    line-height: 1.85;
+  }
+  .coda-right .stamp {
+    margin-top: 26px;
+    display: inline-block;
+    color: var(--secondary);
+    border: 1.5px solid var(--secondary);
+    padding: 8px 14px;
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.3em;
+    font-size: 13px;
+    transform: rotate(2deg);
+  }
+
+  /* ============ Footer ============ */
+  footer.site {
+    margin-top: 80px;
+    background: var(--bg);
+    position: relative;
+    padding: 56px 80px 24px 80px;
+    border-top: 1px solid var(--ornament);
+  }
+  footer.site::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 56px;
+    background-image: url("svg/seigaiha-waves.svg");
+    background-size: 180px;
+    opacity: 0.08;
+    pointer-events: none;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 220px 1fr 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+    position: relative;
+  }
+  .kiri-seal {
+    width: 110px;
+    height: 110px;
+    opacity: 0.85;
+  }
+  .kiri-seal svg { width:100%; height:100%; }
+  .footer-col h4 {
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.3em;
+    color: var(--primary);
+    margin: 0 0 12px 0;
+    font-weight: 400;
+  }
+  .footer-col p, .footer-col ul {
+    font-size: 12px;
+    line-height: 1.85;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .footer-col a {
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: 1px dotted transparent;
+  }
+  .footer-col a:hover { border-bottom-color: var(--text); }
+  .footer-attribution {
+    margin-top: 48px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(12,12,12,0.2);
+    font-size: 11px;
+    color: var(--text);
+    opacity: 0.65;
+    display: flex;
+    justify-content: space-between;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ MASTHEAD ============ -->
+<header class="masthead">
+  <div class="masthead-mark">京都・興林木工</div>
+  <h1 class="masthead-title">
+    Kōrin&nbsp;Mokkō
+    <small>Atelier of Joinery & Paper · Est. Kyōto</small>
+  </h1>
+</header>
+
+<!-- ============ NAV ============ -->
+<nav class="primary" aria-label="Primary">
+  <a href="page-1.html" class="tsuru-mark" aria-label="Home — tsuru-no-maru roundel">
+    <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="344" cy="344" r="330" fill="none" stroke="#0c0c0c" stroke-width="6"/>
+      <circle cx="344" cy="344" r="296" fill="none" stroke="#0c0c0c" stroke-width="1.5"/>
+      <g transform="translate(150,150) scale(0.56)">
+        <path d="M 343 60 C 280 90, 230 150, 220 220 C 215 260, 235 290, 270 305 C 240 330, 230 380, 260 420 C 290 450, 340 455, 380 430 C 420 470, 480 470, 510 430 C 540 395, 530 340, 490 320 C 520 290, 525 240, 500 200 C 470 150, 410 110, 343 60 Z M 343 200 A 18 18 0 1 1 343 236 A 18 18 0 1 1 343 200 Z" fill="none" stroke="#0c0c0c" stroke-width="3.5" stroke-linejoin="round"/>
+        <path d="M 270 305 Q 343 260, 490 320" fill="none" stroke="#0c0c0c" stroke-width="2"/>
+        <path d="M 290 380 Q 343 360, 460 380" fill="none" stroke="#0c0c0c" stroke-width="2"/>
+      </g>
+    </svg>
+  </a>
+  <ul>
+    <li><a href="page-1.html">Atelier</a></li>
+    <li><a href="page-2.html">Workshop</a></li>
+    <li><a href="page-3.html" aria-current="page">Commissions</a></li>
+    <li><a href="page-4.html">Materials</a></li>
+    <li><a href="page-5.html">Apprenticeship</a></li>
+    <li><a href="page-6.html">Visit</a></li>
+  </ul>
+</nav>
+
+<!-- ============ INTRO ============ -->
+<section class="page-intro">
+  <div class="seigaiha-ground" aria-hidden="true"></div>
+  <aside class="page-intro-meta">
+    Folio III<br>
+    Selected Works<br>
+    1998 — 2021
+    <div class="seal">記録 · Kiroku</div>
+  </aside>
+  <div>
+    <h1>
+      Commissions<br>&amp; Works
+      <span class="han">仕事の記 ― しごとのき</span>
+    </h1>
+  </div>
+  <div class="page-intro-blurb">
+    Four works, drawn from twenty-three years of joinery, paper, and lacquer at the atelier on Aburanokōji-dōri. Each commission begins with a long conversation in the timber yard and ends, sometimes years later, with the quiet click of a wooden peg. We offer them here as records, not as advertisement.
+  </div>
+</section>
+
+<!-- ============ DIVIDER ============ -->
+<div class="divider" aria-hidden="true">
+  <div class="rule"></div>
+  <div class="glyph">作 品 譜</div>
+  <div class="rule"></div>
+</div>
+
+<!-- ============ WORKS ============ -->
+<section class="works" aria-label="Selected works">
+
+  <!-- WORK 01 -->
+  <article class="work">
+    <svg class="work-kamon" viewBox="0 0 688 688" aria-hidden="true">
+      <rect width="688" height="688" fill="#0c0c0c"/>
+      <circle cx="344" cy="344" r="120" fill="#f5efde"/>
+      <g fill="#0c0c0c">
+        <ellipse cx="344" cy="220" rx="50" ry="68"/>
+        <ellipse cx="450" cy="290" rx="50" ry="68" transform="rotate(72 450 290)"/>
+        <ellipse cx="408" cy="412" rx="50" ry="68" transform="rotate(144 408 412)"/>
+        <ellipse cx="280" cy="412" rx="50" ry="68" transform="rotate(216 280 412)"/>
+        <ellipse cx="238" cy="290" rx="50" ry="68" transform="rotate(288 238 290)"/>
+        <circle cx="344" cy="344" r="32"/>
+      </g>
+    </svg>
+    <div>
+      <div class="work-num">第 一 ・ I</div>
+      <h2 class="work-title">
+        住吉屋揚屋
+        <span class="work-title-en">Sumiya Ageya · Restoration of Lattice & Fittings</span>
+      </h2>
+    </div>
+    <div class="work-body">
+      <p class="lede">
+        A two-year restoration of the surviving second-floor lattice screens, transom carvings, and tea-room joinery of the Sumiya ageya in Shimabara — the last extant Edo-period banquet house in Kyōto, designated an Important Cultural Property. Original eighteenth-century joints were reproduced in matched hinoki without recourse to glue or nail; the cinnabar lacquer of the Matsu-no-Ma transom was renewed by hand under the supervision of the family.
+      </p>
+      <div class="work-rule"></div>
+      <dl class="work-meta">
+        <dt>Year</dt><dd>1998 – 2000 (commenced spring, completed autumn)</dd>
+        <dt>Site</dt><dd>Nishi-Shinyashiki Ageya-chō, Shimoyō-ku, Kyōto</dd>
+        <dt>Materials</dt><dd>Kiso hinoki, aged sugi, urushi (kuro / shu), iron mokkō nails for hidden fixings</dd>
+        <dt>Lead artisan</dt><dd>Kōrin Tatsuhiko, second-generation master joiner</dd>
+        <dt>Scope</dt><dd>Eleven kōshi screens; Matsu-no-Ma ranma; tea-room ji-ita and tokobashira</dd>
+      </dl>
+    </div>
+  </article>
+
+  <!-- WORK 02 -->
+  <article class="work">
+    <svg class="work-kamon" viewBox="0 0 688 688" aria-hidden="true">
+      <rect width="688" height="688" fill="#0c0c0c"/>
+      <circle cx="344" cy="344" r="120" fill="#f5efde"/>
+      <g fill="#0c0c0c">
+        <ellipse cx="344" cy="220" rx="50" ry="68"/>
+        <ellipse cx="450" cy="290" rx="50" ry="68" transform="rotate(72 450 290)"/>
+        <ellipse cx="408" cy="412" rx="50" ry="68" transform="rotate(144 408 412)"/>
+        <ellipse cx="280" cy="412" rx="50" ry="68" transform="rotate(216 280 412)"/>
+        <ellipse cx="238" cy="290" rx="50" ry="68" transform="rotate(288 238 290)"/>
+        <circle cx="344" cy="344" r="32"/>
+      </g>
+    </svg>
+    <div>
+      <div class="work-num">第 二 ・ II</div>
+      <h2 class="work-title">
+        襖框・上京邸
+        <span class="work-title-en">Fusuma Frames for a Private Residence in Kamigyō</span>
+      </h2>
+    </div>
+    <div class="work-body">
+      <p class="lede">
+        A set of fourteen fusuma frames commissioned for the principal rooms of a machiya residence near Demachiyanagi. Frames were jointed in straight-grained sugi from the family's own holdings in Kitayama, dressed only with raw tung oil. The kōzo paper was made within the atelier and brushed with a single field of gofun white; the proprietor requested no painted ornament, only the slow texture of the mulberry fibre against winter light.
+      </p>
+      <div class="work-rule"></div>
+      <dl class="work-meta">
+        <dt>Year</dt><dd>2007</dd>
+        <dt>Site</dt><dd>Private residence, Kamigyō-ku, Kyōto</dd>
+        <dt>Materials</dt><dd>Kitayama-sugi, hand-couched kōzo paper, hand-forged hikite, tung oil</dd>
+        <dt>Lead artisan</dt><dd>Kōrin Tatsuhiko (joinery) · Hatano Sumie (paper)</dd>
+        <dt>Quantity</dt><dd>14 fusuma · 4 maira-do interior screens</dd>
+      </dl>
+    </div>
+  </article>
+
+  <!-- WORK 03 -->
+  <article class="work">
+    <svg class="work-kamon" viewBox="0 0 688 688" aria-hidden="true">
+      <rect width="688" height="688" fill="#0c0c0c"/>
+      <circle cx="344" cy="344" r="120" fill="#f5efde"/>
+      <g fill="#0c0c0c">
+        <ellipse cx="344" cy="220" rx="50" ry="68"/>
+        <ellipse cx="450" cy="290" rx="50" ry="68" transform="rotate(72 450 290)"/>
+        <ellipse cx="408" cy="412" rx="50" ry="68" transform="rotate(144 408 412)"/>
+        <ellipse cx="280" cy="412" rx="50" ry="68" transform="rotate(216 280 412)"/>
+        <ellipse cx="238" cy="290" rx="50" ry="68" transform="rotate(288 238 290)"/>
+        <circle cx="344" cy="344" r="32"/>
+      </g>
+    </svg>
+    <div>
+      <div class="work-num">第 三 ・ III</div>
+      <h2 class="work-title">
+        祇園会・提灯七十張
+        <span class="work-title-en">Seventy Paper Lanterns for the Gion Matsuri</span>
+      </h2>
+    </div>
+    <div class="work-body">
+      <p class="lede">
+        At the request of the Naginata-boko preservation society, a commission of seventy chōchin lanterns to replace those lost in storage damage of the previous year. Bamboo armatures were split and bent green; kōzo paper from Kurotani was washed in persimmon tannin to deepen the warm tone of evening; the iconography of the boko was inked by hand in sumi by an apprentice over the course of forty-three days. The full set hung along Shijō-dōri for the yoiyama nights of July 2014.
+      </p>
+      <div class="work-rule"></div>
+      <dl class="work-meta">
+        <dt>Year</dt><dd>2014 (delivered 12 July, in time for yoiyama)</dd>
+        <dt>Site</dt><dd>Naginata-boko, Shijō-Karasuma, Kyōto</dd>
+        <dt>Materials</dt><dd>Madake bamboo, Kurotani kōzo, persimmon-tannin wash, sumi ink</dd>
+        <dt>Lead artisan</dt><dd>Hatano Sumie (paper-making) · Mori Kentarō (bamboo)</dd>
+        <dt>Quantity</dt><dd>70 lanterns · 3 standard sizes (尺一・尺三・尺五)</dd>
+      </dl>
+    </div>
+  </article>
+
+  <!-- WORK 04 -->
+  <article class="work">
+    <svg class="work-kamon" viewBox="0 0 688 688" aria-hidden="true">
+      <rect width="688" height="688" fill="#0c0c0c"/>
+      <circle cx="344" cy="344" r="120" fill="#f5efde"/>
+      <g fill="#0c0c0c">
+        <ellipse cx="344" cy="220" rx="50" ry="68"/>
+        <ellipse cx="450" cy="290" rx="50" ry="68" transform="rotate(72 450 290)"/>
+        <ellipse cx="408" cy="412" rx="50" ry="68" transform="rotate(144 408 412)"/>
+        <ellipse cx="280" cy="412" rx="50" ry="68" transform="rotate(216 280 412)"/>
+        <ellipse cx="238" cy="290" rx="50" ry="68" transform="rotate(288 238 290)"/>
+        <circle cx="344" cy="344" r="32"/>
+      </g>
+    </svg>
+    <div>
+      <div class="work-num">第 四 ・ IV</div>
+      <h2 class="work-title">
+        大原・茶室再生
+        <span class="work-title-en">Tea-Room Renewal at Ōhara</span>
+      </h2>
+    </div>
+    <div class="work-body">
+      <p class="lede">
+        A four-and-a-half mat tea-room in the hills above Ōhara, rebuilt around its surviving tokobashira of weathered akamatsu. The brief was contemplative rather than restorative: to keep what had aged honourably, replace what had failed quietly, and admit no flourish that the tea masters of the eighteenth century would not have recognised. The nijiriguchi was re-hung in a single board of two-hundred-year sugi salvaged from a demolished sake brewery in Fushimi.
+      </p>
+      <div class="work-rule"></div>
+      <dl class="work-meta">
+        <dt>Year</dt><dd>2021 (March – November)</dd>
+        <dt>Site</dt><dd>Private chashitsu, Ōhara Raikō-in district, Sakyō-ku, Kyōto</dd>
+        <dt>Materials</dt><dd>Reclaimed Fushimi sugi, akamatsu (existing), Yoshino-hinoki ceiling, urushi finish on tokobashira base</dd>
+        <dt>Lead artisan</dt><dd>Kōrin Naoko, third generation · with master plasterer Yamashita Tetsu</dd>
+        <dt>Scope</dt><dd>Full re-roof in kokerabuki shingle; tatami renewed; ro-bata cut anew</dd>
+      </dl>
+    </div>
+  </article>
+
+</section>
+
+<!-- ============ CODA ============ -->
+<section class="coda">
+  <div class="coda-left">
+    <div class="kanji">御依頼</div>
+    <div class="en">Inquiries · Go-irai</div>
+  </div>
+  <div class="coda-right">
+    The atelier accepts a small number of commissions each year, generally restoration of machiya elements, the making of fusuma and chōchin in series, and the rebuilding of tea-rooms. We meet first in the workshop, walk the timber yard, and only later discuss measure and cost. Letters reach us most reliably by post; our address is kept on the visit page.
+    <br>
+    <span class="stamp">興 林</span>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site">
+  <div class="footer-grid">
+    <div class="kiri-seal" aria-label="Kiri paulownia seal">
+      <svg viewBox="0 0 345 326" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g fill="#0c0c0c" opacity="0.85">
+          <path d="M 172 8 C 168 14, 160 18, 154 22 C 150 28, 152 38, 158 44 C 164 50, 168 58, 168 68 C 168 80, 164 88, 158 92 C 154 90, 152 84, 152 76 C 150 70, 148 66, 142 64 C 136 64, 132 68, 132 74 C 134 80, 130 84, 126 88 C 132 92, 138 92, 144 90 C 150 90, 156 94, 158 100 C 160 110, 158 120, 156 128 C 152 130, 148 124, 146 116 C 144 108, 138 102, 132 102 C 126 104, 122 110, 124 116 C 126 122, 122 126, 120 130 C 124 132, 130 134, 136 130 C 142 128, 148 132, 152 136 C 156 132, 162 130, 168 132 C 168 138, 168 144, 168 150 C 172 156, 178 156, 182 150 C 182 144, 182 138, 182 132 C 188 130, 194 132, 198 136 C 202 132, 208 128, 214 130 C 220 134, 226 132, 230 130 C 228 126, 224 122, 226 116 C 228 110, 224 104, 218 102 C 212 102, 206 108, 204 116 C 202 124, 198 130, 194 128 C 192 120, 190 110, 192 100 C 194 94, 200 90, 206 90 C 212 92, 218 92, 224 88 C 220 84, 216 80, 218 74 C 218 68, 214 64, 208 64 C 202 66, 200 70, 198 76 C 198 84, 196 90, 192 92 C 186 88, 182 80, 182 68 C 182 58, 186 50, 192 44 C 198 38, 200 28, 196 22 C 190 18, 182 14, 178 8 C 176 6, 174 6, 172 8 Z"/>
+          <ellipse cx="175" cy="155" rx="10" ry="10"/>
+          <path d="M 120 170 C 100 200, 90 240, 100 275 C 105 290, 130 320, 175 320 C 220 320, 245 290, 250 275 C 260 240, 250 200, 230 170 C 210 200, 195 240, 195 275 C 192 290, 188 305, 175 308 C 162 305, 158 290, 155 275 C 155 240, 140 200, 120 170 Z"/>
+        </g>
+      </svg>
+    </div>
+    <div class="footer-col">
+      <h4>興林木工</h4>
+      <p>
+        Kōrin Mokkō<br>
+        Atelier of Joinery,<br>
+        Paper, &amp; Lacquer<br>
+        — since the third year of Heisei
+      </p>
+    </div>
+    <div class="footer-col">
+      <h4>所在地</h4>
+      <p>
+        Aburanokōji-dōri<br>
+        Marutamachi-agaru<br>
+        Nakagyō-ku, Kyōto-shi<br>
+        604-0931 日本国
+      </p>
+    </div>
+    <div class="footer-col">
+      <h4>諸頁</h4>
+      <ul>
+        <li><a href="page-1.html">Atelier — 表</a></li>
+        <li><a href="page-2.html">Workshop — 工房</a></li>
+        <li><a href="page-4.html">Materials — 素材</a></li>
+        <li><a href="page-5.html">Apprenticeship — 弟子入</a></li>
+        <li><a href="page-6.html">Visit — 来訪</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-attribution">
+    <span>Kamon SVG renderings after public-domain sources, redrawn for the atelier by N. Hatano, 2019.</span>
+    <span>© Heisei 3 — Reiwa 6 · Kōrin Mokkō</span>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Press & Notes | Kalasha</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), sans-serif;
+    margin: 0;
+    line-height: 1.55;
+  }
+
+  /* ============ MASTHEAD ============ */
+  .masthead {
+    background: var(--bg);
+    border-bottom: 2px solid var(--ornament);
+    position: relative;
+  }
+  .gopuram-tier {
+    height: 14px;
+    background: var(--ornament);
+    position: relative;
+  }
+  .gopuram-tier::before,
+  .gopuram-tier::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-style: solid;
+  }
+  .gopuram-tier-2 {
+    height: 8px;
+    background: var(--accent);
+    width: 80%;
+    margin: 0 auto;
+  }
+  .gopuram-tier-3 {
+    height: 6px;
+    background: var(--text-emphasis);
+    width: 60%;
+    margin: 0 auto;
+  }
+  .gopuram-tier-4 {
+    height: 4px;
+    background: var(--ornament);
+    width: 40%;
+    margin: 0 auto;
+  }
+
+  .masthead-title {
+    text-align: center;
+    padding: 28px 0 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+  }
+  .masthead-title h1 {
+    font-family: var(--font-display), serif;
+    font-weight: normal;
+    font-size: 38px;
+    letter-spacing: 0.32em;
+    margin: 0;
+    color: var(--primary);
+    text-transform: uppercase;
+  }
+  .masthead-title h1 .em {
+    color: var(--secondary);
+  }
+  .masthead-title .lotus-glyph {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+  }
+  .masthead-tag {
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    padding-bottom: 14px;
+    font-style: italic;
+    font-family: var(--font-body), sans-serif;
+  }
+
+  .navband {
+    background: var(--secondary);
+    padding: 14px 0;
+    border-top: 2px solid var(--accent);
+    border-bottom: 2px solid var(--accent);
+  }
+  .navband ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0;
+  }
+  .navband a {
+    color: #f8f4ec;
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    padding: 4px 22px;
+    font-weight: 700;
+    transition: color .2s;
+  }
+  .navband a:hover { color: var(--accent); }
+  .navband a[aria-current="page"] {
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent);
+  }
+  .navband li + li::before {
+    content: "❋";
+    color: var(--accent);
+    font-size: 10px;
+  }
+
+  /* ============ DIVIDER (twin peacocks band) ============ */
+  .peacock-band {
+    width: 100%;
+    overflow: hidden;
+    background: var(--bg);
+    padding: 14px 40px;
+    border-bottom: 1px solid var(--accent);
+  }
+  .peacock-band svg {
+    width: 100%;
+    height: 36px;
+    display: block;
+  }
+
+  /* ============ PAGE TITLE BLOCK ============ */
+  .page-title {
+    text-align: center;
+    padding: 44px 60px 28px;
+    background:
+      repeating-linear-gradient(90deg,
+        transparent 0 18px,
+        rgba(201,162,58,0.18) 18px 19px);
+    background-color: var(--bg);
+    border-bottom: 1px double var(--ornament);
+  }
+  .page-title .kicker {
+    font-size: 11px;
+    letter-spacing: 0.5em;
+    color: var(--text-emphasis);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .page-title h2 {
+    font-family: var(--font-display), serif;
+    font-size: 56px;
+    margin: 0 0 12px;
+    letter-spacing: 0.16em;
+    color: var(--primary);
+    font-weight: normal;
+  }
+  .page-title .deck {
+    max-width: 720px;
+    margin: 0 auto;
+    font-size: 15px;
+    color: var(--primary);
+    font-style: italic;
+  }
+  .page-title .deck b { color: var(--secondary); font-style: normal; letter-spacing: 0.04em; }
+
+  /* ============ MAIN GRID ============ */
+  main {
+    padding: 50px 60px 60px;
+    max-width: 1320px;
+    margin: 0 auto;
+  }
+  .press-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 40px;
+    margin-bottom: 50px;
+  }
+
+  /* ============ DOUBLE-LINE NOTCHED CARDS ============ */
+  .card {
+    position: relative;
+    background: var(--surface);
+    border: 1.5px solid var(--secondary);
+    padding: 4px;
+  }
+  .card-inner {
+    border: 1px solid var(--accent);
+    padding: 28px 32px 30px;
+    position: relative;
+  }
+  /* stepped corner notches */
+  .card::before, .card::after,
+  .card-inner::before, .card-inner::after {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border: 1.5px solid var(--secondary);
+    background: var(--bg);
+  }
+  .card::before { top: -8px; left: -8px; border-right: none; border-bottom: none; }
+  .card::after { top: -8px; right: -8px; border-left: none; border-bottom: none; }
+  .card-inner::before { bottom: -12px; left: -12px; border-right: none; border-top: none; }
+  .card-inner::after { bottom: -12px; right: -12px; border-left: none; border-top: none; }
+
+  .card-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 6px;
+  }
+  .card-head .lotus-mini {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+  }
+  .card-subtitle {
+    font-size: 10px;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    font-weight: 700;
+  }
+  .card h3 {
+    font-family: var(--font-display), serif;
+    font-weight: normal;
+    font-size: 26px;
+    line-height: 1.2;
+    letter-spacing: 0.04em;
+    color: var(--primary);
+    margin: 6px 0 14px;
+  }
+  .card .source {
+    font-size: 12px;
+    color: var(--secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin-bottom: 14px;
+    font-weight: 700;
+  }
+  .card .source span { color: var(--primary); font-weight: 400; letter-spacing: 0.06em; text-transform: none; font-style: italic; }
+
+  blockquote.pull {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    line-height: 1.4;
+    color: var(--text-emphasis);
+    margin: 18px 0;
+    padding: 0 0 0 22px;
+    border-left: 3px double var(--accent);
+    letter-spacing: 0.02em;
+  }
+  blockquote.pull::before {
+    content: "“";
+    font-size: 48px;
+    line-height: 0;
+    color: var(--ornament);
+    vertical-align: -16px;
+    margin-right: 4px;
+    font-family: serif;
+  }
+
+  .card p { font-size: 14.5px; margin: 10px 0; }
+
+  /* ============ AWARDS COLUMN ============ */
+  .awards-col h3 {
+    margin-top: 0;
+  }
+  .award-item {
+    border-top: 1px solid var(--accent);
+    padding: 18px 0 14px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .award-item:first-of-type { border-top: none; padding-top: 4px; }
+  .award-medal {
+    flex: 0 0 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    border: 2px solid var(--secondary);
+    box-shadow: inset 0 0 0 3px var(--bg), inset 0 0 0 4px var(--accent);
+    text-align: center;
+    line-height: 1.05;
+    letter-spacing: 0.04em;
+  }
+  .award-text strong {
+    display: block;
+    font-family: var(--font-display), serif;
+    font-size: 16px;
+    color: var(--primary);
+    margin-bottom: 3px;
+    letter-spacing: 0.04em;
+    font-weight: normal;
+  }
+  .award-text span {
+    font-size: 12px;
+    color: var(--text-emphasis);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  .award-text p { font-size: 13.5px; margin: 6px 0 0; }
+
+  /* ============ ARABESQUE DIVIDER ============ */
+  .arabesque-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    margin: 30px 0 40px;
+    color: var(--ornament);
+  }
+  .arabesque-divider .line {
+    flex: 1;
+    height: 0;
+    border-top: 1px solid var(--secondary);
+    border-bottom: 1px solid var(--accent);
+    padding-top: 2px;
+  }
+  .arabesque-divider .seal {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+  }
+  .arabesque-divider .glyph {
+    color: var(--secondary);
+    font-size: 18px;
+    letter-spacing: 0.4em;
+  }
+
+  /* ============ READER LETTERS ============ */
+  .letters-section h2.section-title {
+    font-family: var(--font-display), serif;
+    font-weight: normal;
+    text-align: center;
+    font-size: 32px;
+    letter-spacing: 0.18em;
+    color: var(--primary);
+    margin: 0 0 8px;
+  }
+  .letters-section .section-sub {
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    color: var(--text-emphasis);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+  }
+  .letters-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+  .letter {
+    background: var(--surface);
+    border: 1.5px solid var(--secondary);
+    padding: 4px;
+    position: relative;
+  }
+  .letter::before, .letter::after {
+    content: "";
+    position: absolute;
+    width: 12px; height: 12px;
+    background: var(--bg);
+    border: 1.5px solid var(--secondary);
+  }
+  .letter::before { top: -7px; left: -7px; border-right: none; border-bottom: none; }
+  .letter::after { bottom: -7px; right: -7px; border-left: none; border-top: none; }
+
+  .letter-inner {
+    border: 1px solid var(--accent);
+    padding: 22px 24px;
+    color: var(--text-emphasis);
+    font-style: italic;
+    font-size: 14.5px;
+    line-height: 1.6;
+  }
+  .letter-inner .letter-mark {
+    font-family: var(--font-display), serif;
+    font-style: normal;
+    font-size: 36px;
+    color: var(--ornament);
+    line-height: 0.5;
+    display: block;
+    margin-bottom: 8px;
+  }
+  .letter-inner footer {
+    margin-top: 14px;
+    font-style: normal;
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    border-top: 1px dashed var(--accent);
+    padding-top: 10px;
+  }
+
+  /* ============ BIBLIOGRAPHY LIST ============ */
+  .biblio {
+    margin: 50px 0 0;
+    padding: 30px 36px;
+    border: 1px solid var(--accent);
+    background: rgba(201,162,58,0.06);
+    position: relative;
+  }
+  .biblio h3 {
+    font-family: var(--font-display), serif;
+    font-weight: normal;
+    margin: 0 0 6px;
+    letter-spacing: 0.14em;
+    font-size: 20px;
+    color: var(--primary);
+  }
+  .biblio .sub {
+    font-size: 10px;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    margin-bottom: 18px;
+  }
+  .biblio ol {
+    columns: 2;
+    column-gap: 40px;
+    margin: 0;
+    padding: 0 0 0 18px;
+    font-size: 13.5px;
+  }
+  .biblio li { margin-bottom: 10px; break-inside: avoid; }
+  .biblio li b { color: var(--secondary); }
+  .biblio li em { color: var(--text-emphasis); }
+
+  /* ============ FOOTER ============ */
+  footer.site-foot {
+    margin-top: 70px;
+    background: var(--bg);
+    border-top: 3px double var(--ornament);
+    color: var(--primary);
+  }
+  .arcade {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    border-bottom: 1px solid var(--primary);
+  }
+  .bay {
+    border-right: 1px solid var(--primary);
+    height: 100px;
+    position: relative;
+    background:
+      linear-gradient(to bottom, transparent 0 18px, var(--primary) 18px 19px, transparent 19px),
+      linear-gradient(to bottom, transparent 0 30px, var(--primary) 30px 31px, transparent 31px);
+  }
+  .bay:last-child { border-right: none; }
+  .bay::before {
+    content: "";
+    position: absolute;
+    top: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 60px;
+    border: 1px solid var(--primary);
+    border-bottom: none;
+    border-radius: 50% 50% 0 0 / 80% 80% 0 0;
+  }
+  .bay::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 60px;
+    background:
+      linear-gradient(to bottom, var(--primary) 0 6px, transparent 6px 10px,
+      var(--primary) 10px 16px, transparent 16px 20px,
+      var(--primary) 20px 60px);
+  }
+  .bay.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg);
+  }
+  .bay.center::before, .bay.center::after { display: none; }
+  .bay.center .om-seal {
+    width: 56px;
+    height: 56px;
+  }
+  .bay.center .twin-lotus {
+    width: 28px;
+    height: 28px;
+    margin: 0 14px;
+  }
+
+  .foot-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 32px 60px;
+    gap: 40px;
+    position: relative;
+  }
+  .foot-cols > div { position: relative; padding: 0 24px; }
+  .foot-cols > div + div::before {
+    content: "";
+    position: absolute;
+    top: 0; bottom: 0; left: -20px;
+    width: 1px;
+    background: var(--secondary);
+  }
+  .foot-cols h4 {
+    font-family: var(--font-display), serif;
+    font-weight: normal;
+    margin: 0 0 10px;
+    font-size: 15px;
+    letter-spacing: 0.18em;
+    color: var(--secondary);
+    text-transform: uppercase;
+  }
+  .foot-cols p, .foot-cols address {
+    font-style: normal;
+    font-size: 13.5px;
+    line-height: 1.6;
+    margin: 0;
+  }
+  .foot-credit {
+    text-align: center;
+    padding: 16px 60px 28px;
+    font-style: italic;
+    font-size: 12px;
+    color: var(--text-emphasis);
+    letter-spacing: 0.08em;
+    border-top: 1px solid var(--accent);
+  }
+
+  /* utility colors used inline */
+  .om-fill path { fill: var(--secondary); }
+  .lotus-glyph path { fill: var(--ornament); stroke: var(--secondary); }
+</style>
+</head>
+<body>
+
+<!-- ============ MASTHEAD ============ -->
+<header class="masthead">
+  <div class="gopuram-tier"></div>
+  <div class="gopuram-tier-2"></div>
+  <div class="gopuram-tier-3"></div>
+  <div class="gopuram-tier-4"></div>
+
+  <div class="masthead-title">
+    <svg class="lotus-glyph" viewBox="0 0 384 301" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <g transform="matrix(2.6725,-2.6725,2.6725,2.6725,-230.7,-334.3)">
+        <ellipse transform="rotate(45)" cx="113.18" cy="136.4" rx="20.77" ry="4.88" fill="#c9a23a" stroke="#e34234" stroke-width="0.5"/>
+        <path d="m -20.5,171.7 c -34.7,-2.8 -17.6,27.4 -17.6,27.5 15,2.8 22.8,5.8 25.9,-13.6 -0.5,-11.4 -4.6,-10.3 -8.3,-14 z" fill="#e34234" opacity="0.7"/>
+        <path d="m -20.4,178.2 c 28.9,-16.2 12.8,-50 12.7,-50.1 -12.9,9.6 -28.2,18.5 -22.3,37.2 2,5.7 6.3,11.6 9.5,12.9 z" fill="#e34234" opacity="0.7"/>
+        <path d="M -18.2,180.4 C -2,151.5 31.9,167.6 31.9,167.7 22.3,180.6 13.5,195.9 -5.3,190 -11,188 -16.9,183.6 -18.2,180.4 Z" fill="#e34234" opacity="0.7"/>
+        <path d="m -23.1,175.5 c 1.4,-33.1 38.9,-33.9 39,-33.9 -2.8,15.8 -6.6,35.7 -26,38.9 -12.1,1 -9.3,-1.3 -13,-5 z" fill="#e34234" opacity="0.7"/>
+      </g>
+    </svg>
+    <h1>Kalasha <span class="em">·</span> A Chettinad Kitchen</h1>
+    <svg class="lotus-glyph" viewBox="0 0 384 301" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <g transform="matrix(-2.6725,-2.6725,-2.6725,2.6725,614.7,-334.3)">
+        <ellipse transform="rotate(45)" cx="113.18" cy="136.4" rx="20.77" ry="4.88" fill="#c9a23a" stroke="#e34234" stroke-width="0.5"/>
+        <path d="m -20.5,171.7 c -34.7,-2.8 -17.6,27.4 -17.6,27.5 15,2.8 22.8,5.8 25.9,-13.6 -0.5,-11.4 -4.6,-10.3 -8.3,-14 z" fill="#e34234" opacity="0.7"/>
+        <path d="m -20.4,178.2 c 28.9,-16.2 12.8,-50 12.7,-50.1 -12.9,9.6 -28.2,18.5 -22.3,37.2 2,5.7 6.3,11.6 9.5,12.9 z" fill="#e34234" opacity="0.7"/>
+        <path d="M -18.2,180.4 C -2,151.5 31.9,167.6 31.9,167.7 22.3,180.6 13.5,195.9 -5.3,190 -11,188 -16.9,183.6 -18.2,180.4 Z" fill="#e34234" opacity="0.7"/>
+        <path d="m -23.1,175.5 c 1.4,-33.1 38.9,-33.9 39,-33.9 -2.8,15.8 -6.6,35.7 -26,38.9 -12.1,1 -9.3,-1.3 -13,-5 z" fill="#e34234" opacity="0.7"/>
+      </g>
+    </svg>
+  </div>
+  <p class="masthead-tag">Heritage Rice Meals · Slow-cooked Kuzhambu · Bangalore</p>
+
+  <nav class="navband" aria-label="Primary">
+    <ul>
+      <li><a href="page-1.html">Home</a></li>
+      <li><a href="page-2.html">The Menu</a></li>
+      <li><a href="page-3.html">Our Story</a></li>
+      <li><a href="page-4.html">Visit</a></li>
+      <li><a href="page-5.html">Feast Days</a></li>
+      <li><a href="page-6.html" aria-current="page">Press &amp; Notes</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- ============ TWIN PEACOCKS BAND ============ -->
+<div class="peacock-band" aria-hidden="true">
+  <svg viewBox="0 0 1186 112" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+    <g fill="#1a1a1a" transform="translate(0,8)">
+      <!-- left peacock silhouette -->
+      <path d="M40 60 Q60 20 110 30 Q150 38 160 60 Q150 70 130 65 Q140 80 120 88 Q100 84 95 70 Q70 78 50 72 Q42 68 40 60 Z M115 35 Q120 28 128 30 Q126 36 120 38 Z"/>
+      <circle cx="123" cy="34" r="2" fill="#e34234"/>
+      <!-- center medallion -->
+      <circle cx="593" cy="48" r="22" fill="none" stroke="#e34234" stroke-width="1.5"/>
+      <circle cx="593" cy="48" r="14" fill="none" stroke="#c9a23a" stroke-width="1"/>
+      <circle cx="593" cy="48" r="4" fill="#e34234"/>
+      <!-- garland -->
+      <path d="M180 56 Q280 30 380 56 Q480 80 570 56" fill="none" stroke="#e34234" stroke-width="1"/>
+      <path d="M616 56 Q706 80 806 56 Q906 30 1006 56" fill="none" stroke="#e34234" stroke-width="1"/>
+      <g fill="#c9a23a">
+        <circle cx="240" cy="48" r="3"/><circle cx="320" cy="58" r="3"/><circle cx="400" cy="56" r="3"/><circle cx="480" cy="64" r="3"/>
+        <circle cx="700" cy="64" r="3"/><circle cx="780" cy="56" r="3"/><circle cx="860" cy="58" r="3"/><circle cx="940" cy="48" r="3"/>
+      </g>
+      <!-- right peacock (mirrored) -->
+      <path d="M1146 60 Q1126 20 1076 30 Q1036 38 1026 60 Q1036 70 1056 65 Q1046 80 1066 88 Q1086 84 1091 70 Q1116 78 1136 72 Q1144 68 1146 60 Z M1071 35 Q1066 28 1058 30 Q1060 36 1066 38 Z"/>
+      <circle cx="1063" cy="34" r="2" fill="#e34234"/>
+    </g>
+  </svg>
+</div>
+
+<!-- ============ PAGE TITLE ============ -->
+<section class="page-title">
+  <div class="kicker">❋ Volume VI · Press &amp; Notes ❋</div>
+  <h2>The Press &amp; The Pantry</h2>
+  <p class="deck">A small selection of writing about Kalasha — what critics, columnists, and a few generous readers have said about the kitchen since we opened our doors on <b>Lavelle Road</b> in <b>September 2019</b>.</p>
+</section>
+
+<main>
+
+  <!-- ============ PRIMARY PRESS GRID ============ -->
+  <div class="press-grid">
+
+    <!-- LEFT: featured press -->
+    <div class="press-col">
+
+      <!-- Conde Nast -->
+      <article class="card">
+        <div class="card-inner">
+          <div class="card-head">
+            <svg class="lotus-mini" viewBox="0 0 384 301" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="192" cy="150" r="60" fill="#c9a23a" stroke="#e34234" stroke-width="3"/>
+              <path d="M192 90 Q220 120 192 150 Q164 120 192 90 Z M252 150 Q222 178 192 150 Q222 122 252 150 Z M192 210 Q164 180 192 150 Q220 180 192 210 Z M132 150 Q162 122 192 150 Q162 178 132 150 Z" fill="#e34234"/>
+            </svg>
+            <span class="card-subtitle">Featured · Long Read</span>
+          </div>
+          <h3>“The Most Quietly Ambitious Tamil Kitchen in the South”</h3>
+          <div class="source">Condé Nast Traveller India <span>— March 2022 · by Nidhi Gupta</span></div>
+          <blockquote class="pull">The most quietly ambitious Tamil kitchen in the south — a room that does not announce itself, but rewards the patient diner with sambar that tastes like a recovered memory.</blockquote>
+          <p>Kalasha was profiled in CNT India's annual Hot List as part of a longer essay on heritage regional Indian cooking moving out of grandmothers' kitchens and into the urban dining room. The piece, photographed by Aman Makkar in our Lavelle Road dining hall, lingered on chef <b>Alagappan Chettiar</b>'s decision to mill heritage <em>seeraga samba</em> rice on premises and serve it for the weekday meal at ₹680.</p>
+          <p>“What is striking,” Gupta writes, “is the restraint. There is no theatre of fire here, no smoke and no story-told-in-three-acts. There is, instead, a banana leaf, a ladle of <em>vendhaya kuzhambu</em>, and the sense that a hundred small decisions have been made correctly, in the dark, before you arrived.”</p>
+        </div>
+      </article>
+
+      <div class="arabesque-divider" aria-hidden="true">
+        <span class="line"></span>
+        <span class="glyph">❋ ✦ ❋</span>
+        <svg class="seal" viewBox="0 0 356 367" xmlns="http://www.w3.org/2000/svg">
+          <path fill="#e34234" d="M178 30 C 130 30 90 70 90 130 C 90 180 130 220 178 220 C 230 220 270 180 270 130 C 270 70 230 30 178 30 Z M178 60 C 215 60 240 90 240 130 C 240 170 215 200 178 200 C 145 200 120 170 120 130 C 120 90 145 60 178 60 Z M178 240 L 200 280 L 240 290 L 210 320 L 220 360 L 178 340 L 136 360 L 146 320 L 116 290 L 156 280 Z"/>
+        </svg>
+        <span class="glyph">❋ ✦ ❋</span>
+        <span class="line"></span>
+      </div>
+
+      <!-- The Hindu Weekend -->
+      <article class="card">
+        <div class="card-inner">
+          <div class="card-head">
+            <svg class="lotus-mini" viewBox="0 0 384 301" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="192" cy="150" r="60" fill="#c9a23a" stroke="#e34234" stroke-width="3"/>
+              <path d="M192 90 Q220 120 192 150 Q164 120 192 90 Z M252 150 Q222 178 192 150 Q222 122 252 150 Z M192 210 Q164 180 192 150 Q220 180 192 210 Z M132 150 Q162 122 192 150 Q162 178 132 150 Z" fill="#e34234"/>
+            </svg>
+            <span class="card-subtitle">Column · Weekend</span>
+          </div>
+          <h3>“Alagappan's Sambar is an Argument”</h3>
+          <div class="source">The Hindu Weekend <span>— V. Sriram, July 17, 2021</span></div>
+          <blockquote class="pull">Alagappan's sambar is an argument — a closely-reasoned defence of the small-batch toor dal, made daily, never reheated past one service.</blockquote>
+          <p>V. Sriram, the paper's long-standing food columnist, devoted his Saturday page to a single bowl: the lunchtime <em>vendhakkai sambar</em> served with the ₹680 meal. He counted, by his own admission rather pedantically, fourteen distinct flavours and dedicated the closing third of his column to a defence of the kitchen's stubborn refusal to scale the recipe past forty portions.</p>
+          <p>“A larger pot,” he quotes Alagappan as saying, “is a different dish. We are not equipped, in temperament or in vessel, to make a different dish.”</p>
+        </div>
+      </article>
+
+      <div class="arabesque-divider" aria-hidden="true">
+        <span class="line"></span>
+        <span class="glyph">❋ ✦ ❋</span>
+        <svg class="seal" viewBox="0 0 356 367" xmlns="http://www.w3.org/2000/svg">
+          <path fill="#e34234" d="M178 30 C 130 30 90 70 90 130 C 90 180 130 220 178 220 C 230 220 270 180 270 130 C 270 70 230 30 178 30 Z M178 60 C 215 60 240 90 240 130 C 240 170 215 200 178 200 C 145 200 120 170 120 130 C 120 90 145 60 178 60 Z M178 240 L 200 280 L 240 290 L 210 320 L 220 360 L 178 340 L 136 360 L 146 320 L 116 290 L 156 280 Z"/>
+        </svg>
+        <span class="glyph">❋ ✦ ❋</span>
+        <span class="line"></span>
+      </div>
+
+      <!-- Goya Journal -->
+      <article class="card">
+        <div class="card-inner">
+          <div class="card-head">
+            <svg class="lotus-mini" viewBox="0 0 384 301" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="192" cy="150" r="60" fill="#c9a23a" stroke="#e34234" stroke-width="3"/>
+              <path d="M192 90 Q220 120 192 150 Q164 120 192 90 Z M252 150 Q222 178 192 150 Q222 122 252 150 Z M192 210 Q164 180 192 150 Q220 180 192 210 Z M132 150 Q162 122 192 150 Q162 178 132 150 Z" fill="#e34234"/>
+            </svg>
+            <span class="card-subtitle">Essay · Issue 14</span>
+          </div>
+          <h3>An Inventory of the Chettinad Pantry</h3>
+          <div class="source">Goya Journal <span>— Issue 14, “The Pantry”, 2023</span></div>
+          <blockquote class="pull">To open Kalasha's spice store is to read a small biography of the Chettiar trade routes — Burmese star anise beside Ceylon cinnamon beside marathi mokku from a single grower in Karaikudi.</blockquote>
+          <p>The journal's fourteenth issue, dedicated entirely to the working pantry, opened with a 4,200-word essay by writer Aysha Tanya on Kalasha's spice room. The essay catalogued forty-seven distinct ingredients, traced the supply chain of the kitchen's <em>kalpasi</em> (stone flower) back to a co-operative in Sivaganga district, and reproduced — with permission — the handwritten notebook page on which Alagappan's mother first recorded the family <em>kuzhambu</em> ratio in 1974.</p>
+          <p>The full essay, “What the Pantry Remembers”, runs across pages 22–41 of the print issue and is available at <em>goya.in/issue-14</em>.</p>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- RIGHT: awards & sidebar -->
+    <aside class="awards-col">
+      <article class="card">
+        <div class="card-inner">
+          <div class="card-head">
+            <svg class="lotus-mini" viewBox="0 0 384 301" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="192" cy="150" r="60" fill="#c9a23a" stroke="#e34234" stroke-width="3"/>
+              <path d="M192 90 Q220 120 192 150 Q164 120 192 90 Z M252 150 Q222 178 192 150 Q222 122 252 150 Z M192 210 Q164 180 192 150 Q220 180 192 210 Z M132 150 Q162 122 192 150 Q162 178 132 150 Z" fill="#e34234"/>
+            </svg>
+            <span class="card-subtitle">Recognition</span>
+          </div>
+          <h3>Awards &amp; Honours</h3>
+
+          <div class="award-item">
+            <div class="award-medal">2023</div>
+            <div class="award-text">
+              <strong>Times Food Award</strong>
+              <span>Best Regional Indian · Bangalore</span>
+              <p>Awarded by The Times of India's annual Food &amp; Nightlife jury, October 2023, in recognition of the lunchtime heritage rice meal and the kitchen's long-standing supplier programme.</p>
+            </div>
+          </div>
+
+          <div class="award-item">
+            <div class="award-medal">2022</div>
+            <div class="award-text">
+              <strong>Condé Nast Traveller Hot List</strong>
+              <span>Top 50 New Restaurants · India</span>
+              <p>Selected by editor Divia Thani's panel of nine writers as one of fifty notable openings of the preceding eighteen months across the subcontinent.</p>
+            </div>
+          </div>
+
+          <div class="award-item">
+            <div class="award-medal">2021</div>
+            <div class="award-text">
+              <strong>EazyDiner Foodie Award</strong>
+              <span>Critics' Pick · South Indian</span>
+              <p>Shortlisted by a jury chaired by Vir Sanghvi; cited specifically for the Sunday banana-leaf meal and the kitchen's <em>chukka varuval</em>.</p>
+            </div>
+          </div>
+
+          <div class="award-item">
+            <div class="award-medal">2020</div>
+            <div class="award-text">
+              <strong>Bangalore Mirror</strong>
+              <span>Newcomer of the Year</span>
+              <p>Awarded six months into the kitchen's first calendar year of service — and, given the year, six months into a great deal else besides.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <div class="biblio">
+        <h3>Also Mentioned In</h3>
+        <p class="sub">A reading list, abbreviated</p>
+        <ol>
+          <li><b>Mint Lounge</b> — “The Slow Lunch”, <em>Smitha Menon</em>, 04 Feb 2023, p. 14.</li>
+          <li><b>Vogue India</b> — “Where the Editors Eat: Bangalore”, March 2022.</li>
+          <li><b>The New Indian Express</b> — Sunday Magazine cover, 19 Sept 2021.</li>
+          <li><b>Roundglass Sustain</b> — “Heritage Rice on a Restaurant Menu”, video feature, 2022.</li>
+          <li><b>Whetstone Magazine</b> — Vol. 9, “The Pepper Issue”, 2023, pp. 88–94.</li>
+          <li><b>Deccan Herald</b> — Anita Rao Kashi, “The Karaikudi Table Comes to Lavelle Road”, 12 Nov 2019.</li>
+        </ol>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- ============ READER LETTERS ============ -->
+  <section class="letters-section">
+    <div class="arabesque-divider" aria-hidden="true">
+      <span class="line"></span>
+      <span class="glyph">❋ ✦ ❋</span>
+      <svg class="seal" viewBox="0 0 356 367" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#e34234" d="M178 30 C 130 30 90 70 90 130 C 90 180 130 220 178 220 C 230 220 270 180 270 130 C 270 70 230 30 178 30 Z M178 60 C 215 60 240 90 240 130 C 240 170 215 200 178 200 C 145 200 120 170 120 130 C 120 90 145 60 178 60 Z M178 240 L 200 280 L 240 290 L 210 320 L 220 360 L 178 340 L 136 360 L 146 320 L 116 290 L 156 280 Z"/>
+      </svg>
+      <span class="glyph">❋ ✦ ❋</span>
+      <span class="line"></span>
+    </div>
+
+    <h2 class="section-title">Letters From the Table</h2>
+    <p class="section-sub">❋ Three readers, reproduced with permission ❋</p>
+
+    <div class="letters-grid">
+      <article class="letter">
+        <div class="letter-inner">
+          <span class="letter-mark">“</span>
+          I came to Bangalore for a wedding in November and was taken to Kalasha by my cousin who, frankly, I don't always trust on these matters. The <em>vendhaya kuzhambu</em> at Sunday lunch tasted exactly like my paati's, only she has been gone fourteen years and I had begun to believe I was misremembering. I am writing to say: I was not misremembering. Thank you.
+          <footer>— Lakshmi R., Singapore · letter dated 03.12.2023</footer>
+        </div>
+      </article>
+
+      <article class="letter">
+        <div class="letter-inner">
+          <span class="letter-mark">“</span>
+          My husband and I are both in our late seventies and we do not eat out often. We came on a Tuesday at half past noon and were given a seat by the courtyard window. Your young man — I think his name was Karthik — explained every dish without making us feel slow. We will come again on our anniversary in March. Please keep the appalam exactly as it was.
+          <footer>— Mrs. &amp; Mr. Subramaniam, Indiranagar · letter dated 21.01.2024</footer>
+        </div>
+      </article>
+
+      <article class="letter">
+        <div class="letter-inner">
+          <span class="letter-mark">“</span>
+          I am a chef in Copenhagen and I read about you in Whetstone. I flew through Bangalore on my way to Colombo and changed my flight to spend a night. The <em>kola urundai</em> was the best single mouthful of food I had in 2023. I am not exaggerating to be polite — I keep notebooks. You are on page 1 of the new one.
+          <footer>— Jonas Vejlby, Copenhagen · letter dated 07.01.2024</footer>
+        </div>
+      </article>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-foot">
+  <div class="arcade" aria-hidden="true">
+    <div class="bay"></div>
+    <div class="bay"></div>
+    <div class="bay center">
+      <svg class="twin-lotus" viewBox="0 0 384 301" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="192" cy="150" r="60" fill="#c9a23a" stroke="#e34234" stroke-width="3"/>
+        <path d="M192 90 Q220 120 192 150 Q164 120 192 90 Z M252 150 Q222 178 192 150 Q222 122 252 150 Z M192 210 Q164 180 192 150 Q220 180 192 210 Z M132 150 Q162 122 192 150 Q162 178 132 150 Z" fill="#e34234"/>
+      </svg>
+      <svg class="om-seal" viewBox="0 0 356 367" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#e34234" d="M90.5 354c-38.7-13.8-66.7-48.2-77.9-95.3-5-21.4-6.5-56.8-2.3-56.8 1.4 0 5.1 9.7 8.3 21.6 6.9 25.9 18.6 50.3 30 62.2 18.8 19.8 65.5 27.6 92.4 15.4 20.9-9.5 29.4-32.1 20.3-54.1-7-17-23-22.7-52.7-18.8 0 0-18.2-19.6-24-54.5l18.7 1.7c22.5 2 39.5-3 48.3-14.2 8.3-10.5 8.1-14.6-1.1-25.3-13.3-15.5-37.2-11.6-85.6 14L40 109l10.2-7.8c25.6-19.6 70.2-29.4 95.5-21 23.1 7.6 40 37.8 35.5 63.3-3.1 17.2-16.9 41.4-27.6 48.1l-9.2 5.8 12.7 5.7c21.6 9.7 34.8 2.3 50.6-28.6 21.8-42.7 35.9-53.7 68.8-53.8 15.3 0 20.8 1.6 31.9 9.4 27.9 19.5 43.1 60 39.8 105.9-4.2 58.1-31.8 93.3-72.9 93.3-22.6 0-37.1-7.9-48.7-26.5-10.2-16.3-14.8-48.7-9-62.9 2.8-6.8 3.3-7 3.5-1.6.2 10 11.6 26.4 22.1 31.8 25.7 13.3 62.7-3.4 77.3-35 11.1-24 5.2-70.2-10-78.4-3.2-1.7-11.1-3.1-17.5-3.1-13.7 0-24.4 9.8-39.5 36.2-5.2 9.1-14 20.8-19.5 26.1-8.9 8.6-12.1 9.6-30 9.6h-20l6.5 14.4c9.3 20.6 8.8 54-1 74.4-8.7 18-28.7 36.2-44.7 40.7-15.6 4.3-41 3.7-54.9-1.3z M165.8 75.9c-8.9-15.1-14.3-43.3-8.4-43.3 7 15.1 21.3 28.6 36.6 38 27.5 13.3 55.4 8 85.8-16.5 6.7-5.4 12.7-9.2 13.2-8.4 7.4 11.5 20.3 21 24.5 34.4 0 5.7-24.3 22-43.6 29.2-47.6 13.7-80 8.3-108.1-33.4z"/>
+      </svg>
+      <svg class="twin-lotus" viewBox="0 0 384 301" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="192" cy="150" r="60" fill="#c9a23a" stroke="#e34234" stroke-width="3"/>
+        <path d="M192 90 Q220 120 192 150 Q164 120 192 90 Z M252 150 Q222 178 192 150 Q222 122 252 150 Z M192 210 Q164 180 192 150 Q220 180 192 210 Z M132 150 Q162 122 192 150 Q162 178 132 150 Z" fill="#e34234"/>
+      </svg>
+    </div>
+    <div class="bay"></div>
+    <div class="bay"></div>
+  </div>
+
+  <div class="foot-cols">
+    <div>
+      <h4>Visit</h4>
+      <address>
+        Kalasha — A Chettinad Kitchen<br>
+        No. 14/2, Lavelle Road,<br>
+        Off Vittal Mallya Road,<br>
+        Bangalore 560 001<br>
+        Karnataka, India
+      </address>
+    </div>
+    <div>
+      <h4>Hours</h4>
+      <p>
+        Tuesday – Sunday<br>
+        Lunch · 12:30 – 3:00<br>
+        Dinner · 7:00 – 10:30<br>
+        <em>Monday — Closed</em><br>
+        Sunday meal seatings: 12:30 &amp; 2:15
+      </p>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <p>
+        Reservations · +91 80 4112 6680<br>
+        Press &amp; Notes · press@kalasha.in<br>
+        Private Dining · feast@kalasha.in<br>
+        @kalasha.kitchen
+      </p>
+    </div>
+  </div>
+
+  <div class="foot-credit">
+    <em>Kitchen of Alagappan Chettiar &amp; Meera Alagappan · Karaikudi, by way of Bangalore · est. September 2019</em>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Visit & Contact — Sri Rajaraja Institute</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    line-height: 1.6;
+  }
+
+  /* ---------- NAVIGATION ---------- */
+  .topbar {
+    background: #0e0e0e;
+    color: #f5ecd6;
+    padding: 14px 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .seal {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .seal-medallion {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #e8c75a 0%, #c9a23a 60%, #8a6d20 100%);
+    display: flex; align-items: center; justify-content: center;
+    border: 1.5px solid #e34234;
+  }
+  .seal-medallion svg { width: 30px; height: 30px; }
+  .seal-medallion svg path { fill: #1a1a1a; }
+  .seal-text {
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    line-height: 1.2;
+  }
+  .seal-text small {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 9.5px;
+    letter-spacing: 0.3em;
+    color: #f5ecd6;
+    margin-top: 3px;
+    font-weight: 400;
+  }
+  .navlinks {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+    margin: 0; padding: 0;
+  }
+  .navlinks a {
+    color: #f5ecd6;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 4px 0;
+    border-bottom: 1px solid transparent;
+    transition: color .2s, border-color .2s;
+  }
+  .navlinks a:hover { color: var(--secondary); }
+  .navlinks a[aria-current="page"] {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+  .nav-rule {
+    height: 6px;
+    background:
+      linear-gradient(to bottom,
+        var(--secondary) 0%, var(--secondary) 2px,
+        var(--bg) 2px, var(--bg) 3px,
+        var(--accent) 3px, var(--accent) 5px,
+        transparent 5px);
+  }
+  .breadcrumb {
+    background: var(--bg);
+    padding: 14px 56px;
+    border-bottom: 1px solid rgba(201,162,58,0.4);
+    color: var(--text-emphasis);
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .breadcrumb a { color: var(--text-emphasis); text-decoration: none; }
+  .breadcrumb .sep { color: var(--accent); margin: 0 12px; }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    padding: 60px 56px 40px;
+    text-align: center;
+    position: relative;
+  }
+  .hero-eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    font-weight: 700;
+    margin-bottom: 18px;
+  }
+  .gopuram-title {
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+    line-height: 1;
+    margin: 0 auto 22px;
+    max-width: 1100px;
+  }
+  .gopuram-title .tier-1 { display:block; font-size: 64px; }
+  .gopuram-title .tier-2 { display:block; font-size: 44px; color: var(--secondary); margin-top: 6px; }
+  .gopuram-title .tier-3 { display:block; font-size: 28px; color: var(--text-emphasis); margin-top: 8px; letter-spacing: 0.08em; }
+  .hero-sub {
+    max-width: 740px;
+    margin: 0 auto 30px;
+    font-size: 16px;
+    color: #333;
+  }
+  .peacock-frame {
+    max-width: 1100px;
+    margin: 24px auto 0;
+    height: 60px;
+    overflow: hidden;
+  }
+  .peacock-frame svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* ---------- SECTIONS ---------- */
+  main { padding: 0 56px 40px; }
+  .section { margin: 70px auto; max-width: 1280px; }
+  .section-head {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .section-head .kicker {
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .section-head h2 {
+    font-family: var(--font-display), serif;
+    font-size: 40px;
+    color: var(--primary);
+    margin: 6px 0 4px;
+  }
+  .section-head .sub {
+    color: var(--text-emphasis);
+    font-size: 14px;
+    letter-spacing: 0.06em;
+  }
+
+  /* divider tailpiece */
+  .tailpiece {
+    text-align: center;
+    margin: 60px 0 0;
+  }
+  .tailpiece svg {
+    width: 90px; height: 70px;
+    opacity: 0.85;
+  }
+  .divider {
+    text-align: center;
+    margin: 30px 0;
+    height: 50px;
+    overflow: hidden;
+    opacity: 0.55;
+  }
+  .divider svg { height: 60px; width: auto; }
+
+  /* ---------- CARDS ---------- */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--accent);
+    padding: 32px 32px 56px;
+    position: relative;
+    transition: border-color .25s, transform .25s;
+  }
+  .card:hover {
+    border-color: var(--secondary);
+    transform: translateY(-3px);
+  }
+  /* corner palmettes */
+  .card::before, .card::after,
+  .card > .corner-tl, .card > .corner-tr {
+    content: '';
+    position: absolute;
+    width: 14px; height: 14px;
+    border: 2px solid var(--secondary);
+  }
+  .card::before { top:-1px; left:-1px; border-right:none; border-bottom:none; }
+  .card::after  { bottom:-1px; right:-1px; border-left:none; border-top:none; }
+  .card > .corner-tl {
+    top:-1px; right:-1px; border-left:none; border-bottom:none;
+  }
+  .card > .corner-tr {
+    bottom:-1px; left:-1px; border-right:none; border-top:none;
+  }
+  .card-title {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0 0 4px;
+  }
+  .card-subtitle {
+    color: var(--text-emphasis);
+    font-size: 12px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 18px;
+  }
+  .card-lotus {
+    position: absolute;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 36px; height: 28px;
+    opacity: 0.7;
+  }
+
+  /* ---------- VISIT & DIRECTIONS ---------- */
+  .visit-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: 36px;
+  }
+  .hours-list { list-style: none; padding: 0; margin: 0; }
+  .hours-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px dashed rgba(201,162,58,0.5);
+    font-size: 15px;
+  }
+  .hours-list li:last-child { border-bottom: none; }
+  .hours-list .day { font-weight: 700; letter-spacing: 0.06em; }
+  .hours-list .time { color: var(--text-emphasis); font-variant-numeric: tabular-nums; }
+  .hours-list .closed { color: var(--secondary); font-style: italic; }
+
+  .note {
+    margin-top: 18px;
+    padding: 14px 18px;
+    background: rgba(231,66,52,0.05);
+    border-left: 3px solid var(--secondary);
+    font-size: 13.5px;
+    color: #4a2c28;
+  }
+
+  /* directions */
+  .direction-row {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    gap: 18px;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px dashed rgba(201,162,58,0.5);
+  }
+  .direction-row:last-child { border-bottom: none; }
+  .direction-icon {
+    width: 64px; height: 64px;
+    border: 1.5px solid var(--accent);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: #fffaee;
+  }
+  .direction-icon span {
+    font-family: var(--font-display);
+    font-size: 13px;
+    color: var(--secondary);
+    letter-spacing: 0.05em;
+    text-align: center;
+    line-height: 1.1;
+  }
+  .direction-text strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 17px;
+    color: var(--primary);
+  }
+  .direction-text span {
+    font-size: 13.5px;
+    color: #444;
+  }
+  .direction-distance {
+    font-family: var(--font-display);
+    color: var(--text-emphasis);
+    font-size: 18px;
+    text-align: right;
+  }
+  .direction-distance small {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #777;
+  }
+
+  /* ---------- ADDRESS BLOCK ---------- */
+  .address-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+    margin-top: 30px;
+  }
+  .address-block address {
+    font-style: normal;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+  .address-label {
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .institute-name {
+    font-family: var(--font-display);
+    color: var(--secondary);
+    font-size: 17px;
+    line-height: 1.25;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  /* ---------- DIRECTORY TABLE ---------- */
+  .directory-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+  }
+  .directory-table thead th {
+    background: #0e0e0e;
+    color: var(--accent);
+    padding: 14px 18px;
+    text-align: left;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .directory-table tbody td {
+    padding: 14px 18px;
+    border-bottom: 1px solid rgba(201,162,58,0.35);
+    font-size: 14px;
+    vertical-align: top;
+  }
+  .directory-table tbody tr:nth-child(even) { background: rgba(201,162,58,0.06); }
+  .dept-name {
+    font-family: var(--font-display);
+    color: var(--primary);
+    font-size: 15px;
+  }
+  .dept-name small {
+    display:block;
+    font-family: var(--font-body);
+    font-size: 12px;
+    color: var(--text-emphasis);
+    font-weight: 400;
+    margin-top: 2px;
+    letter-spacing: 0.04em;
+  }
+  .phone, .email {
+    font-variant-numeric: tabular-nums;
+    color: var(--text);
+  }
+  .email a, .phone a { color: var(--text-emphasis); text-decoration: none; }
+  .email a:hover { color: var(--secondary); }
+
+  /* ---------- KEY CONTACTS ---------- */
+  .contacts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 28px;
+  }
+  .contact-card .role {
+    color: var(--text-emphasis);
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .contact-card .name {
+    font-family: var(--font-display);
+    font-size: 22px;
+    color: var(--primary);
+    margin: 6px 0 4px;
+  }
+  .contact-card .creds {
+    font-style: italic;
+    color: #555;
+    font-size: 13px;
+    margin-bottom: 14px;
+  }
+  .contact-card p { margin: 6px 0; font-size: 14px; }
+  .contact-card .label {
+    display: inline-block;
+    width: 64px;
+    color: var(--accent);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  /* ---------- ETIQUETTE NOTE ---------- */
+  .etiquette {
+    background: linear-gradient(180deg, #fffaef 0%, #f8f4ec 100%);
+    border-top: 2px solid var(--secondary);
+    border-bottom: 2px solid var(--secondary);
+    padding: 50px 60px;
+    margin: 60px auto 0;
+    max-width: 1100px;
+    text-align: center;
+    position: relative;
+  }
+  .etiquette::before, .etiquette::after {
+    content: '';
+    position: absolute;
+    width: 24px; height: 24px;
+    border: 2px solid var(--accent);
+  }
+  .etiquette::before { top: -12px; left: -12px; border-right:none; border-bottom:none; background: var(--bg); }
+  .etiquette::after  { bottom: -12px; right: -12px; border-left:none; border-top:none; background: var(--bg); }
+  .etiquette h3 {
+    font-family: var(--font-display);
+    font-size: 26px;
+    color: var(--secondary);
+    margin: 0 0 14px;
+  }
+  .etiquette p {
+    max-width: 760px;
+    margin: 0 auto;
+    font-size: 15px;
+    line-height: 1.8;
+    color: #2a2a2a;
+  }
+
+  /* ---------- FOOTER (PILLARED ARCADE) ---------- */
+  footer { margin-top: 80px; }
+  .arcade {
+    background: #0e0e0e;
+    padding: 40px 56px 30px;
+    position: relative;
+  }
+  .arcade-pillars {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0;
+    align-items: end;
+    height: 110px;
+    position: relative;
+  }
+  .pillar {
+    width: 2px;
+    background: linear-gradient(to top, transparent 0%, var(--accent) 10%, var(--accent) 90%, transparent 100%);
+    height: 100%;
+    margin: 0 auto;
+    position: relative;
+  }
+  .pillar::before, .pillar::after {
+    content: '';
+    position: absolute;
+    left: 50%; transform: translateX(-50%);
+    width: 16px; height: 4px;
+    background: var(--accent);
+  }
+  .pillar::before { top: 8px; }
+  .pillar::after  { bottom: 8px; }
+  .arcade-center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #1a1a1a 0%, #0e0e0e 70%);
+    border: 2px solid var(--accent);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .arcade-center svg { width: 56px; height: 56px; }
+  .arcade-links {
+    margin-top: 36px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 24px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(201,162,58,0.3);
+  }
+  .arcade-links a {
+    color: #d8c98a;
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-align: center;
+  }
+  .arcade-links a:hover { color: var(--secondary); }
+
+  .footer-strip {
+    background: var(--secondary);
+    color: #fdf3df;
+    padding: 18px 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-family: var(--font-body);
+  }
+  .footer-strip span { opacity: 0.95; }
+</style>
+</head>
+<body>
+
+<!-- ===================== NAV ===================== -->
+<header class="topbar">
+  <div class="seal">
+    <div class="seal-medallion" aria-hidden="true">
+      <svg viewBox="0 0 356 367" xmlns="http://www.w3.org/2000/svg"><path d="M 90.456847,353.9498 C 51.797347,340.13485 23.72672,305.75839 12.612487,258.6184 C 7.5684267,237.22321 6.1421397,201.86984 10.323594,201.86984 C 11.712834,201.86984 15.42322,211.57056 18.568972,223.427 C 25.452892,249.37152 37.19436,273.76855 48.535988,285.69407 C 67.374717,305.50242 114.0356,313.26029 140.92106,301.05394 C 161.86409,291.54544 170.35697,268.94603 161.24995,246.95931 C 154.21242,229.96943 138.24701,224.28836 108.50834,228.19197 C 108.50834,228.19197 90.282834,208.57398 84.476417,173.73548 L 103.15738,175.42939 C 125.65731,177.46962 142.64532,172.49605 151.46236,161.28728 C 159.74765,150.75419 159.5685,146.68046 150.34841,135.96157 C 137.04396,120.49428 113.15511,124.41248 64.786577,149.99522 L 40.381632,109.08518 L 50.613137,101.2812 C 76.253387,81.724339 120.77357,71.947329 146.11011,80.309169 C 169.18841,87.925649 186.12724,118.14755 181.60247,143.63298 C 178.54327,160.86286 164.72752,184.99524 154.05369,191.75339 L 144.84862,197.58162 L 157.56351,203.31522 C 179.17018,213.05833 192.36061,205.61034 208.12001,174.76849 C 229.92949,132.0869 244.0745,121.0378 276.96658,120.99051 C 292.28176,120.96847 297.73268,122.57499 308.90312,130.4031 C 336.78213,149.94016 351.9622,190.39693 348.62804,236.27272 C 344.40474,294.37435 316.88374,329.61601 275.73415,329.61601 C 253.15086,329.61601 238.59451,321.69526 227.00729,303.10156 C 216.82976,286.76927 212.24334,254.42288 218.08805,240.19369 C 220.89208,233.36732 221.39892,233.13578 221.58223,238.59686 C 221.91916,248.63689 233.34159,264.95549 243.82827,270.37835 C 269.55794,283.68369 306.49479,266.96693 321.10832,235.4032 C 332.20339,211.4394 326.25105,165.21656 311.02084,157.06552 C 307.83453,155.36024 299.96089,153.96502 293.5244,153.96502 C 279.84214,153.96502 269.09709,163.80155 254.03263,190.11774 C 248.82442,199.21613 240.05943,210.97175 234.55486,216.24128 C 225.61134,224.80312 222.41769,225.82225 204.53067,225.82225 L 184.51412,225.82225 L 190.98415,240.19369 C 200.2451,260.76437 199.80694,294.18704 190.00976,314.53347 C 181.35272,332.51252 161.33618,350.71469 145.33374,355.16013 C 129.75572,359.4876 104.38789,358.9281 90.456847,353.9498 z M 165.8338,75.923739 C 156.97908,60.814399 151.52974,32.606158 157.46546,32.606158 C 164.43775,47.732319 178.73037,61.227101 194.03409,70.643259 C 221.52091,83.949329 249.39257,78.578529 279.84247,54.108239 C 286.54595,48.721279 292.48231,44.913138 293.0345,45.645698 C 300.4697,57.184233 313.331,66.613261 317.58219,80.021449 C 317.58219,85.678729 293.22867,101.96033 274.01214,109.15007 C 226.38264,122.8706 193.96598,117.44304 165.8338,75.923739 z M 189.83603,40.997228 L 220.84514,6.6137488 L 255.30593,38.514418 C 243.51876,48.222549 235.00994,63.289118 221.54391,70.930009 C 210.90372,63.086273 195.02308,53.837816 189.83603,40.997228 z "/></svg>
+    </div>
+    <div class="seal-text">
+      Sri Rajaraja Institute
+      <small>of Temple Arts &amp; Sciences · Tanjore</small>
+    </div>
+  </div>
+  <nav>
+    <ul class="navlinks">
+      <li><a href="page-1.html">Home</a></li>
+      <li><a href="page-2.html">Schools</a></li>
+      <li><a href="page-3.html">Admissions</a></li>
+      <li><a href="page-4.html">Research</a></li>
+      <li><a href="page-5.html">Campus</a></li>
+      <li><a href="page-6.html" aria-current="page">Visit</a></li>
+    </ul>
+  </nav>
+</header>
+<div class="nav-rule"></div>
+<div class="breadcrumb">
+  <a href="page-1.html">Mukha Mandapa</a>
+  <span class="sep">▸</span>
+  <a href="page-5.html">Outer Prakara</a>
+  <span class="sep">▸</span>
+  Visit &amp; Contact
+</div>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+  <div class="hero-eyebrow">Sannidhi · Approach &amp; Welcome</div>
+  <h1 class="gopuram-title">
+    <span class="tier-1">Visit &amp; Contact</span>
+    <span class="tier-2">Plan Your Pilgrimage</span>
+    <span class="tier-3">to the Vennaru Road Campus</span>
+  </h1>
+  <p class="hero-sub">
+    Whether you are arriving for an admission interview, attending a śilpa-śāstra
+    colloquium, or simply walking the Heritage Trail, our gates open onto the
+    same courtyard that once received the masons of the Brihadeeswara. We hope
+    these notes ease your way.
+  </p>
+  <div class="peacock-frame" aria-hidden="true">
+    <svg viewBox="0 0 313.71717 29.540759" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(54.572101,-91.176475)">
+        <path style="fill:#e34234" d="m -45.203647,120.20506 c -2.080683,-0.59494 -3.600099,-1.33764 -4.88273,-2.38671 -1.667517,-1.36388 -2.894118,-2.64027 -2.893812,-3.0113 1.42e-4,-0.17364 -0.209138,-0.47237 -0.46507,-0.66382 -0.819614,-0.61314 -1.16478,-1.84791 -1.123557,-4.01931 0.07527,-3.96496 0.841997,-6.28592 3.359706,-10.170217 2.091957,-3.227467 6.669369,-6.452883 10.647663,-7.502765 2.252562,-0.594453 8.248778,-0.796292 11.003264,-0.370372 6.94812,1.074354 16.152972,4.460234 20.6562963,7.598128 0.8536092,0.594796 0.7949964,0.623336 1.3291143,-0.64739 0.2251847,-0.535733 0.8814684,-1.603973 1.4584084,-2.373871 0.8561927,-1.142535 1.457933,-1.600664 3.2740672,-2.492638 2.16210793,-1.06191 4.5637653,-1.779237 6.7277099,-2.009456 0.5824052,-0.06194 1.3990594,-0.240975 1.8147895,-0.397805 0.7738562,-0.291942 6.4810504,-0.196925 10.0927814,0.168029 2.264542,0.228828 9.60899,1.67773 11.219571,2.21338 1.156599,0.384661 1.203738,0.376381 3.086684,-0.542345 2.528472,-1.2337 4.016657,-1.480542 8.446835,-1.401064 3.61374,0.06486 4.290154,0.147139 6.742793,0.820538 0.653941,0.179545 1.719761,0.375692 2.368485,0.435889 0.648729,0.0602 1.838242,0.282073 2.643363,0.493076 1.333488,0.349469 1.625289,0.339432 3.276461,-0.112735 4.298701,-1.177186 16.775093,-2.487486 20.247754,-2.126478 0.82522,0.08579 2.552867,0.408475 3.839215,0.717074 2.046471,0.490964 2.518569,0.521833 3.776859,0.246952 3.038874,-0.663879 6.75683,-1.061515 11.128253,-1.190178 4.134196,-0.121667 4.707691,-0.08259 6.380251,0.434721 1.364622,0.422078 2.105892,0.83929 2.879252,1.620559 1.29673,1.309975 1.63,2.709456 1.6237,6.818148 -0.005,2.95745 0.2393,4.45137 0.62566,3.83325 0.10807,-0.17288 0.17855,-1.23469 0.15662,-2.35957 -0.10151,-5.20664 0.0689,-6.026385 1.66799,-8.024476 0.85063,-1.062863 2.64553,-2.128587 4.10167,-2.435363 2.81819,-0.59374 15.88977,0.302112 18.8453,1.291541 0.69822,0.23375 1.33752,0.188118 3.17619,-0.226686 4.44974,-1.003866 5.16179,-1.08168 9.66723,-1.056509 4.01601,0.0224 5.00432,0.121426 8.5084,0.852608 6.84995,1.42927 7.19777,1.434197 12.43469,0.175947 1.28482,-0.308696 3.07339,-0.450501 5.82325,-0.46168 3.55974,-0.01452 4.14585,0.04906 5.68548,0.615953 0.94414,0.347651 2.11528,0.863208 2.60253,1.145677 0.82461,0.478046 0.98936,0.487693 2.38057,0.139336 1.77908,-0.445477 5.29646,-1.019874 9.8354,-1.606151 3.88998,-0.502463 11.70287,-0.5191 15.08161,-0.03212 5.86054,0.844676 9.86323,3.110261 10.57122,5.983455 l 0.28701,1.164733 3.35851,-1.630478 c 3.17793,-1.542804 8.22537,-3.484656 11.44251,-4.402193 4.71613,-1.345036 12.68145,-1.710913 16.9375,-0.778008 4.93058,1.080764 10.02057,5.551052 11.64065,10.223444 0.65092,1.87732 1.01878,5.06928 0.79472,6.89574 -0.46904,3.82309 -3.07509,7.60889 -6.48471,9.42031 z"/>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<main>
+
+<!-- ===================== HOURS & DIRECTIONS ===================== -->
+<section class="section">
+  <div class="section-head">
+    <div class="kicker">· Prakāra Pravēśa ·</div>
+    <h2>Hours &amp; Approach</h2>
+    <div class="sub">When the gates are open, and how the road may be travelled</div>
+  </div>
+
+  <div class="visit-grid">
+    <div class="card">
+      <span class="corner-tl"></span><span class="corner-tr"></span>
+      <h3 class="card-title">Visiting Hours</h3>
+      <div class="card-subtitle">Vennaru Road Campus</div>
+      <ul class="hours-list">
+        <li><span class="day">Monday — Friday</span><span class="time">9.00 — 17.30</span></li>
+        <li><span class="day">Saturday</span><span class="time">9.00 — 17.30</span></li>
+        <li><span class="day">Sunday</span><span class="time closed">Closed for general visits</span></li>
+        <li><span class="day">Pournami (Full Moon)</span><span class="time closed">Closed · Recitation Day</span></li>
+        <li><span class="day">Public Holidays</span><span class="time closed">Closed</span></li>
+      </ul>
+      <p class="note">
+        <strong>Heritage Walk groups</strong> of more than eight visitors must
+        register at least 48 hours in advance with the Visitor Cell. The Brihat
+        Library and stone-craft workshops admit guests only between 10.30 and
+        16.00, accompanied by a faculty escort.
+      </p>
+      <svg class="card-lotus" viewBox="0 0 383 301" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g transform="matrix(2.67,-2.67,2.67,2.67,-230.7,-334.3)">
+          <ellipse cx="113.18" cy="136.4" rx="20.77" ry="4.88" transform="rotate(45)" fill="#c9a23a" opacity=".6"/>
+          <ellipse cx="113.18" cy="136.4" rx="14" ry="2" transform="rotate(45)" fill="#e34234" opacity=".7"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="card">
+      <span class="corner-tl"></span><span class="corner-tr"></span>
+      <h3 class="card-title">Reaching the Campus</h3>
+      <div class="card-subtitle">Rail · Air · Road</div>
+
+      <div class="direction-row">
+        <div class="direction-icon"><span>RAIL</span></div>
+        <div class="direction-text">
+          <strong>Thanjavur Junction</strong>
+          <span>Pre-paid auto stand at Exit B; campus shuttle on request between 8.00 and 19.00.</span>
+        </div>
+        <div class="direction-distance">4.2 km<small>± 12 min</small></div>
+      </div>
+
+      <div class="direction-row">
+        <div class="direction-icon"><span>AIR</span></div>
+        <div class="direction-text">
+          <strong>Tiruchirapalli International (TRZ)</strong>
+          <span>NH-83 via Mannarkudi Road. Institute taxis must be booked 24 hours ahead.</span>
+        </div>
+        <div class="direction-distance">58 km<small>± 75 min</small></div>
+      </div>
+
+      <div class="direction-row">
+        <div class="direction-icon"><span>BUS</span></div>
+        <div class="direction-text">
+          <strong>New Bus Stand, Thanjavur</strong>
+          <span>Town routes 7C, 11 and 22 stop at the Vennaru Road junction.</span>
+        </div>
+        <div class="direction-distance">3.1 km<small>± 9 min</small></div>
+      </div>
+
+      <p class="note" style="margin-top:22px">
+        <strong>Parking:</strong> Visitor parking is at <em>Gate II (South)</em>
+        opposite the Sthapati Lodge — 40 cars and 80 two-wheelers. Coaches must
+        approach via the service lane behind the Nataraja Mandapa; please apply
+        for a coach pass at least three days in advance.
+      </p>
+      <svg class="card-lotus" viewBox="0 0 383 301" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g transform="matrix(2.67,-2.67,2.67,2.67,-230.7,-334.3)">
+          <ellipse cx="113.18" cy="136.4" rx="20.77" ry="4.88" transform="rotate(45)" fill="#c9a23a" opacity=".6"/>
+          <ellipse cx="113.18" cy="136.4" rx="14" ry="2" transform="rotate(45)" fill="#e34234" opacity=".7"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ADDRESS ===================== -->
+<section class="section">
+  <div class="section-head">
+    <div class="kicker">· Vāsa-sthāna ·</div>
+    <h2>Postal &amp; Civic Address</h2>
+    <div class="sub">For correspondence, courier, and official memoranda</div>
+  </div>
+
+  <div class="address-block">
+    <div class="card">
+      <span class="corner-tl"></span><span class="corner-tr"></span>
+      <div class="address-label">Main Campus</div>
+      <address>
+        <span class="institute-name">Sri Rajaraja Institute of<br>Temple Arts &amp; Sciences</span>
+        Vennaru Road<br>
+        Thanjavur 613007<br>
+        Tamil Nadu, India<br><br>
+        <strong>Tel:</strong> +91&nbsp;4362&nbsp;240&nbsp;700<br>
+        <strong>Fax:</strong> +91&nbsp;4362&nbsp;240&nbsp;711
+      </address>
+      <svg class="card-lotus" viewBox="0 0 383 301" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g transform="matrix(2.67,-2.67,2.67,2.67,-230.7,-334.3)"><ellipse cx="113.18" cy="136.4" rx="20.77" ry="4.88" transform="rotate(45)" fill="#c9a23a" opacity=".6"/></g></svg>
+    </div>
+
+    <div class="card">
+      <span class="corner-tl"></span><span class="corner-tr"></span>
+      <div class="address-label">Registrar's Office</div>
+      <address>
+        <span class="institute-name">Office of the Registrar</span>
+        Mukha Mandapa Building, First Floor<br>
+        Block A, Vennaru Road<br>
+        Thanjavur 613007<br><br>
+        <strong>Email:</strong> <a href="mailto:registrar@srrita.ac.in" style="color:var(--text-emphasis);text-decoration:none">registrar@srrita.ac.in</a><br>
+        <strong>Direct:</strong> +91&nbsp;4362&nbsp;240&nbsp;702<br>
+        <strong>Hours:</strong> Mon–Fri 9.30 — 16.00
+      </address>
+      <svg class="card-lotus" viewBox="0 0 383 301" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g transform="matrix(2.67,-2.67,2.67,2.67,-230.7,-334.3)"><ellipse cx="113.18" cy="136.4" rx="20.77" ry="4.88" transform="rotate(45)" fill="#c9a23a" opacity=".6"/></g></svg>
+    </div>
+
+    <div class="card">
+      <span class="corner-tl"></span><span class="corner-tr"></span>
+      <div class="address-label">Visitor Cell</div>
+      <address>
+        <span class="institute-name">Atithi Sevā Kendra</span>
+        Gate I (East), Sthapati Lodge<br>
+        Vennaru Road<br>
+        Thanjavur 613007<br><br>
+        <strong>Email:</strong> <a href="mailto:visit@srrita.ac.in" style="color:var(--text-emphasis);text-decoration:none">visit@srrita.ac.in</a><br>
+        <strong>WhatsApp:</strong> +91&nbsp;90878&nbsp;14206<br>
+        <strong>Walk-ins:</strong> Mon–Sat 9.00 — 17.30
+      </address>
+      <svg class="card-lotus" viewBox="0 0 383 301" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g transform="matrix(2.67,-2.67,2.67,2.67,-230.7,-334.3)"><ellipse cx="113.18" cy="136.4" rx="20.77" ry="4.88" transform="rotate(45)" fill="#c9a23a" opacity=".6"/></g></svg>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== DIRECTORY ===================== -->
+<section class="section">
+  <div class="section-head">
+    <div class="kicker">· Vibhāga Sūchikā ·</div>
+    <h2>Departmental Directory</h2>
+    <div class="sub">Faculties, schools and central offices — by phone &amp; mail</div>
+  </div>
+
+  <div class="card" style="padding:0">
+    <span class="corner-tl"></span><span class="corner-tr"></span>
+    <table class="directory-table">
+      <thead>
+        <tr>
+          <th>Department</th>
+          <th>Head / Officer</th>
+          <th>Phone</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="dept-name">School of Sthāpatya<small>Architecture &amp; Stone Craft</small></td>
+          <td>Prof. M. Selvaraj</td>
+          <td class="phone">+91 4362 240 720</td>
+          <td class="email"><a href="mailto:sthapatya@srrita.ac.in">sthapatya@srrita.ac.in</a></td>
+        </tr>
+        <tr>
+          <td class="dept-name">School of Śilpa-Śāstra<small>Sacred Geometry &amp; Iconometry</small></td>
+          <td>Prof. R. Padmavathi</td>
+          <td class="phone">+91 4362 240 724</td>
+          <td class="email"><a href="mailto:silpa@srrita.ac.in">silpa@srrita.ac.in</a></td>
+        </tr>
+        <tr>
+          <td class="dept-name">School of Classical Arts<small>Bharatanāṭyam, Karṇāṭik, Yāzh</small></td>
+          <td>Smt. Lakshmi Vishwanathan</td>
+          <td class="phone">+91 4362 240 730</td>
+          <td class="email"><a href="mailto:arts@srrita.ac.in">arts@srrita.ac.in</a></td>
+        </tr>
+        <tr>
+          <td class="dept-name">Department of Tamil &amp; Manuscriptology<small>Cōḻa Inscription Studies</small></td>
+          <td>Dr. K. Subbiah</td>
+          <td class="phone">+91 4362 240 738</td>
+          <td class="email"><a href="mailto:tamil@srrita.ac.in">tamil@srrita.ac.in</a></td>
+        </tr>
+        <tr>
+          <td class="dept-name">Centre for Bronze &amp; Metallurgy<small>Pancha-loha and Cire-Perdue</small></td>
+          <td>Prof. V. Iyappan</td>
+          <td class="phone">+91 4362 240 742</td>
+          <td class="email"><a href="mailto:bronze@srrita.ac.in">bronze@srrita.ac.in</a></td>
+        </tr>
+        <tr>
+          <td class="dept-name">Office of Admissions<small>Undergraduate &amp; Postgraduate Intake</small></td>
+          <td>Dr. P. Anitha (Dean)</td>
+          <td class="phone">+91 4362 240 706</td>
+          <td class="email"><a href="mailto:admissions@srrita.ac.in">admissions@srrita.ac.in</a></td>
+        </tr>
+        <tr>
+          <td class="dept-name">Brihat Library &amp; Archives<small>Manuscripts, Estampages, Periodicals</small></td>
+          <td>Smt. R. Hemalatha (Chief Librarian)</td>
+          <td class="phone">+91 4362 240 750</td>
+          <td class="email"><a href="mailto:library@srrita.ac.in">library@srrita.ac.in</a></td>
+        </tr>
+        <tr>
+          <td class="dept-name">Finance &amp; Bursar<small>Fees, Scholarships, Grants</small></td>
+          <td>Shri G. Ramanathan</td>
+          <td class="phone">+91 4362 240 715</td>
+          <td class="email"><a href="mailto:bursar@srrita.ac.in">bursar@srrita.ac.in</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ===================== KEY CONTACTS ===================== -->
+<section class="section">
+  <div class="section-head">
+    <div class="kicker">· Mukhya Sampark ·</div>
+    <h2>Key Contacts</h2>
+    <div class="sub">Officers who answer their post personally</div>
+  </div>
+
+  <div class="contacts-grid">
+    <div class="card">
+      <span class="corner-tl"></span><span class="corner-tr"></span>
+      <div class="role">Registrar</div>
+      <div class="name">Dr. S. Meenakshi Sundaram</div>
+      <div class="creds">M.A. (Indology), Ph.D., Madras</div>
+      <p><span class="label">Email</span><a href="mailto:registrar@srrita.ac.in" style="color:var(--text-emphasis);text-decoration:none">registrar@srrita.ac.in</a></p>
+      <p><span class="label">Direct</span>+91 4362 240 702</p>
+      <p><span class="label">Mobile</span>+91 94434 12009</p>
+      <svg class="card-lotus" viewBox="0 0 383 301" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g transform="matrix(2.67,-2.67,2.67,2.67,-230.7,-334.3)"><ellipse cx="113.18" cy="136.4" rx="20.77" ry="4.88" transform="rotate(45)" fill="#c9a23a" opacity=".6"/></g></svg>
+    </div>
+
+    <div class="card">
+      <span class="corner-tl"></span><span class="corner-tr"></span>
+      <div class="role">Media &amp; Press Enquiries</div>
+      <div class="name">Dr. Aravind Pichai</div>
+      <div class="creds">Director, Outreach &amp; Communications</div>
+      <p><span class="label">Email</span><a href="mailto:media@srrita.ac.in" style="color:var(--text-emphasis);text-decoration:none">media@srrita.ac.in</a></p>
+      <p><span class="label">Direct</span>+91 4362 240 760</p>
+      <p><span class="label">Mobile</span>+91 98414 70113</p>
+      <svg class="card-lotus" viewBox="0 0 383 301" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g transform="matrix(2.67,-2.67,2.67,2.67,-230.7,-334.3)"><ellipse cx="113.18" cy="136.4" rx="20.77" ry="4.88" transform="rotate(45)" fill="#c9a23a" opacity=".6"/></g></svg>
+    </div>
+
+    <div class="card">
+      <span class="corner-tl"></span><span class="corner-tr"></span>
+      <div class="role">International &amp; Alumni</div>
+      <div class="name">Dr. T. Janaki Raman</div>
+      <div class="creds">Dean, Global Engagement</div>
+      <p><span class="label">Email</span><a href="mailto:global@srrita.ac.in" style="color:var(--text-emphasis);text-decoration:none">global@srrita.ac.in</a></p>
+      <p><span class="label">Direct</span>+91 4362 240 770</p>
+      <p><span class="label">Mobile</span>+91 96770 24855</p>
+      <svg class="card-lotus" viewBox="0 0 383 301" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g transform="matrix(2.67,-2.67,2.67,2.67,-230.7,-334.3)"><ellipse cx="113.18" cy="136.4" rx="20.77" ry="4.88" transform="rotate(45)" fill="#c9a23a" opacity=".6"/></g></svg>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ETIQUETTE NOTE ===================== -->
+<section class="etiquette">
+  <h3>A Note on Photography in the Workshops</h3>
+  <p>
+    The stone-craft and bronze workshops are working spaces in which apprentices
+    chant <em>śloka</em>s before each first cut. Visitors are welcome to
+    photograph completed pieces in the courtyard, but please refrain from
+    photographing artisans at work, half-finished icons, or measured drawings.
+    No flash, no tripods, and no audio recording within the foundry. A short
+    written request, addressed to the workshop master, will usually obtain a
+    portrait sitting at the close of the working day. We thank you for honouring
+    the discipline of the craft.
+  </p>
+  <div class="tailpiece">
+    <svg viewBox="0 0 383 301" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <g transform="matrix(2.67,-2.67,2.67,2.67,-230.7,-334.3)">
+        <ellipse cx="113.18" cy="136.4" rx="20.77" ry="4.88" transform="rotate(45)" fill="#c9a23a"/>
+        <ellipse cx="113.18" cy="136.4" rx="14" ry="2.5" transform="rotate(45)" fill="#e34234"/>
+        <ellipse cx="113.18" cy="136.4" rx="6" ry="1.2" transform="rotate(45)" fill="#076b88"/>
+      </g>
+    </svg>
+  </div>
+</section>
+
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="arcade">
+    <div class="arcade-pillars" aria-hidden="true">
+      <div class="pillar"></div>
+      <div class="pillar"></div>
+      <div class="pillar"></div>
+      <div class="pillar"></div>
+      <div class="pillar"></div>
+      <div class="pillar"></div>
+      <div class="pillar"></div>
+    </div>
+    <div class="arcade-center" aria-hidden="true">
+      <svg viewBox="0 0 356 367" xmlns="http://www.w3.org/2000/svg"><path fill="#e34234" d="M 90.456847,353.9498 C 51.797347,340.13485 23.72672,305.75839 12.612487,258.6184 C 7.5684267,237.22321 6.1421397,201.86984 10.323594,201.86984 C 11.712834,201.86984 15.42322,211.57056 18.568972,223.427 C 25.452892,249.37152 37.19436,273.76855 48.535988,285.69407 C 67.374717,305.50242 114.0356,313.26029 140.92106,301.05394 C 161.86409,291.54544 170.35697,268.94603 161.24995,246.95931 C 154.21242,229.96943 138.24701,224.28836 108.50834,228.19197 C 108.50834,228.19197 90.282834,208.57398 84.476417,173.73548 L 103.15738,175.42939 C 125.65731,177.46962 142.64532,172.49605 151.46236,161.28728 C 159.74765,150.75419 159.5685,146.68046 150.34841,135.96157 C 137.04396,120.49428 113.15511,124.41248 64.786577,149.99522 L 40.381632,109.08518 L 50.613137,101.2812 C 76.253387,81.724339 120.77357,71.947329 146.11011,80.309169 C 169.18841,87.925649 186.12724,118.14755 181.60247,143.63298 C 178.54327,160.86286 164.72752,184.99524 154.05369,191.75339 L 144.84862,197.58162 L 157.56351,203.31522 C 179.17018,213.05833 192.36061,205.61034 208.12001,174.76849 C 229.92949,132.0869 244.0745,121.0378 276.96658,120.99051 C 292.28176,120.96847 297.73268,122.57499 308.90312,130.4031 C 336.78213,149.94016 351.9622,190.39693 348.62804,236.27272 C 344.40474,294.37435 316.88374,329.61601 275.73415,329.61601 C 253.15086,329.61601 238.59451,321.69526 227.00729,303.10156 C 216.82976,286.76927 212.24334,254.42288 218.08805,240.19369 C 220.89208,233.36732 221.39892,233.13578 221.58223,238.59686 C 221.91916,248.63689 233.34159,264.95549 243.82827,270.37835 C 269.55794,283.68369 306.49479,266.96693 321.10832,235.4032 C 332.20339,211.4394 326.25105,165.21656 311.02084,157.06552 C 307.83453,155.36024 299.96089,153.96502 293.5244,153.96502 C 279.84214,153.96502 269.09709,163.80155 254.03263,190.11774 C 248.82442,199.21613 240.05943,210.97175 234.55486,216.24128 C 225.61134,224.80312 222.41769,225.82225 204.53067,225.82225 L 184.51412,225.82225 L 190.98415,240.19369 C 200.2451,260.76437 199.80694,294.18704 190.00976,314.53347 C 181.35272,332.51252 161.33618,350.71469 145.33374,355.16013 C 129.75572,359.4876 104.38789,358.9281 90.456847,353.9498 z M 165.8338,75.923739 C 156.97908,60.814399 151.52974,32.606158 157.46546,32.606158 C 164.43775,47.732319 178.73037,61.227101 194.03409,70.643259 C 221.52091,83.949329 249.39257,78.578529 279.84247,54.108239 C 286.54595,48.721279 292.48231,44.913138 293.0345,45.645698 C 300.4697,57.184233 313.331,66.613261 317.58219,80.021449 C 317.58219,85.678729 293.22867,101.96033 274.01214,109.15007 C 226.38264,122.8706 193.96598,117.44304 165.8338,75.923739 z M 189.83603,40.997228 L 220.84514,6.6137488 L 255.30593,38.514418 C 243.51876,48.222549 235.00994,63.289118 221.54391,70.930009 C 210.90372,63.086273 195.02308,53.837816 189.83603,40.997228 z "/></svg>
+    </div>
+    <nav class="arcade-links">
+      <a href="page-1.html">Home</a>
+      <a href="page-2.html">Schools &amp; Faculties</a>
+      <a href="page-3.html">Admissions</a>
+      <a href="page-4.html">Research</a>
+      <a href="page-5.html">Campus Walk</a>
+      <a href="page-6.html" aria-current="page">Visit &amp; Contact</a>
+    </nav>
+  </div>
+  <div class="footer-strip">
+    <span>© 2024 Sri Rajaraja Institute of Temple Arts &amp; Sciences</span>
+    <span>Accredited by NAAC ‘A++’ · UGC 12(B) · ICCR Affiliate</span>
+    <span>Vennaru Road · Thanjavur 613007 · Tamil Nadu</span>
+  </div>
+</footer>
+
+</body>
+</html>

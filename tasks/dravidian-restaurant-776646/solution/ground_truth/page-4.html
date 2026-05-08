@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Visit & Reservations | Kalasha</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), sans-serif;
+    margin: 0;
+    line-height: 1.55;
+  }
+
+  /* ---------- MASTHEAD ---------- */
+  .masthead {
+    background: var(--bg);
+    border-bottom: 2px solid var(--secondary);
+    position: relative;
+  }
+  .gopuram-tier {
+    display: block;
+    width: 100%;
+    height: 14px;
+    background:
+      repeating-linear-gradient(90deg,
+        var(--secondary) 0 28px,
+        transparent 28px 56px);
+    border-bottom: 1px solid var(--accent);
+  }
+  .gopuram-tier:nth-of-type(2) {
+    height: 10px;
+    background:
+      repeating-linear-gradient(90deg,
+        var(--accent) 0 18px,
+        transparent 18px 36px);
+    border-bottom: 1px solid var(--secondary);
+  }
+  .gopuram-tier:nth-of-type(3) {
+    height: 6px;
+    background: var(--secondary);
+    border: none;
+  }
+  .brand-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    padding: 22px 40px 14px;
+  }
+  .brand-row .lotus {
+    width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
+  }
+  .brand-row h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 38px;
+    letter-spacing: 0.18em;
+    margin: 0;
+    color: var(--primary);
+    text-align: center;
+  }
+  .brand-row h1 small {
+    display: block;
+    font-family: var(--font-body), sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.42em;
+    color: var(--text-emphasis);
+    text-transform: uppercase;
+    margin-top: 4px;
+    font-weight: 700;
+  }
+
+  /* nav band */
+  .navband {
+    background: var(--secondary);
+    color: var(--bg);
+    padding: 10px 0;
+  }
+  .navband ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0;
+  }
+  .navband li {
+    display: flex;
+    align-items: center;
+  }
+  .navband a {
+    color: var(--bg);
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    padding: 4px 22px;
+    font-weight: 700;
+  }
+  .navband a[aria-current="page"] {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 6px;
+    text-decoration-thickness: 1px;
+  }
+  .navband .dot {
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  /* ---------- HERO / TITLE BAND ---------- */
+  .hero {
+    padding: 48px 60px 36px;
+    text-align: center;
+    position: relative;
+    border-bottom: 1px solid var(--accent);
+  }
+  .hero .peacocks {
+    width: 100%;
+    max-width: 1100px;
+    height: auto;
+    display: block;
+    margin: 0 auto 24px;
+    opacity: 0.92;
+  }
+  .hero .eyebrow {
+    font-family: var(--font-body), sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5em;
+    font-size: 11px;
+    color: var(--text-emphasis);
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .hero h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 56px;
+    letter-spacing: 0.08em;
+    color: var(--primary);
+    margin: 0 0 14px;
+  }
+  .hero p.lede {
+    max-width: 720px;
+    margin: 0 auto;
+    font-size: 16px;
+    color: var(--primary);
+    font-style: italic;
+  }
+  .hero p.lede em {
+    color: var(--text-emphasis);
+    font-style: italic;
+  }
+
+  /* ornamental section divider strip */
+  .divider-strip {
+    height: 36px;
+    background:
+      linear-gradient(var(--bg), var(--bg)) padding-box,
+      repeating-linear-gradient(90deg,
+        var(--secondary) 0 10px,
+        var(--accent) 10px 12px,
+        var(--secondary) 12px 22px,
+        transparent 22px 30px);
+    border-top: 2px solid var(--secondary);
+    border-bottom: 2px solid var(--secondary);
+    position: relative;
+    overflow: hidden;
+  }
+  .divider-strip::before, .divider-strip::after {
+    content: "";
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 50%;
+    background:
+      repeating-linear-gradient(90deg,
+        transparent 0 12px,
+        var(--secondary) 12px 14px,
+        transparent 14px 28px,
+        var(--accent) 28px 30px,
+        transparent 30px 42px);
+    opacity: 0.85;
+  }
+  .divider-strip::before { left: 0; }
+  .divider-strip::after { right: 0; }
+  .divider-strip .seal {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 28px;
+    height: 28px;
+    background: var(--bg);
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    z-index: 2;
+  }
+
+  /* ---------- MAIN GRID ---------- */
+  main {
+    padding: 56px 60px;
+    max-width: 1320px;
+    margin: 0 auto;
+  }
+  .grid-top {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 36px;
+    margin-bottom: 48px;
+  }
+
+  /* card pattern */
+  .card {
+    background: var(--surface);
+    border: 1.5px solid var(--secondary);
+    padding: 4px;
+    position: relative;
+  }
+  .card-inner {
+    border: 1px solid var(--accent);
+    padding: 28px 32px 30px;
+    position: relative;
+  }
+  /* stepped notches on corners */
+  .card::before, .card::after,
+  .card-inner::before, .card-inner::after {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border: 1.5px solid var(--secondary);
+    background: var(--bg);
+  }
+  .card::before { top: -8px; left: -8px; border-right: none; border-bottom: none; }
+  .card::after { top: -8px; right: -8px; border-left: none; border-bottom: none; }
+  .card-inner::before { bottom: -10px; left: -12px; border-right: none; border-top: none; }
+  .card-inner::after { bottom: -10px; right: -12px; border-left: none; border-top: none; }
+
+  .card-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 6px;
+  }
+  .card-head .ml-lotus {
+    width: 22px;
+    height: 22px;
+    flex: 0 0 22px;
+  }
+  .card-head .subtitle {
+    font-family: var(--font-body), sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    font-weight: 700;
+  }
+  .card h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 28px;
+    letter-spacing: 0.05em;
+    color: var(--primary);
+    margin: 4px 0 18px;
+  }
+  .card p, .card li {
+    font-size: 15px;
+    color: var(--primary);
+  }
+
+  /* address card specifics */
+  .address-card address {
+    font-style: normal;
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--primary);
+  }
+  .address-card .label {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    font-weight: 700;
+    display: block;
+    margin: 18px 0 4px;
+  }
+  .address-card a {
+    color: var(--text-emphasis);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--text-emphasis);
+  }
+
+  /* hours table */
+  .hours-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 4px;
+  }
+  .hours-table tr {
+    border-bottom: 1px dotted var(--accent);
+  }
+  .hours-table tr:last-child { border-bottom: none; }
+  .hours-table th, .hours-table td {
+    text-align: left;
+    padding: 9px 4px;
+    font-size: 14px;
+  }
+  .hours-table th {
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: 0.06em;
+    width: 40%;
+  }
+  .hours-table td {
+    color: var(--primary);
+    font-variant-numeric: tabular-nums;
+  }
+  .hours-table .closed td {
+    color: var(--secondary);
+    font-style: italic;
+  }
+
+  /* reservations callout */
+  .reservations {
+    margin: 20px 0 56px;
+    border: 1.5px solid var(--secondary);
+    padding: 4px;
+    background:
+      repeating-linear-gradient(45deg,
+        var(--bg) 0 8px,
+        rgba(201,162,58,0.06) 8px 16px);
+  }
+  .reservations-inner {
+    border: 1px solid var(--accent);
+    padding: 26px 36px;
+    background: var(--bg);
+    display: grid;
+    grid-template-columns: 90px 1fr auto;
+    gap: 28px;
+    align-items: center;
+  }
+  .reservations .seal-svg {
+    width: 80px;
+    height: 80px;
+  }
+  .reservations h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 24px;
+    letter-spacing: 0.05em;
+    margin: 0 0 6px;
+    color: var(--primary);
+  }
+  .reservations .quote {
+    color: var(--text-emphasis);
+    font-style: italic;
+    font-size: 15px;
+    margin: 6px 0 0;
+    line-height: 1.5;
+  }
+  .reservations .cta {
+    text-align: right;
+  }
+  .reservations .cta a {
+    display: inline-block;
+    padding: 10px 22px;
+    border: 1.5px solid var(--secondary);
+    color: var(--secondary);
+    background: var(--bg);
+    text-decoration: none;
+    font-weight: 700;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    font-size: 11px;
+  }
+  .reservations .cta a + a {
+    margin-top: 8px;
+    background: var(--secondary);
+    color: var(--bg);
+    display: block;
+  }
+
+  /* three sub-blocks */
+  .triptych {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    margin-bottom: 56px;
+  }
+
+  .sub-block .card-inner { min-height: 280px; }
+  .sub-block ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .sub-block li {
+    padding: 8px 0 8px 22px;
+    position: relative;
+    font-size: 14px;
+    border-bottom: 1px dotted rgba(201,162,58,0.5);
+  }
+  .sub-block li:last-child { border-bottom: none; }
+  .sub-block li::before {
+    content: "";
+    position: absolute;
+    left: 4px; top: 16px;
+    width: 6px; height: 6px;
+    background: var(--accent);
+    transform: rotate(45deg);
+  }
+  .sub-block p + p { margin-top: 10px; }
+  .sub-block strong {
+    color: var(--text-emphasis);
+    font-weight: 700;
+  }
+
+  /* arabesque divider */
+  .arabesque-divider {
+    width: 100%;
+    margin: 12px 0 56px;
+    text-align: center;
+  }
+  .arabesque-divider svg {
+    max-width: 100%;
+    height: 80px;
+  }
+
+  /* directions / map row */
+  .directions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-bottom: 24px;
+  }
+  .map-stylized {
+    border: 1.5px solid var(--secondary);
+    padding: 4px;
+    background: var(--bg);
+  }
+  .map-stylized-inner {
+    border: 1px solid var(--accent);
+    height: 100%;
+    min-height: 320px;
+    background:
+      linear-gradient(var(--bg), var(--bg)) padding-box,
+      repeating-linear-gradient(90deg,
+        rgba(201,162,58,0.18) 0 1px,
+        transparent 1px 40px),
+      repeating-linear-gradient(0deg,
+        rgba(201,162,58,0.18) 0 1px,
+        transparent 1px 40px);
+    position: relative;
+    padding: 24px;
+  }
+  .map-stylized-inner::before {
+    content: "INDIRANAGAR · 12TH MAIN · HAL 2ND STAGE";
+    position: absolute;
+    top: 18px; left: 24px;
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    color: var(--text-emphasis);
+    font-weight: 700;
+  }
+  .map-pin {
+    position: absolute;
+    left: 50%; top: 54%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  .map-pin .pin-dot {
+    width: 18px; height: 18px;
+    background: var(--secondary);
+    border: 3px solid var(--accent);
+    border-radius: 50%;
+    margin: 0 auto 8px;
+    box-shadow: 0 0 0 6px rgba(227,66,52,0.15);
+  }
+  .map-pin .pin-label {
+    font-family: var(--font-display), serif;
+    font-size: 18px;
+    letter-spacing: 0.08em;
+    color: var(--primary);
+  }
+  .map-pin .pin-sub {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--text-emphasis);
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+  .map-streets {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .map-streets line {
+    stroke: var(--secondary);
+    stroke-width: 1.4;
+    opacity: 0.4;
+  }
+  .map-streets text {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    fill: var(--text-emphasis);
+    font-weight: 700;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    margin-top: 36px;
+    background: var(--bg);
+    border-top: 2px solid var(--secondary);
+    position: relative;
+  }
+  .arcade {
+    height: 110px;
+    position: relative;
+    border-bottom: 1px solid var(--accent);
+    background:
+      linear-gradient(var(--bg), var(--bg)) padding-box;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+  }
+  .bay {
+    position: relative;
+    border-right: 1px solid var(--primary);
+  }
+  .bay:last-child { border-right: none; }
+  .bay::before {
+    /* stepped pilaster */
+    content: "";
+    position: absolute;
+    bottom: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 44px;
+    height: 88px;
+    background:
+      linear-gradient(var(--primary), var(--primary)) top/100% 6px no-repeat,
+      linear-gradient(var(--primary), var(--primary)) center/70% 60px no-repeat,
+      linear-gradient(var(--primary), var(--primary)) bottom/100% 8px no-repeat;
+  }
+  .bay::after {
+    /* arch */
+    content: "";
+    position: absolute;
+    top: 8px; left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    height: 70px;
+    border: 1.5px solid var(--primary);
+    border-bottom: none;
+    border-radius: 50% 50% 0 0 / 80% 80% 0 0;
+  }
+  .bay.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .bay.center::before, .bay.center::after { display: none; }
+  .bay.center .om-wrap {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    z-index: 2;
+    background: var(--bg);
+    padding: 0 14px;
+  }
+  .bay.center .om-wrap .om {
+    width: 56px;
+    height: 56px;
+  }
+  .bay.center .om-wrap .lotus-mini {
+    width: 28px;
+    height: 28px;
+  }
+
+  .footer-cols {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 32px 60px 18px;
+    gap: 0;
+  }
+  .footer-col {
+    padding: 0 32px;
+    border-right: 2px solid var(--secondary);
+  }
+  .footer-col:first-child { padding-left: 0; }
+  .footer-col:last-child { border-right: none; padding-right: 0; }
+  .footer-col h4 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 18px;
+    letter-spacing: 0.1em;
+    margin: 0 0 10px;
+    color: var(--primary);
+  }
+  .footer-col p, .footer-col address {
+    font-style: normal;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--primary);
+    margin: 0;
+  }
+  .footer-col a {
+    color: var(--text-emphasis);
+    text-decoration: none;
+  }
+
+  .footer-credit {
+    text-align: center;
+    padding: 18px 20px 26px;
+    color: var(--text-emphasis);
+    font-style: italic;
+    font-size: 13px;
+    border-top: 1px dotted var(--accent);
+    margin: 0 60px;
+  }
+
+  .footer-stripe {
+    height: 12px;
+    background:
+      repeating-linear-gradient(90deg,
+        var(--secondary) 0 18px,
+        var(--accent) 18px 22px,
+        var(--secondary) 22px 40px,
+        var(--bg) 40px 48px);
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== MASTHEAD ========== -->
+<header class="masthead" role="banner">
+  <span class="gopuram-tier" aria-hidden="true"></span>
+  <span class="gopuram-tier" aria-hidden="true"></span>
+  <span class="gopuram-tier" aria-hidden="true"></span>
+
+  <div class="brand-row">
+    <!-- left lotus -->
+    <svg class="lotus" viewBox="0 0 384 302" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+      <g transform="matrix(2.6725,-2.6725,2.6725,2.6725,-230.7,-334.3)" fill="#e34234" stroke="#c9a23a" stroke-width="0.6" opacity="0.9">
+        <path d="m -20.5,171.7 c -34.7,-2.8 -17.6,27.4 -17.6,27.5 15,2.8 22.7,5.8 25.9,-13.6 -0.5,-11.5 -4.6,-10.3 -8.3,-13.9 z"/>
+        <path d="m -20.4,178.2 c 28.9,-16.2 12.8,-50 12.7,-50.1 -12.9,9.6 -28.2,18.5 -22.3,37.2 1.9,5.7 6.3,11.6 9.5,12.9 z"/>
+        <path d="M -18.2,180.4 C -2,151.5 31.9,167.6 31.9,167.7 22.3,180.6 13.5,195.9 -5.3,190 -11,188 -16.9,183.6 -18.2,180.4 Z"/>
+        <path d="m -23.1,175.5 c 1.4,-33.1 38.9,-33.9 39,-33.9 -2.8,15.8 -6.6,35.7 -26,38.9 -12.1,1 -9.3,-1.3 -13,-5 z"/>
+        <ellipse cx="-7" cy="178" rx="14" ry="3.5" fill="#c9a23a"/>
+      </g>
+    </svg>
+
+    <h1>
+      KALASHA
+      <small>A Chettinad Kitchen — Bangalore</small>
+    </h1>
+
+    <!-- right lotus -->
+    <svg class="lotus" viewBox="0 0 384 302" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" style="transform: scaleX(-1);">
+      <g transform="matrix(2.6725,-2.6725,2.6725,2.6725,-230.7,-334.3)" fill="#e34234" stroke="#c9a23a" stroke-width="0.6" opacity="0.9">
+        <path d="m -20.5,171.7 c -34.7,-2.8 -17.6,27.4 -17.6,27.5 15,2.8 22.7,5.8 25.9,-13.6 -0.5,-11.5 -4.6,-10.3 -8.3,-13.9 z"/>
+        <path d="m -20.4,178.2 c 28.9,-16.2 12.8,-50 12.7,-50.1 -12.9,9.6 -28.2,18.5 -22.3,37.2 1.9,5.7 6.3,11.6 9.5,12.9 z"/>
+        <path d="M -18.2,180.4 C -2,151.5 31.9,167.6 31.9,167.7 22.3,180.6 13.5,195.9 -5.3,190 -11,188 -16.9,183.6 -18.2,180.4 Z"/>
+        <path d="m -23.1,175.5 c 1.4,-33.1 38.9,-33.9 39,-33.9 -2.8,15.8 -6.6,35.7 -26,38.9 -12.1,1 -9.3,-1.3 -13,-5 z"/>
+        <ellipse cx="-7" cy="178" rx="14" ry="3.5" fill="#c9a23a"/>
+      </g>
+    </svg>
+  </div>
+
+  <nav class="navband" aria-label="Primary">
+    <ul>
+      <li><a href="page-1.html">Home</a></li>
+      <li><span class="dot" aria-hidden="true"></span></li>
+      <li><a href="page-2.html">The Menu</a></li>
+      <li><span class="dot" aria-hidden="true"></span></li>
+      <li><a href="page-3.html">Our Story</a></li>
+      <li><span class="dot" aria-hidden="true"></span></li>
+      <li><a href="page-4.html" aria-current="page">Visit &amp; Reservations</a></li>
+      <li><span class="dot" aria-hidden="true"></span></li>
+      <li><a href="page-5.html">Feast Days</a></li>
+      <li><span class="dot" aria-hidden="true"></span></li>
+      <li><a href="page-6.html">Press &amp; Notes</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- ========== HERO ========== -->
+<section class="hero">
+  <svg class="peacocks" viewBox="0 0 1186 112" preserveAspectRatio="xMidYMid meet" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(206.4, -344.6)" fill="#1a1a1a">
+      <path d="m -45.2,120.2 c -2.1,-0.6 -3.6,-1.3 -4.9,-2.4 -1.7,-1.4 -2.9,-2.6 -2.9,-3 0,-0.2 -0.2,-0.5 -0.5,-0.7 -0.8,-0.6 -1.2,-1.8 -1.1,-4 0.1,-4 0.8,-6.3 3.4,-10.2 2.1,-3.2 6.7,-6.5 10.6,-7.5 2.3,-0.6 8.2,-0.8 11,-0.4 6.9,1.1 16.2,4.5 20.7,7.6 0.9,0.6 0.8,0.6 1.3,-0.6 0.2,-0.5 0.9,-1.6 1.5,-2.4 0.9,-1.1 1.5,-1.6 3.3,-2.5 2.2,-1.1 4.6,-1.8 6.7,-2 0.6,-0.1 1.4,-0.2 1.8,-0.4 0.8,-0.3 6.5,-0.2 10.1,0.2 2.3,0.2 9.6,1.7 11.2,2.2 1.2,0.4 1.2,0.4 3.1,-0.5 2.5,-1.2 4,-1.5 8.4,-1.4 3.6,0.1 4.3,0.1 6.7,0.8 0.7,0.2 1.7,0.4 2.4,0.4 0.6,0.1 1.8,0.3 2.6,0.5 1.3,0.3 1.6,0.3 3.3,-0.1 4.3,-1.2 16.8,-2.5 20.2,-2.1 0.8,0.1 2.6,0.4 3.8,0.7 2,0.5 2.5,0.5 3.8,0.2 3,-0.7 6.8,-1.1 11.1,-1.2 4.1,-0.1 4.7,-0.1 6.4,0.4 1.4,0.4 2.1,0.8 2.9,1.6 1.3,1.3 1.6,2.7 1.6,6.8 0,3 0.2,4.5 0.6,3.8 0.1,-0.2 0.2,-1.2 0.2,-2.4 -0.1,-5.2 0.1,-6 1.7,-8 0.9,-1.1 2.6,-2.1 4.1,-2.4 2.8,-0.6 15.9,0.3 18.8,1.3 0.7,0.2 1.3,0.2 3.2,-0.2 4.4,-1 5.2,-1.1 9.7,-1.1 4,0 5,0.1 8.5,0.9 6.8,1.4 7.2,1.4 12.4,0.2 1.3,-0.3 3.1,-0.5 5.8,-0.5 3.6,0 4.1,0.1 5.7,0.6 0.9,0.3 2.1,0.9 2.6,1.1 0.8,0.5 1,0.5 2.4,0.1 1.8,-0.4 5.3,-1 9.8,-1.6 3.9,-0.5 11.7,-0.5 15.1,0 5.9,0.8 9.9,3.1 10.6,6 l 0.3,1.2 3.4,-1.6 c 3.2,-1.5 8.2,-3.5 11.4,-4.4 4.7,-1.3 12.7,-1.7 16.9,-0.8 4.9,1.1 10,5.6 11.6,10.2 0.7,1.9 1,5.1 0.8,6.9 -0.5,3.8 -3.1,7.6 -6.5,9.4 -0.5,0.3 -1.1,0.6 -1.3,0.8 -1.3,0.9 -4,1.1 -9.4,0.6 -4.2,-0.4 -43.1,-0.6 -48.3,-0.2 -3.4,0.2 -9.7,0.1 -14.2,-0.2 -3.2,-0.3 -11.4,-2.5 -15,-4 -0.5,-0.2 -1.1,-0.4 -1.3,-0.4 -0.4,0 -0.3,0.7 0.2,1.4 0.6,0.8 0.7,1.5 0.1,2.3 -0.4,0.6 -0.5,0.6 -2.5,0.4 -1.1,-0.1 -3.2,-0.4 -4.7,-0.7 -1.5,-0.3 -4.1,-0.6 -5.9,-0.7 -3.5,-0.2 -4.7,0 -8.9,1.4 -2,0.7 -2.2,0.7 -4.8,0.3 -1.7,-0.2 -5,-0.3 -8.9,-0.3 -6,0 -6.2,0 -7.3,-0.6 -1.3,-0.7 -2.9,-0.7 -5,0.1 -0.9,0.3 -2.2,0.4 -4.9,0.4 -4.8,0 -5.6,-0.2 -6.1,-1.3 l -0.4,-0.9 -1.1,0.9 c -1.9,1.5 -2.9,1.8 -5.6,1.8 -1.3,0 -3.6,-0.2 -5,-0.5 -2,-0.4 -2.7,-0.4 -3,-0.2 -1.4,1 -5.2,1.2 -9.4,0.5 -2.3,-0.4 -4.4,-0.4 -10.1,0.2 -2.4,0.2 -2.4,0.2 -4,-0.6 l -1.6,-0.8 -4.8,0 c -3.3,0 -5.3,0.1 -6.6,0.4 -3,0.6 -5.2,0.8 -6.3,0.4 -1.4,-0.5 -2.2,-1.3 -2.2,-2.2 0,-0.4 -0.1,-0.7 -0.2,-0.7 -0.1,0 -1.2,0.4 -2.5,0.8 -7.9,2.8 -18,3.8 -31.4,3 -7.1,-0.4 -10.3,-0.5 -22.8,-0.3 -5.2,0.1 -13.3,0.2 -18,0.3 -4.7,0.1 -9.7,0.2 -11,0.2 -1.5,0.1 -2.9,0 -3.7,-0.3 z"/>
+    </g>
+  </svg>
+
+  <p class="eyebrow">Visit &middot; Reservations &middot; Indiranagar</p>
+  <h2>The Door is Open</h2>
+  <p class="lede">Find us a lane off 12th Main, where the smell of <em>kuzhambu</em> and curry-leaf tempering reaches the gate before you do. Lunch begins at half past noon, dinner at seven.</p>
+</section>
+
+<div class="divider-strip" aria-hidden="true">
+  <span class="seal"></span>
+</div>
+
+<!-- ========== MAIN ========== -->
+<main>
+
+  <section class="grid-top" aria-label="Address and hours">
+
+    <article class="card address-card">
+      <div class="card-inner">
+        <div class="card-head">
+          <svg class="ml-lotus" viewBox="0 0 384 302" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+            <g transform="matrix(2.6725,-2.6725,2.6725,2.6725,-230.7,-334.3)" fill="#e34234" stroke="#c9a23a" stroke-width="0.8">
+              <path d="M -18.2,180.4 C -2,151.5 31.9,167.6 31.9,167.7 22.3,180.6 13.5,195.9 -5.3,190 -11,188 -16.9,183.6 -18.2,180.4 Z"/>
+              <path d="m -23.1,175.5 c 1.4,-33.1 38.9,-33.9 39,-33.9 -2.8,15.8 -6.6,35.7 -26,38.9 -12.1,1 -9.3,-1.3 -13,-5 z"/>
+              <ellipse cx="-7" cy="178" rx="12" ry="3" fill="#c9a23a"/>
+            </g>
+          </svg>
+          <span class="subtitle">Where to Find Us</span>
+        </div>
+        <h3>The Address</h3>
+        <address>
+          <strong>Kalasha — A Chettinad Kitchen</strong><br>
+          No. 14, 12th Main,<br>
+          HAL 2nd Stage, Indiranagar,<br>
+          Bangalore 560038
+        </address>
+
+        <span class="label">Telephone</span>
+        <p style="margin:0"><a href="tel:+918041236677">+91 80 4123 6677</a></p>
+
+        <span class="label">Email</span>
+        <p style="margin:0"><a href="mailto:tables@kalasha.in">tables@kalasha.in</a></p>
+
+        <span class="label">Landmark</span>
+        <p style="margin:0;font-size:14px;color:var(--primary)">Behind the old Defence Colony post office, opposite the temple courtyard. The doorway is the one with the brass kalasha at the lintel.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-inner">
+        <div class="card-head">
+          <svg class="ml-lotus" viewBox="0 0 384 302" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+            <g transform="matrix(2.6725,-2.6725,2.6725,2.6725,-230.7,-334.3)" fill="#e34234" stroke="#c9a23a" stroke-width="0.8">
+              <path d="M -18.2,180.4 C -2,151.5 31.9,167.6 31.9,167.7 22.3,180.6 13.5,195.9 -5.3,190 -11,188 -16.9,183.6 -18.2,180.4 Z"/>
+              <path d="m -23.1,175.5 c 1.4,-33.1 38.9,-33.9 39,-33.9 -2.8,15.8 -6.6,35.7 -26,38.9 -12.1,1 -9.3,-1.3 -13,-5 z"/>
+              <ellipse cx="-7" cy="178" rx="12" ry="3" fill="#c9a23a"/>
+            </g>
+          </svg>
+          <span class="subtitle">When the Hearth Burns</span>
+        </div>
+        <h3>Hours of Service</h3>
+        <table class="hours-table">
+          <tbody>
+            <tr class="closed">
+              <th scope="row">Monday</th>
+              <td>Closed — kitchen rest day</td>
+            </tr>
+            <tr>
+              <th scope="row">Tuesday – Saturday</th>
+              <td>12:30 – 15:00 &nbsp;·&nbsp; 19:00 – 22:30</td>
+            </tr>
+            <tr>
+              <th scope="row">Sunday</th>
+              <td>Elai Sappadu &nbsp;12:30 – 15:30<br>Dinner 19:00 – 22:00</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="margin-top:18px;font-size:13px;color:var(--text-emphasis);font-style:italic;border-top:1px dotted var(--accent);padding-top:14px">
+          Last orders thirty minutes before close. The kitchen pauses for prayer at noon on the first Friday of each month — service resumes at 13:00.
+        </p>
+      </div>
+    </article>
+
+  </section>
+
+  <!-- RESERVATIONS NOTE -->
+  <aside class="reservations" aria-label="Reservations">
+    <div class="reservations-inner">
+      <svg class="seal-svg" viewBox="0 0 356 367" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#e34234" d="M 90.5,353.9 C 51.8,340.1 23.7,305.8 12.6,258.6 7.6,237.2 6.1,201.9 10.3,201.9 11.7,201.9 15.4,211.6 18.6,223.4 25.5,249.4 37.2,273.8 48.5,285.7 67.4,305.5 114,313.3 140.9,301.1 161.9,291.5 170.4,268.9 161.2,247 154.2,230 138.2,224.3 108.5,228.2 c 0,0 -18.2,-19.6 -24,-54.5 l 18.7,1.7 c 22.5,2 39.5,-2.9 48.3,-14.1 8.3,-10.5 8.1,-14.6 -1.1,-25.3 -13.3,-15.5 -37.2,-11.6 -85.6,14 L 40.4,109.1 50.6,101.3 C 76.3,81.7 120.8,72 146.1,80.3 169.2,87.9 186.1,118.1 181.6,143.6 c -3.1,17.2 -16.9,41.4 -27.5,48.1 l -9.2,5.8 12.7,5.7 c 21.6,9.7 34.8,2.3 50.6,-28.5 21.8,-42.7 35.9,-53.7 68.8,-53.8 15.3,0 20.8,1.6 31.9,9.4 27.9,19.5 43.1,60 39.7,105.9 -4.2,58.1 -31.7,93.3 -72.9,93.3 -22.6,0 -37.1,-7.9 -48.7,-26.5 -10.2,-16.3 -14.8,-48.7 -9,-62.9 2.8,-6.8 3.3,-7.1 3.5,-1.6 0.3,10 11.7,26.3 22.2,31.8 25.7,13.3 62.7,-3.4 77.3,-35 11.1,-24 5.2,-70.2 -10,-78.4 -3.2,-1.7 -11.1,-3.1 -17.5,-3.1 -13.7,0 -24.4,9.8 -39.5,36.2 -5.2,9.1 -14,20.8 -19.5,26.1 -8.9,8.6 -12.1,9.6 -30,9.6 H 184.5 l 6.5,14.4 c 9.3,20.6 8.8,54 -1,74.3 -8.7,18 -28.7,36.2 -44.7,40.7 -15.6,4.3 -41,3.7 -54.9,-1.3 z"/>
+      </svg>
+      <div>
+        <h3>Reservations &amp; the Sunday Elai Sappadu</h3>
+        <p style="margin:0;font-size:14px">Reservations are taken by phone, ten in the morning to nine at night. Walk-ins seated at the counter when there is room.</p>
+        <p class="quote">“The Sunday <em>elai sappadu</em> — twelve courses on a banana leaf — books two weeks ahead. Please call early; we hold no more than thirty leaves.”</p>
+      </div>
+      <div class="cta">
+        <a href="tel:+918041236677">Call +91 80 4123 6677</a>
+        <a href="mailto:tables@kalasha.in">Email a request</a>
+      </div>
+    </div>
+  </aside>
+
+  <div class="arabesque-divider" aria-hidden="true">
+    <svg viewBox="0 0 800 80" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="#e34234" stroke-width="1.2" fill="none">
+        <line x1="0" y1="40" x2="320" y2="40"/>
+        <line x1="480" y1="40" x2="800" y2="40"/>
+        <circle cx="340" cy="40" r="4" fill="#c9a23a" stroke="#e34234"/>
+        <circle cx="460" cy="40" r="4" fill="#c9a23a" stroke="#e34234"/>
+        <path d="M 360,40 Q 380,10 400,40 Q 420,70 440,40" stroke="#e34234" stroke-width="1.5"/>
+        <path d="M 360,40 Q 380,70 400,40 Q 420,10 440,40" stroke="#c9a23a" stroke-width="1.2"/>
+        <circle cx="400" cy="40" r="6" fill="#e34234"/>
+        <circle cx="400" cy="40" r="2.5" fill="#c9a23a"/>
+        <!-- side palmettes -->
+        <g transform="translate(200,40)">
+          <path d="M 0,0 q 10,-18 20,0 q -10,18 -20,0 z" fill="#c9a23a" opacity="0.5"/>
+          <path d="M 0,0 q -10,-18 -20,0 q 10,18 20,0 z" fill="#c9a23a" opacity="0.5"/>
+        </g>
+        <g transform="translate(600,40)">
+          <path d="M 0,0 q 10,-18 20,0 q -10,18 -20,0 z" fill="#c9a23a" opacity="0.5"/>
+          <path d="M 0,0 q -10,-18 -20,0 q 10,18 20,0 z" fill="#c9a23a" opacity="0.5"/>
+        </g>
+      </g>
+    </svg>
+  </div>
+
+  <!-- TRIPTYCH OF SUB-BLOCKS -->
+  <section class="triptych" aria-label="Practical notes">
+
+    <article class="card sub-block">
+      <div class="card-inner">
+        <div class="card-head">
+          <svg class="ml-lotus" viewBox="0 0 384 302" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+            <g transform="matrix(2.6725,-2.6725,2.6725,2.6725,-230.7,-334.3)" fill="#e34234" stroke="#c9a23a" stroke-width="0.8">
+              <path d="M -18.2,180.4 C -2,151.5 31.9,167.6 31.9,167.7 22.3,180.6 13.5,195.9 -5.3,190 -11,188 -16.9,183.6 -18.2,180.4 Z"/>
+              <ellipse cx="-7" cy="178" rx="12" ry="3" fill="#c9a23a"/>
+            </g>
+          </svg>
+          <span class="subtitle">Arriving</span>
+        </div>
+        <h3>Parking &amp; Auto</h3>
+        <ul>
+          <li>Valet parking from <strong>12:00</strong> at the side gate on 13th Cross. Two cars per family, please.</li>
+          <li>Auto-rickshaws may stop directly at the brass-lintel door — the lane is wide enough.</li>
+          <li>Namma Metro: alight at <strong>Indiranagar (Purple Line)</strong>, six minutes on foot via 100 Feet Road.</li>
+          <li>Two-wheeler stand opposite the temple courtyard, free for guests with a stamped bill.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="card sub-block">
+      <div class="card-inner">
+        <div class="card-head">
+          <svg class="ml-lotus" viewBox="0 0 384 302" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+            <g transform="matrix(2.6725,-2.6725,2.6725,2.6725,-230.7,-334.3)" fill="#e34234" stroke="#c9a23a" stroke-width="0.8">
+              <path d="M -18.2,180.4 C -2,151.5 31.9,167.6 31.9,167.7 22.3,180.6 13.5,195.9 -5.3,190 -11,188 -16.9,183.6 -18.2,180.4 Z"/>
+              <ellipse cx="-7" cy="178" rx="12" ry="3" fill="#c9a23a"/>
+            </g>
+          </svg>
+          <span class="subtitle">A Pillared Room</span>
+        </div>
+        <h3>Private Dining</h3>
+        <p><strong>The Mandapam Room</strong> seats twelve at a single rosewood table, lit by a brass <em>vilakku</em> lamp and ringed in pillared teak panels rescued from a Karaikudi mansion.</p>
+        <p>Reserved for engagements, naming days, and quiet birthdays. Set menus from <strong>₹2,400 per guest</strong> (vegetarian) or <strong>₹3,200</strong> (Chettinad mutton-and-rice). Two-week notice; 50% advance.</p>
+        <p style="font-size:13px;color:var(--text-emphasis);font-style:italic">Write to <a href="mailto:mandapam@kalasha.in" style="color:var(--text-emphasis)">mandapam@kalasha.in</a></p>
+      </div>
+    </article>
+
+    <article class="card sub-block">
+      <div class="card-inner">
+        <div class="card-head">
+          <svg class="ml-lotus" viewBox="0 0 384 302" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+            <g transform="matrix(2.6725,-2.6725,2.6725,2.6725,-230.7,-334.3)" fill="#e34234" stroke="#c9a23a" stroke-width="0.8">
+              <path d="M -18.2,180.4 C -2,151.5 31.9,167.6 31.9,167.7 22.3,180.6 13.5,195.9 -5.3,190 -11,188 -16.9,183.6 -18.2,180.4 Z"/>
+              <ellipse cx="-7" cy="178" rx="12" ry="3" fill="#c9a23a"/>
+            </g>
+          </svg>
+          <span class="subtitle">From the Kitchen</span>
+        </div>
+        <h3>Dietary Notes</h3>
+        <p>The kitchen is <strong>pure-vegetarian on Friday lunch</strong> in keeping with the household tradition; no meat, fish, or egg crosses the threshold between 12:30 and 15:00 that day.</p>
+        <p>All mutton dishes — <em>kola urundai</em>, <em>chukka</em>, the Sunday biryani — use <strong>Bannur lamb</strong>, sourced direct from a single farm in Mandya district.</p>
+        <p>Jain, vegan, and gluten-free meals on twenty-four hours' notice. Do tell us at the time of booking; the rasam stock will be set aside.</p>
+      </div>
+    </article>
+
+  </section>
+
+  <!-- DIRECTIONS / STYLISED MAP -->
+  <section class="directions" aria-label="Directions">
+    <article class="card">
+      <div class="card-inner">
+        <div class="card-head">
+          <svg class="ml-lotus" viewBox="0 0 384 302" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+            <g transform="matrix(2.6725,-2.6725,2.6725,2.6725,-230.7,-334.3)" fill="#e34234" stroke="#c9a23a" stroke-width="0.8">
+              <path d="M -18.2,180.4 C -2,151.5 31.9,167.6 31.9,167.7 22.3,180.6 13.5,195.9 -5.3,190 -11,188 -16.9,183.6 -18.2,180.4 Z"/>
+              <ellipse cx="-7" cy="178" rx="12" ry="3" fill="#c9a23a"/>
+            </g>
+          </svg>
+          <span class="subtitle">By Lane &amp; Landmark</span>
+        </div>
+        <h3>Directions</h3>
+        <p style="font-size:14px"><strong>From 100 Feet Road:</strong> turn into 12th Main between the bookshop and the medical store. Cross 13th Cross. We are the second doorway on the left, set back from the road behind a frangipani tree.</p>
+        <p style="font-size:14px"><strong>From CMH Road:</strong> follow Defence Colony signage; once past the temple courtyard, keep right at the chai stall. Kalasha is fifty metres on.</p>
+        <p style="font-size:13px;color:var(--text-emphasis);font-style:italic;border-top:1px dotted var(--accent);padding-top:12px;margin-top:14px">A note: 12th Main becomes one-way after 19:30. Drivers should approach from the HAL 2nd Stage end after dark.</p>
+      </div>
+    </article>
+
+    <div class="map-stylized" aria-hidden="true">
+      <div class="map-stylized-inner">
+        <svg class="map-streets" viewBox="0 0 400 280" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="0" y1="80" x2="400" y2="80"/>
+          <line x1="0" y1="200" x2="400" y2="200"/>
+          <line x1="120" y1="0" x2="120" y2="280"/>
+          <line x1="280" y1="0" x2="280" y2="280"/>
+          <line x1="0" y1="140" x2="400" y2="140" stroke-dasharray="4 4"/>
+          <text x="20" y="74">100 FEET ROAD</text>
+          <text x="20" y="194">CMH ROAD</text>
+          <text x="124" y="20" transform="rotate(90 124 20)">12TH MAIN</text>
+          <text x="284" y="20" transform="rotate(90 284 20)">13TH CROSS</text>
+        </svg>
+        <div class="map-pin">
+          <div class="pin-dot"></div>
+          <div class="pin-label">KALASHA</div>
+          <div class="pin-sub">No. 14 · 12th Main</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div class="arcade" aria-hidden="true">
+    <div class="bay"></div>
+    <div class="bay"></div>
+    <div class="bay center">
+      <div class="om-wrap">
+        <svg class="lotus-mini" viewBox="0 0 384 302" xmlns="http://www.w3.org/2000/svg">
+          <g transform="matrix(2.6725,-2.6725,2.6725,2.6725,-230.7,-334.3)" fill="#e34234" stroke="#c9a23a" stroke-width="0.8">
+            <path d="M -18.2,180.4 C -2,151.5 31.9,167.6 31.9,167.7 22.3,180.6 13.5,195.9 -5.3,190 -11,188 -16.9,183.6 -18.2,180.4 Z"/>
+            <path d="m -23.1,175.5 c 1.4,-33.1 38.9,-33.9 39,-33.9 -2.8,15.8 -6.6,35.7 -26,38.9 -12.1,1 -9.3,-1.3 -13,-5 z"/>
+            <ellipse cx="-7" cy="178" rx="12" ry="3" fill="#c9a23a"/>
+          </g>
+        </svg>
+        <svg class="om" viewBox="0 0 356 367" xmlns="http://www.w3.org/2000/svg">
+          <path fill="#e34234" d="M 90.5,353.9 C 51.8,340.1 23.7,305.8 12.6,258.6 7.6,237.2 6.1,201.9 10.3,201.9 11.7,201.9 15.4,211.6 18.6,223.4 25.5,249.4 37.2,273.8 48.5,285.7 67.4,305.5 114,313.3 140.9,301.1 161.9,291.5 170.4,268.9 161.2,247 154.2,230 138.2,224.3 108.5,228.2 c 0,0 -18.2,-19.6 -24,-54.5 l 18.7,1.7 c 22.5,2 39.5,-2.9 48.3,-14.1 8.3,-10.5 8.1,-14.6 -1.1,-25.3 -13.3,-15.5 -37.2,-11.6 -85.6,14 L 40.4,109.1 50.6,101.3 C 76.3,81.7 120.8,72 146.1,80.3 169.2,87.9 186.1,118.1 181.6,143.6 c -3.1,17.2 -16.9,41.4 -27.5,48.1 l -9.2,5.8 12.7,5.7 c 21.6,9.7 34.8,2.3 50.6,-28.5 21.8,-42.7 35.9,-53.7 68.8,-53.8 15.3,0 20.8,1.6 31.9,9.4 27.9,19.5 43.1,60 39.7,105.9 -4.2,58.1 -31.7,93.3 -72.9,93.3 -22.6,0 -37.1,-7.9 -48.7,-26.5 -10.2,-16.3 -14.8,-48.7 -9,-62.9 2.8,-6.8 3.3,-7.1 3.5,-1.6 0.3,10 11.7,26.3 22.2,31.8 25.7,13.3 62.7,-3.4 77.3,-35 11.1,-24 5.2,-70.2 -10,-78.4 -3.2,-1.7 -11.1,-3.1 -17.5,-3.1 -13.7,0 -24.4,9.8 -39.5,36.2 -5.2,9.1 -14,20.8 -19.5,26.1 -8.9,8.6 -12.1,9.6 -30,9.6 H 184.5 l 6.5,14.4 c 9.3,20.6 8.8,54 -1,74.3 -8.7,18 -28.7,36.2 -44.7,40.7 -15.6,4.3 -41,3.7 -54.9,-1.3 z"/>
+        </svg>
+        <svg class="lotus-mini" viewBox="0 0 384 302" xmlns="http://www.w3.org/2000/svg" style="transform:scaleX(-1)">
+          <g transform="matrix(2.6725,-2.6725,2.6725,2.6725,-230.7,-334.3)" fill="#e34234" stroke="#c9a23a" stroke-width="0.8">
+            <path d="M -18.2,180.4 C -2,151.5 31.9,167.6 31.9,167.7 22.3,180.6 13.5,195.9 -5.3,190 -11,188 -16.9,183.6 -18.2,180.4 Z"/>
+            <path d="m -23.1,175.5 c 1.4,-33.1 38.9,-33.9 39,-33.9 -2.8,15.8 -6.6,35.7 -26,38.9 -12.1,1 -9.3,-1.3 -13,-5 z"/>
+            <ellipse cx="-7" cy="178" rx="12" ry="3" fill="#c9a23a"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <div class="bay"></div>
+    <div class="bay"></div>
+  </div>
+
+  <div class="footer-cols">
+    <div class="footer-col">
+      <h4>Kalasha</h4>
+      <address>
+        No. 14, 12th Main,<br>
+        HAL 2nd Stage, Indiranagar,<br>
+        Bangalore 560038
+      </address>
+    </div>
+    <div class="footer-col">
+      <h4>Hours</h4>
+      <p>
+        Tue – Sun &nbsp; 12:30 – 15:00<br>
+        Tue – Sun &nbsp; 19:00 – 22:30<br>
+        <em style="color:var(--secondary)">Monday — closed</em>
+      </p>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p>
+        <a href="tel:+918041236677">+91 80 4123 6677</a><br>
+        <a href="mailto:tables@kalasha.in">tables@kalasha.in</a><br>
+        <a href="page-2.html">View the menu</a> &nbsp;·&nbsp;
+        <a href="page-5.html">Feast days</a>
+      </p>
+    </div>
+  </div>
+
+  <p class="footer-credit">
+    A kitchen kept by Chef Meenakshi Alagappan and the Kalasha hearth-team — since 2017, in this lane off 12th Main.
+  </p>
+
+  <div class="footer-stripe" aria-hidden="true"></div>
+</footer>
+
+</body>
+</html>

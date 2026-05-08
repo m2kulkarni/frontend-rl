@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Materials & Method — Kōrin Mokkō</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--font-body),"Shippori Mincho",serif;
+    font-size:15px;
+    line-height:1.75;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+
+  /* ------- Layout shell ------- */
+  .page{
+    max-width:1320px;
+    margin:0 auto;
+    padding:48px 72px 0;
+    position:relative;
+  }
+
+  /* ------- Masthead ------- */
+  .masthead{
+    display:grid;
+    grid-template-columns:1fr auto;
+    align-items:end;
+    padding-bottom:18px;
+  }
+  .mark-block{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+  }
+  .mark-jp{
+    font-family:var(--font-display),serif;
+    font-size:42px;
+    letter-spacing:0.18em;
+    color:var(--primary);
+    line-height:1;
+  }
+  .mark-en{
+    font-family:var(--font-body),serif;
+    font-size:11px;
+    letter-spacing:0.42em;
+    text-transform:uppercase;
+    color:var(--text);
+    margin-top:6px;
+  }
+  .masthead-meta{
+    text-align:right;
+    font-style:italic;
+    font-size:12px;
+    letter-spacing:0.08em;
+    color:#3a3a3a;
+  }
+  .masthead-meta .vol{
+    display:block;
+    font-style:normal;
+    font-family:var(--font-display),serif;
+    font-size:18px;
+    letter-spacing:0.4em;
+    color:var(--primary);
+    margin-bottom:4px;
+  }
+
+  /* ------- Navigation ------- */
+  nav.primary{
+    border-top:1px solid var(--ornament);
+    border-bottom:1px solid var(--ornament);
+    margin-top:6px;
+    display:grid;
+    grid-template-columns:48px 1fr;
+    align-items:center;
+  }
+  nav.primary .roundel{
+    width:36px;height:36px;
+    display:flex;align-items:center;justify-content:center;
+    border-right:1px solid var(--ornament);
+    padding:6px 0;
+  }
+  nav.primary ul{
+    list-style:none;
+    display:flex;
+    justify-content:flex-end;
+    gap:38px;
+    padding:14px 4px 14px 0;
+  }
+  nav.primary li{
+    font-size:10.5px;
+    letter-spacing:0.34em;
+    text-transform:uppercase;
+    font-variant:small-caps;
+  }
+  nav.primary a[aria-current="page"]{
+    color:var(--secondary);
+    border-bottom:1px solid var(--secondary);
+    padding-bottom:2px;
+  }
+  nav.primary a:hover{color:var(--primary)}
+
+  /* ------- Hero band ------- */
+  .hero{
+    display:grid;
+    grid-template-columns:5fr 7fr;
+    gap:80px;
+    padding:90px 0 60px;
+    position:relative;
+    min-height:420px;
+  }
+  .hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:url("svg/seigaiha-waves.svg");
+    background-size:340px;
+    background-position:right -40px top -60px;
+    background-repeat:no-repeat;
+    opacity:0.10;
+    pointer-events:none;
+  }
+  .hero-text{
+    position:relative;
+    padding-top:40px;
+  }
+  .kicker{
+    font-size:11px;
+    letter-spacing:0.5em;
+    text-transform:uppercase;
+    color:var(--primary);
+    margin-bottom:28px;
+    font-variant:small-caps;
+  }
+  .kicker::before{
+    content:"";
+    display:inline-block;
+    width:42px;height:1px;
+    background:var(--primary);
+    vertical-align:middle;
+    margin-right:14px;
+  }
+  h1.title{
+    font-family:var(--font-display),serif;
+    font-size:62px;
+    line-height:1.05;
+    color:var(--primary);
+    letter-spacing:0.04em;
+    font-weight:400;
+  }
+  h1.title .ja{
+    display:block;
+    font-size:34px;
+    letter-spacing:0.32em;
+    color:var(--text);
+    margin-top:18px;
+  }
+  .hero-lede{
+    margin-top:36px;
+    font-size:15px;
+    max-width:36ch;
+    color:#1a1a1a;
+  }
+  .hero-stamp{
+    position:absolute;
+    bottom:8px;
+    left:-6px;
+    width:78px;height:78px;
+    background:var(--secondary);
+    color:var(--surface);
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--font-display),serif;
+    font-size:30px;
+    letter-spacing:0;
+    transform:rotate(-4deg);
+    box-shadow:inset 0 0 0 2px var(--surface), inset 0 0 0 3px var(--secondary);
+    line-height:1;
+    text-align:center;
+  }
+  .hero-stamp span{display:block;}
+  .hero-aside{
+    align-self:end;
+    position:relative;
+    padding:0 0 0 40px;
+  }
+  .hero-aside .crane{
+    width:340px;
+    height:340px;
+    opacity:0.92;
+    margin-left:auto;
+    display:block;
+  }
+  .hero-aside .crane svg{width:100%;height:100%}
+  .hero-aside .caption{
+    margin-top:14px;
+    font-size:11px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:#444;
+    font-style:italic;
+    text-align:right;
+  }
+
+  /* ------- Section divider ------- */
+  .section-rule{
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    align-items:center;
+    gap:24px;
+    margin:80px 0 48px;
+  }
+  .section-rule::before,.section-rule::after{
+    content:"";height:1px;background:var(--ornament);
+  }
+  .section-rule .label{
+    font-family:var(--font-display),serif;
+    font-size:18px;
+    letter-spacing:0.5em;
+    color:var(--primary);
+  }
+  .section-rule .label small{
+    display:block;
+    font-family:var(--font-body),serif;
+    font-size:10px;
+    letter-spacing:0.4em;
+    color:#444;
+    margin-top:4px;
+    font-style:italic;
+  }
+
+  /* ------- Essay / sourcing grid ------- */
+  .sourcing{
+    display:grid;
+    grid-template-columns:4fr 1fr 5fr;
+    gap:0;
+    align-items:start;
+    margin-bottom:40px;
+  }
+  .sourcing-intro{
+    padding-right:30px;
+  }
+  .sourcing-intro h2{
+    font-family:var(--font-display),serif;
+    font-size:34px;
+    color:var(--primary);
+    line-height:1.15;
+    margin-bottom:24px;
+    font-weight:400;
+    letter-spacing:0.03em;
+  }
+  .sourcing-intro h2 .ja{
+    display:block;
+    font-size:18px;
+    letter-spacing:0.3em;
+    color:var(--text);
+    margin-top:10px;
+  }
+  .sourcing-intro p{
+    margin-bottom:16px;
+    font-size:14px;
+  }
+  .sourcing-intro p::first-line{letter-spacing:0.02em}
+  .dropcap::first-letter{
+    font-family:var(--font-display),serif;
+    font-size:54px;
+    float:left;
+    line-height:0.9;
+    padding:6px 10px 0 0;
+    color:var(--primary);
+  }
+  .sourcing-spacer{
+    align-self:stretch;
+    border-left:1px solid var(--ornament);
+    margin:6px 0;
+  }
+  .partners{
+    display:flex;
+    flex-direction:column;
+    padding-left:40px;
+  }
+  .partner-card{
+    border-top:1px solid var(--ornament);
+    padding:22px 0 26px;
+    background:var(--surface);
+    padding-left:22px;
+    padding-right:22px;
+    margin-left:-22px;
+    margin-right:-22px;
+    position:relative;
+  }
+  .partner-card:last-child{border-bottom:1px solid var(--ornament)}
+  .partner-card .ume{
+    position:absolute;
+    top:18px;right:18px;
+    width:14px;height:14px;
+    opacity:0.85;
+  }
+  .partner-card .ume svg{width:100%;height:100%}
+  .partner-card h3{
+    font-family:var(--font-display),serif;
+    font-size:22px;
+    color:var(--primary);
+    font-weight:400;
+    letter-spacing:0.04em;
+    line-height:1.2;
+  }
+  .partner-card .meta{
+    font-style:italic;
+    font-size:11.5px;
+    color:#3a3a3a;
+    margin-top:8px;
+    padding-top:8px;
+    border-top:1px solid #c7b78f;
+    letter-spacing:0.05em;
+  }
+  .partner-card .body{
+    margin-top:14px;
+    font-size:13.5px;
+    line-height:1.7;
+  }
+
+  /* ------- Seasonal rhythm ------- */
+  .rhythm{
+    display:grid;
+    grid-template-columns:6fr 6fr;
+    gap:80px;
+    align-items:start;
+    position:relative;
+    margin-bottom:30px;
+  }
+  .rhythm-illus{
+    padding-top:30px;
+    position:relative;
+  }
+  .rhythm-illus .seal-wrap{
+    width:280px;
+    margin:0 auto 0 0;
+    position:relative;
+  }
+  .rhythm-illus .seal-wrap svg{width:100%;height:auto;display:block}
+  .rhythm-illus .calendar{
+    margin-top:30px;
+    border-top:1px solid var(--ornament);
+    padding-top:18px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:0;
+    font-size:10.5px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    text-align:center;
+    color:#333;
+  }
+  .rhythm-illus .calendar div{
+    border-right:1px solid #c7b78f;
+    padding:10px 6px;
+  }
+  .rhythm-illus .calendar div:last-child{border-right:none}
+  .rhythm-illus .calendar strong{
+    display:block;
+    font-family:var(--font-display),serif;
+    font-size:16px;
+    letter-spacing:0.2em;
+    color:var(--primary);
+    font-weight:400;
+    margin-bottom:6px;
+  }
+  .rhythm-text h2{
+    font-family:var(--font-display),serif;
+    font-size:34px;
+    color:var(--primary);
+    font-weight:400;
+    line-height:1.15;
+    margin-bottom:8px;
+    letter-spacing:0.03em;
+  }
+  .rhythm-text h2 .ja{
+    display:block;
+    font-size:18px;
+    letter-spacing:0.3em;
+    color:var(--text);
+    margin-top:10px;
+  }
+  .rhythm-text > p:first-of-type{margin-top:24px}
+  .rhythm-text p{margin-bottom:16px;font-size:14px}
+  .pullquote{
+    margin:28px 0;
+    padding:22px 26px 22px 30px;
+    border-left:2px solid var(--secondary);
+    font-family:var(--font-display),serif;
+    font-size:20px;
+    line-height:1.5;
+    color:var(--primary);
+    background:var(--surface);
+  }
+  .pullquote cite{
+    display:block;
+    margin-top:12px;
+    font-family:var(--font-body),serif;
+    font-style:italic;
+    font-size:12px;
+    color:#3a3a3a;
+    letter-spacing:0.08em;
+  }
+
+  /* ------- Diagrams ------- */
+  .diagrams{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:48px;
+    margin-top:24px;
+  }
+  .diagram{
+    border-top:1px solid var(--ornament);
+    padding-top:22px;
+    position:relative;
+    background:var(--surface);
+    padding:22px 22px 24px;
+    margin-top:-1px;
+  }
+  .diagram::before{
+    content:"";
+    position:absolute;
+    top:0;left:0;right:0;
+    height:1px;background:var(--ornament);
+  }
+  .diagram .ume{
+    position:absolute;top:14px;right:14px;
+    width:14px;height:14px;opacity:0.85;
+  }
+  .diagram .ume svg{width:100%;height:100%}
+  .diagram .num{
+    font-family:var(--font-display),serif;
+    font-size:14px;
+    letter-spacing:0.4em;
+    color:var(--secondary);
+  }
+  .diagram h4{
+    font-family:var(--font-display),serif;
+    font-size:22px;
+    font-weight:400;
+    color:var(--primary);
+    margin-top:8px;
+    line-height:1.2;
+  }
+  .diagram h4 .ja{
+    display:block;
+    font-size:13px;
+    letter-spacing:0.3em;
+    color:var(--text);
+    margin-top:6px;
+  }
+  .diagram .meta{
+    font-style:italic;
+    font-size:11px;
+    color:#444;
+    margin-top:10px;
+    padding-top:8px;
+    border-top:1px solid #c7b78f;
+    letter-spacing:0.05em;
+  }
+  .diagram .sketch{
+    margin:18px 0 14px;
+    height:180px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .diagram .sketch svg{
+    width:100%;height:100%;
+    overflow:visible;
+  }
+  .diagram p{font-size:13px;line-height:1.7}
+
+  /* ------- Notes column ------- */
+  .notes{
+    display:grid;
+    grid-template-columns:7fr 5fr;
+    gap:80px;
+    margin:80px 0 60px;
+    align-items:start;
+  }
+  .notes-text h2{
+    font-family:var(--font-display),serif;
+    font-size:30px;
+    color:var(--primary);
+    font-weight:400;
+    margin-bottom:20px;
+    letter-spacing:0.03em;
+  }
+  .notes-text h2 .ja{
+    display:block;font-size:16px;letter-spacing:0.3em;color:var(--text);margin-top:8px;
+  }
+  .notes-text p{margin-bottom:16px;font-size:14px}
+  .ledger{
+    background:var(--surface);
+    border-top:1px solid var(--ornament);
+    padding:28px 28px 26px;
+    position:relative;
+  }
+  .ledger .ume{
+    position:absolute;top:18px;right:18px;width:14px;height:14px;opacity:0.85;
+  }
+  .ledger .ume svg{width:100%;height:100%}
+  .ledger h3{
+    font-family:var(--font-display),serif;
+    font-size:18px;
+    color:var(--primary);
+    font-weight:400;
+    letter-spacing:0.05em;
+  }
+  .ledger .meta{
+    font-style:italic;font-size:11px;color:#3a3a3a;
+    padding-top:8px;margin-top:8px;border-top:1px solid #c7b78f;
+    margin-bottom:16px;letter-spacing:0.05em;
+  }
+  .ledger dl{
+    display:grid;
+    grid-template-columns:auto 1fr auto;
+    gap:10px 14px;
+    font-size:12.5px;
+    align-items:baseline;
+  }
+  .ledger dt{
+    font-family:var(--font-display),serif;
+    color:var(--text);
+    letter-spacing:0.04em;
+  }
+  .ledger dd.dots{
+    border-bottom:1px dotted #888;
+    height:0.6em;
+    margin:0;
+  }
+  .ledger dd.value{
+    font-style:italic;
+    color:var(--primary);
+    text-align:right;
+    margin:0;
+    white-space:nowrap;
+  }
+
+  /* ------- Footer ------- */
+  footer{
+    margin-top:80px;
+    background:var(--bg);
+    position:relative;
+    padding:0 0 28px;
+    border-top:1px solid transparent;
+  }
+  footer::before{
+    content:"";
+    position:absolute;
+    top:0;left:0;right:0;height:36px;
+    background-image:url("svg/seigaiha-waves.svg");
+    background-size:240px;
+    opacity:0.08;
+    pointer-events:none;
+  }
+  .foot-inner{
+    max-width:1320px;
+    margin:0 auto;
+    padding:64px 72px 0;
+    display:grid;
+    grid-template-columns:200px 1fr 1fr 1fr;
+    gap:48px;
+    align-items:start;
+  }
+  .kiri{
+    width:140px;height:140px;
+    opacity:0.9;
+  }
+  .kiri svg{width:100%;height:100%}
+  .foot-col{
+    font-size:12px;
+    line-height:1.9;
+    letter-spacing:0.06em;
+    border-left:1px solid var(--ornament);
+    padding-left:24px;
+  }
+  .foot-col h5{
+    font-family:var(--font-display),serif;
+    font-size:14px;
+    color:var(--primary);
+    font-weight:400;
+    letter-spacing:0.18em;
+    margin-bottom:10px;
+  }
+  .foot-col p{font-style:italic;color:#2a2a2a;margin-bottom:10px}
+  .attrib{
+    max-width:1320px;
+    margin:32px auto 0;
+    padding:14px 72px 0;
+    border-top:1px solid var(--ornament);
+    font-size:11px;
+    color:#0c0c0c;
+    letter-spacing:0.08em;
+    display:flex;justify-content:space-between;
+  }
+  .attrib em{font-style:italic}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ===== Masthead ===== -->
+  <header class="masthead">
+    <div class="mark-block">
+      <span class="mark-jp">光琳木工</span>
+      <span class="mark-en">Kōrin Mokkō &middot; Atelier of Joinery & Paper &middot; Kyoto</span>
+    </div>
+    <div class="masthead-meta">
+      <span class="vol">巻 ／ IV</span>
+      Materials &amp; Method — a record of the studio's seasonal work
+    </div>
+  </header>
+
+  <!-- ===== Navigation ===== -->
+  <nav class="primary" aria-label="Primary">
+    <div class="roundel" aria-hidden="true">
+      <!-- tsuru-no-maru roundel, simplified inline -->
+      <svg viewBox="0 0 36 36" width="32" height="32">
+        <circle cx="18" cy="18" r="16.5" fill="none" stroke="#0c0c0c" stroke-width="1"/>
+        <circle cx="18" cy="18" r="13" fill="none" stroke="#0c0c0c" stroke-width="0.6"/>
+        <path d="M9 22 Q14 13 18 18 Q22 23 27 14" fill="none" stroke="#0c0c0c" stroke-width="1.1" stroke-linecap="round"/>
+        <circle cx="27" cy="14" r="1.2" fill="#0c0c0c"/>
+      </svg>
+    </div>
+    <ul>
+      <li><a href="page-1.html">Atelier</a></li>
+      <li><a href="page-2.html">The Workshop</a></li>
+      <li><a href="page-3.html">Commissions</a></li>
+      <li><a href="page-4.html" aria-current="page">Materials &amp; Method</a></li>
+      <li><a href="page-5.html">Apprenticeship</a></li>
+      <li><a href="page-6.html">Visit</a></li>
+    </ul>
+  </nav>
+
+  <!-- ===== Hero ===== -->
+  <section class="hero">
+    <div class="hero-text">
+      <div class="kicker">Process · 製法と素材</div>
+      <h1 class="title">
+        Materials &amp;<br>the Method of<br>Their Making
+        <span class="ja">材と仕事の節</span>
+      </h1>
+      <p class="hero-lede">
+        A studio is, before anything, the relationships it keeps with the
+        forests, rivers, and lacquer-tappers that supply it. What follows
+        is an account of where our timber, paper, and urushi originate —
+        and the seasonal logic by which each is worked.
+      </p>
+      <div class="hero-stamp" aria-label="Seal: Process">
+        <span>製<br>法</span>
+      </div>
+    </div>
+
+    <aside class="hero-aside" aria-hidden="true">
+      <div class="crane">
+        <!-- Crane mon as decorative hero ornament -->
+        <svg viewBox="0 0 688 688" preserveAspectRatio="xMidYMid meet">
+          <circle cx="344" cy="344" r="320" fill="none" stroke="#1c3a5e" stroke-width="1"/>
+          <circle cx="344" cy="344" r="270" fill="none" stroke="#1c3a5e" stroke-width="0.6"/>
+          <g transform="translate(344 344)" stroke="#0c0c0c" stroke-width="2.4" fill="none" stroke-linecap="round">
+            <path d="M-180 60 Q-90 -120 0 -40 Q90 40 180 -80"/>
+            <path d="M-160 90 Q-60 -40 30 30 Q120 100 200 -10"/>
+            <circle cx="190" cy="-60" r="6" fill="#e34234" stroke="none"/>
+            <path d="M-200 110 L-150 80 M-180 130 L-140 110"/>
+          </g>
+          <text x="344" y="360" text-anchor="middle" font-family="Yuji Syuku, serif" font-size="32" fill="#1c3a5e" letter-spacing="6">鶴丸</text>
+        </svg>
+      </div>
+      <div class="caption">— Tsuru-no-maru, the studio's house mark —</div>
+    </aside>
+  </section>
+
+  <!-- ===== Section: Sourcing ===== -->
+  <div class="section-rule">
+    <span></span>
+    <span class="label">壹 &nbsp; SOURCING<small>three houses, three rivers</small></span>
+    <span></span>
+  </div>
+
+  <section class="sourcing">
+    <div class="sourcing-intro">
+      <h2>
+        The provenance of<br>a single shutter.
+        <span class="ja">一枚の戸の出自</span>
+      </h2>
+      <p class="dropcap">
+        A finished shoji weighs perhaps four kilograms. Inside that weight
+        are the patience of three families and the quiet of three rivers.
+        Kōrin Mokkō works with the same houses our predecessors used —
+        in some cases for over forty years — and we receive their material
+        on the rhythm they choose, not on the rhythm of our commissions.
+      </p>
+      <p>
+        We send no purchase orders. A telephone call in late autumn from
+        the Iwano family signals that the year's <em>kōzo</em> bark has
+        been steamed; a postcard in February from Yoshino tells us which
+        hinoki billets have finally surrendered their winter water. We
+        plan around these small letters, not around our calendar.
+      </p>
+      <p>
+        What follows are the three houses with which the studio's work is
+        most closely entangled. None advertise. All of them are listed in
+        the ledgers of the Imperial Household Agency at one moment or
+        another in the past century.
+      </p>
+    </div>
+
+    <div class="sourcing-spacer" aria-hidden="true"></div>
+
+    <div class="partners">
+
+      <article class="partner-card">
+        <span class="ume" aria-hidden="true">
+          <svg viewBox="0 0 688 688"><circle cx="344" cy="344" r="320" fill="#0c0c0c"/><circle cx="344" cy="190" r="80" fill="#f5efde"/><circle cx="500" cy="280" r="80" fill="#f5efde"/><circle cx="500" cy="440" r="80" fill="#f5efde"/><circle cx="344" cy="520" r="80" fill="#f5efde"/><circle cx="188" cy="440" r="80" fill="#f5efde"/><circle cx="188" cy="280" r="80" fill="#f5efde"/><circle cx="344" cy="354" r="44" fill="#f5efde"/></svg>
+        </span>
+        <h3>Yoshino Hinoki — Nakai Mokuzai</h3>
+        <div class="meta">Yoshino-gun, Nara · merchants since 1842 · sixth generation</div>
+        <p class="body">
+          Our hinoki cypress comes exclusively from the Nakai timber yard
+          on the Yoshino-gawa, where Nakai Tatsuya selects standing trees
+          of 180 years or more. Billets are air-dried under cedar shingles
+          for a minimum of four winters. We pay roughly ¥48,000 per
+          <em>shaku-jime</em>; the figure has not changed since 2017.
+        </p>
+      </article>
+
+      <article class="partner-card">
+        <span class="ume" aria-hidden="true">
+          <svg viewBox="0 0 688 688"><circle cx="344" cy="344" r="320" fill="#0c0c0c"/><circle cx="344" cy="190" r="80" fill="#f5efde"/><circle cx="500" cy="280" r="80" fill="#f5efde"/><circle cx="500" cy="440" r="80" fill="#f5efde"/><circle cx="344" cy="520" r="80" fill="#f5efde"/><circle cx="188" cy="440" r="80" fill="#f5efde"/><circle cx="188" cy="280" r="80" fill="#f5efde"/><circle cx="344" cy="354" r="44" fill="#f5efde"/></svg>
+        </span>
+        <h3>Echizen Washi — Iwano-ke</h3>
+        <div class="meta">Imadate, Fukui · paper-makers since 1751 · ninth generation</div>
+        <p class="body">
+          The Iwano family — currently led by Iwano Ichibei IX, a Living
+          National Treasure — supply our <em>hōsho</em> and <em>torinoko</em>
+          papers. Each sheet is hand-couched from kōzo grown on the
+          Okamoto-gawa floodplain, beaten on stone, and dried on cedar
+          boards under late-autumn sun. We receive 300 sheets annually,
+          delivered the third week of November.
+        </p>
+      </article>
+
+      <article class="partner-card">
+        <span class="ume" aria-hidden="true">
+          <svg viewBox="0 0 688 688"><circle cx="344" cy="344" r="320" fill="#0c0c0c"/><circle cx="344" cy="190" r="80" fill="#f5efde"/><circle cx="500" cy="280" r="80" fill="#f5efde"/><circle cx="500" cy="440" r="80" fill="#f5efde"/><circle cx="344" cy="520" r="80" fill="#f5efde"/><circle cx="188" cy="440" r="80" fill="#f5efde"/><circle cx="188" cy="280" r="80" fill="#f5efde"/><circle cx="344" cy="354" r="44" fill="#f5efde"/></svg>
+        </span>
+        <h3>Jōbōji Urushi — Satō Kenji</h3>
+        <div class="meta">Ninohe, Iwate · single tapper · seasonal yield 1.6 kg</div>
+        <p class="body">
+          Satō-san is one of fewer than thirty <em>urushi-kaki</em>
+          remaining in Japan. He works alone on a hillside above the
+          Anebetsu stream, tapping perhaps 250 trees between June and
+          October. We receive his entire summer yield — about 1.6
+          kilograms — at ¥38,000 per 100 grams. It is enough for
+          eleven commissions a year, no more.
+        </p>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ===== Section: Seasonal rhythm ===== -->
+  <div class="section-rule">
+    <span></span>
+    <span class="label">貳 &nbsp; THE YEAR<small>summer lacquer · winter joinery · autumn paper</small></span>
+    <span></span>
+  </div>
+
+  <section class="rhythm">
+    <div class="rhythm-illus">
+      <div class="seal-wrap" aria-hidden="true">
+        <!-- Use the kiri seal as a centerpiece, low contrast -->
+        <svg viewBox="0 0 345 326" preserveAspectRatio="xMidYMid meet">
+          <g fill="none" stroke="#1c3a5e" stroke-width="1.2">
+            <circle cx="172" cy="163" r="148"/>
+            <circle cx="172" cy="163" r="118" stroke-width="0.6"/>
+          </g>
+          <g transform="translate(172 163)" stroke="#0c0c0c" stroke-width="1" fill="none">
+            <line x1="-130" y1="0" x2="130" y2="0"/>
+            <line x1="0" y1="-130" x2="0" y2="130"/>
+            <circle r="44" fill="#f5efde"/>
+            <text y="6" text-anchor="middle" font-family="Yuji Syuku, serif" font-size="22" fill="#1c3a5e">節</text>
+          </g>
+          <text x="172" y="36" text-anchor="middle" font-family="Yuji Syuku" font-size="14" fill="#0c0c0c" letter-spacing="4">夏</text>
+          <text x="304" y="167" text-anchor="middle" font-family="Yuji Syuku" font-size="14" fill="#0c0c0c" letter-spacing="4">秋</text>
+          <text x="172" y="304" text-anchor="middle" font-family="Yuji Syuku" font-size="14" fill="#0c0c0c" letter-spacing="4">冬</text>
+          <text x="40" y="167" text-anchor="middle" font-family="Yuji Syuku" font-size="14" fill="#0c0c0c" letter-spacing="4">春</text>
+        </svg>
+      </div>
+
+      <div class="calendar" aria-label="Seasonal calendar of the studio">
+        <div><strong>春</strong>Spring<br>planning, drawing</div>
+        <div><strong>夏</strong>Summer<br>lacquer &amp; cure</div>
+        <div><strong>秋</strong>Autumn<br>paper-mounting</div>
+        <div><strong>冬</strong>Winter<br>joinery, kumiko</div>
+      </div>
+    </div>
+
+    <div class="rhythm-text">
+      <h2>
+        A year folded into<br>four kinds of work.
+        <span class="ja">四つの節</span>
+      </h2>
+
+      <p>
+        The studio's calendar follows the materials, not the client. A
+        commission accepted in March may not deliver until the following
+        December — because urushi requires summer humidity, paper requires
+        the dry clarity of October, and joinery requires winter.
+      </p>
+
+      <p>
+        From <strong>June through early September</strong>, when Kyoto's
+        humidity stays above 75 percent for weeks at a time, we apply
+        urushi. Lacquer cures by absorbing water, not by losing it; the
+        muggy stillness of the rainy season is a slow tide that pulls
+        each coat into hardness over six to ten days. We work in a
+        cedar-lined cabinet — the <em>furo</em> — set behind the workshop's
+        north wall, where temperature stays near 24°C.
+      </p>
+
+      <div class="pullquote">
+        “We do not finish a piece. We arrange the conditions in which
+        the piece, over a year, finishes itself.”
+        <cite>— Tanabe Kōrin III, in conversation, Spring 2019</cite>
+      </div>
+
+      <p>
+        <strong>Autumn</strong> belongs to paper. Sheets from the Iwano
+        family arrive flat-packed in cedar boxes during the third week of
+        November. We mount them onto kumiko frames in our smallest room,
+        where the air is dry and still, using nori glue cooked from
+        three-year-aged wheat starch. A single shoji panel takes a full
+        afternoon to mount, and must rest forty-eight hours under boards
+        before it is touched again.
+      </p>
+
+      <p>
+        <strong>Winter</strong> — December through February — is for
+        joinery. The hinoki has by now lost the last of its summer
+        moisture; the workshop holds steady at 8°C; chisels stay sharp
+        for hours rather than minutes. This is when kumiko lattices are
+        cut and assembled, and when the <em>ari-tsugi</em> dovetail-less
+        joints which give our cabinets their reputation are pared into
+        being.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== Section: Diagrams ===== -->
+  <div class="section-rule">
+    <span></span>
+    <span class="label">參 &nbsp; THREE DIAGRAMS<small>ink sketches from the master notebook</small></span>
+    <span></span>
+  </div>
+
+  <section class="diagrams">
+
+    <article class="diagram">
+      <span class="ume" aria-hidden="true">
+        <svg viewBox="0 0 688 688"><circle cx="344" cy="344" r="320" fill="#0c0c0c"/><circle cx="344" cy="190" r="80" fill="#f5efde"/><circle cx="500" cy="280" r="80" fill="#f5efde"/><circle cx="500" cy="440" r="80" fill="#f5efde"/><circle cx="344" cy="520" r="80" fill="#f5efde"/><circle cx="188" cy="440" r="80" fill="#f5efde"/><circle cx="188" cy="280" r="80" fill="#f5efde"/><circle cx="344" cy="354" r="44" fill="#f5efde"/></svg>
+      </span>
+      <div class="num">壹</div>
+      <h4>The Kumiko Lattice
+        <span class="ja">組子 ・ あさのは</span>
+      </h4>
+      <div class="meta">Hinoki strips, 3mm × 9mm · pattern: asa-no-ha</div>
+
+      <div class="sketch" aria-label="Asa-no-ha kumiko lattice diagram">
+        <svg viewBox="0 0 240 180" stroke="#0c0c0c" fill="none" stroke-width="1">
+          <g stroke-width="1.2">
+            <rect x="20" y="20" width="200" height="140"/>
+          </g>
+          <g stroke-width="0.9">
+            <!-- Asa-no-ha hexagonal star pattern -->
+            <g transform="translate(120 90)">
+              <polygon points="-50,-58 50,-58 100,0 50,58 -50,58 -100,0"/>
+              <line x1="-100" y1="0" x2="100" y2="0"/>
+              <line x1="-50" y1="-58" x2="50" y2="58"/>
+              <line x1="50" y1="-58" x2="-50" y2="58"/>
+              <line x1="0" y1="-58" x2="0" y2="58"/>
+              <!-- inner star -->
+              <line x1="-100" y1="0" x2="0" y2="0"/>
+              <line x1="100" y1="0" x2="0" y2="0"/>
+              <line x1="-50" y1="-58" x2="0" y2="0"/>
+              <line x1="50" y1="-58" x2="0" y2="0"/>
+              <line x1="-50" y1="58" x2="0" y2="0"/>
+              <line x1="50" y1="58" x2="0" y2="0"/>
+            </g>
+          </g>
+          <g stroke-width="0.5" stroke-dasharray="2 2">
+            <line x1="20" y1="90" x2="220" y2="90"/>
+          </g>
+          <text x="20" y="174" font-family="Shippori Mincho" font-size="8" fill="#444" font-style="italic">scale 1:2 · sumi on kraft</text>
+        </svg>
+      </div>
+
+      <p>
+        The asa-no-ha — hemp-leaf — pattern shown here resolves to a
+        six-pointed star whose every line is precisely 30 millimetres.
+        Each intersection is a half-lap pared with a 15mm shōji-nomi.
+        A 600 × 400 panel contains 184 such cuts.
+      </p>
+    </article>
+
+    <article class="diagram">
+      <span class="ume" aria-hidden="true">
+        <svg viewBox="0 0 688 688"><circle cx="344" cy="344" r="320" fill="#0c0c0c"/><circle cx="344" cy="190" r="80" fill="#f5efde"/><circle cx="500" cy="280" r="80" fill="#f5efde"/><circle cx="500" cy="440" r="80" fill="#f5efde"/><circle cx="344" cy="520" r="80" fill="#f5efde"/><circle cx="188" cy="440" r="80" fill="#f5efde"/><circle cx="188" cy="280" r="80" fill="#f5efde"/><circle cx="344" cy="354" r="44" fill="#f5efde"/></svg>
+      </span>
+      <div class="num">貳</div>
+      <h4>The Ari-tsugi Joint
+        <span class="ja">蟻継ぎ ・ 留型</span>
+      </h4>
+      <div class="meta">Hinoki on hinoki · no glue, no metal · tolerance 0.05mm</div>
+
+      <div class="sketch" aria-label="Ari-tsugi dovetail-less joint diagram">
+        <svg viewBox="0 0 240 180" stroke="#0c0c0c" fill="none" stroke-width="1">
+          <!-- Top member -->
+          <g stroke-width="1.1">
+            <path d="M30 30 L210 30 L210 80 L150 80 L142 92 L130 92 L122 80 L30 80 Z"/>
+            <!-- Lower member with mating socket -->
+            <path d="M30 100 L122 100 L130 88 L142 88 L150 100 L210 100 L210 150 L30 150 Z"
+                  transform="translate(0 4)"/>
+          </g>
+          <!-- Hidden tongues -->
+          <g stroke-width="0.6" stroke-dasharray="3 2">
+            <line x1="122" y1="80" x2="122" y2="104"/>
+            <line x1="142" y1="80" x2="142" y2="104"/>
+            <line x1="60" y1="80" x2="60" y2="104"/>
+            <line x1="180" y1="80" x2="180" y2="104"/>
+          </g>
+          <!-- Annotations -->
+          <g stroke="#e34234" stroke-width="0.8" fill="none">
+            <circle cx="136" cy="92" r="14"/>
+          </g>
+          <text x="158" y="96" font-family="Shippori Mincho" font-size="8" fill="#e34234" font-style="italic">tail</text>
+          <text x="20" y="174" font-family="Shippori Mincho" font-size="8" fill="#444" font-style="italic">section · sumi · winter 2023</text>
+        </svg>
+      </div>
+
+      <p>
+        Our ari-tsugi differs from the European dovetail in that it
+        receives no glue and is hidden on three faces. The joint draws
+        tighter as the seasons compress the hinoki — a property that
+        rewards the hand that cut it within twelve months.
+      </p>
+    </article>
+
+    <article class="diagram">
+      <span class="ume" aria-hidden="true">
+        <svg viewBox="0 0 688 688"><circle cx="344" cy="344" r="320" fill="#0c0c0c"/><circle cx="344" cy="190" r="80" fill="#f5efde"/><circle cx="500" cy="280" r="80" fill="#f5efde"/><circle cx="500" cy="440" r="80" fill="#f5efde"/><circle cx="344" cy="520" r="80" fill="#f5efde"/><circle cx="188" cy="440" r="80" fill="#f5efde"/><circle cx="188" cy="280" r="80" fill="#f5efde"/><circle cx="344" cy="354" r="44" fill="#f5efde"/></svg>
+      </span>
+      <div class="num">參</div>
+      <h4>Layered Shoji Frame
+        <span class="ja">障子 ・ 重ね</span>
+      </h4>
+      <div class="meta">Outer stile, inner kumiko, hosho paper · cross-section</div>
+
+      <div class="sketch" aria-label="Layered shoji frame cross-section">
+        <svg viewBox="0 0 240 180" stroke="#0c0c0c" fill="none" stroke-width="1">
+          <!-- Outer frame -->
+          <g stroke-width="1.2">
+            <rect x="30" y="30" width="180" height="120"/>
+            <rect x="42" y="42" width="156" height="96"/>
+          </g>
+          <!-- Kumiko grid -->
+          <g stroke-width="0.7">
+            <line x1="42" y1="66" x2="198" y2="66"/>
+            <line x1="42" y1="90" x2="198" y2="90"/>
+            <line x1="42" y1="114" x2="198" y2="114"/>
+            <line x1="80" y1="42" x2="80" y2="138"/>
+            <line x1="120" y1="42" x2="120" y2="138"/>
+            <line x1="160" y1="42" x2="160" y2="138"/>
+          </g>
+          <!-- Paper indication -->
+          <g stroke-width="0.4" stroke-dasharray="1 2">
+            <rect x="42" y="42" width="156" height="96" fill="none"/>
+          </g>
+          <!-- Callouts -->
+          <g stroke="#0c0c0c" stroke-width="0.6">
+            <line x1="218" y1="36" x2="226" y2="20"/>
+            <line x1="200" y1="60" x2="226" y2="58"/>
+            <line x1="170" y1="100" x2="226" y2="100"/>
+          </g>
+          <g font-family="Shippori Mincho" font-size="7" fill="#0c0c0c" font-style="italic">
+            <text x="146" y="18">① stile (kamachi)</text>
+            <text x="180" y="56">② kumiko</text>
+            <text x="180" y="102">③ paper (hōsho)</text>
+          </g>
+          <text x="20" y="174" font-family="Shippori Mincho" font-size="8" fill="#444" font-style="italic">frontal · sumi sketch</text>
+        </svg>
+      </div>
+
+      <p>
+        Three layers, each contributing one quality: the stile gives
+        rigidity, the kumiko gives geometry, the paper gives light.
+        A standard 1820 × 910 panel comprises 88 kumiko members and
+        a single uncut sheet of Iwano hōsho.
+      </p>
+    </article>
+
+  </section>
+
+  <!-- ===== Notes + ledger ===== -->
+  <section class="notes">
+    <div class="notes-text">
+      <h2>
+        Notes from the bench.
+        <span class="ja">仕事帳より</span>
+      </h2>
+      <p>
+        We keep a ledger — bound annually in indigo cotton — in which
+        every commission is matched against the materials it consumed.
+        The page reproduced opposite is taken from the entry for a
+        machiya restoration in Nishijin, completed in March 2024. It
+        records, in the master's hand, the small economy by which the
+        building was put back together.
+      </p>
+      <p>
+        Three values are noted for each material: its source, its weight
+        or count, and its cost in <em>monme</em> — an obsolete unit we
+        retain because it forces us to weigh things rather than count
+        them. A single shoji frame, by this reckoning, is somewhere
+        between 460 and 510 monme of work.
+      </p>
+      <p>
+        We publish nothing of these ledgers ordinarily. The page below
+        appears here only because the machiya it describes — a
+        nineteenth-century weaver's house on Senbon-dōri — is itself now
+        a public concern, restored on behalf of the Kyoto Heritage Trust.
+      </p>
+    </div>
+
+    <aside class="ledger" aria-label="Sample ledger entry">
+      <span class="ume" aria-hidden="true">
+        <svg viewBox="0 0 688 688"><circle cx="344" cy="344" r="320" fill="#0c0c0c"/><circle cx="344" cy="190" r="80" fill="#f5efde"/><circle cx="500" cy="280" r="80" fill="#f5efde"/><circle cx="500" cy="440" r="80" fill="#f5efde"/><circle cx="344" cy="520" r="80" fill="#f5efde"/><circle cx="188" cy="440" r="80" fill="#f5efde"/><circle cx="188" cy="280" r="80" fill="#f5efde"/><circle cx="344" cy="354" r="44" fill="#f5efde"/></svg>
+      </span>
+      <h3>Ledger · Nishijin Machiya</h3>
+      <div class="meta">Project № 2023-11 · Senbon-dōri · completed 14 March 2024</div>
+
+      <dl>
+        <dt>Hinoki billets</dt><dd class="dots"></dd><dd class="value">14 · ¥672,000</dd>
+        <dt>Hōsho paper sheets</dt><dd class="dots"></dd><dd class="value">38 · ¥114,000</dd>
+        <dt>Kōzo (raw bark)</dt><dd class="dots"></dd><dd class="value">2.4 kg</dd>
+        <dt>Urushi · summer ’23</dt><dd class="dots"></dd><dd class="value">220 g · ¥83,600</dd>
+        <dt>Nori (wheat starch)</dt><dd class="dots"></dd><dd class="value">3 yr · 460 g</dd>
+        <dt>Bench-days, master</dt><dd class="dots"></dd><dd class="value">41</dd>
+        <dt>Bench-days, apprentice</dt><dd class="dots"></dd><dd class="value">63</dd>
+        <dt>Recorded in monme</dt><dd class="dots"></dd><dd class="value">11,420</dd>
+      </dl>
+    </aside>
+  </section>
+
+</div>
+
+<!-- ===== Footer ===== -->
+<footer>
+  <div class="foot-inner">
+    <div class="kiri" aria-hidden="true">
+      <svg viewBox="0 0 345 326" preserveAspectRatio="xMidYMid meet">
+        <g transform="translate(0 0)" fill="#0c0c0c">
+          <rect x="160" y="150" width="25" height="20" rx="3"/>
+          <ellipse cx="172" cy="155" rx="9" ry="9"/>
+          <g stroke="#0c0c0c" stroke-width="2" fill="none">
+            <path d="M120 160 Q90 90 60 60"/>
+            <path d="M225 160 Q255 90 285 60"/>
+            <path d="M172 150 V60"/>
+            <path d="M172 175 Q120 230 100 290"/>
+            <path d="M172 175 Q225 230 245 290"/>
+            <path d="M172 175 V300"/>
+          </g>
+          <g fill="#0c0c0c">
+            <ellipse cx="60" cy="55" rx="12" ry="22" transform="rotate(-25 60 55)"/>
+            <ellipse cx="285" cy="55" rx="12" ry="22" transform="rotate(25 285 55)"/>
+            <ellipse cx="172" cy="50" rx="12" ry="24"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+
+    <div class="foot-col">
+      <h5>光琳木工</h5>
+      <p>Kōrin Mokkō<br>Atelier of Joinery<br>&amp; Paper</p>
+      <p>Established Kyōto, 1948<br>Third generation</p>
+    </div>
+
+    <div class="foot-col">
+      <h5>所在地</h5>
+      <p>57 Higashi-iru<br>Aburanokōji-dōri<br>Kamigyō-ku, Kyōto<br>602-8237</p>
+      <p>+81 75 432 0118<br>atelier@korin-mokko.jp</p>
+    </div>
+
+    <div class="foot-col">
+      <h5>開所</h5>
+      <p>Tuesday – Saturday<br>10:00 – 17:00<br>By appointment only</p>
+      <p>Closed for lacquer-cure:<br>1 – 21 August annually</p>
+    </div>
+  </div>
+
+  <div class="attrib">
+    <span><em>Kamon SVG renderings (tsuru, umebachi, kiri, seigaiha, sayagata) reproduced under public-domain heraldic sources; redrawn for the studio, 2024.</em></span>
+    <span>© Kōrin Mokkō &middot; 巻 IV · 製法</span>
+  </div>
+</footer>
+
+</body>
+</html>

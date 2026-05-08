@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Visit — Hours, Galleries, and Maydān</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    margin: 0;
+    line-height: 1.65;
+  }
+
+  /* ---------- HEADER STRIP ---------- */
+  .top-strip {
+    background: var(--primary);
+    color: var(--bg);
+    text-align: center;
+    padding: 10px 0 8px;
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.32em;
+    font-size: 11px;
+    text-transform: uppercase;
+  }
+  .top-strip .ar { font-style: italic; letter-spacing: 0.1em; opacity: 0.85; margin: 0 14px; }
+
+  /* ---------- NAV ---------- */
+  nav.primary {
+    background: var(--bg);
+    border-top: 1px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
+    padding: 14px 0 12px;
+  }
+  nav.primary ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0;
+  }
+  nav.primary li { display: flex; align-items: center; }
+  nav.primary a {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    font-size: 12px;
+    color: var(--primary);
+    text-decoration: none;
+    padding: 4px 18px;
+    display: inline-block;
+  }
+  nav.primary a[aria-current="page"] {
+    border-bottom: 1px solid var(--accent);
+    color: var(--text-emphasis);
+  }
+  nav.primary .palmette {
+    color: var(--accent);
+    font-size: 10px;
+    transform: translateY(-1px);
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    text-align: center;
+    padding: 56px 40px 32px;
+    position: relative;
+  }
+  .hero .eyebrow {
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    font-size: 11px;
+    color: var(--secondary);
+    margin-bottom: 12px;
+  }
+  .hero h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 56px;
+    line-height: 1.1;
+    margin: 0 0 8px;
+    color: var(--primary);
+    letter-spacing: 0.04em;
+  }
+  .hero h1 .accent { color: var(--text-emphasis); font-style: italic; }
+  .hero .sub {
+    max-width: 640px;
+    margin: 18px auto 0;
+    font-size: 17px;
+    font-style: italic;
+    color: var(--text);
+  }
+
+  .arch-frame {
+    position: relative;
+    width: 460px;
+    height: 360px;
+    margin: 28px auto 0;
+  }
+  .arch-frame svg.arch {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+  }
+  .arch-frame .inner {
+    position: absolute;
+    top: 70px; left: 90px; right: 90px; bottom: 30px;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 18px;
+  }
+  .arch-frame .inner .label {
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .arch-frame .inner .hours-big {
+    font-family: var(--font-display), serif;
+    font-size: 30px;
+    color: var(--primary);
+    line-height: 1.25;
+    margin: 0;
+  }
+  .arch-frame .inner .closed {
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--text-emphasis);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-family: var(--font-display), serif;
+  }
+
+  /* ---------- DIVIDER ---------- */
+  .divider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 32px 0 16px;
+    color: var(--accent);
+  }
+  .divider svg { width: 360px; height: auto; display: block; }
+  .divider svg path, .divider svg polyline { fill: var(--accent); stroke: var(--accent); }
+
+  /* ---------- MAIN AXIS ---------- */
+  main {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  .section-title {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.34em;
+    font-size: 13px;
+    color: var(--primary);
+    margin: 14px 0 28px;
+  }
+
+  /* ---------- INFO CARDS ---------- */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+    margin-bottom: 24px;
+  }
+  .card {
+    position: relative;
+    padding: 64px 22px 32px;
+    background: var(--bg);
+    text-align: center;
+  }
+  .card .arch-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .card .arch-bg svg { width: 100%; height: 100%; }
+  .card .arch-bg svg path {
+    stroke: var(--primary);
+    fill: none;
+    stroke-width: 2.5;
+    transition: stroke 0.3s;
+  }
+  .card:hover .arch-bg svg path { stroke: var(--text-emphasis); }
+  .card .arch-bg::before {
+    content: "";
+    position: absolute;
+    top: 22px; left: 18px; right: 18px; bottom: 18px;
+    border: 1px solid var(--accent);
+    pointer-events: none;
+  }
+  .card h3 {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 13px;
+    color: var(--primary);
+    margin: 0 0 14px;
+  }
+  .card .price {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    color: var(--text-emphasis);
+    margin: 4px 0 2px;
+  }
+  .card p {
+    font-size: 14px;
+    margin: 6px 0 0;
+    color: var(--text);
+  }
+  .card .meta {
+    font-size: 12px;
+    color: var(--secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-family: var(--font-display), serif;
+    margin-top: 6px;
+  }
+
+  /* spandrel girih */
+  .spandrel {
+    position: absolute;
+    width: 22px; height: 22px;
+    color: var(--secondary);
+    opacity: 0.85;
+  }
+  .spandrel svg { width: 100%; height: 100%; }
+  .sp-tl { top: 26px; left: 22px; }
+  .sp-tr { top: 26px; right: 22px; transform: scaleX(-1); }
+
+  /* ---------- TIMETABLE ---------- */
+  .timetable-wrap {
+    margin: 24px auto 0;
+    max-width: 820px;
+    border: 1px solid var(--primary);
+    padding: 0;
+    background: var(--bg);
+    position: relative;
+  }
+  .timetable-wrap::before, .timetable-wrap::after {
+    content: "";
+    position: absolute;
+    left: 6px; right: 6px;
+    height: 1px;
+    background: var(--accent);
+  }
+  .timetable-wrap::before { top: 6px; }
+  .timetable-wrap::after { bottom: 6px; }
+
+  table.hours {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+  }
+  table.hours caption {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.32em;
+    font-size: 12px;
+    color: var(--accent);
+    padding: 22px 0 8px;
+  }
+  table.hours th, table.hours td {
+    padding: 11px 28px;
+    border-bottom: 1px solid rgba(30, 58, 95, 0.18);
+    text-align: left;
+  }
+  table.hours tr:last-child th, table.hours tr:last-child td { border-bottom: none; }
+  table.hours th {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 12px;
+    color: var(--primary);
+    width: 38%;
+  }
+  table.hours td { color: var(--text); }
+  table.hours td.closed { color: var(--text-emphasis); font-style: italic; }
+
+  /* ---------- TWO COLUMN ROW ---------- */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    margin-top: 16px;
+    align-items: start;
+  }
+  .panel h2 {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    font-size: 14px;
+    color: var(--primary);
+    margin: 0 0 4px;
+    text-align: center;
+  }
+  .panel h2 .filet {
+    display: block;
+    width: 60px;
+    height: 1px;
+    background: var(--accent);
+    margin: 12px auto 16px;
+  }
+  .panel p {
+    font-size: 15px;
+    margin: 0 0 12px;
+  }
+  .panel .lang-list {
+    list-style: none;
+    padding: 0;
+    margin: 14px 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .panel .lang-list li {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dotted rgba(30, 58, 95, 0.3);
+    padding-bottom: 8px;
+    font-size: 14px;
+  }
+  .panel .lang-list .lang {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--primary);
+    font-size: 12px;
+  }
+  .panel .lang-list .time { color: var(--text-emphasis); font-style: italic; }
+
+  /* ---------- ADDRESS BLOCK with seal ---------- */
+  .address-block {
+    text-align: center;
+    margin: 8px auto 0;
+    max-width: 760px;
+    padding: 32px 40px;
+    position: relative;
+  }
+  .address-block .seal {
+    width: 86px; height: 86px;
+    margin: 0 auto 14px;
+  }
+  .address-block .seal svg { width: 100%; height: 100%; }
+  .address-block .where {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    color: var(--primary);
+    letter-spacing: 0.04em;
+    margin: 0 0 6px;
+  }
+  .address-block .street {
+    font-size: 15px;
+    color: var(--text);
+    margin: 0 0 4px;
+  }
+  .address-block .meta-line {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    font-size: 11px;
+    color: var(--secondary);
+    margin-top: 14px;
+  }
+
+  /* ---------- TEAROOM PANEL ---------- */
+  .tearoom {
+    margin: 24px auto 0;
+    max-width: 880px;
+    text-align: center;
+    background: var(--bg);
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+    padding: 30px 56px;
+    position: relative;
+  }
+  .tearoom h2 {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.34em;
+    font-size: 13px;
+    color: var(--primary);
+    margin: 0 0 10px;
+  }
+  .tearoom .tagline {
+    font-style: italic;
+    color: var(--text-emphasis);
+    font-size: 17px;
+    margin: 0 0 12px;
+  }
+  .tearoom p {
+    font-size: 15px;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    margin-top: 64px;
+    background: var(--primary);
+    color: var(--bg);
+    position: relative;
+    overflow: hidden;
+  }
+  footer .pattern {
+    position: absolute; inset: 0;
+    opacity: 0.07;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'><g fill='none' stroke='%23f2e5cc' stroke-width='1.2'><polygon points='60,10 80,30 80,60 60,80 40,60 40,30'/><polygon points='60,40 70,50 70,70 60,80 50,70 50,50'/><line x1='0' y1='60' x2='120' y2='60'/><line x1='60' y1='0' x2='60' y2='120'/></g></svg>");
+    background-size: 220px 220px;
+  }
+  footer .inner {
+    position: relative;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 56px 40px 28px;
+    text-align: center;
+  }
+  footer .cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 36px;
+  }
+  footer h4 {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    font-size: 12px;
+    color: var(--accent);
+    margin: 0 0 14px;
+  }
+  footer p, footer address {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--bg);
+    font-style: normal;
+    margin: 0;
+  }
+  footer .star {
+    width: 84px;
+    height: 84px;
+    margin: 0 auto 6px;
+    color: var(--accent);
+  }
+  footer .star svg { width: 100%; height: 100%; }
+  footer .tailpiece {
+    font-family: var(--font-display), serif;
+    color: var(--accent);
+    letter-spacing: 0.5em;
+    font-size: 14px;
+    text-align: center;
+    padding-top: 8px;
+  }
+  footer .rule {
+    height: 1px;
+    background: var(--accent);
+    margin: 14px auto 18px;
+    width: 380px;
+  }
+  footer .copy {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    font-size: 11px;
+    color: var(--bg);
+    opacity: 0.85;
+  }
+</style>
+</head>
+<body>
+
+<div class="top-strip">
+  Dār al-Naqsh <span class="ar">دار النقش</span> Museum of Safavid Ornament
+</div>
+
+<nav class="primary" aria-label="Primary">
+  <ul>
+    <li><a href="page-1.html">Home</a></li>
+    <li class="palmette" aria-hidden="true">❖</li>
+    <li><a href="page-2.html">Collection</a></li>
+    <li class="palmette" aria-hidden="true">❖</li>
+    <li><a href="page-3.html">Exhibition</a></li>
+    <li class="palmette" aria-hidden="true">❖</li>
+    <li><a href="page-4.html">Kitābkhāna</a></li>
+    <li class="palmette" aria-hidden="true">❖</li>
+    <li><a href="page-5.html" aria-current="page">Visit</a></li>
+    <li class="palmette" aria-hidden="true">❖</li>
+    <li><a href="page-6.html">About</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="eyebrow">Plan Your Visit</div>
+  <h1>Hours, Galleries,<br><span class="accent">and the Maydān</span></h1>
+  <p class="sub">A scholarly threshold onto Safavid Isfahan: ticketing, access, tours, and the courtyard tea-room — gathered beneath one ogee arch.</p>
+
+  <div class="arch-frame" aria-hidden="true">
+    <svg class="arch" viewBox="140 240 510 560" preserveAspectRatio="xMidYMid meet">
+      <g transform="translate(8.199085,-11.874106)">
+        <g style="stroke:#1e3a5f;stroke-width:3.5;fill:none;stroke-linecap:round;">
+          <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+          <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+        </g>
+        <g transform="matrix(-1,0,0,1,777.88071,-0.2972181)" style="stroke:#1e3a5f;stroke-width:3.5;fill:none;stroke-linecap:round;">
+          <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+          <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+        </g>
+      </g>
+    </svg>
+    <div class="inner">
+      <div class="label">Open</div>
+      <p class="hours-big">Tuesday — Sunday<br>9:00 — 17:30</p>
+      <div class="closed">Closed Mondays · Nowruz Week</div>
+    </div>
+  </div>
+
+  <div class="divider" aria-hidden="true">
+    <svg viewBox="0 0 437.999 18.893" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,9.445c0,0,37.005-0.063,73.998-0.829c18.495-0.386,36.989-0.949,50.831-1.785c6.919-0.414,12.677-0.906,16.663-1.46c1.99-0.28,3.539-0.582,4.535-0.878c0.502-0.146,0.844-0.297,1.049-0.405c0.157-0.107,0.238-0.162,0.238-0.162l0.42-0.287l0.656,0.656l-0.369,0.338c0,0-0.154,0.142-0.456,0.324c-0.291,0.154-0.714,0.331-1.256,0.484c-1.085,0.314-2.667,0.608-4.686,0.879c-4.037,0.533-9.811,0.985-16.745,1.354c-13.868,0.744-32.369,1.183-50.87,1.443C37.003,9.632,0,9.445,0,9.445z"/>
+      <path d="M437.999,9.445c0,0-37.004,0.187-74.007-0.329c-18.501-0.261-37.002-0.699-50.869-1.443c-6.935-0.368-12.708-0.82-16.745-1.354c-2.019-0.271-3.601-0.565-4.687-0.879c-0.541-0.153-0.965-0.33-1.256-0.484c-0.302-0.183-0.456-0.324-0.456-0.324l-0.369-0.338l0.656-0.656l0.42,0.287c0,0,0.081,0.055,0.238,0.162c0.204,0.108,0.546,0.26,1.048,0.405c0.996,0.296,2.545,0.598,4.535,0.878c3.986,0.554,9.744,1.046,16.663,1.46C327.011,7.667,345.506,8.23,364,8.616C400.994,9.382,437.999,9.445,437.999,9.445z"/>
+      <circle cx="219" cy="9.445" r="5" fill="currentColor"/>
+      <circle cx="169" cy="9.445" r="2.5" fill="currentColor"/>
+      <circle cx="269" cy="9.445" r="2.5" fill="currentColor"/>
+    </svg>
+  </div>
+</section>
+
+<main>
+
+  <h2 class="section-title">Ticketing &amp; Admission</h2>
+
+  <section class="cards" aria-label="Admission cards">
+
+    <article class="card">
+      <div class="arch-bg" aria-hidden="true">
+        <svg viewBox="0 0 200 260" preserveAspectRatio="none">
+          <path d="M 6 254 L 6 90 Q 6 60 30 40 Q 60 14 100 6 Q 140 14 170 40 Q 194 60 194 90 L 194 254 Z"/>
+        </svg>
+      </div>
+      <span class="spandrel sp-tl" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z" fill="currentColor"/></svg></span>
+      <span class="spandrel sp-tr" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z" fill="currentColor"/></svg></span>
+      <h3>General</h3>
+      <div class="price">200,000 IRR</div>
+      <p>All permanent galleries and the current exhibition <em>The Inner Dome</em>.</p>
+      <div class="meta">Adult · Single Visit</div>
+    </article>
+
+    <article class="card">
+      <div class="arch-bg" aria-hidden="true">
+        <svg viewBox="0 0 200 260" preserveAspectRatio="none">
+          <path d="M 6 254 L 6 90 Q 6 60 30 40 Q 60 14 100 6 Q 140 14 170 40 Q 194 60 194 90 L 194 254 Z"/>
+        </svg>
+      </div>
+      <span class="spandrel sp-tl" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z" fill="currentColor"/></svg></span>
+      <span class="spandrel sp-tr" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z" fill="currentColor"/></svg></span>
+      <h3>Students</h3>
+      <div class="price">80,000 IRR</div>
+      <p>With valid card from any university or madrasa, Iranian or foreign.</p>
+      <div class="meta">ID Required</div>
+    </article>
+
+    <article class="card">
+      <div class="arch-bg" aria-hidden="true">
+        <svg viewBox="0 0 200 260" preserveAspectRatio="none">
+          <path d="M 6 254 L 6 90 Q 6 60 30 40 Q 60 14 100 6 Q 140 14 170 40 Q 194 60 194 90 L 194 254 Z"/>
+        </svg>
+      </div>
+      <span class="spandrel sp-tl" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z" fill="currentColor"/></svg></span>
+      <span class="spandrel sp-tr" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z" fill="currentColor"/></svg></span>
+      <h3>Children &amp; Elders</h3>
+      <div class="price">Free</div>
+      <p>Children under twelve and visitors over seventy enter without charge.</p>
+      <div class="meta">No Reservation</div>
+    </article>
+
+    <article class="card">
+      <div class="arch-bg" aria-hidden="true">
+        <svg viewBox="0 0 200 260" preserveAspectRatio="none">
+          <path d="M 6 254 L 6 90 Q 6 60 30 40 Q 60 14 100 6 Q 140 14 170 40 Q 194 60 194 90 L 194 254 Z"/>
+        </svg>
+      </div>
+      <span class="spandrel sp-tl" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z" fill="currentColor"/></svg></span>
+      <span class="spandrel sp-tr" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z" fill="currentColor"/></svg></span>
+      <h3>Annual Pass</h3>
+      <div class="price">1,200,000 IRR</div>
+      <p>Unlimited entry, two guest tickets, and quarterly Kitābkhāna evenings.</p>
+      <div class="meta">Patron Tier</div>
+    </article>
+
+  </section>
+
+  <section style="margin-top:48px;">
+    <h2 class="section-title">Opening Times</h2>
+    <div class="timetable-wrap">
+      <table class="hours">
+        <caption>Galleries · Permanent &amp; Temporary</caption>
+        <tbody>
+          <tr><th>Saturday</th><td>9:00 — 17:30</td></tr>
+          <tr><th>Sunday</th><td>9:00 — 17:30</td></tr>
+          <tr><th>Monday</th><td class="closed">Closed for conservation</td></tr>
+          <tr><th>Tuesday</th><td>9:00 — 17:30</td></tr>
+          <tr><th>Wednesday</th><td>9:00 — 17:30 · late hours until 20:00 in Tīr &amp; Mordād</td></tr>
+          <tr><th>Thursday</th><td>9:00 — 17:30</td></tr>
+          <tr><th>Friday</th><td>10:30 — 17:30</td></tr>
+          <tr><th>Nowruz Week</th><td class="closed">Closed 1 — 7 Farvardīn for the New Year holidays</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section style="margin-top:56px;">
+    <div class="two-col">
+
+      <div class="panel">
+        <h2>Accessibility<span class="filet"></span></h2>
+        <p>Step-free access to every public gallery is provided by a discreet ramp through the <em>north iwan</em>, opening directly into the central courtyard. Wheelchairs are available without charge at the porter's lodge; large-print exhibition labels and a tactile tile-fragment cabinet stand beside Gallery III.</p>
+        <p>Companions of disabled visitors enter without charge. Service animals are welcome throughout, save for the Kitābkhāna manuscript room where humidity is regulated.</p>
+        <p>A quiet sanctuary, lined with cobalt felt, sits behind the muqarnas vestibule for visitors who require rest from the dense ornament of the main halls.</p>
+      </div>
+
+      <div class="panel">
+        <h2>Guided Tours<span class="filet"></span></h2>
+        <p>Docents — drawn from the curatorial staff and senior students of the Isfahan University faculty of restoration — lead small groups of no more than twelve through the permanent collection. Tours convene at the gold star inlaid in the courtyard pavement.</p>
+        <ul class="lang-list">
+          <li><span class="lang">Persian (Fārsī)</span><span class="time">Tue – Sun · 10:00, 14:00</span></li>
+          <li><span class="lang">English</span><span class="time">Wed, Fri, Sun · 11:30</span></li>
+          <li><span class="lang">Français</span><span class="time">Thursday · 15:00</span></li>
+          <li><span class="lang">Private Scholar Tour</span><span class="time">By appointment</span></li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <section style="margin-top:56px;">
+    <h2 class="section-title">Finding the Museum</h2>
+    <div class="address-block">
+      <div class="seal" aria-hidden="true">
+        <svg viewBox="0 0 1500 1500" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(750 750)">
+            <g fill="none" stroke="#c9a23a" stroke-width="22">
+              <polygon points="0,-380 268,-268 380,0 268,268 0,380 -268,268 -380,0 -268,-268"/>
+              <polygon points="0,-380 0,380 380,0 -380,0" transform="rotate(22.5)"/>
+              <polygon points="0,-380 0,380 380,0 -380,0"/>
+            </g>
+            <g fill="#1e3a5f">
+              <polygon points="0,-180 50,-50 180,0 50,50 0,180 -50,50 -180,0 -50,-50"/>
+            </g>
+            <g fill="none" stroke="#7a1f2e" stroke-width="14">
+              <circle r="120"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <p class="where">Dār al-Naqsh</p>
+      <p class="street">14 Khiyābān-e Ostāndārī, off Maydān-e Naqsh-e Jahān</p>
+      <p class="street">Isfahan, Islamic Republic of Iran</p>
+      <p class="meta-line">Five minutes on foot from the ʿAlī Qāpū gate</p>
+    </div>
+  </section>
+
+  <section class="tearoom" aria-label="Tea-room">
+    <h2>The Courtyard Tea-Room</h2>
+    <p class="tagline">Rosewater sharbat beneath the plane tree</p>
+    <p>Set in the south-eastern corner of the museum's <em>chahār-bāgh</em> courtyard, the tea-room serves chilled rosewater <em>sharbat</em>, saffron-perfumed tea, and almond <em>nān-e nokhodchī</em> from late morning until closing. Seating extends onto the tiled <em>hawz</em> terrace whenever the Isfahan weather obliges; in winter the room retreats indoors beneath a small painted dome.</p>
+  </section>
+
+</main>
+
+<footer>
+  <div class="pattern" aria-hidden="true"></div>
+  <div class="inner">
+    <div class="cols">
+      <div>
+        <h4>Hours</h4>
+        <p>
+          Tuesday — Sunday<br>
+          9:00 — 17:30<br>
+          Friday opens 10:30<br>
+          <em>Closed Mondays &amp; Nowruz week</em>
+        </p>
+      </div>
+      <div>
+        <div class="star" aria-hidden="true">
+          <svg viewBox="0 0 100 100">
+            <g fill="none" stroke="currentColor" stroke-width="1.6">
+              <polygon points="50,6 62,30 88,32 70,52 76,80 50,66 24,80 30,52 12,32 38,30"/>
+              <polygon points="50,20 58,36 74,38 62,52 66,70 50,60 34,70 38,52 26,38 42,36"/>
+              <circle cx="50" cy="50" r="6"/>
+            </g>
+          </svg>
+        </div>
+        <h4>Seal of the Museum</h4>
+        <p style="font-style:italic;">Dār al-Naqsh · بُنیاد ۱۴۰۲</p>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <address>
+          14 Khiyābān-e Ostāndārī<br>
+          Maydān-e Naqsh-e Jahān<br>
+          Isfahan, Iran<br>
+          +98 (31) 3220 4417<br>
+          visit@daralnaqsh.ir
+        </address>
+      </div>
+    </div>
+    <div class="tailpiece">❖ ❖ ❖</div>
+    <div class="rule"></div>
+    <div class="copy">© 1402 A.H.Sh · Dār al-Naqsh · All rights reserved</div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Of Commissions and Their Manner — Atelier of Gautier de Soissons</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Garamond, serif;
+    margin: 0;
+    line-height: 1.55;
+  }
+
+  /* ============ NAVIGATION ARCADE ============ */
+  .nav-arcade {
+    padding: 1.6em 2em 0.4em;
+    background: var(--bg);
+  }
+  .nav-arcade ul {
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 0.6em;
+    max-width: 64em;
+  }
+  .nav-arcade li {
+    flex: 1 1 0;
+    max-width: 12em;
+  }
+  .nav-arch {
+    position: relative;
+    display: block;
+    height: 5.4em;
+    text-decoration: none;
+    color: var(--text);
+    text-align: center;
+  }
+  .nav-arch svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .nav-arch .arch-shape {
+    fill: none;
+    stroke: var(--ornament);
+    stroke-width: 2;
+  }
+  .nav-arch[aria-current="page"] .arch-shape {
+    fill: var(--primary);
+    stroke: var(--primary);
+  }
+  .nav-arch span {
+    position: absolute;
+    bottom: 0.7em;
+    left: 0;
+    right: 0;
+    font-variant: small-caps;
+    letter-spacing: 0.12em;
+    font-size: 0.78rem;
+    color: var(--text);
+  }
+  .nav-arch[aria-current="page"] span {
+    color: var(--bg);
+  }
+  .gold-rule {
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--accent) 12%, var(--accent) 88%, transparent);
+    margin: 0.4em auto 0;
+    max-width: 72em;
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 28em 1fr;
+    align-items: stretch;
+    padding: 3.2em 2em 1em;
+    gap: 0;
+  }
+  .hero-frame {
+    grid-column: 2;
+    position: relative;
+    padding: 2.6em 2.4em 2em;
+    text-align: center;
+    min-height: 22em;
+  }
+  .hero-frame > svg.arch-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+  .hero-frame > * { position: relative; z-index: 1; }
+  .hero h1 {
+    font-family: var(--font-display), serif;
+    color: var(--text-emphasis);
+    font-size: 2.7rem;
+    line-height: 1.05;
+    margin: 1.4em 0 0.4em;
+    font-weight: 400;
+  }
+  .hero .eyebrow {
+    font-variant: small-caps;
+    letter-spacing: 0.22em;
+    color: var(--primary);
+    font-size: 0.82rem;
+    margin-top: 0.4em;
+  }
+  .hero p.lede {
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--text);
+    max-width: 22em;
+    margin: 1em auto 0;
+  }
+
+  /* ============ SECTIONS ============ */
+  main {
+    max-width: 64em;
+    margin: 0 auto;
+    padding: 1em 2em 3em;
+  }
+  .section-head {
+    text-align: center;
+    margin: 3em 0 1.2em;
+  }
+  .section-head h2 {
+    font-family: var(--font-display), serif;
+    color: var(--text-emphasis);
+    font-size: 2rem;
+    font-weight: 400;
+    margin: 0;
+  }
+  .section-head .roman {
+    font-variant: small-caps;
+    letter-spacing: 0.2em;
+    color: var(--primary);
+    font-size: 0.78rem;
+    display: block;
+    margin-bottom: 0.4em;
+  }
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1em 0 2em;
+    gap: 1em;
+  }
+  .divider .line {
+    flex: 1;
+    height: 1px;
+    background: var(--accent);
+    max-width: 14em;
+  }
+  .divider svg {
+    width: 2.4em;
+    height: 2.4em;
+  }
+
+  /* ============ PROCESS COLUMNS (cards) ============ */
+  .process {
+    display: grid;
+    grid-template-columns: 18em 18em;
+    gap: 2.4em;
+    justify-content: center;
+    margin-top: 1em;
+  }
+  .arch-card {
+    position: relative;
+    padding: 3.4em 1.8em 2em;
+    min-height: 26em;
+  }
+  .arch-card > svg.card-arch {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+  .arch-card > * { position: relative; z-index: 1; }
+  .arch-card .step-no {
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+    font-size: 1.1rem;
+    text-align: center;
+    letter-spacing: 0.1em;
+  }
+  .arch-card h3 {
+    font-family: var(--font-display), serif;
+    color: var(--text-emphasis);
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 0.2em 0 0.4em;
+    font-weight: 400;
+    line-height: 1.15;
+  }
+  .arch-card .gold-line {
+    width: 60%;
+    margin: 0.6em auto 1em;
+    height: 1px;
+    background: var(--accent);
+  }
+  .arch-card p {
+    font-size: 0.95rem;
+    margin: 0;
+  }
+  .arch-card p::first-letter {
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+    font-size: 2.6em;
+    float: left;
+    line-height: 0.85;
+    padding: 0.08em 0.12em 0 0;
+  }
+
+  /* ============ PRICES TABLE ============ */
+  .prices {
+    margin: 1em auto;
+    max-width: 44em;
+    background: var(--bg);
+    position: relative;
+    padding: 2em 2.4em;
+    border-top: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+  }
+  .prices::before, .prices::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    height: 1px;
+    background: var(--accent);
+  }
+  .prices::before { top: 4px; }
+  .prices::after { bottom: 4px; }
+  .prices table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .prices caption {
+    font-family: var(--font-display), serif;
+    color: var(--text-emphasis);
+    font-size: 1.4rem;
+    margin-bottom: 0.6em;
+    text-align: center;
+  }
+  .prices th, .prices td {
+    text-align: left;
+    padding: 0.6em 0.4em;
+    vertical-align: top;
+    border-bottom: 1px dotted var(--surface);
+  }
+  .prices th {
+    font-variant: small-caps;
+    letter-spacing: 0.12em;
+    color: var(--primary);
+    font-weight: 400;
+    font-size: 0.82rem;
+    border-bottom: 1px solid var(--accent);
+  }
+  .prices td.price {
+    text-align: right;
+    font-family: var(--font-display), serif;
+    color: var(--text-emphasis);
+    font-size: 1.1rem;
+    white-space: nowrap;
+  }
+  .prices td .item-name {
+    display: block;
+    font-style: italic;
+    color: var(--text);
+  }
+  .prices td .item-detail {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text);
+    margin-top: 0.2em;
+  }
+
+  /* ============ TITHE / ASIDE ============ */
+  .tithe {
+    display: grid;
+    grid-template-columns: 6em 1fr;
+    gap: 1.6em;
+    align-items: center;
+    max-width: 44em;
+    margin: 2.4em auto 0;
+    padding: 1.4em 1.6em;
+    background: var(--bg);
+    border-left: 3px solid var(--secondary);
+    border-right: 3px solid var(--secondary);
+  }
+  .tithe svg { width: 100%; height: auto; }
+  .tithe p {
+    margin: 0;
+    font-style: italic;
+    font-size: 0.98rem;
+  }
+  .tithe p strong {
+    font-style: normal;
+    font-family: var(--font-display), serif;
+    color: var(--text-emphasis);
+    font-weight: 400;
+    display: block;
+    font-size: 1.2rem;
+    margin-bottom: 0.3em;
+  }
+
+  /* ============ CALENDAR / FEAST DAYS ============ */
+  .feasts {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.4em;
+    max-width: 56em;
+    margin: 2em auto 0;
+  }
+  .feast {
+    text-align: center;
+    padding: 1.4em 1em;
+    border: 1px solid var(--ornament);
+    background: var(--bg);
+    position: relative;
+  }
+  .feast::before {
+    content: "";
+    position: absolute;
+    top: 4px; left: 4px; right: 4px; bottom: 4px;
+    border: 1px solid var(--accent);
+    pointer-events: none;
+  }
+  .feast .date {
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+    font-size: 1.3rem;
+    display: block;
+  }
+  .feast .name {
+    font-style: italic;
+    color: var(--text-emphasis);
+    display: block;
+    margin: 0.3em 0;
+  }
+  .feast .note {
+    font-size: 0.82rem;
+    color: var(--text);
+  }
+
+  /* ============ CLOSING SEAL ============ */
+  .seal-block {
+    text-align: center;
+    margin: 4em auto 1em;
+  }
+  .seal-block svg {
+    width: 6em;
+    height: 6em;
+    fill: var(--secondary);
+  }
+  .seal-block p {
+    font-style: italic;
+    max-width: 30em;
+    margin: 1em auto 0;
+    color: var(--text);
+  }
+  .seal-block .signed {
+    font-family: var(--font-display), serif;
+    color: var(--text-emphasis);
+    font-size: 1.4rem;
+    margin-top: 0.6em;
+    display: block;
+  }
+
+  /* ============ FOOTER ============ */
+  footer.site-foot {
+    margin-top: 4em;
+    padding: 2em 2em 2.4em;
+    background: var(--bg);
+    border-top: 1px solid var(--accent);
+  }
+  .blind-arcade {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    max-width: 56em;
+    margin: 0 auto 1.4em;
+  }
+  .blind-arcade .arch {
+    width: 7em;
+    height: 6em;
+    position: relative;
+  }
+  .blind-arcade .arch svg.outline {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .blind-arcade .arch .ornament-mark {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ornament);
+    font-size: 1.6rem;
+  }
+  .colophon {
+    text-align: center;
+    color: var(--text);
+  }
+  .colophon .name {
+    font-family: var(--font-display), serif;
+    font-size: 1.6rem;
+    color: var(--text-emphasis);
+    display: block;
+  }
+  .colophon .addr {
+    font-style: italic;
+    margin: 0.3em 0;
+    font-size: 0.95rem;
+  }
+  .colophon .year {
+    font-variant: small-caps;
+    letter-spacing: 0.2em;
+    color: var(--primary);
+    font-size: 0.85rem;
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== NAVIGATION ===================== -->
+<nav class="nav-arcade" aria-label="Primary">
+  <ul>
+    <li><a class="nav-arch" href="page-1.html">
+      <svg viewBox="0 0 100 90" preserveAspectRatio="none"><path class="arch-shape" d="M 4 86 L 4 40 Q 4 4 50 4 Q 96 4 96 40 L 96 86 Z"/></svg>
+      <span>Atelier</span>
+    </a></li>
+    <li><a class="nav-arch" href="page-2.html">
+      <svg viewBox="0 0 100 90" preserveAspectRatio="none"><path class="arch-shape" d="M 4 86 L 4 40 Q 4 4 50 4 Q 96 4 96 40 L 96 86 Z"/></svg>
+      <span>Glass</span>
+    </a></li>
+    <li><a class="nav-arch" href="page-3.html">
+      <svg viewBox="0 0 100 90" preserveAspectRatio="none"><path class="arch-shape" d="M 4 86 L 4 40 Q 4 4 50 4 Q 96 4 96 40 L 96 86 Z"/></svg>
+      <span>Books</span>
+    </a></li>
+    <li><a class="nav-arch" href="page-4.html">
+      <svg viewBox="0 0 100 90" preserveAspectRatio="none"><path class="arch-shape" d="M 4 86 L 4 40 Q 4 4 50 4 Q 96 4 96 40 L 96 86 Z"/></svg>
+      <span>Workshop</span>
+    </a></li>
+    <li><a class="nav-arch" href="page-5.html" aria-current="page">
+      <svg viewBox="0 0 100 90" preserveAspectRatio="none"><path class="arch-shape" d="M 4 86 L 4 40 Q 4 4 50 4 Q 96 4 96 40 L 96 86 Z"/></svg>
+      <span>Commissions</span>
+    </a></li>
+    <li><a class="nav-arch" href="page-6.html">
+      <svg viewBox="0 0 100 90" preserveAspectRatio="none"><path class="arch-shape" d="M 4 86 L 4 40 Q 4 4 50 4 Q 96 4 96 40 L 96 86 Z"/></svg>
+      <span>To Visit</span>
+    </a></li>
+  </ul>
+  <div class="gold-rule"></div>
+</nav>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+  <div class="hero-frame">
+    <svg class="arch-bg" viewBox="147 244 502 552" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <g transform="translate(8.199085,-11.874106)">
+        <g style="stroke:#1e3a5f;stroke-width:3.125;fill:none;stroke-linecap:round">
+          <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+          <path d="m 250,430.58 24.75248,58.41585"/>
+          <path d="m 347.0297,342.46119 41.58416,23.76238 0.9901,35.64356"/>
+          <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+        </g>
+        <g transform="matrix(-1,0,0,1,777.88071,-0.2972181)" style="stroke:#1e3a5f;stroke-width:3.125;fill:none;stroke-linecap:round">
+          <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+          <path d="m 250,430.58 24.75248,58.41585"/>
+          <path d="m 347.0297,342.46119 41.58416,23.76238 0.9901,35.64356"/>
+          <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+        </g>
+      </g>
+    </svg>
+    <p class="eyebrow">Of the Manner of Commissions</p>
+    <h1>Of Commissions<br>&amp; Their Manner</h1>
+    <p class="lede">Wherein the prospective patron is shown the order &amp; observance by which a work in glass or vellum is brought from first speech to feast-day delivery, with prices set down in livres tournois according to the custom of Soissons.</p>
+  </div>
+</section>
+
+<main>
+
+<!-- ===================== PROCESS ===================== -->
+<div class="section-head">
+  <span class="roman">I · The Five Stages</span>
+  <h2>The Order of a Work</h2>
+</div>
+
+<div class="divider">
+  <span class="line"></span>
+  <svg viewBox="110 124 40 40" aria-hidden="true"><g transform="translate(-110.42237,-124.36839)"><path fill="#0a0a0a" d="m 114.66203,164.08918 c -0.0328,-0.0327 -0.68829,-0.0817 -1.45676,-0.10894 -1.80675,-0.064 -2.36901,-0.53702 -2.63,-2.21282 -0.11332,-0.7276 -0.17799,-6.08542 -0.14371,-11.90625 0.0343,-5.82083 0.0746,-12.75622 0.0897,-15.41198 0.0222,-3.92567 0.0959,-4.82864 0.394,-4.82864 0.20166,0 0.41336,0.14014 0.47046,0.31142 0.1689,0.50671 0.73404,-0.0257 0.73404,-0.69152 z"/></g></svg>
+  <span class="line"></span>
+</div>
+
+<div class="process">
+
+  <article class="arch-card">
+    <svg class="card-arch" viewBox="0 0 200 360" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M 6 354 L 6 90 Q 6 6 100 6 Q 194 6 194 90 L 194 354 Z" fill="none" stroke="#0a0a0a" stroke-width="1.6"/>
+      <g transform="translate(100,46)">
+        <circle r="22" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+        <path d="M 0 -22 Q 11 -11 0 0 Q -11 -11 0 -22 Z M 22 0 Q 11 11 0 0 Q 11 -11 22 0 Z M 0 22 Q -11 11 0 0 Q 11 11 0 22 Z M -22 0 Q -11 -11 0 0 Q -11 11 -22 0 Z" fill="#1e3a5f"/>
+      </g>
+      <line x1="20" y1="84" x2="180" y2="84" stroke="#c9a23a" stroke-width="0.8"/>
+    </svg>
+    <p class="step-no">· i ·</p>
+    <h3>The First Interview</h3>
+    <div class="gold-line"></div>
+    <p>The patron is received in the long chamber above the workshop on the rue des Verriers, by appointment sent through the parish clerk of Saint-Gervais. There the maker hears what is wanted — saint, scene, blazon, or text — what wall or chapel shall receive it, and at what light it shall be seen. No pledge is taken at this hour; only earnest counsel given, and a fee of two sous tournois for the parchment of notes.</p>
+  </article>
+
+  <article class="arch-card">
+    <svg class="card-arch" viewBox="0 0 200 360" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M 6 354 L 6 90 Q 6 6 100 6 Q 194 6 194 90 L 194 354 Z" fill="none" stroke="#0a0a0a" stroke-width="1.6"/>
+      <g transform="translate(100,46)">
+        <circle r="22" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+        <path d="M 0 -22 Q 11 -11 0 0 Q -11 -11 0 -22 Z M 22 0 Q 11 11 0 0 Q 11 -11 22 0 Z M 0 22 Q -11 11 0 0 Q 11 11 0 22 Z M -22 0 Q -11 -11 0 0 Q -11 11 -22 0 Z" fill="#1e3a5f"/>
+      </g>
+      <line x1="20" y1="84" x2="180" y2="84" stroke="#c9a23a" stroke-width="0.8"/>
+    </svg>
+    <p class="step-no">· ii ·</p>
+    <h3>The Drawing of the Cartoon</h3>
+    <div class="gold-line"></div>
+    <p>Within forty days the cartoon is laid out at full scale upon whitewashed boards in the north studio, that the patron may walk before it as he should before the finished work. The figures are charcoaled, then inked in lampblack; the leadlines numbered; the colours noted in Picard hand at the margin. Master Gautier or Brother Aubert of the scriptorium attends to answer questions of likeness and heraldry.</p>
+  </article>
+
+  <article class="arch-card">
+    <svg class="card-arch" viewBox="0 0 200 360" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M 6 354 L 6 90 Q 6 6 100 6 Q 194 6 194 90 L 194 354 Z" fill="none" stroke="#0a0a0a" stroke-width="1.6"/>
+      <g transform="translate(100,46)">
+        <circle r="22" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+        <path d="M 0 -22 Q 11 -11 0 0 Q -11 -11 0 -22 Z M 22 0 Q 11 11 0 0 Q 11 -11 22 0 Z M 0 22 Q -11 11 0 0 Q 11 11 0 22 Z M -22 0 Q -11 -11 0 0 Q -11 11 -22 0 Z" fill="#1e3a5f"/>
+      </g>
+      <line x1="20" y1="84" x2="180" y2="84" stroke="#c9a23a" stroke-width="0.8"/>
+    </svg>
+    <p class="step-no">· iii ·</p>
+    <h3>The Patron's Approval</h3>
+    <div class="gold-line"></div>
+    <p>Approval is given in writing, sealed at the foot of the cartoon-board itself, with a deposit of one third the agreed price. From this hour no figure may be added nor saint exchanged save by a new accord and a second seal. Should the patron repent his choice, the deposit holds the boards in the workshop for one twelvemonth; thereafter they are washed and the timber put to other use.</p>
+  </article>
+
+  <article class="arch-card">
+    <svg class="card-arch" viewBox="0 0 200 360" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M 6 354 L 6 90 Q 6 6 100 6 Q 194 6 194 90 L 194 354 Z" fill="none" stroke="#0a0a0a" stroke-width="1.6"/>
+      <g transform="translate(100,46)">
+        <circle r="22" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+        <path d="M 0 -22 Q 11 -11 0 0 Q -11 -11 0 -22 Z M 22 0 Q 11 11 0 0 Q 11 -11 22 0 Z M 0 22 Q -11 11 0 0 Q 11 11 0 22 Z M -22 0 Q -11 -11 0 0 Q -11 11 -22 0 Z" fill="#1e3a5f"/>
+      </g>
+      <line x1="20" y1="84" x2="180" y2="84" stroke="#c9a23a" stroke-width="0.8"/>
+    </svg>
+    <p class="step-no">· iv ·</p>
+    <h3>The Cutting &amp; the Ruling</h3>
+    <div class="gold-line"></div>
+    <p>For glass: the pot-metal is brought from Pierre Lefèvre's furnace at Reims, scored to the cartoon with the hot iron, trimmed at the grozing-pliers, painted with the tracing-black, and fired thrice in the small kiln behind the yew-tree. For books: the calfskin is pumiced, ruled with the leadpoint at twenty-six lines to the page, and the quires gathered before any pigment is set down. A second third of the price falls due at this stage.</p>
+  </article>
+
+  <article class="arch-card" style="grid-column: 1 / -1; max-width: 38em; justify-self:center;">
+    <svg class="card-arch" viewBox="0 0 400 280" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M 6 274 L 6 70 Q 6 6 200 6 Q 394 6 394 70 L 394 274 Z" fill="none" stroke="#0a0a0a" stroke-width="1.6"/>
+      <g transform="translate(200,46)">
+        <circle r="22" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+        <path d="M 0 -22 Q 11 -11 0 0 Q -11 -11 0 -22 Z M 22 0 Q 11 11 0 0 Q 11 -11 22 0 Z M 0 22 Q -11 11 0 0 Q 11 11 0 22 Z M -22 0 Q -11 -11 0 0 Q -11 11 -22 0 Z" fill="#1e3a5f"/>
+      </g>
+      <line x1="40" y1="84" x2="360" y2="84" stroke="#c9a23a" stroke-width="0.8"/>
+    </svg>
+    <p class="step-no">· v ·</p>
+    <h3>Delivery upon the Feast Day Agreed</h3>
+    <div class="gold-line"></div>
+    <p>The work is delivered upon the feast day named in the first accord — most often the patronal feast of the chapel that shall house it — wrapped in linen for vellum, or crated in straw and oak between two boards for glass. The final third of the price is rendered upon delivery, in the presence of the parish priest or a notary of the bailliage. A small mass is sung at the workshop on the morning of departure, that the work may travel in good keeping.</p>
+  </article>
+
+</div>
+
+<!-- ===================== PRICES ===================== -->
+<div class="section-head">
+  <span class="roman">II · The Reckoning</span>
+  <h2>Indicative Prices, in Livres Tournois</h2>
+</div>
+
+<div class="divider">
+  <span class="line"></span>
+  <svg viewBox="0 0 200 200" aria-hidden="true"><path fill="#8b1538" transform="translate(0 -852.36)" d="m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187z"/></svg>
+  <span class="line"></span>
+</div>
+
+<section class="prices" aria-labelledby="price-caption">
+  <table>
+    <caption id="price-caption">Workshop Tariff, Anno Domini MCCXLIII</caption>
+    <thead>
+      <tr><th scope="col">Of Glass &amp; of Vellum</th><th scope="col" style="text-align:right">Price</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <span class="item-name">A single lancet of three figures</span>
+          <span class="item-detail">Saint, donor, and angel; or three standing apostles. Pot-metal, with painted faces and drapery. Height to four ells.</span>
+        </td>
+        <td class="price">xx ℔</td>
+      </tr>
+      <tr>
+        <td>
+          <span class="item-name">A lancet of five figures, with canopy</span>
+          <span class="item-detail">As above, with architectural canopy in cobalt and grisaille; suited to chapel windows of the new manner.</span>
+        </td>
+        <td class="price">xxxij ℔</td>
+      </tr>
+      <tr>
+        <td>
+          <span class="item-name">A small rose of eight petals</span>
+          <span class="item-detail">For a transept gable or cloister wall; central quatrefoil with eight surrounding lobes, each of one figure.</span>
+        </td>
+        <td class="price">lx ℔</td>
+      </tr>
+      <tr>
+        <td>
+          <span class="item-name">A Book of Hours, plain-bound</span>
+          <span class="item-detail">Calfskin over oak boards; calendar, hours of the Virgin, penitential psalms, office of the dead. Six historiated initials.</span>
+        </td>
+        <td class="price">xxxv ℔</td>
+      </tr>
+      <tr>
+        <td>
+          <span class="item-name">A Book of Hours, with full miniatures</span>
+          <span class="item-detail">Twelve full pages of miniature, gilt grounds, ivy-leaf borders to every page. Bound in tooled red leather.</span>
+        </td>
+        <td class="price">lxxxv ℔</td>
+      </tr>
+      <tr>
+        <td>
+          <span class="item-name">A Psalter for parish or convent use</span>
+          <span class="item-detail">Hundred and fifty psalms, eight historiated initials at the customary divisions; chant lines added at four sous the page.</span>
+        </td>
+        <td class="price">xlij ℔</td>
+      </tr>
+      <tr>
+        <td>
+          <span class="item-name">A Charter or Foundation Roll, illuminated</span>
+          <span class="item-detail">Vellum roll, opening initial of the patron's blazon, twin pendants of silk for the seals.</span>
+        </td>
+        <td class="price">vij ℔</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="text-align:center; font-style:italic; margin: 1em 0 0; font-size:0.88rem;">Prices are exclusive of carriage beyond the walls of Soissons; carriage to Reims, Laon, or Noyon at four sous the league.</p>
+</section>
+
+<!-- ===================== TITHE ===================== -->
+<aside class="tithe">
+  <svg viewBox="0 0 4000 4000" aria-hidden="true">
+    <path fill="#8b1538" d="M1778.9,3200A120.9263,120.9263 0 0,1 1657.97,3320.93A120.9263,120.9263 0 0,1 1537.04,3200A221.5096,221.5096 0 0,0 1456.32,3371.02A221.5096,221.5096 0 0,0 1677.83,3592.53A221.5096,221.5096 0 0,0 1818.61,3542.03A362.779,362.779 0 0,0 2000,3856.21A362.779,362.779 0 0,0 2181.39,3542.03A221.5096,221.5096 0 0,0 2322.17,3592.53A221.5096,221.5096 0 0,0 2543.68,3371.02A221.5096,221.5096 0 0,0 2462.96,3200A120.9263,120.9263 0 0,1 2342.03,3320.93A120.9263,120.9263 0 0,1 2221.1,3200V2221.1H3200A120.9263,120.9263 0 0,1 3320.93,2342.03A120.9263,120.9263 0 0,1 3200,2462.96A221.5096,221.5096 0 0,0 3371.02,2543.68A221.5096,221.5096 0 0,0 3592.53,2322.17A221.5096,221.5096 0 0,0 3542.03,2181.39A362.779,362.779 0 0,0 3856.21,2000A362.779,362.779 0 0,0 3542.03,1818.61A221.5096,221.5096 0 0,0 3592.53,1677.83A221.5096,221.5096 0 0,0 3371.02,1456.32A221.5096,221.5096 0 0,0 3200,1537.04A120.9263,120.9263 0 0,1 3320.93,1657.97A120.9263,120.9263 0 0,1 3200,1778.9H2221.1V800A120.9263,120.9263 0 0,1 2342.03,679.073A120.9263,120.9263 0 0,1 2462.96,800A221.5096,221.5096 0 0,0 2543.68,628.984A221.5096,221.5096 0 0,0 2322.17,407.475A221.5096,221.5096 0 0,0 2181.39,457.969A362.779,362.779 0 0,0 2000,143.793A362.779,362.779 0 0,0 1818.61,457.969A221.5096,221.5096 0 0,0 1677.83,407.475A221.5096,221.5096 0 0,0 1456.32,628.984A221.5096,221.5096 0 0,0 1537.04,800A120.9263,120.9263 0 0,1 1657.97,679.073A120.9263,120.9263 0 0,1 1778.9,800V1778.9H800A120.9263,120.9263 0 0,1 679.073,1657.97A120.9263,120.9263 0 0,1 800,1537.04A221.5096,221.5096 0 0,0 628.984,1456.32A221.5096,221.5096 0 0,0 407.475,1677.83A221.5096,221.5096 0 0,0 457.969,1818.61A362.779,362.779 0 0,0 143.793,2000A362.779,362.779 0 0,0 457.969,2181.39A221.5096,221.5096 0 0,0 407.475,2322.17A221.5096,221.5096 0 0,0 628.984,2543.68A221.5096,221.5096 0 0,0 800,2462.96A120.9263,120.9263 0 0,1 679.073,2342.03A120.9263,120.9263 0 0,1 800,2221.1H1778.9Z"/>
+  </svg>
+  <p>
+    <strong>Of the Customary Tithe</strong>
+    For any work destined to a church, chapel, abbey, or shrine, the workshop renders one tenth part of the agreed price to the parish of Saint-Gervais, where this house was founded and where the bones of Master Renaud, our predecessor, lie before the rood. So has it been kept since the year MCCXIX, and so shall it be kept whilst this atelier endures.
+  </p>
+</aside>
+
+<!-- ===================== FEAST DAYS ===================== -->
+<div class="section-head">
+  <span class="roman">III · Of Feast Days &amp; Delivery</span>
+  <h2>Days Customarily Chosen</h2>
+</div>
+
+<div class="feasts">
+  <div class="feast">
+    <span class="date">II Februarii</span>
+    <span class="name">The Purification</span>
+    <span class="note">For lady-chapel windows and Marian books; candles blessed at delivery.</span>
+  </div>
+  <div class="feast">
+    <span class="date">XXIV Junii</span>
+    <span class="name">Saint John Baptist</span>
+    <span class="note">For baptistery glass and font-side panels; the favoured day of the bishopric.</span>
+  </div>
+  <div class="feast">
+    <span class="date">XV Augusti</span>
+    <span class="name">The Assumption</span>
+    <span class="note">The high summer feast — books bound in red leather are most often delivered now.</span>
+  </div>
+  <div class="feast">
+    <span class="date">XXIX Septembris</span>
+    <span class="name">Michaelmas</span>
+    <span class="note">For accounts settled and rolls illuminated; the workshop's books also closed at this hour.</span>
+  </div>
+  <div class="feast">
+    <span class="date">I Novembris</span>
+    <span class="name">All Saints</span>
+    <span class="note">Apt for memorial windows and books of the dead; candles travel with the work.</span>
+  </div>
+  <div class="feast">
+    <span class="date">XXV Decembris</span>
+    <span class="name">The Nativity</span>
+    <span class="note">Reserved for great commissions; only one work in glass delivered each Christmastide.</span>
+  </div>
+</div>
+
+<!-- ===================== SEAL ===================== -->
+<div class="seal-block">
+  <svg viewBox="0 0 4000 4000" aria-hidden="true">
+    <path d="M1778.9,3200A120.9263,120.9263 0 0,1 1657.97,3320.93A120.9263,120.9263 0 0,1 1537.04,3200A221.5096,221.5096 0 0,0 1456.32,3371.02A221.5096,221.5096 0 0,0 1677.83,3592.53A221.5096,221.5096 0 0,0 1818.61,3542.03A362.779,362.779 0 0,0 2000,3856.21A362.779,362.779 0 0,0 2181.39,3542.03A221.5096,221.5096 0 0,0 2322.17,3592.53A221.5096,221.5096 0 0,0 2543.68,3371.02A221.5096,221.5096 0 0,0 2462.96,3200A120.9263,120.9263 0 0,1 2342.03,3320.93A120.9263,120.9263 0 0,1 2221.1,3200V2221.1H3200A120.9263,120.9263 0 0,1 3320.93,2342.03A120.9263,120.9263 0 0,1 3200,2462.96A221.5096,221.5096 0 0,0 3371.02,2543.68A221.5096,221.5096 0 0,0 3592.53,2322.17A221.5096,221.5096 0 0,0 3542.03,2181.39A362.779,362.779 0 0,0 3856.21,2000A362.779,362.779 0 0,0 3542.03,1818.61A221.5096,221.5096 0 0,0 3592.53,1677.83A221.5096,221.5096 0 0,0 3371.02,1456.32A221.5096,221.5096 0 0,0 3200,1537.04A120.9263,120.9263 0 0,1 3320.93,1657.97A120.9263,120.9263 0 0,1 3200,1778.9H2221.1V800A120.9263,120.9263 0 0,1 2342.03,679.073A120.9263,120.9263 0 0,1 2462.96,800A221.5096,221.5096 0 0,0 2543.68,628.984A221.5096,221.5096 0 0,0 2322.17,407.475A221.5096,221.5096 0 0,0 2181.39,457.969A362.779,362.779 0 0,0 2000,143.793A362.779,362.779 0 0,0 1818.61,457.969A221.5096,221.5096 0 0,0 1677.83,407.475A221.5096,221.5096 0 0,0 1456.32,628.984A221.5096,221.5096 0 0,0 1537.04,800A120.9263,120.9263 0 0,1 1657.97,679.073A120.9263,120.9263 0 0,1 1778.9,800V1778.9H800A120.9263,120.9263 0 0,1 679.073,1657.97A120.9263,120.9263 0 0,1 800,1537.04A221.5096,221.5096 0 0,0 628.984,1456.32A221.5096,221.5096 0 0,0 407.475,1677.83A221.5096,221.5096 0 0,0 457.969,1818.61A362.779,362.779 0 0,0 143.793,2000A362.779,362.779 0 0,0 457.969,2181.39A221.5096,221.5096 0 0,0 407.475,2322.17A221.5096,221.5096 0 0,0 628.984,2543.68A221.5096,221.5096 0 0,0 800,2462.96A120.9263,120.9263 0 0,1 679.073,2342.03A120.9263,120.9263 0 0,1 800,2221.1H1778.9Z"/>
+  </svg>
+  <p>To set down a commission, send word by the carrier of Saint-Gervais, addressed to the workshop in the rue des Verriers, sealed and signed by your hand or your priest's. Reply within fifteen days is pledged.</p>
+  <span class="signed">— Gautier de Soissons, master</span>
+</div>
+
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="site-foot">
+  <div class="blind-arcade" aria-hidden="true">
+    <div class="arch">
+      <svg class="outline" viewBox="0 0 100 86" preserveAspectRatio="none"><path d="M 4 84 L 4 40 Q 4 4 50 4 Q 96 4 96 40 L 96 84" fill="none" stroke="#1e3a5f" stroke-width="1.6"/></svg>
+      <div class="ornament-mark">⚜</div>
+    </div>
+    <div class="arch">
+      <svg class="outline" viewBox="0 0 100 86" preserveAspectRatio="none"><path d="M 4 84 L 4 40 Q 4 4 50 4 Q 96 4 96 40 L 96 84" fill="none" stroke="#1e3a5f" stroke-width="1.6"/></svg>
+      <div class="ornament-mark">✠</div>
+    </div>
+    <div class="arch">
+      <svg class="outline" viewBox="0 0 100 86" preserveAspectRatio="none"><path d="M 4 84 L 4 40 Q 4 4 50 4 Q 96 4 96 40 L 96 84" fill="none" stroke="#1e3a5f" stroke-width="1.6"/></svg>
+      <div class="ornament-mark">⚜</div>
+    </div>
+    <div class="arch">
+      <svg class="outline" viewBox="0 0 100 86" preserveAspectRatio="none"><path d="M 4 84 L 4 40 Q 4 4 50 4 Q 96 4 96 40 L 96 84" fill="none" stroke="#1e3a5f" stroke-width="1.6"/></svg>
+      <div class="ornament-mark">✠</div>
+    </div>
+    <div class="arch">
+      <svg class="outline" viewBox="0 0 100 86" preserveAspectRatio="none"><path d="M 4 84 L 4 40 Q 4 4 50 4 Q 96 4 96 40 L 96 84" fill="none" stroke="#1e3a5f" stroke-width="1.6"/></svg>
+      <div class="ornament-mark">⚜</div>
+    </div>
+    <div class="arch">
+      <svg class="outline" viewBox="0 0 100 86" preserveAspectRatio="none"><path d="M 4 84 L 4 40 Q 4 4 50 4 Q 96 4 96 40 L 96 84" fill="none" stroke="#1e3a5f" stroke-width="1.6"/></svg>
+      <div class="ornament-mark">✠</div>
+    </div>
+    <div class="arch">
+      <svg class="outline" viewBox="0 0 100 86" preserveAspectRatio="none"><path d="M 4 84 L 4 40 Q 4 4 50 4 Q 96 4 96 40 L 96 84" fill="none" stroke="#1e3a5f" stroke-width="1.6"/></svg>
+      <div class="ornament-mark">⚜</div>
+    </div>
+  </div>
+  <div class="colophon">
+    <span class="name">Atelier of Gautier de Soissons</span>
+    <p class="addr">rue des Verriers, parish of Saint-Gervais, in the city of Soissons</p>
+    <span class="year">Founded · MCCXIX</span>
+  </div>
+</footer>
+
+</body>
+</html>

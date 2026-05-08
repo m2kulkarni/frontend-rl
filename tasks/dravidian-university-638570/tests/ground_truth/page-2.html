@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Schools & Faculties — Sri Rajaraja Institute</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Lato, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  a { color: var(--text-emphasis); text-decoration: none; }
+  a:hover { color: var(--secondary); }
+
+  /* ===== NAVIGATION ===== */
+  .topbar {
+    background: #111;
+    color: #f4ead5;
+    padding: 14px 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .seal-mark {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .seal-mark .seal-circle {
+    width: 46px; height: 46px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #e7c24a, var(--accent) 70%, #8a6a18);
+    display: flex; align-items: center; justify-content: center;
+    border: 1.5px solid var(--accent);
+    box-shadow: 0 0 0 3px #111, 0 0 0 4px var(--accent);
+  }
+  .seal-mark .seal-circle svg { width: 28px; height: 28px; }
+  .seal-mark .seal-circle svg path { fill: #2a1a05; }
+  .brand-title {
+    font-family: var(--font-display), serif;
+    font-size: 18px;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+    line-height: 1.1;
+  }
+  .brand-sub {
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    color: #d8c98a;
+    text-transform: uppercase;
+  }
+  nav.primary ul {
+    list-style: none;
+    margin: 0; padding: 0;
+    display: flex;
+    gap: 30px;
+  }
+  nav.primary a {
+    color: #f4ead5;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding-bottom: 4px;
+    border-bottom: 1px solid transparent;
+  }
+  nav.primary a:hover { color: var(--secondary); border-bottom-color: var(--secondary); }
+  nav.primary a[aria-current="page"] {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+  .double-rule {
+    height: 6px;
+    background:
+      linear-gradient(var(--secondary), var(--secondary)) 0 0/100% 2px no-repeat,
+      linear-gradient(var(--accent), var(--accent)) 0 4px/100% 1px no-repeat,
+      #111;
+  }
+  .breadcrumb {
+    background: var(--bg);
+    border-bottom: 1px solid rgba(7,107,136,0.15);
+    padding: 12px 56px;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+  }
+  .breadcrumb .sep {
+    margin: 0 12px;
+    color: var(--accent);
+  }
+
+  /* ===== HERO / GOPURAM TIERED HEADING ===== */
+  .hero {
+    padding: 70px 56px 30px;
+    text-align: center;
+    position: relative;
+  }
+  .hero-frame {
+    max-width: 1080px;
+    margin: 0 auto 26px;
+    opacity: 0.85;
+  }
+  .hero-frame svg { width: 100%; height: 36px; display: block; }
+  .hero-frame.flip svg { transform: scaleY(-1); }
+  .gopuram-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    margin: 24px 0;
+  }
+  .gopuram-stack .tier {
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+    line-height: 1;
+  }
+  .gopuram-stack .tier-1 { font-size: 14px; letter-spacing: 0.4em; color: var(--secondary); text-transform: uppercase; padding: 6px 30px; border: 1px solid var(--accent); }
+  .gopuram-stack .tier-2 { font-size: 22px; letter-spacing: 0.18em; padding: 8px 60px; border: 1px solid var(--accent); border-top: none; color: var(--text-emphasis); }
+  .gopuram-stack .tier-3 { font-size: 56px; letter-spacing: 0.04em; padding: 16px 100px 18px; border: 1px solid var(--accent); border-top: none; background: linear-gradient(180deg, transparent 0%, rgba(201,162,58,0.06) 100%); }
+  .hero-lede {
+    max-width: 760px;
+    margin: 18px auto 0;
+    color: #3a3a3a;
+    font-size: 16px;
+  }
+  .hero-meta {
+    margin-top: 22px;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .hero-meta span { margin: 0 14px; }
+
+  /* ===== SECTION DIVIDER ===== */
+  .divider {
+    margin: 50px auto;
+    max-width: 900px;
+    text-align: center;
+    color: var(--ornament);
+  }
+  .divider svg {
+    width: 100%; height: 38px;
+    display: block;
+  }
+  .tailpiece {
+    text-align: center;
+    margin: 30px auto 10px;
+  }
+  .tailpiece svg {
+    width: 64px; height: 64px;
+    opacity: 0.85;
+  }
+
+  /* ===== MAIN GRID ===== */
+  .main-wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 20px 56px 40px;
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 48px;
+  }
+  .section-title {
+    font-family: var(--font-display), serif;
+    font-size: 28px;
+    color: var(--primary);
+    text-align: center;
+    margin: 0 0 8px;
+    letter-spacing: 0.06em;
+  }
+  .section-sub {
+    text-align: center;
+    color: var(--text-emphasis);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 36px;
+  }
+
+  /* ===== CARDS ===== */
+  .schools {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--accent);
+    padding: 28px 28px 64px;
+    position: relative;
+    transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .card:hover {
+    border-color: var(--secondary);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px -16px rgba(227,66,52,0.4);
+  }
+  /* Vermilion corner palmettes */
+  .card::before, .card::after,
+  .card .corner-bl, .card .corner-br {
+    content: "";
+    position: absolute;
+    width: 18px; height: 18px;
+    border: 2px solid var(--secondary);
+  }
+  .card::before { top: -1px; left: -1px; border-right: none; border-bottom: none; }
+  .card::after { top: -1px; right: -1px; border-left: none; border-bottom: none; }
+  .card .corner-bl { bottom: -1px; left: -1px; border-right: none; border-top: none; }
+  .card .corner-br { bottom: -1px; right: -1px; border-left: none; border-top: none; }
+
+  .card-num {
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    color: var(--secondary);
+    letter-spacing: 0.3em;
+  }
+  .card h3 {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    margin: 6px 0 4px;
+    color: var(--primary);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-variant: small-caps;
+    line-height: 1.15;
+  }
+  .card h3 .tamil {
+    display: block;
+    font-size: 13px;
+    color: var(--text-emphasis);
+    letter-spacing: 0.2em;
+    margin-top: 2px;
+    text-transform: none;
+  }
+  .card .meta-row {
+    margin-top: 14px;
+    padding: 10px 0;
+    border-top: 1px solid rgba(201,162,58,0.4);
+    border-bottom: 1px solid rgba(201,162,58,0.4);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #555;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .card .meta-row strong { color: var(--text-emphasis); font-weight: 700; }
+  .card .programs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 14px 0 12px;
+  }
+  .card .programs span {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    padding: 3px 9px;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .card p.charter {
+    font-size: 14px;
+    color: #2a2a2a;
+    margin: 12px 0 0;
+    line-height: 1.65;
+  }
+  .card .lotus-anchor {
+    position: absolute;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 30px;
+    opacity: 0.75;
+  }
+  .card .lotus-anchor svg { width: 100%; height: 100%; }
+
+  /* ===== SIDEBAR ===== */
+  aside.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .panel {
+    background: #fffaf0;
+    border: 1px solid var(--accent);
+    padding: 24px 22px 36px;
+    position: relative;
+  }
+  .panel::before, .panel::after {
+    content: "";
+    position: absolute;
+    width: 14px; height: 14px;
+    border: 2px solid var(--secondary);
+  }
+  .panel::before { top: -1px; left: -1px; border-right: none; border-bottom: none; }
+  .panel::after { top: -1px; right: -1px; border-left: none; border-bottom: none; }
+
+  .panel h4 {
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin: 0 0 4px;
+    text-align: center;
+  }
+  .panel h2 {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    margin: 0 0 16px;
+    text-align: center;
+    color: var(--primary);
+    letter-spacing: 0.04em;
+  }
+  .panel-rule {
+    width: 60%;
+    margin: 0 auto 16px;
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  }
+  .panel ul.credits {
+    list-style: none;
+    margin: 0; padding: 0;
+    font-size: 13.5px;
+  }
+  .panel ul.credits li {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px dotted rgba(201,162,58,0.5);
+  }
+  .panel ul.credits li:last-child { border-bottom: none; }
+  .panel ul.credits .label { color: #333; }
+  .panel ul.credits .val { color: var(--text-emphasis); font-weight: 700; }
+
+  .trimester {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 6px;
+  }
+  .term {
+    border-left: 3px solid var(--secondary);
+    padding: 8px 12px;
+    background: rgba(201,162,58,0.06);
+  }
+  .term .name {
+    font-family: var(--font-display), serif;
+    font-size: 16px;
+    color: var(--primary);
+    letter-spacing: 0.06em;
+  }
+  .term .dates {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    margin-top: 2px;
+  }
+  .term .note {
+    font-size: 12.5px;
+    color: #444;
+    margin-top: 4px;
+  }
+  .panel-tail {
+    text-align: center;
+    margin-top: 16px;
+  }
+  .panel-tail svg { width: 38px; height: 38px; opacity: 0.85; }
+
+  .sidebar .quick-facts li {
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: #2a2a2a;
+    line-height: 1.7;
+  }
+
+  /* ===== DEAN BAR ===== */
+  .deans-block {
+    margin: 60px 56px 0;
+    padding: 36px 48px;
+    background: #1a1a1a;
+    color: #f4ead5;
+    position: relative;
+  }
+  .deans-block h2 {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    color: var(--accent);
+    letter-spacing: 0.18em;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 0 0 4px;
+  }
+  .deans-block .deans-sub {
+    text-align: center;
+    color: #d8c98a;
+    letter-spacing: 0.3em;
+    font-size: 10px;
+    text-transform: uppercase;
+    margin-bottom: 26px;
+  }
+  .deans-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px 40px;
+  }
+  .dean-row {
+    border-top: 1px solid rgba(201,162,58,0.4);
+    padding-top: 12px;
+  }
+  .dean-row .school {
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--secondary);
+  }
+  .dean-row .name {
+    font-family: var(--font-display), serif;
+    font-size: 18px;
+    color: var(--accent);
+    margin-top: 2px;
+  }
+  .dean-row .qual {
+    font-size: 12px;
+    color: #d8c98a;
+    margin-top: 2px;
+  }
+
+  /* ===== FOOTER ===== */
+  footer.site-footer { margin-top: 70px; }
+  .arcade {
+    background: #111;
+    padding: 36px 56px 28px;
+    position: relative;
+  }
+  .arcade-row {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    align-items: center;
+    gap: 0;
+    height: 110px;
+    position: relative;
+  }
+  .pillar {
+    height: 100%;
+    border-left: 1px solid var(--accent);
+    border-right: 1px solid var(--accent);
+    background:
+      linear-gradient(var(--accent), var(--accent)) top/100% 1px no-repeat,
+      linear-gradient(var(--accent), var(--accent)) bottom/100% 1px no-repeat;
+    width: 6px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .pillar::before, .pillar::after {
+    content: "";
+    position: absolute;
+    left: -6px; right: -6px;
+    height: 4px;
+    background: var(--accent);
+  }
+  .pillar::before { top: 0; }
+  .pillar::after { bottom: 0; }
+  .arcade-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px; height: 80px;
+    background: #111;
+    display: flex; align-items: center; justify-content: center;
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+  }
+  .arcade-center svg { width: 50px; height: 50px; }
+  .arcade-center svg path { fill: var(--accent); }
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    margin-top: 22px;
+    flex-wrap: wrap;
+  }
+  .footer-links a {
+    color: #d8c98a;
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+  }
+  .footer-links a:hover { color: var(--secondary); }
+  .copyrule {
+    background: var(--secondary);
+    color: #fff5e1;
+    padding: 14px 56px;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .copyrule strong { color: #fff; }
+
+  /* SVG color helpers */
+  .ink-svg path { fill: var(--primary); }
+  .vermilion-svg path { fill: var(--secondary); }
+  .gold-svg path { fill: var(--accent); }
+</style>
+</head>
+<body>
+
+<!-- ===== TOP NAV ===== -->
+<header class="topbar">
+  <div class="seal-mark">
+    <div class="seal-circle" aria-hidden="true">
+      <svg viewBox="0 0 356 367" xmlns="http://www.w3.org/2000/svg"><path d="M 90.456847,353.9498 C 51.797347,340.13485 23.72672,305.75839 12.612487,258.6184 C 7.5684267,237.22321 6.1421397,201.86984 10.323594,201.86984 C 11.712834,201.86984 15.42322,211.57056 18.568972,223.427 C 25.452892,249.37152 37.19436,273.76855 48.535988,285.69407 C 67.374717,305.50242 114.0356,313.26029 140.92106,301.05394 C 161.86409,291.54544 170.35697,268.94603 161.24995,246.95931 C 154.21242,229.96943 138.24701,224.28836 108.50834,228.19197 C 108.50834,228.19197 90.282834,208.57398 84.476417,173.73548 L 103.15738,175.42939 C 125.65731,177.46962 142.64532,172.49605 151.46236,161.28728 C 159.74765,150.75419 159.5685,146.68046 150.34841,135.96157 C 137.04396,120.49428 113.15511,124.41248 64.786577,149.99522 L 40.381632,109.08518 L 50.613137,101.2812 C 76.253387,81.724339 120.77357,71.947329 146.11011,80.309169 C 169.18841,87.925649 186.12724,118.14755 181.60247,143.63298 C 178.54327,160.86286 164.72752,184.99524 154.05369,191.75339 L 144.84862,197.58162 L 157.56351,203.31522 C 179.17018,213.05833 192.36061,205.61034 208.12001,174.76849 C 229.92949,132.0869 244.0745,121.0378 276.96658,120.99051 C 292.28176,120.96847 297.73268,122.57499 308.90312,130.4031 C 336.78213,149.94016 351.9622,190.39693 348.62804,236.27272 C 344.40474,294.37435 316.88374,329.61601 275.73415,329.61601 C 253.15086,329.61601 238.59451,321.69526 227.00729,303.10156 C 216.82976,286.76927 212.24334,254.42288 218.08805,240.19369 C 220.89208,233.36732 221.39892,233.13578 221.58223,238.59686 C 221.91916,248.63689 233.34159,264.95549 243.82827,270.37835 C 269.55794,283.68369 306.49479,266.96693 321.10832,235.4032 C 332.20339,211.4394 326.25105,165.21656 311.02084,157.06552 C 307.83453,155.36024 299.96089,153.96502 293.5244,153.96502 C 279.84214,153.96502 269.09709,163.80155 254.03263,190.11774 C 248.82442,199.21613 240.05943,210.97175 234.55486,216.24128 C 225.61134,224.80312 222.41769,225.82225 204.53067,225.82225 L 184.51412,225.82225 L 190.98415,240.19369 C 200.2451,260.76437 199.80694,294.18704 190.00976,314.53347 C 181.35272,332.51252 161.33618,350.71469 145.33374,355.16013 C 129.75572,359.4876 104.38789,358.9281 90.456847,353.9498 z M 165.8338,75.923739 C 156.97908,60.814399 151.52974,32.606158 157.46546,32.606158 C 164.43775,47.732319 178.73037,61.227101 194.03409,70.643259 C 221.52091,83.949329 249.39257,78.578529 279.84247,54.108239 C 286.54595,48.721279 292.48231,44.913138 293.0345,45.645698 C 300.4697,57.184233 313.331,66.613261 317.58219,80.021449 C 317.58219,85.678729 293.22867,101.96033 274.01214,109.15007 C 226.38264,122.8706 193.96598,117.44304 165.8338,75.923739 z M 189.83603,40.997228 L 220.84514,6.6137488 L 255.30593,38.514418 C 243.51876,48.222549 235.00994,63.289118 221.54391,70.930009 C 210.90372,63.086273 195.02308,53.837816 189.83603,40.997228 z "/></svg>
+    </div>
+    <div>
+      <div class="brand-title">Sri Rajaraja Institute</div>
+      <div class="brand-sub">of Temple Arts &amp; Sciences · Tanjore</div>
+    </div>
+  </div>
+  <nav class="primary" aria-label="Primary">
+    <ul>
+      <li><a href="page-1.html">Sannidhi · Home</a></li>
+      <li><a href="page-2.html" aria-current="page">Schools</a></li>
+      <li><a href="page-3.html">Admissions</a></li>
+      <li><a href="page-4.html">Research</a></li>
+      <li><a href="page-5.html">Campus</a></li>
+      <li><a href="page-6.html">Visit</a></li>
+    </ul>
+  </nav>
+</header>
+<div class="double-rule" aria-hidden="true"></div>
+<div class="breadcrumb">
+  <a href="page-1.html">Mukha-Mandapa</a>
+  <span class="sep">◆</span>
+  <span>Vidya Prakara — Schools &amp; Faculties</span>
+  <span class="sep">◆</span>
+  <span>Trimester of Aippasi, 2024–25</span>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-frame" aria-hidden="true">
+    <svg viewBox="0 0 313.71717 29.540759" preserveAspectRatio="xMidYMid meet"><g transform="translate(54.572101,-91.176475)"><path style="fill:#1a1a1a" d="m -45.203647,120.20506 c -2.080683,-0.59494 -3.600099,-1.33764 -4.88273,-2.38671 -1.667517,-1.36388 -2.894118,-2.64027 -2.893812,-3.0113 1.42e-4,-0.17364 -0.209138,-0.47237 -0.46507,-0.66382 -0.819614,-0.61314 -1.16478,-1.84791 -1.123557,-4.01931 0.07527,-3.96496 0.841997,-6.28592 3.359706,-10.170217 2.091957,-3.227467 6.669369,-6.452883 10.647663,-7.502765 2.252562,-0.594453 8.248778,-0.796292 11.003264,-0.370372 6.94812,1.074354 16.152972,4.460234 20.6562963,7.598128 0.8536092,0.594796 0.7949964,0.623336 1.3291143,-0.64739 0.2251847,-0.535733 0.8814684,-1.603973 1.4584084,-2.373871 0.8561927,-1.142535 1.457933,-1.600664 3.2740672,-2.492638 2.16210793,-1.06191 4.5637653,-1.779237 6.7277099,-2.009456 0.5824052,-0.06194 1.3990594,-0.240975 1.8147895,-0.397805 0.7738562,-0.291942 6.4810504,-0.196925 10.0927814,0.168029 2.264542,0.228828 9.60899,1.67773 11.219571,2.21338 1.156599,0.384661 1.203738,0.376381 3.086684,-0.542345 2.528472,-1.2337 4.016657,-1.480542 8.446835,-1.401064 3.61374,0.06486 4.290154,0.147139 6.742793,0.820538 0.653941,0.179545 1.719761,0.375692 2.368485,0.435889 0.648729,0.0602 1.838242,0.282073 2.643363,0.493076 1.333488,0.349469 1.625289,0.339432 3.276461,-0.112735 4.298701,-1.177186 16.775093,-2.487486 20.247754,-2.126478 0.82522,0.08579 2.552867,0.408475 3.839215,0.717074 2.046471,0.490964 2.518569,0.521833 3.776859,0.246952 3.038874,-0.663879 6.75683,-1.061515 11.128253,-1.190178 4.134196,-0.121667 4.707691,-0.08259 6.380251,0.434721 1.364622,0.422078 2.105892,0.83929 2.879252,1.620559 1.29673,1.309975 1.63,2.709456 1.6237,6.818148 -0.005,2.95745 0.2393,4.45137 0.62566,3.83325 0.10807,-0.17288 0.17855,-1.23469 0.15662,-2.35957 -0.10151,-5.20664 0.0689,-6.026385 1.66799,-8.024476 0.85063,-1.062863 2.64553,-2.128587 4.10167,-2.435363 2.81819,-0.59374 15.88977,0.302112 18.8453,1.291541 0.69822,0.23375 1.33752,0.188118 3.17619,-0.226686 4.44974,-1.003866 5.16179,-1.08168 9.66723,-1.056509 4.01601,0.0224 5.00432,0.121426 8.5084,0.852608 6.84995,1.42927 7.19777,1.434197 12.43469,0.175947 1.28482,-0.308696 3.07339,-0.450501 5.82325,-0.46168 3.55974,-0.01452 4.14585,0.04906 5.68548,0.615953 0.94414,0.347651 2.11528,0.863208 2.60253,1.145677 0.82461,0.478046 0.98936,0.487693 2.38057,0.139336 1.77908,-0.445477 5.29646,-1.019874 9.8354,-1.606151 3.88998,-0.502463 11.70287,-0.5191 15.08161,-0.03212 5.86054,0.844676 9.86323,3.110261 10.57122,5.983455 l 0.28701,1.164733 3.35851,-1.630478 c 3.17793,-1.542804 8.22537,-3.484656 11.44251,-4.402193 4.71613,-1.345036 12.68145,-1.710913 16.9375,-0.778008 4.93058,1.080764 10.02057,5.551052 11.64065,10.223444 0.65092,1.87732 1.01878,5.06928 0.79472,6.89574 -0.46904,3.82309 -3.07509,7.60889 -6.48471,9.42031 -0.51071,0.27132 -1.10781,0.62201 -1.32689,0.7793 -1.28176,0.92026 -3.99222,1.08281 -9.3957,0.5635 -4.226,-0.40615 -43.09412,-0.56404 -48.28608,-0.19612 -3.36622,0.23852 -9.71584,0.13599 -14.17646,-0.22893 -3.19042,-0.261 -11.4116,-2.46478 -14.96419,-4.01131 z"/></g></svg>
+  </div>
+
+  <div class="gopuram-stack">
+    <div class="tier tier-1">Vidya Prakara</div>
+    <div class="tier tier-2">The Six Schools of the Institute</div>
+    <h1 class="tier tier-3">Schools &amp; Faculties</h1>
+  </div>
+
+  <p class="hero-lede">
+    Beneath the gilded vimanam of our central mandapa, the Institute teaches the disciplines that sustained a thousand years of South Indian sacred building. Six constituent schools — Sthapatya, Silpa, Sangita-Nritya, Bhasha, Samrakshana, and Pratima-Vidya — together confer the Bachelor's, Master's, M.Phil. and Doctoral degrees recognised by the University Grants Commission.
+  </p>
+  <div class="hero-meta">
+    <span>Estd. 1978</span>·<span>UGC NAAC A++</span>·<span>Trimester System</span>·<span>1,142 Resident Scholars</span>
+  </div>
+
+  <div class="hero-frame flip" aria-hidden="true" style="margin-top:36px;">
+    <svg viewBox="0 0 313.71717 29.540759" preserveAspectRatio="xMidYMid meet"><g transform="translate(54.572101,-91.176475)"><path style="fill:#1a1a1a" d="m -45.203647,120.20506 c -2.080683,-0.59494 -3.600099,-1.33764 -4.88273,-2.38671 -1.667517,-1.36388 -2.894118,-2.64027 -2.893812,-3.0113 1.42e-4,-0.17364 -0.209138,-0.47237 -0.46507,-0.66382 -0.819614,-0.61314 -1.16478,-1.84791 -1.123557,-4.01931 0.07527,-3.96496 0.841997,-6.28592 3.359706,-10.170217 2.091957,-3.227467 6.669369,-6.452883 10.647663,-7.502765 2.252562,-0.594453 8.248778,-0.796292 11.003264,-0.370372 6.94812,1.074354 16.152972,4.460234 20.6562963,7.598128 0.8536092,0.594796 0.7949964,0.623336 1.3291143,-0.64739 0.2251847,-0.535733 0.8814684,-1.603973 1.4584084,-2.373871 0.8561927,-1.142535 1.457933,-1.600664 3.2740672,-2.492638 2.16210793,-1.06191 4.5637653,-1.779237 6.7277099,-2.009456 0.5824052,-0.06194 1.3990594,-0.240975 1.8147895,-0.397805 0.7738562,-0.291942 6.4810504,-0.196925 10.0927814,0.168029 2.264542,0.228828 9.60899,1.67773 11.219571,2.21338 1.156599,0.384661 1.203738,0.376381 3.086684,-0.542345 2.528472,-1.2337 4.016657,-1.480542 8.446835,-1.401064 3.61374,0.06486 4.290154,0.147139 6.742793,0.820538 0.653941,0.179545 1.719761,0.375692 2.368485,0.435889 0.648729,0.0602 1.838242,0.282073 2.643363,0.493076 1.333488,0.349469 1.625289,0.339432 3.276461,-0.112735 4.298701,-1.177186 16.775093,-2.487486 20.247754,-2.126478 0.82522,0.08579 2.552867,0.408475 3.839215,0.717074 2.046471,0.490964 2.518569,0.521833 3.776859,0.246952 3.038874,-0.663879 6.75683,-1.061515 11.128253,-1.190178 4.134196,-0.121667 4.707691,-0.08259 6.380251,0.434721 1.364622,0.422078 2.105892,0.83929 2.879252,1.620559 1.29673,1.309975 1.63,2.709456 1.6237,6.818148 -0.005,2.95745 0.2393,4.45137 0.62566,3.83325 z"/></g></svg>
+  </div>
+</section>
+
+<!-- ===== MAIN GRID ===== -->
+<div class="main-wrap">
+  <main>
+    <h2 class="section-title">The Six Constituent Schools</h2>
+    <div class="section-sub">◆ Six Prakaras of Learning ◆</div>
+
+    <section class="schools">
+
+      <!-- 1 STHAPATYA -->
+      <article class="card">
+        <span class="corner-bl"></span><span class="corner-br"></span>
+        <div class="card-num">I · STHAPATYA</div>
+        <h3>School of Sthapatya<span class="tamil">Temple Architecture &amp; Sacred Geometry</span></h3>
+        <div class="meta-row">
+          <div><strong>Dean:</strong> Prof. Dr. Veerappan Muthuswami, M.Arch (IIT-M), Ph.D.</div>
+          <div><strong>Faculty:</strong> 18 · <strong>Studios:</strong> 6 · <strong>Founded:</strong> 1978</div>
+        </div>
+        <div class="programs">
+          <span>B.A. (5 yr)</span><span>M.A. (2 yr)</span><span>M.Phil.</span><span>Ph.D.</span>
+        </div>
+        <p class="charter">
+          Heir to the Mayamatam and Manasara traditions, the School of Sthapatya trains scholar-architects in the four-fold proportional grammar — pada-vinyasa, ayadi-shadvarga, mana, and tala — that governs the Dravida vimana. Students measure surviving temples of the Chola heartland, draft palm-leaf-derived karṇa-bhitti diagrams, and complete a final mandapa-design thesis under stone-yard supervision.
+        </p>
+        <div class="lotus-anchor" aria-hidden="true">
+          <svg viewBox="0 0 384 301" preserveAspectRatio="xMidYMid meet"><circle cx="192" cy="150" r="6" fill="#e34234"/><g fill="none" stroke="#c9a23a" stroke-width="3"><path d="M192 150 C 130 90, 100 130, 192 150"/><path d="M192 150 C 254 90, 284 130, 192 150"/><path d="M192 150 C 130 210, 100 170, 192 150"/><path d="M192 150 C 254 210, 284 170, 192 150"/><path d="M192 150 C 192 70, 192 70, 192 150"/><path d="M192 150 C 192 230, 192 230, 192 150"/></g></svg>
+        </div>
+      </article>
+
+      <!-- 2 SILPA -->
+      <article class="card">
+        <span class="corner-bl"></span><span class="corner-br"></span>
+        <div class="card-num">II · SILPA</div>
+        <h3>School of Silpa<span class="tamil">Stone &amp; Bronze Craft</span></h3>
+        <div class="meta-row">
+          <div><strong>Dean:</strong> Prof. Sthapati Ramanathan Achari, Hereditary Silpi (Swamimalai), D.Litt. (h.c.)</div>
+          <div><strong>Faculty:</strong> 14 · <strong>Foundries:</strong> 2 · <strong>Stone-yard:</strong> 1.4 acre</div>
+        </div>
+        <div class="programs">
+          <span>B.A. (5 yr)</span><span>M.A. (2 yr)</span><span>M.Phil.</span><span>Ph.D.</span>
+        </div>
+        <p class="charter">
+          The hands-led School of Silpa preserves the lost-wax madhuchchhishta-vidhana method of bronze casting and the granite ulipi-and-chisel craft of the Pallava-Chola lineage. Each cohort apprentices under a hereditary stapathi for two trimesters, then advances to figural commissions — Nataraja, Somaskanda, Bhairava — measured against the talamana of Sariputra.
+        </p>
+        <div class="lotus-anchor" aria-hidden="true">
+          <svg viewBox="0 0 384 301" preserveAspectRatio="xMidYMid meet"><circle cx="192" cy="150" r="6" fill="#e34234"/><g fill="none" stroke="#c9a23a" stroke-width="3"><path d="M192 150 C 130 90, 100 130, 192 150"/><path d="M192 150 C 254 90, 284 130, 192 150"/><path d="M192 150 C 130 210, 100 170, 192 150"/><path d="M192 150 C 254 210, 284 170, 192 150"/></g></svg>
+        </div>
+      </article>
+
+      <!-- 3 MUSIC DANCE -->
+      <article class="card">
+        <span class="corner-bl"></span><span class="corner-br"></span>
+        <div class="card-num">III · SANGITA-NRITYA</div>
+        <h3>School of Classical Music &amp; Dance<span class="tamil">Carnatic Sangita &amp; Bharatanatyam</span></h3>
+        <div class="meta-row">
+          <div><strong>Dean:</strong> Prof. Smt. Lalitha Krishnamurthy, Sangita Kalanidhi, Ph.D. (Madras)</div>
+          <div><strong>Faculty:</strong> 22 · <strong>Performance halls:</strong> 3 · <strong>Annual concerts:</strong> 84</div>
+        </div>
+        <div class="programs">
+          <span>B.A. (4 yr)</span><span>M.A. (2 yr)</span><span>M.Phil.</span><span>Ph.D.</span>
+        </div>
+        <p class="charter">
+          Faithful to the seventy-two melakarta system codified by Venkatamakhin, this School cultivates voice, veena, mridangam, and the natya-vadya ensemble alongside the Tanjore quartet's Bharatanatyam repertoire. The Margazhi cohort presents the full margam — alarippu through tillana — at the Brihadisvara open-air stage as the public viva of the Master's degree.
+        </p>
+        <div class="lotus-anchor" aria-hidden="true">
+          <svg viewBox="0 0 384 301" preserveAspectRatio="xMidYMid meet"><circle cx="192" cy="150" r="6" fill="#e34234"/><g fill="none" stroke="#c9a23a" stroke-width="3"><path d="M192 150 C 130 90, 100 130, 192 150"/><path d="M192 150 C 254 90, 284 130, 192 150"/><path d="M192 150 C 130 210, 100 170, 192 150"/><path d="M192 150 C 254 210, 284 170, 192 150"/></g></svg>
+        </div>
+      </article>
+
+      <!-- 4 SANSKRIT TAMIL -->
+      <article class="card">
+        <span class="corner-bl"></span><span class="corner-br"></span>
+        <div class="card-num">IV · BHASHA</div>
+        <h3>School of Sanskrit &amp; Tamil Letters<span class="tamil">Sastra, Sangam &amp; Bhakti Literature</span></h3>
+        <div class="meta-row">
+          <div><strong>Dean:</strong> Prof. Dr. Arul Chelvan Pillai, M.A. (Sanskrit), M.A. (Tamil), Ph.D. (Pondicherry)</div>
+          <div><strong>Faculty:</strong> 20 · <strong>Manuscript holdings:</strong> 9,400 palm-leaf bundles</div>
+        </div>
+        <div class="programs">
+          <span>B.A. (3 yr)</span><span>M.A. (2 yr)</span><span>M.Phil.</span><span>Ph.D.</span>
+        </div>
+        <p class="charter">
+          The Bhasha School trains philologists in Panini's Ashtadhyayi and Tolkappiyam in equal measure, and reads the Tevaram, Tiruvasagam, Tiruvaymoli, the Silappadikaram, and the Saiva Siddhanta corpus alongside the Agama-sastras. Doctoral candidates contribute to the Institute's ongoing critical edition of the Karandai Tamil Sangam plates.
+        </p>
+        <div class="lotus-anchor" aria-hidden="true">
+          <svg viewBox="0 0 384 301" preserveAspectRatio="xMidYMid meet"><circle cx="192" cy="150" r="6" fill="#e34234"/><g fill="none" stroke="#c9a23a" stroke-width="3"><path d="M192 150 C 130 90, 100 130, 192 150"/><path d="M192 150 C 254 90, 284 130, 192 150"/><path d="M192 150 C 130 210, 100 170, 192 150"/><path d="M192 150 C 254 210, 284 170, 192 150"/></g></svg>
+        </div>
+      </article>
+
+      <!-- 5 CONSERVATION -->
+      <article class="card">
+        <span class="corner-bl"></span><span class="corner-br"></span>
+        <div class="card-num">V · SAMRAKSHANA</div>
+        <h3>School of Heritage Conservation<span class="tamil">Stone, Mural &amp; Site Conservation</span></h3>
+        <div class="meta-row">
+          <div><strong>Dean:</strong> Prof. Dr. Devanathan Iyer, M.Sc. (Chemistry), M.A. (Archaeology), Ph.D. (ICOMOS Fellow)</div>
+          <div><strong>Faculty:</strong> 12 · <strong>Field labs:</strong> 4 · <strong>Active sites:</strong> 27</div>
+        </div>
+        <div class="programs">
+          <span>B.A. (3 yr)</span><span>M.A. (2 yr)</span><span>M.Phil.</span><span>Ph.D.</span>
+        </div>
+        <p class="charter">
+          Established in 1996 in collaboration with the Archaeological Survey of India, Samrakshana trains conservators in lime-mortar petrography, biocide-free granite cleaning, and the in-situ stabilisation of Nayaka-period murals at Tiruvarur and Chidambaram. The School's mobile diagnostic laboratory has surveyed forty-one heritage temples across the Kaveri delta since 2014.
+        </p>
+        <div class="lotus-anchor" aria-hidden="true">
+          <svg viewBox="0 0 384 301" preserveAspectRatio="xMidYMid meet"><circle cx="192" cy="150" r="6" fill="#e34234"/><g fill="none" stroke="#c9a23a" stroke-width="3"><path d="M192 150 C 130 90, 100 130, 192 150"/><path d="M192 150 C 254 90, 284 130, 192 150"/><path d="M192 150 C 130 210, 100 170, 192 150"/><path d="M192 150 C 254 210, 284 170, 192 150"/></g></svg>
+        </div>
+      </article>
+
+      <!-- 6 ICONOGRAPHY -->
+      <article class="card">
+        <span class="corner-bl"></span><span class="corner-br"></span>
+        <div class="card-num">VI · PRATIMA-VIDYA</div>
+        <h3>School of Iconography &amp; Art History<span class="tamil">Murti-Sastra &amp; Comparative Forms</span></h3>
+        <div class="meta-row">
+          <div><strong>Dean:</strong> Prof. Dr. Padmaja Subrahmanian, Ph.D. (SOAS, London), Padma Shri 2019</div>
+          <div><strong>Faculty:</strong> 11 · <strong>Slide library:</strong> 38,200 plates · <strong>Founded:</strong> 1984</div>
+        </div>
+        <div class="programs">
+          <span>B.A. (3 yr)</span><span>M.A. (2 yr)</span><span>M.Phil.</span><span>Ph.D.</span>
+        </div>
+        <p class="charter">
+          Pratima-Vidya treats the icon as a doctrinal document: students read the Vishnudharmottara, Silparatna and Kashyapa-Silpa; analyse Pallava, Chola and Vijayanagara stylistic horizons; and compare Dravidian forms with Pala, Hoysala and South-East Asian counterparts at Polonnaruwa and Prambanan. The School curates the Institute's Bronze Gallery of 312 catalogued works.
+        </p>
+        <div class="lotus-anchor" aria-hidden="true">
+          <svg viewBox="0 0 384 301" preserveAspectRatio="xMidYMid meet"><circle cx="192" cy="150" r="6" fill="#e34234"/><g fill="none" stroke="#c9a23a" stroke-width="3"><path d="M192 150 C 130 90, 100 130, 192 150"/><path d="M192 150 C 254 90, 284 130, 192 150"/><path d="M192 150 C 130 210, 100 170, 192 150"/><path d="M192 150 C 254 210, 284 170, 192 150"/></g></svg>
+        </div>
+      </article>
+
+    </section>
+
+    <div class="tailpiece" aria-hidden="true">
+      <svg viewBox="0 0 384 301" preserveAspectRatio="xMidYMid meet">
+        <g transform="translate(192,150)">
+          <circle r="8" fill="#e34234"/>
+          <g fill="none" stroke="#c9a23a" stroke-width="3">
+            <ellipse cx="0" cy="-40" rx="20" ry="40"/>
+            <ellipse cx="0" cy="40" rx="20" ry="40"/>
+            <ellipse cx="-40" cy="0" rx="40" ry="20"/>
+            <ellipse cx="40" cy="0" rx="40" ry="20"/>
+            <ellipse cx="-30" cy="-30" rx="30" ry="22" transform="rotate(-45 -30 -30)"/>
+            <ellipse cx="30" cy="-30" rx="30" ry="22" transform="rotate(45 30 -30)"/>
+            <ellipse cx="-30" cy="30" rx="30" ry="22" transform="rotate(45 -30 30)"/>
+            <ellipse cx="30" cy="30" rx="30" ry="22" transform="rotate(-45 30 30)"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+  </main>
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside class="sidebar">
+
+    <div class="panel">
+      <h4>Pramana</h4>
+      <h2>Credit Framework</h2>
+      <hr class="panel-rule">
+      <p style="font-size:13px;color:#444;margin:0 0 14px;">
+        The Institute follows the UGC Choice-Based Credit System adapted to a three-trimester academic year. One credit is reckoned at fifteen contact-hours of theory or thirty hours of studio / fieldwork.
+      </p>
+      <ul class="credits">
+        <li><span class="label">B.A. Programme</span><span class="val">132 credits</span></li>
+        <li><span class="label">M.A. Programme</span><span class="val">88 credits</span></li>
+        <li><span class="label">M.Phil. Pre-Doctoral</span><span class="val">36 credits</span></li>
+        <li><span class="label">Ph.D. Coursework</span><span class="val">24 credits</span></li>
+        <li><span class="label">Studio / Fieldwork share</span><span class="val">≥ 40 %</span></li>
+        <li><span class="label">Sanskrit / Tamil floor</span><span class="val">12 credits</span></li>
+        <li><span class="label">Open electives</span><span class="val">8 credits</span></li>
+        <li><span class="label">Min. attendance</span><span class="val">75 %</span></li>
+      </ul>
+      <div class="panel-tail" aria-hidden="true">
+        <svg viewBox="0 0 384 301" preserveAspectRatio="xMidYMid meet"><g transform="translate(192,150)"><circle r="6" fill="#e34234"/><g fill="none" stroke="#c9a23a" stroke-width="4"><path d="M0,0 C -40,-40 -80,-20 0,0"/><path d="M0,0 C 40,-40 80,-20 0,0"/><path d="M0,0 C -40,40 -80,20 0,0"/><path d="M0,0 C 40,40 80,20 0,0"/></g></g></svg>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h4>Kala-cakra</h4>
+      <h2>Trimester Calendar</h2>
+      <hr class="panel-rule">
+      <p style="font-size:13px;color:#444;margin:0 0 16px;">
+        The academic year is partitioned by the Tamil month-cycle into three trimesters, each of fourteen instructional weeks framed by a temple-festival recess.
+      </p>
+      <div class="trimester">
+        <div class="term">
+          <div class="name">Aippasi</div>
+          <div class="dates">18 Oct 2024 — 24 Jan 2025</div>
+          <div class="note">Opens with Saraswati Puja and the Annaabhishekam fortnight. Foundational coursework, agamic primers, fresh studio inductions.</div>
+        </div>
+        <div class="term">
+          <div class="name">Thai</div>
+          <div class="dates">03 Feb 2025 — 09 May 2025</div>
+          <div class="note">Heaviest of the three. Mid-term juries, Pongal field visits to Gangaikondacholapuram, intensive bronze-casting weeks.</div>
+        </div>
+        <div class="term">
+          <div class="name">Vaikasi</div>
+          <div class="dates">26 May 2025 — 22 Aug 2025</div>
+          <div class="note">Thesis trimester. Final viva-voce, Vaikasi Visakam recital, public exhibition at the Institute Mandapa, dissertation submission.</div>
+        </div>
+      </div>
+      <div class="panel-tail" aria-hidden="true">
+        <svg viewBox="0 0 384 301" preserveAspectRatio="xMidYMid meet"><g transform="translate(192,150)"><circle r="6" fill="#e34234"/><g fill="none" stroke="#c9a23a" stroke-width="4"><path d="M0,0 C -40,-40 -80,-20 0,0"/><path d="M0,0 C 40,-40 80,-20 0,0"/><path d="M0,0 C -40,40 -80,20 0,0"/><path d="M0,0 C 40,40 80,20 0,0"/></g></g></svg>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h4>Saṃkhya</h4>
+      <h2>By the Numbers</h2>
+      <hr class="panel-rule">
+      <ul class="credits">
+        <li><span class="label">Resident Scholars</span><span class="val">1,142</span></li>
+        <li><span class="label">Visiting Sthapatis</span><span class="val">26</span></li>
+        <li><span class="label">Studio-faculty ratio</span><span class="val">1 : 9</span></li>
+        <li><span class="label">Library volumes</span><span class="val">68,400</span></li>
+        <li><span class="label">Palm-leaf bundles</span><span class="val">9,400</span></li>
+        <li><span class="label">Field sites this year</span><span class="val">27</span></li>
+        <li><span class="label">Tuition (annual, INR)</span><span class="val">₹ 84,000</span></li>
+      </ul>
+    </div>
+
+  </aside>
+</div>
+
+<!-- ===== ARABESQUE DIVIDER ===== -->
+<div class="divider" aria-hidden="true">
+  <svg viewBox="0 0 800 30" preserveAspectRatio="xMidYMid meet">
+    <g fill="#e34234">
+      <circle cx="400" cy="15" r="6"/>
+      <path d="M400 15 C 360 5, 340 5, 320 15 C 340 25, 360 25, 400 15 Z"/>
+      <path d="M400 15 C 440 5, 460 5, 480 15 C 460 25, 440 25, 400 15 Z"/>
+    </g>
+    <g fill="none" stroke="#c9a23a" stroke-width="1">
+      <path d="M0 15 H 310"/>
+      <path d="M490 15 H 800"/>
+      <circle cx="200" cy="15" r="4"/>
+      <circle cx="600" cy="15" r="4"/>
+      <circle cx="100" cy="15" r="2.5"/>
+      <circle cx="700" cy="15" r="2.5"/>
+    </g>
+  </svg>
+</div>
+
+<!-- ===== DEANS BLOCK ===== -->
+<section class="deans-block">
+  <h2>Acharya-Mandala — The Council of Deans</h2>
+  <div class="deans-sub">◆ As constituted for the academic year 2024 — 2025 ◆</div>
+  <div class="deans-grid">
+    <div class="dean-row">
+      <div class="school">Sthapatya</div>
+      <div class="name">Prof. Veerappan Muthuswami</div>
+      <div class="qual">M.Arch. (IIT-M), Ph.D. — Thiruvaiyaru Wing, Block A</div>
+    </div>
+    <div class="dean-row">
+      <div class="school">Silpa</div>
+      <div class="name">Prof. Sthapati Ramanathan Achari</div>
+      <div class="qual">Hereditary Silpi (Swamimalai), D.Litt. (h.c.)</div>
+    </div>
+    <div class="dean-row">
+      <div class="school">Sangita-Nritya</div>
+      <div class="name">Prof. Smt. Lalitha Krishnamurthy</div>
+      <div class="qual">Sangita Kalanidhi · Ph.D. (Madras)</div>
+    </div>
+    <div class="dean-row">
+      <div class="school">Bhasha</div>
+      <div class="name">Prof. Arul Chelvan Pillai</div>
+      <div class="qual">M.A. Skt. · M.A. Tamil · Ph.D. (Pondicherry)</div>
+    </div>
+    <div class="dean-row">
+      <div class="school">Samrakshana</div>
+      <div class="name">Prof. Devanathan Iyer</div>
+      <div class="qual">M.Sc. · M.A. · Ph.D. · ICOMOS Fellow</div>
+    </div>
+    <div class="dean-row">
+      <div class="school">Pratima-Vidya</div>
+      <div class="name">Prof. Padmaja Subrahmanian</div>
+      <div class="qual">Ph.D. (SOAS) · Padma Shri 2019</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <div class="arcade">
+    <div class="arcade-row" aria-hidden="true">
+      <div class="pillar"></div>
+      <div class="pillar"></div>
+      <div class="pillar"></div>
+      <div class="pillar"></div>
+      <div class="pillar"></div>
+      <div class="pillar"></div>
+      <div class="pillar"></div>
+      <div class="arcade-center">
+        <svg viewBox="0 0 356 367" xmlns="http://www.w3.org/2000/svg"><path d="M 90.456847,353.9498 C 51.797347,340.13485 23.72672,305.75839 12.612487,258.6184 C 7.5684267,237.22321 6.1421397,201.86984 10.323594,201.86984 C 11.712834,201.86984 15.42322,211.57056 18.568972,223.427 C 25.452892,249.37152 37.19436,273.76855 48.535988,285.69407 C 67.374717,305.50242 114.0356,313.26029 140.92106,301.05394 C 161.86409,291.54544 170.35697,268.94603 161.24995,246.95931 C 154.21242,229.96943 138.24701,224.28836 108.50834,228.19197 C 108.50834,228.19197 90.282834,208.57398 84.476417,173.73548 L 103.15738,175.42939 C 125.65731,177.46962 142.64532,172.49605 151.46236,161.28728 C 159.74765,150.75419 159.5685,146.68046 150.34841,135.96157 C 137.04396,120.49428 113.15511,124.41248 64.786577,149.99522 L 40.381632,109.08518 L 50.613137,101.2812 C 76.253387,81.724339 120.77357,71.947329 146.11011,80.309169 C 169.18841,87.925649 186.12724,118.14755 181.60247,143.63298 C 178.54327,160.86286 164.72752,184.99524 154.05369,191.75339 L 144.84862,197.58162 L 157.56351,203.31522 C 179.17018,213.05833 192.36061,205.61034 208.12001,174.76849 C 229.92949,132.0869 244.0745,121.0378 276.96658,120.99051 C 292.28176,120.96847 297.73268,122.57499 308.90312,130.4031 C 336.78213,149.94016 351.9622,190.39693 348.62804,236.27272 C 344.40474,294.37435 316.88374,329.61601 275.73415,329.61601 C 253.15086,329.61601 238.59451,321.69526 227.00729,303.10156 C 216.82976,286.76927 212.24334,254.42288 218.08805,240.19369 C 220.89208,233.36732 221.39892,233.13578 221.58223,238.59686 C 221.91916,248.63689 233.34159,264.95549 243.82827,270.37835 C 269.55794,283.68369 306.49479,266.96693 321.10832,235.4032 C 332.20339,211.4394 326.25105,165.21656 311.02084,157.06552 C 307.83453,155.36024 299.96089,153.96502 293.5244,153.96502 C 279.84214,153.96502 269.09709,163.80155 254.03263,190.11774 C 248.82442,199.21613 240.05943,210.97175 234.55486,216.24128 C 225.61134,224.80312 222.41769,225.82225 204.53067,225.82225 L 184.51412,225.82225 L 190.98415,240.19369 C 200.2451,260.76437 199.80694,294.18704 190.00976,314.53347 C 181.35272,332.51252 161.33618,350.71469 145.33374,355.16013 C 129.75572,359.4876 104.38789,358.9281 90.456847,353.9498 z M 165.8338,75.923739 C 156.97908,60.814399 151.52974,32.606158 157.46546,32.606158 C 164.43775,47.732319 178.73037,61.227101 194.03409,70.643259 C 221.52091,83.949329 249.39257,78.578529 279.84247,54.108239 C 286.54595,48.721279 292.48231,44.913138 293.0345,45.645698 C 300.4697,57.184233 313.331,66.613261 317.58219,80.021449 C 317.58219,85.678729 293.22867,101.96033 274.01214,109.15007 C 226.38264,122.8706 193.96598,117.44304 165.8338,75.923739 z M 189.83603,40.997228 L 220.84514,6.6137488 L 255.30593,38.514418 C 243.51876,48.222549 235.00994,63.289118 221.54391,70.930009 C 210.90372,63.086273 195.02308,53.837816 189.83603,40.997228 z "/></svg>
+      </div>
+    </div>
+    <div class="footer-links">
+      <a href="page-1.html">Home</a>
+      <a href="page-2.html">Schools</a>
+      <a href="page-3.html">Admissions</a>
+      <a href="page-4.html">Research</a>
+      <a href="page-5.html">Campus</a>
+      <a href="page-6.html">Visit</a>
+    </div>
+  </div>
+  <div class="copyrule">
+    <span>© 2024 <strong>Sri Rajaraja Institute of Temple Arts &amp; Sciences</strong></span>
+    <span>UGC · NAAC A++ · Recognised by ASI &amp; the Ministry of Culture, Govt. of India</span>
+    <span>Brihadeeswarar Road, Thanjavur 613 007, Tamil Nadu</span>
+  </div>
+</footer>
+
+</body>
+</html>

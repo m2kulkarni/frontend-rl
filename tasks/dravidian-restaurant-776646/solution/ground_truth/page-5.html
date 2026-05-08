@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Feast Days & Seasons | Kalasha</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), sans-serif;
+    margin: 0;
+    line-height: 1.55;
+  }
+
+  /* ---------- Masthead / Nav ---------- */
+  .masthead {
+    background: var(--bg);
+    padding: 28px 0 0;
+    border-bottom: none;
+    position: relative;
+  }
+  .gopuram-tiers {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding-bottom: 14px;
+  }
+  .tier {
+    background: var(--primary);
+    height: 6px;
+  }
+  .tier-1 { width: 720px; }
+  .tier-2 { width: 820px; height: 4px; background: var(--accent); }
+  .tier-3 { width: 920px; height: 3px; background: var(--secondary); }
+  .tier-4 { width: 1040px; height: 2px; background: var(--primary); }
+
+  .brand-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    padding: 22px 0 18px;
+  }
+  .brand-row .lotus {
+    width: 46px;
+    height: 36px;
+    flex-shrink: 0;
+  }
+  .brand-name {
+    font-family: var(--font-display), serif;
+    font-size: 38px;
+    letter-spacing: 0.32em;
+    color: var(--primary);
+    text-transform: uppercase;
+    text-align: center;
+    margin: 0;
+  }
+  .brand-name .amp {
+    color: var(--secondary);
+    font-style: normal;
+    margin: 0 6px;
+  }
+  .brand-tag {
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    margin: -8px 0 16px;
+  }
+
+  .navband {
+    background: var(--secondary);
+    border-top: 2px solid var(--accent);
+    border-bottom: 2px solid var(--accent);
+    padding: 12px 0;
+  }
+  .navband ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+  .navband a {
+    color: var(--bg);
+    text-decoration: none;
+    font-family: var(--font-body), sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    padding: 4px 14px;
+  }
+  .navband a[aria-current="page"] {
+    color: var(--accent);
+    border-bottom: 1px solid var(--accent);
+  }
+  .navband .dot {
+    color: var(--accent);
+    font-size: 14px;
+    line-height: 1;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    padding: 50px 80px 30px;
+    text-align: center;
+  }
+  .hero-frame {
+    display: block;
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto 24px;
+  }
+  .hero h1 {
+    font-family: var(--font-display), serif;
+    font-size: 64px;
+    letter-spacing: 0.12em;
+    color: var(--primary);
+    margin: 0 0 14px;
+    line-height: 1.05;
+  }
+  .hero h1 .accent {
+    color: var(--secondary);
+  }
+  .hero .lede {
+    max-width: 720px;
+    margin: 0 auto;
+    color: var(--text);
+    font-size: 16px;
+  }
+  .hero .kicker {
+    font-size: 11px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    margin-bottom: 18px;
+  }
+
+  /* ---------- Divider ---------- */
+  .divider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 18px 0;
+    gap: 12px;
+  }
+  .divider svg {
+    width: 100%;
+    max-width: 1180px;
+    height: 36px;
+    opacity: 0.85;
+  }
+
+  /* ---------- Calendar grid ---------- */
+  main {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 10px 60px 40px;
+  }
+
+  .feasts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-bottom: 30px;
+  }
+  .feast {
+    position: relative;
+    background: var(--surface);
+    border: 2px solid var(--secondary);
+    padding: 6px;
+  }
+  .feast-inner {
+    border: 1px solid var(--accent);
+    padding: 28px 32px 30px;
+    position: relative;
+  }
+  /* stepped corner notches */
+  .feast::before, .feast::after {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background:
+      linear-gradient(45deg, var(--bg) 50%, transparent 50%);
+    border: 2px solid var(--secondary);
+  }
+  .feast::before { top: -2px; left: -2px; border-right: none; border-bottom: none; transform: rotate(0deg); background: var(--bg); border-top: 2px solid var(--secondary); border-left: 2px solid var(--secondary); border-right: 2px solid var(--secondary); border-bottom: 2px solid var(--secondary);}
+  .feast::after  { bottom: -2px; right: -2px; background: var(--bg); }
+
+  .feast-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--accent);
+  }
+  .feast-head .lotus-mark {
+    width: 38px;
+    height: 30px;
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+  .feast-head .titles { flex: 1; }
+  .feast-subtitle {
+    font-family: var(--font-body), sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    margin: 0 0 6px;
+    font-weight: 700;
+  }
+  .feast h2 {
+    font-family: var(--font-display), serif;
+    font-size: 30px;
+    letter-spacing: 0.04em;
+    color: var(--primary);
+    margin: 0;
+    line-height: 1.1;
+  }
+  .feast .price {
+    font-family: var(--font-display), serif;
+    color: var(--secondary);
+    font-size: 22px;
+    margin-left: 8px;
+    white-space: nowrap;
+  }
+
+  .feast .when {
+    font-size: 13px;
+    color: var(--text-emphasis);
+    font-style: italic;
+    margin: 0 0 14px;
+    letter-spacing: 0.04em;
+  }
+  .menu-sketch {
+    list-style: none;
+    margin: 0 0 18px;
+    padding: 14px 16px;
+    background: rgba(201, 162, 58, 0.08);
+    border-left: 3px double var(--accent);
+  }
+  .menu-sketch li {
+    font-size: 14px;
+    padding: 3px 0;
+    color: var(--text);
+  }
+  .menu-sketch li::before {
+    content: "❋ ";
+    color: var(--secondary);
+    margin-right: 4px;
+  }
+  .booking {
+    font-size: 12px;
+    color: var(--primary);
+    border-top: 1px dotted var(--secondary);
+    padding-top: 12px;
+    margin: 0;
+  }
+  .booking strong {
+    color: var(--text-emphasis);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 10.5px;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  /* ---------- Kuzhambu Club (full-width feature) ---------- */
+  .club {
+    margin-top: 30px;
+    border: 3px double var(--secondary);
+    padding: 8px;
+    background: var(--surface);
+  }
+  .club-inner {
+    border: 1px solid var(--accent);
+    padding: 36px 50px 40px;
+    position: relative;
+  }
+  .club-flag {
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    margin-bottom: 12px;
+  }
+  .club h2 {
+    font-family: var(--font-display), serif;
+    text-align: center;
+    font-size: 44px;
+    letter-spacing: 0.1em;
+    color: var(--primary);
+    margin: 0 0 6px;
+  }
+  .club h2 .red { color: var(--secondary); }
+  .club .club-tag {
+    text-align: center;
+    font-style: italic;
+    color: var(--text-emphasis);
+    margin: 0 0 22px;
+    font-size: 15px;
+  }
+  .club-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+    border-top: 1px solid var(--accent);
+    padding-top: 24px;
+  }
+  .club-grid h3 {
+    font-family: var(--font-body), sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin: 0 0 8px;
+  }
+  .club-grid p { margin: 0 0 8px; font-size: 14px; }
+  .club-grid .big {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    color: var(--primary);
+    line-height: 1.25;
+  }
+  .club-foot {
+    margin-top: 24px;
+    padding-top: 18px;
+    border-top: 1px dotted var(--secondary);
+    text-align: center;
+    font-size: 13px;
+    color: var(--text);
+  }
+  .club-foot em { color: var(--text-emphasis); }
+
+  /* ---------- Footer ---------- */
+  footer {
+    margin-top: 50px;
+    background: var(--bg);
+    border-top: 2px solid var(--secondary);
+  }
+  .arcade {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    border-bottom: 1px solid var(--primary);
+    padding: 22px 60px 10px;
+    align-items: end;
+  }
+  .bay {
+    text-align: center;
+    position: relative;
+    padding: 0 4px;
+  }
+  .pilaster {
+    height: 88px;
+    margin: 0 auto;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 2px;
+  }
+  .pilaster span {
+    background: var(--primary);
+    display: block;
+  }
+  .pilaster .cap1 { height: 4px; }
+  .pilaster .cap2 { height: 6px; margin: 0 6px; }
+  .pilaster .cap3 { height: 4px; margin: 0 12px; }
+  .pilaster .shaft { flex: 1; margin: 0 22px; border-left: 1px solid var(--primary); border-right: 1px solid var(--primary); background: transparent;}
+  .pilaster .base1 { height: 4px; margin: 0 12px; }
+  .pilaster .base2 { height: 6px; margin: 0 6px; }
+  .pilaster .base3 { height: 4px; }
+
+  .bay.center { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; }
+  .om-seal { width: 64px; height: 64px; }
+  .twin-lotus { display: flex; gap: 14px; align-items: center; }
+  .twin-lotus svg { width: 30px; height: 24px; }
+
+  .footer-cols {
+    display: grid;
+    grid-template-columns: 1fr 2px 1fr 2px 1fr;
+    padding: 30px 80px;
+    gap: 0;
+    align-items: start;
+  }
+  .footer-cols .vrule {
+    background: var(--secondary);
+    height: 100%;
+    min-height: 140px;
+  }
+  .fcol h4 {
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin: 0 0 12px;
+  }
+  .fcol p { margin: 0 0 8px; font-size: 14px; }
+  .fcol { padding: 0 30px; }
+  .footer-credit {
+    text-align: center;
+    padding: 18px 40px 30px;
+    font-style: italic;
+    color: var(--text-emphasis);
+    font-size: 13px;
+    border-top: 1px solid var(--accent);
+  }
+
+  /* ---------- small helpers ---------- */
+  .lotus-inline {
+    display: inline-block;
+    vertical-align: middle;
+    width: 22px;
+    height: 18px;
+    margin: 0 6px;
+  }
+  .section-title {
+    font-family: var(--font-display), serif;
+    text-align: center;
+    font-size: 22px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    margin: 10px 0 6px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ MASTHEAD ============ -->
+<header class="masthead">
+  <div class="gopuram-tiers" aria-hidden="true">
+    <div class="tier tier-1"></div>
+    <div class="tier tier-2"></div>
+    <div class="tier tier-3"></div>
+    <div class="tier tier-4"></div>
+  </div>
+
+  <div class="brand-row">
+    <svg class="lotus" viewBox="0 0 384 301" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+      <g transform="matrix(2.67,-2.67,2.67,2.67,-230.7,-334.3)" fill="#e34234" stroke="#c9a23a" stroke-width="0.6">
+        <path d="m -20.5,171.7 c -34.7,-2.8 -17.6,27.4 -17.6,27.5 15,2.8 22.8,5.8 25.9,-13.6 -0.5,-11.5 -4.6,-10.3 -8.3,-13.9 z"/>
+        <path d="m -20.5,178.2 c 28.9,-16.2 12.8,-50 12.7,-50.1 -12.9,9.6 -28.2,18.5 -22.3,37.2 2,5.7 6.3,11.6 9.5,12.9 z"/>
+        <path d="M -18.2,180.4 C -2,151.5 31.9,167.6 31.9,167.7 22.3,180.6 13.5,195.9 -5.3,190 -11,188 -16.9,183.6 -18.2,180.4 Z"/>
+        <path d="m -23.1,175.5 c 1.4,-33.1 38.9,-33.9 39,-33.9 -2.8,15.8 -6.6,35.7 -26,38.9 -12.1,1 -9.3,-1.3 -13,-5 z"/>
+        <ellipse cx="113.2" cy="136.4" rx="20.8" ry="4.9" transform="rotate(45)" fill="#c9a23a"/>
+        <path d="m -21.7,173.9 c 15.6,-29.3 -16.3,-49 -16.4,-49.1 -5.7,15 -13.7,30.8 1.4,43.4 4.7,3.7 11.6,6.4 15,5.7 z"/>
+        <path d="m -15.8,179.8 c 29.3,-15.6 49,16.3 49.1,16.4 -15,5.7 -30.8,13.7 -43.4,-1.4 -3.7,-4.7 -6.4,-11.6 -5.7,-15 z"/>
+      </g>
+    </svg>
+
+    <h1 class="brand-name">Kalasha <span class="amp">·</span> A Chettinad Kitchen</h1>
+
+    <svg class="lotus" viewBox="0 0 384 301" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+      <g transform="matrix(-2.67,-2.67,-2.67,2.67,614.7,-334.3)" fill="#e34234" stroke="#c9a23a" stroke-width="0.6">
+        <path d="m -20.5,171.7 c -34.7,-2.8 -17.6,27.4 -17.6,27.5 15,2.8 22.8,5.8 25.9,-13.6 -0.5,-11.5 -4.6,-10.3 -8.3,-13.9 z"/>
+        <path d="m -20.5,178.2 c 28.9,-16.2 12.8,-50 12.7,-50.1 -12.9,9.6 -28.2,18.5 -22.3,37.2 2,5.7 6.3,11.6 9.5,12.9 z"/>
+        <path d="M -18.2,180.4 C -2,151.5 31.9,167.6 31.9,167.7 22.3,180.6 13.5,195.9 -5.3,190 -11,188 -16.9,183.6 -18.2,180.4 Z"/>
+        <path d="m -23.1,175.5 c 1.4,-33.1 38.9,-33.9 39,-33.9 -2.8,15.8 -6.6,35.7 -26,38.9 -12.1,1 -9.3,-1.3 -13,-5 z"/>
+        <ellipse cx="113.2" cy="136.4" rx="20.8" ry="4.9" transform="rotate(45)" fill="#c9a23a"/>
+      </g>
+    </svg>
+  </div>
+
+  <p class="brand-tag">Bangalore · Est. in the Chettinad Tradition · Lunch & Supper</p>
+
+  <nav class="navband" aria-label="Primary">
+    <ul>
+      <li><a href="page-1.html">Home</a></li>
+      <li class="dot">◆</li>
+      <li><a href="page-2.html">The Menu</a></li>
+      <li class="dot">◆</li>
+      <li><a href="page-3.html">Our Story</a></li>
+      <li class="dot">◆</li>
+      <li><a href="page-4.html">Visit &amp; Reservations</a></li>
+      <li class="dot">◆</li>
+      <li><a href="page-5.html" aria-current="page">Feast Days &amp; Seasons</a></li>
+      <li class="dot">◆</li>
+      <li><a href="page-6.html">Press &amp; Notes</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <svg class="hero-frame" viewBox="0 0 1182 112" preserveAspectRatio="xMidYMid meet" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <g fill="#e34234">
+      <path d="M0,56 L1182,56 L1182,58 L0,58 Z"/>
+      <path d="M0,52 L1182,52 L1182,53 L0,53 Z" fill="#c9a23a"/>
+      <path d="M0,61 L1182,61 L1182,62 L0,62 Z" fill="#c9a23a"/>
+    </g>
+    <!-- twin peacocks abstracted -->
+    <g fill="#1a1a1a" transform="translate(80,10)">
+      <path d="M0,46 q40,-46 90,-30 q30,8 50,30 q-30,-10 -60,-6 q-30,4 -50,18 q-15,-4 -30,-12 z"/>
+      <circle cx="78" cy="22" r="4" fill="#076b88"/>
+      <path d="M70,18 q14,-22 36,-22 q-4,12 -14,18" fill="none" stroke="#c9a23a" stroke-width="2"/>
+    </g>
+    <g fill="#1a1a1a" transform="translate(1102,10) scale(-1,1)">
+      <path d="M0,46 q40,-46 90,-30 q30,8 50,30 q-30,-10 -60,-6 q-30,4 -50,18 q-15,-4 -30,-12 z"/>
+      <circle cx="78" cy="22" r="4" fill="#076b88"/>
+      <path d="M70,18 q14,-22 36,-22 q-4,12 -14,18" fill="none" stroke="#c9a23a" stroke-width="2"/>
+    </g>
+    <!-- center medallion -->
+    <g transform="translate(591,56)">
+      <circle r="22" fill="none" stroke="#e34234" stroke-width="2"/>
+      <circle r="14" fill="none" stroke="#c9a23a" stroke-width="1.5"/>
+      <circle r="4" fill="#076b88"/>
+    </g>
+  </svg>
+
+  <p class="kicker">The Kalasha Calendar · MMXXIV–MMXXV</p>
+  <h1>Feast Days <span class="accent">&amp;</span> Seasons</h1>
+  <p class="lede">Four times a year the temple kitchen at Kalasha bends to the planets. Harvest sun, river flood, nine nights of the goddess, and the long lamps of Karthigai — each calls for a different rice, a different kuzhambu, a different way of laying the leaf. Bookings open six weeks in advance.</p>
+</section>
+
+<div class="divider" aria-hidden="true">
+  <svg viewBox="0 0 600 30" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+    <line x1="0" y1="15" x2="240" y2="15" stroke="#e34234" stroke-width="1.2"/>
+    <line x1="0" y1="18" x2="240" y2="18" stroke="#c9a23a" stroke-width="0.6"/>
+    <g transform="translate(300,15)" fill="#e34234">
+      <path d="M-40,0 q20,-12 40,0 q-20,12 -40,0 z"/>
+      <path d="M40,0 q-20,-12 -40,0 q20,12 40,0 z" fill="#c9a23a"/>
+      <circle r="5" fill="#076b88"/>
+      <circle r="2" fill="#f8f4ec"/>
+    </g>
+    <line x1="360" y1="15" x2="600" y2="15" stroke="#e34234" stroke-width="1.2"/>
+    <line x1="360" y1="18" x2="600" y2="18" stroke="#c9a23a" stroke-width="0.6"/>
+  </svg>
+</div>
+
+<!-- ============ FEASTS ============ -->
+<main>
+
+  <p class="section-title">The Four Feast Days</p>
+
+  <div class="feasts">
+
+    <!-- Pongal -->
+    <article class="feast">
+      <div class="feast-inner">
+        <div class="feast-head">
+          <svg class="lotus-mark" viewBox="0 0 384 301" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+            <g transform="matrix(2.67,-2.67,2.67,2.67,-230.7,-334.3)" fill="#e34234" stroke="#c9a23a" stroke-width="0.6">
+              <path d="m -20.5,171.7 c -34.7,-2.8 -17.6,27.4 -17.6,27.5 15,2.8 22.8,5.8 25.9,-13.6 z"/>
+              <path d="m -20.5,178.2 c 28.9,-16.2 12.8,-50 12.7,-50.1 -12.9,9.6 -28.2,18.5 -22.3,37.2 z"/>
+              <path d="M -18.2,180.4 C -2,151.5 31.9,167.6 31.9,167.7 22.3,180.6 13.5,195.9 -5.3,190 z"/>
+              <path d="m -23.1,175.5 c 1.4,-33.1 38.9,-33.9 39,-33.9 -2.8,15.8 -6.6,35.7 -26,38.9 z"/>
+              <ellipse cx="113.2" cy="136.4" rx="20.8" ry="4.9" transform="rotate(45)" fill="#c9a23a"/>
+            </g>
+          </svg>
+          <div class="titles">
+            <p class="feast-subtitle">The Harvest Lunch · Thai Month</p>
+            <h2>Pongal Thali <span class="price">₹950</span></h2>
+          </div>
+        </div>
+        <p class="when">Saturday 11 January &amp; Wednesday 15 January 2025 · seatings 12:30 and 2:30 PM</p>
+        <ul class="menu-sketch">
+          <li>Sakkarai pongal cooked at the table over a clay stove, jaggery from Erode</li>
+          <li>Ven pongal with whole black pepper, cashew, twelve curry leaves</li>
+          <li>Seven-vegetable kootu, raw turmeric pickle, gingelly-oil avial</li>
+          <li>Sugarcane, banana, betel leaf — served on a fresh plantain leaf</li>
+        </ul>
+        <p class="booking"><strong>Booking</strong>Fixed thali, no à la carte. Whole-table reservations only — minimum two, maximum eight per leaf. Pre-payment confirms.</p>
+      </div>
+    </article>
+
+    <!-- Aadi Perukku -->
+    <article class="feast">
+      <div class="feast-inner">
+        <div class="feast-head">
+          <svg class="lotus-mark" viewBox="0 0 384 301" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+            <g transform="matrix(2.67,-2.67,2.67,2.67,-230.7,-334.3)" fill="#e34234" stroke="#c9a23a" stroke-width="0.6">
+              <path d="m -20.5,171.7 c -34.7,-2.8 -17.6,27.4 -17.6,27.5 15,2.8 22.8,5.8 25.9,-13.6 z"/>
+              <path d="m -20.5,178.2 c 28.9,-16.2 12.8,-50 12.7,-50.1 -12.9,9.6 -28.2,18.5 -22.3,37.2 z"/>
+              <path d="M -18.2,180.4 C -2,151.5 31.9,167.6 31.9,167.7 22.3,180.6 13.5,195.9 -5.3,190 z"/>
+              <path d="m -23.1,175.5 c 1.4,-33.1 38.9,-33.9 39,-33.9 -2.8,15.8 -6.6,35.7 -26,38.9 z"/>
+              <ellipse cx="113.2" cy="136.4" rx="20.8" ry="4.9" transform="rotate(45)" fill="#c9a23a"/>
+            </g>
+          </svg>
+          <div class="titles">
+            <p class="feast-subtitle">The River Festival · Aadi 18</p>
+            <h2>Aadi Perukku <span class="price">₹1,250</span></h2>
+          </div>
+        </div>
+        <p class="when">Saturday 2 August &amp; Sunday 3 August 2025 · single seating, 1:00 PM</p>
+        <ul class="menu-sketch">
+          <li>Five flavoured rices — coconut, lemon, tamarind, curd, sesame — packed in banana leaf</li>
+          <li>Vazhaipoo vadai, sundakkai vatha kuzhambu, kovakkai poriyal</li>
+          <li>Paruppu payasam with palm jaggery, served warm from copper</li>
+          <li>Tender mango pickle, three-day aged, from the kitchen's clay jar</li>
+        </ul>
+        <p class="booking"><strong>Booking</strong>Carry-out parcels available for the river-bank ritual — order three days ahead. Dining-room seats forty.</p>
+      </div>
+    </article>
+
+    <!-- Navaratri -->
+    <article class="feast">
+      <div class="feast-inner">
+        <div class="feast-head">
+          <svg class="lotus-mark" viewBox="0 0 384 301" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+            <g transform="matrix(2.67,-2.67,2.67,2.67,-230.7,-334.3)" fill="#e34234" stroke="#c9a23a" stroke-width="0.6">
+              <path d="m -20.5,171.7 c -34.7,-2.8 -17.6,27.4 -17.6,27.5 15,2.8 22.8,5.8 25.9,-13.6 z"/>
+              <path d="m -20.5,178.2 c 28.9,-16.2 12.8,-50 12.7,-50.1 -12.9,9.6 -28.2,18.5 -22.3,37.2 z"/>
+              <path d="M -18.2,180.4 C -2,151.5 31.9,167.6 31.9,167.7 22.3,180.6 13.5,195.9 -5.3,190 z"/>
+              <path d="m -23.1,175.5 c 1.4,-33.1 38.9,-33.9 39,-33.9 -2.8,15.8 -6.6,35.7 -26,38.9 z"/>
+              <ellipse cx="113.2" cy="136.4" rx="20.8" ry="4.9" transform="rotate(45)" fill="#c9a23a"/>
+            </g>
+          </svg>
+          <div class="titles">
+            <p class="feast-subtitle">Nine Nights · Sundal Counter</p>
+            <h2>Navaratri Sundal <span class="price">₹180 / cone</span></h2>
+          </div>
+        </div>
+        <p class="when">22 September – 1 October 2025 · 5:00 to 9:00 PM, courtyard counter</p>
+        <ul class="menu-sketch">
+          <li>Nine days, nine legumes — chana, kabuli, peanut, green gram, mochai, karamani, thatta payaru, white peas, horse gram</li>
+          <li>Tempered with mustard, asafoetida, fresh coconut, raw mango on alternate evenings</li>
+          <li>Served in palm-leaf cones with kosumalli salad and a small payasam</li>
+          <li>Free golu darshan in the entrance bay — bring the children</li>
+        </ul>
+        <p class="booking"><strong>Booking</strong>Walk-in counter, no reservation required. Whole-platter pre-orders for kolu visits accepted till 4 PM same day.</p>
+      </div>
+    </article>
+
+    <!-- Karthigai -->
+    <article class="feast">
+      <div class="feast-inner">
+        <div class="feast-head">
+          <svg class="lotus-mark" viewBox="0 0 384 301" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+            <g transform="matrix(2.67,-2.67,2.67,2.67,-230.7,-334.3)" fill="#e34234" stroke="#c9a23a" stroke-width="0.6">
+              <path d="m -20.5,171.7 c -34.7,-2.8 -17.6,27.4 -17.6,27.5 15,2.8 22.8,5.8 25.9,-13.6 z"/>
+              <path d="m -20.5,178.2 c 28.9,-16.2 12.8,-50 12.7,-50.1 -12.9,9.6 -28.2,18.5 -22.3,37.2 z"/>
+              <path d="M -18.2,180.4 C -2,151.5 31.9,167.6 31.9,167.7 22.3,180.6 13.5,195.9 -5.3,190 z"/>
+              <path d="m -23.1,175.5 c 1.4,-33.1 38.9,-33.9 39,-33.9 -2.8,15.8 -6.6,35.7 -26,38.9 z"/>
+              <ellipse cx="113.2" cy="136.4" rx="20.8" ry="4.9" transform="rotate(45)" fill="#c9a23a"/>
+            </g>
+          </svg>
+          <div class="titles">
+            <p class="feast-subtitle">The Oil-Lamp Dinner · Karthigai Deepam</p>
+            <h2>Lamp Supper <span class="price">₹1,650</span></h2>
+          </div>
+        </div>
+        <p class="when">Wednesday 3 December 2025 · single seating, 7:30 PM, lamps lit at 6:45</p>
+        <ul class="menu-sketch">
+          <li>Eight hundred clay agal lamps along the entrance, lit by guests on arrival</li>
+          <li>Pori urundai and nei appam at the door, by hand, still warm</li>
+          <li>Slow-cooked country-chicken kuzhambu with marudhani spice, kal dosai</li>
+          <li>Adai-aviyal, rice-flour kozhukattai, payasam of sago and coconut milk</li>
+        </ul>
+        <p class="booking"><strong>Booking</strong>Forty-eight seats only. Vegetarian table set apart on request at booking. Children below ten at half-cover.</p>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- divider -->
+  <div class="divider" aria-hidden="true">
+    <svg viewBox="0 0 800 30" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+      <line x1="0" y1="14" x2="340" y2="14" stroke="#e34234" stroke-width="1.2"/>
+      <line x1="0" y1="17" x2="340" y2="17" stroke="#c9a23a" stroke-width="0.6"/>
+      <g transform="translate(400,15)">
+        <path d="M-30,-10 L-15,0 L-30,10 Z" fill="#e34234"/>
+        <path d="M30,-10 L15,0 L30,10 Z" fill="#e34234"/>
+        <circle r="6" fill="#076b88"/>
+        <circle r="2" fill="#c9a23a"/>
+      </g>
+      <line x1="460" y1="14" x2="800" y2="14" stroke="#e34234" stroke-width="1.2"/>
+      <line x1="460" y1="17" x2="800" y2="17" stroke="#c9a23a" stroke-width="0.6"/>
+    </svg>
+  </div>
+
+  <!-- ============ KUZHAMBU CLUB ============ -->
+  <section class="club" aria-labelledby="club-heading">
+    <div class="club-inner">
+      <p class="club-flag">The Standing Supper Series · Since 2019</p>
+      <h2 id="club-heading">The Kuzhambu <span class="red">Club</span></h2>
+      <p class="club-tag">One long table. Twelve seats. The chef cooks one kuzhambu, three ways.</p>
+
+      <div class="club-grid">
+        <div>
+          <h3>When</h3>
+          <p class="big">Last Saturday<br>of every month</p>
+          <p>Doors at 7:30 PM. The first course is served at 8:00 sharp; latecomers join at the next ladle. The evening closes by 10:45.</p>
+        </div>
+        <div>
+          <h3>How It Works</h3>
+          <p>A single regional kuzhambu — meen, kara, vatha, ennai, or pulikuzhambu — is taken apart through the meal. First poured over rice, then over dosai, then sipped from a tumbler. The chef sits down for the third course.</p>
+        </div>
+        <div>
+          <h3>Cover &amp; Booking</h3>
+          <p class="big">₹2,400 per head</p>
+          <p>Includes a welcome rasam, three kuzhambu courses, two rices, four side dishes, dessert, filter coffee. Wine and toddy at additional cost. Pre-payment is required to hold a seat.</p>
+        </div>
+      </div>
+
+      <div class="club-foot">
+        <p>Upcoming dates — <strong>25 January</strong> · <strong>22 February</strong> · <strong>29 March</strong> · <strong>26 April</strong> 2025. To book, write <em>club@kalasha.in</em> or call the kitchen line directly. Members of the club receive the year's twelve dates by post in early January.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="arcade" aria-hidden="true">
+    <div class="bay">
+      <div class="pilaster">
+        <span class="cap1"></span><span class="cap2"></span><span class="cap3"></span>
+        <span class="shaft"></span>
+        <span class="base3"></span><span class="base2"></span><span class="base1"></span>
+      </div>
+    </div>
+    <div class="bay">
+      <div class="pilaster">
+        <span class="cap1"></span><span class="cap2"></span><span class="cap3"></span>
+        <span class="shaft"></span>
+        <span class="base3"></span><span class="base2"></span><span class="base1"></span>
+      </div>
+    </div>
+    <div class="bay center">
+      <div class="twin-lotus">
+        <svg viewBox="0 0 384 301" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <g transform="matrix(2.67,-2.67,2.67,2.67,-230.7,-334.3)" fill="#e34234" stroke="#c9a23a" stroke-width="0.6">
+            <path d="m -20.5,171.7 c -34.7,-2.8 -17.6,27.4 -17.6,27.5 15,2.8 22.8,5.8 25.9,-13.6 z"/>
+            <path d="M -18.2,180.4 C -2,151.5 31.9,167.6 31.9,167.7 22.3,180.6 13.5,195.9 -5.3,190 z"/>
+            <ellipse cx="113.2" cy="136.4" rx="20.8" ry="4.9" transform="rotate(45)" fill="#c9a23a"/>
+          </g>
+        </svg>
+        <svg class="om-seal" viewBox="0 0 356 367" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path fill="#e34234" d="M 90.5,354 C 51.8,340.1 23.7,305.8 12.6,258.6 7.6,237.2 6.1,201.9 10.3,201.9 c 1.4,0 5.1,9.7 8.3,21.6 6.9,25.9 18.6,50.3 30,62.2 18.8,19.8 65.5,27.6 92.4,15.4 20.9,-9.5 29.4,-32.1 20.3,-54.1 -7,-17 -23,-22.7 -52.7,-18.8 0,0 -18.2,-19.6 -24,-54.4 l 18.7,1.7 c 22.5,2 39.5,-3 48.3,-14.2 8.3,-10.5 8.1,-14.6 -1.1,-25.3 -13.3,-15.5 -37.2,-11.6 -85.6,14 L 40.4,109 50.6,101.3 c 25.6,-19.6 70.2,-29.3 95.5,-21 23.1,7.6 40,37.9 35.5,63.4 -3.1,17.2 -16.9,41.4 -27.6,48.1 l -9.2,5.8 12.7,5.7 c 21.6,9.7 34.8,2.3 50.6,-28.6 21.8,-42.7 36,-53.7 68.9,-53.8 15.3,0 20.7,1.6 31.9,9.4 27.9,19.5 43.1,60 39.7,105.9 -4.2,58.1 -31.7,93.3 -72.9,93.3 -22.6,0 -37.1,-7.9 -48.7,-26.5 -10.2,-16.3 -14.8,-48.7 -8.9,-62.9 2.8,-6.8 3.3,-7.1 3.5,-1.6 0.3,10 11.8,26.3 22.2,31.8 25.8,13.3 62.7,-3.4 77.3,-35 11.1,-24 5.2,-70.2 -10,-78.4 -3.2,-1.7 -11.1,-3.1 -17.5,-3.1 -13.7,0 -24.4,9.8 -39.5,36.1 -5.2,9.1 -14,20.9 -19.5,26.1 -8.9,8.6 -12.1,9.6 -30,9.6 H 184.5 L 191,240.2 c 9.3,20.6 8.8,53.9 -1,74.3 -8.6,18 -28.7,36.2 -44.7,40.7 -15.6,4.3 -41,3.7 -54.9,-1.2 z M 165.8,75.9 C 157,60.8 151.5,32.6 157.5,32.6 c 7,15.1 21.3,28.6 36.6,38 27.5,13.3 55.4,8 85.8,-16.5 6.7,-5.4 12.6,-9.2 13.2,-8.5 7.4,11.5 20.3,21 24.5,34.4 0,5.7 -24.4,21.9 -43.6,29.1 -47.6,13.7 -80.1,8.3 -108.2,-33.2 z M 189.8,41 220.8,6.6 255.3,38.5 c -11.8,9.7 -20.3,24.8 -33.8,32.4 -10.6,-7.8 -26.5,-17.1 -31.7,-29.9 z"/>
+        </svg>
+        <svg viewBox="0 0 384 301" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <g transform="matrix(-2.67,-2.67,-2.67,2.67,614.7,-334.3)" fill="#e34234" stroke="#c9a23a" stroke-width="0.6">
+            <path d="m -20.5,171.7 c -34.7,-2.8 -17.6,27.4 -17.6,27.5 15,2.8 22.8,5.8 25.9,-13.6 z"/>
+            <path d="M -18.2,180.4 C -2,151.5 31.9,167.6 31.9,167.7 22.3,180.6 13.5,195.9 -5.3,190 z"/>
+            <ellipse cx="113.2" cy="136.4" rx="20.8" ry="4.9" transform="rotate(45)" fill="#c9a23a"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <div class="bay">
+      <div class="pilaster">
+        <span class="cap1"></span><span class="cap2"></span><span class="cap3"></span>
+        <span class="shaft"></span>
+        <span class="base3"></span><span class="base2"></span><span class="base1"></span>
+      </div>
+    </div>
+    <div class="bay">
+      <div class="pilaster">
+        <span class="cap1"></span><span class="cap2"></span><span class="cap3"></span>
+        <span class="shaft"></span>
+        <span class="base3"></span><span class="base2"></span><span class="base1"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-cols">
+    <div class="fcol">
+      <h4>Address</h4>
+      <p>Kalasha · A Chettinad Kitchen</p>
+      <p>14 Kasturba Cross Road,<br>Off Lavelle Road,<br>Bangalore 560 001</p>
+      <p>Off-street parking on Wood Street.</p>
+    </div>
+    <div class="vrule" aria-hidden="true"></div>
+    <div class="fcol">
+      <h4>Hours</h4>
+      <p>Tuesday – Sunday</p>
+      <p>Lunch · 12:30 – 3:00 PM<br>Supper · 7:00 – 10:30 PM</p>
+      <p>Monday closed for the kuzhambu pots.</p>
+      <p>Feast days follow festival hours — see calendar above.</p>
+    </div>
+    <div class="vrule" aria-hidden="true"></div>
+    <div class="fcol">
+      <h4>Contact</h4>
+      <p>Reservations · +91 80 4123 9090</p>
+      <p>Kitchen line · +91 98456 11220</p>
+      <p>book@kalasha.in<br>club@kalasha.in</p>
+      <p>@kalasha.bengaluru</p>
+    </div>
+  </div>
+
+  <p class="footer-credit">
+    <em>The kitchen is run by Chef Meenakshi Alagappan, fourth generation of the Karaikudi line. Pots tended by Murugan, Saraswathi, and Rekha. Filter coffee by hand, every morning, since 2017.</em>
+  </p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Apprenticeship — Kōrin Mokkō</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), serif;
+    margin: 0;
+    line-height: 1.7;
+    font-size: 15px;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* ============== MASTHEAD ============== */
+  .masthead {
+    padding: 56px 80px 0 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: end;
+    gap: 40px;
+  }
+  .masthead-left {
+    grid-column: 1;
+  }
+  .studio-jp {
+    font-family: var(--font-display), serif;
+    font-size: 64px;
+    line-height: 1;
+    letter-spacing: 0.1em;
+    color: var(--text);
+    margin: 0 0 12px 0;
+  }
+  .studio-en {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin: 0;
+  }
+  .masthead-right {
+    text-align: right;
+    align-self: end;
+    padding-bottom: 8px;
+  }
+  .seal-stamp {
+    display: inline-block;
+    background: var(--secondary);
+    color: var(--surface);
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.2em;
+    padding: 8px 14px;
+    transform: rotate(-3deg);
+    line-height: 1.3;
+  }
+  .seal-stamp small { display: block; font-size: 9px; letter-spacing: 0.15em; margin-top: 2px;}
+
+  /* ============== NAV ============== */
+  nav.primary {
+    margin: 32px 80px 0 80px;
+    border-top: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+  }
+  .tsuru-mark {
+    width: 38px; height: 38px;
+    border: 1px solid var(--ornament);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .tsuru-mark svg { width: 30px; height: 30px; }
+  nav.primary ul {
+    list-style: none;
+    margin: 0; padding: 0;
+    display: flex;
+    gap: 36px;
+    font-family: var(--font-body), serif;
+    font-variant: small-caps;
+    font-size: 12px;
+    letter-spacing: 0.28em;
+    text-transform: lowercase;
+  }
+  nav.primary a { color: var(--text); }
+  nav.primary a[aria-current="page"] {
+    color: var(--secondary);
+    border-bottom: 1px solid var(--secondary);
+    padding-bottom: 2px;
+  }
+
+  /* ============== HERO ============== */
+  .hero {
+    margin: 64px 80px 0 80px;
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    gap: 80px;
+    min-height: 380px;
+    position: relative;
+  }
+  .hero-left {
+    padding-top: 24px;
+  }
+  .kicker {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin: 0 0 24px 0;
+  }
+  h1.hero-title {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 76px;
+    line-height: 1;
+    margin: 0 0 32px 0;
+    letter-spacing: 0.02em;
+    color: var(--text);
+  }
+  h1.hero-title .jp {
+    display: block;
+    font-size: 32px;
+    letter-spacing: 0.4em;
+    color: var(--primary);
+    margin-bottom: 16px;
+  }
+  .hero-lead {
+    font-size: 16px;
+    line-height: 1.85;
+    max-width: 44ch;
+    color: var(--text);
+  }
+  .hero-lead::first-letter {
+    font-family: var(--font-display), serif;
+    font-size: 48px;
+    float: left;
+    line-height: 0.9;
+    margin: 4px 10px 0 0;
+    color: var(--secondary);
+  }
+  .hero-right {
+    position: relative;
+  }
+  .hero-crane {
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    width: 380px;
+    height: 380px;
+    opacity: 0.55;
+  }
+  .hero-crane svg { width: 100%; height: 100%; }
+
+  /* ============== SECTION DIVIDER ============== */
+  .divider {
+    margin: 96px 80px 64px 80px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+  .divider .rule {
+    flex: 1;
+    height: 1px;
+    background: var(--ornament);
+  }
+  .divider .glyph {
+    width: 28px; height: 28px;
+    opacity: 0.7;
+  }
+
+  /* ============== PHASES ============== */
+  .phases-section {
+    margin: 0 80px;
+    position: relative;
+  }
+  .seigaiha-bg {
+    position: absolute;
+    top: 0; right: -40px;
+    width: 400px; height: 400px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'><g fill='none' stroke='%231c3a5e' stroke-width='1.2'><circle cx='0' cy='0' r='100'/><circle cx='0' cy='0' r='75'/><circle cx='0' cy='0' r='50'/><circle cx='0' cy='0' r='25'/><circle cx='200' cy='0' r='100'/><circle cx='200' cy='0' r='75'/><circle cx='200' cy='0' r='50'/><circle cx='100' cy='100' r='100'/><circle cx='100' cy='100' r='75'/><circle cx='100' cy='100' r='50'/></g></svg>");
+    opacity: 0.1;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .phases-header {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: 80px;
+    margin-bottom: 48px;
+    position: relative;
+    z-index: 1;
+  }
+  .phases-header h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 44px;
+    margin: 0;
+    line-height: 1.1;
+  }
+  .phases-header h2 .jp {
+    display: block;
+    font-size: 18px;
+    letter-spacing: 0.4em;
+    color: var(--primary);
+    margin-bottom: 12px;
+  }
+  .phases-header p {
+    font-size: 15px;
+    line-height: 1.85;
+    margin: 0;
+  }
+
+  .phase-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 24px;
+    position: relative;
+    z-index: 1;
+  }
+  .phase-card {
+    background: var(--surface);
+    padding: 28px 28px 32px 28px;
+    border-top: 1px solid var(--ornament);
+    position: relative;
+  }
+  .phase-card .umebachi {
+    position: absolute;
+    top: 14px; right: 14px;
+    width: 14px; height: 14px;
+  }
+  .phase-card .yr {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin: 0 0 8px 0;
+  }
+  .phase-card h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 26px;
+    margin: 0 0 6px 0;
+    line-height: 1.15;
+  }
+  .phase-card .jp-sub {
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.3em;
+    color: var(--secondary);
+    margin: 0 0 16px 0;
+  }
+  .phase-card .meta-rule {
+    height: 1px; background: var(--ornament); opacity: 0.4;
+    margin: 12px 0;
+  }
+  .phase-card p {
+    font-size: 13.5px;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .phase-1 { grid-column: 1 / span 5; margin-top: 0; }
+  .phase-2 { grid-column: 7 / span 5; margin-top: 64px; }
+  .phase-3 { grid-column: 2 / span 5; margin-top: 24px; }
+  .phase-4 { grid-column: 8 / span 5; margin-top: 96px; }
+
+  /* ============== TERMS ============== */
+  .terms-section {
+    margin: 128px 80px 0 80px;
+    display: grid;
+    grid-template-columns: 4fr 1fr 6fr;
+    gap: 48px;
+  }
+  .terms-section h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 38px;
+    margin: 0;
+    line-height: 1.1;
+  }
+  .terms-section h2 .jp {
+    display: block;
+    font-size: 16px;
+    letter-spacing: 0.4em;
+    color: var(--primary);
+    margin-bottom: 10px;
+  }
+  .terms-list {
+    list-style: none;
+    padding: 0; margin: 0;
+  }
+  .terms-list li {
+    padding: 18px 0;
+    border-bottom: 1px solid rgba(12,12,12,0.2);
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 32px;
+    align-items: baseline;
+  }
+  .terms-list li:first-child { border-top: 1px solid var(--ornament); }
+  .terms-list dt, .terms-list .label {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--primary);
+  }
+  .terms-list .body {
+    font-size: 14px;
+    line-height: 1.75;
+  }
+
+  /* ============== APPLICATION ============== */
+  .application {
+    margin: 128px 80px 0 80px;
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .application h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 38px;
+    margin: 0 0 32px 0;
+    line-height: 1.1;
+  }
+  .application h2 .jp {
+    display: block;
+    font-size: 16px;
+    letter-spacing: 0.4em;
+    color: var(--primary);
+    margin-bottom: 10px;
+  }
+  .criteria {
+    counter-reset: crit;
+    list-style: none;
+    padding: 0; margin: 0;
+  }
+  .criteria li {
+    counter-increment: crit;
+    padding: 16px 0 16px 60px;
+    position: relative;
+    border-top: 1px solid rgba(12,12,12,0.25);
+    font-size: 14px;
+    line-height: 1.75;
+  }
+  .criteria li:last-child { border-bottom: 1px solid rgba(12,12,12,0.25); }
+  .criteria li::before {
+    content: "—  " counter(crit, decimal-leading-zero);
+    position: absolute;
+    left: 0; top: 16px;
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.2em;
+    color: var(--secondary);
+  }
+  .last-apprentice {
+    background: var(--surface);
+    border-top: 1px solid var(--ornament);
+    padding: 32px 32px 36px 32px;
+    position: relative;
+  }
+  .last-apprentice .umebachi {
+    position: absolute;
+    top: 14px; right: 14px;
+    width: 14px; height: 14px;
+  }
+  .last-apprentice .label {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin: 0 0 12px 0;
+  }
+  .last-apprentice .name {
+    font-family: var(--font-display), serif;
+    font-size: 28px;
+    margin: 0 0 4px 0;
+    line-height: 1.1;
+  }
+  .last-apprentice .origin {
+    font-style: italic;
+    font-size: 13px;
+    color: var(--text);
+    margin: 0 0 16px 0;
+  }
+  .last-apprentice .meta-rule {
+    height: 1px; background: var(--ornament); opacity: 0.4;
+    margin: 14px 0;
+  }
+  .last-apprentice p {
+    font-size: 13.5px;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  /* ============== CLOSING NOTE ============== */
+  .closing {
+    margin: 128px 80px 96px 80px;
+    display: grid;
+    grid-template-columns: 1fr 8fr 3fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .closing-rule { height: 1px; background: var(--ornament); }
+  .closing-text {
+    font-family: var(--font-display), serif;
+    font-size: 24px;
+    line-height: 1.5;
+    margin: 0;
+  }
+  .closing-text em {
+    color: var(--secondary);
+    font-style: normal;
+  }
+  .closing-aside {
+    text-align: right;
+    font-style: italic;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    line-height: 1.7;
+    color: var(--primary);
+  }
+
+  /* ============== FOOTER ============== */
+  footer {
+    background: var(--bg);
+    margin-top: 96px;
+    padding: 0 80px 32px 80px;
+    position: relative;
+  }
+  .footer-wave {
+    height: 60px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'><g fill='none' stroke='%230c0c0c' stroke-width='1.2'><circle cx='0' cy='0' r='100'/><circle cx='0' cy='0' r='75'/><circle cx='0' cy='0' r='50'/><circle cx='0' cy='0' r='25'/><circle cx='200' cy='0' r='100'/><circle cx='200' cy='0' r='75'/><circle cx='200' cy='0' r='50'/><circle cx='100' cy='100' r='100'/><circle cx='100' cy='100' r='75'/><circle cx='100' cy='100' r='50'/></g></svg>");
+    background-size: 200px 200px;
+    opacity: 0.08;
+    margin: 0 -80px 48px -80px;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 180px 1fr 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+  .footer-seal {
+    width: 120px; height: 120px;
+    opacity: 0.85;
+  }
+  .footer-seal svg { width: 100%; height: 100%; }
+  .footer-col h4 {
+    font-family: var(--font-display), serif;
+    font-size: 18px;
+    margin: 0 0 12px 0;
+    letter-spacing: 0.05em;
+  }
+  .footer-col p, .footer-col a {
+    font-size: 12px;
+    line-height: 1.85;
+    margin: 0;
+    color: var(--text);
+    display: block;
+  }
+  .footer-col.vert { font-style: italic; }
+  .attribution {
+    margin-top: 48px;
+    font-size: 11px;
+    color: var(--ornament);
+    letter-spacing: 0.05em;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============== MASTHEAD ============== -->
+<header class="masthead">
+  <div class="masthead-left">
+    <h2 class="studio-jp">光琳木工</h2>
+    <p class="studio-en">Kōrin Mokkō &nbsp;·&nbsp; Atelier of Joinery &amp; Paper &nbsp;·&nbsp; Est. Higashiyama, Kyōto</p>
+  </div>
+  <div class="masthead-right">
+    <span class="seal-stamp">入門 NYŪMON<small>apprenticeship intake</small></span>
+  </div>
+</header>
+
+<!-- ============== NAV ============== -->
+<nav class="primary" aria-label="primary">
+  <a href="page-1.html" class="tsuru-mark" aria-label="Kōrin Mokkō home">
+    <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="344" cy="344" r="320" fill="none" stroke="#0c0c0c" stroke-width="14"/>
+      <circle cx="344" cy="344" r="260" fill="none" stroke="#0c0c0c" stroke-width="2"/>
+      <path d="M344 180 c -60 60 -100 120 -60 180 c 20 30 60 40 60 80 c 0 -40 40 -50 60 -80 c 40 -60 0 -120 -60 -180 z" fill="#0c0c0c"/>
+    </svg>
+  </a>
+  <ul>
+    <li><a href="page-1.html">Atelier</a></li>
+    <li><a href="page-2.html">Workshop</a></li>
+    <li><a href="page-3.html">Commissions</a></li>
+    <li><a href="page-4.html">Materials</a></li>
+    <li><a href="page-5.html" aria-current="page">Apprenticeship</a></li>
+    <li><a href="page-6.html">Visit</a></li>
+  </ul>
+</nav>
+
+<!-- ============== HERO ============== -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="kicker">弟子入り — A seven-year covenant</p>
+    <h1 class="hero-title"><span class="jp">七年の修業</span>The Apprenticeship</h1>
+    <p class="hero-lead">Kōrin Mokkō accepts, when occasion warrants, a single apprentice into a seven-year course of joinery, paper, and finish. The discipline follows the rhythms of the Kyōto seasons — beginning with the broom in the genkan and, in the latter years, drawing toward an independent commission entrusted to the apprentice's own hand. The intake is not annual; the next is anticipated for the spring of 2027.</p>
+  </div>
+  <div class="hero-right">
+    <div class="hero-crane" aria-hidden="true">
+      <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="344" cy="344" r="330" fill="none" stroke="#0c0c0c" stroke-width="2"/>
+        <circle cx="344" cy="344" r="296" fill="none" stroke="#0c0c0c" stroke-width="1"/>
+        <g transform="translate(344 344)" fill="#0c0c0c">
+          <path d="M0 -240 c -40 60 -100 120 -160 130 c 60 30 100 60 130 110 c -20 30 -30 60 -20 100 c 30 -20 60 -30 100 -30 c 0 0 50 50 100 50 c 30 0 -10 -50 -30 -90 c 50 -30 110 -90 130 -160 c -60 30 -120 30 -180 0 c 30 -40 40 -80 30 -110 c -40 0 -70 0 -100 0 z"/>
+          <circle cx="-30" cy="-180" r="6" fill="#e34234"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============== DIVIDER ============== -->
+<div class="divider" aria-hidden="true">
+  <span class="rule"></span>
+  <svg class="glyph" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+    <polygon points="501.6,301.2 551.1,251.7 500.8,201.4 451.3,250.9 300.9,100.5 350.4,51 300.1,0.7 250.6,50.2 201.1,0.7 150.3,51.5 500.3,401.5 551.1,350.7" fill="none" stroke="#0c0c0c" stroke-width="14"/>
+  </svg>
+  <span class="rule"></span>
+</div>
+
+<!-- ============== PHASES ============== -->
+<section class="phases-section">
+  <div class="seigaiha-bg" aria-hidden="true"></div>
+
+  <div class="phases-header">
+    <h2><span class="jp">四つの段階</span>The Four Phases</h2>
+    <p>The course is divided into four uneven stages, each presupposing the last. No phase may be hurried; on rare occasions, a phase has been repeated. Tools, like the apprentice, are sharpened only by patience. What follows is the unalterable shape of the seven years.</p>
+  </div>
+
+  <div class="phase-grid">
+
+    <article class="phase-card phase-1">
+      <svg class="umebachi" viewBox="0 0 688 688" aria-hidden="true"><circle cx="344" cy="344" r="320" fill="#0c0c0c"/><circle cx="344" cy="180" r="90" fill="#f5efde"/><circle cx="180" cy="420" r="90" fill="#f5efde"/><circle cx="508" cy="420" r="90" fill="#f5efde"/><circle cx="240" cy="540" r="80" fill="#f5efde"/><circle cx="448" cy="540" r="80" fill="#f5efde"/><circle cx="344" cy="380" r="60" fill="#f5efde"/></svg>
+      <p class="yr">Year One</p>
+      <h3>Sweeping &amp; Tool-Care</h3>
+      <p class="jp-sub">掃除と道具</p>
+      <p>The first year is given to the broom, the whetstone, and the lacquered wiping cloth. The apprentice rises before the master, opens the shutters of the workshop on Yanaginobaba-dōri, sweeps the genkan, fills the water-pail, and learns the names of forty-three planes and seventy-one chisels. No cutting is permitted of work-stock; only of waste cedar.</p>
+      <div class="meta-rule"></div>
+      <p><em>Hours: 06:00–18:00, six days. One day at Hōnen-in.</em></p>
+    </article>
+
+    <article class="phase-card phase-2">
+      <svg class="umebachi" viewBox="0 0 688 688" aria-hidden="true"><circle cx="344" cy="344" r="320" fill="#0c0c0c"/><circle cx="344" cy="180" r="90" fill="#f5efde"/><circle cx="180" cy="420" r="90" fill="#f5efde"/><circle cx="508" cy="420" r="90" fill="#f5efde"/><circle cx="240" cy="540" r="80" fill="#f5efde"/><circle cx="448" cy="540" r="80" fill="#f5efde"/><circle cx="344" cy="380" r="60" fill="#f5efde"/></svg>
+      <p class="yr">Years Two — Three</p>
+      <h3>Planing &amp; Chiseling</h3>
+      <p class="jp-sub">鉋と鑿</p>
+      <p>Now the kanna is taken up. The apprentice draws shavings — at first thick and torn, then, by the autumn of the second year, thin enough to read newsprint through. Chisel work begins on offcuts of hinoki and continues through the simpler housings. By the close of the third year, the apprentice grinds and re-handles their own tools without supervision.</p>
+      <div class="meta-rule"></div>
+      <p><em>Examination: a single katsura board planed to 0.04 mm shavings.</em></p>
+    </article>
+
+    <article class="phase-card phase-3">
+      <svg class="umebachi" viewBox="0 0 688 688" aria-hidden="true"><circle cx="344" cy="344" r="320" fill="#0c0c0c"/><circle cx="344" cy="180" r="90" fill="#f5efde"/><circle cx="180" cy="420" r="90" fill="#f5efde"/><circle cx="508" cy="420" r="90" fill="#f5efde"/><circle cx="240" cy="540" r="80" fill="#f5efde"/><circle cx="448" cy="540" r="80" fill="#f5efde"/><circle cx="344" cy="380" r="60" fill="#f5efde"/></svg>
+      <p class="yr">Years Four — Five</p>
+      <h3>Joinery Proper</h3>
+      <p class="jp-sub">指物の本道</p>
+      <p>The apprentice is set to the binding of frames — first the simple kumiko grids of asa-no-ha, then sangi-kuzushi, and at length the compound goma-gara that demands no glue and no nail. Mortise-and-tenon, shihō-tsugi, and the blind dovetail are taught in turn. Restoration work on machiya fittings begins in the latter half of year five, under the master's eye.</p>
+      <div class="meta-rule"></div>
+      <p><em>Materials: hinoki, sugi, kuri; later kuwa and tagayasan.</em></p>
+    </article>
+
+    <article class="phase-card phase-4">
+      <svg class="umebachi" viewBox="0 0 688 688" aria-hidden="true"><circle cx="344" cy="344" r="320" fill="#0c0c0c"/><circle cx="344" cy="180" r="90" fill="#f5efde"/><circle cx="180" cy="420" r="90" fill="#f5efde"/><circle cx="508" cy="420" r="90" fill="#f5efde"/><circle cx="240" cy="540" r="80" fill="#f5efde"/><circle cx="448" cy="540" r="80" fill="#f5efde"/><circle cx="344" cy="380" r="60" fill="#f5efde"/></svg>
+      <p class="yr">Years Six — Seven</p>
+      <h3>Independent Commission</h3>
+      <p class="jp-sub">独立の依頼</p>
+      <p>In the sixth year the apprentice is entrusted with a small commission of their own — a transom, a tea-room ranma, or a set of fusuma frames — drawn, costed, and built without intervention save in matters of safety. The seventh year permits a larger work and the journey to the lacquerers in Wajima or the paper-makers in Kurotani. At its close, the master may grant the apprentice's own seal.</p>
+      <div class="meta-rule"></div>
+      <p><em>Closing: presentation at the spring opening, fifth-of-fifth.</em></p>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============== TERMS ============== -->
+<section class="terms-section">
+  <div>
+    <h2><span class="jp">条件</span>Terms of the Course</h2>
+  </div>
+  <div></div>
+  <div>
+    <ul class="terms-list">
+      <li>
+        <span class="label">Lodging</span>
+        <span class="body">Room and board provided in the upper rear of the atelier — a six-mat room overlooking the inner garden, shared facilities, breakfast and supper at the master's table. The apprentice is expected to keep the room and to rise without summons.</span>
+      </li>
+      <li>
+        <span class="label">Stipend</span>
+        <span class="body">No stipend is paid in years one and two. From the first month of year three, a modest monthly sum of ¥45,000 is paid, rising to ¥85,000 in year five and ¥140,000 in years six and seven. Tools are issued from the studio's reserve and become the apprentice's own at completion.</span>
+      </li>
+      <li>
+        <span class="label">Holidays</span>
+        <span class="body">Three days at New Year, the week of Obon, and one day each fortnight. The full hottest week of August, when glue will not set, is given to rest or to the rice harvest if the family requires.</span>
+      </li>
+      <li>
+        <span class="label">Departure</span>
+        <span class="body">An apprentice may withdraw at any time without obligation; the master will write a letter of introduction to another house if asked. Of nine apprentices accepted in the studio's history, six have completed the seven years.</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============== APPLICATION ============== -->
+<section class="application">
+  <div>
+    <h2><span class="jp">志願の条件</span>Criteria for Application</h2>
+    <ol class="criteria">
+      <li>Age between eighteen and twenty-eight at the date of intake. Earlier or later applications are considered only by personal introduction.</li>
+      <li>Sufficient Japanese to follow daily instruction. Reading proficiency is not required at entry; it will be acquired in the course of the work.</li>
+      <li>Sound health and undamaged hands. A medical certificate dated within ninety days is requested upon shortlisting.</li>
+      <li>A letter, written by hand, describing one object the applicant has made and one object they have repaired. Photographs are welcomed but not required.</li>
+      <li>Two letters of introduction — one from a teacher or employer, one from a person not related by family — sealed and unopened.</li>
+      <li>Willingness to remain in residence for the seven years, with the brief exceptions noted above. The course cannot be undertaken in part.</li>
+    </ol>
+  </div>
+
+  <aside class="last-apprentice">
+    <svg class="umebachi" viewBox="0 0 688 688" aria-hidden="true"><circle cx="344" cy="344" r="320" fill="#0c0c0c"/><circle cx="344" cy="180" r="90" fill="#f5efde"/><circle cx="180" cy="420" r="90" fill="#f5efde"/><circle cx="508" cy="420" r="90" fill="#f5efde"/><circle cx="240" cy="540" r="80" fill="#f5efde"/><circle cx="448" cy="540" r="80" fill="#f5efde"/><circle cx="344" cy="380" r="60" fill="#f5efde"/></svg>
+    <p class="label">The current apprentice — accepted spring 2019</p>
+    <h3 class="name">Mori Yūta</h3>
+    <p class="origin">of Sakai, Ōsaka — formerly of the Tominaga blade-house</p>
+    <div class="meta-rule"></div>
+    <p>Mori-san entered the atelier in the third week of March, 2019, having walked the Yamato-kaidō from Sakai with a single furoshiki. He completed the planing examination in the autumn of 2021 and is presently engaged on the latter half of his independent commission — a kumiko ranma for a teahouse in Kamigyō. He will conclude the course in the spring of 2026.</p>
+  </aside>
+</section>
+
+<!-- ============== CLOSING NOTE ============== -->
+<section class="closing">
+  <span class="closing-rule"></span>
+  <p class="closing-text">The next intake is anticipated for <em>spring 2027</em>. Letters of inquiry, written by hand, may be addressed to the master between the first day of the ninth month and the last day of the eleventh month, 2026.</p>
+  <p class="closing-aside">— Kōrin Sōgen<br>workshop master, eighth generation</p>
+</section>
+
+<!-- ============== FOOTER ============== -->
+<footer>
+  <div class="footer-wave" aria-hidden="true"></div>
+  <div class="footer-grid">
+    <div class="footer-seal" aria-hidden="true">
+      <svg viewBox="0 0 345 326" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="172" cy="163" r="160" fill="none" stroke="#0c0c0c" stroke-width="3"/>
+        <g transform="translate(172 163)" fill="#0c0c0c">
+          <ellipse cx="0" cy="-60" rx="22" ry="80"/>
+          <ellipse cx="-70" cy="-20" rx="20" ry="70" transform="rotate(-30 -70 -20)"/>
+          <ellipse cx="70" cy="-20" rx="20" ry="70" transform="rotate(30 70 -20)"/>
+          <circle cx="0" cy="0" r="10"/>
+          <rect x="-4" y="20" width="8" height="80"/>
+          <rect x="-30" y="50" width="6" height="50"/>
+          <rect x="24" y="50" width="6" height="50"/>
+        </g>
+      </svg>
+    </div>
+    <div class="footer-col vert">
+      <h4>光琳木工</h4>
+      <p>Kōrin Mokkō</p>
+      <p>Atelier of Joinery,</p>
+      <p>Paper, &amp; Lacquer Finish</p>
+      <p>est. 1873 (Meiji 6)</p>
+    </div>
+    <div class="footer-col vert">
+      <h4>所在地</h4>
+      <p>17 Yanaginobaba-dōri</p>
+      <p>Higashiyama-ku</p>
+      <p>Kyōto-shi 605-0826</p>
+      <p>+81 75 541 0826</p>
+    </div>
+    <div class="footer-col">
+      <h4>来訪</h4>
+      <p><a href="page-6.html">Visit the atelier →</a></p>
+      <p><a href="page-3.html">Recent commissions</a></p>
+      <p><a href="page-2.html">The workshop</a></p>
+      <p><a href="page-4.html">Materials &amp; method</a></p>
+    </div>
+  </div>
+  <p class="attribution">Kamon SVG renderings — tsuru-no-maru, kiri, umebachi, sayagata, seigaiha — adapted from public-domain heraldic plates after Hayashi Rakusai (1913). Set in Yuji Syuku and Shippori Mincho. © Kōrin Mokkō, Reiwa 6.</p>
+</footer>
+
+</body>
+</html>
