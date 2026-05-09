@@ -27,6 +27,7 @@ Or via the CLI: scripts/render_screenshots.py
 
 import http.server
 import json
+import re
 import shutil
 import socketserver
 import subprocess
