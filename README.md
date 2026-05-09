@@ -15,6 +15,33 @@ Decision log lives in `docs/`:
 - `docs/design.md` — diversity strategy + rationale
 - `docs/generator.md` — pipeline architecture, all locked design decisions
 - `docs/harbor.md` — Harbor task interface notes
+- `docs/animations.md` — Bonus 1 design (animations + filmstrip input)
+- [`docs/eval_report.md`](docs/eval_report.md) — **30 × 2 trial eval results**
+- [`docs/rubric_audit.md`](docs/rubric_audit.md) — reward-hack audit + decomposition plan for RL use
+
+## Latest eval — 30 tasks × 2 attempts
+
+**Run:** `jobs/2026-05-09__15-57-29/`  ·  **Wall clock:** 1h 32m  ·  **Cost:** ~$600  ·  **Agent:** claude-code with `claude-opus-4-7`
+
+| Rubric | Mean | Median | Stdev |
+|---|---|---|---|
+| Overall (composite) | 0.522 | 0.577 | 0.146 |
+| Visual (SSIM) | 0.707 | 0.737 | 0.078 |
+| Palette (Lab + 3D histogram) | 0.539 | 0.647 | **0.303** |
+| Structural (DOM tag Jaccard) | 0.573 | 0.586 | 0.065 |
+| Typography (font-name Jaccard) | 0.342 | 0.250 | 0.267 |
+| Consistency (header/footer hash) | 0.631 | 0.583 | 0.262 |
+| Animation (frame-SSIM + @keyframes) | 0.645 | 0.661 | 0.109 |
+| Coverage | 1.000 | 1.000 | 0.000 |
+
+Full per-task and per-trial breakdowns + viewer links: **[`docs/eval_report.md`](docs/eval_report.md)**.
+
+Open the side-by-side viewer:
+```bash
+open viewer/index.html
+```
+
+Per-trial deep links (jump straight to that trial's GT-vs-agent comparison) are listed in `docs/eval_report.md`.
 
 ## Setup
 

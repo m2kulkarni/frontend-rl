@@ -104,12 +104,21 @@ def main() -> int:
                         help="Number of tasks to generate in parallel.")
     parser.add_argument("--animated", action="store_true",
                         help="Generate animated tasks (every sample sets animated=True).")
+    parser.add_argument("--variant", choices=["period_faithful", "modern", "bold"],
+                        default=None,
+                        help="If set, override the sampled variant on every point. "
+                             "Useful for batching a single variant (e.g., bold).")
     args = parser.parse_args()
 
     args.out.mkdir(parents=True, exist_ok=True)
 
     sampler = sample_stratified_animated if args.animated else sample_stratified
     points = sampler(args.n, rng_seed=args.seed)
+    if args.variant:
+        points = [
+            TaxonomyPoint(p.style, args.variant, p.purpose, p.seed, p.animated)
+            for p in points
+        ]
 
     print(f"Plan: generate {len(points)} tasks (seed={args.seed}, "
           f"concurrent={args.concurrent}) → {args.out}")

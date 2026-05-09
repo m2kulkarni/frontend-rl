@@ -22,7 +22,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from proximal_env.rubric import (
-    animation, coverage, palette, structural, typography, visual,
+    animation, consistency, coverage, palette, structural, typography, visual,
 )
 
 # Default weights. Tunable. Animation is only included when the task is
@@ -33,10 +33,12 @@ WEIGHTS: dict[str, float] = {
     "structural": 1.0,
     "typography": 0.5,   # weakest signal in current implementation
     "animation": 1.0,    # only contributes when task is animated
+    "consistency": 0.5,  # header/footer match across pages — structural
+                         # integrity check (independent of GT comparison)
 }
 
-COMPOSED_STATIC = ("visual", "palette", "structural", "typography")
-COMPOSED_ANIMATED = ("visual", "palette", "structural", "typography", "animation")
+COMPOSED_STATIC = ("visual", "palette", "structural", "typography", "consistency")
+COMPOSED_ANIMATED = ("visual", "palette", "structural", "typography", "animation", "consistency")
 
 
 def _weighted_geometric_mean(scores: dict[str, float], keys: tuple[str, ...]) -> float:
@@ -83,9 +85,11 @@ def grade(ground_truth_dir: Path, candidate_dir: Path) -> dict:
     pal = palette.score(gt, cand)
     stc = structural.score(gt, cand)
     typ = typography.score(gt, cand)
+    con = consistency.score(gt, cand)
 
     components: dict[str, float] = {
-        "visual": vis, "palette": pal, "structural": stc, "typography": typ,
+        "visual": vis, "palette": pal, "structural": stc,
+        "typography": typ, "consistency": con,
     }
     if animated:
         components["animation"] = animation.score(gt, cand)

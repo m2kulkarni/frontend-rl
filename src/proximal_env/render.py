@@ -40,9 +40,6 @@ FILMSTRIP_COLS = 4          # 4×4 grid = 16 cells, 15 frames + 1 blank.
 FILMSTRIP_ROWS = 4          # Time runs left-to-right, top-to-bottom.
 FILMSTRIP_FRAME_W = 360     # 25% of viewport width
 FILMSTRIP_FRAME_H = 225     # 25% of viewport height
-# Total filmstrip dimensions: 1440 × 900 — matches the canonical viewport, well
-# under Anthropic's 1568 longest-side limit so the vision API processes each
-# cell at full per-cell resolution without downsampling.
 
 
 def _compute_tile_ranges(height: int) -> list[tuple[int, int]]:
@@ -87,11 +84,7 @@ def _render_with_page(page: Page, html_path: Path, out_path: Path) -> None:
     file_url = f"file://{html_path.resolve()}"
     page.goto(file_url, wait_until="networkidle", timeout=30000)
 
-    # Wait for web fonts to settle. document.fonts.ready is a promise; awaiting
-    # it via evaluate ensures CSS-bundled fonts have arrived before we shoot.
     page.evaluate("document.fonts.ready")
-
-    # Small extra settle for any CSS transitions/animations that fire on load.
     page.wait_for_timeout(500)
 
     page.screenshot(path=str(out_path), full_page=True)
@@ -115,11 +108,6 @@ def render_page(html_path: Path, out_path: Path) -> None:
 def _record_one_page_frames(page, html_path: Path, frames_dir: Path) -> list[Path]:
     """Take VIDEO_FRAME_COUNT timed screenshots of a page, evenly spaced over
     VIDEO_DURATION_SEC. Build a horizontal filmstrip alongside the frames.
-
-    The viewport screenshots show the animation at evenly-spaced moments
-    (frame-01 at t=0, frame-02 at t=333ms, …, frame-15 at t=4666ms). The agent
-    reads the filmstrip first ("which element moves?"), then loads individual
-    frames for fine detail.
     """
     file_url = f"file://{html_path.resolve()}"
     page.goto(file_url, wait_until="networkidle", timeout=30000)

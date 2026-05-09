@@ -18,7 +18,7 @@ from typing import Literal
 ArchitecturalStyle = Literal[
     "persian-safavid", "roman-imperial", "high-gothic", "dravidian", "edo-japanese"
 ]
-Variant = Literal["period_faithful", "modern"]
+Variant = Literal["period_faithful", "modern", "bold"]
 SitePurpose = Literal[
     "museum", "university", "restaurant", "studio",
     "editorial", "portfolio", "civic", "foundation",
@@ -27,7 +27,7 @@ SitePurpose = Literal[
 ARCHITECTURAL_STYLES: tuple[ArchitecturalStyle, ...] = (
     "persian-safavid", "roman-imperial", "high-gothic", "dravidian", "edo-japanese",
 )
-VARIANTS: tuple[Variant, ...] = ("period_faithful", "modern")
+VARIANTS: tuple[Variant, ...] = ("period_faithful", "modern", "bold")
 SITE_PURPOSES: tuple[SitePurpose, ...] = (
     "museum", "university", "restaurant", "studio",
     "editorial", "portfolio", "civic", "foundation",
@@ -74,9 +74,6 @@ def sample_stratified_animated(n: int, *, rng_seed: int | None = None) -> list[T
 
 def sample_stratified(n: int, *, rng_seed: int | None = None) -> list[TaxonomyPoint]:
     """Stratified sampling — guarantees every architectural style appears at least once.
-
-    The curated 10-task deliverable goes through this. Goal: maximize visible diversity
-    in the report (no two near-identical (style × purpose) pairs).
     """
     if n < len(ARCHITECTURAL_STYLES):
         raise ValueError(
@@ -89,9 +86,10 @@ def sample_stratified(n: int, *, rng_seed: int | None = None) -> list[TaxonomyPo
     purposes_left = list(SITE_PURPOSES)
     rng.shuffle(purposes_left)
 
-    # Round 1: one task per architectural style; alternate variants.
+    # Round 1: one task per architectural style; cycle through all variants
+    # (was `i % 2` before bold was added — that bug excluded bold from round 1).
     for i, style in enumerate(ARCHITECTURAL_STYLES):
-        variant: Variant = VARIANTS[i % 2]
+        variant: Variant = VARIANTS[i % len(VARIANTS)]
         purpose = purposes_left.pop() if purposes_left else rng.choice(SITE_PURPOSES)
         points.append(TaxonomyPoint(
             style=style,

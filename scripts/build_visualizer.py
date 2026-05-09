@@ -113,6 +113,10 @@ def build_one_task(slug: str, trial_dir: Path, out_root: Path) -> dict | None:
     re-grading), copies the agent's HTML, and renders both GT and agent to
     PNGs for the side-by-side. Returns None if the trial is incomplete
     (no reward.json yet).
+
+    Output dir is keyed by `trial_dir.name` (e.g. `slug__abc123`) so that
+    multiple trials of the same slug (k>1) each get their own dir and
+    don't overwrite each other.
     """
     gt_dir = _resolve_gt_dir(slug)
 
@@ -121,7 +125,8 @@ def build_one_task(slug: str, trial_dir: Path, out_root: Path) -> dict | None:
         # Trial still in flight or failed before verifier ran.
         return None
 
-    task_out = out_root / slug
+    trial_key = trial_dir.name  # `slug__hash` — unique per trial
+    task_out = out_root / trial_key
     task_out.mkdir(parents=True, exist_ok=True)
 
     # 1. Stage agent files
@@ -154,12 +159,14 @@ def build_one_task(slug: str, trial_dir: Path, out_root: Path) -> dict | None:
     # 4. Stash a small scores.json for ad-hoc inspection / re-use
     (task_out / "scores.json").write_text(json.dumps({
         "slug": slug,
+        "trial_key": trial_key,
         "trial_id": trial_dir.name.split("__", 1)[-1],
         "overall": overall,
     }, indent=2))
 
     return {
         "slug": slug,
+        "trial_key": trial_key,
         "trial_id": trial_dir.name.split("__", 1)[-1],
         "overall": overall,
         "pages": pages,
@@ -244,12 +251,20 @@ def color_class(score: float) -> str:
     return "bad"
 
 
-def render_task_html(task: dict, slug: str) -> str:
-    """Render the HTML block for one task."""
+def render_task_html(task: dict) -> str:
+    """Render the HTML block for one (task, trial) pair."""
+    slug = task["slug"]
+    trial_key = task["trial_key"]  # unique per trial — used for anchor + image paths
     overall = task["overall"]
-    # Display only the keys that exist in this reward.json — robust to schema drift.
-    rubric_keys = [k for k in ("overall", "coverage", "visual", "palette",
-                                "structural", "typography") if k in overall]
+    # Display every numeric key in reward.json, ordered with the most important first.
+    canonical_order = ("overall", "coverage", "visual", "palette",
+                       "structural", "typography", "consistency", "animation")
+    rubric_keys = [k for k in canonical_order if k in overall]
+    # Append any extras that snuck in (forward-compat).
+    for k in overall:
+        if k not in rubric_keys and isinstance(overall[k], (int, float)):
+            rubric_keys.append(k)
+
     score_chips = "".join(
         f'<div class="score">'
         f'<div class="score-label">{k}</div>'
@@ -261,12 +276,12 @@ def render_task_html(task: dict, slug: str) -> str:
     pages_html = []
     for page in task["pages"]:
         gt_panel = (
-            f'<img src="{slug}/gt/{page}" alt="gt {page}">'
+            f'<img src="{trial_key}/gt/{page}" alt="gt {page}">'
             if task["has_gt"].get(page) else
             '<div class="panel missing">missing</div>'
         )
         agent_panel = (
-            f'<img src="{slug}/agent/{page}" alt="agent {page}">'
+            f'<img src="{trial_key}/agent/{page}" alt="agent {page}">'
             if task["has_agent"].get(page) else
             '<div class="panel missing">missing</div>'
         )
@@ -279,7 +294,7 @@ def render_task_html(task: dict, slug: str) -> str:
           <div class="panel"><div class="panel-label">agent attempt</div>{agent_panel}</div>
         </div>""")
 
-    return f"""<div class="task" id="{slug}">
+    return f"""<div class="task" id="{trial_key}">
   <h2>{slug}</h2>
   <div class="meta">trial: <code>{task['trial_id']}</code></div>
   <div class="scorebar">{score_chips}</div>
@@ -296,6 +311,8 @@ def main() -> int:
                         help="path to a jobs/<run-id> directory")
     parser.add_argument("--out", type=Path, default=Path("viewer"),
                         help="output viewer directory (default: viewer/)")
+    parser.add_argument("--workers", type=int, default=6,
+                        help="parallel render workers (default: 6).")
     args = parser.parse_args()
 
     if not args.run_dir.is_dir():
@@ -309,33 +326,45 @@ def main() -> int:
         print(f"no trials found under {args.run_dir}", file=sys.stderr)
         return 1
 
-    print(f"Building viewer for {len(trials)} trial(s)...\n")
+    print(f"Building viewer for {len(trials)} trial(s) with up to {args.workers} parallel renders...\n")
+
+    import concurrent.futures as _cf
+    import threading
+
+    print_lock = threading.Lock()
     tasks_data = []
     skipped = 0
-    for slug, trial in trials:
-        print(f"  {slug}  → ", end="", flush=True)
+
+    def _one(slug: str, trial: Path) -> tuple[str, dict | None, str | None]:
         t0 = time.time()
         try:
             t = build_one_task(slug, trial, args.out)
         except Exception as exc:
-            print(f"FAILED: {exc!r}")
-            continue
+            return slug, None, f"FAILED: {exc!r}"
         if t is None:
-            print("(in flight or no reward.json yet — skipping)")
-            skipped += 1
-            continue
+            return slug, None, "(in flight or no reward.json yet — skipping)"
         elapsed = time.time() - t0
-        print(f"overall={t['overall']['overall']:.3f}  ({elapsed:.0f}s)")
-        tasks_data.append((slug, t))
+        return slug, t, f"overall={t['overall']['overall']:.3f}  ({elapsed:.0f}s)"
+
+    with _cf.ThreadPoolExecutor(max_workers=args.workers) as ex:
+        futures = {ex.submit(_one, slug, trial): (slug, trial) for slug, trial in trials}
+        for fut in _cf.as_completed(futures):
+            slug, t, msg = fut.result()
+            with print_lock:
+                print(f"  {slug:55s}  →  {msg}", flush=True)
+            if t is None and msg and msg.startswith("("):
+                skipped += 1
+            elif t is not None:
+                tasks_data.append((slug, t))
 
     # Sort tasks by overall score, descending — best-first in the viewer.
     tasks_data.sort(key=lambda st: st[1]["overall"]["overall"], reverse=True)
 
     nav = " ".join(
-        f'<a href="#{slug}">{slug.split("-", 1)[0]}</a>'
-        for slug, _ in tasks_data
+        f'<a href="#{t["trial_key"]}">{slug.split("-", 1)[0]}</a>'
+        for slug, t in tasks_data
     )
-    tasks_html = "\n".join(render_task_html(t, slug) for slug, t in tasks_data)
+    tasks_html = "\n".join(render_task_html(t) for _, t in tasks_data)
     html = INDEX_HTML.replace("__NAV__", nav).replace("__TASKS__", tasks_html)
     (args.out / "index.html").write_text(html)
 

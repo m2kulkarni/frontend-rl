@@ -34,31 +34,77 @@ def _other_pages(filename: str, all_pages: list[dict]) -> list[dict]:
     return [p for p in all_pages if p["filename"] != filename]
 
 
-def _embed_motif_svg(library: StyleLibrary, ref: str | None) -> str:
-    """Read SVG body for a motif reference like 'svg/girih-8-star.svg'.
-
-    Returns empty string if ref is None or not found. Returns the full SVG file
-    contents (a couple of KB up to a few hundred KB).
-    """
-    if ref is None:
-        return ""
-    target = (library.style_dir / ref)
-    if not target.is_file():
-        return ""
-    return target.read_text(encoding="utf-8")
-
-
 def _build_motif_context(library: StyleLibrary, motif_selection: dict) -> str:
-    """Produce the inline-SVG block for the prompt — assigned motifs only."""
+    """Produce the per-slot motif catalog for the prompt.
+
+    Output is a tiny table — slot, basename, and a one-line description from
+    the manifest. We deliberately do NOT include the SVG body in the prompt
+    anymore: the LLM doesn't need to copy the geometry, only decide where to
+    place each motif and at what size/class. The build inlines the bodies
+    deterministically post-LLM (`inline_motif_imgs`).
+    """
     chunks = []
+    motifs_by_path = library.motifs_by_filename()
     for slot, ref in motif_selection.items():
         if not ref:
             continue
-        body = _embed_motif_svg(library, ref)
-        if not body:
-            continue
-        chunks.append(f"### Motif: {slot}  (file: `{ref}`)\n\n```svg\n{body}\n```")
-    return "\n\n".join(chunks) if chunks else "(no motifs assigned to this design system)"
+        basename = ref.split("/")[-1]
+        motif = motifs_by_path.get(ref) or library.motif_by_basename(basename)
+        notes = (motif.notes if motif else "") or "(no description)"
+        chunks.append(
+            f"- **slot `{slot}`** → `motifs/{basename}` — {notes}"
+        )
+    return "\n".join(chunks) if chunks else "(no motifs assigned to this design system)"
+
+
+_IMG_MOTIF_RE = re.compile(
+    r'<img\s+([^>]*?)\bsrc="motifs/([^"]+\.svg)"([^>]*?)/?>',
+    re.IGNORECASE | re.DOTALL,
+)
+_SVG_OPEN_RE = re.compile(r'<svg\b([^>]*)>', re.IGNORECASE)
+_XML_DECL_RE = re.compile(r'<\?xml[^?]*\?>\s*', re.IGNORECASE)
+_DOCTYPE_RE = re.compile(r'<!DOCTYPE[^>]*>\s*', re.IGNORECASE)
+
+
+def inline_motif_imgs(html: str, library: StyleLibrary) -> str:
+    """Replace `<img src="motifs/X.svg" ...>` with the inlined SVG body.
+
+    The LLM is told to emit `<img src="motifs/<basename>.svg" class="..." width=...>`
+    references for ornaments. This pass reads each referenced SVG file and
+    inlines it byte-for-byte (path data, viewBox), merging the `<img>`'s
+    attributes (class, width, height, style) onto the outer `<svg>` tag so
+    layout + recoloring CSS still hits.
+
+    Geometric fidelity is now structural: the LLM cannot redraw the motif
+    even if it wanted to.
+    """
+    def replace(match: re.Match) -> str:
+        before_attrs = (match.group(1) or "").strip()
+        ref = match.group(2)
+        after_attrs = (match.group(3) or "").strip()
+        extra_attrs = " ".join(p for p in (before_attrs, after_attrs) if p)
+
+        motif = library.motif_by_basename(ref.split("/")[-1])
+        if motif is None:
+            return match.group(0)  # unknown motif — leave the img alone (will 404)
+
+        body = library.read_motif_svg(motif)
+        body = _XML_DECL_RE.sub("", body)
+        body = _DOCTYPE_RE.sub("", body)
+        body = body.strip()
+
+        # Merge LLM-provided attributes onto the outer <svg>. The source SVG
+        # already has its own viewBox, xmlns, width, height — we APPEND new
+        # attrs after, and the browser uses the *last* duplicate, so size/class
+        # from the LLM wins over the source's hard-coded width/height.
+        def merge_into_svg(svg_match: re.Match) -> str:
+            existing = svg_match.group(1) or ""
+            sep = " " if existing and not existing.endswith(" ") else ""
+            return f"<svg{existing}{sep}{extra_attrs}>" if extra_attrs else f"<svg{existing}>"
+
+        return _SVG_OPEN_RE.sub(merge_into_svg, body, count=1)
+
+    return _IMG_MOTIF_RE.sub(replace, html)
 
 
 def build_user_prompt(
@@ -162,13 +208,38 @@ prices, addresses go in. No lorem ipsum.
 Already handled by the shared `nav_html` above. Filenames in the site:
 `page-1.html` through `page-{ds['page_count']}.html`. The current page is `{page['filename']}`.
 
-# Inline-SVG motifs to use
+# Motifs — emit references; the build inlines them for you
 
-The design system pre-assigned these motif files to roles. Their full SVG
-bodies are below — embed (or transform) them inline where appropriate. Do not
-fetch external SVGs; do not invent geometric ornament from scratch — use these.
+The design system pre-assigned these motif files to roles. **Do not draw
+your own SVG. Do not paste SVG bodies into the HTML.** Instead, emit a
+plain `<img>` tag referencing the file, and the build pipeline will replace
+each one with the file's verbatim SVG body before rendering.
+
+Format:
+  `<img src="motifs/<basename>.svg" class="<your-class>" width="<px>" height="<px>" style="...">`
+
+The `class`, `width`, `height`, and `style` attributes you put on the
+`<img>` will be carried onto the outer `<svg>` after inlining, so they
+control layout and CSS targeting normally. Recoloring the motif works via
+ordinary CSS:
+
+```css
+.seal {{ fill: var(--accent); }}
+.divider svg path {{ stroke: var(--fg); }}
+```
+
+(remember: after inlining, `<img class="seal">` becomes `<svg class="seal">` —
+your CSS targets the inlined SVG directly).
+
+The motifs assigned to this design system:
 
 {motif_context}
+
+Use these slots judiciously — each page only needs a few motifs, not all of
+them. Place them where the screenshot's typographic rhythm calls for an
+ornament: dividers, seals, marginalia, hero accents, footer flourishes.
+Every `<svg>`-flavored ornament you emit MUST be an `<img src="motifs/...">`
+reference — never a hand-drawn `<svg>` block.
 
 # Hard constraints
 
@@ -236,6 +307,10 @@ def generate_page(
 
     text = "".join(b.text for b in final.content if b.type == "text")
     html = _strip_code_fence(text)
+    # Replace `<img src="motifs/X.svg" ...>` references with the literal SVG
+    # body from disk. This is what makes GT geometrically faithful to the
+    # source library — the LLM never gets to redraw the motifs.
+    html = inline_motif_imgs(html, library)
     return GeneratedPage(
         filename=page_brief["filename"],
         html=html,

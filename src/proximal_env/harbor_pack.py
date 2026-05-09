@@ -49,8 +49,8 @@ def _font_menu(style: str) -> str:
     """
     library = load_style(style)
     families: set[str] = set()
-    for pairings in (library.pairings_period, library.pairings_modern):
-        for pairing in pairings:
+    for variant_pairings in library.pairings.values():
+        for pairing in variant_pairings:
             families.add(pairing.display)
             families.add(pairing.body)
     return ", ".join(sorted(families))
@@ -103,13 +103,13 @@ Write files to **`/app/output/`**:
   {FONT_MENU}
   ```
   Look at the typography in the screenshots and select the **display** and **body** font(s) from this list that visually match (character shapes, contrast, weight, x-height). Load them via `<link>` and apply them via CSS — both as direct `font-family: "Name", ...` declarations and (optionally) as CSS custom properties like `--font-display: "Name"`. Picking fonts not on this list will not match the target.
-{ANIMATION_SECTION}- **Motifs — REQUIRED: embed as inline `<svg>...</svg>`, not as `<img>` or `background-image`.** Read the contents of each motif file from `/app/motifs/` (e.g., with the `Read` tool) and paste the SVG body directly into your HTML. The reason is color fidelity: when an SVG is loaded via `<img src="...">` or `background-image: url(...)`, the page's CSS *cannot* set its `fill` or `stroke` colors — the SVG renders in whatever colors it shipped with (often black), which won't match the palette in the screenshots. Inline SVGs DO inherit `currentColor` and respond to CSS `fill`/`stroke` rules, letting you recolor each motif to match the design.
+{ANIMATION_SECTION}- **Motifs — REQUIRED: embed as inline `<svg>...</svg>`, not as `<img>` or `background-image`.** Read the contents of each motif file from `/app/motifs/` (e.g., with the `Read` tool) and paste the SVG body directly into your HTML. 
 - **Sizing inlined SVGs is your responsibility.** Inline `<svg>` elements have **no intrinsic size**. Without an explicit dimension, the browser renders them at the parent container's full width — destroying the layout. After embedding each motif, give it dimensions via CSS or `width`/`height` attributes. Look at the screenshots to gauge what size each ornament should be in its context. Examples:
   - For a thin horizontal divider: `.divider svg { width: 100%; height: 40px; display: block; }`
   - For a small inline accent: `.accent svg { width: 24px; height: 24px; }`
   - For a centered seal: `.seal svg { width: 120px; height: 120px; }`
   Or set attributes directly on the `<svg>` tag itself: `<svg width="120" height="120" ...>`. **Every inline SVG you write should have explicit dimensions.**
-- **Recolor inlined SVGs via CSS** so they match the screenshot's palette. Default black SVGs need recoloring — set `fill` and/or `stroke` on the SVG (or use `currentColor` and set the parent's `color`).
+- **Recolor inlined SVGs via CSS** so they match the screenshot's palette. 
 - **Do not invent your own geometric ornament** from scratch when an existing motif file fits the design.
 - **Do not read from `/verifier/`.** That directory contains the grader's reference data — it's not part of your inputs.
 
@@ -342,8 +342,7 @@ def package_task(generated_dir: Path, output_dir: Path) -> dict:
         )
     shutil.copytree(src_shots, dst_shots)
 
-    # ---- motifs/ (Option A: just .svg files; no manifest, no notes) ----
-    #      Also inside environment/ for the same Docker-build-context reason.
+    # ---- motifs/
     style_svg_dir = _MOTIFS_ROOT / style / "svg"
     if not style_svg_dir.is_dir():
         raise FileNotFoundError(f"motifs not found at {style_svg_dir}")
@@ -354,14 +353,16 @@ def package_task(generated_dir: Path, output_dir: Path) -> dict:
     for svg in sorted(style_svg_dir.glob("*.svg")):
         shutil.copy(svg, dst_motifs / svg.name)
 
-    # ---- videos/ (animated tasks only) — filmstrips + per-page frames so the
-    #      agent can identify the motion pattern from visual evidence.
+    # ---- videos/ — for animated tasks, copy filmstrips + per-page frames.
+    dst_videos = output_dir / "environment" / "videos"
     src_videos = generated_dir / "videos"
     if animated and src_videos.is_dir():
-        dst_videos = output_dir / "environment" / "videos"
         if dst_videos.exists():
             shutil.rmtree(dst_videos)
         shutil.copytree(src_videos, dst_videos)
+    else:
+        dst_videos.mkdir(parents=True, exist_ok=True)
+        (dst_videos / ".placeholder").write_text("")
 
     # ---- ground_truth/ — placed inside tests/ AND solution/ so it's only
     #      visible to the verifier and the oracle, NOT the agent's container.
@@ -455,6 +456,7 @@ def package_task(generated_dir: Path, output_dir: Path) -> dict:
         "rubric/structural.py",
         "rubric/typography.py",
         "rubric/animation.py",
+        "rubric/consistency.py",
     ]
     for rel in grader_files:
         src_file = _PROXIMAL_ENV_SRC / rel
