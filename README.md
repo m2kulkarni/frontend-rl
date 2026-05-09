@@ -84,18 +84,10 @@ The pipeline runs in five stages. Each is a separate script so you can re-run an
 Produces `generated/<slug>/` with `design-system.json`, `design-system.css`, and `page-1.html` … `page-N.html` for each task.
 
 ```bash
-# Single task — useful for iteration on prompts / rubrics
-uv run python scripts/generate_many.py --n 1 --seed 42
-
-# Curated batch
 uv run python scripts/generate_many.py --n 10 --seed 100 --concurrent 3
-
-# Large batch (multiple tasks generate concurrently; each task already
-# parallelizes its own 6 page calls internally)
-uv run python scripts/generate_many.py --n 50 --seed 200 --concurrent 3
 ```
 
-`--seed` controls reproducibility and the taxonomy sampler. `--concurrent K` overlaps K task pipelines (each pipeline is 6 parallel Claude calls); 3 is a safe default for Anthropic rate limits.
+`--seed` controls reproducibility and the taxonomy sampler. `--concurrent K` overlaps K task pipelines (each pipeline is 6 parallel Claude calls);
 
 ### 2 · Render screenshots
 
