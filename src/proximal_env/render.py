@@ -27,6 +27,7 @@ Or via the CLI: scripts/render_screenshots.py
 
 import http.server
 import json
+import shutil
 import socketserver
 import subprocess
 import threading
@@ -351,3 +352,113 @@ def render_task(task_dir: Path, *, screenshots_dir: Path | None = None) -> list[
             browser.close()
 
     return written
+
+
+import re as _re
+
+# When dumping React-rendered HTML for vanilla-shape consumption:
+# - <script> tags are no longer useful (we already captured post-mount DOM).
+#   Removing them avoids file://-CORS problems if the dumped HTML is later
+#   re-opened by render_task.
+# - `crossorigin` attrs on <link> tags also break over file://; strip.
+_REACT_DUMP_STRIP_SCRIPT = _re.compile(r"<script\b[^>]*>.*?</script>", _re.DOTALL | _re.IGNORECASE)
+_REACT_DUMP_STRIP_SCRIPT_SELF = _re.compile(r"<script\b[^>]*/>", _re.IGNORECASE)
+_REACT_DUMP_STRIP_CROSSORIGIN = _re.compile(r"\s+crossorigin(?:=\"[^\"]*\")?", _re.IGNORECASE)
+
+
+def _flatten_react_html_for_static_use(html: str) -> str:
+    """Make the dumped post-React-mount HTML safely re-openable as a static file.
+
+    Removes <script> tags (the page is already mounted; we don't need to re-run
+    React to inspect the DOM) and `crossorigin` attributes (Chromium refuses
+    crossorigin module loads over file://). Asset <link>s are preserved — the
+    caller copies dist/assets/ alongside, so relative paths resolve.
+    """
+    out = _REACT_DUMP_STRIP_SCRIPT.sub("", html)
+    out = _REACT_DUMP_STRIP_SCRIPT_SELF.sub("", out)
+    out = _REACT_DUMP_STRIP_CROSSORIGIN.sub("", out)
+    return out
+
+
+def render_react_to_files(task_dir: Path, out_dir: Path) -> dict:
+    """Build a React task and dump it into vanilla-shaped output for the grader.
+
+    For each route registered by App.tsx, writes:
+      - out_dir/page-N.html   — the rendered HTML of that route (post React mount,
+                                 with <script> + crossorigin stripped so it can
+                                 be re-opened via file:// without CORS issues)
+      - out_dir/screenshots/page-N.png — full-page screenshot
+      - out_dir/screenshots/page-N-tile-K.png — tiles for tall pages
+      - out_dir/design-system.css — copied from task root
+      - out_dir/assets/* — dist/assets/* copied so relative ./assets/foo.css
+                            references in the dumped HTML resolve correctly
+
+    The returned dict reports build/render counts; useful for verifier
+    diagnostics. Used by test.sh to flatten a React agent's output into
+    the same shape as vanilla so the existing grader applies unchanged.
+    """
+    if not _is_react_task(task_dir):
+        raise ValueError(f"{task_dir} is not a React task (missing package.json or src/App.tsx)")
+
+    out_dir.mkdir(parents=True, exist_ok=True)
+    sshots_dir = out_dir / "screenshots"
+    sshots_dir.mkdir(exist_ok=True)
+    for stale in sshots_dir.glob("page-*-tile-*.png"):
+        stale.unlink()
+
+    src_css = task_dir / "design-system.css"
+    if src_css.is_file():
+        shutil.copy(src_css, out_dir / "design-system.css")
+
+    dist = _ensure_react_built(task_dir)
+    num_pages = _react_num_pages(task_dir)
+    if num_pages == 0:
+        return {"pages": 0, "html_dumped": 0, "screenshots": 0}
+
+    # Copy dist/assets/ → out_dir/assets/ so the dumped HTML's
+    # `./assets/index-XXX.css` references resolve when the HTML is re-opened
+    # via file:// for downstream rubrics.
+    src_assets = dist / "assets"
+    if src_assets.is_dir():
+        dst_assets = out_dir / "assets"
+        if dst_assets.exists():
+            shutil.rmtree(dst_assets)
+        shutil.copytree(src_assets, dst_assets)
+
+    html_dumped = 0
+    screenshot_count = 0
+    with sync_playwright() as p:
+        browser = p.chromium.launch()
+        try:
+            ctx = browser.new_context(
+                viewport={"width": VIEWPORT_WIDTH, "height": VIEWPORT_HEIGHT},
+                device_scale_factor=1,
+            )
+            page = ctx.new_page()
+            with _local_static_server(dist) as base_url:
+                for n in range(1, num_pages + 1):
+                    url = f"{base_url}/index.html#/page-{n}"
+                    page.goto(url, wait_until="networkidle", timeout=30000)
+                    page.evaluate("document.fonts.ready")
+                    page.wait_for_timeout(500)
+
+                    # 1. Dump the rendered HTML (post-React-mount). The grader's
+                    #    structural / typography / consistency rubrics walk this.
+                    raw_html = page.evaluate("document.documentElement.outerHTML")
+                    html = _flatten_react_html_for_static_use(raw_html)
+                    (out_dir / f"page-{n}.html").write_text(
+                        f"<!DOCTYPE html>\n{html}", encoding="utf-8"
+                    )
+                    html_dumped += 1
+
+                    # 2. Screenshot for visual / palette / animation rubrics.
+                    out_png = sshots_dir / f"page-{n}.png"
+                    page.screenshot(path=str(out_png), full_page=True)
+                    screenshot_count += 1
+                    tiles = _save_tiles(out_png)
+                    screenshot_count += len(tiles)
+        finally:
+            browser.close()
+
+    return {"pages": num_pages, "html_dumped": html_dumped,
+            "screenshots": screenshot_count}

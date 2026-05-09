@@ -173,6 +173,54 @@ COPY video[s]/ /app/videos/
 """
 
 
+# Bonus 2 — React variant. Same Python+Playwright base, plus Node 20, plus
+# pre-cached node_modules so trials don't pay the install cost (~30s, ~200MB).
+DOCKERFILE_REACT_TEMPLATE = """\
+FROM mcr.microsoft.com/playwright/python:v1.59.0-noble
+
+ENV PIP_BREAK_SYSTEM_PACKAGES=1
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Python grader deps (same as vanilla)
+RUN python3 -m pip install --no-cache-dir \\
+    "playwright==1.59.0" \\
+    "Pillow==12.2.0" \\
+    "scikit-image==0.26.0" \\
+    "beautifulsoup4==4.14.3" \\
+    "lxml==6.1.0"
+RUN python3 -m playwright install chromium
+RUN python3 -c "import playwright, skimage, bs4, lxml, PIL"
+
+# Node 20 for Vite. NodeSource setup script handles apt-key + sources.list.
+RUN apt-get update && apt-get install -y curl && \\
+    curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \\
+    apt-get install -y --no-install-recommends nodejs && \\
+    apt-get clean && rm -rf /var/lib/apt/lists/* && \\
+    node --version && npm --version
+
+# Pre-cache the React project's node_modules at image build time. The
+# project skeleton (package.json + lockfile) is COPYd in, then we run
+# `npm ci` against it. node_modules ends up baked into the image, so
+# every Modal trial starts with `npm install` already done.
+WORKDIR /app
+COPY package.json /app/package.json
+COPY package-lock.json /app/package-lock.json
+RUN npm ci --no-audit --no-fund --silent
+
+# Now the rest of the project skeleton + agent inputs.
+COPY vite.config.ts /app/vite.config.ts
+COPY tsconfig.json /app/tsconfig.json
+COPY index.html /app/index.html
+COPY design-system.css /app/design-system.css
+COPY src /app/src
+COPY screenshots/ /app/screenshots/
+COPY motifs/ /app/motifs/
+COPY video[s]/ /app/videos/
+
+RUN mkdir -p /app/output
+"""
+
+
 TEST_SH_TEMPLATE = """\
 #!/bin/bash
 # Decomposed grader: emits each rubric (visual SSIM, palette histogram in Lab,
@@ -215,6 +263,104 @@ else
   "typography": 0.0,
   "consistency": 0.0,
   "animation": 0.0
+}
+EOF
+fi
+"""
+
+
+# Bonus 2 — React test.sh: build, render to vanilla shape, grade.
+TEST_SH_REACT_TEMPLATE = """\
+#!/bin/bash
+# React variant verifier: builds the agent's edits, renders each route to
+# both HTML and screenshot, then runs the same grader the vanilla flow uses.
+#
+# Why the indirection: the agent edits src/pages/Page<N>.tsx — those don't
+# look like the page-N.html files the grader's structural / typography /
+# consistency rubrics walk. Rendering to vanilla shape (page-N.html +
+# screenshots/page-N.png + design-system.css) lets the grader run unchanged.
+
+set -e
+mkdir -p /logs/verifier
+mkdir -p /logs/agent
+
+export PYTHONPATH=/tests/grader:${PYTHONPATH:-}
+
+# 1. Build the React app. node_modules is pre-cached in the image, so this
+#    is just `vite build` (~1-3s for a small project).
+cd /app
+if ! npm run build > /logs/agent/build.log 2>&1; then
+    echo "vite build FAILED — emitting build-failure reward" >&2
+    cat /logs/agent/build.log >&2
+    cat > /logs/verifier/reward.json <<EOF
+{
+  "overall": 0.0,
+  "overall_geomean": 0.0,
+  "coverage": 0.0,
+  "visual": 0.0,
+  "palette": 0.0,
+  "structural": 0.0,
+  "typography": 0.0,
+  "consistency": 0.0,
+  "animation": 0.0,
+  "build_succeeded": 0.0
+}
+EOF
+    exit 0
+fi
+
+# 2. Render each route to /app/_candidate/ — page-N.html + screenshots/.
+#    This is what the grader actually compares against.
+python3 -c "
+from pathlib import Path
+from proximal_env.render import render_react_to_files
+result = render_react_to_files(Path('/app'), Path('/app/_candidate'))
+print(f'rendered {result}')
+" > /logs/agent/render.log 2>&1
+RENDER_EXIT=$?
+if [ $RENDER_EXIT -ne 0 ]; then
+    echo "render FAILED — emitting all-zero reward" >&2
+    cat /logs/agent/render.log >&2
+    cat > /logs/verifier/reward.json <<EOF
+{
+  "overall": 0.0,
+  "overall_geomean": 0.0,
+  "coverage": 0.0,
+  "visual": 0.0,
+  "palette": 0.0,
+  "structural": 0.0,
+  "typography": 0.0,
+  "consistency": 0.0,
+  "animation": 0.0,
+  "build_succeeded": 1.0,
+  "render_succeeded": 0.0
+}
+EOF
+    exit 0
+fi
+
+# 3. Run the grader against the vanilla-shaped candidate dir.
+if python3 /tests/grader/run_grader.py /tests/ground_truth /app/_candidate \\
+        > /logs/verifier/reward.json 2>/logs/verifier/grader-stderr.log; then
+    echo "Grader succeeded:"
+    cat /logs/verifier/reward.json
+else
+    echo "Grader failed — emitting fallback reward.json (all zeros)." >&2
+    cat /logs/verifier/grader-stderr.log >&2 || true
+    cat > /logs/verifier/reward.json <<EOF
+{
+  "overall": 0.0,
+  "overall_geomean": 0.0,
+  "coverage": 0.0,
+  "visual": 0.0,
+  "palette": 0.0,
+  "structural": 0.0,
+  "typography": 0.0,
+  "consistency": 0.0,
+  "animation": 0.0,
+  "build_succeeded": 1.0,
+  "render_succeeded": 1.0,
+  "grader_succeeded": 0.0
 }
 EOF
 fi
@@ -293,14 +439,21 @@ harbor run -a claude-code -m claude-opus-4-7 -e modal --path .
 
 # ---------------------------------------------------------------- helpers
 
-def parse_slug(slug: str) -> tuple[str, str, int, bool]:
-    """Parse `[anim-]<style>-<purpose>-<seed>` slug.
+def parse_slug(slug: str) -> tuple[str, str, int, bool, str]:
+    """Parse `[react-][anim-]<style>-<purpose>-<seed>` slug.
+
+    Returns (style, purpose, seed, animated, framework).
 
     Examples:
-        'persian-safavid-museum-475203'      → ('persian-safavid', 'museum', 475203, False)
-        'dravidian-restaurant-776646'        → ('dravidian',       'restaurant', 776646, False)
-        'anim-edo-japanese-studio-556616'    → ('edo-japanese',    'studio', 556616, True)
+        'persian-safavid-museum-475203'           → ('persian-safavid', 'museum', 475203, False, 'vanilla')
+        'anim-edo-japanese-studio-556616'         → ('edo-japanese',    'studio', 556616, True,  'vanilla')
+        'react-edo-japanese-studio-42'            → ('edo-japanese',    'studio', 42,    False, 'react')
+        'react-anim-high-gothic-civic-597158'     → ('high-gothic',     'civic',  597158, True,  'react')
     """
+    framework = "vanilla"
+    if slug.startswith("react-"):
+        slug = slug[len("react-"):]
+        framework = "react"
     animated_from_slug = False
     if slug.startswith("anim-"):
         slug = slug[len("anim-"):]
@@ -309,7 +462,7 @@ def parse_slug(slug: str) -> tuple[str, str, int, bool]:
     if len(parts) != 3:
         raise ValueError(f"slug doesn't match <style>-<purpose>-<seed>: {slug!r}")
     style, purpose, seed_str = parts
-    return style, purpose, int(seed_str), animated_from_slug
+    return style, purpose, int(seed_str), animated_from_slug, framework
 
 
 # ---------------------------------------------------------------- main entry
@@ -323,7 +476,7 @@ def package_task(generated_dir: Path, output_dir: Path) -> dict:
         raise FileNotFoundError(f"{generated_dir} not found")
 
     slug = generated_dir.name
-    style, purpose, seed, _animated_from_slug = parse_slug(slug)
+    style, purpose, seed, _animated_from_slug, framework = parse_slug(slug)
 
     ds_path = generated_dir / "design-system.json"
     if not ds_path.exists():
@@ -376,20 +529,32 @@ def package_task(generated_dir: Path, output_dir: Path) -> dict:
     # ---- ground_truth/ — placed inside tests/ AND solution/ so it's only
     #      visible to the verifier and the oracle, NOT the agent's container.
     #      (Harbor mounts tests/ and solution/ separately at run time.)
-    gt_files: list[Path] = []
-    for html in sorted(generated_dir.glob("page-*.html")):
-        gt_files.append(html)
-    css = generated_dir / "design-system.css"
-    if css.exists():
-        gt_files.append(css)
+    if framework == "react":
+        # For React tasks, the GT is the BUILT React app rendered to the same
+        # vanilla shape the verifier produces from the agent's output. Same
+        # file layout (page-*.html + screenshots/ + assets/ + design-system.css)
+        # so the grader compares like-with-like.
+        from proximal_env.render import render_react_to_files
+        for parent in ("tests", "solution"):
+            dst_gt = output_dir / parent / "ground_truth"
+            if dst_gt.exists():
+                shutil.rmtree(dst_gt)
+            render_react_to_files(generated_dir, dst_gt)
+    else:
+        gt_files: list[Path] = []
+        for html in sorted(generated_dir.glob("page-*.html")):
+            gt_files.append(html)
+        css = generated_dir / "design-system.css"
+        if css.exists():
+            gt_files.append(css)
 
-    for parent in ("tests", "solution"):
-        dst_gt = output_dir / parent / "ground_truth"
-        if dst_gt.exists():
-            shutil.rmtree(dst_gt)
-        dst_gt.mkdir()
-        for f in gt_files:
-            shutil.copy(f, dst_gt / f.name)
+        for parent in ("tests", "solution"):
+            dst_gt = output_dir / parent / "ground_truth"
+            if dst_gt.exists():
+                shutil.rmtree(dst_gt)
+            dst_gt.mkdir()
+            for f in gt_files:
+                shutil.copy(f, dst_gt / f.name)
 
     # ---- task.toml ----
     (output_dir / "task.toml").write_text(
@@ -436,11 +601,32 @@ def package_task(generated_dir: Path, output_dir: Path) -> dict:
     )
 
     # ---- environment/Dockerfile ----
-    (output_dir / "environment" / "Dockerfile").write_text(DOCKERFILE_TEMPLATE)
+    if framework == "react":
+        (output_dir / "environment" / "Dockerfile").write_text(DOCKERFILE_REACT_TEMPLATE)
+        # React tasks need the project skeleton in the build context.
+        # Copy from generated/<slug>/ into environment/ so the Dockerfile
+        # COPY directives can reach them.
+        for f in ("package.json", "package-lock.json", "vite.config.ts",
+                  "tsconfig.json", "index.html", "design-system.css"):
+            src = generated_dir / f
+            if src.is_file():
+                shutil.copy(src, output_dir / "environment" / f)
+        # src/ tree (App.tsx, main.tsx, shared/, pages/)
+        src_dir = generated_dir / "src"
+        if src_dir.is_dir():
+            dst_src = output_dir / "environment" / "src"
+            if dst_src.exists():
+                shutil.rmtree(dst_src)
+            shutil.copytree(src_dir, dst_src)
+    else:
+        (output_dir / "environment" / "Dockerfile").write_text(DOCKERFILE_TEMPLATE)
 
     # ---- tests/test.sh ----
     test_sh = output_dir / "tests" / "test.sh"
-    test_sh.write_text(TEST_SH_TEMPLATE)
+    if framework == "react":
+        test_sh.write_text(TEST_SH_REACT_TEMPLATE)
+    else:
+        test_sh.write_text(TEST_SH_TEMPLATE)
     test_sh.chmod(0o755)
 
     # ---- tests/grader/ — bundle the composite grader code with the task
@@ -483,11 +669,13 @@ def package_task(generated_dir: Path, output_dir: Path) -> dict:
     solve_sh.write_text(SOLVE_SH_TEMPLATE)
     solve_sh.chmod(0o755)
 
+    gt_dir = output_dir / "tests" / "ground_truth"
     return {
         "slug": slug,
+        "framework": framework,
         "screenshots": sum(1 for _ in dst_shots.iterdir()),
         "motifs": sum(1 for _ in dst_motifs.iterdir()),
-        "ground_truth": len(gt_files),
+        "ground_truth_files": sum(1 for _ in gt_dir.iterdir() if _.is_file()),
     }
 
 
