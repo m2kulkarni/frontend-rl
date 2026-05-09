@@ -75,63 +75,93 @@ def per_page_breakdown(gt_dir: Path, cand_dir: Path) -> dict:
     }
 
 
-def build_one_task(slug: str, trial_dir: Path, out_root: Path) -> dict:
+def _load_reward_json(trial_dir: Path) -> dict | None:
+    """Read the verifier-emitted reward.json. Returns None if missing/malformed."""
+    reward = trial_dir / "verifier" / "reward.json"
+    if not reward.is_file():
+        return None
+    try:
+        return json.loads(reward.read_text())
+    except (json.JSONDecodeError, OSError):
+        return None
+
+
+def _resolve_gt_dir(slug: str) -> Path:
+    """Find the ground-truth dir for a trial slug.
+
+    Harbor truncates trial-directory names at some cap, so a slug like
+    'persian-safavid-foundation-335124' may show up as '...-33512'. Fall
+    back to a unique prefix-match against generated/.
+    """
+    direct = GENERATED_ROOT / slug
+    if direct.is_dir():
+        return direct
+    matches = [d for d in GENERATED_ROOT.iterdir()
+               if d.is_dir() and d.name.startswith(slug)]
+    if len(matches) == 1:
+        return matches[0]
+    raise FileNotFoundError(
+        f"ground truth missing for {slug} — expected at {direct} "
+        f"(prefix-match returned {[m.name for m in matches]})"
+    )
+
+
+def build_one_task(slug: str, trial_dir: Path, out_root: Path) -> dict | None:
     """Process one (task, trial) pair into the visualizer assets.
 
-    Returns a dict with everything index.html needs to render this task.
+    Reads composite scores from the verifier's reward.json (fast — no
+    re-grading), copies the agent's HTML, and renders both GT and agent to
+    PNGs for the side-by-side. Returns None if the trial is incomplete
+    (no reward.json yet).
     """
-    gt_dir = GENERATED_ROOT / slug
-    if not gt_dir.is_dir():
-        raise FileNotFoundError(
-            f"ground truth missing for {slug} — expected at {gt_dir}"
-        )
+    gt_dir = _resolve_gt_dir(slug)
+
+    overall = _load_reward_json(trial_dir)
+    if overall is None:
+        # Trial still in flight or failed before verifier ran.
+        return None
 
     task_out = out_root / slug
     task_out.mkdir(parents=True, exist_ok=True)
 
-    # 1. Stage agent files in viewer/<slug>/agent-html/
+    # 1. Stage agent files
     agent_html_dir = task_out / "agent-html"
     collect_agent_output(trial_dir, agent_html_dir)
 
-    # 2. Render screenshots for both gt and agent into viewer/<slug>/{gt|agent}/
+    if not any(agent_html_dir.glob("page-*.html")):
+        # Verifier wrote a reward (likely the all-zeros fallback), but the
+        # agent didn't actually produce HTML. Skip — nothing to render.
+        return None
+
+    # 2. Render screenshots for both gt and agent
     gt_pngs_dir = task_out / "gt"
     agent_pngs_dir = task_out / "agent"
     gt_pngs_dir.mkdir(exist_ok=True)
     agent_pngs_dir.mkdir(exist_ok=True)
 
-    # gt: render fresh from generated/<slug>/. (Could symlink the cached
-    # screenshots/ but re-rendering keeps it deterministic with the same
-    # Playwright config the grader uses.)
     for png in render_task(gt_dir, screenshots_dir=gt_pngs_dir):
         if "-tile-" in png.name:
-            png.unlink()  # tiles are agent-input only, drop from viewer
+            png.unlink()
     for png in render_task(agent_html_dir, screenshots_dir=agent_pngs_dir):
         if "-tile-" in png.name:
             png.unlink()
 
-    # 3. Compute composite + per-page breakdown
-    overall = grade(gt_dir, agent_html_dir)
-    breakdown = per_page_breakdown(gt_dir, agent_html_dir)
-
-    # 4. Stash scores.json for re-use
-    scores_data = {
-        "slug": slug,
-        "trial_id": trial_dir.name.split("__", 1)[-1],
-        "overall": overall,
-        "per_page": breakdown,
-    }
-    (task_out / "scores.json").write_text(json.dumps(scores_data, indent=2))
-
-    # 5. List the page files we have
+    # 3. List the page files we have for the index template
     gt_pages = sorted(p.name for p in gt_pngs_dir.glob("page-*.png"))
     agent_pages = sorted(p.name for p in agent_pngs_dir.glob("page-*.png"))
     pages = sorted(set(gt_pages) | set(agent_pages))
 
+    # 4. Stash a small scores.json for ad-hoc inspection / re-use
+    (task_out / "scores.json").write_text(json.dumps({
+        "slug": slug,
+        "trial_id": trial_dir.name.split("__", 1)[-1],
+        "overall": overall,
+    }, indent=2))
+
     return {
         "slug": slug,
-        "trial_id": scores_data["trial_id"],
+        "trial_id": trial_dir.name.split("__", 1)[-1],
         "overall": overall,
-        "per_page": breakdown,
         "pages": pages,
         "has_gt": {p: p in gt_pages for p in pages},
         "has_agent": {p: p in agent_pages for p in pages},
@@ -217,7 +247,9 @@ def color_class(score: float) -> str:
 def render_task_html(task: dict, slug: str) -> str:
     """Render the HTML block for one task."""
     overall = task["overall"]
-    rubric_keys = ("overall", "coverage", "visual", "palette", "structural", "typography")
+    # Display only the keys that exist in this reward.json — robust to schema drift.
+    rubric_keys = [k for k in ("overall", "coverage", "visual", "palette",
+                                "structural", "typography") if k in overall]
     score_chips = "".join(
         f'<div class="score">'
         f'<div class="score-label">{k}</div>'
@@ -228,16 +260,6 @@ def render_task_html(task: dict, slug: str) -> str:
 
     pages_html = []
     for page in task["pages"]:
-        per_page_scores = {
-            "visual": task["per_page"]["visual"].get(page.replace(".png", ".png"), 0.0),
-            "palette": task["per_page"]["palette"].get(page.replace(".png", ".png"), 0.0),
-            "structural": task["per_page"]["structural"].get(page.replace(".png", ".html"), 0.0),
-            "typography": task["per_page"]["typography"].get(page.replace(".png", ".html"), 0.0),
-        }
-        info_dl = "".join(
-            f"<dt>{k}</dt><dd>{v:.3f}</dd>"
-            for k, v in per_page_scores.items()
-        )
         gt_panel = (
             f'<img src="{slug}/gt/{page}" alt="gt {page}">'
             if task["has_gt"].get(page) else
@@ -252,7 +274,6 @@ def render_task_html(task: dict, slug: str) -> str:
         <div class="page-row">
           <div class="page-info">
             <h3>{page}</h3>
-            <dl>{info_dl}</dl>
           </div>
           <div class="panel"><div class="panel-label">ground truth</div>{gt_panel}</div>
           <div class="panel"><div class="panel-label">agent attempt</div>{agent_panel}</div>
@@ -290,6 +311,7 @@ def main() -> int:
 
     print(f"Building viewer for {len(trials)} trial(s)...\n")
     tasks_data = []
+    skipped = 0
     for slug, trial in trials:
         print(f"  {slug}  → ", end="", flush=True)
         t0 = time.time()
@@ -298,17 +320,29 @@ def main() -> int:
         except Exception as exc:
             print(f"FAILED: {exc!r}")
             continue
+        if t is None:
+            print("(in flight or no reward.json yet — skipping)")
+            skipped += 1
+            continue
         elapsed = time.time() - t0
         print(f"overall={t['overall']['overall']:.3f}  ({elapsed:.0f}s)")
         tasks_data.append((slug, t))
 
-    # Build the index.html
-    nav = " ".join(f'<a href="#{slug}">{slug.split("-", 1)[0]}</a>' for slug, _ in tasks_data)
+    # Sort tasks by overall score, descending — best-first in the viewer.
+    tasks_data.sort(key=lambda st: st[1]["overall"]["overall"], reverse=True)
+
+    nav = " ".join(
+        f'<a href="#{slug}">{slug.split("-", 1)[0]}</a>'
+        for slug, _ in tasks_data
+    )
     tasks_html = "\n".join(render_task_html(t, slug) for slug, t in tasks_data)
     html = INDEX_HTML.replace("__NAV__", nav).replace("__TASKS__", tasks_html)
     (args.out / "index.html").write_text(html)
 
-    print(f"\nWrote {args.out / 'index.html'}")
+    print(f"\n{len(tasks_data)} tasks rendered" +
+          (f", {skipped} skipped (in flight)" if skipped else "") +
+          ".")
+    print(f"Wrote {args.out / 'index.html'}")
     print(f"To open: open {args.out / 'index.html'}")
     return 0
 

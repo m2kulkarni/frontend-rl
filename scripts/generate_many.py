@@ -26,7 +26,9 @@ from proximal_env.generator.css import render_design_system_css
 from proximal_env.generator.design_system import generate_design_system
 from proximal_env.generator.page import basic_validate_html, generate_all_pages
 from proximal_env.motifs import load_style
-from proximal_env.taxonomy import TaxonomyPoint, sample_stratified
+from proximal_env.taxonomy import (
+    TaxonomyPoint, sample_stratified, sample_stratified_animated
+)
 
 _PRINT_LOCK = threading.Lock()
 
@@ -52,7 +54,7 @@ def generate_one_task(point: TaxonomyPoint, out_root: Path) -> dict:
     _safe_print(f"  [{slug}] design-system pass...")
     ds = generate_design_system(point, library)
     (out_dir / "design-system.json").write_text(json.dumps(ds.raw, indent=2))
-    (out_dir / "design-system.css").write_text(render_design_system_css(ds))
+    (out_dir / "design-system.css").write_text(render_design_system_css(ds, library))
 
     _safe_print(f"  [{slug}] generating {ds.page_count} pages...")
     pages = generate_all_pages(ds, library, point)
@@ -99,14 +101,15 @@ def main() -> int:
     parser.add_argument("--seed", type=int, required=True)
     parser.add_argument("--n", type=int, default=5)
     parser.add_argument("--concurrent", type=int, default=1,
-                        help="Number of tasks to generate in parallel (each task "
-                             "already parallelizes its 6 page calls internally; "
-                             "concurrent=K means K such pipelines overlap).")
+                        help="Number of tasks to generate in parallel.")
+    parser.add_argument("--animated", action="store_true",
+                        help="Generate animated tasks (every sample sets animated=True).")
     args = parser.parse_args()
 
     args.out.mkdir(parents=True, exist_ok=True)
 
-    points = sample_stratified(args.n, rng_seed=args.seed)
+    sampler = sample_stratified_animated if args.animated else sample_stratified
+    points = sampler(args.n, rng_seed=args.seed)
 
     print(f"Plan: generate {len(points)} tasks (seed={args.seed}, "
           f"concurrent={args.concurrent}) → {args.out}")

@@ -68,15 +68,31 @@ def build_user_prompt(
     point: TaxonomyPoint,
 ) -> str:
     ds = design_system.raw
-    other_pages = _other_pages(page["filename"], ds["pages"])
-    nav_links = "\n".join(
-        f"- `{p['filename']}` — title: {p['title']!r}, role: {p['role']}"
-        for p in ds["pages"]
-    )
-
     motif_context = _build_motif_context(library, ds["motif_selection"])
-
     css_tokens_summary = "\n".join(f"  {k}: {v};" for k, v in ds["css_tokens"].items())
+
+    sh = ds.get("shared_html", {})
+    nav_html = sh.get("nav_html", "")
+    footer_html = sh.get("footer_html", "")
+
+    # If the design-system selected an animation, give the page generator the
+    # animation's CSS class name + target motif role so it knows which inline
+    # SVG to mark with the matching class.
+    animation_section = ""
+    anim_spec = ds.get("animation")
+    if anim_spec and library.animations:
+        anim_obj = library.animation_by_name(anim_spec["name"])
+        if anim_obj is not None:
+            css_class = _animation_css_class(anim_obj.css) or f"animated-{anim_spec['name']}"
+            target_role = anim_obj.applies_to
+            target_motif = ds["motif_selection"].get(target_role)
+            animation_section = f"""
+# Animation (this site is animated)
+
+The shared `design-system.css` already declares the @keyframes + class rule for the animation `{anim_spec['name']}`. Your job on each page: ensure the inline SVG embedded for the **`{target_role}`** motif (file: `{target_motif}`) carries the CSS class `{css_class}` on its outermost wrapping element. That wrapper can be the `<svg>` itself or a containing `<div>`/`<span>` — whatever makes layout sense — but the class **must be applied** so the animation activates.
+
+The animation: *{anim_obj.description}* — duration {anim_obj.duration_sec}s, easing {anim_obj.easing}, looped infinitely. The animation runs on the entire targeted ornament; do not animate any other element.
+"""
 
     return f"""# Goal
 
@@ -108,11 +124,27 @@ minimal reset, and base typography. **Your `<head>` must contain
 `<link rel="stylesheet" href="design-system.css">`.** Use `var(--*)` for colors;
 do NOT redefine the tokens.
 
-# Shared component patterns (apply consistently across all pages)
+# Shared HTML — embed VERBATIM (do not modify)
 
-- **Navigation:** {ds['shared_components']['navigation_pattern']}
-- **Cards:**     {ds['shared_components']['card_pattern']}
-- **Footer:**    {ds['shared_components']['footer_pattern']}
+The site has a single shared `<header>` and `<footer>` that appear identically on every page. The exact HTML is provided below. **You must paste these blocks verbatim** at the top and bottom of `<body>` respectively. Do not change classes, attribute order, or text.
+
+### nav_html — paste at the top of <body>:
+
+```html
+{nav_html}
+```
+
+### footer_html — paste at the bottom of <body>:
+
+```html
+{footer_html}
+```
+
+The CSS rules that style these blocks are already in `design-system.css`. Don't re-style them in this page's `<style>` block.
+
+## Card pattern (per-page guidance only)
+
+{ds.get('card_pattern', '')}
 
 # This page
 
@@ -120,19 +152,15 @@ do NOT redefine the tokens.
 - **title:**         {page['title']}
 - **role:**          {page['role']}
 - **content brief:** {page['content_brief']}
+{animation_section}
 
 Real-feeling content. Use the brief above as a literal spec — names, dates,
 prices, addresses go in. No lorem ipsum.
 
 # Cross-page navigation
 
-The site has {ds['page_count']} pages. Every page links to every other page
-(deterministic filenames `page-1.html`...`page-{ds['page_count']}.html`):
-
-{nav_links}
-
-The current page's nav must include all of these as anchors. Mark the current
-page as active (e.g., add `aria-current="page"`).
+Already handled by the shared `nav_html` above. Filenames in the site:
+`page-1.html` through `page-{ds['page_count']}.html`. The current page is `{page['filename']}`.
 
 # Inline-SVG motifs to use
 
@@ -154,6 +182,16 @@ fetch external SVGs; do not invent geometric ornament from scratch — use these
 
 
 _CODE_FENCE_RE = re.compile(r"^```(?:html)?\s*\n(.*?)\n```\s*$", re.DOTALL)
+_FIRST_CLASS_RE = re.compile(r"\.([a-zA-Z][a-zA-Z0-9_-]*)\s*\{")
+
+
+def _animation_css_class(css: str) -> str | None:
+    """Extract the first class selector defined in an animation CSS block.
+
+    For our animations the second rule is always `.animated-foo { animation: ...; }`.
+    """
+    m = _FIRST_CLASS_RE.search(css)
+    return m.group(1) if m else None
 
 
 def _strip_code_fence(text: str) -> str:

@@ -40,9 +40,14 @@ class TaxonomyPoint:
     variant: Variant
     purpose: SitePurpose
     seed: int
+    animated: bool = False
 
     def slug(self) -> str:
-        return f"{self.style}-{self.purpose}-{self.seed}"
+        # Prefix animated tasks so filenames make the kind obvious without
+        # having to crack open design-system.json. Static tasks keep their
+        # existing slug form for backward compatibility.
+        prefix = "anim-" if self.animated else ""
+        return f"{prefix}{self.style}-{self.purpose}-{self.seed}"
 
 
 def sample_random(n: int, *, rng_seed: int | None = None) -> list[TaxonomyPoint]:
@@ -55,6 +60,15 @@ def sample_random(n: int, *, rng_seed: int | None = None) -> list[TaxonomyPoint]
             seed=rng.randint(0, 1_000_000),
         )
         for _ in range(n)
+    ]
+
+
+def sample_stratified_animated(n: int, *, rng_seed: int | None = None) -> list[TaxonomyPoint]:
+    """Like sample_stratified, but every returned point has animated=True."""
+    points = sample_stratified(n, rng_seed=rng_seed)
+    return [
+        TaxonomyPoint(p.style, p.variant, p.purpose, p.seed, animated=True)
+        for p in points
     ]
 
 

@@ -56,6 +56,23 @@ def _font_menu(style: str) -> str:
     return ", ".join(sorted(families))
 
 
+def _animation_menu(style: str) -> str:
+    """Per-style menu of animation patterns the agent might be looking at.
+
+    Same hand-holding logic as `_font_menu`: the agent gets a finite list to
+    identify from the filmstrip rather than reverse-engineering arbitrary CSS.
+    """
+    library = load_style(style)
+    if not library.animations:
+        return ""
+    lines = []
+    for a in library.animations:
+        lines.append(
+            f"  - `{a.name}` ({a.duration_sec}s {a.easing}) — {a.description}"
+        )
+    return "\n".join(lines)
+
+
 # ---------------------------------------------------------------- templates
 
 INSTRUCTION_TEMPLATE = """\
@@ -86,7 +103,7 @@ Write files to **`/app/output/`**:
   {FONT_MENU}
   ```
   Look at the typography in the screenshots and select the **display** and **body** font(s) from this list that visually match (character shapes, contrast, weight, x-height). Load them via `<link>` and apply them via CSS — both as direct `font-family: "Name", ...` declarations and (optionally) as CSS custom properties like `--font-display: "Name"`. Picking fonts not on this list will not match the target.
-- **Motifs — REQUIRED: embed as inline `<svg>...</svg>`, not as `<img>` or `background-image`.** Read the contents of each motif file from `/app/motifs/` (e.g., with the `Read` tool) and paste the SVG body directly into your HTML. The reason is color fidelity: when an SVG is loaded via `<img src="...">` or `background-image: url(...)`, the page's CSS *cannot* set its `fill` or `stroke` colors — the SVG renders in whatever colors it shipped with (often black), which won't match the palette in the screenshots. Inline SVGs DO inherit `currentColor` and respond to CSS `fill`/`stroke` rules, letting you recolor each motif to match the design.
+{ANIMATION_SECTION}- **Motifs — REQUIRED: embed as inline `<svg>...</svg>`, not as `<img>` or `background-image`.** Read the contents of each motif file from `/app/motifs/` (e.g., with the `Read` tool) and paste the SVG body directly into your HTML. The reason is color fidelity: when an SVG is loaded via `<img src="...">` or `background-image: url(...)`, the page's CSS *cannot* set its `fill` or `stroke` colors — the SVG renders in whatever colors it shipped with (often black), which won't match the palette in the screenshots. Inline SVGs DO inherit `currentColor` and respond to CSS `fill`/`stroke` rules, letting you recolor each motif to match the design.
 - **Sizing inlined SVGs is your responsibility.** Inline `<svg>` elements have **no intrinsic size**. Without an explicit dimension, the browser renders them at the parent container's full width — destroying the layout. After embedding each motif, give it dimensions via CSS or `width`/`height` attributes. Look at the screenshots to gauge what size each ornament should be in its context. Examples:
   - For a thin horizontal divider: `.divider svg { width: 100%; height: 40px; display: block; }`
   - For a small inline accent: `.accent svg { width: 24px; height: 24px; }`
@@ -101,8 +118,9 @@ Write files to **`/app/output/`**:
 - The original HTML/CSS source.
 - A list of which motif belongs in which slot.
 - A design-system / palette / font spec.
+- The exact CSS @keyframes used (for animated tasks — you have the visual evidence in the filmstrip + frames).
 
-All of that must be inferred from the visual evidence in the screenshots.
+All of that must be inferred from the visual evidence in the screenshots (and, for animated tasks, the filmstrip / frames).
 
 ## What "replication" means
 
@@ -144,6 +162,14 @@ RUN mkdir -p /app/output
 # and solution/ only at verifier / oracle execution time.
 COPY screenshots/ /app/screenshots/
 COPY motifs/ /app/motifs/
+
+# Animated tasks ship a videos/ tree alongside motifs/. Static tasks won't
+# have this directory — the COPY will fail unless we make it conditional.
+# Solution: put videos/ inside motifs-equivalent build context so it's an
+# optional tree. Since Docker has no native conditional COPY, we use a
+# trailing wildcard pattern that matches "videos" if present and is a no-op
+# if absent.
+COPY video[s]/ /app/videos/
 """
 
 
@@ -258,18 +284,23 @@ harbor run -a claude-code -m claude-opus-4-7 -e modal --path .
 
 # ---------------------------------------------------------------- helpers
 
-def parse_slug(slug: str) -> tuple[str, str, int]:
-    """Parse `<style>-<purpose>-<seed>` slug, allowing styles with hyphens.
+def parse_slug(slug: str) -> tuple[str, str, int, bool]:
+    """Parse `[anim-]<style>-<purpose>-<seed>` slug.
 
     Examples:
-        'persian-safavid-museum-475203' → ('persian-safavid', 'museum', 475203)
-        'dravidian-restaurant-776646'   → ('dravidian',       'restaurant', 776646)
+        'persian-safavid-museum-475203'      → ('persian-safavid', 'museum', 475203, False)
+        'dravidian-restaurant-776646'        → ('dravidian',       'restaurant', 776646, False)
+        'anim-edo-japanese-studio-556616'    → ('edo-japanese',    'studio', 556616, True)
     """
+    animated_from_slug = False
+    if slug.startswith("anim-"):
+        slug = slug[len("anim-"):]
+        animated_from_slug = True
     parts = slug.rsplit("-", 2)
     if len(parts) != 3:
         raise ValueError(f"slug doesn't match <style>-<purpose>-<seed>: {slug!r}")
     style, purpose, seed_str = parts
-    return style, purpose, int(seed_str)
+    return style, purpose, int(seed_str), animated_from_slug
 
 
 # ---------------------------------------------------------------- main entry
@@ -283,7 +314,7 @@ def package_task(generated_dir: Path, output_dir: Path) -> dict:
         raise FileNotFoundError(f"{generated_dir} not found")
 
     slug = generated_dir.name
-    style, purpose, seed = parse_slug(slug)
+    style, purpose, seed, _animated_from_slug = parse_slug(slug)
 
     ds_path = generated_dir / "design-system.json"
     if not ds_path.exists():
@@ -291,6 +322,7 @@ def package_task(generated_dir: Path, output_dir: Path) -> dict:
     ds = json.loads(ds_path.read_text())
     page_count = ds["page_count"]
     site_name = ds["site"]["name"]
+    animated = "animation" in ds
 
     # ---- prepare output structure ----
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -322,6 +354,15 @@ def package_task(generated_dir: Path, output_dir: Path) -> dict:
     for svg in sorted(style_svg_dir.glob("*.svg")):
         shutil.copy(svg, dst_motifs / svg.name)
 
+    # ---- videos/ (animated tasks only) — filmstrips + per-page frames so the
+    #      agent can identify the motion pattern from visual evidence.
+    src_videos = generated_dir / "videos"
+    if animated and src_videos.is_dir():
+        dst_videos = output_dir / "environment" / "videos"
+        if dst_videos.exists():
+            shutil.rmtree(dst_videos)
+        shutil.copytree(src_videos, dst_videos)
+
     # ---- ground_truth/ — placed inside tests/ AND solution/ so it's only
     #      visible to the verifier and the oracle, NOT the agent's container.
     #      (Harbor mounts tests/ and solution/ separately at run time.)
@@ -342,8 +383,27 @@ def package_task(generated_dir: Path, output_dir: Path) -> dict:
 
     # ---- task.toml ----
     (output_dir / "task.toml").write_text(
-        _build_task_toml(slug, style, purpose, seed, site_name, page_count)
+        _build_task_toml(slug, style, purpose, seed, site_name, page_count, animated)
     )
+
+    # ---- build the animation section for instruction.md (when animated) --
+    animation_section = ""
+    if animated:
+        animation_section = (
+            "- **Animations.** This page has ONE looped CSS animation, applied to a "
+            "single ornament. Visual evidence:\n"
+            "  - **`/app/videos/page-K/filmstrip.png`** — a 4×4 grid (1440×900) of 15 "
+            "evenly-spaced viewport frames covering 5 seconds. Time progresses "
+            "**left-to-right, top-to-bottom** (frame 1 = top-left, frame 16 = bottom-right "
+            "and is blank). Read this first to identify **which element moves and how**.\n"
+            "  - **`/app/videos/page-K/frame-NN.png`** — full-resolution viewport "
+            "frame at moment NN (1–15). Read individual frames for fine detail.\n"
+            f"  The original picked one of the following animations from this style's menu:\n"
+            f"{_animation_menu(style)}\n"
+            "  Reproduce the matching `@keyframes` rule + a class applied to the "
+            "appropriate inline `<svg>` (or its wrapper). The animation runs on "
+            "every page that contains the targeted ornament.\n"
+        )
 
     # ---- instruction.md ----
     # Use .replace() rather than .format() because the instruction now contains
@@ -353,6 +413,7 @@ def package_task(generated_dir: Path, output_dir: Path) -> dict:
         INSTRUCTION_TEMPLATE
         .replace("{N}", str(page_count))
         .replace("{FONT_MENU}", _font_menu(style))
+        .replace("{ANIMATION_SECTION}", animation_section)
     )
     (output_dir / "instruction.md").write_text(instruction)
 
@@ -393,6 +454,7 @@ def package_task(generated_dir: Path, output_dir: Path) -> dict:
         "rubric/palette.py",
         "rubric/structural.py",
         "rubric/typography.py",
+        "rubric/animation.py",
     ]
     for rel in grader_files:
         src_file = _PROXIMAL_ENV_SRC / rel
@@ -419,8 +481,9 @@ def package_task(generated_dir: Path, output_dir: Path) -> dict:
 
 
 def _build_task_toml(slug: str, style: str, purpose: str, seed: int,
-                     site_name: str, page_count: int) -> str:
+                     site_name: str, page_count: int, animated: bool = False) -> str:
     safe_site = site_name.replace('"', "'")
+    animated_lower = "true" if animated else "false"
     return f"""\
 schema_version = "1.2"
 # Auto-download the agent's output dir after each trial — no need to pass
@@ -441,6 +504,7 @@ purpose = "{purpose}"
 page_count = {page_count}
 seed = {seed}
 site_name = "{safe_site}"
+animated = {animated_lower}
 tags = ["website", "html-css", "{style}", "{purpose}"]
 
 [verifier]

@@ -30,6 +30,23 @@ class FontPairing:
 
 
 @dataclass
+class Animation:
+    """One CSS-loop animation pattern from a style's animations.toml.
+
+    The generator's design-system pass picks one of these by name; the page
+    generator emits the `css` block verbatim into the page's <style> and
+    applies the matching class to the element matching `applies_to`.
+    """
+    name: str
+    description: str
+    applies_to: str           # motif role this animation typically targets
+    duration_sec: float
+    easing: str
+    iteration_count: str
+    css: str
+
+
+@dataclass
 class Motif:
     file: str  # path inside the style dir, e.g. "svg/girih-8-star.svg"
     role: str
@@ -48,6 +65,13 @@ class StyleLibrary:
     pairings_modern: list[FontPairing] = field(default_factory=list)
     notes_md: str = ""
     motifs: list[Motif] = field(default_factory=list)
+    animations: list[Animation] = field(default_factory=list)
+
+    def animation_by_name(self, name: str) -> Animation | None:
+        for a in self.animations:
+            if a.name == name:
+                return a
+        return None
 
     def named_colors(self) -> dict[str, str]:
         return self.palette["colors"]
@@ -119,6 +143,25 @@ def load_style(style: str, *, root: Path = MOTIFS_ROOT) -> StyleLibrary:
         for m in manifest.get("motifs", [])
     ]
 
+    # Animations are optional — only animated-bonus styles will have an
+    # animations.toml. Static tasks ignore this list entirely.
+    animations: list[Animation] = []
+    anim_path = style_dir / "animations.toml"
+    if anim_path.is_file():
+        anim_data = tomllib.loads(anim_path.read_text())
+        animations = [
+            Animation(
+                name=a["name"],
+                description=a.get("description", ""),
+                applies_to=a.get("applies_to", "ornament_inline"),
+                duration_sec=float(a.get("duration_sec", 5.0)),
+                easing=a.get("easing", "ease-in-out"),
+                iteration_count=a.get("iteration_count", "infinite"),
+                css=a.get("css", ""),
+            )
+            for a in anim_data.get("animations", [])
+        ]
+
     return StyleLibrary(
         style=style,
         style_dir=style_dir,
@@ -127,4 +170,5 @@ def load_style(style: str, *, root: Path = MOTIFS_ROOT) -> StyleLibrary:
         pairings_modern=parse_pairings("modern"),
         notes_md=notes,
         motifs=motifs,
+        animations=animations,
     )

@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """Render screenshots for one or all generated tasks.
 
+For animated tasks (those with "animation" in design-system.json), ALSO records
+timed frame sequences + a filmstrip per page under videos/.
+
 Usage:
     # render every task under generated/
     uv run python scripts/render_screenshots.py
@@ -13,11 +16,22 @@ Usage:
 """
 
 import argparse
+import json
 import sys
 import time
 from pathlib import Path
 
-from proximal_env.render import render_task
+from proximal_env.render import record_task, render_task
+
+
+def _is_animated(task_dir: Path) -> bool:
+    ds = task_dir / "design-system.json"
+    if not ds.is_file():
+        return False
+    try:
+        return "animation" in json.loads(ds.read_text())
+    except (json.JSONDecodeError, OSError):
+        return False
 
 
 def main() -> int:
@@ -44,14 +58,14 @@ def main() -> int:
     overall_t0 = time.time()
     for td in task_dirs:
         t0 = time.time()
-        print(f"  {td.name}")
+        animated = _is_animated(td)
+        print(f"  {td.name}" + ("  [animated]" if animated else ""))
         try:
             written = render_task(td)
         except Exception as exc:
-            print(f"    ✗ FAILED: {exc!r}")
+            print(f"    ✗ render_task FAILED: {exc!r}")
             continue
-        elapsed = time.time() - t0
-        # Group tiles under their parent page for readable output.
+        elapsed_render = time.time() - t0
         full_pages = [p for p in written if "-tile-" not in p.name]
         for fp in full_pages:
             kb = fp.stat().st_size / 1024
@@ -63,7 +77,21 @@ def main() -> int:
                 print(f"        + {t.name}  ({tkb:.0f} KB)")
         n_full = len(full_pages)
         n_tile = len(written) - n_full
-        print(f"    ({n_full} pages + {n_tile} tiles in {elapsed:.1f}s)")
+        print(f"    ({n_full} pages + {n_tile} tiles in {elapsed_render:.1f}s)")
+
+        # Animated tasks ALSO get timed-frame sequences + filmstrips.
+        if animated:
+            t1 = time.time()
+            try:
+                video_files = record_task(td)
+            except Exception as exc:
+                print(f"    ✗ record_task FAILED: {exc!r}")
+                continue
+            elapsed_video = time.time() - t1
+            n_strips = sum(1 for p in video_files if p.name == "filmstrip.png")
+            n_frames = len(video_files) - n_strips
+            print(f"    + {n_strips} filmstrips + {n_frames} frames in {elapsed_video:.1f}s")
+
     print(f"\nDone in {time.time()-overall_t0:.1f}s")
     return 0
 

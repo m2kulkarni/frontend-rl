@@ -21,24 +21,29 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from proximal_env.rubric import coverage, palette, structural, typography, visual
+from proximal_env.rubric import (
+    animation, coverage, palette, structural, typography, visual,
+)
 
-# Default weights. Tunable.
+# Default weights. Tunable. Animation is only included when the task is
+# actually animated — see grade() below.
 WEIGHTS: dict[str, float] = {
     "visual": 2.0,       # the primary "does it look right" signal
     "palette": 1.0,
     "structural": 1.0,
     "typography": 0.5,   # weakest signal in current implementation
+    "animation": 1.0,    # only contributes when task is animated
 }
 
-COMPOSED = ("visual", "palette", "structural", "typography")
+COMPOSED_STATIC = ("visual", "palette", "structural", "typography")
+COMPOSED_ANIMATED = ("visual", "palette", "structural", "typography", "animation")
 
 
-def _weighted_geometric_mean(scores: dict[str, float]) -> float:
-    """Weighted geometric mean over COMPOSED keys, using WEIGHTS."""
-    total_weight = sum(WEIGHTS[k] for k in COMPOSED)
+def _weighted_geometric_mean(scores: dict[str, float], keys: tuple[str, ...]) -> float:
+    """Weighted geometric mean over `keys`, using WEIGHTS."""
+    total_weight = sum(WEIGHTS[k] for k in keys)
     product = 1.0
-    for k in COMPOSED:
+    for k in keys:
         # Floor each score at a small epsilon so a single 0 doesn't zero the
         # product; we still want low scores to drag the composite down.
         s = max(scores[k], 1e-3)
@@ -50,19 +55,28 @@ def grade(ground_truth_dir: Path, candidate_dir: Path) -> dict:
     """Run every rubric and produce a composite score.
 
     Returns a dict shaped to fit Harbor's reward.json schema (all values
-    numeric):
+    numeric). For animated tasks, the `animation` key is also present and
+    contributes to the composite. For static tasks, animation is omitted
+    entirely (so the geomean isn't diluted by a free 1.0 on an axis we
+    aren't actually measuring).
 
+    Animated case:
         {
-          "overall":     float,  # coverage * weighted_geomean(others)
-          "coverage":    float,
-          "visual":      float,
-          "palette":     float,
-          "structural":  float,
-          "typography":  float
+          "overall":    float,  # coverage * geomean(visual, palette, structural,
+                                #                   typography, animation)
+          "coverage":   float,
+          "visual":     float,
+          "palette":    float,
+          "structural": float,
+          "typography": float,
+          "animation":  float
         }
+
+    Static case: same dict minus `animation`.
     """
     gt = Path(ground_truth_dir)
     cand = Path(candidate_dir)
+    animated = animation.is_animated_task(gt)
 
     cov = coverage.score(gt, cand)
     vis = visual.score(gt, cand)
@@ -70,17 +84,19 @@ def grade(ground_truth_dir: Path, candidate_dir: Path) -> dict:
     stc = structural.score(gt, cand)
     typ = typography.score(gt, cand)
 
-    geom = _weighted_geometric_mean({
+    components: dict[str, float] = {
         "visual": vis, "palette": pal, "structural": stc, "typography": typ,
-    })
+    }
+    if animated:
+        components["animation"] = animation.score(gt, cand)
 
+    keys = COMPOSED_ANIMATED if animated else COMPOSED_STATIC
+    geom = _weighted_geometric_mean(components, keys)
     overall = cov * geom
 
-    return {
+    result: dict[str, float] = {
         "overall": float(overall),
         "coverage": float(cov),
-        "visual": float(vis),
-        "palette": float(pal),
-        "structural": float(stc),
-        "typography": float(typ),
+        **{k: float(v) for k, v in components.items()},
     }
+    return result

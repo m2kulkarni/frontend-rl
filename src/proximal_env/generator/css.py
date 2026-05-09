@@ -5,10 +5,12 @@ The CSS file is what every page links to. It contains:
     - the CSS custom properties (--bg, --primary, etc.) on :root
     - a minimal CSS reset
     - a few base styles (links, body type)
+    - if animated: the picked animation's @keyframes + class rule
 Pages add page-specific styles in their own <style> blocks on top of this.
 """
 
 from proximal_env.generator.design_system import DesignSystem
+from proximal_env.motifs import StyleLibrary
 
 
 _RESET = """\
@@ -38,8 +40,13 @@ a:hover { text-decoration: underline; }
 """
 
 
-def render_design_system_css(ds: DesignSystem) -> str:
-    """Build the contents of design-system.css from the design-system JSON."""
+def render_design_system_css(ds: DesignSystem, library: StyleLibrary | None = None) -> str:
+    """Build the contents of design-system.css from the design-system JSON.
+
+    If `library` is provided AND the design-system declared an `animation`
+    block, append that animation's @keyframes + class rule so every page
+    that loads design-system.css can apply the animation by adding the class.
+    """
     fonts = ds.raw["fonts"]
     google_fonts_link = fonts["google_fonts_link"]
     display = fonts["display"]
@@ -62,4 +69,25 @@ def render_design_system_css(ds: DesignSystem) -> str:
         _BASE.rstrip(),
         "",
     ]
+
+    # Shared CSS for nav + footer (lives in design-system.css so every page inherits it).
+    shared_css = ds.raw.get("shared_html", {}).get("shared_css", "").strip()
+    if shared_css:
+        parts.extend([
+            "/* --- shared (nav + footer) --- */",
+            shared_css,
+            "",
+        ])
+
+    # Animation block (if any).
+    anim = ds.raw.get("animation")
+    if anim and library is not None:
+        anim_obj = library.animation_by_name(anim["name"])
+        if anim_obj is not None and anim_obj.css:
+            parts.extend([
+                "/* --- animation: " + anim["name"] + " --- */",
+                anim_obj.css.rstrip(),
+                "",
+            ])
+
     return "\n".join(parts)
