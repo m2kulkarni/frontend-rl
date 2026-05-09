@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Hokusai's Wave, Read Slowly — Tōkaidō Review</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), serif;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Background seigaiha drift */
+  .bg-pattern {
+    position: fixed;
+    inset: -10% -10%;
+    width: 120%;
+    height: 120%;
+    z-index: 0;
+    opacity: 0.06;
+    pointer-events: none;
+  }
+  .bg-pattern svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  main {
+    position: relative;
+    z-index: 1;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 80px 80px 120px;
+  }
+
+  /* Article header — asymmetric, 40% blank on the right */
+  .article-head {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: end;
+    margin-bottom: 96px;
+  }
+  .article-head__meta {
+    border-left: 1px solid var(--primary);
+    padding: 8px 0 8px 24px;
+  }
+  .kicker {
+    font-family: var(--font-body), sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 24px;
+  }
+  .article-head h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 500;
+    font-size: 68px;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--primary);
+    margin: 0 0 32px;
+  }
+  .article-head h1 em {
+    font-style: italic;
+    color: var(--secondary);
+  }
+  .article-head__byline {
+    font-family: var(--font-display), serif;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text);
+  }
+  .article-head__byline .label {
+    font-family: var(--font-body), sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .article-head__date {
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid var(--accent); /* the one cinnabar hairline */
+    font-family: var(--font-body), sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--primary);
+  }
+
+  /* Standfirst — large pull, off-center */
+  .standfirst {
+    display: grid;
+    grid-template-columns: 1fr 7fr 4fr;
+    gap: 48px;
+    margin-bottom: 96px;
+    align-items: start;
+  }
+  .standfirst__num {
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    color: var(--secondary);
+    letter-spacing: 0.1em;
+    padding-top: 12px;
+  }
+  .standfirst__lead {
+    font-family: var(--font-display), serif;
+    font-size: 26px;
+    line-height: 1.45;
+    color: var(--primary);
+    font-weight: 400;
+  }
+  .standfirst__lead::first-letter {
+    font-size: 96px;
+    float: left;
+    line-height: 0.85;
+    padding: 8px 16px 0 0;
+    color: var(--secondary);
+    font-family: var(--font-display), serif;
+  }
+
+  /* The body — three-up irregular reading column */
+  .body-grid {
+    display: grid;
+    grid-template-columns: 200px 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 96px;
+  }
+  .marginalia {
+    font-family: var(--font-body), sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    line-height: 1.8;
+    padding-top: 8px;
+  }
+  .marginalia .stamp {
+    margin-bottom: 24px;
+  }
+  .marginalia .stamp img,
+  .marginalia .stamp svg {
+    width: 36px;
+    height: 36px;
+    display: block;
+    margin-bottom: 12px;
+  }
+  .prose p {
+    font-family: var(--font-display), serif;
+    font-size: 15.5px;
+    line-height: 1.75;
+    margin: 0 0 22px;
+  }
+  .prose p:first-child {
+    text-indent: 0;
+  }
+  .prose p + p {
+    text-indent: 1.4em;
+  }
+  .prose .pull {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    line-height: 1.45;
+    color: var(--secondary);
+    border-left: 1px solid var(--secondary);
+    padding: 12px 0 12px 24px;
+    margin: 32px 0;
+    text-indent: 0 !important;
+  }
+  .prose .jp {
+    font-family: var(--font-display), serif;
+    color: var(--secondary);
+    font-size: 17px;
+  }
+
+  /* Detail crops gallery */
+  .crops {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 56px;
+    margin: 96px 0;
+    position: relative;
+  }
+  .crops::before {
+    content: "三つの見取り図 · Three Detail Readings";
+    position: absolute;
+    top: -56px;
+    left: 0;
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    color: var(--secondary);
+  }
+  .crop {
+    border-left: 1px solid var(--primary);
+    padding: 0 0 0 28px;
+    position: relative;
+  }
+  .crop__plate {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    background: #ebe2c9;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .crop__plate::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 30% 70%, rgba(28,58,94,0.12) 0%, transparent 40%),
+      radial-gradient(circle at 70% 30%, rgba(12,12,12,0.08) 0%, transparent 50%);
+  }
+  .crop__plate--foam {
+    background:
+      radial-gradient(ellipse at 20% 80%, #f5efde 0%, #f5efde 18%, transparent 19%),
+      radial-gradient(ellipse at 35% 70%, #f5efde 0%, #f5efde 12%, transparent 13%),
+      radial-gradient(ellipse at 50% 60%, #f5efde 0%, #f5efde 14%, transparent 15%),
+      radial-gradient(ellipse at 65% 50%, #f5efde 0%, #f5efde 10%, transparent 11%),
+      linear-gradient(135deg, #1c3a5e 0%, #2d4f7a 50%, #1c3a5e 100%);
+  }
+  .crop__plate--boats {
+    background:
+      linear-gradient(180deg, #d9c89a 0%, #c4ad7a 60%, #1c3a5e 60%, #1c3a5e 100%);
+  }
+  .crop__plate--fuji {
+    background:
+      linear-gradient(180deg, #d9c89a 0%, #d9c89a 55%, transparent 55%),
+      linear-gradient(180deg, #1c3a5e 0%, #1c3a5e 100%);
+  }
+  .crop__plate--fuji::before {
+    content: "";
+    position: absolute;
+    bottom: 25%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 70px solid transparent;
+    border-right: 70px solid transparent;
+    border-bottom: 60px solid #f5efde;
+    z-index: 2;
+  }
+  .crop__num {
+    font-family: var(--font-body), sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    color: var(--secondary);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .crop__title {
+    font-family: var(--font-display), serif;
+    font-size: 18px;
+    line-height: 1.3;
+    color: var(--primary);
+    margin-bottom: 12px;
+  }
+  .crop__caption {
+    font-family: var(--font-body), sans-serif;
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--text);
+  }
+
+  /* Argument cards */
+  .arguments {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    margin-bottom: 96px;
+  }
+  .arg-card {
+    background: var(--surface);
+    border-left: 1px solid var(--primary);
+    padding: 40px 44px 44px;
+    position: relative;
+  }
+  .arg-card__kamon {
+    position: absolute;
+    top: 32px;
+    right: 32px;
+    width: 24px;
+    height: 24px;
+    opacity: 0.85;
+  }
+  .arg-card__kicker {
+    font-family: var(--font-body), sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 18px;
+  }
+  .arg-card__title {
+    font-family: var(--font-display), serif;
+    font-size: 26px;
+    line-height: 1.25;
+    color: var(--primary);
+    margin: 0 0 20px;
+    font-weight: 500;
+  }
+  .arg-card__rule {
+    width: 32px;
+    height: 1px;
+    background: var(--primary);
+    margin-bottom: 20px;
+  }
+  .arg-card__dek {
+    font-family: var(--font-body), sans-serif;
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--text);
+  }
+
+  /* Closing — seal block */
+  .closing {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 48px;
+    align-items: end;
+    margin-top: 120px;
+  }
+  .closing__cite {
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--text);
+  }
+  .closing__cite .label {
+    font-family: var(--font-body), sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    display: block;
+    margin-bottom: 8px;
+  }
+  .closing__seal {
+    text-align: center;
+  }
+  .closing__seal-wrap {
+    display: inline-block;
+    border: 1.5px solid var(--accent);
+    padding: 18px 22px;
+    color: var(--accent);
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    letter-spacing: 0.3em;
+    line-height: 1;
+  }
+  .closing__seal-caption {
+    margin-top: 12px;
+    font-family: var(--font-body), sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--secondary);
+  }
+  .closing__nextup {
+    text-align: right;
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  .closing__nextup .label {
+    font-family: var(--font-body), sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    display: block;
+    margin-bottom: 8px;
+  }
+  .closing__nextup a {
+    color: var(--primary);
+    text-decoration: none;
+    border-bottom: 1px solid var(--primary);
+  }
+
+  /* Section divider — sayagata key-fret */
+  .divider {
+    margin: 0 0 80px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    height: 24px;
+  }
+  .divider svg, .divider img {
+    height: 18px;
+    flex: 0 0 auto;
+    opacity: 0.7;
+  }
+  .divider__label {
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    color: var(--secondary);
+    text-transform: uppercase;
+  }
+  .divider__line {
+    flex: 1;
+    height: 1px;
+    background: var(--primary);
+    opacity: 0.5;
+  }
+
+  /* Hero plate — the wave itself, abstract */
+  .hero-plate {
+    height: 380px;
+    margin-bottom: 96px;
+    position: relative;
+    background:
+      linear-gradient(180deg, #d9c89a 0%, #d9c89a 100%);
+    overflow: hidden;
+    border-left: 1px solid var(--primary);
+  }
+  .hero-plate__caption {
+    position: absolute;
+    bottom: 24px;
+    right: 32px;
+    font-family: var(--font-body), sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--bg);
+    background: var(--secondary);
+    padding: 8px 14px;
+    z-index: 3;
+  }
+  .hero-plate__wave {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 600px 200px at 25% 60%, #1c3a5e 0%, #1c3a5e 40%, transparent 41%),
+      radial-gradient(ellipse 400px 160px at 70% 80%, #1c3a5e 0%, #1c3a5e 50%, transparent 51%),
+      radial-gradient(ellipse 200px 80px at 30% 40%, #f5efde 0%, #f5efde 20%, transparent 21%),
+      radial-gradient(ellipse 100px 60px at 45% 30%, #f5efde 0%, #f5efde 25%, transparent 26%);
+  }
+  .hero-plate__fuji {
+    position: absolute;
+    bottom: 35%;
+    left: 55%;
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 42px solid #ebe2c9;
+    z-index: 2;
+  }
+  .hero-plate__kikko {
+    position: absolute;
+    top: 32px;
+    right: 32px;
+    width: 64px;
+    height: 64px;
+    z-index: 4;
+    opacity: 0.85;
+    color: var(--accent);
+  }
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="site-nav__inner">
+    <a class="site-nav__brand" href="page-1.html" aria-label="Tōkaidō Review — home">
+      <span class="site-nav__kicker">第十四号 · Issue XIV</span>
+      <span class="site-nav__wordmark">Tōkaidō Review</span>
+      <span class="site-nav__sub">A Journal of the Edo Period</span>
+    </a>
+    <nav class="site-nav__links" aria-label="Primary">
+      <ol>
+        <li><a href="page-1.html"><span class="num">01</span> Front</a></li>
+        <li><a href="page-2.html"><span class="num">02</span> Fifty-Three Stations</a></li>
+        <li><a href="page-3.html"><span class="num">03</span> Aizome-an</a></li>
+        <li><a href="page-4.html"><span class="num">04</span> The Wave</a></li>
+        <li><a href="page-5.html"><span class="num">05</span> Tsumago Dispatch</a></li>
+        <li><a href="page-6.html"><span class="num">06</span> Masthead</a></li>
+      </ol>
+    </nav>
+  </div>
+  <div class="site-nav__rule" aria-hidden="true"></div>
+</header>
+
+<div class="bg-pattern" aria-hidden="true">
+  <!-- Validated W3C 2014-03-02 -->
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="700" height="700" id="svg2" viewBox="0 0 700 700" class="animated-seigaiha" width="100%" height="100%" alt="">
+	<title>Seigaiha</title>
+	<defs>
+		<g id="C1">
+			<path d="M 1,210 V 100 A 98,98 0 0 1 100,1 98,98 0 0 1 199,100 V 210" style="fill:white;stroke:black;stroke-width:2" />
+			<path d="M 175,210 V 100 A 75,75 0 0 0 100,25 75,75 0 0 0 25,100 V 210" style="fill:white;stroke:black;stroke-width:1" />
+		</g>
+	</defs>
+	<g id="C4">
+		<use xlink:href="#C1" />
+		<use xlink:href="#C1" transform="translate(200,0)" />
+		<use xlink:href="#C1" transform="translate(400,0)" />
+		<use xlink:href="#C1" transform="translate(600,0)" />
+	</g>
+	<use xlink:href="#C4" transform="translate(-100,100)" />
+	<use xlink:href="#C4" transform="translate(0,200)" />
+	<use xlink:href="#C4" transform="translate(-100,300)" />
+	<use xlink:href="#C4" transform="translate(0,400)" />
+	<use xlink:href="#C4" transform="translate(-100,500)" />
+	<use xlink:href="#C4" transform="translate(0,600)" />
+</svg>
+</div>
+
+<main>
+
+  <article>
+
+    <header class="article-head">
+      <div class="article-head__meta">
+        <div class="kicker">Criticism · No. 04 · Close Reading</div>
+        <h1>Hokusai's Wave,<br><em>Read Slowly</em></h1>
+      </div>
+      <div class="article-head__byline">
+        <span class="label">By the Critic</span>
+        Junichirō Mori<br>
+        Contributing Editor, Edo-period print culture<br>
+        <span class="article-head__date">14 September 2024 · Tokyo</span>
+      </div>
+    </header>
+
+    <section class="standfirst">
+      <div class="standfirst__num">序<br>i.</div>
+      <p class="standfirst__lead">For two centuries the West has read <em>Kanagawa-oki Nami-ura</em> as a portrait of menace — an instant before catastrophe, a wave poised to devour three slender boats. This is, I want to argue, an almost wilful misreading. The wave is not falling. It is repeating.</p>
+      <div></div>
+    </section>
+
+    <div class="hero-plate" aria-label="Visual study after Katsushika Hokusai, Kanagawa-oki Nami-ura, c. 1831">
+      <div class="hero-plate__wave"></div>
+      <div class="hero-plate__fuji"></div>
+      <svg width="100%" height="100%" viewBox="0 0 600 600" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;" class="hero-plate__kikko" width="64" height="64" alt="">
+    <g id="Ebene1">
+        <rect x="0" y="-2.84217e-14" width="600" height="600" style="fill:black;"/>
+        <path d="M160,57.5129L440,57.5129L580,300L440,542.487L160,542.487L20,300L160,57.5129Z" style="fill:white;"/>
+        <path d="M200,126.795L400,126.795L500,300L400,473.205L200,473.205L100,300L200,126.795Z" style="fill:black;"/>
+        <rect x="180" y="200" width="108.445" height="120" style="fill:black;"/>
+        <rect x="220" y="240" width="14.2227" height="20" style="fill:black;"/>
+        <rect x="180" y="180" width="240" height="240" style="fill:white;"/>
+        <rect x="335" y="180" width="20" height="85" style="fill:black;"/>
+        <rect x="245" y="335" width="20" height="85" style="fill:black;"/>
+        <path d="M180,245L180,265L265,265L265,245L180,245Z" style="fill:black;"/>
+        <path d="M335,335L335,355L420,355L420,335L335,335Z" style="fill:black;"/>
+    </g>
+</svg>
+      <div class="hero-plate__caption">Plate I · After Hokusai, c. 1831 · ōban yoko-e</div>
+    </div>
+
+    <section class="body-grid">
+      <aside class="marginalia">
+        <div class="stamp">
+          <!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.0"
+   width="688"
+   height="688"
+   id="svg2652" width="36" height="36" alt="">
+  <defs
+     id="defs2654" />
+  <g
+     id="layer1">
+    <rect
+       width="688"
+       height="688"
+       x="0"
+       y="0"
+       id="rect5371"
+       style="opacity:1;fill:#000000;fill-opacity:1;stroke:#60441c;stroke-width:0;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       d="M 226.13364,612.57579 C 207.8052,610.64503 189.07085,603.27797 174.07991,592.10629 C 168.2372,587.75214 158.29322,577.8608 153.78698,571.9208 C 132.5626,543.94339 126.61588,507.85248 137.79008,474.83496 C 141.25861,464.58614 146.78359,453.9662 152.97675,445.64361 C 157.16039,440.02149 167.66572,429.43802 173.42393,425.04434 C 201.20575,403.84602 237.50693,397.85655 270.50977,409.02578 C 286.664,414.49289 299.71221,422.76016 311.9042,435.25303 C 323.67395,447.31324 331.05394,459.27791 336.31895,474.83496 C 346.30781,504.35006 342.79857,535.57031 326.40165,563.06499 C 318.72451,575.93817 304.73233,589.92909 291.82929,597.63424 C 271.43302,609.81403 248.79421,614.96291 226.13364,612.57579 z M 439.98488,612.57579 C 421.65644,610.64503 402.9221,603.27797 387.93116,592.10629 C 382.08845,587.75214 372.14446,577.8608 367.63822,571.9208 C 346.41385,543.94339 340.46712,507.85248 351.64132,474.83496 C 355.10985,464.58614 360.63483,453.9662 366.828,445.64361 C 371.01163,440.02149 381.51696,429.43802 387.27517,425.04434 C 415.05699,403.84602 451.35818,397.85655 484.36101,409.02578 C 500.51524,414.49289 513.56346,422.76016 525.75544,435.25303 C 537.52519,447.31324 544.90518,459.27791 550.17019,474.83496 C 560.15906,504.35006 556.64982,535.57031 540.25289,563.06499 C 532.57575,575.93817 518.58357,589.92909 505.68054,597.63424 C 485.28426,609.81403 462.64546,614.96291 439.98488,612.57579 z M 333.09971,445.5755 C 326.99741,441.05835 322.03757,437.0118 322.07785,436.58317 C 322.11812,436.15453 324.00614,430.04755 326.27344,423.01211 C 328.54074,415.97667 330.40195,409.82984 330.40946,409.35249 C 330.41825,408.79313 330.90894,408.61682 331.78974,408.85653 C 336.91594,410.25168 345.03197,410.75398 350.25232,409.9992 C 353.2886,409.5602 356.20013,409.03704 356.72239,408.83663 C 357.45739,408.55458 358.66391,411.56003 362.06214,422.13803 C 364.47674,429.65422 366.56921,436.1094 366.71207,436.48287 C 366.91109,437.00314 349.02239,450.85215 344.9585,453.32397 C 344.51333,453.59474 339.56703,450.36286 333.09971,445.5755 z M 314.11227,432.13619 C 306.25374,424.11659 298.14048,418.10026 288.08287,412.83429 L 281.67525,409.47937 L 286.09629,406.26424 C 288.52786,404.49592 294.0499,400.4269 298.36748,397.22196 C 303.55068,393.3745 306.30718,391.69547 306.4812,392.2798 C 307.38291,395.30755 319.74689,404.66661 325.48873,406.66778 C 326.68341,407.08415 327.53314,407.75863 327.37703,408.16662 C 327.22092,408.57461 325.12543,415.03369 322.72039,422.52012 C 320.31535,430.00655 318.2756,436.13182 318.18762,436.13182 C 318.09963,436.13182 316.26572,434.33378 314.11227,432.13619 z M 365.69749,421.91999 C 363.16716,414.06854 361.15694,407.62326 361.23033,407.59713 C 361.30371,407.57101 363.62965,406.42384 366.3991,405.04786 C 371.95469,402.28759 379.49079,396.42732 381.29054,393.46788 L 382.44784,391.56484 L 394.69181,400.52347 L 406.93578,409.48211 L 400.48175,412.86132 C 391.30586,417.66564 384.77492,422.37347 377.03638,429.76189 L 370.29807,436.19534 L 365.69749,421.91999 z M 159.87911,409.8763 C 141.55067,407.94553 122.81632,400.57848 107.82539,389.4068 C 101.98268,385.05265 92.038692,375.16131 87.532453,369.22131 C 66.308078,341.2439 60.361354,305.15299 71.535554,272.13546 C 75.004083,261.88664 80.529061,251.26671 86.722226,242.94411 C 90.905865,237.322 101.4112,226.73853 107.1694,222.34485 C 127.75958,206.63396 154.14627,198.87562 179.1638,201.17674 C 189.54676,202.13177 195.42739,203.33865 204.25524,206.32629 C 220.40947,211.7934 233.45769,220.06067 245.64967,232.55353 C 257.41942,244.61375 264.79941,256.57842 270.06442,272.13546 C 280.05329,301.65056 276.54405,332.87082 260.14712,360.3655 C 252.46998,373.23868 238.4778,387.2296 225.57477,394.93475 C 205.17849,407.11454 182.53968,412.26341 159.87911,409.8763 z M 506.23941,409.8763 C 487.91097,407.94553 469.17662,400.57848 454.18568,389.4068 C 448.34297,385.05265 438.39899,375.16131 433.89275,369.22131 C 412.66837,341.2439 406.72165,305.15299 417.89585,272.13546 C 421.36438,261.88664 426.88936,251.26671 433.08252,242.94411 C 437.26616,237.322 447.77149,226.73853 453.5297,222.34485 C 474.11988,206.63396 500.50657,198.87562 525.5241,201.17674 C 535.90705,202.13177 541.78769,203.33865 550.61554,206.32629 C 566.76977,211.7934 579.81798,220.06067 592.00997,232.55353 C 603.77972,244.61375 611.15971,256.57842 616.42472,272.13546 C 626.4136,301.65056 622.90434,332.87082 606.50742,360.3655 C 598.83028,373.23868 584.8381,387.2296 571.93506,394.93475 C 551.53879,407.11454 528.89998,412.26341 506.23941,409.8763 z M 268.15715,398.34455 C 262.05485,393.8274 257.09274,389.78085 257.13022,389.35222 C 257.16771,388.92358 259.02238,382.8904 261.25171,375.94516 L 265.30504,363.31744 L 280.33093,363.31744 L 295.35682,363.31744 L 295.75661,366.43337 C 296.75664,374.22758 299.55735,382.58539 302.60198,386.86118 L 303.90698,388.69388 L 292.35247,397.16119 C 285.99749,401.8182 280.45018,405.83753 280.0251,406.09302 C 279.57107,406.36591 274.67503,403.16933 268.15715,398.34455 z M 337.42028,405.976 C 320.59281,403.47665 306.16279,391.05567 300.82957,374.47969 C 298.54115,367.36718 298.54115,355.33179 300.82957,348.21927 C 305.39337,334.03469 316.66535,322.76272 330.84992,318.19891 C 337.96244,315.9105 349.99783,315.9105 357.11035,318.19891 C 371.29492,322.76272 382.5669,334.03469 387.1307,348.21927 C 388.46092,352.35367 388.71703,354.47349 388.71703,361.34948 C 388.71703,368.22547 388.46092,370.34529 387.1307,374.47969 C 382.57727,388.63201 371.11073,400.11532 357.26766,404.38638 C 351.87523,406.05013 342.80849,406.77631 337.42028,405.976 z M 396.92579,397.62232 L 384.71401,388.68724 L 386.01664,386.85786 C 389.05892,382.58537 391.85993,374.22514 392.85964,366.43337 L 393.25943,363.31744 L 408.27879,363.31744 L 423.29815,363.31744 L 427.32825,375.8997 C 429.54481,382.81995 431.48345,388.80799 431.63636,389.20646 C 431.8485,389.75928 414.15576,403.50512 409.90118,406.09295 C 409.45622,406.36359 404.04167,402.82884 396.92579,397.62232 z M 268.02631,354.50884 C 273.04989,344.52009 276.23138,334.54383 278.53343,321.56141 L 279.36557,316.86856 L 291.64153,325.75743 L 303.91749,334.6463 L 302.60724,336.48638 C 299.65373,340.6342 296.80802,348.88222 295.79112,356.24225 L 295.36383,359.33483 L 280.3873,359.52217 L 265.41076,359.70952 L 268.02631,354.50884 z M 392.82864,356.26559 C 391.80759,348.88029 388.96624,340.63942 386.00902,336.48638 L 384.69876,334.6463 L 396.97472,325.75914 C 403.7265,320.8712 409.31228,316.92903 409.38756,316.99877 C 409.46284,317.0685 409.8559,319.32711 410.26103,322.0179 C 411.91853,333.02667 415.51082,344.4202 420.36087,354.0511 C 421.6465,356.60403 422.69838,358.84776 422.69838,359.03716 C 422.69838,359.22656 416.07462,359.38152 407.9789,359.38152 L 393.25943,359.38152 L 392.82864,356.26559 z M 294.07723,322.92243 C 287.42898,318.04206 282.02018,313.69568 282.05767,313.2638 C 282.09515,312.83192 283.94982,306.79609 286.17915,299.85085 L 290.23248,287.22313 L 304.28557,287.22313 L 318.33866,287.22313 L 322.92901,301.46672 C 325.4537,309.30069 327.45931,315.73168 327.38593,315.75781 C 327.31255,315.78393 324.9866,316.93111 322.21716,318.30709 C 316.65941,321.06842 309.12528,326.92793 307.32398,329.88993 L 306.16493,331.79582 L 294.07723,322.92243 z M 382.02729,330.93379 C 382.02729,328.56931 368.96178,318.72054 363.12752,316.68717 C 361.93285,316.27079 361.08312,315.59632 361.23922,315.18833 C 361.39533,314.78034 363.49082,308.32126 365.89587,300.83483 L 370.26867,287.22313 L 384.31969,287.22313 L 398.37071,287.22313 L 402.4008,299.8054 C 404.61736,306.72564 406.55662,312.71526 406.71026,313.11566 C 406.86391,313.51606 401.76919,317.66923 395.38865,322.34491 C 381.62025,332.43446 382.02729,332.17281 382.02729,330.93379 z M 330.29493,312.66796 C 325.8914,298.77937 322.39483,286.94226 322.62717,286.70991 C 322.78591,286.55118 325.51511,286.81431 328.69207,287.29465 C 336.19383,288.42889 353.31585,288.4268 360.24099,287.29081 C 363.23139,286.80027 365.81041,286.53124 365.97215,286.69298 C 366.13389,286.85472 365.11589,290.67424 363.70993,295.18081 C 362.30397,299.68738 360.38824,305.88391 359.45275,308.95089 L 357.75187,314.52721 L 352.99795,313.69292 C 345.8921,312.44588 337.51981,312.74932 332.16818,314.44786 C 331.25536,314.73758 330.81995,314.32387 330.29493,312.66796 z M 333.05926,283.9271 C 314.73082,281.99634 295.99647,274.62928 281.00554,263.4576 C 275.16282,259.10345 265.21884,249.21211 260.7126,243.27211 C 239.48823,215.2947 233.5415,179.20379 244.7157,146.18627 C 248.18423,135.93744 253.70921,125.31751 259.90237,116.99491 C 264.08601,111.3728 274.59134,100.78933 280.34955,96.395647 C 308.13137,75.197328 344.43255,69.207858 377.43539,80.377088 C 393.58962,85.844198 406.63783,94.111468 418.82982,106.60433 C 430.59957,118.66455 437.97956,130.62922 443.24457,146.18627 C 453.23344,175.70137 449.7242,206.92162 433.32727,234.4163 C 425.65013,247.28948 411.65795,261.2804 398.75492,268.98555 C 378.35864,281.16534 355.71983,286.31422 333.05926,283.9271 z"
+       id="path9114"
+       style="fill:#ffffff" />
+  </g>
+</svg>
+          The seigaiha argument
+        </div>
+        Print:<br>
+        Kanagawa-oki Nami-ura<br>
+        c. 1831 · Tenpō 2<br>
+        Ōban yoko-e<br>
+        25.7 × 37.9 cm<br><br>
+        From: Fugaku<br>Sanjūrokkei<br>
+        三十六景<br><br>
+        Pigments: prussian blue (bero-ai), sumi, beni
+      </aside>
+
+      <div class="prose">
+        <p>To stand close to a first-state impression — I last did so in the print room of the Sumida Hokusai Museum, on a grey Wednesday in March — is to feel the image refuse the reading the West has hung on it. The crest does not bear down. It hangs. The foam, which most reproductions render as droplets in motion, resolves on close inspection into discrete, interlocking <span class="jp">爪 (tsume)</span> — claws — that repeat in scale, smaller and smaller, like the arcs of a <span class="jp">青海波</span> pattern thrown vertical.</p>
+
+        <p>This is not a metaphor I am importing. The seigaiha — the blue-ocean-wave wagara, those nested concentric arcs found on every other kimono lining of the period — was, by 1831, two centuries old as a textile motif and at least a millennium old as an idea. Hokusai's genius is not to have invented the wave. It is to have rotated the seigaiha ninety degrees and asked what happens when its arcs are read as an instant rather than an eternity.</p>
+
+        <p class="pull">The wave is not a verb. It is a noun being inflected — water performing its grammar.</p>
+
+        <p>Read this way, the print's tension dissolves into something stranger and more durable. The boatmen are not fleeing. They have bowed their heads because this is what one does inside structural water. Mt. Fuji, which Western viewers persistently describe as "tiny" or "menaced" by the wave, is in fact exactly proportioned: it is the still point against which the repetition can register as repetition. Without Fuji, the wave is gesture. With Fuji, it is pattern.</p>
+      </div>
+
+      <div class="prose">
+        <p>Consider the boats. There are three — <span class="jp">押送船 (oshiokuri-bune)</span>, the fast cargo skiffs that ran fresh fish from the Bōsō peninsula into Edo Bay before dawn. Eight oarsmen per boat, low gunwales, designed precisely for this kind of water. Hokusai knew this. His original buyers — chōnin merchants in Nihonbashi, paying perhaps thirty mon per impression — knew this. The boats are not in peril. They are at work.</p>
+
+        <p>The Western reading of menace, I suspect, is a translation error of a particular nineteenth-century kind: the Goncourt brothers, then Edmond de Goncourt's 1896 monograph, then a century of museum wall-text, all reading the print through a Romantic vocabulary of sublime threat that the print itself does not contain. Hokusai gave us water as architecture. We have insisted on reading it as drama.</p>
+
+        <p>What I want to propose, then — and what the three details on the next page are intended to substantiate — is that <em>The Great Wave</em> is best understood not as Hokusai's most exceptional print but as his most <em>characteristic</em>: a working out, in the language of ukiyo-e, of the same patience the seigaiha textile demands of its weaver. Look long enough, and the wave stops moving.</p>
+      </div>
+    </section>
+
+    <div class="divider">
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0" y="0" width="600" height="600" viewBox="0 0 600 600" alt="" width="120" height="18">
+<style type="text/css">
+	.st0{fill:none;stroke:#000;stroke-width:2;}
+</style>
+<polygon class="st0" points="501.6,301.2 551.1,251.7 500.8,201.4 451.3,250.9 300.9,100.5 350.4,51 300.1,0.7 250.6,50.2 
+	201.1,0.7 150.3,51.5 500.3,401.5 551.1,350.7 "/>
+<polygon class="st0" points="600.9,199.9 551.6,150.7 601.2,101 550.7,50.4 501,100.1 450.4,150.7 400.8,200.3 451.3,250.9 
+	501,201.2 550.3,250.5 "/>
+<polyline class="st0" points="600,0 400.8,200.3 351,150.5 501.5,0 "/>
+<polygon class="st0" points="349.9,452.9 300.4,502.4 250.1,452.1 299.6,402.6 149.2,252.2 99.7,301.7 49.4,251.4 98.9,201.9 
+	49.4,152.4 100.2,101.6 450.2,451.6 399.4,502.4 "/>
+<polygon class="st0" points="248.7,552.1 199.4,502.9 149.7,552.5 99.2,501.9 148.8,452.3 199.4,401.7 249,352.1 299.6,402.6 
+	250,452.3 299.2,501.6 "/>
+<polygon class="st0" points="-0.9,302.6 48.4,351.9 -1.2,401.5 49.3,452.1 99,402.5 149.6,351.9 199.2,302.2 148.7,251.7 99,301.3 
+	49.7,252 "/>
+<rect x="86.2" y="284.6" transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 -96.6059 819.6381)" class="st0" width="70.5" height="290.4"/>
+<polyline class="st0" points="551.1,350.7 501.6,301.2 551.1,251.7 600.6,301.2 "/>
+<polyline class="st0" points="49.4,152.4 99.4,202.4 49.7,252 -0.2,202.1 "/>
+<polyline class="st0" points="399.4,502.4 349.4,452.4 299.8,502.1 349.7,552.1 299.2,602.6 "/>
+<line class="st0" x1="600.4" y1="400" x2="398.7" y2="600.7"/>
+<line class="st0" x1="99.4" y1="0" x2="0.4" y2="101.6"/>
+<line class="st0" x1="600" y1="502.4" x2="499.6" y2="600"/>
+<line class="st0" x1="43.7" y1="557.4" x2="0.4" y2="600.7"/>
+<line class="st0" x1="149.7" y1="552.5" x2="99" y2="600.7"/>
+</svg>
+      <span class="divider__label">Three Crops</span>
+      <div class="divider__line"></div>
+    </div>
+
+    <section class="crops">
+      <figure class="crop">
+        <div class="crop__plate crop__plate--foam"></div>
+        <div class="crop__num">Detail i · upper crest</div>
+        <h3 class="crop__title">The Foam Claws</h3>
+        <p class="crop__caption">Magnified at the wave's lip, the spray resolves into discrete fingered shapes that repeat at three diminishing scales. The smallest claw, near the lower right of the crest, is roughly 4 mm on the original block — a register of carving precision, and an argument for repetition over chaos.</p>
+      </figure>
+
+      <figure class="crop">
+        <div class="crop__plate crop__plate--boats"></div>
+        <div class="crop__num">Detail ii · centre register</div>
+        <h3 class="crop__title">The Three Skiffs</h3>
+        <p class="crop__caption">Eight oarsmen visible per oshiokuri-bune. Their postures are not those of men bracing for impact; they are those of men rowing through known water. Note the unbroken line of the gunwale — Hokusai's draughtsmanship admits no panic.</p>
+      </figure>
+
+      <figure class="crop">
+        <div class="crop__plate crop__plate--fuji"></div>
+        <div class="crop__num">Detail iii · centre-rear</div>
+        <h3 class="crop__title">Mt. Fuji, in Scale</h3>
+        <p class="crop__caption">Frequently described as "diminished," Fuji is in fact rendered at the precise scale required to anchor the wave's repeating arcs as a figure against ground. Remove the mountain, and the seigaiha logic collapses. It is the silent partner of the wave.</p>
+      </figure>
+    </section>
+
+    <div class="divider">
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0" y="0" width="600" height="600" viewBox="0 0 600 600" alt="" width="120" height="18">
+<style type="text/css">
+	.st0{fill:none;stroke:#000;stroke-width:2;}
+</style>
+<polygon class="st0" points="501.6,301.2 551.1,251.7 500.8,201.4 451.3,250.9 300.9,100.5 350.4,51 300.1,0.7 250.6,50.2 
+	201.1,0.7 150.3,51.5 500.3,401.5 551.1,350.7 "/>
+<polygon class="st0" points="600.9,199.9 551.6,150.7 601.2,101 550.7,50.4 501,100.1 450.4,150.7 400.8,200.3 451.3,250.9 
+	501,201.2 550.3,250.5 "/>
+<polyline class="st0" points="600,0 400.8,200.3 351,150.5 501.5,0 "/>
+<polygon class="st0" points="349.9,452.9 300.4,502.4 250.1,452.1 299.6,402.6 149.2,252.2 99.7,301.7 49.4,251.4 98.9,201.9 
+	49.4,152.4 100.2,101.6 450.2,451.6 399.4,502.4 "/>
+<polygon class="st0" points="248.7,552.1 199.4,502.9 149.7,552.5 99.2,501.9 148.8,452.3 199.4,401.7 249,352.1 299.6,402.6 
+	250,452.3 299.2,501.6 "/>
+<polygon class="st0" points="-0.9,302.6 48.4,351.9 -1.2,401.5 49.3,452.1 99,402.5 149.6,351.9 199.2,302.2 148.7,251.7 99,301.3 
+	49.7,252 "/>
+<rect x="86.2" y="284.6" transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 -96.6059 819.6381)" class="st0" width="70.5" height="290.4"/>
+<polyline class="st0" points="551.1,350.7 501.6,301.2 551.1,251.7 600.6,301.2 "/>
+<polyline class="st0" points="49.4,152.4 99.4,202.4 49.7,252 -0.2,202.1 "/>
+<polyline class="st0" points="399.4,502.4 349.4,452.4 299.8,502.1 349.7,552.1 299.2,602.6 "/>
+<line class="st0" x1="600.4" y1="400" x2="398.7" y2="600.7"/>
+<line class="st0" x1="99.4" y1="0" x2="0.4" y2="101.6"/>
+<line class="st0" x1="600" y1="502.4" x2="499.6" y2="600"/>
+<line class="st0" x1="43.7" y1="557.4" x2="0.4" y2="600.7"/>
+<line class="st0" x1="149.7" y1="552.5" x2="99" y2="600.7"/>
+</svg>
+      <span class="divider__label">Two Counter-Arguments Considered</span>
+      <div class="divider__line"></div>
+    </div>
+
+    <section class="arguments">
+      <article class="arg-card">
+        <!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.0"
+   width="688"
+   height="688"
+   id="svg2652" class="arg-card__kamon" width="24" height="24" alt="">
+  <defs
+     id="defs2654" />
+  <g
+     id="layer1">
+    <rect
+       width="688"
+       height="688"
+       x="0"
+       y="0"
+       id="rect5371"
+       style="opacity:1;fill:#000000;fill-opacity:1;stroke:#60441c;stroke-width:0;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       d="M 226.13364,612.57579 C 207.8052,610.64503 189.07085,603.27797 174.07991,592.10629 C 168.2372,587.75214 158.29322,577.8608 153.78698,571.9208 C 132.5626,543.94339 126.61588,507.85248 137.79008,474.83496 C 141.25861,464.58614 146.78359,453.9662 152.97675,445.64361 C 157.16039,440.02149 167.66572,429.43802 173.42393,425.04434 C 201.20575,403.84602 237.50693,397.85655 270.50977,409.02578 C 286.664,414.49289 299.71221,422.76016 311.9042,435.25303 C 323.67395,447.31324 331.05394,459.27791 336.31895,474.83496 C 346.30781,504.35006 342.79857,535.57031 326.40165,563.06499 C 318.72451,575.93817 304.73233,589.92909 291.82929,597.63424 C 271.43302,609.81403 248.79421,614.96291 226.13364,612.57579 z M 439.98488,612.57579 C 421.65644,610.64503 402.9221,603.27797 387.93116,592.10629 C 382.08845,587.75214 372.14446,577.8608 367.63822,571.9208 C 346.41385,543.94339 340.46712,507.85248 351.64132,474.83496 C 355.10985,464.58614 360.63483,453.9662 366.828,445.64361 C 371.01163,440.02149 381.51696,429.43802 387.27517,425.04434 C 415.05699,403.84602 451.35818,397.85655 484.36101,409.02578 C 500.51524,414.49289 513.56346,422.76016 525.75544,435.25303 C 537.52519,447.31324 544.90518,459.27791 550.17019,474.83496 C 560.15906,504.35006 556.64982,535.57031 540.25289,563.06499 C 532.57575,575.93817 518.58357,589.92909 505.68054,597.63424 C 485.28426,609.81403 462.64546,614.96291 439.98488,612.57579 z M 333.09971,445.5755 C 326.99741,441.05835 322.03757,437.0118 322.07785,436.58317 C 322.11812,436.15453 324.00614,430.04755 326.27344,423.01211 C 328.54074,415.97667 330.40195,409.82984 330.40946,409.35249 C 330.41825,408.79313 330.90894,408.61682 331.78974,408.85653 C 336.91594,410.25168 345.03197,410.75398 350.25232,409.9992 C 353.2886,409.5602 356.20013,409.03704 356.72239,408.83663 C 357.45739,408.55458 358.66391,411.56003 362.06214,422.13803 C 364.47674,429.65422 366.56921,436.1094 366.71207,436.48287 C 366.91109,437.00314 349.02239,450.85215 344.9585,453.32397 C 344.51333,453.59474 339.56703,450.36286 333.09971,445.5755 z M 314.11227,432.13619 C 306.25374,424.11659 298.14048,418.10026 288.08287,412.83429 L 281.67525,409.47937 L 286.09629,406.26424 C 288.52786,404.49592 294.0499,400.4269 298.36748,397.22196 C 303.55068,393.3745 306.30718,391.69547 306.4812,392.2798 C 307.38291,395.30755 319.74689,404.66661 325.48873,406.66778 C 326.68341,407.08415 327.53314,407.75863 327.37703,408.16662 C 327.22092,408.57461 325.12543,415.03369 322.72039,422.52012 C 320.31535,430.00655 318.2756,436.13182 318.18762,436.13182 C 318.09963,436.13182 316.26572,434.33378 314.11227,432.13619 z M 365.69749,421.91999 C 363.16716,414.06854 361.15694,407.62326 361.23033,407.59713 C 361.30371,407.57101 363.62965,406.42384 366.3991,405.04786 C 371.95469,402.28759 379.49079,396.42732 381.29054,393.46788 L 382.44784,391.56484 L 394.69181,400.52347 L 406.93578,409.48211 L 400.48175,412.86132 C 391.30586,417.66564 384.77492,422.37347 377.03638,429.76189 L 370.29807,436.19534 L 365.69749,421.91999 z M 159.87911,409.8763 C 141.55067,407.94553 122.81632,400.57848 107.82539,389.4068 C 101.98268,385.05265 92.038692,375.16131 87.532453,369.22131 C 66.308078,341.2439 60.361354,305.15299 71.535554,272.13546 C 75.004083,261.88664 80.529061,251.26671 86.722226,242.94411 C 90.905865,237.322 101.4112,226.73853 107.1694,222.34485 C 127.75958,206.63396 154.14627,198.87562 179.1638,201.17674 C 189.54676,202.13177 195.42739,203.33865 204.25524,206.32629 C 220.40947,211.7934 233.45769,220.06067 245.64967,232.55353 C 257.41942,244.61375 264.79941,256.57842 270.06442,272.13546 C 280.05329,301.65056 276.54405,332.87082 260.14712,360.3655 C 252.46998,373.23868 238.4778,387.2296 225.57477,394.93475 C 205.17849,407.11454 182.53968,412.26341 159.87911,409.8763 z M 506.23941,409.8763 C 487.91097,407.94553 469.17662,400.57848 454.18568,389.4068 C 448.34297,385.05265 438.39899,375.16131 433.89275,369.22131 C 412.66837,341.2439 406.72165,305.15299 417.89585,272.13546 C 421.36438,261.88664 426.88936,251.26671 433.08252,242.94411 C 437.26616,237.322 447.77149,226.73853 453.5297,222.34485 C 474.11988,206.63396 500.50657,198.87562 525.5241,201.17674 C 535.90705,202.13177 541.78769,203.33865 550.61554,206.32629 C 566.76977,211.7934 579.81798,220.06067 592.00997,232.55353 C 603.77972,244.61375 611.15971,256.57842 616.42472,272.13546 C 626.4136,301.65056 622.90434,332.87082 606.50742,360.3655 C 598.83028,373.23868 584.8381,387.2296 571.93506,394.93475 C 551.53879,407.11454 528.89998,412.26341 506.23941,409.8763 z M 268.15715,398.34455 C 262.05485,393.8274 257.09274,389.78085 257.13022,389.35222 C 257.16771,388.92358 259.02238,382.8904 261.25171,375.94516 L 265.30504,363.31744 L 280.33093,363.31744 L 295.35682,363.31744 L 295.75661,366.43337 C 296.75664,374.22758 299.55735,382.58539 302.60198,386.86118 L 303.90698,388.69388 L 292.35247,397.16119 C 285.99749,401.8182 280.45018,405.83753 280.0251,406.09302 C 279.57107,406.36591 274.67503,403.16933 268.15715,398.34455 z M 337.42028,405.976 C 320.59281,403.47665 306.16279,391.05567 300.82957,374.47969 C 298.54115,367.36718 298.54115,355.33179 300.82957,348.21927 C 305.39337,334.03469 316.66535,322.76272 330.84992,318.19891 C 337.96244,315.9105 349.99783,315.9105 357.11035,318.19891 C 371.29492,322.76272 382.5669,334.03469 387.1307,348.21927 C 388.46092,352.35367 388.71703,354.47349 388.71703,361.34948 C 388.71703,368.22547 388.46092,370.34529 387.1307,374.47969 C 382.57727,388.63201 371.11073,400.11532 357.26766,404.38638 C 351.87523,406.05013 342.80849,406.77631 337.42028,405.976 z M 396.92579,397.62232 L 384.71401,388.68724 L 386.01664,386.85786 C 389.05892,382.58537 391.85993,374.22514 392.85964,366.43337 L 393.25943,363.31744 L 408.27879,363.31744 L 423.29815,363.31744 L 427.32825,375.8997 C 429.54481,382.81995 431.48345,388.80799 431.63636,389.20646 C 431.8485,389.75928 414.15576,403.50512 409.90118,406.09295 C 409.45622,406.36359 404.04167,402.82884 396.92579,397.62232 z M 268.02631,354.50884 C 273.04989,344.52009 276.23138,334.54383 278.53343,321.56141 L 279.36557,316.86856 L 291.64153,325.75743 L 303.91749,334.6463 L 302.60724,336.48638 C 299.65373,340.6342 296.80802,348.88222 295.79112,356.24225 L 295.36383,359.33483 L 280.3873,359.52217 L 265.41076,359.70952 L 268.02631,354.50884 z M 392.82864,356.26559 C 391.80759,348.88029 388.96624,340.63942 386.00902,336.48638 L 384.69876,334.6463 L 396.97472,325.75914 C 403.7265,320.8712 409.31228,316.92903 409.38756,316.99877 C 409.46284,317.0685 409.8559,319.32711 410.26103,322.0179 C 411.91853,333.02667 415.51082,344.4202 420.36087,354.0511 C 421.6465,356.60403 422.69838,358.84776 422.69838,359.03716 C 422.69838,359.22656 416.07462,359.38152 407.9789,359.38152 L 393.25943,359.38152 L 392.82864,356.26559 z M 294.07723,322.92243 C 287.42898,318.04206 282.02018,313.69568 282.05767,313.2638 C 282.09515,312.83192 283.94982,306.79609 286.17915,299.85085 L 290.23248,287.22313 L 304.28557,287.22313 L 318.33866,287.22313 L 322.92901,301.46672 C 325.4537,309.30069 327.45931,315.73168 327.38593,315.75781 C 327.31255,315.78393 324.9866,316.93111 322.21716,318.30709 C 316.65941,321.06842 309.12528,326.92793 307.32398,329.88993 L 306.16493,331.79582 L 294.07723,322.92243 z M 382.02729,330.93379 C 382.02729,328.56931 368.96178,318.72054 363.12752,316.68717 C 361.93285,316.27079 361.08312,315.59632 361.23922,315.18833 C 361.39533,314.78034 363.49082,308.32126 365.89587,300.83483 L 370.26867,287.22313 L 384.31969,287.22313 L 398.37071,287.22313 L 402.4008,299.8054 C 404.61736,306.72564 406.55662,312.71526 406.71026,313.11566 C 406.86391,313.51606 401.76919,317.66923 395.38865,322.34491 C 381.62025,332.43446 382.02729,332.17281 382.02729,330.93379 z M 330.29493,312.66796 C 325.8914,298.77937 322.39483,286.94226 322.62717,286.70991 C 322.78591,286.55118 325.51511,286.81431 328.69207,287.29465 C 336.19383,288.42889 353.31585,288.4268 360.24099,287.29081 C 363.23139,286.80027 365.81041,286.53124 365.97215,286.69298 C 366.13389,286.85472 365.11589,290.67424 363.70993,295.18081 C 362.30397,299.68738 360.38824,305.88391 359.45275,308.95089 L 357.75187,314.52721 L 352.99795,313.69292 C 345.8921,312.44588 337.51981,312.74932 332.16818,314.44786 C 331.25536,314.73758 330.81995,314.32387 330.29493,312.66796 z M 333.05926,283.9271 C 314.73082,281.99634 295.99647,274.62928 281.00554,263.4576 C 275.16282,259.10345 265.21884,249.21211 260.7126,243.27211 C 239.48823,215.2947 233.5415,179.20379 244.7157,146.18627 C 248.18423,135.93744 253.70921,125.31751 259.90237,116.99491 C 264.08601,111.3728 274.59134,100.78933 280.34955,96.395647 C 308.13137,75.197328 344.43255,69.207858 377.43539,80.377088 C 393.58962,85.844198 406.63783,94.111468 418.82982,106.60433 C 430.59957,118.66455 437.97956,130.62922 443.24457,146.18627 C 453.23344,175.70137 449.7242,206.92162 433.32727,234.4163 C 425.65013,247.28948 411.65795,261.2804 398.75492,268.98555 C 378.35864,281.16534 355.71983,286.31422 333.05926,283.9271 z"
+       id="path9114"
+       style="fill:#ffffff" />
+  </g>
+</svg>
+        <div class="arg-card__kicker">Counter i · The Romantic</div>
+        <h3 class="arg-card__title">"But surely the wave is about to fall."</h3>
+        <div class="arg-card__rule"></div>
+        <p class="arg-card__dek">It is not. The crest's geometry — measured against the horizon and the boats' waterline — places it in a sustained vertical, not a descending arc. Hokusai's preparatory studies (Sumida MS. 14) show the same form held across multiple sketches. This is a posture, not a moment.</p>
+      </article>
+
+      <article class="arg-card">
+        <!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.0"
+   width="688"
+   height="688"
+   id="svg2652" class="arg-card__kamon" width="24" height="24" alt="">
+  <defs
+     id="defs2654" />
+  <g
+     id="layer1">
+    <rect
+       width="688"
+       height="688"
+       x="0"
+       y="0"
+       id="rect5371"
+       style="opacity:1;fill:#000000;fill-opacity:1;stroke:#60441c;stroke-width:0;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       d="M 226.13364,612.57579 C 207.8052,610.64503 189.07085,603.27797 174.07991,592.10629 C 168.2372,587.75214 158.29322,577.8608 153.78698,571.9208 C 132.5626,543.94339 126.61588,507.85248 137.79008,474.83496 C 141.25861,464.58614 146.78359,453.9662 152.97675,445.64361 C 157.16039,440.02149 167.66572,429.43802 173.42393,425.04434 C 201.20575,403.84602 237.50693,397.85655 270.50977,409.02578 C 286.664,414.49289 299.71221,422.76016 311.9042,435.25303 C 323.67395,447.31324 331.05394,459.27791 336.31895,474.83496 C 346.30781,504.35006 342.79857,535.57031 326.40165,563.06499 C 318.72451,575.93817 304.73233,589.92909 291.82929,597.63424 C 271.43302,609.81403 248.79421,614.96291 226.13364,612.57579 z M 439.98488,612.57579 C 421.65644,610.64503 402.9221,603.27797 387.93116,592.10629 C 382.08845,587.75214 372.14446,577.8608 367.63822,571.9208 C 346.41385,543.94339 340.46712,507.85248 351.64132,474.83496 C 355.10985,464.58614 360.63483,453.9662 366.828,445.64361 C 371.01163,440.02149 381.51696,429.43802 387.27517,425.04434 C 415.05699,403.84602 451.35818,397.85655 484.36101,409.02578 C 500.51524,414.49289 513.56346,422.76016 525.75544,435.25303 C 537.52519,447.31324 544.90518,459.27791 550.17019,474.83496 C 560.15906,504.35006 556.64982,535.57031 540.25289,563.06499 C 532.57575,575.93817 518.58357,589.92909 505.68054,597.63424 C 485.28426,609.81403 462.64546,614.96291 439.98488,612.57579 z M 333.09971,445.5755 C 326.99741,441.05835 322.03757,437.0118 322.07785,436.58317 C 322.11812,436.15453 324.00614,430.04755 326.27344,423.01211 C 328.54074,415.97667 330.40195,409.82984 330.40946,409.35249 C 330.41825,408.79313 330.90894,408.61682 331.78974,408.85653 C 336.91594,410.25168 345.03197,410.75398 350.25232,409.9992 C 353.2886,409.5602 356.20013,409.03704 356.72239,408.83663 C 357.45739,408.55458 358.66391,411.56003 362.06214,422.13803 C 364.47674,429.65422 366.56921,436.1094 366.71207,436.48287 C 366.91109,437.00314 349.02239,450.85215 344.9585,453.32397 C 344.51333,453.59474 339.56703,450.36286 333.09971,445.5755 z M 314.11227,432.13619 C 306.25374,424.11659 298.14048,418.10026 288.08287,412.83429 L 281.67525,409.47937 L 286.09629,406.26424 C 288.52786,404.49592 294.0499,400.4269 298.36748,397.22196 C 303.55068,393.3745 306.30718,391.69547 306.4812,392.2798 C 307.38291,395.30755 319.74689,404.66661 325.48873,406.66778 C 326.68341,407.08415 327.53314,407.75863 327.37703,408.16662 C 327.22092,408.57461 325.12543,415.03369 322.72039,422.52012 C 320.31535,430.00655 318.2756,436.13182 318.18762,436.13182 C 318.09963,436.13182 316.26572,434.33378 314.11227,432.13619 z M 365.69749,421.91999 C 363.16716,414.06854 361.15694,407.62326 361.23033,407.59713 C 361.30371,407.57101 363.62965,406.42384 366.3991,405.04786 C 371.95469,402.28759 379.49079,396.42732 381.29054,393.46788 L 382.44784,391.56484 L 394.69181,400.52347 L 406.93578,409.48211 L 400.48175,412.86132 C 391.30586,417.66564 384.77492,422.37347 377.03638,429.76189 L 370.29807,436.19534 L 365.69749,421.91999 z M 159.87911,409.8763 C 141.55067,407.94553 122.81632,400.57848 107.82539,389.4068 C 101.98268,385.05265 92.038692,375.16131 87.532453,369.22131 C 66.308078,341.2439 60.361354,305.15299 71.535554,272.13546 C 75.004083,261.88664 80.529061,251.26671 86.722226,242.94411 C 90.905865,237.322 101.4112,226.73853 107.1694,222.34485 C 127.75958,206.63396 154.14627,198.87562 179.1638,201.17674 C 189.54676,202.13177 195.42739,203.33865 204.25524,206.32629 C 220.40947,211.7934 233.45769,220.06067 245.64967,232.55353 C 257.41942,244.61375 264.79941,256.57842 270.06442,272.13546 C 280.05329,301.65056 276.54405,332.87082 260.14712,360.3655 C 252.46998,373.23868 238.4778,387.2296 225.57477,394.93475 C 205.17849,407.11454 182.53968,412.26341 159.87911,409.8763 z M 506.23941,409.8763 C 487.91097,407.94553 469.17662,400.57848 454.18568,389.4068 C 448.34297,385.05265 438.39899,375.16131 433.89275,369.22131 C 412.66837,341.2439 406.72165,305.15299 417.89585,272.13546 C 421.36438,261.88664 426.88936,251.26671 433.08252,242.94411 C 437.26616,237.322 447.77149,226.73853 453.5297,222.34485 C 474.11988,206.63396 500.50657,198.87562 525.5241,201.17674 C 535.90705,202.13177 541.78769,203.33865 550.61554,206.32629 C 566.76977,211.7934 579.81798,220.06067 592.00997,232.55353 C 603.77972,244.61375 611.15971,256.57842 616.42472,272.13546 C 626.4136,301.65056 622.90434,332.87082 606.50742,360.3655 C 598.83028,373.23868 584.8381,387.2296 571.93506,394.93475 C 551.53879,407.11454 528.89998,412.26341 506.23941,409.8763 z M 268.15715,398.34455 C 262.05485,393.8274 257.09274,389.78085 257.13022,389.35222 C 257.16771,388.92358 259.02238,382.8904 261.25171,375.94516 L 265.30504,363.31744 L 280.33093,363.31744 L 295.35682,363.31744 L 295.75661,366.43337 C 296.75664,374.22758 299.55735,382.58539 302.60198,386.86118 L 303.90698,388.69388 L 292.35247,397.16119 C 285.99749,401.8182 280.45018,405.83753 280.0251,406.09302 C 279.57107,406.36591 274.67503,403.16933 268.15715,398.34455 z M 337.42028,405.976 C 320.59281,403.47665 306.16279,391.05567 300.82957,374.47969 C 298.54115,367.36718 298.54115,355.33179 300.82957,348.21927 C 305.39337,334.03469 316.66535,322.76272 330.84992,318.19891 C 337.96244,315.9105 349.99783,315.9105 357.11035,318.19891 C 371.29492,322.76272 382.5669,334.03469 387.1307,348.21927 C 388.46092,352.35367 388.71703,354.47349 388.71703,361.34948 C 388.71703,368.22547 388.46092,370.34529 387.1307,374.47969 C 382.57727,388.63201 371.11073,400.11532 357.26766,404.38638 C 351.87523,406.05013 342.80849,406.77631 337.42028,405.976 z M 396.92579,397.62232 L 384.71401,388.68724 L 386.01664,386.85786 C 389.05892,382.58537 391.85993,374.22514 392.85964,366.43337 L 393.25943,363.31744 L 408.27879,363.31744 L 423.29815,363.31744 L 427.32825,375.8997 C 429.54481,382.81995 431.48345,388.80799 431.63636,389.20646 C 431.8485,389.75928 414.15576,403.50512 409.90118,406.09295 C 409.45622,406.36359 404.04167,402.82884 396.92579,397.62232 z M 268.02631,354.50884 C 273.04989,344.52009 276.23138,334.54383 278.53343,321.56141 L 279.36557,316.86856 L 291.64153,325.75743 L 303.91749,334.6463 L 302.60724,336.48638 C 299.65373,340.6342 296.80802,348.88222 295.79112,356.24225 L 295.36383,359.33483 L 280.3873,359.52217 L 265.41076,359.70952 L 268.02631,354.50884 z M 392.82864,356.26559 C 391.80759,348.88029 388.96624,340.63942 386.00902,336.48638 L 384.69876,334.6463 L 396.97472,325.75914 C 403.7265,320.8712 409.31228,316.92903 409.38756,316.99877 C 409.46284,317.0685 409.8559,319.32711 410.26103,322.0179 C 411.91853,333.02667 415.51082,344.4202 420.36087,354.0511 C 421.6465,356.60403 422.69838,358.84776 422.69838,359.03716 C 422.69838,359.22656 416.07462,359.38152 407.9789,359.38152 L 393.25943,359.38152 L 392.82864,356.26559 z M 294.07723,322.92243 C 287.42898,318.04206 282.02018,313.69568 282.05767,313.2638 C 282.09515,312.83192 283.94982,306.79609 286.17915,299.85085 L 290.23248,287.22313 L 304.28557,287.22313 L 318.33866,287.22313 L 322.92901,301.46672 C 325.4537,309.30069 327.45931,315.73168 327.38593,315.75781 C 327.31255,315.78393 324.9866,316.93111 322.21716,318.30709 C 316.65941,321.06842 309.12528,326.92793 307.32398,329.88993 L 306.16493,331.79582 L 294.07723,322.92243 z M 382.02729,330.93379 C 382.02729,328.56931 368.96178,318.72054 363.12752,316.68717 C 361.93285,316.27079 361.08312,315.59632 361.23922,315.18833 C 361.39533,314.78034 363.49082,308.32126 365.89587,300.83483 L 370.26867,287.22313 L 384.31969,287.22313 L 398.37071,287.22313 L 402.4008,299.8054 C 404.61736,306.72564 406.55662,312.71526 406.71026,313.11566 C 406.86391,313.51606 401.76919,317.66923 395.38865,322.34491 C 381.62025,332.43446 382.02729,332.17281 382.02729,330.93379 z M 330.29493,312.66796 C 325.8914,298.77937 322.39483,286.94226 322.62717,286.70991 C 322.78591,286.55118 325.51511,286.81431 328.69207,287.29465 C 336.19383,288.42889 353.31585,288.4268 360.24099,287.29081 C 363.23139,286.80027 365.81041,286.53124 365.97215,286.69298 C 366.13389,286.85472 365.11589,290.67424 363.70993,295.18081 C 362.30397,299.68738 360.38824,305.88391 359.45275,308.95089 L 357.75187,314.52721 L 352.99795,313.69292 C 345.8921,312.44588 337.51981,312.74932 332.16818,314.44786 C 331.25536,314.73758 330.81995,314.32387 330.29493,312.66796 z M 333.05926,283.9271 C 314.73082,281.99634 295.99647,274.62928 281.00554,263.4576 C 275.16282,259.10345 265.21884,249.21211 260.7126,243.27211 C 239.48823,215.2947 233.5415,179.20379 244.7157,146.18627 C 248.18423,135.93744 253.70921,125.31751 259.90237,116.99491 C 264.08601,111.3728 274.59134,100.78933 280.34955,96.395647 C 308.13137,75.197328 344.43255,69.207858 377.43539,80.377088 C 393.58962,85.844198 406.63783,94.111468 418.82982,106.60433 C 430.59957,118.66455 437.97956,130.62922 443.24457,146.18627 C 453.23344,175.70137 449.7242,206.92162 433.32727,234.4163 C 425.65013,247.28948 411.65795,261.2804 398.75492,268.98555 C 378.35864,281.16534 355.71983,286.31422 333.05926,283.9271 z"
+       id="path9114"
+       style="fill:#ffffff" />
+  </g>
+</svg>
+        <div class="arg-card__kicker">Counter ii · The Biographical</div>
+        <h3 class="arg-card__title">"Hokusai feared the sea — see his late letters."</h3>
+        <div class="arg-card__rule"></div>
+        <p class="arg-card__dek">He did, and they confirm rather than complicate the reading. Fear of the sea as an ordering force, not as catastrophe, is precisely what produces the seigaiha frame of mind. The wave is reverent, not paranoid. It bows back at Fuji.</p>
+      </article>
+    </section>
+
+    <section class="closing">
+      <div class="closing__cite">
+        <span class="label">Print examined</span>
+        Katsushika Hokusai<br>
+        Kanagawa-oki Nami-ura, c. 1831<br>
+        Sumida Hokusai Museum,<br>
+        Inv. SHK-1831-014<br>
+        First-state impression
+      </div>
+
+      <div class="closing__seal">
+        <div class="closing__seal-wrap">森</div>
+        <div class="closing__seal-caption">Mori · 森 · Critic's Seal</div>
+      </div>
+
+      <div class="closing__nextup">
+        <span class="label">Next in this issue</span>
+        No. 05 — Tsumago-juku<br>
+        in Winter, a dispatch<br>
+        from the Kiso valley<br>
+        <a href="page-5.html">Continue reading →</a>
+      </div>
+    </section>
+
+  </article>
+
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="site-footer__seal" aria-hidden="true">
+      <svg viewBox="0 0 64 64" width="56" height="56" role="img" aria-label="Paulownia seal">
+        <circle cx="32" cy="32" r="30" fill="none" stroke="currentColor" stroke-width="1"/>
+        <circle cx="32" cy="32" r="26" fill="none" stroke="currentColor" stroke-width="0.5"/>
+        <text x="32" y="38" text-anchor="middle" font-family="Shippori Mincho, serif" font-size="18" fill="currentColor">東</text>
+      </svg>
+    </div>
+
+    <div class="site-footer__colophon">
+      <p class="site-footer__title">Tōkaidō Review</p>
+      <p class="site-footer__addr">
+        編集部 · Editorial Offices<br>
+        3-7-2 Kanda-Surugadai, Chiyoda-ku<br>
+        Tokyo 101-0062, Japan
+      </p>
+      <p class="site-footer__contact">
+        editors@tokaido-review.jp · +81 3 5280 4711<br>
+        Quarterly · ¥2,800 per issue
+      </p>
+    </div>
+
+    <nav class="site-footer__nav" aria-label="Footer">
+      <p class="site-footer__navhead">Issue Index</p>
+      <ul>
+        <li><a href="page-1.html">Front</a></li>
+        <li><a href="page-2.html">The Fifty-Three Stations</a></li>
+        <li><a href="page-3.html">Indigo at Aizome-an</a></li>
+        <li><a href="page-4.html">Hokusai's Wave, Read Slowly</a></li>
+        <li><a href="page-5.html">Tsumago-juku in Winter</a></li>
+        <li><a href="page-6.html">Masthead & Subscriptions</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="site-footer__meta">
+    <span>© 2019–2024 Tōkaidō Review · 株式会社東街道評論</span>
+    <span>Kamon & wagara source files: CC-BY-SA, Wikimedia Commons contributors.</span>
+    <span>Set in Shippori Mincho & Inter.</span>
+  </div>
+</footer>
+
+</body>
+</html>
