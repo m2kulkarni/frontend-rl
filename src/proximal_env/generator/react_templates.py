@@ -52,11 +52,24 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   base: './',
+  // No `crossorigin` on emitted <script>/<link> tags. Lets the dist/ folder
+  // be served by raw-file CDNs (githack, etc.) without CORS-header surprises.
+  // Also lets Playwright open dist/index.html via file:// without Chromium
+  // refusing the module load.
+  html: { cspNonce: undefined },
   build: {
     outDir: 'dist',
     emptyOutDir: true,
     sourcemap: false,
     minify: false, // keep readable so structural rubric can parse the rendered HTML
+    modulePreload: { polyfill: false },
+    rollupOptions: {
+      output: {
+        // Don't emit crossorigin — see comment above.
+        // (Vite ignores `output.crossorigin: false` directly; the postbuild
+        // strip in render.py / the build helper handles it for us.)
+      },
+    },
   },
 })
 """

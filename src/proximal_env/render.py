@@ -207,6 +207,11 @@ def _ensure_react_built(task_dir: Path) -> Path:
     Skips installation if `node_modules/` already exists (idempotent re-runs
     are cheap). Skips the build if `dist/index.html` already exists; callers
     that want a fresh build should rm -rf the dist/ directory first.
+
+    Post-build: strips `crossorigin` attributes from dist/index.html. Vite
+    emits these by default but they break script loading over file:// (Chromium
+    refuses) and over rawcdn-style proxies (no CORS headers). Self-contained
+    dist/ folders served from one origin don't need the attribute.
     """
     dist = task_dir / "dist"
     nm = task_dir / "node_modules"
@@ -226,6 +231,13 @@ def _ensure_react_built(task_dir: Path) -> Path:
             ["npm", "run", "build", "--silent"],
             cwd=task_dir, check=True,
         )
+        # Post-build cleanup: strip crossorigin so the result is portable.
+        index = dist / "index.html"
+        if index.is_file():
+            text = index.read_text()
+            cleaned = re.sub(r"\s+crossorigin(?:=\"[^\"]*\")?", "", text, flags=re.IGNORECASE)
+            if cleaned != text:
+                index.write_text(cleaned)
 
     return dist
 
