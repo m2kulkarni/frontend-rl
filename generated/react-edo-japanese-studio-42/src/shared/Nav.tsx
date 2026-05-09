@@ -4,7 +4,7 @@ export default function Nav() {
           <div className="site-nav__inner">
             <a className="site-nav__brand" href="#/page-1" aria-label="Hanagumi Atelier — home">
               <span className="site-nav__mark" aria-hidden="true">
-                <svg viewBox="0 0 32 32" width="28" height="28">
+                <svg viewBox="0 0 32 32" width="28" height="28" style={{color: "var(--fg)"}}>
                   <circle cx="16" cy="16" r="14" fill="none" stroke="currentColor" stroke-width="1.25"/>
                   <circle cx="16" cy="6.5" r="2.4" fill="currentColor"/>
                   <circle cx="24.4" cy="12.5" r="2.4" fill="currentColor"/>

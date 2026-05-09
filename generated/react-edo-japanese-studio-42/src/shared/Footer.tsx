@@ -4,7 +4,7 @@ export default function Footer() {
           <div className="site-footer__rule" aria-hidden="true"></div>
           <div className="site-footer__inner">
             <div className="site-footer__col site-footer__col--seal">
-              <svg className="site-footer__seal" viewBox="0 0 64 64" width="64" height="64" aria-hidden="true">
+              <svg className="site-footer__seal" viewBox="0 0 64 64" width="64" height="64" aria-hidden="true" style={{color: "var(--fg)"}}>
                 <circle cx="32" cy="32" r="30" fill="none" stroke="currentColor" stroke-width="1.25"/>
                 <circle cx="32" cy="32" r="24" fill="none" stroke="currentColor" stroke-width="0.75"/>
                 <path d="M32 12 C26 22, 22 26, 14 30 C22 30, 28 32, 32 38 C36 32, 42 30, 50 30 C42 26, 38 22, 32 12 Z" fill="currentColor"/>

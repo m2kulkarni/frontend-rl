@@ -382,7 +382,7 @@ export default function Page3() {
 
       <div className="wave-band" aria-hidden="true">
         
-<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="700" height="700" id="svg2" viewBox="0 0 700 700" width={1600} height={96}>
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="700" height="700" id="svg2" viewBox="0 0 700 700" width={1600} height={96} style={{color: "var(--fg)"}}>
 	<title>Seigaiha</title>
 	<defs>
 		<g id="C1">
@@ -458,7 +458,7 @@ export default function Page3() {
       <div className="divider-row" aria-hidden="true">
         <span className="label">作品 — Index</span>
         <div className="keyfret">
-          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0" y="0" width="600" height="600" viewBox="0 0 600 600" width={900} height={32}>
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0" y="0" width="600" height="600" viewBox="0 0 600 600" width={900} height={32} style={{color: "var(--fg)"}}>
 <style type="text/css">{`
 	.st0{fill:none;stroke:#000;stroke-width:2;}
 `}</style>
@@ -795,7 +795,7 @@ export default function Page3() {
 
       <div className="wave-band" aria-hidden="true">
         
-<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="700" height="700" id="svg2" viewBox="0 0 700 700" width={1600} height={96}>
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="700" height="700" id="svg2" viewBox="0 0 700 700" width={1600} height={96} style={{color: "var(--fg)"}}>
 	<title>Seigaiha</title>
 	<defs>
 		<g id="C1">

@@ -309,7 +309,7 @@ export default function Page3() {
 
       <div className="sake-page">
         <div className="sake-bg" aria-hidden="true">
-          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="503" height="501" viewBox="0 0 503 501">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="503" height="501" viewBox="0 0 503 501" style={{color: "var(--fg)"}}>
 <style type="text/css">{`
 	.st0{fill:none;stroke:#000;stroke-linecap:round;}
 	.st1{fill:none;stroke:#000;}
@@ -668,7 +668,7 @@ export default function Page3() {
 
           {sakeList.map((region, i) => (
             <section key={region.region} className="sake-region">
-              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0" y="0" width="600" height="600" viewBox="0 0 600 600" className="sake-region__divider" width={80} height={20}>
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0" y="0" width="600" height="600" viewBox="0 0 600 600" className="sake-region__divider" width={80} height={20} style={{color: "var(--fg)"}}>
 <style type="text/css">{`
 	.st0{fill:none;stroke:#000;stroke-width:2;}
 `}</style>

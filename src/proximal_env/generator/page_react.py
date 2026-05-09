@@ -266,6 +266,19 @@ def inline_motif_jsx(tsx: str, library: StyleLibrary) -> str:
         body = re.sub(r"^\s*\]>\s*$", "", body, flags=re.MULTILINE)
         # The source SVG might contain `class="foo"` — needs JSX rewrite.
         body = body.replace("class=", "className=")
+        # Neutralize hard-coded fill/stroke colors on shape elements so CSS
+        # `color: var(--accent)` on a parent (or directly on the inlined
+        # <svg>) can recolor them. Wikimedia source SVGs commonly have
+        # explicit fill="#000000" / fill="#fff" / fill="black" — both
+        # invisible on dark backgrounds in different ways. `currentColor`
+        # makes them inherit from CSS `color`.
+        # We DO leave the outer <svg> tag's fill alone; the per-element
+        # rewrite applies only to internal paths / polygons / etc.
+        body = re.sub(
+            r'\s(fill|stroke)="(#[0-9a-fA-F]{3,8}|black|white|none|rgb\([^)]*\))"',
+            lambda m: " " + m.group(1) + '="currentColor"' if m.group(2).lower() != "none" else m.group(0),
+            body,
+        )
         # Inline-style attributes inside the SVG (`style="x:y"`) ALSO need to
         # become JSX-style objects. Rare in our motifs (mostly path data),
         # but cheap to handle: just remove inline style= entirely. Future
@@ -279,11 +292,18 @@ def inline_motif_jsx(tsx: str, library: StyleLibrary) -> str:
             body,
         )
 
-        # Merge forwarded attrs onto the <svg>.
+        # Merge forwarded attrs onto the <svg>. Also inject a default
+        # `style={{color: 'var(--fg)'}}` so the inlined SVG paints in the
+        # foreground token even without LLM-written CSS. The forwarded
+        # attrs win if they include their own style (the spread happens
+        # last) — they're written AFTER our default below.
+        default_color_attr = ' style={{color: "var(--fg)"}}'
+
         def merge(m: re.Match) -> str:
             existing = m.group(1) or ""
             sep = " " if existing and not existing.endswith(" ") else ""
-            return f"<svg{existing}{sep}{forwarded}>" if forwarded else f"<svg{existing}>"
+            attrs = default_color_attr + (sep + forwarded if forwarded else "")
+            return f"<svg{existing}{attrs}>"
 
         body = _SVG_OPEN_RE.sub(merge, body, count=1)
 

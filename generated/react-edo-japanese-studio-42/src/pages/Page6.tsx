@@ -27,7 +27,7 @@ export default function Page6() {
           position: absolute;
           top: 0; left: 0; right: 0;
           height: 140px;
-          background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'></svg>");
+          background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' style={{color: "var(--fg)"}}></svg>");
           pointer-events: none;
         }
         .page6-hero .eyebrow {
@@ -392,7 +392,7 @@ export default function Page6() {
         <div className="wagara-tile-row">
           {Array.from({ length: 14 }).map((_, i) => (
             
-<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="700" height="700" id="svg2" viewBox="0 0 700 700" key={i}  width={120} height={110}>
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="700" height="700" id="svg2" viewBox="0 0 700 700" key={i}  width={120} height={110} style={{color: "var(--fg)"}}>
 	<title>Seigaiha</title>
 	<defs>
 		<g id="C1">
@@ -459,7 +459,7 @@ export default function Page6() {
 
         <div>
           <div className="divider" aria-hidden="true">
-            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0" y="0" width="600" height="600" viewBox="0 0 600 600" width={220} height={28}>
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0" y="0" width="600" height="600" viewBox="0 0 600 600" width={220} height={28} style={{color: "var(--fg)"}}>
 <style type="text/css">{`
 	.st0{fill:none;stroke:#000;stroke-width:2;}
 `}</style>
@@ -836,7 +836,7 @@ export default function Page6() {
         <div className="wagara-tile-row">
           {Array.from({ length: 14 }).map((_, i) => (
             
-<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="700" height="700" id="svg2" viewBox="0 0 700 700" key={i}  width={120} height={110}>
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="700" height="700" id="svg2" viewBox="0 0 700 700" key={i}  width={120} height={110} style={{color: "var(--fg)"}}>
 	<title>Seigaiha</title>
 	<defs>
 		<g id="C1">

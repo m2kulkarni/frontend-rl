@@ -7047,7 +7047,7 @@ function Nav() {
 }
 function Footer() {
   return /* @__PURE__ */ jsxRuntimeExports.jsx("footer", { className: "site-footer", role: "contentinfo", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "site-footer__inner", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "site-footer__seal", "aria-hidden": "true", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { viewBox: "0 0 64 64", xmlns: "http://www.w3.org/2000/svg", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "site-footer__seal", "aria-hidden": "true", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { viewBox: "0 0 64 64", xmlns: "http://www.w3.org/2000/svg", style: { color: "var(--fg)" }, children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "32", cy: "32", r: "30", fill: "none", stroke: "currentColor", "stroke-width": "1.2" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "32", cy: "32", r: "22", fill: "none", stroke: "currentColor", "stroke-width": "0.8" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("text", { x: "32", y: "38", "text-anchor": "middle", "font-family": "serif", "font-size": "18", fill: "currentColor", children: "月" })
@@ -7399,7 +7399,7 @@ function Page1() {
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "tsukimi-home", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(Nav, {}),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "hero", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-asanoha", "aria-hidden": "true", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { version: "1.1", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", x: "0", y: "0", width: "503", height: "501", viewBox: "0 0 503 501", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-asanoha", "aria-hidden": "true", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { version: "1.1", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", x: "0", y: "0", width: "503", height: "501", viewBox: "0 0 503 501", style: { color: "var(--fg)" }, children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("style", { type: "text/css", children: `
 	.st0{fill:none;stroke:#000;stroke-linecap:round;}
 	.st1{fill:none;stroke:#000;}
@@ -8398,7 +8398,7 @@ function Page1() {
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Late Autumn · 晩秋 · 2024" })
         ] })
       ] }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "divider", "aria-hidden": "true", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { version: "1.1", xmlns: "http://www.w3.org/2000/svg", x: "0", y: "0", width: "600", height: "600", viewBox: "0 0 600 600", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "divider", "aria-hidden": "true", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { version: "1.1", xmlns: "http://www.w3.org/2000/svg", x: "0", y: "0", width: "600", height: "600", viewBox: "0 0 600 600", style: { color: "var(--fg)" }, children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("style", { type: "text/css", children: `
 	.st0{fill:none;stroke:#000;stroke-width:2;}
 ` }),
@@ -8846,7 +8846,7 @@ function Page2() {
       ` }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(Nav, {}),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p2-bg-pattern", "aria-hidden": "true", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { version: "1.1", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", x: "0", y: "0", width: "503", height: "501", viewBox: "0 0 503 501", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p2-bg-pattern", "aria-hidden": "true", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { version: "1.1", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", x: "0", y: "0", width: "503", height: "501", viewBox: "0 0 503 501", style: { color: "var(--fg)" }, children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("style", { type: "text/css", children: `
 	.st0{fill:none;stroke:#000;stroke-linecap:round;}
 	.st1{fill:none;stroke:#000;}
@@ -8910,7 +8910,7 @@ function Page2() {
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "ja", children: "献立" })
         ] }) })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p2-divider", "aria-hidden": "true", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { version: "1.1", xmlns: "http://www.w3.org/2000/svg", x: "0", y: "0", width: "600", height: "600", viewBox: "0 0 600 600", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p2-divider", "aria-hidden": "true", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { version: "1.1", xmlns: "http://www.w3.org/2000/svg", x: "0", y: "0", width: "600", height: "600", viewBox: "0 0 600 600", style: { color: "var(--fg)" }, children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("style", { type: "text/css", children: `
 	.st0{fill:none;stroke:#000;stroke-width:2;}
 ` }),
@@ -9882,7 +9882,7 @@ function Page2() {
           ] })
         ] }, c.romaji)) })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p2-divider", "aria-hidden": "true", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { version: "1.1", xmlns: "http://www.w3.org/2000/svg", x: "0", y: "0", width: "600", height: "600", viewBox: "0 0 600 600", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p2-divider", "aria-hidden": "true", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { version: "1.1", xmlns: "http://www.w3.org/2000/svg", x: "0", y: "0", width: "600", height: "600", viewBox: "0 0 600 600", style: { color: "var(--fg)" }, children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("style", { type: "text/css", children: `
 	.st0{fill:none;stroke:#000;stroke-width:2;}
 ` }),
@@ -10270,7 +10270,7 @@ function Page3() {
         }
       ` }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "sake-page", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "sake-bg", "aria-hidden": "true", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { version: "1.1", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", x: "0", y: "0", width: "503", height: "501", viewBox: "0 0 503 501", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "sake-bg", "aria-hidden": "true", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { version: "1.1", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", x: "0", y: "0", width: "503", height: "501", viewBox: "0 0 503 501", style: { color: "var(--fg)" }, children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("style", { type: "text/css", children: `
 	.st0{fill:none;stroke:#000;stroke-linecap:round;}
 	.st1{fill:none;stroke:#000;}
@@ -11284,7 +11284,7 @@ function Page3() {
           ] })
         ] }),
         sakeList.map((region, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "sake-region", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { version: "1.1", xmlns: "http://www.w3.org/2000/svg", x: "0", y: "0", width: "600", height: "600", viewBox: "0 0 600 600", className: "sake-region__divider", width: 80, height: 20, children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { version: "1.1", xmlns: "http://www.w3.org/2000/svg", x: "0", y: "0", width: "600", height: "600", viewBox: "0 0 600 600", className: "sake-region__divider", width: 80, height: 20, style: { color: "var(--fg)" }, children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx("style", { type: "text/css", children: `
 	.st0{fill:none;stroke:#000;stroke-width:2;}
 ` }),
@@ -11699,7 +11699,7 @@ function Page4() {
       /* @__PURE__ */ jsxRuntimeExports.jsx(Nav, {}),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { className: "p4-main", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "p4-hero", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p4-hero-pattern", "aria-hidden": "true", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { "xmlns:svg": "http://www.w3.org/2000/svg", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", version: "1.1", width: "700", height: "700", id: "svg2", viewBox: "0 0 700 700", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p4-hero-pattern", "aria-hidden": "true", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { "xmlns:svg": "http://www.w3.org/2000/svg", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", version: "1.1", width: "700", height: "700", id: "svg2", viewBox: "0 0 700 700", style: { color: "var(--fg)" }, children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx("title", { children: "Seigaiha" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("defs", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { id: "C1", children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "M 1,210 V 100 A 98,98 0 0 1 100,1 98,98 0 0 1 199,100 V 210" }),
@@ -11729,7 +11729,7 @@ function Page4() {
             /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "p4-hero-kana", children: "板場 — いわさき そうた" })
           ] })
         ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p4-divider", "aria-hidden": "true", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { version: "1.1", xmlns: "http://www.w3.org/2000/svg", x: "0", y: "0", width: "600", height: "600", viewBox: "0 0 600 600", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p4-divider", "aria-hidden": "true", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { version: "1.1", xmlns: "http://www.w3.org/2000/svg", x: "0", y: "0", width: "600", height: "600", viewBox: "0 0 600 600", style: { color: "var(--fg)" }, children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("style", { type: "text/css", children: `
 	.st0{fill:none;stroke:#000;stroke-width:2;}
 ` }),
@@ -11772,7 +11772,7 @@ function Page4() {
             /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Tsukimi-tei opened on the third of March, 2019, with seven seats and no second seating." })
           ] })
         ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p4-divider", "aria-hidden": "true", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { version: "1.1", xmlns: "http://www.w3.org/2000/svg", x: "0", y: "0", width: "600", height: "600", viewBox: "0 0 600 600", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p4-divider", "aria-hidden": "true", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { version: "1.1", xmlns: "http://www.w3.org/2000/svg", x: "0", y: "0", width: "600", height: "600", viewBox: "0 0 600 600", style: { color: "var(--fg)" }, children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("style", { type: "text/css", children: `
 	.st0{fill:none;stroke:#000;stroke-width:2;}
 ` }),
@@ -12735,7 +12735,7 @@ function Page4() {
           ] })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "p4-section p4-philosophy", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p4-philosophy-bg", "aria-hidden": "true", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { version: "1.1", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", x: "0", y: "0", width: "503", height: "501", viewBox: "0 0 503 501", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p4-philosophy-bg", "aria-hidden": "true", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { version: "1.1", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", x: "0", y: "0", width: "503", height: "501", viewBox: "0 0 503 501", style: { color: "var(--fg)" }, children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx("style", { type: "text/css", children: `
 	.st0{fill:none;stroke:#000;stroke-linecap:round;}
 	.st1{fill:none;stroke:#000;}
@@ -13194,7 +13194,7 @@ function Page5() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(Nav, {}),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { className: "page5-main", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "page5-hero", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "page5-hero-bg", "aria-hidden": "true", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { "xmlns:svg": "http://www.w3.org/2000/svg", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", version: "1.1", width: "700", height: "700", id: "svg2", viewBox: "0 0 700 700", width: 520, height: 520, children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "page5-hero-bg", "aria-hidden": "true", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { "xmlns:svg": "http://www.w3.org/2000/svg", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", version: "1.1", width: "700", height: "700", id: "svg2", viewBox: "0 0 700 700", width: 520, height: 520, style: { color: "var(--fg)" }, children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("title", { children: "Seigaiha" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("defs", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { id: "C1", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "M 1,210 V 100 A 98,98 0 0 1 100,1 98,98 0 0 1 199,100 V 210" }),
@@ -13231,7 +13231,7 @@ function Page5() {
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "page5-divider", "aria-hidden": "true", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "line" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { version: "1.1", xmlns: "http://www.w3.org/2000/svg", x: "0", y: "0", width: "600", height: "600", viewBox: "0 0 600 600", width: 120, height: 28, children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { version: "1.1", xmlns: "http://www.w3.org/2000/svg", x: "0", y: "0", width: "600", height: "600", viewBox: "0 0 600 600", width: 120, height: 28, style: { color: "var(--fg)" }, children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("style", { type: "text/css", children: `
 	.st0{fill:none;stroke:#000;stroke-width:2;}
 ` }),
@@ -13292,7 +13292,7 @@ function Page5() {
         ] })
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "page5-particulars", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "page5-particulars-pattern", "aria-hidden": "true", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { version: "1.1", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", x: "0", y: "0", width: "503", height: "501", viewBox: "0 0 503 501", width: 360, height: 720, children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "page5-particulars-pattern", "aria-hidden": "true", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { version: "1.1", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", x: "0", y: "0", width: "503", height: "501", viewBox: "0 0 503 501", width: 360, height: 720, style: { color: "var(--fg)" }, children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("style", { type: "text/css", children: `
 	.st0{fill:none;stroke:#000;stroke-linecap:round;}
 	.st1{fill:none;stroke:#000;}
@@ -14726,7 +14726,7 @@ function Page6() {
       ` }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(Nav, {}),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { className: "page6-main", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "page6-asanoha", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { version: "1.1", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", x: "0", y: "0", width: "503", height: "501", viewBox: "0 0 503 501", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "page6-asanoha", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { version: "1.1", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", x: "0", y: "0", width: "503", height: "501", viewBox: "0 0 503 501", style: { color: "var(--fg)" }, children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("style", { type: "text/css", children: `
 	.st0{fill:none;stroke:#000;stroke-linecap:round;}
 	.st1{fill:none;stroke:#000;}
@@ -15766,7 +15766,7 @@ function Page6() {
           )
         ] })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "section-divider", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { version: "1.1", xmlns: "http://www.w3.org/2000/svg", x: "0", y: "0", width: "600", height: "600", viewBox: "0 0 600 600", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "section-divider", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { version: "1.1", xmlns: "http://www.w3.org/2000/svg", x: "0", y: "0", width: "600", height: "600", viewBox: "0 0 600 600", style: { color: "var(--fg)" }, children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("style", { type: "text/css", children: `
 	.st0{fill:none;stroke:#000;stroke-width:2;}
 ` }),
@@ -15801,7 +15801,7 @@ function Page6() {
           /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "address-notes", children: "The shop occupies the ground floor of a two-storey wooden machiya set back from the lane. A single paulownia tree stands at the entrance; the noren is hung from the eaves at sundown and taken in when the last guest is seated." })
         ] })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "section-divider", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { version: "1.1", xmlns: "http://www.w3.org/2000/svg", x: "0", y: "0", width: "600", height: "600", viewBox: "0 0 600 600", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "section-divider", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { version: "1.1", xmlns: "http://www.w3.org/2000/svg", x: "0", y: "0", width: "600", height: "600", viewBox: "0 0 600 600", style: { color: "var(--fg)" }, children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("style", { type: "text/css", children: `
 	.st0{fill:none;stroke:#000;stroke-width:2;}
 ` }),
@@ -15868,7 +15868,7 @@ function Page6() {
         ] })
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "hours-section", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "hours-bg", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { "xmlns:svg": "http://www.w3.org/2000/svg", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", version: "1.1", width: "700", height: "700", id: "svg2", viewBox: "0 0 700 700", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "hours-bg", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { "xmlns:svg": "http://www.w3.org/2000/svg", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", version: "1.1", width: "700", height: "700", id: "svg2", viewBox: "0 0 700 700", style: { color: "var(--fg)" }, children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("title", { children: "Seigaiha" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("defs", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { id: "C1", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "M 1,210 V 100 A 98,98 0 0 1 100,1 98,98 0 0 1 199,100 V 210" }),
@@ -15972,7 +15972,7 @@ function Page6() {
           }
         ) })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "section-divider", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { version: "1.1", xmlns: "http://www.w3.org/2000/svg", x: "0", y: "0", width: "600", height: "600", viewBox: "0 0 600 600", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "section-divider", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { version: "1.1", xmlns: "http://www.w3.org/2000/svg", x: "0", y: "0", width: "600", height: "600", viewBox: "0 0 600 600", style: { color: "var(--fg)" }, children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("style", { type: "text/css", children: `
 	.st0{fill:none;stroke:#000;stroke-width:2;}
 ` }),

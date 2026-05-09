@@ -7475,7 +7475,7 @@ function Page1() {
           /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "195.1614716", r: "163" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "-195.1614716", r: "163" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { x: "-232", y: "-232", width: "464", height: "464" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { fill: "#ffffff", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { fill: "currentColor", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "-195.1614716", r: "157" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "195.1614716", r: "157" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "195.1614716", r: "157" }),
@@ -7487,7 +7487,7 @@ function Page1() {
           /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "195.1614716", r: "144" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "-195.1614716", r: "144" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { x: "-213", y: "-213", width: "426", height: "426" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { fill: "#ffffff", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { fill: "currentColor", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "-195.1614716", r: "138" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "195.1614716", r: "138" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "195.1614716", r: "138" }),
@@ -7693,6 +7693,7 @@ function Page1() {
               x: "0px",
               width: 400,
               height: 400,
+              style: { color: "var(--fg)" },
               children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "circle",
@@ -7700,7 +7701,7 @@ function Page1() {
                     cy: "500",
                     cx: "500",
                     r: "488.21",
-                    fill: "#231304"
+                    fill: "currentColor"
                   }
                 ),
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -7715,7 +7716,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -7894,7 +7895,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -8077,7 +8078,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -8260,7 +8261,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -8443,7 +8444,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -8626,7 +8627,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -8809,7 +8810,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -8992,7 +8993,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -9175,7 +9176,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -9358,7 +9359,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -9541,7 +9542,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -9724,7 +9725,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -9907,7 +9908,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -10088,7 +10089,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -10269,7 +10270,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -10450,7 +10451,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -10633,7 +10634,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -10814,7 +10815,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -10997,7 +10998,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -11178,7 +11179,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -11359,7 +11360,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -11540,7 +11541,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -11723,7 +11724,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -11904,7 +11905,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -12085,7 +12086,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -12266,7 +12267,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -12447,7 +12448,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -12628,7 +12629,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -12809,7 +12810,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -12990,7 +12991,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -13171,7 +13172,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -13352,7 +13353,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -13527,7 +13528,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -13736,7 +13737,7 @@ function Page1() {
                   {
                     r: "27.555",
                     cy: "164.89",
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     cx: "533.06",
                     "stroke-width": "2.5",
                     fill: "url(#SVGID_133_)"
@@ -13772,7 +13773,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m494.06 159.44c3.003 14.919-6.652 29.451-21.569 32.454-14.921 3.008-29.449-6.65-32.454-21.568-3.005-14.919 6.65-29.45 21.569-32.456 14.92-3 29.45 6.66 32.45 21.58z",
                     fill: "url(#SVGID_134_)"
@@ -13808,7 +13809,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m684.27 213.53c-5.793 14.075-21.895 20.792-35.964 15.002-14.079-5.789-20.792-21.892-15.003-35.964 5.79-14.075 21.893-20.792 35.966-15.004 14.07 5.79 20.78 21.89 14.99 35.96z",
                     fill: "url(#SVGID_135_)"
@@ -13844,7 +13845,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m624.85 183.09c-2.937 14.934-17.416 24.664-32.349 21.729-14.936-2.93-24.661-17.414-21.729-32.345 2.933-14.933 17.414-24.663 32.347-21.731 14.93 2.92 24.66 17.41 21.73 32.34z",
                     fill: "url(#SVGID_136_)"
@@ -15515,7 +15516,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "5",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -15704,7 +15705,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "5",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -15936,7 +15937,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m305.86 220.13c10.785 10.736 10.83 28.184 0.096 38.968-10.736 10.79-28.182 10.831-38.968 0.097-10.786-10.736-10.832-28.181-0.098-38.969 10.73-10.79 28.18-10.83 38.97-0.1z",
                     fill: "url(#SVGID_189_)"
@@ -15972,7 +15973,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m254.99 263.38c12.674 8.426 16.122 25.529 7.697 38.2-8.424 12.678-25.526 16.122-38.199 7.698-12.675-8.424-16.121-25.526-7.698-38.202 8.42-12.68 25.53-16.12 38.2-7.7z",
                     fill: "url(#SVGID_190_)"
@@ -16008,7 +16009,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m427.74 167.14c5.856 14.048-0.78 30.184-14.822 36.038-14.049 5.862-30.182-0.777-36.039-14.821-5.858-14.047 0.778-30.183 14.822-36.041 14.05-5.86 30.18 0.77 36.04 14.82z",
                     fill: "url(#SVGID_191_)"
@@ -16044,7 +16045,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m364.19 187.63c8.483 12.636 5.125 29.755-7.51 38.238-12.633 8.489-29.751 5.125-38.235-7.507-8.485-12.633-5.126-29.753 7.506-38.239 12.63-8.48 29.75-5.12 38.24 7.51z",
                     fill: "url(#SVGID_192_)"
@@ -16498,7 +16499,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "5",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -16689,7 +16690,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "5",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -16921,7 +16922,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m164.82 439.38c15.217-0.034 27.586 12.271 27.621 27.487 0.039 15.221-12.269 27.586-27.485 27.623-15.218 0.036-27.586-12.268-27.624-27.486-0.04-15.22 12.26-27.58 27.48-27.62z",
                     fill: "url(#SVGID_245_)"
@@ -16957,7 +16958,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m159.44 505.94c14.919-3.003 29.451 6.652 32.453 21.569 3.008 14.921-6.65 29.45-21.568 32.454-14.918 3.006-29.449-6.65-32.455-21.569s6.66-29.45 21.58-32.45z",
                     fill: "url(#SVGID_246_)"
@@ -16993,7 +16994,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m213.53 315.73c14.074 5.792 20.791 21.895 15.002 35.963-5.789 14.08-21.892 20.792-35.964 15.003-14.075-5.79-20.792-21.893-15.004-35.966 5.79-14.07 21.89-20.78 35.96-14.99z",
                     fill: "url(#SVGID_247_)"
@@ -17029,7 +17030,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m183.09 375.15c14.934 2.937 24.664 17.416 21.729 32.349-2.93 14.936-17.413 24.661-32.345 21.729-14.933-2.933-24.663-17.414-21.731-32.347 2.92-14.93 17.41-24.66 32.34-21.73z",
                     fill: "url(#SVGID_248_)"
@@ -17483,7 +17484,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "5",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -17674,7 +17675,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "5",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -17906,7 +17907,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m220.13 694.14c10.735-10.783 28.184-10.828 38.967-0.095 10.791 10.735 10.831 28.182 0.098 38.968-10.736 10.785-28.181 10.832-38.969 0.098-10.79-10.73-10.83-28.18-0.1-38.97z",
                     fill: "url(#SVGID_301_)"
@@ -17942,7 +17943,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m263.38 745.01c8.426-12.672 25.529-16.121 38.199-7.695 12.678 8.424 16.123 25.526 7.698 38.199-8.423 12.674-25.526 16.121-38.201 7.697s-16.12-25.54-7.7-38.21z",
                     fill: "url(#SVGID_302_)"
@@ -17978,7 +17979,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m167.14 572.26c14.048-5.856 30.184 0.779 36.037 14.822 5.863 14.049-0.776 30.182-14.82 36.039-14.047 5.858-30.183-0.778-36.041-14.822-5.86-14.05 0.77-30.18 14.82-36.04z",
                     fill: "url(#SVGID_303_)"
@@ -18014,7 +18015,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m187.63 635.81c12.636-8.483 29.755-5.125 38.238 7.51 8.489 12.633 5.125 29.751-7.507 38.235-12.633 8.485-29.753 5.126-38.239-7.506-8.48-12.63-5.12-29.75 7.51-38.24z",
                     fill: "url(#SVGID_304_)"
@@ -18466,7 +18467,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "5",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -18657,7 +18658,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "5",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -18889,7 +18890,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m439.38 835.18c-0.033-15.215 12.272-27.585 27.486-27.621 15.223-0.039 27.587 12.27 27.624 27.486 0.034 15.218-12.268 27.586-27.486 27.624-15.22 0.03-27.58-12.27-27.62-27.49z",
                     fill: "url(#SVGID_357_)"
@@ -18925,7 +18926,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m505.94 840.56c-3.002-14.919 6.653-29.452 21.57-32.453 14.921-3.008 29.45 6.649 32.454 21.567 3.006 14.918-6.65 29.449-21.569 32.455-14.92 3-29.45-6.66-32.45-21.58z",
                     fill: "url(#SVGID_358_)"
@@ -18961,7 +18962,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m315.73 786.47c5.792-14.074 21.895-20.792 35.963-15.001 14.08 5.788 20.793 21.891 15.004 35.963-5.79 14.075-21.893 20.792-35.966 15.004-14.07-5.79-20.78-21.89-14.99-35.96z",
                     fill: "url(#SVGID_359_)"
@@ -18997,7 +18998,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m375.15 816.91c2.937-14.935 17.416-24.664 32.349-21.729 14.936 2.93 24.661 17.413 21.729 32.345-2.933 14.933-17.414 24.663-32.347 21.731-14.93-2.92-24.66-17.41-21.73-32.34z",
                     fill: "url(#SVGID_360_)"
@@ -19449,7 +19450,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "5",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -19640,7 +19641,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "5",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -19872,7 +19873,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m694.14 779.87c-10.781-10.734-10.827-28.183-0.095-38.966 10.736-10.792 28.183-10.831 38.969-0.098 10.784 10.737 10.832 28.181 0.097 38.97-10.73 10.79-28.18 10.83-38.97 0.1z",
                     fill: "url(#SVGID_413_)"
@@ -19908,7 +19909,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m745.01 736.62c-12.672-8.427-16.121-25.53-7.695-38.2 8.424-12.678 25.526-16.123 38.199-7.698 12.674 8.423 16.121 25.526 7.697 38.201-8.43 12.68-25.54 16.12-38.21 7.7z",
                     fill: "url(#SVGID_414_)"
@@ -19944,7 +19945,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m572.26 832.86c-5.856-14.048 0.779-30.184 14.822-36.037 14.049-5.863 30.182 0.776 36.039 14.82 5.858 14.047-0.778 30.183-14.822 36.041-14.05 5.86-30.18-0.77-36.04-14.82z",
                     fill: "url(#SVGID_415_)"
@@ -19980,7 +19981,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m635.81 812.37c-8.483-12.637-5.125-29.755 7.51-38.238 12.633-8.489 29.751-5.125 38.235 7.507 8.485 12.633 5.126 29.753-7.506 38.239-12.63 8.48-29.75 5.12-38.24-7.51z",
                     fill: "url(#SVGID_416_)"
@@ -20403,7 +20404,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "5",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -20594,7 +20595,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "5",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -20826,7 +20827,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m835.18 560.62c-15.214 0.033-27.584-12.272-27.62-27.486-0.039-15.223 12.27-27.587 27.486-27.624 15.218-0.033 27.586 12.268 27.624 27.487 0.03 15.22-12.27 27.58-27.49 27.62z",
                     fill: "url(#SVGID_469_)"
@@ -20862,7 +20863,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m840.56 494.06c-14.919 3.002-29.452-6.653-32.453-21.57-3.008-14.921 6.649-29.45 21.567-32.454 14.918-3.006 29.449 6.65 32.455 21.569 3 14.92-6.66 29.45-21.58 32.45z",
                     fill: "url(#SVGID_470_)"
@@ -20898,7 +20899,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m786.47 684.27c-14.074-5.792-20.792-21.895-15.001-35.963 5.788-14.08 21.891-20.793 35.963-15.004 14.075 5.79 20.792 21.893 15.004 35.966-5.79 14.07-21.89 20.78-35.96 14.99z",
                     fill: "url(#SVGID_471_)"
@@ -20934,7 +20935,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m816.91 624.85c-14.935-2.937-24.664-17.416-21.729-32.349 2.93-14.936 17.413-24.661 32.345-21.729 14.933 2.933 24.663 17.414 21.731 32.347-2.92 14.93-17.41 24.66-32.34 21.73z",
                     fill: "url(#SVGID_472_)"
@@ -21384,7 +21385,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "5",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -21575,7 +21576,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "5",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -21807,7 +21808,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m779.87 305.86c-10.734 10.781-28.183 10.827-38.966 0.095-10.792-10.736-10.831-28.183-0.098-38.969 10.737-10.784 28.181-10.832 38.97-0.097 10.79 10.73 10.83 28.18 0.1 38.97z",
                     fill: "url(#SVGID_525_)"
@@ -21843,7 +21844,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m736.62 254.99c-8.427 12.672-25.53 16.121-38.2 7.695-12.678-8.424-16.123-25.526-7.698-38.199 8.423-12.674 25.526-16.121 38.201-7.697 12.68 8.43 16.12 25.54 7.7 38.21z",
                     fill: "url(#SVGID_526_)"
@@ -21879,7 +21880,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m832.86 427.74c-14.048 5.856-30.184-0.78-36.037-14.822-5.863-14.049 0.776-30.182 14.82-36.039 14.047-5.858 30.183 0.778 36.041 14.822 5.86 14.05-0.77 30.18-14.82 36.04z",
                     fill: "url(#SVGID_527_)"
@@ -21915,7 +21916,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m812.37 364.19c-12.637 8.483-29.755 5.125-38.238-7.51-8.489-12.633-5.125-29.751 7.507-38.235 12.633-8.485 29.753-5.126 38.239 7.506 8.48 12.63 5.12 29.75-7.51 38.24z",
                     fill: "url(#SVGID_528_)"
@@ -22770,7 +22771,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "5",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -22961,7 +22962,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "5",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -23166,7 +23167,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5814",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -23246,7 +23247,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5814",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -23327,7 +23328,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5814",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -23408,7 +23409,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5814",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -23489,7 +23490,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5814",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -23570,7 +23571,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5814",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -23649,7 +23650,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5814",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -23728,7 +23729,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5814",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -23833,7 +23834,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "529.75 43.026 546 20.438 517.74 18.919",
                     fill: "url(#SVGID_597_)"
@@ -23869,7 +23870,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "470.25 43.026 454 20.438 482.26 18.919",
                     fill: "url(#SVGID_598_)"
@@ -23905,7 +23906,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "352.6 66.428 358.98 39.339 332.29 48.751",
                     fill: "url(#SVGID_599_)"
@@ -23941,7 +23942,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "297.64 89.194 273.98 74.546 299.51 62.328",
                     fill: "url(#SVGID_600_)"
@@ -23977,7 +23978,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "197.9 155.84 193.43 128.37 172.37 147.28",
                     fill: "url(#SVGID_601_)"
@@ -24013,7 +24014,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "155.84 197.9 128.37 193.42 147.28 172.37",
                     fill: "url(#SVGID_602_)"
@@ -24049,7 +24050,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "89.195 297.64 74.547 273.98 62.328 299.51",
                     fill: "url(#SVGID_603_)"
@@ -24085,7 +24086,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "66.429 352.6 39.34 358.98 48.752 332.29",
                     fill: "url(#SVGID_604_)"
@@ -24121,7 +24122,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "43.027 470.25 20.439 454 18.92 482.26",
                     fill: "url(#SVGID_605_)"
@@ -24157,7 +24158,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "43.027 529.75 20.439 546 18.921 517.74",
                     fill: "url(#SVGID_606_)"
@@ -24193,7 +24194,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "66.43 647.39 39.341 641.02 48.752 667.71",
                     fill: "url(#SVGID_607_)"
@@ -24229,7 +24230,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "89.196 702.36 74.548 726.02 62.33 700.49",
                     fill: "url(#SVGID_608_)"
@@ -24265,7 +24266,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "155.84 802.09 128.37 806.57 147.28 827.63",
                     fill: "url(#SVGID_609_)"
@@ -24301,7 +24302,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "197.91 844.16 193.43 871.63 172.37 852.72",
                     fill: "url(#SVGID_610_)"
@@ -24337,7 +24338,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "297.64 910.8 273.98 925.45 299.51 937.67",
                     fill: "url(#SVGID_611_)"
@@ -24373,7 +24374,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "352.61 933.57 358.98 960.66 332.29 951.25",
                     fill: "url(#SVGID_612_)"
@@ -24409,7 +24410,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "470.26 956.97 454 979.56 482.26 981.08",
                     fill: "url(#SVGID_613_)"
@@ -24445,7 +24446,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "529.75 956.97 546 979.56 517.74 981.08",
                     fill: "url(#SVGID_614_)"
@@ -24481,7 +24482,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "647.4 933.57 641.02 960.66 667.71 951.25",
                     fill: "url(#SVGID_615_)"
@@ -24517,7 +24518,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "702.36 910.8 726.02 925.45 700.49 937.67",
                     fill: "url(#SVGID_616_)"
@@ -24553,7 +24554,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "802.1 844.16 806.58 871.63 827.63 852.72",
                     fill: "url(#SVGID_617_)"
@@ -24589,7 +24590,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "844.16 802.09 871.63 806.57 852.72 827.63",
                     fill: "url(#SVGID_618_)"
@@ -24625,7 +24626,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "910.8 702.36 925.45 726.02 937.67 700.49",
                     fill: "url(#SVGID_619_)"
@@ -24661,7 +24662,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "933.57 647.39 960.66 641.02 951.25 667.71",
                     fill: "url(#SVGID_620_)"
@@ -24697,7 +24698,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "956.97 529.74 979.56 546 981.08 517.74",
                     fill: "url(#SVGID_621_)"
@@ -24733,7 +24734,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "956.97 470.25 979.56 454 981.08 482.26",
                     fill: "url(#SVGID_622_)"
@@ -24769,7 +24770,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "933.57 352.6 960.66 358.98 951.25 332.29",
                     fill: "url(#SVGID_623_)"
@@ -24805,7 +24806,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "910.8 297.64 925.45 273.98 937.67 299.51",
                     fill: "url(#SVGID_624_)"
@@ -24841,7 +24842,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "844.16 197.9 871.63 193.42 852.72 172.37",
                     fill: "url(#SVGID_625_)"
@@ -24877,7 +24878,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "802.09 155.84 806.57 128.37 827.63 147.28",
                     fill: "url(#SVGID_626_)"
@@ -24913,7 +24914,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "702.36 89.196 726.02 74.544 700.49 62.329",
                     fill: "url(#SVGID_627_)"
@@ -24949,7 +24950,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "647.39 66.429 641.02 39.34 667.71 48.751",
                     fill: "url(#SVGID_628_)"
@@ -24985,7 +24986,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m511.63 425.41h-23.805l-20.621-111.31c0 17.962 14.562 32.522 32.523 32.522s32.522-14.561 32.522-32.522l-20.61 111.31z",
                     fill: "url(#SVGID_629_)"
@@ -25021,7 +25022,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m482.2 426.64l-21.993 9.109-61.646-94.943c6.874 16.595 25.899 24.474 42.494 17.601 16.595-6.874 24.475-25.898 17.601-42.493l23.55 110.72z",
                     fill: "url(#SVGID_630_)"
@@ -25057,7 +25058,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m455.48 439.03l-16.833 16.833-93.287-64.125c12.7 12.701 33.293 12.7 45.994-0.001s12.7-33.292 0-45.993l64.13 93.28z",
                     fill: "url(#SVGID_631_)"
@@ -25093,7 +25094,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m435.54 460.71l-9.11 21.993-110.73-23.544c16.595 6.874 35.619-1.008 42.493-17.603s-1.006-35.619-17.602-42.492l94.95 61.64z",
                     fill: "url(#SVGID_632_)"
@@ -25129,7 +25130,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m425.41 488.37v23.806l-111.31 20.62c17.962 0.001 32.522-14.562 32.522-32.523 0-17.963-14.562-32.522-32.523-32.522l111.31 20.61z",
                     fill: "url(#SVGID_633_)"
@@ -25165,7 +25166,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m426.64 517.8l9.109 21.993-94.943 61.646c16.595-6.874 24.474-25.899 17.601-42.494-6.874-16.595-25.897-24.475-42.492-17.601l110.72-23.55z",
                     fill: "url(#SVGID_634_)"
@@ -25201,7 +25202,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m439.03 544.52l16.834 16.833-64.126 93.287c12.701-12.7 12.7-33.293-0.001-45.994s-33.293-12.699-45.994 0.001l93.29-64.13z",
                     fill: "url(#SVGID_635_)"
@@ -25237,7 +25238,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m460.71 564.46l21.993 9.11-23.544 110.73c6.873-16.595-1.009-35.619-17.603-42.493-16.595-6.874-35.618 1.007-42.492 17.601l61.64-94.95z",
                     fill: "url(#SVGID_636_)"
@@ -25273,7 +25274,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m488.37 574.59l23.806-0.001 20.62 111.31c0-17.961-14.561-32.521-32.523-32.522-17.963 0.001-32.521 14.562-32.521 32.524l20.61-111.31z",
                     fill: "url(#SVGID_637_)"
@@ -25309,7 +25310,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m517.79 573.36l21.994-9.109 61.646 94.943c-6.875-16.594-25.9-24.473-42.494-17.601-16.596 6.874-24.475 25.897-17.602 42.491l-23.55-110.72z",
                     fill: "url(#SVGID_638_)"
@@ -25345,7 +25346,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m544.52 560.97l16.833-16.835 93.287 64.126c-12.7-12.7-33.292-12.7-45.995 0-12.7 12.703-12.698 33.294 0.003 45.995l-64.12-93.29z",
                     fill: "url(#SVGID_639_)"
@@ -25381,7 +25382,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m564.46 539.29l9.111-21.993 110.73 23.544c-16.595-6.872-35.619 1.01-42.493 17.603-6.874 16.596 1.006 35.618 17.6 42.492l-94.95-61.64z",
                     fill: "url(#SVGID_640_)"
@@ -25417,7 +25418,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m574.59 511.64l-0.001-23.807 111.31-20.62c-17.961 0-32.521 14.561-32.523 32.523 0.002 17.963 14.563 32.521 32.525 32.521l-111.31-20.61z",
                     fill: "url(#SVGID_641_)"
@@ -25453,7 +25454,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m573.36 482.21l-9.108-21.995 94.942-61.647c-16.593 6.875-24.472 25.901-17.6 42.495 6.874 16.596 25.896 24.474 42.491 17.602l-110.72 23.55z",
                     fill: "url(#SVGID_642_)"
@@ -25489,7 +25490,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m560.97 455.48l-16.835-16.833 64.126-93.287c-12.7 12.7-12.7 33.292 0 45.995 12.703 12.7 33.294 12.698 45.995-0.003l-93.29 64.12z",
                     fill: "url(#SVGID_643_)"
@@ -25525,7 +25526,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m539.29 435.54l-21.993-9.112 23.543-110.73c-6.871 16.595 1.011 35.619 17.604 42.493 16.596 6.874 35.617-1.006 42.492-17.6l-61.64 94.95z",
                     fill: "url(#SVGID_644_)"
@@ -25631,7 +25632,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     d: "m504.74 469.18l3.311-17.257c-2.366 2.17-4.887 3.454-8.046 3.454s-5.679-1.286-8.045-3.455l3.312 17.257c1.85-0.52 8.2-0.66 9.47 0z",
                     fill: "url(#SVGID_647_)"
                   }
@@ -25702,7 +25703,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     d: "m492.58 469.71l-3.545-17.21c-1.356 2.911-3.193 5.062-6.112 6.271s-5.739 0.985-8.755-0.112l9.663 14.676c1.51-1.2 7.32-3.75 8.74-3.63z",
                     fill: "url(#SVGID_649_)"
                   }
@@ -25773,7 +25774,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     d: "m481.55 474.86l-9.861-14.544c-0.139 3.208-1.013 5.898-3.247 8.132s-4.925 3.106-8.132 3.246l14.545 9.861c0.94-1.69 5.34-6.27 6.69-6.7z",
                     fill: "url(#SVGID_651_)"
                   }
@@ -25844,7 +25845,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     d: "m473.33 483.83l-14.676-9.663c1.099 3.018 1.321 5.837 0.111 8.756-1.208 2.919-3.361 4.755-6.27 6.111l17.21 3.545c0.24-1.92 2.54-7.83 3.63-8.75z",
                     fill: "url(#SVGID_653_)"
                   }
@@ -25915,7 +25916,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     d: "m469.18 495.26l-17.256-3.311c2.17 2.366 3.454 4.886 3.453 8.046 0 3.16-1.285 5.679-3.454 8.045l17.257-3.312c-0.52-1.85-0.66-8.2 0-9.47z",
                     fill: "url(#SVGID_655_)"
                   }
@@ -25986,7 +25987,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     d: "m469.71 507.42l-17.211 3.543c2.912 1.357 5.062 3.194 6.271 6.113 1.21 2.919 0.985 5.739-0.112 8.755l14.676-9.663c-1.2-1.51-3.75-7.32-3.63-8.74z",
                     fill: "url(#SVGID_657_)"
                   }
@@ -26057,7 +26058,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     d: "m474.85 518.45l-14.542 9.86c3.207 0.139 5.897 1.013 8.132 3.247 2.233 2.234 3.106 4.925 3.246 8.132l9.86-14.544c-1.68-0.95-6.26-5.35-6.7-6.7z",
                     fill: "url(#SVGID_659_)"
                   }
@@ -26128,7 +26129,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     d: "m483.83 526.67l-9.664 14.676c3.019-1.1 5.838-1.32 8.757-0.111s4.755 3.361 6.11 6.27l3.545-17.21c-1.92-0.24-7.83-2.54-8.75-3.63z",
                     fill: "url(#SVGID_661_)"
                   }
@@ -26199,7 +26200,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     d: "m495.26 530.83l-3.311 17.255c2.365-2.169 4.887-3.454 8.047-3.454 3.158 0 5.679 1.286 8.045 3.455l-3.312-17.257c-1.86 0.52-8.2 0.66-9.47 0.01z",
                     fill: "url(#SVGID_663_)"
                   }
@@ -26268,7 +26269,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     d: "m507.42 530.29l3.544 17.211c1.356-2.911 3.194-5.062 6.113-6.271s5.739-0.985 8.754 0.112l-9.663-14.675c-1.51 1.2-7.32 3.75-8.74 3.63z",
                     fill: "url(#SVGID_665_)"
                   }
@@ -26337,7 +26338,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     d: "m518.45 525.15l9.861 14.541c0.139-3.205 1.013-5.897 3.247-8.132 2.233-2.233 4.925-3.106 8.132-3.246l-14.545-9.86c-0.95 1.68-5.34 6.26-6.69 6.7z",
                     fill: "url(#SVGID_667_)"
                   }
@@ -26406,7 +26407,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     d: "m526.66 516.17l14.677 9.663c-1.1-3.018-1.32-5.838-0.111-8.757s3.361-4.755 6.27-6.11l-17.21-3.544c-0.23 1.92-2.53 7.83-3.63 8.75z",
                     fill: "url(#SVGID_669_)"
                   }
@@ -26477,7 +26478,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     d: "m530.83 504.74l17.255 3.309c-2.168-2.363-3.454-4.886-3.454-8.046 0-3.158 1.286-5.679 3.454-8.045l-17.256 3.312c0.52 1.86 0.66 8.2 0.01 9.47z",
                     fill: "url(#SVGID_671_)"
                   }
@@ -26546,7 +26547,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     d: "m530.29 492.58l17.211-3.545c-2.911-1.356-5.062-3.194-6.271-6.113s-0.985-5.739 0.112-8.754l-14.675 9.663c1.2 1.51 3.75 7.32 3.63 8.74z",
                     fill: "url(#SVGID_673_)"
                   }
@@ -26617,7 +26618,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     d: "m525.15 481.55l14.54-9.862c-3.203-0.138-5.896-1.012-8.131-3.247-2.233-2.233-3.106-4.924-3.247-8.131l-9.86 14.544c1.68 0.96 6.26 5.35 6.7 6.7z",
                     fill: "url(#SVGID_675_)"
                   }
@@ -26686,7 +26687,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     d: "m516.17 473.34l9.663-14.677c-3.018 1.1-5.838 1.32-8.757 0.111s-4.755-3.361-6.11-6.27l-3.544 17.21c1.92 0.23 7.83 2.53 8.75 3.63z",
                     fill: "url(#SVGID_677_)"
                   }
@@ -26888,9 +26889,9 @@ function Page1() {
             /* @__PURE__ */ jsxRuntimeExports.jsx("em", { children: "of Sacred Glass & Stone" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "hero-motto", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.1", viewBox: "0 0 200 200", xmlns: "http://www.w3.org/2000/svg", className: "inline-vine", children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { transform: "translate(0 -852.36)", d: "m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z" }) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.1", viewBox: "0 0 200 200", xmlns: "http://www.w3.org/2000/svg", className: "inline-vine", style: { color: "var(--fg)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { transform: "translate(0 -852.36)", d: "m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z" }) }),
             "Lux perpetua luceat",
-            /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.1", viewBox: "0 0 200 200", xmlns: "http://www.w3.org/2000/svg", className: "inline-vine", children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { transform: "translate(0 -852.36)", d: "m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z" }) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.1", viewBox: "0 0 200 200", xmlns: "http://www.w3.org/2000/svg", className: "inline-vine", style: { color: "var(--fg)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { transform: "translate(0 -852.36)", d: "m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z" }) }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
             /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { fontSize: "0.95rem", opacity: 0.8 }, children: "— let perpetual light shine." })
           ] })
@@ -26917,6 +26918,7 @@ function Page1() {
             "sodipodi:docname": "Oak-leaf and acorn ornament.svg",
             width: 110,
             height: 36,
+            style: { color: "var(--fg)" },
             children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "defs",
@@ -27003,7 +27005,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "195.1614716", r: "163" }),
                 /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "-195.1614716", r: "163" }),
                 /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { x: "-232", y: "-232", width: "464", height: "464" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { fill: "#ffffff", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { fill: "currentColor", children: [
                   /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "-195.1614716", r: "157" }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "195.1614716", r: "157" }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "195.1614716", r: "157" }),
@@ -27015,7 +27017,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "195.1614716", r: "144" }),
                 /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "-195.1614716", r: "144" }),
                 /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { x: "-213", y: "-213", width: "426", height: "426" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { fill: "#ffffff", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { fill: "currentColor", children: [
                   /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "-195.1614716", r: "138" }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "195.1614716", r: "138" }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "195.1614716", r: "138" }),
@@ -27218,7 +27220,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "195.1614716", r: "163" }),
                 /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "-195.1614716", r: "163" }),
                 /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { x: "-232", y: "-232", width: "464", height: "464" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { fill: "#ffffff", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { fill: "currentColor", children: [
                   /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "-195.1614716", r: "157" }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "195.1614716", r: "157" }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "195.1614716", r: "157" }),
@@ -27230,7 +27232,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "195.1614716", r: "144" }),
                 /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "-195.1614716", r: "144" }),
                 /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { x: "-213", y: "-213", width: "426", height: "426" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { fill: "#ffffff", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { fill: "currentColor", children: [
                   /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "-195.1614716", r: "138" }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "195.1614716", r: "138" }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "195.1614716", r: "138" }),
@@ -27433,7 +27435,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "195.1614716", r: "163" }),
                 /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "-195.1614716", r: "163" }),
                 /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { x: "-232", y: "-232", width: "464", height: "464" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { fill: "#ffffff", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { fill: "currentColor", children: [
                   /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "-195.1614716", r: "157" }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "195.1614716", r: "157" }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "195.1614716", r: "157" }),
@@ -27445,7 +27447,7 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "195.1614716", r: "144" }),
                 /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "-195.1614716", r: "144" }),
                 /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { x: "-213", y: "-213", width: "426", height: "426" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { fill: "#ffffff", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { fill: "currentColor", children: [
                   /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "-195.1614716", r: "138" }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "195.1614716", r: "138" }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "195.1614716", r: "138" }),
@@ -27662,6 +27664,7 @@ function Page1() {
             "sodipodi:docname": "Oak-leaf and acorn ornament.svg",
             width: 110,
             height: 36,
+            style: { color: "var(--fg)" },
             children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "defs",
@@ -27920,7 +27923,7 @@ function Page1() {
           /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "role", children: "Mère Geneviève d'Argenteuil · Director, The Cloister Museum" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "It is my joy to welcome you, in this feast-month of Michaelmas, 2024, to the opening of our north wing — a chamber long imagined and at last built, whose seven lancets face the same compass-point as those at Reims and Chartres, that the morning light might pass first through coloured glass before it reaches any visitor's eye." }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.1", viewBox: "0 0 200 200", xmlns: "http://www.w3.org/2000/svg", className: "inline-vine", children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { transform: "translate(0 -852.36)", d: "m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z" }) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.1", viewBox: "0 0 200 200", xmlns: "http://www.w3.org/2000/svg", className: "inline-vine", style: { color: "var(--fg)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { transform: "translate(0 -852.36)", d: "m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z" }) }),
             "We are a small institution, and an unfashionable one. We collect cathedrals in fragments — a mullion, a quatrefoil, a single foot of cobalt sky — and we ask of our visitors only what the cathedrals themselves once asked: patience, attention, and the willingness to look upward."
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "The new wing was made possible by a bequest from the Confraternity of Saint Bernard and by twelve years of stonework by the apprentices of the Compagnons du Devoir. To them, and to you, our thanks." }),
@@ -28048,7 +28051,7 @@ function Page2() {
           content: '';
           position: fixed;
           inset: 0;
-          background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><path d='M40 8 Q56 24 56 40 Q56 56 40 72 Q24 56 24 40 Q24 24 40 8 Z' fill='none' stroke='%23c9a23a' stroke-width='0.5' opacity='0.08'/></svg>");
+          background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80' style={{color: "var(--fg)"}}><path d='M40 8 Q56 24 56 40 Q56 56 40 72 Q24 56 24 40 Q24 24 40 8 Z' fill='none' stroke='%23c9a23a' stroke-width='0.5' opacity='0.08'/></svg>");
           opacity: 0.5;
           pointer-events: none;
           z-index: 0;
@@ -28508,6 +28511,7 @@ function Page2() {
             "sodipodi:docname": "Oak-leaf and acorn ornament.svg",
             width: 140,
             height: 40,
+            style: { color: "var(--fg)" },
             children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "defs",
@@ -28583,7 +28587,7 @@ function Page2() {
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "p2-prologue", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "p2-drop", children: [
         "The Cloister Museum's permanent collection comprises one thousand four hundred and seventy-two catalogued objects, of which two hundred and sixteen are on continuous public display across the seven galleries described below.",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.1", viewBox: "0 0 200 200", xmlns: "http://www.w3.org/2000/svg", className: "vine", width: 16, height: 16, children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { transform: "translate(0 -852.36)", d: "m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z" }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.1", viewBox: "0 0 200 200", xmlns: "http://www.w3.org/2000/svg", className: "vine", width: 16, height: 16, style: { color: "var(--fg)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { transform: "translate(0 -852.36)", d: "m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z" }) }),
         "The remaining works are accessible to credentialed researchers through the Reading Room by appointment, and a rotating selection appears in the museum's biennial loan exhibitions. All accession numbers follow the museum standard adopted in 1962: prefix CMS, gallery code, and acquisition sequence."
       ] }) }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "p2-galleries", children: [
@@ -28805,6 +28809,7 @@ function Page2() {
             "sodipodi:docname": "Oak-leaf and acorn ornament.svg",
             width: 140,
             height: 40,
+            style: { color: "var(--fg)" },
             children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "defs",
@@ -28901,6 +28906,7 @@ function Page2() {
             className: "p2-coda-rose",
             width: 220,
             height: 220,
+            style: { color: "var(--fg)" },
             children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "circle",
@@ -28908,7 +28914,7 @@ function Page2() {
                   cy: "500",
                   cx: "500",
                   r: "488.21",
-                  fill: "#231304"
+                  fill: "currentColor"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -28923,7 +28929,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -29102,7 +29108,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -29285,7 +29291,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -29468,7 +29474,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -29651,7 +29657,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -29834,7 +29840,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -30017,7 +30023,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -30200,7 +30206,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -30383,7 +30389,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -30566,7 +30572,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -30749,7 +30755,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -30932,7 +30938,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -31115,7 +31121,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -31296,7 +31302,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -31477,7 +31483,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -31658,7 +31664,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -31841,7 +31847,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -32022,7 +32028,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -32205,7 +32211,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -32386,7 +32392,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -32567,7 +32573,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -32748,7 +32754,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -32931,7 +32937,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -33112,7 +33118,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -33293,7 +33299,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -33474,7 +33480,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -33655,7 +33661,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -33836,7 +33842,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -34017,7 +34023,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -34198,7 +34204,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -34379,7 +34385,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -34560,7 +34566,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -34735,7 +34741,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -34944,7 +34950,7 @@ function Page2() {
                 {
                   r: "27.555",
                   cy: "164.89",
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   cx: "533.06",
                   "stroke-width": "2.5",
                   fill: "url(#SVGID_133_)"
@@ -34980,7 +34986,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m494.06 159.44c3.003 14.919-6.652 29.451-21.569 32.454-14.921 3.008-29.449-6.65-32.454-21.568-3.005-14.919 6.65-29.45 21.569-32.456 14.92-3 29.45 6.66 32.45 21.58z",
                   fill: "url(#SVGID_134_)"
@@ -35016,7 +35022,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m684.27 213.53c-5.793 14.075-21.895 20.792-35.964 15.002-14.079-5.789-20.792-21.892-15.003-35.964 5.79-14.075 21.893-20.792 35.966-15.004 14.07 5.79 20.78 21.89 14.99 35.96z",
                   fill: "url(#SVGID_135_)"
@@ -35052,7 +35058,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m624.85 183.09c-2.937 14.934-17.416 24.664-32.349 21.729-14.936-2.93-24.661-17.414-21.729-32.345 2.933-14.933 17.414-24.663 32.347-21.731 14.93 2.92 24.66 17.41 21.73 32.34z",
                   fill: "url(#SVGID_136_)"
@@ -36723,7 +36729,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "5",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -36912,7 +36918,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "5",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -37144,7 +37150,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m305.86 220.13c10.785 10.736 10.83 28.184 0.096 38.968-10.736 10.79-28.182 10.831-38.968 0.097-10.786-10.736-10.832-28.181-0.098-38.969 10.73-10.79 28.18-10.83 38.97-0.1z",
                   fill: "url(#SVGID_189_)"
@@ -37180,7 +37186,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m254.99 263.38c12.674 8.426 16.122 25.529 7.697 38.2-8.424 12.678-25.526 16.122-38.199 7.698-12.675-8.424-16.121-25.526-7.698-38.202 8.42-12.68 25.53-16.12 38.2-7.7z",
                   fill: "url(#SVGID_190_)"
@@ -37216,7 +37222,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m427.74 167.14c5.856 14.048-0.78 30.184-14.822 36.038-14.049 5.862-30.182-0.777-36.039-14.821-5.858-14.047 0.778-30.183 14.822-36.041 14.05-5.86 30.18 0.77 36.04 14.82z",
                   fill: "url(#SVGID_191_)"
@@ -37252,7 +37258,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m364.19 187.63c8.483 12.636 5.125 29.755-7.51 38.238-12.633 8.489-29.751 5.125-38.235-7.507-8.485-12.633-5.126-29.753 7.506-38.239 12.63-8.48 29.75-5.12 38.24 7.51z",
                   fill: "url(#SVGID_192_)"
@@ -37706,7 +37712,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "5",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -37897,7 +37903,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "5",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -38129,7 +38135,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m164.82 439.38c15.217-0.034 27.586 12.271 27.621 27.487 0.039 15.221-12.269 27.586-27.485 27.623-15.218 0.036-27.586-12.268-27.624-27.486-0.04-15.22 12.26-27.58 27.48-27.62z",
                   fill: "url(#SVGID_245_)"
@@ -38165,7 +38171,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m159.44 505.94c14.919-3.003 29.451 6.652 32.453 21.569 3.008 14.921-6.65 29.45-21.568 32.454-14.918 3.006-29.449-6.65-32.455-21.569s6.66-29.45 21.58-32.45z",
                   fill: "url(#SVGID_246_)"
@@ -38201,7 +38207,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m213.53 315.73c14.074 5.792 20.791 21.895 15.002 35.963-5.789 14.08-21.892 20.792-35.964 15.003-14.075-5.79-20.792-21.893-15.004-35.966 5.79-14.07 21.89-20.78 35.96-14.99z",
                   fill: "url(#SVGID_247_)"
@@ -38237,7 +38243,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m183.09 375.15c14.934 2.937 24.664 17.416 21.729 32.349-2.93 14.936-17.413 24.661-32.345 21.729-14.933-2.933-24.663-17.414-21.731-32.347 2.92-14.93 17.41-24.66 32.34-21.73z",
                   fill: "url(#SVGID_248_)"
@@ -38691,7 +38697,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "5",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -38882,7 +38888,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "5",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -39114,7 +39120,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m220.13 694.14c10.735-10.783 28.184-10.828 38.967-0.095 10.791 10.735 10.831 28.182 0.098 38.968-10.736 10.785-28.181 10.832-38.969 0.098-10.79-10.73-10.83-28.18-0.1-38.97z",
                   fill: "url(#SVGID_301_)"
@@ -39150,7 +39156,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m263.38 745.01c8.426-12.672 25.529-16.121 38.199-7.695 12.678 8.424 16.123 25.526 7.698 38.199-8.423 12.674-25.526 16.121-38.201 7.697s-16.12-25.54-7.7-38.21z",
                   fill: "url(#SVGID_302_)"
@@ -39186,7 +39192,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m167.14 572.26c14.048-5.856 30.184 0.779 36.037 14.822 5.863 14.049-0.776 30.182-14.82 36.039-14.047 5.858-30.183-0.778-36.041-14.822-5.86-14.05 0.77-30.18 14.82-36.04z",
                   fill: "url(#SVGID_303_)"
@@ -39222,7 +39228,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m187.63 635.81c12.636-8.483 29.755-5.125 38.238 7.51 8.489 12.633 5.125 29.751-7.507 38.235-12.633 8.485-29.753 5.126-38.239-7.506-8.48-12.63-5.12-29.75 7.51-38.24z",
                   fill: "url(#SVGID_304_)"
@@ -39674,7 +39680,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "5",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -39865,7 +39871,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "5",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -40097,7 +40103,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m439.38 835.18c-0.033-15.215 12.272-27.585 27.486-27.621 15.223-0.039 27.587 12.27 27.624 27.486 0.034 15.218-12.268 27.586-27.486 27.624-15.22 0.03-27.58-12.27-27.62-27.49z",
                   fill: "url(#SVGID_357_)"
@@ -40133,7 +40139,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m505.94 840.56c-3.002-14.919 6.653-29.452 21.57-32.453 14.921-3.008 29.45 6.649 32.454 21.567 3.006 14.918-6.65 29.449-21.569 32.455-14.92 3-29.45-6.66-32.45-21.58z",
                   fill: "url(#SVGID_358_)"
@@ -40169,7 +40175,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m315.73 786.47c5.792-14.074 21.895-20.792 35.963-15.001 14.08 5.788 20.793 21.891 15.004 35.963-5.79 14.075-21.893 20.792-35.966 15.004-14.07-5.79-20.78-21.89-14.99-35.96z",
                   fill: "url(#SVGID_359_)"
@@ -40205,7 +40211,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m375.15 816.91c2.937-14.935 17.416-24.664 32.349-21.729 14.936 2.93 24.661 17.413 21.729 32.345-2.933 14.933-17.414 24.663-32.347 21.731-14.93-2.92-24.66-17.41-21.73-32.34z",
                   fill: "url(#SVGID_360_)"
@@ -40657,7 +40663,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "5",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -40848,7 +40854,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "5",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -41080,7 +41086,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m694.14 779.87c-10.781-10.734-10.827-28.183-0.095-38.966 10.736-10.792 28.183-10.831 38.969-0.098 10.784 10.737 10.832 28.181 0.097 38.97-10.73 10.79-28.18 10.83-38.97 0.1z",
                   fill: "url(#SVGID_413_)"
@@ -41116,7 +41122,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m745.01 736.62c-12.672-8.427-16.121-25.53-7.695-38.2 8.424-12.678 25.526-16.123 38.199-7.698 12.674 8.423 16.121 25.526 7.697 38.201-8.43 12.68-25.54 16.12-38.21 7.7z",
                   fill: "url(#SVGID_414_)"
@@ -41152,7 +41158,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m572.26 832.86c-5.856-14.048 0.779-30.184 14.822-36.037 14.049-5.863 30.182 0.776 36.039 14.82 5.858 14.047-0.778 30.183-14.822 36.041-14.05 5.86-30.18-0.77-36.04-14.82z",
                   fill: "url(#SVGID_415_)"
@@ -41188,7 +41194,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m635.81 812.37c-8.483-12.637-5.125-29.755 7.51-38.238 12.633-8.489 29.751-5.125 38.235 7.507 8.485 12.633 5.126 29.753-7.506 38.239-12.63 8.48-29.75 5.12-38.24-7.51z",
                   fill: "url(#SVGID_416_)"
@@ -41611,7 +41617,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "5",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -41802,7 +41808,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "5",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -42034,7 +42040,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m835.18 560.62c-15.214 0.033-27.584-12.272-27.62-27.486-0.039-15.223 12.27-27.587 27.486-27.624 15.218-0.033 27.586 12.268 27.624 27.487 0.03 15.22-12.27 27.58-27.49 27.62z",
                   fill: "url(#SVGID_469_)"
@@ -42070,7 +42076,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m840.56 494.06c-14.919 3.002-29.452-6.653-32.453-21.57-3.008-14.921 6.649-29.45 21.567-32.454 14.918-3.006 29.449 6.65 32.455 21.569 3 14.92-6.66 29.45-21.58 32.45z",
                   fill: "url(#SVGID_470_)"
@@ -42106,7 +42112,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m786.47 684.27c-14.074-5.792-20.792-21.895-15.001-35.963 5.788-14.08 21.891-20.793 35.963-15.004 14.075 5.79 20.792 21.893 15.004 35.966-5.79 14.07-21.89 20.78-35.96 14.99z",
                   fill: "url(#SVGID_471_)"
@@ -42142,7 +42148,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m816.91 624.85c-14.935-2.937-24.664-17.416-21.729-32.349 2.93-14.936 17.413-24.661 32.345-21.729 14.933 2.933 24.663 17.414 21.731 32.347-2.92 14.93-17.41 24.66-32.34 21.73z",
                   fill: "url(#SVGID_472_)"
@@ -42592,7 +42598,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "5",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -42783,7 +42789,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "5",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -43015,7 +43021,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m779.87 305.86c-10.734 10.781-28.183 10.827-38.966 0.095-10.792-10.736-10.831-28.183-0.098-38.969 10.737-10.784 28.181-10.832 38.97-0.097 10.79 10.73 10.83 28.18 0.1 38.97z",
                   fill: "url(#SVGID_525_)"
@@ -43051,7 +43057,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m736.62 254.99c-8.427 12.672-25.53 16.121-38.2 7.695-12.678-8.424-16.123-25.526-7.698-38.199 8.423-12.674 25.526-16.121 38.201-7.697 12.68 8.43 16.12 25.54 7.7 38.21z",
                   fill: "url(#SVGID_526_)"
@@ -43087,7 +43093,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m832.86 427.74c-14.048 5.856-30.184-0.78-36.037-14.822-5.863-14.049 0.776-30.182 14.82-36.039 14.047-5.858 30.183 0.778 36.041 14.822 5.86 14.05-0.77 30.18-14.82 36.04z",
                   fill: "url(#SVGID_527_)"
@@ -43123,7 +43129,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m812.37 364.19c-12.637 8.483-29.755 5.125-38.238-7.51-8.489-12.633-5.125-29.751 7.507-38.235 12.633-8.485 29.753-5.126 38.239 7.506 8.48 12.63 5.12 29.75-7.51 38.24z",
                   fill: "url(#SVGID_528_)"
@@ -43978,7 +43984,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "5",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -44169,7 +44175,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "5",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -44374,7 +44380,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5814",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -44454,7 +44460,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5814",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -44535,7 +44541,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5814",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -44616,7 +44622,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5814",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -44697,7 +44703,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5814",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -44778,7 +44784,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5814",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -44857,7 +44863,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5814",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -44936,7 +44942,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5814",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -45041,7 +45047,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "529.75 43.026 546 20.438 517.74 18.919",
                   fill: "url(#SVGID_597_)"
@@ -45077,7 +45083,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "470.25 43.026 454 20.438 482.26 18.919",
                   fill: "url(#SVGID_598_)"
@@ -45113,7 +45119,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "352.6 66.428 358.98 39.339 332.29 48.751",
                   fill: "url(#SVGID_599_)"
@@ -45149,7 +45155,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "297.64 89.194 273.98 74.546 299.51 62.328",
                   fill: "url(#SVGID_600_)"
@@ -45185,7 +45191,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "197.9 155.84 193.43 128.37 172.37 147.28",
                   fill: "url(#SVGID_601_)"
@@ -45221,7 +45227,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "155.84 197.9 128.37 193.42 147.28 172.37",
                   fill: "url(#SVGID_602_)"
@@ -45257,7 +45263,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "89.195 297.64 74.547 273.98 62.328 299.51",
                   fill: "url(#SVGID_603_)"
@@ -45293,7 +45299,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "66.429 352.6 39.34 358.98 48.752 332.29",
                   fill: "url(#SVGID_604_)"
@@ -45329,7 +45335,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "43.027 470.25 20.439 454 18.92 482.26",
                   fill: "url(#SVGID_605_)"
@@ -45365,7 +45371,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "43.027 529.75 20.439 546 18.921 517.74",
                   fill: "url(#SVGID_606_)"
@@ -45401,7 +45407,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "66.43 647.39 39.341 641.02 48.752 667.71",
                   fill: "url(#SVGID_607_)"
@@ -45437,7 +45443,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "89.196 702.36 74.548 726.02 62.33 700.49",
                   fill: "url(#SVGID_608_)"
@@ -45473,7 +45479,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "155.84 802.09 128.37 806.57 147.28 827.63",
                   fill: "url(#SVGID_609_)"
@@ -45509,7 +45515,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "197.91 844.16 193.43 871.63 172.37 852.72",
                   fill: "url(#SVGID_610_)"
@@ -45545,7 +45551,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "297.64 910.8 273.98 925.45 299.51 937.67",
                   fill: "url(#SVGID_611_)"
@@ -45581,7 +45587,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "352.61 933.57 358.98 960.66 332.29 951.25",
                   fill: "url(#SVGID_612_)"
@@ -45617,7 +45623,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "470.26 956.97 454 979.56 482.26 981.08",
                   fill: "url(#SVGID_613_)"
@@ -45653,7 +45659,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "529.75 956.97 546 979.56 517.74 981.08",
                   fill: "url(#SVGID_614_)"
@@ -45689,7 +45695,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "647.4 933.57 641.02 960.66 667.71 951.25",
                   fill: "url(#SVGID_615_)"
@@ -45725,7 +45731,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "702.36 910.8 726.02 925.45 700.49 937.67",
                   fill: "url(#SVGID_616_)"
@@ -45761,7 +45767,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "802.1 844.16 806.58 871.63 827.63 852.72",
                   fill: "url(#SVGID_617_)"
@@ -45797,7 +45803,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "844.16 802.09 871.63 806.57 852.72 827.63",
                   fill: "url(#SVGID_618_)"
@@ -45833,7 +45839,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "910.8 702.36 925.45 726.02 937.67 700.49",
                   fill: "url(#SVGID_619_)"
@@ -45869,7 +45875,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "933.57 647.39 960.66 641.02 951.25 667.71",
                   fill: "url(#SVGID_620_)"
@@ -45905,7 +45911,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "956.97 529.74 979.56 546 981.08 517.74",
                   fill: "url(#SVGID_621_)"
@@ -45941,7 +45947,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "956.97 470.25 979.56 454 981.08 482.26",
                   fill: "url(#SVGID_622_)"
@@ -45977,7 +45983,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "933.57 352.6 960.66 358.98 951.25 332.29",
                   fill: "url(#SVGID_623_)"
@@ -46013,7 +46019,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "910.8 297.64 925.45 273.98 937.67 299.51",
                   fill: "url(#SVGID_624_)"
@@ -46049,7 +46055,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "844.16 197.9 871.63 193.42 852.72 172.37",
                   fill: "url(#SVGID_625_)"
@@ -46085,7 +46091,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "802.09 155.84 806.57 128.37 827.63 147.28",
                   fill: "url(#SVGID_626_)"
@@ -46121,7 +46127,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "702.36 89.196 726.02 74.544 700.49 62.329",
                   fill: "url(#SVGID_627_)"
@@ -46157,7 +46163,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "647.39 66.429 641.02 39.34 667.71 48.751",
                   fill: "url(#SVGID_628_)"
@@ -46193,7 +46199,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m511.63 425.41h-23.805l-20.621-111.31c0 17.962 14.562 32.522 32.523 32.522s32.522-14.561 32.522-32.522l-20.61 111.31z",
                   fill: "url(#SVGID_629_)"
@@ -46229,7 +46235,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m482.2 426.64l-21.993 9.109-61.646-94.943c6.874 16.595 25.899 24.474 42.494 17.601 16.595-6.874 24.475-25.898 17.601-42.493l23.55 110.72z",
                   fill: "url(#SVGID_630_)"
@@ -46265,7 +46271,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m455.48 439.03l-16.833 16.833-93.287-64.125c12.7 12.701 33.293 12.7 45.994-0.001s12.7-33.292 0-45.993l64.13 93.28z",
                   fill: "url(#SVGID_631_)"
@@ -46301,7 +46307,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m435.54 460.71l-9.11 21.993-110.73-23.544c16.595 6.874 35.619-1.008 42.493-17.603s-1.006-35.619-17.602-42.492l94.95 61.64z",
                   fill: "url(#SVGID_632_)"
@@ -46337,7 +46343,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m425.41 488.37v23.806l-111.31 20.62c17.962 0.001 32.522-14.562 32.522-32.523 0-17.963-14.562-32.522-32.523-32.522l111.31 20.61z",
                   fill: "url(#SVGID_633_)"
@@ -46373,7 +46379,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m426.64 517.8l9.109 21.993-94.943 61.646c16.595-6.874 24.474-25.899 17.601-42.494-6.874-16.595-25.897-24.475-42.492-17.601l110.72-23.55z",
                   fill: "url(#SVGID_634_)"
@@ -46409,7 +46415,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m439.03 544.52l16.834 16.833-64.126 93.287c12.701-12.7 12.7-33.293-0.001-45.994s-33.293-12.699-45.994 0.001l93.29-64.13z",
                   fill: "url(#SVGID_635_)"
@@ -46445,7 +46451,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m460.71 564.46l21.993 9.11-23.544 110.73c6.873-16.595-1.009-35.619-17.603-42.493-16.595-6.874-35.618 1.007-42.492 17.601l61.64-94.95z",
                   fill: "url(#SVGID_636_)"
@@ -46481,7 +46487,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m488.37 574.59l23.806-0.001 20.62 111.31c0-17.961-14.561-32.521-32.523-32.522-17.963 0.001-32.521 14.562-32.521 32.524l20.61-111.31z",
                   fill: "url(#SVGID_637_)"
@@ -46517,7 +46523,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m517.79 573.36l21.994-9.109 61.646 94.943c-6.875-16.594-25.9-24.473-42.494-17.601-16.596 6.874-24.475 25.897-17.602 42.491l-23.55-110.72z",
                   fill: "url(#SVGID_638_)"
@@ -46553,7 +46559,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m544.52 560.97l16.833-16.835 93.287 64.126c-12.7-12.7-33.292-12.7-45.995 0-12.7 12.703-12.698 33.294 0.003 45.995l-64.12-93.29z",
                   fill: "url(#SVGID_639_)"
@@ -46589,7 +46595,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m564.46 539.29l9.111-21.993 110.73 23.544c-16.595-6.872-35.619 1.01-42.493 17.603-6.874 16.596 1.006 35.618 17.6 42.492l-94.95-61.64z",
                   fill: "url(#SVGID_640_)"
@@ -46625,7 +46631,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m574.59 511.64l-0.001-23.807 111.31-20.62c-17.961 0-32.521 14.561-32.523 32.523 0.002 17.963 14.563 32.521 32.525 32.521l-111.31-20.61z",
                   fill: "url(#SVGID_641_)"
@@ -46661,7 +46667,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m573.36 482.21l-9.108-21.995 94.942-61.647c-16.593 6.875-24.472 25.901-17.6 42.495 6.874 16.596 25.896 24.474 42.491 17.602l-110.72 23.55z",
                   fill: "url(#SVGID_642_)"
@@ -46697,7 +46703,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m560.97 455.48l-16.835-16.833 64.126-93.287c-12.7 12.7-12.7 33.292 0 45.995 12.703 12.7 33.294 12.698 45.995-0.003l-93.29 64.12z",
                   fill: "url(#SVGID_643_)"
@@ -46733,7 +46739,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m539.29 435.54l-21.993-9.112 23.543-110.73c-6.871 16.595 1.011 35.619 17.604 42.493 16.596 6.874 35.617-1.006 42.492-17.6l-61.64 94.95z",
                   fill: "url(#SVGID_644_)"
@@ -46839,7 +46845,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   d: "m504.74 469.18l3.311-17.257c-2.366 2.17-4.887 3.454-8.046 3.454s-5.679-1.286-8.045-3.455l3.312 17.257c1.85-0.52 8.2-0.66 9.47 0z",
                   fill: "url(#SVGID_647_)"
                 }
@@ -46910,7 +46916,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   d: "m492.58 469.71l-3.545-17.21c-1.356 2.911-3.193 5.062-6.112 6.271s-5.739 0.985-8.755-0.112l9.663 14.676c1.51-1.2 7.32-3.75 8.74-3.63z",
                   fill: "url(#SVGID_649_)"
                 }
@@ -46981,7 +46987,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   d: "m481.55 474.86l-9.861-14.544c-0.139 3.208-1.013 5.898-3.247 8.132s-4.925 3.106-8.132 3.246l14.545 9.861c0.94-1.69 5.34-6.27 6.69-6.7z",
                   fill: "url(#SVGID_651_)"
                 }
@@ -47052,7 +47058,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   d: "m473.33 483.83l-14.676-9.663c1.099 3.018 1.321 5.837 0.111 8.756-1.208 2.919-3.361 4.755-6.27 6.111l17.21 3.545c0.24-1.92 2.54-7.83 3.63-8.75z",
                   fill: "url(#SVGID_653_)"
                 }
@@ -47123,7 +47129,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   d: "m469.18 495.26l-17.256-3.311c2.17 2.366 3.454 4.886 3.453 8.046 0 3.16-1.285 5.679-3.454 8.045l17.257-3.312c-0.52-1.85-0.66-8.2 0-9.47z",
                   fill: "url(#SVGID_655_)"
                 }
@@ -47194,7 +47200,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   d: "m469.71 507.42l-17.211 3.543c2.912 1.357 5.062 3.194 6.271 6.113 1.21 2.919 0.985 5.739-0.112 8.755l14.676-9.663c-1.2-1.51-3.75-7.32-3.63-8.74z",
                   fill: "url(#SVGID_657_)"
                 }
@@ -47265,7 +47271,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   d: "m474.85 518.45l-14.542 9.86c3.207 0.139 5.897 1.013 8.132 3.247 2.233 2.234 3.106 4.925 3.246 8.132l9.86-14.544c-1.68-0.95-6.26-5.35-6.7-6.7z",
                   fill: "url(#SVGID_659_)"
                 }
@@ -47336,7 +47342,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   d: "m483.83 526.67l-9.664 14.676c3.019-1.1 5.838-1.32 8.757-0.111s4.755 3.361 6.11 6.27l3.545-17.21c-1.92-0.24-7.83-2.54-8.75-3.63z",
                   fill: "url(#SVGID_661_)"
                 }
@@ -47407,7 +47413,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   d: "m495.26 530.83l-3.311 17.255c2.365-2.169 4.887-3.454 8.047-3.454 3.158 0 5.679 1.286 8.045 3.455l-3.312-17.257c-1.86 0.52-8.2 0.66-9.47 0.01z",
                   fill: "url(#SVGID_663_)"
                 }
@@ -47476,7 +47482,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   d: "m507.42 530.29l3.544 17.211c1.356-2.911 3.194-5.062 6.113-6.271s5.739-0.985 8.754 0.112l-9.663-14.675c-1.51 1.2-7.32 3.75-8.74 3.63z",
                   fill: "url(#SVGID_665_)"
                 }
@@ -47545,7 +47551,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   d: "m518.45 525.15l9.861 14.541c0.139-3.205 1.013-5.897 3.247-8.132 2.233-2.233 4.925-3.106 8.132-3.246l-14.545-9.86c-0.95 1.68-5.34 6.26-6.69 6.7z",
                   fill: "url(#SVGID_667_)"
                 }
@@ -47614,7 +47620,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   d: "m526.66 516.17l14.677 9.663c-1.1-3.018-1.32-5.838-0.111-8.757s3.361-4.755 6.27-6.11l-17.21-3.544c-0.23 1.92-2.53 7.83-3.63 8.75z",
                   fill: "url(#SVGID_669_)"
                 }
@@ -47685,7 +47691,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   d: "m530.83 504.74l17.255 3.309c-2.168-2.363-3.454-4.886-3.454-8.046 0-3.158 1.286-5.679 3.454-8.045l-17.256 3.312c0.52 1.86 0.66 8.2 0.01 9.47z",
                   fill: "url(#SVGID_671_)"
                 }
@@ -47754,7 +47760,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   d: "m530.29 492.58l17.211-3.545c-2.911-1.356-5.062-3.194-6.271-6.113s-0.985-5.739 0.112-8.754l-14.675 9.663c1.2 1.51 3.75 7.32 3.63 8.74z",
                   fill: "url(#SVGID_673_)"
                 }
@@ -47825,7 +47831,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   d: "m525.15 481.55l14.54-9.862c-3.203-0.138-5.896-1.012-8.131-3.247-2.233-2.233-3.106-4.924-3.247-8.131l-9.86 14.544c1.68 0.96 6.26 5.35 6.7 6.7z",
                   fill: "url(#SVGID_675_)"
                 }
@@ -47894,7 +47900,7 @@ function Page2() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   d: "m516.17 473.34l9.663-14.677c-3.018 1.1-5.838 1.32-8.757 0.111s-4.755-3.361-6.11-6.27l-3.544 17.21c1.92 0.23 7.83 2.53 8.75 3.63z",
                   fill: "url(#SVGID_677_)"
                 }
@@ -48416,7 +48422,7 @@ function Page3() {
       /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "195.1614716", r: "163" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "-195.1614716", r: "163" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { x: "-232", y: "-232", width: "464", height: "464" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { fill: "#ffffff", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { fill: "currentColor", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "-195.1614716", r: "157" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "195.1614716", r: "157" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "195.1614716", r: "157" }),
@@ -48428,7 +48434,7 @@ function Page3() {
       /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "195.1614716", r: "144" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "-195.1614716", r: "144" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { x: "-213", y: "-213", width: "426", height: "426" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { fill: "#ffffff", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { fill: "currentColor", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "-195.1614716", r: "138" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "195.1614716", r: "138" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "195.1614716", r: "138" }),
@@ -48460,6 +48466,7 @@ function Page3() {
             x: "0px",
             width: 140,
             height: 140,
+            style: { color: "var(--fg)" },
             children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "circle",
@@ -48467,7 +48474,7 @@ function Page3() {
                   cy: "500",
                   cx: "500",
                   r: "488.21",
-                  fill: "#231304"
+                  fill: "currentColor"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -48482,7 +48489,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -48661,7 +48668,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -48844,7 +48851,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -49027,7 +49034,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -49210,7 +49217,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -49393,7 +49400,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -49576,7 +49583,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -49759,7 +49766,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -49942,7 +49949,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -50125,7 +50132,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -50308,7 +50315,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -50491,7 +50498,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -50674,7 +50681,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -50855,7 +50862,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -51036,7 +51043,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -51217,7 +51224,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -51400,7 +51407,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -51581,7 +51588,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -51764,7 +51771,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -51945,7 +51952,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -52126,7 +52133,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -52307,7 +52314,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -52490,7 +52497,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -52671,7 +52678,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -52852,7 +52859,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -53033,7 +53040,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -53214,7 +53221,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -53395,7 +53402,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -53576,7 +53583,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -53757,7 +53764,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -53938,7 +53945,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -54119,7 +54126,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -54294,7 +54301,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "radialGradient",
@@ -54503,7 +54510,7 @@ function Page3() {
                 {
                   r: "27.555",
                   cy: "164.89",
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   cx: "533.06",
                   "stroke-width": "2.5",
                   fill: "url(#SVGID_133_)"
@@ -54539,7 +54546,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m494.06 159.44c3.003 14.919-6.652 29.451-21.569 32.454-14.921 3.008-29.449-6.65-32.454-21.568-3.005-14.919 6.65-29.45 21.569-32.456 14.92-3 29.45 6.66 32.45 21.58z",
                   fill: "url(#SVGID_134_)"
@@ -54575,7 +54582,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m684.27 213.53c-5.793 14.075-21.895 20.792-35.964 15.002-14.079-5.789-20.792-21.892-15.003-35.964 5.79-14.075 21.893-20.792 35.966-15.004 14.07 5.79 20.78 21.89 14.99 35.96z",
                   fill: "url(#SVGID_135_)"
@@ -54611,7 +54618,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m624.85 183.09c-2.937 14.934-17.416 24.664-32.349 21.729-14.936-2.93-24.661-17.414-21.729-32.345 2.933-14.933 17.414-24.663 32.347-21.731 14.93 2.92 24.66 17.41 21.73 32.34z",
                   fill: "url(#SVGID_136_)"
@@ -56282,7 +56289,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "5",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -56471,7 +56478,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "5",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -56703,7 +56710,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m305.86 220.13c10.785 10.736 10.83 28.184 0.096 38.968-10.736 10.79-28.182 10.831-38.968 0.097-10.786-10.736-10.832-28.181-0.098-38.969 10.73-10.79 28.18-10.83 38.97-0.1z",
                   fill: "url(#SVGID_189_)"
@@ -56739,7 +56746,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m254.99 263.38c12.674 8.426 16.122 25.529 7.697 38.2-8.424 12.678-25.526 16.122-38.199 7.698-12.675-8.424-16.121-25.526-7.698-38.202 8.42-12.68 25.53-16.12 38.2-7.7z",
                   fill: "url(#SVGID_190_)"
@@ -56775,7 +56782,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m427.74 167.14c5.856 14.048-0.78 30.184-14.822 36.038-14.049 5.862-30.182-0.777-36.039-14.821-5.858-14.047 0.778-30.183 14.822-36.041 14.05-5.86 30.18 0.77 36.04 14.82z",
                   fill: "url(#SVGID_191_)"
@@ -56811,7 +56818,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m364.19 187.63c8.483 12.636 5.125 29.755-7.51 38.238-12.633 8.489-29.751 5.125-38.235-7.507-8.485-12.633-5.126-29.753 7.506-38.239 12.63-8.48 29.75-5.12 38.24 7.51z",
                   fill: "url(#SVGID_192_)"
@@ -57265,7 +57272,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "5",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -57456,7 +57463,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "5",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -57688,7 +57695,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m164.82 439.38c15.217-0.034 27.586 12.271 27.621 27.487 0.039 15.221-12.269 27.586-27.485 27.623-15.218 0.036-27.586-12.268-27.624-27.486-0.04-15.22 12.26-27.58 27.48-27.62z",
                   fill: "url(#SVGID_245_)"
@@ -57724,7 +57731,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m159.44 505.94c14.919-3.003 29.451 6.652 32.453 21.569 3.008 14.921-6.65 29.45-21.568 32.454-14.918 3.006-29.449-6.65-32.455-21.569s6.66-29.45 21.58-32.45z",
                   fill: "url(#SVGID_246_)"
@@ -57760,7 +57767,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m213.53 315.73c14.074 5.792 20.791 21.895 15.002 35.963-5.789 14.08-21.892 20.792-35.964 15.003-14.075-5.79-20.792-21.893-15.004-35.966 5.79-14.07 21.89-20.78 35.96-14.99z",
                   fill: "url(#SVGID_247_)"
@@ -57796,7 +57803,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m183.09 375.15c14.934 2.937 24.664 17.416 21.729 32.349-2.93 14.936-17.413 24.661-32.345 21.729-14.933-2.933-24.663-17.414-21.731-32.347 2.92-14.93 17.41-24.66 32.34-21.73z",
                   fill: "url(#SVGID_248_)"
@@ -58250,7 +58257,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "5",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -58441,7 +58448,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "5",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -58673,7 +58680,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m220.13 694.14c10.735-10.783 28.184-10.828 38.967-0.095 10.791 10.735 10.831 28.182 0.098 38.968-10.736 10.785-28.181 10.832-38.969 0.098-10.79-10.73-10.83-28.18-0.1-38.97z",
                   fill: "url(#SVGID_301_)"
@@ -58709,7 +58716,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m263.38 745.01c8.426-12.672 25.529-16.121 38.199-7.695 12.678 8.424 16.123 25.526 7.698 38.199-8.423 12.674-25.526 16.121-38.201 7.697s-16.12-25.54-7.7-38.21z",
                   fill: "url(#SVGID_302_)"
@@ -58745,7 +58752,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m167.14 572.26c14.048-5.856 30.184 0.779 36.037 14.822 5.863 14.049-0.776 30.182-14.82 36.039-14.047 5.858-30.183-0.778-36.041-14.822-5.86-14.05 0.77-30.18 14.82-36.04z",
                   fill: "url(#SVGID_303_)"
@@ -58781,7 +58788,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m187.63 635.81c12.636-8.483 29.755-5.125 38.238 7.51 8.489 12.633 5.125 29.751-7.507 38.235-12.633 8.485-29.753 5.126-38.239-7.506-8.48-12.63-5.12-29.75 7.51-38.24z",
                   fill: "url(#SVGID_304_)"
@@ -59233,7 +59240,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "5",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -59424,7 +59431,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "5",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -59656,7 +59663,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m439.38 835.18c-0.033-15.215 12.272-27.585 27.486-27.621 15.223-0.039 27.587 12.27 27.624 27.486 0.034 15.218-12.268 27.586-27.486 27.624-15.22 0.03-27.58-12.27-27.62-27.49z",
                   fill: "url(#SVGID_357_)"
@@ -59692,7 +59699,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m505.94 840.56c-3.002-14.919 6.653-29.452 21.57-32.453 14.921-3.008 29.45 6.649 32.454 21.567 3.006 14.918-6.65 29.449-21.569 32.455-14.92 3-29.45-6.66-32.45-21.58z",
                   fill: "url(#SVGID_358_)"
@@ -59728,7 +59735,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m315.73 786.47c5.792-14.074 21.895-20.792 35.963-15.001 14.08 5.788 20.793 21.891 15.004 35.963-5.79 14.075-21.893 20.792-35.966 15.004-14.07-5.79-20.78-21.89-14.99-35.96z",
                   fill: "url(#SVGID_359_)"
@@ -59764,7 +59771,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m375.15 816.91c2.937-14.935 17.416-24.664 32.349-21.729 14.936 2.93 24.661 17.413 21.729 32.345-2.933 14.933-17.414 24.663-32.347 21.731-14.93-2.92-24.66-17.41-21.73-32.34z",
                   fill: "url(#SVGID_360_)"
@@ -60216,7 +60223,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "5",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -60407,7 +60414,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "5",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -60639,7 +60646,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m694.14 779.87c-10.781-10.734-10.827-28.183-0.095-38.966 10.736-10.792 28.183-10.831 38.969-0.098 10.784 10.737 10.832 28.181 0.097 38.97-10.73 10.79-28.18 10.83-38.97 0.1z",
                   fill: "url(#SVGID_413_)"
@@ -60675,7 +60682,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m745.01 736.62c-12.672-8.427-16.121-25.53-7.695-38.2 8.424-12.678 25.526-16.123 38.199-7.698 12.674 8.423 16.121 25.526 7.697 38.201-8.43 12.68-25.54 16.12-38.21 7.7z",
                   fill: "url(#SVGID_414_)"
@@ -60711,7 +60718,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m572.26 832.86c-5.856-14.048 0.779-30.184 14.822-36.037 14.049-5.863 30.182 0.776 36.039 14.82 5.858 14.047-0.778 30.183-14.822 36.041-14.05 5.86-30.18-0.77-36.04-14.82z",
                   fill: "url(#SVGID_415_)"
@@ -60747,7 +60754,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m635.81 812.37c-8.483-12.637-5.125-29.755 7.51-38.238 12.633-8.489 29.751-5.125 38.235 7.507 8.485 12.633 5.126 29.753-7.506 38.239-12.63 8.48-29.75 5.12-38.24-7.51z",
                   fill: "url(#SVGID_416_)"
@@ -61170,7 +61177,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "5",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -61361,7 +61368,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "5",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -61593,7 +61600,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m835.18 560.62c-15.214 0.033-27.584-12.272-27.62-27.486-0.039-15.223 12.27-27.587 27.486-27.624 15.218-0.033 27.586 12.268 27.624 27.487 0.03 15.22-12.27 27.58-27.49 27.62z",
                   fill: "url(#SVGID_469_)"
@@ -61629,7 +61636,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m840.56 494.06c-14.919 3.002-29.452-6.653-32.453-21.57-3.008-14.921 6.649-29.45 21.567-32.454 14.918-3.006 29.449 6.65 32.455 21.569 3 14.92-6.66 29.45-21.58 32.45z",
                   fill: "url(#SVGID_470_)"
@@ -61665,7 +61672,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m786.47 684.27c-14.074-5.792-20.792-21.895-15.001-35.963 5.788-14.08 21.891-20.793 35.963-15.004 14.075 5.79 20.792 21.893 15.004 35.966-5.79 14.07-21.89 20.78-35.96 14.99z",
                   fill: "url(#SVGID_471_)"
@@ -61701,7 +61708,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m816.91 624.85c-14.935-2.937-24.664-17.416-21.729-32.349 2.93-14.936 17.413-24.661 32.345-21.729 14.933 2.933 24.663 17.414 21.731 32.347-2.92 14.93-17.41 24.66-32.34 21.73z",
                   fill: "url(#SVGID_472_)"
@@ -62151,7 +62158,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "5",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -62342,7 +62349,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "5",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -62574,7 +62581,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m779.87 305.86c-10.734 10.781-28.183 10.827-38.966 0.095-10.792-10.736-10.831-28.183-0.098-38.969 10.737-10.784 28.181-10.832 38.97-0.097 10.79 10.73 10.83 28.18 0.1 38.97z",
                   fill: "url(#SVGID_525_)"
@@ -62610,7 +62617,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m736.62 254.99c-8.427 12.672-25.53 16.121-38.2 7.695-12.678-8.424-16.123-25.526-7.698-38.199 8.423-12.674 25.526-16.121 38.201-7.697 12.68 8.43 16.12 25.54 7.7 38.21z",
                   fill: "url(#SVGID_526_)"
@@ -62646,7 +62653,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m832.86 427.74c-14.048 5.856-30.184-0.78-36.037-14.822-5.863-14.049 0.776-30.182 14.82-36.039 14.047-5.858 30.183 0.778 36.041 14.822 5.86 14.05-0.77 30.18-14.82 36.04z",
                   fill: "url(#SVGID_527_)"
@@ -62682,7 +62689,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m812.37 364.19c-12.637 8.483-29.755 5.125-38.238-7.51-8.489-12.633-5.125-29.751 7.507-38.235 12.633-8.485 29.753-5.126 38.239 7.506 8.48 12.63 5.12 29.75-7.51 38.24z",
                   fill: "url(#SVGID_528_)"
@@ -63537,7 +63544,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "5",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -63728,7 +63735,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "5",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -63933,7 +63940,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5814",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -64013,7 +64020,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5814",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -64094,7 +64101,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5814",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -64175,7 +64182,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5814",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -64256,7 +64263,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5814",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -64337,7 +64344,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5814",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -64416,7 +64423,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5814",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -64495,7 +64502,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "g",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5814",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -64600,7 +64607,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "529.75 43.026 546 20.438 517.74 18.919",
                   fill: "url(#SVGID_597_)"
@@ -64636,7 +64643,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "470.25 43.026 454 20.438 482.26 18.919",
                   fill: "url(#SVGID_598_)"
@@ -64672,7 +64679,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "352.6 66.428 358.98 39.339 332.29 48.751",
                   fill: "url(#SVGID_599_)"
@@ -64708,7 +64715,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "297.64 89.194 273.98 74.546 299.51 62.328",
                   fill: "url(#SVGID_600_)"
@@ -64744,7 +64751,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "197.9 155.84 193.43 128.37 172.37 147.28",
                   fill: "url(#SVGID_601_)"
@@ -64780,7 +64787,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "155.84 197.9 128.37 193.42 147.28 172.37",
                   fill: "url(#SVGID_602_)"
@@ -64816,7 +64823,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "89.195 297.64 74.547 273.98 62.328 299.51",
                   fill: "url(#SVGID_603_)"
@@ -64852,7 +64859,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "66.429 352.6 39.34 358.98 48.752 332.29",
                   fill: "url(#SVGID_604_)"
@@ -64888,7 +64895,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "43.027 470.25 20.439 454 18.92 482.26",
                   fill: "url(#SVGID_605_)"
@@ -64924,7 +64931,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "43.027 529.75 20.439 546 18.921 517.74",
                   fill: "url(#SVGID_606_)"
@@ -64960,7 +64967,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "66.43 647.39 39.341 641.02 48.752 667.71",
                   fill: "url(#SVGID_607_)"
@@ -64996,7 +65003,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "89.196 702.36 74.548 726.02 62.33 700.49",
                   fill: "url(#SVGID_608_)"
@@ -65032,7 +65039,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "155.84 802.09 128.37 806.57 147.28 827.63",
                   fill: "url(#SVGID_609_)"
@@ -65068,7 +65075,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "197.91 844.16 193.43 871.63 172.37 852.72",
                   fill: "url(#SVGID_610_)"
@@ -65104,7 +65111,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "297.64 910.8 273.98 925.45 299.51 937.67",
                   fill: "url(#SVGID_611_)"
@@ -65140,7 +65147,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "352.61 933.57 358.98 960.66 332.29 951.25",
                   fill: "url(#SVGID_612_)"
@@ -65176,7 +65183,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "470.26 956.97 454 979.56 482.26 981.08",
                   fill: "url(#SVGID_613_)"
@@ -65212,7 +65219,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "529.75 956.97 546 979.56 517.74 981.08",
                   fill: "url(#SVGID_614_)"
@@ -65248,7 +65255,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "647.4 933.57 641.02 960.66 667.71 951.25",
                   fill: "url(#SVGID_615_)"
@@ -65284,7 +65291,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "702.36 910.8 726.02 925.45 700.49 937.67",
                   fill: "url(#SVGID_616_)"
@@ -65320,7 +65327,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "802.1 844.16 806.58 871.63 827.63 852.72",
                   fill: "url(#SVGID_617_)"
@@ -65356,7 +65363,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "844.16 802.09 871.63 806.57 852.72 827.63",
                   fill: "url(#SVGID_618_)"
@@ -65392,7 +65399,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "910.8 702.36 925.45 726.02 937.67 700.49",
                   fill: "url(#SVGID_619_)"
@@ -65428,7 +65435,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "933.57 647.39 960.66 641.02 951.25 667.71",
                   fill: "url(#SVGID_620_)"
@@ -65464,7 +65471,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "956.97 529.74 979.56 546 981.08 517.74",
                   fill: "url(#SVGID_621_)"
@@ -65500,7 +65507,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "956.97 470.25 979.56 454 981.08 482.26",
                   fill: "url(#SVGID_622_)"
@@ -65536,7 +65543,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "933.57 352.6 960.66 358.98 951.25 332.29",
                   fill: "url(#SVGID_623_)"
@@ -65572,7 +65579,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "910.8 297.64 925.45 273.98 937.67 299.51",
                   fill: "url(#SVGID_624_)"
@@ -65608,7 +65615,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "844.16 197.9 871.63 193.42 852.72 172.37",
                   fill: "url(#SVGID_625_)"
@@ -65644,7 +65651,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "802.09 155.84 806.57 128.37 827.63 147.28",
                   fill: "url(#SVGID_626_)"
@@ -65680,7 +65687,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "702.36 89.196 726.02 74.544 700.49 62.329",
                   fill: "url(#SVGID_627_)"
@@ -65716,7 +65723,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "polygon",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.875",
                   points: "647.39 66.429 641.02 39.34 667.71 48.751",
                   fill: "url(#SVGID_628_)"
@@ -65752,7 +65759,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m511.63 425.41h-23.805l-20.621-111.31c0 17.962 14.562 32.522 32.523 32.522s32.522-14.561 32.522-32.522l-20.61 111.31z",
                   fill: "url(#SVGID_629_)"
@@ -65788,7 +65795,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m482.2 426.64l-21.993 9.109-61.646-94.943c6.874 16.595 25.899 24.474 42.494 17.601 16.595-6.874 24.475-25.898 17.601-42.493l23.55 110.72z",
                   fill: "url(#SVGID_630_)"
@@ -65824,7 +65831,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m455.48 439.03l-16.833 16.833-93.287-64.125c12.7 12.701 33.293 12.7 45.994-0.001s12.7-33.292 0-45.993l64.13 93.28z",
                   fill: "url(#SVGID_631_)"
@@ -65860,7 +65867,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m435.54 460.71l-9.11 21.993-110.73-23.544c16.595 6.874 35.619-1.008 42.493-17.603s-1.006-35.619-17.602-42.492l94.95 61.64z",
                   fill: "url(#SVGID_632_)"
@@ -65896,7 +65903,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m425.41 488.37v23.806l-111.31 20.62c17.962 0.001 32.522-14.562 32.522-32.523 0-17.963-14.562-32.522-32.523-32.522l111.31 20.61z",
                   fill: "url(#SVGID_633_)"
@@ -65932,7 +65939,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m426.64 517.8l9.109 21.993-94.943 61.646c16.595-6.874 24.474-25.899 17.601-42.494-6.874-16.595-25.897-24.475-42.492-17.601l110.72-23.55z",
                   fill: "url(#SVGID_634_)"
@@ -65968,7 +65975,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m439.03 544.52l16.834 16.833-64.126 93.287c12.701-12.7 12.7-33.293-0.001-45.994s-33.293-12.699-45.994 0.001l93.29-64.13z",
                   fill: "url(#SVGID_635_)"
@@ -66004,7 +66011,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m460.71 564.46l21.993 9.11-23.544 110.73c6.873-16.595-1.009-35.619-17.603-42.493-16.595-6.874-35.618 1.007-42.492 17.601l61.64-94.95z",
                   fill: "url(#SVGID_636_)"
@@ -66040,7 +66047,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m488.37 574.59l23.806-0.001 20.62 111.31c0-17.961-14.561-32.521-32.523-32.522-17.963 0.001-32.521 14.562-32.521 32.524l20.61-111.31z",
                   fill: "url(#SVGID_637_)"
@@ -66076,7 +66083,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m517.79 573.36l21.994-9.109 61.646 94.943c-6.875-16.594-25.9-24.473-42.494-17.601-16.596 6.874-24.475 25.897-17.602 42.491l-23.55-110.72z",
                   fill: "url(#SVGID_638_)"
@@ -66112,7 +66119,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m544.52 560.97l16.833-16.835 93.287 64.126c-12.7-12.7-33.292-12.7-45.995 0-12.7 12.703-12.698 33.294 0.003 45.995l-64.12-93.29z",
                   fill: "url(#SVGID_639_)"
@@ -66148,7 +66155,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m564.46 539.29l9.111-21.993 110.73 23.544c-16.595-6.872-35.619 1.01-42.493 17.603-6.874 16.596 1.006 35.618 17.6 42.492l-94.95-61.64z",
                   fill: "url(#SVGID_640_)"
@@ -66184,7 +66191,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m574.59 511.64l-0.001-23.807 111.31-20.62c-17.961 0-32.521 14.561-32.523 32.523 0.002 17.963 14.563 32.521 32.525 32.521l-111.31-20.61z",
                   fill: "url(#SVGID_641_)"
@@ -66220,7 +66227,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m573.36 482.21l-9.108-21.995 94.942-61.647c-16.593 6.875-24.472 25.901-17.6 42.495 6.874 16.596 25.896 24.474 42.491 17.602l-110.72 23.55z",
                   fill: "url(#SVGID_642_)"
@@ -66256,7 +66263,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m560.97 455.48l-16.835-16.833 64.126-93.287c-12.7 12.7-12.7 33.292 0 45.995 12.703 12.7 33.294 12.698 45.995-0.003l-93.29 64.12z",
                   fill: "url(#SVGID_643_)"
@@ -66292,7 +66299,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   "stroke-width": "2.5",
                   d: "m539.29 435.54l-21.993-9.112 23.543-110.73c-6.871 16.595 1.011 35.619 17.604 42.493 16.596 6.874 35.617-1.006 42.492-17.6l-61.64 94.95z",
                   fill: "url(#SVGID_644_)"
@@ -66398,7 +66405,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   d: "m504.74 469.18l3.311-17.257c-2.366 2.17-4.887 3.454-8.046 3.454s-5.679-1.286-8.045-3.455l3.312 17.257c1.85-0.52 8.2-0.66 9.47 0z",
                   fill: "url(#SVGID_647_)"
                 }
@@ -66469,7 +66476,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   d: "m492.58 469.71l-3.545-17.21c-1.356 2.911-3.193 5.062-6.112 6.271s-5.739 0.985-8.755-0.112l9.663 14.676c1.51-1.2 7.32-3.75 8.74-3.63z",
                   fill: "url(#SVGID_649_)"
                 }
@@ -66540,7 +66547,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   d: "m481.55 474.86l-9.861-14.544c-0.139 3.208-1.013 5.898-3.247 8.132s-4.925 3.106-8.132 3.246l14.545 9.861c0.94-1.69 5.34-6.27 6.69-6.7z",
                   fill: "url(#SVGID_651_)"
                 }
@@ -66611,7 +66618,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   d: "m473.33 483.83l-14.676-9.663c1.099 3.018 1.321 5.837 0.111 8.756-1.208 2.919-3.361 4.755-6.27 6.111l17.21 3.545c0.24-1.92 2.54-7.83 3.63-8.75z",
                   fill: "url(#SVGID_653_)"
                 }
@@ -66682,7 +66689,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   d: "m469.18 495.26l-17.256-3.311c2.17 2.366 3.454 4.886 3.453 8.046 0 3.16-1.285 5.679-3.454 8.045l17.257-3.312c-0.52-1.85-0.66-8.2 0-9.47z",
                   fill: "url(#SVGID_655_)"
                 }
@@ -66753,7 +66760,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   d: "m469.71 507.42l-17.211 3.543c2.912 1.357 5.062 3.194 6.271 6.113 1.21 2.919 0.985 5.739-0.112 8.755l14.676-9.663c-1.2-1.51-3.75-7.32-3.63-8.74z",
                   fill: "url(#SVGID_657_)"
                 }
@@ -66824,7 +66831,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   d: "m474.85 518.45l-14.542 9.86c3.207 0.139 5.897 1.013 8.132 3.247 2.233 2.234 3.106 4.925 3.246 8.132l9.86-14.544c-1.68-0.95-6.26-5.35-6.7-6.7z",
                   fill: "url(#SVGID_659_)"
                 }
@@ -66895,7 +66902,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   d: "m483.83 526.67l-9.664 14.676c3.019-1.1 5.838-1.32 8.757-0.111s4.755 3.361 6.11 6.27l3.545-17.21c-1.92-0.24-7.83-2.54-8.75-3.63z",
                   fill: "url(#SVGID_661_)"
                 }
@@ -66966,7 +66973,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   d: "m495.26 530.83l-3.311 17.255c2.365-2.169 4.887-3.454 8.047-3.454 3.158 0 5.679 1.286 8.045 3.455l-3.312-17.257c-1.86 0.52-8.2 0.66-9.47 0.01z",
                   fill: "url(#SVGID_663_)"
                 }
@@ -67035,7 +67042,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   d: "m507.42 530.29l3.544 17.211c1.356-2.911 3.194-5.062 6.113-6.271s5.739-0.985 8.754 0.112l-9.663-14.675c-1.51 1.2-7.32 3.75-8.74 3.63z",
                   fill: "url(#SVGID_665_)"
                 }
@@ -67104,7 +67111,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   d: "m518.45 525.15l9.861 14.541c0.139-3.205 1.013-5.897 3.247-8.132 2.233-2.233 4.925-3.106 8.132-3.246l-14.545-9.86c-0.95 1.68-5.34 6.26-6.69 6.7z",
                   fill: "url(#SVGID_667_)"
                 }
@@ -67173,7 +67180,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   d: "m526.66 516.17l14.677 9.663c-1.1-3.018-1.32-5.838-0.111-8.757s3.361-4.755 6.27-6.11l-17.21-3.544c-0.23 1.92-2.53 7.83-3.63 8.75z",
                   fill: "url(#SVGID_669_)"
                 }
@@ -67244,7 +67251,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   d: "m530.83 504.74l17.255 3.309c-2.168-2.363-3.454-4.886-3.454-8.046 0-3.158 1.286-5.679 3.454-8.045l-17.256 3.312c0.52 1.86 0.66 8.2 0.01 9.47z",
                   fill: "url(#SVGID_671_)"
                 }
@@ -67313,7 +67320,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   d: "m530.29 492.58l17.211-3.545c-2.911-1.356-5.062-3.194-6.271-6.113s-0.985-5.739 0.112-8.754l-14.675 9.663c1.2 1.51 3.75 7.32 3.63 8.74z",
                   fill: "url(#SVGID_673_)"
                 }
@@ -67384,7 +67391,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   d: "m525.15 481.55l14.54-9.862c-3.203-0.138-5.896-1.012-8.131-3.247-2.233-2.233-3.106-4.924-3.247-8.131l-9.86 14.544c1.68 0.96 6.26 5.35 6.7 6.7z",
                   fill: "url(#SVGID_675_)"
                 }
@@ -67453,7 +67460,7 @@ function Page3() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "path",
                 {
-                  stroke: "#231F20",
+                  stroke: "currentColor",
                   d: "m516.17 473.34l9.663-14.677c-3.018 1.1-5.838 1.32-8.757 0.111s-4.755-3.361-6.11-6.27l-3.544 17.21c1.92 0.23 7.83 2.53 8.75 3.63z",
                   fill: "url(#SVGID_677_)"
                 }
@@ -67674,6 +67681,7 @@ function Page3() {
           "sodipodi:docname": "Oak-leaf and acorn ornament.svg",
           width: 180,
           height: 36,
+          style: { color: "var(--fg)" },
           children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               "defs",
@@ -67939,7 +67947,7 @@ function Page3() {
             /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "body-copy", children: [
               "A close study of the pigment chemistry behind the famed",
               /* @__PURE__ */ jsxRuntimeExports.jsx("em", { children: " bleu de Chartres" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "vine", children: /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.1", viewBox: "0 0 200 200", xmlns: "http://www.w3.org/2000/svg", children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { transform: "translate(0 -852.36)", d: "m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z" }) }) }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "vine", children: /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.1", viewBox: "0 0 200 200", xmlns: "http://www.w3.org/2000/svg", style: { color: "var(--fg)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { transform: "translate(0 -852.36)", d: "m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z" }) }) }),
               "presented alongside side-by-side panels drawn from the",
               /* @__PURE__ */ jsxRuntimeExports.jsx("em", { children: " Belle Verrière" }),
               ", with cross-section microphotography and trace-element analysis from the Atelier Lorin."
@@ -68148,7 +68156,7 @@ function Page3() {
             /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "gallery", children: "South Cloister · Through 2 February" }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "body-copy", children: [
               "Thirty-eight silverpoint drawings",
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "vine", children: /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.1", viewBox: "0 0 200 200", xmlns: "http://www.w3.org/2000/svg", children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { transform: "translate(0 -852.36)", d: "m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z" }) }) }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "vine", children: /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.1", viewBox: "0 0 200 200", xmlns: "http://www.w3.org/2000/svg", style: { color: "var(--fg)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { transform: "translate(0 -852.36)", d: "m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z" }) }) }),
               "attributed to the workshop of ",
               /* @__PURE__ */ jsxRuntimeExports.jsx("em", { children: "Villard de Honnecourt" }),
               ", presented for the first time in their bound order. Architectural elevations, lion studies, and a remarkable diagram of a self-winding water clock."
@@ -68357,7 +68365,7 @@ function Page3() {
             /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "gallery", children: "Reliquary Chamber · Through 2 February" }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "body-copy", children: [
               "A private-collection manuscript",
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "vine", children: /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.1", viewBox: "0 0 200 200", xmlns: "http://www.w3.org/2000/svg", children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { transform: "translate(0 -852.36)", d: "m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z" }) }) }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "vine", children: /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.1", viewBox: "0 0 200 200", xmlns: "http://www.w3.org/2000/svg", style: { color: "var(--fg)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { transform: "translate(0 -852.36)", d: "m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z" }) }) }),
               "opened to the ",
               /* @__PURE__ */ jsxRuntimeExports.jsx("em", { children: "Annunciation" }),
               " miniature, with its leaf turned each Friday at the eleventh hour by conservator",
@@ -68396,6 +68404,7 @@ function Page3() {
           "sodipodi:docname": "Oak-leaf and acorn ornament.svg",
           width: 180,
           height: 36,
+          style: { color: "var(--fg)" },
           children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               "defs",
@@ -68943,7 +68952,7 @@ function Page4() {
             /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "195.1614716", r: "163" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "-195.1614716", r: "163" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { x: "-232", y: "-232", width: "464", height: "464" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { fill: "#ffffff", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { fill: "currentColor", children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "-195.1614716", r: "157" }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "195.1614716", r: "157" }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "195.1614716", r: "157" }),
@@ -68955,7 +68964,7 @@ function Page4() {
             /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "195.1614716", r: "144" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "-195.1614716", r: "144" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { x: "-213", y: "-213", width: "426", height: "426" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { fill: "#ffffff", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { fill: "currentColor", children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "-195.1614716", r: "138" }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "195.1614716", r: "138" }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "195.1614716", r: "138" }),
@@ -69166,6 +69175,7 @@ function Page4() {
             "sodipodi:docname": "Oak-leaf and acorn ornament.svg",
             width: 140,
             height: 28,
+            style: { color: "var(--fg)" },
             children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "defs",
@@ -69818,7 +69828,7 @@ function Page4() {
             /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "195.1614716", r: "163" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "-195.1614716", r: "163" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { x: "-232", y: "-232", width: "464", height: "464" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { fill: "#ffffff", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { fill: "currentColor", children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "-195.1614716", r: "157" }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "195.1614716", r: "157" }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "195.1614716", r: "157" }),
@@ -69830,7 +69840,7 @@ function Page4() {
             /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "195.1614716", r: "144" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "-195.1614716", r: "144" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { x: "-213", y: "-213", width: "426", height: "426" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { fill: "#ffffff", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { fill: "currentColor", children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "-195.1614716", r: "138" }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "195.1614716", r: "138" }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "195.1614716", r: "138" }),
@@ -69842,7 +69852,7 @@ function Page4() {
             /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: "Accessibility" }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
               "Wheelchair access is provided through the",
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "visit-vine", children: /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.1", viewBox: "0 0 200 200", xmlns: "http://www.w3.org/2000/svg", width: 28, height: 14, children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { transform: "translate(0 -852.36)", d: "m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z" }) }) }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "visit-vine", children: /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.1", viewBox: "0 0 200 200", xmlns: "http://www.w3.org/2000/svg", width: 28, height: 14, style: { color: "var(--fg)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { transform: "translate(0 -852.36)", d: "m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z" }) }) }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { style: { color: "var(--text-emphasis)" }, children: "north transept entrance" }),
               ", where the floor lies level with the ambulatory and the chapter-house gallery."
             ] }),
@@ -69904,6 +69914,7 @@ function Page4() {
               x: "0px",
               width: 360,
               height: 360,
+              style: { color: "var(--fg)" },
               children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "circle",
@@ -69911,7 +69922,7 @@ function Page4() {
                     cy: "500",
                     cx: "500",
                     r: "488.21",
-                    fill: "#231304"
+                    fill: "currentColor"
                   }
                 ),
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -69926,7 +69937,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -70105,7 +70116,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -70288,7 +70299,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -70471,7 +70482,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -70654,7 +70665,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -70837,7 +70848,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -71020,7 +71031,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -71203,7 +71214,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -71386,7 +71397,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -71569,7 +71580,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -71752,7 +71763,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -71935,7 +71946,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -72118,7 +72129,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -72299,7 +72310,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -72480,7 +72491,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -72661,7 +72672,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -72844,7 +72855,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -73025,7 +73036,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -73208,7 +73219,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -73389,7 +73400,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -73570,7 +73581,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -73751,7 +73762,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -73934,7 +73945,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -74115,7 +74126,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -74296,7 +74307,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -74477,7 +74488,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -74658,7 +74669,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -74839,7 +74850,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -75020,7 +75031,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -75201,7 +75212,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -75382,7 +75393,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -75563,7 +75574,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -75738,7 +75749,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "radialGradient",
@@ -75947,7 +75958,7 @@ function Page4() {
                   {
                     r: "27.555",
                     cy: "164.89",
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     cx: "533.06",
                     "stroke-width": "2.5",
                     fill: "url(#SVGID_133_)"
@@ -75983,7 +75994,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m494.06 159.44c3.003 14.919-6.652 29.451-21.569 32.454-14.921 3.008-29.449-6.65-32.454-21.568-3.005-14.919 6.65-29.45 21.569-32.456 14.92-3 29.45 6.66 32.45 21.58z",
                     fill: "url(#SVGID_134_)"
@@ -76019,7 +76030,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m684.27 213.53c-5.793 14.075-21.895 20.792-35.964 15.002-14.079-5.789-20.792-21.892-15.003-35.964 5.79-14.075 21.893-20.792 35.966-15.004 14.07 5.79 20.78 21.89 14.99 35.96z",
                     fill: "url(#SVGID_135_)"
@@ -76055,7 +76066,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m624.85 183.09c-2.937 14.934-17.416 24.664-32.349 21.729-14.936-2.93-24.661-17.414-21.729-32.345 2.933-14.933 17.414-24.663 32.347-21.731 14.93 2.92 24.66 17.41 21.73 32.34z",
                     fill: "url(#SVGID_136_)"
@@ -77726,7 +77737,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "5",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -77915,7 +77926,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "5",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -78147,7 +78158,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m305.86 220.13c10.785 10.736 10.83 28.184 0.096 38.968-10.736 10.79-28.182 10.831-38.968 0.097-10.786-10.736-10.832-28.181-0.098-38.969 10.73-10.79 28.18-10.83 38.97-0.1z",
                     fill: "url(#SVGID_189_)"
@@ -78183,7 +78194,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m254.99 263.38c12.674 8.426 16.122 25.529 7.697 38.2-8.424 12.678-25.526 16.122-38.199 7.698-12.675-8.424-16.121-25.526-7.698-38.202 8.42-12.68 25.53-16.12 38.2-7.7z",
                     fill: "url(#SVGID_190_)"
@@ -78219,7 +78230,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m427.74 167.14c5.856 14.048-0.78 30.184-14.822 36.038-14.049 5.862-30.182-0.777-36.039-14.821-5.858-14.047 0.778-30.183 14.822-36.041 14.05-5.86 30.18 0.77 36.04 14.82z",
                     fill: "url(#SVGID_191_)"
@@ -78255,7 +78266,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m364.19 187.63c8.483 12.636 5.125 29.755-7.51 38.238-12.633 8.489-29.751 5.125-38.235-7.507-8.485-12.633-5.126-29.753 7.506-38.239 12.63-8.48 29.75-5.12 38.24 7.51z",
                     fill: "url(#SVGID_192_)"
@@ -78709,7 +78720,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "5",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -78900,7 +78911,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "5",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -79132,7 +79143,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m164.82 439.38c15.217-0.034 27.586 12.271 27.621 27.487 0.039 15.221-12.269 27.586-27.485 27.623-15.218 0.036-27.586-12.268-27.624-27.486-0.04-15.22 12.26-27.58 27.48-27.62z",
                     fill: "url(#SVGID_245_)"
@@ -79168,7 +79179,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m159.44 505.94c14.919-3.003 29.451 6.652 32.453 21.569 3.008 14.921-6.65 29.45-21.568 32.454-14.918 3.006-29.449-6.65-32.455-21.569s6.66-29.45 21.58-32.45z",
                     fill: "url(#SVGID_246_)"
@@ -79204,7 +79215,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m213.53 315.73c14.074 5.792 20.791 21.895 15.002 35.963-5.789 14.08-21.892 20.792-35.964 15.003-14.075-5.79-20.792-21.893-15.004-35.966 5.79-14.07 21.89-20.78 35.96-14.99z",
                     fill: "url(#SVGID_247_)"
@@ -79240,7 +79251,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m183.09 375.15c14.934 2.937 24.664 17.416 21.729 32.349-2.93 14.936-17.413 24.661-32.345 21.729-14.933-2.933-24.663-17.414-21.731-32.347 2.92-14.93 17.41-24.66 32.34-21.73z",
                     fill: "url(#SVGID_248_)"
@@ -79694,7 +79705,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "5",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -79885,7 +79896,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "5",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -80117,7 +80128,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m220.13 694.14c10.735-10.783 28.184-10.828 38.967-0.095 10.791 10.735 10.831 28.182 0.098 38.968-10.736 10.785-28.181 10.832-38.969 0.098-10.79-10.73-10.83-28.18-0.1-38.97z",
                     fill: "url(#SVGID_301_)"
@@ -80153,7 +80164,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m263.38 745.01c8.426-12.672 25.529-16.121 38.199-7.695 12.678 8.424 16.123 25.526 7.698 38.199-8.423 12.674-25.526 16.121-38.201 7.697s-16.12-25.54-7.7-38.21z",
                     fill: "url(#SVGID_302_)"
@@ -80189,7 +80200,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m167.14 572.26c14.048-5.856 30.184 0.779 36.037 14.822 5.863 14.049-0.776 30.182-14.82 36.039-14.047 5.858-30.183-0.778-36.041-14.822-5.86-14.05 0.77-30.18 14.82-36.04z",
                     fill: "url(#SVGID_303_)"
@@ -80225,7 +80236,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m187.63 635.81c12.636-8.483 29.755-5.125 38.238 7.51 8.489 12.633 5.125 29.751-7.507 38.235-12.633 8.485-29.753 5.126-38.239-7.506-8.48-12.63-5.12-29.75 7.51-38.24z",
                     fill: "url(#SVGID_304_)"
@@ -80677,7 +80688,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "5",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -80868,7 +80879,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "5",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -81100,7 +81111,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m439.38 835.18c-0.033-15.215 12.272-27.585 27.486-27.621 15.223-0.039 27.587 12.27 27.624 27.486 0.034 15.218-12.268 27.586-27.486 27.624-15.22 0.03-27.58-12.27-27.62-27.49z",
                     fill: "url(#SVGID_357_)"
@@ -81136,7 +81147,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m505.94 840.56c-3.002-14.919 6.653-29.452 21.57-32.453 14.921-3.008 29.45 6.649 32.454 21.567 3.006 14.918-6.65 29.449-21.569 32.455-14.92 3-29.45-6.66-32.45-21.58z",
                     fill: "url(#SVGID_358_)"
@@ -81172,7 +81183,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m315.73 786.47c5.792-14.074 21.895-20.792 35.963-15.001 14.08 5.788 20.793 21.891 15.004 35.963-5.79 14.075-21.893 20.792-35.966 15.004-14.07-5.79-20.78-21.89-14.99-35.96z",
                     fill: "url(#SVGID_359_)"
@@ -81208,7 +81219,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m375.15 816.91c2.937-14.935 17.416-24.664 32.349-21.729 14.936 2.93 24.661 17.413 21.729 32.345-2.933 14.933-17.414 24.663-32.347 21.731-14.93-2.92-24.66-17.41-21.73-32.34z",
                     fill: "url(#SVGID_360_)"
@@ -81660,7 +81671,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "5",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -81851,7 +81862,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "5",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -82083,7 +82094,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m694.14 779.87c-10.781-10.734-10.827-28.183-0.095-38.966 10.736-10.792 28.183-10.831 38.969-0.098 10.784 10.737 10.832 28.181 0.097 38.97-10.73 10.79-28.18 10.83-38.97 0.1z",
                     fill: "url(#SVGID_413_)"
@@ -82119,7 +82130,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m745.01 736.62c-12.672-8.427-16.121-25.53-7.695-38.2 8.424-12.678 25.526-16.123 38.199-7.698 12.674 8.423 16.121 25.526 7.697 38.201-8.43 12.68-25.54 16.12-38.21 7.7z",
                     fill: "url(#SVGID_414_)"
@@ -82155,7 +82166,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m572.26 832.86c-5.856-14.048 0.779-30.184 14.822-36.037 14.049-5.863 30.182 0.776 36.039 14.82 5.858 14.047-0.778 30.183-14.822 36.041-14.05 5.86-30.18-0.77-36.04-14.82z",
                     fill: "url(#SVGID_415_)"
@@ -82191,7 +82202,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m635.81 812.37c-8.483-12.637-5.125-29.755 7.51-38.238 12.633-8.489 29.751-5.125 38.235 7.507 8.485 12.633 5.126 29.753-7.506 38.239-12.63 8.48-29.75 5.12-38.24-7.51z",
                     fill: "url(#SVGID_416_)"
@@ -82614,7 +82625,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "5",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -82805,7 +82816,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "5",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -83037,7 +83048,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m835.18 560.62c-15.214 0.033-27.584-12.272-27.62-27.486-0.039-15.223 12.27-27.587 27.486-27.624 15.218-0.033 27.586 12.268 27.624 27.487 0.03 15.22-12.27 27.58-27.49 27.62z",
                     fill: "url(#SVGID_469_)"
@@ -83073,7 +83084,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m840.56 494.06c-14.919 3.002-29.452-6.653-32.453-21.57-3.008-14.921 6.649-29.45 21.567-32.454 14.918-3.006 29.449 6.65 32.455 21.569 3 14.92-6.66 29.45-21.58 32.45z",
                     fill: "url(#SVGID_470_)"
@@ -83109,7 +83120,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m786.47 684.27c-14.074-5.792-20.792-21.895-15.001-35.963 5.788-14.08 21.891-20.793 35.963-15.004 14.075 5.79 20.792 21.893 15.004 35.966-5.79 14.07-21.89 20.78-35.96 14.99z",
                     fill: "url(#SVGID_471_)"
@@ -83145,7 +83156,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m816.91 624.85c-14.935-2.937-24.664-17.416-21.729-32.349 2.93-14.936 17.413-24.661 32.345-21.729 14.933 2.933 24.663 17.414 21.731 32.347-2.92 14.93-17.41 24.66-32.34 21.73z",
                     fill: "url(#SVGID_472_)"
@@ -83595,7 +83606,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "5",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -83786,7 +83797,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "5",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -84018,7 +84029,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m779.87 305.86c-10.734 10.781-28.183 10.827-38.966 0.095-10.792-10.736-10.831-28.183-0.098-38.969 10.737-10.784 28.181-10.832 38.97-0.097 10.79 10.73 10.83 28.18 0.1 38.97z",
                     fill: "url(#SVGID_525_)"
@@ -84054,7 +84065,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m736.62 254.99c-8.427 12.672-25.53 16.121-38.2 7.695-12.678-8.424-16.123-25.526-7.698-38.199 8.423-12.674 25.526-16.121 38.201-7.697 12.68 8.43 16.12 25.54 7.7 38.21z",
                     fill: "url(#SVGID_526_)"
@@ -84090,7 +84101,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m832.86 427.74c-14.048 5.856-30.184-0.78-36.037-14.822-5.863-14.049 0.776-30.182 14.82-36.039 14.047-5.858 30.183 0.778 36.041 14.822 5.86 14.05-0.77 30.18-14.82 36.04z",
                     fill: "url(#SVGID_527_)"
@@ -84126,7 +84137,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m812.37 364.19c-12.637 8.483-29.755 5.125-38.238-7.51-8.489-12.633-5.125-29.751 7.507-38.235 12.633-8.485 29.753-5.126 38.239 7.506 8.48 12.63 5.12 29.75-7.51 38.24z",
                     fill: "url(#SVGID_528_)"
@@ -84981,7 +84992,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "5",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -85172,7 +85183,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "5",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -85377,7 +85388,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5814",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -85457,7 +85468,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5814",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -85538,7 +85549,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5814",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -85619,7 +85630,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5814",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -85700,7 +85711,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5814",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -85781,7 +85792,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5814",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -85860,7 +85871,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5814",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -85939,7 +85950,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "g",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5814",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -86044,7 +86055,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "529.75 43.026 546 20.438 517.74 18.919",
                     fill: "url(#SVGID_597_)"
@@ -86080,7 +86091,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "470.25 43.026 454 20.438 482.26 18.919",
                     fill: "url(#SVGID_598_)"
@@ -86116,7 +86127,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "352.6 66.428 358.98 39.339 332.29 48.751",
                     fill: "url(#SVGID_599_)"
@@ -86152,7 +86163,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "297.64 89.194 273.98 74.546 299.51 62.328",
                     fill: "url(#SVGID_600_)"
@@ -86188,7 +86199,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "197.9 155.84 193.43 128.37 172.37 147.28",
                     fill: "url(#SVGID_601_)"
@@ -86224,7 +86235,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "155.84 197.9 128.37 193.42 147.28 172.37",
                     fill: "url(#SVGID_602_)"
@@ -86260,7 +86271,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "89.195 297.64 74.547 273.98 62.328 299.51",
                     fill: "url(#SVGID_603_)"
@@ -86296,7 +86307,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "66.429 352.6 39.34 358.98 48.752 332.29",
                     fill: "url(#SVGID_604_)"
@@ -86332,7 +86343,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "43.027 470.25 20.439 454 18.92 482.26",
                     fill: "url(#SVGID_605_)"
@@ -86368,7 +86379,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "43.027 529.75 20.439 546 18.921 517.74",
                     fill: "url(#SVGID_606_)"
@@ -86404,7 +86415,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "66.43 647.39 39.341 641.02 48.752 667.71",
                     fill: "url(#SVGID_607_)"
@@ -86440,7 +86451,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "89.196 702.36 74.548 726.02 62.33 700.49",
                     fill: "url(#SVGID_608_)"
@@ -86476,7 +86487,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "155.84 802.09 128.37 806.57 147.28 827.63",
                     fill: "url(#SVGID_609_)"
@@ -86512,7 +86523,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "197.91 844.16 193.43 871.63 172.37 852.72",
                     fill: "url(#SVGID_610_)"
@@ -86548,7 +86559,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "297.64 910.8 273.98 925.45 299.51 937.67",
                     fill: "url(#SVGID_611_)"
@@ -86584,7 +86595,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "352.61 933.57 358.98 960.66 332.29 951.25",
                     fill: "url(#SVGID_612_)"
@@ -86620,7 +86631,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "470.26 956.97 454 979.56 482.26 981.08",
                     fill: "url(#SVGID_613_)"
@@ -86656,7 +86667,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "529.75 956.97 546 979.56 517.74 981.08",
                     fill: "url(#SVGID_614_)"
@@ -86692,7 +86703,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "647.4 933.57 641.02 960.66 667.71 951.25",
                     fill: "url(#SVGID_615_)"
@@ -86728,7 +86739,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "702.36 910.8 726.02 925.45 700.49 937.67",
                     fill: "url(#SVGID_616_)"
@@ -86764,7 +86775,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "802.1 844.16 806.58 871.63 827.63 852.72",
                     fill: "url(#SVGID_617_)"
@@ -86800,7 +86811,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "844.16 802.09 871.63 806.57 852.72 827.63",
                     fill: "url(#SVGID_618_)"
@@ -86836,7 +86847,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "910.8 702.36 925.45 726.02 937.67 700.49",
                     fill: "url(#SVGID_619_)"
@@ -86872,7 +86883,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "933.57 647.39 960.66 641.02 951.25 667.71",
                     fill: "url(#SVGID_620_)"
@@ -86908,7 +86919,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "956.97 529.74 979.56 546 981.08 517.74",
                     fill: "url(#SVGID_621_)"
@@ -86944,7 +86955,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "956.97 470.25 979.56 454 981.08 482.26",
                     fill: "url(#SVGID_622_)"
@@ -86980,7 +86991,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "933.57 352.6 960.66 358.98 951.25 332.29",
                     fill: "url(#SVGID_623_)"
@@ -87016,7 +87027,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "910.8 297.64 925.45 273.98 937.67 299.51",
                     fill: "url(#SVGID_624_)"
@@ -87052,7 +87063,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "844.16 197.9 871.63 193.42 852.72 172.37",
                     fill: "url(#SVGID_625_)"
@@ -87088,7 +87099,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "802.09 155.84 806.57 128.37 827.63 147.28",
                     fill: "url(#SVGID_626_)"
@@ -87124,7 +87135,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "702.36 89.196 726.02 74.544 700.49 62.329",
                     fill: "url(#SVGID_627_)"
@@ -87160,7 +87171,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "polygon",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.875",
                     points: "647.39 66.429 641.02 39.34 667.71 48.751",
                     fill: "url(#SVGID_628_)"
@@ -87196,7 +87207,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m511.63 425.41h-23.805l-20.621-111.31c0 17.962 14.562 32.522 32.523 32.522s32.522-14.561 32.522-32.522l-20.61 111.31z",
                     fill: "url(#SVGID_629_)"
@@ -87232,7 +87243,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m482.2 426.64l-21.993 9.109-61.646-94.943c6.874 16.595 25.899 24.474 42.494 17.601 16.595-6.874 24.475-25.898 17.601-42.493l23.55 110.72z",
                     fill: "url(#SVGID_630_)"
@@ -87268,7 +87279,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m455.48 439.03l-16.833 16.833-93.287-64.125c12.7 12.701 33.293 12.7 45.994-0.001s12.7-33.292 0-45.993l64.13 93.28z",
                     fill: "url(#SVGID_631_)"
@@ -87304,7 +87315,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m435.54 460.71l-9.11 21.993-110.73-23.544c16.595 6.874 35.619-1.008 42.493-17.603s-1.006-35.619-17.602-42.492l94.95 61.64z",
                     fill: "url(#SVGID_632_)"
@@ -87340,7 +87351,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m425.41 488.37v23.806l-111.31 20.62c17.962 0.001 32.522-14.562 32.522-32.523 0-17.963-14.562-32.522-32.523-32.522l111.31 20.61z",
                     fill: "url(#SVGID_633_)"
@@ -87376,7 +87387,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m426.64 517.8l9.109 21.993-94.943 61.646c16.595-6.874 24.474-25.899 17.601-42.494-6.874-16.595-25.897-24.475-42.492-17.601l110.72-23.55z",
                     fill: "url(#SVGID_634_)"
@@ -87412,7 +87423,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m439.03 544.52l16.834 16.833-64.126 93.287c12.701-12.7 12.7-33.293-0.001-45.994s-33.293-12.699-45.994 0.001l93.29-64.13z",
                     fill: "url(#SVGID_635_)"
@@ -87448,7 +87459,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m460.71 564.46l21.993 9.11-23.544 110.73c6.873-16.595-1.009-35.619-17.603-42.493-16.595-6.874-35.618 1.007-42.492 17.601l61.64-94.95z",
                     fill: "url(#SVGID_636_)"
@@ -87484,7 +87495,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m488.37 574.59l23.806-0.001 20.62 111.31c0-17.961-14.561-32.521-32.523-32.522-17.963 0.001-32.521 14.562-32.521 32.524l20.61-111.31z",
                     fill: "url(#SVGID_637_)"
@@ -87520,7 +87531,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m517.79 573.36l21.994-9.109 61.646 94.943c-6.875-16.594-25.9-24.473-42.494-17.601-16.596 6.874-24.475 25.897-17.602 42.491l-23.55-110.72z",
                     fill: "url(#SVGID_638_)"
@@ -87556,7 +87567,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m544.52 560.97l16.833-16.835 93.287 64.126c-12.7-12.7-33.292-12.7-45.995 0-12.7 12.703-12.698 33.294 0.003 45.995l-64.12-93.29z",
                     fill: "url(#SVGID_639_)"
@@ -87592,7 +87603,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m564.46 539.29l9.111-21.993 110.73 23.544c-16.595-6.872-35.619 1.01-42.493 17.603-6.874 16.596 1.006 35.618 17.6 42.492l-94.95-61.64z",
                     fill: "url(#SVGID_640_)"
@@ -87628,7 +87639,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m574.59 511.64l-0.001-23.807 111.31-20.62c-17.961 0-32.521 14.561-32.523 32.523 0.002 17.963 14.563 32.521 32.525 32.521l-111.31-20.61z",
                     fill: "url(#SVGID_641_)"
@@ -87664,7 +87675,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m573.36 482.21l-9.108-21.995 94.942-61.647c-16.593 6.875-24.472 25.901-17.6 42.495 6.874 16.596 25.896 24.474 42.491 17.602l-110.72 23.55z",
                     fill: "url(#SVGID_642_)"
@@ -87700,7 +87711,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m560.97 455.48l-16.835-16.833 64.126-93.287c-12.7 12.7-12.7 33.292 0 45.995 12.703 12.7 33.294 12.698 45.995-0.003l-93.29 64.12z",
                     fill: "url(#SVGID_643_)"
@@ -87736,7 +87747,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     "stroke-width": "2.5",
                     d: "m539.29 435.54l-21.993-9.112 23.543-110.73c-6.871 16.595 1.011 35.619 17.604 42.493 16.596 6.874 35.617-1.006 42.492-17.6l-61.64 94.95z",
                     fill: "url(#SVGID_644_)"
@@ -87842,7 +87853,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     d: "m504.74 469.18l3.311-17.257c-2.366 2.17-4.887 3.454-8.046 3.454s-5.679-1.286-8.045-3.455l3.312 17.257c1.85-0.52 8.2-0.66 9.47 0z",
                     fill: "url(#SVGID_647_)"
                   }
@@ -87913,7 +87924,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     d: "m492.58 469.71l-3.545-17.21c-1.356 2.911-3.193 5.062-6.112 6.271s-5.739 0.985-8.755-0.112l9.663 14.676c1.51-1.2 7.32-3.75 8.74-3.63z",
                     fill: "url(#SVGID_649_)"
                   }
@@ -87984,7 +87995,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     d: "m481.55 474.86l-9.861-14.544c-0.139 3.208-1.013 5.898-3.247 8.132s-4.925 3.106-8.132 3.246l14.545 9.861c0.94-1.69 5.34-6.27 6.69-6.7z",
                     fill: "url(#SVGID_651_)"
                   }
@@ -88055,7 +88066,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     d: "m473.33 483.83l-14.676-9.663c1.099 3.018 1.321 5.837 0.111 8.756-1.208 2.919-3.361 4.755-6.27 6.111l17.21 3.545c0.24-1.92 2.54-7.83 3.63-8.75z",
                     fill: "url(#SVGID_653_)"
                   }
@@ -88126,7 +88137,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     d: "m469.18 495.26l-17.256-3.311c2.17 2.366 3.454 4.886 3.453 8.046 0 3.16-1.285 5.679-3.454 8.045l17.257-3.312c-0.52-1.85-0.66-8.2 0-9.47z",
                     fill: "url(#SVGID_655_)"
                   }
@@ -88197,7 +88208,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     d: "m469.71 507.42l-17.211 3.543c2.912 1.357 5.062 3.194 6.271 6.113 1.21 2.919 0.985 5.739-0.112 8.755l14.676-9.663c-1.2-1.51-3.75-7.32-3.63-8.74z",
                     fill: "url(#SVGID_657_)"
                   }
@@ -88268,7 +88279,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     d: "m474.85 518.45l-14.542 9.86c3.207 0.139 5.897 1.013 8.132 3.247 2.233 2.234 3.106 4.925 3.246 8.132l9.86-14.544c-1.68-0.95-6.26-5.35-6.7-6.7z",
                     fill: "url(#SVGID_659_)"
                   }
@@ -88339,7 +88350,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     d: "m483.83 526.67l-9.664 14.676c3.019-1.1 5.838-1.32 8.757-0.111s4.755 3.361 6.11 6.27l3.545-17.21c-1.92-0.24-7.83-2.54-8.75-3.63z",
                     fill: "url(#SVGID_661_)"
                   }
@@ -88410,7 +88421,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     d: "m495.26 530.83l-3.311 17.255c2.365-2.169 4.887-3.454 8.047-3.454 3.158 0 5.679 1.286 8.045 3.455l-3.312-17.257c-1.86 0.52-8.2 0.66-9.47 0.01z",
                     fill: "url(#SVGID_663_)"
                   }
@@ -88479,7 +88490,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     d: "m507.42 530.29l3.544 17.211c1.356-2.911 3.194-5.062 6.113-6.271s5.739-0.985 8.754 0.112l-9.663-14.675c-1.51 1.2-7.32 3.75-8.74 3.63z",
                     fill: "url(#SVGID_665_)"
                   }
@@ -88548,7 +88559,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     d: "m518.45 525.15l9.861 14.541c0.139-3.205 1.013-5.897 3.247-8.132 2.233-2.233 4.925-3.106 8.132-3.246l-14.545-9.86c-0.95 1.68-5.34 6.26-6.69 6.7z",
                     fill: "url(#SVGID_667_)"
                   }
@@ -88617,7 +88628,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     d: "m526.66 516.17l14.677 9.663c-1.1-3.018-1.32-5.838-0.111-8.757s3.361-4.755 6.27-6.11l-17.21-3.544c-0.23 1.92-2.53 7.83-3.63 8.75z",
                     fill: "url(#SVGID_669_)"
                   }
@@ -88688,7 +88699,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     d: "m530.83 504.74l17.255 3.309c-2.168-2.363-3.454-4.886-3.454-8.046 0-3.158 1.286-5.679 3.454-8.045l-17.256 3.312c0.52 1.86 0.66 8.2 0.01 9.47z",
                     fill: "url(#SVGID_671_)"
                   }
@@ -88757,7 +88768,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     d: "m530.29 492.58l17.211-3.545c-2.911-1.356-5.062-3.194-6.271-6.113s-0.985-5.739 0.112-8.754l-14.675 9.663c1.2 1.51 3.75 7.32 3.63 8.74z",
                     fill: "url(#SVGID_673_)"
                   }
@@ -88828,7 +88839,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     d: "m525.15 481.55l14.54-9.862c-3.203-0.138-5.896-1.012-8.131-3.247-2.233-2.233-3.106-4.924-3.247-8.131l-9.86 14.544c1.68 0.96 6.26 5.35 6.7 6.7z",
                     fill: "url(#SVGID_675_)"
                   }
@@ -88897,7 +88908,7 @@ function Page4() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "path",
                   {
-                    stroke: "#231F20",
+                    stroke: "currentColor",
                     d: "m516.17 473.34l9.663-14.677c-3.018 1.1-5.838 1.32-8.757 0.111s-4.755-3.361-6.11-6.27l-3.544 17.21c1.92 0.23 7.83 2.53 8.75 3.63z",
                     fill: "url(#SVGID_677_)"
                   }
@@ -89111,6 +89122,7 @@ function Page4() {
             "sodipodi:docname": "Oak-leaf and acorn ornament.svg",
             width: 140,
             height: 28,
+            style: { color: "var(--fg)" },
             children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "defs",
@@ -89527,7 +89539,7 @@ function Page5() {
         /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "195.1614716", r: "163" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "-195.1614716", r: "163" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { x: "-232", y: "-232", width: "464", height: "464" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { fill: "#ffffff", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { fill: "currentColor", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "-195.1614716", r: "157" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "195.1614716", r: "157" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "195.1614716", r: "157" }),
@@ -89539,7 +89551,7 @@ function Page5() {
         /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "195.1614716", r: "144" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "-195.1614716", r: "144" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { x: "-213", y: "-213", width: "426", height: "426" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { fill: "#ffffff", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { fill: "currentColor", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "-195.1614716", r: "138" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "195.1614716", r: "138" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "195.1614716", r: "138" }),
@@ -89756,6 +89768,7 @@ function Page5() {
               "sodipodi:docname": "Oak-leaf and acorn ornament.svg",
               width: 140,
               height: 32,
+              style: { color: "var(--fg)" },
               children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "defs",
@@ -89913,6 +89926,7 @@ function Page5() {
                 "sodipodi:docname": "Oak-leaf and acorn ornament.svg",
                 width: 140,
                 height: 32,
+                style: { color: "var(--fg)" },
                 children: [
                   /* @__PURE__ */ jsxRuntimeExports.jsx(
                     "defs",
@@ -90888,7 +90902,7 @@ function Page6() {
             /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "195.1614716", r: "163" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "-195.1614716", r: "163" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { x: "-232", y: "-232", width: "464", height: "464" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { fill: "#ffffff", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { fill: "currentColor", children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "-195.1614716", r: "157" }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "195.1614716", r: "157" }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "195.1614716", r: "157" }),
@@ -90900,7 +90914,7 @@ function Page6() {
             /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "195.1614716", r: "144" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "-195.1614716", r: "144" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { x: "-213", y: "-213", width: "426", height: "426" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { fill: "#ffffff", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { fill: "currentColor", children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "-195.1614716", r: "138" }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "195.1614716", r: "138" }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cy: "195.1614716", r: "138" }),
@@ -91108,6 +91122,7 @@ function Page6() {
                 "sodipodi:docname": "Oak-leaf and acorn ornament.svg",
                 width: 220,
                 height: 28,
+                style: { color: "var(--fg)" },
                 children: [
                   /* @__PURE__ */ jsxRuntimeExports.jsx(
                     "defs",
@@ -91203,6 +91218,7 @@ function Page6() {
                 "sodipodi:docname": "Oak-leaf and acorn ornament.svg",
                 width: 280,
                 height: 32,
+                style: { color: "var(--fg)" },
                 children: [
                   /* @__PURE__ */ jsxRuntimeExports.jsx(
                     "defs",
@@ -91848,6 +91864,7 @@ function Page6() {
                 "sodipodi:docname": "Oak-leaf and acorn ornament.svg",
                 width: 280,
                 height: 32,
+                style: { color: "var(--fg)" },
                 children: [
                   /* @__PURE__ */ jsxRuntimeExports.jsx(
                     "defs",
@@ -91923,7 +91940,7 @@ function Page6() {
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "narrative", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "dropcap", children: [
               "The Priory of Saint-Hilaire-des-Aubes stood empty from the suppressions of 1791 until Édouard de Saint-Pierre, then fifty-four years of age and lately retired from his commerce in ecclesiastical antiquities at Reims, took possession of its ruined chapter house and west cloister in the autumn of 1897. He installed his private collection — manuscript leaves, capital fragments, and a set of three rose-window medallions attributed to the workshop of Saint-Denis — in the surviving south range, opening one room to scholars by appointment.",
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "inline-vine", "aria-hidden": "true", children: /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.1", viewBox: "0 0 200 200", xmlns: "http://www.w3.org/2000/svg", width: 20, height: 20, children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { transform: "translate(0 -852.36)", d: "m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z" }) }) })
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "inline-vine", "aria-hidden": "true", children: /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.1", viewBox: "0 0 200 200", xmlns: "http://www.w3.org/2000/svg", width: 20, height: 20, style: { color: "var(--fg)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { transform: "translate(0 -852.36)", d: "m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z" }) }) })
             ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Following the bequest of 1923 the trust acquired contiguous parcels to the north and east, regularising the precinct to its present 4.6 hectares. The new lancet hall, completed under the Perret atelier in 1962, runs ninety-three metres along the former conventual nave; its twenty-two paired lancets house the core of the de Saint-Pierre glass at the original sill height. The Rose Window Study wing, dedicated in May 2019, completes the north-west angle of the cloister and provides climate-controlled vitrines for the medallion fragments and a small chapel for the conservation of pigments and lead came." })
           ] })
@@ -91950,6 +91967,7 @@ function Page6() {
                 "sodipodi:docname": "Oak-leaf and acorn ornament.svg",
                 width: 280,
                 height: 32,
+                style: { color: "var(--fg)" },
                 children: [
                   /* @__PURE__ */ jsxRuntimeExports.jsx(
                     "defs",
@@ -92105,6 +92123,7 @@ function Page6() {
                 "sodipodi:docname": "Oak-leaf and acorn ornament.svg",
                 width: 280,
                 height: 32,
+                style: { color: "var(--fg)" },
                 children: [
                   /* @__PURE__ */ jsxRuntimeExports.jsx(
                     "defs",

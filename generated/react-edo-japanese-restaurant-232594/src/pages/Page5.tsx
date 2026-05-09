@@ -345,7 +345,7 @@ export default function Page5() {
         <section className="page5-hero">
           <div className="page5-hero-bg" aria-hidden="true">
             
-<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="700" height="700" id="svg2" viewBox="0 0 700 700" width={520} height={520}>
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="700" height="700" id="svg2" viewBox="0 0 700 700" width={520} height={520} style={{color: "var(--fg)"}}>
 	<title>Seigaiha</title>
 	<defs>
 		<g id="C1">
@@ -389,7 +389,7 @@ export default function Page5() {
 
         <div className="page5-divider" aria-hidden="true">
           <span className="line" />
-          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0" y="0" width="600" height="600" viewBox="0 0 600 600" width={120} height={28}>
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0" y="0" width="600" height="600" viewBox="0 0 600 600" width={120} height={28} style={{color: "var(--fg)"}}>
 <style type="text/css">{`
 	.st0{fill:none;stroke:#000;stroke-width:2;}
 `}</style>
@@ -471,7 +471,7 @@ export default function Page5() {
 
         <section className="page5-particulars">
           <div className="page5-particulars-pattern" aria-hidden="true">
-            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="503" height="501" viewBox="0 0 503 501" width={360} height={720}>
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="503" height="501" viewBox="0 0 503 501" width={360} height={720} style={{color: "var(--fg)"}}>
 <style type="text/css">{`
 	.st0{fill:none;stroke:#000;stroke-linecap:round;}
 	.st1{fill:none;stroke:#000;}

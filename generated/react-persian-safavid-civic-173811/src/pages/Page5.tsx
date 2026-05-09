@@ -695,7 +695,7 @@ export default function Page5() {
 
 <svg version="1.1" id="Layer_1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;"
 	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="437.999px"
-	 height="18.893px" viewBox="0 0 437.999 18.893" enable-background="new 0 0 437.999 18.893" xml:space="preserve">
+	 height="18.893px" viewBox="0 0 437.999 18.893" enable-background="new 0 0 437.999 18.893" xml:space="preserve" style={{color: "var(--fg)"}}>
 <metadata>
 	<sfw  xmlns="&ns_sfw;">
 		<slices></slices>
@@ -840,7 +840,7 @@ export default function Page5() {
 		c-1.23,0.469-2.304,0.877-3.188,1.213c-0.442,0.168-0.837,0.318-1.18,0.449c-0.35,0.116-0.62,0.28-0.895,0.274
 		c-0.274-0.005-0.526-0.116-0.721-0.255c-0.187-0.116-0.304-0.23-0.304-0.23L218.963,9.353z"/>
 </g>
-<polyline fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" points="209.416,13.307 219,9.445 228.583,5.584 
+<polyline fill="none" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" points="209.416,13.307 219,9.445 228.583,5.584 
 	"/>
 <g>
 	<path d="M229.998,1.929c-0.005,0.007-0.064-0.133-0.229-0.326c-0.146-0.191-0.438-0.423-0.854-0.563
@@ -870,7 +870,7 @@ export default function Page5() {
 
         <div className="p5-folio">
           <span>Compiled in the Reign of Shāh ‘Abbās II</span>
-          <span><svg width="100%" height="100%" viewBox="0 0 1500 1500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" className="seal" width={28} height={28}>
+          <span><svg width="100%" height="100%" viewBox="0 0 1500 1500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" className="seal" width={28} height={28} style={{color: "var(--fg)"}}>
     <rect x="0" y="0" width="1500" height="1500"/>
     <clipPath id="_clip1">
         <rect x="0" y="0" width="1500" height="1500"/>
@@ -1124,49 +1124,49 @@ export default function Page5() {
          id="path14"
          transform="matrix(.82759,0,0,.82759,-245.46119,-685.61198)"
          fill-opacity=".98039"
-         fill="#fff"
+         fill="currentColor"
          d="m306.22015,838.87067c0,2.65682-2.15378,4.81061-4.8106,4.81061s-4.81061-2.15379-4.81061-4.81061 2.15378-4.81061 4.81061-4.81061 4.8106,2.15378 4.8106,4.81061z" />
       <path
          id="path16"
          transform="matrix(.68966,0,0,.68966,-196.5886,-562.60682)"
          fill-opacity=".98039"
-         fill="#fff"
+         fill="currentColor"
          d="m306.22015,838.87067c0,2.65682-2.15378,4.81061-4.8106,4.81061s-4.81061-2.15379-4.81061-4.81061 2.15378-4.81061 4.81061-4.81061 4.8106,2.15378 4.8106,4.81061z" />
       <path
          id="path18"
          transform="matrix(.55172,0,0,.55172,-154.01957,-458.18056)"
          fill-opacity=".98039"
-         fill="#fff"
+         fill="currentColor"
          d="m306.22015,838.87067c0,2.65682-2.15378,4.81061-4.8106,4.81061s-4.81061-2.15379-4.81061-4.81061 2.15378-4.81061 4.81061-4.81061 4.8106,2.15378 4.8106,4.81061z" />
       <path
          id="path20"
          transform="matrix(.41379,0,0,.41379,-107.13758,-335.50716)"
          fill-opacity=".98039"
-         fill="#fff"
+         fill="currentColor"
          d="m306.22015,838.87067c0,2.65682-2.15378,4.81061-4.8106,4.81061s-4.81061-2.15379-4.81061-4.81061 2.15378-4.81061 4.81061-4.81061 4.8106,2.15378 4.8106,4.81061z" />
       <path
          id="path22"
          transform="matrix(.41379,0,0,.41379,-118.41763,-345.12838)"
          fill-opacity=".98039"
-         fill="#fff"
+         fill="currentColor"
          d="m306.22015,838.87067c0,2.65682-2.15378,4.81061-4.8106,4.81061s-4.81061-2.15379-4.81061-4.81061 2.15378-4.81061 4.81061-4.81061 4.8106,2.15378 4.8106,4.81061z" />
       <path
          id="path24"
          transform="matrix(.41379,0,0,.41379,-105.47875,-328.87184)"
          fill-opacity=".98039"
-         fill="#fff"
+         fill="currentColor"
          d="m306.22015,838.87067c0,2.65682-2.15378,4.81061-4.8106,4.81061s-4.81061-2.15379-4.81061-4.81061 2.15378-4.81061 4.81061-4.81061 4.8106,2.15378 4.8106,4.81061z" />
       <path
          id="path26"
          transform="matrix(.68966,0,0,.68966,-186.96738,-573.5551)"
          fill-opacity=".98039"
-         fill="#fff"
+         fill="currentColor"
          d="m306.22015,838.87067c0,2.65682-2.15378,4.81061-4.8106,4.81061s-4.81061-2.15379-4.81061-4.81061 2.15378-4.81061 4.81061-4.81061 4.8106,2.15378 4.8106,4.81061z" />
       <path
          id="path28"
          transform="matrix(.68966,0,0,.68966,-183.98148,-564.92918)"
          fill-opacity=".98039"
-         fill="#fff"
+         fill="currentColor"
          d="m306.22015,838.87067c0,2.65682-2.15378,4.81061-4.8106,4.81061s-4.81061-2.15379-4.81061-4.81061 2.15378-4.81061 4.81061-4.81061 4.8106,2.15378 4.8106,4.81061z" />
     </pattern>
     <linearGradient
@@ -1288,7 +1288,7 @@ export default function Page5() {
 
 <svg version="1.1" id="Layer_1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;"
 	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="437.999px"
-	 height="18.893px" viewBox="0 0 437.999 18.893" enable-background="new 0 0 437.999 18.893" xml:space="preserve">
+	 height="18.893px" viewBox="0 0 437.999 18.893" enable-background="new 0 0 437.999 18.893" xml:space="preserve" style={{color: "var(--fg)"}}>
 <metadata>
 	<sfw  xmlns="&ns_sfw;">
 		<slices></slices>
@@ -1433,7 +1433,7 @@ export default function Page5() {
 		c-1.23,0.469-2.304,0.877-3.188,1.213c-0.442,0.168-0.837,0.318-1.18,0.449c-0.35,0.116-0.62,0.28-0.895,0.274
 		c-0.274-0.005-0.526-0.116-0.721-0.255c-0.187-0.116-0.304-0.23-0.304-0.23L218.963,9.353z"/>
 </g>
-<polyline fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" points="209.416,13.307 219,9.445 228.583,5.584 
+<polyline fill="none" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" points="209.416,13.307 219,9.445 228.583,5.584 
 	"/>
 <g>
 	<path d="M229.998,1.929c-0.005,0.007-0.064-0.133-0.229-0.326c-0.146-0.191-0.438-0.423-0.854-0.563
@@ -1635,7 +1635,7 @@ export default function Page5() {
         </section>
 
         <div className="p5-centerseal" aria-hidden="true">
-          <span className="seal-svg"><svg width="100%" height="100%" viewBox="0 0 1500 1500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/">
+          <span className="seal-svg"><svg width="100%" height="100%" viewBox="0 0 1500 1500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style={{color: "var(--fg)"}}>
     <rect x="0" y="0" width="1500" height="1500"/>
     <clipPath id="_clip1">
         <rect x="0" y="0" width="1500" height="1500"/>
@@ -1916,7 +1916,7 @@ export default function Page5() {
 
 <svg version="1.1" id="Layer_1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;"
 	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="437.999px"
-	 height="18.893px" viewBox="0 0 437.999 18.893" enable-background="new 0 0 437.999 18.893" xml:space="preserve">
+	 height="18.893px" viewBox="0 0 437.999 18.893" enable-background="new 0 0 437.999 18.893" xml:space="preserve" style={{color: "var(--fg)"}}>
 <metadata>
 	<sfw  xmlns="&ns_sfw;">
 		<slices></slices>
@@ -2061,7 +2061,7 @@ export default function Page5() {
 		c-1.23,0.469-2.304,0.877-3.188,1.213c-0.442,0.168-0.837,0.318-1.18,0.449c-0.35,0.116-0.62,0.28-0.895,0.274
 		c-0.274-0.005-0.526-0.116-0.721-0.255c-0.187-0.116-0.304-0.23-0.304-0.23L218.963,9.353z"/>
 </g>
-<polyline fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" points="209.416,13.307 219,9.445 228.583,5.584 
+<polyline fill="none" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" points="209.416,13.307 219,9.445 228.583,5.584 
 	"/>
 <g>
 	<path d="M229.998,1.929c-0.005,0.007-0.064-0.133-0.229-0.326c-0.146-0.191-0.438-0.423-0.854-0.563

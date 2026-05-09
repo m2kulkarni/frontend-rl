@@ -336,14 +336,14 @@ export default function Page5() {
 <circle cx="-195.1614716" r="163"/><circle cx="195.1614716" r="163"/>
 <circle cy="195.1614716" r="163"/><circle cy="-195.1614716" r="163"/>
 <rect x="-232" y="-232" width="464" height="464"/>
-<g fill="#ffffff">
+<g fill="currentColor">
 <circle cx="-195.1614716" r="157"/><circle cx="195.1614716" r="157"/>
 <circle cy="195.1614716" r="157"/><circle cy="-195.1614716" r="157"/>
 <rect x="-226" y="-226" width="452" height="452"/></g>
 <circle cx="-195.1614716" r="144"/><circle cx="195.1614716" r="144"/>
 <circle cy="195.1614716" r="144"/><circle cy="-195.1614716" r="144"/>
 <rect x="-213" y="-213" width="426" height="426"/>
-<g fill="#ffffff">
+<g fill="currentColor">
 <circle cx="-195.1614716" r="138"/><circle cx="195.1614716" r="138"/>
 <circle cy="195.1614716" r="138"/><circle cy="-195.1614716" r="138"/>
 <rect x="-207" y="-207" width="414" height="414"/></g>
@@ -484,7 +484,7 @@ export default function Page5() {
    version="1.1"
    id="svg80"
    inkscape:version="1.0.2 (e86c870879, 2021-01-15, custom)"
-   sodipodi:docname="Oak-leaf and acorn ornament.svg" width={140} height={32}>
+   sodipodi:docname="Oak-leaf and acorn ornament.svg" width={140} height={32} style={{color: "var(--fg)"}}>
   <defs
      id="defs74" />
   <sodipodi:namedview
@@ -619,7 +619,7 @@ export default function Page5() {
    version="1.1"
    id="svg80"
    inkscape:version="1.0.2 (e86c870879, 2021-01-15, custom)"
-   sodipodi:docname="Oak-leaf and acorn ornament.svg" width={140} height={32}>
+   sodipodi:docname="Oak-leaf and acorn ornament.svg" width={140} height={32} style={{color: "var(--fg)"}}>
   <defs
      id="defs74" />
   <sodipodi:namedview

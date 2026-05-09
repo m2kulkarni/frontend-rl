@@ -377,7 +377,7 @@ export default function Page1() {
       {/* DIVIDER */}
       <div className="p1-divider" aria-hidden="true">
         <span className="rule" />
-        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0" y="0" width="600" height="600" viewBox="0 0 600 600" width={140} height={22}>
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0" y="0" width="600" height="600" viewBox="0 0 600 600" width={140} height={22} style={{color: "var(--fg)"}}>
 <style type="text/css">{`
 	.st0{fill:none;stroke:#000;stroke-width:2;}
 `}</style>

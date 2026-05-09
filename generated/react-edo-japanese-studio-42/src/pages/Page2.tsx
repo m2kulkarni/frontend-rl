@@ -277,7 +277,7 @@ export default function Page2() {
           <div className="seigaiha-band" aria-hidden="true">
             <div className="pattern">
               
-<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="700" height="700" id="svg2" viewBox="0 0 700 700" width={1240} height={90}>
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="700" height="700" id="svg2" viewBox="0 0 700 700" width={1240} height={90} style={{color: "var(--fg)"}}>
 	<title>Seigaiha</title>
 	<defs>
 		<g id="C1">
@@ -354,7 +354,7 @@ export default function Page2() {
 
           <div className="divider">
             <span className="label">The Four</span>
-            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0" y="0" width="600" height="600" viewBox="0 0 600 600" className="keyfret" width={96} height={24}>
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0" y="0" width="600" height="600" viewBox="0 0 600 600" className="keyfret" width={96} height={24} style={{color: "var(--fg)"}}>
 <style type="text/css">{`
 	.st0{fill:none;stroke:#000;stroke-width:2;}
 `}</style>

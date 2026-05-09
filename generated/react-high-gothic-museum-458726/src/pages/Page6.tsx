@@ -335,14 +335,14 @@ export default function Page6() {
 <circle cx="-195.1614716" r="163"/><circle cx="195.1614716" r="163"/>
 <circle cy="195.1614716" r="163"/><circle cy="-195.1614716" r="163"/>
 <rect x="-232" y="-232" width="464" height="464"/>
-<g fill="#ffffff">
+<g fill="currentColor">
 <circle cx="-195.1614716" r="157"/><circle cx="195.1614716" r="157"/>
 <circle cy="195.1614716" r="157"/><circle cy="-195.1614716" r="157"/>
 <rect x="-226" y="-226" width="452" height="452"/></g>
 <circle cx="-195.1614716" r="144"/><circle cx="195.1614716" r="144"/>
 <circle cy="195.1614716" r="144"/><circle cy="-195.1614716" r="144"/>
 <rect x="-213" y="-213" width="426" height="426"/>
-<g fill="#ffffff">
+<g fill="currentColor">
 <circle cx="-195.1614716" r="138"/><circle cx="195.1614716" r="138"/>
 <circle cy="195.1614716" r="138"/><circle cy="-195.1614716" r="138"/>
 <rect x="-207" y="-207" width="414" height="414"/></g>
@@ -477,7 +477,7 @@ export default function Page6() {
    version="1.1"
    id="svg80"
    inkscape:version="1.0.2 (e86c870879, 2021-01-15, custom)"
-   sodipodi:docname="Oak-leaf and acorn ornament.svg" width={220} height={28}>
+   sodipodi:docname="Oak-leaf and acorn ornament.svg" width={220} height={28} style={{color: "var(--fg)"}}>
   <defs
      id="defs74" />
   <sodipodi:namedview
@@ -543,7 +543,7 @@ export default function Page6() {
    version="1.1"
    id="svg80"
    inkscape:version="1.0.2 (e86c870879, 2021-01-15, custom)"
-   sodipodi:docname="Oak-leaf and acorn ornament.svg" width={280} height={32}>
+   sodipodi:docname="Oak-leaf and acorn ornament.svg" width={280} height={32} style={{color: "var(--fg)"}}>
   <defs
      id="defs74" />
   <sodipodi:namedview
@@ -973,7 +973,7 @@ export default function Page6() {
    version="1.1"
    id="svg80"
    inkscape:version="1.0.2 (e86c870879, 2021-01-15, custom)"
-   sodipodi:docname="Oak-leaf and acorn ornament.svg" width={280} height={32}>
+   sodipodi:docname="Oak-leaf and acorn ornament.svg" width={280} height={32} style={{color: "var(--fg)"}}>
   <defs
      id="defs74" />
   <sodipodi:namedview
@@ -1032,7 +1032,7 @@ export default function Page6() {
                 to the workshop of Saint-Denis — in the surviving south range,
                 opening one room to scholars by appointment.
                 <span className="inline-vine" aria-hidden="true">
-                  <svg version="1.1" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width={20} height={20}>
+                  <svg version="1.1" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width={20} height={20} style={{color: "var(--fg)"}}>
  <path transform="translate(0 -852.36)" d="m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z"/>
 </svg>
                 </span>
@@ -1070,7 +1070,7 @@ export default function Page6() {
    version="1.1"
    id="svg80"
    inkscape:version="1.0.2 (e86c870879, 2021-01-15, custom)"
-   sodipodi:docname="Oak-leaf and acorn ornament.svg" width={280} height={32}>
+   sodipodi:docname="Oak-leaf and acorn ornament.svg" width={280} height={32} style={{color: "var(--fg)"}}>
   <defs
      id="defs74" />
   <sodipodi:namedview
@@ -1198,7 +1198,7 @@ export default function Page6() {
    version="1.1"
    id="svg80"
    inkscape:version="1.0.2 (e86c870879, 2021-01-15, custom)"
-   sodipodi:docname="Oak-leaf and acorn ornament.svg" width={280} height={32}>
+   sodipodi:docname="Oak-leaf and acorn ornament.svg" width={280} height={32} style={{color: "var(--fg)"}}>
   <defs
      id="defs74" />
   <sodipodi:namedview

@@ -7987,31 +7987,31 @@ function Page1() {
           ] })
         ] }) }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "divider", "aria-hidden": "true", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "meander", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "meander", style: { color: "var(--fg)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(255,255,255)", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(255,255,255)", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { fill: "none", stroke: "none", x: "1000", y: "365", width: "16511", height: "4446" })
             ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
             ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
             ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
             ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
             ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
             ] })
           ] }) }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -8032,6 +8032,7 @@ function Page1() {
               "inkscape:version": "1.0.2 (e86c870879, 2021-01-15, custom)",
               "sodipodi:docname": "Cleland ornament 10818 (oak wreath).svg",
               className: "roundel",
+              style: { color: "var(--fg)" },
               children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "defs",
@@ -8103,31 +8104,31 @@ function Page1() {
               ]
             }
           ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "meander", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "meander", style: { color: "var(--fg)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(255,255,255)", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(255,255,255)", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { fill: "none", stroke: "none", x: "1000", y: "365", width: "16511", height: "4446" })
             ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
             ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
             ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
             ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
             ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
             ] })
           ] }) })
         ] }),
@@ -8138,31 +8139,31 @@ function Page1() {
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "projects", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsxs("article", { className: "card", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "card-meander-top", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "card-meander-top", style: { color: "var(--fg)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(255,255,255)", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(255,255,255)", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { fill: "none", stroke: "none", x: "1000", y: "365", width: "16511", height: "4446" })
                 ] }),
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
                 ] }),
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
                 ] }),
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
                 ] }),
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
                 ] }),
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
                 ] })
               ] }) }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "card-no", children: "Project I" }),
@@ -8173,60 +8174,60 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "2022 — 2024" }),
                 /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "gold", children: "In Situ" })
               ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "card-meander-bottom", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "card-meander-bottom", style: { color: "var(--fg)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(255,255,255)", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(255,255,255)", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { fill: "none", stroke: "none", x: "1000", y: "365", width: "16511", height: "4446" })
                 ] }),
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
                 ] }),
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
                 ] }),
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
                 ] }),
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
                 ] }),
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
                 ] })
               ] }) })
             ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("article", { className: "card", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "card-meander-top", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "card-meander-top", style: { color: "var(--fg)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(255,255,255)", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(255,255,255)", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { fill: "none", stroke: "none", x: "1000", y: "365", width: "16511", height: "4446" })
                 ] }),
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
                 ] }),
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
                 ] }),
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
                 ] }),
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
                 ] }),
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
                 ] })
               ] }) }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "card-no", children: "Project II" }),
@@ -8237,60 +8238,60 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "2023 — 2025" }),
                 /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "gold", children: "In Cantiere" })
               ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "card-meander-bottom", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "card-meander-bottom", style: { color: "var(--fg)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(255,255,255)", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(255,255,255)", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { fill: "none", stroke: "none", x: "1000", y: "365", width: "16511", height: "4446" })
                 ] }),
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
                 ] }),
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
                 ] }),
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
                 ] }),
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
                 ] }),
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
                 ] })
               ] }) })
             ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("article", { className: "card", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "card-meander-top", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "card-meander-top", style: { color: "var(--fg)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(255,255,255)", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(255,255,255)", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { fill: "none", stroke: "none", x: "1000", y: "365", width: "16511", height: "4446" })
                 ] }),
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
                 ] }),
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
                 ] }),
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
                 ] }),
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
                 ] }),
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
                 ] })
               ] }) }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "card-no", children: "Project III" }),
@@ -8301,62 +8302,62 @@ function Page1() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "2024 —" }),
                 /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "gold", children: "In Disegno" })
               ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "card-meander-bottom", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "card-meander-bottom", style: { color: "var(--fg)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(255,255,255)", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(255,255,255)", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { fill: "none", stroke: "none", x: "1000", y: "365", width: "16511", height: "4446" })
                 ] }),
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
                 ] }),
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
                 ] }),
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
                 ] }),
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
                 ] }),
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
                 ] })
               ] }) })
             ] })
           ] })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "divider", "aria-hidden": "true", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "meander", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "meander", style: { color: "var(--fg)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(255,255,255)", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(255,255,255)", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { fill: "none", stroke: "none", x: "1000", y: "365", width: "16511", height: "4446" })
             ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
             ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
             ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
             ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
             ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
             ] })
           ] }) }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -8377,6 +8378,7 @@ function Page1() {
               "inkscape:version": "1.0.2 (e86c870879, 2021-01-15, custom)",
               "sodipodi:docname": "Cleland ornament 10818 (oak wreath).svg",
               className: "roundel",
+              style: { color: "var(--fg)" },
               children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "defs",
@@ -8448,31 +8450,31 @@ function Page1() {
               ]
             }
           ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "meander", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "meander", style: { color: "var(--fg)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(255,255,255)", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(255,255,255)", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { fill: "none", stroke: "none", x: "1000", y: "365", width: "16511", height: "4446" })
             ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
             ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
             ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
             ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
             ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
             ] })
           ] }) })
         ] }),
@@ -8495,6 +8497,7 @@ function Page1() {
               "inkscape:version": "1.0.2 (e86c870879, 2021-01-15, custom)",
               "sodipodi:docname": "Cleland ornament 10818 (oak wreath).svg",
               className: "seal",
+              style: { color: "var(--fg)" },
               children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "defs",
@@ -8568,7 +8571,7 @@ function Page1() {
           ),
           /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { id: "studio-statement", children: "Studio Statement" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "dropcap", children: "The studio works in the conviction that Roman geometry is not a quotation but a continuing grammar — a set of rules for proportion, threshold, and ornament still capable of governing contemporary buildings. Each commission begins from the plan in ink on travertine-coloured paper, and is resolved through full- size cartoons before any stone is cut or any wall is raised. Mosaic, frescoed border, and architectural section are treated as one continuous drawing, so that a doorway and a tessera obey the same axis. We build slowly, in small numbers, for clients who understand that a pavement is also a treatise." }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.1", viewBox: "0 0 200 200", xmlns: "http://www.w3.org/2000/svg", className: "vine", children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { transform: "translate(0 -852.36)", d: "m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z" }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.1", viewBox: "0 0 200 200", xmlns: "http://www.w3.org/2000/svg", className: "vine", style: { color: "var(--fg)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { transform: "translate(0 -852.36)", d: "m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z" }) }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "signoff", children: "Lucia Marciana · Roma, MMXXIV" })
         ] })
       ] }),
@@ -9485,33 +9488,33 @@ function Page2() {
         /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "p2-eyebrow", children: "Catalogus Operum · MMXVI–MMXXIV" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "p2-title", children: "Selected Works" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "p2-sub", children: "Seven completed commissions of Atelier Vesperia, set in chronological order from the first atrium in Trastevere to the household aedicula of the present year. Each is described in two sentences and divided by the Greek key." }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p2-rule", "aria-hidden": "true", children: /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.1", viewBox: "0 0 200 200", xmlns: "http://www.w3.org/2000/svg", className: "p2-rule-leaf", children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { transform: "translate(0 -852.36)", d: "m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z" }) }) })
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p2-rule", "aria-hidden": "true", children: /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.1", viewBox: "0 0 200 200", xmlns: "http://www.w3.org/2000/svg", className: "p2-rule-leaf", style: { color: "var(--fg)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { transform: "translate(0 -852.36)", d: "m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z" }) }) })
       ] }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p2-meander-wrap", "aria-hidden": "true", children: /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "p2-meander", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p2-meander-wrap", "aria-hidden": "true", children: /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "p2-meander", style: { color: "var(--fg)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(255,255,255)", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(255,255,255)", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { fill: "none", stroke: "none", x: "1000", y: "365", width: "16511", height: "4446" })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
         ] })
       ] }) }) }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("main", { className: "p2-catalogue", children: works.map((w2, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
@@ -9527,36 +9530,36 @@ function Page2() {
               w2.year
             ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "p2-desc", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.1", viewBox: "0 0 200 200", xmlns: "http://www.w3.org/2000/svg", className: "p2-vine", children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { transform: "translate(0 -852.36)", d: "m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z" }) }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.1", viewBox: "0 0 200 200", xmlns: "http://www.w3.org/2000/svg", className: "p2-vine", style: { color: "var(--fg)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { transform: "translate(0 -852.36)", d: "m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z" }) }),
               w2.desc
             ] })
           ] })
         ] }),
-        i < works.length - 1 && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p2-meander-wrap", "aria-hidden": "true", children: /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "p2-meander", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
+        i < works.length - 1 && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p2-meander-wrap", "aria-hidden": "true", children: /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "p2-meander", style: { color: "var(--fg)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(255,255,255)", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(255,255,255)", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { fill: "none", stroke: "none", x: "1000", y: "365", width: "16511", height: "4446" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
           ] })
         ] }) }) })
       ] }, w2.n)) }),
@@ -9582,6 +9585,7 @@ function Page2() {
               className: "p2-roundel",
               width: 150,
               height: 150,
+              style: { color: "var(--fg)" },
               children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "defs",
@@ -10640,31 +10644,31 @@ function Page3() {
             ] })
           ] })
         ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "meander-rule", width: 880, height: 28, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "meander-rule", width: 880, height: 28, style: { color: "var(--fg)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(255,255,255)", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(255,255,255)", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { fill: "none", stroke: "none", x: "1000", y: "365", width: "16511", height: "4446" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
           ] })
         ] }) }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "chapter", id: "findings", children: [
@@ -10689,6 +10693,7 @@ function Page3() {
                 className: "roundel",
                 width: 180,
                 height: 180,
+                style: { color: "var(--fg)" },
                 children: [
                   /* @__PURE__ */ jsxRuntimeExports.jsx(
                     "defs",
@@ -10770,31 +10775,31 @@ function Page3() {
             /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Three principal pathologies were recorded: bowing of the bedding course across the southern quadrant (max. deflection 38 mm), salt-driven detachment of approximately 1,200 individual tesserae, and a fracture line running NNE–SSW, almost certainly seismic, datable on stratigraphic grounds to the early sixteenth century." })
           ] })
         ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "meander-rule", width: 880, height: 28, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "meander-rule", width: 880, height: 28, style: { color: "var(--fg)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(255,255,255)", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(255,255,255)", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { fill: "none", stroke: "none", x: "1000", y: "365", width: "16511", height: "4446" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
           ] })
         ] }) }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "chapter", id: "geometry", children: [
@@ -10819,6 +10824,7 @@ function Page3() {
                 className: "roundel",
                 width: 180,
                 height: 180,
+                style: { color: "var(--fg)" },
                 children: [
                   /* @__PURE__ */ jsxRuntimeExports.jsx(
                     "defs",
@@ -10920,31 +10926,31 @@ function Page3() {
             /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "The central nine-square field articulates a quincunx of inscribed roundels, each one struck from a radius of 0.171 m — exactly nine-twentieths of the module — and each enclosing a rotated swastika-meander in bardiglio against a giallo ground. A continuous Greek key runs the perimeter at a stride matching the module precisely; nothing in the design is approximate." })
           ] })
         ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "meander-rule", width: 880, height: 28, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "meander-rule", width: 880, height: 28, style: { color: "var(--fg)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(255,255,255)", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(255,255,255)", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { fill: "none", stroke: "none", x: "1000", y: "365", width: "16511", height: "4446" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
           ] })
         ] }) }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "chapter", id: "material", children: [
@@ -10969,6 +10975,7 @@ function Page3() {
                 className: "roundel",
                 width: 180,
                 height: 180,
+                style: { color: "var(--fg)" },
                 children: [
                   /* @__PURE__ */ jsxRuntimeExports.jsx(
                     "defs",
@@ -11071,31 +11078,31 @@ function Page3() {
             ] })
           ] })
         ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "meander-rule", width: 880, height: 28, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "meander-rule", width: 880, height: 28, style: { color: "var(--fg)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(255,255,255)", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(255,255,255)", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { fill: "none", stroke: "none", x: "1000", y: "365", width: "16511", height: "4446" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
           ] })
         ] }) }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "chapter", id: "method", children: [
@@ -11120,6 +11127,7 @@ function Page3() {
                 className: "roundel",
                 width: 180,
                 height: 180,
+                style: { color: "var(--fg)" },
                 children: [
                   /* @__PURE__ */ jsxRuntimeExports.jsx(
                     "defs",
@@ -11214,38 +11222,38 @@ function Page3() {
             ] })
           ] }) })
         ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "meander-rule", width: 880, height: 28, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "meander-rule", width: 880, height: 28, style: { color: "var(--fg)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(255,255,255)", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(255,255,255)", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { fill: "none", stroke: "none", x: "1000", y: "365", width: "16511", height: "4446" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
           ] })
         ] }) }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "credits", "aria-label": "Project credits", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "section-title", children: "Credits" }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "section-sub", children: [
             "Villa Aurelia Pavement, 2022–2024",
-            /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.1", viewBox: "0 0 200 200", xmlns: "http://www.w3.org/2000/svg", className: "vine", width: 28, height: 18, children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { transform: "translate(0 -852.36)", d: "m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z" }) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.1", viewBox: "0 0 200 200", xmlns: "http://www.w3.org/2000/svg", className: "vine", width: 28, height: 18, style: { color: "var(--fg)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { transform: "translate(0 -852.36)", d: "m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z" }) }),
             "Project no. AV-2022-014"
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("ul", { className: "credit-list", children: [
@@ -12204,64 +12212,64 @@ function Page4() {
         /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "hero-sub", children: "Twelve plates of works on paper from the studio of Lucia Marciana — elevations, ceiling templates, and ornamental cartouches drawn for private commission." }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "gold-rule" })
       ] }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "meander", width: 1100, height: 28, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "meander", width: 1100, height: 28, style: { color: "var(--fg)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(255,255,255)", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(255,255,255)", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { fill: "none", stroke: "none", x: "1000", y: "365", width: "16511", height: "4446" })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
         ] })
       ] }) }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("section", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "intro", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "drop", children: "P" }),
         "Each plate gathered here is offered as a commissioned work, drawn by hand at the bench on the via dei Coronari. The selection covers the studio's principal lines of practice — architectural elevations rendered in ink and grey wash, full-scale templates for coffered ceilings, running borders in the Greek manner, and laurel cartouches for inscription above doorways and funerary tablets.",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.1", viewBox: "0 0 200 200", xmlns: "http://www.w3.org/2000/svg", className: "vine", width: 22, height: 22, children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { transform: "translate(0 -852.36)", d: "m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z" }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.1", viewBox: "0 0 200 200", xmlns: "http://www.w3.org/2000/svg", className: "vine", width: 22, height: 22, style: { color: "var(--fg)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { transform: "translate(0 -852.36)", d: "m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z" }) }),
         "Originals travel rolled in linen sleeves; numbered editions of three are pulled on request."
       ] }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "meander", width: 1100, height: 28, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "meander", width: 1100, height: 28, style: { color: "var(--fg)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(255,255,255)", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(255,255,255)", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { fill: "none", stroke: "none", x: "1000", y: "365", width: "16511", height: "4446" })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
         ] })
       ] }) }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
@@ -12288,6 +12296,7 @@ function Page4() {
               className: "roundel",
               width: 140,
               height: 140,
+              style: { color: "var(--fg)" },
               children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "defs",
@@ -12370,31 +12379,31 @@ function Page4() {
           ] })
         ] }, p2.tab)) })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "meander", width: 1100, height: 28, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "meander", width: 1100, height: 28, style: { color: "var(--fg)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(255,255,255)", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(255,255,255)", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { fill: "none", stroke: "none", x: "1000", y: "365", width: "16511", height: "4446" })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
         ] })
       ] }) }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
@@ -12405,31 +12414,31 @@ function Page4() {
           /* @__PURE__ */ jsxRuntimeExports.jsx("dd", { children: t2.price })
         ] }, t2.item)) }) })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "meander", width: 1100, height: 28, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "meander", width: 1100, height: 28, style: { color: "var(--fg)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(255,255,255)", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(255,255,255)", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { fill: "none", stroke: "none", x: "1000", y: "365", width: "16511", height: "4446" })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
         ] })
       ] }) }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "colophon", children: [
@@ -12454,6 +12463,7 @@ function Page4() {
               className: "seal-svg",
               width: 200,
               height: 200,
+              style: { color: "var(--fg)" },
               children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "defs",
@@ -13515,33 +13525,33 @@ function Page5() {
           /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "eyebrow", children: "V · Studio & Practice" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "title", children: "Lucia Marciana" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "subtitle", children: "Architect and mosaicist. Founder of Atelier Vesperia, working in the lineage of Roman imperial geometry — axis, rhythm, and the quiet authority of stone." }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "gold-rule", children: /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.1", viewBox: "0 0 200 200", xmlns: "http://www.w3.org/2000/svg", className: "vine", children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { transform: "translate(0 -852.36)", d: "m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z" }) }) })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "gold-rule", children: /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.1", viewBox: "0 0 200 200", xmlns: "http://www.w3.org/2000/svg", className: "vine", style: { color: "var(--fg)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { transform: "translate(0 -852.36)", d: "m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z" }) }) })
         ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "divider", children: /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "meander-band", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "divider", children: /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "meander-band", style: { color: "var(--fg)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(255,255,255)", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(255,255,255)", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { fill: "none", stroke: "none", x: "1000", y: "365", width: "16511", height: "4446" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
           ] })
         ] }) }) }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "block", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "axis-column", children: [
@@ -13570,6 +13580,7 @@ function Page5() {
               "inkscape:version": "1.0.2 (e86c870879, 2021-01-15, custom)",
               "sodipodi:docname": "Cleland ornament 10818 (oak wreath).svg",
               className: "oak",
+              style: { color: "var(--fg)" },
               children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "defs",
@@ -13702,31 +13713,31 @@ function Page5() {
             ] })
           ] })
         ] }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "divider", children: /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "meander-band", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "divider", children: /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "meander-band", style: { color: "var(--fg)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(255,255,255)", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(255,255,255)", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { fill: "none", stroke: "none", x: "1000", y: "365", width: "16511", height: "4446" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
           ] })
         ] }) }) }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "block", children: [
@@ -13763,6 +13774,7 @@ function Page5() {
               "inkscape:version": "1.0.2 (e86c870879, 2021-01-15, custom)",
               "sodipodi:docname": "Cleland ornament 10818 (oak wreath).svg",
               className: "oak",
+              style: { color: "var(--fg)" },
               children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "defs",
@@ -13873,31 +13885,31 @@ function Page5() {
             ] })
           ] })
         ] }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "divider", children: /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "meander-band", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "divider", children: /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "meander-band", style: { color: "var(--fg)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(255,255,255)", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(255,255,255)", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { fill: "none", stroke: "none", x: "1000", y: "365", width: "16511", height: "4446" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
           ] })
         ] }) }) }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "block", children: [
@@ -13918,7 +13930,7 @@ function Page5() {
             /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "city", children: "Roma · MMXXIV" })
           ] })
         ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "gold-rule", style: { marginTop: "4rem" }, children: /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.1", viewBox: "0 0 200 200", xmlns: "http://www.w3.org/2000/svg", className: "vine", children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { transform: "translate(0 -852.36)", d: "m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z" }) }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "gold-rule", style: { marginTop: "4rem" }, children: /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.1", viewBox: "0 0 200 200", xmlns: "http://www.w3.org/2000/svg", className: "vine", style: { color: "var(--fg)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { transform: "translate(0 -852.36)", d: "m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z" }) }) }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("nav", { style: { textAlign: "center", marginTop: "3rem", fontFamily: "var(--font-display), serif", letterSpacing: "0.28em", textTransform: "uppercase", fontSize: "0.78rem" }, children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#/page-4", style: { color: "var(--primary)", textDecoration: "none", marginRight: "2rem" }, children: "← Drawings" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#/page-6", style: { color: "var(--accent)", textDecoration: "none" }, children: "Correspondence →" })
@@ -14818,31 +14830,31 @@ function Page6() {
         /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "The atelier receives visitors by appointment in the heart of Rome, two streets from the Tiber. Correspondence regarding architectural commissions, pavement work, and bespoke ornament is most warmly welcomed." })
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "page6-section-mark", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "meander", width: 520, height: 22, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "meander", width: 520, height: 22, style: { color: "var(--fg)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(255,255,255)", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(255,255,255)", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { fill: "none", stroke: "none", x: "1000", y: "365", width: "16511", height: "4446" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
           ] })
         ] }) }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "label", children: "I · Studio & Hours" })
@@ -14905,6 +14917,7 @@ function Page6() {
             className: "seal",
             width: 200,
             height: 200,
+            style: { color: "var(--fg)" },
             children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "defs",
@@ -14980,7 +14993,7 @@ function Page6() {
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "page6-scope", children: [
         "The studio undertakes a small number of works each year so that each may receive the consideration it deserves.",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.1", viewBox: "0 0 200 200", xmlns: "http://www.w3.org/2000/svg", className: "vine", width: 28, height: 14, children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { transform: "translate(0 -852.36)", d: "m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z" }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.1", viewBox: "0 0 200 200", xmlns: "http://www.w3.org/2000/svg", className: "vine", width: 28, height: 14, style: { color: "var(--fg)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { transform: "translate(0 -852.36)", d: "m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z" }) }),
         "Architectural design — including villa, chapel, and civic interior — begins from €40,000. Bespoke pavement, mosaic, and applied ornament begins from €8,000 and is priced by surface and pattern complexity."
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "page6-pricelist", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("dl", { children: [
@@ -14998,31 +15011,31 @@ function Page6() {
         "."
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { className: "page6-cta", href: "mailto:studio@vesperia.atelier", children: "Begin a Commission" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "page6-section-mark", style: { marginTop: "4.5rem" }, children: /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "meander", width: 520, height: 22, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "page6-section-mark", style: { marginTop: "4.5rem" }, children: /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { version: "1.2", baseProfile: "tiny", width: "165.11mm", height: "44.47mm", viewBox: "1000 364 16511 4447", preserveAspectRatio: "xMidYMid", "fill-rule": "evenodd", "stroke-width": "28.222", "stroke-linejoin": "round", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink", "xml:space": "preserve", className: "meander", width: 520, height: 22, style: { color: "var(--fg)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { visibility: "visible", id: "Slide_1", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(255,255,255)", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(255,255,255)", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_1_0", "stroke-linejoin": "round", d: "M 9255,4809 L 1000,4809 1000,364 17510,364 17510,4809 9255,4809 Z" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { fill: "none", stroke: "none", x: "1000", y: "365", width: "16511", height: "4446" })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_2_0", "stroke-linejoin": "round", d: "M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z" })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_3_0", "stroke-linejoin": "round", d: "M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z" })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_4_0", "stroke-linejoin": "round", d: "M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z" })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_5_0", "stroke-linejoin": "round", d: "M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z" })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "rgb(0,0,0)", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "rgb(0,0,0)", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", stroke: "none", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "none", stroke: "currentColor", id: "Drawing_6_0", "stroke-linejoin": "round", d: "M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z" })
         ] })
       ] }) }) }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("nav", { className: "page6-pages", "aria-label": "Other pages", children: [

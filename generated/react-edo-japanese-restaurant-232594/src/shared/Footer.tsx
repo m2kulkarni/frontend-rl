@@ -3,7 +3,7 @@ export default function Footer() {
         <footer className="site-footer" role="contentinfo">
           <div className="site-footer__inner">
             <div className="site-footer__seal" aria-hidden="true">
-              <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+              <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" style={{color: "var(--fg)"}}>
                 <circle cx="32" cy="32" r="30" fill="none" stroke="currentColor" stroke-width="1.2"/>
                 <circle cx="32" cy="32" r="22" fill="none" stroke="currentColor" stroke-width="0.8"/>
                 <text x="32" y="38" text-anchor="middle" font-family="serif" font-size="18" fill="currentColor">月</text>
