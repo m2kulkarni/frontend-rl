@@ -265,9 +265,22 @@ def react_project_files(
         footer_html — same for footer.
         num_pages   — App.tsx imports & routes Page1..PageN accordingly.
     """
+    # Convert HTML→JSX, then rewrite cross-page links (page-N.html → #/page-N)
+    # so the hash router in App.tsx picks up clicks. Imported here (not at
+    # module top) to avoid the circular page_react ↔ react_templates dance.
+    from proximal_env.generator.page_react import rewrite_react_routes
+
     # Indent the converted JSX by 8 spaces so it sits inside `return (\n...\n)`
-    nav_jsx = "\n".join("        " + ln for ln in html_to_jsx(nav_html).splitlines() if ln.strip())
-    footer_jsx = "\n".join("        " + ln for ln in html_to_jsx(footer_html).splitlines() if ln.strip())
+    nav_jsx = "\n".join(
+        "        " + ln for ln in
+        rewrite_react_routes(html_to_jsx(nav_html)).splitlines()
+        if ln.strip()
+    )
+    footer_jsx = "\n".join(
+        "        " + ln for ln in
+        rewrite_react_routes(html_to_jsx(footer_html)).splitlines()
+        if ln.strip()
+    )
 
     return [
         ("package.json", PACKAGE_JSON),

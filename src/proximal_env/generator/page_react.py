@@ -180,6 +180,19 @@ prices, addresses go in. No lorem ipsum.
   default export."""
 
 
+# ---- Route rewriting (post-process) ----------------------------------------
+
+# Vanilla shared HTML uses href="page-N.html" for cross-page links. The React
+# variant runs through a hash router that expects href="#/page-N". This is a
+# deterministic fix-up — no JSX surgery, just URL rewriting.
+_HREF_PAGE_HTML_RE = re.compile(r'href="page-(\d+)\.html"', re.IGNORECASE)
+
+
+def rewrite_react_routes(jsx: str) -> str:
+    """Rewrite `href="page-N.html"` → `href="#/page-N"` for the React variant."""
+    return _HREF_PAGE_HTML_RE.sub(r'href="#/page-\1"', jsx)
+
+
 # ---- Motif inlining (post-process) -----------------------------------------
 
 # Match `<Motif name="X" {...other-attrs} />` (and `<Motif name="X" {...} ></Motif>`).
@@ -232,6 +245,10 @@ def inline_motif_jsx(tsx: str, library: StyleLibrary) -> str:
         body = _DOCTYPE_RE.sub("", body)
         body = body.strip()
 
+        # XML/HTML comments (e.g. `<!-- Created with Inkscape -->` from
+        # Wikimedia source SVGs) aren't valid JSX. Strip them — they're
+        # metadata, not visual content.
+        body = re.sub(r"<!--.*?-->", "", body, flags=re.DOTALL)
         # The source SVG might contain `class="foo"` — needs JSX rewrite.
         body = body.replace("class=", "className=")
         # Inline-style attributes inside the SVG (`style="x:y"`) ALSO need to
@@ -302,6 +319,7 @@ def generate_react_page_tsx(
     text = "".join(b.text for b in final.content if b.type == "text")
     tsx = _strip_code_fence(text)
     tsx = inline_motif_jsx(tsx, library)
+    tsx = rewrite_react_routes(tsx)
 
     page_n = page_brief["filename"].replace("page-", "").replace(".html", "")
     target = f"src/pages/Page{page_n}.tsx"
