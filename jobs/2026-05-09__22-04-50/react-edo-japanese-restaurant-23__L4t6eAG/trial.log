@@ -1,0 +1,71 @@
+Selected strategy: _ModalDirect
+Running command: if command -v apk &> /dev/null; then  apk add --no-cache curl bash nodejs npm; elif command -v apt-get &> /dev/null; then  apt-get update && apt-get install -y curl; elif command -v yum &> /dev/null; then  yum install -y curl; else  echo "Warning: No known package manager found, assuming curl is available" >&2; fi
+Command outputs captured
+Running command: set -euo pipefail; if command -v apk &> /dev/null; then  npm install -g @anthropic-ai/claude-code; else  curl -fsSL https://claude.ai/install.sh | bash -s --; fi && echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc && export PATH="$HOME/.local/bin:$PATH" && claude --version
+Command outputs captured
+Running command: mkdir -p $CLAUDE_CONFIG_DIR/debug $CLAUDE_CONFIG_DIR/projects/-app $CLAUDE_CONFIG_DIR/shell-snapshots $CLAUDE_CONFIG_DIR/statsig $CLAUDE_CONFIG_DIR/todos $CLAUDE_CONFIG_DIR/skills && if [ -d ~/.claude/skills ]; then cp -r ~/.claude/skills/. $CLAUDE_CONFIG_DIR/skills/ 2>/dev/null || true; fi
+Command outputs captured
+Running command: export PATH="$HOME/.local/bin:$PATH"; claude --verbose --output-format=stream-json --permission-mode=bypassPermissions --max-budget-usd 20 --print -- '# Task: replicate this 6-page website design from screenshots — React + Vite
+
+You are given screenshots of a multi-page website. Your job is to write **React + TypeScript** components that visually replicate the design. The project skeleton is already set up; you only write the per-page components.
+
+## Inputs
+
+- **`/app/screenshots/page-1.png` ... `page-6.png`** — full-page screenshots, one per page. Each is the entire scrollable rendering at viewport 1440 px wide.
+- **`/app/screenshots/page-K-tile-J.png`** — 1440×1568 tile crops of pages taller than 2000 px. Use these for fine detail (small typography, narrow ornament).
+- **`/app/motifs/`** — flat directory of `.svg` ornament files used in the original design (filenames match the `<Motif name=...>` you pass to the `<Motif>` component — see below).
+
+## The project already has
+
+- `/app/package.json` — pinned `react@18.3.1`, `react-dom@18.3.1`, `vite@5.4.10`, `typescript@5.6.3`. **Do not edit.**
+- `/app/vite.config.ts`, `/app/tsconfig.json`, `/app/index.html` — pre-configured. **Do not edit.**
+- `/app/design-system.css` — CSS custom properties for the design (`--bg`, `--fg`, `--primary`, `--font-display`, `--font-body`, etc.). Loaded automatically. **Do not edit.**
+- `/app/node_modules/` — already installed, do not run `npm install`.
+- `/app/src/main.tsx` — bootstraps React. **Do not edit.**
+- `/app/src/App.tsx` — hash-router that routes `#/page-1` → `Page1`, `#/page-2` → `Page2`, etc. **Do not edit.**
+- `/app/src/shared/Nav.tsx` — the verbatim shared header for every page. Use as `<Nav />`. **Do not edit.**
+- `/app/src/shared/Footer.tsx` — the verbatim shared footer. Use as `<Footer />`. **Do not edit.**
+- `/app/src/shared/Motif.tsx` — placeholder component. Reference motifs as `<Motif name="kiri-paulownia-mon" className="..." width={120} height={120} />`. The verifier replaces these with verbatim source SVG bodies before grading.
+
+## Your output
+
+Write/edit files in `/app/src/pages/`:
+
+- `Page1.tsx`, `Page2.tsx`, …, `Page6.tsx` — one default-exported component per page. Component names match: `function Page1() { ... }`.
+
+The verifier will run `npm run build` then screenshot each route. **You do NOT need to build or run anything.**
+
+## React/TSX rules (must follow)
+
+- JSX syntax: `className=` (not `class=`), `htmlFor=` (not `for=`), `{expressions}` for JS values, `style={{ background: '"'"'var(--bg)'"'"' }}` for inline styles (note double braces in JSX object-literal style).
+- Per-page CSS goes in a `<style>{`...CSS...`}</style>` block at the start of the component'"'"'s return — JSX template literal so curly braces in CSS aren'"'"'t interpreted as expressions.
+- Always render `<Nav />` at the top and `<Footer />` at the bottom of each page'"'"'s outer wrapper.
+- Use design-system tokens: `var(--bg)`, `var(--fg)`, `var(--primary)`, `var(--font-display)`, `var(--font-body)`, etc. Don'"'"'t hardcode colors or fonts that should come from the design system.
+- For ornaments use `<Motif name="..." className="..." width={...} height={...} />`. **Do not draw your own SVGs. Do not import SVG files.** The build pipeline replaces every `<Motif>` instance with the verbatim source SVG body, carrying through your className/width/height/style props.
+- Cross-page links use the App-level hash router: `<a href="#/page-N">`. Do not link to `page-N.html` — those don'"'"'t exist in the built dist.
+
+## Constraints
+
+- **Static SPA only.** No data fetching, no setState beyond minimal client interactions. The verifier compares the rendered output, not interactivity.
+- **Viewport: 1440 × 900.** Layout for that width.
+- **Typography.** The original loads from Google Fonts via `<link>`. The fonts the original might have chosen come from this curated list (style-specific):
+  ```
+  Inter, Klee One, Kosugi Maru, Noto Serif JP, Sawarabi Gothic, Sawarabi Mincho, Shippori Mincho, Source Sans 3, Yuji Syuku
+  ```
+  Pick the **display** and **body** font(s) from this list and reference them via the design-system CSS variables (`--font-display`, `--font-body`) — those variables are pre-defined and the Google Fonts `<link>` is already in `index.html`.
+
+## What you do NOT have
+
+- The original source.
+- A list of which motif belongs in which slot.
+- A design-system / palette / font spec.
+
+All of that must be inferred from the visual evidence in the screenshots (and, for animated tasks, the filmstrip / frames).
+
+## What "replication" means
+
+Match: layout structure, color palette, typography hierarchy, the placement and styling of motifs, cross-page consistency of header/footer, and the overall architectural-aesthetic commitment of the site. The grader compares your rendering to the original on multiple visual axes.
+' 2>&1 </dev/null | tee /logs/agent/claude-code.txt
+Command outputs captured
+Wrote Claude Code trajectory to jobs/2026-05-09__22-04-50/react-edo-japanese-restaurant-23__L4t6eAG/agent/trajectory.json
+Convention artifacts dir not found or download failed (best-effort)
