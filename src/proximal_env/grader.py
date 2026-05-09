@@ -1,20 +1,29 @@
-"""Composite grader — weighted combination of the per-rubric scores.
+"""Decomposed grader — independent reward streams, no geometric mean.
 
-The composite score is a coverage-gated geometric mean of the visual,
-palette, structural, and typography rubrics.
+The grader emits each rubric score independently, plus `overall` (set to
+the visual SSIM score) as the primary outcome reward Harbor records as
+"the" scalar reward for the trial.
 
-Why geometric mean: a candidate that nails 4 of 5 dimensions but completely
-misses the palette should not score 0.8 — it should score lower, because
-"right structure, wrong vibe" is a much bigger failure than "right vibe,
-slightly off structure." Geometric mean is harsher on weak components than
-arithmetic mean.
+We *used* to compute a weighted geometric mean across all rubrics gated by
+coverage. That worked for human-readable single-score ranking but is bad
+for any RL use of this env:
 
-Why coverage as a multiplier: a candidate that produced 4 of 6 pages should
-not have its per-page scores averaged-away; the missing pages should count.
-Coverage = 4/6 → composite ≤ 0.667.
+- Geomean flattens per-axis gradient (high-scoring rubrics dominate the
+  derivative; weak rubrics learn slowly or not at all).
+- A single near-zero rubric (typography is the canonical example) dragged
+  the whole composite down by a flat factor on every trial — flat penalty,
+  no gradient.
+- Coverage-as-multiplicative-gate creates a discontinuous reward landscape:
+  a missed page has outsized impact relative to gradual quality changes.
 
-Weights are reasonable defaults for v1. Calibration against ~30 hand-ranked
-pairs would tune these to maximize agreement with human judgment.
+Design now: each rubric is its own number in [0, 1], emitted side-by-side.
+The "overall" key is **visual SSIM** (the actual outcome we care about) so
+Harbor's default scalar-reward path keeps working. An optional
+`overall_geomean` is also emitted for backward-compat with the visualizer's
+existing aggregate display — it's no longer load-bearing.
+
+See `docs/rubric_audit.md` for the full reasoning + the per-rubric
+hack-fix plan.
 """
 
 from __future__ import annotations
@@ -25,56 +34,59 @@ from proximal_env.rubric import (
     animation, consistency, coverage, palette, structural, typography, visual,
 )
 
-# Default weights. Tunable. Animation is only included when the task is
-# actually animated — see grade() below.
-WEIGHTS: dict[str, float] = {
-    "visual": 2.0,       # the primary "does it look right" signal
+
+# Optional: an aggregate display number for the visualizer's score chip.
+# This is NOT used as a training signal and is NOT what Harbor reads as
+# the trial reward. It's a friendly summary stat for humans skimming the
+# viewer.
+_DISPLAY_WEIGHTS: dict[str, float] = {
+    "visual": 2.0,
     "palette": 1.0,
     "structural": 1.0,
-    "typography": 0.5,   # weakest signal in current implementation
-    "animation": 1.0,    # only contributes when task is animated
-    "consistency": 0.5,  # header/footer match across pages — structural
-                         # integrity check (independent of GT comparison)
+    "typography": 0.5,
+    "animation": 1.0,
+    "consistency": 0.5,
 }
 
-COMPOSED_STATIC = ("visual", "palette", "structural", "typography", "consistency")
-COMPOSED_ANIMATED = ("visual", "palette", "structural", "typography", "animation", "consistency")
 
+def _display_geomean(scores: dict[str, float]) -> float:
+    """Coverage-free weighted geomean over whatever scores are present.
 
-def _weighted_geometric_mean(scores: dict[str, float], keys: tuple[str, ...]) -> float:
-    """Weighted geometric mean over `keys`, using WEIGHTS."""
-    total_weight = sum(WEIGHTS[k] for k in keys)
+    Used only for `overall_geomean` in reward.json — a human-readable summary
+    column in the visualizer. NOT used by Harbor, NOT used as a training
+    signal. If you're tempted to use this for anything important, read
+    docs/rubric_audit.md instead.
+    """
+    keys = [k for k in _DISPLAY_WEIGHTS if k in scores]
+    if not keys:
+        return 0.0
+    total_weight = sum(_DISPLAY_WEIGHTS[k] for k in keys)
     product = 1.0
     for k in keys:
-        # Floor each score at a small epsilon so a single 0 doesn't zero the
-        # product; we still want low scores to drag the composite down.
         s = max(scores[k], 1e-3)
-        product *= s ** (WEIGHTS[k] / total_weight)
+        product *= s ** (_DISPLAY_WEIGHTS[k] / total_weight)
     return product
 
 
 def grade(ground_truth_dir: Path, candidate_dir: Path) -> dict:
-    """Run every rubric and produce a composite score.
+    """Run every rubric and emit independent reward streams.
 
-    Returns a dict shaped to fit Harbor's reward.json schema (all values
-    numeric). For animated tasks, the `animation` key is also present and
-    contributes to the composite. For static tasks, animation is omitted
-    entirely (so the geomean isn't diluted by a free 1.0 on an axis we
-    aren't actually measuring).
+    Returns a dict of all numeric scores. Schema:
 
-    Animated case:
         {
-          "overall":    float,  # coverage * geomean(visual, palette, structural,
-                                #                   typography, animation)
-          "coverage":   float,
-          "visual":     float,
-          "palette":    float,
-          "structural": float,
-          "typography": float,
-          "animation":  float
+          "overall":          float,  # = visual; this is THE reward Harbor logs
+          "overall_geomean":  float,  # display-only (visualizer)
+          "coverage":         float,
+          "visual":           float,
+          "palette":          float,
+          "structural":       float,
+          "typography":       float,
+          "consistency":      float,
+          "animation":        float,  # animated tasks only — key omitted otherwise
         }
 
-    Static case: same dict minus `animation`.
+    Each value is a Python float in [0, 1]. Coverage is no longer a
+    multiplicative gate — it's just another stream.
     """
     gt = Path(ground_truth_dir)
     cand = Path(candidate_dir)
@@ -88,19 +100,23 @@ def grade(ground_truth_dir: Path, candidate_dir: Path) -> dict:
     con = consistency.score(gt, cand)
 
     components: dict[str, float] = {
-        "visual": vis, "palette": pal, "structural": stc,
-        "typography": typ, "consistency": con,
+        "coverage": cov,
+        "visual": vis,
+        "palette": pal,
+        "structural": stc,
+        "typography": typ,
+        "consistency": con,
     }
     if animated:
         components["animation"] = animation.score(gt, cand)
 
-    keys = COMPOSED_ANIMATED if animated else COMPOSED_STATIC
-    geom = _weighted_geometric_mean(components, keys)
-    overall = cov * geom
+    # The headline reward Harbor logs is the visual SSIM score — that's the
+    # actual "did the agent solve the replication task" signal. Auxiliary
+    # streams are siblings, not sub-components of overall.
+    overall = vis
 
-    result: dict[str, float] = {
+    return {
         "overall": float(overall),
-        "coverage": float(cov),
+        "overall_geomean": float(_display_geomean(components)),
         **{k: float(v) for k, v in components.items()},
     }
-    return result

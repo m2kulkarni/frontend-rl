@@ -1,4 +1,5 @@
-"""Animation rubric: frame-SSIM over time + @keyframes Jaccard.
+"""Animation rubric: frame-SSIM over time + @keyframes Jaccard, gated on
+detected motion in the candidate's rendering.
 
 Two sub-signals composed into one [0,1] score:
 
@@ -18,7 +19,15 @@ Two sub-signals composed into one [0,1] score:
         This captures *intent* fidelity — did the candidate animate the same
         kind of property change, regardless of which element gets it.
 
-Composite:  animation = 0.7 × frame_ssim + 0.3 × keyframes_jaccard.
+  • motion gate
+        Compute pixelwise frame-to-frame delta on the candidate's recorded
+        frames. If no page exhibits motion above MIN_MOTION_DELTA, the
+        animation score is forced to 0 — closes adversaries that declare
+        the GT's @keyframes verbatim but never apply the class, or apply
+        it to a 0×0 / display:none element. Without the gate, those
+        adversaries score 0.3 × Jaccard for free.
+
+Composite:  animation = motion_detected × (0.7 × frame_ssim + 0.3 × keyframes_jaccard).
 
 This rubric only makes sense for animated tasks. The grader gates its inclusion
 on `is_animated_task(task_dir)` so static tasks aren't penalized.
@@ -43,6 +52,14 @@ NAME = "animation"
 # actual visual outcome; keyframes-jaccard is a sanity check on the strategy).
 W_FRAME = 0.7
 W_KEYFRAMES = 0.3
+
+# Motion gate — a candidate must move pixels by at least this much (mean
+# absolute pixel delta in [0, 255]) on at least one recorded page to be
+# considered "actually animating." Below this we treat the candidate as
+# static and force the animation score to 0 regardless of how cleanly the
+# @keyframes Jaccard aligns. 1.5 is loose enough to allow font-rendering
+# jitter / sub-pixel text shifts but tight enough to catch flat pages.
+MIN_MOTION_DELTA = 1.5
 
 # Regex for `@keyframes <name> { ... }` blocks. Allows one level of nesting
 # (the per-step blocks like `0% { ... }`). Suitable for our well-formed CSS.
@@ -111,6 +128,44 @@ def _frame_ssim(gt_task: Path, cand_task: Path) -> float:
     return sum(per_page.values()) / len(per_page)
 
 
+# ---- motion gate -------------------------------------------------------------
+
+def _max_motion_per_page(video_root: Path) -> float:
+    """Maximum mean-absolute frame-to-frame pixel delta across pages.
+
+    For each page-K subdir, compute mean(|frame[i] - frame[i-1]|) across
+    consecutive frame pairs. Take the max across pages. Returns 0.0 if
+    no frames present (i.e., we couldn't record).
+
+    A page that's completely static (no animation, no class hookup)
+    returns ~0; a page with even subtle motion returns >> MIN_MOTION_DELTA.
+    """
+    if not video_root.is_dir():
+        return 0.0
+    page_max = 0.0
+    for page_dir in sorted(video_root.iterdir()):
+        if not page_dir.is_dir():
+            continue
+        frames = sorted(page_dir.glob("frame-*.png"))
+        if len(frames) < 2:
+            continue
+        prev = np.array(Image.open(frames[0]).convert("RGB"), dtype=np.int16)
+        deltas: list[float] = []
+        for f in frames[1:]:
+            cur = np.array(Image.open(f).convert("RGB"), dtype=np.int16)
+            if cur.shape != prev.shape:
+                # Resize doesn't preserve animation comparison meaning;
+                # if dimensions vary frame-to-frame something is off,
+                # safest is to treat that page as no-motion.
+                prev = cur
+                continue
+            deltas.append(float(np.mean(np.abs(cur - prev))))
+            prev = cur
+        if deltas:
+            page_max = max(page_max, max(deltas))
+    return page_max
+
+
 # ---- @keyframes Jaccard ------------------------------------------------------
 
 def _all_css_for_task(task_dir: Path) -> str:
@@ -172,27 +227,56 @@ def _keyframes_jaccard(gt_task: Path, cand_task: Path) -> float:
 # ---- public API --------------------------------------------------------------
 
 def score(ground_truth_dir: Path, candidate_dir: Path) -> float:
-    """Composite animation score in [0, 1]."""
+    """Composite animation score in [0, 1].
+
+    Gated: if the candidate's rendered frames show no motion above
+    MIN_MOTION_DELTA on any page, the score is 0 regardless of how well
+    its @keyframes match GT's. Closes the "declare keyframes but never
+    apply the class" hack.
+    """
     gt = Path(ground_truth_dir)
     cand = Path(candidate_dir)
-    fs = _frame_ssim(gt, cand)
+
+    with tempfile.TemporaryDirectory() as gt_tmp, tempfile.TemporaryDirectory() as cand_tmp:
+        record_task(gt,   videos_dir=Path(gt_tmp))
+        record_task(cand, videos_dir=Path(cand_tmp))
+        gt_root = Path(gt_tmp)
+        cand_root = Path(cand_tmp)
+
+        cand_motion = _max_motion_per_page(cand_root)
+        if cand_motion < MIN_MOTION_DELTA:
+            # No detectable motion in the candidate's render → policy
+            # didn't actually animate anything. Force-zero the score.
+            return 0.0
+
+        per_page = _frame_ssim_per_page(gt_root, cand_root)
+
+    fs = sum(per_page.values()) / len(per_page) if per_page else 0.0
     kj = _keyframes_jaccard(gt, cand)
     return W_FRAME * fs + W_KEYFRAMES * kj
 
 
 def score_detailed(ground_truth_dir: Path, candidate_dir: Path) -> dict:
-    """Composite + per-page frame-SSIM + keyframes-jaccard."""
+    """Composite + per-page frame-SSIM + keyframes-jaccard + motion gate."""
     gt = Path(ground_truth_dir)
     cand = Path(candidate_dir)
     with tempfile.TemporaryDirectory() as gt_tmp, tempfile.TemporaryDirectory() as cand_tmp:
         record_task(gt,   videos_dir=Path(gt_tmp))
         record_task(cand, videos_dir=Path(cand_tmp))
-        per_page = _frame_ssim_per_page(Path(gt_tmp), Path(cand_tmp))
+        gt_root = Path(gt_tmp)
+        cand_root = Path(cand_tmp)
+        per_page = _frame_ssim_per_page(gt_root, cand_root)
+        cand_motion = _max_motion_per_page(cand_root)
+
     fs_mean = sum(per_page.values()) / len(per_page) if per_page else 0.0
     kj = _keyframes_jaccard(gt, cand)
+    motion_passed = cand_motion >= MIN_MOTION_DELTA
+    raw_overall = W_FRAME * fs_mean + W_KEYFRAMES * kj
     return {
         "frame_ssim_mean": fs_mean,
         "frame_ssim_per_page": per_page,
         "keyframes_jaccard": kj,
-        "overall": W_FRAME * fs_mean + W_KEYFRAMES * kj,
+        "candidate_motion_max": cand_motion,
+        "motion_gate_passed": motion_passed,
+        "overall": raw_overall if motion_passed else 0.0,
     }

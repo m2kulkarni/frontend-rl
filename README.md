@@ -19,6 +19,13 @@ Decision log lives in `docs/`:
 - [`docs/eval_report.md`](docs/eval_report.md) — **30 × 2 trial eval results**
 - [`docs/rubric_audit.md`](docs/rubric_audit.md) — reward-hack audit + decomposition plan for RL use
 
+## Design Choices i made
+- **Architectural Style Diversity** - Five Styles (roman, gothic, south-indian, japanese and persian) for the website design. Along with different palettes and targetting different industries. I wanted the websites to be visually tough to reproduce, while also being diverse enough. This is also easy to extend, because we can add more styles, more industries, more palettes etc.
+- **Motifs** - The RL environemnt sees a few SVG's and their description while making the website. LLMs are terrible at recreating hard designs, and I did not want that to influence our environment, its a seperate problem to make good designs. Plus, in a real world usecase, a website maker would design motifs (logos, brand design), give it to the LLM and ask it to use that to make the website appealing.  There were some issues with SVGs and using them, so for this env, I ask the LLM to not inline the SVGs, and I post process replace it. Slightly hacky, but letting the LLM use SVGs will just bloat the context.
+- **Animation rendering** - I render 30 frames, at equal intervals and then make 1 image out of these 30 images. This way, the LLM can look at whats happening. Example [filmstrip](generated/anim-high-gothic-civic-597158/videos/page-1/filmstrip.png). And the recreated website attempts - [#1](jobs/2026-05-09__15-57-29/anim-high-gothic-civic-597158__eveu4Ti/artifacts/output/page-1.html), [#2](jobs/2026-05-09__15-57-29/anim-high-gothic-civic-597158__XEo6Zcz/artifacts/output/page-1.html).
+
+
+
 ## Latest eval — 30 tasks × 2 attempts
 
 **Run:** `jobs/2026-05-09__15-57-29/`  ·  **Wall clock:** 1h 32m  ·  **Cost:** ~$600  ·  **Agent:** claude-code with `claude-opus-4-7`

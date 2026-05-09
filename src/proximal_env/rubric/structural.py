@@ -19,6 +19,7 @@ deliberately skip `<style>`, `<script>`, `<meta>`, `<link>` and the like.
 
 from __future__ import annotations
 
+import re
 from collections import Counter
 from pathlib import Path
 
@@ -43,16 +44,44 @@ STRUCTURAL_TAGS: frozenset[str] = frozenset({
 })
 
 
+_HIDE_RE = re.compile(
+    r"(?:^|;)\s*(display\s*:\s*none|visibility\s*:\s*hidden)\s*(?:;|$)",
+    re.IGNORECASE,
+)
+
+
+def _is_hidden_inline(tag: Tag) -> bool:
+    """Return True if a tag is hidden via inline `style=` or `hidden` attr.
+
+    Closes the hack where an adversary stuffs every GT tag into an
+    invisible subtree to game tag-bag Jaccard. Doesn't catch CSS-driven
+    hiding from `<style>` or external CSS — that would require a real CSS
+    cascade resolver. Inline `style=` is what most adversarial agents
+    would reach for, so it's the right level of cheap protection.
+    """
+    if tag.has_attr("hidden"):
+        return True
+    style = tag.get("style", "")
+    if isinstance(style, list):  # bs4 sometimes returns lists
+        style = " ".join(style)
+    return bool(style and _HIDE_RE.search(style))
+
+
 def _layout_multiset(html_path: Path) -> Counter:
     """Build a multiset of structural tags used in a page.
 
-    We deliberately use depth-agnostic tag counts rather than (tag, depth)
-    pairs. Empirically, depth-aware matching was too strict: a candidate that
-    happens to use one fewer wrapper `<div>` ends up with all its tags at
-    depth-1, scoring near-zero on Jaccard despite structurally similar
-    vocabulary. The visual SSIM rubric already captures spatial fidelity
-    (which is where exact nesting depth matters); structural's job is the
-    "did the candidate use a similar set of layout primitives" question.
+    Walk semantics:
+      - Start at `<body>` (skip everything in `<head>`, including `<style>`,
+        `<link>`, `<meta>` — these aren't visible structure).
+      - Skip subtrees rooted at a hidden element (inline `style="display:none"`,
+        `visibility:hidden`, or the `hidden` attribute). Adversaries can
+        otherwise stuff invisible tags to inflate the multiset.
+      - Count only tags in STRUCTURAL_TAGS (already semantic — landmarks,
+        text, layout primitives).
+
+    Depth-agnostic: a candidate that happens to use one fewer wrapper `<div>`
+    shouldn't fail on tag-bag Jaccard. The visual SSIM rubric already captures
+    spatial fidelity.
     """
     raw = html_path.read_text(encoding="utf-8", errors="replace")
     soup = BeautifulSoup(raw, "lxml")
@@ -62,12 +91,17 @@ def _layout_multiset(html_path: Path) -> Counter:
         for child in elem.children:
             if not isinstance(child, Tag):
                 continue
+            if _is_hidden_inline(child):
+                continue  # skip the entire subtree
             tag = (child.name or "").lower()
             if tag in STRUCTURAL_TAGS:
                 counter[tag] += 1
             walk(child)
 
-    root = soup.html or soup.body or soup
+    # Start at <body> — anything in <head> isn't visible structure and shouldn't
+    # contribute to the tag bag. (Pre-fix the walk started at <html> and
+    # included `<style>`/`<link>`/`<meta>` siblings.)
+    root = soup.body or soup.html or soup
     walk(root)
     return counter
 

@@ -175,13 +175,16 @@ COPY video[s]/ /app/videos/
 
 TEST_SH_TEMPLATE = """\
 #!/bin/bash
-# Composite grader: visual SSIM + palette histogram (Lab) + structural DOM tag
-# Jaccard + typography font-set Jaccard, all gated on coverage. Code lives in
-# /tests/grader/proximal_env/ — bundled at task-package time so each task is
+# Decomposed grader: emits each rubric (visual SSIM, palette histogram in Lab,
+# structural DOM Jaccard, typography font-set Jaccard, consistency, animation,
+# coverage) as an independent numeric stream in reward.json. The `overall`
+# key duplicates `visual` so Harbor's default scalar-reward path keeps
+# working — visual SSIM is the actual outcome we care about. Code lives in
+# /tests/grader/proximal_env/, bundled at task-package time so each task is
 # self-contained.
 #
-# Output: /logs/verifier/reward.json with all sub-scores plus 'overall'. Every
-# value is numeric (Harbor's VerifierResult schema rejects strings/bools).
+# Output: /logs/verifier/reward.json. Every value is numeric (Harbor's
+# VerifierResult schema rejects strings/bools).
 
 set -e
 mkdir -p /logs/verifier
@@ -197,15 +200,21 @@ else
     echo "Grader failed — emitting fallback reward.json (all zeros)." >&2
     echo "stderr was:" >&2
     cat /logs/verifier/grader-stderr.log >&2 || true
+    # IMPORTANT: this fallback must match the schema grader.grade() produces.
+    # All keys numeric (Harbor rejects strings/bools). Animation included
+    # unconditionally — it's safe to emit 0.0 for static tasks; the consumer
+    # (visualizer / aggregator) keys on rubric NAMES, not the animated bit.
     cat > /logs/verifier/reward.json <<EOF
 {
   "overall": 0.0,
+  "overall_geomean": 0.0,
   "coverage": 0.0,
   "visual": 0.0,
   "palette": 0.0,
   "structural": 0.0,
   "typography": 0.0,
-  "grader_failed": 1
+  "consistency": 0.0,
+  "animation": 0.0
 }
 EOF
 fi
