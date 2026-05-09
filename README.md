@@ -4,7 +4,7 @@ A pipeline that **generates RL-environment tasks for testing coding agents on mu
 
 The pipeline:
 1. Samples a (style × variant × purpose × seed) point from a taxonomy
-2. Calls Claude (Opus 4.7) to produce a 5–7 page website committed to one of five architectural styles (Persian Safavid, Roman Imperial, High Gothic, Dravidian, Edo Japanese)
+2. Calls Claude (Opus 4.7) to produce a 5–7 page website committed to one of five architectural styles (Persian Safavid, Roman Imperial, High Gothic, Dravidian, Edo Japanese). A two step process where we first generate the overall design and then generate each page seperately.
 3. Renders each page to a PNG via Playwright
 4. Packages the result into a Harbor task: screenshots are the agent's input, the original HTML/CSS is the verifier's reference
 5. Runs Claude Code (or any Harbor agent) on Modal in parallel against every task
@@ -22,7 +22,16 @@ Decision log lives in `docs/`:
 ## Design Choices i made
 - **Architectural Style Diversity** - Five Styles (roman, gothic, south-indian, japanese and persian) for the website design. Along with different palettes and targetting different industries. I wanted the websites to be visually tough to reproduce, while also being diverse enough. This is also easy to extend, because we can add more styles, more industries, more palettes etc.
 - **Motifs** - The RL environemnt sees a few SVG's and their description while making the website. LLMs are terrible at recreating hard designs, and I did not want that to influence our environment, its a seperate problem to make good designs. Plus, in a real world usecase, a website maker would design motifs (logos, brand design), give it to the LLM and ask it to use that to make the website appealing.  There were some issues with SVGs and using them, so for this env, I ask the LLM to not inline the SVGs, and I post process replace it. Slightly hacky, but letting the LLM use SVGs will just bloat the context.
-- **Animation rendering** - I render 30 frames, at equal intervals and then make 1 image out of these 30 images. This way, the LLM can look at whats happening. Example [filmstrip](generated/anim-high-gothic-civic-597158/videos/page-1/filmstrip.png). And the recreated website attempts - [#1](jobs/2026-05-09__15-57-29/anim-high-gothic-civic-597158__eveu4Ti/artifacts/output/page-1.html), [#2](jobs/2026-05-09__15-57-29/anim-high-gothic-civic-597158__XEo6Zcz/artifacts/output/page-1.html).
+- **Animation rendering** - I render 15 frames at equal intervals over 5 seconds and stitch them into one 4×4 grid image (15 frames + 1 blank cell). This way, the LLM can look at whats happening. Example [filmstrip](generated/anim-high-gothic-civic-597158/videos/page-1/filmstrip.png). And the recreated website attempts - [#1](jobs/2026-05-09__15-57-29/anim-high-gothic-civic-597158__eveu4Ti/artifacts/output/page-1.html), [#2](jobs/2026-05-09__15-57-29/anim-high-gothic-civic-597158__XEo6Zcz/artifacts/output/page-1.html).
+- **Reward implementation** - All the rewards sit in [`src/proximal_env/rubric`](src/proximal_env/rubric). We audit each of the implemented rubric using [`scripts/adversarial_rubric_test.py`](scripts/adversarial_rubric_test.py) to understand easy reward hacking behaviors and as a regression suite.
+  - Visual (multichannel SSIM)
+  - Palette (CIE Lab + 3D histogram intersection)
+  - Structural (DOM tag bag-of-tags Jaccard, visibility-filtered)
+  - Typography (font-family + Google-Fonts URL set Jaccard)
+  - Animation (frame-SSIM + @keyframes Jaccard)
+  - Consistency (header/footer hash equality × inter-page diversity)
+  - Coverage (substantive-page count)
+- **** - 
 
 
 
@@ -60,10 +69,9 @@ uv run playwright install chromium
 # Set credentials
 cp .env.example .env
 # then edit .env to fill in:
-#   ANTHROPIC_API_KEY=sk-ant-...
-# (Modal credentials should be set via `modal token set` so they live in ~/.modal.toml)
+#   ANTHROPIC_API_KEY=
 
-# Install Harbor (with the modal extra) if not already
+# Install Harbor (with the modal extra)
 uv tool install 'harbor[modal]'
 ```
 
@@ -162,11 +170,3 @@ proximal-env/
 ├── scripts/                     — entry points (see "canonical flow" above)
 └── (run artifacts — gitignored: generated/, tasks/, jobs/, viewer/)
 ```
-
-## Notable design choices
-
-- **Diversity by architectural style.** Five styles (Roman Imperial, Persian Safavid, High Gothic, Dravidian, Edo Japanese) instead of generic SaaS-vs-blog-vs-portfolio. Forces the agent to commit to specific visual vocabulary; gives the grader specific per-style fingerprints to grade against.
-- **Two-pass generation.** A single design-system Opus call locks the palette, fonts, motif assignments, and per-page briefs *before* any individual page is generated. Page calls then fan out (5–7 parallel) using the locked spec as shared context. Prevents drift across pages; keeps coherence.
-- **Public-domain motif library.** Every SVG ornament comes from Wikimedia Commons (Owen Jones plates, kamon, girih tiles, etc.). Honesty about gaps (notably Dravidian — Wikimedia is thin on Hindu temple SVGs; we substitute Vogeler 1902 peacocks and document this in `motifs/dravidian/notes.md`).
-- **Composite grader as the product.** The grader is what an RL training run would optimize against; if it's noisy, the agent learns nothing. Five signals — coverage + visual SSIM + palette histogram intersection in CIE Lab + structural DOM tag Jaccard + typography font-set Jaccard — combined via weighted geometric mean, gated on coverage. Each rubric validated individually before composition (identity ≥ 0.95 + sensible discrimination on real candidates).
-- **Inline-SVG mandate + sizing requirement in the agent's instruction.** Necessary for color fidelity (img-tag SVGs ignore CSS `fill`); we accept the resulting hand-holding because it removes a confounder from the eval signal.
