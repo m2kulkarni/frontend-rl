@@ -54,7 +54,7 @@ def main() -> int:
             print(f"      → {dst}")
             print(f"      screenshots: {summary['screenshots']}, "
                   f"motifs: {summary['motifs']}, "
-                  f"ground_truth: {summary['ground_truth']}")
+                  f"ground_truth: {summary.get('ground_truth_files', summary.get('ground_truth', '?'))}")
             n_ok += 1
         except Exception as exc:
             print(f"  ✗ {src.name}  → FAILED: {exc!r}")

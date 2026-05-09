@@ -249,6 +249,21 @@ def inline_motif_jsx(tsx: str, library: StyleLibrary) -> str:
         # Wikimedia source SVGs) aren't valid JSX. Strip them — they're
         # metadata, not visual content.
         body = re.sub(r"<!--.*?-->", "", body, flags=re.DOTALL)
+        # `<!DOCTYPE svg [<!ENTITY foo "..."> ... ]>` — DOCTYPE with internal
+        # subset. Strip the whole thing (open + entities + close) so we don't
+        # leave orphan `]>` brackets behind. Stripped before the looser
+        # `<!\w+...>` regex so the entire block goes as a unit.
+        body = re.sub(r"<!DOCTYPE\b[^>\[]*\[.*?\]\s*>", "", body,
+                      flags=re.DOTALL | re.IGNORECASE)
+        # SGML/XML declarations like `<!ENTITY ns_ai "...">` (Adobe
+        # Illustrator metadata) and standalone `<!DOCTYPE svg>`. JSX rejects
+        # the leading `<!`, esbuild errors with "Expected identifier".
+        body = re.sub(r"<!\w+[^>]*?>", "", body, flags=re.DOTALL)
+        # Final cleanup: orphan `]>` lines left behind when an entity-stripping
+        # pass removed the contents of a DOCTYPE internal subset but the close
+        # bracket survived (this happens when the entity regex caught the
+        # individual entries before the DOCTYPE-with-subset regex could match).
+        body = re.sub(r"^\s*\]>\s*$", "", body, flags=re.MULTILINE)
         # The source SVG might contain `class="foo"` — needs JSX rewrite.
         body = body.replace("class=", "className=")
         # Inline-style attributes inside the SVG (`style="x:y"`) ALSO need to
