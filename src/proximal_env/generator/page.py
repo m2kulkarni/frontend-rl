@@ -318,6 +318,54 @@ def generate_page(
     )
 
 
+def _generate_all_react_pages(
+    design_system: DesignSystem,
+    library: StyleLibrary,
+    point: TaxonomyPoint,
+    *,
+    client: Anthropic,
+    model: str,
+    max_concurrency: int,
+) -> list[GeneratedPage]:
+    """React variant: parallel page-LLM calls + bundled boilerplate files.
+
+    Returns one GeneratedPage per file the caller should write — the LLM-
+    generated `src/pages/Page<N>.tsx` plus the deterministic project shell
+    (`package.json`, `vite.config.ts`, `tsconfig.json`, `index.html`,
+    `src/main.tsx`, `src/App.tsx`, `src/shared/{Nav,Footer,Motif}.tsx`).
+    """
+    from proximal_env.generator.page_react import generate_react_page_tsx
+    from proximal_env.generator.react_templates import react_project_files
+
+    page_briefs = design_system.page_briefs()
+
+    def _one(brief: dict) -> GeneratedPage:
+        target, tsx = generate_react_page_tsx(brief, design_system, library, point,
+                                              client=client, model=model)
+        return GeneratedPage(filename=target, html=tsx, stop_reason=None)
+
+    with _cf.ThreadPoolExecutor(max_workers=min(max_concurrency, len(page_briefs))) as ex:
+        page_results = list(ex.map(_one, page_briefs))
+
+    # Stable sort: pages first (in page-N order), then boilerplate files.
+    page_results.sort(
+        key=lambda g: int(g.filename.rsplit("/", 1)[-1].replace("Page", "").replace(".tsx", ""))
+    )
+
+    sh = design_system.raw.get("shared_html", {})
+    boilerplate = react_project_files(
+        site_name=design_system.raw["site"]["name"],
+        nav_html=sh.get("nav_html", ""),
+        footer_html=sh.get("footer_html", ""),
+        num_pages=len(page_briefs),
+    )
+    boilerplate_pages = [
+        GeneratedPage(filename=path, html=content, stop_reason=None)
+        for path, content in boilerplate
+    ]
+    return page_results + boilerplate_pages
+
+
 def generate_all_pages(
     design_system: DesignSystem,
     library: StyleLibrary,
@@ -327,8 +375,24 @@ def generate_all_pages(
     model: str = "claude-opus-4-7",
     max_concurrency: int = 7,
 ) -> list[GeneratedPage]:
-    """Fan out one Opus call per page, in parallel threads."""
+    """Fan out one Opus call per page, in parallel threads.
+
+    Dispatches on `point.framework`:
+      - "vanilla" (default): emits page-1.html ... page-6.html, each with
+        embedded shared header/footer + inlined SVG motifs.
+      - "react": emits src/pages/Page1.tsx ... PageN.tsx (one Opus call each)
+        PLUS the deterministic React+Vite project shell (package.json,
+        vite.config.ts, App.tsx, etc.) — see `react_templates.py`.
+    """
     client = client or Anthropic()
+
+    if point.framework == "react":
+        return _generate_all_react_pages(
+            design_system, library, point,
+            client=client, model=model, max_concurrency=max_concurrency,
+        )
+
+    # Vanilla path (the original behavior).
     page_briefs = design_system.page_briefs()
 
     def _one(brief: dict) -> GeneratedPage:
@@ -345,8 +409,15 @@ def generate_all_pages(
 
 
 def basic_validate_html(page: GeneratedPage) -> list[str]:
-    """Lightweight sanity checks. Returns list of error strings; empty = ok."""
+    """Lightweight sanity checks. Returns list of error strings; empty = ok.
+
+    Only checks vanilla HTML pages (page-N.html). React TSX files and project
+    boilerplate are validated by the build step (Vite catches their issues
+    when render runs `npm run build`).
+    """
     errors: list[str] = []
+    if not page.filename.endswith(".html"):
+        return errors  # not HTML — skip validation
     html = page.html
     if page.stop_reason and page.stop_reason != "end_turn":
         errors.append(f"stop_reason={page.stop_reason!r} (likely truncated)")

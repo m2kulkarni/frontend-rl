@@ -62,7 +62,11 @@ def generate_one_task(point: TaxonomyPoint, out_root: Path) -> dict:
     page_errors_total = 0
     for p in pages:
         errs = basic_validate_html(p)
-        (out_dir / p.filename).write_text(p.html)
+        # React tasks emit nested paths like `src/pages/Page1.tsx` — ensure
+        # parent dirs exist before writing.
+        target = out_dir / p.filename
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(p.html)
         if errs:
             page_errors_total += 1
 

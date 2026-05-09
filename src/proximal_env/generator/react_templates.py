@@ -244,3 +244,39 @@ def html_to_jsx(html: str) -> str:
     # Comments: HTML `<!-- ... -->` becomes `{/* ... */}` in JSX.
     out = re.sub(r"<!--\s*(.*?)\s*-->", r"{/* \1 */}", out, flags=re.DOTALL)
     return out
+
+
+def react_project_files(
+    site_name: str,
+    nav_html: str,
+    footer_html: str,
+    num_pages: int,
+) -> list[tuple[str, str]]:
+    """Return all the deterministic React+Vite boilerplate files for one task.
+
+    Returns a list of (relative_path, content) pairs the caller writes into
+    the task's generated/<slug>/ directory. The LLM-generated Page<N>.tsx
+    files are written separately by the page generator.
+
+    Inputs:
+        site_name   — used in `index.html`'s <title>.
+        nav_html    — verbatim shared nav HTML emitted by the design-system
+                      pass; we convert to JSX and embed in Nav.tsx.
+        footer_html — same for footer.
+        num_pages   — App.tsx imports & routes Page1..PageN accordingly.
+    """
+    # Indent the converted JSX by 8 spaces so it sits inside `return (\n...\n)`
+    nav_jsx = "\n".join("        " + ln for ln in html_to_jsx(nav_html).splitlines() if ln.strip())
+    footer_jsx = "\n".join("        " + ln for ln in html_to_jsx(footer_html).splitlines() if ln.strip())
+
+    return [
+        ("package.json", PACKAGE_JSON),
+        ("vite.config.ts", VITE_CONFIG_TS),
+        ("tsconfig.json", TSCONFIG_JSON),
+        ("index.html", INDEX_HTML.format(site_name=site_name)),
+        ("src/main.tsx", MAIN_TSX),
+        ("src/App.tsx", render_app_tsx(num_pages)),
+        ("src/shared/Nav.tsx", render_nav_tsx(nav_jsx)),
+        ("src/shared/Footer.tsx", render_footer_tsx(footer_jsx)),
+        ("src/shared/Motif.tsx", MOTIF_TSX),
+    ]
