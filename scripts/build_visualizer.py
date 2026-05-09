@@ -366,7 +366,10 @@ def main() -> int:
                 tasks_data.append((slug, t))
 
     # Sort tasks by overall score, descending — best-first in the viewer.
-    tasks_data.sort(key=lambda st: st[1]["overall"]["overall"], reverse=True)
+    # Group by slug, then within each slug rank best-first. Keeps all k attempts
+    # of the same task adjacent in the rendered page — easier to scan than a
+    # global score-sort that scatters them.
+    tasks_data.sort(key=lambda st: (st[0], -st[1]["overall"]["overall"]))
 
     nav = " ".join(
         f'<a href="#{t["trial_key"]}">{slug.split("-", 1)[0]}</a>'
