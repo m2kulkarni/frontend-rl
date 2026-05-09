@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Scholarship & Library — The Cloisters of Saint-Évroult</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  :root {
+    --col-w: 18em;
+    --rule-w: 1px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+  a { color: var(--secondary); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* ============ MASTHEAD ============ */
+  .masthead {
+    padding: 2.5rem 4rem 0;
+    text-align: center;
+    background: var(--bg);
+  }
+  .masthead .gold-rule {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 0 auto 1.5rem;
+    max-width: 1200px;
+  }
+  .masthead .gold-rule .line {
+    flex: 1;
+    height: 1px;
+    background: var(--accent);
+  }
+  .masthead .gold-rule svg {
+    width: 22px;
+    height: 22px;
+    fill: var(--accent);
+  }
+  .masthead h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 2.6rem;
+    letter-spacing: 0.04em;
+    margin: 0 0 0.3rem;
+    color: var(--primary);
+    font-style: italic;
+  }
+  .masthead .subtitle {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.3em;
+    font-size: 0.85rem;
+    color: var(--text);
+    margin: 0 0 2rem;
+  }
+
+  /* ============ NAV ARCADE ============ */
+  nav.arcade {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin: 0 auto 0;
+    max-width: 1200px;
+    padding: 0 2rem;
+  }
+  nav.arcade ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 0;
+  }
+  nav.arcade li { margin: 0; }
+  nav.arcade a {
+    display: block;
+    width: 150px;
+    height: 90px;
+    position: relative;
+    text-align: center;
+    padding-top: 38px;
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    font-size: 0.72rem;
+    color: var(--primary);
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 90' preserveAspectRatio='none'><path d='M 5 88 L 5 50 Q 5 8 75 8 Q 145 8 145 50 L 145 88' fill='none' stroke='%230a0a0a' stroke-width='1.4'/></svg>");
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: 100% 100%;
+    transition: color 0.2s;
+  }
+  nav.arcade a:hover {
+    text-decoration: none;
+    color: var(--secondary);
+  }
+  nav.arcade a[aria-current="page"] {
+    color: var(--bg);
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 90' preserveAspectRatio='none'><path d='M 5 88 L 5 50 Q 5 8 75 8 Q 145 8 145 50 L 145 88 Z' fill='%231e3a5f' stroke='%230a0a0a' stroke-width='1.4'/></svg>");
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    margin: 3rem auto 2rem;
+    max-width: 1280px;
+    padding: 0 4rem;
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  .hero-arch {
+    position: relative;
+    width: 360px;
+    height: 460px;
+    margin: 0 auto;
+  }
+  .hero-arch svg.arch-frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .hero-arch .arch-inner {
+    position: absolute;
+    left: 30px;
+    right: 30px;
+    top: 30px;
+    bottom: 30px;
+    background:
+      linear-gradient(180deg, rgba(30,58,95,0.08), rgba(201,162,58,0.06)),
+      var(--surface);
+    -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400'><path d='M 0 400 L 0 200 Q 0 0 150 0 Q 300 0 300 200 L 300 400 Z' fill='black'/></svg>");
+    -webkit-mask-size: 100% 100%;
+            mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400'><path d='M 0 400 L 0 200 Q 0 0 150 0 Q 300 0 300 200 L 300 400 Z' fill='black'/></svg>");
+            mask-size: 100% 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero-arch .rose {
+    width: 76%;
+    height: 76%;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  .hero-arch .rose svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .hero-text h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 2.2rem;
+    color: var(--text-emphasis);
+    margin: 0 0 0.4rem;
+    font-style: italic;
+    line-height: 1.15;
+  }
+  .hero-text .eyebrow {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.28em;
+    color: var(--accent);
+    font-size: 0.78rem;
+    margin-bottom: 0.8rem;
+  }
+  .hero-text p {
+    max-width: 36em;
+    font-size: 1.02rem;
+  }
+  .hero-text .lede::first-letter {
+    font-family: var(--font-display), serif;
+    font-size: 3.6rem;
+    float: left;
+    line-height: 0.9;
+    padding: 0.4rem 0.5rem 0 0;
+    color: var(--secondary);
+    font-style: normal;
+  }
+
+  /* ============ SECTION DIVIDER ============ */
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.2rem;
+    max-width: 1100px;
+    margin: 3.5rem auto 2.5rem;
+    padding: 0 4rem;
+  }
+  .divider .rule {
+    flex: 1;
+    height: 1px;
+    background: var(--ornament);
+    opacity: 0.5;
+  }
+  .divider svg {
+    width: 36px;
+    height: 36px;
+    fill: var(--ornament);
+  }
+  .section-head {
+    text-align: center;
+    margin: 0 auto 2rem;
+  }
+  .section-head h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 1.7rem;
+    font-variant: small-caps;
+    letter-spacing: 0.16em;
+    color: var(--secondary);
+    margin: 0;
+  }
+  .section-head .gold {
+    color: var(--accent);
+    font-size: 0.78rem;
+    font-variant: small-caps;
+    letter-spacing: 0.3em;
+    margin-top: 0.3rem;
+  }
+
+  /* ============ TWO-COLUMN BODY ============ */
+  .body-cols {
+    max-width: 56em;
+    margin: 0 auto;
+    padding: 0 4rem;
+    column-count: 2;
+    column-gap: 3rem;
+    column-rule: 1px solid rgba(10,10,10,0.18);
+  }
+  .body-cols p {
+    margin: 0 0 1.1rem;
+    font-size: 0.98rem;
+    line-height: 1.7;
+    text-align: justify;
+    hyphens: auto;
+  }
+  .body-cols p.lead::first-letter {
+    font-family: var(--font-display), serif;
+    font-size: 3.4rem;
+    float: left;
+    line-height: 0.9;
+    padding: 0.35rem 0.5rem 0 0;
+    color: var(--secondary);
+  }
+  .body-cols em { color: var(--text-emphasis); font-style: italic; }
+
+  /* ============ CARDS GRID ============ */
+  .cards-wrap {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 4rem;
+  }
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-top: 1rem;
+  }
+  .card {
+    position: relative;
+    padding: 0 0 1rem;
+    text-align: center;
+    transition: transform 0.25s ease;
+  }
+  .card:hover { transform: translateY(-6px); }
+  .card .arch {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 5;
+    margin: 0 auto;
+  }
+  .card .arch svg.outline {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .card .arch .interior {
+    position: absolute;
+    left: 8%;
+    right: 8%;
+    top: 6%;
+    bottom: 4%;
+    -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 500'><path d='M 0 500 L 0 250 Q 0 0 150 0 Q 300 0 300 250 L 300 500 Z' fill='black'/></svg>");
+    -webkit-mask-size: 100% 100%;
+            mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 500'><path d='M 0 500 L 0 250 Q 0 0 150 0 Q 300 0 300 250 L 300 500 Z' fill='black'/></svg>");
+            mask-size: 100% 100%;
+    background: var(--surface);
+    transition: background 0.3s;
+  }
+  .card:hover .arch .interior {
+    background:
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 600 600'><g transform='translate(300,300)scale(0.87)rotate(45)' fill='%231e3a5f' opacity='0.12'><circle cx='-195.16' r='163'/><circle cx='195.16' r='163'/><circle cy='195.16' r='163'/><circle cy='-195.16' r='163'/><rect x='-232' y='-232' width='464' height='464'/><g fill='%23f4ecd8'><circle cx='-195.16' r='157'/><circle cx='195.16' r='157'/><circle cy='195.16' r='157'/><circle cy='-195.16' r='157'/><rect x='-226' y='-226' width='452' height='452'/></g><circle cx='-195.16' r='144'/><circle cx='195.16' r='144'/><circle cy='195.16' r='144'/><circle cy='-195.16' r='144'/><rect x='-213' y='-213' width='426' height='426'/><g fill='%23f4ecd8'><circle cx='-195.16' r='138'/><circle cx='195.16' r='138'/><circle cy='195.16' r='138'/><circle cy='-195.16' r='138'/><rect x='-207' y='-207' width='414' height='414'/></g></g></svg>"),
+      var(--surface);
+    background-size: 80px 80px, auto;
+  }
+  .card .arch .content {
+    position: relative;
+    z-index: 2;
+    padding: 14% 12% 12%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .card .arch .content .num {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 2.2rem;
+    color: var(--secondary);
+    line-height: 1;
+    margin: 0 0 0.4rem;
+  }
+  .card .arch .content .num-label {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.2em;
+    font-size: 0.7rem;
+    color: var(--accent);
+    margin-bottom: 0.6rem;
+  }
+  .card .arch .content .name {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    font-size: 0.85rem;
+    letter-spacing: 0.14em;
+    color: var(--secondary);
+    line-height: 1.3;
+    margin: 0;
+  }
+  .card .spandrel {
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 26px;
+    height: 26px;
+    z-index: 3;
+  }
+  .card .spandrel svg { width: 100%; height: 100%; fill: var(--ornament); }
+  .card h4 {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    font-weight: 400;
+    font-size: 1rem;
+    letter-spacing: 0.14em;
+    color: var(--secondary);
+    margin: 0.9rem 0 0.1rem;
+  }
+  .card .catalog {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    color: var(--accent);
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+  }
+  .card p {
+    font-size: 0.86rem;
+    line-height: 1.55;
+    margin: 0 0.4rem;
+    color: var(--text);
+  }
+
+  /* ============ FELLOWSHIP / PUBLICATION PANELS ============ */
+  .panel-row {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+  .panel {
+    position: relative;
+    padding: 2.4rem 2.6rem 2.2rem;
+    background:
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='90' height='90' viewBox='0 0 600 600'><g transform='translate(300,300)scale(0.87)rotate(45)' fill='%230a0a0a' opacity='0.05'><circle cx='-195.16' r='163'/><circle cx='195.16' r='163'/><circle cy='195.16' r='163'/><circle cy='-195.16' r='163'/><rect x='-232' y='-232' width='464' height='464'/><g fill='%23f4ecd8'><circle cx='-195.16' r='157'/><circle cx='195.16' r='157'/><circle cy='195.16' r='157'/><circle cy='-195.16' r='157'/><rect x='-226' y='-226' width='452' height='452'/></g><circle cx='-195.16' r='144'/><circle cx='195.16' r='144'/><circle cy='195.16' r='144'/><circle cy='-195.16' r='144'/><rect x='-213' y='-213' width='426' height='426'/><g fill='%23f4ecd8'><circle cx='-195.16' r='138'/><circle cx='195.16' r='138'/><circle cy='195.16' r='138'/><circle cy='-195.16' r='138'/><rect x='-207' y='-207' width='414' height='414'/></g></g></svg>"),
+      var(--surface);
+    background-size: 90px 90px, auto;
+    border: 1px solid var(--ornament);
+  }
+  .panel::before, .panel::after {
+    content: "";
+    position: absolute;
+    width: 14px; height: 14px;
+    border: 1px solid var(--accent);
+  }
+  .panel::before { top: 6px; left: 6px; border-right: none; border-bottom: none; }
+  .panel::after { bottom: 6px; right: 6px; border-left: none; border-top: none; }
+  .panel h4 {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    font-weight: 400;
+    font-size: 1.25rem;
+    letter-spacing: 0.14em;
+    color: var(--secondary);
+    margin: 0 0 0.2rem;
+  }
+  .panel .latin {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    color: var(--accent);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+  .panel p {
+    font-size: 0.95rem;
+    margin: 0 0 0.9rem;
+  }
+  .panel dl {
+    margin: 0.8rem 0 0;
+    font-size: 0.88rem;
+    border-top: 1px solid rgba(10,10,10,0.15);
+    padding-top: 0.8rem;
+  }
+  .panel dl div {
+    display: grid;
+    grid-template-columns: 12em 1fr;
+    gap: 0.6rem;
+    padding: 0.35rem 0;
+    border-bottom: 1px dotted rgba(10,10,10,0.15);
+  }
+  .panel dl dt {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.1em;
+    color: var(--text-emphasis);
+    margin: 0;
+  }
+  .panel dl dd { margin: 0; color: var(--text); }
+  .panel dl dd em { color: var(--accent); font-style: italic; }
+
+  /* ============ DIGITISATION TABLE ============ */
+  .digi-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 4rem;
+  }
+  .digi-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  .digi-text p { font-size: 0.98rem; }
+  .digi-text p:first-child::first-letter {
+    font-family: var(--font-display), serif;
+    font-size: 3rem;
+    float: left;
+    line-height: 0.9;
+    padding: 0.3rem 0.45rem 0 0;
+    color: var(--secondary);
+  }
+  table.manuscripts {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    margin-top: 0.4rem;
+  }
+  table.manuscripts caption {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    font-size: 0.78rem;
+    text-align: left;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--accent);
+    margin-bottom: 0.4rem;
+  }
+  table.manuscripts th {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.08em;
+    color: var(--secondary);
+    font-weight: 400;
+    text-align: left;
+    padding: 0.5rem 0.4rem;
+    border-bottom: 1px solid var(--ornament);
+  }
+  table.manuscripts td {
+    padding: 0.45rem 0.4rem;
+    border-bottom: 1px dotted rgba(10,10,10,0.2);
+    vertical-align: top;
+  }
+  table.manuscripts tr:last-child td { border-bottom: none; }
+  table.manuscripts td.num {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    color: var(--accent);
+    width: 4.4em;
+    white-space: nowrap;
+  }
+  table.manuscripts td.status {
+    text-align: right;
+    font-variant: small-caps;
+    letter-spacing: 0.08em;
+    font-size: 0.75rem;
+    color: var(--secondary);
+  }
+
+  /* ============ CONTACT BLOCK ============ */
+  .contact-block {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    text-align: center;
+  }
+  .contact-block .arch-mini {
+    display: inline-block;
+    padding: 2.4rem 3rem 2rem;
+    border: 1px solid var(--ornament);
+    background: var(--surface);
+    position: relative;
+    -webkit-mask-image: linear-gradient(#000,#000);
+  }
+  .contact-block h4 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    font-size: 1.05rem;
+    color: var(--secondary);
+    margin: 0 0 0.3rem;
+  }
+  .contact-block .name {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 1.5rem;
+    color: var(--text-emphasis);
+    margin: 0.6rem 0 0.2rem;
+  }
+  .contact-block .role {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.16em;
+    color: var(--accent);
+    font-size: 0.82rem;
+    margin-bottom: 1rem;
+  }
+  .contact-block p { margin: 0.4rem 0; font-size: 0.96rem; }
+  .contact-block .meta {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(10,10,10,0.15);
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.14em;
+    font-size: 0.78rem;
+    color: var(--secondary);
+  }
+  .contact-block a { color: var(--secondary); border-bottom: 1px dotted var(--accent); }
+
+  /* ============ FOOTER ============ */
+  footer {
+    margin-top: 5rem;
+    background: var(--secondary);
+    color: var(--bg);
+  }
+  footer .arcade-band {
+    height: 56px;
+    background-repeat: repeat-x;
+    background-position: center bottom;
+    background-size: 90px 56px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 90 56' preserveAspectRatio='none'><g fill='none' stroke='%23c9a23a' stroke-width='1.2'><path d='M 5 56 L 5 36 Q 5 12 22.5 12 Q 40 12 40 36 L 40 56'/><path d='M 50 56 L 50 36 Q 50 12 67.5 12 Q 85 12 85 36 L 85 56'/></g></svg>");
+    border-bottom: 1px solid var(--accent);
+  }
+  footer .foot-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2.5rem 4rem 1.5rem;
+    text-align: center;
+  }
+  footer h5 {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.22em;
+    font-weight: 400;
+    color: var(--accent);
+    font-size: 0.78rem;
+    margin: 0 0 0.6rem;
+  }
+  footer p { margin: 0.2rem 0; font-size: 0.88rem; line-height: 1.6; color: var(--bg); opacity: 0.92; }
+  footer .ack {
+    text-align: center;
+    padding: 0 4rem 1rem;
+    font-style: italic;
+    font-size: 0.82rem;
+    opacity: 0.8;
+  }
+  footer .fleurs {
+    height: 28px;
+    border-top: 1px solid var(--accent);
+    background-repeat: repeat-x;
+    background-position: center;
+    background-size: 32px 28px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 28'><g fill='%23c9a23a'><path d='M16 6 Q 13 10 11 12 Q 10 14 12 15 L 14 15 L 14 19 L 11 19 L 11 21 L 21 21 L 21 19 L 18 19 L 18 15 L 20 15 Q 22 14 21 12 Q 19 10 16 6 Z'/></g></svg>");
+  }
+  footer .colophon {
+    text-align: center;
+    padding: 0.8rem;
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.24em;
+    font-size: 0.7rem;
+    color: var(--accent);
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="gold-rule" aria-hidden="true">
+    <svg viewBox="0 0 200 200"><path d="M 43 11 c -1.8 0 -3.6 0.1 -5.3 0.3 c -7 0.7 -13.9 2.8 -19.2 7.5 c -5.2 4.7 -8.2 12 -7.7 21 c 0.5 9 4.3 16.1 10.2 20.3 c 5.9 4.2 13.3 5.5 21 5.2 c 15.5 -0.7 32.8 -8 45.8 -18.3 c 1.4 -1.1 2.8 -2 4.3 -3.1 c 4.3 6.7 7.6 14.8 9.3 24.1 c -7.5 -5.1 -21 -10.5 -35.7 1.5 c -22.1 18.2 -25 12.9 -45.3 -2.1 c -2.9 36.1 15 54.6 44.7 52.5 c 0 0 -14 4.3 -3.6 26.4 c 6 12.9 8.4 20.1 6.6 25.2 c -12.8 2.3 -15.8 7.8 -5.6 12.7 c 45.1 10 65.7 -27.5 68.7 -66 c 45.4 0 52.9 -31.8 52.5 -50.4 c -8.2 11.1 -22.2 11.1 -32.9 2.5 c -9.9 -7.9 -21.7 -16.2 -39 -1.1 c -1.7 -11.7 -5.7 -22.1 -11.2 -30.7 c 19.4 -11.4 38.7 -14.5 52.5 -10.8 c 5.5 1.4 9.5 4.1 12.4 7 c -9 8.4 -11.8 26.4 2.3 27 c 18.9 0.9 21 -15.5 13.6 -27.1 c -5.4 -8.5 -16.4 -13.2 -25.7 -16.6 c -17.5 -4.6 -39.7 -0.6 -61.3 12.5 c -5.2 -5.7 -11.1 -10.2 -17.7 -13 c -7.1 -2.9 -17.5 -5.7 -28.3 -6.3 z"/></svg>
+    <div class="line"></div>
+    <svg viewBox="0 0 200 200"><path d="M 43 11 c -1.8 0 -3.6 0.1 -5.3 0.3 c -7 0.7 -13.9 2.8 -19.2 7.5 c -5.2 4.7 -8.2 12 -7.7 21 c 0.5 9 4.3 16.1 10.2 20.3 c 5.9 4.2 13.3 5.5 21 5.2 c 15.5 -0.7 32.8 -8 45.8 -18.3 c 1.4 -1.1 2.8 -2 4.3 -3.1 c 4.3 6.7 7.6 14.8 9.3 24.1 c -7.5 -5.1 -21 -10.5 -35.7 1.5 c -22.1 18.2 -25 12.9 -45.3 -2.1 c -2.9 36.1 15 54.6 44.7 52.5 c 0 0 -14 4.3 -3.6 26.4 c 6 12.9 8.4 20.1 6.6 25.2 c -12.8 2.3 -15.8 7.8 -5.6 12.7 c 45.1 10 65.7 -27.5 68.7 -66 c 45.4 0 52.9 -31.8 52.5 -50.4 z"/></svg>
+  </div>
+  <h1>The Cloisters of Saint-Évroult</h1>
+  <div class="subtitle">Museum of Medieval Art &middot; La Ferté-en-Ouche</div>
+
+  <nav class="arcade" aria-label="Primary">
+    <ul>
+      <li><a href="page-1.html">Home</a></li>
+      <li><a href="page-2.html">Collection</a></li>
+      <li><a href="page-3.html">Exhibition</a></li>
+      <li><a href="page-4.html">History</a></li>
+      <li><a href="page-5.html">Visit</a></li>
+      <li><a href="page-6.html" aria-current="page">Scholarship</a></li>
+      <li><a href="page-1.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-arch" aria-hidden="true">
+    <svg class="arch-frame" viewBox="0 0 500 550" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(-147,-244)">
+        <g stroke="#0a0a0a" stroke-width="3" fill="none" stroke-linecap="round">
+          <path d="m 388.984,268.984 -57.342,98.846 c 0,0 -25.866,42.495 -83.142,62.818 -57.275,20.323 -100.760,86.775 -99.770,153.350 54.339,0.096 3.097,-0.096 62.468,0.254 0,0 -2.044,-66.404 63.168,-94.481 50.355,-21.680 83.142,-42.495 114.551,-88.684"/>
+          <path d="m 250,430.58 24.752,58.416"/>
+          <path d="m 347.030,342.461 41.584,23.762 0.990,35.644"/>
+          <path d="m 211.386,583.055 -1.485,211.881"/>
+        </g>
+        <g stroke="#0a0a0a" stroke-width="3" fill="none" stroke-linecap="round" transform="matrix(-1,0,0,1,777.881,-0.297)">
+          <path d="m 388.984,268.984 -57.342,98.846 c 0,0 -25.866,42.495 -83.142,62.818 -57.275,20.323 -100.760,86.775 -99.770,153.350 54.339,0.096 3.097,-0.096 62.468,0.254 0,0 -2.044,-66.404 63.168,-94.481 50.355,-21.680 83.142,-42.495 114.551,-88.684"/>
+          <path d="m 250,430.58 24.752,58.416"/>
+          <path d="m 347.030,342.461 41.584,23.762 0.990,35.644"/>
+          <path d="m 211.386,583.055 -1.485,211.881"/>
+        </g>
+      </g>
+    </svg>
+    <div class="arch-inner">
+      <div class="rose">
+        <svg viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <radialGradient id="rh1" cx="500" cy="500" r="490" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#1e3a5f"/>
+              <stop offset="1" stop-color="#0a0a0a"/>
+            </radialGradient>
+          </defs>
+          <circle cx="500" cy="500" r="490" fill="url(#rh1)"/>
+          <g fill="none" stroke="#c9a23a" stroke-width="3">
+            <circle cx="500" cy="500" r="450"/>
+            <circle cx="500" cy="500" r="360"/>
+            <circle cx="500" cy="500" r="240"/>
+            <circle cx="500" cy="500" r="120"/>
+            <circle cx="500" cy="500" r="40" fill="#c9a23a"/>
+          </g>
+          <g fill="#c9a23a" stroke="#0a0a0a" stroke-width="2">
+            <g id="petal"><circle cx="500" cy="180" r="60"/></g>
+            <use href="#petal" transform="rotate(30 500 500)"/>
+            <use href="#petal" transform="rotate(60 500 500)"/>
+            <use href="#petal" transform="rotate(90 500 500)"/>
+            <use href="#petal" transform="rotate(120 500 500)"/>
+            <use href="#petal" transform="rotate(150 500 500)"/>
+            <use href="#petal" transform="rotate(180 500 500)"/>
+            <use href="#petal" transform="rotate(210 500 500)"/>
+            <use href="#petal" transform="rotate(240 500 500)"/>
+            <use href="#petal" transform="rotate(270 500 500)"/>
+            <use href="#petal" transform="rotate(300 500 500)"/>
+            <use href="#petal" transform="rotate(330 500 500)"/>
+          </g>
+          <g fill="#1e3a5f" stroke="#c9a23a" stroke-width="2">
+            <g id="petal2"><circle cx="500" cy="320" r="38"/></g>
+            <use href="#petal2" transform="rotate(45 500 500)"/>
+            <use href="#petal2" transform="rotate(90 500 500)"/>
+            <use href="#petal2" transform="rotate(135 500 500)"/>
+            <use href="#petal2" transform="rotate(180 500 500)"/>
+            <use href="#petal2" transform="rotate(225 500 500)"/>
+            <use href="#petal2" transform="rotate(270 500 500)"/>
+            <use href="#petal2" transform="rotate(315 500 500)"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-text">
+    <div class="eyebrow">Bibliothèque &middot; Études &middot; Édition</div>
+    <h2>Scholarship &amp; the Library<br>Robert-de-Glanville</h2>
+    <p class="lede">Behind the cloister's open arcade lies the working heart of the museum: a research library of 12,400 volumes, a fellowship programme of two stipends, an annual scholarly journal, and the long, patient work of digitising the priory's surviving manuscripts. We welcome by appointment readers whose work touches Norman monasticism, the conservation of stained glass, or the codicology of the Évroult corpus.</p>
+  </div>
+</section>
+
+<!-- ============ DIVIDER ============ -->
+<div class="divider" aria-hidden="true">
+  <div class="rule"></div>
+  <svg viewBox="0 0 200 200"><path d="M 43 11 c -1.8 0 -3.6 0.1 -5.3 0.3 c -7 0.7 -13.9 2.8 -19.2 7.5 c -5.2 4.7 -8.2 12 -7.7 21 c 0.5 9 4.3 16.1 10.2 20.3 c 5.9 4.2 13.3 5.5 21 5.2 c 15.5 -0.7 32.8 -8 45.8 -18.3 c 1.4 -1.1 2.8 -2 4.3 -3.1 c 4.3 6.7 7.6 14.8 9.3 24.1 z M 70 95 c 5 12 8 23 6 30 c -13 2 -16 8 -6 13 c 45 10 66 -27 69 -66 c 45 0 53 -32 53 -50 c -8 11 -22 11 -33 3 c -10 -8 -22 -16 -39 -1 c -2 -12 -6 -22 -11 -31 z"/></svg>
+  <div class="rule"></div>
+</div>
+
+<header class="section-head">
+  <h3>The Bibliothèque Robert-de-Glanville</h3>
+  <div class="gold">A working library, founded 1947</div>
+</header>
+
+<div class="body-cols">
+  <p class="lead">The library occupies the upper range of the surviving cloister-wing, where the lay-brothers' dormitory once stood. Its collection — 12,400 catalogued volumes, of which approximately 940 are pre-1800 — is named for the architect-canon Robert de Glanville (1881–1953), whose bequest of his personal working library in 1947 founded the present holdings. The collection specialises narrowly: <em>Norman monasticism</em>, particularly the houses of the diocese of Lisieux from the eleventh through the fifteenth centuries; and the <em>conservation of medieval stained glass</em>, with strong holdings in twentieth-century French and German technical literature.</p>
+
+  <p>Notable strengths include a near-complete run of the <em>Bulletin monumental</em> from 1834, the personal offprint files of the glass-conservator Jean Lafond, and a working reference set of cartulary editions for the dioceses of Lisieux, Évreux, Bayeux and Sées. The library does not lend; all consultation is on-site, in the reading-room beneath the rib-vaulted bay overlooking the south walk of the cloister.</p>
+
+  <p>Three workstations are reserved for visiting researchers; a fourth is fitted for the consultation of large-format material and the priory's own manuscripts. Photography is permitted under the standard conditions of the Direction régionale des affaires culturelles. The reading-room seats fourteen and is open Tuesday through Friday, 9 h 30 – 17 h 30, with prior application to the conservator of manuscripts.</p>
+
+  <p>The library catalogue is partially available through the Sudoc union catalogue; the pre-1800 holdings and the Évroult manuscripts are described only in the printed <em>Catalogue raisonné</em> (1971, with supplements 1989 and 2014), copies of which may be consulted in the reading-room or purchased from the museum shop for 38 €.</p>
+</div>
+
+<!-- ============ DIVIDER ============ -->
+<div class="divider" aria-hidden="true">
+  <div class="rule"></div>
+  <svg viewBox="0 0 200 200"><path d="M 100 20 L 110 80 L 170 90 L 110 100 L 100 160 L 90 100 L 30 90 L 90 80 Z"/></svg>
+  <div class="rule"></div>
+</div>
+
+<header class="section-head">
+  <h3>Holdings at a Glance</h3>
+  <div class="gold">selecta &middot; per genus</div>
+</header>
+
+<div class="cards-wrap">
+  <div class="cards">
+
+    <article class="card">
+      <div class="spandrel" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M12 2 L13 10 L21 11 L13 12 L12 22 L11 12 L3 11 L11 10 Z"/></svg>
+      </div>
+      <div class="arch">
+        <svg class="outline" viewBox="0 0 300 500" preserveAspectRatio="none">
+          <path d="M 8 498 L 8 250 Q 8 8 150 8 Q 292 8 292 250 L 292 498" fill="none" stroke="#0a0a0a" stroke-width="1.6"/>
+        </svg>
+        <div class="interior"></div>
+        <div class="content">
+          <div class="num">12,400</div>
+          <div class="num-label">volumes</div>
+          <p class="name">monographs<br>&amp; periodicals</p>
+        </div>
+      </div>
+      <h4>General Holdings</h4>
+      <div class="catalog">cat. gén. 1947–</div>
+      <p>The principal working collection: monographs, periodicals, exhibition catalogues, and offprints assembled since the founding bequest of 1947.</p>
+    </article>
+
+    <article class="card">
+      <div class="spandrel" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M12 2 L13 10 L21 11 L13 12 L12 22 L11 12 L3 11 L11 10 Z"/></svg>
+      </div>
+      <div class="arch">
+        <svg class="outline" viewBox="0 0 300 500" preserveAspectRatio="none">
+          <path d="M 8 498 L 8 250 Q 8 8 150 8 Q 292 8 292 250 L 292 498" fill="none" stroke="#0a0a0a" stroke-width="1.6"/>
+        </svg>
+        <div class="interior"></div>
+        <div class="content">
+          <div class="num">940</div>
+          <div class="num-label">livres anciens</div>
+          <p class="name">printed<br>before 1800</p>
+        </div>
+      </div>
+      <h4>Pre-1800 Books</h4>
+      <div class="catalog">Rés. A–H</div>
+      <p>Reserved-stack imprints: Norman cartulary editions, post-Tridentine liturgical books, antiquarian topographies, and the Mabillon corpus complete.</p>
+    </article>
+
+    <article class="card">
+      <div class="spandrel" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M12 2 L13 10 L21 11 L13 12 L12 22 L11 12 L3 11 L11 10 Z"/></svg>
+      </div>
+      <div class="arch">
+        <svg class="outline" viewBox="0 0 300 500" preserveAspectRatio="none">
+          <path d="M 8 498 L 8 250 Q 8 8 150 8 Q 292 8 292 250 L 292 498" fill="none" stroke="#0a0a0a" stroke-width="1.6"/>
+        </svg>
+        <div class="interior"></div>
+        <div class="content">
+          <div class="num">88</div>
+          <div class="num-label">manuscrits</div>
+          <p class="name">codices &amp;<br>fragments</p>
+        </div>
+      </div>
+      <h4>Évroult Manuscripts</h4>
+      <div class="catalog">MS Évr. 1–88</div>
+      <p>The surviving codicological corpus of the priory: gospel-books, breviaries, customaries and the great Évroult cartulary of c. 1247, in two volumes.</p>
+    </article>
+
+    <article class="card">
+      <div class="spandrel" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M12 2 L13 10 L21 11 L13 12 L12 22 L11 12 L3 11 L11 10 Z"/></svg>
+      </div>
+      <div class="arch">
+        <svg class="outline" viewBox="0 0 300 500" preserveAspectRatio="none">
+          <path d="M 8 498 L 8 250 Q 8 8 150 8 Q 292 8 292 250 L 292 498" fill="none" stroke="#0a0a0a" stroke-width="1.6"/>
+        </svg>
+        <div class="interior"></div>
+        <div class="content">
+          <div class="num">1842</div>
+          <div class="num-label">ISSN 0399-</div>
+          <p class="name">Cahiers de<br>Saint-Évroult</p>
+        </div>
+      </div>
+      <h4>The Cahiers</h4>
+      <div class="catalog">annual, 1968–</div>
+      <p>The museum's peer-reviewed yearbook. Each volume gathers four to six articles, an editorial chronicle, and notices of recent acquisitions and excavations.</p>
+    </article>
+
+  </div>
+</div>
+
+<!-- ============ DIVIDER ============ -->
+<div class="divider" aria-hidden="true">
+  <div class="rule"></div>
+  <svg viewBox="0 0 200 200"><path d="M 100 20 L 110 80 L 170 90 L 110 100 L 100 160 L 90 100 L 30 90 L 90 80 Z"/></svg>
+  <div class="rule"></div>
+</div>
+
+<header class="section-head">
+  <h3>Fellowships &amp; Publications</h3>
+  <div class="gold">stipendia &middot; editiones</div>
+</header>
+
+<div class="panel-row">
+
+  <section class="panel">
+    <h4>Visiting-Fellowship Programme</h4>
+    <div class="latin"><em>Stipendium Roberti de Glanville</em></div>
+    <p>Two fellowships are awarded each year — one in the Lent term, one in Michaelmas — to scholars whose work depends substantively on the library's holdings or on the Évroult manuscripts. Fellows are housed in the converted infirmary range and are required to give one public seminar during the tenure of the award.</p>
+    <p>Applications open on 15 January and 15 June; decisions are communicated within ten weeks. The selection committee comprises the conservator of manuscripts, the director of the museum, and two external members nominated by the <em>Société des Antiquaires de Normandie</em>.</p>
+    <dl>
+      <div><dt>Stipend</dt><dd><em>4 800 €</em> per fellowship, per annum</dd></div>
+      <div><dt>Tenure</dt><dd>three months, residential</dd></div>
+      <div><dt>Awards / year</dt><dd>two (spring &amp; autumn)</dd></div>
+      <div><dt>Eligibility</dt><dd>doctoral candidates &amp; established scholars</dd></div>
+      <div><dt>Deadlines</dt><dd>15 January · 15 June</dd></div>
+    </dl>
+  </section>
+
+  <section class="panel">
+    <h4>Cahiers de Saint-Évroult</h4>
+    <div class="latin"><em>Annales &amp; commentarii</em></div>
+    <p>Founded in 1968, the <em>Cahiers</em> appear annually in November. Each volume runs to 180–220 pages and is distributed by subscription to libraries and learned societies, and through the museum shop. Articles are accepted in French, English, and Latin; abstracts are provided in all three.</p>
+    <p>The current editor is the conservator of manuscripts. Submissions for the forthcoming volume close on 1 March; the editorial board sits in May. A complete back-run is maintained in the reading-room and may be consulted on request.</p>
+    <dl>
+      <div><dt>ISSN</dt><dd><em>0399-1842</em></dd></div>
+      <div><dt>Frequency</dt><dd>annual, since 1968</dd></div>
+      <div><dt>Volumes to date</dt><dd>fifty-six (LVI, 2024)</dd></div>
+      <div><dt>Subscription</dt><dd>62 € per volume, postage included</dd></div>
+      <div><dt>Submissions</dt><dd>by 1 March, to the editor</dd></div>
+    </dl>
+  </section>
+
+</div>
+
+<!-- ============ DIVIDER ============ -->
+<div class="divider" aria-hidden="true">
+  <div class="rule"></div>
+  <svg viewBox="0 0 200 200"><path d="M 100 20 L 110 80 L 170 90 L 110 100 L 100 160 L 90 100 L 30 90 L 90 80 Z"/></svg>
+  <div class="rule"></div>
+</div>
+
+<header class="section-head">
+  <h3>The Digitisation of MS Évr. 1–88</h3>
+  <div class="gold">opus in progressu &middot; 2019–</div>
+</header>
+
+<div class="digi-wrap">
+  <div class="digi-grid">
+
+    <div class="digi-text">
+      <p>The systematic digitisation of the eighty-eight surviving manuscripts of the Évroult corpus was begun in 2019, in partnership with the Institut de recherche et d'histoire des textes. Each codex is photographed at 600 dpi in raking and direct light, with full collation diagrams and updated codicological descriptions; results are released to the public domain volume by volume on the museum's repository.</p>
+      <p>Work proceeds at a deliberate rhythm of eight to twelve manuscripts per year. The cartulary (MS Évr. 41–42) and the Norman customary (MS Évr. 17) have been treated first, on account of demand; the calendar fragments and pen-trial leaves of MS Évr. 71–88 will close the campaign, projected for completion in late 2027. Researchers are warmly invited to consult the working files in advance of publication, by appointment.</p>
+    </div>
+
+    <div class="digi-table">
+      <table class="manuscripts">
+        <caption>Progress of the campaign</caption>
+        <thead>
+          <tr><th>Shelfmark</th><th>Description</th><th class="status">State</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="num">Évr. 1–8</td><td>gospel-books &amp; pericopes</td><td class="status">complete</td></tr>
+          <tr><td class="num">Évr. 9–16</td><td>breviaries &amp; psalters</td><td class="status">complete</td></tr>
+          <tr><td class="num">Évr. 17</td><td>Norman customary</td><td class="status">complete</td></tr>
+          <tr><td class="num">Évr. 18–32</td><td>liturgical &amp; conventual</td><td class="status">complete</td></tr>
+          <tr><td class="num">Évr. 33–40</td><td>obituaries &amp; necrologies</td><td class="status">in press</td></tr>
+          <tr><td class="num">Évr. 41–42</td><td>cartulary, c. 1247 (2 vol.)</td><td class="status">complete</td></tr>
+          <tr><td class="num">Évr. 43–58</td><td>charters &amp; rentals</td><td class="status">in progress</td></tr>
+          <tr><td class="num">Évr. 59–70</td><td>theological &amp; patristic</td><td class="status">scheduled</td></tr>
+          <tr><td class="num">Évr. 71–88</td><td>fragments &amp; pen-trials</td><td class="status">2026–27</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============ DIVIDER ============ -->
+<div class="divider" aria-hidden="true">
+  <div class="rule"></div>
+  <svg viewBox="0 0 200 200"><path d="M 100 20 L 110 80 L 170 90 L 110 100 L 100 160 L 90 100 L 30 90 L 90 80 Z"/></svg>
+  <div class="rule"></div>
+</div>
+
+<header class="section-head">
+  <h3>Contact for Researchers</h3>
+  <div class="gold">sub praevia conventione</div>
+</header>
+
+<div class="contact-block">
+  <div class="arch-mini">
+    <h4>Conservateur des Manuscrits</h4>
+    <div class="name">Dr Henri Beaufort</div>
+    <div class="role">conservator &middot; editor of the Cahiers</div>
+    <p>All applications — for fellowships, for consultation of the Évroult corpus, for submissions to the <em>Cahiers</em>, and for permission to reproduce — should be addressed to the conservator, who receives by appointment on Wednesday afternoons (14 h–17 h 30) in the reading-room.</p>
+    <p><a href="mailto:beaufort@cloitres-saint-evroult.fr">beaufort@cloitres-saint-evroult.fr</a> &nbsp;&middot;&nbsp; +33 (0)2 33 34 18 42</p>
+    <div class="meta">By appointment &middot; Wednesday, 14 h – 17 h 30</div>
+  </div>
+</div>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="arcade-band" aria-hidden="true"></div>
+  <div class="foot-cols">
+    <div>
+      <h5>Visiting Hours</h5>
+      <p>Tuesday – Sunday</p>
+      <p>10 h 00 – 17 h 30</p>
+      <p>Closed Mondays &amp; 25 December</p>
+      <p>Library: Tue – Fri, 9 h 30 – 17 h 30</p>
+    </div>
+    <div>
+      <h5>The Priory</h5>
+      <p>The Cloisters of Saint-Évroult</p>
+      <p>12 rue Saint-Évroult</p>
+      <p>61550 La Ferté-en-Ouche</p>
+      <p>Normandie, France</p>
+    </div>
+    <div>
+      <h5>Acknowledgement</h5>
+      <p>The museum operates under the patronage of the Commune de La Ferté-en-Ouche and the Conseil départemental de l'Orne.</p>
+    </div>
+  </div>
+  <div class="ack">With the support of the Direction régionale des affaires culturelles de Normandie.</div>
+  <div class="fleurs" aria-hidden="true"></div>
+  <div class="colophon">Cloistres &middot; Sancti Ebrulphi &middot; MMXXV</div>
+</footer>
+
+</body>
+</html>

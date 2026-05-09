@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Permanent Collection — Antiquarium Traianum</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    font-size: 17px;
+    line-height: 1.65;
+  }
+
+  /* ============ NAVIGATION ============ */
+  .site-header {
+    background: var(--bg);
+    border-bottom: 1px solid rgba(169,50,38,0.15);
+    padding: 28px 0 0;
+    text-align: center;
+  }
+  .site-mark {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.42em;
+    font-size: 13px;
+    color: var(--text);
+    margin: 0 0 6px;
+  }
+  .site-name {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 14px;
+  }
+  .meander-rule {
+    height: 22px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='22' viewBox='0 0 80 22'><g fill='none' stroke='%23c9a23a' stroke-width='1.4'><path d='M0 21 L0 5 L15 5 L15 16 L7 16 L7 11 L11 11 L11 13'/><path d='M20 21 L20 5 L35 5 L35 16 L27 16 L27 11 L31 11 L31 13'/><path d='M40 21 L40 5 L55 5 L55 16 L47 16 L47 11 L51 11 L51 13'/><path d='M60 21 L60 5 L75 5 L75 16 L67 16 L67 11 L71 11 L71 13'/></g></svg>");
+    background-repeat: repeat-x;
+    background-position: center;
+    margin: 0 auto;
+    max-width: 1200px;
+  }
+  .site-nav {
+    padding: 16px 0 22px;
+  }
+  .site-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0;
+  }
+  .site-nav li {
+    display: flex;
+    align-items: center;
+  }
+  .site-nav a {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 12px;
+    color: var(--secondary);
+    text-decoration: none;
+    padding: 6px 14px;
+    transition: color 0.2s;
+  }
+  .site-nav a:hover { color: var(--primary); }
+  .site-nav a[aria-current="page"] {
+    color: var(--primary);
+    border-bottom: 2px solid var(--primary);
+    padding-bottom: 4px;
+  }
+  .nav-sep {
+    color: var(--secondary);
+    font-size: 14px;
+    line-height: 1;
+    opacity: 0.7;
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    text-align: center;
+    padding: 60px 24px 40px;
+    position: relative;
+  }
+  .pediment {
+    width: 720px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .pediment-frame {
+    border: 1px solid var(--secondary);
+    border-top: none;
+    padding: 50px 40px 36px;
+    position: relative;
+    background: var(--surface);
+  }
+  .pediment-frame::before {
+    content: "";
+    position: absolute;
+    top: -1px; left: 0; right: 0;
+    height: 70px;
+    background: var(--surface);
+    clip-path: polygon(0 100%, 50% 0, 100% 100%);
+    border-left: 1px solid var(--secondary);
+    border-right: 1px solid var(--secondary);
+    transform: translateY(-70px);
+  }
+  .pediment-frame::after {
+    content: "";
+    position: absolute;
+    top: -71px; left: 50%;
+    transform: translateX(-50%);
+    width: 14px; height: 14px;
+    background: var(--secondary);
+    border-radius: 50%;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.4em;
+    color: var(--primary);
+    font-size: 13px;
+    margin: 0 0 12px;
+  }
+  .hero h1 {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 36px;
+    color: var(--text);
+    margin: 0 0 14px;
+    font-weight: 600;
+  }
+  .hero-lede {
+    max-width: 540px;
+    margin: 0 auto;
+    font-style: italic;
+    color: #3a2a1a;
+  }
+  .hero-lede::first-letter {
+    color: var(--primary);
+    font-family: var(--font-display), serif;
+    font-size: 2.2em;
+    float: left;
+    line-height: 0.9;
+    padding: 4px 8px 0 0;
+    font-style: normal;
+  }
+
+  /* ============ DIVIDER ============ */
+  .greek-key-divider {
+    height: 38px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='38' viewBox='0 0 120 38'><g fill='none' stroke='%23a93226' stroke-width='1.6'><path d='M0 32 L0 6 L24 6 L24 25 L13 25 L13 16 L18 16 L18 20'/><path d='M30 32 L30 6 L54 6 L54 25 L43 25 L43 16 L48 16 L48 20'/><path d='M60 32 L60 6 L84 6 L84 25 L73 25 L73 16 L78 16 L78 20'/><path d='M90 32 L90 6 L114 6 L114 25 L103 25 L103 16 L108 16 L108 20'/></g></svg>");
+    background-repeat: repeat-x;
+    background-position: center;
+    margin: 30px auto;
+    max-width: 1200px;
+  }
+
+  /* ============ COLLECTION GRID ============ */
+  .collection {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 20px 40px 60px;
+  }
+  .section-heading {
+    text-align: center;
+    margin: 30px 0 40px;
+  }
+  .section-heading h2 {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    font-size: 22px;
+    color: var(--accent);
+    margin: 0 0 8px;
+    font-weight: 600;
+  }
+  .section-heading p {
+    font-style: italic;
+    color: #4a3a2a;
+    margin: 0;
+    font-size: 15px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .card {
+    background: var(--surface);
+    padding: 28px 26px 24px;
+    position: relative;
+    border: 1px solid rgba(201,162,58,0.4);
+  }
+  /* Greek key border via background */
+  .card::before {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border: 1px solid var(--secondary);
+    pointer-events: none;
+  }
+  .card::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 14px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='60' height='14' viewBox='0 0 60 14'><g fill='none' stroke='%23c9a23a' stroke-width='1'><path d='M0 12 L0 3 L11 3 L11 9 L5 9 L5 6 L8 6 L8 7.5'/><path d='M15 12 L15 3 L26 3 L26 9 L20 9 L20 6 L23 6 L23 7.5'/><path d='M30 12 L30 3 L41 3 L41 9 L35 9 L35 6 L38 6 L38 7.5'/><path d='M45 12 L45 3 L56 3 L56 9 L50 9 L50 6 L53 6 L53 7.5'/></g></svg>");
+    background-repeat: repeat-x;
+    pointer-events: none;
+  }
+  .card-inv {
+    font-family: var(--font-display), serif;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--primary);
+    text-align: center;
+    margin: 12px 0 4px;
+    text-transform: uppercase;
+  }
+  .card h3 {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    text-align: center;
+    font-size: 17px;
+    letter-spacing: 0.1em;
+    color: var(--text);
+    margin: 0 0 6px;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .card .meta {
+    text-align: center;
+    font-style: italic;
+    color: #5a4530;
+    font-size: 13px;
+    margin: 0 0 14px;
+  }
+  .card .rule {
+    width: 60px;
+    height: 1px;
+    background: var(--secondary);
+    margin: 0 auto 14px;
+  }
+  .card .note {
+    text-align: justify;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #2a2018;
+    margin: 0 0 12px;
+    hyphens: auto;
+  }
+  .card .note::first-letter {
+    color: var(--primary);
+    font-family: var(--font-display), serif;
+    font-size: 2.4em;
+    float: left;
+    line-height: 0.85;
+    padding: 4px 6px 0 0;
+    font-weight: 600;
+  }
+  .card .specs {
+    border-top: 1px solid rgba(201,162,58,0.5);
+    padding-top: 10px;
+    font-size: 12px;
+    color: #4a3a28;
+    text-align: center;
+    letter-spacing: 0.04em;
+  }
+  .card .specs span { display: block; margin: 2px 0; }
+  .card .specs .label {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 10px;
+    color: var(--accent);
+    display: inline;
+    margin-right: 4px;
+  }
+
+  .card.flagship .wreath {
+    position: absolute;
+    top: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 56px;
+    height: 56px;
+    background: var(--bg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+  }
+  .card.flagship .wreath svg {
+    width: 50px;
+    height: 50px;
+  }
+  .card.flagship {
+    margin-top: 28px;
+    border-color: var(--primary);
+  }
+
+  /* ============ SUB-GALLERY DIVIDER ============ */
+  .subgallery-divider {
+    text-align: center;
+    margin: 70px auto 30px;
+    max-width: 1100px;
+  }
+  .subgallery-divider .bar {
+    height: 30px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='30' viewBox='0 0 100 30'><g fill='none' stroke='%234d1c5e' stroke-width='1.4'><path d='M0 25 L0 5 L19 5 L19 19 L11 19 L11 12 L14 12 L14 15'/><path d='M25 25 L25 5 L44 5 L44 19 L36 19 L36 12 L39 12 L39 15'/><path d='M50 25 L50 5 L69 5 L69 19 L61 19 L61 12 L64 12 L64 15'/><path d='M75 25 L75 5 L94 5 L94 19 L86 19 L86 12 L89 12 L89 15'/></g></svg>");
+    background-repeat: repeat-x;
+    background-position: center;
+    margin-bottom: 20px;
+  }
+  .subgallery-divider .label {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.4em;
+    font-size: 12px;
+    color: var(--accent);
+    margin: 0 0 6px;
+  }
+  .subgallery-divider h2 {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.24em;
+    font-size: 26px;
+    color: var(--text);
+    margin: 0 0 12px;
+    font-weight: 600;
+  }
+  .subgallery-divider p {
+    max-width: 640px;
+    margin: 0 auto;
+    font-style: italic;
+    color: #4a3a28;
+    font-size: 15px;
+  }
+
+  /* Coinage two-column */
+  .coin-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+  .coin-card {
+    background: var(--surface);
+    border: 1px solid rgba(77,28,94,0.3);
+    padding: 24px 22px 20px;
+    position: relative;
+  }
+  .coin-card::before {
+    content: "";
+    position: absolute;
+    inset: 5px;
+    border: 1px dotted var(--accent);
+    pointer-events: none;
+  }
+  .coin-card h3 {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    font-size: 15px;
+    text-align: center;
+    letter-spacing: 0.1em;
+    margin: 0 0 4px;
+    color: var(--accent);
+  }
+  .coin-card .meta {
+    text-align: center;
+    font-style: italic;
+    font-size: 12px;
+    color: #5a4530;
+    margin: 0 0 12px;
+  }
+  .coin-card p {
+    font-size: 13px;
+    margin: 0;
+    text-align: justify;
+    line-height: 1.65;
+  }
+  .coin-card .legend {
+    display: block;
+    text-align: center;
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.25em;
+    font-size: 10px;
+    color: var(--primary);
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(201,162,58,0.4);
+  }
+
+  /* ============ FOOTER ============ */
+  .frieze {
+    margin-top: 80px;
+    background: var(--primary);
+    height: 56px;
+    background-image:
+      radial-gradient(circle at 30px 28px, var(--secondary) 0 4px, transparent 5px),
+      radial-gradient(circle at 30px 28px, transparent 7px, var(--secondary) 7.5px, var(--secondary) 9px, transparent 9.5px),
+      radial-gradient(circle at 30px 28px, transparent 12px, rgba(201,162,58,0.6) 12.5px, rgba(201,162,58,0.6) 13px, transparent 13.5px);
+    background-size: 60px 56px;
+    background-repeat: repeat-x;
+    border-top: 2px solid var(--secondary);
+    border-bottom: 2px solid var(--secondary);
+  }
+  footer {
+    background: #1a0d0a;
+    color: #e8dcc4;
+    padding: 50px 60px 30px;
+  }
+  .footer-cols {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    max-width: 1280px;
+    margin: 0 auto 40px;
+  }
+  .footer-cols h4 {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    font-size: 13px;
+    color: var(--secondary);
+    margin: 0 0 16px;
+    font-weight: 600;
+    text-align: center;
+  }
+  .footer-cols div {
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.8;
+  }
+  .footer-cols .latin {
+    font-family: var(--font-display), serif;
+    font-style: normal;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-size: 12px;
+    color: var(--secondary);
+    line-height: 1.9;
+  }
+  .footer-base {
+    text-align: center;
+    border-top: 1px solid rgba(201,162,58,0.3);
+    padding-top: 20px;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(232,220,196,0.6);
+    font-family: var(--font-display), serif;
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <p class="site-mark">Museum of the Imperial Forum</p>
+  <h1 class="site-name">Antiquarium Traianum</h1>
+  <div class="meander-rule" aria-hidden="true"></div>
+  <nav class="site-nav" aria-label="Primary">
+    <ul>
+      <li><a href="page-1.html">Home</a></li>
+      <li class="nav-sep" aria-hidden="true">❦</li>
+      <li><a href="page-2.html" aria-current="page">Collection</a></li>
+      <li class="nav-sep" aria-hidden="true">❦</li>
+      <li><a href="page-3.html">Exhibition</a></li>
+      <li class="nav-sep" aria-hidden="true">❦</li>
+      <li><a href="page-4.html">Visit</a></li>
+      <li class="nav-sep" aria-hidden="true">❦</li>
+      <li><a href="page-5.html">Scholarship</a></li>
+      <li class="nav-sep" aria-hidden="true">❦</li>
+      <li><a href="page-6.html">About</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="pediment">
+    <div class="pediment-frame">
+      <p class="hero-eyebrow">Galleries I — IV · Catalogus Permanens</p>
+      <h1>Permanent Collection</h1>
+      <p class="hero-lede">Twelve principal works, drawn from the strata of the Trajanic and Antonine forums, document the public face of imperial Rome — its rulers in armour, its citizens in stone, its gods underfoot in tessera. The catalogue below records each object as it appears in the galleries, arranged by acquisition number AT-101 through AT-212.</p>
+    </div>
+  </div>
+</section>
+
+<div class="greek-key-divider" aria-hidden="true"></div>
+
+<main class="collection">
+
+  <div class="section-heading">
+    <h2>Sculpture · Mosaic · Inscription</h2>
+    <p>Galleries I through IV — opened to the public 14 March 1962, reordered 2019.</p>
+  </div>
+
+  <div class="grid">
+
+    <article class="card flagship">
+      <div class="wreath" aria-hidden="true">
+        <svg viewBox="0 0 117.78949 118.25037" xmlns="http://www.w3.org/2000/svg"><circle cx="58.9" cy="59.1" r="40" fill="none" stroke="#c9a23a" stroke-width="2"/><circle cx="58.9" cy="59.1" r="32" fill="none" stroke="#a93226" stroke-width="0.6"/><text x="58.9" y="65" text-anchor="middle" font-family="Cinzel" font-size="14" fill="#4d1c5e" font-weight="700">SPQR</text></svg>
+      </div>
+      <p class="card-inv">Inv. AT-114</p>
+      <h3>Cuirassed Torso of Trajan</h3>
+      <p class="meta">Pentelic marble · c. 108 CE</p>
+      <div class="rule"></div>
+      <p class="note">Recovered in 1932 from the southern exedra of the Forum of Trajan, the torso preserves a relief programme of paired Victories flanking a central gorgoneion — a standard imperial trope here rendered with unusual attention to the lorica's leather pteryges. The head and lower limbs are lost; the figure stood approximately 2.4 m at completion.</p>
+      <div class="specs">
+        <span><span class="label">Provenance</span> Forum Traiani, southern exedra</span>
+        <span><span class="label">Dimensions</span> H. 138 cm · W. 84 cm</span>
+        <span><span class="label">Acquired</span> 1932, soprintendenza transfer</span>
+      </div>
+    </article>
+
+    <article class="card flagship">
+      <div class="wreath" aria-hidden="true">
+        <svg viewBox="0 0 117.78949 118.25037" xmlns="http://www.w3.org/2000/svg"><circle cx="58.9" cy="59.1" r="40" fill="none" stroke="#c9a23a" stroke-width="2"/><circle cx="58.9" cy="59.1" r="32" fill="none" stroke="#a93226" stroke-width="0.6"/><text x="58.9" y="65" text-anchor="middle" font-family="Cinzel" font-size="14" fill="#4d1c5e" font-weight="700">II</text></svg>
+      </div>
+      <p class="card-inv">Inv. AT-127</p>
+      <h3>Mosaic Pavement with Marine Thiasos</h3>
+      <p class="meta">Opus tessellatum · Ostia · 2nd c. CE</p>
+      <div class="rule"></div>
+      <p class="note">Lifted in nine sections from a frigidarium adjacent to the Baths of Neptune, this 6.2-metre pavement renders Tritons, hippocamps, and Nereids riding sea-monsters in a tonal palette restricted to four marbles. The tesserae average 8 mm and the central emblema preserves an inscribed signature, FELIX FECIT, in the lower right border.</p>
+      <div class="specs">
+        <span><span class="label">Provenance</span> Ostia Antica, Reg. II Ins. IV</span>
+        <span><span class="label">Dimensions</span> 6.20 × 4.05 m</span>
+        <span><span class="label">Acquired</span> 1968, on loan from Ostia</span>
+      </div>
+    </article>
+
+    <article class="card">
+      <p class="card-inv">Inv. AT-131</p>
+      <h3>Funerary Altar of Lucius Aelius Niger</h3>
+      <p class="meta">Travertine · 96 CE</p>
+      <div class="rule"></div>
+      <p class="note">A square altar with garlanded bucrania on three faces and a tabula ansata bearing the dedication of a freedman of the Aelian gens, set up by his wife Cornelia Salvia and three named children. The opening line — D · M · L · AELIO · NIGRO — preserves the early Flavian-Trajanic transitional letter forms, with strongly serifed apices.</p>
+      <div class="specs">
+        <span><span class="label">Provenance</span> Via Latina, tomb XII</span>
+        <span><span class="label">Dimensions</span> H. 92 cm · W. 64 cm</span>
+        <span><span class="label">Acquired</span> 1908, Boncompagni bequest</span>
+      </div>
+    </article>
+
+    <article class="card">
+      <p class="card-inv">Inv. AT-142</p>
+      <h3>Portrait Head of Plotina</h3>
+      <p class="meta">Lunense marble · c. 112 CE</p>
+      <div class="rule"></div>
+      <p class="note">An over-life-size head of the empress wearing the high diadem-fronted coiffure introduced during her husband's Dacian triumph. The drilling of the upper hair-mass is restrained compared to later Hadrianic practice, and the brow's slight asymmetry suggests the piece may have been a workshop replica rather than a court original.</p>
+      <div class="specs">
+        <span><span class="label">Provenance</span> Forum Augustum, north portico</span>
+        <span><span class="label">Dimensions</span> H. 41 cm</span>
+        <span><span class="label">Acquired</span> 1954, excavation deposit</span>
+      </div>
+    </article>
+
+    <article class="card">
+      <p class="card-inv">Inv. AT-156</p>
+      <h3>Relief Panel with Sacrificial Procession</h3>
+      <p class="meta">White marble · c. 138–161 CE</p>
+      <div class="rule"></div>
+      <p class="note">Six togate figures advance toward an unseen altar at the right; the central celebrant lifts a patera, while two camilli bear an acerra and a ewer. The composition recalls the inner frieze of the Ara Pacis without its Augustan crowding, suggesting a public monument of the early Antonine years, perhaps the precinct of Faustina the Elder.</p>
+      <div class="specs">
+        <span><span class="label">Provenance</span> Forum Romanum, west drain</span>
+        <span><span class="label">Dimensions</span> H. 78 cm · L. 184 cm</span>
+        <span><span class="label">Acquired</span> 1899, state purchase</span>
+      </div>
+    </article>
+
+    <article class="card">
+      <p class="card-inv">Inv. AT-163</p>
+      <h3>Statuette of Mercury Travelling</h3>
+      <p class="meta">Bronze, silver inlay · c. 150 CE</p>
+      <div class="rule"></div>
+      <p class="note">A finely cast lar-shrine bronze, 28 cm in height, depicts the god in mid-stride, caduceus in left hand, marsupium in right; the petasos and winged sandals retain traces of silver inlay. Recovered with two companion lares in a domestic shrine on the Caelian, it stands as one of the museum's most complete household assemblages.</p>
+      <div class="specs">
+        <span><span class="label">Provenance</span> Caelian, Domus dei Valerii</span>
+        <span><span class="label">Dimensions</span> H. 28 cm</span>
+        <span><span class="label">Acquired</span> 1976, scavi municipali</span>
+      </div>
+    </article>
+
+    <article class="card">
+      <p class="card-inv">Inv. AT-178</p>
+      <h3>Fragment of the Acta Fratrum Arvalium</h3>
+      <p class="meta">Marble inscription · 87 CE</p>
+      <div class="rule"></div>
+      <p class="note">Eleven lines of a Domitianic protocol of the Arval Brethren, recording the vows undertaken pro salute imperatoris on 3 January. The stone was reused in late antiquity as paving in the atrium of San Cesareo de Appia, from which it was extracted in 1923. The dating consul-pair is fully preserved.</p>
+      <div class="specs">
+        <span><span class="label">Provenance</span> San Cesareo de Appia (reused)</span>
+        <span><span class="label">Dimensions</span> H. 56 cm · W. 71 cm</span>
+        <span><span class="label">Acquired</span> 1923, ecclesial deposit</span>
+      </div>
+    </article>
+
+    <article class="card">
+      <p class="card-inv">Inv. AT-184</p>
+      <h3>Sarcophagus Lid with Reclining Couple</h3>
+      <p class="meta">Proconnesian marble · c. 230 CE</p>
+      <div class="rule"></div>
+      <p class="note">The lid alone survives of what was once a kline-type sarcophagus of the Severan period: a married couple reclines on a banqueting couch, the wife's right hand resting on her husband's shoulder. Her hairstyle — braided into a flat nest at the nape — corresponds closely to portraits of Julia Mamaea, securing the date.</p>
+      <div class="specs">
+        <span><span class="label">Provenance</span> Via Appia, fifth mile</span>
+        <span><span class="label">Dimensions</span> L. 218 cm · H. 64 cm</span>
+        <span><span class="label">Acquired</span> 1888, Torlonia exchange</span>
+      </div>
+    </article>
+
+    <article class="card">
+      <p class="card-inv">Inv. AT-191</p>
+      <h3>Capital from the Basilica Ulpia</h3>
+      <p class="meta">Pavonazzetto marble · c. 113 CE</p>
+      <div class="rule"></div>
+      <p class="note">A Composite capital of the inner colonnade, preserving three of its four corner volutes and the full crown of acanthus mollis. The deep undercutting and crisp scotia mark the high standard of the workshops dispatched to the Basilica from the imperial quarries; surface tooling indicates final dressing on site.</p>
+      <div class="specs">
+        <span><span class="label">Provenance</span> Basilica Ulpia, north aisle</span>
+        <span><span class="label">Dimensions</span> H. 96 cm · W. 124 cm</span>
+        <span><span class="label">Acquired</span> 1934, Mussolini scavi</span>
+      </div>
+    </article>
+
+    <article class="card">
+      <p class="card-inv">Inv. AT-198</p>
+      <h3>Stele of the Cohors III Praetoria</h3>
+      <p class="meta">Limestone · 162 CE</p>
+      <div class="rule"></div>
+      <p class="note">A military funerary stele bearing the relief portrait, in shallow niche, of Marcus Antonius Sabinus, optio of the third praetorian cohort, dead at twenty-eight after seven years' service. The inscription records his origo as Aquileia and is dated by reference to the consuls of 162; the workmanship is provincial-trained but accomplished.</p>
+      <div class="specs">
+        <span><span class="label">Provenance</span> Castra Praetoria, exterior</span>
+        <span><span class="label">Dimensions</span> H. 162 cm · W. 58 cm</span>
+        <span><span class="label">Acquired</span> 1911, ministerial deposit</span>
+      </div>
+    </article>
+
+    <article class="card">
+      <p class="card-inv">Inv. AT-205</p>
+      <h3>Mosaic Threshold with Guard-Dog</h3>
+      <p class="meta">Black-and-white tessellatum · 1st c. CE</p>
+      <div class="rule"></div>
+      <p class="note">From the vestibule of a Pompeian-type domus on the Esquiline, a chained mastiff bares its teeth above the legend CAVE CANEM. The composition, taken up almost word for word in Petronius, exhibits the schematic vigour typical of Flavian black-and-white pavements; the border of crenellated meander frames the panel without crowding it.</p>
+      <div class="specs">
+        <span><span class="label">Provenance</span> Esquiline, Domus Aureliana</span>
+        <span><span class="label">Dimensions</span> 1.40 × 0.95 m</span>
+        <span><span class="label">Acquired</span> 1947, post-war recovery</span>
+      </div>
+    </article>
+
+    <article class="card">
+      <p class="card-inv">Inv. AT-212</p>
+      <h3>Votive Hand of Sabazius</h3>
+      <p class="meta">Bronze · late 2nd c. CE</p>
+      <div class="rule"></div>
+      <p class="note">A right hand cast in the benedictio latina, encrusted with the symbolic apparatus of the Phrygian god: a snake coiling the wrist, a tortoise and frog at the base, a pine-cone at the thumb's tip, and a small reclining figure of the deity in the palm. Such hands, suspended in domestic shrines, attest the wide diffusion of mystery cults under the Antonines.</p>
+      <div class="specs">
+        <span><span class="label">Provenance</span> Aventine, mithraeum sub.</span>
+        <span><span class="label">Dimensions</span> H. 22 cm</span>
+        <span><span class="label">Acquired</span> 1981, antiquariat purchase</span>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- Sub-gallery divider -->
+  <div class="subgallery-divider">
+    <div class="bar" aria-hidden="true"></div>
+    <p class="label">Gallery V · Numismatica</p>
+    <h2>The Coinage of Empire</h2>
+    <p>A study cabinet of forty-seven specimens traces the imperial portrait from the principate of Nerva to the Tetrarchy. Six representative pieces are displayed in the standing cases; the remainder may be consulted by appointment in the print-room on Fridays.</p>
+    <div class="bar" aria-hidden="true" style="margin-top:20px;margin-bottom:0;"></div>
+  </div>
+
+  <div class="coin-grid">
+
+    <article class="coin-card">
+      <h3>Aureus of Nerva</h3>
+      <p class="meta">Rome · 97 CE · 7.32 g</p>
+      <p>Laureate head right; reverse, Concordia seated holding patera and cornucopia. A scarce issue of the second consulship, struck in the months following the adoption of Trajan. Slight die-shift at the obverse rim; otherwise lustrous fields.</p>
+      <span class="legend">IMP · NERVA · CAES · AVG · P · M</span>
+    </article>
+
+    <article class="coin-card">
+      <h3>Sestertius of Trajan</h3>
+      <p class="meta">Rome · 104 CE · 25.91 g</p>
+      <p>Reverse, the harbour at Centumcellae viewed in raised aerial perspective — six ships ride at anchor between the curving moles. A celebrated and uncommonly architectural reverse type, here preserved with full legend and brown patina.</p>
+      <span class="legend">PORTVM · TRAIANI</span>
+    </article>
+
+    <article class="coin-card">
+      <h3>Denarius of Hadrian</h3>
+      <p class="meta">Rome · 134 CE · 3.18 g</p>
+      <p>Travel series; reverse, AEGYPTOS reclining with sistrum and ibis. From the second tour of the empire (130–134), this issue is one of the most legible specimens in the cabinet — the sistrum's three rattles individually distinguishable.</p>
+      <span class="legend">HADRIANVS · AVG · COS · III · P · P</span>
+    </article>
+
+    <article class="coin-card">
+      <h3>Aureus of Antoninus Pius</h3>
+      <p class="meta">Rome · 145 CE · 7.27 g</p>
+      <p>Reverse, the consecratio pyre of Faustina the Elder, four tiers tall and crowned by a quadriga. The piece commemorates the divinisation of the empress in 141 and reproduces, in miniature, the lost cenotaph of the Campus Martius.</p>
+      <span class="legend">DIVA · FAVSTINA</span>
+    </article>
+
+    <article class="coin-card">
+      <h3>Antoninianus of Gallienus</h3>
+      <p class="meta">Mediolanum · 263 CE · 3.84 g</p>
+      <p>Radiate bust right; reverse, GERMANICVS · MAX · V, trophy between two captives. The flan is debased and the strike soft, characteristic of the mid-third-century crisis; included as a counterweight to the high-imperial issues above.</p>
+      <span class="legend">GALLIENVS · AVG</span>
+    </article>
+
+    <article class="coin-card">
+      <h3>Follis of Diocletian</h3>
+      <p class="meta">Treveri · 296 CE · 9.55 g</p>
+      <p>Reverse, GENIO · POPVLI · ROMANI, the Genius standing with patera and cornucopia. The new monetary system of the Tetrarchy, with its broad copper module and standardised Genius reverse, here closes the cabinet's chronological run at the threshold of late antiquity.</p>
+      <span class="legend">IMP · DIOCLETIANVS · P · F · AVG</span>
+    </article>
+
+  </div>
+
+</main>
+
+<div class="frieze" aria-hidden="true"></div>
+
+<footer>
+  <div class="footer-cols">
+    <div>
+      <h4>Hours</h4>
+      Tuesday — Sunday<br>
+      09.00 — 19.15<br>
+      Closed Mondays<br>
+      1 January · 25 December<br>
+      Last admission 18.30
+    </div>
+    <div>
+      <h4>Address</h4>
+      Antiquarium Traianum<br>
+      Via dei Fori Imperiali 1<br>
+      00184 Roma RM, Italia<br>
+      Telefono +39 06 0608<br>
+      info@antiquariumtraianum.it
+    </div>
+    <div>
+      <h4>Dedication</h4>
+      <p class="latin">
+        Senatvs · Popvlvsqve<br>
+        Romanvs · Memoriae<br>
+        Vrbis · Aeternae<br>
+        D · D · MCMLXII
+      </p>
+    </div>
+  </div>
+  <div class="footer-base">
+    Antiquarium Traianum · Museum of the Imperial Forum · Founded MCMLXII
+  </div>
+</footer>
+
+</body>
+</html>

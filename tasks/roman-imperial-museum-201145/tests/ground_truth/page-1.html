@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Antiquarium Traianum — Museum of the Imperial Forum</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.65;
+  }
+
+  /* ============ MASTHEAD ============ */
+  .masthead {
+    background: var(--surface);
+    padding: 56px 40px 28px;
+    text-align: center;
+    border-top: 6px double var(--primary);
+    position: relative;
+  }
+  .masthead .spqr {
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.55em;
+    color: var(--accent);
+    margin: 0 0 14px;
+    text-transform: uppercase;
+  }
+  .masthead h1 {
+    font-family: var(--font-display), serif;
+    font-size: 44px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    color: var(--text);
+    margin: 0 0 10px;
+    text-transform: uppercase;
+  }
+  .masthead .latin {
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.4em;
+    color: var(--primary);
+    margin: 0;
+    text-transform: uppercase;
+  }
+  .masthead .rule-pair {
+    width: 320px;
+    margin: 22px auto 0;
+    border-top: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+    height: 6px;
+  }
+
+  /* ============ NAVIGATION ============ */
+  nav.primary {
+    background: var(--surface);
+    text-align: center;
+    padding: 20px 0 18px;
+    border-top: 1px solid var(--ornament);
+  }
+  nav.primary ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    flex-wrap: wrap;
+  }
+  nav.primary li {
+    display: inline-flex;
+    align-items: center;
+  }
+  nav.primary a {
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--text);
+    text-decoration: none;
+    padding: 6px 18px;
+    transition: color 0.2s;
+  }
+  nav.primary a:hover { color: var(--primary); }
+  nav.primary a[aria-current="page"] {
+    color: var(--primary);
+    border-bottom: 2px solid var(--secondary);
+    padding-bottom: 4px;
+  }
+  nav.primary .vine {
+    width: 14px;
+    height: 14px;
+    fill: var(--ornament);
+    opacity: 0.85;
+  }
+
+  /* ============ MEANDER STRIP ============ */
+  .meander-strip {
+    height: 28px;
+    background: var(--surface);
+    border-top: 1px solid var(--text);
+    border-bottom: 1px solid var(--text);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .meander-strip svg {
+    height: 22px;
+    width: auto;
+    display: block;
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    background: var(--bg);
+    padding: 70px 40px 60px;
+    text-align: center;
+    position: relative;
+  }
+  .pediment {
+    width: 720px;
+    height: 90px;
+    margin: 0 auto 0;
+    position: relative;
+  }
+  .pediment::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 360px solid transparent;
+    border-right: 360px solid transparent;
+    border-bottom: 90px solid var(--surface);
+  }
+  .pediment::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 360px solid transparent;
+    border-right: 360px solid transparent;
+    border-bottom: 90px solid transparent;
+    border-bottom-color: transparent;
+    filter: drop-shadow(0 -2px 0 var(--primary));
+  }
+  .entablature {
+    width: 720px;
+    margin: 0 auto;
+    background: var(--surface);
+    border-top: 3px solid var(--primary);
+    border-bottom: 3px solid var(--primary);
+    padding: 8px 0;
+  }
+  .entablature .meta-rule {
+    height: 4px;
+    background: var(--secondary);
+    margin: 4px 40px;
+  }
+
+  .hero-frame-wrap {
+    position: relative;
+    width: 640px;
+    margin: -8px auto 0;
+    padding: 50px 60px 50px;
+    background: var(--surface);
+    border-left: 3px solid var(--primary);
+    border-right: 3px solid var(--primary);
+    border-bottom: 3px solid var(--primary);
+  }
+  .hero-frame-wrap .laurel {
+    position: absolute;
+    top: 22px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 280px;
+    opacity: 0.18;
+    pointer-events: none;
+  }
+  .hero-frame-wrap h2 {
+    position: relative;
+    font-family: var(--font-display), serif;
+    font-size: 56px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    color: var(--text);
+    margin: 0 0 12px;
+    text-transform: uppercase;
+    line-height: 1.05;
+  }
+  .hero-frame-wrap .subtitle {
+    position: relative;
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.45em;
+    color: var(--accent);
+    margin: 0 0 20px;
+    text-transform: uppercase;
+  }
+  .hero-frame-wrap .latin-tag {
+    position: relative;
+    font-family: var(--font-display), serif;
+    font-size: 16px;
+    letter-spacing: 0.32em;
+    color: var(--primary);
+    margin: 18px 0 0;
+    padding-top: 18px;
+    border-top: 1px solid var(--ornament);
+    text-transform: uppercase;
+  }
+
+  /* ============ WELCOME ============ */
+  .welcome {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 70px 40px 50px;
+    text-align: center;
+  }
+  .welcome .drop {
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.4em;
+    color: var(--primary);
+    text-transform: uppercase;
+    margin: 0 0 30px;
+  }
+  .welcome p {
+    font-size: 17px;
+    margin: 0 0 22px;
+    text-align: justify;
+    text-align-last: center;
+  }
+  .welcome p::first-letter {
+    font-family: var(--font-display), serif;
+    font-size: 1.6em;
+    color: var(--primary);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+
+  /* ============ MEANDER DIVIDER ============ */
+  .meander-divider {
+    text-align: center;
+    padding: 30px 0 50px;
+    background: var(--bg);
+  }
+  .meander-divider svg {
+    height: 36px;
+    width: auto;
+  }
+  .meander-divider .label {
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.5em;
+    color: var(--accent);
+    margin-bottom: 18px;
+    text-transform: uppercase;
+  }
+
+  /* ============ FEATURE CARDS ============ */
+  .features {
+    padding: 0 40px 80px;
+    max-width: 1320px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 36px;
+  }
+  .card {
+    background: var(--surface);
+    border: 2px solid var(--secondary);
+    padding: 6px;
+    position: relative;
+  }
+  .card-inner {
+    border: 1px solid var(--primary);
+    padding: 36px 30px 30px;
+    text-align: center;
+    height: 100%;
+  }
+  .card .greek-key-top, .card .greek-key-bottom {
+    height: 14px;
+    background-image: repeating-linear-gradient(
+      90deg,
+      var(--secondary) 0 2px,
+      transparent 2px 6px,
+      var(--secondary) 6px 8px,
+      transparent 8px 14px
+    );
+    border-top: 1px solid var(--secondary);
+    border-bottom: 1px solid var(--secondary);
+  }
+  .card .roundel {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 14px;
+    display: block;
+    opacity: 0.85;
+  }
+  .card h3 {
+    font-family: var(--font-display), serif;
+    font-size: 17px;
+    letter-spacing: 0.18em;
+    color: var(--primary);
+    margin: 0 0 6px;
+    text-transform: uppercase;
+    line-height: 1.3;
+  }
+  .card .kicker {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin: 0 0 16px;
+  }
+  .card p {
+    font-size: 15px;
+    margin: 0 0 18px;
+    color: var(--text);
+    text-align: justify;
+    text-align-last: center;
+  }
+  .card .closing-rule {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .card .closing-rule .line {
+    height: 1px;
+    width: 60px;
+    background: var(--secondary);
+  }
+  .card .closing-rule svg {
+    width: 18px;
+    height: 18px;
+    fill: var(--secondary);
+  }
+  .card .meta {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--text);
+    text-transform: uppercase;
+    margin-top: 14px;
+    opacity: 0.75;
+  }
+
+  /* ============ FOOTER ============ */
+  footer {
+    background: #d8c9a8;
+    border-top: 4px double var(--primary);
+    margin-top: 0;
+    padding: 0 0 40px;
+  }
+  footer .frieze {
+    height: 32px;
+    background-image: repeating-linear-gradient(
+      90deg,
+      var(--secondary) 0 4px,
+      transparent 4px 10px,
+      var(--secondary) 10px 12px,
+      transparent 12px 22px
+    );
+    border-top: 1px solid var(--secondary);
+    border-bottom: 1px solid var(--secondary);
+    margin-bottom: 36px;
+  }
+  footer .inscription {
+    text-align: center;
+    padding: 0 40px;
+  }
+  footer .inscription .name {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    letter-spacing: 0.28em;
+    color: var(--text);
+    margin: 0 0 14px;
+    text-transform: uppercase;
+  }
+  footer .inscription .address {
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.32em;
+    color: var(--text);
+    margin: 0 0 8px;
+    text-transform: uppercase;
+  }
+  footer .inscription .founded {
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.45em;
+    color: var(--primary);
+    margin: 14px 0 0;
+    text-transform: uppercase;
+  }
+  footer .tailpiece {
+    text-align: center;
+    margin-top: 24px;
+  }
+  footer .tailpiece svg {
+    width: 36px;
+    height: 36px;
+    fill: var(--secondary);
+  }
+  footer .small {
+    text-align: center;
+    margin-top: 22px;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    font-family: var(--font-display), serif;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- ============ MASTHEAD ============ -->
+<header class="masthead">
+  <p class="spqr">S · P · Q · R</p>
+  <h1>Antiquarium Traianum</h1>
+  <p class="latin">Museum of the Imperial Forum · Roma</p>
+  <div class="rule-pair"></div>
+</header>
+
+<!-- ============ NAVIGATION ============ -->
+<nav class="primary" aria-label="Primary">
+  <ul>
+    <li><a href="page-1.html" aria-current="page">Home</a></li>
+    <li><svg class="vine" viewBox="0 0 200 200" aria-hidden="true"><path d="M43.6 863.4c-1.8 0-3.6 0.1-5.3 0.3-7 0.7-13.9 2.8-19.2 7.5s-8.2 12-7.7 21c0.5 9 4.3 16.1 10.2 20.3 5.9 4.2 13.3 5.5 21 5.2 15.5-0.7 32.8-8 45.8-18.3 1.4-1.1 2.8-2 4.3-3.1 4.3 6.7 7.6 14.8 9.3 24.1-7.5-5.1-21-10.5-35.7 1.5-22.1 18.2-25 12.9-45.3-2.1-2.9 36.1 15 54.6 44.7 52.5 0 0-14 4.3-3.6 26.4 6 12.9 8.4 20.1 6.6 25.2-12.8 2.3-15.8 7.8-5.6 12.7 45.1 10 65.7-27.5 68.7-66 45.4 0 52.9-31.8 52.5-50.4-8.2 11.1-22.2 11.1-32.9 2.5-9.9-7.9-21.7-16.2-39-1.1-1.7-11.7-5.7-22.1-11.2-30.7 19.4-11.4 38.7-14.5 52.5-10.8 5.5 1.4 9.5 4.1 12.4 6.9-9 8.4-11.8 26.4 2.3 27 18.9 0.9 21-15.5 13.6-27.1-5.5-8.5-16.4-13.2-25.7-16.6-17.5-4.6-39.7-0.6-61.3 12.5-5.2-5.7-11.1-10.2-17.7-13-7.1-2.9-17.5-5.7-28.3-6.3-1.8-0.1-3.6-0.1-5.4-0.1z" transform="translate(0 -852.36)"/></svg></li>
+    <li><a href="page-2.html">Collection</a></li>
+    <li><svg class="vine" viewBox="0 0 200 200" aria-hidden="true"><path d="M43.6 863.4c-1.8 0-3.6 0.1-5.3 0.3-7 0.7-13.9 2.8-19.2 7.5s-8.2 12-7.7 21c0.5 9 4.3 16.1 10.2 20.3 5.9 4.2 13.3 5.5 21 5.2 15.5-0.7 32.8-8 45.8-18.3 1.4-1.1 2.8-2 4.3-3.1 4.3 6.7 7.6 14.8 9.3 24.1-7.5-5.1-21-10.5-35.7 1.5-22.1 18.2-25 12.9-45.3-2.1-2.9 36.1 15 54.6 44.7 52.5 0 0-14 4.3-3.6 26.4 6 12.9 8.4 20.1 6.6 25.2-12.8 2.3-15.8 7.8-5.6 12.7 45.1 10 65.7-27.5 68.7-66 45.4 0 52.9-31.8 52.5-50.4-8.2 11.1-22.2 11.1-32.9 2.5-9.9-7.9-21.7-16.2-39-1.1-1.7-11.7-5.7-22.1-11.2-30.7 19.4-11.4 38.7-14.5 52.5-10.8 5.5 1.4 9.5 4.1 12.4 6.9-9 8.4-11.8 26.4 2.3 27 18.9 0.9 21-15.5 13.6-27.1-5.5-8.5-16.4-13.2-25.7-16.6-17.5-4.6-39.7-0.6-61.3 12.5-5.2-5.7-11.1-10.2-17.7-13-7.1-2.9-17.5-5.7-28.3-6.3-1.8-0.1-3.6-0.1-5.4-0.1z" transform="translate(0 -852.36)"/></svg></li>
+    <li><a href="page-3.html">Exhibition</a></li>
+    <li><svg class="vine" viewBox="0 0 200 200" aria-hidden="true"><path d="M43.6 863.4c-1.8 0-3.6 0.1-5.3 0.3-7 0.7-13.9 2.8-19.2 7.5s-8.2 12-7.7 21c0.5 9 4.3 16.1 10.2 20.3 5.9 4.2 13.3 5.5 21 5.2 15.5-0.7 32.8-8 45.8-18.3 1.4-1.1 2.8-2 4.3-3.1 4.3 6.7 7.6 14.8 9.3 24.1-7.5-5.1-21-10.5-35.7 1.5-22.1 18.2-25 12.9-45.3-2.1-2.9 36.1 15 54.6 44.7 52.5 0 0-14 4.3-3.6 26.4 6 12.9 8.4 20.1 6.6 25.2-12.8 2.3-15.8 7.8-5.6 12.7 45.1 10 65.7-27.5 68.7-66 45.4 0 52.9-31.8 52.5-50.4-8.2 11.1-22.2 11.1-32.9 2.5-9.9-7.9-21.7-16.2-39-1.1-1.7-11.7-5.7-22.1-11.2-30.7 19.4-11.4 38.7-14.5 52.5-10.8 5.5 1.4 9.5 4.1 12.4 6.9-9 8.4-11.8 26.4 2.3 27 18.9 0.9 21-15.5 13.6-27.1-5.5-8.5-16.4-13.2-25.7-16.6-17.5-4.6-39.7-0.6-61.3 12.5-5.2-5.7-11.1-10.2-17.7-13-7.1-2.9-17.5-5.7-28.3-6.3-1.8-0.1-3.6-0.1-5.4-0.1z" transform="translate(0 -852.36)"/></svg></li>
+    <li><a href="page-4.html">Visit</a></li>
+    <li><svg class="vine" viewBox="0 0 200 200" aria-hidden="true"><path d="M43.6 863.4c-1.8 0-3.6 0.1-5.3 0.3-7 0.7-13.9 2.8-19.2 7.5s-8.2 12-7.7 21c0.5 9 4.3 16.1 10.2 20.3 5.9 4.2 13.3 5.5 21 5.2 15.5-0.7 32.8-8 45.8-18.3 1.4-1.1 2.8-2 4.3-3.1 4.3 6.7 7.6 14.8 9.3 24.1-7.5-5.1-21-10.5-35.7 1.5-22.1 18.2-25 12.9-45.3-2.1-2.9 36.1 15 54.6 44.7 52.5 0 0-14 4.3-3.6 26.4 6 12.9 8.4 20.1 6.6 25.2-12.8 2.3-15.8 7.8-5.6 12.7 45.1 10 65.7-27.5 68.7-66 45.4 0 52.9-31.8 52.5-50.4-8.2 11.1-22.2 11.1-32.9 2.5-9.9-7.9-21.7-16.2-39-1.1-1.7-11.7-5.7-22.1-11.2-30.7 19.4-11.4 38.7-14.5 52.5-10.8 5.5 1.4 9.5 4.1 12.4 6.9-9 8.4-11.8 26.4 2.3 27 18.9 0.9 21-15.5 13.6-27.1-5.5-8.5-16.4-13.2-25.7-16.6-17.5-4.6-39.7-0.6-61.3 12.5-5.2-5.7-11.1-10.2-17.7-13-7.1-2.9-17.5-5.7-28.3-6.3-1.8-0.1-3.6-0.1-5.4-0.1z" transform="translate(0 -852.36)"/></svg></li>
+    <li><a href="page-5.html">Scholarship</a></li>
+    <li><svg class="vine" viewBox="0 0 200 200" aria-hidden="true"><path d="M43.6 863.4c-1.8 0-3.6 0.1-5.3 0.3-7 0.7-13.9 2.8-19.2 7.5s-8.2 12-7.7 21c0.5 9 4.3 16.1 10.2 20.3 5.9 4.2 13.3 5.5 21 5.2 15.5-0.7 32.8-8 45.8-18.3 1.4-1.1 2.8-2 4.3-3.1 4.3 6.7 7.6 14.8 9.3 24.1-7.5-5.1-21-10.5-35.7 1.5-22.1 18.2-25 12.9-45.3-2.1-2.9 36.1 15 54.6 44.7 52.5 0 0-14 4.3-3.6 26.4 6 12.9 8.4 20.1 6.6 25.2-12.8 2.3-15.8 7.8-5.6 12.7 45.1 10 65.7-27.5 68.7-66 45.4 0 52.9-31.8 52.5-50.4-8.2 11.1-22.2 11.1-32.9 2.5-9.9-7.9-21.7-16.2-39-1.1-1.7-11.7-5.7-22.1-11.2-30.7 19.4-11.4 38.7-14.5 52.5-10.8 5.5 1.4 9.5 4.1 12.4 6.9-9 8.4-11.8 26.4 2.3 27 18.9 0.9 21-15.5 13.6-27.1-5.5-8.5-16.4-13.2-25.7-16.6-17.5-4.6-39.7-0.6-61.3 12.5-5.2-5.7-11.1-10.2-17.7-13-7.1-2.9-17.5-5.7-28.3-6.3-1.8-0.1-3.6-0.1-5.4-0.1z" transform="translate(0 -852.36)"/></svg></li>
+    <li><a href="page-6.html">About</a></li>
+  </ul>
+</nav>
+
+<!-- ============ MEANDER STRIP ============ -->
+<div class="meander-strip" aria-hidden="true">
+  <svg viewBox="1000 364 16511 4447" preserveAspectRatio="xMidYMid meet">
+    <g>
+      <path fill="#1a1a1a" d="M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z"/>
+      <path fill="#1a1a1a" d="M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z"/>
+      <path fill="#1a1a1a" d="M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z"/>
+      <path fill="#1a1a1a" d="M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z"/>
+      <path fill="#1a1a1a" d="M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z"/>
+    </g>
+  </svg>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="pediment" aria-hidden="true"></div>
+  <div class="entablature">
+    <div class="meta-rule"></div>
+  </div>
+  <div class="hero-frame-wrap">
+    <svg class="laurel" viewBox="0 0 323.75 295.79" aria-hidden="true">
+      <path fill="#c9a23a" d="m 141.69922,-18.574219 c -11.04494,4.854973 -23.40097,9.4683311 -30.06445,22.6386721 -4.68287,7.1205619 -4.80387,16.3913319 -8.10547,24.1464849 6.1158,-6.501993 15.58349,-13.160155 20.97851,-20.7246099 6.01849,-9.4997444 9.07864,-18.0112601 17.19141,-26.0605471 z m 164.51172,0 c 8.11277,8.049287 11.17487,16.5608027 17.19336,26.0605471 5.39502,7.5644549 14.86076,14.2226169 20.97656,20.7246099 -3.3016,-7.755152 -3.4226,-17.025923 -8.10547,-24.1464849 -6.66348,-13.170341 -19.01951,-17.7836991 -30.06445,-22.6386721 z" transform="translate(20 40)"/>
+    </svg>
+    <p class="subtitle">Memoria Vrbis · MCMVII</p>
+    <h2>Senatvs<br>Popvlvsqve</h2>
+    <p class="latin-tag">Memoria Vrbis Aeternae</p>
+  </div>
+</section>
+
+<!-- ============ WELCOME ============ -->
+<section class="welcome">
+  <p class="drop">· Salvete · Welcome to the Antiquarium ·</p>
+  <p>The Antiquarium Traianum stands upon the southern flank of the Forum of Trajan, founded by royal decree in 1907 to gather and conserve the lapidary, bronze, and architectural patrimony unearthed during the systematic excavation of the imperial fora. For more than a century our galleries have offered scholars and citizens a measured passage from the Augustan settlement of 27 B.C. through the closing chapter of the Severan dynasty.</p>
+
+  <p>Our holdings comprise four thousand two hundred and twelve catalogued objects: dedicatory inscriptions to emperors and consuls, fragmentary equestrian bronzes, sculptural revetments from the Basilica Ulpia, fistulae bearing the names of imperial freedmen, and the celebrated wall of marble portraits drawn from the necropoleis of the Via Latina. A reading room and the Bibliotheca Traiani complete the institution's scholarly apparatus.</p>
+
+  <p>The museum is open Tuesday through Sunday from nine in the morning to seven in the evening, and is reached on foot from the Via dei Fori Imperiali. Admission to the permanent galleries is twelve euro; concessions, school groups, and citizens of Rome enter at reduced rate. We invite you to walk among the stones, and to read what the Empire wrote of itself.</p>
+</section>
+
+<!-- ============ MEANDER DIVIDER ============ -->
+<div class="meander-divider">
+  <p class="label">· Notitia · Of the Current Season ·</p>
+  <svg viewBox="1000 364 16511 4447" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+    <g>
+      <path fill="#c9a23a" d="M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z"/>
+      <path fill="#c9a23a" d="M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z"/>
+      <path fill="#c9a23a" d="M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z"/>
+      <path fill="#c9a23a" d="M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z"/>
+      <path fill="#c9a23a" d="M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z"/>
+    </g>
+  </svg>
+</div>
+
+<!-- ============ FEATURE CARDS ============ -->
+<section class="features">
+
+  <article class="card">
+    <div class="greek-key-top"></div>
+    <div class="card-inner">
+      <svg class="roundel" viewBox="0 0 117.79 118.25" aria-hidden="true">
+        <circle cx="58.9" cy="59.1" r="42" fill="none" stroke="#a93226" stroke-width="1.2"/>
+        <circle cx="58.9" cy="59.1" r="36" fill="none" stroke="#c9a23a" stroke-width="0.8"/>
+        <text x="58.9" y="64" text-anchor="middle" font-family="Cinzel" font-size="14" fill="#a93226" letter-spacing="2">EX</text>
+      </svg>
+      <p class="kicker">Current Exhibition</p>
+      <h3>Mosaics of the<br>Bay of Naples</h3>
+      <p>Forty-seven floor and wall mosaics drawn from Pompeii, Herculaneum, and the maritime villas of Stabiae, presented for the first time in Rome alongside the recently restored Nereid panel from Boscoreale.</p>
+      <div class="closing-rule">
+        <span class="line"></span>
+        <svg viewBox="0 0 200 200" aria-hidden="true"><path d="M43.6 863.4c-1.8 0-3.6 0.1-5.3 0.3-7 0.7-13.9 2.8-19.2 7.5s-8.2 12-7.7 21c0.5 9 4.3 16.1 10.2 20.3 5.9 4.2 13.3 5.5 21 5.2 15.5-0.7 32.8-8 45.8-18.3 1.4-1.1 2.8-2 4.3-3.1 4.3 6.7 7.6 14.8 9.3 24.1-7.5-5.1-21-10.5-35.7 1.5-22.1 18.2-25 12.9-45.3-2.1-2.9 36.1 15 54.6 44.7 52.5 0 0-14 4.3-3.6 26.4 6 12.9 8.4 20.1 6.6 25.2-12.8 2.3-15.8 7.8-5.6 12.7 45.1 10 65.7-27.5 68.7-66 45.4 0 52.9-31.8 52.5-50.4-8.2 11.1-22.2 11.1-32.9 2.5-9.9-7.9-21.7-16.2-39-1.1-1.7-11.7-5.7-22.1-11.2-30.7 19.4-11.4 38.7-14.5 52.5-10.8 5.5 1.4 9.5 4.1 12.4 6.9-9 8.4-11.8 26.4 2.3 27 18.9 0.9 21-15.5 13.6-27.1-5.5-8.5-16.4-13.2-25.7-16.6-17.5-4.6-39.7-0.6-61.3 12.5-5.2-5.7-11.1-10.2-17.7-13-7.1-2.9-17.5-5.7-28.3-6.3-1.8-0.1-3.6-0.1-5.4-0.1z" transform="translate(0 -852.36)"/></svg>
+        <span class="line"></span>
+      </div>
+      <p class="meta">Open through XIV November</p>
+    </div>
+    <div class="greek-key-bottom"></div>
+  </article>
+
+  <article class="card">
+    <div class="greek-key-top"></div>
+    <div class="card-inner">
+      <svg class="roundel" viewBox="0 0 117.79 118.25" aria-hidden="true">
+        <circle cx="58.9" cy="59.1" r="42" fill="none" stroke="#a93226" stroke-width="1.2"/>
+        <circle cx="58.9" cy="59.1" r="36" fill="none" stroke="#c9a23a" stroke-width="0.8"/>
+        <text x="58.9" y="64" text-anchor="middle" font-family="Cinzel" font-size="14" fill="#a93226" letter-spacing="2">LC</text>
+      </svg>
+      <p class="kicker">Public Lecture</p>
+      <h3>The Severan<br>Marble Plan</h3>
+      <p>Prof. Livia Marcheselli of the Università di Bologna delivers the autumn Galassi Lecture, treating recent digital reassemblies of the Forma Urbis Romae and their consequences for the topography of regio VIII.</p>
+      <div class="closing-rule">
+        <span class="line"></span>
+        <svg viewBox="0 0 200 200" aria-hidden="true"><path d="M43.6 863.4c-1.8 0-3.6 0.1-5.3 0.3-7 0.7-13.9 2.8-19.2 7.5s-8.2 12-7.7 21c0.5 9 4.3 16.1 10.2 20.3 5.9 4.2 13.3 5.5 21 5.2 15.5-0.7 32.8-8 45.8-18.3 1.4-1.1 2.8-2 4.3-3.1 4.3 6.7 7.6 14.8 9.3 24.1-7.5-5.1-21-10.5-35.7 1.5-22.1 18.2-25 12.9-45.3-2.1-2.9 36.1 15 54.6 44.7 52.5 0 0-14 4.3-3.6 26.4 6 12.9 8.4 20.1 6.6 25.2-12.8 2.3-15.8 7.8-5.6 12.7 45.1 10 65.7-27.5 68.7-66 45.4 0 52.9-31.8 52.5-50.4-8.2 11.1-22.2 11.1-32.9 2.5-9.9-7.9-21.7-16.2-39-1.1-1.7-11.7-5.7-22.1-11.2-30.7 19.4-11.4 38.7-14.5 52.5-10.8 5.5 1.4 9.5 4.1 12.4 6.9-9 8.4-11.8 26.4 2.3 27 18.9 0.9 21-15.5 13.6-27.1-5.5-8.5-16.4-13.2-25.7-16.6-17.5-4.6-39.7-0.6-61.3 12.5-5.2-5.7-11.1-10.2-17.7-13-7.1-2.9-17.5-5.7-28.3-6.3-1.8-0.1-3.6-0.1-5.4-0.1z" transform="translate(0 -852.36)"/></svg>
+        <span class="line"></span>
+      </div>
+      <p class="meta">XXII October · Aula Magna · 18:30</p>
+    </div>
+    <div class="greek-key-bottom"></div>
+  </article>
+
+  <article class="card">
+    <div class="greek-key-top"></div>
+    <div class="card-inner">
+      <svg class="roundel" viewBox="0 0 117.79 118.25" aria-hidden="true">
+        <circle cx="58.9" cy="59.1" r="42" fill="none" stroke="#a93226" stroke-width="1.2"/>
+        <circle cx="58.9" cy="59.1" r="36" fill="none" stroke="#c9a23a" stroke-width="0.8"/>
+        <text x="58.9" y="64" text-anchor="middle" font-family="Cinzel" font-size="14" fill="#a93226" letter-spacing="2">NA</text>
+      </svg>
+      <p class="kicker">New Acquisition</p>
+      <h3>Equestrian<br>Portrait Fragment</h3>
+      <p>A bronze head and partial torso of the Hadrianic period, recovered in 2023 from a private collection in Tivoli and acquired through the generosity of the Fondazione Pacelli. Now installed in the East Atrium.</p>
+      <div class="closing-rule">
+        <span class="line"></span>
+        <svg viewBox="0 0 200 200" aria-hidden="true"><path d="M43.6 863.4c-1.8 0-3.6 0.1-5.3 0.3-7 0.7-13.9 2.8-19.2 7.5s-8.2 12-7.7 21c0.5 9 4.3 16.1 10.2 20.3 5.9 4.2 13.3 5.5 21 5.2 15.5-0.7 32.8-8 45.8-18.3 1.4-1.1 2.8-2 4.3-3.1 4.3 6.7 7.6 14.8 9.3 24.1-7.5-5.1-21-10.5-35.7 1.5-22.1 18.2-25 12.9-45.3-2.1-2.9 36.1 15 54.6 44.7 52.5 0 0-14 4.3-3.6 26.4 6 12.9 8.4 20.1 6.6 25.2-12.8 2.3-15.8 7.8-5.6 12.7 45.1 10 65.7-27.5 68.7-66 45.4 0 52.9-31.8 52.5-50.4-8.2 11.1-22.2 11.1-32.9 2.5-9.9-7.9-21.7-16.2-39-1.1-1.7-11.7-5.7-22.1-11.2-30.7 19.4-11.4 38.7-14.5 52.5-10.8 5.5 1.4 9.5 4.1 12.4 6.9-9 8.4-11.8 26.4 2.3 27 18.9 0.9 21-15.5 13.6-27.1-5.5-8.5-16.4-13.2-25.7-16.6-17.5-4.6-39.7-0.6-61.3 12.5-5.2-5.7-11.1-10.2-17.7-13-7.1-2.9-17.5-5.7-28.3-6.3-1.8-0.1-3.6-0.1-5.4-0.1z" transform="translate(0 -852.36)"/></svg>
+        <span class="line"></span>
+      </div>
+      <p class="meta">Inv. AT · 2023 · 0411</p>
+    </div>
+    <div class="greek-key-bottom"></div>
+  </article>
+
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="frieze" aria-hidden="true"></div>
+  <div class="inscription">
+    <p class="name">Antiquarium Traianum</p>
+    <p class="address">Via Alessandrina XVI · Roma · I — 00184</p>
+    <p class="address">Tel. + 39 · 06 · 0608 · info@antiquarium-traianum.it</p>
+    <p class="founded">Fundata · Anno · MCMVII</p>
+  </div>
+  <div class="tailpiece">
+    <svg viewBox="0 0 200 200" aria-hidden="true">
+      <path d="M43.6 863.4c-1.8 0-3.6 0.1-5.3 0.3-7 0.7-13.9 2.8-19.2 7.5s-8.2 12-7.7 21c0.5 9 4.3 16.1 10.2 20.3 5.9 4.2 13.3 5.5 21 5.2 15.5-0.7 32.8-8 45.8-18.3 1.4-1.1 2.8-2 4.3-3.1 4.3 6.7 7.6 14.8 9.3 24.1-7.5-5.1-21-10.5-35.7 1.5-22.1 18.2-25 12.9-45.3-2.1-2.9 36.1 15 54.6 44.7 52.5 0 0-14 4.3-3.6 26.4 6 12.9 8.4 20.1 6.6 25.2-12.8 2.3-15.8 7.8-5.6 12.7 45.1 10 65.7-27.5 68.7-66 45.4 0 52.9-31.8 52.5-50.4-8.2 11.1-22.2 11.1-32.9 2.5-9.9-7.9-21.7-16.2-39-1.1-1.7-11.7-5.7-22.1-11.2-30.7 19.4-11.4 38.7-14.5 52.5-10.8 5.5 1.4 9.5 4.1 12.4 6.9-9 8.4-11.8 26.4 2.3 27 18.9 0.9 21-15.5 13.6-27.1-5.5-8.5-16.4-13.2-25.7-16.6-17.5-4.6-39.7-0.6-61.3 12.5-5.2-5.7-11.1-10.2-17.7-13-7.1-2.9-17.5-5.7-28.3-6.3-1.8-0.1-3.6-0.1-5.4-0.1z" transform="translate(0 -852.36)"/>
+    </svg>
+  </div>
+  <p class="small">Ex Senatus Consulto · Civitas Aeterna</p>
+</footer>
+
+</body>
+</html>

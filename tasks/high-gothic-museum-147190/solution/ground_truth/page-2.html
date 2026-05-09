@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Permanent Collection — The Cloisters of Saint-Évroult</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  :root{
+    --col-width: 18em;
+    --rule-gold: #c9a23a;
+    --ink: #0a0a0a;
+    --cobalt: #1e3a5f;
+    --parchment: #f4ecd8;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    line-height: 1.7;
+    font-size: 17px;
+  }
+
+  a{ color: var(--secondary); text-decoration: none; }
+  a:hover{ text-decoration: underline; }
+
+  h1,h2,h3,h4{
+    font-family: var(--font-display), "Times New Roman", serif;
+    font-weight: 500;
+    color: var(--text-emphasis);
+    letter-spacing: 0.02em;
+  }
+
+  /* ---------- MASTHEAD ---------- */
+  .masthead{
+    text-align:center;
+    padding: 2.5rem 2rem 0.5rem;
+    background: var(--bg);
+  }
+  .gold-rule{
+    display:flex; align-items:center; justify-content:center;
+    gap: 0.75rem;
+    margin: 0 auto 1.25rem;
+    max-width: 1100px;
+  }
+  .gold-rule .line{
+    flex:1; height:1px;
+    background: linear-gradient(to right, transparent, var(--rule-gold) 15%, var(--rule-gold) 85%, transparent);
+  }
+  .gold-rule .leaf{
+    width:22px; height:22px;
+    color: var(--rule-gold);
+  }
+  .gold-rule .leaf svg{ width:100%; height:100%; fill: currentColor; }
+
+  .site-title{
+    font-family: var(--font-display), serif;
+    font-size: 2.25rem;
+    font-weight: 400;
+    margin: 0 0 0.25rem;
+    color: var(--primary);
+    letter-spacing: 0.04em;
+  }
+  .site-tagline{
+    font-family: var(--font-body), sans-serif;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.32em;
+    color: var(--text);
+    margin: 0;
+  }
+
+  /* ---------- ARCADE NAV ---------- */
+  nav.arcade{
+    margin: 1.5rem auto 0;
+    max-width: 1180px;
+    padding: 0 2rem;
+  }
+  nav.arcade ul{
+    list-style:none; padding:0; margin:0;
+    display:grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0;
+    border-bottom: 1px solid var(--ink);
+  }
+  nav.arcade li{
+    position:relative;
+    text-align:center;
+  }
+  nav.arcade a{
+    display:block;
+    position:relative;
+    padding: 2.5rem 0.25rem 0.6rem;
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    text-transform: lowercase;
+    letter-spacing: 0.12em;
+    font-size: 0.78rem;
+    color: var(--ink);
+    border-left: 1px solid var(--ink);
+  }
+  nav.arcade li:last-child a{ border-right: 1px solid var(--ink); }
+
+  /* pointed-arch silhouette via clip + outline */
+  nav.arcade a::before{
+    content:"";
+    position:absolute;
+    top:6px; left:8%; right:8%;
+    height: 32px;
+    border: 1px solid var(--ink);
+    border-bottom: none;
+    border-radius: 50% 50% 0 0 / 80% 80% 0 0;
+    clip-path: polygon(0 100%, 0 35%, 50% 0, 100% 35%, 100% 100%);
+  }
+  nav.arcade a[aria-current="page"]{
+    color: var(--parchment);
+  }
+  nav.arcade a[aria-current="page"]::before{
+    background: var(--cobalt);
+    border-color: var(--cobalt);
+  }
+  nav.arcade a[aria-current="page"]::after{
+    content:"";
+    position:absolute;
+    left:8%; right:8%;
+    bottom: 0.4rem;
+    height: 1px;
+    background: var(--rule-gold);
+  }
+
+  /* ---------- PAGE HEAD ---------- */
+  .page-head{
+    text-align:center;
+    padding: 3rem 2rem 1.5rem;
+  }
+  .page-head .eyebrow{
+    font-family: var(--font-body), sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.6rem;
+  }
+  .page-head h1{
+    font-size: 3rem;
+    margin: 0 0 0.5rem;
+    font-weight: 400;
+  }
+  .page-head .lede{
+    max-width: 32em;
+    margin: 0.75rem auto 0;
+    font-size: 1.02rem;
+    color: var(--text);
+  }
+  .divider-vine{
+    display:flex; justify-content:center; align-items:center;
+    margin: 2rem auto 0;
+    gap: 1rem;
+    color: var(--ink);
+  }
+  .divider-vine .rule{
+    width: 90px; height:1px; background: var(--ink);
+  }
+  .divider-vine svg{ width: 38px; height: 38px; fill: var(--ink); }
+
+  /* ---------- LAYOUT ---------- */
+  .layout{
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 2rem 2rem 4rem;
+    display: grid;
+    grid-template-columns: 1fr 260px;
+    gap: 3.5rem;
+  }
+
+  /* ---------- HALL SECTION ---------- */
+  .hall{
+    margin-bottom: 3.5rem;
+  }
+  .hall-head{
+    display:grid;
+    grid-template-columns: auto 1fr auto;
+    align-items:center;
+    gap: 1.25rem;
+    margin-bottom: 1.75rem;
+  }
+  .hall-num{
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    color: var(--accent);
+    font-size: 0.95rem;
+    letter-spacing: 0.15em;
+  }
+  .hall-head h2{
+    font-size: 1.85rem;
+    margin: 0;
+    font-variant: small-caps;
+    letter-spacing: 0.06em;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 0.4rem;
+    line-height: 1;
+  }
+  .hall-meta{
+    font-size: 0.75rem;
+    color: var(--text);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  /* ---------- CARD GRID ---------- */
+  .card-grid{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.25rem 2rem;
+  }
+
+  /* ---------- ARCH CARD ---------- */
+  .arch-card{
+    position:relative;
+    padding: 2.75rem 1.75rem 1.75rem;
+    background: var(--surface);
+    transition: transform 0.25s ease;
+  }
+  .arch-card::before{
+    /* the pointed-arch outline */
+    content:"";
+    position:absolute;
+    inset: 0.6rem 0.6rem 0.6rem 0.6rem;
+    border: 1.5px solid var(--ink);
+    border-radius: 50% 50% 0 0 / 28% 28% 0 0;
+    pointer-events:none;
+    z-index: 0;
+  }
+  .arch-card::after{
+    /* diaper interior, hidden by default */
+    content:"";
+    position:absolute;
+    inset: 0.65rem 0.65rem 0.65rem 0.65rem;
+    border-radius: 50% 50% 0 0 / 28% 28% 0 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 600 600'><g transform='translate(300,300)scale(0.87)rotate(45)' fill='%231e3a5f' fill-opacity='0.07'><circle cx='-195' r='163'/><circle cx='195' r='163'/><circle cy='195' r='163'/><circle cy='-195' r='163'/><rect x='-232' y='-232' width='464' height='464'/></g></svg>");
+    background-size: 80px 80px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events:none;
+    z-index: 0;
+  }
+  .arch-card:hover{
+    transform: translateY(-4px);
+  }
+  .arch-card:hover::after{ opacity: 1; }
+
+  .cross-flory{
+    position:absolute;
+    top: -8px; left: 50%;
+    transform: translateX(-50%);
+    width: 22px; height:22px;
+    color: var(--ink);
+    z-index: 2;
+  }
+  .cross-flory svg{ width:100%; height:100%; fill: currentColor; }
+
+  .card-inner{
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+
+  .card-cat{
+    display:block;
+    font-family: var(--font-body), sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.4rem;
+  }
+  .card-title{
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    font-size: 1.25rem;
+    color: var(--cobalt);
+    margin: 0 0 0.25rem;
+    letter-spacing: 0.05em;
+    line-height: 1.2;
+  }
+  .card-prov{
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 0.88rem;
+    color: var(--text);
+    margin: 0 0 1rem;
+  }
+  .card-desc{
+    font-size: 0.92rem;
+    line-height: 1.65;
+    margin: 0 auto;
+    max-width: 22em;
+    text-align: left;
+    color: var(--text);
+  }
+  .card-foot{
+    margin-top: 1.1rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(10,10,10,0.18);
+    display:flex; justify-content:space-between;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+
+  /* ---------- SIDE RAIL ---------- */
+  aside.rail{
+    border-left: 1px solid var(--ink);
+    padding-left: 2rem;
+    align-self: start;
+    position: sticky;
+    top: 1rem;
+  }
+  aside.rail h3{
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: var(--ink);
+    margin: 0 0 0.6rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--rule-gold);
+    font-family: var(--font-body), sans-serif;
+    font-weight: 600;
+  }
+  aside.rail h3:not(:first-child){ margin-top: 1.75rem; }
+  aside.rail ul{
+    list-style:none; padding:0; margin:0;
+  }
+  aside.rail li{
+    padding: 0.32rem 0;
+    font-size: 0.88rem;
+    display:flex; justify-content:space-between;
+    border-bottom: 1px dotted rgba(10,10,10,0.2);
+  }
+  aside.rail li a{
+    color: var(--text);
+    flex: 1;
+  }
+  aside.rail li a:hover{ color: var(--cobalt); text-decoration: none; }
+  aside.rail .count{
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    color: var(--accent);
+    font-size: 0.82rem;
+  }
+
+  .rail-intro{
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--text);
+    margin: 0 0 1rem;
+    font-style: italic;
+  }
+
+  /* ---------- INDEX TABLE ---------- */
+  .index-section{
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 2rem 4rem;
+  }
+  .index-section h2{
+    text-align:center;
+    font-size: 1.4rem;
+    font-variant: small-caps;
+    letter-spacing: 0.1em;
+    margin: 0 0 1.5rem;
+  }
+  table.index{
+    width:100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+  }
+  table.index th, table.index td{
+    text-align:left;
+    padding: 0.6rem 0.5rem;
+    border-bottom: 1px solid rgba(10,10,10,0.15);
+  }
+  table.index th{
+    font-family: var(--font-body), sans-serif;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    border-bottom: 1px solid var(--ink);
+    color: var(--text-emphasis);
+  }
+  table.index td:first-child{
+    font-family: var(--font-display), serif;
+    color: var(--accent);
+    font-style: italic;
+    width: 8em;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer.cobalt{
+    background: var(--cobalt);
+    color: #f0e6cb;
+    margin-top: 3rem;
+  }
+  .arcade-band{
+    display:grid;
+    grid-template-columns: repeat(9, 1fr);
+    border-bottom: 1px solid rgba(201,162,58,0.45);
+  }
+  .arcade-band .mini-arch{
+    height: 42px;
+    border-right: 1px solid rgba(201,162,58,0.4);
+    position: relative;
+  }
+  .arcade-band .mini-arch:last-child{ border-right: none; }
+  .arcade-band .mini-arch::before{
+    content:"";
+    position:absolute;
+    left: 18%; right: 18%;
+    bottom: 4px;
+    top: 8px;
+    border: 1px solid var(--rule-gold);
+    border-bottom: none;
+    border-radius: 50% 50% 0 0 / 80% 80% 0 0;
+  }
+
+  .footer-cols{
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem 1.5rem;
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    text-align:center;
+  }
+  .footer-cols h4{
+    font-family: var(--font-display), serif;
+    color: var(--rule-gold);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    margin: 0 0 0.75rem;
+    font-weight: 400;
+  }
+  .footer-cols p{
+    margin: 0.2rem 0;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: #f0e6cb;
+  }
+  .fleur-rule{
+    text-align:center;
+    padding: 0.75rem 0 1.25rem;
+    color: var(--rule-gold);
+    letter-spacing: 1.2em;
+    font-size: 0.85rem;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- ================= MASTHEAD ================= -->
+<header class="masthead">
+  <div class="gold-rule">
+    <span class="leaf" aria-hidden="true">
+      <svg viewBox="0 0 200 200"><path d="M43 11c-7 .7-13.9 2.8-19 7.5s-8.2 12-7.7 21c.5 9 4.3 16.1 10.2 20.3 5.9 4.2 13.3 5.5 21 5.2 15.5-.7 32.8-8 45.8-18.3 1.4-1.1 2.8-2 4.3-3 4.3 6.7 7.6 14.8 9.3 24-7.5-5.1-21-10.5-35.7 1.5-22.1 18.2-25 12.9-45.3-2.1-2.9 36 15 54.6 44.6 52.5 0 0-13.9 4.3-3.6 26.4 6 12.9 8.4 20.1 6.6 25.2-12.8 2.3-15.8 7.8-5.6 12.7 45.1 10 65.7-27.5 68.7-66 45.4 0 52.9-31.8 52.5-50.4-8.2 11.1-22.2 11.1-32.9 2.5-9.9-7.9-21.7-16.2-39-1.1-1.7-11.7-5.7-22.1-11.2-30.7 19.4-11.4 38.7-14.5 52.5-10.8 5.5 1.4 9.5 4.1 12.4 7-9 8.4-11.8 26.4 2.3 27 18.9.9 21-15.5 13.6-27.1-5.4-8.5-16.4-13.2-25.7-16.6-17.5-4.6-39.7-.6-61.3 12.5-5.2-5.7-11.1-10.2-17.7-13C64.9 14 54.4 11.2 43.7 10.7L43 11z"/></svg>
+    </span>
+    <span class="line"></span>
+    <span class="leaf" aria-hidden="true" style="transform:scaleX(-1);">
+      <svg viewBox="0 0 200 200"><path d="M43 11c-7 .7-13.9 2.8-19 7.5s-8.2 12-7.7 21c.5 9 4.3 16.1 10.2 20.3 5.9 4.2 13.3 5.5 21 5.2 15.5-.7 32.8-8 45.8-18.3 1.4-1.1 2.8-2 4.3-3 4.3 6.7 7.6 14.8 9.3 24-7.5-5.1-21-10.5-35.7 1.5-22.1 18.2-25 12.9-45.3-2.1-2.9 36 15 54.6 44.6 52.5 0 0-13.9 4.3-3.6 26.4 6 12.9 8.4 20.1 6.6 25.2-12.8 2.3-15.8 7.8-5.6 12.7 45.1 10 65.7-27.5 68.7-66 45.4 0 52.9-31.8 52.5-50.4-8.2 11.1-22.2 11.1-32.9 2.5-9.9-7.9-21.7-16.2-39-1.1-1.7-11.7-5.7-22.1-11.2-30.7 19.4-11.4 38.7-14.5 52.5-10.8 5.5 1.4 9.5 4.1 12.4 7-9 8.4-11.8 26.4 2.3 27 18.9.9 21-15.5 13.6-27.1-5.4-8.5-16.4-13.2-25.7-16.6-17.5-4.6-39.7-.6-61.3 12.5-5.2-5.7-11.1-10.2-17.7-13C64.9 14 54.4 11.2 43.7 10.7L43 11z"/></svg>
+    </span>
+  </div>
+  <h1 class="site-title">The Cloisters of Saint-Évroult</h1>
+  <p class="site-tagline">Musée d'art médiéval &middot; La Ferté-en-Ouche</p>
+
+  <nav class="arcade" aria-label="Primary">
+    <ul>
+      <li><a href="page-1.html">Priory</a></li>
+      <li><a href="page-2.html" aria-current="page">Collection</a></li>
+      <li><a href="page-3.html">Exhibition</a></li>
+      <li><a href="page-4.html">History</a></li>
+      <li><a href="page-5.html">Visit</a></li>
+      <li><a href="page-6.html">Library</a></li>
+      <li><a href="mailto:contact@saintevroult.fr">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- ================= PAGE HEAD ================= -->
+<section class="page-head">
+  <div class="eyebrow">Catalogue Raisonné &middot; MMXXIV</div>
+  <h1>The Permanent Collection</h1>
+  <p class="lede">Four halls trace the medieval ornamental arts of Lower Normandy and the wider Île-de-France: stonework recovered from suppressed abbeys, three Chartres-school medallions, a single illuminated leaf from a Norman psalter, and the gilt-copper reliquary of Saint Évroult himself.</p>
+
+  <div class="divider-vine" aria-hidden="true">
+    <span class="rule"></span>
+    <svg viewBox="0 0 39.26 39.9"><path d="M19.6 4c-3 0-7 0-9 1-2 1-3 4-3 7v5c0 3 0 7 0 11 0 3 0 6 0 9 0 2 0 3 1 4 1 1 2 1 4 1 5 0 11 0 17 0 4 0 7 0 9-1 1-1 2-3 2-5 0-4 0-9 0-13s0-9 0-13c0-2-1-4-2-5-2-1-5-1-9-1-3 0-7 0-10 0z" fill="none" stroke="#0a0a0a" stroke-width="1"/><circle cx="19" cy="20" r="3" fill="#c9a23a"/></svg>
+    <span class="rule"></span>
+  </div>
+</section>
+
+<!-- ================= LAYOUT ================= -->
+<div class="layout">
+
+  <main>
+
+    <!-- HALL I -->
+    <section class="hall" id="hall-stonework">
+      <div class="hall-head">
+        <span class="hall-num">— Hall I —</span>
+        <h2>Stonework &amp; Tracery</h2>
+        <span class="hall-meta">Galerie nord</span>
+      </div>
+
+      <div class="card-grid">
+
+        <article class="arch-card">
+          <span class="cross-flory" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 1l1.5 4.5L18 4l-1.5 4.5L21 7l-4.5 1.5L18 13l-4.5-1.5L12 16l-1.5-4.5L6 13l1.5-4.5L3 7l4.5 1.5L6 4l4.5 1.5z"/></svg>
+          </span>
+          <div class="card-inner">
+            <span class="card-cat">MS-Pierre 003 / Cat. 14</span>
+            <h3 class="card-title">Capital with Acanthus &amp; Beasts</h3>
+            <p class="card-prov">Abbaye de Jumièges &middot; c. 1080–1100</p>
+            <p class="card-desc">A Norman-Romanesque cushion capital in oolitic limestone, carved with deeply undercut acanthus volutes flanking a pair of confronted lions. Recovered from the south transept of Jumièges following the suppression of 1791 and conserved here since 1894.</p>
+            <div class="card-foot">
+              <span>Limestone</span>
+              <span>11th c.</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="arch-card">
+          <span class="cross-flory" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 1l1.5 4.5L18 4l-1.5 4.5L21 7l-4.5 1.5L18 13l-4.5-1.5L12 16l-1.5-4.5L6 13l1.5-4.5L3 7l4.5 1.5L6 4l4.5 1.5z"/></svg>
+          </span>
+          <div class="card-inner">
+            <span class="card-cat">MS-Pierre 011 / Cat. 22</span>
+            <h3 class="card-title">Voussoir with Foliate Mask</h3>
+            <p class="card-prov">Saint-Lô, église Notre-Dame &middot; c. 1230</p>
+            <p class="card-desc">A keystone voussoir from the destroyed western portal of Notre-Dame de Saint-Lô, struck during the bombardment of 1944 and salvaged the following spring. The carving shows a green-man emitting trefoil oak from the corners of his mouth.</p>
+            <div class="card-foot">
+              <span>Calcaire</span>
+              <span>13th c.</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="arch-card">
+          <span class="cross-flory" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 1l1.5 4.5L18 4l-1.5 4.5L21 7l-4.5 1.5L18 13l-4.5-1.5L12 16l-1.5-4.5L6 13l1.5-4.5L3 7l4.5 1.5L6 4l4.5 1.5z"/></svg>
+          </span>
+          <div class="card-inner">
+            <span class="card-cat">MS-Pierre 027 / Cat. 38</span>
+            <h3 class="card-title">Engaged Colonnette &amp; Base</h3>
+            <p class="card-prov">Saint-Évroult-en-Ouche &middot; c. 1175</p>
+            <p class="card-desc">In situ from the priory's own south arcade. The base shows a typical griffe in the western corner; the shaft retains traces of its original red ochre underpaint, last touched during the campaigns of Abbot Roger du Sap (d. 1126's successor lineage).</p>
+            <div class="card-foot">
+              <span>Limestone</span>
+              <span>12th c.</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="arch-card">
+          <span class="cross-flory" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 1l1.5 4.5L18 4l-1.5 4.5L21 7l-4.5 1.5L18 13l-4.5-1.5L12 16l-1.5-4.5L6 13l1.5-4.5L3 7l4.5 1.5L6 4l4.5 1.5z"/></svg>
+          </span>
+          <div class="card-inner">
+            <span class="card-cat">MS-Pierre 034 / Cat. 41</span>
+            <h3 class="card-title">Tracery Fragment, Quatrefoil</h3>
+            <p class="card-prov">Bayeux, deanery rebuild &middot; c. 1265</p>
+            <p class="card-desc">A bar-tracery quatrefoil from a clerestory window of the Bayeux deanery, replaced during the 1865 Viollet-le-Duc campaign and acquired at the Caen sale of 1903. The cusps preserve sharp lancet-edged tooling marks.</p>
+            <div class="card-foot">
+              <span>Limestone</span>
+              <span>13th c.</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- HALL II -->
+    <section class="hall" id="hall-glass">
+      <div class="hall-head">
+        <span class="hall-num">— Hall II —</span>
+        <h2>Glass</h2>
+        <span class="hall-meta">Galerie est</span>
+      </div>
+
+      <div class="card-grid">
+
+        <article class="arch-card">
+          <span class="cross-flory" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 1l1.5 4.5L18 4l-1.5 4.5L21 7l-4.5 1.5L18 13l-4.5-1.5L12 16l-1.5-4.5L6 13l1.5-4.5L3 7l4.5 1.5L6 4l4.5 1.5z"/></svg>
+          </span>
+          <div class="card-inner">
+            <span class="card-cat">MS-Verre 001 / Cat. 56</span>
+            <h3 class="card-title">Medallion: The Vintage of Noah</h3>
+            <p class="card-prov">Atelier de Chartres &middot; c. 1215</p>
+            <p class="card-desc">A circular medallion of pot-metal glass leaded in original twelfth-century strapwork. The cobalt ground has the deep "Chartres blue" indistinguishable from the cathedral's western lancets; figural drawing in vitreous brown grisaille.</p>
+            <div class="card-foot">
+              <span>Pot-metal</span>
+              <span>13th c.</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="arch-card">
+          <span class="cross-flory" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 1l1.5 4.5L18 4l-1.5 4.5L21 7l-4.5 1.5L18 13l-4.5-1.5L12 16l-1.5-4.5L6 13l1.5-4.5L3 7l4.5 1.5L6 4l4.5 1.5z"/></svg>
+          </span>
+          <div class="card-inner">
+            <span class="card-cat">MS-Verre 002 / Cat. 57</span>
+            <h3 class="card-title">Medallion: The Sower at Dawn</h3>
+            <p class="card-prov">Atelier de Chartres &middot; c. 1215</p>
+            <p class="card-desc">Companion to Cat. 56, depicting a hooded peasant casting seed across a furrowed field rendered in three bands of green. The borderwork employs the rare "knotted-vine" pattern found also at Bourges and on three panels at Sens.</p>
+            <div class="card-foot">
+              <span>Pot-metal</span>
+              <span>13th c.</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="arch-card">
+          <span class="cross-flory" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 1l1.5 4.5L18 4l-1.5 4.5L21 7l-4.5 1.5L18 13l-4.5-1.5L12 16l-1.5-4.5L6 13l1.5-4.5L3 7l4.5 1.5L6 4l4.5 1.5z"/></svg>
+          </span>
+          <div class="card-inner">
+            <span class="card-cat">MS-Verre 003 / Cat. 58</span>
+            <h3 class="card-title">Medallion: The Threshing Floor</h3>
+            <p class="card-prov">Atelier de Chartres &middot; c. 1215</p>
+            <p class="card-desc">Third of the surviving labours-of-the-months sequence acquired from the abbey of Saint-Père-en-Vallée before its dispersal. A flailing figure in red separates grain from chaff beneath an arched cobalt sky; lead came is largely original.</p>
+            <div class="card-foot">
+              <span>Pot-metal</span>
+              <span>13th c.</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="arch-card">
+          <span class="cross-flory" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 1l1.5 4.5L18 4l-1.5 4.5L21 7l-4.5 1.5L18 13l-4.5-1.5L12 16l-1.5-4.5L6 13l1.5-4.5L3 7l4.5 1.5L6 4l4.5 1.5z"/></svg>
+          </span>
+          <div class="card-inner">
+            <span class="card-cat">MS-Verre 014 / Cat. 71</span>
+            <h3 class="card-title">Border Strip with Vine Scroll</h3>
+            <p class="card-prov">Norman atelier &middot; c. 1240</p>
+            <p class="card-desc">A vertical border strip salvaged from a destroyed lancet at Saint-Pierre-sur-Dives. The vine winds in continuous serpentine through twelve tendrils; small grisaille rosettes mark each turn. Mounted in a contemporary bronze frame.</p>
+            <div class="card-foot">
+              <span>Grisaille</span>
+              <span>13th c.</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- HALL III -->
+    <section class="hall" id="hall-manuscript">
+      <div class="hall-head">
+        <span class="hall-num">— Hall III —</span>
+        <h2>Manuscript &amp; Illumination</h2>
+        <span class="hall-meta">Galerie sud</span>
+      </div>
+
+      <div class="card-grid">
+
+        <article class="arch-card">
+          <span class="cross-flory" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 1l1.5 4.5L18 4l-1.5 4.5L21 7l-4.5 1.5L18 13l-4.5-1.5L12 16l-1.5-4.5L6 13l1.5-4.5L3 7l4.5 1.5L6 4l4.5 1.5z"/></svg>
+          </span>
+          <div class="card-inner">
+            <span class="card-cat">MS-Évr. 44 / fol. 27v</span>
+            <h3 class="card-title">Beatus Initial &amp; King David</h3>
+            <p class="card-prov">Norman psalter &middot; c. 1280</p>
+            <p class="card-desc">A single illuminated leaf, vellum, 244 × 168 mm. The historiated B encloses David tuning his harp; line-endings in burnished gold and lapis. The catalogue identifies the hand as that of the so-called Master of Évreux, active c. 1275–1290.</p>
+            <div class="card-foot">
+              <span>Vellum</span>
+              <span>13th c.</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="arch-card">
+          <span class="cross-flory" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 1l1.5 4.5L18 4l-1.5 4.5L21 7l-4.5 1.5L18 13l-4.5-1.5L12 16l-1.5-4.5L6 13l1.5-4.5L3 7l4.5 1.5L6 4l4.5 1.5z"/></svg>
+          </span>
+          <div class="card-inner">
+            <span class="card-cat">MS-Évr. 17 / fol. 4r</span>
+            <h3 class="card-title">Calendar Page, July</h3>
+            <p class="card-prov">Bec-Hellouin scriptorium &middot; c. 1310</p>
+            <p class="card-desc">A calendar leaf showing the labour of harvesting wheat with a curved sickle, paired with the zodiacal sign of Leo. Saints' days are inscribed in three inks; the KL monogram is rendered in blue and rose with white-vine penwork.</p>
+            <div class="card-foot">
+              <span>Vellum</span>
+              <span>14th c.</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="arch-card">
+          <span class="cross-flory" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 1l1.5 4.5L18 4l-1.5 4.5L21 7l-4.5 1.5L18 13l-4.5-1.5L12 16l-1.5-4.5L6 13l1.5-4.5L3 7l4.5 1.5L6 4l4.5 1.5z"/></svg>
+          </span>
+          <div class="card-inner">
+            <span class="card-cat">MS-Évr. 09 / bifolium</span>
+            <h3 class="card-title">Antiphonal Bifolium</h3>
+            <p class="card-prov">Saint-Évroult priory &middot; c. 1340</p>
+            <p class="card-desc">A liturgical bifolium with square notation on a four-line red staff. The chants for the Feast of Saint Évroult (29 December) are preserved here in their unique rhymed-office form, a survival of considerable musicological importance.</p>
+            <div class="card-foot">
+              <span>Vellum</span>
+              <span>14th c.</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="arch-card">
+          <span class="cross-flory" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 1l1.5 4.5L18 4l-1.5 4.5L21 7l-4.5 1.5L18 13l-4.5-1.5L12 16l-1.5-4.5L6 13l1.5-4.5L3 7l4.5 1.5L6 4l4.5 1.5z"/></svg>
+          </span>
+          <div class="card-inner">
+            <span class="card-cat">MS-Évr. 51 / fol. 1r</span>
+            <h3 class="card-title">Charter of Robert de Grandmesnil</h3>
+            <p class="card-prov">Saint-Évroult priory &middot; 1066</p>
+            <p class="card-desc">The earliest object in the museum: a foundation charter on a single sheet of vellum, with the wax seal of Robert de Grandmesnil partly intact. Confirms the priory's dependencies and grants of woodland in the forest of La Trappe.</p>
+            <div class="card-foot">
+              <span>Vellum</span>
+              <span>11th c.</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- HALL IV -->
+    <section class="hall" id="hall-metalwork">
+      <div class="hall-head">
+        <span class="hall-num">— Hall IV —</span>
+        <h2>Reliquary Metalwork</h2>
+        <span class="hall-meta">Trésor</span>
+      </div>
+
+      <div class="card-grid">
+
+        <article class="arch-card">
+          <span class="cross-flory" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 1l1.5 4.5L18 4l-1.5 4.5L21 7l-4.5 1.5L18 13l-4.5-1.5L12 16l-1.5-4.5L6 13l1.5-4.5L3 7l4.5 1.5L6 4l4.5 1.5z"/></svg>
+          </span>
+          <div class="card-inner">
+            <span class="card-cat">MS-Métal 001 / Cat. 102</span>
+            <h3 class="card-title">Châsse de Saint-Évroult</h3>
+            <p class="card-prov">Limoges atelier &middot; c. 1230</p>
+            <p class="card-desc">The principal reliquary of the priory: gilt-copper over an oak core, with eight champlevé enamel medallions on a vermicule ground. The roof bears applied figures of Christ in Majesty and the four Evangelist symbols in cobalt and turquoise.</p>
+            <div class="card-foot">
+              <span>Gilt-copper</span>
+              <span>13th c.</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="arch-card">
+          <span class="cross-flory" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 1l1.5 4.5L18 4l-1.5 4.5L21 7l-4.5 1.5L18 13l-4.5-1.5L12 16l-1.5-4.5L6 13l1.5-4.5L3 7l4.5 1.5L6 4l4.5 1.5z"/></svg>
+          </span>
+          <div class="card-inner">
+            <span class="card-cat">MS-Métal 008 / Cat. 109</span>
+            <h3 class="card-title">Processional Cross</h3>
+            <p class="card-prov">Norman workshop &middot; c. 1190</p>
+            <p class="card-desc">A double-armed processional cross of beaten silver over a wooden core, with engraved foliate terminals. The corpus is cast separately and shows the four-nail iconography characteristic of the period preceding the Crucifixion type.</p>
+            <div class="card-foot">
+              <span>Silver</span>
+              <span>12th c.</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="arch-card">
+          <span class="cross-flory" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 1l1.5 4.5L18 4l-1.5 4.5L21 7l-4.5 1.5L18 13l-4.5-1.5L12 16l-1.5-4.5L6 13l1.5-4.5L3 7l4.5 1.5L6 4l4.5 1.5z"/></svg>
+          </span>
+          <div class="card-inner">
+            <span class="card-cat">MS-Métal 014 / Cat. 116</span>
+            <h3 class="card-title">Pyx with Standing Saints</h3>
+            <p class="card-prov">Limoges atelier &middot; c. 1250</p>
+            <p class="card-desc">A small cylindrical pyx for the reserved host, the lid surmounted by a knop in the form of a fleur-de-lis. The body is decorated with four standing saints under arcades — Peter, Paul, John the Evangelist, and Évroult — in champlevé.</p>
+            <div class="card-foot">
+              <span>Champlevé</span>
+              <span>13th c.</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="arch-card">
+          <span class="cross-flory" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 1l1.5 4.5L18 4l-1.5 4.5L21 7l-4.5 1.5L18 13l-4.5-1.5L12 16l-1.5-4.5L6 13l1.5-4.5L3 7l4.5 1.5L6 4l4.5 1.5z"/></svg>
+          </span>
+          <div class="card-inner">
+            <span class="card-cat">MS-Métal 022 / Cat. 124</span>
+            <h3 class="card-title">Aquamanile in the form of a Lion</h3>
+            <p class="card-prov">Lower Saxony or Mosan &middot; c. 1280</p>
+            <p class="card-desc">A vessel for the priest's lavabo, cast in leaded bronze, the lion's tail forming the handle and the open mouth the spout. Imported into Normandy by way of the Champagne fairs and recorded in the priory inventory of 1432.</p>
+            <div class="card-foot">
+              <span>Bronze</span>
+              <span>13th c.</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= SIDE RAIL ================= -->
+  <aside class="rail" aria-label="Filters">
+    <p class="rail-intro">Filter the standing collection by century of origin, primary material, or hall of display. Sixteen works listed; eight in study reserve.</p>
+
+    <h3>By Century</h3>
+    <ul>
+      <li><a href="#">11th century</a><span class="count">ii</span></li>
+      <li><a href="#">12th century</a><span class="count">ii</span></li>
+      <li><a href="#">13th century</a><span class="count">ix</span></li>
+      <li><a href="#">14th century</a><span class="count">ii</span></li>
+      <li><a href="#">In reserve</a><span class="count">viii</span></li>
+    </ul>
+
+    <h3>By Material</h3>
+    <ul>
+      <li><a href="#">Limestone</a><span class="count">iv</span></li>
+      <li><a href="#">Pot-metal glass</a><span class="count">iv</span></li>
+      <li><a href="#">Vellum</a><span class="count">iv</span></li>
+      <li><a href="#">Gilt-copper</a><span class="count">i</span></li>
+      <li><a href="#">Silver &amp; bronze</a><span class="count">iii</span></li>
+    </ul>
+
+    <h3>By Hall</h3>
+    <ul>
+      <li><a href="#hall-stonework">I. Stonework</a><span class="count">iv</span></li>
+      <li><a href="#hall-glass">II. Glass</a><span class="count">iv</span></li>
+      <li><a href="#hall-manuscript">III. Manuscript</a><span class="count">iv</span></li>
+      <li><a href="#hall-metalwork">IV. Metalwork</a><span class="count">iv</span></li>
+    </ul>
+
+    <h3>By Provenance</h3>
+    <ul>
+      <li><a href="#">Saint-Évroult</a><span class="count">v</span></li>
+      <li><a href="#">Jumièges</a><span class="count">i</span></li>
+      <li><a href="#">Chartres atelier</a><span class="count">iii</span></li>
+      <li><a href="#">Limoges atelier</a><span class="count">ii</span></li>
+      <li><a href="#">Bec-Hellouin</a><span class="count">i</span></li>
+    </ul>
+  </aside>
+
+</div>
+
+<!-- ================= INDEX TABLE ================= -->
+<section class="index-section">
+  <h2>Concordance of Acquisition</h2>
+  <table class="index">
+    <thead>
+      <tr>
+        <th>Catalogue №</th>
+        <th>Title</th>
+        <th>Provenance</th>
+        <th>Date</th>
+        <th>Hall</th>
+        <th>Acquired</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Cat. 14</td><td>Capital with Acanthus &amp; Beasts</td><td>Jumièges</td><td>c. 1080</td><td>I</td><td>1894</td></tr>
+      <tr><td>Cat. 22</td><td>Voussoir with Foliate Mask</td><td>Saint-Lô</td><td>c. 1230</td><td>I</td><td>1945</td></tr>
+      <tr><td>Cat. 38</td><td>Engaged Colonnette &amp; Base</td><td>Saint-Évroult</td><td>c. 1175</td><td>I</td><td>in situ</td></tr>
+      <tr><td>Cat. 41</td><td>Tracery Fragment, Quatrefoil</td><td>Bayeux</td><td>c. 1265</td><td>I</td><td>1903</td></tr>
+      <tr><td>Cat. 56</td><td>Medallion: Vintage of Noah</td><td>Chartres atelier</td><td>c. 1215</td><td>II</td><td>1922</td></tr>
+      <tr><td>Cat. 57</td><td>Medallion: The Sower at Dawn</td><td>Chartres atelier</td><td>c. 1215</td><td>II</td><td>1922</td></tr>
+      <tr><td>Cat. 58</td><td>Medallion: The Threshing Floor</td><td>Chartres atelier</td><td>c. 1215</td><td>II</td><td>1924</td></tr>
+      <tr><td>Cat. 71</td><td>Border Strip with Vine Scroll</td><td>Saint-Pierre-sur-Dives</td><td>c. 1240</td><td>II</td><td>1968</td></tr>
+      <tr><td>MS Évr. 44</td><td>Beatus Initial &amp; King David</td><td>Norman scriptorium</td><td>c. 1280</td><td>III</td><td>1947</td></tr>
+      <tr><td>MS Évr. 17</td><td>Calendar Page, July</td><td>Bec-Hellouin</td><td>c. 1310</td><td>III</td><td>1953</td></tr>
+      <tr><td>MS Évr. 09</td><td>Antiphonal Bifolium</td><td>Saint-Évroult</td><td>c. 1340</td><td>III</td><td>in situ</td></tr>
+      <tr><td>MS Évr. 51</td><td>Charter of Robert de Grandmesnil</td><td>Saint-Évroult</td><td>1066</td><td>III</td><td>in situ</td></tr>
+      <tr><td>Cat. 102</td><td>Châsse de Saint-Évroult</td><td>Limoges atelier</td><td>c. 1230</td><td>IV</td><td>in situ</td></tr>
+      <tr><td>Cat. 109</td><td>Processional Cross</td><td>Norman workshop</td><td>c. 1190</td><td>IV</td><td>1911</td></tr>
+      <tr><td>Cat. 116</td><td>Pyx with Standing Saints</td><td>Limoges atelier</td><td>c. 1250</td><td>IV</td><td>1937</td></tr>
+      <tr><td>Cat. 124</td><td>Aquamanile (Lion)</td><td>Lower Saxony / Mosan</td><td>c. 1280</td><td>IV</td><td>1971</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="cobalt">
+  <div class="arcade-band" aria-hidden="true">
+    <div class="mini-arch"></div><div class="mini-arch"></div><div class="mini-arch"></div>
+    <div class="mini-arch"></div><div class="mini-arch"></div><div class="mini-arch"></div>
+    <div class="mini-arch"></div><div class="mini-arch"></div><div class="mini-arch"></div>
+  </div>
+
+  <div class="footer-cols">
+    <div>
+      <h4>Visiting Hours</h4>
+      <p>Tuesday — Sunday</p>
+      <p>10h00 — 17h30</p>
+      <p>Closed Mondays &amp; 1 January</p>
+    </div>
+    <div>
+      <h4>Address</h4>
+      <p>12 rue Saint-Évroult</p>
+      <p>61550 La Ferté-en-Ouche</p>
+      <p>Normandie, France</p>
+    </div>
+    <div>
+      <h4>Acknowledgement</h4>
+      <p>Conserved with the support of the Direction régionale des affaires culturelles de Normandie.</p>
+    </div>
+  </div>
+
+  <div class="fleur-rule" aria-hidden="true">⚜ ⚜ ⚜ ⚜ ⚜ ⚜ ⚜</div>
+</footer>
+
+</body>
+</html>

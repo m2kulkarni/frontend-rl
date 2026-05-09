@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Atelier Naqsh-e Jahan — Workshop of Safavid Ornament</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    font-size: 18px;
+    line-height: 1.55;
+  }
+
+  /* ============ TOP RULE + NAV ============ */
+  .top-rule {
+    height: 4px;
+    background: var(--primary);
+    border-bottom: 1px solid var(--accent);
+  }
+  nav.primary {
+    background: var(--bg);
+    border-bottom: 1px solid var(--primary);
+    padding: 18px 0 16px;
+    position: relative;
+  }
+  nav.primary ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    flex-wrap: wrap;
+  }
+  nav.primary li {
+    display: flex;
+    align-items: center;
+  }
+  nav.primary a {
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--primary);
+    text-decoration: none;
+    padding: 6px 22px;
+    position: relative;
+  }
+  nav.primary a[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    left: 22px; right: 22px;
+    bottom: -2px;
+    height: 2px;
+    background: var(--accent);
+  }
+  nav.primary .palmette {
+    width: 14px; height: 14px;
+    color: var(--accent);
+    opacity: 0.85;
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    background: var(--bg);
+    padding: 60px 0 30px;
+    text-align: center;
+    position: relative;
+  }
+  .hero-arch {
+    position: relative;
+    width: 720px;
+    height: 560px;
+    margin: 0 auto;
+  }
+  .hero-arch .arch-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    color: var(--primary);
+  }
+  .hero-arch .arch-inner {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 90px 60px;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.36em;
+    color: var(--secondary);
+    text-transform: uppercase;
+    margin-bottom: 22px;
+  }
+  .hero-title {
+    font-family: var(--font-display), serif;
+    font-size: 44px;
+    line-height: 1.05;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin: 0 0 14px;
+    font-weight: 700;
+  }
+  .hero-title .amp {
+    color: var(--accent);
+    font-style: italic;
+    text-transform: none;
+    font-weight: 400;
+  }
+  .hero-rule {
+    width: 220px;
+    height: 1px;
+    background: var(--accent);
+    margin: 18px auto;
+    position: relative;
+  }
+  .hero-rule::before, .hero-rule::after {
+    content: "✦";
+    position: absolute;
+    top: -10px;
+    color: var(--accent);
+    font-size: 12px;
+  }
+  .hero-rule::before { left: -16px; }
+  .hero-rule::after { right: -16px; }
+  .hero-tagline {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 19px;
+    color: var(--text);
+    max-width: 460px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+  .hero-meta {
+    margin-top: 22px;
+    font-family: var(--font-display), serif;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+  }
+  .hero-meta span { margin: 0 14px; }
+
+  /* spandrel ornaments */
+  .spandrel {
+    position: absolute;
+    top: 30px;
+    width: 110px;
+    height: 110px;
+    color: var(--accent);
+    opacity: 0.45;
+  }
+  .spandrel.left { left: 60px; transform: scaleX(-1); }
+  .spandrel.right { right: 60px; }
+
+  /* ============ DIVIDERS ============ */
+  .divider {
+    display: block;
+    margin: 40px auto;
+    width: 480px;
+    height: 22px;
+    color: var(--accent);
+  }
+  .divider svg { width: 100%; height: 100%; display: block; }
+  .divider svg path { fill: var(--accent); }
+
+  /* ============ DEPARTMENTS ============ */
+  .section-heading {
+    text-align: center;
+    margin: 30px auto 10px;
+  }
+  .section-heading h2 {
+    font-family: var(--font-display), serif;
+    font-size: 26px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin: 0;
+    font-weight: 700;
+  }
+  .section-heading p {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    color: var(--text-emphasis);
+    margin: 8px auto 0;
+    max-width: 560px;
+  }
+
+  .departments {
+    max-width: 1280px;
+    margin: 30px auto 50px;
+    padding: 0 60px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 36px;
+  }
+
+  .card {
+    position: relative;
+    background: var(--bg);
+    padding: 70px 28px 36px;
+    text-align: center;
+    min-height: 460px;
+  }
+  .card-arch-frame {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .card-arch-frame svg.outer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    color: var(--primary);
+  }
+  .card-medallion {
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 38px; height: 38px;
+    background: var(--secondary);
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--bg);
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    z-index: 2;
+  }
+  .card-number {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--text-emphasis);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .card h3 {
+    font-family: var(--font-display), serif;
+    font-size: 19px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin: 0 0 4px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+  .card .persian {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    color: var(--secondary);
+    font-size: 16px;
+    margin-bottom: 14px;
+  }
+  .card .body-text {
+    text-align: justify;
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: var(--text);
+  }
+  .card .body-text p { margin: 0 0 10px; }
+  .card .meta-line {
+    margin-top: 14px;
+    font-family: var(--font-display), serif;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+  }
+
+  /* ============ MANIFESTO ============ */
+  .manifesto {
+    max-width: 880px;
+    margin: 60px auto 30px;
+    padding: 0 40px;
+    text-align: center;
+    position: relative;
+  }
+  .manifesto-frame {
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+    padding: 36px 50px;
+    position: relative;
+  }
+  .manifesto-frame::before, .manifesto-frame::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    height: 1px;
+    background: var(--primary);
+  }
+  .manifesto-frame::before { top: 4px; }
+  .manifesto-frame::after { bottom: 4px; }
+  .manifesto h2 {
+    font-family: var(--font-display), serif;
+    font-size: 18px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin: 0 0 18px;
+  }
+  .manifesto p {
+    font-family: var(--font-body), serif;
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--text);
+    margin: 0 auto;
+    max-width: 720px;
+  }
+  .manifesto p + p { margin-top: 14px; }
+  .manifesto .signature {
+    margin-top: 22px;
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+  }
+
+  /* ============ STAR SEAL ============ */
+  .seal {
+    width: 130px;
+    height: 130px;
+    margin: 50px auto 0;
+    color: var(--primary);
+    display: block;
+  }
+
+  /* ============ FOOTER ============ */
+  footer {
+    margin-top: 50px;
+    background: var(--primary);
+    color: var(--bg);
+    position: relative;
+    padding: 0;
+  }
+  footer .filet {
+    height: 3px;
+    background: var(--secondary);
+  }
+  footer .inner {
+    padding: 50px 60px 30px;
+    text-align: center;
+  }
+  footer .star-seal {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 20px;
+    color: var(--accent);
+  }
+  footer .footer-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 8px;
+  }
+  footer .footer-cols h4 {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 10px;
+    font-weight: 700;
+  }
+  footer .footer-cols p {
+    font-family: var(--font-body), serif;
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0;
+    color: var(--bg);
+  }
+  footer .attribution {
+    margin-top: 28px;
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--accent);
+  }
+  footer .copyright {
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(201, 162, 58, 0.35);
+    font-family: var(--font-display), serif;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--bg);
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<div class="top-rule"></div>
+
+<nav class="primary" aria-label="Primary">
+  <ul>
+    <li><a href="page-1.html" aria-current="page">Atelier</a></li>
+    <li aria-hidden="true"><svg class="palmette" viewBox="0 0 10 10"><path d="M5 0 L6 4 L10 5 L6 6 L5 10 L4 6 L0 5 L4 4 Z" fill="currentColor"/></svg></li>
+    <li><a href="page-2.html">Workshop</a></li>
+    <li aria-hidden="true"><svg class="palmette" viewBox="0 0 10 10"><path d="M5 0 L6 4 L10 5 L6 6 L5 10 L4 6 L0 5 L4 4 Z" fill="currentColor"/></svg></li>
+    <li><a href="page-3.html">Commissions</a></li>
+    <li aria-hidden="true"><svg class="palmette" viewBox="0 0 10 10"><path d="M5 0 L6 4 L10 5 L6 6 L5 10 L4 6 L0 5 L4 4 Z" fill="currentColor"/></svg></li>
+    <li><a href="page-4.html">Crafts &amp; Methods</a></li>
+    <li aria-hidden="true"><svg class="palmette" viewBox="0 0 10 10"><path d="M5 0 L6 4 L10 5 L6 6 L5 10 L4 6 L0 5 L4 4 Z" fill="currentColor"/></svg></li>
+    <li><a href="page-5.html">Apprenticeship</a></li>
+    <li aria-hidden="true"><svg class="palmette" viewBox="0 0 10 10"><path d="M5 0 L6 4 L10 5 L6 6 L5 10 L4 6 L0 5 L4 4 Z" fill="currentColor"/></svg></li>
+    <li><a href="page-6.html">Visit</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+
+  <!-- spandrel ornament left -->
+  <svg class="spandrel left" viewBox="0 0 100 100" aria-hidden="true">
+    <g fill="none" stroke="currentColor" stroke-width="1.2">
+      <path d="M5 95 Q 50 50 95 5"/>
+      <path d="M15 95 Q 55 55 95 15"/>
+      <circle cx="30" cy="70" r="3" fill="currentColor"/>
+      <circle cx="50" cy="50" r="4" fill="currentColor"/>
+      <circle cx="70" cy="30" r="3" fill="currentColor"/>
+      <path d="M40 80 L 45 75 L 50 80 L 45 85 Z" fill="currentColor"/>
+      <path d="M60 60 L 65 55 L 70 60 L 65 65 Z" fill="currentColor"/>
+    </g>
+  </svg>
+  <svg class="spandrel right" viewBox="0 0 100 100" aria-hidden="true">
+    <g fill="none" stroke="currentColor" stroke-width="1.2">
+      <path d="M5 95 Q 50 50 95 5"/>
+      <path d="M15 95 Q 55 55 95 15"/>
+      <circle cx="30" cy="70" r="3" fill="currentColor"/>
+      <circle cx="50" cy="50" r="4" fill="currentColor"/>
+      <circle cx="70" cy="30" r="3" fill="currentColor"/>
+      <path d="M40 80 L 45 75 L 50 80 L 45 85 Z" fill="currentColor"/>
+      <path d="M60 60 L 65 55 L 70 60 L 65 65 Z" fill="currentColor"/>
+    </g>
+  </svg>
+
+  <div class="hero-arch">
+    <!-- Ogee arch frame -->
+    <svg class="arch-svg" viewBox="0 0 500 550" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <g transform="translate(-147.139,-244.937)">
+        <g style="stroke:currentColor;stroke-width:3.125;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none">
+          <path style="fill:none;stroke:currentColor;stroke-width:3.125;stroke-linecap:round;stroke-linejoin:miter" d="m 388.984,268.984 -57.342,98.846 c 0,0 -25.866,42.495 -83.142,62.818 -57.275,20.323 -100.760,86.775 -99.770,153.350 54.339,0.096 3.097,-0.096 62.468,0.254 0,0 -2.044,-66.404 63.168,-94.481 50.355,-21.680 83.142,-42.495 114.551,-88.684"/>
+          <path style="fill:none;stroke:currentColor;stroke-width:3.125" d="m 250,430.58 24.752,58.416"/>
+          <path style="fill:none;stroke:currentColor;stroke-width:3.125" d="m 347.030,342.461 41.584,23.762 0.990,35.644"/>
+          <path style="fill:none;stroke:currentColor;stroke-width:3.125" d="m 211.386,583.055 -1.485,211.881"/>
+        </g>
+        <g style="stroke:currentColor;stroke-width:3.125" transform="matrix(-1,0,0,1,777.881,-0.297)">
+          <path style="fill:none;stroke:currentColor;stroke-width:3.125;stroke-linecap:round;stroke-linejoin:miter" d="m 388.984,268.984 -57.342,98.846 c 0,0 -25.866,42.495 -83.142,62.818 -57.275,20.323 -100.760,86.775 -99.770,153.350 54.339,0.096 3.097,-0.096 62.468,0.254 0,0 -2.044,-66.404 63.168,-94.481 50.355,-21.680 83.142,-42.495 114.551,-88.684"/>
+          <path style="fill:none;stroke:currentColor;stroke-width:3.125" d="m 250,430.58 24.752,58.416"/>
+          <path style="fill:none;stroke:currentColor;stroke-width:3.125" d="m 347.030,342.461 41.584,23.762 0.990,35.644"/>
+          <path style="fill:none;stroke:currentColor;stroke-width:3.125" d="m 211.386,583.055 -1.485,211.881"/>
+        </g>
+      </g>
+    </svg>
+    <!-- inner gold filet, traced -->
+    <svg class="arch-svg" viewBox="0 0 500 550" preserveAspectRatio="xMidYMid meet" aria-hidden="true" style="color: var(--accent);">
+      <g transform="translate(-147.139,-244.937) scale(0.96) translate(10, 12)">
+        <g style="stroke:currentColor;stroke-width:1.4;stroke-miterlimit:4;fill:none;opacity:0.85">
+          <path d="m 388.984,268.984 -57.342,98.846 c 0,0 -25.866,42.495 -83.142,62.818 -57.275,20.323 -100.760,86.775 -99.770,153.350"/>
+        </g>
+        <g style="stroke:currentColor;stroke-width:1.4;fill:none;opacity:0.85" transform="matrix(-1,0,0,1,777.881,-0.297)">
+          <path d="m 388.984,268.984 -57.342,98.846 c 0,0 -25.866,42.495 -83.142,62.818 -57.275,20.323 -100.760,86.775 -99.770,153.350"/>
+        </g>
+      </g>
+    </svg>
+
+    <div class="arch-inner">
+      <div class="hero-eyebrow">Isfahan · Naqsh-e Jahan Square</div>
+      <h1 class="hero-title">Atelier<br>Naqsh-e Jahan</h1>
+      <div class="hero-rule"></div>
+      <p class="hero-tagline">
+        Tilework, Calligraphic Banding, and<br>
+        Architectural Drawing — Isfahan, since 1387 SH.
+      </p>
+      <div class="hero-meta">
+        <span>Founded 1387 SH</span>·<span>Bāzār-e Honar 14</span>·<span>Mon — Sat, 8 — 18</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="divider" aria-hidden="true">
+  <svg viewBox="0 0 437.999 18.893" preserveAspectRatio="xMidYMid meet">
+    <path d="M0,9.445c0,0,37.005-0.063,73.998-0.829c18.495-0.386,36.989-0.949,50.831-1.785c6.919-0.414,12.677-0.906,16.663-1.46c1.99-0.28,3.539-0.582,4.535-0.878c0.502-0.146,0.844-0.297,1.049-0.405c0.157-0.107,0.238-0.162,0.238-0.162l0.42-0.287l0.656,0.656l-0.369,0.338c0,0-0.154,0.142-0.456,0.324c-0.291,0.154-0.714,0.331-1.256,0.484c-1.085,0.314-2.667,0.608-4.686,0.879c-4.037,0.533-9.811,0.985-16.745,1.354c-13.868,0.744-32.369,1.183-50.87,1.443C37.003,9.632,0,9.445,0,9.445z"/>
+    <path d="M0,9.445c0,0,37.003-0.312,74.011,0.079c18.504,0.198,37.009,0.574,50.89,1.271c6.941,0.346,12.724,0.779,16.785,1.302c2.033,0.267,3.633,0.556,4.762,0.879c0.562,0.156,1.026,0.347,1.36,0.523c0.367,0.218,0.571,0.418,0.565,0.405l0.46,0.953l-0.85,0.851l-1.025-0.39c-0.011-0.004-0.022-0.003-0.129-0.081c-0.162-0.085-0.463-0.224-0.944-0.365c-0.952-0.288-2.484-0.594-4.459-0.879c-3.961-0.564-9.711-1.076-16.623-1.514c-13.828-0.882-32.319-1.508-50.811-1.956C37.006,9.634,0,9.445,0,9.445z"/>
+    <circle cx="169" cy="9.4" r="5" fill="none" stroke="currentColor" stroke-width="1"/>
+    <circle cx="269" cy="9.4" r="5" fill="none" stroke="currentColor" stroke-width="1"/>
+    <circle cx="219" cy="9.4" r="3.5"/>
+    <path d="M437.999,9.445c0,0-37.004,0.187-74.007-0.329c-18.501-0.261-37.002-0.699-50.869-1.443c-6.935-0.368-12.708-0.82-16.745-1.354c-2.019-0.271-3.601-0.565-4.687-0.879c-0.541-0.153-0.965-0.33-1.256-0.484c-0.302-0.183-0.456-0.324-0.456-0.324l-0.369-0.338l0.656-0.656l0.42,0.287c0,0,0.081,0.055,0.238,0.162c0.204,0.108,0.546,0.26,1.048,0.405c0.996,0.296,2.545,0.598,4.535,0.878c3.986,0.554,9.744,1.046,16.663,1.46C327.011,7.667,345.506,8.23,364,8.616C400.994,9.382,437.999,9.445,437.999,9.445z"/>
+    <path d="M437.999,9.445c0,0-37.006,0.188-73.993,1.079c-18.492,0.448-36.983,1.074-50.812,1.956c-6.911,0.438-12.661,0.949-16.622,1.514c-1.976,0.285-3.507,0.591-4.459,0.879c-0.481,0.142-0.782,0.28-0.944,0.365c-0.106,0.078-0.117,0.077-0.129,0.081l-1.024,0.39l-0.851-0.851l0.461-0.953c-0.006,0.013,0.198-0.188,0.564-0.405c0.334-0.177,0.799-0.367,1.36-0.523c1.13-0.323,2.729-0.612,4.763-0.879c4.062-0.522,9.844-0.956,16.785-1.302c13.881-0.697,32.386-1.073,50.89-1.271C400.996,9.134,437.999,9.445,437.999,9.445z"/>
+  </svg>
+</div>
+
+<!-- DEPARTMENTS -->
+<div class="section-heading">
+  <h2>The Three Departments</h2>
+  <p>Each branch of the atelier carries a distinct discipline of Safavid ornament, practised under one courtyard roof.</p>
+</div>
+
+<section class="departments" aria-label="Departments">
+
+  <article class="card">
+    <div class="card-arch-frame" aria-hidden="true">
+      <svg class="outer" viewBox="0 0 300 460" preserveAspectRatio="none">
+        <!-- ogee arch outline -->
+        <path d="M 12 450 L 12 180 Q 12 90 150 20 Q 288 90 288 180 L 288 450 Z"
+              fill="none" stroke="currentColor" stroke-width="2.5"/>
+        <path d="M 22 446 L 22 184 Q 22 100 150 35 Q 278 100 278 184 L 278 446"
+              fill="none" stroke="var(--accent)" stroke-width="1"/>
+      </svg>
+    </div>
+    <div class="card-medallion" aria-hidden="true">۱</div>
+    <div class="card-number">Department I</div>
+    <h3>Kāshi-kāri Mosaic</h3>
+    <div class="persian">کاشی‌کاری</div>
+    <div class="body-text">
+      <p>The cutting hall keeps eleven master and journeyman tile-cutters who reduce hand-fired faience into the small geometric units (mo'arraq) used in spandrel and dado work. Cobalt, turquoise, and oxblood glazes are fired in our two wood kilns at Bāgh-e Hasht-Behesht.</p>
+      <p>We dress walls from 6 to 240 square metres, working from a measured pounce on linen. Recent installations include the iwan of the Karbāsi residence and the qibla niche of Masjid-e Sharifiyya, Qom.</p>
+    </div>
+    <div class="meta-line">From 4,200,000 IRR / m²</div>
+  </article>
+
+  <article class="card">
+    <div class="card-arch-frame" aria-hidden="true">
+      <svg class="outer" viewBox="0 0 300 460" preserveAspectRatio="none">
+        <path d="M 12 450 L 12 180 Q 12 90 150 20 Q 288 90 288 180 L 288 450 Z"
+              fill="none" stroke="currentColor" stroke-width="2.5"/>
+        <path d="M 22 446 L 22 184 Q 22 100 150 35 Q 278 100 278 184 L 278 446"
+              fill="none" stroke="var(--accent)" stroke-width="1"/>
+      </svg>
+    </div>
+    <div class="card-medallion" aria-hidden="true">۲</div>
+    <div class="card-number">Department II</div>
+    <h3>Naskh Banding</h3>
+    <div class="persian">کتیبه‌نگاری</div>
+    <div class="body-text">
+      <p>Under master calligrapher Hossein Mirzā-Ahmadi, the banding atelier composes thuluth and naskh-derived inscription friezes for cornices, drum bands, and mihrab borders. Each cartouche is ruled, gilded, and signed before transfer.</p>
+      <p>The studio holds four registered scripts and a working archive of 312 historical inscription rubbings taken between 1402 and 1404 SH from the monuments of Isfahan, Yazd, and Ardabil.</p>
+    </div>
+    <div class="meta-line">From 1,800,000 IRR / linear m</div>
+  </article>
+
+  <article class="card">
+    <div class="card-arch-frame" aria-hidden="true">
+      <svg class="outer" viewBox="0 0 300 460" preserveAspectRatio="none">
+        <path d="M 12 450 L 12 180 Q 12 90 150 20 Q 288 90 288 180 L 288 450 Z"
+              fill="none" stroke="currentColor" stroke-width="2.5"/>
+        <path d="M 22 446 L 22 184 Q 22 100 150 35 Q 278 100 278 184 L 278 446"
+              fill="none" stroke="var(--accent)" stroke-width="1"/>
+      </svg>
+    </div>
+    <div class="card-medallion" aria-hidden="true">۳</div>
+    <div class="card-number">Department III</div>
+    <h3>Measured Drawing</h3>
+    <div class="persian">نقشه‌برداری</div>
+    <div class="body-text">
+      <p>Three architectural draughtsmen survey standing Safavid monuments at 1:20 and 1:50, producing inked plans, sections, and unfolded elevations on Fabriano paper. Our drawing room holds 1,140 sheets catalogued since 1391 SH.</p>
+      <p>Commissioned surveys are issued bound in cloth and hand-stamped; recent dossiers cover the Sheikh Lotfollāh dome interior and the chahār-bāgh pavilion at Farah-ābād.</p>
+    </div>
+    <div class="meta-line">Survey from 92,000,000 IRR</div>
+  </article>
+
+</section>
+
+<!-- DIVIDER -->
+<div class="divider" aria-hidden="true">
+  <svg viewBox="0 0 437.999 18.893" preserveAspectRatio="xMidYMid meet">
+    <path d="M0,9.445c0,0,37.005-0.063,73.998-0.829c18.495-0.386,36.989-0.949,50.831-1.785c6.919-0.414,12.677-0.906,16.663-1.46c1.99-0.28,3.539-0.582,4.535-0.878c0.502-0.146,0.844-0.297,1.049-0.405l0.395-0.45l0.656,0.656l-0.369,0.338c0,0-0.154,0.142-0.456,0.324c-0.291,0.154-0.714,0.331-1.256,0.484c-1.085,0.314-2.667,0.608-4.686,0.879c-4.037,0.533-9.811,0.985-16.745,1.354c-13.868,0.744-32.369,1.183-50.87,1.443C37.003,9.632,0,9.445,0,9.445z"/>
+    <circle cx="219" cy="9.4" r="3.5"/>
+    <path d="M437.999,9.445c0,0-37.004,0.187-74.007-0.329c-18.501-0.261-37.002-0.699-50.869-1.443c-6.935-0.368-12.708-0.82-16.745-1.354c-2.019-0.271-3.601-0.565-4.687-0.879c-0.541-0.153-0.965-0.33-1.256-0.484c-0.302-0.183-0.456-0.324-0.456-0.324l-0.369-0.338l0.656-0.656l0.42,0.287c0,0,0.081,0.055,0.238,0.162c0.204,0.108,0.546,0.26,1.048,0.405c0.996,0.296,2.545,0.598,4.535,0.878c3.986,0.554,9.744,1.046,16.663,1.46C327.011,7.667,345.506,8.23,364,8.616C400.994,9.382,437.999,9.445,437.999,9.445z"/>
+  </svg>
+</div>
+
+<!-- MANIFESTO -->
+<section class="manifesto">
+  <div class="manifesto-frame">
+    <h2>On the Continuity of the Craft</h2>
+    <p>
+      We do not restore Safavid ornament; we continue it. The drawings hung on our courtyard walls were ruled by the same compass that ruled the niches of Masjid-e Shāh, and the cobalt we grind in mortar No. 4 is bought from the same Qamsar pit that supplied the tile-makers of Shāh ‘Abbās.
+    </p>
+    <p>
+      A pattern is not a picture but an instruction held in a community of hands. So long as one cutter still chips the petal of a shamseh from a fired blank, and one scribe still rules a line of thuluth in iron-gall ink, the Safavid order remains a living craft — not a memory but a workshop, opening at eight each morning to the call of the muezzin from the Masjid-e Jāmi'.
+    </p>
+    <div class="signature">— The Mu‘allim and the Twelve Workmen of the Atelier</div>
+  </div>
+</section>
+
+<!-- STAR SEAL ABOVE FOOTER -->
+<svg class="seal" viewBox="0 0 100 100" aria-hidden="true">
+  <g fill="none" stroke="currentColor" stroke-width="1.5">
+    <circle cx="50" cy="50" r="46"/>
+    <circle cx="50" cy="50" r="40" stroke="var(--accent)"/>
+    <!-- 8-point star -->
+    <path d="M50 8 L58 38 L88 30 L66 52 L88 74 L58 66 L50 96 L42 66 L12 74 L34 52 L12 30 L42 38 Z"
+          fill="var(--accent)" stroke="var(--primary)" stroke-width="1"/>
+    <path d="M50 22 L55 42 L75 38 L60 52 L75 66 L55 62 L50 82 L45 62 L25 66 L40 52 L25 38 L45 42 Z"
+          fill="var(--text-emphasis)" stroke="var(--bg)" stroke-width="0.6"/>
+    <circle cx="50" cy="50" r="6" fill="var(--secondary)" stroke="var(--bg)" stroke-width="0.8"/>
+  </g>
+</svg>
+
+<!-- FOOTER -->
+<footer>
+  <div class="filet"></div>
+  <div class="inner">
+    <svg class="star-seal" viewBox="0 0 100 100" aria-hidden="true">
+      <g stroke="currentColor" stroke-width="1.4" fill="none">
+        <path d="M50 6 L58 38 L92 38 L64 58 L74 92 L50 72 L26 92 L36 58 L8 38 L42 38 Z" fill="currentColor" stroke="var(--bg)"/>
+        <circle cx="50" cy="52" r="6" fill="var(--primary)" stroke="var(--bg)"/>
+      </g>
+    </svg>
+
+    <div class="footer-cols">
+      <div>
+        <h4>Address</h4>
+        <p>Bāzār-e Honar, No. 14<br>
+        North Flank, Naqsh-e Jahan Sq.<br>
+        Isfahan 8146913954, Iran</p>
+      </div>
+      <div>
+        <h4>Opening Hours</h4>
+        <p>Saturday — Thursday<br>
+        08:00 — 18:00<br>
+        Closed Fridays &amp; on Nowruz</p>
+      </div>
+      <div>
+        <h4>Correspondence</h4>
+        <p>atelier@naqsh-e-jahan.ir<br>
+        +98 (31) 3220 4187<br>
+        Master Hossein Mirzā-Ahmadi, Director</p>
+      </div>
+    </div>
+
+    <div class="attribution">
+      Drawn, cut, fired, and ruled by hand within the courtyard of the Atelier.
+    </div>
+    <div class="copyright">
+      © 1387–1404 SH · Atelier Naqsh-e Jahan · All Patterns &amp; Inscriptions Reserved
+    </div>
+  </div>
+  <div class="filet"></div>
+</footer>
+
+</body>
+</html>

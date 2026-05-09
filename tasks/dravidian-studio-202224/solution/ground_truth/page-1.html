@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Sthapati Workshop — Studio for Temple-Craft & Contemporary Form</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), serif;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* ===== NAV BAND ===== */
+  .nav-band {
+    background: var(--surface);
+    padding: 18px 56px 0 56px;
+    position: relative;
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+  }
+  .om-seal {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .om-seal svg {
+    width: 42px;
+    height: 42px;
+    display: block;
+  }
+  .om-seal .mark-text {
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.18em;
+    color: var(--primary);
+    line-height: 1.1;
+  }
+  .om-seal .mark-text small {
+    display: block;
+    font-family: var(--font-body), serif;
+    font-size: 9px;
+    letter-spacing: 0.32em;
+    color: var(--secondary);
+    text-transform: uppercase;
+    margin-top: 3px;
+    font-weight: 700;
+  }
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .nav-links a {
+    font-family: var(--font-body), serif;
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--primary);
+    padding: 6px 0 14px 0;
+    position: relative;
+    display: block;
+  }
+  .nav-links a[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 14px;
+    height: 14px;
+    background:
+      radial-gradient(circle at 50% 50%, var(--secondary) 2px, transparent 2.5px),
+      radial-gradient(circle at 50% 20%, var(--secondary) 1.5px, transparent 2px),
+      radial-gradient(circle at 80% 50%, var(--secondary) 1.5px, transparent 2px),
+      radial-gradient(circle at 50% 80%, var(--secondary) 1.5px, transparent 2px),
+      radial-gradient(circle at 20% 50%, var(--secondary) 1.5px, transparent 2px);
+  }
+  .nav-rule {
+    margin-top: 18px;
+    height: 6px;
+    border-top: 2px solid var(--secondary);
+    border-bottom: 2px solid var(--accent);
+  }
+
+  /* ===== HERO / GOPURAM ===== */
+  .hero {
+    padding: 56px 56px 40px 56px;
+    background: var(--surface);
+    text-align: center;
+    position: relative;
+  }
+  .hero-frame {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .hero-frame svg {
+    width: 100%;
+    height: 28px;
+    display: block;
+  }
+  .hero-frame.flip svg {
+    transform: scaleY(-1);
+  }
+  .gopuram {
+    margin: 18px auto 0 auto;
+    width: 1100px;
+    position: relative;
+  }
+  .tier {
+    margin: 0 auto;
+    border: 2px solid var(--accent);
+    background: var(--secondary);
+    color: var(--bg);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 0 0 4px var(--secondary), inset 0 0 0 6px var(--accent);
+  }
+  .tier::before, .tier::after {
+    /* small kalasha finials at the ends of each tier */
+    content: "";
+    position: absolute;
+    top: -10px;
+    width: 8px;
+    height: 14px;
+    background: var(--accent);
+    clip-path: polygon(50% 0, 100% 40%, 80% 100%, 20% 100%, 0 40%);
+  }
+  .tier::before { left: -4px; }
+  .tier::after  { right: -4px; }
+
+  .tier-1 { width: 280px; height: 64px; }
+  .tier-2 { width: 520px; height: 110px; margin-top: 0; }
+  .tier-3 { width: 740px; height: 86px; margin-top: 0; }
+  .tier-4 { width: 920px; height: 74px; margin-top: 0; }
+  .tier-5 { width: 1100px; height: 64px; margin-top: 0; }
+
+  .tier-1-cap {
+    /* the kalasha finial above tier 1 */
+    width: 14px;
+    height: 36px;
+    margin: 0 auto 0 auto;
+    background: var(--secondary);
+    clip-path: polygon(50% 0, 60% 18%, 100% 35%, 70% 50%, 100% 75%, 50% 100%, 0 75%, 30% 50%, 0 35%, 40% 18%);
+  }
+  .tier-1-text {
+    font-family: var(--font-display), serif;
+    color: var(--bg);
+    font-size: 13px;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+  }
+  .tier-2-text {
+    font-family: var(--font-display), serif;
+    color: var(--bg);
+    font-size: 38px;
+    letter-spacing: 0.18em;
+    line-height: 1;
+    text-align: center;
+    text-shadow: 0 2px 0 rgba(0,0,0,0.15);
+  }
+  .tier-2-text small {
+    display: block;
+    font-family: var(--font-body), serif;
+    font-size: 11px;
+    letter-spacing: 0.42em;
+    color: var(--accent);
+    margin-top: 10px;
+    font-weight: 700;
+  }
+  .tier-3-text, .tier-4-text, .tier-5-text {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    padding: 0 24px;
+    color: var(--bg);
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.22em;
+    font-size: 13px;
+    text-transform: uppercase;
+  }
+  .tier-3-text span, .tier-4-text span, .tier-5-text span {
+    border-left: 1px solid var(--accent);
+    border-right: 1px solid var(--accent);
+    padding: 0 18px;
+  }
+  .tier-3-text span:first-child, .tier-4-text span:first-child, .tier-5-text span:first-child { border-left: 0; }
+  .tier-3-text span:last-child, .tier-4-text span:last-child, .tier-5-text span:last-child { border-right: 0; }
+
+  .hero-founding {
+    margin-top: 24px;
+    font-family: var(--font-display), serif;
+    font-size: 16px;
+    letter-spacing: 0.14em;
+    color: var(--text-emphasis);
+  }
+  .hero-founding small {
+    display: block;
+    font-family: var(--font-body), serif;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-top: 8px;
+    font-weight: 700;
+  }
+
+  /* ===== BAND DIVIDER ===== */
+  .band-divider {
+    height: 38px;
+    background: var(--secondary);
+    border-top: 2px solid var(--accent);
+    border-bottom: 2px solid var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .band-divider svg {
+    height: 70px;
+    width: 100%;
+    filter: invert(1) sepia(1) saturate(8) hue-rotate(-20deg);
+    opacity: 0.85;
+  }
+  .band-thin-rule {
+    height: 6px;
+    border-top: 2px solid var(--accent);
+    border-bottom: 2px solid var(--secondary);
+    margin: 0;
+  }
+
+  /* ===== STANCE / INTRO ===== */
+  .stance {
+    background: var(--surface);
+    padding: 56px 56px 48px 56px;
+    text-align: center;
+  }
+  .stance h2 {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    letter-spacing: 0.32em;
+    color: var(--text-emphasis);
+    text-transform: uppercase;
+    margin: 0 0 8px 0;
+  }
+  .stance .sub {
+    font-family: var(--font-body), serif;
+    font-size: 11px;
+    letter-spacing: 0.36em;
+    color: var(--secondary);
+    text-transform: uppercase;
+    margin-bottom: 36px;
+    font-weight: 700;
+  }
+  .stance-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    max-width: 1240px;
+    margin: 0 auto;
+  }
+  .stance-col {
+    padding: 0 28px;
+    position: relative;
+    text-align: left;
+  }
+  .stance-col + .stance-col {
+    border-left: 1px solid var(--accent);
+  }
+  .stance-col h3 {
+    font-family: var(--font-display), serif;
+    font-size: 15px;
+    letter-spacing: 0.18em;
+    color: var(--secondary);
+    text-transform: uppercase;
+    margin: 0 0 14px 0;
+  }
+  .stance-col h3::before {
+    content: "❋";
+    color: var(--accent);
+    margin-right: 8px;
+  }
+  .stance-col p {
+    margin: 0 0 12px 0;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--primary);
+  }
+  .stance-col p strong {
+    color: var(--text-emphasis);
+    font-weight: 700;
+  }
+
+  /* ===== ENGAGEMENTS / CARDS ===== */
+  .engagements-band {
+    background: var(--surface);
+    padding: 16px 56px 64px 56px;
+  }
+  .engagements-head {
+    text-align: center;
+    margin-bottom: 36px;
+    padding-top: 36px;
+  }
+  .engagements-head h2 {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    letter-spacing: 0.32em;
+    color: var(--text-emphasis);
+    text-transform: uppercase;
+    margin: 0 0 6px 0;
+  }
+  .engagements-head .meta {
+    font-family: var(--font-body), serif;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    color: var(--secondary);
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+    max-width: 1340px;
+    margin: 0 auto;
+  }
+  .card {
+    background: var(--bg);
+    padding: 44px 22px 28px 22px;
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+    position: relative;
+  }
+  /* Pillars left and right */
+  .card::before, .card::after {
+    content: "";
+    position: absolute;
+    top: 8px;
+    bottom: 8px;
+    width: 1px;
+    background: var(--accent);
+  }
+  .card::before { left: 8px; }
+  .card::after  { right: 8px; }
+  /* lotus capitals at the pillars */
+  .pillar-cap {
+    position: absolute;
+    width: 14px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  }
+  .pillar-cap.tl { top: 4px; left: 1px; }
+  .pillar-cap.tr { top: 4px; right: 1px; }
+  .pillar-cap.bl { bottom: 4px; left: 1px; transform: scaleY(-1); }
+  .pillar-cap.br { bottom: 4px; right: 1px; transform: scaleY(-1); }
+
+  /* kalasha pot finial */
+  .kalasha {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 18px;
+    height: 26px;
+    background: var(--secondary);
+    clip-path: polygon(50% 0, 60% 14%, 80% 28%, 100% 50%, 85% 70%, 100% 100%, 0 100%, 15% 70%, 0 50%, 20% 28%, 40% 14%);
+  }
+
+  .card-tag {
+    font-family: var(--font-body), serif;
+    font-size: 9px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .card h3 {
+    font-family: var(--font-display), serif;
+    font-size: 17px;
+    letter-spacing: 0.12em;
+    color: var(--text-emphasis);
+    text-transform: uppercase;
+    margin: 0 0 12px 0;
+    line-height: 1.25;
+    min-height: 60px;
+  }
+  .card .card-meta {
+    font-size: 12px;
+    color: var(--secondary);
+    margin-bottom: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+  .card p {
+    font-size: 13px;
+    line-height: 1.6;
+    margin: 0 0 14px 0;
+  }
+  .card .specs {
+    border-top: 1px dashed var(--accent);
+    padding-top: 10px;
+    font-size: 11px;
+    line-height: 1.7;
+    color: var(--primary);
+  }
+  .card .specs span {
+    display: block;
+  }
+  .card .specs span b {
+    color: var(--text-emphasis);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-size: 10px;
+    margin-right: 6px;
+  }
+
+  /* ===== KOLAM-DECORATED MID-BAND ===== */
+  .kolam-band {
+    background: var(--bg);
+    padding: 36px 56px;
+    text-align: center;
+    border-top: 2px solid var(--accent);
+    border-bottom: 2px solid var(--accent);
+    position: relative;
+  }
+  .kolam-band::before, .kolam-band::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    height: 2px;
+    background: var(--secondary);
+  }
+  .kolam-band::before { top: -6px; }
+  .kolam-band::after  { bottom: -6px; }
+  .kolam-band-text {
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.4em;
+    color: var(--text-emphasis);
+    text-transform: uppercase;
+  }
+  .kolam-band-text small {
+    display: block;
+    font-family: var(--font-body), serif;
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    color: var(--primary);
+    margin-top: 8px;
+    font-weight: 700;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--surface);
+    padding: 0;
+    margin: 0;
+  }
+  .footer-arcade {
+    background: var(--secondary);
+    padding: 48px 56px 40px 56px;
+    border-top: 2px solid var(--accent);
+    position: relative;
+    color: var(--bg);
+  }
+  .footer-arcade::before {
+    content: "";
+    position: absolute;
+    top: 6px; left: 0; right: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .arcade-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0;
+    align-items: stretch;
+    min-height: 220px;
+    position: relative;
+  }
+  .pillar {
+    width: 2px;
+    background: var(--accent);
+    margin: 0 auto;
+    position: relative;
+    height: 220px;
+  }
+  .pillar::before, .pillar::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 18px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  }
+  .pillar::before { top: -2px; }
+  .pillar::after  { bottom: -2px; transform: translateX(-50%) scaleY(-1); }
+
+  .mandala {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 320px;
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--bg);
+    background:
+      radial-gradient(circle at 50% 50%, transparent 84px, var(--secondary) 86px),
+      radial-gradient(circle at 50% 50%, var(--accent) 0.5px, transparent 1.5px) 0 0 / 8px 8px,
+      radial-gradient(circle at 50% 50%, var(--bg) 0.8px, transparent 1.4px) 4px 4px / 12px 12px;
+    border-radius: 50%;
+  }
+  .mandala-inner {
+    width: 170px;
+    height: 170px;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--secondary);
+    position: relative;
+  }
+  .mandala-inner::before {
+    content: "";
+    position: absolute;
+    inset: 8px;
+    border: 1px dotted var(--accent);
+    border-radius: 50%;
+  }
+  .mandala-inner::after {
+    content: "";
+    position: absolute;
+    inset: 18px;
+    border: 1px dashed var(--accent);
+    border-radius: 50%;
+  }
+  .addr {
+    position: relative;
+    z-index: 2;
+    font-family: var(--font-display), serif;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    line-height: 1.7;
+    color: var(--bg);
+    padding: 0 14px;
+  }
+  .addr b {
+    display: block;
+    font-size: 12px;
+    letter-spacing: 0.24em;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+
+  .arcade-side {
+    color: var(--bg);
+    font-family: var(--font-body), serif;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    line-height: 1.7;
+    align-self: center;
+    padding: 0 8px;
+  }
+  .arcade-side h4 {
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.28em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin: 0 0 8px 0;
+  }
+  .arcade-side a {
+    color: var(--bg);
+    border-bottom: 1px dotted var(--accent);
+  }
+
+  .footer-rule {
+    height: 6px;
+    border-top: 2px solid var(--accent);
+    border-bottom: 2px solid var(--secondary);
+  }
+  .footer-strip {
+    background: var(--bg);
+    padding: 14px 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--primary);
+  }
+  .footer-strip .ta {
+    font-family: var(--font-display), serif;
+    color: var(--text-emphasis);
+    letter-spacing: 0.2em;
+  }
+
+  /* hero divider arabesque inline */
+  .arabesque-strip {
+    height: 38px;
+    overflow: hidden;
+    background: var(--bg);
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .arabesque-strip svg {
+    width: 100%;
+    height: 60px;
+    display: block;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============== NAV ============== -->
+<header class="nav-band" role="banner">
+  <div class="nav-inner">
+    <a class="om-seal" href="page-1.html" aria-label="Sthapati Workshop home">
+      <svg viewBox="0 0 356 367" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M 90.456847,353.9498 C 51.797347,340.13485 23.72672,305.75839 12.612487,258.6184 C 7.5684267,237.22321 6.1421397,201.86984 10.323594,201.86984 C 11.712834,201.86984 15.42322,211.57056 18.568972,223.427 C 25.452892,249.37152 37.19436,273.76855 48.535988,285.69407 C 67.374717,305.50242 114.0356,313.26029 140.92106,301.05394 C 161.86409,291.54544 170.35697,268.94603 161.24995,246.95931 C 154.21242,229.96943 138.24701,224.28836 108.50834,228.19197 C 108.50834,228.19197 90.282834,208.57398 84.476417,173.73548 L 103.15738,175.42939 C 125.65731,177.46962 142.64532,172.49605 151.46236,161.28728 C 159.74765,150.75419 159.5685,146.68046 150.34841,135.96157 C 137.04396,120.49428 113.15511,124.41248 64.786577,149.99522 L 40.381632,109.08518 L 50.613137,101.2812 C 76.253387,81.724339 120.77357,71.947329 146.11011,80.309169 C 169.18841,87.925649 186.12724,118.14755 181.60247,143.63298 C 178.54327,160.86286 164.72752,184.99524 154.05369,191.75339 L 144.84862,197.58162 L 157.56351,203.31522 C 179.17018,213.05833 192.36061,205.61034 208.12001,174.76849 C 229.92949,132.0869 244.0745,121.0378 276.96658,120.99051 C 292.28176,120.96847 297.73268,122.57499 308.90312,130.4031 C 336.78213,149.94016 351.9622,190.39693 348.62804,236.27272 C 344.40474,294.37435 316.88374,329.61601 275.73415,329.61601 C 253.15086,329.61601 238.59451,321.69526 227.00729,303.10156 C 216.82976,286.76927 212.24334,254.42288 218.08805,240.19369 C 220.89208,233.36732 221.39892,233.13578 221.58223,238.59686 C 221.91916,248.63689 233.34159,264.95549 243.82827,270.37835 C 269.55794,283.68369 306.49479,266.96693 321.10832,235.4032 C 332.20339,211.4394 326.25105,165.21656 311.02084,157.06552 C 307.83453,155.36024 299.96089,153.96502 293.5244,153.96502 C 279.84214,153.96502 269.09709,163.80155 254.03263,190.11774 C 248.82442,199.21613 240.05943,210.97175 234.55486,216.24128 C 225.61134,224.80312 222.41769,225.82225 204.53067,225.82225 L 184.51412,225.82225 L 190.98415,240.19369 C 200.2451,260.76437 199.80694,294.18704 190.00976,314.53347 C 181.35272,332.51252 161.33618,350.71469 145.33374,355.16013 C 129.75572,359.4876 104.38789,358.9281 90.456847,353.9498 z M 165.8338,75.923739 C 156.97908,60.814399 151.52974,32.606158 157.46546,32.606158 C 164.43775,47.732319 178.73037,61.227101 194.03409,70.643259 C 221.52091,83.949329 249.39257,78.578529 279.84247,54.108239 C 286.54595,48.721279 292.48231,44.913138 293.0345,45.645698 C 300.4697,57.184233 313.331,66.613261 317.58219,80.021449 C 317.58219,85.678729 293.22867,101.96033 274.01214,109.15007 C 226.38264,122.8706 193.96598,117.44304 165.8338,75.923739 z M 189.83603,40.997228 L 220.84514,6.6137488 L 255.30593,38.514418 C 243.51876,48.222549 235.00994,63.289118 221.54391,70.930009 C 210.90372,63.086273 195.02308,53.837816 189.83603,40.997228 z " fill="#e34234"/></svg>
+      <span class="mark-text">Sthapati Workshop<small>Madurai · Est. 2014</small></span>
+    </a>
+    <nav aria-label="Primary">
+      <ul class="nav-links">
+        <li><a href="page-1.html" aria-current="page">Studio</a></li>
+        <li><a href="page-2.html">Practice</a></li>
+        <li><a href="page-3.html">Projects</a></li>
+        <li><a href="page-4.html">Workshop</a></li>
+        <li><a href="page-5.html">Writings</a></li>
+        <li><a href="page-6.html">Contact</a></li>
+        <li><a href="page-3.html#archive">Archive</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="nav-rule"></div>
+</header>
+
+<!-- ============== HERO / GOPURAM ============== -->
+<section class="hero" aria-label="Studio mark and gopuram">
+  <div class="hero-frame" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 313.71717 29.540759" preserveAspectRatio="none">
+      <path fill="#e34234" d="m 8.231,29.029 c -2.081,-0.595 -3.6,-1.338 -4.883,-2.387 -1.667,-1.364 -2.894,-2.64 -2.894,-3.011 0,-0.174 -0.209,-0.473 -0.465,-0.664 -0.82,-0.613 -1.165,-1.848 -1.124,-4.019 0.075,-3.965 0.842,-6.286 3.36,-10.17 2.092,-3.227 6.669,-6.453 10.648,-7.503 2.252,-0.594 8.249,-0.796 11.003,-0.37 6.948,1.074 16.153,4.46 20.656,7.598 0.854,0.595 0.795,0.623 1.329,-0.647 0.225,-0.536 0.881,-1.604 1.458,-2.374 0.856,-1.143 1.458,-1.601 3.274,-2.493 2.162,-1.062 4.564,-1.779 6.728,-2.009 0.582,-0.062 1.399,-0.241 1.815,-0.398 0.774,-0.292 6.481,-0.197 10.093,0.168 2.265,0.229 9.609,1.678 11.22,2.213 1.157,0.385 1.204,0.376 3.087,-0.542 2.528,-1.234 4.017,-1.481 8.447,-1.401 3.614,0.065 4.29,0.147 6.743,0.821 0.654,0.18 1.72,0.376 2.368,0.436 0.649,0.06 1.838,0.282 2.643,0.493 1.334,0.349 1.625,0.339 3.276,-0.113 4.299,-1.177 16.775,-2.487 20.248,-2.126 0.825,0.086 2.553,0.408 3.839,0.717 2.046,0.491 2.519,0.522 3.777,0.247 3.039,-0.664 6.757,-1.062 11.128,-1.19 4.134,-0.122 4.708,-0.083 6.38,0.435 1.365,0.422 2.106,0.839 2.879,1.62 1.297,1.31 1.63,2.71 1.624,6.818 -0.005,2.957 0.239,4.451 0.626,3.833 0.108,-0.173 0.179,-1.235 0.157,-2.36 -0.102,-5.207 0.069,-6.026 1.668,-8.024 0.85,-1.063 2.645,-2.129 4.102,-2.435 2.818,-0.594 15.89,0.302 18.845,1.291 0.698,0.234 1.338,0.188 3.176,-0.227 4.45,-1.004 5.162,-1.082 9.667,-1.057 4.016,0.022 5.005,0.121 8.508,0.853 6.85,1.429 7.198,1.434 12.435,0.176 1.285,-0.309 3.073,-0.451 5.823,-0.462 3.56,-0.014 4.146,0.049 5.685,0.616 0.944,0.348 2.115,0.863 2.603,1.146 0.825,0.478 0.989,0.488 2.381,0.139 1.779,-0.445 5.296,-1.02 9.835,-1.606 3.89,-0.502 11.703,-0.519 15.082,-0.032 5.86,0.845 9.863,3.11 10.571,5.983 l 0.287,1.165 3.359,-1.63 c 3.178,-1.543 8.225,-3.485 11.443,-4.402 4.716,-1.345 12.681,-1.711 16.937,-0.778 4.931,1.081 10.021,5.551 11.641,10.223 0.651,1.877 1.019,5.069 0.795,6.896 -0.469,3.823 -3.075,7.609 -6.485,9.42 -0.511,0.272 -1.108,0.622 -1.327,0.78 -1.282,0.92 -3.992,1.082 -9.396,0.563 -4.226,-0.406 -43.094,-0.564 -48.286,-0.196 -3.366,0.238 -9.716,0.136 -14.176,-0.229 -3.19,-0.261 -11.412,-2.465 -14.964,-4.011 -0.54,-0.235 -1.105,-0.428 -1.255,-0.429 -0.438,-0.002 -0.319,0.667 0.249,1.397 0.639,0.821 0.662,1.465 0.083,2.283 -0.417,0.589 -0.538,0.61 -2.45,0.427 -1.106,-0.106 -3.2,-0.441 -4.654,-0.745 z"/>
+    </svg>
+  </div>
+
+  <div class="gopuram" role="img" aria-label="Five-tier gopuram silhouette">
+    <div class="tier-1-cap" aria-hidden="true"></div>
+    <div class="tier tier-1"><span class="tier-1-text">श्री · श्री · श्री</span></div>
+    <div class="tier tier-2">
+      <div class="tier-2-text">
+        STHAPATI&nbsp;·&nbsp;WORKSHOP
+        <small>STUDIO FOR TEMPLE-CRAFT &amp; CONTEMPORARY FORM</small>
+      </div>
+    </div>
+    <div class="tier tier-3">
+      <div class="tier-3-text">
+        <span>TALA</span><span>SILPA</span><span>VASTU</span><span>VARNA</span><span>KOLAM</span>
+      </div>
+    </div>
+    <div class="tier tier-4">
+      <div class="tier-4-text">
+        <span>Architecture</span><span>Restoration</span><span>Exhibition</span><span>Type · Print</span><span>Pedagogy</span>
+      </div>
+    </div>
+    <div class="tier tier-5">
+      <div class="tier-5-text">
+        <span>Madurai</span><span>Tiruchendur</span><span>Karaikudi</span><span>Thanjavur</span><span>Chennai</span><span>Pondicherry</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-frame flip" aria-hidden="true" style="margin-top:18px;">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 313.71717 29.540759" preserveAspectRatio="none">
+      <path fill="#c9a23a" d="m 8.231,29.029 c -2.081,-0.595 -3.6,-1.338 -4.883,-2.387 -1.667,-1.364 -2.894,-2.64 -2.894,-3.011 0,-0.174 -0.209,-0.473 -0.465,-0.664 -0.82,-0.613 -1.165,-1.848 -1.124,-4.019 0.075,-3.965 0.842,-6.286 3.36,-10.17 2.092,-3.227 6.669,-6.453 10.648,-7.503 2.252,-0.594 8.249,-0.796 11.003,-0.37 6.948,1.074 16.153,4.46 20.656,7.598 0.854,0.595 0.795,0.623 1.329,-0.647 0.225,-0.536 0.881,-1.604 1.458,-2.374 0.856,-1.143 1.458,-1.601 3.274,-2.493 2.162,-1.062 4.564,-1.779 6.728,-2.009 0.582,-0.062 1.399,-0.241 1.815,-0.398 0.774,-0.292 6.481,-0.197 10.093,0.168 2.265,0.229 9.609,1.678 11.22,2.213 1.157,0.385 1.204,0.376 3.087,-0.542 2.528,-1.234 4.017,-1.481 8.447,-1.401 3.614,0.065 4.29,0.147 6.743,0.821 0.654,0.18 1.72,0.376 2.368,0.436 0.649,0.06 1.838,0.282 2.643,0.493 1.334,0.349 1.625,0.339 3.276,-0.113 4.299,-1.177 16.775,-2.487 20.248,-2.126 0.825,0.086 2.553,0.408 3.839,0.717 2.046,0.491 2.519,0.522 3.777,0.247 3.039,-0.664 6.757,-1.062 11.128,-1.19 4.134,-0.122 4.708,-0.083 6.38,0.435 1.365,0.422 2.106,0.839 2.879,1.62 1.297,1.31 1.63,2.71 1.624,6.818 -0.005,2.957 0.239,4.451 0.626,3.833 0.108,-0.173 0.179,-1.235 0.157,-2.36 -0.102,-5.207 0.069,-6.026 1.668,-8.024 0.85,-1.063 2.645,-2.129 4.102,-2.435 2.818,-0.594 15.89,0.302 18.845,1.291 0.698,0.234 1.338,0.188 3.176,-0.227 4.45,-1.004 5.162,-1.082 9.667,-1.057 4.016,0.022 5.005,0.121 8.508,0.853 6.85,1.429 7.198,1.434 12.435,0.176 1.285,-0.309 3.073,-0.451 5.823,-0.462 3.56,-0.014 4.146,0.049 5.685,0.616 0.944,0.348 2.115,0.863 2.603,1.146 0.825,0.478 0.989,0.488 2.381,0.139 1.779,-0.445 5.296,-1.02 9.835,-1.606 3.89,-0.502 11.703,-0.519 15.082,-0.032 5.86,0.845 9.863,3.11 10.571,5.983 l 0.287,1.165 3.359,-1.63 c 3.178,-1.543 8.225,-3.485 11.443,-4.402 4.716,-1.345 12.681,-1.711 16.937,-0.778 4.931,1.081 10.021,5.551 11.641,10.223 0.651,1.877 1.019,5.069 0.795,6.896 -0.469,3.823 -3.075,7.609 -6.485,9.42 -0.511,0.272 -1.108,0.622 -1.327,0.78 -1.282,0.92 -3.992,1.082 -9.396,0.563 z"/>
+    </svg>
+  </div>
+
+  <div class="hero-founding">
+    Established Madurai, 2014<br>
+    <small>practice of M. Arumugam Sthapati &amp; Lakshmi Raghavan</small>
+  </div>
+</section>
+
+<!-- band divider -->
+<div class="band-thin-rule"></div>
+
+<!-- ============== STANCE ============== -->
+<section class="stance" aria-label="Studio stance">
+  <h2>The Living Grammar</h2>
+  <div class="sub">A statement of practice, in three measures</div>
+
+  <div class="stance-grid">
+    <div class="stance-col">
+      <h3>Tala — Proportion</h3>
+      <p>Sthapati Workshop holds that the <strong>tala system</strong> — the ancient Dravidian module that orders a temple from plinth to finial — is not an antiquarian curiosity but a working unit of measure. We draw in <em>angula</em> and <em>hasta</em> beside the millimetre, and find that contemporary brief and canonical proportion rarely contradict each other.</p>
+      <p>Our 2019 dossier on the proportions of the Meenakshi Amman <em>kalyana mandapa</em> remains in continuous use as a teaching document at SAP, Anna University.</p>
+    </div>
+    <div class="stance-col">
+      <h3>Silpa — Ornament as Structure</h3>
+      <p>In the southern tradition the <strong>kumbha-panjara</strong>, the <em>vyala</em> bracket, the lotus medallion are not applied decoration; they describe how a load is gathered, turned, and let go. We design with that vocabulary intact — even where the building is a tea pavilion or a typeface specimen — because ornament that does no work loses the right to be there.</p>
+      <p>The studio maintains a working library of 1,140 rubbings and squeezes from temples between Madurai and Kanchipuram.</p>
+    </div>
+    <div class="stance-col">
+      <h3>Varna — Polychrome as Devotion</h3>
+      <p>The Nayak painters of the 16th–18th centuries did not treat colour as decoration but as <strong>offering</strong>. Sacred white, vermilion, gold-leaf, peacock-blue, ink-black — the five-colour grammar — entered the building because it entered the rite. The Workshop applies the same five colours, in the same proportions, to print, exhibition, and façade.</p>
+      <p>We do not work in muted palettes. We do not produce greyscale renderings. The drawing is the building is the painting.</p>
+    </div>
+  </div>
+</section>
+
+<!-- arabesque strip -->
+<div class="arabesque-strip" aria-hidden="true">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 60" preserveAspectRatio="none">
+    <g fill="#c9a23a">
+      <path d="M0 30 L1200 30" stroke="#c9a23a" stroke-width="0.5" fill="none"/>
+      <g>
+        <circle cx="60" cy="30" r="4"/><circle cx="60" cy="30" r="10" fill="none" stroke="#c9a23a" stroke-width="0.6"/>
+        <circle cx="180" cy="30" r="4"/><circle cx="180" cy="30" r="10" fill="none" stroke="#c9a23a" stroke-width="0.6"/>
+        <circle cx="300" cy="30" r="4"/><circle cx="300" cy="30" r="10" fill="none" stroke="#c9a23a" stroke-width="0.6"/>
+        <circle cx="420" cy="30" r="4"/><circle cx="420" cy="30" r="10" fill="none" stroke="#c9a23a" stroke-width="0.6"/>
+        <circle cx="540" cy="30" r="4"/><circle cx="540" cy="30" r="10" fill="none" stroke="#c9a23a" stroke-width="0.6"/>
+        <circle cx="660" cy="30" r="4"/><circle cx="660" cy="30" r="10" fill="none" stroke="#c9a23a" stroke-width="0.6"/>
+        <circle cx="780" cy="30" r="4"/><circle cx="780" cy="30" r="10" fill="none" stroke="#c9a23a" stroke-width="0.6"/>
+        <circle cx="900" cy="30" r="4"/><circle cx="900" cy="30" r="10" fill="none" stroke="#c9a23a" stroke-width="0.6"/>
+        <circle cx="1020" cy="30" r="4"/><circle cx="1020" cy="30" r="10" fill="none" stroke="#c9a23a" stroke-width="0.6"/>
+        <circle cx="1140" cy="30" r="4"/><circle cx="1140" cy="30" r="10" fill="none" stroke="#c9a23a" stroke-width="0.6"/>
+      </g>
+      <g fill="#e34234">
+        <path d="M120 22 Q124 14 128 22 Q132 30 128 38 Q124 46 120 38 Q116 30 120 22 Z"/>
+        <path d="M240 22 Q244 14 248 22 Q252 30 248 38 Q244 46 240 38 Q236 30 240 22 Z"/>
+        <path d="M360 22 Q364 14 368 22 Q372 30 368 38 Q364 46 360 38 Q356 30 360 22 Z"/>
+        <path d="M480 22 Q484 14 488 22 Q492 30 488 38 Q484 46 480 38 Q476 30 480 22 Z"/>
+        <path d="M600 22 Q604 14 608 22 Q612 30 608 38 Q604 46 600 38 Q596 30 600 22 Z"/>
+        <path d="M720 22 Q724 14 728 22 Q732 30 728 38 Q724 46 720 38 Q716 30 720 22 Z"/>
+        <path d="M840 22 Q844 14 848 22 Q852 30 848 38 Q844 46 840 38 Q836 30 840 22 Z"/>
+        <path d="M960 22 Q964 14 968 22 Q972 30 968 38 Q964 46 960 38 Q956 30 960 22 Z"/>
+        <path d="M1080 22 Q1084 14 1088 22 Q1092 30 1088 38 Q1084 46 1080 38 Q1076 30 1080 22 Z"/>
+      </g>
+    </g>
+  </svg>
+</div>
+
+<!-- ============== ENGAGEMENTS ============== -->
+<section class="engagements-band" aria-label="Current engagements">
+  <div class="engagements-head">
+    <h2>Current Engagements</h2>
+    <div class="meta">Four works on the table · Karthikai 2024 — Vaikasi 2025</div>
+  </div>
+
+  <div class="cards">
+    <article class="card">
+      <span class="kalasha" aria-hidden="true"></span>
+      <span class="pillar-cap tl"></span><span class="pillar-cap tr"></span>
+      <span class="pillar-cap bl"></span><span class="pillar-cap br"></span>
+      <div class="card-tag">01 · Architecture</div>
+      <h3>Tiruchendur Visitor Pavilion</h3>
+      <div class="card-meta">Tiruchendur · Tuticorin Dist. · Phase II</div>
+      <p>A 1,840-sq.m. ablution-and-orientation pavilion at the western entrance of the Subrahmanya Swami Temple, organised on a five-bay <em>mandapa</em> grid with a perforated kadappa stone screen along the seafront elevation.</p>
+      <div class="specs">
+        <span><b>Client</b>HR &amp; CE Dept., Tamil Nadu</span>
+        <span><b>Stage</b>GFC issued 14 Mar 2024</span>
+        <span><b>Budget</b>₹ 4.62 cr.</span>
+      </div>
+    </article>
+
+    <article class="card">
+      <span class="kalasha" aria-hidden="true"></span>
+      <span class="pillar-cap tl"></span><span class="pillar-cap tr"></span>
+      <span class="pillar-cap bl"></span><span class="pillar-cap br"></span>
+      <div class="card-tag">02 · Restoration</div>
+      <h3>Chettinad House Revival</h3>
+      <div class="card-meta">Karaikudi · Sivaganga Dist. · 1908 fabric</div>
+      <p>Conservation of the Visalam-Veedu — a 14-courtyard Nattukottai mansion — including reinstatement of the Burma teak <em>thinnai</em>, Athangudi tile relaying across 11 rooms, and re-pigmenting of the entrance lime-plaster panels.</p>
+      <div class="specs">
+        <span><b>Client</b>R. Meyyappan family trust</span>
+        <span><b>Stage</b>Site work, week 32 of 96</span>
+        <span><b>Area</b>2,310 sq.m. covered</span>
+      </div>
+    </article>
+
+    <article class="card">
+      <span class="kalasha" aria-hidden="true"></span>
+      <span class="pillar-cap tl"></span><span class="pillar-cap tr"></span>
+      <span class="pillar-cap bl"></span><span class="pillar-cap br"></span>
+      <div class="card-tag">03 · Exhibition</div>
+      <h3>Five Colours of Devotion</h3>
+      <div class="card-meta">Kala Bhavan · Santiniketan · 12 Jul – 28 Sep 2025</div>
+      <p>A travelling exhibition of 64 painted ceiling fragments from the Ramaswamy &amp; Meenakshi temples, hung against a full-height vermilion field. Curatorial design, vitrine fabrication, and the bilingual catalogue (288 pp.) by the Workshop.</p>
+      <div class="specs">
+        <span><b>Curator</b>Lakshmi Raghavan</span>
+        <span><b>Catalogue</b>₹ 1,650 / ₹ 2,400 cl.</span>
+        <span><b>Tour</b>Kochi · Bombay · Berlin (2026)</span>
+      </div>
+    </article>
+
+    <article class="card">
+      <span class="kalasha" aria-hidden="true"></span>
+      <span class="pillar-cap tl"></span><span class="pillar-cap tr"></span>
+      <span class="pillar-cap bl"></span><span class="pillar-cap br"></span>
+      <div class="card-tag">04 · Type · Print</div>
+      <h3>Tirumurai — A Tourism Typeface</h3>
+      <div class="card-meta">Commission · Tamil Nadu Tourism · 2024–25</div>
+      <p>A bilingual Tamil/Latin display family in five weights, drawn from the inscriptional capitals of the Brihadisvara temple at Thanjavur. Released under a public-use licence; first deployment, the 2025 Pongal campaign across 411 hoardings.</p>
+      <div class="specs">
+        <span><b>Designer</b>M. Arumugam, with G. Vaidehi</span>
+        <span><b>Glyphs</b>Tamil 312 · Latin 254</span>
+        <span><b>Release</b>14 Jan 2025</span>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- kolam mid band -->
+<div class="kolam-band" aria-label="Studio mantra">
+  <div class="kolam-band-text">
+    கல்லும் கலையும் ஒன்றே
+    <small>STONE AND CRAFT, ONE AND THE SAME — workshop motto, inscribed at the studio gate, 2014</small>
+  </div>
+</div>
+
+<!-- ============== FOOTER ============== -->
+<footer role="contentinfo">
+  <div class="footer-arcade">
+    <div class="arcade-grid">
+      <div class="pillar" aria-hidden="true"></div>
+
+      <div class="arcade-side">
+        <h4>Find</h4>
+        <a href="page-1.html">Studio</a><br>
+        <a href="page-2.html">Practice</a><br>
+        <a href="page-3.html">Projects</a><br>
+        <a href="page-4.html">Workshop</a>
+      </div>
+
+      <div class="pillar" aria-hidden="true"></div>
+
+      <div class="arcade-side">
+        <h4>Read</h4>
+        <a href="page-5.html">Writings</a><br>
+        <a href="page-5.html">Lectures</a><br>
+        <a href="page-3.html#archive">Archive</a><br>
+        <a href="page-6.html">Press</a>
+      </div>
+
+      <div class="pillar" aria-hidden="true"></div>
+
+      <div class="arcade-side">
+        <h4>Visit</h4>
+        <a href="page-6.html">Studio &amp; map</a><br>
+        Open Tue–Sat<br>
+        10:00 — 18:00 IST<br>
+        +91 452 4204 118
+      </div>
+
+      <div class="pillar" aria-hidden="true"></div>
+
+      <div class="mandala" aria-hidden="false">
+        <div class="mandala-inner">
+          <div class="addr">
+            <b>STHAPATI WORKSHOP</b>
+            14, North Chitrai Street<br>
+            Madurai 625 001<br>
+            Tamil Nadu · India
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-rule"></div>
+  <div class="footer-strip">
+    <div>© 2014 — 2025 Sthapati Workshop LLP · GSTIN&nbsp;33AAFCS4118R1ZK</div>
+    <div class="ta">கல்லில் கதை · STORIES IN STONE</div>
+    <div>page 1 of 6 · v.4.2 · Vaikasi 1446</div>
+  </div>
+</footer>
+
+</body>
+</html>

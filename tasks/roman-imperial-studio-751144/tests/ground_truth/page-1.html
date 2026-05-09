@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Atelier Vitruvius — Studio of Classical Architecture</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.7;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display), serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    text-align: center;
+    margin: 0;
+  }
+  a { color: var(--primary); text-decoration: none; }
+
+  /* ==== TOP BAND ==== */
+  .top-band {
+    background: var(--surface);
+    padding: 28px 0 12px;
+    border-bottom: 1px solid var(--ornament);
+  }
+  .greek-key-strip {
+    height: 26px;
+    width: 100%;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 20' preserveAspectRatio='xMidYMid'><g fill='none' stroke='%23c9a23a' stroke-width='1.4'><path d='M0 18 L0 4 L14 4 L14 14 L6 14 L6 8 L10 8 L10 12'/><path d='M20 18 L20 4 L34 4 L34 14 L26 14 L26 8 L30 8 L30 12'/><path d='M40 18 L40 4 L54 4 L54 14 L46 14 L46 8 L50 8 L50 12'/><path d='M60 18 L60 4 L74 4 L74 14 L66 14 L66 8 L70 8 L70 12'/></g></svg>");
+    background-repeat: repeat-x;
+    background-size: 80px 20px;
+    margin-bottom: 22px;
+  }
+  .studio-name {
+    text-align: center;
+    padding: 14px 0;
+    border-top: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+    margin: 0 auto;
+    width: 80%;
+    max-width: 1100px;
+  }
+  .studio-name .name {
+    font-family: var(--font-display), serif;
+    font-size: 30px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+  .studio-name .tag {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-top: 6px;
+  }
+
+  nav.primary {
+    text-align: center;
+    padding: 22px 0 8px;
+  }
+  nav.primary ul {
+    list-style: none;
+    margin: 0; padding: 0;
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  nav.primary li {
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    padding: 0 4px;
+  }
+  nav.primary a {
+    color: var(--text);
+    padding: 4px 10px;
+    display: inline-block;
+  }
+  nav.primary a[aria-current="page"] {
+    color: var(--primary);
+    border-bottom: 1px solid var(--primary);
+  }
+  nav.primary .vine {
+    display: inline-block;
+    width: 18px; height: 18px;
+    color: var(--ornament);
+    vertical-align: middle;
+  }
+  nav.primary .vine svg { width: 100%; height: 100%; fill: var(--ornament); }
+
+  /* ==== HERO ==== */
+  .hero {
+    position: relative;
+    background: var(--surface);
+    padding: 70px 40px 90px;
+    text-align: center;
+    overflow: hidden;
+  }
+  .pediment {
+    width: 880px;
+    max-width: 92%;
+    margin: 0 auto;
+    position: relative;
+  }
+  .pediment-svg {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    height: auto;
+  }
+  .pediment-content {
+    position: relative;
+    margin-top: -10px;
+    padding: 30px 40px 50px;
+    border-left: 1px solid var(--ornament);
+    border-right: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+    background: var(--surface);
+  }
+  .laurel-wrap {
+    position: relative;
+    width: 380px;
+    height: 340px;
+    margin: 0 auto 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .laurel-wrap > svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .laurel-text {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 0 50px;
+  }
+  .laurel-text .roman-name {
+    font-family: var(--font-display), serif;
+    font-size: 26px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text);
+    line-height: 1.2;
+  }
+  .laurel-text .roman-rule {
+    width: 60px;
+    height: 1px;
+    background: var(--ornament);
+    margin: 14px auto;
+  }
+  .laurel-text .roman-sub {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .hero-motto {
+    font-family: var(--font-display), serif;
+    font-size: 18px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-top: 20px;
+  }
+  .hero-motto .dot { color: var(--ornament); margin: 0 0.4em; }
+  .hero-line {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--text);
+    max-width: 640px;
+    margin: 18px auto 0;
+    line-height: 1.6;
+  }
+
+  /* ==== MEANDER DIVIDER ==== */
+  .meander-divider {
+    height: 36px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 20' preserveAspectRatio='xMidYMid'><g fill='none' stroke='%23c9a23a' stroke-width='1.6'><path d='M0 18 L0 4 L14 4 L14 14 L6 14 L6 8 L10 8 L10 12'/><path d='M20 18 L20 4 L34 4 L34 14 L26 14 L26 8 L30 8 L30 12'/><path d='M40 18 L40 4 L54 4 L54 14 L46 14 L46 8 L50 8 L50 12'/><path d='M60 18 L60 4 L74 4 L74 14 L66 14 L66 8 L70 8 L70 12'/></g></svg>");
+    background-repeat: repeat-x;
+    background-size: 80px 20px;
+    background-position: center;
+    margin: 0;
+  }
+
+  /* ==== SECTIONS ==== */
+  main { background: var(--surface); }
+  .section {
+    padding: 70px 60px;
+    max-width: 1320px;
+    margin: 0 auto;
+  }
+  .section-title {
+    font-size: 22px;
+    letter-spacing: 0.38em;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .section-sub {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--accent);
+    margin-bottom: 50px;
+  }
+
+  /* ==== DEPARTMENT CARDS ==== */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+  .card {
+    background: var(--bg);
+    padding: 12px;
+    position: relative;
+  }
+  .card-inner {
+    position: relative;
+    padding: 70px 30px 40px;
+    border: 1px solid var(--ornament);
+    background: var(--bg);
+  }
+  /* meander border via repeating SVG */
+  .card-meander-top, .card-meander-bottom {
+    position: absolute;
+    left: 0; right: 0;
+    height: 18px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 20' preserveAspectRatio='xMidYMid'><g fill='none' stroke='%23c9a23a' stroke-width='1.4'><path d='M0 18 L0 4 L14 4 L14 14 L6 14 L6 8 L10 8 L10 12'/><path d='M20 18 L20 4 L34 4 L34 14 L26 14 L26 8 L30 8 L30 12'/><path d='M40 18 L40 4 L54 4 L54 14 L46 14 L46 8 L50 8 L50 12'/><path d='M60 18 L60 4 L74 4 L74 14 L66 14 L66 8 L70 8 L70 12'/></g></svg>");
+    background-repeat: repeat-x;
+    background-size: 60px 15px;
+  }
+  .card-meander-top { top: 0; }
+  .card-meander-bottom { bottom: 0; transform: scaleY(-1); }
+
+  .card-roundel {
+    position: absolute;
+    top: -42px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 130px;
+    height: 130px;
+    background: var(--surface);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+  }
+  .card-roundel svg.laurel {
+    position: absolute;
+    inset: -6px;
+    width: calc(100% + 12px);
+    height: calc(100% + 12px);
+  }
+  .card-roundel .roundel-text {
+    position: relative;
+    z-index: 2;
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    line-height: 1.25;
+    color: var(--text);
+    padding: 0 10px;
+  }
+  .card-roundel .roundel-text strong {
+    display: block;
+    color: var(--primary);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    margin-bottom: 3px;
+  }
+  .card h3 {
+    font-size: 14px;
+    letter-spacing: 0.3em;
+    margin-top: 30px;
+    margin-bottom: 6px;
+    color: var(--text);
+  }
+  .card .latin {
+    font-family: var(--font-display), serif;
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 22px;
+  }
+  .card p {
+    text-align: justify;
+    hyphens: auto;
+    font-size: 15px;
+    margin: 0 0 14px;
+    line-height: 1.75;
+  }
+  .card p:first-letter {
+    font-family: var(--font-display), serif;
+    font-size: 30px;
+    color: var(--primary);
+    float: left;
+    line-height: 0.9;
+    padding: 6px 8px 0 0;
+  }
+  .card-vine {
+    width: 38px;
+    height: 38px;
+    margin: 18px auto 0;
+    display: block;
+    fill: var(--ornament);
+  }
+  .card .meta {
+    list-style: none;
+    padding: 0;
+    margin: 18px 0 0;
+    border-top: 1px solid var(--ornament);
+    padding-top: 14px;
+  }
+  .card .meta li {
+    font-family: var(--font-display), serif;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--text);
+    padding: 3px 0;
+  }
+  .card .meta li span {
+    color: var(--accent);
+  }
+
+  /* ==== COMMISSIONS BLOCK ==== */
+  .commissions {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 70px 60px 90px;
+    text-align: center;
+  }
+  .commissions-frame {
+    border: 1px solid var(--ornament);
+    padding: 50px 60px;
+    background: var(--bg);
+    position: relative;
+  }
+  .commissions-frame::before,
+  .commissions-frame::after {
+    content: "";
+    position: absolute;
+    left: 30px; right: 30px;
+    height: 14px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 20' preserveAspectRatio='xMidYMid'><g fill='none' stroke='%23c9a23a' stroke-width='1.2'><path d='M0 18 L0 4 L14 4 L14 14 L6 14 L6 8 L10 8 L10 12'/><path d='M20 18 L20 4 L34 4 L34 14 L26 14 L26 8 L30 8 L30 12'/><path d='M40 18 L40 4 L54 4 L54 14 L46 14 L46 8 L50 8 L50 12'/><path d='M60 18 L60 4 L74 4 L74 14 L66 14 L66 8 L70 8 L70 12'/></g></svg>");
+    background-repeat: repeat-x;
+    background-size: 60px 14px;
+  }
+  .commissions-frame::before { top: 12px; }
+  .commissions-frame::after { bottom: 12px; transform: scaleY(-1); }
+  .commissions h2 {
+    font-size: 18px;
+    letter-spacing: 0.32em;
+  }
+  .commissions .sub {
+    font-family: var(--font-display), serif;
+    font-size: 10px;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 6px 0 24px;
+  }
+  .commissions p {
+    font-size: 16px;
+    line-height: 1.85;
+    text-align: justify;
+    hyphens: auto;
+    margin: 0 0 14px;
+  }
+  .commissions .recent {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-top: 30px;
+    text-align: left;
+  }
+  .recent-item {
+    border-left: 2px solid var(--primary);
+    padding: 6px 18px;
+  }
+  .recent-item h4 {
+    text-align: left;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    color: var(--primary);
+    margin-bottom: 4px;
+  }
+  .recent-item .place {
+    font-family: var(--font-display), serif;
+    font-size: 10px;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 8px;
+  }
+  .recent-item p {
+    font-size: 14px;
+    margin: 0;
+  }
+
+  /* ==== FOOTER ==== */
+  footer { margin-top: 0; }
+  .frieze {
+    background: var(--primary);
+    color: var(--surface);
+    padding: 30px 40px;
+    text-align: center;
+    position: relative;
+  }
+  .rosette-band {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    margin-bottom: 14px;
+  }
+  .rosette {
+    width: 22px; height: 22px;
+    flex: 0 0 auto;
+  }
+  .rosette svg { width: 100%; height: 100%; }
+  .frieze .addr {
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: var(--surface);
+  }
+  .frieze .addr strong { color: var(--secondary); font-weight: 600; }
+  .footer-meander {
+    height: 24px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 20' preserveAspectRatio='xMidYMid'><g fill='none' stroke='%23c9a23a' stroke-width='1.6'><path d='M0 18 L0 4 L14 4 L14 14 L6 14 L6 8 L10 8 L10 12'/><path d='M20 18 L20 4 L34 4 L34 14 L26 14 L26 8 L30 8 L30 12'/><path d='M40 18 L40 4 L54 4 L54 14 L46 14 L46 8 L50 8 L50 12'/><path d='M60 18 L60 4 L74 4 L74 14 L66 14 L66 8 L70 8 L70 12'/></g></svg>");
+    background-repeat: repeat-x;
+    background-size: 80px 20px;
+    background-position: center;
+    background-color: var(--surface);
+  }
+  .colophon {
+    background: var(--surface);
+    text-align: center;
+    padding: 30px 20px 50px;
+  }
+  .colophon .text {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin-bottom: 18px;
+  }
+  .tailpiece {
+    width: 200px;
+    height: 40px;
+    margin: 0 auto;
+  }
+  .tailpiece svg { width: 100%; height: 100%; }
+
+</style>
+</head>
+<body>
+
+<header class="top-band">
+  <div class="greek-key-strip" aria-hidden="true"></div>
+  <div class="studio-name">
+    <div class="name">Atelier Vitruvius</div>
+    <div class="tag">Studio of Classical Architecture · Roma</div>
+  </div>
+  <nav class="primary" aria-label="Primary">
+    <ul>
+      <li><a href="page-1.html" aria-current="page">Atrium</a></li>
+      <li class="vine" aria-hidden="true"><svg viewBox="0 0 200 200"><path d="M43 11c-2 0-4 0-5 .3-7 .7-14 3-19 8s-8 12-8 21 4 16 10 20c6 4 13 6 21 5 15-.7 33-8 46-18l4-3c4 7 8 15 9 24-7-5-21-11-36 1-22 18-25 13-45-2-3 36 15 55 45 53 0 0-14 4-4 26 6 13 8 20 7 25-13 2-16 8-6 13 45 10 66-27 69-66 45 0 53-32 52-50-8 11-22 11-33 3-10-8-22-16-39-1-2-12-6-22-11-31 19-11 38-14 52-11 5 1 9 4 12 7-9 8-12 26 2 27 19 1 21-15 14-27-5-9-16-13-26-17-17-5-40-1-61 13-5-6-11-10-18-13-7-3-17-6-28-6z"/></svg></li>
+      <li><a href="page-2.html">Works</a></li>
+      <li class="vine" aria-hidden="true"><svg viewBox="0 0 200 200"><path d="M43 11c-2 0-4 0-5 .3-7 .7-14 3-19 8s-8 12-8 21 4 16 10 20c6 4 13 6 21 5 15-.7 33-8 46-18l4-3c4 7 8 15 9 24-7-5-21-11-36 1-22 18-25 13-45-2-3 36 15 55 45 53 0 0-14 4-4 26 6 13 8 20 7 25-13 2-16 8-6 13 45 10 66-27 69-66 45 0 53-32 52-50-8 11-22 11-33 3-10-8-22-16-39-1-2-12-6-22-11-31 19-11 38-14 52-11 5 1 9 4 12 7-9 8-12 26 2 27 19 1 21-15 14-27-5-9-16-13-26-17-17-5-40-1-61 13-5-6-11-10-18-13-7-3-17-6-28-6z"/></svg></li>
+      <li><a href="page-3.html">The Studio</a></li>
+      <li class="vine" aria-hidden="true"><svg viewBox="0 0 200 200"><path d="M43 11c-2 0-4 0-5 .3-7 .7-14 3-19 8s-8 12-8 21 4 16 10 20c6 4 13 6 21 5 15-.7 33-8 46-18l4-3c4 7 8 15 9 24-7-5-21-11-36 1-22 18-25 13-45-2-3 36 15 55 45 53 0 0-14 4-4 26 6 13 8 20 7 25-13 2-16 8-6 13 45 10 66-27 69-66 45 0 53-32 52-50-8 11-22 11-33 3-10-8-22-16-39-1-2-12-6-22-11-31 19-11 38-14 52-11 5 1 9 4 12 7-9 8-12 26 2 27 19 1 21-15 14-27-5-9-16-13-26-17-17-5-40-1-61 13-5-6-11-10-18-13-7-3-17-6-28-6z"/></svg></li>
+      <li><a href="page-4.html">The Orders</a></li>
+      <li class="vine" aria-hidden="true"><svg viewBox="0 0 200 200"><path d="M43 11c-2 0-4 0-5 .3-7 .7-14 3-19 8s-8 12-8 21 4 16 10 20c6 4 13 6 21 5 15-.7 33-8 46-18l4-3c4 7 8 15 9 24-7-5-21-11-36 1-22 18-25 13-45-2-3 36 15 55 45 53 0 0-14 4-4 26 6 13 8 20 7 25-13 2-16 8-6 13 45 10 66-27 69-66 45 0 53-32 52-50-8 11-22 11-33 3-10-8-22-16-39-1-2-12-6-22-11-31 19-11 38-14 52-11 5 1 9 4 12 7-9 8-12 26 2 27 19 1 21-15 14-27-5-9-16-13-26-17-17-5-40-1-61 13-5-6-11-10-18-13-7-3-17-6-28-6z"/></svg></li>
+      <li><a href="page-5.html">Practice</a></li>
+      <li class="vine" aria-hidden="true"><svg viewBox="0 0 200 200"><path d="M43 11c-2 0-4 0-5 .3-7 .7-14 3-19 8s-8 12-8 21 4 16 10 20c6 4 13 6 21 5 15-.7 33-8 46-18l4-3c4 7 8 15 9 24-7-5-21-11-36 1-22 18-25 13-45-2-3 36 15 55 45 53 0 0-14 4-4 26 6 13 8 20 7 25-13 2-16 8-6 13 45 10 66-27 69-66 45 0 53-32 52-50-8 11-22 11-33 3-10-8-22-16-39-1-2-12-6-22-11-31 19-11 38-14 52-11 5 1 9 4 12 7-9 8-12 26 2 27 19 1 21-15 14-27-5-9-16-13-26-17-17-5-40-1-61 13-5-6-11-10-18-13-7-3-17-6-28-6z"/></svg></li>
+      <li><a href="page-6.html">Visit</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="pediment">
+    <svg class="pediment-svg" viewBox="0 0 880 200" preserveAspectRatio="none" aria-hidden="true">
+      <polygon points="0,200 440,12 880,200" fill="none" stroke="#c9a23a" stroke-width="1.2"/>
+      <polygon points="20,196 440,28 860,196" fill="none" stroke="#c9a23a" stroke-width="0.8"/>
+      <line x1="0" y1="200" x2="880" y2="200" stroke="#c9a23a" stroke-width="1.2"/>
+      <circle cx="440" cy="180" r="6" fill="none" stroke="#a93226" stroke-width="1.2"/>
+      <circle cx="220" cy="190" r="4" fill="none" stroke="#c9a23a"/>
+      <circle cx="660" cy="190" r="4" fill="none" stroke="#c9a23a"/>
+    </svg>
+
+    <div class="pediment-content">
+      <div class="laurel-wrap" aria-hidden="false">
+        <svg viewBox="0 0 323 295" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <g transform="translate(-64,20)" fill="#c9a23a" stroke="#8b6914" stroke-width="0.6" opacity="0.85">
+            <path d="M141 -18c-11 5-23 9-30 22-4 7-5 16-8 24 6-6 16-13 21-21 6-9 9-18 17-26zm164 0c8 8 11 17 17 26 5 7 14 14 21 21-3-8-3-17-8-24-7-13-19-18-30-22zM112 -1c-6 2-11 5-15 11-9 11-11 25-7 42 1 4-1 9 0 13 3-6 6-12 12-16 13-8 17-13 20-21 4-9 5-11 5-19-4 12-15 17-23 25-4 4-7 10-9 15v-1c1-5 3-9 4-14 3-13 3-28 13-37zm223 0c11 8 10 24 14 37 1 5 3 9 4 14v1c-2-5-5-11-9-15-8-8-19-13-23-25 0 8 1 10 5 19 3 8 7 12 20 21 6 4 9 10 12 16 0-4-2-9 0-13 4-17 2-31-7-42-4-6-9-10-15-11zM89 21c-7 11-14 19-14 34-1 18 11 35 12 52 2-13 11-22 18-32-1 4-2 9-4 12-8 14-16 31-11 49-3-6-3-13-4-19-3-13-15-27-12-47-2 4-3 9-3 13-2 12-3 19 0 30 4 14 18 29 24 41-1-7-1-14 0-21 3-10 10-21 12-31 1-8-1-18-2-26 3-4 5-7 7-12 2-6 1-15 2-22-1 3-3 5-5 8-9 9-19 19-21 33 0 2 0 4-1 6-1 0-1 0-1-1l1-17c0-16-7-34 2-49zm270 0c8 14 1 33 2 49l1 17c0 1 0 1-1 1-1-2-1-4-1-6-2-14-12-24-21-33-2-3-4-5-5-8 1 7-1 16 2 22 2 5 4 8 7 12-1 8-3 17-2 26 2 10 9 21 12 31 1 7 1 14 0 21 6-12 20-27 24-41 3-11 2-18 0-30 0-4-2-9-3-13 3 20-9 34-12 47-2 6-2 13-4 19 6-18-3-35-11-49-2-4-3-8-4-12 7 10 16 19 18 32 1-17 12-34 12-52 0-15-7-23-14-34zM103 113c1 14-4 26-3 40 0 8 3 16 7 23h-1c-5-8-9-16-15-24-10-10-22-21-23-36-2 12 0 24 5 34 5 10 12 19 21 26l4 3c7 5 13 8 20 14v-1c-5-10-5-22-6-35-1-12-3-25-7-36zm242 0l-2 8c-3 11-6 24-7 36-1 12 0 24-5 35v1c7-6 13-8 20-14l4-3c9-7 16-16 21-26 5-10 7-22 5-34-1 15-13 26-23 36-6 8-10 16-15 24h-1c4-7 6-15 7-23 0-14-5-26-4-40zm-233 37c7 15 4 35 13 49 2 5 7 9 10 12 -3-2-6-4-9-7-15-14-38-16-47-40 1 9 3 17 8 25 17 24 34 25 62 31-13-12-15-29-20-44-4-9-9-18-15-26zm224 0c-6 8-12 17-15 26-6 15-8 33-21 44 29-6 45-6 62-31 5-7 6-16 8-25-9 24-32 25-47 40-3 3-6 5-9 7l-1-1c4-4 8-8 10-12 9-14 6-34 13-49zm-202 37c8 13 11 32 26 38 3 2 6 1 8 3-3 1-5-1-8-1-20-5-44 1-58-18 6 12 17 22 28 26 17 7 35-1 51-5 2-1 5-1 7-1-9-2-17-5-24-12-10-11-19-21-30-29zm180 0c-11 8-20 19-29 29-7 7-16 10-25 12 2 1 5 1 7 1 16 5 34 12 51 5 11-4 23-14 28-26-15 19-39 13-58 18-3 0-5 2-8 1 2-2 6-2 8-3 15-6 18-25 26-38zm-73 41c-5 0-9 1-14 2-3 3-6-1-9-1-19-5-36 5-52 13-12 5-28 4-38-4 5 7 12 12 19 15 13 6 30 2 41-7 10-6 18-18 30-13-13 7-25 16-35 28l7 6c8-12 18-21 28-29 2-1 5-3 7-3 13 7 24 19 34 32 2-2 5-4 6-7-11-12-22-21-35-28 2-1 4-1 7-1 7 0 11 5 17 9 13 11 30 19 47 12 7-3 15-8 20-16-10 8-26 10-38 5l-13-6c-9-5-19-8-29-8z"/>
+          </g>
+        </svg>
+        <div class="laurel-text">
+          <div class="roman-name">Atelier<br>Vitruvius</div>
+          <div class="roman-rule"></div>
+          <div class="roman-sub">Romae · MMXI</div>
+        </div>
+      </div>
+
+      <div class="hero-motto">Firmitas <span class="dot">·</span> Utilitas <span class="dot">·</span> Venustas</div>
+      <p class="hero-line">— since the founding of the atelier on the Via dei Coronari, MMXI.</p>
+    </div>
+  </div>
+</section>
+
+<div class="meander-divider" aria-hidden="true"></div>
+
+<main>
+  <section class="section">
+    <h2 class="section-title">The Three Departments</h2>
+    <div class="section-sub">Tres Officinae Atelieri</div>
+
+    <div class="cards">
+
+      <article class="card">
+        <div class="card-inner">
+          <div class="card-meander-top" aria-hidden="true"></div>
+          <div class="card-roundel">
+            <svg class="laurel" viewBox="0 0 200 200" aria-hidden="true">
+              <g fill="none" stroke="#c9a23a" stroke-width="1.2">
+                <circle cx="100" cy="100" r="92"/>
+                <circle cx="100" cy="100" r="86"/>
+              </g>
+              <g fill="#c9a23a" opacity="0.85">
+                <path d="M100 14 c-3 4 -7 9 -10 12 c2 0 5 1 7 0 c2 -3 4 -7 3 -12z"/>
+                <path d="M100 186 c-3 -4 -7 -9 -10 -12 c2 0 5 -1 7 0 c2 3 4 7 3 12z"/>
+                <path d="M14 100 c4 -3 9 -7 12 -10 c0 2 1 5 0 7 c-3 2 -7 4 -12 3z"/>
+                <path d="M186 100 c-4 -3 -9 -7 -12 -10 c0 2 -1 5 0 7 c3 2 7 4 12 3z"/>
+                <path d="M40 40 c5 1 11 3 14 6 c-2 1 -5 3 -7 3 c-3 -2 -6 -5 -7 -9z"/>
+                <path d="M160 40 c-5 1 -11 3 -14 6 c2 1 5 3 7 3 c3 -2 6 -5 7 -9z"/>
+                <path d="M40 160 c5 -1 11 -3 14 -6 c-2 -1 -5 -3 -7 -3 c-3 2 -6 5 -7 9z"/>
+                <path d="M160 160 c-5 -1 -11 -3 -14 -6 c2 -1 5 -3 7 -3 c3 2 6 5 7 9z"/>
+              </g>
+            </svg>
+            <div class="roundel-text"><strong>I.</strong>Civic<br>Works</div>
+          </div>
+          <h3>Civic Works</h3>
+          <div class="latin">Opera Civilia</div>
+          <p>The department of Civic Works receives commissions for basilicas, courts, libraries, and public porticoes. Each project begins with a measured study of the site and proceeds through orthographic plates drawn at the board, in graphite and Indian ink, before any model is begun. We hold that the public building must outlive its commissioning council, and we draw accordingly.</p>
+          <ul class="meta">
+            <li>Director <span>· G. Massari</span></li>
+            <li>Studio <span>· Sala dei Disegni I</span></li>
+            <li>Fee <span>· From €48,000</span></li>
+          </ul>
+          <svg class="card-vine" viewBox="0 0 200 200" aria-hidden="true"><path d="M43 11c-2 0-4 0-5 .3-7 .7-14 3-19 8s-8 12-8 21 4 16 10 20c6 4 13 6 21 5 15-.7 33-8 46-18l4-3c4 7 8 15 9 24-7-5-21-11-36 1-22 18-25 13-45-2-3 36 15 55 45 53 0 0-14 4-4 26 6 13 8 20 7 25-13 2-16 8-6 13 45 10 66-27 69-66 45 0 53-32 52-50-8 11-22 11-33 3-10-8-22-16-39-1-2-12-6-22-11-31 19-11 38-14 52-11 5 1 9 4 12 7-9 8-12 26 2 27 19 1 21-15 14-27-5-9-16-13-26-17-17-5-40-1-61 13-5-6-11-10-18-13-7-3-17-6-28-6z"/></svg>
+          <div class="card-meander-bottom" aria-hidden="true"></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-inner">
+          <div class="card-meander-top" aria-hidden="true"></div>
+          <div class="card-roundel">
+            <svg class="laurel" viewBox="0 0 200 200" aria-hidden="true">
+              <g fill="none" stroke="#c9a23a" stroke-width="1.2">
+                <circle cx="100" cy="100" r="92"/>
+                <circle cx="100" cy="100" r="86"/>
+              </g>
+              <g fill="#c9a23a" opacity="0.85">
+                <path d="M100 14 c-3 4 -7 9 -10 12 c2 0 5 1 7 0 c2 -3 4 -7 3 -12z"/>
+                <path d="M100 186 c-3 -4 -7 -9 -10 -12 c2 0 5 -1 7 0 c2 3 4 7 3 12z"/>
+                <path d="M14 100 c4 -3 9 -7 12 -10 c0 2 1 5 0 7 c-3 2 -7 4 -12 3z"/>
+                <path d="M186 100 c-4 -3 -9 -7 -12 -10 c0 2 -1 5 0 7 c3 2 7 4 12 3z"/>
+                <path d="M40 40 c5 1 11 3 14 6 c-2 1 -5 3 -7 3 c-3 -2 -6 -5 -7 -9z"/>
+                <path d="M160 40 c-5 1 -11 3 -14 6 c2 1 5 3 7 3 c3 -2 6 -5 7 -9z"/>
+                <path d="M40 160 c5 -1 11 -3 14 -6 c-2 -1 -5 -3 -7 -3 c-3 2 -6 5 -7 9z"/>
+                <path d="M160 160 c-5 -1 -11 -3 -14 -6 c2 -1 5 -3 7 -3 c3 2 6 5 7 9z"/>
+              </g>
+            </svg>
+            <div class="roundel-text"><strong>II.</strong>Domestic<br>Interiors</div>
+          </div>
+          <h3>Domestic Interiors</h3>
+          <div class="latin">Domus et Cubicula</div>
+          <p>For the private house, villa, and apartment we conceive interiors after the manner of the Pompeian schemes, with stuccoed friezes, coffered ceilings, and floors of opus sectile or cement-tile. Each room is treated as a small architectural composition: walls articulated by pilasters, doors framed by entablatures. We work in marble, fresco, oak, and bronze, and decline plastic substitutes.</p>
+          <ul class="meta">
+            <li>Director <span>· L. Albertini</span></li>
+            <li>Studio <span>· Sala dei Disegni II</span></li>
+            <li>Fee <span>· From €22,000</span></li>
+          </ul>
+          <svg class="card-vine" viewBox="0 0 200 200" aria-hidden="true"><path d="M43 11c-2 0-4 0-5 .3-7 .7-14 3-19 8s-8 12-8 21 4 16 10 20c6 4 13 6 21 5 15-.7 33-8 46-18l4-3c4 7 8 15 9 24-7-5-21-11-36 1-22 18-25 13-45-2-3 36 15 55 45 53 0 0-14 4-4 26 6 13 8 20 7 25-13 2-16 8-6 13 45 10 66-27 69-66 45 0 53-32 52-50-8 11-22 11-33 3-10-8-22-16-39-1-2-12-6-22-11-31 19-11 38-14 52-11 5 1 9 4 12 7-9 8-12 26 2 27 19 1 21-15 14-27-5-9-16-13-26-17-17-5-40-1-61 13-5-6-11-10-18-13-7-3-17-6-28-6z"/></svg>
+          <div class="card-meander-bottom" aria-hidden="true"></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-inner">
+          <div class="card-meander-top" aria-hidden="true"></div>
+          <div class="card-roundel">
+            <svg class="laurel" viewBox="0 0 200 200" aria-hidden="true">
+              <g fill="none" stroke="#c9a23a" stroke-width="1.2">
+                <circle cx="100" cy="100" r="92"/>
+                <circle cx="100" cy="100" r="86"/>
+              </g>
+              <g fill="#c9a23a" opacity="0.85">
+                <path d="M100 14 c-3 4 -7 9 -10 12 c2 0 5 1 7 0 c2 -3 4 -7 3 -12z"/>
+                <path d="M100 186 c-3 -4 -7 -9 -10 -12 c2 0 5 -1 7 0 c2 3 4 7 3 12z"/>
+                <path d="M14 100 c4 -3 9 -7 12 -10 c0 2 1 5 0 7 c-3 2 -7 4 -12 3z"/>
+                <path d="M186 100 c-4 -3 -9 -7 -12 -10 c0 2 -1 5 0 7 c3 2 7 4 12 3z"/>
+                <path d="M40 40 c5 1 11 3 14 6 c-2 1 -5 3 -7 3 c-3 -2 -6 -5 -7 -9z"/>
+                <path d="M160 40 c-5 1 -11 3 -14 6 c2 1 5 3 7 3 c3 -2 6 -5 7 -9z"/>
+                <path d="M40 160 c5 -1 11 -3 14 -6 c-2 -1 -5 -3 -7 -3 c-3 2 -6 5 -7 9z"/>
+                <path d="M160 160 c-5 -1 -11 -3 -14 -6 c2 -1 5 -3 7 -3 c3 2 6 5 7 9z"/>
+              </g>
+            </svg>
+            <div class="roundel-text"><strong>III.</strong>Commemo-<br>rative</div>
+          </div>
+          <h3>Commemorative Monuments</h3>
+          <div class="latin">Monumenta Memoriae</div>
+          <p>Triumphal arches, funerary stelae, civic columns, and inscribed cenotaphs are conceived in this department. We collaborate with letter-cutters in Carrara and bronze-founders in Vicenza; every inscription is set in Roman square capitals composed by hand, never by machine. The monument is the slowest of buildings, and we accept no commission of less than four years' patience.</p>
+          <ul class="meta">
+            <li>Director <span>· P. Falconieri</span></li>
+            <li>Studio <span>· Sala dei Disegni III</span></li>
+            <li>Fee <span>· From €74,000</span></li>
+          </ul>
+          <svg class="card-vine" viewBox="0 0 200 200" aria-hidden="true"><path d="M43 11c-2 0-4 0-5 .3-7 .7-14 3-19 8s-8 12-8 21 4 16 10 20c6 4 13 6 21 5 15-.7 33-8 46-18l4-3c4 7 8 15 9 24-7-5-21-11-36 1-22 18-25 13-45-2-3 36 15 55 45 53 0 0-14 4-4 26 6 13 8 20 7 25-13 2-16 8-6 13 45 10 66-27 69-66 45 0 53-32 52-50-8 11-22 11-33 3-10-8-22-16-39-1-2-12-6-22-11-31 19-11 38-14 52-11 5 1 9 4 12 7-9 8-12 26 2 27 19 1 21-15 14-27-5-9-16-13-26-17-17-5-40-1-61 13-5-6-11-10-18-13-7-3-17-6-28-6z"/></svg>
+          <div class="card-meander-bottom" aria-hidden="true"></div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <div class="meander-divider" aria-hidden="true"></div>
+
+  <section class="commissions">
+    <div class="commissions-frame">
+      <h2>Recent Commissions</h2>
+      <div class="sub">Opera Recentiora · MMXXII — MMXXIII</div>
+      <p>The work of the atelier proceeds in the slow measure proper to building. We do not advertise; commissions reach us by recommendation of the magistrates of the cities in which we have already built. In the past two seasons our boards have been principally occupied with two works of public consequence, both undertaken at the invitation of the Soprintendenza and recorded here for the citizen who would know our hand.</p>
+
+      <div class="recent">
+        <div class="recent-item">
+          <h4>Basilica Aurelia · Rebuild Study</h4>
+          <span class="place">Ravenna · MMXXII</span>
+          <p>A measured proposal for the restoration of the lost Basilica Aurelia upon its sixth-century footprint, with new apse, ambo, and a roof of cedar trusses on Corinthian colonnade. Drawings deposited with the Diocesan Archive, March MMXXIII.</p>
+        </div>
+        <div class="recent-item">
+          <h4>Forum of Aquileia · Visitor Pavilion</h4>
+          <span class="place">Aquileia · MMXXIII</span>
+          <p>A small tetrastyle pavilion in Istrian limestone serving the western edge of the archaeological forum, completed for the patronal festival of June MMXXIII. Roof in lead-sheathed timber; floor in opus signinum after the antique.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="frieze">
+    <div class="rosette-band" aria-hidden="true">
+      <span class="rosette"><svg viewBox="0 0 40 40"><g fill="none" stroke="#c9a23a" stroke-width="1.4"><circle cx="20" cy="20" r="14"/><circle cx="20" cy="20" r="6" fill="#c9a23a"/><path d="M20 6 v28 M6 20 h28 M10 10 l20 20 M10 30 l20 -20"/></g></svg></span>
+      <span class="rosette"><svg viewBox="0 0 40 40"><g fill="none" stroke="#c9a23a" stroke-width="1.4"><circle cx="20" cy="20" r="14"/><circle cx="20" cy="20" r="6" fill="#c9a23a"/><path d="M20 6 v28 M6 20 h28 M10 10 l20 20 M10 30 l20 -20"/></g></svg></span>
+      <span class="rosette"><svg viewBox="0 0 40 40"><g fill="none" stroke="#c9a23a" stroke-width="1.4"><circle cx="20" cy="20" r="14"/><circle cx="20" cy="20" r="6" fill="#c9a23a"/><path d="M20 6 v28 M6 20 h28 M10 10 l20 20 M10 30 l20 -20"/></g></svg></span>
+      <span class="rosette"><svg viewBox="0 0 40 40"><g fill="none" stroke="#c9a23a" stroke-width="1.4"><circle cx="20" cy="20" r="14"/><circle cx="20" cy="20" r="6" fill="#c9a23a"/><path d="M20 6 v28 M6 20 h28 M10 10 l20 20 M10 30 l20 -20"/></g></svg></span>
+      <span class="rosette"><svg viewBox="0 0 40 40"><g fill="none" stroke="#c9a23a" stroke-width="1.4"><circle cx="20" cy="20" r="14"/><circle cx="20" cy="20" r="6" fill="#c9a23a"/><path d="M20 6 v28 M6 20 h28 M10 10 l20 20 M10 30 l20 -20"/></g></svg></span>
+      <span class="rosette"><svg viewBox="0 0 40 40"><g fill="none" stroke="#c9a23a" stroke-width="1.4"><circle cx="20" cy="20" r="14"/><circle cx="20" cy="20" r="6" fill="#c9a23a"/><path d="M20 6 v28 M6 20 h28 M10 10 l20 20 M10 30 l20 -20"/></g></svg></span>
+      <span class="rosette"><svg viewBox="0 0 40 40"><g fill="none" stroke="#c9a23a" stroke-width="1.4"><circle cx="20" cy="20" r="14"/><circle cx="20" cy="20" r="6" fill="#c9a23a"/><path d="M20 6 v28 M6 20 h28 M10 10 l20 20 M10 30 l20 -20"/></g></svg></span>
+    </div>
+    <div class="addr"><strong>Atelier Vitruvius</strong> &nbsp;·&nbsp; Via dei Coronari XLVII &nbsp;·&nbsp; Rione Ponte &nbsp;·&nbsp; Roma 00186 &nbsp;·&nbsp; Telephone (+39) 06 6880 4411</div>
+  </div>
+  <div class="footer-meander" aria-hidden="true"></div>
+  <div class="colophon">
+    <div class="text">Atelier Vitrvivs · Romae · MMXXIV</div>
+    <div class="tailpiece" aria-hidden="true">
+      <svg viewBox="0 0 200 40">
+        <g fill="none" stroke="#c9a23a" stroke-width="1.1">
+          <line x1="0" y1="20" x2="70" y2="20"/>
+          <line x1="130" y1="20" x2="200" y2="20"/>
+          <circle cx="100" cy="20" r="6" fill="#a93226" stroke="none"/>
+          <circle cx="100" cy="20" r="11"/>
+          <path d="M76 20 q12 -16 24 0 q12 16 24 0"/>
+          <path d="M76 20 q12 16 24 0 q12 -16 24 0"/>
+          <circle cx="74" cy="20" r="2" fill="#c9a23a" stroke="none"/>
+          <circle cx="126" cy="20" r="2" fill="#c9a23a" stroke="none"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

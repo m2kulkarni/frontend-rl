@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>The Studio — Atelier Saint-Sévrin</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  /* ---------- ARCADE NAVIGATION ---------- */
+  .arcade {
+    padding: 28px 48px 0;
+    border-bottom: 1px solid var(--accent);
+  }
+  .arcade-row {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+    align-items: end;
+  }
+  .arch-link {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    color: var(--primary);
+    position: relative;
+    padding-top: 8px;
+  }
+  .arch-svg {
+    display: block;
+    width: 100%;
+    height: 96px;
+  }
+  .arch-svg path.arch-shape {
+    fill: var(--bg);
+    stroke: var(--primary);
+    stroke-width: 1.4;
+  }
+  .arch-link[aria-current="page"] .arch-svg path.arch-shape {
+    fill: var(--secondary);
+    stroke: var(--secondary);
+  }
+  .arch-link[aria-current="page"] .arch-label {
+    color: var(--bg);
+  }
+  .arch-label {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.14em;
+    font-size: 11px;
+    font-weight: 500;
+    padding-top: 22px;
+  }
+  .arcade-rule {
+    height: 2px;
+    background: var(--accent);
+    margin-top: 6px;
+  }
+  .arcade-rule.thin {
+    height: 1px;
+    margin-top: 2px;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    position: relative;
+    padding: 80px 48px 60px;
+    display: grid;
+    grid-template-columns: 1fr 480px 1fr;
+    gap: 0;
+    align-items: stretch;
+  }
+  .hero-side {
+    border-top: 1px solid var(--ornament);
+    margin-top: 80px;
+    padding-top: 18px;
+    position: relative;
+  }
+  .hero-side.left { padding-right: 32px; text-align: right; }
+  .hero-side.right { padding-left: 32px; }
+  .hero-side .eyebrow {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.22em;
+    font-size: 11px;
+    color: var(--primary);
+    margin-bottom: 8px;
+  }
+  .hero-side p {
+    font-size: 13px;
+    color: var(--text);
+    margin: 0 0 0.6em;
+    max-width: 22em;
+  }
+  .hero-side.left p { margin-left: auto; }
+
+  .hero-arch {
+    position: relative;
+    width: 480px;
+    height: 540px;
+  }
+  .hero-arch svg.arch-frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+  .hero-arch-inner {
+    position: absolute;
+    top: 60px;
+    left: 60px;
+    right: 60px;
+    bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-top: 24px;
+  }
+  .hero-quatrefoil {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 18px;
+  }
+  .hero-quatrefoil svg { width: 100%; height: 100%; }
+  .hero-eyebrow {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.32em;
+    font-size: 12px;
+    color: var(--secondary);
+    margin-bottom: 10px;
+  }
+  .hero-title {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 56px;
+    line-height: 1.02;
+    margin: 0 0 14px;
+    color: var(--primary);
+    letter-spacing: -0.01em;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--secondary);
+  }
+  .hero-rule {
+    width: 60px;
+    height: 1px;
+    background: var(--accent);
+    margin: 14px 0 18px;
+  }
+  .hero-lede {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 17px;
+    line-height: 1.5;
+    color: var(--text);
+    max-width: 22em;
+    margin: 0;
+  }
+  .hero-founded {
+    margin-top: 28px;
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    font-size: 11px;
+    color: var(--primary);
+  }
+  .hero-founded span { color: var(--accent); }
+
+  /* ---------- SECTION HEAD with ornament ---------- */
+  .section {
+    padding: 60px 48px;
+    border-top: 1px solid var(--ornament);
+  }
+  .section-head {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+  .section-head .rule {
+    height: 1px;
+    background: var(--ornament);
+  }
+  .section-head .crown {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-head .crown svg {
+    width: 56px;
+    height: 56px;
+  }
+  .section-head h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 32px;
+    margin: 0;
+    text-align: center;
+    letter-spacing: 0.02em;
+    color: var(--primary);
+  }
+  .section-head .kicker {
+    font-variant: small-caps;
+    letter-spacing: 0.28em;
+    font-size: 11px;
+    color: var(--secondary);
+  }
+
+  /* ---------- HISTORY: drop cap + columns ---------- */
+  .history {
+    display: grid;
+    grid-template-columns: 22em 22em 22em;
+    gap: 56px;
+    justify-content: center;
+  }
+  .history p {
+    margin: 0 0 1em;
+    font-size: 14.5px;
+    line-height: 1.65;
+  }
+  .history p:first-child::first-letter {
+    font-family: var(--font-display), serif;
+    font-size: 64px;
+    line-height: 0.85;
+    float: left;
+    padding: 6px 10px 0 0;
+    color: var(--secondary);
+    font-weight: 500;
+  }
+  .history .marginalia {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--text-emphasis);
+    border-left: 1px solid var(--accent);
+    padding-left: 14px;
+    margin: 24px 0;
+  }
+
+  /* ---------- COMPOSITION ROSTER ---------- */
+  .composition {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 64px;
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+  .composition-aside h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 22px;
+    margin: 0 0 12px;
+    color: var(--primary);
+  }
+  .composition-aside p {
+    font-size: 13.5px;
+    margin: 0 0 1em;
+  }
+  .roster {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--ornament);
+  }
+  .roster li {
+    padding: 16px 18px;
+    border-bottom: 1px solid var(--ornament);
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .roster li:nth-child(odd) { border-right: 1px solid var(--ornament); }
+  .roster .count {
+    font-family: var(--font-display), serif;
+    font-size: 28px;
+    color: var(--secondary);
+    line-height: 1;
+    min-width: 1.2em;
+  }
+  .roster .role {
+    flex: 1;
+    font-family: var(--font-display), serif;
+    font-size: 15px;
+    color: var(--primary);
+  }
+  .roster .role em {
+    display: block;
+    font-style: italic;
+    font-size: 12px;
+    color: var(--text);
+    font-family: var(--font-body), serif;
+    letter-spacing: 0.02em;
+    margin-top: 2px;
+  }
+  .roster .mark {
+    color: var(--accent);
+    font-size: 14px;
+  }
+
+  /* ---------- ARCHITECT CARDS (arch silhouettes) ---------- */
+  .architects {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 56px 64px;
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+  .arch-card {
+    position: relative;
+    padding: 0 24px 32px;
+  }
+  .arch-card-frame {
+    position: relative;
+    height: 200px;
+    margin-bottom: 4px;
+  }
+  .arch-card-frame svg.silhouette {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .arch-card-quatrefoil {
+    position: absolute;
+    top: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 32px;
+    height: 32px;
+  }
+  .arch-card-quatrefoil svg { width: 100%; height: 100%; }
+  .arch-card-name {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 26px;
+    margin: 0;
+    color: var(--primary);
+    text-align: center;
+    letter-spacing: 0.005em;
+  }
+  .arch-card-meta {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--text-emphasis);
+    text-align: center;
+    margin: 6px 0 14px;
+  }
+  .arch-card-rule {
+    width: 40px;
+    height: 1px;
+    background: var(--accent);
+    margin: 0 auto 16px;
+  }
+  .arch-card-bio {
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0 0 14px;
+    max-width: 26em;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .arch-card-papers {
+    border-top: 1px dotted var(--ornament);
+    padding-top: 12px;
+    font-size: 12.5px;
+    max-width: 26em;
+    margin: 0 auto;
+  }
+  .arch-card-papers .label {
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    font-size: 10px;
+    color: var(--secondary);
+    display: block;
+    margin-bottom: 6px;
+  }
+  .arch-card-papers ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .arch-card-papers li {
+    margin-bottom: 4px;
+    font-style: italic;
+    color: var(--text);
+  }
+  .arch-card-papers li::before {
+    content: "❧ ";
+    color: var(--accent);
+    font-style: normal;
+  }
+
+  /* ---------- METHOD STATEMENT ---------- */
+  .method {
+    background: var(--bg);
+    padding: 80px 48px;
+    border-top: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+  }
+  .method-inner {
+    max-width: 880px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .method blockquote {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 30px;
+    line-height: 1.35;
+    color: var(--primary);
+    margin: 0 0 24px;
+    letter-spacing: 0.005em;
+  }
+  .method blockquote .accent { color: var(--secondary); font-style: normal; }
+  .method-cite {
+    font-variant: small-caps;
+    letter-spacing: 0.24em;
+    font-size: 11px;
+    color: var(--accent);
+    margin-bottom: 32px;
+  }
+  .method-prose {
+    display: grid;
+    grid-template-columns: 22em 22em;
+    gap: 48px;
+    justify-content: center;
+    text-align: left;
+  }
+  .method-prose p {
+    font-size: 14px;
+    margin: 0 0 1em;
+  }
+  .method-prose .step {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.2em;
+    font-size: 11px;
+    color: var(--secondary);
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    margin-top: 80px;
+    position: relative;
+  }
+  .seal {
+    position: absolute;
+    top: -48px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 96px;
+    height: 96px;
+    background: var(--bg);
+    border-radius: 50%;
+    padding: 12px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .seal svg {
+    width: 100%;
+    height: 100%;
+    fill: var(--primary);
+  }
+  .seal::before {
+    content: "";
+    position: absolute;
+    inset: 4px;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+  }
+  .heraldic-band {
+    height: 96px;
+    background-color: var(--bg);
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 600 600'><g transform='translate(300,300)scale(0.87)rotate(45)'><circle cx='-195.1614716' r='163'/><circle cx='195.1614716' r='163'/><circle cy='195.1614716' r='163'/><circle cy='-195.1614716' r='163'/><rect x='-232' y='-232' width='464' height='464'/><g fill='%23f4ecd8'><circle cx='-195.1614716' r='157'/><circle cx='195.1614716' r='157'/><circle cy='195.1614716' r='157'/><circle cy='-195.1614716' r='157'/><rect x='-226' y='-226' width='452' height='452'/></g><circle cx='-195.1614716' r='144'/><circle cx='195.1614716' r='144'/><circle cy='195.1614716' r='144'/><circle cy='-195.1614716' r='144'/><rect x='-213' y='-213' width='426' height='426'/><g fill='%23f4ecd8'><circle cx='-195.1614716' r='138'/><circle cx='195.1614716' r='138'/><circle cy='195.1614716' r='138'/><circle cy='-195.1614716' r='138'/><rect x='-207' y='-207' width='414' height='414'/></g></g></svg>");
+    background-size: 80px 80px;
+    background-repeat: repeat;
+  }
+  .footer-text {
+    background: var(--bg);
+    padding: 32px 48px 36px;
+    text-align: center;
+  }
+  .footer-text .addr {
+    font-family: var(--font-display), serif;
+    font-size: 15px;
+    color: var(--primary);
+    margin: 0 0 6px;
+  }
+  .footer-text .tel {
+    font-size: 13px;
+    color: var(--text);
+    margin: 0 0 14px;
+  }
+  .footer-text .attr {
+    font-variant: small-caps;
+    letter-spacing: 0.24em;
+    font-size: 10px;
+    color: var(--secondary);
+    margin: 0;
+  }
+  .footer-text .attr span { color: var(--accent); }
+
+</style>
+</head>
+<body>
+
+<!-- ============== ARCADE NAV ============== -->
+<header class="arcade" role="banner">
+  <nav class="arcade-row" aria-label="Primary">
+    <a class="arch-link" href="page-1.html">
+      <svg class="arch-svg" viewBox="0 0 100 96" preserveAspectRatio="none" aria-hidden="true">
+        <path class="arch-shape" d="M 6 96 L 6 50 Q 6 6 50 6 Q 94 6 94 50 L 94 96 Z"/>
+      </svg>
+      <span class="arch-label">Atelier</span>
+    </a>
+    <a class="arch-link" href="page-2.html">
+      <svg class="arch-svg" viewBox="0 0 100 96" preserveAspectRatio="none" aria-hidden="true">
+        <path class="arch-shape" d="M 6 96 L 6 50 Q 6 6 50 6 Q 94 6 94 50 L 94 96 Z"/>
+      </svg>
+      <span class="arch-label">Works</span>
+    </a>
+    <a class="arch-link" href="page-3.html" aria-current="page">
+      <svg class="arch-svg" viewBox="0 0 100 96" preserveAspectRatio="none" aria-hidden="true">
+        <path class="arch-shape" d="M 6 96 L 6 50 Q 6 6 50 6 Q 94 6 94 50 L 94 96 Z"/>
+      </svg>
+      <span class="arch-label">The Studio</span>
+    </a>
+    <a class="arch-link" href="page-4.html">
+      <svg class="arch-svg" viewBox="0 0 100 96" preserveAspectRatio="none" aria-hidden="true">
+        <path class="arch-shape" d="M 6 96 L 6 50 Q 6 6 50 6 Q 94 6 94 50 L 94 96 Z"/>
+      </svg>
+      <span class="arch-label">Method</span>
+    </a>
+    <a class="arch-link" href="page-5.html">
+      <svg class="arch-svg" viewBox="0 0 100 96" preserveAspectRatio="none" aria-hidden="true">
+        <path class="arch-shape" d="M 6 96 L 6 50 Q 6 6 50 6 Q 94 6 94 50 L 94 96 Z"/>
+      </svg>
+      <span class="arch-label">Journal</span>
+    </a>
+    <a class="arch-link" href="page-6.html">
+      <svg class="arch-svg" viewBox="0 0 100 96" preserveAspectRatio="none" aria-hidden="true">
+        <path class="arch-shape" d="M 6 96 L 6 50 Q 6 6 50 6 Q 94 6 94 50 L 94 96 Z"/>
+      </svg>
+      <span class="arch-label">Commissions</span>
+    </a>
+    <a class="arch-link" href="page-6.html#contact">
+      <svg class="arch-svg" viewBox="0 0 100 96" preserveAspectRatio="none" aria-hidden="true">
+        <path class="arch-shape" d="M 6 96 L 6 50 Q 6 6 50 6 Q 94 6 94 50 L 94 96 Z"/>
+      </svg>
+      <span class="arch-label">Contact</span>
+    </a>
+  </nav>
+  <div class="arcade-rule"></div>
+  <div class="arcade-rule thin" style="background: var(--ornament); opacity: 0.4;"></div>
+</header>
+
+<!-- ============== HERO ============== -->
+<section class="hero">
+  <div class="hero-side left">
+    <div class="eyebrow">III. The Studio</div>
+    <p>Eleven hands at the long oak table on Rue de Vesle, drawing what stone has already half-decided.</p>
+    <p>Reims · Paris · Senlis</p>
+  </div>
+
+  <div class="hero-arch">
+    <svg class="arch-frame" viewBox="0 0 500 550" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <g transform="translate(-147.13944,-244.9375)" stroke="#0a0a0a" stroke-width="3.125" fill="none" stroke-linecap="round">
+        <g transform="translate(8.199085,-11.874106)">
+          <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+          <path d="m 250,430.58 24.75248,58.41585"/>
+          <path d="m 347.0297,342.46119 41.58416,23.76238 0.9901,35.64356"/>
+          <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+          <g transform="matrix(-1,0,0,1,777.88071,-0.2972181)">
+            <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+            <path d="m 250,430.58 24.75248,58.41585"/>
+            <path d="m 347.0297,342.46119 41.58416,23.76238 0.9901,35.64356"/>
+            <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+          </g>
+        </g>
+      </g>
+    </svg>
+    <div class="hero-arch-inner">
+      <div class="hero-quatrefoil">
+        <svg viewBox="0 0 600 600" aria-hidden="true">
+          <g transform="translate(300,300)scale(0.6)rotate(45)" fill="#1e3a5f">
+            <circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/>
+            <circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/>
+            <rect x="-232" y="-232" width="464" height="464"/>
+            <g fill="#f4ecd8">
+              <circle cx="-195.16" r="138"/><circle cx="195.16" r="138"/>
+              <circle cy="195.16" r="138"/><circle cy="-195.16" r="138"/>
+              <rect x="-207" y="-207" width="414" height="414"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <div class="hero-eyebrow">A Practice of Stone &amp; Sacred Space</div>
+      <h1 class="hero-title">The <em>Atelier</em><br>at Rue de Vesle</h1>
+      <div class="hero-rule"></div>
+      <p class="hero-lede">A studio of eleven, at work between cathedral fabric and civic order — drawing first, modelling after.</p>
+      <div class="hero-founded">Founded MCMLXXXVI &nbsp;<span>·</span>&nbsp; Reims</div>
+    </div>
+  </div>
+
+  <div class="hero-side right">
+    <div class="eyebrow">Service des Monuments</div>
+    <p>Hélène Vaucresson, DPLG Versailles 1981, ten years at the Service des Monuments Historiques before founding the practice.</p>
+    <p>Diplômés et compagnons.</p>
+  </div>
+</section>
+
+<!-- ============== HISTORY ============== -->
+<section class="section" aria-labelledby="history-h">
+  <div class="section-head">
+    <div class="rule"></div>
+    <div class="crown">
+      <div class="kicker">Chapter I</div>
+      <svg viewBox="0 0 600 600" aria-hidden="true">
+        <g transform="translate(300,300)scale(0.78)rotate(45)" fill="#0a0a0a">
+          <circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/>
+          <circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/>
+          <rect x="-232" y="-232" width="464" height="464"/>
+          <g fill="#f4ecd8">
+            <circle cx="-195.16" r="144"/><circle cx="195.16" r="144"/>
+            <circle cy="195.16" r="144"/><circle cy="-195.16" r="144"/>
+            <rect x="-213" y="-213" width="426" height="426"/>
+          </g>
+          <circle cx="-195.16" r="60" fill="#c9a23a"/><circle cx="195.16" r="60" fill="#c9a23a"/>
+          <circle cy="195.16" r="60" fill="#c9a23a"/><circle cy="-195.16" r="60" fill="#c9a23a"/>
+        </g>
+      </svg>
+      <h2 id="history-h">A Brief History of the House</h2>
+    </div>
+    <div class="rule"></div>
+  </div>
+
+  <div class="history">
+    <div>
+      <p>The atelier was founded in the spring of 1986 by Hélène Vaucresson, who had taken her diploma from the École de Versailles in 1981 and spent the intervening decade in service to the Monuments Historiques — three years at Senlis under Pierre Lablaude, four at the central bureau in Paris, and three on the long campaign at Saint-Remi.</p>
+      <p>Her decision to leave the State and open a small bureau on Rue de Vesle was, at the time, regarded as eccentric. The practice was deliberately situated within a half-hour's walk of the cathedral. Her first commission, the consolidation of the south transept window of Notre-Dame de l'Épine, arrived within four months.</p>
+    </div>
+
+    <div>
+      <p class="marginalia">"To work upon a cathedral is to enter a conversation already nine centuries old. One does not begin; one continues." — H.V., <em>Carnet d'atelier</em>, 1992.</p>
+      <p>For its first decade the atelier worked almost exclusively on stone — vaulting, tracery, the reset of fallen voussoirs after the storms of '99. The historian Mathilde Renouard joined in 1994; the resident stone-cutters Joachim Ferré and Anselme Doré followed in 1997 and 2003 respectively, both trained at the Compagnons du Devoir.</p>
+      <p>Civic and contemporary commissions entered the practice from 2008, beginning with the new mediathèque at Châlons. The studio today does not regard these as a departure but as the same discipline applied to younger walls.</p>
+    </div>
+
+    <div>
+      <p>Since 2011 the practice has been led collegially by four senior architects: Vaucresson herself, Jean-Baptiste Coursier, Inès Mahieu, and Théo Brassart. Three associates — Camille Lavergne, Olivier Pinson, and Naïma El Ghali — sit beneath them. Two stone-cutters work in residence; one historian, one accountant complete the household.</p>
+      <p>The atelier accepts at most six commissions in any given year. Three of those are conserved for sacred or heritage fabric. The remaining three may be civic, scholarly, or domestic, provided the work bears upon the older question.</p>
+      <p>The studio is not a partnership in the legal sense. It is, in Vaucresson's phrase, <em>une maison</em> — a house, with rooms set aside for those who live in it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============== COMPOSITION / ROSTER ============== -->
+<section class="section" aria-labelledby="comp-h">
+  <div class="section-head">
+    <div class="rule"></div>
+    <div class="crown">
+      <div class="kicker">Chapter II</div>
+      <svg viewBox="0 0 600 600" aria-hidden="true">
+        <g transform="translate(300,300)scale(0.78)rotate(45)" fill="#0a0a0a">
+          <circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/>
+          <circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/>
+          <rect x="-232" y="-232" width="464" height="464"/>
+          <g fill="#f4ecd8">
+            <circle cx="-195.16" r="144"/><circle cx="195.16" r="144"/>
+            <circle cy="195.16" r="144"/><circle cy="-195.16" r="144"/>
+            <rect x="-213" y="-213" width="426" height="426"/>
+          </g>
+        </g>
+      </svg>
+      <h2 id="comp-h">The Present Composition</h2>
+    </div>
+    <div class="rule"></div>
+  </div>
+
+  <div class="composition">
+    <aside class="composition-aside">
+      <h3>Eleven, including the cat</h3>
+      <p>The studio numbers eleven souls — four senior architects, three associates, two stone-cutters in residence, one historian, and one accountant. A black cat, Athanase, has been on the books in an unofficial capacity since 2014.</p>
+      <p>The atelier occupies the first and second floors of a 17th-century hôtel particulier on Rue de Vesle in central Reims. The drawing room is on the second floor, the stone yard at the rear court.</p>
+    </aside>
+
+    <ul class="roster">
+      <li><span class="count">IV</span><span class="role">Senior Architects<em>Vaucresson · Coursier · Mahieu · Brassart</em></span><span class="mark">✦</span></li>
+      <li><span class="count">III</span><span class="role">Associates<em>Lavergne · Pinson · El Ghali</em></span><span class="mark">✦</span></li>
+      <li><span class="count">II</span><span class="role">Stone-cutters in Residence<em>Ferré · Doré</em></span><span class="mark">✦</span></li>
+      <li><span class="count">I</span><span class="role">Historian<em>Mathilde Renouard, Sorbonne</em></span><span class="mark">✦</span></li>
+      <li><span class="count">I</span><span class="role">Accountant<em>Pascal Vermeil</em></span><span class="mark">✦</span></li>
+      <li><span class="count">I</span><span class="role">Atelier Cat<em>Athanase, in service since 2014</em></span><span class="mark">✦</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============== ARCHITECT CARDS ============== -->
+<section class="section" aria-labelledby="arch-h">
+  <div class="section-head">
+    <div class="rule"></div>
+    <div class="crown">
+      <div class="kicker">Chapter III</div>
+      <svg viewBox="0 0 600 600" aria-hidden="true">
+        <g transform="translate(300,300)scale(0.78)rotate(45)" fill="#0a0a0a">
+          <circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/>
+          <circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/>
+          <rect x="-232" y="-232" width="464" height="464"/>
+          <g fill="#f4ecd8">
+            <circle cx="-195.16" r="144"/><circle cx="195.16" r="144"/>
+            <circle cy="195.16" r="144"/><circle cy="-195.16" r="144"/>
+            <rect x="-213" y="-213" width="426" height="426"/>
+          </g>
+          <circle cx="-195.16" r="60" fill="#1e3a5f"/><circle cx="195.16" r="60" fill="#1e3a5f"/>
+          <circle cy="195.16" r="60" fill="#1e3a5f"/><circle cy="-195.16" r="60" fill="#1e3a5f"/>
+        </g>
+      </svg>
+      <h2 id="arch-h">The Senior Architects</h2>
+    </div>
+    <div class="rule"></div>
+  </div>
+
+  <div class="architects">
+
+    <article class="arch-card">
+      <div class="arch-card-frame">
+        <svg class="silhouette" viewBox="0 0 200 200" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M 20 200 L 20 110 Q 20 20 100 20 Q 180 20 180 110 L 180 200 Z" fill="none" stroke="#0a0a0a" stroke-width="1.2"/>
+          <path d="M 30 200 L 30 112 Q 30 30 100 30 Q 170 30 170 112 L 170 200" fill="none" stroke="#c9a23a" stroke-width="0.7"/>
+          <path d="M 100 30 L 100 200" stroke="#0a0a0a" stroke-width="0.4" stroke-dasharray="2 3"/>
+        </svg>
+        <div class="arch-card-quatrefoil">
+          <svg viewBox="0 0 600 600" aria-hidden="true">
+            <g transform="translate(300,300)scale(0.6)rotate(45)" fill="#1e3a5f">
+              <circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/>
+              <circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/>
+              <rect x="-232" y="-232" width="464" height="464"/>
+              <g fill="#f4ecd8">
+                <circle cx="-195.16" r="138"/><circle cx="195.16" r="138"/>
+                <circle cy="195.16" r="138"/><circle cy="-195.16" r="138"/>
+                <rect x="-207" y="-207" width="414" height="414"/>
+              </g>
+            </g>
+          </svg>
+        </div>
+      </div>
+      <h3 class="arch-card-name">Hélène Vaucresson</h3>
+      <p class="arch-card-meta">Founder &nbsp;·&nbsp; DPLG Versailles, 1981 &nbsp;·&nbsp; Stone fabric, Gothic vaulting</p>
+      <div class="arch-card-rule"></div>
+      <p class="arch-card-bio">A decade at the Service des Monuments Historiques, including the long campaign at Saint-Remi (1983–86), preceded the founding of the atelier. Specialism: the consolidation and rebedding of high-Gothic vault webs and flying buttresses. Drawing master to all who pass through the studio.</p>
+      <div class="arch-card-papers">
+        <span class="label">Selected Papers</span>
+        <ul>
+          <li>"On the Re-Setting of Voussoirs", Bulletin Monumental, 1994</li>
+          <li>"Notre-Dame de l'Épine: South Transept", AMH, 2001</li>
+          <li>"Carnet d'atelier I–III" (privately printed, 1992–2018)</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="arch-card">
+      <div class="arch-card-frame">
+        <svg class="silhouette" viewBox="0 0 200 200" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M 20 200 L 20 110 Q 20 20 100 20 Q 180 20 180 110 L 180 200 Z" fill="none" stroke="#0a0a0a" stroke-width="1.2"/>
+          <path d="M 30 200 L 30 112 Q 30 30 100 30 Q 170 30 170 112 L 170 200" fill="none" stroke="#c9a23a" stroke-width="0.7"/>
+          <path d="M 100 30 L 100 200" stroke="#0a0a0a" stroke-width="0.4" stroke-dasharray="2 3"/>
+        </svg>
+        <div class="arch-card-quatrefoil">
+          <svg viewBox="0 0 600 600" aria-hidden="true">
+            <g transform="translate(300,300)scale(0.6)rotate(45)" fill="#1e3a5f">
+              <circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/>
+              <circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/>
+              <rect x="-232" y="-232" width="464" height="464"/>
+              <g fill="#f4ecd8">
+                <circle cx="-195.16" r="138"/><circle cx="195.16" r="138"/>
+                <circle cy="195.16" r="138"/><circle cy="-195.16" r="138"/>
+                <rect x="-207" y="-207" width="414" height="414"/>
+              </g>
+            </g>
+          </svg>
+        </div>
+      </div>
+      <h3 class="arch-card-name">Jean-Baptiste Coursier</h3>
+      <p class="arch-card-meta">Senior Architect &nbsp;·&nbsp; HMONP Belleville, 1996 &nbsp;·&nbsp; Civic commissions, mediathèques</p>
+      <div class="arch-card-rule"></div>
+      <p class="arch-card-bio">Joined the practice in 2002 from the Atelier Castro-Denissof. Coursier directs the studio's contemporary civic work — the Châlons mediathèque (2011), the Senlis tribunal extension (2017), the Reims music conservatoire (in progress, completion expected 2026). Reads Pugin every winter.</p>
+      <div class="arch-card-papers">
+        <span class="label">Selected Papers</span>
+        <ul>
+          <li>"The Civic Arch: Notes from Châlons", D'A, 2013</li>
+          <li>"Stone in Public Buildings, 1990–2020", Le Moniteur, 2021</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="arch-card">
+      <div class="arch-card-frame">
+        <svg class="silhouette" viewBox="0 0 200 200" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M 20 200 L 20 110 Q 20 20 100 20 Q 180 20 180 110 L 180 200 Z" fill="none" stroke="#0a0a0a" stroke-width="1.2"/>
+          <path d="M 30 200 L 30 112 Q 30 30 100 30 Q 170 30 170 112 L 170 200" fill="none" stroke="#c9a23a" stroke-width="0.7"/>
+          <path d="M 100 30 L 100 200" stroke="#0a0a0a" stroke-width="0.4" stroke-dasharray="2 3"/>
+        </svg>
+        <div class="arch-card-quatrefoil">
+          <svg viewBox="0 0 600 600" aria-hidden="true">
+            <g transform="translate(300,300)scale(0.6)rotate(45)" fill="#1e3a5f">
+              <circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/>
+              <circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/>
+              <rect x="-232" y="-232" width="464" height="464"/>
+              <g fill="#f4ecd8">
+                <circle cx="-195.16" r="138"/><circle cx="195.16" r="138"/>
+                <circle cy="195.16" r="138"/><circle cy="-195.16" r="138"/>
+                <rect x="-207" y="-207" width="414" height="414"/>
+              </g>
+            </g>
+          </svg>
+        </div>
+      </div>
+      <h3 class="arch-card-name">Inès Mahieu</h3>
+      <p class="arch-card-meta">Senior Architect &nbsp;·&nbsp; ENSA Paris-Malaquais, 1999 &nbsp;·&nbsp; Glazing &amp; daylight, sacred interiors</p>
+      <div class="arch-card-rule"></div>
+      <p class="arch-card-bio">Trained additionally at the CRMH workshop in Champs-sur-Marne (DSA Patrimoine, 2002). Mahieu is the studio's lead on stained-glass campaigns and the geometry of daylight. Directed the cleaning and re-leading of the western lancets at Saint-Remi (2015–19) and the new dalles de verre programme at the chapelle de Sept-Saulx.</p>
+      <div class="arch-card-papers">
+        <span class="label">Selected Papers</span>
+        <ul>
+          <li>"Daylight in the Romanesque Choir", Cahiers de Saint-Michel, 2016</li>
+          <li>"Re-Leading: A Manual for Practitioners" (co-authored), 2020</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="arch-card">
+      <div class="arch-card-frame">
+        <svg class="silhouette" viewBox="0 0 200 200" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M 20 200 L 20 110 Q 20 20 100 20 Q 180 20 180 110 L 180 200 Z" fill="none" stroke="#0a0a0a" stroke-width="1.2"/>
+          <path d="M 30 200 L 30 112 Q 30 30 100 30 Q 170 30 170 112 L 170 200" fill="none" stroke="#c9a23a" stroke-width="0.7"/>
+          <path d="M 100 30 L 100 200" stroke="#0a0a0a" stroke-width="0.4" stroke-dasharray="2 3"/>
+        </svg>
+        <div class="arch-card-quatrefoil">
+          <svg viewBox="0 0 600 600" aria-hidden="true">
+            <g transform="translate(300,300)scale(0.6)rotate(45)" fill="#1e3a5f">
+              <circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/>
+              <circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/>
+              <rect x="-232" y="-232" width="464" height="464"/>
+              <g fill="#f4ecd8">
+                <circle cx="-195.16" r="138"/><circle cx="195.16" r="138"/>
+                <circle cy="195.16" r="138"/><circle cy="-195.16" r="138"/>
+                <rect x="-207" y="-207" width="414" height="414"/>
+              </g>
+            </g>
+          </svg>
+        </div>
+      </div>
+      <h3 class="arch-card-name">Théo Brassart</h3>
+      <p class="arch-card-meta">Senior Architect &nbsp;·&nbsp; ENSA Strasbourg, 2004 &nbsp;·&nbsp; Survey, photogrammetry, digital model</p>
+      <div class="arch-card-rule"></div>
+      <p class="arch-card-bio">Joined in 2009. Brassart oversees the survey department: laser scanning, photogrammetry, and the construction of the studio's three-dimensional models from the hand-measured drawings. Holds that the digital model exists to confirm the eye, not to replace it. Lectures at ENSA Nancy each spring.</p>
+      <div class="arch-card-papers">
+        <span class="label">Selected Papers</span>
+        <ul>
+          <li>"Measured Drawing in the Age of the Scanner", Architecture &amp; Patrimoine, 2018</li>
+          <li>"Five Notes on Tolerance", privately circulated, 2022</li>
+        </ul>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============== METHOD STATEMENT ============== -->
+<section class="method" aria-labelledby="method-h">
+  <div class="method-inner">
+    <div class="section-head" style="margin-bottom: 36px;">
+      <div class="rule"></div>
+      <div class="crown">
+        <div class="kicker">Chapter IV</div>
+        <svg viewBox="0 0 600 600" width="48" height="48" aria-hidden="true">
+          <g transform="translate(300,300)scale(0.78)rotate(45)" fill="#c9a23a">
+            <circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/>
+            <circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/>
+            <rect x="-232" y="-232" width="464" height="464"/>
+            <g fill="#f4ecd8">
+              <circle cx="-195.16" r="144"/><circle cx="195.16" r="144"/>
+              <circle cy="195.16" r="144"/><circle cy="-195.16" r="144"/>
+              <rect x="-213" y="-213" width="426" height="426"/>
+            </g>
+            <circle r="80" fill="#1e3a5f"/>
+          </g>
+        </svg>
+        <h2 id="method-h">On Working Method</h2>
+      </div>
+      <div class="rule"></div>
+    </div>
+
+    <blockquote>
+      "Measured drawing first.<br>
+      <span class="accent">Digital model second.</span><br>
+      Always."
+    </blockquote>
+    <div class="method-cite">— House Rule of the Atelier, 1986 / 2011</div>
+
+    <div class="method-prose">
+      <div>
+        <span class="step">i. The Hand</span>
+        <p>Every commission begins with the survey: the building measured by hand, in pencil, on cartridge paper at 1:50 or 1:20. The senior architect of the project goes onto the scaffold with two assistants, a folding rule, and a plumb-line. No commission proceeds until this drawing is complete and signed at the bottom.</p>
+        <p>The hand-survey is filed in the studio's drawing-room, in flat oak boxes ordered by year. There are now thirty-eight such boxes.</p>
+      </div>
+      <div>
+        <span class="step">ii. The Model</span>
+        <p>The hand-survey is then translated into a digital model — not before. Brassart's department photographs and laser-scans only after the pencil drawing is in. The model is used for tolerance-checking, for fabrication drawings sent to the stone yard, and for coordination with engineers. It is not used to think with.</p>
+        <p>This sequence is the single non-negotiable rule of the practice. It is older than any of the partners. It will, we hope, outlast them.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FOOTER ============== -->
+<footer>
+  <div class="seal" aria-hidden="true">
+    <svg viewBox="0 0 592 592" xmlns="http://www.w3.org/2000/svg">
+      <path transform="translate(-4,-4)scale(0.15,0.15)" d="M1778.9,3200A120.9263,120.9263 0 0,1 1657.97,3320.93A120.9263,120.9263 0 0,1 1537.04,3200 A221.5096,221.5096 0 0,0 1456.32,3371.02A221.5096,221.5096 0 0,0 1677.83,3592.53A221.5096,221.5096 0 0,0 1818.61,3542.03 A362.779,362.779 0 0,0 2000,3856.21A362.779,362.779 0 0,0 2181.39,3542.03 A221.5096,221.5096 0 0,0 2322.17,3592.53A221.5096,221.5096 0 0,0 2543.68,3371.02A221.5096,221.5096 0 0,0 2462.96,3200 A120.9263,120.9263 0 0,1 2342.03,3320.93A120.9263,120.9263 0 0,1 2221.1,3200V2221.1H3200 A120.9263,120.9263 0 0,1 3320.93,2342.03A120.9263,120.9263 0 0,1 3200,2462.96 A221.5096,221.5096 0 0,0 3371.02,2543.68A221.5096,221.5096 0 0,0 3592.53,2322.17A221.5096,221.5096 0 0,0 3542.03,2181.39 A362.779,362.779 0 0,0 3856.21,2000A362.779,362.779 0 0,0 3542.03,1818.61 A221.5096,221.5096 0 0,0 3592.53,1677.83A221.5096,221.5096 0 0,0 3371.02,1456.32A221.5096,221.5096 0 0,0 3200,1537.04 A120.9263,120.9263 0 0,1 3320.93,1657.97A120.9263,120.9263 0 0,1 3200,1778.9H2221.1V800 A120.9263,120.9263 0 0,1 2342.03,679.073A120.9263,120.9263 0 0,1 2462.96,800 A221.5096,221.5096 0 0,0 2543.68,628.984A221.5096,221.5096 0 0,0 2322.17,407.475A221.5096,221.5096 0 0,0 2181.39,457.969 A362.779,362.779 0 0,0 2000,143.793A362.779,362.779 0 0,0 1818.61,457.969 A221.5096,221.5096 0 0,0 1677.83,407.475A221.5096,221.5096 0 0,0 1456.32,628.984A221.5096,221.5096 0 0,0 1537.04,800 A120.9263,120.9263 0 0,1 1657.97,679.073A120.9263,120.9263 0 0,1 1778.9,800V1778.9H800 A120.9263,120.9263 0 0,1 679.073,1657.97A120.9263,120.9263 0 0,1 800,1537.04 A221.5096,221.5096 0 0,0 628.984,1456.32A221.5096,221.5096 0 0,0 407.475,1677.83A221.5096,221.5096 0 0,0 457.969,1818.61 A362.779,362.779 0 0,0 143.793,2000A362.779,362.779 0 0,0 457.969,2181.39 A221.5096,221.5096 0 0,0 407.475,2322.17A221.5096,221.5096 0 0,0 628.984,2543.68A221.5096,221.5096 0 0,0 800,2462.96 A120.9263,120.9263 0 0,1 679.073,2342.03A120.9263,120.9263 0 0,1 800,2221.1H1778.9Z"/>
+    </svg>
+  </div>
+  <div class="heraldic-band" role="presentation"></div>
+  <div class="footer-text">
+    <p class="addr">Atelier Saint-Sévrin &nbsp;·&nbsp; 14, Rue de Vesle &nbsp;·&nbsp; 51100 Reims, France</p>
+    <p class="tel">+33 (0)3 26 47 18 92 &nbsp;·&nbsp; bureau@saint-sevrin.fr</p>
+    <p class="attr">Founded MCMLXXXVI <span>·</span> Drawn, Cut &amp; Set in Reims <span>·</span> All Stone Bears Witness</p>
+  </div>
+</footer>
+
+</body>
+</html>

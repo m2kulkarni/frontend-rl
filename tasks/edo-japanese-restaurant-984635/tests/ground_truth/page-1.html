@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Kiritsubo — Ryōtei of the Kanda Riverbank</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  html, body { background: var(--bg); color: var(--text); margin: 0; padding: 0; font-family: var(--font-body), serif; }
+  body { min-height: 100vh; position: relative; overflow-x: hidden; }
+
+  /* Page frame */
+  .page {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 48px 72px 0 72px;
+    position: relative;
+  }
+
+  /* Top bar: kamon top-left, nav top-right */
+  .topbar {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    min-height: 96px;
+    margin-bottom: 64px;
+  }
+  .housemark {
+    width: 64px; height: 64px;
+    display: block;
+    opacity: 0.92;
+  }
+  .housemark svg { width: 100%; height: 100%; display: block; }
+
+  nav.primary {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0;
+  }
+  nav.primary a {
+    font-family: var(--font-body), serif;
+    font-variant: small-caps;
+    font-size: 11.5px;
+    letter-spacing: 0.28em;
+    color: var(--text);
+    text-decoration: none;
+    padding: 0 18px;
+    border-right: 1px solid rgba(12,12,12,0.55);
+    line-height: 1;
+  }
+  nav.primary a:last-child { border-right: none; padding-right: 0; }
+  nav.primary a[aria-current="page"] {
+    color: var(--secondary);
+  }
+  nav.primary a:hover { color: var(--primary); }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 560px;
+    margin-bottom: 120px;
+  }
+  .hero-left {
+    /* deliberate negative space — kraft field */
+    position: relative;
+  }
+  .hero-left .seal {
+    position: absolute;
+    top: 32px;
+    left: 8px;
+    width: 110px; height: 110px;
+    opacity: 0.85;
+  }
+  .hero-left .seal svg { width: 100%; height: 100%; display: block; }
+
+  .hero-right {
+    position: relative;
+    padding-top: 24px;
+  }
+  .wave-band {
+    position: absolute;
+    top: 60px;
+    right: -72px;
+    left: -40px;
+    height: 220px;
+    overflow: hidden;
+    opacity: 0.13;
+    pointer-events: none;
+  }
+  .wave-band svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .hero-title {
+    position: relative;
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 132px;
+    line-height: 0.92;
+    color: var(--primary);
+    margin: 40px 0 0 0;
+    letter-spacing: -0.01em;
+  }
+  .hero-title .kanji {
+    display: block;
+    font-size: 92px;
+    color: var(--ornament);
+    margin-bottom: 18px;
+    letter-spacing: 0.18em;
+  }
+  .hero-sub {
+    position: relative;
+    font-family: var(--font-body), serif;
+    font-size: 14px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin-top: 28px;
+    padding-left: 4px;
+  }
+  .hero-sub .accent {
+    color: var(--secondary);
+  }
+
+  .pull-quote {
+    position: absolute;
+    bottom: -40px;
+    left: 8%;
+    width: 44%;
+    font-family: var(--font-display), serif;
+    font-size: 26px;
+    line-height: 1.5;
+    color: var(--ornament);
+    border-top: 1px solid var(--ornament);
+    padding-top: 18px;
+  }
+  .pull-quote::before {
+    content: "「";
+    color: var(--secondary);
+    font-size: 32px;
+  }
+  .pull-quote::after {
+    content: "」";
+    color: var(--secondary);
+    font-size: 32px;
+  }
+  .pull-quote .attr {
+    display: block;
+    font-family: var(--font-body), serif;
+    font-size: 12px;
+    letter-spacing: 0.24em;
+    margin-top: 14px;
+    color: var(--text);
+    text-transform: uppercase;
+  }
+
+  /* Three passages */
+  .passages {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 36px;
+    margin-bottom: 96px;
+    position: relative;
+  }
+  .passages::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: -44px;
+    left: 0;
+    width: 64px;
+    height: 1px;
+    background: var(--ornament);
+  }
+
+  .card {
+    position: relative;
+    background: var(--surface);
+    padding: 48px 36px 64px 36px;
+    border-top: 1px solid var(--ornament);
+  }
+  .card .num {
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.4em;
+    color: var(--secondary);
+    margin-bottom: 18px;
+    display: block;
+  }
+  .card h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 1.2;
+    margin: 0 0 24px 0;
+    color: var(--primary);
+  }
+  .card h2 .ja {
+    display: block;
+    font-size: 18px;
+    color: var(--ornament);
+    letter-spacing: 0.16em;
+    margin-bottom: 6px;
+  }
+  .card p {
+    font-size: 14.5px;
+    line-height: 1.85;
+    margin: 0;
+    color: var(--text);
+  }
+  .card .plum {
+    position: absolute;
+    right: 18px; bottom: 18px;
+    width: 28px; height: 28px;
+    opacity: 0.7;
+  }
+  .card .plum svg { width: 100%; height: 100%; display: block; }
+
+  /* Reservation CTA */
+  .reserve-block {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 64px;
+    align-items: end;
+    margin-bottom: 120px;
+    position: relative;
+    padding-top: 80px;
+  }
+  .reserve-block::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 280px;
+    height: 1px;
+    background: var(--ornament);
+  }
+  .divider-mark {
+    position: absolute;
+    top: -22px; left: 0;
+    width: 44px; height: 44px;
+    background: var(--bg);
+    padding: 0 8px;
+    opacity: 0.7;
+  }
+  .divider-mark svg { width: 100%; height: 100%; display: block; }
+
+  .reserve-left h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 44px;
+    line-height: 1.15;
+    margin: 0 0 18px 0;
+    color: var(--primary);
+  }
+  .reserve-left h3 .small {
+    display: block;
+    font-size: 16px;
+    letter-spacing: 0.32em;
+    color: var(--secondary);
+    margin-bottom: 14px;
+    text-transform: uppercase;
+    font-family: var(--font-body), serif;
+  }
+  .reserve-right p {
+    font-size: 15px;
+    line-height: 1.85;
+    margin: 0 0 22px 0;
+  }
+  .reserve-right .price {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    color: var(--ornament);
+    margin: 18px 0 28px 0;
+    letter-spacing: 0.04em;
+  }
+  .reserve-right .price em {
+    font-style: normal;
+    color: var(--secondary);
+    margin-right: 14px;
+  }
+  .reserve-cta {
+    display: inline-block;
+    font-family: var(--font-body), serif;
+    font-size: 12px;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: var(--text);
+    text-decoration: none;
+    border: 1px solid var(--ornament);
+    padding: 16px 32px;
+    background: transparent;
+    transition: all 0.2s;
+  }
+  .reserve-cta:hover {
+    background: var(--primary);
+    color: var(--surface);
+    border-color: var(--primary);
+  }
+  .reserve-cta .gold {
+    color: var(--accent);
+    margin-right: 10px;
+  }
+
+  /* FOOTER */
+  footer {
+    margin-top: 0;
+    background: var(--bg);
+    padding-top: 0;
+    position: relative;
+  }
+  .asanoha-band {
+    height: 72px;
+    overflow: hidden;
+    opacity: 0.12;
+    margin: 0 -72px;
+    border-top: 1px solid rgba(12,12,12,0.4);
+    border-bottom: 1px solid rgba(12,12,12,0.4);
+    background-repeat: repeat-x;
+  }
+  .asanoha-band svg {
+    width: 100%;
+    height: 72px;
+    display: block;
+  }
+  .footer-inner {
+    padding: 56px 0 64px 0;
+    text-align: center;
+    position: relative;
+  }
+  .footer-seal {
+    width: 72px; height: 72px;
+    margin: 0 auto 16px auto;
+    opacity: 0.88;
+  }
+  .footer-seal svg { width: 100%; height: 100%; display: block; }
+  .signature {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    color: var(--primary);
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+  }
+  .signature-sub {
+    font-size: 11px;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin-bottom: 48px;
+  }
+  .footer-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: left;
+    font-size: 12px;
+    line-height: 1.85;
+  }
+  .footer-cols h4 {
+    font-family: var(--font-body), serif;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin: 0 0 12px 0;
+    font-weight: normal;
+    border-bottom: 1px solid var(--ornament);
+    padding-bottom: 8px;
+  }
+  .footer-cols p { margin: 0 0 10px 0; }
+  .attribution {
+    margin-top: 56px;
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    color: rgba(12,12,12,0.65);
+    text-align: center;
+    padding: 0 80px;
+  }
+
+  /* Vertical text mark in hero left negative space */
+  .vmark {
+    position: absolute;
+    bottom: 40px;
+    left: 24px;
+    writing-mode: vertical-rl;
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.4em;
+    color: var(--ornament);
+    opacity: 0.7;
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- TOP -->
+  <header class="topbar">
+    <div class="housemark" aria-label="Tsuru-no-maru house mark">
+      <!-- centerpiece_seal: tsuru -->
+      <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg">
+        <g transform="matrix(1.25,0,0,-1.25,130.52945,976.02211)">
+          <g transform="matrix(0.90805161,0,0,0.90805161,-98.479009,143.93972)">
+            <circle cx="344" cy="344" r="320" fill="none" stroke="#0c0c0c" stroke-width="6"/>
+            <path d="m 251.52,309.6816 c -16.32,0 -29.4,13.2 -29.4,29.4 0,3.96 0.72,7.8 2.22,11.4 6.9,-5.4 15.3,-8.4 24.06,-8.4 1.56,0 3.24,0.12 4.86,0.3 l -12.3,-8.46 c -0.96,-0.72 -1.56,-1.8 -1.56,-3.12 0,-2.04 1.56,-3.72 3.72,-3.72 0.72,0 1.44,0.24 2.04,0.66 l 9.78,6.6 c -0.06,-0.78 -0.06,-1.74 -0.06,-2.82 0,-7.2 1.92,-14.28 5.82,-20.34 -2.94,-0.9 -6.06,-1.5 -9.18,-1.5 z" fill="#0c0c0c"/>
+            <path d="m 381.75,317.6875 c -34.35,0 -62.09375,27.775 -62.09375,62.125 0,1.05 -0.0125,2.25 0.0625,3.375 l -70.40625,39.21875 78.375,-34.0625 c 0.525,-0.3 1.125,-0.4375 1.875,-0.4375 2.1,0 4.03125,1.78125 4.03125,4.03125 0,1.35 -0.90625,2.71875 -2.03125,3.46875 l -78.375,34.78125 104.5,-32.6875 c 2.325,-0.9 4.85625,-1.34375 7.40625,-1.34375 11.25,0 20.40625,9.00625 20.40625,20.40625 0,1.05 -0.15,2.075 -0.375,3.125 -3.225,19.05 -14.01875,36.15625 -30.21875,47.03125 -34.05,15.975 -65.54375,36.38125 -93.59375,60.90625 21.45,28.875 54.6,46.56875 90.375,48.21875 -8.025,-10.5 -12.25,-23.23125 -12.25,-36.28125 0,-16.35 6.6125,-31.8125 18.3125,-43.0625 17.55,-16.65 29.99375,-37.95 35.84375,-61.5 3.6,-10.65 5.5625,-21.75 5.5625,-33 0,-1.8 -0.14375,-3.1375 -0.21875,-4.1875 -0.075,-0.3 0.0625,-0.7625 0.0625,-1.0625 0,-13.5 -10.9625,-24.3125 -24.3125,-24.3125 z" transform="matrix(0.8,0,0,-0.8,0,842)" fill="#0c0c0c"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+
+    <nav class="primary" aria-label="Primary">
+      <a href="page-1.html" aria-current="page">House</a>
+      <a href="page-2.html">Today's Menu</a>
+      <a href="page-3.html">Lineage</a>
+      <a href="page-4.html">Seasons</a>
+      <a href="page-5.html">Reserve</a>
+      <a href="page-6.html">Visit</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="seal" aria-hidden="true">
+        <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="344" cy="344" r="316" fill="none" stroke="#1c3a5e" stroke-width="6"/>
+          <circle cx="344" cy="344" r="280" fill="none" stroke="#1c3a5e" stroke-width="2"/>
+          <path d="M 200,420 Q 280,320 344,360 Q 410,400 488,300 L 460,420 Q 410,460 344,440 Q 280,420 220,460 Z" fill="#1c3a5e" opacity="0.85"/>
+          <path d="M 320,200 L 360,260 L 344,340 L 328,260 Z" fill="#1c3a5e"/>
+          <circle cx="344" cy="180" r="14" fill="#e34234"/>
+        </svg>
+      </div>
+      <div class="vmark">文政七年・神田川畔</div>
+    </div>
+
+    <div class="hero-right">
+      <div class="wave-band" aria-hidden="true">
+        <svg viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <g id="seig">
+              <path d="M 1,210 V 100 A 98,98 0 0 1 100,1 98,98 0 0 1 199,100 V 210" fill="none" stroke="#1c3a5e" stroke-width="2"/>
+              <path d="M 175,210 V 100 A 75,75 0 0 0 100,25 75,75 0 0 0 25,100 V 210" fill="none" stroke="#1c3a5e" stroke-width="1.2"/>
+              <path d="M 145,210 V 100 A 45,45 0 0 0 100,55 45,45 0 0 0 55,100 V 210" fill="none" stroke="#1c3a5e" stroke-width="1"/>
+            </g>
+          </defs>
+          <use href="#seig" x="0" y="0"/>
+          <use href="#seig" x="200" y="0"/>
+          <use href="#seig" x="400" y="0"/>
+          <use href="#seig" x="600" y="0"/>
+          <use href="#seig" x="-100" y="100"/>
+          <use href="#seig" x="100" y="100"/>
+          <use href="#seig" x="300" y="100"/>
+          <use href="#seig" x="500" y="100"/>
+          <use href="#seig" x="700" y="100"/>
+        </svg>
+      </div>
+
+      <h1 class="hero-title">
+        <span class="kanji">桐 壺</span>
+        Kiritsubo
+      </h1>
+      <p class="hero-sub">Ryōtei of the Kanda Riverbank — <span class="accent">Est. Bunsei 7 · 1824</span></p>
+    </div>
+
+    <blockquote class="pull-quote">
+      Since Bunsei 7 (1824), at the bend below Shōhei Bridge.
+      <span class="attr">— from the kitchen book of Kiritsubo Yoshibei, fourth proprietor</span>
+    </blockquote>
+  </section>
+
+  <!-- THREE PASSAGES -->
+  <section class="passages" aria-label="Introduction">
+    <article class="card">
+      <span class="num">— 一 —</span>
+      <h2><span class="ja">家</span>The House</h2>
+      <p>Kiritsubo opened its sliding cedar doors in the seventh year of Bunsei, when the Kanda merchant Sasakura Tōbei set down his ledgers and took up the kitchen knife. Six generations later, the same recipe books — bound in indigo cloth, marked with the umebachi seal — still guide the morning's preparations. The zashiki rooms look out across the embankment toward Shōhei Bridge, much as they did when the Tokugawa rule was still ordering the city.</p>
+      <span class="plum" aria-hidden="true">
+        <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="344" cy="200" r="92" fill="#0c0c0c"/>
+          <circle cx="540" cy="320" r="92" fill="#0c0c0c"/>
+          <circle cx="148" cy="320" r="92" fill="#0c0c0c"/>
+          <circle cx="240" cy="510" r="92" fill="#0c0c0c"/>
+          <circle cx="448" cy="510" r="92" fill="#0c0c0c"/>
+          <circle cx="344" cy="360" r="44" fill="#0c0c0c"/>
+        </svg>
+      </span>
+    </article>
+
+    <article class="card">
+      <span class="num">— 二 —</span>
+      <h2><span class="ja">川</span>The River</h2>
+      <p>The Kanda flows past our kitchens at a measured pace, dark in summer with eel and ayu, bright in autumn with returning trout. Our fishmonger Kichizō calls before dawn from the Yanagibashi landing; what enters the kitchen at five o'clock is on the table by seven. We hold to the older practice — one fish, one method, one season — and refuse the convenience of the icebox for any creature taken from the river itself.</p>
+      <span class="plum" aria-hidden="true">
+        <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="344" cy="200" r="92" fill="#0c0c0c"/>
+          <circle cx="540" cy="320" r="92" fill="#0c0c0c"/>
+          <circle cx="148" cy="320" r="92" fill="#0c0c0c"/>
+          <circle cx="240" cy="510" r="92" fill="#0c0c0c"/>
+          <circle cx="448" cy="510" r="92" fill="#0c0c0c"/>
+          <circle cx="344" cy="360" r="44" fill="#0c0c0c"/>
+        </svg>
+      </span>
+    </article>
+
+    <article class="card">
+      <span class="num">— 三 —</span>
+      <h2><span class="ja">季</span>The Season</h2>
+      <p>Kaiseki at Kiritsubo follows the twenty-four sekki of the old calendar. We are entering Kanro now — the cold dew — when matsutake arrive from the Tamba hills and the river chestnut sweetens. The autumn course begins with a clear suimono of hamo and chrysanthemum, advances through grilled ayu salted three days, and closes with steamed rice cooked over matsutake and a single roasted ginkgo nut. Nine courses; ninety minutes; one room at a time.</p>
+      <span class="plum" aria-hidden="true">
+        <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="344" cy="200" r="92" fill="#0c0c0c"/>
+          <circle cx="540" cy="320" r="92" fill="#0c0c0c"/>
+          <circle cx="148" cy="320" r="92" fill="#0c0c0c"/>
+          <circle cx="240" cy="510" r="92" fill="#0c0c0c"/>
+          <circle cx="448" cy="510" r="92" fill="#0c0c0c"/>
+          <circle cx="344" cy="360" r="44" fill="#0c0c0c"/>
+        </svg>
+      </span>
+    </article>
+  </section>
+
+  <!-- RESERVE BLOCK -->
+  <section class="reserve-block">
+    <span class="divider-mark" aria-hidden="true">
+      <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="501.6,301.2 551.1,251.7 500.8,201.4 451.3,250.9 300.9,100.5 350.4,51 300.1,0.7 250.6,50.2 201.1,0.7 150.3,51.5 500.3,401.5 551.1,350.7" fill="none" stroke="#0c0c0c" stroke-width="6"/>
+        <polygon points="349.9,452.9 300.4,502.4 250.1,452.1 299.6,402.6 149.2,252.2 99.7,301.7 49.4,251.4 98.9,201.9 49.4,152.4 100.2,101.6 450.2,451.6 399.4,502.4" fill="none" stroke="#0c0c0c" stroke-width="6"/>
+      </svg>
+    </span>
+
+    <div class="reserve-left">
+      <h3>
+        <span class="small">Autumn — Aki no Kondate</span>
+        Matsutake<br>by lamplight, in a private zashiki.
+      </h3>
+    </div>
+    <div class="reserve-right">
+      <p>From the eighth of October until the second snowfall, the small zashiki on the river side — six tatami, paper lanterns, a single hanging scroll changed each week — is given over to the matsutake course. We seat one party only between the hours of six and nine.</p>
+      <p class="price"><em>Aki no Kaiseki</em> — nine courses, ¥28,000 per guest. Sake pairings from Kanda's Toshimaya brewery, ¥6,500.</p>
+      <a class="reserve-cta" href="page-5.html"><span class="gold">◆</span> Reserve a Zashiki</a>
+    </div>
+  </section>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="asanoha-band" aria-hidden="true">
+    <svg viewBox="0 0 1500 72" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <pattern id="asa" x="0" y="0" width="100" height="72" patternUnits="userSpaceOnUse">
+          <g fill="none" stroke="#0c0c0c" stroke-width="1">
+            <line x1="50" y1="36" x2="50" y2="0"/>
+            <line x1="50" y1="36" x2="0" y2="14"/>
+            <line x1="50" y1="36" x2="100" y2="14"/>
+            <line x1="50" y1="36" x2="0" y2="72"/>
+            <line x1="50" y1="36" x2="100" y2="72"/>
+            <line x1="0" y1="14" x2="0" y2="72"/>
+            <line x1="100" y1="14" x2="100" y2="72"/>
+            <line x1="0" y1="14" x2="50" y2="0"/>
+            <line x1="100" y1="14" x2="50" y2="0"/>
+          </g>
+        </pattern>
+      </defs>
+      <rect width="1500" height="72" fill="url(#asa)"/>
+    </svg>
+  </div>
+
+  <div class="page">
+    <div class="footer-inner">
+      <div class="footer-seal" aria-hidden="true">
+        <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="344" cy="344" r="316" fill="none" stroke="#1c3a5e" stroke-width="6"/>
+          <circle cx="344" cy="344" r="280" fill="none" stroke="#1c3a5e" stroke-width="2"/>
+          <path d="M 200,420 Q 280,320 344,360 Q 410,400 488,300 L 460,420 Q 410,460 344,440 Q 280,420 220,460 Z" fill="#1c3a5e" opacity="0.85"/>
+          <path d="M 320,200 L 360,260 L 344,340 L 328,260 Z" fill="#1c3a5e"/>
+          <circle cx="344" cy="180" r="14" fill="#e34234"/>
+        </svg>
+      </div>
+      <div class="signature">桐壺</div>
+      <div class="signature-sub">Kiritsubo — Kanda-ku, Tōkyō</div>
+
+      <div class="footer-cols">
+        <div>
+          <h4>Address</h4>
+          <p>2-chōme 14-7 Kanda-Sudachō<br>Chiyoda-ku, Tōkyō 101-0041</p>
+          <p>Below Shōhei Bridge, river side.<br>Telephone: 03-3251-7824</p>
+        </div>
+        <div>
+          <h4>Hours</h4>
+          <p>Lunch · 11:30 — 14:00 (Tue–Sat)<br>Dinner · 17:30 — 21:30 (Tue–Sun)</p>
+          <p>Closed Mondays and from the<br>28th of December to the 4th of January.</p>
+        </div>
+      </div>
+
+      <p class="attribution">Kamon renderings (tsuru-no-maru, umebachi) and the wagara grounds (seigaiha, asanoha, sayagata) reproduced under CC BY-SA 4.0 from public-domain heraldic sources. Site set in Yuji Syuku and Shippori Mincho.</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Scholarship & Publications — Museo Aureliano</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Inter, sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* ---------- NAVIGATION ---------- */
+  .nav-rule-top {
+    height: 2px;
+    background: var(--secondary);
+    width: 100%;
+  }
+  .topnav {
+    padding: 28px 60px 16px;
+    background: var(--bg);
+  }
+  .nav-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 40px;
+  }
+  .nav-links {
+    display: flex;
+    list-style: none;
+    gap: 14px;
+    font-family: var(--font-body), sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .nav-links.left { justify-content: flex-end; }
+  .nav-links.right { justify-content: flex-start; }
+  .nav-links li {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .nav-links li a {
+    padding-bottom: 2px;
+    border-bottom: 1px solid transparent;
+    transition: border-color .2s;
+  }
+  .nav-links li[aria-current="page"] a {
+    border-bottom-color: var(--accent);
+    color: var(--accent);
+  }
+  .vine-sep {
+    width: 14px;
+    height: 14px;
+    opacity: 0.55;
+    flex-shrink: 0;
+  }
+  .vine-sep svg { width: 100%; height: 100%; fill: var(--ornament); }
+  .wordmark {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .wordmark .amp { color: var(--secondary); }
+
+  .meander-strip {
+    width: 100%;
+    height: 28px;
+    margin-top: 18px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 165 44' preserveAspectRatio='xMidYMid meet'><g fill='%231a1a1a'><path d='M10 41.75 L10 10 L41.75 10 L41.75 29.05 L29.05 29.05 L29.05 35.4 L48.1 35.4 L48.1 41.75 L22.7 41.75 L22.7 22.7 L35.4 22.7 L35.4 16.35 L16.35 16.35 L16.35 41.75 Z'/><path d='M48.1 41.75 L48.1 10 L79.85 10 L79.85 29.05 L67.15 29.05 L67.15 35.4 L86.2 35.4 L86.2 41.75 L60.8 41.75 L60.8 22.7 L73.5 22.7 L73.5 16.35 L54.45 16.35 L54.45 41.75 Z'/><path d='M86.2 41.75 L86.2 10 L117.95 10 L117.95 29.05 L105.25 29.05 L105.25 35.4 L124.3 35.4 L124.3 41.75 L98.9 41.75 L98.9 22.7 L111.6 22.7 L111.6 16.35 L92.55 16.35 L92.55 41.75 Z'/><path d='M124.3 41.75 L124.3 10 L156.05 10 L156.05 29.05 L143.35 29.05 L143.35 35.4 L162.4 35.4 L162.4 41.75 L137 41.75 L137 22.7 L149.7 22.7 L149.7 16.35 L130.65 16.35 L130.65 41.75 Z'/></g></svg>");
+    background-repeat: repeat-x;
+    background-size: auto 28px;
+    background-position: center;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    padding: 70px 60px 50px;
+    text-align: center;
+    position: relative;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-body), sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.4em;
+    font-size: 11px;
+    color: var(--accent);
+    margin-bottom: 18px;
+  }
+  .hero-frame-wrap {
+    position: relative;
+    display: inline-block;
+    width: 540px;
+    max-width: 100%;
+    padding: 60px 40px 50px;
+  }
+  .hero-frame-wrap .laurel {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0.95;
+  }
+  .hero-frame-wrap .laurel svg {
+    width: 100%;
+    height: 100%;
+    /* recolor: keep monochrome via CSS filter */
+    filter: grayscale(1) brightness(0.15);
+    opacity: 0.85;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 1;
+  }
+  .hero h1 {
+    font-family: var(--font-display), serif;
+    font-size: 44px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    line-height: 1.1;
+    color: var(--primary);
+  }
+  .hero h1 .amp { color: var(--secondary); font-style: italic; padding: 0 6px; }
+  .hero-sub {
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-top: 18px;
+    color: var(--primary);
+  }
+  .hero-quote {
+    margin-top: 26px;
+    font-style: italic;
+    color: var(--text-emphasis);
+    font-family: var(--font-display), serif;
+    font-size: 15px;
+    letter-spacing: 0.05em;
+  }
+
+  /* ---------- DIVIDERS ---------- */
+  .divider {
+    height: 22px;
+    margin: 50px auto;
+    width: 80%;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 165 44' preserveAspectRatio='xMidYMid meet'><g fill='%231a1a1a'><path d='M10 41.75 L10 10 L41.75 10 L41.75 29.05 L29.05 29.05 L29.05 35.4 L48.1 35.4 L48.1 41.75 L22.7 41.75 L22.7 22.7 L35.4 22.7 L35.4 16.35 L16.35 16.35 L16.35 41.75 Z'/><path d='M48.1 41.75 L48.1 10 L79.85 10 L79.85 29.05 L67.15 29.05 L67.15 35.4 L86.2 35.4 L86.2 41.75 L60.8 41.75 L60.8 22.7 L73.5 22.7 L73.5 16.35 L54.45 16.35 L54.45 41.75 Z'/><path d='M86.2 41.75 L86.2 10 L117.95 10 L117.95 29.05 L105.25 29.05 L105.25 35.4 L124.3 35.4 L124.3 41.75 L98.9 41.75 L98.9 22.7 L111.6 22.7 L111.6 16.35 L92.55 16.35 L92.55 41.75 Z'/><path d='M124.3 41.75 L124.3 10 L156.05 10 L156.05 29.05 L143.35 29.05 L143.35 35.4 L162.4 35.4 L162.4 41.75 L137 41.75 L137 22.7 L149.7 22.7 L149.7 16.35 L130.65 16.35 L130.65 41.75 Z'/></g></svg>");
+    background-repeat: repeat-x;
+    background-size: auto 22px;
+    background-position: center;
+  }
+
+  /* ---------- SECTION HEADINGS ---------- */
+  .section-title {
+    font-family: var(--font-display), serif;
+    font-size: 28px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    text-align: center;
+    color: var(--primary);
+    margin-bottom: 10px;
+  }
+  .laurel-sprig {
+    display: block;
+    margin: 8px auto 30px;
+    width: 90px;
+    height: 14px;
+  }
+  .laurel-sprig svg { width:100%; height:100%; }
+
+  .section-lede {
+    max-width: 780px;
+    margin: 0 auto 40px;
+    text-align: center;
+    color: var(--primary);
+    font-size: 15.5px;
+  }
+
+  /* ---------- CARD GRID ---------- */
+  main { padding: 0 60px; }
+  .cards-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 32px;
+    margin-bottom: 30px;
+  }
+  .card {
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--ornament);
+    padding: 8px;
+  }
+  .card-inner {
+    border: 4px solid var(--secondary);
+    padding: 32px 28px 28px;
+    height: 100%;
+    position: relative;
+  }
+  /* Greek-key style edges via repeating background on outer border */
+  .card::before {
+    content: "";
+    position: absolute;
+    top: -1px; left: -1px; right: -1px;
+    height: 1px;
+    background: var(--ornament);
+  }
+  .card-roundel {
+    width: 56px;
+    height: 56px;
+    margin: -52px auto 14px;
+    background: var(--bg);
+    padding: 4px;
+    border-radius: 50%;
+  }
+  .card-roundel svg { width: 100%; height: 100%; }
+  .card h3 {
+    font-family: var(--font-display), serif;
+    font-size: 17px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--primary);
+    margin-bottom: 6px;
+  }
+  .card .laurel-sprig { margin: 6px auto 16px; width: 70px; height: 12px; }
+  .card p { font-size: 14.5px; }
+  .card p + p { margin-top: 10px; }
+  .card .meta {
+    margin-top: 14px;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--accent);
+  }
+
+  /* ---------- FEATURED LISTS ---------- */
+  .pub-section { margin-top: 30px; }
+  .pub-list {
+    list-style: none;
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+  .pub-list li {
+    display: grid;
+    grid-template-columns: 110px 1fr 160px;
+    gap: 30px;
+    padding: 22px 0;
+    border-bottom: 1px solid rgba(26,26,26,0.18);
+    align-items: baseline;
+  }
+  .pub-list li:first-child { border-top: 1px solid rgba(26,26,26,0.18); }
+  .pub-year {
+    font-family: var(--font-display), serif;
+    color: var(--text-emphasis);
+    letter-spacing: 0.18em;
+    font-size: 14px;
+  }
+  .pub-body h4 {
+    font-family: var(--font-display), serif;
+    font-size: 17px;
+    letter-spacing: 0.06em;
+    margin-bottom: 4px;
+  }
+  .pub-body .author {
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .pub-body p { font-size: 14px; color: var(--primary); }
+  .pub-tag {
+    text-align: right;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--primary);
+    opacity: 0.8;
+  }
+
+  /* ---------- TWO COLUMN INFO ---------- */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 60px;
+    max-width: 1180px;
+    margin: 0 auto;
+    align-items: start;
+  }
+  .two-col h3 {
+    font-family: var(--font-display), serif;
+    font-size: 20px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    color: var(--primary);
+  }
+  .two-col p { margin-bottom: 14px; font-size: 15px; }
+  .inscription {
+    border-left: 3px solid var(--secondary);
+    padding: 14px 22px;
+    margin: 22px 0;
+    font-family: var(--font-display), serif;
+    color: var(--text-emphasis);
+    font-size: 16px;
+    letter-spacing: 0.04em;
+    line-height: 1.6;
+    background: rgba(201,162,58,0.06);
+  }
+  .deadline {
+    color: var(--text-emphasis);
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.08em;
+  }
+  .fellowship-box {
+    background: var(--surface);
+    border: 1px solid var(--ornament);
+    padding: 6px;
+  }
+  .fellowship-inner {
+    border: 4px solid var(--secondary);
+    padding: 28px 30px;
+  }
+  .fellowship-inner h4 {
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+  .fellowship-inner ul {
+    list-style: none;
+    font-size: 14px;
+  }
+  .fellowship-inner ul li {
+    padding: 8px 0;
+    border-bottom: 1px dotted rgba(26,26,26,0.25);
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .fellowship-inner ul li:last-child { border-bottom: none; }
+  .fellowship-inner .label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--primary);
+    opacity: 0.7;
+  }
+  .fellowship-inner .val {
+    font-family: var(--font-display), serif;
+    text-align: right;
+  }
+
+  /* ---------- EDITORIAL BOARD ---------- */
+  .board {
+    max-width: 1180px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .board-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    margin-top: 26px;
+  }
+  .board-grid .person {
+    padding: 18px 12px;
+    border-top: 1px solid var(--ornament);
+  }
+  .board-grid .person .name {
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-size: 13px;
+    margin-bottom: 4px;
+  }
+  .board-grid .person .role {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .board-grid .person .inst {
+    font-size: 12px;
+    margin-top: 6px;
+    color: var(--primary);
+    opacity: 0.8;
+  }
+
+  /* ---------- TAILPIECE / FOOTER ---------- */
+  .tailpiece {
+    margin: 70px auto 30px;
+    width: 110px;
+    height: 110px;
+    display: block;
+  }
+  .tailpiece svg { width: 100%; height: 100%; }
+
+  footer {
+    margin-top: 30px;
+    background: var(--bg);
+    border-top: none;
+  }
+  .footer-meander {
+    width: 100%;
+    height: 30px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 165 44' preserveAspectRatio='xMidYMid meet'><g fill='%231a1a1a'><path d='M10 41.75 L10 10 L41.75 10 L41.75 29.05 L29.05 29.05 L29.05 35.4 L48.1 35.4 L48.1 41.75 L22.7 41.75 L22.7 22.7 L35.4 22.7 L35.4 16.35 L16.35 16.35 L16.35 41.75 Z'/><path d='M48.1 41.75 L48.1 10 L79.85 10 L79.85 29.05 L67.15 29.05 L67.15 35.4 L86.2 35.4 L86.2 41.75 L60.8 41.75 L60.8 22.7 L73.5 22.7 L73.5 16.35 L54.45 16.35 L54.45 41.75 Z'/><path d='M86.2 41.75 L86.2 10 L117.95 10 L117.95 29.05 L105.25 29.05 L105.25 35.4 L124.3 35.4 L124.3 41.75 L98.9 41.75 L98.9 22.7 L111.6 22.7 L111.6 16.35 L92.55 16.35 L92.55 41.75 Z'/><path d='M124.3 41.75 L124.3 10 L156.05 10 L156.05 29.05 L143.35 29.05 L143.35 35.4 L162.4 35.4 L162.4 41.75 L137 41.75 L137 22.7 L149.7 22.7 L149.7 16.35 L130.65 16.35 L130.65 41.75 Z'/></g></svg>");
+    background-repeat: repeat-x;
+    background-size: auto 30px;
+  }
+  .footer-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+    padding: 50px 80px 24px;
+    text-align: center;
+  }
+  .footer-cols h5 {
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .footer-cols p, .footer-cols a {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    line-height: 1.9;
+  }
+  .footer-tail {
+    width: 60px;
+    height: 30px;
+    margin: 6px auto 4px;
+    text-align: center;
+    color: var(--ornament);
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    letter-spacing: 0.2em;
+  }
+  .footer-founding {
+    text-align: center;
+    color: var(--text-emphasis);
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.32em;
+    padding-bottom: 28px;
+  }
+
+  /* sprig svg path */
+  .sprig-svg path { fill: none; stroke: var(--ornament); stroke-width: 1; }
+</style>
+</head>
+<body>
+
+<!-- Top gold rule -->
+<div class="nav-rule-top"></div>
+
+<!-- Navigation -->
+<header class="topnav">
+  <div class="nav-grid">
+    <ul class="nav-links left">
+      <li><a href="page-1.html">Home</a></li>
+      <li><span class="vine-sep" aria-hidden="true"><svg viewBox="0 0 200 200"><path d="M43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5z" transform="translate(0 -852.36)"/></svg></span></li>
+      <li><a href="page-2.html">Collection</a></li>
+      <li><span class="vine-sep" aria-hidden="true"><svg viewBox="0 0 200 200"><circle cx="100" cy="100" r="6"/></svg></span></li>
+      <li><a href="page-3.html">Exhibition</a></li>
+    </ul>
+    <div class="wordmark">MVSEO <span class="amp">·</span> AVRELIANO</div>
+    <ul class="nav-links right">
+      <li><a href="page-4.html">Visit</a></li>
+      <li><span class="vine-sep" aria-hidden="true"><svg viewBox="0 0 200 200"><circle cx="100" cy="100" r="6"/></svg></span></li>
+      <li><a href="page-5.html">History</a></li>
+      <li><span class="vine-sep" aria-hidden="true"><svg viewBox="0 0 200 200"><circle cx="100" cy="100" r="6"/></svg></span></li>
+      <li aria-current="page"><a href="page-6.html">Scholarship</a></li>
+    </ul>
+  </div>
+</header>
+
+<div class="meander-strip" aria-hidden="true"></div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">Acta &nbsp;·&nbsp; Studia &nbsp;·&nbsp; Corpus</div>
+  <div class="hero-frame-wrap">
+    <div class="laurel" aria-hidden="true">
+      <!-- inline laurel wreath: simplified placement -->
+      <svg viewBox="0 0 323 295" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+        <g fill="#1a1a1a">
+          <path d="M141.7-18.6c-11 4.9-23.4 9.5-30.1 22.6-4.7 7.1-4.8 16.4-8.1 24.2 6.1-6.5 15.6-13.2 21-20.7 6-9.5 9.1-18 17.2-26.1zm164.5 0c8.1 8 11.2 16.5 17.2 26.1 5.4 7.6 14.9 14.2 21 20.7-3.3-7.8-3.4-17-8.1-24.2-6.7-13.2-19-17.8-30.1-22.6zM111.9-1.6c-5.6 1.6-10.6 5.5-14.6 11-9.1 10.8-10.7 25-6.9 42 1.3 4.5-0.5 8.7-0.3 13 2.7-6.2 5.7-11.9 11.6-15.9 13.1-8.4 16.7-12.8 20.1-20.8 3.9-9.3 4.7-10.7 4.8-19-3.8 12-15.3 17.1-23.1 25.2-4 4.4-7.2 9.6-9 15l-0.3-0.3c1-4.8 2.9-9.1 4-13.8 3.5-12.7 2.8-28 13.7-36.4z"/>
+          <path d="M88.6 21.1c-7.6 11-14.3 19.3-14 34.1-1 18.2 10.5 34.8 11.7 51.9 1.8-13.1 10.8-22.4 18.3-32.6-1 4.3-2.1 8.6-4.1 12.3-8.2 14.1-16.4 30.8-10.7 48.8-2.3-5.9-2.7-12.8-4.3-19.1-3.7-13-15.3-27.1-12-46.6-1.8 4.2-2.5 9-3.4 13.6-2 11.9-3 19.3-0.1 30.3 3.5 13.8 18.4 28.9 24.5 41.5l0.8 0.7c-0.9-6.8-1.3-14.2 0.4-20.7 2.6-10.4 9.7-20.6 11.7-31.4 1-8.4-1.3-17.8-2.2-25.9 2.7-3.7 5.2-7.5 7.1-11.6 2.5-6.2 1.4-15.1 2.2-21.9-1 2.9-2.7 5.4-4.7 7.8-9.1 9.4-19.5 19-21.5 32.6-0.3 1.9-0.4 3.9-0.9 5.8-0.4 0.2-0.4-0.3-0.6-0.4l1.1-16.8c0.4-16.4-6.6-34.7 1.8-49.1z"/>
+          <path d="M359.3 21.1c8.4 14.4 1.4 32.7 1.8 49.1l1.1 16.8c-0.2 0.1-0.2 0.6-0.6 0.4-0.5-1.9-0.6-3.9-0.9-5.8-2-13.6-12.4-23.2-21.5-32.6-1.9-2.5-3.7-4.9-4.7-7.8 0.7 6.8-0.3 15.6 2.2 21.9 1.9 4.1 4.4 7.9 7.1 11.6-0.9 8.1-3.2 17.5-2.2 25.9 2 10.8 9.1 20.9 11.7 31.4 1.7 6.5 1.3 13.9 0.4 20.7l0.8-0.7c6-12.6 20.9-27.8 24.5-41.5 2.9-11 1.9-18.3-0.1-30.3-0.9-4.6-1.7-9.4-3.4-13.6 3.4 19.5-8.2 33.6-12 50.6-1.6 6.3-2 13.1-4.3 19.1-0.2 0.1-0.4-0.1-0.5-0.3 5.7-18-2.5-34.7-10.7-48.8-2-3.8-3.1-8-4.1-12.3 7.5 10.2 16.6 19.5 18.3 32.6 1.2-17.2 12.7-33.7 11.7-51.9 0.3-14.8-6.3-23.1-13.9-34.1z"/>
+          <path d="M104.8 113.5c1.4 14-4 25.8-3.6 39.8 0.4 8.5 2.8 16 6.7 22.7l-0.7 0c-5.3-7.9-9.4-16.3-15.6-23.7-9.6-10.5-21.9-21.2-23.1-35.8-1.6 12.2 0.6 23.6 5.4 33.7 4.8 10.1 12.3 18.8 21.2 25.7l4.1 2.9c7.3 5.4 13.1 7.6 20.2 13.7v-0.8c-5.4-10.2-4.7-22.3-5.6-34.6-0.9-12.3-3.3-24.9-6.6-36.1z"/>
+          <path d="M345.1 113.5l-2.5 7.5c-3.3 11.2-5.7 23.8-6.6 36.1-0.9 12.3-0.2 24.4-5.6 34.6v0.8c7.1-6.2 12.8-8.3 20.2-13.7l4.1-2.9c8.9-6.9 16.4-15.6 21.2-25.7 4.8-10.1 7-21.5 5.4-33.7-1.3 14.6-13.5 25.3-23.1 35.8-6.2 7.5-10.3 15.9-15.6 23.7l-0.7 0c3.9-6.7 6.4-14.2 6.7-22.7 0.4-14-5-25.8-3.6-39.8z"/>
+        </g>
+      </svg>
+    </div>
+    <div class="hero-content">
+      <h1>Scholarship <span class="amp">&</span><br>Publications</h1>
+      <div class="hero-sub">Acta Aureliana &nbsp;·&nbsp; Vol. XXVII &nbsp;·&nbsp; MMXXIV</div>
+      <div class="hero-quote">“Litteris et lapidibus historia traditur.”</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider" aria-hidden="true"></div>
+
+<main>
+
+  <!-- INTRODUCTION CARDS -->
+  <section>
+    <h2 class="section-title">The Research Programme</h2>
+    <svg class="laurel-sprig sprig-svg" viewBox="0 0 90 14" aria-hidden="true">
+      <path d="M2 7 H88" />
+      <path d="M20 7 q4 -5 8 0 M28 7 q4 -5 8 0 M36 7 q4 -5 8 0 M44 7 q4 -5 8 0 M52 7 q4 -5 8 0 M60 7 q4 -5 8 0" />
+      <path d="M20 7 q4 5 8 0 M28 7 q4 5 8 0 M36 7 q4 5 8 0 M44 7 q4 5 8 0 M52 7 q4 5 8 0 M60 7 q4 5 8 0" />
+    </svg>
+    <p class="section-lede">The Centro di Studi Aureliani sustains a programme of original research in Roman epigraphy, sculpture, and the social fabric of the Imperial city. Three publication series, an annual journal, and a forthcoming open-access digital corpus carry that work to colleagues and the public.</p>
+
+    <div class="cards-row">
+      <article class="card">
+        <div class="card-inner">
+          <div class="card-roundel" aria-hidden="true">
+            <svg viewBox="0 0 117 118"><circle cx="58" cy="59" r="50" fill="none" stroke="#1a1a1a" stroke-width="1"/><circle cx="58" cy="59" r="42" fill="none" stroke="#c9a23a" stroke-width="2"/><text x="58" y="66" text-anchor="middle" font-family="Marcellus" font-size="22" fill="#1a1a1a">A</text></svg>
+          </div>
+          <h3>Acta Aureliana</h3>
+          <svg class="laurel-sprig sprig-svg" viewBox="0 0 70 12" aria-hidden="true"><path d="M2 6 H68"/><path d="M16 6 q3 -4 6 0 M22 6 q3 -4 6 0 M28 6 q3 -4 6 0 M34 6 q3 -4 6 0 M40 6 q3 -4 6 0 M46 6 q3 -4 6 0"/></svg>
+          <p>The annual peer-reviewed journal of the museum, published since 1998. Each volume gathers original studies on Roman art, civic ritual, and inscriptions, with extended catalogue entries from the permanent collection.</p>
+          <div class="meta">Vol. XXVII · 2024 · 312 pp.</div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-inner">
+          <div class="card-roundel" aria-hidden="true">
+            <svg viewBox="0 0 117 118"><circle cx="58" cy="59" r="50" fill="none" stroke="#1a1a1a" stroke-width="1"/><circle cx="58" cy="59" r="42" fill="none" stroke="#c9a23a" stroke-width="2"/><text x="58" y="66" text-anchor="middle" font-family="Marcellus" font-size="22" fill="#1a1a1a">S</text></svg>
+          </div>
+          <h3>Studia Epigraphica</h3>
+          <svg class="laurel-sprig sprig-svg" viewBox="0 0 70 12" aria-hidden="true"><path d="M2 6 H68"/><path d="M16 6 q3 -4 6 0 M22 6 q3 -4 6 0 M28 6 q3 -4 6 0 M34 6 q3 -4 6 0 M40 6 q3 -4 6 0 M46 6 q3 -4 6 0"/></svg>
+          <p>A monograph series in two strands — Romana and Provincialia — devoted to the close edition of inscriptions, dedications, and funerary texts. Eighteen volumes have appeared since 2006, distributed by L'Erma di Bretschneider.</p>
+          <div class="meta">XVIII vols. · since 2006</div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-inner">
+          <div class="card-roundel" aria-hidden="true">
+            <svg viewBox="0 0 117 118"><circle cx="58" cy="59" r="50" fill="none" stroke="#1a1a1a" stroke-width="1"/><circle cx="58" cy="59" r="42" fill="none" stroke="#c9a23a" stroke-width="2"/><text x="58" y="66" text-anchor="middle" font-family="Marcellus" font-size="22" fill="#1a1a1a">C</text></svg>
+          </div>
+          <h3>Corpus Digitale</h3>
+          <svg class="laurel-sprig sprig-svg" viewBox="0 0 70 12" aria-hidden="true"><path d="M2 6 H68"/><path d="M16 6 q3 -4 6 0 M22 6 q3 -4 6 0 M28 6 q3 -4 6 0 M34 6 q3 -4 6 0 M40 6 q3 -4 6 0 M46 6 q3 -4 6 0"/></svg>
+          <p>A forthcoming digital edition of 1,860 inscriptions held in the Aventine collections, encoded in EpiDoc TEI XML with high-resolution photogrammetry, RTI imaging, and full apparatus criticus. Free at launch.</p>
+          <div class="meta">Public release · Spring 2026</div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <!-- ACTA AURELIANA CONTENTS -->
+  <section class="pub-section">
+    <h2 class="section-title">Acta Aureliana, Vol. XXVII (2024)</h2>
+    <svg class="laurel-sprig sprig-svg" viewBox="0 0 90 14" aria-hidden="true">
+      <path d="M2 7 H88"/><path d="M20 7 q4 -5 8 0 M28 7 q4 -5 8 0 M36 7 q4 -5 8 0 M44 7 q4 -5 8 0 M52 7 q4 -5 8 0 M60 7 q4 -5 8 0"/><path d="M20 7 q4 5 8 0 M28 7 q4 5 8 0 M36 7 q4 5 8 0 M44 7 q4 5 8 0 M52 7 q4 5 8 0 M60 7 q4 5 8 0"/>
+    </svg>
+    <p class="section-lede">Edited by Prof. Margherita Sabatini and Dr. Tomás Reinhart-Vega. Print ISSN 1124-3308 · Online ISSN 2531-9844. Available in the museum bookshop (€38) and through the major academic distributors.</p>
+
+    <ul class="pub-list">
+      <li>
+        <div class="pub-year">MMXXIV</div>
+        <div class="pub-body">
+          <div class="author">Carnelos, L. &nbsp;·&nbsp; Università di Padova</div>
+          <h4>Funerary Altars of the Esquiline Necropolis: A Re-attribution</h4>
+          <p>A revision of fifty-three altars long catalogued under the rubric "Aventine workshop", proposing instead a coherent Esquiline atelier active c. 80–140 CE. Includes a full prosopography of the freedmen named.</p>
+        </div>
+        <div class="pub-tag">Article · pp. 9–62</div>
+      </li>
+      <li>
+        <div class="pub-year">MMXXIV</div>
+        <div class="pub-body">
+          <div class="author">Okonkwo, A. &nbsp;·&nbsp; King's College London</div>
+          <h4>Concrete, Centring, and the Pantheon's Coffered Vault</h4>
+          <p>A reassessment of the construction sequence proposed by Lancaster (2005), drawing on new laser-scan data taken during the 2022 conservation campaign and on comparanda from the Baths of Caracalla.</p>
+        </div>
+        <div class="pub-tag">Article · pp. 63–104</div>
+      </li>
+      <li>
+        <div class="pub-year">MMXXIV</div>
+        <div class="pub-body">
+          <div class="author">Vlachos, K. &nbsp;·&nbsp; Ephorate of Antiquities, Patras</div>
+          <h4>Imperial Cult and Civic Benefaction at Patrae, 27 BCE – 117 CE</h4>
+          <p>Reads the dossier of municipal decrees in light of three previously unpublished inscriptions recovered from the harbour mole during dredging operations in 2019.</p>
+        </div>
+        <div class="pub-tag">Article · pp. 105–148</div>
+      </li>
+      <li>
+        <div class="pub-year">MMXXIV</div>
+        <div class="pub-body">
+          <div class="author">Bellini, R. &nbsp;·&nbsp; Soprintendenza Roma</div>
+          <h4>The Aventine Travertine: Quarry, Block, Basilica</h4>
+          <p>An architectural-geological study of the museum's own building, identifying the Tivoli bench from which its facing blocks were extracted in the campaign of 1881–1884.</p>
+        </div>
+        <div class="pub-tag">Article · pp. 149–186</div>
+      </li>
+      <li>
+        <div class="pub-year">MMXXIV</div>
+        <div class="pub-body">
+          <div class="author">Editorial Board</div>
+          <h4>Notes &amp; Documents · Reviews · Index</h4>
+          <p>Twelve short notes on recent acquisitions; ten signed reviews of monographs published 2022–2024; cumulative index to volumes XXIII–XXVII.</p>
+        </div>
+        <div class="pub-tag">pp. 187–312</div>
+      </li>
+    </ul>
+  </section>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <!-- STUDIA EPIGRAPHICA RECENT -->
+  <section class="pub-section">
+    <h2 class="section-title">Studia Epigraphica Romana — Recent Volumes</h2>
+    <svg class="laurel-sprig sprig-svg" viewBox="0 0 90 14" aria-hidden="true"><path d="M2 7 H88"/><path d="M20 7 q4 -5 8 0 M28 7 q4 -5 8 0 M36 7 q4 -5 8 0 M44 7 q4 -5 8 0 M52 7 q4 -5 8 0 M60 7 q4 -5 8 0"/><path d="M20 7 q4 5 8 0 M28 7 q4 5 8 0 M36 7 q4 5 8 0 M44 7 q4 5 8 0 M52 7 q4 5 8 0 M60 7 q4 5 8 0"/></svg>
+
+    <ul class="pub-list">
+      <li>
+        <div class="pub-year">MMXXIII</div>
+        <div class="pub-body">
+          <div class="author">Carnelos, L. (ed.)</div>
+          <h4>Funerary Altars of the Esquiline Necropolis</h4>
+          <p>Vol. XVIII. Cloth, 416 pp., 184 plates. The full catalogue underlying the 2024 article, with edition, translation, and commentary on each piece. €72.</p>
+        </div>
+        <div class="pub-tag">ISBN 978-88-913-2271-4</div>
+      </li>
+      <li>
+        <div class="pub-year">MMXXII</div>
+        <div class="pub-body">
+          <div class="author">Hadjikyriakou, P. &amp; Marini, F. (eds.)</div>
+          <h4>Slave Names &amp; Manumission in Trajanic Rome</h4>
+          <p>Vol. XVII. Cloth, 348 pp. Editions of 211 inscriptions from the columbaria of the via Latina, with a statistical appendix on onomastic patterns by region of origin. €64.</p>
+        </div>
+        <div class="pub-tag">ISBN 978-88-913-2198-4</div>
+      </li>
+      <li>
+        <div class="pub-year">MMXXI</div>
+        <div class="pub-body">
+          <div class="author">El-Sayed, N.</div>
+          <h4>Egyptian Soldiers in the Praetorian Guard, 193–235 CE</h4>
+          <p>Vol. XVI. Cloth, 282 pp. Builds the dossier from military diplomas and dedicatory plaques in the Aventine and Naples collections. €58.</p>
+        </div>
+        <div class="pub-tag">ISBN 978-88-913-2114-4</div>
+      </li>
+      <li>
+        <div class="pub-year">MMXXVI</div>
+        <div class="pub-body">
+          <div class="author">Aureliano Digital Project</div>
+          <h4>Inscriptiones Aurelianae · Corpus Digitale (forthcoming)</h4>
+          <p>Open-access edition of 1,860 inscriptions in EpiDoc TEI XML. RTI captures, photogrammetric meshes, and IIIF imagery for every stone. Released under CC BY 4.0.</p>
+        </div>
+        <div class="pub-tag">DOI · pending</div>
+      </li>
+    </ul>
+  </section>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <!-- EDITORIAL BOARD -->
+  <section class="board">
+    <h2 class="section-title">Editorial Board</h2>
+    <svg class="laurel-sprig sprig-svg" viewBox="0 0 90 14" aria-hidden="true"><path d="M2 7 H88"/><path d="M20 7 q4 -5 8 0 M28 7 q4 -5 8 0 M36 7 q4 -5 8 0 M44 7 q4 -5 8 0 M52 7 q4 -5 8 0 M60 7 q4 -5 8 0"/><path d="M20 7 q4 5 8 0 M28 7 q4 5 8 0 M36 7 q4 5 8 0 M44 7 q4 5 8 0 M52 7 q4 5 8 0 M60 7 q4 5 8 0"/></svg>
+    <div class="board-grid">
+      <div class="person">
+        <div class="name">M. Sabatini</div>
+        <div class="role">Editor-in-Chief</div>
+        <div class="inst">Sapienza, Roma</div>
+      </div>
+      <div class="person">
+        <div class="name">T. Reinhart-Vega</div>
+        <div class="role">Co-Editor</div>
+        <div class="inst">Museo Aureliano</div>
+      </div>
+      <div class="person">
+        <div class="name">L. Carnelos</div>
+        <div class="role">Epigraphy</div>
+        <div class="inst">Università di Padova</div>
+      </div>
+      <div class="person">
+        <div class="name">A. Okonkwo</div>
+        <div class="role">Architecture</div>
+        <div class="inst">King's College London</div>
+      </div>
+      <div class="person">
+        <div class="name">K. Vlachos</div>
+        <div class="role">Provincial Studies</div>
+        <div class="inst">Ephorate, Patras</div>
+      </div>
+      <div class="person">
+        <div class="name">N. El-Sayed</div>
+        <div class="role">Military Diplomas</div>
+        <div class="inst">Universität Heidelberg</div>
+      </div>
+      <div class="person">
+        <div class="name">P. Hadjikyriakou</div>
+        <div class="role">Onomastics</div>
+        <div class="inst">University of Cyprus</div>
+      </div>
+      <div class="person">
+        <div class="name">R. Bellini</div>
+        <div class="role">Conservation</div>
+        <div class="inst">Soprintendenza Roma</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <!-- FELLOWSHIP -->
+  <section>
+    <h2 class="section-title">The 2026 Visiting Fellowship</h2>
+    <svg class="laurel-sprig sprig-svg" viewBox="0 0 90 14" aria-hidden="true"><path d="M2 7 H88"/><path d="M20 7 q4 -5 8 0 M28 7 q4 -5 8 0 M36 7 q4 -5 8 0 M44 7 q4 -5 8 0 M52 7 q4 -5 8 0 M60 7 q4 -5 8 0"/><path d="M20 7 q4 5 8 0 M28 7 q4 5 8 0 M36 7 q4 5 8 0 M44 7 q4 5 8 0 M52 7 q4 5 8 0 M60 7 q4 5 8 0"/></svg>
+
+    <div class="two-col">
+      <div>
+        <h3>Submission Guidelines</h3>
+        <p>The Museo Aureliano awards three Visiting Fellowships each year to scholars of any nationality working on Roman Imperial art, epigraphy, or the social topography of the city of Rome between 27 BCE and 337 CE. Fellows reside on the Aventine for three uninterrupted months and are expected to deliver one public lecture and to deposit a working paper in the museum's open repository.</p>
+        <p>Applications must be submitted in a single PDF, in English, Italian, or German, and comprise: a curriculum vitae of no more than four pages; a research proposal of 2,500 words inclusive of bibliography; one published writing sample; and the names of two referees willing to write directly to the Director by the deadline.</p>
+        <p>Address all correspondence to <em>Segreteria Scientifica, Museo Aureliano, Via di Santa Sabina 14, 00153 Roma</em>, or by electronic submission to <em>fellowships [at] museoaureliano.it</em>.</p>
+
+        <div class="inscription">
+          “SCRIPTORES · ROMANI · IN · DOMO · NOSTRA · HOSPITES · SVNT”<br>
+          <span style="font-size:12px; letter-spacing:0.18em;">— Dedicatory plaque, atrium, MCMXCIV</span>
+        </div>
+
+        <p>Decisions are taken by the Editorial Board in joint session with the Director and communicated in writing no later than <span class="deadline">XV April MMXXVI</span>. Three fellowships will be filled for the academic year MMXXVI–MMXXVII.</p>
+      </div>
+
+      <aside class="fellowship-box">
+        <div class="fellowship-inner">
+          <h4>At a Glance</h4>
+          <ul>
+            <li><span class="label">Stipend</span><span class="val">€ 9,600</span></li>
+            <li><span class="label">Duration</span><span class="val">3 months</span></li>
+            <li><span class="label">Housing</span><span class="val">Provided</span></li>
+            <li><span class="label">Travel</span><span class="val">€ 800</span></li>
+            <li><span class="label">Open to</span><span class="val">Post-doc + Senior</span></li>
+            <li><span class="label">Term</span><span class="val">Oct.–Dec. 2026</span></li>
+            <li><span class="label">Application opens</span><span class="val">I Sept. 2025</span></li>
+            <li><span class="label">Deadline</span><span class="val" style="color:var(--text-emphasis)">XV Jan. MMXXVI</span></li>
+            <li><span class="label">Notification</span><span class="val">XV April MMXXVI</span></li>
+            <li><span class="label">Public lecture</span><span class="val">Required</span></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- TAILPIECE -->
+  <div class="tailpiece" aria-hidden="true">
+    <svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+      <g fill="none" stroke="#1a1a1a" stroke-width="1.2">
+        <path d="M55 10 C 30 35, 30 75, 55 100 C 80 75, 80 35, 55 10 Z"/>
+        <path d="M55 25 L 55 95"/>
+        <path d="M40 55 Q 55 45, 70 55"/>
+        <path d="M40 70 Q 55 60, 70 70"/>
+        <circle cx="55" cy="20" r="2.5" fill="#c9a23a" stroke="none"/>
+        <circle cx="55" cy="90" r="2.5" fill="#c9a23a" stroke="none"/>
+      </g>
+      <g fill="#a93226">
+        <circle cx="55" cy="55" r="3"/>
+      </g>
+    </svg>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-meander" aria-hidden="true"></div>
+  <div class="footer-cols">
+    <div>
+      <h5>Visit</h5>
+      <p>Via di Santa Sabina 14<br>00153 Roma · Aventino</p>
+      <p>Tue – Sun · 09:30 – 18:30<br>Closed Mondays &amp; 1 Jan</p>
+    </div>
+    <div>
+      <h5>Contact</h5>
+      <p>+39 06 5740 219<br>info [at] museoaureliano.it</p>
+      <p><a href="page-4.html">Tickets &amp; Access</a><br><a href="page-6.html">Press &amp; Scholarship</a></p>
+    </div>
+    <div>
+      <h5>Credits</h5>
+      <p>Direzione: M. Sabatini<br>Curatela: T. Reinhart-Vega</p>
+      <p>© Museo Aureliano<br>Tutti i diritti riservati</p>
+    </div>
+  </div>
+  <div class="footer-tail" aria-hidden="true">❦</div>
+  <div class="footer-founding">FUNDATUM · ANNO · MCMXCIV</div>
+</footer>
+
+</body>
+</html>

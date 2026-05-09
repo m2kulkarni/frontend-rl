@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Subscribe & Correspond — The Lancet Quarterly</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  :root {
+    --rule: #1e3a5f;
+    --ink: #0a0a0a;
+    --gold: #c9a23a;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    font-size: 16px;
+    line-height: 1.6;
+    background-image:
+      radial-gradient(ellipse at top, rgba(201,162,58,0.05), transparent 60%),
+      radial-gradient(ellipse at bottom, rgba(30,58,95,0.04), transparent 60%);
+  }
+
+  a { color: var(--secondary); text-decoration: none; }
+  a:hover { color: var(--accent); }
+
+  /* ====== MASTHEAD ====== */
+  .masthead {
+    border-top: 1px solid var(--secondary);
+    border-bottom: 3px solid var(--ink);
+    padding: 28px 40px 18px;
+    text-align: center;
+    background: var(--bg);
+  }
+  .masthead .kicker {
+    font-family: var(--font-body);
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 8px;
+  }
+  .masthead h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 56px;
+    letter-spacing: 0.04em;
+    margin: 0;
+    color: var(--ink);
+    font-variant: small-caps;
+    line-height: 1;
+  }
+  .masthead .meta {
+    margin-top: 12px;
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    color: var(--text);
+  }
+  .masthead .meta span {
+    margin: 0 14px;
+  }
+
+  /* ====== NAV ARCADE ====== */
+  nav.arcade {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 18px 40px 8px;
+    background: var(--bg);
+    border-bottom: 1px solid rgba(10,10,10,0.15);
+    gap: 0;
+  }
+  nav.arcade ul {
+    list-style: none;
+    margin: 0; padding: 0;
+    display: flex;
+    gap: 0;
+  }
+  nav.arcade li {
+    position: relative;
+    width: 180px;
+    height: 76px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 14px;
+  }
+  nav.arcade li::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 50% 100%, transparent 0 88px, var(--ink) 88px 89px, transparent 89px),
+      linear-gradient(to right, transparent 0 calc(50% - 1px), var(--ink) calc(50% - 1px) calc(50% + 0px), transparent calc(50% + 1px));
+  }
+  nav.arcade li .arch {
+    position: absolute;
+    inset: 0;
+    border-left: 1px solid var(--ink);
+    border-right: 1px solid var(--ink);
+    -webkit-mask: radial-gradient(120px 120px at 50% 100%, #000 88px, transparent 89px);
+            mask: radial-gradient(120px 120px at 50% 100%, #000 88px, transparent 89px);
+  }
+  nav.arcade svg.arch-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  nav.arcade a {
+    position: relative;
+    z-index: 2;
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    color: var(--ink);
+    padding: 0 8px;
+  }
+  nav.arcade li[aria-current="page"] a {
+    color: var(--secondary);
+  }
+  nav.arcade li[aria-current="page"] .trefoil {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 22px;
+    height: 22px;
+    z-index: 3;
+  }
+
+  /* ====== PAGE HEAD ====== */
+  .page-head {
+    text-align: center;
+    padding: 56px 40px 32px;
+    position: relative;
+  }
+  .page-head .eyebrow {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--secondary);
+    letter-spacing: 0.05em;
+    margin-bottom: 14px;
+  }
+  .page-head h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 700;
+    font-variant: small-caps;
+    letter-spacing: 0.06em;
+    font-size: 64px;
+    line-height: 1;
+    color: var(--ink);
+    margin: 0 0 14px;
+  }
+  .page-head .dek {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--text);
+    max-width: 720px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  /* divider with rule + ornament */
+  .rule-ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin: 28px auto;
+    max-width: 720px;
+  }
+  .rule-ornament::before,
+  .rule-ornament::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--gold);
+  }
+  .rule-ornament svg {
+    width: 28px; height: 28px;
+    flex-shrink: 0;
+  }
+
+  /* ====== MAIN GRID ====== */
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px 60px;
+  }
+  .lede {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 48px;
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--text);
+  }
+  .lede .dropcap {
+    float: left;
+    font-family: var(--font-display), serif;
+    font-weight: 800;
+    font-size: 64px;
+    line-height: 0.85;
+    padding: 6px 10px 0 0;
+    color: var(--accent);
+    text-shadow: 1px 1px 0 rgba(30,58,95,0.15);
+  }
+
+  .grid-three {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 32px;
+    margin-bottom: 56px;
+  }
+
+  /* ====== POINTED-ARCH CARD ====== */
+  .arch-card {
+    position: relative;
+    background: var(--bg);
+    border: 1px solid var(--ink);
+    border-top-left-radius: 50% 80px;
+    border-top-right-radius: 50% 80px;
+    padding: 64px 28px 28px;
+    text-align: center;
+    box-shadow: 0 1px 0 rgba(10,10,10,0.05);
+  }
+  .arch-card .quatrefoil {
+    position: absolute;
+    top: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 28px;
+    height: 28px;
+    color: var(--secondary);
+  }
+  .arch-card h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 800;
+    font-variant: small-caps;
+    letter-spacing: 0.08em;
+    font-size: 22px;
+    line-height: 1.1;
+    color: var(--ink);
+    margin: 0 0 8px;
+  }
+  .arch-card .byline {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--secondary);
+    margin-bottom: 14px;
+  }
+  .arch-card .gold-rule {
+    width: 60%;
+    height: 1px;
+    background: var(--gold);
+    margin: 14px auto;
+  }
+  .arch-card .body {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--text);
+    text-align: left;
+  }
+  .arch-card .body p { margin: 0 0 10px; }
+  .arch-card .body dl {
+    margin: 8px 0 0;
+    font-size: 13.5px;
+  }
+  .arch-card .body dt {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.08em;
+    color: var(--secondary);
+    margin-top: 8px;
+  }
+  .arch-card .body dd {
+    margin: 2px 0 0;
+  }
+  .arch-card .price {
+    font-family: var(--font-display), serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--ink);
+    text-align: center;
+    margin: 14px 0 4px;
+    letter-spacing: 0.04em;
+  }
+  .arch-card .price-meta {
+    text-align: center;
+    font-style: italic;
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    color: var(--secondary);
+    margin-bottom: 4px;
+  }
+
+  /* ====== TWO-COLUMN: FORM + COLOPHON ====== */
+  .compose {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 56px;
+    align-items: start;
+    margin-bottom: 56px;
+    padding: 48px 0;
+    border-top: 1px solid var(--gold);
+    border-bottom: 1px solid var(--gold);
+    position: relative;
+  }
+  .compose::before, .compose::after {
+    content: "";
+    position: absolute;
+    left: 50%; transform: translateX(-50%);
+    width: 32px; height: 32px;
+    background: var(--bg);
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+  }
+  .compose::before { top: -16px; }
+  .compose::after  { bottom: -16px; }
+
+  .section-title {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    font-size: 28px;
+    color: var(--ink);
+    margin: 0 0 6px;
+  }
+  .section-italic {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--secondary);
+    margin: 0 0 22px;
+  }
+
+  form .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-bottom: 16px;
+  }
+  form label {
+    display: block;
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.12em;
+    font-size: 11px;
+    color: var(--secondary);
+    margin-bottom: 4px;
+  }
+  form input[type="text"],
+  form input[type="email"],
+  form select,
+  form textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--ink);
+    padding: 8px 4px;
+    font-family: var(--font-body), serif;
+    font-size: 15px;
+    color: var(--text);
+    outline: none;
+  }
+  form input:focus, form select:focus, form textarea:focus {
+    border-bottom-color: var(--secondary);
+  }
+  form textarea {
+    min-height: 110px;
+    resize: vertical;
+    border: 1px solid var(--ink);
+    padding: 10px;
+    font-family: var(--font-body), serif;
+    background: rgba(255,255,255,0.2);
+  }
+  .field-full { grid-column: 1 / -1; }
+
+  .check-group {
+    margin: 6px 0 18px;
+    font-size: 14px;
+  }
+  .check-group label {
+    font-family: var(--font-body);
+    font-variant: normal;
+    letter-spacing: normal;
+    color: var(--text);
+    text-transform: none;
+    font-size: 14px;
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 6px;
+    gap: 8px;
+  }
+  .check-group input { margin-top: 4px; }
+
+  button.send {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 14px 32px;
+    background: var(--ink);
+    color: var(--bg);
+    border: none;
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 0;
+  }
+  button.send:hover { background: var(--secondary); }
+
+  .colophon {
+    background:
+      linear-gradient(rgba(244,236,216,0.95), rgba(244,236,216,0.95)),
+      url('svg/quatrefoil-in-square.svg');
+    background-size: cover, 220px;
+    background-position: center;
+    border: 1px solid var(--ink);
+    padding: 32px 28px;
+    position: relative;
+  }
+  .colophon h3 {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    font-size: 22px;
+    color: var(--ink);
+    margin: 0 0 14px;
+    text-align: center;
+  }
+  .colophon .ornament-row {
+    display: flex;
+    justify-content: center;
+    margin: 6px 0 14px;
+  }
+  .colophon .ornament-row svg {
+    width: 36px; height: 36px;
+  }
+  .colophon p {
+    font-size: 14.5px;
+    line-height: 1.65;
+    margin: 0 0 12px;
+    color: var(--text);
+  }
+  .colophon .address {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    text-align: center;
+    font-size: 15px;
+    color: var(--secondary);
+    line-height: 1.5;
+    margin-top: 16px;
+  }
+
+  /* ====== CALENDAR ROW ====== */
+  .calendar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-bottom: 56px;
+  }
+  .quarter {
+    text-align: center;
+    padding: 22px 14px;
+    border: 1px solid var(--ink);
+    background: rgba(255,255,255,0.25);
+    position: relative;
+  }
+  .quarter .feast {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    font-size: 17px;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .quarter .date {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--secondary);
+    margin-bottom: 10px;
+  }
+  .quarter .issue {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.4;
+  }
+
+  /* ====== FOOTER ====== */
+  footer {
+    margin-top: 60px;
+    border-top: 1px solid var(--ink);
+    background: var(--bg);
+  }
+  .frieze {
+    height: 36px;
+    width: 100%;
+    background-repeat: repeat-x;
+    background-size: 36px 36px;
+    background-position: center;
+    border-bottom: 1px solid var(--ink);
+  }
+  .footer-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+    padding: 36px 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .footer-cols h4 {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.14em;
+    font-size: 14px;
+    color: var(--ink);
+    margin: 0 0 12px;
+    border-bottom: 1px solid var(--gold);
+    padding-bottom: 6px;
+  }
+  .footer-cols p {
+    font-size: 13.5px;
+    line-height: 1.6;
+    margin: 0 0 8px;
+    color: var(--text);
+  }
+  .footer-cols .italic {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    color: var(--secondary);
+  }
+  .footer-baseline {
+    text-align: center;
+    padding: 14px 20px 28px;
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    font-size: 12px;
+    color: var(--ink);
+    border-top: 1px solid rgba(10,10,10,0.2);
+  }
+
+  /* small detail glyphs */
+  .glyph-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    margin: 14px 0 0;
+  }
+  .glyph-row svg { width: 18px; height: 18px; color: var(--gold); }
+  .glyph-row span {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--secondary);
+    letter-spacing: 0.04em;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============= MASTHEAD ============= -->
+<header class="masthead">
+  <div class="kicker">Vol. XXIII · No. IV · Michaelmas Term</div>
+  <h1>The Lancet Quarterly</h1>
+  <div class="meta">
+    <span>A Review of Gothic Craft</span>
+    <span>·</span>
+    <span>Founded MMXIX</span>
+    <span>·</span>
+    <span>Paris IV<sup>e</sup></span>
+  </div>
+</header>
+
+<!-- ============= NAV ARCADE ============= -->
+<nav class="arcade" aria-label="Primary">
+  <ul>
+    <li>
+      <svg class="arch-svg" viewBox="0 0 180 76" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M 1 76 L 1 40 Q 1 1 90 1 Q 179 1 179 40 L 179 76" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+      </svg>
+      <a href="page-1.html">Frontispiece</a>
+    </li>
+    <li>
+      <svg class="arch-svg" viewBox="0 0 180 76" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M 1 76 L 1 40 Q 1 1 90 1 Q 179 1 179 40 L 179 76" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+      </svg>
+      <a href="page-2.html">Essays</a>
+    </li>
+    <li>
+      <svg class="arch-svg" viewBox="0 0 180 76" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M 1 76 L 1 40 Q 1 1 90 1 Q 179 1 179 40 L 179 76" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+      </svg>
+      <a href="page-3.html">Cobalt of Chartres</a>
+    </li>
+    <li>
+      <svg class="arch-svg" viewBox="0 0 180 76" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M 1 76 L 1 40 Q 1 1 90 1 Q 179 1 179 40 L 179 76" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+      </svg>
+      <a href="page-4.html">Plates</a>
+    </li>
+    <li>
+      <svg class="arch-svg" viewBox="0 0 180 76" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M 1 76 L 1 40 Q 1 1 90 1 Q 179 1 179 40 L 179 76" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+      </svg>
+      <a href="page-5.html">Workshop</a>
+    </li>
+    <li aria-current="page">
+      <svg class="trefoil" viewBox="0 0 24 24" aria-hidden="true">
+        <g fill="#c9a23a" stroke="#0a0a0a" stroke-width="0.8">
+          <circle cx="12" cy="6" r="4"/>
+          <circle cx="6.5" cy="14" r="4"/>
+          <circle cx="17.5" cy="14" r="4"/>
+          <path d="M 12 14 L 12 22" stroke="#0a0a0a" stroke-width="1.2" fill="none"/>
+        </g>
+      </svg>
+      <svg class="arch-svg" viewBox="0 0 180 76" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M 1 76 L 1 40 Q 1 1 90 1 Q 179 1 179 40 L 179 76" fill="none" stroke="#0a0a0a" stroke-width="1.6"/>
+      </svg>
+      <a href="page-6.html">Subscribe</a>
+    </li>
+  </ul>
+</nav>
+
+<!-- ============= PAGE HEAD ============= -->
+<section class="page-head">
+  <div class="eyebrow">Rue du Cloître Notre-Dame · 75004</div>
+  <h2>Subscribe &amp; Correspond</h2>
+  <p class="dek">Four issues per annum, posted at the four canonical quarter-days. Letters to the editor, manuscript proposals, and plates received by post or by hand.</p>
+  <div class="rule-ornament">
+    <svg viewBox="0 0 40 40" aria-hidden="true">
+      <g fill="#0a0a0a">
+        <circle cx="20" cy="20" r="3"/>
+        <circle cx="20" cy="8" r="3"/>
+        <circle cx="20" cy="32" r="3"/>
+        <circle cx="8" cy="20" r="3"/>
+        <circle cx="32" cy="20" r="3"/>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<main>
+
+  <!-- ============= LEDE ============= -->
+  <p class="lede">
+    <span class="dropcap">T</span>he Quarterly is a small subscription review, set in lead-by-hand at our desk in the shadow of the choir, and printed each quarter on Munken Pure paper at the press of Saint-Séverin. We carry no advertising and no corporate underwriting; the journal subsists upon its readers and upon the Auerbach-Holcombe Fund, which has supported our editorial independence since 2021. The pages that follow record the terms of subscription, the manner of correspondence, and the colophon by which we account for ourselves.
+  </p>
+
+  <!-- ============= QUARTER-DAYS ============= -->
+  <div class="calendar" aria-label="Posting calendar">
+    <div class="quarter">
+      <div class="feast">Lady Day</div>
+      <div class="date">25 March</div>
+      <div class="issue">Spring Number<br>plates &amp; essays</div>
+    </div>
+    <div class="quarter">
+      <div class="feast">Midsummer</div>
+      <div class="date">24 June</div>
+      <div class="issue">Summer Number<br>field reports</div>
+    </div>
+    <div class="quarter">
+      <div class="feast">Michaelmas</div>
+      <div class="date">29 September</div>
+      <div class="issue">Autumn Number<br>longer essays</div>
+    </div>
+    <div class="quarter">
+      <div class="feast">Christmas</div>
+      <div class="date">25 December</div>
+      <div class="issue">Winter Number<br>annual index</div>
+    </div>
+  </div>
+
+  <!-- ============= THREE ARCH-CARDS: SUBSCRIPTION TIERS ============= -->
+  <div class="grid-three">
+
+    <article class="arch-card">
+      <svg class="quatrefoil" viewBox="0 0 28 28" aria-hidden="true">
+        <g fill="#1e3a5f">
+          <circle cx="14" cy="6" r="5"/>
+          <circle cx="14" cy="22" r="5"/>
+          <circle cx="6" cy="14" r="5"/>
+          <circle cx="22" cy="14" r="5"/>
+        </g>
+        <circle cx="14" cy="14" r="3" fill="#c9a23a"/>
+      </svg>
+      <h3>Domestic<br>Subscription</h3>
+      <div class="byline">posted within the United Kingdom</div>
+      <div class="gold-rule"></div>
+      <div class="price">£48</div>
+      <div class="price-meta">per annum · four issues</div>
+      <div class="gold-rule"></div>
+      <div class="body">
+        <p>Sent by Royal Mail second-class in stout kraft envelopes, hand-addressed at the desk. Issues arrive within ten days of the quarter-day.</p>
+        <dl>
+          <dt>Includes</dt>
+          <dd>Four numbers, the annual index, and the Michaelmas plate-supplement.</dd>
+          <dt>Renewal</dt>
+          <dd>By post, in the New Year, by signed standing order.</dd>
+        </dl>
+      </div>
+    </article>
+
+    <article class="arch-card">
+      <svg class="quatrefoil" viewBox="0 0 28 28" aria-hidden="true">
+        <g fill="#1e3a5f">
+          <circle cx="14" cy="6" r="5"/>
+          <circle cx="14" cy="22" r="5"/>
+          <circle cx="6" cy="14" r="5"/>
+          <circle cx="22" cy="14" r="5"/>
+        </g>
+        <circle cx="14" cy="14" r="3" fill="#c9a23a"/>
+      </svg>
+      <h3>Continental<br>&amp; Abroad</h3>
+      <div class="byline">posted to all other addresses</div>
+      <div class="gold-rule"></div>
+      <div class="price">£62</div>
+      <div class="price-meta">per annum · four issues</div>
+      <div class="gold-rule"></div>
+      <div class="body">
+        <p>Sent by international airmail, wrapped in archival glassine. Subscribers in France, Germany, Belgium, and the Low Countries receive Lady Day and Christmas numbers within the fortnight.</p>
+        <dl>
+          <dt>Payment</dt>
+          <dd>By IBAN transfer or sterling cheque drawn on a London bank.</dd>
+          <dt>Loss in transit</dt>
+          <dd>Replaced upon a single signed letter.</dd>
+        </dl>
+      </div>
+    </article>
+
+    <article class="arch-card">
+      <svg class="quatrefoil" viewBox="0 0 28 28" aria-hidden="true">
+        <g fill="#1e3a5f">
+          <circle cx="14" cy="6" r="5"/>
+          <circle cx="14" cy="22" r="5"/>
+          <circle cx="6" cy="14" r="5"/>
+          <circle cx="22" cy="14" r="5"/>
+        </g>
+        <circle cx="14" cy="14" r="3" fill="#c9a23a"/>
+      </svg>
+      <h3>Institutional<br>&amp; Library</h3>
+      <div class="byline">for chapters, archives, and ateliers</div>
+      <div class="gold-rule"></div>
+      <div class="price">£96</div>
+      <div class="price-meta">per annum · two copies</div>
+      <div class="gold-rule"></div>
+      <div class="body">
+        <p>Two copies of every issue, one for the reading-room and one for the bound annual. Includes the right to reproduce a single plate per number for non-commercial scholarly use.</p>
+        <dl>
+          <dt>Eligible</dt>
+          <dd>University libraries, cathedral chapters, conservation studios, ecclesiastical archives.</dd>
+          <dt>Inquiries</dt>
+          <dd>Address Mlle. Auerbach, Subscriptions.</dd>
+        </dl>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- ============= COMPOSE: FORM + COLOPHON ============= -->
+  <section class="compose">
+
+    <div class="form-block">
+      <h3 class="section-title">Letters &amp; Submissions</h3>
+      <p class="section-italic">Letters to the editor; manuscript proposals of 3,000 to 6,000 words; plate submissions in colour or in line.</p>
+
+      <form action="#" method="post" autocomplete="off">
+        <div class="row">
+          <div>
+            <label for="given">Given name</label>
+            <input type="text" id="given" name="given" placeholder="Hélène">
+          </div>
+          <div>
+            <label for="surname">Surname</label>
+            <input type="text" id="surname" name="surname" placeholder="de Vaucanson">
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label for="email">Postal or electronic address</label>
+            <input type="email" id="email" name="email" placeholder="h.vaucanson@institut-roman.fr">
+          </div>
+          <div>
+            <label for="affil">Affiliation, if any</label>
+            <input type="text" id="affil" name="affil" placeholder="Atelier de Saint-Séverin">
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label for="kind">Nature of correspondence</label>
+            <select id="kind" name="kind">
+              <option>Letter to the Editor</option>
+              <option>Manuscript proposal (3,000–6,000 words)</option>
+              <option>Plate or drawing submission</option>
+              <option>Subscription inquiry</option>
+              <option>Errata or correction</option>
+            </select>
+          </div>
+          <div>
+            <label for="length">Approximate length (words)</label>
+            <input type="text" id="length" name="length" placeholder="4,200">
+          </div>
+        </div>
+
+        <div class="field-full" style="margin-bottom:16px;">
+          <label for="subject">Working title or subject</label>
+          <input type="text" id="subject" name="subject" placeholder="On the masonry of the eastern apse at Noyon">
+        </div>
+
+        <div class="field-full" style="margin-bottom:18px;">
+          <label for="body">Letter or précis</label>
+          <textarea id="body" name="body" placeholder="A short précis: the question proposed, the materials examined, and the season in which the writer expects to deliver the manuscript."></textarea>
+        </div>
+
+        <div class="check-group">
+          <label><input type="checkbox" name="post"> I prefer to send my manuscript by post; please reply with the editorial address and the form of submission.</label>
+          <label><input type="checkbox" name="plate"> A plate or drawing accompanies this letter (please indicate medium and dimensions in the précis).</label>
+          <label><input type="checkbox" name="reading"> I confirm I have read the editorial guide for proposals (3,000–6,000 words; one rewrite expected).</label>
+        </div>
+
+        <button class="send" type="submit">Send by Hand</button>
+      </form>
+    </div>
+
+    <aside class="colophon">
+      <h3>Colophon</h3>
+      <div class="ornament-row">
+        <svg viewBox="0 0 40 40" aria-hidden="true">
+          <g fill="#0a0a0a">
+            <path d="M 20 4 L 22 14 L 32 12 L 24 18 L 32 26 L 22 24 L 20 36 L 18 24 L 8 26 L 16 18 L 8 12 L 18 14 Z"/>
+          </g>
+        </svg>
+      </div>
+      <p>The Lancet Quarterly is edited by Reuben Auerbach and Marguerite Holcombe at a single desk in the rue du Cloître Notre-Dame, with editorial assistance from Sœur Madeleine Coquillard of the cathedral archive.</p>
+      <p>The Quarterly does <em>not</em> run advertising of any kind, and accepts no commercial sponsorship. Since the spring of 2021 it has been supported, in whole and without editorial condition, by the <strong>Auerbach-Holcombe Fund</strong> for the study of medieval architecture.</p>
+      <p>Plates are reproduced by offset lithography at four colours; text is set in lead and printed letterpress on Munken Pure 120 g/m². Bindings are sewn in linen thread by Atelier Pellerin.</p>
+      <div class="address">
+        Rue du Cloître Notre-Dame 9<br>
+        75004 Paris, France<br>
+        <span style="font-size:12px;">— par voie postale ou par main —</span>
+      </div>
+      <div class="glyph-row">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="currentColor"/></svg>
+        <span>fondé MMXIX</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="currentColor"/></svg>
+      </div>
+    </aside>
+
+  </section>
+
+</main>
+
+<!-- ============= FOOTER ============= -->
+<footer>
+  <div class="frieze" aria-hidden="true" style="
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 36 36%22><g fill=%22%230a0a0a%22><path d=%22M18 4 Q20 10 26 12 Q20 14 18 20 Q16 14 10 12 Q16 10 18 4 Z M18 16 Q20 22 26 24 Q20 26 18 32 Q16 26 10 24 Q16 22 18 16 Z M4 18 Q10 16 12 10 Q14 16 20 18 Q14 20 12 26 Q10 20 4 18 Z%22/><circle cx=%2218%22 cy=%2218%22 r=%221.6%22/></g></svg>');
+  "></div>
+
+  <div class="footer-cols">
+    <div>
+      <h4>Colophon</h4>
+      <p class="italic">The Lancet Quarterly</p>
+      <p>Set in Fraunces &amp; Source Sans 3. Printed letterpress at the Atelier de Saint-Séverin, four colours on Munken Pure 120 g/m², sewn in linen thread.</p>
+      <p>Published quarterly at the canonical quarter-days. ISSN 2755-0941.</p>
+    </div>
+    <div>
+      <h4>Masthead</h4>
+      <p><strong>Editors</strong><br>Reuben Auerbach<br>Marguerite Holcombe</p>
+      <p><strong>Plates Editor</strong><br>Anselm Bourdon-Lefèvre</p>
+      <p><strong>Archive Liaison</strong><br>Sœur Madeleine Coquillard</p>
+      <p><strong>Press</strong><br>Atelier de Saint-Séverin, Paris V<sup>e</sup></p>
+    </div>
+    <div>
+      <h4>Subscription &amp; Address</h4>
+      <p>Rue du Cloître Notre-Dame 9<br>75004 Paris, France</p>
+      <p><strong>Domestic</strong> &nbsp;£48 per annum<br>
+         <strong>Abroad</strong> &nbsp;£62 per annum<br>
+         <strong>Institutional</strong> &nbsp;£96 per annum</p>
+      <p class="italic">souscriptions@lancet-quarterly.fr</p>
+    </div>
+  </div>
+
+  <div class="footer-baseline">
+    Set in Fraunces and Source Sans 3 — printed quarterly since MMXIX
+  </div>
+</footer>
+
+</body>
+</html>

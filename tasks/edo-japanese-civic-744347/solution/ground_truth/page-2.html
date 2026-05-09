@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="ja-en">
+<head>
+<meta charset="UTF-8">
+<title>Register of the Eight-Hundred-Eight Wards — Edo Bureau of Wards & Watercourses</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.8;
+    overflow-x: hidden;
+  }
+
+  /* ===== NAV ===== */
+  nav.bureau-nav {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    padding: 28px 64px 22px 64px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--ornament);
+    gap: 32px;
+  }
+  nav .brand {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  nav .brand .kamon {
+    width: 44px;
+    height: 44px;
+  }
+  nav .brand .name {
+    font-family: var(--font-body), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.14em;
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.3;
+  }
+  nav .brand .name .sub {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    color: #555;
+    margin-top: 2px;
+  }
+  nav ul.links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    grid-column: 3;
+  }
+  nav ul.links li {
+    padding: 0 22px;
+    border-right: 1px solid var(--ornament);
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    font-variant: small-caps;
+  }
+  nav ul.links li:last-child { border-right: none; padding-right: 0; }
+  nav ul.links li:first-child { }
+  nav ul.links a {
+    color: var(--text);
+    text-decoration: none;
+  }
+  nav ul.links a[aria-current="page"] {
+    color: var(--secondary);
+    text-decoration: underline;
+    text-decoration-color: var(--secondary);
+    text-underline-offset: 6px;
+    text-decoration-thickness: 1px;
+  }
+
+  /* ===== HERO / TITLE BLOCK (off-axis) ===== */
+  .hero {
+    position: relative;
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    min-height: 460px;
+    padding: 90px 64px 60px 64px;
+  }
+  .hero .empty-field {
+    /* deliberate kraft-paper void */
+  }
+  .hero .title-mass {
+    grid-column: 2;
+    padding-left: 40px;
+    border-left: 1px solid var(--ornament);
+    position: relative;
+  }
+  .hero .eyebrow {
+    font-variant: small-caps;
+    letter-spacing: 0.32em;
+    font-size: 11px;
+    color: var(--text);
+    margin-bottom: 28px;
+  }
+  .hero h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 700;
+    font-size: 62px;
+    line-height: 1.05;
+    margin: 0 0 28px 0;
+    color: var(--text);
+    letter-spacing: 0.01em;
+  }
+  .hero h1 .accent {
+    color: var(--secondary);
+  }
+  .hero .lede {
+    max-width: 380px;
+    font-size: 14px;
+    line-height: 1.9;
+    color: #1a1a1a;
+  }
+  .hero .compiled {
+    margin-top: 36px;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    font-variant: small-caps;
+    color: #555;
+  }
+
+  /* faint sayagata in the empty field */
+  .hero-pattern {
+    position: absolute;
+    top: 70px;
+    left: 64px;
+    width: 360px;
+    height: 360px;
+    opacity: 0.13;
+    pointer-events: none;
+  }
+  .hero-pattern svg { width: 100%; height: 100%; }
+
+  /* ===== TALLY STRIP ===== */
+  .tally {
+    display: grid;
+    grid-template-columns: 5fr 1fr 1fr 1fr 1fr;
+    border-top: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+    padding: 22px 64px;
+    align-items: baseline;
+    background: var(--bg);
+  }
+  .tally .label {
+    font-variant: small-caps;
+    letter-spacing: 0.28em;
+    font-size: 11px;
+    color: #444;
+  }
+  .tally .stat {
+    text-align: right;
+    border-left: 1px solid var(--ornament);
+    padding-left: 18px;
+  }
+  .tally .stat .num {
+    font-family: var(--font-display), serif;
+    font-size: 26px;
+    color: var(--primary);
+    display: block;
+    line-height: 1;
+  }
+  .tally .stat .cap {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    font-variant: small-caps;
+    color: #555;
+    margin-top: 6px;
+    display: block;
+  }
+
+  /* ===== SECTION HEADING ===== */
+  .section-head {
+    display: grid;
+    grid-template-columns: 1fr 7fr;
+    padding: 80px 64px 30px 64px;
+    align-items: end;
+  }
+  .section-head .num {
+    font-family: var(--font-display), serif;
+    font-size: 80px;
+    color: var(--accent);
+    line-height: 1;
+    border-bottom: 1px solid var(--ornament);
+    padding-bottom: 8px;
+  }
+  .section-head .name {
+    padding-left: 40px;
+    border-bottom: 1px solid var(--ornament);
+    padding-bottom: 16px;
+  }
+  .section-head .name h2 {
+    font-family: var(--font-display), serif;
+    font-size: 30px;
+    margin: 0 0 6px 0;
+    font-weight: 700;
+  }
+  .section-head .name .gloss {
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    font-variant: small-caps;
+    color: #555;
+  }
+
+  /* ===== REGISTER CARDS ===== */
+  .register {
+    padding: 30px 64px 80px 64px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 36px 48px;
+  }
+  .ward-card {
+    background: var(--surface);
+    border-top: 1px solid var(--ornament);
+    padding: 28px 36px 32px 56px;
+    position: relative;
+    min-height: 230px;
+  }
+  .ward-card .seal {
+    position: absolute;
+    top: 18px;
+    right: 22px;
+    width: 38px;
+    height: 38px;
+    opacity: 0.9;
+  }
+  .ward-card .seal svg { width: 100%; height: 100%; }
+  .ward-card .index {
+    position: absolute;
+    top: 22px;
+    left: 18px;
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: #888;
+  }
+  .ward-card h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 700;
+    font-size: 26px;
+    margin: 4px 0 4px 0;
+    line-height: 1.15;
+    max-width: 260px;
+  }
+  .ward-card .district {
+    font-size: 11px;
+    font-variant: small-caps;
+    letter-spacing: 0.22em;
+    color: #555;
+    margin-bottom: 22px;
+  }
+  .ward-card dl {
+    margin: 0;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 6px 18px;
+    font-size: 13px;
+    border-top: 1px solid #d4c8a8;
+    padding-top: 14px;
+  }
+  .ward-card dt {
+    font-variant: small-caps;
+    letter-spacing: 0.16em;
+    font-size: 10px;
+    color: #6b6b6b;
+    padding-top: 3px;
+  }
+  .ward-card dd {
+    margin: 0;
+    color: var(--text);
+  }
+  .ward-card .trade {
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid #d4c8a8;
+    font-size: 12.5px;
+    line-height: 1.7;
+    color: #1a1a1a;
+    font-style: italic;
+    max-width: 340px;
+  }
+  .ward-card .trade::before {
+    content: "於 — ";
+    font-style: normal;
+    color: var(--secondary);
+    letter-spacing: 0.1em;
+  }
+
+  /* ===== DIVIDER ===== */
+  .divider {
+    display: flex;
+    justify-content: center;
+    padding: 30px 0 10px 0;
+  }
+  .divider svg {
+    width: 120px;
+    height: 30px;
+    opacity: 0.55;
+  }
+
+  /* ===== APPENDIX (off-axis colophon) ===== */
+  .appendix {
+    display: grid;
+    grid-template-columns: 4fr 8fr;
+    padding: 60px 64px 80px 64px;
+    border-top: 1px solid var(--ornament);
+  }
+  .appendix .pull {
+    padding-right: 40px;
+    border-right: 1px solid var(--ornament);
+  }
+  .appendix .pull .quote {
+    font-family: var(--font-display), serif;
+    font-size: 28px;
+    line-height: 1.4;
+    color: var(--primary);
+  }
+  .appendix .pull .attrib {
+    margin-top: 18px;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    font-variant: small-caps;
+    color: #555;
+  }
+  .appendix .notes {
+    padding-left: 40px;
+  }
+  .appendix .notes h4 {
+    font-family: var(--font-display), serif;
+    font-size: 16px;
+    margin: 0 0 14px 0;
+    letter-spacing: 0.04em;
+  }
+  .appendix .notes p {
+    font-size: 13px;
+    max-width: 520px;
+    margin: 0 0 12px 0;
+  }
+  .appendix .notes ul {
+    list-style: none;
+    padding: 0;
+    margin: 18px 0 0 0;
+    font-size: 12px;
+  }
+  .appendix .notes ul li {
+    padding: 8px 0;
+    border-bottom: 1px solid #c8b890;
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 18px;
+  }
+  .appendix .notes ul li span:first-child {
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    font-size: 10px;
+    color: #555;
+  }
+
+  /* ===== FOOTER ===== */
+  footer.bureau-foot {
+    position: relative;
+    padding: 0 0 50px 0;
+    text-align: center;
+    background: var(--bg);
+  }
+  .wave-band {
+    height: 70px;
+    overflow: hidden;
+    opacity: 0.18;
+    border-top: 1px solid var(--ornament);
+  }
+  .wave-band svg {
+    width: 100%;
+    height: 280px;
+    display: block;
+  }
+  footer .seal-mon {
+    width: 70px;
+    height: 70px;
+    margin: 40px auto 18px auto;
+  }
+  footer .addr {
+    font-size: 12px;
+    line-height: 1.9;
+    color: var(--text);
+  }
+  footer .addr .line {
+    display: block;
+  }
+  footer .era {
+    margin-top: 18px;
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.14em;
+  }
+  footer .attrib-cc {
+    margin-top: 22px;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    font-variant: small-caps;
+    color: #555;
+  }
+
+  /* tiny shared kamon SVG inline (paulownia simplified) for nav */
+  .mini-kiri {
+    width: 44px; height: 44px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============== NAV ============== -->
+<nav class="bureau-nav" aria-label="Primary">
+  <div class="brand">
+    <div class="kamon" aria-hidden="true">
+      <!-- paulownia kamon, small -->
+      <svg viewBox="0 0 345 326" xmlns="http://www.w3.org/2000/svg" class="mini-kiri">
+        <g fill="#0c0c0c">
+          <circle cx="172.6" cy="155" r="9"/>
+          <path d="M172.6 166c-0.4 4-0.7 8-0.8 12 16.5 8.7 31.9 20 43 35.3 10.9 16.6 19.5 36.6 16.8 56.9 -1.4-7.3-1.8-14.6-3.4-21.8 -7.3-29.3-29.4-53-55.9-66.6 -0.2 3.8-0.1 7.7-0.1 11.5 14 8.1 26.6 19.3 35.4 33.2 11.8 19.6 15.1 45.1 6.3 66.8 1.8-12.7 2.6-25.5 1.2-38.2 -4.2-24.7-20.7-46.4-42.9-57.9 -0.1 5.2-0.1 10.2-0.2 15.4 11.4 6.6 21.6 16.1 27.1 28.3 8.6 19.3 8.6 42.8-1 61.9 2.7-16.3 6.8-33 1.9-49.3 -3.4-15.9-14.2-29.4-28.3-36.8 0.2 4.2-1.1 9.4 2 13 17.8 20.9 21.3 52.9 9.7 77.5 0.9-8.6 3.3-17.1 3.2-25.9 1.2-17.1-3.2-35.2-14.8-48.2 -0.2 21.8 0.4 43.7 0.2 65.3 -0.2 3.5-0.7 6.7-1.7 10 -0.1-0.3-0.1-0.6-0.2-0.9 -0.1 0.3-0.1 0.6-0.2 0.9 -0.9-3.3-1.5-6.5-1.7-10 -0.2-21.7 0.4-43.5 0.2-65.3 -11.6 12.9-16 31.1-14.8 48.2 -0.1 8.8 2.4 17.3 3.2 25.9 -11.7-24.6-8.1-56.6 9.7-77.5 3.1-3.6 1.8-8.8 2-13 -14 7.4-24.9 20.9-28.3 36.8 -4.9 16.2-0.8 33-1.1 49.3 -9.6-19.1-9.6-42.7-1-61.9 5.5-12.2 15.7-21.7 27.1-28.3 -0.1-5.2-0.1-10.2-0.2-15.4 -22.1 11.5-38.6 33.3-42.9 57.9 -1.4 12.6-0.6 25.4 1.2 38.2 -8.8-21.7-5.5-47.2 6.3-66.8 8.7-13.9 21.3-25.1 35.4-33.2 0-3.8 0.1-7.7-0.1-11.5 -26.6 13.6-48.6 37.3-56 66.6 -1.6 7.3-2 14.6-3.4 21.8 -2.7-20.3 5.9-40.3 16.8-56.9 11-15.2 26.5-26.6 43-35.3 -0.1-3.7-0.4-7.5-0.7-11.2"/>
+          <path d="M85 130c-3-1.5-6-2-10-1.7 -2.6 0.1-5 0.3-5.3 0.6 -1.4 1.1-10.1 2.6-13 2.2 -2.2-0.3-4.7-2.1-6-4.3 -1.1-1.8-1-5.3 0-7 0.9-1.6 0.9-3.6 0-6.3 -1-2.8-0.6-4.3 1.7-6.9 1.4-1.5 2.6-2.3 4.7-2.9 2.8-0.8 2.9-0.8 5.5 0.2 3.4 1.3 4.2 1.3 6.5 0.1 3.7-1.9 9-0.8 11.7 2.4 1.5 1.7 1.6 3.2 0.8 8.1 -0.8 4.7 0.9 8.4 4.5 10.4 3.2 1.7 4.1-0.7 4.1-11 0-8.4 0.4-10.2 3-13 2.9-3 6.4-4.2 11.2-3.9 11.7 0.9 13.3 0.8 15.5-0.3 3.3-1.7 4-3 4-7.4 0-2.7 0.2-4.2 0.9-5.7 1.3-2.9 1.2-6.3-0.3-8.5 -1.4-2.1-5.3-3.8-8.7-3.8 -1.4 0-3.1-0.5-5.1-1.5 -2.3-1.2-3.4-1.5-4.8-1.3 -2.4 0.3-5.6 2.4-6.8 4.3 -1.4 2.2-2.4 7.4-2.4 12 0 4.5-0.9 6.9-3.2 9.2 -1 1-1.8 1.3-2.8 1.2 -1.2-0.1-1.4-0.4-1.7-2.1 -0.6-3.1-0.4-15.7 0.2-17.4 0.7-2 3.9-5.4 6.5-7.1 1.2-0.8 3-2.7 4.4-4.9 2.2-3.2 2.4-3.8 2.4-6.3 0-3.7-1.3-5.6-5-7.5 -1.5-0.8-3.4-2.2-4.1-3.1 -2.1-2.7-4.1-4.3-5.9-4.8 -3.7-1-5.4-0.4-8.7 3.5 -1.3 1.5-2.9 2.8-3.6 3 -5 1.2-9.1 7.9-7.4 12.2 0.7 1.9 5.1 6.4 8 8.4 6.3 4.2 8.5 9.1 8.5 19.4 0 7.4-0.6 8.1-4.2 5.1 -2.6-2.2-3.9-5-4.5-9.9 -0.7-5.3-1.7-9-3-10.5 -0.6-0.7-2.1-1.7-3.4-2.3 -2.9-1.4-4.8-1.2-9.3 1 -2.4 1.2-4.2 1.7-6.4 1.8 -2.6 0.2-3.4 0.4-4.5 1.5 -3 2.8-3.4 5.4-1.5 9.5 1.3 2.6 1.3 2.6 0.4 4.5 -0.8 1.8-0.8 2 0 3.8 0.5 1.1 1.7 2.5 3 3.5 1.9 1.4 2.6 1.6 4.9 1.5 1.5 0 3.3-0.3 4-0.6 0.7-0.3 4-0.7 7.2-0.8 5.4-0.3 6 -0.2 8.1 0.7 2.9 1.3 6.5 5.1 7.8 8.1 0.8 1.9 0.9 3.3 0.9 9.3 -0.1 8-0.5 9.7-2.7 9.9 -2.8 0.3-4.5-3-5.2-10.1 -0.3-3.4-0.8-5.5-1.6-7.4 -1.1-2.3-1.5-2.7-4.3-4.1 -4.5-2.2-5.5-2-11.2 1.7 -2 1.3-2.9 1.6-6 1.8 -4.1 0.2-5.4 0.9-7.1 3.8 -1.4 2.4-1.3 4.2 0.5 7.7 1.4 2.8 1.5 3.1 0.9 5.3 -0.8 3.1-0.3 5.2 1.6 7.1 2 2 5.3 3 9.5 3 2.7 0 3.7-0.3 6.7-1.9 3.3-1.7 4-1.8 7.5-1.8 4 0 4.7 0.3 8 2.9 1.1 0.9 1.8 1 6.4 1 5-0.1 5.2-0.1 7.1-1.5z"/>
+          <path d="M260 130c-4.3-3.3-5.9-3.8-11.1-3.7 -2.6 0.1-5 0.3-5.3 0.6 -1.4 1.1-10.1 2.6-13 2.2 -2.2-0.3-4.7-2.1-6-4.3 -1.1-1.8-1-5.3 0-7 0.9-1.6 0.9-3.6 0-6.3 -1-2.8-0.6-4.3 1.7-6.9 1.4-1.5 2.6-2.3 4.7-2.9 2.8-0.8 2.9-0.8 5.5 0.2 3.4 1.3 4.2 1.3 6.5 0.1 3.7-1.9 9-0.8 11.7 2.4 1.5 1.7 1.6 3.2 0.8 8.1 -0.8 4.7 0.9 8.4 4.5 10.4 3.2 1.7 4.1-0.7 4.1-11 0-8.4 0.4-10.2 3-13 2.9-3 6.4-4.2 11.2-3.9 11.7 0.9 13.3 0.8 15.5-0.3 3.3-1.7 4-3 4-7.4 0-2.7 0.2-4.2 0.9-5.7 1.3-2.9 1.2-6.3-0.3-8.5 -1.4-2.1-5.3-3.8-8.7-3.8 -1.4 0-3.1-0.5-5.1-1.5 -2.3-1.2-3.4-1.5-4.8-1.3 -2.4 0.3-5.6 2.4-6.8 4.3 -1.4 2.2-2.4 7.4-2.4 12 0 4.5-0.9 6.9-3.2 9.2 -1 1-1.8 1.3-2.8 1.2 -1.2-0.1-1.4-0.4-1.7-2.1 -0.6-3.1-0.4-15.7 0.2-17.4 0.7-2 3.9-5.4 6.5-7.1 1.2-0.8 3-2.7 4.4-4.9 2.2-3.2 2.4-3.8 2.4-6.3 0-3.7-1.3-5.6-5-7.5 -1.5-0.8-3.4-2.2-4.1-3.1 -2.1-2.7-4.1-4.3-5.9-4.8 -3.7-1-5.4-0.4-8.7 3.5 -1.3 1.5-2.9 2.8-3.6 3 -5 1.2-9.1 7.9-7.4 12.2 0.7 1.9 5.1 6.4 8 8.4 6.3 4.2 8.5 9.1 8.5 19.4 0 7.4-0.6 8.1-4.2 5.1 -2.6-2.2-3.9-5-4.5-9.9 -0.7-5.3-1.7-9-3-10.5 -0.6-0.7-2.1-1.7-3.4-2.3 -2.9-1.4-4.8-1.2-9.3 1 -2.4 1.2-4.2 1.7-6.4 1.8 -2.6 0.2-3.4 0.4-4.5 1.5 -3 2.8-3.4 5.4-1.5 9.5 1.3 2.6 1.3 2.6 0.4 4.5 -0.8 1.8-0.8 2 0 3.8 0.5 1.1 1.7 2.5 3 3.5 1.9 1.4 2.6 1.6 4.9 1.5 1.5 0 3.3-0.3 4-0.6 0.7-0.3 4-0.7 7.2-0.8 5.4-0.3 6-0.2 8.1 0.7 2.9 1.3 6.5 5.1 7.8 8.1 0.8 1.9 0.9 3.3 0.9 9.3 -0.1 8-0.5 9.7-2.7 9.9 -2.8 0.3-4.5-3-5.2-10.1 -0.3-3.4-0.8-5.5-1.6-7.4 -1.1-2.3-1.5-2.7-4.3-4.1 -4.5-2.2-5.5-2-11.2 1.7 -2 1.3-2.9 1.6-6 1.8 -4.1 0.2-5.4 0.9-7.1 3.8 -1.4 2.4-1.3 4.2 0.5 7.7 1.4 2.8 1.5 3.1 0.9 5.3 -0.8 3.1-0.3 5.2 1.6 7.1 2 2 5.3 3 9.5 3 2.7 0 3.7-0.3 6.7-1.9 3.3-1.7 4-1.8 7.5-1.8 4 0 4.7 0.3 8 2.9 1.1 0.9 1.8 1 6.4 1 5-0.1 5.2-0.1 7.1-1.5z"/>
+        </g>
+      </svg>
+    </div>
+    <div class="name">
+      Edo Bureau of Wards & Watercourses
+      <span class="sub">町方並上水方御役所</span>
+    </div>
+  </div>
+  <ul class="links">
+    <li><a href="page-1.html">Notices</a></li>
+    <li><a href="page-2.html" aria-current="page">Register</a></li>
+    <li><a href="page-3.html">Watercourses</a></li>
+    <li><a href="page-4.html">Fire-Watch</a></li>
+    <li><a href="page-5.html">Office</a></li>
+    <li><a href="page-6.html">Origins</a></li>
+  </ul>
+</nav>
+
+<!-- ============== HERO (off-axis) ============== -->
+<section class="hero">
+  <div class="hero-pattern" aria-hidden="true">
+    <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+      <g fill="none" stroke="#0c0c0c" stroke-width="2">
+        <polygon points="501.6,301.2 551.1,251.7 500.8,201.4 451.3,250.9 300.9,100.5 350.4,51 300.1,0.7 250.6,50.2 201.1,0.7 150.3,51.5 500.3,401.5 551.1,350.7"/>
+        <polygon points="600.9,199.9 551.6,150.7 601.2,101 550.7,50.4 501,100.1 450.4,150.7 400.8,200.3 451.3,250.9 501,201.2 550.3,250.5"/>
+        <polyline points="600,0 400.8,200.3 351,150.5 501.5,0"/>
+        <polygon points="349.9,452.9 300.4,502.4 250.1,452.1 299.6,402.6 149.2,252.2 99.7,301.7 49.4,251.4 98.9,201.9 49.4,152.4 100.2,101.6 450.2,451.6 399.4,502.4"/>
+        <polygon points="248.7,552.1 199.4,502.9 149.7,552.5 99.2,501.9 148.8,452.3 199.4,401.7 249,352.1 299.6,402.6 250,452.3 299.2,501.6"/>
+        <polygon points="-0.9,302.6 48.4,351.9 -1.2,401.5 49.3,452.1 99,402.5 149.6,351.9 199.2,302.2 148.7,251.7 99,301.3 49.7,252"/>
+      </g>
+    </svg>
+  </div>
+  <div class="empty-field" aria-hidden="true"></div>
+  <div class="title-mass">
+    <div class="eyebrow">Bureau Folio II · Of the Townsmen's Quarters</div>
+    <h1>Register of the<br>Eight-Hundred-Eight<br><span class="accent">Wards</span></h1>
+    <p class="lede">
+      A standing directory of representative <em>machi</em> under the bureau's jurisdiction, with the name of the present ward elder, the count of registered hearths, and the principal trade by which each quarter is known. Compiled annually upon the changing of the watch and certified by the Bureau seal.
+    </p>
+    <div class="compiled">Compiled · Bunsei 7, Eleventh Month, the Day of the Boar</div>
+  </div>
+</section>
+
+<!-- ============== TALLY ============== -->
+<div class="tally">
+  <div class="label">Whole Register · Summary of Hearths and Elders</div>
+  <div class="stat"><span class="num">808</span><span class="cap">Wards</span></div>
+  <div class="stat"><span class="num">12</span><span class="cap">Shown Below</span></div>
+  <div class="stat"><span class="num">9,847</span><span class="cap">Hearths</span></div>
+  <div class="stat"><span class="num">12</span><span class="cap">Toshiyori</span></div>
+</div>
+
+<!-- ============== SECTION HEADING ============== -->
+<header class="section-head">
+  <div class="num">壹</div>
+  <div class="name">
+    <h2>Wards of Standing — Selected Entries</h2>
+    <div class="gloss">Listed by district, north of the Nihonbashi bridge first, thence southward and to Asakusa</div>
+  </div>
+</header>
+
+<!-- ============== REGISTER CARDS ============== -->
+<section class="register">
+
+  <!-- Card 1 -->
+  <article class="ward-card">
+    <div class="index">No. 一</div>
+    <div class="seal" aria-hidden="true">
+      <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg">
+        <rect width="688" height="688" fill="#1c3a5e"/>
+        <path fill="#f5efde" d="M226 612c-18-2-37-9-52-21-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-20 28-21 64-27 97-16 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 13zM440 612c-18-2-37-9-52-21-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-20 28-21 64-27 97-16 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 13zM333 446c-6-5-12-9-12-9 0-1 2-7 5-14 2-7 4-13 4-13 0-1 0-1 1-1 5 1 13 2 18 1 3 0 6-1 7-1 0 0 1 3 4 13 2 7 5 14 5 14 0 0-18 14-22 17-1 0-5-3-10-7zM314 432c-8-8-16-14-26-19l-7-3 5-3c2-2 8-6 12-9 5-4 8-6 9-5 1 3 13 12 19 14 1 0 2 1 2 1 0 0-2 6-4 14-2 7-4 14-4 14 0 0-2-2-4-4zM366 422c-3-8-5-14-5-15 0-1 2-1 5-3 6-3 13-9 15-12l2-2 12 9 12 9-6 4c-9 5-16 9-23 17l-7 6-5-15zM160 410c-18-2-37-9-52-21-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-20 21-16 47-23 72-21 10 1 16 2 25 5 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 13zM506 410c-18-2-37-9-52-21-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-20 21-16 47-23 72-21 10 1 16 2 25 5 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 13z"/>
+      </svg>
+    </div>
+    <h3>Kanda Sudachō</h3>
+    <div class="district">Kanda · north of the river</div>
+    <dl>
+      <dt>Toshiyori</dt><dd>Shibukawa Genzaemon</dd>
+      <dt>Hearths</dt><dd>614 households</dd>
+      <dt>Founded</dt><dd>Keichō 11 (1606)</dd>
+    </dl>
+    <p class="trade">Vinegar and rice-bran brokers; the western lane known for its barrel-makers since the great rebuild of Meireki.</p>
+  </article>
+
+  <!-- Card 2 -->
+  <article class="ward-card">
+    <div class="index">No. 二</div>
+    <div class="seal" aria-hidden="true">
+      <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg">
+        <rect width="688" height="688" fill="#1c3a5e"/>
+        <path fill="#f5efde" d="M226 612c-18-2-37-9-52-21-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-20 28-21 64-27 97-16 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 13zM440 612c-18-2-37-9-52-21-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-20 28-21 64-27 97-16 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 13zM160 410c-18-2-37-9-52-21-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-20 21-16 47-23 72-21 10 1 16 2 25 5 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 13zM506 410c-18-2-37-9-52-21-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-20 21-16 47-23 72-21 10 1 16 2 25 5 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 13z"/>
+      </svg>
+    </div>
+    <h3>Nihonbashi Muromachi</h3>
+    <div class="district">Nihonbashi · the great bridgehead</div>
+    <dl>
+      <dt>Toshiyori</dt><dd>Sugimoto Jūbei</dd>
+      <dt>Hearths</dt><dd>1,128 households</dd>
+      <dt>Founded</dt><dd>Genna 2 (1616)</dd>
+    </dl>
+    <p class="trade">Drapers and silk-merchants of the first standing; site of the Echigoya cloth-house and the public scales of the Goto silver-mint.</p>
+  </article>
+
+  <!-- Card 3 -->
+  <article class="ward-card">
+    <div class="index">No. 三</div>
+    <div class="seal" aria-hidden="true">
+      <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg">
+        <rect width="688" height="688" fill="#1c3a5e"/>
+        <path fill="#f5efde" d="M226 612c-18-2-37-9-52-21-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-20 28-21 64-27 97-16 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 13zM440 612c-18-2-37-9-52-21-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-20 28-21 64-27 97-16 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 13zM160 410c-18-2-37-9-52-21-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-20 21-16 47-23 72-21 10 1 16 2 25 5 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 13zM506 410c-18-2-37-9-52-21-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-20 21-16 47-23 72-21 10 1 16 2 25 5 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 13z"/>
+      </svg>
+    </div>
+    <h3>Asakusa Tawaramachi</h3>
+    <div class="district">Asakusa · upon the high road</div>
+    <dl>
+      <dt>Toshiyori</dt><dd>Hayashi Tōkichi</dd>
+      <dt>Hearths</dt><dd>702 households</dd>
+      <dt>Founded</dt><dd>Kan'ei 14 (1637)</dd>
+    </dl>
+    <p class="trade">Rice-straw and bale-makers (tawara); the ward takes its name from the cooperage that supplies the granaries of Kuramae.</p>
+  </article>
+
+  <!-- Card 4 -->
+  <article class="ward-card">
+    <div class="index">No. 四</div>
+    <div class="seal" aria-hidden="true">
+      <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg">
+        <rect width="688" height="688" fill="#1c3a5e"/>
+        <path fill="#f5efde" d="M226 612c-18-2-37-9-52-21-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-20 28-21 64-27 97-16 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 13zM440 612c-18-2-37-9-52-21-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-20 28-21 64-27 97-16 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 13zM160 410c-18-2-37-9-52-21-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-20 21-16 47-23 72-21 10 1 16 2 25 5 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 13zM506 410c-18-2-37-9-52-21-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-20 21-16 47-23 72-21 10 1 16 2 25 5 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 13z"/>
+      </svg>
+    </div>
+    <h3>Kanda Konyachō</h3>
+    <div class="district">Kanda · the dyers' lane</div>
+    <dl>
+      <dt>Toshiyori</dt><dd>Tsuruya Heisuke</dd>
+      <dt>Hearths</dt><dd>421 households</dd>
+      <dt>Founded</dt><dd>Genna 4 (1618)</dd>
+    </dl>
+    <p class="trade">Indigo-dyers (konya) of long lineage; the open vats are inspected each Third Month for compliance with the river-discharge edict.</p>
+  </article>
+
+  <!-- Card 5 -->
+  <article class="ward-card">
+    <div class="index">No. 五</div>
+    <div class="seal" aria-hidden="true">
+      <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg">
+        <rect width="688" height="688" fill="#1c3a5e"/>
+        <path fill="#f5efde" d="M226 612c-18-2-37-9-52-21-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-20 28-21 64-27 97-16 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 13zM440 612c-18-2-37-9-52-21-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-20 28-21 64-27 97-16 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 13zM160 410c-18-2-37-9-52-21-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-20 21-16 47-23 72-21 10 1 16 2 25 5 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 13zM506 410c-18-2-37-9-52-21-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-20 21-16 47-23 72-21 10 1 16 2 25 5 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 13z"/>
+      </svg>
+    </div>
+    <h3>Nihonbashi Hongokuchō</h3>
+    <div class="district">Nihonbashi · east of the fish-market</div>
+    <dl>
+      <dt>Toshiyori</dt><dd>Ōkura Kichirōbei</dd>
+      <dt>Hearths</dt><dd>889 households</dd>
+      <dt>Founded</dt><dd>Keichō 14 (1609)</dd>
+    </dl>
+    <p class="trade">Sake brokers serving the Ikeda and Itami houses; ward storehouses hold the public seal of measure for the koku and the shō.</p>
+  </article>
+
+  <!-- Card 6 -->
+  <article class="ward-card">
+    <div class="index">No. 六</div>
+    <div class="seal" aria-hidden="true">
+      <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg">
+        <rect width="688" height="688" fill="#1c3a5e"/>
+        <path fill="#f5efde" d="M226 612c-18-2-37-9-52-21-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-20 28-21 64-27 97-16 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 13zM440 612c-18-2-37-9-52-21-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-20 28-21 64-27 97-16 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 13zM160 410c-18-2-37-9-52-21-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-20 21-16 47-23 72-21 10 1 16 2 25 5 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 13zM506 410c-18-2-37-9-52-21-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-20 21-16 47-23 72-21 10 1 16 2 25 5 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 13z"/>
+      </svg>
+    </div>
+    <h3>Kyōbashi Minamidenmachō</h3>
+    <div class="district">Kyōbashi · south of the post-station</div>
+    <dl>
+      <dt>Toshiyori</dt><dd>Iseya Sōbei</dd>
+      <dt>Hearths</dt><dd>556 households</dd>
+      <dt>Founded</dt><dd>Kan'ei 8 (1631)</dd>
+    </dl>
+    <p class="trade">Paper-merchants and account-book binders; supplier of ledger paper to the Magistrate's office and to twenty-three minor bureaus.</p>
+  </article>
+
+  <div class="divider" aria-hidden="true">
+    <svg viewBox="0 0 600 150" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+      <g fill="none" stroke="#0c0c0c" stroke-width="2" transform="translate(0,-225)">
+        <polygon points="501.6,301.2 551.1,251.7 500.8,201.4 451.3,250.9 300.9,100.5 350.4,51 300.1,0.7 250.6,50.2 201.1,0.7 150.3,51.5 500.3,401.5 551.1,350.7"/>
+        <polygon points="248.7,552.1 199.4,502.9 149.7,552.5 99.2,501.9 148.8,452.3 199.4,401.7 249,352.1 299.6,402.6 250,452.3 299.2,501.6"/>
+      </g>
+    </svg>
+  </div>
+  <div class="divider" aria-hidden="true"></div>
+
+  <!-- Card 7 -->
+  <article class="ward-card">
+    <div class="index">No. 七</div>
+    <div class="seal" aria-hidden="true">
+      <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg">
+        <rect width="688" height="688" fill="#1c3a5e"/>
+        <path fill="#f5efde" d="M226 612c-18-2-37-9-52-21-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-20 28-21 64-27 97-16 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 13zM440 612c-18-2-37-9-52-21-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-20 28-21 64-27 97-16 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 13zM160 410c-18-2-37-9-52-21-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-20 21-16 47-23 72-21 10 1 16 2 25 5 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 13zM506 410c-18-2-37-9-52-21-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-20 21-16 47-23 72-21 10 1 16 2 25 5 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 13z"/>
+      </svg>
+    </div>
+    <h3>Shiba Shinmeichō</h3>
+    <div class="district">Shiba · before the shrine of Shinmei</div>
+    <dl>
+      <dt>Toshiyori</dt><dd>Watanabe Magoshichi</dd>
+      <dt>Hearths</dt><dd>473 households</dd>
+      <dt>Founded</dt><dd>Kanbun 4 (1664)</dd>
+    </dl>
+    <p class="trade">Tatami-makers and rush-merchants; ward maintains the festival floats for the autumn rites of Shiba Daijingū at its own charge.</p>
+  </article>
+
+  <!-- Card 8 -->
+  <article class="ward-card">
+    <div class="index">No. 八</div>
+    <div class="seal" aria-hidden="true">
+      <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg">
+        <rect width="688" height="688" fill="#1c3a5e"/>
+        <path fill="#f5efde" d="M226 612c-18-2-37-9-52-21-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-20 28-21 64-27 97-16 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 13zM440 612c-18-2-37-9-52-21-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-20 28-21 64-27 97-16 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 13zM160 410c-18-2-37-9-52-21-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-20 21-16 47-23 72-21 10 1 16 2 25 5 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 13zM506 410c-18-2-37-9-52-21-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-20 21-16 47-23 72-21 10 1 16 2 25 5 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 13z"/>
+      </svg>
+    </div>
+    <h3>Honjo Aioichō</h3>
+    <div class="district">Honjo · across the great river</div>
+    <dl>
+      <dt>Toshiyori</dt><dd>Kashiwagi Buntarō</dd>
+      <dt>Hearths</dt><dd>638 households</dd>
+      <dt>Founded</dt><dd>Tenna 2 (1682)</dd>
+    </dl>
+    <p class="trade">Lumber and bamboo factors; ward yards run alongside the Tatekawa canal and supply the daimyō rebuilding works.</p>
+  </article>
+
+  <!-- Card 9 -->
+  <article class="ward-card">
+    <div class="index">No. 九</div>
+    <div class="seal" aria-hidden="true">
+      <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg">
+        <rect width="688" height="688" fill="#1c3a5e"/>
+        <path fill="#f5efde" d="M226 612c-18-2-37-9-52-21-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-20 28-21 64-27 97-16 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 13zM440 612c-18-2-37-9-52-21-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-20 28-21 64-27 97-16 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 13zM160 410c-18-2-37-9-52-21-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-20 21-16 47-23 72-21 10 1 16 2 25 5 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 13zM506 410c-18-2-37-9-52-21-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-20 21-16 47-23 72-21 10 1 16 2 25 5 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 13z"/>
+      </svg>
+    </div>
+    <h3>Fukagawa Saga-chō</h3>
+    <div class="district">Fukagawa · by the timber-yards</div>
+    <dl>
+      <dt>Toshiyori</dt><dd>Kinokuniya Riichi</dd>
+      <dt>Hearths</dt><dd>521 households</dd>
+      <dt>Founded</dt><dd>Genroku 3 (1690)</dd>
+    </dl>
+    <p class="trade">Cargo-handlers and warehouse-keepers; ward is jointly bonded with the river-watch for tolls upon goods crossing from Kiba.</p>
+  </article>
+
+  <!-- Card 10 -->
+  <article class="ward-card">
+    <div class="index">No. 十</div>
+    <div class="seal" aria-hidden="true">
+      <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg">
+        <rect width="688" height="688" fill="#1c3a5e"/>
+        <path fill="#f5efde" d="M226 612c-18-2-37-9-52-21-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-20 28-21 64-27 97-16 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 13zM440 612c-18-2-37-9-52-21-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-20 28-21 64-27 97-16 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 13zM160 410c-18-2-37-9-52-21-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-20 21-16 47-23 72-21 10 1 16 2 25 5 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 13zM506 410c-18-2-37-9-52-21-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-20 21-16 47-23 72-21 10 1 16 2 25 5 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 13z"/>
+      </svg>
+    </div>
+    <h3>Kanda Kajichō</h3>
+    <div class="district">Kanda · the smiths' quarter</div>
+    <dl>
+      <dt>Toshiyori</dt><dd>Mukōjima Saburōzaemon</dd>
+      <dt>Hearths</dt><dd>368 households</dd>
+      <dt>Founded</dt><dd>Keichō 19 (1614)</dd>
+    </dl>
+    <p class="trade">Sword and edge-tool smiths; the bureau requires that each forge stand at least sixteen <em>ken</em> from the nearest thatched eaves.</p>
+  </article>
+
+  <!-- Card 11 -->
+  <article class="ward-card">
+    <div class="index">No. 十一</div>
+    <div class="seal" aria-hidden="true">
+      <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg">
+        <rect width="688" height="688" fill="#1c3a5e"/>
+        <path fill="#f5efde" d="M226 612c-18-2-37-9-52-21-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-20 28-21 64-27 97-16 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 13zM440 612c-18-2-37-9-52-21-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-20 28-21 64-27 97-16 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 13zM160 410c-18-2-37-9-52-21-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-20 21-16 47-23 72-21 10 1 16 2 25 5 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 13zM506 410c-18-2-37-9-52-21-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-20 21-16 47-23 72-21 10 1 16 2 25 5 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 13z"/>
+      </svg>
+    </div>
+    <h3>Asakusa Komagatachō</h3>
+    <div class="district">Asakusa · by the Komagata ferry</div>
+    <dl>
+      <dt>Toshiyori</dt><dd>Sasaki Yohei</dd>
+      <dt>Hearths</dt><dd>402 households</dd>
+      <dt>Founded</dt><dd>Manji 2 (1659)</dd>
+    </dl>
+    <p class="trade">Ferrymen, eel-cookers, and lantern-makers; the ward elder sits on the joint board governing the Sumida crossing tolls.</p>
+  </article>
+
+  <!-- Card 12 -->
+  <article class="ward-card">
+    <div class="index">No. 十二</div>
+    <div class="seal" aria-hidden="true">
+      <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg">
+        <rect width="688" height="688" fill="#1c3a5e"/>
+        <path fill="#f5efde" d="M226 612c-18-2-37-9-52-21-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-20 28-21 64-27 97-16 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 13zM440 612c-18-2-37-9-52-21-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-20 28-21 64-27 97-16 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 13zM160 410c-18-2-37-9-52-21-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-20 21-16 47-23 72-21 10 1 16 2 25 5 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 13zM506 410c-18-2-37-9-52-21-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-20 21-16 47-23 72-21 10 1 16 2 25 5 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 13z"/>
+      </svg>
+    </div>
+    <h3>Nihonbashi Yokkaichichō</h3>
+    <div class="district">Nihonbashi · the four-day market</div>
+    <dl>
+      <dt>Toshiyori</dt><dd>Tanaka Mansuke</dd>
+      <dt>Hearths</dt><dd>1,135 households</dd>
+      <dt>Founded</dt><dd>Genna 7 (1621)</dd>
+    </dl>
+    <p class="trade">Greengrocers and dry-goods sellers; ward holds the patent for the public produce market on the fourth, fourteenth, and twenty-fourth.</p>
+  </article>
+
+</section>
+
+<!-- ============== APPENDIX ============== -->
+<section class="appendix">
+  <div class="pull">
+    <div class="quote">A ward without an elder is a lantern without oil; a register without a seal is a promise without a hand.</div>
+    <div class="attrib">— Bureau Maxim, attributed to Tameyoshi, Third Commissioner of Wards</div>
+  </div>
+  <div class="notes">
+    <h4>On the Reading of This Register</h4>
+    <p>
+      Hearth counts reflect the registry as last reconciled at the close of the Tenth Month. Wards in which a ward elder is presently absent — through illness, mourning, or removal to country residence — are governed in the interim by the deputy elder (<em>kumigashira</em>), whose name is held on the unabridged scroll at the bureau office and is not reproduced here.
+    </p>
+    <p>
+      Petitions concerning the boundaries of any ward, the legitimacy of an elder's standing, or the assessment of hearths shall be lodged in writing at the bureau gate during the third through seventh hour of the day, accompanied by the seal of two householders of standing within the ward concerned.
+    </p>
+    <ul>
+      <li><span>Total wards under bureau</span><span>Eight hundred and eight (formal count); 1,673 in present working register</span></li>
+      <li><span>Wards reformed this year</span><span>Seven, by reason of fire reconstruction in Honjo</span></li>
+      <li><span>Elders newly invested</span><span>Fourteen, of whom eleven inherited the post by family line</span></li>
+      <li><span>Next reconciliation</span><span>Bunsei 8, Third Month, the Day of the Hare</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============== FOOTER ============== -->
+<footer class="bureau-foot">
+  <div class="wave-band" aria-hidden="true">
+    <svg viewBox="0 0 700 700" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMin slice">
+      <defs>
+        <g id="C1f">
+          <path d="M 1,210 V 100 A 98,98 0 0 1 100,1 98,98 0 0 1 199,100 V 210" style="fill:#d9c8a5;stroke:#0c0c0c;stroke-width:2"/>
+          <path d="M 175,210 V 100 A 75,75 0 0 0 100,25 75,75 0 0 0 25,100 V 210" style="fill:#d9c8a5;stroke:#0c0c0c;stroke-width:1"/>
+        </g>
+        <g id="C4f">
+          <use href="#C1f"/>
+          <use href="#C1f" transform="translate(200,0)"/>
+          <use href="#C1f" transform="translate(400,0)"/>
+          <use href="#C1f" transform="translate(600,0)"/>
+        </g>
+      </defs>
+      <use href="#C4f" transform="translate(-100,0)"/>
+      <use href="#C4f" transform="translate(0,100)"/>
+      <use href="#C4f" transform="translate(-100,200)"/>
+    </svg>
+  </div>
+  <div class="seal-mon" aria-hidden="true">
+    <svg viewBox="0 0 345 326" xmlns="http://www.w3.org/2000/svg">
+      <g fill="#0c0c0c">
+        <circle cx="172.6" cy="155" r="9"/>
+        <path d="M172.6 166c-0.4 4-0.7 8-0.8 12 16.5 8.7 31.9 20 43 35.3 10.9 16.6 19.5 36.6 16.8 56.9 -1.4-7.3-1.8-14.6-3.4-21.8 -7.3-29.3-29.4-53-55.9-66.6 -0.2 3.8-0.1 7.7-0.1 11.5 14 8.1 26.6 19.3 35.4 33.2 11.8 19.6 15.1 45.1 6.3 66.8 1.8-12.7 2.6-25.5 1.2-38.2 -4.2-24.7-20.7-46.4-42.9-57.9 -0.1 5.2-0.1 10.2-0.2 15.4 11.4 6.6 21.6 16.1 27.1 28.3 8.6 19.3 8.6 42.8-1 61.9 2.7-16.3 6.8-33 1.9-49.3 -3.4-15.9-14.2-29.4-28.3-36.8 0.2 4.2-1.1 9.4 2 13 17.8 20.9 21.3 52.9 9.7 77.5 0.9-8.6 3.3-17.1 3.2-25.9 1.2-17.1-3.2-35.2-14.8-48.2 -0.2 21.8 0.4 43.7 0.2 65.3 -0.2 3.5-0.7 6.7-1.7 10 -0.1-0.3-0.1-0.6-0.2-0.9 -0.1 0.3-0.1 0.6-0.2 0.9 -0.9-3.3-1.5-6.5-1.7-10 -0.2-21.7 0.4-43.5 0.2-65.3 -11.6 12.9-16 31.1-14.8 48.2 -0.1 8.8 2.4 17.3 3.2 25.9 -11.7-24.6-8.1-56.6 9.7-77.5 3.1-3.6 1.8-8.8 2-13 -14 7.4-24.9 20.9-28.3 36.8 -4.9 16.2-0.8 33-1.1 49.3 -9.6-19.1-9.6-42.7-1-61.9 5.5-12.2 15.7-21.7 27.1-28.3 -0.1-5.2-0.1-10.2-0.2-15.4 -22.1 11.5-38.6 33.3-42.9 57.9 -1.4 12.6-0.6 25.4 1.2 38.2 -8.8-21.7-5.5-47.2 6.3-66.8 8.7-13.9 21.3-25.1 35.4-33.2 0-3.8 0.1-7.7-0.1-11.5 -26.6 13.6-48.6 37.3-56 66.6 -1.6 7.3-2 14.6-3.4 21.8 -2.7-20.3 5.9-40.3 16.8-56.9 11-15.2 26.5-26.6 43-35.3 -0.1-3.7-0.4-7.5-0.7-11.2"/>
+        <path d="M85 130c-3-1.5-6-2-10-1.7 -2.6 0.1-5 0.3-5.3 0.6 -1.4 1.1-10.1 2.6-13 2.2 -2.2-0.3-4.7-2.1-6-4.3 -1.1-1.8-1-5.3 0-7 0.9-1.6 0.9-3.6 0-6.3 -1-2.8-0.6-4.3 1.7-6.9 1.4-1.5 2.6-2.3 4.7-2.9 2.8-0.8 2.9-0.8 5.5 0.2 3.4 1.3 4.2 1.3 6.5 0.1 3.7-1.9 9-0.8 11.7 2.4 1.5 1.7 1.6 3.2 0.8 8.1 -0.8 4.7 0.9 8.4 4.5 10.4 3.2 1.7 4.1-0.7 4.1-11 0-8.4 0.4-10.2 3-13 2.9-3 6.4-4.2 11.2-3.9 11.7 0.9 13.3 0.8 15.5-0.3 3.3-1.7 4-3 4-7.4 0-2.7 0.2-4.2 0.9-5.7 1.3-2.9 1.2-6.3-0.3-8.5 -1.4-2.1-5.3-3.8-8.7-3.8 -1.4 0-3.1-0.5-5.1-1.5 -2.3-1.2-3.4-1.5-4.8-1.3 -2.4 0.3-5.6 2.4-6.8 4.3 -1.4 2.2-2.4 7.4-2.4 12 0 4.5-0.9 6.9-3.2 9.2 -1 1-1.8 1.3-2.8 1.2 -1.2-0.1-1.4-0.4-1.7-2.1 -0.6-3.1-0.4-15.7 0.2-17.4 0.7-2 3.9-5.4 6.5-7.1 1.2-0.8 3-2.7 4.4-4.9 2.2-3.2 2.4-3.8 2.4-6.3 0-3.7-1.3-5.6-5-7.5 -1.5-0.8-3.4-2.2-4.1-3.1 -2.1-2.7-4.1-4.3-5.9-4.8 -3.7-1-5.4-0.4-8.7 3.5 -1.3 1.5-2.9 2.8-3.6 3 -5 1.2-9.1 7.9-7.4 12.2 0.7 1.9 5.1 6.4 8 8.4 6.3 4.2 8.5 9.1 8.5 19.4 0 7.4-0.6 8.1-4.2 5.1 -2.6-2.2-3.9-5-4.5-9.9 -0.7-5.3-1.7-9-3-10.5 -0.6-0.7-2.1-1.7-3.4-2.3 -2.9-1.4-4.8-1.2-9.3 1 -2.4 1.2-4.2 1.7-6.4 1.8 -2.6 0.2-3.4 0.4-4.5 1.5 -3 2.8-3.4 5.4-1.5 9.5 1.3 2.6 1.3 2.6 0.4 4.5 -0.8 1.8-0.8 2 0 3.8 0.5 1.1 1.7 2.5 3 3.5 1.9 1.4 2.6 1.6 4.9 1.5 1.5 0 3.3-0.3 4-0.6 0.7-0.3 4-0.7 7.2-0.8 5.4-0.3 6 -0.2 8.1 0.7 2.9 1.3 6.5 5.1 7.8 8.1 0.8 1.9 0.9 3.3 0.9 9.3 -0.1 8-0.5 9.7-2.7 9.9 -2.8 0.3-4.5-3-5.2-10.1 -0.3-3.4-0.8-5.5-1.6-7.4 -1.1-2.3-1.5-2.7-4.3-4.1 -4.5-2.2-5.5-2-11.2 1.7 -2 1.3-2.9 1.6-6 1.8 -4.1 0.2-5.4 0.9-7.1 3.8 -1.4 2.4-1.3 4.2 0.5 7.7 1.4 2.8 1.5 3.1 0.9 5.3 -0.8 3.1-0.3 5.2 1.6 7.1 2 2 5.3 3 9.5 3 2.7 0 3.7-0.3 6.7-1.9 3.3-1.7 4-1.8 7.5-1.8 4 0 4.7 0.3 8 2.9 1.1 0.9 1.8 1 6.4 1 5-0.1 5.2-0.1 7.1-1.5z"/>
+        <path d="M260 130c-4.3-3.3-5.9-3.8-11.1-3.7 -2.6 0.1-5 0.3-5.3 0.6 -1.4 1.1-10.1 2.6-13 2.2 -2.2-0.3-4.7-2.1-6-4.3 -1.1-1.8-1-5.3 0-7 0.9-1.6 0.9-3.6 0-6.3 -1-2.8-0.6-4.3 1.7-6.9 1.4-1.5 2.6-2.3 4.7-2.9 2.8-0.8 2.9-0.8 5.5 0.2 3.4 1.3 4.2 1.3 6.5 0.1 3.7-1.9 9-0.8 11.7 2.4 1.5 1.7 1.6 3.2 0.8 8.1 -0.8 4.7 0.9 8.4 4.5 10.4 3.2 1.7 4.1-0.7 4.1-11 0-8.4 0.4-10.2 3-13 2.9-3 6.4-4.2 11.2-3.9 11.7 0.9 13.3 0.8 15.5-0.3 3.3-1.7 4-3 4-7.4 0-2.7 0.2-4.2 0.9-5.7 1.3-2.9 1.2-6.3-0.3-8.5 -1.4-2.1-5.3-3.8-8.7-3.8 -1.4 0-3.1-0.5-5.1-1.5 -2.3-1.2-3.4-1.5-4.8-1.3 -2.4 0.3-5.6 2.4-6.8 4.3 -1.4 2.2-2.4 7.4-2.4 12 0 4.5-0.9 6.9-3.2 9.2 -1 1-1.8 1.3-2.8 1.2 -1.2-0.1-1.4-0.4-1.7-2.1 -0.6-3.1-0.4-15.7 0.2-17.4 0.7-2 3.9-5.4 6.5-7.1 1.2-0.8 3-2.7 4.4-4.9 2.2-3.2 2.4-3.8 2.4-6.3 0-3.7-1.3-5.6-5-7.5 -1.5-0.8-3.4-2.2-4.1-3.1 -2.1-2.7-4.1-4.3-5.9-4.8 -3.7-1-5.4-0.4-8.7 3.5 -1.3 1.5-2.9 2.8-3.6 3 -5 1.2-9.1 7.9-7.4 12.2 0.7 1.9 5.1 6.4 8 8.4 6.3 4.2 8.5 9.1 8.5 19.4 0 7.4-0.6 8.1-4.2 5.1 -2.6-2.2-3.9-5-4.5-9.9 -0.7-5.3-1.7-9-3-10.5 -0.6-0.7-2.1-1.7-3.4-2.3 -2.9-1.4-4.8-1.2-9.3 1 -2.4 1.2-4.2 1.7-6.4 1.8 -2.6 0.2-3.4 0.4-4.5 1.5 -3 2.8-3.4 5.4-1.5 9.5 1.3 2.6 1.3 2.6 0.4 4.5 -0.8 1.8-0.8 2 0 3.8 0.5 1.1 1.7 2.5 3 3.5 1.9 1.4 2.6 1.6 4.9 1.5 1.5 0 3.3-0.3 4-0.6 0.7-0.3 4-0.7 7.2-0.8 5.4-0.3 6-0.2 8.1 0.7 2.9 1.3 6.5 5.1 7.8 8.1 0.8 1.9 0.9 3.3 0.9 9.3 -0.1 8-0.5 9.7-2.7 9.9 -2.8 0.3-4.5-3-5.2-10.1 -0.3-3.4-0.8-5.5-1.6-7.4 -1.1-2.3-1.5-2.7-4.3-4.1 -4.5-2.2-5.5-2-11.2 1.7 -2 1.3-2.9 1.6-6 1.8 -4.1 0.2-5.4 0.9-7.1 3.8 -1.4 2.4-1.3 4.2 0.5 7.7 1.4 2.8 1.5 3.1 0.9 5.3 -0.8 3.1-0.3 5.2 1.6 7.1 2 2 5.3 3 9.5 3 2.7 0 3.7-0.3 6.7-1.9 3.3-1.7 4-1.8 7.5-1.8 4 0 4.7 0.3 8 2.9 1.1 0.9 1.8 1 6.4 1 5-0.1 5.2-0.1 7.1-1.5z"/>
+      </g>
+    </svg>
+  </div>
+  <div class="addr">
+    <span class="line">Edo Bureau of Wards & Watercourses · 町方並上水方御役所</span>
+    <span class="line">Within the inner moat, north of Tokiwa-bashi gate, by the willow at the second turning</span>
+    <span class="line">Office of the Commissioner: open the third through the seventh hour of the day</span>
+  </div>
+  <div class="era">Compiled · Bunsei 7 · 文政七年 霜月吉日</div>
+  <div class="attrib-cc">Kamon SVG renderings — paulownia, plum, sayagata, seigaiha — used under CC-BY-SA</div>
+</footer>
+
+</body>
+</html>

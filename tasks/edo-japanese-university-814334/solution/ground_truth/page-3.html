@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admissions — Rikuō University</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+  }
+
+  /* ========== NAVIGATION ========== */
+  .site-nav {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    padding: 1.75rem 4rem 1.5rem;
+    border-bottom: 1px solid var(--primary);
+  }
+  .wordmark {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    font-family: var(--font-display), serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.08em;
+    color: var(--primary);
+    text-decoration: none;
+  }
+  .wordmark-mark {
+    width: 26px;
+    height: 26px;
+    display: inline-block;
+  }
+  .nav-links {
+    justify-self: end;
+    display: flex;
+    gap: 2.5em;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .nav-links a {
+    font-size: 14px;
+    color: var(--primary);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    position: relative;
+    padding-bottom: 0.6rem;
+  }
+  .nav-links a[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  /* ========== HERO / EDITORIAL HEADER ========== */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 6rem 4rem 4rem;
+    gap: 4rem;
+    align-items: end;
+  }
+  .hero-eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-family: var(--font-display), serif;
+    font-size: 5.5rem;
+    line-height: 1.05;
+    margin: 0;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: var(--primary);
+  }
+  .hero h1 .accent-char {
+    color: var(--accent);
+  }
+  .hero-side {
+    border-left: 1px solid var(--primary);
+    padding: 0.5rem 0 0.5rem 2rem;
+    align-self: end;
+    max-width: 380px;
+  }
+  .hero-side p {
+    font-size: 0.95rem;
+    line-height: 1.85;
+    color: var(--text);
+    margin: 0;
+  }
+  .hero-meta {
+    margin-top: 2rem;
+    font-family: var(--font-display), serif;
+    font-size: 0.95rem;
+    color: var(--text-emphasis);
+    letter-spacing: 0.05em;
+  }
+
+  /* ========== DIVIDER ========== */
+  .divider {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 2rem;
+    padding: 5rem 4rem;
+  }
+  .divider .rule {
+    height: 1px;
+    background: var(--primary);
+  }
+  .divider .glyph {
+    width: 64px;
+    height: 64px;
+    opacity: 0.85;
+  }
+
+  /* ========== DEADLINES ========== */
+  .deadlines-section {
+    padding: 0 4rem 6rem;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 4rem;
+  }
+  .section-label {
+    font-family: var(--font-display), serif;
+  }
+  .section-label .num {
+    font-size: 14px;
+    letter-spacing: 0.3em;
+    color: var(--text-emphasis);
+    display: block;
+    margin-bottom: 1rem;
+  }
+  .section-label h2 {
+    font-family: var(--font-display), serif;
+    font-size: 2rem;
+    font-weight: 400;
+    margin: 0 0 1.5rem;
+    line-height: 1.2;
+  }
+  .section-label p {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: var(--text);
+    max-width: 240px;
+  }
+
+  .deadline-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .card {
+    position: relative;
+    background: var(--surface);
+    border-top: 1px solid var(--primary);
+    border-left: 1px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
+    border-right: none;
+    padding: 2.5rem;
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+  }
+  .card-mon {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 24px;
+    height: 24px;
+    opacity: 0.85;
+  }
+  .card-mon svg {
+    width: 100%;
+    height: 100%;
+  }
+  .card-track {
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    margin-bottom: 1.5rem;
+  }
+  .card h3 {
+    font-family: var(--font-display), serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin: 0 0 1rem;
+    line-height: 1.3;
+  }
+  .card .date {
+    font-family: var(--font-display), serif;
+    font-size: 1.1rem;
+    color: var(--text-emphasis);
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(12,12,12,0.15);
+    padding-bottom: 1rem;
+  }
+  .card p {
+    font-size: 0.95rem;
+    line-height: 1.75;
+    margin: 0;
+  }
+  .card.featured h3::first-letter {
+    color: var(--accent);
+  }
+
+  /* ========== DOCUMENTS / TUITION ========== */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 6rem;
+    padding: 6rem 4rem;
+    border-top: 1px solid var(--primary);
+  }
+  .two-col h2 {
+    font-family: var(--font-display), serif;
+    font-size: 2.4rem;
+    font-weight: 400;
+    margin: 0 0 0.5rem;
+    line-height: 1.2;
+  }
+  .two-col .num {
+    font-size: 14px;
+    letter-spacing: 0.3em;
+    color: var(--text-emphasis);
+    display: block;
+    margin-bottom: 1rem;
+  }
+  .two-col h2 + p.lede {
+    margin: 0 0 2.5rem;
+    font-size: 1rem;
+    line-height: 1.85;
+    max-width: 480px;
+    color: var(--text);
+  }
+  .doc-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .doc-list li {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid rgba(12,12,12,0.15);
+  }
+  .doc-list li:last-child { border-bottom: none; }
+  .doc-list .doc-num {
+    font-family: var(--font-display), serif;
+    font-size: 1.2rem;
+    color: var(--text-emphasis);
+    letter-spacing: 0.1em;
+  }
+  .doc-list .doc-name {
+    font-family: var(--font-display), serif;
+    font-size: 1.15rem;
+    margin-bottom: 0.4rem;
+  }
+  .doc-list .doc-detail {
+    font-size: 0.9rem;
+    color: var(--text);
+    line-height: 1.7;
+  }
+  .doc-list .optional {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-left: 0.5em;
+  }
+
+  /* TUITION SIDE */
+  .tuition-block {
+    position: relative;
+    padding: 2rem 0 0;
+  }
+  .tuition-figure {
+    font-family: var(--font-display), serif;
+    font-size: 5.5rem;
+    line-height: 1;
+    color: var(--primary);
+    letter-spacing: -0.02em;
+    margin: 0 0 0.5rem;
+  }
+  .tuition-figure .yen {
+    color: var(--accent);
+  }
+  .tuition-meta {
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--primary);
+  }
+  .scholarship h3 {
+    font-family: var(--font-display), serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin: 0 0 1rem;
+  }
+  .scholarship p {
+    font-size: 0.95rem;
+    line-height: 1.85;
+    margin: 0 0 1rem;
+  }
+  .scholarship .seal {
+    margin-top: 2rem;
+    width: 56px;
+    height: 56px;
+    opacity: 0.9;
+  }
+
+  /* ========== CALL TO ACTION BAND ========== */
+  .cta-band {
+    position: relative;
+    padding: 7rem 4rem;
+    border-top: 1px solid var(--primary);
+    overflow: hidden;
+  }
+  .cta-wave {
+    position: absolute;
+    inset: 0;
+    opacity: 0.07;
+    pointer-events: none;
+    background-image: url("svg/seigaiha-waves.svg");
+    background-size: 350px;
+    background-repeat: repeat;
+  }
+  .cta-inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 4rem;
+    max-width: 1100px;
+  }
+  .cta-inner h2 {
+    font-family: var(--font-display), serif;
+    font-size: 3.2rem;
+    font-weight: 400;
+    line-height: 1.15;
+    margin: 0;
+    max-width: 700px;
+  }
+  .cta-inner p {
+    font-size: 0.95rem;
+    line-height: 1.85;
+    margin: 1.5rem 0 0;
+    max-width: 520px;
+  }
+  .cta-action {
+    text-align: right;
+  }
+  .cta-action a {
+    font-family: var(--font-display), serif;
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+    color: var(--primary);
+    text-decoration: none;
+    border-bottom: 1px solid var(--primary);
+    padding-bottom: 0.4rem;
+  }
+  .cta-mark {
+    display: block;
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    margin-bottom: 1.5rem;
+    margin-left: auto;
+  }
+
+  /* ========== FOOTER ========== */
+  footer {
+    position: relative;
+    padding: 4rem 4rem 3rem;
+    border-top: 1px solid var(--primary);
+    overflow: hidden;
+  }
+  .footer-wave {
+    position: absolute;
+    inset: 0;
+    opacity: 0.08;
+    pointer-events: none;
+    background-image: url("svg/seigaiha-waves.svg");
+    background-size: 320px;
+    background-repeat: repeat;
+  }
+  .footer-rule {
+    height: 1px;
+    background: var(--primary);
+    margin-bottom: 3rem;
+    position: relative;
+  }
+  .footer-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr;
+    gap: 4rem;
+  }
+  .footer-mark {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 1.5rem;
+    display: block;
+  }
+  .footer-name {
+    font-family: var(--font-display), serif;
+    font-size: 1.3rem;
+    line-height: 1.5;
+    margin: 0 0 0.5rem;
+  }
+  .footer-found {
+    font-family: var(--font-display), serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.15em;
+    color: var(--text-emphasis);
+    margin: 0;
+  }
+  .footer-address {
+    font-size: 0.85rem;
+    line-height: 1.9;
+    color: var(--text);
+    max-width: 220px;
+  }
+  .footer-attr {
+    font-size: 0.75rem;
+    line-height: 1.8;
+    color: var(--text);
+    opacity: 0.7;
+  }
+  .footer-attr h4 {
+    font-family: var(--font-display), serif;
+    font-size: 0.95rem;
+    font-weight: 400;
+    margin: 0 0 0.8rem;
+    color: var(--primary);
+    opacity: 1;
+    letter-spacing: 0.05em;
+  }
+</style>
+</head>
+<body>
+
+<!-- Reusable inline SVG sprites -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="kiri-mon" viewBox="0 0 345 326">
+      <g transform="matrix(0.98619,0,0,0.98619,2.38,5.36)">
+        <path fill="currentColor" d="M172.6,0c-1.3-0.2-2.6-0.1-4,0.1c-0.8,0.3-2.9,2-4.6,4c-1.9,2.1-4.1,3.9-5.5,4.6c-1.4,0.7-2.9,1.9-3.7,3.1c-1.2,1.7-1.4,2.5-1.5,5.3c0,5.2,1.4,7.8,7.7,14.2c7,7.1,7.6,8.3,8.1,18c0.4,8,0.2,10.2-1.2,10.9c-1.5,0.8-2.3,0.6-4.1-1.1c-2.6-2.3-3.8-5.2-5.3-13.2c-2.2-11.3-3.8-15.1-7.1-16.8c-2.8-1.5-5.1-0.8-8.8,2.7c-1.6,1.5-2.1,1.7-4,1.7c-5.4-0.1-8.6,5.1-6.3,9.9c0.8,1.7,0.6,2.5-1.9,5.5c-1.6,2-2.2,5.2-1.2,7c0.3,0.7,1.3,1.7,2.2,2.3c1.4,0.9,2.3,1.1,5.6,1.1c2.3,0,4.8-0.3,6-0.7c2.8-0.9,4.6-0.9,8.5,0.4c6.9,2.2,13.9,7,16.3,11c1.3,2.3,1.3,2.4,1.4,11.8l0.1,9.5l-1.2,1.2c-1.5,1.5-2.6,1.5-4.7,0.1c-2.3-1.5-3.4-3.9-3.1-6.6c0.1-1.2-0.2-4.4-0.6-7.1c-1.3-7.7-4-11.6-9.2-13.4c-2.5-0.9-3.2-0.8-6.7,0.6c-2.2,0.9-2.6,0.9-4.5,0.2c-1.9-0.7-2.3-0.6-4.1,0c-2.3,0.9-4.2,2.7-5.1,5c-0.5,1.3-0.5,2.1,0,4.3c0.6,2.5,0.5,2.9-0.7,6.3c-1.6,4.4-1.6,4.8-0.4,7.3c2.1,4.2,5.7,5.6,16.3,6.4c4.4,0.3,8.9,0.7,10.1,0.8c2.9,0.4,7.6,3.1,10.1,6c3.1,3.5,3.7,6,4.1,17.8c0.4,12,0,14.5-2.8,14.4c-1.6,0-2.4-1.6-3-6.3c-2.1-15.8-3.1-19.5-6.2-22.9c-1.5-1.7-2.6-2.3-5.2-3.1l-3.3-1l-3,1c-2.7,0.9-3.4,0.9-6.8,0.4c-2.1-0.3-4.7-0.6-5.7-0.6c-2.4,0-5.4,1.6-6.7,3.7c-0.9,1.4-1,2-0.7,5.5c0.3,3.8,0.3,3.9-1.2,6c-2.2,3-2.6,4.5-1.8,7.3c1.1,3.9,6.5,7.8,11.9,8.5c1.3,0.2,2.6,0.5,2.9,0.7c0.3,0.2,3.9,0.5,8,0.7c6.6,0.3,7.7,0.5,10,1.6c2.8,1.3,4.8,3,6.9,5.9c0.1,0.2,1.5,1.9,2.4,3c2.1-1.6,4.7-2.6,7.5-2.6c2.9,0,5.5,1,7.6,2.6c0.8-1,2.1-2.7,2.4-3c2.1-2.9,4-4.6,6.9-5.9c2.3-1.1,3.4-1.3,10-1.6c4.1-0.2,7.7-0.5,8-0.7c0.3-0.2,1.6-0.5,2.9-0.7c5.3-0.7,10.7-4.6,11.9-8.5c0.8-2.8,0.4-4.3-1.8-7.3c-1.5-2.1-1.5-2.2-1.2-6c0.3-3.4,0.2-4-0.7-5.5c-1.3-2.1-4.3-3.7-6.7-3.7c-1,0-3.6,0.3-5.7,0.6c-3.4,0.5-4.1,0.4-6.8-0.4l-3-1l-3.3,1c-2.6,0.8-3.7,1.4-5.2,3.1c-3.1,3.5-4.1,7.2-6.2,22.9c-0.6,4.7-1.4,6.3-3,6.3c-2.8,0-3.2-2.4-2.8-14.4c0.4-11.8,1-14.3,4.1-17.8c2.5-2.9,7.2-5.6,10.1-6c1.2-0.1,5.7-0.5,10.1-0.8c10.6-0.8,14.2-2.2,16.3-6.4c1.2-2.5,1.2-2.9-0.4-7.3c-1.3-3.4-1.3-3.8-0.7-6.3c0.5-2.2,0.5-3,0-4.3c-0.9-2.3-2.8-4.1-5.1-5c-1.8-0.6-2.2-0.7-4.1,0c-1.9,0.7-2.3,0.7-4.5-0.2c-3.5-1.4-4.2-1.5-6.7-0.6c-5.2,1.8-7.9,5.7-9.2,13.4c-0.4,2.7-0.7,5.9-0.6,7.1c0.3,2.7-0.8,5.1-3.1,6.6c-2.1,1.4-3.2,1.4-4.7-0.1l-1.2-1.2l0.1-9.5c0.1-9.4,0.1-9.5,1.4-11.8c2.4-4,9.4-8.8,16.3-11c3.9-1.3,5.7-1.3,8.5-0.4c1.2,0.4,3.7,0.7,6,0.7c3.3,0,4.2-0.2,5.6-1.1c0.9-0.6,1.9-1.6,2.2-2.3c1-1.8,0.4-5-1.2-7c-2.5-3-2.7-3.8-1.9-5.5c2.3-4.8-0.9-10-6.3-9.9c-1.9,0-2.4-0.2-4-1.7c-3.7-3.5-6-4.2-8.8-2.7c-3.3,1.7-4.9,5.5-7.1,16.8c-1.5,8-2.7,10.9-5.3,13.2c-1.8,1.7-2.6,1.9-4.1,1.1c-1.4-0.7-1.6-2.9-1.2-10.9c0.5-9.7,1.1-10.9,8.1-18c6.3-6.4,7.7-9,7.7-14.2c-0.1-2.8-0.3-3.6-1.5-5.3c-0.8-1.2-2.3-2.4-3.7-3.1c-1.4-0.7-3.6-2.5-5.5-4.6c-1.7-2-3.8-3.7-4.6-4C175.2-0.1,173.9-0.2,172.6,0z"/>
+        <circle fill="currentColor" cx="172.6" cy="155" r="9.9"/>
+        <path fill="currentColor" d="M170.05,166.07 C 125.35,181.64 94.94,229.19 96.65,275.91 C 97.36,282.23 102.5,286.5 107.45,289.79 C 110.5,291.35 110.66,295.19 112.18,298.07 C 117.42,311.53 134.03,318.57 147.48,314.47 C 154.41,320.59 162.94,326.54 172.6,326.24 C 182.26,326.54 190.79,320.59 197.72,314.47 C 211.17,318.57 227.78,311.53 233.03,298.07 C 234.54,295.19 234.7,291.35 237.75,289.79 C 242.7,286.5 247.84,282.23 248.55,275.91 C 250.26,229.19 219.85,181.64 175.15,166.07 C 174.81,169.77 174.48,173.61 174.33,177.29 C 190.88,185.96 206.31,197.33 217.36,212.56 C 228.23,229.14 236.83,249.18 234.12,269.51 C 232.72,262.25 232.28,254.97 230.68,247.7 C 223.35,218.45 201.3,194.69 174.75,181.12 C 174.59,184.95 174.62,188.78 174.65,192.62 C 188.71,200.74 201.26,211.93 210,225.84 C 221.85,245.48 225.13,270.93 216.31,292.66 C 218.12,280 218.97,267.15 217.52,254.52 C 213.29,229.84 196.82,208.14 174.69,196.64 C 174.54,201.81 174.58,206.8 174.43,211.97 C 185.79,218.58 196.03,228.07 201.5,240.29 C 210.09,259.56 210.1,283.13 200.49,302.18 C 203.23,285.87 207.3,269.17 202.37,252.92 C 198.98,237.05 188.13,223.54 174.08,216.19 C 174.31,220.4 173.02,225.59 176.11,229.2 C 193.92,250.12 197.45,282.09 185.78,306.71 C 186.66,298.08 189.08,289.64 189.01,280.82 C 190.2,263.76 185.83,245.6 174.23,232.66 C 174.03,254.51 174.6,276.35 174.4,298 C 174.24,301.45 173.69,304.71 172.76,307.97 C 172.7,307.69 172.66,307.41 172.6,307.12 C 172.54,307.41 172.5,307.69 172.44,307.97 C 171.51,304.71 170.96,301.45 170.8,298 C 170.6,276.35 171.17,254.51 170.97,232.66 C 159.37,245.6 155,263.76 156.19,280.82 C 156.12,289.64 158.54,298.08 159.42,306.71 C 147.75,282.09 151.28,250.12 169.09,229.2 C 172.18,225.59 170.89,220.4 171.11,216.19 C 157.07,223.54 146.22,237.05 142.83,252.92 C 137.9,269.17 141.97,285.87 144.71,302.18 C 135.1,283.13 135.11,259.56 143.7,240.29 C 149.17,228.07 159.41,218.58 170.77,211.97 C 170.62,206.8 170.66,201.81 170.51,196.64 C 148.38,208.14 131.91,229.84 127.68,254.52 C 126.23,267.15 127.08,280 128.89,292.66 C 120.06,270.93 123.35,245.48 135.2,225.84 C 143.94,211.93 156.49,200.74 170.55,192.62 C 170.58,188.78 170.61,184.95 170.45,181.12 C 143.9,194.69 121.85,218.45 114.52,247.7 C 112.92,254.97 112.48,262.25 111.07,269.51 C 108.37,249.18 116.97,229.14 127.84,212.56 C 138.89,197.33 154.32,185.96 170.87,177.29 C 170.72,173.61 170.39,169.77 170.05,166.07 z"/>
+      </g>
+    </symbol>
+    <symbol id="umebachi-mon" viewBox="0 0 688 688">
+      <circle cx="344" cy="344" r="340" fill="currentColor"/>
+      <g fill="#f5efde">
+        <circle cx="344" cy="180" r="92"/>
+        <circle cx="220" cy="270" r="92"/>
+        <circle cx="468" cy="270" r="92"/>
+        <circle cx="265" cy="430" r="92"/>
+        <circle cx="423" cy="430" r="92"/>
+        <circle cx="344" cy="345" r="48"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ===== NAVIGATION ===== -->
+<nav class="site-nav" aria-label="Primary">
+  <a href="page-1.html" class="wordmark">
+    <svg class="wordmark-mark" aria-hidden="true"><use href="#kiri-mon"/></svg>
+    <span>Rikuō University&nbsp;&nbsp;·&nbsp;&nbsp;陸王大學</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="page-1.html">Home</a></li>
+    <li><a href="page-2.html">Faculties</a></li>
+    <li><a href="page-3.html" aria-current="page">Admissions</a></li>
+    <li><a href="page-4.html">Library</a></li>
+    <li><a href="page-5.html">Visit</a></li>
+    <li><a href="page-6.html">About</a></li>
+  </ul>
+</nav>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+  <div>
+    <p class="hero-eyebrow">Undergraduate Admissions &nbsp;·&nbsp; Academic Year 2026</p>
+    <h1>Entry by<br>letter, ink,<br>and <span class="accent-char">resolve</span>.</h1>
+    <p class="hero-meta">Office of the Registrar &nbsp;·&nbsp; Established Meiji 14</p>
+  </div>
+  <aside class="hero-side">
+    <p>
+      Rikuō welcomes a single intake each spring. Candidates apply along one
+      of three tracks below; each is read by a panel of three faculty members
+      from the relevant school. We accept a deliberately small cohort —
+      approximately one hundred and forty undergraduates per year — so that
+      every entrant can be known by name.
+    </p>
+  </aside>
+</header>
+
+<!-- ===== DIVIDER ===== -->
+<div class="divider" aria-hidden="true">
+  <div class="rule"></div>
+  <svg class="glyph" viewBox="0 0 600 600">
+    <g fill="none" stroke="#0c0c0c" stroke-width="3">
+      <polygon points="501.6,301.2 551.1,251.7 500.8,201.4 451.3,250.9 300.9,100.5 350.4,51 300.1,0.7 250.6,50.2 201.1,0.7 150.3,51.5 500.3,401.5 551.1,350.7"/>
+      <polygon points="349.9,452.9 300.4,502.4 250.1,452.1 299.6,402.6 149.2,252.2 99.7,301.7 49.4,251.4 98.9,201.9 49.4,152.4 100.2,101.6 450.2,451.6 399.4,502.4"/>
+    </g>
+  </svg>
+  <div class="rule"></div>
+</div>
+
+<!-- ===== DEADLINES ===== -->
+<section class="deadlines-section">
+  <div class="section-label">
+    <span class="num">— I.</span>
+    <h2>Three<br>Deadlines</h2>
+    <p>
+      Each track is independent. An applicant may stand for one only.
+      All times are Japan Standard Time, end of day.
+    </p>
+  </div>
+
+  <div class="deadline-grid">
+
+    <article class="card">
+      <svg class="card-mon" aria-hidden="true"><use href="#umebachi-mon"/></svg>
+      <p class="card-track">Track 一 · Recommendation</p>
+      <h3>Recommendation<br>Track</h3>
+      <p class="date">10 December 2025</p>
+      <p>
+        For candidates put forward by an affiliated upper secondary or by a
+        practicing master in a recognised craft. Interview held on campus
+        the following January.
+      </p>
+    </article>
+
+    <article class="card featured">
+      <svg class="card-mon" aria-hidden="true"><use href="#umebachi-mon"/></svg>
+      <p class="card-track">Track 二 · International</p>
+      <h3>International<br>Application</h3>
+      <p class="date">15 January 2026</p>
+      <p>
+        Open to applicants schooled outside Japan. Submitted online with
+        certified transcripts. Conducted in English or Japanese; no
+        preference is given to either.
+      </p>
+    </article>
+
+    <article class="card">
+      <svg class="card-mon" aria-hidden="true"><use href="#umebachi-mon"/></svg>
+      <p class="card-track">Track 三 · Domestic</p>
+      <h3>Domestic<br>Common Test</h3>
+      <p class="date">25 February 2026</p>
+      <p>
+        Standard route for graduates of Japanese senior high schools.
+        Common Test results are read alongside the personal statement
+        and any submitted portfolio.
+      </p>
+    </article>
+
+  </div>
+</section>
+
+<!-- ===== DOCUMENTS / TUITION ===== -->
+<section class="two-col">
+  <div>
+    <span class="num">— II.</span>
+    <h2>Required<br>Documents</h2>
+    <p class="lede">
+      All applicants, regardless of track, submit the following. Files are
+      uploaded to the admissions portal; physical portfolios are couriered
+      to the Yanaka campus.
+    </p>
+
+    <ol class="doc-list">
+      <li>
+        <span class="doc-num">一</span>
+        <div>
+          <div class="doc-name">Personal Statement</div>
+          <div class="doc-detail">A continuous essay of approximately 1,200 words on a chosen prompt issued each October. Written in either Japanese or English.</div>
+        </div>
+      </li>
+      <li>
+        <span class="doc-num">二</span>
+        <div>
+          <div class="doc-name">Two Letters of Reference</div>
+          <div class="doc-detail">From two persons who have taught or supervised the candidate for at least one academic year. Submitted directly through the portal.</div>
+        </div>
+      </li>
+      <li>
+        <span class="doc-num">三</span>
+        <div>
+          <div class="doc-name">Portfolio <span class="optional">Fine Crafts only</span></div>
+          <div class="doc-detail">Eight to twelve works in any medium pursued by the candidate. Documentation in photographs is acceptable; original objects need not be sent.</div>
+        </div>
+      </li>
+      <li>
+        <span class="doc-num">四</span>
+        <div>
+          <div class="doc-name">Calligraphy Sample <span class="optional">Encouraged</span></div>
+          <div class="doc-detail">A single sheet, free composition. Read not for technical mastery but for attention. Optional in every track.</div>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <aside>
+    <span class="num">— III.</span>
+    <h2>Tuition &amp;<br>Support</h2>
+    <div class="tuition-block">
+      <p class="tuition-figure"><span class="yen">¥</span>640,000</p>
+      <p class="tuition-meta">Per Annum &nbsp;·&nbsp; AY 2026</p>
+
+      <div class="scholarship">
+        <h3>The Tachibana Foundation Scholarship</h3>
+        <p>
+          Each year the Tachibana Foundation, established in 1962 by the late
+          Tachibana Yoshinori, awards twelve full-tuition scholarships to
+          incoming undergraduates. Recipients are nominated by faculty after
+          admission; no separate application is required.
+        </p>
+        <p>
+          The scholarship is renewable for the full four years of study,
+          contingent on academic standing.
+        </p>
+        <svg class="seal" aria-hidden="true" style="color:var(--primary)"><use href="#kiri-mon"/></svg>
+      </div>
+    </div>
+  </aside>
+</section>
+
+<!-- ===== CTA BAND ===== -->
+<section class="cta-band">
+  <div class="cta-wave" aria-hidden="true"></div>
+  <div class="cta-inner">
+    <div>
+      <h2>To stand for entry is, in itself, the first lesson.</h2>
+      <p>
+        The portal opens 1 October 2025. Candidates with questions may
+        write to the Office of the Registrar at any time; replies are
+        sent within ten working days.
+      </p>
+    </div>
+    <div class="cta-action">
+      <span class="cta-mark" aria-hidden="true"></span>
+      <a href="page-5.html">Visit the Yanaka Campus &nbsp;→</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-wave" aria-hidden="true"></div>
+  <div class="footer-rule"></div>
+  <div class="footer-grid">
+    <div>
+      <svg class="footer-mark" aria-hidden="true" style="color:var(--primary)"><use href="#kiri-mon"/></svg>
+      <p class="footer-name">Rikuō University<br>of the Eastern Capital<br>陸王大學</p>
+      <p class="footer-found">Founded &nbsp;明治十四年 &nbsp;·&nbsp; 1881</p>
+    </div>
+    <div class="footer-address">
+      Office of the Registrar<br>
+      3-7-12 Yanaka, Taitō-ku<br>
+      Tokyo 110-0001, Japan<br><br>
+      +81 (0)3 3821 4400<br>
+      admissions@rikuo.ac.jp
+    </div>
+    <div class="footer-attr">
+      <h4>Attribution</h4>
+      Kamon vector outlines (kiri-paulownia, umebachi-plum) adapted from
+      sources held at Wikimedia Commons and used here under the
+      Creative Commons Attribution–ShareAlike license. Sayagata and
+      seigaiha pattern fragments likewise public domain via Wikimedia
+      contributors. Typography: Shippori Mincho &amp; Inter, Google Fonts.
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

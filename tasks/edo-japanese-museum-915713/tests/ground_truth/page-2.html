@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Current Exhibition — Hiroshige's Kisokaidō · Hanazono Museum of Edo Life</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), system-ui, sans-serif;
+    margin: 0;
+    line-height: 1.6;
+    font-size: 15px;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* ---------- NAV ---------- */
+  .nav-wrap {
+    border-bottom: 1px solid var(--primary);
+    background: var(--bg);
+  }
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 56px;
+    padding: 22px 64px 18px 64px;
+    max-width: 1440px;
+  }
+  .wordmark {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-right: 24px;
+  }
+  .wordmark .seal {
+    width: 38px; height: 38px;
+    border: 1px solid var(--primary);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    background: var(--bg);
+  }
+  .wordmark .seal svg { width: 30px; height: 30px; }
+  .wordmark .name {
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: .12em;
+    line-height: 1.2;
+  }
+  .wordmark .name small {
+    display: block;
+    font-family: var(--font-body), sans-serif;
+    font-size: 9px;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-top: 2px;
+  }
+  .nav ul {
+    list-style: none;
+    margin: 0; padding: 0;
+    display: flex;
+    gap: 36px;
+    margin-left: auto;
+  }
+  .nav a {
+    font-size: 12px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--primary);
+    padding-bottom: 4px;
+  }
+  .nav a[aria-current="page"] {
+    border-bottom: 1px solid var(--accent);
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    padding: 80px 64px 60px 64px;
+    gap: 64px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url('svg/seigaiha-waves.svg');
+    background-size: 380px;
+    opacity: 0.05;
+    pointer-events: none;
+  }
+  .hero-text { position: relative; z-index: 1; max-width: 640px; }
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: .35em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 36px; height: 1px;
+    background: var(--accent);
+  }
+  .hero h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 500;
+    font-size: 68px;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin: 0 0 28px 0;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--secondary);
+  }
+  .hero .deck {
+    font-family: var(--font-display), serif;
+    font-size: 20px;
+    line-height: 1.55;
+    color: var(--text-emphasis);
+    max-width: 540px;
+    margin-bottom: 40px;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 48px;
+    border-top: 1px solid var(--primary);
+    padding-top: 24px;
+  }
+  .hero-meta dt {
+    font-size: 10px;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 6px;
+  }
+  .hero-meta dd {
+    font-family: var(--font-display), serif;
+    font-size: 17px;
+    margin: 0;
+  }
+
+  .hero-frame {
+    position: relative;
+    align-self: start;
+    aspect-ratio: 1/1.05;
+    border: 1px solid var(--primary);
+    background: var(--surface);
+    padding: 28px;
+    overflow: hidden;
+  }
+  .hero-frame::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url('svg/seigaiha-waves.svg');
+    background-size: 280px;
+    opacity: 0.06;
+  }
+  .hero-frame .crane {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-frame .crane svg {
+    width: 80%; height: 80%;
+  }
+  .hero-frame .corner-mark {
+    position: absolute;
+    bottom: 22px; right: 28px;
+    z-index: 2;
+    font-family: var(--font-display);
+    font-size: 11px;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    writing-mode: vertical-rl;
+  }
+  .hero-frame .stamp {
+    position: absolute;
+    top: 22px; left: 28px;
+    z-index: 2;
+    width: 52px; height: 52px;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    display: grid;
+    place-items: center;
+    font-family: var(--font-display);
+    font-size: 10px;
+    letter-spacing: .15em;
+    text-align: center;
+    line-height: 1.1;
+  }
+
+  /* ---------- DIVIDER ---------- */
+  .divider {
+    height: 60px;
+    background-image: url('svg/sayagata-keyfret.svg');
+    background-size: 120px;
+    background-repeat: repeat-x;
+    background-position: center;
+    opacity: 0.18;
+    margin: 0 64px;
+    border-top: 1px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
+  }
+
+  /* ---------- BODY GRID ---------- */
+  .body-grid {
+    display: grid;
+    grid-template-columns: 220px 540px 1fr;
+    gap: 64px;
+    padding: 100px 64px;
+  }
+  .body-grid .rail {
+    font-size: 11px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--secondary);
+  }
+  .body-grid .rail .rail-block {
+    border-top: 1px solid var(--primary);
+    padding-top: 16px;
+    margin-bottom: 40px;
+  }
+  .body-grid .rail .rail-block strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 14px;
+    letter-spacing: .05em;
+    text-transform: none;
+    color: var(--primary);
+    margin-bottom: 8px;
+  }
+  .body-grid .rail .rail-block p {
+    margin: 0;
+    font-family: var(--font-body);
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.55;
+  }
+
+  .prose h2 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 1.2;
+    margin: 64px 0 18px 0;
+    border-top: 1px solid var(--primary);
+    padding-top: 24px;
+  }
+  .prose h2:first-child { margin-top: 0; }
+  .prose h2 .num {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 11px;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .prose p {
+    margin: 0 0 18px 0;
+    font-size: 15.5px;
+    line-height: 1.75;
+  }
+  .prose p .dropcap {
+    font-family: var(--font-display);
+    font-size: 56px;
+    line-height: .85;
+    float: left;
+    margin: 6px 10px 0 0;
+    color: var(--secondary);
+  }
+  .pullquote {
+    margin: 40px 0 40px -40px;
+    padding: 20px 0 20px 40px;
+    border-left: 2px solid var(--accent);
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 24px;
+    line-height: 1.4;
+    color: var(--text-emphasis);
+  }
+  .pullquote cite {
+    display: block;
+    margin-top: 14px;
+    font-size: 11px;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    font-style: normal;
+    font-family: var(--font-body);
+  }
+
+  /* ---------- SIDEBAR ---------- */
+  .sidebar {
+    align-self: start;
+    position: sticky;
+    top: 32px;
+  }
+  .sidebar-card {
+    border-top: 1px solid var(--primary);
+    padding: 28px 24px 32px 24px;
+    background: var(--surface);
+    position: relative;
+  }
+  .sidebar-card .seal-mark {
+    position: absolute;
+    top: 18px; right: 20px;
+    width: 26px; height: 26px;
+    opacity: .85;
+  }
+  .sidebar-card .seal-mark svg { width: 100%; height: 100%; }
+  .sidebar-card h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 18px;
+    margin: 0 0 4px 0;
+    padding-right: 36px;
+  }
+  .sidebar-card .kicker {
+    font-size: 10px;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+  .sidebar-card p {
+    font-size: 13.5px;
+    line-height: 1.65;
+    margin: 0 0 14px 0;
+  }
+  .sidebar-card .schedule {
+    list-style: none;
+    margin: 18px 0 0 0;
+    padding: 16px 0 0 0;
+    border-top: 1px solid var(--primary);
+    font-size: 12px;
+  }
+  .sidebar-card .schedule li {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px dotted rgba(12,12,12,.25);
+  }
+  .sidebar-card .schedule li span:first-child {
+    font-family: var(--font-display);
+  }
+  .sidebar-card .schedule li span:last-child {
+    color: var(--secondary);
+    letter-spacing: .05em;
+  }
+
+  /* ---------- CHECKLIST ---------- */
+  .checklist-section {
+    padding: 80px 64px 100px 64px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 64px;
+    border-top: 1px solid var(--primary);
+    position: relative;
+  }
+  .checklist-section .head h2 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 44px;
+    line-height: 1.05;
+    margin: 0 0 24px 0;
+  }
+  .checklist-section .head .eyebrow { margin-bottom: 24px; }
+  .checklist-section .head p {
+    font-size: 14px;
+    color: var(--text-emphasis);
+    max-width: 320px;
+    line-height: 1.65;
+  }
+  .checklist-section .head .env {
+    margin-top: 28px;
+    padding-top: 18px;
+    border-top: 1px solid var(--primary);
+    font-size: 11px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    line-height: 1.9;
+  }
+  .checklist-section .head .env strong {
+    color: var(--accent);
+    font-weight: 400;
+  }
+  .checklist {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    column-count: 2;
+    column-gap: 48px;
+  }
+  .checklist li {
+    break-inside: avoid;
+    padding: 14px 0 14px 0;
+    border-top: 1px solid var(--primary);
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: 12px;
+  }
+  .checklist li:last-child { border-bottom: 1px solid var(--primary); }
+  .checklist .no {
+    font-family: var(--font-display);
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: .1em;
+    padding-top: 2px;
+  }
+  .checklist .title {
+    font-family: var(--font-display);
+    font-size: 15px;
+    line-height: 1.3;
+    margin-bottom: 4px;
+  }
+  .checklist .meta {
+    font-size: 10.5px;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--secondary);
+  }
+
+  /* ---------- CREDIT BAND ---------- */
+  .credit-band {
+    padding: 60px 64px;
+    border-top: 1px solid var(--primary);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 60px;
+    background: var(--surface);
+    position: relative;
+  }
+  .credit-band .col h4 {
+    font-family: var(--font-body);
+    font-size: 10px;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin: 0 0 12px 0;
+    font-weight: 500;
+  }
+  .credit-band .col p {
+    font-family: var(--font-display);
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0 0 6px 0;
+  }
+  .credit-band .col p small {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 12px;
+    color: var(--text);
+    margin-top: 4px;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    background: var(--bg);
+    border-top: 1px solid var(--primary);
+    padding: 80px 64px 30px 64px;
+    position: relative;
+    text-align: center;
+    overflow: hidden;
+  }
+  footer .seal-center {
+    width: 96px; height: 96px;
+    margin: 0 auto 22px auto;
+    display: grid;
+    place-items: center;
+  }
+  footer .seal-center svg { width: 100%; height: 100%; }
+  footer .museum-name {
+    font-family: var(--font-display);
+    font-size: 22px;
+    letter-spacing: .08em;
+    margin: 0 0 8px 0;
+  }
+  footer .tag {
+    font-size: 11px;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 50px;
+  }
+  .footer-cols {
+    display: grid;
+    grid-template-columns: 1fr 200px 1fr;
+    gap: 60px;
+    max-width: 1100px;
+    margin: 0 auto 60px auto;
+    text-align: left;
+  }
+  .footer-cols .col h5 {
+    font-size: 10px;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 10px 0;
+    font-weight: 500;
+  }
+  .footer-cols .col p {
+    font-family: var(--font-display);
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+  }
+  .footer-cols .col.center { text-align: center; }
+  .footer-wave {
+    height: 70px;
+    margin: 0 -64px -30px -64px;
+    background-image: url('svg/seigaiha-waves.svg');
+    background-size: 200px;
+    background-repeat: repeat-x;
+    background-position: center bottom;
+    opacity: 0.12;
+  }
+  .footer-credit {
+    font-size: 10px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    padding-top: 30px;
+    border-top: 1px solid var(--primary);
+    margin-top: 30px;
+  }
+
+  /* small util */
+  .smallcaps {
+    font-size: 10px;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    color: var(--secondary);
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<div class="nav-wrap">
+  <nav class="nav" aria-label="Primary">
+    <a href="page-1.html" class="wordmark" aria-label="Hanazono Museum home">
+      <span class="seal" aria-hidden="true">
+        <svg viewBox="0 0 688 688" preserveAspectRatio="xMidYMid meet"><g transform="translate(344,344) scale(.0008) translate(-280,-400)"><circle cx="280" cy="400" r="260" fill="none" stroke="#0c0c0c" stroke-width="20"/></g></svg>
+        <svg viewBox="0 0 100 100" style="position:absolute;width:24px;height:24px;"><circle cx="50" cy="50" r="34" fill="none" stroke="#0c0c0c" stroke-width="1.4"/><path d="M50 30 Q40 50 50 70 Q60 50 50 30 Z M30 50 Q50 40 70 50 Q50 60 30 50 Z" fill="#0c0c0c" opacity=".85"/></svg>
+      </span>
+      <span class="name">花園江戸<br><small>Hanazono · Kyoto</small></span>
+    </a>
+    <ul>
+      <li><a href="page-1.html">Home</a></li>
+      <li><a href="page-2.html" aria-current="page">Current Exhibition</a></li>
+      <li><a href="page-3.html">Collection</a></li>
+      <li><a href="page-4.html">The Machiya</a></li>
+      <li><a href="page-5.html">Visit</a></li>
+      <li><a href="page-6.html">About</a></li>
+    </ul>
+  </nav>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-text">
+    <p class="eyebrow">Gallery 2 · 12 March – 8 September 2024</p>
+    <h1>Sixty-Nine Stations of the <em>Kisokaidō</em></h1>
+    <p class="deck">Hiroshige and Eisen's complete inland journey from Nihonbashi to Kyōto, printed at Iseya Rihei's workshop between 1835 and 1838 — fifteen impressions on rotation, drawn from the museum's Yamashita-Tachibana bequest.</p>
+    <dl class="hero-meta">
+      <div>
+        <dt>Artists</dt>
+        <dd>Utagawa Hiroshige<br>Keisai Eisen</dd>
+      </div>
+      <div>
+        <dt>Publisher</dt>
+        <dd>Iseya Rihei<br>(Kinjudō)</dd>
+      </div>
+      <div>
+        <dt>Curator</dt>
+        <dd>Dr. Saitō Mariko<br>Senior, Prints &amp; Drawings</dd>
+      </div>
+    </dl>
+  </div>
+
+  <div class="hero-frame" aria-hidden="true">
+    <span class="stamp">SAITŌ<br>監修</span>
+    <span class="corner-mark">中山道 · KISOKAIDŌ</span>
+    <div class="crane">
+      <!-- inline crane mon -->
+      <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="344" cy="344" r="320" fill="none" stroke="#0c0c0c" stroke-width="2"/>
+        <circle cx="344" cy="344" r="280" fill="none" stroke="#0c0c0c" stroke-width="1"/>
+        <g transform="translate(344,344) scale(.78) translate(-220,-220)" fill="#0c0c0c">
+          <path d="M220 60 C 160 80 110 130 100 200 C 90 260 110 320 160 360 C 120 350 90 320 70 280 C 80 340 120 390 180 410 C 130 420 90 400 60 360 C 90 430 160 470 230 460 C 200 480 160 480 120 470 C 180 510 270 510 320 470 C 290 500 240 510 200 500 C 270 530 360 510 400 460 C 380 490 340 510 300 510 C 380 520 460 480 480 410 C 470 450 440 480 400 490 C 470 470 510 410 500 340 C 500 380 480 410 450 430 C 510 390 530 320 510 250 C 510 290 490 320 460 340 C 510 290 520 220 480 160 C 480 200 460 230 430 250 C 460 200 450 130 400 90 C 410 130 400 160 380 180 C 380 130 340 80 280 60 C 300 90 300 130 280 160 C 270 110 240 70 220 60 Z M 340 200 C 360 220 370 250 360 280 C 350 250 340 230 340 200 Z M 240 240 C 270 240 290 270 290 300 C 270 280 250 270 240 240 Z M 380 280 C 410 290 420 320 410 350 C 400 320 390 300 380 280 Z M 290 360 L 300 380 L 320 370 L 340 380 L 350 360 L 360 380 L 380 360 L 390 380 Z" />
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<div class="divider" aria-hidden="true"></div>
+
+<!-- ============ BODY ============ -->
+<section class="body-grid">
+  <aside class="rail">
+    <div class="rail-block">
+      <strong>Run dates</strong>
+      <p>12 March 2024 — 8 September 2024. Closed Mondays.</p>
+    </div>
+    <div class="rail-block">
+      <strong>Location</strong>
+      <p>Gallery 2, second floor of the Yamashita machiya wing.</p>
+    </div>
+    <div class="rail-block">
+      <strong>Admission</strong>
+      <p>Included with general entry · ¥1,400 / ¥800 students.</p>
+    </div>
+    <div class="rail-block">
+      <strong>Acquisition</strong>
+      <p>Yamashita-Tachibana bequest, 1987. Twenty-three impressions of which fifteen are on view.</p>
+    </div>
+    <div class="rail-block">
+      <strong>Photography</strong>
+      <p>Permitted without flash. No tripods. Please observe a 50 cm distance from the case glass.</p>
+    </div>
+  </aside>
+
+  <article class="prose">
+
+    <h2><span class="num">I · The Project</span>An inland road, drawn in sixty-nine breaths</h2>
+    <p><span class="dropcap">B</span>etween 1835 and the early years of the Tenpō reform, the publisher Iseya Rihei — operating under the studio name Kinjudō from his shop on the eastern side of Nihonbashi — issued the most ambitious print series of the late Edo period. <em>Kisokaidō rokujū-kyū tsugi</em>, the Sixty-Nine Stations of the Kisokaidō, traces the inland highway that connected the shōgun's capital to Kyōto, climbing through the Kiso valley and the mountain passes of Shinano province before descending into Ōmi.</p>
+    <p>Where the better-known Tōkaidō hugged the Pacific coast, the Kisokaidō cut into the heart of the country: snowbound, cedar-shaded, and travelled in winter by daimyō processions returning to Edo under the system of <em>sankin-kōtai</em>. Keisai Eisen began the series with twenty-four sheets but withdrew, possibly under pressure from the censors or from Iseya himself; Utagawa Hiroshige completed the remaining forty-six between 1837 and 1838.</p>
+
+    <blockquote class="pullquote">
+      "The road bends and the snow comes down — Eisen sees it as an obstacle, Hiroshige as the very subject of the picture."
+      <cite>— Saitō M., wall text, station 38 (Suhara)</cite>
+    </blockquote>
+
+    <h2><span class="num">II · The Post-Station System</span>Sixty-nine inns, two domains, and a shogunal ledger</h2>
+    <p>Each <em>shukuba</em> on the Kisokaidō was a fully administered settlement, required by the Bakufu to maintain a fixed number of post-horses (typically twenty-five), porters, and an official lodging for daimyō travel known as the <em>honjin</em>. The road was patrolled at the Usui and Kiso-Fukushima barriers, where women, firearms and severed heads were checked against written permits — a fact that quietly governs many of the prints' compositions, in which figures cluster, wait, or are turned back at gates.</p>
+    <p>Hiroshige's images were not topographical surveys but mnemonic objects. Travellers carried them, collectors arranged them in albums, and the publisher reissued popular sheets from worn blocks. Several of the impressions in this exhibition show the soft, slightly sunken outlines of late-state printing — evidence not of failure but of the series' commercial life.</p>
+
+    <h2><span class="num">III · Iseya Rihei</span>The publisher and his block-cutters</h2>
+    <p>Iseya Rihei is named on every sheet in the series, his seal — a small <em>kin</em> in a gourd — pressed into the lower margin beside the censor's <em>kiwame</em>. He was not a wealthy publisher by the standards of Tsutaya Jūzaburō's heirs, but he commanded a workshop large enough to commission a full-colour <em>nishiki-e</em> series of nearly seventy designs. Recent attribution work by the Tōkyō National Research Institute identifies the block-cutter Yokokawa Takejirō as responsible for at least eleven of the figural blocks; the colour blocks were almost certainly cut by a separate hand.</p>
+    <p>The collaboration was unusual. Eisen and Hiroshige worked for different print networks, and the decision to publish them under one title — rather than two competing series — suggests that Iseya was hedging: when one artist faltered, the other could carry the road.</p>
+
+    <blockquote class="pullquote">
+      "Look closely at <em>Oiwake</em>: the snow is not white pigment but the bare paper, masked by ten separate impressions. The block-cutter's restraint is the print's true colour."
+    </blockquote>
+
+    <h2><span class="num">IV · Multi-Block Nishiki-e</span>Ten passes through the press</h2>
+    <p>A full-colour <em>nishiki-e</em> from the late 1830s required between eight and fifteen separate carved cherrywood blocks, each registering a single colour or tonal pass against a pair of <em>kentō</em> notches cut into every block's edge. The deepest impressions in the Kisokaidō series — Hiroshige's <em>Kiso no Yamanaka</em>, in particular — demand at least twelve passes: a key block, two greys, two indigos including the imported <em>bero-ai</em> Prussian blue, a pale grey-blue gradation (<em>bokashi</em>) for the mountain mist, two greens, ochre, vermilion for the figures' robes, a black overprint for the foreground branches, and a final embossing pass (<em>karazuri</em>) for the snow on the rooftops.</p>
+    <p>Prussian blue, available in Japan from around 1829, is the chemical signature of the series. Its arrival permitted Hiroshige to render water and atmosphere with a tonal range previously possible only in monochrome ink painting, and the Kisokaidō prints exploit it constantly: the river at Nojiri, the dusk over Yawata, the haze in the Wada pass.</p>
+
+    <h2><span class="num">V · A Note on the Hanging</span>Reading order</h2>
+    <p>The fifteen impressions on view are not arranged in geographical sequence. We have grouped them instead by atmosphere: arrivals and departures along the east wall, weather across the long north wall, and the four night scenes at the far end of the gallery, lit at 50 lux. A printed station-by-station gazetteer is available at the entrance for visitors who wish to walk the road in its proper order.</p>
+
+  </article>
+
+  <aside class="sidebar">
+    <div class="sidebar-card">
+      <span class="seal-mark" aria-hidden="true">
+        <svg viewBox="0 0 688 688"><circle cx="344" cy="344" r="300" fill="none" stroke="#0c0c0c" stroke-width="6"/><g transform="translate(344,344)" fill="#0c0c0c"><circle cx="0" cy="-160" r="70"/><circle cx="152" cy="-50" r="70"/><circle cx="94" cy="130" r="70"/><circle cx="-94" cy="130" r="70"/><circle cx="-152" cy="-50" r="70"/><circle cx="0" cy="0" r="55" fill="#f5efde"/><circle cx="0" cy="0" r="32"/></g></svg>
+      </span>
+      <p class="kicker">Conservation note</p>
+      <h3>Six-week rotation</h3>
+      <p>Edo woodblock prints are exquisitely sensitive to light. To limit cumulative exposure to no more than 50,000 lux-hours per impression per year, the fifteen sheets in this exhibition are rotated on a strict six-week schedule, after which they return to dark storage at 18 °C and 50 % RH for a minimum of three years.</p>
+      <p>Visitors planning to see specific impressions are encouraged to consult the schedule below, or to telephone the Prints &amp; Drawings desk on <strong>075-441-2208</strong>.</p>
+      <ul class="schedule" aria-label="Rotation schedule">
+        <li><span>Rot. A</span><span>12 Mar — 22 Apr</span></li>
+        <li><span>Rot. B</span><span>23 Apr — 03 Jun</span></li>
+        <li><span>Rot. C</span><span>04 Jun — 15 Jul</span></li>
+        <li><span>Rot. D</span><span>16 Jul — 26 Aug</span></li>
+        <li><span>Coda</span><span>27 Aug — 08 Sep</span></li>
+      </ul>
+    </div>
+  </aside>
+</section>
+
+<!-- ============ CHECKLIST ============ -->
+<section class="checklist-section">
+  <div class="head">
+    <p class="eyebrow">Checklist · Gallery 2</p>
+    <h2>Fifteen impressions on view</h2>
+    <p>Selected from the Yamashita-Tachibana bequest. All sheets are full-colour woodblock (<em>nishiki-e</em>), <em>ōban</em> format, c. 1835–1838, Iseya Rihei (Kinjudō), Edo.</p>
+    <div class="env">
+      Room temperature&nbsp;<strong>20 °C</strong><br>
+      Relative humidity&nbsp;<strong>50 % RH</strong><br>
+      Illumination&nbsp;<strong>50 lux</strong>
+    </div>
+  </div>
+
+  <ol class="checklist">
+    <li><span class="no">01</span><div><div class="title">Nihonbashi · Departure at Dawn</div><div class="meta">Eisen · Sheet 1 · 1835</div></div></li>
+    <li><span class="no">02</span><div><div class="title">Itabashi · Travellers at the Shimmei Shrine</div><div class="meta">Eisen · Sheet 2 · 1835</div></div></li>
+    <li><span class="no">03</span><div><div class="title">Urawa · The Tone Ferry</div><div class="meta">Eisen · Sheet 4 · 1835</div></div></li>
+    <li><span class="no">11</span><div><div class="title">Kōnosu · Fuji from the Plain</div><div class="meta">Eisen · Sheet 8 · 1836</div></div></li>
+    <li><span class="no">19</span><div><div class="title">Karuizawa · Evening Smoke</div><div class="meta">Hiroshige · Sheet 19 · 1837</div></div></li>
+    <li><span class="no">21</span><div><div class="title">Oiwake · The Junction</div><div class="meta">Hiroshige · Sheet 21 · 1837</div></div></li>
+    <li><span class="no">26</span><div><div class="title">Mochizuki · Moon Rising</div><div class="meta">Hiroshige · Sheet 26 · 1837</div></div></li>
+    <li><span class="no">29</span><div><div class="title">Wada · The Mountain Pass in Snow</div><div class="meta">Hiroshige · Sheet 29 · 1838</div></div></li>
+    <li><span class="no">36</span><div><div class="title">Yabuhara · Crossing the Torii Pass</div><div class="meta">Hiroshige · Sheet 36 · 1838</div></div></li>
+    <li><span class="no">38</span><div><div class="title">Suhara · Rain in the Cedars</div><div class="meta">Hiroshige · Sheet 38 · 1838</div></div></li>
+    <li><span class="no">40</span><div><div class="title">Nojiri · The Iné River</div><div class="meta">Hiroshige · Sheet 40 · 1838</div></div></li>
+    <li><span class="no">42</span><div><div class="title">Mitake · Travellers at the Inn</div><div class="meta">Hiroshige · Sheet 42 · 1838</div></div></li>
+    <li><span class="no">52</span><div><div class="title">Musa · Boats at the Landing</div><div class="meta">Hiroshige · Sheet 52 · 1838</div></div></li>
+    <li><span class="no">63</span><div><div class="title">Toriimoto · Pine Wind</div><div class="meta">Hiroshige · Sheet 63 · 1838</div></div></li>
+    <li><span class="no">69</span><div><div class="title">Ōtsu · Arrival at Lake Biwa</div><div class="meta">Hiroshige · Sheet 69 · 1838</div></div></li>
+  </ol>
+</section>
+
+<!-- ============ CREDITS ============ -->
+<section class="credit-band">
+  <div class="col">
+    <h4>Curator</h4>
+    <p>Dr. Saitō Mariko<br><small>Senior Curator, Prints &amp; Drawings, Hanazono Museum of Edo Life. Author of <em>Iseya Rihei and the Late Edo Print Trade</em> (Shibunkaku, 2019).</small></p>
+  </div>
+  <div class="col">
+    <h4>Conservation</h4>
+    <p>Imai Yūichirō &amp; Park Hyojin<br><small>Paper conservation team, supported by a 2023 grant from the Sumitomo Foundation (project no. 23-A-241). Mounting consultation by Bokkōdō, Kyōto.</small></p>
+  </div>
+  <div class="col">
+    <h4>Acknowledgements</h4>
+    <p>The Yamashita-Tachibana family<br><small>For the 1987 bequest of twenty-three impressions of the series. Additional thanks to the Tōkyō National Research Institute for Cultural Properties.</small></p>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="seal-center" aria-hidden="true">
+    <svg viewBox="0 0 345 326" xmlns="http://www.w3.org/2000/svg">
+      <g fill="#0c0c0c" transform="translate(0,0)">
+        <circle cx="172" cy="155" r="10"/>
+        <ellipse cx="86" cy="78" rx="32" ry="50"/>
+        <ellipse cx="172" cy="55" rx="32" ry="55"/>
+        <ellipse cx="258" cy="78" rx="32" ry="50"/>
+        <path d="M172 165 C 130 200 110 260 110 300 L 130 300 C 130 270 145 230 172 210 C 199 230 214 270 214 300 L 234 300 C 234 260 214 200 172 165 Z"/>
+        <rect x="80" y="285" width="184" height="6"/>
+      </g>
+    </svg>
+  </div>
+  <h2 class="museum-name">Hanazono Museum of Edo Life</h2>
+  <p class="tag">花園江戸生活博物館 · Kyōto</p>
+
+  <div class="footer-cols">
+    <div class="col">
+      <h5>Address</h5>
+      <p>78 Hanazono-Tarumi-chō<br>Ukyō-ku, Kyōto-shi<br>616-8035 Japan<br>tel · 075-441-2208</p>
+    </div>
+    <div class="col center">
+      <h5>This Exhibition</h5>
+      <p>Gallery 2<br>12 Mar – 8 Sep 2024<br>Closed Mondays</p>
+    </div>
+    <div class="col">
+      <h5>Hours</h5>
+      <p>Tue – Sun · 10:00 – 17:30<br>Last entry 17:00<br>Closed 28 Dec – 3 Jan<br>and during rotation days</p>
+    </div>
+  </div>
+
+  <div class="footer-credit">
+    Kamon line-work after public-domain sources, redrawn in-house · CC BY-SA 4.0 · © 2024 Hanazono Museum
+  </div>
+  <div class="footer-wave" aria-hidden="true"></div>
+</footer>
+
+</body>
+</html>

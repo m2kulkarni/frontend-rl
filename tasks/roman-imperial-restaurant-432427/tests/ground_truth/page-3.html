@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>The Cellar — Vina Nobilia · Triclinium Aureum</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  /* ---------- BASE ---------- */
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    font-size: 17px;
+    line-height: 1.7;
+  }
+  a { color: var(--text-emphasis); text-decoration: none; }
+
+  /* ---------- GREEK KEY STRIP (CSS pattern) ---------- */
+  .greek-key-strip {
+    height: 22px;
+    background-color: var(--bg);
+    background-image:
+      repeating-linear-gradient(90deg,
+        var(--ornament) 0 2px,
+        transparent 2px 6px,
+        var(--ornament) 6px 8px,
+        transparent 8px 14px,
+        var(--ornament) 14px 16px,
+        transparent 16px 22px
+      ),
+      linear-gradient(var(--ornament), var(--ornament));
+    background-size: 22px 22px, 100% 1px;
+    background-position: 0 50%, 0 50%;
+    background-repeat: repeat-x, repeat-x;
+    border-top: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+    position: relative;
+  }
+  .greek-key-strip::before,
+  .greek-key-strip::after {
+    content:"";
+    position:absolute; left:0; right:0; height:1px;
+    background: var(--ornament);
+  }
+  .greek-key-strip::before { top: 4px; }
+  .greek-key-strip::after  { bottom: 4px; }
+
+  /* ---------- NAV ---------- */
+  nav.frieze {
+    background: var(--bg);
+    padding: 0;
+  }
+  nav.frieze .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    padding: 18px 40px;
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 12px;
+  }
+  nav.frieze .site-name {
+    font-size: 22px;
+    letter-spacing: 0.32em;
+    color: var(--text);
+    padding: 0 24px;
+    white-space: nowrap;
+  }
+  nav.frieze .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex: 1;
+  }
+  nav.frieze .nav-links.left  { justify-content: flex-end; }
+  nav.frieze .nav-links.right { justify-content: flex-start; }
+  nav.frieze a {
+    color: var(--text);
+    position: relative;
+    padding: 6px 4px;
+    display: inline-block;
+  }
+  nav.frieze a[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -4px;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--primary);
+    transform: translateX(-50%);
+  }
+  nav.frieze .leaf {
+    width: 14px; height: 14px;
+    fill: var(--ornament);
+    opacity: 0.7;
+    flex-shrink: 0;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    text-align: center;
+    padding: 70px 40px 50px;
+    position: relative;
+  }
+  .hero-frame-wrap {
+    position: relative;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .hero-frame-wrap svg.laurel {
+    width: 360px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+  .hero h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 600;
+    font-size: 54px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin: 18px 0 6px;
+    color: var(--text);
+  }
+  .hero .subtitle {
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .hero .latin {
+    font-style: italic;
+    font-size: 18px;
+    color: var(--text-emphasis);
+    margin-top: 8px;
+  }
+
+  /* ---------- MEANDER DIVIDER ---------- */
+  .meander-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    margin: 30px auto;
+    max-width: 1100px;
+    padding: 0 40px;
+  }
+  .meander-divider .line {
+    flex: 1;
+    height: 1px;
+    background: var(--ornament);
+  }
+  .meander-divider svg {
+    width: 200px;
+    height: auto;
+    display: block;
+  }
+  .meander-divider svg path { fill: var(--ornament); stroke: var(--ornament); }
+
+  /* ---------- ESSAY ---------- */
+  .essay {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 40px 30px;
+    text-align: center;
+  }
+  .essay h2 {
+    font-family: var(--font-display), serif;
+    font-size: 26px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin-bottom: 18px;
+  }
+  .essay p {
+    text-align: justify;
+    text-align-last: center;
+    margin: 14px 0;
+  }
+  .essay .drop::first-letter {
+    font-family: var(--font-display), serif;
+    float: left;
+    font-size: 56px;
+    line-height: 0.9;
+    padding: 6px 10px 0 0;
+    color: var(--primary);
+    font-weight: 700;
+  }
+
+  /* ---------- CARDS ---------- */
+  .section-title {
+    text-align: center;
+    margin: 50px auto 26px;
+  }
+  .section-title h2 {
+    font-family: var(--font-display), serif;
+    font-size: 30px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    margin: 0;
+    color: var(--text);
+  }
+  .section-title .latin-sub {
+    font-style: italic;
+    color: var(--text-emphasis);
+    font-size: 16px;
+    margin-top: 4px;
+    letter-spacing: 0.04em;
+  }
+
+  .card {
+    background: var(--surface);
+    margin: 0 auto 40px;
+    max-width: 1120px;
+    padding: 36px 44px 30px;
+    position: relative;
+    /* Greek-key border via repeating gradient */
+    border: 2px solid var(--ornament);
+    box-shadow:
+      inset 0 0 0 6px var(--surface),
+      inset 0 0 0 7px var(--ornament),
+      inset 0 0 0 14px var(--surface);
+  }
+  .card::before {
+    content: "";
+    position: absolute;
+    top: 8px; left: 8px; right: 8px;
+    height: 14px;
+    background-image: repeating-linear-gradient(90deg,
+      var(--ornament) 0 2px,
+      transparent 2px 8px,
+      var(--ornament) 8px 10px,
+      transparent 10px 18px,
+      var(--ornament) 18px 20px,
+      transparent 20px 28px
+    );
+    opacity: 0.85;
+  }
+  .card::after {
+    content: "";
+    position: absolute;
+    bottom: 8px; left: 8px; right: 8px;
+    height: 14px;
+    background-image: repeating-linear-gradient(90deg,
+      var(--ornament) 0 2px,
+      transparent 2px 8px,
+      var(--ornament) 8px 10px,
+      transparent 10px 18px,
+      var(--ornament) 18px 20px,
+      transparent 20px 28px
+    );
+    opacity: 0.85;
+  }
+  .card-inner {
+    padding: 26px 8px 22px;
+    text-align: center;
+  }
+  .card-title {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    margin: 0 0 4px;
+    color: var(--text);
+  }
+  .card-subtitle {
+    font-style: italic;
+    color: var(--text-emphasis);
+    font-size: 15px;
+    margin-bottom: 14px;
+    letter-spacing: 0.05em;
+  }
+  .roundel {
+    display: block;
+    margin: -8px auto 8px;
+    width: 64px;
+    height: 64px;
+  }
+
+  /* ---------- WINE TABLE ---------- */
+  table.cellar {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 14px;
+    text-align: left;
+  }
+  table.cellar thead th {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding: 10px 12px;
+    border-bottom: 2px solid var(--ornament);
+    font-weight: 600;
+  }
+  table.cellar tbody td {
+    padding: 16px 12px;
+    border-bottom: 1px solid rgba(201,162,58,0.4);
+    vertical-align: top;
+  }
+  table.cellar tbody tr:last-child td { border-bottom: none; }
+  table.cellar .vintage {
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.14em;
+    color: var(--text);
+    white-space: nowrap;
+    width: 70px;
+  }
+  table.cellar .vineyard {
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    color: var(--text);
+    text-transform: uppercase;
+    width: 200px;
+  }
+  table.cellar .region {
+    font-variant: small-caps;
+    color: var(--text-emphasis);
+    letter-spacing: 0.08em;
+    font-size: 14px;
+    width: 130px;
+  }
+  table.cellar .style {
+    font-style: italic;
+    color: var(--text);
+    width: 130px;
+    font-size: 14px;
+  }
+  table.cellar .note {
+    font-style: italic;
+    color: #444;
+    font-size: 15px;
+    line-height: 1.55;
+  }
+  table.cellar .price {
+    font-variant: small-caps;
+    color: var(--primary);
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    text-align: right;
+    white-space: nowrap;
+    width: 90px;
+  }
+
+  /* card foot flourish */
+  .card-foot {
+    text-align: center;
+    margin-top: 16px;
+    color: var(--ornament);
+    letter-spacing: 0.6em;
+    font-size: 12px;
+  }
+  .card-foot::before, .card-foot::after { content: "❦"; margin: 0 8px; color: var(--ornament); }
+
+  /* ---------- TWO COLUMN ---------- */
+  .two-col {
+    max-width: 1120px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    padding: 0 30px;
+  }
+  .two-col .card { margin: 0; }
+
+  /* ---------- CLOSING ---------- */
+  .closing {
+    max-width: 820px;
+    margin: 50px auto 70px;
+    padding: 0 40px;
+    text-align: center;
+  }
+  .closing-frame {
+    background: var(--surface);
+    padding: 36px 50px;
+    border: 1px solid var(--ornament);
+    position: relative;
+  }
+  .closing-frame::before, .closing-frame::after {
+    content:"";
+    position:absolute;
+    left: 14px; right: 14px;
+    height: 8px;
+    background-image: repeating-linear-gradient(90deg,
+      var(--ornament) 0 2px,
+      transparent 2px 8px,
+      var(--ornament) 8px 10px,
+      transparent 10px 18px
+    );
+  }
+  .closing-frame::before { top: 6px; }
+  .closing-frame::after  { bottom: 6px; }
+  .closing-frame .latin {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+  .closing-frame p {
+    font-style: italic;
+    font-size: 17px;
+    margin: 8px 0;
+  }
+  .closing-frame .mulsum {
+    font-variant: small-caps;
+    color: var(--primary);
+    letter-spacing: 0.16em;
+    font-size: 16px;
+    font-style: normal;
+    margin-top: 14px;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    margin-top: 60px;
+  }
+  .footer-frieze {
+    background: var(--primary);
+    color: var(--secondary);
+    padding: 28px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 36px;
+    position: relative;
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 13px;
+    text-align: center;
+  }
+  .footer-frieze .rosette {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    border: 1.5px solid var(--secondary);
+    position: relative;
+    flex-shrink: 0;
+  }
+  .footer-frieze .rosette::before {
+    content: "✦";
+    position: absolute;
+    inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--secondary);
+    font-size: 16px;
+  }
+  .footer-frieze .info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .footer-frieze .info .hours {
+    font-family: var(--font-body), serif;
+    text-transform: none;
+    letter-spacing: 0.04em;
+    font-style: italic;
+    color: #f3e0a8;
+    font-size: 14px;
+  }
+  .footer-strip {
+    background: var(--bg);
+    text-align: center;
+    padding: 14px 40px;
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    font-size: 11px;
+    color: var(--text);
+    position: relative;
+  }
+  .footer-strip .leaf {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 14px;
+    width: 14px; height: 14px;
+    fill: var(--ornament);
+  }
+  .corner-laurel {
+    position: relative;
+  }
+  .corner-laurel::before, .corner-laurel::after {
+    content: "❦";
+    position: absolute;
+    color: var(--secondary);
+    font-size: 22px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .corner-laurel::before { left: 22px; }
+  .corner-laurel::after  { right: 22px; }
+</style>
+</head>
+<body>
+
+<!-- ========== TOP NAV FRIEZE ========== -->
+<div class="greek-key-strip" aria-hidden="true"></div>
+<nav class="frieze" aria-label="Primary">
+  <div class="nav-inner">
+    <div class="nav-links left">
+      <a href="page-1.html">Domus</a>
+      <svg class="leaf" viewBox="0 0 200 200" aria-hidden="true"><path d="M43 11c-2 0-4 0-5 0-7 1-14 3-19 7s-8 12-7 21c0 9 4 16 10 20s13 6 21 5c15-1 33-8 46-18 1-1 3-2 4-3 4 7 8 15 9 24-7-5-21-10-36 2-22 18-25 13-45-2-3 36 15 55 45 53 0 0-14 4-4 26 6 13 8 20 7 25-13 2-16 8-6 13 45 10 66-27 69-66 45 0 53-32 52-50-8 11-22 11-33 2-10-8-22-16-39-1-2-12-6-22-11-31 19-11 39-14 53-11 5 1 9 4 12 7-9 8-12 26 2 27 19 1 21-15 14-27-5-8-16-13-26-17-17-5-39 0-61 13-5-6-11-10-18-13-7-3-17-6-28-6z"/></svg>
+      <a href="page-2.html">Carta</a>
+    </div>
+    <div class="site-name">Triclinium Aureum</div>
+    <div class="nav-links right">
+      <a href="page-3.html" aria-current="page">Cellarium</a>
+      <svg class="leaf" viewBox="0 0 200 200" aria-hidden="true"><path d="M43 11c-2 0-4 0-5 0-7 1-14 3-19 7s-8 12-7 21c0 9 4 16 10 20s13 6 21 5c15-1 33-8 46-18 1-1 3-2 4-3 4 7 8 15 9 24-7-5-21-10-36 2-22 18-25 13-45-2-3 36 15 55 45 53 0 0-14 4-4 26 6 13 8 20 7 25-13 2-16 8-6 13 45 10 66-27 69-66 45 0 53-32 52-50-8 11-22 11-33 2-10-8-22-16-39-1-2-12-6-22-11-31 19-11 39-14 53-11 5 1 9 4 12 7-9 8-12 26 2 27 19 1 21-15 14-27-5-8-16-13-26-17-17-5-39 0-61 13-5-6-11-10-18-13-7-3-17-6-28-6z"/></svg>
+      <a href="page-4.html">De Domo</a>
+      <svg class="leaf" viewBox="0 0 200 200" aria-hidden="true"><path d="M43 11c-2 0-4 0-5 0-7 1-14 3-19 7s-8 12-7 21c0 9 4 16 10 20s13 6 21 5c15-1 33-8 46-18 1-1 3-2 4-3 4 7 8 15 9 24-7-5-21-10-36 2-22 18-25 13-45-2-3 36 15 55 45 53 0 0-14 4-4 26 6 13 8 20 7 25-13 2-16 8-6 13 45 10 66-27 69-66 45 0 53-32 52-50-8 11-22 11-33 2-10-8-22-16-39-1-2-12-6-22-11-31 19-11 39-14 53-11 5 1 9 4 12 7-9 8-12 26 2 27 19 1 21-15 14-27-5-8-16-13-26-17-17-5-39 0-61 13-5-6-11-10-18-13-7-3-17-6-28-6z"/></svg>
+      <a href="page-5.html">Convivia</a>
+      <svg class="leaf" viewBox="0 0 200 200" aria-hidden="true"><path d="M43 11c-2 0-4 0-5 0-7 1-14 3-19 7s-8 12-7 21c0 9 4 16 10 20s13 6 21 5c15-1 33-8 46-18 1-1 3-2 4-3 4 7 8 15 9 24-7-5-21-10-36 2-22 18-25 13-45-2-3 36 15 55 45 53 0 0-14 4-4 26 6 13 8 20 7 25-13 2-16 8-6 13 45 10 66-27 69-66 45 0 53-32 52-50-8 11-22 11-33 2-10-8-22-16-39-1-2-12-6-22-11-31 19-11 39-14 53-11 5 1 9 4 12 7-9 8-12 26 2 27 19 1 21-15 14-27-5-8-16-13-26-17-17-5-39 0-61 13-5-6-11-10-18-13-7-3-17-6-28-6z"/></svg>
+      <a href="page-6.html">Ad Nos</a>
+    </div>
+  </div>
+</nav>
+<div class="greek-key-strip" aria-hidden="true"></div>
+
+<!-- ========== HERO ========== -->
+<section class="hero">
+  <div class="hero-frame-wrap">
+    <svg class="laurel" viewBox="0 0 323.7 295.8" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <g transform="translate(-64.08 20.56)" fill="var(--ornament)" stroke="var(--ornament)" stroke-width="0.94">
+        <path d="M141.7-18.6c-11 4.9-23.4 9.5-30.1 22.6-4.7 7.1-4.8 16.4-8.1 24.1 6.1-6.5 15.6-13.2 21-20.7 6-9.5 9.1-18 17.2-26zm164.5 0c8.1 8 11.2 16.6 17.2 26 5.4 7.6 14.9 14.2 21 20.7-3.3-7.8-3.4-17-8.1-24.1-6.7-13.2-19-17.8-30.1-22.6zM111.9-1.6c-5.6 1.6-10.6 5.5-14.6 11-9.1 10.8-10.7 25-6.9 42 1.3 4.5-0.5 8.7-0.3 13 2.7-6.2 5.7-11.9 11.6-15.9 13.1-8.4 16.7-12.8 20.1-20.8 3.9-9.3 4.7-10.7 4.8-19-3.8 12-15.3 17.1-23.1 25.2-4 4.4-7.2 9.6-9 15l-0.3-0.3c1-4.8 2.9-9.1 4-13.8 3.5-12.7 2.8-27.9 13.7-36.4zm223.7 0c10.9 8.5 10.2 23.8 13.7 36.4 1.1 4.7 3 9 4 13.8l-0.3 0.3c-1.8-5.4-5-10.6-9-15-7.8-8.1-19.2-13.2-23.1-25.2 0.1 8.4 0.8 9.7 4.8 19 3.4 7.9 7 12.4 20.1 20.8 5.9 4 8.9 9.7 11.6 15.9 0.3-4.2-1.6-8.4-0.3-13 3.8-17.1 2.2-31.2-6.9-42-3.9-5.6-8.9-9.4-14.6-11zM88.6 21.1c-7.6 11-14.3 19.3-13.9 34.1-1 18.2 10.5 34.8 11.7 51.9 1.8-13.1 10.8-22.4 18.3-32.6-1 4.3-2.1 8.6-4.1 12.3-8.2 14.1-16.4 30.8-10.7 48.8-2.3-5.9-2.7-12.7-4.3-19-3-12.1-14.6-26.2-11.2-45.7-1.8 4.2-2.5 9-3.4 13.6-2 11.9-3 19.3-0.1 30.3 3.5 13.8 18.4 28.9 24.5 41.5l0.8 0.7c-0.9-6.8-1.3-14.2 0.4-20.7 2.6-10.4 9.7-20.6 11.7-31.4 1-8.4-1.3-17.8-2.2-25.9 2.7-3.7 5.2-7.5 7.1-11.6 2.5-6.2 1.4-15.1 2.2-21.9-1 2.9-2.7 5.4-4.7 7.8-9.1 9.4-19.5 19-21.5 32.6-0.3 1.9-0.4 3.9-0.9 5.8 0 0-0.1-0.5-0.3-0.6l1.1-16.8c0.4-16.4-6.6-34.7 1.8-49.1zm270.7 0c8.4 14.4 1.4 32.7 1.8 49.1l1.1 16.8c-0.5-1.9-0.6-3.9-0.9-5.8-2-13.6-12.4-23.2-21.5-32.6-1.9-2.5-3.7-4.9-4.7-7.8 0.7 6.8-0.3 15.6 2.2 21.9 1.9 4.1 4.4 7.9 7.1 11.6-0.9 8.1-3.2 17.5-2.2 25.9 2 10.8 9.1 20.9 11.7 31.4 1.7 6.5 1.3 13.9 0.4 20.7l0.8-0.7c6-12.6 20.9-27.8 24.5-41.5 2.9-11 1.9-18.3-0.1-30.3-0.9-4.6-1.7-9.4-3.4-13.6 3.4 19.5-8.2 33.6-12 50.6-1.6 6.3-2 13.1-4.3 19 5.7-18-2.5-34.7-10.7-48.8-2-3.8-3.1-8-4.1-12.3 7.5 10.2 16.6 19.5 18.3 32.6 1.2-17.2 12.7-33.8 11.7-51.9 0.3-14.8-6.3-23.1-13.9-34.1zM102.8 113.5c1.4 14-4 25.8-3.6 39.8 0.4 8.5 2.8 16 6.7 22.7l-0.7 0c-5.3-7.9-9.4-16.3-15.6-23.7-9.6-10.5-21.9-21.2-23.1-35.8-1.6 12.2 0.6 23.6 5.4 33.7 4.8 10.1 12.3 18.8 21.2 25.7l4.1 2.9c7.3 5.4 13.1 7.6 20.2 13.7v-0.8c-5.4-10.2-4.7-22.3-5.6-34.6-0.9-12.3-3.3-24.9-6.6-36.1zm242.2 0-2.5 7.5c-3.3 11.2-5.7 23.8-6.6 36.1-0.9 12.3-0.2 24.4-5.6 34.6v0.8c7.1-6.2 12.8-8.3 20.2-13.7l4.1-2.9c8.9-6.9 16.4-15.6 21.2-25.7 4.8-10.1 7-21.5 5.4-33.7-1.3 14.6-13.5 25.3-23.1 35.8-6.2 7.5-10.3 15.9-15.6 23.7l-0.7 0c3.9-6.7 6.4-14.2 6.7-22.7 0.4-14-5-25.8-3.6-39.8z"/>
+      </g>
+    </svg>
+  </div>
+  <div class="subtitle">Pars Tertia · Liber Vinorum</div>
+  <h1>The Cellar</h1>
+  <div class="latin">— Vina Nobilia, ex more antiquorum —</div>
+</section>
+
+<!-- ========== MEANDER DIVIDER ========== -->
+<div class="meander-divider" aria-hidden="true">
+  <span class="line"></span>
+  <svg viewBox="1000 364 16511 4447" xmlns="http://www.w3.org/2000/svg">
+    <path d="M1000,4175 L1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z"/>
+    <path d="M4810,4175 L4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z"/>
+    <path d="M8620,4175 L8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z"/>
+    <path d="M12430,4175 L12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z"/>
+    <path d="M16240,4175 L16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z"/>
+  </svg>
+  <span class="line"></span>
+</div>
+
+<!-- ========== ESSAY ========== -->
+<section class="essay">
+  <h2>De Anno Vinario</h2>
+  <p class="drop">The Roman wine-year was no idle calendar. In <em>Februarius</em>, the vineyards of Latium were pruned by the same hand that had set them; in the long heat of <em>Augustus</em> and <em>September</em>, the grape was gathered to the chant of vintners; and at the festival of the <em>Vinalia</em>, in <em>Aprilis</em>, the new must was offered to Jupiter before any cup met a Roman lip. To drink wine, in the Empire, was to remember a god.</p>
+  <p>Of all the wines so consecrated, three stood above the rest. <strong>Falernian</strong>, raised on the slopes of Mount Massicus in Campania, was the wine of senators and emperors; the vintage of the consulate of Lucius Opimius, in 121 B.C., was already legend in Pliny's day, drunk a hundred years old and amber as honey. <strong>Caecuban</strong>, from the marshes near Fundi, was the wine Horace called <em>generosum</em> — noble — and reserved for occasions of triumph. <strong>Massic</strong>, paler and more austere, was the soldier's reward and the philosopher's friend. These three our cellar honours; these three we pour, in the proportion the ancients set down, mixed with cool spring water in a krater of Corinthian bronze.</p>
+  <p>What follows is our <em>Index Vinorum</em>, drawn from the cellar beneath the Aventine. The ancient names we offer in their vinted memory; the modern names — Italian and Greek — we offer as their living descendants, raised on the same soils, by the same suns, beneath the same lares.</p>
+</section>
+
+<!-- ========== ANCIENT WINES CARD ========== -->
+<div class="section-title">
+  <h2>Vina Antiqua</h2>
+  <div class="latin-sub">— the wines of the ancestors, pressed in the old manner —</div>
+</div>
+
+<section class="card">
+  <div class="card-inner">
+    <svg class="roundel" viewBox="75.7 121.6 117.8 118.3" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="134.6" cy="180.7" r="52" fill="none" stroke="var(--ornament)" stroke-width="2"/>
+      <circle cx="134.6" cy="180.7" r="44" fill="none" stroke="var(--ornament)" stroke-width="0.6"/>
+      <text x="134.6" y="186" text-anchor="middle" font-family="Cinzel, serif" font-size="16" fill="var(--primary)" letter-spacing="2">SPQR</text>
+    </svg>
+    <h3 class="card-title">Cellarium Antiquum</h3>
+    <p class="card-subtitle">Wines of the Imperial Table — served by the amphora or the cyathus</p>
+
+    <table class="cellar">
+      <thead>
+        <tr>
+          <th>Vintage</th>
+          <th>Vineyard</th>
+          <th>Region</th>
+          <th>Style</th>
+          <th>Tasting Note</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="vintage">A.U.C. 633</td>
+          <td class="vineyard">Falernum Opimianum</td>
+          <td class="region">Campania</td>
+          <td class="style">amber, sweet, aged</td>
+          <td class="note">After the consulship of Opimius, the legendary year. Honey on the rim of the krater; bees-wax, dried fig, and the dust of a hundred summers. The wine of Lucullus and of Cicero's better evenings.</td>
+          <td class="price">cyathus · 180</td>
+        </tr>
+        <tr>
+          <td class="vintage">A.U.C. 711</td>
+          <td class="vineyard">Caecubum Setinum</td>
+          <td class="region">Latium</td>
+          <td class="style">red, generous</td>
+          <td class="note">Horace's <em>generosum</em>: a wine of triumphs and accessions. Pomegranate and crushed laurel, a long warm finish that tastes — as Pliny said — of the marshes of Fundi by torchlight.</td>
+          <td class="price">cyathus · 96</td>
+        </tr>
+        <tr>
+          <td class="vintage">A.U.C. 728</td>
+          <td class="vineyard">Massicum Sinuessanum</td>
+          <td class="region">Campania</td>
+          <td class="style">pale, austere</td>
+          <td class="note">Pale gold, dry, with the salt-edge of the Tyrrhenian. The wine Virgil gave his shepherds; the wine the Tenth Legion drank on the eve of Actium. Stone-fruit and rosemary.</td>
+          <td class="price">cyathus · 64</td>
+        </tr>
+        <tr>
+          <td class="vintage">A.U.C. 745</td>
+          <td class="vineyard">Albanum de Monte</td>
+          <td class="region">Latium</td>
+          <td class="style">sweet white</td>
+          <td class="note">From the slopes of the Alban Hills above Domitian's villa. Quince, wild thyme, and a faint smoke from the volcanic earth. Best with dormice or honeyed pear.</td>
+          <td class="price">cyathus · 52</td>
+        </tr>
+        <tr>
+          <td class="vintage">A.U.C. 762</td>
+          <td class="vineyard">Surrentinum</td>
+          <td class="region">Campania</td>
+          <td class="style">light, clear</td>
+          <td class="note">Tiberius called it <em>nobilis acetum</em> — noble vinegar — yet drank it. Bright, almost cutting; lemon-pith and thin honey. The wine of long conversation.</td>
+          <td class="price">cyathus · 38</td>
+        </tr>
+        <tr>
+          <td class="vintage">A.U.C. 781</td>
+          <td class="vineyard">Mamertinum Messanense</td>
+          <td class="region">Sicilia</td>
+          <td class="style">amber, robust</td>
+          <td class="note">Caesar's chosen vintage at his triumph over Pharnaces. Burnt orange and resin, with a Sicilian sun behind every sip. A wine that remembers Carthage.</td>
+          <td class="price">cyathus · 72</td>
+        </tr>
+        <tr>
+          <td class="vintage">A.U.C. 793</td>
+          <td class="vineyard">Chium Ariusinum</td>
+          <td class="region">Achaia</td>
+          <td class="style">Greek, sweet</td>
+          <td class="note">From the slopes above Ariousios on Chios. The wine Pericles drank; pine-resin, dried apricot, sea-spray. Served in the Greek manner, mixed three parts to one of cold water.</td>
+          <td class="price">cyathus · 88</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="card-foot">— FINIS · CELLARII · ANTIQUI —</div>
+  </div>
+</section>
+
+<!-- ========== MODERN WINES — DESCENDANTS ========== -->
+<div class="section-title">
+  <h2>Posteri Vitium</h2>
+  <div class="latin-sub">— descendants of the ancient stock, gathered by province —</div>
+</div>
+
+<div class="two-col">
+
+  <!-- CAMPANIA -->
+  <section class="card">
+    <div class="card-inner">
+      <h3 class="card-title">Campania</h3>
+      <p class="card-subtitle">— heirs of Falernum and Massicum —</p>
+      <table class="cellar">
+        <thead>
+          <tr><th>Year</th><th>House</th><th>Style</th><th>Price</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="vintage">2018</td>
+            <td class="vineyard">Galardi · Terra di Lavoro</td>
+            <td class="style">red, structured</td>
+            <td class="price">320</td>
+          </tr>
+          <tr>
+            <td colspan="4" class="note">Aglianico and Piedirosso from the lava soils above Sessa Aurunca — the very slope where Falernian was raised. Black plum, leather, smoked tobacco; a wine that drinks with the gravity of an old senator.</td>
+          </tr>
+          <tr>
+            <td class="vintage">2020</td>
+            <td class="vineyard">Mastroberardino · Radici</td>
+            <td class="style">red, Taurasi</td>
+            <td class="price">240</td>
+          </tr>
+          <tr>
+            <td colspan="4" class="note">Pure Aglianico from Irpinia. Iron, sour cherry, dried herb. The house has rebuilt the ancient <em>Villa dei Misteri</em> vineyard at Pompeii from rootstocks of unbroken descent.</td>
+          </tr>
+          <tr>
+            <td class="vintage">2021</td>
+            <td class="vineyard">Pietracupa · Greco di Tufo</td>
+            <td class="style">white, mineral</td>
+            <td class="price">180</td>
+          </tr>
+          <tr>
+            <td colspan="4" class="note">Volcanic and saline — almost a memory of Surrentinum. Chamomile, white peach, struck flint.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="card-foot">CAMPANIA · FELIX</div>
+    </div>
+  </section>
+
+  <!-- LATIUM -->
+  <section class="card">
+    <div class="card-inner">
+      <h3 class="card-title">Latium</h3>
+      <p class="card-subtitle">— from the hills of Caecubum and Albanum —</p>
+      <table class="cellar">
+        <thead>
+          <tr><th>Year</th><th>House</th><th>Style</th><th>Price</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="vintage">2019</td>
+            <td class="vineyard">Casale del Giglio · Mater Matuta</td>
+            <td class="style">red, Pontine</td>
+            <td class="price">220</td>
+          </tr>
+          <tr>
+            <td colspan="4" class="note">From the drained marshes of Fundi — the soil of Caecubum itself. Petit Verdot and Syrah; black olive, violet, sea-air. A modern echo of an imperial wine.</td>
+          </tr>
+          <tr>
+            <td class="vintage">2022</td>
+            <td class="vineyard">Castel de Paolis · Frascati Superiore</td>
+            <td class="style">white, fragrant</td>
+            <td class="price">110</td>
+          </tr>
+          <tr>
+            <td colspan="4" class="note">The wine of the popes and, before them, of the Alban Hills. Almond blossom, white pear, a little salt.</td>
+          </tr>
+          <tr>
+            <td class="vintage">2020</td>
+            <td class="vineyard">Damiano Ciolli · Cesanese</td>
+            <td class="style">red, rustic</td>
+            <td class="price">160</td>
+          </tr>
+          <tr>
+            <td colspan="4" class="note">From Olevano Romano, on the road the Caesars rode to Praeneste. Wild rose, pomegranate, crushed pepper. A wine of bandits and emperors alike.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="card-foot">LATIUM · VETUS</div>
+    </div>
+  </section>
+
+  <!-- SICILIA -->
+  <section class="card">
+    <div class="card-inner">
+      <h3 class="card-title">Sicilia</h3>
+      <p class="card-subtitle">— under the gaze of Aetna, heirs of Mamertinum —</p>
+      <table class="cellar">
+        <thead>
+          <tr><th>Year</th><th>House</th><th>Style</th><th>Price</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="vintage">2019</td>
+            <td class="vineyard">Frank Cornelissen · Magma</td>
+            <td class="style">red, volcanic</td>
+            <td class="price">420</td>
+          </tr>
+          <tr>
+            <td colspan="4" class="note">Nerello Mascalese from the highest contrade of Etna. Smoked cherry, ash, blood orange. As close to the sun as a wine may come.</td>
+          </tr>
+          <tr>
+            <td class="vintage">2021</td>
+            <td class="vineyard">Arianna Occhipinti · SP68</td>
+            <td class="style">red, juicy</td>
+            <td class="price">140</td>
+          </tr>
+          <tr>
+            <td colspan="4" class="note">Frappato and Nero d'Avola from Vittoria. A wine to drink with the noon meal — pomegranate, raspberry, thyme.</td>
+          </tr>
+          <tr>
+            <td class="vintage">2018</td>
+            <td class="vineyard">Florio · Marsala Vergine</td>
+            <td class="style">amber, fortified</td>
+            <td class="price">95</td>
+          </tr>
+          <tr>
+            <td colspan="4" class="note">The nearest living kin of the old Mamertinum. Walnut, dried fig, candied citrus. Served with the <em>secunda mensa</em> — the sweets.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="card-foot">SICILIA · TRIQVETRA</div>
+    </div>
+  </section>
+
+  <!-- ACHAIA -->
+  <section class="card">
+    <div class="card-inner">
+      <h3 class="card-title">Achaia</h3>
+      <p class="card-subtitle">— Greek wines, after the manner of Chios and Lesbos —</p>
+      <table class="cellar">
+        <thead>
+          <tr><th>Year</th><th>House</th><th>Style</th><th>Price</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="vintage">2020</td>
+            <td class="vineyard">Ariousios · Chios White</td>
+            <td class="style">white, resinous</td>
+            <td class="price">180</td>
+          </tr>
+          <tr>
+            <td colspan="4" class="note">A revived wine from the very Ariousion slope praised by Strabo. Bee-pollen, pine, sun-warmed stone. The lineal descendant of the Chian poured at every imperial banquet.</td>
+          </tr>
+          <tr>
+            <td class="vintage">2021</td>
+            <td class="vineyard">Methymnaeos · Lesbos Red</td>
+            <td class="style">red, ancient varietal</td>
+            <td class="price">155</td>
+          </tr>
+          <tr>
+            <td colspan="4" class="note">From Chidiriotiko vines on Lesbos, replanted from pre-phylloxera cuttings. Sour plum, oregano, sea-salt. The wine of Sappho's island.</td>
+          </tr>
+          <tr>
+            <td class="vintage">2019</td>
+            <td class="vineyard">Sigalas · Vinsanto Santorini</td>
+            <td class="style">sweet, sun-dried</td>
+            <td class="price">200</td>
+          </tr>
+          <tr>
+            <td colspan="4" class="note">Assyrtiko grapes laid on the volcanic ash to dry, then aged in oak for a decade. Burnt caramel, dried apricot, brine. The honeyed sweet wine of Homer made anew.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="card-foot">ACHAIA · GRAECA</div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ========== MEANDER DIVIDER ========== -->
+<div class="meander-divider" aria-hidden="true">
+  <span class="line"></span>
+  <svg viewBox="1000 364 16511 4447" xmlns="http://www.w3.org/2000/svg">
+    <path d="M1000,4175 L1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z"/>
+    <path d="M4810,4175 L4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z"/>
+    <path d="M8620,4175 L8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z"/>
+    <path d="M12430,4175 L12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z"/>
+    <path d="M16240,4175 L16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z"/>
+  </svg>
+  <span class="line"></span>
+</div>
+
+<!-- ========== CLOSING — MULSUM ========== -->
+<section class="closing">
+  <div class="closing-frame">
+    <div class="latin">— De Mulso Domus —</div>
+    <p>Of the house mulsum a word in closing. Honey from our own hives at Tibur is warmed gently with a young white from the Alban Hills, perfumed with bay, black pepper, and a single thread of saffron.</p>
+    <p>It is poured, in the manner of the ancients, into a small earthenware cup at the moment the <em>gustatio</em> is set down — the eggs, the olives, the pickled mullet — and is offered, as the law of hospitality requires,</p>
+    <div class="mulsum">gratis · without price · to every guest at table</div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div class="greek-key-strip" aria-hidden="true"></div>
+  <div class="footer-frieze corner-laurel">
+    <span class="rosette" aria-hidden="true"></span>
+    <span class="rosette" aria-hidden="true"></span>
+    <div class="info">
+      <div>Triclinium Aureum · Via di Santa Sabina XII · Aventino · Roma</div>
+      <div class="hours">Open from the eleventh hour until the second watch · Tuesday through Saturday</div>
+    </div>
+    <span class="rosette" aria-hidden="true"></span>
+    <span class="rosette" aria-hidden="true"></span>
+  </div>
+  <div class="footer-strip">
+    Marcus Aurelius Vettius · Proprietor
+    <svg class="leaf" viewBox="0 0 200 200" aria-hidden="true"><path d="M43 11c-2 0-4 0-5 0-7 1-14 3-19 7s-8 12-7 21c0 9 4 16 10 20s13 6 21 5c15-1 33-8 46-18 1-1 3-2 4-3 4 7 8 15 9 24-7-5-21-10-36 2-22 18-25 13-45-2-3 36 15 55 45 53 0 0-14 4-4 26 6 13 8 20 7 25-13 2-16 8-6 13 45 10 66-27 69-66 45 0 53-32 52-50-8 11-22 11-33 2-10-8-22-16-39-1-2-12-6-22-11-31 19-11 39-14 53-11 5 1 9 4 12 7-9 8-12 26 2 27 19 1 21-15 14-27-5-8-16-13-26-17-17-5-39 0-61 13-5-6-11-10-18-13-7-3-17-6-28-6z"/></svg>
+    Conditum · Anno · MMXIX
+  </div>
+  <div class="greek-key-strip" aria-hidden="true"></div>
+</footer>
+
+</body>
+</html>

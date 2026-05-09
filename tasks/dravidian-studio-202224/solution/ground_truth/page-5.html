@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Writings & Lectures — Sthapati Workshop</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), sans-serif;
+    margin: 0;
+    line-height: 1.55;
+  }
+  a { color: inherit; }
+
+  /* ---------- NAV ---------- */
+  .topnav {
+    background: var(--surface);
+    padding: 18px 60px 0;
+    position: relative;
+  }
+  .topnav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+  }
+  .mark {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .mark svg { width: 38px; height: 40px; }
+  .mark-text {
+    font-family: var(--font-display);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    color: var(--primary);
+    line-height: 1.1;
+  }
+  .mark-text small {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 9.5px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    margin-top: 2px;
+  }
+  .navlinks {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .navlinks a {
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--primary);
+    padding-bottom: 18px;
+    position: relative;
+    display: inline-block;
+  }
+  .navlinks a[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 4px;
+    width: 14px;
+    height: 14px;
+    transform: translateX(-50%);
+    background: radial-gradient(circle, var(--secondary) 22%, transparent 23%),
+                conic-gradient(from 0deg, var(--secondary), var(--accent), var(--secondary));
+    -webkit-mask: radial-gradient(circle, #000 30%, transparent 31%),
+                  radial-gradient(circle, #000 60%, transparent 61%);
+    border-radius: 50%;
+    background: var(--secondary);
+    clip-path: polygon(50% 0, 61% 38%, 100% 38%, 68% 62%, 79% 100%, 50% 76%, 21% 100%, 32% 62%, 0 38%, 39% 38%);
+  }
+  .nav-rule {
+    margin-top: 0;
+    height: 6px;
+    border-top: 2px solid var(--secondary);
+    border-bottom: 2px solid var(--accent);
+  }
+
+  /* ---------- HERO / GOPURAM HEADER ---------- */
+  .hero {
+    text-align: center;
+    padding: 50px 60px 30px;
+    position: relative;
+  }
+  .hero-tier-1, .hero-tier-2, .hero-tier-3 {
+    margin: 0 auto;
+    background: var(--secondary);
+    color: var(--bg);
+    padding: 10px 40px;
+    font-family: var(--font-display);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    border-top: 2px solid var(--accent);
+    border-bottom: 2px solid var(--accent);
+  }
+  .hero-tier-1 { width: 38%; font-size: 12px; }
+  .hero-tier-2 { width: 56%; font-size: 22px; padding: 14px 40px; border-top-width:3px; border-bottom-width:3px; }
+  .hero-tier-3 { width: 76%; font-size: 11px; background: var(--bg); color: var(--text-emphasis); border-color: var(--accent); }
+  .hero-tier-1, .hero-tier-2 { margin-bottom: 0; }
+  .hero-tier-2 { margin-bottom: 0; }
+  .hero-tier-3 { margin-top: 0; padding: 16px 40px; }
+
+  .hero-sub {
+    margin-top: 22px;
+    font-size: 14px;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+    color: var(--primary);
+  }
+  .hero-sub em {
+    color: var(--text-emphasis);
+    font-style: normal;
+    font-weight: 700;
+  }
+
+  .peacock-frame {
+    margin: 26px auto 0;
+    max-width: 1100px;
+    height: 56px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1184 112'><g fill='%23e34234'><circle cx='80' cy='56' r='8'/><circle cx='1104' cy='56' r='8'/></g></svg>");
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .peacock-frame::before, .peacock-frame::after {
+    content: "";
+    flex: 1;
+    height: 2px;
+    background: var(--accent);
+    position: relative;
+  }
+  .peacock-frame .center-glyph {
+    width: 60px; height: 56px;
+    margin: 0 22px;
+    background: var(--secondary);
+    clip-path: polygon(50% 0,100% 30%,80% 100%,20% 100%,0 30%);
+  }
+
+  /* ---------- LISTING TIER ---------- */
+  .listing {
+    padding: 30px 90px 20px;
+  }
+  .tier-band {
+    background: var(--secondary);
+    color: var(--bg);
+    text-align: center;
+    font-family: var(--font-display);
+    letter-spacing: 0.32em;
+    font-size: 14px;
+    padding: 12px;
+    border-top: 2px solid var(--accent);
+    border-bottom: 2px solid var(--accent);
+    text-transform: uppercase;
+  }
+  .tier-band-thin {
+    text-align: center;
+    color: var(--text-emphasis);
+    font-family: var(--font-display);
+    letter-spacing: 0.4em;
+    font-size: 10px;
+    padding: 8px 0 18px;
+    text-transform: uppercase;
+  }
+
+  /* ---------- ENTRY CARD ---------- */
+  .entry {
+    position: relative;
+    background: var(--surface);
+    margin: 0 0 22px;
+    padding: 38px 56px 30px;
+    border-left: 1.5px solid var(--accent);
+    border-right: 1.5px solid var(--accent);
+  }
+  /* lotus capitals */
+  .entry::before, .entry::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    height: 10px;
+    background:
+      linear-gradient(to right,
+        var(--accent) 0, var(--accent) 1.5px,
+        transparent 1.5px, transparent calc(100% - 1.5px),
+        var(--accent) calc(100% - 1.5px), var(--accent) 100%);
+  }
+  .entry::before { top: -1px; }
+  .entry::after { bottom: -1px; }
+
+  /* kalasha pot-finial */
+  .kalasha {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 22px;
+    height: 28px;
+    z-index: 2;
+  }
+  .kalasha::before {
+    content: "";
+    position: absolute;
+    bottom: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 18px; height: 10px;
+    background: var(--secondary);
+    border-radius: 50% 50% 4px 4px / 70% 70% 4px 4px;
+  }
+  .kalasha::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 4px; height: 18px;
+    background: var(--secondary);
+    border-radius: 50% 50% 0 0 / 80% 80% 0 0;
+    box-shadow: 0 4px 0 -1px var(--accent);
+  }
+
+  .entry-grid {
+    display: grid;
+    grid-template-columns: 110px 1fr 200px;
+    gap: 32px;
+    align-items: start;
+  }
+
+  .entry-num {
+    text-align: center;
+    border-right: 1px solid var(--accent);
+    padding-right: 20px;
+    padding-top: 6px;
+  }
+  .entry-num .roman {
+    font-family: var(--font-display);
+    font-size: 28px;
+    color: var(--secondary);
+    letter-spacing: 0.1em;
+  }
+  .entry-num .date {
+    margin-top: 8px;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    line-height: 1.6;
+  }
+  .entry-num .kind {
+    display: inline-block;
+    margin-top: 14px;
+    padding: 3px 8px;
+    background: var(--accent);
+    color: var(--primary);
+    font-size: 9px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .entry-num .kind.lecture { background: var(--text-emphasis); color: var(--bg); }
+  .entry-num .kind.column { background: var(--secondary); color: var(--bg); }
+
+  .entry-body h2 {
+    font-family: var(--font-display);
+    color: var(--text-emphasis);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 22px;
+    margin: 0 0 6px;
+    line-height: 1.25;
+  }
+  .entry-body .venue {
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+  .entry-body p {
+    margin: 0 0 12px;
+    font-size: 14px;
+    color: var(--primary);
+  }
+  .entry-body .meta {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: #555;
+    text-transform: uppercase;
+    border-top: 1px dotted var(--accent);
+    padding-top: 10px;
+    margin-top: 10px;
+  }
+
+  .entry-side {
+    border-left: 1px solid var(--accent);
+    padding-left: 20px;
+    padding-top: 6px;
+  }
+  .entry-side .label {
+    font-family: var(--font-display);
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    color: var(--text-emphasis);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .pdf-link {
+    display: block;
+    background: var(--bg);
+    border: 1.5px solid var(--secondary);
+    color: var(--secondary);
+    text-decoration: none;
+    padding: 14px 12px;
+    text-align: center;
+    font-family: var(--font-display);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    position: relative;
+  }
+  .pdf-link::before {
+    content: "॥";
+    color: var(--accent);
+    margin-right: 8px;
+  }
+  .pdf-link::after {
+    content: "॥";
+    color: var(--accent);
+    margin-left: 8px;
+  }
+  .pdf-meta {
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #555;
+    text-align: center;
+    line-height: 1.7;
+  }
+  .pdf-meta strong { color: var(--primary); }
+
+  /* divider between entries */
+  .palmette-divider {
+    text-align: center;
+    margin: 0 0 22px;
+    color: var(--accent);
+    letter-spacing: 0.4em;
+    font-size: 10px;
+    position: relative;
+  }
+  .palmette-divider::before, .palmette-divider::after {
+    content: "";
+    display: inline-block;
+    width: 38%;
+    height: 1px;
+    background: var(--accent);
+    vertical-align: middle;
+    margin: 0 12px;
+  }
+  .palmette-divider span {
+    color: var(--secondary);
+    font-family: var(--font-display);
+    letter-spacing: 0.5em;
+  }
+
+  /* ---------- BROADSHEET COLUMN BOX ---------- */
+  .broadsheet {
+    margin: 30px 90px 0;
+    background: var(--bg);
+    border: 2px solid var(--secondary);
+    padding: 0;
+    position: relative;
+  }
+  .broadsheet-head {
+    background: var(--secondary);
+    color: var(--bg);
+    text-align: center;
+    padding: 12px;
+    font-family: var(--font-display);
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    font-size: 14px;
+  }
+  .broadsheet-head small {
+    display: block;
+    font-family: var(--font-body);
+    letter-spacing: 0.3em;
+    font-size: 10px;
+    margin-top: 4px;
+    color: var(--accent);
+  }
+  .broadsheet-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+  .issue {
+    padding: 22px 22px 24px;
+    border-right: 1px dotted var(--accent);
+    position: relative;
+  }
+  .issue:last-child { border-right: none; }
+  .issue .num {
+    font-family: var(--font-display);
+    color: var(--accent);
+    font-size: 28px;
+    letter-spacing: 0.1em;
+  }
+  .issue .season {
+    font-family: var(--font-display);
+    font-size: 14px;
+    color: var(--text-emphasis);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+  .issue .essay-title {
+    font-size: 13px;
+    margin: 10px 0 12px;
+    color: var(--primary);
+    line-height: 1.4;
+    font-weight: 700;
+  }
+  .issue p {
+    font-size: 12px;
+    margin: 0 0 12px;
+    color: #333;
+  }
+  .issue a.dl {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    font-weight: 700;
+    text-decoration: none;
+    border-bottom: 1px solid var(--secondary);
+    padding-bottom: 2px;
+  }
+
+  /* ---------- INDEX / ARCHIVE ---------- */
+  .archive {
+    margin: 40px 90px 30px;
+  }
+  .archive h3 {
+    text-align: center;
+    font-family: var(--font-display);
+    letter-spacing: 0.32em;
+    color: var(--text-emphasis);
+    font-size: 14px;
+    text-transform: uppercase;
+    margin: 0 0 18px;
+  }
+  .archive-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+  .archive-table th {
+    text-align: left;
+    font-family: var(--font-display);
+    color: var(--secondary);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-size: 10px;
+    border-bottom: 2px solid var(--accent);
+    padding: 8px 10px;
+    font-weight: 400;
+  }
+  .archive-table td {
+    padding: 9px 10px;
+    border-bottom: 1px dotted var(--accent);
+  }
+  .archive-table td.year {
+    color: var(--text-emphasis);
+    font-family: var(--font-display);
+    letter-spacing: 0.1em;
+  }
+  .archive-table td a {
+    color: var(--secondary);
+    text-decoration: none;
+    font-weight: 700;
+  }
+  .archive-table tr:hover td { background: rgba(227,66,52,0.04); }
+
+  /* ---------- SUBMIT NOTE ---------- */
+  .submit-note {
+    margin: 30px 90px 60px;
+    background: var(--secondary);
+    color: var(--bg);
+    padding: 28px 40px;
+    text-align: center;
+    border-top: 3px solid var(--accent);
+    border-bottom: 3px solid var(--accent);
+  }
+  .submit-note h4 {
+    font-family: var(--font-display);
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    margin: 0 0 8px;
+    font-size: 16px;
+  }
+  .submit-note p {
+    margin: 0;
+    font-size: 13px;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .submit-note p a {
+    color: var(--accent);
+    font-weight: 700;
+    text-decoration: underline;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    background: var(--secondary);
+    color: var(--bg);
+    padding: 0;
+    margin-top: 0;
+  }
+  .arcade {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    height: 60px;
+    border-top: 3px solid var(--accent);
+    border-bottom: 3px solid var(--accent);
+  }
+  .arcade .col {
+    border-right: 1px solid var(--accent);
+    position: relative;
+  }
+  .arcade .col:last-child { border-right: none; }
+  .arcade .col::before, .arcade .col::after {
+    content: "";
+    position: absolute;
+    left: 50%; transform: translateX(-50%);
+    width: 22px; height: 6px;
+    background: var(--accent);
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  }
+  .arcade .col::before { top: 0; }
+  .arcade .col::after { bottom: 0; transform: translateX(-50%) scaleY(-1); }
+
+  .footer-body {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 40px;
+    padding: 38px 60px;
+    align-items: center;
+  }
+  .footer-left, .footer-right {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    line-height: 1.9;
+  }
+  .footer-left { text-align: right; }
+  .footer-left strong, .footer-right strong {
+    font-family: var(--font-display);
+    color: var(--accent);
+    letter-spacing: 0.22em;
+    display: block;
+    font-size: 12px;
+    font-weight: 400;
+    margin-bottom: 4px;
+  }
+
+  .kolam {
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    border: 2px dotted var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .kolam::before, .kolam::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    border: 1px dotted var(--accent);
+  }
+  .kolam::before { inset: 14px; border-style: dotted; }
+  .kolam::after { inset: 32px; border: 1px solid var(--accent); }
+  .kolam-inner {
+    text-align: center;
+    z-index: 2;
+    font-family: var(--font-display);
+    color: var(--bg);
+    letter-spacing: 0.18em;
+    font-size: 10px;
+    line-height: 1.6;
+    text-transform: uppercase;
+  }
+  .kolam-inner span {
+    display: block;
+    color: var(--accent);
+    font-size: 11px;
+    margin-bottom: 4px;
+    letter-spacing: 0.3em;
+  }
+
+  .colophon {
+    text-align: center;
+    background: var(--primary);
+    color: var(--bg);
+    padding: 14px 60px;
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+  }
+  .colophon span { color: var(--accent); margin: 0 14px; }
+</style>
+</head>
+<body>
+
+<!-- ======= NAVIGATION ======= -->
+<nav class="topnav">
+  <div class="topnav-inner">
+    <a class="mark" href="page-1.html">
+      <svg viewBox="0 0 356 367" aria-hidden="true"><path fill="#e34234" d="M 90.5,353.9 C 51.8,340.1 23.7,305.8 12.6,258.6 7.6,237.2 6.1,201.9 10.3,201.9 c 1.4,0 5.1,9.7 8.2,21.6 6.9,25.9 18.6,50.3 30,62.2 18.8,19.8 65.5,27.6 92.4,15.4 20.9,-9.5 29.4,-32.1 20.3,-54.1 -7,-17 -23,-22.7 -52.7,-18.8 0,0 -18.2,-19.6 -24.1,-54.4 l 18.7,1.7 c 22.5,2 39.5,-3 48.3,-14.2 8.3,-10.5 8.1,-14.6 -1.1,-25.3 -13.3,-15.5 -37.2,-11.6 -85.6,14 L 40.4,109.1 50.6,101.3 C 76.3,81.7 120.8,71.9 146.1,80.3 c 23.1,7.6 40,37.8 35.5,63.3 -3.1,17.2 -16.9,41.3 -27.6,48.1 l -9.2,5.8 12.7,5.7 c 21.6,9.7 34.8,2.3 50.6,-28.6 21.8,-42.7 35.9,-53.7 68.8,-53.8 15.3,0 20.8,1.6 32,9.4 27.9,19.5 43,60 39.7,105.9 -4.2,58.1 -31.7,93.4 -72.9,93.4 -22.6,0 -37.1,-7.9 -48.7,-26.5 -10.2,-16.3 -14.8,-48.7 -8.9,-62.9 2.8,-6.8 3.3,-7.1 3.5,-1.6 0.3,10 11.7,26.4 22.2,31.8 25.7,13.3 62.7,-3.4 77.3,-35 11.1,-24 5.2,-70.2 -10,-78.4 -3.2,-1.7 -11.1,-3.1 -17.5,-3.1 -13.7,0 -24.4,9.8 -39.5,36.2 -5.2,9.1 -14,20.8 -19.5,26.1 -8.9,8.6 -12.1,9.6 -30,9.6 H 184.5 l 6.5,14.4 c 9.3,20.6 8.8,53.9 -1,74.3 -8.7,18 -28.7,36.2 -44.7,40.6 -15.6,4.3 -41,3.8 -54.9,-1.2 z M 165.8,75.9 C 157,60.8 151.5,32.6 157.5,32.6 c 7,15.1 21.3,28.6 36.6,38 27.5,13.3 55.4,8 85.8,-16.5 6.7,-5.4 12.6,-9.2 13.2,-8.5 7.4,11.5 20.3,21 24.6,34.4 0,5.7 -24.4,21.9 -43.6,29.1 -47.6,13.7 -80,8.3 -108.2,-33.2 z M 189.8,41 220.8,6.6 255.3,38.5 C 243.5,48.2 235,63.3 221.5,70.9 210.9,63.1 195,53.8 189.8,41 z"/></svg>
+      <span class="mark-text">Sthapati Workshop<small>Madurai · Est. 2011</small></span>
+    </a>
+    <ul class="navlinks">
+      <li><a href="page-1.html">Home</a></li>
+      <li><a href="page-2.html">Practice</a></li>
+      <li><a href="page-3.html">Projects</a></li>
+      <li><a href="page-4.html">Workshop</a></li>
+      <li><a href="page-5.html" aria-current="page">Writings</a></li>
+      <li><a href="page-6.html">Studio</a></li>
+      <li><a href="mailto:office@sthapatiworkshop.in">Correspond</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="nav-rule"></div>
+
+<!-- ======= HERO ======= -->
+<section class="hero">
+  <div class="hero-tier-1">Section the Fifth · Bhāga Pañcamaḥ</div>
+  <div class="hero-tier-2">Writings &amp; Lectures</div>
+  <div class="hero-tier-3">Essays · Talks · Marginalia · The Yard Broadsheet · 2018 — Present</div>
+
+  <p class="hero-sub">
+    Reading, more than drawing, is the true labour of the studio. The texts collected below
+    are <em>working documents</em> — argued in print, delivered from lecterns, or scribbled in
+    the broadsheet that travels with our consignments — through which we test the proposition
+    that the <em>Dravidian</em> grammar still has uses for the contemporary city.
+  </p>
+
+  <div class="peacock-frame">
+    <div class="center-glyph"></div>
+  </div>
+</section>
+
+<!-- ======= LISTING ======= -->
+<section class="listing">
+  <div class="tier-band">Reverse Chronology · Selected Writings, Lectures &amp; Reviews</div>
+  <div class="tier-band-thin">Press the seal · receive the document</div>
+
+  <!-- ENTRY I -->
+  <article class="entry">
+    <div class="kalasha"></div>
+    <div class="entry-grid">
+      <div class="entry-num">
+        <div class="roman">I.</div>
+        <div class="date">March<br>2023</div>
+        <span class="kind">Essay</span>
+      </div>
+      <div class="entry-body">
+        <h2>On the Tala System: Why a Column Is Never Just a Column</h2>
+        <div class="venue">Marg Magazine · Vol. 74, No. 3 · pp. 44–61</div>
+        <p>
+          A long-form essay arguing that the Śilpa Śāstra <em>tala</em> measures — the nine-,
+          ten-, and twelve-part proportional grids that govern image and pillar alike — be
+          read not as antiquarian formulae but as a <em>generative interface</em>: a way to
+          pre-load a building with cultural memory before the section is even drawn.
+          Illustrated with our own tala-overlay studies on the columns of the
+          Mīnākṣī Sundareśvarar maṇḍapa and a comparison set from a 2022 hospitality
+          commission in Karaikudi.
+        </p>
+        <div class="meta">5,400 words · 14 plates · Editor: Naman P. Ahuja · ISSN 0972-1444</div>
+      </div>
+      <aside class="entry-side">
+        <div class="label">Document</div>
+        <a class="pdf-link" href="pdf/tala-system-marg-2023.pdf">Download PDF</a>
+        <div class="pdf-meta">
+          <strong>2.4 MB · 18 pp.</strong><br>
+          Reproduced with permission of The Marg Foundation, Bombay
+        </div>
+      </aside>
+    </div>
+  </article>
+
+  <div class="palmette-divider"><span>❀ ❀ ❀</span></div>
+
+  <!-- ENTRY II -->
+  <article class="entry">
+    <div class="kalasha"></div>
+    <div class="entry-grid">
+      <div class="entry-num">
+        <div class="roman">II.</div>
+        <div class="date">October<br>2022</div>
+        <span class="kind lecture">Lecture</span>
+      </div>
+      <div class="entry-body">
+        <h2>Vermilion is a Verb</h2>
+        <div class="venue">V&amp;A Jameel Centre · London · 27 October 2022 · 18:30 GMT</div>
+        <p>
+          The annual Jameel Lecture, delivered by principal R. Ananthanarayanan to a hall
+          of 220. The argument: that <em>kāvi</em> red — the iron-oxide pigment that floods
+          the Nayak temple ceiling — is best understood as an <em>act of marking time</em>,
+          renewed every twelve years by the temple's painters. The studio's broadsheet press
+          and a Madurai-prepared pigment cake were set out on the lectern table; the audience
+          was invited to handle both. A response by Mariam Rosser-Owen followed.
+        </p>
+        <div class="meta">62-min recording · transcript edited by H. Subramaniam · ©V&amp;A 2022</div>
+      </div>
+      <aside class="entry-side">
+        <div class="label">Document</div>
+        <a class="pdf-link" href="pdf/vermilion-is-a-verb-va-2022.pdf">Download PDF</a>
+        <div class="pdf-meta">
+          <strong>1.7 MB · 24 pp.</strong><br>
+          Lecture transcript with 9 figures &amp; a glossary of pigment names
+        </div>
+      </aside>
+    </div>
+  </article>
+
+  <div class="palmette-divider"><span>❀ ❀ ❀</span></div>
+
+  <!-- ENTRY III -->
+  <article class="entry">
+    <div class="kalasha"></div>
+    <div class="entry-grid">
+      <div class="entry-num">
+        <div class="roman">III.</div>
+        <div class="date">November<br>2021</div>
+        <span class="kind">Essay</span>
+      </div>
+      <div class="entry-body">
+        <h2>Reading Ranganāthaswāmy as a City</h2>
+        <div class="venue">Domus India · Issue 109 · pp. 78–89</div>
+        <p>
+          Commissioned by editor Kaiwan Mehta, this essay treats the seven concentric
+          <em>prākāra</em> walls of the Srirangam temple-town not as fortification but as
+          <em>urban score</em> — a graduated sequence of thresholds that calibrates the
+          density, sound and light of the surrounding fabric. We propose four contemporary
+          design lessons drawn from a fortnight of field measurements taken with students of
+          the CEPT summer studio, July 2021.
+        </p>
+        <div class="meta">3,800 words · 22 measured drawings · Photography: Iwan Baan &amp; studio</div>
+      </div>
+      <aside class="entry-side">
+        <div class="label">Document</div>
+        <a class="pdf-link" href="pdf/srirangam-domus-2021.pdf">Download PDF</a>
+        <div class="pdf-meta">
+          <strong>4.1 MB · 14 pp.</strong><br>
+          Includes folded plan of all seven prākāra at 1:5000
+        </div>
+      </aside>
+    </div>
+  </article>
+
+  <div class="palmette-divider"><span>❀ ❀ ❀</span></div>
+
+  <!-- ENTRY IV -->
+  <article class="entry">
+    <div class="kalasha"></div>
+    <div class="entry-grid">
+      <div class="entry-num">
+        <div class="roman">IV.</div>
+        <div class="date">February<br>2021</div>
+        <span class="kind lecture">Lecture</span>
+      </div>
+      <div class="entry-body">
+        <h2>The Mandapa as Slow Software</h2>
+        <div class="venue">Indian Institute of Architects · Chennai Chapter · Online</div>
+        <p>
+          A pandemic-era talk treating the thousand-pillar maṇḍapa as a piece of versioned,
+          patched, locally-forked software whose maintenance contract has never lapsed. The
+          studio's argument was that contemporary practice — accustomed to deprecation — has
+          much to learn from a system designed for <em>unbounded continuity</em>. Q&amp;A with
+          Brinda Somaya followed.
+        </p>
+        <div class="meta">48 min · 312 attendees · CPD-accredited 1.5 hrs</div>
+      </div>
+      <aside class="entry-side">
+        <div class="label">Document</div>
+        <a class="pdf-link" href="pdf/mandapa-as-slow-software-iia-2021.pdf">Download PDF</a>
+        <div class="pdf-meta">
+          <strong>980 KB · 11 pp.</strong><br>
+          Edited transcript &amp; selected slides
+        </div>
+      </aside>
+    </div>
+  </article>
+
+  <div class="palmette-divider"><span>❀ ❀ ❀</span></div>
+
+  <!-- ENTRY V -->
+  <article class="entry">
+    <div class="kalasha"></div>
+    <div class="entry-grid">
+      <div class="entry-num">
+        <div class="roman">V.</div>
+        <div class="date">August<br>2020</div>
+        <span class="kind">Review</span>
+      </div>
+      <div class="entry-body">
+        <h2>Against the Atrium: A Letter on the New Tirupati Terminal</h2>
+        <div class="venue">Architectural Review Asia Pacific · Issue 158</div>
+        <p>
+          A 1,200-word polemic against the dominance of the climate-controlled glass atrium
+          in temple-town transit architecture, with an alternative sketch proposal — a
+          stepped, open <em>tirumaṇḍapa</em> roof, ventilated by the gopuram-section's own
+          chimney effect, presented at 1:200. The letter generated correspondence from six
+          practices over the following eighteen months, archived herewith.
+        </p>
+        <div class="meta">1,200 words · 4 sketches · Letters appendix: 14 pp.</div>
+      </div>
+      <aside class="entry-side">
+        <div class="label">Document</div>
+        <a class="pdf-link" href="pdf/against-the-atrium-ar-2020.pdf">Download PDF</a>
+        <div class="pdf-meta">
+          <strong>1.1 MB · 19 pp.</strong><br>
+          Letter + correspondence appendix
+        </div>
+      </aside>
+    </div>
+  </article>
+</section>
+
+<!-- ======= BROADSHEET COLUMN ======= -->
+<section class="broadsheet">
+  <div class="broadsheet-head">
+    Notes from the Yard
+    <small>A quarterly broadsheet · printed on the studio Heidelberg · folio 540 × 380 mm</small>
+  </div>
+  <div class="broadsheet-grid">
+    <div class="issue">
+      <div class="num">XXIII.</div>
+      <div class="season">Āvaṇi · 2024</div>
+      <div class="essay-title">On the small theft of a chisel, and what the apprentice did next</div>
+      <p>
+        A field note from the Sivaganga yard concerning the shrinkage of the toolbox and
+        the unexpected pedagogy of replacement.
+      </p>
+      <a class="dl" href="pdf/yard-23.pdf">Download · PDF</a>
+    </div>
+    <div class="issue">
+      <div class="num">XXII.</div>
+      <div class="season">Vaikāsi · 2024</div>
+      <div class="essay-title">Three pillars and the man who refused to sign them</div>
+      <p>
+        Sthapati K. Murugesan, eighty-one, on why authorship is, in his estimation,
+        a contagious disease afflicting the print era only.
+      </p>
+      <a class="dl" href="pdf/yard-22.pdf">Download · PDF</a>
+    </div>
+    <div class="issue">
+      <div class="num">XXI.</div>
+      <div class="season">Mārgaḻi · 2023</div>
+      <div class="essay-title">Granite weights and the price of the dust</div>
+      <p>
+        A small accounting essay: how a 2.4-tonne block of Pallavaram black becomes
+        18 kilos of finished column, and what happens to the rest.
+      </p>
+      <a class="dl" href="pdf/yard-21.pdf">Download · PDF</a>
+    </div>
+    <div class="issue">
+      <div class="num">XX.</div>
+      <div class="season">Puraṭṭāsi · 2023</div>
+      <div class="essay-title">A kolam, redrawn for the office floor each Monday</div>
+      <p>
+        On the studio's twelve-year ritual of opening the week with rice-flour
+        geometry — and what happened the morning we forgot.
+      </p>
+      <a class="dl" href="pdf/yard-20.pdf">Download · PDF</a>
+    </div>
+  </div>
+</section>
+
+<!-- ======= ARCHIVE INDEX ======= -->
+<section class="archive">
+  <h3>· Earlier Writings · 2014 — 2019 ·</h3>
+  <table class="archive-table">
+    <thead>
+      <tr>
+        <th style="width:90px">Year</th>
+        <th>Title</th>
+        <th style="width:280px">Venue</th>
+        <th style="width:90px">Format</th>
+        <th style="width:120px">Document</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="year">2019</td><td>The Tinned Roof and the Tiered Tower: a Madurai Inventory</td><td>Journal of the Indian Society of Oriental Art, n.s. 12</td><td>Essay</td><td><a href="pdf/tinned-roof-2019.pdf">PDF · 1.3 MB</a></td></tr>
+      <tr><td class="year">2018</td><td>What the Stapathi's Notebook Knows</td><td>NID Ahmedabad · Foundation Lecture</td><td>Lecture</td><td><a href="pdf/stapathi-notebook-2018.pdf">PDF · 880 KB</a></td></tr>
+      <tr><td class="year">2018</td><td>Plaster, Paint, Repaint: A Conservation Quarrel</td><td>Context · Built · Living · Heritage Vol. XV/1</td><td>Essay</td><td><a href="pdf/plaster-paint-2018.pdf">PDF · 2.0 MB</a></td></tr>
+      <tr><td class="year">2017</td><td>The Section as Pilgrimage</td><td>Goa Architecture Festival · Panaji</td><td>Lecture</td><td><a href="pdf/section-pilgrimage-2017.pdf">PDF · 1.1 MB</a></td></tr>
+      <tr><td class="year">2016</td><td>On Working Slowly, in Public</td><td>Take on Art Magazine · Issue 17</td><td>Essay</td><td><a href="pdf/working-slowly-2016.pdf">PDF · 720 KB</a></td></tr>
+      <tr><td class="year">2015</td><td>A Short Defence of the Dravidian Order</td><td>Architecture + Design India · Sept. issue</td><td>Essay</td><td><a href="pdf/dravidian-defence-2015.pdf">PDF · 940 KB</a></td></tr>
+      <tr><td class="year">2014</td><td>Founding Note: Why Madurai, Why Now</td><td>Studio inaugural broadsheet</td><td>Manifesto</td><td><a href="pdf/founding-note-2014.pdf">PDF · 410 KB</a></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ======= SUBMIT NOTE ======= -->
+<section class="submit-note">
+  <h4>· On Reproduction &amp; Reprint ·</h4>
+  <p>
+    All texts above may be reproduced in scholarly contexts with attribution to the original
+    place of publication. For full-text reprint rights, classroom dossiers, or to commission
+    a new piece, write to <a href="mailto:editorial@sthapatiworkshop.in">editorial@sthapatiworkshop.in</a>
+    — please allow ten working days, the broadsheet press is hand-cranked.
+  </p>
+</section>
+
+<!-- ======= FOOTER ======= -->
+<footer>
+  <div class="arcade">
+    <div class="col"></div><div class="col"></div><div class="col"></div>
+    <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+  </div>
+  <div class="footer-body">
+    <div class="footer-left">
+      <strong>The Studio</strong>
+      Sthapati Workshop LLP<br>
+      No. 14, North Avani Moola Veethi<br>
+      East Gopuram, Madurai 625 001<br>
+      Tamil Nadu · Bhārat
+    </div>
+    <div class="kolam">
+      <div class="kolam-inner">
+        <span>॥ Kolam ॥</span>
+        Open<br>
+        Tuesday — Saturday<br>
+        09.30 — 17.30<br>
+        +91 452 234 1109
+      </div>
+    </div>
+    <div class="footer-right">
+      <strong>Correspondence</strong>
+      office@sthapatiworkshop.in<br>
+      editorial@sthapatiworkshop.in<br>
+      Workshop Yard · Sivagangai Road<br>
+      Visits by appointment only
+    </div>
+  </div>
+  <div class="colophon">
+    © 2011 — 2024 Sthapati Workshop LLP <span>·</span> GSTIN 33AAFCS4421Q1ZB <span>·</span>
+    கல்லில் எழுதியது நிலைக்கும் · what is written in stone, endures
+  </div>
+</footer>
+
+</body>
+</html>

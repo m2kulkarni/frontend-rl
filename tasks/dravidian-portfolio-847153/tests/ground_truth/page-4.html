@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>The Workshop — Lineage, Hands, and Tools · Atelier Sthapati</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    line-height: 1.65;
+  }
+  .page {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px 40px;
+  }
+
+  /* ---------- AUM TILAKA + ARCADE NAV ---------- */
+  .tilaka {
+    display: flex;
+    justify-content: center;
+    padding: 22px 0 8px;
+  }
+  .tilaka-seal {
+    width: 54px;
+    height: 54px;
+    background: var(--surface);
+    border: 2px solid var(--primary);
+    border-radius: 50%;
+    box-shadow: 0 0 0 3px var(--bg), 0 0 0 4px var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .tilaka-seal svg { width: 34px; height: 34px; }
+
+  nav.arcade {
+    background: var(--bg);
+    border-top: 3px double var(--primary);
+    border-bottom: 3px double var(--primary);
+    position: relative;
+    margin-bottom: 0;
+  }
+  nav.arcade::before, nav.arcade::after {
+    content: "";
+    display: block;
+    height: 2px;
+    background: var(--accent);
+  }
+  nav.arcade ul {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  nav.arcade li {
+    position: relative;
+    text-align: center;
+    background: var(--surface);
+    border-right: 2px solid var(--primary);
+    border-left: 2px solid var(--primary);
+    margin-left: -2px;
+  }
+  nav.arcade li:first-child { border-left: none; margin-left: 0; }
+  nav.arcade li:last-child { border-right: none; }
+  /* stepped capitals */
+  nav.arcade li::before, nav.arcade li::after {
+    content: "";
+    position: absolute;
+    left: -2px;
+    right: -2px;
+    height: 6px;
+    background:
+      linear-gradient(var(--accent), var(--accent)) 0 0/100% 2px no-repeat,
+      linear-gradient(var(--primary), var(--primary)) 0 4px/100% 2px no-repeat;
+  }
+  nav.arcade li::before { top: 0; }
+  nav.arcade li::after { bottom: 0; transform: scaleY(-1); }
+  nav.arcade a {
+    display: block;
+    padding: 18px 6px;
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    font-size: 11px;
+    color: var(--text);
+    text-decoration: none;
+    line-height: 1.3;
+  }
+  nav.arcade li[aria-current="page"] {
+    background: var(--bg);
+  }
+  nav.arcade li[aria-current="page"] a {
+    color: var(--text-emphasis);
+    font-weight: 700;
+  }
+  nav.arcade .bay-num {
+    display: block;
+    font-size: 9px;
+    color: var(--accent);
+    letter-spacing: 0.3em;
+    margin-bottom: 2px;
+  }
+
+  /* ---------- HEADPIECE ---------- */
+  .headpiece {
+    background: var(--surface);
+    padding: 18px 0 8px;
+    border-bottom: 1px solid var(--accent);
+  }
+  .headpiece svg {
+    display: block;
+    width: 100%;
+    height: 38px;
+    margin: 0 auto;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    background: var(--surface);
+    border: 1px solid var(--accent);
+    border-top: none;
+    padding: 36px 60px 32px;
+    text-align: center;
+    position: relative;
+  }
+  .hero .eyebrow {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.4em;
+    color: var(--secondary);
+    font-size: 12px;
+    margin-bottom: 14px;
+  }
+  .hero h1 {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.14em;
+    font-size: 42px;
+    margin: 0 0 12px;
+    color: var(--text-emphasis);
+    line-height: 1.15;
+  }
+  .hero h1 .amp { color: var(--accent); font-style: normal; }
+  .hero .subtitle {
+    font-style: italic;
+    color: var(--text);
+    font-size: 17px;
+    max-width: 760px;
+    margin: 0 auto 18px;
+  }
+  .hero .meta {
+    display: flex;
+    justify-content: center;
+    gap: 36px;
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    font-size: 11px;
+    color: var(--secondary);
+    padding-top: 16px;
+    border-top: 1px solid var(--accent);
+    margin-top: 18px;
+  }
+  .hero .meta strong {
+    display: block;
+    color: var(--text-emphasis);
+    font-size: 13px;
+    letter-spacing: 0.12em;
+  }
+
+  /* ---------- SECTION DIVIDER ---------- */
+  .divider {
+    padding: 22px 0 18px;
+    text-align: center;
+  }
+  .divider svg {
+    width: 70%;
+    height: 30px;
+    display: inline-block;
+    opacity: 0.85;
+  }
+  .divider .dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: var(--primary);
+    transform: rotate(45deg);
+    margin: 0 8px;
+    vertical-align: middle;
+  }
+
+  /* ---------- SECTION TITLES ---------- */
+  .sec-title {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  .sec-title .kicker {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.35em;
+    color: var(--secondary);
+    font-size: 11px;
+    margin-bottom: 6px;
+  }
+  .sec-title h2 {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.14em;
+    font-size: 28px;
+    color: var(--text-emphasis);
+    margin: 0;
+  }
+
+  /* ---------- LINEAGE BAND ---------- */
+  .lineage {
+    background: var(--surface);
+    border: 1px solid var(--accent);
+    margin-top: 0;
+    padding: 36px 56px 30px;
+    position: relative;
+  }
+  /* gopuram pediment */
+  .pediment {
+    height: 22px;
+    background:
+      linear-gradient(var(--primary), var(--primary)) 0 0/100% 4px no-repeat,
+      linear-gradient(var(--accent), var(--accent)) 0 5px/100% 1px no-repeat,
+      linear-gradient(var(--surface), var(--surface)) 0 6px/100% 4px no-repeat,
+      linear-gradient(var(--primary), var(--primary)) 0 11px/100% 2px no-repeat,
+      linear-gradient(var(--surface), var(--surface)) 0 14px/100% 4px no-repeat,
+      linear-gradient(var(--accent), var(--accent)) 0 19px/100% 1px no-repeat,
+      var(--bg);
+  }
+  .lineage-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 40px;
+    margin-top: 24px;
+  }
+  .lineage p {
+    margin: 0 0 14px;
+    font-size: 16px;
+  }
+  .lineage p:first-letter {
+    font-family: var(--font-display), serif;
+    font-size: 44px;
+    float: left;
+    line-height: 0.9;
+    padding: 6px 8px 0 0;
+    color: var(--text-emphasis);
+  }
+  .lineage-card p:first-letter { all: unset; }
+  .lineage-card {
+    background: var(--bg);
+    border: 1px solid var(--primary);
+    padding: 22px 24px;
+    position: relative;
+  }
+  .lineage-card h3 {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.16em;
+    font-size: 15px;
+    color: var(--surface);
+    background: var(--secondary);
+    margin: -22px -24px 16px;
+    padding: 10px 24px;
+    border-bottom: 2px solid var(--accent);
+  }
+  .lineage-card dl {
+    margin: 0;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 6px 14px;
+    font-size: 14px;
+  }
+  .lineage-card dt {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.12em;
+    color: var(--text-emphasis);
+    font-size: 11px;
+  }
+  .lineage-card dd { margin: 0; }
+
+  /* ---------- HANDS — CARD GRID ---------- */
+  .hands-section { margin-top: 0; }
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .card {
+    background: var(--surface);
+    position: relative;
+    padding: 0 28px 28px;
+    border: 1px solid var(--accent);
+  }
+  /* paired carved-pillar margins */
+  .card::before, .card::after {
+    content: "";
+    position: absolute;
+    top: 38px;
+    bottom: 18px;
+    width: 4px;
+    background:
+      linear-gradient(var(--primary), var(--primary)) 0 0/100% 100% no-repeat;
+  }
+  .card::before { left: 10px; }
+  .card::after { right: 10px; }
+  /* gopuram pediment top */
+  .card-pediment {
+    margin: 0 -28px;
+    height: 26px;
+    background:
+      linear-gradient(var(--primary), var(--primary)) 50% 0/40% 4px no-repeat,
+      linear-gradient(var(--accent), var(--accent)) 50% 5px/55% 1px no-repeat,
+      linear-gradient(var(--primary), var(--primary)) 50% 8px/70% 3px no-repeat,
+      linear-gradient(var(--accent), var(--accent)) 50% 13px/85% 1px no-repeat,
+      linear-gradient(var(--primary), var(--primary)) 50% 16px/100% 3px no-repeat,
+      linear-gradient(var(--accent), var(--accent)) 50% 21px/100% 1px no-repeat,
+      var(--surface);
+  }
+  .card-title {
+    background: var(--secondary);
+    color: var(--surface);
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    font-size: 15px;
+    text-align: center;
+    padding: 10px 6px;
+    margin: 8px -16px 0;
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+  }
+  .card .role {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.22em;
+    font-size: 10px;
+    color: var(--text-emphasis);
+    padding: 10px 0 6px;
+  }
+  .card .bio {
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0 4px 14px;
+  }
+  .card .stats {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.1em;
+    color: var(--secondary);
+    border-top: 1px solid var(--accent);
+    padding: 8px 6px 0;
+    margin: 0 4px;
+  }
+  .card .stats strong {
+    display: block;
+    color: var(--text-emphasis);
+    font-size: 13px;
+  }
+  .card .lotus {
+    text-align: center;
+    margin-top: 10px;
+  }
+  .card .lotus svg {
+    width: 28px;
+    height: 22px;
+    opacity: 0.95;
+  }
+
+  /* ---------- TOOLS TABLE ---------- */
+  .tools-section { margin-top: 0; }
+  .tools-wrap {
+    background: var(--surface);
+    border: 1px solid var(--accent);
+    padding: 0;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+  }
+  .tools-table {
+    border-right: 2px double var(--primary);
+    padding: 30px 36px;
+  }
+  .tools-table table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  .tools-table th {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    font-size: 11px;
+    color: var(--surface);
+    background: var(--text-emphasis);
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 2px solid var(--accent);
+  }
+  .tools-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    vertical-align: top;
+  }
+  .tools-table tr:nth-child(even) td {
+    background: rgba(193,154,107,0.12);
+  }
+  .tools-table .tamil {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.1em;
+    color: var(--text-emphasis);
+    font-weight: 700;
+    width: 22%;
+  }
+  .tools-table .yr {
+    color: var(--secondary);
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.12em;
+    width: 14%;
+  }
+  .tools-side {
+    padding: 30px 28px;
+    background:
+      linear-gradient(var(--accent), var(--accent)) 0 0/2px 100% repeat-y,
+      var(--bg);
+  }
+  .tools-side h3 {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.16em;
+    font-size: 14px;
+    color: var(--text-emphasis);
+    margin: 0 0 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--primary);
+  }
+  .tools-side p { font-size: 13px; margin: 0 0 14px; }
+  .tools-side .modern {
+    background: var(--surface);
+    border: 1px solid var(--primary);
+    padding: 14px;
+    margin-top: 16px;
+  }
+  .tools-side .modern strong {
+    display: block;
+    color: var(--text-emphasis);
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.14em;
+    margin-bottom: 4px;
+  }
+
+  /* ---------- DAY-IN-WORKSHOP STRIP ---------- */
+  .timetable {
+    background: var(--surface);
+    border: 1px solid var(--accent);
+    padding: 30px 40px;
+    display: grid;
+    grid-template-columns: 1fr 2.3fr;
+    gap: 36px;
+    align-items: start;
+  }
+  .timetable h2 {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.14em;
+    font-size: 22px;
+    color: var(--text-emphasis);
+    margin: 0 0 8px;
+  }
+  .timetable .lead {
+    font-style: italic;
+    font-size: 14px;
+    color: var(--secondary);
+  }
+  .schedule {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+  .schedule li {
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(227,66,52,0.25);
+    font-size: 13px;
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 10px;
+  }
+  .schedule li:nth-child(odd) {
+    border-right: 1px solid rgba(227,66,52,0.25);
+  }
+  .schedule .hr {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.1em;
+    color: var(--text-emphasis);
+    font-size: 11px;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer.arcade {
+    margin-top: 0;
+    border-top: 3px double var(--primary);
+    background: var(--bg);
+  }
+  footer .bays {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    background: var(--surface);
+    border-bottom: 2px solid var(--accent);
+  }
+  footer .bay {
+    padding: 22px 18px;
+    border-right: 2px solid var(--primary);
+    position: relative;
+    text-align: center;
+  }
+  footer .bay:last-child { border-right: none; }
+  footer .bay::before, footer .bay::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    height: 4px;
+    background:
+      linear-gradient(var(--accent), var(--accent)) 0 0/100% 1px no-repeat,
+      linear-gradient(var(--primary), var(--primary)) 0 2px/100% 2px no-repeat;
+  }
+  footer .bay::before { top: 0; }
+  footer .bay::after { bottom: 0; transform: scaleY(-1); }
+  footer .bay h4 {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.2em;
+    font-size: 11px;
+    color: var(--text-emphasis);
+    margin: 0 0 8px;
+  }
+  footer .bay p {
+    font-size: 12px;
+    margin: 0;
+    line-height: 1.5;
+  }
+  footer .bay.kolam {
+    padding: 18px 10px 14px;
+  }
+  .kolam-mandala {
+    width: 110px;
+    height: 110px;
+    margin: 0 auto;
+    position: relative;
+    background:
+      radial-gradient(circle at center, var(--primary) 2px, transparent 3px),
+      radial-gradient(circle at 50% 12%, var(--text-emphasis) 1.5px, transparent 2px),
+      radial-gradient(circle at 50% 88%, var(--text-emphasis) 1.5px, transparent 2px),
+      radial-gradient(circle at 12% 50%, var(--text-emphasis) 1.5px, transparent 2px),
+      radial-gradient(circle at 88% 50%, var(--text-emphasis) 1.5px, transparent 2px),
+      radial-gradient(circle at 25% 25%, var(--secondary) 1.5px, transparent 2px),
+      radial-gradient(circle at 75% 25%, var(--secondary) 1.5px, transparent 2px),
+      radial-gradient(circle at 25% 75%, var(--secondary) 1.5px, transparent 2px),
+      radial-gradient(circle at 75% 75%, var(--secondary) 1.5px, transparent 2px),
+      radial-gradient(circle at 50% 30%, var(--accent) 1.5px, transparent 2px),
+      radial-gradient(circle at 50% 70%, var(--accent) 1.5px, transparent 2px),
+      radial-gradient(circle at 30% 50%, var(--accent) 1.5px, transparent 2px),
+      radial-gradient(circle at 70% 50%, var(--accent) 1.5px, transparent 2px);
+    border: 1px solid var(--primary);
+    border-radius: 50%;
+  }
+  footer .double-rule {
+    height: 6px;
+    background:
+      linear-gradient(var(--primary), var(--primary)) 0 0/100% 2px no-repeat,
+      linear-gradient(var(--accent), var(--accent)) 0 4px/100% 1px no-repeat,
+      var(--bg);
+  }
+  footer .colophon {
+    text-align: center;
+    padding: 14px 0 22px;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--text-emphasis);
+    background: var(--bg);
+  }
+
+  /* ---------- BREADCRUMB / FOLIO ---------- */
+  .folio {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.3em;
+    font-size: 10px;
+    color: var(--text-emphasis);
+    padding: 10px 4px 6px;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- AUM TILAKA -->
+  <div class="tilaka" aria-hidden="true">
+    <div class="tilaka-seal">
+      <svg viewBox="0 0 356 367"><path d="M 90.456847,353.9498 C 51.797347,340.13485 23.72672,305.75839 12.612487,258.6184 C 7.5684267,237.22321 6.1421397,201.86984 10.323594,201.86984 C 11.712834,201.86984 15.42322,211.57056 18.568972,223.427 C 25.452892,249.37152 37.19436,273.76855 48.535988,285.69407 C 67.374717,305.50242 114.0356,313.26029 140.92106,301.05394 C 161.86409,291.54544 170.35697,268.94603 161.24995,246.95931 C 154.21242,229.96943 138.24701,224.28836 108.50834,228.19197 C 108.50834,228.19197 90.282834,208.57398 84.476417,173.73548 L 103.15738,175.42939 C 125.65731,177.46962 142.64532,172.49605 151.46236,161.28728 C 159.74765,150.75419 159.5685,146.68046 150.34841,135.96157 C 137.04396,120.49428 113.15511,124.41248 64.786577,149.99522 L 40.381632,109.08518 L 50.613137,101.2812 C 76.253387,81.724339 120.77357,71.947329 146.11011,80.309169 C 169.18841,87.925649 186.12724,118.14755 181.60247,143.63298 C 178.54327,160.86286 164.72752,184.99524 154.05369,191.75339 L 144.84862,197.58162 L 157.56351,203.31522 C 179.17018,213.05833 192.36061,205.61034 208.12001,174.76849 C 229.92949,132.0869 244.0745,121.0378 276.96658,120.99051 C 292.28176,120.96847 297.73268,122.57499 308.90312,130.4031 C 336.78213,149.94016 351.9622,190.39693 348.62804,236.27272 C 344.40474,294.37435 316.88374,329.61601 275.73415,329.61601 C 253.15086,329.61601 238.59451,321.69526 227.00729,303.10156 C 216.82976,286.76927 212.24334,254.42288 218.08805,240.19369 C 220.89208,233.36732 221.39892,233.13578 221.58223,238.59686 C 221.91916,248.63689 233.34159,264.95549 243.82827,270.37835 C 269.55794,283.68369 306.49479,266.96693 321.10832,235.4032 C 332.20339,211.4394 326.25105,165.21656 311.02084,157.06552 C 307.83453,155.36024 299.96089,153.96502 293.5244,153.96502 C 279.84214,153.96502 269.09709,163.80155 254.03263,190.11774 C 248.82442,199.21613 240.05943,210.97175 234.55486,216.24128 C 225.61134,224.80312 222.41769,225.82225 204.53067,225.82225 L 184.51412,225.82225 L 190.98415,240.19369 C 200.2451,260.76437 199.80694,294.18704 190.00976,314.53347 C 181.35272,332.51252 161.33618,350.71469 145.33374,355.16013 C 129.75572,359.4876 104.38789,358.9281 90.456847,353.9498 z M 165.8338,75.923739 C 156.97908,60.814399 151.52974,32.606158 157.46546,32.606158 C 164.43775,47.732319 178.73037,61.227101 194.03409,70.643259 C 221.52091,83.949329 249.39257,78.578529 279.84247,54.108239 C 286.54595,48.721279 292.48231,44.913138 293.0345,45.645698 C 300.4697,57.184233 313.331,66.613261 317.58219,80.021449 C 317.58219,85.678729 293.22867,101.96033 274.01214,109.15007 C 226.38264,122.8706 193.96598,117.44304 165.8338,75.923739 z M 189.83603,40.997228 L 220.84514,6.6137488 L 255.30593,38.514418 C 243.51876,48.222549 235.00994,63.289118 221.54391,70.930009 C 210.90372,63.086273 195.02308,53.837816 189.83603,40.997228 z" style="fill:var(--primary)"/></svg>
+    </div>
+  </div>
+
+  <!-- ARCADE NAV -->
+  <nav class="arcade" aria-label="Primary">
+    <ul>
+      <li><a href="page-1.html"><span class="bay-num">I</span>Sanctum</a></li>
+      <li><a href="page-2.html"><span class="bay-num">II</span>Selected Works</a></li>
+      <li><a href="page-3.html"><span class="bay-num">III</span>Drawings &amp; Treatises</a></li>
+      <li aria-current="page"><a href="page-4.html"><span class="bay-num">IV</span>The Workshop</a></li>
+      <li><a href="page-5.html"><span class="bay-num">V</span>Commissions</a></li>
+      <li><a href="page-6.html"><span class="bay-num">VI</span>Visit the Studio</a></li>
+      <li><a href="page-1.html#colophon"><span class="bay-num">VII</span>Colophon</a></li>
+    </ul>
+  </nav>
+
+  <!-- HEADPIECE PEACOCKS -->
+  <div class="headpiece">
+    <svg viewBox="0 0 313.71717 29.540759" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(54.572101,-91.176475)">
+        <path style="fill:var(--text-emphasis)" d="m -45.203647,120.20506 c -2.080683,-0.59494 -3.600099,-1.33764 -4.88273,-2.38671 -1.667517,-1.36388 -2.894118,-2.64027 -2.893812,-3.0113 1.42e-4,-0.17364 -0.209138,-0.47237 -0.46507,-0.66382 -0.819614,-0.61314 -1.16478,-1.84791 -1.123557,-4.01931 0.07527,-3.96496 0.841997,-6.28592 3.359706,-10.170217 2.091957,-3.227467 6.669369,-6.452883 10.647663,-7.502765 2.252562,-0.594453 8.248778,-0.796292 11.003264,-0.370372 6.94812,1.074354 16.152972,4.460234 20.6562963,7.598128 0.8536092,0.594796 0.7949964,0.623336 1.3291143,-0.64739 0.2251847,-0.535733 0.8814684,-1.603973 1.4584084,-2.373871 0.8561927,-1.142535 1.457933,-1.600664 3.2740672,-2.492638 2.16210793,-1.06191 4.5637653,-1.779237 6.7277099,-2.009456 0.5824052,-0.06194 1.3990594,-0.240975 1.8147895,-0.397805 0.7738562,-0.291942 6.4810504,-0.196925 10.0927814,0.168029 2.264542,0.228828 9.60899,1.67773 11.219571,2.21338 1.156599,0.384661 1.203738,0.376381 3.086684,-0.542345 2.528472,-1.2337 4.016657,-1.480542 8.446835,-1.401064 3.61374,0.06486 4.290154,0.147139 6.742793,0.820538 0.653941,0.179545 1.719761,0.375692 2.368485,0.435889 0.648729,0.0602 1.838242,0.282073 2.643363,0.493076 1.333488,0.349469 1.625289,0.339432 3.276461,-0.112735 4.298701,-1.177186 16.775093,-2.487486 20.247754,-2.126478 0.82522,0.08579 2.552867,0.408475 3.839215,0.717074 2.046471,0.490964 2.518569,0.521833 3.776859,0.246952 3.038874,-0.663879 6.75683,-1.061515 11.128253,-1.190178 4.134196,-0.121667 4.707691,-0.08259 6.380251,0.434721 1.364622,0.422078 2.105892,0.83929 2.879252,1.620559 1.29673,1.309975 1.63,2.709456 1.6237,6.818148 -0.005,2.95745 0.2393,4.45137 0.62566,3.83325 0.10807,-0.17288 0.17855,-1.23469 0.15662,-2.35957 -0.10151,-5.20664 0.0689,-6.026385 1.66799,-8.024476 0.85063,-1.062863 2.64553,-2.128587 4.10167,-2.435363 2.81819,-0.59374 15.88977,0.302112 18.8453,1.291541 0.69822,0.23375 1.33752,0.188118 3.17619,-0.226686 4.44974,-1.003866 5.16179,-1.08168 9.66723,-1.056509 4.01601,0.0224 5.00432,0.121426 8.5084,0.852608 6.84995,1.42927 7.19777,1.434197 12.43469,0.175947 1.28482,-0.308696 3.07339,-0.450501 5.82325,-0.46168 3.55974,-0.01452 4.14585,0.04906 5.68548,0.615953 0.94414,0.347651 2.11528,0.863208 2.60253,1.145677 0.82461,0.478046 0.98936,0.487693 2.38057,0.139336 1.77908,-0.445477 5.29646,-1.019874 9.8354,-1.606151 3.88998,-0.502463 11.70287,-0.5191 15.08161,-0.03212 5.86054,0.844676 9.86323,3.110261 10.57122,5.983455 l 0.28701,1.164733 3.35851,-1.630478 c 3.17793,-1.542804 8.22537,-3.484656 11.44251,-4.402193 4.71613,-1.345036 12.68145,-1.710913 16.9375,-0.778008 4.93058,1.080764 10.02057,5.551052 11.64065,10.223444 0.65092,1.87732 1.01878,5.06928 0.79472,6.89574 -0.46904,3.82309 -3.07509,7.60889 -6.48471,9.42031 -0.51071,0.27132 -1.10781,0.62201 -1.32689,0.7793 -1.28176,0.92026 -3.99222,1.08281 -9.3957,0.5635 -4.226,-0.40615 -43.09412,-0.56404 -48.28608,-0.19612 -3.36622,0.23852 -9.71584,0.13599 -14.17646,-0.22893 -3.19042,-0.261 -11.4116,-2.46478 -14.96419,-4.01131 -0.53984,-0.23501 -1.10442,-0.42792 -1.25461,-0.42868 -0.43847,-0.002 -0.31926,0.66639 0.24899,1.3964 0.63886,0.82072 0.66215,1.46506 0.0825,2.28367 -0.41639,0.5881 -0.53812,0.60929 -2.4496,0.42635 -1.10627,-0.10587 -3.2008,-0.44095 -4.65448,-0.74463 -1.45369,-0.30368 -4.09201,-0.62284 -5.86295,-0.70924 -3.45491,-0.16856 -4.65649,0.0199 -8.93437,1.40162 -2.04956,0.66196 -2.15841,0.6695 -4.80352,0.33258 -1.68376,-0.21447 -5.04124,-0.32578 -8.88522,-0.29456 -6.04658,0.0491 -6.20383,0.0368 -7.34956,-0.57531 -1.32088,-0.70568 -2.86287,-0.66893 -5.04444,0.12022 -0.88229,0.31916 -2.15717,0.43295 -4.89707,0.43713 -4.79736,0.007 -5.58286,-0.16276 -6.13105,-1.32752 l -0.42264,-0.89802 -1.08755,0.85944 c -1.8674,1.47572 -2.94146,1.82323 -5.59703,1.81093 -1.313341,-0.006 -3.557388,-0.23736 -4.986775,-0.51393 -2.027573,-0.39234 -2.694777,-0.43476 -3.0351,-0.19299 -1.426504,1.01339 -5.2004,1.21652 -9.369876,0.50433 -2.342079,-0.40006 -4.350291,-0.35925 -10.118619,0.20564 -2.370926,0.23218 -2.390138,0.22923 -3.965706,-0.60953 l -1.583238,-0.84286 -4.76258,0.004 c -3.320233,0.003 -5.333694,0.12924 -6.648373,0.41833 -2.953758,0.64954 -5.182097,0.79482 -6.349714,0.41398 -1.394469,-0.45482 -2.213474,-1.26097 -2.208834,-2.17419 0.0021,-0.41118 -0.106632,-0.74818 -0.241605,-0.74887 -0.13497,-6.8e-4 -1.238115,0.35414 -2.451433,0.7885 -7.896638,2.82691 -18.009765,3.78342 -31.365341,2.96657 -7.1026623,-0.43441 -10.2556485,-0.47172 -22.841675,-0.27026 -5.166476,0.0827 -13.263451,0.2047 -17.993277,0.27111 -4.729825,0.0664 -9.671447,0.15763 -10.98138,0.20269 -1.516176,0.0522 -2.861762,-0.0553 -3.702712,-0.29577 z"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="folio">
+    <span>Folio IV · The Workshop</span>
+    <span>Atelier Sthapati · Kumbakonam</span>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="eyebrow">About the Studio · Lineage, Hands &amp; Tools</div>
+    <h1>The Workshop <span class="amp">·</span> Lineage, Hands, &amp; Tools</h1>
+    <p class="subtitle">A seven-person atelier under the direction of R. Kalyanasundaram Sthapati, working in the Chola–Vijayanagara idiom from a tiled shed at 14, Sannidhi Street. The bench has stood, in one form or another, since 1947.</p>
+    <div class="meta">
+      <div><strong>Established</strong>1947 · Tiruvarur</div>
+      <div><strong>Re-founded</strong>1986 · Kumbakonam</div>
+      <div><strong>Hands at present</strong>Seven, plus two students</div>
+      <div><strong>Working idiom</strong>Chola · Later Vijayanagara</div>
+    </div>
+  </section>
+
+  <!-- DIVIDER -->
+  <div class="divider" aria-hidden="true">
+    <span class="dot"></span>
+    <svg viewBox="0 0 645 222" preserveAspectRatio="xMidYMid meet"><use href="#palmette"/></svg>
+    <span class="dot"></span>
+  </div>
+
+  <!-- LINEAGE -->
+  <div class="pediment" aria-hidden="true"></div>
+  <section class="lineage">
+    <div class="sec-title">
+      <div class="kicker">§ I · Paramparā</div>
+      <h2>The Lineage of the Hand</h2>
+    </div>
+    <div class="lineage-grid">
+      <div>
+        <p>R. Kalyanasundaram Sthapati was born in Tiruvarur in the Tamil month of Maasi, 1958, the third son of T. Ramanatha Sthapati (1932–2004) and Lakshmi Ammal. He took the chisel at the age of eleven, learning first the squaring of the granite block and the cutting of the plinth-mouldings, then advancing — under his father's exacting watch — to the carving of the kumbha and the lower register of the dvārapāla figure.</p>
+        <p>His father, T. Ramanatha, had himself been apprenticed to V. Subramanya Sthapati of Swamimalai, working through the great post-Independence revival on commissions for the Endowments Department at Tiruvaiyaru, Tirupperundurai, and (in 1971) the rebuilt Adhiṣṭhāna of the Pancha-vaṭi shrine at Mannargudi. The instruments now on the workshop wall — the heavy takku, the long-shafted brass plumb, the forty-eight uli of varying gauge — descend in unbroken ownership from that bench.</p>
+        <p>From 1976 to 1981, R. Kalyanasundaram studied at the Government College of Architecture and Sculpture, Mamallapuram, under Prof. M. Muthiah Sthapati and the late Dr. V. Ganapati Sthapati. The diploma in his cabinet records distinctions in iconometry (Tālamāna), in stone-dressing (Śilā-saṁskāra), and in the drafting of the vimāna elevation. He returned to Kumbakonam in the spring of 1986 and founded the present atelier in a rented shed behind the Sarangapani temple tank; the present premises at Sannidhi Street were taken in 1994.</p>
+      </div>
+      <aside>
+        <div class="lineage-card">
+          <h3>Master · Kalyanasundaram</h3>
+          <dl>
+            <dt>Born</dt><dd>14 February 1958, Tiruvarur</dd>
+            <dt>Father</dt><dd>T. Ramanatha Sthapati (1932–2004)</dd>
+            <dt>Trained</dt><dd>GCAS, Mamallapuram, 1976–1981</dd>
+            <dt>Diploma</dt><dd>Śilpaśāstra (Distinction), 1981</dd>
+            <dt>Studio founded</dt><dd>Tirumalai Lane, Kumbakonam · 1986</dd>
+            <dt>Present address</dt><dd>14, Sannidhi Street · since 1994</dd>
+            <dt>Affiliations</dt><dd>South Indian Sthapati Sangam (member, 1989); Tamil Nadu HR&amp;CE Panel of Approved Sculptors (1996)</dd>
+            <dt>Awards</dt><dd>State Award, Stone Sculpture, 2003; Kalaimāmani, 2011</dd>
+          </dl>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- DIVIDER -->
+  <div class="divider" aria-hidden="true">
+    <span class="dot"></span>
+    <span class="dot" style="background:var(--secondary)"></span>
+    <span class="dot"></span>
+    <span class="dot" style="background:var(--accent)"></span>
+    <span class="dot"></span>
+  </div>
+
+  <!-- HANDS -->
+  <section class="hands-section">
+    <div class="sec-title">
+      <div class="kicker">§ II · The Present Hands</div>
+      <h2>Seven at the Bench</h2>
+    </div>
+    <div class="cards-grid">
+
+      <article class="card">
+        <div class="card-pediment"></div>
+        <div class="role">Stone-carver · Kal-tachchan</div>
+        <h3 class="card-title">M. Selvaraj</h3>
+        <p class="bio">First chisel since 1991. Came to the bench at fourteen from Tiruchirapalli district. Carries the figural work — the standing Vishnu, the seated Ganesha, the makara of the toraṇa. His hand is recognised on the upper register of the Kāmākshī shrine at Pillayarpatti (commissioned 2009).</p>
+        <div class="stats"><span><strong>33 yrs</strong>at this bench</span><span><strong>Figural</strong>specialism</span></div>
+        <div class="lotus" aria-hidden="true">
+          <svg viewBox="-90 120 240 200"><circle cx="30" cy="220" r="6" fill="var(--primary)"/><circle cx="30" cy="220" r="14" fill="none" stroke="var(--accent)" stroke-width="1"/></svg>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-pediment"></div>
+        <div class="role">Stone-carver · Kal-tachchan</div>
+        <h3 class="card-title">P. Anbarasu</h3>
+        <p class="bio">Joined 1998. Trained in the same College at Mamallapuram (1992 batch) before coming north. Cuts the architectural members — kapota, prati, vyāḷa-pāda — and is the studio's surest hand at the corbel and the eave-bracket. Reads Sanskrit measure from the Mayamata without prompt.</p>
+        <div class="stats"><span><strong>26 yrs</strong>at this bench</span><span><strong>Architectural</strong>specialism</span></div>
+        <div class="lotus" aria-hidden="true">
+          <svg viewBox="-90 120 240 200"><circle cx="30" cy="220" r="6" fill="var(--primary)"/><circle cx="30" cy="220" r="14" fill="none" stroke="var(--accent)" stroke-width="1"/></svg>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-pediment"></div>
+        <div class="role">Draftsman · Rekhā-kāra</div>
+        <h3 class="card-title">K. Venkatraman</h3>
+        <p class="bio">The studio's draftsman since 2003. Holds an ITI certificate in mechanical drawing (1999) and was retrained in temple proportion by the master himself over five seasons. Draws the elevation, the plan, the ground-grid (āyādi), and the tāla-māna sheets in pencil and India ink at 1:20.</p>
+        <div class="stats"><span><strong>21 yrs</strong>at this bench</span><span><strong>Sheets</strong>at 1:20 / 1:50</span></div>
+        <div class="lotus" aria-hidden="true">
+          <svg viewBox="-90 120 240 200"><circle cx="30" cy="220" r="6" fill="var(--primary)"/><circle cx="30" cy="220" r="14" fill="none" stroke="var(--accent)" stroke-width="1"/></svg>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-pediment"></div>
+        <div class="role">Plaster-finisher · Sudhā-kāra</div>
+        <h3 class="card-title">R. Murugan</h3>
+        <p class="bio">Lime-mortar work, gesso, and the finishing of stucco figures on the gopuram tier. With us since 2007. Trained in the traditional kadukkai-kāy and palm-jaggery binder method preserved by the Sthapatis of Swamimalai. Maintains the small mixing-pit at the studio's back wall.</p>
+        <div class="stats"><span><strong>17 yrs</strong>at this bench</span><span><strong>Stucco &amp;</strong>lime-finish</span></div>
+        <div class="lotus" aria-hidden="true">
+          <svg viewBox="-90 120 240 200"><circle cx="30" cy="220" r="6" fill="var(--primary)"/><circle cx="30" cy="220" r="14" fill="none" stroke="var(--accent)" stroke-width="1"/></svg>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-pediment"></div>
+        <div class="role">Apprentice · Śiṣya, Year IV</div>
+        <h3 class="card-title">S. Karthik</h3>
+        <p class="bio">Nephew of M. Selvaraj. Joined Maasi 2020 at the age of seventeen. Has progressed from the dressing of the granite block to the cutting of simple lotus-petal mouldings. Permitted, since Aippasi 2023, to carve the kumbha of the half-pillar under supervision.</p>
+        <div class="stats"><span><strong>4th yr</strong>of apprenticeship</span><span><strong>Stipend</strong>₹ 6,500 / month</span></div>
+        <div class="lotus" aria-hidden="true">
+          <svg viewBox="-90 120 240 200"><circle cx="30" cy="220" r="6" fill="var(--primary)"/><circle cx="30" cy="220" r="14" fill="none" stroke="var(--accent)" stroke-width="1"/></svg>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-pediment"></div>
+        <div class="role">Apprentice · Śiṣya, Year II</div>
+        <h3 class="card-title">D. Bhaskaran</h3>
+        <p class="bio">Joined the bench in Aavani 2022. Sent to us by his uncle, a temple-priest at Tiruvidaimarudur. Currently learning the squaring and the chisel-grip; permitted to handle only the soft chlorite practice-blocks and the broken granite from the yard, never the commissioned stone.</p>
+        <div class="stats"><span><strong>2nd yr</strong>of apprenticeship</span><span><strong>Stipend</strong>₹ 4,000 / month</span></div>
+        <div class="lotus" aria-hidden="true">
+          <svg viewBox="-90 120 240 200"><circle cx="30" cy="220" r="6" fill="var(--primary)"/><circle cx="30" cy="220" r="14" fill="none" stroke="var(--accent)" stroke-width="1"/></svg>
+        </div>
+      </article>
+
+      <article class="card" style="grid-column: span 3;">
+        <div class="card-pediment"></div>
+        <div class="role">Kitchen-keeper · Maḍai-kāri</div>
+        <h3 class="card-title">Smt. Padmavati Ammal</h3>
+        <p class="bio" style="text-align:center; max-width:780px; margin:0 auto 14px;">Cousin of the master, widowed in 2001, with the bench since the same year. Cooks the midday meal for the seven hands — rice, sambar, two vegetables, and curd — on a wood-and-kerosene stove in the courtyard kitchen. Keeps the household accounts of the studio: rice, oil, lentils, firewood, the brass tumblers and the banana-leaf supply. Without her, neither the chisel nor the pencil would last past noon.</p>
+        <div class="stats" style="max-width:540px; margin:0 auto;"><span><strong>23 yrs</strong>with the studio</span><span><strong>Meals</strong>9 daily, by leaf</span><span><strong>Stipend</strong>₹ 9,000 + room</span></div>
+        <div class="lotus" aria-hidden="true">
+          <svg viewBox="-90 120 240 200"><circle cx="30" cy="220" r="6" fill="var(--primary)"/><circle cx="30" cy="220" r="14" fill="none" stroke="var(--accent)" stroke-width="1"/></svg>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- DIVIDER -->
+  <div class="divider" aria-hidden="true">
+    <span class="dot" style="background:var(--secondary)"></span>
+    <span class="dot"></span>
+    <span class="dot" style="background:var(--accent)"></span>
+    <span class="dot"></span>
+    <span class="dot" style="background:var(--secondary)"></span>
+  </div>
+
+  <!-- TOOLS -->
+  <section class="tools-section">
+    <div class="sec-title">
+      <div class="kicker">§ III · Āyudha-paṭṭi · The Register of Tools</div>
+      <h2>The Principal Implements of the Bench</h2>
+    </div>
+    <div class="tools-wrap">
+      <div class="tools-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Implement (Tamil / Skt.)</th>
+              <th>Use</th>
+              <th>Count</th>
+              <th>Acquired</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="tamil">Takku · taṅka</td><td>Heavy hammer of forged iron, 1.4 kg, used to drive the uli into hard granite. Two are inherited from T. Ramanatha; the others purchased from the Karaikudi smithy.</td><td>5</td><td class="yr">1968 — 2014</td></tr>
+            <tr><td class="tamil">Uli (assorted)</td><td>Tempered chisels in eight gauges, from the ⅛-inch fine-line uli for the eye and the ornament, to the 1-inch heavy uli for plinth-dressing. Re-tempered annually at the Tiruvidaimarudur smithy.</td><td>48</td><td class="yr">various</td></tr>
+            <tr><td class="tamil">Kuṇḍi-uli · point chisel</td><td>The pointed chisel, for the first roughing-out of the form from the squared block.</td><td>9</td><td class="yr">since 1986</td></tr>
+            <tr><td class="tamil">Pīli · claw chisel</td><td>Toothed chisel of three, four and seven teeth; used for the second dressing, removing the high points left by the kuṇḍi-uli.</td><td>11</td><td class="yr">since 1986</td></tr>
+            <tr><td class="tamil">Vakku-uli · flat chisel</td><td>Flat-bladed finishing chisel for the smooth surface, particularly the cheek of the figure and the moulding-edge.</td><td>14</td><td class="yr">since 1986</td></tr>
+            <tr><td class="tamil">Sūtra-kayiru</td><td>The plumb-line, of red cotton waxed with bee's-wax and weighted with a brass cone (250 g). Three sets are kept in the drawer of the master's table.</td><td>3</td><td class="yr">1986, 1998, 2017</td></tr>
+            <tr><td class="tamil">Kōl · measuring rod</td><td>The graduated rod of teak, 36 inches, marked in the Mānasāra aṅgula and the British inch on opposite faces. The master's personal rod was cut by his father in 1972.</td><td>4</td><td class="yr">1972 — 2009</td></tr>
+            <tr><td class="tamil">Karaṇḍi · trowel</td><td>For the lime-mortar finish and the laying of the stucco. Held by R. Murugan; not lent.</td><td>2</td><td class="yr">2007</td></tr>
+            <tr><td class="tamil">Aṟam · file (rasp)</td><td>Coarse and fine rasps for the final smoothing of soft chlorite (saligrāma) and for the sandstone blocks of the Pillayarpatti commission.</td><td>7</td><td class="yr">various</td></tr>
+            <tr><td class="tamil">Drafting-board</td><td>Pine, 30 × 42 inches, set on trestles by the north light. Two are kept; one for K. Venkatraman, one for the master.</td><td>2</td><td class="yr">1994, 2003</td></tr>
+            <tr><td class="tamil">Theodolite (Sokkia)</td><td>For the setting-out of the temple plan on site, the verification of the ground-grid, and the levelling of the adhiṣṭhāna course. Acquired from a Madras surveyor's estate sale.</td><td>1</td><td class="yr">1998</td></tr>
+            <tr><td class="tamil">Brass plumb &amp; spirit-level</td><td>Modern Stanley spirit-level (24 in.); the brass plumb, however, is from the master's father's bench.</td><td>2</td><td class="yr">1972 / 2001</td></tr>
+            <tr><td class="tamil">Compass-pair (large)</td><td>For the setting-out of the lotus-bands and the circular mouldings of the kumbha. Forged locally to the master's pattern.</td><td>3</td><td class="yr">1989</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <aside class="tools-side">
+        <h3>A Note on Tempering</h3>
+        <p>The chisels are re-tempered every year in the lull before the festival season — the months of Aippasi and Kārttikai — at the Vēlu smithy on the Tiruvidaimarudur road. The smith, Mr. Vēlu Asari, is the third generation of his family to do this work for our bench.</p>
+        <p>The hardness is judged by ear: the chisel is held by the haft and the bevel struck against an old anvil-corner. The note must ring clear and high, without a rattle, before the master will accept it back to the rack.</p>
+        <div class="modern">
+          <strong>The Theodolite, 1998</strong>
+          A used Sokkia DT-5, purchased for ₹ 14,000 from the estate of a retired PWD surveyor. It is the only twentieth-century instrument the studio has admitted to the bench, and it is used only on site, never in the shed.
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- DIVIDER -->
+  <div class="divider" aria-hidden="true">
+    <span class="dot"></span>
+    <span class="dot" style="background:var(--accent)"></span>
+    <span class="dot"></span>
+  </div>
+
+  <!-- TIMETABLE -->
+  <section class="timetable">
+    <div>
+      <div class="kicker" style="font-family:var(--font-display);font-variant:small-caps;letter-spacing:0.3em;color:var(--secondary);font-size:11px;">§ IV · The Day at the Bench</div>
+      <h2>From Dawn-bath to Lamp-lighting</h2>
+      <p class="lead">The studio keeps the old hours. Work begins at the second hour after sunrise, after the master has bathed and made his offering at the Sarangapani shrine. It ends with the lighting of the brass lamp at the threshold.</p>
+      <p style="font-size:13px;margin-top:14px;">No chisel is sounded on the festival days of Vinayaka Chaturthi, Mahā-Śivarātri, the nine days of Navarātri, the day of Vaikuṇṭha Ekādaśī, and on the new-moon (amāvāsyai) of every month.</p>
+    </div>
+    <ol class="schedule">
+      <li><span class="hr">05:30</span><span>Master's pūjā at the workshop shrine; lamp lit before the granite Ganesha.</span></li>
+      <li><span class="hr">06:30</span><span>Apprentices sweep the yard, lay out the day's chisels, fill the water-pot.</span></li>
+      <li><span class="hr">07:00</span><span>First sitting at the bench. Heavy roughing-out work.</span></li>
+      <li><span class="hr">10:30</span><span>Tea, with jaggery, brought by Padmavati Ammal.</span></li>
+      <li><span class="hr">12:30</span><span>The midday meal, taken in the courtyard on banana-leaf.</span></li>
+      <li><span class="hr">13:30</span><span>Drafting-board work; quiet hours, the master at his table.</span></li>
+      <li><span class="hr">15:30</span><span>Second sitting at the bench. Fine-finishing only, no hammering.</span></li>
+      <li><span class="hr">18:00</span><span>Tools racked, sand swept, threshold-lamp lit. Day closed.</span></li>
+    </ol>
+  </section>
+
+  <!-- DIVIDER -->
+  <div class="divider" aria-hidden="true">
+    <span class="dot"></span>
+    <span class="dot" style="background:var(--secondary)"></span>
+    <span class="dot"></span>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="arcade">
+    <div class="bays">
+      <div class="bay">
+        <h4>The Studio</h4>
+        <p>Atelier Sthapati<br>14, Sannidhi Street<br>Kumbakonam 612 001</p>
+      </div>
+      <div class="bay">
+        <h4>Correspondence</h4>
+        <p>By post, in the master's hand<br>or by telephone, after 4 p.m.<br>+91&nbsp;435&nbsp;242&nbsp;0817</p>
+      </div>
+      <div class="bay kolam" aria-hidden="true">
+        <div class="kolam-mandala"></div>
+      </div>
+      <div class="bay">
+        <h4>Established</h4>
+        <p>Tirumalai Lane, 1986<br>Sannidhi Street, since 1994<br>Bench in lineage since 1947</p>
+      </div>
+      <div class="bay">
+        <h4>Of Record</h4>
+        <p>HR&amp;CE Approved Sculptor<br>Reg. No. TN/SC/1996/214<br>Folio drawn IV of VI</p>
+      </div>
+    </div>
+    <div class="double-rule" aria-hidden="true"></div>
+    <div class="colophon">
+      Drawn at the bench on the 18th day of Aippasi, in the year Krodhin · corresponding to the 3rd of November, 2024.
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Conservation Projects — Active Fieldwork</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  :root{
+    --cobalt:#1e3a5f;
+    --turquoise:#2a8a8a;
+    --gold:#c9a23a;
+    --ivory:#f2e5cc;
+    --oxblood:#7a1f2e;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--font-body),"EB Garamond",Georgia,serif;
+    line-height:1.65;
+  }
+  a{color:inherit;text-decoration:none}
+
+  /* ============ HEADER ============ */
+  .header-strip{
+    background:var(--cobalt);
+    height:14px;
+    border-bottom:1px solid var(--gold);
+  }
+  .brand{
+    text-align:center;
+    padding:28px 0 18px;
+    background:var(--ivory);
+    border-bottom:1px solid var(--gold);
+  }
+  .brand-eyebrow{
+    font-family:var(--font-display),"Marcellus",serif;
+    letter-spacing:.55em;
+    font-size:.72rem;
+    color:var(--turquoise);
+    text-transform:uppercase;
+  }
+  .brand-name{
+    font-family:var(--font-display),"Marcellus",serif;
+    font-size:2rem;
+    color:var(--cobalt);
+    letter-spacing:.08em;
+    margin-top:6px;
+  }
+  .brand-rule{
+    width:120px;height:2px;background:var(--gold);margin:14px auto 8px;
+  }
+  .brand-sub{
+    font-style:italic;color:var(--text-emphasis);font-size:.95rem;
+  }
+
+  /* ============ NAV ============ */
+  nav.primary{
+    border-top:1px solid var(--gold);
+    border-bottom:1px solid var(--gold);
+    background:var(--ivory);
+    padding:14px 0;
+    position:relative;
+  }
+  nav.primary::before, nav.primary::after{
+    content:"";display:block;height:1px;background:var(--gold);
+    margin:0 auto;width:96%;
+  }
+  nav.primary::before{position:absolute;top:3px;left:2%;right:2%;}
+  nav.primary::after{position:absolute;bottom:3px;left:2%;right:2%;}
+  nav.primary ul{
+    display:flex;justify-content:center;align-items:center;
+    list-style:none;gap:0;flex-wrap:wrap;
+  }
+  nav.primary li{display:flex;align-items:center;}
+  nav.primary a{
+    font-family:var(--font-display),"Marcellus",serif;
+    font-variant:small-caps;
+    letter-spacing:.22em;
+    font-size:.82rem;
+    color:var(--cobalt);
+    padding:6px 22px;
+    display:inline-block;
+    position:relative;
+  }
+  nav.primary a[aria-current="page"]{
+    color:var(--cobalt);
+  }
+  nav.primary a[aria-current="page"]::after{
+    content:"";
+    position:absolute;
+    left:50%;transform:translateX(-50%);
+    bottom:-6px;
+    width:34px;height:2px;background:var(--turquoise);
+  }
+  .palmette{
+    color:var(--gold);font-size:.7rem;display:inline-block;
+    transform:translateY(-1px);
+  }
+
+  /* ============ HERO ============ */
+  .hero{
+    position:relative;
+    padding:60px 40px 40px;
+    text-align:center;
+    background:
+      radial-gradient(ellipse at top, rgba(42,138,138,.06), transparent 60%),
+      var(--ivory);
+    border-bottom:1px solid var(--gold);
+    overflow:hidden;
+  }
+  .hero-spandrel-bg{
+    position:absolute;inset:0;
+    opacity:.05;
+    pointer-events:none;
+    background-image:
+      repeating-linear-gradient(45deg, var(--cobalt) 0 1px, transparent 1px 28px),
+      repeating-linear-gradient(-45deg, var(--cobalt) 0 1px, transparent 1px 28px);
+  }
+  .hero-inner{position:relative;z-index:2;max-width:980px;margin:0 auto;}
+  .hero-kicker{
+    font-family:var(--font-display),"Marcellus",serif;
+    letter-spacing:.5em;
+    color:var(--turquoise);
+    font-size:.78rem;
+    text-transform:uppercase;
+  }
+  .hero h1{
+    font-family:var(--font-display),"Marcellus",serif;
+    font-size:3rem;
+    color:var(--cobalt);
+    margin:14px 0 10px;
+    letter-spacing:.04em;
+  }
+  .hero-tagline{
+    font-style:italic;
+    color:var(--text);
+    max-width:720px;margin:0 auto 22px;
+    font-size:1.1rem;
+  }
+  .hero-arch{
+    display:flex;justify-content:center;align-items:center;gap:24px;
+    margin-top:18px;
+  }
+  .hero-arch svg{flex-shrink:0;}
+  .hero-meta{
+    font-family:var(--font-display),"Marcellus",serif;
+    font-variant:small-caps;
+    letter-spacing:.18em;
+    color:var(--oxblood);
+    font-size:.85rem;
+  }
+
+  /* ============ DIVIDER ============ */
+  .divider{
+    display:flex;justify-content:center;align-items:center;
+    padding:28px 0;background:var(--ivory);
+  }
+  .divider svg{width:440px;height:auto;color:var(--cobalt)}
+  .divider svg path{fill:var(--cobalt)}
+  .divider svg polyline{stroke:var(--gold)}
+
+  /* ============ PROJECTS SECTION ============ */
+  .projects{
+    background:var(--ivory);
+    padding:20px 60px 80px;
+  }
+  .projects-intro{
+    text-align:center;max-width:860px;margin:0 auto 50px;
+  }
+  .projects-intro h2{
+    font-family:var(--font-display),"Marcellus",serif;
+    font-size:1.7rem;color:var(--cobalt);
+    letter-spacing:.06em;margin-bottom:10px;
+  }
+  .projects-intro p{font-size:1.02rem;color:var(--text);}
+
+  .grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:48px 56px;
+    max-width:1280px;margin:0 auto;
+  }
+
+  /* ============ CARD (POINTED ARCH) ============ */
+  .card{
+    position:relative;
+    background:var(--ivory);
+    padding:0;
+  }
+  .arch-wrap{
+    position:relative;
+    background:#fbf3df;
+    padding:54px 44px 46px;
+    border:1.5px solid var(--cobalt);
+    border-radius:50% 50% 4px 4px / 38% 38% 4px 4px;
+    box-shadow:inset 0 0 0 1px var(--ivory), inset 0 0 0 2px var(--gold);
+    text-align:center;
+  }
+  .arch-wrap::before{
+    /* faint girih spandrel suggestion at top corners */
+    content:"";
+    position:absolute;
+    top:0;left:0;right:0;height:140px;
+    background-image:
+      repeating-linear-gradient(60deg, rgba(30,58,95,.08) 0 1px, transparent 1px 18px),
+      repeating-linear-gradient(-60deg, rgba(30,58,95,.08) 0 1px, transparent 1px 18px);
+    border-radius:50% 50% 0 0 / 100% 100% 0 0;
+    opacity:.55;
+    pointer-events:none;
+  }
+  .card-num{
+    font-family:var(--font-display),"Marcellus",serif;
+    color:var(--turquoise);
+    letter-spacing:.4em;
+    font-size:.72rem;
+    position:relative;z-index:2;
+  }
+  .card h3{
+    font-family:var(--font-display),"Marcellus",serif;
+    font-variant:small-caps;
+    letter-spacing:.08em;
+    color:var(--cobalt);
+    font-size:1.35rem;
+    margin:10px auto 14px;
+    max-width:380px;
+    line-height:1.25;
+    position:relative;z-index:2;
+  }
+  .card-loc{
+    font-style:italic;
+    color:var(--text-emphasis);
+    font-size:.95rem;
+    margin-bottom:18px;
+    position:relative;z-index:2;
+  }
+  .meta-row{
+    display:flex;justify-content:center;gap:30px;
+    border-top:1px solid var(--gold);
+    border-bottom:1px solid var(--gold);
+    padding:12px 0;
+    margin:0 0 18px;
+    font-size:.82rem;
+    position:relative;z-index:2;
+  }
+  .meta-row dl{display:flex;gap:8px;align-items:baseline}
+  .meta-row dt{
+    font-family:var(--font-display),"Marcellus",serif;
+    font-variant:small-caps;
+    letter-spacing:.18em;
+    color:var(--turquoise);
+    font-size:.7rem;
+  }
+  .meta-row dd{color:var(--cobalt);font-weight:600;font-size:.88rem;}
+  .scope{
+    font-size:1rem;
+    line-height:1.65;
+    text-align:left;
+    color:var(--text);
+    position:relative;z-index:2;
+    padding:0 6px;
+  }
+  .star-seal{
+    margin:22px auto 0;
+    width:34px;height:34px;
+    position:relative;z-index:2;
+  }
+  .star-seal svg{display:block;width:100%;height:100%;}
+
+  /* ============ TABLE OF FIELDWORK ============ */
+  .summary{
+    margin:80px auto 0;max-width:1100px;
+    border-top:1px solid var(--gold);
+    border-bottom:1px solid var(--gold);
+    padding:30px 20px;
+  }
+  .summary h2{
+    text-align:center;
+    font-family:var(--font-display),"Marcellus",serif;
+    color:var(--cobalt);
+    letter-spacing:.16em;
+    font-size:1.2rem;
+    margin-bottom:20px;
+    font-variant:small-caps;
+  }
+  table{
+    width:100%;border-collapse:collapse;
+    font-size:.92rem;
+  }
+  th, td{
+    text-align:left;padding:10px 14px;
+    border-bottom:1px dotted rgba(30,58,95,.3);
+  }
+  th{
+    font-family:var(--font-display),"Marcellus",serif;
+    font-variant:small-caps;letter-spacing:.18em;
+    color:var(--turquoise);font-weight:400;font-size:.78rem;
+  }
+  td:first-child{color:var(--cobalt);font-weight:600;}
+  td.budget{color:var(--text-emphasis);font-style:italic;}
+
+  /* ============ FOOTER ============ */
+  footer{
+    background:var(--cobalt);
+    color:var(--ivory);
+    margin-top:60px;
+    position:relative;
+    padding:40px 60px 30px;
+  }
+  .footer-filet{
+    height:18px;
+    background-image:
+      repeating-linear-gradient(90deg,
+        var(--ivory) 0 8px, transparent 8px 16px,
+        var(--gold) 16px 18px, transparent 18px 28px);
+    opacity:.55;
+    margin-bottom:30px;
+    border-bottom:1px solid var(--gold);
+  }
+  .footer-cols{
+    display:grid;grid-template-columns:1fr 1fr 1fr;
+    gap:40px;text-align:center;max-width:1200px;margin:0 auto;
+  }
+  .footer-cols h4{
+    font-family:var(--font-display),"Marcellus",serif;
+    font-variant:small-caps;
+    letter-spacing:.24em;
+    color:var(--gold);
+    font-size:.85rem;font-weight:400;
+    margin-bottom:12px;
+  }
+  .footer-cols p, .footer-cols ul{font-size:.92rem;line-height:1.7;}
+  .footer-cols ul{list-style:none;}
+  .footer-seal{
+    width:46px;height:46px;margin:34px auto 14px;
+  }
+  .copyright{
+    text-align:center;
+    font-style:italic;font-size:.85rem;
+    color:rgba(242,229,204,.75);
+    border-top:1px solid rgba(201,162,58,.35);
+    padding-top:16px;
+  }
+
+  /* small inline gold star icon */
+  .gold-star{color:var(--gold);font-size:.85rem;}
+</style>
+</head>
+<body>
+
+<div class="header-strip"></div>
+
+<header class="brand">
+  <div class="brand-eyebrow">Founded MMVII · Isfahan</div>
+  <div class="brand-name">The Bagh-e Fin Foundation</div>
+  <div class="brand-rule"></div>
+  <div class="brand-sub">for the Conservation of Persian Arts</div>
+</header>
+
+<nav class="primary" aria-label="Primary">
+  <ul>
+    <li><a href="page-1.html">Home</a></li>
+    <li><span class="palmette">❖</span></li>
+    <li><a href="page-2.html">Mission &amp; History</a></li>
+    <li><span class="palmette">❖</span></li>
+    <li><a href="page-3.html" aria-current="page">Conservation Projects</a></li>
+    <li><span class="palmette">❖</span></li>
+    <li><a href="page-4.html">The Collection</a></li>
+    <li><span class="palmette">❖</span></li>
+    <li><a href="page-5.html">Grants &amp; Fellowships</a></li>
+    <li><span class="palmette">❖</span></li>
+    <li><a href="page-6.html">Visit &amp; Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-spandrel-bg" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <div class="hero-kicker">Field Register · 1403 / 2024–25</div>
+    <h1>Conservation Projects</h1>
+    <p class="hero-tagline">A working catalogue of six active interventions undertaken by foundation conservators and partner ateliers across the cities of Isfahan, Kashan, and Ardabil — each entry comprises locality, lead conservator, commencement, and a brief scope of works.</p>
+    <div class="hero-arch" aria-hidden="true">
+      <svg width="80" height="90" viewBox="0 0 500 550" fill="none" stroke="#1e3a5f" stroke-width="6">
+        <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432" transform="translate(-147,-244)"/>
+        <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432" transform="matrix(-1,0,0,1,630,-244)"/>
+      </svg>
+      <span class="hero-meta">Six Sites · Three Cities · Four Disciplines</span>
+      <svg width="80" height="90" viewBox="0 0 500 550" fill="none" stroke="#1e3a5f" stroke-width="6">
+        <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432" transform="translate(-147,-244)"/>
+        <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432" transform="matrix(-1,0,0,1,630,-244)"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<div class="divider" aria-hidden="true">
+  <svg viewBox="0 0 437.999 18.893" xmlns="http://www.w3.org/2000/svg">
+    <g fill="#1e3a5f">
+      <path d="M0,9.445c0,0,37.005-0.063,73.998-0.829c18.495-0.386,36.989-0.949,50.831-1.785c6.919-0.414,12.677-0.906,16.663-1.46c1.99-0.28,3.539-0.582,4.535-0.878c0.502-0.146,0.844-0.297,1.049-0.405c0.157-0.107,0.238-0.162,0.238-0.162l0.42-0.287l0.656,0.656l-0.369,0.338c0,0-0.154,0.142-0.456,0.324c-0.291,0.154-0.714,0.331-1.256,0.484c-1.085,0.314-2.667,0.608-4.686,0.879c-4.037,0.533-9.811,0.985-16.745,1.354c-13.868,0.744-32.369,1.183-50.87,1.443C37.003,9.632,0,9.445,0,9.445z"/>
+      <path d="M437.999,9.445c0,0-37.004,0.187-74.007-0.329c-18.501-0.261-37.002-0.699-50.869-1.443c-6.935-0.368-12.708-0.82-16.745-1.354c-2.019-0.271-3.601-0.565-4.687-0.879c-0.541-0.153-0.965-0.33-1.256-0.484c-0.302-0.183-0.456-0.324-0.456-0.324l-0.369-0.338l0.656-0.656l0.42,0.287c0,0,0.081,0.055,0.238,0.162c0.204,0.108,0.546,0.26,1.048,0.405c0.996,0.296,2.545,0.598,4.535,0.878c3.986,0.554,9.744,1.046,16.663,1.46C327.011,7.667,345.506,8.23,364,8.616C400.994,9.382,437.999,9.445,437.999,9.445z"/>
+      <circle cx="219" cy="9.445" r="6" fill="#c9a23a"/>
+      <circle cx="170" cy="9.445" r="3" fill="#2a8a8a"/>
+      <circle cx="268" cy="9.445" r="3" fill="#2a8a8a"/>
+    </g>
+  </svg>
+</div>
+
+<section class="projects">
+  <div class="projects-intro">
+    <h2>Active Fieldwork, Cycle of 1403</h2>
+    <p>Each project below is overseen by a foundation-appointed lead conservator working alongside the Iranian Cultural Heritage, Handicrafts and Tourism Organisation. Reports are filed quarterly to the Trustees in Isfahan.</p>
+  </div>
+
+  <div class="grid">
+
+    <!-- 1 -->
+    <article class="card">
+      <div class="arch-wrap">
+        <div class="card-num">·  Project No. I  ·</div>
+        <h3>Sheikh Lotfollah Inner-Dome Stabilization</h3>
+        <div class="card-loc">Naqsh-e Jahan Square, Isfahan</div>
+        <div class="meta-row">
+          <dl><dt>Lead</dt><dd>Mehrnoush Tabrizi</dd></dl>
+          <dl><dt>Began</dt><dd>March 2023</dd></dl>
+        </div>
+        <p class="scope">A campaign of micro-grouting and seismic monitoring addresses hairline fissures along the dome's lemon-yellow lozenge field, identified during the 2022 ground-survey. Phase II will reseat thirty-seven displaced haft-rang tiles using lime-pozzolan mortars cured to nineteenth-century specification.</p>
+        <div class="star-seal" aria-hidden="true">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="50,8 58,38 90,38 64,58 74,90 50,72 26,90 36,58 10,38 42,38" fill="#2a8a8a" stroke="#c9a23a" stroke-width="1.5"/>
+            <circle cx="50" cy="50" r="6" fill="#1e3a5f"/>
+          </svg>
+        </div>
+      </div>
+    </article>
+
+    <!-- 2 -->
+    <article class="card">
+      <div class="arch-wrap">
+        <div class="card-num">·  Project No. II  ·</div>
+        <h3>Imam Mosque Iwan Tile Re-Cutting</h3>
+        <div class="card-loc">Masjed-e Shah, Isfahan</div>
+        <div class="meta-row">
+          <dl><dt>Lead</dt><dd>Paolo Sereni</dd></dl>
+          <dl><dt>Began</dt><dd>September 2022</dd></dl>
+        </div>
+        <p class="scope">The southern iwan's spandrel mosaics, weathered by sixty winters of frost-cycling, are being matched and replaced piece-by-piece by the foundation's Kashan kiln using cobalt and turquoise glazes formulated from period recipes. Each replacement bears a discreet incised mark on its reverse to distinguish modern intervention from Safavid original.</p>
+        <div class="star-seal" aria-hidden="true">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="50,8 58,38 90,38 64,58 74,90 50,72 26,90 36,58 10,38 42,38" fill="#2a8a8a" stroke="#c9a23a" stroke-width="1.5"/>
+            <circle cx="50" cy="50" r="6" fill="#1e3a5f"/>
+          </svg>
+        </div>
+      </div>
+    </article>
+
+    <!-- 3 -->
+    <article class="card">
+      <div class="arch-wrap">
+        <div class="card-num">·  Project No. III  ·</div>
+        <h3>Chehel Sotoun Mirror-Ceiling Cleaning</h3>
+        <div class="card-loc">Chehel Sotoun Pavilion, Isfahan</div>
+        <div class="meta-row">
+          <dl><dt>Lead</dt><dd>Ladan Esfandiari</dd></dl>
+          <dl><dt>Began</dt><dd>January 2024</dd></dl>
+        </div>
+        <p class="scope">Conservators are removing nineteenth-century shellac varnishes that have darkened the audience-hall's faceted mirror vault, working in eighty-centimetre grids using cotton swabs and a buffered solvent gel. The treatment recovers the original silver flash that animated wall-paintings of the Shah Abbas court receptions below.</p>
+        <div class="star-seal" aria-hidden="true">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="50,8 58,38 90,38 64,58 74,90 50,72 26,90 36,58 10,38 42,38" fill="#2a8a8a" stroke="#c9a23a" stroke-width="1.5"/>
+            <circle cx="50" cy="50" r="6" fill="#1e3a5f"/>
+          </svg>
+        </div>
+      </div>
+    </article>
+
+    <!-- 4 -->
+    <article class="card">
+      <div class="arch-wrap">
+        <div class="card-num">·  Project No. IV  ·</div>
+        <h3>Ardabil Shrine Carpet Documentation</h3>
+        <div class="card-loc">Sheikh Safi al-Din Khānegāh, Ardabil</div>
+        <div class="meta-row">
+          <dl><dt>Lead</dt><dd>Reza Khorrami-Manesh</dd></dl>
+          <dl><dt>Began</dt><dd>May 2023</dd></dl>
+        </div>
+        <p class="scope">A non-invasive photogrammetric record is being made of the surviving knot-by-knot fragments housed in the shrine's museum wing, complementing the V&amp;A and LACMA holdings of the dispersed pair. Fibre samples taken with curatorial consent are being analysed at the Tehran Polymer Institute for dye-source identification.</p>
+        <div class="star-seal" aria-hidden="true">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="50,8 58,38 90,38 64,58 74,90 50,72 26,90 36,58 10,38 42,38" fill="#2a8a8a" stroke="#c9a23a" stroke-width="1.5"/>
+            <circle cx="50" cy="50" r="6" fill="#1e3a5f"/>
+          </svg>
+        </div>
+      </div>
+    </article>
+
+    <!-- 5 -->
+    <article class="card">
+      <div class="arch-wrap">
+        <div class="card-num">·  Project No. V  ·</div>
+        <h3>Ali Qapu Music-Room Muqarnas Survey</h3>
+        <div class="card-loc">Ali Qapu Palace, Upper Storey, Isfahan</div>
+        <div class="meta-row">
+          <dl><dt>Lead</dt><dd>Catherine Verhaegen</dd></dl>
+          <dl><dt>Began</dt><dd>October 2023</dd></dl>
+        </div>
+        <p class="scope">A laser-scan and stratigraphic study of the celebrated stucco music-room records the niches and instrument-shaped cut-outs ahead of any consolidation. Findings will be published jointly with the Isfahan Higher Institute of Architecture in autumn 1404, and will inform the long-debated question of polychrome reinstatement.</p>
+        <div class="star-seal" aria-hidden="true">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="50,8 58,38 90,38 64,58 74,90 50,72 26,90 36,58 10,38 42,38" fill="#2a8a8a" stroke="#c9a23a" stroke-width="1.5"/>
+            <circle cx="50" cy="50" r="6" fill="#1e3a5f"/>
+          </svg>
+        </div>
+      </div>
+    </article>
+
+    <!-- 6 -->
+    <article class="card">
+      <div class="arch-wrap">
+        <div class="card-num">·  Project No. VI  ·</div>
+        <h3>Bagh-e Fin Hydraulic Restoration</h3>
+        <div class="card-loc">Bagh-e Fin Garden, Kashan</div>
+        <div class="meta-row">
+          <dl><dt>Lead</dt><dd>Hossein Mokhtari-Yazdi</dd></dl>
+          <dl><dt>Began</dt><dd>April 2022</dd></dl>
+        </div>
+        <p class="scope">The garden's qanāt-fed channels and pressurised cascades — original to Shah Tahmasp's commission of 1574 — are being relined in traditional saruj rather than concrete, restoring the audible register of the runnels. Work follows a hydrological model commissioned from Sharif University and is now in its concluding cypress-allée phase.</p>
+        <div class="star-seal" aria-hidden="true">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="50,8 58,38 90,38 64,58 74,90 50,72 26,90 36,58 10,38 42,38" fill="#2a8a8a" stroke="#c9a23a" stroke-width="1.5"/>
+            <circle cx="50" cy="50" r="6" fill="#1e3a5f"/>
+          </svg>
+        </div>
+      </div>
+    </article>
+
+  </div>
+
+  <div class="summary">
+    <h2>· Fieldwork Register · Summary at 1 Khordād 1403 ·</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Project</th>
+          <th>City</th>
+          <th>Lead Conservator</th>
+          <th>Discipline</th>
+          <th>Phase</th>
+          <th>Allocation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Sheikh Lotfollah Dome</td><td>Isfahan</td><td>M. Tabrizi</td><td>Tile / Structure</td><td>II of III</td><td class="budget">€ 412,000</td></tr>
+        <tr><td>Imam Mosque Iwan</td><td>Isfahan</td><td>P. Sereni</td><td>Mosaic Faïence</td><td>III of IV</td><td class="budget">€ 538,000</td></tr>
+        <tr><td>Chehel Sotoun Ceiling</td><td>Isfahan</td><td>L. Esfandiari</td><td>Mirror &amp; Paint</td><td>I of II</td><td class="budget">€ 196,000</td></tr>
+        <tr><td>Ardabil Carpet Records</td><td>Ardabil</td><td>R. Khorrami-Manesh</td><td>Textile / Documentation</td><td>II of II</td><td class="budget">€ 88,500</td></tr>
+        <tr><td>Ali Qapu Music-Room</td><td>Isfahan</td><td>C. Verhaegen</td><td>Stucco / Survey</td><td>I of III</td><td class="budget">€ 274,000</td></tr>
+        <tr><td>Bagh-e Fin Hydraulics</td><td>Kashan</td><td>H. Mokhtari-Yazdi</td><td>Garden / Engineering</td><td>IV of IV</td><td class="budget">€ 360,000</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</section>
+
+<footer>
+  <div class="footer-filet" aria-hidden="true"></div>
+  <div class="footer-cols">
+    <div>
+      <h4>Foundation Office</h4>
+      <p>Bagh-e Fin Foundation<br>
+      No. 14, Kuche-ye Hasht Behesht<br>
+      Chahar Bagh-e Abbasi Avenue<br>
+      Isfahan 81467, Iran<br>
+      <em>tel +98 31 3622 0418</em></p>
+    </div>
+    <div>
+      <h4>Trustees</h4>
+      <ul>
+        <li>Dr. Farideh Daftari, Chair</li>
+        <li>Prof. Sussan Babaie</li>
+        <li>Mehrnoush Tabrizi</li>
+        <li>Paolo Sereni</li>
+        <li>Hossein Mokhtari-Yazdi</li>
+        <li>Catherine Verhaegen</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Endowment Notice</h4>
+      <p>The Foundation operates upon a perpetual endowment established 2007 by private bequest, augmented by the Aga Khan Trust for Culture and the Barakat Foundation. No state monies are received; all conservation works are undertaken at the invitation of site custodians.</p>
+    </div>
+  </div>
+  <div class="footer-seal" aria-hidden="true">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="50,5 60,38 95,38 66,58 78,92 50,72 22,92 34,58 5,38 40,38" fill="#c9a23a" stroke="#f2e5cc" stroke-width="1.5"/>
+      <circle cx="50" cy="50" r="7" fill="#1e3a5f" stroke="#f2e5cc"/>
+    </svg>
+  </div>
+  <p class="copyright">© MMXXV · <em>The Bagh-e Fin Foundation for the Conservation of Persian Arts</em> · Isfahan</p>
+</footer>
+
+</body>
+</html>

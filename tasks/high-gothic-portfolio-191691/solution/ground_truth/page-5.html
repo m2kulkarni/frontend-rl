@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Of the Master & His Lodge — The Atelier of Guillaume de Sens</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  :root{
+    --came: #0a0a0a;
+    --cobalt: #1e3a5f;
+    --madder: #8b1538;
+    --gold: #c9a23a;
+    --parchment: #f4ecd8;
+    --ink: #3a2618;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background-color: var(--bg);
+    background-image: url('svg/quatrefoil-in-square.svg');
+    background-size: 360px 360px;
+    background-repeat: repeat;
+    color: var(--text);
+    font-family: var(--font-body), 'EB Garamond', Georgia, serif;
+    font-size: 17px;
+    line-height: 1.65;
+  }
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background: var(--bg);
+    opacity: 0.82;
+    z-index:-1;
+  }
+
+  /* ===== Masthead ===== */
+  .masthead{
+    text-align:center;
+    padding: 48px 40px 0;
+    border-bottom: 1px solid var(--came);
+    background: linear-gradient(180deg, rgba(244,236,216,0.0) 0%, rgba(244,236,216,0.6) 100%);
+  }
+  .sitename{
+    font-family: var(--font-display), 'UnifrakturMaguntia', serif;
+    font-size: 56px;
+    font-weight: 400;
+    color: var(--ink);
+    letter-spacing: 0.5px;
+    line-height: 1;
+  }
+  .siteminor{
+    font-family: var(--font-body), serif;
+    font-size: 12px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--madder);
+    margin-top: 12px;
+  }
+
+  /* ===== Nav arcade ===== */
+  nav.arcade{
+    margin-top: 28px;
+    display:flex;
+    justify-content:center;
+    gap: 0;
+    padding-bottom: 6px;
+  }
+  nav.arcade ul{
+    display:flex;
+    list-style:none;
+    gap: 0;
+    border-bottom: 2px solid var(--came);
+  }
+  nav.arcade li{
+    position:relative;
+    width: 200px;
+    height: 96px;
+  }
+  nav.arcade a{
+    position:absolute;
+    inset: 0;
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+    padding-bottom: 14px;
+    text-decoration:none;
+    color: var(--ink);
+    font-size: 11.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-variant: small-caps;
+    font-weight: 600;
+    /* pointed arch via clip-path */
+    clip-path: polygon(0% 100%, 0% 40%, 50% 0%, 100% 40%, 100% 100%);
+    border-left: 2px solid var(--came);
+    border-right: 2px solid var(--came);
+    background: rgba(244,236,216,0.4);
+    transition: background 0.2s;
+  }
+  nav.arcade li:not(:first-child) a{ border-left: 1px solid var(--came); }
+  nav.arcade a:hover{
+    background: var(--cobalt);
+    color: var(--parchment);
+  }
+  nav.arcade a[aria-current="page"]{
+    background: rgba(201,162,58,0.18);
+  }
+  nav.arcade a[aria-current="page"]::before{
+    content:"⚜";
+    position:absolute;
+    top: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--gold);
+    font-size: 22px;
+    text-shadow: 0 0 1px var(--ink);
+  }
+
+  /* ===== Hero ===== */
+  .hero{
+    padding: 60px 40px 40px;
+    text-align:center;
+    position:relative;
+  }
+  .hero h1{
+    font-family: var(--font-display), serif;
+    font-size: 72px;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.05;
+    margin-bottom: 8px;
+  }
+  .hero .subtitle{
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 19px;
+    color: var(--madder);
+    letter-spacing: 0.05em;
+  }
+  .hero .roman{
+    font-size: 13px;
+    letter-spacing: 0.4em;
+    color: var(--ink);
+    margin-top: 14px;
+    text-transform: uppercase;
+  }
+  .hero-frame{
+    max-width: 280px;
+    margin: 24px auto 0;
+    opacity: 0.85;
+  }
+
+  /* ===== Section divider ===== */
+  .divider{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin: 32px 0;
+    gap: 18px;
+  }
+  .divider::before, .divider::after{
+    content:"";
+    flex: 1;
+    max-width: 280px;
+    height: 1px;
+    background: var(--gold);
+  }
+  .divider svg{
+    width: 38px; height: 38px;
+    fill: var(--ink);
+  }
+
+  /* ===== Body layout ===== */
+  main{
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 60px 40px;
+  }
+
+  /* Biography in arch */
+  .bio-section{
+    display:grid;
+    grid-template-columns: 360px 1fr;
+    gap: 56px;
+    align-items: start;
+    margin-top: 24px;
+  }
+  .bio-portrait{
+    position: relative;
+    height: 540px;
+    background:
+      radial-gradient(circle at 50% 28%, rgba(201,162,58,0.18) 0, transparent 60%),
+      linear-gradient(180deg, #2d4a73 0%, #1e3a5f 40%, #5a1228 75%, #8b1538 100%);
+    clip-path: polygon(0% 100%, 0% 32%, 50% 0%, 100% 32%, 100% 100%);
+    border: 3px solid var(--came);
+    box-shadow: inset 0 0 0 6px var(--gold), inset 0 0 0 8px var(--came);
+  }
+  .bio-portrait::after{
+    content:"";
+    position:absolute;
+    inset: 18px;
+    border: 1px solid rgba(201,162,58,0.5);
+    clip-path: polygon(0% 100%, 0% 32%, 50% 0%, 100% 32%, 100% 100%);
+    pointer-events:none;
+  }
+  .bio-portrait .seal{
+    position:absolute;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 130px;
+    height: 130px;
+    background: var(--parchment);
+    border-radius: 50%;
+    border: 3px solid var(--gold);
+    box-shadow: 0 0 0 2px var(--came), 0 0 0 6px var(--gold), 0 0 0 8px var(--came);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    text-align:center;
+  }
+  .bio-portrait .seal .initials{
+    font-family: var(--font-display), serif;
+    font-size: 38px;
+    color: var(--madder);
+    line-height: 1;
+  }
+  .bio-portrait .seal .seal-roman{
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--ink);
+    margin-top: 4px;
+  }
+  .bio-portrait .figure{
+    position:absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--gold);
+    font-family: var(--font-display), serif;
+    font-size: 80px;
+    line-height: 1;
+    text-shadow: 0 2px 0 rgba(0,0,0,0.5);
+  }
+  .bio-portrait .caption{
+    position:absolute;
+    bottom: 14px;
+    left: 0; right: 0;
+    text-align:center;
+    color: var(--gold);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    font-variant: small-caps;
+  }
+
+  .bio-text h2{
+    font-family: var(--font-display), serif;
+    font-size: 44px;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.05;
+    margin-bottom: 6px;
+  }
+  .bio-text .epigraph{
+    font-style: italic;
+    color: var(--madder);
+    font-size: 16px;
+    border-left: 2px solid var(--gold);
+    padding-left: 14px;
+    margin-bottom: 22px;
+  }
+  .gold-rule{
+    height: 1px;
+    background: var(--gold);
+    margin: 18px 0;
+    box-shadow: 0 1px 0 rgba(201,162,58,0.3);
+  }
+  .bio-text p{
+    margin-bottom: 14px;
+    text-align: justify;
+    hyphens: auto;
+  }
+  .bio-text p:first-of-type::first-letter{
+    font-family: var(--font-display), serif;
+    color: var(--madder);
+    float: left;
+    font-size: 64px;
+    line-height: 0.85;
+    padding: 6px 10px 0 0;
+    margin-top: 4px;
+  }
+
+  /* Lodge roster */
+  .lodge{
+    margin-top: 56px;
+  }
+  .section-title{
+    font-family: var(--font-display), serif;
+    font-size: 40px;
+    text-align:center;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .section-sub{
+    text-align:center;
+    font-style: italic;
+    color: var(--madder);
+    margin-bottom: 32px;
+    font-size: 16px;
+    letter-spacing: 0.04em;
+  }
+  .roster{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  .lodge-card{
+    background: var(--parchment);
+    border: 1px solid var(--came);
+    padding: 0;
+    position:relative;
+    box-shadow: 0 2px 0 rgba(0,0,0,0.08);
+  }
+  .lodge-card .head{
+    position:relative;
+    height: 220px;
+    background: linear-gradient(180deg, var(--cobalt) 0%, #2a4a78 100%);
+    clip-path: polygon(0% 100%, 0% 38%, 50% 0%, 100% 38%, 100% 100%);
+    border-bottom: 2px solid var(--gold);
+    overflow:hidden;
+  }
+  .lodge-card .head::before{
+    content:"";
+    position:absolute;
+    inset: 8px;
+    border: 1px solid rgba(201,162,58,0.4);
+    clip-path: polygon(0% 100%, 0% 38%, 50% 0%, 100% 38%, 100% 100%);
+  }
+  .lodge-card .quatrefoil{
+    position:absolute;
+    top: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 64px; height: 64px;
+    background: var(--parchment);
+    border: 2px solid var(--gold);
+    box-shadow: 0 0 0 1px var(--came);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family: var(--font-body), serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--ink);
+    /* quatrefoil-ish via mask of 4 circles */
+    -webkit-mask:
+      radial-gradient(circle at 20% 50%, black 38%, transparent 39%),
+      radial-gradient(circle at 80% 50%, black 38%, transparent 39%),
+      radial-gradient(circle at 50% 20%, black 38%, transparent 39%),
+      radial-gradient(circle at 50% 80%, black 38%, transparent 39%),
+      linear-gradient(black,black);
+    -webkit-mask-composite: source-over;
+            mask:
+      radial-gradient(circle at 20% 50%, black 38%, transparent 39%),
+      radial-gradient(circle at 80% 50%, black 38%, transparent 39%),
+      radial-gradient(circle at 50% 20%, black 38%, transparent 39%),
+      radial-gradient(circle at 50% 80%, black 38%, transparent 39%),
+      linear-gradient(black,black);
+  }
+  .lodge-card .blackletter-name{
+    position:absolute;
+    bottom: 36px;
+    left: 0; right: 0;
+    text-align:center;
+    font-family: var(--font-display), serif;
+    color: var(--gold);
+    font-size: 30px;
+    line-height: 1;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.6);
+  }
+  .lodge-card .role{
+    position:absolute;
+    bottom: 14px;
+    left: 0; right: 0;
+    text-align:center;
+    color: var(--parchment);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    font-variant: small-caps;
+  }
+  .lodge-card .body{
+    padding: 22px 22px 24px;
+    border-top: 1px solid var(--gold);
+    margin-top: -2px;
+  }
+  .lodge-card .body p{
+    font-size: 15px;
+    line-height: 1.6;
+    text-align: justify;
+  }
+  .lodge-card .body p::first-letter{
+    font-family: var(--font-display), serif;
+    color: var(--madder);
+    font-size: 36px;
+    float: left;
+    line-height: 0.9;
+    padding: 4px 7px 0 0;
+  }
+  .lodge-card .meta{
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px dashed rgba(58,38,24,0.3);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--madder);
+    text-align:center;
+    font-variant: small-caps;
+  }
+
+  /* Patrons + lodge plate */
+  .patrons{
+    margin-top: 64px;
+    display:grid;
+    grid-template-columns: 1fr 360px;
+    gap: 56px;
+    align-items: stretch;
+  }
+  .patrons-text{
+    padding-top: 8px;
+  }
+  .patrons-text h2{
+    font-family: var(--font-display), serif;
+    font-size: 40px;
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.05;
+  }
+  .patrons-text .latin{
+    font-style: italic;
+    color: var(--madder);
+    margin-bottom: 16px;
+  }
+  .patrons-text p{
+    margin-bottom: 12px;
+    text-align: justify;
+  }
+  .four-saints{
+    margin-top: 18px;
+    list-style: none;
+    border-top: 1px solid var(--gold);
+    border-bottom: 1px solid var(--gold);
+    padding: 14px 0;
+  }
+  .four-saints li{
+    display:grid;
+    grid-template-columns: 110px 1fr;
+    padding: 8px 0;
+    font-size: 15px;
+  }
+  .four-saints li + li{
+    border-top: 1px dashed rgba(58,38,24,0.25);
+  }
+  .four-saints .name{
+    font-variant: small-caps;
+    letter-spacing: 0.12em;
+    color: var(--madder);
+    font-weight: 600;
+  }
+
+  .rose-plate{
+    background: var(--cobalt);
+    border: 3px solid var(--came);
+    box-shadow: inset 0 0 0 4px var(--gold);
+    padding: 22px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+  }
+  .rose-plate svg{
+    width: 100%;
+    max-width: 280px;
+    height: auto;
+  }
+  .rose-plate .label{
+    margin-top: 14px;
+    color: var(--gold);
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    line-height: 1.2;
+  }
+  .rose-plate .label-sub{
+    color: var(--parchment);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+
+  /* Chronicle / oath */
+  .chronicle{
+    margin-top: 64px;
+    background: rgba(244,236,216,0.55);
+    border: 1px solid var(--came);
+    padding: 32px 40px;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    position:relative;
+  }
+  .chronicle::before, .chronicle::after{
+    content:"";
+    position:absolute;
+    width: 22px; height: 22px;
+    border: 2px solid var(--gold);
+  }
+  .chronicle::before{ top: -1px; left: -1px; border-right:none; border-bottom:none;}
+  .chronicle::after{ bottom: -1px; right: -1px; border-left:none; border-top:none;}
+  .chronicle h3{
+    font-family: var(--font-display), serif;
+    font-size: 28px;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+  .chronicle dl{
+    font-size: 15px;
+  }
+  .chronicle dt{
+    font-variant: small-caps;
+    letter-spacing: 0.12em;
+    color: var(--madder);
+    margin-top: 10px;
+    font-weight: 600;
+  }
+  .chronicle dd{
+    margin-left: 0;
+    padding-left: 14px;
+    border-left: 1px solid var(--gold);
+  }
+  .oath{
+    font-style: italic;
+    line-height: 1.7;
+  }
+  .oath .signoff{
+    margin-top: 16px;
+    text-align:right;
+    font-style: normal;
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    color: var(--ink);
+  }
+
+  /* ===== Footer ===== */
+  footer{
+    margin-top: 80px;
+    border-top: 2px solid var(--came);
+    background:
+      linear-gradient(180deg, rgba(244,236,216,0.4) 0%, rgba(244,236,216,0.8) 100%);
+    padding: 36px 40px 28px;
+  }
+  .foot-arcade{
+    display:flex;
+    justify-content:center;
+    gap: 0;
+    margin-bottom: 24px;
+  }
+  .foot-arcade .miniarch{
+    width: 80px; height: 90px;
+    border: 1.5px solid var(--cobalt);
+    border-bottom: 2px solid var(--cobalt);
+    clip-path: polygon(0% 100%, 0% 45%, 50% 0%, 100% 45%, 100% 100%);
+    background: rgba(30,58,95,0.04);
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+    padding-bottom: 18px;
+    color: var(--cobalt);
+    font-size: 22px;
+  }
+  .foot-arcade .miniarch + .miniarch{ margin-left: -1px; }
+  .colophon{
+    text-align:center;
+    color: var(--ink);
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  .colophon .address{
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    color: var(--madder);
+  }
+  .colophon .latin{
+    font-style: italic;
+    margin-top: 6px;
+    color: var(--ink);
+  }
+  .cross-flory{
+    text-align:center;
+    margin-top: 14px;
+    font-size: 32px;
+    color: var(--ink);
+    line-height: 1;
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="sitename">The Atelier of Guillaume de Sens</div>
+  <div class="siteminor">✦ Maître-Maçon · Tailleur de Remplages · Sens en Bourgogne ✦</div>
+
+  <nav class="arcade" aria-label="Primary">
+    <ul>
+      <li><a href="page-1.html">The Atelier</a></li>
+      <li><a href="page-2.html">Works in Stone</a></li>
+      <li><a href="page-3.html">Works in Glass</a></li>
+      <li><a href="page-4.html">Drawings</a></li>
+      <li><a href="page-5.html" aria-current="page">The Master</a></li>
+      <li><a href="page-6.html">To Petition</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Of the Master &amp; His Lodge</h1>
+  <div class="subtitle">A faithful account of him who holds the compasses, and of those who keep the candle</div>
+  <div class="roman">· Anno Domini MCCCIV ·</div>
+</section>
+
+<main>
+
+  <div class="divider" aria-hidden="true">
+    <svg viewBox="0 0 40 40"><path d="M20 4 L24 16 L36 18 L26 26 L30 38 L20 30 L10 38 L14 26 L4 18 L16 16 Z"/></svg>
+  </div>
+
+  <!-- Biography -->
+  <section class="bio-section">
+    <aside class="bio-portrait" aria-label="Effigy of the Master">
+      <div class="seal">
+        <div class="initials">G·S</div>
+        <div class="seal-roman">MCCLXII</div>
+      </div>
+      <div class="figure">✠</div>
+      <div class="caption">Effigies Magistri</div>
+    </aside>
+
+    <div class="bio-text">
+      <h2>Guillaume de Sens, the Younger</h2>
+      <p class="epigraph">— born at Vézelay <em>circa</em> Anno Domini MCCLXII, freed of the Lodge of Saint-Denis in the year MCCLXXXIV, master at Sens since the feast of Saint-Étienne, MCCLXXXVII.</p>
+      <div class="gold-rule"></div>
+
+      <p>Guillaume the younger was born in the shadow of the Madeleine at Vézelay, in the second year of the reign of Louis the Saint, to a father who cut voussoirs for the abbey choir and to a mother who was a vintner's daughter of the Cure valley. Of his eleventh year he was set to the tracing-floor at Saint-Denis under Master Eudes le Breton, successor in the lodge to Pierre de Montreuil, and there he learned the Parisian manner of the fenestrage — the lancets thinning, the cusps multiplying, the mullions running unbroken from sill to apex.</p>
+
+      <p>He was freed of his apprenticeship in the spring of MCCLXXXIV, marked upon the cheek with the cross of the lodge and given the small bronze square that he wears yet upon his belt. Three years he journeyed: to Reims for the chevet of the Coronation Church, to Strasbourg under Master Erwin's kinsmen, and at last to Troyes where he cut the rose-jambs of Saint-Urbain in the manner that has since been called <em>rayonnant</em>.</p>
+
+      <p>In the year MCCLXXXVII the Chapter of Sens, having need of a master upon the death of Master Renaud le Vieux, called him by deed sealed at the feast of Saint-Étienne. He took the lodge above the south transept, where it stands to this day, and in the seventeen years since has set the tracing-floor with no fewer than forty-one chantiers — chapels, vault-keys, glass, monstrances, and one chasse of gilded copper for the bones of Saint Loup.</p>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true">
+    <svg viewBox="0 0 40 40"><path d="M20 4 L24 16 L36 18 L26 26 L30 38 L20 30 L10 38 L14 26 L4 18 L16 16 Z"/></svg>
+  </div>
+
+  <!-- Lodge roster -->
+  <section class="lodge">
+    <h2 class="section-title">The Journeymen &amp; Apprentices of the Lodge</h2>
+    <p class="section-sub">— presently sworn upon the square at Sens, in the Year of Our Lord MCCCIV —</p>
+
+    <div class="roster">
+
+      <article class="lodge-card">
+        <header class="head">
+          <div class="quatrefoil">MCCXCI</div>
+          <div class="blackletter-name">Aymeric</div>
+          <div class="role">The Glazier</div>
+        </header>
+        <div class="body">
+          <p>Born at Chartres of a family of <em>verriers</em> seven generations deep, Aymeric came to the lodge in MCCXCI, bringing with him the cobalt of Saint-Denis and the secret of the madder pot which he sets only at the new moon. He cuts the came with the iron tooth, leads the saints, and binds the panels with the iron armatures forged by Pierre Crochet of the rue des Cordeliers.</p>
+          <div class="meta">Verrier · since A.D. MCCXCI</div>
+        </div>
+      </article>
+
+      <article class="lodge-card">
+        <header class="head">
+          <div class="quatrefoil">MCCXCV</div>
+          <div class="blackletter-name">Renaud</div>
+          <div class="role">Of Troyes</div>
+        </header>
+        <div class="body">
+          <p>Renaud of Troyes, third son of a master-mason of Saint-Urbain, was sent to Sens in the year MCCXCV that he might learn the Sénonais manner of the rib-vault. He has now the freedom of the lodge and cuts the springers and corbels for the chapter, and is besides the lodge's keeper of the parchment-roll and of the brass dividers that were Master Eudes' own.</p>
+          <div class="meta">Tailleur de pierre · since A.D. MCCXCV</div>
+        </div>
+      </article>
+
+      <article class="lodge-card">
+        <header class="head">
+          <div class="quatrefoil">MCCC</div>
+          <div class="blackletter-name">Jehan</div>
+          <div class="role">Le Petit</div>
+        </header>
+        <div class="body">
+          <p>Jehan, called <em>le Petit</em> for he is small of stature though he is now of his fifteenth year, was bound apprentice in the year of the Jubilee. He is the son of a Senonois weaver and was given to the lodge by his uncle, a sub-deacon of the cathedral. He sweeps the tracing-floor, fetches the iron, grinds the colours of azurite and orpiment, and is taught the rudiments of the geometry by Renaud upon Saturday eves.</p>
+          <div class="meta">Apprenti · since A.D. MCCC</div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- Patrons + rose plate -->
+  <section class="patrons">
+    <div class="patrons-text">
+      <h2>The Four Crowned Martyrs</h2>
+      <p class="latin">— <em>Sancti Quattuor Coronati, patroni lapicidarum et fenestrariorum</em> —</p>
+
+      <p>Before these four the workshop keeps its candle. They were Christian masons and sculptors of the Pannonian quarries under the emperor Diocletian, who suffered death rather than carve the figure of Aesculapius for his pagan altar. Their relics rest at Rome upon the Caelian; their feast is the eighth of November; their patronage is held by every lodge of stone from Compostela to Cologne.</p>
+
+      <p>Upon the south jamb of the lodge door there is a small niche, cut by Master Renaud le Vieux in MCCLIX, wherein four candles of beeswax are kept burning by Jehan in turn — one for each Crowned Martyr, that the chisel may not slip and that the keystone, when set, may bear its load until the trumpet of the Last Day.</p>
+
+      <ul class="four-saints">
+        <li><span class="name">Claudius</span><span>master of the quarry, who refused the chisel of idols</span></li>
+        <li><span class="name">Castorius</span><span>cutter of the porphyry, brother in the craft</span></li>
+        <li><span class="name">Symphorian</span><span>tracer of the figures, third in the bond</span></li>
+        <li><span class="name">Nicostratus</span><span>setter of the stones, fourth and youngest</span></li>
+      </ul>
+    </div>
+
+    <aside class="rose-plate" aria-label="Heraldic rose of the lodge">
+      <svg viewBox="0 0 200 200" role="img" aria-label="Lodge rose">
+        <defs>
+          <radialGradient id="rg" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#c9a23a"/>
+            <stop offset="55%" stop-color="#1e3a5f"/>
+            <stop offset="100%" stop-color="#0a0a0a"/>
+          </radialGradient>
+        </defs>
+        <circle cx="100" cy="100" r="96" fill="#0a0a0a"/>
+        <circle cx="100" cy="100" r="92" fill="url(#rg)"/>
+        <g stroke="#0a0a0a" stroke-width="2" fill="none">
+          <circle cx="100" cy="100" r="72"/>
+          <circle cx="100" cy="100" r="48"/>
+          <circle cx="100" cy="100" r="22"/>
+        </g>
+        <g stroke="#c9a23a" stroke-width="1.4" fill="none" opacity="0.9">
+          <line x1="100" y1="4" x2="100" y2="196"/>
+          <line x1="4" y1="100" x2="196" y2="100"/>
+          <line x1="32" y1="32" x2="168" y2="168"/>
+          <line x1="168" y1="32" x2="32" y2="168"/>
+          <line x1="100" y1="4" x2="32" y2="100"/>
+          <line x1="100" y1="4" x2="168" y2="100"/>
+          <line x1="100" y1="196" x2="32" y2="100"/>
+          <line x1="100" y1="196" x2="168" y2="100"/>
+        </g>
+        <g fill="#8b1538" stroke="#0a0a0a" stroke-width="1">
+          <circle cx="100" cy="28" r="9"/>
+          <circle cx="100" cy="172" r="9"/>
+          <circle cx="28" cy="100" r="9"/>
+          <circle cx="172" cy="100" r="9"/>
+        </g>
+        <g fill="#1e3a5f" stroke="#c9a23a" stroke-width="1">
+          <circle cx="49" cy="49" r="7"/>
+          <circle cx="151" cy="49" r="7"/>
+          <circle cx="49" cy="151" r="7"/>
+          <circle cx="151" cy="151" r="7"/>
+        </g>
+        <circle cx="100" cy="100" r="14" fill="#c9a23a" stroke="#0a0a0a" stroke-width="1.5"/>
+        <text x="100" y="105" text-anchor="middle" font-size="12" font-family="serif" fill="#0a0a0a">G·S</text>
+      </svg>
+      <div class="label">Insignia Lodgiae</div>
+      <div class="label-sub">Sigillum Magistri Senonensis</div>
+    </aside>
+  </section>
+
+  <!-- Chronicle / oath -->
+  <section class="chronicle">
+    <div>
+      <h3>Chronicle of the Master</h3>
+      <dl>
+        <dt>A.D. MCCLXII</dt>
+        <dd>Born at Vézelay, on the eve of Saint Bernard.</dd>
+        <dt>A.D. MCCLXXIII</dt>
+        <dd>Bound apprentice at the lodge of Saint-Denis under Master Eudes le Breton.</dd>
+        <dt>A.D. MCCLXXXIV</dt>
+        <dd>Freed of the lodge upon the feast of the Ascension; cuts his first <em>chef-d'œuvre</em>, a corbel of the prophet Habakkuk.</dd>
+        <dt>A.D. MCCLXXXV–LXXXVII</dt>
+        <dd>Journeyman at Reims, Strasbourg, and Troyes; cuts the rose-jambs of Saint-Urbain.</dd>
+        <dt>A.D. MCCLXXXVII</dt>
+        <dd>Called master at Sens by deed of the Cathedral Chapter; takes the lodge above the south transept.</dd>
+        <dt>A.D. MCCXCI</dt>
+        <dd>Receives Aymeric the glazier into the lodge.</dd>
+        <dt>A.D. MCCC</dt>
+        <dd>Binds Jehan le Petit apprentice in the year of the Jubilee.</dd>
+      </dl>
+    </div>
+
+    <div>
+      <h3>The Oath of the Lodge</h3>
+      <p class="oath">
+        <em>I swear upon the Crowned Four, upon the iron compasses of my master, upon the keystone yet to be set: that I shall cut the stone true to the trace; that I shall not betray the secret of the geometry to him who has not been freed; that I shall keep faith with my fellows of the chisel and of the came; and that the work of my hands shall stand until the day when all stone shall be made one with the heavenly Jerusalem.</em>
+      </p>
+      <p class="oath">
+        <em>And if I break this bond, may my chisel turn upon me, may my mortar fail at the spring, may my name be struck from the lodge-roll and forgotten of the brethren, here and in the life to come.</em>
+      </p>
+      <div class="signoff">— Guillaume, Master at Sens</div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="foot-arcade" aria-hidden="true">
+    <div class="miniarch">✠</div>
+    <div class="miniarch">⚜</div>
+    <div class="miniarch">✠</div>
+    <div class="miniarch">✦</div>
+    <div class="miniarch">✠</div>
+    <div class="miniarch">⚜</div>
+    <div class="miniarch">✠</div>
+  </div>
+  <div class="colophon">
+    <div class="address">Atelier de Guillaume de Sens · Loge du Transept Sud · Cathédrale Saint-Étienne · Sens en Bourgogne</div>
+    <div class="latin">Scriptum atque insculptum Anno Domini MCCCIV, in vigilia Sancti Stephani protomartyris · Quattuor Coronatis patronis</div>
+  </div>
+  <div class="cross-flory" aria-hidden="true">✠</div>
+</footer>
+
+</body>
+</html>

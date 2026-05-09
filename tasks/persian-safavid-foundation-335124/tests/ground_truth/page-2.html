@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Mission & History — The Bagh-e Fin Foundation</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    margin: 0;
+    line-height: 1.65;
+  }
+
+  /* ====== HEADER ====== */
+  .header-strip {
+    background: var(--primary);
+    color: var(--bg);
+    padding: 8px 0;
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+  }
+  .header-strip span { color: var(--accent); margin: 0 14px; }
+
+  .nav-band {
+    background: var(--bg);
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+    padding: 18px 0;
+    position: relative;
+  }
+  .nav-band::before, .nav-band::after {
+    content: "";
+    display: block;
+    height: 1px;
+    background: var(--accent);
+    margin: 0 auto;
+    width: 90%;
+    position: absolute;
+    left: 5%;
+  }
+  .nav-band::before { top: 4px; opacity: 0.5; }
+  .nav-band::after { bottom: 4px; opacity: 0.5; }
+
+  nav.primary {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.28em;
+    font-size: 14px;
+  }
+  nav.primary a {
+    color: var(--primary);
+    text-decoration: none;
+    padding: 4px 2px;
+    margin: 0 4px;
+    position: relative;
+  }
+  nav.primary a[aria-current="page"] {
+    color: var(--text-emphasis);
+  }
+  nav.primary a[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    left: 18%;
+    right: 18%;
+    bottom: -8px;
+    height: 2px;
+    background: var(--secondary);
+  }
+  nav.primary .palmette {
+    color: var(--accent);
+    margin: 0 8px;
+    font-size: 10px;
+    display: inline-block;
+    transform: translateY(-2px);
+  }
+
+  /* ====== HERO ====== */
+  .hero {
+    position: relative;
+    padding: 70px 0 60px;
+    text-align: center;
+    overflow: hidden;
+    border-bottom: 1px solid var(--accent);
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    opacity: 0.05;
+    pointer-events: none;
+    background-image: 
+      radial-gradient(circle at 50% 50%, var(--accent) 1px, transparent 1.5px);
+    background-size: 36px 36px;
+  }
+  .hero-arch {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 360px;
+    height: 400px;
+    opacity: 0.18;
+    pointer-events: none;
+  }
+  .hero-arch svg { width: 100%; height: 100%; }
+  .hero-arch svg path { stroke: var(--primary) !important; }
+
+  .hero-eyebrow {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.4em;
+    font-size: 13px;
+    color: var(--secondary);
+    margin-bottom: 14px;
+    position: relative;
+  }
+  .hero h1 {
+    font-family: var(--font-display), serif;
+    font-size: 54px;
+    color: var(--primary);
+    margin: 0 0 16px;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    position: relative;
+  }
+  .hero-subtitle {
+    font-style: italic;
+    font-size: 19px;
+    color: var(--text);
+    max-width: 640px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  /* ====== DIVIDER ====== */
+  .filet-divider {
+    display: flex;
+    justify-content: center;
+    padding: 28px 0;
+  }
+  .filet-divider svg {
+    width: 480px;
+    height: auto;
+  }
+  .filet-divider svg path {
+    fill: var(--accent);
+  }
+
+  /* ====== ESSAY ====== */
+  main { max-width: 1280px; margin: 0 auto; padding: 0 60px; }
+
+  .essay {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 30px 0 50px;
+    text-align: justify;
+  }
+  .essay h2 {
+    font-family: var(--font-display), serif;
+    font-size: 28px;
+    color: var(--primary);
+    text-align: center;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    margin: 36px 0 20px;
+  }
+  .essay h2::before, .essay h2::after {
+    content: "✦";
+    color: var(--accent);
+    margin: 0 16px;
+    font-size: 14px;
+    vertical-align: middle;
+  }
+  .essay .lede {
+    font-size: 19px;
+    line-height: 1.7;
+    color: var(--text);
+    text-align: center;
+    font-style: italic;
+    margin-bottom: 32px;
+  }
+  .essay .lede::first-letter {
+    font-family: var(--font-display), serif;
+    font-size: 56px;
+    float: left;
+    line-height: 0.9;
+    margin: 6px 8px 0 0;
+    color: var(--text-emphasis);
+    font-style: normal;
+  }
+  .essay p {
+    font-size: 16.5px;
+    margin: 0 0 18px;
+  }
+  .essay p .accent {
+    color: var(--text-emphasis);
+    font-style: italic;
+  }
+  .essay blockquote {
+    border: none;
+    margin: 30px 40px;
+    padding: 20px 30px;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--primary);
+    text-align: center;
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+  }
+  .essay blockquote cite {
+    display: block;
+    margin-top: 10px;
+    font-size: 13px;
+    font-style: normal;
+    font-variant: small-caps;
+    letter-spacing: 0.2em;
+    color: var(--secondary);
+  }
+
+  /* ====== TIMELINE ====== */
+  .timeline-section {
+    background: linear-gradient(180deg, var(--bg) 0%, #ecdcbe 100%);
+    padding: 60px 0 70px;
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+    margin: 40px 0;
+    position: relative;
+  }
+  .timeline-section h2 {
+    font-family: var(--font-display), serif;
+    text-align: center;
+    font-size: 32px;
+    color: var(--primary);
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    margin: 0 0 8px;
+  }
+  .timeline-section .sub {
+    text-align: center;
+    font-style: italic;
+    color: var(--secondary);
+    margin-bottom: 50px;
+    font-size: 15px;
+    letter-spacing: 0.05em;
+  }
+  .timeline {
+    max-width: 1120px;
+    margin: 0 auto;
+    position: relative;
+    padding: 0 40px;
+  }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--primary);
+    transform: translateX(-1px);
+  }
+  .tl-entry {
+    display: grid;
+    grid-template-columns: 1fr 120px 1fr;
+    align-items: center;
+    margin-bottom: 38px;
+  }
+  .tl-medallion {
+    width: 84px;
+    height: 84px;
+    margin: 0 auto;
+    position: relative;
+    background: var(--bg);
+    border-radius: 50%;
+    border: 2px solid var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 0 4px var(--bg), 0 0 0 5px var(--accent);
+  }
+  .tl-medallion::before {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+  }
+  .tl-medallion .girih-mini {
+    width: 60px;
+    height: 60px;
+    transform: rotate(45deg);
+    border: 1px solid var(--secondary);
+    position: absolute;
+    top: 12px; left: 12px;
+    opacity: 0.4;
+  }
+  .tl-year {
+    font-family: var(--font-display), serif;
+    font-size: 17px;
+    color: var(--primary);
+    z-index: 1;
+    letter-spacing: 0.05em;
+  }
+  .tl-content {
+    background: #fbf3e2;
+    border: 1px solid var(--accent);
+    padding: 18px 22px;
+    position: relative;
+  }
+  .tl-content h3 {
+    font-family: var(--font-display), serif;
+    font-size: 17px;
+    color: var(--text-emphasis);
+    margin: 0 0 6px;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+  }
+  .tl-content p {
+    margin: 0;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--text);
+  }
+  .tl-entry.left .tl-content { grid-column: 1; text-align: right; }
+  .tl-entry.left > div:nth-child(3) { grid-column: 3; }
+  .tl-entry.right .tl-content { grid-column: 3; text-align: left; }
+  .tl-entry.right > div:nth-child(3) { grid-column: 1; }
+
+  /* ====== TRUSTEES ====== */
+  .trustees-section {
+    padding: 60px 60px 40px;
+    text-align: center;
+  }
+  .trustees-section h2 {
+    font-family: var(--font-display), serif;
+    font-size: 32px;
+    color: var(--primary);
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    margin: 0 0 8px;
+  }
+  .trustees-section .sub {
+    font-style: italic;
+    color: var(--secondary);
+    margin-bottom: 50px;
+    font-size: 15px;
+  }
+  .trustees-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  .trustee-card {
+    position: relative;
+    padding: 0;
+    text-align: center;
+  }
+  .arch-frame {
+    position: relative;
+    height: 320px;
+    background: #fbf3e2;
+    border: 1.5px solid var(--primary);
+    border-radius: 50% 50% 4px 4px / 30% 30% 4px 4px;
+    overflow: hidden;
+    box-shadow: inset 0 0 0 4px var(--bg), inset 0 0 0 5px var(--accent);
+  }
+  .arch-frame::before {
+    /* spandrel girih ghost */
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 0% 100%, transparent 60%, var(--accent) 60.5%, transparent 62%),
+      radial-gradient(circle at 100% 100%, transparent 60%, var(--accent) 60.5%, transparent 62%);
+    opacity: 0.06;
+    pointer-events: none;
+  }
+  .portrait {
+    position: absolute;
+    inset: 30px 24px 90px;
+    border-radius: 50% 50% 4px 4px / 40% 40% 4px 4px;
+    background: linear-gradient(160deg, var(--secondary) 0%, var(--primary) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--bg);
+    font-family: var(--font-display), serif;
+    font-size: 56px;
+    letter-spacing: 0.04em;
+    border: 1px solid var(--accent);
+  }
+  .trustee-name {
+    position: absolute;
+    bottom: 38px;
+    left: 12px; right: 12px;
+    font-family: var(--font-display), serif;
+    font-size: 15px;
+    color: var(--primary);
+    font-variant: small-caps;
+    letter-spacing: 0.12em;
+    line-height: 1.2;
+  }
+  .trustee-role {
+    position: absolute;
+    bottom: 18px;
+    left: 12px; right: 12px;
+    font-style: italic;
+    font-size: 12px;
+    color: var(--text-emphasis);
+  }
+  .trustee-bio {
+    margin-top: 16px;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--text);
+    padding: 0 8px;
+  }
+  .star-seal {
+    width: 22px;
+    height: 22px;
+    margin: 14px auto 0;
+    display: block;
+    background: var(--secondary);
+    transform: rotate(45deg);
+    position: relative;
+  }
+  .star-seal::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--secondary);
+    transform: rotate(45deg);
+  }
+
+  /* ====== FOOTER ====== */
+  footer {
+    background: var(--primary);
+    color: var(--bg);
+    margin-top: 60px;
+    padding: 0;
+    position: relative;
+  }
+  .footer-filet {
+    background: var(--bg);
+    padding: 8px 0;
+    display: flex;
+    justify-content: center;
+  }
+  .footer-filet svg { width: 600px; height: auto; }
+  .footer-filet svg path { fill: var(--primary); }
+  .footer-cols {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 50px 60px 30px;
+    text-align: center;
+  }
+  .footer-cols h4 {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    font-size: 14px;
+    font-weight: 400;
+    margin: 0 0 16px;
+  }
+  .footer-cols p {
+    font-size: 14px;
+    line-height: 1.65;
+    margin: 0 0 8px;
+    color: var(--bg);
+    opacity: 0.92;
+  }
+  .footer-seal {
+    text-align: center;
+    padding-bottom: 20px;
+  }
+  .footer-seal-mark {
+    width: 36px; height: 36px;
+    margin: 0 auto 14px;
+    background: var(--accent);
+    transform: rotate(45deg);
+    position: relative;
+  }
+  .footer-seal-mark::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: var(--accent);
+    transform: rotate(45deg);
+  }
+  .copyright {
+    font-style: italic;
+    font-size: 13px;
+    text-align: center;
+    padding: 0 0 30px;
+    color: var(--bg);
+    opacity: 0.8;
+  }
+
+  /* === Inline ogee arch in trustee card via clip-path approach (already done with border-radius) === */
+</style>
+</head>
+<body>
+
+<div class="header-strip">
+  The Bagh-e Fin Foundation <span>✦</span> Established Isfahan, 1971 <span>✦</span> A Private Endowment for the Persian Arts
+</div>
+
+<div class="nav-band">
+  <nav class="primary" aria-label="Primary">
+    <a href="page-1.html">Home</a>
+    <span class="palmette">❖</span>
+    <a href="page-2.html" aria-current="page">Mission &amp; History</a>
+    <span class="palmette">❖</span>
+    <a href="page-3.html">Conservation</a>
+    <span class="palmette">❖</span>
+    <a href="page-4.html">The Collection</a>
+    <span class="palmette">❖</span>
+    <a href="page-5.html">Grants &amp; Fellowships</a>
+    <span class="palmette">❖</span>
+    <a href="page-6.html">Visit &amp; Contact</a>
+  </nav>
+</div>
+
+<section class="hero">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-arch" aria-hidden="true">
+    <svg viewBox="0 0 500 550" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(-147,-244)">
+        <g style="stroke:#1e3a5f;stroke-width:3;fill:none;stroke-linecap:round;">
+          <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+          <path d="m 250,430.58 24.75248,58.41585"/>
+          <path d="m 347.0297,342.46119 41.58416,23.76238 0.9901,35.64356"/>
+          <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+        </g>
+        <g style="stroke:#1e3a5f;stroke-width:3;fill:none;stroke-linecap:round;" transform="matrix(-1,0,0,1,777.88071,-0.297)">
+          <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+          <path d="m 250,430.58 24.75248,58.41585"/>
+          <path d="m 347.0297,342.46119 41.58416,23.76238 0.9901,35.64356"/>
+          <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+        </g>
+      </g>
+    </svg>
+  </div>
+  <div class="hero-eyebrow">II. ✦ Mission &amp; History</div>
+  <h1>An Endowment for the Persian Arts</h1>
+  <p class="hero-subtitle">Founded in Isfahan in 1971 to safeguard the tile, the page, and the garden — three traces of the Safavid hand that endure where the hand itself has gone.</p>
+</section>
+
+<div class="filet-divider" aria-hidden="true">
+  <svg viewBox="0 0 437.999 18.893" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,9.445c0,0,37.005-0.063,73.998-0.829c18.495-0.386,36.989-0.949,50.831-1.785c6.919-0.414,12.677-0.906,16.663-1.46c1.99-0.28,3.539-0.582,4.535-0.878c0.502-0.146,0.844-0.297,1.049-0.405c0.157-0.107,0.238-0.162,0.238-0.162l0.42-0.287l0.656,0.656l-0.369,0.338c0,0-0.154,0.142-0.456,0.324c-0.291,0.154-0.714,0.331-1.256,0.484c-1.085,0.314-2.667,0.608-4.686,0.879c-4.037,0.533-9.811,0.985-16.745,1.354c-13.868,0.744-32.369,1.183-50.87,1.443C37.003,9.632,0,9.445,0,9.445z"/>
+    <path d="M437.999,9.445c0,0-37.004,0.187-74.007-0.329c-18.501-0.261-37.002-0.699-50.869-1.443c-6.935-0.368-12.708-0.82-16.745-1.354c-2.019-0.271-3.601-0.565-4.687-0.879c-0.541-0.153-0.965-0.33-1.256-0.484c-0.302-0.183-0.456-0.324-0.456-0.324l-0.369-0.338l0.656-0.656l0.42,0.287c0,0,0.081,0.055,0.238,0.162c0.204,0.108,0.546,0.26,1.048,0.405c0.996,0.296,2.545,0.598,4.535,0.878c3.986,0.554,9.744,1.046,16.663,1.46C327.011,7.667,345.506,8.23,364,8.616C400.994,9.382,437.999,9.445,437.999,9.445z"/>
+    <circle cx="218.999" cy="9.445" r="6" fill="none" stroke="currentColor" stroke-width="1.2"/>
+    <path d="M218.999,3.445L218.999,15.445M212.999,9.445L224.999,9.445" stroke="currentColor" stroke-width="0.8" fill="none"/>
+  </svg>
+</div>
+
+<main>
+
+  <article class="essay">
+    <p class="lede">In the late spring of 1971, two scholars met in the courtyard of the Madrasa-ye Chahar Bagh and resolved that the spalling cobalt of Isfahan should not pass uncatalogued into another century. From that quiet conversation, the Bagh-e Fin Foundation was conceived.</p>
+
+    <h2>Origins, 1971</h2>
+
+    <p>The Foundation was incorporated on the fourteenth of <span class="accent">Khordad 1350</span> (4 June 1971) by Dr. Manouchehr Sotoudeh, then Reader in Persian Material Culture at the University of Tehran, and Lady Helena Whitcombe-Pirzad, the British-born scholar of Islamic textiles whose 1968 monograph on Ardabil silks remains in print. Their initial endowment, a sum of <span class="accent">£42,000</span> drawn from Lady Whitcombe-Pirzad's family trust and matched by a private grant from the Pahlavi Cultural Office, was deposited at Bank Melli on the corner of Chahar Bagh-e Bala and the proceeds directed at once toward salvage.</p>
+
+    <p>The first fieldwork — undertaken between July and October of that founding year — concerned the spandrel tilework of the southern iwan of the <span class="accent">Maidan-e Naqsh-e Jahan</span>. A January storm had loosened a section of the seventeenth-century mosaic above the Sheikh Lotfollah portal; thirty-eight kilograms of cobalt-and-turquoise <em>haft-rang</em> fragments were recovered from the scaffolding pans before the municipal restorers swept them to the dump. Sotoudeh personally drove the fragments, in two wooden crates, to a workshop on Hakim Street, where the tilemaster Ustad Reza Kashi-saz spent the following winter consolidating them. Twenty-two of those fragments are now displayed in the Foundation's Reading Hall; nine were returned, conserved, to the Maidan in 1979.</p>
+
+    <blockquote>
+      We do not own the tile. We are merely the hand that catches it as it falls.
+      <cite>— Dr. Sotoudeh, in a letter to the Trustees, 1973</cite>
+    </blockquote>
+
+    <h2>Method &amp; Mandate</h2>
+
+    <p>From its founding charter the Foundation has held to three objects, each phrased in the original Persian and English of the 1971 deed: the conservation of <span class="accent">tilework</span> of the Safavid and immediately post-Safavid periods (1501–1736 and the workshop continuities thereafter); the cataloguing and physical stabilization of <span class="accent">manuscripts</span> in private and waqf collections; and the preservation, where the Foundation is granted standing, of <span class="accent">garden architecture</span> — the chahar-bagh and its hydraulic infrastructure — across the cities of Isfahan, Kashan, and Ardabil. The mandate has not been amended in fifty-three years.</p>
+
+    <p>The Foundation does not acquire. It does not auction. It does not lend. It conserves in situ where possible, and where not possible, it underwrites the work of others — typically the provincial offices of the Iranian Cultural Heritage, Handicrafts and Tourism Organization, with whom the Foundation signed a standing memorandum in 1994 and renewed in 2019.</p>
+
+    <h2>The Trustee Council Today</h2>
+
+    <p>Governance rests with a four-person Trustee Council, drawn in alternating cycles from the academic, conservation, and legal professions. The current Council was seated on <span class="accent">21 March 2022</span>, at the Nowruz convocation. Its members serve seven-year terms, are unpaid, and meet quarterly in the Foundation's offices on <span class="accent">Kucheh-ye Bagh-e Fin, Isfahan</span>. The Council is supported by a permanent staff of eleven, including two field conservators, an archivist, a manuscript binder trained at the Chester Beatty, and the Foundation's secretary, Mme. Farideh Rastegar, who has held the post since 1998.</p>
+
+  </article>
+</main>
+
+<section class="timeline-section">
+  <h2>An Axial Chronology, 1971 – 2024</h2>
+  <p class="sub">— Five decades, four cities, one mandate —</p>
+
+  <div class="timeline">
+
+    <div class="tl-entry left">
+      <div class="tl-content">
+        <h3>Foundation &amp; First Salvage</h3>
+        <p>Sotoudeh and Whitcombe-Pirzad sign the founding deed; spandrel-tile recovery commences at the Maidan-e Naqsh-e Jahan within ninety days.</p>
+      </div>
+      <div class="tl-medallion"><span class="girih-mini"></span><span class="tl-year">1971</span></div>
+      <div></div>
+    </div>
+
+    <div class="tl-entry right">
+      <div></div>
+      <div class="tl-medallion"><span class="girih-mini"></span><span class="tl-year">1978</span></div>
+      <div class="tl-content">
+        <h3>Kashan Office Opened</h3>
+        <p>A second permanent office is established on Alavi Street to oversee work on the gardens of Bagh-e Fin proper, from which the Foundation takes its name.</p>
+      </div>
+    </div>
+
+    <div class="tl-entry left">
+      <div class="tl-content">
+        <h3>The Quiet Years</h3>
+        <p>Through the revolutionary period and the war that followed, the Foundation suspends fieldwork and concentrates on the indexing of its manuscript holdings — 1,184 folios catalogued by 1986.</p>
+      </div>
+      <div class="tl-medallion"><span class="girih-mini"></span><span class="tl-year">1979–88</span></div>
+      <div></div>
+    </div>
+
+    <div class="tl-entry right">
+      <div></div>
+      <div class="tl-medallion"><span class="girih-mini"></span><span class="tl-year">1994</span></div>
+      <div class="tl-content">
+        <h3>Memorandum with ICHHTO</h3>
+        <p>A standing concordat is signed permitting Foundation conservators to work alongside provincial heritage staff at twenty-three named sites across three provinces.</p>
+      </div>
+    </div>
+
+    <div class="tl-entry left">
+      <div class="tl-content">
+        <h3>Sheikh Safi Shrine, Ardabil</h3>
+        <p>The Foundation underwrites a four-year stabilization of the lustre-tile dado of the Chini-khaneh, a project completed under master conservator Bahram Yeganeh.</p>
+      </div>
+      <div class="tl-medallion"><span class="girih-mini"></span><span class="tl-year">2003</span></div>
+      <div></div>
+    </div>
+
+    <div class="tl-entry right">
+      <div></div>
+      <div class="tl-medallion"><span class="girih-mini"></span><span class="tl-year">2011</span></div>
+      <div class="tl-content">
+        <h3>Fortieth-Anniversary Endowment</h3>
+        <p>Principal grows to <span class="accent" style="color:var(--text-emphasis)">€18.4 million</span> through the bequest of Lady Whitcombe-Pirzad. The annual fellowship programme is launched in her name.</p>
+      </div>
+    </div>
+
+    <div class="tl-entry left">
+      <div class="tl-content">
+        <h3>Digital Folio Project</h3>
+        <p>In partnership with the Bodleian, 2,300 folios from the Foundation's manuscript holdings are photographed in high resolution and made available without restriction.</p>
+      </div>
+      <div class="tl-medallion"><span class="girih-mini"></span><span class="tl-year">2018</span></div>
+      <div></div>
+    </div>
+
+    <div class="tl-entry right">
+      <div></div>
+      <div class="tl-medallion"><span class="girih-mini"></span><span class="tl-year">2024</span></div>
+      <div class="tl-content">
+        <h3>The Bagh-e Fin Hydraulic Survey</h3>
+        <p>A three-year, on-going study of the qanat that has fed the garden since 1590, undertaken with the Faculty of Architecture, University of Kashan.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="trustees-section">
+  <h2>The Current Trustees</h2>
+  <p class="sub">— Seated at Nowruz, 21 March 2022 —</p>
+
+  <div class="trustees-grid">
+
+    <div class="trustee-card">
+      <div class="arch-frame">
+        <div class="portrait">آ</div>
+        <div class="trustee-name">Prof. Ashraf Daneshvar</div>
+        <div class="trustee-role">Chair of the Council</div>
+      </div>
+      <div class="star-seal" aria-hidden="true"></div>
+      <p class="trustee-bio">Emerita Professor of Architectural History, University of Tehran. Author of <em>The Iwan and the Axis</em> (2014). Joined the Council in 2015; elected Chair in 2022.</p>
+    </div>
+
+    <div class="trustee-card">
+      <div class="arch-frame">
+        <div class="portrait">ر</div>
+        <div class="trustee-name">Dr. Reza Kashi-saz the Younger</div>
+        <div class="trustee-role">Trustee for Conservation</div>
+      </div>
+      <div class="star-seal" aria-hidden="true"></div>
+      <p class="trustee-bio">Tilemaster and grandson of the Foundation's first conservator. Trained at ICCROM, Rome. Directs all field operations in Isfahan and Kashan provinces.</p>
+    </div>
+
+    <div class="trustee-card">
+      <div class="arch-frame">
+        <div class="portrait">N</div>
+        <div class="trustee-name">Nasrin Whitcombe-Pirzad</div>
+        <div class="trustee-role">Trustee for the Endowment</div>
+      </div>
+      <div class="star-seal" aria-hidden="true"></div>
+      <p class="trustee-bio">Granddaughter of the co-founder. Solicitor, called to the Bar of England and Wales 1996. Custodian of the founding deed and of the family papers held at the Isfahan office.</p>
+    </div>
+
+    <div class="trustee-card">
+      <div class="arch-frame">
+        <div class="portrait">ج</div>
+        <div class="trustee-name">Dr. Javad Mirhosseini</div>
+        <div class="trustee-role">Trustee for Manuscripts</div>
+      </div>
+      <div class="star-seal" aria-hidden="true"></div>
+      <p class="trustee-bio">Reader in Codicology, University of Kashan. Editor of the forthcoming <em>Catalogue of the Bagh-e Fin Folios</em> (Brill, 2025). Appointed 2022.</p>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="footer-filet" aria-hidden="true">
+    <svg viewBox="0 0 437.999 18.893" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,9.445c0,0,37.005-0.063,73.998-0.829c18.495-0.386,36.989-0.949,50.831-1.785c6.919-0.414,12.677-0.906,16.663-1.46c1.99-0.28,3.539-0.582,4.535-0.878c0.502-0.146,0.844-0.297,1.049-0.405c0.157-0.107,0.238-0.162,0.238-0.162l0.42-0.287l0.656,0.656l-0.369,0.338c0,0-0.154,0.142-0.456,0.324c-0.291,0.154-0.714,0.331-1.256,0.484c-1.085,0.314-2.667,0.608-4.686,0.879c-4.037,0.533-9.811,0.985-16.745,1.354c-13.868,0.744-32.369,1.183-50.87,1.443C37.003,9.632,0,9.445,0,9.445z" fill="#f2e5cc"/>
+      <path d="M437.999,9.445c0,0-37.004,0.187-74.007-0.329c-18.501-0.261-37.002-0.699-50.869-1.443c-6.935-0.368-12.708-0.82-16.745-1.354c-2.019-0.271-3.601-0.565-4.687-0.879c-0.541-0.153-0.965-0.33-1.256-0.484c-0.302-0.183-0.456-0.324-0.456-0.324l-0.369-0.338l0.656-0.656l0.42,0.287c0,0,0.081,0.055,0.238,0.162c0.204,0.108,0.546,0.26,1.048,0.405c0.996,0.296,2.545,0.598,4.535,0.878c3.986,0.554,9.744,1.046,16.663,1.46C327.011,7.667,345.506,8.23,364,8.616C400.994,9.382,437.999,9.445,437.999,9.445z" fill="#f2e5cc"/>
+      <circle cx="218.999" cy="9.445" r="5" fill="#f2e5cc"/>
+    </svg>
+  </div>
+
+  <div class="footer-cols">
+    <div>
+      <h4>Office &amp; Reading Hall</h4>
+      <p>The Bagh-e Fin Foundation</p>
+      <p>No. 14, Kucheh-ye Bagh-e Fin</p>
+      <p>off Chahar Bagh-e Paeen</p>
+      <p>Isfahan 81467, Iran</p>
+      <p style="margin-top:10px;font-style:italic;opacity:0.75">Open to scholars Sun–Wed, by appointment</p>
+    </div>
+    <div>
+      <h4>Trustee Council</h4>
+      <p>Prof. Ashraf Daneshvar, <em>Chair</em></p>
+      <p>Dr. Reza Kashi-saz the Younger</p>
+      <p>Nasrin Whitcombe-Pirzad, Esq.</p>
+      <p>Dr. Javad Mirhosseini</p>
+      <p style="margin-top:10px;font-style:italic;opacity:0.75">Mme. F. Rastegar, Secretary</p>
+    </div>
+    <div>
+      <h4>Endowment Notice</h4>
+      <p>The Foundation is a private endowment registered under Iranian charitable trust law (1971) and recognised by HM Charity Commissioners as a foreign cultural body.</p>
+      <p>Principal: €18.4 m, audited annually by Tadbir Hesab.</p>
+      <p style="margin-top:10px;font-style:italic;opacity:0.75">Accounts available upon written request.</p>
+    </div>
+  </div>
+
+  <div class="footer-seal">
+    <div class="footer-seal-mark" aria-hidden="true"></div>
+  </div>
+
+  <p class="copyright">© 1971–2024 The Bagh-e Fin Foundation for Persian Arts. All rights reserved in Isfahan, Kashan, Ardabil, and London.</p>
+</footer>
+
+</body>
+</html>

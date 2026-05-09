@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Collection — Dīvānkhāneh</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    font-size: 17px;
+    line-height: 1.55;
+    margin: 0;
+    padding: 0;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* ---------- Page frame ---------- */
+  .page {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 60px;
+  }
+
+  /* ---------- Wordmark + Nav ---------- */
+  .masthead {
+    text-align: center;
+    padding: 48px 0 12px;
+  }
+  .wordmark {
+    font-family: var(--font-display), serif;
+    font-size: 46px;
+    letter-spacing: 0.04em;
+    color: var(--primary);
+    margin: 0 0 4px;
+    font-weight: 700;
+  }
+  .wordmark .amp { color: var(--text-emphasis); font-style: italic; }
+  .tagline {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--primary);
+    letter-spacing: 0.18em;
+    text-transform: lowercase;
+    margin: 0;
+  }
+
+  nav.primary {
+    margin: 28px auto 0;
+    padding: 12px 0 0;
+    text-align: center;
+    position: relative;
+  }
+  nav.primary ul {
+    list-style: none;
+    margin: 0; padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+  }
+  nav.primary li {
+    position: relative;
+    padding: 0 6px;
+  }
+  nav.primary a {
+    font-family: var(--font-display), serif;
+    font-size: 12.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--primary);
+    padding: 14px 18px 8px;
+    display: inline-block;
+    position: relative;
+  }
+  nav.primary a[aria-current="page"] {
+    color: var(--text-emphasis);
+  }
+  nav.primary a[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    left: 18px; right: 18px;
+    bottom: 0;
+    height: 2px;
+    background: var(--text-emphasis);
+  }
+  nav.primary a[aria-current="page"]::before {
+    content: "✦";
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--accent);
+    font-size: 10px;
+  }
+  nav.primary .palmette {
+    width: 14px; height: 14px;
+    display: inline-block;
+    color: var(--accent);
+    opacity: 0.85;
+    flex-shrink: 0;
+  }
+  nav.primary .palmette svg { width: 100%; height: 100%; display: block; }
+
+  .filet {
+    display: block;
+    width: 100%;
+    height: 22px;
+    color: var(--primary);
+    margin: 4px 0;
+  }
+  .filet svg { width: 100%; height: 100%; display: block; }
+  .filet.gold { color: var(--accent); }
+
+  /* ---------- Hero / page title ---------- */
+  .page-hero {
+    text-align: center;
+    padding: 40px 0 28px;
+    position: relative;
+  }
+  .eyebrow {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin: 0 0 14px;
+  }
+  .page-hero h1 {
+    font-family: var(--font-display), serif;
+    font-size: 58px;
+    color: var(--primary);
+    margin: 0 0 14px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  .page-hero .lede {
+    max-width: 720px;
+    margin: 0 auto;
+    font-size: 19px;
+    font-style: italic;
+    color: var(--text);
+  }
+  .page-hero .lede em { color: var(--text-emphasis); font-style: italic; }
+
+  /* ---------- Catalogue meta strip ---------- */
+  .meta-strip {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin: 32px 0 8px;
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--primary);
+  }
+  .meta-strip span b {
+    color: var(--text-emphasis);
+    font-weight: 700;
+    margin-right: 8px;
+  }
+
+  /* ---------- Filter / classification rail ---------- */
+  .rail {
+    text-align: center;
+    margin: 24px 0 20px;
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+  }
+  .rail a {
+    display: inline-block;
+    padding: 8px 16px;
+    color: var(--primary);
+    border: 1px solid transparent;
+  }
+  .rail a.active {
+    border: 1px solid var(--accent);
+    color: var(--text-emphasis);
+  }
+  .rail .sep { color: var(--accent); margin: 0 4px; }
+
+  /* ---------- Grid of cards ---------- */
+  .catalogue {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 36px 32px;
+    padding: 24px 0 56px;
+  }
+
+  .card {
+    position: relative;
+    background: var(--bg);
+    padding: 22px 22px 24px;
+    border: 1.5px solid var(--primary);
+    box-shadow: inset 0 0 0 4px var(--bg), inset 0 0 0 5px var(--accent);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+  }
+  .card .arch-frame {
+    position: relative;
+    border: 1.5px solid var(--primary);
+    padding: 18px 18px 20px;
+    box-shadow: inset 0 0 0 3px var(--bg), inset 0 0 0 4px var(--accent);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .card .arch-frame::before,
+  .card .arch-frame::after {
+    content: "";
+    position: absolute;
+    width: 26px; height: 26px;
+    pointer-events: none;
+  }
+  /* corner palmettes via inline svg in markup instead */
+
+  .card .accession {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg);
+    padding: 0 10px;
+    font-family: var(--font-display), serif;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--text-emphasis);
+    text-transform: uppercase;
+  }
+
+  .card .object {
+    position: relative;
+    height: 220px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .card .object .arch {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    color: var(--primary);
+    opacity: 0.18;
+  }
+  .card .object .arch svg {
+    width: 100%; height: 100%;
+    display: block;
+  }
+  .card .object .seal {
+    width: 130px; height: 130px;
+    position: relative;
+    z-index: 2;
+  }
+  .card .object .seal svg { width: 100%; height: 100%; display: block; }
+
+  .card h3 {
+    font-family: var(--font-display), serif;
+    font-size: 14.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin: 6px 0 4px;
+    line-height: 1.35;
+  }
+  .card .attrib {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--text-emphasis);
+    margin: 0 0 10px;
+  }
+  .card .specs {
+    font-family: var(--font-display), serif;
+    font-size: 9.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin: 0 0 10px;
+    line-height: 1.7;
+  }
+  .card .specs b { color: var(--accent); font-weight: 700; margin-right: 4px; }
+  .card .note {
+    font-size: 14.5px;
+    line-height: 1.5;
+    margin: 0;
+    text-align: center;
+    color: var(--text);
+  }
+  .card .note em { color: var(--text-emphasis); font-style: italic; }
+
+  /* tiny corner palmettes in cards */
+  .corner {
+    position: absolute;
+    width: 22px; height: 22px;
+    color: var(--accent);
+    opacity: 0.9;
+    z-index: 3;
+  }
+  .corner svg { width: 100%; height: 100%; display: block; }
+  .corner.tl { top: 4px; left: 4px; transform: rotate(-90deg); }
+  .corner.tr { top: 4px; right: 4px; transform: rotate(0deg) scaleX(-1); }
+  .corner.bl { bottom: 4px; left: 4px; transform: rotate(180deg) scaleX(-1); }
+  .corner.br { bottom: 4px; right: 4px; transform: rotate(180deg); }
+
+  /* spandrel girih fill */
+  .spandrel {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 60px;
+    overflow: hidden;
+    opacity: 0.07;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .spandrel svg { width: 200%; height: 240%; }
+
+  /* ---------- Section divider ---------- */
+  .section-threshold {
+    text-align: center;
+    margin: 32px 0;
+  }
+  .section-threshold .name {
+    display: inline-block;
+    padding: 0 24px;
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--primary);
+  }
+
+  /* ---------- Curatorial colophon ---------- */
+  .colophon {
+    margin: 40px auto 60px;
+    max-width: 880px;
+    text-align: center;
+    padding: 30px 40px;
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+    position: relative;
+  }
+  .colophon::before, .colophon::after {
+    content: "✦";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--accent);
+    background: var(--bg);
+    padding: 0 10px;
+    font-size: 12px;
+  }
+  .colophon::before { top: -8px; }
+  .colophon::after { bottom: -8px; }
+  .colophon h2 {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    color: var(--primary);
+    letter-spacing: 0.12em;
+    margin: 0 0 12px;
+  }
+  .colophon p {
+    font-size: 16px;
+    font-style: italic;
+    margin: 0 0 8px;
+  }
+  .colophon .signature {
+    margin-top: 14px;
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+  }
+
+  /* ---------- Footer ---------- */
+  footer.cobalt {
+    background: var(--primary);
+    color: var(--bg);
+    margin-top: 0;
+    padding: 0;
+  }
+  footer.cobalt .filet { color: var(--accent); }
+  footer.cobalt .inner {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 50px 60px 30px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    text-align: center;
+  }
+  footer.cobalt h4 {
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 16px;
+    font-weight: 600;
+  }
+  footer.cobalt p {
+    margin: 0 0 6px;
+    font-size: 15px;
+    color: var(--bg);
+    font-style: italic;
+  }
+  footer.cobalt p b { font-style: normal; color: #f2e5cc; }
+  footer.cobalt .tailpiece {
+    text-align: center;
+    color: var(--accent);
+    font-size: 18px;
+    letter-spacing: 0.6em;
+    margin: 6px 0 4px;
+  }
+  footer.cobalt .imprint {
+    text-align: center;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--bg);
+    padding: 10px 0 30px;
+    margin: 0;
+    opacity: 0.9;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================== -->
+<!--   Reusable inline SVG symbols  -->
+<!-- ============================== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="palmette" viewBox="0 0 100 60">
+    <g fill="currentColor">
+      <path d="M50 6 C 56 18, 68 22, 78 22 C 70 28, 64 34, 62 44 C 58 38, 54 36, 50 36 C 46 36, 42 38, 38 44 C 36 34, 30 28, 22 22 C 32 22, 44 18, 50 6 Z"/>
+      <circle cx="50" cy="50" r="2.4"/>
+      <path d="M14 50 L 86 50" stroke="currentColor" stroke-width="1.2" fill="none"/>
+    </g>
+  </symbol>
+
+  <symbol id="filet-divider" viewBox="0 0 438 19" preserveAspectRatio="xMidYMid meet">
+    <g fill="currentColor">
+      <path d="M0,9.4c0,0,37-0.06,74-0.83c18.5-0.39,37-0.95,50.8-1.78c6.9-0.41,12.7-0.91,16.7-1.46c2-0.28,3.5-0.58,4.5-0.88l1.3-0.57l0.7,0.66l-0.4,0.34c0,0-0.5,0.36-1.7,0.7c-1.1,0.31-2.7,0.61-4.7,0.88c-4,0.53-9.8,0.99-16.7,1.35c-13.9,0.74-32.4,1.18-50.9,1.44C37,9.6,0,9.4,0,9.4z"/>
+      <path d="M438,9.4c0,0-37,0.19-74-0.33c-18.5-0.26-37-0.7-50.9-1.44c-6.9-0.37-12.7-0.82-16.7-1.35c-2-0.27-3.6-0.57-4.7-0.88l-1.7-0.7l-0.4-0.34l0.7-0.66l1.3,0.57c1,0.3,2.5,0.6,4.5,0.88c4,0.55,9.7,1.05,16.7,1.46c13.8,0.83,32.3,1.39,50.8,1.78C401,9.34,438,9.4,438,9.4z"/>
+      <circle cx="169" cy="9.4" r="5" fill="none" stroke="currentColor" stroke-width="1.4"/>
+      <circle cx="269" cy="9.4" r="5" fill="none" stroke="currentColor" stroke-width="1.4"/>
+      <circle cx="219" cy="9.4" r="3" fill="currentColor"/>
+      <path d="M178,9.4c0-3,3-6,6-6s6,3,6,6s-3,6-6,6S178,12.4,178,9.4z" fill="none" stroke="currentColor" stroke-width="0.8"/>
+      <path d="M248,9.4c0-3,3-6,6-6s6,3,6,6s-3,6-6,6S248,12.4,248,9.4z" fill="none" stroke="currentColor" stroke-width="0.8"/>
+      <path d="M195,9.4 L 219,2 L 243,9.4 L 219,16.8 Z" fill="none" stroke="currentColor" stroke-width="0.9"/>
+    </g>
+  </symbol>
+
+  <symbol id="ogee-arch" viewBox="0 0 200 220" preserveAspectRatio="xMidYMid meet">
+    <path d="M100 8 C 100 60, 30 70, 30 130 L 30 212 L 170 212 L 170 130 C 170 70, 100 60, 100 8 Z"
+          fill="none" stroke="currentColor" stroke-width="2"/>
+    <path d="M100 18 C 100 64, 40 74, 40 130 L 40 202 L 160 202 L 160 130 C 160 74, 100 64, 100 18 Z"
+          fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.6"/>
+  </symbol>
+
+  <symbol id="star-seal" viewBox="0 0 100 100">
+    <g fill="none" stroke="currentColor" stroke-width="1.4">
+      <circle cx="50" cy="50" r="46"/>
+      <circle cx="50" cy="50" r="38"/>
+      <g>
+        <polygon points="50,12 56,38 82,32 64,52 82,72 56,66 50,92 44,66 18,72 36,52 18,32 44,38" fill="currentColor" fill-opacity="0.10"/>
+        <polygon points="50,12 56,38 82,32 64,52 82,72 56,66 50,92 44,66 18,72 36,52 18,32 44,38"/>
+      </g>
+      <g transform="rotate(45 50 50)">
+        <polygon points="50,18 55,40 78,36 62,52 78,68 55,64 50,86 45,64 22,68 38,52 22,36 45,40"/>
+      </g>
+      <circle cx="50" cy="50" r="6" fill="currentColor"/>
+    </g>
+  </symbol>
+
+  <symbol id="girih" viewBox="0 0 200 120">
+    <g fill="none" stroke="currentColor" stroke-width="1.2">
+      <polygon points="20,60 50,30 80,60 50,90"/>
+      <polygon points="80,60 110,30 140,60 110,90"/>
+      <polygon points="140,60 170,30 200,60 170,90"/>
+      <polygon points="50,30 80,0 110,30"/>
+      <polygon points="110,30 140,0 170,30"/>
+      <polygon points="50,90 80,120 110,90"/>
+      <polygon points="110,90 140,120 170,90"/>
+      <polygon points="0,30 20,0 50,30 20,60"/>
+    </g>
+  </symbol>
+</svg>
+
+<div class="page">
+
+  <!-- ============= Masthead ============= -->
+  <header class="masthead">
+    <h1 class="wordmark">Dīvānkhāneh</h1>
+    <p class="tagline">museum of safavid isfahan · founded 1969</p>
+
+    <nav class="primary" aria-label="Primary">
+      <ul>
+        <li><a href="page-1.html">Hall</a></li>
+        <li><span class="palmette" aria-hidden="true"><svg><use href="#palmette"/></svg></span></li>
+        <li><a href="page-2.html" aria-current="page">Collection</a></li>
+        <li><span class="palmette" aria-hidden="true"><svg><use href="#palmette"/></svg></span></li>
+        <li><a href="page-3.html">Exhibition</a></li>
+        <li><span class="palmette" aria-hidden="true"><svg><use href="#palmette"/></svg></span></li>
+        <li><a href="page-4.html">Reading Room</a></li>
+        <li><span class="palmette" aria-hidden="true"><svg><use href="#palmette"/></svg></span></li>
+        <li><a href="page-5.html">Visit</a></li>
+        <li><span class="palmette" aria-hidden="true"><svg><use href="#palmette"/></svg></span></li>
+        <li><a href="page-6.html">About</a></li>
+      </ul>
+    </nav>
+
+    <div class="filet" aria-hidden="true"><svg><use href="#filet-divider"/></svg></div>
+    <div class="filet gold" aria-hidden="true" style="height:14px"><svg><use href="#filet-divider"/></svg></div>
+  </header>
+
+  <!-- ============= Page hero ============= -->
+  <section class="page-hero">
+    <p class="eyebrow">Folio II · The Catalogue</p>
+    <h1>The Collection</h1>
+    <p class="lede">Fifteen works drawn from the royal kitābkhāna, the tile-yards of <em>Naqsh-i Jahān</em>, and the courtly textile workshops of Yazd, Kāshān, and Iṣfahān — assembled here as a tessellated catalogue, ordered by medium and date.</p>
+
+    <div class="meta-strip" role="list">
+      <span><b>Holdings</b> 1,142 objects</span>
+      <span><b>On view</b> 287</span>
+      <span><b>Period</b> 1501 – 1736</span>
+    </div>
+  </section>
+
+  <div class="filet gold" aria-hidden="true"><svg><use href="#filet-divider"/></svg></div>
+
+  <!-- ============= Classification rail ============= -->
+  <nav class="rail" aria-label="Classification">
+    <a href="#" class="active">All Media</a>
+    <span class="sep">✦</span>
+    <a href="#">Tilework</a>
+    <span class="sep">✦</span>
+    <a href="#">Manuscripts</a>
+    <span class="sep">✦</span>
+    <a href="#">Metalwork</a>
+    <span class="sep">✦</span>
+    <a href="#">Textiles</a>
+    <span class="sep">✦</span>
+    <a href="#">Arms & Standards</a>
+  </nav>
+
+  <!-- ============= GROUP I: Tilework & Architecture ============= -->
+  <div class="section-threshold">
+    <div class="filet" aria-hidden="true"><svg><use href="#filet-divider"/></svg></div>
+    <span class="name">i · Tilework & Architectural Revetment</span>
+    <div class="filet" aria-hidden="true"><svg><use href="#filet-divider"/></svg></div>
+  </div>
+
+  <section class="catalogue" aria-label="Catalogue, Group I">
+
+    <!-- 1 -->
+    <article class="card">
+      <div class="spandrel"><svg><use href="#girih"/></svg></div>
+      <span class="accession">Acc. 1971.04.112</span>
+      <div class="arch-frame">
+        <span class="corner tl"><svg><use href="#palmette"/></svg></span>
+        <span class="corner tr"><svg><use href="#palmette"/></svg></span>
+        <span class="corner bl"><svg><use href="#palmette"/></svg></span>
+        <span class="corner br"><svg><use href="#palmette"/></svg></span>
+
+        <div class="object">
+          <div class="arch" aria-hidden="true"><svg><use href="#ogee-arch"/></svg></div>
+          <div class="seal" aria-hidden="true"><svg><use href="#star-seal"/></svg></div>
+        </div>
+        <h3>Cuerda-Seca Tile Panel</h3>
+        <p class="attrib">Iṣfahān · c. 1612 (1021 AH)</p>
+        <p class="specs">
+          <b>Medium</b> Stonepaste, polychrome glazes within manganese outline<br>
+          <b>Dimensions</b> 124 × 198 cm, mounted in seven sections
+        </p>
+        <p class="note">Recovered from a courtyard wall of the <em>Masjid-i Shāh</em>. Cobalt grounds the saz leaves; turquoise threads bind the cloud-bands. The maker's brand survives at lower-left.</p>
+      </div>
+    </article>
+
+    <!-- 2 -->
+    <article class="card">
+      <div class="spandrel"><svg><use href="#girih"/></svg></div>
+      <span class="accession">Acc. 1984.11.027</span>
+      <div class="arch-frame">
+        <span class="corner tl"><svg><use href="#palmette"/></svg></span>
+        <span class="corner tr"><svg><use href="#palmette"/></svg></span>
+        <span class="corner bl"><svg><use href="#palmette"/></svg></span>
+        <span class="corner br"><svg><use href="#palmette"/></svg></span>
+
+        <div class="object">
+          <div class="arch" aria-hidden="true"><svg><use href="#ogee-arch"/></svg></div>
+          <div class="seal" aria-hidden="true"><svg><use href="#star-seal"/></svg></div>
+        </div>
+        <h3>Mosaic Spandrel Fragment</h3>
+        <p class="attrib">Iṣfahān · c. 1602</p>
+        <p class="specs">
+          <b>Medium</b> Cut tile mosaic (<em>muʿarraq kāshī</em>)<br>
+          <b>Dimensions</b> 86 × 64 cm
+        </p>
+        <p class="note">A spandrel from a portal of the Lutfullāh complex, its arabesque set against a deep ultramarine. The fitting marks of the original masons remain incised on the verso.</p>
+      </div>
+    </article>
+
+    <!-- 3 -->
+    <article class="card">
+      <div class="spandrel"><svg><use href="#girih"/></svg></div>
+      <span class="accession">Acc. 1969.01.003</span>
+      <div class="arch-frame">
+        <span class="corner tl"><svg><use href="#palmette"/></svg></span>
+        <span class="corner tr"><svg><use href="#palmette"/></svg></span>
+        <span class="corner bl"><svg><use href="#palmette"/></svg></span>
+        <span class="corner br"><svg><use href="#palmette"/></svg></span>
+
+        <div class="object">
+          <div class="arch" aria-hidden="true"><svg><use href="#ogee-arch"/></svg></div>
+          <div class="seal" aria-hidden="true"><svg><use href="#star-seal"/></svg></div>
+        </div>
+        <h3>Star & Cross Tile Set</h3>
+        <p class="attrib">Kāshān · early 17th c.</p>
+        <p class="specs">
+          <b>Medium</b> Lustre over opaque white glaze, gold reflect<br>
+          <b>Dimensions</b> Eight-pointed stars, 21 cm; crosses, 14 cm
+        </p>
+        <p class="note">A sequence of nine stars and eight cross-tiles from a domestic dado, each star bearing a couplet from <em>Saʿdī's Bostān</em> in nastaʿlīq.</p>
+      </div>
+    </article>
+
+  </section>
+
+  <!-- ============= GROUP II: Manuscripts ============= -->
+  <div class="section-threshold">
+    <div class="filet" aria-hidden="true"><svg><use href="#filet-divider"/></svg></div>
+    <span class="name">ii · The Royal Kitābkhāna</span>
+    <div class="filet" aria-hidden="true"><svg><use href="#filet-divider"/></svg></div>
+  </div>
+
+  <section class="catalogue" aria-label="Catalogue, Group II">
+
+    <!-- 4 -->
+    <article class="card">
+      <div class="spandrel"><svg><use href="#girih"/></svg></div>
+      <span class="accession">Acc. 1976.22.041</span>
+      <div class="arch-frame">
+        <span class="corner tl"><svg><use href="#palmette"/></svg></span>
+        <span class="corner tr"><svg><use href="#palmette"/></svg></span>
+        <span class="corner bl"><svg><use href="#palmette"/></svg></span>
+        <span class="corner br"><svg><use href="#palmette"/></svg></span>
+
+        <div class="object">
+          <div class="arch" aria-hidden="true"><svg><use href="#ogee-arch"/></svg></div>
+          <div class="seal" aria-hidden="true"><svg><use href="#star-seal"/></svg></div>
+        </div>
+        <h3>Rustam Mourns Suhrāb</h3>
+        <p class="attrib">Tabrīz · c. 1535, kitābkhāna of Shāh Tahmāsp</p>
+        <p class="specs">
+          <b>Medium</b> Opaque watercolour, ink, gold on paper<br>
+          <b>Dimensions</b> Folio 47 × 31.8 cm; image 28 × 19 cm
+        </p>
+        <p class="note">A leaf from the dispersed <em>Shāhnāma</em> of Shāh Tahmāsp. The hero's grief unfolds beneath a tent-pole that splits the composition along its sacred axis.</p>
+      </div>
+    </article>
+
+    <!-- 5 -->
+    <article class="card">
+      <div class="spandrel"><svg><use href="#girih"/></svg></div>
+      <span class="accession">Acc. 1991.18.114</span>
+      <div class="arch-frame">
+        <span class="corner tl"><svg><use href="#palmette"/></svg></span>
+        <span class="corner tr"><svg><use href="#palmette"/></svg></span>
+        <span class="corner bl"><svg><use href="#palmette"/></svg></span>
+        <span class="corner br"><svg><use href="#palmette"/></svg></span>
+
+        <div class="object">
+          <div class="arch" aria-hidden="true"><svg><use href="#ogee-arch"/></svg></div>
+          <div class="seal" aria-hidden="true"><svg><use href="#star-seal"/></svg></div>
+        </div>
+        <h3>Khamsa of Niẓāmī, Single Folio</h3>
+        <p class="attrib">Qazvīn · c. 1576, attrib. Ṣādiqī Beg</p>
+        <p class="specs">
+          <b>Medium</b> Opaque watercolour and gold on burnished paper<br>
+          <b>Dimensions</b> 32.4 × 22.1 cm
+        </p>
+        <p class="note">Khusraw glimpses Shīrīn at her bath — a scene rendered in the late-Qazvīn manner, with figures elongated and the rocks edged in <em>oxblood</em>.</p>
+      </div>
+    </article>
+
+    <!-- 6 -->
+    <article class="card">
+      <div class="spandrel"><svg><use href="#girih"/></svg></div>
+      <span class="accession">Acc. 2003.07.002</span>
+      <div class="arch-frame">
+        <span class="corner tl"><svg><use href="#palmette"/></svg></span>
+        <span class="corner tr"><svg><use href="#palmette"/></svg></span>
+        <span class="corner bl"><svg><use href="#palmette"/></svg></span>
+        <span class="corner br"><svg><use href="#palmette"/></svg></span>
+
+        <div class="object">
+          <div class="arch" aria-hidden="true"><svg><use href="#ogee-arch"/></svg></div>
+          <div class="seal" aria-hidden="true"><svg><use href="#star-seal"/></svg></div>
+        </div>
+        <h3>Album Page, Calligraphic Quatrain</h3>
+        <p class="attrib">Iṣfahān · c. 1620, signed Mīr ʿImād al-Ḥasanī</p>
+        <p class="specs">
+          <b>Medium</b> Black ink in nastaʿlīq, gold sprinkle, marbled border<br>
+          <b>Dimensions</b> 24 × 14 cm
+        </p>
+        <p class="note">Four lines of a quatrain by Hāfiẓ, set diagonally. Mīr ʿImād's hand is at its most disciplined — the <em>kashīda</em> cuts like a drawn bow.</p>
+      </div>
+    </article>
+
+    <!-- 7 -->
+    <article class="card">
+      <div class="spandrel"><svg><use href="#girih"/></svg></div>
+      <span class="accession">Acc. 1988.09.061</span>
+      <div class="arch-frame">
+        <span class="corner tl"><svg><use href="#palmette"/></svg></span>
+        <span class="corner tr"><svg><use href="#palmette"/></svg></span>
+        <span class="corner bl"><svg><use href="#palmette"/></svg></span>
+        <span class="corner br"><svg><use href="#palmette"/></svg></span>
+
+        <div class="object">
+          <div class="arch" aria-hidden="true"><svg><use href="#ogee-arch"/></svg></div>
+          <div class="seal" aria-hidden="true"><svg><use href="#star-seal"/></svg></div>
+        </div>
+        <h3>Riẓā ʿAbbāsī, Seated Youth with Cup</h3>
+        <p class="attrib">Iṣfahān · c. 1627</p>
+        <p class="specs">
+          <b>Medium</b> Tinted drawing on paper<br>
+          <b>Dimensions</b> 17.8 × 10.4 cm
+        </p>
+        <p class="note">A single figure rendered in supple line. The pleated sash, drawn with a single sweep, is the master's signature gesture, dated by his autograph at lower-right.</p>
+      </div>
+    </article>
+
+    <!-- 8 -->
+    <article class="card">
+      <div class="spandrel"><svg><use href="#girih"/></svg></div>
+      <span class="accession">Acc. 1995.31.018</span>
+      <div class="arch-frame">
+        <span class="corner tl"><svg><use href="#palmette"/></svg></span>
+        <span class="corner tr"><svg><use href="#palmette"/></svg></span>
+        <span class="corner bl"><svg><use href="#palmette"/></svg></span>
+        <span class="corner br"><svg><use href="#palmette"/></svg></span>
+
+        <div class="object">
+          <div class="arch" aria-hidden="true"><svg><use href="#ogee-arch"/></svg></div>
+          <div class="seal" aria-hidden="true"><svg><use href="#star-seal"/></svg></div>
+        </div>
+        <h3>Qurʾān Juzʾ, Illuminated Frontispiece</h3>
+        <p class="attrib">Shīrāz · c. 1550</p>
+        <p class="specs">
+          <b>Medium</b> Ink, opaque pigment, gold and lapis on paper, leather binding<br>
+          <b>Dimensions</b> 31 × 21 cm; 42 folios
+        </p>
+        <p class="note">The opening <em>shamsa</em> bristles with nine concentric registers of arabesque. Endpapers are abrī — Persian marbled paper of the highest grade.</p>
+      </div>
+    </article>
+
+    <!-- 9 -->
+    <article class="card">
+      <div class="spandrel"><svg><use href="#girih"/></svg></div>
+      <span class="accession">Acc. 1972.14.090</span>
+      <div class="arch-frame">
+        <span class="corner tl"><svg><use href="#palmette"/></svg></span>
+        <span class="corner tr"><svg><use href="#palmette"/></svg></span>
+        <span class="corner bl"><svg><use href="#palmette"/></svg></span>
+        <span class="corner br"><svg><use href="#palmette"/></svg></span>
+
+        <div class="object">
+          <div class="arch" aria-hidden="true"><svg><use href="#ogee-arch"/></svg></div>
+          <div class="seal" aria-hidden="true"><svg><use href="#star-seal"/></svg></div>
+        </div>
+        <h3>Lacquer Bookbinding</h3>
+        <p class="attrib">Iṣfahān · c. 1680</p>
+        <p class="specs">
+          <b>Medium</b> Pasteboard, painted and varnished; doublure of cut leather<br>
+          <b>Dimensions</b> 26.5 × 17 cm
+        </p>
+        <p class="note">A nightingale and rose set within a four-fold cartouche. The varnish has clarified with age; the gilt rule is original to the binding.</p>
+      </div>
+    </article>
+
+  </section>
+
+  <!-- ============= GROUP III: Metalwork & Arms ============= -->
+  <div class="section-threshold">
+    <div class="filet" aria-hidden="true"><svg><use href="#filet-divider"/></svg></div>
+    <span class="name">iii · Metalwork, Instruments & Standards</span>
+    <div class="filet" aria-hidden="true"><svg><use href="#filet-divider"/></svg></div>
+  </div>
+
+  <section class="catalogue" aria-label="Catalogue, Group III">
+
+    <!-- 10 -->
+    <article class="card">
+      <div class="spandrel"><svg><use href="#girih"/></svg></div>
+      <span class="accession">Acc. 1970.06.011</span>
+      <div class="arch-frame">
+        <span class="corner tl"><svg><use href="#palmette"/></svg></span>
+        <span class="corner tr"><svg><use href="#palmette"/></svg></span>
+        <span class="corner bl"><svg><use href="#palmette"/></svg></span>
+        <span class="corner br"><svg><use href="#palmette"/></svg></span>
+
+        <div class="object">
+          <div class="arch" aria-hidden="true"><svg><use href="#ogee-arch"/></svg></div>
+          <div class="seal" aria-hidden="true"><svg><use href="#star-seal"/></svg></div>
+        </div>
+        <h3>Planispheric Astrolabe</h3>
+        <p class="attrib">Iṣfahān · 1659/60 (1070 AH), Muḥammad Mahdī al-Yazdī</p>
+        <p class="specs">
+          <b>Medium</b> Brass, engraved and pierced, silver inlay on rete<br>
+          <b>Dimensions</b> Diameter 14.6 cm; six plates plus rete
+        </p>
+        <p class="note">Signed beneath the throne. Plates serve latitudes from Mecca to Samarqand; the rete carries thirty-one named stars in <em>kūfī</em>.</p>
+      </div>
+    </article>
+
+    <!-- 11 -->
+    <article class="card">
+      <div class="spandrel"><svg><use href="#girih"/></svg></div>
+      <span class="accession">Acc. 1981.02.244</span>
+      <div class="arch-frame">
+        <span class="corner tl"><svg><use href="#palmette"/></svg></span>
+        <span class="corner tr"><svg><use href="#palmette"/></svg></span>
+        <span class="corner bl"><svg><use href="#palmette"/></svg></span>
+        <span class="corner br"><svg><use href="#palmette"/></svg></span>
+
+        <div class="object">
+          <div class="arch" aria-hidden="true"><svg><use href="#ogee-arch"/></svg></div>
+          <div class="seal" aria-hidden="true"><svg><use href="#star-seal"/></svg></div>
+        </div>
+        <h3>ʿAlam Standard Finial</h3>
+        <p class="attrib">Qazvīn · late 16th c.</p>
+        <p class="specs">
+          <b>Medium</b> Pierced and chiselled steel, traces of gold koftgari<br>
+          <b>Dimensions</b> 78 × 36 cm
+        </p>
+        <p class="note">Bearing the names of the Fourteen Pure Ones in <em>thuluth</em>. Carried in Muḥarram processions; the pierced field reads as light made legible.</p>
+      </div>
+    </article>
+
+    <!-- 12 -->
+    <article class="card">
+      <div class="spandrel"><svg><use href="#girih"/></svg></div>
+      <span class="accession">Acc. 1973.05.077</span>
+      <div class="arch-frame">
+        <span class="corner tl"><svg><use href="#palmette"/></svg></span>
+        <span class="corner tr"><svg><use href="#palmette"/></svg></span>
+        <span class="corner bl"><svg><use href="#palmette"/></svg></span>
+        <span class="corner br"><svg><use href="#palmette"/></svg></span>
+
+        <div class="object">
+          <div class="arch" aria-hidden="true"><svg><use href="#ogee-arch"/></svg></div>
+          <div class="seal" aria-hidden="true"><svg><use href="#star-seal"/></svg></div>
+        </div>
+        <h3>Tinned Copper Bowl with Verses</h3>
+        <p class="attrib">Iṣfahān · c. 1645</p>
+        <p class="specs">
+          <b>Medium</b> Tinned copper, engraved cartouches<br>
+          <b>Dimensions</b> Diameter 22 cm; height 9 cm
+        </p>
+        <p class="note">Six cartouches carry verses by Ṣāʾib of Tabrīz. The interior bears a single sun-rosette, hammered from beneath.</p>
+      </div>
+    </article>
+
+    <!-- 13 -->
+    <article class="card">
+      <div class="spandrel"><svg><use href="#girih"/></svg></div>
+      <span class="accession">Acc. 1999.13.058</span>
+      <div class="arch-frame">
+        <span class="corner tl"><svg><use href="#palmette"/></svg></span>
+        <span class="corner tr"><svg><use href="#palmette"/></svg></span>
+        <span class="corner bl"><svg><use href="#palmette"/></svg></span>
+        <span class="corner br"><svg><use href="#palmette"/></svg></span>
+
+        <div class="object">
+          <div class="arch" aria-hidden="true"><svg><use href="#ogee-arch"/></svg></div>
+          <div class="seal" aria-hidden="true"><svg><use href="#star-seal"/></svg></div>
+        </div>
+        <h3>Watered-Steel Shamshīr & Scabbard</h3>
+        <p class="attrib">Iṣfahān · early 17th c., blade signed Asadullāh</p>
+        <p class="specs">
+          <b>Medium</b> Crucible steel (jowhar), gold koftgari; fish-skin scabbard with silver mounts<br>
+          <b>Dimensions</b> Blade 78.4 cm; total length 92 cm
+        </p>
+        <p class="note">The watered figure runs in flowing parallels — the so-called <em>kirk-narduban</em> or forty-rung ladder. The cartouche cites the <em>Nād-i ʿAlī</em>.</p>
+      </div>
+    </article>
+
+  </section>
+
+  <!-- ============= GROUP IV: Textiles & Carpets ============= -->
+  <div class="section-threshold">
+    <div class="filet" aria-hidden="true"><svg><use href="#filet-divider"/></svg></div>
+    <span class="name">iv · The Textile Workshops</span>
+    <div class="filet" aria-hidden="true"><svg><use href="#filet-divider"/></svg></div>
+  </div>
+
+  <section class="catalogue" aria-label="Catalogue, Group IV">
+
+    <!-- 14 -->
+    <article class="card">
+      <div class="spandrel"><svg><use href="#girih"/></svg></div>
+      <span class="accession">Acc. 1978.20.005</span>
+      <div class="arch-frame">
+        <span class="corner tl"><svg><use href="#palmette"/></svg></span>
+        <span class="corner tr"><svg><use href="#palmette"/></svg></span>
+        <span class="corner bl"><svg><use href="#palmette"/></svg></span>
+        <span class="corner br"><svg><use href="#palmette"/></svg></span>
+
+        <div class="object">
+          <div class="arch" aria-hidden="true"><svg><use href="#ogee-arch"/></svg></div>
+          <div class="seal" aria-hidden="true"><svg><use href="#star-seal"/></svg></div>
+        </div>
+        <h3>Silk Lampas, Lotus & Cloud-Band</h3>
+        <p class="attrib">Yazd · late 16th c.</p>
+        <p class="specs">
+          <b>Medium</b> Silk lampas, ground in cream, pattern in cobalt and ruby<br>
+          <b>Dimensions</b> Loom-width 67 cm; preserved length 218 cm
+        </p>
+        <p class="note">The repeat advances by a half-drop of the <em>chīnī</em> cloud-bands; lotuses turn each on a different stem. A robe-length, never cut.</p>
+      </div>
+    </article>
+
+    <!-- 15 -->
+    <article class="card">
+      <div class="spandrel"><svg><use href="#girih"/></svg></div>
+      <span class="accession">Acc. 1986.04.222</span>
+      <div class="arch-frame">
+        <span class="corner tl"><svg><use href="#palmette"/></svg></span>
+        <span class="corner tr"><svg><use href="#palmette"/></svg></span>
+        <span class="corner bl"><svg><use href="#palmette"/></svg></span>
+        <span class="corner br"><svg><use href="#palmette"/></svg></span>
+
+        <div class="object">
+          <div class="arch" aria-hidden="true"><svg><use href="#ogee-arch"/></svg></div>
+          <div class="seal" aria-hidden="true"><svg><use href="#star-seal"/></svg></div>
+        </div>
+        <h3>Vase-Technique Carpet, Fragment</h3>
+        <p class="attrib">Kirmān · c. 1620</p>
+        <p class="specs">
+          <b>Medium</b> Wool pile on cotton foundation, asymmetric knot<br>
+          <b>Dimensions</b> 2.34 × 1.18 m (preserved field)
+        </p>
+        <p class="note">Three offset lattices interlock — palmette, cloud, and vase. The reds derive from <em>madder</em> and cochineal; the blues are pure indigo.</p>
+      </div>
+    </article>
+
+    <!-- 16 (overflow placeholder kept to 15: skipping this; we already have 15) -->
+
+  </section>
+
+  <!-- ============= Curatorial colophon ============= -->
+  <div class="filet gold" aria-hidden="true"><svg><use href="#filet-divider"/></svg></div>
+
+  <section class="colophon">
+    <h2>A Note from the Keeper of Catalogues</h2>
+    <p>The catalogue is revised on the first day of <em>Farvardīn</em> and the first day of <em>Mehr</em>. Loans, recent acquisitions, and conservation withdrawals are listed in the printed supplement, available at the desk for ﷼ 850,000 or as part of membership.</p>
+    <p>Researchers may consult any object on this page in the Reading Room by appointment, Tuesday through Friday, 09:00–13:00.</p>
+    <p class="signature">— Dr. Farīdeh Naṣīrī, Keeper of the Catalogue</p>
+  </section>
+
+  <div class="filet gold" aria-hidden="true"><svg><use href="#filet-divider"/></svg></div>
+
+</div>
+
+<!-- ============= Footer ============= -->
+<footer class="cobalt">
+  <div class="filet" aria-hidden="true" style="height:18px;"><svg><use href="#filet-divider"/></svg></div>
+
+  <div class="inner">
+    <div>
+      <h4>Visit</h4>
+      <p><b>Dīvānkhāneh</b></p>
+      <p>14 Khiyābān-i Chahār Bāgh-i ʿAbbāsī</p>
+      <p>Iṣfahān 8173643112, Iran</p>
+      <p>Tue–Sun · 09:00 – 17:30</p>
+      <p>Closed Mondays & ʿĀshūrāʾ</p>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <p>Telephone +98 31 3220 4471</p>
+      <p>Catalogue desk +98 31 3220 4488</p>
+      <p>Postbox 81746-394, Iṣfahān</p>
+      <p>keeper@divankhaneh.museum.ir</p>
+    </div>
+    <div>
+      <h4>Patronage</h4>
+      <p>Founded 1969 under the Endowment</p>
+      <p>of the Ḥaydariyya Trust</p>
+      <p>Conservation: the Āqā-Bozorg Foundation</p>
+      <p>Acquisitions: Friends of the Kitābkhāna</p>
+    </div>
+  </div>
+
+  <div class="tailpiece" aria-hidden="true">✦ ❖ ✦ ❖ ✦</div>
+  <p class="imprint">Imprint © MMXXIV Dīvānkhāneh, Museum of Safavid Iṣfahān · all rights reserved within the lands of scholarship.</p>
+
+  <div class="filet" aria-hidden="true" style="height:18px;"><svg><use href="#filet-divider"/></svg></div>
+</footer>
+
+</body>
+</html>

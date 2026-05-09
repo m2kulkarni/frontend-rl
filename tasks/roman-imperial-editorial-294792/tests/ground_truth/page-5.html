@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>The Library — Acta Diurna</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    margin: 0;
+    line-height: 1.7;
+  }
+  a { color: inherit; }
+
+  /* ---------- MASTHEAD & NAV ---------- */
+  .masthead {
+    text-align: center;
+    padding: 56px 40px 24px;
+    border-bottom: 1px solid var(--primary);
+  }
+  .masthead .greek-rule {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 18px;
+  }
+  .masthead .greek-rule svg {
+    width: 180px;
+    height: 28px;
+  }
+  .masthead h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 900;
+    font-size: 56px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    margin: 0 0 6px;
+    line-height: 1;
+  }
+  .masthead .latin-tag {
+    font-style: italic;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    color: var(--primary);
+    margin: 0 0 4px;
+  }
+  .masthead .issue-line {
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    margin: 14px 0 0;
+  }
+  .masthead .issue-line .accent { color: var(--accent); }
+
+  nav.primary {
+    text-align: center;
+    padding: 18px 0 22px;
+    border-bottom: 1px solid var(--primary);
+  }
+  nav.primary ul {
+    list-style: none;
+    margin: 0; padding: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  nav.primary a {
+    text-decoration: none;
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    padding: 4px 2px;
+    color: var(--primary);
+  }
+  nav.primary li[aria-current="page"] a {
+    border-bottom: 1px solid var(--secondary);
+    padding-bottom: 3px;
+  }
+  nav.primary .vine {
+    width: 14px; height: 14px;
+    fill: var(--secondary);
+    opacity: 0.7;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    text-align: center;
+    padding: 64px 40px 40px;
+    border-bottom: 1px solid var(--primary);
+    position: relative;
+  }
+  .hero .kicker {
+    font-size: 11px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 18px;
+  }
+  .hero h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 900;
+    font-size: 78px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    line-height: 0.95;
+    margin: 0 auto 18px;
+    max-width: 980px;
+  }
+  .hero .subtitle {
+    font-style: italic;
+    font-size: 19px;
+    color: var(--primary);
+    max-width: 620px;
+    margin: 0 auto 30px;
+    line-height: 1.55;
+  }
+  .hero .wreath-frame {
+    width: 220px;
+    height: auto;
+    margin: 22px auto 0;
+    display: block;
+    opacity: 0.85;
+  }
+  .hero .wreath-frame .wreath-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--font-display), serif;
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+  }
+  .wreath-wrap { position: relative; display: inline-block; }
+  .wreath-wrap .label {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    font-size: 11px;
+    line-height: 1.4;
+  }
+  .wreath-wrap .label em {
+    display: block;
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+    font-size: 9px;
+    margin-top: 4px;
+  }
+
+  /* ---------- DIVIDERS ---------- */
+  .meander-divider {
+    display: block;
+    width: 100%;
+    height: 28px;
+    overflow: hidden;
+  }
+  .meander-divider svg { width: 100%; height: 100%; display: block; }
+  .meander-strip {
+    width: 100%;
+    height: 24px;
+    background-image: repeating-linear-gradient(
+      90deg,
+      var(--primary) 0 2px,
+      transparent 2px 6px,
+      var(--primary) 6px 8px,
+      transparent 8px 14px
+    );
+  }
+
+  .center-rule {
+    display: flex; align-items: center; justify-content: center;
+    gap: 18px; margin: 0 auto;
+    max-width: 720px;
+  }
+  .center-rule .line {
+    flex: 1; height: 1px; background: var(--primary);
+  }
+  .center-rule .line.gold { background: var(--secondary); }
+  .center-rule .line.red { background: var(--accent); }
+  .center-rule .vine { width: 14px; height: 14px; fill: var(--accent); }
+
+  .section-title {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.36em;
+    font-size: 22px;
+    font-weight: 900;
+    margin: 0 0 8px;
+  }
+  .section-title-deck {
+    text-align: center;
+    font-style: italic;
+    color: var(--primary);
+    font-size: 14px;
+    margin: 0 auto 28px;
+    max-width: 540px;
+  }
+
+  /* ---------- LEAD REVIEW ---------- */
+  .lead-review {
+    padding: 72px 40px 56px;
+    text-align: center;
+  }
+  .lead-review .header-block {
+    max-width: 880px;
+    margin: 0 auto 34px;
+  }
+  .review-meta {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    font-size: 10px;
+    color: var(--accent);
+    margin-bottom: 18px;
+  }
+  .review-title {
+    font-family: var(--font-display), serif;
+    font-weight: 900;
+    font-size: 52px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    line-height: 1;
+    margin: 0 0 10px;
+  }
+  .review-subtitle {
+    font-style: italic;
+    font-size: 18px;
+    margin: 8px auto 14px;
+    max-width: 620px;
+  }
+  .pub-line {
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin: 0 0 14px;
+  }
+  .rosettes {
+    display: inline-flex;
+    gap: 6px;
+    align-items: center;
+    margin: 6px 0 8px;
+  }
+  .rosette {
+    width: 14px; height: 14px;
+    background: radial-gradient(circle at 50% 50%, var(--secondary) 0 30%, transparent 31%),
+                conic-gradient(var(--secondary) 0 25%, transparent 0 50%, var(--secondary) 0 75%, transparent 0);
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px var(--secondary) inset;
+    position: relative;
+  }
+  .rosette::before {
+    content: "";
+    position: absolute;
+    inset: 3px;
+    background: var(--secondary);
+    clip-path: polygon(50% 0, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  }
+  .rosette.empty {
+    background: none;
+    box-shadow: 0 0 0 1px var(--primary) inset;
+    opacity: 0.4;
+  }
+  .rosette.empty::before { background: var(--primary); opacity: 0.35; }
+
+  .byline-rule {
+    width: 80px; height: 1px;
+    background: var(--accent);
+    margin: 18px auto 12px;
+  }
+  .byline {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.32em;
+    font-size: 11px;
+  }
+  .byline em {
+    display: block;
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0.04em;
+    color: var(--primary);
+    font-size: 13px;
+    margin-top: 6px;
+  }
+
+  .review-body {
+    max-width: 38em; /* golden-ratio-ish reading column */
+    margin: 0 auto;
+    text-align: left;
+    font-size: 16px;
+    line-height: 1.85;
+    column-count: 1;
+  }
+  .review-body p { margin: 0 0 1.05em; }
+  .review-body p:first-of-type::first-letter {
+    font-family: var(--font-display), serif;
+    font-weight: 900;
+    color: var(--accent);
+    float: left;
+    font-size: 78px;
+    line-height: 0.85;
+    padding: 6px 12px 0 0;
+  }
+  .review-body .pull {
+    color: var(--text-emphasis);
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.45;
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+    padding: 22px 0;
+    margin: 32px 0;
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  }
+  .review-body .pull::before,
+  .review-body .pull::after {
+    content: "❦";
+    display: block;
+    font-size: 14px;
+    color: var(--secondary);
+    margin: 0 0 6px;
+  }
+  .review-body .pull::after { margin: 6px 0 0; }
+  .review-body em.lat {
+    color: var(--text-emphasis);
+    font-style: italic;
+  }
+  .end-mark {
+    text-align: center;
+    margin: 22px 0 0;
+    color: var(--accent);
+    letter-spacing: 0.6em;
+    font-size: 14px;
+  }
+
+  /* ---------- NOTICES ---------- */
+  .notices {
+    padding: 56px 40px 72px;
+    background: var(--surface);
+  }
+  .notices-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 36px;
+    max-width: 1280px;
+    margin: 36px auto 0;
+  }
+  .card {
+    background: var(--bg);
+    text-align: center;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .card .key-top, .card .key-bottom {
+    height: 18px;
+    background-image: repeating-linear-gradient(
+      90deg,
+      var(--primary) 0 2px,
+      transparent 2px 5px,
+      var(--primary) 5px 7px,
+      transparent 7px 12px
+    );
+  }
+  .card .body {
+    padding: 30px 26px 28px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .card .category {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.34em;
+    font-size: 9.5px;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+  .card h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 22px;
+    line-height: 1.15;
+    margin: 0 0 6px;
+  }
+  .card .author {
+    font-style: italic;
+    font-size: 14px;
+    margin: 0 0 6px;
+  }
+  .card .pub {
+    font-size: 10.5px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin: 6px 0 12px;
+  }
+  .card .rosettes { margin-bottom: 14px; }
+  .card .deck {
+    font-style: italic;
+    font-size: 14.5px;
+    line-height: 1.55;
+    max-width: 23em;
+    margin: 6px auto 14px;
+  }
+  .card .ruler {
+    width: 60px; height: 1px;
+    background: var(--accent);
+    margin: 6px auto 12px;
+  }
+  .card .reviewer {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    font-size: 10px;
+  }
+  .card .reviewer em {
+    display: block;
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0.04em;
+    font-size: 12px;
+    color: var(--primary);
+    margin-top: 4px;
+  }
+  .card .price {
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-top: 14px;
+    color: var(--text-emphasis);
+  }
+
+  /* ---------- SHELF NOTE ---------- */
+  .shelf-note {
+    text-align: center;
+    padding: 56px 40px 64px;
+    border-top: 1px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
+    background: var(--bg);
+  }
+  .shelf-note .seal-wrap {
+    width: 130px; height: 130px;
+    margin: 0 auto 22px;
+    position: relative;
+  }
+  .shelf-note .seal-wrap svg { width: 100%; height: 100%; }
+  .shelf-note .seal-wrap .seal-label {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column;
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    font-size: 10px;
+  }
+  .shelf-note h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    font-size: 22px;
+    margin: 0 0 14px;
+  }
+  .shelf-note p {
+    max-width: 580px;
+    margin: 0 auto 12px;
+    font-style: italic;
+    font-size: 15px;
+  }
+  .shelf-note .editor {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    font-size: 11px;
+    margin-top: 22px;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    background: var(--bg);
+    padding: 0 0 32px;
+  }
+  footer .frieze {
+    width: 100%;
+    height: 26px;
+    background-image: repeating-linear-gradient(
+      90deg,
+      var(--primary) 0 2px,
+      transparent 2px 5px,
+      var(--primary) 5px 7px,
+      transparent 7px 12px
+    );
+    margin-bottom: 38px;
+  }
+  footer .cols {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    max-width: 980px;
+    margin: 0 auto 32px;
+    text-align: center;
+  }
+  footer .col h4 {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.36em;
+    margin: 0 0 16px;
+    color: var(--accent);
+  }
+  footer .col ul {
+    list-style: none;
+    padding: 0; margin: 0;
+  }
+  footer .col li {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 11px;
+    margin: 8px 0;
+  }
+  footer .col a { text-decoration: none; }
+  footer .colophon {
+    text-align: center;
+    font-style: italic;
+    font-size: 13px;
+    max-width: 620px;
+    margin: 24px auto 18px;
+    color: var(--primary);
+  }
+  footer .tailpiece {
+    text-align: center;
+    color: var(--accent);
+    letter-spacing: 0.7em;
+    font-size: 16px;
+    margin: 22px 0 14px;
+  }
+  footer .copyright {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.4em;
+    font-size: 10px;
+  }
+
+  /* ---------- TINY HELPERS ---------- */
+  .vine-glyph {
+    display: inline-block;
+    width: 12px; height: 12px;
+    fill: var(--secondary);
+    vertical-align: middle;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============= MASTHEAD ============= -->
+<header class="masthead">
+  <div class="greek-rule" aria-hidden="true">
+    <svg viewBox="1000 364 16511 4447" preserveAspectRatio="xMidYMid meet">
+      <g fill="currentColor">
+        <path d="M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z"/>
+        <path d="M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z"/>
+        <path d="M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z"/>
+        <path d="M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z"/>
+        <path d="M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z"/>
+      </g>
+    </svg>
+    <svg viewBox="1000 364 16511 4447" preserveAspectRatio="xMidYMid meet" style="transform:scaleX(-1)">
+      <g fill="currentColor">
+        <path d="M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z"/>
+        <path d="M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z"/>
+        <path d="M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z"/>
+        <path d="M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z"/>
+        <path d="M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z"/>
+      </g>
+    </svg>
+  </div>
+  <h1>Acta Diurna</h1>
+  <p class="latin-tag">Acta non verba — quae lecta sunt, manent</p>
+  <p class="issue-line">Vol. XII <span class="accent">·</span> Issue 47 <span class="accent">·</span> Kalends of November, MMXXIV</p>
+</header>
+
+<!-- ============= NAV ============= -->
+<nav class="primary" aria-label="Primary">
+  <ul>
+    <li><a href="page-1.html">Frontispiece</a></li>
+    <li aria-hidden="true"><svg class="vine" viewBox="0 0 200 200"><path d="m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312" transform="translate(0 -852.36) scale(0.9)"/></svg></li>
+    <li><a href="page-2.html">The Long Essay</a></li>
+    <li aria-hidden="true"><svg class="vine" viewBox="0 0 200 200"><circle cx="100" cy="100" r="6"/></svg></li>
+    <li><a href="page-3.html">Dispatches</a></li>
+    <li aria-hidden="true"><svg class="vine" viewBox="0 0 200 200"><circle cx="100" cy="100" r="6"/></svg></li>
+    <li><a href="page-4.html">Letters &amp; Marginalia</a></li>
+    <li aria-hidden="true"><svg class="vine" viewBox="0 0 200 200"><circle cx="100" cy="100" r="6"/></svg></li>
+    <li aria-current="page"><a href="page-5.html">The Library</a></li>
+    <li aria-hidden="true"><svg class="vine" viewBox="0 0 200 200"><circle cx="100" cy="100" r="6"/></svg></li>
+    <li><a href="page-6.html">Colophon &amp; Subscriptions</a></li>
+  </ul>
+</nav>
+
+<!-- ============= HERO ============= -->
+<section class="hero">
+  <div class="kicker">Bibliotheca · Reviews for the Reading Hour</div>
+  <h2>The Library</h2>
+  <p class="subtitle">A monthly ledger of recent volumes on antiquity — what to keep on the shelf, what to lend without expectation of return, and what to leave to the moths.</p>
+
+  <div class="wreath-wrap">
+    <svg class="wreath-frame" viewBox="0 0 323.7496 295.78787" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <g transform="translate(-64.080293,20.557994)" fill="#1a1a1a">
+        <path d="m 141.69922,-18.574219 c -11.04494,4.854973 -23.40097,9.4683311 -30.06445,22.6386721 -4.68287,7.1205619 -4.80387,16.3913319 -8.10547,24.1464849 6.1158,-6.501993 15.58349,-13.160155 20.97851,-20.7246099 6.01849,-9.4997444 9.07864,-18.0112601 17.19141,-26.0605471 z m 164.51172,0 c 8.11277,8.049287 11.17487,16.5608027 17.19336,26.0605471 5.39502,7.5644549 14.86076,14.2226169 20.97656,20.7246099 -3.3016,-7.755152 -3.4226,-17.025923 -8.10547,-24.1464849 -6.66348,-13.170341 -19.01951,-17.7836991 -30.06445,-22.6386721 z M 111.91016,-1.609375 c -5.62925,1.6211189 -10.63239,5.4766012 -14.578129,11.03125 -9.091887,10.794409 -10.650938,24.955987 -6.882812,42.029297 1.29642,4.515656 -0.546937,8.745577 -0.285157,12.960937 2.670395,-6.196346 5.695046,-11.891942 11.576168,-15.880859 13.11411,-8.396211 16.72071,-12.842155 20.07618,-20.757812 3.94553,-9.307642 4.67865,-10.690112 4.76562,-19.0429692 -3.8045,12.0144002 -15.28958,17.0564642 -23.05273,25.1679692 -3.989646,4.42761 -7.185187,9.557822 -9.003909,14.990234 l -0.279297,-0.25 c 0.955858,-4.806688 2.87563,-9.125741 3.980468,-13.814453 3.465218,-12.678655 2.753188,-27.9402133 13.683598,-36.433594 z m 223.7207,0 c 10.93041,8.4933807 10.21837,23.754939 13.68359,36.433594 1.10484,4.688712 3.02461,9.007765 3.98047,13.814453 l -0.2793,0.25 c -1.81872,-5.432412 -5.01426,-10.562624 -9.0039,-14.990234 -7.76315,-8.111504 -19.24824,-13.153569 -23.05274,-25.1679692 0.087,8.3528572 0.82205,9.7353272 4.76758,19.0429692 3.35547,7.915658 6.96011,12.361601 20.07422,20.757812 5.88113,3.988917 8.90578,9.684513 11.57617,15.880859 0.26178,-4.21536 -1.58157,-8.445281 -0.28515,-12.960937 3.76813,-17.07331 2.20907,-31.234888 -6.88282,-42.029297 -3.94574,-5.5546488 -8.94887,-9.4101311 -14.57812,-11.03125 z M 88.582031,21.103516 c -0.285043,-0.06111 -0.440803,0.189404 -0.662109,0.314453 -7.621928,10.996064 -14.276223,19.314775 -13.947266,34.09375 -1.026473,18.187407 10.514507,34.765271 11.671875,51.917971 1.750611,-13.130771 10.807487,-22.406215 18.300779,-32.583987 -0.98775,4.349179 -2.13436,8.562369 -4.115232,12.345703 -8.209219,14.068624 -16.380096,30.769014 -10.720703,48.769534 -0.130895,0.19017 -0.315508,0.44085 -0.527344,0.31054 -2.27427,-5.94788 -2.663387,-12.7527 -4.253906,-19.08984 C 80.527063,100.23951 68.939767,86.139797 72.300781,66.609375 70.526838,70.847055 69.808642,75.6298 68.869141,80.25 c -1.983204,11.940394 -3.039316,19.305723 -0.126953,30.27344 3.53927,13.75705 18.448306,28.93333 24.466796,41.53125 l 0.822266,0.74609 c -0.876637,-6.83476 -1.323965,-14.19285 0.382812,-20.71094 2.59375,-10.43136 9.722618,-20.62507 11.718748,-31.37695 1.04045,-8.431763 -1.27928,-17.779819 -2.15625,-25.910156 2.70485,-3.676944 5.2104,-7.469552 7.08399,-11.609375 2.47318,-6.247039 1.43629,-15.135756 2.17773,-21.894531 -0.99633,2.877898 -2.71112,5.366165 -4.65039,7.816406 -9.081552,9.36475 -19.478768,18.977574 -21.455078,32.550782 -0.331541,1.92903 -0.437578,3.9336 -0.933593,5.808593 -0.389229,0.193565 -0.390205,-0.311196 -0.554688,-0.433593 l 1.107422,-16.830078 c 0.382341,-16.439189 -6.55998,-34.665617 1.830078,-49.107422 z m 270.746089,0 c 8.39005,14.441805 1.44969,32.668233 1.83204,49.107422 l 1.10546,16.830078 c -0.16448,0.122397 -0.1635,0.627158 -0.55273,0.433593 -0.49601,-1.874993 -0.60401,-3.879563 -0.93555,-5.808593 -1.9763,-13.573208 -12.37352,-23.186032 -21.45507,-32.550782 -1.93927,-2.450241 -3.65406,-4.938508 -4.65039,-7.816406 0.74144,6.758775 -0.2935,15.647492 2.17968,21.894531 1.87359,4.139823 4.37719,7.932431 7.08203,11.609375 -0.87697,8.130337 -3.19474,17.478394 -2.15429,25.910156 1.99613,10.75188 9.125,20.94559 11.71875,31.37695 1.70678,6.51809 1.25749,13.87618 0.38086,20.71094 l 0.82226,-0.74609 c 6.01849,-12.59792 20.92948,-27.7742 24.46875,-41.53125 2.91236,-10.967717 1.85431,-18.333046 -0.1289,-30.27344 -0.9395,-4.6202 -1.6577,-9.402945 -3.43164,-13.640625 3.36101,19.530422 -8.22629,33.630135 -12.02735,50.572265 -1.59052,6.33714 -1.97962,13.14196 -4.25391,19.08984 -0.21183,0.13031 -0.39645,-0.12037 -0.52734,-0.31054 5.65939,-18.00052 -2.50953,-34.70091 -10.71875,-48.769534 -1.98087,-3.783334 -3.12944,-7.996524 -4.11719,-12.345703 7.4933,10.177772 16.55019,19.453217 18.30078,32.583987 1.15738,-17.152701 12.69836,-33.730564 11.67188,-51.917971 0.32896,-14.778975 -6.32338,-23.097686 -13.94531,-34.09375 -0.2213,-0.125049 -0.37903,-0.375561 -0.66407,-0.314453 z M 102.84375,113.50781 c 1.38902,13.9572 -3.957486,25.7937 -3.582031,39.80078 0.375454,8.46117 2.810341,15.95994 6.728511,22.70899 l -0.66406,0.002 c -5.29341,-7.87325 -9.426875,-16.2506 -15.613279,-23.74805 -9.602539,-10.48187 -21.854528,-21.22907 -23.115235,-35.79882 -1.630562,12.16681 0.562984,23.57309 5.390625,33.65625 4.82764,10.08317 12.289201,18.84243 21.19336,25.71093 l 4.148437,2.9043 c 7.340332,5.43365 13.122202,7.56579 20.175782,13.74609 v -0.75976 c -5.40191,-10.17041 -4.7081,-22.25194 -5.57031,-34.58985 -0.86221,-12.33788 -3.28109,-24.93288 -6.60938,-36.13085 z m 242.22266,0 -2.48243,7.50196 c -3.32829,11.19797 -5.74521,23.79297 -6.60742,36.13085 -0.86221,12.3379 -0.1684,24.41944 -5.57031,34.58985 v 0.75976 c 7.05358,-6.1803 12.8335,-8.31244 20.17383,-13.74609 l 4.14844,-2.9043 c 8.90416,-6.8685 16.36572,-15.62776 21.19336,-25.71093 4.82763,-10.08316 7.02118,-21.48944 5.39062,-33.65625 -1.26071,14.56975 -13.51269,25.31695 -23.11523,35.79882 -6.1864,7.49745 -10.31988,15.8748 -15.61329,23.74805 l -0.66406,-0.002 c 3.91817,-6.74905 6.35502,-14.24782 6.73047,-22.70899 0.37546,-14.00708 -4.973,-25.84358 -3.58398,-39.80078 z m -232.94532,37.26758 c 6.747,15.28492 3.57909,35.16958 12.58399,49.38672 2.47319,4.69926 6.55942,8.83184 10.0918,12.46094 l -0.16407,0.18945 c -3.19654,-1.69484 -6.16273,-4.11937 -8.99414,-6.9707 -15.38594,-14.3441 -38.33359,-16.33724 -47.496092,-39.86133 1.243053,8.63137 2.753739,17.29389 7.689453,24.54492 16.576719,24.26009 34.209669,24.68194 62.042969,31.15625 -12.7388,-11.66743 -14.84241,-29.06815 -20.34766,-44.48047 -3.70117,-9.44194 -9.27582,-18.09717 -15.40625,-26.42578 z m 223.66797,0 c -6.13043,8.32861 -11.70508,16.98384 -15.40625,26.42578 -5.50525,15.41232 -7.60885,32.81304 -20.34765,44.48047 28.78938,-6.10047 45.10756,-6.22279 62.04296,-31.15625 4.93571,-7.25103 6.4464,-15.91355 7.68946,-24.54492 -9.16251,23.52409 -32.1082,25.51723 -47.49414,39.86133 -2.83141,2.85133 -5.79956,5.27586 -8.9961,6.9707 l -0.16406,-0.18945 c 3.53238,-3.6291 7.61861,-7.76168 10.0918,-12.46094 9.0049,-14.21714 5.83698,-34.1018 12.58398,-49.38672 z"/>
+      </g>
+    </svg>
+    <span class="label">S · P · Q · R<em>libri legendi sunt</em></span>
+  </div>
+</section>
+
+<div class="meander-strip" aria-hidden="true"></div>
+
+<!-- ============= LEAD REVIEW ============= -->
+<section class="lead-review">
+  <div class="header-block">
+    <div class="review-meta">★ Lead Review · Critica Princeps ★</div>
+    <h1 class="review-title">Emperor of Rome</h1>
+    <p class="review-subtitle">Ruling the Ancient Roman World</p>
+    <p class="pub-line">Mary Beard &nbsp;·&nbsp; Profile Books, 2023 &nbsp;·&nbsp; 512 pp. &nbsp;·&nbsp; £30 / $35</p>
+    <div class="rosettes" aria-label="Five out of five rosettes">
+      <span class="rosette"></span><span class="rosette"></span><span class="rosette"></span><span class="rosette"></span><span class="rosette"></span>
+    </div>
+    <div class="byline-rule"></div>
+    <p class="byline">Reviewed by Theodora Vance<em>contributing critic, Faculty of Classics, Magdalen College, Oxford</em></p>
+  </div>
+
+  <div class="review-body">
+    <p>For thirty years Mary Beard has been the most public custodian of the Roman past in the English-speaking world, and for thirty years she has resisted the temptation, common to her trade, to write a book about emperors as if emperors were what mattered most. <em class="lat">Emperor of Rome</em>, her tenth full-length volume and the long-promised companion to <em class="lat">SPQR</em>, is therefore not the book one might expect: it is not a parade of Caesars from Augustus to Alexander Severus, marching obediently from page to page in their numismatic profiles. It is, instead, a book about the <em class="lat">idea</em> of the emperor — the role, the routine, the dinner menu, the bureaucratic shadow he cast over a world that very rarely saw him in person.</p>
+
+    <p>The conceit is announced on the first page and held with the discipline of a senatorial debate: Beard refuses chronology. Domitian and Trajan share a paragraph; Hadrian materialises beside Elagabalus; Caligula is summoned not for his vices but for the question of how a Roman emperor ate his lunch. This is, on the face of it, a perverse choice. It is also the book's chief glory. By dissolving the dynasty into themes — accession, palace, work, dinner, journey, succession — she allows the reader to see what the conventional biography conceals: that the imperial office, for all its theatrical individuation, was a remarkably stable bundle of obligations performed by interchangeable men, most of whom would have been astonished to be remembered at all.</p>
+
+    <p class="pull">"The emperor was less a person than a problem of logistics — a man who had to be everywhere, eat with everyone, and answer everybody's mail."</p>
+
+    <p>Beard is at her best on the paperwork. The chapter on <em class="lat">epistulae</em> — the imperial correspondence — is worth the price of admission. Drawing on Pliny's letters from Bithynia, on Hadrian's responses to provincials in Asia Minor, on the wooden tablets from Vindolanda and the Egyptian papyri from Oxyrhynchus, she reconstructs an emperor who was, more than anything, a man drowning in petitions. The figure who emerges is not Suetonius's monster nor Tacitus's hypocrite, but a slightly harassed administrator who has been asked, again, whether a small town in Pontus may build a new bath-house, and who replies, with a patience that reads almost like exhaustion, that they may.</p>
+
+    <p>This is the Beard manner: the deflation of grandeur not by sneering but by the patient accumulation of detail. When she turns to the emperor's table — and she devotes a long, marvellous chapter to it — the result is neither Petronian satire nor moralising lecture, but something closer to ethnography. Who carved the meat? Who tasted the wine first? Where did the slaves stand, and what did they hear? Beard's answer is that the imperial dinner was less a feast than a stage on which the entire political order of the empire was rehearsed, nightly, in front of an audience of perhaps thirty.</p>
+
+    <p>Not everything succeeds. The chapter on imperial women — Livia, Agrippina, Julia Domna, the formidable Severan matriarchs — feels compressed, almost dutiful, as though Beard is conscious of having said much of it before in <em class="lat">Women &amp; Power</em>. The treatment of the Tetrarchy is brisk to the point of impatience, and readers hoping for a sustained reckoning with the Christian emperors will need to look elsewhere; Constantine appears mostly as an awkward coda. Beard is candid about these omissions — she announces in the introduction that her emperor is the emperor of the first three centuries, not the late-antique autocrat of the fourth — but the announcement does not quite excuse the imbalance.</p>
+
+    <p>What it does excuse, and gloriously so, is the book's refusal to be a textbook. <em class="lat">Emperor of Rome</em> is the work of a scholar who has stopped trying to convince anyone of anything and has instead settled into the harder business of looking carefully. The footnotes are a pleasure in themselves: a running, slightly mischievous commentary in which Beard quarrels with Ronald Syme, agrees reluctantly with Fergus Millar, and confesses, on page 387, that she has changed her mind about Commodus. One does not often read a classicist confessing in print to having changed her mind. It is the kind of intellectual courtesy that makes the book feel less like a monument than a long, generous conversation.</p>
+
+    <p>Profile Books have produced the volume with their customary care: the colour plates are well chosen (the marble portrait of Caracalla from Berlin, scowling out of the page like a bouncer, is worth lingering over), the maps are legible, the index is — rare praise — actually useful. At £30 for 512 pages of intelligent, unhurried, frequently funny prose, it is the best classical bargain of the season. Buy it; lend it cautiously; expect not to get it back.</p>
+
+    <p>If <em class="lat">SPQR</em> was Beard's argument with the long arc of Roman history, <em class="lat">Emperor of Rome</em> is her argument with the men who sat, briefly and uncomfortably, at its summit. The argument, in the end, is that they were not as interesting as we have been told, and that this is precisely what makes them worth our attention. It is a quietly subversive thesis, advanced with the authority of someone who has earned the right to be quiet. The shelf of books on the Caesars is very long. This one belongs near the top of it.</p>
+
+    <div class="end-mark">·  ·  ·</div>
+  </div>
+</section>
+
+<div class="meander-strip" aria-hidden="true"></div>
+
+<!-- ============= NOTICES ============= -->
+<section class="notices">
+  <h2 class="section-title">Shorter Notices</h2>
+  <p class="section-title-deck">Three volumes recently arrived in our offices in Bloomsbury — read, weighed, and committed to the record.</p>
+
+  <div class="notices-grid">
+
+    <article class="card">
+      <div class="key-top" aria-hidden="true"></div>
+      <div class="body">
+        <div class="category">Poetry · Translation</div>
+        <h3>The Silvae</h3>
+        <p class="author">Publius Papinius Statius</p>
+        <p class="author">translated by D. R. Shackleton Bailey, revised by Christopher A. Parrott</p>
+        <p class="pub">Loeb Classical Library 206 · Harvard University Press, 2024 · 528 pp. · $30</p>
+        <div class="rosettes" aria-label="Four out of five rosettes">
+          <span class="rosette"></span><span class="rosette"></span><span class="rosette"></span><span class="rosette"></span><span class="rosette empty"></span>
+        </div>
+        <div class="ruler"></div>
+        <p class="deck">Statius's occasional poems — the consolations, the wedding hymn for Stella, the manic poem on the Via Domitiana — have always lived in the long shadow of the <em>Thebaid</em>. Parrott's revision of Shackleton Bailey is sober where it ought to be and sparkling where Statius is, restoring to the sequence its flickering, almost Baroque, instability of tone.</p>
+        <p class="reviewer">— Notice by L. Whitcombe<em>Senior Lecturer, King's College London</em></p>
+        <p class="price">Cloth · $30.00</p>
+      </div>
+      <div class="key-bottom" aria-hidden="true"></div>
+    </article>
+
+    <article class="card">
+      <div class="key-top" aria-hidden="true"></div>
+      <div class="body">
+        <div class="category">Monograph · Frontier Studies</div>
+        <h3>The Limes Germanicus</h3>
+        <p class="author">Stone, Earth, and the Edge of Empire, AD 83–260</p>
+        <p class="author">Hartmut F. Reinhardt</p>
+        <p class="pub">Cambridge University Press, 2024 · 386 pp. · £75</p>
+        <div class="rosettes" aria-label="Four out of five rosettes">
+          <span class="rosette"></span><span class="rosette"></span><span class="rosette"></span><span class="rosette"></span><span class="rosette empty"></span>
+        </div>
+        <div class="ruler"></div>
+        <p class="deck">Reinhardt synthesises three decades of German rescue archaeology — from the Saalburg to the Odenwald line — into a single, lucid argument: the <em>limes</em> was less a wall than a permeable apparatus of customs posts, watchtowers, and negotiated permissions. Indispensable; the maps alone repay the price.</p>
+        <p class="reviewer">— Notice by F. Marcellus<em>Roman Frontier Project, Newcastle</em></p>
+        <p class="price">Cloth · £75.00</p>
+      </div>
+      <div class="key-bottom" aria-hidden="true"></div>
+    </article>
+
+    <article class="card">
+      <div class="key-top" aria-hidden="true"></div>
+      <div class="body">
+        <div class="category">Exhibition Catalogue</div>
+        <h3>Faces of the Republic</h3>
+        <p class="author">Roman Portraiture from the Late Republic to Augustus</p>
+        <p class="author">edited by Anne Marie Nielsen &amp; Jan Stubbe Østergaard</p>
+        <p class="pub">Ny Carlsberg Glyptotek, Copenhagen, 2024 · 312 pp. · DKK 395</p>
+        <div class="rosettes" aria-label="Three out of five rosettes">
+          <span class="rosette"></span><span class="rosette"></span><span class="rosette"></span><span class="rosette empty"></span><span class="rosette empty"></span>
+        </div>
+        <div class="ruler"></div>
+        <p class="deck">The Glyptotek's portraits — those magnificent, lined, sceptical Republican heads — deserve a catalogue that matches them. This one almost does. Nielsen's introductory essay on <em>verism</em> is exemplary; the photography, alas, occasionally flatters where it should interrogate. Still, an essential souvenir of an essential collection.</p>
+        <p class="reviewer">— Notice by H. Aurelius<em>Curator, Antikensammlung, Berlin</em></p>
+        <p class="price">Paperback · DKK 395</p>
+      </div>
+      <div class="key-bottom" aria-hidden="true"></div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============= SHELF NOTE ============= -->
+<section class="shelf-note">
+  <div class="seal-wrap">
+    <svg viewBox="0 0 117.78949 118.25037" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <g transform="translate(-75.727539,-121.57078)" fill="#1a1a1a">
+        <circle cx="134.6" cy="180.7" r="48" fill="none" stroke="#1a1a1a" stroke-width="0.6"/>
+        <circle cx="134.6" cy="180.7" r="42" fill="none" stroke="#a93226" stroke-width="0.4"/>
+      </g>
+      <g fill="#1a1a1a" opacity="0.85">
+        <path d="M30 60 Q 35 40 58 38 Q 50 50 50 62 Q 38 64 30 60 Z"/>
+        <path d="M88 60 Q 83 40 60 38 Q 68 50 68 62 Q 80 64 88 60 Z"/>
+        <path d="M28 80 Q 32 65 50 70 Q 44 80 46 88 Q 34 90 28 80 Z"/>
+        <path d="M90 80 Q 86 65 68 70 Q 74 80 72 88 Q 84 90 90 80 Z"/>
+        <path d="M34 100 Q 40 90 54 92 Q 50 102 52 108 Q 40 108 34 100 Z"/>
+        <path d="M84 100 Q 78 90 64 92 Q 68 102 66 108 Q 78 108 84 100 Z"/>
+      </g>
+    </svg>
+    <span class="seal-label">Editor's<br>Seal</span>
+  </div>
+  <h2>From the Books Editor</h2>
+  <p>Volumes for review may be sent to the books desk at 14 Bedford Square, London WC1B 3JA. We acknowledge all parcels; we review, regrettably, only a quarter. Self-published works are read, but rarely twice.</p>
+  <p>Forthcoming in our December number: Catherine Edwards on the new Suetonius from Penguin; Llewelyn Morgan on Horace's <em>Odes</em> in modern verse; and a long essay on the afterlife of Pliny the Younger in the eighteenth-century English country house.</p>
+  <p class="editor">— A. Caelius Sabinus, Books Editor</p>
+</section>
+
+<!-- ============= FOOTER ============= -->
+<footer>
+  <div class="frieze" aria-hidden="true"></div>
+  <div class="cols">
+    <div class="col">
+      <h4>Sections</h4>
+      <ul>
+        <li><a href="page-1.html">Frontispiece</a></li>
+        <li><a href="page-2.html">The Long Essay</a></li>
+        <li><a href="page-3.html">Dispatches from the Field</a></li>
+        <li><a href="page-4.html">Letters &amp; Marginalia</a></li>
+      </ul>
+    </div>
+    <div class="col">
+      <h4>The Library</h4>
+      <ul>
+        <li><a href="page-5.html">Current Reviews</a></li>
+        <li><a href="page-5.html">Shorter Notices</a></li>
+        <li><a href="page-5.html">Books Received</a></li>
+        <li><a href="page-5.html">Forthcoming</a></li>
+      </ul>
+    </div>
+    <div class="col">
+      <h4>The House</h4>
+      <ul>
+        <li><a href="page-6.html">Colophon</a></li>
+        <li><a href="page-6.html">Subscriptions</a></li>
+        <li><a href="page-6.html">Contributors</a></li>
+        <li><a href="page-6.html">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <p class="colophon">Set in Playfair Display and Lora. Printed at the Aldine Press, Bloomsbury, on Travertine cream stock. <em>Acta Diurna</em> appears on the Kalends of each month, save August, when the editors are at their reading.</p>
+  <div class="tailpiece">❦ · ❦ · ❦</div>
+  <p class="copyright">© MMXXIV · Acta Diurna · All Rights Reserved · S·P·Q·R</p>
+</footer>
+
+</body>
+</html>

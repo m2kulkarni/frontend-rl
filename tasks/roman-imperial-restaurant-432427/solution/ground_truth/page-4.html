@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>De Domo Nostra — Of Our House · Triclinium Aureum</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  /* ---------- Page foundation ---------- */
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    font-size: 17px;
+    line-height: 1.7;
+  }
+  a { color: var(--text-emphasis); text-decoration: none; }
+
+  /* travertine speckle */
+  body::before {
+    content: "";
+    position: fixed; inset: 0;
+    background-image:
+      radial-gradient(rgba(120,90,40,.06) 1px, transparent 1.4px),
+      radial-gradient(rgba(120,90,40,.04) 1px, transparent 1px);
+    background-size: 7px 7px, 13px 13px;
+    background-position: 0 0, 3px 5px;
+    pointer-events: none;
+    z-index: 0;
+  }
+  main, header, footer { position: relative; z-index: 1; }
+
+  /* ---------- Display & axis ---------- */
+  h1, h2, h3, .caps {
+    font-family: var(--font-display), serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    text-align: center;
+  }
+  h1 { font-size: 2.6rem; letter-spacing: 0.32em; margin: 0; }
+  h2 { font-size: 1.5rem; letter-spacing: 0.28em; margin: 0 0 1.2em; }
+  h3 { font-size: 1.05rem; letter-spacing: 0.24em; margin: 0 0 .8em; }
+  p  { text-align: justify; hyphens: auto; }
+  .latin {
+    font-variant: small-caps;
+    letter-spacing: 0.08em;
+    color: var(--text-emphasis);
+  }
+
+  /* ---------- Greek-key strip (CSS pattern) ---------- */
+  .meander {
+    height: 22px;
+    background-image:
+      linear-gradient(var(--ornament), var(--ornament)),
+      linear-gradient(var(--ornament), var(--ornament));
+    background-repeat: repeat-x, no-repeat;
+    background-size: 44px 22px, 100% 22px;
+    background-position: 0 0, 0 0;
+    /* fallback solid line */
+    position: relative;
+  }
+  .meander {
+    background:
+      repeating-linear-gradient(90deg,
+        var(--ornament) 0 2px,
+        transparent 2px 6px,
+        var(--ornament) 6px 8px,
+        transparent 8px 14px,
+        var(--ornament) 14px 16px,
+        transparent 16px 22px
+      );
+    border-top: 2px solid var(--ornament);
+    border-bottom: 2px solid var(--ornament);
+    height: 14px;
+  }
+  .meander.thin { height: 8px; border-width: 1px; }
+
+  /* ---------- Navigation ---------- */
+  .nav-frieze {
+    background: var(--bg);
+    padding: 0;
+  }
+  .nav-inner {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 2rem;
+    padding: 1.4rem 2.5rem;
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+  .nav-side {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.9rem;
+    flex-wrap: wrap;
+  }
+  .nav-side.left { justify-content: flex-end; }
+  .nav-side.right { justify-content: flex-start; }
+  .nav-side a {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 0.72rem;
+    color: var(--text);
+    position: relative;
+    padding: 0.35rem 0.2rem;
+  }
+  .nav-side a[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    left: 50%; bottom: -0.3rem;
+    width: 7px; height: 7px;
+    background: var(--primary);
+    border-radius: 50%;
+    transform: translateX(-50%);
+  }
+  .nav-vine {
+    width: 14px; height: 14px;
+    opacity: 0.7;
+    fill: var(--ornament);
+    flex-shrink: 0;
+  }
+  .nav-title {
+    font-family: var(--font-display), serif;
+    font-size: 1.35rem;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: var(--text);
+    white-space: nowrap;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    padding: 4rem 2rem 3rem;
+    text-align: center;
+    position: relative;
+  }
+  .hero-frame {
+    max-width: 760px;
+    margin: 0 auto;
+    position: relative;
+    padding: 2.5rem 3rem;
+  }
+  .hero-wreath {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    opacity: 0.85;
+  }
+  .hero-wreath svg {
+    width: 100%;
+    height: auto;
+    max-width: 520px;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+  }
+  .hero .eyebrow {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.4em;
+    font-size: 0.78rem;
+    color: var(--accent);
+    margin-bottom: 1.4rem;
+  }
+  .hero h1 {
+    color: var(--text);
+    margin-bottom: 0.6rem;
+  }
+  .hero .subtitle {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    text-transform: none;
+    font-size: 1.05rem;
+    letter-spacing: 0.05em;
+    color: var(--text-emphasis);
+    margin-top: 0.6rem;
+  }
+  .hero .dedication {
+    margin-top: 1.6rem;
+    font-style: italic;
+    color: #4a3a2a;
+    font-size: 0.95rem;
+  }
+
+  /* ---------- Section divider ---------- */
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 2rem 0 2.5rem;
+  }
+  .divider .line {
+    flex: 0 1 280px;
+    height: 14px;
+    background: repeating-linear-gradient(90deg,
+      var(--ornament) 0 2px,
+      transparent 2px 6px,
+      var(--ornament) 6px 8px,
+      transparent 8px 14px,
+      var(--ornament) 14px 16px,
+      transparent 16px 22px
+    );
+    border-top: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+  }
+  .divider .seal {
+    width: 64px; height: 64px;
+    flex-shrink: 0;
+  }
+  .divider .seal svg {
+    width: 100%; height: 100%;
+    fill: var(--accent);
+  }
+
+  /* ---------- Content layout ---------- */
+  main {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 2rem 4rem;
+  }
+
+  /* Card with Greek-key border */
+  .card {
+    background: var(--surface);
+    padding: 2.4rem 2.6rem 2rem;
+    margin: 0 auto 2.5rem;
+    position: relative;
+    border: 1px solid rgba(169, 50, 38, 0.15);
+    box-shadow: 0 1px 0 rgba(0,0,0,0.03);
+  }
+  .card::before, .card::after {
+    content: "";
+    position: absolute;
+    left: 14px; right: 14px;
+    height: 10px;
+    background: repeating-linear-gradient(90deg,
+      var(--ornament) 0 2px,
+      transparent 2px 6px,
+      var(--ornament) 6px 8px,
+      transparent 8px 14px,
+      var(--ornament) 14px 16px,
+      transparent 16px 22px
+    );
+    border-top: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+  }
+  .card::before { top: 14px; }
+  .card::after  { bottom: 14px; }
+  .card-inner {
+    padding: 1.8rem 1rem 1.4rem;
+  }
+  .card-laurel {
+    width: 80px; height: 80px;
+    margin: 0 auto 1rem;
+    display: block;
+    fill: var(--accent);
+  }
+  .card-foot {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.4rem;
+    height: 10px;
+    background: repeating-linear-gradient(90deg,
+      var(--ornament) 0 2px,
+      transparent 2px 6px,
+      var(--ornament) 6px 8px,
+      transparent 8px 14px,
+      var(--ornament) 14px 16px,
+      transparent 16px 22px
+    ) center / 180px 10px no-repeat;
+  }
+
+  /* Two-column for founders */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .lead {
+    font-size: 1.12rem;
+    text-align: center;
+    color: #2a2018;
+    max-width: 60ch;
+    margin: 0 auto 1.4rem;
+    font-style: italic;
+  }
+  .dropcap::first-letter {
+    font-family: var(--font-display), serif;
+    font-size: 3.4rem;
+    float: left;
+    line-height: 0.9;
+    margin: 0.25rem 0.6rem 0 0;
+    color: var(--primary);
+    font-weight: 600;
+  }
+
+  blockquote {
+    margin: 1.6rem 2rem;
+    padding: 0.6rem 1.4rem;
+    border-left: 3px solid var(--secondary);
+    font-style: italic;
+    color: #3a2a1c;
+    text-align: left;
+  }
+  blockquote cite {
+    display: block;
+    margin-top: 0.5rem;
+    font-style: normal;
+    font-variant: small-caps;
+    letter-spacing: 0.1em;
+    font-size: 0.85rem;
+    color: var(--text-emphasis);
+  }
+
+  /* Chronicle list */
+  .chronicle {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.1rem;
+  }
+  .chronicle li {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 1.4rem;
+    align-items: baseline;
+    padding-bottom: 1rem;
+    border-bottom: 1px dotted rgba(169,50,38,0.25);
+  }
+  .chronicle li:last-child { border-bottom: none; }
+  .chronicle .year {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.95rem;
+    color: var(--primary);
+    text-align: right;
+    font-variant: small-caps;
+  }
+  .chronicle .what {
+    text-align: left;
+  }
+  .chronicle .what strong {
+    font-family: var(--font-display), serif;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 0.85rem;
+    color: var(--text);
+    display: block;
+    margin-bottom: 0.2rem;
+  }
+
+  /* Footer */
+  footer.frieze {
+    background: var(--primary);
+    color: var(--secondary);
+    margin-top: 3rem;
+    position: relative;
+  }
+  .footer-main {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 2rem;
+    padding: 2.2rem 3rem;
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+  .rosette {
+    display: flex;
+    gap: 1rem;
+  }
+  .rosette span {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    border: 2px solid var(--secondary);
+    position: relative;
+  }
+  .rosette span::before {
+    content: "";
+    position: absolute; inset: 4px;
+    border-radius: 50%;
+    background: var(--secondary);
+    opacity: 0.4;
+  }
+  .footer-center {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 0.85rem;
+    line-height: 1.9;
+    color: var(--secondary);
+  }
+  .footer-center .sep {
+    margin: 0 0.6rem;
+    color: rgba(201,162,58,0.6);
+  }
+  .footer-sub {
+    background: var(--bg);
+    color: var(--text);
+    text-align: center;
+    padding: 0.85rem 1rem;
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 0.72rem;
+    border-top: 2px solid var(--ornament);
+    border-bottom: 2px solid var(--ornament);
+  }
+  .footer-sub svg {
+    width: 14px; height: 14px;
+    vertical-align: middle;
+    margin: 0 0.8rem;
+    fill: var(--ornament);
+  }
+  .corner-laurel {
+    position: absolute;
+    width: 70px; height: 70px;
+    opacity: 0.45;
+    pointer-events: none;
+  }
+  .corner-laurel svg { width: 100%; height: 100%; }
+  .corner-laurel.tl { top: 8px; left: 8px; }
+  .corner-laurel.tr { top: 8px; right: 8px; transform: scaleX(-1); }
+  .corner-laurel.bl { bottom: 8px; left: 8px; transform: scaleY(-1); }
+  .corner-laurel.br { bottom: 8px; right: 8px; transform: scale(-1,-1); }
+
+  /* Inline reused SVG: vine leaf */
+  .vine-inline {
+    width: 16px; height: 16px;
+    fill: var(--ornament);
+    vertical-align: middle;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============== NAV FRIEZE ============== -->
+<header class="nav-frieze">
+  <div class="meander thin" aria-hidden="true"></div>
+  <div class="nav-inner">
+    <div class="nav-side left">
+      <a href="page-1.html">Domus</a>
+      <svg class="nav-vine" viewBox="0 0 200 200" aria-hidden="true"><path d="m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z" transform="translate(0 -852.36)"/></svg>
+      <a href="page-2.html">Carta</a>
+      <svg class="nav-vine" viewBox="0 0 200 200" aria-hidden="true"><path d="m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z" transform="translate(0 -852.36)"/></svg>
+      <a href="page-3.html">Cellarium</a>
+    </div>
+    <div class="nav-title">Triclinium Aureum</div>
+    <div class="nav-side right">
+      <a href="page-4.html" aria-current="page">De Domo</a>
+      <svg class="nav-vine" viewBox="0 0 200 200" aria-hidden="true"><path d="m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z" transform="translate(0 -852.36)"/></svg>
+      <a href="page-5.html">Convivia</a>
+      <svg class="nav-vine" viewBox="0 0 200 200" aria-hidden="true"><path d="m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z" transform="translate(0 -852.36)"/></svg>
+      <a href="page-6.html">Ad Nos</a>
+    </div>
+  </div>
+  <div class="meander thin" aria-hidden="true"></div>
+</header>
+
+<!-- ============== HERO ============== -->
+<section class="hero">
+  <div class="hero-frame">
+    <div class="hero-wreath" aria-hidden="true">
+      <svg viewBox="0 0 323 295" xmlns="http://www.w3.org/2000/svg">
+        <g fill="none" stroke="#c9a23a" stroke-width="1.4" opacity="0.85">
+          <!-- Stylised laurel: two arching sprigs of leaves -->
+          <path d="M161 30 C 90 40, 40 110, 50 200 C 60 260, 110 280, 161 280" />
+          <path d="M161 30 C 232 40, 282 110, 272 200 C 262 260, 212 280, 161 280" />
+          <!-- left leaves -->
+          <g fill="#c9a23a" stroke="none">
+            <ellipse cx="60" cy="80" rx="14" ry="5" transform="rotate(-40 60 80)"/>
+            <ellipse cx="48" cy="115" rx="15" ry="5" transform="rotate(-25 48 115)"/>
+            <ellipse cx="44" cy="150" rx="15" ry="5" transform="rotate(-5 44 150)"/>
+            <ellipse cx="48" cy="185" rx="15" ry="5" transform="rotate(15 48 185)"/>
+            <ellipse cx="60" cy="220" rx="14" ry="5" transform="rotate(35 60 220)"/>
+            <ellipse cx="82" cy="250" rx="13" ry="5" transform="rotate(55 82 250)"/>
+            <ellipse cx="115" cy="270" rx="12" ry="4" transform="rotate(75 115 270)"/>
+            <ellipse cx="80" cy="60" rx="13" ry="4" transform="rotate(-55 80 60)"/>
+            <ellipse cx="110" cy="42" rx="12" ry="4" transform="rotate(-70 110 42)"/>
+          </g>
+          <!-- right leaves -->
+          <g fill="#c9a23a" stroke="none">
+            <ellipse cx="262" cy="80" rx="14" ry="5" transform="rotate(40 262 80)"/>
+            <ellipse cx="274" cy="115" rx="15" ry="5" transform="rotate(25 274 115)"/>
+            <ellipse cx="278" cy="150" rx="15" ry="5" transform="rotate(5 278 150)"/>
+            <ellipse cx="274" cy="185" rx="15" ry="5" transform="rotate(-15 274 185)"/>
+            <ellipse cx="262" cy="220" rx="14" ry="5" transform="rotate(-35 262 220)"/>
+            <ellipse cx="240" cy="250" rx="13" ry="5" transform="rotate(-55 240 250)"/>
+            <ellipse cx="207" cy="270" rx="12" ry="4" transform="rotate(-75 207 270)"/>
+            <ellipse cx="242" cy="60" rx="13" ry="4" transform="rotate(55 242 60)"/>
+            <ellipse cx="212" cy="42" rx="12" ry="4" transform="rotate(70 212 42)"/>
+          </g>
+          <!-- crown ribbon -->
+          <path d="M140 28 Q 161 18, 182 28" stroke="#a93226" stroke-width="2" fill="none"/>
+        </g>
+      </svg>
+    </div>
+    <div class="hero-content">
+      <div class="eyebrow">Liber Domus &middot; IV</div>
+      <h1>De Domo Nostra</h1>
+      <div class="subtitle">— Of Our House —</div>
+      <p class="dedication">A chronicle of the founders, the building, the kitchen,<br>and the hand that painted these walls.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============== DIVIDER ============== -->
+<div class="divider" aria-hidden="true">
+  <span class="line"></span>
+  <span class="seal">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="46" fill="none" stroke="#4d1c5e" stroke-width="1.2"/>
+      <circle cx="50" cy="50" r="38" fill="none" stroke="#4d1c5e" stroke-width="0.8"/>
+      <g fill="#4d1c5e">
+        <ellipse cx="50" cy="14" rx="3" ry="6"/>
+        <ellipse cx="68" cy="20" rx="3" ry="6" transform="rotate(30 68 20)"/>
+        <ellipse cx="82" cy="34" rx="3" ry="6" transform="rotate(60 82 34)"/>
+        <ellipse cx="86" cy="50" rx="3" ry="6" transform="rotate(90 86 50)"/>
+        <ellipse cx="82" cy="66" rx="3" ry="6" transform="rotate(120 82 66)"/>
+        <ellipse cx="68" cy="80" rx="3" ry="6" transform="rotate(150 68 80)"/>
+        <ellipse cx="50" cy="86" rx="3" ry="6"/>
+        <ellipse cx="32" cy="80" rx="3" ry="6" transform="rotate(-150 32 80)"/>
+        <ellipse cx="18" cy="66" rx="3" ry="6" transform="rotate(-120 18 66)"/>
+        <ellipse cx="14" cy="50" rx="3" ry="6" transform="rotate(-90 14 50)"/>
+        <ellipse cx="18" cy="34" rx="3" ry="6" transform="rotate(-60 18 34)"/>
+        <ellipse cx="32" cy="20" rx="3" ry="6" transform="rotate(-30 32 20)"/>
+      </g>
+      <text x="50" y="55" text-anchor="middle" font-family="Cinzel, serif" font-size="14" font-weight="700" fill="#4d1c5e" letter-spacing="2">TA</text>
+    </svg>
+  </span>
+  <span class="line"></span>
+</div>
+
+<!-- ============== MAIN ============== -->
+<main>
+
+  <!-- FOUNDING -->
+  <article class="card">
+    <div class="card-inner">
+      <svg class="card-laurel" viewBox="0 0 100 100" aria-hidden="true">
+        <circle cx="50" cy="50" r="40" fill="none" stroke="#4d1c5e" stroke-width="1"/>
+        <g fill="#4d1c5e">
+          <ellipse cx="20" cy="50" rx="4" ry="10" transform="rotate(-10 20 50)"/>
+          <ellipse cx="26" cy="32" rx="4" ry="9" transform="rotate(-35 26 32)"/>
+          <ellipse cx="40" cy="20" rx="4" ry="9" transform="rotate(-60 40 20)"/>
+          <ellipse cx="80" cy="50" rx="4" ry="10" transform="rotate(10 80 50)"/>
+          <ellipse cx="74" cy="32" rx="4" ry="9" transform="rotate(35 74 32)"/>
+          <ellipse cx="60" cy="20" rx="4" ry="9" transform="rotate(60 60 20)"/>
+          <ellipse cx="26" cy="68" rx="4" ry="9" transform="rotate(-145 26 68)"/>
+          <ellipse cx="40" cy="80" rx="4" ry="9" transform="rotate(-120 40 80)"/>
+          <ellipse cx="74" cy="68" rx="4" ry="9" transform="rotate(145 74 68)"/>
+          <ellipse cx="60" cy="80" rx="4" ry="9" transform="rotate(120 60 80)"/>
+        </g>
+        <text x="50" y="56" text-anchor="middle" font-family="Cinzel, serif" font-size="16" font-weight="700" fill="#4d1c5e">I</text>
+      </svg>
+      <h2>The Founding</h2>
+      <p class="lead">In the year <span class="latin">MMXIX</span>, two classicists turned cooks set down their books and lit a fire on the Aventine.</p>
+      <p class="dropcap">Triclinium Aureum was opened on the seventeenth of October, <span class="latin">MMXIX</span>, by <strong>Marcus Vibius Sabinus</strong> and his daughter <strong>Livia Vibia</strong>. Father and daughter had each spent a long apprenticeship among manuscripts before they spent any among saucepans — he as a Latinist at the Collegio Romano, she as a doctoral student of agrarian Rome at the Scuola Normale in Pisa. The kitchen was the late convert; the philology came first.</p>
+      <p>The notion of a supper-house cooking from the <em>De Re Coquinaria</em> began as a private joke at the family table in Trastevere, and was tested upon friends for the better part of three years before it acquired premises, a licence, and a sign. The sign — a single gilt laurel above an unmarked door at <span class="latin">Via di Sant'Anselmo, 14</span> — is the only announcement the house makes to the street.</p>
+      <div class="card-foot" aria-hidden="true"></div>
+    </div>
+  </article>
+
+  <!-- THE BUILDING -->
+  <article class="card">
+    <div class="card-inner">
+      <h2>The Building</h2>
+      <p class="lead">A printing-works, vaulted in brick, gave the house its bones.</p>
+      <div class="two-col">
+        <div>
+          <h3>The Shell</h3>
+          <p>The premises had stood empty since 2014, when the last of the Aventine printing concerns — <em>Tipografia Pellegrini</em>, founded 1898 — closed its presses. The Pellegrini building is a long, narrow rectangle running back from the street, roofed by three shallow brick groin vaults of the late nineteenth century, themselves built upon foundations of Roman opus reticulatum visible still in the cellar.</p>
+          <p>It was these vaults that decided the matter. They gave the long room its acoustic and its proportions — twenty-eight metres by nine, with the central vault rising to five and a half — and they accepted lime plaster without complaint. The presses were sold to a museum at Treviso; the iron rails on which they had run are preserved in the floor.</p>
+        </div>
+        <div>
+          <h3>The Triclinium</h3>
+          <p>The dining-room is laid out on the antique plan: three sides of low couches, the fourth open to the service. Twenty-one diners may recline at one sitting, never more. A second, smaller chamber — the <span class="latin">cubiculum</span> — seats six at a low marble table, and is reserved for the wine suppers described elsewhere in this book.</p>
+          <p>The pavement is the original printing-works terrazzo, scrubbed and waxed. The walls were taken back to brick, replastered in seven coats of slaked lime, and given over to the muralist named below.</p>
+        </div>
+      </div>
+      <div class="card-foot" aria-hidden="true"></div>
+    </div>
+  </article>
+
+  <!-- KITCHEN GOVERNANCE -->
+  <article class="card">
+    <div class="card-inner">
+      <h2>The Governance of the Kitchen</h2>
+      <p class="lead">Three writers preside, dead these nineteen centuries: <span class="latin">Apicius</span>, <span class="latin">Cato</span>, <span class="latin">Columella</span>.</p>
+      <p class="dropcap">The kitchen is governed by recipes drawn from the ten books of <em>De Re Coquinaria</em>, attributed to Apicius, and by the agricultural writers <strong>Cato the Elder</strong> (<em>De Agri Cultura</em>) and <strong>Columella</strong> (<em>De Re Rustica</em>), with reference to the elder Pliny on questions of substance and to Galen where the matter has crossed into medicine. We adjust only where ingredients are no longer to be had — the African silphium being long extinct, we use asafoetida; the Roman <span class="latin">liquamen</span> of mackerel viscera being unobtainable in commerce, we ferment our own each spring in glazed jars on the roof, after a recipe communicated by the Gargilius institute at Pompeii.</p>
+      <blockquote>
+        Patinam de piris: pira elixa et purgata e medio teres cum pipere, cumino, melle, passo, liquamine, oleo modico.
+        <cite>— Apicius, IV. ii. 35 (rendered nightly as our <span class="latin">Patina Pirorum</span>)</cite>
+      </blockquote>
+      <p>Where a Roman text calls for a measurement we cannot verify — the <span class="latin">cyathus</span>, the <span class="latin">acetabulum</span>, the loose handful — we cook the dish three times in three weights and decide by argument at the table. The argument is preserved in a black notebook kept by Livia in the pass; it now runs to four hundred and sixty pages and is unlikely to be finished.</p>
+      <p>Bread, wine, and oil are the three things we do not adapt. The bread is a <span class="latin">panis quadratus</span> of stone-milled spelt, baked each morning by Tommaso Ricci in a wood oven on the Via Marmorata. The oil is a single Sabine grove (Casperia, harvest of November) pressed within twelve hours. The wine is treated in a separate book — <em>Vina Nobilia</em> — to which the reader is referred.</p>
+      <div class="card-foot" aria-hidden="true"></div>
+    </div>
+  </article>
+
+  <!-- THE FRESCOES -->
+  <article class="card">
+    <div class="card-inner">
+      <h2>The Frescoes</h2>
+      <p class="lead">The dining-room is painted, wall to vault, by one hand.</p>
+      <p>The fresco cycle that surrounds the diner on three sides is the work of <strong>Elena Ricci</strong> of Naples, conservator and muralist, trained at the Istituto Centrale per il Restauro and for fifteen years a member of the team responsible for the stabilisation of the second-style cycles at Pompeii and Boscoreale. Signora Ricci painted the room over four months in the spring and summer of <span class="latin">MMXIX</span>, working in true buon fresco upon damp lime, after the manner — and at full scale — of the megalography in the Villa of the Mysteries.</p>
+      <p>The figures are not copies. The composition follows the Mysteries cycle in its rhythm of standing forms upon a continuous Pompeian-red ground, divided by slender black pilasters; but the figures themselves are taken from other rooms — the seated lyre-player from the Villa of P. Fannius Synistor, the winged genius from the House of the Vettii, the offering-bearer from a fragment in the Naples archaeological museum, inv. 9106. Signora Ricci has called this her <em>centone</em>, her patchwork; we call it the room.</p>
+      <p>The pigments are those a Roman painter would have known — cinnabar for the field, Egyptian blue for the pilaster grounds, yellow ochre and madder, lamp black, and a single passage of leaf gold above the entrance, applied <em>a missione</em>. The room is lit by twelve oil lamps and six candles. Electric light is not admitted.</p>
+      <div class="card-foot" aria-hidden="true"></div>
+    </div>
+  </article>
+
+  <!-- CHRONICLE -->
+  <article class="card">
+    <div class="card-inner">
+      <h2>A Brief Chronicle</h2>
+      <ul class="chronicle">
+        <li>
+          <span class="year">MMXVI</span>
+          <span class="what"><strong>The Private Suppers Begin</strong>The first cooked-from-Apicius supper is given for nine friends in the Vibius family flat at Trastevere. The <span class="latin">patina cotidiana</span> is judged a success; the boiled flamingo is not attempted.</span>
+        </li>
+        <li>
+          <span class="year">MMXVIII</span>
+          <span class="what"><strong>The Aventine Premises Acquired</strong>The disused Pellegrini printing-works is taken on a fifteen-year lease in March. Demolition of partitions reveals the brick vaulting and a fragment of Roman wall in the cellar.</span>
+        </li>
+        <li>
+          <span class="year">MMXIX</span>
+          <span class="what"><strong>Frescoes Completed; House Opened</strong>Elena Ricci concludes the dining-room cycle on 4 October. The first paying guests are received on 17 October, a Thursday, at the eleventh hour by the Roman reckoning.</span>
+        </li>
+        <li>
+          <span class="year">MMXXI</span>
+          <span class="what"><strong>The Cellar of Falernian</strong>A consignment of forty-eight bottles of an experimental <em>Falernum</em> from Mondragone is laid down in the cellar; the first is drawn for a supper in autumn <span class="latin">MMXXIV</span>.</span>
+        </li>
+        <li>
+          <span class="year">MMXXIII</span>
+          <span class="what"><strong>The Black Notebook Filled</strong>Livia Vibia closes the first kitchen notebook (460 pp.) and begins a second. The first is bound in vellum and given a place on the pass.</span>
+        </li>
+        <li>
+          <span class="year">MMXXV</span>
+          <span class="what"><strong>The Present Year</strong>Forty-two covers a week, two services, Tuesday through Saturday. Closed in August, as is the Roman custom.</span>
+        </li>
+      </ul>
+      <div class="card-foot" aria-hidden="true"></div>
+    </div>
+  </article>
+
+  <!-- COLOPHON -->
+  <article class="card" style="max-width: 720px;">
+    <div class="card-inner" style="text-align:center;">
+      <h2>Colophon</h2>
+      <p style="text-align:center;">This page set in <em>Cinzel</em> and <em>EB Garamond</em>, after the manner of an inscribed tablet and a humanist book respectively. The borders follow the meander floor of the House of the Faun at Pompeii (Reg. VI, ins. 12). The roundels are after Cleland's ornament n. 10818, the oak wreath being sacred to Jove.</p>
+      <p class="latin" style="text-align:center; margin-top:1.4rem;">Marcus Vibius Sabinus &middot; Livia Vibia &middot; <span style="color:var(--accent)">Proprietores</span></p>
+      <div class="card-foot" aria-hidden="true"></div>
+    </div>
+  </article>
+
+</main>
+
+<!-- ============== FOOTER FRIEZE ============== -->
+<footer class="frieze">
+  <div class="corner-laurel tl" aria-hidden="true">
+    <svg viewBox="0 0 100 100"><g fill="#c9a23a"><ellipse cx="20" cy="50" rx="3" ry="9" transform="rotate(-10 20 50)"/><ellipse cx="26" cy="32" rx="3" ry="8" transform="rotate(-35 26 32)"/><ellipse cx="40" cy="20" rx="3" ry="8" transform="rotate(-60 40 20)"/><ellipse cx="58" cy="14" rx="3" ry="8" transform="rotate(-85 58 14)"/><path d="M16 54 Q 50 80 80 50" fill="none" stroke="#c9a23a" stroke-width="1.5"/></g></svg>
+  </div>
+  <div class="corner-laurel tr" aria-hidden="true">
+    <svg viewBox="0 0 100 100"><g fill="#c9a23a"><ellipse cx="20" cy="50" rx="3" ry="9" transform="rotate(-10 20 50)"/><ellipse cx="26" cy="32" rx="3" ry="8" transform="rotate(-35 26 32)"/><ellipse cx="40" cy="20" rx="3" ry="8" transform="rotate(-60 40 20)"/><ellipse cx="58" cy="14" rx="3" ry="8" transform="rotate(-85 58 14)"/><path d="M16 54 Q 50 80 80 50" fill="none" stroke="#c9a23a" stroke-width="1.5"/></g></svg>
+  </div>
+
+  <div class="footer-main">
+    <div class="rosette" aria-hidden="true">
+      <span></span><span></span><span></span>
+    </div>
+    <div class="footer-center">
+      Triclinium Aureum &middot; Via di Sant'Anselmo, XIV &middot; Aventino, Roma
+      <br>
+      <span class="sep">&#10070;</span> Tuesday — Saturday <span class="sep">&#10070;</span> Two Services: Hora Octava &middot; Hora Decima <span class="sep">&#10070;</span>
+      <br>
+      Reservations: +39&nbsp;06&nbsp;5743&nbsp;091 &middot; coena@triclinium-aureum.roma
+    </div>
+    <div class="rosette" aria-hidden="true">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+
+  <div class="footer-sub">
+    Marcus Vibius Sabinus &amp; Livia Vibia, Proprietores
+    <svg viewBox="0 0 200 200" aria-hidden="true"><path d="m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z" transform="translate(0 -852.36)"/></svg>
+    Founded <span style="color:var(--primary)">MMXIX</span>
+  </div>
+
+  <div class="corner-laurel bl" aria-hidden="true">
+    <svg viewBox="0 0 100 100"><g fill="#c9a23a"><ellipse cx="20" cy="50" rx="3" ry="9" transform="rotate(-10 20 50)"/><ellipse cx="26" cy="32" rx="3" ry="8" transform="rotate(-35 26 32)"/><ellipse cx="40" cy="20" rx="3" ry="8" transform="rotate(-60 40 20)"/><ellipse cx="58" cy="14" rx="3" ry="8" transform="rotate(-85 58 14)"/><path d="M16 54 Q 50 80 80 50" fill="none" stroke="#c9a23a" stroke-width="1.5"/></g></svg>
+  </div>
+  <div class="corner-laurel br" aria-hidden="true">
+    <svg viewBox="0 0 100 100"><g fill="#c9a23a"><ellipse cx="20" cy="50" rx="3" ry="9" transform="rotate(-10 20 50)"/><ellipse cx="26" cy="32" rx="3" ry="8" transform="rotate(-35 26 32)"/><ellipse cx="40" cy="20" rx="3" ry="8" transform="rotate(-60 40 20)"/><ellipse cx="58" cy="14" rx="3" ry="8" transform="rotate(-85 58 14)"/><path d="M16 54 Q 50 80 80 50" fill="none" stroke="#c9a23a" stroke-width="1.5"/></g></svg>
+  </div>
+</footer>
+
+</body>
+</html>

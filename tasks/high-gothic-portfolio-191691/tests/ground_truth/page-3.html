@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Works in Glass — Lead, Light, & Cobalt — The Atelier of Guillaume de Sens</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  :root {
+    --came: #0a0a0a;
+    --cobalt: #1e3a5f;
+    --madder: #8b1538;
+    --gold: #c9a23a;
+    --parchment: #f4ecd8;
+    --parchment-deep: #e8dcb8;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), "EB Garamond", Georgia, serif;
+    font-size: 17px;
+    line-height: 1.6;
+    background-image:
+      radial-gradient(ellipse at top, rgba(201,162,58,0.05), transparent 60%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><g opacity='0.06'><circle cx='60' cy='60' r='40' fill='none' stroke='%231e3a5f' stroke-width='1.2'/><rect x='20' y='20' width='80' height='80' fill='none' stroke='%231e3a5f' stroke-width='1.2'/><circle cx='30' cy='60' r='14' fill='none' stroke='%231e3a5f' stroke-width='1'/><circle cx='90' cy='60' r='14' fill='none' stroke='%231e3a5f' stroke-width='1'/><circle cx='60' cy='30' r='14' fill='none' stroke='%231e3a5f' stroke-width='1'/><circle cx='60' cy='90' r='14' fill='none' stroke='%231e3a5f' stroke-width='1'/></g></svg>");
+  }
+
+  /* ─── HEAD BANNER ─────────────────────── */
+  .banner {
+    text-align: center;
+    padding: 36px 20px 8px;
+    border-bottom: 1px solid rgba(10,10,10,0.15);
+    background: linear-gradient(to bottom, var(--parchment-deep), var(--bg));
+  }
+  .site-title {
+    font-family: var(--font-display), "UnifrakturMaguntia", serif;
+    font-size: 56px;
+    color: var(--ornament);
+    margin: 0 0 4px;
+    line-height: 1;
+    letter-spacing: 1px;
+  }
+  .site-subtitle {
+    font-variant: small-caps;
+    letter-spacing: 0.3em;
+    color: var(--secondary);
+    font-size: 13px;
+    margin: 0 0 18px;
+  }
+
+  /* ─── ARCADE NAV ─────────────────────── */
+  .arcade {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    padding: 0 20px 14px;
+    background: var(--bg);
+    border-bottom: 2px solid var(--ornament);
+  }
+  .arcade-arch {
+    position: relative;
+    width: 200px;
+    height: 88px;
+    text-align: center;
+    text-decoration: none;
+    color: var(--ornament);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 14px;
+    font-family: var(--font-body), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    font-size: 12px;
+    border-left: 1px solid rgba(10,10,10,0.2);
+  }
+  .arcade-arch:first-child { border-left: none; }
+  .arcade-arch::before {
+    content: "";
+    position: absolute;
+    inset: 8px 6px 0 6px;
+    border: 1.5px solid var(--ornament);
+    border-bottom: none;
+    border-radius: 50% 50% 0 0 / 90% 90% 0 0;
+    clip-path: polygon(0 100%, 0 40%, 50% 0, 100% 40%, 100% 100%);
+    background: transparent;
+    transition: background 0.2s;
+    z-index: 0;
+  }
+  .arcade-arch span { position: relative; z-index: 1; }
+  .arcade-arch:hover::before {
+    background: var(--cobalt);
+  }
+  .arcade-arch:hover { color: var(--bg); }
+  .arcade-arch[aria-current="page"]::before {
+    background: rgba(30,58,95,0.08);
+  }
+  .arcade-arch[aria-current="page"] {
+    color: var(--secondary);
+  }
+  .arcade-arch[aria-current="page"]::after {
+    content: "⚜";
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--gold);
+    font-size: 16px;
+    text-shadow: 0 0 2px rgba(0,0,0,0.4);
+    z-index: 2;
+  }
+
+  /* ─── HERO ─────────────────────── */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 380px 1fr;
+    gap: 0;
+    padding: 50px 60px 30px;
+    align-items: center;
+    background:
+      linear-gradient(to bottom, transparent 0%, transparent 70%, var(--bg) 100%),
+      radial-gradient(ellipse at center top, rgba(30,58,95,0.07), transparent 60%);
+  }
+  .hero-side {
+    font-family: var(--font-body), serif;
+    color: var(--text);
+  }
+  .hero-side.left {
+    text-align: right;
+    padding-right: 40px;
+    border-right: 1px solid rgba(10,10,10,0.15);
+  }
+  .hero-side.right {
+    text-align: left;
+    padding-left: 40px;
+    border-left: 1px solid rgba(10,10,10,0.15);
+  }
+  .hero-side .label {
+    font-variant: small-caps;
+    letter-spacing: 0.25em;
+    font-size: 11px;
+    color: var(--secondary);
+    margin-bottom: 8px;
+  }
+  .hero-side .figure {
+    font-family: var(--font-display), serif;
+    font-size: 38px;
+    color: var(--ornament);
+    line-height: 1;
+    margin: 4px 0 10px;
+  }
+  .hero-side p {
+    font-style: italic;
+    font-size: 14px;
+    color: var(--text);
+    margin: 6px 0;
+    line-height: 1.5;
+  }
+  .hero-center {
+    position: relative;
+    text-align: center;
+  }
+  .hero-arch {
+    position: relative;
+    width: 380px;
+    height: 460px;
+    margin: 0 auto;
+  }
+  .hero-arch svg.frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .hero-arch .lancet {
+    position: absolute;
+    inset: 18px 30px 30px 30px;
+    background:
+      radial-gradient(circle at 30% 20%, #2c5494 0%, #1e3a5f 35%, #0d1f3a 100%);
+    clip-path: polygon(0 100%, 0 40%, 50% 0, 100% 40%, 100% 100%);
+    overflow: hidden;
+    z-index: 1;
+  }
+  .hero-arch .lancet::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(45deg, transparent 48%, rgba(0,0,0,0.6) 48%, rgba(0,0,0,0.6) 52%, transparent 52%),
+      linear-gradient(-45deg, transparent 48%, rgba(0,0,0,0.6) 48%, rgba(0,0,0,0.6) 52%, transparent 52%);
+    background-size: 40px 40px;
+    opacity: 0.4;
+  }
+  .hero-arch .lancet-pane {
+    position: absolute;
+    width: 60%;
+    left: 20%;
+    top: 30%;
+    text-align: center;
+    color: var(--gold);
+    font-family: var(--font-display), serif;
+    font-size: 28px;
+    line-height: 1.2;
+    text-shadow: 0 0 8px rgba(0,0,0,0.8);
+    z-index: 2;
+  }
+  .hero-arch .lancet-pane .glow {
+    color: #f8d77a;
+  }
+  .hero-arch .lancet-pane .madder {
+    color: #d44a6a;
+    display: block;
+    font-size: 22px;
+    margin-top: 14px;
+  }
+  .hero-arch .quatrefoil-seal {
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90px;
+    height: 90px;
+    z-index: 3;
+  }
+  .hero-title {
+    font-family: var(--font-display), serif;
+    font-size: 44px;
+    color: var(--ornament);
+    line-height: 1.05;
+    margin: 24px 0 8px;
+  }
+  .hero-kicker {
+    font-variant: small-caps;
+    letter-spacing: 0.3em;
+    font-size: 12px;
+    color: var(--secondary);
+  }
+
+  /* ─── SECTION DIVIDER ─────────────────────── */
+  .divider {
+    text-align: center;
+    margin: 30px 0 20px;
+    color: var(--ornament);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+  .divider .rule {
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    flex: 0 0 200px;
+  }
+  .divider svg {
+    width: 36px;
+    height: 36px;
+    opacity: 0.85;
+  }
+
+  /* ─── INTRO PROSE ─────────────────────── */
+  .prose {
+    max-width: 880px;
+    margin: 0 auto 40px;
+    padding: 0 60px;
+    text-align: justify;
+    column-count: 2;
+    column-gap: 40px;
+    column-rule: 1px solid rgba(10,10,10,0.1);
+    font-size: 16px;
+  }
+  .prose .dropcap::first-letter {
+    font-family: var(--font-display), serif;
+    font-size: 52px;
+    color: var(--secondary);
+    float: left;
+    line-height: 0.9;
+    padding: 4px 8px 0 0;
+  }
+  .prose p { margin: 0 0 12px; break-inside: avoid; }
+  .prose p:first-child { margin-top: 0; }
+
+  /* ─── CARDS GRID ─────────────────────── */
+  .commissions {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 36px;
+    padding: 20px 60px 60px;
+    max-width: 1320px;
+    margin: 0 auto;
+  }
+  .card {
+    position: relative;
+    background: var(--parchment);
+    padding: 70px 26px 30px;
+    border: 1px solid rgba(10,10,10,0.2);
+    box-shadow: 0 2px 0 rgba(10,10,10,0.05);
+  }
+  .card::before {
+    content: "";
+    position: absolute;
+    top: -28px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 4px);
+    height: 90px;
+    background: var(--parchment);
+    border: 1.5px solid var(--ornament);
+    border-bottom: none;
+    clip-path: polygon(0 100%, 0 35%, 50% 0, 100% 35%, 100% 100%);
+    z-index: 0;
+  }
+  .card-frame {
+    position: relative;
+    margin-top: -90px;
+    height: 220px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    border: 1px solid var(--ornament);
+    background: #1a2c4d;
+    clip-path: polygon(0 100%, 0 30%, 50% 0, 100% 30%, 100% 100%);
+  }
+  .card-glass {
+    position: absolute;
+    inset: 0;
+    background-size: 18px 18px;
+  }
+  .glass-jesse {
+    background:
+      radial-gradient(circle at 50% 80%, rgba(201,162,58,0.4) 0%, transparent 30%),
+      linear-gradient(0deg, #2a4d2f 0%, #1e3a5f 50%, #8b1538 100%);
+  }
+  .glass-jesse::before {
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(45deg, transparent 48%, #0a0a0a 48%, #0a0a0a 52%, transparent 52%),
+      linear-gradient(-45deg, transparent 48%, #0a0a0a 48%, #0a0a0a 52%, transparent 52%);
+    background-size: 30px 30px;
+    opacity: 0.5;
+  }
+  .glass-passion {
+    background:
+      repeating-linear-gradient(90deg,
+        #1e3a5f 0px, #1e3a5f 18%,
+        #0a0a0a 18%, #0a0a0a 20%,
+        #8b1538 20%, #8b1538 38%,
+        #0a0a0a 38%, #0a0a0a 40%,
+        #c9a23a 40%, #c9a23a 58%,
+        #0a0a0a 58%, #0a0a0a 60%,
+        #8b1538 60%, #8b1538 78%,
+        #0a0a0a 78%, #0a0a0a 80%,
+        #1e3a5f 80%, #1e3a5f 100%);
+  }
+  .glass-passion::before {
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(0deg,
+        transparent 0px, transparent 28px,
+        rgba(0,0,0,0.7) 28px, rgba(0,0,0,0.7) 30px);
+  }
+  .glass-evangelists {
+    background:
+      radial-gradient(circle at center, #c9a23a 0%, #c9a23a 8%, #0a0a0a 8%, #0a0a0a 11%, #1e3a5f 11%, #1e3a5f 35%, #0a0a0a 35%, #0a0a0a 38%, #8b1538 38%, #8b1538 65%, #0a0a0a 65%, #0a0a0a 68%, #1e3a5f 68% 100%);
+  }
+  .glass-evangelists::before {
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      conic-gradient(from 0deg,
+        transparent 0deg, transparent 88deg, #0a0a0a 88deg, #0a0a0a 92deg,
+        transparent 92deg, transparent 178deg, #0a0a0a 178deg, #0a0a0a 182deg,
+        transparent 182deg, transparent 268deg, #0a0a0a 268deg, #0a0a0a 272deg,
+        transparent 272deg, transparent 358deg, #0a0a0a 358deg, #0a0a0a 360deg);
+  }
+  .card-quatrefoil {
+    position: absolute;
+    top: -16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70px;
+    height: 70px;
+    z-index: 4;
+  }
+  .card-quatrefoil svg {
+    width: 100%; height: 100%;
+  }
+  .card-quatrefoil .roman {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-body), serif;
+    font-variant: small-caps;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--ornament);
+    font-weight: 600;
+  }
+  .card-title {
+    font-family: var(--font-display), serif;
+    font-size: 26px;
+    color: var(--ornament);
+    text-align: center;
+    line-height: 1.1;
+    margin: 4px 0 6px;
+  }
+  .card-loc {
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    font-size: 11px;
+    color: var(--secondary);
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  .gold-rule {
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--gold) 20%, var(--gold) 80%, transparent);
+    margin: 10px 0 14px;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.1);
+  }
+  .card-body {
+    font-size: 14.5px;
+    line-height: 1.55;
+    text-align: justify;
+    hyphens: auto;
+  }
+  .card-body::first-letter {
+    font-family: var(--font-display), serif;
+    font-size: 40px;
+    color: var(--madder);
+    float: left;
+    line-height: 0.85;
+    padding: 4px 6px 0 0;
+  }
+  .card-meta {
+    margin-top: 14px;
+    padding-top: 10px;
+    border-top: 1px dotted rgba(10,10,10,0.3);
+    font-size: 12px;
+    font-variant: small-caps;
+    letter-spacing: 0.08em;
+    color: var(--text);
+  }
+  .card-meta dt {
+    color: var(--secondary);
+    display: inline;
+    margin-right: 6px;
+  }
+  .card-meta dd {
+    display: inline;
+    margin: 0;
+  }
+  .card-meta div { margin-bottom: 3px; }
+
+  /* ─── NOTES SECTION ─────────────────────── */
+  .notes {
+    max-width: 1100px;
+    margin: 0 auto 60px;
+    padding: 0 60px;
+  }
+  .notes-title {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-size: 38px;
+    color: var(--ornament);
+    margin: 20px 0 6px;
+  }
+  .notes-subtitle {
+    text-align: center;
+    font-variant: small-caps;
+    letter-spacing: 0.3em;
+    font-size: 12px;
+    color: var(--secondary);
+    margin-bottom: 28px;
+  }
+  .notes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 36px;
+    margin-top: 24px;
+  }
+  .note {
+    position: relative;
+    padding: 16px 18px 16px 22px;
+    border-left: 2px solid var(--gold);
+  }
+  .note h3 {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    color: var(--secondary);
+    margin: 0 0 8px;
+  }
+  .note p {
+    font-size: 14.5px;
+    margin: 0;
+    text-align: justify;
+  }
+  .note .pigment {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-right: 6px;
+    vertical-align: middle;
+    border: 1px solid var(--ornament);
+  }
+  .pigment-cobalt { background: var(--cobalt); }
+  .pigment-silver { background: linear-gradient(135deg, #d4c878, #f0e6a8); }
+  .pigment-came { background: var(--ornament); }
+
+  /* ─── PRICE TABLE ─────────────────────── */
+  .ledger {
+    max-width: 900px;
+    margin: 0 auto 60px;
+    padding: 30px 50px;
+    background: var(--parchment-deep);
+    border: 1px solid var(--ornament);
+    border-image: linear-gradient(to bottom, var(--ornament), var(--gold), var(--ornament)) 1;
+    position: relative;
+  }
+  .ledger::before, .ledger::after {
+    content: "❦";
+    position: absolute;
+    top: -14px;
+    color: var(--gold);
+    font-size: 24px;
+    background: var(--bg);
+    padding: 0 12px;
+  }
+  .ledger::before { left: 30px; }
+  .ledger::after { right: 30px; }
+  .ledger h2 {
+    font-family: var(--font-display), serif;
+    font-size: 32px;
+    color: var(--ornament);
+    text-align: center;
+    margin: 0 0 6px;
+  }
+  .ledger .legend {
+    text-align: center;
+    font-style: italic;
+    color: var(--text);
+    margin-bottom: 22px;
+    font-size: 14px;
+  }
+  .ledger table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14.5px;
+  }
+  .ledger th {
+    text-align: left;
+    font-variant: small-caps;
+    letter-spacing: 0.15em;
+    font-size: 11px;
+    color: var(--secondary);
+    border-bottom: 1.5px solid var(--ornament);
+    padding: 6px 8px;
+  }
+  .ledger th.right, .ledger td.right { text-align: right; }
+  .ledger td {
+    padding: 8px;
+    border-bottom: 1px dotted rgba(10,10,10,0.3);
+  }
+  .ledger tr:last-child td { border-bottom: none; }
+  .ledger .work {
+    font-family: var(--font-display), serif;
+    font-size: 18px;
+    color: var(--ornament);
+  }
+  .ledger .price {
+    font-variant: small-caps;
+    letter-spacing: 0.05em;
+    color: var(--secondary);
+  }
+
+  /* ─── FOOTER ─────────────────────── */
+  footer {
+    background: linear-gradient(to bottom, var(--bg), var(--parchment-deep));
+    border-top: 2px solid var(--ornament);
+    padding: 40px 20px 30px;
+    text-align: center;
+  }
+  .foot-arcade {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 24px;
+  }
+  .foot-arch {
+    width: 70px;
+    height: 78px;
+    position: relative;
+    border: 1.2px solid var(--cobalt);
+    border-bottom: none;
+    border-radius: 50% 50% 0 0 / 90% 90% 0 0;
+    clip-path: polygon(0 100%, 0 40%, 50% 0, 100% 40%, 100% 100%);
+    margin: 0 -1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--cobalt);
+    font-size: 22px;
+  }
+  .foot-address {
+    font-style: italic;
+    font-size: 14px;
+    color: var(--text);
+    margin: 6px 0;
+  }
+  .colophon {
+    font-variant: small-caps;
+    letter-spacing: 0.22em;
+    font-size: 12px;
+    color: var(--secondary);
+    margin: 8px 0 16px;
+  }
+  .cross-flory {
+    font-size: 28px;
+    color: #3a2618;
+    line-height: 1;
+  }
+
+  /* helper svg */
+  .quatrefoil-svg path,
+  .quatrefoil-svg circle,
+  .quatrefoil-svg rect {
+    fill: var(--parchment);
+    stroke: var(--ornament);
+    stroke-width: 2;
+  }
+</style>
+</head>
+<body>
+
+<header class="banner">
+  <h1 class="site-title">The Atelier of Guillaume de Sens</h1>
+  <p class="site-subtitle">Master Mason · Tracery-Cutter · Glazier of the Cathedral Towns</p>
+</header>
+
+<nav class="arcade" aria-label="Primary">
+  <a class="arcade-arch" href="page-1.html"><span>The Atelier</span></a>
+  <a class="arcade-arch" href="page-2.html"><span>Works in Stone</span></a>
+  <a class="arcade-arch" href="page-3.html" aria-current="page"><span>Works in Glass</span></a>
+  <a class="arcade-arch" href="page-4.html"><span>Drawings</span></a>
+  <a class="arcade-arch" href="page-5.html"><span>Of the Master</span></a>
+  <a class="arcade-arch" href="page-6.html"><span>Petitions</span></a>
+</nav>
+
+<section class="hero">
+  <aside class="hero-side left">
+    <div class="label">Anno Domini</div>
+    <div class="figure">MCCXC–MCCCV</div>
+    <p>Fifteen years of glazing,<br>from Auxerre to Provins,<br>from Sens to Saint-Quiriace.</p>
+  </aside>
+
+  <div class="hero-center">
+    <div class="hero-arch">
+      <!-- Quatrefoil seal at apex -->
+      <div class="quatrefoil-seal">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(50,50)">
+            <circle cx="-22" cy="0" r="18" fill="#f4ecd8" stroke="#0a0a0a" stroke-width="1.5"/>
+            <circle cx="22" cy="0" r="18" fill="#f4ecd8" stroke="#0a0a0a" stroke-width="1.5"/>
+            <circle cx="0" cy="-22" r="18" fill="#f4ecd8" stroke="#0a0a0a" stroke-width="1.5"/>
+            <circle cx="0" cy="22" r="18" fill="#f4ecd8" stroke="#0a0a0a" stroke-width="1.5"/>
+            <circle cx="0" cy="0" r="14" fill="#c9a23a" stroke="#0a0a0a" stroke-width="1.5"/>
+            <text x="0" y="3" text-anchor="middle" font-size="9" fill="#0a0a0a" font-family="serif" font-weight="700">III</text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="lancet">
+        <div class="lancet-pane">
+          Lux<br>per<br>Vitrum
+          <span class="madder">Sanguis · Cobaltum · Aurum</span>
+        </div>
+      </div>
+
+      <!-- Pointed-arch frame overlay -->
+      <svg class="frame" viewBox="0 0 380 460" preserveAspectRatio="none">
+        <path d="M 12 460 L 12 200 Q 12 120 190 12 Q 368 120 368 200 L 368 460" 
+              fill="none" stroke="#0a0a0a" stroke-width="3"/>
+        <path d="M 24 460 L 24 205 Q 24 130 190 28 Q 356 130 356 205 L 356 460"
+              fill="none" stroke="#c9a23a" stroke-width="1"/>
+      </svg>
+    </div>
+
+    <h2 class="hero-title">Works in Glass</h2>
+    <div class="hero-kicker">Lead · Light · &amp; Cobalt</div>
+  </div>
+
+  <aside class="hero-side right">
+    <div class="label">Of the rue de la Verrerie</div>
+    <div class="figure">Sens</div>
+    <p>In confraternity with<br>the glaziers Pierre Aubri,<br>Jehan le Verrier &amp; sons.</p>
+  </aside>
+</section>
+
+<div class="divider">
+  <span class="rule"></span>
+  <svg viewBox="0 0 39 40" xmlns="http://www.w3.org/2000/svg"><path d="M19.5 2 L24 12 L34 14 L26 21 L28 32 L19.5 26 L11 32 L13 21 L5 14 L15 12 Z" fill="#3a2618" opacity="0.85"/></svg>
+  <span class="rule"></span>
+</div>
+
+<section class="prose">
+  <p class="dropcap">From the great kilns of Picardy come our pots of cobalt-blue, the deep glass of which no Burgundian rival has yet matched; from the Argonne, our murrey-red, struck through with three flashings to deepen the madder; and from the local works at Sens itself, the pale verdure and rough quarrels that fill the grisaille fields. The atelier of Guillaume keeps long covenant with the master glaziers of the rue de la Verrerie — chief among them Pierre Aubri, who has cut for us since the year of grace MCCLXXXIX, and Jehan le Verrier, who succeeded his father at the second forge.</p>
+  <p>Our windows are drawn first upon the tracing-floor in chalk and red ochre, panel by panel, then transferred to the whitened oak board where the glazier may set out his lead lines. Cobalt is reserved for the mantles of the Virgin and for the deep sky behind the prophets; madder for the wounds of Our Lord and for royal robes; gold-leaf, applied with silver stain after the year MCCC, for haloes, sceptres, and the crowns of the kings of Israel. Of these three commissions, set forth below, the atelier holds the surviving cartoons in its own hand.</p>
+</section>
+
+<section class="commissions" aria-label="Featured glass commissions">
+
+  <article class="card">
+    <div class="card-frame">
+      <div class="card-glass glass-jesse"></div>
+    </div>
+    <div class="card-quatrefoil">
+      <svg viewBox="0 0 100 100"><g transform="translate(50,50)">
+        <circle cx="-20" cy="0" r="16" fill="#f4ecd8" stroke="#0a0a0a" stroke-width="1.5"/>
+        <circle cx="20" cy="0" r="16" fill="#f4ecd8" stroke="#0a0a0a" stroke-width="1.5"/>
+        <circle cx="0" cy="-20" r="16" fill="#f4ecd8" stroke="#0a0a0a" stroke-width="1.5"/>
+        <circle cx="0" cy="20" r="16" fill="#f4ecd8" stroke="#0a0a0a" stroke-width="1.5"/>
+        <circle cx="0" cy="0" r="13" fill="#c9a23a" stroke="#0a0a0a" stroke-width="1.5"/>
+      </g></svg>
+      <div class="roman">MCCXCVI</div>
+    </div>
+    <h3 class="card-title">The Tree of Jesse</h3>
+    <div class="card-loc">Lady Chapel · Auxerre</div>
+    <div class="gold-rule"></div>
+    <p class="card-body">Begun at the petition of the Chapter of Saint-Étienne in the spring of MCCXCV and set in lead by Michaelmas of the following year, this tall lancet rises through five tiers of crowned ancestors — Jesse recumbent at the root, the Virgin at the apex bearing the Christ-child against a field of pot-metal cobalt sourced wholly from Picardy. Each king is named in white-letter on a banderole; the foliage is cut from a single sheet of flashed green and abraded to reveal the pale yellow beneath.</p>
+    <dl class="card-meta">
+      <div><dt>Glass:</dt><dd>cobalt, madder, flashed verdure</dd></div>
+      <div><dt>Came:</dt><dd>H-section, Chartrain pattern</dd></div>
+      <div><dt>Patron:</dt><dd>Eudes de Cicons, dean</dd></div>
+    </dl>
+  </article>
+
+  <article class="card">
+    <div class="card-frame">
+      <div class="card-glass glass-passion"></div>
+    </div>
+    <div class="card-quatrefoil">
+      <svg viewBox="0 0 100 100"><g transform="translate(50,50)">
+        <circle cx="-20" cy="0" r="16" fill="#f4ecd8" stroke="#0a0a0a" stroke-width="1.5"/>
+        <circle cx="20" cy="0" r="16" fill="#f4ecd8" stroke="#0a0a0a" stroke-width="1.5"/>
+        <circle cx="0" cy="-20" r="16" fill="#f4ecd8" stroke="#0a0a0a" stroke-width="1.5"/>
+        <circle cx="0" cy="20" r="16" fill="#f4ecd8" stroke="#0a0a0a" stroke-width="1.5"/>
+        <circle cx="0" cy="0" r="13" fill="#c9a23a" stroke="#0a0a0a" stroke-width="1.5"/>
+      </g></svg>
+      <div class="roman">MCCCI</div>
+    </div>
+    <h3 class="card-title">The Passion Cycle</h3>
+    <div class="card-loc">Saint-Quiriace · Provins</div>
+    <div class="gold-rule"></div>
+    <p class="card-body">A great work of five lancets, eighteen scenes, completed in the year of Our Lord MCCCI for the south transept of the collegiate church. The cycle reads from the Entry into Jerusalem at lower left to the Descent into Limbo at upper right; the Crucifixion occupies the central lancet with the figure of Our Lord drawn against a sky of unbroken cobalt — fourteen panes set without dividing rod. The leading patterns are taken directly from the Chartrain master Pierre de Bonneval, who lent us his cartoons in MCCXCIX.</p>
+    <dl class="card-meta">
+      <div><dt>Lancets:</dt><dd>five, of XII pieds high</dd></div>
+      <div><dt>Sum paid:</dt><dd>cccxx livres tournois</dd></div>
+      <div><dt>Patron:</dt><dd>Chapter of St-Quiriace</dd></div>
+    </dl>
+  </article>
+
+  <article class="card">
+    <div class="card-frame">
+      <div class="card-glass glass-evangelists"></div>
+    </div>
+    <div class="card-quatrefoil">
+      <svg viewBox="0 0 100 100"><g transform="translate(50,50)">
+        <circle cx="-20" cy="0" r="16" fill="#f4ecd8" stroke="#0a0a0a" stroke-width="1.5"/>
+        <circle cx="20" cy="0" r="16" fill="#f4ecd8" stroke="#0a0a0a" stroke-width="1.5"/>
+        <circle cx="0" cy="-20" r="16" fill="#f4ecd8" stroke="#0a0a0a" stroke-width="1.5"/>
+        <circle cx="0" cy="20" r="16" fill="#f4ecd8" stroke="#0a0a0a" stroke-width="1.5"/>
+        <circle cx="0" cy="0" r="13" fill="#c9a23a" stroke="#0a0a0a" stroke-width="1.5"/>
+      </g></svg>
+      <div class="roman">MCCCIII</div>
+    </div>
+    <h3 class="card-title">Oculus of the Four Evangelists</h3>
+    <div class="card-loc">Sens · west clerestory</div>
+    <div class="gold-rule"></div>
+    <p class="card-body">Set in the western clerestory of the cathedral of Saint-Étienne, this quatrefoil oculus is our first work to employ silver stain throughout — applied to the haloes, the wing-feathers of the four creatures, and the gilt borders of the Gospel-books. The Lion of Mark and Eagle of John face westward; the Bull of Luke and the Man of Matthew turn to the east. Each lobe is bordered by a ring of madder roundels at the came-junctions, after the manner observed at Bourges. Glass cut by Aubri, leading by the master himself.</p>
+    <dl class="card-meta">
+      <div><dt>Diameter:</dt><dd>VIII pieds, IV pouces</dd></div>
+      <div><dt>Stain:</dt><dd>silver, post-MCCC</dd></div>
+      <div><dt>Patron:</dt><dd>Archbishop Étienne Bécard</dd></div>
+    </dl>
+  </article>
+
+</section>
+
+<div class="divider">
+  <span class="rule"></span>
+  <svg viewBox="0 0 39 40" xmlns="http://www.w3.org/2000/svg"><path d="M19.5 2 L24 12 L34 14 L26 21 L28 32 L19.5 26 L11 32 L13 21 L5 14 L15 12 Z" fill="#3a2618" opacity="0.85"/></svg>
+  <span class="rule"></span>
+</div>
+
+<section class="notes">
+  <h2 class="notes-title">Of Pigments &amp; Practice</h2>
+  <div class="notes-subtitle">A short discourse upon our materials</div>
+
+  <div class="notes-grid">
+    <div class="note">
+      <h3><span class="pigment pigment-cobalt"></span>Pot-Metal Cobalt</h3>
+      <p>Sourced wholly from the Picard kilns at Saint-Quentin, where the cobalt earth is fluxed with potash from beech-ash and cooled in shallow cakes. The depth is unequalled north of the Loire; one pane will hold its colour against the western sun for three generations of canons, by the witness of those who saw the choir at Soissons re-glazed in MCCLXIV.</p>
+    </div>
+    <div class="note">
+      <h3><span class="pigment pigment-silver"></span>Silver Stain (post-MCCC)</h3>
+      <p>Brought to our atelier by the journeyman Renaud de Beauvais, who learned the trick of it at Saint-Urbain de Troyes. Applied as a paste of silver-sulphide and ochre to the back of the pane, then fired at low heat: the silver migrates into the glass and yields a true gold without leading. We have used it in every commission since the Evangelists of Sens.</p>
+    </div>
+    <div class="note">
+      <h3><span class="pigment pigment-came"></span>Leading after Chartres</h3>
+      <p>Our lead came is drawn through an iron mill of two passes, in the H-section pattern adopted by the workshops of Chartres in the lifetime of Master Bernard. Joints are soldered with tin-lead at every crossing — never less than four solders to the square pied — and the panel reinforced with iron saddle-bars at intervals of two pieds.</p>
+    </div>
+  </div>
+</section>
+
+<section class="ledger">
+  <h2>A Ledger of Glass</h2>
+  <p class="legend">Sums recorded by the atelier-clerk, in livres tournois &amp; pieds carrés</p>
+  <table>
+    <thead>
+      <tr>
+        <th>Commission</th>
+        <th>Year</th>
+        <th class="right">Surface</th>
+        <th class="right">Sum Received</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="work">Tree of Jesse, Auxerre</td>
+        <td>MCCXCVI</td>
+        <td class="right">XLII pieds²</td>
+        <td class="right price">cxl livres</td>
+      </tr>
+      <tr>
+        <td class="work">Passion Cycle, Provins</td>
+        <td>MCCCI</td>
+        <td class="right">CCXVI pieds²</td>
+        <td class="right price">cccxx livres</td>
+      </tr>
+      <tr>
+        <td class="work">Oculus, Sens</td>
+        <td>MCCCIII</td>
+        <td class="right">L pieds²</td>
+        <td class="right price">lxxx livres, X sols</td>
+      </tr>
+      <tr>
+        <td class="work">Lesser quarrels &amp; repairs</td>
+        <td>MCCXC–MCCCV</td>
+        <td class="right">various</td>
+        <td class="right price">xlii livres, vi sols</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<footer>
+  <div class="foot-arcade" aria-hidden="true">
+    <div class="foot-arch">✠</div>
+    <div class="foot-arch">⚜</div>
+    <div class="foot-arch">✠</div>
+    <div class="foot-arch">☩</div>
+    <div class="foot-arch">✠</div>
+    <div class="foot-arch">⚜</div>
+    <div class="foot-arch">✠</div>
+  </div>
+  <p class="foot-address">The Atelier of Guillaume de Sens · rue de la Verrerie, hard by the cloister of Saint-Étienne · Sens en Champagne</p>
+  <p class="colophon">Scriptum atque illuminatum · Anno Domini MCCCV · in officina magistri Guillelmi cæmentarii</p>
+  <div class="cross-flory">✠</div>
+</footer>
+
+</body>
+</html>

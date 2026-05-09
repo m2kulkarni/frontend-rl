@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Council Proceedings & Resolutions — Tiruvanaikoil Town Panchayat</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), sans-serif;
+    margin: 0;
+    line-height: 1.55;
+  }
+
+  /* ---------- TOP NAVIGATION ---------- */
+  .topbar {
+    background: #1a1a1a;
+    color: #f8f4ec;
+    border-bottom: 2px solid var(--accent);
+  }
+  .topbar-inner {
+    display: flex;
+    align-items: center;
+    padding: 14px 48px;
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+  .seal-roundel {
+    width: 46px;
+    height: 46px;
+    background: var(--secondary);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--accent);
+    flex-shrink: 0;
+  }
+  .seal-roundel svg { width: 30px; height: 30px; }
+  .seal-roundel svg path { fill: #f8f4ec !important; }
+
+  .site-id {
+    margin-left: 18px;
+    font-family: var(--font-display), serif;
+    font-size: 15px;
+    color: #f8f4ec;
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+  }
+  .site-id small {
+    display: block;
+    font-family: var(--font-body), sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+  .topnav {
+    margin-left: auto;
+    display: flex;
+    gap: 26px;
+  }
+  .topnav a {
+    color: #f8f4ec;
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 6px 0;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .topnav a:hover { color: var(--accent); }
+  .topnav a[aria-current="page"] {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+
+  /* sub-bar with lotus chain */
+  .subbar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--accent);
+    padding: 10px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .subbar .crumb {
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+  .subbar .lotus {
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    color: var(--secondary);
+  }
+  .lotus-glyph {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background: radial-gradient(circle, var(--secondary) 30%, transparent 32%),
+                conic-gradient(from 0deg, var(--secondary) 0 12.5%, transparent 12.5% 25%, var(--secondary) 25% 37.5%, transparent 37.5% 50%, var(--secondary) 50% 62.5%, transparent 62.5% 75%, var(--secondary) 75% 87.5%, transparent 87.5% 100%);
+    border-radius: 50%;
+    transform: rotate(22.5deg);
+    opacity: 0.85;
+  }
+
+  /* ---------- GOPURAM HEADER ---------- */
+  .gopuram {
+    background: var(--surface);
+    padding: 40px 0 0;
+    position: relative;
+  }
+  .gopuram-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  .tier {
+    background: var(--secondary);
+    color: #f8f4ec;
+    text-align: center;
+    border-top: 3px solid var(--accent);
+    border-bottom: 3px solid var(--accent);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .tier::before, .tier::after {
+    content: "";
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 8px;
+    background: var(--accent);
+  }
+  .tier::before { left: 0; }
+  .tier::after { right: 0; }
+
+  .tier-1 { width: 92%; height: 28px; font-size: 10px; }
+  .tier-2 { width: 78%; height: 36px; font-size: 11px; background: #c8362a; }
+  .tier-3 { width: 64%; height: 46px; font-size: 13px; }
+  .tier-4 { width: 48%; height: 58px; font-size: 16px; background: #c8362a; }
+
+  .apex {
+    width: 110px;
+    height: 110px;
+    background: var(--surface);
+    border: 4px solid var(--accent);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    margin-top: -20px;
+    margin-bottom: -10px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 0 4px var(--secondary), 0 0 0 8px var(--accent);
+    position: relative;
+  }
+  .apex svg { width: 70px; height: 70px; }
+
+  .gopuram-title {
+    text-align: center;
+    padding: 36px 24px 24px;
+    background: var(--surface);
+  }
+  .gopuram-title h1 {
+    font-family: var(--font-display), serif;
+    color: var(--text-emphasis);
+    font-size: 42px;
+    margin: 0 0 8px;
+    letter-spacing: 0.02em;
+  }
+  .gopuram-title .tagline {
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--secondary);
+  }
+  .gopuram-title .meta-line {
+    margin-top: 18px;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    color: var(--text);
+    text-transform: uppercase;
+  }
+
+  /* hero frame band */
+  .hero-frame {
+    width: 100%;
+    overflow: hidden;
+    background: var(--surface);
+    border-top: 2px solid var(--accent);
+    border-bottom: 2px solid var(--accent);
+    padding: 8px 0;
+  }
+  .hero-frame svg {
+    width: 100%;
+    height: 32px;
+    display: block;
+  }
+
+  /* ---------- DIVIDER ---------- */
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 48px;
+    background: var(--surface);
+  }
+  .divider svg {
+    width: 320px;
+    height: 36px;
+    opacity: 0.85;
+  }
+
+  /* ---------- CONTENT SECTIONS ---------- */
+  main {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+  section { padding: 28px 0; }
+
+  .section-head {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  .section-head h2 {
+    font-family: var(--font-display), serif;
+    color: var(--text-emphasis);
+    font-size: 28px;
+    margin: 0;
+    letter-spacing: 0.02em;
+  }
+  .section-head .eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 6px;
+  }
+  .section-head p {
+    max-width: 760px;
+    margin: 14px auto 0;
+    font-size: 14px;
+    color: var(--text);
+  }
+
+  /* Chair card */
+  .chair-bar {
+    background: var(--surface);
+    border-top: 2px solid var(--accent);
+    border-bottom: 2px solid var(--accent);
+    padding: 22px 32px;
+    display: grid;
+    grid-template-columns: auto 1fr auto auto auto;
+    gap: 32px;
+    align-items: center;
+    position: relative;
+    margin-bottom: 36px;
+  }
+  .chair-bar::before, .chair-bar::after {
+    content: "";
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 6px;
+    background: var(--secondary);
+  }
+  .chair-bar::before { left: 0; }
+  .chair-bar::after { right: 0; }
+  .chair-bar .label {
+    font-size: 9px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--text);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .chair-bar .value {
+    font-family: var(--font-display), serif;
+    color: var(--text-emphasis);
+    font-size: 16px;
+  }
+  .chair-bar .small-value {
+    font-size: 13px;
+    color: var(--text);
+    letter-spacing: 0.04em;
+  }
+  .chair-mini-seal {
+    width: 56px;
+    height: 56px;
+    background: var(--text-emphasis);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid var(--accent);
+  }
+  .chair-mini-seal svg { width: 36px; height: 36px; }
+  .chair-mini-seal svg path { fill: #f8f4ec !important; }
+
+  /* RESOLUTION CARDS */
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+  .card {
+    background: var(--surface);
+    position: relative;
+    padding: 26px 36px 24px;
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+    box-shadow: 0 0 0 0 transparent;
+  }
+  .card::before {
+    content: "";
+    position: absolute;
+    top: -3px; bottom: -3px;
+    left: 0;
+    width: 10px;
+    background: var(--secondary);
+    border-left: 2px solid var(--accent);
+    border-right: 2px solid var(--accent);
+  }
+  .card::after {
+    content: "";
+    position: absolute;
+    top: -3px; bottom: -3px;
+    right: 0;
+    width: 10px;
+    background: var(--secondary);
+    border-left: 2px solid var(--accent);
+    border-right: 2px solid var(--accent);
+  }
+  .card .double-rule-top,
+  .card .double-rule-bottom {
+    position: absolute;
+    left: 14px; right: 14px;
+    height: 4px;
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+  }
+  .card .double-rule-top { top: -1px; }
+  .card .double-rule-bottom { bottom: -1px; }
+
+  .card-lotus {
+    position: absolute;
+    top: 12px;
+    left: 22px;
+    width: 16px;
+    height: 16px;
+  }
+  .card-lotus .lotus-glyph { width: 14px; height: 14px; }
+
+  .card .resolution-no {
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin: 0 0 6px 22px;
+    font-weight: 700;
+  }
+  .card h3 {
+    font-family: var(--font-display), serif;
+    color: var(--text-emphasis);
+    font-size: 19px;
+    margin: 0 0 14px;
+    line-height: 1.3;
+    letter-spacing: 0.01em;
+  }
+  .card p.subject {
+    font-size: 13.5px;
+    color: var(--text);
+    margin: 0 0 16px;
+  }
+  .card .meta {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    gap: 14px 22px;
+    border-top: 1px dashed var(--accent);
+    padding-top: 12px;
+    margin-top: 14px;
+  }
+  .card .meta div span {
+    display: block;
+  }
+  .card .meta .k {
+    font-size: 9px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--text);
+    opacity: 0.7;
+    margin-bottom: 2px;
+  }
+  .card .meta .v {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text);
+    font-weight: 700;
+  }
+  .card .downloads {
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid var(--accent);
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .card .downloads a {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--surface);
+    background: var(--text-emphasis);
+    padding: 7px 14px;
+    text-decoration: none;
+    border: 1px solid var(--accent);
+  }
+  .card .downloads a.alt {
+    background: transparent;
+    color: var(--text-emphasis);
+  }
+  .card .downloads a:hover {
+    background: var(--secondary);
+    color: #f8f4ec;
+  }
+
+  /* archive table */
+  .archive-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+    background: var(--surface);
+    border: 2px solid var(--accent);
+  }
+  .archive-table th {
+    background: var(--secondary);
+    color: #f8f4ec;
+    font-family: var(--font-body), sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 12px 14px;
+    text-align: left;
+    border-bottom: 2px solid var(--accent);
+  }
+  .archive-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid rgba(227,66,52,0.25);
+    font-size: 13px;
+    vertical-align: top;
+  }
+  .archive-table tr:last-child td { border-bottom: none; }
+  .archive-table .yatra {
+    font-family: var(--font-display), serif;
+    color: var(--text-emphasis);
+    font-size: 14px;
+  }
+  .archive-table a {
+    color: var(--text-emphasis);
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--accent);
+  }
+
+  /* notice strip */
+  .notice-strip {
+    background: var(--text-emphasis);
+    color: #f8f4ec;
+    padding: 22px 32px;
+    border-top: 3px solid var(--accent);
+    border-bottom: 3px solid var(--accent);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+    align-items: center;
+    margin-top: 20px;
+  }
+  .notice-strip h3 {
+    font-family: var(--font-display), serif;
+    margin: 0 0 4px;
+    font-size: 18px;
+  }
+  .notice-strip p {
+    margin: 0;
+    font-size: 12.5px;
+    opacity: 0.92;
+  }
+  .notice-strip a {
+    background: var(--accent);
+    color: #1a1a1a;
+    padding: 10px 18px;
+    text-decoration: none;
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    font-weight: 700;
+    border: 1px solid #f8f4ec;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    margin-top: 40px;
+    background: var(--surface);
+    border-top: 2px solid var(--accent);
+  }
+  .footer-seal {
+    display: flex;
+    justify-content: center;
+    padding: 28px 0 14px;
+  }
+  .footer-mandala {
+    width: 96px;
+    height: 96px;
+    background: var(--text-emphasis);
+    border-radius: 50%;
+    border: 4px solid var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 0 4px var(--surface), 0 0 0 6px var(--secondary);
+  }
+  .footer-mandala svg { width: 60px; height: 60px; }
+  .footer-mandala svg path { fill: #f8f4ec !important; }
+
+  .mandapa {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    background: var(--secondary);
+    border-top: 2px solid var(--accent);
+    border-bottom: 2px solid var(--accent);
+  }
+  .mandapa-col {
+    padding: 24px 22px;
+    color: #f8f4ec;
+    border-right: 2px solid var(--accent);
+    min-height: 220px;
+  }
+  .mandapa-col:last-child { border-right: none; }
+  .mandapa-col h4 {
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    margin: 0 0 12px;
+    color: var(--accent);
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 8px;
+    text-transform: uppercase;
+  }
+  .mandapa-col p, .mandapa-col li {
+    font-size: 11.5px;
+    line-height: 1.7;
+    color: #f8f4ec;
+    margin: 0 0 4px;
+  }
+  .mandapa-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .mandapa-col a {
+    color: #f8f4ec;
+    text-decoration: none;
+    border-bottom: 1px dotted var(--accent);
+  }
+
+  .footer-arabesque {
+    background: #1a1a1a;
+    padding: 14px 0;
+    overflow: hidden;
+  }
+  .footer-arabesque svg {
+    width: 100%;
+    height: 28px;
+    display: block;
+  }
+  .footer-arabesque svg path { fill: var(--accent) !important; stroke: var(--accent) !important; }
+
+  .footer-base {
+    background: #1a1a1a;
+    color: #f8f4ec;
+    padding: 14px 48px;
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    border-top: 1px solid var(--accent);
+  }
+
+  /* arabesque divider color override */
+  .divider svg path {
+    fill: var(--secondary) !important;
+    stroke: var(--secondary) !important;
+  }
+
+  /* hero frame motif coloring */
+  .hero-frame svg path {
+    fill: var(--secondary) !important;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- ============ TOP NAVIGATION ============ -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <span class="seal-roundel" aria-hidden="true">
+      <svg viewBox="0 0 356 367"><path d="M 90.456847,353.9498 C 51.797347,340.13485 23.72672,305.75839 12.612487,258.6184 C 7.5684267,237.22321 6.1421397,201.86984 10.323594,201.86984 C 11.712834,201.86984 15.42322,211.57056 18.568972,223.427 C 25.452892,249.37152 37.19436,273.76855 48.535988,285.69407 C 67.374717,305.50242 114.0356,313.26029 140.92106,301.05394 C 161.86409,291.54544 170.35697,268.94603 161.24995,246.95931 C 154.21242,229.96943 138.24701,224.28836 108.50834,228.19197 C 108.50834,228.19197 90.282834,208.57398 84.476417,173.73548 L 103.15738,175.42939 C 125.65731,177.46962 142.64532,172.49605 151.46236,161.28728 C 159.74765,150.75419 159.5685,146.68046 150.34841,135.96157 C 137.04396,120.49428 113.15511,124.41248 64.786577,149.99522 L 40.381632,109.08518 L 50.613137,101.2812 C 76.253387,81.724339 120.77357,71.947329 146.11011,80.309169 C 169.18841,87.925649 186.12724,118.14755 181.60247,143.63298 C 178.54327,160.86286 164.72752,184.99524 154.05369,191.75339 L 144.84862,197.58162 L 157.56351,203.31522 C 179.17018,213.05833 192.36061,205.61034 208.12001,174.76849 C 229.92949,132.0869 244.0745,121.0378 276.96658,120.99051 C 292.28176,120.96847 297.73268,122.57499 308.90312,130.4031 C 336.78213,149.94016 351.9622,190.39693 348.62804,236.27272 C 344.40474,294.37435 316.88374,329.61601 275.73415,329.61601 C 253.15086,329.61601 238.59451,321.69526 227.00729,303.10156 C 216.82976,286.76927 212.24334,254.42288 218.08805,240.19369 C 220.89208,233.36732 221.39892,233.13578 221.58223,238.59686 C 221.91916,248.63689 233.34159,264.95549 243.82827,270.37835 C 269.55794,283.68369 306.49479,266.96693 321.10832,235.4032 C 332.20339,211.4394 326.25105,165.21656 311.02084,157.06552 C 307.83453,155.36024 299.96089,153.96502 293.5244,153.96502 C 279.84214,153.96502 269.09709,163.80155 254.03263,190.11774 C 248.82442,199.21613 240.05943,210.97175 234.55486,216.24128 C 225.61134,224.80312 222.41769,225.82225 204.53067,225.82225 L 184.51412,225.82225 L 190.98415,240.19369 C 200.2451,260.76437 199.80694,294.18704 190.00976,314.53347 C 181.35272,332.51252 161.33618,350.71469 145.33374,355.16013 C 129.75572,359.4876 104.38789,358.9281 90.456847,353.9498 z M 165.8338,75.923739 C 156.97908,60.814399 151.52974,32.606158 157.46546,32.606158 C 164.43775,47.732319 178.73037,61.227101 194.03409,70.643259 C 221.52091,83.949329 249.39257,78.578529 279.84247,54.108239 C 286.54595,48.721279 292.48231,44.913138 293.0345,45.645698 C 300.4697,57.184233 313.331,66.613261 317.58219,80.021449 C 317.58219,85.678729 293.22867,101.96033 274.01214,109.15007 C 226.38264,122.8706 193.96598,117.44304 165.8338,75.923739 z M 189.83603,40.997228 L 220.84514,6.6137488 L 255.30593,38.514418 C 243.51876,48.222549 235.00994,63.289118 221.54391,70.930009 C 210.90372,63.086273 195.02308,53.837816 189.83603,40.997228 z "/></svg>
+    </span>
+    <div class="site-id">
+      Tiruvanaikoil Town Panchayat
+      <small>Office of the Municipal Commissioner</small>
+    </div>
+    <nav class="topnav" aria-label="Primary">
+      <a href="page-1.html">Home</a>
+      <a href="page-2.html">Services</a>
+      <a href="page-3.html" aria-current="page">Council</a>
+      <a href="page-4.html">Wards</a>
+      <a href="page-5.html">Notices</a>
+      <a href="page-6.html">Visit</a>
+    </nav>
+  </div>
+</header>
+
+<div class="subbar">
+  <span class="crumb">Public Records</span>
+  <span class="lotus-glyph"></span>
+  <span class="crumb">Council Sittings</span>
+  <span class="lotus-glyph"></span>
+  <span class="crumb">Resolutions Register</span>
+  <span class="lotus-glyph"></span>
+  <span class="crumb">Minutes Archive</span>
+  <span class="lotus-glyph"></span>
+  <span class="crumb">Tamil &amp; English</span>
+</div>
+
+<!-- ============ GOPURAM HEADER ============ -->
+<div class="gopuram">
+  <div class="gopuram-stack">
+    <div class="tier tier-1">Office of the Municipal Commissioner · Established 1956</div>
+    <div class="tier tier-2">Town Panchayat · Tiruchirappalli District · Tamil Nadu</div>
+    <div class="tier tier-3">Council Proceedings &amp; Resolutions</div>
+    <div class="tier tier-4">Public Register · Financial Year 2024–25</div>
+    <div class="apex" aria-hidden="true">
+      <svg viewBox="0 0 356 367"><path d="M 90.456847,353.9498 C 51.797347,340.13485 23.72672,305.75839 12.612487,258.6184 C 7.5684267,237.22321 6.1421397,201.86984 10.323594,201.86984 C 11.712834,201.86984 15.42322,211.57056 18.568972,223.427 C 25.452892,249.37152 37.19436,273.76855 48.535988,285.69407 C 67.374717,305.50242 114.0356,313.26029 140.92106,301.05394 C 161.86409,291.54544 170.35697,268.94603 161.24995,246.95931 C 154.21242,229.96943 138.24701,224.28836 108.50834,228.19197 C 108.50834,228.19197 90.282834,208.57398 84.476417,173.73548 L 103.15738,175.42939 C 125.65731,177.46962 142.64532,172.49605 151.46236,161.28728 C 159.74765,150.75419 159.5685,146.68046 150.34841,135.96157 C 137.04396,120.49428 113.15511,124.41248 64.786577,149.99522 L 40.381632,109.08518 L 50.613137,101.2812 C 76.253387,81.724339 120.77357,71.947329 146.11011,80.309169 C 169.18841,87.925649 186.12724,118.14755 181.60247,143.63298 C 178.54327,160.86286 164.72752,184.99524 154.05369,191.75339 L 144.84862,197.58162 L 157.56351,203.31522 C 179.17018,213.05833 192.36061,205.61034 208.12001,174.76849 C 229.92949,132.0869 244.0745,121.0378 276.96658,120.99051 C 292.28176,120.96847 297.73268,122.57499 308.90312,130.4031 C 336.78213,149.94016 351.9622,190.39693 348.62804,236.27272 C 344.40474,294.37435 316.88374,329.61601 275.73415,329.61601 C 253.15086,329.61601 238.59451,321.69526 227.00729,303.10156 C 216.82976,286.76927 212.24334,254.42288 218.08805,240.19369 C 220.89208,233.36732 221.39892,233.13578 221.58223,238.59686 C 221.91916,248.63689 233.34159,264.95549 243.82827,270.37835 C 269.55794,283.68369 306.49479,266.96693 321.10832,235.4032 C 332.20339,211.4394 326.25105,165.21656 311.02084,157.06552 C 307.83453,155.36024 299.96089,153.96502 293.5244,153.96502 C 279.84214,153.96502 269.09709,163.80155 254.03263,190.11774 C 248.82442,199.21613 240.05943,210.97175 234.55486,216.24128 C 225.61134,224.80312 222.41769,225.82225 204.53067,225.82225 L 184.51412,225.82225 L 190.98415,240.19369 C 200.2451,260.76437 199.80694,294.18704 190.00976,314.53347 C 181.35272,332.51252 161.33618,350.71469 145.33374,355.16013 C 129.75572,359.4876 104.38789,358.9281 90.456847,353.9498 z M 165.8338,75.923739 C 156.97908,60.814399 151.52974,32.606158 157.46546,32.606158 C 164.43775,47.732319 178.73037,61.227101 194.03409,70.643259 C 221.52091,83.949329 249.39257,78.578529 279.84247,54.108239 C 286.54595,48.721279 292.48231,44.913138 293.0345,45.645698 C 300.4697,57.184233 313.331,66.613261 317.58219,80.021449 C 317.58219,85.678729 293.22867,101.96033 274.01214,109.15007 C 226.38264,122.8706 193.96598,117.44304 165.8338,75.923739 z M 189.83603,40.997228 L 220.84514,6.6137488 L 255.30593,38.514418 C 243.51876,48.222549 235.00994,63.289118 221.54391,70.930009 C 210.90372,63.086273 195.02308,53.837816 189.83603,40.997228 z "/></svg>
+    </div>
+  </div>
+  <div class="gopuram-title">
+    <div class="tagline">Sabhai Theermaanangal · Council Resolutions</div>
+    <h1>Council Proceedings &amp; Resolutions</h1>
+    <div class="meta-line">Six Most Recent Sittings · January – June 2024 · Convened at the Council Hall, Mada Veethi</div>
+  </div>
+  <div class="hero-frame" aria-hidden="true">
+    <svg viewBox="0 0 313.71717 29.540759" preserveAspectRatio="xMidYMid meet"><path d="M -45.203647,120.20506 C -47.284330,119.61012 -48.803746,118.86742 -50.086377,117.81835 C -51.753894,116.45447 -52.980495,115.17808 -52.980189,114.80705 C -52.980047,114.63341 -53.189327,114.33468 -53.445259,114.14323 C -54.264873,113.53009 -54.610039,112.29532 -54.568816,110.12392 C -54.493546,106.15896 -53.726819,103.83800 -51.209110,99.953703 C -49.117153,96.726236 -44.539741,93.500820 -40.561447,92.450938 C -38.308885,91.856485 -32.312669,91.654646 -29.558183,92.080566 C -22.610063,93.154920 -13.405211,96.540800 -8.9019867,99.678694 C -8.0483775,100.273490 -8.1069903,100.302030 -7.5728724,99.031310 C -7.3476877,98.495577 -6.6914040,97.427337 -6.1144640,96.657439 C -5.2582713,95.514904 -4.6565313,95.056775 -2.8403971,94.164801 C -0.6782892,93.102891 1.7233682,92.385564 3.8873128,92.155345 C 4.4697180,92.093405 5.2863722,91.914370 5.7021023,91.757540 C 6.4759585,91.465598 12.183153,91.560615 15.794884,91.925561 C 18.059426,92.154389 25.403877,93.603289 27.014458,94.138939 C 28.171057,94.523600 28.218196,94.515320 30.101142,93.596594 C 32.629614,92.362894 34.117799,92.116052 38.547977,92.195530 C 42.161717,92.260390 42.838131,92.342669 45.290770,93.016068 C 45.944711,93.195613 47.010531,93.391760 47.659255,93.451957 C 48.307984,93.512157 49.497497,93.734030 50.302618,93.945033 C 51.636106,94.294502 51.927907,94.284465 53.579079,93.832298 C 57.877780,92.655112 70.354172,91.344812 73.826833,91.705820 C 74.652053,91.791610 76.379700,92.114295 77.666048,92.422894 C 79.712519,92.913858 80.184617,92.944727 81.442907,92.669846 C 84.481781,92.005967 88.199737,91.608331 92.571160,91.479668 C 96.705356,91.358001 97.278851,91.397081 98.951411,91.914392 C 100.316033,92.336470 101.057303,92.753683 101.830663,93.534952 C 103.127393,94.844927 103.460663,96.244408 103.454363,100.353100 C 103.449363,103.310550 103.693663,104.804470 104.080023,104.186350 C 104.188093,104.013470 104.258573,102.951660 104.236643,101.826780 C 104.135133,96.620140 104.305433,95.800395 105.904523,93.802304 C 106.755153,92.739441 108.550053,91.673717 110.006193,91.366941 C 112.824383,90.773201 125.895963,91.669053 128.851493,92.658482 C 129.549713,92.892232 130.189013,92.846600 132.027683,92.431796 C 136.477423,91.427930 137.189473,91.350120 141.694913,91.375291 C 145.710923,91.397691 146.699233,91.496720 150.203313,92.227902 C 157.053263,93.657172 157.401083,93.662099 162.638003,92.403849 C 163.922823,92.095153 165.711393,91.953348 168.461253,91.942169 C 172.020993,91.927649 172.607103,91.991229 174.146733,92.558122 C 175.090873,92.905773 176.262013,93.421330 176.749263,93.703799 C 177.573873,94.181845 177.738623,94.191492 179.129833,93.843135 C 180.908913,93.397658 184.426293,92.823261 188.965233,92.236984 C 192.855213,91.734521 200.668103,91.717911 204.046843,92.204891 C 209.907383,93.049567 213.910073,95.315152 214.618063,98.188346 L 214.905073,99.353079 L 218.263583,97.722601 C 221.441513,96.179797 226.488953,94.237945 229.706093,93.320408 C 234.422223,91.975372 242.387543,91.609495 246.643593,92.542400 C 251.574173,93.623164 256.664163,98.093452 258.284243,102.765844 C 258.935163,104.643164 259.303023,107.835124 259.079063,109.661584 C 258.610023,113.484674 256.003973,117.270474 252.594353,119.081894 C 252.083643,119.353214 251.486543,119.704034 251.267463,119.861794 C 249.985703,120.781794 247.275243,120.944344 241.871763,120.425034 C 237.645763,120.018884 198.777643,119.860994 193.585683,120.228914 C 190.219463,120.467434 183.869843,120.364904 179.409223,120.000484 C 176.218803,119.738874 168.005983,117.535094 164.453393,115.988564 C 163.913553,115.753554 163.348973,115.560644 163.198783,115.559884 C 162.760313,115.557884 162.879523,116.226274 163.447783,116.956284 C 164.086643,117.777004 164.109933,118.421344 163.530353,119.239954 C 163.113963,119.828054 162.992233,119.849244 161.080753,119.666304 C 159.974483,119.560434 157.880003,119.225354 156.426323,118.921674 C 154.972633,118.617994 152.334313,118.298834 150.563373,118.212434 C 147.108463,118.043874 145.906883,118.232314 141.629003,119.614034 C 139.579443,120.275994 139.470593,120.283534 136.825483,119.946614 C 135.141723,119.732144 131.784243,119.620834 127.940263,119.652054 C 121.893683,119.701154 121.736433,119.688854 120.590703,119.076744 C 119.269823,118.371064 117.727833,118.407814 115.546263,119.196964 C 114.663973,119.516124 113.389093,119.629914 110.649193,119.634094 C 105.851833,119.641094 105.066333,119.471334 104.518143,118.306574 L 104.095503,117.408554 L 103.007953,118.267994 C 101.140553,119.743714 100.066493,120.091224 97.410923,120.078924 C 96.097583,120.072924 93.853533,119.841564 92.424143,119.564994 C 90.396573,119.172654 89.729373,119.130234 89.389043,119.372004 C 87.962543,120.385394 84.188643,120.588524 80.019163,119.876334 C 77.677083,119.476274 75.668873,119.517084 69.900543,120.081974 C 67.529623,120.314154 67.510403,120.311204 65.934833,119.472434 L 64.351593,118.629574 L 59.589013,118.633574 C 56.268783,118.636574 54.255323,118.762804 52.940643,119.051894 C 49.986883,119.701434 47.758543,119.846714 46.590933,119.465874 C 45.196463,119.011054 44.377453,118.204904 44.382093,117.291684 C 44.384193,116.880504 44.275463,116.543504 44.140483,116.542814 C 44.005513,116.542134 42.902353,116.897494 41.689043,117.331854 C 33.792403,120.158764 23.679273,121.115274 10.323703,120.298424 C 3.221033,119.864014 0.068053,119.826704 -12.517973,120.028164 C -17.684453,120.110864 -25.781423,120.232864 -30.511253,120.299274 C -35.241073,120.365674 -40.182703,120.456924 -41.492633,120.501944 C -43.008813,120.554154 -44.354393,120.446654 -45.195353,120.206104 z" fill="#e34234"/></svg>
+  </div>
+</div>
+
+<div class="divider" aria-hidden="true">
+  <svg viewBox="380 280 540 60" preserveAspectRatio="xMidYMid meet"><use href="#"/><path d="M 700.08977,557.12137 C 696.24683,545.42137 692.66815,541.62137 689.04415,539.62137 C 695.34983,541.42137 705.55301,545.41137 715.34117,553.62137 C 716.41064,547.62137 718.18000,540.91137 720.08977,535.62137 L 700.08977,535.62137 z" fill="#e34234"/></svg>
+</div>
+
+<!-- ============ MAIN ============ -->
+<main>
+
+  <section>
+    <div class="section-head">
+      <div class="eyebrow">Public Notice · Section 18(1) Town Panchayats Act</div>
+      <h2>Register of Council Sittings, 2024</h2>
+      <p>Pursuant to Rule 11 of the Tamil Nadu Town Panchayats (Procedure) Rules, 2000, the proceedings of every ordinary sitting of the Council are hereby published for the information of the residents of the eighteen wards. Minutes are available in Tamil and English; certified true copies may be obtained at the office of the Town Panchayat upon payment of the prescribed fee.</p>
+    </div>
+
+    <div class="chair-bar">
+      <div class="chair-mini-seal" aria-hidden="true">
+        <svg viewBox="0 0 356 367"><path d="M 90.456847,353.9498 C 51.797347,340.13485 23.72672,305.75839 12.612487,258.6184 C 7.5684267,237.22321 6.1421397,201.86984 10.323594,201.86984 C 11.712834,201.86984 15.42322,211.57056 18.568972,223.427 C 25.452892,249.37152 37.19436,273.76855 48.535988,285.69407 C 67.374717,305.50242 114.0356,313.26029 140.92106,301.05394 C 161.86409,291.54544 170.35697,268.94603 161.24995,246.95931 C 154.21242,229.96943 138.24701,224.28836 108.50834,228.19197 C 108.50834,228.19197 90.282834,208.57398 84.476417,173.73548 L 103.15738,175.42939 C 125.65731,177.46962 142.64532,172.49605 151.46236,161.28728 C 159.74765,150.75419 159.5685,146.68046 150.34841,135.96157 C 137.04396,120.49428 113.15511,124.41248 64.786577,149.99522 L 40.381632,109.08518 L 50.613137,101.2812 C 76.253387,81.724339 120.77357,71.947329 146.11011,80.309169 C 169.18841,87.925649 186.12724,118.14755 181.60247,143.63298 C 178.54327,160.86286 164.72752,184.99524 154.05369,191.75339 L 144.84862,197.58162 L 157.56351,203.31522 C 179.17018,213.05833 192.36061,205.61034 208.12001,174.76849 C 229.92949,132.0869 244.0745,121.0378 276.96658,120.99051 C 292.28176,120.96847 297.73268,122.57499 308.90312,130.4031 C 336.78213,149.94016 351.9622,190.39693 348.62804,236.27272 C 344.40474,294.37435 316.88374,329.61601 275.73415,329.61601 C 253.15086,329.61601 238.59451,321.69526 227.00729,303.10156 C 216.82976,286.76927 212.24334,254.42288 218.08805,240.19369 z"/></svg>
+      </div>
+      <div>
+        <span class="label">Chairperson</span>
+        <span class="value">Thiru K. Murugesan</span>
+        <span class="small-value">Elected 19 February 2022 · Independent</span>
+      </div>
+      <div>
+        <span class="label">Vice Chair</span>
+        <span class="value">Tmt. R. Shanthi</span>
+      </div>
+      <div>
+        <span class="label">Commissioner</span>
+        <span class="value">Thiru S. Ramanathan, B.A., B.L.</span>
+      </div>
+      <div>
+        <span class="label">Council Strength</span>
+        <span class="value">18 Ward Members</span>
+      </div>
+    </div>
+
+    <!-- ============ RESOLUTION CARDS ============ -->
+    <div class="cards">
+
+      <article class="card">
+        <span class="double-rule-top"></span>
+        <span class="double-rule-bottom"></span>
+        <span class="card-lotus" aria-hidden="true"><span class="lotus-glyph"></span></span>
+        <p class="resolution-no">Resolution 47 / 2024 · Sitting of 12 January 2024</p>
+        <h3>Sanction of Rs. 18.60 Lakh for Repair of the South Mada Street Stormwater Drain</h3>
+        <p class="subject">The Council resolved to sanction expenditure of Rupees Eighteen Lakh Sixty Thousand only towards reconstruction of the masonry stormwater drain along South Mada Street between the Tank Bund junction and the Old Bus Stand, comprising 412 running metres, under the State Finance Commission Devolution Grant 2023–24. Tendering to be completed before 28 February 2024.</p>
+        <div class="meta">
+          <div><span class="k">Date</span><span class="v">12 Jan 2024</span></div>
+          <div><span class="k">File No.</span><span class="v">TPN / E1 / 047 / 24</span></div>
+          <div><span class="k">Ward</span><span class="v">Ward 4 &amp; 5</span></div>
+          <div><span class="k">Movers</span><span class="v">Selvi K. Anitha</span></div>
+          <div><span class="k">Vote</span><span class="v">17 For · 0 Against</span></div>
+          <div><span class="k">Quorum</span><span class="v">17 / 18 Present</span></div>
+        </div>
+        <div class="downloads">
+          <a href="#minutes-jan-tamil">Minutes · தமிழ் · PDF</a>
+          <a href="#minutes-jan-eng" class="alt">Minutes · English · PDF</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="double-rule-top"></span>
+        <span class="double-rule-bottom"></span>
+        <span class="card-lotus" aria-hidden="true"><span class="lotus-glyph"></span></span>
+        <p class="resolution-no">Resolution 58 / 2024 · Sitting of 09 February 2024</p>
+        <h3>Award of Solid Waste Collection Contract for the Northern Sector</h3>
+        <p class="subject">Resolved to award the door-to-door solid waste collection contract for Wards 1 to 9 (Northern Sector) to M/s. Vetrivel Sanitation Services, Srirangam, at the rate of Rs. 7.42 lakh per month for a period of twenty-four months, the lowest of three responsive tenders received against Tender Notice No. 11/2024 dated 18 January 2024.</p>
+        <div class="meta">
+          <div><span class="k">Date</span><span class="v">09 Feb 2024</span></div>
+          <div><span class="k">File No.</span><span class="v">TPN / SW / 058 / 24</span></div>
+          <div><span class="k">Wards</span><span class="v">1 – 9</span></div>
+          <div><span class="k">Movers</span><span class="v">Thiru P. Velusamy</span></div>
+          <div><span class="k">Vote</span><span class="v">15 For · 2 Against</span></div>
+          <div><span class="k">Quorum</span><span class="v">17 / 18 Present</span></div>
+        </div>
+        <div class="downloads">
+          <a href="#minutes-feb-tamil">Minutes · தமிழ் · PDF</a>
+          <a href="#minutes-feb-eng" class="alt">Minutes · English · PDF</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="double-rule-top"></span>
+        <span class="double-rule-bottom"></span>
+        <span class="card-lotus" aria-hidden="true"><span class="lotus-glyph"></span></span>
+        <p class="resolution-no">Resolution 71 / 2024 · Sitting of 14 March 2024</p>
+        <h3>Levy of Revised Property Tax on Commercial Premises along East Mada Street</h3>
+        <p class="subject">Resolved to adopt the revised Annual Rateable Value schedule for commercial properties along East Mada Street, Car Street and Vannarapettai, effective from the half-year commencing 01 April 2024, in conformity with the Tamil Nadu Town Panchayats (Property Tax) Rules. Notice of revision to be published in two Tamil dailies within fifteen days.</p>
+        <div class="meta">
+          <div><span class="k">Date</span><span class="v">14 Mar 2024</span></div>
+          <div><span class="k">File No.</span><span class="v">TPN / R1 / 071 / 24</span></div>
+          <div><span class="k">Wards</span><span class="v">6, 7, 8</span></div>
+          <div><span class="k">Movers</span><span class="v">Tmt. R. Shanthi</span></div>
+          <div><span class="k">Vote</span><span class="v">14 For · 3 Against · 1 Abst.</span></div>
+          <div><span class="k">Quorum</span><span class="v">18 / 18 Present</span></div>
+        </div>
+        <div class="downloads">
+          <a href="#minutes-mar-tamil">Minutes · தமிழ் · PDF</a>
+          <a href="#minutes-mar-eng" class="alt">Minutes · English · PDF</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="double-rule-top"></span>
+        <span class="double-rule-bottom"></span>
+        <span class="card-lotus" aria-hidden="true"><span class="lotus-glyph"></span></span>
+        <p class="resolution-no">Resolution 84 / 2024 · Sitting of 11 April 2024</p>
+        <h3>Approval of the Annual Budget Estimate for the Year 2024–25</h3>
+        <p class="subject">The Council approved the Budget Estimate placing the total receipts at Rs. 9.42 crore and the total expenditure at Rs. 9.18 crore, leaving a closing balance of Rs. 24.06 lakh. Heads of major outlay: street lighting Rs. 1.62 cr, water supply Rs. 2.34 cr, sanitation Rs. 1.86 cr, road maintenance Rs. 1.47 cr, and the Periya Kulam desilting reserve Rs. 38.50 lakh.</p>
+        <div class="meta">
+          <div><span class="k">Date</span><span class="v">11 Apr 2024</span></div>
+          <div><span class="k">File No.</span><span class="v">TPN / B1 / 084 / 24</span></div>
+          <div><span class="k">Scope</span><span class="v">All Wards</span></div>
+          <div><span class="k">Movers</span><span class="v">Commissioner</span></div>
+          <div><span class="k">Vote</span><span class="v">16 For · 1 Against · 1 Abst.</span></div>
+          <div><span class="k">Quorum</span><span class="v">18 / 18 Present</span></div>
+        </div>
+        <div class="downloads">
+          <a href="#minutes-apr-tamil">Minutes · தமிழ் · PDF</a>
+          <a href="#minutes-apr-eng" class="alt">Minutes · English · PDF</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="double-rule-top"></span>
+        <span class="double-rule-bottom"></span>
+        <span class="card-lotus" aria-hidden="true"><span class="lotus-glyph"></span></span>
+        <p class="resolution-no">Resolution 96 / 2024 · Sitting of 09 May 2024</p>
+        <h3>Sanction for Augmentation of the Cauvery Combined Water Supply Scheme</h3>
+        <p class="subject">Resolved to accept the technical estimate of Rs. 2.34 crore prepared by the Tamil Nadu Water Supply and Drainage Board for the augmentation of the existing Cauvery Combined Water Supply Scheme, comprising one additional 2.5-lakh-litre overhead tank at Therkku Theru and 6.8 km of distribution mains, and to remit the panchayat share of 25 per cent (Rs. 58.50 lakh) in three instalments.</p>
+        <div class="meta">
+          <div><span class="k">Date</span><span class="v">09 May 2024</span></div>
+          <div><span class="k">File No.</span><span class="v">TPN / W1 / 096 / 24</span></div>
+          <div><span class="k">Wards</span><span class="v">10, 11, 14, 16</span></div>
+          <div><span class="k">Movers</span><span class="v">Thiru M. Arumugam</span></div>
+          <div><span class="k">Vote</span><span class="v">18 For · 0 Against</span></div>
+          <div><span class="k">Quorum</span><span class="v">18 / 18 Present</span></div>
+        </div>
+        <div class="downloads">
+          <a href="#minutes-may-tamil">Minutes · தமிழ் · PDF</a>
+          <a href="#minutes-may-eng" class="alt">Minutes · English · PDF</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="double-rule-top"></span>
+        <span class="double-rule-bottom"></span>
+        <span class="card-lotus" aria-hidden="true"><span class="lotus-glyph"></span></span>
+        <p class="resolution-no">Resolution 108 / 2024 · Sitting of 13 June 2024</p>
+        <h3>Naming of the New Library at Bazaar Veethi as the Bharathiyar Reading Room</h3>
+        <p class="subject">Resolved that the newly constructed reading room and panchayat library at Bazaar Veethi (Survey No. 142/3) be designated the “Mahakavi Bharathiyar Reading Room”, and that an inaugural function be conducted on 11 July 2024 at 5.30 p.m. in the presence of the District Collector, Tiruchirappalli. Annual book-purchase grant fixed at Rs. 1.20 lakh.</p>
+        <div class="meta">
+          <div><span class="k">Date</span><span class="v">13 Jun 2024</span></div>
+          <div><span class="k">File No.</span><span class="v">TPN / G3 / 108 / 24</span></div>
+          <div><span class="k">Ward</span><span class="v">Ward 9</span></div>
+          <div><span class="k">Movers</span><span class="v">Selvi A. Bharathi</span></div>
+          <div><span class="k">Vote</span><span class="v">18 For · 0 Against</span></div>
+          <div><span class="k">Quorum</span><span class="v">18 / 18 Present</span></div>
+        </div>
+        <div class="downloads">
+          <a href="#minutes-jun-tamil">Minutes · தமிழ் · PDF</a>
+          <a href="#minutes-jun-eng" class="alt">Minutes · English · PDF</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true">
+    <svg viewBox="380 280 540 60" preserveAspectRatio="xMidYMid meet"><path d="M 700.08977,557.12137 C 696.24683,545.42137 692.66815,541.62137 689.04415,539.62137 C 695.34983,541.42137 705.55301,545.41137 715.34117,553.62137 C 716.41064,547.62137 718.18000,540.91137 720.08977,535.62137 L 700.08977,535.62137 z" fill="#e34234"/></svg>
+  </div>
+
+  <!-- ============ ARCHIVE TABLE ============ -->
+  <section>
+    <div class="section-head">
+      <div class="eyebrow">Older Sittings · Indexed by Date</div>
+      <h2>Index of Resolutions · 2023</h2>
+      <p>The full register of resolutions for the financial year 2023–24 is open to inspection at the Records Section of the panchayat office on all working days between 10.00 a.m. and 4.30 p.m. Certified copies are issued under Rule 14 against payment of Rs. 12 per page.</p>
+    </div>
+
+    <table class="archive-table">
+      <thead>
+        <tr>
+          <th>Sitting Date</th>
+          <th>Resolutions</th>
+          <th>Principal Subjects</th>
+          <th>File No.</th>
+          <th>Minutes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="yatra">14 Dec 2023</td>
+          <td>Res. 31 – 46</td>
+          <td>Street-lighting LED retrofit (Rs. 42.80 lakh); Periya Kulam desilting tender approval; sanitary worker recruitment of nine posts.</td>
+          <td>TPN / 12-23</td>
+          <td><a href="#m-dec23">Tamil · English</a></td>
+        </tr>
+        <tr>
+          <td class="yatra">09 Nov 2023</td>
+          <td>Res. 18 – 30</td>
+          <td>Adoption of revised birth and death certificate fees; rental of community hall at Sannadhi Theru fixed at Rs. 850 per day.</td>
+          <td>TPN / 11-23</td>
+          <td><a href="#m-nov23">Tamil · English</a></td>
+        </tr>
+        <tr>
+          <td class="yatra">12 Oct 2023</td>
+          <td>Res. 09 – 17</td>
+          <td>Diwali sanitation arrangements; condolence on the demise of former Chair Thiru V. Krishnan; relief disbursal for Cyclone Michaung evacuees (Rs. 4.62 lakh).</td>
+          <td>TPN / 10-23</td>
+          <td><a href="#m-oct23">Tamil · English</a></td>
+        </tr>
+        <tr>
+          <td class="yatra">14 Sep 2023</td>
+          <td>Res. 01 – 08</td>
+          <td>Constitution of standing committees; appointment of Internal Auditor; review of pending property tax arrears (Rs. 14.38 lakh).</td>
+          <td>TPN / 09-23</td>
+          <td><a href="#m-sep23">Tamil · English</a></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="notice-strip">
+      <div>
+        <h3>Inspection of the Resolutions Register</h3>
+        <p>The complete bound register for the years 1956 to 2023 is preserved at the panchayat archives. Inspection is permitted under Sec. 4(1)(b) of the Right to Information Act, 2005. Apply on Form RTI–1 to the Public Information Officer, room 14, ground floor.</p>
+      </div>
+      <a href="page-6.html">File an RTI Application</a>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true">
+    <svg viewBox="380 280 540 60" preserveAspectRatio="xMidYMid meet"><path d="M 700.08977,557.12137 C 696.24683,545.42137 692.66815,541.62137 689.04415,539.62137 C 695.34983,541.42137 705.55301,545.41137 715.34117,553.62137 C 716.41064,547.62137 718.18000,540.91137 720.08977,535.62137 L 700.08977,535.62137 z" fill="#e34234"/></svg>
+  </div>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="footer-seal">
+    <div class="footer-mandala" aria-hidden="true">
+      <svg viewBox="0 0 356 367"><path d="M 90.456847,353.9498 C 51.797347,340.13485 23.72672,305.75839 12.612487,258.6184 C 7.5684267,237.22321 6.1421397,201.86984 10.323594,201.86984 C 11.712834,201.86984 15.42322,211.57056 18.568972,223.427 C 25.452892,249.37152 37.19436,273.76855 48.535988,285.69407 C 67.374717,305.50242 114.0356,313.26029 140.92106,301.05394 C 161.86409,291.54544 170.35697,268.94603 161.24995,246.95931 C 154.21242,229.96943 138.24701,224.28836 108.50834,228.19197 C 108.50834,228.19197 90.282834,208.57398 84.476417,173.73548 L 103.15738,175.42939 C 125.65731,177.46962 142.64532,172.49605 151.46236,161.28728 C 159.74765,150.75419 159.5685,146.68046 150.34841,135.96157 C 137.04396,120.49428 113.15511,124.41248 64.786577,149.99522 L 40.381632,109.08518 L 50.613137,101.2812 C 76.253387,81.724339 120.77357,71.947329 146.11011,80.309169 C 169.18841,87.925649 186.12724,118.14755 181.60247,143.63298 C 178.54327,160.86286 164.72752,184.99524 154.05369,191.75339 L 144.84862,197.58162 L 157.56351,203.31522 C 179.17018,213.05833 192.36061,205.61034 208.12001,174.76849 C 229.92949,132.0869 244.0745,121.0378 276.96658,120.99051 C 292.28176,120.96847 297.73268,122.57499 308.90312,130.4031 C 336.78213,149.94016 351.9622,190.39693 348.62804,236.27272 C 344.40474,294.37435 316.88374,329.61601 275.73415,329.61601 C 253.15086,329.61601 238.59451,321.69526 227.00729,303.10156 C 216.82976,286.76927 212.24334,254.42288 218.08805,240.19369 z"/></svg>
+    </div>
+  </div>
+
+  <div class="mandapa">
+    <div class="mandapa-col">
+      <h4>Contact</h4>
+      <p>Office of the Municipal Commissioner</p>
+      <p>74, North Mada Veethi</p>
+      <p>Tiruvanaikoil 620 005</p>
+      <p>Tiruchirappalli District</p>
+      <p>Tamil Nadu</p>
+      <p>Tel: 0431 — 246 1820</p>
+      <p>commissioner.tpvk@tn.gov.in</p>
+    </div>
+    <div class="mandapa-col">
+      <h4>Office Hours</h4>
+      <p>Monday – Friday</p>
+      <p>10.00 a.m. – 5.45 p.m.</p>
+      <p>Saturday (Counter)</p>
+      <p>10.00 a.m. – 1.00 p.m.</p>
+      <p>Closed on second Saturdays, Sundays and notified Government holidays.</p>
+      <p>Public hearing: every Wednesday, 11.00 a.m.</p>
+    </div>
+    <div class="mandapa-col">
+      <h4>The Council</h4>
+      <ul>
+        <li><a href="page-3.html">Resolutions Register</a></li>
+        <li><a href="page-4.html">Ward Members</a></li>
+        <li><a href="page-2.html">Citizen Services</a></li>
+        <li><a href="page-5.html">Tenders &amp; Notices</a></li>
+        <li><a href="page-1.html">Home</a></li>
+        <li><a href="page-6.html">Visit &amp; Grievance</a></li>
+      </ul>
+    </div>
+    <div class="mandapa-col">
+      <h4>Accessibility</h4>
+      <p>Ramp access at the South entrance.</p>
+      <p>Wheelchair available at counter 3.</p>
+      <p>Tamil Sign Language interpreter on request — telephone three working days in advance.</p>
+      <p>Documents in large print on application under Rule 7(c).</p>
+    </div>
+    <div class="mandapa-col">
+      <h4>மொழி · Language</h4>
+      <p>This portal is published in Tamil and English in compliance with the Tamil Nadu Official Language Act, 1956.</p>
+      <p><a href="#tamil">தமிழில் காண்க</a></p>
+      <p><a href="#english">View in English</a></p>
+      <p>Translations to other Indian languages on request.</p>
+    </div>
+  </div>
+
+  <div class="footer-arabesque" aria-hidden="true">
+    <svg viewBox="380 280 540 60" preserveAspectRatio="xMidYMid meet">
+      <path d="M 400,310 L 900,310" stroke="#c9a23a" stroke-width="2" fill="none"/>
+      <path d="M 400,318 L 900,318" stroke="#c9a23a" stroke-width="1" fill="none"/>
+      <g fill="#c9a23a">
+        <circle cx="430" cy="314" r="3"/><circle cx="470" cy="314" r="3"/><circle cx="510" cy="314" r="3"/>
+        <circle cx="550" cy="314" r="3"/><circle cx="590" cy="314" r="3"/><circle cx="630" cy="314" r="3"/>
+        <circle cx="670" cy="314" r="3"/><circle cx="710" cy="314" r="3"/><circle cx="750" cy="314" r="3"/>
+        <circle cx="790" cy="314" r="3"/><circle cx="830" cy="314" r="3"/><circle cx="870" cy="314" r="3"/>
+        <path d="M 450,300 Q 460,290 470,300 Q 480,310 490,300 Q 500,290 510,300 Q 520,310 530,300 Q 540,290 550,300 Q 560,310 570,300 Q 580,290 590,300 Q 600,310 610,300 Q 620,290 630,300 Q 640,310 650,300 Q 660,290 670,300 Q 680,310 690,300 Q 700,290 710,300 Q 720,310 730,300 Q 740,290 750,300 Q 760,310 770,300 Q 780,290 790,300 Q 800,310 810,300 Q 820,290 830,300 Q 840,310 850,300" fill="none" stroke="#c9a23a" stroke-width="1.5"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="footer-base">
+    © 2024 Tiruvanaikoil Town Panchayat · Government of Tamil Nadu · Last updated 28 June 2024
+  </div>
+</footer>
+
+</body>
+</html>

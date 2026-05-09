@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="la">
+<head>
+<meta charset="UTF-8">
+<title>Aquae et Thermae — Waters and Baths</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    font-size: 17px;
+    line-height: 1.65;
+  }
+  a { color: var(--primary); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* ---------- HEADER ---------- */
+  .masthead {
+    background: var(--surface);
+    padding: 36px 0 0;
+    text-align: center;
+    border-bottom: 3px double var(--primary);
+  }
+  .pediment {
+    width: 720px;
+    margin: 0 auto;
+    position: relative;
+    padding: 26px 40px 18px;
+  }
+  .pediment::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: -28px; left: 50%;
+    transform: translateX(-50%);
+    width: 0; height: 0;
+    border-left: 360px solid transparent;
+    border-right: 360px solid transparent;
+    border-bottom: 38px solid var(--primary);
+  }
+  .pediment::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: -22px; left: 50%;
+    transform: translateX(-50%);
+    width: 0; height: 0;
+    border-left: 348px solid transparent;
+    border-right: 348px solid transparent;
+    border-bottom: 30px solid var(--surface);
+  }
+  .wordmark {
+    font-family: var(--font-display), serif;
+    font-size: 30px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin: 0;
+    font-weight: 600;
+  }
+  .wordmark-sub {
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-top: 8px;
+  }
+  .spqr {
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.5em;
+    color: var(--secondary);
+    font-size: 14px;
+    margin-top: 14px;
+  }
+
+  nav.primary {
+    background: var(--surface);
+    padding: 18px 0 14px;
+    text-align: center;
+  }
+  nav.primary ul {
+    list-style: none;
+    margin: 0; padding: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  nav.primary li {
+    display: inline-flex;
+    align-items: center;
+  }
+  nav.primary a {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.24em;
+    font-size: 12px;
+    color: var(--text);
+    padding: 6px 18px;
+  }
+  nav.primary a[aria-current="page"] {
+    color: var(--primary);
+    border-bottom: 2px solid var(--secondary);
+  }
+  .vine-glyph {
+    width: 16px; height: 16px;
+    fill: var(--secondary);
+    opacity: 0.8;
+  }
+
+  /* Greek key strip */
+  .key-strip {
+    height: 28px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 28'><g fill='none' stroke='%23a93226' stroke-width='2'><path d='M0 4 H20 V20 H8 V12 H14'/><path d='M20 4 H40 V20 H28 V12 H34'/><path d='M40 4 H60 V20 H48 V12 H54'/><path d='M60 4 H80 V20 H68 V12 H74'/></g></svg>");
+    background-repeat: repeat-x;
+    background-size: 80px 28px;
+    background-color: var(--bg);
+    border-top: 1px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    text-align: center;
+    padding: 60px 20px 50px;
+    position: relative;
+  }
+  .hero-wreath {
+    position: relative;
+    display: inline-block;
+    width: 560px;
+    max-width: 100%;
+    padding: 70px 60px 60px;
+  }
+  .hero-wreath svg.wreath {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+    opacity: 0.85;
+  }
+  .hero-wreath > * { position: relative; z-index: 1; }
+  .hero h1 {
+    font-family: var(--font-display), serif;
+    font-size: 38px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin: 0 0 10px;
+    font-weight: 600;
+  }
+  .hero .latin {
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+  .hero p.lede {
+    margin: 22px auto 0;
+    max-width: 480px;
+    font-style: italic;
+    color: #3a2a1a;
+  }
+
+  /* ---------- SECTION FRAME ---------- */
+  section {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 30px 30px 60px;
+    text-align: center;
+  }
+  .section-title {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin: 0 0 6px;
+    font-weight: 600;
+  }
+  .section-rule {
+    display: block;
+    margin: 14px auto 36px;
+    height: 22px;
+    width: 320px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 22'><line x1='0' y1='11' x2='130' y2='11' stroke='%23c9a23a' stroke-width='1.5'/><line x1='190' y1='11' x2='320' y2='11' stroke='%23c9a23a' stroke-width='1.5'/><circle cx='160' cy='11' r='6' fill='none' stroke='%23a93226' stroke-width='1.2'/><circle cx='160' cy='11' r='2' fill='%234d1c5e'/></svg>");
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  /* ---------- AQUEDUCT BLOCK ---------- */
+  .aqueduct {
+    background: var(--surface);
+    padding: 40px 50px;
+    border: 1px solid var(--primary);
+    outline: 1px solid var(--secondary);
+    outline-offset: 6px;
+    margin-bottom: 60px;
+    text-align: left;
+  }
+  .aqueduct .axis {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .aqueduct h2 {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.24em;
+    color: var(--primary);
+    font-size: 19px;
+    margin: 0 0 18px;
+    font-weight: 600;
+  }
+  .aqueduct p { margin: 0 0 14px; }
+  .aqueduct p:first-of-type::first-letter {
+    font-family: var(--font-display), serif;
+    font-size: 48px;
+    float: left;
+    line-height: 0.9;
+    padding: 6px 10px 0 0;
+    color: var(--primary);
+  }
+  .fountain-list {
+    margin-top: 24px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px 40px;
+    text-align: left;
+    font-size: 15px;
+  }
+  .fountain-list dt {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 12px;
+    color: var(--accent);
+    margin-top: 8px;
+  }
+  .fountain-list dd { margin: 0 0 4px; }
+
+  /* ---------- BATHS DIAGRAM ---------- */
+  .baths-block {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 36px;
+    background: var(--surface);
+    border: 1px solid var(--primary);
+    outline: 1px solid var(--secondary);
+    outline-offset: 6px;
+    padding: 50px 50px 50px 30px;
+    text-align: left;
+    margin-bottom: 60px;
+  }
+  .ionic-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .ionic-column svg {
+    width: 100%;
+    height: auto;
+  }
+  .baths-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+  }
+  .bath-card {
+    background: #faf6ec;
+    border: 1px solid var(--primary);
+    outline: 4px solid transparent;
+    outline-offset: 0;
+    padding: 22px 24px 20px;
+    position: relative;
+  }
+  .bath-card::before {
+    content: "";
+    position: absolute;
+    inset: -8px;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40' fill='none' stroke='%23c9a23a' stroke-width='1.4'><path d='M2 2 H14 V14 H8 V8 H10 M38 2 H26 V14 H32 V8 H30 M2 38 H14 V26 H8 V32 H10 M38 38 H26 V26 H32 V32 H30'/></svg>");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    z-index: 0;
+  }
+  .bath-card > * { position: relative; z-index: 1; }
+  .bath-card h3 {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 14px;
+    color: var(--primary);
+    margin: 0 0 10px;
+    text-align: center;
+    font-weight: 600;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--secondary);
+  }
+  .bath-card .meta {
+    font-size: 14px;
+    line-height: 1.55;
+  }
+  .bath-card .meta dt {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 10.5px;
+    color: var(--accent);
+    margin-top: 6px;
+  }
+  .bath-card .meta dd {
+    margin: 0 0 4px;
+  }
+  .bath-card p.body {
+    font-size: 14px;
+    margin: 8px 0 0;
+    line-height: 1.55;
+  }
+  .bath-card p.body::first-letter {
+    font-family: var(--font-display), serif;
+    font-size: 26px;
+    float: left;
+    line-height: 0.9;
+    padding: 4px 6px 0 0;
+    color: var(--primary);
+  }
+  .price-tag {
+    display: inline-block;
+    margin-top: 4px;
+    padding: 2px 8px;
+    border: 1px solid var(--secondary);
+    color: var(--accent);
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.14em;
+    font-size: 11px;
+    text-transform: uppercase;
+  }
+
+  /* ---------- ADVISORY ---------- */
+  .advisory {
+    position: relative;
+    background: #faf2e0;
+    border: 2px solid var(--primary);
+    padding: 60px 60px 50px;
+    margin: 0 auto 60px;
+    max-width: 880px;
+    text-align: center;
+  }
+  .advisory::before, .advisory::after {
+    content: "";
+    position: absolute;
+    left: 12px; right: 12px;
+    height: 6px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 6'><path d='M0 3 L8 0 L16 3 L24 0 L32 3 L40 0' stroke='%23c9a23a' fill='none' stroke-width='1'/></svg>");
+    background-repeat: repeat-x;
+  }
+  .advisory::before { top: 8px; }
+  .advisory::after { bottom: 8px; }
+  .advisory .seal {
+    width: 110px;
+    height: 110px;
+    margin: 0 auto 14px;
+    display: block;
+  }
+  .advisory h2 {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--primary);
+    font-size: 18px;
+    margin: 0 0 14px;
+    font-weight: 600;
+  }
+  .advisory p {
+    text-align: left;
+    margin: 0 auto 12px;
+    max-width: 680px;
+  }
+  .advisory p:first-of-type::first-letter {
+    font-family: var(--font-display), serif;
+    font-size: 44px;
+    float: left;
+    line-height: 0.9;
+    padding: 6px 10px 0 0;
+    color: var(--primary);
+  }
+  .advisory .signed {
+    margin-top: 18px;
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 12px;
+    color: var(--accent);
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    background: var(--surface);
+    border-top: 3px double var(--primary);
+    padding: 0 0 30px;
+    margin-top: 40px;
+  }
+  .rosette-row {
+    height: 28px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 28'><g fill='none' stroke='%23c9a23a' stroke-width='1.2'><circle cx='30' cy='14' r='6'/><circle cx='30' cy='14' r='2.5' fill='%23c9a23a'/><path d='M30 4 V24 M20 14 H40 M23 7 L37 21 M37 7 L23 21'/></g></svg>");
+    background-repeat: repeat-x;
+    background-size: 60px 28px;
+    border-bottom: 1px solid var(--secondary);
+  }
+  .footer-cols {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 1080px;
+    margin: 36px auto 0;
+    padding: 0 40px;
+    gap: 40px;
+    text-align: center;
+  }
+  .footer-cols h4 {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.24em;
+    font-size: 12px;
+    color: var(--primary);
+    margin: 0 0 10px;
+    font-weight: 600;
+  }
+  .footer-cols p {
+    font-size: 14px;
+    margin: 2px 0;
+    font-variant: small-caps;
+    letter-spacing: 0.04em;
+  }
+  .tailpiece {
+    text-align: center;
+    margin: 30px auto 14px;
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    color: var(--secondary);
+    letter-spacing: 0.4em;
+  }
+  .footer-bottom {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.5em;
+    color: var(--primary);
+    font-size: 12px;
+    border-top: 1px solid var(--secondary);
+    padding-top: 14px;
+    margin: 0 60px;
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="pediment">
+    <h1 class="wordmark">Curia Aedilium Ostiensis</h1>
+    <div class="wordmark-sub">Officium Aquarum · Thermarum · Fontium</div>
+    <div class="spqr">S · P · Q · O</div>
+  </div>
+</header>
+
+<nav class="primary" aria-label="Primary">
+  <ul>
+    <li><a href="page-1.html">Officium</a></li>
+    <li aria-hidden="true"><svg class="vine-glyph" viewBox="0 0 200 200"><path d="M100 30 C70 60 40 80 60 120 C75 150 100 140 100 170 C100 140 125 150 140 120 C160 80 130 60 100 30 Z" fill="currentColor"/></svg></li>
+    <li><a href="page-2.html">Edicta</a></li>
+    <li aria-hidden="true"><svg class="vine-glyph" viewBox="0 0 200 200"><path d="M100 30 C70 60 40 80 60 120 C75 150 100 140 100 170 C100 140 125 150 140 120 C160 80 130 60 100 30 Z" fill="currentColor"/></svg></li>
+    <li><a href="page-3.html">Magistratus</a></li>
+    <li aria-hidden="true"><svg class="vine-glyph" viewBox="0 0 200 200"><path d="M100 30 C70 60 40 80 60 120 C75 150 100 140 100 170 C100 140 125 150 140 120 C160 80 130 60 100 30 Z" fill="currentColor"/></svg></li>
+    <li><a href="page-4.html">Macellum</a></li>
+    <li aria-hidden="true"><svg class="vine-glyph" viewBox="0 0 200 200"><path d="M100 30 C70 60 40 80 60 120 C75 150 100 140 100 170 C100 140 125 150 140 120 C160 80 130 60 100 30 Z" fill="currentColor"/></svg></li>
+    <li><a href="page-5.html" aria-current="page">Aquae &amp; Thermae</a></li>
+    <li aria-hidden="true"><svg class="vine-glyph" viewBox="0 0 200 200"><path d="M100 30 C70 60 40 80 60 120 C75 150 100 140 100 170 C100 140 125 150 140 120 C160 80 130 60 100 30 Z" fill="currentColor"/></svg></li>
+    <li><a href="page-6.html">Ad Curiam</a></li>
+  </ul>
+</nav>
+<div class="key-strip" aria-hidden="true"></div>
+
+<main>
+
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-wreath">
+      <svg class="wreath" viewBox="0 0 323.75 295.79" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <radialGradient id="wreathGrad" cx="50%" cy="50%" r="60%">
+          <stop offset="0" stop-color="#c9a23a" stop-opacity="0.15"/>
+          <stop offset="1" stop-color="#3d6b2a" stop-opacity="0.85"/>
+        </radialGradient>
+        <path fill="url(#wreathGrad)" stroke="#3d6b2a" stroke-width="0.9" d="M141.7-18.6c-11 4.9-23.4 9.5-30 22.6-4.7 7.1-4.8 16.4-8.1 24.1 6.1-6.5 15.6-13.2 21-20.7 6-9.5 9.1-18 17.2-26zm164.5 0c8.1 8 11.2 16.5 17.2 26 5.4 7.6 14.9 14.2 21 20.7-3.3-7.8-3.4-17-8.1-24.1-6.7-13.2-19-17.8-30.1-22.6zM111.9-1.6c-5.6 1.6-10.6 5.5-14.6 11-9.1 10.8-10.7 24.9-6.9 42 1.3 4.5-0.5 8.7-0.3 13 2.7-6.2 5.7-11.9 11.6-15.9 13.1-8.4 16.7-12.8 20.1-20.8 3.9-9.3 4.7-10.7 4.8-19-3.8 12-15.3 17-23 25.2-4 4.4-7.2 9.6-9 15l-0.3-0.3c1-4.8 2.9-9.1 4-13.8 3.5-12.7 2.8-28 13.7-36.4zm223.7 0c10.9 8.5 10.2 23.8 13.7 36.4 1.1 4.7 3 9 4 13.8l-0.3 0.3c-1.8-5.4-5-10.6-9-15-7.8-8.1-19.2-13.2-23.1-25.2 0.1 8.4 0.8 9.7 4.8 19 3.4 7.9 7 12.4 20.1 20.8 5.9 4 8.9 9.7 11.6 15.9 0.3-4.2-1.6-8.4-0.3-13 3.8-17.1 2.2-31.2-6.9-42-3.9-5.6-8.9-9.4-14.6-11z" transform="translate(-64 21)"/>
+        <circle cx="161.9" cy="148" r="120" fill="none" stroke="#3d6b2a" stroke-width="1.2" stroke-dasharray="2 6" opacity="0.4"/>
+      </svg>
+      <h1 id="hero-title">Aquae et Thermae</h1>
+      <div class="latin">De Aquis · De Thermis · De Fontibus Publicis</div>
+      <p class="lede">Of the waters that descend from the Anio Vetus into our port, the fountains that nourish the wards, and the four bathing complexes held under the inspection of the Aediles.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="aq-title">
+    <h2 class="section-title" id="aq-title">De Aquaeductu Ostiensi</h2>
+    <span class="section-rule" aria-hidden="true"></span>
+
+    <div class="aqueduct">
+      <div class="axis">
+        <h2>The Branch of the Anio &amp; the Public Fountains</h2>
+      </div>
+      <p>Our city is fed by a subsidiary branch of the <em>Aqua Anio Vetus</em>, taken at the eleventh milestone from the parent channel and conducted by arcade and substruction across the Laurentine plain to the <em>castellum aquae</em> at the Porta Romana. From the great <em>castellum</em> the flow is divided into three orders: the first to the public fountains and the basins of the wards (<em>vici</em>); the second to the four imperial baths and the palaestrae; and the third, by lease and tally, to the houses of those who hold a license under the <em>tabula plumbea</em> stamped by this office.</p>
+      <p>Each branch is gauged by the bronze <em>calix</em> set in the wall of the <em>castellum</em> and witnessed twice yearly, on the Kalends of March and the Kalends of September, by the senior <em>aedilis curulis</em> in person. Tampering with a calix or piercing of the public mains carries a fine of two thousand sesterces and the confiscation of the offending lead pipe.</p>
+
+      <dl class="fountain-list">
+        <dt>Fons Fortunae · Forum Quadrant</dt>
+        <dd>Sextary flow, perennial. Drawn freely.</dd>
+        <dt>Fons Neptuni · Decumanus Maximus</dt>
+        <dd>Two-spout basin at the Bivium. Drawn freely.</dd>
+        <dt>Fons Mercurii · Vicus Mercurii</dt>
+        <dd>Single-spout, restored under T. Helvius Basila.</dd>
+        <dt>Fons Cereris · By the Macellum</dt>
+        <dd>Triple basin; reserved for market traders before the third hour.</dd>
+        <dt>Fons Dianae · Vicus Augustanus</dt>
+        <dd>Lustral water; not for the watering of beasts.</dd>
+        <dt>Fons Portae · Porta Marina</dt>
+        <dd>For the use of sailors and the watering of the customs-house.</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section aria-labelledby="baths-title">
+    <h2 class="section-title" id="baths-title">Thermarum Ostiae Conspectus</h2>
+    <span class="section-rule" aria-hidden="true"></span>
+
+    <div class="baths-block">
+      <aside class="ionic-column" aria-hidden="true">
+        <svg viewBox="0 0 100 520" xmlns="http://www.w3.org/2000/svg">
+          <!-- Capital (Ionic volutes) -->
+          <rect x="20" y="0" width="60" height="6" fill="#a93226"/>
+          <rect x="14" y="6" width="72" height="10" fill="#f5f0e6" stroke="#a93226" stroke-width="1"/>
+          <path d="M14 16 Q30 32 30 22 Q30 12 22 16 M86 16 Q70 32 70 22 Q70 12 78 16" fill="none" stroke="#a93226" stroke-width="1.5"/>
+          <circle cx="26" cy="22" r="2.5" fill="#c9a23a"/>
+          <circle cx="74" cy="22" r="2.5" fill="#c9a23a"/>
+          <rect x="20" y="32" width="60" height="6" fill="#a93226"/>
+          <!-- Shaft with flutes -->
+          <rect x="28" y="38" width="44" height="430" fill="#f5f0e6" stroke="#a93226" stroke-width="1"/>
+          <line x1="36" y1="38" x2="36" y2="468" stroke="#c9a23a" stroke-width="0.6"/>
+          <line x1="44" y1="38" x2="44" y2="468" stroke="#c9a23a" stroke-width="0.6"/>
+          <line x1="50" y1="38" x2="50" y2="468" stroke="#c9a23a" stroke-width="0.6"/>
+          <line x1="56" y1="38" x2="56" y2="468" stroke="#c9a23a" stroke-width="0.6"/>
+          <line x1="64" y1="38" x2="64" y2="468" stroke="#c9a23a" stroke-width="0.6"/>
+          <!-- Base -->
+          <rect x="22" y="468" width="56" height="8" fill="#a93226"/>
+          <ellipse cx="50" cy="486" rx="34" ry="6" fill="#f5f0e6" stroke="#a93226" stroke-width="1"/>
+          <rect x="14" y="492" width="72" height="10" fill="#a93226"/>
+          <rect x="10" y="502" width="80" height="14" fill="#f5f0e6" stroke="#a93226" stroke-width="1"/>
+        </svg>
+      </aside>
+
+      <div class="baths-grid">
+
+        <article class="bath-card">
+          <h3>Thermae Neptuni</h3>
+          <p class="body">Built by the divine Hadrian and dedicated in the year of the consuls Bruttius Praesens and Iunius Rusticus. Famed for the great mosaic of Neptune in the <em>frigidarium</em>; the <em>caldarium</em> faces the south-west and is heated from the corner praefurnium.</p>
+          <dl class="meta">
+            <dt>Address</dt>
+            <dd>Regio II, Insula IV, on the Decumanus.</dd>
+            <dt>Hours</dt>
+            <dd>Women: hour II to VI · Men: hour VII to sunset.</dd>
+            <dt>Entry</dt>
+            <dd><span class="price-tag">¼ as · women ½ as</span></dd>
+          </dl>
+        </article>
+
+        <article class="bath-card">
+          <h3>Thermae Mithrae</h3>
+          <p class="body">So called from the Mithraeum cut beneath the service corridor. A modest establishment of seven chambers, suited to the laborers of the salt-pans and the wool-fullers of the Vicus Augustanus. Inspected for soundness of vault every fifth year.</p>
+          <dl class="meta">
+            <dt>Address</dt>
+            <dd>Regio I, Insula XVII, behind the Mill of Silvanus.</dd>
+            <dt>Hours</dt>
+            <dd>Open hour III to sunset · No women's interval.</dd>
+            <dt>Entry</dt>
+            <dd><span class="price-tag">⅛ as · sailors free</span></dd>
+          </dl>
+        </article>
+
+        <article class="bath-card">
+          <h3>Thermae Septem Sapientium</h3>
+          <p class="body">The Baths of the Seven Sages, named for the painted exedra in the round hall depicting Solon, Thales, Bias, and their fellows with their inscribed maxims. The largest cold-pool in the city, eighteen paces across.</p>
+          <dl class="meta">
+            <dt>Address</dt>
+            <dd>Regio III, Insula X, by the Insula of the Charioteers.</dd>
+            <dt>Hours</dt>
+            <dd>Women: hour I to V · Men: hour VI to first lamp.</dd>
+            <dt>Entry</dt>
+            <dd><span class="price-tag">½ as · children ¼ as</span></dd>
+          </dl>
+        </article>
+
+        <article class="bath-card">
+          <h3>Thermae Fori</h3>
+          <p class="body">Adjoining the Forum on its eastern flank; restored at the cost of the senator C. Cartilius Poplicola in the consulship of Aelius Caesar. Reserved on the Ides of each month for the magistracy and the tribunes of the corn-fleet.</p>
+          <dl class="meta">
+            <dt>Address</dt>
+            <dd>Regio I, Insula XII, east side of the Forum.</dd>
+            <dt>Hours</dt>
+            <dd>Women: hour II to V · Men: hour V to ninth.</dd>
+            <dt>Entry</dt>
+            <dd><span class="price-tag">1 as · gratis on Ides</span></dd>
+          </dl>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="adv-title">
+    <h2 class="section-title" id="adv-title">Edictum de Aquae Parsimonia</h2>
+    <span class="section-rule" aria-hidden="true"></span>
+
+    <div class="advisory">
+      <svg class="seal" viewBox="0 0 117.79 118.25" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="58.9" cy="59.1" r="48" fill="#f5f0e6" stroke="#4d1c5e" stroke-width="1.2"/>
+        <circle cx="58.9" cy="59.1" r="40" fill="none" stroke="#c9a23a" stroke-width="0.8" stroke-dasharray="2 3"/>
+        <g fill="#3d6b2a" stroke="#3d6b2a" stroke-width="0.6">
+          <ellipse cx="20" cy="59" rx="10" ry="4" transform="rotate(-30 20 59)"/>
+          <ellipse cx="98" cy="59" rx="10" ry="4" transform="rotate(30 98 59)"/>
+          <ellipse cx="30" cy="30" rx="9" ry="3.5" transform="rotate(-60 30 30)"/>
+          <ellipse cx="88" cy="30" rx="9" ry="3.5" transform="rotate(60 88 30)"/>
+          <ellipse cx="30" cy="88" rx="9" ry="3.5" transform="rotate(60 30 88)"/>
+          <ellipse cx="88" cy="88" rx="9" ry="3.5" transform="rotate(-60 88 88)"/>
+          <ellipse cx="59" cy="20" rx="10" ry="4"/>
+          <ellipse cx="59" cy="98" rx="10" ry="4"/>
+        </g>
+        <text x="58.9" y="56" text-anchor="middle" font-family="Cinzel, serif" font-size="9" fill="#a93226" letter-spacing="2">SPQO</text>
+        <text x="58.9" y="70" text-anchor="middle" font-family="Cinzel, serif" font-size="6" fill="#4d1c5e" letter-spacing="1.5">AQVA · PARCE</text>
+      </svg>
+      <h2>Standing Advisory · Months of Sextilis &amp; September</h2>
+      <p>Whereas the flow of the Anio is observed each year to fall by some two-fifths during the dry months of <em>Sextilis</em> (August) and September, and whereas the public bathing complexes consume in summer above six hundred <em>quinariae</em> daily, this office, by authority of the senior aedile Q. Asconius Marcellus, decrees the following observances from the Kalends of Sextilis to the Kalends of October:</p>
+      <p>The fountains of the wards shall be drawn from only between the second and tenth hours; the watering of private gardens by leased pipe shall cease entirely; the Baths of the Forum shall close their <em>natatio</em> on the days following each <em>nundinae</em>; and householders are reminded that to fill a private cistern from the public spout is theft of public water and shall be punished with the lash for slaves and a fine of fifty sesterces for the freeborn.</p>
+      <p>Citizens observing breach of these provisions are urged to lodge complaint at the office of the curule aedile, in the chamber adjoining the Forum Baths, before the eleventh hour of any working day.</p>
+      <div class="signed">Given at Ostia · A.D. III Kal. Aug. · Q. Asconius Marcellus, Aed. Cur.</div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="rosette-row" aria-hidden="true"></div>
+  <div class="footer-cols">
+    <div>
+      <h4>Iurisdictio</h4>
+      <p>Curia Aedilium Ostiensis</p>
+      <p>Forum Ostiense, Tabularium</p>
+      <p>Regio I · Insula XII</p>
+    </div>
+    <div>
+      <h4>Horae Officii</h4>
+      <p>Hora prima ad nonam</p>
+      <p>Diebus fastis tantum</p>
+      <p>Clausa Saturnalibus</p>
+    </div>
+    <div>
+      <h4>Ad Nuntium</h4>
+      <p>Per tabellarium publicum</p>
+      <p>Vel scriba ad ianuam Curiae</p>
+      <p>Petitiones · vide Pagina VI</p>
+    </div>
+  </div>
+  <div class="tailpiece" aria-hidden="true">❦ · ❦ · ❦</div>
+  <div class="footer-bottom">SPQR · OSTIA</div>
+</footer>
+
+</body>
+</html>

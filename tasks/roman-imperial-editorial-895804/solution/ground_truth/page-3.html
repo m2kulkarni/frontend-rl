@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Columns & Correspondence | Acta Diurna</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* ---------- Masthead ---------- */
+  .masthead {
+    text-align: center;
+    padding: 38px 40px 0;
+    background: var(--surface);
+  }
+  .masthead .kicker {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 12px;
+  }
+  .masthead h1.wordmark {
+    font-family: var(--font-display), serif;
+    font-weight: 700;
+    font-size: 56px;
+    letter-spacing: 0.32em;
+    margin: 0 0 6px;
+    text-transform: uppercase;
+    text-indent: 0.32em; /* compensate tracking for centering */
+  }
+  .masthead .latin {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    color: var(--text-emphasis);
+    margin-bottom: 22px;
+  }
+  nav.primary {
+    display: flex;
+    justify-content: center;
+    gap: 38px;
+    padding: 14px 0 18px;
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+  }
+  nav.primary a { padding: 4px 2px; color: var(--primary); }
+  nav.primary a[aria-current="page"] {
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 2px;
+  }
+
+  /* ---------- Meander divider ---------- */
+  .meander {
+    display: block;
+    width: 100%;
+    height: 28px;
+    background-image: repeating-linear-gradient(
+      to right,
+      var(--primary) 0 22px,
+      transparent 22px 24px,
+      var(--primary) 24px 26px,
+      transparent 26px 48px
+    );
+    position: relative;
+    border-top: 1px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
+  }
+  .meander-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 0 40px;
+  }
+  .meander-row .line {
+    flex: 1;
+    height: 1px;
+    background: var(--primary);
+  }
+  .meander-row svg { display: block; }
+
+  /* Meander SVG strip */
+  .meander-strip {
+    width: 100%;
+    height: 22px;
+    display: block;
+  }
+
+  /* ---------- Page heading (pediment) ---------- */
+  .page-head {
+    text-align: center;
+    padding: 56px 40px 36px;
+    position: relative;
+  }
+  .pediment {
+    width: 360px;
+    height: 60px;
+    margin: 0 auto 18px;
+    position: relative;
+  }
+  .pediment::before {
+    content: "";
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 4px;
+    background: var(--primary);
+  }
+  .pediment::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 0; height: 0;
+    border-left: 180px solid transparent;
+    border-right: 180px solid transparent;
+    border-bottom: 56px solid transparent;
+    transform: translateX(-50%);
+  }
+  .pediment .triangle {
+    position: absolute;
+    left: 50%;
+    bottom: 4px;
+    transform: translateX(-50%);
+    width: 360px;
+    height: 56px;
+  }
+  .page-head .eyebrow {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.42em;
+    color: var(--secondary);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .page-head h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 700;
+    font-size: 44px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 18px;
+  }
+  .page-head .deck {
+    max-width: 640px;
+    margin: 0 auto;
+    font-style: italic;
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--primary);
+  }
+  .page-head .issue-line {
+    margin-top: 22px;
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.38em;
+    color: var(--secondary);
+    text-transform: uppercase;
+  }
+
+  /* ---------- Two-column classical layout ---------- */
+  main.columns-page {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 30px 60px 60px;
+  }
+  .columns-grid {
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr;
+    gap: 0 56px;
+  }
+  .column-rule {
+    background: var(--primary);
+    width: 1px;
+    margin: 18px 0;
+    position: relative;
+  }
+  .column-rule::before, .column-rule::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 9px; height: 9px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+  .column-rule::before { top: -4px; }
+  .column-rule::after { bottom: -4px; }
+
+  /* ---------- Department cards ---------- */
+  .department {
+    border: 1px solid var(--primary);
+    background: var(--surface);
+    padding: 32px 30px 30px;
+    margin-bottom: 38px;
+    position: relative;
+  }
+  .department::before {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border: 1px solid var(--primary);
+    pointer-events: none;
+    opacity: 0.35;
+  }
+  .dept-keystrip {
+    height: 14px;
+    margin: -32px -30px 22px;
+    background-image: repeating-linear-gradient(
+      to right,
+      var(--primary) 0 14px,
+      transparent 14px 16px,
+      var(--primary) 16px 18px,
+      transparent 18px 32px
+    );
+    border-bottom: 1px solid var(--primary);
+  }
+  .dept-kicker {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-size: 10px;
+    letter-spacing: 0.42em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .ornament-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .ornament-row .rule {
+    width: 60px; height: 1px;
+    background: var(--secondary);
+  }
+  .ornament-row svg {
+    width: 22px; height: 22px;
+    fill: var(--secondary);
+  }
+  .dept-title {
+    font-family: var(--font-display), serif;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 0 0 6px;
+    font-variant: small-caps;
+  }
+  .dept-title em {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    font-variant: normal;
+    font-size: 22px;
+    display: block;
+    color: var(--text-emphasis);
+    margin-top: 4px;
+  }
+  .byline {
+    text-align: center;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--primary);
+    margin-bottom: 4px;
+  }
+  .dateline {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    color: var(--secondary);
+    text-transform: uppercase;
+    margin-bottom: 22px;
+  }
+
+  /* Drop cap */
+  .dept-body {
+    column-count: 1;
+    text-align: justify;
+    hyphens: auto;
+    font-size: 15px;
+    line-height: 1.78;
+  }
+  .dept-body p { margin: 0 0 14px; }
+  .dropcap {
+    float: left;
+    font-family: var(--font-display), serif;
+    font-size: 64px;
+    line-height: 0.85;
+    padding: 6px 12px 0 0;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .dropcap-wrap {
+    position: relative;
+  }
+  .vine-cap {
+    float: left;
+    width: 56px;
+    height: 56px;
+    margin: 4px 14px 0 0;
+    fill: var(--secondary);
+    shape-outside: circle();
+  }
+  .dept-body .leaf-flourish {
+    text-align: center;
+    margin: 18px 0 8px;
+    color: var(--secondary);
+    font-size: 14px;
+    letter-spacing: 0.4em;
+  }
+
+  /* Inscription block */
+  .inscription {
+    background: var(--bg);
+    border-top: 1px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
+    padding: 18px 12px;
+    margin: 16px 0 18px;
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    line-height: 1.55;
+    font-size: 14px;
+  }
+  .inscription .cite {
+    display: block;
+    margin-top: 10px;
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: 0;
+    font-size: 12px;
+    color: var(--text-emphasis);
+  }
+  .translation {
+    font-style: italic;
+    font-size: 14px;
+    text-align: center;
+    color: var(--primary);
+    margin: -6px 0 16px;
+  }
+
+  /* Recipe list */
+  .recipe-card {
+    background: var(--bg);
+    border: 1px dotted var(--primary);
+    padding: 14px 18px;
+    margin: 14px 0 18px;
+    font-size: 14px;
+  }
+  .recipe-card h4 {
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.32em;
+    margin: 0 0 8px;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-align: center;
+  }
+  .recipe-card ul {
+    margin: 0; padding-left: 18px;
+  }
+  .recipe-card li { margin-bottom: 4px; }
+
+  /* Letters block */
+  .letter {
+    border-left: 2px solid var(--accent);
+    padding: 4px 0 4px 16px;
+    margin: 0 0 22px;
+  }
+  .letter .from {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 4px;
+  }
+  .letter p {
+    margin: 0 0 8px;
+    font-size: 14.5px;
+    line-height: 1.7;
+  }
+  .letter .signoff {
+    font-style: italic;
+    color: var(--text-emphasis);
+    font-size: 13.5px;
+  }
+
+  /* ---------- Section divider band ---------- */
+  .band-divider {
+    text-align: center;
+    padding: 30px 0 40px;
+    position: relative;
+  }
+  .band-divider .key-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    color: var(--secondary);
+  }
+  .band-divider .key-row .glyph {
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.4em;
+    font-size: 12px;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+  .band-divider .key-row .rule {
+    width: 220px; height: 1px;
+    background: var(--primary);
+  }
+
+  /* ---------- Index of departments ---------- */
+  .dept-index {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+    border-top: 1px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
+    padding: 26px 0;
+    margin-bottom: 30px;
+  }
+  .idx-item {
+    text-align: center;
+    padding: 0 12px;
+    border-right: 1px solid rgba(26,26,26,0.18);
+  }
+  .idx-item:last-child { border-right: 0; }
+  .idx-item .roman {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    color: var(--secondary);
+    letter-spacing: 0.18em;
+  }
+  .idx-item .name {
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    margin: 6px 0 4px;
+  }
+  .idx-item .author {
+    font-style: italic;
+    font-size: 12px;
+    color: var(--text-emphasis);
+  }
+
+  /* ---------- Footer ---------- */
+  footer.frieze {
+    margin-top: 60px;
+    background: var(--surface);
+    border-top: 1px solid var(--primary);
+  }
+  .frieze-grid {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+    padding: 40px 60px 24px;
+    text-align: center;
+  }
+  .frieze-grid h5 {
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    margin: 0 0 16px;
+    color: var(--accent);
+  }
+  .frieze-grid ul {
+    list-style: none;
+    margin: 0; padding: 0;
+    font-size: 13px;
+    line-height: 1.9;
+  }
+  .frieze-grid li { font-style: italic; }
+  .tailpiece {
+    text-align: center;
+    padding: 6px 0 18px;
+    color: var(--secondary);
+    font-size: 22px;
+    letter-spacing: 0.5em;
+  }
+  .copyline {
+    text-align: center;
+    font-style: italic;
+    font-size: 12px;
+    padding: 0 0 28px;
+    color: var(--primary);
+  }
+
+  /* small caps gold dates */
+  .gold-caps {
+    font-family: var(--font-display), serif;
+    color: var(--secondary);
+    letter-spacing: 0.3em;
+    font-size: 11px;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+<!-- Inline SVG sprite for vine leaf ornament -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="vine-leaf" viewBox="0 0 200 200">
+      <path d="M43.583 11.011c-1.79 0.033-3.58 0.128-5.34 0.312-7.05 0.737-13.93 2.795-19.16 7.469s-8.2 12.003-7.69 21c0.51 9.001 4.3 16.144 10.19 20.344 5.89 4.2 13.31 5.533 21.03 5.187 15.45-0.691 32.83-8.003 45.81-18.312 1.41-1.118 2.83-2.039 4.25-3.062 4.29 6.677 7.61 14.826 9.34 24.062-7.5-5.072-21.01-10.546-35.66 1.5-22.14 18.214-24.99 12.875-45.34-2.125-2.86 36.071 15.01 54.643 44.66 52.5 0 0-13.95 4.263-3.59 26.406 6.02 12.866 8.41 20.075 6.56 25.187-12.84 2.292-15.77 7.78-5.57 12.665 45.1 9.974 65.67-27.473 68.66-66.04 45.36 0 52.86-31.804 52.5-50.375-8.21 11.071-22.16 11.071-32.87 2.5-9.93-7.946-21.69-16.177-39-1.125-1.74-11.676-5.69-22.127-11.22-30.719 19.36-11.371 38.72-14.46 52.53-10.812 5.48 1.447 9.46 4.092 12.37 6.969-8.97 8.357-11.84 26.377 2.28 27.031 18.92 0.876 21.03-15.451 13.56-27.125-5.45-8.513-16.42-13.229-25.66-16.562-17.51-4.626-39.74-0.566-61.28 12.5-5.17-5.723-11.13-10.224-17.72-12.969-7.08-2.95-17.54-5.734-28.28-6.312-1.79-0.097-3.58-0.127-5.37-0.094zM43.7 21.04c1.52-0.018 3.09 0.028 4.66 0.125 9.41 0.585 19.25 3.062 25.03 5.469 4.63 1.93 9.04 5.226 13.06 9.437-1.42 1.036-2.84 1.976-4.25 3.094-11.3 8.976-27.54 15.597-40.03 16.156-6.25 0.279-11.37-0.914-14.78-3.343-3.41-2.43-5.65-6.037-6.03-12.75-0.38-6.718 1.42-10.299 4.4-12.969 2.98-2.67 7.74-4.367 13.5-4.969 1.44-0.15 2.92-0.232 4.44-0.25zM106 85.85c1 0.006 2.03 0.101 3.06 0.281 8.26 1.44 14 8.106 12.81 14.906-1.18 6.801-8.83 11.159-17.09 9.719-8.26-1.44-14-8.105-12.81-14.906 1.04-5.951 7.02-10.04 14.03-10z"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ============ MASTHEAD ============ -->
+<header class="masthead">
+  <div class="kicker">Quarterly · Anno MMXXIV · Numerus XL</div>
+  <h1 class="wordmark">Acta Diurna</h1>
+  <div class="latin">— Quae geruntur in orbe terrarum antiquo —</div>
+
+  <nav class="primary" aria-label="Primary">
+    <a href="page-1.html">Forum</a>
+    <a href="page-2.html">Long Reads</a>
+    <a href="page-3.html" aria-current="page">Columns</a>
+    <a href="page-4.html">Archive</a>
+    <a href="page-5.html">About</a>
+    <a href="page-6.html">Subscribe</a>
+  </nav>
+</header>
+
+<!-- Greek key meander divider -->
+<div class="meander-row" aria-hidden="true">
+  <div class="line"></div>
+  <svg width="180" height="22" viewBox="0 0 360 22" class="meander-strip" preserveAspectRatio="none">
+    <g fill="none" stroke="currentColor" stroke-width="2" style="color:var(--primary)">
+      <path d="M0 20 H360" />
+      <path d="M0 2 H360" />
+      <path d="M10 2 V14 H30 V20 M50 2 V14 H30 M50 20 V8 H70 V20 M90 2 V14 H70 M90 20 V8 H110 V20 M130 2 V14 H110 M130 20 V8 H150 V20 M170 2 V14 H150 M170 20 V8 H190 V20 M210 2 V14 H190 M210 20 V8 H230 V20 M250 2 V14 H230 M250 20 V8 H270 V20 M290 2 V14 H270 M290 20 V8 H310 V20 M330 2 V14 H310 M330 20 V8 H350" />
+    </g>
+  </svg>
+  <div class="line"></div>
+</div>
+
+<!-- ============ PAGE HEADING ============ -->
+<section class="page-head">
+  <div class="pediment" aria-hidden="true">
+    <svg class="triangle" viewBox="0 0 360 56" preserveAspectRatio="none">
+      <polyline points="0,56 180,0 360,56" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+      <polyline points="14,56 180,8 346,56" fill="none" stroke="#c9a23a" stroke-width="0.8"/>
+      <circle cx="180" cy="32" r="4" fill="#a93226"/>
+    </svg>
+  </div>
+  <div class="eyebrow">Pars Tertia &middot; Columnae et Epistulae</div>
+  <h2>Columns &amp; Correspondence</h2>
+  <p class="deck">
+    Four standing departments of the review — a press of new books, a kitchen of
+    reconstructed antiquity, a single inscription unpacked at length, and the
+    letters our readers have sent in reply.
+  </p>
+  <div class="issue-line">Issue XL · Autumnus MMXXIV · pp. 48–73</div>
+</section>
+
+<!-- Index strip -->
+<main class="columns-page">
+  <div class="dept-index" aria-label="Departments in this issue">
+    <div class="idx-item">
+      <div class="roman">I.</div>
+      <div class="name">Ex Libris</div>
+      <div class="author">Anne-Marie Foucher</div>
+    </div>
+    <div class="idx-item">
+      <div class="roman">II.</div>
+      <div class="name">De Re Coquinaria</div>
+      <div class="author">Tullio Renzi</div>
+    </div>
+    <div class="idx-item">
+      <div class="roman">III.</div>
+      <div class="name">Inscriptiones</div>
+      <div class="author">CIL VI 1199</div>
+    </div>
+    <div class="idx-item">
+      <div class="roman">IV.</div>
+      <div class="name">Letters</div>
+      <div class="author">From the Readers</div>
+    </div>
+  </div>
+
+  <!-- ============ TWO-COLUMN GRID ============ -->
+  <div class="columns-grid">
+
+    <!-- ====== LEFT COLUMN ====== -->
+    <div class="col col-left">
+
+      <!-- EX LIBRIS -->
+      <article class="department">
+        <div class="dept-keystrip" aria-hidden="true"></div>
+        <div class="dept-kicker">Departmentum I &middot; Ex Libris</div>
+        <div class="ornament-row" aria-hidden="true">
+          <span class="rule"></span>
+          <svg><use href="#vine-leaf"/></svg>
+          <span class="rule"></span>
+        </div>
+        <h3 class="dept-title">Ex Libris<em>The Monthly Classics-Press Review</em></h3>
+        <div class="byline">by Anne-Marie Foucher, Maître de conférences, Sorbonne</div>
+        <div class="dateline">September &middot; October &middot; November MMXXIV</div>
+
+        <div class="dept-body">
+          <div class="dropcap-wrap">
+            <svg class="vine-cap" aria-hidden="true"><use href="#vine-leaf"/></svg>
+            <p>
+              <span class="dropcap">F</span>our books cross the desk this quarter, and
+              three of them are worth your shelf. Princeton's reissue of Mary
+              Beard's <em>SPQR</em> in a tenth-anniversary edition (cloth, $34.95)
+              adds a new fifty-page postscript on the historiography of the
+              provinces — the most useful thing she has written about Rome in a
+              decade. Read it before the rest.
+            </p>
+          </div>
+          <p>
+            From Cambridge, Llewelyn Morgan's <em>Ovid: A Very Short Introduction</em>
+            (paper, £8.99) is exactly what the format demands and no more: lean,
+            literary, and unembarrassed by enthusiasm. He is particularly fine on
+            the <em>Tristia</em>, which he reads, against the current, as the poet's
+            best work. I am not certain he is wrong.
+          </p>
+          <p>
+            Yale's translation of Maurizio Bettini's <em>Il dio elegante</em>, now
+            <em>The Elegant God</em> (cloth, $30), recovers Mercury as something
+            stranger than the Olympian footnote we inherited from the
+            handbooks — a god of the threshold, the verge, the awkward in-between.
+            The English of Lucia Pasquini reads beautifully.
+          </p>
+          <div class="leaf-flourish">❦ &nbsp; ❦ &nbsp; ❦</div>
+          <p>
+            The fourth book — Penguin's revised <em>Aeneid</em> in Shadi Bartsch's
+            verse — has had its applause elsewhere. I will say only that I miss
+            Fitzgerald, and that the new line is brisker, plainer, and (one
+            suspects) destined for syllabi. A copy reached me with the Penguin
+            jacket band already creased; even the publishers, it seems, expect
+            their Vergils to be carried about.
+          </p>
+          <p>
+            <em>Forthcoming, and warned of: </em> Oxford's <em>Cambridge Companion to
+            Tacitus</em>, ed. A. J. Woodman, January MMXXV; and a long-rumored
+            <em>Suetonius</em> from Tom Holland, slated for the spring.
+          </p>
+        </div>
+      </article>
+
+      <!-- INSCRIPTIONES -->
+      <article class="department">
+        <div class="dept-keystrip" aria-hidden="true"></div>
+        <div class="dept-kicker">Departmentum III &middot; Inscriptiones</div>
+        <div class="ornament-row" aria-hidden="true">
+          <span class="rule"></span>
+          <svg><use href="#vine-leaf"/></svg>
+          <span class="rule"></span>
+        </div>
+        <h3 class="dept-title">Inscriptiones<em>One stone, read closely</em></h3>
+        <div class="byline">unpacked this issue by the editors</div>
+        <div class="dateline">CIL VI 1199 &middot; Via Appia, Mile III</div>
+
+        <div class="dept-body">
+          <div class="dropcap-wrap">
+            <svg class="vine-cap" aria-hidden="true"><use href="#vine-leaf"/></svg>
+            <p>
+              <span class="dropcap">A</span> small travertine slab, broken on the
+              right, recovered in 1873 from the third milestone of the Via Appia
+              and now in the lapidarium of the Museo Nazionale Romano (inv.
+              115284). The text, in carefully cut capitals of the late second
+              century, reads:
+            </p>
+          </div>
+
+          <div class="inscription">
+            D &middot; M &middot; S<br>
+            FELICVLAE LIB &middot; DVL[CISS]<br>
+            QVAE VIXIT ANN &middot; XXIII<br>
+            MENS &middot; IIII &middot; DIES &middot; XI<br>
+            FECIT &middot; T &middot; AELIVS &middot; HER[MES]<br>
+            CONIVGI &middot; B &middot; M &middot; F<br>
+            <span class="cite">CIL VI 1199 (= ILS 8459)</span>
+          </div>
+
+          <p class="translation">
+            “To the spirits of the departed. For Felicula, his sweetest
+            freedwoman, who lived 23 years, 4 months, 11 days. Titus Aelius
+            Hermes made this for his wife, well-deserving.”
+          </p>
+
+          <p>
+            The stone is small — 38 cm by 27 — and quite ordinary. That is its
+            interest. Felicula was freed (<em>liberta</em>), then married her
+            former master (<em>coniugi</em>); the formula <em>bene merenti
+            fecit</em> is the commonest closure in Roman epitaphs and survives,
+            slightly Christianized, into the fourth century. What the stone
+            documents is the steep, ordinary trajectory of a Roman household:
+            Hermes, himself almost certainly a Greek-named freedman of Hadrian's
+            family (the <em>nomen</em> Aelius is the give-away), reaches manumission,
+            buys and frees Felicula, and within a decade is burying her on the
+            Appia.
+          </p>
+          <p>
+            The lacuna in line 5 has been read three ways. <em>HER[MES]</em>
+            (Henzen, 1873) remains the standard; <em>HER[ENNIANVS]</em> (Mommsen,
+            <em>per litteras</em>) is unlikely on spacing; <em>HER[ACLIDA]</em>,
+            proposed by Solin in 2009, is now the consensus where the family was
+            of Bithynian origin. We retain Henzen.
+          </p>
+          <div class="leaf-flourish">❦</div>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- column rule -->
+    <div class="column-rule" aria-hidden="true"></div>
+
+    <!-- ====== RIGHT COLUMN ====== -->
+    <div class="col col-right">
+
+      <!-- DE RE COQUINARIA -->
+      <article class="department">
+        <div class="dept-keystrip" aria-hidden="true"></div>
+        <div class="dept-kicker">Departmentum II &middot; De Re Coquinaria</div>
+        <div class="ornament-row" aria-hidden="true">
+          <span class="rule"></span>
+          <svg><use href="#vine-leaf"/></svg>
+          <span class="rule"></span>
+        </div>
+        <h3 class="dept-title">De Re Coquinaria<em>Roman cookery, reconstructed</em></h3>
+        <div class="byline">by Tullio Renzi, chef-proprietor, Trattoria del Pantheon, Roma</div>
+        <div class="dateline">From Apicius, Lib. IV &middot; Patina de piris</div>
+
+        <div class="dept-body">
+          <div class="dropcap-wrap">
+            <svg class="vine-cap" aria-hidden="true"><use href="#vine-leaf"/></svg>
+            <p>
+              <span class="dropcap">A</span>picius gives us a pear flan in seven
+              lines and assumes you know the rest. I have been cooking it for
+              fifteen years at the trattoria — autumn only, when the Volpina pears
+              from the Veneto come in — and have come to think of it as the most
+              honest dish in the corpus. There is no fraud in it. Pears, eggs,
+              wine, pepper, a little honey: the kitchen of a senator who is not
+              trying to impress anyone.
+            </p>
+          </div>
+
+          <div class="recipe-card">
+            <h4>Patina de piris &middot; for VI</h4>
+            <ul>
+              <li>800 g ripe pears (Volpina or Bosc), peeled and cored</li>
+              <li>6 large eggs</li>
+              <li>120 ml passum (a sweet raisin wine; or vin santo)</li>
+              <li>2 tbsp clear honey</li>
+              <li>½ tsp finely ground long pepper</li>
+              <li>a pinch of cumin, ground</li>
+              <li>1 tbsp olive oil, plus more for the dish</li>
+              <li>sea salt, scant</li>
+            </ul>
+          </div>
+
+          <p>
+            Poach the pears whole in lightly salted water for nine minutes; drain,
+            cool, and pass through a food mill. (Apicius says <em>teres</em>, “grind”;
+            a mortar will do, but the mill is faster and more honest about it.)
+            Beat the eggs with the passum, honey, pepper, cumin, and salt; fold
+            in the pear pulp. Oil an earthenware <em>patina</em> generously, pour in
+            the mixture, and bake at 160°C for 35–40 minutes, until just set and
+            faintly bronzed at the edges. Dust with more long pepper. Serve warm,
+            never hot, with a glass of the same passum.
+          </p>
+          <p>
+            A note on the pepper. Apicius means <em>piper longum</em>, which the Romans
+            imported by the ton from the Malabar coast and which is not what
+            comes out of your mill at home. It is hotter, sweeter, and more
+            floral than black pepper, and the dish does not work without it.
+            Penzeys carries it; so does any decent Indian grocer. Buy whole and
+            grind on the day.
+          </p>
+          <div class="leaf-flourish">❦ &nbsp; ❦ &nbsp; ❦</div>
+          <p>
+            <em>Next issue:</em> <span class="gold-caps">Moretum</span> — the
+            farmer's herb-and-cheese pounded paste of the pseudo-Vergilian poem,
+            with a side argument about whether garlic belongs in it. (It does.)
+          </p>
+        </div>
+      </article>
+
+      <!-- LETTERS -->
+      <article class="department">
+        <div class="dept-keystrip" aria-hidden="true"></div>
+        <div class="dept-kicker">Departmentum IV &middot; Epistulae Lectorum</div>
+        <div class="ornament-row" aria-hidden="true">
+          <span class="rule"></span>
+          <svg><use href="#vine-leaf"/></svg>
+          <span class="rule"></span>
+        </div>
+        <h3 class="dept-title">Letters<em>From the Readers</em></h3>
+        <div class="byline">replies to the Spring number's piece on Vitruvian proportion</div>
+        <div class="dateline">Received April–July MMXXIV</div>
+
+        <div class="dept-body">
+          <div class="dropcap-wrap">
+            <svg class="vine-cap" aria-hidden="true"><use href="#vine-leaf"/></svg>
+            <p>
+              <span class="dropcap">P</span>rofessor Halloran's essay
+              (“The Module and the Man,” Issue XXXIX, pp. 14–29) provoked a
+              postbag larger than any we have had since the Pompeii number. We
+              print, with light editing, four of the more useful replies. The
+              author's response will appear in Issue XLI.
+            </p>
+          </div>
+
+          <div class="letter">
+            <div class="from">From Prof. Indra Mehta &middot; Yale, New Haven</div>
+            <p>
+              Halloran is right that the <em>De architectura</em> is not a
+              metaphysical document, and right to scold the Renaissance for
+              treating it as one. But he overcorrects. Vitruvius does, in III.1,
+              treat the body as a <em>commensus</em> — a measured agreement — and
+              the word matters. To strip it of every Pythagorean echo is to
+              flatten the prose into something Vitruvius himself would not
+              recognize.
+            </p>
+            <p class="signoff">— with collegial regards.</p>
+          </div>
+
+          <div class="letter">
+            <div class="from">From Mr. Giles Carrington &middot; Bath, England</div>
+            <p>
+              I read the piece on the train from Paddington and was struck by the
+              footnote on Inigo Jones. May I add: the Banqueting House at
+              Whitehall (1622) uses a column-to-intercolumniation ratio of almost
+              exactly 1 : 2.25, which is closer to Vitruvius III.3 than anything
+              Palladio actually built. I have measured it, in the rain, with a
+              perfectly ordinary tape. The English Vitruvians were better readers
+              than we credit.
+            </p>
+          </div>
+
+          <div class="letter">
+            <div class="from">From Sig.ra Carla De Luca &middot; Roma</div>
+            <p>
+              Una piccola correzione. Halloran writes that the Pantheon's
+              interior diameter is 43.3 m. It is 43.44 m, measured by Lugli in
+              1938 and confirmed by the Soprintendenza in 2006. The fourteen
+              centimetres are not nothing, when one is arguing about ratios.
+            </p>
+            <p class="signoff">— cordialmente.</p>
+          </div>
+
+          <div class="letter">
+            <div class="from">From Mr. Daniel O'Hare &middot; Brooklyn, NY</div>
+            <p>
+              I am not a classicist — I am a carpenter — and I want to say that
+              the article was the first thing about Vitruvius I have read that
+              treated him as a working man with a working problem. Thank you. I
+              keep the issue on the bench.
+            </p>
+          </div>
+
+          <div class="leaf-flourish">❦</div>
+          <p style="text-align:center; font-style:italic; font-size:13px; color:var(--text-emphasis);">
+            Letters: editors@actadiurna.org &middot; or Acta Diurna, 27 Wall Street, New Haven CT 06511
+          </p>
+        </div>
+      </article>
+
+    </div>
+  </div>
+
+  <!-- closing band -->
+  <div class="band-divider" aria-hidden="true">
+    <div class="key-row">
+      <span class="rule"></span>
+      <span class="glyph">Finis Columnarum</span>
+      <span class="rule"></span>
+    </div>
+  </div>
+</main>
+
+<!-- ============ FOOTER FRIEZE ============ -->
+<footer class="frieze">
+  <div class="meander-row" aria-hidden="true" style="padding:8px 40px;">
+    <div class="line"></div>
+    <svg width="180" height="22" viewBox="0 0 360 22" class="meander-strip" preserveAspectRatio="none">
+      <g fill="none" stroke="currentColor" stroke-width="2" style="color:var(--primary)">
+        <path d="M0 20 H360" />
+        <path d="M0 2 H360" />
+        <path d="M10 2 V14 H30 V20 M50 2 V14 H30 M50 20 V8 H70 V20 M90 2 V14 H70 M90 20 V8 H110 V20 M130 2 V14 H110 M130 20 V8 H150 V20 M170 2 V14 H150 M170 20 V8 H190 V20 M210 2 V14 H190 M210 20 V8 H230 V20 M250 2 V14 H230 M250 20 V8 H270 V20 M290 2 V14 H270 M290 20 V8 H310 V20 M330 2 V14 H310 M330 20 V8 H350" />
+      </g>
+    </svg>
+    <div class="line"></div>
+  </div>
+
+  <div class="frieze-grid">
+    <div>
+      <h5>Editorial</h5>
+      <ul>
+        <li><a href="page-1.html">The Forum (current issue)</a></li>
+        <li><a href="page-2.html">Long Reads</a></li>
+        <li><a href="page-3.html">Columns &amp; Correspondence</a></li>
+        <li><a href="page-4.html">The Archive, I–XL</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Correspondence</h5>
+      <ul>
+        <li>editors@actadiurna.org</li>
+        <li>27 Wall Street, New Haven CT 06511</li>
+        <li>Via dei Coronari 142, Roma 00186</li>
+        <li><a href="page-6.html">Subscribe by post</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Colophon</h5>
+      <ul>
+        <li>Set in Playfair &amp; Lora</li>
+        <li>Printed by Officina Bodoni, Verona</li>
+        <li>Bound in Roma quarterly</li>
+        <li><a href="page-5.html">About the Review</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="tailpiece" aria-hidden="true">❦ &nbsp;✦&nbsp; ❦</div>
+  <div class="copyline">Acta Diurna — published quarterly from Rome and New Haven, MMXXIV</div>
+</footer>
+
+</body>
+</html>

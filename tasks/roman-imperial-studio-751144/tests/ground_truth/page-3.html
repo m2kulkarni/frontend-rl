@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>The Studio — On Method and Principle · Atelier Vitruvius</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  /* ============ RESET / BASE ============ */
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), "EB Garamond", Georgia, serif;
+    font-size: 17px;
+    line-height: 1.7;
+    text-align: center;
+  }
+  a { color: var(--text-emphasis); text-decoration: none; }
+  h1, h2, h3, h4, h5 {
+    font-family: var(--font-display), "Cinzel", serif;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  /* ============ GREEK KEY STRIP ============ */
+  .greek-key-strip {
+    height: 22px;
+    background-color: var(--surface);
+    background-image:
+      linear-gradient(var(--ornament), var(--ornament)),
+      linear-gradient(var(--ornament), var(--ornament));
+    background-size: 100% 1px, 100% 1px;
+    background-position: top, bottom;
+    background-repeat: repeat-x;
+    position: relative;
+    overflow: hidden;
+  }
+  .greek-key-strip::before {
+    content: "";
+    position: absolute;
+    inset: 3px 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='16' viewBox='0 0 40 16'><g fill='none' stroke='%23c9a23a' stroke-width='1.4'><path d='M0 14 H8 V4 H30 V14 H22 V8 H16 V14 H40'/></g></svg>");
+    background-repeat: repeat-x;
+    background-position: center;
+    opacity: 0.85;
+  }
+
+  /* ============ MASTHEAD ============ */
+  .masthead {
+    background: var(--surface);
+    padding: 36px 0 22px;
+    border-bottom: 1px solid var(--ornament);
+  }
+  .masthead-rule {
+    width: 60%;
+    margin: 0 auto;
+    height: 1px;
+    background: var(--ornament);
+  }
+  .site-name {
+    font-family: var(--font-display);
+    font-size: 28px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--text);
+    padding: 14px 0;
+    margin: 0;
+  }
+  .site-tagline {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 15px;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-top: 4px;
+  }
+
+  /* ============ NAVIGATION ============ */
+  nav.primary {
+    background: var(--surface);
+    padding: 18px 0 24px;
+  }
+  nav.primary ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+  }
+  nav.primary li {
+    display: inline-flex;
+    align-items: center;
+  }
+  nav.primary a {
+    font-family: var(--font-display);
+    font-size: 12px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--text);
+    padding: 4px 18px;
+    transition: color 0.2s;
+  }
+  nav.primary a[aria-current="page"] {
+    color: var(--primary);
+    border-bottom: 1px solid var(--primary);
+  }
+  nav.primary a:hover { color: var(--primary); }
+  nav.primary .vine-sep {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    color: var(--ornament);
+  }
+  nav.primary .vine-sep svg { width: 100%; height: 100%; fill: currentColor; }
+
+  /* ============ MEANDER BORDER (reusable) ============ */
+  .meander-frame {
+    position: relative;
+    background: var(--surface);
+    padding: 56px 64px;
+    margin: 0 auto;
+    border: 1px solid var(--ornament);
+    box-shadow: inset 0 0 0 6px var(--surface), inset 0 0 0 7px var(--ornament);
+  }
+  .meander-frame::before,
+  .meander-frame::after {
+    content: "";
+    position: absolute;
+    left: 14px;
+    right: 14px;
+    height: 14px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='14' viewBox='0 0 40 14'><g fill='none' stroke='%23c9a23a' stroke-width='1.2'><path d='M0 12 H8 V3 H30 V12 H22 V7 H16 V12 H40'/></g></svg>");
+    background-repeat: repeat-x;
+    background-position: center;
+  }
+  .meander-frame::before { top: 14px; }
+  .meander-frame::after { bottom: 14px; transform: scaleY(-1); }
+
+  /* ============ HERO ============ */
+  .hero {
+    padding: 60px 0 40px;
+    background: var(--bg);
+  }
+  .hero-inner {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+  .hero-roundel {
+    width: 280px;
+    margin: 0 auto 18px;
+    position: relative;
+  }
+  .hero-roundel svg { width: 100%; height: auto; display: block; }
+  .hero-roundel-text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+  }
+  .hero-roundel-text .eyebrow {
+    font-family: var(--font-display);
+    font-size: 9px;
+    letter-spacing: 0.36em;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .hero-roundel-text .num {
+    font-family: var(--font-display);
+    font-size: 38px;
+    color: var(--primary);
+    letter-spacing: 0.05em;
+  }
+  .hero h1 {
+    font-size: 34px;
+    color: var(--text);
+    margin-top: 18px;
+  }
+  .hero .sub {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 18px;
+    color: var(--accent);
+    text-transform: none;
+    letter-spacing: 0.04em;
+    margin-top: 12px;
+  }
+
+  /* ============ DIVIDER ============ */
+  .divider {
+    margin: 30px auto;
+    height: 30px;
+    color: var(--ornament);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .divider svg { height: 100%; width: auto; }
+  .divider .left, .divider .right {
+    flex: 0 1 200px;
+    height: 1px;
+    background: var(--ornament);
+    margin: 0 16px;
+  }
+  .divider .glyph {
+    width: 30px; height: 30px;
+    color: var(--ornament);
+  }
+  .divider .glyph svg { width: 100%; height: 100%; fill: currentColor; }
+
+  /* ============ ESSAY ============ */
+  /* Golden ratio column: 900 / 1.618 ≈ 556. We use 560px column. */
+  main {
+    padding: 20px 0 80px;
+  }
+  .essay-wrap {
+    width: 760px;
+    margin: 0 auto;
+  }
+  .essay {
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
+    width: 560px;
+    margin: 0 auto;
+    font-size: 17.5px;
+    line-height: 1.78;
+    color: var(--text);
+  }
+  .essay h2 {
+    text-align: center;
+    font-size: 14px;
+    letter-spacing: 0.4em;
+    color: var(--accent);
+    margin: 44px 0 18px;
+  }
+  .essay p { margin: 0 0 1.1em; }
+  .essay p + p { text-indent: 1.6em; }
+
+  /* DROP CAP */
+  .dropcap-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 1.1em;
+  }
+  .dropcap {
+    font-family: var(--font-display);
+    font-size: 92px;
+    line-height: 0.85;
+    color: var(--primary);
+    float: left;
+    padding: 6px 14px 0 0;
+    margin-top: 4px;
+  }
+  .dropcap-text {
+    text-align: justify;
+  }
+  .dropcap-text::first-line {
+    font-variant: small-caps;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+  }
+
+  .vine-flourish {
+    text-align: center;
+    margin: 8px auto 26px;
+    color: var(--ornament);
+  }
+  .vine-flourish svg {
+    width: 36px; height: 36px; fill: currentColor;
+  }
+
+  /* ============ PRINCIPLES ============ */
+  .principles {
+    width: 700px;
+    margin: 50px auto 30px;
+    background: var(--surface);
+    padding: 50px 60px 40px;
+    position: relative;
+  }
+  .principles {
+    border: 1px solid var(--ornament);
+    box-shadow: inset 0 0 0 6px var(--surface), inset 0 0 0 7px var(--ornament);
+  }
+  .principles::before, .principles::after {
+    content: "";
+    position: absolute;
+    left: 14px; right: 14px;
+    height: 14px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='14' viewBox='0 0 40 14'><g fill='none' stroke='%23c9a23a' stroke-width='1.2'><path d='M0 12 H8 V3 H30 V12 H22 V7 H16 V12 H40'/></g></svg>");
+    background-repeat: repeat-x;
+  }
+  .principles::before { top: 14px; }
+  .principles::after { bottom: 14px; transform: scaleY(-1); }
+
+  .principles-title {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+  .principles-title .laurel {
+    width: 130px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .principles-title .laurel svg { width: 100%; height: auto; display: block; }
+  .principles-title .laurel-label {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    color: var(--primary);
+    text-align: center;
+  }
+  .principles h3 {
+    font-size: 16px;
+    letter-spacing: 0.32em;
+    color: var(--text);
+    margin: 14px 0 6px;
+  }
+  .principles ol {
+    list-style: none;
+    counter-reset: principle;
+    padding: 0;
+    margin: 24px 0 0;
+    text-align: left;
+  }
+  .principles li {
+    counter-increment: principle;
+    padding: 14px 0 14px 70px;
+    position: relative;
+    border-top: 1px solid rgba(201,162,58,0.4);
+  }
+  .principles li:first-child { border-top: none; }
+  .principles li::before {
+    content: counter(principle, upper-roman) ".";
+    position: absolute;
+    left: 0;
+    top: 14px;
+    width: 56px;
+    text-align: right;
+    font-family: var(--font-display);
+    font-size: 22px;
+    color: var(--secondary);
+    letter-spacing: 0.04em;
+  }
+  .principles .p-name {
+    font-family: var(--font-display);
+    font-size: 13px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--primary);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .principles .p-body {
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--text);
+  }
+
+  /* ============ FOUNDER ============ */
+  .founder {
+    width: 760px;
+    margin: 60px auto 0;
+    text-align: center;
+  }
+  .founder-roundel {
+    width: 220px;
+    margin: 0 auto 10px;
+    position: relative;
+  }
+  .founder-roundel svg { width: 100%; height: auto; display: block; }
+  .founder-portrait {
+    position: absolute;
+    inset: 22%;
+    border-radius: 50%;
+    background:
+      radial-gradient(ellipse at 50% 38%, #d4c5a5 0%, #b89e74 45%, #6e5a3c 100%);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .founder-portrait::before {
+    /* abstract bust silhouette */
+    content: "";
+    position: absolute;
+    bottom: -8%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 70%;
+    background: radial-gradient(ellipse at 50% 30%, #4a3a26 0%, #2e2418 60%, transparent 70%);
+    border-radius: 50% 50% 30% 30%;
+  }
+  .founder-portrait::after {
+    content: "M·A·V";
+    position: relative;
+    font-family: var(--font-display);
+    font-size: 14px;
+    letter-spacing: 0.3em;
+    color: var(--surface);
+    z-index: 2;
+    margin-bottom: 14px;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+  }
+  .founder h2 {
+    font-size: 20px;
+    color: var(--text);
+    margin-top: 18px;
+  }
+  .founder .role {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 16px;
+    color: var(--accent);
+    margin-top: 6px;
+  }
+  .founder .dates {
+    font-family: var(--font-display);
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    color: var(--secondary);
+    margin-top: 12px;
+    text-transform: uppercase;
+  }
+
+  /* ============ FOOTER ============ */
+  footer { margin-top: 80px; }
+  .frieze {
+    background: var(--primary);
+    color: var(--surface);
+    padding: 28px 40px;
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+  }
+  .frieze-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    position: relative;
+    z-index: 2;
+  }
+  .frieze-rosette {
+    width: 26px; height: 26px;
+    flex-shrink: 0;
+    color: var(--secondary);
+  }
+  .frieze-rosette svg { width: 100%; height: 100%; }
+  .frieze-text {
+    font-family: var(--font-display);
+    font-size: 12px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--surface);
+    text-align: center;
+  }
+  .frieze::before, .frieze::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    height: 26px;
+    width: 38%;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='52' height='26' viewBox='0 0 52 26'><g fill='%23c9a23a' opacity='0.55'><circle cx='26' cy='13' r='2.2'/><circle cx='6' cy='13' r='1.6'/><circle cx='46' cy='13' r='1.6'/></g></svg>");
+    background-repeat: repeat-x;
+    background-position: center;
+    transform: translateY(-50%);
+    opacity: 0.6;
+  }
+  .frieze::before { left: 0; }
+  .frieze::after { right: 0; }
+
+  .meander-strip {
+    height: 18px;
+    background: var(--surface);
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='14' viewBox='0 0 40 14'><g fill='none' stroke='%23c9a23a' stroke-width='1.2'><path d='M0 12 H8 V3 H30 V12 H22 V7 H16 V12 H40'/></g></svg>");
+    background-repeat: repeat-x;
+    background-position: center;
+  }
+  .colophon {
+    background: var(--surface);
+    text-align: center;
+    padding: 22px 20px 30px;
+  }
+  .colophon-text {
+    font-family: var(--font-display);
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    color: var(--text);
+  }
+  .tailpiece {
+    margin: 14px auto 0;
+    width: 240px;
+    height: 28px;
+    color: var(--ornament);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  .tailpiece .l, .tailpiece .r {
+    flex: 1;
+    height: 1px;
+    background: var(--ornament);
+  }
+  .tailpiece .gem {
+    width: 12px; height: 12px;
+    transform: rotate(45deg);
+    background: var(--secondary);
+  }
+  .tailpiece .gem.outer { background: transparent; border: 1px solid var(--ornament); }
+
+</style>
+</head>
+<body>
+
+<!-- ========== TOP STRIP ========== -->
+<div class="greek-key-strip" aria-hidden="true"></div>
+
+<!-- ========== MASTHEAD ========== -->
+<header class="masthead">
+  <div class="masthead-rule"></div>
+  <h1 class="site-name">Atelier Vitruvius</h1>
+  <div class="masthead-rule"></div>
+  <div class="site-tagline">Studio of Classical Architecture · Founded Roma, MMXI</div>
+</header>
+
+<!-- ========== NAVIGATION ========== -->
+<nav class="primary" aria-label="Primary">
+  <ul>
+    <li><a href="page-1.html">Atrium</a></li>
+    <li><span class="vine-sep" aria-hidden="true"><svg viewBox="0 0 200 200"><path d="M100 40c-20 0-40 10-40 40s20 40 40 40 40-10 40-40-20-40-40-40zm0 20c12 0 22 8 22 20s-10 20-22 20-22-8-22-20 10-20 22-20zM60 130c-10 10-10 30 10 40 15 5 25-5 25-15-15-5-30-15-35-25zm80 0c-5 10-20 20-35 25 0 10 10 20 25 15 20-10 20-30 10-40z"/></svg></span></li>
+    <li><a href="page-2.html">Works</a></li>
+    <li><span class="vine-sep" aria-hidden="true"><svg viewBox="0 0 200 200"><path d="M100 40c-20 0-40 10-40 40s20 40 40 40 40-10 40-40-20-40-40-40zm0 20c12 0 22 8 22 20s-10 20-22 20-22-8-22-20 10-20 22-20zM60 130c-10 10-10 30 10 40 15 5 25-5 25-15-15-5-30-15-35-25zm80 0c-5 10-20 20-35 25 0 10 10 20 25 15 20-10 20-30 10-40z"/></svg></span></li>
+    <li><a href="page-3.html" aria-current="page">The Studio</a></li>
+    <li><span class="vine-sep" aria-hidden="true"><svg viewBox="0 0 200 200"><path d="M100 40c-20 0-40 10-40 40s20 40 40 40 40-10 40-40-20-40-40-40zm0 20c12 0 22 8 22 20s-10 20-22 20-22-8-22-20 10-20 22-20zM60 130c-10 10-10 30 10 40 15 5 25-5 25-15-15-5-30-15-35-25zm80 0c-5 10-20 20-35 25 0 10 10 20 25 15 20-10 20-30 10-40z"/></svg></span></li>
+    <li><a href="page-4.html">The Orders</a></li>
+    <li><span class="vine-sep" aria-hidden="true"><svg viewBox="0 0 200 200"><path d="M100 40c-20 0-40 10-40 40s20 40 40 40 40-10 40-40-20-40-40-40zm0 20c12 0 22 8 22 20s-10 20-22 20-22-8-22-20 10-20 22-20zM60 130c-10 10-10 30 10 40 15 5 25-5 25-15-15-5-30-15-35-25zm80 0c-5 10-20 20-35 25 0 10 10 20 25 15 20-10 20-30 10-40z"/></svg></span></li>
+    <li><a href="page-5.html">Practice</a></li>
+    <li><span class="vine-sep" aria-hidden="true"><svg viewBox="0 0 200 200"><path d="M100 40c-20 0-40 10-40 40s20 40 40 40 40-10 40-40-20-40-40-40zm0 20c12 0 22 8 22 20s-10 20-22 20-22-8-22-20 10-20 22-20zM60 130c-10 10-10 30 10 40 15 5 25-5 25-15-15-5-30-15-35-25zm80 0c-5 10-20 20-35 25 0 10 10 20 25 15 20-10 20-30 10-40z"/></svg></span></li>
+    <li><a href="page-6.html">Visit</a></li>
+  </ul>
+</nav>
+
+<!-- ========== HERO ========== -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-roundel" aria-hidden="true">
+      <!-- LAUREL WREATH FRAME -->
+      <svg viewBox="0 0 323.75 295.79" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(-64.08 20.56)" fill="#c9a23a" stroke="#a07b22" stroke-width="0.6">
+          <path d="m141.7-18.57c-11 4.85-23.4 9.47-30.06 22.64-4.68 7.12-4.8 16.39-8.1 24.15 6.11-6.5 15.58-13.16 20.97-20.72 6.02-9.5 9.08-18.01 17.19-26.06zm164.51 0c8.11 8.05 11.17 16.56 17.19 26.06 5.4 7.56 14.86 14.22 20.98 20.72-3.3-7.76-3.42-17.03-8.11-24.15-6.66-13.17-19.02-17.78-30.06-22.64zM111.91-1.61c-5.63 1.62-10.63 5.48-14.58 11.03-9.09 10.79-10.65 24.96-6.88 42.03 1.3 4.52-0.55 8.75-0.29 12.96 2.67-6.2 5.7-11.89 11.58-15.88 13.11-8.4 16.72-12.84 20.08-20.76 3.95-9.31 4.68-10.69 4.77-19.04-3.81 12.01-15.29 17.06-23.05 25.17-3.99 4.43-7.19 9.56-9 14.99l-0.28-0.25c0.96-4.81 2.88-9.13 3.98-13.81 3.47-12.68 2.75-27.94 13.68-36.43z"/>
+          <ellipse cx="225.87" cy="125.58" rx="105" ry="105" fill="none" stroke="#c9a23a" stroke-width="1.5"/>
+        </g>
+      </svg>
+    </div>
+    <div class="hero-roundel-text" style="margin-top:-300px; height:280px; position:relative;">
+      <!-- placeholder so text overlays roundel -->
+    </div>
+    <h1>The Studio · On Method &amp; Principle</h1>
+    <p class="sub">Liber tertius — an essay on lineage, doctrine, and the four columns of our practice.</p>
+  </div>
+</section>
+
+<div class="divider" aria-hidden="true">
+  <div class="left"></div>
+  <div class="glyph">
+    <svg viewBox="0 0 200 200"><path d="M100 40c-20 0-40 10-40 40s20 40 40 40 40-10 40-40-20-40-40-40zm0 20c12 0 22 8 22 20s-10 20-22 20-22-8-22-20 10-20 22-20zM60 130c-10 10-10 30 10 40 15 5 25-5 25-15-15-5-30-15-35-25zm80 0c-5 10-20 20-35 25 0 10 10 20 25 15 20-10 20-30 10-40z" fill="currentColor"/></svg>
+  </div>
+  <div class="right"></div>
+</div>
+
+<!-- ========== ESSAY ========== -->
+<main>
+  <div class="essay-wrap">
+    <article class="essay">
+
+      <p class="dropcap-text">
+        <span class="dropcap">V</span>itruvius, writing for the Emperor Augustus near the close of the first century before our era, set down in his ten books <em>De Architectura</em> a doctrine that has not in two thousand years been improved upon: that building is the proper marriage of <em>firmitas, utilitas, venustas</em>—soundness, usefulness, and beauty. From this seed our atelier draws its name, and from this seed our every drawing must be capable of being traced.
+      </p>
+
+      <div class="vine-flourish" aria-hidden="true">
+        <svg viewBox="0 0 200 200"><path d="M100 40c-20 0-40 10-40 40s20 40 40 40 40-10 40-40-20-40-40-40zm0 20c12 0 22 8 22 20s-10 20-22 20-22-8-22-20 10-20 22-20zM60 130c-10 10-10 30 10 40 15 5 25-5 25-15-15-5-30-15-35-25zm80 0c-5 10-20 20-35 25 0 10 10 20 25 15 20-10 20-30 10-40z"/></svg>
+      </div>
+
+      <p>The lineage we claim is not invented. It runs from the workshops of Augustan Rome through the Renaissance treatises of Sebastiano Serlio, whose seven books on architecture, published between 1537 and 1575, restored to the Cinquecento a systematic vocabulary of orders, doors, and stage settings. From Serlio it passes to Andrea Palladio, whose <em>Quattro Libri</em> of 1570 distilled antique example into a measured, drawable canon, and whose villas of the Veneto remain the finest demonstration that classical principle is not a costume but a discipline.</p>
+
+      <p>What we received from these masters we have not modified, only translated for our century. The atelier teaches and practises that an architect is, before anything else, a draughtsman; that he is, after that, a reader of stones; and that he is, finally, the servant of a public room. The orders are not ornaments to be applied; they are arguments to be proved. A column engaged in a wall must answer for itself why it stands there, what it carries, and at what scale it speaks.</p>
+
+      <h2>· The Four Working Principles ·</h2>
+
+      <p>Within the studio at Via dei Coronari we have, since 2011, organised our work around four principles. They are written above the drawing room door in incised travertine, and every commission—whether the small chapel at Frascati or the new tribunal hall at Lecce—is reviewed against them before it leaves our hands.</p>
+
+    </article>
+
+    <!-- PRINCIPLES -->
+    <section class="principles">
+      <div class="principles-title">
+        <div class="laurel" aria-hidden="true">
+          <!-- simplified laurel roundel -->
+          <svg viewBox="0 0 200 200">
+            <circle cx="100" cy="100" r="78" fill="none" stroke="#c9a23a" stroke-width="1.2"/>
+            <circle cx="100" cy="100" r="72" fill="none" stroke="#c9a23a" stroke-width="0.6"/>
+            <g fill="#c9a23a">
+              <path d="M30 100 q10 -18 28 -22 q-4 14 -14 22 q10 -2 18 -8 q-4 14 -14 18 q8 0 16 -4 q-6 12 -18 14 q-10 -8 -16 -20z"/>
+              <path d="M170 100 q-10 -18 -28 -22 q4 14 14 22 q-10 -2 -18 -8 q4 14 14 18 q-8 0 -16 -4 q6 12 18 14 q10 -8 16 -20z"/>
+            </g>
+          </svg>
+        </div>
+        <div class="laurel-label" style="margin-top:-78px; height:130px;">QUATTUOR<br>CANONES</div>
+      </div>
+
+      <ol>
+        <li>
+          <span class="p-name">Axial Planning</span>
+          <span class="p-body">Every plan begins at a single line drawn from threshold to apse. Rooms gather upon that line in symmetrical pairs; circulation does not wander but processes. A building without an axis is, to us, a building without a sentence.</span>
+        </li>
+        <li>
+          <span class="p-name">The Round Arch</span>
+          <span class="p-body">We hold with the Romans, and not with the Goths, that the semicircular arch is the truest resolution of weight in masonry. From Pantheon to Aqua Claudia, it is the figure that proves a wall has thought about its load.</span>
+        </li>
+        <li>
+          <span class="p-name">The Coffered Surface</span>
+          <span class="p-body">Vaults, soffits, and ceilings shall be coffered—divided into the recessed panels that lighten the apparent mass of the structure and offer to plaster, gilding, or rosette the disciplined field upon which ornament may speak without shouting.</span>
+        </li>
+        <li>
+          <span class="p-name">Restraint of Colour</span>
+          <span class="p-body">The fabric of a building is travertine, marble, brick, and lime. To these we add, sparingly, the three accents of the Empire: Pompeian red for friezes, gold for the meander and the rosette, Tyrian purple only for the seat of authority. Nothing else.</span>
+        </li>
+      </ol>
+    </section>
+
+    <article class="essay" style="margin-top:50px;">
+      <p>These four are not preferences. They are the conditions under which a drawing earns its title. A young architect entering our studio is given, on his first day, a measured plan of the Maison Carrée at Nîmes and a sheet of Fabriano paper; he draws it in pencil before he is permitted to draw anything of his own. We have found, after a dozen years, that nothing else teaches the eye so quickly the difference between a building that knows itself and a building that does not.</p>
+
+      <p>We do not refuse the present age. We refuse only the proposition that the present age has rendered the antique illegible. The materials remain; the geometry remains; the public, when honestly addressed in the old grammar, remains capable of understanding it. That is the wager of the atelier, and the work shown in these pages is its evidence.</p>
+    </article>
+
+    <!-- DIVIDER -->
+    <div class="divider" aria-hidden="true">
+      <div class="left"></div>
+      <div class="glyph">
+        <svg viewBox="0 0 200 200"><path d="M100 40c-20 0-40 10-40 40s20 40 40 40 40-10 40-40-20-40-40-40zm0 20c12 0 22 8 22 20s-10 20-22 20-22-8-22-20 10-20 22-20zM60 130c-10 10-10 30 10 40 15 5 25-5 25-15-15-5-30-15-35-25zm80 0c-5 10-20 20-35 25 0 10 10 20 25 15 20-10 20-30 10-40z" fill="currentColor"/></svg>
+      </div>
+      <div class="right"></div>
+    </div>
+
+    <!-- FOUNDER -->
+    <section class="founder">
+      <div class="founder-roundel" aria-label="Portrait of Marcus Aurelius Vegetti">
+        <!-- OAK WREATH ROUNDEL (simplified) -->
+        <svg viewBox="0 0 200 200">
+          <circle cx="100" cy="100" r="92" fill="none" stroke="#1a1a1a" stroke-width="1"/>
+          <circle cx="100" cy="100" r="86" fill="none" stroke="#1a1a1a" stroke-width="0.5"/>
+          <g fill="#1a1a1a">
+            <!-- left oak cluster -->
+            <path d="M14 100 q12 -24 32 -28 q-4 10 -8 16 q12 -4 22 -14 q-4 14 -16 24 q14 -2 24 -10 q-6 16 -22 22 q12 0 22 -4 q-10 14 -28 16 q-14 -10 -26 -22z"/>
+            <!-- right oak cluster -->
+            <path d="M186 100 q-12 -24 -32 -28 q4 10 8 16 q-12 -4 -22 -14 q4 14 16 24 q-14 -2 -24 -10 q6 16 22 22 q-12 0 -22 -4 q10 14 28 16 q14 -10 26 -22z"/>
+            <!-- top -->
+            <path d="M100 14 q-14 6 -22 18 q14 -2 22 -10 q8 8 22 10 q-8 -12 -22 -18z"/>
+            <!-- bottom ribbon -->
+            <path d="M80 178 l8 -8 l12 6 l12 -6 l8 8 l-10 4 l-10 -4 l-10 4z"/>
+          </g>
+        </svg>
+        <div class="founder-portrait" aria-hidden="true"></div>
+      </div>
+      <h2>Marcus Aurelius Vegetti</h2>
+      <div class="role">Founder &amp; Principal Architect</div>
+      <div class="dates">Born Tivoli, 1968 · Founded the Atelier, 2011</div>
+    </section>
+
+  </div>
+</main>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div class="frieze">
+    <div class="frieze-inner">
+      <span class="frieze-rosette" aria-hidden="true">
+        <svg viewBox="0 0 26 26"><g fill="#c9a23a"><circle cx="13" cy="13" r="3"/><circle cx="13" cy="3" r="1.6"/><circle cx="13" cy="23" r="1.6"/><circle cx="3" cy="13" r="1.6"/><circle cx="23" cy="13" r="1.6"/><circle cx="6" cy="6" r="1.2"/><circle cx="20" cy="6" r="1.2"/><circle cx="6" cy="20" r="1.2"/><circle cx="20" cy="20" r="1.2"/></g></svg>
+      </span>
+      <div class="frieze-text">
+        Atelier Vitruvius · Via dei Coronari 142 · Rione Ponte · Roma · Italia · +39 06 6880 4411
+      </div>
+      <span class="frieze-rosette" aria-hidden="true">
+        <svg viewBox="0 0 26 26"><g fill="#c9a23a"><circle cx="13" cy="13" r="3"/><circle cx="13" cy="3" r="1.6"/><circle cx="13" cy="23" r="1.6"/><circle cx="3" cy="13" r="1.6"/><circle cx="23" cy="13" r="1.6"/><circle cx="6" cy="6" r="1.2"/><circle cx="20" cy="6" r="1.2"/><circle cx="6" cy="20" r="1.2"/><circle cx="20" cy="20" r="1.2"/></g></svg>
+      </span>
+    </div>
+  </div>
+  <div class="meander-strip" aria-hidden="true"></div>
+  <div class="colophon">
+    <div class="colophon-text">Atelier Vitruvius · Romae · MMXXIV</div>
+    <div class="tailpiece" aria-hidden="true">
+      <span class="l"></span>
+      <span class="gem outer"></span>
+      <span class="gem"></span>
+      <span class="gem outer"></span>
+      <span class="r"></span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

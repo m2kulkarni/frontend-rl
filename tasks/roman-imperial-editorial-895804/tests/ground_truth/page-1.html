@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Acta Diurna — A Quarterly Review of the Roman World</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    margin: 0;
+    line-height: 1.7;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* ============ MASTHEAD / NAV ============ */
+  .top-rule {
+    border-top: 1px solid var(--ornament);
+    border-bottom: 3px double var(--ornament);
+    height: 6px;
+    margin: 0;
+  }
+  .masthead {
+    text-align: center;
+    padding: 28px 40px 0;
+    background: var(--surface);
+  }
+  .masthead .issue-line {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    color: var(--text);
+    opacity: 0.7;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 18px;
+    text-transform: uppercase;
+  }
+  .masthead .issue-line span:nth-child(2) {
+    color: var(--secondary);
+    letter-spacing: 0.32em;
+    font-style: normal;
+  }
+  .masthead h1.wordmark {
+    font-family: var(--font-display), serif;
+    font-weight: 900;
+    font-size: 64px;
+    letter-spacing: 0.42em;
+    margin: 0 0 4px;
+    text-transform: uppercase;
+    line-height: 1;
+    text-indent: 0.42em; /* optical center for tracking */
+  }
+  .masthead .latin-tag {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    color: var(--text-emphasis);
+    margin-bottom: 22px;
+  }
+
+  nav.primary {
+    display: flex;
+    justify-content: center;
+    gap: 44px;
+    padding: 14px 0 18px;
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+  }
+  nav.primary a {
+    color: var(--text);
+    padding-bottom: 4px;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+  nav.primary a:hover { border-bottom-color: var(--secondary); }
+  nav.primary a[aria-current="page"] {
+    border-bottom: 2px solid var(--accent);
+    color: var(--accent);
+  }
+
+  .meander-divider {
+    height: 28px;
+    width: 100%;
+    background: var(--bg);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .meander-divider svg {
+    width: 100%;
+    height: 28px;
+    display: block;
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    text-align: center;
+    padding: 64px 40px 56px;
+    position: relative;
+    background: var(--surface);
+  }
+  .hero-frame {
+    position: relative;
+    width: 640px;
+    height: 540px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero-frame .wreath {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.92;
+  }
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 360px;
+  }
+  .hero-kicker {
+    font-family: var(--font-display);
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 18px;
+  }
+  .hero-title {
+    font-family: var(--font-display), serif;
+    font-weight: 900;
+    font-size: 72px;
+    letter-spacing: 0.18em;
+    line-height: 0.95;
+    margin: 0 0 24px;
+    text-transform: uppercase;
+    color: var(--primary);
+  }
+  .hero-rule {
+    width: 80px;
+    height: 1px;
+    background: var(--secondary);
+    margin: 0 auto 22px;
+  }
+  .hero-standing {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+  .hero-standing strong {
+    display: block;
+    font-style: normal;
+    font-family: var(--font-display);
+    font-size: 11px;
+    letter-spacing: 0.36em;
+    color: var(--secondary);
+    margin-top: 12px;
+    text-transform: uppercase;
+  }
+
+  /* ============ SECTION HEADER ============ */
+  .section-head {
+    text-align: center;
+    margin: 30px auto 38px;
+  }
+  .section-head .eyebrow {
+    font-family: var(--font-display);
+    font-size: 10px;
+    letter-spacing: 0.5em;
+    color: var(--secondary);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .section-head h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 800;
+    font-size: 28px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+  }
+  .vine-ornament {
+    width: 44px;
+    height: 44px;
+    margin: 0 auto;
+    display: block;
+    fill: var(--accent);
+    opacity: 0.8;
+  }
+
+  /* ============ LEAD ESSAY ============ */
+  main { max-width: 1200px; margin: 0 auto; padding: 30px 40px 0; }
+
+  .lead-card {
+    border: 1px solid var(--ornament);
+    background: var(--surface);
+    padding: 56px 80px 64px;
+    text-align: center;
+    position: relative;
+    margin-bottom: 80px;
+  }
+  .lead-card::before, .lead-card::after {
+    content: "";
+    position: absolute;
+    left: 8px; right: 8px;
+    height: 2px;
+    background: repeating-linear-gradient(90deg,
+      var(--ornament) 0 6px, transparent 6px 12px,
+      var(--ornament) 12px 14px, transparent 14px 22px);
+  }
+  .lead-card::before { top: 8px; }
+  .lead-card::after { bottom: 8px; }
+
+  .roundel {
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 28px;
+    display: block;
+  }
+  .lead-kicker {
+    font-family: var(--font-display);
+    font-size: 11px;
+    letter-spacing: 0.5em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .lead-card .vine-inline {
+    width: 28px;
+    height: 28px;
+    margin: 4px auto 18px;
+    display: block;
+    fill: var(--text-emphasis);
+    opacity: 0.7;
+  }
+  .lead-headline {
+    font-family: var(--font-display), serif;
+    font-weight: 800;
+    font-size: 44px;
+    line-height: 1.1;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin: 0 0 22px;
+    color: var(--primary);
+  }
+  .lead-headline em {
+    font-style: italic;
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    color: var(--text-emphasis);
+  }
+  .lead-byline {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+  .lead-meta {
+    font-family: var(--font-display);
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    color: var(--secondary);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+  .lead-deck {
+    max-width: 560px;
+    margin: 0 auto 30px;
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.75;
+    color: var(--text);
+  }
+  .lead-link {
+    font-family: var(--font-display);
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 3px;
+  }
+
+  /* ============ SECONDARY GRID ============ */
+  .secondary-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 32px;
+    margin-bottom: 80px;
+  }
+  .article-card {
+    border: 1px solid var(--ornament);
+    background: var(--surface);
+    padding: 32px 28px 36px;
+    text-align: center;
+    position: relative;
+  }
+  .article-card .key-strip {
+    height: 14px;
+    margin: -32px -28px 24px;
+    border-bottom: 1px solid var(--ornament);
+    background-image:
+      linear-gradient(90deg,
+        transparent 0, transparent 8px,
+        var(--primary) 8px, var(--primary) 10px,
+        transparent 10px, transparent 18px,
+        var(--primary) 18px, var(--primary) 20px,
+        transparent 20px);
+    background-size: 28px 14px;
+    background-color: var(--bg);
+  }
+  .card-kicker {
+    font-family: var(--font-display);
+    font-size: 10px;
+    letter-spacing: 0.42em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .card-vine {
+    width: 22px;
+    height: 22px;
+    margin: 4px auto 14px;
+    display: block;
+    fill: var(--text-emphasis);
+    opacity: 0.7;
+  }
+  .card-headline {
+    font-family: var(--font-display), serif;
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1.25;
+    margin: 0 0 18px;
+    color: var(--primary);
+  }
+  .card-byline {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .card-date {
+    font-family: var(--font-display);
+    font-size: 10px;
+    letter-spacing: 0.36em;
+    color: var(--secondary);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .card-deck {
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.7;
+    text-align: left;
+    margin-bottom: 22px;
+  }
+  .card-link {
+    font-family: var(--font-display);
+    font-size: 10px;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 2px;
+  }
+
+  /* ============ SUBSCRIBE STRIP ============ */
+  .subscribe-strip {
+    text-align: center;
+    border-top: 1px solid var(--ornament);
+    border-bottom: 3px double var(--ornament);
+    padding: 40px 40px;
+    margin: 0 0 0;
+    background: var(--surface);
+  }
+  .subscribe-strip .label {
+    font-family: var(--font-display);
+    font-size: 11px;
+    letter-spacing: 0.5em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .subscribe-strip h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 800;
+    font-size: 28px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin: 0 0 12px;
+  }
+  .subscribe-strip p {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 16px;
+    max-width: 620px;
+    margin: 0 auto 22px;
+  }
+  .subscribe-strip a.cta {
+    font-family: var(--font-display);
+    font-size: 12px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--bg);
+    background: var(--accent);
+    padding: 14px 40px;
+    display: inline-block;
+  }
+
+  /* ============ FOOTER ============ */
+  footer {
+    background: var(--bg);
+    padding: 0 0 50px;
+  }
+  footer .meander-divider { margin-top: 0; }
+  .frieze {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+    max-width: 1100px;
+    margin: 50px auto 30px;
+    padding: 0 40px;
+  }
+  .frieze .col {
+    text-align: center;
+  }
+  .frieze h4 {
+    font-family: var(--font-display);
+    font-size: 12px;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    margin: 0 0 18px;
+    color: var(--primary);
+    border-bottom: 1px solid var(--secondary);
+    display: inline-block;
+    padding-bottom: 6px;
+  }
+  .frieze ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 2;
+  }
+  .frieze address {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .tailpiece {
+    text-align: center;
+    margin: 30px auto 14px;
+    font-family: var(--font-display);
+    font-size: 22px;
+    letter-spacing: 1em;
+    color: var(--secondary);
+  }
+  .tailpiece::before, .tailpiece::after {
+    content: "—";
+    margin: 0 16px;
+    color: var(--ornament);
+    letter-spacing: 0;
+  }
+  .colophon {
+    text-align: center;
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 13px;
+    color: var(--text);
+    opacity: 0.85;
+  }
+
+  /* small helper */
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="masthead">
+    <div class="issue-line">
+      <span>Roma · Novum Portum</span>
+      <span>Numerus XLI</span>
+      <span>Autumnus MMXXIV</span>
+    </div>
+    <h1 class="wordmark">Acta Diurna</h1>
+    <div class="latin-tag">Diurna populi Romani — a quarterly review of antiquity</div>
+  </div>
+  <nav class="primary" aria-label="Primary">
+    <a href="page-1.html" aria-current="page">Forum</a>
+    <a href="page-2.html">Long Reads</a>
+    <a href="page-3.html">Columns</a>
+    <a href="page-4.html">Archive</a>
+    <a href="page-5.html">About</a>
+    <a href="page-6.html">Subscribe</a>
+  </nav>
+  <div class="meander-divider" aria-hidden="true">
+    <svg viewBox="0 0 1651 444" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+      <g fill="currentColor" style="color:var(--ornament)">
+        <path d="M0,417 L0,100 317,100 317,290 190,290 190,354 481,354 481,417 227,417 227,227 354,227 354,163 163,163 163,417 0,417 Z"/>
+        <path d="M481,417 L481,100 798,100 798,290 671,290 671,354 862,354 862,417 608,417 608,227 735,227 735,163 544,163 544,417 481,417 Z"/>
+        <path d="M862,417 L862,100 1179,100 1179,290 1052,290 1052,354 1243,354 1243,417 989,417 989,227 1116,227 1116,163 925,163 925,417 862,417 Z"/>
+        <path d="M1243,417 L1243,100 1560,100 1560,290 1433,290 1433,354 1624,354 1624,417 1370,417 1370,227 1497,227 1497,163 1306,163 1306,417 1243,417 Z"/>
+      </g>
+    </svg>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-frame">
+    <svg class="wreath" viewBox="0 0 324 296" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <g fill="none" stroke="currentColor" stroke-width="1" style="color:var(--secondary)">
+        <!-- Stylised laurel wreath: pair of curving leaf clusters -->
+        <path d="M162,40 C90,40 30,100 30,170 C30,220 60,260 110,275" stroke-width="1.4"/>
+        <path d="M162,40 C234,40 294,100 294,170 C294,220 264,260 214,275" stroke-width="1.4"/>
+        <path d="M110,275 Q162,290 214,275" stroke-width="1.4"/>
+      </g>
+      <g fill="currentColor" style="color:var(--secondary)">
+        <!-- left leaves -->
+        <g>
+          <ellipse cx="50" cy="120" rx="14" ry="5" transform="rotate(-50 50 120)"/>
+          <ellipse cx="42" cy="150" rx="15" ry="5" transform="rotate(-65 42 150)"/>
+          <ellipse cx="40" cy="182" rx="15" ry="5" transform="rotate(-80 40 182)"/>
+          <ellipse cx="46" cy="214" rx="15" ry="5" transform="rotate(-95 46 214)"/>
+          <ellipse cx="62" cy="244" rx="14" ry="5" transform="rotate(-110 62 244)"/>
+          <ellipse cx="86" cy="266" rx="13" ry="5" transform="rotate(-125 86 266)"/>
+          <ellipse cx="68" cy="100" rx="14" ry="5" transform="rotate(-35 68 100)"/>
+          <ellipse cx="92" cy="78" rx="14" ry="5" transform="rotate(-20 92 78)"/>
+          <ellipse cx="120" cy="62" rx="13" ry="5" transform="rotate(-10 120 62)"/>
+        </g>
+        <!-- right leaves -->
+        <g>
+          <ellipse cx="274" cy="120" rx="14" ry="5" transform="rotate(50 274 120)"/>
+          <ellipse cx="282" cy="150" rx="15" ry="5" transform="rotate(65 282 150)"/>
+          <ellipse cx="284" cy="182" rx="15" ry="5" transform="rotate(80 284 182)"/>
+          <ellipse cx="278" cy="214" rx="15" ry="5" transform="rotate(95 278 214)"/>
+          <ellipse cx="262" cy="244" rx="14" ry="5" transform="rotate(110 262 244)"/>
+          <ellipse cx="238" cy="266" rx="13" ry="5" transform="rotate(125 238 266)"/>
+          <ellipse cx="256" cy="100" rx="14" ry="5" transform="rotate(35 256 100)"/>
+          <ellipse cx="232" cy="78" rx="14" ry="5" transform="rotate(20 232 78)"/>
+          <ellipse cx="204" cy="62" rx="13" ry="5" transform="rotate(10 204 62)"/>
+        </g>
+        <!-- ribbon at bottom -->
+        <path d="M150,278 L162,292 L174,278 L172,272 L162,282 L152,272 Z" fill="currentColor" style="color:var(--accent)"/>
+      </g>
+    </svg>
+    <div class="hero-inner">
+      <div class="hero-kicker">Salvete, Lectores</div>
+      <div class="hero-title">Acta<br>Diurna</div>
+      <div class="hero-rule"></div>
+      <div class="hero-standing">
+        A Quarterly Review of the Roman World
+        <strong>Number XLI · Autumn MMXXIV</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="meander-divider" aria-hidden="true">
+  <svg viewBox="0 0 1651 444" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+    <g fill="currentColor" style="color:var(--ornament)">
+      <path d="M0,417 L0,100 317,100 317,290 190,290 190,354 481,354 481,417 227,417 227,227 354,227 354,163 163,163 163,417 0,417 Z"/>
+      <path d="M481,417 L481,100 798,100 798,290 671,290 671,354 862,354 862,417 608,417 608,227 735,227 735,163 544,163 544,417 481,417 Z"/>
+      <path d="M862,417 L862,100 1179,100 1179,290 1052,290 1052,354 1243,354 1243,417 989,417 989,227 1116,227 1116,163 925,163 925,417 862,417 Z"/>
+      <path d="M1243,417 L1243,100 1560,100 1560,290 1433,290 1433,354 1624,354 1624,417 1370,417 1370,227 1497,227 1497,163 1306,163 1306,417 1243,417 Z"/>
+    </g>
+  </svg>
+</div>
+
+<main>
+
+  <div class="section-head">
+    <div class="eyebrow">From this Issue</div>
+    <h2>The Lead Essay</h2>
+    <svg class="vine-ornament" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M43.6,11c-1.8,0-3.6,0.1-5.3,0.3c-7,0.7-13.9,2.8-19.2,7.5s-8.2,12-7.7,21c0.5,9,4.3,16.1,10.2,20.3c5.9,4.2,13.3,5.5,21,5.2c15.5-0.7,32.8-8,45.8-18.3c1.4-1.1,2.8-2,4.3-3.1c4.3,6.7,7.6,14.8,9.3,24.1c-7.5-5.1-21-10.5-35.7,1.5C44.2,87.7,41.4,82.4,21,67.4c-2.9,36.1,15,54.6,44.7,52.5c0,0-14,4.3-3.6,26.4c6,12.9,8.4,20.1,6.6,25.2c-12.8,2.3-15.8,7.8-5.6,12.7c45.1,10,65.7-27.5,68.7-66c45.4,0,52.9-31.8,52.5-50.4c-8.2,11.1-22.2,11.1-32.9,2.5c-9.9-7.9-21.7-16.2-39-1.1c-1.7-11.7-5.7-22.1-11.2-30.7c19.4-11.4,38.7-14.5,52.5-10.8c5.5,1.4,9.5,4.1,12.4,6.9c-9,8.4-11.8,26.4,2.3,27c18.9,0.9,21-15.5,13.6-27.1c-5.4-8.5-16.4-13.2-25.7-16.6C139.6,5.4,117.4,9.4,95.8,22.5c-5.2-5.7-11.1-10.2-17.7-13c-7.1-3-17.5-5.7-28.3-6.3C48,3.1,46.2,3.1,44.4,3.1z"/>
+    </svg>
+  </div>
+
+  <article class="lead-card">
+    <svg class="roundel" viewBox="0 0 118 118" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="59" cy="59" r="54" fill="none" stroke="currentColor" stroke-width="0.6" style="color:var(--ornament)"/>
+      <circle cx="59" cy="59" r="48" fill="none" stroke="currentColor" stroke-width="0.4" style="color:var(--secondary)"/>
+      <g fill="currentColor" style="color:var(--ornament)">
+        <!-- oak leaves around circle -->
+        <g transform="translate(59 59)">
+          <g>
+            <path d="M0,-50 C-3,-46 -5,-44 -3,-40 C-5,-38 -6,-35 -3,-33 C-5,-31 -6,-28 -3,-26 C-5,-24 -6,-21 -3,-19 C-5,-17 -6,-14 -2,-12 L0,-10 L2,-12 C6,-14 5,-17 3,-19 C6,-21 5,-24 3,-26 C6,-28 5,-31 3,-33 C6,-35 5,-38 3,-40 C5,-44 3,-46 0,-50 Z"/>
+          </g>
+          <g transform="rotate(45)"><path d="M0,-50 C-3,-46 -5,-44 -3,-40 C-5,-38 -6,-35 -3,-33 C-5,-31 -6,-28 -3,-26 C-5,-24 -6,-21 -3,-19 C-5,-17 -6,-14 -2,-12 L0,-10 L2,-12 C6,-14 5,-17 3,-19 C6,-21 5,-24 3,-26 C6,-28 5,-31 3,-33 C6,-35 5,-38 3,-40 C5,-44 3,-46 0,-50 Z"/></g>
+          <g transform="rotate(90)"><path d="M0,-50 C-3,-46 -5,-44 -3,-40 C-5,-38 -6,-35 -3,-33 C-5,-31 -6,-28 -3,-26 C-5,-24 -6,-21 -3,-19 C-5,-17 -6,-14 -2,-12 L0,-10 L2,-12 C6,-14 5,-17 3,-19 C6,-21 5,-24 3,-26 C6,-28 5,-31 3,-33 C6,-35 5,-38 3,-40 C5,-44 3,-46 0,-50 Z"/></g>
+          <g transform="rotate(135)"><path d="M0,-50 C-3,-46 -5,-44 -3,-40 C-5,-38 -6,-35 -3,-33 C-5,-31 -6,-28 -3,-26 C-5,-24 -6,-21 -3,-19 C-5,-17 -6,-14 -2,-12 L0,-10 L2,-12 C6,-14 5,-17 3,-19 C6,-21 5,-24 3,-26 C6,-28 5,-31 3,-33 C6,-35 5,-38 3,-40 C5,-44 3,-46 0,-50 Z"/></g>
+          <g transform="rotate(180)"><path d="M0,-50 C-3,-46 -5,-44 -3,-40 C-5,-38 -6,-35 -3,-33 C-5,-31 -6,-28 -3,-26 C-5,-24 -6,-21 -3,-19 C-5,-17 -6,-14 -2,-12 L0,-10 L2,-12 C6,-14 5,-17 3,-19 C6,-21 5,-24 3,-26 C6,-28 5,-31 3,-33 C6,-35 5,-38 3,-40 C5,-44 3,-46 0,-50 Z"/></g>
+          <g transform="rotate(225)"><path d="M0,-50 C-3,-46 -5,-44 -3,-40 C-5,-38 -6,-35 -3,-33 C-5,-31 -6,-28 -3,-26 C-5,-24 -6,-21 -3,-19 C-5,-17 -6,-14 -2,-12 L0,-10 L2,-12 C6,-14 5,-17 3,-19 C6,-21 5,-24 3,-26 C6,-28 5,-31 3,-33 C6,-35 5,-38 3,-40 C5,-44 3,-46 0,-50 Z"/></g>
+          <g transform="rotate(270)"><path d="M0,-50 C-3,-46 -5,-44 -3,-40 C-5,-38 -6,-35 -3,-33 C-5,-31 -6,-28 -3,-26 C-5,-24 -6,-21 -3,-19 C-5,-17 -6,-14 -2,-12 L0,-10 L2,-12 C6,-14 5,-17 3,-19 C6,-21 5,-24 3,-26 C6,-28 5,-31 3,-33 C6,-35 5,-38 3,-40 C5,-44 3,-46 0,-50 Z"/></g>
+          <g transform="rotate(315)"><path d="M0,-50 C-3,-46 -5,-44 -3,-40 C-5,-38 -6,-35 -3,-33 C-5,-31 -6,-28 -3,-26 C-5,-24 -6,-21 -3,-19 C-5,-17 -6,-14 -2,-12 L0,-10 L2,-12 C6,-14 5,-17 3,-19 C6,-21 5,-24 3,-26 C6,-28 5,-31 3,-33 C6,-35 5,-38 3,-40 C5,-44 3,-46 0,-50 Z"/></g>
+        </g>
+      </g>
+      <text x="59" y="65" text-anchor="middle" font-family="Playfair Display, serif" font-weight="800" font-size="16" letter-spacing="2" fill="currentColor" style="color:var(--accent)">XLI</text>
+    </svg>
+    <div class="lead-kicker">Lead Essay · Architecture &amp; Cosmos</div>
+    <svg class="vine-inline" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M43.6,11c-1.8,0-3.6,0.1-5.3,0.3c-7,0.7-13.9,2.8-19.2,7.5s-8.2,12-7.7,21c0.5,9,4.3,16.1,10.2,20.3c5.9,4.2,13.3,5.5,21,5.2c15.5-0.7,32.8-8,45.8-18.3c1.4-1.1,2.8-2,4.3-3.1c4.3,6.7,7.6,14.8,9.3,24.1c-7.5-5.1-21-10.5-35.7,1.5C44.2,87.7,41.4,82.4,21,67.4c-2.9,36.1,15,54.6,44.7,52.5c0,0-14,4.3-3.6,26.4c6,12.9,8.4,20.1,6.6,25.2c-12.8,2.3-15.8,7.8-5.6,12.7c45.1,10,65.7-27.5,68.7-66c45.4,0,52.9-31.8,52.5-50.4c-8.2,11.1-22.2,11.1-32.9,2.5c-9.9-7.9-21.7-16.2-39-1.1c-1.7-11.7-5.7-22.1-11.2-30.7c19.4-11.4,38.7-14.5,52.5-10.8c5.5,1.4,9.5,4.1,12.4,6.9c-9,8.4-11.8,26.4,2.3,27c18.9,0.9,21-15.5,13.6-27.1z"/>
+    </svg>
+    <h2 class="lead-headline">The Oculus and the Sky:<br><em>What the Pantheon Was For</em></h2>
+    <div class="lead-byline">By Helena Vespasia Ross</div>
+    <div class="lead-meta">2,400 Words · Reading Time XX Minutes</div>
+    <p class="lead-deck">
+      Hadrian's rotunda has been called a temple, a tomb, a planetarium, and a problem. Standing beneath the
+      twenty-seven-foot opening, on a clear October noon, the historian Helena Vespasia Ross argues that we have
+      been asking the wrong question for nineteen centuries. The Pantheon was never simply a building dedicated
+      to the gods; it was an instrument for measuring the relationship between Roman power and the visible
+      heavens — and its silence has more to teach us than its inscription.
+    </p>
+    <a href="page-2.html" class="lead-link">Read the Essay →</a>
+  </article>
+
+  <div class="section-head">
+    <div class="eyebrow">Also in Number XLI</div>
+    <h2>Dispatches &amp; Reviews</h2>
+    <svg class="vine-ornament" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M43.6,11c-1.8,0-3.6,0.1-5.3,0.3c-7,0.7-13.9,2.8-19.2,7.5s-8.2,12-7.7,21c0.5,9,4.3,16.1,10.2,20.3c5.9,4.2,13.3,5.5,21,5.2c15.5-0.7,32.8-8,45.8-18.3c1.4-1.1,2.8-2,4.3-3.1c4.3,6.7,7.6,14.8,9.3,24.1c-7.5-5.1-21-10.5-35.7,1.5C44.2,87.7,41.4,82.4,21,67.4c-2.9,36.1,15,54.6,44.7,52.5c0,0-14,4.3-3.6,26.4c6,12.9,8.4,20.1,6.6,25.2c-12.8,2.3-15.8,7.8-5.6,12.7c45.1,10,65.7-27.5,68.7-66c45.4,0,52.9-31.8,52.5-50.4c-8.2,11.1-22.2,11.1-32.9,2.5c-9.9-7.9-21.7-16.2-39-1.1c-1.7-11.7-5.7-22.1-11.2-30.7c19.4-11.4,38.7-14.5,52.5-10.8c5.5,1.4,9.5,4.1,12.4,6.9c-9,8.4-11.8,26.4,2.3,27c18.9,0.9,21-15.5,13.6-27.1z"/>
+    </svg>
+  </div>
+
+  <section class="secondary-grid">
+
+    <article class="article-card">
+      <div class="key-strip" aria-hidden="true"></div>
+      <div class="card-kicker">Dispatch · Esquiline Hill</div>
+      <svg class="card-vine" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M43.6,11c-1.8,0-3.6,0.1-5.3,0.3c-7,0.7-13.9,2.8-19.2,7.5s-8.2,12-7.7,21c0.5,9,4.3,16.1,10.2,20.3c5.9,4.2,13.3,5.5,21,5.2c15.5-0.7,32.8-8,45.8-18.3c1.4-1.1,2.8-2,4.3-3.1c4.3,6.7,7.6,14.8,9.3,24.1c-7.5-5.1-21-10.5-35.7,1.5C44.2,87.7,41.4,82.4,21,67.4c-2.9,36.1,15,54.6,44.7,52.5c0,0-14,4.3-3.6,26.4c6,12.9,8.4,20.1,6.6,25.2c-12.8,2.3-15.8,7.8-5.6,12.7c45.1,10,65.7-27.5,68.7-66c45.4,0,52.9-31.8,52.5-50.4c-8.2,11.1-22.2,11.1-32.9,2.5c-9.9-7.9-21.7-16.2-39-1.1c-1.7-11.7-5.7-22.1-11.2-30.7c19.4-11.4,38.7-14.5,52.5-10.8c5.5,1.4,9.5,4.1,12.4,6.9c-9,8.4-11.8,26.4,2.3,27c18.9,0.9,21-15.5,13.6-27.1z"/>
+      </svg>
+      <h3 class="card-headline">Letters From the Domus Aurea</h3>
+      <div class="card-byline">Marcus Stillwell, on assignment</div>
+      <div class="card-date">June – September MMXXIV</div>
+      <p class="card-deck">
+        Twenty-five meters beneath the Oppian Hill, conservators are racing the water table to stabilise Nero's
+        vaulted corridors. A field report on lime mortars, LED scaffolds, and the ghost of an emperor whose
+        palace was buried by his successors before the paint had dried.
+      </p>
+      <a href="page-2.html" class="card-link">Continue →</a>
+    </article>
+
+    <article class="article-card">
+      <div class="key-strip" aria-hidden="true"></div>
+      <div class="card-kicker">Column · Tacitus</div>
+      <svg class="card-vine" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M43.6,11c-1.8,0-3.6,0.1-5.3,0.3c-7,0.7-13.9,2.8-19.2,7.5s-8.2,12-7.7,21c0.5,9,4.3,16.1,10.2,20.3c5.9,4.2,13.3,5.5,21,5.2c15.5-0.7,32.8-8,45.8-18.3c1.4-1.1,2.8-2,4.3-3.1c4.3,6.7,7.6,14.8,9.3,24.1c-7.5-5.1-21-10.5-35.7,1.5C44.2,87.7,41.4,82.4,21,67.4c-2.9,36.1,15,54.6,44.7,52.5c0,0-14,4.3-3.6,26.4c6,12.9,8.4,20.1,6.6,25.2c-12.8,2.3-15.8,7.8-5.6,12.7c45.1,10,65.7-27.5,68.7-66c45.4,0,52.9-31.8,52.5-50.4c-8.2,11.1-22.2,11.1-32.9,2.5c-9.9-7.9-21.7-16.2-39-1.1c-1.7-11.7-5.7-22.1-11.2-30.7c19.4-11.4,38.7-14.5,52.5-10.8c5.5,1.4,9.5,4.1,12.4,6.9c-9,8.4-11.8,26.4,2.3,27c18.9,0.9,21-15.5,13.6-27.1z"/>
+      </svg>
+      <h3 class="card-headline">On Reading Tacitus in English</h3>
+      <div class="card-byline">Quintus Aurelius Black</div>
+      <div class="card-date">Quarterly Column · No. XII</div>
+      <p class="card-deck">
+        Cynthia Damon's new <em>Annals</em> for the Loeb has reignited an old fight: should Tacitus sound like
+        Tacitus, or like English? Our columnist sides, reluctantly, with the Latin — and explains why every
+        good translator must first make peace with the verb 'to slaughter.'
+      </p>
+      <a href="page-3.html" class="card-link">Continue →</a>
+    </article>
+
+    <article class="article-card">
+      <div class="key-strip" aria-hidden="true"></div>
+      <div class="card-kicker">Review · The Getty Villa</div>
+      <svg class="card-vine" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M43.6,11c-1.8,0-3.6,0.1-5.3,0.3c-7,0.7-13.9,2.8-19.2,7.5s-8.2,12-7.7,21c0.5,9,4.3,16.1,10.2,20.3c5.9,4.2,13.3,5.5,21,5.2c15.5-0.7,32.8-8,45.8-18.3c1.4-1.1,2.8-2,4.3-3.1c4.3,6.7,7.6,14.8,9.3,24.1c-7.5-5.1-21-10.5-35.7,1.5C44.2,87.7,41.4,82.4,21,67.4c-2.9,36.1,15,54.6,44.7,52.5c0,0-14,4.3-3.6,26.4c6,12.9,8.4,20.1,6.6,25.2c-12.8,2.3-15.8,7.8-5.6,12.7c45.1,10,65.7-27.5,68.7-66c45.4,0,52.9-31.8,52.5-50.4c-8.2,11.1-22.2,11.1-32.9,2.5c-9.9-7.9-21.7-16.2-39-1.1c-1.7-11.7-5.7-22.1-11.2-30.7c19.4-11.4,38.7-14.5,52.5-10.8c5.5,1.4,9.5,4.1,12.4,6.9c-9,8.4-11.8,26.4,2.3,27c18.9,0.9,21-15.5,13.6-27.1z"/>
+      </svg>
+      <h3 class="card-headline">Pompeii: Color and Catastrophe</h3>
+      <div class="card-byline">Reviewed by Iulia Whitfield</div>
+      <div class="card-date">On view through 27 January MMXXV</div>
+      <p class="card-deck">
+        The Getty's autumn show stages eighty-three objects from the National Archaeological Museum of Naples
+        beside contemporary pigment analyses. The result is the most chromatically literate exhibition of
+        Vesuvian material since 1979 — and a quiet rebuke to the white-marble fantasy of antiquity.
+      </p>
+      <a href="page-3.html" class="card-link">Continue →</a>
+    </article>
+
+  </section>
+
+</main>
+
+<section class="subscribe-strip">
+  <div class="label">Quarterly Subscription</div>
+  <h3>Sixty-Four Pages, Four Times a Year</h3>
+  <p>
+    Acta Diurna is published in print and digital editions each equinox and solstice. New subscribers
+    receive Number XLI and the bound index of Volumes I–X. Founders' rate of $48 per annum holds through
+    the Kalends of December.
+  </p>
+  <a href="page-6.html" class="cta">Subscribe at acta-diurna.org/subscribe</a>
+</section>
+
+<footer>
+  <div class="meander-divider" aria-hidden="true">
+    <svg viewBox="0 0 1651 444" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+      <g fill="currentColor" style="color:var(--ornament)">
+        <path d="M0,417 L0,100 317,100 317,290 190,290 190,354 481,354 481,417 227,417 227,227 354,227 354,163 163,163 163,417 0,417 Z"/>
+        <path d="M481,417 L481,100 798,100 798,290 671,290 671,354 862,354 862,417 608,417 608,227 735,227 735,163 544,163 544,417 481,417 Z"/>
+        <path d="M862,417 L862,100 1179,100 1179,290 1052,290 1052,354 1243,354 1243,417 989,417 989,227 1116,227 1116,163 925,163 925,417 862,417 Z"/>
+        <path d="M1243,417 L1243,100 1560,100 1560,290 1433,290 1433,354 1624,354 1624,417 1370,417 1370,227 1497,227 1497,163 1306,163 1306,417 1243,417 Z"/>
+      </g>
+    </svg>
+  </div>
+  <div class="frieze">
+    <div class="col">
+      <h4>Editorial</h4>
+      <ul>
+        <li><a href="page-2.html">The Forum — Long Reads</a></li>
+        <li><a href="page-3.html">Columns &amp; Correspondence</a></li>
+        <li><a href="page-4.html">The Archive · Issues I–XL</a></li>
+        <li><a href="page-5.html">About the Review</a></li>
+      </ul>
+    </div>
+    <div class="col">
+      <h4>Correspondence</h4>
+      <address>
+        Editorial Office<br>
+        14 Vicolo del Cinque<br>
+        Trastevere, Roma 00153<br>
+        — and —<br>
+        318 Crown Street, Suite 4<br>
+        New Haven, Connecticut 06511
+      </address>
+    </div>
+    <div class="col">
+      <h4>Colophon</h4>
+      <ul>
+        <li>Set in Playfair &amp; Lora</li>
+        <li>Printed by Tipografia Trevi</li>
+        <li>Letterpress covers · Cartiera Magnani</li>
+        <li><a href="page-6.html">Subscribe — $48 / year</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="tailpiece" aria-hidden="true">S P Q R</div>
+  <p class="colophon">
+    Acta Diurna — published quarterly from Rome and New Haven, MMXXIV
+  </p>
+</footer>
+
+</body>
+</html>

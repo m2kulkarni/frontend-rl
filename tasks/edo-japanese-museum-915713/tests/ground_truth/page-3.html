@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Permanent Collection — Hanazono Museum of Edo Life</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ---------- NAV ---------- */
+  .nav {
+    display: flex;
+    align-items: center;
+    padding: 24px 56px 20px;
+    background: var(--bg);
+    gap: 56px;
+  }
+  .nav-mark {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+  }
+  .nav-mark svg { width: 100%; height: 100%; display: block; }
+  .nav-links {
+    display: flex;
+    gap: 38px;
+    margin-left: auto;
+    font-family: var(--font-body), sans-serif;
+    font-size: 12.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .nav-links a {
+    color: var(--primary);
+    text-decoration: none;
+    padding-bottom: 4px;
+    position: relative;
+  }
+  .nav-links a[aria-current="page"] {
+    border-bottom: 1px solid var(--accent);
+  }
+  .nav-rule {
+    height: 1px;
+    background: var(--primary);
+    width: 100%;
+  }
+
+  /* ---------- PAGE HEADER ---------- */
+  .page-head {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 80px 56px 60px;
+    position: relative;
+    gap: 40px;
+  }
+  .page-head .eyebrow {
+    font-family: var(--font-body);
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin: 0 0 24px;
+  }
+  .page-head h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 500;
+    font-size: 78px;
+    line-height: 1.05;
+    margin: 0;
+    color: var(--primary);
+    grid-column: 1 / span 2;
+    letter-spacing: -0.01em;
+  }
+  .page-head .meta-col {
+    grid-column: 3;
+    grid-row: 1;
+    align-self: end;
+    padding-bottom: 12px;
+  }
+  .page-head .meta-col dl {
+    margin: 0;
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    row-gap: 10px;
+    font-size: 13px;
+  }
+  .page-head .meta-col dt {
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--secondary);
+  }
+  .page-head .meta-col dd {
+    margin: 0;
+    color: var(--primary);
+  }
+
+  /* ---------- INTRO ---------- */
+  .intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 48px;
+    padding: 0 56px 100px;
+    align-items: start;
+  }
+  .intro .hairline {
+    border: 0;
+    border-top: 1px solid var(--primary);
+    margin: 0 0 28px;
+  }
+  .intro-lead {
+    grid-column: 1 / span 2;
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    line-height: 1.5;
+    color: var(--primary);
+    margin: 0;
+    padding-right: 80px;
+  }
+  .intro-lead em { color: var(--secondary); font-style: normal; }
+  .intro-side p {
+    margin: 0 0 14px;
+    font-size: 13.5px;
+    color: var(--primary);
+  }
+  .intro-side .stat {
+    font-family: var(--font-display), serif;
+    font-size: 56px;
+    line-height: 1;
+    color: var(--secondary);
+    margin: 0 0 6px;
+  }
+  .intro-side .stat-label {
+    font-size: 10.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 28px;
+  }
+
+  /* ---------- DIVIDER ---------- */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 0 56px;
+    margin-bottom: 56px;
+  }
+  .divider .line {
+    flex: 1;
+    height: 1px;
+    background: var(--primary);
+  }
+  .divider .label {
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--primary);
+  }
+  .divider .keyfret {
+    width: 56px;
+    height: 28px;
+    overflow: hidden;
+    opacity: 0.55;
+  }
+  .divider .keyfret svg { width: 100%; height: auto; display: block; }
+
+  /* ---------- CATEGORY SECTION ---------- */
+  .category {
+    padding: 0 56px;
+    margin-bottom: 110px;
+    position: relative;
+  }
+  .cat-head {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 48px;
+    margin-bottom: 56px;
+    align-items: end;
+  }
+  .cat-head .num {
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.2em;
+    color: var(--secondary);
+    margin: 0 0 8px;
+  }
+  .cat-head h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 500;
+    font-size: 44px;
+    margin: 0;
+    color: var(--primary);
+    line-height: 1.1;
+  }
+  .cat-head h2 .jp {
+    display: block;
+    font-size: 16px;
+    color: var(--secondary);
+    letter-spacing: 0.3em;
+    margin-top: 8px;
+  }
+  .cat-head .blurb {
+    font-size: 14px;
+    color: var(--primary);
+    margin: 0;
+    padding-bottom: 6px;
+    max-width: 540px;
+  }
+
+  /* ---------- OBJECT GRID ---------- */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 64px 56px;
+  }
+  .grid.offset-right > :nth-child(1) { grid-column: 2; }
+
+  .obj {
+    position: relative;
+    padding-top: 22px;
+  }
+  .obj::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 64px;
+    height: 1px;
+    background: var(--primary);
+  }
+  .obj .seal {
+    position: absolute;
+    top: 14px;
+    right: 0;
+    width: 22px;
+    height: 22px;
+    opacity: 0.85;
+  }
+  .obj .seal svg { width: 100%; height: 100%; display: block; }
+  .obj .accession {
+    font-size: 10.5px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin: 0 0 14px;
+    font-variant: small-caps;
+  }
+  .obj h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 500;
+    font-size: 21px;
+    line-height: 1.3;
+    margin: 0 36px 14px 0;
+    color: var(--primary);
+  }
+  .obj .specs {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin: 0 0 14px;
+    font-variant: small-caps;
+  }
+  .obj .specs span + span::before {
+    content: " · ";
+    color: var(--secondary);
+  }
+  .obj p {
+    font-size: 13.5px;
+    color: var(--primary);
+    margin: 0 0 18px;
+    line-height: 1.65;
+  }
+  .obj .read {
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    display: block;
+    text-align: right;
+  }
+
+  /* ---------- WAGARA BG WRAP for one section ---------- */
+  .wagara-bg {
+    position: relative;
+  }
+  .wagara-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("svg/seigaiha-waves.svg");
+    background-size: 320px;
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .wagara-bg > * { position: relative; z-index: 1; }
+
+  /* ---------- INDEX TABLE ---------- */
+  .index-section {
+    padding: 0 56px 100px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 56px;
+  }
+  .index-section h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 500;
+    font-size: 36px;
+    margin: 0 0 16px;
+  }
+  .index-section .note {
+    font-size: 13px;
+    color: var(--primary);
+    margin: 0;
+    max-width: 320px;
+  }
+  table.index {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  table.index th, table.index td {
+    text-align: left;
+    padding: 14px 12px 14px 0;
+    border-bottom: 1px solid rgba(12,12,12,0.18);
+    vertical-align: top;
+  }
+  table.index th {
+    font-size: 10.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    font-weight: 500;
+    border-bottom: 1px solid var(--primary);
+  }
+  table.index td.num {
+    font-family: var(--font-display), serif;
+    color: var(--secondary);
+    width: 110px;
+  }
+  table.index td.cat {
+    width: 130px;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    margin-top: 40px;
+    padding: 80px 56px 0;
+    background: var(--bg);
+    position: relative;
+    overflow: hidden;
+  }
+  .foot-rule {
+    height: 1px;
+    background: var(--primary);
+    margin-bottom: 64px;
+  }
+  .foot-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .foot-col h4 {
+    font-family: var(--font-body);
+    font-size: 10.5px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin: 0 0 16px;
+    font-weight: 500;
+  }
+  .foot-col p, .foot-col address {
+    font-size: 13px;
+    margin: 0 0 6px;
+    font-style: normal;
+    line-height: 1.6;
+  }
+  .foot-center {
+    text-align: center;
+  }
+  .foot-seal {
+    width: 90px;
+    height: 90px;
+    margin: 0 auto 20px;
+  }
+  .foot-seal svg { width: 100%; height: 100%; display: block; }
+  .foot-center .name {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    color: var(--primary);
+    margin: 0 0 6px;
+  }
+  .foot-center .ja {
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    color: var(--secondary);
+    letter-spacing: 0.3em;
+  }
+  .seigaiha-band {
+    margin-top: 64px;
+    height: 80px;
+    background-image: url("svg/seigaiha-waves.svg");
+    background-size: 240px;
+    background-repeat: repeat-x;
+    background-position: bottom center;
+    opacity: 0.08;
+  }
+  .credit {
+    text-align: center;
+    font-size: 10.5px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--primary);
+    padding: 18px 0 24px;
+    opacity: 0.7;
+  }
+
+  /* tiny inline plum mark using umebachi for cards */
+  .plum-inline {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    vertical-align: -2px;
+    margin-right: 6px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============== NAV ============== -->
+<nav class="nav" aria-label="Primary">
+  <a href="page-1.html" class="nav-mark" aria-label="Hanazono Museum home">
+    <!-- Crane-in-circle kamon (simplified mark using tsuru motif silhouette) -->
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="48" fill="none" stroke="#0c0c0c" stroke-width="1.5"/>
+      <circle cx="50" cy="50" r="40" fill="none" stroke="#0c0c0c" stroke-width="0.6"/>
+      <path d="M50 22 C 38 30, 32 42, 34 54 C 36 66, 46 72, 50 78 C 54 72, 64 66, 66 54 C 68 42, 62 30, 50 22 Z" fill="#0c0c0c"/>
+      <path d="M50 30 C 44 36, 42 46, 50 58 C 58 46, 56 36, 50 30 Z" fill="#f5efde"/>
+      <circle cx="50" cy="44" r="2" fill="#0c0c0c"/>
+    </svg>
+  </a>
+  <div class="nav-links">
+    <a href="page-1.html">Museum</a>
+    <a href="page-2.html">Current Exhibition</a>
+    <a href="page-3.html" aria-current="page">Permanent Collection</a>
+    <a href="page-4.html">The Machiya</a>
+    <a href="page-5.html">Visit</a>
+    <a href="page-6.html">About</a>
+  </div>
+</nav>
+<div class="nav-rule"></div>
+
+<!-- ============== PAGE HEAD ============== -->
+<header class="page-head">
+  <p class="eyebrow" style="grid-column:1; grid-row:1; align-self:start;">Section 三 — Holdings</p>
+  <h1>Permanent<br>Collection</h1>
+  <div class="meta-col">
+    <dl>
+      <dt>Founded</dt><dd>1962, Yoshida bequest</dd>
+      <dt>Objects</dt><dd>4,318 catalogued</dd>
+      <dt>Galleries</dt><dd>Six, ground &amp; first floor</dd>
+      <dt>On view</dt><dd>Approx. 410 at any time</dd>
+    </dl>
+  </div>
+</header>
+
+<!-- ============== INTRO ============== -->
+<section class="intro">
+  <div class="intro-lead-wrap" style="grid-column:1 / span 2;">
+    <hr class="hairline">
+    <p class="intro-lead">
+      The collection was assembled from the <em>Yoshida family donation of 1962</em> — a Kyoto merchant household's three-generation accumulation of prints, dress, lacquer, and household goods — and has since grown through careful acquisition and bequest to <em>4,318 objects</em>, of which roughly four hundred are on view at any moment across the machiya's six galleries.
+    </p>
+  </div>
+  <aside class="intro-side">
+    <p class="stat">1,742</p>
+    <p class="stat-label">Woodblock prints</p>
+    <p class="stat">986</p>
+    <p class="stat-label">Textiles &amp; dress</p>
+    <p class="stat">412</p>
+    <p class="stat-label">Lacquerware</p>
+  </aside>
+</section>
+
+<!-- ============== CATEGORY 1 — PRINTS ============== -->
+<div class="divider">
+  <span class="label">i. Ukiyo-e</span>
+  <div class="line"></div>
+  <div class="keyfret" aria-hidden="true">
+    <svg viewBox="0 0 600 200" preserveAspectRatio="xMidYMid slice"><g stroke="#0c0c0c" stroke-width="2" fill="none">
+      <polygon points="501.6,101.2 551.1,51.7 500.8,1.4 451.3,50.9 300.9,-99.5 350.4,-149 300.1,-199.3 250.6,-149.8 201.1,-199.3 150.3,-148.5 500.3,201.5 551.1,150.7"/>
+      <polygon points="349.9,52.9 300.4,102.4 250.1,52.1 299.6,2.6 149.2,-147.8 99.7,-98.3 49.4,-148.6 98.9,-198.1 49.4,-247.6 100.2,-298.4 450.2,51.6 399.4,102.4"/>
+      <polygon points="248.7,152.1 199.4,102.9 149.7,152.5 99.2,101.9 148.8,52.3 199.4,1.7 249,-47.9 299.6,2.6 250,52.3 299.2,101.6"/>
+    </g></svg>
+  </div>
+</div>
+
+<section class="category">
+  <div class="cat-head">
+    <div>
+      <p class="num">No. 01 / Five</p>
+      <h2>Prints<span class="jp">浮世絵 — UKIYO-E</span></h2>
+    </div>
+    <p class="blurb">Single-sheet nishiki-e and illustrated books from the late eighteenth century through the closing decades of the Edo period, with notable holdings in landscape, kabuki portraiture, and meisho-e of the Kyoto-Osaka region.</p>
+  </div>
+
+  <div class="grid">
+
+    <article class="obj">
+      <span class="seal" aria-hidden="true"><svg viewBox="0 0 688 688"><circle cx="344" cy="344" r="320" fill="none" stroke="#0c0c0c" stroke-width="14"/><g fill="#0c0c0c"><circle cx="344" cy="180" r="70"/><circle cx="500" cy="290" r="70"/><circle cx="440" cy="470" r="70"/><circle cx="248" cy="470" r="70"/><circle cx="188" cy="290" r="70"/><circle cx="344" cy="344" r="55" fill="#f5efde"/></g></svg></span>
+      <p class="accession">Acc. 1962.0014 — Yoshida bequest</p>
+      <h3>Naruto no fūha — Whirlpools at Awa</h3>
+      <p class="specs"><span>Utagawa Hiroshige</span><span>c. 1855</span><span>Edo</span></p>
+      <p>Ōban triptych in nishiki-e, the central sheet bearing the censor's aratame seal of the third month. Acquired with the founding gift; a key sheet for the museum's Hiroshige holdings, exhibited in rotation every eighteen months.</p>
+      <a class="read" href="#">Read on →</a>
+    </article>
+
+    <article class="obj">
+      <span class="seal" aria-hidden="true"><svg viewBox="0 0 688 688"><circle cx="344" cy="344" r="320" fill="none" stroke="#0c0c0c" stroke-width="14"/><g fill="#0c0c0c"><circle cx="344" cy="180" r="70"/><circle cx="500" cy="290" r="70"/><circle cx="440" cy="470" r="70"/><circle cx="248" cy="470" r="70"/><circle cx="188" cy="290" r="70"/><circle cx="344" cy="344" r="55" fill="#f5efde"/></g></svg></span>
+      <p class="accession">Acc. 1971.0488</p>
+      <h3>Actor Ichikawa Danjūrō VII as Sukeroku</h3>
+      <p class="specs"><span>Utagawa Kunisada</span><span>1832</span><span>Edo</span></p>
+      <p>Ōban tate-e nishiki-e on hōsho paper, with deluxe metallic pigments at the headband. Purchased 1971 from the estate of the Kyoto print dealer Mukai Tatsujirō; one of seven Kunisada actor portraits in the collection.</p>
+      <a class="read" href="#">Read on →</a>
+    </article>
+
+    <article class="obj">
+      <span class="seal" aria-hidden="true"><svg viewBox="0 0 688 688"><circle cx="344" cy="344" r="320" fill="none" stroke="#0c0c0c" stroke-width="14"/><g fill="#0c0c0c"><circle cx="344" cy="180" r="70"/><circle cx="500" cy="290" r="70"/><circle cx="440" cy="470" r="70"/><circle cx="248" cy="470" r="70"/><circle cx="188" cy="290" r="70"/><circle cx="344" cy="344" r="55" fill="#f5efde"/></g></svg></span>
+      <p class="accession">Acc. 1987.0203</p>
+      <h3>Kisokaidō: Mochizuki Station in Snow</h3>
+      <p class="specs"><span>Utagawa Hiroshige</span><span>c. 1837</span><span>Edo</span></p>
+      <p>Ōban yoko-e from the Kisokaidō rokujūkyū-tsugi series, one of fourteen sheets from the set held by the museum. Currently on view in the present exhibition; rotates to storage in March of 2025.</p>
+      <a class="read" href="#">Read on →</a>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============== CATEGORY 2 — TEXTILES ============== -->
+<div class="divider">
+  <span class="label">ii. Senshoku</span>
+  <div class="line"></div>
+  <div class="keyfret" aria-hidden="true">
+    <svg viewBox="0 0 600 200" preserveAspectRatio="xMidYMid slice"><g stroke="#0c0c0c" stroke-width="2" fill="none">
+      <polygon points="501.6,101.2 551.1,51.7 500.8,1.4 451.3,50.9 300.9,-99.5 350.4,-149 300.1,-199.3 250.6,-149.8 201.1,-199.3 150.3,-148.5 500.3,201.5 551.1,150.7"/>
+      <polygon points="349.9,52.9 300.4,102.4 250.1,52.1 299.6,2.6 149.2,-147.8 99.7,-98.3 49.4,-148.6 98.9,-198.1 49.4,-247.6 100.2,-298.4 450.2,51.6 399.4,102.4"/>
+    </g></svg>
+  </div>
+</div>
+
+<section class="category wagara-bg">
+  <div class="cat-head">
+    <div>
+      <p class="num">No. 02 / Five</p>
+      <h2>Textiles<span class="jp">染織 — SENSHOKU</span></h2>
+    </div>
+    <p class="blurb">Kosode, kimono, fukusa wrapping cloths, and obi from the Kyō-yūzen and Edo komon traditions, including a small group of sumptuary-restricted merchant-class garments characteristic of the Tenpō era.</p>
+  </div>
+
+  <div class="grid">
+
+    <article class="obj">
+      <span class="seal" aria-hidden="true"><svg viewBox="0 0 688 688"><circle cx="344" cy="344" r="320" fill="none" stroke="#0c0c0c" stroke-width="14"/><g fill="#0c0c0c"><circle cx="344" cy="180" r="70"/><circle cx="500" cy="290" r="70"/><circle cx="440" cy="470" r="70"/><circle cx="248" cy="470" r="70"/><circle cx="188" cy="290" r="70"/><circle cx="344" cy="344" r="55" fill="#f5efde"/></g></svg></span>
+      <p class="accession">Acc. 1962.0671</p>
+      <h3>Kosode with pine, bamboo &amp; plum</h3>
+      <p class="specs"><span>Yūzen-dyed silk</span><span>c. 1780</span><span>Kyoto</span></p>
+      <p>Outer kosode in lavender chirimen silk, the shoulders worked with shōchikubai motifs in resist-paste yūzen and couched gold thread. Worn by Yoshida Mine, daughter of the donor's great-grandfather, at her wedding in 1782.</p>
+      <a class="read" href="#">Read on →</a>
+    </article>
+
+    <article class="obj">
+      <span class="seal" aria-hidden="true"><svg viewBox="0 0 688 688"><circle cx="344" cy="344" r="320" fill="none" stroke="#0c0c0c" stroke-width="14"/><g fill="#0c0c0c"><circle cx="344" cy="180" r="70"/><circle cx="500" cy="290" r="70"/><circle cx="440" cy="470" r="70"/><circle cx="248" cy="470" r="70"/><circle cx="188" cy="290" r="70"/><circle cx="344" cy="344" r="55" fill="#f5efde"/></g></svg></span>
+      <p class="accession">Acc. 1994.0128</p>
+      <h3>Fireman's coat (hikeshi-banten)</h3>
+      <p class="specs"><span>Sashiko-stitched cotton</span><span>c. 1840</span><span>Edo</span></p>
+      <p>Reversible coat of indigo-dyed cotton densely sashiko-stitched in concentric layers; interior painted with a dragon among waves. Acquired from the Kanda firefighters' brigade descendants association in 1994.</p>
+      <a class="read" href="#">Read on →</a>
+    </article>
+
+    <article class="obj">
+      <span class="seal" aria-hidden="true"><svg viewBox="0 0 688 688"><circle cx="344" cy="344" r="320" fill="none" stroke="#0c0c0c" stroke-width="14"/><g fill="#0c0c0c"><circle cx="344" cy="180" r="70"/><circle cx="500" cy="290" r="70"/><circle cx="440" cy="470" r="70"/><circle cx="248" cy="470" r="70"/><circle cx="188" cy="290" r="70"/><circle cx="344" cy="344" r="55" fill="#f5efde"/></g></svg></span>
+      <p class="accession">Acc. 2002.0046</p>
+      <h3>Edo komon kamishimo with shark-skin pattern</h3>
+      <p class="specs"><span>Stencil-resist dyed silk</span><span>c. 1830</span><span>Edo</span></p>
+      <p>Two-piece formal samurai garment dyed in the same-komon (鮫小紋) pattern at four hundred dots per sun, a density legible only at conversational distance. Donated by the Hosokawa family branch of Kumamoto in 2002.</p>
+      <a class="read" href="#">Read on →</a>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============== CATEGORY 3 — LACQUER ============== -->
+<div class="divider">
+  <span class="label">iii. Shikki</span>
+  <div class="line"></div>
+  <div class="keyfret" aria-hidden="true">
+    <svg viewBox="0 0 600 200" preserveAspectRatio="xMidYMid slice"><g stroke="#0c0c0c" stroke-width="2" fill="none">
+      <polygon points="501.6,101.2 551.1,51.7 500.8,1.4 451.3,50.9 300.9,-99.5 350.4,-149 300.1,-199.3 250.6,-149.8 201.1,-199.3 150.3,-148.5 500.3,201.5 551.1,150.7"/>
+      <polygon points="248.7,152.1 199.4,102.9 149.7,152.5 99.2,101.9 148.8,52.3 199.4,1.7 249,-47.9 299.6,2.6 250,52.3 299.2,101.6"/>
+    </g></svg>
+  </div>
+</div>
+
+<section class="category">
+  <div class="cat-head">
+    <div>
+      <p class="num">No. 03 / Five</p>
+      <h2>Lacquerware<span class="jp">漆器 — SHIKKI</span></h2>
+    </div>
+    <p class="blurb">Boxes, trays, sagemono, and tableware in maki-e and negoro techniques, with a particular concentration of inrō and writing boxes from the workshops of Kyoto and the Kii peninsula.</p>
+  </div>
+
+  <div class="grid">
+
+    <article class="obj">
+      <span class="seal" aria-hidden="true"><svg viewBox="0 0 688 688"><circle cx="344" cy="344" r="320" fill="none" stroke="#0c0c0c" stroke-width="14"/><g fill="#0c0c0c"><circle cx="344" cy="180" r="70"/><circle cx="500" cy="290" r="70"/><circle cx="440" cy="470" r="70"/><circle cx="248" cy="470" r="70"/><circle cx="188" cy="290" r="70"/><circle cx="344" cy="344" r="55" fill="#f5efde"/></g></svg></span>
+      <p class="accession">Acc. 1987.0214</p>
+      <h3>Inrō with chrysanthemum &amp; waves</h3>
+      <p class="specs"><span>Lacquer on wood, gold maki-e</span><span>c. 1820</span><span>Kyoto</span></p>
+      <p>Four-case inrō, the ground in roiro black with high-relief takamaki-e chrysanthemums riding stylized waves; ojime of carved coral, netsuke of stained ivory (signed Tomotada). Purchased at auction in Osaka, March 1987.</p>
+      <a class="read" href="#">Read on →</a>
+    </article>
+
+    <article class="obj">
+      <span class="seal" aria-hidden="true"><svg viewBox="0 0 688 688"><circle cx="344" cy="344" r="320" fill="none" stroke="#0c0c0c" stroke-width="14"/><g fill="#0c0c0c"><circle cx="344" cy="180" r="70"/><circle cx="500" cy="290" r="70"/><circle cx="440" cy="470" r="70"/><circle cx="248" cy="470" r="70"/><circle cx="188" cy="290" r="70"/><circle cx="344" cy="344" r="55" fill="#f5efde"/></g></svg></span>
+      <p class="accession">Acc. 1962.0291</p>
+      <h3>Writing box (suzuribako) with autumn grasses</h3>
+      <p class="specs"><span>Hiramaki-e &amp; mother-of-pearl</span><span>c. 1750</span><span>Kyoto</span></p>
+      <p>Rectangular suzuribako with sloping lid, decorated in low-relief gold maki-e and aogai shell inlay depicting susuki, kuzu, and bush clover at moonrise. Among the earliest objects in the Yoshida bequest, traditionally attributed to the Shiomi workshop.</p>
+      <a class="read" href="#">Read on →</a>
+    </article>
+
+    <article class="obj">
+      <span class="seal" aria-hidden="true"><svg viewBox="0 0 688 688"><circle cx="344" cy="344" r="320" fill="none" stroke="#0c0c0c" stroke-width="14"/><g fill="#0c0c0c"><circle cx="344" cy="180" r="70"/><circle cx="500" cy="290" r="70"/><circle cx="440" cy="470" r="70"/><circle cx="248" cy="470" r="70"/><circle cx="188" cy="290" r="70"/><circle cx="344" cy="344" r="55" fill="#f5efde"/></g></svg></span>
+      <p class="accession">Acc. 1978.0102</p>
+      <h3>Negoro footed tray</h3>
+      <p class="specs"><span>Cinnabar &amp; black lacquer on wood</span><span>c. 1670</span><span>Kii province</span></p>
+      <p>Round tray with raised foot in negoro technique: vermilion lacquer worn through to underlying black at the rim by long temple use, the deliberate aesthetic of monastic wear. Acquired from Negoro-ji's deaccession of duplicates, 1978.</p>
+      <a class="read" href="#">Read on →</a>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============== CATEGORY 4 — CERAMICS ============== -->
+<div class="divider">
+  <span class="label">iv. Tōji</span>
+  <div class="line"></div>
+  <div class="keyfret" aria-hidden="true">
+    <svg viewBox="0 0 600 200" preserveAspectRatio="xMidYMid slice"><g stroke="#0c0c0c" stroke-width="2" fill="none">
+      <polygon points="501.6,101.2 551.1,51.7 500.8,1.4 451.3,50.9 300.9,-99.5 350.4,-149 300.1,-199.3 250.6,-149.8 201.1,-199.3 150.3,-148.5 500.3,201.5 551.1,150.7"/>
+      <polygon points="349.9,52.9 300.4,102.4 250.1,52.1 299.6,2.6 149.2,-147.8 99.7,-98.3 49.4,-148.6 98.9,-198.1 49.4,-247.6 100.2,-298.4 450.2,51.6 399.4,102.4"/>
+    </g></svg>
+  </div>
+</div>
+
+<section class="category">
+  <div class="cat-head">
+    <div>
+      <p class="num">No. 04 / Five</p>
+      <h2>Ceramics<span class="jp">陶磁 — TŌJI</span></h2>
+    </div>
+    <p class="blurb">Tea-ceremony wares from Raku, Karatsu, Hagi, and Kyō kilns, alongside everyday Seto and Imari household porcelain that documents the spread of ceramic tableware into urban Edo-period kitchens.</p>
+  </div>
+
+  <div class="grid">
+
+    <article class="obj">
+      <span class="seal" aria-hidden="true"><svg viewBox="0 0 688 688"><circle cx="344" cy="344" r="320" fill="none" stroke="#0c0c0c" stroke-width="14"/><g fill="#0c0c0c"><circle cx="344" cy="180" r="70"/><circle cx="500" cy="290" r="70"/><circle cx="440" cy="470" r="70"/><circle cx="248" cy="470" r="70"/><circle cx="188" cy="290" r="70"/><circle cx="344" cy="344" r="55" fill="#f5efde"/></g></svg></span>
+      <p class="accession">Acc. 1969.0033</p>
+      <h3>Black Raku tea bowl, named "Hatsushimo"</h3>
+      <p class="specs"><span>Raku ware, Sanyū</span><span>c. 1760</span><span>Kyoto</span></p>
+      <p>Hand-built black-glazed chawan, the foot trimmed with a single decisive cut and the rim slightly compressed at one side. Box inscribed by Omotesenke iemoto Sottakusai; gifted by the Imamiya tea family in 1969.</p>
+      <a class="read" href="#">Read on →</a>
+    </article>
+
+    <article class="obj">
+      <span class="seal" aria-hidden="true"><svg viewBox="0 0 688 688"><circle cx="344" cy="344" r="320" fill="none" stroke="#0c0c0c" stroke-width="14"/><g fill="#0c0c0c"><circle cx="344" cy="180" r="70"/><circle cx="500" cy="290" r="70"/><circle cx="440" cy="470" r="70"/><circle cx="248" cy="470" r="70"/><circle cx="188" cy="290" r="70"/><circle cx="344" cy="344" r="55" fill="#f5efde"/></g></svg></span>
+      <p class="accession">Acc. 1962.0809</p>
+      <h3>Imari blue-and-white covered jar</h3>
+      <p class="specs"><span>Porcelain, sometsuke</span><span>c. 1810</span><span>Hizen</span></p>
+      <p>Lidded household jar, decorated in underglaze cobalt with karakusa scroll on the body and a domestic kamon at the lid. Used for storing pickled plums in the Yoshida kitchen for at least four generations before its donation in 1962.</p>
+      <a class="read" href="#">Read on →</a>
+    </article>
+
+    <article class="obj">
+      <span class="seal" aria-hidden="true"><svg viewBox="0 0 688 688"><circle cx="344" cy="344" r="320" fill="none" stroke="#0c0c0c" stroke-width="14"/><g fill="#0c0c0c"><circle cx="344" cy="180" r="70"/><circle cx="500" cy="290" r="70"/><circle cx="440" cy="470" r="70"/><circle cx="248" cy="470" r="70"/><circle cx="188" cy="290" r="70"/><circle cx="344" cy="344" r="55" fill="#f5efde"/></g></svg></span>
+      <p class="accession">Acc. 2011.0070</p>
+      <h3>Set of seven Seto soba cups</h3>
+      <p class="specs"><span>Stoneware, ash glaze</span><span>c. 1850</span><span>Owari</span></p>
+      <p>Seven (originally ten) cups in pale ash-yellow glaze with iron-painted bamboo, scaled for the standardised Edo soba portion. Acquired in 2011 from the surviving stock of the Yamashiro-ya noodle shop, Pontochō.</p>
+      <a class="read" href="#">Read on →</a>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============== CATEGORY 5 — ARCHITECTURAL FRAGMENTS ============== -->
+<div class="divider">
+  <span class="label">v. Kenchiku-zai</span>
+  <div class="line"></div>
+  <div class="keyfret" aria-hidden="true">
+    <svg viewBox="0 0 600 200" preserveAspectRatio="xMidYMid slice"><g stroke="#0c0c0c" stroke-width="2" fill="none">
+      <polygon points="501.6,101.2 551.1,51.7 500.8,1.4 451.3,50.9 300.9,-99.5 350.4,-149 300.1,-199.3 250.6,-149.8 201.1,-199.3 150.3,-148.5 500.3,201.5 551.1,150.7"/>
+      <polygon points="248.7,152.1 199.4,102.9 149.7,152.5 99.2,101.9 148.8,52.3 199.4,1.7 249,-47.9 299.6,2.6 250,52.3 299.2,101.6"/>
+    </g></svg>
+  </div>
+</div>
+
+<section class="category">
+  <div class="cat-head">
+    <div>
+      <p class="num">No. 05 / Five</p>
+      <h2>Machiya Fragments<span class="jp">町家建築材 — KENCHIKU-ZAI</span></h2>
+    </div>
+    <p class="blurb">Architectural members salvaged in situ from Kyoto townhouses demolished between 1968 and 2003 — ramma transoms, kōshi lattice panels, sliding-door pulls, and roof tiles — preserved with their address of origin and date of removal.</p>
+  </div>
+
+  <div class="grid">
+
+    <article class="obj">
+      <span class="seal" aria-hidden="true"><svg viewBox="0 0 688 688"><circle cx="344" cy="344" r="320" fill="none" stroke="#0c0c0c" stroke-width="14"/><g fill="#0c0c0c"><circle cx="344" cy="180" r="70"/><circle cx="500" cy="290" r="70"/><circle cx="440" cy="470" r="70"/><circle cx="248" cy="470" r="70"/><circle cx="188" cy="290" r="70"/><circle cx="344" cy="344" r="55" fill="#f5efde"/></g></svg></span>
+      <p class="accession">Acc. 1979.0204</p>
+      <h3>Ramma transom with crane &amp; pine</h3>
+      <p class="specs"><span>Carved keyaki wood</span><span>c. 1845</span><span>Nakagyō, Kyoto</span></p>
+      <p>Single-panel openwork transom, 1830 × 380 mm, salvaged from the Tominokōji-Sanjō merchant house "Sasaya" before its demolition in 1979. The crane is carved in three planes; traces of the original gofun whitening remain at the wing tips.</p>
+      <a class="read" href="#">Read on →</a>
+    </article>
+
+    <article class="obj">
+      <span class="seal" aria-hidden="true"><svg viewBox="0 0 688 688"><circle cx="344" cy="344" r="320" fill="none" stroke="#0c0c0c" stroke-width="14"/><g fill="#0c0c0c"><circle cx="344" cy="180" r="70"/><circle cx="500" cy="290" r="70"/><circle cx="440" cy="470" r="70"/><circle cx="248" cy="470" r="70"/><circle cx="188" cy="290" r="70"/><circle cx="344" cy="344" r="55" fill="#f5efde"/></g></svg></span>
+      <p class="accession">Acc. 1998.0082</p>
+      <h3>Kōshi lattice façade panel</h3>
+      <p class="specs"><span>Sugi wood, sumi-stained</span><span>c. 1860</span><span>Kamigyō, Kyoto</span></p>
+      <p>Full-height first-floor lattice from a textile-merchant's storefront, in the regular kyō-gōshi rhythm typical of weaving households (itoya-gōshi). Removed during a 1998 façade restoration on Nishijin's Ōmiya-dōri and replaced with a faithful copy.</p>
+      <a class="read" href="#">Read on →</a>
+    </article>
+
+    <article class="obj">
+      <span class="seal" aria-hidden="true"><svg viewBox="0 0 688 688"><circle cx="344" cy="344" r="320" fill="none" stroke="#0c0c0c" stroke-width="14"/><g fill="#0c0c0c"><circle cx="344" cy="180" r="70"/><circle cx="500" cy="290" r="70"/><circle cx="440" cy="470" r="70"/><circle cx="248" cy="470" r="70"/><circle cx="188" cy="290" r="70"/><circle cx="344" cy="344" r="55" fill="#f5efde"/></g></svg></span>
+      <p class="accession">Acc. 2003.0117</p>
+      <h3>Onigawara end-tile with paulownia crest</h3>
+      <p class="specs"><span>Iburi-gawara fired tile</span><span>c. 1810</span><span>Fushimi, Kyoto</span></p>
+      <p>Smoked-grey ridge-end tile, 410 mm tall, the face moulded with a five-three paulownia kamon and a band of cloud scroll. Recovered from the Aburakōji-Shichijō teahouse roof during typhoon damage repairs in October 2003.</p>
+      <a class="read" href="#">Read on →</a>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============== INDEX TABLE ============== -->
+<section class="index-section">
+  <div>
+    <h2>Concise<br>Acquisitions Index</h2>
+    <p class="note">A representative selection from the catalogue, drawn equally across the five categories. Full provenance is available in the reading room by appointment with the registrar.</p>
+  </div>
+  <table class="index">
+    <thead>
+      <tr>
+        <th>Acc. No.</th>
+        <th>Category</th>
+        <th>Object</th>
+        <th>Date</th>
+        <th>Region</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="num">1962.0014</td><td class="cat">Print</td><td>Hiroshige, "Whirlpools at Awa"</td><td>c. 1855</td><td>Edo</td></tr>
+      <tr><td class="num">1962.0291</td><td class="cat">Lacquer</td><td>Suzuribako with autumn grasses</td><td>c. 1750</td><td>Kyoto</td></tr>
+      <tr><td class="num">1962.0671</td><td class="cat">Textile</td><td>Yūzen kosode, shōchikubai</td><td>c. 1780</td><td>Kyoto</td></tr>
+      <tr><td class="num">1969.0033</td><td class="cat">Ceramic</td><td>Black Raku chawan "Hatsushimo"</td><td>c. 1760</td><td>Kyoto</td></tr>
+      <tr><td class="num">1971.0488</td><td class="cat">Print</td><td>Kunisada, Danjūrō VII as Sukeroku</td><td>1832</td><td>Edo</td></tr>
+      <tr><td class="num">1978.0102</td><td class="cat">Lacquer</td><td>Negoro footed tray</td><td>c. 1670</td><td>Kii</td></tr>
+      <tr><td class="num">1979.0204</td><td class="cat">Architecture</td><td>Ramma, crane &amp; pine</td><td>c. 1845</td><td>Nakagyō</td></tr>
+      <tr><td class="num">1987.0214</td><td class="cat">Lacquer</td><td>Inrō, chrysanthemum &amp; waves</td><td>c. 1820</td><td>Kyoto</td></tr>
+      <tr><td class="num">1994.0128</td><td class="cat">Textile</td><td>Sashiko hikeshi-banten</td><td>c. 1840</td><td>Edo</td></tr>
+      <tr><td class="num">1998.0082</td><td class="cat">Architecture</td><td>Itoya-gōshi lattice</td><td>c. 1860</td><td>Kamigyō</td></tr>
+      <tr><td class="num">2003.0117</td><td class="cat">Architecture</td><td>Onigawara, paulownia crest</td><td>c. 1810</td><td>Fushimi</td></tr>
+      <tr><td class="num">2011.0070</td><td class="cat">Ceramic</td><td>Seven Seto soba cups</td><td>c. 1850</td><td>Owari</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============== FOOTER ============== -->
+<footer>
+  <div class="foot-rule"></div>
+  <div class="foot-grid">
+    <div class="foot-col">
+      <h4>Address</h4>
+      <address>
+        花園江戸生活博物館<br>
+        Hanazono Museum of Edo Life<br>
+        327 Hanazono-chō, Nakagyō-ku<br>
+        Kyoto 604-8225, Japan<br>
+        +81 75 414 2218
+      </address>
+    </div>
+    <div class="foot-col foot-center">
+      <div class="foot-seal" aria-hidden="true">
+        <!-- Kiri paulownia simplified -->
+        <svg viewBox="0 0 345 326" xmlns="http://www.w3.org/2000/svg">
+          <g fill="#0c0c0c">
+            <circle cx="172.6" cy="155" r="9.5"/>
+            <path d="M172.6 165 C 145 175, 110 215, 110 270 C 110 295, 130 320, 172.6 320 C 215 320, 235 295, 235 270 C 235 215, 200 175, 172.6 165 Z M172.6 175 C 175 200, 175 240, 175 290 M155 185 C 145 215, 142 250, 150 290 M190 185 C 200 215, 203 250, 195 290" stroke="#0c0c0c" stroke-width="2" fill="none"/>
+            <path d="M85 130 C 70 110, 55 90, 55 65 C 55 50, 65 38, 80 40 C 90 25, 110 25, 115 45 C 130 50, 130 75, 115 85 C 110 105, 95 120, 85 130 Z" stroke="#0c0c0c" fill="#0c0c0c"/>
+            <path d="M260 130 C 275 110, 290 90, 290 65 C 290 50, 280 38, 265 40 C 255 25, 235 25, 230 45 C 215 50, 215 75, 230 85 C 235 105, 250 120, 260 130 Z" stroke="#0c0c0c" fill="#0c0c0c"/>
+            <path d="M172.6 8 C 150 30, 130 60, 130 95 C 130 115, 145 130, 172.6 130 C 200 130, 215 115, 215 95 C 215 60, 195 30, 172.6 8 Z" stroke="#0c0c0c" fill="#0c0c0c"/>
+          </g>
+        </svg>
+      </div>
+      <p class="name">Hanazono Museum of Edo Life</p>
+      <p class="ja">花 園 江 戸 生 活 博 物 館</p>
+    </div>
+    <div class="foot-col">
+      <h4>Hours</h4>
+      <p>Tuesday — Sunday<br>10:00 — 17:30</p>
+      <p>Closed Mondays &amp; Dec 28 – Jan 3</p>
+      <p style="margin-top:14px;">Adults ¥1,200 · Students ¥600<br>Children under 12 free</p>
+    </div>
+  </div>
+  <div class="seigaiha-band" aria-hidden="true"></div>
+  <p class="credit">Kamon sources used on this site — tsuru, umebachi, kiri, sayagata, seigaiha — courtesy of the public-domain &amp; CC-BY-SA Japanese crest archive.</p>
+</footer>
+
+</body>
+</html>

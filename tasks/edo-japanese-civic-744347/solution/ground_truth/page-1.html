@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Edo Bureau of Wards & Watercourses — Public Notices</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    margin: 0;
+    padding: 0;
+    line-height: 1.8;
+    overflow-x: hidden;
+  }
+
+  /* ---------- NAV ---------- */
+  nav.bureau-nav {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    padding: 28px 56px 22px 56px;
+    border-bottom: 1px solid var(--ornament);
+    gap: 32px;
+  }
+  nav.bureau-nav .seal-mark {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  nav.bureau-nav .seal-mark svg { width: 100%; height: 100%; }
+  nav.bureau-nav .bureau-mark {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  nav.bureau-nav .bureau-name {
+    font-family: var(--font-body);
+    font-size: 13px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+  nav.bureau-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0;
+  }
+  nav.bureau-nav li {
+    padding: 0 22px;
+    border-right: 1px solid var(--ornament);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+  }
+  nav.bureau-nav li:last-child { border-right: none; padding-right: 0; }
+  nav.bureau-nav li:first-child { }
+  nav.bureau-nav a {
+    color: var(--text);
+    text-decoration: none;
+    font-family: var(--font-body);
+  }
+  nav.bureau-nav a[aria-current="page"] {
+    color: var(--secondary);
+    border-bottom: 1px solid var(--secondary);
+    padding-bottom: 4px;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 80px 520px 80px;
+    min-height: 680px;
+    overflow: hidden;
+  }
+  .hero-pattern {
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='700' height='700' viewBox='0 0 700 700'><defs><g id='C1'><path d='M 1,210 V 100 A 98,98 0 0 1 100,1 98,98 0 0 1 199,100 V 210' fill='none' stroke='%231c3a5e' stroke-width='2'/><path d='M 175,210 V 100 A 75,75 0 0 0 100,25 75,75 0 0 0 25,100 V 210' fill='none' stroke='%231c3a5e' stroke-width='1'/></g><g id='C4'><use href='%23C1'/><use href='%23C1' x='200'/><use href='%23C1' x='400'/><use href='%23C1' x='600'/></g></defs><use href='%23C4' x='-100' y='100'/><use href='%23C4' x='0' y='200'/><use href='%23C4' x='-100' y='300'/><use href='%23C4' x='0' y='400'/><use href='%23C4' x='-100' y='500'/><use href='%23C4' x='0' y='600'/></svg>");
+    background-size: 480px 480px;
+    background-position: -200px 280px;
+    opacity: 0.13;
+    pointer-events: none;
+  }
+
+  .hero-title {
+    grid-column: 2 / span 1;
+    grid-row: 2;
+    align-self: center;
+    justify-self: end;
+    writing-mode: vertical-rl;
+    font-family: var(--font-display);
+    font-size: 78px;
+    line-height: 1.05;
+    color: var(--text);
+    letter-spacing: 0.06em;
+    font-weight: 700;
+    position: relative;
+    z-index: 2;
+    padding-right: 12px;
+  }
+  .hero-title .accent-stroke {
+    position: absolute;
+    left: -38px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--secondary);
+  }
+
+  .hero-meta {
+    grid-column: 3 / span 1;
+    grid-row: 2;
+    align-self: end;
+    padding-bottom: 20px;
+    padding-left: 60px;
+    position: relative;
+    z-index: 2;
+  }
+  .hero-seal {
+    width: 76px;
+    height: 76px;
+    margin-bottom: 28px;
+  }
+  .hero-seal svg { width: 100%; height: 100%; }
+  .hero-meta .era {
+    font-family: var(--font-display);
+    font-size: 22px;
+    color: var(--primary);
+    letter-spacing: 0.08em;
+    margin: 0 0 6px 0;
+  }
+  .hero-meta .era-sub {
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text);
+    opacity: 0.7;
+    margin: 0 0 22px 0;
+  }
+  .hero-meta .hairline {
+    width: 64px;
+    height: 1px;
+    background: var(--ornament);
+    margin-bottom: 22px;
+  }
+  .hero-meta .standfirst {
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.9;
+    max-width: 260px;
+    color: var(--text);
+  }
+
+  .hero-emptyfield {
+    grid-column: 4 / span 1;
+    grid-row: 2;
+    /* deliberately blank */
+  }
+
+  /* ---------- DIVIDER STRIP ---------- */
+  .divider-strip {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    padding: 18px 56px;
+    border-top: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+  }
+  .divider-strip .label {
+    font-family: var(--font-display);
+    font-size: 18px;
+    letter-spacing: 0.08em;
+    color: var(--text);
+    white-space: nowrap;
+  }
+  .divider-strip .label-en {
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--text);
+    opacity: 0.6;
+    white-space: nowrap;
+  }
+  .divider-strip .keyfret {
+    flex: 1;
+    height: 30px;
+    overflow: hidden;
+    opacity: 0.55;
+  }
+  .divider-strip .keyfret svg {
+    width: 100%;
+    height: 100%;
+  }
+  .divider-strip .ref {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    color: var(--text);
+    opacity: 0.7;
+  }
+
+  /* ---------- NOTICES ---------- */
+  .notices {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+    padding: 64px 56px 80px 56px;
+  }
+  .notice-card {
+    background: var(--surface);
+    padding: 40px 36px 44px 64px;
+    position: relative;
+    border-top: 1px solid var(--ornament);
+  }
+  .notice-card .card-seal {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    width: 28px;
+    height: 28px;
+    opacity: 0.85;
+  }
+  .notice-card .card-seal svg { width: 100%; height: 100%; }
+  .notice-card .notice-no {
+    font-family: var(--font-body);
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin: 0 0 20px 0;
+  }
+  .notice-card h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 1.3;
+    margin: 0 0 22px 0;
+    color: var(--text);
+    max-width: 18ch;
+  }
+  .notice-card .meta-row {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: var(--text);
+    opacity: 0.75;
+    margin-bottom: 22px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--ornament);
+  }
+  .notice-card p {
+    font-size: 13.5px;
+    line-height: 1.85;
+    margin: 0 0 14px 0;
+    max-width: 32ch;
+  }
+  .notice-card .signoff {
+    margin-top: 26px;
+    font-family: var(--font-display);
+    font-size: 14px;
+    color: var(--primary);
+    letter-spacing: 0.06em;
+  }
+
+  /* ---------- PULL QUOTE ---------- */
+  .proclamation {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    padding: 60px 56px 80px 56px;
+    align-items: start;
+    border-top: 1px solid var(--ornament);
+  }
+  .proclamation .quote-mark {
+    font-family: var(--font-display);
+    font-size: 96px;
+    color: var(--secondary);
+    line-height: 1;
+    grid-column: 1;
+    justify-self: end;
+    padding-right: 30px;
+    padding-top: 8px;
+  }
+  .proclamation blockquote {
+    grid-column: 2;
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 28px;
+    line-height: 1.55;
+    color: var(--text);
+    max-width: 24ch;
+  }
+  .proclamation cite {
+    grid-column: 2;
+    display: block;
+    margin-top: 28px;
+    font-style: normal;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: var(--text);
+    opacity: 0.7;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer.bureau-foot {
+    margin-top: 0;
+    position: relative;
+    padding: 0 56px 56px 56px;
+  }
+  .wave-band {
+    height: 90px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='700' height='700' viewBox='0 0 700 700'><defs><g id='C1'><path d='M 1,210 V 100 A 98,98 0 0 1 100,1 98,98 0 0 1 199,100 V 210' fill='none' stroke='%230c0c0c' stroke-width='2'/><path d='M 175,210 V 100 A 75,75 0 0 0 100,25 75,75 0 0 0 25,100 V 210' fill='none' stroke='%230c0c0c' stroke-width='1'/></g><g id='C4'><use href='%23C1'/><use href='%23C1' x='200'/><use href='%23C1' x='400'/><use href='%23C1' x='600'/></g></defs><use href='%23C4' x='-100' y='100'/><use href='%23C4' x='0' y='200'/><use href='%23C4' x='-100' y='300'/><use href='%23C4' x='0' y='400'/></svg>");
+    background-size: 360px 360px;
+    background-position: 0 -90px;
+    opacity: 0.18;
+    margin-bottom: 50px;
+  }
+  .foot-inner {
+    text-align: center;
+  }
+  .foot-seal {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 22px auto;
+  }
+  .foot-seal svg { width: 100%; height: 100%; }
+  .foot-address {
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 1.9;
+    color: var(--text);
+  }
+  .foot-address div { margin: 0; }
+  .foot-date {
+    margin-top: 22px;
+    font-family: var(--font-display);
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    color: var(--primary);
+  }
+  .foot-attrib {
+    margin-top: 28px;
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text);
+    opacity: 0.55;
+  }
+
+  /* shared inline svg colorings */
+  .ink-fill path,
+  .ink-fill circle,
+  .ink-fill rect,
+  .ink-fill polygon { fill: var(--ornament); }
+  .ink-fill rect[width="688"] { fill: transparent; }
+</style>
+</head>
+<body>
+
+<!-- ===================== NAV ===================== -->
+<nav class="bureau-nav" aria-label="Primary">
+  <div class="bureau-mark">
+    <span class="seal-mark" aria-hidden="true">
+      <!-- Paulownia kamon, small -->
+      <svg viewBox="0 0 345 326" xmlns="http://www.w3.org/2000/svg">
+        <g fill="#0c0c0c">
+          <circle cx="170" cy="153" r="9.8"/>
+          <path d="M170 168c-30 12-58 38-66 72-3 14-1 28 4 41 9 18 28 30 48 30s39-12 48-30c5-13 7-27 4-41-8-34-36-60-66-72zm-2 16c20 9 38 27 44 49 4 14 2 30-5 42-7-14-9-30-7-46-4 18-3 38 4 54-9-2-17-9-22-18-7-13-7-30 0-43 4-8 11-15 19-19-13 4-23 14-29 27-7 16-4 35 8 47-15-5-26-19-29-35-3-22 6-44 23-58z"/>
+          <path d="M155 90c-8-12-22-18-36-15-12 3-22 13-25 25-3 14 4 28 16 35 8 4 18 4 26 0 4-2 7-6 9-10-4 4-9 6-15 6-12 1-23-9-23-21 0-13 11-23 24-22 9 1 17 7 21 15 1-5 2-10 3-13z"/>
+          <path d="M190 90c8-12 22-18 36-15 12 3 22 13 25 25 3 14-4 28-16 35-8 4-18 4-26 0-4-2-7-6-9-10 4 4 9 6 15 6 12 1 23-9 23-21 0-13-11-23-24-22-9 1-17 7-21 15-1-5-2-10-3-13z"/>
+          <path d="M172 0c-2 0-3 1-5 3-3 4-7 7-12 9-3 1-5 4-5 7v8c0 6 2 12 6 17 3 4 6 9 6 14v18c0 2-1 4-2 5-3 1-5-1-7-4-3-5-5-11-5-17v-8c-1-3-3-5-6-5-2 0-4 1-5 3-1 1-2 2-4 2-3-1-5 1-6 4-1 2-1 4 0 6 1 1 1 3 0 5-1 2 0 4 1 5 2 2 5 2 8 1 4-1 8 1 11 4 4 4 7 9 7 14v6h2c1-1 3-1 5-1h11c2 0 4 0 5 1h2v-6c0-5 3-10 7-14 3-3 7-5 11-4 3 1 6 1 8-1 1-1 2-3 1-5-1-2-1-4 0-5 1-2 1-4 0-6-1-3-3-5-6-4-2 0-3-1-4-2-1-2-3-3-5-3-3 0-5 2-6 5v8c0 6-2 12-5 17-2 3-4 5-7 4-1-1-2-3-2-5v-18c0-5 3-10 6-14 4-5 6-11 6-17v-8c0-3-2-6-5-7-5-2-9-5-12-9-2-2-3-3-5-3z"/>
+        </g>
+      </svg>
+    </span>
+    <span class="bureau-name">Edo Bureau of Wards &amp; Watercourses</span>
+  </div>
+  <div></div>
+  <ul>
+    <li><a href="page-1.html" aria-current="page">Public Notices</a></li>
+    <li><a href="page-2.html">Register of Wards</a></li>
+    <li><a href="page-3.html">Watercourses</a></li>
+    <li><a href="page-4.html">Fire-Watch</a></li>
+    <li><a href="page-5.html">Office &amp; Petitions</a></li>
+    <li><a href="page-6.html">Origins</a></li>
+  </ul>
+</nav>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+  <div class="hero-pattern" aria-hidden="true"></div>
+
+  <h1 class="hero-title">
+    <span class="accent-stroke" aria-hidden="true"></span>
+    町と水の<br>御普請所
+  </h1>
+
+  <div class="hero-meta">
+    <div class="hero-seal" aria-hidden="true">
+      <!-- Paulownia kamon (centerpiece) -->
+      <svg viewBox="0 0 345 326" xmlns="http://www.w3.org/2000/svg">
+        <g fill="#1c3a5e">
+          <circle cx="172" cy="155" r="10"/>
+          <path d="M172 166c-32 13-62 41-71 76-3 14-1 28 4 42 9 19 30 31 50 31s41-12 50-31c5-14 7-28 4-42-9-35-39-63-71-76 0 4-1 8-1 12 14 7 27 17 38 31 11 17 16 38 11 58 1-22-7-43-21-60-12-15-29-25-46-33 0 4-1 8 0 12 12 6 23 16 32 28 11 17 14 39 8 58 0-21-3-42-13-60-9-15-22-26-37-33 0 5 0 9-1 13 11 6 21 14 28 25 9 17 11 39 5 58 1-21-2-42-11-60-5-9-12-16-21-22 0 4-1 9 0 13 9 7 16 16 21 27 8 17 9 38 4 56 0-22-3-44-12-63-3-7-7-13-12-18-1 18-1 36-1 54 0 4-1 8-2 12-1-4-2-8-2-12 0-18 0-36-1-54-5 5-9 11-12 18-9 19-12 41-12 63-5-18-4-39 4-56 5-11 12-20 21-27 1-4 0-9 0-13-9 6-16 13-21 22-9 18-12 39-11 60-6-19-4-41 5-58 7-11 17-19 28-25-1-4-1-8-1-13-15 7-28 18-37 33-10 18-13 39-13 60-6-19-3-41 8-58 9-12 20-22 32-28 1-4 0-8 0-12-17 8-34 18-46 33-14 17-22 38-21 60-5-20 0-41 11-58 11-14 24-24 38-31 0-4-1-8-1-12z"/>
+          <path d="M155 90c-8-12-22-18-36-16-13 3-23 13-26 26-3 14 4 28 16 35 8 4 19 4 27 0 4-2 7-5 9-9-4 3-9 5-15 6-12 1-23-9-23-21 0-13 11-23 24-22 9 0 17 6 21 14z"/>
+          <path d="M190 90c8-12 22-18 36-16 13 3 23 13 26 26 3 14-4 28-16 35-8 4-19 4-27 0-4-2-7-5-9-9 4 3 9 5 15 6 12 1 23-9 23-21 0-13-11-23-24-22-9 0-17 6-21 14z"/>
+        </g>
+      </svg>
+    </div>
+    <p class="era">文久二年 三月</p>
+    <p class="era-sub">Bunkyū 2nd Year · 3rd Month · 1862</p>
+    <div class="hairline"></div>
+    <p class="standfirst">
+      The civic office charged with the registration of the
+      machi wards, the upkeep of the conduits running from
+      the Sumida to Nihonbashi, and the coordination of the
+      fire-watch towers of the eight-hundred-and-eight machi.
+    </p>
+  </div>
+
+  <div class="hero-emptyfield" aria-hidden="true"></div>
+</section>
+
+<!-- ===================== DIVIDER ===================== -->
+<div class="divider-strip">
+  <span class="label">公示</span>
+  <span class="label-en">Public Notices · Three Postings</span>
+  <span class="keyfret" aria-hidden="true">
+    <svg viewBox="0 100 600 200" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <g fill="none" stroke="#0c0c0c" stroke-width="1.4">
+        <polygon points="501.6,301.2 551.1,251.7 500.8,201.4 451.3,250.9 300.9,100.5 350.4,51 300.1,0.7 250.6,50.2 201.1,0.7 150.3,51.5 500.3,401.5 551.1,350.7"/>
+        <polygon points="600.9,199.9 551.6,150.7 601.2,101 550.7,50.4 501,100.1 450.4,150.7 400.8,200.3 451.3,250.9 501,201.2 550.3,250.5"/>
+        <polyline points="600,0 400.8,200.3 351,150.5 501.5,0"/>
+        <polygon points="349.9,452.9 300.4,502.4 250.1,452.1 299.6,402.6 149.2,252.2 99.7,301.7 49.4,251.4 98.9,201.9 49.4,152.4 100.2,101.6 450.2,451.6 399.4,502.4"/>
+        <polygon points="248.7,552.1 199.4,502.9 149.7,552.5 99.2,501.9 148.8,452.3 199.4,401.7 249,352.1 299.6,402.6 250,452.3 299.2,501.6"/>
+        <polygon points="-0.9,302.6 48.4,351.9 -1.2,401.5 49.3,452.1 99,402.5 149.6,351.9 199.2,302.2 148.7,251.7 99,301.3 49.7,252"/>
+      </g>
+    </svg>
+  </span>
+  <span class="ref">Posted at the Bureau Gate · Hongokuchō</span>
+</div>
+
+<!-- ===================== NOTICES ===================== -->
+<section class="notices" aria-label="Public notices">
+
+  <article class="notice-card">
+    <span class="card-seal" aria-hidden="true">
+      <!-- Umebachi (inverted ink) -->
+      <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="344" cy="344" r="338" fill="#0c0c0c"/>
+        <g fill="#f5efde">
+          <circle cx="344" cy="180" r="78"/>
+          <circle cx="200" cy="290" r="78"/>
+          <circle cx="488" cy="290" r="78"/>
+          <circle cx="248" cy="470" r="78"/>
+          <circle cx="440" cy="470" r="78"/>
+          <circle cx="344" cy="345" r="60"/>
+        </g>
+      </svg>
+    </span>
+    <p class="notice-no">Notice № I · Watercourses</p>
+    <h2>Dredging Order: Kanda-gawa, Spring Quarter</h2>
+    <div class="meta-row">
+      <span>Issued · Bunkyū 2 / 3rd month / 4th day</span>
+      <span>Reach · Suidōbashi to Yanagibashi</span>
+      <span>Wards Levied · 17 machi</span>
+    </div>
+    <p>
+      Be it known that the silting at the Suidōbashi reach of the
+      Kanda-gawa has risen to obstruct the passage of timber rafts
+      bound for the lumberyards at Saruyachō. The seventeen wards
+      bordering this stretch are summoned to provide labour parties
+      of three men per chōnai for the duration of fifteen days.
+    </p>
+    <p>
+      Stipend: rice three shō and copper sixteen mon per labourer
+      per day, drawn upon the Bureau treasury at Hongokuchō.
+    </p>
+    <p class="signoff">— Mizu-bugyō Inoue Tadayoshi</p>
+  </article>
+
+  <article class="notice-card">
+    <span class="card-seal" aria-hidden="true">
+      <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="344" cy="344" r="338" fill="#0c0c0c"/>
+        <g fill="#f5efde">
+          <circle cx="344" cy="180" r="78"/>
+          <circle cx="200" cy="290" r="78"/>
+          <circle cx="488" cy="290" r="78"/>
+          <circle cx="248" cy="470" r="78"/>
+          <circle cx="440" cy="470" r="78"/>
+          <circle cx="344" cy="345" r="60"/>
+        </g>
+      </svg>
+    </span>
+    <p class="notice-no">Notice № II · Register</p>
+    <h2>Posting of New Ward Elders, Nihonbashi-Hongokuchō</h2>
+    <div class="meta-row">
+      <span>Issued · Bunkyū 2 / 3rd month / 11th day</span>
+      <span>Ward · Hongokuchō Itchōme through Yonchōme</span>
+      <span>Term · Three years from this posting</span>
+    </div>
+    <p>
+      Upon the retirement of the elder Sawaya Kichibei, aged
+      seventy-three, the following residents are hereby entered
+      onto the Register as Toshiyori of their respective chōnai:
+      Komatsuya Jirōbei (1-chōme), Echigoya Sōshichi (2-chōme),
+      Tsuruya Hanzaemon (3-chōme), and Iseya Tokubei (4-chōme).
+    </p>
+    <p>
+      Their seals shall be impressed upon the ward register at the
+      Bureau hall on the morning of the 18th day, in the presence
+      of the city magistrate's deputy.
+    </p>
+    <p class="signoff">— Machi-bugyō Sakai Tadayuki</p>
+  </article>
+
+  <article class="notice-card">
+    <span class="card-seal" aria-hidden="true">
+      <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="344" cy="344" r="338" fill="#0c0c0c"/>
+        <g fill="#f5efde">
+          <circle cx="344" cy="180" r="78"/>
+          <circle cx="200" cy="290" r="78"/>
+          <circle cx="488" cy="290" r="78"/>
+          <circle cx="248" cy="470" r="78"/>
+          <circle cx="440" cy="470" r="78"/>
+          <circle cx="344" cy="345" r="60"/>
+        </g>
+      </svg>
+    </span>
+    <p class="notice-no">Notice № III · Fire-Watch</p>
+    <h2>Proclamation for the Dry-Wind Season</h2>
+    <div class="meta-row">
+      <span>Issued · Bunkyū 2 / 3rd month / 19th day</span>
+      <span>Effect · From this day until the 5th month</span>
+      <span>Penalty · Forfeit of three kanmon</span>
+    </div>
+    <p>
+      With the northwesterly winds now prevailing across the
+      townscape, all hearths shall be banked at the hour of the
+      Dog. Bath-houses are to extinguish their furnaces by the
+      eighth bell. Lanterns hung from eaves must be shielded with
+      paper of the heavier weight, and no firework, however small,
+      is to be discharged within the city wards.
+    </p>
+    <p>
+      The hikeshi of the Yo-gumi, I-gumi, and Ro-gumi companies
+      shall keep doubled watch upon the towers of Asakusa, Kanda,
+      and Kyōbashi until the wind shall turn.
+    </p>
+    <p class="signoff">— Hikeshi-yoriki Ōkubo Magoshirō</p>
+  </article>
+
+</section>
+
+<!-- ===================== PROCLAMATION ===================== -->
+<section class="proclamation">
+  <div class="quote-mark" aria-hidden="true">「</div>
+  <blockquote>
+    The wards are the bones of the city; the conduits, its veins;
+    the watch-towers, its waking eyes. Let no part be neglected.
+  </blockquote>
+  <cite>— From the founding charter of the Bureau, Kan'ei 14 (1637)</cite>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="bureau-foot">
+  <div class="wave-band" aria-hidden="true"></div>
+  <div class="foot-inner">
+    <div class="foot-seal" aria-hidden="true">
+      <svg viewBox="0 0 345 326" xmlns="http://www.w3.org/2000/svg">
+        <g fill="#0c0c0c">
+          <circle cx="172" cy="155" r="9"/>
+          <path d="M172 168c-30 12-58 38-66 72-3 14-1 28 4 41 9 18 28 30 47 30s38-12 47-30c5-13 7-27 4-41-8-34-36-60-66-72 0 4-1 7-1 11 13 6 25 16 36 29 10 16 15 36 10 55 1-21-7-41-20-57-12-14-28-23-44-31 0 4-1 8 0 11 12 6 22 15 31 27 10 16 13 37 7 55 0-20-3-40-12-57-9-14-21-24-35-31 0 4 0 9-1 12 10 6 19 13 26 24 9 16 11 36 5 55 1-20-2-40-10-57-5-9-12-15-20-21 0 4-1 8 0 12 8 6 15 15 19 26 8 16 9 36 4 53 0-21-3-42-11-60-3-7-7-12-11-17-1 17-1 34-1 51 0 4-1 8-2 11-1-3-2-7-2-11 0-17 0-34-1-51-4 5-8 10-11 17-8 18-11 39-11 60-5-17-4-37 4-53 4-11 11-20 19-26 1-4 0-8 0-12-8 6-15 12-20 21-8 17-11 37-10 57-6-19-4-39 5-55 7-11 16-18 26-24-1-3-1-8-1-12-14 7-26 17-35 31-9 17-12 37-12 57-6-18-3-39 7-55 9-12 19-21 31-27 1-3 0-7 0-11-16 8-32 17-44 31-13 16-21 36-20 57-5-19 0-39 10-55 11-13 23-23 36-29 0-4-1-7-1-11z"/>
+        </g>
+      </svg>
+    </div>
+    <div class="foot-address">
+      <div>Edo Bureau of Wards &amp; Watercourses</div>
+      <div>Nihonbashi-Hongokuchō Itchōme, north of the bridge</div>
+      <div>Bell-tower district, Edo · Musashi Province</div>
+    </div>
+    <div class="foot-date">編纂 · 文久二年 三月吉日 (Bunkyū 2 · 3rd month, an auspicious day)</div>
+    <div class="foot-attrib">Kamon SVG renderings under CC-BY-SA · Compiled by the Office of the Machi-Bugyō</div>
+  </div>
+</footer>
+
+</body>
+</html>

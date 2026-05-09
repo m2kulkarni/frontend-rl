@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Current Exhibition — Concrete & Oculus</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    font-size: 16px;
+    line-height: 1.65;
+  }
+  a { color: inherit; }
+
+  /* ---------- NAV ---------- */
+  .topbar {
+    border-top: 2px solid var(--secondary);
+    padding: 24px 60px 0;
+    background: var(--bg);
+  }
+  .nav-row {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 40px;
+    padding-bottom: 14px;
+  }
+  .nav-links {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 18px;
+    font-family: var(--font-body);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .nav-links.left { justify-content: flex-end; }
+  .nav-links.right { justify-content: flex-start; }
+  .nav-links li {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--primary);
+    padding-bottom: 2px;
+  }
+  .nav-links a[aria-current="page"] {
+    border-bottom: 2px solid var(--accent);
+    color: var(--accent);
+  }
+  .vine {
+    width: 14px;
+    height: 14px;
+    fill: var(--secondary);
+    opacity: 0.85;
+  }
+  .wordmark {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--primary);
+    white-space: nowrap;
+  }
+  .meander-strip {
+    width: 100%;
+    height: 22px;
+    overflow: hidden;
+    border-top: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 165 44' preserveAspectRatio='xMidYMid meet'><g fill='%231a1a1a'><path d='M10 41.75 L10 10 L41.75 10 L41.75 29.05 L29.05 29.05 L29.05 35.4 L48.1 35.4 L48.1 41.75 L22.7 41.75 L22.7 22.7 L35.4 22.7 L35.4 16.35 L16.35 16.35 L16.35 41.75 Z'/><path d='M48.1 41.75 L48.1 10 L79.85 10 L79.85 29.05 L67.15 29.05 L67.15 35.4 L86.2 35.4 L86.2 41.75 L60.8 41.75 L60.8 22.7 L73.5 22.7 L73.5 16.35 L54.45 16.35 L54.45 41.75 Z'/><path d='M86.2 41.75 L86.2 10 L117.95 10 L117.95 29.05 L105.25 29.05 L105.25 35.4 L124.3 35.4 L124.3 41.75 L98.9 41.75 L98.9 22.7 L111.6 22.7 L111.6 16.35 L92.55 16.35 L92.55 41.75 Z'/><path d='M124.3 41.75 L124.3 10 L156.05 10 L156.05 29.05 L143.35 29.05 L143.35 35.4 L162.4 35.4 L162.4 41.75 L137 41.75 L137 22.7 L149.7 22.7 L149.7 16.35 L130.65 16.35 L130.65 41.75 Z'/></g></svg>");
+    background-repeat: repeat-x;
+    background-size: auto 22px;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    text-align: center;
+    padding: 70px 60px 50px;
+    position: relative;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-body);
+    text-transform: uppercase;
+    letter-spacing: 0.4em;
+    font-size: 11px;
+    color: var(--accent);
+    margin-bottom: 24px;
+  }
+  .hero-frame {
+    position: relative;
+    display: inline-block;
+    width: 720px;
+    padding: 60px 40px 40px;
+  }
+  .hero-frame svg.wreath {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  .hero h1 {
+    font-family: var(--font-display), serif;
+    font-size: 56px;
+    line-height: 1.1;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin: 0 0 8px;
+    color: var(--primary);
+  }
+  .hero h1 .amp {
+    color: var(--accent);
+    font-style: normal;
+    padding: 0 0.1em;
+  }
+  .hero-sub {
+    font-family: var(--font-display), serif;
+    font-size: 19px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin: 14px 0 6px;
+  }
+  .hero-meta {
+    font-size: 13px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin-top: 18px;
+  }
+  .hero-meta .date-roman {
+    color: var(--text-emphasis);
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.22em;
+  }
+
+  /* ---------- DIVIDER ---------- */
+  .divider {
+    margin: 50px auto;
+    width: 80%;
+    height: 18px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 165 44' preserveAspectRatio='xMidYMid meet'><g fill='%231a1a1a'><path d='M10 41.75 L10 10 L41.75 10 L41.75 29.05 L29.05 29.05 L29.05 35.4 L48.1 35.4 L48.1 41.75 L22.7 41.75 L22.7 22.7 L35.4 22.7 L35.4 16.35 L16.35 16.35 L16.35 41.75 Z'/><path d='M48.1 41.75 L48.1 10 L79.85 10 L79.85 29.05 L67.15 29.05 L67.15 35.4 L86.2 35.4 L86.2 41.75 L60.8 41.75 L60.8 22.7 L73.5 22.7 L73.5 16.35 L54.45 16.35 L54.45 41.75 Z'/><path d='M86.2 41.75 L86.2 10 L117.95 10 L117.95 29.05 L105.25 29.05 L105.25 35.4 L124.3 35.4 L124.3 41.75 L98.9 41.75 L98.9 22.7 L111.6 22.7 L111.6 16.35 L92.55 16.35 L92.55 41.75 Z'/><path d='M124.3 41.75 L124.3 10 L156.05 10 L156.05 29.05 L143.35 29.05 L143.35 35.4 L162.4 35.4 L162.4 41.75 L137 41.75 L137 22.7 L149.7 22.7 L149.7 16.35 L130.65 16.35 L130.65 41.75 Z'/></g></svg>");
+    background-repeat: repeat-x;
+    background-size: auto 18px;
+  }
+  .divider.thin {
+    height: 14px;
+    background-size: auto 14px;
+    width: 60%;
+    margin: 36px auto;
+  }
+
+  /* ---------- INTRO ---------- */
+  .intro {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 60px;
+    text-align: center;
+  }
+  .intro h2 {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin: 0 0 24px;
+  }
+  .intro p {
+    font-size: 17px;
+    line-height: 1.75;
+    margin: 0 0 18px;
+  }
+  .credit {
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin-top: 30px;
+    opacity: 0.85;
+  }
+
+  /* ---------- SECTIONS ---------- */
+  .section {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 60px;
+  }
+  .section-head {
+    text-align: center;
+    margin-bottom: 38px;
+  }
+  .section-head .num {
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.4em;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+  .section-head h2 {
+    font-family: var(--font-display), serif;
+    font-size: 34px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin: 8px 0 0;
+    color: var(--primary);
+  }
+  .laurel-sprig {
+    display: block;
+    margin: 12px auto 0;
+    width: 90px;
+    height: 14px;
+  }
+  .laurel-sprig path {
+    fill: none;
+    stroke: var(--secondary);
+    stroke-width: 1;
+  }
+
+  .col-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+  }
+  .col-2 p {
+    margin: 0 0 16px;
+    font-size: 15px;
+  }
+
+  .pullquote {
+    margin: 40px auto;
+    max-width: 820px;
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    line-height: 1.5;
+    color: var(--text-emphasis);
+    letter-spacing: 0.02em;
+    padding: 24px 40px;
+    border-top: 1px solid var(--secondary);
+    border-bottom: 1px solid var(--secondary);
+  }
+  .pullquote cite {
+    display: block;
+    margin-top: 14px;
+    font-family: var(--font-body);
+    font-style: normal;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--text);
+    opacity: 0.7;
+  }
+
+  /* ---------- DOME GEOMETRY CARD ---------- */
+  .geometry-block {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .geometry-svg {
+    width: 100%;
+    height: auto;
+  }
+  .geometry-svg .axis { stroke: var(--accent); stroke-width: 0.6; stroke-dasharray: 3 3; }
+  .geometry-svg .ink { stroke: var(--primary); fill: none; stroke-width: 1; }
+  .geometry-svg .label {
+    font-family: var(--font-display), serif;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    fill: var(--primary);
+    text-transform: uppercase;
+  }
+  .geometry-svg .gold { stroke: var(--secondary); fill: none; stroke-width: 1.2; }
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 14px;
+  }
+  .data-table th, .data-table td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(26,26,26,0.18);
+  }
+  .data-table th {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border-bottom: 1px solid var(--accent);
+  }
+  .data-table .figure {
+    color: var(--text-emphasis);
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.08em;
+  }
+
+  /* ---------- LECTURE CARDS ---------- */
+  .lecture-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-top: 20px;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--ornament);
+    padding: 0;
+    position: relative;
+  }
+  .card-inner {
+    border: 4px solid transparent;
+    outline: 1px solid var(--secondary);
+    outline-offset: -6px;
+    padding: 28px 22px 26px;
+    height: 100%;
+    text-align: center;
+  }
+  .card .roundel {
+    width: 52px;
+    height: 52px;
+    margin: 0 auto 14px;
+    display: block;
+  }
+  .card .roundel svg {
+    width: 100%; height: 100%;
+  }
+  .card .date {
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    margin-bottom: 6px;
+  }
+  .card h3 {
+    font-family: var(--font-display), serif;
+    font-size: 16px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin: 6px 0 8px;
+    line-height: 1.3;
+    color: var(--primary);
+  }
+  .laurel-mini {
+    width: 50px;
+    height: 8px;
+    margin: 6px auto 12px;
+    display: block;
+  }
+  .laurel-mini path { fill: none; stroke: var(--secondary); stroke-width: 0.8; }
+  .card .speaker {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .card p.abstract {
+    font-size: 13.5px;
+    line-height: 1.6;
+    margin: 0;
+    color: var(--text);
+  }
+  .card .time {
+    margin-top: 14px;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+
+  /* ---------- TICKETING ---------- */
+  .ticketing {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+    margin-top: 20px;
+    border-top: 1px solid var(--secondary);
+    border-bottom: 1px solid var(--secondary);
+    padding: 36px 30px;
+  }
+  .ticketing h4 {
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin: 0 0 14px;
+  }
+  .ticketing dl {
+    margin: 0;
+    font-size: 14px;
+  }
+  .ticketing dt {
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    margin-top: 10px;
+  }
+  .ticketing dd {
+    margin: 2px 0 0;
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.04em;
+  }
+  .ticketing .price {
+    color: var(--text-emphasis);
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    margin-top: 80px;
+  }
+  .footer-inner {
+    background: var(--bg);
+    padding: 44px 60px 30px;
+  }
+  .footer-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 60px;
+    text-align: center;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .footer-cols h5 {
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    color: var(--accent);
+  }
+  .footer-cols p, .footer-cols address {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    line-height: 1.9;
+    font-style: normal;
+    margin: 0;
+  }
+  .tailpiece {
+    text-align: center;
+    margin: 28px auto 6px;
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    letter-spacing: 0.6em;
+    color: var(--ornament);
+  }
+  .founding {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    color: var(--text-emphasis);
+    letter-spacing: 0.32em;
+    font-size: 12px;
+    margin-top: 4px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ====== TOP NAV ====== -->
+<header class="topbar" role="banner">
+  <div class="nav-row">
+    <ul class="nav-links left">
+      <li><a href="page-1.html">Home</a>
+        <svg class="vine" viewBox="0 0 200 200" aria-hidden="true"><path d="M43.583 863.37c-1.79.03-3.58.13-5.34.31-7.05.74-13.94 2.79-19.16 7.47s-8.2 12-7.69 21c.51 9 4.3 16.14 10.19 20.34 5.89 4.2 13.31 5.53 21.03 5.19 15.45-.69 32.83-8 45.81-18.31 1.41-1.12 2.83-2.04 4.25-3.06 4.29 6.68 7.61 14.83 9.34 24.06-7.5-5.07-21.01-10.55-35.66 1.5-22.14 18.21-24.99 12.88-45.34-2.13-2.86 36.07 15.01 54.64 44.66 52.5 0 0-13.95 4.26-3.59 26.41 6.02 12.87 8.41 20.07 6.56 25.19-12.84 2.29-15.77 7.78-5.57 12.66 45.1 9.97 65.67-27.47 68.66-66.04 45.36 0 52.86-31.8 52.5-50.37-8.21 11.07-22.16 11.07-32.87 2.5-9.93-7.95-21.69-16.18-39-1.13-1.74-11.68-5.69-22.13-11.22-30.72 19.36-11.37 38.72-14.46 52.53-10.81 5.48 1.45 9.46 4.09 12.38 6.97-8.97 8.36-11.84 26.38 2.28 27.03 18.92.88 21.03-15.45 13.56-27.13-5.45-8.51-16.42-13.23-25.66-16.56-17.51-4.63-39.74-.57-61.28 12.5-5.17-5.72-11.13-10.22-17.72-12.97-7.08-2.95-17.54-5.73-28.28-6.31-1.79-.1-3.58-.13-5.37-.09zm.13 10.03c1.52-.02 3.09.03 4.66.13 9.41.59 19.25 3.06 25.03 5.47 4.63 1.93 9.05 5.23 13.06 9.44-1.42 1.04-2.84 1.98-4.25 3.09-11.3 8.98-27.54 15.6-40.03 16.16-6.25.28-11.38-.91-14.78-3.34-3.41-2.43-5.65-6.04-6.03-12.75-.38-6.72 1.42-10.3 4.41-12.97 2.98-2.67 7.74-4.37 13.5-4.97 1.44-.15 2.92-.23 4.44-.25zm62.28 64.81c1-.01 2.03.1 3.06.28 8.26 1.44 14 8.11 12.81 14.91-1.19 6.8-8.84 11.16-17.09 9.72-8.26-1.44-14-8.11-12.81-14.91 1.04-5.95 7.02-10.04 14.03-10z" transform="translate(0 -852.36)"/></svg>
+      </li>
+      <li><a href="page-2.html">Collection</a>
+        <svg class="vine" viewBox="0 0 200 200" aria-hidden="true"><path d="M43.583 863.37c-1.79.03-3.58.13-5.34.31-7.05.74-13.94 2.79-19.16 7.47s-8.2 12-7.69 21c.51 9 4.3 16.14 10.19 20.34 5.89 4.2 13.31 5.53 21.03 5.19 15.45-.69 32.83-8 45.81-18.31 1.41-1.12 2.83-2.04 4.25-3.06 4.29 6.68 7.61 14.83 9.34 24.06-7.5-5.07-21.01-10.55-35.66 1.5-22.14 18.21-24.99 12.88-45.34-2.13-2.86 36.07 15.01 54.64 44.66 52.5 0 0-13.95 4.26-3.59 26.41 6.02 12.87 8.41 20.07 6.56 25.19-12.84 2.29-15.77 7.78-5.57 12.66 45.1 9.97 65.67-27.47 68.66-66.04 45.36 0 52.86-31.8 52.5-50.37-8.21 11.07-22.16 11.07-32.87 2.5-9.93-7.95-21.69-16.18-39-1.13-1.74-11.68-5.69-22.13-11.22-30.72 19.36-11.37 38.72-14.46 52.53-10.81 5.48 1.45 9.46 4.09 12.38 6.97-8.97 8.36-11.84 26.38 2.28 27.03 18.92.88 21.03-15.45 13.56-27.13-5.45-8.51-16.42-13.23-25.66-16.56-17.51-4.63-39.74-.57-61.28 12.5z" transform="translate(0 -852.36)"/></svg>
+      </li>
+      <li><a href="page-3.html" aria-current="page">Exhibition</a></li>
+    </ul>
+
+    <div class="wordmark">MVSEO&nbsp;AVRELIANO</div>
+
+    <ul class="nav-links right">
+      <li><a href="page-4.html">Visit</a>
+        <svg class="vine" viewBox="0 0 200 200" aria-hidden="true"><path d="M43.583 863.37c-1.79.03-3.58.13-5.34.31-7.05.74-13.94 2.79-19.16 7.47s-8.2 12-7.69 21c.51 9 4.3 16.14 10.19 20.34 5.89 4.2 13.31 5.53 21.03 5.19 15.45-.69 32.83-8 45.81-18.31 1.41-1.12 2.83-2.04 4.25-3.06 4.29 6.68 7.61 14.83 9.34 24.06-7.5-5.07-21.01-10.55-35.66 1.5-22.14 18.21-24.99 12.88-45.34-2.13-2.86 36.07 15.01 54.64 44.66 52.5 0 0-13.95 4.26-3.59 26.41 6.02 12.87 8.41 20.07 6.56 25.19-12.84 2.29-15.77 7.78-5.57 12.66 45.1 9.97 65.67-27.47 68.66-66.04 45.36 0 52.86-31.8 52.5-50.37-8.21 11.07-22.16 11.07-32.87 2.5-9.93-7.95-21.69-16.18-39-1.13-1.74-11.68-5.69-22.13-11.22-30.72 19.36-11.37 38.72-14.46 52.53-10.81z" transform="translate(0 -852.36)"/></svg>
+      </li>
+      <li><a href="page-5.html">History</a>
+        <svg class="vine" viewBox="0 0 200 200" aria-hidden="true"><path d="M43.583 863.37c-1.79.03-3.58.13-5.34.31-7.05.74-13.94 2.79-19.16 7.47s-8.2 12-7.69 21c.51 9 4.3 16.14 10.19 20.34 5.89 4.2 13.31 5.53 21.03 5.19 15.45-.69 32.83-8 45.81-18.31 1.41-1.12 2.83-2.04 4.25-3.06 4.29 6.68 7.61 14.83 9.34 24.06-7.5-5.07-21.01-10.55-35.66 1.5-22.14 18.21-24.99 12.88-45.34-2.13-2.86 36.07 15.01 54.64 44.66 52.5z" transform="translate(0 -852.36)"/></svg>
+      </li>
+      <li><a href="page-6.html">Scholarship</a></li>
+    </ul>
+  </div>
+  <div class="meander-strip" role="presentation"></div>
+</header>
+
+<!-- ====== HERO ====== -->
+<section class="hero">
+  <div class="hero-eyebrow">Current Exhibition · Hall of the Pediment</div>
+  <div class="hero-frame">
+    <svg class="wreath" viewBox="0 0 323.75 295.79" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+      <g fill="none" stroke="#c9a23a" stroke-width="0.9">
+        <ellipse cx="161.87" cy="147.9" rx="150" ry="135"/>
+        <path d="M50 90 C 80 60, 130 50, 161 60 C 192 50, 242 60, 272 90"/>
+        <path d="M50 205 C 80 235, 130 245, 161 235 C 192 245, 242 235, 272 205"/>
+      </g>
+      <g fill="#c9a23a" opacity="0.85">
+        <!-- left laurel leaves -->
+        <ellipse cx="55" cy="105" rx="9" ry="3.5" transform="rotate(-30 55 105)"/>
+        <ellipse cx="50" cy="125" rx="10" ry="3.6" transform="rotate(-20 50 125)"/>
+        <ellipse cx="48" cy="148" rx="10" ry="3.6" transform="rotate(-5 48 148)"/>
+        <ellipse cx="50" cy="170" rx="10" ry="3.6" transform="rotate(15 50 170)"/>
+        <ellipse cx="56" cy="190" rx="10" ry="3.6" transform="rotate(28 56 190)"/>
+        <ellipse cx="68" cy="210" rx="10" ry="3.6" transform="rotate(45 68 210)"/>
+        <ellipse cx="86" cy="226" rx="10" ry="3.6" transform="rotate(60 86 226)"/>
+        <ellipse cx="108" cy="240" rx="10" ry="3.6" transform="rotate(75 108 240)"/>
+        <!-- right laurel leaves -->
+        <ellipse cx="269" cy="105" rx="9" ry="3.5" transform="rotate(30 269 105)"/>
+        <ellipse cx="274" cy="125" rx="10" ry="3.6" transform="rotate(20 274 125)"/>
+        <ellipse cx="276" cy="148" rx="10" ry="3.6" transform="rotate(5 276 148)"/>
+        <ellipse cx="274" cy="170" rx="10" ry="3.6" transform="rotate(-15 274 170)"/>
+        <ellipse cx="268" cy="190" rx="10" ry="3.6" transform="rotate(-28 268 190)"/>
+        <ellipse cx="256" cy="210" rx="10" ry="3.6" transform="rotate(-45 256 210)"/>
+        <ellipse cx="238" cy="226" rx="10" ry="3.6" transform="rotate(-60 238 226)"/>
+        <ellipse cx="216" cy="240" rx="10" ry="3.6" transform="rotate(-75 216 240)"/>
+        <!-- top leaves -->
+        <ellipse cx="100" cy="62" rx="10" ry="3.6" transform="rotate(-55 100 62)"/>
+        <ellipse cx="125" cy="50" rx="10" ry="3.6" transform="rotate(-40 125 50)"/>
+        <ellipse cx="200" cy="50" rx="10" ry="3.6" transform="rotate(40 200 50)"/>
+        <ellipse cx="225" cy="62" rx="10" ry="3.6" transform="rotate(55 225 62)"/>
+        <!-- bow at bottom -->
+        <path d="M148 250 L162 245 L176 250 L170 260 L162 256 L154 260 Z" fill="#a93226" stroke="#a93226"/>
+      </g>
+      <g fill="none" stroke="#a93226" stroke-width="0.6">
+        <line x1="161.87" y1="20" x2="161.87" y2="48"/>
+        <line x1="161.87" y1="248" x2="161.87" y2="276"/>
+      </g>
+    </svg>
+    <h1>Concrete <span class="amp">&amp;</span> Oculus</h1>
+    <div class="hero-sub">The Pantheon Reconsidered</div>
+    <div class="hero-meta">
+      <span class="date-roman">XIV·MAR — XXVIII·VI · MMXXV</span><br>
+      Co-curated with the Soprintendenza Speciale di Roma
+    </div>
+  </div>
+</section>
+
+<!-- ====== INTRO ====== -->
+<section class="intro">
+  <h2>An Argument in Stone, Lime &amp; Air</h2>
+  <p>For seventeen hundred years the Pantheon's coffered hemisphere has stood without scaffolding, ribbing, or steel. <em>Concrete &amp; Oculus</em> assembles, for the first time outside the Soprintendenza's working archive, twenty-eight original Hadrianic core samples, four 19th-century survey ledgers, and a 1:25 sectional model fabricated in the Museo's workshops, to ask the simplest of questions: how does a building made of mortar continue to refuse gravity?</p>
+  <p>The exhibition occupies the Hall of the Pediment and the adjoining Sala Aureliana on the museum's upper floor. Visitors are guided, in three rooms, from the quarry to the rotunda to the surveyor's notebook — and finally to the oculus itself, rendered at full diameter on the basilica's travertine floor.</p>
+  <div class="credit">Curators · F. Calzoni &amp; M. Hadjipetrou · with C. Vergari, Soprintendenza Speciale di Roma</div>
+</section>
+
+<div class="divider" role="presentation"></div>
+
+<!-- ====== SECTION I — CONCRETE ====== -->
+<section class="section">
+  <div class="section-head">
+    <div class="num">— I —</div>
+    <h2>Hadrianic Concrete Formulae</h2>
+    <svg class="laurel-sprig" viewBox="0 0 90 14" aria-hidden="true">
+      <path d="M2 7 Q 45 1 88 7"/>
+      <path d="M14 7 Q 18 2 22 6"/>
+      <path d="M28 7 Q 32 2 36 6"/>
+      <path d="M42 7 Q 46 2 50 6"/>
+      <path d="M56 7 Q 60 2 64 6"/>
+      <path d="M70 7 Q 74 2 78 6"/>
+      <path d="M14 7 Q 18 12 22 8"/>
+      <path d="M28 7 Q 32 12 36 8"/>
+      <path d="M42 7 Q 46 12 50 8"/>
+      <path d="M56 7 Q 60 12 64 8"/>
+      <path d="M70 7 Q 74 12 78 8"/>
+    </svg>
+  </div>
+
+  <div class="col-2">
+    <div>
+      <p>The mortar that lifts the dome is not one mortar but five. Hadrian's engineers — almost certainly working from drawings prepared under Apollodorus a generation earlier — graded their <em>opus caementicium</em> by altitude. The lower drum, bearing the greatest compressive load, was packed with travertine and tufa rubble bound in a heavy lime-pozzolana paste drawn from the Pozzuoli beds south of the Bay of Naples.</p>
+      <p>Above the springing line, the aggregate lightens course by course. Brick and broken terracotta replace the travertine; nearer the crown, the masons turned to porous yellow tufo and finally to small lumps of pumice ferried, the inscriptions tell us, from the Aeolian Islands. The result is a graded shell whose density falls almost in lockstep with the structural demand placed upon it.</p>
+    </div>
+    <div>
+      <p>What the Soprintendenza's recent campaign has confirmed — and what this exhibition documents through cross-section and chemical assay — is the consistency of the volcanic ash itself. Specimens drawn in 2019 from the third register show the same characteristic phillipsite and Al-tobermorite signatures identified in earlier studies, the very minerals to which the mortar owes its long, slow, self-healing cure.</p>
+      <p>Two centuries of restoration mortars, layered against the original, are presented here side by side. The contrast — Hadrianic core, Renaissance patch, Settecento repair — is the exhibition's quietest and most eloquent display.</p>
+    </div>
+  </div>
+
+  <blockquote class="pullquote">
+    “Caementa quae in fornice ponuntur, quanto altius surgunt, tanto leviora esse oportet.”
+    <cite>— Vitruvius, De Architectura, II.viii (cited on the room-I lintel)</cite>
+  </blockquote>
+</section>
+
+<div class="divider thin" role="presentation"></div>
+
+<!-- ====== SECTION II — GEOMETRY ====== -->
+<section class="section">
+  <div class="section-head">
+    <div class="num">— II —</div>
+    <h2>The Geometry of the 43.3-Metre Dome</h2>
+    <svg class="laurel-sprig" viewBox="0 0 90 14" aria-hidden="true">
+      <path d="M2 7 Q 45 1 88 7"/>
+      <path d="M14 7 Q 18 2 22 6"/><path d="M28 7 Q 32 2 36 6"/>
+      <path d="M42 7 Q 46 2 50 6"/><path d="M56 7 Q 60 2 64 6"/>
+      <path d="M70 7 Q 74 2 78 6"/>
+      <path d="M14 7 Q 18 12 22 8"/><path d="M28 7 Q 32 12 36 8"/>
+      <path d="M42 7 Q 46 12 50 8"/><path d="M56 7 Q 60 12 64 8"/>
+      <path d="M70 7 Q 74 12 78 8"/>
+    </svg>
+  </div>
+
+  <div class="geometry-block">
+    <svg class="geometry-svg" viewBox="0 0 400 380" aria-labelledby="geomTitle">
+      <title id="geomTitle">Sectional diagram of the Pantheon, with inscribed sphere</title>
+      <!-- vertical axis -->
+      <line class="axis" x1="200" y1="10" x2="200" y2="370"/>
+      <!-- ground line -->
+      <line class="ink" x1="20" y1="370" x2="380" y2="370" stroke-width="1.4"/>
+      <!-- drum -->
+      <line class="ink" x1="60" y1="370" x2="60" y2="190"/>
+      <line class="ink" x1="340" y1="370" x2="340" y2="190"/>
+      <!-- dome (semicircle) -->
+      <path class="ink" d="M60 190 A 140 140 0 0 1 340 190"/>
+      <!-- inscribed sphere (the famous 43.3 m) -->
+      <circle class="gold" cx="200" cy="190" r="140"/>
+      <!-- oculus -->
+      <line class="ink" x1="186" y1="50" x2="214" y2="50" stroke-width="2"/>
+      <!-- diameter dimension -->
+      <line class="axis" x1="60" y1="200" x2="340" y2="200"/>
+      <text class="label" x="200" y="216" text-anchor="middle">DIAMETER · 43.30 M</text>
+      <!-- height dimension -->
+      <line class="axis" x1="370" y1="50" x2="370" y2="370"/>
+      <text class="label" x="362" y="210" text-anchor="middle" transform="rotate(-90 362 210)">HEIGHT · 43.30 M</text>
+      <!-- oculus label -->
+      <text class="label" x="200" y="42" text-anchor="middle">OCULUS · 8.92 M</text>
+      <!-- centre point -->
+      <circle cx="200" cy="190" r="2.2" fill="#a93226"/>
+      <text class="label" x="206" y="186">CENTRUM</text>
+      <!-- coffer schematic -->
+      <g class="ink" stroke-width="0.5" opacity="0.6">
+        <path d="M85 210 A 115 115 0 0 1 315 210"/>
+        <path d="M110 230 A 90 90 0 0 1 290 230"/>
+        <path d="M135 250 A 65 65 0 0 1 265 250"/>
+        <path d="M160 268 A 40 40 0 0 1 240 268"/>
+      </g>
+    </svg>
+
+    <div>
+      <p>Hadrian's geometers gave the rotunda a single ratio: the diameter of the dome is exactly the height from the floor to the underside of the oculus. A perfect sphere can be inscribed within the volume — a fact the Renaissance rediscovered and which Serlio drew, with rather less precision, in 1540.</p>
+      <p>The five rings of coffers are not, however, a simple division of the hemisphere. Their proportions diminish toward the apex more rapidly than perspective alone would dictate, lightening both the apparent weight of the shell and its actual load.</p>
+      <table class="data-table">
+        <thead><tr><th>Element</th><th>Measure</th></tr></thead>
+        <tbody>
+          <tr><td>Internal diameter</td><td class="figure">43.30 m</td></tr>
+          <tr><td>Height to oculus</td><td class="figure">43.30 m</td></tr>
+          <tr><td>Oculus aperture</td><td class="figure">8.92 m</td></tr>
+          <tr><td>Wall thickness, drum</td><td class="figure">6.05 m</td></tr>
+          <tr><td>Coffer rings</td><td class="figure">V</td></tr>
+          <tr><td>Coffers per ring</td><td class="figure">XXVIII</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<div class="divider thin" role="presentation"></div>
+
+<!-- ====== SECTION III — SURVEYS ====== -->
+<section class="section">
+  <div class="section-head">
+    <div class="num">— III —</div>
+    <h2>Nineteenth-Century Engineering Surveys</h2>
+    <svg class="laurel-sprig" viewBox="0 0 90 14" aria-hidden="true">
+      <path d="M2 7 Q 45 1 88 7"/>
+      <path d="M14 7 Q 18 2 22 6"/><path d="M28 7 Q 32 2 36 6"/>
+      <path d="M42 7 Q 46 2 50 6"/><path d="M56 7 Q 60 2 64 6"/>
+      <path d="M70 7 Q 74 2 78 6"/>
+      <path d="M14 7 Q 18 12 22 8"/><path d="M28 7 Q 32 12 36 8"/>
+      <path d="M42 7 Q 46 12 50 8"/><path d="M56 7 Q 60 12 64 8"/>
+      <path d="M70 7 Q 74 12 78 8"/>
+    </svg>
+  </div>
+
+  <div class="col-2">
+    <div>
+      <p>The third gallery turns to the long century in which the Pantheon ceased to be merely a building and became a problem. From Pietro Bianchi's 1819 plumb-line survey onward, the rotunda was measured, prodded, and theorised about with an obsessive thoroughness — chiefly because its cracks, long known, were now visible to a public increasingly anxious about the antique.</p>
+      <p>Bianchi's notebooks, lent for the first time by the Accademia di San Luca, are displayed open at the page on which he records, with admirable understatement, that "the meridian fissure measured at the springing has not appreciably widened since the survey of MDCCLXXXIII."</p>
+    </div>
+    <div>
+      <p>Beside Bianchi we have placed the 1892 report of the engineer Luigi Cremona, whose photoelastic studies of the drum — performed with mirrors, plumb-lines, and the patience of an entire winter — first quantified what the masons had grasped intuitively: the dome's thrust is conducted not into the drum's mass but through the eight relieving arches concealed within it.</p>
+      <p>The exhibition closes with three folios from the survey conducted in 1934 by the Genio Civile, included here for the contrast they offer: drawings made by men who already had reinforced concrete in their hands, looking at a building that had no need of it.</p>
+    </div>
+  </div>
+
+  <blockquote class="pullquote">
+    “La cupola non grava: si sostiene da sé, come una cosa pensata.”
+    <cite>— Pietro Bianchi, Relazione al Cardinal Consalvi, MDCCCXIX</cite>
+  </blockquote>
+</section>
+
+<div class="divider" role="presentation"></div>
+
+<!-- ====== LECTURES ====== -->
+<section class="section">
+  <div class="section-head">
+    <div class="num">— Programme —</div>
+    <h2>Four Lectures</h2>
+    <svg class="laurel-sprig" viewBox="0 0 90 14" aria-hidden="true">
+      <path d="M2 7 Q 45 1 88 7"/>
+      <path d="M14 7 Q 18 2 22 6"/><path d="M28 7 Q 32 2 36 6"/>
+      <path d="M42 7 Q 46 2 50 6"/><path d="M56 7 Q 60 2 64 6"/>
+      <path d="M70 7 Q 74 2 78 6"/>
+      <path d="M14 7 Q 18 12 22 8"/><path d="M28 7 Q 32 12 36 8"/>
+      <path d="M42 7 Q 46 12 50 8"/><path d="M56 7 Q 60 12 64 8"/>
+      <path d="M70 7 Q 74 12 78 8"/>
+    </svg>
+  </div>
+
+  <div class="lecture-grid">
+
+    <article class="card">
+      <div class="card-inner">
+        <div class="roundel" aria-hidden="true">
+          <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="26" fill="none" stroke="#1a1a1a" stroke-width="1"/><circle cx="30" cy="30" r="22" fill="none" stroke="#c9a23a" stroke-width="0.8"/><text x="30" y="35" text-anchor="middle" font-family="Marcellus" font-size="13" fill="#1a1a1a">I</text></svg>
+        </div>
+        <div class="date">28·III·MMXXV</div>
+        <h3>The Pozzuoli Beds</h3>
+        <svg class="laurel-mini" viewBox="0 0 50 8" aria-hidden="true"><path d="M2 4 Q 25 1 48 4"/><path d="M10 4 Q 13 1 16 4"/><path d="M22 4 Q 25 1 28 4"/><path d="M34 4 Q 37 1 40 4"/></svg>
+        <div class="speaker">Prof. F. Calzoni</div>
+        <p class="abstract">Volcanic ash, the long cure, and the chemistry of self-healing in Hadrianic mortars.</p>
+        <div class="time">Friday · 18.30 · Sala Aureliana</div>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-inner">
+        <div class="roundel" aria-hidden="true">
+          <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="26" fill="none" stroke="#1a1a1a" stroke-width="1"/><circle cx="30" cy="30" r="22" fill="none" stroke="#c9a23a" stroke-width="0.8"/><text x="30" y="35" text-anchor="middle" font-family="Marcellus" font-size="13" fill="#1a1a1a">II</text></svg>
+        </div>
+        <div class="date">18·IV·MMXXV</div>
+        <h3>An Inscribed Sphere</h3>
+        <svg class="laurel-mini" viewBox="0 0 50 8" aria-hidden="true"><path d="M2 4 Q 25 1 48 4"/><path d="M10 4 Q 13 1 16 4"/><path d="M22 4 Q 25 1 28 4"/><path d="M34 4 Q 37 1 40 4"/></svg>
+        <div class="speaker">Dr M. Hadjipetrou</div>
+        <p class="abstract">On the geometry of the rotunda and the practical mathematics of Apollodorus's school.</p>
+        <div class="time">Friday · 18.30 · Sala Aureliana</div>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-inner">
+        <div class="roundel" aria-hidden="true">
+          <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="26" fill="none" stroke="#1a1a1a" stroke-width="1"/><circle cx="30" cy="30" r="22" fill="none" stroke="#c9a23a" stroke-width="0.8"/><text x="30" y="35" text-anchor="middle" font-family="Marcellus" font-size="13" fill="#1a1a1a">III</text></svg>
+        </div>
+        <div class="date">16·V·MMXXV</div>
+        <h3>Bianchi's Plumb-Line</h3>
+        <svg class="laurel-mini" viewBox="0 0 50 8" aria-hidden="true"><path d="M2 4 Q 25 1 48 4"/><path d="M10 4 Q 13 1 16 4"/><path d="M22 4 Q 25 1 28 4"/><path d="M34 4 Q 37 1 40 4"/></svg>
+        <div class="speaker">C. Vergari</div>
+        <p class="abstract">Reading the 1819 survey notebooks: meridian fissures, restoration, and the politics of measurement.</p>
+        <div class="time">Friday · 18.30 · Sala Aureliana</div>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-inner">
+        <div class="roundel" aria-hidden="true">
+          <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="26" fill="none" stroke="#1a1a1a" stroke-width="1"/><circle cx="30" cy="30" r="22" fill="none" stroke="#c9a23a" stroke-width="0.8"/><text x="30" y="35" text-anchor="middle" font-family="Marcellus" font-size="13" fill="#1a1a1a">IV</text></svg>
+        </div>
+        <div class="date">13·VI·MMXXV</div>
+        <h3>The Eight Hidden Arches</h3>
+        <svg class="laurel-mini" viewBox="0 0 50 8" aria-hidden="true"><path d="M2 4 Q 25 1 48 4"/><path d="M10 4 Q 13 1 16 4"/><path d="M22 4 Q 25 1 28 4"/><path d="M34 4 Q 37 1 40 4"/></svg>
+        <div class="speaker">Eng. R. Della Valle</div>
+        <p class="abstract">Cremona's 1892 photoelastic survey and the structural logic of the relieving arches.</p>
+        <div class="time">Friday · 18.30 · Sala Aureliana</div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<div class="divider thin" role="presentation"></div>
+
+<!-- ====== TICKETING ====== -->
+<section class="section">
+  <div class="section-head">
+    <div class="num">— Tickets &amp; Notes —</div>
+    <h2>Visiting the Exhibition</h2>
+  </div>
+
+  <div class="ticketing">
+    <div>
+      <h4>Admission</h4>
+      <dl>
+        <dt>Standard</dt>
+        <dd class="price">€ 14,00</dd>
+        <dt>Concessions (under 25, over 65)</dt>
+        <dd class="price">€ 9,00</dd>
+        <dt>Members &amp; under 12</dt>
+        <dd class="price">Gratis</dd>
+        <dt>Combined ticket with Permanent Collection</dt>
+        <dd class="price">€ 19,00</dd>
+      </dl>
+    </div>
+
+    <div>
+      <h4>Lectures</h4>
+      <dl>
+        <dt>Single lecture</dt>
+        <dd class="price">€ 8,00</dd>
+        <dt>Series of four</dt>
+        <dd class="price">€ 26,00</dd>
+        <dt>Students with valid card</dt>
+        <dd class="price">€ 4,00</dd>
+        <dt>Booking</dt>
+        <dd>required · prenotazioni@museoaureliano.it</dd>
+      </dl>
+    </div>
+
+    <div>
+      <h4>Practical</h4>
+      <dl>
+        <dt>Hall</dt>
+        <dd>Sala del Frontone, upper floor</dd>
+        <dt>Run of show</dt>
+        <dd>14·III — 28·VI · MMXXV</dd>
+        <dt>Closed</dt>
+        <dd>Mondays · 25 April · 1 May</dd>
+        <dt>Last entry</dt>
+        <dd>one hour before closing</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- ====== FOOTER ====== -->
+<footer>
+  <div class="meander-strip" role="presentation"></div>
+  <div class="footer-inner">
+    <div class="footer-cols">
+      <div>
+        <h5>Visit</h5>
+        <address>
+          Museo Aureliano<br>
+          Via di Santa Sabina XII<br>
+          Aventino · 00153 Roma<br>
+          Tue–Sun · 09.30 — 19.00
+        </address>
+      </div>
+      <div>
+        <h5>Contact</h5>
+        <p>
+          +39 06 4555 0182<br>
+          info@museoaureliano.it<br>
+          press@museoaureliano.it<br>
+          prenotazioni@museoaureliano.it
+        </p>
+      </div>
+      <div>
+        <h5>Credits</h5>
+        <p>
+          Soprintendenza Speciale di Roma<br>
+          Accademia di San Luca<br>
+          Genio Civile, Archivio Storico<br>
+          Photographs · A. Romano
+        </p>
+      </div>
+    </div>
+    <div class="tailpiece" aria-hidden="true">· ❦ ·</div>
+    <div class="founding">FUNDATUM · ANNO · MCMLXXVII</div>
+  </div>
+</footer>
+
+</body>
+</html>

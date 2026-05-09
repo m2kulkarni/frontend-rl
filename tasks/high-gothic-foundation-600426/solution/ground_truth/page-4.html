@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>The Apprentice Roll and School of Glass — Foundation of Saint-Gervais</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  /* ---------- Page-specific styling ---------- */
+  body{
+    background-color: var(--bg);
+    background-image:
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 600 600'><g transform='translate(300,300)scale(0.87)rotate(45)' fill='%231e3a5f' opacity='0.07'><circle cx='-195.16' r='163'/><circle cx='195.16' r='163'/><circle cy='195.16' r='163'/><circle cy='-195.16' r='163'/><rect x='-232' y='-232' width='464' height='464'/></g><g transform='translate(300,300)scale(0.87)rotate(45)' fill='%23f4ecd8'><circle cx='-195.16' r='157'/><circle cx='195.16' r='157'/><circle cy='195.16' r='157'/><circle cy='-195.16' r='157'/><rect x='-226' y='-226' width='452' height='452'/></g><g transform='translate(300,300)scale(0.87)rotate(45)' fill='%231e3a5f' opacity='0.07'><circle cx='-195.16' r='144'/><circle cx='195.16' r='144'/><circle cy='195.16' r='144'/><circle cy='-195.16' r='144'/><rect x='-213' y='-213' width='426' height='426'/></g><g transform='translate(300,300)scale(0.87)rotate(45)' fill='%23f4ecd8'><circle cx='-195.16' r='138'/><circle cx='195.16' r='138'/><circle cy='195.16' r='138'/><circle cy='-195.16' r='138'/><rect x='-207' y='-207' width='414' height='414'/></g></svg>");
+    color: var(--text);
+    font-family: var(--font-body), "EB Garamond", Georgia, serif;
+    margin: 0;
+    line-height: 1.65;
+  }
+
+  /* ---------- Navigation arcade ---------- */
+  .arcade-nav{
+    background-color: var(--bg);
+    border-bottom: 1px solid var(--accent);
+    padding: 24px 40px 8px;
+  }
+  .arcade-nav .arches{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 0;
+    max-width: 1280px;
+    margin: 0 auto;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 0;
+  }
+  .arch-link{
+    flex: 1;
+    text-align: center;
+    text-decoration: none;
+    color: var(--ornament);
+    padding: 0;
+    position: relative;
+    height: 110px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  .arch-link svg.arch-shape{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .arch-link .arch-label{
+    position: relative;
+    z-index: 2;
+    font-family: var(--font-body), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.12em;
+    font-size: 11px;
+    padding-top: 38px;
+    color: var(--ornament);
+  }
+  .arch-link[aria-current="page"] .arch-label{
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* arch SVG paths */
+  .arch-svg-path{
+    fill: none;
+    stroke: var(--ornament);
+    stroke-width: 1.5;
+  }
+  .arch-link[aria-current="page"] .arch-svg-fill{
+    fill: var(--primary);
+  }
+  .arch-link:not([aria-current="page"]) .arch-svg-fill{
+    fill: transparent;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 48px 40px 24px;
+    display: grid;
+    grid-template-columns: 1fr 460px 1fr;
+    gap: 24px;
+    align-items: center;
+  }
+  .hero-side{
+    text-align: center;
+    padding: 24px;
+  }
+  .hero-side h3{
+    font-family: var(--font-body), serif;
+    font-variant: small-caps;
+    color: var(--secondary);
+    letter-spacing: 0.1em;
+    font-size: 14px;
+    margin: 0 0 12px;
+  }
+  .hero-side p{
+    font-style: italic;
+    font-size: 13px;
+    color: var(--text);
+  }
+  .hero-arch{
+    position: relative;
+    width: 460px;
+    height: 540px;
+    margin: 0 auto;
+  }
+  .hero-arch svg.frame{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+  .hero-arch .hero-content{
+    position: absolute;
+    top: 90px;
+    left: 60px;
+    right: 60px;
+    bottom: 60px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .hero-eyebrow{
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    color: var(--secondary);
+    font-size: 12px;
+    margin-bottom: 16px;
+  }
+  .hero-title{
+    font-family: var(--font-display), "UnifrakturMaguntia", serif;
+    color: var(--primary);
+    font-size: 38px;
+    line-height: 1.05;
+    margin: 0 0 18px;
+    font-weight: normal;
+  }
+  .hero-sub{
+    font-style: italic;
+    color: var(--text);
+    font-size: 14px;
+    max-width: 280px;
+    margin: 0 auto;
+  }
+  .hero-cap-jewel{
+    width: 40px;
+    height: 40px;
+    margin: 18px auto 0;
+  }
+  .hero-cap-jewel svg{ width: 100%; height: 100%; fill: var(--accent); }
+
+  /* ---------- Section dividers ---------- */
+  .divider{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    max-width: 1100px;
+    margin: 32px auto;
+    padding: 0 40px;
+  }
+  .divider .rule{
+    flex: 1;
+    height: 1px;
+    background: var(--ornament);
+  }
+  .divider svg{ width: 44px; height: 44px; flex: none; }
+  .divider svg path{ fill: var(--ornament); }
+
+  /* ---------- Main content ---------- */
+  main{
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 40px 60px;
+  }
+
+  .section-title{
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+    font-size: 28px;
+    text-align: center;
+    margin: 0 0 4px;
+    font-weight: normal;
+  }
+  .section-sub{
+    text-align: center;
+    font-style: italic;
+    color: var(--secondary);
+    font-variant: small-caps;
+    letter-spacing: 0.15em;
+    font-size: 12px;
+    margin-bottom: 28px;
+  }
+
+  /* ---------- Two-column body ---------- */
+  .two-col{
+    column-count: 2;
+    column-gap: 56px;
+    column-rule: 1px solid rgba(58,38,24,0.2);
+    font-size: 15px;
+    text-align: justify;
+    hyphens: auto;
+  }
+  .two-col p{ margin: 0 0 14px; }
+  .drop-cap::first-letter{
+    font-family: var(--font-display), serif;
+    color: var(--accent);
+    float: left;
+    font-size: 56px;
+    line-height: 0.85;
+    padding: 6px 8px 0 0;
+    text-shadow: 1px 1px 0 var(--secondary);
+  }
+
+  /* ---------- Card grid (curriculum) ---------- */
+  .card-grid{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin: 16px 0 8px;
+  }
+  .card{
+    position: relative;
+    background: var(--bg);
+    border: 1.5px solid var(--ornament);
+    padding: 56px 22px 24px;
+    text-align: center;
+    min-height: 240px;
+  }
+  .card::before, .card::after{
+    content: "";
+    position: absolute;
+    width: 18px; height: 18px;
+    border: 1.5px solid var(--ornament);
+  }
+  .card::before{ top: 6px; left: 6px; border-right: none; border-bottom: none; }
+  .card::after{ bottom: 6px; right: 6px; border-left: none; border-top: none; }
+  .card-jewel{
+    position: absolute;
+    top: -16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 32px; height: 32px;
+    background: var(--bg);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .card-jewel svg{ width: 28px; height: 28px; fill: var(--primary); }
+  .card h4{
+    font-family: var(--font-body), serif;
+    font-variant: small-caps;
+    color: var(--secondary);
+    letter-spacing: 0.1em;
+    font-size: 14px;
+    margin: 0 0 6px;
+  }
+  .card .fleur-rule{
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+    margin: 0 0 12px;
+  }
+  .card .fleur-rule .r{ flex: 1; height: 1px; background: var(--ornament); max-width: 40px; }
+  .card .fleur-rule .f{ color: var(--accent); font-size: 14px; }
+  .card p{
+    font-size: 13px;
+    line-height: 1.55;
+    text-align: left;
+    margin: 0;
+  }
+  .card p::first-letter{
+    font-family: var(--font-display), serif;
+    color: var(--accent);
+    float: left;
+    font-size: 32px;
+    line-height: 0.85;
+    padding: 4px 5px 0 0;
+  }
+
+  /* ---------- Roll table ---------- */
+  .roll-frame{
+    border: 1.5px solid var(--ornament);
+    padding: 24px;
+    background-color: rgba(255,255,255,0.25);
+    margin: 20px 0;
+    position: relative;
+  }
+  .roll-frame::before, .roll-frame::after{
+    content: "";
+    position: absolute;
+    width: 24px; height: 24px;
+    border: 1.5px solid var(--accent);
+  }
+  .roll-frame::before{ top: -1px; left: -1px; border-right: none; border-bottom: none; }
+  .roll-frame::after{ bottom: -1px; right: -1px; border-left: none; border-top: none; }
+  table.roll{
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  table.roll caption{
+    caption-side: top;
+    font-family: var(--font-body), serif;
+    font-variant: small-caps;
+    color: var(--secondary);
+    font-size: 13px;
+    letter-spacing: 0.16em;
+    padding-bottom: 12px;
+  }
+  table.roll thead th{
+    font-family: var(--font-body), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.1em;
+    color: var(--primary);
+    text-align: left;
+    border-bottom: 2px solid var(--ornament);
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+  table.roll tbody td{
+    padding: 12px;
+    border-bottom: 1px solid rgba(58,38,24,0.2);
+    vertical-align: top;
+  }
+  table.roll tbody tr:last-child td{ border-bottom: none; }
+  table.roll .name{
+    font-style: italic;
+    color: var(--text-emphasis);
+    font-size: 15px;
+  }
+  table.roll .year{
+    font-variant: small-caps;
+    letter-spacing: 0.08em;
+    color: var(--primary);
+  }
+  table.roll .note{
+    font-style: italic;
+    font-size: 12px;
+    color: var(--text);
+  }
+
+  /* ---------- Pull-quote ---------- */
+  .pull{
+    text-align: center;
+    margin: 36px auto;
+    max-width: 780px;
+    position: relative;
+    padding: 24px 40px;
+  }
+  .pull blockquote{
+    font-family: var(--font-display), serif;
+    font-size: 26px;
+    color: var(--primary);
+    line-height: 1.3;
+    margin: 0;
+  }
+  .pull cite{
+    display: block;
+    font-style: italic;
+    font-family: var(--font-body), serif;
+    color: var(--secondary);
+    font-size: 13px;
+    margin-top: 12px;
+    font-variant: small-caps;
+    letter-spacing: 0.14em;
+  }
+
+  /* ---------- Journeyman panel section ---------- */
+  .journey{
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 40px;
+    align-items: center;
+    margin-top: 32px;
+  }
+  .journey-text p{ font-size: 15px; }
+  .journey-text p:first-child{
+    text-indent: 0;
+  }
+  .journey-medallion{
+    width: 320px; height: 320px;
+    margin: 0 auto;
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .journey-medallion svg.seal{
+    width: 100%; height: 100%;
+    fill: var(--primary);
+    opacity: 0.85;
+  }
+  .journey-medallion::before{
+    content: "";
+    position: absolute;
+    inset: 8px;
+    border: 1.5px solid var(--accent);
+    border-radius: 50%;
+  }
+  .journey-medallion::after{
+    content: "";
+    position: absolute;
+    inset: 18px;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    margin-top: 60px;
+    background-color: var(--bg);
+    padding: 32px 40px 28px;
+    border-top: 2px solid var(--accent);
+  }
+  .foot-arcade{
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    max-width: 720px;
+    margin: 0 auto 24px;
+  }
+  .foot-arch{
+    flex: 1;
+    height: 56px;
+    position: relative;
+  }
+  .foot-arch svg{ width: 100%; height: 100%; }
+  .foot-meta{
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+    gap: 20px;
+  }
+  .foot-seal{ text-align: left; }
+  .foot-seal svg{ width: 56px; height: 56px; fill: var(--secondary); }
+  .foot-center{
+    text-align: center;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--text);
+  }
+  .foot-center .charter{
+    font-variant: small-caps;
+    letter-spacing: 0.14em;
+    font-style: normal;
+    color: var(--primary);
+    margin-top: 4px;
+    font-size: 11px;
+  }
+  .foot-motto{
+    text-align: right;
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+    font-size: 18px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== NAVIGATION ARCADE ========== -->
+<nav class="arcade-nav" aria-label="Primary">
+  <div class="arches">
+    <a class="arch-link" href="page-1.html">
+      <svg class="arch-shape" viewBox="0 0 120 110" preserveAspectRatio="none">
+        <path class="arch-svg-fill" d="M5,108 L5,55 Q5,5 60,5 Q115,5 115,55 L115,108 Z"/>
+        <path class="arch-svg-path" d="M5,108 L5,55 Q5,5 60,5 Q115,5 115,55 L115,108"/>
+      </svg>
+      <span class="arch-label">The Foundation</span>
+    </a>
+    <a class="arch-link" href="page-2.html">
+      <svg class="arch-shape" viewBox="0 0 120 110" preserveAspectRatio="none">
+        <path class="arch-svg-fill" d="M5,108 L5,55 Q5,5 60,5 Q115,5 115,55 L115,108 Z"/>
+        <path class="arch-svg-path" d="M5,108 L5,55 Q5,5 60,5 Q115,5 115,55 L115,108"/>
+      </svg>
+      <span class="arch-label">Charter &amp; Purpose</span>
+    </a>
+    <a class="arch-link" href="page-3.html">
+      <svg class="arch-shape" viewBox="0 0 120 110" preserveAspectRatio="none">
+        <path class="arch-svg-fill" d="M5,108 L5,55 Q5,5 60,5 Q115,5 115,55 L115,108 Z"/>
+        <path class="arch-svg-path" d="M5,108 L5,55 Q5,5 60,5 Q115,5 115,55 L115,108"/>
+      </svg>
+      <span class="arch-label">Almshouse</span>
+    </a>
+    <a class="arch-link" href="page-4.html" aria-current="page">
+      <svg class="arch-shape" viewBox="0 0 120 110" preserveAspectRatio="none">
+        <path class="arch-svg-fill" d="M5,108 L5,55 Q5,5 60,5 Q115,5 115,55 L115,108 Z"/>
+        <path class="arch-svg-path" d="M5,108 L5,55 Q5,5 60,5 Q115,5 115,55 L115,108"/>
+      </svg>
+      <span class="arch-label">Apprentice Roll</span>
+    </a>
+    <a class="arch-link" href="page-5.html">
+      <svg class="arch-shape" viewBox="0 0 120 110" preserveAspectRatio="none">
+        <path class="arch-svg-fill" d="M5,108 L5,55 Q5,5 60,5 Q115,5 115,55 L115,108 Z"/>
+        <path class="arch-svg-path" d="M5,108 L5,55 Q5,5 60,5 Q115,5 115,55 L115,108"/>
+      </svg>
+      <span class="arch-label">Benefactions</span>
+    </a>
+    <a class="arch-link" href="page-6.html">
+      <svg class="arch-shape" viewBox="0 0 120 110" preserveAspectRatio="none">
+        <path class="arch-svg-fill" d="M5,108 L5,55 Q5,5 60,5 Q115,5 115,55 L115,108 Z"/>
+        <path class="arch-svg-path" d="M5,108 L5,55 Q5,5 60,5 Q115,5 115,55 L115,108"/>
+      </svg>
+      <span class="arch-label">To Visit</span>
+    </a>
+  </div>
+</nav>
+
+<!-- ========== HERO ========== -->
+<section class="hero">
+  <aside class="hero-side">
+    <h3>Bound for vii Years</h3>
+    <p>By the custom of the chapter, an apprentice is indentured for seven full years before the altar of Saint-Gervais, swearing upon the iron-bound book to obey his master in all matters of the craft.</p>
+  </aside>
+
+  <div class="hero-arch">
+    <svg class="frame" viewBox="0 0 500 550" preserveAspectRatio="xMidYMid meet">
+      <g transform="translate(-147.13944,-244.9375)">
+        <g transform="translate(8.199085,-11.874106)">
+          <g style="stroke:#1e3a5f;stroke-width:3.125;fill:none;stroke-linejoin:miter;">
+            <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432" stroke-linecap="round"/>
+            <path d="m 250,430.58 24.75248,58.41585"/>
+            <path d="m 347.0297,342.46119 41.58416,23.76238 0.9901,35.64356"/>
+            <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+          </g>
+          <g transform="matrix(-1,0,0,1,777.88071,-0.2972181)" style="stroke:#1e3a5f;stroke-width:3.125;fill:none;stroke-linejoin:miter;">
+            <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432" stroke-linecap="round"/>
+            <path d="m 250,430.58 24.75248,58.41585"/>
+            <path d="m 347.0297,342.46119 41.58416,23.76238 0.9901,35.64356"/>
+            <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+          </g>
+        </g>
+      </g>
+    </svg>
+    <div class="hero-content">
+      <div class="hero-eyebrow">✦ Liber Discipulorum ✦</div>
+      <h1 class="hero-title">The Apprentice Roll<br>&amp; School of Glass</h1>
+      <p class="hero-sub">Wherein six youths are bound under the masters of the chapter, that the noble craft of glaziery may not perish from the cathedral towns.</p>
+      <div class="hero-cap-jewel" aria-hidden="true">
+        <svg viewBox="0 0 4000 4000"><path transform="scale(1)" d="M1778.9,3200A120.9263,120.9263 0 0,1 1657.97,3320.93A120.9263,120.9263 0 0,1 1537.04,3200A221.5096,221.5096 0 0,0 1456.32,3371.02A221.5096,221.5096 0 0,0 1677.83,3592.53A221.5096,221.5096 0 0,0 1818.61,3542.03A362.779,362.779 0 0,0 2000,3856.21A362.779,362.779 0 0,0 2181.39,3542.03A221.5096,221.5096 0 0,0 2322.17,3592.53A221.5096,221.5096 0 0,0 2543.68,3371.02A221.5096,221.5096 0 0,0 2462.96,3200A120.9263,120.9263 0 0,1 2342.03,3320.93A120.9263,120.9263 0 0,1 2221.1,3200V2221.1H3200A120.9263,120.9263 0 0,1 3320.93,2342.03A120.9263,120.9263 0 0,1 3200,2462.96A221.5096,221.5096 0 0,0 3371.02,2543.68A221.5096,221.5096 0 0,0 3592.53,2322.17A221.5096,221.5096 0 0,0 3542.03,2181.39A362.779,362.779 0 0,0 3856.21,2000A362.779,362.779 0 0,0 3542.03,1818.61A221.5096,221.5096 0 0,0 3592.53,1677.83A221.5096,221.5096 0 0,0 3371.02,1456.32A221.5096,221.5096 0 0,0 3200,1537.04A120.9263,120.9263 0 0,1 3320.93,1657.97A120.9263,120.9263 0 0,1 3200,1778.9H2221.1V800A120.9263,120.9263 0 0,1 2342.03,679.073A120.9263,120.9263 0 0,1 2462.96,800A221.5096,221.5096 0 0,0 2543.68,628.984A221.5096,221.5096 0 0,0 2322.17,407.475A221.5096,221.5096 0 0,0 2181.39,457.969A362.779,362.779 0 0,0 2000,143.793A362.779,362.779 0 0,0 1818.61,457.969A221.5096,221.5096 0 0,0 1677.83,407.475A221.5096,221.5096 0 0,0 1456.32,628.984A221.5096,221.5096 0 0,0 1537.04,800A120.9263,120.9263 0 0,1 1657.97,679.073A120.9263,120.9263 0 0,1 1778.9,800V1778.9H800A120.9263,120.9263 0 0,1 679.073,1657.97A120.9263,120.9263 0 0,1 800,1537.04A221.5096,221.5096 0 0,0 628.984,1456.32A221.5096,221.5096 0 0,0 407.475,1677.83A221.5096,221.5096 0 0,0 457.969,1818.61A362.779,362.779 0 0,0 143.793,2000A362.779,362.779 0 0,0 457.969,2181.39A221.5096,221.5096 0 0,0 407.475,2322.17A221.5096,221.5096 0 0,0 628.984,2543.68A221.5096,221.5096 0 0,0 800,2462.96A120.9263,120.9263 0 0,1 679.073,2342.03A120.9263,120.9263 0 0,1 800,2221.1H1778.9Z"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <aside class="hero-side">
+    <h3>Six at a Time</h3>
+    <p>No more than six apprentices may dwell at once within the school, that each may have proper instruction in the cutting of quarries and the laying of the leads.</p>
+  </aside>
+</section>
+
+<!-- ========== DIVIDER ========== -->
+<div class="divider" aria-hidden="true">
+  <span class="rule"></span>
+  <svg viewBox="0 0 39.26 39.9"><path d="M19.6 2 L24 12 L34 14 L26 21 L29 32 L19.6 26 L10 32 L13 21 L5 14 L15 12 Z" fill="none" stroke="#0a0a0a" stroke-width="0.6"/><circle cx="19.6" cy="20" r="2.5" fill="#c9a23a"/></svg>
+  <span class="rule"></span>
+</div>
+
+<main>
+
+<!-- ========== INTRODUCTION ========== -->
+<h2 class="section-title">Of the School of Glass</h2>
+<p class="section-sub">✦ Schola Vitrearia Sancti Gervasii ✦</p>
+
+<div class="two-col">
+  <p class="drop-cap">From the founding of this house in the year of grace MCCXLVII, it hath been ordained by the chapter that six apprentices, and no more, shall at one time be bound under the masters of glaziery within our walls. Each youth, upon reaching his twelfth year, may be presented at the feast of Saint Gervais by his father, his guardian, or by a brother of the trade, and if found of sound limb, of sober mien, and of sufficient quickness in the matter of the eye and the hand, shall be received into the indenture of seven years.</p>
+  <p>The boy is sworn upon the iron-bound Gospel that lieth in the chapel, his right hand laid upon the painted figure of Saint Luke. He is then signed upon the brow with the smoke of the firing-kiln, in token that he hath put off his former estate and entered into the company of the glasswrights. From that day he weareth the russet tunic of the school, eateth at the lower table of the almshouse, and sleepeth in the dorter above the cutting-floor.</p>
+  <p>His master receiveth, by the constitution of the Foundation, the sum of <em>iiij sols parisis</em> by the quarter for his board and instruction, and a further <em>xij deniers</em> for the provision of lead, of solder, and of the small iron tools that the boy shall break or lose in the first three years. Upon the completion of the seventh year, the apprentice is examined before the master and two wardens of the chapter; and if he hath shewn himself worthy, he shall be given the freedom of the trade and the gift of a journeyman's panel, hereafter described.</p>
+  <p>It is moreover provided that no apprentice shall be turned away for poverty, neither shall any be received who hath not first heard the Mass of Saint Catherine sung in our chapel; for she is, after our patron, the second protectress of those who labour with the wheel and the diamond.</p>
+</div>
+
+<!-- ========== DIVIDER ========== -->
+<div class="divider" aria-hidden="true">
+  <span class="rule"></span>
+  <svg viewBox="0 0 39.26 39.9"><circle cx="19.6" cy="20" r="6" fill="none" stroke="#0a0a0a" stroke-width="0.6"/><path d="M19.6 8 Q23 14 30 14 Q24 18 24 25 Q19.6 22 15 25 Q15 18 9 14 Q16 14 19.6 8 Z" fill="#1e3a5f"/></svg>
+  <span class="rule"></span>
+</div>
+
+<!-- ========== APPRENTICE ROLL TABLE ========== -->
+<h2 class="section-title">The Present Roll</h2>
+<p class="section-sub">✦ At the Feast of Saint Michael, MCCXC ✦</p>
+
+<div class="roll-frame">
+  <table class="roll">
+    <caption>Six youths now bound, with their masters and the years of their expected release</caption>
+    <thead>
+      <tr>
+        <th style="width:24%">Apprentice</th>
+        <th style="width:14%">Entered</th>
+        <th style="width:24%">Master Glazier</th>
+        <th style="width:14%">Released</th>
+        <th>Note</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name">Guion fils de Thibaut</td>
+        <td class="year">A.D. MCCLXXXVII</td>
+        <td>Maistre Aubert le Verrier</td>
+        <td class="year">MCCXCIV</td>
+        <td class="note">Of Soissons; son of the late wheelwright Thibaut. Hand for the cutting of quarries.</td>
+      </tr>
+      <tr>
+        <td class="name">Aymeric le Jeune</td>
+        <td class="year">A.D. MCCLXXXVIII</td>
+        <td>Maistre Aubert le Verrier</td>
+        <td class="year">MCCXCV</td>
+        <td class="note">Of Laon; nephew to canon Aymeric the elder, who paid <em>v livres</em> in earnest.</td>
+      </tr>
+      <tr>
+        <td class="name">Hersent la Cadette</td>
+        <td class="year">A.D. MCCLXXXIX</td>
+        <td>Maistre Renaud du Four</td>
+        <td class="year">MCCXCVI</td>
+        <td class="note">Daughter of the trade. Exceptional admission by writ of the chapter, ix. Kal. Maii.</td>
+      </tr>
+      <tr>
+        <td class="name">Perrin de la Marche</td>
+        <td class="year">A.D. MCCLXXXIX</td>
+        <td>Maistre Renaud du Four</td>
+        <td class="year">MCCXCVI</td>
+        <td class="note">Foundling, raised by the almshouse from his seventh year. No fee taken.</td>
+      </tr>
+      <tr>
+        <td class="name">Jehan Petitjehan</td>
+        <td class="year">A.D. MCCXC</td>
+        <td>Maistre Gilbert d'Auxerre</td>
+        <td class="year">MCCXCVII</td>
+        <td class="note">Of Reims; presented by his uncle, a draper of the Rue Tirelire.</td>
+      </tr>
+      <tr>
+        <td class="name">Colin l'Anglais</td>
+        <td class="year">A.D. MCCXC</td>
+        <td>Maistre Gilbert d'Auxerre</td>
+        <td class="year">MCCXCVII</td>
+        <td class="note">Of Canterbury, by way of Amiens. Speaketh the tongue but slowly; quick at grisaille.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ========== PULL QUOTE ========== -->
+<div class="pull">
+  <blockquote>“The eye that hath beheld the colour of glass at the morning hour, shall not after content itself with the wall.”</blockquote>
+  <cite>— from the Customary of the Chapter, fol. xiv</cite>
+</div>
+
+<!-- ========== DIVIDER ========== -->
+<div class="divider" aria-hidden="true">
+  <span class="rule"></span>
+  <svg viewBox="0 0 60 30"><path d="M2 15 Q15 2 30 15 Q45 28 58 15" fill="none" stroke="#0a0a0a" stroke-width="0.8"/><circle cx="30" cy="15" r="3" fill="#8b1538"/></svg>
+  <span class="rule"></span>
+</div>
+
+<!-- ========== CURRICULUM CARDS ========== -->
+<h2 class="section-title">Of the Curriculum</h2>
+<p class="section-sub">✦ The Four Hands of the Glazier ✦</p>
+
+<div class="card-grid">
+
+  <article class="card">
+    <div class="card-jewel" aria-hidden="true">
+      <svg viewBox="0 0 100 100"><path d="M50 5 L60 35 L95 40 L70 55 L75 90 L50 75 L25 90 L30 55 L5 40 L40 35 Z"/></svg>
+    </div>
+    <h4>Of Cutting Quarries</h4>
+    <div class="fleur-rule"><span class="r"></span><span class="f">⚜</span><span class="r"></span></div>
+    <p>The first year is given over wholly to the diamond and the grozing-iron. The boy must learn to score the white glass of Chartres true to the cartoon, to break the lozenge clean, and to nibble the edge to the line of lead.</p>
+  </article>
+
+  <article class="card">
+    <div class="card-jewel" aria-hidden="true">
+      <svg viewBox="0 0 100 100"><path d="M50 5 L60 35 L95 40 L70 55 L75 90 L50 75 L25 90 L30 55 L5 40 L40 35 Z"/></svg>
+    </div>
+    <h4>Of Firing Grisaille</h4>
+    <div class="fleur-rule"><span class="r"></span><span class="f">⚜</span><span class="r"></span></div>
+    <p>In the third year he is taught the mixture of iron oxide, of gum, and of wine vinegar; the laying of the brush upon the glass; and the long vigil at the kiln, by which the painted line is fixed unto the panel forever.</p>
+  </article>
+
+  <article class="card">
+    <div class="card-jewel" aria-hidden="true">
+      <svg viewBox="0 0 100 100"><path d="M50 5 L60 35 L95 40 L70 55 L75 90 L50 75 L25 90 L30 55 L5 40 L40 35 Z"/></svg>
+    </div>
+    <h4>Of Leading Panels</h4>
+    <div class="fleur-rule"><span class="r"></span><span class="f">⚜</span><span class="r"></span></div>
+    <p>By the fifth year the apprentice is set to the lead-came, the soldering-iron, and the bench of pegs. He learneth the H-section and the U-section, and to draw the lead through the stretcher till it lieth straight as a quill.</p>
+  </article>
+
+  <article class="card">
+    <div class="card-jewel" aria-hidden="true">
+      <svg viewBox="0 0 100 100"><path d="M50 5 L60 35 L95 40 L70 55 L75 90 L50 75 L25 90 L30 55 L5 40 L40 35 Z"/></svg>
+    </div>
+    <h4>Of Reading Cartoons</h4>
+    <div class="fleur-rule"><span class="r"></span><span class="f">⚜</span><span class="r"></span></div>
+    <p>In the seventh and final year the journeyman-to-be is taught to read the master's cartoon upon the whitewashed bench, to apportion the colours, and to set the figures of saints and donors in their proper attitudes.</p>
+  </article>
+
+</div>
+
+<!-- ========== DIVIDER ========== -->
+<div class="divider" aria-hidden="true">
+  <span class="rule"></span>
+  <svg viewBox="0 0 39.26 39.9"><path d="M19.6 4 Q26 12 26 20 Q26 28 19.6 36 Q13 28 13 20 Q13 12 19.6 4 Z" fill="#8b1538"/><circle cx="19.6" cy="20" r="2" fill="#c9a23a"/></svg>
+  <span class="rule"></span>
+</div>
+
+<!-- ========== JOURNEYMAN PANEL ========== -->
+<h2 class="section-title">The Journeyman's Panel</h2>
+<p class="section-sub">✦ Tabula Vitri in Signum Libertatis ✦</p>
+
+<div class="journey">
+  <div class="journey-text two-col" style="column-count:1; column-rule:none;">
+    <p class="drop-cap">Upon the day of his release, which is customarily the morrow of Saint John ante Portam Latinam, the apprentice presenteth before the chapter a panel of his own devising, no smaller than a foot and a half square, in which he must shew the four hands of his craft: a quarry cut and grozed, a figure painted in grisaille and silver-stain, a border of lead led true to the bench, and a small inscription read from a cartoon of the master's setting.</p>
+    <p>This panel, being approved by the wardens — namely Maistre Aubert, Maistre Renaud, and a third elected from the chapter at large — is then set into a window of the cloister, where it remaineth unto the end of the journeyman's life as witness of his admission to the trade. The Foundation provideth the white glass and the lead at no cost; the colours, the silver-stain, and the iron oxide must the youth procure of his own purse, that he may know the price of his art.</p>
+    <p>It is further the custom that, at the same hour, the new journeyman maketh gift of <em>two deniers</em> to the almshouse and a candle of one pound's weight to the altar of Saint Gervais; and he is then embraced by his master, by his fellow apprentices, and by the warden of the school, and so dismissed into the wider company of the glaziers of France.</p>
+  </div>
+
+  <div class="journey-medallion" aria-hidden="true">
+    <svg class="seal" viewBox="0 0 4000 4000"><path d="M1778.9,3200A120.9263,120.9263 0 0,1 1657.97,3320.93A120.9263,120.9263 0 0,1 1537.04,3200A221.5096,221.5096 0 0,0 1456.32,3371.02A221.5096,221.5096 0 0,0 1677.83,3592.53A221.5096,221.5096 0 0,0 1818.61,3542.03A362.779,362.779 0 0,0 2000,3856.21A362.779,362.779 0 0,0 2181.39,3542.03A221.5096,221.5096 0 0,0 2322.17,3592.53A221.5096,221.5096 0 0,0 2543.68,3371.02A221.5096,221.5096 0 0,0 2462.96,3200A120.9263,120.9263 0 0,1 2342.03,3320.93A120.9263,120.9263 0 0,1 2221.1,3200V2221.1H3200A120.9263,120.9263 0 0,1 3320.93,2342.03A120.9263,120.9263 0 0,1 3200,2462.96A221.5096,221.5096 0 0,0 3371.02,2543.68A221.5096,221.5096 0 0,0 3592.53,2322.17A221.5096,221.5096 0 0,0 3542.03,2181.39A362.779,362.779 0 0,0 3856.21,2000A362.779,362.779 0 0,0 3542.03,1818.61A221.5096,221.5096 0 0,0 3592.53,1677.83A221.5096,221.5096 0 0,0 3371.02,1456.32A221.5096,221.5096 0 0,0 3200,1537.04A120.9263,120.9263 0 0,1 3320.93,1657.97A120.9263,120.9263 0 0,1 3200,1778.9H2221.1V800A120.9263,120.9263 0 0,1 2342.03,679.073A120.9263,120.9263 0 0,1 2462.96,800A221.5096,221.5096 0 0,0 2543.68,628.984A221.5096,221.5096 0 0,0 2322.17,407.475A221.5096,221.5096 0 0,0 2181.39,457.969A362.779,362.779 0 0,0 2000,143.793A362.779,362.779 0 0,0 1818.61,457.969A221.5096,221.5096 0 0,0 1677.83,407.475A221.5096,221.5096 0 0,0 1456.32,628.984A221.5096,221.5096 0 0,0 1537.04,800A120.9263,120.9263 0 0,1 1657.97,679.073A120.9263,120.9263 0 0,1 1778.9,800V1778.9H800A120.9263,120.9263 0 0,1 679.073,1657.97A120.9263,120.9263 0 0,1 800,1537.04A221.5096,221.5096 0 0,0 628.984,1456.32A221.5096,221.5096 0 0,0 407.475,1677.83A221.5096,221.5096 0 0,0 457.969,1818.61A362.779,362.779 0 0,0 143.793,2000A362.779,362.779 0 0,0 457.969,2181.39A221.5096,221.5096 0 0,0 407.475,2322.17A221.5096,221.5096 0 0,0 628.984,2543.68A221.5096,221.5096 0 0,0 800,2462.96A120.9263,120.9263 0 0,1 679.073,2342.03A120.9263,120.9263 0 0,1 800,2221.1H1778.9Z"/></svg>
+  </div>
+</div>
+
+</main>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div class="foot-arcade" aria-hidden="true">
+    <div class="foot-arch">
+      <svg viewBox="0 0 60 56" preserveAspectRatio="none">
+        <path d="M3,55 L3,30 Q3,3 30,3 Q57,3 57,30 L57,55" fill="none" stroke="#1e3a5f" stroke-width="1.4"/>
+        <text x="30" y="42" text-anchor="middle" fill="#c9a23a" font-size="22" font-family="serif">⚜</text>
+      </svg>
+    </div>
+    <div class="foot-arch">
+      <svg viewBox="0 0 60 56" preserveAspectRatio="none">
+        <path d="M3,55 L3,30 Q3,3 30,3 Q57,3 57,30 L57,55" fill="none" stroke="#1e3a5f" stroke-width="1.4"/>
+        <text x="30" y="42" text-anchor="middle" fill="#c9a23a" font-size="22" font-family="serif">✠</text>
+      </svg>
+    </div>
+    <div class="foot-arch">
+      <svg viewBox="0 0 60 56" preserveAspectRatio="none">
+        <path d="M3,55 L3,30 Q3,3 30,3 Q57,3 57,30 L57,55" fill="none" stroke="#1e3a5f" stroke-width="1.4"/>
+        <text x="30" y="42" text-anchor="middle" fill="#c9a23a" font-size="22" font-family="serif">⚜</text>
+      </svg>
+    </div>
+    <div class="foot-arch">
+      <svg viewBox="0 0 60 56" preserveAspectRatio="none">
+        <path d="M3,55 L3,30 Q3,3 30,3 Q57,3 57,30 L57,55" fill="none" stroke="#1e3a5f" stroke-width="1.4"/>
+        <text x="30" y="42" text-anchor="middle" fill="#c9a23a" font-size="22" font-family="serif">✠</text>
+      </svg>
+    </div>
+    <div class="foot-arch">
+      <svg viewBox="0 0 60 56" preserveAspectRatio="none">
+        <path d="M3,55 L3,30 Q3,3 30,3 Q57,3 57,30 L57,55" fill="none" stroke="#1e3a5f" stroke-width="1.4"/>
+        <text x="30" y="42" text-anchor="middle" fill="#c9a23a" font-size="22" font-family="serif">⚜</text>
+      </svg>
+    </div>
+    <div class="foot-arch">
+      <svg viewBox="0 0 60 56" preserveAspectRatio="none">
+        <path d="M3,55 L3,30 Q3,3 30,3 Q57,3 57,30 L57,55" fill="none" stroke="#1e3a5f" stroke-width="1.4"/>
+        <text x="30" y="42" text-anchor="middle" fill="#c9a23a" font-size="22" font-family="serif">✠</text>
+      </svg>
+    </div>
+    <div class="foot-arch">
+      <svg viewBox="0 0 60 56" preserveAspectRatio="none">
+        <path d="M3,55 L3,30 Q3,3 30,3 Q57,3 57,30 L57,55" fill="none" stroke="#1e3a5f" stroke-width="1.4"/>
+        <text x="30" y="42" text-anchor="middle" fill="#c9a23a" font-size="22" font-family="serif">⚜</text>
+      </svg>
+    </div>
+  </div>
+  <div class="foot-meta">
+    <div class="foot-seal" aria-label="Foundation seal">
+      <svg viewBox="0 0 4000 4000"><path d="M1778.9,3200A120.9263,120.9263 0 0,1 1657.97,3320.93A120.9263,120.9263 0 0,1 1537.04,3200A221.5096,221.5096 0 0,0 1456.32,3371.02A221.5096,221.5096 0 0,0 1677.83,3592.53A221.5096,221.5096 0 0,0 1818.61,3542.03A362.779,362.779 0 0,0 2000,3856.21A362.779,362.779 0 0,0 2181.39,3542.03A221.5096,221.5096 0 0,0 2322.17,3592.53A221.5096,221.5096 0 0,0 2543.68,3371.02A221.5096,221.5096 0 0,0 2462.96,3200A120.9263,120.9263 0 0,1 2342.03,3320.93A120.9263,120.9263 0 0,1 2221.1,3200V2221.1H3200A120.9263,120.9263 0 0,1 3320.93,2342.03A120.9263,120.9263 0 0,1 3200,2462.96A221.5096,221.5096 0 0,0 3371.02,2543.68A221.5096,221.5096 0 0,0 3592.53,2322.17A221.5096,221.5096 0 0,0 3542.03,2181.39A362.779,362.779 0 0,0 3856.21,2000A362.779,362.779 0 0,0 3542.03,1818.61A221.5096,221.5096 0 0,0 3592.53,1677.83A221.5096,221.5096 0 0,0 3371.02,1456.32A221.5096,221.5096 0 0,0 3200,1537.04A120.9263,120.9263 0 0,1 3320.93,1657.97A120.9263,120.9263 0 0,1 3200,1778.9H2221.1V800A120.9263,120.9263 0 0,1 2342.03,679.073A120.9263,120.9263 0 0,1 2462.96,800A221.5096,221.5096 0 0,0 2543.68,628.984A221.5096,221.5096 0 0,0 2322.17,407.475A221.5096,221.5096 0 0,0 2181.39,457.969A362.779,362.779 0 0,0 2000,143.793A362.779,362.779 0 0,0 1818.61,457.969A221.5096,221.5096 0 0,0 1677.83,407.475A221.5096,221.5096 0 0,0 1456.32,628.984A221.5096,221.5096 0 0,0 1537.04,800A120.9263,120.9263 0 0,1 1657.97,679.073A120.9263,120.9263 0 0,1 1778.9,800V1778.9H800A120.9263,120.9263 0 0,1 679.073,1657.97A120.9263,120.9263 0 0,1 800,1537.04A221.5096,221.5096 0 0,0 628.984,1456.32A221.5096,221.5096 0 0,0 407.475,1677.83A221.5096,221.5096 0 0,0 457.969,1818.61A362.779,362.779 0 0,0 143.793,2000A362.779,362.779 0 0,0 457.969,2181.39A221.5096,221.5096 0 0,0 407.475,2322.17A221.5096,221.5096 0 0,0 628.984,2543.68A221.5096,221.5096 0 0,0 800,2462.96A120.9263,120.9263 0 0,1 679.073,2342.03A120.9263,120.9263 0 0,1 800,2221.1H1778.9Z"/></svg>
+    </div>
+    <div class="foot-center">
+      The Foundation of Saint-Gervais of the Glasswrights<br>
+      Maison de Verre, Rue des Changes, parish of Saint-Gervais, Soissons<br>
+      <span class="charter">✦ Chartered the Feast of the Translation of Saint Gervais, Anno Domini MCCXLVII ✦</span>
+    </div>
+    <div class="foot-motto">Lux per vitrum, gratia per opus</div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>The Hall — Our Rooms | Chehel Sotoun</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    margin: 0;
+    line-height: 1.65;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* ---------- Page frame ---------- */
+  .page {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 80px;
+  }
+
+  /* ---------- Header / Nav ---------- */
+  header.site {
+    text-align: center;
+    padding: 38px 0 0;
+    border-bottom: 1px solid var(--primary);
+  }
+  .wordmark {
+    font-family: var(--font-display), serif;
+    font-size: 34px;
+    letter-spacing: 0.18em;
+    color: var(--primary);
+    margin: 0;
+    text-transform: none;
+  }
+  .wordmark span {
+    display: block;
+    font-size: 12px;
+    letter-spacing: 0.42em;
+    color: var(--text-emphasis);
+    margin-top: 8px;
+    font-style: italic;
+    font-family: var(--font-body), serif;
+  }
+  .cobalt-rule {
+    height: 2px;
+    background: var(--primary);
+    margin: 22px auto 0;
+    max-width: 720px;
+    position: relative;
+  }
+  .cobalt-rule::before, .cobalt-rule::after {
+    content: "";
+    position: absolute;
+    top: -3px;
+    width: 8px; height: 8px;
+    background: var(--accent);
+    transform: rotate(45deg);
+  }
+  .cobalt-rule::before { left: -4px; }
+  .cobalt-rule::after { right: -4px; }
+
+  nav.primary {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0;
+    padding: 18px 0 22px;
+    font-family: var(--font-display), serif;
+    font-size: 12.5px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+  }
+  nav.primary a {
+    padding: 6px 18px;
+    color: var(--primary);
+    position: relative;
+  }
+  nav.primary .sep {
+    color: var(--accent);
+    font-size: 14px;
+    line-height: 1;
+  }
+  nav.primary a[aria-current="page"] {
+    color: var(--text-emphasis);
+  }
+  nav.primary a[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    left: 14px; right: 14px;
+    bottom: -4px;
+    height: 8px;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 8' preserveAspectRatio='none'><path d='M0 6 Q 25 0 50 4 T 100 6' fill='none' stroke='%237a1f2e' stroke-width='1.2'/></svg>") center/100% 100% no-repeat;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    text-align: center;
+    padding: 70px 0 50px;
+    position: relative;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.4em;
+    font-size: 11px;
+    color: var(--secondary);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .hero h1 {
+    font-family: var(--font-display), serif;
+    font-size: 58px;
+    line-height: 1.05;
+    color: var(--primary);
+    margin: 0 0 8px;
+    letter-spacing: 0.04em;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--text-emphasis);
+    font-weight: normal;
+  }
+  .hero-sub {
+    font-style: italic;
+    color: var(--text);
+    max-width: 640px;
+    margin: 14px auto 28px;
+    font-size: 18px;
+  }
+
+  /* ---------- Seal centerpiece ---------- */
+  .seal {
+    width: 78px; height: 78px;
+    margin: 0 auto;
+    display: block;
+  }
+  .seal-mini {
+    width: 44px; height: 44px;
+    margin: 0 auto 10px;
+    display: block;
+  }
+
+  /* ---------- Divider ---------- */
+  .filet {
+    display: block;
+    margin: 50px auto;
+    width: 440px;
+    max-width: 90%;
+    color: var(--accent);
+  }
+  .filet svg { width: 100%; height: auto; display: block; fill: currentColor; }
+
+  /* ---------- Iwan section (room) ---------- */
+  .iwan {
+    margin: 60px 0;
+    position: relative;
+  }
+  .iwan-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .iwan.reverse .iwan-grid > .iwan-text { order: 2; }
+  .iwan.reverse .iwan-grid > .iwan-frame { order: 1; }
+
+  .iwan-text .room-num {
+    font-family: var(--font-display), serif;
+    color: var(--accent);
+    letter-spacing: 0.4em;
+    font-size: 11px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .iwan-text h2 {
+    font-family: var(--font-display), serif;
+    font-size: 36px;
+    color: var(--primary);
+    margin: 0 0 6px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .iwan-text h2 em {
+    font-style: italic;
+    color: var(--text-emphasis);
+    text-transform: none;
+    font-size: 22px;
+    display: block;
+    letter-spacing: 0.02em;
+    margin-top: 2px;
+  }
+  .iwan-text p {
+    margin: 14px 0;
+    font-size: 16px;
+  }
+  .iwan-text .meta {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--accent);
+    display: flex;
+    gap: 28px;
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--secondary);
+  }
+  .iwan-text .meta strong {
+    color: var(--text-emphasis);
+    display: block;
+    font-weight: normal;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    text-transform: none;
+    font-style: italic;
+    margin-top: 4px;
+  }
+
+  /* ---------- Pointed-arch frame for "elevation drawings" ---------- */
+  .iwan-frame {
+    position: relative;
+    aspect-ratio: 4/5;
+    background: #fbf3df;
+    border: 1px solid var(--primary);
+    padding: 16px;
+  }
+  .iwan-frame::before {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border: 1px solid var(--accent);
+    pointer-events: none;
+  }
+  .arch-svg {
+    width: 100%; height: 100%;
+    display: block;
+  }
+  .arch-svg svg { width: 100%; height: 100%; display: block; }
+
+  /* corner palmettes on frame */
+  .iwan-frame .corner {
+    position: absolute;
+    width: 28px; height: 28px;
+    color: var(--accent);
+  }
+  .iwan-frame .c-tl { top: 10px; left: 10px; }
+  .iwan-frame .c-tr { top: 10px; right: 10px; transform: scaleX(-1); }
+  .iwan-frame .c-bl { bottom: 10px; left: 10px; transform: scaleY(-1); }
+  .iwan-frame .c-br { bottom: 10px; right: 10px; transform: scale(-1,-1); }
+
+  /* ---------- Mirror Hall (uses turquoise tones) ---------- */
+  .iwan-mirror .arch-svg { background: linear-gradient(180deg, #e8f1f1 0%, #cfe2e2 100%); }
+  .iwan-cobalt .arch-svg { background: linear-gradient(180deg, #d8e0ee 0%, #1e3a5f 100%); }
+  .iwan-pavilion .arch-svg { background: linear-gradient(180deg, #f3eccd 0%, #d8b97a 100%); }
+
+  /* ---------- Note panel ---------- */
+  .note {
+    margin: 80px 0 40px;
+    background: #ead7b8;
+    padding: 50px 70px;
+    position: relative;
+    border-top: 2px solid var(--primary);
+    border-bottom: 2px solid var(--primary);
+  }
+  .note::before, .note::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    height: 4px;
+    background: repeating-linear-gradient(90deg, var(--accent) 0 12px, transparent 12px 18px);
+  }
+  .note::before { top: 8px; }
+  .note::after { bottom: 8px; }
+  .note h3 {
+    font-family: var(--font-display), serif;
+    text-align: center;
+    font-size: 24px;
+    color: var(--primary);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin: 0 0 18px;
+  }
+  .note p {
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto;
+    font-size: 16.5px;
+  }
+  .note p em { color: var(--text-emphasis); }
+
+  /* ---------- Footer ---------- */
+  footer {
+    background: var(--primary);
+    color: var(--bg);
+    margin-top: 70px;
+    padding: 60px 0 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  footer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='180' viewBox='0 0 240 180'><g fill='none' stroke='%23c9a23a' stroke-width='1' opacity='0.35'><polygon points='120,10 150,40 150,80 120,110 90,80 90,40'/><polygon points='30,80 60,110 60,150 30,180 0,150 0,110'/><polygon points='210,80 240,110 240,150 210,180 180,150 180,110'/><polygon points='120,110 150,140 120,170 90,140'/></g></svg>");
+    background-size: 240px 180px;
+    opacity: 0.55;
+    pointer-events: none;
+  }
+  .footer-inner {
+    position: relative;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 80px;
+    text-align: center;
+  }
+  .footer-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 30px;
+  }
+  .footer-cols h4 {
+    font-family: var(--font-display), serif;
+    color: var(--accent);
+    letter-spacing: 0.32em;
+    font-size: 12px;
+    text-transform: uppercase;
+    margin: 0 0 12px;
+  }
+  .footer-cols p {
+    margin: 4px 0;
+    font-size: 14.5px;
+    color: #f2e5cc;
+  }
+  .footer-divider {
+    border-top: 1px solid var(--accent);
+    margin: 24px 0 16px;
+    position: relative;
+  }
+  .footer-divider::before, .footer-divider::after {
+    content: "";
+    position: absolute;
+    top: -7px;
+    width: 14px; height: 14px;
+    background: var(--secondary);
+    transform: rotate(45deg);
+    border: 1px solid var(--accent);
+  }
+  .footer-divider::before { left: 0; }
+  .footer-divider::after { right: 0; }
+  .footer-attr {
+    font-style: italic;
+    font-size: 13px;
+    color: #d8c9a8;
+  }
+
+  /* ---------- Inline ornament glyphs (palmette separators) ---------- */
+  .palmette-glyph {
+    display: inline-block;
+    width: 10px; height: 10px;
+    background: var(--accent);
+    clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+    vertical-align: middle;
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="page">
+    <h1 class="wordmark">CHEHEL SOTOUN<span>Hall of Forty Columns</span></h1>
+    <div class="cobalt-rule"></div>
+    <nav class="primary" aria-label="Primary">
+      <a href="page-1.html">Table</a>
+      <span class="sep palmette-glyph" aria-hidden="true"></span>
+      <a href="page-2.html">Sofreh</a>
+      <span class="sep palmette-glyph" aria-hidden="true"></span>
+      <a href="page-3.html" aria-current="page">The Hall</a>
+      <span class="sep palmette-glyph" aria-hidden="true"></span>
+      <a href="page-4.html">Lineage</a>
+      <span class="sep palmette-glyph" aria-hidden="true"></span>
+      <a href="page-5.html">Reservations</a>
+      <span class="sep palmette-glyph" aria-hidden="true"></span>
+      <a href="page-6.html">Visit</a>
+    </nav>
+  </div>
+</header>
+
+<main class="page">
+
+  <!-- HERO -->
+  <section class="hero">
+    <svg class="seal" viewBox="0 0 1500 1500" aria-hidden="true">
+      <g transform="translate(750,750)">
+        <g fill="none" stroke="#1e3a5f" stroke-width="14">
+          <circle r="540"/>
+          <circle r="460" stroke="#c9a23a" stroke-width="6"/>
+        </g>
+        <g fill="#c9a23a" stroke="#1e3a5f" stroke-width="6">
+          <polygon points="0,-440 110,-110 440,0 110,110 0,440 -110,110 -440,0 -110,-110"/>
+        </g>
+        <g fill="#7a1f2e" stroke="#1e3a5f" stroke-width="6" transform="rotate(45)">
+          <polygon points="0,-310 78,-78 310,0 78,78 0,310 -78,78 -310,0 -78,-78"/>
+        </g>
+        <circle r="60" fill="#2a8a8a" stroke="#1e3a5f" stroke-width="6"/>
+      </g>
+    </svg>
+    <p class="hero-eyebrow" style="margin-top:18px;">Three Iwans, One Table</p>
+    <h1>The Hall <em>—</em> Our Rooms</h1>
+    <p class="hero-sub">Three rooms framed as iwans face a single courtyard table. Each is built from the materials of the city it remembers — Tehran mirror-work, Isfahani cobalt tile, and the orchard stone of Qazvin.</p>
+    <div class="filet" aria-hidden="true">
+      <svg viewBox="0 0 437.999 18.893"><use href="#filetpath"/></svg>
+    </div>
+  </section>
+
+  <!-- ROOM 1 — MIRROR HALL -->
+  <section class="iwan iwan-mirror">
+    <div class="iwan-grid">
+      <div class="iwan-text">
+        <div class="room-num">Iwan I <span class="palmette-glyph"></span> Twenty-four seats</div>
+        <h2>The Mirror Hall<em>Tālār-e Āyeneh</em></h2>
+        <p>The principal dining room sits beneath a fragmented-mirror ceiling commissioned in 2019 from the <em>atelier Pirnia</em> of Tehran, whose family has set <em>āyeneh-kāri</em> for ninety-three years. Eleven thousand hand-cut shards reflect the cobalt of the side walls and the small flame of each candle, so that the room is, after dusk, almost entirely made of light.</p>
+        <p>Twenty-four seats are arranged along a single low cedar table in the Safavid manner, with cushions of indigo wool from Khorasan. Service is paced to four hours; the kitchen does not turn the room.</p>
+        <div class="meta">
+          <div>Capacity<strong>24 guests</strong></div>
+          <div>Sitting<strong>One per evening</strong></div>
+          <div>Ceiling<strong>11,000 shards, 2019</strong></div>
+        </div>
+      </div>
+      <div class="iwan-frame">
+        <span class="corner c-tl">◆</span><span class="corner c-tr">◆</span>
+        <span class="corner c-bl">◆</span><span class="corner c-br">◆</span>
+        <div class="arch-svg" aria-label="Elevation drawing of the Mirror Hall">
+          <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <clipPath id="archclip1">
+                <path d="M 60,480 L 60,240 Q 60,140 200,40 Q 340,140 340,240 L 340,480 Z"/>
+              </clipPath>
+            </defs>
+            <!-- arch outline -->
+            <path d="M 60,480 L 60,240 Q 60,140 200,40 Q 340,140 340,240 L 340,480"
+                  fill="none" stroke="#1e3a5f" stroke-width="2.5"/>
+            <path d="M 72,470 L 72,242 Q 72,148 200,54 Q 328,148 328,242 L 328,470"
+                  fill="none" stroke="#c9a23a" stroke-width="0.8"/>
+            <g clip-path="url(#archclip1)" stroke="#1e3a5f" stroke-width="0.6" fill="none">
+              <!-- mirror facets -->
+              <g opacity="0.85">
+                <polygon points="200,80 230,110 215,150 185,150 170,110" fill="#fff"/>
+                <polygon points="140,140 170,170 155,210 125,210 110,170" fill="#e8f1f1"/>
+                <polygon points="260,140 290,170 275,210 245,210 230,170" fill="#e8f1f1"/>
+                <polygon points="200,180 230,210 215,250 185,250 170,210" fill="#fff"/>
+                <polygon points="140,240 170,270 155,310 125,310 110,270" fill="#fff"/>
+                <polygon points="260,240 290,270 275,310 245,310 230,270" fill="#fff"/>
+                <polygon points="200,280 230,310 215,350 185,350 170,310" fill="#e8f1f1"/>
+              </g>
+              <!-- columns -->
+              <rect x="90" y="320" width="14" height="150" fill="#7a1f2e" opacity="0.75"/>
+              <rect x="296" y="320" width="14" height="150" fill="#7a1f2e" opacity="0.75"/>
+              <!-- table -->
+              <rect x="115" y="430" width="170" height="10" fill="#7a1f2e"/>
+              <line x1="115" y1="440" x2="115" y2="470" stroke="#1e3a5f"/>
+              <line x1="285" y1="440" x2="285" y2="470" stroke="#1e3a5f"/>
+              <!-- chairs -->
+              <g fill="#1e3a5f" opacity="0.6">
+                <rect x="120" y="445" width="10" height="14"/><rect x="140" y="445" width="10" height="14"/>
+                <rect x="160" y="445" width="10" height="14"/><rect x="180" y="445" width="10" height="14"/>
+                <rect x="200" y="445" width="10" height="14"/><rect x="220" y="445" width="10" height="14"/>
+                <rect x="240" y="445" width="10" height="14"/><rect x="260" y="445" width="10" height="14"/>
+              </g>
+              <!-- floor line -->
+              <line x1="60" y1="470" x2="340" y2="470" stroke="#1e3a5f" stroke-width="1.2"/>
+            </g>
+            <!-- scale -->
+            <g font-family="Marcellus, serif" font-size="9" fill="#1e3a5f" letter-spacing="2">
+              <text x="200" y="495" text-anchor="middle">ELEVATION · TĀLĀR-E ĀYENEH · 1:80</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="filet" aria-hidden="true">
+    <svg viewBox="0 0 437.999 18.893" id="filet-svg-1">
+      <g id="filetpath" fill="currentColor">
+        <path d="M0,9.445s37,-0.063,73.998,-0.829c18.495,-0.386,36.989,-0.949,50.831,-1.785c6.919,-0.414,12.677,-0.906,16.663,-1.46l4.535,-0.878l1.049,-0.405l0.238,-0.162l0.42,-0.287l0.656,0.656l-0.369,0.338l-0.456,0.324l-1.256,0.484c-1.085,0.314,-2.667,0.608,-4.686,0.879c-4.037,0.533,-9.811,0.985,-16.745,1.354c-13.868,0.744,-32.369,1.183,-50.87,1.443C37,9.632,0,9.445,0,9.445z"/>
+        <circle cx="219" cy="9.4" r="6" fill="none" stroke="currentColor" stroke-width="1.2"/>
+        <path d="M438,9.445s-37,0.187,-74,-0.329c-18.5,-0.261,-37,-0.699,-50.87,-1.443c-6.93,-0.368,-12.7,-0.82,-16.74,-1.354l-4.69,-0.879l-1.26,-0.484l-0.45,-0.324l-0.37,-0.338l0.66,-0.656l0.42,0.287l0.24,0.162l1.05,0.405l4.53,0.878c3.99,0.554,9.74,1.046,16.66,1.46c13.84,0.836,32.34,1.399,50.83,1.785C401,9.382,438,9.445,438,9.445z"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- ROOM 2 — COBALT IWAN -->
+  <section class="iwan iwan-cobalt reverse">
+    <div class="iwan-grid">
+      <div class="iwan-frame">
+        <span class="corner c-tl">◆</span><span class="corner c-tr">◆</span>
+        <span class="corner c-bl">◆</span><span class="corner c-br">◆</span>
+        <div class="arch-svg" aria-label="Elevation drawing of the Cobalt Iwan">
+          <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <clipPath id="archclip2">
+                <path d="M 60,480 L 60,240 Q 60,140 200,40 Q 340,140 340,240 L 340,480 Z"/>
+              </clipPath>
+              <pattern id="tilepat" width="40" height="40" patternUnits="userSpaceOnUse">
+                <rect width="40" height="40" fill="#1e3a5f"/>
+                <polygon points="20,4 36,20 20,36 4,20" fill="none" stroke="#c9a23a" stroke-width="0.6"/>
+                <polygon points="20,12 28,20 20,28 12,20" fill="#2a8a8a"/>
+              </pattern>
+            </defs>
+            <path d="M 60,480 L 60,240 Q 60,140 200,40 Q 340,140 340,240 L 340,480"
+                  fill="none" stroke="#1e3a5f" stroke-width="2.5"/>
+            <g clip-path="url(#archclip2)">
+              <rect x="60" y="40" width="280" height="440" fill="url(#tilepat)"/>
+              <!-- inner ogee niche -->
+              <path d="M 130,460 L 130,290 Q 130,210 200,140 Q 270,210 270,290 L 270,460 Z"
+                    fill="#f2e5cc" stroke="#c9a23a" stroke-width="1"/>
+              <!-- medallion -->
+              <g transform="translate(200,260)">
+                <circle r="44" fill="#7a1f2e" stroke="#c9a23a" stroke-width="1.2"/>
+                <circle r="30" fill="none" stroke="#c9a23a" stroke-width="0.8"/>
+                <polygon points="0,-32 9,-9 32,0 9,9 0,32 -9,9 -32,0 -9,-9" fill="#c9a23a"/>
+              </g>
+              <!-- table for twelve -->
+              <rect x="155" y="420" width="90" height="8" fill="#7a1f2e"/>
+              <g fill="#1e3a5f">
+                <rect x="158" y="430" width="8" height="12"/><rect x="172" y="430" width="8" height="12"/>
+                <rect x="186" y="430" width="8" height="12"/><rect x="200" y="430" width="8" height="12"/>
+                <rect x="214" y="430" width="8" height="12"/><rect x="228" y="430" width="8" height="12"/>
+              </g>
+            </g>
+            <g font-family="Marcellus, serif" font-size="9" fill="#1e3a5f" letter-spacing="2">
+              <text x="200" y="495" text-anchor="middle">ELEVATION · IWAN-E LĀJVARDI · 1:80</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+      <div class="iwan-text">
+        <div class="room-num">Iwan II <span class="palmette-glyph"></span> Twelve seats, private</div>
+        <h2>The Cobalt Iwan<em>Iwan-e Lājvardi</em></h2>
+        <p>A private dining room for twelve, walled on three sides in glazed seven-colour tile <em>(haft-rang)</em> set after the dome of the <em>Sheikh Lotfollah</em> mosque (Isfahan, 1619). The pattern was redrawn from photographs by the architect Niloofar Sadeghi and fired in 2021 at a kiln outside Yazd; ninety-six tiles were broken in transit and replaced from the same batch.</p>
+        <p>The room is reserved most often for engagements, anniversaries, and the long autumn dinner of the saffron harvest. A single ogee niche at the head of the table holds a copper bowl of pomegranate, replaced each Thursday.</p>
+        <div class="meta">
+          <div>Capacity<strong>12 guests, private</strong></div>
+          <div>Hire<strong>From £1,400 / evening</strong></div>
+          <div>Tiles<strong>Yazd, fired 2021</strong></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="filet" aria-hidden="true">
+    <svg viewBox="0 0 437.999 18.893"><use href="#filetpath"/></svg>
+  </div>
+
+  <!-- ROOM 3 — PAVILION GARDEN -->
+  <section class="iwan iwan-pavilion">
+    <div class="iwan-grid">
+      <div class="iwan-text">
+        <div class="room-num">Iwan III <span class="palmette-glyph"></span> Seasonal, open-air</div>
+        <h2>The Pavilion Garden<em>Bāgh-e Kūshk</em></h2>
+        <p>From the first week of <em>April</em> through the last of <em>October</em>, the rear courtyard opens as an outdoor pavilion set among four quince and two sour-cherry trees, planted in 2014 from cuttings carried from a private orchard near Karaj. A linen canopy is raised at midday and struck before midnight; in May the cherry sets fruit directly above the lamb table.</p>
+        <p>Service here is more informal: shared platters of <em>kashk-e bademjan</em>, charcoal kebabs from the open hearth, and tea brewed over a samovar that has stood in the family since 1958. Forty seats in good weather, eighteen if the rain comes.</p>
+        <div class="meta">
+          <div>Season<strong>April – October</strong></div>
+          <div>Capacity<strong>40 (18 in rain)</strong></div>
+          <div>Trees<strong>Quince &amp; sour-cherry</strong></div>
+        </div>
+      </div>
+      <div class="iwan-frame">
+        <span class="corner c-tl">◆</span><span class="corner c-tr">◆</span>
+        <span class="corner c-bl">◆</span><span class="corner c-br">◆</span>
+        <div class="arch-svg" aria-label="Elevation drawing of the Pavilion Garden">
+          <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <clipPath id="archclip3">
+                <path d="M 60,480 L 60,240 Q 60,140 200,40 Q 340,140 340,240 L 340,480 Z"/>
+              </clipPath>
+            </defs>
+            <path d="M 60,480 L 60,240 Q 60,140 200,40 Q 340,140 340,240 L 340,480"
+                  fill="none" stroke="#1e3a5f" stroke-width="2.5"/>
+            <g clip-path="url(#archclip3)">
+              <!-- sky -->
+              <rect x="60" y="40" width="280" height="280" fill="#e6d4a6"/>
+              <!-- ground -->
+              <rect x="60" y="320" width="280" height="160" fill="#c5824a" opacity="0.55"/>
+              <!-- canopy -->
+              <path d="M 90,180 Q 200,140 310,180 L 300,200 L 100,200 Z" fill="#f2e5cc" stroke="#1e3a5f" stroke-width="1"/>
+              <line x1="100" y1="200" x2="100" y2="320" stroke="#1e3a5f" stroke-width="1.5"/>
+              <line x1="300" y1="200" x2="300" y2="320" stroke="#1e3a5f" stroke-width="1.5"/>
+              <!-- trees -->
+              <g>
+                <rect x="78" y="260" width="6" height="60" fill="#7a1f2e"/>
+                <circle cx="81" cy="260" r="22" fill="#2a8a8a" opacity="0.85"/>
+                <circle cx="73" cy="252" r="14" fill="#2a8a8a" opacity="0.7"/>
+              </g>
+              <g>
+                <rect x="316" y="260" width="6" height="60" fill="#7a1f2e"/>
+                <circle cx="319" cy="260" r="22" fill="#2a8a8a" opacity="0.85"/>
+                <circle cx="327" cy="252" r="14" fill="#2a8a8a" opacity="0.7"/>
+              </g>
+              <!-- water rill -->
+              <rect x="190" y="380" width="20" height="100" fill="#2a8a8a" opacity="0.5" stroke="#1e3a5f" stroke-width="0.6"/>
+              <!-- tables -->
+              <rect x="120" y="400" width="50" height="6" fill="#7a1f2e"/>
+              <rect x="230" y="400" width="50" height="6" fill="#7a1f2e"/>
+              <rect x="120" y="440" width="50" height="6" fill="#7a1f2e"/>
+              <rect x="230" y="440" width="50" height="6" fill="#7a1f2e"/>
+              <!-- cherries in sky -->
+              <g fill="#7a1f2e">
+                <circle cx="120" cy="200" r="2"/><circle cx="160" cy="190" r="2"/>
+                <circle cx="240" cy="190" r="2"/><circle cx="280" cy="200" r="2"/>
+              </g>
+            </g>
+            <g font-family="Marcellus, serif" font-size="9" fill="#1e3a5f" letter-spacing="2">
+              <text x="200" y="495" text-anchor="middle">ELEVATION · BĀGH-E KŪSHK · 1:80</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="filet" aria-hidden="true">
+    <svg viewBox="0 0 437.999 18.893"><use href="#filetpath"/></svg>
+  </div>
+
+  <!-- NOTE ON THE COLUMNS -->
+  <section class="note">
+    <svg class="seal-mini" viewBox="0 0 100 100" aria-hidden="true">
+      <circle cx="50" cy="50" r="46" fill="none" stroke="#1e3a5f" stroke-width="2"/>
+      <circle cx="50" cy="50" r="38" fill="none" stroke="#c9a23a" stroke-width="1"/>
+      <polygon points="50,18 60,42 86,50 60,58 50,82 40,58 14,50 40,42" fill="#7a1f2e" stroke="#1e3a5f" stroke-width="1"/>
+    </svg>
+    <h3>A Note on the Forty Columns</h3>
+    <p>The eight cedar columns that divide the three rooms — and which, doubled in the long mirror of the entry passage, complete the count of <em>forty</em> — were reclaimed in 2018 from a 1930s caravanserai near <em>Qazvin</em>, dismantled when the Tehran–Rasht road was widened. They were planed by hand at the workshop of master <em>Hossein Najjar</em> in Lavasan, oiled with walnut, and raised here in the spring of 2022. Two retain the iron rings to which travellers once tied their horses; we have left these in place.</p>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-cols">
+      <div>
+        <h4>Address</h4>
+        <p>14 Mossbridge Lane</p>
+        <p>Marylebone, London W1U 6QF</p>
+        <p>+44 (0)20 7935 0641</p>
+      </div>
+      <div>
+        <h4>Hours</h4>
+        <p>Tuesday – Saturday</p>
+        <p>Dinner · 18:30 – 23:00</p>
+        <p>Sunday Sofreh · 13:00 – 16:30</p>
+      </div>
+      <div>
+        <h4>House</h4>
+        <p>Chef-patron Darius Khorsandi</p>
+        <p>Tile &amp; mirror, Pirnia atelier</p>
+        <p>Established 2022</p>
+      </div>
+    </div>
+    <div class="footer-divider"></div>
+    <p class="footer-attr">Chehel Sotoun — Hall of Forty Columns · the Isfahani table in London · <span style="color:var(--accent)">۱۴۰۳</span></p>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Acta Diurna — A Review of the Classical World</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    margin: 0;
+    line-height: 1.7;
+    font-size: 16px;
+  }
+  .page {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 48px 64px 0;
+    text-align: center;
+  }
+
+  /* ============ MASTHEAD ============ */
+  .masthead {
+    text-align: center;
+    padding: 32px 0 18px;
+    border-top: 3px double var(--primary);
+    border-bottom: 1px solid var(--primary);
+    position: relative;
+  }
+  .masthead .topline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--primary);
+    padding: 0 8px 24px;
+    border-bottom: 1px solid var(--primary);
+    margin-bottom: 28px;
+  }
+  .masthead h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 900;
+    font-size: 116px;
+    letter-spacing: 0.12em;
+    margin: 0;
+    line-height: 0.95;
+    color: var(--primary);
+    text-transform: uppercase;
+  }
+  .masthead .subline {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 16px;
+    letter-spacing: 0.08em;
+    color: var(--primary);
+    margin-top: 14px;
+  }
+  .masthead .subline span.sep {
+    color: var(--accent);
+    margin: 0 14px;
+    font-style: normal;
+  }
+  .seal {
+    color: var(--secondary);
+    margin: 18px auto 0;
+    width: 36px;
+    height: 36px;
+    display: block;
+  }
+
+  /* ============ NAV ============ */
+  nav.primary {
+    padding: 22px 0 26px;
+    border-bottom: 3px double var(--primary);
+    margin-bottom: 0;
+  }
+  nav.primary .keyrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    margin-bottom: 14px;
+  }
+  nav.primary .keyrow .key-rule {
+    flex: 0 0 220px;
+    height: 28px;
+    color: var(--primary);
+  }
+  nav.primary .keyrow .brand {
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--primary);
+  }
+  nav.primary ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+  nav.primary li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  nav.primary a {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    font-size: 11px;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--primary);
+    padding: 4px 2px;
+  }
+  nav.primary a[aria-current="page"] {
+    border-bottom: 1px solid var(--secondary);
+    color: var(--primary);
+  }
+  nav.primary .vine {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    color: var(--accent);
+    opacity: 0.7;
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    padding: 70px 0 60px;
+    text-align: center;
+    border-bottom: 1px solid var(--primary);
+  }
+  .hero .kicker {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 18px;
+  }
+  .hero-frame {
+    position: relative;
+    width: 720px;
+    margin: 0 auto;
+    padding: 60px 40px 40px;
+  }
+  .hero-frame .wreath-bg {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 560px;
+    height: auto;
+    opacity: 0.95;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .hero-frame .wreath-bg svg { width: 100%; height: auto; }
+  .hero-content { position: relative; z-index: 1; }
+  .hero h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 900;
+    font-size: 54px;
+    line-height: 1.04;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin: 0 0 18px;
+    color: var(--primary);
+  }
+  .hero h2 .ampersand {
+    font-style: italic;
+    text-transform: lowercase;
+    font-weight: 400;
+    letter-spacing: 0;
+    color: var(--text-emphasis);
+  }
+  .hero .deck {
+    font-style: italic;
+    font-size: 19px;
+    line-height: 1.55;
+    color: var(--primary);
+    max-width: 540px;
+    margin: 14px auto 22px;
+  }
+  .hero .hairline {
+    width: 80px;
+    height: 1px;
+    background: var(--accent);
+    margin: 22px auto;
+  }
+  .hero .byline {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.32em;
+    font-size: 12px;
+    color: var(--primary);
+  }
+  .hero .byline em {
+    font-family: var(--font-body), serif;
+    text-transform: none;
+    letter-spacing: 0.04em;
+    font-size: 13px;
+    color: var(--primary);
+  }
+
+  /* ============ DROP CAP / OPENING ============ */
+  .opening {
+    max-width: 620px;
+    margin: 56px auto 36px;
+    text-align: left;
+    font-size: 17px;
+    line-height: 1.75;
+  }
+  .opening::first-letter,
+  .opening .dropcap {
+    font-family: var(--font-display), serif;
+    font-weight: 900;
+    font-size: 78px;
+    float: left;
+    line-height: 0.85;
+    margin: 6px 10px 0 0;
+    color: var(--accent);
+  }
+  .opening p { margin: 0 0 14px; }
+  .opening .pull {
+    color: var(--text-emphasis);
+    font-style: italic;
+  }
+
+  /* ============ INDEX (THREE COLUMNS) ============ */
+  .section-head {
+    text-align: center;
+    margin: 70px auto 36px;
+  }
+  .section-head h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+  }
+  .section-head .meander {
+    width: 320px;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+    color: var(--primary);
+  }
+  .index-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
+  }
+  .index-grid article.card {
+    padding: 36px 28px 32px;
+    text-align: center;
+    border-right: 1px solid var(--primary);
+    background: var(--surface);
+    position: relative;
+  }
+  .index-grid article.card:last-child { border-right: none; }
+  .card .meander-strip {
+    width: 100%;
+    height: 22px;
+    color: var(--primary);
+    margin-bottom: 24px;
+    display: block;
+  }
+  .card .meander-strip.bottom { margin: 24px 0 0; }
+  .card .num {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .card h4 {
+    font-family: var(--font-display), serif;
+    font-weight: 800;
+    font-size: 22px;
+    line-height: 1.15;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin: 0 0 16px;
+    color: var(--primary);
+  }
+  .card .deck {
+    font-style: italic;
+    font-size: 15px;
+    line-height: 1.55;
+    max-width: 240px;
+    margin: 0 auto 16px;
+    color: var(--primary);
+  }
+  .card .red-rule {
+    width: 50px;
+    height: 1px;
+    background: var(--accent);
+    margin: 14px auto;
+  }
+  .card .byline {
+    font-family: var(--font-display), serif;
+    font-size: 10.5px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--primary);
+  }
+  .card .byline em {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    display: block;
+    margin-top: 6px;
+    font-size: 12px;
+    color: var(--primary);
+    opacity: 0.75;
+  }
+  .card.featured .roundel {
+    width: 54px;
+    height: 54px;
+    margin: 0 auto 12px;
+    color: var(--secondary);
+    display: block;
+  }
+
+  /* ============ EDITOR'S STANDFIRST ============ */
+  .standfirst {
+    margin: 88px auto 64px;
+    text-align: center;
+    max-width: 760px;
+    padding: 0 24px;
+  }
+  .standfirst .label {
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 18px;
+  }
+  .standfirst h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 800;
+    font-size: 36px;
+    letter-spacing: 0.04em;
+    line-height: 1.18;
+    text-transform: uppercase;
+    margin: 0 0 28px;
+    color: var(--primary);
+  }
+  .standfirst blockquote {
+    margin: 0 auto;
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 19px;
+    line-height: 1.7;
+    color: var(--text-emphasis);
+    max-width: 600px;
+  }
+  .standfirst blockquote p { margin: 0 0 16px; }
+  .standfirst .signoff {
+    margin-top: 28px;
+    font-family: var(--font-display), serif;
+    font-size: 11.5px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--primary);
+  }
+  .standfirst .signoff em {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0.04em;
+    display: block;
+    font-size: 13px;
+    margin-top: 8px;
+    opacity: 0.75;
+  }
+
+  /* ============ FOOTER ============ */
+  footer.frieze {
+    margin-top: 40px;
+    background: var(--bg);
+    border-top: 1px solid var(--primary);
+  }
+  footer .key-band {
+    width: 100%;
+    height: 38px;
+    color: var(--primary);
+    display: block;
+  }
+  footer .key-band svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  footer .cols {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 50px 80px 30px;
+    text-align: center;
+    gap: 48px;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  footer .cols h5 {
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    margin: 0 0 18px;
+    color: var(--primary);
+  }
+  footer .cols ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  footer .cols li {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    margin: 8px 0;
+  }
+  footer .cols a {
+    color: var(--primary);
+    text-decoration: none;
+  }
+  footer .colophon {
+    text-align: center;
+    padding: 24px 40px 14px;
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--primary);
+    max-width: 760px;
+    margin: 0 auto;
+    border-top: 1px solid var(--primary);
+  }
+  footer .tailpiece {
+    width: 80px;
+    height: 80px;
+    margin: 18px auto 6px;
+    color: var(--accent);
+    display: block;
+  }
+  footer .copyright {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    padding: 0 0 40px;
+    color: var(--primary);
+  }
+
+  /* ============ DECORATIVE GREEK KEY (inline SVG sized) ============ */
+  .keystrip-inline {
+    display: inline-block;
+    height: 22px;
+    width: 200px;
+    color: var(--primary);
+    vertical-align: middle;
+  }
+  .keystrip-inline svg { width: 100%; height: 100%; display: block; }
+
+  .vine-glyph {
+    width: 12px;
+    height: 12px;
+    fill: currentColor;
+    display: inline-block;
+    vertical-align: middle;
+  }
+</style>
+</head>
+<body>
+
+<!-- Reusable inline SVG symbols -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- Greek-key meander strip (simplified, repeating) -->
+    <symbol id="meander" viewBox="0 0 400 40" preserveAspectRatio="xMidYMid meet">
+      <g fill="currentColor">
+        <path d="M0,2 H400 V6 H0 Z"/>
+        <path d="M0,34 H400 V38 H0 Z"/>
+        <g>
+          <path d="M10,8 h28 v4 h-24 v16 h20 v-12 h-12 v4 h8 v4 h-4 v4 h12 v-20 h-28 z"/>
+          <path d="M50,8 h28 v4 h-24 v16 h20 v-12 h-12 v4 h8 v4 h-4 v4 h12 v-20 h-28 z"/>
+          <path d="M90,8 h28 v4 h-24 v16 h20 v-12 h-12 v4 h8 v4 h-4 v4 h12 v-20 h-28 z"/>
+          <path d="M130,8 h28 v4 h-24 v16 h20 v-12 h-12 v4 h8 v4 h-4 v4 h12 v-20 h-28 z"/>
+          <path d="M170,8 h28 v4 h-24 v16 h20 v-12 h-12 v4 h8 v4 h-4 v4 h12 v-20 h-28 z"/>
+          <path d="M210,8 h28 v4 h-24 v16 h20 v-12 h-12 v4 h8 v4 h-4 v4 h12 v-20 h-28 z"/>
+          <path d="M250,8 h28 v4 h-24 v16 h20 v-12 h-12 v4 h8 v4 h-4 v4 h12 v-20 h-28 z"/>
+          <path d="M290,8 h28 v4 h-24 v16 h20 v-12 h-12 v4 h8 v4 h-4 v4 h12 v-20 h-28 z"/>
+          <path d="M330,8 h28 v4 h-24 v16 h20 v-12 h-12 v4 h8 v4 h-4 v4 h12 v-20 h-28 z"/>
+          <path d="M370,8 h28 v4 h-24 v16 h20 v-12 h-12 v4 h8 v4 h-4 v4 h12 v-20 h-28 z"/>
+        </g>
+      </g>
+    </symbol>
+
+    <!-- Vine leaf glyph (simplified from oeuvre) -->
+    <symbol id="vine" viewBox="0 0 200 200">
+      <path d="M43.6,11c-1.8,0-3.6,0.1-5.3,0.3c-7,0.7-13.9,2.8-19.2,7.5s-8.2,12-7.7,21c0.5,9,4.3,16.1,10.2,20.3c5.9,4.2,13.3,5.5,21,5.2c15.5-0.7,32.8-8,45.8-18.3c1.4-1.1,2.8-2,4.3-3.1c4.3,6.7,7.6,14.8,9.3,24.1c-7.5-5.1-21-10.5-35.7,1.5C44.3,87.7,41.4,82.4,21.1,67.4c-2.9,36.1,15,54.6,44.7,52.5c0,0-14,4.3-3.6,26.4c6,12.9,8.4,20.1,6.6,25.2c-12.8,2.3-15.8,7.8-5.6,12.7c45.1,10,65.7-27.5,68.7-66c45.4,0,52.9-31.8,52.5-50.4c-8.2,11.1-22.2,11.1-32.9,2.5c-9.9-7.9-21.7-16.2-39-1.1c-1.7-11.7-5.7-22.1-11.2-30.7c19.4-11.4,38.7-14.5,52.5-10.8c5.5,1.4,9.5,4.1,12.4,7c-9,8.4-11.8,26.4,2.3,27c18.9,0.9,21-15.5,13.6-27.1c-5.4-8.5-16.4-13.2-25.7-16.6C138.9,12.7,116.6,16.8,95.1,29.8c-5.2-5.7-11.1-10.2-17.7-13C70.3,13.9,59.8,11.1,49.1,10.5C47.3,10.4,45.5,10.4,43.7,11z" fill="currentColor"/>
+    </symbol>
+
+    <!-- Tailpiece (leaf-and-rule) -->
+    <symbol id="tailpiece" viewBox="0 0 200 80">
+      <g fill="currentColor" stroke="currentColor">
+        <line x1="10" y1="40" x2="80" y2="40" stroke-width="1"/>
+        <line x1="120" y1="40" x2="190" y2="40" stroke-width="1"/>
+        <path d="M100,20 C 92,30 92,50 100,60 C 108,50 108,30 100,20 Z"/>
+        <circle cx="100" cy="40" r="3"/>
+        <circle cx="85" cy="40" r="1.5"/>
+        <circle cx="115" cy="40" r="1.5"/>
+        <circle cx="75" cy="40" r="1"/>
+        <circle cx="125" cy="40" r="1"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="page">
+
+  <!-- ============== MASTHEAD ============== -->
+  <header class="masthead" role="banner">
+    <div class="topline">
+      <span>Founded MMXIII · Roma &amp; Oxford</span>
+      <span>No. XLVIII</span>
+      <span>Price · Ten Sesterces</span>
+    </div>
+    <h1>Acta Diurna</h1>
+    <div class="subline">
+      Quarterly Review <span class="sep">·</span> Vol. XII <span class="sep">·</span> Kalends of October
+    </div>
+    <svg class="seal" viewBox="0 0 100 100" aria-hidden="true">
+      <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="1"/>
+      <circle cx="50" cy="50" r="38" fill="none" stroke="currentColor" stroke-width="0.6"/>
+      <text x="50" y="56" text-anchor="middle" font-family="Playfair Display" font-size="18" font-weight="900" fill="currentColor">A·D</text>
+    </svg>
+  </header>
+
+  <!-- ============== NAV ============== -->
+  <nav class="primary" aria-label="Primary">
+    <div class="keyrow">
+      <span class="key-rule"><svg viewBox="0 0 400 40" preserveAspectRatio="none" width="100%" height="100%"><use href="#meander"/></svg></span>
+      <span class="brand">Editio Romana</span>
+      <span class="key-rule"><svg viewBox="0 0 400 40" preserveAspectRatio="none" width="100%" height="100%"><use href="#meander"/></svg></span>
+    </div>
+    <ul>
+      <li><a href="page-1.html" aria-current="page">Frontispiece</a></li>
+      <li><svg class="vine"><use href="#vine"/></svg></li>
+      <li><a href="page-2.html">The Long Essay</a></li>
+      <li><svg class="vine"><use href="#vine"/></svg></li>
+      <li><a href="page-3.html">Dispatches</a></li>
+      <li><svg class="vine"><use href="#vine"/></svg></li>
+      <li><a href="page-4.html">Letters</a></li>
+      <li><svg class="vine"><use href="#vine"/></svg></li>
+      <li><a href="page-5.html">The Library</a></li>
+      <li><svg class="vine"><use href="#vine"/></svg></li>
+      <li><a href="page-6.html">Colophon</a></li>
+    </ul>
+  </nav>
+
+  <!-- ============== HERO ============== -->
+  <section class="hero">
+    <div class="kicker">— Hoc Mensis · The Featured Essay —</div>
+    <div class="hero-frame">
+      <div class="wreath-bg" aria-hidden="true">
+        <svg viewBox="0 0 323 296" xmlns="http://www.w3.org/2000/svg">
+          <g fill="#1a1a1a" opacity="0.92">
+            <!-- Stylised laurel wreath echoing the supplied motif -->
+            <path d="M161 20 C 110 20, 60 60, 50 130 C 45 195, 90 250, 161 270 C 232 250, 277 195, 272 130 C 262 60, 212 20, 161 20 Z" fill="none" stroke="#1a1a1a" stroke-width="0.8"/>
+            <g>
+              <!-- left leaves -->
+              <path d="M55 90 q -18 4 -22 22 q 14 -2 22 -10 z"/>
+              <path d="M48 120 q -20 6 -22 26 q 16 -4 24 -14 z"/>
+              <path d="M48 152 q -20 8 -20 28 q 16 -4 24 -14 z"/>
+              <path d="M52 184 q -18 12 -16 32 q 16 -8 22 -20 z"/>
+              <path d="M62 214 q -14 14 -8 32 q 14 -10 18 -24 z"/>
+              <path d="M78 240 q -10 16 0 32 q 14 -14 14 -28 z"/>
+              <!-- right leaves -->
+              <path d="M268 90 q 18 4 22 22 q -14 -2 -22 -10 z"/>
+              <path d="M275 120 q 20 6 22 26 q -16 -4 -24 -14 z"/>
+              <path d="M275 152 q 20 8 20 28 q -16 -4 -24 -14 z"/>
+              <path d="M271 184 q 18 12 16 32 q -16 -8 -22 -20 z"/>
+              <path d="M261 214 q 14 14 8 32 q -14 -10 -18 -24 z"/>
+              <path d="M245 240 q 10 16 0 32 q -14 -14 -14 -28 z"/>
+              <!-- top leaves -->
+              <path d="M120 30 q -8 -14 -26 -14 q 4 16 16 22 z"/>
+              <path d="M150 22 q -4 -16 -22 -18 q 0 16 12 22 z"/>
+              <path d="M203 30 q 8 -14 26 -14 q -4 16 -16 22 z"/>
+              <path d="M173 22 q 4 -16 22 -18 q 0 16 -12 22 z"/>
+              <!-- bottom ribbon -->
+              <path d="M148 268 q 14 4 28 0 l -2 8 q -12 4 -24 0 z" fill="#a93226"/>
+              <path d="M140 274 l 8 4 l 0 8 l -10 -4 z" fill="#a93226"/>
+              <path d="M182 274 l -8 4 l 0 8 l 10 -4 z" fill="#a93226"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <div class="hero-content">
+        <h2>The Oculus<br><span class="ampersand">and</span> the Sky</h2>
+        <p class="deck">On the geometry of the Pantheon, the engineering of weather, and the architectural piety of an empire that built circles to contain the gods.</p>
+        <div class="hairline"></div>
+        <div class="byline">
+          By Helena Vossius<br>
+          <em>Senior Fellow, Schola Architecturae · Bologna</em>
+        </div>
+      </div>
+    </div>
+
+    <div class="opening">
+      <p><span class="dropcap">A</span>t noon on the twenty-first of April — the traditional dies natalis of Rome — a coin of light falls through the oculus of the Pantheon and crosses the threshold of the doorway with the precision of a sundial. Hadrian's masons knew this, and so did Apollodorus before them. The building is not, as the guidebooks say, a hemisphere balanced on a drum. <span class="pull">It is a single sphere, half-buried in the earth, its lower meridian held by walls thick enough to be mistaken for masonry, but in truth performing the geometry of restraint.</span></p>
+      <p>To stand beneath the dome is to stand inside an idea — and the idea is older than its concrete. This issue assembles eight essays on what Rome built, what Rome wrote, and what Rome continues to ask of us.</p>
+    </div>
+  </section>
+
+  <!-- ============== INDEX ============== -->
+  <div class="section-head">
+    <h3>In This Issue · Index Rerum</h3>
+    <svg class="meander" viewBox="0 0 400 40" preserveAspectRatio="xMidYMid meet"><use href="#meander"/></svg>
+  </div>
+
+  <section class="index-grid">
+
+    <article class="card featured">
+      <svg class="meander-strip" viewBox="0 0 400 40" preserveAspectRatio="none"><use href="#meander"/></svg>
+      <svg class="roundel" viewBox="0 0 100 100" aria-hidden="true">
+        <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="1"/>
+        <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="0.6"/>
+        <g stroke="currentColor" fill="currentColor" stroke-width="0.5">
+          <path d="M50,12 q -8,8 -10,18 q 6,-4 12,-10 z"/>
+          <path d="M50,12 q 8,8 10,18 q -6,-4 -12,-10 z"/>
+          <path d="M22,30 q 0,10 6,18 q 6,-4 8,-12 z"/>
+          <path d="M78,30 q 0,10 -6,18 q -6,-4 -8,-12 z"/>
+          <path d="M16,56 q 4,10 12,16 q 4,-6 4,-14 z"/>
+          <path d="M84,56 q -4,10 -12,16 q -4,-6 -4,-14 z"/>
+          <path d="M28,82 q 8,8 18,8 q 0,-8 -6,-14 z"/>
+          <path d="M72,82 q -8,8 -18,8 q 0,-8 6,-14 z"/>
+        </g>
+        <text x="50" y="56" text-anchor="middle" font-family="Playfair Display" font-size="14" font-weight="900" fill="#1a1a1a">SPQR</text>
+      </svg>
+      <div class="num">No. I</div>
+      <h4>The Forum<br>Reconsidered</h4>
+      <p class="deck"><em>How a strip of marketplace mud became, in seven centuries, the central nervous system of a civilisation — and why archaeologists have begun to dig it up again.</em></p>
+      <div class="red-rule"></div>
+      <div class="byline">
+        Marcus T. Holroyd<br>
+        <em>Visiting Scholar, École Française de Rome</em>
+      </div>
+      <svg class="meander-strip bottom" viewBox="0 0 400 40" preserveAspectRatio="none"><use href="#meander"/></svg>
+    </article>
+
+    <article class="card">
+      <svg class="meander-strip" viewBox="0 0 400 40" preserveAspectRatio="none"><use href="#meander"/></svg>
+      <div class="num">No. II</div>
+      <h4>On Reading<br>Tacitus Slowly</h4>
+      <p class="deck"><em>The historian as moralist; the historian as cipher. A defence of the long sentence, the buried clause, and the patience required to hear an empire admit its faults.</em></p>
+      <div class="red-rule"></div>
+      <div class="byline">
+        Cornelia Aldborough<br>
+        <em>Reader in Latin Literature, Cambridge</em>
+      </div>
+      <svg class="meander-strip bottom" viewBox="0 0 400 40" preserveAspectRatio="none"><use href="#meander"/></svg>
+    </article>
+
+    <article class="card">
+      <svg class="meander-strip" viewBox="0 0 400 40" preserveAspectRatio="none"><use href="#meander"/></svg>
+      <div class="num">No. III</div>
+      <h4>Mosaics<br>at Zeugma</h4>
+      <p class="deck"><em>A field report from the Euphrates: rescue archaeology, rising water, and the unflinching gaze of a Gypsy girl preserved beneath two metres of silt for nineteen centuries.</em></p>
+      <div class="red-rule"></div>
+      <div class="byline">
+        Dr. Sefa Karaköse<br>
+        <em>Director of Excavations, Gaziantep Museum</em>
+      </div>
+      <svg class="meander-strip bottom" viewBox="0 0 400 40" preserveAspectRatio="none"><use href="#meander"/></svg>
+    </article>
+
+    <article class="card">
+      <svg class="meander-strip" viewBox="0 0 400 40" preserveAspectRatio="none"><use href="#meander"/></svg>
+      <div class="num">No. IV</div>
+      <h4>The Stoic<br>and the State</h4>
+      <p class="deck"><em>From Seneca's letters to the modern boardroom: a sceptical reading of how Stoicism became, against its own teachings, the philosophy of comfortable men.</em></p>
+      <div class="red-rule"></div>
+      <div class="byline">
+        Prof. Owen Llewellyn-Beck<br>
+        <em>Chair in Ancient Philosophy, Edinburgh</em>
+      </div>
+      <svg class="meander-strip bottom" viewBox="0 0 400 40" preserveAspectRatio="none"><use href="#meander"/></svg>
+    </article>
+
+    <article class="card">
+      <svg class="meander-strip" viewBox="0 0 400 40" preserveAspectRatio="none"><use href="#meander"/></svg>
+      <div class="num">No. V</div>
+      <h4>Pompeii's<br>Last Bakery</h4>
+      <p class="deck"><em>Eighty-one carbonised loaves, a millstone driven by a donkey, and the question every visitor whispers but few archaeologists answer: what did Romans actually eat?</em></p>
+      <div class="red-rule"></div>
+      <div class="byline">
+        Beatrice Pellegrini<br>
+        <em>Soprintendenza Archeologica di Pompei</em>
+      </div>
+      <svg class="meander-strip bottom" viewBox="0 0 400 40" preserveAspectRatio="none"><use href="#meander"/></svg>
+    </article>
+
+    <article class="card">
+      <svg class="meander-strip" viewBox="0 0 400 40" preserveAspectRatio="none"><use href="#meander"/></svg>
+      <div class="num">No. VI</div>
+      <h4>Aqueducts<br>&amp; Empire</h4>
+      <p class="deck"><em>Frontinus's <em>De Aquis</em> as a manual of governance: water, taxation, and the surprisingly modern bureaucracy that kept eleven aqueducts flowing into the city of Rome.</em></p>
+      <div class="red-rule"></div>
+      <div class="byline">
+        Augustin Vermeer<br>
+        <em>Hydraulic Historian, Universiteit Leiden</em>
+      </div>
+      <svg class="meander-strip bottom" viewBox="0 0 400 40" preserveAspectRatio="none"><use href="#meander"/></svg>
+    </article>
+
+  </section>
+
+  <!-- ============== EDITOR'S STANDFIRST ============== -->
+  <section class="standfirst">
+    <div class="label">— From the Editor's Desk —</div>
+    <h3>Why Rome Still<br>Legislates the Imagination</h3>
+    <blockquote>
+      <p>We do not study Rome because it answers our questions. We study Rome because it teaches us how to ask them — slowly, in long sentences, with an instinct for ruin and a stubborn faith that what is built well outlasts the men who built it.</p>
+      <p>This issue, our forty-eighth, is offered in that spirit. The amphitheatres are silent now; the legions are dust. But the grammar of public life — the colonnade, the codex, the carved inscription that begins <em>SENATUS POPULUSQUE</em> — has not yet finished speaking.</p>
+    </blockquote>
+    <div class="signoff">
+      Lucius Aurelian Pratt
+      <em>Editor-in-Chief · Acta Diurna · Kalends of October</em>
+    </div>
+  </section>
+
+</div>
+
+<!-- ============== FOOTER ============== -->
+<footer class="frieze" role="contentinfo">
+  <div class="key-band" aria-hidden="true">
+    <svg viewBox="0 0 400 40" preserveAspectRatio="none"><use href="#meander"/></svg>
+  </div>
+
+  <div class="cols">
+    <div>
+      <h5>The Review</h5>
+      <ul>
+        <li><a href="page-1.html">Frontispiece</a></li>
+        <li><a href="page-2.html">The Long Essay</a></li>
+        <li><a href="page-3.html">Dispatches</a></li>
+        <li><a href="page-5.html">The Library</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Correspondence</h5>
+      <ul>
+        <li><a href="page-4.html">Letters &amp; Marginalia</a></li>
+        <li><a href="page-6.html">Submissions</a></li>
+        <li><a href="page-6.html">Subscriptions</a></li>
+        <li><a href="page-6.html">Colophon</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Editorial Office</h5>
+      <ul>
+        <li>14 Via dei Coronari</li>
+        <li>Roma · 00186</li>
+        <li>Founded MMXIII</li>
+        <li>ISSN 2049 · 7314</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="colophon">
+    Set in Playfair Display &amp; Lora · printed in travertine cream &amp; ink · published quarterly upon the Kalends of January, April, July, and October by the editors and fellows of Acta Diurna, in association with the Schola Romanitatis.
+  </div>
+
+  <svg class="tailpiece" aria-hidden="true"><use href="#tailpiece"/></svg>
+
+  <div class="copyright">
+    © MMXXIV · Acta Diurna · Omnia Iura Reservata
+  </div>
+</footer>
+
+</body>
+</html>

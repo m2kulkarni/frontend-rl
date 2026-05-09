@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Visiter Saint-Loup-sur-Aisne</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* === DIAPER PATTERN BACKGROUND === */
+  .diaper-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 600 600'><g transform='translate(300,300)scale(0.87)rotate(45)' fill='%233a2618'><circle cx='-195.16' r='163'/><circle cx='195.16' r='163'/><circle cy='195.16' r='163'/><circle cy='-195.16' r='163'/><rect x='-232' y='-232' width='464' height='464'/><g fill='%23f4ecd8'><circle cx='-195.16' r='157'/><circle cx='195.16' r='157'/><circle cy='195.16' r='157'/><circle cy='-195.16' r='157'/><rect x='-226' y='-226' width='452' height='452'/></g><circle cx='-195.16' r='144'/><circle cx='195.16' r='144'/><circle cy='195.16' r='144'/><circle cy='-195.16' r='144'/><rect x='-213' y='-213' width='426' height='426'/><g fill='%23f4ecd8'><circle cx='-195.16' r='138'/><circle cx='195.16' r='138'/><circle cy='195.16' r='138'/><circle cy='-195.16' r='138'/><rect x='-207' y='-207' width='414' height='414'/></g></g></svg>");
+    opacity: 0.08;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* === NAVIGATION ARCADE === */
+  .arcade-nav {
+    position: relative;
+    background: var(--bg);
+    border-bottom: 1px solid var(--accent);
+    padding: 1.5rem 3rem 0.75rem;
+    z-index: 10;
+  }
+  .arcade-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: end;
+    gap: 1rem;
+  }
+  .nav-cluster {
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .nav-cluster li { text-align: center; }
+  .nav-cluster a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: var(--primary);
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    padding: 0 0.5rem;
+  }
+  .nav-arch {
+    width: 28px;
+    height: 36px;
+    margin-bottom: 6px;
+  }
+  .nav-arch path {
+    fill: none;
+    stroke: var(--primary);
+    stroke-width: 1.5;
+  }
+  .nav-cluster a[aria-current="page"] .nav-arch path {
+    fill: var(--secondary);
+    stroke: var(--secondary);
+  }
+  .nav-cluster a[aria-current="page"] {
+    color: var(--secondary);
+  }
+  .nav-center {
+    width: 36px;
+    height: 36px;
+    margin-bottom: 4px;
+  }
+  .nav-center svg { width: 100%; height: 100%; fill: var(--accent); }
+
+  /* === HERO === */
+  .hero {
+    position: relative;
+    padding: 4rem 2rem 5rem;
+    text-align: center;
+    overflow: hidden;
+    border-bottom: 1px solid var(--accent);
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-display);
+    font-variant: small-caps;
+    letter-spacing: 0.3em;
+    color: var(--secondary);
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 3.4rem;
+    line-height: 1.05;
+    color: var(--primary);
+    margin: 0 0 1.5rem;
+    letter-spacing: 0.01em;
+  }
+  .hero-lede {
+    font-size: 1.05rem;
+    color: var(--text);
+    max-width: 32rem;
+    margin: 0 auto;
+  }
+  .hero-arch-frame {
+    position: absolute;
+    top: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 480px;
+    height: 528px;
+    z-index: 1;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  .hero-arch-frame svg { width: 100%; height: 100%; }
+
+  /* === MAIN LAYOUT === */
+  main {
+    position: relative;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 4rem 3rem;
+  }
+  .columns {
+    display: grid;
+    grid-template-columns: 18em 1fr 18em;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  /* === ITINERARY (CENTER) === */
+  .itinerary-head {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  .itinerary-head h2 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 2.2rem;
+    color: var(--primary);
+    margin: 0.5rem 0;
+  }
+  .itinerary-head .small-caps {
+    font-family: var(--font-display);
+    font-variant: small-caps;
+    letter-spacing: 0.25em;
+    color: var(--secondary);
+    font-size: 0.8rem;
+  }
+
+  .stop {
+    display: grid;
+    grid-template-columns: 4.5rem 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid rgba(58,38,24,0.18);
+  }
+  .stop:last-child { border-bottom: none; }
+
+  .stop-num {
+    font-family: var(--font-display);
+    font-size: 3.2rem;
+    line-height: 1;
+    color: var(--secondary);
+    text-align: center;
+    border-right: 1px solid var(--accent);
+    padding-right: 1.5rem;
+    padding-top: 0.25rem;
+  }
+  .stop-num small {
+    display: block;
+    font-size: 0.7rem;
+    font-family: var(--font-body);
+    color: var(--text);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-top: 0.5rem;
+  }
+  .stop h3 {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    margin: 0 0 0.25rem;
+    color: var(--primary);
+  }
+  .stop .stop-meta {
+    font-family: var(--font-display);
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    font-size: 0.78rem;
+    color: var(--text-emphasis);
+    margin-bottom: 0.75rem;
+  }
+  .stop p { margin: 0.5rem 0; }
+
+  /* Section divider */
+  .divider {
+    text-align: center;
+    margin: 3rem auto;
+  }
+  .divider svg {
+    width: 48px;
+    height: 48px;
+    fill: var(--ornament);
+  }
+
+  /* === CARDS (Pointed-arch frames) === */
+  .notice-card {
+    position: relative;
+    padding: 2rem 1.75rem 1.75rem;
+    margin-bottom: 2rem;
+    background:
+      radial-gradient(ellipse 60% 30% at 50% 18%, rgba(30,58,95,0.04), transparent 60%),
+      var(--surface);
+    border: 1px solid var(--primary);
+    border-top-left-radius: 50% 18%;
+    border-top-right-radius: 50% 18%;
+  }
+  .notice-card::before {
+    content: "";
+    position: absolute;
+    top: 4px; left: 4px; right: 4px; bottom: 4px;
+    border: 1px solid var(--primary);
+    border-top-left-radius: 50% 18%;
+    border-top-right-radius: 50% 18%;
+    pointer-events: none;
+    opacity: 0.4;
+  }
+  .notice-card h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.2rem;
+    margin: 0 0 1rem;
+    text-align: center;
+    color: var(--primary);
+    letter-spacing: 0.02em;
+  }
+  .notice-card p {
+    font-size: 0.92rem;
+    margin: 0.5rem 0;
+  }
+  .notice-card .dropcap::first-letter {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    line-height: 0.85;
+    float: left;
+    padding: 0.2rem 0.5rem 0 0;
+    color: var(--secondary);
+    font-weight: 500;
+  }
+  .notice-card .vine {
+    text-align: center;
+    margin: 1.25rem 0 0.75rem;
+  }
+  .notice-card .vine svg {
+    width: 32px;
+    height: 32px;
+    fill: var(--ornament);
+    opacity: 0.7;
+  }
+  .notice-card .cta {
+    display: block;
+    text-align: center;
+    font-family: var(--font-display);
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    font-size: 0.85rem;
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-underline-offset: 4px;
+  }
+
+  .col-label {
+    font-family: var(--font-display);
+    font-variant: small-caps;
+    letter-spacing: 0.25em;
+    font-size: 0.75rem;
+    color: var(--secondary);
+    text-align: center;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--accent);
+  }
+
+  dl.facts {
+    margin: 0;
+    font-size: 0.88rem;
+  }
+  dl.facts dt {
+    font-family: var(--font-display);
+    font-variant: small-caps;
+    letter-spacing: 0.12em;
+    color: var(--text-emphasis);
+    margin-top: 0.6rem;
+    font-size: 0.78rem;
+  }
+  dl.facts dd {
+    margin: 0.1rem 0 0.5rem;
+  }
+
+  /* === GUIDED TOURS NOTICE === */
+  .tours-notice {
+    margin-top: 4rem;
+    padding: 3rem 2rem;
+    text-align: center;
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+    position: relative;
+  }
+  .seal-bg {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 220px;
+    height: 220px;
+    opacity: 0.06;
+    pointer-events: none;
+  }
+  .seal-bg svg { width: 100%; height: 100%; fill: var(--secondary); }
+  .tours-notice .inner {
+    position: relative;
+    max-width: 36em;
+    margin: 0 auto;
+  }
+  .tours-notice h2 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.8rem;
+    color: var(--primary);
+    margin: 0 0 0.5rem;
+  }
+  .tours-notice .sub {
+    font-family: var(--font-display);
+    font-variant: small-caps;
+    letter-spacing: 0.25em;
+    font-size: 0.78rem;
+    color: var(--secondary);
+    margin-bottom: 1.5rem;
+  }
+
+  /* === FOOTER ARCADE === */
+  footer {
+    position: relative;
+    background: var(--bg);
+    border-top: 2px solid var(--primary);
+    padding: 3rem 3rem 1rem;
+    margin-top: 4rem;
+    overflow: hidden;
+  }
+  .footer-arcade {
+    position: relative;
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1.25rem;
+    z-index: 2;
+  }
+  .footer-col {
+    position: relative;
+    padding: 0.5rem 0.75rem 1rem;
+    text-align: center;
+  }
+  .footer-col::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 64px;
+    margin: 0 auto 0.75rem;
+    background: no-repeat center/contain url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 100'><path d='M5 99 V50 Q5 5 40 5 Q75 5 75 50 V99' fill='none' stroke='%230a0a0a' stroke-width='2'/></svg>");
+  }
+  .footer-col h4 {
+    font-family: var(--font-display);
+    font-variant: small-caps;
+    letter-spacing: 0.15em;
+    font-size: 0.72rem;
+    color: var(--secondary);
+    margin: 0 0 0.5rem;
+  }
+  .footer-col p, .footer-col address {
+    font-size: 0.78rem;
+    line-height: 1.5;
+    margin: 0;
+    font-style: normal;
+    color: var(--text);
+  }
+  .footer-band {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px dotted var(--accent);
+    text-align: center;
+    position: relative;
+  }
+  .cross-band {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin: 0.5rem 0 1rem;
+  }
+  .cross-band svg {
+    width: 18px;
+    height: 18px;
+    fill: var(--accent);
+    opacity: 0.85;
+  }
+  .footer-seal-line {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--text);
+  }
+
+  .diaper-footer {
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 600 600'><g transform='translate(300,300)scale(0.87)rotate(45)' fill='%233a2618'><circle cx='-195.16' r='163'/><circle cx='195.16' r='163'/><circle cy='195.16' r='163'/><circle cy='-195.16' r='163'/><rect x='-232' y='-232' width='464' height='464'/><g fill='%23f4ecd8'><circle cx='-195.16' r='157'/><circle cx='195.16' r='157'/><circle cy='195.16' r='157'/><circle cy='-195.16' r='157'/><rect x='-226' y='-226' width='452' height='452'/></g><circle cx='-195.16' r='144'/><circle cx='195.16' r='144'/><circle cy='195.16' r='144'/><circle cy='-195.16' r='144'/><rect x='-213' y='-213' width='426' height='426'/><g fill='%23f4ecd8'><circle cx='-195.16' r='138'/><circle cx='195.16' r='138'/><circle cy='195.16' r='138'/><circle cy='-195.16' r='138'/><rect x='-207' y='-207' width='414' height='414'/></g></g></svg>");
+    opacity: 0.06;
+    pointer-events: none;
+    z-index: 1;
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== NAVIGATION ARCADE ========== -->
+<nav class="arcade-nav" aria-label="Navigation principale">
+  <div class="arcade-inner">
+    <ul class="nav-cluster">
+      <li><a href="page-1.html">
+        <svg class="nav-arch" viewBox="0 0 28 36"><path d="M2 35 V18 Q2 2 14 2 Q26 2 26 18 V35"/></svg>
+        Accueil
+      </a></li>
+      <li><a href="page-2.html">
+        <svg class="nav-arch" viewBox="0 0 28 36"><path d="M2 35 V18 Q2 2 14 2 Q26 2 26 18 V35"/></svg>
+        Conseil
+      </a></li>
+      <li><a href="page-3.html">
+        <svg class="nav-arch" viewBox="0 0 28 36"><path d="M2 35 V18 Q2 2 14 2 Q26 2 26 18 V35"/></svg>
+        Démarches
+      </a></li>
+    </ul>
+    <div class="nav-center" aria-hidden="true">
+      <svg viewBox="0 0 600 600"><path transform="translate(-4,-4)scale(0.15,0.15)" d="M1778.9,3200A120.9263,120.9263 0 0,1 1657.97,3320.93A120.9263,120.9263 0 0,1 1537.04,3200A221.5096,221.5096 0 0,0 1456.32,3371.02A221.5096,221.5096 0 0,0 1677.83,3592.53A221.5096,221.5096 0 0,0 1818.61,3542.03A362.779,362.779 0 0,0 2000,3856.21A362.779,362.779 0 0,0 2181.39,3542.03A221.5096,221.5096 0 0,0 2322.17,3592.53A221.5096,221.5096 0 0,0 2543.68,3371.02A221.5096,221.5096 0 0,0 2462.96,3200A120.9263,120.9263 0 0,1 2342.03,3320.93A120.9263,120.9263 0 0,1 2221.1,3200V2221.1H3200A120.9263,120.9263 0 0,1 3320.93,2342.03A120.9263,120.9263 0 0,1 3200,2462.96A221.5096,221.5096 0 0,0 3371.02,2543.68A221.5096,221.5096 0 0,0 3592.53,2322.17A221.5096,221.5096 0 0,0 3542.03,2181.39A362.779,362.779 0 0,0 3856.21,2000A362.779,362.779 0 0,0 3542.03,1818.61A221.5096,221.5096 0 0,0 3592.53,1677.83A221.5096,221.5096 0 0,0 3371.02,1456.32A221.5096,221.5096 0 0,0 3200,1537.04A120.9263,120.9263 0 0,1 3320.93,1657.97A120.9263,120.9263 0 0,1 3200,1778.9H2221.1V800A120.9263,120.9263 0 0,1 2342.03,679.073A120.9263,120.9263 0 0,1 2462.96,800A221.5096,221.5096 0 0,0 2543.68,628.984A221.5096,221.5096 0 0,0 2322.17,407.475A221.5096,221.5096 0 0,0 2181.39,457.969A362.779,362.779 0 0,0 2000,143.793A362.779,362.779 0 0,0 1818.61,457.969A221.5096,221.5096 0 0,0 1677.83,407.475A221.5096,221.5096 0 0,0 1456.32,628.984A221.5096,221.5096 0 0,0 1537.04,800A120.9263,120.9263 0 0,1 1657.97,679.073A120.9263,120.9263 0 0,1 1778.9,800V1778.9H800A120.9263,120.9263 0 0,1 679.073,1657.97A120.9263,120.9263 0 0,1 800,1537.04A221.5096,221.5096 0 0,0 628.984,1456.32A221.5096,221.5096 0 0,0 407.475,1677.83A221.5096,221.5096 0 0,0 457.969,1818.61A362.779,362.779 0 0,0 143.793,2000A362.779,362.779 0 0,0 457.969,2181.39A221.5096,221.5096 0 0,0 407.475,2322.17A221.5096,221.5096 0 0,0 628.984,2543.68A221.5096,221.5096 0 0,0 800,2462.96A120.9263,120.9263 0 0,1 679.073,2342.03A120.9263,120.9263 0 0,1 800,2221.1H1778.9Z"/></svg>
+    </div>
+    <ul class="nav-cluster">
+      <li><a href="page-4.html">
+        <svg class="nav-arch" viewBox="0 0 28 36"><path d="M2 35 V18 Q2 2 14 2 Q26 2 26 18 V35"/></svg>
+        Patrimoine
+      </a></li>
+      <li><a href="page-5.html" aria-current="page">
+        <svg class="nav-arch" viewBox="0 0 28 36"><path d="M2 35 V18 Q2 2 14 2 Q26 2 26 18 V35"/></svg>
+        Visiter
+      </a></li>
+      <li><a href="page-6.html">
+        <svg class="nav-arch" viewBox="0 0 28 36"><path d="M2 35 V18 Q2 2 14 2 Q26 2 26 18 V35"/></svg>
+        Contact
+      </a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ========== HERO ========== -->
+<section class="hero">
+  <div class="diaper-bg" aria-hidden="true"></div>
+  <div class="hero-arch-frame" aria-hidden="true">
+    <svg viewBox="0 0 500 800" preserveAspectRatio="xMidYMid meet">
+      <g transform="translate(-140,-240)">
+        <g style="stroke:#3a2618;stroke-width:2.2;fill:none;stroke-linecap:round;">
+          <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+          <path d="m 250,430.58 24.75248,58.41585"/>
+          <path d="m 347.0297,342.46119 41.58416,23.76238 0.9901,35.64356"/>
+          <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+        </g>
+        <g transform="matrix(-1,0,0,1,777.88071,-0.297)" style="stroke:#3a2618;stroke-width:2.2;fill:none;stroke-linecap:round;">
+          <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+          <path d="m 250,430.58 24.75248,58.41585"/>
+          <path d="m 347.0297,342.46119 41.58416,23.76238 0.9901,35.64356"/>
+          <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+        </g>
+      </g>
+    </svg>
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Itinéraire & Pèlerinage</div>
+    <h1>Visiter Saint-Loup-sur-Aisne</h1>
+    <p class="hero-lede">De la gare au porche de l'église collégiale, par la Place du Marché et la rue du Chapitre — un parcours d'une heure et demie à travers neuf siècles de pierre, de tilleuls et de marchés.</p>
+  </div>
+</section>
+
+<!-- ========== MAIN ========== -->
+<main>
+  <div class="columns">
+
+    <!-- ========== LEFT COLUMN ========== -->
+    <aside>
+      <div class="col-label">Accès & Transports</div>
+
+      <div class="notice-card">
+        <h3>Par autocar</h3>
+        <div class="vine"><svg viewBox="0 0 200 200"><path d="m43.583 11.011c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937z"/></svg></div>
+        <p class="dropcap">La ligne <strong>56</strong> du réseau interurbain de l'Aisne dessert la commune au départ de Soissons (gare routière, quai 7), avec un arrêt en plein cœur du village, devant la halle aux grains.</p>
+        <dl class="facts">
+          <dt>Fréquence</dt><dd>Horaire, du lundi au vendredi, de 6 h 45 à 19 h 15</dd>
+          <dt>Samedi</dt><dd>Cinq services — premier départ 8 h 10</dd>
+          <dt>Durée</dt><dd>Environ 38 minutes depuis Soissons</dd>
+          <dt>Tarif</dt><dd>2,40 € — billet unique zone B</dd>
+        </dl>
+        <a class="cta" href="page-6.html">Horaires complets en mairie →</a>
+      </div>
+
+      <div class="notice-card">
+        <h3>Stationnement</h3>
+        <div class="vine"><svg viewBox="0 0 200 200"><path d="m43.583 11.011c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312z"/></svg></div>
+        <p class="dropcap">Au <strong>Champ-de-Foire</strong>, à deux minutes à pied de la Place du Marché, un parking communal libre et gratuit accueille jusqu'à 80 véhicules sous l'ombre des marronniers centenaires.</p>
+        <dl class="facts">
+          <dt>Capacité</dt><dd>80 places — 4 emplacements PMR</dd>
+          <dt>Accès</dt><dd>Rue de la Tannerie, sortie nord du village</dd>
+          <dt>Restrictions</dt><dd>Fermé le second mardi du mois (foire bovine)</dd>
+        </dl>
+        <a class="cta" href="page-3.html">Plan de la commune →</a>
+      </div>
+    </aside>
+
+    <!-- ========== CENTER : ITINERARY ========== -->
+    <article>
+      <header class="itinerary-head">
+        <div class="small-caps">Parcours du Visiteur</div>
+        <h2>De la gare à la collégiale</h2>
+        <p>Cinq stations &mdash; environ 1 km, 1 h 30 avec les arrêts</p>
+      </header>
+
+      <ol style="list-style:none;padding:0;margin:0;">
+
+        <li class="stop">
+          <div class="stop-num">I<small>5 min</small></div>
+          <div>
+            <h3>Place de la Gare et Pont de l'Aisne</h3>
+            <div class="stop-meta">Départ &middot; Cote 64 m</div>
+            <p>Le voyageur sort de la halte ferroviaire (PLM, 1873) et descend la rue Carnot vers le pont de pierre à trois arches qui franchit l'Aisne. Sur la rive droite, une croix de mission de 1854 marque le seuil de l'ancienne paroisse.</p>
+            <p><em>Repère :</em> moulin Bertaut, en contrebas — meule visible depuis le parapet.</p>
+          </div>
+        </li>
+
+        <li class="stop">
+          <div class="stop-num">II<small>12 min</small></div>
+          <div>
+            <h3>Rue Basse et lavoir Saint-Médard</h3>
+            <div class="stop-meta">Montée douce &middot; pavés du XVIIIᵉ</div>
+            <p>On remonte la rue Basse, bordée de maisons à pignon de brique et silex, jusqu'au lavoir couvert restauré en 1987 par les Compagnons du Devoir. La fontaine attenante coule depuis 1612 selon l'inscription gravée au tympan.</p>
+            <p>Une stèle en grès rappelle les six lavandières emportées par la crue de mars 1910.</p>
+          </div>
+        </li>
+
+        <li class="stop">
+          <div class="stop-num">III<small>20 min</small></div>
+          <div>
+            <h3>Place du Marché et Halle aux Grains</h3>
+            <div class="stop-meta">Cœur civique &middot; marché le mercredi</div>
+            <p>Cœur battant de la commune, la place s'organise autour de la halle de charpente en chêne (1532, restaurée 1894). Sept piliers en tronc équarri soutiennent la toiture de tuile plate. Sous la halle, le marché hebdomadaire se tient chaque mercredi de 8 h à 13 h.</p>
+            <p>L'hôtel de ville (1846) lui fait face — façade en pierre de Soissons, fronton portant la devise « Concordia Civium ».</p>
+          </div>
+        </li>
+
+        <li class="stop">
+          <div class="stop-num">IV<small>10 min</small></div>
+          <div>
+            <h3>Rue du Chapitre et Maison du Doyen</h3>
+            <div class="stop-meta">Vestiges canoniaux &middot; XIIIᵉ–XVᵉ s.</div>
+            <p>La rue étroite mène au quartier des chanoines. Au n° 12, la Maison du Doyen, à colombages et encorbellement, abrite aujourd'hui l'office de tourisme intercommunal. Son escalier à vis en chêne est classé au titre des Monuments historiques (arrêté du 14 mars 1928).</p>
+            <p>Aux numéros 18 et 20, deux portails à accolade encadrent l'ancienne cour capitulaire.</p>
+          </div>
+        </li>
+
+        <li class="stop">
+          <div class="stop-num">V<small>arrivée</small></div>
+          <div>
+            <h3>Collégiale Saint-Loup</h3>
+            <div class="stop-meta">Terme du parcours &middot; XIIᵉ–XVᵉ s.</div>
+            <p>Le porche occidental ouvre sur la nef à cinq travées, voûtée d'ogives sur croisée. Le chœur abrite le gisant de Renaud de Brienne (vers 1287) et un retable polychrome de 1518. Vitraux du maître Pierre Hémart, atelier rémois, restaurés en 2009.</p>
+            <p>Ouverture libre 9 h&ndash;18 h ; visite du trésor sur demande à la sacristie.</p>
+          </div>
+        </li>
+
+      </ol>
+
+      <div class="divider" aria-hidden="true">
+        <svg viewBox="0 0 39 40"><g transform="translate(-110.42,-124.37)"><path d="M114.66 164.09c-0.03-0.03-0.69-0.08-1.46-0.11-1.81-0.06-2.37-0.54-2.63-2.21-0.11-0.73-0.18-6.09-0.14-11.91 0.03-5.82 0.07-12.76 0.09-15.41 0.02-3.93 0.10-4.83 0.39-4.83 0.20 0 0.41 0.14 0.47 0.31 0.17 0.51 0.73-0.03 0.73-0.69 0-0.71-0.65-1.39-0.92-0.96z" fill="currentColor" stroke="none"/></g></svg>
+      </div>
+    </article>
+
+    <!-- ========== RIGHT COLUMN ========== -->
+    <aside>
+      <div class="col-label">Office de Tourisme</div>
+
+      <div class="notice-card">
+        <h3>Maison du Doyen</h3>
+        <div class="vine"><svg viewBox="0 0 200 200"><path d="m43.583 11.011c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344z"/></svg></div>
+        <p class="dropcap">Office de tourisme intercommunal du Soissonnais-en-Aisne, antenne de Saint-Loup, installé dans la maison canoniale du XVᵉ siècle, au cœur du parcours.</p>
+        <dl class="facts">
+          <dt>Adresse</dt><dd>12, rue du Chapitre<br>02880 Saint-Loup-sur-Aisne</dd>
+          <dt>Téléphone</dt><dd>03 23 74 12 56</dd>
+          <dt>Saison</dt><dd>De Pâques à la Toussaint</dd>
+          <dt>Horaires</dt><dd>Mardi&ndash;samedi, 10 h&ndash;12 h 30 et 14 h&ndash;18 h<br>Dimanche, 14 h&ndash;17 h</dd>
+          <dt>Hors-saison</dt><dd>Renseignements en mairie</dd>
+        </dl>
+        <a class="cta" href="page-6.html">Permanences municipales →</a>
+      </div>
+
+      <div class="notice-card">
+        <h3>Conseils pratiques</h3>
+        <div class="vine"><svg viewBox="0 0 200 200"><path d="m43.583 11.011c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125z"/></svg></div>
+        <p class="dropcap">Itinéraire balisé en cabochons de laiton scellés au pavé. Suivre le motif de la fleur de lys gravée à chaque carrefour.</p>
+        <dl class="facts">
+          <dt>Saison conseillée</dt><dd>Avril à octobre — éclairage naturel optimal sur les vitraux à 11 h</dd>
+          <dt>Accessibilité</dt><dd>Parcours adapté en fauteuil hors la rue Basse (pavés)</dd>
+          <dt>Halte</dt><dd>Salon de thé « Au Tilleul » sous la halle</dd>
+        </dl>
+        <a class="cta" href="page-4.html">Histoire détaillée →</a>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- ========== GUIDED TOURS ========== -->
+  <section class="tours-notice">
+    <div class="seal-bg" aria-hidden="true">
+      <svg viewBox="0 0 600 600"><path transform="translate(-4,-4)scale(0.15,0.15)" d="M1778.9,3200A120.9263,120.9263 0 0,1 1657.97,3320.93A120.9263,120.9263 0 0,1 1537.04,3200A221.5096,221.5096 0 0,0 1456.32,3371.02A221.5096,221.5096 0 0,0 1677.83,3592.53A221.5096,221.5096 0 0,0 1818.61,3542.03A362.779,362.779 0 0,0 2000,3856.21A362.779,362.779 0 0,0 2181.39,3542.03A221.5096,221.5096 0 0,0 2322.17,3592.53A221.5096,221.5096 0 0,0 2543.68,3371.02A221.5096,221.5096 0 0,0 2462.96,3200A120.9263,120.9263 0 0,1 2342.03,3320.93A120.9263,120.9263 0 0,1 2221.1,3200V2221.1H3200A120.9263,120.9263 0 0,1 3320.93,2342.03A120.9263,120.9263 0 0,1 3200,2462.96A221.5096,221.5096 0 0,0 3371.02,2543.68A221.5096,221.5096 0 0,0 3592.53,2322.17A221.5096,221.5096 0 0,0 3542.03,2181.39A362.779,362.779 0 0,0 3856.21,2000A362.779,362.779 0 0,0 3542.03,1818.61A221.5096,221.5096 0 0,0 3592.53,1677.83A221.5096,221.5096 0 0,0 3371.02,1456.32A221.5096,221.5096 0 0,0 3200,1537.04A120.9263,120.9263 0 0,1 3320.93,1657.97A120.9263,120.9263 0 0,1 3200,1778.9H2221.1V800A120.9263,120.9263 0 0,1 2342.03,679.073A120.9263,120.9263 0 0,1 2462.96,800A221.5096,221.5096 0 0,0 2543.68,628.984A221.5096,221.5096 0 0,0 2322.17,407.475A221.5096,221.5096 0 0,0 2181.39,457.969A362.779,362.779 0 0,0 2000,143.793A362.779,362.779 0 0,0 1818.61,457.969A221.5096,221.5096 0 0,0 1677.83,407.475A221.5096,221.5096 0 0,0 1456.32,628.984A221.5096,221.5096 0 0,0 1537.04,800A120.9263,120.9263 0 0,1 1657.97,679.073A120.9263,120.9263 0 0,1 1778.9,800V1778.9H800A120.9263,120.9263 0 0,1 679.073,1657.97A120.9263,120.9263 0 0,1 800,1537.04A221.5096,221.5096 0 0,0 628.984,1456.32A221.5096,221.5096 0 0,0 407.475,1677.83A221.5096,221.5096 0 0,0 457.969,1818.61A362.779,362.779 0 0,0 143.793,2000A362.779,362.779 0 0,0 457.969,2181.39A221.5096,221.5096 0 0,0 407.475,2322.17A221.5096,221.5096 0 0,0 628.984,2543.68A221.5096,221.5096 0 0,0 800,2462.96A120.9263,120.9263 0 0,1 679.073,2342.03A120.9263,120.9263 0 0,1 800,2221.1H1778.9Z"/></svg>
+    </div>
+    <div class="inner">
+      <div class="sub">Visites Commentées</div>
+      <h2>Société des Amis du Vieux Saint-Loup</h2>
+      <p>Visites guidées du parcours intégral, agrémentées d'archives photographiques et de la lecture commentée des cartulaires de la collégiale, conduites par les bénévoles de la Société.</p>
+      <p style="margin-top:1.25rem;font-family:var(--font-display);font-style:italic;font-size:1.05rem;color:var(--text-emphasis);">
+        Chaque <strong>second samedi du mois</strong>, à <strong>14 h 30</strong>, départ devant la halle aux grains.
+      </p>
+      <p style="font-size:0.9rem;">Durée 2 h &middot; Participation libre au profit de la restauration des vitraux &middot; Inscription auprès de l'office de tourisme ou directement sur place.</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div class="diaper-footer" aria-hidden="true"></div>
+  <div class="footer-arcade">
+
+    <div class="footer-col">
+      <h4>Mairie</h4>
+      <address>
+        Place du Marché<br>
+        02880 Saint-Loup-<br>sur-Aisne<br>
+        03 23 74 10 02
+      </address>
+    </div>
+
+    <div class="footer-col">
+      <h4>Ouverture</h4>
+      <p>Lun&ndash;Jeu<br>9 h&ndash;12 h, 14 h&ndash;17 h<br>Vendredi 9 h&ndash;12 h<br>Samedi 9 h&ndash;11 h</p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Conseil</h4>
+      <p>M. le Maire<br>R. Vasseur-Chamblay<br>1ᵉʳ adjoint<br>M<sup>me</sup> H. Pinchon</p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Paroisse</h4>
+      <p>Doyenné de l'Aisne<br>abbé F. Largillière<br>presbytère, 4 rue<br>du Chapitre</p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Accessibilité</h4>
+      <p>Site conforme<br>RGAA 4.1 niv. AA<br>partiellement<br>déclaration en ligne</p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Archives</h4>
+      <p>Cartulaires &amp;<br>cadastres déposés<br>aux Archives<br>dép. de l'Aisne</p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Révision</h4>
+      <p>Page établie<br>14 février 2024<br>Service<br>communication</p>
+    </div>
+
+  </div>
+
+  <div class="footer-band">
+    <div class="cross-band" aria-hidden="true">
+      <svg viewBox="0 0 600 600"><path transform="translate(-4,-4)scale(0.15,0.15)" d="M1778.9,3200A120.9263,120.9263 0 0,1 1657.97,3320.93A120.9263,120.9263 0 0,1 1537.04,3200A221.5096,221.5096 0 0,0 1456.32,3371.02A221.5096,221.5096 0 0,0 1677.83,3592.53A221.5096,221.5096 0 0,0 1818.61,3542.03A362.779,362.779 0 0,0 2000,3856.21A362.779,362.779 0 0,0 2181.39,3542.03A221.5096,221.5096 0 0,0 2322.17,3592.53A221.5096,221.5096 0 0,0 2543.68,3371.02A221.5096,221.5096 0 0,0 2462.96,3200A120.9263,120.9263 0 0,1 2342.03,3320.93A120.9263,120.9263 0 0,1 2221.1,3200V2221.1H3200A120.9263,120.9263 0 0,1 3320.93,2342.03A120.9263,120.9263 0 0,1 3200,2462.96A221.5096,221.5096 0 0,0 3371.02,2543.68A221.5096,221.5096 0 0,0 3592.53,2322.17A221.5096,221.5096 0 0,0 3542.03,2181.39A362.779,362.779 0 0,0 3856.21,2000A362.779,362.779 0 0,0 3542.03,1818.61A221.5096,221.5096 0 0,0 3592.53,1677.83A221.5096,221.5096 0 0,0 3371.02,1456.32A221.5096,221.5096 0 0,0 3200,1537.04A120.9263,120.9263 0 0,1 3320.93,1657.97A120.9263,120.9263 0 0,1 3200,1778.9H2221.1V800A120.9263,120.9263 0 0,1 2342.03,679.073A120.9263,120.9263 0 0,1 2462.96,800A221.5096,221.5096 0 0,0 2543.68,628.984A221.5096,221.5096 0 0,0 2322.17,407.475A221.5096,221.5096 0 0,0 2181.39,457.969A362.779,362.779 0 0,0 2000,143.793A362.779,362.779 0 0,0 1818.61,457.969A221.5096,221.5096 0 0,0 1677.83,407.475A221.5096,221.5096 0 0,0 1456.32,628.984A221.5096,221.5096 0 0,0 1537.04,800A120.9263,120.9263 0 0,1 1657.97,679.073A120.9263,120.9263 0 0,1 1778.9,800V1778.9H800A120.9263,120.9263 0 0,1 679.073,1657.97A120.9263,120.9263 0 0,1 800,1537.04A221.5096,221.5096 0 0,0 628.984,1456.32A221.5096,221.5096 0 0,0 407.475,1677.83A221.5096,221.5096 0 0,0 457.969,1818.61A362.779,362.779 0 0,0 143.793,2000A362.779,362.779 0 0,0 457.969,2181.39A221.5096,221.5096 0 0,0 407.475,2322.17A221.5096,221.5096 0 0,0 628.984,2543.68A221.5096,221.5096 0 0,0 800,2462.96A120.9263,120.9263 0 0,1 679.073,2342.03A120.9263,120.9263 0 0,1 800,2221.1H1778.9Z"/></svg>
+      <svg viewBox="0 0 600 600"><path transform="translate(-4,-4)scale(0.15,0.15)" d="M1778.9,3200A120.9263,120.9263 0 0,1 1657.97,3320.93A120.9263,120.9263 0 0,1 1537.04,3200A221.5096,221.5096 0 0,0 1456.32,3371.02A221.5096,221.5096 0 0,0 1677.83,3592.53A221.5096,221.5096 0 0,0 1818.61,3542.03A362.779,362.779 0 0,0 2000,3856.21A362.779,362.779 0 0,0 2181.39,3542.03A221.5096,221.5096 0 0,0 2322.17,3592.53A221.5096,221.5096 0 0,0 2543.68,3371.02A221.5096,221.5096 0 0,0 2462.96,3200A120.9263,120.9263 0 0,1 2342.03,3320.93A120.9263,120.9263 0 0,1 2221.1,3200V2221.1H3200A120.9263,120.9263 0 0,1 3320.93,2342.03A120.9263,120.9263 0 0,1 3200,2462.96A221.5096,221.5096 0 0,0 3371.02,2543.68A221.5096,221.5096 0 0,0 3592.53,2322.17A221.5096,221.5096 0 0,0 3542.03,2181.39A362.779,362.779 0 0,0 3856.21,2000A362.779,362.779 0 0,0 3542.03,1818.61A221.5096,221.5096 0 0,0 3592.53,1677.83A221.5096,221.5096 0 0,0 3371.02,1456.32A221.5096,221.5096 0 0,0 3200,1537.04A120.9263,120.9263 0 0,1 3320.93,1657.97A120.9263,120.9263 0 0,1 3200,1778.9H2221.1V800A120.9263,120.9263 0 0,1 2342.03,679.073A120.9263,120.9263 0 0,1 2462.96,800A221.5096,221.5096 0 0,0 2543.68,628.984A221.5096,221.5096 0 0,0 2322.17,407.475A221.5096,221.5096 0 0,0 2181.39,457.969A362.779,362.779 0 0,0 2000,143.793A362.779,362.779 0 0,0 1818.61,457.969A221.5096,221.5096 0 0,0 1677.83,407.475A221.5096,221.5096 0 0,0 1456.32,628.984A221.5096,221.5096 0 0,0 1537.04,800A120.9263,120.9263 0 0,1 1657.97,679.073A120.9263,120.9263 0 0,1 1778.9,800V1778.9H800A120.9263,120.9263 0 0,1 679.073,1657.97A120.9263,120.9263 0 0,1 800,1537.04A221.5096,221.5096 0 0,0 628.984,1456.32A221.5096,221.5096 0 0,0 407.475,1677.83A221.5096,221.5096 0 0,0 457.969,1818.61A362.779,362.779 0 0,0 143.793,2000A362.779,362.779 0 0,0 457.969,2181.39A221.5096,221.5096 0 0,0 407.475,2322.17A221.5096,221.5096 0 0,0 628.984,2543.68A221.5096,221.5096 0 0,0 800,2462.96A120.9263,120.9263 0 0,1 679.073,2342.03A120.9263,120.9263 0 0,1 800,2221.1H1778.9Z"/></svg>
+      <svg viewBox="0 0 600 600"><path transform="translate(-4,-4)scale(0.15,0.15)" d="M1778.9,3200A120.9263,120.9263 0 0,1 1657.97,3320.93A120.9263,120.9263 0 0,1 1537.04,3200A221.5096,221.5096 0 0,0 1456.32,3371.02A221.5096,221.5096 0 0,0 1677.83,3592.53A221.5096,221.5096 0 0,0 1818.61,3542.03A362.779,362.779 0 0,0 2000,3856.21A362.779,362.779 0 0,0 2181.39,3542.03A221.5096,221.5096 0 0,0 2322.17,3592.53A221.5096,221.5096 0 0,0 2543.68,3371.02A221.5096,221.5096 0 0,0 2462.96,3200A120.9263,120.9263 0 0,1 2342.03,3320.93A120.9263,120.9263 0 0,1 2221.1,3200V2221.1H3200A120.9263,120.9263 0 0,1 3320.93,2342.03A120.9263,120.9263 0 0,1 3200,2462.96A221.5096,221.5096 0 0,0 3371.02,2543.68A221.5096,221.5096 0 0,0 3592.53,2322.17A221.5096,221.5096 0 0,0 3542.03,2181.39A362.779,362.779 0 0,0 3856.21,2000A362.779,362.779 0 0,0 3542.03,1818.61A221.5096,221.5096 0 0,0 3592.53,1677.83A221.5096,221.5096 0 0,0 3371.02,1456.32A221.5096,221.5096 0 0,0 3200,1537.04A120.9263,120.9263 0 0,1 3320.93,1657.97A120.9263,120.9263 0 0,1 3200,1778.9H2221.1V800A120.9263,120.9263 0 0,1 2342.03,679.073A120.9263,120.9263 0 0,1 2462.96,800A221.5096,221.5096 0 0,0 2543.68,628.984A221.5096,221.5096 0 0,0 2322.17,407.475A221.5096,221.5096 0 0,0 2181.39,457.969A362.779,362.779 0 0,0 2000,143.793A362.779,362.779 0 0,0 1818.61,457.969A221.5096,221.5096 0 0,0 1677.83,407.475A221.5096,221.5096 0 0,0 1456.32,628.984A221.5096,221.5096 0 0,0 1537.04,800A120.9263,120.9263 0 0,1 1657.97,679.073A120.9263,120.9263 0 0,1 1778.9,800V1778.9H800A120.9263,120.9263 0 0,1 679.073,1657.97A120.9263,120.9263 0 0,1 800,1537.04A221.5096,221.5096 0 0,0 628.984,1456.32A221.5096,221.5096 0 0,0 407.475,1677.83A221.5096,221.5096 0 0,0 457.969,1818.61A362.779,362.779 0 0,0 143.793,2000A362.779,362.779 0 0,0 457.969,2181.39A221.5096,221.5096 0 0,0 407.475,2322.17A221.5096,221.5096 0 0,0 628.984,2543.68A221.5096,221.5096 0 0,0 800,2462.96A120.9263,120.9263 0 0,1 679.073,2342.03A120.9263,120.9263 0 0,1 800,2221.1H1778.9Z"/></svg>
+      <svg viewBox="0 0 600 600"><path transform="translate(-4,-4)scale(0.15,0.15)" d="M1778.9,3200A120.9263,120.9263 0 0,1 1657.97,3320.93A120.9263,120.9263 0 0,1 1537.04,3200A221.5096,221.5096 0 0,0 1456.32,3371.02A221.5096,221.5096 0 0,0 1677.83,3592.53A221.5096,221.5096 0 0,0 1818.61,3542.03A362.779,362.779 0 0,0 2000,3856.21A362.779,362.779 0 0,0 2181.39,3542.03A221.5096,221.5096 0 0,0 2322.17,3592.53A221.5096,221.5096 0 0,0 2543.68,3371.02A221.5096,221.5096 0 0,0 2462.96,3200A120.9263,120.9263 0 0,1 2342.03,3320.93A120.9263,120.9263 0 0,1 2221.1,3200V2221.1H3200A120.9263,120.9263 0 0,1 3320.93,2342.03A120.9263,120.9263 0 0,1 3200,2462.96A221.5096,221.5096 0 0,0 3371.02,2543.68A221.5096,221.5096 0 0,0 3592.53,2322.17A221.5096,221.5096 0 0,0 3542.03,2181.39A362.779,362.779 0 0,0 3856.21,2000A362.779,362.779 0 0,0 3542.03,1818.61A221.5096,221.5096 0 0,0 3592.53,1677.83A221.5096,221.5096 0 0,0 3371.02,1456.32A221.5096,221.5096 0 0,0 3200,1537.04A120.9263,120.9263 0 0,1 3320.93,1657.97A120.9263,120.9263 0 0,1 3200,1778.9H2221.1V800A120.9263,120.9263 0 0,1 2342.03,679.073A120.9263,120.9263 0 0,1 2462.96,800A221.5096,221.5096 0 0,0 2543.68,628.984A221.5096,221.5096 0 0,0 2322.17,407.475A221.5096,221.5096 0 0,0 2181.39,457.969A362.779,362.779 0 0,0 2000,143.793A362.779,362.779 0 0,0 1818.61,457.969A221.5096,221.5096 0 0,0 1677.83,407.475A221.5096,221.5096 0 0,0 1456.32,628.984A221.5096,221.5096 0 0,0 1537.04,800A120.9263,120.9263 0 0,1 1657.97,679.073A120.9263,120.9263 0 0,1 1778.9,800V1778.9H800A120.9263,120.9263 0 0,1 679.073,1657.97A120.9263,120.9263 0 0,1 800,1537.04A221.5096,221.5096 0 0,0 628.984,1456.32A221.5096,221.5096 0 0,0 407.475,1677.83A221.5096,221.5096 0 0,0 457.969,1818.61A362.779,362.779 0 0,0 143.793,2000A362.779,362.779 0 0,0 457.969,2181.39A221.5096,221.5096 0 0,0 407.475,2322.17A221.5096,221.5096 0 0,0 628.984,2543.68A221.5096,221.5096 0 0,0 800,2462.96A120.9263,120.9263 0 0,1 679.073,2342.03A120.9263,120.9263 0 0,1 800,2221.1H1778.9Z"/></svg>
+      <svg viewBox="0 0 600 600"><path transform="translate(-4,-4)scale(0.15,0.15)" d="M1778.9,3200A120.9263,120.9263 0 0,1 1657.97,3320.93A120.9263,120.9263 0 0,1 1537.04,3200A221.5096,221.5096 0 0,0 1456.32,3371.02A221.5096,221.5096 0 0,0 1677.83,3592.53A221.5096,221.5096 0 0,0 1818.61,3542.03A362.779,362.779 0 0,0 2000,3856.21A362.779,362.779 0 0,0 2181.39,3542.03A221.5096,221.5096 0 0,0 2322.17,3592.53A221.5096,221.5096 0 0,0 2543.68,3371.02A221.5096,221.5096 0 0,0 2462.96,3200A120.9263,120.9263 0 0,1 2342.03,3320.93A120.9263,120.9263 0 0,1 2221.1,3200V2221.1H3200A120.9263,120.9263 0 0,1 3320.93,2342.03A120.9263,120.9263 0 0,1 3200,2462.96A221.5096,221.5096 0 0,0 3371.02,2543.68A221.5096,221.5096 0 0,0 3592.53,2322.17A221.5096,221.5096 0 0,0 3542.03,2181.39A362.779,362.779 0 0,0 3856.21,2000A362.779,362.779 0 0,0 3542.03,1818.61A221.5096,221.5096 0 0,0 3592.53,1677.83A221.5096,221.5096 0 0,0 3371.02,1456.32A221.5096,221.5096 0 0,0 3200,1537.04A120.9263,120.9263 0 0,1 3320.93,1657.97A120.9263,120.9263 0 0,1 3200,1778.9H2221.1V800A120.9263,120.9263 0 0,1 2342.03,679.073A120.9263,120.9263 0 0,1 2462.96,800A221.5096,221.5096 0 0,0 2543.68,628.984A221.5096,221.5096 0 0,0 2322.17,407.475A221.5096,221.5096 0 0,0 2181.39,457.969A362.779,362.779 0 0,0 2000,143.793A362.779,362.779 0 0,0 1818.61,457.969A221.5096,221.5096 0 0,0 1677.83,407.475A221.5096,221.5096 0 0,0 1456.32,628.984A221.5096,221.5096 0 0,0 1537.04,800A120.9263,120.9263 0 0,1 1657.97,679.073A120.9263,120.9263 0 0,1 1778.9,800V1778.9H800A120.9263,120.9263 0 0,1 679.073,1657.97A120.9263,120.9263 0 0,1 800,1537.04A221.5096,221.5096 0 0,0 628.984,1456.32A221.5096,221.5096 0 0,0 407.475,1677.83A221.5096,221.5096 0 0,0 457.969,1818.61A362.779,362.779 0 0,0 143.793,2000A362.779,362.779 0 0,0 457.969,2181.39A221.5096,221.5096 0 0,0 407.475,2322.17A221.5096,221.5096 0 0,0 628.984,2543.68A221.5096,221.5096 0 0,0 800,2462.96A120.9263,120.9263 0 0,1 679.073,2342.03A120.9263,120.9263 0 0,1 800,2221.1H1778.9Z"/></svg>
+    </div>
+    <p class="footer-seal-line">Sceau de la Commune, MCMXLIV — révisé 2024</p>
+  </div>
+</footer>
+
+</body>
+</html>

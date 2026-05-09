@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Commissions & Portfolio — Atelier Naqsh-e Jahan</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  *,*::before,*::after{box-sizing:border-box}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--font-body),Georgia,serif;
+    font-size:17px;
+    line-height:1.55;
+  }
+  a{color:inherit;text-decoration:none}
+
+  /* ---------- TOP BAR ---------- */
+  .top-rule{
+    height:3px;background:var(--primary);
+    box-shadow:0 4px 0 -1.5px var(--accent);
+  }
+  .masthead{
+    text-align:center;
+    padding:30px 20px 10px;
+  }
+  .masthead .arabic-mark{
+    font-family:var(--font-display),serif;
+    font-size:13px;
+    letter-spacing:.5em;
+    color:var(--text-emphasis);
+    text-transform:uppercase;
+  }
+  .masthead h1{
+    font-family:var(--font-display),serif;
+    font-weight:700;
+    font-size:34px;
+    letter-spacing:.18em;
+    color:var(--primary);
+    margin:8px 0 4px;
+    text-transform:uppercase;
+  }
+  .masthead .tagline{
+    font-style:italic;
+    color:var(--text-emphasis);
+    font-size:16px;
+    letter-spacing:.05em;
+  }
+
+  /* ---------- NAV ---------- */
+  nav.primary{
+    border-top:1px solid var(--primary);
+    border-bottom:1px solid var(--primary);
+    background:var(--bg);
+    margin-top:18px;
+    padding:14px 0;
+  }
+  nav.primary ul{
+    list-style:none;margin:0;padding:0;
+    display:flex;justify-content:center;align-items:center;
+    gap:0;
+    font-family:var(--font-display),serif;
+    font-size:12px;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    color:var(--primary);
+  }
+  nav.primary li{display:flex;align-items:center}
+  nav.primary a{padding:4px 22px;display:inline-block;position:relative}
+  nav.primary a[aria-current="page"]{
+    color:var(--text-emphasis);
+  }
+  nav.primary a[aria-current="page"]::after{
+    content:"";
+    position:absolute;left:18px;right:18px;bottom:-8px;
+    height:2px;background:var(--accent);
+    box-shadow:0 3px 0 -1px var(--accent);
+  }
+  .palmette-sep{
+    color:var(--accent);
+    font-size:14px;
+    transform:translateY(-1px);
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    background:var(--primary);
+    color:var(--bg);
+    padding:60px 40px 70px;
+    overflow:hidden;
+    text-align:center;
+    border-bottom:6px double var(--accent);
+  }
+  .hero::before,.hero::after{
+    content:"";
+    position:absolute;top:0;bottom:0;width:160px;
+    background:
+      repeating-linear-gradient(45deg,
+        rgba(201,162,58,.15) 0 8px,
+        transparent 8px 16px),
+      var(--primary);
+    border-right:1px solid var(--accent);
+    opacity:.85;
+  }
+  .hero::before{left:0;border-right:1px solid var(--accent);border-left:none}
+  .hero::after{right:0;border-left:1px solid var(--accent);border-right:none}
+  .hero-inner{position:relative;z-index:2;max-width:900px;margin:0 auto}
+  .hero .eyebrow{
+    font-family:var(--font-display),serif;
+    font-size:11px;letter-spacing:.4em;
+    color:var(--accent);text-transform:uppercase;
+    margin-bottom:18px;
+  }
+  .hero h2{
+    font-family:var(--font-display),serif;
+    font-weight:700;
+    font-size:46px;
+    letter-spacing:.08em;
+    margin:0 0 20px;
+    color:var(--bg);
+    text-transform:uppercase;
+  }
+  .hero h2 .em{color:var(--accent)}
+  .hero p.lede{
+    font-size:19px;
+    font-style:italic;
+    line-height:1.65;
+    max-width:680px;
+    margin:0 auto;
+    color:#f5e9d2;
+  }
+  .hero-arch{
+    position:absolute;
+    left:50%;transform:translateX(-50%);
+    bottom:-2px;
+    width:520px;height:auto;
+    opacity:.18;
+    pointer-events:none;
+  }
+  .hero-arch svg{width:100%;height:auto;display:block}
+  .hero-arch path{stroke:var(--accent) !important;stroke-width:5 !important}
+
+  /* ---------- DIVIDER ---------- */
+  .filet{
+    display:flex;align-items:center;justify-content:center;
+    padding:34px 0 28px;
+    color:var(--accent);
+  }
+  .filet svg{width:480px;height:22px;display:block}
+  .filet svg path{fill:var(--accent)}
+
+  /* ---------- INTRO ---------- */
+  .intro{
+    max-width:880px;margin:0 auto;
+    padding:0 40px;
+    text-align:center;
+  }
+  .intro h3{
+    font-family:var(--font-display),serif;
+    color:var(--primary);
+    font-size:22px;letter-spacing:.18em;
+    text-transform:uppercase;
+    margin:0 0 14px;
+  }
+  .intro p{
+    font-size:17px;line-height:1.7;
+    color:var(--text);
+    text-align:justify;
+    column-count:2;column-gap:38px;
+    margin-top:10px;
+  }
+  .intro p::first-letter{
+    font-family:var(--font-display),serif;
+    color:var(--text-emphasis);
+    font-size:38px;float:left;
+    line-height:.9;padding:4px 8px 0 0;
+  }
+
+  /* ---------- PORTFOLIO GRID ---------- */
+  .portfolio{
+    max-width:1280px;margin:0 auto;
+    padding:30px 40px 20px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:38px 32px;
+  }
+  .card{
+    position:relative;
+    background:var(--bg);
+    padding:54px 26px 28px;
+    text-align:center;
+  }
+  .card-frame{
+    position:absolute;inset:0;
+    pointer-events:none;
+  }
+  /* ogee arch frame using SVG */
+  .arch-svg{
+    position:absolute;inset:0;width:100%;height:100%;
+  }
+  .arch-svg path,.arch-svg line,.arch-svg polyline{
+    fill:none;
+  }
+  .arch-outer{stroke:var(--primary);stroke-width:3}
+  .arch-inner{stroke:var(--accent);stroke-width:1}
+
+  .card .medallion{
+    position:absolute;top:14px;left:50%;
+    transform:translateX(-50%);
+    width:32px;height:32px;
+    background:var(--secondary);
+    border-radius:50%;
+    border:2px solid var(--accent);
+    display:flex;align-items:center;justify-content:center;
+    z-index:3;
+    box-shadow:0 0 0 3px var(--bg);
+  }
+  .card .medallion::after{
+    content:"";
+    width:10px;height:10px;
+    background:var(--bg);
+    transform:rotate(45deg);
+  }
+  .card h4{
+    font-family:var(--font-display),serif;
+    font-size:15px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--primary);
+    margin:0 12px 4px;
+    line-height:1.3;
+  }
+  .card .meta{
+    font-family:var(--font-display),serif;
+    font-size:10px;
+    letter-spacing:.3em;
+    color:var(--text-emphasis);
+    text-transform:uppercase;
+    margin:6px 0 14px;
+  }
+  .card .meta .dot{color:var(--accent);margin:0 6px}
+  .card p{
+    font-size:15px;
+    line-height:1.55;
+    text-align:justify;
+    margin:0 0 10px;
+    color:var(--text);
+    hyphens:auto;
+  }
+  .card .artisan{
+    margin-top:14px;
+    padding-top:12px;
+    border-top:1px solid var(--accent);
+    font-size:13px;
+    font-style:italic;
+    color:var(--text-emphasis);
+  }
+  .card .artisan strong{
+    font-family:var(--font-display),serif;
+    font-style:normal;
+    font-size:11px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    display:block;
+    color:var(--primary);
+    margin-bottom:2px;
+  }
+  .card .scope{
+    font-size:13px;
+    color:var(--secondary);
+    font-style:italic;
+    margin-bottom:8px;
+    letter-spacing:.02em;
+  }
+
+  /* ---------- LEDGER ---------- */
+  .ledger{
+    max-width:1180px;margin:50px auto 30px;
+    padding:36px 50px;
+    border:1px solid var(--accent);
+    border-top:3px double var(--accent);
+    border-bottom:3px double var(--accent);
+    background:
+      repeating-linear-gradient(0deg,transparent 0 28px,rgba(30,58,95,.04) 28px 29px),
+      var(--bg);
+  }
+  .ledger h3{
+    font-family:var(--font-display),serif;
+    text-align:center;
+    color:var(--primary);
+    font-size:18px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    margin:0 0 22px;
+  }
+  .ledger-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:24px;
+    text-align:center;
+  }
+  .ledger-grid div{
+    border-left:1px solid var(--accent);
+    padding:4px 14px;
+  }
+  .ledger-grid div:first-child{border-left:none}
+  .ledger-grid .num{
+    font-family:var(--font-display),serif;
+    font-size:32px;
+    color:var(--text-emphasis);
+    line-height:1;
+  }
+  .ledger-grid .lbl{
+    font-family:var(--font-display),serif;
+    font-size:10px;
+    letter-spacing:.3em;
+    text-transform:uppercase;
+    color:var(--primary);
+    margin-top:8px;
+  }
+
+  /* ---------- COMMISSIONING ---------- */
+  .commission-note{
+    max-width:980px;margin:30px auto 60px;
+    padding:0 40px;
+    text-align:center;
+  }
+  .commission-note h3{
+    font-family:var(--font-display),serif;
+    font-size:20px;
+    color:var(--primary);
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    margin:0 0 12px;
+  }
+  .commission-note p{
+    font-size:16px;
+    line-height:1.7;
+    font-style:italic;
+    color:var(--text);
+    max-width:700px;margin:0 auto;
+  }
+  .commission-note .cta{
+    margin-top:20px;
+    display:inline-block;
+    font-family:var(--font-display),serif;
+    font-size:11px;
+    letter-spacing:.3em;
+    text-transform:uppercase;
+    color:var(--primary);
+    border:1px solid var(--primary);
+    border-top:1px solid var(--accent);
+    border-bottom:1px solid var(--accent);
+    padding:12px 30px;
+    background:var(--bg);
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer.site{
+    background:var(--primary);
+    color:var(--bg);
+    padding:0;
+    border-top:3px solid var(--secondary);
+    border-bottom:3px solid var(--secondary);
+    position:relative;
+  }
+  .footer-inner{
+    padding:50px 40px 30px;
+    text-align:center;
+    position:relative;
+    border-top:1px solid var(--secondary);
+    border-bottom:1px solid var(--secondary);
+    margin:3px 0;
+  }
+  .star-seal{
+    width:78px;height:78px;
+    margin:0 auto 18px;
+    display:block;
+  }
+  .star-seal svg{width:100%;height:100%}
+  .footer-inner .row{
+    display:grid;grid-template-columns:1fr 1fr 1fr;
+    gap:40px;
+    max-width:980px;margin:0 auto;
+    align-items:start;
+  }
+  .footer-inner .row > div{
+    padding:0 20px;
+    border-left:1px solid rgba(201,162,58,.45);
+  }
+  .footer-inner .row > div:first-child{border-left:none}
+  .footer-inner h5{
+    font-family:var(--font-display),serif;
+    font-size:11px;
+    letter-spacing:.3em;
+    color:var(--accent);
+    text-transform:uppercase;
+    margin:0 0 10px;
+  }
+  .footer-inner p{
+    font-size:14px;
+    line-height:1.6;
+    margin:0;
+    color:#f5e9d2;
+  }
+  .footer-inner .attribution{
+    margin-top:30px;
+    font-style:italic;
+    font-size:13px;
+    color:var(--accent);
+  }
+  .copy{
+    background:var(--primary);
+    text-align:center;
+    padding:14px;
+    font-family:var(--font-display),serif;
+    font-size:10px;
+    letter-spacing:.4em;
+    color:var(--bg);
+    text-transform:uppercase;
+    border-top:1px solid var(--accent);
+  }
+
+  /* tiny SVG palmette inline */
+  .palmette-glyph{
+    display:inline-block;width:14px;height:10px;
+    vertical-align:middle;
+  }
+  .palmette-glyph::before{
+    content:"❋";
+    color:var(--accent);
+    font-size:11px;
+  }
+</style>
+</head>
+<body>
+
+<div class="top-rule"></div>
+
+<header class="masthead">
+  <div class="arabic-mark">نقش جهان</div>
+  <h1>Atelier Naqsh-e Jahan</h1>
+  <div class="tagline">Tile-Cutters, Calligraphers &amp; Draughtsmen — Isfahan, since 1387 SH</div>
+</header>
+
+<nav class="primary" aria-label="Primary">
+  <ul>
+    <li><a href="page-1.html">Court</a></li>
+    <li><span class="palmette-sep">❋</span></li>
+    <li><a href="page-2.html">Workshop</a></li>
+    <li><span class="palmette-sep">❋</span></li>
+    <li><a href="page-3.html" aria-current="page">Commissions</a></li>
+    <li><span class="palmette-sep">❋</span></li>
+    <li><a href="page-4.html">Crafts</a></li>
+    <li><span class="palmette-sep">❋</span></li>
+    <li><a href="page-5.html">Apprenticeship</a></li>
+    <li><span class="palmette-sep">❋</span></li>
+    <li><a href="page-6.html">Visit</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">❋ Register of Works ❋ Sefāresh-nāmeh ❋</div>
+    <h2>Commissions <span class="em">&amp;</span> Portfolio</h2>
+    <p class="lede">A ledger of recent works carried out by the courtyard — restorations, dado panels, mihrab niches and calligraphic friezes set down between 1398 SH and 1403 SH, recorded here by year, place, and the hand that led each table.</p>
+  </div>
+  <div class="hero-arch" aria-hidden="true">
+    <svg viewBox="0 0 500 550" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(-147.13944,-244.9375)">
+        <g transform="translate(8.199085,-11.874106)">
+          <g style="stroke:#c9a23a;stroke-width:3.125;fill:none">
+            <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+            <path d="m 250,430.58 24.75248,58.41585"/>
+            <path d="m 347.0297,342.46119 41.58416,23.76238 0.9901,35.64356"/>
+            <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+          </g>
+          <g transform="matrix(-1,0,0,1,777.88071,-0.2972181)" style="stroke:#c9a23a;stroke-width:3.125;fill:none">
+            <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+            <path d="m 250,430.58 24.75248,58.41585"/>
+            <path d="m 347.0297,342.46119 41.58416,23.76238 0.9901,35.64356"/>
+            <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+          </g>
+        </g>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<div class="filet" aria-hidden="true">
+  <svg viewBox="0 0 437.999 18.893" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,9.445c0,0,37.005-0.063,73.998-0.829c18.495-0.386,36.989-0.949,50.831-1.785c6.919-0.414,12.677-0.906,16.663-1.46c1.99-0.28,3.539-0.582,4.535-0.878c0.502-0.146,0.844-0.297,1.049-0.405c0.157-0.107,0.238-0.162,0.238-0.162l0.42-0.287l0.656,0.656l-0.369,0.338c0,0-0.154,0.142-0.456,0.324c-0.291,0.154-0.714,0.331-1.256,0.484c-1.085,0.314-2.667,0.608-4.686,0.879c-4.037,0.533-9.811,0.985-16.745,1.354c-13.868,0.744-32.369,1.183-50.87,1.443C37.003,9.632,0,9.445,0,9.445z"/>
+    <path d="M437.999,9.445c0,0-37.004,0.187-74.007-0.329c-18.501-0.261-37.002-0.699-50.869-1.443c-6.935-0.368-12.708-0.82-16.745-1.354c-2.019-0.271-3.601-0.565-4.687-0.879c-0.541-0.153-0.965-0.33-1.256-0.484c-0.302-0.183-0.456-0.324-0.456-0.324l-0.369-0.338l0.656-0.656l0.42,0.287c0,0,0.081,0.055,0.238,0.162c0.204,0.108,0.546,0.26,1.048,0.405c0.996,0.296,2.545,0.598,4.535,0.878c3.986,0.554,9.744,1.046,16.663,1.46C327.011,7.667,345.506,8.23,364,8.616C400.994,9.382,437.999,9.445,437.999,9.445z"/>
+    <circle cx="219" cy="9.4" r="6" fill="#c9a23a"/>
+    <circle cx="169" cy="9.4" r="3.5" fill="#c9a23a"/>
+    <circle cx="269" cy="9.4" r="3.5" fill="#c9a23a"/>
+  </svg>
+</div>
+
+<section class="intro">
+  <h3>On the Discipline of Recording Work</h3>
+  <p>Each commission entered into this register has been measured, drawn, fired, and set under the supervision of a named ostād, whose hand bears responsibility for the work from the first cartoon to the final pointing of the joints. We do not subcontract; every haft-rang tile leaving the courtyard at Kucheh Joubāreh is signed on its reverse with the studio cipher and the year in the solar Hijri calendar. The works below are arranged by date of completion, eldest first, and represent only those projects whose patrons have given consent for public listing — a number of private residential commissions in Tehran, Shiraz, and Doha are by agreement omitted.</p>
+</section>
+
+<div class="filet" aria-hidden="true">
+  <svg viewBox="0 0 437.999 18.893" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,9.445c0,0,37.005-0.063,73.998-0.829c18.495-0.386,36.989-0.949,50.831-1.785c6.919-0.414,12.677-0.906,16.663-1.46c1.99-0.28,3.539-0.582,4.535-0.878c0.502-0.146,0.844-0.297,1.049-0.405c0.157-0.107,0.238-0.162,0.238-0.162l0.42-0.287l0.656,0.656l-0.369,0.338c0,0-0.154,0.142-0.456,0.324c-0.291,0.154-0.714,0.331-1.256,0.484c-1.085,0.314-2.667,0.608-4.686,0.879c-4.037,0.533-9.811,0.985-16.745,1.354c-13.868,0.744-32.369,1.183-50.87,1.443C37.003,9.632,0,9.445,0,9.445z"/>
+    <path d="M437.999,9.445c0,0-37.004,0.187-74.007-0.329c-18.501-0.261-37.002-0.699-50.869-1.443c-6.935-0.368-12.708-0.82-16.745-1.354c-2.019-0.271-3.601-0.565-4.687-0.879c-0.541-0.153-0.965-0.33-1.256-0.484c-0.302-0.183-0.456-0.324-0.456-0.324l-0.369-0.338l0.656-0.656l0.42,0.287c0,0,0.081,0.055,0.238,0.162c0.204,0.108,0.546,0.26,1.048,0.405c0.996,0.296,2.545,0.598,4.535,0.878c3.986,0.554,9.744,1.046,16.663,1.46C327.011,7.667,345.506,8.23,364,8.616C400.994,9.382,437.999,9.445,437.999,9.445z"/>
+    <circle cx="219" cy="9.4" r="6" fill="#c9a23a"/>
+  </svg>
+</div>
+
+<section class="portfolio">
+
+  <!-- CARD 1 -->
+  <article class="card">
+    <svg class="arch-svg" viewBox="0 0 100 130" preserveAspectRatio="none" aria-hidden="true">
+      <path class="arch-outer" d="M 4 126 L 4 38 Q 4 24 18 22 Q 32 20 40 12 Q 50 0 50 0 Q 50 0 60 12 Q 68 20 82 22 Q 96 24 96 38 L 96 126 Z"/>
+      <path class="arch-inner" d="M 8 122 L 8 40 Q 8 27 20 25 Q 33 23 41 15 Q 50 5 50 5 Q 50 5 59 15 Q 67 23 80 25 Q 92 27 92 40 L 92 122 Z"/>
+    </svg>
+    <div class="medallion"></div>
+    <h4>Spandrel Restoration</h4>
+    <div class="meta">1398 SH <span class="dot">❋</span> 2019</div>
+    <div class="scope">Madrasa-ye Madar-e Shah, Isfahan</div>
+    <p>Replacement of one hundred forty-three failed mosaic-faience pieces in the south-east īwān spandrels, including reweaving of the cobalt vine-scroll lost to water ingress in 1392.</p>
+    <p>Original cartoons reconstructed from photographic plates of 1934 held by the Cultural Heritage Organisation; new tile fired in three campaigns to match the surviving Safavid palette.</p>
+    <div class="artisan">
+      <strong>Lead Artisan</strong>
+      Ostād Mohammad-Reza Sehāti, kāshī-tarāsh
+    </div>
+  </article>
+
+  <!-- CARD 2 -->
+  <article class="card">
+    <svg class="arch-svg" viewBox="0 0 100 130" preserveAspectRatio="none" aria-hidden="true">
+      <path class="arch-outer" d="M 4 126 L 4 38 Q 4 24 18 22 Q 32 20 40 12 Q 50 0 50 0 Q 50 0 60 12 Q 68 20 82 22 Q 96 24 96 38 L 96 126 Z"/>
+      <path class="arch-inner" d="M 8 122 L 8 40 Q 8 27 20 25 Q 33 23 41 15 Q 50 5 50 5 Q 50 5 59 15 Q 67 23 80 25 Q 92 27 92 40 L 92 122 Z"/>
+    </svg>
+    <div class="medallion"></div>
+    <h4>Private Courtyard Fountain</h4>
+    <div class="meta">1400 SH <span class="dot">❋</span> 2021</div>
+    <div class="scope">Bāgh-e Dowlatābād Quarter, Yazd</div>
+    <p>Octagonal pool of four-and-a-quarter metres span with turquoise and oxblood seven-colour dado, commissioned by the Mehrābi family for a restored qājār courtyard house dated 1247 LH.</p>
+    <p>The basin floor carries a sixteen-pointed star drawn from a girih in the Topkapı Scroll, set in cuerda-seca on biscuit fired at our Kashan kiln to withstand the saline groundwater of the region.</p>
+    <div class="artisan">
+      <strong>Lead Artisan</strong>
+      Ostāda Forough Naqdi, mosaic-faience
+    </div>
+  </article>
+
+  <!-- CARD 3 -->
+  <article class="card">
+    <svg class="arch-svg" viewBox="0 0 100 130" preserveAspectRatio="none" aria-hidden="true">
+      <path class="arch-outer" d="M 4 126 L 4 38 Q 4 24 18 22 Q 32 20 40 12 Q 50 0 50 0 Q 50 0 60 12 Q 68 20 82 22 Q 96 24 96 38 L 96 126 Z"/>
+      <path class="arch-inner" d="M 8 122 L 8 40 Q 8 27 20 25 Q 33 23 41 15 Q 50 5 50 5 Q 50 5 59 15 Q 67 23 80 25 Q 92 27 92 40 L 92 122 Z"/>
+    </svg>
+    <div class="medallion"></div>
+    <h4>Calligraphic Frieze</h4>
+    <div class="meta">1401 SH <span class="dot">❋</span> 2022</div>
+    <div class="scope">Qazvin Cultural Foundation, Sepāh St.</div>
+    <p>Continuous thuluth band of forty-two metres encircling the foundation's reading-hall, drawn from selected verses of Sa'di's Golestān and rendered in white interlace upon a cobalt ground.</p>
+    <p>Letterforms cut from imported Maragheh limestone and inlaid with glazed tile fragments; the project required eleven months in the courtyard and a further three on site, completed Mehr 1401.</p>
+    <div class="artisan">
+      <strong>Lead Artisan</strong>
+      Ostād Hosayn-Ali Tabrizi, khoshnevis
+    </div>
+  </article>
+
+  <!-- CARD 4 -->
+  <article class="card">
+    <svg class="arch-svg" viewBox="0 0 100 130" preserveAspectRatio="none" aria-hidden="true">
+      <path class="arch-outer" d="M 4 126 L 4 38 Q 4 24 18 22 Q 32 20 40 12 Q 50 0 50 0 Q 50 0 60 12 Q 68 20 82 22 Q 96 24 96 38 L 96 126 Z"/>
+      <path class="arch-inner" d="M 8 122 L 8 40 Q 8 27 20 25 Q 33 23 41 15 Q 50 5 50 5 Q 50 5 59 15 Q 67 23 80 25 Q 92 27 92 40 L 92 122 Z"/>
+    </svg>
+    <div class="medallion"></div>
+    <h4>Tile Dado Panels</h4>
+    <div class="meta">1402 SH <span class="dot">❋</span> 2023</div>
+    <div class="scope">Hotel Abbasi, East Wing — Isfahan</div>
+    <p>Twenty-eight haft-rang dado panels at one-point-six metres height, replacing twentieth-century reproductions in the corridor connecting the east wing to the historic caravanserai courtyard.</p>
+    <p>Patterns drawn from surviving fragments of the 1085 LH Abbāsi scheme; commissioned by the hotel's heritage committee at a value of 4.2 milliard rial and delivered in two phases over fourteen months.</p>
+    <div class="artisan">
+      <strong>Lead Artisan</strong>
+      Ostād Mohammad-Reza Sehāti, kāshī-tarāsh
+    </div>
+  </article>
+
+  <!-- CARD 5 -->
+  <article class="card">
+    <svg class="arch-svg" viewBox="0 0 100 130" preserveAspectRatio="none" aria-hidden="true">
+      <path class="arch-outer" d="M 4 126 L 4 38 Q 4 24 18 22 Q 32 20 40 12 Q 50 0 50 0 Q 50 0 60 12 Q 68 20 82 22 Q 96 24 96 38 L 96 126 Z"/>
+      <path class="arch-inner" d="M 8 122 L 8 40 Q 8 27 20 25 Q 33 23 41 15 Q 50 5 50 5 Q 50 5 59 15 Q 67 23 80 25 Q 92 27 92 40 L 92 122 Z"/>
+    </svg>
+    <div class="medallion"></div>
+    <h4>Ablutions-Court Repair</h4>
+    <div class="meta">1402 SH <span class="dot">❋</span> 2023</div>
+    <div class="scope">Masjed-e Hakim, Isfahan</div>
+    <p>Stabilisation of subsidence in the north-west corner of the ablutions court and re-laying of two hundred eleven square metres of seven-colour pavement disturbed by the works.</p>
+    <p>Carried out under joint supervision of the Endowments Office and our courtyard between Bahman 1401 and Khordād 1402; original glaze recipes recovered from kiln waste excavated on site by the survey team.</p>
+    <div class="artisan">
+      <strong>Lead Artisan</strong>
+      Ostād Jalāl Pirniyā, master draughtsman
+    </div>
+  </article>
+
+  <!-- CARD 6 -->
+  <article class="card">
+    <svg class="arch-svg" viewBox="0 0 100 130" preserveAspectRatio="none" aria-hidden="true">
+      <path class="arch-outer" d="M 4 126 L 4 38 Q 4 24 18 22 Q 32 20 40 12 Q 50 0 50 0 Q 50 0 60 12 Q 68 20 82 22 Q 96 24 96 38 L 96 126 Z"/>
+      <path class="arch-inner" d="M 8 122 L 8 40 Q 8 27 20 25 Q 33 23 41 15 Q 50 5 50 5 Q 50 5 59 15 Q 67 23 80 25 Q 92 27 92 40 L 92 122 Z"/>
+    </svg>
+    <div class="medallion"></div>
+    <h4>New Mihrab Niche</h4>
+    <div class="meta">1403 SH <span class="dot">❋</span> 2024</div>
+    <div class="scope">Naderi Family Chapel, Natanz</div>
+    <p>An entirely new pointed-arch mihrab at two-point-four metres height, the first wholly original mihrab cut by the courtyard since the founding of the atelier; muqarnas hood of nineteen tiers in cobalt and gold.</p>
+    <p>Verse selection — the throne-verse encircling the niche — set in jali thuluth and finished in matt oxblood; consecrated on the fourteenth of Sha'bān 1445 LH in the presence of the patron family.</p>
+    <div class="artisan">
+      <strong>Lead Artisan</strong>
+      Ostāda Forough Naqdi, mosaic-faience
+    </div>
+  </article>
+
+</section>
+
+<section class="ledger" aria-label="Studio ledger">
+  <h3>❋ A Ledger of the Five Years ❋</h3>
+  <div class="ledger-grid">
+    <div>
+      <div class="num">VI</div>
+      <div class="lbl">Public Commissions</div>
+    </div>
+    <div>
+      <div class="num">211</div>
+      <div class="lbl">Sq. Metres of Tilework</div>
+    </div>
+    <div>
+      <div class="num">19</div>
+      <div class="lbl">Tiers of Muqarnas</div>
+    </div>
+    <div>
+      <div class="num">IV</div>
+      <div class="lbl">Ostāds in Charge</div>
+    </div>
+  </div>
+</section>
+
+<section class="commission-note">
+  <h3>On Receiving New Sefāresh</h3>
+  <p>Inquiries regarding restoration, new mihrab work, courtyard pavements, or calligraphic friezes are received by letter or in person at the courtyard between Saturday and Wednesday, ten in the morning until four in the afternoon. A first cartoon and estimate are prepared within forty days of site survey.</p>
+  <a class="cta" href="page-6.html">❋ Address the Atelier ❋</a>
+</section>
+
+<footer class="site">
+  <div class="footer-inner">
+    <div class="star-seal" aria-hidden="true">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(50,50)">
+          <g fill="#c9a23a" stroke="#f2e5cc" stroke-width="0.6">
+            <polygon points="0,-38 8,-12 34,-18 18,4 38,22 12,18 0,42 -12,18 -38,22 -18,4 -34,-18 -8,-12"/>
+          </g>
+          <circle r="9" fill="#2a8a8a" stroke="#f2e5cc" stroke-width="1"/>
+          <circle r="3" fill="#c9a23a"/>
+        </g>
+      </svg>
+    </div>
+    <div class="row">
+      <div>
+        <h5>The Courtyard</h5>
+        <p>No. 14, Kucheh Joubāreh<br>off Hārun-e Velāyat St.<br>Isfahan 81396, Iran</p>
+      </div>
+      <div>
+        <h5>Hours of Reception</h5>
+        <p>Saturday — Wednesday<br>10:00 — 16:00<br>Thursdays by appointment only</p>
+      </div>
+      <div>
+        <h5>Established</h5>
+        <p>Founded 1387 SH (2008)<br>under the seal of<br>Ostād M. Sehāti &amp; partners</p>
+      </div>
+    </div>
+    <p class="attribution">— Drawn, cut, and fired entirely within the walls of the courtyard, by hand —</p>
+  </div>
+  <div class="copy">© 1403 SH ❋ Atelier Naqsh-e Jahan ❋ All Rights of Pattern &amp; Cartoon Reserved</div>
+</footer>
+
+</body>
+</html>

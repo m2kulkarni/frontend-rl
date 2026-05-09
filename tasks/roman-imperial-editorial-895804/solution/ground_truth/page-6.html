@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Subscribe | Acta Diurna</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  :root {
+    --col-narrow: 38rem; /* golden-ratio body column */
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    line-height: 1.7;
+  }
+
+  a { color: inherit; }
+
+  /* ============ MASTHEAD / NAV ============ */
+  .masthead {
+    text-align: center;
+    padding: 2.5rem 1rem 0;
+  }
+  .masthead .eyebrow {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    text-transform: lowercase;
+    margin-bottom: 0.6rem;
+  }
+  .masthead h1.wordmark {
+    font-family: var(--font-display), serif;
+    font-weight: 700;
+    font-size: 3.4rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    margin: 0;
+    color: var(--primary);
+    text-indent: 0.32em; /* optical compensation for tracking */
+  }
+  .masthead .latin {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    color: var(--text-emphasis);
+    margin-top: 0.4rem;
+  }
+
+  nav.primary {
+    margin: 1.4rem auto 0;
+    text-align: center;
+  }
+  nav.primary ul {
+    list-style: none;
+    padding: 0; margin: 0;
+    display: inline-flex;
+    gap: 2.6rem;
+    justify-content: center;
+  }
+  nav.primary a {
+    text-decoration: none;
+    font-family: var(--font-display), serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--primary);
+    padding-bottom: 0.35rem;
+    border-bottom: 1px solid transparent;
+  }
+  nav.primary a[aria-current="page"] {
+    border-bottom-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* Greek-key meander divider */
+  .meander {
+    display: block;
+    width: 100%;
+    height: 28px;
+    margin: 1.6rem auto 0;
+    color: var(--ornament);
+  }
+  .meander svg { display: block; height: 100%; width: 100%; }
+
+  /* ============ PEDIMENT HERO ============ */
+  .hero {
+    text-align: center;
+    padding: 4rem 1rem 2rem;
+    position: relative;
+  }
+  .pediment {
+    width: 720px;
+    max-width: 90%;
+    margin: 0 auto 1.5rem;
+    display: block;
+  }
+  .hero .kicker {
+    font-family: var(--font-display), serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin: 0 0 0.6rem;
+  }
+  .hero h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 700;
+    font-size: 3.6rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin: 0 0 0.6rem;
+    color: var(--primary);
+  }
+  .vine {
+    width: 36px;
+    height: 36px;
+    margin: 0.5rem auto;
+    color: var(--accent);
+    display: block;
+  }
+  .vine svg { width: 100%; height: 100%; fill: currentColor; }
+
+  .hero p.lede {
+    max-width: var(--col-narrow);
+    margin: 1rem auto 0;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    font-style: italic;
+    color: var(--text);
+  }
+
+  /* ============ TIERS ============ */
+  .tiers {
+    max-width: 1200px;
+    margin: 3rem auto 4rem;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+  }
+  .tier {
+    background: var(--surface);
+    border: 1px solid var(--primary);
+    padding: 2.4rem 2rem 2.6rem;
+    text-align: center;
+    position: relative;
+  }
+  .tier::before, .tier::after {
+    content: "";
+    position: absolute;
+    left: 1rem; right: 1rem;
+    height: 6px;
+    background-image:
+      linear-gradient(90deg, var(--primary) 50%, transparent 50%),
+      linear-gradient(var(--primary), var(--primary));
+    background-size: 14px 6px, 100% 1px;
+    background-repeat: repeat-x, no-repeat;
+    background-position: 0 0, 0 100%;
+  }
+  .tier::before { top: 0.7rem; }
+  .tier::after { bottom: 0.7rem; }
+
+  .tier .roman-numeral {
+    font-family: var(--font-display), serif;
+    font-size: 1rem;
+    letter-spacing: 0.5em;
+    color: var(--secondary);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .tier h3 {
+    font-family: var(--font-display), serif;
+    font-size: 2rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin: 0 0 0.4rem;
+    color: var(--primary);
+  }
+  .tier .vine-mini {
+    width: 22px; height: 22px; margin: 0.4rem auto 1rem;
+    color: var(--accent);
+    display: block;
+  }
+  .tier .vine-mini svg { width: 100%; height: 100%; fill: currentColor; }
+
+  .tier .price {
+    font-family: var(--font-display), serif;
+    font-size: 2.6rem;
+    color: var(--primary);
+    margin: 0.4rem 0 0.2rem;
+    letter-spacing: 0.04em;
+  }
+  .tier .price .currency {
+    color: var(--accent);
+    font-size: 1.6rem;
+    vertical-align: top;
+    margin-right: 0.1rem;
+  }
+  .tier .term {
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--text-emphasis);
+    margin-bottom: 1.6rem;
+  }
+  .tier .rule {
+    width: 60px;
+    height: 1px;
+    background: var(--secondary);
+    margin: 0.6rem auto 1.4rem;
+  }
+
+  .tier ul.includes {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem;
+    text-align: left;
+    font-size: 0.95rem;
+  }
+  .tier ul.includes li {
+    padding: 0.55rem 0 0.55rem 1.3rem;
+    border-bottom: 1px dotted rgba(26,26,26,0.25);
+    position: relative;
+    line-height: 1.55;
+  }
+  .tier ul.includes li::before {
+    content: "✦";
+    position: absolute;
+    left: 0; top: 0.55rem;
+    color: var(--secondary);
+    font-size: 0.7rem;
+  }
+  .tier ul.includes li:last-child { border-bottom: none; }
+
+  .tier .subscribe-btn {
+    display: inline-block;
+    padding: 0.85rem 2rem;
+    font-family: var(--font-display), serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--bg);
+    background: var(--primary);
+    border: 1px solid var(--primary);
+  }
+  .tier.featured {
+    border-width: 2px;
+    border-color: var(--accent);
+  }
+  .tier.featured .subscribe-btn {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .tier.featured .roman-numeral { color: var(--accent); }
+
+  .tier.benefactor {
+    border-color: var(--text-emphasis);
+  }
+  .tier.benefactor .subscribe-btn {
+    background: var(--text-emphasis);
+    border-color: var(--text-emphasis);
+  }
+  .tier.benefactor .roman-numeral { color: var(--text-emphasis); }
+
+  /* ============ INSTITUTIONAL NOTE ============ */
+  .institutional {
+    max-width: 900px;
+    margin: 2rem auto 4rem;
+    padding: 2.4rem 3rem;
+    text-align: center;
+    border-top: 1px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
+    position: relative;
+  }
+  .institutional h4 {
+    font-family: var(--font-display), serif;
+    font-size: 1rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin: 0 0 0.4rem;
+  }
+  .institutional p {
+    margin: 0.4rem auto;
+    max-width: 38rem;
+    font-size: 0.95rem;
+  }
+  .institutional .price-line {
+    font-family: var(--font-display), serif;
+    font-size: 1.1rem;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-top: 0.8rem;
+  }
+
+  /* ============ COUPON ============ */
+  .coupon-section {
+    max-width: 1100px;
+    margin: 0 auto 4rem;
+    padding: 0 2rem;
+  }
+  .coupon-section .intro {
+    text-align: center;
+    max-width: var(--col-narrow);
+    margin: 0 auto 2rem;
+  }
+  .coupon-section .intro h3 {
+    font-family: var(--font-display), serif;
+    font-size: 1.6rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin: 0 0 0.4rem;
+  }
+  .coupon-section .intro p {
+    font-style: italic;
+    color: var(--text);
+  }
+
+  .coupon {
+    border: 2px dashed var(--primary);
+    padding: 2.4rem 2.6rem;
+    background: var(--surface);
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 2.4rem;
+    position: relative;
+  }
+  .coupon::before {
+    content: "✂";
+    position: absolute;
+    top: -0.85rem; left: 1.4rem;
+    background: var(--bg);
+    padding: 0 0.5rem;
+    font-size: 1.2rem;
+    color: var(--primary);
+  }
+  .coupon h4 {
+    font-family: var(--font-display), serif;
+    font-size: 1rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    margin: 0 0 1rem;
+    color: var(--primary);
+    border-bottom: 1px solid var(--secondary);
+    padding-bottom: 0.4rem;
+  }
+  .coupon-form .field {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+  }
+  .coupon-form .label {
+    flex: 0 0 7rem;
+    font-family: var(--font-display), serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+  }
+  .coupon-form .line {
+    flex: 1;
+    border-bottom: 1px solid var(--primary);
+    height: 1.4rem;
+  }
+  .coupon-form .checkboxes {
+    margin-top: 1.4rem;
+    font-size: 0.92rem;
+  }
+  .coupon-form .checkboxes label {
+    display: block;
+    padding: 0.3rem 0;
+  }
+  .coupon-form .check {
+    display: inline-block;
+    width: 0.9rem; height: 0.9rem;
+    border: 1px solid var(--primary);
+    margin-right: 0.6rem;
+    vertical-align: middle;
+  }
+
+  .coupon-payee {
+    font-size: 0.92rem;
+    line-height: 1.7;
+  }
+  .coupon-payee p { margin: 0.3rem 0; }
+  .coupon-payee .address {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: rgba(201,162,58,0.08);
+    border-left: 3px solid var(--secondary);
+    font-style: normal;
+  }
+  .coupon-payee .address strong {
+    display: block;
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-size: 0.82rem;
+    margin-bottom: 0.4rem;
+    color: var(--primary);
+  }
+  .coupon-payee .note {
+    font-style: italic;
+    color: var(--text-emphasis);
+    font-size: 0.85rem;
+    margin-top: 1rem;
+  }
+
+  /* ============ FOOTER ============ */
+  footer {
+    margin-top: 5rem;
+    padding-bottom: 3rem;
+  }
+  footer .meander {
+    margin-bottom: 2.6rem;
+  }
+  .frieze {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3rem;
+    text-align: center;
+  }
+  .frieze h5 {
+    font-family: var(--font-display), serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    margin: 0 0 1rem;
+    color: var(--primary);
+  }
+  .frieze p, .frieze a {
+    font-size: 0.88rem;
+    line-height: 1.7;
+    margin: 0.2rem 0;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .frieze a:hover { color: var(--accent); }
+
+  .tailpiece {
+    text-align: center;
+    margin: 2.4rem auto 1rem;
+    color: var(--ornament);
+    font-size: 1.4rem;
+    letter-spacing: 0.6em;
+  }
+  .tailpiece span { color: var(--accent); }
+
+  .colophon {
+    text-align: center;
+    font-style: italic;
+    font-size: 0.82rem;
+    color: var(--text-emphasis);
+    margin-top: 0.8rem;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ MASTHEAD ============ -->
+<header class="masthead">
+  <div class="eyebrow">a quarterly review · est. mmxiv</div>
+  <h1 class="wordmark">Acta Diurna</h1>
+  <div class="latin">— quae acta sunt, scripta manent —</div>
+
+  <nav class="primary" aria-label="Primary">
+    <ul>
+      <li><a href="page-1.html">Forum</a></li>
+      <li><a href="page-2.html">Long Reads</a></li>
+      <li><a href="page-3.html">Columns</a></li>
+      <li><a href="page-4.html">Archive</a></li>
+      <li><a href="page-5.html">About</a></li>
+      <li><a href="page-6.html" aria-current="page">Subscribe</a></li>
+    </ul>
+  </nav>
+
+  <div class="meander" aria-hidden="true">
+    <svg viewBox="1000 364 16511 4447" preserveAspectRatio="xMidYMid meet">
+      <g fill="currentColor">
+        <path d="M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z"/>
+        <path d="M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z"/>
+        <path d="M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z"/>
+        <path d="M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z"/>
+        <path d="M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z"/>
+      </g>
+    </svg>
+  </div>
+</header>
+
+<!-- ============ PEDIMENT HERO ============ -->
+<section class="hero">
+  <svg class="pediment" viewBox="0 0 720 140" aria-hidden="true">
+    <!-- Pediment outline: triangular roof on entablature -->
+    <g fill="none" stroke="#1a1a1a" stroke-width="1.4">
+      <polygon points="360,12 700,108 20,108"/>
+      <polygon points="360,28 678,112 42,112" stroke="#c9a23a" stroke-width="0.8"/>
+      <line x1="20" y1="108" x2="700" y2="108"/>
+      <line x1="20" y1="118" x2="700" y2="118"/>
+      <line x1="20" y1="130" x2="700" y2="130" stroke="#a93226"/>
+      <!-- acroteria -->
+      <circle cx="360" cy="6" r="5" fill="#a93226" stroke="none"/>
+      <circle cx="20" cy="108" r="4" fill="#1a1a1a" stroke="none"/>
+      <circle cx="700" cy="108" r="4" fill="#1a1a1a" stroke="none"/>
+      <!-- tympanum rosette -->
+      <circle cx="360" cy="78" r="14" stroke="#c9a23a"/>
+      <circle cx="360" cy="78" r="6" fill="#c9a23a" stroke="none"/>
+      <!-- triglyphs hint -->
+      <g stroke="#1a1a1a" stroke-width="0.8">
+        <line x1="120" y1="118" x2="120" y2="130"/>
+        <line x1="200" y1="118" x2="200" y2="130"/>
+        <line x1="280" y1="118" x2="280" y2="130"/>
+        <line x1="360" y1="118" x2="360" y2="130"/>
+        <line x1="440" y1="118" x2="440" y2="130"/>
+        <line x1="520" y1="118" x2="520" y2="130"/>
+        <line x1="600" y1="118" x2="600" y2="130"/>
+      </g>
+    </g>
+  </svg>
+
+  <div class="kicker">— Patronage &amp; Subscription —</div>
+  <h2>Subscribe</h2>
+  <div class="vine" aria-hidden="true">
+    <svg viewBox="0 0 200 200"><path transform="translate(0 -852.36)" d="m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z"/></svg>
+  </div>
+  <p class="lede">
+    Acta Diurna is read by classicists, archaeologists, museum trustees, and
+    private students of antiquity in twenty-eight countries. Our quarterly
+    is sustained almost entirely by subscribers and patrons. Choose a tier
+    below; your name shall be entered into the colophon of issue XLI.
+  </p>
+</section>
+
+<!-- ============ TIERS ============ -->
+<section class="tiers" aria-label="Subscription tiers">
+
+  <article class="tier reader">
+    <div class="roman-numeral">— I —</div>
+    <h3>Reader</h3>
+    <div class="vine-mini" aria-hidden="true">
+      <svg viewBox="0 0 200 200"><path transform="translate(0 -852.36)" d="m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z"/></svg>
+    </div>
+    <div class="price"><span class="currency">$</span>48<span style="font-size:1rem;letter-spacing:0.1em;">/yr</span></div>
+    <div class="term">payable in one annual instalment</div>
+    <div class="rule"></div>
+    <ul class="includes">
+      <li>Four print issues per year, mailed in linen-wrap (Spring · Summer · Autumn · Saturnalia)</li>
+      <li>Letterpress index sheet for the year, suitable for binding</li>
+      <li>Reader's email despatch with corrigenda &amp; reading list</li>
+      <li>Access to the public Forum web archive</li>
+    </ul>
+    <a class="subscribe-btn" href="#order">Subscribe</a>
+  </article>
+
+  <article class="tier featured">
+    <div class="roman-numeral">— II —</div>
+    <h3>Patron</h3>
+    <div class="vine-mini" aria-hidden="true">
+      <svg viewBox="0 0 200 200"><path transform="translate(0 -852.36)" d="m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z"/></svg>
+    </div>
+    <div class="price"><span class="currency">$</span>120<span style="font-size:1rem;letter-spacing:0.1em;">/yr</span></div>
+    <div class="term">most chosen · best value for scholars</div>
+    <div class="rule"></div>
+    <ul class="includes">
+      <li>All Reader benefits, with print copies upgraded to numbered Patron edition</li>
+      <li>Full digital archive of issues I–XL, searchable, with downloadable PDFs of every essay</li>
+      <li>Annual portfolio print: a hand-pulled intaglio plate by a guest engraver, mailed each December</li>
+      <li>Patron's correspondence — quarterly letter from the editors, not published online</li>
+      <li>Pre-publication access to long reads two weeks before press</li>
+    </ul>
+    <a class="subscribe-btn" href="#order">Subscribe</a>
+  </article>
+
+  <article class="tier benefactor">
+    <div class="roman-numeral">— III —</div>
+    <h3>Benefactor</h3>
+    <div class="vine-mini" aria-hidden="true">
+      <svg viewBox="0 0 200 200"><path transform="translate(0 -852.36)" d="m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z"/></svg>
+    </div>
+    <div class="price"><span class="currency">$</span>600<span style="font-size:1rem;letter-spacing:0.1em;">/yr</span></div>
+    <div class="term">limited to one hundred names per year</div>
+    <div class="rule"></div>
+    <ul class="includes">
+      <li>All Patron benefits, with quarterly issues bound in cloth and gilt at year's end</li>
+      <li>Named acknowledgement in the colophon of every issue published during the year of subscription</li>
+      <li>Invitation for two to the annual Saturnalia editorial dinner, held mid-December at the Casa di Goethe, Rome</li>
+      <li>Private viewing of an editor-led collection at the Yale University Art Gallery, New Haven, each Spring</li>
+      <li>One commissioned offprint per year on a subject of the Benefactor's choosing</li>
+    </ul>
+    <a class="subscribe-btn" href="#order">Subscribe</a>
+  </article>
+
+</section>
+
+<!-- ============ INSTITUTIONAL ============ -->
+<section class="institutional">
+  <h4>Institutional Rates</h4>
+  <p>
+    University libraries, museum reading rooms, and seminary collections may
+    subscribe under our institutional licence, which permits unrestricted
+    on-site reading and inter-library loan of bound volumes.
+  </p>
+  <p class="price-line">$220 per year · print + perpetual digital licence</p>
+  <p style="font-style:italic; font-size:0.88rem; margin-top:0.8rem;">
+    Enquiries to the Subscriptions Office: <a href="mailto:libraries@actadiurna.press" style="color:var(--accent);">libraries@actadiurna.press</a> &nbsp;·&nbsp; or by post to the address below.
+  </p>
+</section>
+
+<!-- ============ COUPON ============ -->
+<section class="coupon-section" id="order">
+  <div class="intro">
+    <h3>By Cheque &amp; Post</h3>
+    <p>For subscribers who prefer payment by cheque or international money order, please complete the coupon below and post to the Foundation. We acknowledge each receipt by hand within ten working days.</p>
+  </div>
+
+  <div class="coupon">
+    <form class="coupon-form" onsubmit="return false;" aria-label="Postal subscription order form">
+      <h4>Postal Order Coupon</h4>
+
+      <div class="field">
+        <span class="label">Name</span>
+        <span class="line"></span>
+      </div>
+      <div class="field">
+        <span class="label">Institution</span>
+        <span class="line"></span>
+      </div>
+      <div class="field">
+        <span class="label">Address</span>
+        <span class="line"></span>
+      </div>
+      <div class="field">
+        <span class="label">City &amp; Code</span>
+        <span class="line"></span>
+      </div>
+      <div class="field">
+        <span class="label">Country</span>
+        <span class="line"></span>
+      </div>
+      <div class="field">
+        <span class="label">Begin with</span>
+        <span class="line"></span>
+      </div>
+
+      <div class="checkboxes">
+        <label><span class="check"></span> Reader &mdash; cheque enclosed for $48</label>
+        <label><span class="check"></span> Patron &mdash; cheque enclosed for $120</label>
+        <label><span class="check"></span> Benefactor &mdash; cheque enclosed for $600</label>
+        <label><span class="check"></span> Institutional &mdash; cheque enclosed for $220</label>
+      </div>
+    </form>
+
+    <aside class="coupon-payee">
+      <h4>Make Cheques Payable To</h4>
+      <p>Please draw cheques in U.S. dollars on a U.S. bank, or by international money order. Personal cheques drawn on European banks (€/£) are accepted at the day's bank rate.</p>
+
+      <div class="address">
+        <strong>The Acta Diurna Foundation</strong>
+        Subscriptions &amp; Patronage Office<br>
+        Box 1729, Yale Station<br>
+        New Haven, Connecticut 06520<br>
+        United States of America
+      </div>
+
+      <p class="note">
+        The Foundation is a registered §501(c)(3) educational publisher;
+        contributions above the cost of subscription are deductible as
+        permitted by U.S. and E.U. law. A duplicate office in Rome (Via
+        della Lungara 3) receives correspondence in Italian, French, and
+        Latin.
+      </p>
+    </aside>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="meander" aria-hidden="true">
+    <svg viewBox="1000 364 16511 4447" preserveAspectRatio="xMidYMid meet">
+      <g fill="currentColor">
+        <path d="M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z"/>
+        <path d="M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z"/>
+        <path d="M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z"/>
+        <path d="M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z"/>
+        <path d="M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="frieze">
+    <section>
+      <h5>Editorial</h5>
+      <p><a href="page-5.html">About the Review</a></p>
+      <p><a href="page-2.html">Long Reads</a></p>
+      <p><a href="page-3.html">Columns</a></p>
+      <p><a href="page-4.html">Archive I–XL</a></p>
+    </section>
+    <section>
+      <h5>Correspondence</h5>
+      <p>The Editors</p>
+      <p>Box 1729, Yale Station</p>
+      <p>New Haven · CT 06520</p>
+      <p style="margin-top:0.6rem;"><a href="mailto:editors@actadiurna.press">editors@actadiurna.press</a></p>
+    </section>
+    <section>
+      <h5>Colophon</h5>
+      <p>Set in Playfair Display &amp; Lora</p>
+      <p>Printed letterpress in Verona</p>
+      <p>Bound by Legatoria Conti, Rome</p>
+      <p><a href="page-6.html">Subscribe &amp; Patronage</a></p>
+    </section>
+  </div>
+
+  <div class="tailpiece" aria-hidden="true">
+    ❦ <span>✦</span> ❦
+  </div>
+
+  <div class="colophon">
+    Acta Diurna — published quarterly from Rome and New Haven, MMXXIV
+  </div>
+</footer>
+
+</body>
+</html>

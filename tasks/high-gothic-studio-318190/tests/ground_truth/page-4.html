@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Method & Craft — Atelier Saint-Sévrin</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    margin: 0;
+    line-height: 1.55;
+  }
+
+  /* ---------- NAV ARCADE ---------- */
+  .arcade {
+    padding: 28px 48px 0;
+    border-bottom: 1px solid var(--accent);
+  }
+  .arcade-inner {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  .arch-link {
+    position: relative;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    color: var(--primary);
+    height: 96px;
+    padding-top: 52px;
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .arch-link svg.arch-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .arch-link svg.arch-bg path.fill {
+    fill: transparent;
+    stroke: var(--primary);
+    stroke-width: 1.2;
+  }
+  .arch-link[aria-current="page"] svg.arch-bg path.fill {
+    fill: var(--secondary);
+    stroke: var(--secondary);
+  }
+  .arch-link[aria-current="page"] {
+    color: var(--bg);
+  }
+  .arch-link .label { position: relative; z-index: 2; }
+  .arch-link .quat {
+    position: absolute;
+    top: 8px; left: 50%;
+    transform: translateX(-50%);
+    width: 10px; height: 10px;
+    color: var(--accent);
+  }
+  .arch-link[aria-current="page"] .quat { color: var(--accent); }
+
+  /* ---------- PAGE HEAD ---------- */
+  .page-head {
+    text-align: center;
+    padding: 72px 48px 32px;
+    position: relative;
+  }
+  .page-head .eyebrow {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    color: var(--secondary);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-size: 12px;
+    margin-bottom: 18px;
+  }
+  .page-head h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 76px;
+    line-height: 1.0;
+    margin: 0 auto 20px;
+    color: var(--primary);
+    max-width: 14ch;
+  }
+  .page-head .subtitle {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 19px;
+    color: var(--text);
+    max-width: 36em;
+    margin: 0 auto;
+  }
+  .pinnacle {
+    width: 64px; height: 64px;
+    margin: 0 auto 12px;
+    color: var(--ornament);
+  }
+
+  /* ---------- DIVIDER ---------- */
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    margin: 40px auto 0;
+    max-width: 720px;
+  }
+  .divider .rule {
+    flex: 1;
+    height: 1px;
+    background: var(--ornament);
+  }
+  .divider .gold {
+    height: 1px;
+    background: var(--accent);
+    margin-top: 4px;
+  }
+  .divider svg {
+    width: 38px; height: 38px;
+    color: var(--ornament);
+  }
+
+  /* ---------- ESSAY LAYOUT ---------- */
+  .essay-grid {
+    display: grid;
+    grid-template-columns: 22em 1fr 22em;
+    gap: 64px;
+    max-width: 1280px;
+    margin: 64px auto 0;
+    padding: 0 48px;
+    align-items: start;
+  }
+  .essay {
+    grid-column: 2;
+    max-width: 22em;
+    margin: 0 auto;
+    font-size: 16px;
+  }
+  .essay h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 1.15;
+    color: var(--primary);
+    text-align: center;
+    margin: 56px 0 8px;
+  }
+  .essay h2:first-of-type { margin-top: 0; }
+  .essay h2 + .h2-sub {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    color: var(--secondary);
+    text-align: center;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    margin: 0 0 28px;
+  }
+  .essay p { margin: 0 0 1.1em; text-align: justify; hyphens: auto; }
+  .essay p:first-of-type::first-letter {
+    font-family: var(--font-display), serif;
+    font-size: 64px;
+    line-height: 0.85;
+    float: left;
+    padding: 6px 10px 0 0;
+    color: var(--secondary);
+    font-weight: 500;
+  }
+  .essay .pull {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.35;
+    color: var(--text-emphasis);
+    text-align: center;
+    border-top: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+    padding: 22px 0;
+    margin: 32px -20px;
+  }
+  .essay .pull::before, .essay .pull::after {
+    content: "✦";
+    color: var(--accent);
+    display: block;
+    font-size: 12px;
+    margin: 0 auto;
+  }
+  .essay .pull::before { margin-bottom: 12px; }
+  .essay .pull::after  { margin-top: 12px; }
+
+  .charter-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.1em;
+    border-top: 1px solid var(--ornament);
+  }
+  .charter-list li {
+    border-bottom: 1px solid var(--ornament);
+    padding: 10px 0;
+    display: grid;
+    grid-template-columns: 5em 1fr;
+    gap: 12px;
+    font-size: 14px;
+  }
+  .charter-list .yr {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    color: var(--secondary);
+  }
+
+  /* ---------- SIDE: ARCHED CASE STUDIES ---------- */
+  .case {
+    grid-column: 3;
+    margin-bottom: 56px;
+  }
+  .case:first-of-type { grid-row: 1; }
+  .case:nth-of-type(2) { grid-row: 2; }
+  .case:nth-of-type(3) { grid-row: 3; }
+
+  .case-card {
+    position: relative;
+    background: var(--bg);
+    padding: 46px 22px 28px;
+    border: 1px solid var(--ornament);
+    border-top: none;
+  }
+  .case-arch {
+    position: relative;
+    height: 110px;
+    margin-bottom: -1px;
+    border: 1px solid var(--ornament);
+    border-bottom: none;
+    overflow: hidden;
+  }
+  .case-arch svg.archtop {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 240px;
+    height: 130px;
+    color: var(--ornament);
+  }
+  .case-arch .quatrefoil {
+    position: absolute;
+    top: 18px; left: 50%;
+    transform: translateX(-50%);
+    width: 32px; height: 32px;
+    color: var(--secondary);
+  }
+  .case-tag {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-align: center;
+    margin: 0 0 6px;
+  }
+  .case-card h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 1.15;
+    text-align: center;
+    margin: 0 0 8px;
+    color: var(--primary);
+  }
+  .case-meta {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 12px;
+    text-align: center;
+    color: #6b4a2b;
+    margin: 0 0 18px;
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 10px;
+  }
+  .case-card p {
+    font-size: 13.5px;
+    line-height: 1.55;
+    margin: 0 0 0.9em;
+  }
+  .case-card .verdict {
+    margin-top: 14px;
+    border-top: 1px dashed var(--ornament);
+    padding-top: 12px;
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--text-emphasis);
+  }
+  .case-card .verdict strong {
+    font-style: normal;
+    font-variant: small-caps;
+    letter-spacing: 0.1em;
+    color: var(--primary);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  /* LEFT COLUMN — references / margin notes */
+  .margin-notes {
+    grid-column: 1;
+    grid-row: 1 / span 3;
+    border-right: 1px solid var(--ornament);
+    padding-right: 32px;
+    font-size: 12.5px;
+  }
+  .margin-notes h4 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 18px;
+    margin: 0 0 4px;
+    text-align: right;
+  }
+  .margin-notes .small-caps {
+    font-variant: small-caps;
+    letter-spacing: 0.16em;
+    font-size: 10.5px;
+    color: var(--accent);
+    text-align: right;
+    display: block;
+    margin-bottom: 16px;
+  }
+  .margin-notes ol {
+    list-style: none;
+    counter-reset: ref;
+    padding: 0;
+    margin: 0;
+    text-align: right;
+  }
+  .margin-notes ol li {
+    counter-increment: ref;
+    padding: 10px 0;
+    border-bottom: 1px dotted var(--ornament);
+    line-height: 1.4;
+  }
+  .margin-notes ol li::before {
+    content: counter(ref, upper-roman) ".";
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    color: var(--secondary);
+    margin-right: 6px;
+  }
+  .margin-notes .who {
+    font-style: italic;
+    color: var(--text-emphasis);
+    font-family: var(--font-display), serif;
+  }
+  .margin-notes .vine {
+    width: 70px; height: 70px;
+    margin: 24px 0 0 auto;
+    display: block;
+    color: var(--ornament);
+    transform: scaleX(-1);
+  }
+
+  /* ---------- TIMELINE OF A SURVEY ---------- */
+  .survey-section {
+    max-width: 1280px;
+    margin: 96px auto 0;
+    padding: 0 48px;
+  }
+  .survey-head {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  .survey-head h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 40px;
+    margin: 8px 0 6px;
+    color: var(--primary);
+  }
+  .survey-head .lead {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    color: var(--secondary);
+    max-width: 36em;
+    margin: 0 auto;
+  }
+  .survey {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    border-top: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+    margin-top: 32px;
+  }
+  .stage {
+    padding: 24px 18px 22px;
+    border-right: 1px solid var(--ornament);
+    position: relative;
+  }
+  .stage:last-child { border-right: none; }
+  .stage .num {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    color: var(--accent);
+    font-size: 14px;
+    margin-bottom: 6px;
+    letter-spacing: 0.1em;
+  }
+  .stage h4 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 17px;
+    margin: 0 0 10px;
+    color: var(--primary);
+    line-height: 1.2;
+  }
+  .stage p {
+    font-size: 12.5px;
+    margin: 0;
+    line-height: 1.5;
+  }
+  .stage .day {
+    margin-top: 12px;
+    font-variant: small-caps;
+    letter-spacing: 0.14em;
+    font-size: 10.5px;
+    color: var(--secondary);
+  }
+
+  /* ---------- COLOPHON ---------- */
+  .colophon {
+    max-width: 760px;
+    margin: 96px auto 64px;
+    padding: 0 48px;
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    color: var(--text);
+  }
+  .colophon::before {
+    content: "✦  ✦  ✦";
+    display: block;
+    color: var(--accent);
+    letter-spacing: 1em;
+    font-size: 10px;
+    margin-bottom: 18px;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    margin-top: 80px;
+    position: relative;
+  }
+  .seal-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: -42px;
+    position: relative;
+    z-index: 3;
+  }
+  .seal {
+    width: 84px; height: 84px;
+    background: var(--bg);
+    border: 1px solid var(--ornament);
+    border-radius: 50%;
+    padding: 12px;
+    color: var(--primary);
+  }
+  .heraldic-band {
+    height: 96px;
+    background-color: var(--bg);
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 600 600'><g transform='translate(300,300)scale(0.87)rotate(45)'><circle cx='-195.1614716' r='163'/><circle cx='195.1614716' r='163'/><circle cy='195.1614716' r='163'/><circle cy='-195.1614716' r='163'/><rect x='-232' y='-232' width='464' height='464'/><g fill='%23f4ecd8'><circle cx='-195.1614716' r='157'/><circle cx='195.1614716' r='157'/><circle cy='195.1614716' r='157'/><circle cy='-195.1614716' r='157'/><rect x='-226' y='-226' width='452' height='452'/></g><circle cx='-195.1614716' r='144'/><circle cx='195.1614716' r='144'/><circle cy='195.1614716' r='144'/><circle cy='-195.1614716' r='144'/><rect x='-213' y='-213' width='426' height='426'/><g fill='%23f4ecd8'><circle cx='-195.1614716' r='138'/><circle cx='195.1614716' r='138'/><circle cy='195.1614716' r='138'/><circle cy='-195.1614716' r='138'/><rect x='-207' y='-207' width='414' height='414'/></g></g></svg>");
+    background-size: 80px 80px;
+    background-repeat: repeat;
+    border-top: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--accent);
+  }
+  .footer-text {
+    text-align: center;
+    padding: 32px 48px 40px;
+    font-family: var(--font-display), serif;
+  }
+  .footer-text .addr {
+    font-size: 14px;
+    font-style: italic;
+    color: var(--text);
+    line-height: 1.7;
+  }
+  .footer-text .addr strong {
+    font-style: normal;
+    font-weight: 500;
+  }
+  .footer-text .attr {
+    margin-top: 18px;
+    font-variant: small-caps;
+    letter-spacing: 0.22em;
+    font-size: 11px;
+    color: var(--secondary);
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ARCADE ============ -->
+<nav class="arcade" aria-label="Primary">
+  <div class="arcade-inner">
+    <a class="arch-link" href="page-1.html">
+      <svg class="arch-bg" viewBox="0 0 100 100" preserveAspectRatio="none"><path class="fill" d="M2,98 L2,46 Q2,2 50,2 Q98,2 98,46 L98,98 Z"/></svg>
+      <svg class="quat" viewBox="0 0 600 600"><g transform="translate(300,300)scale(0.87)rotate(45)" fill="currentColor"><circle cx="-195" r="163"/><circle cx="195" r="163"/><circle cy="195" r="163"/><circle cy="-195" r="163"/><rect x="-232" y="-232" width="464" height="464"/></g></svg>
+      <span class="label">Atelier</span>
+    </a>
+    <a class="arch-link" href="page-2.html">
+      <svg class="arch-bg" viewBox="0 0 100 100" preserveAspectRatio="none"><path class="fill" d="M2,98 L2,46 Q2,2 50,2 Q98,2 98,46 L98,98 Z"/></svg>
+      <svg class="quat" viewBox="0 0 600 600"><g transform="translate(300,300)scale(0.87)rotate(45)" fill="currentColor"><circle cx="-195" r="163"/><circle cx="195" r="163"/><circle cy="195" r="163"/><circle cy="-195" r="163"/><rect x="-232" y="-232" width="464" height="464"/></g></svg>
+      <span class="label">Works</span>
+    </a>
+    <a class="arch-link" href="page-3.html">
+      <svg class="arch-bg" viewBox="0 0 100 100" preserveAspectRatio="none"><path class="fill" d="M2,98 L2,46 Q2,2 50,2 Q98,2 98,46 L98,98 Z"/></svg>
+      <svg class="quat" viewBox="0 0 600 600"><g transform="translate(300,300)scale(0.87)rotate(45)" fill="currentColor"><circle cx="-195" r="163"/><circle cx="195" r="163"/><circle cy="195" r="163"/><circle cy="-195" r="163"/><rect x="-232" y="-232" width="464" height="464"/></g></svg>
+      <span class="label">Studio</span>
+    </a>
+    <a class="arch-link" href="page-4.html" aria-current="page">
+      <svg class="arch-bg" viewBox="0 0 100 100" preserveAspectRatio="none"><path class="fill" d="M2,98 L2,46 Q2,2 50,2 Q98,2 98,46 L98,98 Z"/></svg>
+      <svg class="quat" viewBox="0 0 600 600"><g transform="translate(300,300)scale(0.87)rotate(45)" fill="currentColor"><circle cx="-195" r="163"/><circle cx="195" r="163"/><circle cy="195" r="163"/><circle cy="-195" r="163"/><rect x="-232" y="-232" width="464" height="464"/></g></svg>
+      <span class="label">Method</span>
+    </a>
+    <a class="arch-link" href="page-5.html">
+      <svg class="arch-bg" viewBox="0 0 100 100" preserveAspectRatio="none"><path class="fill" d="M2,98 L2,46 Q2,2 50,2 Q98,2 98,46 L98,98 Z"/></svg>
+      <svg class="quat" viewBox="0 0 600 600"><g transform="translate(300,300)scale(0.87)rotate(45)" fill="currentColor"><circle cx="-195" r="163"/><circle cx="195" r="163"/><circle cy="195" r="163"/><circle cy="-195" r="163"/><rect x="-232" y="-232" width="464" height="464"/></g></svg>
+      <span class="label">Journal</span>
+    </a>
+    <a class="arch-link" href="page-6.html">
+      <svg class="arch-bg" viewBox="0 0 100 100" preserveAspectRatio="none"><path class="fill" d="M2,98 L2,46 Q2,2 50,2 Q98,2 98,46 L98,98 Z"/></svg>
+      <svg class="quat" viewBox="0 0 600 600"><g transform="translate(300,300)scale(0.87)rotate(45)" fill="currentColor"><circle cx="-195" r="163"/><circle cx="195" r="163"/><circle cy="195" r="163"/><circle cy="-195" r="163"/><rect x="-232" y="-232" width="464" height="464"/></g></svg>
+      <span class="label">Contact</span>
+    </a>
+    <a class="arch-link" href="page-1.html#fr">
+      <svg class="arch-bg" viewBox="0 0 100 100" preserveAspectRatio="none"><path class="fill" d="M2,98 L2,46 Q2,2 50,2 Q98,2 98,46 L98,98 Z"/></svg>
+      <svg class="quat" viewBox="0 0 600 600"><g transform="translate(300,300)scale(0.87)rotate(45)" fill="currentColor"><circle cx="-195" r="163"/><circle cx="195" r="163"/><circle cy="195" r="163"/><circle cy="-195" r="163"/><rect x="-232" y="-232" width="464" height="464"/></g></svg>
+      <span class="label">FR / EN</span>
+    </a>
+  </div>
+</nav>
+
+<!-- ============ PAGE HEAD ============ -->
+<header class="page-head">
+  <svg class="pinnacle" viewBox="0 0 600 600" aria-hidden="true">
+    <g fill="currentColor" transform="translate(300,300)scale(0.6)rotate(45)">
+      <circle cx="-195" r="163"/><circle cx="195" r="163"/>
+      <circle cy="195" r="163"/><circle cy="-195" r="163"/>
+      <rect x="-232" y="-232" width="464" height="464"/>
+      <g fill="#f4ecd8">
+        <circle cx="-195" r="138"/><circle cx="195" r="138"/>
+        <circle cy="195" r="138"/><circle cy="-195" r="138"/>
+        <rect x="-207" y="-207" width="414" height="414"/>
+      </g>
+    </g>
+  </svg>
+  <p class="eyebrow">— iv —  ·  Method &amp; Craft</p>
+  <h1>The Discipline<br>of the Long Look</h1>
+  <p class="subtitle">On the measured survey, the ethics of intervention, and what we owe to fabric older than ourselves.</p>
+
+  <div class="divider">
+    <span class="rule"></span>
+    <svg viewBox="0 0 600 600" aria-hidden="true"><g fill="currentColor" transform="translate(300,300)scale(0.78)rotate(45)"><circle cx="-195" r="163"/><circle cx="195" r="163"/><circle cy="195" r="163"/><circle cy="-195" r="163"/><rect x="-232" y="-232" width="464" height="464"/><g fill="#f4ecd8"><circle cx="-195" r="138"/><circle cx="195" r="138"/><circle cy="195" r="138"/><circle cy="-195" r="138"/><rect x="-207" y="-207" width="414" height="414"/></g></g></svg>
+    <span class="rule"></span>
+  </div>
+</header>
+
+<!-- ============ ESSAY GRID ============ -->
+<section class="essay-grid">
+
+  <aside class="margin-notes" aria-label="Marginalia">
+    <h4>Marginalia</h4>
+    <span class="small-caps">Notes &amp; Authorities</span>
+    <ol>
+      <li><span class="who">John Ruskin</span> — <em>The Seven Lamps of Architecture</em>, 1849; on the Lamp of Memory: "we have no right whatever to touch them."</li>
+      <li><span class="who">Eugène Viollet-le-Duc</span> — <em>Dictionnaire raisonné</em>, 1854: to restore an edifice is to re-establish it in a complete state which may never have existed at any given moment.</li>
+      <li><span class="who">Camillo Boito</span> — Rome, 1883: the seven points; legibility of the new against the old.</li>
+      <li><span class="who">Gustavo Giovannoni</span> — <em>Vecchie città ed edilizia nuova</em>, 1931.</li>
+      <li><span class="who">ICOMOS</span> — <em>Venice Charter</em>, 25 May 1964, Article 9: "any extra work which is indispensable must be distinct from the architectural composition."</li>
+      <li><span class="who">UNESCO</span> — <em>Nara Document on Authenticity</em>, 1–6 November 1994.</li>
+      <li><span class="who">Burra Charter</span>, Australia ICOMOS, revised 2013 — the principle of doing as much as necessary, as little as possible.</li>
+    </ol>
+    <svg class="vine" viewBox="0 0 200 200" aria-hidden="true">
+      <path fill="currentColor" d="M43.6 11C36.5 11.7 29.7 13.8 24.4 18.5s-8.2 12-7.7 21c0.5 9 4.3 16.1 10.2 20.3s13.3 5.5 21 5.2c15.5-0.7 32.8-8 45.8-18.3 1.4-1.1 2.8-2 4.3-3.1 4.3 6.7 7.6 14.8 9.3 24-7.5-5.1-21-10.5-35.7 1.5-22.1 18.2-25 12.9-45.3-2.1-2.9 36 15 54.6 44.7 52.5 0 0-14 4.3-3.6 26.4 6 12.9 8.4 20.1 6.6 25.2 -12.8 2.3-15.8 7.8-5.6 12.7 45.1 10 65.7-27.5 68.7-66 45.4 0 52.9-31.8 52.5-50.4-8.2 11.1-22.2 11.1-32.9 2.5-9.9-7.9-21.7-16.2-39-1.1-1.7-11.7-5.7-22.1-11.2-30.7 19.4-11.4 38.7-14.5 52.5-10.8z"/>
+    </svg>
+  </aside>
+
+  <article class="essay">
+
+    <h2>I.   Of the measured survey</h2>
+    <p class="h2-sub">le relevé · before the pencil dares the plan</p>
+
+    <p>Before any intervention is drawn, a building must be heard. The measured survey is the discipline by which we listen — a slow inventory of stone, mortar, joint, and crack, conducted in sketchbook and total-station and, increasingly, in point-cloud. At Atelier Saint-Sévrin we hold to the rule that no proposal may be lodged with a Direction régionale des affaires culturelles before the survey has been bound, signed, and stamped — and before, separately, every elevation has been redrawn by hand at 1:50.</p>
+
+    <p>The hand redrawing is not nostalgia. It is the only way we know to discover what the laser has not registered: the faint chamfer that betrays a recut jamb of 1689; the splay of a buttress weeping iron from a Victorian cramp; the moment a fourteenth-century mason changed his mind and altered a course-line to clear a putlog. The instrument records geometry. The pencil records intention. A scheme that proceeds from one without the other will, sooner or later, fail the building.</p>
+
+    <p>Our standard package for a parochial commission &mdash; Saint-Léger d'Essômes was typical &mdash; runs to roughly fourteen weeks: two on archive, three on access scaffold, six on the measured drawings themselves, three on the condition report. We charge it at cost. We have never recovered a survey fee on a project that did not also commission the work, and we accept this as the price of doing the discipline honestly.</p>
+
+    <div class="pull">
+      "As much as is necessary; as little as possible. The rest is vanity dressed as scholarship."
+    </div>
+
+    <h2>II.   The ethics of intervention</h2>
+    <p class="h2-sub">les chartes · the inherited contract</p>
+
+    <p>A studio that works on listed fabric does not invent its ethics &mdash; it inherits them. We work, in practice, beneath three documents and within the spirit of a fourth.</p>
+
+    <ul class="charter-list">
+      <li><span class="yr">1964</span><span><strong>Venice Charter.</strong> Replacements must integrate harmoniously with the whole, but at the same time be distinguishable from the original.</span></li>
+      <li><span class="yr">1994</span><span><strong>Nara Document.</strong> Authenticity is plural, culture-bound, and includes the immaterial: workmanship, use, spirit.</span></li>
+      <li><span class="yr">2003</span><span><strong>ICOMOS Principles, Stone.</strong> On compatibility of repair mortars; on the bias toward minimum intervention.</span></li>
+      <li><span class="yr">2013</span><span><strong>Burra Charter.</strong> Cultural significance as the test of every decision.</span></li>
+    </ul>
+
+    <p>The Venice Charter is the spine of our daily reasoning. Article 9 &mdash; that any addition "indispensable for reasons of aesthetic or technical order" must bear the mark of its own time &mdash; is the article we cite most often to clients who ask us to "make it match." We do not make it match. We make it answer. The Nara Document, three decades younger, gave us licence to think about authenticity beyond the substance of stone: the authenticity of liturgical use at a still-functioning church is not interchangeable with the authenticity of a museum-piece chancel, and our schemes are calibrated accordingly.</p>
+
+    <p>The harder question, in our experience, is not whether to intervene. It is the choice, when intervention is unavoidable, between like-for-like replacement in matching limestone and an honest contemporary insertion legible as the work of our century. Both can be defended within the charters. The decision falls on the building &mdash; on whether the lost element belonged to a continuous, repeatable language (a vault rib, a tracery mullion) or stood as a singular gesture (a pinnacle, a finial, a tympanum). For the first, like-for-like, in stone of demonstrably compatible petrography, cut by hand to the surveyed profile. For the second, almost always, the contemporary insertion &mdash; or no insertion at all.</p>
+
+    <h2>III.   The third question</h2>
+    <p class="h2-sub">to reinstate, to insert, or to leave</p>
+
+    <p>There is a third option which the literature treats too lightly: to do nothing. To stabilise, to protect, and to leave the lacuna visible as a lacuna. Ruskin would have called this the Lamp of Memory. We call it, more prosaically, the null intervention. It is the option we recommend more often than clients expect, and it is the option whose defence consumes the largest share of our written reports. A missing pinnacle is not always a wound; sometimes it is a record. A studio that will not read the difference has no business holding the pencil.</p>
+
+    <p>What follows, in the column to the right, are three decisions made on three projects between 2019 and 2024. They are not exemplary. They are simply the working of the method on three buildings that asked three different questions.</p>
+
+  </article>
+
+  <!-- ===== CASE 1 ===== -->
+  <aside class="case">
+    <div class="case-arch">
+      <svg class="archtop" viewBox="0 0 500 550" preserveAspectRatio="none" aria-hidden="true">
+        <g fill="none" stroke="currentColor" stroke-width="3">
+          <path d="M250,40 Q120,40 60,260 L60,540 L100,540 L100,300 Q150,140 250,140 Q350,140 400,300 L400,540 L440,540 L440,260 Q380,40 250,40 Z"/>
+          <path d="M100,300 L400,300"/>
+          <path d="M250,140 L250,540"/>
+        </g>
+      </svg>
+      <svg class="quatrefoil" viewBox="0 0 600 600" aria-hidden="true">
+        <g fill="currentColor" transform="translate(300,300)scale(0.87)rotate(45)">
+          <circle cx="-195" r="163"/><circle cx="195" r="163"/>
+          <circle cy="195" r="163"/><circle cy="-195" r="163"/>
+          <rect x="-232" y="-232" width="464" height="464"/>
+          <g fill="#f4ecd8"><circle cx="-195" r="138"/><circle cx="195" r="138"/><circle cy="195" r="138"/><circle cy="-195" r="138"/><rect x="-207" y="-207" width="414" height="414"/></g>
+        </g>
+      </svg>
+    </div>
+    <div class="case-card">
+      <p class="case-tag">Case study  ·  i</p>
+      <h3>The Chancel-Step at Noyon</h3>
+      <p class="case-meta">2019–2021  ·  Cathédrale Notre-Dame de Noyon  ·  liturgical fabric</p>
+      <p>The principal step into the chancel had been refaced four times since 1804, each campaign cutting back further into the worn 13<sup>th</sup>-century tread. By 2018 the stone retained perhaps thirty per cent original substance and the lip stood 38&nbsp;mm proud of the sanctuary pavement &mdash; a trip hazard at every Mass.</p>
+      <p>We surveyed the step in eleven sections. Eight retained sufficient mediaeval fabric to be conserved in place with a lime-shelter coat. Three did not. We replaced these in Saint-Maximin fine, cut by hand, set with a hot-mixed NHL 3.5 mortar, and dated discreetly on the underside &mdash; <em>asn · mmxx</em>.</p>
+      <div class="verdict">
+        <strong>Decision</strong>
+        Like-for-like in three sections; conservation in eight. The new stone is identifiable to the eye that knows where to look, and invisible to the eye that does not. Cost: €184,000.
+      </div>
+    </div>
+  </aside>
+
+  <!-- ===== CASE 2 ===== -->
+  <aside class="case">
+    <div class="case-arch">
+      <svg class="archtop" viewBox="0 0 500 550" preserveAspectRatio="none" aria-hidden="true">
+        <g fill="none" stroke="currentColor" stroke-width="3">
+          <path d="M250,40 Q120,40 60,260 L60,540 L100,540 L100,300 Q150,140 250,140 Q350,140 400,300 L400,540 L440,540 L440,260 Q380,40 250,40 Z"/>
+          <path d="M100,300 L400,300"/>
+          <path d="M250,140 L250,540"/>
+        </g>
+      </svg>
+      <svg class="quatrefoil" viewBox="0 0 600 600" aria-hidden="true">
+        <g fill="currentColor" transform="translate(300,300)scale(0.87)rotate(45)">
+          <circle cx="-195" r="163"/><circle cx="195" r="163"/><circle cy="195" r="163"/><circle cy="-195" r="163"/>
+          <rect x="-232" y="-232" width="464" height="464"/>
+          <g fill="#f4ecd8"><circle cx="-195" r="138"/><circle cx="195" r="138"/><circle cy="195" r="138"/><circle cy="-195" r="138"/><rect x="-207" y="-207" width="414" height="414"/></g>
+        </g>
+      </svg>
+    </div>
+    <div class="case-card">
+      <p class="case-tag">Case study  ·  ii</p>
+      <h3>Glazing at the Cluny Pavilion</h3>
+      <p class="case-meta">2022–2023  ·  Pavillon de Cluny, Paris V<sup>e</sup>  ·  contemporary insertion</p>
+      <p>A small ancillary pavilion of the abbatial enclosure, much altered, had lost its 14<sup>th</sup>-century traceried lights to a 1928 reglazing in steel and obscured cathedral. The fabric of the tracery survived; the glass did not, and no documentary record of the original cartoons existed.</p>
+      <p>We rejected pastiche. There was no scholarship to support a "restored" glazing scheme, and a faux-mediaeval quarry-and-grisaille would have lent false antiquity to a window with no surviving evidence of one. We commissioned the glassmaker Anne-Sophie Bauer to design a contemporary scheme of mouth-blown clear cylinder, leaded in a rhythm derived from the surveyed tracery but legible to any visitor as work of 2023.</p>
+      <div class="verdict">
+        <strong>Decision</strong>
+        Honest contemporary insertion under Venice Article 9. The mediaeval stone tracery reads first; the glass second; the date of the glass, third. Cost: €312,000.
+      </div>
+    </div>
+  </aside>
+
+  <!-- ===== CASE 3 ===== -->
+  <aside class="case">
+    <div class="case-arch">
+      <svg class="archtop" viewBox="0 0 500 550" preserveAspectRatio="none" aria-hidden="true">
+        <g fill="none" stroke="currentColor" stroke-width="3">
+          <path d="M250,40 Q120,40 60,260 L60,540 L100,540 L100,300 Q150,140 250,140 Q350,140 400,300 L400,540 L440,540 L440,260 Q380,40 250,40 Z"/>
+          <path d="M100,300 L400,300"/>
+          <path d="M250,140 L250,540"/>
+        </g>
+      </svg>
+      <svg class="quatrefoil" viewBox="0 0 600 600" aria-hidden="true">
+        <g fill="currentColor" transform="translate(300,300)scale(0.87)rotate(45)">
+          <circle cx="-195" r="163"/><circle cx="195" r="163"/><circle cy="195" r="163"/><circle cy="-195" r="163"/>
+          <rect x="-232" y="-232" width="464" height="464"/>
+          <g fill="#f4ecd8"><circle cx="-195" r="138"/><circle cx="195" r="138"/><circle cy="195" r="138"/><circle cy="-195" r="138"/><rect x="-207" y="-207" width="414" height="414"/></g>
+        </g>
+      </svg>
+    </div>
+    <div class="case-card">
+      <p class="case-tag">Case study  ·  iii</p>
+      <h3>The Missing Pinnacle, Saint-Léger</h3>
+      <p class="case-meta">2023–2024  ·  Saint-Léger d'Essômes-sur-Marne  ·  question of reinstatement</p>
+      <p>The south-east buttress of the chevet has stood without its pinnacle since at least 1789, when a parish account records "<em>la pyramide jetée bas par la foudre</em>." A 1654 elevation by Israël Silvestre shows it intact; nothing else does. The parish council asked us to rebuild it.</p>
+      <p>We declined. The single oblique image is insufficient evidence for a 4.2&nbsp;m carved element; the buttress has stood without it for 235 years, and the silhouette of the chevet as it now reads &mdash; truncated, austere &mdash; has itself entered the historical record. We proposed instead a campaign of consolidation to the buttress head, a discreet bronze plaque set into the pavement below recording the lost feature, and the deposit of our research file in the Archives départementales at Laon.</p>
+      <div class="verdict">
+        <strong>Decision</strong>
+        Null intervention; the lacuna preserved as record. The parish accepted in March 2024. Cost: €41,000.
+      </div>
+    </div>
+  </aside>
+
+</section>
+
+<!-- ============ SURVEY TIMELINE ============ -->
+<section class="survey-section">
+  <div class="survey-head">
+    <div class="divider" style="margin-bottom:24px">
+      <span class="rule"></span>
+      <svg viewBox="0 0 600 600" style="width:38px;height:38px;color:var(--ornament)" aria-hidden="true"><g fill="currentColor" transform="translate(300,300)scale(0.78)rotate(45)"><circle cx="-195" r="163"/><circle cx="195" r="163"/><circle cy="195" r="163"/><circle cy="-195" r="163"/><rect x="-232" y="-232" width="464" height="464"/><g fill="#f4ecd8"><circle cx="-195" r="138"/><circle cx="195" r="138"/><circle cy="195" r="138"/><circle cy="-195" r="138"/><rect x="-207" y="-207" width="414" height="414"/></g></g></svg>
+      <span class="rule"></span>
+    </div>
+    <p class="eyebrow" style="font-family:var(--font-display);font-style:italic;color:var(--secondary);letter-spacing:.18em;text-transform:uppercase;font-size:12px;margin:0 0 8px">— v —</p>
+    <h2>The Course of a Survey</h2>
+    <p class="lead">Fourteen weeks, in five movements, from first key turned in the lock to bound report on the diocesan desk.</p>
+  </div>
+
+  <div class="survey">
+    <div class="stage">
+      <div class="num">i.</div>
+      <h4>Archive</h4>
+      <p>Diocesan archives, departmental archives, parish accounts, photographic record. Every prior campaign documented, dated, and located on plan.</p>
+      <div class="day">Wks 1–2</div>
+    </div>
+    <div class="stage">
+      <div class="num">ii.</div>
+      <h4>Access</h4>
+      <p>Independent scaffold, drone overflight where the canopy permits, lift access to vault haunches. Photogrammetric capture at 4 mm GSD.</p>
+      <div class="day">Wks 3–5</div>
+    </div>
+    <div class="stage">
+      <div class="num">iii.</div>
+      <h4>The Hand Drawing</h4>
+      <p>Every elevation, plan, and section redrawn at 1:50 in graphite on Canson 200&nbsp;g/m². Crack maps, mortar maps, intervention maps as overlays.</p>
+      <div class="day">Wks 6–11</div>
+    </div>
+    <div class="stage">
+      <div class="num">iv.</div>
+      <h4>Diagnosis</h4>
+      <p>Petrographic samples to the laboratory at LRMH, Champs-sur-Marne. Mortar analyses; salt content; biological colonisation. Structural review.</p>
+      <div class="day">Wks 12–13</div>
+    </div>
+    <div class="stage">
+      <div class="num">v.</div>
+      <h4>The Report</h4>
+      <p>Bound dossier &mdash; roughly 180 pages &mdash; lodged with DRAC, the diocese, and our archive. Recommendations always offered against the null option.</p>
+      <div class="day">Wk 14</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COLOPHON ============ -->
+<p class="colophon">
+  This page set in Fraunces &amp; Source Sans 3.<br>
+  All charters cited are available on request from the studio library at 14 rue du Cardinal de Lorraine, Reims.<br>
+  &mdash; <em>Atelier Saint-Sévrin, mmxxiv</em> &mdash;
+</p>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="seal-wrap">
+    <svg class="seal" viewBox="0 0 600 600" aria-hidden="true">
+      <path fill="currentColor" transform="translate(0,0)scale(0.15)" d="M1778.9,3200A120.9,120.9 0 0,1 1657.97,3320.93A120.9,120.9 0 0,1 1537.04,3200A221.5,221.5 0 0,0 1456.32,3371.02A221.5,221.5 0 0,0 1677.83,3592.53A221.5,221.5 0 0,0 1818.61,3542.03A362.78,362.78 0 0,0 2000,3856.21A362.78,362.78 0 0,0 2181.39,3542.03A221.5,221.5 0 0,0 2322.17,3592.53A221.5,221.5 0 0,0 2543.68,3371.02A221.5,221.5 0 0,0 2462.96,3200A120.9,120.9 0 0,1 2342.03,3320.93A120.9,120.9 0 0,1 2221.1,3200V2221.1H3200A120.9,120.9 0 0,1 3320.93,2342.03A120.9,120.9 0 0,1 3200,2462.96A221.5,221.5 0 0,0 3371.02,2543.68A221.5,221.5 0 0,0 3592.53,2322.17A221.5,221.5 0 0,0 3542.03,2181.39A362.78,362.78 0 0,0 3856.21,2000A362.78,362.78 0 0,0 3542.03,1818.61A221.5,221.5 0 0,0 3592.53,1677.83A221.5,221.5 0 0,0 3371.02,1456.32A221.5,221.5 0 0,0 3200,1537.04A120.9,120.9 0 0,1 3320.93,1657.97A120.9,120.9 0 0,1 3200,1778.9H2221.1V800A120.9,120.9 0 0,1 2342.03,679.073A120.9,120.9 0 0,1 2462.96,800A221.5,221.5 0 0,0 2543.68,628.984A221.5,221.5 0 0,0 2322.17,407.475A221.5,221.5 0 0,0 2181.39,457.969A362.78,362.78 0 0,0 2000,143.793A362.78,362.78 0 0,0 1818.61,457.969A221.5,221.5 0 0,0 1677.83,407.475A221.5,221.5 0 0,0 1456.32,628.984A221.5,221.5 0 0,0 1537.04,800A120.9,120.9 0 0,1 1657.97,679.073A120.9,120.9 0 0,1 1778.9,800V1778.9H800A120.9,120.9 0 0,1 679.073,1657.97A120.9,120.9 0 0,1 800,1537.04A221.5,221.5 0 0,0 628.984,1456.32A221.5,221.5 0 0,0 407.475,1677.83A221.5,221.5 0 0,0 457.969,1818.61A362.78,362.78 0 0,0 143.793,2000A362.78,362.78 0 0,0 457.969,2181.39A221.5,221.5 0 0,0 407.475,2322.17A221.5,221.5 0 0,0 628.984,2543.68A221.5,221.5 0 0,0 800,2462.96A120.9,120.9 0 0,1 679.073,2342.03A120.9,120.9 0 0,1 800,2221.1H1778.9Z"/>
+    </svg>
+  </div>
+  <div class="heraldic-band" role="presentation"></div>
+  <div class="footer-text">
+    <p class="addr">
+      <strong>Atelier Saint-Sévrin</strong> — Architecture &amp; Sacred Conservation<br>
+      14 rue du Cardinal de Lorraine, 51100 Reims, France<br>
+      +33 (0)3 26 47 88 12  ·  atelier@saint-sevrin.fr
+    </p>
+    <p class="attr">Ordre des Architectes  ·  Compagnie des Architectes en Chef des Monuments Historiques  ·  mmxxiv</p>
+  </div>
+</footer>
+
+</body>
+</html>

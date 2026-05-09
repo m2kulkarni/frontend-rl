@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Campus & Visiting — Rikuō University</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), system-ui, sans-serif;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* ---------- NAV ---------- */
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.75rem 4rem 1.5rem;
+    border-bottom: 1px solid var(--primary);
+    background: var(--bg);
+  }
+  .wordmark {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    font-family: var(--font-display), serif;
+    font-size: 1.25rem;
+    letter-spacing: 0.05em;
+    color: var(--primary);
+    text-decoration: none;
+  }
+  .wordmark .seal {
+    width: 28px;
+    height: 28px;
+    display: block;
+  }
+  .nav-links {
+    display: flex;
+    list-style: none;
+    margin: 0; padding: 0;
+    align-items: center;
+  }
+  .nav-links li { margin-left: 2.5em; position: relative; }
+  .nav-links li:first-child { margin-left: 0; }
+  .nav-links a {
+    font-family: var(--font-body), sans-serif;
+    font-size: 14px;
+    color: var(--primary);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+  }
+  .nav-links a[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -10px;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+    transform: translateX(-50%);
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 6rem 4rem 5rem 4rem;
+    position: relative;
+    min-height: 520px;
+  }
+  .hero-eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 2rem;
+  }
+  .hero-eyebrow .dot {
+    display: inline-block;
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    margin-right: 0.9em;
+    vertical-align: middle;
+  }
+  .hero h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 500;
+    font-size: 4.25rem;
+    line-height: 1.15;
+    margin: 0 0 1.5rem 0;
+    color: var(--primary);
+    letter-spacing: -0.01em;
+  }
+  .hero h1 .alt {
+    font-family: var(--font-display), serif;
+    color: var(--secondary);
+    font-style: italic;
+    font-size: 2rem;
+    display: block;
+    margin-top: 0.5rem;
+    letter-spacing: 0.05em;
+  }
+  .hero-meta {
+    margin-top: 4rem;
+    max-width: 380px;
+    font-size: 0.95rem;
+    line-height: 1.85;
+    color: var(--text);
+  }
+  .hero-meta strong {
+    font-family: var(--font-display), serif;
+    font-weight: 500;
+    display: block;
+    margin-bottom: 0.4rem;
+    color: var(--text-emphasis);
+  }
+  .hero-right {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+  }
+  .hero-seal {
+    width: 220px;
+    height: 220px;
+    opacity: 0.92;
+    margin-top: 2rem;
+    margin-right: 2rem;
+  }
+  .hero-rule {
+    position: absolute;
+    right: 4rem;
+    bottom: 5rem;
+    width: 1px;
+    height: 120px;
+    background: var(--accent);
+  }
+  .hero-rule-label {
+    position: absolute;
+    right: 5rem;
+    bottom: 5rem;
+    writing-mode: vertical-rl;
+    font-family: var(--font-display), serif;
+    font-size: 0.85rem;
+    color: var(--secondary);
+    letter-spacing: 0.5em;
+  }
+
+  /* ---------- DIVIDER ---------- */
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem 4rem;
+    gap: 2rem;
+  }
+  .divider svg {
+    width: 64px; height: 64px;
+    opacity: 0.55;
+  }
+  .divider .line {
+    flex: 0 1 180px;
+    height: 1px;
+    background: var(--primary);
+    opacity: 0.6;
+  }
+  .divider .label {
+    font-family: var(--font-display), serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.6em;
+    text-transform: uppercase;
+    color: var(--primary);
+  }
+
+  /* ---------- VISIT GRID ---------- */
+  .visit-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3rem;
+    padding: 4rem 4rem 5rem;
+  }
+  .card {
+    background: var(--surface);
+    border-top: 1px solid var(--primary);
+    border-left: 1px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
+    border-right: none;
+    padding: 2.5rem;
+    position: relative;
+  }
+  .card .umebachi {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    width: 24px;
+    height: 24px;
+    opacity: 0.85;
+  }
+  .card h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 500;
+    font-size: 1.5rem;
+    margin: 0 0 0.4rem 0;
+    color: var(--primary);
+  }
+  .card .subtitle {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--secondary);
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.05em;
+  }
+  .card p {
+    font-size: 1rem;
+    line-height: 1.75;
+    margin: 0 0 1rem 0;
+  }
+  .card dl {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.8;
+  }
+  .card dt {
+    font-family: var(--font-display), serif;
+    color: var(--text-emphasis);
+    margin-top: 0.6rem;
+  }
+  .card dd { margin: 0; padding: 0; }
+
+  /* ---------- HALLS ---------- */
+  .halls {
+    position: relative;
+    padding: 5rem 4rem 6rem;
+    overflow: hidden;
+  }
+  .halls::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='700' height='700' viewBox='0 0 700 700'><defs><g id='C1'><path d='M 1,210 V 100 A 98,98 0 0 1 100,1 98,98 0 0 1 199,100 V 210' fill='none' stroke='%231c3a5e' stroke-width='2'/><path d='M 175,210 V 100 A 75,75 0 0 0 100,25 75,75 0 0 0 25,100 V 210' fill='none' stroke='%231c3a5e' stroke-width='1'/></g></defs><g id='C4'><use href='%23C1'/><use href='%23C1' transform='translate(200,0)'/><use href='%23C1' transform='translate(400,0)'/><use href='%23C1' transform='translate(600,0)'/></g><use href='%23C4' transform='translate(-100,100)'/><use href='%23C4' transform='translate(0,200)'/><use href='%23C4' transform='translate(-100,300)'/><use href='%23C4' transform='translate(0,400)'/><use href='%23C4' transform='translate(-100,500)'/><use href='%23C4' transform='translate(0,600)'/></svg>");
+    background-size: 350px;
+    background-position: center top;
+    opacity: 0.08;
+    pointer-events: none;
+  }
+  .halls-inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    gap: 5rem;
+  }
+  .halls h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 500;
+    font-size: 2.5rem;
+    line-height: 1.2;
+    margin: 0 0 1.5rem 0;
+    color: var(--primary);
+  }
+  .halls .lede {
+    font-size: 1rem;
+    line-height: 1.85;
+    color: var(--text);
+  }
+  .halls-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+  .hall {
+    border-top: 1px solid var(--primary);
+    padding: 2rem 2rem 2rem 0;
+    position: relative;
+  }
+  .hall:nth-child(odd) { padding-right: 2.5rem; }
+  .hall:nth-child(even) { padding-left: 2.5rem; border-left: 1px solid var(--primary); }
+  .hall:nth-last-child(-n+2) { border-bottom: 1px solid var(--primary); }
+  .hall .glyph {
+    font-family: var(--font-display), serif;
+    font-size: 3rem;
+    line-height: 1;
+    color: var(--primary);
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+  .hall:first-child .glyph { color: var(--accent); }
+  .hall h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 500;
+    font-size: 1.15rem;
+    margin: 0 0 0.5rem 0;
+    color: var(--text-emphasis);
+  }
+  .hall p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    margin: 0;
+    color: var(--text);
+  }
+
+  /* ---------- TOUR / ACCESS ---------- */
+  .schedule {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    padding: 5rem 4rem;
+    gap: 5rem;
+    align-items: start;
+  }
+  .schedule-left h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 500;
+    font-size: 2.2rem;
+    margin: 0 0 2rem 0;
+  }
+  .tour-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+  }
+  .tour-table th, .tour-table td {
+    text-align: left;
+    padding: 1rem 0.5rem;
+    border-bottom: 1px solid rgba(12,12,12,0.2);
+    vertical-align: top;
+  }
+  .tour-table th {
+    font-family: var(--font-display), serif;
+    font-weight: 500;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    width: 28%;
+  }
+  .tour-table td .marker {
+    color: var(--accent);
+    margin-right: 0.5em;
+  }
+  .schedule-right {
+    border-left: 1px solid var(--primary);
+    padding-left: 3rem;
+  }
+  .schedule-right h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 500;
+    font-size: 1.4rem;
+    margin: 0 0 1rem 0;
+  }
+  .schedule-right p {
+    font-size: 0.95rem;
+    line-height: 1.85;
+    margin: 0 0 1.2rem 0;
+  }
+  .schedule-right .station {
+    font-family: var(--font-display), serif;
+    color: var(--text-emphasis);
+  }
+
+  /* ---------- INDIGO GARDEN ---------- */
+  .garden {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 4rem 4rem 6rem;
+    gap: 4rem;
+    align-items: center;
+  }
+  .garden-text h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 500;
+    font-size: 2rem;
+    margin: 0 0 1.5rem 0;
+    line-height: 1.3;
+  }
+  .garden-text h2 .first {
+    color: var(--accent);
+    font-size: 3rem;
+    line-height: 1;
+    float: left;
+    margin: 0.1em 0.15em 0 0;
+    font-family: var(--font-display), serif;
+  }
+  .garden-text p {
+    font-size: 1rem;
+    line-height: 1.85;
+    margin: 0 0 1.2rem 0;
+  }
+  .garden-figure {
+    background: var(--surface);
+    border: 1px solid var(--primary);
+    border-right: none;
+    padding: 3rem;
+    position: relative;
+    min-height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .garden-figure svg {
+    width: 100%;
+    max-width: 300px;
+    opacity: 0.75;
+  }
+  .garden-figure .caption {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 3rem;
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--secondary);
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    position: relative;
+    padding: 4rem 4rem 3rem;
+    border-top: 1px solid var(--primary);
+    overflow: hidden;
+  }
+  footer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='700' height='700' viewBox='0 0 700 700'><defs><g id='C1'><path d='M 1,210 V 100 A 98,98 0 0 1 100,1 98,98 0 0 1 199,100 V 210' fill='none' stroke='%230c0c0c' stroke-width='2'/><path d='M 175,210 V 100 A 75,75 0 0 0 100,25 75,75 0 0 0 25,100 V 210' fill='none' stroke='%230c0c0c' stroke-width='1'/></g></defs><g id='C4'><use href='%23C1'/><use href='%23C1' transform='translate(200,0)'/><use href='%23C1' transform='translate(400,0)'/><use href='%23C1' transform='translate(600,0)'/></g><use href='%23C4' transform='translate(-100,100)'/><use href='%23C4' transform='translate(0,200)'/><use href='%23C4' transform='translate(-100,300)'/><use href='%23C4' transform='translate(0,400)'/><use href='%23C4' transform='translate(-100,500)'/><use href='%23C4' transform='translate(0,600)'/></svg>");
+    background-size: 400px;
+    opacity: 0.08;
+    pointer-events: none;
+  }
+  .footer-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr;
+    gap: 4rem;
+  }
+  .footer-left .kiri {
+    width: 48px; height: 48px;
+    display: block;
+    margin-bottom: 1.5rem;
+  }
+  .footer-left .stack {
+    font-family: var(--font-display), serif;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--primary);
+  }
+  .footer-left .stack span { display: block; }
+  .footer-left .founded {
+    font-size: 0.8rem;
+    margin-top: 0.6rem;
+    color: var(--secondary);
+    letter-spacing: 0.15em;
+  }
+  .footer-center {
+    font-size: 0.85rem;
+    line-height: 1.85;
+    max-width: 220px;
+  }
+  .footer-center h4 {
+    font-family: var(--font-display), serif;
+    font-weight: 500;
+    font-size: 0.85rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin: 0 0 1rem 0;
+    color: var(--secondary);
+  }
+  .footer-right {
+    font-size: 0.75rem;
+    line-height: 1.7;
+    color: var(--text);
+    opacity: 0.85;
+  }
+  .footer-right h4 {
+    font-family: var(--font-display), serif;
+    font-weight: 500;
+    font-size: 0.85rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin: 0 0 1rem 0;
+    color: var(--secondary);
+    opacity: 1;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============= NAVIGATION ============= -->
+<nav class="nav">
+  <a href="page-1.html" class="wordmark">
+    <svg class="seal" viewBox="0 0 345 326" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <g transform="scale(0.95) translate(8,12)" fill="currentColor">
+        <circle cx="172.6" cy="155" r="9.9"/>
+        <path d="M73,128.9c4.3-3.3,5.9-3.8,11.1-3.7c2.6,0.1,5,0.3,5.3,0.6c1.4,1.1,10.1,2.6,13,2.2c2.2-0.3,4.7-2.1,6-4.3c1.1-1.8,1.2-5.3,0.2-7c-0.9-1.6-0.9-3.6,0.1-6.3c1-2.8,0.6-4.3-1.7-6.9c-1.4-1.5-2.6-2.3-4.7-2.9c-2.8-0.8-2.9-0.8-5.5,0.2c-3.4,1.3-4.2,1.3-6.5,0.1c-3.7-1.9-9-0.8-11.7,2.4c-1.5,1.7-1.6,3.2-0.8,8.1c0.8,4.7-0.9,8.4-4.5,10.4c-3.2,1.7-4.1-0.6-4.1-11C68.9,102.3,69.4,100.5,72.1,97.7z"/>
+        <path d="M172.6,180c-15,0-27.3,12.2-27.3,27.3s12.2,27.3,27.3,27.3s27.3-12.2,27.3-27.3S187.7,180,172.6,180z M172.6,225c-9.8,0-17.7-7.9-17.7-17.7s7.9-17.7,17.7-17.7s17.7,7.9,17.7,17.7S182.4,225,172.6,225z"/>
+      </g>
+    </svg>
+    <span>陸王 &nbsp; Rikuō University</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="page-1.html">Home</a></li>
+    <li><a href="page-2.html">Faculties</a></li>
+    <li><a href="page-3.html">Admissions</a></li>
+    <li><a href="page-4.html">Library</a></li>
+    <li><a href="page-5.html" aria-current="page">Visiting</a></li>
+    <li><a href="page-6.html">About</a></li>
+  </ul>
+</nav>
+
+<!-- ============= HERO ============= -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow"><span class="dot"></span>Campus &nbsp;·&nbsp; Yanaka, Taitō Ward</div>
+    <h1>
+      Visiting the
+      Yanaka Campus
+      <span class="alt">谷中校舎案内 — A Guide for Guests</span>
+    </h1>
+    <div class="hero-meta">
+      <strong>Founded grounds, retained.</strong>
+      Four Meiji-era wooden lecture halls — Kō, Otsu, Hei, and Tei — stand as
+      they were raised in 1889, set among gravel courts, a working indigo-dye
+      garden, and the original Kiri Gate from which all public tours depart.
+    </div>
+  </div>
+  <div class="hero-right">
+    <svg class="hero-seal" viewBox="0 0 345 326" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <g transform="matrix(0.986,0,0,0.986,2.4,5.4)" fill="#0c0c0c">
+        <circle cx="172.6" cy="155" r="9.9"/>
+        <path d="M175.2,166.1c-0.3,3.7-0.7,7.5-0.8,11.2c16.5,8.7,32,20,43,35.3c10.9,16.6,19.5,36.6,16.8,57c-1.4-7.3-1.8-14.5-3.4-21.8c-7.3-29.3-29.4-53-55.9-66.6c-0.2,3.8-0.1,7.7-0.1,11.5c14.1,8.1,26.6,19.3,35.4,33.2c11.9,19.6,15.1,45.1,6.3,66.8c1.8-12.7,2.7-25.5,1.2-38.1c-4.2-24.7-20.7-46.4-42.8-57.9c-0.1,5.2-0.1,10.2-0.3,15.4c11.4,6.6,21.6,16.1,27.1,28.3c8.6,19.3,8.6,42.8-1,61.9c2.7-16.3,6.8-33,1.9-49.3c-3.4-15.9-14.2-29.4-28.3-36.7c0.2,4.2-1.1,9.4,2,13c17.8,20.9,21.3,52.9,9.7,77.5c0.9-8.6,3.3-17.1,3.2-25.9c1.2-17.1-3.2-35.2-14.8-48.2c-0.2,21.8,0.4,43.7,0.2,65.3c-0.2,3.5-0.7,6.7-1.6,10c-0.1-0.3-0.1-0.6-0.2-0.9c-0.1,0.3-0.1,0.6-0.2,0.9c-0.9-3.3-1.5-6.5-1.6-10c-0.2-21.7,0.4-43.5,0.2-65.3c-11.6,12.9-16,31.1-14.8,48.2c-0.1,8.8,2.3,17.2,3.2,25.9c-11.7-24.6-8.1-56.6,9.7-77.5c3.1-3.6,1.8-8.8,2-13c-14,7.4-24.9,20.9-28.3,36.7c-4.9,16.2-0.8,32.9,1.9,49.3c-9.6-19.1-9.6-42.6-1-61.9c5.5-12.2,15.7-21.7,27.1-28.3c-0.1-5.2-0.1-10.2-0.3-15.4c-22.1,11.5-38.6,33.2-42.8,57.9c-1.4,12.6-0.6,25.4,1.2,38.1c-8.8-21.7-5.6-47.2,6.3-66.8c8.7-13.9,21.3-25.1,35.4-33.2c0-3.8,0.1-7.7-0.1-11.5c-26.5,13.6-48.6,37.3-55.9,66.6c-1.6,7.3-2,14.5-3.4,21.8c-2.7-20.3,5.9-40.4,16.8-57c11-15.2,26.5-26.6,43-35.3c-0.2-3.7-0.5-7.5-0.8-11.2c-44.7,15.6-75.1,63.1-73.4,109.8c0.7,6.3,5.8,10.6,10.8,13.9c3.1,1.6,3.2,5.4,4.7,8.3c5.2,13.5,21.9,20.5,35.3,16.4c6.9,6.1,15.5,12.1,25.1,11.8c9.7,0.3,18.2-5.7,25.1-11.8c13.5,4.1,30.1-2.9,35.3-16.4c1.5-2.9,1.7-6.7,4.7-8.3c5-3.3,10.1-7.6,10.8-13.9C250.3,229.2,219.9,181.6,175.2,166.1z"/>
+      </g>
+    </svg>
+  </div>
+  <div class="hero-rule" aria-hidden="true"></div>
+  <div class="hero-rule-label">EST. 1889</div>
+</section>
+
+<!-- ============= DIVIDER ============= -->
+<div class="divider" aria-hidden="true">
+  <span class="line"></span>
+  <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+    <g fill="none" stroke="#0c0c0c" stroke-width="2">
+      <polygon points="501.6,301.2 551.1,251.7 500.8,201.4 451.3,250.9 300.9,100.5 350.4,51 300.1,0.7 250.6,50.2 201.1,0.7 150.3,51.5 500.3,401.5 551.1,350.7"/>
+      <polygon points="600.9,199.9 551.6,150.7 601.2,101 550.7,50.4 501,100.1 450.4,150.7 400.8,200.3 451.3,250.9 501,201.2 550.3,250.5"/>
+      <polygon points="349.9,452.9 300.4,502.4 250.1,452.1 299.6,402.6 149.2,252.2 99.7,301.7 49.4,251.4 98.9,201.9 49.4,152.4 100.2,101.6 450.2,451.6 399.4,502.4"/>
+      <polygon points="248.7,552.1 199.4,502.9 149.7,552.5 99.2,501.9 148.8,452.3 199.4,401.7 249,352.1 299.6,402.6 250,452.3 299.2,501.6"/>
+    </g>
+  </svg>
+  <span class="label">Plan Your Visit</span>
+  <span class="line"></span>
+</div>
+
+<!-- ============= VISIT GRID ============= -->
+<section class="visit-grid">
+
+  <article class="card">
+    <svg class="umebachi" viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect width="688" height="688" fill="#0c0c0c"/>
+      <path fill="#f5efde" d="M226,612c-18-2-37-9-52-21c-30-22-44-58-39-95c4-30,22-58,49-72c33-17,76-11,103,15c25,23,33,57,22,89c-12,33-43,55-78,57z M440,612c-18-2-37-9-52-21c-30-22-44-58-39-95c4-30,22-58,49-72c33-17,76-11,103,15c25,23,33,57,22,89c-12,33-43,55-78,57z M333,283c-30-3-58-15-79-37c-28-29-37-72-22-110c12-29,37-50,68-58c33-9,68-2,95,18c20,15,34,37,40,62c8,30,1,63-19,87c-19,22-46,36-77,38z M160,410c-30-3-58-15-79-37c-28-29-37-72-22-110c12-29,37-50,68-58c33-9,68-2,95,18c20,15,34,37,40,62c8,30,1,63-19,87c-19,22-46,36-77,38z M506,410c-30-3-58-15-79-37c-28-29-37-72-22-110c12-29,37-50,68-58c33-9,68-2,95,18c20,15,34,37,40,62c8,30,1,63-19,87c-19,22-46,36-77,38z"/>
+    </svg>
+    <h2>Address &amp; Grounds</h2>
+    <div class="subtitle">所在地</div>
+    <p>The Yanaka campus occupies a quiet quarter west of Yanaka Cemetery, set back from Sansaki-zaka behind a low cypress wall.</p>
+    <dl>
+      <dt>Postal</dt>
+      <dd>3-12-7 Yanaka, Taitō Ward<br>Tokyo 110-0001 &nbsp; Japan</dd>
+      <dt>Hours (Visitors)</dt>
+      <dd>Tue – Sat &nbsp; 09:30 – 17:00</dd>
+      <dt>Closed</dt>
+      <dd>Sundays, Mondays, and University holidays</dd>
+    </dl>
+  </article>
+
+  <article class="card">
+    <svg class="umebachi" viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect width="688" height="688" fill="#0c0c0c"/>
+      <path fill="#f5efde" d="M226,612c-18-2-37-9-52-21c-30-22-44-58-39-95c4-30,22-58,49-72c33-17,76-11,103,15c25,23,33,57,22,89c-12,33-43,55-78,57z M440,612c-18-2-37-9-52-21c-30-22-44-58-39-95c4-30,22-58,49-72c33-17,76-11,103,15c25,23,33,57,22,89c-12,33-43,55-78,57z M333,283c-30-3-58-15-79-37c-28-29-37-72-22-110c12-29,37-50,68-58c33-9,68-2,95,18c20,15,34,37,40,62c8,30,1,63-19,87c-19,22-46,36-77,38z M160,410c-30-3-58-15-79-37c-28-29-37-72-22-110c12-29,37-50,68-58c33-9,68-2,95,18c20,15,34,37,40,62c8,30,1,63-19,87c-19,22-46,36-77,38z M506,410c-30-3-58-15-79-37c-28-29-37-72-22-110c12-29,37-50,68-58c33-9,68-2,95,18c20,15,34,37,40,62c8,30,1,63-19,87c-19,22-46,36-77,38z"/>
+    </svg>
+    <h2>Public Tours</h2>
+    <div class="subtitle">公開見学</div>
+    <p>Free guided walks of the historic precinct depart every Thursday at 14:00 from the Kiri Gate. The route covers the four lecture halls, the indigo garden, and the Hakuro Library forecourt.</p>
+    <dl>
+      <dt>Schedule</dt>
+      <dd>Thursdays · 14:00 (sharp)</dd>
+      <dt>Duration</dt>
+      <dd>Approximately 75 minutes</dd>
+      <dt>Languages</dt>
+      <dd>Japanese, with printed English notes</dd>
+      <dt>Reservation</dt>
+      <dd>Walk-ups welcome; groups of 6+ kindly write ahead</dd>
+    </dl>
+  </article>
+
+  <article class="card">
+    <svg class="umebachi" viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect width="688" height="688" fill="#0c0c0c"/>
+      <path fill="#f5efde" d="M226,612c-18-2-37-9-52-21c-30-22-44-58-39-95c4-30,22-58,49-72c33-17,76-11,103,15c25,23,33,57,22,89c-12,33-43,55-78,57z M440,612c-18-2-37-9-52-21c-30-22-44-58-39-95c4-30,22-58,49-72c33-17,76-11,103,15c25,23,33,57,22,89c-12,33-43,55-78,57z M333,283c-30-3-58-15-79-37c-28-29-37-72-22-110c12-29,37-50,68-58c33-9,68-2,95,18c20,15,34,37,40,62c8,30,1,63-19,87c-19,22-46,36-77,38z M160,410c-30-3-58-15-79-37c-28-29-37-72-22-110c12-29,37-50,68-58c33-9,68-2,95,18c20,15,34,37,40,62c8,30,1,63-19,87c-19,22-46,36-77,38z M506,410c-30-3-58-15-79-37c-28-29-37-72-22-110c12-29,37-50,68-58c33-9,68-2,95,18c20,15,34,37,40,62c8,30,1,63-19,87c-19,22-46,36-77,38z"/>
+    </svg>
+    <h2>Getting Here</h2>
+    <div class="subtitle">交通案内</div>
+    <p>Five minutes on foot from Nippori Station via the Yanaka Ginza shōtengai. The campus is unmistakable — a low tile-roofed gatehouse marked with the paulownia seal.</p>
+    <dl>
+      <dt>Train</dt>
+      <dd>Nippori Station — JR Yamanote, JR Jōban, Keisei Main Line</dd>
+      <dt>On Foot</dt>
+      <dd>5 min. via Yūyake-dandan steps</dd>
+      <dt>Bicycle</dt>
+      <dd>Visitor racks at the eastern hedge wall</dd>
+      <dt>Bicycle Hire</dt>
+      <dd>Yanaka Cycle, 4-min. walk west</dd>
+    </dl>
+  </article>
+
+</section>
+
+<!-- ============= HALLS ============= -->
+<section class="halls">
+  <div class="halls-inner">
+    <div>
+      <h2>The Four<br>Meiji Halls</h2>
+      <p class="lede">
+        Raised in 1889 by master carpenter Andō Kazuhei of Yanaka, the four
+        wooden lecture halls — named in the old enumerative order
+        <em>Kō, Otsu, Hei, Tei</em> — remain in continuous teaching use.
+        Their sugi-bark roofs are recoursed every fourteen years; the next
+        recoursing is scheduled for spring 2027.
+      </p>
+    </div>
+
+    <div class="halls-list">
+      <article class="hall">
+        <span class="glyph">甲</span>
+        <h3>Kō Hall &nbsp;— Letters</h3>
+        <p>The eldest of the four. Houses the philology and classical Japanese seminars. North-facing tatami floor, original ranma transom carvings.</p>
+      </article>
+      <article class="hall">
+        <span class="glyph">乙</span>
+        <h3>Otsu Hall &nbsp;— Crafts</h3>
+        <p>Studios for woodblock cutting, paste-resist dyeing, and bookbinding. Adjoins the indigo garden through a covered roka.</p>
+      </article>
+      <article class="hall">
+        <span class="glyph">丙</span>
+        <h3>Hei Hall &nbsp;— History</h3>
+        <p>Lecture hall and seminar suite for the Faculty of History. Original 1889 blackboard, reglazed annually with sumi-ink.</p>
+      </article>
+      <article class="hall">
+        <span class="glyph">丁</span>
+        <h3>Tei Hall &nbsp;— Music</h3>
+        <p>Acoustically retuned in 1972 by Kawabata Iwao. Used for shōmyō recitation, gagaku rehearsal, and chamber recitals.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============= SCHEDULE / ACCESS ============= -->
+<section class="schedule">
+  <div class="schedule-left">
+    <h2>Tour Schedule, in Detail</h2>
+    <table class="tour-table">
+      <tr>
+        <th>13:50</th>
+        <td><span class="marker">●</span>Assemble at the Kiri Gate, west side. Look for the paulownia seal carved above the lintel.</td>
+      </tr>
+      <tr>
+        <th>14:00</th>
+        <td>Tour begins. Brief introduction and a reading of the 1889 charter inscription.</td>
+      </tr>
+      <tr>
+        <th>14:15</th>
+        <td>Walk through the gravel courtyard to <em>Kō Hall</em> and <em>Otsu Hall</em>.</td>
+      </tr>
+      <tr>
+        <th>14:45</th>
+        <td>The indigo-dye garden — tended by Faculty of Fine Crafts students; demonstrations as conditions permit.</td>
+      </tr>
+      <tr>
+        <th>15:05</th>
+        <td><em>Hei Hall</em> and <em>Tei Hall</em>; the original 1889 blackboard.</td>
+      </tr>
+      <tr>
+        <th>15:15</th>
+        <td>Conclusion at the Hakuro Library forecourt. Tea is offered when weather permits.</td>
+      </tr>
+    </table>
+  </div>
+
+  <aside class="schedule-right">
+    <h3>From Nippori Station</h3>
+    <p>
+      Exit through the <span class="station">West Exit</span> of Nippori Station.
+      Cross under the Sansaki-bashi bridge and ascend the Yūyake-dandan stone
+      steps. At the top, turn left onto Sansaki-zaka and continue 180 metres
+      until you reach a low cypress hedge.
+    </p>
+    <p>
+      The Kiri Gate stands at the far end, marked by a single dark-tiled
+      gatehouse. The whole walk takes approximately five minutes at an
+      unhurried pace.
+    </p>
+    <p>
+      <span class="station">Note —</span> the lane through Yanaka Ginza is
+      narrowest on weekend afternoons; weekday visits are quieter and
+      recommended for guests using mobility aids.
+    </p>
+  </aside>
+</section>
+
+<!-- ============= INDIGO GARDEN ============= -->
+<section class="garden">
+  <div class="garden-text">
+    <h2><span class="first">藍</span>The Indigo-Dye Garden</h2>
+    <p>
+      Behind Otsu Hall, a working <em>aizome</em> garden has been continuously
+      cultivated by students of the Faculty of Fine Crafts since 1903. The
+      garden raises Japanese indigo (<em>tade-ai</em>) from seed each April,
+      with the leaves harvested between July and September and composted
+      into <em>sukumo</em> through the autumn months.
+    </p>
+    <p>
+      Visitors on the Thursday tour may observe — but not handle — the
+      fermentation vats. The garden is closed to the public during the harvest
+      itself (typically the third week of August), when the entire faculty
+      assembles for cutting and stacking.
+    </p>
+    <p>
+      Finished cloth from the previous year's vats is sold at the annual
+      <em>Kōbō-kai</em> craft fair held on the first Saturday of November.
+    </p>
+  </div>
+  <figure class="garden-figure">
+    <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <g fill="none" stroke="#1c3a5e" stroke-width="2">
+        <polygon points="501.6,301.2 551.1,251.7 500.8,201.4 451.3,250.9 300.9,100.5 350.4,51 300.1,0.7 250.6,50.2 201.1,0.7 150.3,51.5 500.3,401.5 551.1,350.7"/>
+        <polygon points="600.9,199.9 551.6,150.7 601.2,101 550.7,50.4 501,100.1 450.4,150.7 400.8,200.3 451.3,250.9 501,201.2 550.3,250.5"/>
+        <polyline points="600,0 400.8,200.3 351,150.5 501.5,0"/>
+        <polygon points="349.9,452.9 300.4,502.4 250.1,452.1 299.6,402.6 149.2,252.2 99.7,301.7 49.4,251.4 98.9,201.9 49.4,152.4 100.2,101.6 450.2,451.6 399.4,502.4"/>
+        <polygon points="248.7,552.1 199.4,502.9 149.7,552.5 99.2,501.9 148.8,452.3 199.4,401.7 249,352.1 299.6,402.6 250,452.3 299.2,501.6"/>
+        <polygon points="-0.9,302.6 48.4,351.9 -1.2,401.5 49.3,452.1 99,402.5 149.6,351.9 199.2,302.2 148.7,251.7 99,301.3 49.7,252"/>
+      </g>
+    </svg>
+    <figcaption class="caption">— sayagata pattern, garden lattice screen</figcaption>
+  </figure>
+</section>
+
+<!-- ============= FOOTER ============= -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-left">
+      <svg class="kiri" viewBox="0 0 345 326" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g transform="matrix(0.986,0,0,0.986,2.4,5.4)" fill="#0c0c0c">
+          <circle cx="172.6" cy="155" r="9.9"/>
+          <path d="M175.2,166.1c-0.3,3.7-0.7,7.5-0.8,11.2c16.5,8.7,32,20,43,35.3c10.9,16.6,19.5,36.6,16.8,57c-1.4-7.3-1.8-14.5-3.4-21.8c-7.3-29.3-29.4-53-55.9-66.6c-0.2,3.8-0.1,7.7-0.1,11.5c14.1,8.1,26.6,19.3,35.4,33.2c11.9,19.6,15.1,45.1,6.3,66.8c1.8-12.7,2.7-25.5,1.2-38.1c-4.2-24.7-20.7-46.4-42.8-57.9c-0.1,5.2-0.1,10.2-0.3,15.4c11.4,6.6,21.6,16.1,27.1,28.3c8.6,19.3,8.6,42.8-1,61.9c2.7-16.3,6.8-33,1.9-49.3c-3.4-15.9-14.2-29.4-28.3-36.7c0.2,4.2-1.1,9.4,2,13c17.8,20.9,21.3,52.9,9.7,77.5c0.9-8.6,3.3-17.1,3.2-25.9c1.2-17.1-3.2-35.2-14.8-48.2c-0.2,21.8,0.4,43.7,0.2,65.3c-0.2,3.5-0.7,6.7-1.6,10c-0.1-0.3-0.1-0.6-0.2-0.9c-0.1,0.3-0.1,0.6-0.2,0.9c-0.9-3.3-1.5-6.5-1.6-10c-0.2-21.7,0.4-43.5,0.2-65.3c-11.6,12.9-16,31.1-14.8,48.2c-0.1,8.8,2.3,17.2,3.2,25.9c-11.7-24.6-8.1-56.6,9.7-77.5c3.1-3.6,1.8-8.8,2-13c-14,7.4-24.9,20.9-28.3,36.7c-4.9,16.2-0.8,32.9,1.9,49.3c-9.6-19.1-9.6-42.6-1-61.9c5.5-12.2,15.7-21.7,27.1-28.3c-0.1-5.2-0.1-10.2-0.3-15.4c-22.1,11.5-38.6,33.2-42.8,57.9c-1.4,12.6-0.6,25.4,1.2,38.1c-8.8-21.7-5.6-47.2,6.3-66.8c8.7-13.9,21.3-25.1,35.4-33.2c0-3.8,0.1-7.7-0.1-11.5c-26.5,13.6-48.6,37.3-55.9,66.6c-1.6,7.3-2,14.5-3.4,21.8c-2.7-20.3,5.9-40.4,16.8-57c11-15.2,26.5-26.6,43-35.3C175.9,173.6,175.5,169.8,175.2,166.1z"/>
+        </g>
+      </svg>
+      <div class="stack">
+        <span>陸 王 大 學</span>
+        <span>Rikuō University</span>
+        <span>of the Eastern Capital</span>
+      </div>
+      <div class="founded">FOUNDED &nbsp; MEIJI 22 &nbsp;·&nbsp; 1889</div>
+    </div>
+
+    <div class="footer-center">
+      <h4>Address</h4>
+      3-12-7 Yanaka<br>
+      Taitō Ward, Tokyo<br>
+      110-0001 Japan<br><br>
+      Telephone &nbsp;03-3821-XXXX<br>
+      visit@rikuo.ac.jp
+    </div>
+
+    <div class="footer-right">
+      <h4>Attribution</h4>
+      Kamon vector forms — kiri paulownia, umebachi plum, sayagata key-fret,
+      and seigaiha wave — adapted from public-domain renderings by
+      Wikimedia Commons contributors and used under
+      Creative Commons Attribution-ShareAlike 4.0 (CC&nbsp;BY-SA&nbsp;4.0).
+      Building photographs and editorial text © Rikuō University, 2024.
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

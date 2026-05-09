@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Permanent Collection — Antiquarium Traianum</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    margin: 0;
+    font-family: var(--font-body), Georgia, serif;
+    font-size: 17px;
+    line-height: 1.65;
+  }
+
+  /* ============ MASTHEAD ============ */
+  .masthead {
+    background: var(--surface);
+    padding: 2.5rem 2rem 1.25rem;
+    text-align: center;
+    border-bottom: 1px solid rgba(169,50,38,0.15);
+  }
+  .masthead .senatus {
+    font-family: var(--font-display), serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.55em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin: 0 0 0.65rem;
+  }
+  .masthead h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 600;
+    font-size: 2.55rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 0.4rem;
+    color: var(--text);
+  }
+  .masthead .latin {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    letter-spacing: 0.22em;
+    color: var(--primary);
+    margin: 0;
+  }
+  .rule-pair {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.9rem;
+    margin: 1rem auto 0;
+    max-width: 720px;
+  }
+  .rule-pair .bar {
+    flex: 1;
+    height: 2px;
+    background: var(--primary);
+  }
+  .rule-pair .bar.thin {
+    height: 1px;
+    background: var(--ornament);
+  }
+  .rule-pair svg.vine {
+    width: 26px;
+    height: 26px;
+    fill: var(--ornament);
+  }
+
+  /* ============ NAVIGATION ============ */
+  nav.primary {
+    background: var(--surface);
+    padding: 1rem 1rem 1.1rem;
+    text-align: center;
+  }
+  nav.primary ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0;
+  }
+  nav.primary li {
+    display: inline-flex;
+    align-items: center;
+  }
+  nav.primary a {
+    font-family: var(--font-display), serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--text);
+    text-decoration: none;
+    padding: 0.35rem 1.1rem;
+  }
+  nav.primary a[aria-current="page"] {
+    color: var(--primary);
+    border-bottom: 2px solid var(--primary);
+  }
+  nav.primary .sep {
+    width: 14px;
+    height: 14px;
+    fill: var(--ornament);
+    opacity: 0.85;
+  }
+
+  /* ============ MEANDER STRIP ============ */
+  .meander-strip {
+    width: 100%;
+    height: 36px;
+    background:
+      repeating-linear-gradient(90deg,
+        var(--ornament) 0 2px,
+        transparent 2px 14px);
+    position: relative;
+    border-top: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+    overflow: hidden;
+  }
+  .meander-strip svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .meander-strip svg path {
+    fill: var(--ornament);
+    stroke: none;
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    background: var(--bg);
+    padding: 3rem 2rem 2.25rem;
+    text-align: center;
+    position: relative;
+  }
+  .pediment {
+    width: 720px;
+    height: 90px;
+    margin: 0 auto 1rem;
+    position: relative;
+  }
+  .pediment::before {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 4px;
+    background: var(--primary);
+  }
+  .pediment::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 4px;
+    transform: translateX(-50%);
+    width: 0; height: 0;
+    border-left: 360px solid transparent;
+    border-right: 360px solid transparent;
+    border-bottom: 86px solid var(--surface);
+  }
+  .pediment .acroterion {
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 86px;
+    border-left: 360px solid transparent;
+    border-right: 360px solid transparent;
+    border-bottom: 86px solid transparent;
+  }
+  .pediment-inscription {
+    position: absolute;
+    bottom: 18px;
+    left: 0; right: 0;
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.4em;
+    color: var(--accent);
+    text-transform: uppercase;
+    z-index: 2;
+  }
+
+  .hero-frame {
+    position: relative;
+    max-width: 880px;
+    margin: 0 auto;
+  }
+  .hero-frame .wreath {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 230px;
+    height: auto;
+    opacity: 0.9;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .hero-frame h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 600;
+    font-size: 2.85rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin: 1rem 0 0.5rem;
+    color: var(--text);
+    position: relative;
+    z-index: 1;
+  }
+  .hero-frame .subtitle {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    letter-spacing: 0.18em;
+    color: var(--primary);
+    margin: 0 0 1.2rem;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-frame .lede {
+    max-width: 640px;
+    margin: 0 auto;
+    font-size: 1.08rem;
+    line-height: 1.75;
+    color: var(--text);
+    position: relative;
+    z-index: 1;
+  }
+  .hero-frame .lede::first-letter {
+    font-family: var(--font-display), serif;
+    font-size: 2.6rem;
+    color: var(--primary);
+    float: left;
+    line-height: 0.95;
+    padding: 0.15rem 0.4rem 0 0;
+  }
+
+  /* ============ PROLOG STRIP ============ */
+  .prolog {
+    background: var(--surface);
+    padding: 1.6rem 2rem;
+    text-align: center;
+    border-top: 1px solid rgba(169,50,38,0.18);
+    border-bottom: 1px solid rgba(169,50,38,0.18);
+  }
+  .prolog .stat-row {
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .prolog .stat {
+    text-align: center;
+  }
+  .prolog .num {
+    font-family: var(--font-display), serif;
+    font-size: 1.95rem;
+    color: var(--primary);
+    letter-spacing: 0.08em;
+    display: block;
+    line-height: 1;
+  }
+  .prolog .lab {
+    font-family: var(--font-display), serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin-top: 0.5rem;
+    display: block;
+  }
+  .prolog .stat-divider {
+    width: 1px;
+    background: var(--ornament);
+    opacity: 0.6;
+  }
+
+  /* ============ SECTION HEADER ============ */
+  .section-head {
+    text-align: center;
+    padding: 3rem 2rem 1.5rem;
+  }
+  .section-head h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 500;
+    font-size: 1.6rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin: 0 0 0.25rem;
+  }
+  .section-head .latin-sub {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    letter-spacing: 0.18em;
+    color: var(--primary);
+    margin: 0;
+  }
+
+  /* ============ GALLERY CARDS ============ */
+  .galleries {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.25rem;
+    max-width: 1240px;
+    margin: 1.5rem auto 3rem;
+    padding: 0 2rem;
+  }
+  .card {
+    background: #fbf6ec;
+    border: 1px solid var(--primary);
+    padding: 0;
+    position: relative;
+  }
+  .card-inner {
+    border: 1px solid var(--ornament);
+    margin: 6px;
+    padding: 2.4rem 2rem 2rem;
+    position: relative;
+  }
+  .card-inner::before,
+  .card-inner::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    height: 14px;
+    background:
+      repeating-linear-gradient(90deg,
+        var(--ornament) 0 2px,
+        transparent 2px 8px,
+        var(--ornament) 8px 10px,
+        transparent 10px 16px);
+  }
+  .card-inner::before { top: -1px; }
+  .card-inner::after  { bottom: -1px; }
+
+  .card .roundel {
+    width: 76px;
+    height: 76px;
+    margin: -2.4rem auto 0.6rem;
+    background: #fbf6ec;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+  }
+  .card .roundel svg {
+    width: 70px;
+    height: 70px;
+  }
+  .card h4 {
+    font-family: var(--font-display), serif;
+    font-weight: 600;
+    font-size: 1.25rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--primary);
+    text-align: center;
+    margin: 0.5rem 0 0.15rem;
+  }
+  .card .gallery-num {
+    font-family: var(--font-display), serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.4em;
+    color: var(--accent);
+    text-align: center;
+    margin: 0 0 1rem;
+    text-transform: uppercase;
+  }
+  .card .english {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    text-align: center;
+    color: var(--text);
+    letter-spacing: 0.05em;
+    margin: 0 0 1.2rem;
+    opacity: 0.85;
+  }
+  .card p.body {
+    margin: 0 1.1rem 1.1rem;
+    text-align: justify;
+    hyphens: auto;
+  }
+  .card .featured {
+    margin: 1rem 1.1rem 0.9rem;
+    padding: 0.9rem 1rem;
+    background: rgba(201,162,58,0.09);
+    border-left: 2px solid var(--secondary);
+    border-right: 2px solid var(--secondary);
+  }
+  .card .featured .label {
+    font-family: var(--font-display), serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+  .card .featured .title {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--text);
+    display: block;
+    margin-bottom: 0.2rem;
+  }
+  .card .featured .desc {
+    font-size: 0.92rem;
+    color: var(--text);
+    margin: 0;
+    line-height: 1.55;
+  }
+  .card .stats-row {
+    display: flex;
+    justify-content: space-around;
+    margin: 1.1rem 1rem 0.5rem;
+    padding: 0.7rem 0;
+    border-top: 1px solid rgba(169,50,38,0.2);
+    border-bottom: 1px solid rgba(169,50,38,0.2);
+  }
+  .card .stats-row .item {
+    text-align: center;
+  }
+  .card .stats-row .item .n {
+    font-family: var(--font-display), serif;
+    font-size: 1.05rem;
+    color: var(--primary);
+    letter-spacing: 0.06em;
+    display: block;
+  }
+  .card .stats-row .item .l {
+    font-family: var(--font-display), serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--text);
+    display: block;
+    margin-top: 0.15rem;
+  }
+
+  .card-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+    margin: 1rem 1.5rem 0;
+  }
+  .card-close .gold-rule {
+    flex: 1;
+    height: 1px;
+    background: var(--ornament);
+  }
+  .card-close svg {
+    width: 18px;
+    height: 18px;
+    fill: var(--ornament);
+  }
+
+  /* ============ CURATORIAL NOTE ============ */
+  .note {
+    background: var(--surface);
+    padding: 3rem 2rem;
+    text-align: center;
+    border-top: 1px solid rgba(169,50,38,0.15);
+    border-bottom: 1px solid rgba(169,50,38,0.15);
+  }
+  .note-inner {
+    max-width: 820px;
+    margin: 0 auto;
+  }
+  .note h3 {
+    font-family: var(--font-display), serif;
+    font-size: 1.3rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin: 0 0 0.4rem;
+  }
+  .note .quote {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 1.15rem;
+    letter-spacing: 0.04em;
+    color: var(--accent);
+    margin: 1.3rem 0 0.6rem;
+    line-height: 1.6;
+  }
+  .note .attrib {
+    font-family: var(--font-display), serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+  .note .body {
+    margin: 1.4rem 0 0;
+    line-height: 1.8;
+  }
+
+  /* ============ VISIT TABLE ============ */
+  .visit-strip {
+    background: var(--bg);
+    padding: 2.5rem 2rem 3rem;
+    text-align: center;
+  }
+  .visit-strip h3 {
+    font-family: var(--font-display), serif;
+    font-size: 1.2rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    margin: 0 0 1.4rem;
+    color: var(--text);
+  }
+  .visit-strip table {
+    margin: 0 auto;
+    border-collapse: collapse;
+    max-width: 760px;
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--primary);
+  }
+  .visit-strip th, .visit-strip td {
+    padding: 0.65rem 1.2rem;
+    border-bottom: 1px solid rgba(201,162,58,0.4);
+    font-size: 0.95rem;
+  }
+  .visit-strip th {
+    font-family: var(--font-display), serif;
+    font-weight: 500;
+    font-size: 0.75rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--primary);
+    text-align: left;
+    background: rgba(201,162,58,0.1);
+  }
+  .visit-strip td.gallery {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    color: var(--accent);
+    text-align: left;
+  }
+  .visit-strip td.curator {
+    text-align: left;
+  }
+  .visit-strip td.room {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.12em;
+    color: var(--text);
+  }
+
+  /* ============ FOOTER ============ */
+  footer {
+    background: #ddd0b3;
+    padding: 0;
+    margin-top: 0;
+  }
+  footer .meander-strip {
+    background:
+      repeating-linear-gradient(90deg,
+        var(--ornament) 0 2px,
+        transparent 2px 14px);
+  }
+  footer .frieze {
+    text-align: center;
+    padding: 2rem 2rem 1.4rem;
+  }
+  footer .frieze .name {
+    font-family: var(--font-display), serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin: 0 0 0.4rem;
+  }
+  footer .frieze .latin {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    letter-spacing: 0.18em;
+    font-size: 0.9rem;
+    color: var(--accent);
+    margin: 0 0 0.5rem;
+  }
+  footer .frieze .addr {
+    font-size: 0.92rem;
+    margin: 0 0 0.3rem;
+    color: var(--text);
+  }
+  footer .frieze .founded {
+    font-family: var(--font-display), serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin: 0.6rem 0 0.8rem;
+  }
+  footer .tailpiece {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    margin-top: 0.5rem;
+  }
+  footer .tailpiece .gold-rule {
+    width: 80px;
+    height: 1px;
+    background: var(--primary);
+  }
+  footer .tailpiece svg {
+    width: 28px;
+    height: 28px;
+    fill: var(--primary);
+  }
+  footer .colophon {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding: 0.6rem 0 1.4rem;
+  }
+
+  /* Greek key generated SVG */
+  .gk-row {
+    display: flex;
+    width: 100%;
+    height: 100%;
+  }
+  .gk-cell {
+    flex: 0 0 80px;
+    height: 100%;
+    background-image:
+      linear-gradient(var(--ornament), var(--ornament)),
+      linear-gradient(var(--ornament), var(--ornament)),
+      linear-gradient(var(--ornament), var(--ornament)),
+      linear-gradient(var(--ornament), var(--ornament)),
+      linear-gradient(var(--ornament), var(--ornament));
+    background-repeat: no-repeat;
+    background-size:
+      80px 4px,
+      4px 22px,
+      40px 4px,
+      4px 14px,
+      24px 4px;
+    background-position:
+      0 2px,
+      0 2px,
+      8px 12px,
+      40px 12px,
+      16px 22px;
+  }
+</style>
+</head>
+<body>
+
+<!-- Vine leaf reusable symbol -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="vine" viewBox="0 0 200 200">
+    <path d="M43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 0.006 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z" transform="translate(0 -852.36)"/>
+  </symbol>
+</svg>
+
+<!-- ============ MASTHEAD ============ -->
+<header class="masthead" role="banner">
+  <p class="senatus">Senatus Populusque Romanus · Anno MMXXIV</p>
+  <h1>Antiquarium Traianum</h1>
+  <p class="latin">Museum Fori Imperialis</p>
+  <div class="rule-pair">
+    <span class="bar thin"></span>
+    <span class="bar"></span>
+    <svg class="vine" aria-hidden="true"><use href="#vine"/></svg>
+    <span class="bar"></span>
+    <span class="bar thin"></span>
+  </div>
+</header>
+
+<!-- ============ NAVIGATION ============ -->
+<nav class="primary" aria-label="Primary">
+  <ul>
+    <li><a href="page-1.html">Atrium</a></li>
+    <li><svg class="sep" aria-hidden="true"><use href="#vine"/></svg></li>
+    <li><a href="page-2.html" aria-current="page">Collection</a></li>
+    <li><svg class="sep" aria-hidden="true"><use href="#vine"/></svg></li>
+    <li><a href="page-3.html">Exhibition</a></li>
+    <li><svg class="sep" aria-hidden="true"><use href="#vine"/></svg></li>
+    <li><a href="page-4.html">Visit</a></li>
+    <li><svg class="sep" aria-hidden="true"><use href="#vine"/></svg></li>
+    <li><a href="page-5.html">Bibliotheca</a></li>
+    <li><svg class="sep" aria-hidden="true"><use href="#vine"/></svg></li>
+    <li><a href="page-6.html">De Museo</a></li>
+  </ul>
+</nav>
+
+<!-- Greek-key meander strip -->
+<div class="meander-strip" aria-hidden="true">
+  <div class="gk-row">
+    <div class="gk-cell"></div><div class="gk-cell"></div><div class="gk-cell"></div>
+    <div class="gk-cell"></div><div class="gk-cell"></div><div class="gk-cell"></div>
+    <div class="gk-cell"></div><div class="gk-cell"></div><div class="gk-cell"></div>
+    <div class="gk-cell"></div><div class="gk-cell"></div><div class="gk-cell"></div>
+    <div class="gk-cell"></div><div class="gk-cell"></div><div class="gk-cell"></div>
+    <div class="gk-cell"></div><div class="gk-cell"></div><div class="gk-cell"></div>
+  </div>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="hero" aria-labelledby="hero-title">
+  <div class="pediment" aria-hidden="true">
+    <div class="pediment-inscription">· Collectio Permanens ·</div>
+  </div>
+
+  <div class="hero-frame">
+    <svg class="wreath" viewBox="0 0 323.7 295.8" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(-64.08,20.56)" fill="#c9a23a" opacity="0.55">
+        <path d="m141.7,-18.6c-11,4.9-23.4,9.5-30.1,22.6-4.7,7.1-4.8,16.4-8.1,24.1 6.1,-6.5 15.6,-13.2 21.0,-20.7 6.0,-9.5 9.1,-18.0 17.2,-26.1z m164.5,0c8.1,8.0 11.2,16.6 17.2,26.1 5.4,7.6 14.9,14.2 21.0,20.7-3.3,-7.8-3.4,-17.0-8.1,-24.1-6.7,-13.2-19.0,-17.8-30.1,-22.6z M111.9,-1.6c-5.6,1.6-10.6,5.5-14.6,11.0-9.1,10.8-10.7,25.0-6.9,42.0 1.3,4.5-0.5,8.7-0.3,13.0 2.7,-6.2 5.7,-11.9 11.6,-15.9 13.1,-8.4 16.7,-12.8 20.1,-20.8 3.9,-9.3 4.7,-10.7 4.8,-19.0-3.8,12.0-15.3,17.1-23.1,25.2-4.0,4.4-7.2,9.6-9.0,15.0-1.0,-4.8 2.9,-9.1 4.0,-13.8 3.5,-12.7 2.8,-27.9 13.7,-36.4z m223.7,0c10.9,8.5 10.2,23.8 13.7,36.4 1.1,4.7 3.0,9.0 4.0,13.8-1.8,-5.4-5.0,-10.6-9.0,-15.0-7.8,-8.1-19.2,-13.2-23.1,-25.2 0.1,8.4 0.8,9.7 4.8,19.0 3.4,7.9 7.0,12.4 20.1,20.8 5.9,4.0 8.9,9.7 11.6,15.9 0.3,-4.2-1.6,-8.4-0.3,-13.0 3.8,-17.1 2.2,-31.2-6.9,-42.0-3.9,-5.6-9.0,-9.4-14.6,-11.0z"/>
+      </g>
+    </svg>
+    <h2 id="hero-title">Permanent Collection</h2>
+    <p class="subtitle">Quattuor Salae · Four Halls of Imperial Rome</p>
+    <p class="lede">The permanent collection of the Antiquarium Traianum gathers more than three thousand objects of stone, bronze, and tessellated pavement, drawn from the imperial precincts of Rome and the cities of Italia. Across four contiguous halls the visitor traverses the Empire from the constitutional settlement of Augustus in 27 B.C. through the Severan reconstructions of the early third century — a span of nearly two and a half centuries of governance, ritual, and craft.</p>
+  </div>
+</section>
+
+<!-- ============ STAT PROLOG ============ -->
+<section class="prolog" aria-label="Collection at a glance">
+  <div class="stat-row">
+    <div class="stat"><span class="num">IV</span><span class="lab">Permanent Halls</span></div>
+    <div class="stat-divider" aria-hidden="true"></div>
+    <div class="stat"><span class="num">3,142</span><span class="lab">Catalogued Objects</span></div>
+    <div class="stat-divider" aria-hidden="true"></div>
+    <div class="stat"><span class="num">XXVII B.C. — CCXXXV A.D.</span><span class="lab">Period of Coverage</span></div>
+    <div class="stat-divider" aria-hidden="true"></div>
+    <div class="stat"><span class="num">63</span><span class="lab">Years on the Forum</span></div>
+  </div>
+</section>
+
+<!-- ============ SECTION HEADER ============ -->
+<div class="section-head">
+  <h3>The Four Halls</h3>
+  <p class="latin-sub">Salae Quattuor Antiquarii</p>
+</div>
+
+<!-- ============ GALLERY CARDS ============ -->
+<section class="galleries" aria-label="Gallery cards">
+
+  <!-- Card I -->
+  <article class="card">
+    <div class="card-inner">
+      <div class="roundel" aria-hidden="true">
+        <svg viewBox="0 0 117.79 118.25" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="58.9" cy="59.1" r="48" fill="none" stroke="#c9a23a" stroke-width="1.4"/>
+          <circle cx="58.9" cy="59.1" r="42" fill="none" stroke="#a93226" stroke-width="0.8"/>
+          <text x="58.9" y="65" text-anchor="middle" font-family="Cinzel, serif" font-size="14" fill="#a93226" letter-spacing="2">I</text>
+          <g fill="#c9a23a" opacity="0.85">
+            <ellipse cx="20" cy="59" rx="6" ry="3" transform="rotate(-30 20 59)"/>
+            <ellipse cx="28" cy="40" rx="6" ry="3" transform="rotate(-55 28 40)"/>
+            <ellipse cx="45" cy="22" rx="6" ry="3" transform="rotate(-80 45 22)"/>
+            <ellipse cx="98" cy="59" rx="6" ry="3" transform="rotate(30 98 59)"/>
+            <ellipse cx="90" cy="40" rx="6" ry="3" transform="rotate(55 90 40)"/>
+            <ellipse cx="73" cy="22" rx="6" ry="3" transform="rotate(80 73 22)"/>
+            <ellipse cx="22" cy="80" rx="6" ry="3" transform="rotate(30 22 80)"/>
+            <ellipse cx="35" cy="98" rx="6" ry="3" transform="rotate(55 35 98)"/>
+            <ellipse cx="96" cy="80" rx="6" ry="3" transform="rotate(-30 96 80)"/>
+            <ellipse cx="83" cy="98" rx="6" ry="3" transform="rotate(-55 83 98)"/>
+          </g>
+        </svg>
+      </div>
+      <h4>Sala degli Imperatori</h4>
+      <p class="gallery-num">Hall the First · Sala I</p>
+      <p class="english">The Hall of Emperors</p>
+      <p class="body">Eighty-four marble portraits trace the iconographic evolution of the imperial likeness from the chiselled, idealised features of Augustus — drawn from the Forum of Augustus type — through the verism of the Flavians, the philosopher-bearded Antonines, and the harsh, drilled curls of Caracalla. Heads from Tivoli, Velletri, and Ostia stand alongside three full-length cuirassed statues recovered from the Basilica Ulpia in 1937. Wall labels in Latin and the modern languages give the cursus honorum and known portrait conventions for each subject.</p>
+
+      <div class="featured">
+        <span class="label">Featured · Pièce Maîtresse</span>
+        <span class="title">Cuirassed Trajan, after A.D. 108</span>
+        <p class="desc">Carrara marble, height 2.21 m. Excavated from the southern hemicycle of the Forum of Trajan in 1932; the breastplate bears in low relief a personification of conquered Dacia flanked by trophies.</p>
+      </div>
+
+      <div class="stats-row">
+        <div class="item"><span class="n">84</span><span class="l">Portrait Heads</span></div>
+        <div class="item"><span class="n">11</span><span class="l">Full Statues</span></div>
+        <div class="item"><span class="n">XXVII B.C.</span><span class="l">Earliest Object</span></div>
+      </div>
+
+      <div class="card-close">
+        <span class="gold-rule"></span>
+        <svg aria-hidden="true"><use href="#vine"/></svg>
+        <span class="gold-rule"></span>
+      </div>
+    </div>
+  </article>
+
+  <!-- Card II -->
+  <article class="card">
+    <div class="card-inner">
+      <div class="roundel" aria-hidden="true">
+        <svg viewBox="0 0 117.79 118.25" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="58.9" cy="59.1" r="48" fill="none" stroke="#c9a23a" stroke-width="1.4"/>
+          <circle cx="58.9" cy="59.1" r="42" fill="none" stroke="#a93226" stroke-width="0.8"/>
+          <text x="58.9" y="65" text-anchor="middle" font-family="Cinzel, serif" font-size="14" fill="#a93226" letter-spacing="2">II</text>
+          <g fill="#c9a23a" opacity="0.85">
+            <ellipse cx="20" cy="59" rx="6" ry="3" transform="rotate(-30 20 59)"/>
+            <ellipse cx="28" cy="40" rx="6" ry="3" transform="rotate(-55 28 40)"/>
+            <ellipse cx="45" cy="22" rx="6" ry="3" transform="rotate(-80 45 22)"/>
+            <ellipse cx="98" cy="59" rx="6" ry="3" transform="rotate(30 98 59)"/>
+            <ellipse cx="90" cy="40" rx="6" ry="3" transform="rotate(55 90 40)"/>
+            <ellipse cx="73" cy="22" rx="6" ry="3" transform="rotate(80 73 22)"/>
+            <ellipse cx="22" cy="80" rx="6" ry="3" transform="rotate(30 22 80)"/>
+            <ellipse cx="35" cy="98" rx="6" ry="3" transform="rotate(55 35 98)"/>
+            <ellipse cx="96" cy="80" rx="6" ry="3" transform="rotate(-30 96 80)"/>
+            <ellipse cx="83" cy="98" rx="6" ry="3" transform="rotate(-55 83 98)"/>
+          </g>
+        </svg>
+      </div>
+      <h4>Sala delle Iscrizioni</h4>
+      <p class="gallery-num">Hall the Second · Sala II</p>
+      <p class="english">The Hall of Inscriptions</p>
+      <p class="body">More than seven hundred Latin inscriptions are mounted along the long walls of the lapidarium, organised by genre: dedicatory, honorific, funerary, sacral, and military. Visitors will find the diplomata militaria of Antoninus Pius, three columbarium plaques from the slope of the Esquiline, and a group of fragmentary fasti consulares. Each stone is accompanied by a transcription expanding the abbreviated Latin and an English summary; rubbings of inaccessible faces are mounted alongside.</p>
+
+      <div class="featured">
+        <span class="label">Featured · Pièce Maîtresse</span>
+        <span class="title">Funerary Altar of Q. Sulpicius Maximus, A.D. 94</span>
+        <p class="desc">White marble altar with Greek and Latin inscription commemorating an eleven-year-old boy who improvised hexameter verse at the Capitoline Games of Domitian. From the Porta Salaria, restored in 1996.</p>
+      </div>
+
+      <div class="stats-row">
+        <div class="item"><span class="n">714</span><span class="l">Inscriptions</span></div>
+        <div class="item"><span class="n">42</span><span class="l">Diplomata</span></div>
+        <div class="item"><span class="n">III A.D.</span><span class="l">Latest Stone</span></div>
+      </div>
+
+      <div class="card-close">
+        <span class="gold-rule"></span>
+        <svg aria-hidden="true"><use href="#vine"/></svg>
+        <span class="gold-rule"></span>
+      </div>
+    </div>
+  </article>
+
+  <!-- Card III -->
+  <article class="card">
+    <div class="card-inner">
+      <div class="roundel" aria-hidden="true">
+        <svg viewBox="0 0 117.79 118.25" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="58.9" cy="59.1" r="48" fill="none" stroke="#c9a23a" stroke-width="1.4"/>
+          <circle cx="58.9" cy="59.1" r="42" fill="none" stroke="#a93226" stroke-width="0.8"/>
+          <text x="58.9" y="65" text-anchor="middle" font-family="Cinzel, serif" font-size="14" fill="#a93226" letter-spacing="2">III</text>
+          <g fill="#c9a23a" opacity="0.85">
+            <ellipse cx="20" cy="59" rx="6" ry="3" transform="rotate(-30 20 59)"/>
+            <ellipse cx="28" cy="40" rx="6" ry="3" transform="rotate(-55 28 40)"/>
+            <ellipse cx="45" cy="22" rx="6" ry="3" transform="rotate(-80 45 22)"/>
+            <ellipse cx="98" cy="59" rx="6" ry="3" transform="rotate(30 98 59)"/>
+            <ellipse cx="90" cy="40" rx="6" ry="3" transform="rotate(55 90 40)"/>
+            <ellipse cx="73" cy="22" rx="6" ry="3" transform="rotate(80 73 22)"/>
+            <ellipse cx="22" cy="80" rx="6" ry="3" transform="rotate(30 22 80)"/>
+            <ellipse cx="35" cy="98" rx="6" ry="3" transform="rotate(55 35 98)"/>
+            <ellipse cx="96" cy="80" rx="6" ry="3" transform="rotate(-30 96 80)"/>
+            <ellipse cx="83" cy="98" rx="6" ry="3" transform="rotate(-55 83 98)"/>
+          </g>
+        </svg>
+      </div>
+      <h4>Sala dei Mosaici</h4>
+      <p class="gallery-num">Hall the Third · Sala III</p>
+      <p class="english">The Hall of Mosaic Pavements</p>
+      <p class="body">Twenty-two floor pavements, lifted whole or in numbered sections, are remounted at gallery level for direct viewing. The pavements derive principally from the insulae and thermae of Ostia Antica, with a smaller selection from the Vesuvian cities of Pompeii and Herculaneum. Geometric black-and-white compositions in the Ostian manner are juxtaposed against the polychrome figural emblemata of the Bay of Naples, allowing the visitor to register at once the regional grammar of the craft.</p>
+
+      <div class="featured">
+        <span class="label">Featured · Pièce Maîtresse</span>
+        <span class="title">Pavement of the Seven Sages, c. A.D. 130</span>
+        <p class="desc">Polychrome opus tessellatum, 4.6 × 3.8 m, from the Caseggiato del Serapide at Ostia. Each philosopher is named in Greek capitals and accompanied by a witticism in Latin set within a tabula ansata.</p>
+      </div>
+
+      <div class="stats-row">
+        <div class="item"><span class="n">22</span><span class="l">Pavements</span></div>
+        <div class="item"><span class="n">340 m²</span><span class="l">Total Area</span></div>
+        <div class="item"><span class="n">Ostia · Pompeii</span><span class="l">Provenance</span></div>
+      </div>
+
+      <div class="card-close">
+        <span class="gold-rule"></span>
+        <svg aria-hidden="true"><use href="#vine"/></svg>
+        <span class="gold-rule"></span>
+      </div>
+    </div>
+  </article>
+
+  <!-- Card IV -->
+  <article class="card">
+    <div class="card-inner">
+      <div class="roundel" aria-hidden="true">
+        <svg viewBox="0 0 117.79 118.25" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="58.9" cy="59.1" r="48" fill="none" stroke="#c9a23a" stroke-width="1.4"/>
+          <circle cx="58.9" cy="59.1" r="42" fill="none" stroke="#a93226" stroke-width="0.8"/>
+          <text x="58.9" y="65" text-anchor="middle" font-family="Cinzel, serif" font-size="14" fill="#a93226" letter-spacing="2">IV</text>
+          <g fill="#c9a23a" opacity="0.85">
+            <ellipse cx="20" cy="59" rx="6" ry="3" transform="rotate(-30 20 59)"/>
+            <ellipse cx="28" cy="40" rx="6" ry="3" transform="rotate(-55 28 40)"/>
+            <ellipse cx="45" cy="22" rx="6" ry="3" transform="rotate(-80 45 22)"/>
+            <ellipse cx="98" cy="59" rx="6" ry="3" transform="rotate(30 98 59)"/>
+            <ellipse cx="90" cy="40" rx="6" ry="3" transform="rotate(55 90 40)"/>
+            <ellipse cx="73" cy="22" rx="6" ry="3" transform="rotate(80 73 22)"/>
+            <ellipse cx="22" cy="80" rx="6" ry="3" transform="rotate(30 22 80)"/>
+            <ellipse cx="35" cy="98" rx="6" ry="3" transform="rotate(55 35 98)"/>
+            <ellipse cx="96" cy="80" rx="6" ry="3" transform="rotate(-30 96 80)"/>
+            <ellipse cx="83" cy="98" rx="6" ry="3" transform="rotate(-55 83 98)"/>
+          </g>
+        </svg>
+      </div>
+      <h4>Sala dell'Architettura</h4>
+      <p class="gallery-num">Hall the Fourth · Sala IV</p>
+      <p class="english">The Hall of Architecture</p>
+      <p class="body">A purpose-built gallery of three bays presents the constituent vocabulary of imperial public architecture: Corinthian and composite capitals from the Forum of Trajan, modillion cornices from the Templum Pacis, and coffered marble fragments from the Basilica of Maxentius. The eastern bay is dominated by full plaster casts of the Cancelleria reliefs, taken from the originals in the Vatican Museums; the western bay houses a 1:50 wooden reconstruction of the Markets of Trajan as proposed by Boni in 1907.</p>
+
+      <div class="featured">
+        <span class="label">Featured · Pièce Maîtresse</span>
+        <span class="title">Cancelleria Reliefs, casts (originals A.D. 93–95)</span>
+        <p class="desc">Two large Domitianic state reliefs depicting the profectio and adventus of the emperor, with the figure of Domitian later recut into Nerva. Casts taken in 1971 with the permission of the Musei Vaticani.</p>
+      </div>
+
+      <div class="stats-row">
+        <div class="item"><span class="n">196</span><span class="l">Architectural Fragments</span></div>
+        <div class="item"><span class="n">2</span><span class="l">Cancelleria Casts</span></div>
+        <div class="item"><span class="n">1:50</span><span class="l">Trajan Market Model</span></div>
+      </div>
+
+      <div class="card-close">
+        <span class="gold-rule"></span>
+        <svg aria-hidden="true"><use href="#vine"/></svg>
+        <span class="gold-rule"></span>
+      </div>
+    </div>
+  </article>
+
+</section>
+
+<!-- ============ CURATORIAL NOTE ============ -->
+<section class="note" aria-labelledby="curator-note">
+  <div class="note-inner">
+    <h3 id="curator-note">A Note from the Curator</h3>
+    <div class="rule-pair" style="margin-top:0.6rem;">
+      <span class="bar thin"></span>
+      <svg class="vine" aria-hidden="true"><use href="#vine"/></svg>
+      <span class="bar thin"></span>
+    </div>
+    <p class="quote">"Sic transit gloria mundi — yet the stone remembers what the chronicle forgets."</p>
+    <p class="attrib">— Dott.ssa Livia Marcellina Verani, Curator of the Permanent Collection</p>
+    <p class="body">The arrangement of the four halls follows neither strict chronology nor strict typology, but rather the visitor's path through the imperial idea itself: first the face of the prince, then the public word in stone, then the floor on which Roman life was lived, and finally the ordered framework of column and cornice that gave to Rome its visible discipline. New acquisitions are recorded each Kalends in the Bulletin of the Antiquarium, available without charge from the porter's lodge.</p>
+  </div>
+</section>
+
+<!-- ============ VISIT TABLE ============ -->
+<section class="visit-strip" aria-label="Curatorial assignments">
+  <h3>Curatorial Assignments &middot; Anno MMXXIV</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Hall</th>
+        <th>Curator in Charge</th>
+        <th>Room</th>
+        <th>Open</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="gallery">Sala degli Imperatori</td>
+        <td class="curator">Prof. Marcus Aelius Tertullian, FBA</td>
+        <td class="room">I</td>
+        <td>Tue–Sun · 09:30</td>
+      </tr>
+      <tr>
+        <td class="gallery">Sala delle Iscrizioni</td>
+        <td class="curator">Dott. Cornelia Rufina Albanese</td>
+        <td class="room">II</td>
+        <td>Tue–Sun · 09:30</td>
+      </tr>
+      <tr>
+        <td class="gallery">Sala dei Mosaici</td>
+        <td class="curator">Dott. Tiberio Salviano Ricci</td>
+        <td class="room">III</td>
+        <td>Tue–Sun · 10:00</td>
+      </tr>
+      <tr>
+        <td class="gallery">Sala dell'Architettura</td>
+        <td class="curator">Arch. Flavia Postumia Greco</td>
+        <td class="room">IV</td>
+        <td>Tue–Sun · 10:00</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer role="contentinfo">
+  <div class="meander-strip" aria-hidden="true">
+    <div class="gk-row">
+      <div class="gk-cell"></div><div class="gk-cell"></div><div class="gk-cell"></div>
+      <div class="gk-cell"></div><div class="gk-cell"></div><div class="gk-cell"></div>
+      <div class="gk-cell"></div><div class="gk-cell"></div><div class="gk-cell"></div>
+      <div class="gk-cell"></div><div class="gk-cell"></div><div class="gk-cell"></div>
+      <div class="gk-cell"></div><div class="gk-cell"></div><div class="gk-cell"></div>
+      <div class="gk-cell"></div><div class="gk-cell"></div><div class="gk-cell"></div>
+    </div>
+  </div>
+  <div class="frieze">
+    <p class="name">Museum of the Imperial Forum &middot; Antiquarium Traianum</p>
+    <p class="latin">Antiquarium Traianum · Museum Fori Imperialis</p>
+    <p class="addr">Via dei Fori Imperiali 28 &middot; Roma I &middot; Italia</p>
+    <p class="addr">Telephonum +39 06 0608 &middot; antiquarium@fori-imperiali.roma.it</p>
+    <p class="founded">Fundatum Anno Domini MCMLXI · A.U.C. MMDCCXIV</p>
+    <div class="tailpiece" aria-hidden="true">
+      <span class="gold-rule"></span>
+      <svg aria-hidden="true"><use href="#vine"/></svg>
+      <span class="gold-rule"></span>
+    </div>
+  </div>
+  <p class="colophon">Ex Officina Typographica · MMXXIV</p>
+</footer>
+
+</body>
+</html>

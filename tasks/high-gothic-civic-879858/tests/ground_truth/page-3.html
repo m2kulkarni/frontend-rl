@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Démarches Administratives — État Civil & Urbanisme</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    line-height: 1.6;
+  }
+  a { color: var(--text-emphasis); }
+
+  /* ---------- NAVIGATION ARCADE ---------- */
+  .arcade-nav {
+    border-bottom: 1px solid var(--accent);
+    background: var(--bg);
+    padding: 1.4rem 3rem 0.6rem;
+  }
+  .arcade-nav-inner {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: end;
+    gap: 1.5rem;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  .arcade-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+    gap: 0.4rem;
+  }
+  .arcade-nav .nav-left { justify-content: flex-end; }
+  .arcade-nav .nav-right { justify-content: flex-start; }
+  .arcade-nav li { text-align: center; }
+  .arcade-nav a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: var(--primary);
+    font-family: var(--font-display), serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.7rem 0.4rem;
+  }
+  .arch-icon {
+    width: 26px;
+    height: 34px;
+    display: block;
+    margin-bottom: 0.35rem;
+  }
+  .arch-icon path {
+    fill: none;
+    stroke: var(--primary);
+    stroke-width: 1.4;
+  }
+  .arcade-nav a[aria-current="page"] .arch-icon path {
+    fill: var(--secondary);
+    stroke: var(--secondary);
+  }
+  .arcade-nav a[aria-current="page"] {
+    color: var(--secondary);
+    font-weight: 600;
+  }
+  .nav-cross {
+    width: 38px;
+    height: 38px;
+    fill: var(--accent);
+    margin-bottom: 0.25rem;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    position: relative;
+    padding: 4rem 2rem 3rem;
+    text-align: center;
+    overflow: hidden;
+    border-bottom: 1px solid var(--accent);
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 600 600'><g transform='translate(300,300)scale(0.87)rotate(45)' fill='%233a2618'><circle cx='-195.16' r='163'/><circle cx='195.16' r='163'/><circle cy='195.16' r='163'/><circle cy='-195.16' r='163'/><rect x='-232' y='-232' width='464' height='464'/></g><g transform='translate(300,300)scale(0.87)rotate(45)' fill='%23f4ecd8'><circle cx='-195.16' r='157'/><circle cx='195.16' r='157'/><circle cy='195.16' r='157'/><circle cy='-195.16' r='157'/><rect x='-226' y='-226' width='452' height='452'/></g><g transform='translate(300,300)scale(0.87)rotate(45)' fill='%233a2618'><circle cx='-195.16' r='144'/><circle cx='195.16' r='144'/><circle cy='195.16' r='144'/><circle cy='-195.16' r='144'/><rect x='-213' y='-213' width='426' height='426'/></g><g transform='translate(300,300)scale(0.87)rotate(45)' fill='%23f4ecd8'><circle cx='-195.16' r='138'/><circle cx='195.16' r='138'/><circle cy='195.16' r='138'/><circle cy='-195.16' r='138'/><rect x='-207' y='-207' width='414' height='414'/></g></svg>");
+    background-size: 160px 160px;
+    opacity: 0.07;
+    pointer-events: none;
+  }
+  .hero-frame {
+    position: relative;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 2rem 3rem 0;
+  }
+  .hero-arch {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  .hero-arch path {
+    fill: none;
+    stroke: var(--primary);
+    stroke-width: 1.5;
+  }
+  .hero .eyebrow {
+    font-family: var(--font-display), serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin: 0 0 1rem;
+  }
+  .hero h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 2.6rem;
+    line-height: 1.15;
+    margin: 0 0 1rem;
+    color: var(--primary);
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--secondary);
+  }
+  .hero p.lede {
+    max-width: 36em;
+    margin: 0 auto;
+    font-size: 1.05rem;
+    color: var(--text);
+  }
+  .hero .seal {
+    width: 56px;
+    height: 56px;
+    margin: 1.6rem auto 0.4rem;
+    fill: var(--accent);
+    display: block;
+  }
+
+  /* ---------- GUICHET STRIP ---------- */
+  .guichet {
+    background: var(--bg);
+    border-top: 1px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
+    padding: 1.5rem 2rem;
+    text-align: center;
+  }
+  .guichet-inner {
+    max-width: 980px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    gap: 2rem;
+    align-items: center;
+  }
+  .guichet h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 500;
+    font-style: italic;
+    font-size: 1.05rem;
+    margin: 0 0 0.3rem;
+    color: var(--secondary);
+    letter-spacing: 0.05em;
+  }
+  .guichet .hours {
+    font-size: 0.92rem;
+    color: var(--text);
+  }
+  .guichet .vrule {
+    width: 1px;
+    height: 60px;
+    background: var(--accent);
+  }
+  .guichet strong {
+    display: block;
+    font-family: var(--font-display), serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 0.2rem;
+  }
+
+  /* ---------- MAIN BODY ---------- */
+  main {
+    padding: 4rem 2rem 5rem;
+    max-width: 1240px;
+    margin: 0 auto;
+  }
+  .section-head {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  .section-head h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 2rem;
+    color: var(--primary);
+    margin: 0 0 0.5rem;
+  }
+  .section-head p {
+    max-width: 32em;
+    margin: 0 auto;
+    font-size: 0.98rem;
+    color: var(--text);
+  }
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 2rem;
+    max-width: 520px;
+  }
+  .divider::before,
+  .divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--accent);
+  }
+  .divider svg {
+    width: 36px;
+    height: 36px;
+    margin: 0 1rem;
+    fill: var(--primary);
+  }
+
+  /* ---------- CARD GRID ---------- */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.4rem 2rem;
+  }
+  .card {
+    position: relative;
+    padding: 2.6rem 2rem 1.6rem;
+    width: 18em;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  .card-frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  .card-frame path {
+    fill: none;
+    stroke: var(--primary);
+    stroke-width: 1;
+  }
+  .card-watermark {
+    position: absolute;
+    top: 1.2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90px;
+    height: 90px;
+    opacity: 0.08;
+    pointer-events: none;
+  }
+  .card h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 500;
+    font-size: 1.18rem;
+    line-height: 1.2;
+    text-align: center;
+    margin: 0 0 0.4rem;
+    color: var(--primary);
+    position: relative;
+  }
+  .card .subtitle {
+    text-align: center;
+    font-style: italic;
+    font-size: 0.82rem;
+    color: var(--secondary);
+    letter-spacing: 0.08em;
+    margin: 0 0 1.1rem;
+    position: relative;
+  }
+  .card .body {
+    position: relative;
+    font-size: 0.92rem;
+  }
+  .card .body p:first-of-type::first-letter {
+    font-family: var(--font-display), serif;
+    color: var(--secondary);
+    font-size: 3.1rem;
+    line-height: 0.85;
+    float: left;
+    padding: 0.25rem 0.45rem 0 0;
+    font-weight: 600;
+  }
+  .card dl {
+    margin: 1rem 0 0.6rem;
+    font-size: 0.86rem;
+    line-height: 1.5;
+  }
+  .card dt {
+    font-family: var(--font-display), serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-top: 0.6rem;
+  }
+  .card dd {
+    margin: 0.1rem 0 0;
+    color: var(--text);
+  }
+  .card .agent {
+    font-style: italic;
+    color: var(--text);
+  }
+  .card .vine {
+    display: block;
+    width: 32px;
+    height: 32px;
+    margin: 1.1rem auto 0.4rem;
+    fill: var(--primary);
+    opacity: 0.75;
+  }
+  .card .cta {
+    display: block;
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1px;
+    margin-top: 0.3rem;
+  }
+
+  /* ---------- PIECES BLOCK ---------- */
+  .pieces-block {
+    margin: 5rem auto 0;
+    max-width: 980px;
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+    padding: 2.5rem 2rem;
+    background: var(--surface);
+  }
+  .pieces-block h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 1.4rem;
+    text-align: center;
+    color: var(--secondary);
+    margin: 0 0 1.6rem;
+    font-style: italic;
+  }
+  .pieces-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.6rem 2rem;
+  }
+  .piece {
+    border-left: 1px solid var(--primary);
+    padding: 0.2rem 0 0.2rem 1rem;
+  }
+  .piece h4 {
+    font-family: var(--font-display), serif;
+    font-weight: 500;
+    font-size: 0.95rem;
+    margin: 0 0 0.3rem;
+    color: var(--primary);
+  }
+  .piece p {
+    font-size: 0.85rem;
+    margin: 0;
+    color: var(--text);
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer.site-foot {
+    position: relative;
+    margin-top: 5rem;
+    padding: 4rem 2rem 1.5rem;
+    background: var(--bg);
+    border-top: 1px solid var(--primary);
+    overflow: hidden;
+  }
+  footer.site-foot::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 600 600'><g transform='translate(300,300)scale(0.87)rotate(45)' fill='%233a2618'><circle cx='-195.16' r='163'/><circle cx='195.16' r='163'/><circle cy='195.16' r='163'/><circle cy='-195.16' r='163'/><rect x='-232' y='-232' width='464' height='464'/></g><g transform='translate(300,300)scale(0.87)rotate(45)' fill='%23f4ecd8'><circle cx='-195.16' r='157'/><circle cx='195.16' r='157'/><circle cy='195.16' r='157'/><circle cy='-195.16' r='157'/><rect x='-226' y='-226' width='452' height='452'/></g></svg>");
+    background-size: 160px 160px;
+    opacity: 0.06;
+    pointer-events: none;
+  }
+  .foot-arcade {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1rem;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  .foot-col {
+    position: relative;
+    padding: 2.4rem 0.6rem 0.5rem;
+    text-align: center;
+  }
+  .foot-arch {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    pointer-events: none;
+  }
+  .foot-arch path {
+    fill: none;
+    stroke: var(--primary);
+    stroke-width: 1;
+  }
+  .foot-col h5 {
+    font-family: var(--font-display), serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin: 0 0 0.5rem;
+  }
+  .foot-col p, .foot-col address {
+    font-size: 0.78rem;
+    line-height: 1.5;
+    margin: 0;
+    color: var(--text);
+    font-style: normal;
+  }
+  .foot-band {
+    position: relative;
+    margin: 2.5rem auto 0.8rem;
+    max-width: 1280px;
+    height: 22px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+  }
+  .foot-band svg {
+    width: 22px;
+    height: 22px;
+    fill: var(--accent);
+    flex: 0 0 auto;
+  }
+  .foot-seal-line {
+    position: relative;
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--text);
+    letter-spacing: 0.05em;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- Reusable arch SVG symbol for nav -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="arch-mini" viewBox="0 0 26 34">
+      <path d="M2 33 L2 14 Q2 2 13 2 Q24 2 24 14 L24 33 Z"/>
+    </symbol>
+    <symbol id="arch-card" viewBox="0 0 300 440">
+      <path d="M6 434 L6 150 Q6 6 150 6 Q294 6 294 150 L294 434 Z"/>
+    </symbol>
+    <symbol id="arch-foot" viewBox="0 0 100 60">
+      <path d="M4 58 L4 30 Q4 4 50 4 Q96 4 96 30 L96 58"/>
+    </symbol>
+    <symbol id="arch-hero" viewBox="0 0 720 280">
+      <path d="M2 278 L2 140 Q2 2 360 2 Q718 2 718 140 L718 278"/>
+    </symbol>
+    <!-- vine leaf small -->
+    <symbol id="vine" viewBox="0 0 200 200">
+      <path d="M43.583 11.011c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 0.006 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z"/>
+    </symbol>
+    <symbol id="cross-flory" viewBox="0 0 600 600">
+      <path d="M266.835 480A18.13895 18.13895 0 0 1 248.6955 498.1395A18.13895 18.13895 0 0 1 230.556 480A33.226 33.226 0 0 0 218.448 505.653A33.226 33.226 0 0 0 251.6745 538.8795A33.226 33.226 0 0 0 272.7915 531.3045A54.4169 54.4169 0 0 0 300 578.4315A54.4169 54.4169 0 0 0 327.2085 531.3045A33.226 33.226 0 0 0 348.3255 538.8795A33.226 33.226 0 0 0 381.552 505.653A33.226 33.226 0 0 0 369.444 480A18.13895 18.13895 0 0 1 351.3045 498.1395A18.13895 18.13895 0 0 1 333.165 480V333.165H480A18.13895 18.13895 0 0 1 498.1395 351.3045A18.13895 18.13895 0 0 1 480 369.444A33.226 33.226 0 0 0 505.653 381.552A33.226 33.226 0 0 0 538.8795 348.3255A33.226 33.226 0 0 0 531.3045 327.2085A54.4169 54.4169 0 0 0 578.4315 300A54.4169 54.4169 0 0 0 531.3045 272.7915A33.226 33.226 0 0 0 538.8795 251.6745A33.226 33.226 0 0 0 505.653 218.448A33.226 33.226 0 0 0 480 230.556A18.13895 18.13895 0 0 1 498.1395 248.6955A18.13895 18.13895 0 0 1 480 266.835H333.165V120A18.13895 18.13895 0 0 1 351.3045 101.8605A18.13895 18.13895 0 0 1 369.444 120A33.226 33.226 0 0 0 381.552 94.347A33.226 33.226 0 0 0 348.3255 61.1205A33.226 33.226 0 0 0 327.2085 68.6955A54.4169 54.4169 0 0 0 300 21.5685A54.4169 54.4169 0 0 0 272.7915 68.6955A33.226 33.226 0 0 0 251.6745 61.1205A33.226 33.226 0 0 0 218.448 94.347A33.226 33.226 0 0 0 230.556 120A18.13895 18.13895 0 0 1 248.6955 101.8605A18.13895 18.13895 0 0 1 266.835 120V266.835H120A18.13895 18.13895 0 0 1 101.8605 248.6955A18.13895 18.13895 0 0 1 120 230.556A33.226 33.226 0 0 0 94.347 218.448A33.226 33.226 0 0 0 61.1205 251.6745A33.226 33.226 0 0 0 68.6955 272.7915A54.4169 54.4169 0 0 0 21.5685 300A54.4169 54.4169 0 0 0 68.6955 327.2085A33.226 33.226 0 0 0 61.1205 348.3255A33.226 33.226 0 0 0 94.347 381.552A33.226 33.226 0 0 0 120 369.444A18.13895 18.13895 0 0 1 101.8605 351.3045A18.13895 18.13895 0 0 1 120 333.165H266.835Z"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- =================== NAVIGATION =================== -->
+<nav class="arcade-nav" aria-label="Navigation principale">
+  <div class="arcade-nav-inner">
+    <ul class="nav-left">
+      <li><a href="page-1.html"><svg class="arch-icon"><use href="#arch-mini"/></svg>Accueil</a></li>
+      <li><a href="page-2.html"><svg class="arch-icon"><use href="#arch-mini"/></svg>Conseil</a></li>
+      <li><a href="page-3.html" aria-current="page"><svg class="arch-icon"><use href="#arch-mini"/></svg>Démarches</a></li>
+    </ul>
+    <svg class="nav-cross" viewBox="0 0 600 600" aria-hidden="true"><use href="#cross-flory"/></svg>
+    <ul class="nav-right">
+      <li><a href="page-4.html"><svg class="arch-icon"><use href="#arch-mini"/></svg>Patrimoine</a></li>
+      <li><a href="page-5.html"><svg class="arch-icon"><use href="#arch-mini"/></svg>Visiter</a></li>
+      <li><a href="page-6.html"><svg class="arch-icon"><use href="#arch-mini"/></svg>Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- =================== HERO =================== -->
+<header class="hero">
+  <div class="hero-frame">
+    <svg class="hero-arch" preserveAspectRatio="none"><use href="#arch-hero"/></svg>
+    <p class="eyebrow">Mairie de Saint-Loup-sur-Aisne · Services aux Habitants</p>
+    <h1>Démarches Administratives<br><em>État Civil & Urbanisme</em></h1>
+    <p class="lede">Le guichet de la mairie reçoit les habitants pour l'ensemble des actes d'état civil, des publications de bans, des inscriptions sur la liste électorale et des autorisations d'urbanisme. Toutes les pièces nécessaires, les délais d'instruction et les agents compétents sont indiqués pour chaque procédure.</p>
+    <svg class="seal" viewBox="0 0 600 600" aria-hidden="true"><use href="#cross-flory"/></svg>
+  </div>
+</header>
+
+<!-- =================== GUICHET HOURS =================== -->
+<section class="guichet" aria-label="Horaires du guichet">
+  <div class="guichet-inner">
+    <div>
+      <strong>Guichet d'État Civil</strong>
+      <h2>Ouverture au public</h2>
+      <p class="hours">Lundi · Mercredi · Vendredi<br>9h00 — 12h00</p>
+    </div>
+    <div class="vrule" aria-hidden="true"></div>
+    <div>
+      <strong>Permanences d'après-midi</strong>
+      <h2>Mardi & Jeudi</h2>
+      <p class="hours">14h00 — 17h00<br>sur rendez-vous recommandé</p>
+    </div>
+    <div class="vrule" aria-hidden="true"></div>
+    <div>
+      <strong>Adresse du Guichet</strong>
+      <h2>Hôtel de Ville</h2>
+      <p class="hours">2, Place du Marché-aux-Cierges<br>02160 Saint-Loup-sur-Aisne</p>
+    </div>
+  </div>
+</section>
+
+<main>
+
+  <!-- =================== ÉTAT CIVIL =================== -->
+  <div class="section-head">
+    <h2>État Civil</h2>
+    <p>Actes de naissance, mariage et décès, livret de famille et reconnaissances. Les actes sont délivrés sur place ou expédiés sous huit jours par voie postale affranchie.</p>
+  </div>
+  <div class="divider" aria-hidden="true">
+    <svg viewBox="0 0 200 200"><use href="#vine"/></svg>
+  </div>
+
+  <section class="cards" aria-label="Démarches d'état civil">
+
+    <!-- CARD 1 -->
+    <article class="card">
+      <svg class="card-frame" preserveAspectRatio="none"><use href="#arch-card"/></svg>
+      <svg class="card-watermark" viewBox="0 0 600 600" aria-hidden="true">
+        <g transform="translate(300,300)scale(0.87)rotate(45)" fill="#3a2618">
+          <circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/>
+          <circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/>
+          <rect x="-232" y="-232" width="464" height="464"/>
+        </g>
+        <g transform="translate(300,300)scale(0.87)rotate(45)" fill="#f4ecd8">
+          <circle cx="-195.16" r="157"/><circle cx="195.16" r="157"/>
+          <circle cy="195.16" r="157"/><circle cy="-195.16" r="157"/>
+          <rect x="-226" y="-226" width="452" height="452"/>
+        </g>
+      </svg>
+      <h3>Extrait d'Acte de Naissance</h3>
+      <p class="subtitle">Copie intégrale ou extrait avec filiation</p>
+      <div class="body">
+        <p>Délivré gratuitement à l'intéressé majeur, à ses ascendants ou descendants directs, ou à toute personne munie d'une procuration écrite. La demande peut être déposée au guichet ou adressée par courrier signé, accompagnée d'une enveloppe timbrée à votre adresse.</p>
+        <dl>
+          <dt>Pièces à fournir</dt>
+          <dd>Pièce d'identité en cours de validité ; livret de famille des parents ; justificatif de filiation pour les tiers autorisés.</dd>
+          <dt>Délai de délivrance</dt>
+          <dd>Immédiat au guichet · 5 à 8 jours par voie postale.</dd>
+          <dt>Tarif</dt>
+          <dd>Gratuit (timbre fiscal non requis).</dd>
+          <dt>Agent responsable</dt>
+          <dd class="agent">Mme Geneviève Loiselet, officière d'état civil principal.</dd>
+        </dl>
+        <svg class="vine" viewBox="0 0 200 200" aria-hidden="true"><use href="#vine"/></svg>
+        <a class="cta" href="#">Demander l'acte</a>
+      </div>
+    </article>
+
+    <!-- CARD 2 -->
+    <article class="card">
+      <svg class="card-frame" preserveAspectRatio="none"><use href="#arch-card"/></svg>
+      <svg class="card-watermark" viewBox="0 0 600 600" aria-hidden="true">
+        <g transform="translate(300,300)scale(0.87)rotate(45)" fill="#3a2618">
+          <circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/>
+          <circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/>
+          <rect x="-232" y="-232" width="464" height="464"/>
+        </g>
+        <g transform="translate(300,300)scale(0.87)rotate(45)" fill="#f4ecd8">
+          <circle cx="-195.16" r="157"/><circle cx="195.16" r="157"/>
+          <circle cy="195.16" r="157"/><circle cy="-195.16" r="157"/>
+          <rect x="-226" y="-226" width="452" height="452"/>
+        </g>
+      </svg>
+      <h3>Publication des Bans de Mariage</h3>
+      <p class="subtitle">Affichage légal · dix jours avant la cérémonie</p>
+      <div class="body">
+        <p>Tout projet de mariage célébré à Saint-Loup-sur-Aisne doit faire l'objet d'une publication des bans, affichée au panneau communal de l'Hôtel de Ville pendant dix jours pleins. Le dossier complet est à déposer au moins six semaines avant la date envisagée.</p>
+        <dl>
+          <dt>Pièces à fournir</dt>
+          <dd>Acte de naissance des deux époux (moins de 3 mois) ; pièce d'identité ; justificatif de domicile ; attestation sur l'honneur de domicile commun ; liste des témoins avec copies de leurs pièces.</dd>
+          <dt>Délai d'instruction</dt>
+          <dd>30 jours minimum entre dépôt et célébration.</dd>
+          <dt>Agent responsable</dt>
+          <dd class="agent">M. Albéric Charroux, secrétaire général de la mairie.</dd>
+        </dl>
+        <svg class="vine" viewBox="0 0 200 200" aria-hidden="true"><use href="#vine"/></svg>
+        <a class="cta" href="#">Constituer le dossier</a>
+      </div>
+    </article>
+
+    <!-- CARD 3 -->
+    <article class="card">
+      <svg class="card-frame" preserveAspectRatio="none"><use href="#arch-card"/></svg>
+      <svg class="card-watermark" viewBox="0 0 600 600" aria-hidden="true">
+        <g transform="translate(300,300)scale(0.87)rotate(45)" fill="#3a2618">
+          <circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/>
+          <circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/>
+          <rect x="-232" y="-232" width="464" height="464"/>
+        </g>
+        <g transform="translate(300,300)scale(0.87)rotate(45)" fill="#f4ecd8">
+          <circle cx="-195.16" r="157"/><circle cx="195.16" r="157"/>
+          <circle cy="195.16" r="157"/><circle cy="-195.16" r="157"/>
+          <rect x="-226" y="-226" width="452" height="452"/>
+        </g>
+      </svg>
+      <h3>Déclaration de Décès</h3>
+      <p class="subtitle">À effectuer dans les 24 heures</p>
+      <div class="body">
+        <p>La déclaration est faite par un proche du défunt ou, le plus souvent, par les pompes funèbres mandatées. La mairie dresse l'acte de décès et délivre les copies nécessaires aux démarches de succession, de retraite et de transport du corps.</p>
+        <dl>
+          <dt>Pièces à fournir</dt>
+          <dd>Certificat médical de décès ; pièce d'identité du défunt ; livret de famille ou acte de naissance ; pièce d'identité du déclarant.</dd>
+          <dt>Délai</dt>
+          <dd>Acte rédigé immédiatement · 6 copies remises sur place.</dd>
+          <dt>Permanence</dt>
+          <dd>Service joignable hors heures d'ouverture au 03 23 54 18 02 (astreinte du week-end).</dd>
+          <dt>Agent responsable</dt>
+          <dd class="agent">Mme Geneviève Loiselet ; suppl. M. Charroux.</dd>
+        </dl>
+        <svg class="vine" viewBox="0 0 200 200" aria-hidden="true"><use href="#vine"/></svg>
+        <a class="cta" href="#">Procédure complète</a>
+      </div>
+    </article>
+
+  </section>
+
+  <!-- =================== URBANISME =================== -->
+  <div class="section-head" style="margin-top:5rem">
+    <h2>Urbanisme &amp; Construction</h2>
+    <p>Les autorisations d'urbanisme sont instruites par le service technique de la commune, en lien avec le Pôle d'Équilibre Territorial du Soissonnais. Tout projet en secteur sauvegardé requiert l'avis conforme de l'Architecte des Bâtiments de France.</p>
+  </div>
+  <div class="divider" aria-hidden="true">
+    <svg viewBox="0 0 200 200"><use href="#vine"/></svg>
+  </div>
+
+  <section class="cards" aria-label="Démarches d'urbanisme">
+
+    <!-- CARD 4 -->
+    <article class="card">
+      <svg class="card-frame" preserveAspectRatio="none"><use href="#arch-card"/></svg>
+      <svg class="card-watermark" viewBox="0 0 600 600" aria-hidden="true">
+        <g transform="translate(300,300)scale(0.87)rotate(45)" fill="#3a2618">
+          <circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/>
+          <circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/>
+          <rect x="-232" y="-232" width="464" height="464"/>
+        </g>
+        <g transform="translate(300,300)scale(0.87)rotate(45)" fill="#f4ecd8">
+          <circle cx="-195.16" r="157"/><circle cx="195.16" r="157"/>
+          <circle cy="195.16" r="157"/><circle cy="-195.16" r="157"/>
+          <rect x="-226" y="-226" width="452" height="452"/>
+        </g>
+      </svg>
+      <h3>Permis de Construire</h3>
+      <p class="subtitle">Bâtiments neufs &gt; 20 m² · extensions notables</p>
+      <div class="body">
+        <p>Obligatoire pour toute construction nouvelle dépassant vingt mètres carrés d'emprise au sol, pour les changements de destination touchant au gros œuvre, et pour toute intervention sur un édifice classé. L'instruction est confiée au service mutualisé d'instruction des sols.</p>
+        <dl>
+          <dt>Pièces à fournir</dt>
+          <dd>Formulaire Cerfa 13406 ; plan de situation ; plan de masse ; plans de coupe et façades ; notice descriptive ; insertion paysagère ; photographies du terrain.</dd>
+          <dt>Délai d'instruction</dt>
+          <dd>2 mois (maison individuelle) · 3 mois (autres) · majoration d'un mois en secteur ABF.</dd>
+          <dt>Tarif</dt>
+          <dd>Gratuit ; taxe d'aménagement perçue après accord.</dd>
+          <dt>Agent responsable</dt>
+          <dd class="agent">M. Joscelin Béranger, agent technique d'urbanisme.</dd>
+        </dl>
+        <svg class="vine" viewBox="0 0 200 200" aria-hidden="true"><use href="#vine"/></svg>
+        <a class="cta" href="#">Retirer le formulaire</a>
+      </div>
+    </article>
+
+    <!-- CARD 5 -->
+    <article class="card">
+      <svg class="card-frame" preserveAspectRatio="none"><use href="#arch-card"/></svg>
+      <svg class="card-watermark" viewBox="0 0 600 600" aria-hidden="true">
+        <g transform="translate(300,300)scale(0.87)rotate(45)" fill="#3a2618">
+          <circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/>
+          <circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/>
+          <rect x="-232" y="-232" width="464" height="464"/>
+        </g>
+        <g transform="translate(300,300)scale(0.87)rotate(45)" fill="#f4ecd8">
+          <circle cx="-195.16" r="157"/><circle cx="195.16" r="157"/>
+          <circle cy="195.16" r="157"/><circle cy="-195.16" r="157"/>
+          <rect x="-226" y="-226" width="452" height="452"/>
+        </g>
+      </svg>
+      <h3>Déclaration Préalable de Travaux</h3>
+      <p class="subtitle">Travaux de moindre importance · ravalement</p>
+      <div class="body">
+        <p>Adressée pour les modifications d'aspect extérieur, les abris de jardin de moins de vingt mètres carrés, le ravalement de façade, le changement de menuiseries et la pose de panneaux solaires. Le silence de l'administration vaut accord à l'expiration du délai légal.</p>
+        <dl>
+          <dt>Pièces à fournir</dt>
+          <dd>Formulaire Cerfa 13703 ; plan de situation ; plan de masse coté ; représentation des façades modifiées ; photographies avant travaux ; nuancier des teintes choisies.</dd>
+          <dt>Délai d'instruction</dt>
+          <dd>1 mois · 2 mois en abords de monument historique.</dd>
+          <dt>Affichage</dt>
+          <dd>Panneau réglementaire à poser dès la décision, durant toute la durée du chantier.</dd>
+          <dt>Agent responsable</dt>
+          <dd class="agent">M. Joscelin Béranger.</dd>
+        </dl>
+        <svg class="vine" viewBox="0 0 200 200" aria-hidden="true"><use href="#vine"/></svg>
+        <a class="cta" href="#">Déposer la déclaration</a>
+      </div>
+    </article>
+
+    <!-- CARD 6 -->
+    <article class="card">
+      <svg class="card-frame" preserveAspectRatio="none"><use href="#arch-card"/></svg>
+      <svg class="card-watermark" viewBox="0 0 600 600" aria-hidden="true">
+        <g transform="translate(300,300)scale(0.87)rotate(45)" fill="#3a2618">
+          <circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/>
+          <circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/>
+          <rect x="-232" y="-232" width="464" height="464"/>
+        </g>
+        <g transform="translate(300,300)scale(0.87)rotate(45)" fill="#f4ecd8">
+          <circle cx="-195.16" r="157"/><circle cx="195.16" r="157"/>
+          <circle cy="195.16" r="157"/><circle cy="-195.16" r="157"/>
+          <rect x="-226" y="-226" width="452" height="452"/>
+        </g>
+      </svg>
+      <h3>Inscription sur la Liste Électorale</h3>
+      <p class="subtitle">Citoyenneté &amp; participation aux scrutins</p>
+      <div class="body">
+        <p>Tout résident âgé de dix-huit ans révolus, de nationalité française ou ressortissant de l'Union européenne (pour les scrutins locaux et européens), peut s'inscrire au bureau de vote unique de Saint-Loup-sur-Aisne, salle des Mariages de l'Hôtel de Ville.</p>
+        <dl>
+          <dt>Pièces à fournir</dt>
+          <dd>Pièce d'identité en cours de validité ; justificatif de domicile de moins de trois mois (avis d'imposition, facture EDF, quittance de loyer) ; formulaire Cerfa 12669.</dd>
+          <dt>Date limite</dt>
+          <dd>6e vendredi précédant le scrutin (échéance affichée sur le panneau communal).</dd>
+          <dt>Bureau de vote</dt>
+          <dd>Bureau unique n° 001 — Salle des Mariages.</dd>
+          <dt>Agent responsable</dt>
+          <dd class="agent">Mme Aliénor Vasseur, chargée des élections.</dd>
+        </dl>
+        <svg class="vine" viewBox="0 0 200 200" aria-hidden="true"><use href="#vine"/></svg>
+        <a class="cta" href="#">S'inscrire au registre</a>
+      </div>
+    </article>
+
+  </section>
+
+  <!-- =================== PIÈCES JUSTIFICATIVES =================== -->
+  <section class="pieces-block" aria-label="Pièces justificatives courantes">
+    <h3>Les Trois Pièces Maîtresses du Dossier</h3>
+    <div class="pieces-grid">
+      <div class="piece">
+        <h4>Justificatif de domicile</h4>
+        <p>Facture d'électricité, de gaz, d'eau ou de téléphone fixe, avis d'imposition ou quittance de loyer, datés de moins de trois mois et au nom du demandeur.</p>
+      </div>
+      <div class="piece">
+        <h4>Pièce d'identité</h4>
+        <p>Carte nationale d'identité, passeport, titre de séjour ou permis de conduire en cours de validité. Photocopie recto-verso jointe au dossier ; original présenté au guichet.</p>
+      </div>
+      <div class="piece">
+        <h4>Livret de famille</h4>
+        <p>Original requis pour toute démarche concernant la filiation, le mariage ou un enfant mineur. Le livret est mis à jour gratuitement par l'officier d'état civil après chaque acte nouveau.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- =================== FOOTER =================== -->
+<footer class="site-foot">
+  <div class="foot-arcade">
+    <div class="foot-col">
+      <svg class="foot-arch" preserveAspectRatio="none"><use href="#arch-foot"/></svg>
+      <h5>Mairie</h5>
+      <address>2, Place du Marché-aux-Cierges<br>02160 Saint-Loup-sur-Aisne<br>03 23 54 18 00</address>
+    </div>
+    <div class="foot-col">
+      <svg class="foot-arch" preserveAspectRatio="none"><use href="#arch-foot"/></svg>
+      <h5>Horaires</h5>
+      <p>Lun-Ven 9h–12h<br>Mar &amp; Jeu 14h–17h<br>Fermé le mercredi après-midi</p>
+    </div>
+    <div class="foot-col">
+      <svg class="foot-arch" preserveAspectRatio="none"><use href="#arch-foot"/></svg>
+      <h5>Conseil Municipal</h5>
+      <p>Mme la Maire<br>Hortense de Vermand-Chaudry<br>conseil@stloup-aisne.fr</p>
+    </div>
+    <div class="foot-col">
+      <svg class="foot-arch" preserveAspectRatio="none"><use href="#arch-foot"/></svg>
+      <h5>Liaison Paroissiale</h5>
+      <p>Père Anselme Drouet<br>Presbytère de Saint-Loup<br>03 23 54 18 47</p>
+    </div>
+    <div class="foot-col">
+      <svg class="foot-arch" preserveAspectRatio="none"><use href="#arch-foot"/></svg>
+      <h5>Accessibilité</h5>
+      <p>Hôtel de Ville accessible PMR (entrée latérale rue Saint-Crépin) ; boucle magnétique au guichet.</p>
+    </div>
+    <div class="foot-col">
+      <svg class="foot-arch" preserveAspectRatio="none"><use href="#arch-foot"/></svg>
+      <h5>Archives</h5>
+      <p>Fonds communal coté 4 E 712 — Archives départementales de l'Aisne, Laon.</p>
+    </div>
+    <div class="foot-col">
+      <svg class="foot-arch" preserveAspectRatio="none"><use href="#arch-foot"/></svg>
+      <h5>Dernière révision</h5>
+      <p>Page mise à jour le<br>14 mars 2024<br>par le secrétariat général</p>
+    </div>
+  </div>
+
+  <div class="foot-band" aria-hidden="true">
+    <svg viewBox="0 0 600 600"><use href="#cross-flory"/></svg>
+    <svg viewBox="0 0 600 600"><use href="#cross-flory"/></svg>
+    <svg viewBox="0 0 600 600"><use href="#cross-flory"/></svg>
+    <svg viewBox="0 0 600 600"><use href="#cross-flory"/></svg>
+    <svg viewBox="0 0 600 600"><use href="#cross-flory"/></svg>
+    <svg viewBox="0 0 600 600"><use href="#cross-flory"/></svg>
+    <svg viewBox="0 0 600 600"><use href="#cross-flory"/></svg>
+    <svg viewBox="0 0 600 600"><use href="#cross-flory"/></svg>
+    <svg viewBox="0 0 600 600"><use href="#cross-flory"/></svg>
+    <svg viewBox="0 0 600 600"><use href="#cross-flory"/></svg>
+    <svg viewBox="0 0 600 600"><use href="#cross-flory"/></svg>
+    <svg viewBox="0 0 600 600"><use href="#cross-flory"/></svg>
+    <svg viewBox="0 0 600 600"><use href="#cross-flory"/></svg>
+  </div>
+  <p class="foot-seal-line">Sceau de la Commune, MCMXLIV — révisé 2024</p>
+</footer>
+
+</body>
+</html>

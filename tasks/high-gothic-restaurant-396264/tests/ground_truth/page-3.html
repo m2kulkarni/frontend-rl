@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>The Cellar — Maison Saint-Vrain</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* ---------- BACKGROUND DIAPER ---------- */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 600 600'><g transform='translate(300,300)scale(0.87)rotate(45)' fill='%230a0a0a' opacity='0.07'><circle cx='-195.16' r='163'/><circle cx='195.16' r='163'/><circle cy='195.16' r='163'/><circle cy='-195.16' r='163'/><rect x='-232' y='-232' width='464' height='464'/><g fill='%23f4ecd8'><circle cx='-195.16' r='157'/><circle cx='195.16' r='157'/><circle cy='195.16' r='157'/><circle cy='-195.16' r='157'/><rect x='-226' y='-226' width='452' height='452'/></g><circle cx='-195.16' r='144'/><circle cx='195.16' r='144'/><circle cy='195.16' r='144'/><circle cy='-195.16' r='144'/><rect x='-213' y='-213' width='426' height='426'/><g fill='%23f4ecd8'><circle cx='-195.16' r='138'/><circle cx='195.16' r='138'/><circle cy='195.16' r='138'/><circle cy='-195.16' r='138'/><rect x='-207' y='-207' width='414' height='414'/></g></g></svg>");
+    background-size: 160px 160px;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.55;
+  }
+
+  main, header, footer { position: relative; z-index: 1; }
+
+  /* ---------- NAVIGATION ARCADE ---------- */
+  .arcade-nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--surface);
+    border-bottom: 1px solid var(--accent);
+    box-shadow: 0 1px 0 var(--accent);
+  }
+  .arcade-nav .inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 0 40px;
+  }
+  .brand {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    letter-spacing: 0.15em;
+    color: var(--primary);
+    padding: 28px 0 22px;
+    text-transform: uppercase;
+  }
+  .brand span { color: var(--accent); }
+  .arcade-nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 4px;
+  }
+  .arcade-nav li a {
+    position: relative;
+    display: block;
+    padding: 32px 18px 14px;
+    font-family: var(--font-display), serif;
+    font-size: 12.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text);
+    text-decoration: none;
+    text-align: center;
+  }
+  .arcade-nav li a::before {
+    content: "";
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 56px;
+    height: 28px;
+    border: 1.5px solid var(--primary);
+    border-bottom: none;
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+    background: transparent;
+  }
+  .arcade-nav li a[aria-current="page"] {
+    color: var(--accent);
+  }
+  .arcade-nav li a[aria-current="page"]::before {
+    background: var(--secondary);
+    border-color: var(--primary);
+  }
+  .arcade-nav li a:hover { color: var(--secondary); }
+
+  /* ---------- PAGE HEADER ---------- */
+  .page-head {
+    text-align: center;
+    padding: 70px 40px 30px;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  .page-eyebrow {
+    font-family: var(--font-display), serif;
+    color: var(--accent);
+    letter-spacing: 0.4em;
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+  .page-head h1 {
+    font-family: var(--font-display), serif;
+    font-size: 76px;
+    line-height: 1;
+    margin: 14px 0 8px;
+    letter-spacing: 0.04em;
+    color: var(--primary);
+    font-weight: 500;
+  }
+  .page-head .lede {
+    max-width: 640px;
+    margin: 18px auto 0;
+    color: var(--text);
+    font-style: italic;
+    font-size: 16px;
+  }
+
+  /* ---------- HERO ARCH FRAME ---------- */
+  .arch-hero {
+    max-width: 1100px;
+    margin: 30px auto 50px;
+    position: relative;
+    padding: 0 40px;
+  }
+  .arch-hero-inner {
+    position: relative;
+    border: 2px solid var(--primary);
+    border-radius: 240px 240px 6px 6px / 320px 320px 6px 6px;
+    padding: 60px 80px 50px;
+    background: rgba(244, 236, 216, 0.85);
+  }
+  .arch-hero-inner::after {
+    content: "";
+    position: absolute;
+    inset: 10px;
+    border: 1px solid var(--accent);
+    border-radius: 230px 230px 4px 4px / 310px 310px 4px 4px;
+    pointer-events: none;
+  }
+  .arch-title {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-size: 28px;
+    letter-spacing: 0.12em;
+    color: var(--secondary);
+    margin: 0 0 6px;
+    text-transform: uppercase;
+  }
+  .arch-sub {
+    text-align: center;
+    color: var(--accent);
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.3em;
+    font-size: 11px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+  .hairline {
+    width: 80px;
+    height: 1px;
+    background: var(--accent);
+    margin: 18px auto 28px;
+  }
+
+  /* ---------- THREE COLUMNS ---------- */
+  .cellar-cols {
+    max-width: 1280px;
+    margin: 20px auto;
+    padding: 0 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+    position: relative;
+  }
+  .cellar-col {
+    padding: 30px 36px;
+    position: relative;
+  }
+  .cellar-col + .cellar-col {
+    border-left: 1px solid rgba(10,10,10,0.18);
+  }
+  .col-arch {
+    text-align: center;
+    margin-bottom: 18px;
+  }
+  .col-arch svg {
+    width: 78px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+  .col-head {
+    font-family: var(--font-display), serif;
+    text-align: center;
+    font-size: 30px;
+    line-height: 1.05;
+    color: var(--primary);
+    margin: 6px 0 4px;
+    letter-spacing: 0.04em;
+    font-weight: 500;
+  }
+  .col-head em {
+    display: block;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--accent);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+  .col-rule {
+    height: 1px;
+    background: var(--primary);
+    margin: 18px auto 24px;
+    width: 70%;
+    position: relative;
+  }
+  .col-rule::before, .col-rule::after {
+    content: "";
+    position: absolute;
+    top: -3px;
+    width: 7px;
+    height: 7px;
+    background: var(--accent);
+    transform: rotate(45deg);
+  }
+  .col-rule::before { left: -4px; }
+  .col-rule::after { right: -4px; }
+
+  /* ---------- BOTTLE NOTES ---------- */
+  .bottle {
+    margin-bottom: 30px;
+  }
+  .bottle h3 {
+    font-family: var(--font-display), serif;
+    font-size: 17px;
+    color: var(--secondary);
+    margin: 0 0 2px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .bottle .meta {
+    font-family: var(--font-display), serif;
+    color: var(--accent);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .bottle p {
+    margin: 0 0 10px;
+    font-size: 14.5px;
+    line-height: 1.75;
+    color: var(--text);
+  }
+  .dropcap::first-letter {
+    font-family: var(--font-display), serif;
+    font-weight: 700;
+    color: var(--accent);
+    float: left;
+    font-size: 56px;
+    line-height: 0.85;
+    padding: 4px 8px 0 0;
+    text-shadow: 0 0 0 var(--accent);
+  }
+  .price {
+    color: var(--secondary);
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.18em;
+    font-size: 13px;
+    margin-top: 8px;
+    display: inline-block;
+    border-top: 1px solid var(--accent);
+    padding-top: 6px;
+  }
+  .lesser-list {
+    list-style: none;
+    padding: 0;
+    margin: 14px 0 0;
+    font-size: 13.5px;
+  }
+  .lesser-list li {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dotted rgba(58,38,24,0.4);
+    padding: 6px 0;
+  }
+  .lesser-list .name { color: var(--text); }
+  .lesser-list .name em { color: var(--text-emphasis); font-style: normal; display:block; font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; }
+  .lesser-list .yr { color: var(--accent); font-family: var(--font-display); letter-spacing: 0.12em; font-size: 12px; padding-left: 12px; white-space: nowrap; }
+
+  /* ---------- DIVIDER BANDS ---------- */
+  .divider-band {
+    max-width: 1280px;
+    margin: 20px auto;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .divider-band .line {
+    flex: 1;
+    height: 1px;
+    background: var(--primary);
+    position: relative;
+  }
+  .divider-band .line::after {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+    transform: translateY(-2px);
+    opacity: 0;
+  }
+  .divider-band .ornaments {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+  }
+  .divider-band svg {
+    width: 34px;
+    height: 34px;
+    fill: var(--primary);
+  }
+
+  /* ---------- LOWER EDITORIAL ---------- */
+  .editor-note {
+    max-width: 980px;
+    margin: 60px auto;
+    padding: 0 40px;
+    text-align: center;
+    color: var(--text);
+    font-style: italic;
+    font-size: 16px;
+  }
+  .editor-note::before, .editor-note::after {
+    content: "✦";
+    color: var(--accent);
+    display: block;
+    margin: 8px 0;
+    font-size: 14px;
+  }
+
+  .pairings {
+    max-width: 1180px;
+    margin: 40px auto 80px;
+    padding: 0 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+  .pairing-card {
+    position: relative;
+    border: 1.5px solid var(--primary);
+    border-radius: 180px 180px 4px 4px / 240px 240px 4px 4px;
+    padding: 40px 40px 32px;
+    background: rgba(244,236,216,0.7);
+  }
+  .pairing-card .quatre {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 28px;
+    height: 28px;
+    background: var(--bg);
+    display: grid;
+    place-items: center;
+  }
+  .pairing-card h4 {
+    font-family: var(--font-display), serif;
+    text-align: center;
+    color: var(--accent);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    font-size: 12px;
+    margin: 0 0 10px;
+  }
+  .pairing-card h3 {
+    font-family: var(--font-display), serif;
+    text-align: center;
+    color: var(--primary);
+    font-size: 22px;
+    margin: 0 0 14px;
+    letter-spacing: 0.05em;
+  }
+  .pairing-card p {
+    font-size: 14px;
+    text-align: center;
+    margin: 0;
+  }
+  .pairing-card .price {
+    display: block;
+    text-align: center;
+    margin-top: 14px;
+    border: none;
+    border-top: 1px solid var(--accent);
+    padding-top: 10px;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    background: var(--surface);
+    border-top: 1px solid var(--accent);
+    margin-top: 60px;
+    padding: 50px 40px 30px;
+  }
+  .foot-arcade {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 30px;
+  }
+  .foot-arch {
+    width: 80px;
+    height: 70px;
+    border: 1.5px solid var(--primary);
+    border-bottom: none;
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+    margin: 0 -1px;
+    display: grid;
+    place-items: center;
+    padding-top: 18px;
+  }
+  .foot-arch svg { width: 22px; height: 22px; fill: var(--primary); }
+  .foot-cols {
+    max-width: 980px;
+    margin: 30px auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+  }
+  .foot-col {
+    padding: 0 30px;
+    border-left: 1px solid var(--accent);
+    text-align: center;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  .foot-col:first-child { border-left: none; }
+  .foot-col h5 {
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin: 0 0 10px;
+  }
+  .seal {
+    text-align: center;
+    margin: 30px auto 6px;
+  }
+  .seal svg { width: 38px; height: 38px; fill: var(--primary); }
+  .copy {
+    text-align: center;
+    font-size: 11.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text);
+    font-family: var(--font-display), serif;
+  }
+</style>
+</head>
+<body>
+
+<header class="arcade-nav" role="banner">
+  <div class="inner">
+    <div class="brand">Maison <span>✚</span> Saint-Vrain</div>
+    <nav aria-label="Primary">
+      <ul>
+        <li><a href="page-1.html">Maison</a></li>
+        <li><a href="page-2.html">The Supper</a></li>
+        <li><a href="page-3.html" aria-current="page">The Cellar</a></li>
+        <li><a href="page-4.html">The House</a></li>
+        <li><a href="page-5.html">Visit</a></li>
+        <li><a href="page-6.html">Reserve</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="page-head">
+    <div class="page-eyebrow">Liber Vinorum · MMXXIV</div>
+    <h1>The Cellar</h1>
+    <p class="lede">Beneath the cloth-merchants' hall, in vaults dug under the rue des Drapiers in 1387, two hundred and ninety bottles wait their hour. Aurélien Brescot and our sommelière Inès Vaudremer keep the keys; what follows is a small register, faithful to the season.</p>
+  </section>
+
+  <section class="arch-hero" aria-label="On the bottles in our keeping">
+    <div class="arch-hero-inner">
+      <h2 class="arch-title">On the Bottles in Our Keeping</h2>
+      <div class="arch-sub">Trois Maisons · Loire · Bourgogne · Picardie</div>
+      <div class="hairline"></div>
+      <p style="text-align:center; max-width:720px; margin:0 auto;">The list is divided in three. To the left, the long, slate-rinsed wines of the Loire — Anjou and Touraine — which carry our river-fish and our white meats. In the middle, the elder Burgundies kept back from auction, decanted only at table. To the right, the meads and orchard ciders of the Somme and the Aisne, brewed in the manner of the abbey houses, served in pewter cups as a chaser to game and to the long puddings of Lent.</p>
+    </div>
+  </section>
+
+  <!-- DIVIDER BAND -->
+  <div class="divider-band" aria-hidden="true">
+    <div class="line"></div>
+    <div class="ornaments">
+      <svg viewBox="110 124 40 40" xmlns="http://www.w3.org/2000/svg"><use href="#oak"/></svg>
+      <svg viewBox="110 124 40 40"><use href="#oak"/></svg>
+      <svg viewBox="110 124 40 40"><use href="#oak"/></svg>
+    </div>
+    <div class="line"></div>
+  </div>
+
+  <!-- THREE COLUMNS -->
+  <section class="cellar-cols">
+
+    <!-- COL 1 - LOIRE -->
+    <div class="cellar-col">
+      <div class="col-arch" aria-hidden="true">
+        <svg viewBox="147 244 500 550" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(-147,-244)" fill="none" stroke="#0a0a0a" stroke-width="6">
+            <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+            <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+          </g>
+          <g transform="matrix(-1,0,0,1,777.88071,-244.297)" fill="none" stroke="#0a0a0a" stroke-width="6">
+            <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+            <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+          </g>
+        </svg>
+      </div>
+      <h2 class="col-head">Vins de Loire<em>Slate · Chenin · Gravel</em></h2>
+      <div class="col-rule"></div>
+
+      <article class="bottle">
+        <h3>Domaine aux Moines</h3>
+        <div class="meta">Savennières — La Roche aux Moines · 2018</div>
+        <p class="dropcap">Tessa Laroche, the third daughter to keep this priory vineyard above the Loire at Savennières, presses her chenin late and slow. The 2018 has begun to throw its yellow gold; on the nose, dried verbena, beeswax, the smoke of a snuffed candle. We pour it with the carp aux pruneaux and the salt-baked turbot, and beg the table not to chill it past cellar-cold.</p>
+        <span class="price">Bouteille · €128</span>
+      </article>
+
+      <article class="bottle">
+        <h3>Clos Rougeard</h3>
+        <div class="meta">Saumur-Champigny · Les Poyeux · 2014</div>
+        <p>Bottled by the late Foucault brothers and laid down by us in March of 2017. Cabernet franc of a gravity rare in the Loire — graphite, blackcurrant leaf, the tannin of an old breviary's binding. Decant a full hour. For the saddle of hare and the pigeon en croûte.</p>
+        <span class="price">Bouteille · €240</span>
+      </article>
+
+      <ul class="lesser-list">
+        <li><span class="name">Huet, Le Mont demi-sec<em>Vouvray</em></span><span class="yr">2011 · €92</span></li>
+        <li><span class="name">Catherine et Pierre Breton<em>Bourgueil, Les Perrières</em></span><span class="yr">2019 · €78</span></li>
+        <li><span class="name">Domaine de la Pépière<em>Muscadet, Clos des Briords</em></span><span class="yr">2020 · €54</span></li>
+        <li><span class="name">Thierry Germain<em>Saumur Blanc, L'Insolite</em></span><span class="yr">2021 · €88</span></li>
+      </ul>
+    </div>
+
+    <!-- COL 2 - BOURGOGNE -->
+    <div class="cellar-col">
+      <div class="col-arch" aria-hidden="true">
+        <svg viewBox="147 244 500 550" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(-147,-244)" fill="none" stroke="#0a0a0a" stroke-width="6">
+            <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+            <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+          </g>
+          <g transform="matrix(-1,0,0,1,777.88071,-244.297)" fill="none" stroke="#0a0a0a" stroke-width="6">
+            <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+            <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+          </g>
+        </svg>
+      </div>
+      <h2 class="col-head">Bourgognes anciens<em>Côte d'Or · Côte Chalonnaise</em></h2>
+      <div class="col-rule"></div>
+
+      <article class="bottle">
+        <h3>Domaine Faiveley</h3>
+        <div class="meta">Mercurey 1<sup>er</sup> Cru · Clos des Myglands · 2015</div>
+        <p class="dropcap">Erwan Faiveley sent us six cases of the 2015 Mercurey in the late autumn of 2019; three remain. The wine has settled into its long-bone middle age — black cherry kirsch, woodsmoke, the iron of a pilgrim's spoon. It is the bottle we open most often for the venison stew with chestnuts and for the long evening in November when the candles last as the table.</p>
+        <span class="price">Bouteille · €165</span>
+      </article>
+
+      <article class="bottle">
+        <h3>Domaine Comte Armand</h3>
+        <div class="meta">Pommard 1<sup>er</sup> Cru · Clos des Epeneaux · 2009</div>
+        <p>From a magnum, drawn slowly over the course of a single supper. The Comte's monopole drinks now in the deepest autumn of itself: dried fig, leather, the church-incense of old burgundian glory. Reserved for tables of six and over.</p>
+        <span class="price">Magnum · €620</span>
+      </article>
+
+      <ul class="lesser-list">
+        <li><span class="name">Joseph Drouhin<em>Chablis 1<sup>er</sup> Cru, Vaudésir</em></span><span class="yr">2017 · €138</span></li>
+        <li><span class="name">Domaine Dujac<em>Morey-Saint-Denis</em></span><span class="yr">2016 · €178</span></li>
+        <li><span class="name">Bouchard Père et Fils<em>Beaune Grèves, Vigne de l'Enfant Jésus</em></span><span class="yr">2010 · €295</span></li>
+        <li><span class="name">A. et P. de Villaine<em>Bouzeron Aligoté</em></span><span class="yr">2020 · €68</span></li>
+        <li><span class="name">Hubert Lamy<em>Saint-Aubin, Derrière chez Edouard</em></span><span class="yr">2018 · €112</span></li>
+      </ul>
+    </div>
+
+    <!-- COL 3 - HYDROMELS -->
+    <div class="cellar-col">
+      <div class="col-arch" aria-hidden="true">
+        <svg viewBox="147 244 500 550" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(-147,-244)" fill="none" stroke="#0a0a0a" stroke-width="6">
+            <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+            <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+          </g>
+          <g transform="matrix(-1,0,0,1,777.88071,-244.297)" fill="none" stroke="#0a0a0a" stroke-width="6">
+            <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+            <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+          </g>
+        </svg>
+      </div>
+      <h2 class="col-head">Hydromels &amp; Cidres<em>Picardy · Normandy · Aisne</em></h2>
+      <div class="col-rule"></div>
+
+      <article class="bottle">
+        <h3>Rucher Caudron</h3>
+        <div class="meta">Hydromel élevé en fût de chêne · 2019</div>
+        <p class="dropcap">Henri Caudron keeps his bees on the chalk above Vaire-sous-Corbie, in sight of the cathedral at Amiens. This four-year mead, fermented from buckwheat honey and aged twenty months in old Calvados oak, drinks like a half-amber Tokaji that has seen weather. We pour it warm at the close of the meal with the fig tart and the walnut wafer; medieval suppers ended this way and ours do also.</p>
+        <span class="price">Carafon 25cl · €34</span>
+      </article>
+
+      <article class="bottle">
+        <h3>Cidrerie du Vieux Bourg</h3>
+        <div class="meta">Cidre fermier brut · Pays de Bray · 2022</div>
+        <p>A bottle-conditioned cider from Marie-Hélène Plouvier, made from twenty-three orchard varieties — Bedan, Mettais, Noël des Champs. Pale stone-fruit, salted apple skin, a finish like wet flint. Drunk in pewter, between courses, to clear the palate of butter.</p>
+        <span class="price">Bouteille 75cl · €38</span>
+      </article>
+
+      <ul class="lesser-list">
+        <li><span class="name">Bouché-Thomas<em>Hydromel de châtaignier</em></span><span class="yr">2020 · €42</span></li>
+        <li><span class="name">Hervé Quinquempois<em>Poiré de Domfront</em></span><span class="yr">2021 · €36</span></li>
+        <li><span class="name">Frères Lefranc<em>Cidre de glace, Aisne</em></span><span class="yr">2018 · €58</span></li>
+        <li><span class="name">Maison Fauchet<em>Hypocras d'hiver, recette de 1408</em></span><span class="yr">N.V. · €28</span></li>
+        <li><span class="name">Calvados Roger Groult<em>Réserve 12 ans</em></span><span class="yr">N.V. · €22 / 4cl</span></li>
+      </ul>
+    </div>
+
+  </section>
+
+  <!-- DIVIDER -->
+  <div class="divider-band" aria-hidden="true">
+    <div class="line"></div>
+    <div class="ornaments">
+      <svg viewBox="110 124 40 40"><use href="#oak"/></svg>
+      <svg viewBox="110 124 40 40"><use href="#oak"/></svg>
+      <svg viewBox="110 124 40 40"><use href="#oak"/></svg>
+      <svg viewBox="110 124 40 40"><use href="#oak"/></svg>
+      <svg viewBox="110 124 40 40"><use href="#oak"/></svg>
+    </div>
+    <div class="line"></div>
+  </div>
+
+  <p class="editor-note">The cellar is shown by appointment on Friday afternoons between three and five. Mademoiselle Vaudremer takes the visitors herself, six at a time, down the four flights of stone.</p>
+
+  <section class="pairings" aria-label="Suggested pairings of the season">
+    <article class="pairing-card">
+      <div class="quatre" aria-hidden="true">
+        <svg viewBox="0 0 600 600" width="20" height="20"><g transform="translate(300,300)scale(0.87)rotate(45)" fill="#0a0a0a"><circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/><circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/><rect x="-232" y="-232" width="464" height="464"/></g></svg>
+      </div>
+      <h4>Accord du Soir · I</h4>
+      <h3>The Long Table — Six Cups</h3>
+      <p>A flight of six pourings keyed to the supper of the day: Muscadet from the Briords with the oysters; Savennières with the carp; the Mercurey with the saddle of hare; the Pommard with the cheese-board; the Caudron mead with the fig tart; and the Groult Calvados to close.</p>
+      <span class="price">Par convive · €92</span>
+    </article>
+
+    <article class="pairing-card">
+      <div class="quatre" aria-hidden="true">
+        <svg viewBox="0 0 600 600" width="20" height="20"><g transform="translate(300,300)scale(0.87)rotate(45)" fill="#0a0a0a"><circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/><circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/><rect x="-232" y="-232" width="464" height="464"/></g></svg>
+      </div>
+      <h4>Accord du Soir · II</h4>
+      <h3>The Cloister Flight — Four Cups</h3>
+      <p>For Friday and the days of fast: a quieter procession of low-alcohol pourings — Bouzeron Aligoté, the Chablis Vaudésir, the Plouvier cider, and the buckwheat hydromel of Caudron. Held at cellar temperature throughout, served from glazed earthenware.</p>
+      <span class="price">Par convive · €58</span>
+    </article>
+  </section>
+
+</main>
+
+<!-- inline reusable SVG defs -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="oak" viewBox="110 124 40 40">
+      <path fill="#0a0a0a" transform="translate(0,0)" d="M130 130 q3 -2 6 0 q3 2 4 6 q-2 1 -4 0 q-3 -1 -6 -6 z M126 138 q4 0 6 3 q2 3 0 6 q-3 -1 -5 -3 q-2 -3 -1 -6 z M138 132 q3 1 4 4 q1 3 -1 5 q-2 -2 -3 -4 q-1 -2 0 -5 z M132 144 a3 4 0 0 1 6 0 a3 4 0 0 1 -6 0 z"/>
+    </symbol>
+    <symbol id="fleur" viewBox="0 0 40 40">
+      <path fill="currentColor" d="M20 4 C18 12 14 14 12 18 C12 22 16 24 20 22 C24 24 28 22 28 18 C26 14 22 12 20 4 Z M10 22 L30 22 L30 25 L10 25 Z M18 25 L22 25 L22 36 L18 36 Z M14 28 C12 30 12 33 15 34 M26 28 C28 30 28 33 25 34"/>
+    </symbol>
+    <symbol id="cross" viewBox="0 0 40 40">
+      <path fill="currentColor" d="M18 6 L22 6 L22 18 L34 18 L34 22 L22 22 L22 34 L18 34 L18 22 L6 22 L6 18 L18 18 Z M16 6 Q14 2 18 4 M22 4 Q26 2 24 6 M6 16 Q2 14 4 18 M36 18 Q38 14 34 16 M6 24 Q2 26 4 22 M34 24 Q38 26 36 22 M16 34 Q14 38 18 36 M24 36 Q26 38 22 34"/>
+    </symbol>
+  </defs>
+</svg>
+
+<footer>
+  <div class="foot-arcade" aria-hidden="true">
+    <div class="foot-arch"><svg><use href="#fleur"/></svg></div>
+    <div class="foot-arch"><svg><use href="#cross"/></svg></div>
+    <div class="foot-arch"><svg><use href="#fleur"/></svg></div>
+    <div class="foot-arch"><svg><use href="#cross"/></svg></div>
+    <div class="foot-arch"><svg><use href="#fleur"/></svg></div>
+    <div class="foot-arch"><svg><use href="#cross"/></svg></div>
+    <div class="foot-arch"><svg><use href="#fleur"/></svg></div>
+  </div>
+
+  <div class="foot-cols">
+    <div class="foot-col">
+      <h5>The Address</h5>
+      14, rue des Drapiers<br>
+      Quartier de la Halle aux Draps<br>
+      80000 Amiens · Picardie
+    </div>
+    <div class="foot-col">
+      <h5>The Hours</h5>
+      Suppers Wednesday — Saturday<br>
+      Doors at seven · Table at half past<br>
+      Cellar visits Fridays, 3—5h
+    </div>
+    <div class="foot-col">
+      <h5>To Reserve</h5>
+      Telephone +33 3 22 47 18 06<br>
+      reserver@maison-saint-vrain.fr<br>
+      Or by letter, sealed
+    </div>
+  </div>
+
+  <div class="seal" aria-hidden="true">
+    <svg viewBox="0 0 592 592"><path transform="translate(-4,-4)scale(0.15,0.15)" d="M1778.9,3200A120.9263,120.9263 0 0,1 1657.97,3320.93A120.9263,120.9263 0 0,1 1537.04,3200A221.5096,221.5096 0 0,0 1456.32,3371.02A221.5096,221.5096 0 0,0 1677.83,3592.53A221.5096,221.5096 0 0,0 1818.61,3542.03A362.779,362.779 0 0,0 2000,3856.21A362.779,362.779 0 0,0 2181.39,3542.03A221.5096,221.5096 0 0,0 2322.17,3592.53A221.5096,221.5096 0 0,0 2543.68,3371.02A221.5096,221.5096 0 0,0 2462.96,3200A120.9263,120.9263 0 0,1 2342.03,3320.93A120.9263,120.9263 0 0,1 2221.1,3200V2221.1H3200A120.9263,120.9263 0 0,1 3320.93,2342.03A120.9263,120.9263 0 0,1 3200,2462.96A221.5096,221.5096 0 0,0 3371.02,2543.68A221.5096,221.5096 0 0,0 3592.53,2322.17A221.5096,221.5096 0 0,0 3542.03,2181.39A362.779,362.779 0 0,0 3856.21,2000A362.779,362.779 0 0,0 3542.03,1818.61A221.5096,221.5096 0 0,0 3592.53,1677.83A221.5096,221.5096 0 0,0 3371.02,1456.32A221.5096,221.5096 0 0,0 3200,1537.04A120.9263,120.9263 0 0,1 3320.93,1657.97A120.9263,120.9263 0 0,1 3200,1778.9H2221.1V800A120.9263,120.9263 0 0,1 2342.03,679.073A120.9263,120.9263 0 0,1 2462.96,800A221.5096,221.5096 0 0,0 2543.68,628.984A221.5096,221.5096 0 0,0 2322.17,407.475A221.5096,221.5096 0 0,0 2181.39,457.969A362.779,362.779 0 0,0 2000,143.793A362.779,362.779 0 0,0 1818.61,457.969A221.5096,221.5096 0 0,0 1677.83,407.475A221.5096,221.5096 0 0,0 1456.32,628.984A221.5096,221.5096 0 0,0 1537.04,800A120.9263,120.9263 0 0,1 1657.97,679.073A120.9263,120.9263 0 0,1 1778.9,800V1778.9H800A120.9263,120.9263 0 0,1 679.073,1657.97A120.9263,120.9263 0 0,1 800,1537.04A221.5096,221.5096 0 0,0 628.984,1456.32A221.5096,221.5096 0 0,0 407.475,1677.83A221.5096,221.5096 0 0,0 457.969,1818.61A362.779,362.779 0 0,0 143.793,2000A362.779,362.779 0 0,0 457.969,2181.39A221.5096,221.5096 0 0,0 407.475,2322.17A221.5096,221.5096 0 0,0 628.984,2543.68A221.5096,221.5096 0 0,0 800,2462.96A120.9263,120.9263 0 0,1 679.073,2342.03A120.9263,120.9263 0 0,1 800,2221.1H1778.9Z"/></svg>
+  </div>
+
+  <div class="copy">© Anno Domini 2024 · Maison Saint-Vrain · Amiens</div>
+</footer>
+
+</body>
+</html>

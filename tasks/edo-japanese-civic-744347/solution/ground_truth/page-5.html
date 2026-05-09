@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Office, Hours & Petitions — Edo Bureau of Wards & Watercourses</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.8;
+  }
+
+  /* Wagara background pattern, low opacity */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("svg/seigaiha-waves.svg");
+    background-size: 280px 280px;
+    opacity: 0.13;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+
+  /* ========== NAVIGATION ========== */
+  nav.topnav {
+    display: flex;
+    align-items: center;
+    padding: 28px 64px 22px 64px;
+    border-bottom: 1px solid var(--ornament);
+  }
+  nav.topnav .brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  nav.topnav .brand svg {
+    width: 36px;
+    height: 36px;
+    flex: 0 0 36px;
+  }
+  nav.topnav .brand .name {
+    font-family: var(--font-body), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.14em;
+    font-size: 14px;
+    color: var(--text);
+  }
+  nav.topnav ul {
+    list-style: none;
+    margin: 0 0 0 auto;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+  nav.topnav li {
+    padding: 0 22px;
+    border-right: 1px solid var(--ornament);
+    font-size: 12.5px;
+    letter-spacing: 0.08em;
+  }
+  nav.topnav li:last-child { border-right: none; padding-right: 0; }
+  nav.topnav li:first-child { }
+  nav.topnav a {
+    color: var(--text);
+    text-decoration: none;
+    font-variant: small-caps;
+    letter-spacing: 0.1em;
+  }
+  nav.topnav a[aria-current="page"] {
+    color: var(--secondary);
+    border-bottom: 1.5px solid var(--secondary);
+    padding-bottom: 3px;
+  }
+
+  /* ========== HERO / OFF-AXIS TITLE ========== */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 100px 64px 80px 64px;
+    min-height: 460px;
+  }
+  .hero .void {
+    /* deliberate emptiness */
+  }
+  .hero .titleblock {
+    grid-column: 2;
+    padding-left: 60px;
+    border-left: 1px solid var(--ornament);
+    align-self: end;
+  }
+  .hero .kanji-mark {
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.4em;
+    color: var(--secondary);
+    margin-bottom: 28px;
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 700;
+    font-size: 76px;
+    line-height: 1.05;
+    margin: 0 0 32px 0;
+    color: var(--text);
+  }
+  .hero h1 .accent {
+    color: var(--secondary);
+  }
+  .hero .standfirst {
+    font-size: 16px;
+    line-height: 1.9;
+    max-width: 460px;
+    color: var(--text);
+  }
+  .hero .meta {
+    margin-top: 36px;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    font-variant: small-caps;
+    color: var(--text);
+    opacity: 0.7;
+  }
+
+  /* ========== DIVIDER ========== */
+  .divider {
+    height: 60px;
+    background-image: url("svg/sayagata-keyfret.svg");
+    background-size: 120px 120px;
+    background-repeat: repeat-x;
+    background-position: center;
+    opacity: 0.14;
+    margin: 0 64px;
+  }
+
+  /* ========== SECTIONS ========== */
+  section {
+    padding: 90px 64px;
+  }
+  .section-header {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    align-items: baseline;
+    margin-bottom: 50px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--ornament);
+  }
+  .section-header .num {
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.3em;
+    color: var(--secondary);
+  }
+  .section-header h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 700;
+    font-size: 38px;
+    margin: 0;
+    color: var(--text);
+  }
+
+  /* ========== ADDRESS BLOCK (off-axis) ========== */
+  .address-block {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 0;
+  }
+  .address-block .seal-side {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-right: 40px;
+  }
+  .address-block .seal-side svg {
+    width: 140px;
+    height: 140px;
+  }
+  .address-block .seal-side .caption {
+    margin-top: 22px;
+    font-size: 11.5px;
+    letter-spacing: 0.18em;
+    font-variant: small-caps;
+    color: var(--text);
+    opacity: 0.75;
+    max-width: 200px;
+  }
+  .address-block .text-side {
+    border-left: 1px solid var(--ornament);
+    padding-left: 60px;
+  }
+  .address-block h3 {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    margin: 0 0 22px 0;
+  }
+  .address-block .lines {
+    font-size: 17px;
+    line-height: 2.1;
+    max-width: 540px;
+  }
+  .address-block .lines strong {
+    color: var(--text-emphasis);
+    font-weight: 400;
+  }
+
+  /* ========== HOURS TABLE ========== */
+  .hours-wrap {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 80px;
+  }
+  .hours-card {
+    background: var(--surface);
+    border-top: 1px solid var(--ornament);
+    padding: 44px 50px 50px 60px;
+    position: relative;
+  }
+  .hours-card .seal-tr {
+    position: absolute;
+    top: 18px;
+    right: 22px;
+    width: 36px;
+    height: 36px;
+    opacity: 0.8;
+  }
+  .hours-card h3 {
+    font-family: var(--font-display), serif;
+    font-size: 24px;
+    margin: 0 0 28px 0;
+  }
+  table.hours {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+  }
+  table.hours th, table.hours td {
+    text-align: left;
+    padding: 14px 8px;
+    border-bottom: 1px solid rgba(12,12,12,0.25);
+    font-size: 15px;
+  }
+  table.hours th {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    font-variant: small-caps;
+    color: var(--secondary);
+    border-bottom: 1px solid var(--ornament);
+  }
+  table.hours td.day {
+    font-family: var(--font-display), serif;
+    font-size: 17px;
+  }
+  table.hours td.closed {
+    color: var(--text-emphasis);
+    font-style: italic;
+  }
+
+  .hours-aside {
+    padding-top: 44px;
+  }
+  .hours-aside .pull {
+    font-family: var(--font-display), serif;
+    font-size: 26px;
+    line-height: 1.5;
+    color: var(--text);
+    border-left: 3px solid var(--secondary);
+    padding-left: 24px;
+    margin-bottom: 28px;
+  }
+  .hours-aside .pull-attr {
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    font-variant: small-caps;
+    opacity: 0.7;
+    padding-left: 27px;
+  }
+  .hours-aside .closed-note {
+    margin-top: 40px;
+    font-size: 14px;
+    line-height: 1.9;
+    padding-left: 27px;
+    max-width: 280px;
+  }
+
+  /* ========== PETITION PROCEDURE ========== */
+  .procedure {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 0;
+  }
+  .procedure .marginalia {
+    padding-right: 40px;
+    text-align: right;
+  }
+  .procedure .marginalia .label {
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.25em;
+    color: var(--secondary);
+    margin-bottom: 14px;
+  }
+  .procedure .marginalia .gloss {
+    font-size: 13px;
+    line-height: 1.8;
+    opacity: 0.75;
+    max-width: 220px;
+    margin-left: auto;
+  }
+  .steps {
+    border-left: 1px solid var(--ornament);
+    padding-left: 60px;
+  }
+  .steps ol {
+    list-style: none;
+    counter-reset: step;
+    margin: 0;
+    padding: 0;
+  }
+  .steps li {
+    counter-increment: step;
+    padding: 26px 0 26px 80px;
+    position: relative;
+    border-bottom: 1px solid rgba(12,12,12,0.18);
+    max-width: 720px;
+  }
+  .steps li:last-child { border-bottom: none; }
+  .steps li::before {
+    content: counter(step, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 28px;
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    color: var(--secondary);
+    letter-spacing: 0.05em;
+  }
+  .steps li h4 {
+    font-family: var(--font-display), serif;
+    font-size: 19px;
+    margin: 0 0 8px 0;
+  }
+  .steps li p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.85;
+  }
+
+  /* ========== TWO CARDS: SEAL PAPER + RUNNER STIPEND ========== */
+  .pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+  }
+  .info-card {
+    background: var(--surface);
+    border-top: 1px solid var(--ornament);
+    padding: 40px 48px 48px 56px;
+    position: relative;
+  }
+  .info-card .seal-tr {
+    position: absolute;
+    top: 18px;
+    right: 22px;
+    width: 32px;
+    height: 32px;
+    opacity: 0.8;
+  }
+  .info-card .eyebrow {
+    font-family: var(--font-display), serif;
+    font-size: 11.5px;
+    letter-spacing: 0.28em;
+    color: var(--secondary);
+    margin-bottom: 14px;
+  }
+  .info-card h3 {
+    font-family: var(--font-display), serif;
+    font-size: 26px;
+    margin: 0 0 18px 0;
+  }
+  .info-card p {
+    font-size: 15px;
+    line-height: 1.9;
+    margin: 0 0 16px 0;
+    max-width: 440px;
+  }
+  .info-card .price {
+    font-family: var(--font-display), serif;
+    font-size: 32px;
+    color: var(--text-emphasis);
+    margin-top: 18px;
+    letter-spacing: 0.04em;
+  }
+  .info-card .price small {
+    display: block;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: var(--text);
+    opacity: 0.65;
+    margin-top: 6px;
+    font-variant: small-caps;
+    font-family: var(--font-body), serif;
+  }
+
+  /* ========== FOOTER ========== */
+  footer {
+    margin-top: 60px;
+    padding: 0 0 60px 0;
+    position: relative;
+  }
+  footer .wave-band {
+    height: 90px;
+    background-image: url("svg/seigaiha-waves.svg");
+    background-size: 220px 220px;
+    background-repeat: repeat-x;
+    background-position: top center;
+    opacity: 0.18;
+    margin-bottom: 50px;
+  }
+  footer .seal {
+    text-align: center;
+  }
+  footer .seal svg {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 22px;
+  }
+  footer .addr {
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.9;
+    margin-bottom: 18px;
+  }
+  footer .addr .name {
+    font-family: var(--font-display), serif;
+    font-size: 17px;
+    letter-spacing: 0.06em;
+    margin-bottom: 4px;
+  }
+  footer .compiled {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.22em;
+    color: var(--secondary);
+    margin: 22px 0 12px 0;
+  }
+  footer .attrib {
+    text-align: center;
+    font-size: 11.5px;
+    letter-spacing: 0.06em;
+    opacity: 0.7;
+    max-width: 620px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ============ NAV ============ -->
+  <nav class="topnav" aria-label="Primary">
+    <div class="brand">
+      <svg viewBox="0 0 345 326" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <use href="svg/kiri-paulownia-mon.svg#root"></use>
+        <image href="svg/kiri-paulownia-mon.svg" width="345" height="326"/>
+      </svg>
+      <span class="name">Edo Bureau of Wards &amp; Watercourses</span>
+    </div>
+    <ul>
+      <li><a href="page-1.html">Public Notices</a></li>
+      <li><a href="page-2.html">Register of Wards</a></li>
+      <li><a href="page-3.html">Watercourses</a></li>
+      <li><a href="page-4.html">Fire-Watch</a></li>
+      <li><a href="page-5.html" aria-current="page">Office &amp; Petitions</a></li>
+      <li><a href="page-6.html">Origins</a></li>
+    </ul>
+  </nav>
+
+  <!-- ============ HERO ============ -->
+  <header class="hero">
+    <div class="void" aria-hidden="true"></div>
+    <div class="titleblock">
+      <div class="kanji-mark">— Visit · Hours · Gansho —</div>
+      <h1>Office,<br>Hours &amp;<br><span class="accent">Petitions.</span></h1>
+      <p class="standfirst">
+        Practical instruction for ward elders (<em>nanushi</em>) and townspeople presenting written petitions to the Bureau. Read with care; the runner will not wait, and the gate-keeper at Tatsunokuchi will not admit any party without seal-paper in proper order.
+      </p>
+      <div class="meta">Posted by order of the Bureau · For the Eight-Hundred-Eight Machi</div>
+    </div>
+  </header>
+
+  <div class="divider" role="presentation"></div>
+
+  <!-- ============ ADDRESS ============ -->
+  <section id="address">
+    <div class="section-header">
+      <div class="num">I.</div>
+      <h2>The Bureau Office</h2>
+    </div>
+    <div class="address-block">
+      <div class="seal-side">
+        <svg viewBox="0 0 345.20605 326.25635" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <image href="svg/kiri-paulownia-mon.svg" width="345.20605" height="326.25635"/>
+        </svg>
+        <div class="caption">Paulownia seal of the Bureau — affixed only to documents bearing the Commissioner's mark.</div>
+      </div>
+      <div class="text-side">
+        <h3>Where to Present Yourself</h3>
+        <div class="lines">
+          The Bureau is housed within the <strong>outer wall at Tatsunokuchi</strong>, immediately east of the Wadakura gate, in the third building of the long row that fronts the moat. Enter by the small side-door marked with the paulownia seal; the main gate is reserved for officers of higher rank.<br><br>
+          Bring your ward elder's written introduction. Arrive on foot. Palanquins must be set down at the corner stone before the bridge — the inner court has no room for them.<br><br>
+          The waiting hall holds nine mats. When it is full, the gate-keeper will write your number on a slip of bamboo paper; return when called.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" role="presentation"></div>
+
+  <!-- ============ HOURS ============ -->
+  <section id="hours">
+    <div class="section-header">
+      <div class="num">II.</div>
+      <h2>Hours of Attendance</h2>
+    </div>
+    <div class="hours-wrap">
+      <div class="hours-card">
+        <svg class="seal-tr" viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <image href="svg/umebachi-plum-mon.svg" width="688" height="688"/>
+        </svg>
+        <h3>Open from the Hour of the Rabbit to the Hour of the Monkey</h3>
+        <table class="hours">
+          <thead>
+            <tr><th>Day</th><th>Open</th><th>Close</th><th>Notice</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="day">Second</td><td>Hour of the Rabbit (六つ時)</td><td>Hour of the Monkey (七つ半)</td><td>—</td></tr>
+            <tr><td class="day">Third</td><td>Hour of the Rabbit</td><td>Hour of the Monkey</td><td>—</td></tr>
+            <tr><td class="day">Fourth</td><td>Hour of the Rabbit</td><td>Hour of the Monkey</td><td>Watercourse desk only after the Hour of the Horse</td></tr>
+            <tr><td class="day">Fifth</td><td>Hour of the Rabbit</td><td>Hour of the Monkey</td><td>—</td></tr>
+            <tr><td class="day">Sixth</td><td>Hour of the Rabbit</td><td>Hour of the Monkey</td><td>—</td></tr>
+            <tr><td class="day">First &amp; Fifteenth</td><td colspan="2" class="closed">Closed — observance days</td><td>No petitions received</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <aside class="hours-aside">
+        <div class="pull">「卯の刻より申の刻まで。日の短きとき早く閉づ。」</div>
+        <div class="pull-attr">— Standing notice, posted at the gate</div>
+        <div class="closed-note">
+          On days of public mourning, festival processions of the Sannō or Kanda shrines, and during the great drills of the hikeshi brigades, the Bureau closes without further notice. Watch the public-notice boards at Nihonbashi and Sujikai-bashi.
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <div class="divider" role="presentation"></div>
+
+  <!-- ============ PETITION PROCEDURE ============ -->
+  <section id="petition">
+    <div class="section-header">
+      <div class="num">III.</div>
+      <h2>Filing a Written Petition (Gansho)</h2>
+    </div>
+    <div class="procedure">
+      <div class="marginalia">
+        <div class="label">Order of<br>Procedure</div>
+        <div class="gloss">No petition is received except through the hand of one's own ward elder. Direct petition by townspeople is not admitted, save in cases of fire, flood, or grave injury.</div>
+      </div>
+      <div class="steps">
+        <ol>
+          <li>
+            <h4>Speak first with your ward elder.</h4>
+            <p>Present your case to the <em>nanushi</em> of your machi. He will judge whether the matter falls within the Bureau's jurisdiction — wards, conduits, fire-watch posts, or the boundaries thereof. Matters of trade or marriage are not heard here.</p>
+          </li>
+          <li>
+            <h4>Have the gansho written upon proper seal-paper.</h4>
+            <p>The petition must be set down on stamped <em>hōsho-gami</em> bearing the official chop, in clean Mincho hand, with the date in the current era and the names and seals of two witnesses from your ward.</p>
+          </li>
+          <li>
+            <h4>Affix the ward elder's seal beside your own.</h4>
+            <p>The elder's vermilion seal stands at the upper right; the petitioner's seal at the lower left. Without both, the gate-keeper will refuse the document and return it folded thrice.</p>
+          </li>
+          <li>
+            <h4>Send the gansho by an authorized runner.</h4>
+            <p>The petition is carried to the Bureau by a registered ward-runner. The petitioner does not deliver it in person. A receipt of acknowledgement, marked with the paulownia, is returned by the runner the same day if filed before the Hour of the Sheep.</p>
+          </li>
+          <li>
+            <h4>Await summons.</h4>
+            <p>The Bureau replies within fifteen days for ordinary matters, within three days for matters touching fire-watch or the breach of a conduit. Summons is delivered to the ward elder, never directly to the petitioner.</p>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" role="presentation"></div>
+
+  <!-- ============ SEAL PAPER + STIPEND ============ -->
+  <section id="costs">
+    <div class="section-header">
+      <div class="num">IV.</div>
+      <h2>Seal-Paper &amp; Customary Stipend</h2>
+    </div>
+    <div class="pair">
+      <div class="info-card">
+        <svg class="seal-tr" viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <image href="svg/umebachi-plum-mon.svg" width="688" height="688"/>
+        </svg>
+        <div class="eyebrow">— Hōsho-gami —</div>
+        <h3>Seal-Paper</h3>
+        <p>
+          Petitions must be written on stamped <em>hōsho-gami</em> obtained from the licensed paper-houses at Asakusa-bashi or at the rear of the Nihonbashi fish-market. Three sheets are issued together, bound with a paper twist, and bear the year's official chop in indigo.
+        </p>
+        <p>
+          Sheets stamped in a previous year are not accepted. Folded sheets, sheets repaired with paste, or sheets with brush-blots beyond the inner ruling are returned without comment.
+        </p>
+        <div class="price">二十四文 <small>per bound set of three sheets</small></div>
+      </div>
+      <div class="info-card">
+        <svg class="seal-tr" viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <image href="svg/umebachi-plum-mon.svg" width="688" height="688"/>
+        </svg>
+        <div class="eyebrow">— Hashiri-chin —</div>
+        <h3>Stipend for the Runner</h3>
+        <p>
+          The customary stipend (<em>hashiri-chin</em>) for the registered ward-runner who carries the gansho to Tatsunokuchi and returns the receipt is fixed by long usage. It is paid in copper, in a folded paper twist, at the moment the runner takes the document.
+        </p>
+        <p>
+          A second twist of like amount is given upon return of the sealed receipt. Runners do not solicit further payment; offering more is considered improper and may be reported.
+        </p>
+        <div class="price">三十二文 <small>per leg, paid in copper mon</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer>
+    <div class="wave-band" aria-hidden="true"></div>
+    <div class="seal">
+      <svg viewBox="0 0 345.20605 326.25635" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <image href="svg/kiri-paulownia-mon.svg" width="345.20605" height="326.25635"/>
+      </svg>
+    </div>
+    <div class="addr">
+      <div class="name">Edo Bureau of Wards &amp; Watercourses</div>
+      <div>Outer Wall at Tatsunokuchi, east of Wadakura Gate</div>
+      <div>Third Building of the Long Row · Edo</div>
+    </div>
+    <div class="compiled">Compiled · Bunsei 七年 · Third Month, Eleventh Day</div>
+    <div class="attrib">
+      Kamon SVG renderings — paulownia (kiri), plum-blossom (umebachi), seigaiha waves, and sayagata key-fret — released under <strong>CC BY-SA</strong>. Set in Yuji Syuku and Shippori Mincho.
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>

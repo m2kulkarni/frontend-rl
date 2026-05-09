@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Bibliothèque Saint-Aubain — Manuscripts & Collections</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    margin: 0;
+    line-height: 1.55;
+  }
+
+  /* ============ MASTHEAD / NAV ============ */
+  .masthead {
+    padding: 28px 60px 0;
+    background: var(--bg);
+    position: relative;
+  }
+  .masthead-title {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    font-size: 22px;
+    color: var(--primary);
+    margin: 0 0 6px 0;
+  }
+  .masthead-rule {
+    border: none;
+    border-top: 1px solid var(--secondary);
+    margin: 0 auto 0;
+    width: 100%;
+  }
+  .arcade-nav {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 0;
+    padding: 14px 0 0;
+    position: relative;
+  }
+  .arcade-nav a {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: var(--primary);
+    font-family: var(--font-display), serif;
+    font-weight: 500;
+    font-variant: small-caps;
+    letter-spacing: 0.14em;
+    font-size: 12.5px;
+    padding: 6px 22px 12px;
+    transition: color 0.2s;
+  }
+  .arcade-nav a .arch-mini {
+    width: 56px;
+    height: 38px;
+    margin-bottom: 6px;
+    display: block;
+  }
+  .arcade-nav a .arch-mini path {
+    fill: transparent;
+    stroke: var(--primary);
+    stroke-width: 1.4;
+    transition: fill 0.25s;
+  }
+  .arcade-nav a:hover { color: var(--accent); }
+  .arcade-nav a:hover .arch-mini path {
+    fill: rgba(30, 58, 95, 0.12);
+  }
+  .arcade-nav a[aria-current="page"] {
+    color: var(--accent);
+  }
+  .arcade-nav a[aria-current="page"] .arch-mini path {
+    fill: rgba(30, 58, 95, 0.18);
+    stroke: var(--secondary);
+    stroke-width: 1.6;
+  }
+  .arcade-nav .fleur {
+    color: var(--accent);
+    font-size: 9px;
+    align-self: center;
+    padding-bottom: 14px;
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 480px 1fr;
+    gap: 0;
+    padding: 50px 60px 60px;
+    align-items: start;
+    border-top: 1px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
+    margin: 30px 60px 0;
+    background:
+      linear-gradient(var(--bg), var(--bg));
+    position: relative;
+  }
+  .hero::before, .hero::after {
+    content: "";
+    position: absolute;
+    top: 8px; bottom: 8px;
+    width: 1px;
+    background: var(--primary);
+    opacity: 0.4;
+  }
+  .hero::before { left: 4px; }
+  .hero::after { right: 4px; }
+
+  .hero-left, .hero-right {
+    padding: 30px 28px;
+  }
+  .hero-eyebrow {
+    font-variant: small-caps;
+    letter-spacing: 0.22em;
+    font-size: 11px;
+    color: var(--secondary);
+    margin: 0 0 20px;
+  }
+  .hero-left p, .hero-right p {
+    font-size: 14px;
+    margin: 0 0 14px;
+  }
+  .hero-center {
+    text-align: center;
+    position: relative;
+    padding: 0 10px;
+  }
+  .hero-arch-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 500/550;
+    margin: 0 auto;
+  }
+  .hero-arch-wrap svg {
+    width: 100%;
+    height: 100%;
+  }
+  .hero-arch-content {
+    position: absolute;
+    top: 12%;
+    left: 18%;
+    right: 18%;
+    bottom: 8%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    padding-top: 18px;
+  }
+  .hero-arch-content h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 38px;
+    line-height: 1.05;
+    color: var(--primary);
+    margin: 0 0 12px;
+    font-style: italic;
+  }
+  .hero-arch-content .sub {
+    font-variant: small-caps;
+    letter-spacing: 0.2em;
+    color: var(--secondary);
+    font-size: 11px;
+    margin-bottom: 18px;
+  }
+  .hero-arch-content .seal {
+    width: 70px;
+    height: 70px;
+    margin: 8px 0 12px;
+  }
+  .hero-arch-content .seal path { fill: var(--accent); }
+  .hero-arch-content .arch-figures {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+  .hero-arch-content .arch-figures b {
+    display: block;
+    font-style: normal;
+    font-size: 26px;
+    color: var(--secondary);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+  }
+
+  /* drop cap */
+  .dropcap::first-letter {
+    font-family: var(--font-display), serif;
+    font-size: 56px;
+    line-height: 0.9;
+    float: left;
+    padding: 6px 10px 0 0;
+    color: var(--accent);
+    font-weight: 600;
+    font-style: normal;
+  }
+
+  /* ============ DIVIDER ============ */
+  .divider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 56px auto;
+    gap: 18px;
+    width: 80%;
+  }
+  .divider .rule {
+    flex: 1;
+    height: 1px;
+    background: var(--primary);
+  }
+  .divider svg {
+    width: 38px;
+    height: 38px;
+  }
+  .divider svg path { fill: var(--primary); }
+
+  /* ============ MAIN GRID ============ */
+  .main {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 50px;
+    padding: 0 60px;
+  }
+
+  .section-head {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 32px;
+    color: var(--primary);
+    margin: 0 0 6px;
+  }
+  .section-sub {
+    font-variant: small-caps;
+    letter-spacing: 0.22em;
+    color: var(--secondary);
+    font-size: 11px;
+    margin: 0 0 28px;
+    border-bottom: 1px solid var(--primary);
+    padding-bottom: 10px;
+  }
+
+  /* Card grid for collections */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-bottom: 60px;
+  }
+  .arch-card {
+    position: relative;
+    padding: 60px 22px 32px;
+    text-align: center;
+    /* arch silhouette via SVG background */
+    background:
+      radial-gradient(ellipse 100% 60% at 50% 0%, var(--bg) 0%, var(--bg) 60%, transparent 60%),
+      var(--bg);
+  }
+  .arch-card-inner {
+    position: relative;
+  }
+  .arch-svg-frame {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .arch-svg-frame svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  /* Quatrefoil finial */
+  .quatre-finial {
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 22px;
+    height: 22px;
+    z-index: 3;
+  }
+  .quatre-finial svg path { fill: var(--accent); }
+
+  .arch-card-content {
+    position: relative;
+    z-index: 2;
+    padding: 14px 14px 0;
+  }
+  .arch-card h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 20px;
+    color: var(--primary);
+    margin: 0 0 4px;
+    line-height: 1.15;
+  }
+  .arch-card .figure {
+    font-family: var(--font-display), serif;
+    font-size: 42px;
+    color: var(--secondary);
+    margin: 8px 0 4px;
+    letter-spacing: 0.02em;
+  }
+  .arch-card p {
+    font-size: 13px;
+    text-align: left;
+    margin: 14px 0 18px;
+  }
+  .arch-card p.dropcap::first-letter {
+    font-size: 38px;
+    padding-right: 6px;
+  }
+  .arch-card .meta {
+    font-variant: small-caps;
+    letter-spacing: 0.16em;
+    color: var(--secondary);
+    font-size: 10.5px;
+    border-top: 1px solid var(--primary);
+    padding-top: 10px;
+    margin-top: 14px;
+  }
+
+  /* Custom inline arch card frame */
+  .arch-frame {
+    position: absolute;
+    inset: 0;
+    border: 1px solid var(--primary);
+    border-radius: 50% 50% 0 0 / 22% 22% 0 0;
+    background: var(--surface);
+    z-index: 1;
+  }
+
+  /* ============ FEATURED PSALTER ============ */
+  .featured-psalter {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 40px;
+    align-items: start;
+    border-top: 1px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
+    padding: 40px 0;
+    margin-bottom: 60px;
+  }
+  .psalter-plate {
+    border: 1px solid var(--primary);
+    background: var(--surface);
+    padding: 18px;
+    text-align: center;
+    position: relative;
+  }
+  .psalter-plate::before {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border: 1px solid var(--accent);
+    pointer-events: none;
+  }
+  .psalter-plate .ms-id {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    color: var(--primary);
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+  .psalter-plate .ms-folio {
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    color: var(--secondary);
+    font-size: 10px;
+  }
+  .psalter-plate .seal-mini {
+    width: 80px;
+    height: 80px;
+    margin: 14px auto;
+  }
+  .psalter-plate .seal-mini path {
+    fill: var(--secondary);
+  }
+  .psalter-plate .vine {
+    width: 60px;
+    height: 60px;
+    margin: 6px auto 0;
+  }
+  .psalter-plate .vine path {
+    fill: var(--accent);
+  }
+  .featured-psalter h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 26px;
+    color: var(--primary);
+    margin: 0 0 4px;
+  }
+  .featured-psalter .label {
+    font-variant: small-caps;
+    letter-spacing: 0.22em;
+    color: var(--accent);
+    font-size: 11px;
+    margin-bottom: 14px;
+  }
+  .featured-psalter p { font-size: 14px; margin: 0 0 12px; }
+
+  /* ============ SIDEBAR ============ */
+  aside.sidebar {
+    background: var(--secondary);
+    color: #f4ecd8;
+    padding: 36px 28px 32px;
+    position: relative;
+    align-self: start;
+  }
+  aside.sidebar::before {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border: 1px solid rgba(244, 236, 216, 0.35);
+    pointer-events: none;
+  }
+  aside.sidebar h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--accent);
+    margin: 0 0 4px;
+  }
+  aside.sidebar .lab {
+    font-variant: small-caps;
+    letter-spacing: 0.2em;
+    font-size: 10.5px;
+    color: #f4ecd8;
+    opacity: 0.8;
+    margin: 0 0 20px;
+    border-bottom: 1px solid rgba(244, 236, 216, 0.3);
+    padding-bottom: 10px;
+  }
+  aside.sidebar dl {
+    margin: 0 0 24px;
+    font-size: 13px;
+  }
+  aside.sidebar dt {
+    font-variant: small-caps;
+    letter-spacing: 0.16em;
+    font-size: 10.5px;
+    color: var(--accent);
+    margin-top: 12px;
+  }
+  aside.sidebar dd {
+    margin: 4px 0 0;
+    color: #f4ecd8;
+  }
+  aside.sidebar .address {
+    font-style: italic;
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    line-height: 1.5;
+    border-top: 1px solid rgba(244,236,216,0.3);
+    padding-top: 18px;
+    margin-top: 8px;
+  }
+  aside.sidebar .seal-aside {
+    width: 50px;
+    height: 50px;
+    display: block;
+    margin: 24px auto 8px;
+  }
+  aside.sidebar .seal-aside path { fill: var(--accent); }
+  aside.sidebar .motto-aside {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+  }
+
+  /* ============ ACQUISITION PANEL ============ */
+  .acquisition {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    padding: 40px 36px;
+    background: var(--surface);
+    border: 1px solid var(--primary);
+    position: relative;
+    margin-top: 20px;
+  }
+  .acquisition::before, .acquisition::after {
+    content: "";
+    position: absolute;
+    width: 30px; height: 30px;
+    background:
+      linear-gradient(45deg, transparent 48%, var(--accent) 48% 52%, transparent 52%),
+      linear-gradient(-45deg, transparent 48%, var(--accent) 48% 52%, transparent 52%);
+    opacity: 0.7;
+  }
+  .acquisition::before { top: 8px; left: 8px; }
+  .acquisition::after { bottom: 8px; right: 8px; }
+
+  .acquisition .label {
+    font-variant: small-caps;
+    letter-spacing: 0.22em;
+    color: var(--accent);
+    font-size: 11px;
+    margin: 0 0 6px;
+  }
+  .acquisition h3 {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 28px;
+    color: var(--primary);
+    margin: 0 0 14px;
+    line-height: 1.15;
+  }
+  .acquisition p { font-size: 14px; margin: 0 0 12px; }
+  .acquisition .specimen {
+    border-left: 2px solid var(--accent);
+    padding: 10px 0 10px 20px;
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--text-emphasis);
+    margin: 14px 0;
+  }
+  .acquisition dl {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px 24px;
+    margin: 0;
+    border-top: 1px solid var(--primary);
+    padding-top: 18px;
+  }
+  .acquisition dt {
+    font-variant: small-caps;
+    letter-spacing: 0.16em;
+    font-size: 10.5px;
+    color: var(--secondary);
+  }
+  .acquisition dd {
+    margin: 2px 0 0;
+    font-size: 13px;
+    color: var(--text);
+  }
+
+  /* ============ READING ROOM RULES TABLE ============ */
+  .rules {
+    grid-column: 1 / -1;
+    margin-top: 60px;
+  }
+  .rules-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border: 1px solid var(--primary);
+  }
+  .rule-cell {
+    padding: 22px 20px;
+    border-right: 1px solid var(--primary);
+    background: var(--surface);
+  }
+  .rule-cell:last-child { border-right: none; }
+  .rule-cell .num {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 32px;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .rule-cell h4 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 16px;
+    margin: 0 0 8px;
+    color: var(--primary);
+  }
+  .rule-cell p {
+    font-size: 12.5px;
+    margin: 0;
+    color: var(--text);
+  }
+
+  /* ============ FOOTER ============ */
+  footer {
+    margin-top: 80px;
+    background: var(--bg);
+    position: relative;
+    padding-top: 0;
+  }
+  .foot-arcade {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    border-top: 1px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
+  }
+  .foot-arch {
+    height: 90px;
+    position: relative;
+    border-right: 1px solid var(--primary);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  .foot-arch:last-child { border-right: none; }
+  .foot-arch::before {
+    content: "";
+    position: absolute;
+    left: 14%; right: 14%;
+    top: 12px; bottom: 0;
+    background: var(--primary);
+    border-radius: 50% 50% 0 0 / 60% 60% 0 0;
+  }
+  .foot-arch svg.qf {
+    position: relative;
+    z-index: 2;
+    width: 14px;
+    height: 14px;
+    margin-bottom: 22px;
+  }
+  .foot-arch svg.qf path { fill: var(--accent); }
+  .foot-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 50px;
+    padding: 40px 60px 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .foot-cols h5 {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    font-weight: 400;
+    font-size: 12px;
+    color: var(--secondary);
+    margin: 0 0 10px;
+    border-bottom: 1px solid var(--primary);
+    padding-bottom: 6px;
+  }
+  .foot-cols p {
+    font-size: 13px;
+    margin: 0 0 6px;
+    color: var(--text);
+  }
+  .foot-cols .motto {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    color: var(--secondary);
+    font-size: 14px;
+    line-height: 1.45;
+  }
+  .diaper-strip {
+    height: 38px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 600 600'><g transform='translate(300,300)scale(0.87)rotate(45)'><circle cx='-195.16' r='163'/><circle cx='195.16' r='163'/><circle cy='195.16' r='163'/><circle cy='-195.16' r='163'/><rect x='-232' y='-232' width='464' height='464'/><g fill='%23f4ecd8'><circle cx='-195.16' r='157'/><circle cx='195.16' r='157'/><circle cy='195.16' r='157'/><circle cy='-195.16' r='157'/><rect x='-226' y='-226' width='452' height='452'/></g><circle cx='-195.16' r='144'/><circle cx='195.16' r='144'/><circle cy='195.16' r='144'/><circle cy='-195.16' r='144'/><rect x='-213' y='-213' width='426' height='426'/><g fill='%23f4ecd8'><circle cx='-195.16' r='138'/><circle cx='195.16' r='138'/><circle cy='195.16' r='138'/><circle cy='-195.16' r='138'/><rect x='-207' y='-207' width='414' height='414'/></g></g></svg>");
+    background-size: 38px 38px;
+    background-repeat: repeat-x;
+    opacity: 0.18;
+    border-top: 1px solid var(--primary);
+  }
+  .foot-coda {
+    text-align: center;
+    padding: 14px 0 26px;
+    font-variant: small-caps;
+    letter-spacing: 0.22em;
+    font-size: 10.5px;
+    color: var(--secondary);
+  }
+
+</style>
+</head>
+<body>
+
+<!-- ============ MASTHEAD ============ -->
+<header class="masthead">
+  <h2 class="masthead-title">Université Saint-Aubain de Vézelay</h2>
+  <hr class="masthead-rule">
+  <nav class="arcade-nav" aria-label="Primary">
+    <a href="page-1.html">
+      <svg class="arch-mini" viewBox="0 0 56 38"><path d="M2 37 L2 18 Q2 2 28 2 Q54 2 54 18 L54 37 Z"/></svg>
+      Studium
+    </a>
+    <span class="fleur">✦</span>
+    <a href="page-2.html">
+      <svg class="arch-mini" viewBox="0 0 56 38"><path d="M2 37 L2 18 Q2 2 28 2 Q54 2 54 18 L54 37 Z"/></svg>
+      Faculties
+    </a>
+    <span class="fleur">✦</span>
+    <a href="page-3.html" aria-current="page">
+      <svg class="arch-mini" viewBox="0 0 56 38"><path d="M2 37 L2 18 Q2 2 28 2 Q54 2 54 18 L54 37 Z"/></svg>
+      Bibliothèque
+    </a>
+    <span class="fleur">✦</span>
+    <a href="page-4.html">
+      <svg class="arch-mini" viewBox="0 0 56 38"><path d="M2 37 L2 18 Q2 2 28 2 Q54 2 54 18 L54 37 Z"/></svg>
+      Admissions
+    </a>
+    <span class="fleur">✦</span>
+    <a href="page-5.html">
+      <svg class="arch-mini" viewBox="0 0 56 38"><path d="M2 37 L2 18 Q2 2 28 2 Q54 2 54 18 L54 37 Z"/></svg>
+      Calendar
+    </a>
+    <span class="fleur">✦</span>
+    <a href="page-6.html">
+      <svg class="arch-mini" viewBox="0 0 56 38"><path d="M2 37 L2 18 Q2 2 28 2 Q54 2 54 18 L54 37 Z"/></svg>
+      Visit
+    </a>
+  </nav>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Liber I — Of the Library</p>
+    <p class="dropcap">Founded in 1247 by the canons of the abbey-school, the Bibliothèque Saint-Aubain occupies the western range of the cloister at Vézelay, its reading-room raised upon the old chapter-house of Abbot Hugues de Poitiers. The collection has grown without rupture for almost eight centuries.</p>
+    <p>Its holdings comprise codices, incunabula, charters, and the printed apparatus of modern humanistic study; access is open to matriculated students, registered scholars, and — by appointment — to visiting readers from any institution of learning.</p>
+  </div>
+
+  <div class="hero-center">
+    <div class="hero-arch-wrap">
+      <svg viewBox="0 0 500 550" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+        <g transform="translate(-147,-244)">
+          <g style="stroke:#0a0a0a;stroke-width:3.125;stroke-miterlimit:4;fill:none">
+            <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432" stroke-linecap="round"/>
+            <path d="m 250,430.58 24.75248,58.41585"/>
+            <path d="m 347.0297,342.46119 41.58416,23.76238 0.9901,35.64356"/>
+            <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+          </g>
+          <g transform="matrix(-1,0,0,1,777.88,-0.297)" style="stroke:#0a0a0a;stroke-width:3.125;fill:none">
+            <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432" stroke-linecap="round"/>
+            <path d="m 250,430.58 24.75248,58.41585"/>
+            <path d="m 347.0297,342.46119 41.58416,23.76238 0.9901,35.64356"/>
+            <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+          </g>
+        </g>
+      </svg>
+      <div class="hero-arch-content">
+        <div class="sub">Bibliothèque Saint-Aubain</div>
+        <h1>Manuscripts<br>& Collections</h1>
+        <svg class="seal" viewBox="0 0 592 592"><path transform="translate(-4,-4)scale(0.15,0.15)" d="M1778.9,3200A120.9263,120.9263 0 0,1 1657.97,3320.93A120.9263,120.9263 0 0,1 1537.04,3200 A221.5096,221.5096 0 0,0 1456.32,3371.02A221.5096,221.5096 0 0,0 1677.83,3592.53A221.5096,221.5096 0 0,0 1818.61,3542.03 A362.779,362.779 0 0,0 2000,3856.21A362.779,362.779 0 0,0 2181.39,3542.03 A221.5096,221.5096 0 0,0 2322.17,3592.53A221.5096,221.5096 0 0,0 2543.68,3371.02A221.5096,221.5096 0 0,0 2462.96,3200 A120.9263,120.9263 0 0,1 2342.03,3320.93A120.9263,120.9263 0 0,1 2221.1,3200V2221.1H3200 A120.9263,120.9263 0 0,1 3320.93,2342.03A120.9263,120.9263 0 0,1 3200,2462.96 A221.5096,221.5096 0 0,0 3371.02,2543.68A221.5096,221.5096 0 0,0 3592.53,2322.17A221.5096,221.5096 0 0,0 3542.03,2181.39 A362.779,362.779 0 0,0 3856.21,2000A362.779,362.779 0 0,0 3542.03,1818.61 A221.5096,221.5096 0 0,0 3592.53,1677.83A221.5096,221.5096 0 0,0 3371.02,1456.32A221.5096,221.5096 0 0,0 3200,1537.04 A120.9263,120.9263 0 0,1 3320.93,1657.97A120.9263,120.9263 0 0,1 3200,1778.9H2221.1V800 A120.9263,120.9263 0 0,1 2342.03,679.073A120.9263,120.9263 0 0,1 2462.96,800 A221.5096,221.5096 0 0,0 2543.68,628.984A221.5096,221.5096 0 0,0 2322.17,407.475A221.5096,221.5096 0 0,0 2181.39,457.969 A362.779,362.779 0 0,0 2000,143.793A362.779,362.779 0 0,0 1818.61,457.969 A221.5096,221.5096 0 0,0 1677.83,407.475A221.5096,221.5096 0 0,0 1456.32,628.984A221.5096,221.5096 0 0,0 1537.04,800 A120.9263,120.9263 0 0,1 1657.97,679.073A120.9263,120.9263 0 0,1 1778.9,800V1778.9H800 A120.9263,120.9263 0 0,1 679.073,1657.97A120.9263,120.9263 0 0,1 800,1537.04 A221.5096,221.5096 0 0,0 628.984,1456.32A221.5096,221.5096 0 0,0 407.475,1677.83A221.5096,221.5096 0 0,0 457.969,1818.61 A362.779,362.779 0 0,0 143.793,2000A362.779,362.779 0 0,0 457.969,2181.39 A221.5096,221.5096 0 0,0 407.475,2322.17A221.5096,221.5096 0 0,0 628.984,2543.68A221.5096,221.5096 0 0,0 800,2462.96 A120.9263,120.9263 0 0,1 679.073,2342.03A120.9263,120.9263 0 0,1 800,2221.1H1778.9Z"/></svg>
+        <div class="arch-figures">
+          <b>MMXXV</b>
+          <span>Anno Bibliothecae · DCCLXXVIII</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <p class="hero-eyebrow">Libellus II — Of the Custodian</p>
+    <p>The library is administered by the <em>Custos Librorum</em>, presently <strong>Mme Aliénor Brossard, archivist-paléographe</strong>, supported by four conservators and a rotating fellowship of doctoral cataloguers from Paris and Lyon.</p>
+    <p>Materials acquired since 1804 are kept in the modern stacks beneath the south transept; the medieval and early-modern reserve is shelved in the upper armarium, accessible by petition through the registrar.</p>
+    <p>A reading desk is reserved each term for visiting fellows of the École nationale des chartes.</p>
+  </div>
+</section>
+
+<!-- ============ DIVIDER ============ -->
+<div class="divider">
+  <span class="rule"></span>
+  <svg viewBox="0 0 39 40" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(-110.4,-124.4)scale(1)">
+      <path d="M129.5 125 L132 130 L137 132 L132 134 L129.5 139 L127 134 L122 132 L127 130 Z" fill="#0a0a0a"/>
+      <circle cx="129.5" cy="132" r="2" fill="#c9a23a"/>
+    </g>
+  </svg>
+  <span class="rule"></span>
+</div>
+
+<!-- ============ MAIN ============ -->
+<main class="main">
+
+  <div class="main-col">
+
+    <h2 class="section-head">The Holdings, in Sum</h2>
+    <p class="section-sub">Numerus Librorum · MMXXV</p>
+
+    <div class="card-grid">
+
+      <article class="arch-card">
+        <div class="arch-frame"></div>
+        <span class="quatre-finial">
+          <svg viewBox="0 0 600 600"><g transform="translate(300,300)scale(0.87)rotate(45)"><circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/><circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/><rect x="-232" y="-232" width="464" height="464"/></g></svg>
+        </span>
+        <div class="arch-card-content">
+          <h3>Printed Volumes</h3>
+          <div class="figure">41,000</div>
+          <p class="dropcap">Encompassing the full circuit of the trivium and quadrivium, modern editions of patristic texts, the Sources Chrétiennes series complete to vol. 612, and a notable run of nineteenth-century French theological journals.</p>
+          <div class="meta">Catalogued · Open Stacks</div>
+        </div>
+      </article>
+
+      <article class="arch-card">
+        <div class="arch-frame"></div>
+        <span class="quatre-finial">
+          <svg viewBox="0 0 600 600"><g transform="translate(300,300)scale(0.87)rotate(45)"><circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/><circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/><rect x="-232" y="-232" width="464" height="464"/></g></svg>
+        </span>
+        <div class="arch-card-content">
+          <h3>Medieval Manuscripts</h3>
+          <div class="figure">312</div>
+          <p class="dropcap">Drawn principally from the dispersed library of the abbey of Vézelay (suppressed 1790), with later accessions from the Cluniac priories of Pontaubert and La Charité-sur-Loire. Dated chiefly to the eleventh through fifteenth centuries.</p>
+          <div class="meta">Reserve · By Petition</div>
+        </div>
+      </article>
+
+      <article class="arch-card">
+        <div class="arch-frame"></div>
+        <span class="quatre-finial">
+          <svg viewBox="0 0 600 600"><g transform="translate(300,300)scale(0.87)rotate(45)"><circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/><circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/><rect x="-232" y="-232" width="464" height="464"/></g></svg>
+        </span>
+        <div class="arch-card-content">
+          <h3>Charters & Fragments</h3>
+          <div class="figure">2,847</div>
+          <p class="dropcap">Including 1,200 monastic charters from the Morvan and Auxerrois, an extensive cartulary of the counts of Nevers (MS 89), and 612 binding fragments recovered from sixteenth-century book-spines, now individually catalogued.</p>
+          <div class="meta">Archive · Salle Vézelay</div>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- ============ FEATURED PSALTER ============ -->
+    <h2 class="section-head">Of the Vézelay Psalter</h2>
+    <p class="section-sub">MS 14 · Capolavoro Domus</p>
+
+    <div class="featured-psalter">
+      <div class="psalter-plate">
+        <div class="ms-id">MS 14</div>
+        <div class="ms-folio">fol. 7v · Beatus</div>
+        <svg class="seal-mini" viewBox="0 0 592 592"><path transform="translate(-4,-4)scale(0.15,0.15)" d="M1778.9,3200A120.9263,120.9263 0 0,1 1657.97,3320.93A120.9263,120.9263 0 0,1 1537.04,3200 A221.5096,221.5096 0 0,0 1456.32,3371.02A221.5096,221.5096 0 0,0 1677.83,3592.53A221.5096,221.5096 0 0,0 1818.61,3542.03 A362.779,362.779 0 0,0 2000,3856.21A362.779,362.779 0 0,0 2181.39,3542.03 A221.5096,221.5096 0 0,0 2322.17,3592.53A221.5096,221.5096 0 0,0 2543.68,3371.02A221.5096,221.5096 0 0,0 2462.96,3200 A120.9263,120.9263 0 0,1 2342.03,3320.93A120.9263,120.9263 0 0,1 2221.1,3200V2221.1H3200 A120.9263,120.9263 0 0,1 3320.93,2342.03A120.9263,120.9263 0 0,1 3200,2462.96 A221.5096,221.5096 0 0,0 3371.02,2543.68A221.5096,221.5096 0 0,0 3592.53,2322.17A221.5096,221.5096 0 0,0 3542.03,2181.39 A362.779,362.779 0 0,0 3856.21,2000A362.779,362.779 0 0,0 3542.03,1818.61 A221.5096,221.5096 0 0,0 3592.53,1677.83A221.5096,221.5096 0 0,0 3371.02,1456.32A221.5096,221.5096 0 0,0 3200,1537.04 A120.9263,120.9263 0 0,1 3320.93,1657.97A120.9263,120.9263 0 0,1 3200,1778.9H2221.1V800 A120.9263,120.9263 0 0,1 2342.03,679.073A120.9263,120.9263 0 0,1 2462.96,800 A221.5096,221.5096 0 0,0 2543.68,628.984A221.5096,221.5096 0 0,0 2322.17,407.475A221.5096,221.5096 0 0,0 2181.39,457.969 A362.779,362.779 0 0,0 2000,143.793A362.779,362.779 0 0,0 1818.61,457.969 A221.5096,221.5096 0 0,0 1677.83,407.475A221.5096,221.5096 0 0,0 1456.32,628.984A221.5096,221.5096 0 0,0 1537.04,800 A120.9263,120.9263 0 0,1 1657.97,679.073A120.9263,120.9263 0 0,1 1778.9,800V1778.9H800 A120.9263,120.9263 0 0,1 679.073,1657.97A120.9263,120.9263 0 0,1 800,1537.04 A221.5096,221.5096 0 0,0 628.984,1456.32A221.5096,221.5096 0 0,0 407.475,1677.83A221.5096,221.5096 0 0,0 457.969,1818.61 A362.779,362.779 0 0,0 143.793,2000A362.779,362.779 0 0,0 457.969,2181.39 A221.5096,221.5096 0 0,0 407.475,2322.17A221.5096,221.5096 0 0,0 628.984,2543.68A221.5096,221.5096 0 0,0 800,2462.96 A120.9263,120.9263 0 0,1 679.073,2342.03A120.9263,120.9263 0 0,1 800,2221.1H1778.9Z"/></svg>
+        <div class="ms-folio">240 × 167 mm · Vellum</div>
+      </div>
+      <div>
+        <div class="label">Codex Insignis</div>
+        <h3>The Vézelay Psalter, c. 1290</h3>
+        <p>Produced in Paris, in or near the workshop of Master Honoré of the rue Érembourg-de-Brie, and brought to Vézelay before 1318 — when it appears in the inventory of Prior Guillaume de Cluny under the rubric <em>"psalterium pulcherrimum cum kalendario"</em>.</p>
+        <p>The codex contains 248 folios, fully illuminated, with twelve historiated calendar miniatures, eight full-page Beatus initials, and over 340 marginal grotesques painted in lapis, gold-leaf, and the distinctive carmine-red associated with the Honoré atelier. The Litany preserves the unusual invocation of Saint Aubain (10th c., obit. 23 April), patron of the studium.</p>
+        <p>The manuscript was lent in 1873 to the Bibliothèque nationale de France for the centenary of the École des chartes, and has since left Vézelay only twice: for the 1968 Paris exhibition <em>Les Manuscrits à peintures en France</em>, and for technical imaging at the IRHT in 2019.</p>
+      </div>
+    </div>
+
+    <!-- ============ ACQUISITION PANEL ============ -->
+    <section class="acquisition">
+      <div>
+        <div class="label">Featured Acquisition · Anno MMXXIV</div>
+        <h3>A Fragment of the Speculum Historiale of Vincent de Beauvais</h3>
+        <p class="dropcap">Catalogued in March 2024 and now shelved as <strong>MS frag. 312</strong>, this bifolium of the <em>Speculum Historiale</em> (Book XXIV, on the Carolingian succession) was donated to the Bibliothèque Saint-Aubain by the Bibliothèque municipale de Sens, as part of an exchange of duplicate medieval material agreed between the two institutions in 2022.</p>
+        <p>The fragment had been used as a flyleaf in a 1581 Lyonese imprint of Cicero's <em>De Officiis</em>, from which it was lifted during conservation in 2018. The hand is a clear <em>littera textualis</em> of the third quarter of the thirteenth century, very probably North-French, with red-and-blue pen-flourished initials.</p>
+        <div class="specimen">"Anno Domini octingentesimo decimo quarto, Karolus Magnus apud Aquasgrani diem clausit extremum…"</div>
+      </div>
+      <div>
+        <p>The bifolium has been paginated, foliated against the standard Douai edition (1624), and digitised at 600 dpi for inclusion in the consortium catalogue <em>Calames</em>. A printed facsimile, with an introduction by Dr Henri Lavaur (Faculté des Lettres), is to appear in the autumn 2025 number of the <em>Bulletin de la Bibliothèque Saint-Aubain</em>.</p>
+        <dl>
+          <dt>Shelfmark</dt><dd>MS frag. 312</dd>
+          <dt>Dimensions</dt><dd>318 × 224 mm</dd>
+          <dt>Donor</dt><dd>Bibl. mun. de Sens</dd>
+          <dt>Catalogued</dt><dd>13 March 2024</dd>
+          <dt>Conservator</dt><dd>É. Marchant</dd>
+          <dt>Consultation</dt><dd>By petition only</dd>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ============ READING ROOM RULES ============ -->
+    <section class="rules">
+      <h2 class="section-head">Of the Reading-Room</h2>
+      <p class="section-sub">Mores Salae Lectoriae</p>
+
+      <div class="rules-grid">
+        <div class="rule-cell">
+          <div class="num">i.</div>
+          <h4>Of Admission</h4>
+          <p>Readers present a current carte de lecteur, or a letter of accreditation from a recognised institution, at the wicket of the cloister porch.</p>
+        </div>
+        <div class="rule-cell">
+          <div class="num">ii.</div>
+          <h4>Of Materials</h4>
+          <p>Pencil only; ink is forbidden in the reserve. Laptops are permitted at the eastern desks; cameras require the written assent of the Custos.</p>
+        </div>
+        <div class="rule-cell">
+          <div class="num">iii.</div>
+          <h4>Of Quotation</h4>
+          <p>Three volumes may be consulted at once; no more than one manuscript. Petitions for additional items are heard each Wednesday at noon.</p>
+        </div>
+        <div class="rule-cell">
+          <div class="num">iv.</div>
+          <h4>Of Silence</h4>
+          <p>The reading-room observes the rule of <em>silentium claustri</em>; conversation is held in the antechamber, beneath the engraving of the abbey.</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar" aria-label="Hours and address">
+    <h2>Reading-Room</h2>
+    <p class="lab">Horae Apertionis</p>
+
+    <dl>
+      <dt>Monday — Friday</dt>
+      <dd>08:30 — 19:00</dd>
+      <dt>Saturday</dt>
+      <dd>09:00 — 13:00</dd>
+      <dt>Sunday & Feasts</dt>
+      <dd>Closed</dd>
+      <dt>Vacation, Hilary</dt>
+      <dd>10:00 — 16:00</dd>
+      <dt>Reserve Consultation</dt>
+      <dd>Tues. & Thurs. only<br>14:00 — 17:00</dd>
+      <dt>Custos Librorum</dt>
+      <dd>Mme A. Brossard<br>brossard@u-saintaubain.fr</dd>
+      <dt>Telephone</dt>
+      <dd>+33 (0)3 86 33 24 51</dd>
+    </dl>
+
+    <div class="address">
+      Bibliothèque Saint-Aubain<br>
+      7 rue de la Cordelle<br>
+      89450 Vézelay<br>
+      Bourgogne-Franche-Comté
+    </div>
+
+    <svg class="seal-aside" viewBox="0 0 592 592"><path transform="translate(-4,-4)scale(0.15,0.15)" d="M1778.9,3200A120.9263,120.9263 0 0,1 1657.97,3320.93A120.9263,120.9263 0 0,1 1537.04,3200 A221.5096,221.5096 0 0,0 1456.32,3371.02A221.5096,221.5096 0 0,0 1677.83,3592.53A221.5096,221.5096 0 0,0 1818.61,3542.03 A362.779,362.779 0 0,0 2000,3856.21A362.779,362.779 0 0,0 2181.39,3542.03 A221.5096,221.5096 0 0,0 2322.17,3592.53A221.5096,221.5096 0 0,0 2543.68,3371.02A221.5096,221.5096 0 0,0 2462.96,3200 A120.9263,120.9263 0 0,1 2342.03,3320.93A120.9263,120.9263 0 0,1 2221.1,3200V2221.1H3200 A120.9263,120.9263 0 0,1 3320.93,2342.03A120.9263,120.9263 0 0,1 3200,2462.96 A221.5096,221.5096 0 0,0 3371.02,2543.68A221.5096,221.5096 0 0,0 3592.53,2322.17A221.5096,221.5096 0 0,0 3542.03,2181.39 A362.779,362.779 0 0,0 3856.21,2000A362.779,362.779 0 0,0 3542.03,1818.61 A221.5096,221.5096 0 0,0 3592.53,1677.83A221.5096,221.5096 0 0,0 3371.02,1456.32A221.5096,221.5096 0 0,0 3200,1537.04 A120.9263,120.9263 0 0,1 3320.93,1657.97A120.9263,120.9263 0 0,1 3200,1778.9H2221.1V800 A120.9263,120.9263 0 0,1 2342.03,679.073A120.9263,120.9263 0 0,1 2462.96,800 A221.5096,221.5096 0 0,0 2543.68,628.984A221.5096,221.5096 0 0,0 2322.17,407.475A221.5096,221.5096 0 0,0 2181.39,457.969 A362.779,362.779 0 0,0 2000,143.793A362.779,362.779 0 0,0 1818.61,457.969 A221.5096,221.5096 0 0,0 1677.83,407.475A221.5096,221.5096 0 0,0 1456.32,628.984A221.5096,221.5096 0 0,0 1537.04,800 A120.9263,120.9263 0 0,1 1657.97,679.073A120.9263,120.9263 0 0,1 1778.9,800V1778.9H800 A120.9263,120.9263 0 0,1 679.073,1657.97A120.9263,120.9263 0 0,1 800,1537.04 A221.5096,221.5096 0 0,0 628.984,1456.32A221.5096,221.5096 0 0,0 407.475,1677.83A221.5096,221.5096 0 0,0 457.969,1818.61 A362.779,362.779 0 0,0 143.793,2000A362.779,362.779 0 0,0 457.969,2181.39 A221.5096,221.5096 0 0,0 407.475,2322.17A221.5096,221.5096 0 0,0 628.984,2543.68A221.5096,221.5096 0 0,0 800,2462.96 A120.9263,120.9263 0 0,1 679.073,2342.03A120.9263,120.9263 0 0,1 800,2221.1H1778.9Z"/></svg>
+    <div class="motto-aside">Lux in tenebris lucet</div>
+  </aside>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="foot-arcade" aria-hidden="true">
+    <div class="foot-arch"><svg class="qf" viewBox="0 0 600 600"><g transform="translate(300,300)scale(0.87)rotate(45)"><circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/><circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/><rect x="-232" y="-232" width="464" height="464"/></g></svg></div>
+    <div class="foot-arch"><svg class="qf" viewBox="0 0 600 600"><g transform="translate(300,300)scale(0.87)rotate(45)"><circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/><circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/><rect x="-232" y="-232" width="464" height="464"/></g></svg></div>
+    <div class="foot-arch"><svg class="qf" viewBox="0 0 600 600"><g transform="translate(300,300)scale(0.87)rotate(45)"><circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/><circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/><rect x="-232" y="-232" width="464" height="464"/></g></svg></div>
+    <div class="foot-arch"><svg class="qf" viewBox="0 0 600 600"><g transform="translate(300,300)scale(0.87)rotate(45)"><circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/><circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/><rect x="-232" y="-232" width="464" height="464"/></g></svg></div>
+    <div class="foot-arch"><svg class="qf" viewBox="0 0 600 600"><g transform="translate(300,300)scale(0.87)rotate(45)"><circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/><circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/><rect x="-232" y="-232" width="464" height="464"/></g></svg></div>
+    <div class="foot-arch"><svg class="qf" viewBox="0 0 600 600"><g transform="translate(300,300)scale(0.87)rotate(45)"><circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/><circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/><rect x="-232" y="-232" width="464" height="464"/></g></svg></div>
+    <div class="foot-arch"><svg class="qf" viewBox="0 0 600 600"><g transform="translate(300,300)scale(0.87)rotate(45)"><circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/><circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/><rect x="-232" y="-232" width="464" height="464"/></g></svg></div>
+  </div>
+
+  <div class="foot-cols">
+    <div>
+      <h5>Address</h5>
+      <p>Université Saint-Aubain de Vézelay</p>
+      <p>7 rue de la Cordelle</p>
+      <p>89450 Vézelay, France</p>
+      <p>+33 (0)3 86 33 24 00</p>
+    </div>
+    <div>
+      <h5>Registrar</h5>
+      <p>M. Pierre-Yves Ducourneau</p>
+      <p>Office of Matriculation</p>
+      <p>registraire@u-saintaubain.fr</p>
+      <p>Mon — Fri · 09:00 — 17:00</p>
+    </div>
+    <div>
+      <h5>Motto</h5>
+      <p class="motto">Lux in tenebris lucet,<br>et tenebrae eam non comprehenderunt.</p>
+    </div>
+  </div>
+
+  <div class="diaper-strip" aria-hidden="true"></div>
+  <div class="foot-coda">MMXXV · Studium Generale Sancti Albini Vizeliacensis</div>
+</footer>
+
+</body>
+</html>

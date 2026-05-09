@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>The Carta — Bill of Fare · Triclinium Aureum</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    margin: 0;
+    line-height: 1.55;
+    font-size: 17px;
+  }
+
+  /* ---------- Greek-key border (CSS pattern) ---------- */
+  .greek-key {
+    height: 22px;
+    background-color: transparent;
+    background-image:
+      linear-gradient(var(--ornament), var(--ornament)),
+      linear-gradient(var(--ornament), var(--ornament)),
+      repeating-linear-gradient(90deg,
+        var(--ornament) 0 6px, transparent 6px 10px,
+        var(--ornament) 10px 16px, transparent 16px 20px,
+        var(--ornament) 20px 26px, transparent 26px 30px,
+        var(--ornament) 30px 36px, transparent 36px 40px);
+    background-size: 100% 1px, 100% 1px, 100% 8px;
+    background-position: top left, bottom left, center;
+    background-repeat: no-repeat, no-repeat, repeat-x;
+    position: relative;
+  }
+  .greek-key::before, .greek-key::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    height: 1px;
+    background: var(--ornament);
+  }
+  .greek-key::before { top: 4px; }
+  .greek-key::after  { bottom: 4px; }
+
+  /* SVG-based meander divider for sections */
+  .meander-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    margin: 0 auto;
+    padding: 10px 0;
+  }
+  .meander-divider svg { display: block; height: 28px; width: auto; }
+  .meander-divider .dot {
+    width: 8px; height: 8px; background: var(--primary);
+    transform: rotate(45deg);
+  }
+
+  /* ---------- Navigation ---------- */
+  nav.frieze {
+    background: var(--bg);
+    border-top: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+    position: relative;
+  }
+  nav.frieze .key-strip {
+    height: 14px;
+    background:
+      repeating-linear-gradient(90deg,
+        var(--ornament) 0 4px, transparent 4px 7px,
+        var(--ornament) 7px 11px, transparent 11px 14px,
+        var(--ornament) 14px 18px, transparent 18px 21px,
+        var(--ornament) 21px 25px, transparent 25px 28px);
+    border-top: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+  }
+  nav.frieze .row {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 18px 56px;
+    gap: 28px;
+  }
+  nav.frieze .links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+  nav.frieze .links.left  { justify-content: flex-end; }
+  nav.frieze .links.right { justify-content: flex-start; }
+  nav.frieze a {
+    color: var(--text);
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 6px;
+  }
+  nav.frieze a[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    left: 50%; bottom: -2px;
+    width: 6px; height: 6px;
+    background: var(--primary);
+    border-radius: 50%;
+    transform: translateX(-50%);
+  }
+  nav.frieze .vine {
+    width: 14px; height: 14px;
+    opacity: 0.7;
+  }
+  nav.frieze .vine svg { width: 100%; height: 100%; fill: var(--ornament); }
+  nav.frieze .sitename {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--text);
+    text-align: center;
+    white-space: nowrap;
+  }
+  nav.frieze .sitename .amp { color: var(--primary); }
+
+  /* ---------- Hero / page heading ---------- */
+  .page-head {
+    text-align: center;
+    padding: 64px 40px 24px;
+    position: relative;
+  }
+  .page-head .eyebrow {
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.4em;
+    color: var(--primary);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .page-head h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 600;
+    font-size: 56px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0;
+    color: var(--text);
+  }
+  .page-head .subtitle {
+    margin-top: 16px;
+    font-style: italic;
+    color: var(--text);
+    font-size: 18px;
+    max-width: 720px;
+    margin-left: auto; margin-right: auto;
+  }
+  .page-head .laurel {
+    width: 180px;
+    margin: 28px auto 0;
+    opacity: 0.85;
+  }
+  .page-head .laurel svg { width: 100%; height: auto; display: block; }
+
+  /* ---------- Carta columns ---------- */
+  main {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 24px 40px 64px;
+  }
+  .carta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 32px;
+    margin-top: 32px;
+  }
+
+  .card {
+    background: var(--surface);
+    position: relative;
+    padding: 6px;
+  }
+  .card .frame {
+    border: 1px solid var(--ornament);
+    padding: 28px 26px 22px;
+    position: relative;
+  }
+  .card .frame::before,
+  .card .frame::after {
+    content: "";
+    position: absolute;
+    left: 6px; right: 6px;
+    height: 6px;
+    background:
+      repeating-linear-gradient(90deg,
+        var(--ornament) 0 3px, transparent 3px 5px,
+        var(--ornament) 5px 8px, transparent 8px 10px);
+  }
+  .card .frame::before { top: 6px; }
+  .card .frame::after  { bottom: 6px; }
+
+  .card .roundel {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 8px;
+    display: block;
+  }
+  .card .roundel svg { width: 100%; height: 100%; display: block; }
+
+  .card h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 600;
+    font-size: 22px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 12px 0 6px;
+    color: var(--text);
+  }
+  .card .latin-sub {
+    text-align: center;
+    font-style: italic;
+    color: var(--accent);
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    margin-bottom: 18px;
+  }
+
+  .dish {
+    margin: 18px 0;
+    padding-bottom: 14px;
+    border-bottom: 1px dotted rgba(169, 50, 38, 0.35);
+  }
+  .dish:last-of-type { border-bottom: none; }
+
+  .dish-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .dish-head .name {
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text);
+    flex: 1;
+  }
+  .dish-head .price {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    color: var(--primary);
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+  }
+  .dish .english {
+    font-style: italic;
+    color: var(--text);
+    font-size: 15px;
+    margin-top: 4px;
+    line-height: 1.4;
+  }
+  .dish .desc {
+    font-size: 14px;
+    color: var(--text);
+    margin-top: 6px;
+    line-height: 1.5;
+  }
+  .dish .tag {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    color: var(--primary);
+    margin-right: 8px;
+  }
+
+  .card-foot {
+    margin-top: 20px;
+    height: 12px;
+    background:
+      repeating-linear-gradient(90deg,
+        var(--ornament) 0 4px, transparent 4px 7px,
+        var(--ornament) 7px 11px, transparent 11px 14px);
+    opacity: 0.85;
+  }
+
+  /* ---------- Footnotes ---------- */
+  .footnotes {
+    max-width: 1100px;
+    margin: 56px auto 0;
+    text-align: center;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--text);
+    padding: 0 40px;
+  }
+  .footnotes p { margin: 8px 0; }
+  .footnotes .lat {
+    font-variant: small-caps;
+    color: var(--primary);
+    font-style: normal;
+    letter-spacing: 0.08em;
+  }
+
+  /* ---------- Coin / denarii panel ---------- */
+  .denarii-panel {
+    max-width: 920px;
+    margin: 56px auto 0;
+    text-align: center;
+    background: var(--surface);
+    padding: 6px;
+  }
+  .denarii-panel .frame {
+    border: 1px solid var(--ornament);
+    padding: 28px 36px;
+    position: relative;
+  }
+  .denarii-panel h3 {
+    font-family: var(--font-display), serif;
+    font-size: 18px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    color: var(--text);
+  }
+  .denarii-panel .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-top: 16px;
+    text-align: center;
+  }
+  .denarii-panel .coin .lat {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    color: var(--primary);
+    letter-spacing: 0.1em;
+    display: block;
+    font-size: 13px;
+  }
+  .denarii-panel .coin .val {
+    font-style: italic;
+    font-size: 14px;
+    color: var(--text);
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    margin-top: 80px;
+    position: relative;
+  }
+  footer .red-band {
+    background: var(--primary);
+    color: var(--secondary);
+    padding: 26px 40px;
+    text-align: center;
+    position: relative;
+    border-top: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+  }
+  footer .red-band .rosettes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 22px;
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    font-size: 13px;
+    color: var(--secondary);
+  }
+  footer .red-band .rosette {
+    width: 18px; height: 18px;
+    border: 1px solid var(--secondary);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    flex: 0 0 auto;
+  }
+  footer .red-band .rosette::before {
+    content: "✦";
+    color: var(--secondary);
+    font-size: 11px;
+  }
+  footer .red-band .addr {
+    margin-top: 12px;
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.18em;
+    font-size: 12px;
+    color: var(--secondary);
+  }
+  footer .travertine-band {
+    background: var(--bg);
+    text-align: center;
+    padding: 14px 40px;
+    font-size: 13px;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+  footer .travertine-band .vine-corner {
+    width: 16px; height: 16px;
+  }
+  footer .travertine-band .vine-corner svg { width: 100%; height: 100%; fill: var(--ornament); }
+  footer .corners {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  footer .corner {
+    position: absolute;
+    width: 70px; height: 70px;
+    opacity: 0.55;
+  }
+  footer .corner.tl { top: 6px; left: 16px; transform: scale(0.5) rotate(-25deg); transform-origin: top left; }
+  footer .corner.tr { top: 6px; right: 16px; transform: scale(0.5) rotate(25deg) scaleX(-1); transform-origin: top right; }
+  footer .corner svg { width: 100%; height: 100%; }
+</style>
+</head>
+<body>
+
+<!-- ============== NAV FRIEZE ============== -->
+<nav class="frieze" aria-label="Primary">
+  <div class="key-strip" aria-hidden="true"></div>
+  <div class="row">
+    <div class="links left">
+      <a href="page-1.html">Domus</a>
+      <span class="vine" aria-hidden="true">
+        <svg viewBox="0 0 200 200"><path d="M43.583 863.37c-1.79.03-3.58.13-5.34.31-7.05.74-13.93 2.79-19.16 7.47s-8.2 12-7.69 21c.51 9 4.3 16.14 10.19 20.34 5.89 4.2 13.31 5.53 21.03 5.19 15.45-.69 32.83-8 45.81-18.31 1.41-1.12 2.83-2.04 4.25-3.06 4.29 6.68 7.61 14.83 9.34 24.06-7.5-5.07-21.01-10.55-35.66 1.5-22.14 18.21-24.99 12.88-45.34-2.13-2.86 36.07 15.01 54.64 44.66 52.5 0 0-13.95 4.26-3.59 26.41 6.02 12.87 8.41 20.07 6.56 25.19-12.84 2.29-15.77 7.78-5.57 12.66 45.1 9.97 65.67-27.47 68.66-66.04 45.36 0 52.86-31.8 52.5-50.37-8.21 11.07-22.16 11.07-32.87 2.5-9.93-7.95-21.69-16.18-39-1.13-1.74-11.68-5.69-22.13-11.22-30.72 19.36-11.37 38.72-14.46 52.53-10.81 5.48 1.45 9.46 4.09 12.37 6.97-8.97 8.36-11.84 26.38 2.28 27.03 18.92.88 21.03-15.45 13.56-27.13-5.45-8.51-16.42-13.23-25.66-16.56-17.51-4.63-39.74-.57-61.28 12.5-5.17-5.72-11.13-10.22-17.72-12.97-7.08-2.95-17.54-5.73-28.28-6.31-1.79-.1-3.58-.13-5.37-.09z" transform="translate(0 -852.36)"/></svg>
+      </span>
+      <a href="page-3.html">Cellarium</a>
+      <span class="vine" aria-hidden="true">
+        <svg viewBox="0 0 200 200"><path d="M43.583 863.37c-1.79.03-3.58.13-5.34.31-7.05.74-13.93 2.79-19.16 7.47s-8.2 12-7.69 21c.51 9 4.3 16.14 10.19 20.34 5.89 4.2 13.31 5.53 21.03 5.19 15.45-.69 32.83-8 45.81-18.31 1.41-1.12 2.83-2.04 4.25-3.06 4.29 6.68 7.61 14.83 9.34 24.06-7.5-5.07-21.01-10.55-35.66 1.5-22.14 18.21-24.99 12.88-45.34-2.13-2.86 36.07 15.01 54.64 44.66 52.5z" transform="translate(0 -852.36)"/></svg>
+      </span>
+      <a href="page-2.html" aria-current="page">Carta</a>
+    </div>
+
+    <div class="sitename">Triclinium <span class="amp">·</span> Aureum</div>
+
+    <div class="links right">
+      <a href="page-4.html">De Domo</a>
+      <span class="vine" aria-hidden="true">
+        <svg viewBox="0 0 200 200"><path d="M43.583 863.37c-1.79.03-3.58.13-5.34.31-7.05.74-13.93 2.79-19.16 7.47s-8.2 12-7.69 21c.51 9 4.3 16.14 10.19 20.34 5.89 4.2 13.31 5.53 21.03 5.19 15.45-.69 32.83-8 45.81-18.31 1.41-1.12 2.83-2.04 4.25-3.06 4.29 6.68 7.61 14.83 9.34 24.06-7.5-5.07-21.01-10.55-35.66 1.5-22.14 18.21-24.99 12.88-45.34-2.13-2.86 36.07 15.01 54.64 44.66 52.5z" transform="translate(0 -852.36)"/></svg>
+      </span>
+      <a href="page-5.html">Convivia</a>
+      <span class="vine" aria-hidden="true">
+        <svg viewBox="0 0 200 200"><path d="M43.583 863.37c-1.79.03-3.58.13-5.34.31-7.05.74-13.93 2.79-19.16 7.47s-8.2 12-7.69 21c.51 9 4.3 16.14 10.19 20.34 5.89 4.2 13.31 5.53 21.03 5.19 15.45-.69 32.83-8 45.81-18.31z" transform="translate(0 -852.36)"/></svg>
+      </span>
+      <a href="page-6.html">Ad Nos</a>
+    </div>
+  </div>
+  <div class="key-strip" aria-hidden="true"></div>
+</nav>
+
+<!-- ============== HERO HEAD ============== -->
+<header class="page-head">
+  <div class="eyebrow">Tabula II · Pars Cenae</div>
+  <h1>The Carta</h1>
+  <p class="subtitle">Bill of fare for the evening, set forth in three courses according to the custom of the Imperial table — that the convivium may proceed in due order, from gustatio to mensae secundae.</p>
+
+  <div class="laurel" aria-hidden="true">
+    <svg viewBox="0 0 323.7 295.8" xmlns="http://www.w3.org/2000/svg">
+      <g fill="none" stroke="#c9a23a" stroke-width="1.4">
+        <path d="M161 30 C 90 50, 50 110, 70 200 C 90 260, 140 280, 161 280" />
+        <path d="M161 30 C 232 50, 272 110, 252 200 C 232 260, 182 280, 161 280" />
+        <path d="M85 80 q -15 10 -10 30 M75 130 q -18 10 -12 32 M80 180 q -20 12 -10 36 M105 230 q -18 12 -6 38" />
+        <path d="M237 80 q 15 10 10 30 M247 130 q 18 10 12 32 M242 180 q 20 12 10 36 M217 230 q 18 12 6 38" />
+      </g>
+      <circle cx="161" cy="30" r="6" fill="#a93226"/>
+      <circle cx="161" cy="280" r="6" fill="#a93226"/>
+    </svg>
+  </div>
+</header>
+
+<!-- ============== MEANDER DIVIDER ============== -->
+<div class="meander-divider" aria-hidden="true">
+  <svg viewBox="1000 364 16511 4447" preserveAspectRatio="xMidYMid meet">
+    <g fill="#c9a23a">
+      <path d="M1000 4175 L1000 1000 4175 1000 4175 2905 2905 2905 2905 3540 4810 3540 4810 4175 2270 4175 2270 2270 3540 2270 3540 1635 1635 1635 1635 4175 1000 4175 Z"/>
+      <path d="M4810 4175 L4810 1000 7985 1000 7985 2905 6715 2905 6715 3540 8620 3540 8620 4175 6080 4175 6080 2270 7350 2270 7350 1635 5445 1635 5445 4175 4810 4175 Z"/>
+      <path d="M8620 4175 L8620 1000 11795 1000 11795 2905 10525 2905 10525 3540 12430 3540 12430 4175 9890 4175 9890 2270 11160 2270 11160 1635 9255 1635 9255 4175 8620 4175 Z"/>
+      <path d="M12430 4175 L12430 1000 15605 1000 15605 2905 14335 2905 14335 3540 16240 3540 16240 4175 13700 4175 13700 2270 14970 2270 14970 1635 13065 1635 13065 4175 12430 4175 Z"/>
+      <path d="M16240 4175 L16240 1000 17510 1000 17510 1635 16875 1635 16875 4175 16240 4175 Z"/>
+    </g>
+  </svg>
+</div>
+
+<!-- ============== CARTA / MENU ============== -->
+<main>
+  <div class="carta-grid">
+
+    <!-- =========== GUSTATIO =========== -->
+    <article class="card" aria-label="Gustatio — first course">
+      <div class="frame">
+        <div class="roundel" aria-hidden="true">
+          <svg viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="44" fill="none" stroke="#c9a23a" stroke-width="1"/>
+            <circle cx="50" cy="50" r="38" fill="none" stroke="#c9a23a" stroke-width="0.6"/>
+            <g stroke="#c9a23a" stroke-width="1" fill="none">
+              <path d="M50 14 q -10 6 -8 16 M50 14 q 10 6 8 16"/>
+              <path d="M22 36 q 6 -2 14 4 M78 36 q -6 -2 -14 4"/>
+              <path d="M14 60 q 8 0 16 -8 M86 60 q -8 0 -16 -8"/>
+              <path d="M28 82 q 4 -8 14 -10 M72 82 q -4 -8 -14 -10"/>
+            </g>
+            <text x="50" y="56" text-anchor="middle" font-family="Cinzel" font-size="14" fill="#a93226" letter-spacing="2">I</text>
+          </svg>
+        </div>
+        <h2>Gustatio</h2>
+        <div class="latin-sub">— the appetiser, taken with mulsum —</div>
+
+        <div class="dish">
+          <div class="dish-head">
+            <span class="name">Ova Spongia ex Lacte</span>
+            <span class="price">VI Den.</span>
+          </div>
+          <div class="english">Milk-soaked egg sponge, crowned with Hyblaean honey</div>
+          <div class="desc">Beaten farm eggs cooked in warmed ewe's milk, golden upon the platter, finished with thyme honey from the slopes of Mons Albanus and a turn of black pepper.</div>
+        </div>
+
+        <div class="dish">
+          <div class="dish-head">
+            <span class="name">Glires Melle ac Papavere</span>
+            <span class="price">XII Den.</span>
+          </div>
+          <div class="english">Honeyed dormice, rolled in poppy</div>
+          <div class="desc"><span class="tag">Apicius IX</span>The signature dish of the house: dormice fattened on chestnut, glazed with honey and crusted with toasted poppy seed. Served upon a small terracotta tile.</div>
+        </div>
+
+        <div class="dish">
+          <div class="dish-head">
+            <span class="name">Moretum Aventinense</span>
+            <span class="price">IV Den.</span>
+          </div>
+          <div class="english">Aventine herb-cheese with rustic bread</div>
+          <div class="desc">Fresh sheep's cheese pounded in the mortar with garlic, rue, coriander and aged vinegar. Served with hot panis quadratus from our wood oven.</div>
+        </div>
+
+        <div class="dish">
+          <div class="dish-head">
+            <span class="name">Olivae Columellae</span>
+            <span class="price">III Den.</span>
+          </div>
+          <div class="english">Cured olives after Columella</div>
+          <div class="desc">Picene and Sabine olives cracked and steeped with fennel seed, lentisk and a thread of garum. A small dish to whet the appetite.</div>
+        </div>
+
+        <div class="dish">
+          <div class="dish-head">
+            <span class="name">Cucurbitae Alexandrinae</span>
+            <span class="price">V Den.</span>
+          </div>
+          <div class="english">Alexandrian gourd, cold</div>
+          <div class="desc">Boiled gourd dressed with cumin, mint, asafoetida and a vinegar of dates — a dish brought from the eastern provinces by our cook.</div>
+        </div>
+
+        <div class="card-foot" aria-hidden="true"></div>
+      </div>
+    </article>
+
+    <!-- =========== PRIMA MENSA =========== -->
+    <article class="card" aria-label="Prima Mensa — main course">
+      <div class="frame">
+        <div class="roundel" aria-hidden="true">
+          <svg viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="44" fill="none" stroke="#c9a23a" stroke-width="1"/>
+            <circle cx="50" cy="50" r="38" fill="none" stroke="#c9a23a" stroke-width="0.6"/>
+            <g stroke="#c9a23a" stroke-width="1" fill="none">
+              <path d="M50 14 q -10 6 -8 16 M50 14 q 10 6 8 16"/>
+              <path d="M22 36 q 6 -2 14 4 M78 36 q -6 -2 -14 4"/>
+              <path d="M14 60 q 8 0 16 -8 M86 60 q -8 0 -16 -8"/>
+              <path d="M28 82 q 4 -8 14 -10 M72 82 q -4 -8 -14 -10"/>
+            </g>
+            <text x="50" y="56" text-anchor="middle" font-family="Cinzel" font-size="14" fill="#a93226" letter-spacing="2">II</text>
+          </svg>
+        </div>
+        <h2>Prima Mensa</h2>
+        <div class="latin-sub">— the main board, served upon silver —</div>
+
+        <div class="dish">
+          <div class="dish-head">
+            <span class="name">Pullum Numidicum</span>
+            <span class="price">XVI Den.</span>
+          </div>
+          <div class="english">Numidian chicken with dates &amp; asafoetida</div>
+          <div class="desc"><span class="tag">Apicius VI · vii</span>A young hen of the Campagna, roasted whole then finished in a sauce of dates from Jericho, asafoetida, pepper, cumin and garum. Served with toasted pine nuts.</div>
+        </div>
+
+        <div class="dish">
+          <div class="dish-head">
+            <span class="name">Porcellus Flaccianus</span>
+            <span class="price">XXII Den.</span>
+          </div>
+          <div class="english">Suckling pig in the manner of Flaccus</div>
+          <div class="desc">Whole suckling pig stuffed with fig, leek and crumbled wheat, roasted slowly upon the spit and basted with passum. Carved at the table.</div>
+        </div>
+
+        <div class="dish">
+          <div class="dish-head">
+            <span class="name">Lepus in sua Aqua</span>
+            <span class="price">XVIII Den.</span>
+          </div>
+          <div class="english">Hare braised in its own broth</div>
+          <div class="desc">Hill-country hare cooked with pepper, lovage, savory, raisin wine and a splash of garum, served with ash-baked turnips.</div>
+        </div>
+
+        <div class="dish">
+          <div class="dish-head">
+            <span class="name">Mullus Rubescens</span>
+            <span class="price">XIV Den.</span>
+          </div>
+          <div class="english">Red mullet of Antium, on bay leaves</div>
+          <div class="desc">Whole red mullet line-caught off Antium, grilled upon fresh bay leaves and finished with oenogarum — wine, garum and a turn of rue.</div>
+        </div>
+
+        <div class="dish">
+          <div class="dish-head">
+            <span class="name">Lenticula ex Castaneis</span>
+            <span class="price">VIII Den.</span>
+          </div>
+          <div class="english">Lentils with chestnut &amp; coriander</div>
+          <div class="desc">Egyptian lentils slowly stewed with whole chestnuts, leek, coriander, mint and a finishing thread of vinegar. A dish for the longer courses.</div>
+        </div>
+
+        <div class="card-foot" aria-hidden="true"></div>
+      </div>
+    </article>
+
+    <!-- =========== SECUNDA MENSA =========== -->
+    <article class="card" aria-label="Secunda Mensa — sweet course">
+      <div class="frame">
+        <div class="roundel" aria-hidden="true">
+          <svg viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="44" fill="none" stroke="#c9a23a" stroke-width="1"/>
+            <circle cx="50" cy="50" r="38" fill="none" stroke="#c9a23a" stroke-width="0.6"/>
+            <g stroke="#c9a23a" stroke-width="1" fill="none">
+              <path d="M50 14 q -10 6 -8 16 M50 14 q 10 6 8 16"/>
+              <path d="M22 36 q 6 -2 14 4 M78 36 q -6 -2 -14 4"/>
+              <path d="M14 60 q 8 0 16 -8 M86 60 q -8 0 -16 -8"/>
+              <path d="M28 82 q 4 -8 14 -10 M72 82 q -4 -8 -14 -10"/>
+            </g>
+            <text x="50" y="56" text-anchor="middle" font-family="Cinzel" font-size="14" fill="#a93226" letter-spacing="2">III</text>
+          </svg>
+        </div>
+        <h2>Secunda Mensa</h2>
+        <div class="latin-sub">— sweet courses, with Falernian wine —</div>
+
+        <div class="dish">
+          <div class="dish-head">
+            <span class="name">Patina de Piris</span>
+            <span class="price">VII Den.</span>
+          </div>
+          <div class="english">Pear &amp; cumin custard, baked in the dish</div>
+          <div class="desc"><span class="tag">Apicius IV · ii</span>Crescentine pears poached in passum, then folded with eggs, honey, pepper and a whisper of cumin and baked until just set. Served warm with a dusting of pepper.</div>
+        </div>
+
+        <div class="dish">
+          <div class="dish-head">
+            <span class="name">Tiropatinam</span>
+            <span class="price">V Den.</span>
+          </div>
+          <div class="english">Honeyed milk &amp; egg pudding</div>
+          <div class="desc">A bowl of warmed milk thickened with eggs and Hymettian honey, finished beneath the lid with cracked black pepper.</div>
+        </div>
+
+        <div class="dish">
+          <div class="dish-head">
+            <span class="name">Dulcia Domestica</span>
+            <span class="price">VI Den.</span>
+          </div>
+          <div class="english">House sweetmeats — dates &amp; nuts</div>
+          <div class="desc">Soft Jericho dates stoned and stuffed with pine kernel, pepper and salt, then sealed in honey. Served with toasted almonds of Damascus.</div>
+        </div>
+
+        <div class="dish">
+          <div class="dish-head">
+            <span class="name">Mala Cydonia in Melle</span>
+            <span class="price">VI Den.</span>
+          </div>
+          <div class="english">Quinces preserved in honey &amp; defrutum</div>
+          <div class="desc">Quinces from our orchard, slowly cooked down with honey, defrutum and a single bay leaf, dark and fragrant. A spoonful suffices.</div>
+        </div>
+
+        <div class="dish">
+          <div class="dish-head">
+            <span class="name">Caseus cum Favo</span>
+            <span class="price">IV Den.</span>
+          </div>
+          <div class="english">Fresh sheep's cheese with the comb</div>
+          <div class="desc">A simple offering: a slab of fresh ricotta-style cheese set beside a piece of honeycomb from the bee-keeper Tullia of Tibur.</div>
+        </div>
+
+        <div class="card-foot" aria-hidden="true"></div>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- =========== DENARII PANEL =========== -->
+  <section class="denarii-panel" aria-label="Currency translation">
+    <div class="frame">
+      <h3>De Pretio · A Note on Coin</h3>
+      <p style="font-style:italic; margin:0;">Prices upon this carta are reckoned in <span style="color:var(--primary); font-variant:small-caps; letter-spacing:.08em;">denarii</span> for the keeping of atmosphere. At settlement, our reckoner converts to modern coin at the following rate, as fixed by the proprietor on the Kalends of January:</p>
+      <div class="grid">
+        <div class="coin"><span class="lat">I Denarius</span><span class="val">€ 1.40</span></div>
+        <div class="coin"><span class="lat">I Sestertius</span><span class="val">€ 0.35</span></div>
+        <div class="coin"><span class="lat">I Aureus</span><span class="val">€ 35.00</span></div>
+        <div class="coin"><span class="lat">Servitii</span><span class="val">12% adiectum</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========== FOOTNOTES =========== -->
+  <section class="footnotes" aria-label="Allergen and provenance notes">
+    <p><span class="lat">De Allergiis</span> — Garum (fermented fish sauce) appears in nearly every savoury dish; please advise the steward of any allergy to fish, sesame, mustard, gluten or tree-nut. A vegetarian carta upon request, prepared after the manner of the Pythagorean households.</p>
+    <p><span class="lat">De Origine</span> — Olive oil pressed at the Sabine farm of our proprietor; bread baked daily on the Aventine; fish landed at Ostia each dawn; honey from Tibur and the Alban Hills; pepper, cumin and asafoetida brought by sea from the eastern markets of Alexandria.</p>
+    <p><span class="lat">De Tempore</span> — The full carta of three courses requires not less than two hours and a half. Convivia begin at the eleventh hour (V post meridiem) and close at the second hour of night.</p>
+  </section>
+</main>
+
+<!-- ============== FOOTER ============== -->
+<footer>
+  <div class="corners" aria-hidden="true">
+    <span class="corner tl">
+      <svg viewBox="0 0 200 200"><g fill="none" stroke="#c9a23a" stroke-width="2"><path d="M30 170 C 60 140, 90 110, 120 80 M30 170 q 20 -10 40 -8 M60 140 q 18 -8 36 -4 M90 110 q 16 -6 32 -2"/></g></svg>
+    </span>
+    <span class="corner tr">
+      <svg viewBox="0 0 200 200"><g fill="none" stroke="#c9a23a" stroke-width="2"><path d="M30 170 C 60 140, 90 110, 120 80 M30 170 q 20 -10 40 -8 M60 140 q 18 -8 36 -4 M90 110 q 16 -6 32 -2"/></g></svg>
+    </span>
+  </div>
+
+  <div class="red-band">
+    <div class="rosettes">
+      <span class="rosette" aria-hidden="true"></span>
+      <span class="rosette" aria-hidden="true"></span>
+      <span>Triclinium Aureum · Vicus Armilustri XII · Mons Aventinus · Roma</span>
+      <span class="rosette" aria-hidden="true"></span>
+      <span class="rosette" aria-hidden="true"></span>
+    </div>
+    <div class="addr">Aperitur Hora Undecima · Clauditur Hora Secunda Noctis · Cenae a Die Martis ad Diem Saturni</div>
+  </div>
+  <div class="travertine-band">
+    <span class="vine-corner" aria-hidden="true">
+      <svg viewBox="0 0 200 200"><path d="M43.583 863.37c-1.79.03-3.58.13-5.34.31-7.05.74-13.93 2.79-19.16 7.47s-8.2 12-7.69 21c.51 9 4.3 16.14 10.19 20.34 5.89 4.2 13.31 5.53 21.03 5.19 15.45-.69 32.83-8 45.81-18.31z" transform="translate(0 -852.36)"/></svg>
+    </span>
+    <span>Proprietor · Lucius Vibius Marcellus &nbsp;·&nbsp; Founded MMXIX &nbsp;·&nbsp; Ex Officina Coquorum</span>
+    <span class="vine-corner" aria-hidden="true">
+      <svg viewBox="0 0 200 200"><path d="M43.583 863.37c-1.79.03-3.58.13-5.34.31-7.05.74-13.93 2.79-19.16 7.47s-8.2 12-7.69 21c.51 9 4.3 16.14 10.19 20.34 5.89 4.2 13.31 5.53 21.03 5.19 15.45-.69 32.83-8 45.81-18.31z" transform="translate(0 -852.36)"/></svg>
+    </span>
+  </div>
+</footer>
+
+</body>
+</html>

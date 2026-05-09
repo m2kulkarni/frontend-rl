@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Works in Stone — Tracery & Vault | The Atelier of Guillaume de Sens</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  :root {
+    --came: #0a0a0a;
+    --cobalt: #1e3a5f;
+    --madder: #8b1538;
+    --gold: #c9a23a;
+    --parchment: #f4ecd8;
+    --ink: #3a2618;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), "EB Garamond", Garamond, serif;
+    font-size: 17px;
+    line-height: 1.55;
+  }
+
+  /* ============ DIAPER BACKGROUND ============ */
+  .diaper-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background-image: url("svg/quatrefoil-in-square.svg");
+    background-size: 220px 220px;
+    background-repeat: repeat;
+    opacity: 0.08;
+    pointer-events: none;
+  }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  /* ============ MASTHEAD ============ */
+  header.masthead {
+    text-align: center;
+    padding: 56px 0 18px;
+    border-bottom: 1px solid var(--came);
+    position: relative;
+  }
+
+  .site-title {
+    font-family: var(--font-display), "UnifrakturMaguntia", "Old English Text MT", serif;
+    font-size: 56px;
+    font-weight: 400;
+    color: var(--came);
+    margin: 0 0 6px;
+    letter-spacing: 0.5px;
+    line-height: 1;
+  }
+
+  .site-subtitle {
+    font-style: italic;
+    color: var(--ink);
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    margin: 0 0 18px;
+  }
+
+  /* ============ NAV ARCADE ============ */
+  nav.arcade {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    padding-top: 18px;
+    padding-bottom: 6px;
+  }
+
+  nav.arcade a {
+    position: relative;
+    width: 168px;
+    height: 92px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 18px;
+    text-decoration: none;
+    color: var(--came);
+    font-family: var(--font-body), serif;
+    font-variant: small-caps;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-align: center;
+    border: none;
+    background: transparent;
+  }
+
+  /* arch shape via SVG-in-CSS */
+  nav.arcade a::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 168 92' preserveAspectRatio='none'><path d='M 8 92 L 8 50 Q 8 8 84 8 Q 160 8 160 50 L 160 92' fill='none' stroke='%230a0a0a' stroke-width='2.2'/><path d='M 14 92 L 14 50 Q 14 14 84 14 Q 154 14 154 50 L 154 92' fill='none' stroke='%230a0a0a' stroke-width='0.8'/></svg>") center/100% 100% no-repeat;
+    z-index: -1;
+  }
+
+  nav.arcade a:hover::before {
+    background:
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 168 92' preserveAspectRatio='none'><path d='M 8 92 L 8 50 Q 8 8 84 8 Q 160 8 160 50 L 160 92 Z' fill='%231e3a5f' stroke='%230a0a0a' stroke-width='2.2'/></svg>") center/100% 100% no-repeat;
+  }
+
+  nav.arcade a:hover { color: var(--gold); }
+
+  nav.arcade a[aria-current="page"] {
+    color: var(--madder);
+  }
+
+  nav.arcade a[aria-current="page"]::after {
+    content: "⚜";
+    position: absolute;
+    top: -16px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--gold);
+    font-size: 22px;
+    text-shadow: 0 0 1px var(--came);
+  }
+
+  /* ============ HERO / PAGE INTRO ============ */
+  .page-intro {
+    position: relative;
+    padding: 60px 80px 40px;
+    text-align: center;
+    margin-top: 24px;
+  }
+
+  .page-intro h1 {
+    font-family: var(--font-display), serif;
+    font-size: 64px;
+    font-weight: 400;
+    margin: 0 0 14px;
+    color: var(--came);
+    line-height: 1.05;
+  }
+
+  .page-intro .latin {
+    font-style: italic;
+    color: var(--madder);
+    font-size: 18px;
+    letter-spacing: 0.05em;
+    margin: 0 0 22px;
+  }
+
+  .page-intro p.lead {
+    max-width: 640px;
+    margin: 0 auto;
+    font-size: 17px;
+    color: var(--ink);
+  }
+
+  .page-intro .corner {
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    opacity: 0.85;
+  }
+  .page-intro .corner svg { width: 100%; height: 100%; }
+  .corner.tl { top: 0; left: 24px; }
+  .corner.tr { top: 0; right: 24px; transform: scaleX(-1); }
+  .corner.bl { bottom: 0; left: 24px; transform: scaleY(-1); }
+  .corner.br { bottom: 0; right: 24px; transform: scale(-1,-1); }
+
+  /* ============ DIVIDER ============ */
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    margin: 28px 0 48px;
+  }
+  .divider .rule {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold) 20%, var(--gold) 80%, transparent);
+  }
+  .divider .leaf {
+    width: 44px; height: 44px;
+  }
+  .divider .leaf svg { width: 100%; height: 100%; }
+
+  /* ============ GALLERY ============ */
+  .gallery {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 64px;
+    padding: 20px 0 80px;
+  }
+
+  /* ============ CARD: pointed-arch ============ */
+  .commission {
+    width: 720px;
+    position: relative;
+    background: var(--parchment);
+    padding: 0;
+  }
+
+  .commission .arch-frame {
+    position: relative;
+    border: 2px solid var(--came);
+    border-bottom: none;
+    border-radius: 360px 360px 0 0 / 220px 220px 0 0;
+    padding: 32px 56px 18px;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(201,162,58,0.10), transparent 60%),
+      var(--parchment);
+  }
+
+  /* inner thin gold rule following arch */
+  .commission .arch-frame::before {
+    content: "";
+    position: absolute;
+    top: 8px; left: 8px; right: 8px; bottom: 0;
+    border: 1px solid var(--gold);
+    border-bottom: none;
+    border-radius: 360px 360px 0 0 / 220px 220px 0 0;
+    pointer-events: none;
+  }
+
+  /* quatrefoil seal at apex */
+  .commission .seal {
+    position: absolute;
+    top: -28px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 88px;
+    height: 88px;
+    background: var(--parchment);
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .commission .seal svg {
+    width: 100%; height: 100%;
+  }
+
+  .commission .seal .roman {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-body), serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--came);
+    text-shadow: 0 0 2px var(--parchment);
+  }
+
+  .commission h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    color: var(--came);
+    text-align: center;
+    margin: 28px 0 6px;
+    font-size: 40px;
+    line-height: 1.05;
+  }
+
+  .commission .patron-line {
+    text-align: center;
+    font-style: italic;
+    color: var(--madder);
+    font-size: 16px;
+    margin: 0 0 16px;
+    letter-spacing: 0.04em;
+  }
+
+  /* gold rule separating apex from body */
+  .commission .gold-rule {
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    margin: 8px 24px 18px;
+    position: relative;
+  }
+  .commission .gold-rule::before,
+  .commission .gold-rule::after {
+    content: "❖";
+    position: absolute;
+    top: -10px;
+    color: var(--gold);
+    font-size: 14px;
+  }
+  .commission .gold-rule::before { left: 50%; transform: translateX(-50%); }
+  .commission .gold-rule::after { display: none; }
+
+  /* body of card: sits below arch, square-bottomed */
+  .commission .body {
+    border: 2px solid var(--came);
+    border-top: none;
+    padding: 0 56px 36px;
+    background: var(--parchment);
+    position: relative;
+  }
+
+  .commission .body::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 8px; right: 8px; bottom: 8px;
+    border: 1px solid var(--gold);
+    border-top: none;
+    pointer-events: none;
+  }
+
+  .commission .description {
+    margin: 0 0 18px;
+    text-align: justify;
+    line-height: 1.65;
+    color: var(--ink);
+    font-size: 16.5px;
+  }
+
+  /* madder-red illuminated drop cap */
+  .commission .description::first-letter {
+    font-family: var(--font-display), serif;
+    float: left;
+    font-size: 56px;
+    line-height: 0.85;
+    padding: 6px 10px 0 0;
+    color: var(--madder);
+    text-shadow: 1px 1px 0 rgba(201,162,58,0.4);
+  }
+
+  .commission dl.specs {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 6px 18px;
+    margin: 18px 0 0;
+    padding: 14px 18px;
+    background: rgba(201,162,58,0.07);
+    border-top: 1px solid var(--gold);
+    border-bottom: 1px solid var(--gold);
+    font-size: 15px;
+  }
+  .commission dl.specs dt {
+    font-variant: small-caps;
+    letter-spacing: 0.1em;
+    color: var(--cobalt);
+    font-weight: 600;
+  }
+  .commission dl.specs dd {
+    margin: 0;
+    color: var(--ink);
+  }
+
+  .commission .technical-note {
+    margin: 18px 0 0;
+    font-style: italic;
+    font-size: 15.5px;
+    color: var(--ink);
+    border-left: 2px solid var(--madder);
+    padding: 4px 0 4px 14px;
+  }
+  .commission .technical-note strong {
+    font-style: normal;
+    font-variant: small-caps;
+    color: var(--cobalt);
+    letter-spacing: 0.08em;
+  }
+
+  /* ============ FOOTER ============ */
+  footer.colophon {
+    border-top: 1px solid var(--came);
+    margin-top: 40px;
+    padding: 48px 0 36px;
+    text-align: center;
+    background: rgba(30,58,95,0.03);
+  }
+
+  footer .arcade7 {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 28px;
+  }
+
+  footer .arcade7 .arch {
+    width: 96px;
+    height: 64px;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 8px;
+    color: var(--cobalt);
+    font-size: 18px;
+  }
+
+  footer .arcade7 .arch::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 64' preserveAspectRatio='none'><path d='M 4 64 L 4 36 Q 4 4 48 4 Q 92 4 92 36 L 92 64' fill='none' stroke='%231e3a5f' stroke-width='1.6'/></svg>") center/100% 100% no-repeat;
+    z-index: -1;
+  }
+
+  footer .address {
+    font-style: italic;
+    color: var(--ink);
+    margin: 6px 0 4px;
+    font-size: 15px;
+  }
+  footer .colophon-line {
+    font-family: var(--font-body), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.12em;
+    color: var(--madder);
+    font-size: 13px;
+    margin: 4px 0 14px;
+  }
+  footer .cross {
+    font-size: 28px;
+    color: var(--ink);
+    line-height: 1;
+  }
+
+  /* small ornaments inline */
+  .ornament-mini {
+    width: 24px; height: 24px;
+    display: inline-block;
+    vertical-align: middle;
+    opacity: 0.7;
+  }
+
+</style>
+</head>
+<body>
+
+<div class="diaper-bg" aria-hidden="true"></div>
+
+<div class="page">
+
+  <header class="masthead">
+    <h1 class="site-title">The Atelier of Guillaume de Sens</h1>
+    <div class="site-subtitle">— Master Mason &amp; Cutter of Tracery, in the Royal Domain of France —</div>
+
+    <nav class="arcade" aria-label="Primary">
+      <a href="page-1.html">Lodge</a>
+      <a href="page-2.html" aria-current="page">Stone</a>
+      <a href="page-3.html">Glass</a>
+      <a href="page-4.html">Drawings</a>
+      <a href="page-5.html">The Master</a>
+    </nav>
+    <!-- secondary arch for sixth page, kept inside the arcade row visually -->
+    <nav class="arcade" aria-label="Secondary" style="margin-top:-6px;">
+      <a href="page-6.html" style="width:200px;">Petitioning</a>
+    </nav>
+  </header>
+
+  <section class="page-intro">
+    <div class="corner tl" aria-hidden="true">
+      <svg viewBox="0 0 64 64"><path d="M2 62 L2 22 Q2 2 22 2 L62 2" fill="none" stroke="#0a0a0a" stroke-width="1.6"/><path d="M8 62 L8 26 Q8 8 26 8 L62 8" fill="none" stroke="#c9a23a" stroke-width="0.8"/><circle cx="14" cy="14" r="3" fill="#8b1538"/></svg>
+    </div>
+    <div class="corner tr" aria-hidden="true">
+      <svg viewBox="0 0 64 64"><path d="M2 62 L2 22 Q2 2 22 2 L62 2" fill="none" stroke="#0a0a0a" stroke-width="1.6"/><path d="M8 62 L8 26 Q8 8 26 8 L62 8" fill="none" stroke="#c9a23a" stroke-width="0.8"/><circle cx="14" cy="14" r="3" fill="#8b1538"/></svg>
+    </div>
+
+    <h1>Works in Stone</h1>
+    <div class="latin">Tracery, Vaulting, &amp; Bar-work — Anno Domini MCCXC – MCCC</div>
+    <p class="lead">Herein are inscribed the six commissions undertaken by this lodge in cut stone, from the lancets of Saint-Étienne de Sens to the vault-ribs of lesser parishes upon the Yonne. Each work is sealed by the year of its erection, with mention of patron, quarry, and the moulding-profiles employed.</p>
+
+    <div class="corner bl" aria-hidden="true">
+      <svg viewBox="0 0 64 64"><path d="M2 62 L2 22 Q2 2 22 2 L62 2" fill="none" stroke="#0a0a0a" stroke-width="1.6"/><path d="M8 62 L8 26 Q8 8 26 8 L62 8" fill="none" stroke="#c9a23a" stroke-width="0.8"/><circle cx="14" cy="14" r="3" fill="#8b1538"/></svg>
+    </div>
+    <div class="corner br" aria-hidden="true">
+      <svg viewBox="0 0 64 64"><path d="M2 62 L2 22 Q2 2 22 2 L62 2" fill="none" stroke="#0a0a0a" stroke-width="1.6"/><path d="M8 62 L8 26 Q8 8 26 8 L62 8" fill="none" stroke="#c9a23a" stroke-width="0.8"/><circle cx="14" cy="14" r="3" fill="#8b1538"/></svg>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true">
+    <span class="rule"></span>
+    <span class="leaf">
+      <svg viewBox="0 0 200 200"><path d="m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937" transform="translate(0 -852.36)" fill="#8b1538"/></svg>
+    </span>
+    <span class="rule"></span>
+  </div>
+
+  <main class="gallery">
+
+    <!-- ========== CARD 1 ========== -->
+    <article class="commission">
+      <div class="seal" aria-hidden="false">
+        <svg viewBox="0 0 100 100">
+          <defs>
+            <radialGradient id="seal1" cx="50%" cy="40%" r="60%">
+              <stop offset="0" stop-color="#f4ecd8"/>
+              <stop offset="1" stop-color="#c9a23a"/>
+            </radialGradient>
+          </defs>
+          <path d="M50 8 A18 18 0 0 1 68 26 A18 18 0 0 1 86 44 A18 18 0 0 1 68 62 A18 18 0 0 1 50 80 A18 18 0 0 1 32 62 A18 18 0 0 1 14 44 A18 18 0 0 1 32 26 A18 18 0 0 1 50 8 Z" fill="url(#seal1)" stroke="#0a0a0a" stroke-width="1.6"/>
+          <circle cx="50" cy="44" r="22" fill="none" stroke="#8b1538" stroke-width="0.8"/>
+        </svg>
+        <span class="roman">MCCXCI</span>
+      </div>
+
+      <div class="arch-frame">
+        <h2>The North Transept Lancets</h2>
+        <div class="patron-line">at Saint-Étienne de Sens</div>
+        <div class="gold-rule"></div>
+      </div>
+
+      <div class="body">
+        <p class="description">Three lancets of unequal height pierce the north wall of the transept, the central rising to nine toises and crowned by a sixfoil oculus. The bar-tracery was set in February of the Year of Our Lord twelve hundred ninety and one, after a winter spent in the cutting-shed at the foot of the apse. Each light is divided by a slender mullion of three-quarter round, the cusps of the trefoiled heads meeting at a small carved bossage of vine-leaf.</p>
+
+        <dl class="specs">
+          <dt>Patron</dt><dd>Chapter of Saint-Étienne, Archbishop Estienne Bécard presiding</dd>
+          <dt>Year</dt><dd>MCCXCI (set Feb. – Lent)</dd>
+          <dt>Stone</dt><dd>Tonnerre limestone, fine bed; quoins in Conflans chalk</dd>
+          <dt>Fee</dt><dd>iiij c lvij livres tournois, payable in three terms</dd>
+        </dl>
+
+        <p class="technical-note"><strong>Technique —</strong> Cusping cut to the half-round with sunk spandrel; outer moulding a triple roll-and-fillet, inner a double ogee. The mullion-bases rest upon a continuous chamfered string, the better to shed rain into the gutter of the transept roof.</p>
+      </div>
+    </article>
+
+    <!-- ========== CARD 2 ========== -->
+    <article class="commission">
+      <div class="seal">
+        <svg viewBox="0 0 100 100">
+          <defs>
+            <radialGradient id="seal2" cx="50%" cy="40%" r="60%">
+              <stop offset="0" stop-color="#f4ecd8"/>
+              <stop offset="1" stop-color="#c9a23a"/>
+            </radialGradient>
+          </defs>
+          <path d="M50 8 A18 18 0 0 1 68 26 A18 18 0 0 1 86 44 A18 18 0 0 1 68 62 A18 18 0 0 1 50 80 A18 18 0 0 1 32 62 A18 18 0 0 1 14 44 A18 18 0 0 1 32 26 A18 18 0 0 1 50 8 Z" fill="url(#seal2)" stroke="#0a0a0a" stroke-width="1.6"/>
+          <circle cx="50" cy="44" r="22" fill="none" stroke="#8b1538" stroke-width="0.8"/>
+        </svg>
+        <span class="roman">MCCXCIV</span>
+      </div>
+
+      <div class="arch-frame">
+        <h2>The Triforium Screen</h2>
+        <div class="patron-line">at Notre-Dame de Soissons</div>
+        <div class="gold-rule"></div>
+      </div>
+
+      <div class="body">
+        <p class="description">Eleven bays of triforium were cut, each comprising two pointed lights beneath a quatrefoil, the whole bound by a horizontal string-course of dog-tooth and small carved heads at the springers. Travel was made from Sens to Soissons in the autumn of the Year of Grace twelve hundred ninety-three, and the screen was raised in the months of June and July following. The work supplanted an earlier wooden balustrade thought beyond reasonable repair.</p>
+
+        <dl class="specs">
+          <dt>Patron</dt><dd>Bishop Gérard de Montcornet &amp; the Cathedral Chapter</dd>
+          <dt>Year</dt><dd>MCCXCIV (raised summer)</dd>
+          <dt>Stone</dt><dd>Conflans chalk for the screen, Tonnerre for the colonnettes</dd>
+          <dt>Fee</dt><dd>vij c xx livres parisis, with carriage</dd>
+        </dl>
+
+        <p class="technical-note"><strong>Technique —</strong> Cusping pierced clear through, after the new manner; mouldings reduced to a single keel-and-hollow on the chamber side, that the eye be not confounded when read against the dimmer gallery beyond. Each colonnette is en délit, of one stone with its capital.</p>
+      </div>
+    </article>
+
+    <!-- ========== CARD 3 ========== -->
+    <article class="commission">
+      <div class="seal">
+        <svg viewBox="0 0 100 100">
+          <defs>
+            <radialGradient id="seal3" cx="50%" cy="40%" r="60%">
+              <stop offset="0" stop-color="#f4ecd8"/>
+              <stop offset="1" stop-color="#c9a23a"/>
+            </radialGradient>
+          </defs>
+          <path d="M50 8 A18 18 0 0 1 68 26 A18 18 0 0 1 86 44 A18 18 0 0 1 68 62 A18 18 0 0 1 50 80 A18 18 0 0 1 32 62 A18 18 0 0 1 14 44 A18 18 0 0 1 32 26 A18 18 0 0 1 50 8 Z" fill="url(#seal3)" stroke="#0a0a0a" stroke-width="1.6"/>
+          <circle cx="50" cy="44" r="22" fill="none" stroke="#8b1538" stroke-width="0.8"/>
+        </svg>
+        <span class="roman">MCCXCVIII</span>
+      </div>
+
+      <div class="arch-frame">
+        <h2>Bar Tracery for the Chapter House</h2>
+        <div class="patron-line">at the Abbey of Pontigny</div>
+        <div class="gold-rule"></div>
+      </div>
+
+      <div class="body">
+        <p class="description">A central rose of twelve foils, set within a square frame of pierced quatrefoils, lights the eastern wall of the chapter house. Below it, four tall lancets of equal height carry the daily light to the brethren's stalls. The work was undertaken at the request of Abbot Pierre de Toucy and concluded on the Vigil of Saint Martin, MCCXCVIII, with the tracery-cutter himself attending the placement of the central boss.</p>
+
+        <dl class="specs">
+          <dt>Patron</dt><dd>Abbot Pierre de Toucy, Cistercian community of Pontigny</dd>
+          <dt>Year</dt><dd>MCCXCVIII (set autumn, completed XI Nov.)</dd>
+          <dt>Stone</dt><dd>Tonnerre limestone, hard upper-bed selected</dd>
+          <dt>Fee</dt><dd>v c lxxxiv livres tournois; ten muids of grain in lieu of carriage</dd>
+        </dl>
+
+        <p class="technical-note"><strong>Technique —</strong> The rose is bar-cut, not plate; cusps formed by chiselling away the spandrels after assembly, that the foils show clean against the southern light. Mouldings are restrained, as befits the Order: a single hollow chamfer on the outer face, a wave moulding within.</p>
+      </div>
+    </article>
+
+    <!-- ========== CARD 4 ========== -->
+    <article class="commission">
+      <div class="seal">
+        <svg viewBox="0 0 100 100">
+          <defs>
+            <radialGradient id="seal4" cx="50%" cy="40%" r="60%">
+              <stop offset="0" stop-color="#f4ecd8"/>
+              <stop offset="1" stop-color="#c9a23a"/>
+            </radialGradient>
+          </defs>
+          <path d="M50 8 A18 18 0 0 1 68 26 A18 18 0 0 1 86 44 A18 18 0 0 1 68 62 A18 18 0 0 1 50 80 A18 18 0 0 1 32 62 A18 18 0 0 1 14 44 A18 18 0 0 1 32 26 A18 18 0 0 1 50 8 Z" fill="url(#seal4)" stroke="#0a0a0a" stroke-width="1.6"/>
+          <circle cx="50" cy="44" r="22" fill="none" stroke="#8b1538" stroke-width="0.8"/>
+        </svg>
+        <span class="roman">MCCXCV</span>
+      </div>
+
+      <div class="arch-frame">
+        <h2>Rib-Vault of the South Aisle</h2>
+        <div class="patron-line">Église Saint-Pierre-le-Vif, Villeneuve</div>
+        <div class="gold-rule"></div>
+      </div>
+
+      <div class="body">
+        <p class="description">Four bays of quadripartite vaulting were raised over the south aisle of this small parish, replacing a wooden ceiling lost to fire on the Eve of the Annunciation, MCCXCIV. The ribs spring from corbels carved with the heads of the Four Evangelists, each in its own attitude — Mark with his book half-closed, Luke with the ox at his shoulder. The keystones are of the simplest sort, plain rounds with painted star-fields.</p>
+
+        <dl class="specs">
+          <dt>Patron</dt><dd>Curé Jehan Bouchart and the parish of Villeneuve-l'Archevêque</dd>
+          <dt>Year</dt><dd>MCCXCV (centring struck at Whitsun)</dd>
+          <dt>Stone</dt><dd>Conflans chalk for webbing, Tonnerre for ribs &amp; corbels</dd>
+          <dt>Fee</dt><dd>ij c xij livres tournois, with masons' lodgings provided</dd>
+        </dl>
+
+        <p class="technical-note"><strong>Technique —</strong> Diagonal ribs of the keel-and-fillet profile, transverse arches plain chamfered. The webbing laid in courses parallel to the wall-rib, after the manner taught by the elder masons of Auxerre. No tas-de-charge employed; the ribs spring independently from each corbel.</p>
+      </div>
+    </article>
+
+    <!-- ========== CARD 5 ========== -->
+    <article class="commission">
+      <div class="seal">
+        <svg viewBox="0 0 100 100">
+          <defs>
+            <radialGradient id="seal5" cx="50%" cy="40%" r="60%">
+              <stop offset="0" stop-color="#f4ecd8"/>
+              <stop offset="1" stop-color="#c9a23a"/>
+            </radialGradient>
+          </defs>
+          <path d="M50 8 A18 18 0 0 1 68 26 A18 18 0 0 1 86 44 A18 18 0 0 1 68 62 A18 18 0 0 1 50 80 A18 18 0 0 1 32 62 A18 18 0 0 1 14 44 A18 18 0 0 1 32 26 A18 18 0 0 1 50 8 Z" fill="url(#seal5)" stroke="#0a0a0a" stroke-width="1.6"/>
+          <circle cx="50" cy="44" r="22" fill="none" stroke="#8b1538" stroke-width="0.8"/>
+        </svg>
+        <span class="roman">MCCXCVI</span>
+      </div>
+
+      <div class="arch-frame">
+        <h2>West Window of Saint-Savinien</h2>
+        <div class="patron-line">parish church beyond the walls of Sens</div>
+        <div class="gold-rule"></div>
+      </div>
+
+      <div class="body">
+        <p class="description">Two pointed lancets surmounted by a circle of six foils, set within a single great pointed arch — the simplest of the geometric fashion now coming up from the Île-de-France. The window was paid for by the bequest of Dame Aalis de Marsangis, late of this parish, and her arms (a chevron between three escallops) are carved upon the spandrel within. The glazing was executed separately by the master Renaud le Verrier of Auxerre.</p>
+
+        <dl class="specs">
+          <dt>Patron</dt><dd>Bequest of Dame Aalis de Marsangis (d. MCCXCV)</dd>
+          <dt>Year</dt><dd>MCCXCVI (consecrated XV August)</dd>
+          <dt>Stone</dt><dd>Tonnerre limestone throughout</dd>
+          <dt>Fee</dt><dd>lxxij livres tournois, plus xij sous for the carved arms</dd>
+        </dl>
+
+        <p class="technical-note"><strong>Technique —</strong> Plate-tracery in the ancient manner has been wholly abandoned; the foils are cut from bars set to the radius of the circle. Mouldings of two orders only, the outer a roll-and-hollow, the inner a single bowtell — restraint suited to a parish work.</p>
+      </div>
+    </article>
+
+    <!-- ========== CARD 6 ========== -->
+    <article class="commission">
+      <div class="seal">
+        <svg viewBox="0 0 100 100">
+          <defs>
+            <radialGradient id="seal6" cx="50%" cy="40%" r="60%">
+              <stop offset="0" stop-color="#f4ecd8"/>
+              <stop offset="1" stop-color="#c9a23a"/>
+            </radialGradient>
+          </defs>
+          <path d="M50 8 A18 18 0 0 1 68 26 A18 18 0 0 1 86 44 A18 18 0 0 1 68 62 A18 18 0 0 1 50 80 A18 18 0 0 1 32 62 A18 18 0 0 1 14 44 A18 18 0 0 1 32 26 A18 18 0 0 1 50 8 Z" fill="url(#seal6)" stroke="#0a0a0a" stroke-width="1.6"/>
+          <circle cx="50" cy="44" r="22" fill="none" stroke="#8b1538" stroke-width="0.8"/>
+        </svg>
+        <span class="roman">MCCXCIX</span>
+      </div>
+
+      <div class="arch-frame">
+        <h2>Sedilia &amp; Piscina, Notre-Dame-du-Pré</h2>
+        <div class="patron-line">at Joigny upon the Yonne</div>
+        <div class="gold-rule"></div>
+      </div>
+
+      <div class="body">
+        <p class="description">Three sedilia of graduated height, with a piscina to the south, were cut into the chancel wall of this small church on the river. Each seat is recessed beneath its own crocketed gable, the gables linked by a continuous string of ball-flower. The work occupied the lodge through the late autumn of MCCXCIX, the masons sheltering against early frost beneath canvas stretched between the choir and the temporary roof.</p>
+
+        <dl class="specs">
+          <dt>Patron</dt><dd>Sire Guillaume de Joigny, lord of the manor; with the curé Robert Beaufils</dd>
+          <dt>Year</dt><dd>MCCXCIX (concluded eve of St. Andrew)</dd>
+          <dt>Stone</dt><dd>Conflans chalk, soft enough for fine crocketing</dd>
+          <dt>Fee</dt><dd>xxxviij livres tournois &amp; six aunes of fustian</dd>
+        </dl>
+
+        <p class="technical-note"><strong>Technique —</strong> Crockets of the early curled-leaf type, not yet the writhing form coming into fashion. Cusping of the seat-heads is deeply undercut, that the shadow read clearly from the body of the church. The piscina drain is cut through a single block, set with a leaden pipe.</p>
+      </div>
+    </article>
+
+  </main>
+
+  <div class="divider" aria-hidden="true">
+    <span class="rule"></span>
+    <span class="leaf">
+      <svg viewBox="0 0 200 200"><path d="m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937" transform="translate(0 -852.36)" fill="#8b1538"/></svg>
+    </span>
+    <span class="rule"></span>
+  </div>
+
+</div>
+
+<footer class="colophon">
+  <div class="page" style="padding:0;">
+    <div class="arcade7" aria-hidden="true">
+      <div class="arch">✠</div>
+      <div class="arch">⚜</div>
+      <div class="arch">✠</div>
+      <div class="arch">⚜</div>
+      <div class="arch">✠</div>
+      <div class="arch">⚜</div>
+      <div class="arch">✠</div>
+    </div>
+
+    <div class="address">
+      The Lodge of Guillaume de Sens · Rue des Tanneurs, hard by the south porch of Saint-Étienne · Sens, in the Archdiocese of the same
+    </div>
+
+    <div class="colophon-line">
+      Scriptum atque ædificatum · Anno Domini MCCC · Pro gloria Dei et utilitate fabricæ
+    </div>
+
+    <div class="cross" aria-label="Cross flory">✠</div>
+  </div>
+</footer>
+
+</body>
+</html>

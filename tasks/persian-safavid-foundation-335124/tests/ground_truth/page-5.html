@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Grants & Fellowships — Apply</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  /* ---------- Base & tokens fallback ---------- */
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), "EB Garamond", Georgia, serif;
+    line-height: 1.65;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display), "Marcellus", serif;
+    font-weight: normal;
+    color: var(--primary);
+    letter-spacing: 0.02em;
+    margin: 0;
+  }
+  a { color: var(--primary); text-decoration: none; }
+
+  /* ---------- Header strip ---------- */
+  .top-strip {
+    background: var(--primary);
+    height: 14px;
+    width: 100%;
+  }
+  .header-band {
+    background: var(--bg);
+    padding: 22px 0 12px;
+    text-align: center;
+    border-bottom: 1px solid var(--accent);
+    border-top: 1px solid var(--accent);
+    position: relative;
+  }
+  .site-mark {
+    font-family: var(--font-display), serif;
+    font-size: 28px;
+    color: var(--primary);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .site-mark .accent { color: var(--text-emphasis); font-style: italic; text-transform: none; letter-spacing: 0.04em; font-size: 22px;}
+  .site-tag {
+    font-style: italic;
+    color: var(--text);
+    font-size: 14px;
+    margin-top: 6px;
+    letter-spacing: 0.05em;
+  }
+
+  /* ---------- Nav ---------- */
+  nav.primary {
+    background: var(--bg);
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+    padding: 14px 0;
+    text-align: center;
+  }
+  nav.primary ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    flex-wrap: wrap;
+  }
+  nav.primary li {
+    display: flex;
+    align-items: center;
+  }
+  nav.primary a {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 12px;
+    color: var(--primary);
+    padding: 4px 22px;
+    display: inline-block;
+    position: relative;
+  }
+  nav.primary a[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -6px;
+    width: 28px;
+    height: 2px;
+    background: var(--secondary);
+  }
+  nav.primary .palmette {
+    color: var(--accent);
+    font-size: 10px;
+    line-height: 1;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    background: var(--primary);
+    color: var(--bg);
+    text-align: center;
+    padding: 56px 20px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before, .hero::after {
+    content: "";
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 110px;
+    background-image:
+      repeating-linear-gradient(45deg, transparent 0 10px, rgba(201,162,58,0.18) 10px 11px),
+      repeating-linear-gradient(-45deg, transparent 0 10px, rgba(42,138,138,0.15) 10px 11px);
+    opacity: 0.7;
+  }
+  .hero::before { left: 0; border-right: 1px solid var(--accent); }
+  .hero::after  { right: 0; border-left: 1px solid var(--accent); }
+  .hero .eyebrow {
+    font-family: var(--font-display), serif;
+    color: var(--accent);
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    font-size: 13px;
+    margin-bottom: 14px;
+  }
+  .hero h1 {
+    color: var(--bg);
+    font-size: 48px;
+    line-height: 1.15;
+    margin-bottom: 14px;
+  }
+  .hero h1 em {
+    color: var(--accent);
+    font-style: italic;
+    font-size: 36px;
+  }
+  .hero .lede {
+    max-width: 720px;
+    margin: 0 auto;
+    font-size: 17px;
+    color: #f4ead4;
+    font-style: italic;
+  }
+  .hero-arch {
+    width: 280px;
+    height: auto;
+    margin: 22px auto 0;
+    display: block;
+  }
+  .hero-arch path { stroke: var(--accent); }
+
+  /* ---------- Divider ---------- */
+  .divider {
+    text-align: center;
+    padding: 28px 0 18px;
+  }
+  .divider svg {
+    width: 360px;
+    height: auto;
+    fill: var(--accent);
+  }
+
+  /* ---------- Container ---------- */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  /* ---------- Intro section ---------- */
+  .intro {
+    text-align: center;
+    padding: 8px 60px 36px;
+    max-width: 880px;
+    margin: 0 auto;
+  }
+  .intro h2 {
+    font-size: 30px;
+    color: var(--primary);
+    margin-bottom: 14px;
+  }
+  .intro p {
+    font-size: 16px;
+    color: var(--text);
+  }
+  .intro .text-emphasis { color: var(--text-emphasis); font-style: italic; }
+
+  /* ---------- Grant cards ---------- */
+  .grants-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    padding: 24px 0 48px;
+  }
+  .grant-card {
+    position: relative;
+    background: #fbf3df;
+    padding: 0;
+    text-align: center;
+  }
+  .arch-card {
+    position: relative;
+    padding: 90px 28px 38px;
+    border: 1px solid var(--accent);
+    background: #fbf3df;
+    overflow: hidden;
+  }
+  .arch-card::before {
+    /* spandrel girih hint */
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 90px;
+    background:
+      radial-gradient(circle at 0% 100%, transparent 84px, rgba(201,162,58,0.12) 85px),
+      radial-gradient(circle at 100% 100%, transparent 84px, rgba(201,162,58,0.12) 85px);
+    pointer-events: none;
+  }
+  .ogee-frame {
+    position: absolute;
+    top: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 78%;
+    height: 70%;
+    pointer-events: none;
+  }
+  .ogee-frame svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+  .grant-card h3 {
+    font-family: var(--font-display), serif;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--primary);
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+  .grant-card .award {
+    font-family: var(--font-display), serif;
+    color: var(--text-emphasis);
+    font-size: 22px;
+    margin: 6px 0 14px;
+    letter-spacing: 0.04em;
+  }
+  .grant-card p {
+    font-size: 14.5px;
+    color: var(--text);
+    margin: 0 0 12px;
+  }
+  .grant-card dl {
+    margin: 14px 0 18px;
+    font-size: 13px;
+    text-align: left;
+    border-top: 1px solid rgba(201,162,58,0.5);
+    border-bottom: 1px solid rgba(201,162,58,0.5);
+    padding: 10px 4px;
+  }
+  .grant-card dt {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 11px;
+    color: var(--secondary);
+    margin-top: 4px;
+  }
+  .grant-card dd {
+    margin: 2px 0 8px;
+    color: var(--text);
+  }
+  .star-seal {
+    width: 36px;
+    height: 36px;
+    margin: 8px auto 0;
+    display: block;
+    color: var(--secondary);
+  }
+
+  /* ---------- Panel section ---------- */
+  .panel {
+    background: #ebd9b5;
+    padding: 48px 0;
+    margin: 12px 0;
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+  }
+  .panel-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .panel h2 {
+    font-size: 26px;
+    margin-bottom: 12px;
+    color: var(--primary);
+  }
+  .panel h2 small {
+    display: block;
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--text-emphasis);
+    letter-spacing: normal;
+    margin-top: 4px;
+  }
+  .panel p {
+    font-size: 15.5px;
+  }
+  .panel ul.judges {
+    list-style: none;
+    padding: 0;
+    margin: 14px 0 0;
+    column-count: 2;
+    column-gap: 28px;
+    font-size: 14.5px;
+  }
+  .panel ul.judges li {
+    padding: 4px 0;
+    break-inside: avoid;
+  }
+  .panel ul.judges li::before {
+    content: "✦  ";
+    color: var(--accent);
+  }
+  .panel ul.judges .chair {
+    font-style: italic;
+    color: var(--text-emphasis);
+  }
+
+  /* ---------- Eligibility & Checklist ---------- */
+  .application {
+    padding: 56px 0 24px;
+  }
+  .application h2 {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 8px;
+  }
+  .application .sub {
+    text-align: center;
+    font-style: italic;
+    color: var(--text-emphasis);
+    margin-bottom: 36px;
+  }
+  .checklist {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--accent);
+    background: #fbf3df;
+  }
+  .checklist > div {
+    padding: 30px 36px 36px;
+  }
+  .checklist > div:first-child {
+    border-right: 1px solid var(--accent);
+  }
+  .checklist h3 {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 14px;
+    color: var(--primary);
+    text-align: center;
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--accent);
+  }
+  .checklist ol {
+    margin: 0;
+    padding: 0;
+    counter-reset: item;
+    list-style: none;
+  }
+  .checklist ol li {
+    counter-increment: item;
+    padding: 8px 0 8px 38px;
+    position: relative;
+    font-size: 14.5px;
+    border-bottom: 1px dotted rgba(201,162,58,0.5);
+  }
+  .checklist ol li:last-child { border-bottom: none; }
+  .checklist ol li::before {
+    content: counter(item, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 8px;
+    font-family: var(--font-display), serif;
+    color: var(--text-emphasis);
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    width: 28px;
+    text-align: right;
+  }
+  .checklist em.note {
+    display: block;
+    margin-top: 4px;
+    font-size: 12.5px;
+    color: var(--secondary);
+    font-style: italic;
+  }
+
+  /* ---------- Tailpiece ---------- */
+  .tailpiece {
+    text-align: center;
+    padding: 56px 0 64px;
+  }
+  .tailpiece-seal {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 16px;
+    color: var(--accent);
+  }
+  .tailpiece p {
+    font-style: italic;
+    color: var(--text-emphasis);
+    max-width: 560px;
+    margin: 0 auto;
+    font-size: 15px;
+  }
+  .tailpiece .small {
+    margin-top: 10px;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--primary);
+    font-style: normal;
+    font-family: var(--font-display), serif;
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    background: var(--primary);
+    color: #ecdcb6;
+    padding: 0 0 24px;
+    margin-top: 24px;
+    position: relative;
+  }
+  footer .filet {
+    height: 18px;
+    background:
+      repeating-linear-gradient(90deg,
+        transparent 0 8px,
+        rgba(242,229,204,0.55) 8px 9px,
+        transparent 9px 22px,
+        rgba(242,229,204,0.3) 22px 24px);
+    border-bottom: 1px solid var(--accent);
+  }
+  .footer-cols {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    max-width: 1080px;
+    margin: 40px auto 24px;
+    padding: 0 40px;
+    text-align: center;
+  }
+  .footer-cols h4 {
+    font-family: var(--font-display), serif;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 12px;
+    margin-bottom: 14px;
+  }
+  .footer-cols p {
+    font-size: 14px;
+    line-height: 1.7;
+    margin: 0;
+    color: #ecdcb6;
+  }
+  .foot-seal {
+    width: 44px;
+    height: 44px;
+    margin: 12px auto 8px;
+    display: block;
+    color: var(--accent);
+  }
+  .copyline {
+    text-align: center;
+    font-style: italic;
+    font-family: var(--font-body), serif;
+    font-size: 13px;
+    color: #d8c79f;
+    border-top: 1px solid rgba(201,162,58,0.35);
+    padding-top: 14px;
+    margin: 0 60px;
+  }
+
+  /* SVG inline helpers */
+  .icon { display:inline-block; vertical-align:middle; }
+</style>
+</head>
+<body>
+
+<div class="top-strip" aria-hidden="true"></div>
+
+<header class="header-band">
+  <div class="site-mark">The Bagh-e Fin Foundation <span class="accent">— for Persian Arts</span></div>
+  <div class="site-tag">Conservation of Safavid Tilework, Manuscripts &amp; Garden Architecture</div>
+</header>
+
+<nav class="primary" aria-label="Primary">
+  <ul>
+    <li><a href="page-1.html">Home</a></li>
+    <li class="palmette" aria-hidden="true">❖</li>
+    <li><a href="page-2.html">Mission &amp; History</a></li>
+    <li class="palmette" aria-hidden="true">❖</li>
+    <li><a href="page-3.html">Projects</a></li>
+    <li class="palmette" aria-hidden="true">❖</li>
+    <li><a href="page-4.html">Collection</a></li>
+    <li class="palmette" aria-hidden="true">❖</li>
+    <li><a href="page-5.html" aria-current="page">Grants &amp; Fellowships</a></li>
+    <li class="palmette" aria-hidden="true">❖</li>
+    <li><a href="page-6.html">Visit &amp; Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="eyebrow">Programmes Annual Cycle 1403 / 2024–25</div>
+  <h1>Grants &amp; Fellowships<br><em>for the Conservation of Safavid Arts</em></h1>
+  <p class="lede">Three competitive awards supporting tile conservators, manuscript scholars, and field researchers working within the dominions of the old Isfahan school.</p>
+
+  <svg class="hero-arch" viewBox="100 240 500 600" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <g transform="translate(8.199,-11.874)" fill="none" stroke="#c9a23a" stroke-width="3" stroke-linecap="round">
+      <path d="m 388.98,268.98 -57.34,98.85 c 0,0 -25.87,42.49 -83.14,62.82 -57.28,20.32 -100.76,86.77 -99.77,153.35 54.34,0.1 3.10,-0.1 62.47,0.25 0,0 -2.04,-66.40 63.17,-94.48 50.35,-21.68 83.14,-42.49 114.55,-88.68"/>
+      <path d="m 250,430.58 24.75,58.42"/>
+      <path d="m 347.03,342.46 41.58,23.76 0.99,35.64"/>
+      <path d="m 211.39,583.06 -1.49,211.88"/>
+    </g>
+    <g transform="matrix(-1,0,0,1,777.88,-0.30) translate(8.199,-11.874)" fill="none" stroke="#c9a23a" stroke-width="3" stroke-linecap="round">
+      <path d="m 388.98,268.98 -57.34,98.85 c 0,0 -25.87,42.49 -83.14,62.82 -57.28,20.32 -100.76,86.77 -99.77,153.35 54.34,0.1 3.10,-0.1 62.47,0.25 0,0 -2.04,-66.40 63.17,-94.48 50.35,-21.68 83.14,-42.49 114.55,-88.68"/>
+      <path d="m 250,430.58 24.75,58.42"/>
+      <path d="m 347.03,342.46 41.58,23.76 0.99,35.64"/>
+      <path d="m 211.39,583.06 -1.49,211.88"/>
+    </g>
+  </svg>
+</section>
+
+<div class="divider" aria-hidden="true">
+  <svg viewBox="0 0 438 19" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,9.4c0,0,37-0.1,74-0.8c18.5-0.4,37-1,50.8-1.8c6.9-0.4,12.7-0.9,16.7-1.5c2-0.3,3.5-0.6,4.5-0.9c0.5-0.1,0.8-0.3,1-0.4l0.4-0.3l0.7,0.7l-0.4,0.3c0,0-0.2,0.1-0.5,0.3c-0.3,0.2-0.7,0.3-1.3,0.5c-1.1,0.3-2.7,0.6-4.7,0.9c-4,0.5-9.8,1-16.7,1.4C111.1,8.7,74,9.4,74,9.4z"/>
+    <circle cx="169" cy="9.4" r="5" fill="none" stroke="currentColor" stroke-width="1.4"/>
+    <path d="M438,9.4c0,0-37,0.2-74-0.3c-18.5-0.3-37-0.7-50.9-1.4c-6.9-0.4-12.7-0.8-16.7-1.4c-2-0.3-3.6-0.6-4.7-0.9c-0.5-0.2-1-0.3-1.3-0.5c-0.3-0.2-0.5-0.3-0.5-0.3l-0.4-0.3l0.7-0.7l0.4,0.3c0,0,0.1,0.1,0.2,0.2c0.2,0.1,0.5,0.3,1,0.4c1,0.3,2.5,0.6,4.5,0.9c4,0.6,9.7,1,16.7,1.5c13.8,0.7,32.4,1.3,50.9,1.8C401,9.4,438,9.4,438,9.4z"/>
+    <circle cx="269" cy="9.4" r="5" fill="none" stroke="currentColor" stroke-width="1.4"/>
+    <path d="M219,5c-15-2-23,4-23,4.4c0,0.4,8,6.4,23,4.4c15,2,23-4,23-4.4C242,9,234,3,219,5z M219,12.5c-1.7,0-3.1-1.4-3.1-3.1s1.4-3.1,3.1-3.1s3.1,1.4,3.1,3.1S220.7,12.5,219,12.5z"/>
+  </svg>
+</div>
+
+<section class="intro container">
+  <h2>An Endowment in Service of the Persian Arts</h2>
+  <p>Since 1998 the Foundation has administered three annual programmes intended to renew the disciplines of Safavid material conservation. Awards are conferred by an independent jury and disbursed through the Trustees' office in Isfahan. <span class="text-emphasis">All applications for the 1403 cycle must be received not later than 30 November.</span></p>
+</section>
+
+<div class="container">
+<div class="grants-row">
+
+  <!-- GRANT 1 -->
+  <article class="grant-card">
+    <div class="arch-card">
+      <svg class="ogee-frame" viewBox="100 240 500 600" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <g fill="none" stroke="#1e3a5f" stroke-width="6" stroke-linecap="round">
+          <path d="m 397.18,257.11 -57.34,98.85 c 0,0 -25.87,42.49 -83.14,62.82 -57.28,20.32 -100.76,86.77 -99.77,153.35"/>
+          <path d="m 397.18,257.11 57.34,98.85 c 0,0 25.87,42.49 83.14,62.82 57.28,20.32 100.76,86.77 99.77,153.35"/>
+        </g>
+        <g fill="none" stroke="#c9a23a" stroke-width="2">
+          <path d="m 397.18,272.11 -50,86 c 0,0 -23,38 -75,57 -52,18 -91,78 -90,138"/>
+          <path d="m 397.18,272.11 50,86 c 0,0 23,38 75,57 52,18 91,78 90,138"/>
+        </g>
+      </svg>
+
+      <h3>The Sotoudeh Fellowship</h3>
+      <div class="award">€18,000</div>
+      <p>For early-career tile conservators undertaking a twelve-month residency on a Safavid-era haft-rang or kāshī-i muʿarraq programme. Two fellowships awarded annually.</p>
+      <dl>
+        <dt>Eligibility</dt>
+        <dd>Practitioners ≤ 7 years post-qualification</dd>
+        <dt>Term</dt>
+        <dd>1 March 1403 – 28 February 1404</dd>
+        <dt>Deadline</dt>
+        <dd>30 November (postmark)</dd>
+        <dt>Host sites</dt>
+        <dd>Masjid-i Shaykh Lutfullah · Imamzadeh Harun-i Vilayat</dd>
+      </dl>
+
+      <svg class="star-seal" viewBox="0 0 100 100" aria-hidden="true">
+        <g fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="50,8 60,40 92,40 66,58 76,90 50,72 24,90 34,58 8,40 40,40"/>
+          <circle cx="50" cy="50" r="10"/>
+        </g>
+      </svg>
+    </div>
+  </article>
+
+  <!-- GRANT 2 -->
+  <article class="grant-card">
+    <div class="arch-card">
+      <svg class="ogee-frame" viewBox="100 240 500 600" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <g fill="none" stroke="#1e3a5f" stroke-width="6" stroke-linecap="round">
+          <path d="m 397.18,257.11 -57.34,98.85 c 0,0 -25.87,42.49 -83.14,62.82 -57.28,20.32 -100.76,86.77 -99.77,153.35"/>
+          <path d="m 397.18,257.11 57.34,98.85 c 0,0 25.87,42.49 83.14,62.82 57.28,20.32 100.76,86.77 99.77,153.35"/>
+        </g>
+        <g fill="none" stroke="#c9a23a" stroke-width="2">
+          <path d="m 397.18,272.11 -50,86 c 0,0 -23,38 -75,57 -52,18 -91,78 -90,138"/>
+          <path d="m 397.18,272.11 50,86 c 0,0 23,38 75,57 52,18 91,78 90,138"/>
+        </g>
+      </svg>
+
+      <h3>The Whitcombe–Pirzad Manuscript Travel Award</h3>
+      <div class="award">€7,500</div>
+      <p>Awarded to scholars consulting illuminated manuscripts of the Isfahan and Qazvin schools held in libraries of Tehran, Mashhad, Dublin, and Istanbul. Five awards annually.</p>
+      <dl>
+        <dt>Eligibility</dt>
+        <dd>Doctoral candidates &amp; independent scholars</dd>
+        <dt>Disciplines</dt>
+        <dd>Codicology · paleography · pigment analysis</dd>
+        <dt>Deadline</dt>
+        <dd>30 November</dd>
+        <dt>Notification</dt>
+        <dd>15 February (each cycle)</dd>
+      </dl>
+
+      <svg class="star-seal" viewBox="0 0 100 100" aria-hidden="true">
+        <g fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="50,8 60,40 92,40 66,58 76,90 50,72 24,90 34,58 8,40 40,40"/>
+          <circle cx="50" cy="50" r="10"/>
+        </g>
+      </svg>
+    </div>
+  </article>
+
+  <!-- GRANT 3 -->
+  <article class="grant-card">
+    <div class="arch-card">
+      <svg class="ogee-frame" viewBox="100 240 500 600" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <g fill="none" stroke="#1e3a5f" stroke-width="6" stroke-linecap="round">
+          <path d="m 397.18,257.11 -57.34,98.85 c 0,0 -25.87,42.49 -83.14,62.82 -57.28,20.32 -100.76,86.77 -99.77,153.35"/>
+          <path d="m 397.18,257.11 57.34,98.85 c 0,0 25.87,42.49 83.14,62.82 57.28,20.32 100.76,86.77 99.77,153.35"/>
+        </g>
+        <g fill="none" stroke="#c9a23a" stroke-width="2">
+          <path d="m 397.18,272.11 -50,86 c 0,0 -23,38 -75,57 -52,18 -91,78 -90,138"/>
+          <path d="m 397.18,272.11 50,86 c 0,0 23,38 75,57 52,18 91,78 90,138"/>
+        </g>
+      </svg>
+
+      <h3>The Maidan Field Grant</h3>
+      <div class="award">€12,000</div>
+      <p>For site-based research and survey work in Isfahan province — courtyards, qanats, garden pavilions, and the Chaharbāgh corridor. Three grants annually, including stipend &amp; travel.</p>
+      <dl>
+        <dt>Eligibility</dt>
+        <dd>Architectural historians · landscape archaeologists</dd>
+        <dt>Term</dt>
+        <dd>Up to 9 months in country</dd>
+        <dt>Deadline</dt>
+        <dd>30 November</dd>
+        <dt>Co-funded with</dt>
+        <dd>Isfahan Cultural Heritage Office</dd>
+      </dl>
+
+      <svg class="star-seal" viewBox="0 0 100 100" aria-hidden="true">
+        <g fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="50,8 60,40 92,40 66,58 76,90 50,72 24,90 34,58 8,40 40,40"/>
+          <circle cx="50" cy="50" r="10"/>
+        </g>
+      </svg>
+    </div>
+  </article>
+
+</div>
+</div>
+
+<section class="panel">
+  <div class="panel-inner">
+    <div>
+      <h2>The Judging Panel
+        <small>Chaired by Prof. Layla Mostofi, Tehran University</small>
+      </h2>
+      <p>The independent jury convenes each January at the Foundation's office on the Chaharbāgh-e Bālā. All decisions are final; the Trustees do not enter into correspondence concerning unsuccessful applications. Members serve in rotating three-year terms.</p>
+    </div>
+    <div>
+      <ul class="judges">
+        <li class="chair">Prof. Layla Mostofi — Chair, Tehran University</li>
+        <li>Dr Henrik Whitcombe — Trinity College Dublin</li>
+        <li>Engineer Bahman Yazdani — ICHHTO, Isfahan</li>
+        <li>Dr Sima Pirzad — Sotheby's Institute, London</li>
+        <li>Ust. Reza Naqqash-Bashi — Master tilelayer, Kashan</li>
+        <li>Dr Maryam Sotoudeh — Foundation Trustee</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="application container">
+  <h2>Application Checklist</h2>
+  <p class="sub">All materials in PDF, in English or Persian, posted or e-mailed to the Trustees by 30 November.</p>
+
+  <div class="checklist">
+    <div>
+      <h3>Required Documents</h3>
+      <ol>
+        <li>Letter of intention, ≤ 1,200 words, signed.<em class="note">addressed to the Secretary, Bagh-e Fin Foundation</em></li>
+        <li>Curriculum vitae with full dates of training and posts held.</li>
+        <li>Two letters of reference from senior practitioners or supervisors.</li>
+        <li>Project outline (max. 8 pages) with methodology and timetable.</li>
+        <li>Detailed budget itemised in Euros, including indirect costs.</li>
+        <li>Copy of academic credentials or guild certification.</li>
+      </ol>
+    </div>
+    <div>
+      <h3>Supplementary Materials</h3>
+      <ol>
+        <li>Portfolio of recent conservation work (10–15 plates).<em class="note">Sotoudeh Fellowship applicants only</em></li>
+        <li>List of manuscripts to be consulted, with shelfmarks.<em class="note">Whitcombe–Pirzad Award applicants only</em></li>
+        <li>Letter of permission from site authority or library.</li>
+        <li>Statement on ethical handling and reproduction rights.</li>
+        <li>Plan for dissemination — lecture, paper, or report.</li>
+        <li>Signed declaration of no conflicting funding above 30%.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="tailpiece">
+  <svg class="tailpiece-seal" viewBox="0 0 100 100" aria-hidden="true">
+    <g fill="none" stroke="currentColor" stroke-width="1.6">
+      <polygon points="50,4 58,28 82,18 72,42 96,50 72,58 82,82 58,72 50,96 42,72 18,82 28,58 4,50 28,42 18,18 42,28"/>
+      <polygon points="50,20 60,40 82,42 66,57 72,80 50,68 28,80 34,57 18,42 40,40"/>
+      <circle cx="50" cy="50" r="6"/>
+    </g>
+  </svg>
+  <p>Inquiries should be directed to the Secretary's office. The Foundation regrets that, owing to the volume of submissions, individual feedback cannot be furnished.</p>
+  <div class="small">— finis —</div>
+</section>
+
+<footer>
+  <div class="filet" aria-hidden="true"></div>
+  <div class="footer-cols">
+    <div>
+      <h4>Foundation Office</h4>
+      <p>The Bagh-e Fin Foundation<br>
+      No. 14, Khiābān-e Chaharbāgh-e Bālā<br>
+      Isfahan 81746, Islamic Republic of Iran<br>
+      <em>+98 31 3622 4180</em></p>
+    </div>
+    <div>
+      <h4>Trustees</h4>
+      <p>Dr Maryam Sotoudeh, Chair<br>
+      Sir Edmund Whitcombe, FBA<br>
+      Prof. Layla Mostofi · Engineer B. Yazdani<br>
+      Hojjat al-Eslam M. Naqqash-Bashi</p>
+    </div>
+    <div>
+      <h4>Endowment Notice</h4>
+      <p>The Foundation is a registered private endowment under the laws of the Islamic Republic of Iran. All grants are disbursed from the Sotoudeh-Pirzad Trust, est. 1998. No public solicitation is undertaken.</p>
+    </div>
+  </div>
+
+  <svg class="foot-seal" viewBox="0 0 100 100" aria-hidden="true">
+    <g fill="none" stroke="currentColor" stroke-width="1.8">
+      <polygon points="50,8 60,40 92,40 66,58 76,90 50,72 24,90 34,58 8,40 40,40"/>
+      <circle cx="50" cy="50" r="9"/>
+    </g>
+  </svg>
+
+  <div class="copyline">
+    <em>© 1403 / 2024 The Bagh-e Fin Foundation for Persian Arts · Isfahan · All rights reserved</em>
+  </div>
+</footer>
+
+</body>
+</html>

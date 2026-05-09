@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Visit — Hours, Tickets & Access · Museo Aureliano</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Inter, sans-serif;
+    margin: 0;
+    line-height: 1.65;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* ---------- NAV ---------- */
+  .topbar { background: var(--bg); }
+  .topbar-rule {
+    height: 1px;
+    background: var(--secondary);
+    margin: 0 80px;
+  }
+  .nav-inner {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 28px 80px 18px;
+    gap: 40px;
+  }
+  .nav-left, .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    font-family: var(--font-body);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .nav-left { justify-content: flex-end; }
+  .nav-right { justify-content: flex-start; }
+  .nav-inner a {
+    color: var(--text);
+    padding: 4px 0;
+  }
+  .nav-inner a[aria-current="page"] {
+    border-bottom: 2px solid var(--accent);
+    color: var(--accent);
+  }
+  .vine {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    opacity: 0.6;
+    vertical-align: middle;
+  }
+  .wordmark {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .meander-strip {
+    height: 28px;
+    background-image: url("svg/meander-greek-key.svg");
+    background-repeat: repeat-x;
+    background-size: auto 28px;
+    background-position: center;
+    margin: 12px 0 0;
+    opacity: 0.92;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    position: relative;
+    padding: 90px 80px 70px;
+    text-align: center;
+  }
+  .pediment {
+    width: 720px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .pediment-triangle {
+    width: 100%;
+    height: 70px;
+    display: block;
+  }
+  .hero-frame {
+    border-left: 1px solid var(--ornament);
+    border-right: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+    padding: 50px 60px 60px;
+    position: relative;
+    background: var(--surface);
+  }
+  .hero-frame::before {
+    content: "";
+    position: absolute;
+    inset: 8px 8px 8px 8px;
+    border: 1px solid var(--secondary);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-body);
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 18px;
+  }
+  .hero h1 {
+    font-family: var(--font-display), serif;
+    font-size: 54px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin: 0 0 18px;
+    line-height: 1.1;
+    font-weight: 400;
+  }
+  .hero-sub {
+    font-style: italic;
+    font-size: 15px;
+    max-width: 520px;
+    margin: 0 auto 30px;
+    color: #2a2a2a;
+  }
+  .hero-wreath {
+    width: 220px;
+    height: 200px;
+    margin: 10px auto 0;
+    display: block;
+  }
+  .hero-wreath-wrap {
+    position: relative;
+    margin-top: -40px;
+  }
+  .hero-date {
+    color: var(--text-emphasis);
+    font-family: var(--font-display);
+    letter-spacing: 0.3em;
+    font-size: 13px;
+    margin-top: 14px;
+  }
+
+  /* ---------- DIVIDER ---------- */
+  .divider {
+    height: 22px;
+    background-image: url("svg/meander-greek-key.svg");
+    background-repeat: repeat-x;
+    background-size: auto 22px;
+    background-position: center;
+    margin: 30px 80px;
+    opacity: 0.9;
+  }
+
+  /* ---------- SECTION TITLES ---------- */
+  .section-title {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-size: 26px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    margin: 0 0 8px;
+    font-weight: 400;
+  }
+  .laurel-sprig {
+    display: block;
+    width: 80px;
+    height: 1px;
+    background: var(--ornament);
+    position: relative;
+    margin: 14px auto 30px;
+  }
+  .laurel-sprig::before, .laurel-sprig::after {
+    content: "";
+    position: absolute;
+    top: -2px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--secondary);
+  }
+  .laurel-sprig::before { left: -2px; }
+  .laurel-sprig::after { right: -2px; }
+
+  /* ---------- CARDS GRID ---------- */
+  .grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    padding: 0 80px;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--ornament);
+    padding: 36px 30px 32px;
+    position: relative;
+    text-align: center;
+  }
+  .card::before {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border: 4px solid transparent;
+    border-top: 1px solid var(--secondary);
+    border-bottom: 1px solid var(--secondary);
+    border-left: 1px solid var(--secondary);
+    border-right: 1px solid var(--secondary);
+    pointer-events: none;
+  }
+  .card h3 {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 16px;
+    font-weight: 400;
+    margin: 0 0 10px;
+  }
+  .card .sprig {
+    width: 50px;
+    height: 1px;
+    background: var(--ornament);
+    margin: 8px auto 18px;
+    position: relative;
+  }
+  .card .sprig::before, .card .sprig::after {
+    content: "";
+    position: absolute;
+    top: -1.5px;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--secondary);
+  }
+  .card .sprig::before { left: -1px; }
+  .card .sprig::after { right: -1px; }
+  .card p, .card dl {
+    font-size: 14px;
+    margin: 0;
+    text-align: left;
+  }
+  .card dl {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 6px 16px;
+  }
+  .card dt {
+    font-family: var(--font-body);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 11px;
+    color: #555;
+    align-self: center;
+  }
+  .card dd {
+    margin: 0;
+    font-size: 14px;
+  }
+  .card dd strong {
+    font-weight: 600;
+  }
+  .closed {
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 11px;
+  }
+  .price {
+    font-family: var(--font-display);
+    font-size: 22px;
+    color: var(--text);
+    letter-spacing: 0.05em;
+  }
+  .ticket-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 8px 0;
+    border-bottom: 1px dotted #b8ad95;
+  }
+  .ticket-row:last-child { border-bottom: 0; }
+  .ticket-row .label {
+    font-size: 13px;
+  }
+  .ticket-row .members {
+    color: var(--text-emphasis);
+    font-style: italic;
+    font-size: 13px;
+  }
+
+  /* ---------- INSCRIPTION QUOTE ---------- */
+  .inscription {
+    text-align: center;
+    margin: 60px auto 20px;
+    max-width: 760px;
+    padding: 0 80px;
+  }
+  .inscription blockquote {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    line-height: 1.5;
+    margin: 0;
+    font-weight: 400;
+  }
+  .inscription cite {
+    display: block;
+    margin-top: 14px;
+    font-style: normal;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  /* ---------- ACCESS / VISIT TABLE ---------- */
+  .access-block {
+    padding: 0 80px;
+    margin: 40px 0 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+  }
+  .access-block h2 {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 0.24em;
+    font-size: 20px;
+    font-weight: 400;
+    margin: 0 0 18px;
+  }
+  .access-block p, .access-block li {
+    font-size: 14px;
+  }
+  .access-block ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .access-block li {
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(26,26,26,0.12);
+  }
+  .access-block li:last-child { border: 0; }
+  .access-block .meta {
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 10.5px;
+    color: #555;
+    display: inline-block;
+    width: 130px;
+  }
+  .address-line {
+    font-family: var(--font-display);
+    font-size: 17px;
+    letter-spacing: 0.08em;
+    margin: 0 0 6px;
+  }
+
+  /* ---------- BEFORE-YOU-VISIT NOTE ---------- */
+  .note-band {
+    text-align: center;
+    padding: 36px 120px;
+    border-top: 1px solid var(--secondary);
+    border-bottom: 1px solid var(--secondary);
+    margin: 0 80px;
+    font-style: italic;
+    color: #2a2a2a;
+    font-size: 14px;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    margin-top: 70px;
+  }
+  .footer-meander {
+    height: 28px;
+    background-image: url("svg/meander-greek-key.svg");
+    background-repeat: repeat-x;
+    background-size: auto 28px;
+    background-position: center;
+  }
+  .footer-cols {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 50px 80px 24px;
+    gap: 60px;
+    text-align: center;
+  }
+  .footer-cols h4 {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    font-size: 12px;
+    margin: 0 0 14px;
+    font-weight: 400;
+  }
+  .footer-cols p, .footer-cols a {
+    font-size: 12px;
+    line-height: 1.8;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text);
+    margin: 0;
+  }
+  .tailpiece {
+    text-align: center;
+    font-family: var(--font-display);
+    font-size: 26px;
+    letter-spacing: 0.6em;
+    color: var(--ornament);
+    padding: 0 0 8px;
+  }
+  .founding {
+    text-align: center;
+    color: var(--text-emphasis);
+    font-family: var(--font-display);
+    letter-spacing: 0.28em;
+    font-size: 11px;
+    padding: 0 0 36px;
+  }
+
+  /* utility */
+  .center { text-align: center; }
+</style>
+</head>
+<body>
+
+<!-- ============== NAV ============== -->
+<header class="topbar">
+  <div class="topbar-rule"></div>
+  <nav class="nav-inner" aria-label="Primary">
+    <div class="nav-left">
+      <a href="page-1.html">Home</a>
+      <svg class="vine" viewBox="0 0 200 200" aria-hidden="true"><use href="#vine"/></svg>
+      <a href="page-2.html">Collection</a>
+      <svg class="vine" viewBox="0 0 200 200" aria-hidden="true"><use href="#vine"/></svg>
+      <a href="page-3.html">Exhibition</a>
+    </div>
+    <div class="wordmark">MVSEO·AVRELIANO</div>
+    <div class="nav-right">
+      <a href="page-4.html" aria-current="page">Visit</a>
+      <svg class="vine" viewBox="0 0 200 200" aria-hidden="true"><use href="#vine"/></svg>
+      <a href="page-5.html">History</a>
+      <svg class="vine" viewBox="0 0 200 200" aria-hidden="true"><use href="#vine"/></svg>
+      <a href="page-6.html">Scholarship</a>
+    </div>
+  </nav>
+  <div class="meander-strip" aria-hidden="true"></div>
+</header>
+
+<!-- inline vine symbol for re-use -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="vine" viewBox="0 0 200 200">
+    <path d="M43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937z" transform="translate(0 -852.36)" fill="currentColor"/>
+  </symbol>
+</svg>
+
+<!-- ============== HERO ============== -->
+<section class="hero">
+  <div class="pediment">
+    <svg class="pediment-triangle" viewBox="0 0 720 70" preserveAspectRatio="none" aria-hidden="true">
+      <polygon points="0,70 360,4 720,70" fill="none" stroke="#1a1a1a" stroke-width="1"/>
+      <polygon points="14,68 360,16 706,68" fill="none" stroke="#c9a23a" stroke-width="1"/>
+      <circle cx="360" cy="40" r="5" fill="#a93226"/>
+    </svg>
+    <div class="hero-frame">
+      <div class="hero-eyebrow">Pateat Omnibus · Open to All</div>
+      <h1>Visit the Museum</h1>
+      <p class="hero-sub">Hours, admission, and access to the converted travertine basilica on the Aventine — where the inscriptions, marbles, and civic life of Imperial Rome are kept in the public trust.</p>
+      <div class="hero-wreath-wrap">
+        <svg class="hero-wreath" viewBox="0 0 323.75 295.79" aria-hidden="true">
+          <g transform="translate(-64.08 20.56)" fill="none" stroke="#1a1a1a" stroke-width="1.2">
+            <ellipse cx="225" cy="125" rx="135" ry="120"/>
+            <path d="M120,30 Q90,90 95,160 Q105,220 145,260" stroke-width="1.5"/>
+            <path d="M330,30 Q360,90 355,160 Q345,220 305,260" stroke-width="1.5"/>
+            <g stroke="#c9a23a">
+              <ellipse cx="110" cy="80" rx="14" ry="5" transform="rotate(-40 110 80)"/>
+              <ellipse cx="100" cy="130" rx="14" ry="5" transform="rotate(-15 100 130)"/>
+              <ellipse cx="108" cy="180" rx="14" ry="5" transform="rotate(20 108 180)"/>
+              <ellipse cx="135" cy="230" rx="14" ry="5" transform="rotate(50 135 230)"/>
+              <ellipse cx="340" cy="80" rx="14" ry="5" transform="rotate(40 340 80)"/>
+              <ellipse cx="350" cy="130" rx="14" ry="5" transform="rotate(15 350 130)"/>
+              <ellipse cx="342" cy="180" rx="14" ry="5" transform="rotate(-20 342 180)"/>
+              <ellipse cx="315" cy="230" rx="14" ry="5" transform="rotate(-50 315 230)"/>
+            </g>
+            <g fill="#a93226" stroke="none">
+              <circle cx="225" cy="265" r="4"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <div class="hero-date">A·D·MMXXV</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider" aria-hidden="true"></div>
+
+<!-- ============== HOURS · TICKETS · ACCESS ============== -->
+<section>
+  <h2 class="section-title">Hours, Admission &amp; Access</h2>
+  <span class="laurel-sprig" aria-hidden="true"></span>
+
+  <div class="grid-3">
+
+    <!-- HOURS -->
+    <article class="card">
+      <h3>Hours</h3>
+      <span class="sprig" aria-hidden="true"></span>
+      <dl>
+        <dt>Tue – Sun</dt><dd><strong>09:30 – 18:00</strong></dd>
+        <dt>Last Entry</dt><dd>17:15</dd>
+        <dt>Monday</dt><dd class="closed">Closed</dd>
+        <dt>1 January</dt><dd class="closed">Closed</dd>
+        <dt>Late Night</dt><dd>First Friday, until 21:00</dd>
+      </dl>
+      <p style="margin-top:18px; font-size:12px; color:#555; text-align:center;">Galleries clear fifteen minutes before closing.</p>
+    </article>
+
+    <!-- TICKETS -->
+    <article class="card">
+      <h3>Admission</h3>
+      <span class="sprig" aria-hidden="true"></span>
+      <div>
+        <div class="ticket-row">
+          <span class="label">General</span>
+          <span class="price">€14</span>
+        </div>
+        <div class="ticket-row">
+          <span class="label">Reduced<br><small style="color:#666;">students, over-65, EU residents</small></span>
+          <span class="price">€9</span>
+        </div>
+        <div class="ticket-row">
+          <span class="label">Under 18</span>
+          <span class="price">Free</span>
+        </div>
+        <div class="ticket-row">
+          <span class="label members">Aureliano Members</span>
+          <span class="price" style="color:var(--text-emphasis);">—</span>
+        </div>
+      </div>
+      <p style="margin-top:14px; font-size:11.5px; color:#555; text-align:center; letter-spacing:0.08em; text-transform:uppercase;">Members enter without charge</p>
+    </article>
+
+    <!-- ACCESS -->
+    <article class="card">
+      <h3>Access</h3>
+      <span class="sprig" aria-hidden="true"></span>
+      <dl>
+        <dt>Step-free</dt><dd>Full access via the Clivo dei Publicii entrance</dd>
+        <dt>Lift</dt><dd>To all four gallery levels</dd>
+        <dt>Seating</dt><dd>In every hall and courtyard</dd>
+        <dt>Companions</dt><dd>Free admission for one carer</dd>
+        <dt>Service Dogs</dt><dd>Welcome throughout</dd>
+      </dl>
+    </article>
+  </div>
+</section>
+
+<!-- ============== INSCRIPTION ============== -->
+<section class="inscription">
+  <blockquote>
+    “Patet · Cunctis · Aedes · Memoriae<br>
+    Annis · Saeculisque · Servanda”
+  </blockquote>
+  <cite>Founders’ inscription · entrance lintel · MMVII</cite>
+</section>
+
+<div class="divider" aria-hidden="true"></div>
+
+<!-- ============== ADDRESS / GETTING HERE ============== -->
+<section class="access-block">
+  <div>
+    <h2>Finding the Museum</h2>
+    <p class="address-line">Via di Santa Sabina, 27</p>
+    <p class="address-line">00153 · Roma</p>
+    <p style="margin-top:14px;">The Museo occupies a sixth-century basilica converted in 2007, set within the cypress gardens of the Aventine. The principal façade faces the Tiber; the step-free Clivo dei Publicii entrance lies on the southern flank.</p>
+    <p style="margin-top:18px; font-size:12px; letter-spacing:0.16em; text-transform:uppercase; color:#555;">Telephone · +39 06 4555 0127</p>
+    <p style="font-size:12px; letter-spacing:0.16em; text-transform:uppercase; color:#555;">visit@museoaureliano.it</p>
+  </div>
+  <div>
+    <h2>Arriving</h2>
+    <ul>
+      <li><span class="meta">Metro</span> Circo Massimo · Line B · 7 min walk</li>
+      <li><span class="meta">Bus</span> Lines 75, 175, 280 · Aventino stop</li>
+      <li><span class="meta">Tram</span> Line 3 · Piramide</li>
+      <li><span class="meta">By Foot</span> 12 min from Bocca della Verità</li>
+      <li><span class="meta">Cycle</span> Racks at the Clivo gate</li>
+      <li><span class="meta">Parking</span> Limited; accessible bays on Via di Santa Sabina</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============== NOTE BAND ============== -->
+<div class="note-band">
+  Tickets timed at thirty-minute intervals; we recommend booking three days in advance for weekend visits.<br>
+  Cloakroom and audio guides (Italian, English, Latin) are included with admission.
+</div>
+
+<!-- ============== FOOTER ============== -->
+<footer>
+  <div class="footer-meander" aria-hidden="true"></div>
+  <div class="footer-cols">
+    <div>
+      <h4>Visit</h4>
+      <p>Via di Santa Sabina 27</p>
+      <p>00153 · Roma</p>
+      <p>Tue – Sun · 09:30 – 18:00</p>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <p>+39 06 4555 0127</p>
+      <p>visit@museoaureliano.it</p>
+      <p><a href="page-6.html">Press &amp; Scholarship</a></p>
+    </div>
+    <div>
+      <h4>Credits</h4>
+      <p><a href="page-5.html">History of the Museum</a></p>
+      <p><a href="page-2.html">Permanent Collection</a></p>
+      <p><a href="page-3.html">Current Exhibition</a></p>
+    </div>
+  </div>
+  <div class="tailpiece" aria-hidden="true">· ❦ ·</div>
+  <div class="founding">FUNDATUM · ANNO · MMVII</div>
+</footer>
+
+</body>
+</html>

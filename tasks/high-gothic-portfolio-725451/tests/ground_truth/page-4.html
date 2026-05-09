@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Of Method — Pot-Metal, Grisaille, and the Lead Came</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Garamond, serif;
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  /* --- Diaper background pattern --- */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 600 600'><g transform='translate(300,300)scale(0.87)rotate(45)' fill='%231e3a5f' fill-opacity='0.05'><circle cx='-195.16' r='163'/><circle cx='195.16' r='163'/><circle cy='195.16' r='163'/><circle cy='-195.16' r='163'/><rect x='-232' y='-232' width='464' height='464'/><g fill='%23f4ecd8'><circle cx='-195.16' r='157'/><circle cx='195.16' r='157'/><circle cy='195.16' r='157'/><circle cy='-195.16' r='157'/><rect x='-226' y='-226' width='452' height='452'/></g><circle cx='-195.16' r='144'/><circle cx='195.16' r='144'/><circle cy='195.16' r='144'/><circle cy='-195.16' r='144'/><rect x='-213' y='-213' width='426' height='426'/><g fill='%23f4ecd8'><circle cx='-195.16' r='138'/><circle cx='195.16' r='138'/><circle cy='195.16' r='138'/><circle cy='-195.16' r='138'/><rect x='-207' y='-207' width='414' height='414'/></g></g></svg>");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page { position: relative; z-index: 1; }
+
+  /* --- Masthead --- */
+  .masthead {
+    text-align: center;
+    padding: 2.5em 1em 0.5em;
+    border-bottom: 1px solid var(--ornament);
+    background: linear-gradient(to bottom, var(--bg), transparent);
+  }
+  .wordmark {
+    font-family: var(--font-display), serif;
+    font-size: 3.4em;
+    color: var(--ornament);
+    margin: 0;
+    letter-spacing: 0.02em;
+    line-height: 1;
+  }
+  .wordmark .amp { color: var(--secondary); }
+  .sub-mark {
+    font-variant: small-caps;
+    letter-spacing: 0.4em;
+    font-size: 0.85em;
+    color: var(--text);
+    margin-top: 0.6em;
+    margin-bottom: 1em;
+  }
+  .sub-mark .ornm {
+    color: var(--accent);
+    margin: 0 1em;
+    font-size: 1.3em;
+  }
+
+  /* --- Arcade Navigation --- */
+  nav.arcade {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    padding: 0 2em 0.5em;
+    border-bottom: 2px solid var(--primary);
+  }
+  nav.arcade a {
+    position: relative;
+    width: 9.5em;
+    height: 5em;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 0.6em;
+    font-variant: small-caps;
+    font-size: 0.78em;
+    letter-spacing: 0.18em;
+    color: var(--text);
+    text-decoration: none;
+    border-left: 1px solid var(--ornament);
+  }
+  nav.arcade a:last-child { border-right: 1px solid var(--ornament); }
+  nav.arcade a::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 100% 90% at 50% 100%, transparent 62%, var(--bg) 63%),
+      linear-gradient(to bottom, transparent 0, transparent 100%);
+    pointer-events: none;
+  }
+  nav.arcade a::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 88%;
+    height: 90%;
+    transform: translateX(-50%);
+    border: 1px solid var(--ornament);
+    border-bottom: none;
+    border-radius: 50% 50% 0 0 / 80% 80% 0 0;
+    pointer-events: none;
+  }
+  nav.arcade a[aria-current="page"] {
+    color: var(--accent);
+    background:
+      radial-gradient(ellipse 88% 90% at 50% 100%, var(--primary) 78%, transparent 79%);
+  }
+  nav.arcade a[aria-current="page"]::after {
+    border-color: var(--accent);
+    border-width: 1.5px;
+  }
+
+  /* --- Page Title Block --- */
+  .page-title {
+    text-align: center;
+    padding: 2.5em 2em 1.5em;
+    position: relative;
+  }
+  .page-title h1 {
+    font-family: var(--font-display), serif;
+    font-size: 3.6em;
+    color: var(--primary);
+    margin: 0.2em 0;
+    line-height: 1.05;
+    font-weight: normal;
+  }
+  .page-title .latin {
+    font-variant: small-caps;
+    letter-spacing: 0.35em;
+    color: var(--secondary);
+    font-size: 0.85em;
+  }
+  .page-title .colophon {
+    font-style: italic;
+    color: var(--text);
+    margin-top: 1em;
+    font-size: 0.95em;
+  }
+  .seal-mark {
+    width: 60px;
+    height: 60px;
+    margin: 1em auto;
+    display: block;
+  }
+  .seal-mark svg { width: 100%; height: 100%; fill: var(--accent); }
+
+  /* --- Two-column manuscript layout --- */
+  .manuscript {
+    max-width: 44em;
+    margin: 0 auto;
+    padding: 2em 2em 3em;
+    position: relative;
+  }
+
+  .frontispiece {
+    text-align: center;
+    border-top: 1.5px solid var(--ornament);
+    border-bottom: 1.5px solid var(--ornament);
+    padding: 1.5em 2em;
+    margin-bottom: 2.5em;
+    color: var(--text);
+    font-style: italic;
+    font-size: 1.05em;
+  }
+  .frontispiece::before, .frontispiece::after {
+    content: "✦";
+    color: var(--accent);
+    margin: 0 1em;
+    font-style: normal;
+  }
+
+  .columns {
+    column-count: 2;
+    column-gap: 3em;
+    column-rule: 1px solid var(--primary);
+    column-fill: balance;
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  .columns p {
+    margin: 0 0 0.9em;
+    text-indent: 1.4em;
+  }
+  .columns p:first-of-type { text-indent: 0; }
+
+  .section-head {
+    break-before: column;
+    break-after: avoid;
+    text-align: center;
+    margin: 0 0 1em;
+    font-family: var(--font-display), serif;
+    font-size: 1.5em;
+    color: var(--secondary);
+    font-weight: normal;
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+  }
+  .section-head:first-child { break-before: auto; }
+  .section-head .num {
+    display: block;
+    font-family: var(--font-body), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.4em;
+    color: var(--primary);
+    font-size: 0.55em;
+    margin-bottom: 0.4em;
+  }
+
+  /* Drop cap */
+  .dropcap {
+    float: left;
+    font-family: var(--font-display), serif;
+    font-size: 4.6em;
+    line-height: 0.85;
+    padding: 0.08em 0.12em 0.05em 0;
+    margin: 0.05em 0.1em 0 0;
+    color: var(--bg);
+    background: var(--secondary);
+    border: 2px solid var(--accent);
+    box-shadow: 0 0 0 2px var(--secondary), 2px 2px 0 2px var(--ornament);
+    text-indent: 0;
+  }
+
+  /* Oak-leaf section divider — full-width, breaks columns */
+  .divider {
+    column-span: all;
+    text-align: center;
+    margin: 1.6em 0 1.8em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+  }
+  .divider .rule {
+    flex: 1;
+    height: 1px;
+    background: var(--ornament);
+  }
+  .divider .rule.gold {
+    background: var(--accent);
+    height: 2px;
+    max-width: 4em;
+  }
+  .divider svg {
+    width: 38px;
+    height: 38px;
+    fill: var(--ornament);
+  }
+
+  /* Marginalia / pull-quote */
+  .marginalia {
+    column-span: all;
+    border-left: 3px solid var(--accent);
+    border-right: 3px solid var(--accent);
+    padding: 1em 2em;
+    margin: 1.5em auto 1.8em;
+    max-width: 30em;
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-size: 1.3em;
+    color: var(--primary);
+    line-height: 1.3;
+    background: rgba(201, 162, 58, 0.08);
+  }
+  .marginalia cite {
+    display: block;
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 0.65em;
+    color: var(--text);
+    margin-top: 0.6em;
+    letter-spacing: 0.1em;
+  }
+
+  /* Pier piers (decorative side columns) */
+  .pier {
+    position: absolute;
+    top: 0;
+    width: 36px;
+    height: 100%;
+    pointer-events: none;
+  }
+  .pier.left { left: 1em; }
+  .pier.right { right: 1em; }
+  .pier svg { width: 100%; height: 100%; }
+
+  /* Glass-recipe box */
+  .recipe-tablet {
+    column-span: all;
+    margin: 1.8em auto;
+    max-width: 32em;
+    border: 1px solid var(--primary);
+    background: rgba(30, 58, 95, 0.04);
+    padding: 1.4em 1.8em 1.2em;
+    position: relative;
+  }
+  .recipe-tablet::before, .recipe-tablet::after {
+    content: "";
+    position: absolute;
+    width: 18px; height: 18px;
+    border: 1.5px solid var(--accent);
+    background: var(--bg);
+    transform: rotate(45deg);
+  }
+  .recipe-tablet::before { top: -10px; left: 50%; margin-left: -9px; }
+  .recipe-tablet::after { bottom: -10px; left: 50%; margin-left: -9px; }
+  .recipe-tablet h3 {
+    font-family: var(--font-display), serif;
+    font-size: 1.2em;
+    color: var(--secondary);
+    margin: 0 0 0.5em;
+    text-align: center;
+    font-weight: normal;
+  }
+  .recipe-tablet dl {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 0.3em 1.2em;
+    margin: 0;
+    font-size: 0.92em;
+  }
+  .recipe-tablet dt {
+    font-variant: small-caps;
+    letter-spacing: 0.12em;
+    color: var(--primary);
+  }
+  .recipe-tablet dd { margin: 0; font-style: italic; }
+
+  /* --- Footer arcade --- */
+  footer.colophon-foot {
+    margin-top: 3em;
+    border-top: 2px solid var(--primary);
+  }
+  .foot-arcade {
+    display: flex;
+    justify-content: center;
+    background: var(--bg);
+    padding: 0.5em 0 0;
+  }
+  .foot-arcade .arch {
+    width: 8em;
+    height: 4.5em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .foot-arcade .arch::after {
+    content: "";
+    position: absolute;
+    left: 8%;
+    top: 0;
+    width: 84%;
+    height: 100%;
+    border: 1px solid var(--ornament);
+    border-bottom: none;
+    border-radius: 50% 50% 0 0 / 78% 78% 0 0;
+  }
+  .foot-arcade .fleur {
+    font-size: 1.6em;
+    color: var(--ornament);
+    z-index: 1;
+  }
+  .foot-strip {
+    background: var(--primary);
+    color: var(--accent);
+    text-align: center;
+    padding: 0.9em 1em;
+    font-variant: small-caps;
+    letter-spacing: 0.28em;
+    font-size: 0.8em;
+  }
+  .foot-strip span { margin: 0 1.4em; }
+  .foot-strip .star { color: var(--bg); }
+
+  /* Sidebar pier ornaments */
+  .pier-ornament {
+    width: 100%;
+    height: 100%;
+    background-repeat: repeat-y;
+    background-size: 36px auto;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="masthead">
+    <h1 class="wordmark">Atelier de Guillaume de Sancerre</h1>
+    <div class="sub-mark">
+      <span class="ornm">✦</span>
+      Maître-Verrier &middot; Chartres
+      <span class="ornm">✦</span>
+    </div>
+  </header>
+
+  <nav class="arcade" aria-label="Primary">
+    <a href="page-1.html">Atelier</a>
+    <a href="page-2.html">The Hand</a>
+    <a href="page-3.html">Catalogue</a>
+    <a href="page-4.html" aria-current="page">Of Method</a>
+    <a href="page-5.html">Restoration</a>
+    <a href="page-6.html">Visit</a>
+  </nav>
+
+  <section class="page-title">
+    <div class="latin">Quatuor Operationes Vitri</div>
+    <h1>Of Method</h1>
+    <div class="latin" style="color:var(--primary);">Pot-Metal &middot; Grisaille &middot; The Lead Came</div>
+    <div class="seal-mark" aria-hidden="true">
+      <svg viewBox="0 0 592 592"><path transform="translate(-4,-4)scale(0.15,0.15)" d="M1778.9,3200A120.9263,120.9263 0 0,1 1657.97,3320.93A120.9263,120.9263 0 0,1 1537.04,3200A221.5096,221.5096 0 0,0 1456.32,3371.02A221.5096,221.5096 0 0,0 1677.83,3592.53A221.5096,221.5096 0 0,0 1818.61,3542.03A362.779,362.779 0 0,0 2000,3856.21A362.779,362.779 0 0,0 2181.39,3542.03A221.5096,221.5096 0 0,0 2322.17,3592.53A221.5096,221.5096 0 0,0 2543.68,3371.02A221.5096,221.5096 0 0,0 2462.96,3200A120.9263,120.9263 0 0,1 2342.03,3320.93A120.9263,120.9263 0 0,1 2221.1,3200V2221.1H3200A120.9263,120.9263 0 0,1 3320.93,2342.03A120.9263,120.9263 0 0,1 3200,2462.96A221.5096,221.5096 0 0,0 3371.02,2543.68A221.5096,221.5096 0 0,0 3592.53,2322.17A221.5096,221.5096 0 0,0 3542.03,2181.39A362.779,362.779 0 0,0 3856.21,2000A362.779,362.779 0 0,0 3542.03,1818.61A221.5096,221.5096 0 0,0 3592.53,1677.83A221.5096,221.5096 0 0,0 3371.02,1456.32A221.5096,221.5096 0 0,0 3200,1537.04A120.9263,120.9263 0 0,1 3320.93,1657.97A120.9263,120.9263 0 0,1 3200,1778.9H2221.1V800A120.9263,120.9263 0 0,1 2342.03,679.073A120.9263,120.9263 0 0,1 2462.96,800A221.5096,221.5096 0 0,0 2543.68,628.984A221.5096,221.5096 0 0,0 2322.17,407.475A221.5096,221.5096 0 0,0 2181.39,457.969A362.779,362.779 0 0,0 2000,143.793A362.779,362.779 0 0,0 1818.61,457.969A221.5096,221.5096 0 0,0 1677.83,407.475A221.5096,221.5096 0 0,0 1456.32,628.984A221.5096,221.5096 0 0,0 1537.04,800A120.9263,120.9263 0 0,1 1657.97,679.073A120.9263,120.9263 0 0,1 1778.9,800V1778.9H800A120.9263,120.9263 0 0,1 679.073,1657.97A120.9263,120.9263 0 0,1 800,1537.04A221.5096,221.5096 0 0,0 628.984,1456.32A221.5096,221.5096 0 0,0 407.475,1677.83A221.5096,221.5096 0 0,0 457.969,1818.61A362.779,362.779 0 0,0 143.793,2000A362.779,362.779 0 0,0 457.969,2181.39A221.5096,221.5096 0 0,0 407.475,2322.17A221.5096,221.5096 0 0,0 628.984,2543.68A221.5096,221.5096 0 0,0 800,2462.96A120.9263,120.9263 0 0,1 679.073,2342.03A120.9263,120.9263 0 0,1 800,2221.1H1778.9Z"/></svg>
+    </div>
+    <p class="colophon">Set forth in four operations, after the manner of the cathedral workshops &mdash; observed at this house, rue au Lin, Anno Domini 2024.</p>
+  </section>
+
+  <article class="manuscript">
+
+    <div class="frontispiece">
+      A window of stained glass is not painted; it is <em>builded</em>. Stone, lead, fire, and the cut of the diamond &mdash; these are the four hands that join with the glazier's, and without any one the work cannot stand.
+    </div>
+
+    <div class="columns">
+
+      <h2 class="section-head">
+        <span class="num">&mdash; The First Operation &mdash;</span>
+        Of the Cartoon, Drawn at Full Scale
+      </h2>
+
+      <p><span class="dropcap">B</span>efore any glass is cut, before any lead is drawn through the vise, a window must first be drawn at its true and full magnitude upon a board of whitewashed oak. This board, called in the old workshops the <em>table à tracer</em>, is in our atelier eleven feet by six, hinged in three leaves, and freshly limed with chalk and rabbit-skin size at the commencement of every commission. A panel for the church of Saint-Aignan-sur-Cher, completed in March of last year, required two such tables laid end to end.</p>
+
+      <p>The cartoon is drawn first in soft charcoal, set down with willow sticks I burn each Lent in a sealed iron tin. The principal figures &mdash; saints, donors, the symbolic beasts of the Apocalypse &mdash; are blocked in three sittings: first the gesture, then the drapery, last the ornament of border and field. Only when these stand correct in proportion are the lines fixed in iron-gall ink, mixed thick with gum arabic so the line will not lift when the glass is laid upon the board for cutting.</p>
+
+      <p>Upon the cartoon are inscribed three sets of marks. The black line is the lead, that which divides one piece of glass from another. The red line, drawn with madder lake, indicates the painted line of the trace, which the brush will follow upon the surface of the glass. The thin blue, struck with cobalt watercolour, marks the saddle bars, those iron supports which cross the panel at intervals of approximately seventeen inches.</p>
+
+      <div class="divider" aria-hidden="true">
+        <span class="rule"></span>
+        <span class="rule gold"></span>
+        <svg viewBox="110 124 40 40"><path d="M130 130 L135 145 L150 150 L135 155 L130 170 L125 155 L110 150 L125 145 Z" fill="currentColor"/></svg>
+        <svg viewBox="110 124 40 40"><circle cx="130" cy="150" r="8"/><path d="M130 142 L130 130" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+        <svg viewBox="110 124 40 40"><path d="M130 130 L135 145 L150 150 L135 155 L130 170 L125 155 L110 150 L125 145 Z" fill="currentColor"/></svg>
+        <span class="rule gold"></span>
+        <span class="rule"></span>
+      </div>
+
+      <h2 class="section-head">
+        <span class="num">&mdash; The Second Operation &mdash;</span>
+        Of the Glass, Mouth-Blown at Saint-Just
+      </h2>
+
+      <p><span class="dropcap">T</span>he glass we use is, almost without exception, drawn from the works at Saint-Just-sur-Loire, in the Loire valley some four hundred kilometres south of this workshop. It is the last establishment in France &mdash; perhaps in Europe &mdash; producing mouth-blown <em>verre antique</em> in the manner of the medieval glasshouses: gathered upon the iron, blown into a cylinder of perhaps forty centimetres in length, scored, opened, and flattened in the annealing oven.</p>
+
+      <p>The colour is in the metal itself, struck while molten by the addition of mineral oxides &mdash; cobalt for the deep blue of Chartres, copper for the rubies, manganese for the violets and pale flesh tones, silver and antimony for the yellows. Such glass is called <em>pot-metal</em>, in distinction from the modern flashed and rolled sheet, and no two pieces are ever the same: striations, bubbles, and unequal thickness move within each leaf, and these very imperfections are what cause a window to be alive when the sun crosses behind it.</p>
+
+      <div class="recipe-tablet">
+        <h3>Of the Bleu de Chartres</h3>
+        <dl>
+          <dt>Source</dt><dd>Verrerie de Saint-Just, Loire</dd>
+          <dt>Colourant</dt><dd>cobalt oxide, struck in the pot</dd>
+          <dt>Thickness</dt><dd>3.2 to 4.6 mm, irregular</dd>
+          <dt>Price, 2024</dt><dd>€ 480 the square metre</dd>
+          <dt>Allowance</dt><dd>one part in five for cutting waste</dd>
+        </dl>
+      </div>
+
+      <p>Upon receipt the sheets are laid against the north window of the cutting-room and read by daylight, never by lamp. Each leaf is numbered upon its corner with a wax pencil, and the variations of tone within a single colour &mdash; for there are perhaps a dozen in any case of cobalt &mdash; are reserved for figures, draperies, and the great expanses of sky as the cartoon demands.</p>
+
+      <p>Cutting is done with the diamond, not the wheel, after the manner Theophilus describes in the twelfth-century <em>Schedula</em>. A wheel-cutter scores cleanly but bruises the edge; a diamond, drawn once and lightly, leaves the line that breaks true. For the curved pieces &mdash; haloes, the lobes of a quatrefoil, the folds of a robe &mdash; the score is followed by the slow tap of a grozing iron, knapping away the surplus until the edge meets its drawn line within a hair's breadth.</p>
+
+      <div class="divider" aria-hidden="true">
+        <span class="rule"></span>
+        <span class="rule gold"></span>
+        <svg viewBox="110 124 40 40"><path d="M130 130 L135 145 L150 150 L135 155 L130 170 L125 155 L110 150 L125 145 Z" fill="currentColor"/></svg>
+        <svg viewBox="110 124 40 40"><circle cx="130" cy="150" r="8"/><path d="M130 142 L130 130" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+        <svg viewBox="110 124 40 40"><path d="M130 130 L135 145 L150 150 L135 155 L130 170 L125 155 L110 150 L125 145 Z" fill="currentColor"/></svg>
+        <span class="rule gold"></span>
+        <span class="rule"></span>
+      </div>
+
+      <h2 class="section-head">
+        <span class="num">&mdash; The Third Operation &mdash;</span>
+        Of Grisaille, Silver Stain, and the Kiln
+      </h2>
+
+      <p><span class="dropcap">G</span>risaille is the brown-black paint by which a face is given its features, a robe its shadow, a leaf its veining. It is no enamel, but a true <em>verre fusible</em>, made of finely ground glass mixed with iron and copper oxides and bound with gum arabic and a little wine vinegar. We grind ours each Monday upon a slab of porphyry brought from Egypt by my grandfather, with a muller of the same stone, until the powder is impalpable to the tongue.</p>
+
+      <p>The painting proceeds in two campaigns. First the trace-line: a fine sable, drawn with a single confident stroke after the cartoon, is laid upon the glass to delineate eye, mouth, finger, fold of cloth. After this dries, the matt, or <em>demi-teinte</em>, is laid in &mdash; a half-transparent wash that gives modelling and shadow. Highlights are then lifted with a stiff hog brush or, for the finest hatchings, with the sharpened end of a goose-quill.</p>
+
+      <div class="marginalia">
+        &ldquo;The fire is the master of the work; the painter only sets the stage upon which fire performs.&rdquo;
+        <cite>&mdash; G. de Sancerre, notebook, Lent 2019</cite>
+      </div>
+
+      <p>The kiln in our workshop is a gas-fired chamber kiln of refractory brick, four feet by three by two, built in 1987 by the firm Schneider of Strasbourg and rebuilt by the same hands in 2014. We fire to 640 degrees Celsius for figural work, holding for forty minutes, and bring the temperature down over no less than fourteen hours to prevent thermal shock in the heavier pot-metal. A panel of any size is fired three times: once for the trace, once for the matt, once for the silver stain.</p>
+
+      <p>Silver stain &mdash; that strange invention of the early fourteenth century, by which a yellow of any depth from primrose to deep gold may be fixed upon white or pale-blue glass &mdash; is applied to the reverse face. A paste of silver nitrate, yellow ochre, and gum is brushed where the colour is wanted; in the kiln, the silver penetrates the surface of the glass and is, when cooled and washed, made one substance with it. There is no other manner by which a halo may be made luminous within a single piece of glass; the leadwork is thereby spared, and the saint's head left whole.</p>
+
+      <div class="divider" aria-hidden="true">
+        <span class="rule"></span>
+        <span class="rule gold"></span>
+        <svg viewBox="110 124 40 40"><path d="M130 130 L135 145 L150 150 L135 155 L130 170 L125 155 L110 150 L125 145 Z" fill="currentColor"/></svg>
+        <svg viewBox="110 124 40 40"><circle cx="130" cy="150" r="8"/><path d="M130 142 L130 130" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+        <svg viewBox="110 124 40 40"><path d="M130 130 L135 145 L150 150 L135 155 L130 170 L125 155 L110 150 L125 145 Z" fill="currentColor"/></svg>
+        <span class="rule gold"></span>
+        <span class="rule"></span>
+      </div>
+
+      <h2 class="section-head">
+        <span class="num">&mdash; The Fourth Operation &mdash;</span>
+        Of the Lead Came &amp; the Cementing
+      </h2>
+
+      <p><span class="dropcap">W</span>hen all the glass has been cut, painted, and fired, it is laid out upon the cartoon and assembled with lead came &mdash; the H-section strips of milled lead which both bind and divide the pieces. We use lead of two profiles only: an interior came of five-sixteenths of an inch for the smaller divisions, and a heavier seven-sixteenths for the principal lines and the perimeter. The lead is drawn fresh through the vise the morning of leading, that it may be soft and true.</p>
+
+      <p>The leading is begun at one corner, generally the lower left, and proceeds outward and upward. Each piece of glass is set into its came, the next came laid against it, and so on, the whole held in place by farrier's nails driven into the board against the edge. When the panel is complete, every joint &mdash; and there may be five or six hundred in a single lancet &mdash; is soldered upon both faces with a tin-lead solder of the proportion sixty to forty, fluxed with tallow.</p>
+
+      <p>There remains the cementing. A black putty of whiting, plaster, linseed oil, lampblack, and a little turpentine is forced beneath every flange of every came with a stiff bristle brush, both faces. This puttying is the unseen labour: it weatherproofs the panel, stiffens it against the wind, and silences the rattling of glass against lead. After two days' setting, the surplus is brushed off with sawdust, and the panel polished. It is then ready for its iron armature, its saddle bars, and its journey to the building it was made to inhabit.</p>
+
+      <p>From cartoon to installation, a single lancet of moderate complexity &mdash; say four square metres, with two figures and a canopy &mdash; occupies this workshop for between fourteen and eighteen weeks. A great rose, such as the one currently in hand for the Lady Chapel at Coutances, is the work of three years. The methods, the tools, and very nearly the prayers are those of the masters of Chartres in 1220. We see no reason to depart from them.</p>
+
+    </div>
+
+  </article>
+
+  <footer class="colophon-foot">
+    <div class="foot-arcade" aria-hidden="true">
+      <div class="arch"><span class="fleur">&#9904;</span></div>
+      <div class="arch"><span class="fleur">&#9904;</span></div>
+      <div class="arch"><span class="fleur">&#9904;</span></div>
+      <div class="arch"><span class="fleur">&#9904;</span></div>
+      <div class="arch"><span class="fleur">&#9904;</span></div>
+      <div class="arch"><span class="fleur">&#9904;</span></div>
+      <div class="arch"><span class="fleur">&#9904;</span></div>
+    </div>
+    <div class="foot-strip">
+      <span>Atelier de Guillaume de Sancerre</span>
+      <span class="star">&#10022;</span>
+      <span>14 rue au Lin &middot; Chartres</span>
+      <span class="star">&#10022;</span>
+      <span>Fondé MCMLXXXIV</span>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>

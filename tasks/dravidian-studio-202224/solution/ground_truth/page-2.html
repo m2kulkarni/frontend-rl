@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Practice — Sthapati Workshop</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  /* ============ BASE ============ */
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Lato, sans-serif;
+    margin: 0;
+    line-height: 1.6;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display), "Yatra One", serif;
+    font-weight: 400;
+    margin: 0;
+  }
+
+  /* ============ NAVIGATION ============ */
+  .nav-band {
+    background: #f8f4ec;
+    padding: 18px 56px 0;
+    position: relative;
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .om-mark {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .om-mark svg {
+    width: 38px;
+    height: 38px;
+  }
+  .om-mark .mark-text {
+    font-family: var(--font-display);
+    font-size: 18px;
+    letter-spacing: 0.18em;
+    color: var(--primary);
+    line-height: 1;
+  }
+  .om-mark .mark-sub {
+    font-size: 9px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    margin-top: 4px;
+  }
+  .nav-links {
+    display: flex;
+    gap: 38px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .nav-links a {
+    font-family: var(--font-body);
+    font-variant: small-caps;
+    font-size: 13px;
+    letter-spacing: 0.22em;
+    text-transform: lowercase;
+    color: var(--primary);
+    text-decoration: none;
+    padding: 8px 2px 18px;
+    position: relative;
+    display: block;
+  }
+  .nav-links a[aria-current="page"] {
+    color: var(--secondary);
+  }
+  .nav-links a[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 14px;
+    height: 14px;
+    background:
+      radial-gradient(circle at center, var(--secondary) 0 2px, transparent 2.5px),
+      conic-gradient(from 0deg, var(--secondary) 0 12.5%, transparent 12.5% 25%, var(--secondary) 25% 37.5%, transparent 37.5% 50%, var(--secondary) 50% 62.5%, transparent 62.5% 75%, var(--secondary) 75% 87.5%, transparent 87.5% 100%);
+    -webkit-mask: radial-gradient(circle at center, black 8px, transparent 8px), radial-gradient(circle at center, black 3px, transparent 3px);
+    border-radius: 50%;
+    opacity: 0.85;
+  }
+  /* lotus glyph beneath active */
+  .nav-links a[aria-current="page"]::before {
+    content: "❋";
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--secondary);
+    font-size: 12px;
+  }
+  .double-rule {
+    margin-top: 4px;
+    border: 0;
+    border-top: 2px solid var(--secondary);
+    border-bottom: 2px solid var(--accent);
+    height: 6px;
+    background: transparent;
+  }
+
+  /* ============ TIERED GOPURAM STACK ============ */
+  .tier {
+    margin: 0 auto;
+    background: var(--surface);
+    position: relative;
+  }
+  .tier-1 { width: 100%; padding: 56px 56px 32px; }
+  .tier-2 { width: 92%; padding: 48px 64px; background: #fbf7ef; border-left: 1px solid var(--accent); border-right: 1px solid var(--accent); }
+  .tier-3 { width: 84%; padding: 56px 72px; }
+  .tier-4 { width: 76%; padding: 48px 80px; background: #fbf7ef; border-left: 1px solid var(--accent); border-right: 1px solid var(--accent); }
+  .tier-5 { width: 100%; padding: 0; }
+
+  /* ============ HERO TIER ============ */
+  .hero-eyebrow {
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    margin-bottom: 18px;
+  }
+  .hero-title {
+    text-align: center;
+    font-family: var(--font-display);
+    font-size: 68px;
+    letter-spacing: 0.15em;
+    color: var(--primary);
+    line-height: 1.05;
+    text-transform: uppercase;
+  }
+  .hero-title .vermilion { color: var(--secondary); }
+  .hero-tamil {
+    text-align: center;
+    margin-top: 14px;
+    font-size: 14px;
+    letter-spacing: 0.3em;
+    color: var(--text-emphasis);
+    font-style: italic;
+  }
+  .peacock-frame {
+    margin: 28px auto 8px;
+    width: 100%;
+    max-width: 1100px;
+    height: 60px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .peacock-frame svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* ============ BAND DIVIDERS ============ */
+  .band {
+    height: 28px;
+    background:
+      repeating-linear-gradient(90deg,
+        var(--secondary) 0 18px,
+        var(--accent) 18px 20px,
+        var(--secondary) 20px 38px,
+        #1a1a1a 38px 40px);
+    position: relative;
+  }
+  .band::before, .band::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .band::before { top: 4px; }
+  .band::after { bottom: 4px; }
+
+  .palmette-divider {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 12px 0;
+    background: var(--surface);
+  }
+  .palmette-divider svg {
+    width: 80%;
+    max-width: 900px;
+    height: 60px;
+  }
+
+  /* ============ INTRO TIER ============ */
+  .intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: start;
+  }
+  .intro-grid .lede {
+    font-family: var(--font-display);
+    font-size: 26px;
+    line-height: 1.5;
+    color: var(--text-emphasis);
+    letter-spacing: 0.02em;
+  }
+  .intro-grid .lede::first-letter {
+    font-size: 64px;
+    color: var(--secondary);
+    float: left;
+    line-height: 0.9;
+    padding: 6px 12px 0 0;
+  }
+  .intro-grid p {
+    font-size: 15px;
+    line-height: 1.75;
+    margin: 0 0 16px;
+  }
+  .intro-grid p + p { margin-top: 0; }
+
+  /* ============ LINEAGE ESSAY ============ */
+  .essay-head {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+  .essay-head .label {
+    font-size: 10px;
+    letter-spacing: 0.5em;
+    color: var(--secondary);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .essay-head h2 {
+    font-size: 42px;
+    letter-spacing: 0.18em;
+    color: var(--text-emphasis);
+    text-transform: uppercase;
+  }
+  .essay-head .rule {
+    width: 60px;
+    height: 2px;
+    background: var(--accent);
+    margin: 16px auto;
+  }
+
+  .essay-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 56px;
+  }
+  .essay-body {
+    column-count: 2;
+    column-gap: 36px;
+    column-rule: 1px solid rgba(201, 162, 58, 0.4);
+    font-size: 14.5px;
+    line-height: 1.85;
+    text-align: justify;
+  }
+  .essay-body p {
+    margin: 0 0 18px;
+  }
+  .essay-body p:first-child::first-letter {
+    font-family: var(--font-display);
+    font-size: 56px;
+    color: var(--secondary);
+    float: left;
+    line-height: 0.9;
+    padding: 4px 10px 0 0;
+  }
+  .essay-body em {
+    color: var(--text-emphasis);
+    font-style: italic;
+  }
+  .essay-body strong {
+    color: var(--secondary);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+
+  /* ============ SIDEBAR (Collaborators) ============ */
+  .sidebar {
+    border-left: 1px solid var(--accent);
+    padding-left: 36px;
+    position: relative;
+  }
+  .sidebar h3 {
+    font-size: 18px;
+    letter-spacing: 0.22em;
+    color: var(--text-emphasis);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .sidebar .subhead {
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 24px;
+  }
+  .collab {
+    padding: 18px 0;
+    border-bottom: 1px dotted rgba(26,26,26,0.25);
+  }
+  .collab:last-child { border-bottom: 0; }
+  .collab .name {
+    font-family: var(--font-display);
+    font-size: 17px;
+    color: var(--primary);
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+  }
+  .collab .role {
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 8px;
+  }
+  .collab .place {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .collab .place::before {
+    content: "❋  ";
+    color: var(--accent);
+    font-size: 10px;
+  }
+
+  /* ============ PILLAR CARD ============ */
+  .principle-tier {
+    background: var(--secondary);
+    padding: 64px 80px;
+    color: #fbf7ef;
+  }
+  .principle-head {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .principle-head .label {
+    font-size: 11px;
+    letter-spacing: 0.5em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .principle-head h2 {
+    font-size: 36px;
+    letter-spacing: 0.2em;
+    color: #fbf7ef;
+    text-transform: uppercase;
+  }
+  .principle-head .tamil {
+    margin-top: 14px;
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    font-style: italic;
+  }
+  .principles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  .pillar-card {
+    background: #fbf7ef;
+    color: var(--primary);
+    padding: 56px 28px 36px;
+    position: relative;
+    border-left: 2px solid var(--accent);
+    border-right: 2px solid var(--accent);
+  }
+  /* lotus capitals on pillars */
+  .pillar-card::before, .pillar-card::after {
+    content: "";
+    position: absolute;
+    left: -10px; right: -10px;
+    height: 14px;
+    background:
+      linear-gradient(180deg, var(--accent) 0 3px, transparent 3px 5px, var(--accent) 5px 7px, transparent 7px 9px, var(--secondary) 9px 14px);
+    border-left: 2px solid var(--accent);
+    border-right: 2px solid var(--accent);
+  }
+  .pillar-card::before { top: -14px; transform: scaleY(-1); }
+  .pillar-card::after { bottom: -14px; }
+  /* kalasha finial */
+  .kalasha {
+    position: absolute;
+    top: -34px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 18px;
+    height: 28px;
+    z-index: 2;
+  }
+  .kalasha::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 50% 22%, var(--secondary) 0 5px, transparent 5.5px),
+      linear-gradient(180deg, transparent 0 8px, var(--secondary) 8px 14px, var(--accent) 14px 16px, var(--secondary) 16px 24px, var(--accent) 24px 26px, var(--secondary) 26px 28px);
+    clip-path: polygon(50% 0, 60% 18%, 80% 30%, 70% 45%, 90% 55%, 75% 75%, 90% 100%, 10% 100%, 25% 75%, 10% 55%, 30% 45%, 20% 30%, 40% 18%);
+  }
+  .pillar-card .num {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    font-family: var(--font-display);
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+  }
+  .pillar-card h3 {
+    font-family: var(--font-display);
+    font-size: 22px;
+    letter-spacing: 0.16em;
+    color: var(--text-emphasis);
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 18px;
+    line-height: 1.25;
+  }
+  .pillar-card p {
+    font-size: 13.5px;
+    line-height: 1.7;
+    margin: 0;
+  }
+  .pillar-card .tamil-tag {
+    display: block;
+    margin-top: 16px;
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--secondary);
+    text-transform: uppercase;
+  }
+
+  /* ============ TIMELINE / FACTS ============ */
+  .facts {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    margin-top: 40px;
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+  }
+  .fact {
+    padding: 24px 22px;
+    border-right: 1px dotted rgba(26,26,26,0.3);
+    text-align: center;
+  }
+  .fact:last-child { border-right: 0; }
+  .fact .yr {
+    font-family: var(--font-display);
+    font-size: 28px;
+    color: var(--secondary);
+    letter-spacing: 0.08em;
+  }
+  .fact .ev {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin-top: 6px;
+    line-height: 1.5;
+  }
+
+  /* ============ PULL QUOTE ============ */
+  .pullquote {
+    text-align: center;
+    margin: 0;
+    padding: 56px 80px;
+    background: #fbf7ef;
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+    position: relative;
+  }
+  .pullquote q {
+    font-family: var(--font-display);
+    font-size: 32px;
+    line-height: 1.5;
+    color: var(--text-emphasis);
+    letter-spacing: 0.04em;
+    quotes: "“" "”";
+    display: block;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .pullquote .attr {
+    margin-top: 22px;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--secondary);
+  }
+
+  /* ============ FOOTER ============ */
+  footer {
+    background: var(--surface);
+    padding-top: 0;
+  }
+  .arcade {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    background: var(--secondary);
+    height: 220px;
+    position: relative;
+    border-top: 4px double var(--accent);
+    border-bottom: 4px double var(--accent);
+  }
+  .arcade .col {
+    position: relative;
+    border-right: 1px solid rgba(201,162,58,0.5);
+  }
+  .arcade .col:last-child { border-right: 0; }
+  .arcade .col::before {
+    /* pillar shaft */
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 22px;
+    bottom: 22px;
+    transform: translateX(-50%);
+    width: 4px;
+    background: linear-gradient(180deg, var(--accent), var(--accent));
+  }
+  .arcade .col::after {
+    /* lotus capital */
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 14px;
+    transform: translateX(-50%);
+    width: 28px;
+    height: 10px;
+    background:
+      linear-gradient(180deg, var(--accent) 0 2px, transparent 2px 4px, var(--accent) 4px 6px, transparent 6px 8px, var(--accent) 8px 10px);
+    border-radius: 50% 50% 0 0;
+  }
+  .arcade .col .base {
+    position: absolute;
+    left: 50%;
+    bottom: 14px;
+    transform: translateX(-50%);
+    width: 28px;
+    height: 10px;
+    background:
+      linear-gradient(0deg, var(--accent) 0 2px, transparent 2px 4px, var(--accent) 4px 6px, transparent 6px 8px, var(--accent) 8px 10px);
+    border-radius: 0 0 50% 50%;
+  }
+  .mandala {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 360px;
+    height: 160px;
+    background: var(--secondary);
+    z-index: 3;
+    text-align: center;
+    color: #fbf7ef;
+    padding: 14px 20px;
+    border: 1px solid var(--accent);
+  }
+  .mandala::before, .mandala::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    border: 1px dotted var(--accent);
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+  .mandala::before { width: 200px; height: 200px; }
+  .mandala::after { width: 140px; height: 140px; border-style: dashed; }
+  .mandala .ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px dotted var(--accent);
+    width: 90px; height: 90px;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .mandala-content {
+    position: relative;
+    z-index: 2;
+  }
+  .mandala h4 {
+    font-family: var(--font-display);
+    font-size: 16px;
+    letter-spacing: 0.22em;
+    color: #fbf7ef;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .mandala p {
+    font-size: 12px;
+    line-height: 1.6;
+    color: #fbf7ef;
+    margin: 0;
+    letter-spacing: 0.04em;
+  }
+  .footer-line {
+    text-align: center;
+    padding: 18px 24px;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--primary);
+    background: var(--surface);
+  }
+  .footer-line .tamil {
+    color: var(--text-emphasis);
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0.18em;
+  }
+
+  /* ornamental side bands */
+  .side-band {
+    position: relative;
+  }
+  .side-band::before, .side-band::after {
+    content: "";
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 14px;
+    background:
+      repeating-linear-gradient(0deg,
+        var(--secondary) 0 12px,
+        var(--accent) 12px 14px,
+        var(--secondary) 14px 26px,
+        var(--primary) 26px 28px);
+  }
+  .side-band::before { left: 0; }
+  .side-band::after { right: 0; }
+
+  /* ============ SECTION HEAD GENERIC ============ */
+  .section-head-mini {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+  .section-head-mini .label {
+    font-size: 10px;
+    letter-spacing: 0.5em;
+    color: var(--secondary);
+    text-transform: uppercase;
+  }
+  .section-head-mini h2 {
+    font-size: 30px;
+    letter-spacing: 0.18em;
+    color: var(--text-emphasis);
+    text-transform: uppercase;
+    margin-top: 8px;
+  }
+
+  /* notes block */
+  .notes {
+    margin-top: 36px;
+    padding: 24px 28px;
+    background: rgba(201,162,58,0.08);
+    border: 1px solid var(--accent);
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  .notes h4 {
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    color: var(--secondary);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- ============ NAVIGATION ============ -->
+<nav class="nav-band" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="page-1.html" class="om-mark" aria-label="Sthapati Workshop home">
+      <svg viewBox="0 0 356 367" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M 90.456847,353.9498 C 51.797347,340.13485 23.72672,305.75839 12.612487,258.6184 C 7.5684267,237.22321 6.1421397,201.86984 10.323594,201.86984 C 11.712834,201.86984 15.42322,211.57056 18.568972,223.427 C 25.452892,249.37152 37.19436,273.76855 48.535988,285.69407 C 67.374717,305.50242 114.0356,313.26029 140.92106,301.05394 C 161.86409,291.54544 170.35697,268.94603 161.24995,246.95931 C 154.21242,229.96943 138.24701,224.28836 108.50834,228.19197 C 108.50834,228.19197 90.282834,208.57398 84.476417,173.73548 L 103.15738,175.42939 C 125.65731,177.46962 142.64532,172.49605 151.46236,161.28728 C 159.74765,150.75419 159.5685,146.68046 150.34841,135.96157 C 137.04396,120.49428 113.15511,124.41248 64.786577,149.99522 L 40.381632,109.08518 L 50.613137,101.2812 C 76.253387,81.724339 120.77357,71.947329 146.11011,80.309169 C 169.18841,87.925649 186.12724,118.14755 181.60247,143.63298 C 178.54327,160.86286 164.72752,184.99524 154.05369,191.75339 L 144.84862,197.58162 L 157.56351,203.31522 C 179.17018,213.05833 192.36061,205.61034 208.12001,174.76849 C 229.92949,132.0869 244.0745,121.0378 276.96658,120.99051 C 292.28176,120.96847 297.73268,122.57499 308.90312,130.4031 C 336.78213,149.94016 351.9622,190.39693 348.62804,236.27272 C 344.40474,294.37435 316.88374,329.61601 275.73415,329.61601 C 253.15086,329.61601 238.59451,321.69526 227.00729,303.10156 C 216.82976,286.76927 212.24334,254.42288 218.08805,240.19369 C 220.89208,233.36732 221.39892,233.13578 221.58223,238.59686 C 221.91916,248.63689 233.34159,264.95549 243.82827,270.37835 C 269.55794,283.68369 306.49479,266.96693 321.10832,235.4032 C 332.20339,211.4394 326.25105,165.21656 311.02084,157.06552 C 307.83453,155.36024 299.96089,153.96502 293.5244,153.96502 C 279.84214,153.96502 269.09709,163.80155 254.03263,190.11774 C 248.82442,199.21613 240.05943,210.97175 234.55486,216.24128 C 225.61134,224.80312 222.41769,225.82225 204.53067,225.82225 L 184.51412,225.82225 L 190.98415,240.19369 C 200.2451,260.76437 199.80694,294.18704 190.00976,314.53347 C 181.35272,332.51252 161.33618,350.71469 145.33374,355.16013 C 129.75572,359.4876 104.38789,358.9281 90.456847,353.9498 z M 165.8338,75.923739 C 156.97908,60.814399 151.52974,32.606158 157.46546,32.606158 C 164.43775,47.732319 178.73037,61.227101 194.03409,70.643259 C 221.52091,83.949329 249.39257,78.578529 279.84247,54.108239 C 286.54595,48.721279 292.48231,44.913138 293.0345,45.645698 C 300.4697,57.184233 313.331,66.613261 317.58219,80.021449 C 317.58219,85.678729 293.22867,101.96033 274.01214,109.15007 C 226.38264,122.8706 193.96598,117.44304 165.8338,75.923739 z M 189.83603,40.997228 L 220.84514,6.6137488 L 255.30593,38.514418 C 243.51876,48.222549 235.00994,63.289118 221.54391,70.930009 C 210.90372,63.086273 195.02308,53.837816 189.83603,40.997228 z " fill="#e34234"/>
+      </svg>
+      <span>
+        <div class="mark-text">STHAPATI</div>
+        <div class="mark-sub">Workshop · Madurai</div>
+      </span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="page-1.html">Studio</a></li>
+      <li><a href="page-2.html" aria-current="page">Practice</a></li>
+      <li><a href="page-3.html">Projects</a></li>
+      <li><a href="page-4.html">Workshop</a></li>
+      <li><a href="page-5.html">Writings</a></li>
+      <li><a href="page-6.html">Visit</a></li>
+      <li><a href="mailto:office@sthapati.in">Enquire</a></li>
+    </ul>
+  </div>
+  <hr class="double-rule">
+</nav>
+
+<!-- ============ TIER 1 — HERO ============ -->
+<section class="tier tier-1">
+  <div class="hero-eyebrow">Page Two · The Practice · Lineage &amp; Principles</div>
+  <h1 class="hero-title">The <span class="vermilion">Practice</span></h1>
+  <div class="hero-tamil">பணிமனை — workshop, lineage, and the long apprenticeship of form</div>
+  <div class="peacock-frame" aria-hidden="true">
+    <svg viewBox="0 0 313.71717 29.540759" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+      <g transform="translate(54.572101,-91.176475)">
+        <path fill="#1a1a1a" d="m -45.203647,120.20506 c -2.080683,-0.59494 -3.600099,-1.33764 -4.88273,-2.38671 -1.667517,-1.36388 -2.894118,-2.64027 -2.893812,-3.0113 1.42e-4,-0.17364 -0.209138,-0.47237 -0.46507,-0.66382 -0.819614,-0.61314 -1.16478,-1.84791 -1.123557,-4.01931 0.07527,-3.96496 0.841997,-6.28592 3.359706,-10.170217 2.091957,-3.227467 6.669369,-6.452883 10.647663,-7.502765 2.252562,-0.594453 8.248778,-0.796292 11.003264,-0.370372 6.94812,1.074354 16.152972,4.460234 20.6562963,7.598128 0.8536092,0.594796 0.7949964,0.623336 1.3291143,-0.64739 0.2251847,-0.535733 0.8814684,-1.603973 1.4584084,-2.373871 0.8561927,-1.142535 1.457933,-1.600664 3.2740672,-2.492638 2.16210793,-1.06191 4.5637653,-1.779237 6.7277099,-2.009456 0.5824052,-0.06194 1.3990594,-0.240975 1.8147895,-0.397805 0.7738562,-0.291942 6.4810504,-0.196925 10.0927814,0.168029 2.264542,0.228828 9.60899,1.67773 11.219571,2.21338 1.156599,0.384661 1.203738,0.376381 3.086684,-0.542345 2.528472,-1.2337 4.016657,-1.480542 8.446835,-1.401064 3.61374,0.06486 4.290154,0.147139 6.742793,0.820538 0.653941,0.179545 1.719761,0.375692 2.368485,0.435889 0.648729,0.0602 1.838242,0.282073 2.643363,0.493076 1.333488,0.349469 1.625289,0.339432 3.276461,-0.112735 4.298701,-1.177186 16.775093,-2.487486 20.247754,-2.126478 0.82522,0.08579 2.552867,0.408475 3.839215,0.717074 2.046471,0.490964 2.518569,0.521833 3.776859,0.246952 3.038874,-0.663879 6.75683,-1.061515 11.128253,-1.190178 4.134196,-0.121667 4.707691,-0.08259 6.380251,0.434721 1.364622,0.422078 2.105892,0.83929 2.879252,1.620559 1.29673,1.309975 1.63,2.709456 1.6237,6.818148 -0.005,2.95745 0.2393,4.45137 0.62566,3.83325 0.10807,-0.17288 0.17855,-1.23469 0.15662,-2.35957 -0.10151,-5.20664 0.0689,-6.026385 1.66799,-8.024476 0.85063,-1.062863 2.64553,-2.128587 4.10167,-2.435363 2.81819,-0.59374 15.88977,0.302112 18.8453,1.291541 0.69822,0.23375 1.33752,0.188118 3.17619,-0.226686 4.44974,-1.003866 5.16179,-1.08168 9.66723,-1.056509 4.01601,0.0224 5.00432,0.121426 8.5084,0.852608 6.84995,1.42927 7.19777,1.434197 12.43469,0.175947 1.28482,-0.308696 3.07339,-0.450501 5.82325,-0.46168 3.55974,-0.01452 4.14585,0.04906 5.68548,0.615953 0.94414,0.347651 2.11528,0.863208 2.60253,1.145677 0.82461,0.478046 0.98936,0.487693 2.38057,0.139336 1.77908,-0.445477 5.29646,-1.019874 9.8354,-1.606151 3.88998,-0.502463 11.70287,-0.5191 15.08161,-0.03212 5.86054,0.844676 9.86323,3.110261 10.57122,5.983455 l 0.28701,1.164733 3.35851,-1.630478 c 3.17793,-1.542804 8.22537,-3.484656 11.44251,-4.402193 4.71613,-1.345036 12.68145,-1.710913 16.9375,-0.778008 4.93058,1.080764 10.02057,5.551052 11.64065,10.223444 0.65092,1.87732 1.01878,5.06928 0.79472,6.89574 -0.46904,3.82309 -3.07509,7.60889 -6.48471,9.42031 -0.51071,0.27132 -1.10781,0.62201 -1.32689,0.7793 -1.28176,0.92026 -3.99222,1.08281 -9.3957,0.5635 -4.226,-0.40615 -43.09412,-0.56404 -48.28608,-0.19612 -3.36622,0.23852 -9.71584,0.13599 -14.17646,-0.22893 -3.19042,-0.261 -11.4116,-2.46478 -14.96419,-4.01131 -0.53984,-0.23501 -1.10442,-0.42792 -1.25461,-0.42868 -0.43847,-0.002 -0.31926,0.66639 0.24899,1.3964 0.63886,0.82072 0.66215,1.46506 0.0825,2.28367 -0.41639,0.5881 -0.53812,0.60929 -2.4496,0.42635 -1.10627,-0.10587 -3.2008,-0.44095 -4.65448,-0.74463 -1.45369,-0.30368 -4.09201,-0.62284 -5.86295,-0.70924 -3.45491,-0.16856 -4.65649,0.0199 -8.93437,1.40162 -2.04956,0.66196 -2.15841,0.6695 -4.80352,0.33258 -1.68376,-0.21447 -5.04124,-0.32578 -8.88522,-0.29456 -6.04658,0.0491 -6.20383,0.0368 -7.34956,-0.57531 -1.32088,-0.70568 -2.86287,-0.66893 -5.04444,0.12022 -0.88229,0.31916 -2.15717,0.43295 -4.89707,0.43713 -4.79736,0.007 -5.58286,-0.16276 -6.13105,-1.32752 l -0.42264,-0.89802 -1.08755,0.85944 c -1.8674,1.47572 -2.94146,1.82323 -5.59703,1.81093 -1.313341,-0.006 -3.557388,-0.23736 -4.986775,-0.51393 -2.027573,-0.39234 -2.694777,-0.43476 -3.0351,-0.19299 -1.426504,1.01339 -5.2004,1.21652 -9.369876,0.50433 -2.342079,-0.40006 -4.350291,-0.35925 -10.118619,0.20564 -2.370926,0.23218 -2.390138,0.22923 -3.965706,-0.60953 l -1.583238,-0.84286 -4.76258,0.004 c -3.320233,0.003 -5.333694,0.12924 -6.648373,0.41833 -2.953758,0.64954 -5.182097,0.79482 -6.349714,0.41398 -1.394469,-0.45482 -2.213474,-1.26097 -2.208834,-2.17419 0.0021,-0.41118 -0.106632,-0.74818 -0.241605,-0.74887 -0.13497,-6.8e-4 -1.238115,0.35414 -2.451433,0.7885 -7.896638,2.82691 -18.009765,3.78342 -31.365341,2.96657 -7.1026623,-0.43441 -10.2556485,-0.47172 -22.841675,-0.27026 -5.166476,0.0827 -13.263451,0.2047 -17.993277,0.27111 -4.729825,0.0664 -9.671447,0.15763 -10.98138,0.20269 -1.516176,0.0522 -2.861762,-0.0553 -3.702712,-0.29577 z"/>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<!-- band -->
+<div class="band" aria-hidden="true"></div>
+
+<!-- ============ TIER 2 — INTRO / LEDE ============ -->
+<section class="tier tier-2">
+  <div class="intro-grid">
+    <div class="lede">
+      Sthapati Workshop has, since 2009, kept rooms above a mango-merchant's godown on East Masi Street, two streets north of the Meenakshi gopuram. The studio was founded as a partnership between an architect-sthapati and a press-trained graphic designer; its work moves between temple commissions, contemporary residences, gallery design, and printed matter on craft.
+    </div>
+    <div>
+      <p>The practice is small by intent — two principals, six full-time associates, and a roving panel of master-craftsmen who join projects as the brief demands. We accept roughly four architectural commissions and three publications a year, and we keep a single physical workshop where stone, plaster, and proof-press all share the same long monsoon-shuttered hall.</p>
+      <p>What follows is a literal account of where the practice came from and the three rules by which we measure a drawing before it leaves the studio. It is not a manifesto. It is the description we send to clients who ask, reasonably, what they should expect.</p>
+    </div>
+  </div>
+</section>
+
+<!-- palmette divider (uses palmette motif simplified) -->
+<div class="palmette-divider" aria-hidden="true">
+  <svg viewBox="0 0 700 60" xmlns="http://www.w3.org/2000/svg">
+    <g fill="#c9a23a" stroke="#c9a23a" stroke-width="0.8">
+      <line x1="0" y1="30" x2="280" y2="30"/>
+      <line x1="420" y1="30" x2="700" y2="30"/>
+      <line x1="0" y1="26" x2="280" y2="26" stroke="#e34234"/>
+      <line x1="420" y1="26" x2="700" y2="26" stroke="#e34234"/>
+      <g transform="translate(350 30)">
+        <circle r="14" fill="none" stroke="#e34234" stroke-width="1.4"/>
+        <circle r="22" fill="none" stroke="#c9a23a" stroke-width="0.8" stroke-dasharray="2 2"/>
+        <circle r="6" fill="#e34234"/>
+        <path d="M 0 -26 L 4 -14 L 0 -8 L -4 -14 Z" fill="#e34234"/>
+        <path d="M 0 26 L 4 14 L 0 8 L -4 14 Z" fill="#e34234"/>
+        <path d="M -26 0 L -14 4 L -8 0 L -14 -4 Z" fill="#e34234"/>
+        <path d="M 26 0 L 14 4 L 8 0 L 14 -4 Z" fill="#e34234"/>
+      </g>
+      <g transform="translate(120 30)" fill="#e34234"><circle r="3"/></g>
+      <g transform="translate(580 30)" fill="#e34234"><circle r="3"/></g>
+      <g transform="translate(220 30)" fill="#c9a23a"><circle r="2"/></g>
+      <g transform="translate(480 30)" fill="#c9a23a"><circle r="2"/></g>
+    </g>
+  </svg>
+</div>
+
+<!-- ============ TIER 3 — LINEAGE ESSAY + SIDEBAR ============ -->
+<section class="tier tier-3">
+
+  <div class="essay-head">
+    <div class="label">Lineage</div>
+    <h2>How the Studio Came to Be</h2>
+    <div class="rule"></div>
+  </div>
+
+  <div class="essay-grid">
+    <article class="essay-body">
+      <p><strong>M. Arumugam</strong> was born in 1974 in the temple town of Mahabalipuram, where his grandfather Sthapati K. Murugesan kept a working yard a hundred and twenty paces from the Shore Temple. Murugesan-thatha had himself trained under V. Ganapati Sthapati's father and belonged to what the family still calls, with some pride and some pedantry, the Mahabalipuram school — the line that holds <em>Manasara</em> and <em>Mayamata</em> in the same hand as a chisel. Arumugam apprenticed with him from the age of nine. He carved his first kumbha (pot-finial) in 1986 and his first complete dvarapala in 1991.</p>
+
+      <p>In 1993 he sat the entrance examination for CEPT Ahmedabad, and over the next five years read architecture under Kurula Varkey and Riyaz Tayyibji. The mismatch — between a sthapati's plumb-line and a studio crit — was its own education. He wrote his thesis on the proportional system of the Tirumalai Nayak Mahal, and graduated in 1998. Three years with Brinda Somaya in Mumbai followed, then two with Mohammad Shaheer on landscape projects in Delhi and Sri Lanka. He returned to Madurai in 2007 to consult on the conservation of a Chettinad mansion at Kanadukathan; he never quite left.</p>
+
+      <p><strong>Lakshmi Raghavan</strong> was born in 1979 in Pondicherry. She read graphic design at NID Ahmedabad between 1999 and 2003, where she specialised in book typography. She spent four years at the Aurobindo Press, setting and printing the press's revised editions of <em>Savitri</em> and the <em>Letters on Yoga</em>; she still keeps a Vandercook proof-press, hand-shipped from Pondicherry, in the studio's back room. In 2008 she joined Tara Books in Chennai for two seasons, and was the designer-of-record on the Gond folio <em>The Night Life of Trees</em>.</p>
+
+      <p>She and Arumugam met in 2008 at a printing seminar in Sivakasi, on the question of whether a temple-craft folio could be set in twelve-point Lato without losing its temper. The argument went on for three years. In 2011 they took the first floor above C. Subbiah &amp; Sons, Mango Merchants, and registered Sthapati Workshop as a partnership firm under the Indian Partnership Act, 1932.</p>
+
+      <p>The studio's first commission was a small <em>kalyana mandapam</em> for a family in Karaikudi — a roofed open hall, sixty feet by thirty, with twelve granite pillars and a coffered timber ceiling. It was finished in 2013 for ₹46 lakh including stonework. It still stands, and is still in use; the family rents it out for weddings at ₹85,000 a day. We visit it twice a year to check the joinery.</p>
+
+      <p>Since then the practice has grown to its current size and no further. We have turned down two offers to open a Bangalore office and one to open a Singapore one. The work we are interested in cannot be done from far away: it requires that someone walk to the stone-yard on a Wednesday afternoon to argue about the depth of a fillet.</p>
+    </article>
+
+    <aside class="sidebar">
+      <h3>Collaborators</h3>
+      <div class="subhead">The standing panel</div>
+
+      <div class="collab">
+        <div class="name">V. Subramanian</div>
+        <div class="role">Stone-carver · since 2012</div>
+        <div class="place">Pillaiyarpatti, Sivaganga district. Third-generation granite carver. Holds the studio's contracts for all dressed-stone work above six inches of relief; runs a yard of nine assistants.</div>
+      </div>
+
+      <div class="collab">
+        <div class="name">Padma Iyer</div>
+        <div class="role">Kolam &amp; surface artist · since 2014</div>
+        <div class="place">Tirunelveli &amp; Madurai. Trained in pulli-kolam from her mother and grandmother; consulted on the floor-geometry of every studio interior since the Erode residence (2015).</div>
+      </div>
+
+      <div class="collab">
+        <div class="name">Reza Mehta</div>
+        <div class="role">Structural engineer · since 2016</div>
+        <div class="place">Mehta &amp; Associates, 14/2 Lavelle Road, Bangalore 560001. Reads RCC, masonry, and mass-timber with equal patience; has signed off every span over twenty feet that the studio has built.</div>
+      </div>
+
+      <div class="collab">
+        <div class="name">A. Kasthuri</div>
+        <div class="role">Master-plasterer · since 2018</div>
+        <div class="place">Sivagangai. Lime-mortar and stucco for the Pudukkottai gallery and the Chettinad restoration; supplies her own slaked-lime, aged a minimum of forty days.</div>
+      </div>
+
+      <div class="notes">
+        <h4>A note on fees</h4>
+        Architectural commissions are billed at 9% of construction cost (sliding to 7% above ₹3 crore). Publication design is billed by the spread, currently ₹14,000 per spread, with a minimum engagement of sixteen spreads.
+      </div>
+    </aside>
+  </div>
+
+  <!-- timeline -->
+  <div class="facts" aria-label="Practice timeline">
+    <div class="fact"><div class="yr">1986</div><div class="ev">First kumbha · age 12</div></div>
+    <div class="fact"><div class="yr">1998</div><div class="ev">CEPT B.Arch · Thesis on Nayak Mahal</div></div>
+    <div class="fact"><div class="yr">2011</div><div class="ev">Studio registered · Madurai</div></div>
+    <div class="fact"><div class="yr">2024</div><div class="ev">28 built works · 41 publications</div></div>
+  </div>
+</section>
+
+<!-- band -->
+<div class="band" aria-hidden="true"></div>
+
+<!-- ============ TIER 4 — PRINCIPLES ============ -->
+<section class="principle-tier">
+  <div class="principle-head">
+    <div class="label">The Three Principles</div>
+    <h2>Tala · Ornament · Color · Light</h2>
+    <div class="tamil">தளம் · அலங்காரம் · நிறம் · ஒளி — the order in which we draw</div>
+  </div>
+
+  <div class="principles">
+
+    <article class="pillar-card">
+      <div class="kalasha" aria-hidden="true"></div>
+      <div class="num">I.</div>
+      <h3>Tala Before<br>Ornament</h3>
+      <p>Proportion is settled before any moulding is permitted to enter the drawing. We work in <em>tala</em>-units (the standing measure of the principal figure or column) and resolve the bay, the storey, and the silhouette in plain line. If the building is wrong at this stage, no ornament will rescue it; if it is right, ornament becomes a service rather than a disguise. We hold this rule even on print — the grid is set before the rule, the rule before the flourish.</p>
+      <span class="tamil-tag">தளம் முதல்</span>
+    </article>
+
+    <article class="pillar-card">
+      <div class="kalasha" aria-hidden="true"></div>
+      <div class="num">II.</div>
+      <h3>Ornament Before<br>Color</h3>
+      <p>Ornament is drawn, carved and sized in monochrome before any pigment is approved. Where a kolam, a palmette, or a kapota cornice is to appear, it is first proved in graphite or slip-cast plaster at full size on the wall. Only after the relief reads correctly under raking light does the studio admit color. This is the rule that stops a building from becoming a poster of itself.</p>
+      <span class="tamil-tag">அலங்காரம் முன்</span>
+    </article>
+
+    <article class="pillar-card">
+      <div class="kalasha" aria-hidden="true"></div>
+      <div class="num">III.</div>
+      <h3>Color Before<br>Light</h3>
+      <p>Color is fixed before the lighting plan is drawn. Pigments are chosen for how they read under the actual sun of the actual site — Madurai's noon is not Bangalore's noon — and the fixtures are then designed to defer to those colors, not to overwrite them. Electric light, in our work, is asked to do the modest work of letting the day's color survive into the evening. It is never asked to invent a mood.</p>
+      <span class="tamil-tag">நிறம் கடைசி</span>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============ TIER 5 — PULLQUOTE ============ -->
+<section class="pullquote">
+  <q>A sthapati who has not also set type does not know what a line is. A typographer who has not laid out a column-base does not know what a margin is for. We have arranged things so that, in this office, both arguments happen at the same table.</q>
+  <div class="attr">— M. Arumugam &amp; Lakshmi Raghavan · Studio note, Aadi 2019</div>
+</section>
+
+<!-- band -->
+<div class="band" aria-hidden="true"></div>
+
+<!-- second palmette divider -->
+<div class="palmette-divider" aria-hidden="true">
+  <svg viewBox="0 0 700 60" xmlns="http://www.w3.org/2000/svg">
+    <g fill="#c9a23a" stroke="#c9a23a" stroke-width="0.8">
+      <line x1="0" y1="30" x2="700" y2="30"/>
+      <line x1="0" y1="34" x2="700" y2="34" stroke="#e34234"/>
+      <g fill="#e34234">
+        <circle cx="100" cy="30" r="3"/>
+        <circle cx="200" cy="30" r="3"/>
+        <circle cx="300" cy="30" r="3"/>
+        <circle cx="400" cy="30" r="3"/>
+        <circle cx="500" cy="30" r="3"/>
+        <circle cx="600" cy="30" r="3"/>
+      </g>
+      <g transform="translate(350 30)">
+        <path d="M -40 0 L 0 -16 L 40 0 L 0 16 Z" fill="none" stroke="#076b88" stroke-width="1.4"/>
+        <circle r="4" fill="#e34234"/>
+      </g>
+    </g>
+  </svg>
+</div>
+
+<!-- ============ MEMBERSHIPS / ACCREDITATIONS ============ -->
+<section class="tier tier-3">
+  <div class="section-head-mini">
+    <div class="label">Memberships &amp; Affiliations</div>
+    <h2>Standing of the Studio</h2>
+  </div>
+  <div class="facts">
+    <div class="fact"><div class="yr">COA</div><div class="ev">Council of Architecture<br>Reg. CA/2002/29411 (Arumugam)</div></div>
+    <div class="fact"><div class="yr">IIA</div><div class="ev">Indian Institute of Architects<br>Tamil Nadu Chapter, 2009–</div></div>
+    <div class="fact"><div class="yr">INTACH</div><div class="ev">Madurai &amp; Chettinad chapters<br>Listed conservation consultants</div></div>
+    <div class="fact"><div class="yr">AIGA</div><div class="ev">Allied member · Lakshmi Raghavan<br>Print, since 2006</div></div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+
+  <div class="band" aria-hidden="true"></div>
+
+  <div class="arcade" aria-hidden="false">
+    <div class="col"><span class="base"></span></div>
+    <div class="col"><span class="base"></span></div>
+    <div class="col"><span class="base"></span></div>
+    <div class="col"><span class="base"></span></div>
+    <div class="col"><span class="base"></span></div>
+    <div class="col"><span class="base"></span></div>
+    <div class="col"><span class="base"></span></div>
+
+    <div class="mandala">
+      <span class="ring" aria-hidden="true"></span>
+      <div class="mandala-content">
+        <h4>Sthapati Workshop</h4>
+        <p>1st Floor, above C. Subbiah &amp; Sons<br>
+        14, East Masi Street<br>
+        Madurai 625001 · Tamil Nadu<br>
+        +91 452 234 1129 · office@sthapati.in</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-line">
+    © 2011–2024 Sthapati Workshop LLP &nbsp;·&nbsp; GSTIN 33AAFCS4421L1Z9 &nbsp;·&nbsp; <span class="tamil">கல்லும் எழுத்தும் ஒரே மேசையில் — stone and letter, on the one table</span>
+  </div>
+
+</footer>
+
+</body>
+</html>

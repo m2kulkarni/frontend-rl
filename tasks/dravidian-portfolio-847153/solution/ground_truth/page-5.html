@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Commissions & Patronage — Terms of Engagement · Atelier Sthapati</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* ---------- Top tilaka + arcade nav ---------- */
+  .tilaka {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 18px 0 4px;
+    background: var(--bg);
+  }
+  .tilaka svg {
+    width: 38px; height: 38px;
+    filter: drop-shadow(0 1px 0 rgba(0,0,0,0.15));
+  }
+
+  .arcade {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    background: var(--surface);
+    border-top: 3px double var(--primary);
+    border-bottom: 3px double var(--primary);
+    box-shadow: 0 1px 0 var(--accent), 0 -1px 0 var(--accent);
+    margin: 0;
+  }
+  .bay {
+    position: relative;
+    text-align: center;
+    padding: 18px 8px 14px;
+    border-left: 1px solid var(--primary);
+    border-right: 1px solid var(--primary);
+    background: var(--surface);
+    text-decoration: none;
+    color: var(--text);
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.22em;
+    font-size: 11px;
+    transition: background 0.2s;
+  }
+  .bay::before, .bay::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    height: 6px;
+    background:
+      linear-gradient(var(--accent), var(--accent)) center/100% 1px no-repeat,
+      repeating-linear-gradient(90deg, var(--primary) 0 2px, transparent 2px 6px);
+  }
+  .bay::before { top: 0; }
+  .bay::after { bottom: 0; }
+  .bay:first-child { border-left: 3px double var(--primary); }
+  .bay:last-child  { border-right: 3px double var(--primary); }
+  .bay[aria-current="page"] {
+    background: var(--bg);
+    color: var(--text-emphasis);
+    font-weight: 700;
+  }
+  .bay[aria-current="page"]::after {
+    background:
+      linear-gradient(var(--primary), var(--primary)) center/100% 2px no-repeat,
+      repeating-linear-gradient(90deg, var(--accent) 0 3px, transparent 3px 6px);
+  }
+  .bay-num {
+    display: block;
+    font-size: 9px;
+    color: var(--accent);
+    letter-spacing: 0.3em;
+    margin-bottom: 4px;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    background: var(--surface);
+    margin: 32px 48px 0;
+    border: 1px solid var(--accent);
+    box-shadow: 0 0 0 6px var(--bg), 0 0 0 7px var(--primary);
+    padding: 48px 56px 36px;
+    position: relative;
+  }
+  .hero-peacocks {
+    display: block;
+    width: 100%;
+    height: 36px;
+    margin-bottom: 24px;
+  }
+  .hero-peacocks svg { width: 100%; height: 100%; }
+  .hero h1 {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    text-align: center;
+    letter-spacing: 0.28em;
+    font-size: 36px;
+    color: var(--text-emphasis);
+    margin: 0 0 8px;
+    font-weight: 600;
+  }
+  .hero .sub {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.4em;
+    font-size: 12px;
+    color: var(--secondary);
+    margin: 0 0 18px;
+  }
+  .hero .epigraph {
+    max-width: 760px;
+    margin: 0 auto;
+    text-align: center;
+    font-style: italic;
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--text);
+  }
+  .hero-rule {
+    margin: 24px auto 0;
+    width: 220px;
+    height: 14px;
+    background:
+      linear-gradient(var(--primary), var(--primary)) center/100% 2px no-repeat,
+      linear-gradient(var(--accent), var(--accent)) center/100% 1px no-repeat;
+    position: relative;
+  }
+  .hero-rule::before, .hero-rule::after {
+    content: "❖";
+    position: absolute; top: -4px;
+    color: var(--primary);
+    font-size: 14px;
+    background: var(--surface);
+    padding: 0 8px;
+  }
+  .hero-rule::before { left: 50%; transform: translateX(-50%); }
+  .hero-rule::after { display: none; }
+
+  /* ---------- Palmette divider ---------- */
+  .palmette {
+    margin: 36px 48px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+  }
+  .palmette svg {
+    height: 48px;
+    width: auto;
+    opacity: 0.85;
+    fill: var(--primary);
+  }
+  .palmette .gloss {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.3em;
+    color: var(--text-emphasis);
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  /* ---------- Tier cards (gopuram) ---------- */
+  .tiers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    margin: 0 48px;
+  }
+  .card {
+    background: var(--surface);
+    position: relative;
+    padding: 0 28px 36px;
+    border: 1px solid var(--accent);
+    box-shadow: inset 0 0 0 4px var(--surface), inset 0 0 0 5px var(--accent);
+  }
+  /* paired carved pillars */
+  .card::before, .card::after {
+    content: "";
+    position: absolute;
+    top: 70px; bottom: 56px;
+    width: 6px;
+    background:
+      linear-gradient(var(--primary), var(--primary)) left/2px 100% no-repeat,
+      linear-gradient(var(--primary), var(--primary)) right/2px 100% no-repeat;
+  }
+  .card::before { left: 12px; }
+  .card::after  { right: 12px; }
+
+  /* stepped pediment */
+  .pediment {
+    margin: 0 -28px 18px;
+    background: var(--bg);
+    position: relative;
+  }
+  .pediment .step {
+    height: 10px;
+    background: var(--primary);
+    border-bottom: 1px solid var(--accent);
+  }
+  .pediment .step:nth-child(1) { width: 100%; }
+  .pediment .step:nth-child(2) { width: 86%; margin: 0 auto; background: var(--secondary); }
+  .pediment .step:nth-child(3) { width: 72%; margin: 0 auto; background: var(--primary); }
+  .pediment .finial {
+    height: 18px;
+    width: 0;
+    margin: 0 auto;
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-bottom: 18px solid var(--text-emphasis);
+  }
+
+  .card .ribbon {
+    background: var(--secondary);
+    color: var(--surface);
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.22em;
+    text-align: center;
+    padding: 10px 6px;
+    font-size: 14px;
+    margin: 0 -16px 16px;
+    box-shadow: 0 1px 0 var(--accent);
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+  }
+  .card .tier-num {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.4em;
+    color: var(--primary);
+    font-size: 11px;
+    margin-bottom: 6px;
+  }
+  .card h3 {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    font-size: 19px;
+    color: var(--text-emphasis);
+    margin: 6px 0 14px;
+    font-weight: 600;
+  }
+  .card .price {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.15em;
+    color: var(--secondary);
+    font-size: 13px;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--accent);
+  }
+  .card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 14px;
+    font-size: 14.5px;
+  }
+  .card ul li {
+    padding: 5px 0 5px 18px;
+    position: relative;
+    border-bottom: 1px dotted rgba(193,154,107,0.5);
+  }
+  .card ul li::before {
+    content: "❀";
+    position: absolute; left: 0; top: 5px;
+    color: var(--primary);
+    font-size: 11px;
+  }
+  .card .duration {
+    font-style: italic;
+    text-align: center;
+    color: var(--text);
+    font-size: 13.5px;
+    margin: 10px 0 4px;
+  }
+  .card .colophon {
+    text-align: center;
+    margin-top: 14px;
+  }
+  .card .colophon svg {
+    width: 38px; height: 30px;
+  }
+
+  /* ---------- Notes section (materials, decline) ---------- */
+  .notes {
+    margin: 0 48px;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 32px;
+  }
+  .note {
+    background: var(--surface);
+    padding: 32px 36px;
+    border: 1px solid var(--accent);
+    box-shadow: 0 0 0 4px var(--bg), 0 0 0 5px var(--primary);
+    position: relative;
+  }
+  .note h2 {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.22em;
+    font-size: 22px;
+    color: var(--text-emphasis);
+    margin: 0 0 6px;
+    font-weight: 600;
+  }
+  .note .h-rule {
+    width: 80px;
+    height: 8px;
+    background:
+      linear-gradient(var(--primary), var(--primary)) center/100% 2px no-repeat,
+      linear-gradient(var(--accent), var(--accent)) center/100% 1px no-repeat;
+    margin-bottom: 18px;
+  }
+  .note p { margin: 0 0 12px; font-size: 15px; }
+  .note p:last-child { margin-bottom: 0; }
+  .note.decline {
+    background: #f3e6d8;
+  }
+  .note.decline h2 { color: var(--text-emphasis); }
+  .note .stamp {
+    position: absolute;
+    top: 22px; right: 22px;
+    width: 48px; height: 48px;
+    opacity: 0.18;
+  }
+
+  /* ---------- Process strip ---------- */
+  .process {
+    margin: 36px 48px;
+    background: var(--surface);
+    border: 1px solid var(--accent);
+    box-shadow: 0 0 0 4px var(--bg), 0 0 0 5px var(--secondary);
+    padding: 28px 32px 32px;
+  }
+  .process h2 {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.3em;
+    font-size: 20px;
+    color: var(--text-emphasis);
+    margin: 0 0 24px;
+    font-weight: 600;
+  }
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    border-top: 2px solid var(--primary);
+    border-bottom: 2px solid var(--primary);
+  }
+  .step-cell {
+    padding: 18px 14px;
+    border-right: 1px dashed var(--accent);
+    text-align: center;
+    position: relative;
+  }
+  .step-cell:last-child { border-right: none; }
+  .step-cell .num {
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+    font-size: 28px;
+    line-height: 1;
+    margin-bottom: 6px;
+    letter-spacing: 0.1em;
+  }
+  .step-cell .label {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    font-size: 13px;
+    color: var(--secondary);
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .step-cell p {
+    font-size: 13px;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* ---------- Schedule of fees ---------- */
+  .schedule {
+    margin: 0 48px 36px;
+    background: var(--surface);
+    border: 1px solid var(--accent);
+    padding: 30px 36px;
+    box-shadow: 0 0 0 4px var(--bg), 0 0 0 5px var(--accent);
+  }
+  .schedule h2 {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.28em;
+    font-size: 20px;
+    color: var(--text-emphasis);
+    margin: 0 0 4px;
+    text-align: center;
+    font-weight: 600;
+  }
+  .schedule .legend {
+    text-align: center;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--secondary);
+    margin-bottom: 18px;
+  }
+  table.fees {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14.5px;
+  }
+  table.fees thead th {
+    background: var(--secondary);
+    color: var(--surface);
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 500;
+  }
+  table.fees tbody td {
+    padding: 11px 12px;
+    border-bottom: 1px dotted var(--accent);
+    vertical-align: top;
+  }
+  table.fees tbody tr:nth-child(odd) td { background: rgba(193,154,107,0.08); }
+  table.fees tbody td:first-child {
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.06em;
+    color: var(--text-emphasis);
+    width: 32%;
+  }
+  table.fees tbody td:last-child {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    color: var(--primary);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  /* ---------- Patrons ledger ---------- */
+  .ledger {
+    margin: 0 48px 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+  .ledger > div {
+    background: var(--surface);
+    border: 1px solid var(--accent);
+    padding: 26px 30px;
+    box-shadow: 0 0 0 4px var(--bg), 0 0 0 5px var(--primary);
+  }
+  .ledger h3 {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.22em;
+    color: var(--text-emphasis);
+    font-size: 17px;
+    margin: 0 0 14px;
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 10px;
+    font-weight: 600;
+  }
+  .ledger ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+  }
+  .ledger li {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    padding: 6px 0;
+    border-bottom: 1px dotted rgba(193,154,107,0.5);
+  }
+  .ledger li:last-child { border-bottom: none; }
+  .ledger li .yr {
+    color: var(--primary);
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.06em;
+  }
+
+  /* ---------- Footer arcade ---------- */
+  footer {
+    margin-top: 48px;
+    background: var(--surface);
+    border-top: 3px double var(--primary);
+    border-bottom: 3px double var(--primary);
+    box-shadow: 0 1px 0 var(--accent), 0 -1px 0 var(--accent);
+  }
+  .foot-arcade {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.2fr 1fr 1fr;
+    align-items: stretch;
+  }
+  .foot-bay {
+    padding: 22px 18px;
+    border-left: 1px solid var(--primary);
+    border-right: 1px solid var(--primary);
+    text-align: center;
+    font-size: 12.5px;
+  }
+  .foot-bay:first-child { border-left: 3px double var(--primary); }
+  .foot-bay:last-child  { border-right: 3px double var(--primary); }
+  .foot-bay h4 {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.22em;
+    font-size: 11px;
+    color: var(--text-emphasis);
+    margin: 0 0 8px;
+    font-weight: 600;
+  }
+  .foot-bay p { margin: 2px 0; line-height: 1.5; }
+
+  /* kolam */
+  .kolam {
+    width: 130px; height: 130px;
+    margin: 4px auto 8px;
+    position: relative;
+    background:
+      radial-gradient(circle at 50% 50%, transparent 28px, var(--primary) 28px 30px, transparent 30px 50px, var(--accent) 50px 51px, transparent 51px),
+      radial-gradient(circle at 50% 50%, var(--surface) 0);
+  }
+  .kolam::before, .kolam::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(var(--primary) 1.4px, transparent 1.6px);
+    background-size: 14px 14px;
+    background-position: center;
+    -webkit-mask: radial-gradient(circle at 50% 50%, #000 60px, transparent 62px);
+            mask: radial-gradient(circle at 50% 50%, #000 60px, transparent 62px);
+  }
+  .kolam::after {
+    background-image:
+      radial-gradient(var(--secondary) 1px, transparent 1.2px);
+    background-size: 22px 22px;
+    -webkit-mask: radial-gradient(circle at 50% 50%, #000 36px, transparent 38px);
+            mask: radial-gradient(circle at 50% 50%, #000 36px, transparent 38px);
+  }
+  .kolam .seal {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .kolam .seal svg {
+    width: 38px; height: 38px;
+  }
+
+  .foot-rule {
+    height: 8px;
+    background:
+      linear-gradient(var(--primary), var(--primary)) center top/100% 3px no-repeat,
+      linear-gradient(var(--accent), var(--accent)) center bottom/100% 2px no-repeat,
+      var(--surface);
+  }
+  .colophon-line {
+    text-align: center;
+    background: var(--surface);
+    padding: 14px 12px 18px;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--text-emphasis);
+  }
+</style>
+</head>
+<body>
+
+<!-- Aum tilaka -->
+<div class="tilaka" aria-hidden="true">
+  <svg viewBox="0 0 356 367" xmlns="http://www.w3.org/2000/svg"><path d="M 90.456847,353.9498 C 51.797347,340.13485 23.72672,305.75839 12.612487,258.6184 C 7.5684267,237.22321 6.1421397,201.86984 10.323594,201.86984 C 11.712834,201.86984 15.42322,211.57056 18.568972,223.427 C 25.452892,249.37152 37.19436,273.76855 48.535988,285.69407 C 67.374717,305.50242 114.0356,313.26029 140.92106,301.05394 C 161.86409,291.54544 170.35697,268.94603 161.24995,246.95931 C 154.21242,229.96943 138.24701,224.28836 108.50834,228.19197 C 108.50834,228.19197 90.282834,208.57398 84.476417,173.73548 L 103.15738,175.42939 C 125.65731,177.46962 142.64532,172.49605 151.46236,161.28728 C 159.74765,150.75419 159.5685,146.68046 150.34841,135.96157 C 137.04396,120.49428 113.15511,124.41248 64.786577,149.99522 L 40.381632,109.08518 L 50.613137,101.2812 C 76.253387,81.724339 120.77357,71.947329 146.11011,80.309169 C 169.18841,87.925649 186.12724,118.14755 181.60247,143.63298 C 178.54327,160.86286 164.72752,184.99524 154.05369,191.75339 L 144.84862,197.58162 L 157.56351,203.31522 C 179.17018,213.05833 192.36061,205.61034 208.12001,174.76849 C 229.92949,132.0869 244.0745,121.0378 276.96658,120.99051 C 292.28176,120.96847 297.73268,122.57499 308.90312,130.4031 C 336.78213,149.94016 351.9622,190.39693 348.62804,236.27272 C 344.40474,294.37435 316.88374,329.61601 275.73415,329.61601 C 253.15086,329.61601 238.59451,321.69526 227.00729,303.10156 C 216.82976,286.76927 212.24334,254.42288 218.08805,240.19369 C 220.89208,233.36732 221.39892,233.13578 221.58223,238.59686 C 221.91916,248.63689 233.34159,264.95549 243.82827,270.37835 C 269.55794,283.68369 306.49479,266.96693 321.10832,235.4032 C 332.20339,211.4394 326.25105,165.21656 311.02084,157.06552 C 307.83453,155.36024 299.96089,153.96502 293.5244,153.96502 C 279.84214,153.96502 269.09709,163.80155 254.03263,190.11774 C 248.82442,199.21613 240.05943,210.97175 234.55486,216.24128 C 225.61134,224.80312 222.41769,225.82225 204.53067,225.82225 L 184.51412,225.82225 L 190.98415,240.19369 C 200.2451,260.76437 199.80694,294.18704 190.00976,314.53347 C 181.35272,332.51252 161.33618,350.71469 145.33374,355.16013 C 129.75572,359.4876 104.38789,358.9281 90.456847,353.9498 z M 165.8338,75.923739 C 156.97908,60.814399 151.52974,32.606158 157.46546,32.606158 C 164.43775,47.732319 178.73037,61.227101 194.03409,70.643259 C 221.52091,83.949329 249.39257,78.578529 279.84247,54.108239 C 286.54595,48.721279 292.48231,44.913138 293.0345,45.645698 C 300.4697,57.184233 313.331,66.613261 317.58219,80.021449 C 317.58219,85.678729 293.22867,101.96033 274.01214,109.15007 C 226.38264,122.8706 193.96598,117.44304 165.8338,75.923739 z M 189.83603,40.997228 L 220.84514,6.6137488 L 255.30593,38.514418 C 243.51876,48.222549 235.00994,63.289118 221.54391,70.930009 C 210.90372,63.086273 195.02308,53.837816 189.83603,40.997228 z" style="fill:var(--primary)"/></svg>
+</div>
+
+<!-- Pillared arcade nav -->
+<nav class="arcade" aria-label="Primary">
+  <a class="bay" href="page-1.html"><span class="bay-num">I</span>Studio</a>
+  <a class="bay" href="page-2.html"><span class="bay-num">II</span>Selected Works</a>
+  <a class="bay" href="page-3.html"><span class="bay-num">III</span>Treatises</a>
+  <a class="bay" href="page-4.html"><span class="bay-num">IV</span>Workshop</a>
+  <a class="bay" href="page-5.html" aria-current="page"><span class="bay-num">V</span>Commissions</a>
+  <a class="bay" href="page-6.html"><span class="bay-num">VI</span>Visit</a>
+  <a class="bay" href="page-1.html"><span class="bay-num">·</span>Index</a>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-peacocks" aria-hidden="true">
+    <svg viewBox="0 0 313.71717 29.540759" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+      <g transform="translate(54.572101,-91.176475)">
+        <path style="fill:var(--text-emphasis)" d="m -45.203647,120.20506 c -2.080683,-0.59494 -3.600099,-1.33764 -4.88273,-2.38671 -1.667517,-1.36388 -2.894118,-2.64027 -2.893812,-3.0113 1.42e-4,-0.17364 -0.209138,-0.47237 -0.46507,-0.66382 -0.819614,-0.61314 -1.16478,-1.84791 -1.123557,-4.01931 0.07527,-3.96496 0.841997,-6.28592 3.359706,-10.170217 2.091957,-3.227467 6.669369,-6.452883 10.647663,-7.502765 2.252562,-0.594453 8.248778,-0.796292 11.003264,-0.370372 6.94812,1.074354 16.152972,4.460234 20.6562963,7.598128 0.8536092,0.594796 0.7949964,0.623336 1.3291143,-0.64739 0.2251847,-0.535733 0.8814684,-1.603973 1.4584084,-2.373871 0.8561927,-1.142535 1.457933,-1.600664 3.2740672,-2.492638 2.16210793,-1.06191 4.5637653,-1.779237 6.7277099,-2.009456 0.5824052,-0.06194 1.3990594,-0.240975 1.8147895,-0.397805 0.7738562,-0.291942 6.4810504,-0.196925 10.0927814,0.168029 2.264542,0.228828 9.60899,1.67773 11.219571,2.21338 1.156599,0.384661 1.203738,0.376381 3.086684,-0.542345 2.528472,-1.2337 4.016657,-1.480542 8.446835,-1.401064 3.61374,0.06486 4.290154,0.147139 6.742793,0.820538 0.653941,0.179545 1.719761,0.375692 2.368485,0.435889 0.648729,0.0602 1.838242,0.282073 2.643363,0.493076 1.333488,0.349469 1.625289,0.339432 3.276461,-0.112735 4.298701,-1.177186 16.775093,-2.487486 20.247754,-2.126478 0.82522,0.08579 2.552867,0.408475 3.839215,0.717074 2.046471,0.490964 2.518569,0.521833 3.776859,0.246952 3.038874,-0.663879 6.75683,-1.061515 11.128253,-1.190178 4.134196,-0.121667 4.707691,-0.08259 6.380251,0.434721 1.364622,0.422078 2.105892,0.83929 2.879252,1.620559 1.29673,1.309975 1.63,2.709456 1.6237,6.818148 -0.005,2.95745 0.2393,4.45137 0.62566,3.83325 0.10807,-0.17288 0.17855,-1.23469 0.15662,-2.35957 -0.10151,-5.20664 0.0689,-6.026385 1.66799,-8.024476 0.85063,-1.062863 2.64553,-2.128587 4.10167,-2.435363 2.81819,-0.59374 15.88977,0.302112 18.8453,1.291541 0.69822,0.23375 1.33752,0.188118 3.17619,-0.226686 4.44974,-1.003866 5.16179,-1.08168 9.66723,-1.056509 4.01601,0.0224 5.00432,0.121426 8.5084,0.852608 6.84995,1.42927 7.19777,1.434197 12.43469,0.175947 1.28482,-0.308696 3.07339,-0.450501 5.82325,-0.46168 3.55974,-0.01452 4.14585,0.04906 5.68548,0.615953 0.94414,0.347651 2.11528,0.863208 2.60253,1.145677 0.82461,0.478046 0.98936,0.487693 2.38057,0.139336 1.77908,-0.445477 5.29646,-1.019874 9.8354,-1.606151 3.88998,-0.502463 11.70287,-0.5191 15.08161,-0.03212 5.86054,0.844676 9.86323,3.110261 10.57122,5.983455 l 0.28701,1.164733 3.35851,-1.630478 c 3.17793,-1.542804 8.22537,-3.484656 11.44251,-4.402193 4.71613,-1.345036 12.68145,-1.710913 16.9375,-0.778008 4.93058,1.080764 10.02057,5.551052 11.64065,10.223444 0.65092,1.87732 1.01878,5.06928 0.79472,6.89574 -0.46904,3.82309 -3.07509,7.60889 -6.48471,9.42031 -0.51071,0.27132 -1.10781,0.62201 -1.32689,0.7793 -1.28176,0.92026 -3.99222,1.08281 -9.3957,0.5635 -4.226,-0.40615 -43.09412,-0.56404 -48.28608,-0.19612 -3.36622,0.23852 -9.71584,0.13599 -14.17646,-0.22893 -3.19042,-0.261 -11.4116,-2.46478 -14.96419,-4.01131 -0.53984,-0.23501 -1.10442,-0.42792 -1.25461,-0.42868 -0.43847,-0.002 -0.31926,0.66639 0.24899,1.3964 0.63886,0.82072 0.66215,1.46506 0.0825,2.28367 -0.41639,0.5881 -0.53812,0.60929 -2.4496,0.42635 -1.10627,-0.10587 -3.2008,-0.44095 -4.65448,-0.74463 -1.45369,-0.30368 -4.09201,-0.62284 -5.86295,-0.70924 -3.45491,-0.16856 -4.65649,0.0199 -8.93437,1.40162 -2.04956,0.66196 -2.15841,0.6695 -4.80352,0.33258 -1.68376,-0.21447 -5.04124,-0.32578 -8.88522,-0.29456 -6.04658,0.0491 -6.20383,0.0368 -7.34956,-0.57531 -1.32088,-0.70568 -2.86287,-0.66893 -5.04444,0.12022 -0.88229,0.31916 -2.15717,0.43295 -4.89707,0.43713 -4.79736,0.007 -5.58286,-0.16276 -6.13105,-1.32752 l -0.42264,-0.89802 -1.08755,0.85944 c -1.8674,1.47572 -2.94146,1.82323 -5.59703,1.81093 -1.313341,-0.006 -3.557388,-0.23736 -4.986775,-0.51393 -2.027573,-0.39234 -2.694777,-0.43476 -3.0351,-0.19299 -1.426504,1.01339 -5.2004,1.21652 -9.369876,0.50433 -2.342079,-0.40006 -4.350291,-0.35925 -10.118619,0.20564 -2.370926,0.23218 -2.390138,0.22923 -3.965706,-0.60953 l -1.583238,-0.84286 -4.76258,0.004 c -3.320233,0.003 -5.333694,0.12924 -6.648373,0.41833 -2.953758,0.64954 -5.182097,0.79482 -6.349714,0.41398 -1.394469,-0.45482 -2.213474,-1.26097 -2.208834,-2.17419 0.0021,-0.41118 -0.106632,-0.74818 -0.241605,-0.74887 -0.13497,-6.8e-4 -1.238115,0.35414 -2.451433,0.7885 -7.896638,2.82691 -18.009765,3.78342 -31.365341,2.96657 -7.1026623,-0.43441 -10.2556485,-0.47172 -22.841675,-0.27026 -5.166476,0.0827 -13.263451,0.2047 -17.993277,0.27111 -4.729825,0.0664 -9.671447,0.15763 -10.98138,0.20269 -1.516176,0.0522 -2.861762,-0.0553 -3.702712,-0.29577 z"/>
+      </g>
+    </svg>
+  </div>
+  <p class="sub">Section V · Of Patronage and the Setting of Hands to Stone</p>
+  <h1>Commissions &amp; Terms of Engagement</h1>
+  <p class="epigraph">
+    By long usage and by the counsel of the <em>Mānasāra</em>, the right ordering of a commission
+    is itself part of the work. Set down here are the three tiers in which this studio
+    accepts engagements from temple trusts, private patrons, and conservation bodies —
+    together with what is undertaken, what is required, and what, in conscience, must be declined.
+  </p>
+  <div class="hero-rule" aria-hidden="true"></div>
+</section>
+
+<div class="palmette" aria-hidden="true">
+  <svg viewBox="0 0 60 40"><path d="M30 2 C 14 2 6 14 6 22 C 6 30 14 38 30 38 C 46 38 54 30 54 22 C 54 14 46 2 30 2 Z M 30 8 L 36 22 L 30 36 L 24 22 Z"/></svg>
+  <span class="gloss">Of the Three Tiers · त्रिविधं कर्म</span>
+  <svg viewBox="0 0 60 40"><path d="M30 2 C 14 2 6 14 6 22 C 6 30 14 38 30 38 C 46 38 54 30 54 22 C 54 14 46 2 30 2 Z M 30 8 L 36 22 L 30 36 L 24 22 Z"/></svg>
+</div>
+
+<!-- Three Tiers -->
+<section class="tiers">
+
+  <article class="card">
+    <div class="pediment" aria-hidden="true">
+      <div class="finial"></div>
+      <div class="step"></div>
+      <div class="step"></div>
+      <div class="step"></div>
+    </div>
+    <p class="tier-num">Prathama · The First Tier</p>
+    <h3 class="ribbon">Drawings Only</h3>
+    <p class="price">From ₹ 1,85,000 · 4 to 7 months</p>
+    <ul>
+      <li>Measured survey of existing fabric, conducted on site over 9–14 days</li>
+      <li>Plans, elevations and sections in ink on Daler-Rowney 220 gsm cartridge</li>
+      <li>Vāstu-puruṣa-maṇḍala plans drawn to the prescribed 64- or 81-pada grid</li>
+      <li>Ornament details at quarter-scale: kumbha, kapota, vyāla, makara-toraṇa</li>
+      <li>One bound portfolio (cloth, hand-stitched) and three loose blueprint sets</li>
+      <li>Consultation with the sthapati of record where one is appointed</li>
+    </ul>
+    <p class="duration">No site work is undertaken at this tier.</p>
+    <div class="colophon" aria-hidden="true">
+      <svg viewBox="0 0 60 50"><g transform="translate(30,25)"><path d="M-18,0 Q-12,-14 0,-14 Q12,-14 18,0 Q12,14 0,14 Q-12,14 -18,0 Z M0,-10 L4,0 L0,10 L-4,0 Z" fill="none" stroke="var(--primary)" stroke-width="1.2"/><circle cx="0" cy="0" r="2" fill="var(--accent)"/></g></svg>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="pediment" aria-hidden="true">
+      <div class="finial"></div>
+      <div class="step"></div>
+      <div class="step"></div>
+      <div class="step"></div>
+    </div>
+    <p class="tier-num">Dvitīya · The Second Tier</p>
+    <h3 class="ribbon">Drawings With Supervision</h3>
+    <p class="price">From ₹ 6,40,000 · 9 to 14 months</p>
+    <ul>
+      <li>All matter of the First Tier, prepared and bound as above</li>
+      <li>Site visits in the auspicious months of <em>Cittirai</em>, <em>Āvaṇi</em>, and <em>Kārttikai</em></li>
+      <li>Inspection of granite blocks at the quarry (typically Tiruchirāpalli or Salem)</li>
+      <li>Marking of stones for the lead carvers; correction of proportion in situ</li>
+      <li>Written reports after each visit, in Tamil and English, to the trustees</li>
+      <li>Standing telephone counsel between visits, without further fee</li>
+    </ul>
+    <p class="duration">A minimum of four supervisions, at intervals of eight to twelve weeks.</p>
+    <div class="colophon" aria-hidden="true">
+      <svg viewBox="0 0 60 50"><g transform="translate(30,25)"><path d="M-18,0 Q-12,-14 0,-14 Q12,-14 18,0 Q12,14 0,14 Q-12,14 -18,0 Z M0,-10 L4,0 L0,10 L-4,0 Z" fill="none" stroke="var(--primary)" stroke-width="1.2"/><circle cx="0" cy="0" r="2" fill="var(--accent)"/></g></svg>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="pediment" aria-hidden="true">
+      <div class="finial"></div>
+      <div class="step"></div>
+      <div class="step"></div>
+      <div class="step"></div>
+    </div>
+    <p class="tier-num">Tritīya · The Third Tier</p>
+    <h3 class="ribbon">Full Śilpi Commission</h3>
+    <p class="price">From ₹ 22,00,000 · 18 to 36 months</p>
+    <ul>
+      <li>Drawings, supervision, and the carving itself by this studio's hands</li>
+      <li>Lineage carvers in granite, sandstone, or kṛṣṇa-śilā as the work demands</li>
+      <li>Selection and consecratory marking of all principal blocks</li>
+      <li>Workshop carving at 14, Sannidhi Street, with weekly correspondence</li>
+      <li>Transport, installation, and the seating of the work upon its adhiṣṭhāna</li>
+      <li>Attendance at the <em>kumbhābhiṣekam</em> where ritually proper</li>
+    </ul>
+    <p class="duration">Eighteen months is the minimum; pillared maṇḍapas require longer.</p>
+    <div class="colophon" aria-hidden="true">
+      <svg viewBox="0 0 60 50"><g transform="translate(30,25)"><path d="M-18,0 Q-12,-14 0,-14 Q12,-14 18,0 Q12,14 0,14 Q-12,14 -18,0 Z M0,-10 L4,0 L0,10 L-4,0 Z" fill="none" stroke="var(--primary)" stroke-width="1.2"/><circle cx="0" cy="0" r="2" fill="var(--accent)"/></g></svg>
+    </div>
+  </article>
+
+</section>
+
+<div class="palmette" aria-hidden="true">
+  <svg viewBox="0 0 60 40"><path d="M30 2 C 14 2 6 14 6 22 C 6 30 14 38 30 38 C 46 38 54 30 54 22 C 54 14 46 2 30 2 Z M 30 8 L 36 22 L 30 36 L 24 22 Z"/></svg>
+  <span class="gloss">On Materials · Of Conduct · Of Refusal</span>
+  <svg viewBox="0 0 60 40"><path d="M30 2 C 14 2 6 14 6 22 C 6 30 14 38 30 38 C 46 38 54 30 54 22 C 54 14 46 2 30 2 Z M 30 8 L 36 22 L 30 36 L 24 22 Z"/></svg>
+</div>
+
+<!-- Notes: materials & decline -->
+<section class="notes">
+
+  <div class="note">
+    <h2>On Materials &amp; the Question of Polychrome</h2>
+    <div class="h-rule"></div>
+    <p>
+      The studio works principally in <strong>kṛṣṇa-śilā</strong> (the dark green-black granite
+      of Tiruchirāpalli district), in the buff sandstone of Pāṇḍya country, and where the trust
+      so directs, in seasoned teak for the carved struts and lintels of pavilion roofs. Kadappa
+      and Tirumalai marble are accepted only for inscriptional slabs.
+    </p>
+    <p>
+      The matter of <em>polychrome</em> is the most-asked question of patrons. It is the firm
+      view of this studio that the bare-stone aesthetic prized by collectors and museums
+      since the late nineteenth century is itself a misreading: the Chola and Vijayanagara
+      gopuras were finished in lime, ochre, and madder, and were never meant to stand naked.
+    </p>
+    <p>
+      Where a temple trust requests <em>restoration of polychrome</em> on figures already
+      bearing pigment traces, the studio undertakes such work using lime-based grounds and
+      mineral pigments prepared in the manner described in the <em>Śilparatna</em>. Where the
+      stone has been cleaned of all pigment within living memory and the patron asks for
+      cleaning only — <em>this also we will do</em>, but with a written record of what is lost.
+    </p>
+  </div>
+
+  <div class="note decline">
+    <svg class="stamp" viewBox="0 0 356 367" aria-hidden="true"><path d="M 90.456847,353.9498 C 51.797347,340.13485 23.72672,305.75839 12.612487,258.6184 C 7.5684267,237.22321 6.1421397,201.86984 10.323594,201.86984 C 11.712834,201.86984 15.42322,211.57056 18.568972,223.427 C 25.452892,249.37152 37.19436,273.76855 48.535988,285.69407 C 67.374717,305.50242 114.0356,313.26029 140.92106,301.05394 C 161.86409,291.54544 170.35697,268.94603 161.24995,246.95931 C 154.21242,229.96943 138.24701,224.28836 108.50834,228.19197 Z" style="fill:var(--text-emphasis)"/></svg>
+    <h2>What the Studio Declines</h2>
+    <div class="h-rule"></div>
+    <p>
+      It must be said plainly. The studio does not accept commissions for
+      <strong>identifiable mūrtis of named deities</strong> — Naṭarāja, Viṣṇu reclining,
+      the Devī in any of Her recognised forms — when these are intended for unconsecrated
+      display: hotel lobbies, private collections of the international art trade, the lawns
+      of resort properties, or the cabinets of museums that purchase rather than receive.
+    </p>
+    <p>
+      An icon cut in the prescribed lakṣaṇas is meant to be opened by a priest and to live
+      in worship. To send such a figure into a room where no lamp will be lit before it is,
+      in our reading of the texts, a private dishonour to the carver and a public confusion
+      of the form. Where doubt exists, the studio will ask to see the order of intended
+      installation.
+    </p>
+    <p>
+      Decorative and architectural work — pillars, friezes, kapota mouldings, lion-bracket
+      vyālas, even unconsecrated dvārapālas for garden gateways — these are accepted without
+      hesitation. The line is drawn at the consecrable image alone.
+    </p>
+  </div>
+
+</section>
+
+<!-- Process strip -->
+<section class="process">
+  <h2>The Order of an Engagement</h2>
+  <div class="steps">
+    <div class="step-cell">
+      <div class="num">I</div>
+      <div class="label">Letter of Inquiry</div>
+      <p>Patron writes to the studio at Sannidhi Street, in Tamil or English, with site, scope, and the lunar month preferred for commencement.</p>
+    </div>
+    <div class="step-cell">
+      <div class="num">II</div>
+      <div class="label">Visit &amp; Reading</div>
+      <p>The sthapati attends the site, reads the existing fabric, and prepares a written assessment within forty days. Travel borne by the patron.</p>
+    </div>
+    <div class="step-cell">
+      <div class="num">III</div>
+      <div class="label">Articles of Agreement</div>
+      <p>Drawn up bilingually, signed before two witnesses, with one-third on signing, one-third at the half-mark, the balance on installation.</p>
+    </div>
+    <div class="step-cell">
+      <div class="num">IV</div>
+      <div class="label">Drawing &amp; Carving</div>
+      <p>Drawings precede stone by no less than four months. The carving room is open to the patron on the second Sunday of every month.</p>
+    </div>
+    <div class="step-cell">
+      <div class="num">V</div>
+      <div class="label">Seating of the Work</div>
+      <p>The work is set upon its place and the studio's responsibility ends with the priest's first <em>arghya</em> or the trustee's signed receipt.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Schedule of fees -->
+<section class="schedule">
+  <h2>A Note on the Schedule of Fees</h2>
+  <p class="legend">Indicative figures, FY 2024–25, exclusive of statutory taxes, lodging, and the cost of stone.</p>
+  <table class="fees">
+    <thead>
+      <tr>
+        <th>Article of Work</th>
+        <th>Unit / Basis</th>
+        <th>Honorarium</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Measured survey, existing temple</td>
+        <td>per 100 sq m of plinth</td>
+        <td>₹ 92,000</td>
+      </tr>
+      <tr>
+        <td>Maṇḍala plan with iconographic register</td>
+        <td>single drawing, ink &amp; wash</td>
+        <td>₹ 48,000</td>
+      </tr>
+      <tr>
+        <td>Pillar, full-height, with capital ornament</td>
+        <td>per pillar, granite, carved</td>
+        <td>₹ 3,80,000 — 6,20,000</td>
+      </tr>
+      <tr>
+        <td>Frieze of vyālas or yāḷis</td>
+        <td>per running metre, in low relief</td>
+        <td>₹ 1,15,000</td>
+      </tr>
+      <tr>
+        <td>Adhiṣṭhāna mouldings, full sequence</td>
+        <td>per running metre, six-course</td>
+        <td>₹ 2,40,000</td>
+      </tr>
+      <tr>
+        <td>Restoration of weathered ornament</td>
+        <td>per day, sthapati &amp; one carver</td>
+        <td>₹ 14,500</td>
+      </tr>
+      <tr>
+        <td>Inscriptional slab, Tamil or Grantha</td>
+        <td>per inscribed face, kadappa stone</td>
+        <td>₹ 68,000</td>
+      </tr>
+      <tr>
+        <td>Supervisory site visit (Tier II)</td>
+        <td>per visit, three days inclusive</td>
+        <td>₹ 36,000</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- Patrons ledger -->
+<section class="ledger">
+  <div>
+    <h3>Recent Engagements</h3>
+    <ul>
+      <li><span>Sri Naṭarāja Devasthānam, Tiruvalaṅgāḍu — pillared maṇḍapa restoration</span><span class="yr">2022–24</span></li>
+      <li><span>Pālayanūr Kāli Trust — new kapota frieze, west prākāra</span><span class="yr">2021–22</span></li>
+      <li><span>INTACH Pondicherry Chapter — measured drawings, four temples</span><span class="yr">2020</span></li>
+      <li><span>Smt. Kamakshi Iyengar (private patron, Madurai) — household śālā</span><span class="yr">2019–20</span></li>
+      <li><span>Karaikudi Heritage Foundation — Chettinad shrine survey</span><span class="yr">2018</span></li>
+    </ul>
+  </div>
+  <div>
+    <h3>Currently Under the Chisel</h3>
+    <ul>
+      <li><span>Tiruveṇgāḍu temple trust — replacement of two yāḷi-pillars</span><span class="yr">since Mar 2023</span></li>
+      <li><span>Mannārkudi village renovation committee — gopura tier II</span><span class="yr">since Jul 2023</span></li>
+      <li><span>Drawings for the Govt. Museum, Chennai (Mānasāra plates)</span><span class="yr">since Jan 2024</span></li>
+      <li><span>Private śiva-liṅga peeṭha, householder shrine, Tanjavūr</span><span class="yr">since May 2024</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- Footer arcade -->
+<footer>
+  <div class="foot-arcade">
+    <div class="foot-bay">
+      <h4>The Studio</h4>
+      <p>Atelier Sthapati</p>
+      <p>R. Kalyanasundaram</p>
+      <p>est. 1994</p>
+    </div>
+    <div class="foot-bay">
+      <h4>Address</h4>
+      <p>14, Sannidhi Street</p>
+      <p>Kumbakonam 612001</p>
+      <p>Thanjāvūr District</p>
+    </div>
+    <div class="foot-bay">
+      <div class="kolam" aria-hidden="true">
+        <div class="seal">
+          <svg viewBox="0 0 356 367"><path d="M 90.456847,353.9498 C 51.797347,340.13485 23.72672,305.75839 12.612487,258.6184 C 7.5684267,237.22321 6.1421397,201.86984 10.323594,201.86984 C 11.712834,201.86984 15.42322,211.57056 18.568972,223.427 C 25.452892,249.37152 37.19436,273.76855 48.535988,285.69407 C 67.374717,305.50242 114.0356,313.26029 140.92106,301.05394 C 161.86409,291.54544 170.35697,268.94603 161.24995,246.95931 C 154.21242,229.96943 138.24701,224.28836 108.50834,228.19197 Z" style="fill:var(--primary)"/></svg>
+        </div>
+      </div>
+      <h4>Of the Hand &amp; the Hammer</h4>
+    </div>
+    <div class="foot-bay">
+      <h4>Correspondence</h4>
+      <p>By post is preferred.</p>
+      <p>sthapati@atelier.in</p>
+      <p>+91 435 2402 819</p>
+    </div>
+    <div class="foot-bay">
+      <h4>Hours of Audience</h4>
+      <p>Monday — Saturday</p>
+      <p>9 to 12 · 4 to 7</p>
+      <p>Closed on amāvāsya</p>
+    </div>
+  </div>
+  <div class="foot-rule" aria-hidden="true"></div>
+  <p class="colophon-line">
+    Drawn up and committed to print on the eleventh day of <em>Aippasi</em>, in the year Krodhi —
+    by the hand of the studio, at Kumbakonam.
+  </p>
+</footer>
+
+</body>
+</html>

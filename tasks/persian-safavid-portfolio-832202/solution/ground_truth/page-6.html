@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Commissions & Visit — Atelier Naqsh-e Jahan</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  :root{
+    --cobalt:#1e3a5f;
+    --turquoise:#2a8a8a;
+    --gold:#c9a23a;
+    --ivory:#f2e5cc;
+    --oxblood:#7a1f2e;
+    --ink:#0f1f3d;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background:var(--ivory);
+    color:var(--ink);
+    font-family:var(--font-body),"Cormorant Garamond",Georgia,serif;
+    font-size:17px;
+    line-height:1.55;
+  }
+  a{color:inherit;text-decoration:none;}
+
+  /* ============ HEADER ============ */
+  .topbar{
+    background:#faf1de;
+    border-bottom:1px solid var(--gold);
+    padding:14px 0 10px;
+    text-align:center;
+  }
+  .wordmark{
+    font-family:var(--font-display),"Cinzel Decorative",serif;
+    font-size:13px;
+    letter-spacing:.42em;
+    color:var(--cobalt);
+    text-transform:uppercase;
+  }
+  .wordmark .pip{color:var(--gold);margin:0 .8em;}
+  .tagline{
+    font-style:italic;
+    color:var(--oxblood);
+    font-size:13px;
+    letter-spacing:.05em;
+    margin-top:3px;
+  }
+
+  /* ============ NAV ============ */
+  nav.primary{
+    background:#faf1de;
+    border-bottom:2px solid var(--cobalt);
+    padding:14px 0 16px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:24px;
+  }
+  nav.primary .tail{flex:0 0 56px;height:24px;}
+  nav.primary ul{
+    display:flex;
+    list-style:none;
+    align-items:center;
+    gap:6px;
+  }
+  nav.primary li{
+    font-family:var(--font-display),"Cinzel Decorative",serif;
+    font-size:11px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--cobalt);
+    position:relative;
+    padding:4px 10px;
+  }
+  nav.primary li a{display:inline-block;padding:2px 4px;}
+  nav.primary li.sep{
+    color:var(--gold);
+    font-size:12px;
+    padding:0 2px;
+  }
+  nav.primary li[aria-current="page"] a{
+    color:var(--oxblood);
+    position:relative;
+  }
+  nav.primary li[aria-current="page"] a::after{
+    content:"";
+    display:block;
+    height:6px;
+    margin-top:2px;
+    background:
+      radial-gradient(circle at 8% 50%,var(--oxblood) 0 1.6px,transparent 2px),
+      radial-gradient(circle at 92% 50%,var(--oxblood) 0 1.6px,transparent 2px),
+      linear-gradient(to right,transparent 6%,var(--oxblood) 6%,var(--oxblood) 94%,transparent 94%);
+    background-size:100% 1.4px,100% 1.4px,100% 1.4px;
+    background-repeat:no-repeat;
+    background-position:0 50%,0 50%,0 50%;
+    border-radius:3px;
+  }
+
+  /* ============ HERO ============ */
+  .hero{
+    position:relative;
+    background:var(--cobalt);
+    color:var(--ivory);
+    padding:54px 0 60px;
+    overflow:hidden;
+    text-align:center;
+  }
+  .hero::before,
+  .hero::after{
+    content:"";
+    position:absolute;top:0;bottom:0;width:120px;
+    background:
+      repeating-linear-gradient(0deg,
+        var(--turquoise) 0 14px,
+        var(--cobalt) 14px 16px,
+        var(--gold) 16px 18px,
+        var(--cobalt) 18px 32px);
+    opacity:.6;
+  }
+  .hero::before{left:0;}
+  .hero::after{right:0;}
+  .hero-inner{position:relative;z-index:2;max-width:760px;margin:0 auto;padding:0 24px;}
+  .hero .arch{
+    width:220px;height:240px;margin:0 auto 14px;
+    display:block;
+  }
+  .hero .arch path{stroke:var(--gold);stroke-width:3.5;fill:none;}
+  .hero h1{
+    font-family:var(--font-display),"Cinzel Decorative",serif;
+    font-size:38px;
+    letter-spacing:.12em;
+    line-height:1.15;
+    color:var(--ivory);
+  }
+  .hero h1 .amp{color:var(--gold);font-style:italic;font-family:var(--font-body),serif;}
+  .hero .sub{
+    margin-top:14px;
+    font-style:italic;
+    font-size:19px;
+    color:#f2e5cc;
+    letter-spacing:.02em;
+  }
+  .hero .filet{
+    margin:24px auto 0;
+    width:380px;
+    display:block;
+    fill:var(--gold);
+    stroke:none;
+  }
+
+  /* ============ MAIN LAYOUT ============ */
+  main{
+    max-width:1180px;
+    margin:0 auto;
+    padding:60px 40px 40px;
+  }
+
+  .axis{
+    text-align:center;
+  }
+  .eyebrow{
+    font-family:var(--font-display),serif;
+    font-size:11px;
+    letter-spacing:.34em;
+    text-transform:uppercase;
+    color:var(--turquoise);
+  }
+  h2.section-title{
+    font-family:var(--font-display),serif;
+    font-size:26px;
+    letter-spacing:.14em;
+    color:var(--cobalt);
+    text-transform:uppercase;
+    margin-top:6px;
+  }
+  .divider{
+    display:block;
+    margin:18px auto 36px;
+    width:340px;
+    fill:var(--gold);
+  }
+
+  /* ============ TWO-COLUMN MIRRORED ============ */
+  .pair{
+    display:grid;
+    grid-template-columns:1fr 80px 1fr;
+    gap:0;
+    align-items:stretch;
+    margin-bottom:64px;
+  }
+  .pair > .card{
+    background:#faf1de;
+    border:1px solid var(--gold);
+    padding:38px 36px 42px;
+    position:relative;
+  }
+  .pair > .card::before{
+    content:"";
+    position:absolute;inset:8px;
+    border:1px solid var(--turquoise);
+    pointer-events:none;
+    opacity:.45;
+  }
+  .pair .center-axis{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+  }
+  .pair .center-axis .seal{
+    width:64px;height:64px;
+    display:block;
+  }
+  .pair .center-axis::before,
+  .pair .center-axis::after{
+    content:"";
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    width:1.5px;
+    height:calc(50% - 38px);
+    background:var(--gold);
+  }
+  .pair .center-axis::before{top:0;}
+  .pair .center-axis::after{bottom:0;}
+
+  .card .arch-cap{
+    width:100%;
+    max-width:240px;
+    height:64px;
+    display:block;
+    margin:0 auto 16px;
+  }
+  .card h3{
+    font-family:var(--font-display),serif;
+    font-size:18px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--cobalt);
+    text-align:center;
+    margin-bottom:6px;
+  }
+  .card .kicker{
+    text-align:center;
+    font-style:italic;
+    color:var(--oxblood);
+    font-size:14px;
+    letter-spacing:.04em;
+    margin-bottom:22px;
+  }
+  .card .body{
+    font-size:16px;
+    text-align:center;
+    line-height:1.7;
+  }
+  .card .body strong{
+    font-weight:600;
+    color:var(--cobalt);
+    letter-spacing:.02em;
+  }
+  .card .body .line{
+    display:block;
+    margin:.18em 0;
+  }
+  .card .meta-table{
+    margin:18px auto 0;
+    border-top:1px solid var(--gold);
+    border-bottom:1px solid var(--gold);
+    padding:14px 0;
+    font-size:15px;
+  }
+  .card .meta-table dt{
+    font-family:var(--font-display),serif;
+    font-size:10.5px;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    color:var(--turquoise);
+    margin-top:8px;
+  }
+  .card .meta-table dt:first-child{margin-top:0;}
+  .card .meta-table dd{
+    color:var(--ink);
+    font-size:16px;
+    margin-top:2px;
+  }
+
+  /* ============ COMMISSION TIERS ============ */
+  .tiers{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:36px;
+    margin:0 0 60px;
+  }
+  .tier{
+    background:#faf1de;
+    border:1px solid var(--cobalt);
+    padding:30px 32px;
+    position:relative;
+  }
+  .tier::before{
+    content:"";
+    position:absolute;inset:6px;
+    border:1px solid var(--gold);
+    pointer-events:none;
+  }
+  .tier h4{
+    font-family:var(--font-display),serif;
+    font-size:15px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--oxblood);
+    text-align:center;
+    margin-bottom:4px;
+  }
+  .tier .lead-time{
+    text-align:center;
+    font-style:italic;
+    color:var(--cobalt);
+    font-size:18px;
+    margin-bottom:14px;
+  }
+  .tier p{font-size:15.5px;line-height:1.65;text-align:center;}
+  .tier .price{
+    display:block;
+    text-align:center;
+    margin-top:16px;
+    font-family:var(--font-display),serif;
+    font-size:13px;
+    letter-spacing:.18em;
+    color:var(--turquoise);
+  }
+
+  /* ============ ENVOI ============ */
+  .envoi{
+    background:#faf1de;
+    border:1px solid var(--turquoise);
+    padding:40px 80px;
+    position:relative;
+    text-align:center;
+    margin-bottom:60px;
+  }
+  .envoi::before{
+    content:"";
+    position:absolute;inset:9px;
+    border:1px solid var(--gold);
+    pointer-events:none;
+  }
+  .envoi .palmette-row{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:22px;
+    margin-bottom:18px;
+    color:var(--gold);
+  }
+  .envoi .palmette-row svg{width:54px;height:18px;fill:var(--gold);}
+  .envoi .palmette-row .dot{
+    width:6px;height:6px;background:var(--oxblood);
+    transform:rotate(45deg);
+  }
+  .envoi h3{
+    font-family:var(--font-display),serif;
+    font-size:18px;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:var(--cobalt);
+    margin-bottom:14px;
+  }
+  .envoi p{
+    font-size:17.5px;
+    line-height:1.7;
+    max-width:760px;
+    margin:0 auto;
+  }
+  .envoi p + p{margin-top:12px;}
+  .envoi .signoff{
+    margin-top:22px;
+    font-family:var(--font-display),serif;
+    font-size:11px;
+    letter-spacing:.32em;
+    text-transform:uppercase;
+    color:var(--oxblood);
+  }
+
+  /* ============ FORM (visual only) ============ */
+  .formline{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:48px;
+    margin:0 0 80px;
+    align-items:start;
+  }
+  .formline .col h3{
+    font-family:var(--font-display),serif;
+    font-size:14px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--cobalt);
+    margin-bottom:14px;
+    text-align:center;
+  }
+  .formline .col p{
+    font-size:15.5px;
+    line-height:1.7;
+  }
+  .formline .col ul{
+    list-style:none;
+    margin-top:14px;
+  }
+  .formline .col li{
+    padding:8px 0;
+    border-bottom:1px dotted rgba(30,58,95,.3);
+    font-size:15.5px;
+    display:flex;
+    justify-content:space-between;
+    gap:14px;
+  }
+  .formline .col li:last-child{border-bottom:none;}
+  .formline .col li .label{
+    font-family:var(--font-display),serif;
+    font-size:10.5px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--turquoise);
+    flex-shrink:0;
+  }
+  .formline .col li .value{
+    text-align:right;
+    color:var(--ink);
+  }
+
+  /* ============ FOOTER ============ */
+  footer{
+    background:var(--cobalt);
+    color:var(--ivory);
+    padding:50px 0 0;
+    text-align:center;
+    position:relative;
+  }
+  footer .filet-band{
+    width:520px;
+    margin:0 auto 24px;
+    display:block;
+    fill:var(--gold);
+  }
+  footer .monogram{
+    width:90px;height:90px;
+    margin:0 auto 18px;
+    display:block;
+  }
+  footer h4{
+    font-family:var(--font-display),serif;
+    font-size:16px;
+    letter-spacing:.28em;
+    color:var(--ivory);
+    text-transform:uppercase;
+    margin-bottom:6px;
+  }
+  footer .addr,
+  footer .contact{
+    font-style:italic;
+    color:#f2e5cc;
+    font-size:14.5px;
+    line-height:1.55;
+    margin-bottom:6px;
+  }
+  footer .colophon{
+    font-family:var(--font-display),serif;
+    font-size:10px;
+    letter-spacing:.34em;
+    color:var(--gold);
+    text-transform:uppercase;
+    margin-top:24px;
+    margin-bottom:18px;
+  }
+  footer .mosaic{
+    height:18px;
+    background:
+      repeating-linear-gradient(90deg,
+        var(--turquoise) 0 14px,
+        var(--gold) 14px 16px,
+        var(--cobalt) 16px 18px,
+        var(--gold) 18px 20px,
+        var(--turquoise) 20px 34px);
+    border-top:1px solid var(--gold);
+  }
+</style>
+</head>
+<body>
+
+<!-- =============== HEADER =============== -->
+<header class="topbar">
+  <div class="wordmark">
+    Atelier
+    <span class="pip">❖</span>
+    Naqsh-e Jahan
+  </div>
+  <div class="tagline">— tilework &amp; ornamental design, Isfahan —</div>
+</header>
+
+<!-- =============== NAV =============== -->
+<nav class="primary" aria-label="Primary">
+  <svg class="tail" viewBox="0 0 56 24" aria-hidden="true">
+    <g fill="none" stroke="#c9a23a" stroke-width="1.4" stroke-linecap="round">
+      <path d="M2 12 Q14 2 26 12 T54 12"/>
+      <path d="M2 12 Q14 22 26 12"/>
+      <circle cx="50" cy="12" r="2.4" fill="#c9a23a" stroke="none"/>
+      <circle cx="34" cy="12" r="1.6" fill="#c9a23a" stroke="none"/>
+    </g>
+  </svg>
+  <ul>
+    <li><a href="page-1.html">Atelier</a></li>
+    <li class="sep">❋</li>
+    <li><a href="page-2.html">Selected Works</a></li>
+    <li class="sep">❋</li>
+    <li><a href="page-3.html">Ardestan Spandrels</a></li>
+    <li class="sep">❋</li>
+    <li><a href="page-4.html">Workshop &amp; Method</a></li>
+    <li class="sep">❋</li>
+    <li><a href="page-5.html">Biography</a></li>
+    <li class="sep">❋</li>
+    <li aria-current="page"><a href="page-6.html">Commissions &amp; Visit</a></li>
+  </ul>
+  <svg class="tail" viewBox="0 0 56 24" aria-hidden="true" style="transform:scaleX(-1);">
+    <g fill="none" stroke="#c9a23a" stroke-width="1.4" stroke-linecap="round">
+      <path d="M2 12 Q14 2 26 12 T54 12"/>
+      <path d="M2 12 Q14 22 26 12"/>
+      <circle cx="50" cy="12" r="2.4" fill="#c9a23a" stroke="none"/>
+      <circle cx="34" cy="12" r="1.6" fill="#c9a23a" stroke="none"/>
+    </g>
+  </svg>
+</nav>
+
+<!-- =============== HERO =============== -->
+<section class="hero">
+  <div class="hero-inner">
+    <svg class="arch" viewBox="0 0 220 240" aria-hidden="true">
+      <!-- Centred ogee arch built from hero_frame motif geometry -->
+      <g fill="none" stroke="#c9a23a" stroke-width="3" stroke-linecap="round">
+        <path d="M110 18
+                 C 60 30, 32 70, 30 130
+                 C 30 160, 50 178, 78 178
+                 C 78 150, 92 132, 110 122"/>
+        <path d="M110 18
+                 C 160 30, 188 70, 190 130
+                 C 190 160, 170 178, 142 178
+                 C 142 150, 128 132, 110 122"/>
+        <path d="M30 178 L30 230 M190 178 L190 230"/>
+        <path d="M22 230 L198 230" stroke-width="2"/>
+        <path d="M70 130 L82 158 M150 130 L138 158"/>
+        <circle cx="110" cy="80" r="4" fill="#c9a23a"/>
+      </g>
+    </svg>
+    <h1>Commissions <span class="amp">&amp;</span> Visit</h1>
+    <div class="sub">A correspondence concerning haft-rang panels, mosaic-faïence, and the reference library at Chahar Bagh.</div>
+    <svg class="filet" viewBox="0 0 438 19" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+      <g transform="scale(1)">
+        <path d="M0,9 C 60,9 100,4 145,4 C 165,9 175,14 219,9 C 263,4 273,14 293,4 C 338,4 378,9 438,9" fill="none" stroke="#c9a23a" stroke-width="1.4"/>
+        <circle cx="219" cy="9" r="4.5" fill="none" stroke="#c9a23a" stroke-width="1.4"/>
+        <circle cx="219" cy="9" r="1.6" fill="#c9a23a"/>
+        <circle cx="110" cy="9" r="1.4" fill="#c9a23a"/>
+        <circle cx="328" cy="9" r="1.4" fill="#c9a23a"/>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<!-- =============== MAIN =============== -->
+<main>
+
+  <div class="axis">
+    <div class="eyebrow">Letter of the Atelier</div>
+    <h2 class="section-title">Workshop, Hours &amp; Correspondence</h2>
+    <svg class="divider" viewBox="0 0 340 18" aria-hidden="true">
+      <path d="M0,9 C 50,9 90,3 130,3 C 150,9 160,15 170,9 C 180,3 190,15 210,9 C 250,9 290,3 340,9"
+            fill="none" stroke="#c9a23a" stroke-width="1.3"/>
+      <circle cx="170" cy="9" r="4" fill="none" stroke="#7a1f2e" stroke-width="1.2"/>
+      <circle cx="170" cy="9" r="1.4" fill="#7a1f2e"/>
+    </svg>
+  </div>
+
+  <!-- =========== MIRRORED PAIR : VISIT / WRITE =========== -->
+  <section class="pair">
+
+    <article class="card">
+      <svg class="arch-cap" viewBox="0 0 240 64" aria-hidden="true">
+        <g fill="none" stroke="#1e3a5f" stroke-width="2">
+          <path d="M10 60 C 10 30, 60 8, 120 6 C 180 8, 230 30, 230 60"/>
+          <path d="M22 60 C 22 36, 66 18, 120 16 C 174 18, 218 36, 218 60" stroke="#c9a23a" stroke-width="1"/>
+          <circle cx="120" cy="20" r="3" fill="#c9a23a" stroke="none"/>
+        </g>
+      </svg>
+      <h3>Visit the Workshop</h3>
+      <div class="kicker">by appointment, in the cool of the courtyard</div>
+
+      <div class="body">
+        <span class="line">The atelier occupies the eastern wing of a restored caravanserai courtyard, two doors south of the Madraseh-ye Chahar Bagh. Visitors are received in the spandrel room, where reference panels and the kiln book are open for inspection.</span>
+      </div>
+
+      <dl class="meta-table">
+        <dt>Address</dt>
+        <dd>47 Chahar Bagh Abbasi<br>Isfahan 8146913571, Iran</dd>
+
+        <dt>Hours</dt>
+        <dd>Saturday – Wednesday<br>10:00 – 16:00 (by appointment)</dd>
+
+        <dt>Closed</dt>
+        <dd>Thursday, Friday &amp; the thirteen days of Nowruz</dd>
+
+        <dt>Telephone</dt>
+        <dd>+98 31 3622 4719</dd>
+      </dl>
+    </article>
+
+    <div class="center-axis" aria-hidden="true">
+      <svg class="seal" viewBox="0 0 64 64">
+        <g transform="translate(32 32)">
+          <g fill="#2a8a8a" stroke="#1e3a5f" stroke-width="1">
+            <polygon points="0,-26 6,-8 24,-8 10,4 16,22 0,12 -16,22 -10,4 -24,-8 -6,-8"/>
+          </g>
+          <circle r="5" fill="#c9a23a" stroke="#1e3a5f" stroke-width="0.8"/>
+          <circle r="1.4" fill="#7a1f2e"/>
+        </g>
+      </svg>
+    </div>
+
+    <article class="card">
+      <svg class="arch-cap" viewBox="0 0 240 64" aria-hidden="true">
+        <g fill="none" stroke="#1e3a5f" stroke-width="2">
+          <path d="M10 60 C 10 30, 60 8, 120 6 C 180 8, 230 30, 230 60"/>
+          <path d="M22 60 C 22 36, 66 18, 120 16 C 174 18, 218 36, 218 60" stroke="#c9a23a" stroke-width="1"/>
+          <circle cx="120" cy="20" r="3" fill="#c9a23a" stroke="none"/>
+        </g>
+      </svg>
+      <h3>Commission Enquiries</h3>
+      <div class="kicker">a careful letter is the beginning of a careful panel</div>
+
+      <div class="body">
+        <span class="line">Enquiries may be addressed to the studio in Persian, English, or French. A useful first letter names the surface to be tiled, the orientation, the desired register of ornament — geometric, vegetal, or mixed — and the season by which the work is to be installed.</span>
+      </div>
+
+      <dl class="meta-table">
+        <dt>Studio Correspondence</dt>
+        <dd>studio@naqsh-e-jahan.atelier</dd>
+
+        <dt>Maître de l'atelier</dt>
+        <dd>Darius Farahani<br>darius@naqsh-e-jahan.atelier</dd>
+
+        <dt>Reference Library</dt>
+        <dd>fragments@naqsh-e-jahan.atelier</dd>
+
+        <dt>Postal</dt>
+        <dd>P.O. Box 81465-1147<br>Isfahan, Islamic Republic of Iran</dd>
+      </dl>
+    </article>
+
+  </section>
+
+  <!-- =========== TIERS =========== -->
+  <div class="axis">
+    <div class="eyebrow">Lead Times &amp; Scope</div>
+    <h2 class="section-title">Two Registers of Commission</h2>
+    <svg class="divider" viewBox="0 0 340 18" aria-hidden="true">
+      <path d="M0,9 C 50,9 90,3 130,3 C 150,9 160,15 170,9 C 180,3 190,15 210,9 C 250,9 290,3 340,9"
+            fill="none" stroke="#c9a23a" stroke-width="1.3"/>
+      <circle cx="170" cy="9" r="4" fill="none" stroke="#7a1f2e" stroke-width="1.2"/>
+      <circle cx="170" cy="9" r="1.4" fill="#7a1f2e"/>
+    </svg>
+  </div>
+
+  <section class="tiers">
+    <article class="tier">
+      <h4>Architectural Work</h4>
+      <div class="lead-time">minimum nine months</div>
+      <p>Spandrels, mihrab niches, dado registers, courtyard fountains and full façade programmes executed in mosaic-faïence (<em>mu‘arraq kāshī</em>). Site survey, full-scale cartoon, kiln tests on local clay, and on-site installation by the atelier's two journeymen are included. A signed cartoon is delivered to the patron at the close of the third month.</p>
+      <span class="price">from 14,500 € per square metre</span>
+    </article>
+    <article class="tier">
+      <h4>Movable Panels</h4>
+      <div class="lead-time">minimum three months</div>
+      <p>Free-standing haft-rang panels, table tops, framed roundels, and devotional plaques to a maximum dimension of 90 × 120 cm. Six pigment campaigns are fired in sequence on the studio's small reduction kiln. Each piece is signed on the verso, dated by the Hijri solar calendar, and accompanied by a one-page conservation note.</p>
+      <span class="price">from 2,800 € per panel</span>
+    </article>
+  </section>
+
+  <!-- =========== TWO COL : SCHEDULE / WHAT TO INCLUDE =========== -->
+  <section class="formline">
+    <div class="col">
+      <h3>Atelier Calendar — 1404 Sh.</h3>
+      <p>The kiln runs in five firing campaigns each year. New commissions are admitted into the campaign whose cartoon stage they can comfortably reach; please write well in advance of the date you have in mind.</p>
+      <ul>
+        <li><span class="label">Campaign I</span><span class="value">Farvardin – Ordibehesht (closed)</span></li>
+        <li><span class="label">Campaign II</span><span class="value">Khordad – Tir (two slots)</span></li>
+        <li><span class="label">Campaign III</span><span class="value">Mordad – Shahrivar (open)</span></li>
+        <li><span class="label">Campaign IV</span><span class="value">Mehr – Aban (open)</span></li>
+        <li><span class="label">Campaign V</span><span class="value">Azar – Dey (architectural only)</span></li>
+        <li><span class="label">Bahman – Esfand</span><span class="value">kiln rest &amp; library cataloguing</span></li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3>What a First Letter Should Carry</h3>
+      <p>Brevity is welcome. Photographs are welcome. The atelier replies, in the order received, within fourteen days of a written enquiry.</p>
+      <ul>
+        <li><span class="label">i.</span><span class="value">the surface — wall, niche, panel, vault</span></li>
+        <li><span class="label">ii.</span><span class="value">approximate dimensions in centimetres</span></li>
+        <li><span class="label">iii.</span><span class="value">orientation &amp; light at midday</span></li>
+        <li><span class="label">iv.</span><span class="value">register sought: geometric / arabesque / mixed</span></li>
+        <li><span class="label">v.</span><span class="value">desired completion month &amp; year</span></li>
+        <li><span class="label">vi.</span><span class="value">whether installation by the atelier is required</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- =========== ENVOI =========== -->
+  <div class="axis">
+    <div class="eyebrow">An Open Door</div>
+    <h2 class="section-title">To Scholars &amp; Restorers</h2>
+    <svg class="divider" viewBox="0 0 340 18" aria-hidden="true">
+      <path d="M0,9 C 50,9 90,3 130,3 C 150,9 160,15 170,9 C 180,3 190,15 210,9 C 250,9 290,3 340,9"
+            fill="none" stroke="#c9a23a" stroke-width="1.3"/>
+      <circle cx="170" cy="9" r="4" fill="none" stroke="#7a1f2e" stroke-width="1.2"/>
+      <circle cx="170" cy="9" r="1.4" fill="#7a1f2e"/>
+    </svg>
+  </div>
+
+  <section class="envoi">
+    <div class="palmette-row" aria-hidden="true">
+      <svg viewBox="0 0 60 18"><path d="M0 9 Q 15 0 30 9 Q 45 18 60 9 M30 3 L30 15" stroke="#c9a23a" stroke-width="1.2" fill="none"/></svg>
+      <span class="dot"></span>
+      <svg viewBox="0 0 60 18"><path d="M0 9 Q 15 0 30 9 Q 45 18 60 9 M30 3 L30 15" stroke="#c9a23a" stroke-width="1.2" fill="none"/></svg>
+    </div>
+    <h3>The Reference Library</h3>
+    <p>Scholars, conservators and graduate restorers are warmly welcomed to request access to the atelier's reference library, which presently holds <strong>312 historical tile fragments</strong> drawn from the workshops of Isfahan, Yazd, Kashan, Ardestan and Tabriz, with the earliest sherd attributed to the late Ilkhanid period and the most recent to the Qajar revival of 1881.</p>
+    <p>The collection is consulted at a long ivory table beneath the courtyard's north iwan. A working session of half a day may be reserved by writing to the librarian; a small selection of pieces is brought up from the cabinets according to the visitor's stated theme — <em>haft-rang</em> palette ratios, <em>girih</em> joinery, glaze losses, or under-glaze pencilling.</p>
+    <p>The atelier asks only that no fragment be photographed against a coloured ground, and that the catalogue card accompany each piece back to its drawer.</p>
+    <div class="signoff">— D. Farahani, written at Isfahan, the 14th of Tir</div>
+  </section>
+
+</main>
+
+<!-- =============== FOOTER =============== -->
+<footer>
+  <svg class="filet-band" viewBox="0 0 438 19" aria-hidden="true">
+    <path d="M0,9 C 60,9 100,4 145,4 C 165,9 175,14 219,9 C 263,4 273,14 293,4 C 338,4 378,9 438,9"
+          fill="none" stroke="#c9a23a" stroke-width="1.4"/>
+    <circle cx="219" cy="9" r="5" fill="none" stroke="#c9a23a" stroke-width="1.2"/>
+    <circle cx="219" cy="9" r="1.8" fill="#c9a23a"/>
+    <circle cx="80" cy="9" r="1.4" fill="#c9a23a"/>
+    <circle cx="358" cy="9" r="1.4" fill="#c9a23a"/>
+  </svg>
+
+  <svg class="monogram" viewBox="0 0 100 100" aria-hidden="true">
+    <g fill="none" stroke="#c9a23a" stroke-width="1.4">
+      <circle cx="50" cy="50" r="44"/>
+      <circle cx="50" cy="50" r="38" stroke="#2a8a8a"/>
+      <path d="M30 70 Q 30 36 50 28 Q 70 36 70 70" />
+      <path d="M38 70 L38 44 Q 50 38 62 44 L62 70" stroke="#f2e5cc"/>
+      <path d="M50 28 L50 70" stroke="#f2e5cc"/>
+      <circle cx="50" cy="50" r="3" fill="#c9a23a" stroke="none"/>
+    </g>
+    <text x="50" y="86" text-anchor="middle" font-family="Cinzel Decorative,serif"
+          font-size="7" fill="#f2e5cc" letter-spacing="2">N · J</text>
+  </svg>
+
+  <h4>Atelier Naqsh-e Jahan</h4>
+  <div class="addr">47 Chahar Bagh Abbasi · Isfahan 8146913571 · Iran</div>
+  <div class="contact">studio@naqsh-e-jahan.atelier &nbsp;❖&nbsp; +98 31 3622 4719</div>
+  <div class="colophon">Founded 1402 Sh. &nbsp;·&nbsp; Tilework &amp; Ornamental Design</div>
+  <div class="mosaic" aria-hidden="true"></div>
+</footer>
+
+</body>
+</html>

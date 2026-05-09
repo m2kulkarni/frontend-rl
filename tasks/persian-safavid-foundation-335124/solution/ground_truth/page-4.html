@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>The Collection — Tile, Manuscript, Textile</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  :root{
+    --cobalt: var(--primary);
+    --turquoise: var(--secondary);
+    --gold: var(--accent);
+    --ivory: var(--bg);
+    --oxblood: var(--text-emphasis);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--ivory);
+    color:var(--text);
+    font-family:var(--font-body),Georgia,serif;
+    font-size:17px;
+    line-height:1.65;
+  }
+  a{color:inherit;text-decoration:none}
+
+  /* ---------- HEADER ---------- */
+  .top-strip{
+    background:var(--cobalt);
+    height:14px;
+    border-bottom:1px solid var(--gold);
+  }
+  .header-marque{
+    background:var(--ivory);
+    text-align:center;
+    padding:28px 20px 18px;
+    border-bottom:1px solid var(--gold);
+  }
+  .header-marque .arabic-tag{
+    font-family:var(--font-display),serif;
+    letter-spacing:.5em;
+    font-size:11px;
+    color:var(--turquoise);
+    text-transform:uppercase;
+  }
+  .header-marque h1{
+    font-family:var(--font-display),serif;
+    font-size:30px;
+    color:var(--cobalt);
+    margin-top:6px;
+    font-weight:400;
+    letter-spacing:.04em;
+  }
+  .header-marque .sub{
+    font-style:italic;
+    color:var(--text);
+    margin-top:4px;
+    font-size:15px;
+  }
+
+  /* ---------- NAV ---------- */
+  nav.primary{
+    border-top:1px solid var(--gold);
+    border-bottom:1px solid var(--gold);
+    background:var(--ivory);
+    padding:14px 0;
+    text-align:center;
+  }
+  nav.primary ul{
+    list-style:none;
+    display:inline-flex;
+    align-items:center;
+    gap:0;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+  nav.primary li{display:flex;align-items:center}
+  nav.primary a{
+    font-family:var(--font-display),serif;
+    text-transform:uppercase;
+    font-size:12px;
+    letter-spacing:.28em;
+    color:var(--cobalt);
+    padding:4px 22px;
+    display:inline-block;
+  }
+  nav.primary a[aria-current="page"]{
+    color:var(--cobalt);
+    border-bottom:2px solid var(--turquoise);
+    padding-bottom:2px;
+  }
+  nav.primary .sep{
+    color:var(--gold);
+    font-size:14px;
+    line-height:1;
+    transform:translateY(-1px);
+  }
+
+  /* ---------- HERO / POLICY BAND ---------- */
+  .policy-band{
+    background:var(--cobalt);
+    color:var(--ivory);
+    padding:64px 80px;
+    position:relative;
+    overflow:hidden;
+  }
+  .policy-band::before,
+  .policy-band::after{
+    content:"";
+    position:absolute;
+    top:0;bottom:0;width:120px;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(201,162,58,.12) 0 2px, transparent 2px 14px),
+      repeating-linear-gradient(-45deg, rgba(201,162,58,.12) 0 2px, transparent 2px 14px);
+  }
+  .policy-band::before{left:0;border-right:1px solid var(--gold)}
+  .policy-band::after{right:0;border-left:1px solid var(--gold)}
+  .policy-inner{
+    max-width:880px;margin:0 auto;text-align:center;position:relative;
+  }
+  .policy-eyebrow{
+    font-family:var(--font-display),serif;
+    letter-spacing:.5em;
+    font-size:11px;
+    color:var(--gold);
+    text-transform:uppercase;
+  }
+  .policy-band h2{
+    font-family:var(--font-display),serif;
+    font-size:34px;
+    font-weight:400;
+    color:var(--ivory);
+    margin:14px 0 24px;
+    letter-spacing:.03em;
+  }
+  .policy-band .quote{
+    font-family:var(--font-body),serif;
+    font-style:italic;
+    font-size:19px;
+    line-height:1.7;
+    color:var(--ivory);
+  }
+  .policy-band .quote .pull{color:var(--gold);font-style:normal;font-size:28px;vertical-align:-6px;margin:0 4px}
+  .policy-band .attrib{
+    margin-top:18px;
+    font-family:var(--font-display),serif;
+    font-size:12px;
+    letter-spacing:.3em;
+    color:var(--gold);
+    text-transform:uppercase;
+  }
+  .arch-flank{
+    position:absolute;
+    top:50%;transform:translateY(-50%);
+    width:120px;height:140px;
+    opacity:.55;
+  }
+  .arch-flank.left{left:30px}
+  .arch-flank.right{right:30px;transform:translateY(-50%) scaleX(-1)}
+  .arch-flank svg path{stroke:var(--gold);stroke-width:3}
+
+  /* ---------- DIVIDER ---------- */
+  .divider{
+    display:flex;align-items:center;justify-content:center;
+    padding:36px 80px 18px;
+    gap:28px;
+  }
+  .divider svg{height:22px;width:auto;flex:0 0 auto}
+  .divider svg path{fill:var(--gold)}
+  .divider .roundel{
+    font-family:var(--font-display),serif;
+    color:var(--cobalt);
+    letter-spacing:.4em;
+    text-transform:uppercase;
+    font-size:12px;
+    white-space:nowrap;
+  }
+
+  /* ---------- COLLECTION TOOLBAR ---------- */
+  .toolbar{
+    max-width:1280px;margin:0 auto;
+    padding:8px 80px 28px;
+    display:flex;justify-content:space-between;align-items:flex-end;
+    border-bottom:1px solid rgba(30,58,95,.18);
+  }
+  .toolbar h3{
+    font-family:var(--font-display),serif;
+    font-size:26px;color:var(--cobalt);font-weight:400;
+    letter-spacing:.03em;
+  }
+  .toolbar h3 small{
+    display:block;font-family:var(--font-body),serif;
+    font-style:italic;color:var(--text);font-size:14px;
+    letter-spacing:0;margin-top:4px;
+  }
+  .filters{
+    display:flex;gap:0;
+    font-family:var(--font-display),serif;
+    font-size:11px;letter-spacing:.25em;text-transform:uppercase;
+  }
+  .filters span{
+    padding:6px 16px;
+    border:1px solid var(--gold);
+    color:var(--cobalt);
+    border-right:none;
+  }
+  .filters span:last-child{border-right:1px solid var(--gold)}
+  .filters span.active{background:var(--cobalt);color:var(--ivory);border-color:var(--cobalt)}
+
+  /* ---------- CATEGORY HEADERS ---------- */
+  .cat-head{
+    max-width:1280px;margin:48px auto 18px;
+    padding:0 80px;
+    display:flex;align-items:baseline;gap:24px;
+  }
+  .cat-head .roman{
+    font-family:var(--font-display),serif;
+    color:var(--gold);font-size:14px;letter-spacing:.4em;
+  }
+  .cat-head h4{
+    font-family:var(--font-display),serif;
+    font-size:24px;color:var(--cobalt);font-weight:400;
+    letter-spacing:.06em;
+  }
+  .cat-head .rule{
+    flex:1;height:1px;background:var(--gold);
+    margin-left:8px;
+  }
+  .cat-head .count{
+    font-family:var(--font-body),serif;
+    font-style:italic;color:var(--text);font-size:14px;
+  }
+
+  /* ---------- GRID ---------- */
+  .grid{
+    max-width:1280px;margin:0 auto;
+    padding:0 80px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:30px 28px;
+  }
+
+  /* ---------- CARD ---------- */
+  .card{
+    background:var(--ivory);
+    position:relative;
+    padding:14px 14px 18px;
+    border:1px solid var(--gold);
+    box-shadow:inset 0 0 0 4px var(--ivory), inset 0 0 0 5px rgba(30,58,95,.18);
+  }
+  .card .frame{
+    position:relative;
+    aspect-ratio:1/1;
+    background:#ece0c5;
+    border:2px solid var(--cobalt);
+    overflow:hidden;
+  }
+  .card .frame::before,
+  .card .frame::after{
+    content:"";position:absolute;inset:6px;
+    border:1px solid var(--gold);
+    pointer-events:none;
+  }
+  .card .frame::after{
+    inset:10px;border:1px dashed rgba(30,58,95,.35);
+  }
+  .thumb{
+    position:absolute;inset:14px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .thumb svg{width:100%;height:100%;display:block}
+
+  .card .meta{
+    margin-top:12px;
+    text-align:center;
+  }
+  .card .acc{
+    font-family:var(--font-display),serif;
+    font-size:10px;letter-spacing:.3em;
+    color:var(--turquoise);
+    text-transform:uppercase;
+  }
+  .card .title{
+    font-family:var(--font-display),serif;
+    font-size:14px;color:var(--cobalt);
+    text-transform:uppercase;letter-spacing:.06em;
+    margin-top:4px;line-height:1.25;
+    min-height:34px;
+  }
+  .card .dyn{
+    font-family:var(--font-body),serif;
+    font-style:italic;
+    font-size:12px;color:var(--text);
+    margin-top:4px;
+  }
+  .card .prov{
+    font-size:11px;color:var(--text);
+    margin-top:2px;
+    border-top:1px solid rgba(201,162,58,.4);
+    padding-top:6px;
+    margin-left:18px;margin-right:18px;
+  }
+  .card .seal-foot{
+    margin:8px auto 0;
+    width:18px;height:18px;
+    color:var(--turquoise);
+  }
+  .card .seal-foot svg{width:100%;height:100%}
+
+  /* category accent */
+  .card.tile .frame{background:linear-gradient(135deg,#cbe4e4 25%,#e7d6b3 25% 50%,#cbe4e4 50% 75%,#e7d6b3 75%)}
+  .card.ms .frame{background:#efe3c2}
+  .card.tex .frame{background:#e7d6b3}
+  .card.cart .frame{background:#dccca8}
+
+  /* ---------- THUMB MOTIFS ---------- */
+  .swatch-tile{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;width:100%;height:100%;gap:2px;background:var(--cobalt);padding:2px}
+  .swatch-tile span{display:block}
+  .swatch-tile span:nth-child(1){background:var(--cobalt)}
+  .swatch-tile span:nth-child(2){background:var(--turquoise)}
+  .swatch-tile span:nth-child(3){background:var(--gold)}
+  .swatch-tile span:nth-child(4){background:var(--ivory)}
+
+  /* ---------- PAGINATION ---------- */
+  .pagination{
+    max-width:1280px;margin:48px auto 12px;
+    padding:0 80px;
+    text-align:center;
+    font-family:var(--font-display),serif;
+    letter-spacing:.3em;font-size:12px;color:var(--cobalt);
+    text-transform:uppercase;
+  }
+  .pagination span{
+    display:inline-block;padding:8px 14px;
+    border:1px solid var(--gold);margin:0 -1px 0 0;
+  }
+  .pagination span.cur{background:var(--cobalt);color:var(--ivory);border-color:var(--cobalt)}
+
+  /* ---------- ACCESS NOTE ---------- */
+  .access{
+    max-width:1100px;margin:48px auto 0;
+    padding:36px 60px;
+    border:1px solid var(--gold);
+    text-align:center;
+    position:relative;
+  }
+  .access::before,.access::after{
+    content:"";position:absolute;width:14px;height:14px;border:1px solid var(--cobalt);
+  }
+  .access::before{top:-7px;left:-7px;border-right:none;border-bottom:none}
+  .access::after{bottom:-7px;right:-7px;border-left:none;border-top:none}
+  .access h5{
+    font-family:var(--font-display),serif;
+    color:var(--cobalt);font-size:18px;font-weight:400;
+    letter-spacing:.2em;text-transform:uppercase;
+  }
+  .access p{
+    margin-top:10px;font-style:italic;color:var(--text);
+    max-width:760px;margin-left:auto;margin-right:auto;
+  }
+  .access .mark{color:var(--oxblood);font-style:normal;font-weight:600}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    margin-top:64px;
+    background:var(--cobalt);
+    color:var(--ivory);
+    padding:0 0 24px;
+    position:relative;
+  }
+  footer .top-filet{
+    height:18px;
+    background:repeating-linear-gradient(90deg,var(--ivory) 0 6px,transparent 6px 12px);
+    opacity:.4;
+    border-bottom:1px solid var(--gold);
+  }
+  footer .cols{
+    display:grid;grid-template-columns:repeat(3,1fr);
+    max-width:1100px;margin:0 auto;padding:48px 60px 24px;
+    text-align:center;gap:40px;
+  }
+  footer h6{
+    font-family:var(--font-display),serif;
+    font-size:12px;letter-spacing:.4em;text-transform:uppercase;
+    color:var(--gold);font-weight:400;margin-bottom:14px;
+  }
+  footer p{font-size:14px;line-height:1.7}
+  footer .seal{
+    margin:8px auto 14px;
+    width:38px;height:38px;color:var(--gold);
+  }
+  footer .seal svg{width:100%;height:100%}
+  footer .copy{
+    text-align:center;font-style:italic;font-size:13px;
+    color:rgba(242,229,204,.75);
+    border-top:1px solid rgba(201,162,58,.35);
+    padding-top:18px;margin:0 60px;
+  }
+
+  /* arabic-style tag (purely typographic, no pseudo-arabic) */
+</style>
+</head>
+<body>
+
+<div class="top-strip"></div>
+
+<div class="header-marque">
+  <div class="arabic-tag">Bonyad-e Bagh-e Fin</div>
+  <h1>The Bagh-e Fin Foundation</h1>
+  <div class="sub">for the Conservation of Persian Arts &nbsp;·&nbsp; Established Isfahan, 1989</div>
+</div>
+
+<nav class="primary" aria-label="Primary">
+  <ul>
+    <li><a href="page-1.html">Foundation</a></li>
+    <li><span class="sep" aria-hidden="true">❖</span></li>
+    <li><a href="page-2.html">Mission &amp; History</a></li>
+    <li><span class="sep" aria-hidden="true">❖</span></li>
+    <li><a href="page-3.html">Projects</a></li>
+    <li><span class="sep" aria-hidden="true">❖</span></li>
+    <li><a href="page-4.html" aria-current="page">The Collection</a></li>
+    <li><span class="sep" aria-hidden="true">❖</span></li>
+    <li><a href="page-5.html">Grants &amp; Fellowships</a></li>
+    <li><span class="sep" aria-hidden="true">❖</span></li>
+    <li><a href="page-6.html">Visit</a></li>
+  </ul>
+</nav>
+
+<!-- ===== POLICY BAND ===== -->
+<section class="policy-band" aria-label="Acquisitions policy">
+  <div class="arch-flank left" aria-hidden="true">
+    <svg viewBox="0 0 500 550" preserveAspectRatio="xMidYMid meet">
+      <g transform="translate(-140,-245)" fill="none" stroke-linecap="round">
+        <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+        <path d="m 250,430.58 24.75248,58.41585"/>
+        <path d="m 347.0297,342.46119 41.58416,23.76238 0.9901,35.64356"/>
+        <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+      </g>
+    </svg>
+  </div>
+  <div class="arch-flank right" aria-hidden="true">
+    <svg viewBox="0 0 500 550" preserveAspectRatio="xMidYMid meet">
+      <g transform="translate(-140,-245)" fill="none" stroke-linecap="round">
+        <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+        <path d="m 250,430.58 24.75248,58.41585"/>
+        <path d="m 347.0297,342.46119 41.58416,23.76238 0.9901,35.64356"/>
+        <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="policy-inner">
+    <div class="policy-eyebrow">The Study Collection</div>
+    <h2>Tile · Manuscript · Textile · Cartoon</h2>
+    <p class="quote">
+      <span class="pull">“</span>The Foundation shall acquire only those objects whose passage from the workshop, the shrine, or the bazaar can be traced with documentary certainty; preference is given to fragments orphaned by the restorations of 1932 and 1958, returned here to be studied, stabilised, and shown without ornament of their loss.<span class="pull">”</span>
+    </p>
+    <div class="attrib">— Acquisitions Policy, ratified 14 Mehr 1368 / 6 October 1989</div>
+  </div>
+</section>
+
+<!-- ===== DIVIDER ===== -->
+<div class="divider" aria-hidden="true">
+  <svg viewBox="0 0 438 19" preserveAspectRatio="xMidYMid meet"><path d="M0,9.445c0,0,37.005-0.063,73.998-0.829c18.495-0.386,36.989-0.949,50.831-1.785c6.919-0.414,12.677-0.906,16.663-1.46 c1.99-0.28,3.539-0.582,4.535-0.878c0.502-0.146,0.844-0.297,1.049-0.405c0.157-0.107,0.238-0.162,0.238-0.162l0.42-0.287 l0.656,0.656l-0.369,0.338c0,0-0.154,0.142-0.456,0.324c-0.291,0.154-0.714,0.331-1.256,0.484 c-1.085,0.314-2.667,0.608-4.686,0.879c-4.037,0.533-9.811,0.985-16.745,1.354c-13.868,0.744-32.369,1.183-50.87,1.443 C37.003,9.632,0,9.445,0,9.445z"/><circle cx="219" cy="9.5" r="5" fill="none" stroke="currentColor" stroke-width="1"/><path d="M437.999,9.445c0,0-37.004,0.187-74.007-0.329c-18.501-0.261-37.002-0.699-50.869-1.443 c-6.935-0.368-12.708-0.82-16.745-1.354c-2.019-0.271-3.601-0.565-4.687-0.879c-0.541-0.153-0.965-0.33-1.256-0.484 c-0.302-0.183-0.456-0.324-0.456-0.324l-0.369-0.338l0.656-0.656l0.42,0.287c0,0,0.081,0.055,0.238,0.162 c0.204,0.108,0.546,0.26,1.048,0.405c0.996,0.296,2.545,0.598,4.535,0.878c3.986,0.554,9.744,1.046,16.663,1.46 C327.011,7.667,345.506,8.23,364,8.616C400.994,9.382,437.999,9.445,437.999,9.445z"/></svg>
+  <span class="roundel">Forty-Eight Objects in Study</span>
+  <svg viewBox="0 0 438 19" preserveAspectRatio="xMidYMid meet"><path d="M0,9.445c0,0,37.005-0.063,73.998-0.829c18.495-0.386,36.989-0.949,50.831-1.785c6.919-0.414,12.677-0.906,16.663-1.46 c1.99-0.28,3.539-0.582,4.535-0.878c0.502-0.146,0.844-0.297,1.049-0.405c0.157-0.107,0.238-0.162,0.238-0.162l0.42-0.287 l0.656,0.656l-0.369,0.338c0,0-0.154,0.142-0.456,0.324c-0.291,0.154-0.714,0.331-1.256,0.484 c-1.085,0.314-2.667,0.608-4.686,0.879c-4.037,0.533-9.811,0.985-16.745,1.354c-13.868,0.744-32.369,1.183-50.87,1.443 C37.003,9.632,0,9.445,0,9.445z"/><circle cx="219" cy="9.5" r="5" fill="none" stroke="currentColor" stroke-width="1"/><path d="M437.999,9.445c0,0-37.004,0.187-74.007-0.329c-18.501-0.261-37.002-0.699-50.869-1.443 c-6.935-0.368-12.708-0.82-16.745-1.354c-2.019-0.271-3.601-0.565-4.687-0.879c-0.541-0.153-0.965-0.33-1.256-0.484 c-0.302-0.183-0.456-0.324-0.456-0.324l-0.369-0.338l0.656-0.656l0.42,0.287c0,0,0.081,0.055,0.238,0.162 c0.204,0.108,0.546,0.26,1.048,0.405c0.996,0.296,2.545,0.598,4.535,0.878c3.986,0.554,9.744,1.046,16.663,1.46 C327.011,7.667,345.506,8.23,364,8.616C400.994,9.382,437.999,9.445,437.999,9.445z"/></svg>
+</div>
+
+<!-- ===== TOOLBAR ===== -->
+<div class="toolbar">
+  <h3>Browsable Index
+    <small>Accession numbers as registered in the Foundation's day-book; fields, dynasty, provenance.</small>
+  </h3>
+  <div class="filters" role="group" aria-label="Filter by medium">
+    <span class="active">All&nbsp;48</span>
+    <span>Tile · 24</span>
+    <span>Manuscript · 6</span>
+    <span>Textile · 14</span>
+    <span>Cartoon · 4</span>
+  </div>
+</div>
+
+<!-- ===== CATEGORY I — TILE ===== -->
+<div class="cat-head">
+  <span class="roman">I</span>
+  <h4>Cuerda-Seca Tilework — Isfahan &amp; Kashan</h4>
+  <span class="rule"></span>
+  <span class="count">twenty-four fragments</span>
+</div>
+
+<div class="grid">
+
+  <!-- 1 -->
+  <article class="card tile">
+    <div class="frame"><div class="thumb">
+      <svg viewBox="0 0 100 100"><rect width="100" height="100" fill="#1e3a5f"/><g fill="#c9a23a"><polygon points="50,8 60,40 92,40 66,58 76,90 50,72 24,90 34,58 8,40 40,40"/></g><circle cx="50" cy="50" r="14" fill="#2a8a8a" stroke="#c9a23a" stroke-width="2"/></svg>
+    </div></div>
+    <div class="meta">
+      <div class="acc">BFF-2003-014</div>
+      <div class="title">Spandrel Star, Masjid-i Shah</div>
+      <div class="dyn">Safavid · c. 1611</div>
+      <div class="prov">Isfahan, Naqsh-e Jahan; salvaged 1932 restoration</div>
+      <div class="seal-foot"><svg viewBox="0 0 24 24"><polygon points="12,2 14,9 22,9 16,14 18,22 12,17 6,22 8,14 2,9 10,9" fill="currentColor"/></svg></div>
+    </div>
+  </article>
+
+  <!-- 2 -->
+  <article class="card tile">
+    <div class="frame"><div class="thumb">
+      <svg viewBox="0 0 100 100"><rect width="100" height="100" fill="#2a8a8a"/><g fill="#1e3a5f"><path d="M50 10 L80 30 L80 70 L50 90 L20 70 L20 30 Z" fill="#f2e5cc" stroke="#c9a23a" stroke-width="1.5"/><path d="M50 25 L70 38 L70 62 L50 75 L30 62 L30 38 Z" fill="#1e3a5f"/></g><circle cx="50" cy="50" r="6" fill="#c9a23a"/></svg>
+    </div></div>
+    <div class="meta">
+      <div class="acc">BFF-2003-019</div>
+      <div class="title">Hexagonal Border, Madrasa Chahar Bagh</div>
+      <div class="dyn">Safavid · 1706</div>
+      <div class="prov">Isfahan; gift of Dr. F. Nazari, 1991</div>
+      <div class="seal-foot"><svg viewBox="0 0 24 24"><polygon points="12,2 14,9 22,9 16,14 18,22 12,17 6,22 8,14 2,9 10,9" fill="currentColor"/></svg></div>
+    </div>
+  </article>
+
+  <!-- 3 -->
+  <article class="card tile">
+    <div class="frame"><div class="thumb">
+      <svg viewBox="0 0 100 100"><rect width="100" height="100" fill="#f2e5cc"/><g stroke="#1e3a5f" stroke-width="1.5" fill="none"><path d="M0 50 Q25 10 50 50 T100 50" /><path d="M0 50 Q25 90 50 50 T100 50" /></g><g fill="#c9a23a"><circle cx="25" cy="50" r="5"/><circle cx="75" cy="50" r="5"/><circle cx="50" cy="50" r="7" fill="#7a1f2e"/></g></svg>
+    </div></div>
+    <div class="meta">
+      <div class="acc">BFF-2003-027</div>
+      <div class="title">Vine-Scroll Frieze Tile</div>
+      <div class="dyn">Safavid · c. 1598</div>
+      <div class="prov">Kashan, Maydan Sang; acquired 1994</div>
+      <div class="seal-foot"><svg viewBox="0 0 24 24"><polygon points="12,2 14,9 22,9 16,14 18,22 12,17 6,22 8,14 2,9 10,9" fill="currentColor"/></svg></div>
+    </div>
+  </article>
+
+  <!-- 4 -->
+  <article class="card tile">
+    <div class="frame"><div class="thumb">
+      <svg viewBox="0 0 100 100"><rect width="100" height="100" fill="#1e3a5f"/><g fill="none" stroke="#c9a23a" stroke-width="1.2"><polygon points="50,15 75,30 75,70 50,85 25,70 25,30"/><polygon points="50,28 65,37 65,63 50,72 35,63 35,37"/><line x1="25" y1="30" x2="75" y2="70"/><line x1="75" y1="30" x2="25" y2="70"/></g><circle cx="50" cy="50" r="5" fill="#2a8a8a"/></svg>
+    </div></div>
+    <div class="meta">
+      <div class="acc">BFF-2004-031</div>
+      <div class="title">Girih Panel Fragment, Masjid-i Jami'</div>
+      <div class="dyn">Late Safavid · 1685</div>
+      <div class="prov">Isfahan; transferred from MOC, 2004</div>
+      <div class="seal-foot"><svg viewBox="0 0 24 24"><polygon points="12,2 14,9 22,9 16,14 18,22 12,17 6,22 8,14 2,9 10,9" fill="currentColor"/></svg></div>
+    </div>
+  </article>
+
+  <!-- 5 -->
+  <article class="card tile">
+    <div class="frame"><div class="thumb">
+      <svg viewBox="0 0 100 100"><rect width="100" height="100" fill="#c9a23a"/><g fill="#1e3a5f"><polygon points="50,5 58,30 85,30 63,46 71,75 50,58 29,75 37,46 15,30 42,30"/></g><circle cx="50" cy="44" r="9" fill="#f2e5cc" stroke="#7a1f2e" stroke-width="1.5"/></svg>
+    </div></div>
+    <div class="meta">
+      <div class="acc">BFF-2004-038</div>
+      <div class="title">Twelve-Point Star, Sheikh Lutfallah</div>
+      <div class="dyn">Safavid · 1617</div>
+      <div class="prov">Isfahan; from 1958 dome restoration</div>
+      <div class="seal-foot"><svg viewBox="0 0 24 24"><polygon points="12,2 14,9 22,9 16,14 18,22 12,17 6,22 8,14 2,9 10,9" fill="currentColor"/></svg></div>
+    </div>
+  </article>
+
+  <!-- 6 -->
+  <article class="card tile">
+    <div class="frame"><div class="thumb">
+      <svg viewBox="0 0 100 100"><rect width="100" height="100" fill="#2a8a8a"/><g fill="#f2e5cc"><path d="M20 50 Q50 20 80 50 Q50 80 20 50 Z"/></g><g fill="#1e3a5f"><circle cx="50" cy="50" r="10"/></g><g fill="#c9a23a"><circle cx="50" cy="50" r="4"/></g></svg>
+    </div></div>
+    <div class="meta">
+      <div class="acc">BFF-2005-042</div>
+      <div class="title">Almond-Field Wall Tile</div>
+      <div class="dyn">Safavid · c. 1620</div>
+      <div class="prov">Kashan; private bequest, Tehran</div>
+      <div class="seal-foot"><svg viewBox="0 0 24 24"><polygon points="12,2 14,9 22,9 16,14 18,22 12,17 6,22 8,14 2,9 10,9" fill="currentColor"/></svg></div>
+    </div>
+  </article>
+
+  <!-- 7 -->
+  <article class="card tile">
+    <div class="frame"><div class="thumb">
+      <svg viewBox="0 0 100 100"><rect width="100" height="100" fill="#f2e5cc"/><g stroke="#1e3a5f" stroke-width="1.4" fill="none"><polygon points="50,10 90,50 50,90 10,50"/><polygon points="50,25 75,50 50,75 25,50"/></g><polygon points="50,10 90,50 50,90 10,50" fill="#2a8a8a" opacity=".25"/><circle cx="50" cy="50" r="4" fill="#7a1f2e"/></svg>
+    </div></div>
+    <div class="meta">
+      <div class="acc">BFF-2005-051</div>
+      <div class="title">Lozenge Tile, Ali Qapu Iwan</div>
+      <div class="dyn">Safavid · 1597</div>
+      <div class="prov">Isfahan; reattributed 2002</div>
+      <div class="seal-foot"><svg viewBox="0 0 24 24"><polygon points="12,2 14,9 22,9 16,14 18,22 12,17 6,22 8,14 2,9 10,9" fill="currentColor"/></svg></div>
+    </div>
+  </article>
+
+  <!-- 8 -->
+  <article class="card tile">
+    <div class="frame"><div class="thumb">
+      <svg viewBox="0 0 100 100"><rect width="100" height="100" fill="#1e3a5f"/><g fill="#c9a23a"><rect x="10" y="10" width="80" height="80" fill="none" stroke="#c9a23a" stroke-width="1"/></g><g fill="#f2e5cc"><polygon points="50,20 60,40 80,40 65,55 70,75 50,65 30,75 35,55 20,40 40,40"/></g><circle cx="50" cy="49" r="6" fill="#2a8a8a"/></svg>
+    </div></div>
+    <div class="meta">
+      <div class="acc">BFF-2006-058</div>
+      <div class="title">Star Border, Imamzadeh Harun-i Vilayat</div>
+      <div class="dyn">Safavid · 1512</div>
+      <div class="prov">Isfahan; field salvage, 1996</div>
+      <div class="seal-foot"><svg viewBox="0 0 24 24"><polygon points="12,2 14,9 22,9 16,14 18,22 12,17 6,22 8,14 2,9 10,9" fill="currentColor"/></svg></div>
+    </div>
+  </article>
+
+</div>
+
+<!-- ===== CATEGORY II — MANUSCRIPT ===== -->
+<div class="cat-head">
+  <span class="roman">II</span>
+  <h4>Manuscript Folios &amp; Bindings</h4>
+  <span class="rule"></span>
+  <span class="count">six folios</span>
+</div>
+
+<div class="grid">
+
+  <!-- 1 -->
+  <article class="card ms">
+    <div class="frame"><div class="thumb">
+      <svg viewBox="0 0 100 100"><rect width="100" height="100" fill="#efe3c2"/><rect x="12" y="12" width="76" height="76" fill="none" stroke="#1e3a5f" stroke-width="1.5"/><rect x="18" y="18" width="64" height="64" fill="none" stroke="#c9a23a" stroke-width=".8"/><g stroke="#1e3a5f" stroke-width=".6" fill="none"><line x1="22" y1="30" x2="78" y2="30"/><line x1="22" y1="38" x2="78" y2="38"/><line x1="22" y1="46" x2="78" y2="46"/><line x1="22" y1="54" x2="78" y2="54"/><line x1="22" y1="62" x2="78" y2="62"/><line x1="22" y1="70" x2="78" y2="70"/></g><rect x="34" y="40" width="32" height="22" fill="#7a1f2e" opacity=".7"/><circle cx="50" cy="51" r="6" fill="#c9a23a"/></svg>
+    </div></div>
+    <div class="meta">
+      <div class="acc">BFF-2007-061</div>
+      <div class="title">Shahnameh Folio: Rustam &amp; the White Demon</div>
+      <div class="dyn">Safavid · dated 996 AH / 1587 CE</div>
+      <div class="prov">Qazvin atelier; acquired Sotheby's, 2007</div>
+      <div class="seal-foot"><svg viewBox="0 0 24 24"><polygon points="12,2 14,9 22,9 16,14 18,22 12,17 6,22 8,14 2,9 10,9" fill="currentColor"/></svg></div>
+    </div>
+  </article>
+
+  <!-- 2 -->
+  <article class="card ms">
+    <div class="frame"><div class="thumb">
+      <svg viewBox="0 0 100 100"><rect width="100" height="100" fill="#efe3c2"/><rect x="12" y="12" width="76" height="76" fill="none" stroke="#1e3a5f" stroke-width="1.5"/><rect x="20" y="20" width="60" height="60" fill="none" stroke="#c9a23a" stroke-width=".8"/><g stroke="#1e3a5f" stroke-width=".5" fill="none"><line x1="24" y1="28" x2="76" y2="28"/><line x1="24" y1="34" x2="76" y2="34"/><line x1="24" y1="40" x2="76" y2="40"/><line x1="24" y1="48" x2="76" y2="48"/><line x1="24" y1="54" x2="76" y2="54"/><line x1="24" y1="60" x2="76" y2="60"/><line x1="24" y1="66" x2="76" y2="66"/><line x1="24" y1="72" x2="76" y2="72"/></g></svg>
+    </div></div>
+    <div class="meta">
+      <div class="acc">BFF-2008-064</div>
+      <div class="title">Khamsa of Nizami, Headpiece Folio</div>
+      <div class="dyn">Safavid · c. 1575</div>
+      <div class="prov">Shiraz; Etemadi family donation, 1995</div>
+      <div class="seal-foot"><svg viewBox="0 0 24 24"><polygon points="12,2 14,9 22,9 16,14 18,22 12,17 6,22 8,14 2,9 10,9" fill="currentColor"/></svg></div>
+    </div>
+  </article>
+
+  <!-- 3 -->
+  <article class="card ms">
+    <div class="frame"><div class="thumb">
+      <svg viewBox="0 0 100 100"><rect width="100" height="100" fill="#7a1f2e"/><rect x="14" y="14" width="72" height="72" fill="#1e3a5f" stroke="#c9a23a" stroke-width="1"/><g fill="none" stroke="#c9a23a" stroke-width=".8"><circle cx="50" cy="50" r="22"/><circle cx="50" cy="50" r="14"/><polygon points="50,30 58,50 50,70 42,50"/><polygon points="30,50 50,42 70,50 50,58"/></g></svg>
+    </div></div>
+    <div class="meta">
+      <div class="acc">BFF-2008-067</div>
+      <div class="title">Lacquered Binding (Upper Cover)</div>
+      <div class="dyn">Late Safavid · 1690s</div>
+      <div class="prov">Isfahan; long-term loan, MFA Tehran</div>
+      <div class="seal-foot"><svg viewBox="0 0 24 24"><polygon points="12,2 14,9 22,9 16,14 18,22 12,17 6,22 8,14 2,9 10,9" fill="currentColor"/></svg></div>
+    </div>
+  </article>
+
+  <!-- 4 -->
+  <article class="card ms">
+    <div class="frame"><div class="thumb">
+      <svg viewBox="0 0 100 100"><rect width="100" height="100" fill="#efe3c2"/><rect x="12" y="12" width="76" height="76" fill="none" stroke="#1e3a5f" stroke-width="1.5"/><g stroke="#1e3a5f" stroke-width=".5" fill="none"><line x1="22" y1="26" x2="78" y2="26"/><line x1="22" y1="32" x2="78" y2="32"/><line x1="22" y1="38" x2="78" y2="38"/><line x1="22" y1="44" x2="78" y2="44"/><line x1="22" y1="50" x2="78" y2="50"/><line x1="22" y1="56" x2="78" y2="56"/><line x1="22" y1="62" x2="78" y2="62"/><line x1="22" y1="68" x2="78" y2="68"/><line x1="22" y1="74" x2="78" y2="74"/></g><rect x="22" y="20" width="56" height="6" fill="#2a8a8a"/><rect x="22" y="74" width="56" height="6" fill="#2a8a8a"/></svg>
+    </div></div>
+    <div class="meta">
+      <div class="acc">BFF-2010-073</div>
+      <div class="title">Diwan of Hafiz, Marginalia Folio</div>
+      <div class="dyn">Safavid · 1582</div>
+      <div class="prov">Mashhad; acq. through Drouot, Paris</div>
+      <div class="seal-foot"><svg viewBox="0 0 24 24"><polygon points="12,2 14,9 22,9 16,14 18,22 12,17 6,22 8,14 2,9 10,9" fill="currentColor"/></svg></div>
+    </div>
+  </article>
+
+</div>
+
+<!-- ===== CATEGORY III — TEXTILE ===== -->
+<div class="cat-head">
+  <span class="roman">III</span>
+  <h4>Silk &amp; Metal-Thread Textiles — Kerman, Yazd</h4>
+  <span class="rule"></span>
+  <span class="count">fourteen panels</span>
+</div>
+
+<div class="grid">
+
+  <!-- 1 -->
+  <article class="card tex">
+    <div class="frame"><div class="thumb">
+      <svg viewBox="0 0 100 100"><rect width="100" height="100" fill="#7a1f2e"/><g fill="none" stroke="#c9a23a" stroke-width=".8"><path d="M0 25 Q25 15 50 25 T100 25"/><path d="M0 50 Q25 40 50 50 T100 50"/><path d="M0 75 Q25 65 50 75 T100 75"/></g><g fill="#c9a23a"><circle cx="25" cy="25" r="3"/><circle cx="75" cy="25" r="3"/><circle cx="50" cy="50" r="4"/><circle cx="25" cy="75" r="3"/><circle cx="75" cy="75" r="3"/></g><g fill="#f2e5cc"><path d="M50 12 Q57 22 50 32 Q43 22 50 12 Z"/><path d="M50 62 Q57 72 50 82 Q43 72 50 62 Z"/></g></svg>
+    </div></div>
+    <div class="meta">
+      <div class="acc">BFF-2011-079</div>
+      <div class="title">Silk Panel with Cypress &amp; Bird</div>
+      <div class="dyn">Safavid · c. 1640</div>
+      <div class="prov">Kerman; Aga Khan Trust exchange, 2011</div>
+      <div class="seal-foot"><svg viewBox="0 0 24 24"><polygon points="12,2 14,9 22,9 16,14 18,22 12,17 6,22 8,14 2,9 10,9" fill="currentColor"/></svg></div>
+    </div>
+  </article>
+
+  <!-- 2 -->
+  <article class="card tex">
+    <div class="frame"><div class="thumb">
+      <svg viewBox="0 0 100 100"><rect width="100" height="100" fill="#1e3a5f"/><g fill="#c9a23a"><rect x="0" y="0" width="100" height="4"/><rect x="0" y="96" width="100" height="4"/><rect x="0" y="48" width="100" height="2"/></g><g fill="none" stroke="#c9a23a" stroke-width=".7"><path d="M10 20 Q25 10 40 20 Q55 30 70 20 Q85 10 95 20"/><path d="M10 75 Q25 65 40 75 Q55 85 70 75 Q85 65 95 75"/></g><g fill="#f2e5cc"><circle cx="25" cy="50" r="6"/><circle cx="50" cy="50" r="8" fill="#7a1f2e" stroke="#c9a23a" stroke-width="1"/><circle cx="75" cy="50" r="6"/></g></svg>
+    </div></div>
+    <div class="meta">
+      <div class="acc">BFF-2012-084</div>
+      <div class="title">Brocaded Sash with Palmette Field</div>
+      <div class="dyn">Safavid · 1660–80</div>
+      <div class="prov">Yazd workshops; gift of M. Farmanfarmaian</div>
+      <div class="seal-foot"><svg viewBox="0 0 24 24"><polygon points="12,2 14,9 22,9 16,14 18,22 12,17 6,22 8,14 2,9 10,9" fill="currentColor"/></svg></div>
+    </div>
+  </article>
+
+  <!-- 3 -->
+  <article class="card tex">
+    <div class="frame"><div class="thumb">
+      <svg viewBox="0 0 100 100"><rect width="100" height="100" fill="#c9a23a"/><g fill="#7a1f2e"><path d="M50 20 Q35 35 50 50 Q65 35 50 20 Z"/><path d="M50 50 Q35 65 50 80 Q65 65 50 50 Z"/><path d="M20 50 Q35 35 50 50 Q35 65 20 50 Z"/><path d="M50 50 Q65 35 80 50 Q65 65 50 50 Z"/></g><circle cx="50" cy="50" r="6" fill="#1e3a5f"/><circle cx="50" cy="50" r="2" fill="#f2e5cc"/></svg>
+    </div></div>
+    <div class="meta">
+      <div class="acc">BFF-2012-088</div>
+      <div class="title">Velvet Fragment, Quatrefoil Repeat</div>
+      <div class="dyn">Safavid · early 17th c.</div>
+      <div class="prov">Kerman; Drouot Paris, 30 Mar 2012</div>
+      <div class="seal-foot"><svg viewBox="0 0 24 24"><polygon points="12,2 14,9 22,9 16,14 18,22 12,17 6,22 8,14 2,9 10,9" fill="currentColor"/></svg></div>
+    </div>
+  </article>
+
+  <!-- 4 -->
+  <article class="card tex">
+    <div class="frame"><div class="thumb">
+      <svg viewBox="0 0 100 100"><rect width="100" height="100" fill="#2a8a8a"/><g fill="none" stroke="#c9a23a" stroke-width="1"><polygon points="50,15 70,30 70,60 50,75 30,60 30,30"/><polygon points="50,28 60,36 60,54 50,62 40,54 40,36"/></g><g fill="#f2e5cc"><circle cx="50" cy="45" r="3"/></g><g stroke="#c9a23a" stroke-width=".5" fill="none"><line x1="0" y1="85" x2="100" y2="85"/><line x1="0" y1="90" x2="100" y2="90"/></g></svg>
+    </div></div>
+    <div class="meta">
+      <div class="acc">BFF-2013-091</div>
+      <div class="title">Tomb Cover, Metal-Thread Inscription Band</div>
+      <div class="dyn">Late Safavid · 1701</div>
+      <div class="prov">Ardabil shrine vestry; reg. 1991</div>
+      <div class="seal-foot"><svg viewBox="0 0 24 24"><polygon points="12,2 14,9 22,9 16,14 18,22 12,17 6,22 8,14 2,9 10,9" fill="currentColor"/></svg></div>
+    </div>
+  </article>
+
+</div>
+
+<!-- ===== CATEGORY IV — CARTOON ===== -->
+<div class="cat-head">
+  <span class="roman">IV</span>
+  <h4>Carpet Cartoons &amp; Working Drawings</h4>
+  <span class="rule"></span>
+  <span class="count">four cartoons</span>
+</div>
+
+<div class="grid">
+
+  <!-- 1 -->
+  <article class="card cart">
+    <div class="frame"><div class="thumb">
+      <svg viewBox="0 0 100 100"><rect width="100" height="100" fill="#dccca8"/><rect x="8" y="8" width="84" height="84" fill="none" stroke="#7a1f2e" stroke-width="1"/><rect x="14" y="14" width="72" height="72" fill="none" stroke="#1e3a5f" stroke-width=".7"/><g fill="none" stroke="#1e3a5f" stroke-width=".5"><circle cx="50" cy="50" r="22"/><circle cx="50" cy="50" r="14"/><polygon points="50,30 58,42 70,44 60,52 64,64 50,58 36,64 40,52 30,44 42,42"/></g><circle cx="50" cy="50" r="3" fill="#7a1f2e"/></svg>
+    </div></div>
+    <div class="meta">
+      <div class="acc">BFF-2014-094</div>
+      <div class="title">Ardabil Carpet Cartoon — Central Medallion Quadrant</div>
+      <div class="dyn">attrib. Maqsud of Kashan circle · c. 1539</div>
+      <div class="prov">Tabriz; long-term study loan from Ardabil Shrine</div>
+      <div class="seal-foot"><svg viewBox="0 0 24 24"><polygon points="12,2 14,9 22,9 16,14 18,22 12,17 6,22 8,14 2,9 10,9" fill="currentColor"/></svg></div>
+    </div>
+  </article>
+
+  <!-- 2 -->
+  <article class="card cart">
+    <div class="frame"><div class="thumb">
+      <svg viewBox="0 0 100 100"><rect width="100" height="100" fill="#dccca8"/><g fill="none" stroke="#1e3a5f" stroke-width=".6"><rect x="10" y="10" width="80" height="80"/><rect x="18" y="18" width="64" height="64"/><rect x="26" y="26" width="48" height="48"/></g><g fill="none" stroke="#7a1f2e" stroke-width=".7"><path d="M30 50 Q40 30 50 50 Q60 70 70 50"/><path d="M30 50 Q40 70 50 50 Q60 30 70 50"/></g><circle cx="50" cy="50" r="3" fill="#1e3a5f"/></svg>
+    </div></div>
+    <div class="meta">
+      <div class="acc">BFF-2014-097</div>
+      <div class="title">Border Cartoon, Vine &amp; Cloud-Band</div>
+      <div class="dyn">Safavid · c. 1560</div>
+      <div class="prov">Tabriz workshops; provenance verified 2002</div>
+      <div class="seal-foot"><svg viewBox="0 0 24 24"><polygon points="12,2 14,9 22,9 16,14 18,22 12,17 6,22 8,14 2,9 10,9" fill="currentColor"/></svg></div>
+    </div>
+  </article>
+
+  <!-- 3 -->
+  <article class="card tile">
+    <div class="frame"><div class="thumb">
+      <svg viewBox="0 0 100 100"><rect width="100" height="100" fill="#1e3a5f"/><g fill="#2a8a8a"><polygon points="50,12 62,38 90,38 67,55 76,82 50,66 24,82 33,55 10,38 38,38"/></g><g fill="#c9a23a"><circle cx="50" cy="51" r="9"/></g><circle cx="50" cy="51" r="3" fill="#7a1f2e"/></svg>
+    </div></div>
+    <div class="meta">
+      <div class="acc">BFF-2015-103</div>
+      <div class="title">Mihrab Tile, Nine-Point Star</div>
+      <div class="dyn">Safavid · 1605</div>
+      <div class="prov">Isfahan; recovered from 1932 inventory</div>
+      <div class="seal-foot"><svg viewBox="0 0 24 24"><polygon points="12,2 14,9 22,9 16,14 18,22 12,17 6,22 8,14 2,9 10,9" fill="currentColor"/></svg></div>
+    </div>
+  </article>
+
+  <!-- 4 -->
+  <article class="card ms">
+    <div class="frame"><div class="thumb">
+      <svg viewBox="0 0 100 100"><rect width="100" height="100" fill="#efe3c2"/><rect x="14" y="14" width="72" height="72" fill="none" stroke="#1e3a5f" stroke-width="1.4"/><rect x="20" y="20" width="60" height="60" fill="none" stroke="#c9a23a"/><g fill="#7a1f2e"><rect x="32" y="36" width="36" height="20"/></g><g stroke="#1e3a5f" stroke-width=".5" fill="none"><line x1="24" y1="62" x2="76" y2="62"/><line x1="24" y1="68" x2="76" y2="68"/><line x1="24" y1="74" x2="76" y2="74"/></g></svg>
+    </div></div>
+    <div class="meta">
+      <div class="acc">BFF-2016-110</div>
+      <div class="title">Bustan of Sa'di, Frontispiece</div>
+      <div class="dyn">Safavid · 1591</div>
+      <div class="prov">Qazvin; on long-term loan from Astan-i Quds</div>
+      <div class="seal-foot"><svg viewBox="0 0 24 24"><polygon points="12,2 14,9 22,9 16,14 18,22 12,17 6,22 8,14 2,9 10,9" fill="currentColor"/></svg></div>
+    </div>
+  </article>
+
+</div>
+
+<!-- ===== PAGINATION ===== -->
+<div class="pagination" aria-label="Pagination">
+  <span class="cur">I</span><span>II</span><span>III</span><span>IV</span><span>V</span><span>VI</span>
+</div>
+
+<!-- ===== ACCESS NOTE ===== -->
+<aside class="access">
+  <h5>Access &amp; Reading-Room Procedures</h5>
+  <p>
+    The full study collection comprises <span class="mark">forty-eight</span> registered objects. Folios, textiles, and cartoons are held in a controlled-environment vault at the Foundation's Isfahan office and may be consulted by appointment in the Bagh-e Fin reading room, Tuesdays through Thursdays, 9.00–13.00. Tile fragments BFF-2003-014 through BFF-2008-058 are on permanent display in the south gallery; high-resolution facsimiles of all manuscript folios are available without restriction.
+  </p>
+</aside>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="top-filet" aria-hidden="true"></div>
+  <div class="cols">
+    <div>
+      <h6>Foundation Office</h6>
+      <p>The Bagh-e Fin Foundation<br>
+      No. 14, Kucheh-ye Hasht-Behesht<br>
+      Chahar Bagh-e Abbasi, Isfahan 81746<br>
+      Islamic Republic of Iran<br>
+      +98 31 3220 8914</p>
+    </div>
+    <div>
+      <div class="seal" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><polygon points="12,1 14.5,8.5 22.5,8.5 16,13.5 18.5,21.5 12,16.5 5.5,21.5 8,13.5 1.5,8.5 9.5,8.5" fill="none" stroke="currentColor" stroke-width="1.2"/><polygon points="12,5 13.5,9 17.5,9 14,11.5 15.5,15.5 12,13 8.5,15.5 10,11.5 6.5,9 10.5,9" fill="currentColor"/></svg>
+      </div>
+      <h6>Board of Trustees</h6>
+      <p>Dr. Shirin Tabrizi, Chair<br>
+      Prof. Hossein Ardakani<br>
+      Mme. Layla Bahrami<br>
+      Sayyid Mohammad-Reza Kashani<br>
+      Dr. Anne-Marie Schimmel ✦ in memoriam</p>
+    </div>
+    <div>
+      <h6>Endowment Notice</h6>
+      <p>The Foundation operates upon a perpetual endowment established 1989 and replenished by the Hosseini-Bahrami bequest of 2004. No object in the study collection is held for sale or trade. Conservation services are offered without fee to public shrines of the three named provinces.</p>
+    </div>
+  </div>
+  <div class="copy">© 1989–2024 The Bagh-e Fin Foundation for Persian Arts · Isfahan · All scholarship freely cited with attribution.</div>
+</footer>
+
+</body>
+</html>

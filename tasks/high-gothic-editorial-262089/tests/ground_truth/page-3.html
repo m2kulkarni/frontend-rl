@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Cobalt of Chartres — The Lancet Quarterly</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  :root {
+    --rule: #1e3a5f;
+    --gold: #c9a23a;
+    --ink: #0a0a0a;
+    --walnut: #3a2618;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    margin: 0;
+    line-height: 1.6;
+    font-size: 17px;
+  }
+
+  a { color: var(--secondary); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* ============ MASTHEAD ============ */
+  .masthead {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 36px 40px 0;
+    text-align: center;
+    border-top: 1px solid var(--secondary);
+  }
+  .masthead-eyebrow {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    color: var(--secondary);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-size: 11px;
+    margin-bottom: 14px;
+  }
+  .masthead-title {
+    font-family: var(--font-display), Georgia, serif;
+    font-weight: 800;
+    font-variant: small-caps;
+    letter-spacing: 0.06em;
+    font-size: 58px;
+    line-height: 1;
+    color: var(--ink);
+    margin: 0 0 8px;
+  }
+  .masthead-sub {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--walnut);
+    font-size: 15px;
+    margin-bottom: 22px;
+  }
+  .masthead-rule {
+    border: 0;
+    border-top: 3px solid var(--ink);
+    margin: 0;
+  }
+  .masthead-rule + .masthead-rule {
+    border-top: 1px solid var(--ink);
+    margin-top: 3px;
+  }
+
+  /* ============ NAV ARCADE ============ */
+  nav.arcade {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 28px 40px 18px;
+    display: flex;
+    justify-content: center;
+    gap: 0;
+  }
+  .arch-link {
+    position: relative;
+    width: 168px;
+    height: 86px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 14px;
+    text-align: center;
+  }
+  .arch-link svg.arch-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+  .arch-link a {
+    position: relative;
+    z-index: 2;
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    font-size: 12px;
+    color: var(--ink);
+  }
+  .arch-link[aria-current="page"] a { color: var(--secondary); }
+  .arch-link .trefoil {
+    position: absolute;
+    top: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 14px;
+    height: 14px;
+    z-index: 3;
+    display: none;
+  }
+  .arch-link[aria-current="page"] .trefoil { display: block; }
+
+  /* ============ FEATURE FRAME ============ */
+  .feature-wrap {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 18px 40px 60px;
+    border-top: 1px solid var(--ink);
+  }
+
+  .feature-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 14px 0 28px;
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.16em;
+    font-size: 11px;
+    color: var(--secondary);
+    border-bottom: 1px solid var(--gold);
+  }
+  .feature-meta .vol { color: var(--ink); }
+
+  /* Title block under arch */
+  .title-block {
+    text-align: center;
+    padding: 56px 40px 30px;
+    position: relative;
+  }
+  .title-eyebrow {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.3em;
+    font-size: 11px;
+    color: var(--secondary);
+  }
+  .title-block h1 {
+    font-family: var(--font-display), Georgia, serif;
+    font-weight: 800;
+    font-variant: small-caps;
+    font-size: 64px;
+    line-height: 1.04;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    margin: 12px auto 18px;
+    max-width: 820px;
+  }
+  .title-block .dek {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 22px;
+    color: var(--walnut);
+    max-width: 660px;
+    margin: 0 auto 22px;
+    line-height: 1.4;
+  }
+  .byline {
+    font-family: var(--font-body), sans-serif;
+    font-style: italic;
+    color: var(--walnut);
+    font-size: 14px;
+    letter-spacing: 0.04em;
+  }
+  .byline strong {
+    font-style: normal;
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    color: var(--secondary);
+    font-weight: 600;
+  }
+
+  /* Hero arch with rose centerpiece */
+  .hero-arch {
+    position: relative;
+    margin: 18px auto 0;
+    width: 460px;
+    height: 510px;
+  }
+  .hero-arch svg.frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .hero-arch .rose {
+    position: absolute;
+    top: 86px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 280px;
+    height: 280px;
+  }
+  .hero-arch .glyph-line {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.22em;
+    font-size: 11px;
+    color: var(--secondary);
+  }
+
+  /* ============ ESSAY COLUMN ============ */
+  .essay {
+    max-width: 580px;
+    margin: 60px auto 0;
+    padding: 0 10px;
+  }
+
+  .essay p {
+    margin: 0 0 18px;
+    text-align: justify;
+    hyphens: auto;
+    color: var(--walnut);
+  }
+  .essay p + p { text-indent: 1.4em; }
+
+  .dropcap::first-letter {
+    font-family: var(--font-display), serif;
+    font-weight: 800;
+    float: left;
+    font-size: 92px;
+    line-height: 0.84;
+    padding: 8px 12px 0 0;
+    color: var(--secondary);
+    background:
+      linear-gradient(transparent 0, transparent 100%);
+    text-shadow: 0 0 0 var(--secondary);
+  }
+  .dropcap::first-line {
+    font-variant: small-caps;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  /* Section heads */
+  .section-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    margin: 44px 0 14px;
+  }
+  .section-divider .rule {
+    flex: 1;
+    height: 1px;
+    background: var(--gold);
+    max-width: 140px;
+  }
+  .section-divider svg {
+    width: 38px;
+    height: 38px;
+    flex: 0 0 auto;
+  }
+  .essay h2 {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    font-size: 22px;
+    text-align: center;
+    color: var(--ink);
+    margin: 6px 0 26px;
+  }
+
+  /* Pull quote */
+  .pullquote {
+    margin: 32px -40px;
+    padding: 26px 30px 22px;
+    border-top: 1px solid var(--gold);
+    border-bottom: 1px solid var(--gold);
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    font-size: 19px;
+    line-height: 1.4;
+    color: var(--secondary);
+  }
+  .pullquote::before, .pullquote::after {
+    content: "✣";
+    display: block;
+    color: var(--gold);
+    font-size: 14px;
+    margin: 0 auto;
+    letter-spacing: 0;
+    font-variant: normal;
+  }
+  .pullquote::before { margin-bottom: 12px; }
+  .pullquote::after { margin-top: 12px; }
+  .pullquote cite {
+    display: block;
+    font-style: normal;
+    font-variant: small-caps;
+    font-weight: 400;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    color: var(--walnut);
+    margin-top: 12px;
+  }
+
+  /* Inline plate */
+  .plate {
+    margin: 36px -40px;
+    text-align: center;
+  }
+  .plate-arch {
+    display: inline-block;
+    position: relative;
+    width: 360px;
+    height: 420px;
+    background: #1a2640;
+    overflow: hidden;
+    border: 1px solid var(--ink);
+    -webkit-mask-image: radial-gradient(circle at 50% 100%, transparent 0, black 0);
+    /* arch top via clip-path */
+    clip-path: path('M 0 360 L 0 180 Q 0 0 180 0 Q 360 0 360 180 L 360 360 Z');
+  }
+  .plate-arch svg {
+    position: absolute;
+    inset: 30px;
+    width: calc(100% - 60px);
+    height: calc(100% - 60px);
+    opacity: 0.92;
+  }
+  .plate-caption {
+    margin-top: 14px;
+    font-family: var(--font-body), sans-serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--walnut);
+    max-width: 460px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.5;
+  }
+  .plate-caption strong {
+    font-style: normal;
+    font-variant: small-caps;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--ink);
+  }
+
+  /* Marginal note in essay */
+  .essay .colophon-end {
+    margin-top: 40px;
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.22em;
+    font-size: 12px;
+    color: var(--secondary);
+  }
+  .essay .colophon-end::before {
+    content: "❦";
+    display: block;
+    color: var(--gold);
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  /* ============ FOOTER ============ */
+  footer {
+    margin-top: 80px;
+    border-top: 1px solid var(--ink);
+  }
+  .frieze {
+    height: 36px;
+    background-repeat: repeat-x;
+    background-position: center;
+    background-size: 36px 36px;
+    border-bottom: 1px solid var(--ink);
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36'><g fill='%230a0a0a'><path d='M18 4 L21 11 L28 11 L22.5 15.5 L25 22 L18 18 L11 22 L13.5 15.5 L8 11 L15 11 Z'/><circle cx='18' cy='14' r='1.6' fill='%23f4ecd8'/></g></svg>");
+  }
+  .footer-cols {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 36px 40px 22px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 50px;
+  }
+  .footer-cols h4 {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    font-size: 12px;
+    color: var(--secondary);
+    margin: 0 0 12px;
+    border-bottom: 1px solid var(--gold);
+    padding-bottom: 6px;
+  }
+  .footer-cols p, .footer-cols address {
+    font-style: normal;
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--walnut);
+    margin: 0 0 8px;
+  }
+  .footer-bottom {
+    text-align: center;
+    padding: 14px 40px 30px;
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.22em;
+    font-size: 11px;
+    color: var(--ink);
+    border-top: 1px solid var(--gold);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* small inline glyph utility for nav arches */
+  .arch-svg-inner { fill: none; stroke: var(--ink); stroke-width: 1.4; }
+</style>
+</head>
+<body>
+
+<!-- ============ MASTHEAD ============ -->
+<header class="masthead">
+  <div class="masthead-eyebrow">Volume XXIV · Number Three · Michaelmas MMXXIV</div>
+  <h1 class="masthead-title">The Lancet Quarterly</h1>
+  <div class="masthead-sub">A Review of Medieval Architecture, Illuminated Manuscripts &amp; Sacred Craft</div>
+  <hr class="masthead-rule">
+  <hr class="masthead-rule">
+</header>
+
+<!-- ============ NAV ARCADE ============ -->
+<nav class="arcade" aria-label="Primary">
+  <div class="arch-link">
+    <svg class="arch-bg" viewBox="0 0 168 86" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M 6 84 L 6 44 Q 6 6 84 6 Q 162 6 162 44 L 162 84" class="arch-svg-inner"/>
+    </svg>
+    <a href="page-1.html">Frontispiece</a>
+  </div>
+  <div class="arch-link">
+    <svg class="arch-bg" viewBox="0 0 168 86" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M 6 84 L 6 44 Q 6 6 84 6 Q 162 6 162 44 L 162 84" class="arch-svg-inner"/>
+    </svg>
+    <a href="page-2.html">Essays</a>
+  </div>
+  <div class="arch-link" aria-current="page">
+    <svg class="trefoil" viewBox="0 0 14 14" aria-hidden="true">
+      <g fill="#c9a23a" stroke="#0a0a0a" stroke-width="0.5">
+        <circle cx="7" cy="3" r="2.6"/>
+        <circle cx="3.6" cy="9" r="2.6"/>
+        <circle cx="10.4" cy="9" r="2.6"/>
+      </g>
+    </svg>
+    <svg class="arch-bg" viewBox="0 0 168 86" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M 6 84 L 6 44 Q 6 6 84 6 Q 162 6 162 44 L 162 84" class="arch-svg-inner" stroke="#1e3a5f" stroke-width="2"/>
+    </svg>
+    <a href="page-3.html">The Cobalt of Chartres</a>
+  </div>
+  <div class="arch-link">
+    <svg class="arch-bg" viewBox="0 0 168 86" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M 6 84 L 6 44 Q 6 6 84 6 Q 162 6 162 44 L 162 84" class="arch-svg-inner"/>
+    </svg>
+    <a href="page-4.html">Plates &amp; Drawings</a>
+  </div>
+  <div class="arch-link">
+    <svg class="arch-bg" viewBox="0 0 168 86" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M 6 84 L 6 44 Q 6 6 84 6 Q 162 6 162 44 L 162 84" class="arch-svg-inner"/>
+    </svg>
+    <a href="page-5.html">On the Workshop</a>
+  </div>
+  <div class="arch-link">
+    <svg class="arch-bg" viewBox="0 0 168 86" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M 6 84 L 6 44 Q 6 6 84 6 Q 162 6 162 44 L 162 84" class="arch-svg-inner"/>
+    </svg>
+    <a href="page-6.html">Subscribe</a>
+  </div>
+</nav>
+
+<!-- ============ FEATURE ============ -->
+<main class="feature-wrap">
+
+  <div class="feature-meta">
+    <span class="vol">Feature · Essay № 47</span>
+    <span>Folio 14 — 28 · Michaelmas Term</span>
+    <span>By M. Holcombe</span>
+  </div>
+
+  <!-- Title + arch hero -->
+  <section class="title-block">
+    <div class="title-eyebrow">In which the question is at last set down</div>
+    <h1>The Cobalt of Chartres</h1>
+    <p class="dek">Upon the singular blue of the twelfth-century glass at Notre-Dame de Chartres — its pigment, its patrons, and the eye that first beheld it.</p>
+    <p class="byline">An essay by <strong>Margery Holcombe</strong>, with reference to the letters of Abbot Suger of Saint-Denis (1140–1144).</p>
+
+    <div class="hero-arch" aria-hidden="true">
+      <svg class="frame" viewBox="0 0 500 550" preserveAspectRatio="xMidYMid meet">
+        <g stroke="#0a0a0a" stroke-width="2.2" fill="none" stroke-linecap="round">
+          <!-- left side of pointed arch frame, schematic from supplied motif -->
+          <path d="M 250 30 L 192 130 C 192 130 168 175 110 195 C 50 215 6 285 6 355 L 70 355 C 70 355 68 285 134 257 C 184 235 218 215 250 168"/>
+          <path d="M 110 195 L 134 253"/>
+          <path d="M 192 130 L 234 154 L 235 188"/>
+          <path d="M 70 360 L 70 540"/>
+          <!-- right side mirror -->
+          <path d="M 250 30 L 308 130 C 308 130 332 175 390 195 C 450 215 494 285 494 355 L 430 355 C 430 355 432 285 366 257 C 316 235 282 215 250 168"/>
+          <path d="M 390 195 L 366 253"/>
+          <path d="M 308 130 L 266 154 L 265 188"/>
+          <path d="M 430 360 L 430 540"/>
+          <!-- base -->
+          <path d="M 70 540 L 430 540" stroke-width="3"/>
+          <path d="M 70 532 L 430 532" stroke-width="0.8"/>
+        </g>
+      </svg>
+
+      <!-- centerpiece rose -->
+      <svg class="rose" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <circle cx="500" cy="500" r="488" fill="#1e3a5f"/>
+        <circle cx="500" cy="500" r="430" fill="none" stroke="#c9a23a" stroke-width="3"/>
+        <circle cx="500" cy="500" r="320" fill="none" stroke="#c9a23a" stroke-width="2"/>
+        <circle cx="500" cy="500" r="170" fill="none" stroke="#c9a23a" stroke-width="2"/>
+        <g stroke="#c9a23a" stroke-width="2" fill="none">
+          <g id="petal-set">
+            <path d="M 500 80 Q 560 240 500 380 Q 440 240 500 80 Z"/>
+          </g>
+          <use href="#petal-set" transform="rotate(30 500 500)"/>
+          <use href="#petal-set" transform="rotate(60 500 500)"/>
+          <use href="#petal-set" transform="rotate(90 500 500)"/>
+          <use href="#petal-set" transform="rotate(120 500 500)"/>
+          <use href="#petal-set" transform="rotate(150 500 500)"/>
+          <use href="#petal-set" transform="rotate(180 500 500)"/>
+          <use href="#petal-set" transform="rotate(210 500 500)"/>
+          <use href="#petal-set" transform="rotate(240 500 500)"/>
+          <use href="#petal-set" transform="rotate(270 500 500)"/>
+          <use href="#petal-set" transform="rotate(300 500 500)"/>
+          <use href="#petal-set" transform="rotate(330 500 500)"/>
+        </g>
+        <circle cx="500" cy="500" r="60" fill="#c9a23a"/>
+        <circle cx="500" cy="500" r="38" fill="#1e3a5f"/>
+        <g fill="#c9a23a">
+          <circle cx="500" cy="245" r="10"/>
+          <circle cx="755" cy="500" r="10"/>
+          <circle cx="500" cy="755" r="10"/>
+          <circle cx="245" cy="500" r="10"/>
+          <circle cx="680" cy="320" r="8"/>
+          <circle cx="680" cy="680" r="8"/>
+          <circle cx="320" cy="680" r="8"/>
+          <circle cx="320" cy="320" r="8"/>
+        </g>
+      </svg>
+
+      <div class="glyph-line">— Notre-Dame de Chartres · west façade —</div>
+    </div>
+  </section>
+
+  <!-- ============ ESSAY ============ -->
+  <article class="essay">
+
+    <p class="dropcap">Concerning the blue of Chartres there is a great deal of confused writing and a small quantity of careful seeing. The cathedral of Notre-Dame, raised between 1194 and 1220 upon the burnt foundations of Bishop Fulbert's earlier basilica, retains in its three western lancets and in the south transept's <em>Notre-Dame de la Belle-Verrière</em> a body of glass which has, for eight centuries, refused to dim. Travellers have called it sapphire; chemists have called it cobalt; the canons of the chapter, in a memorandum of 1842, simply called it <em>le bleu de Chartres</em>, as though it were the property of the place itself.</p>
+
+    <p>It is not. The blue belongs, properly speaking, to a small constellation of churches — Saint-Denis, Bourges, Le Mans, the western lancets at Chartres — built or glazed within a span of perhaps sixty years on either side of the year 1170. Outside that window the blue is not made; inside it, the blue is hardly made anywhere else. To explain this concentration is to explain a great deal about the twelfth century and about the men, mostly anonymous, who set their crucibles against its sky.</p>
+
+    <p>I came to the question by way of a quieter one. Sitting at the south transept on the afternoon of 4 October 2023, with the sun at perhaps thirty-five degrees and a thin haze over the Beauce, I noticed that the blue of the Belle-Verrière did not behave as the blues of the nineteenth-century restorations behave. The restorations went grey when the cloud passed. The twelfth-century glass did not. It went, if anything, deeper — and the deeper it went, the more it seemed to issue light of its own. A glassmaker friend in Reims, M. Étienne Caillaux, has described this property to me as <em>la respiration du verre</em>, the breathing of the glass. It is not a poetic flourish. It is a measurable thing.</p>
+
+    <div class="section-divider" aria-hidden="true">
+      <div class="rule"></div>
+      <svg viewBox="0 0 40 40" aria-hidden="true">
+        <g fill="#0a0a0a">
+          <ellipse cx="20" cy="20" rx="3" ry="5"/>
+          <path d="M 20 14 Q 12 10 8 16 Q 12 22 20 18 Z"/>
+          <path d="M 20 14 Q 28 10 32 16 Q 28 22 20 18 Z"/>
+          <path d="M 20 26 Q 12 30 8 24 Q 12 18 20 22 Z"/>
+          <path d="M 20 26 Q 28 30 32 24 Q 28 18 20 22 Z"/>
+          <circle cx="6" cy="20" r="1.6"/>
+          <circle cx="34" cy="20" r="1.6"/>
+        </g>
+      </svg>
+      <div class="rule"></div>
+    </div>
+    <h2>I. The Pigment Question</h2>
+
+    <p>The blue is, chemically, cobalt. This much was established in 1847 by the Strasbourg chemist Frédéric Kuhlmann, who broke a fragment of debris glass recovered after the 1836 fire and analysed its composition by wet methods. Kuhlmann reported a cobalt content of between 0.08 and 0.21 per cent by mass, with traces of nickel, iron, and a curiously high proportion of soda. The figures have since been refined — most recently by the Centre de Recherche et de Restauration des Musées de France (C2RMF), whose 2018 study by Dr Aurélie Pelletier confirmed cobalt as the chromophore in 94 per cent of the sampled blue glass at Chartres, with a mean concentration of 0.14 per cent.</p>
+
+    <p>The figure looks small. It is not. Cobalt is the most aggressive of the medieval colourants: a tenth of a per cent will turn a melt as blue as a tenth of a per cent of manganese will turn it brown. The medieval glassmaker who could obtain cobalt at all could colour with extreme economy, and the medieval glassmaker who could not, could not approximate the result by any other means.</p>
+
+    <p>The question is therefore: where did the cobalt come from? Twelfth-century Europe knew of two principal sources. The first was the Erzgebirge, the ore-mountains separating Saxony from Bohemia, where cobalt was a nuisance to silver-miners — a "kobold," a malicious sprite who spoiled the silver assay. The miners discarded the cobalt earths until at least the late thirteenth century, when the Venetian glassmakers began to buy the spoil at low prices. The second source, less well understood, was the Massif Central — small alluvial deposits in the upper Loire and the Cévennes, worked sporadically and at small scale.</p>
+
+    <p>Neither source quite explains Chartres. The Erzgebirge cobalt is too late: there is no evidence of trade in it before about 1280. The Massif Central cobalt is contemporary but apparently insufficient in volume. The C2RMF study found, in the Chartres glass, an isotopic signature for nickel which is consistent with neither — and which is consistent, troublingly, with a third and as yet unlocated source. Dr Pelletier proposes, with appropriate caution, that the twelfth-century glaziers were drawing on a deposit which was exhausted before the century closed and which has not been identified in modern times.</p>
+
+    <p>If she is correct — and the metallurgical reasoning is, I think, sound — then the blue of Chartres is not merely rare. It is, in a strict and material sense, irretrievable. We cannot make it again because we cannot find the ore.</p>
+
+    <div class="section-divider" aria-hidden="true">
+      <div class="rule"></div>
+      <svg viewBox="0 0 40 40" aria-hidden="true">
+        <g fill="#0a0a0a">
+          <ellipse cx="20" cy="20" rx="3" ry="5"/>
+          <path d="M 20 14 Q 12 10 8 16 Q 12 22 20 18 Z"/>
+          <path d="M 20 14 Q 28 10 32 16 Q 28 22 20 18 Z"/>
+          <path d="M 20 26 Q 12 30 8 24 Q 12 18 20 22 Z"/>
+          <path d="M 20 26 Q 28 30 32 24 Q 28 18 20 22 Z"/>
+          <circle cx="6" cy="20" r="1.6"/>
+          <circle cx="34" cy="20" r="1.6"/>
+        </g>
+      </svg>
+      <div class="rule"></div>
+    </div>
+    <h2>II. Suger's Letters</h2>
+
+    <p>For the cultural history of the pigment we are indebted to Abbot Suger of Saint-Denis, whose treatises <em>De Administratione</em> and <em>De Consecratione</em> (composed between roughly 1144 and 1149) record the rebuilding of the abbey choir which is now generally taken as the inception of the Gothic mode. Suger writes of his blue glass with a mixture of pride and accountancy that has rarely been equalled in ecclesiastical literature.</p>
+
+    <blockquote class="pullquote">
+      We caused to be made, by the hand of many masters from divers regions, a continuous and most splendid variety of new windows, in which is the saphirorum materia, very precious indeed.
+      <cite>— Suger, De Administratione XXXIV (c. 1144)</cite>
+    </blockquote>
+
+    <p>The phrase <em>saphirorum materia</em> — "sapphire-stuff" — has occupied scholars for the better part of a century. It is plainly not lapis lazuli, which Suger calls elsewhere by its proper name; nor is it ground sapphire, which would be both ruinously expensive and chromatically inert in a glass melt. The most persuasive reading, advanced by the late Madeleine Caviness in her 1990 monograph and elaborated by Lindy Grant in 2014, is that Suger means a specific batch of cobalt-blue glass, traded as a finished commodity rather than as raw pigment, and so precious that it was reckoned by weight against silver.</p>
+
+    <p>Suger's account books, which survive in fragments at the Bibliothèque nationale (MS lat. 9298), record three separate purchases of <em>vitrum saphireum</em>: in 1141, 1142, and 1144. The 1144 entry gives a price of forty-two <em>solidi</em> for what appears to be roughly fifteen kilograms of cullet — that is, broken or discarded glass intended for re-melting. By comparison, a fine mantle of crimson silk, in the same ledger, costs fifty <em>solidi</em>. The cobalt cullet is, weight for weight, of the same order of value as imported silk.</p>
+
+    <p>This is the economic context in which we must read Chartres. The glaziers of 1194, working some fifty years after Suger, were not improvising with a cheap colourant. They were deploying — under the patronage of Bishop Renaud de Mouçon and the cathedral chapter — what was, at the time, among the most expensive industrial materials known to the Latin West. The blue of Chartres is, in the most literal sense, a costly blue.</p>
+
+    <p>The letters of Suger imply a further point, which is that the trade in <em>saphirorum materia</em> was already well established before Saint-Denis. He buys cullet, not raw cobalt; he buys it through factors at Saint-Omer, who were themselves agents of merchants further east. Whoever was making the original glass — and wherever they were finding the cobalt — they were doing so at sufficient scale to supply at least a Parisian market by 1140.</p>
+
+    <!-- Plate -->
+    <figure class="plate" aria-label="Plate I: Notre-Dame de la Belle-Verrière">
+      <div class="plate-arch">
+        <svg viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+          <rect x="0" y="0" width="1000" height="1000" fill="#1e3a5f"/>
+          <!-- mandorla -->
+          <ellipse cx="500" cy="540" rx="220" ry="320" fill="#c9a23a" opacity="0.18"/>
+          <ellipse cx="500" cy="540" rx="180" ry="280" fill="none" stroke="#c9a23a" stroke-width="3"/>
+          <!-- figure: madonna schematic -->
+          <g fill="#c9a23a" stroke="#0a0a0a" stroke-width="2">
+            <!-- crown -->
+            <path d="M 430 280 L 440 250 L 460 270 L 480 245 L 500 270 L 520 245 L 540 270 L 560 250 L 570 280 Z"/>
+            <!-- head -->
+            <ellipse cx="500" cy="330" rx="55" ry="62" fill="#f4ecd8"/>
+            <!-- halo -->
+            <circle cx="500" cy="320" r="80" fill="none" stroke="#c9a23a" stroke-width="3"/>
+            <!-- robe -->
+            <path d="M 380 400 Q 380 600 420 800 L 580 800 Q 620 600 620 400 Q 560 380 500 380 Q 440 380 380 400 Z" fill="#1e3a5f" stroke="#c9a23a" stroke-width="2"/>
+            <!-- child -->
+            <ellipse cx="500" cy="500" rx="40" ry="50" fill="#f4ecd8" stroke="#0a0a0a" stroke-width="1.5"/>
+            <circle cx="500" cy="475" r="22" fill="#f4ecd8" stroke="#0a0a0a" stroke-width="1.5"/>
+          </g>
+          <!-- side panels of light -->
+          <g stroke="#c9a23a" stroke-width="1.5" fill="none">
+            <line x1="100" y1="100" x2="100" y2="900"/>
+            <line x1="900" y1="100" x2="900" y2="900"/>
+            <line x1="100" y1="500" x2="900" y2="500" opacity="0.4"/>
+          </g>
+          <!-- leading -->
+          <g stroke="#0a0a0a" stroke-width="2" fill="none" opacity="0.5">
+            <line x1="0" y1="220" x2="1000" y2="220"/>
+            <line x1="0" y1="440" x2="1000" y2="440"/>
+            <line x1="0" y1="660" x2="1000" y2="660"/>
+            <line x1="500" y1="0" x2="500" y2="1000"/>
+          </g>
+        </svg>
+      </div>
+      <figcaption class="plate-caption">
+        <strong>Plate I —</strong> <em>Notre-Dame de la Belle-Verrière</em>, south transept, Chartres, c. 1180 (figure) and c. 1215 (surround). Reproduced at quarter scale from a tracing made on site by the author, October 2023. The seated Virgin and Child occupy a mandorla of cobalt; the surrounding panels are early thirteenth-century replacements following the fire of 1194.
+      </figcaption>
+    </figure>
+
+    <div class="section-divider" aria-hidden="true">
+      <div class="rule"></div>
+      <svg viewBox="0 0 40 40" aria-hidden="true">
+        <g fill="#0a0a0a">
+          <ellipse cx="20" cy="20" rx="3" ry="5"/>
+          <path d="M 20 14 Q 12 10 8 16 Q 12 22 20 18 Z"/>
+          <path d="M 20 14 Q 28 10 32 16 Q 28 22 20 18 Z"/>
+          <path d="M 20 26 Q 12 30 8 24 Q 12 18 20 22 Z"/>
+          <path d="M 20 26 Q 28 30 32 24 Q 28 18 20 22 Z"/>
+          <circle cx="6" cy="20" r="1.6"/>
+          <circle cx="34" cy="20" r="1.6"/>
+        </g>
+      </svg>
+      <div class="rule"></div>
+    </div>
+    <h2>III. What the Twelfth-Century Eye Saw</h2>
+
+    <p>It is tempting, and almost universally done, to read the blue of Chartres against modern blues — against ultramarine, against Yves Klein, against the sky over the Beauce on a clear morning. This is to misunderstand what the twelfth-century eye was looking at. The twelfth century had very few saturated blues. The dye-works of Picardy and Thuringia did not produce a reliable woad-blue cloth until the late thirteenth century; the painters' palette, before the importation of ultramarine in any quantity around 1200, ran chiefly to azurite, which is greenish, and to indigo, which is dull. Lapis lazuli, when used at all, was reserved for the Virgin's mantle in panel painting, and even then in small quantities at the centre of the field.</p>
+
+    <p>To stand before the Belle-Verrière in 1180, then, was not to see one blue among many. It was to see, for perhaps the first time in one's life, a saturated blue at architectural scale. The closest approximation would have been the Mediterranean at midday, which a Beauceron pilgrim would in all likelihood never have seen; or the rim of a clear winter dawn, which lasts some forty seconds. The cathedral offered, by contrast, a blue which did not move and did not fade and which could be looked at for as long as one wished.</p>
+
+    <blockquote class="pullquote">
+      The blue of Chartres was not a colour. It was, for the people who first stood beneath it, a quantity of heaven made stationary.
+      <cite>— from the author's notebook, 4 October 2023</cite>
+    </blockquote>
+
+    <p>Hugh of Saint-Victor, writing about 1130, distinguishes between <em>visio corporalis</em> (the seeing of bodies), <em>visio spiritualis</em> (the seeing of images), and <em>visio intellectualis</em> (the seeing of truths). The blue of Chartres straddles these categories deliberately. It is a body — a sheet of melted silica, leaded into a window-frame. It is an image — the field within which the Virgin sits enthroned. And it is, for Hugh's contemporary readers, a truth: the colour of the firmament described in Genesis, the colour of the throne in Ezekiel I:26, the colour into which, at the end of all things, all things will resolve.</p>
+
+    <p>This triple reading is essential, I would argue, to any account of the cathedral's effect. The twelfth-century pilgrim did not separate the chemistry from the iconography from the theology. The blue did all three at once. To restore one of these readings while suppressing the others — as the secular tourist does, in attending only to the colour, and as the iconographer does, in attending only to the figure — is to break apart what was, from the beginning, a single object.</p>
+
+    <p>I write all this in the shadow of a more practical question. The cathedral has been undergoing, since 2009, a programme of cleaning of which the wisdom remains a matter of dispute. The interior stone, blackened by candles and coal-smoke and the breathing of eight centuries of pilgrims, has been brought back to a near-white. The effect on the glass is dramatic and, I think, regrettable. Blue, against the new white, reads as an applied colour — as something added to an otherwise neutral space. Blue, against the older brown, read as the principal substance of the building, into which the stone faded as background. The cleaning has, in effect, reversed the figure-ground relation that the twelfth-century glaziers were working within.</p>
+
+    <p>This is not an argument against cleaning, which has its own justifications. It is an argument for remembering that the blue we now see at Chartres is not the blue that was made there. It is darker than they meant; it is more isolated than they meant; and it is — in the strict chemical sense outlined above — not reproducible. We are looking at the survival of a thing rather than the thing itself.</p>
+
+    <p>That the survival is so complete, and so beautiful, is the small miracle which the Lancet Quarterly is constituted to record. The twelfth century did not know it was making a thing for the twenty-first; it was making a thing for the immediate edification of a Beauceron peasantry whose names we no longer have. That the peasantry's blue has outlasted the peasantry, and the abbots, and the kings, and the chemists who came to analyse it, is the quiet argument the cathedral makes against our own century's pretensions to permanence.</p>
+
+    <p>I shall return, in a future number, to the question of the rubies — which are a separate problem, and a stranger one, involving gold rather than copper as the chromophore in at least three of the surviving panels. Until then, the reader is encouraged to make the journey to Chartres in person, in any weather, and to sit for as long as the verger will permit before the south transept. The blue, after all, is still there.</p>
+
+    <p class="colophon-end">Margery Holcombe · Paris IVe · Michaelmas MMXXIV</p>
+
+  </article>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="frieze" aria-hidden="true"></div>
+  <div class="footer-cols">
+    <div>
+      <h4>Colophon</h4>
+      <p>The Lancet Quarterly is composed at the Atelier Saint-Séverin and printed in quarto by the press of Maison Bertrand-Volney, Paris, on Arches mould-made laid paper, 120 g/m². Established Michaelmas MMXIX. Editor in chief, T. Devaux-Holcombe; consulting editor, Père Aldric Mauclerc; plates and tracings by E. Caillaux of Reims.</p>
+    </div>
+    <div>
+      <h4>Masthead</h4>
+      <p>
+        Margery Holcombe, contributing editor.<br>
+        Théodore Devaux-Holcombe, editor.<br>
+        Aldric Mauclerc, consulting editor.<br>
+        Étienne Caillaux, plates &amp; tracings.<br>
+        Sylvie Renart, copyist &amp; rubricator.<br>
+        Jean-Luc Pesquier, printer.
+      </p>
+    </div>
+    <div>
+      <h4>Subscription &amp; Correspondence</h4>
+      <address>
+        The Lancet Quarterly<br>
+        Rue du Cloître Notre-Dame 9<br>
+        Paris IVe, 75004<br>
+        France<br>
+        Annual: €88 (four issues, post paid).<br>
+        Single number: €24.
+      </address>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    Set in Fraunces and Source Sans 3 — printed quarterly since MMXIX.
+  </div>
+</footer>
+
+</body>
+</html>

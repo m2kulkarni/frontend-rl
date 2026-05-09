@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>The Hall & Hours — Annapurna Bhavan</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    font-size: 17px;
+    line-height: 1.65;
+  }
+
+  /* ===== NAVIGATION ===== */
+  .nav-band {
+    background: linear-gradient(180deg, #d7b27e 0%, #c19a6b 50%, #d7b27e 100%);
+    border-top: 3px double var(--primary);
+    border-bottom: 3px double var(--primary);
+    position: relative;
+  }
+  .nav-band::before, .nav-band::after {
+    content: "";
+    display: block;
+    height: 2px;
+    background: var(--accent);
+  }
+  .nav-title {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-size: 32px;
+    letter-spacing: 0.42em;
+    color: var(--text-emphasis);
+    text-transform: uppercase;
+    padding: 18px 0 6px;
+    text-shadow: 0 1px 0 #f8f4ec;
+  }
+  .nav-title .small {
+    display: block;
+    font-size: 12px;
+    letter-spacing: 0.6em;
+    color: var(--secondary);
+    margin-top: 4px;
+  }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    padding: 14px 30px 18px;
+    list-style: none;
+    margin: 0;
+    flex-wrap: nowrap;
+  }
+  .nav-links li {
+    display: flex;
+    align-items: center;
+  }
+  .nav-links a {
+    font-family: var(--font-display), serif;
+    color: var(--text-emphasis);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 12.5px;
+    padding: 4px 14px;
+    transition: color .2s;
+  }
+  .nav-links a[aria-current="page"] {
+    color: var(--primary);
+    border-bottom: 2px solid var(--accent);
+  }
+  .nav-links a:hover {
+    color: #6b1020;
+    border-bottom: 2px solid var(--accent);
+  }
+  .lotus-glyph {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    opacity: 0.7;
+  }
+  .om-seal {
+    width: 46px;
+    height: 46px;
+    margin: 0 14px;
+    flex-shrink: 0;
+  }
+
+  /* ===== LOTUS PETAL BAND ===== */
+  .petal-band {
+    height: 30px;
+    background: var(--surface);
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
+  }
+  .petal-band::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(ellipse 16px 10px at 12px 50%, var(--primary) 30%, transparent 32%),
+      radial-gradient(ellipse 16px 10px at 36px 50%, var(--accent) 30%, transparent 32%),
+      radial-gradient(ellipse 16px 10px at 60px 50%, var(--secondary) 30%, transparent 32%);
+    background-size: 72px 30px;
+    background-repeat: repeat-x;
+    opacity: 0.85;
+  }
+  .petal-band.thin { height: 18px; }
+  .petal-band.thin::before {
+    background-size: 48px 18px;
+    background-image:
+      radial-gradient(ellipse 10px 6px at 8px 50%, var(--primary) 30%, transparent 32%),
+      radial-gradient(ellipse 10px 6px at 24px 50%, var(--accent) 30%, transparent 32%),
+      radial-gradient(ellipse 10px 6px at 40px 50%, var(--secondary) 30%, transparent 32%);
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: var(--surface);
+    padding: 50px 80px 30px;
+    text-align: center;
+    position: relative;
+  }
+  .hero-frame-svg {
+    width: 100%;
+    max-width: 1100px;
+    height: auto;
+    display: block;
+    margin: 0 auto 18px;
+  }
+  .hero h1 {
+    font-family: var(--font-display), serif;
+    font-size: 54px;
+    letter-spacing: 0.18em;
+    color: var(--text-emphasis);
+    text-transform: uppercase;
+    margin: 10px 0 6px;
+    line-height: 1.1;
+  }
+  .hero .sanskrit {
+    color: var(--secondary);
+    font-size: 18px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    font-family: var(--font-display), serif;
+    margin-bottom: 14px;
+  }
+  .hero .lede {
+    max-width: 760px;
+    margin: 0 auto;
+    color: var(--text);
+    font-size: 19px;
+    line-height: 1.7;
+  }
+  .hero .lede em {
+    color: var(--text-emphasis);
+    font-style: italic;
+  }
+
+  /* ===== SECTION DIVIDER ===== */
+  .divider {
+    background: var(--bg);
+    padding: 24px 0;
+    text-align: center;
+  }
+  .divider svg {
+    width: 80%;
+    max-width: 900px;
+    height: 50px;
+    fill: var(--primary);
+    opacity: 0.85;
+  }
+
+  /* ===== MAIN GRID ===== */
+  main {
+    background: var(--bg);
+    padding: 30px 60px 50px;
+  }
+  .row {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 36px;
+    margin-bottom: 36px;
+  }
+  .row.three { grid-template-columns: 1fr 1fr 1fr; }
+
+  /* ===== CARD (gopuram) ===== */
+  .card {
+    background: var(--surface);
+    position: relative;
+    padding: 56px 48px 42px;
+    border: 1px solid var(--primary);
+  }
+  /* Gopuram tier silhouette top */
+  .card::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 0; right: 0;
+    height: 36px;
+    background:
+      linear-gradient(var(--primary), var(--primary)) center top / 100% 4px no-repeat,
+      linear-gradient(var(--accent), var(--accent)) center 6px / 80% 3px no-repeat,
+      linear-gradient(var(--primary), var(--primary)) center 12px / 60% 3px no-repeat,
+      linear-gradient(var(--accent), var(--accent)) center 18px / 40% 3px no-repeat,
+      linear-gradient(var(--primary), var(--primary)) center 24px / 22% 4px no-repeat;
+  }
+  /* Pillars left/right */
+  .card::after {
+    content: "";
+    position: absolute;
+    top: 40px; bottom: 20px;
+    left: 10px;
+    width: 14px;
+    background:
+      linear-gradient(180deg, var(--primary) 0%, var(--primary) 6px, var(--surface) 6px, var(--surface) 10px, var(--accent) 10px, var(--accent) 14px, var(--surface) 14px),
+      repeating-linear-gradient(180deg, var(--secondary) 0 4px, transparent 4px 12px);
+    border-left: 2px solid var(--primary);
+    border-right: 2px solid var(--primary);
+  }
+  .card .pillar-right {
+    position: absolute;
+    top: 40px; bottom: 20px;
+    right: 10px;
+    width: 14px;
+    background:
+      linear-gradient(180deg, var(--primary) 0%, var(--primary) 6px, var(--surface) 6px, var(--surface) 10px, var(--accent) 10px, var(--accent) 14px, var(--surface) 14px),
+      repeating-linear-gradient(180deg, var(--secondary) 0 4px, transparent 4px 12px);
+    border-left: 2px solid var(--primary);
+    border-right: 2px solid var(--primary);
+  }
+
+  .card h2 {
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 26px;
+    margin: 0 0 6px;
+    text-align: center;
+  }
+  .card h2 .sub {
+    display: block;
+    color: var(--secondary);
+    font-size: 13px;
+    letter-spacing: 0.4em;
+    margin-top: 4px;
+  }
+  .card-rule {
+    width: 50%;
+    margin: 14px auto 22px;
+    border: 0;
+    height: 6px;
+    background:
+      radial-gradient(circle at 50% 50%, var(--accent) 30%, transparent 32%) center/16px 6px repeat-x,
+      linear-gradient(var(--primary), var(--primary)) center/100% 1px no-repeat;
+  }
+  .card p { margin: 0 0 14px; }
+
+  /* Tailpiece */
+  .tailpiece {
+    text-align: center;
+    margin-top: 22px;
+    color: var(--primary);
+    font-size: 22px;
+    letter-spacing: 0.4em;
+  }
+
+  /* ===== HOURS TABLE ===== */
+  .hours-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 4px 0 0;
+    font-family: var(--font-body), serif;
+  }
+  .hours-table tr {
+    border-bottom: 1px dashed var(--secondary);
+  }
+  .hours-table tr:last-child { border-bottom: 0; }
+  .hours-table td {
+    padding: 12px 6px;
+    vertical-align: top;
+  }
+  .hours-table .service {
+    font-family: var(--font-display), serif;
+    color: var(--text-emphasis);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 15px;
+    width: 32%;
+  }
+  .hours-table .clock {
+    color: var(--secondary);
+    font-weight: 600;
+    font-size: 18px;
+    text-align: right;
+    font-feature-settings: "tnum";
+  }
+  .hours-table .desc {
+    color: var(--text);
+    font-size: 14px;
+    font-style: italic;
+    width: 38%;
+  }
+
+  /* ===== HALL FACTS LIST ===== */
+  .facts {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .facts li {
+    padding: 14px 0 14px 38px;
+    border-bottom: 1px dashed var(--accent);
+    position: relative;
+  }
+  .facts li:last-child { border-bottom: 0; }
+  .facts li::before {
+    content: "❁";
+    position: absolute;
+    left: 8px; top: 12px;
+    color: var(--primary);
+    font-size: 18px;
+  }
+  .facts strong {
+    display: block;
+    font-family: var(--font-display), serif;
+    color: var(--text-emphasis);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 13px;
+    margin-bottom: 4px;
+  }
+
+  /* ===== SEATING / ADDRESS ===== */
+  .seat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin: 8px 0;
+  }
+  .seat-cell {
+    background: #fff;
+    border: 1px solid var(--accent);
+    padding: 18px 14px;
+    text-align: center;
+    position: relative;
+  }
+  .seat-cell .num {
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+    font-size: 48px;
+    line-height: 1;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .seat-cell .label {
+    font-family: var(--font-display), serif;
+    color: var(--secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 12px;
+  }
+  .seat-cell .desc {
+    font-size: 13px;
+    margin-top: 6px;
+    color: var(--text);
+    font-style: italic;
+  }
+
+  .address-block {
+    text-align: center;
+    padding: 6px 0;
+  }
+  .address-block .addr {
+    font-family: var(--font-display), serif;
+    color: var(--text-emphasis);
+    font-size: 18px;
+    letter-spacing: 0.1em;
+    line-height: 1.6;
+    text-transform: uppercase;
+  }
+  .address-block .tel {
+    color: var(--primary);
+    font-family: var(--font-display), serif;
+    font-size: 26px;
+    letter-spacing: 0.16em;
+    margin-top: 14px;
+    display: block;
+  }
+  .conch {
+    color: var(--accent);
+    font-size: 22px;
+    margin: 0 14px;
+  }
+
+  /* ===== DRESS NOTE PULL QUOTE ===== */
+  .dress-note {
+    background: var(--surface);
+    border: 1px solid var(--primary);
+    padding: 30px 50px;
+    text-align: center;
+    margin: 30px 0;
+    position: relative;
+  }
+  .dress-note::before, .dress-note::after {
+    content: "❀";
+    color: var(--primary);
+    font-size: 22px;
+    margin: 0 8px;
+  }
+  .dress-note p {
+    display: inline;
+    font-family: var(--font-display), serif;
+    font-size: 19px;
+    color: var(--text-emphasis);
+    letter-spacing: 0.08em;
+    line-height: 1.7;
+  }
+
+  /* ===== KOLAM CENTERPIECE ===== */
+  .kolam-section {
+    background: var(--surface);
+    padding: 40px 60px;
+    margin: 30px 0;
+    border-top: 3px double var(--primary);
+    border-bottom: 3px double var(--primary);
+    text-align: center;
+  }
+  .kolam-section h2 {
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    font-size: 28px;
+    margin: 0 0 8px;
+  }
+  .kolam-section p {
+    max-width: 720px;
+    margin: 6px auto 20px;
+    color: var(--text);
+    font-size: 17px;
+  }
+  .kolam-svg {
+    width: 220px;
+    height: 220px;
+    display: block;
+    margin: 12px auto;
+  }
+
+  /* ===== FOOTER ===== */
+  footer.arcade {
+    background: var(--bg);
+    border-top: 3px double var(--primary);
+    padding: 0;
+    margin-top: 30px;
+    color: var(--text);
+  }
+  .arcade-band {
+    height: 110px;
+    position: relative;
+    background: var(--bg);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    padding: 0 60px;
+  }
+  .arcade-col {
+    flex: 0 0 14%;
+    height: 100px;
+    background:
+      linear-gradient(180deg, var(--text-emphasis) 0%, var(--text-emphasis) 12px, transparent 12px),
+      linear-gradient(180deg, transparent 12px, var(--text-emphasis) 12px, var(--text-emphasis) 18px, transparent 18px),
+      radial-gradient(ellipse at 50% 22px, transparent 50%, var(--text-emphasis) 50% 60%, transparent 60%);
+    position: relative;
+  }
+  .arcade-col::after {
+    content: "";
+    position: absolute;
+    top: 22px; bottom: 0;
+    left: 30%; right: 30%;
+    background: var(--text-emphasis);
+    clip-path: polygon(0 0, 100% 0, 90% 100%, 10% 100%);
+  }
+  .arcade-center {
+    position: absolute;
+    left: 50%;
+    top: 10px;
+    transform: translateX(-50%);
+    width: 90px;
+    height: 90px;
+    z-index: 2;
+  }
+  .arcade-center svg {
+    width: 100%;
+    height: 100%;
+  }
+  .footer-info {
+    background: var(--surface);
+    padding: 28px 60px;
+    display: grid;
+    grid-template-columns: 1fr 1.3fr 1fr;
+    gap: 30px;
+    align-items: center;
+    border-top: 1px solid var(--primary);
+  }
+  .footer-info .col {
+    text-align: center;
+    font-family: var(--font-body), serif;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .footer-info .col h3 {
+    font-family: var(--font-display), serif;
+    color: var(--text-emphasis);
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 13px;
+    margin: 0 0 8px;
+  }
+  .footer-info .tel-line {
+    color: var(--primary);
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    letter-spacing: 0.14em;
+  }
+  .footer-conch {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    color: var(--accent);
+    font-size: 24px;
+  }
+  .footer-bottom {
+    background: var(--text-emphasis);
+    color: var(--surface);
+    text-align: center;
+    padding: 14px;
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.3em;
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+
+  /* utility */
+  .label-tag {
+    display: inline-block;
+    background: var(--primary);
+    color: var(--surface);
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    font-size: 11px;
+    padding: 4px 14px;
+    margin-bottom: 10px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAVIGATION ============ -->
+<header class="nav-band">
+  <div class="nav-title">
+    Annapurna Bhavan
+    <span class="small">— Tanjore Kitchens · Estd. Mylapore —</span>
+  </div>
+  <nav>
+    <ul class="nav-links">
+      <li><a href="page-1.html">Mandapam</a></li>
+      <li><svg class="lotus-glyph" viewBox="0 0 10 10"><circle cx="5" cy="5" r="2" fill="#c9a23a"/><circle cx="5" cy="5" r="4" fill="none" stroke="#e34234" stroke-width="0.5"/></svg></li>
+      <li><a href="page-2.html">The Thali</a></li>
+      <li><svg class="lotus-glyph" viewBox="0 0 10 10"><circle cx="5" cy="5" r="2" fill="#c9a23a"/><circle cx="5" cy="5" r="4" fill="none" stroke="#e34234" stroke-width="0.5"/></svg></li>
+      <li><a href="page-3.html">Chettinad Hearth</a></li>
+
+      <li>
+        <svg class="om-seal" viewBox="0 0 356 367" aria-hidden="true">
+          <path d="M 90.456847,353.9498 C 51.797347,340.13485 23.72672,305.75839 12.612487,258.6184 C 7.5684267,237.22321 6.1421397,201.86984 10.323594,201.86984 C 11.712834,201.86984 15.42322,211.57056 18.568972,223.427 C 25.452892,249.37152 37.19436,273.76855 48.535988,285.69407 C 67.374717,305.50242 114.0356,313.26029 140.92106,301.05394 C 161.86409,291.54544 170.35697,268.94603 161.24995,246.95931 C 154.21242,229.96943 138.24701,224.28836 108.50834,228.19197 C 108.50834,228.19197 90.282834,208.57398 84.476417,173.73548 L 103.15738,175.42939 C 125.65731,177.46962 142.64532,172.49605 151.46236,161.28728 C 159.74765,150.75419 159.5685,146.68046 150.34841,135.96157 C 137.04396,120.49428 113.15511,124.41248 64.786577,149.99522 L 40.381632,109.08518 L 50.613137,101.2812 C 76.253387,81.724339 120.77357,71.947329 146.11011,80.309169 C 169.18841,87.925649 186.12724,118.14755 181.60247,143.63298 C 178.54327,160.86286 164.72752,184.99524 154.05369,191.75339 L 144.84862,197.58162 L 157.56351,203.31522 C 179.17018,213.05833 192.36061,205.61034 208.12001,174.76849 C 229.92949,132.0869 244.0745,121.0378 276.96658,120.99051 C 292.28176,120.96847 297.73268,122.57499 308.90312,130.4031 C 336.78213,149.94016 351.9622,190.39693 348.62804,236.27272 C 344.40474,294.37435 316.88374,329.61601 275.73415,329.61601 C 253.15086,329.61601 238.59451,321.69526 227.00729,303.10156 C 216.82976,286.76927 212.24334,254.42288 218.08805,240.19369 C 220.89208,233.36732 221.39892,233.13578 221.58223,238.59686 C 221.91916,248.63689 233.34159,264.95549 243.82827,270.37835 C 269.55794,283.68369 306.49479,266.96693 321.10832,235.4032 C 332.20339,211.4394 326.25105,165.21656 311.02084,157.06552 C 307.83453,155.36024 299.96089,153.96502 293.5244,153.96502 C 279.84214,153.96502 269.09709,163.80155 254.03263,190.11774 C 248.82442,199.21613 240.05943,210.97175 234.55486,216.24128 C 225.61134,224.80312 222.41769,225.82225 204.53067,225.82225 L 184.51412,225.82225 L 190.98415,240.19369 C 200.2451,260.76437 199.80694,294.18704 190.00976,314.53347 C 181.35272,332.51252 161.33618,350.71469 145.33374,355.16013 C 129.75572,359.4876 104.38789,358.9281 90.456847,353.9498 z M 165.8338,75.923739 C 156.97908,60.814399 151.52974,32.606158 157.46546,32.606158 C 164.43775,47.732319 178.73037,61.227101 194.03409,70.643259 C 221.52091,83.949329 249.39257,78.578529 279.84247,54.108239 C 286.54595,48.721279 292.48231,44.913138 293.0345,45.645698 C 300.4697,57.184233 313.331,66.613261 317.58219,80.021449 C 317.58219,85.678729 293.22867,101.96033 274.01214,109.15007 C 226.38264,122.8706 193.96598,117.44304 165.8338,75.923739 z M 189.83603,40.997228 L 220.84514,6.6137488 L 255.30593,38.514418 C 243.51876,48.222549 235.00994,63.289118 221.54391,70.930009 C 210.90372,63.086273 195.02308,53.837816 189.83603,40.997228 z " fill="#e34234"/>
+        </svg>
+      </li>
+
+      <li><a href="page-4.html" aria-current="page">Hall &amp; Hours</a></li>
+      <li><svg class="lotus-glyph" viewBox="0 0 10 10"><circle cx="5" cy="5" r="2" fill="#c9a23a"/><circle cx="5" cy="5" r="4" fill="none" stroke="#e34234" stroke-width="0.5"/></svg></li>
+      <li><a href="page-5.html">Lineage</a></li>
+      <li><svg class="lotus-glyph" viewBox="0 0 10 10"><circle cx="5" cy="5" r="2" fill="#c9a23a"/><circle cx="5" cy="5" r="4" fill="none" stroke="#e34234" stroke-width="0.5"/></svg></li>
+      <li><a href="page-6.html">Festivals &amp; Reservations</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="petal-band"></div>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <svg class="hero-frame-svg" viewBox="0 0 313.71717 29.540759" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+    <g transform="translate(54.572101,-91.176475)">
+      <path fill="#8b1538" d="m -45.203647,120.20506 c -2.080683,-0.59494 -3.600099,-1.33764 -4.88273,-2.38671 -1.667517,-1.36388 -2.894118,-2.64027 -2.893812,-3.0113 1.42e-4,-0.17364 -0.209138,-0.47237 -0.46507,-0.66382 -0.819614,-0.61314 -1.16478,-1.84791 -1.123557,-4.01931 0.07527,-3.96496 0.841997,-6.28592 3.359706,-10.170217 2.091957,-3.227467 6.669369,-6.452883 10.647663,-7.502765 2.252562,-0.594453 8.248778,-0.796292 11.003264,-0.370372 6.94812,1.074354 16.152972,4.460234 20.6562963,7.598128 0.8536092,0.594796 0.7949964,0.623336 1.3291143,-0.64739 0.2251847,-0.535733 0.8814684,-1.603973 1.4584084,-2.373871 0.8561927,-1.142535 1.457933,-1.600664 3.2740672,-2.492638 2.16210793,-1.06191 4.5637653,-1.779237 6.7277099,-2.009456 0.5824052,-0.06194 1.3990594,-0.240975 1.8147895,-0.397805 0.7738562,-0.291942 6.4810504,-0.196925 10.0927814,0.168029 2.264542,0.228828 9.60899,1.67773 11.219571,2.21338 1.156599,0.384661 1.203738,0.376381 3.086684,-0.542345 2.528472,-1.2337 4.016657,-1.480542 8.446835,-1.401064 3.61374,0.06486 4.290154,0.147139 6.742793,0.820538 0.653941,0.179545 1.719761,0.375692 2.368485,0.435889 0.648729,0.0602 1.838242,0.282073 2.643363,0.493076 1.333488,0.349469 1.625289,0.339432 3.276461,-0.112735 4.298701,-1.177186 16.775093,-2.487486 20.247754,-2.126478 0.82522,0.08579 2.552867,0.408475 3.839215,0.717074 2.046471,0.490964 2.518569,0.521833 3.776859,0.246952 3.038874,-0.663879 6.75683,-1.061515 11.128253,-1.190178 4.134196,-0.121667 4.707691,-0.08259 6.380251,0.434721 1.364622,0.422078 2.105892,0.83929 2.879252,1.620559 1.29673,1.309975 1.63,2.709456 1.6237,6.818148 -0.005,2.95745 0.2393,4.45137 0.62566,3.83325 0.10807,-0.17288 0.17855,-1.23469 0.15662,-2.35957 -0.10151,-5.20664 0.0689,-6.026385 1.66799,-8.024476 0.85063,-1.062863 2.64553,-2.128587 4.10167,-2.435363 2.81819,-0.59374 15.88977,0.302112 18.8453,1.291541 0.69822,0.23375 1.33752,0.188118 3.17619,-0.226686 4.44974,-1.003866 5.16179,-1.08168 9.66723,-1.056509 4.01601,0.0224 5.00432,0.121426 8.5084,0.852608 6.84995,1.42927 7.19777,1.434197 12.43469,0.175947 1.28482,-0.308696 3.07339,-0.450501 5.82325,-0.46168 3.55974,-0.01452 4.14585,0.04906 5.68548,0.615953 0.94414,0.347651 2.11528,0.863208 2.60253,1.145677 0.82461,0.478046 0.98936,0.487693 2.38057,0.139336 1.77908,-0.445477 5.29646,-1.019874 9.8354,-1.606151 3.88998,-0.502463 11.70287,-0.5191 15.08161,-0.03212 5.86054,0.844676 9.86323,3.110261 10.57122,5.983455 l 0.28701,1.164733 3.35851,-1.630478 c 3.17793,-1.542804 8.22537,-3.484656 11.44251,-4.402193 4.71613,-1.345036 12.68145,-1.710913 16.9375,-0.778008 4.93058,1.080764 10.02057,5.551052 11.64065,10.223444 0.65092,1.87732 1.01878,5.06928 0.79472,6.89574 -0.46904,3.82309 -3.07509,7.60889 -6.48471,9.42031 -0.51071,0.27132 -1.10781,0.62201 -1.32689,0.7793 -1.28176,0.92026 -3.99222,1.08281 -9.3957,0.5635 -4.226,-0.40615 -43.09412,-0.56404 -48.28608,-0.19612 -3.36622,0.23852 -9.71584,0.13599 -14.17646,-0.22893 -3.19042,-0.261 -11.4116,-2.46478 -14.96419,-4.01131 -0.53984,-0.23501 -1.10442,-0.42792 -1.25461,-0.42868 -0.43847,-0.002 -0.31926,0.66639 0.24899,1.3964 0.63886,0.82072 0.66215,1.46506 0.0825,2.28367 -0.41639,0.5881 -0.53812,0.60929 -2.4496,0.42635 -1.10627,-0.10587 -3.2008,-0.44095 -4.65448,-0.74463 -1.45369,-0.30368 -4.09201,-0.62284 -5.86295,-0.70924 -3.45491,-0.16856 -4.65649,0.0199 -8.93437,1.40162 -2.04956,0.66196 -2.15841,0.6695 -4.80352,0.33258 -1.68376,-0.21447 -5.04124,-0.32578 -8.88522,-0.29456 -6.04658,0.0491 -6.20383,0.0368 -7.34956,-0.57531 -1.32088,-0.70568 -2.86287,-0.66893 -5.04444,0.12022 -0.88229,0.31916 -2.15717,0.43295 -4.89707,0.43713 -4.79736,0.007 -5.58286,-0.16276 -6.13105,-1.32752 l -0.42264,-0.89802 -1.08755,0.85944 c -1.8674,1.47572 -2.94146,1.82323 -5.59703,1.81093 -1.313341,-0.006 -3.557388,-0.23736 -4.986775,-0.51393 -2.027573,-0.39234 -2.694777,-0.43476 -3.0351,-0.19299 -1.426504,1.01339 -5.2004,1.21652 -9.369876,0.50433 -2.342079,-0.40006 -4.350291,-0.35925 -10.118619,0.20564 -2.370926,0.23218 -2.390138,0.22923 -3.965706,-0.60953 l -1.583238,-0.84286 -4.76258,0.004 c -3.320233,0.003 -5.333694,0.12924 -6.648373,0.41833 -2.953758,0.64954 -5.182097,0.79482 -6.349714,0.41398 -1.394469,-0.45482 -2.213474,-1.26097 -2.208834,-2.17419 0.0021,-0.41118 -0.106632,-0.74818 -0.241605,-0.74887 -0.13497,-6.8e-4 -1.238115,0.35414 -2.451433,0.7885 -7.896638,2.82691 -18.009765,3.78342 -31.365341,2.96657 -7.1026623,-0.43441 -10.2556485,-0.47172 -22.841675,-0.27026 -5.166476,0.0827 -13.263451,0.2047 -17.993277,0.27111 -4.729825,0.0664 -9.671447,0.15763 -10.98138,0.20269 -1.516176,0.0522 -2.861762,-0.0553 -3.702712,-0.29577 z"/>
+    </g>
+  </svg>
+
+  <div class="sanskrit">॥ Mandapam · The Pillared Hall ॥</div>
+  <h1>The Hall &amp; Hours</h1>
+  <p class="lede">
+    Step beneath the carved lintel of <em>47 Kutchery Road</em> and you enter not a dining room but a <em>chatram</em>—a temple-town rest-house where pilgrim and householder alike are served on plantain leaf, beneath thirty-two pillars of teak that remember the gas-lit Mylapore of a century ago. We keep the doors open from before the first conch of dawn until the last bell of evening.
+  </p>
+</section>
+
+<!-- ============ DIVIDER ============ -->
+<div class="divider">
+  <svg viewBox="0 0 600 50" aria-hidden="true">
+    <g fill="#e34234">
+      <circle cx="300" cy="25" r="8"/>
+      <circle cx="300" cy="25" r="14" fill="none" stroke="#e34234" stroke-width="1.5"/>
+      <path d="M 0 25 L 270 25 M 330 25 L 600 25" stroke="#e34234" stroke-width="1.2" fill="none"/>
+      <path d="M 270 25 Q 285 10 300 25 Q 315 40 330 25" stroke="#c9a23a" stroke-width="1.5" fill="none"/>
+      <circle cx="100" cy="25" r="4"/><circle cx="200" cy="25" r="4"/>
+      <circle cx="400" cy="25" r="4"/><circle cx="500" cy="25" r="4"/>
+      <path d="M 50 25 Q 60 15 70 25 Q 80 35 90 25" stroke="#076b88" stroke-width="1" fill="none"/>
+      <path d="M 510 25 Q 520 15 530 25 Q 540 35 550 25" stroke="#076b88" stroke-width="1" fill="none"/>
+    </g>
+  </svg>
+</div>
+
+<!-- ============ MAIN ============ -->
+<main>
+
+  <!-- ROW 1: The Mandapa + Hours -->
+  <div class="row">
+    <article class="card">
+      <div class="pillar-right"></div>
+      <div class="label-tag">Mandapa</div>
+      <h2>The Pillared Hall<span class="sub">Carved Teak · Brass · Plantain Leaf</span></h2>
+      <hr class="card-rule">
+      <p>
+        The dining mandapam is enclosed by <strong>thirty-two pillars of carved teak</strong>, salvaged in the winter of 1971 from a derelict <em>chatram</em> built at Tiruvarur in 1908 by the merchant Naranappa Chettiar. Each pillar bears at its capital a different musician of the Chola court — a <em>mridangam</em> player here, a <em>nagaswaram</em> blower there — and a base of compressed lotus petals worn smooth by ninety winters of pilgrim hands.
+      </p>
+      <p>
+        At the centre of the hall stands a <strong>brass uruli</strong>, four feet across, in which jasmine and red lotus float on tepid water from sunrise to last service. The lamps in the four corner niches are filled each evening with sesame oil; the wicks are spun, every Friday, by Mrs. Padmavathy, who has tended this hall since 1979.
+      </p>
+      <p>
+        Diners are seated on low benches of jackfruit-wood facing the long granite plinth. The leaf is laid tip-to-the-left, washed with rosewater, and the meal commences only when the senior server has rung the small bronze bell beside the kitchen threshold.
+      </p>
+      <div class="tailpiece">❀ ✦ ❀</div>
+    </article>
+
+    <article class="card">
+      <div class="pillar-right"></div>
+      <div class="label-tag">Service Hours</div>
+      <h2>The Day’s Three Bells<span class="sub">Tiffin · Meals · Evening</span></h2>
+      <hr class="card-rule">
+      <table class="hours-table">
+        <tr>
+          <td class="service">Tiffin</td>
+          <td class="desc">Idli, pongal, filter coffee</td>
+          <td class="clock">06:30 – 10:30</td>
+        </tr>
+        <tr>
+          <td class="service">Meals</td>
+          <td class="desc">Full thali on plantain leaf</td>
+          <td class="clock">11:30 – 15:00</td>
+        </tr>
+        <tr>
+          <td class="service">Evening</td>
+          <td class="desc">Tiffin, dosai, Chettinad à la carte</td>
+          <td class="clock">16:00 – 22:30</td>
+        </tr>
+      </table>
+      <p style="margin-top:22px; font-style:italic; text-align:center; color:var(--secondary);">
+        The kitchen rests between 15:00 and 16:00 for the cleaning of leaves, the boiling of new rasam stocks, and the lighting of the courtyard lamps.
+      </p>
+      <p style="text-align:center; margin-top:18px;">
+        Open seven days. Closed only on <strong style="color:var(--text-emphasis);">Aadi Amavasya</strong> (new moon of Aadi) for ancestral offerings, and on the morning of <strong style="color:var(--text-emphasis);">Pongal</strong> for the household ceremony.
+      </p>
+      <div class="tailpiece">❀ ✦ ❀</div>
+    </article>
+  </div>
+
+  <!-- DRESS NOTE -->
+  <div class="dress-note">
+    <p>
+      Dress is comfortable. Please remove footwear at the inner threshold, where the brass step is marked with kumkum each morning.
+    </p>
+  </div>
+
+  <!-- ROW 2: Seating + Address -->
+  <div class="row">
+    <article class="card">
+      <div class="pillar-right"></div>
+      <div class="label-tag">Seating</div>
+      <h2>Places at the Leaf<span class="sub">Hall &amp; Courtyard</span></h2>
+      <hr class="card-rule">
+      <div class="seat-grid">
+        <div class="seat-cell">
+          <span class="num">40</span>
+          <span class="label">Main Hall</span>
+          <div class="desc">banana-leaf places along the granite plinth</div>
+        </div>
+        <div class="seat-cell">
+          <span class="num">12</span>
+          <span class="label">Courtyard</span>
+          <div class="desc">under the jasmine pandal &amp; tamarind tree</div>
+        </div>
+      </div>
+      <p style="margin-top:18px;">
+        The courtyard tables are stone, polished by four generations of elbows; in summer the pandal is rethatched with fresh palmyra. Reservation is suggested for the courtyard during the months of Margazhi and Vaikasi, when the music season and wedding feasts overlap.
+      </p>
+      <div class="tailpiece">❀ ✦ ❀</div>
+    </article>
+
+    <article class="card">
+      <div class="pillar-right"></div>
+      <div class="label-tag">To Find Us</div>
+      <h2>Address &amp; Telephone<span class="sub">Mylapore · Chennai</span></h2>
+      <hr class="card-rule">
+      <div class="address-block">
+        <div class="addr">
+          47 Kutchery Road<br>
+          Mylapore<br>
+          Chennai 600 004
+        </div>
+        <div style="margin:18px 0; color:var(--secondary); font-style:italic;">
+          A four-minute walk south of the Kapaleeshwarar Temple east gopuram. The nearest landmark is the green-painted <em>Sri Vasavi Stores</em>; we are the doorway with the twin brass conches.
+        </div>
+        <div style="margin:14px 0;">
+          <span class="conch">𑀁</span>
+          <span class="tel">+91&nbsp;44&nbsp;2461&nbsp;4708</span>
+          <span class="conch">𑀁</span>
+        </div>
+        <div style="font-size:14px; color:var(--text); font-style:italic;">
+          Telephone is answered by the <em>kanakkupillai</em> (book-keeper) from 09:00 to 21:00 daily.
+        </div>
+      </div>
+      <div class="tailpiece">❀ ✦ ❀</div>
+    </article>
+  </div>
+
+  <!-- KOLAM CENTERPIECE -->
+  <section class="kolam-section">
+    <h2>The Daily Kolam</h2>
+    <p>
+      Each morning at 05:45, before the rice is set to soak, Mrs. Padmavathy refreshes the threshold kolam in rice flour and red brick powder. The pattern — sixteen lotus petals around a central <em>nelli</em> seed — has not been changed since 1979.
+    </p>
+    <svg class="kolam-svg" viewBox="0 0 200 200" aria-hidden="true">
+      <g transform="translate(100,100)">
+        <circle r="6" fill="#e34234"/>
+        <circle r="14" fill="none" stroke="#8b1538" stroke-width="1.5"/>
+        <circle r="26" fill="none" stroke="#076b88" stroke-width="1"/>
+        <circle r="42" fill="none" stroke="#c9a23a" stroke-width="1.2"/>
+        <circle r="62" fill="none" stroke="#e34234" stroke-width="1"/>
+        <circle r="86" fill="none" stroke="#8b1538" stroke-width="1.5"/>
+        <g fill="#e34234" opacity="0.85">
+          <g><ellipse cx="0" cy="-72" rx="6" ry="14"/></g>
+          <g transform="rotate(22.5)"><ellipse cx="0" cy="-72" rx="6" ry="14" fill="#c9a23a"/></g>
+          <g transform="rotate(45)"><ellipse cx="0" cy="-72" rx="6" ry="14"/></g>
+          <g transform="rotate(67.5)"><ellipse cx="0" cy="-72" rx="6" ry="14" fill="#076b88"/></g>
+          <g transform="rotate(90)"><ellipse cx="0" cy="-72" rx="6" ry="14"/></g>
+          <g transform="rotate(112.5)"><ellipse cx="0" cy="-72" rx="6" ry="14" fill="#c9a23a"/></g>
+          <g transform="rotate(135)"><ellipse cx="0" cy="-72" rx="6" ry="14"/></g>
+          <g transform="rotate(157.5)"><ellipse cx="0" cy="-72" rx="6" ry="14" fill="#076b88"/></g>
+          <g transform="rotate(180)"><ellipse cx="0" cy="-72" rx="6" ry="14"/></g>
+          <g transform="rotate(202.5)"><ellipse cx="0" cy="-72" rx="6" ry="14" fill="#c9a23a"/></g>
+          <g transform="rotate(225)"><ellipse cx="0" cy="-72" rx="6" ry="14"/></g>
+          <g transform="rotate(247.5)"><ellipse cx="0" cy="-72" rx="6" ry="14" fill="#076b88"/></g>
+          <g transform="rotate(270)"><ellipse cx="0" cy="-72" rx="6" ry="14"/></g>
+          <g transform="rotate(292.5)"><ellipse cx="0" cy="-72" rx="6" ry="14" fill="#c9a23a"/></g>
+          <g transform="rotate(315)"><ellipse cx="0" cy="-72" rx="6" ry="14"/></g>
+          <g transform="rotate(337.5)"><ellipse cx="0" cy="-72" rx="6" ry="14" fill="#076b88"/></g>
+        </g>
+        <g fill="#8b1538">
+          <circle cx="0" cy="-86" r="2"/><circle cx="0" cy="86" r="2"/>
+          <circle cx="-86" cy="0" r="2"/><circle cx="86" cy="0" r="2"/>
+          <circle cx="-61" cy="-61" r="2"/><circle cx="61" cy="-61" r="2"/>
+          <circle cx="-61" cy="61" r="2"/><circle cx="61" cy="61" r="2"/>
+        </g>
+      </g>
+    </svg>
+    <p style="font-style:italic; color:var(--secondary);">
+      “The kolam is the first hospitality of the house — it greets the rising sun before any guest.”<br>— Mrs. Padmavathy, head of threshold rites since 1979
+    </p>
+  </section>
+
+  <!-- ROW 3: House Customs -->
+  <div class="row">
+    <article class="card" style="grid-column: 1 / -1;">
+      <div class="pillar-right"></div>
+      <div class="label-tag">House Customs</div>
+      <h2>Notes for the Honoured Guest<span class="sub">Of Footwear, Of Photography, Of Children</span></h2>
+      <hr class="card-rule">
+      <ul class="facts">
+        <li>
+          <strong>The Inner Threshold</strong>
+          Footwear is removed at the inner threshold marked by the brass step. Lockers of carved Burma-teak are provided to the right of the entry; the attendant returns slippers polished, at no charge.
+        </li>
+        <li>
+          <strong>The Plantain Leaf</strong>
+          Each diner is served upon a fresh leaf cut that morning from the Saidapet groves. The narrow tip points to your left; sweets are placed at the top, savouries below, rice at the centre. Folding the leaf toward yourself at the end of the meal is the customary signal of contentment.
+        </li>
+        <li>
+          <strong>Hands &amp; Vessels</strong>
+          We serve in the Tanjore manner — by hand, with copper <em>panchapaatra</em> for water and silver tumblers for buttermilk. Spoons are available on request and brought without comment.
+        </li>
+        <li>
+          <strong>Photography</strong>
+          Photographs of the hall and the food are welcomed. We ask only that the brass uruli, the kolam, and the small shrine to Annapurna in the north-east niche be approached with quiet feet.
+        </li>
+        <li>
+          <strong>Children</strong>
+          Children are honoured guests; small leaves are laid for them and a half-portion of curd-rice with a single ripe banana is the traditional first course. There is a low cushioned bench at the courtyard end for grandmothers and infants.
+        </li>
+        <li>
+          <strong>Quiet Hours</strong>
+          From 13:00 to 14:00 the hall observes a soft hush in honour of the noon offering at the Kapaleeshwarar Temple; conversation continues, but the ceiling fans are stilled and the radio is switched off.
+        </li>
+      </ul>
+      <div class="tailpiece">❀ ✦ ✦ ❀ ✦ ✦ ❀</div>
+    </article>
+  </div>
+
+</main>
+
+<div class="petal-band thin"></div>
+
+<!-- ============ FOOTER ============ -->
+<footer class="arcade">
+  <div class="arcade-band">
+    <div class="arcade-col"></div>
+    <div class="arcade-col"></div>
+    <div class="arcade-center">
+      <svg viewBox="0 0 200 200" aria-hidden="true">
+        <g transform="translate(100,100)">
+          <rect x="-70" y="-70" width="140" height="140" fill="none" stroke="#e34234" stroke-width="1.5"/>
+          <rect x="-55" y="-55" width="110" height="110" fill="none" stroke="#c9a23a" stroke-width="1" transform="rotate(45)"/>
+          <circle r="40" fill="none" stroke="#076b88" stroke-width="1"/>
+          <circle r="26" fill="none" stroke="#e34234" stroke-width="1.2"/>
+          <circle r="12" fill="#e34234"/>
+          <g fill="#c9a23a">
+            <circle cx="0" cy="-50" r="3"/><circle cx="0" cy="50" r="3"/>
+            <circle cx="-50" cy="0" r="3"/><circle cx="50" cy="0" r="3"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+    <div class="arcade-col"></div>
+    <div class="arcade-col"></div>
+    <div class="arcade-col"></div>
+  </div>
+  <div class="footer-info">
+    <div class="col">
+      <h3>Address</h3>
+      47 Kutchery Road<br>
+      Mylapore, Chennai 600 004<br>
+      <em>Beside Sri Vasavi Stores</em>
+    </div>
+    <div class="col">
+      <h3>Telephone</h3>
+      <div class="footer-conch">
+        <span>𑀁</span>
+        <span class="tel-line">+91&nbsp;44&nbsp;2461&nbsp;4708</span>
+        <span>𑀁</span>
+      </div>
+      <div style="margin-top:8px; font-size:13px; font-style:italic; color:var(--secondary);">
+        Answered 09:00 – 21:00 daily by the kanakkupillai
+      </div>
+    </div>
+    <div class="col">
+      <h3>Hours</h3>
+      Tiffin · 06:30 – 10:30<br>
+      Meals · 11:30 – 15:00<br>
+      Evening · 16:00 – 22:30
+    </div>
+  </div>
+  <div class="footer-bottom">
+    Annapurna Bhavan · Tanjore Kitchens · Mylapore · ॥ Annapurne Sadapurne ॥
+  </div>
+</footer>
+
+</body>
+</html>

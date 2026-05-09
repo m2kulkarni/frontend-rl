@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Commissions — Kuramae Sashimono</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), "Shippori Mincho", serif;
+    font-size: 15px;
+    line-height: 1.7;
+    position: relative;
+    min-height: 100vh;
+  }
+
+  /* Asanoha background wash */
+  .asanoha-wash {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.12;
+    background-image: url("svg/asanoha-hempleaf.svg");
+    background-repeat: repeat;
+    background-size: 240px 240px;
+  }
+  .asanoha-wash svg { display: none; }
+
+  main, header, footer { position: relative; z-index: 1; }
+
+  /* ---- Navigation ---- */
+  .nav-band {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    align-items: center;
+    padding: 22px 64px 22px 40px;
+    border-bottom: 1px solid var(--ornament);
+  }
+  .nav-mark {
+    width: 56px; height: 56px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .nav-mark svg { width: 100%; height: 100%; }
+  .nav-links {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0;
+    font-family: var(--font-body), serif;
+    font-variant: small-caps;
+    font-size: 13px;
+    letter-spacing: 0.14em;
+  }
+  .nav-links a {
+    color: var(--text);
+    text-decoration: none;
+    padding: 4px 22px;
+    border-right: 1px solid var(--ornament);
+    line-height: 1;
+  }
+  .nav-links a:last-child { border-right: none; padding-right: 0; }
+  .nav-links a[aria-current="page"] {
+    border-bottom: 2px solid var(--secondary);
+    padding-bottom: 2px;
+  }
+
+  /* ---- Page header / hero ---- */
+  .page-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 420px;
+    padding: 90px 64px 70px 40px;
+    position: relative;
+  }
+  .page-hero .empty { /* ma — left side intentionally empty */ }
+  .page-hero .anchor {
+    grid-column: 2;
+    align-self: end;
+    max-width: 520px;
+    padding-left: 40px;
+    border-left: 1px solid var(--ornament);
+  }
+  .page-hero .kanji-rule {
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.5em;
+    color: var(--text);
+    margin-bottom: 28px;
+  }
+  .page-hero h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 56px;
+    line-height: 1.05;
+    margin: 0 0 28px;
+    letter-spacing: 0.02em;
+  }
+  .page-hero h1 .accent {
+    color: var(--secondary);
+    display: inline-block;
+    margin-left: 8px;
+  }
+  .page-hero .lede {
+    font-size: 16px;
+    line-height: 1.85;
+    margin: 0 0 18px;
+    max-width: 460px;
+  }
+  .page-hero .meta {
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    font-size: 12px;
+    color: var(--text);
+    margin-top: 32px;
+  }
+  .page-hero .meta .dot { color: var(--secondary); margin: 0 10px; }
+
+  /* small kamon seal floating top-right of hero */
+  .hero-seal {
+    position: absolute;
+    top: 70px;
+    right: 80px;
+    width: 88px;
+    height: 88px;
+    opacity: 0.92;
+  }
+  .hero-seal svg { width: 100%; height: 100%; display: block; }
+
+  /* ---- Section title bar ---- */
+  .section-title {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    align-items: baseline;
+    padding: 50px 64px 30px 40px;
+  }
+  .section-title .label {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    letter-spacing: 0.12em;
+  }
+  .section-title .rule {
+    height: 1px;
+    background: var(--ornament);
+    margin-top: 12px;
+  }
+
+  /* ---- Cards grid ---- */
+  .commissions {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    padding: 0 64px 80px 40px;
+    column-gap: 36px;
+    row-gap: 56px;
+  }
+  .card {
+    position: relative;
+    background: var(--surface);
+    border-top: 1px solid var(--ornament);
+    border-left: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+    /* right edge intentionally open */
+    padding: 30px 28px 34px 28px;
+    min-height: 360px;
+  }
+  .card .seal {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 38px;
+    height: 38px;
+    opacity: 0.85;
+  }
+  .card .seal svg { width: 100%; height: 100%; display: block; }
+  .card .index {
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    color: var(--secondary);
+    margin-bottom: 10px;
+  }
+  .card h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 1.2;
+    margin: 0 50px 14px 0;
+    letter-spacing: 0.01em;
+  }
+  .card .meta-row {
+    font-size: 12px;
+    font-variant: small-caps;
+    letter-spacing: 0.14em;
+    line-height: 1.7;
+    margin: 0 0 6px;
+    color: var(--text);
+  }
+  .card .meta-row strong { font-weight: 400; color: var(--text); }
+  .card .joinery {
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    margin: 14px 0 18px;
+    padding-top: 12px;
+    border-top: 1px solid var(--ornament);
+  }
+  .card .joinery .term { color: var(--secondary); }
+  .card p.desc {
+    font-size: 13.5px;
+    line-height: 1.75;
+    margin: 0;
+  }
+  .card .price {
+    margin-top: 18px;
+    font-variant: small-caps;
+    letter-spacing: 0.16em;
+    font-size: 11px;
+    color: var(--text);
+  }
+
+  /* ---- Process aside ---- */
+  .aside-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    padding: 30px 64px 90px 40px;
+    gap: 60px;
+  }
+  .aside-row .note {
+    border-left: 1px solid var(--ornament);
+    padding-left: 32px;
+    max-width: 520px;
+  }
+  .aside-row .note h4 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 20px;
+    margin: 0 0 14px;
+    letter-spacing: 0.04em;
+  }
+  .aside-row .note p {
+    font-size: 13px;
+    line-height: 1.85;
+    margin: 0 0 12px;
+  }
+  .aside-row .empty-anchor {
+    text-align: right;
+    align-self: end;
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.3em;
+    color: var(--text);
+    opacity: 0.5;
+  }
+
+  /* ---- Footer ---- */
+  .sayagata-strip {
+    height: 60px;
+    background-image: url("svg/sayagata-keyfret.svg");
+    background-repeat: repeat-x;
+    background-size: 200px 60px;
+    opacity: 0.18;
+  }
+  footer.site-foot {
+    background: var(--bg);
+    padding: 50px 64px 36px 40px;
+    display: grid;
+    grid-template-columns: 110px 1fr 1fr;
+    gap: 40px;
+    border-top: 1px solid var(--ornament);
+  }
+  .foot-mark {
+    width: 92px; height: 92px;
+  }
+  .foot-mark svg { width: 100%; height: 100%; }
+  .foot-mark svg path,
+  .foot-mark svg circle { fill: var(--accent); }
+  .foot-mark svg rect[width="688"] { fill: transparent !important; }
+  .foot-sig {
+    writing-mode: vertical-rl;
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.18em;
+    line-height: 2.2;
+    height: 240px;
+  }
+  .foot-right {
+    text-align: right;
+    font-family: var(--font-display), serif;
+    font-size: 15px;
+    line-height: 2;
+    letter-spacing: 0.05em;
+  }
+  .foot-right .brushy {
+    font-size: 18px;
+    margin-bottom: 24px;
+  }
+  .foot-attrib {
+    grid-column: 1 / -1;
+    margin-top: 30px;
+    padding-top: 18px;
+    border-top: 1px solid var(--ornament);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    opacity: 0.7;
+  }
+
+  /* small inline kamon used inside cards — strip the black bg */
+  .umebachi-inline rect { display: none; }
+  .umebachi-inline path { fill: var(--secondary); }
+
+  /* tsuru roundel for nav — circular, hairline */
+  .tsuru-roundel {
+    width: 56px; height: 56px;
+    border: 1px solid var(--ornament);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .tsuru-roundel svg { width: 88%; height: 88%; }
+
+  /* hero seal — kiri kamon, paulownia gold */
+  .hero-seal svg path,
+  .hero-seal svg circle { fill: var(--accent); }
+</style>
+</head>
+<body>
+
+<div class="asanoha-wash" aria-hidden="true"></div>
+
+<header class="nav-band" role="banner">
+  <div class="nav-mark" aria-label="Kuramae Sashimono studio mark">
+    <div class="tsuru-roundel" aria-hidden="true">
+      <!-- tsuru-no-maru: simplified inline mark -->
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="46" fill="none" stroke="#0c0c0c" stroke-width="1"/>
+        <path d="M50 22 C 38 30, 30 42, 30 54 C 30 66, 40 74, 50 74 C 60 74, 70 66, 70 54 C 70 42, 62 30, 50 22 Z M50 30 C 56 38, 62 46, 62 54 C 62 62, 56 66, 50 66 C 44 66, 38 62, 38 54 C 38 46, 44 38, 50 30 Z M44 50 L 56 50 M48 42 L 52 42 M46 58 L 54 58" stroke="#0c0c0c" stroke-width="1" fill="none"/>
+        <circle cx="50" cy="50" r="3" fill="#0c0c0c"/>
+      </svg>
+    </div>
+  </div>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="page-1.html">Studio</a>
+    <a href="page-2.html" aria-current="page">Commissions</a>
+    <a href="page-3.html">On Joinery</a>
+    <a href="page-4.html">Workshop</a>
+    <a href="page-5.html">Visit</a>
+    <a href="page-6.html">Correspondence</a>
+  </nav>
+</header>
+
+<main>
+
+  <section class="page-hero">
+    <div class="empty" aria-hidden="true"></div>
+
+    <div class="hero-seal" aria-hidden="true">
+      <svg viewBox="0 0 345.20605 326.25635" xmlns="http://www.w3.org/2000/svg">
+        <g transform="matrix(0.9861902,0,0,0.9861902,2.3836171,5.3631323)">
+          <circle cx="172.60352" cy="155.03467" r="9.9453125"/>
+          <path d="M 175.15234,166.07861 C 174.81543,169.77197 174.48633,173.61865 174.33496,177.29736 C 190.88574,185.96729 206.31055,197.3335 217.36035,212.56689 C 228.23242,229.14404 236.83105,249.18896 234.12988,269.51904 C 232.72656,262.25049 232.2832,254.97607 230.68652,247.70752 C 223.35059,218.45654 201.30664,194.69482 174.75195,181.12549 C 174.59082,184.9585 174.625,188.78857 174.65723,192.62061 C 188.71387,200.74268 201.2627,211.93994 210.00195,225.84912 C 221.85547,245.48486 225.1377,270.93604 216.31836,292.66357 C 218.12695,280.00244 218.97461,267.15674 217.52637,254.5249 C 213.29297,229.84326 196.82227,208.146 174.69238,196.64307 C 174.54297,201.81982 174.58496,206.80029 174.4375,211.97412 C 185.79785,218.58252 196.03223,228.07568 201.50391,240.29053 C 210.09766,259.56885 210.10645,283.13623 200.49512,302.18701 C 203.23047,285.87646 207.30273,269.17139 202.37598,252.9292 C 198.9834,237.05811 188.13965,223.54736 174.08984,216.19287 C 174.31836,220.40381 173.02246,225.59033 176.11816,229.20166 C 193.9209,250.12744 197.45117,282.09326 185.78027,306.71533 C 186.66699,298.0874 189.08594,289.64014 189.01074,280.82373 C 190.20703,263.76416 185.83789,245.60107 174.23047,232.66846 C 174.03418,254.51221 174.60254,276.3501 174.4043,298.00146 C 174.24121,301.45166 173.69434,304.7124 172.76465,307.979 C 172.7002,307.69678 172.66309,307.4126 172.60449,307.12939 C 172.54492,307.4126 172.50977,307.69678 172.44531,307.979 C 171.5127,304.7124 170.96973,301.45166 170.80469,298.00146 C 170.60645,276.3501 171.17383,254.51221 170.97949,232.66846 C 159.37305,245.60107 155.00195,263.76416 156.19727,280.82373 C 156.12305,289.64014 158.54004,298.0874 159.42676,306.71533 C 147.75977,282.09326 151.28906,250.12744 169.09082,229.20166 C 172.18555,225.59033 170.89063,220.40381 171.11816,216.19287 C 157.07031,223.54736 146.22461,237.05811 142.83105,252.9292 C 137.90723,269.17139 141.97852,285.87646 144.71484,302.18701 C 135.10059,283.13623 135.11133,259.56885 143.70313,240.29053 C 149.1748,228.07568 159.41211,218.58252 170.77051,211.97412 C 170.62109,206.80029 170.66602,201.81982 170.51563,196.64307 C 148.38867,208.146 131.91602,229.84326 127.68066,254.5249 C 126.2334,267.15674 127.08203,280.00244 128.8916,292.66357 C 120.06934,270.93604 123.35352,245.48486 135.20508,225.84912 C 143.94824,211.93994 156.49707,200.74268 170.55078,192.62061 C 170.58496,188.78857 170.61523,184.9585 170.45605,181.12549 C 143.90234,194.69482 121.8584,218.45654 114.52246,247.70752 C 112.92773,254.97607 112.48438,262.25049 111.0791,269.51904 C 108.37695,249.18896 116.97461,229.14404 127.84863,212.56689 C 138.89941,197.3335 154.32324,185.96729 170.87598,177.29736 C 170.7207,173.61865 170.3916,169.77197 170.05859,166.07861 z"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="anchor">
+      <div class="kanji-rule">註 文 帖 — Chūmon-chō</div>
+      <h1>Commissions<span class="accent">.</span></h1>
+      <p class="lede">A working register of recent works delivered from the bench at Taishō-dōri. Each piece is built to a written specification, signed inside the carcass in sumi, and accompanied by an inventory of joints employed. Wood species named below were milled within the Kantō region unless otherwise stated.</p>
+      <div class="meta">Reiwa 5 — 6 <span class="dot">·</span> Six pieces of record <span class="dot">·</span> Compiled by Kondō Hiroaki, joiner</div>
+    </div>
+  </section>
+
+  <section class="section-title">
+    <div class="label">壹 — Recent Works</div>
+    <div>
+      <div class="rule"></div>
+    </div>
+  </section>
+
+  <section class="commissions" aria-label="Six commissioned works">
+
+    <!-- CARD 1 -->
+    <article class="card">
+      <div class="seal umebachi-inline" aria-hidden="true">
+        <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg" class="umebachi-inline">
+          <rect width="688" height="688"/>
+          <path d="M 226.13364,612.57579 C 207.8052,610.64503 189.07085,603.27797 174.07991,592.10629 C 168.2372,587.75214 158.29322,577.8608 153.78698,571.9208 C 132.5626,543.94339 126.61588,507.85248 137.79008,474.83496 C 141.25861,464.58614 146.78359,453.9662 152.97675,445.64361 C 157.16039,440.02149 167.66572,429.43802 173.42393,425.04434 C 201.20575,403.84602 237.50693,397.85655 270.50977,409.02578 C 286.664,414.49289 299.71221,422.76016 311.9042,435.25303 C 323.67395,447.31324 331.05394,459.27791 336.31895,474.83496 C 346.30781,504.35006 342.79857,535.57031 326.40165,563.06499 C 318.72451,575.93817 304.73233,589.92909 291.82929,597.63424 C 271.43302,609.81403 248.79421,614.96291 226.13364,612.57579 z M 333.05926,283.9271 C 314.73082,281.99634 295.99647,274.62928 281.00554,263.4576 C 275.16282,259.10345 265.21884,249.21211 260.7126,243.27211 C 239.48823,215.2947 233.5415,179.20379 244.7157,146.18627 C 248.18423,135.93744 253.70921,125.31751 259.90237,116.99491 C 264.08601,111.3728 274.59134,100.78933 280.34955,96.395647 C 308.13137,75.197328 344.43255,69.207858 377.43539,80.377088 C 393.58962,85.844198 406.63783,94.111468 418.82982,106.60433 C 430.59957,118.66455 437.97956,130.62922 443.24457,146.18627 C 453.23344,175.70137 449.7242,206.92162 433.32727,234.4163 C 425.65013,247.28948 411.65795,261.2804 398.75492,268.98555 C 378.35864,281.16534 355.71983,286.31422 333.05926,283.9271 z"/>
+        </svg>
+      </div>
+      <div class="index">壹 · No. 01</div>
+      <h3>Tansu for the Yanaka Shōkōkai</h3>
+      <p class="meta-row"><strong>Wood —</strong> Aizu paulownia (kiri), Bunsei-period stock</p>
+      <p class="meta-row"><strong>Year —</strong> Reiwa 5 (2023) · delivered 11.iii</p>
+      <div class="joinery"><span class="term">Joinery —</span> arigata-tsugi dovetails throughout the carcass; kanawa-tsugi at the plinth scarf; hand-cut shōji-mortice for drawer runners.</div>
+      <p class="desc">A four-tier merchant's chest commissioned by the Yanaka Shōkōkai as a reception piece for their Sakura-dōri offices. The kiri was reclaimed from a 1827 storehouse beam donated by the Itō family of Sendagi; the grain runs continuous across the three lower drawers. Hardware in hand-forged iron by Murata Kinzōku-ten, Asakusa.</p>
+      <div class="price">Recorded value · ¥1,840,000</div>
+    </article>
+
+    <!-- CARD 2 -->
+    <article class="card">
+      <div class="seal umebachi-inline" aria-hidden="true">
+        <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg" class="umebachi-inline">
+          <rect width="688" height="688"/>
+          <path d="M 226.13364,612.57579 C 207.8052,610.64503 189.07085,603.27797 174.07991,592.10629 C 168.2372,587.75214 158.29322,577.8608 153.78698,571.9208 C 132.5626,543.94339 126.61588,507.85248 137.79008,474.83496 C 141.25861,464.58614 146.78359,453.9662 152.97675,445.64361 C 157.16039,440.02149 167.66572,429.43802 173.42393,425.04434 C 201.20575,403.84602 237.50693,397.85655 270.50977,409.02578 C 286.664,414.49289 299.71221,422.76016 311.9042,435.25303 C 323.67395,447.31324 331.05394,459.27791 336.31895,474.83496 C 346.30781,504.35006 342.79857,535.57031 326.40165,563.06499 C 318.72451,575.93817 304.73233,589.92909 291.82929,597.63424 C 271.43302,609.81403 248.79421,614.96291 226.13364,612.57579 z M 333.05926,283.9271 C 314.73082,281.99634 295.99647,274.62928 281.00554,263.4576 C 275.16282,259.10345 265.21884,249.21211 260.7126,243.27211 C 239.48823,215.2947 233.5415,179.20379 244.7157,146.18627 C 248.18423,135.93744 253.70921,125.31751 259.90237,116.99491 C 264.08601,111.3728 274.59134,100.78933 280.34955,96.395647 C 308.13137,75.197328 344.43255,69.207858 377.43539,80.377088 C 393.58962,85.844198 406.63783,94.111468 418.82982,106.60433 C 430.59957,118.66455 437.97956,130.62922 443.24457,146.18627 C 453.23344,175.70137 449.7242,206.92162 433.32727,234.4163 C 425.65013,247.28948 411.65795,261.2804 398.75492,268.98555 C 378.35864,281.16534 355.71983,286.31422 333.05926,283.9271 z"/>
+        </svg>
+      </div>
+      <div class="index">貳 · No. 02</div>
+      <h3>Cha-dōgu-bako for Kondō-sensei</h3>
+      <p class="meta-row"><strong>Wood —</strong> Quartersawn kiri (paulownia), unfinished</p>
+      <p class="meta-row"><strong>Year —</strong> Reiwa 5 (2023) · delivered 22.vii</p>
+      <div class="joinery"><span class="term">Joinery —</span> hako-zashi mitred frame, blind kakushi-arigata corners; lid registered with single 3.2 mm cherrywood pin.</div>
+      <p class="desc">A storage box for a set of four chasen and a single chashaku, made for Kondō Sōkō-sensei of the Urasenke Tōkyō branch. The interior is left raw to absorb humidity; the exterior given two passes of tonoko-polish only. The lid lifts with the breath of a closed shōji — slow, even, no pop. Signed beneath the floor in pale sumi.</p>
+      <div class="price">Recorded value · ¥285,000</div>
+    </article>
+
+    <!-- CARD 3 -->
+    <article class="card">
+      <div class="seal umebachi-inline" aria-hidden="true">
+        <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg" class="umebachi-inline">
+          <rect width="688" height="688"/>
+          <path d="M 226.13364,612.57579 C 207.8052,610.64503 189.07085,603.27797 174.07991,592.10629 C 168.2372,587.75214 158.29322,577.8608 153.78698,571.9208 C 132.5626,543.94339 126.61588,507.85248 137.79008,474.83496 C 141.25861,464.58614 146.78359,453.9662 152.97675,445.64361 C 157.16039,440.02149 167.66572,429.43802 173.42393,425.04434 C 201.20575,403.84602 237.50693,397.85655 270.50977,409.02578 C 286.664,414.49289 299.71221,422.76016 311.9042,435.25303 C 323.67395,447.31324 331.05394,459.27791 336.31895,474.83496 C 346.30781,504.35006 342.79857,535.57031 326.40165,563.06499 C 318.72451,575.93817 304.73233,589.92909 291.82929,597.63424 C 271.43302,609.81403 248.79421,614.96291 226.13364,612.57579 z M 333.05926,283.9271 C 314.73082,281.99634 295.99647,274.62928 281.00554,263.4576 C 275.16282,259.10345 265.21884,249.21211 260.7126,243.27211 C 239.48823,215.2947 233.5415,179.20379 244.7157,146.18627 C 248.18423,135.93744 253.70921,125.31751 259.90237,116.99491 C 264.08601,111.3728 274.59134,100.78933 280.34955,96.395647 C 308.13137,75.197328 344.43255,69.207858 377.43539,80.377088 C 393.58962,85.844198 406.63783,94.111468 418.82982,106.60433 C 430.59957,118.66455 437.97956,130.62922 443.24457,146.18627 C 453.23344,175.70137 449.7242,206.92162 433.32727,234.4163 C 425.65013,247.28948 411.65795,261.2804 398.75492,268.98555 C 378.35864,281.16534 355.71983,286.31422 333.05926,283.9271 z"/>
+        </svg>
+      </div>
+      <div class="index">参 · No. 03</div>
+      <h3>Pair of Shōji Frames, Asakusa Engei Hall</h3>
+      <p class="meta-row"><strong>Wood —</strong> Kiso sugi (Japanese cedar), 60-yr stand</p>
+      <p class="meta-row"><strong>Year —</strong> Reiwa 4 (2022) · delivered 09.xi</p>
+      <div class="joinery"><span class="term">Joinery —</span> kumiko lattice in asa-no-ha pattern; through-tenons wedged with cherry; sashimono frame in cogged dadō-tsugi.</div>
+      <p class="desc">A matched pair fitted to the green-room of the Asakusa Engei Hall, where rakugo is performed nightly. The kumiko stand at 9 mm × 4 mm with no metal fastenings; the asanoha figure was selected by the proprietor Tachibana-san for its association with healthy growth in children. Paper hung by Sekiyama Hyōgu-ten across the river in Mukōjima.</p>
+      <div class="price">Recorded value · ¥520,000 (the pair)</div>
+    </article>
+
+    <!-- CARD 4 -->
+    <article class="card">
+      <div class="seal umebachi-inline" aria-hidden="true">
+        <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg" class="umebachi-inline">
+          <rect width="688" height="688"/>
+          <path d="M 226.13364,612.57579 C 207.8052,610.64503 189.07085,603.27797 174.07991,592.10629 C 168.2372,587.75214 158.29322,577.8608 153.78698,571.9208 C 132.5626,543.94339 126.61588,507.85248 137.79008,474.83496 C 141.25861,464.58614 146.78359,453.9662 152.97675,445.64361 C 157.16039,440.02149 167.66572,429.43802 173.42393,425.04434 C 201.20575,403.84602 237.50693,397.85655 270.50977,409.02578 C 286.664,414.49289 299.71221,422.76016 311.9042,435.25303 C 323.67395,447.31324 331.05394,459.27791 336.31895,474.83496 C 346.30781,504.35006 342.79857,535.57031 326.40165,563.06499 C 318.72451,575.93817 304.73233,589.92909 291.82929,597.63424 C 271.43302,609.81403 248.79421,614.96291 226.13364,612.57579 z M 333.05926,283.9271 C 314.73082,281.99634 295.99647,274.62928 281.00554,263.4576 C 275.16282,259.10345 265.21884,249.21211 260.7126,243.27211 C 239.48823,215.2947 233.5415,179.20379 244.7157,146.18627 C 248.18423,135.93744 253.70921,125.31751 259.90237,116.99491 C 264.08601,111.3728 274.59134,100.78933 280.34955,96.395647 C 308.13137,75.197328 344.43255,69.207858 377.43539,80.377088 C 393.58962,85.844198 406.63783,94.111468 418.82982,106.60433 C 430.59957,118.66455 437.97956,130.62922 443.24457,146.18627 C 453.23344,175.70137 449.7242,206.92162 433.32727,234.4163 C 425.65013,247.28948 411.65795,261.2804 398.75492,268.98555 C 378.35864,281.16534 355.71983,286.31422 333.05926,283.9271 z"/>
+        </svg>
+      </div>
+      <div class="index">肆 · No. 04</div>
+      <h3>Bun-tsukue (writing desk) in Keyaki Burl</h3>
+      <p class="meta-row"><strong>Wood —</strong> Tama-mokume keyaki (zelkova burl), single board</p>
+      <p class="meta-row"><strong>Year —</strong> Reiwa 5 (2023) · delivered 04.ii</p>
+      <div class="joinery"><span class="term">Joinery —</span> shiho-zashi four-way frame; sliding kō-arigata drawer behind a hidden release; legs joined with hozo-sashi-komi and bamboo pin.</div>
+      <p class="desc">A low writing-desk for a private collector in Yushima, requesting a piece that would not require iron. The top is a single 920 × 460 board of figured keyaki sourced from a felled tree at Tōfuku-ji's Tōkyō branch (storm of Shōwa 34). The drawer pull is a finger-pocket only; the desk weighs 14.6 kg.</p>
+      <div class="price">Recorded value · ¥1,420,000</div>
+    </article>
+
+    <!-- CARD 5 -->
+    <article class="card">
+      <div class="seal umebachi-inline" aria-hidden="true">
+        <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg" class="umebachi-inline">
+          <rect width="688" height="688"/>
+          <path d="M 226.13364,612.57579 C 207.8052,610.64503 189.07085,603.27797 174.07991,592.10629 C 168.2372,587.75214 158.29322,577.8608 153.78698,571.9208 C 132.5626,543.94339 126.61588,507.85248 137.79008,474.83496 C 141.25861,464.58614 146.78359,453.9662 152.97675,445.64361 C 157.16039,440.02149 167.66572,429.43802 173.42393,425.04434 C 201.20575,403.84602 237.50693,397.85655 270.50977,409.02578 C 286.664,414.49289 299.71221,422.76016 311.9042,435.25303 C 323.67395,447.31324 331.05394,459.27791 336.31895,474.83496 C 346.30781,504.35006 342.79857,535.57031 326.40165,563.06499 C 318.72451,575.93817 304.73233,589.92909 291.82929,597.63424 C 271.43302,609.81403 248.79421,614.96291 226.13364,612.57579 z M 333.05926,283.9271 C 314.73082,281.99634 295.99647,274.62928 281.00554,263.4576 C 275.16282,259.10345 265.21884,249.21211 260.7126,243.27211 C 239.48823,215.2947 233.5415,179.20379 244.7157,146.18627 C 248.18423,135.93744 253.70921,125.31751 259.90237,116.99491 C 264.08601,111.3728 274.59134,100.78933 280.34955,96.395647 C 308.13137,75.197328 344.43255,69.207858 377.43539,80.377088 C 393.58962,85.844198 406.63783,94.111468 418.82982,106.60433 C 430.59957,118.66455 437.97956,130.62922 443.24457,146.18627 C 453.23344,175.70137 449.7242,206.92162 433.32727,234.4163 C 425.65013,247.28948 411.65795,261.2804 398.75492,268.98555 C 378.35864,281.16534 355.71983,286.31422 333.05926,283.9271 z"/>
+        </svg>
+      </div>
+      <div class="index">伍 · No. 05</div>
+      <h3>Sanbō Offering-Stand, Mishima Inari</h3>
+      <p class="meta-row"><strong>Wood —</strong> Kiso hinoki (Japanese cypress), unwaxed</p>
+      <p class="meta-row"><strong>Year —</strong> Reiwa 4 (2022) · delivered 28.ix</p>
+      <div class="joinery"><span class="term">Joinery —</span> kumi-shiguchi corner; pierced trefoil (hōju) windows by chisel only; no glue, no nails — disassembles for purification.</div>
+      <p class="desc">An offering-stand for the autumn harvest rite at Mishima Inari Jinja, two streets east of the workshop. The piece is built per Engi-shiki convention: hinoki only, planed in a single direction, joined dry. It will be replaced after twenty years and the old wood ritually burnt. Built to a measured drawing held by the shrine since the rebuild of Shōwa 24.</p>
+      <div class="price">Recorded · gratis (奉納 / hōnō)</div>
+    </article>
+
+    <!-- CARD 6 -->
+    <article class="card">
+      <div class="seal umebachi-inline" aria-hidden="true">
+        <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg" class="umebachi-inline">
+          <rect width="688" height="688"/>
+          <path d="M 226.13364,612.57579 C 207.8052,610.64503 189.07085,603.27797 174.07991,592.10629 C 168.2372,587.75214 158.29322,577.8608 153.78698,571.9208 C 132.5626,543.94339 126.61588,507.85248 137.79008,474.83496 C 141.25861,464.58614 146.78359,453.9662 152.97675,445.64361 C 157.16039,440.02149 167.66572,429.43802 173.42393,425.04434 C 201.20575,403.84602 237.50693,397.85655 270.50977,409.02578 C 286.664,414.49289 299.71221,422.76016 311.9042,435.25303 C 323.67395,447.31324 331.05394,459.27791 336.31895,474.83496 C 346.30781,504.35006 342.79857,535.57031 326.40165,563.06499 C 318.72451,575.93817 304.73233,589.92909 291.82929,597.63424 C 271.43302,609.81403 248.79421,614.96291 226.13364,612.57579 z M 333.05926,283.9271 C 314.73082,281.99634 295.99647,274.62928 281.00554,263.4576 C 275.16282,259.10345 265.21884,249.21211 260.7126,243.27211 C 239.48823,215.2947 233.5415,179.20379 244.7157,146.18627 C 248.18423,135.93744 253.70921,125.31751 259.90237,116.99491 C 264.08601,111.3728 274.59134,100.78933 280.34955,96.395647 C 308.13137,75.197328 344.43255,69.207858 377.43539,80.377088 C 393.58962,85.844198 406.63783,94.111468 418.82982,106.60433 C 430.59957,118.66455 437.97956,130.62922 443.24457,146.18627 C 453.23344,175.70137 449.7242,206.92162 433.32727,234.4163 C 425.65013,247.28948 411.65795,261.2804 398.75492,268.98555 C 378.35864,281.16534 355.71983,286.31422 333.05926,283.9271 z"/>
+        </svg>
+      </div>
+      <div class="index">陸 · No. 06</div>
+      <h3>Restoration of an Edo Merchant's Chest</h3>
+      <p class="meta-row"><strong>Wood —</strong> Original sugi carcass; replacement kiri drawer-fronts</p>
+      <p class="meta-row"><strong>Year —</strong> Reiwa 5 (2023) · returned 17.v</p>
+      <div class="joinery"><span class="term">Joinery —</span> reinforcement of failing arigata-tsugi with sashi-mochi splines; new kanawa scarf at the lower rail; iron-work re-tempered at Murata's forge.</div>
+      <p class="desc">A four-drawer chest dated to Bunsei 8 (1825), brought in by the Hayashi family of Negishi. The carcass was sound; three drawer-bottoms had cupped beyond use and the front-left dovetails were lost in a kitchen fire of 1947. The work followed the principle of fukugen — restoration to the maker's intention, not to mint condition. The original sumi inscription has been preserved, untouched, on the back panel.</p>
+      <div class="price">Recorded value · ¥640,000 (labour)</div>
+    </article>
+
+  </section>
+
+  <section class="aside-row">
+    <div class="empty-anchor" aria-hidden="true">餘白 — Ma</div>
+    <aside class="note">
+      <h4>On the entry of new commissions</h4>
+      <p>The bench accepts no more than nine substantial pieces a year. A first letter — by post or by hand at the workshop door — opens a conversation; a measured drawing follows after a visit. Wood is selected together; price is fixed only after the drawing is signed.</p>
+      <p>Estimates given here are recorded values at the date of delivery and are noted for the historical record only. Current commissions are quoted afresh.</p>
+    </aside>
+  </section>
+
+</main>
+
+<div class="sayagata-strip" aria-hidden="true"></div>
+
+<footer class="site-foot" role="contentinfo">
+  <div class="foot-mark" aria-label="Kuramae Sashimono paulownia mark">
+    <svg viewBox="0 0 345.20605 326.25635" xmlns="http://www.w3.org/2000/svg">
+      <g transform="matrix(0.9861902,0,0,0.9861902,2.3836171,5.3631323)">
+        <circle cx="172.60352" cy="155.03467" r="9.9453125"/>
+        <path d="M 175.15234,166.07861 C 174.81543,169.77197 174.48633,173.61865 174.33496,177.29736 C 190.88574,185.96729 206.31055,197.3335 217.36035,212.56689 C 228.23242,229.14404 236.83105,249.18896 234.12988,269.51904 C 232.72656,262.25049 232.2832,254.97607 230.68652,247.70752 C 223.35059,218.45654 201.30664,194.69482 174.75195,181.12549 C 174.59082,184.9585 174.625,188.78857 174.65723,192.62061 C 188.71387,200.74268 201.2627,211.93994 210.00195,225.84912 C 221.85547,245.48486 225.1377,270.93604 216.31836,292.66357 C 218.12695,280.00244 218.97461,267.15674 217.52637,254.5249 C 213.29297,229.84326 196.82227,208.146 174.69238,196.64307 C 174.54297,201.81982 174.58496,206.80029 174.4375,211.97412 C 185.79785,218.58252 196.03223,228.07568 201.50391,240.29053 C 210.09766,259.56885 210.10645,283.13623 200.49512,302.18701 C 203.23047,285.87646 207.30273,269.17139 202.37598,252.9292 C 198.9834,237.05811 188.13965,223.54736 174.08984,216.19287 C 174.31836,220.40381 173.02246,225.59033 176.11816,229.20166 C 193.9209,250.12744 197.45117,282.09326 185.78027,306.71533 C 186.66699,298.0874 189.08594,289.64014 189.01074,280.82373 C 190.20703,263.76416 185.83789,245.60107 174.23047,232.66846 C 174.03418,254.51221 174.60254,276.3501 174.4043,298.00146 C 174.24121,301.45166 173.69434,304.7124 172.76465,307.979 C 172.7002,307.69678 172.66309,307.4126 172.60449,307.12939 C 172.54492,307.4126 172.50977,307.69678 172.44531,307.979 C 171.5127,304.7124 170.96973,301.45166 170.80469,298.00146 C 170.60645,276.3501 171.17383,254.51221 170.97949,232.66846 C 159.37305,245.60107 155.00195,263.76416 156.19727,280.82373 C 156.12305,289.64014 158.54004,298.0874 159.42676,306.71533 C 147.75977,282.09326 151.28906,250.12744 169.09082,229.20166 C 172.18555,225.59033 170.89063,220.40381 171.11816,216.19287 C 157.07031,223.54736 146.22461,237.05811 142.83105,252.9292 C 137.90723,269.17139 141.97852,285.87646 144.71484,302.18701 C 135.10059,283.13623 135.11133,259.56885 143.70313,240.29053 C 149.1748,228.07568 159.41211,218.58252 170.77051,211.97412 C 170.62109,206.80029 170.66602,201.81982 170.51563,196.64307 C 148.38867,208.146 131.91602,229.84326 124.52246,247.70752 C 112.92773,254.97607 112.48438,262.25049 111.0791,269.51904 C 108.37695,249.18896 116.97461,229.14404 127.84863,212.56689 C 138.89941,197.3335 154.32324,185.96729 170.87598,177.29736 C 170.7207,173.61865 170.3916,169.77197 170.05859,166.07861 z"/>
+      </g>
+    </svg>
+  </div>
+  <div class="foot-sig">
+    蔵前指物 · 大正通り三-七-二 · 台東区 · 東京
+  </div>
+  <div class="foot-right">
+    <div class="brushy">Founded Bunkyū 2 (1862)</div>
+    <div>Rebuilt Shōwa 24 (1949)</div>
+    <div>· Continued ·</div>
+  </div>
+  <div class="foot-attrib">
+    Kamon renderings (tsuru-no-maru, kiri, umebachi) sourced from Wikimedia Commons under CC-BY-SA. Sayagata and asanoha pattern files in the public domain. Typesetting in Yuji Syuku and Shippori Mincho via Google Fonts.
+  </div>
+</footer>
+
+</body>
+</html>

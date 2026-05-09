@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Visiting Kiritsubo — Directions and Hours</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), "Shippori Mincho", "Hiragino Mincho ProN", serif;
+    font-size: 15px;
+    line-height: 1.75;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Kraft paper texture using subtle gradient noise */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(28,58,94,0.025) 0, transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(12,12,12,0.02) 0, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ------- Header / Nav ------- */
+  .site-header {
+    position: relative;
+    padding: 36px 64px 28px 64px;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    align-items: start;
+    z-index: 5;
+  }
+  .house-mark {
+    width: 64px;
+    height: 64px;
+    opacity: 0.85;
+  }
+  .house-mark svg { width: 100%; height: 100%; display: block; }
+
+  nav.primary {
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    padding-top: 18px;
+  }
+  nav.primary a {
+    font-family: var(--font-body), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.22em;
+    text-transform: lowercase;
+    font-size: 11px;
+    color: var(--text);
+    text-decoration: none;
+    padding: 0 18px;
+    border-right: 1px solid rgba(12,12,12,0.45);
+    line-height: 1;
+  }
+  nav.primary a:last-child { border-right: none; padding-right: 0; }
+  nav.primary a:first-child { padding-left: 0; }
+  nav.primary a[aria-current="page"] {
+    color: var(--secondary);
+  }
+
+  /* ------- Page heading band ------- */
+  .page-mast {
+    position: relative;
+    padding: 40px 64px 28px 64px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    z-index: 4;
+  }
+  .mast-left {
+    grid-column: 2;
+  }
+  .eyebrow {
+    font-family: var(--font-body), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.4em;
+    font-size: 10px;
+    color: var(--primary);
+    margin: 0 0 14px 0;
+  }
+  h1.page-title {
+    font-family: var(--font-display), "Yuji Syuku", serif;
+    font-weight: 400;
+    font-size: 54px;
+    line-height: 1.1;
+    margin: 0 0 12px 0;
+    color: var(--text);
+    letter-spacing: 0.02em;
+  }
+  h1.page-title .accent {
+    color: var(--secondary);
+  }
+  .kicker {
+    font-size: 14px;
+    max-width: 28em;
+    color: rgba(12,12,12,0.82);
+    margin: 0;
+  }
+
+  /* ------- Main composition grid ------- */
+  main.visit {
+    position: relative;
+    display: grid;
+    grid-template-columns: 64px 280px 1fr 64px;
+    grid-template-rows: auto auto auto;
+    column-gap: 48px;
+    row-gap: 56px;
+    padding: 60px 0 80px 0;
+    z-index: 3;
+  }
+
+  /* Vertical address column — tategaki */
+  .address-block {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    font-family: var(--font-display), serif;
+    font-size: 19px;
+    line-height: 2.2;
+    letter-spacing: 0.15em;
+    color: var(--text);
+    border-right: 1px solid rgba(12,12,12,0.55);
+    padding: 0 24px 0 0;
+    margin-left: auto;
+    height: 560px;
+    position: relative;
+  }
+  .address-block .label {
+    font-size: 11px;
+    font-variant: small-caps;
+    letter-spacing: 0.3em;
+    color: var(--primary);
+    writing-mode: horizontal-tb;
+    text-orientation: mixed;
+    position: absolute;
+    top: -28px;
+    right: 0;
+    padding: 0;
+  }
+  .address-block .seal-cinnabar {
+    writing-mode: horizontal-tb;
+    position: absolute;
+    bottom: -18px;
+    right: -14px;
+    width: 44px;
+    height: 44px;
+    background: var(--secondary);
+    color: var(--surface);
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 0 1px rgba(12,12,12,0.15);
+  }
+
+  /* Hero card area with seigaiha frame */
+  .hero-card {
+    grid-column: 3;
+    grid-row: 1;
+    position: relative;
+    background: var(--surface);
+    border-top: 1px solid var(--text);
+    padding: 44px 56px 56px 56px;
+    min-height: 360px;
+    overflow: hidden;
+  }
+  .hero-card .seigaiha-frame {
+    position: absolute;
+    right: -80px;
+    bottom: -120px;
+    width: 520px;
+    height: 520px;
+    opacity: 0.09;
+    pointer-events: none;
+  }
+  .hero-card .seigaiha-frame svg { width: 100%; height: 100%; display: block; }
+
+  .hero-card h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 34px;
+    line-height: 1.2;
+    margin: 0 0 8px 0;
+    max-width: 14em;
+  }
+  .hero-card h2 .accent { color: var(--secondary); }
+  .hero-card .sub {
+    font-size: 12px;
+    font-variant: small-caps;
+    letter-spacing: 0.3em;
+    color: var(--primary);
+    margin-bottom: 24px;
+  }
+  .hero-card p {
+    max-width: 34em;
+    margin: 0 0 16px 0;
+  }
+  .umebachi-mark {
+    position: absolute;
+    right: 22px;
+    bottom: 18px;
+    width: 28px;
+    height: 28px;
+    opacity: 0.55;
+  }
+  .umebachi-mark svg { width: 100%; height: 100%; display: block; }
+
+  /* Hours card */
+  .hours-card {
+    grid-column: 3;
+    grid-row: 2;
+    position: relative;
+    background: var(--surface);
+    border-top: 1px solid var(--text);
+    padding: 36px 48px 48px 48px;
+    max-width: 720px;
+  }
+  .hours-card h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 28px;
+    margin: 0 0 4px 0;
+  }
+  .hours-card .sub {
+    font-size: 11px;
+    font-variant: small-caps;
+    letter-spacing: 0.3em;
+    color: var(--primary);
+    margin-bottom: 22px;
+  }
+  .hours-grid {
+    display: grid;
+    grid-template-columns: 130px 1fr 110px;
+    gap: 0;
+    border-top: 1px solid rgba(12,12,12,0.3);
+  }
+  .hours-grid > div {
+    padding: 14px 12px;
+    border-bottom: 1px solid rgba(12,12,12,0.18);
+    font-size: 14px;
+  }
+  .hours-grid .svc {
+    font-family: var(--font-display), serif;
+    font-size: 17px;
+    color: var(--primary);
+  }
+  .hours-grid .time {
+    font-variant: tabular-nums;
+    letter-spacing: 0.05em;
+  }
+  .hours-grid .days {
+    font-size: 11px;
+    font-variant: small-caps;
+    letter-spacing: 0.22em;
+    text-align: right;
+    color: rgba(12,12,12,0.7);
+    padding-top: 18px;
+  }
+  .hours-grid .closed {
+    grid-column: 1 / -1;
+    border-bottom: none;
+    padding-top: 18px;
+    color: var(--secondary);
+    font-style: italic;
+    font-size: 13px;
+  }
+
+  /* Divider strip */
+  .divider-strip {
+    grid-column: 2 / 4;
+    grid-row: 3;
+    position: relative;
+    height: 70px;
+    margin-top: -10px;
+    overflow: hidden;
+    opacity: 0.45;
+  }
+  .divider-strip svg {
+    position: absolute;
+    top: -260px;
+    left: 0;
+    width: 100%;
+    height: 600px;
+  }
+  .divider-strip svg .st0 { stroke: var(--primary); stroke-width: 1.2; }
+
+  /* Bottom row: directions + lantern */
+  .bottom-row {
+    grid-column: 2 / 4;
+    grid-row: 4;
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 56px;
+    margin-top: 30px;
+  }
+
+  .directions-card {
+    position: relative;
+    background: var(--surface);
+    border-top: 1px solid var(--text);
+    padding: 36px 44px 56px 44px;
+  }
+  .directions-card h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 26px;
+    margin: 0 0 4px 0;
+  }
+  .directions-card .sub {
+    font-size: 11px;
+    font-variant: small-caps;
+    letter-spacing: 0.3em;
+    color: var(--primary);
+    margin-bottom: 22px;
+  }
+  .directions-card ol {
+    list-style: none;
+    counter-reset: step;
+    padding: 0;
+    margin: 0;
+  }
+  .directions-card ol li {
+    counter-increment: step;
+    position: relative;
+    padding-left: 56px;
+    margin-bottom: 18px;
+    min-height: 38px;
+  }
+  .directions-card ol li::before {
+    content: counter(step, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 2px;
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    color: var(--secondary);
+    border-bottom: 1px solid var(--text);
+    padding-bottom: 2px;
+    width: 38px;
+  }
+  .directions-card ol li strong {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    color: var(--primary);
+    display: block;
+    font-size: 16px;
+    letter-spacing: 0.04em;
+  }
+  .directions-card ol li span {
+    font-size: 14px;
+    color: rgba(12,12,12,0.85);
+  }
+
+  /* Lantern aside */
+  .lantern-aside {
+    position: relative;
+    padding: 20px 28px 20px 28px;
+    align-self: start;
+  }
+  .lantern-aside::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 12px;
+    bottom: 12px;
+    width: 1px;
+    background: var(--text);
+  }
+  .lantern-aside .stamp {
+    width: 88px;
+    height: 88px;
+    margin-bottom: 18px;
+    position: relative;
+    background: var(--secondary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 0 0 2px rgba(245,239,222,0.6);
+  }
+  .lantern-aside .stamp span {
+    font-family: var(--font-display), serif;
+    color: var(--surface);
+    font-size: 36px;
+    line-height: 1;
+  }
+  .lantern-aside .quote {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    line-height: 1.5;
+    color: var(--text);
+    margin: 0 0 14px 0;
+    max-width: 14em;
+  }
+  .lantern-aside .quote .accent { color: var(--secondary); }
+  .lantern-aside cite {
+    font-style: normal;
+    font-size: 11px;
+    font-variant: small-caps;
+    letter-spacing: 0.3em;
+    color: rgba(12,12,12,0.7);
+    display: block;
+  }
+
+  .umebachi-mark.card-mark {
+    position: absolute;
+    right: 18px;
+    bottom: 14px;
+    width: 26px;
+    height: 26px;
+    opacity: 0.55;
+  }
+
+  /* ------- Footer ------- */
+  footer.site-footer {
+    position: relative;
+    background: var(--bg);
+    padding: 0 0 40px 0;
+    margin-top: 80px;
+    border-top: 1px solid rgba(12,12,12,0.25);
+  }
+  .asanoha-band {
+    height: 70px;
+    overflow: hidden;
+    position: relative;
+    opacity: 0.13;
+    border-bottom: 1px solid rgba(12,12,12,0.2);
+  }
+  .asanoha-band svg {
+    position: absolute;
+    top: -20px;
+    left: 0;
+    width: 100%;
+    height: 130px;
+  }
+  .asanoha-band svg .st1, .asanoha-band svg .st0 {
+    stroke: var(--primary);
+  }
+
+  .footer-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 36px 0 12px 0;
+  }
+  .footer-center .tsuru-seal {
+    width: 56px;
+    height: 56px;
+    opacity: 0.85;
+  }
+  .footer-center .tsuru-seal svg { width: 100%; height: 100%; }
+  .footer-center .signature {
+    font-family: var(--font-display), serif;
+    font-size: 18px;
+    margin-top: 14px;
+    letter-spacing: 0.1em;
+  }
+  .footer-center .signature .accent { color: var(--secondary); }
+
+  .footer-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-width: 720px;
+    margin: 28px auto 0 auto;
+    gap: 64px;
+    padding: 0 64px;
+    font-size: 11px;
+    line-height: 1.8;
+    color: rgba(12,12,12,0.78);
+  }
+  .footer-cols h4 {
+    font-family: var(--font-body), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.3em;
+    font-size: 10px;
+    margin: 0 0 8px 0;
+    color: var(--primary);
+    font-weight: 600;
+  }
+  .footer-cols p { margin: 0 0 8px 0; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="house-mark" aria-label="Tsuru-no-maru house mark">
+    <!-- Tsuru kamon, simplified placement -->
+    <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="344" cy="344" r="320" fill="none" stroke="#0c0c0c" stroke-width="6"/>
+      <g transform="translate(344,344)">
+        <!-- stylized crane: two wings + circle body -->
+        <path d="M -180,-20 C -120,-110 -40,-150 0,-90 C 40,-150 120,-110 180,-20 C 120,40 40,30 0,-30 C -40,30 -120,40 -180,-20 Z" fill="#0c0c0c"/>
+        <circle cx="0" cy="60" r="48" fill="none" stroke="#0c0c0c" stroke-width="6"/>
+        <circle cx="0" cy="60" r="14" fill="#0c0c0c"/>
+      </g>
+    </svg>
+  </div>
+  <nav class="primary" aria-label="Primary">
+    <a href="page-1.html">Kiritsubo</a>
+    <a href="page-2.html">O-shinagaki</a>
+    <a href="page-3.html">The House</a>
+    <a href="page-4.html">Shun no Kondate</a>
+    <a href="page-5.html">Reservations</a>
+    <a href="page-6.html" aria-current="page">Visiting</a>
+  </nav>
+</header>
+
+<section class="page-mast">
+  <div class="mast-left">
+    <p class="eyebrow">Page Six · Hōmon · Visiting the House</p>
+    <h1 class="page-title">Follow the lantern<br>past the <span class="accent">plum tree.</span></h1>
+    <p class="kicker">Kiritsubo stands a short walk from Awajichō, on the south bank of the Kanda river, where a single paper lantern marks the lane after dusk.</p>
+  </div>
+</section>
+
+<main class="visit">
+
+  <aside class="address-block" aria-label="Address">
+    <span class="label">Jūsho · Address</span>
+    東京都千代田区<br>
+    神田須田町二丁目<br>
+    十四番七号<br>
+    桐壺
+    <span class="seal-cinnabar" aria-hidden="true">桐</span>
+  </aside>
+
+  <article class="hero-card">
+    <p class="sub">Kanda-Sudachō · Chiyoda-ku · Tōkyō</p>
+    <h2>2-chōme 14-7,<br>Kanda-Sudachō — <span class="accent">the south-bank lane.</span></h2>
+    <p>Our gate is set back from the street by twelve paces, marked only by a noren of indigo linen and the small lantern that hangs from the eave. There is no signboard at the road; if you reach the bridge, you have walked one house too far west.</p>
+    <p>The river is loud here in summer and altogether silent in winter. We keep the lattice door slid open from a quarter-hour before each service so that guests may step in at their leisure.</p>
+
+    <div class="seigaiha-frame" aria-hidden="true">
+      <svg viewBox="0 0 700 700" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <defs>
+          <g id="C1v">
+            <path d="M 1,210 V 100 A 98,98 0 0 1 100,1 98,98 0 0 1 199,100 V 210" fill="none" stroke="#1c3a5e" stroke-width="2"/>
+            <path d="M 175,210 V 100 A 75,75 0 0 0 100,25 75,75 0 0 0 25,100 V 210" fill="none" stroke="#1c3a5e" stroke-width="1"/>
+          </g>
+        </defs>
+        <g id="C4v">
+          <use xlink:href="#C1v"/>
+          <use xlink:href="#C1v" transform="translate(200,0)"/>
+          <use xlink:href="#C1v" transform="translate(400,0)"/>
+          <use xlink:href="#C1v" transform="translate(600,0)"/>
+        </g>
+        <use xlink:href="#C4v" transform="translate(-100,100)"/>
+        <use xlink:href="#C4v" transform="translate(0,200)"/>
+        <use xlink:href="#C4v" transform="translate(-100,300)"/>
+        <use xlink:href="#C4v" transform="translate(0,400)"/>
+        <use xlink:href="#C4v" transform="translate(-100,500)"/>
+        <use xlink:href="#C4v" transform="translate(0,600)"/>
+      </svg>
+    </div>
+
+    <div class="umebachi-mark" aria-hidden="true">
+      <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg">
+        <g fill="#0c0c0c">
+          <circle cx="344" cy="180" r="92"/>
+          <circle cx="200" cy="300" r="92"/>
+          <circle cx="488" cy="300" r="92"/>
+          <circle cx="240" cy="468" r="92"/>
+          <circle cx="448" cy="468" r="92"/>
+          <circle cx="344" cy="344" r="46" fill="#f5efde"/>
+        </g>
+      </svg>
+    </div>
+  </article>
+
+  <article class="hours-card">
+    <p class="sub">Eigyō-jikan · Hours of Service</p>
+    <h2>The two services of the day.</h2>
+    <div class="hours-grid">
+      <div class="svc">Hiru — Lunch</div>
+      <div class="time">11:30 — 14:00</div>
+      <div class="days">Tue – Sat</div>
+
+      <div class="svc">Yūshoku — Dinner</div>
+      <div class="time">17:30 — 22:00</div>
+      <div class="days">Tue – Sun</div>
+
+      <div class="closed">Closed all day Monday, and the second Tuesday of every month, in observance of the kitchen's monthly accounting and the laying-in of seasonal goods.</div>
+    </div>
+    <div class="umebachi-mark card-mark" aria-hidden="true">
+      <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg">
+        <g fill="#0c0c0c">
+          <circle cx="344" cy="180" r="92"/>
+          <circle cx="200" cy="300" r="92"/>
+          <circle cx="488" cy="300" r="92"/>
+          <circle cx="240" cy="468" r="92"/>
+          <circle cx="448" cy="468" r="92"/>
+          <circle cx="344" cy="344" r="46" fill="#f5efde"/>
+        </g>
+      </svg>
+    </div>
+  </article>
+
+  <div class="divider-strip" aria-hidden="true">
+    <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <g>
+        <polygon class="st0" points="501.6,301.2 551.1,251.7 500.8,201.4 451.3,250.9 300.9,100.5 350.4,51 300.1,0.7 250.6,50.2 201.1,0.7 150.3,51.5 500.3,401.5 551.1,350.7 " fill="none" stroke="#1c3a5e" stroke-width="1.2"/>
+        <polygon class="st0" points="600.9,199.9 551.6,150.7 601.2,101 550.7,50.4 501,100.1 450.4,150.7 400.8,200.3 451.3,250.9 501,201.2 550.3,250.5 " fill="none" stroke="#1c3a5e" stroke-width="1.2"/>
+        <polyline class="st0" points="600,0 400.8,200.3 351,150.5 501.5,0 " fill="none" stroke="#1c3a5e" stroke-width="1.2"/>
+        <polygon class="st0" points="349.9,452.9 300.4,502.4 250.1,452.1 299.6,402.6 149.2,252.2 99.7,301.7 49.4,251.4 98.9,201.9 49.4,152.4 100.2,101.6 450.2,451.6 399.4,502.4 " fill="none" stroke="#1c3a5e" stroke-width="1.2"/>
+        <polygon class="st0" points="248.7,552.1 199.4,502.9 149.7,552.5 99.2,501.9 148.8,452.3 199.4,401.7 249,352.1 299.6,402.6 250,452.3 299.2,501.6 " fill="none" stroke="#1c3a5e" stroke-width="1.2"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bottom-row">
+    <article class="directions-card">
+      <p class="sub">Michi-annai · From Awajichō Station</p>
+      <h2>Four minutes along the south bank.</h2>
+      <ol>
+        <li>
+          <strong>Take Exit A3.</strong>
+          <span>From the Marunouchi Line at Awajichō, ascend through Exit A3. You will emerge facing the willow at the corner of Sotobori-dōri.</span>
+        </li>
+        <li>
+          <strong>Turn east toward the river.</strong>
+          <span>Walk two short blocks along the south side of Sotobori-dōri. The cooper's shop with the red shutter is your landmark; pass it on your left.</span>
+        </li>
+        <li>
+          <strong>Follow the south bank.</strong>
+          <span>At the second crossing, turn left onto the narrow lane that traces the Kanda river. Maples line the embankment for some sixty paces.</span>
+        </li>
+        <li>
+          <strong>Stop at the plum tree.</strong>
+          <span>Where the lane bends, an old white plum overhangs the fence. Our small lantern hangs in its shadow. Slide the lattice door to your right.</span>
+        </li>
+      </ol>
+      <div class="umebachi-mark card-mark" aria-hidden="true">
+        <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg">
+          <g fill="#0c0c0c">
+            <circle cx="344" cy="180" r="92"/>
+            <circle cx="200" cy="300" r="92"/>
+            <circle cx="488" cy="300" r="92"/>
+            <circle cx="240" cy="468" r="92"/>
+            <circle cx="448" cy="468" r="92"/>
+            <circle cx="344" cy="344" r="46" fill="#f5efde"/>
+          </g>
+        </svg>
+      </div>
+    </article>
+
+    <aside class="lantern-aside">
+      <div class="stamp" aria-hidden="true"><span>提</span></div>
+      <p class="quote">“Follow the <span class="accent">lantern</span> past the plum tree.”</p>
+      <cite>— inscribed on the small andon at our entrance, in the hand of the fourth proprietor, ca. Meiji 12.</cite>
+    </aside>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="asanoha-band" aria-hidden="true">
+    <svg viewBox="0 0 503 130" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <g fill="none" stroke="#1c3a5e" stroke-width="0.8">
+        <!-- Simplified asanoha tile repeated -->
+        <g id="hl">
+          <polygon points="50,5 95,30 95,80 50,105 5,80 5,30"/>
+          <line x1="50" y1="5" x2="50" y2="105"/>
+          <line x1="5" y1="30" x2="95" y2="80"/>
+          <line x1="95" y1="30" x2="5" y2="80"/>
+          <line x1="50" y1="5" x2="5" y2="80"/>
+          <line x1="50" y1="5" x2="95" y2="80"/>
+          <line x1="50" y1="105" x2="5" y2="30"/>
+          <line x1="50" y1="105" x2="95" y2="30"/>
+        </g>
+        <use href="#hl" x="100"/>
+        <use href="#hl" x="200"/>
+        <use href="#hl" x="300"/>
+        <use href="#hl" x="400"/>
+        <use href="#hl" x="500"/>
+        <use href="#hl" x="-50"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="footer-center">
+    <div class="tsuru-seal" aria-hidden="true">
+      <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="344" cy="344" r="320" fill="none" stroke="#0c0c0c" stroke-width="6"/>
+        <g transform="translate(344,344)">
+          <path d="M -180,-20 C -120,-110 -40,-150 0,-90 C 40,-150 120,-110 180,-20 C 120,40 40,30 0,-30 C -40,30 -120,40 -180,-20 Z" fill="#0c0c0c"/>
+          <circle cx="0" cy="60" r="48" fill="none" stroke="#0c0c0c" stroke-width="6"/>
+          <circle cx="0" cy="60" r="14" fill="#0c0c0c"/>
+        </g>
+      </svg>
+    </div>
+    <p class="signature"><span class="accent">桐壺</span> Kiritsubo — Kanda-ku, Tōkyō</p>
+  </div>
+
+  <div class="footer-cols">
+    <div>
+      <h4>House &amp; Hours</h4>
+      <p>2-chōme 14-7, Kanda-Sudachō<br>Chiyoda-ku, Tōkyō 101-0041</p>
+      <p>Lunch · Tue–Sat · 11:30–14:00<br>Dinner · Tue–Sun · 17:30–22:00</p>
+      <p>Closed Mondays and the second Tuesday of each month.</p>
+    </div>
+    <div>
+      <h4>Notes &amp; Attribution</h4>
+      <p>Reservations by telephone preferred; the kitchen accepts written request by post for parties of six or more.</p>
+      <p>Kamon renderings (tsuru-no-maru, umebachi) and the seigaiha, sayagata, and asanoha grounds are adapted from public-domain Edo pattern books and shared under <abbr title="Creative Commons Attribution-ShareAlike">CC BY-SA 4.0</abbr>. © Kiritsubo, Bunsei 5 — present.</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

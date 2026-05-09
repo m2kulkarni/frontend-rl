@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>The Sofreh — Seasonal Menu | Chehel Sotoun</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  /* ---------- Base ---------- */
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    font-size: 17px;
+    line-height: 1.65;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  .axis {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 80px;
+    position: relative;
+  }
+
+  /* ---------- Top rule ---------- */
+  .top-rule {
+    height: 2px;
+    background: var(--primary);
+    width: 100%;
+  }
+
+  /* ---------- Wordmark + Nav ---------- */
+  header.site-head {
+    text-align: center;
+    padding: 36px 0 0;
+  }
+  .wordmark {
+    font-family: var(--font-display), serif;
+    font-size: 38px;
+    letter-spacing: 0.18em;
+    color: var(--primary);
+    text-transform: uppercase;
+    margin: 0;
+    font-weight: 400;
+  }
+  .wordmark .amp {
+    display: block;
+    font-size: 13px;
+    letter-spacing: 0.4em;
+    color: var(--text-emphasis);
+    margin-top: 8px;
+    font-style: italic;
+    font-family: var(--font-body), serif;
+    text-transform: none;
+  }
+  nav.primary {
+    margin: 22px 0 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0;
+  }
+  nav.primary a {
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--primary);
+    padding: 6px 14px;
+    position: relative;
+  }
+  nav.primary .palmette {
+    color: var(--accent);
+    font-size: 10px;
+    line-height: 1;
+    transform: translateY(-1px);
+  }
+  nav.primary a[aria-current="page"] {
+    color: var(--text-emphasis);
+  }
+  nav.primary a[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    left: 14px; right: 14px; bottom: -2px;
+    height: 8px;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 8' preserveAspectRatio='none'><path d='M2,6 Q25,-2 50,4 T98,6' stroke='%237a1f2e' stroke-width='1.2' fill='none' stroke-linecap='round'/></svg>") center/100% 100% no-repeat;
+  }
+  .nav-rule {
+    height: 1px;
+    background: var(--primary);
+    opacity: 0.35;
+    margin-top: 8px;
+  }
+
+  /* ---------- Hero / Iwan ---------- */
+  .hero {
+    text-align: center;
+    padding: 60px 0 30px;
+    position: relative;
+  }
+  .hero-arch {
+    width: 360px;
+    height: 400px;
+    margin: 0 auto 20px;
+    position: relative;
+    background: var(--primary);
+    -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 220'><path d='M20,220 L20,120 Q20,60 60,40 Q80,30 100,10 Q120,30 140,40 Q180,60 180,120 L180,220 Z' fill='black'/></svg>") center/contain no-repeat;
+            mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 220'><path d='M20,220 L20,120 Q20,60 60,40 Q80,30 100,10 Q120,30 140,40 Q180,60 180,120 L180,220 Z' fill='black'/></svg>") center/contain no-repeat;
+  }
+  .hero-arch::before {
+    content: "";
+    position: absolute;
+    inset: 14px;
+    background:
+      radial-gradient(circle at 50% 30%, var(--secondary) 0 2px, transparent 3px),
+      radial-gradient(circle at 30% 50%, var(--accent) 0 2px, transparent 3px),
+      radial-gradient(circle at 70% 50%, var(--accent) 0 2px, transparent 3px),
+      radial-gradient(circle at 50% 70%, var(--secondary) 0 2px, transparent 3px),
+      linear-gradient(135deg, var(--primary) 0%, #16294a 100%);
+    -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 220'><path d='M28,220 L28,124 Q28,68 64,50 Q82,40 100,22 Q118,40 136,50 Q172,68 172,124 L172,220 Z' fill='black'/></svg>") center/contain no-repeat;
+            mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 220'><path d='M28,220 L28,124 Q28,68 64,50 Q82,40 100,22 Q118,40 136,50 Q172,68 172,124 L172,220 Z' fill='black'/></svg>") center/contain no-repeat;
+  }
+  .hero-arch .seal {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 140px; height: 140px;
+    transform: translate(-50%, -50%);
+    opacity: 0.95;
+  }
+  .eyebrow {
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.4em;
+    font-size: 11px;
+    color: var(--text-emphasis);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  h1.page-title {
+    font-family: var(--font-display), serif;
+    font-size: 54px;
+    margin: 0 0 14px;
+    color: var(--primary);
+    letter-spacing: 0.04em;
+    font-weight: 400;
+  }
+  h1.page-title em {
+    color: var(--text-emphasis);
+    font-style: italic;
+  }
+  .lede {
+    max-width: 640px;
+    margin: 0 auto;
+    font-size: 18px;
+    line-height: 1.7;
+    color: #1a2c50;
+  }
+  .lede strong {
+    color: var(--text-emphasis);
+    font-weight: 600;
+  }
+
+  /* ---------- Divider ---------- */
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 40px 0;
+    gap: 14px;
+  }
+  .divider svg.filet {
+    height: 18px;
+    width: 360px;
+    color: var(--accent);
+  }
+  .divider svg.filet path { fill: currentColor; }
+  .divider .finial {
+    width: 18px; height: 18px;
+    color: var(--secondary);
+  }
+
+  /* ---------- Sofreh grid ---------- */
+  .sofreh {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px 64px;
+    margin: 30px 0 60px;
+  }
+  .panel {
+    background: #fbf3df;
+    border: 2px solid var(--primary);
+    position: relative;
+    padding: 0;
+    box-shadow: 0 1px 0 var(--accent) inset, 0 0 0 1px var(--accent);
+  }
+  /* Pointed-arch top via clip on header band */
+  .panel-head {
+    background: var(--primary);
+    color: var(--bg);
+    text-align: center;
+    padding: 60px 30px 28px;
+    position: relative;
+    clip-path: polygon(0 0, 50% 0, 50% 0, 100% 0, 100% 100%, 0 100%);
+  }
+  .panel-head::before {
+    content: "";
+    position: absolute;
+    top: -1px; left: 50%;
+    width: 240px; height: 70px;
+    background: var(--primary);
+    transform: translateX(-50%);
+    clip-path: polygon(0 100%, 0 50%, 50% 0, 100% 50%, 100% 100%);
+  }
+  .medallion {
+    position: absolute;
+    top: 8px; left: 50%;
+    transform: translateX(-50%);
+    width: 64px; height: 64px;
+    background: #fbf3df;
+    border: 2px solid var(--secondary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    box-shadow: 0 0 0 3px #fbf3df, 0 0 0 4px var(--accent);
+  }
+  .medallion svg {
+    width: 44px; height: 44px;
+  }
+  .panel-num {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    position: relative;
+    z-index: 1;
+  }
+  .panel-title {
+    font-family: var(--font-display), serif;
+    font-size: 24px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin: 0;
+    color: var(--bg);
+    font-weight: 400;
+    position: relative;
+    z-index: 1;
+  }
+  .panel-sub {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--accent);
+    margin-top: 8px;
+    letter-spacing: 0.06em;
+    position: relative;
+    z-index: 1;
+  }
+  .panel-body {
+    padding: 30px 36px 28px;
+    position: relative;
+  }
+  /* corner palmettes */
+  .panel-body::before,
+  .panel-body::after {
+    content: "";
+    position: absolute;
+    width: 28px; height: 28px;
+    background-image: radial-gradient(circle at 0 0, var(--accent) 0 1.5px, transparent 2px);
+    background-size: 6px 6px;
+    opacity: 0.7;
+  }
+  .panel-body::before { top: 8px; left: 8px; }
+  .panel-body::after { bottom: 8px; right: 8px; transform: rotate(180deg); }
+
+  .dish {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4px 14px;
+    padding: 14px 0;
+    border-bottom: 1px dotted rgba(30, 58, 95, 0.25);
+    align-items: baseline;
+  }
+  .dish:last-of-type { border-bottom: none; }
+  .dish-name {
+    font-family: var(--font-display), serif;
+    font-size: 17px;
+    letter-spacing: 0.04em;
+    color: var(--primary);
+  }
+  .dish-name em {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    color: var(--text-emphasis);
+    font-size: 14px;
+    letter-spacing: 0;
+    margin-left: 4px;
+  }
+  .dish-price {
+    font-family: var(--font-display), serif;
+    font-size: 18px;
+    color: var(--text-emphasis);
+    font-variant-numeric: oldstyle-nums;
+    letter-spacing: 0.02em;
+  }
+  .dish-desc {
+    grid-column: 1 / 2;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: #2a3a5a;
+    margin-top: 2px;
+  }
+
+  /* Brick inset for footnote */
+  .panel-foot {
+    background: var(--surface);
+    color: #fff;
+    padding: 14px 24px;
+    font-size: 12px;
+    line-height: 1.55;
+    letter-spacing: 0.02em;
+    text-align: center;
+    border-top: 1px solid var(--accent);
+  }
+  .panel-foot strong {
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-size: 10px;
+    color: #fff5dd;
+    display: block;
+    margin-bottom: 3px;
+  }
+
+  /* ---------- Tasting prelude band ---------- */
+  .prelude {
+    background: #fbf3df;
+    border-top: 2px solid var(--primary);
+    border-bottom: 2px solid var(--primary);
+    padding: 30px 60px;
+    margin: 0 0 40px;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 30px;
+    align-items: center;
+    position: relative;
+  }
+  .prelude::before, .prelude::after {
+    content: "";
+    position: absolute; left: 0; right: 0;
+    height: 4px;
+    background: repeating-linear-gradient(90deg, var(--accent) 0 8px, transparent 8px 16px);
+  }
+  .prelude::before { top: 4px; }
+  .prelude::after { bottom: 4px; }
+  .prelude h2 {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    margin: 0;
+    color: var(--primary);
+    letter-spacing: 0.08em;
+    text-align: right;
+    text-transform: uppercase;
+  }
+  .prelude p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.7;
+    text-align: center;
+    color: #1a2c50;
+  }
+  .prelude .price-block {
+    text-align: left;
+    font-family: var(--font-display), serif;
+  }
+  .prelude .price-block .num {
+    font-size: 38px;
+    color: var(--text-emphasis);
+    line-height: 1;
+  }
+  .prelude .price-block .label {
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-top: 4px;
+    display: block;
+  }
+
+  /* ---------- Closing note ---------- */
+  .closing {
+    text-align: center;
+    margin: 50px auto 80px;
+    max-width: 720px;
+  }
+  .closing h3 {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    color: var(--primary);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+  }
+  .closing p {
+    font-size: 15.5px;
+    color: #2a3a5a;
+    line-height: 1.75;
+  }
+  .closing p em { color: var(--text-emphasis); font-style: italic; }
+
+  /* ---------- Footer ---------- */
+  footer.site-foot {
+    background: var(--primary);
+    color: var(--bg);
+    padding: 60px 0 32px;
+    margin-top: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  footer.site-foot::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 10% 20%, var(--accent) 0 2px, transparent 3px),
+      radial-gradient(circle at 30% 80%, var(--accent) 0 2px, transparent 3px),
+      radial-gradient(circle at 60% 30%, var(--accent) 0 2px, transparent 3px),
+      radial-gradient(circle at 85% 70%, var(--accent) 0 2px, transparent 3px),
+      radial-gradient(circle at 50% 50%, var(--accent) 0 2px, transparent 3px);
+    background-size: 120px 120px;
+    opacity: 0.18;
+    pointer-events: none;
+  }
+  .foot-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+    text-align: center;
+    position: relative;
+  }
+  .foot-cols h4 {
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 14px;
+    font-weight: 400;
+  }
+  .foot-cols p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #f4ead2;
+  }
+  .foot-divider {
+    margin: 36px 0 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    position: relative;
+  }
+  .foot-divider svg.filet {
+    flex: 1;
+    max-width: 900px;
+    height: 16px;
+    color: var(--accent);
+    opacity: 0.85;
+  }
+  .foot-divider svg.filet path { fill: currentColor; }
+  .foot-divider .finial {
+    width: 16px; height: 16px;
+    color: var(--secondary);
+  }
+  .foot-attrib {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    position: relative;
+  }
+
+  /* Inline ogee finial SVG */
+  .ogee-finial {
+    width: 100%; height: 100%;
+    display: block;
+  }
+</style>
+</head>
+<body>
+
+<!-- Inline reusable SVG symbols -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="filet" viewBox="0 0 437.999 18.893">
+      <path d="M0,9.445c0,0,37.005-0.063,73.998-0.829c18.495-0.386,36.989-0.949,50.831-1.785c6.919-0.414,12.677-0.906,16.663-1.46c1.99-0.28,3.539-0.582,4.535-0.878c0.502-0.146,0.844-0.297,1.049-0.405c0.157-0.107,0.238-0.162,0.238-0.162l0.42-0.287l0.656,0.656l-0.369,0.338c0,0-0.154,0.142-0.456,0.324c-0.291,0.154-0.714,0.331-1.256,0.484c-1.085,0.314-2.667,0.608-4.686,0.879c-4.037,0.533-9.811,0.985-16.745,1.354c-13.868,0.744-32.369,1.183-50.87,1.443C37.003,9.632,0,9.445,0,9.445z"/>
+      <path d="M437.999,9.445c0,0-37.004,0.187-74.007-0.329c-18.501-0.261-37.002-0.699-50.869-1.443c-6.935-0.368-12.708-0.82-16.745-1.354c-2.019-0.271-3.601-0.565-4.687-0.879c-0.541-0.153-0.965-0.33-1.256-0.484c-0.302-0.183-0.456-0.324-0.456-0.324l-0.369-0.338l0.656-0.656l0.42,0.287c0,0,0.081,0.055,0.238,0.162c0.204,0.108,0.546,0.26,1.048,0.405c0.996,0.296,2.545,0.598,4.535,0.878c3.986,0.554,9.744,1.046,16.663,1.46c13.842,0.836,32.337,1.399,50.831,1.785C400.994,9.382,437.999,9.445,437.999,9.445z"/>
+      <circle cx="219" cy="9.4" r="4.5"/>
+      <path d="M170,9.4 Q190,2 210,9.4 T170,9.4 Z"/>
+      <path d="M268,9.4 Q248,2 228,9.4 T268,9.4 Z"/>
+    </symbol>
+    <symbol id="ogee-finial" viewBox="0 0 24 24">
+      <path d="M12,2 Q14,8 18,10 Q14,12 12,22 Q10,12 6,10 Q10,8 12,2 Z" fill="currentColor"/>
+    </symbol>
+    <symbol id="seal-star" viewBox="0 0 100 100">
+      <g stroke="currentColor" stroke-width="1.4" fill="none">
+        <circle cx="50" cy="50" r="34"/>
+        <circle cx="50" cy="50" r="22"/>
+        <path d="M50,16 L58,42 L84,42 L63,57 L71,82 L50,67 L29,82 L37,57 L16,42 L42,42 Z"/>
+        <path d="M50,28 L54,44 L70,44 L57,53 L62,68 L50,59 L38,68 L43,53 L30,44 L46,44 Z"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="top-rule"></div>
+
+<header class="site-head">
+  <div class="axis">
+    <h1 class="wordmark">
+      Chehel Sotoun
+      <span class="amp">— Hall of Forty Columns —</span>
+    </h1>
+    <nav class="primary" aria-label="Primary">
+      <a href="page-1.html">Iwan</a>
+      <span class="palmette">❖</span>
+      <a href="page-2.html" aria-current="page">The Sofreh</a>
+      <span class="palmette">❖</span>
+      <a href="page-3.html">The Hall</a>
+      <span class="palmette">❖</span>
+      <a href="page-4.html">Lineage</a>
+      <span class="palmette">❖</span>
+      <a href="page-5.html">Reservations</a>
+      <span class="palmette">❖</span>
+      <a href="page-6.html">Visit</a>
+    </nav>
+    <div class="nav-rule"></div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="axis">
+      <div class="hero-arch" aria-hidden="true">
+        <svg class="seal" viewBox="0 0 100 100"><use href="#seal-star" style="color:#c9a23a"/></svg>
+      </div>
+      <div class="eyebrow">Carte du Soir · Spring Mizan, 1403</div>
+      <h1 class="page-title">The <em>Sofreh</em></h1>
+      <p class="lede">
+        Our table is laid as a <strong>spread cloth</strong> in four iwans — the
+        garden, the long hearth, the rice of the twelve provinces, and the bazaar
+        of sweets. Dishes are drawn from the courtly kitchens of seventeenth-century
+        Isfahan, set to the rhythm of what the orchards and millers send each week.
+      </p>
+    </div>
+  </section>
+
+  <div class="axis">
+    <div class="prelude">
+      <h2>The Full <br>Sofreh</h2>
+      <p>
+        For the table of four or more, our kitchen lays the complete sofreh —
+        all four iwans served in sequence, with bread baked to the hour, sharbat
+        of sour cherry and rose, and tea drawn from a samovar of beaten copper.
+        Reservations advised by sundown of the prior day.
+      </p>
+      <div class="price-block">
+        <span class="num">128</span>
+        <span class="label">per guest · prix fixe</span>
+      </div>
+    </div>
+
+    <div class="divider" aria-hidden="true">
+      <svg class="finial"><use href="#ogee-finial"/></svg>
+      <svg class="filet"><use href="#filet"/></svg>
+      <svg class="finial"><use href="#ogee-finial"/></svg>
+    </div>
+
+    <section class="sofreh" aria-label="Menu panels">
+
+      <!-- Panel I -->
+      <article class="panel">
+        <div class="medallion"><svg viewBox="0 0 100 100"><use href="#seal-star" style="color:#2a8a8a"/></svg></div>
+        <header class="panel-head">
+          <div class="panel-num">Iwan I</div>
+          <h2 class="panel-title">Mezze of the Garden</h2>
+          <div class="panel-sub">— pīsh-ghazā · the cool dishes —</div>
+        </header>
+        <div class="panel-body">
+          <div class="dish">
+            <div class="dish-name">Mast-o-Khiar <em>with Damascene rose</em></div>
+            <div class="dish-price">14</div>
+            <p class="dish-desc">Strained sheep's-milk yogurt folded with cucumber from the Karaj cold-frames, dried Damascene rose petals, walnut, and a thread of mountain mint.</p>
+          </div>
+          <div class="dish">
+            <div class="dish-name">Kashk-e Bademjān</div>
+            <div class="dish-price">16</div>
+            <p class="dish-desc">Smoked aubergine pounded with whey-kashk from Kashan, fried mint, and saffron-bloomed onion. Served warm in a copper bowl.</p>
+          </div>
+          <div class="dish">
+            <div class="dish-name">Sabzi Khordan</div>
+            <div class="dish-price">12</div>
+            <p class="dish-desc">A platter of tarragon, basil, radish, scallion and walnut with feta of Lighvan and warm sangak bread.</p>
+          </div>
+          <div class="dish">
+            <div class="dish-name">Mirza Ghasemi</div>
+            <div class="dish-price">15</div>
+            <p class="dish-desc">Fire-roasted aubergine with crushed tomato, garlic confit and farm egg, in the manner of the Caspian shore.</p>
+          </div>
+          <div class="dish">
+            <div class="dish-name">Borani Esfanāj</div>
+            <div class="dish-price">13</div>
+            <p class="dish-desc">Wilted spinach in thick yogurt, with golden barberry and toasted barberry oil.</p>
+          </div>
+        </div>
+        <div class="panel-foot">
+          <strong>This week's garden</strong>
+          Greens from Hadi Family Farm, Karaj · Yogurt from Lighvan Dairy · Rose petals milled at Qamsar
+        </div>
+      </article>
+
+      <!-- Panel II -->
+      <article class="panel">
+        <div class="medallion"><svg viewBox="0 0 100 100"><use href="#seal-star" style="color:#2a8a8a"/></svg></div>
+        <header class="panel-head">
+          <div class="panel-num">Iwan II</div>
+          <h2 class="panel-title">Stews of the Long Hearth</h2>
+          <div class="panel-sub">— khoresh · slow fires of the kitchen —</div>
+        </header>
+        <div class="panel-body">
+          <div class="dish">
+            <div class="dish-name">Fesenjān <em>of pomegranate &amp; walnut</em></div>
+            <div class="dish-price">38</div>
+            <p class="dish-desc">Free-roaming duck simmered seven hours in a dark sauce of stone-ground walnut and reduced pomegranate molasses from Saveh. Served with chelow.</p>
+          </div>
+          <div class="dish">
+            <div class="dish-name">Ash-e Reshteh <em>with kashk from Kashan</em></div>
+            <div class="dish-price">22</div>
+            <p class="dish-desc">A thick noodle pottage of four legumes, mountain herbs, and hand-pulled reshteh, finished with fried mint, caramelised onion, and a swirl of Kashan kashk.</p>
+          </div>
+          <div class="dish">
+            <div class="dish-name">Ghormeh Sabzi</div>
+            <div class="dish-price">32</div>
+            <p class="dish-desc">Lamb shoulder with seven herbs, dried Omani lime, and red kidney bean. Cooked from the third hour of the morning.</p>
+          </div>
+          <div class="dish">
+            <div class="dish-name">Khoresh-e Karafs</div>
+            <div class="dish-price">28</div>
+            <p class="dish-desc">Veal shank and Persian celery with parsley, mint, and a finishing of unripe-grape verjuice.</p>
+          </div>
+          <div class="dish">
+            <div class="dish-name">Khoresh-e Bademjān</div>
+            <div class="dish-price">29</div>
+            <p class="dish-desc">Lamb and fried aubergine in a sauce of tomato, sour-grape juice and yellow split pea.</p>
+          </div>
+        </div>
+        <div class="panel-foot">
+          <strong>This week's hearth</strong>
+          Lamb from Bakhtiari shepherds, Chaharmahal · Walnuts from Tuyserkan · Pomegranate molasses pressed at Saveh, Oct. 1402
+        </div>
+      </article>
+
+      <!-- Panel III -->
+      <article class="panel">
+        <div class="medallion"><svg viewBox="0 0 100 100"><use href="#seal-star" style="color:#2a8a8a"/></svg></div>
+        <header class="panel-head">
+          <div class="panel-num">Iwan III</div>
+          <h2 class="panel-title">Rice of the Twelve Provinces</h2>
+          <div class="panel-sub">— polo · the steamed pilafs —</div>
+        </header>
+        <div class="panel-body">
+          <div class="dish">
+            <div class="dish-name">Zereshk Polo <em>with barberries from Birjand</em></div>
+            <div class="dish-price">34</div>
+            <p class="dish-desc">Saffron-domed rice strewn with butter-bloomed barberries from the Birjand harvest of Mehr 1402, with poached chicken in saffron broth.</p>
+          </div>
+          <div class="dish">
+            <div class="dish-name">Baghali Polo ba Mahicheh</div>
+            <div class="dish-price">36</div>
+            <p class="dish-desc">Fava beans and dill folded through long-grain Tarom rice, plated with a slow-braised lamb shank.</p>
+          </div>
+          <div class="dish">
+            <div class="dish-name">Albaloo Polo</div>
+            <div class="dish-price">30</div>
+            <p class="dish-desc">Sour cherry rice with cardamom and rose, set in a glazed earthen tahdig of saffron crust.</p>
+          </div>
+          <div class="dish">
+            <div class="dish-name">Sabzi Polo ba Mahi</div>
+            <div class="dish-price">34</div>
+            <p class="dish-desc">Herbed rice of parsley, dill and chive served with smoked white fish from the Anzali lagoon.</p>
+          </div>
+          <div class="dish">
+            <div class="dish-name">Adas Polo</div>
+            <div class="dish-price">27</div>
+            <p class="dish-desc">Lentil pilaf with date, raisin and slow-glazed lamb, in the style of Shiraz.</p>
+          </div>
+        </div>
+        <div class="panel-foot">
+          <strong>This week's mill</strong>
+          Tarom rice, Domghan Mill, Mazandaran · Saffron from Qaen Cooperative · Barberries from the Mousavi orchard, Birjand
+        </div>
+      </article>
+
+      <!-- Panel IV -->
+      <article class="panel">
+        <div class="medallion"><svg viewBox="0 0 100 100"><use href="#seal-star" style="color:#2a8a8a"/></svg></div>
+        <header class="panel-head">
+          <div class="panel-num">Iwan IV</div>
+          <h2 class="panel-title">Sweets of the Bazaar</h2>
+          <div class="panel-sub">— shirini · for the tongue at evening's end —</div>
+        </header>
+        <div class="panel-body">
+          <div class="dish">
+            <div class="dish-name">Sholeh Zard <em>scented with cardamom</em></div>
+            <div class="dish-price">11</div>
+            <p class="dish-desc">A saffron rice pudding poured into a shallow dish, perfumed with green cardamom and rosewater, written upon with cinnamon and slivered pistachio.</p>
+          </div>
+          <div class="dish">
+            <div class="dish-name">Bastani Sonnati</div>
+            <div class="dish-price">10</div>
+            <p class="dish-desc">Saffron-rosewater ice cream studded with pistachio and frozen cream, churned each morning in our cold-room.</p>
+          </div>
+          <div class="dish">
+            <div class="dish-name">Baghlava-ye Yazdi</div>
+            <div class="dish-price">9</div>
+            <p class="dish-desc">A diamond of pistachio and rose, soaked lightly in cardamom syrup. Cut from the morning's tray.</p>
+          </div>
+          <div class="dish">
+            <div class="dish-name">Faloodeh Shirazi</div>
+            <div class="dish-price">10</div>
+            <p class="dish-desc">Frozen vermicelli in rose-syrup, finished with lime and sour cherry preserve.</p>
+          </div>
+          <div class="dish">
+            <div class="dish-name">Chai &amp; Nabat</div>
+            <div class="dish-price">6</div>
+            <p class="dish-desc">Black tea drawn from the samovar, served with saffron-yellow rock-sugar, dried lime, or wild thyme — to your asking.</p>
+          </div>
+        </div>
+        <div class="panel-foot">
+          <strong>This week's bazaar</strong>
+          Pistachios from Rafsanjan, Anvari Grove · Saffron from Qaen · Rosewater distilled at Qamsar, Ordibehesht 1403
+        </div>
+      </article>
+
+    </section>
+
+    <div class="divider" aria-hidden="true">
+      <svg class="finial"><use href="#ogee-finial"/></svg>
+      <svg class="filet"><use href="#filet"/></svg>
+      <svg class="finial"><use href="#ogee-finial"/></svg>
+    </div>
+
+    <section class="closing">
+      <h3>A Note on the Sofreh</h3>
+      <p>
+        The menu turns with the season and the post-rider. Where a dish names a
+        farm or a mill, that name was true at the writing of this card; should the
+        rains delay a delivery, the kitchen will speak the substitution at your
+        table. <em>Bread is laid before salt; salt before water; water before tea.</em>
+      </p>
+    </section>
+  </div>
+</main>
+
+<footer class="site-foot">
+  <div class="axis">
+    <div class="foot-cols">
+      <div>
+        <h4>The Address</h4>
+        <p>
+          No. 40, Bagh-e Chenar Lane<br>
+          off Naqsh-e Jahan Square<br>
+          Isfahan Quarter, 11842
+        </p>
+      </div>
+      <div>
+        <h4>The Hours</h4>
+        <p>
+          Wednesday — Sunday<br>
+          Sofreh laid 18:30 to 23:00<br>
+          Tea &amp; sweets from 16:00
+        </p>
+      </div>
+      <div>
+        <h4>The Hand</h4>
+        <p>
+          Kitchen of Ostad Reza Tabrizi<br>
+          Established 1402 · Hijri Shamsi<br>
+          Reservations: 021 · 4040 · 1647
+        </p>
+      </div>
+    </div>
+
+    <div class="foot-divider" aria-hidden="true">
+      <svg class="finial"><use href="#ogee-finial"/></svg>
+      <svg class="filet" preserveAspectRatio="none"><use href="#filet"/></svg>
+      <svg class="finial"><use href="#ogee-finial"/></svg>
+    </div>
+
+    <div class="foot-attrib">
+      Chehel Sotoun · Hall of Forty Columns · Of the Isfahani Table
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

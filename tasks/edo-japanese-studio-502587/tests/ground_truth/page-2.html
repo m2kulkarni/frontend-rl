@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Works — Selected Commissions 2014–2024 · Hakubai Atelier</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), system-ui, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+  }
+
+  /* ---------- Navigation ---------- */
+  .nav-wrap {
+    padding: 36px 80px 0 80px;
+  }
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+  }
+  .mark {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+  }
+  .mark svg { width: 100%; height: 100%; display: block; }
+  .nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 36px;
+  }
+  .nav a {
+    font-family: var(--font-body), sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 11px;
+    color: var(--text);
+    text-decoration: none;
+    padding-bottom: 4px;
+  }
+  .nav a[aria-current="page"] {
+    border-bottom: 1px solid var(--text);
+  }
+  .nav-rule {
+    height: 1px;
+    background: var(--text);
+    margin: 24px 80px 0 80px;
+  }
+
+  /* ---------- Page Header ---------- */
+  .page-head {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+    padding: 96px 80px 64px 80px;
+    position: relative;
+  }
+  .page-head .seigaiha-bg {
+    position: absolute;
+    inset: 0;
+    opacity: 0.08;
+    background-image: url("svg/seigaiha-waves.svg");
+    background-size: 350px;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .page-head > * { position: relative; z-index: 1; }
+
+  .eyebrow {
+    font-family: var(--font-body), sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    font-size: 10px;
+    color: var(--text-emphasis);
+    margin: 0 0 24px 0;
+  }
+  .page-head h1 {
+    grid-column: 1 / 3;
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 64px;
+    line-height: 1.1;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+  .page-head h1 em {
+    font-style: italic;
+    color: var(--text-emphasis);
+  }
+  .page-head .lede {
+    grid-column: 3 / 4;
+    align-self: end;
+    font-size: 14px;
+    line-height: 1.7;
+    max-width: 320px;
+  }
+
+  /* ---------- Index Bar ---------- */
+  .index-bar {
+    display: grid;
+    grid-template-columns: 200px 1fr 1fr 1fr 1fr;
+    gap: 40px;
+    padding: 32px 80px;
+    border-top: 1px solid var(--text);
+    border-bottom: 1px solid var(--text);
+    margin: 0 80px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+  }
+  .index-bar .label {
+    color: var(--text-emphasis);
+  }
+  .index-bar .accent-num {
+    color: var(--accent);
+    font-family: var(--font-display), serif;
+    font-size: 20px;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  /* ---------- Works Grid ---------- */
+  .works {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 80px 56px;
+    padding: 96px 80px;
+  }
+  .card {
+    position: relative;
+  }
+  .card.empty { visibility: hidden; }
+
+  .card-kamon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 12px;
+    height: 12px;
+  }
+  .card-kamon svg { width: 100%; height: 100%; display: block; }
+
+  .card-image {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    background: #e8e0c8;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .card-image.tone-1 { background: linear-gradient(160deg, #d9cfb3 0%, #c4b896 100%); }
+  .card-image.tone-2 { background: linear-gradient(160deg, #cfc9b6 0%, #a89e82 100%); }
+  .card-image.tone-3 { background: linear-gradient(160deg, #ddd1ad 0%, #b8a373 100%); }
+  .card-image.tone-4 { background: linear-gradient(160deg, #c8b896 0%, #8b7a5a 100%); }
+  .card-image.tone-5 { background: linear-gradient(160deg, #e2d9c0 0%, #b0a384 100%); }
+  .card-image.tone-6 { background: linear-gradient(160deg, #d4c8a8 0%, #9a8a68 100%); }
+
+  .card-image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(rgba(12,12,12,0.04) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(12,12,12,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .card-num {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    color: var(--bg);
+    letter-spacing: 0.1em;
+  }
+
+  .card h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 1.25;
+    margin: 0 0 12px 0;
+    padding-right: 24px;
+  }
+  .card .caption {
+    font-size: 13px;
+    line-height: 1.7;
+    margin: 0 0 16px 0;
+    color: var(--text);
+  }
+  .card .meta {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--text);
+    border-top: 1px solid var(--text);
+    padding-top: 10px;
+    margin: 0;
+  }
+  .card .collab {
+    font-size: 11px;
+    color: var(--text-emphasis);
+    font-style: italic;
+    margin-top: 6px;
+  }
+
+  /* ---------- Divider ---------- */
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 80px;
+    gap: 32px;
+  }
+  .divider .line { flex: 1; height: 1px; background: var(--text); }
+  .divider .ornament { width: 80px; height: 80px; opacity: 0.5; }
+  .divider .ornament svg { width: 100%; height: 100%; }
+
+  /* ---------- Materials Index ---------- */
+  .materials {
+    padding: 96px 80px;
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 80px;
+  }
+  .materials h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 1.2;
+    margin: 0;
+  }
+  .materials .intro {
+    font-size: 13px;
+    line-height: 1.7;
+    margin-top: 24px;
+    max-width: 280px;
+  }
+  .mat-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px 40px;
+  }
+  .mat {
+    border-top: 1px solid var(--text);
+    padding-top: 16px;
+  }
+  .mat .jp {
+    font-family: var(--font-display), serif;
+    font-size: 28px;
+    color: var(--text-emphasis);
+    margin: 0 0 4px 0;
+  }
+  .mat .romaji {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 16px;
+    margin: 0 0 12px 0;
+  }
+  .mat p {
+    font-size: 12px;
+    line-height: 1.7;
+    margin: 0;
+  }
+  .mat .count {
+    margin-top: 12px;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--text-emphasis);
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    padding: 96px 80px 48px 80px;
+    margin-top: 48px;
+  }
+  .seal {
+    width: 36px;
+    height: 36px;
+    margin: 0 auto 24px auto;
+  }
+  .seal svg { width: 100%; height: 100%; }
+  .footer-rule {
+    height: 1px;
+    background: var(--text);
+    margin-bottom: 48px;
+  }
+  .footer-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 48px;
+    font-size: 12px;
+    line-height: 1.8;
+  }
+  .footer-cols h4 {
+    font-family: var(--font-body), sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 10px;
+    margin: 0 0 12px 0;
+    color: var(--text-emphasis);
+    font-weight: 500;
+  }
+  .colophon {
+    margin-top: 64px;
+    padding-top: 16px;
+    border-top: 1px solid var(--text);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    display: flex;
+    justify-content: space-between;
+  }
+</style>
+</head>
+<body>
+
+<!-- Umebachi inline symbol -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="umebachi" viewBox="0 0 688 688">
+    <path d="M226.13364,612.57579 C207.8052,610.64503 189.07085,603.27797 174.07991,592.10629 C168.2372,587.75214 158.29322,577.8608 153.78698,571.9208 C132.5626,543.94339 126.61588,507.85248 137.79008,474.83496 C141.25861,464.58614 146.78359,453.9662 152.97675,445.64361 C157.16039,440.02149 167.66572,429.43802 173.42393,425.04434 C201.20575,403.84602 237.50693,397.85655 270.50977,409.02578 C286.664,414.49289 299.71221,422.76016 311.9042,435.25303 C323.67395,447.31324 331.05394,459.27791 336.31895,474.83496 C346.30781,504.35006 342.79857,535.57031 326.40165,563.06499 C318.72451,575.93817 304.73233,589.92909 291.82929,597.63424 C271.43302,609.81403 248.79421,614.96291 226.13364,612.57579 z M439.98488,612.57579 C421.65644,610.64503 402.9221,603.27797 387.93116,592.10629 C382.08845,587.75214 372.14446,577.8608 367.63822,571.9208 C346.41385,543.94339 340.46712,507.85248 351.64132,474.83496 C355.10985,464.58614 360.63483,453.9662 366.828,445.64361 C371.01163,440.02149 381.51696,429.43802 387.27517,425.04434 C415.05699,403.84602 451.35818,397.85655 484.36101,409.02578 C500.51524,414.49289 513.56346,422.76016 525.75544,435.25303 C537.52519,447.31324 544.90518,459.27791 550.17019,474.83496 C560.15906,504.35006 556.64982,535.57031 540.25289,563.06499 C532.57575,575.93817 518.58357,589.92909 505.68054,597.63424 C485.28426,609.81403 462.64546,614.96291 439.98488,612.57579 z M333.09971,445.5755 C326.99741,441.05835 322.03757,437.0118 322.07785,436.58317 C322.11812,436.15453 324.00614,430.04755 326.27344,423.01211 C328.54074,415.97667 330.40195,409.82984 330.40946,409.35249 C330.41825,408.79313 330.90894,408.61682 331.78974,408.85653 C336.91594,410.25168 345.03197,410.75398 350.25232,409.9992 C353.2886,409.5602 356.20013,409.03704 356.72239,408.83663 C357.45739,408.55458 358.66391,411.56003 362.06214,422.13803 C364.47674,429.65422 366.56921,436.1094 366.71207,436.48287 C366.91109,437.00314 349.02239,450.85215 344.9585,453.32397 C344.51333,453.59474 339.56703,450.36286 333.09971,445.5755 z M159.87911,409.8763 C141.55067,407.94553 122.81632,400.57848 107.82539,389.4068 C101.98268,385.05265 92.038692,375.16131 87.532453,369.22131 C66.308078,341.2439 60.361354,305.15299 71.535554,272.13546 C75.004083,261.88664 80.529061,251.26671 86.722226,242.94411 C90.905865,237.322 101.4112,226.73853 107.1694,222.34485 C127.75958,206.63396 154.14627,198.87562 179.1638,201.17674 C189.54676,202.13177 195.42739,203.33865 204.25524,206.32629 C220.40947,211.7934 233.45769,220.06067 245.64967,232.55353 C257.41942,244.61375 264.79941,256.57842 270.06442,272.13546 C280.05329,301.65056 276.54405,332.87082 260.14712,360.3655 C252.46998,373.23868 238.4778,387.2296 225.57477,394.93475 C205.17849,407.11454 182.53968,412.26341 159.87911,409.8763 z M506.23941,409.8763 C487.91097,407.94553 469.17662,400.57848 454.18568,389.4068 C448.34297,385.05265 438.39899,375.16131 433.89275,369.22131 C412.66837,341.2439 406.72165,305.15299 417.89585,272.13546 C421.36438,261.88664 426.88936,251.26671 433.08252,242.94411 C437.26616,237.322 447.77149,226.73853 453.5297,222.34485 C474.11988,206.63396 500.50657,198.87562 525.5241,201.17674 C535.90705,202.13177 541.78769,203.33865 550.61554,206.32629 C566.76977,211.7934 579.81798,220.06067 592.00997,232.55353 C603.77972,244.61375 611.15971,256.57842 616.42472,272.13546 C626.4136,301.65056 622.90434,332.87082 606.50742,360.3655 C598.83028,373.23868 584.8381,387.2296 571.93506,394.93475 C551.53879,407.11454 528.89998,412.26341 506.23941,409.8763 z M337.42028,405.976 C320.59281,403.47665 306.16279,391.05567 300.82957,374.47969 C298.54115,367.36718 298.54115,355.33179 300.82957,348.21927 C305.39337,334.03469 316.66535,322.76272 330.84992,318.19891 C337.96244,315.9105 349.99783,315.9105 357.11035,318.19891 C371.29492,322.76272 382.5669,334.03469 387.1307,348.21927 C388.46092,352.35367 388.71703,354.47349 388.71703,361.34948 C388.71703,368.22547 388.46092,370.34529 387.1307,374.47969 C382.57727,388.63201 371.11073,400.11532 357.26766,404.38638 C351.87523,406.05013 342.80849,406.77631 337.42028,405.976 z M333.05926,283.9271 C314.73082,281.99634 295.99647,274.62928 281.00554,263.4576 C275.16282,259.10345 265.21884,249.21211 260.7126,243.27211 C239.48823,215.2947 233.5415,179.20379 244.7157,146.18627 C248.18423,135.93744 253.70921,125.31751 259.90237,116.99491 C264.08601,111.3728 274.59134,100.78933 280.34955,96.395647 C308.13137,75.197328 344.43255,69.207858 377.43539,80.377088 C393.58962,85.844198 406.63783,94.111468 418.82982,106.60433 C430.59957,118.66455 437.97956,130.62922 443.24457,146.18627 C453.23344,175.70137 449.7242,206.92162 433.32727,234.4163 C425.65013,247.28948 411.65795,261.2804 398.75492,268.98555 C378.35864,281.16534 355.71983,286.31422 333.05926,283.9271 z" fill="currentColor"/>
+  </symbol>
+</svg>
+
+<div class="nav-wrap">
+  <nav class="nav" aria-label="Primary">
+    <a class="mark" href="page-1.html" aria-label="Hakubai Atelier home">
+      <svg viewBox="0 0 688 688"><use href="#umebachi"/></svg>
+    </a>
+    <ul>
+      <li><a href="page-1.html">Atelier</a></li>
+      <li><a href="page-2.html" aria-current="page">Works</a></li>
+      <li><a href="page-3.html">Practice</a></li>
+      <li><a href="page-4.html">Materials</a></li>
+      <li><a href="page-5.html">Journal</a></li>
+      <li><a href="page-6.html">Studio</a></li>
+    </ul>
+  </nav>
+</div>
+<div class="nav-rule"></div>
+
+<header class="page-head">
+  <div class="seigaiha-bg" aria-hidden="true"></div>
+  <div>
+    <p class="eyebrow">Catalogue 02 — Selected Commissions</p>
+  </div>
+  <h1>Twelve works,<br><em>across ten years</em><br>of joinery and paper.</h1>
+  <p class="lede">A chronological record of completed commissions between 2014 and 2024. Each entry names the principal materials and the carpenter, lacquerer, or paper-maker with whom the studio collaborated.</p>
+</header>
+
+<section class="index-bar" aria-label="Catalogue summary">
+  <div>
+    <div class="label">Span</div>
+    <div>2014 — 2024</div>
+  </div>
+  <div>
+    <div class="label">Joinery</div>
+    <div>06 commissions</div>
+  </div>
+  <div>
+    <div class="label">Lighting</div>
+    <div>03 commissions</div>
+  </div>
+  <div>
+    <div class="label">Interiors</div>
+    <div>03 commissions</div>
+  </div>
+  <div>
+    <div class="label">Total works</div>
+    <div class="accent-num">12</div>
+  </div>
+</section>
+
+<section class="works" aria-label="Completed works">
+
+  <!-- 01 -->
+  <article class="card">
+    <span class="card-kamon" aria-hidden="true"><svg viewBox="0 0 688 688"><use href="#umebachi"/></svg></span>
+    <div class="card-image tone-1"><span class="card-num">No. 01 / 2024</span></div>
+    <h3>Kitano Tenmangū Reading Pavilion</h3>
+    <p class="caption">A small hinoki-framed reading pavilion built within a private courtyard adjoining the shrine grounds, with sliding shōji of double-layered kōzo paper.</p>
+    <p class="meta">2024 · Hinoki · Itō family, Kamigyō-ku</p>
+    <p class="collab">with Yamamoto Daiku, Kameoka</p>
+  </article>
+
+  <!-- 02 -->
+  <article class="card">
+    <span class="card-kamon" aria-hidden="true"><svg viewBox="0 0 688 688"><use href="#umebachi"/></svg></span>
+    <div class="card-image tone-2"><span class="card-num">No. 02 / 2023</span></div>
+    <h3>Kamigyō Tea Room</h3>
+    <p class="caption">A four-and-a-half mat chashitsu inserted into a renovated machiya, joined entirely without metal fasteners. Walls in earthen plaster; tokonoma post in unstripped akamatsu.</p>
+    <p class="meta">2023 · Hinoki, washi, akamatsu · Private, Kyoto</p>
+    <p class="collab">with Tsuji Sashimono, Sakyō-ku</p>
+  </article>
+
+  <!-- 03 empty cell -->
+  <article class="card empty" aria-hidden="true"></article>
+
+  <!-- 04 -->
+  <article class="card">
+    <span class="card-kamon" aria-hidden="true"><svg viewBox="0 0 688 688"><use href="#umebachi"/></svg></span>
+    <div class="card-image tone-3"><span class="card-num">No. 03 / 2022</span></div>
+    <h3>Andon Series No. 7 — for Sasayuri</h3>
+    <p class="caption">Edition of nine floor lanterns commissioned for the ryokan Sasayuri-ann in Nara. Frame of jointed sugi; double shade of hand-pulled kōzo with a single indigo line.</p>
+    <p class="meta">2022 · Sugi, kōzo paper · Sasayuri-ann, Nara</p>
+    <p class="collab">paper by Hatano Wataru, Ayabe</p>
+  </article>
+
+  <!-- 05 -->
+  <article class="card">
+    <span class="card-kamon" aria-hidden="true"><svg viewBox="0 0 688 688"><use href="#umebachi"/></svg></span>
+    <div class="card-image tone-4"><span class="card-num">No. 04 / 2022</span></div>
+    <h3>Honke Owariya Counter Rebuild</h3>
+    <p class="caption">Replacement of the kitchen-side counter at the 550-year-old soba house, salvaging two original keyaki boards and rejoining them with butterfly keys.</p>
+    <p class="meta">2022 · Keyaki (reclaimed) · Honke Owariya, Nakagyō</p>
+    <p class="collab">with Inaba-gumi carpenters</p>
+  </article>
+
+  <!-- 06 empty -->
+  <article class="card empty" aria-hidden="true"></article>
+
+  <!-- 07 -->
+  <article class="card">
+    <span class="card-kamon" aria-hidden="true"><svg viewBox="0 0 688 688"><use href="#umebachi"/></svg></span>
+    <div class="card-image tone-5"><span class="card-num">No. 05 / 2021</span></div>
+    <h3>Mori Residence Kumiko Screen</h3>
+    <p class="caption">A 2.4-metre kumiko screen of asanoha pattern, dividing the genkan from the living room. Cut from a single yakusugi board, recovered from the 2010 thinning programme.</p>
+    <p class="meta">2021 · Yakusugi · Mori family, Ōhara</p>
+    <p class="collab">with Kumiko Ichihara, Hikone</p>
+  </article>
+
+  <!-- 08 -->
+  <article class="card">
+    <span class="card-kamon" aria-hidden="true"><svg viewBox="0 0 688 688"><use href="#umebachi"/></svg></span>
+    <div class="card-image tone-6"><span class="card-num">No. 06 / 2020</span></div>
+    <h3>Gion Bunkō — Archive Cabinetry</h3>
+    <p class="caption">Twelve full-height cabinets in kiri, designed to store woodblock-printed ephemera under stable humidity. Drawers run on traditional wedged dovetails.</p>
+    <p class="meta">2020 · Kiri (paulownia) · Gion Bunkō Foundation</p>
+    <p class="collab">with Nakagawa Mokkōgei, Kamigyō</p>
+  </article>
+
+  <!-- 09 -->
+  <article class="card">
+    <span class="card-kamon" aria-hidden="true"><svg viewBox="0 0 688 688"><use href="#umebachi"/></svg></span>
+    <div class="card-image tone-1"><span class="card-num">No. 07 / 2019</span></div>
+    <h3>Sobaya Tsuruya — Pontochō Counter</h3>
+    <p class="caption">A nine-seat counter for the soba house Tsuruya, single-board hinoki finished only with a planed surface; no varnish. Renewed annually with rice-bran cloth.</p>
+    <p class="meta">2019 · Hinoki · Sobaya Tsuruya, Pontochō</p>
+    <p class="collab">with Yamamoto Daiku, Kameoka</p>
+  </article>
+
+  <!-- 10 -->
+  <article class="card">
+    <span class="card-kamon" aria-hidden="true"><svg viewBox="0 0 688 688"><use href="#umebachi"/></svg></span>
+    <div class="card-image tone-2"><span class="card-num">No. 08 / 2018</span></div>
+    <h3>Andon Series No. 4 — Wall Edition</h3>
+    <p class="caption">A run of fourteen wall-mounted andon for a hotel corridor in Hakone. Frame in finger-jointed sugi; shade of gampi tissue layered over kōzo, lit by 2 W LED.</p>
+    <p class="meta">2018 · Sugi, gampi, kōzo · Gōra Kadan, Hakone</p>
+    <p class="collab">paper by Awagami Factory, Tokushima</p>
+  </article>
+
+  <!-- 11 empty -->
+  <article class="card empty" aria-hidden="true"></article>
+
+  <!-- 12 -->
+  <article class="card">
+    <span class="card-kamon" aria-hidden="true"><svg viewBox="0 0 688 688"><use href="#umebachi"/></svg></span>
+    <div class="card-image tone-3"><span class="card-num">No. 09 / 2017</span></div>
+    <h3>Tsuwano Bookshop Fixtures</h3>
+    <p class="caption">A complete fit-out for an independent bookshop in the castle town of Tsuwano: shelves, counter, low display tables, and a single suspended andon over the entrance.</p>
+    <p class="meta">2017 · Sugi, kōzo paper · Hon-no-mori, Tsuwano</p>
+    <p class="collab">with Iwami Mokkōsha, Shimane</p>
+  </article>
+
+  <!-- 13 -->
+  <article class="card">
+    <span class="card-kamon" aria-hidden="true"><svg viewBox="0 0 688 688"><use href="#umebachi"/></svg></span>
+    <div class="card-image tone-4"><span class="card-num">No. 10 / 2016</span></div>
+    <h3>Ōkubo Atelier — Workbench Series</h3>
+    <p class="caption">A pair of joinery workbenches for the painter Ōkubo Aiko, designed around her left-handed working stance. Each bench joined with through-tenons and oak wedges.</p>
+    <p class="meta">2016 · Mizunara oak · Ōkubo studio, Iwakura</p>
+    <p class="collab">with Tsuji Sashimono, Sakyō-ku</p>
+  </article>
+
+  <!-- 14 -->
+  <article class="card">
+    <span class="card-kamon" aria-hidden="true"><svg viewBox="0 0 688 688"><use href="#umebachi"/></svg></span>
+    <div class="card-image tone-5"><span class="card-num">No. 11 / 2015</span></div>
+    <h3>Higashiyama Guesthouse Interior</h3>
+    <p class="caption">Full interior commission for a six-room guesthouse: shōji, ranma, tokonoma, fixed lighting, and a six-mat dining table milled from a single felled keyaki.</p>
+    <p class="meta">2015 · Hinoki, keyaki, kōzo · Yamashita-tei, Higashiyama</p>
+    <p class="collab">with Inaba-gumi carpenters</p>
+  </article>
+
+  <!-- 15 empty -->
+  <article class="card empty" aria-hidden="true"></article>
+
+  <!-- 16 -->
+  <article class="card">
+    <span class="card-kamon" aria-hidden="true"><svg viewBox="0 0 688 688"><use href="#umebachi"/></svg></span>
+    <div class="card-image tone-6"><span class="card-num">No. 12 / 2014</span></div>
+    <h3>Hakubai Atelier — Studio Counter</h3>
+    <p class="caption">The studio's own working counter, made on commencement of practice. Two-board hinoki top with a butterfly key in cinnabar urushi; the only marked work in the catalogue.</p>
+    <p class="meta">2014 · Hinoki, urushi · Hakubai Atelier, Kamigyō</p>
+    <p class="collab">made in-house, signed by all three founders</p>
+  </article>
+
+</section>
+
+<div class="divider" aria-hidden="true">
+  <span class="line"></span>
+  <span class="ornament">
+    <svg viewBox="0 0 600 600">
+      <polygon points="501.6,301.2 551.1,251.7 500.8,201.4 451.3,250.9 300.9,100.5 350.4,51 300.1,0.7 250.6,50.2 201.1,0.7 150.3,51.5 500.3,401.5 551.1,350.7 " fill="none" stroke="#0c0c0c" stroke-width="2"/>
+      <polygon points="349.9,452.9 300.4,502.4 250.1,452.1 299.6,402.6 149.2,252.2 99.7,301.7 49.4,251.4 98.9,201.9 49.4,152.4 100.2,101.6 450.2,451.6 399.4,502.4 " fill="none" stroke="#0c0c0c" stroke-width="2"/>
+    </svg>
+  </span>
+  <span class="line"></span>
+</div>
+
+<section class="materials" aria-label="Materials index">
+  <div>
+    <p class="eyebrow">Index — A</p>
+    <h2>Materials drawn upon, 2014 — 2024.</h2>
+    <p class="intro">Six woods and two papers carry nearly the full body of work. Counts indicate the number of catalogued commissions in which each material appears as a principal element.</p>
+  </div>
+  <div class="mat-list">
+    <div class="mat">
+      <p class="jp">檜</p>
+      <p class="romaji">Hinoki</p>
+      <p>Japanese cypress, fragrant and pale. Used for tea-room timbers, counters, and the studio's own bench. Sourced from Kiso and Kameoka thinnings.</p>
+      <p class="count">In 05 works</p>
+    </div>
+    <div class="mat">
+      <p class="jp">杉</p>
+      <p class="romaji">Sugi</p>
+      <p>Cryptomeria. The structural wood of the andon frames; cut on the quarter, finger-jointed, finished with raw lacquer.</p>
+      <p class="count">In 03 works</p>
+    </div>
+    <div class="mat">
+      <p class="jp">屋久杉</p>
+      <p class="romaji">Yakusugi</p>
+      <p>Old-growth sugi from Yakushima, only obtained through licensed thinning recovery. Reserved for kumiko and tokonoma posts.</p>
+      <p class="count">In 01 work</p>
+    </div>
+    <div class="mat">
+      <p class="jp">桐</p>
+      <p class="romaji">Kiri</p>
+      <p>Paulownia. Light, dimensionally stable, suited to archival cabinetry and instrument cases. Acquired from Aizu cooperatives.</p>
+      <p class="count">In 01 work</p>
+    </div>
+    <div class="mat">
+      <p class="jp">楮</p>
+      <p class="romaji">Kōzo</p>
+      <p>Paper-mulberry fibre, the principal washi used in our shōji and lantern shades. Hand-beaten and laid on bamboo screens.</p>
+      <p class="count">In 06 works</p>
+    </div>
+    <div class="mat">
+      <p class="jp">雁皮</p>
+      <p class="romaji">Gampi</p>
+      <p>A finer, translucent fibre, layered over kōzo where a softer light is wanted. Reserved for inner shade leaves and tea-room ranma.</p>
+      <p class="count">In 02 works</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="seal" aria-hidden="true"><svg viewBox="0 0 688 688"><use href="#umebachi"/></svg></div>
+  <div class="footer-rule"></div>
+  <div class="footer-cols">
+    <div>
+      <h4>Studio</h4>
+      Hakubai Atelier<br>
+      87 Demizu-dōri, Kamigyō-ku<br>
+      Kyoto 602-8374, Japan<br>
+      Open by appointment<br>
+      Tuesday — Saturday
+    </div>
+    <div>
+      <h4>Contact &amp; Hours</h4>
+      atelier@hakubai.kyoto<br>
+      +81 75 414 2287<br>
+      Workshop visits 10:00 — 16:00<br>
+      Closed in Obon and the<br>
+      first week of January
+    </div>
+    <div>
+      <h4>Colophon</h4>
+      Set in Shippori Mincho<br>
+      and Inter, by Google Fonts.<br>
+      Kamon and seigaiha after<br>
+      Mon-yō reference plates,<br>
+      rendered for this site.<br>
+      SVG marks: CC-BY-SA 3.0.
+    </div>
+  </div>
+  <div class="colophon">
+    <span>Founded 1998 · Kyoto</span>
+    <span>Kamon renderings — CC-BY-SA · © Hakubai Atelier MMXXIV</span>
+  </div>
+</footer>
+
+</body>
+</html>

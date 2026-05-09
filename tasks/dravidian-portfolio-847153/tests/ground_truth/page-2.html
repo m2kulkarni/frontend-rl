@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Selected Works · 1994–2024 — Atelier Sthapati</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  /* ====== TILAKA + ARCADE NAV ====== */
+  .tilaka {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 18px 0 6px;
+    background: var(--bg);
+  }
+  .tilaka-seal {
+    width: 46px; height: 46px;
+    background: var(--surface);
+    border: 2px solid var(--primary);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 0 3px var(--bg), 0 0 0 4px var(--accent);
+  }
+  .tilaka-seal svg { width: 30px; height: 30px; }
+
+  .arcade {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    background: var(--bg);
+    border-top: 3px double var(--primary);
+    border-bottom: 3px double var(--primary);
+    position: relative;
+  }
+  .arcade::before, .arcade::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    height: 1px;
+    background: var(--accent);
+  }
+  .arcade::before { top: 5px; }
+  .arcade::after  { bottom: 5px; }
+
+  .bay {
+    position: relative;
+    text-align: center;
+    padding: 22px 8px 18px;
+    background: var(--surface);
+    text-decoration: none;
+    color: var(--text);
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-variant: small-caps;
+    border-right: 2px solid var(--primary);
+    box-shadow: inset -1px 0 0 var(--accent);
+    transition: background 0.2s;
+  }
+  .bay:first-child { border-left: none; }
+  .bay:last-child  { border-right: none; box-shadow: none; }
+  .bay::before, .bay::after {
+    /* stepped pillar capitals */
+    content: "";
+    position: absolute;
+    left: 50%; transform: translateX(-50%);
+    width: 60%;
+    height: 4px;
+    background: var(--accent);
+  }
+  .bay::before { top: 0; }
+  .bay::after  { bottom: 0; }
+  .bay[aria-current="page"] {
+    background: var(--bg);
+    color: var(--text-emphasis);
+    font-weight: 700;
+  }
+  .bay[aria-current="page"]::before,
+  .bay[aria-current="page"]::after {
+    background: var(--primary);
+    height: 6px;
+  }
+  .bay-label { display: block; }
+  .bay-num {
+    display: block;
+    font-size: 9px;
+    color: var(--secondary);
+    letter-spacing: 0.3em;
+    margin-bottom: 4px;
+  }
+
+  /* ====== HERO BAND ====== */
+  .hero {
+    background: var(--surface);
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+    padding: 36px 60px 28px;
+    position: relative;
+  }
+  .hero-frame {
+    border: 2px solid var(--primary);
+    padding: 28px 40px;
+    background: var(--surface);
+    position: relative;
+  }
+  .hero-frame::before, .hero-frame::after {
+    content: "";
+    position: absolute;
+    left: 8px; right: 8px;
+    height: 1px;
+    background: var(--accent);
+  }
+  .hero-frame::before { top: 6px; }
+  .hero-frame::after  { bottom: 6px; }
+
+  .hero-eyebrow {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    color: var(--secondary);
+    letter-spacing: 0.4em;
+    font-size: 11px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .hero h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 600;
+    text-align: center;
+    margin: 0;
+    font-size: 38px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    font-variant: small-caps;
+    line-height: 1.15;
+  }
+  .hero-sub {
+    text-align: center;
+    font-style: italic;
+    margin: 14px auto 0;
+    max-width: 880px;
+    color: var(--text);
+    font-size: 17px;
+  }
+  .hero-peacocks {
+    display: block;
+    margin: 18px auto 0;
+    width: 92%;
+    height: 26px;
+  }
+  .hero-peacocks svg { width: 100%; height: 100%; display: block; }
+
+  /* ====== TIER BAND (sub-header strip) ====== */
+  .tier-band {
+    background: var(--primary);
+    color: var(--surface);
+    text-align: center;
+    padding: 10px 0;
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.3em;
+    font-size: 12px;
+    text-transform: uppercase;
+    border-top: 4px solid var(--accent);
+    border-bottom: 4px solid var(--accent);
+    position: relative;
+  }
+  .tier-band span { padding: 0 18px; }
+  .tier-band::before, .tier-band::after {
+    content: "❖";
+    color: var(--accent);
+  }
+
+  /* ====== MAIN GRID ====== */
+  main {
+    background: var(--bg);
+    padding: 38px 48px 24px;
+  }
+  .legend {
+    background: var(--surface);
+    border: 1px solid var(--accent);
+    padding: 16px 24px;
+    margin-bottom: 28px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 18px;
+    font-size: 13px;
+  }
+  .legend dt {
+    font-family: var(--font-display), serif;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 3px;
+  }
+  .legend dd { margin: 0; color: var(--text); }
+  .legend dd b { color: var(--text-emphasis); }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 26px;
+  }
+
+  /* ====== CARD ====== */
+  .card {
+    background: var(--surface);
+    position: relative;
+    padding: 0 24px 22px;
+    box-shadow: 0 0 0 1px var(--accent);
+    border-left: 2px solid var(--primary);
+    border-right: 2px solid var(--primary);
+  }
+  /* Carved pillar capitals (top) */
+  .card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: -2px; right: -2px;
+    height: 0;
+    border-bottom: 6px solid var(--primary);
+  }
+  /* Pediment (gopuram tier) */
+  .pediment {
+    margin: 0 -24px 14px;
+    background: var(--bg);
+    position: relative;
+    padding-top: 6px;
+  }
+  .pediment-tier-1, .pediment-tier-2, .pediment-tier-3 {
+    height: 8px;
+    background: var(--primary);
+    margin: 2px auto;
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+  }
+  .pediment-tier-1 { width: 50%; }
+  .pediment-tier-2 { width: 70%; }
+  .pediment-tier-3 { width: 90%; }
+  .pediment-finial {
+    height: 14px;
+    width: 14px;
+    background: var(--accent);
+    transform: rotate(45deg);
+    margin: 0 auto -7px;
+    position: relative;
+    z-index: 2;
+    border: 1px solid var(--primary);
+  }
+
+  .card-title-band {
+    background: var(--secondary);
+    color: var(--surface);
+    margin: 0 -24px 0;
+    padding: 12px 18px;
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-variant: small-caps;
+    text-align: center;
+    line-height: 1.25;
+    border-top: 2px solid var(--accent);
+    border-bottom: 2px solid var(--accent);
+  }
+  .card-meta {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    color: var(--text-emphasis);
+    text-transform: uppercase;
+    padding: 10px 0 4px;
+    border-bottom: 1px dotted var(--accent);
+  }
+  .card-body {
+    font-size: 14.5px;
+    line-height: 1.55;
+    padding: 14px 4px 8px;
+    color: var(--text);
+  }
+  .card-body p { margin: 0 0 8px; }
+  .card-spec {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 4px 10px;
+    font-size: 12.5px;
+    padding: 8px 4px;
+    border-top: 1px dotted var(--accent);
+    border-bottom: 1px dotted var(--accent);
+  }
+  .card-spec dt {
+    font-family: var(--font-display), serif;
+    font-size: 9.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--secondary);
+  }
+  .card-spec dd { margin: 0; color: var(--text); }
+  .role-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    background: var(--bg);
+    color: var(--text-emphasis);
+    font-family: var(--font-display), serif;
+    font-size: 9.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border: 1px solid var(--primary);
+  }
+  .colophon {
+    display: flex;
+    justify-content: center;
+    margin-top: 12px;
+  }
+  .colophon svg { width: 26px; height: 22px; }
+
+  /* ====== TAILPIECE / PALMETTE BAND ====== */
+  .palmette-band {
+    margin: 36px auto 0;
+    width: 90%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .palmette-band::before, .palmette-band::after {
+    content: "";
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--primary), var(--accent), var(--primary), transparent);
+  }
+  .palmette-band svg {
+    height: 56px;
+    margin: 0 16px;
+  }
+
+  /* ====== INDEX TABLE ====== */
+  .index-section {
+    background: var(--surface);
+    margin: 36px 48px 0;
+    border: 2px solid var(--primary);
+    padding: 0;
+  }
+  .index-head {
+    background: var(--text-emphasis);
+    color: var(--surface);
+    text-align: center;
+    padding: 10px 0;
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    border-bottom: 2px solid var(--accent);
+  }
+  table.index {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  table.index th, table.index td {
+    padding: 8px 14px;
+    border-bottom: 1px solid var(--accent);
+    text-align: left;
+  }
+  table.index th {
+    background: var(--bg);
+    font-family: var(--font-display), serif;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+  }
+  table.index tr:nth-child(even) td { background: #fbf8f1; }
+  table.index td.num {
+    font-family: var(--font-display), serif;
+    color: var(--secondary);
+    width: 36px;
+  }
+
+  /* ====== FOOTER ====== */
+  footer {
+    margin-top: 48px;
+    background: var(--bg);
+  }
+  .footer-arcade {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.4fr 1fr 1fr;
+    background: var(--surface);
+    border-top: 4px double var(--primary);
+    border-bottom: 1px solid var(--accent);
+  }
+  .footer-bay {
+    padding: 22px 18px;
+    border-right: 2px solid var(--primary);
+    text-align: center;
+    position: relative;
+  }
+  .footer-bay:last-child { border-right: none; }
+  .footer-bay::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 50%; transform: translateX(-50%);
+    width: 60%;
+    height: 4px;
+    background: var(--accent);
+  }
+  .footer-bay h4 {
+    font-family: var(--font-display), serif;
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    margin: 0 0 8px;
+    color: var(--text-emphasis);
+  }
+  .footer-bay p { margin: 0 0 4px; font-size: 13px; line-height: 1.45; }
+  .footer-bay.center { background: var(--bg); }
+
+  .kolam {
+    width: 130px; height: 130px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .kolam-svg { display: block; }
+  .kolam-svg circle.dot {
+    fill: var(--text-emphasis);
+  }
+  .kolam-svg .ring {
+    fill: none;
+    stroke: var(--primary);
+    stroke-width: 1;
+  }
+  .kolam-svg .ring2 {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 0.6;
+  }
+
+  .footer-rule {
+    height: 0;
+    border-top: 2px solid var(--primary);
+    border-bottom: 2px solid var(--accent);
+    margin: 0;
+    background: var(--surface);
+    padding: 4px 0;
+  }
+  .colophon-line {
+    text-align: center;
+    background: var(--bg);
+    padding: 14px 0 22px;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--text);
+  }
+  .colophon-line .seal {
+    display: inline-block;
+    width: 14px; height: 14px;
+    vertical-align: -2px;
+    margin: 0 8px;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- ===== TILAKA AUM SEAL ===== -->
+<div class="tilaka" aria-hidden="true">
+  <div class="tilaka-seal">
+    <svg viewBox="0 0 356 367" xmlns="http://www.w3.org/2000/svg"><path d="M 90.456847,353.9498 C 51.797347,340.13485 23.72672,305.75839 12.612487,258.6184 C 7.5684267,237.22321 6.1421397,201.86984 10.323594,201.86984 C 11.712834,201.86984 15.42322,211.57056 18.568972,223.427 C 25.452892,249.37152 37.19436,273.76855 48.535988,285.69407 C 67.374717,305.50242 114.0356,313.26029 140.92106,301.05394 C 161.86409,291.54544 170.35697,268.94603 161.24995,246.95931 C 154.21242,229.96943 138.24701,224.28836 108.50834,228.19197 C 108.50834,228.19197 90.282834,208.57398 84.476417,173.73548 L 103.15738,175.42939 C 125.65731,177.46962 142.64532,172.49605 151.46236,161.28728 C 159.74765,150.75419 159.5685,146.68046 150.34841,135.96157 C 137.04396,120.49428 113.15511,124.41248 64.786577,149.99522 L 40.381632,109.08518 L 50.613137,101.2812 C 76.253387,81.724339 120.77357,71.947329 146.11011,80.309169 C 169.18841,87.925649 186.12724,118.14755 181.60247,143.63298 C 178.54327,160.86286 164.72752,184.99524 154.05369,191.75339 L 144.84862,197.58162 L 157.56351,203.31522 C 179.17018,213.05833 192.36061,205.61034 208.12001,174.76849 C 229.92949,132.0869 244.0745,121.0378 276.96658,120.99051 C 292.28176,120.96847 297.73268,122.57499 308.90312,130.4031 C 336.78213,149.94016 351.9622,190.39693 348.62804,236.27272 C 344.40474,294.37435 316.88374,329.61601 275.73415,329.61601 C 253.15086,329.61601 238.59451,321.69526 227.00729,303.10156 C 216.82976,286.76927 212.24334,254.42288 218.08805,240.19369 C 220.89208,233.36732 221.39892,233.13578 221.58223,238.59686 C 221.91916,248.63689 233.34159,264.95549 243.82827,270.37835 C 269.55794,283.68369 306.49479,266.96693 321.10832,235.4032 C 332.20339,211.4394 326.25105,165.21656 311.02084,157.06552 C 307.83453,155.36024 299.96089,153.96502 293.5244,153.96502 C 279.84214,153.96502 269.09709,163.80155 254.03263,190.11774 C 248.82442,199.21613 240.05943,210.97175 234.55486,216.24128 C 225.61134,224.80312 222.41769,225.82225 204.53067,225.82225 L 184.51412,225.82225 L 190.98415,240.19369 C 200.2451,260.76437 199.80694,294.18704 190.00976,314.53347 C 181.35272,332.51252 161.33618,350.71469 145.33374,355.16013 C 129.75572,359.4876 104.38789,358.9281 90.456847,353.9498 z M 165.8338,75.923739 C 156.97908,60.814399 151.52974,32.606158 157.46546,32.606158 C 164.43775,47.732319 178.73037,61.227101 194.03409,70.643259 C 221.52091,83.949329 249.39257,78.578529 279.84247,54.108239 C 286.54595,48.721279 292.48231,44.913138 293.0345,45.645698 C 300.4697,57.184233 313.331,66.613261 317.58219,80.021449 C 317.58219,85.678729 293.22867,101.96033 274.01214,109.15007 C 226.38264,122.8706 193.96598,117.44304 165.8338,75.923739 z M 189.83603,40.997228 L 220.84514,6.6137488 L 255.30593,38.514418 C 243.51876,48.222549 235.00994,63.289118 221.54391,70.930009 C 210.90372,63.086273 195.02308,53.837816 189.83603,40.997228 z " fill="var(--primary)"/></svg>
+  </div>
+</div>
+
+<!-- ===== ARCADE NAV ===== -->
+<nav class="arcade" aria-label="Primary">
+  <a class="bay" href="page-1.html"><span class="bay-num">I</span><span class="bay-label">Sthapati</span></a>
+  <a class="bay" href="page-2.html" aria-current="page"><span class="bay-num">II</span><span class="bay-label">Selected Works</span></a>
+  <a class="bay" href="page-3.html"><span class="bay-num">III</span><span class="bay-label">Drawings · Treatises</span></a>
+  <a class="bay" href="page-4.html"><span class="bay-num">IV</span><span class="bay-label">The Workshop</span></a>
+  <a class="bay" href="page-5.html"><span class="bay-num">V</span><span class="bay-label">Commissions</span></a>
+  <a class="bay" href="page-6.html"><span class="bay-num">VI</span><span class="bay-label">Visit</span></a>
+  <a class="bay" href="page-1.html"><span class="bay-num">⁂</span><span class="bay-label">Colophon</span></a>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-frame">
+    <div class="hero-eyebrow">Folio II · Karma-Patrika</div>
+    <h1>Selected Works · 1994 — 2024</h1>
+    <p class="hero-sub">Three decades of drafting, supervision, and execution in the Chola–Vijayanagara idiom — temples, mandapas, gopurams, and stand-alone sculpture, recorded by Tamil-month and patron, with notes on stone, plaster, and pigment.</p>
+    <div class="hero-peacocks" aria-hidden="true">
+      <svg viewBox="0 0 313.7 29.5" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(54.57,-91.18)">
+          <path fill="var(--text-emphasis)" d="m -45.2,120.2 c -2.08,-0.59 -3.6,-1.34 -4.88,-2.39 -1.67,-1.36 -2.89,-2.64 -2.89,-3.01 0,-0.17 -0.21,-0.47 -0.47,-0.66 -0.82,-0.61 -1.16,-1.85 -1.12,-4.02 0.08,-3.96 0.84,-6.29 3.36,-10.17 2.09,-3.23 6.67,-6.45 10.65,-7.5 2.25,-0.59 8.25,-0.8 11,-0.37 6.95,1.07 16.15,4.46 20.66,7.6 0.85,0.59 0.79,0.62 1.33,-0.65 0.23,-0.54 0.88,-1.6 1.46,-2.37 0.86,-1.14 1.46,-1.6 3.27,-2.49 2.16,-1.06 4.56,-1.78 6.73,-2.01 0.58,-0.06 1.4,-0.24 1.81,-0.4 0.77,-0.29 6.48,-0.2 10.09,0.17 2.26,0.23 9.61,1.68 11.22,2.21 1.16,0.38 1.2,0.38 3.09,-0.54 2.53,-1.23 4.02,-1.48 8.45,-1.4 3.61,0.06 4.29,0.15 6.74,0.82 0.65,0.18 1.72,0.38 2.37,0.44 0.65,0.06 1.84,0.28 2.64,0.49 1.33,0.35 1.63,0.34 3.28,-0.11 4.3,-1.18 16.78,-2.49 20.25,-2.13 0.83,0.09 2.55,0.41 3.84,0.72 2.05,0.49 2.52,0.52 3.78,0.25 3.04,-0.66 6.76,-1.06 11.13,-1.19 4.13,-0.12 4.71,-0.08 6.38,0.43 1.36,0.42 2.11,0.84 2.88,1.62 1.3,1.31 1.63,2.71 1.62,6.82 -0.01,2.96 0.24,4.45 0.63,3.83 0.11,-0.17 0.18,-1.23 0.16,-2.36 -0.1,-5.21 0.07,-6.03 1.67,-8.02 0.85,-1.06 2.65,-2.13 4.1,-2.44 2.82,-0.59 15.89,0.3 18.85,1.29 0.7,0.23 1.34,0.19 3.18,-0.23 4.45,-1 5.16,-1.08 9.67,-1.06 4.02,0.02 5,0.12 8.51,0.85 6.85,1.43 7.2,1.43 12.43,0.18 1.28,-0.31 3.07,-0.45 5.82,-0.46 3.56,-0.01 4.15,0.05 5.69,0.62 0.94,0.35 2.12,0.86 2.6,1.15 0.82,0.48 0.99,0.49 2.38,0.14 1.78,-0.45 5.3,-1.02 9.84,-1.61 3.89,-0.5 11.7,-0.52 15.08,-0.03 5.86,0.84 9.86,3.11 10.57,5.98 l 0.29,1.16 3.36,-1.63 c 3.18,-1.54 8.23,-3.48 11.44,-4.4 4.72,-1.35 12.68,-1.71 16.94,-0.78 4.93,1.08 10.02,5.55 11.64,10.22 0.65,1.88 1.02,5.07 0.79,6.9 -0.47,3.82 -3.08,7.61 -6.48,9.42 -0.51,0.27 -1.11,0.62 -1.33,0.78 -1.28,0.92 -3.99,1.08 -9.4,0.56 -4.23,-0.41 -43.09,-0.56 -48.29,-0.2 -3.37,0.24 -9.72,0.14 -14.18,-0.23 -3.19,-0.26 -11.41,-2.46 -14.96,-4.01 -0.54,-0.24 -1.1,-0.43 -1.25,-0.43 -0.44,0 -0.32,0.67 0.25,1.4 0.64,0.82 0.66,1.47 0.08,2.28 -0.42,0.59 -0.54,0.61 -2.45,0.43 -1.11,-0.11 -3.2,-0.44 -4.65,-0.74 -1.45,-0.3 -4.09,-0.62 -5.86,-0.71 -3.45,-0.17 -4.66,0.02 -8.93,1.4 -2.05,0.66 -2.16,0.67 -4.8,0.33 -1.68,-0.21 -5.04,-0.33 -8.89,-0.29 -6.05,0.05 -6.2,0.04 -7.35,-0.58 -1.32,-0.71 -2.86,-0.67 -5.04,0.12 -0.88,0.32 -2.16,0.43 -4.9,0.44 -4.8,0.01 -5.58,-0.16 -6.13,-1.33 l -0.42,-0.9 -1.09,0.86 c -1.87,1.48 -2.94,1.82 -5.6,1.81 -1.31,-0.01 -3.56,-0.24 -4.99,-0.51 -2.03,-0.39 -2.69,-0.43 -3.04,-0.19 -1.43,1.01 -5.2,1.22 -9.37,0.5 -2.34,-0.4 -4.35,-0.36 -10.12,0.21 -2.37,0.23 -2.39,0.23 -3.97,-0.61 l -1.58,-0.84 -4.76,0 c -3.32,0 -5.33,0.13 -6.65,0.42 -2.95,0.65 -5.18,0.79 -6.35,0.41 -1.39,-0.45 -2.21,-1.26 -2.21,-2.17 0,-0.41 -0.11,-0.75 -0.24,-0.75 -0.13,0 -1.24,0.35 -2.45,0.79 -7.9,2.83 -18.01,3.78 -31.37,2.97 -7.1,-0.43 -10.26,-0.47 -22.84,-0.27 -5.17,0.08 -13.26,0.2 -17.99,0.27 -4.73,0.07 -9.67,0.16 -10.98,0.2 -1.52,0.05 -2.86,-0.06 -3.7,-0.3 z"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<div class="tier-band"><span>Twelve Karma · Granite · Plaster · Pigment · Brass-pin</span></div>
+
+<!-- ===== MAIN ===== -->
+<main>
+
+  <dl class="legend" aria-label="Studio role legend">
+    <div><dt>Drafting Only</dt><dd><b>D</b> — measured drawings, iconographic plates, paper templates supplied to a third-party śilpī.</dd></div>
+    <div><dt>Drafting & Supervision</dt><dd><b>D+S</b> — drawings plus weekly site visits, mason corrections, dimension-stone approval.</dd></div>
+    <div><dt>Full Execution</dt><dd><b>F</b> — chisel-to-consecration: studio carves on-site, kalasha set under our hand.</dd></div>
+    <div><dt>Patron-Inscribed</dt><dd><b>★</b> — the patron's name is recorded in the completed inscription panel.</dd></div>
+  </dl>
+
+  <div class="grid">
+
+    <!-- CARD 1 -->
+    <article class="card">
+      <div class="pediment">
+        <div class="pediment-finial"></div>
+        <div class="pediment-tier-1"></div>
+        <div class="pediment-tier-2"></div>
+        <div class="pediment-tier-3"></div>
+      </div>
+      <h3 class="card-title-band">Gopuram Restoration<br>Sri Sarangapani Trust</h3>
+      <div class="card-meta">Aippasi · 2011 · Kumbakonam</div>
+      <div class="card-body">
+        <p>Re-cutting of the third tier (yamala-tala) and re-pinning of seventeen displaced stucco vyāla figures on the south face of the eastern rāja-gopuram, following the 2010 monsoon settlement.</p>
+      </div>
+      <dl class="card-spec">
+        <dt>Stone</dt><dd>Krishna-river granite, salvaged blocks re-faced</dd>
+        <dt>Plaster</dt><dd>Karaikudi lime, jaggery-fermented, six coats</dd>
+        <dt>Pigment</dt><dd>Vegetable indigo, kāvi red, lamp-black</dd>
+        <dt>Role</dt><dd><span class="role-tag">D + S ★</span></dd>
+      </dl>
+      <div class="colophon" aria-hidden="true">
+        <svg viewBox="0 0 384 301" xmlns="http://www.w3.org/2000/svg"><circle cx="192" cy="150" r="16" fill="var(--primary)"/><circle cx="192" cy="150" r="40" fill="none" stroke="var(--accent)" stroke-width="2"/><circle cx="192" cy="150" r="64" fill="none" stroke="var(--primary)" stroke-width="1"/></svg>
+      </div>
+    </article>
+
+    <!-- CARD 2 -->
+    <article class="card">
+      <div class="pediment">
+        <div class="pediment-finial"></div>
+        <div class="pediment-tier-1"></div>
+        <div class="pediment-tier-2"></div>
+        <div class="pediment-tier-3"></div>
+      </div>
+      <h3 class="card-title-band">Sixteen-Pillared Mandapa<br>Sri Rajagopalaswamy Devasthanam</h3>
+      <div class="card-meta">Vaikasi · 2017 · Mannargudi</div>
+      <div class="card-body">
+        <p>Replacement of four decayed corner pillars and the full re-cutting of sixteen capital-blocks; new dais (jagati) raised by 11 inches to clear flood-line of 2015.</p>
+      </div>
+      <dl class="card-spec">
+        <dt>Stone</dt><dd>Krishna-river black granite, 14 cu. ft. blocks</dd>
+        <dt>Plaster</dt><dd>None — exposed dressed stone</dd>
+        <dt>Pigment</dt><dd>Sandalwood paste finish, ritual only</dd>
+        <dt>Role</dt><dd><span class="role-tag">F ★</span></dd>
+      </dl>
+      <div class="colophon" aria-hidden="true">
+        <svg viewBox="0 0 384 301" xmlns="http://www.w3.org/2000/svg"><circle cx="192" cy="150" r="16" fill="var(--primary)"/><circle cx="192" cy="150" r="40" fill="none" stroke="var(--accent)" stroke-width="2"/><circle cx="192" cy="150" r="64" fill="none" stroke="var(--primary)" stroke-width="1"/></svg>
+      </div>
+    </article>
+
+    <!-- CARD 3 -->
+    <article class="card">
+      <div class="pediment">
+        <div class="pediment-finial"></div>
+        <div class="pediment-tier-1"></div>
+        <div class="pediment-tier-2"></div>
+        <div class="pediment-tier-3"></div>
+      </div>
+      <h3 class="card-title-band">Granite Yali Capitals<br>Set of Eight, Periya Mandapam</h3>
+      <div class="card-meta">Panguni · 2021 · Ariyalur</div>
+      <div class="card-body">
+        <p>Eight free-standing yali-mukha capitals carved in the studio's Kumbakonam yard, transported by lorry, and set at the eastern entry of a private agraharam temple.</p>
+      </div>
+      <dl class="card-spec">
+        <dt>Stone</dt><dd>Krishna-river granite, single-block heads</dd>
+        <dt>Plaster</dt><dd>—</dd>
+        <dt>Pigment</dt><dd>Pupil-eyes inlaid: lac & vermilion</dd>
+        <dt>Role</dt><dd><span class="role-tag">F</span></dd>
+      </dl>
+      <div class="colophon" aria-hidden="true">
+        <svg viewBox="0 0 384 301" xmlns="http://www.w3.org/2000/svg"><circle cx="192" cy="150" r="16" fill="var(--primary)"/><circle cx="192" cy="150" r="40" fill="none" stroke="var(--accent)" stroke-width="2"/><circle cx="192" cy="150" r="64" fill="none" stroke="var(--primary)" stroke-width="1"/></svg>
+      </div>
+    </article>
+
+    <!-- CARD 4 -->
+    <article class="card">
+      <div class="pediment">
+        <div class="pediment-finial"></div>
+        <div class="pediment-tier-1"></div>
+        <div class="pediment-tier-2"></div>
+        <div class="pediment-tier-3"></div>
+      </div>
+      <h3 class="card-title-band">Dhvajasthambha & Bali-pīṭha<br>Vellala Community Trust</h3>
+      <div class="card-meta">Thai · 1994 · Pudukkottai</div>
+      <div class="card-body">
+        <p>The studio's first independent commission. Brass-clad teak flagstaff (33 ft) and a granite bali-pīṭha with twelve compartments for daily-rite offerings, set in a re-paved courtyard.</p>
+      </div>
+      <dl class="card-spec">
+        <dt>Stone</dt><dd>Local Pudukkottai grey granite</dd>
+        <dt>Plaster</dt><dd>Karaikudi lime, sealing-coat only</dd>
+        <dt>Pigment</dt><dd>Sindūr at the four cardinal faces</dd>
+        <dt>Role</dt><dd><span class="role-tag">D + S</span></dd>
+      </dl>
+      <div class="colophon" aria-hidden="true">
+        <svg viewBox="0 0 384 301" xmlns="http://www.w3.org/2000/svg"><circle cx="192" cy="150" r="16" fill="var(--primary)"/><circle cx="192" cy="150" r="40" fill="none" stroke="var(--accent)" stroke-width="2"/><circle cx="192" cy="150" r="64" fill="none" stroke="var(--primary)" stroke-width="1"/></svg>
+      </div>
+    </article>
+
+    <!-- CARD 5 -->
+    <article class="card">
+      <div class="pediment">
+        <div class="pediment-finial"></div>
+        <div class="pediment-tier-1"></div>
+        <div class="pediment-tier-2"></div>
+        <div class="pediment-tier-3"></div>
+      </div>
+      <h3 class="card-title-band">Garbhagṛha Vimāna Plates<br>Sri Bhū-Varāha Temple</h3>
+      <div class="card-meta">Maasi · 2003 · Srimushnam</div>
+      <div class="card-body">
+        <p>Set of forty-seven measured drawings (1:8) of the existing vimāna prior to a contested 2002 cement-coat removal. Drawings later filed with the HR&CE office, Cuddalore.</p>
+      </div>
+      <dl class="card-spec">
+        <dt>Stone</dt><dd>Survey only — no fresh stone</dd>
+        <dt>Plaster</dt><dd>Recorded condition of inherited lime</dd>
+        <dt>Pigment</dt><dd>Drawings in ferro-gallotannate ink</dd>
+        <dt>Role</dt><dd><span class="role-tag">D</span></dd>
+      </dl>
+      <div class="colophon" aria-hidden="true">
+        <svg viewBox="0 0 384 301" xmlns="http://www.w3.org/2000/svg"><circle cx="192" cy="150" r="16" fill="var(--primary)"/><circle cx="192" cy="150" r="40" fill="none" stroke="var(--accent)" stroke-width="2"/><circle cx="192" cy="150" r="64" fill="none" stroke="var(--primary)" stroke-width="1"/></svg>
+      </div>
+    </article>
+
+    <!-- CARD 6 -->
+    <article class="card">
+      <div class="pediment">
+        <div class="pediment-finial"></div>
+        <div class="pediment-tier-1"></div>
+        <div class="pediment-tier-2"></div>
+        <div class="pediment-tier-3"></div>
+      </div>
+      <h3 class="card-title-band">Nataraja Bronze-Stone Pair<br>Iyer Family, Chennai</h3>
+      <div class="card-meta">Aadi · 2008 · Mylapore</div>
+      <div class="card-body">
+        <p>A 28-inch granite Nataraja for the household shrine, paired with a lost-wax bronze of the same iconography — the bronze cast at the Swamimalai foundry of K. Devasenapathy.</p>
+      </div>
+      <dl class="card-spec">
+        <dt>Stone</dt><dd>Krishna-river black granite, single block</dd>
+        <dt>Plaster</dt><dd>—</dd>
+        <dt>Pigment</dt><dd>Polished only; no surface pigment</dd>
+        <dt>Role</dt><dd><span class="role-tag">F ★</span></dd>
+      </dl>
+      <div class="colophon" aria-hidden="true">
+        <svg viewBox="0 0 384 301" xmlns="http://www.w3.org/2000/svg"><circle cx="192" cy="150" r="16" fill="var(--primary)"/><circle cx="192" cy="150" r="40" fill="none" stroke="var(--accent)" stroke-width="2"/><circle cx="192" cy="150" r="64" fill="none" stroke="var(--primary)" stroke-width="1"/></svg>
+      </div>
+    </article>
+
+    <!-- CARD 7 -->
+    <article class="card">
+      <div class="pediment">
+        <div class="pediment-finial"></div>
+        <div class="pediment-tier-1"></div>
+        <div class="pediment-tier-2"></div>
+        <div class="pediment-tier-3"></div>
+      </div>
+      <h3 class="card-title-band">Stucco Refurbishment<br>Sri Adi-Kumbeswarar Trust</h3>
+      <div class="card-meta">Karthigai · 2015 · Kumbakonam</div>
+      <div class="card-body">
+        <p>Renewal of forty-two stucco figures of dvārapālas, gandharvas, and apsarases on the inner prākāra wall, including re-laying of substrate plaster on previously cement-patched zones.</p>
+      </div>
+      <dl class="card-spec">
+        <dt>Stone</dt><dd>Existing — no new stone</dd>
+        <dt>Plaster</dt><dd>Karaikudi lime, kuṭṭāṇam method</dd>
+        <dt>Pigment</dt><dd>Indigo, geru, haldi, lamp-black</dd>
+        <dt>Role</dt><dd><span class="role-tag">F</span></dd>
+      </dl>
+      <div class="colophon" aria-hidden="true">
+        <svg viewBox="0 0 384 301" xmlns="http://www.w3.org/2000/svg"><circle cx="192" cy="150" r="16" fill="var(--primary)"/><circle cx="192" cy="150" r="40" fill="none" stroke="var(--accent)" stroke-width="2"/><circle cx="192" cy="150" r="64" fill="none" stroke="var(--primary)" stroke-width="1"/></svg>
+        </div>
+    </article>
+
+    <!-- CARD 8 -->
+    <article class="card">
+      <div class="pediment">
+        <div class="pediment-finial"></div>
+        <div class="pediment-tier-1"></div>
+        <div class="pediment-tier-2"></div>
+        <div class="pediment-tier-3"></div>
+      </div>
+      <h3 class="card-title-band">Navagraha Pavilion<br>Sri Suryanarkoil Devasthanam</h3>
+      <div class="card-meta">Aavani · 2019 · Suryanarkoil</div>
+      <div class="card-body">
+        <p>A nine-pillared open pavilion housing the Navagraha images, with floor-laid yantra in inlaid brass-strip and granite, oriented to the studio's measured azimuth chart.</p>
+      </div>
+      <dl class="card-spec">
+        <dt>Stone</dt><dd>Krishna-river granite & local sandstone trim</dd>
+        <dt>Plaster</dt><dd>Karaikudi lime, ceiling coffers only</dd>
+        <dt>Pigment</dt><dd>Nine planet-colours per Mānasāra ch. 51</dd>
+        <dt>Role</dt><dd><span class="role-tag">D + S ★</span></dd>
+      </dl>
+      <div class="colophon" aria-hidden="true">
+        <svg viewBox="0 0 384 301" xmlns="http://www.w3.org/2000/svg"><circle cx="192" cy="150" r="16" fill="var(--primary)"/><circle cx="192" cy="150" r="40" fill="none" stroke="var(--accent)" stroke-width="2"/><circle cx="192" cy="150" r="64" fill="none" stroke="var(--primary)" stroke-width="1"/></svg>
+      </div>
+    </article>
+
+    <!-- CARD 9 -->
+    <article class="card">
+      <div class="pediment">
+        <div class="pediment-finial"></div>
+        <div class="pediment-tier-1"></div>
+        <div class="pediment-tier-2"></div>
+        <div class="pediment-tier-3"></div>
+      </div>
+      <h3 class="card-title-band">Lintel & Door-Jamb Set<br>Chettiar Bungalow Restoration</h3>
+      <div class="card-meta">Maargazhi · 1999 · Karaikudi</div>
+      <div class="card-body">
+        <p>A pair of carved teakwood door-jambs and granite threshold for the renovation of a Chettiar courtyard house. Lakṣmī-vyāla motif on the jamb, kīrtimukha at the lintel-centre.</p>
+      </div>
+      <dl class="card-spec">
+        <dt>Stone</dt><dd>Granite threshold; teak jambs</dd>
+        <dt>Plaster</dt><dd>—</dd>
+        <dt>Pigment</dt><dd>Linseed-oil polish on teak</dd>
+        <dt>Role</dt><dd><span class="role-tag">D + S</span></dd>
+      </dl>
+      <div class="colophon" aria-hidden="true">
+        <svg viewBox="0 0 384 301" xmlns="http://www.w3.org/2000/svg"><circle cx="192" cy="150" r="16" fill="var(--primary)"/><circle cx="192" cy="150" r="40" fill="none" stroke="var(--accent)" stroke-width="2"/><circle cx="192" cy="150" r="64" fill="none" stroke="var(--primary)" stroke-width="1"/></svg>
+      </div>
+    </article>
+
+    <!-- CARD 10 -->
+    <article class="card">
+      <div class="pediment">
+        <div class="pediment-finial"></div>
+        <div class="pediment-tier-1"></div>
+        <div class="pediment-tier-2"></div>
+        <div class="pediment-tier-3"></div>
+      </div>
+      <h3 class="card-title-band">Vimāna Stucco Re-Modelling<br>Sri Vaitheeswaran Trust</h3>
+      <div class="card-meta">Chittirai · 2013 · Vaitheeswarankoil</div>
+      <div class="card-body">
+        <p>Replacement of severely cement-patched stucco from the 1968 kumbābhiṣekam with traditional lime work; re-modelling of two niche-figures destroyed by a falling palm.</p>
+      </div>
+      <dl class="card-spec">
+        <dt>Stone</dt><dd>Substrate stone untouched</dd>
+        <dt>Plaster</dt><dd>Lime + jaggery + kadukkai, three-coat</dd>
+        <dt>Pigment</dt><dd>Geru, kāvi, indigo, white-clay ground</dd>
+        <dt>Role</dt><dd><span class="role-tag">F</span></dd>
+      </dl>
+      <div class="colophon" aria-hidden="true">
+        <svg viewBox="0 0 384 301" xmlns="http://www.w3.org/2000/svg"><circle cx="192" cy="150" r="16" fill="var(--primary)"/><circle cx="192" cy="150" r="40" fill="none" stroke="var(--accent)" stroke-width="2"/><circle cx="192" cy="150" r="64" fill="none" stroke="var(--primary)" stroke-width="1"/></svg>
+      </div>
+    </article>
+
+    <!-- CARD 11 -->
+    <article class="card">
+      <div class="pediment">
+        <div class="pediment-finial"></div>
+        <div class="pediment-tier-1"></div>
+        <div class="pediment-tier-2"></div>
+        <div class="pediment-tier-3"></div>
+      </div>
+      <h3 class="card-title-band">Inscription Panel & Pādukā<br>Madurai Srī Vaiṣṇava Sabhā</h3>
+      <div class="card-meta">Purattasi · 2006 · Madurai</div>
+      <div class="card-body">
+        <p>A four-line Tamil-Grantha donor inscription cut on a single granite slab, paired with a footprint pādukā shrine raised over a relic-stone, accompanying a centenary endowment.</p>
+      </div>
+      <dl class="card-spec">
+        <dt>Stone</dt><dd>Single-piece Krishna-river granite slab</dd>
+        <dt>Plaster</dt><dd>—</dd>
+        <dt>Pigment</dt><dd>Letters filled with red ochre paste</dd>
+        <dt>Role</dt><dd><span class="role-tag">F ★</span></dd>
+      </dl>
+      <div class="colophon" aria-hidden="true">
+        <svg viewBox="0 0 384 301" xmlns="http://www.w3.org/2000/svg"><circle cx="192" cy="150" r="16" fill="var(--primary)"/><circle cx="192" cy="150" r="40" fill="none" stroke="var(--accent)" stroke-width="2"/><circle cx="192" cy="150" r="64" fill="none" stroke="var(--primary)" stroke-width="1"/></svg>
+      </div>
+    </article>
+
+    <!-- CARD 12 -->
+    <article class="card">
+      <div class="pediment">
+        <div class="pediment-finial"></div>
+        <div class="pediment-tier-1"></div>
+        <div class="pediment-tier-2"></div>
+        <div class="pediment-tier-3"></div>
+      </div>
+      <h3 class="card-title-band">Open-Air Gopuram Plates<br>For the Tamil Nadu HR&CE</h3>
+      <div class="card-meta">Aippasi · 2024 · Thanjavur Region</div>
+      <div class="card-body">
+        <p>A continuing folio of measured elevations of seventeen rural rāja-gopurams in the Cauvery delta, prepared at the request of the HR&CE survey cell, Thanjavur.</p>
+      </div>
+      <dl class="card-spec">
+        <dt>Stone</dt><dd>Survey of inherited fabric only</dd>
+        <dt>Plaster</dt><dd>Condition reports filed by tier</dd>
+        <dt>Pigment</dt><dd>Ink: ferro-gallotannate; wash: indigo</dd>
+        <dt>Role</dt><dd><span class="role-tag">D</span></dd>
+      </dl>
+      <div class="colophon" aria-hidden="true">
+        <svg viewBox="0 0 384 301" xmlns="http://www.w3.org/2000/svg"><circle cx="192" cy="150" r="16" fill="var(--primary)"/><circle cx="192" cy="150" r="40" fill="none" stroke="var(--accent)" stroke-width="2"/><circle cx="192" cy="150" r="64" fill="none" stroke="var(--primary)" stroke-width="1"/></svg>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- PALMETTE BAND DIVIDER -->
+  <div class="palmette-band" aria-hidden="true">
+    <svg viewBox="0 0 700 300" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(50,30)">
+        <path fill="var(--primary)" d="M 195,27 c -17,0.2 -17,9.5 -17,16 4,-6 11,-7 14,-5 26,14 30,55 37,85 l 5,3 c -5,-26 -6,-52 -16,-77 -5,-14 -16,-22 -23,-22 z m 89,0 c -6,-0.1 -17,8 -22,22 -9,25 -11,51 -16,77 l 5,-3 c 7,-30 10,-71 37,-85 3,-2 10,-1 14,5 0.1,-7 0,-16 -17,-16 z m 76,0 c -17,0.2 -17,9.5 -17,16 4,-6 11,-7 14,-5 26,14 30,55 37,85 l 5,3 c -5,-26 -6,-52 -16,-77 -5,-14 -16,-22 -23,-22 z m 89,0 c -6,-0.1 -17,8 -22,22 -9,25 -11,51 -16,77 l 5,-3 c 7,-30 10,-71 37,-85 3,-2 10,-1 14,5 0.1,-7 0,-16 -17,-16 z"/>
+        <circle cx="322" cy="160" r="8" fill="var(--accent)"/>
+        <circle cx="322" cy="160" r="20" fill="none" stroke="var(--primary)" stroke-width="2"/>
+      </g>
+    </svg>
+  </div>
+
+</main>
+
+<!-- ===== INDEX ===== -->
+<section class="index-section" aria-label="Index of works">
+  <div class="index-head">Index · By Tamil-Month, Ascending</div>
+  <table class="index">
+    <thead>
+      <tr>
+        <th>№</th>
+        <th>Tamil-Month / Year</th>
+        <th>Project</th>
+        <th>Patron</th>
+        <th>Locality</th>
+        <th>Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="num">i</td><td>Thai · 1994</td><td>Dhvajasthambha & Bali-pīṭha</td><td>Vellala Community Trust</td><td>Pudukkottai</td><td>D + S</td></tr>
+      <tr><td class="num">ii</td><td>Maargazhi · 1999</td><td>Lintel & Door-Jamb Set</td><td>Meyyappan Chettiar Family</td><td>Karaikudi</td><td>D + S</td></tr>
+      <tr><td class="num">iii</td><td>Maasi · 2003</td><td>Garbhagṛha Vimāna Plates</td><td>Sri Bhū-Varāha Temple</td><td>Srimushnam</td><td>D</td></tr>
+      <tr><td class="num">iv</td><td>Purattasi · 2006</td><td>Inscription & Pādukā Shrine</td><td>Madurai Srī Vaiṣṇava Sabhā</td><td>Madurai</td><td>F ★</td></tr>
+      <tr><td class="num">v</td><td>Aadi · 2008</td><td>Nataraja Stone-Bronze Pair</td><td>R. Iyer (Pvt)</td><td>Mylapore, Chennai</td><td>F ★</td></tr>
+      <tr><td class="num">vi</td><td>Aippasi · 2011</td><td>Gopuram Restoration, 3rd Tier</td><td>Sri Sarangapani Trust</td><td>Kumbakonam</td><td>D + S ★</td></tr>
+      <tr><td class="num">vii</td><td>Chittirai · 2013</td><td>Vimāna Stucco Re-Modelling</td><td>Sri Vaitheeswaran Trust</td><td>Vaitheeswarankoil</td><td>F</td></tr>
+      <tr><td class="num">viii</td><td>Karthigai · 2015</td><td>Inner Prākāra Stucco Renewal</td><td>Sri Adi-Kumbeswarar Trust</td><td>Kumbakonam</td><td>F</td></tr>
+      <tr><td class="num">ix</td><td>Vaikasi · 2017</td><td>Sixteen-Pillared Mandapa</td><td>Sri Rajagopalaswamy Devast.</td><td>Mannargudi</td><td>F ★</td></tr>
+      <tr><td class="num">x</td><td>Aavani · 2019</td><td>Navagraha Pavilion</td><td>Sri Suryanarkoil Devast.</td><td>Suryanarkoil</td><td>D + S ★</td></tr>
+      <tr><td class="num">xi</td><td>Panguni · 2021</td><td>Yali Capitals (set of eight)</td><td>Pvt. Agraharam Trust</td><td>Ariyalur</td><td>F</td></tr>
+      <tr><td class="num">xii</td><td>Aippasi · 2024</td><td>Open-Air Gopuram Plates</td><td>HR&CE, Tamil Nadu</td><td>Thanjavur Region</td><td>D</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-arcade">
+    <div class="footer-bay">
+      <h4>Studio</h4>
+      <p>Atelier Sthapati</p>
+      <p>R. Kalyanasundaram, Sthapati</p>
+      <p>Apprentices · four</p>
+    </div>
+    <div class="footer-bay">
+      <h4>Address</h4>
+      <p>14, Sannidhi Street</p>
+      <p>Kumbakonam 612001</p>
+      <p>Thanjavur Dist., T.N.</p>
+    </div>
+    <div class="footer-bay center">
+      <div class="kolam" aria-hidden="true">
+        <svg class="kolam-svg" viewBox="0 0 130 130" xmlns="http://www.w3.org/2000/svg">
+          <circle class="ring" cx="65" cy="65" r="58"/>
+          <circle class="ring2" cx="65" cy="65" r="48"/>
+          <circle class="ring" cx="65" cy="65" r="38"/>
+          <circle class="ring2" cx="65" cy="65" r="26"/>
+          <circle class="ring" cx="65" cy="65" r="14"/>
+          <!-- radial dots -->
+          <g>
+            <circle class="dot" cx="65" cy="7" r="2"/>
+            <circle class="dot" cx="65" cy="123" r="2"/>
+            <circle class="dot" cx="7" cy="65" r="2"/>
+            <circle class="dot" cx="123" cy="65" r="2"/>
+            <circle class="dot" cx="106" cy="24" r="2"/>
+            <circle class="dot" cx="24" cy="24" r="2"/>
+            <circle class="dot" cx="106" cy="106" r="2"/>
+            <circle class="dot" cx="24" cy="106" r="2"/>
+            <!-- inner dots ring -->
+            <circle class="dot" cx="65" cy="27" r="1.6"/>
+            <circle class="dot" cx="65" cy="103" r="1.6"/>
+            <circle class="dot" cx="27" cy="65" r="1.6"/>
+            <circle class="dot" cx="103" cy="65" r="1.6"/>
+            <circle class="dot" cx="92" cy="38" r="1.6"/>
+            <circle class="dot" cx="38" cy="38" r="1.6"/>
+            <circle class="dot" cx="92" cy="92" r="1.6"/>
+            <circle class="dot" cx="38" cy="92" r="1.6"/>
+            <!-- centre rosette -->
+            <circle class="dot" cx="65" cy="55" r="1.4"/>
+            <circle class="dot" cx="65" cy="75" r="1.4"/>
+            <circle class="dot" cx="55" cy="65" r="1.4"/>
+            <circle class="dot" cx="75" cy="65" r="1.4"/>
+            <circle class="dot" cx="65" cy="65" r="2.6" fill="var(--primary)"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <div class="footer-bay">
+      <h4>Correspondence</h4>
+      <p>Post: above address</p>
+      <p>Telephone · 0435-242-1186</p>
+      <p>Letter preferred to e-mail</p>
+    </div>
+    <div class="footer-bay">
+      <h4>Dates</h4>
+      <p>Established · Maasi 1994</p>
+      <p>Folio current to · 2024</p>
+      <p>Twelve karma recorded</p>
+    </div>
+  </div>
+  <div class="footer-rule"></div>
+  <div class="colophon-line">
+    <svg class="seal" viewBox="0 0 356 367" xmlns="http://www.w3.org/2000/svg"><path d="M 90,353 C 51,340 23,305 12,258 C 7,237 6,201 10,201 C 11,201 15,211 18,223 C 25,249 37,273 48,285 C 67,305 114,313 140,301 C 161,291 170,268 161,246 C 154,229 138,224 108,228 C 108,228 90,208 84,173 L 103,175 C 125,177 142,172 151,161 C 159,150 159,146 150,135 C 137,120 113,124 64,149 L 40,109 L 50,101 C 76,81 120,71 146,80 C 169,87 186,118 181,143 C 178,160 164,184 154,191 L 144,197 L 157,203 C 179,213 192,205 208,174 C 229,132 244,121 276,120 C 292,120 297,122 308,130 C 336,149 351,190 348,236 C 344,294 316,329 275,329 C 253,329 238,321 227,303 C 216,286 212,254 218,240 C 220,233 221,233 221,238 C 221,248 233,264 243,270 C 269,283 306,266 321,235 C 332,211 326,165 311,157 C 307,155 299,153 293,153 C 279,153 269,163 254,190 C 248,199 240,210 234,216 C 225,224 222,225 204,225 L 184,225 L 190,240 C 200,260 199,294 190,314 C 181,332 161,350 145,355 C 129,359 104,358 90,353 z" fill="var(--primary)"/></svg>
+    Folio sealed in the studio at Kumbakonam · Aippasi-māsi, year Krodhana, Saka 1946 · being the 24th day of October, MMXXIV
+    <svg class="seal" viewBox="0 0 356 367" xmlns="http://www.w3.org/2000/svg"><path d="M 90,353 C 51,340 23,305 12,258 C 7,237 6,201 10,201 C 11,201 15,211 18,223 C 25,249 37,273 48,285 C 67,305 114,313 140,301 C 161,291 170,268 161,246 C 154,229 138,224 108,228 C 108,228 90,208 84,173 L 103,175 C 125,177 142,172 151,161 C 159,150 159,146 150,135 C 137,120 113,124 64,149 L 40,109 L 50,101 C 76,81 120,71 146,80 C 169,87 186,118 181,143 C 178,160 164,184 154,191 L 144,197 L 157,203 C 179,213 192,205 208,174 C 229,132 244,121 276,120 C 292,120 297,122 308,130 C 336,149 351,190 348,236 C 344,294 316,329 275,329 C 253,329 238,321 227,303 C 216,286 212,254 218,240 C 220,233 221,233 221,238 C 221,248 233,264 243,270 C 269,283 306,266 321,235 C 332,211 326,165 311,157 C 307,155 299,153 293,153 C 279,153 269,163 254,190 C 248,199 240,210 234,216 C 225,224 222,225 204,225 L 184,225 L 190,240 C 200,260 199,294 190,314 C 181,332 161,350 145,355 C 129,359 104,358 90,353 z" fill="var(--primary)"/></svg>
+  </div>
+</footer>
+
+</body>
+</html>

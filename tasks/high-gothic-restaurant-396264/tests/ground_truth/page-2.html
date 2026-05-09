@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>The Supper — Maison Saint-Vrain</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    position: relative;
+  }
+
+  /* Diaper background field */
+  .diaper-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-color: var(--bg);
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 600 600'><g transform='translate(300,300)scale(0.87)rotate(45)' fill='%230a0a0a' opacity='0.07'><circle cx='-195.16' r='163'/><circle cx='195.16' r='163'/><circle cy='195.16' r='163'/><circle cy='-195.16' r='163'/><rect x='-232' y='-232' width='464' height='464'/><g fill='%23f4ecd8'><circle cx='-195.16' r='157'/><circle cx='195.16' r='157'/><circle cy='195.16' r='157'/><circle cy='-195.16' r='157'/><rect x='-226' y='-226' width='452' height='452'/></g><circle cx='-195.16' r='144'/><circle cx='195.16' r='144'/><circle cy='195.16' r='144'/><circle cy='-195.16' r='144'/><rect x='-213' y='-213' width='426' height='426'/><g fill='%23f4ecd8'><circle cx='-195.16' r='138'/><circle cx='195.16' r='138'/><circle cy='195.16' r='138'/><circle cy='-195.16' r='138'/><rect x='-207' y='-207' width='414' height='414'/></g></g></svg>");
+    background-size: 90px 90px;
+  }
+
+  /* ====== NAVIGATION ARCADE ====== */
+  .arcade-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bg);
+    border-bottom: 1.5px solid var(--accent);
+    padding: 0;
+  }
+  .arcade-nav-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 0;
+    padding: 0 40px;
+  }
+  .nav-arch {
+    position: relative;
+    width: 165px;
+    height: 78px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-family: var(--font-display), serif;
+    font-size: 11.5px;
+    font-variant: small-caps;
+    color: var(--text);
+    padding-bottom: 14px;
+  }
+  .nav-arch svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+  .nav-arch span {
+    position: relative;
+    z-index: 1;
+  }
+  .nav-arch:hover { color: var(--secondary); }
+  .nav-arch[aria-current="page"] {
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .nav-arch[aria-current="page"] .arch-fill { fill: var(--secondary); }
+
+  /* ====== HERO ====== */
+  .hero {
+    text-align: center;
+    padding: 80px 40px 40px;
+    position: relative;
+  }
+  .hero .eyebrow {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.4em;
+    color: var(--accent);
+    font-size: 14px;
+  }
+  .hero h1 {
+    font-family: var(--font-display), serif;
+    font-size: 68px;
+    font-weight: 500;
+    line-height: 1.05;
+    margin: 18px 0 10px;
+    color: var(--primary);
+    letter-spacing: 0.02em;
+  }
+  .hero .date {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    color: var(--secondary);
+    font-size: 22px;
+    margin-bottom: 8px;
+  }
+  .hero .lede {
+    max-width: 640px;
+    margin: 24px auto 0;
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.8;
+  }
+
+  /* ====== SECTION DIVIDER ====== */
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 30px auto 50px;
+    max-width: 700px;
+    gap: 24px;
+  }
+  .divider::before, .divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--ornament);
+  }
+  .divider svg {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+  }
+
+  /* ====== COURSE CARDS ====== */
+  .courses {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 40px 60px;
+  }
+  .course-card {
+    position: relative;
+    margin-bottom: 70px;
+    padding: 0 60px;
+  }
+  .course-arch {
+    position: relative;
+    border: 2px solid var(--ornament);
+    border-radius: 0;
+    padding: 70px 50px 50px;
+    background: var(--bg);
+    /* Pointed arch top via clip-path */
+    clip-path: polygon(
+      0 30%, 0 100%, 100% 100%, 100% 30%,
+      85% 18%, 70% 9%, 50% 0%, 30% 9%, 15% 18%
+    );
+  }
+  /* Use SVG approach for arch frame instead */
+  .course-card {
+    position: relative;
+    margin-bottom: 80px;
+  }
+  .arch-frame {
+    position: relative;
+    background:
+      radial-gradient(ellipse at 50% 0%, transparent 0 90px, var(--bg) 91px);
+    padding: 0;
+  }
+  .arch-svg-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .arch-content {
+    position: relative;
+    z-index: 1;
+    padding: 110px 80px 60px;
+    text-align: center;
+  }
+  .quatrefoil {
+    position: absolute;
+    top: 22px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 36px;
+    height: 36px;
+    z-index: 2;
+  }
+  .course-label {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.32em;
+    color: var(--accent);
+    font-size: 13px;
+    margin-bottom: 8px;
+  }
+  .course-rule {
+    width: 80px;
+    height: 1px;
+    background: var(--ornament);
+    margin: 8px auto 24px;
+  }
+  .course-name {
+    font-family: var(--font-display), serif;
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--primary);
+    margin: 0 0 20px;
+    line-height: 1.2;
+  }
+  .course-desc {
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.85;
+    max-width: 460px;
+    margin: 0 auto;
+    text-align: left;
+  }
+  .course-desc p { margin: 0; }
+  .vine-inline {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 14px 0;
+  }
+  .vine-inline svg {
+    width: 28px;
+    height: 28px;
+    fill: var(--accent);
+  }
+  .course-price {
+    margin-top: 28px;
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.2em;
+    color: var(--secondary);
+    font-size: 14px;
+  }
+  .course-num {
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    color: var(--accent);
+    letter-spacing: 0.3em;
+    z-index: 3;
+  }
+
+  /* ====== SUPPER NOTE ====== */
+  .supper-note {
+    max-width: 720px;
+    margin: 40px auto 80px;
+    padding: 50px 60px;
+    text-align: center;
+    border-top: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+    position: relative;
+  }
+  .supper-note::before, .supper-note::after {
+    content: "";
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    transform: rotate(45deg);
+    left: 50%;
+    margin-left: -3px;
+  }
+  .supper-note::before { top: -4px; }
+  .supper-note::after { bottom: -4px; }
+  .supper-note h2 {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.25em;
+    color: var(--primary);
+    font-size: 18px;
+    margin: 0 0 18px;
+  }
+  .supper-note p {
+    color: var(--text);
+    line-height: 1.85;
+    margin: 8px 0;
+  }
+  .supper-note strong {
+    color: var(--secondary);
+    font-weight: 600;
+  }
+  .farms {
+    margin-top: 24px;
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    color: var(--text-emphasis);
+    font-size: 17px;
+  }
+
+  /* ====== FOOTER ARCADE ====== */
+  footer {
+    border-top: 1.5px solid var(--accent);
+    padding: 50px 40px 30px;
+    background: var(--bg);
+  }
+  .footer-arcade {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 40px;
+  }
+  .foot-arch {
+    width: 80px;
+    height: 100px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .foot-arch svg.frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .foot-arch svg.glyph {
+    width: 28px;
+    height: 28px;
+    position: relative;
+    z-index: 1;
+    fill: var(--ornament);
+  }
+  .footer-cols {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+  }
+  .footer-col {
+    padding: 0 28px;
+    text-align: center;
+    border-right: 1px solid var(--accent);
+  }
+  .footer-col:last-child { border-right: none; }
+  .footer-col h4 {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.28em;
+    color: var(--accent);
+    font-size: 12px;
+    margin: 0 0 10px;
+    font-weight: 500;
+  }
+  .footer-col p {
+    margin: 4px 0;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--text);
+  }
+  .footer-seal {
+    margin-top: 40px;
+    text-align: center;
+  }
+  .footer-seal svg {
+    width: 38px;
+    height: 38px;
+    fill: var(--ornament);
+  }
+  .footer-seal .copy {
+    margin-top: 12px;
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.2em;
+    color: var(--text);
+    font-size: 11px;
+  }
+</style>
+</head>
+<body>
+
+<div class="diaper-bg" aria-hidden="true"></div>
+
+<!-- ========== NAV ARCADE ========== -->
+<nav class="arcade-nav" aria-label="Main">
+  <div class="arcade-nav-inner">
+    <a class="nav-arch" href="page-1.html">
+      <svg viewBox="0 0 165 78" preserveAspectRatio="none" aria-hidden="true">
+        <path class="arch-fill" d="M 8 78 L 8 38 Q 82.5 -10 157 38 L 157 78 Z" fill="none" stroke="#0a0a0a" stroke-width="1.2"/>
+      </svg>
+      <span>The House</span>
+    </a>
+    <a class="nav-arch" href="page-2.html" aria-current="page">
+      <svg viewBox="0 0 165 78" preserveAspectRatio="none" aria-hidden="true">
+        <path class="arch-fill" d="M 8 78 L 8 38 Q 82.5 -10 157 38 L 157 78 Z" fill="#1e3a5f" stroke="#0a0a0a" stroke-width="1.2"/>
+      </svg>
+      <span>The Supper</span>
+    </a>
+    <a class="nav-arch" href="page-3.html">
+      <svg viewBox="0 0 165 78" preserveAspectRatio="none" aria-hidden="true">
+        <path class="arch-fill" d="M 8 78 L 8 38 Q 82.5 -10 157 38 L 157 78 Z" fill="none" stroke="#0a0a0a" stroke-width="1.2"/>
+      </svg>
+      <span>The Cellar</span>
+    </a>
+    <a class="nav-arch" href="page-4.html">
+      <svg viewBox="0 0 165 78" preserveAspectRatio="none" aria-hidden="true">
+        <path class="arch-fill" d="M 8 78 L 8 38 Q 82.5 -10 157 38 L 157 78 Z" fill="none" stroke="#0a0a0a" stroke-width="1.2"/>
+      </svg>
+      <span>Our Cooks</span>
+    </a>
+    <a class="nav-arch" href="page-5.html">
+      <svg viewBox="0 0 165 78" preserveAspectRatio="none" aria-hidden="true">
+        <path class="arch-fill" d="M 8 78 L 8 38 Q 82.5 -10 157 38 L 157 78 Z" fill="none" stroke="#0a0a0a" stroke-width="1.2"/>
+      </svg>
+      <span>Visit</span>
+    </a>
+    <a class="nav-arch" href="page-6.html">
+      <svg viewBox="0 0 165 78" preserveAspectRatio="none" aria-hidden="true">
+        <path class="arch-fill" d="M 8 78 L 8 38 Q 82.5 -10 157 38 L 157 78 Z" fill="none" stroke="#0a0a0a" stroke-width="1.2"/>
+      </svg>
+      <span>Reservations</span>
+    </a>
+  </div>
+</nav>
+
+<!-- ========== HERO ========== -->
+<header class="hero">
+  <div class="eyebrow">Bill of the House &nbsp;·&nbsp; Saint-Martin's Tide</div>
+  <h1>The Supper</h1>
+  <div class="date">Souper de la Saint-Martin &nbsp;·&nbsp; 11 November — 23 December</div>
+  <p class="lede">Seven courses brought to one long table at half-past seven o'clock, in the manner of the cloth-merchants who once supped here by tallow-light. The bill turns with the season; the fires are lit at six. One hundred and forty-five euros the cover, wines apart.</p>
+</header>
+
+<div class="divider" aria-hidden="true">
+  <svg viewBox="0 0 39.26 39.9" xmlns="http://www.w3.org/2000/svg">
+    <path fill="#0a0a0a" transform="translate(-110.42,-124.37)" d="m 114.66,164.09 c -0.03,-0.03 -0.69,-0.08 -1.46,-0.11 -1.81,-0.06 -2.37,-0.54 -2.63,-2.21 -0.11,-0.73 -0.18,-6.09 -0.14,-11.91 0.03,-5.82 0.07,-12.76 0.09,-15.41 0.02,-3.93 0.10,-4.83 0.39,-4.83 0.20,0 0.41,0.14 0.47,0.31 0.17,0.51 0.73,-0.03 0.73,-0.69 0,-0.71 -0.65,-1.39 -0.92,-0.96 -0.09,0.15 -0.05,0.28 0.11,0.28 0.15,0 0.28,0.15 0.28,0.34 0,0.19 -0.24,0.34 -0.53,0.34 -0.37,0 -0.53,-0.18 -0.53,-0.60 0,-0.33 0.15,-0.61 0.33,-0.61 0.24,0 0.23,-0.07 -0.04,-0.24 -0.54,-0.34 -0.19,-2.16 0.54,-2.74 0.54,-0.44 1.46,-0.47 13.70,-0.44 7.22,0.02 15.44,-0.05 18.28,-0.14 4.83,-0.16 5.20,-0.14 5.74,0.33 0.58,0.50 0.58,0.51 0.53,10.58 -0.03,5.93 -0.15,10.02 -0.29,9.93 -0.13,-0.08 -0.17,-0.03 -0.08,0.12 0.09,0.14 0.24,4.02 0.34,8.62 0.17,8.29 0.17,8.36 -0.40,9.16 -0.66,0.93 -2.30,1.42 -2.69,0.79 z"/>
+  </svg>
+</div>
+
+<!-- ========== COURSES ========== -->
+<section class="courses" aria-label="Seven Courses">
+
+  <!-- Course I -->
+  <article class="course-card">
+    <div class="arch-frame">
+      <svg class="arch-svg-bg" viewBox="0 0 600 540" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M 30 540 L 30 180 Q 300 -20 570 180 L 570 540 Z" fill="none" stroke="#0a0a0a" stroke-width="2.5"/>
+        <path d="M 50 540 L 50 188 Q 300 6 550 188 L 550 540" fill="none" stroke="#0a0a0a" stroke-width="0.8"/>
+      </svg>
+      <svg class="quatrefoil" viewBox="-300 -300 600 600" aria-hidden="true">
+        <g transform="scale(0.87)rotate(45)" fill="#0a0a0a">
+          <circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/>
+          <circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/>
+          <rect x="-232" y="-232" width="464" height="464"/>
+          <g fill="#f4ecd8">
+            <circle cx="-195.16" r="138"/><circle cx="195.16" r="138"/>
+            <circle cy="195.16" r="138"/><circle cy="-195.16" r="138"/>
+            <rect x="-207" y="-207" width="414" height="414"/>
+          </g>
+        </g>
+      </svg>
+      <div class="course-num">I</div>
+      <div class="arch-content">
+        <div class="course-label">Premier Service · Le Bouillon</div>
+        <div class="course-rule"></div>
+        <h3 class="course-name">Bouillon de Poule au Safran</h3>
+        <div class="course-desc">
+          <p>An old broth of bone-hen and roasted leek, drawn slowly through a night and a morning until it carries the colour of amber. Saffron from the lower Somme is steeped at the last, with a single thread of preserved lemon and a crouton rubbed in goose fat.</p>
+          <div class="vine-inline" aria-hidden="true">
+            <svg viewBox="0 0 200 200"><path transform="translate(0,-852.36)" d="m43.58,863.37c-1.79,0.03-3.58,0.13-5.34,0.31-7.05,0.74-13.94,2.79-19.16,7.47s-8.20,12.00-7.69,21.00c0.51,9.00,4.30,16.14,10.19,20.34,5.89,4.20,13.31,5.53,21.03,5.19,15.45-0.69,32.83-8.00,45.81-18.31,1.41-1.12,2.83-2.04,4.25-3.06,4.29,6.68,7.61,14.83,9.34,24.06-7.50-5.07-21.01-10.55-35.66,1.50-22.14,18.21-24.99,12.88-45.34-2.13-2.86,36.07,15.01,54.64,44.66,52.50,0,0-13.95,4.26-3.59,26.41,6.02,12.87,8.41,20.08,6.56,25.19-12.84,2.29-15.77,7.78-5.57,12.66,45.10,9.97,65.67-27.47,68.66-66.04,45.36,0,52.86-31.80,52.50-50.38-8.21,11.07-22.16,11.07-32.88,2.50-9.93-7.95-21.69-16.18-39.00-1.13-1.74-11.68-5.69-22.13-11.22-30.72,19.36-11.37,38.72-14.46,52.53-10.81,5.48,1.45,9.46,4.09,12.38,6.97-8.97,8.36-11.84,26.38,2.28,27.03,18.92,0.88,21.03-15.45,13.56-27.13-5.45-8.51-16.42-13.23-25.66-16.56-17.51-4.63-39.74-0.57-61.28,12.50-5.17-5.72-11.13-10.22-17.72-12.97-7.08-2.95-17.54-5.73-28.28-6.31z"/></svg>
+          </div>
+          <p>Served in the small black bowls thrown by a potter at Marquaix, scarcely a half-litre, that the appetite may rise rather than be satisfied.</p>
+        </div>
+        <div class="course-price">— Set at the Hour —</div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Course II -->
+  <article class="course-card">
+    <div class="arch-frame">
+      <svg class="arch-svg-bg" viewBox="0 0 600 540" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M 30 540 L 30 180 Q 300 -20 570 180 L 570 540 Z" fill="none" stroke="#0a0a0a" stroke-width="2.5"/>
+        <path d="M 50 540 L 50 188 Q 300 6 550 188 L 550 540" fill="none" stroke="#0a0a0a" stroke-width="0.8"/>
+      </svg>
+      <svg class="quatrefoil" viewBox="-300 -300 600 600" aria-hidden="true">
+        <g transform="scale(0.87)rotate(45)" fill="#0a0a0a">
+          <circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/>
+          <circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/>
+          <rect x="-232" y="-232" width="464" height="464"/>
+          <g fill="#f4ecd8">
+            <circle cx="-195.16" r="138"/><circle cx="195.16" r="138"/>
+            <circle cy="195.16" r="138"/><circle cy="-195.16" r="138"/>
+            <rect x="-207" y="-207" width="414" height="414"/>
+          </g>
+        </g>
+      </svg>
+      <div class="course-num">II</div>
+      <div class="arch-content">
+        <div class="course-label">Deuxième Service · L'Entrée Chaude</div>
+        <div class="course-rule"></div>
+        <h3 class="course-name">Tarte aux Poireaux et Lard Fumé</h3>
+        <div class="course-desc">
+          <p>A short crust of buckwheat and butter, blind-baked at first light, filled with poireaux sweated in cream and dotted with thumb-cut lardons smoked over apple-wood at La Bergerie de Vraignes.</p>
+          <div class="vine-inline" aria-hidden="true">
+            <svg viewBox="0 0 200 200"><path transform="translate(0,-852.36)" d="m43.58,863.37c-1.79,0.03-3.58,0.13-5.34,0.31-7.05,0.74-13.94,2.79-19.16,7.47s-8.20,12.00-7.69,21.00c0.51,9.00,4.30,16.14,10.19,20.34,5.89,4.20,13.31,5.53,21.03,5.19,15.45-0.69,32.83-8.00,45.81-18.31,1.41-1.12,2.83-2.04,4.25-3.06,4.29,6.68,7.61,14.83,9.34,24.06-7.50-5.07-21.01-10.55-35.66,1.50-22.14,18.21-24.99,12.88-45.34-2.13-2.86,36.07,15.01,54.64,44.66,52.50,0,0-13.95,4.26-3.59,26.41,6.02,12.87,8.41,20.08,6.56,25.19-12.84,2.29-15.77,7.78-5.57,12.66,45.10,9.97,65.67-27.47,68.66-66.04,45.36,0,52.86-31.80,52.50-50.38-8.21,11.07-22.16,11.07-32.88,2.50-9.93-7.95-21.69-16.18-39.00-1.13-1.74-11.68-5.69-22.13-11.22-30.72,19.36-11.37,38.72-14.46,52.53-10.81,5.48,1.45,9.46,4.09,12.38,6.97-8.97,8.36-11.84,26.38,2.28,27.03,18.92,0.88,21.03-15.45,13.56-27.13-5.45-8.51-16.42-13.23-25.66-16.56-17.51-4.63-39.74-0.57-61.28,12.50-5.17-5.72-11.13-10.22-17.72-12.97-7.08-2.95-17.54-5.73-28.28-6.31z"/></svg>
+          </div>
+          <p>Glazed at the salamander to a colour between honey and copper; cut into long wedges and served with a salt-cellar of grey fleur de Guérande set down between every two guests.</p>
+        </div>
+        <div class="course-price">— Set at the Hour —</div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Course III -->
+  <article class="course-card">
+    <div class="arch-frame">
+      <svg class="arch-svg-bg" viewBox="0 0 600 540" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M 30 540 L 30 180 Q 300 -20 570 180 L 570 540 Z" fill="none" stroke="#0a0a0a" stroke-width="2.5"/>
+        <path d="M 50 540 L 50 188 Q 300 6 550 188 L 550 540" fill="none" stroke="#0a0a0a" stroke-width="0.8"/>
+      </svg>
+      <svg class="quatrefoil" viewBox="-300 -300 600 600" aria-hidden="true">
+        <g transform="scale(0.87)rotate(45)" fill="#0a0a0a">
+          <circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/>
+          <circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/>
+          <rect x="-232" y="-232" width="464" height="464"/>
+          <g fill="#f4ecd8">
+            <circle cx="-195.16" r="138"/><circle cx="195.16" r="138"/>
+            <circle cy="195.16" r="138"/><circle cy="-195.16" r="138"/>
+            <rect x="-207" y="-207" width="414" height="414"/>
+          </g>
+        </g>
+      </svg>
+      <div class="course-num">III</div>
+      <div class="arch-content">
+        <div class="course-label">Troisième Service · Le Poisson</div>
+        <div class="course-rule"></div>
+        <h3 class="course-name">Brochet Poché, Sauce Verjus</h3>
+        <div class="course-desc">
+          <p>A pike taken from the slow water of the Somme above Cappy, poached whole in a fumet of riesling and bay, then portioned at the sideboard. The sauce is mounted of verjus pressed in our own kitchen from green grapes of the Soissonnais, with shallot and a tail of butter.</p>
+          <div class="vine-inline" aria-hidden="true">
+            <svg viewBox="0 0 200 200"><path transform="translate(0,-852.36)" d="m43.58,863.37c-1.79,0.03-3.58,0.13-5.34,0.31-7.05,0.74-13.94,2.79-19.16,7.47s-8.20,12.00-7.69,21.00c0.51,9.00,4.30,16.14,10.19,20.34,5.89,4.20,13.31,5.53,21.03,5.19,15.45-0.69,32.83-8.00,45.81-18.31,1.41-1.12,2.83-2.04,4.25-3.06,4.29,6.68,7.61,14.83,9.34,24.06-7.50-5.07-21.01-10.55-35.66,1.50-22.14,18.21-24.99,12.88-45.34-2.13-2.86,36.07,15.01,54.64,44.66,52.50,0,0-13.95,4.26-3.59,26.41,6.02,12.87,8.41,20.08,6.56,25.19-12.84,2.29-15.77,7.78-5.57,12.66,45.10,9.97,65.67-27.47,68.66-66.04,45.36,0,52.86-31.80,52.50-50.38-8.21,11.07-22.16,11.07-32.88,2.50-9.93-7.95-21.69-16.18-39.00-1.13-1.74-11.68-5.69-22.13-11.22-30.72,19.36-11.37,38.72-14.46,52.53-10.81,5.48,1.45,9.46,4.09,12.38,6.97-8.97,8.36-11.84,26.38,2.28,27.03,18.92,0.88,21.03-15.45,13.56-27.13-5.45-8.51-16.42-13.23-25.66-16.56-17.51-4.63-39.74-0.57-61.28,12.50-5.17-5.72-11.13-10.22-17.72-12.97-7.08-2.95-17.54-5.73-28.28-6.31z"/></svg>
+          </div>
+          <p>Strewn with a thin coin of pickled radish and the pale inner leaves of celery; nothing more, that the freshwater taste be not muddied.</p>
+        </div>
+        <div class="course-price">— Set at the Hour —</div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Course IV -->
+  <article class="course-card">
+    <div class="arch-frame">
+      <svg class="arch-svg-bg" viewBox="0 0 600 540" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M 30 540 L 30 180 Q 300 -20 570 180 L 570 540 Z" fill="none" stroke="#0a0a0a" stroke-width="2.5"/>
+        <path d="M 50 540 L 50 188 Q 300 6 550 188 L 550 540" fill="none" stroke="#0a0a0a" stroke-width="0.8"/>
+      </svg>
+      <svg class="quatrefoil" viewBox="-300 -300 600 600" aria-hidden="true">
+        <g transform="scale(0.87)rotate(45)" fill="#0a0a0a">
+          <circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/>
+          <circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/>
+          <rect x="-232" y="-232" width="464" height="464"/>
+          <g fill="#f4ecd8">
+            <circle cx="-195.16" r="138"/><circle cx="195.16" r="138"/>
+            <circle cy="195.16" r="138"/><circle cy="-195.16" r="138"/>
+            <rect x="-207" y="-207" width="414" height="414"/>
+          </g>
+        </g>
+      </svg>
+      <div class="course-num">IV</div>
+      <div class="arch-content">
+        <div class="course-label">Quatrième Service · Le Rôt</div>
+        <div class="course-rule"></div>
+        <h3 class="course-name">Chevreau Rôti aux Coings</h3>
+        <div class="course-desc">
+          <p>A milk-fed kid from Ferme du Bois-Hallot, twelve weeks old, rubbed in the morning with thyme, juniper and pepper of the long sort, and turned slowly above embers of vine-cutting until the skin cracks like parchment. The shoulder is carved at the table; the loin rests under butter.</p>
+          <div class="vine-inline" aria-hidden="true">
+            <svg viewBox="0 0 200 200"><path transform="translate(0,-852.36)" d="m43.58,863.37c-1.79,0.03-3.58,0.13-5.34,0.31-7.05,0.74-13.94,2.79-19.16,7.47s-8.20,12.00-7.69,21.00c0.51,9.00,4.30,16.14,10.19,20.34,5.89,4.20,13.31,5.53,21.03,5.19,15.45-0.69,32.83-8.00,45.81-18.31,1.41-1.12,2.83-2.04,4.25-3.06,4.29,6.68,7.61,14.83,9.34,24.06-7.50-5.07-21.01-10.55-35.66,1.50-22.14,18.21-24.99,12.88-45.34-2.13-2.86,36.07,15.01,54.64,44.66,52.50,0,0-13.95,4.26-3.59,26.41,6.02,12.87,8.41,20.08,6.56,25.19-12.84,2.29-15.77,7.78-5.57,12.66,45.10,9.97,65.67-27.47,68.66-66.04,45.36,0,52.86-31.80,52.50-50.38-8.21,11.07-22.16,11.07-32.88,2.50-9.93-7.95-21.69-16.18-39.00-1.13-1.74-11.68-5.69-22.13-11.22-30.72,19.36-11.37,38.72-14.46,52.53-10.81,5.48,1.45,9.46,4.09,12.38,6.97-8.97,8.36-11.84,26.38,2.28,27.03,18.92,0.88,21.03-15.45,13.56-27.13-5.45-8.51-16.42-13.23-25.66-16.56-17.51-4.63-39.74-0.57-61.28,12.50-5.17-5.72-11.13-10.22-17.72-12.97-7.08-2.95-17.54-5.73-28.28-6.31z"/></svg>
+          </div>
+          <p>Beside it, quinces braised in red wine and a spoon of their own jelly; a single roast onion blackened in the ash, peeled at the edge of the plate.</p>
+        </div>
+        <div class="course-price">— Set at the Hour —</div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Course V -->
+  <article class="course-card">
+    <div class="arch-frame">
+      <svg class="arch-svg-bg" viewBox="0 0 600 540" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M 30 540 L 30 180 Q 300 -20 570 180 L 570 540 Z" fill="none" stroke="#0a0a0a" stroke-width="2.5"/>
+        <path d="M 50 540 L 50 188 Q 300 6 550 188 L 550 540" fill="none" stroke="#0a0a0a" stroke-width="0.8"/>
+      </svg>
+      <svg class="quatrefoil" viewBox="-300 -300 600 600" aria-hidden="true">
+        <g transform="scale(0.87)rotate(45)" fill="#0a0a0a">
+          <circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/>
+          <circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/>
+          <rect x="-232" y="-232" width="464" height="464"/>
+          <g fill="#f4ecd8">
+            <circle cx="-195.16" r="138"/><circle cx="195.16" r="138"/>
+            <circle cy="195.16" r="138"/><circle cy="-195.16" r="138"/>
+            <rect x="-207" y="-207" width="414" height="414"/>
+          </g>
+        </g>
+      </svg>
+      <div class="course-num">V</div>
+      <div class="arch-content">
+        <div class="course-label">Cinquième Service · Le Vert</div>
+        <div class="course-rule"></div>
+        <h3 class="course-name">Salade d'Herbes Amères</h3>
+        <div class="course-desc">
+          <p>A plain dish in the medieval manner: dandelion, wild chicory, mâche, and the small bitter heart of treviso, dressed simply with hazelnut oil pressed in October at Domvast and a few drops of cider vinegar from Boves.</p>
+          <div class="vine-inline" aria-hidden="true">
+            <svg viewBox="0 0 200 200"><path transform="translate(0,-852.36)" d="m43.58,863.37c-1.79,0.03-3.58,0.13-5.34,0.31-7.05,0.74-13.94,2.79-19.16,7.47s-8.20,12.00-7.69,21.00c0.51,9.00,4.30,16.14,10.19,20.34,5.89,4.20,13.31,5.53,21.03,5.19,15.45-0.69,32.83-8.00,45.81-18.31,1.41-1.12,2.83-2.04,4.25-3.06,4.29,6.68,7.61,14.83,9.34,24.06-7.50-5.07-21.01-10.55-35.66,1.50-22.14,18.21-24.99,12.88-45.34-2.13-2.86,36.07,15.01,54.64,44.66,52.50,0,0-13.95,4.26-3.59,26.41,6.02,12.87,8.41,20.08,6.56,25.19-12.84,2.29-15.77,7.78-5.57,12.66,45.10,9.97,65.67-27.47,68.66-66.04,45.36,0,52.86-31.80,52.50-50.38-8.21,11.07-22.16,11.07-32.88,2.50-9.93-7.95-21.69-16.18-39.00-1.13-1.74-11.68-5.69-22.13-11.22-30.72,19.36-11.37,38.72-14.46,52.53-10.81,5.48,1.45,9.46,4.09,12.38,6.97-8.97,8.36-11.84,26.38,2.28,27.03,18.92,0.88,21.03-15.45,13.56-27.13-5.45-8.51-16.42-13.23-25.66-16.56-17.51-4.63-39.74-0.57-61.28,12.50-5.17-5.72-11.13-10.22-17.72-12.97-7.08-2.95-17.54-5.73-28.28-6.31z"/></svg>
+          </div>
+          <p>Set down between the meat and the cheese, as our forebears would have it, to refresh the palate before the long second half of the supper begins.</p>
+        </div>
+        <div class="course-price">— Set at the Hour —</div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Course VI -->
+  <article class="course-card">
+    <div class="arch-frame">
+      <svg class="arch-svg-bg" viewBox="0 0 600 540" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M 30 540 L 30 180 Q 300 -20 570 180 L 570 540 Z" fill="none" stroke="#0a0a0a" stroke-width="2.5"/>
+        <path d="M 50 540 L 50 188 Q 300 6 550 188 L 550 540" fill="none" stroke="#0a0a0a" stroke-width="0.8"/>
+      </svg>
+      <svg class="quatrefoil" viewBox="-300 -300 600 600" aria-hidden="true">
+        <g transform="scale(0.87)rotate(45)" fill="#0a0a0a">
+          <circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/>
+          <circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/>
+          <rect x="-232" y="-232" width="464" height="464"/>
+          <g fill="#f4ecd8">
+            <circle cx="-195.16" r="138"/><circle cx="195.16" r="138"/>
+            <circle cy="195.16" r="138"/><circle cy="-195.16" r="138"/>
+            <rect x="-207" y="-207" width="414" height="414"/>
+          </g>
+        </g>
+      </svg>
+      <div class="course-num">VI</div>
+      <div class="arch-content">
+        <div class="course-label">Sixième Service · Le Fromage</div>
+        <div class="course-rule"></div>
+        <h3 class="course-name">Tomme de Picardie, Miel de Sarrasin</h3>
+        <div class="course-desc">
+          <p>A young raw-milk tomme aged seven weeks in the cellars at Vraignes, washed with bière de garde so that the rind takes on the colour of damp brick. The paste is supple and faintly grassy, the smell ample but never vexed.</p>
+          <div class="vine-inline" aria-hidden="true">
+            <svg viewBox="0 0 200 200"><path transform="translate(0,-852.36)" d="m43.58,863.37c-1.79,0.03-3.58,0.13-5.34,0.31-7.05,0.74-13.94,2.79-19.16,7.47s-8.20,12.00-7.69,21.00c0.51,9.00,4.30,16.14,10.19,20.34,5.89,4.20,13.31,5.53,21.03,5.19,15.45-0.69,32.83-8.00,45.81-18.31,1.41-1.12,2.83-2.04,4.25-3.06,4.29,6.68,7.61,14.83,9.34,24.06-7.50-5.07-21.01-10.55-35.66,1.50-22.14,18.21-24.99,12.88-45.34-2.13-2.86,36.07,15.01,54.64,44.66,52.50,0,0-13.95,4.26-3.59,26.41,6.02,12.87,8.41,20.08,6.56,25.19-12.84,2.29-15.77,7.78-5.57,12.66,45.10,9.97,65.67-27.47,68.66-66.04,45.36,0,52.86-31.80,52.50-50.38-8.21,11.07-22.16,11.07-32.88,2.50-9.93-7.95-21.69-16.18-39.00-1.13-1.74-11.68-5.69-22.13-11.22-30.72,19.36-11.37,38.72-14.46,52.53-10.81,5.48,1.45,9.46,4.09,12.38,6.97-8.97,8.36-11.84,26.38,2.28,27.03,18.92,0.88,21.03-15.45,13.56-27.13-5.45-8.51-16.42-13.23-25.66-16.56-17.51-4.63-39.74-0.57-61.28,12.50-5.17-5.72-11.13-10.22-17.72-12.97-7.08-2.95-17.54-5.73-28.28-6.31z"/></svg>
+          </div>
+          <p>Served with a comb-spoon of dark buckwheat honey from Rucher Caudron, a slip of pickled walnut, and four oat-and-rye flatbreads baked at the back of the bread oven.</p>
+        </div>
+        <div class="course-price">— Set at the Hour —</div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Course VII -->
+  <article class="course-card">
+    <div class="arch-frame">
+      <svg class="arch-svg-bg" viewBox="0 0 600 540" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M 30 540 L 30 180 Q 300 -20 570 180 L 570 540 Z" fill="none" stroke="#0a0a0a" stroke-width="2.5"/>
+        <path d="M 50 540 L 50 188 Q 300 6 550 188 L 550 540" fill="none" stroke="#0a0a0a" stroke-width="0.8"/>
+      </svg>
+      <svg class="quatrefoil" viewBox="-300 -300 600 600" aria-hidden="true">
+        <g transform="scale(0.87)rotate(45)" fill="#0a0a0a">
+          <circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/>
+          <circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/>
+          <rect x="-232" y="-232" width="464" height="464"/>
+          <g fill="#f4ecd8">
+            <circle cx="-195.16" r="138"/><circle cx="195.16" r="138"/>
+            <circle cy="195.16" r="138"/><circle cy="-195.16" r="138"/>
+            <rect x="-207" y="-207" width="414" height="414"/>
+          </g>
+        </g>
+      </svg>
+      <div class="course-num">VII</div>
+      <div class="arch-content">
+        <div class="course-label">Septième Service · L'Entremet</div>
+        <div class="course-rule"></div>
+        <h3 class="course-name">Rissoles aux Pommes et Cardamome</h3>
+        <div class="course-desc">
+          <p>Small folded pastries of butter dough, filled with reinette apples cooked down with green cardamom, a spoon of fig molasses, and the merest grating of black pepper. Fried at the moment of service in clarified butter, drained on linen, and dusted with rough cane sugar.</p>
+          <div class="vine-inline" aria-hidden="true">
+            <svg viewBox="0 0 200 200"><path transform="translate(0,-852.36)" d="m43.58,863.37c-1.79,0.03-3.58,0.13-5.34,0.31-7.05,0.74-13.94,2.79-19.16,7.47s-8.20,12.00-7.69,21.00c0.51,9.00,4.30,16.14,10.19,20.34,5.89,4.20,13.31,5.53,21.03,5.19,15.45-0.69,32.83-8.00,45.81-18.31,1.41-1.12,2.83-2.04,4.25-3.06,4.29,6.68,7.61,14.83,9.34,24.06-7.50-5.07-21.01-10.55-35.66,1.50-22.14,18.21-24.99,12.88-45.34-2.13-2.86,36.07,15.01,54.64,44.66,52.50,0,0-13.95,4.26-3.59,26.41,6.02,12.87,8.41,20.08,6.56,25.19-12.84,2.29-15.77,7.78-5.57,12.66,45.10,9.97,65.67-27.47,68.66-66.04,45.36,0,52.86-31.80,52.50-50.38-8.21,11.07-22.16,11.07-32.88,2.50-9.93-7.95-21.69-16.18-39.00-1.13-1.74-11.68-5.69-22.13-11.22-30.72,19.36-11.37,38.72-14.46,52.53-10.81,5.48,1.45,9.46,4.09,12.38,6.97-8.97,8.36-11.84,26.38,2.28,27.03,18.92,0.88,21.03-15.45,13.56-27.13-5.45-8.51-16.42-13.23-25.66-16.56-17.51-4.63-39.74-0.57-61.28,12.50-5.17-5.72-11.13-10.22-17.72-12.97-7.08-2.95-17.54-5.73-28.28-6.31z"/></svg>
+          </div>
+          <p>Three to a guest, served upon a slate, with a small glass of warmed marc de Champagne for those who care to take it. With this the supper closes; coffee is brought into the small parlour after.</p>
+        </div>
+        <div class="course-price">— Set at the Hour —</div>
+      </div>
+    </div>
+  </article>
+
+</section>
+
+<!-- ========== SUPPER NOTE & FARMS ========== -->
+<aside class="supper-note">
+  <h2>A Word on Provenance</h2>
+  <p>Every supper at the Maison is built upon the labour of three houses, named here as a courtesy and a thanks. Their hands are in every plate set down upon our trestle.</p>
+  <div class="farms">
+    Ferme du Bois-Hallot &nbsp;·&nbsp; La Bergerie de Vraignes &nbsp;·&nbsp; Rucher Caudron
+  </div>
+  <p style="margin-top:22px;">The bill is fixed at <strong>€145</strong> the cover, taken in one sitting at half-past seven o'clock, Wednesday through Saturday. The pairing of seven wines from the cellar is offered at <strong>€78</strong> a head. Bread, butter, water of the table and coffee at the close are included. Service is settled.</p>
+</aside>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div class="footer-arcade" aria-hidden="true">
+    <!-- 7 arches: fleur, cross, fleur, cross, fleur, cross, fleur -->
+    <div class="foot-arch">
+      <svg class="frame" viewBox="0 0 80 100" preserveAspectRatio="none"><path d="M 8 100 L 8 50 Q 40 0 72 50 L 72 100" fill="none" stroke="#0a0a0a" stroke-width="1.5"/></svg>
+      <svg class="glyph" viewBox="0 0 100 100"><path d="M50 10 Q 45 30 35 35 Q 25 38 30 50 Q 35 55 45 50 L 45 70 L 35 70 L 35 78 L 45 78 L 45 90 L 55 90 L 55 78 L 65 78 L 65 70 L 55 70 L 55 50 Q 65 55 70 50 Q 75 38 65 35 Q 55 30 50 10 Z"/></svg>
+    </div>
+    <div class="foot-arch">
+      <svg class="frame" viewBox="0 0 80 100" preserveAspectRatio="none"><path d="M 8 100 L 8 50 Q 40 0 72 50 L 72 100" fill="none" stroke="#0a0a0a" stroke-width="1.5"/></svg>
+      <svg class="glyph" viewBox="0 0 100 100"><path d="M44 10 L 56 10 L 56 40 L 86 40 L 86 56 L 56 56 L 56 90 L 44 90 L 44 56 L 14 56 L 14 40 L 44 40 Z"/></svg>
+    </div>
+    <div class="foot-arch">
+      <svg class="frame" viewBox="0 0 80 100" preserveAspectRatio="none"><path d="M 8 100 L 8 50 Q 40 0 72 50 L 72 100" fill="none" stroke="#0a0a0a" stroke-width="1.5"/></svg>
+      <svg class="glyph" viewBox="0 0 100 100"><path d="M50 10 Q 45 30 35 35 Q 25 38 30 50 Q 35 55 45 50 L 45 70 L 35 70 L 35 78 L 45 78 L 45 90 L 55 90 L 55 78 L 65 78 L 65 70 L 55 70 L 55 50 Q 65 55 70 50 Q 75 38 65 35 Q 55 30 50 10 Z"/></svg>
+    </div>
+    <div class="foot-arch">
+      <svg class="frame" viewBox="0 0 80 100" preserveAspectRatio="none"><path d="M 8 100 L 8 50 Q 40 0 72 50 L 72 100" fill="none" stroke="#0a0a0a" stroke-width="1.5"/></svg>
+      <svg class="glyph" viewBox="0 0 100 100"><path d="M44 10 L 56 10 L 56 40 L 86 40 L 86 56 L 56 56 L 56 90 L 44 90 L 44 56 L 14 56 L 14 40 L 44 40 Z"/></svg>
+    </div>
+    <div class="foot-arch">
+      <svg class="frame" viewBox="0 0 80 100" preserveAspectRatio="none"><path d="M 8 100 L 8 50 Q 40 0 72 50 L 72 100" fill="none" stroke="#0a0a0a" stroke-width="1.5"/></svg>
+      <svg class="glyph" viewBox="0 0 100 100"><path d="M50 10 Q 45 30 35 35 Q 25 38 30 50 Q 35 55 45 50 L 45 70 L 35 70 L 35 78 L 45 78 L 45 90 L 55 90 L 55 78 L 65 78 L 65 70 L 55 70 L 55 50 Q 65 55 70 50 Q 75 38 65 35 Q 55 30 50 10 Z"/></svg>
+    </div>
+    <div class="foot-arch">
+      <svg class="frame" viewBox="0 0 80 100" preserveAspectRatio="none"><path d="M 8 100 L 8 50 Q 40 0 72 50 L 72 100" fill="none" stroke="#0a0a0a" stroke-width="1.5"/></svg>
+      <svg class="glyph" viewBox="0 0 100 100"><path d="M44 10 L 56 10 L 56 40 L 86 40 L 86 56 L 56 56 L 56 90 L 44 90 L 44 56 L 14 56 L 14 40 L 44 40 Z"/></svg>
+    </div>
+    <div class="foot-arch">
+      <svg class="frame" viewBox="0 0 80 100" preserveAspectRatio="none"><path d="M 8 100 L 8 50 Q 40 0 72 50 L 72 100" fill="none" stroke="#0a0a0a" stroke-width="1.5"/></svg>
+      <svg class="glyph" viewBox="0 0 100 100"><path d="M50 10 Q 45 30 35 35 Q 25 38 30 50 Q 35 55 45 50 L 45 70 L 35 70 L 35 78 L 45 78 L 45 90 L 55 90 L 55 78 L 65 78 L 65 70 L 55 70 L 55 50 Q 65 55 70 50 Q 75 38 65 35 Q 55 30 50 10 Z"/></svg>
+    </div>
+  </div>
+
+  <div class="footer-cols">
+    <div class="footer-col">
+      <h4>The House</h4>
+      <p>Maison Saint-Vrain</p>
+      <p>14, rue des Drapiers</p>
+      <p>80000 Amiens, Picardie</p>
+    </div>
+    <div class="footer-col">
+      <h4>The Hours</h4>
+      <p>Wednesday — Saturday</p>
+      <p>Doors at 18h30</p>
+      <p>Supper served at 19h30</p>
+    </div>
+    <div class="footer-col">
+      <h4>Reservations</h4>
+      <p>+33 (0)3 22 41 86 09</p>
+      <p>table@saint-vrain.fr</p>
+      <p>Booked twenty days in advance</p>
+    </div>
+  </div>
+
+  <div class="footer-seal">
+    <svg viewBox="0 0 600 600" aria-hidden="true">
+      <path transform="translate(-4,-4)scale(0.15,0.15)" d="M1778.9,3200A120.93,120.93 0 0,1 1657.97,3320.93A120.93,120.93 0 0,1 1537.04,3200A221.51,221.51 0 0,0 1456.32,3371.02A221.51,221.51 0 0,0 1677.83,3592.53A221.51,221.51 0 0,0 1818.61,3542.03A362.78,362.78 0 0,0 2000,3856.21A362.78,362.78 0 0,0 2181.39,3542.03A221.51,221.51 0 0,0 2322.17,3592.53A221.51,221.51 0 0,0 2543.68,3371.02A221.51,221.51 0 0,0 2462.96,3200A120.93,120.93 0 0,1 2342.03,3320.93A120.93,120.93 0 0,1 2221.1,3200V2221.1H3200A120.93,120.93 0 0,1 3320.93,2342.03A120.93,120.93 0 0,1 3200,2462.96A221.51,221.51 0 0,0 3371.02,2543.68A221.51,221.51 0 0,0 3592.53,2322.17A221.51,221.51 0 0,0 3542.03,2181.39A362.78,362.78 0 0,0 3856.21,2000A362.78,362.78 0 0,0 3542.03,1818.61A221.51,221.51 0 0,0 3592.53,1677.83A221.51,221.51 0 0,0 3371.02,1456.32A221.51,221.51 0 0,0 3200,1537.04A120.93,120.93 0 0,1 3320.93,1657.97A120.93,120.93 0 0,1 3200,1778.9H2221.1V800A120.93,120.93 0 0,1 2342.03,679.07A120.93,120.93 0 0,1 2462.96,800A221.51,221.51 0 0,0 2543.68,628.98A221.51,221.51 0 0,0 2322.17,407.48A221.51,221.51 0 0,0 2181.39,457.97A362.78,362.78 0 0,0 2000,143.79A362.78,362.78 0 0,0 1818.61,457.97A221.51,221.51 0 0,0 1677.83,407.48A221.51,221.51 0 0,0 1456.32,628.98A221.51,221.51 0 0,0 1537.04,800A120.93,120.93 0 0,1 1657.97,679.07A120.93,120.93 0 0,1 1778.9,800V1778.9H800A120.93,120.93 0 0,1 679.07,1657.97A120.93,120.93 0 0,1 800,1537.04A221.51,221.51 0 0,0 628.98,1456.32A221.51,221.51 0 0,0 407.48,1677.83A221.51,221.51 0 0,0 457.97,1818.61A362.78,362.78 0 0,0 143.79,2000A362.78,362.78 0 0,0 457.97,2181.39A221.51,221.51 0 0,0 407.48,2322.17A221.51,221.51 0 0,0 628.98,2543.68A221.51,221.51 0 0,0 800,2462.96A120.93,120.93 0 0,1 679.07,2342.03A120.93,120.93 0 0,1 800,2221.1H1778.9Z"/>
+    </svg>
+    <div class="copy">© Anno MMXXV &nbsp;·&nbsp; Maison Saint-Vrain &nbsp;·&nbsp; Amiens</div>
+  </div>
+</footer>
+
+</body>
+</html>

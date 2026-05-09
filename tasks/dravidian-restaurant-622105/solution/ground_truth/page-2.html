@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>The Thali — Annapurna Bhavan</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--font-body),Georgia,serif;
+    font-size:17px;
+    line-height:1.6;
+    background-image:
+      repeating-linear-gradient(0deg,transparent 0 38px,rgba(139,21,56,.04) 38px 39px),
+      repeating-linear-gradient(90deg,transparent 0 38px,rgba(7,107,136,.03) 38px 39px);
+  }
+  h1,h2,h3,h4{font-family:var(--font-display),serif;font-weight:400}
+
+  /* ===== NAV ===== */
+  .topband{
+    background:var(--bg);
+    border-top:6px double var(--primary);
+    border-bottom:6px double var(--primary);
+    position:relative;
+  }
+  .topband::before,.topband::after{
+    content:"";display:block;height:3px;background:var(--accent);
+  }
+  .topband::before{margin-top:2px}
+  .topband::after{margin-bottom:2px}
+  .nav-name{
+    text-align:center;
+    font-family:var(--font-display);
+    font-size:30px;
+    letter-spacing:.5em;
+    color:var(--text-emphasis);
+    padding:14px 0 4px;
+    text-transform:uppercase;
+  }
+  .nav-name small{display:block;font-size:11px;letter-spacing:.4em;color:var(--secondary);margin-top:4px;font-family:var(--font-body)}
+  .nav-row{
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    align-items:center;
+    padding:10px 40px 16px;
+    gap:24px;
+  }
+  .nav-row ul{list-style:none;display:flex;justify-content:center;flex-wrap:wrap;gap:6px;align-items:center}
+  .nav-row a{
+    color:var(--text);
+    text-decoration:none;
+    font-family:var(--font-display);
+    font-size:13px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    padding:4px 10px;
+  }
+  .nav-row a[aria-current="page"]{color:var(--text-emphasis);border-bottom:2px solid var(--accent)}
+  .nav-row a:hover{color:#6b0e26;border-bottom:2px solid var(--accent)}
+  .nav-row li.sep{color:var(--accent);font-size:10px;line-height:1}
+  .om-seal{width:54px;height:54px;display:block}
+
+  /* ===== LOTUS BAND DIVIDER ===== */
+  .lotus-band{
+    height:36px;
+    background:
+      radial-gradient(ellipse 18px 12px at 12px 50%,var(--primary) 0 60%,transparent 62%),
+      radial-gradient(ellipse 18px 12px at 36px 50%,var(--accent) 0 60%,transparent 62%);
+    background-color:var(--surface);
+    background-size:48px 36px;
+    background-repeat:repeat-x;
+    border-top:2px solid var(--text-emphasis);
+    border-bottom:2px solid var(--text-emphasis);
+  }
+
+  /* ===== HEADER ===== */
+  .page-head{
+    background:var(--surface);
+    padding:32px 60px 24px;
+    text-align:center;
+    border-bottom:1px solid rgba(139,21,56,.2);
+  }
+  .page-head .peacocks{width:100%;max-width:1100px;margin:0 auto;display:block;opacity:.85}
+  .page-head h1{
+    font-size:54px;
+    letter-spacing:.32em;
+    color:var(--text-emphasis);
+    text-transform:uppercase;
+    margin:8px 0 6px;
+  }
+  .page-head .tamil{font-family:var(--font-display);color:var(--secondary);font-size:22px;letter-spacing:.1em;margin-bottom:8px}
+  .page-head p.lede{
+    max-width:780px;margin:8px auto 0;color:#3a2a1a;font-size:18px;
+  }
+  .page-head .seal-row{display:flex;justify-content:center;align-items:center;gap:18px;margin-top:14px}
+  .page-head .seal-row span{font-family:var(--font-display);color:var(--accent);letter-spacing:.4em;font-size:12px}
+
+  /* ===== MAIN LAYOUT ===== */
+  main{
+    background:var(--surface);
+    padding:48px 60px 24px;
+  }
+  .thali-wrap{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) 360px;
+    gap:36px;
+    max-width:1320px;
+    margin:0 auto;
+  }
+  .section-title{
+    text-align:center;
+    margin:0 0 24px;
+  }
+  .section-title h2{
+    font-size:30px;
+    letter-spacing:.3em;
+    color:var(--text-emphasis);
+    text-transform:uppercase;
+  }
+  .section-title .sub{font-family:var(--font-body);font-style:italic;color:var(--secondary);font-size:14px;letter-spacing:.18em;margin-top:4px}
+
+  /* ===== LEAF DIAGRAM ===== */
+  .leaf{
+    position:relative;
+    background:
+      radial-gradient(ellipse 95% 60% at 50% 50%, #fffbf2 0 70%, #f1e6cf 80%, transparent 100%);
+    border:2px solid var(--text-emphasis);
+    border-radius:50% / 38%;
+    padding:36px 28px;
+    min-height:1100px;
+  }
+  .leaf::before,.leaf::after{
+    content:"";position:absolute;left:50%;transform:translateX(-50%);
+    width:80px;height:18px;
+    background:radial-gradient(ellipse 40px 9px,var(--accent) 0 60%,transparent 62%);
+  }
+  .leaf::before{top:-10px}
+  .leaf::after{bottom:-10px}
+  .leaf-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:22px;
+  }
+  .leaf-grid .full{grid-column:1 / -1}
+
+  /* ===== CARDS ===== */
+  .card{
+    position:relative;
+    background:#fffaef;
+    padding:18px 38px 22px;
+    border:1px solid rgba(139,21,56,.35);
+    box-shadow:0 0 0 4px #fffaef, 0 0 0 5px rgba(139,21,56,.2);
+  }
+  /* gopuram top */
+  .card::before{
+    content:"";
+    position:absolute;
+    top:-1px;left:-1px;right:-1px;
+    height:18px;
+    background:
+      linear-gradient(var(--text-emphasis),var(--text-emphasis)) 0 0/100% 3px no-repeat,
+      linear-gradient(var(--accent),var(--accent)) 0 5px/100% 2px no-repeat,
+      linear-gradient(var(--text-emphasis),var(--text-emphasis)) 0 9px/100% 3px no-repeat,
+      linear-gradient(90deg,
+        var(--text-emphasis) 0 6px,transparent 6px 14px,
+        var(--text-emphasis) 14px 22px,transparent 22px 30px,
+        var(--text-emphasis) 30px 38px,transparent 38px 46px,
+        var(--text-emphasis) 46px 54px) 0 13px/54px 5px repeat-x;
+  }
+  /* pillars */
+  .card > .pillar{
+    position:absolute;top:24px;bottom:30px;width:14px;
+    background:
+      linear-gradient(var(--text-emphasis),var(--text-emphasis)) 0 0/100% 6px no-repeat,
+      linear-gradient(var(--text-emphasis),var(--text-emphasis)) 0 100%/100% 6px no-repeat,
+      repeating-linear-gradient(0deg,var(--accent) 0 3px,transparent 3px 9px) 50% 0/4px 100% no-repeat,
+      linear-gradient(180deg,#f1e6cf,#e8d8b6);
+    border:1px solid var(--text-emphasis);
+  }
+  .card > .pillar.left{left:8px}
+  .card > .pillar.right{right:8px}
+  .card .dish-head{
+    display:flex;justify-content:space-between;align-items:baseline;
+    border-bottom:1px dotted var(--accent);
+    padding-bottom:6px;margin-bottom:10px;gap:14px;
+  }
+  .card h3{
+    font-family:var(--font-display);
+    color:var(--primary);
+    font-size:21px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    line-height:1.1;
+  }
+  .card h3 .tam{
+    display:block;font-size:12px;color:var(--secondary);letter-spacing:.22em;margin-top:3px;font-family:var(--font-body);font-style:italic
+  }
+  .card .price{
+    font-family:var(--font-body);
+    color:var(--secondary);
+    font-size:20px;
+    font-weight:600;
+    white-space:nowrap;
+  }
+  .card .satvik{
+    display:inline-flex;align-items:center;gap:4px;
+    font-size:10px;color:var(--accent);
+    font-family:var(--font-display);letter-spacing:.25em;
+    margin-top:6px;
+  }
+  .card .satvik svg{width:14px;height:14px}
+  .card p.desc{
+    color:var(--text);
+    font-size:15px;
+    line-height:1.55;
+    margin-top:6px;
+  }
+  .card .tail{
+    text-align:center;margin-top:10px;color:var(--text-emphasis);font-size:18px;letter-spacing:.4em;
+  }
+
+  /* ===== SIDE PANEL ===== */
+  aside.sets{
+    align-self:start;
+    background:#fffaef;
+    border:2px solid var(--text-emphasis);
+    padding:0;
+    position:relative;
+  }
+  aside.sets .panel-head{
+    background:var(--text-emphasis);
+    color:#fffaef;
+    text-align:center;
+    padding:18px 14px 14px;
+    font-family:var(--font-display);
+    letter-spacing:.32em;
+    font-size:18px;
+    border-bottom:3px double var(--accent);
+  }
+  aside.sets .panel-head small{display:block;font-size:11px;letter-spacing:.3em;color:var(--accent);font-family:var(--font-body);margin-top:4px}
+  aside.sets .panel-body{padding:18px 22px 8px}
+  .set{
+    border-bottom:1px dashed rgba(139,21,56,.4);
+    padding:16px 0;
+  }
+  .set:last-child{border-bottom:none}
+  .set h4{
+    font-family:var(--font-display);
+    font-size:22px;
+    color:var(--primary);
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    display:flex;justify-content:space-between;align-items:baseline;gap:8px;
+  }
+  .set h4 .p{color:var(--secondary);font-family:var(--font-body);font-size:18px;font-weight:600;letter-spacing:.04em}
+  .set .courses{font-style:italic;color:var(--secondary);font-size:13px;letter-spacing:.05em;margin:4px 0 8px}
+  .set p{font-size:14px;line-height:1.55}
+  .set .note{
+    display:inline-block;margin-top:8px;font-size:11px;letter-spacing:.2em;
+    background:var(--accent);color:#3a2a04;padding:3px 8px;font-family:var(--font-display);
+  }
+  aside.sets .panel-foot{
+    text-align:center;padding:14px 18px 18px;
+    border-top:3px double var(--accent);
+    background:#f6ecd6;
+  }
+  aside.sets .panel-foot p{font-size:13px;color:#3a2a1a;line-height:1.5}
+  aside.sets .panel-foot .om{display:block;margin:6px auto 4px;width:38px;height:38px}
+
+  /* legend strip */
+  .legend{
+    background:var(--bg);
+    border-top:4px double var(--primary);
+    border-bottom:4px double var(--primary);
+    padding:18px 60px;
+    display:flex;justify-content:center;gap:48px;flex-wrap:wrap;
+    color:#1a1a1a;font-size:13px;letter-spacing:.15em;font-family:var(--font-display);
+  }
+  .legend .item{display:flex;align-items:center;gap:10px}
+  .legend svg{width:22px;height:22px}
+
+  /* arabesque divider */
+  .arabesque{
+    background:var(--surface);
+    text-align:center;
+    padding:18px 0 22px;
+  }
+  .arabesque svg{width:90%;max-width:1100px;height:60px;opacity:.85}
+
+  /* ===== FOOTER ===== */
+  footer{
+    background:var(--bg);
+    color:#1a1a1a;
+    padding:0 0 24px;
+    border-top:6px double var(--primary);
+  }
+  .arcade{
+    height:120px;
+    background:
+      linear-gradient(var(--text-emphasis),var(--text-emphasis)) 0 0/100% 6px no-repeat,
+      linear-gradient(var(--text-emphasis),var(--text-emphasis)) 0 100%/100% 6px no-repeat;
+    position:relative;
+    display:grid;grid-template-columns:repeat(11,1fr);align-items:end;
+    padding:0 40px 8px;
+  }
+  .arcade .col{
+    height:78px;margin:0 auto;width:60%;
+    background:
+      linear-gradient(var(--text-emphasis),var(--text-emphasis)) 0 0/100% 6px no-repeat,
+      linear-gradient(var(--text-emphasis),var(--text-emphasis)) 0 100%/100% 6px no-repeat,
+      repeating-linear-gradient(0deg,var(--accent) 0 3px,transparent 3px 9px) 50% 0/5px 100% no-repeat,
+      linear-gradient(180deg,#a86a3c,#7a4a26);
+    border-radius:30% 30% 0 0 / 18% 18% 0 0;
+    border:1px solid #4a2a14;
+    position:relative;
+  }
+  .arcade .center-mandala{
+    grid-column:6 / 7;
+    height:96px;width:96px;margin:0 auto;
+    border:2px solid var(--text-emphasis);
+    border-radius:50%;
+    background:
+      radial-gradient(circle, var(--accent) 0 8%, transparent 9%),
+      radial-gradient(circle, transparent 14%, var(--text-emphasis) 15% 17%, transparent 18%),
+      radial-gradient(circle, transparent 24%, var(--secondary) 25% 27%, transparent 28%),
+      radial-gradient(circle, transparent 36%, var(--text-emphasis) 37% 39%, transparent 40%),
+      conic-gradient(from 0deg, var(--accent) 0 5%, transparent 5% 12.5%, var(--accent) 12.5% 17.5%, transparent 17.5% 25%, var(--accent) 25% 30%, transparent 30% 37.5%, var(--accent) 37.5% 42.5%, transparent 42.5% 50%, var(--accent) 50% 55%, transparent 55% 62.5%, var(--accent) 62.5% 67.5%, transparent 67.5% 75%, var(--accent) 75% 80%, transparent 80% 87.5%, var(--accent) 87.5% 92.5%, transparent 92.5% 100%),
+      #fffaef;
+  }
+  .footer-info{
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    align-items:center;
+    gap:30px;
+    padding:24px 60px 0;
+    text-align:center;
+  }
+  .footer-info .conch{font-size:38px;color:var(--text-emphasis);font-family:var(--font-display)}
+  .footer-info .block{font-size:14px;line-height:1.7}
+  .footer-info .block strong{font-family:var(--font-display);color:var(--text-emphasis);letter-spacing:.18em;display:block;margin-bottom:4px}
+  .footer-info .tel{
+    font-family:var(--font-display);
+    color:var(--primary);
+    font-size:24px;
+    letter-spacing:.16em;
+    margin-top:8px;
+  }
+  .footer-bottom{
+    text-align:center;margin-top:18px;padding-top:14px;
+    border-top:1px solid rgba(139,21,56,.3);
+    font-size:11px;letter-spacing:.3em;font-family:var(--font-display);color:var(--text-emphasis);
+  }
+</style>
+</head>
+<body>
+
+<header class="topband">
+  <div class="nav-name">Annapurna Bhavan<small>Tanjore Kitchens · Estd. 1948 · Mylapore</small></div>
+  <nav class="nav-row" aria-label="Primary">
+    <ul>
+      <li><a href="page-1.html">Home</a></li>
+      <li class="sep">❋</li>
+      <li><a href="page-2.html" aria-current="page">The Thali</a></li>
+      <li class="sep">❋</li>
+      <li><a href="page-3.html">Chettinad Hearth</a></li>
+    </ul>
+    <svg class="om-seal" viewBox="0 0 356 367" aria-hidden="true">
+      <path d="M 90.456847,353.9498 C 51.797347,340.13485 23.72672,305.75839 12.612487,258.6184 C 7.5684267,237.22321 6.1421397,201.86984 10.323594,201.86984 C 11.712834,201.86984 15.42322,211.57056 18.568972,223.427 C 25.452892,249.37152 37.19436,273.76855 48.535988,285.69407 C 67.374717,305.50242 114.0356,313.26029 140.92106,301.05394 C 161.86409,291.54544 170.35697,268.94603 161.24995,246.95931 C 154.21242,229.96943 138.24701,224.28836 108.50834,228.19197 C 108.50834,228.19197 90.282834,208.57398 84.476417,173.73548 L 103.15738,175.42939 C 125.65731,177.46962 142.64532,172.49605 151.46236,161.28728 C 159.74765,150.75419 159.5685,146.68046 150.34841,135.96157 C 137.04396,120.49428 113.15511,124.41248 64.786577,149.99522 L 40.381632,109.08518 L 50.613137,101.2812 C 76.253387,81.724339 120.77357,71.947329 146.11011,80.309169 C 169.18841,87.925649 186.12724,118.14755 181.60247,143.63298 C 178.54327,160.86286 164.72752,184.99524 154.05369,191.75339 L 144.84862,197.58162 L 157.56351,203.31522 C 179.17018,213.05833 192.36061,205.61034 208.12001,174.76849 C 229.92949,132.0869 244.0745,121.0378 276.96658,120.99051 C 292.28176,120.96847 297.73268,122.57499 308.90312,130.4031 C 336.78213,149.94016 351.9622,190.39693 348.62804,236.27272 C 344.40474,294.37435 316.88374,329.61601 275.73415,329.61601 C 253.15086,329.61601 238.59451,321.69526 227.00729,303.10156 C 216.82976,286.76927 212.24334,254.42288 218.08805,240.19369 C 220.89208,233.36732 221.39892,233.13578 221.58223,238.59686 C 221.91916,248.63689 233.34159,264.95549 243.82827,270.37835 C 269.55794,283.68369 306.49479,266.96693 321.10832,235.4032 C 332.20339,211.4394 326.25105,165.21656 311.02084,157.06552 C 307.83453,155.36024 299.96089,153.96502 293.5244,153.96502 C 279.84214,153.96502 269.09709,163.80155 254.03263,190.11774 C 248.82442,199.21613 240.05943,210.97175 234.55486,216.24128 C 225.61134,224.80312 222.41769,225.82225 204.53067,225.82225 L 184.51412,225.82225 L 190.98415,240.19369 C 200.2451,260.76437 199.80694,294.18704 190.00976,314.53347 C 181.35272,332.51252 161.33618,350.71469 145.33374,355.16013 C 129.75572,359.4876 104.38789,358.9281 90.456847,353.9498 z M 165.8338,75.923739 C 156.97908,60.814399 151.52974,32.606158 157.46546,32.606158 C 164.43775,47.732319 178.73037,61.227101 194.03409,70.643259 C 221.52091,83.949329 249.39257,78.578529 279.84247,54.108239 C 286.54595,48.721279 292.48231,44.913138 293.0345,45.645698 C 300.4697,57.184233 313.331,66.613261 317.58219,80.021449 C 317.58219,85.678729 293.22867,101.96033 274.01214,109.15007 C 226.38264,122.8706 193.96598,117.44304 165.8338,75.923739 z M 189.83603,40.997228 L 220.84514,6.6137488 L 255.30593,38.514418 C 243.51876,48.222549 235.00994,63.289118 221.54391,70.930009 C 210.90372,63.086273 195.02308,53.837816 189.83603,40.997228 z " style="fill:var(--primary)"/>
+    </svg>
+    <ul>
+      <li><a href="page-4.html">The Hall &amp; Hours</a></li>
+      <li class="sep">❋</li>
+      <li><a href="page-5.html">Lineage</a></li>
+      <li class="sep">❋</li>
+      <li><a href="page-6.html">Festivals &amp; Reservations</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="lotus-band" aria-hidden="true"></div>
+
+<section class="page-head">
+  <svg class="peacocks" viewBox="0 0 800 60" aria-hidden="true" preserveAspectRatio="none">
+    <g fill="#8b1538">
+      <path d="M0 30 Q 100 10 200 30 T 400 30 T 600 30 T 800 30 L 800 32 Q 600 12 400 32 T 0 32 Z"/>
+      <circle cx="100" cy="30" r="4"/>
+      <circle cx="300" cy="30" r="4"/>
+      <circle cx="500" cy="30" r="4"/>
+      <circle cx="700" cy="30" r="4"/>
+      <path d="M380 18 Q 400 0 420 18 Q 410 8 400 14 Q 390 8 380 18 Z" fill="#076b88"/>
+      <path d="M390 22 L 410 22 L 400 40 Z" fill="#c9a23a"/>
+    </g>
+  </svg>
+  <div class="tamil">— இலை விருந்து —</div>
+  <h1>The Thali</h1>
+  <p class="lede">An offering of seven compartments arranged upon the banana leaf, after the manner of the Chola court — sambhar, kuzhambu, vadai, masiyal, avial, pachadi, and the closing payasam. Served at noon and at dusk; rice, ghee and buttermilk poured at table without measure.</p>
+  <div class="seal-row"><span>❋</span><span>SATVIK · TEMPLE-PURE · NO ONION, NO GARLIC WHERE MARKED</span><span>❋</span></div>
+</section>
+
+<main>
+  <div class="thali-wrap">
+
+    <section aria-label="Banana leaf compartments">
+      <div class="section-title">
+        <h2>Upon The Leaf</h2>
+        <div class="sub">— seven compartments, in the order of serving —</div>
+      </div>
+
+      <div class="leaf">
+        <div class="leaf-grid">
+
+          <article class="card">
+            <span class="pillar left"></span><span class="pillar right"></span>
+            <div class="dish-head">
+              <h3>Sambhar of Three Lentils
+                <span class="tam">mūnru paruppu sāmbhār</span>
+              </h3>
+              <div class="price">₹ 95</div>
+            </div>
+            <p class="desc">Tuvar, moong and chana simmered with drumstick, brinjal and shallot; tempered in cold-pressed gingelly oil with curry leaf, fenugreek and a pinch of asafoetida from Karaikudi.</p>
+            <div class="satvik">
+              <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3" fill="#c9a23a"/><path d="M10 2 L11 8 L17 10 L11 12 L10 18 L9 12 L3 10 L9 8 Z" fill="#c9a23a" opacity=".6"/></svg>
+              SATVIK
+            </div>
+            <div class="tail">❦ ❋ ❦</div>
+          </article>
+
+          <article class="card">
+            <span class="pillar left"></span><span class="pillar right"></span>
+            <div class="dish-head">
+              <h3>Mor Kuzhambu
+                <span class="tam">mōr kuḻampu</span>
+              </h3>
+              <div class="price">₹ 110</div>
+            </div>
+            <p class="desc">Sour buttermilk thickened with soaked tuvar, coconut and green chilli, and crowned with whole ash-gourd cubes. A kitchen heirloom from the Kaveri delta, gentle on the noon stomach.</p>
+            <div class="satvik">
+              <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3" fill="#c9a23a"/><path d="M10 2 L11 8 L17 10 L11 12 L10 18 L9 12 L3 10 L9 8 Z" fill="#c9a23a" opacity=".6"/></svg>
+              SATVIK
+            </div>
+            <div class="tail">❦ ❋ ❦</div>
+          </article>
+
+          <article class="card">
+            <span class="pillar left"></span><span class="pillar right"></span>
+            <div class="dish-head">
+              <h3>Vazhaipoo Vadai
+                <span class="tam">vāḻaippū vaḍai</span>
+              </h3>
+              <div class="price">₹ 80</div>
+            </div>
+            <p class="desc">Banana-blossom hand-chopped fine, bound with chana dal, fennel and dried red chilli; pressed by thumb into rounds and fried in groundnut oil till the edges crackle. Two pieces to a serving.</p>
+            <div class="satvik">
+              <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3" fill="#c9a23a"/><path d="M10 2 L11 8 L17 10 L11 12 L10 18 L9 12 L3 10 L9 8 Z" fill="#c9a23a" opacity=".6"/></svg>
+              SATVIK
+            </div>
+            <div class="tail">❦ ❋ ❦</div>
+          </article>
+
+          <article class="card">
+            <span class="pillar left"></span><span class="pillar right"></span>
+            <div class="dish-head">
+              <h3>Keerai Masiyal
+                <span class="tam">kīrai masiyāl</span>
+              </h3>
+              <div class="price">₹ 70</div>
+            </div>
+            <p class="desc">Country amaranth and arai-keerai mashed with a wooden ladle, finished with one whole green chilli, salt and a tear of gingelly oil. The plainest dish on the leaf, and the most measured.</p>
+            <div class="satvik">
+              <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3" fill="#c9a23a"/><path d="M10 2 L11 8 L17 10 L11 12 L10 18 L9 12 L3 10 L9 8 Z" fill="#c9a23a" opacity=".6"/></svg>
+              SATVIK
+            </div>
+            <div class="tail">❦ ❋ ❦</div>
+          </article>
+
+          <article class="card">
+            <span class="pillar left"></span><span class="pillar right"></span>
+            <div class="dish-head">
+              <h3>Avial in Coconut-Curd
+                <span class="tam">aviyal</span>
+              </h3>
+              <div class="price">₹ 130</div>
+            </div>
+            <p class="desc">Yam, raw banana, snake-gourd, ash-gourd and drumstick cut to the length of a finger and warmed in a paste of fresh coconut, cumin and curd. Coconut oil drizzled in at the last moment.</p>
+            <div class="satvik">
+              <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3" fill="#c9a23a"/><path d="M10 2 L11 8 L17 10 L11 12 L10 18 L9 12 L3 10 L9 8 Z" fill="#c9a23a" opacity=".6"/></svg>
+              SATVIK
+            </div>
+            <div class="tail">❦ ❋ ❦</div>
+          </article>
+
+          <article class="card">
+            <span class="pillar left"></span><span class="pillar right"></span>
+            <div class="dish-head">
+              <h3>Pachadi of Mango &amp; Ginger
+                <span class="tam">māṅkāy iñci pacaṭi</span>
+              </h3>
+              <div class="price">₹ 85</div>
+            </div>
+            <p class="desc">Half-ripe Salem mango grated coarse, set whole-curd, fresh ginger root and split mustard. A cold, bright corner of the leaf to cut the ghee. Served in a small dipped katori.</p>
+            <div class="satvik">
+              <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3" fill="#c9a23a"/><path d="M10 2 L11 8 L17 10 L11 12 L10 18 L9 12 L3 10 L9 8 Z" fill="#c9a23a" opacity=".6"/></svg>
+              SATVIK
+            </div>
+            <div class="tail">❦ ❋ ❦</div>
+          </article>
+
+          <article class="card full">
+            <span class="pillar left"></span><span class="pillar right"></span>
+            <div class="dish-head">
+              <h3>Payasam of Jaggery &amp; Ghee
+                <span class="tam">paruppu pradhamam</span>
+              </h3>
+              <div class="price">₹ 140</div>
+            </div>
+            <p class="desc">Yellow moong dal roasted dark, simmered in coconut milk and Marayoor jaggery; broken cashew and raisin browned in ghee from the temple-cow herd at Tiruvaiyaru. The closing sweet, ladled over the centre of the leaf.</p>
+            <div class="satvik">
+              <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3" fill="#c9a23a"/><path d="M10 2 L11 8 L17 10 L11 12 L10 18 L9 12 L3 10 L9 8 Z" fill="#c9a23a" opacity=".6"/></svg>
+              SATVIK · RITUAL SWEET
+            </div>
+            <div class="tail">❦ ❋ ❦ ❋ ❦</div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <aside class="sets" aria-label="Set thalis">
+      <div class="panel-head">
+        The Set Thalis
+        <small>three feasts, after the courts</small>
+      </div>
+      <div class="panel-body">
+
+        <div class="set">
+          <h4>Chola <span class="p">₹ 420</span></h4>
+          <div class="courses">— eleven courses on the leaf —</div>
+          <p>Steamed Ponni rice, two ghees, sambhar, rasam, mor kuzhambu, two poriyals, keerai masiyal, pachadi, appalam, butter, and paruppu payasam. The everyday thali, served from 12.00 to 15.00 and 19.00 to 22.00.</p>
+        </div>
+
+        <div class="set">
+          <h4>Pandya <span class="p">₹ 560</span></h4>
+          <div class="courses">— fifteen courses, with vadai and ghee-rice —</div>
+          <p>All of the Chola, with vazhaipoo vadai, kootu of black-eyed bean, avial, ven pongal with pepper-ghee, beetroot pachadi, and a second sweet — semiya payasam alongside the paruppu. The midday choice of the temple street.</p>
+        </div>
+
+        <div class="set">
+          <h4>Vijayanagara <span class="p">₹ 780</span></h4>
+          <div class="courses">— twenty-one courses · weekend only —</div>
+          <p>The festival leaf: kalkandu sadam, puliyodharai, curd-rice with pomegranate, mango thokku, three vadais, three poriyals, mor kuzhambu, vatha kuzhambu, milagu rasam, plain rasam, two payasams, jangiri, and Mysore pak fried that morning.</p>
+          <span class="note">SAT · SUN · 11.30–15.30</span>
+        </div>
+
+      </div>
+      <div class="panel-foot">
+        <svg class="om" viewBox="0 0 356 367" aria-hidden="true">
+          <path d="M 90.456847,353.9498 C 51.797347,340.13485 23.72672,305.75839 12.612487,258.6184 C 7.5684267,237.22321 6.1421397,201.86984 10.323594,201.86984 C 11.712834,201.86984 15.42322,211.57056 18.568972,223.427 C 25.452892,249.37152 37.19436,273.76855 48.535988,285.69407 C 67.374717,305.50242 114.0356,313.26029 140.92106,301.05394 C 161.86409,291.54544 170.35697,268.94603 161.24995,246.95931 C 154.21242,229.96943 138.24701,224.28836 108.50834,228.19197 C 108.50834,228.19197 90.282834,208.57398 84.476417,173.73548 L 103.15738,175.42939 C 125.65731,177.46962 142.64532,172.49605 151.46236,161.28728 C 159.74765,150.75419 159.5685,146.68046 150.34841,135.96157 C 137.04396,120.49428 113.15511,124.41248 64.786577,149.99522 L 40.381632,109.08518 L 50.613137,101.2812 C 76.253387,81.724339 120.77357,71.947329 146.11011,80.309169 C 169.18841,87.925649 186.12724,118.14755 181.60247,143.63298 C 178.54327,160.86286 164.72752,184.99524 154.05369,191.75339 L 144.84862,197.58162 L 157.56351,203.31522 C 179.17018,213.05833 192.36061,205.61034 208.12001,174.76849 C 229.92949,132.0869 244.0745,121.0378 276.96658,120.99051 C 292.28176,120.96847 297.73268,122.57499 308.90312,130.4031 C 336.78213,149.94016 351.9622,190.39693 348.62804,236.27272 C 344.40474,294.37435 316.88374,329.61601 275.73415,329.61601 C 253.15086,329.61601 238.59451,321.69526 227.00729,303.10156 C 216.82976,286.76927 212.24334,254.42288 218.08805,240.19369 C 220.89208,233.36732 221.39892,233.13578 221.58223,238.59686 C 221.91916,248.63689 233.34159,264.95549 243.82827,270.37835 C 269.55794,283.68369 306.49479,266.96693 321.10832,235.4032 C 332.20339,211.4394 326.25105,165.21656 311.02084,157.06552 C 307.83453,155.36024 299.96089,153.96502 293.5244,153.96502 C 279.84214,153.96502 269.09709,163.80155 254.03263,190.11774 C 248.82442,199.21613 240.05943,210.97175 234.55486,216.24128 C 225.61134,224.80312 222.41769,225.82225 204.53067,225.82225 L 184.51412,225.82225 L 190.98415,240.19369 C 200.2451,260.76437 199.80694,294.18704 190.00976,314.53347 C 181.35272,332.51252 161.33618,350.71469 145.33374,355.16013 C 129.75572,359.4876 104.38789,358.9281 90.456847,353.9498 z" style="fill:var(--primary)"/>
+        </svg>
+        <p>Each set thali includes unlimited rice, ghee, sambhar, rasam, buttermilk and a betel-leaf with fennel at close. Served upon a fresh banana leaf cut at dawn from the Mylapore garden.</p>
+      </div>
+    </aside>
+
+  </div>
+</main>
+
+<div class="legend" aria-label="legend">
+  <div class="item">
+    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2 L11 8 L17 10 L11 12 L10 18 L9 12 L3 10 L9 8 Z" fill="#c9a23a"/></svg>
+    LOTUS · SATVIK DISH
+  </div>
+  <div class="item"><span style="color:var(--primary);font-size:18px">❦</span> &nbsp;PALMETTE · COURSE CLOSE</div>
+  <div class="item"><span style="color:var(--secondary);font-weight:700">₹</span> &nbsp;PRICE IN RUPEES, INCLUSIVE OF GST</div>
+  <div class="item"><span style="color:var(--text-emphasis)">❋</span>&nbsp;TEMPLE-RECIPE · NO ONION · NO GARLIC</div>
+</div>
+
+<div class="arabesque" aria-hidden="true">
+  <svg viewBox="0 0 1100 60" preserveAspectRatio="none">
+    <g fill="#8b1538">
+      <path d="M0 30 L 1100 30" stroke="#8b1538" stroke-width="1"/>
+      <path d="M540 30 Q 550 10 560 30 Q 550 50 540 30 Z"/>
+      <path d="M550 14 L 552 26 L 548 26 Z" fill="#c9a23a"/>
+      <circle cx="200" cy="30" r="3"/><circle cx="280" cy="30" r="3"/><circle cx="360" cy="30" r="3"/>
+      <circle cx="740" cy="30" r="3"/><circle cx="820" cy="30" r="3"/><circle cx="900" cy="30" r="3"/>
+      <path d="M100 30 q 20 -16 40 0 q -20 16 -40 0 Z" fill="#076b88"/>
+      <path d="M960 30 q 20 -16 40 0 q -20 16 -40 0 Z" fill="#076b88"/>
+      <path d="M420 30 q 30 -20 60 0 q -30 20 -60 0 Z"/>
+      <path d="M620 30 q 30 -20 60 0 q -30 20 -60 0 Z"/>
+    </g>
+  </svg>
+</div>
+
+<footer>
+  <div class="arcade" aria-hidden="true">
+    <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+    <div class="center-mandala"></div>
+    <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+  </div>
+  <div class="footer-info">
+    <div class="block">
+      <span class="conch" aria-hidden="true">𑀰</span>
+      <strong>The Hall</strong>
+      No. 14, North Mada Street<br>
+      Kapaleeshwarar Temple Tank<br>
+      Mylapore, Chennai 600 004
+    </div>
+    <div class="block">
+      <strong>Hours of the Kitchen</strong>
+      Tiffin · 07.00 – 10.30<br>
+      Thali (noon) · 12.00 – 15.00<br>
+      Thali (dusk) · 19.00 – 22.00<br>
+      <div class="tel">☎ 044 · 2464 · 1948</div>
+    </div>
+    <div class="block" style="text-align:right">
+      <span class="conch" aria-hidden="true" style="float:right;margin-left:10px">𑀰</span>
+      <strong>Other Pages</strong>
+      <a href="page-1.html" style="color:var(--text);text-decoration:none">Home</a> ·
+      <a href="page-3.html" style="color:var(--text);text-decoration:none">Chettinad Hearth</a><br>
+      <a href="page-4.html" style="color:var(--text);text-decoration:none">Visit</a> ·
+      <a href="page-5.html" style="color:var(--text);text-decoration:none">Lineage</a><br>
+      <a href="page-6.html" style="color:var(--text);text-decoration:none">Festivals &amp; Reservations</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    ❋ &nbsp; ANNAPURNA BHAVAN · TANJORE KITCHENS · ESTD. 1948 &nbsp; ❋ &nbsp; PRINTED ON PALM-LEAF, REPRINTED YEARLY AT THE TAMIL NEW YEAR &nbsp; ❋
+  </div>
+</footer>
+
+</body>
+</html>

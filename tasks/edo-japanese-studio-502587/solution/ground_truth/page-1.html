@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Hakubai Atelier — Joinery, Paper, and Light</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), sans-serif;
+    margin: 0;
+    padding: 0;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* ------- NAV ------- */
+  .nav-wrap {
+    padding: 36px 80px 0 80px;
+    position: relative;
+  }
+  nav.primary {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+  }
+  .mark {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+  }
+  .mark svg { width: 100%; height: 100%; display: block; }
+  nav.primary ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 38px;
+  }
+  nav.primary a {
+    text-decoration: none;
+    color: var(--text);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding-bottom: 4px;
+    border-bottom: 1px solid transparent;
+  }
+  nav.primary a[aria-current="page"] {
+    border-bottom-color: var(--primary);
+  }
+  .nav-rule {
+    margin: 24px 0 0 0;
+    border: 0;
+    border-top: 1px solid var(--primary);
+  }
+
+  /* ------- HERO ------- */
+  .hero {
+    position: relative;
+    padding: 80px 80px 140px 80px;
+    min-height: 620px;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    opacity: 0.08;
+    background-image: url("svg/seigaiha-waves.svg");
+    background-size: 350px 350px;
+    background-repeat: repeat;
+    pointer-events: none;
+  }
+  .hero-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    min-height: 520px;
+  }
+  .hero-meta {
+    grid-column: 1;
+    align-self: start;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+  .hero-meta .num {
+    color: var(--accent);
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.05em;
+    margin-right: 12px;
+  }
+  .hero-statement {
+    grid-column: 1;
+    align-self: end;
+    max-width: 380px;
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    line-height: 1.7;
+    color: var(--text);
+  }
+  .hero-statement em {
+    font-style: normal;
+    color: var(--text-emphasis);
+  }
+  .vertical-title {
+    grid-column: 3;
+    grid-row: 1 / -1;
+    justify-self: end;
+    align-self: stretch;
+    writing-mode: vertical-rl;
+    font-family: var(--font-display), serif;
+    font-size: 84px;
+    line-height: 1.05;
+    letter-spacing: 0.18em;
+    color: var(--text);
+    padding-right: 12px;
+  }
+  .vertical-title .sub {
+    font-size: 16px;
+    letter-spacing: 0.4em;
+    color: var(--text-emphasis);
+    margin-top: 60px;
+  }
+
+  /* ------- DIVIDER ------- */
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 0 80px;
+    margin: 0 0 60px 0;
+  }
+  .section-divider .label {
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    white-space: nowrap;
+  }
+  .section-divider .rule {
+    flex: 1;
+    border-top: 1px solid var(--primary);
+  }
+  .section-divider .keyfret {
+    width: 32px;
+    height: 32px;
+    opacity: 0.7;
+  }
+
+  /* ------- CURRENT WORKS ------- */
+  .works {
+    padding: 0 80px 120px 80px;
+  }
+  .works-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 56px 48px;
+  }
+  .work {
+    position: relative;
+    background: var(--surface);
+  }
+  .work .kamon-tr {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 16px;
+    height: 16px;
+  }
+  .work .kamon-tr svg { width:100%; height:100%; display:block; }
+  .work .img {
+    width: 100%;
+    aspect-ratio: 4 / 3.4;
+    background: #1c3a5e;
+    margin-bottom: 22px;
+    position: relative;
+    overflow: hidden;
+  }
+  .work .img.indigo { background: var(--text-emphasis); }
+  .work .img.sumi { background: var(--primary); }
+  .work .img.kraft {
+    background: #e8dfca;
+    border: 1px solid var(--primary);
+  }
+  .work .img-pat {
+    position:absolute; inset:0;
+    background-image: url("svg/seigaiha-waves.svg");
+    background-size: 220px 220px;
+    opacity: 0.12;
+  }
+  .work h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 500;
+    font-size: 22px;
+    margin: 0 0 10px 0;
+    line-height: 1.3;
+    color: var(--text);
+  }
+  .work p {
+    font-size: 13.5px;
+    line-height: 1.7;
+    margin: 0 0 16px 0;
+    color: var(--text);
+  }
+  .work .meta {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text);
+    border-top: 1px solid var(--primary);
+    padding-top: 10px;
+  }
+  .work-empty {
+    /* deliberate negative space */
+  }
+  .work-index {
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  /* ------- CLOSING BAND ------- */
+  .closing {
+    padding: 80px 80px 100px 80px;
+    border-top: 1px solid var(--primary);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 48px;
+  }
+  .closing h4 {
+    font-family: var(--font-body), sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin: 0 0 18px 0;
+    color: var(--text);
+    font-weight: 500;
+  }
+  .closing p {
+    margin: 0 0 8px 0;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .closing .display {
+    font-family: var(--font-display), serif;
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--text-emphasis);
+  }
+  .closing .open-studio {
+    grid-column: 4;
+  }
+  .closing .open-studio .display strong {
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  /* ------- FOOTER ------- */
+  footer {
+    padding: 80px 80px 60px 80px;
+    background: var(--bg);
+  }
+  .footer-seal {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+  .footer-seal svg {
+    width: 36px;
+    height: 36px;
+    display: block;
+  }
+  .footer-rule {
+    border: 0;
+    border-top: 1px solid var(--primary);
+    margin: 0 0 40px 0;
+  }
+  .footer-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 60px;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  .footer-cols h5 {
+    font-family: var(--font-body), sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    margin: 0 0 12px 0;
+    font-weight: 500;
+  }
+  .footer-coda {
+    margin-top: 56px;
+    padding-top: 20px;
+    border-top: 1px solid var(--primary);
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  /* small umebachi inline svg */
+  .ume {
+    display: inline-block;
+    vertical-align: middle;
+  }
+</style>
+</head>
+<body>
+
+<!-- Reusable umebachi symbol -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="umebachi" viewBox="0 0 688 688">
+    <path fill="currentColor" d="M 226.13,612.57 C 207.80,610.64 189.07,603.27 174.07,592.10 C 168.23,587.75 158.29,577.86 153.78,571.92 C 132.56,543.94 126.61,507.85 137.79,474.83 C 141.25,464.58 146.78,453.96 152.97,445.64 C 157.16,440.02 167.66,429.43 173.42,425.04 C 201.20,403.84 237.50,397.85 270.50,409.02 C 286.66,414.49 299.71,422.76 311.90,435.25 C 323.67,447.31 331.05,459.27 336.31,474.83 C 346.30,504.35 342.79,535.57 326.40,563.06 C 318.72,575.93 304.73,589.92 291.82,597.63 C 271.43,609.81 248.79,614.96 226.13,612.57 z M 439.98,612.57 C 421.65,610.64 402.92,603.27 387.93,592.10 C 382.08,587.75 372.14,577.86 367.63,571.92 C 346.41,543.94 340.46,507.85 351.64,474.83 C 355.10,464.58 360.63,453.96 366.82,445.64 C 371.01,440.02 381.51,429.43 387.27,425.04 C 415.05,403.84 451.35,397.85 484.36,409.02 C 500.51,414.49 513.56,422.76 525.75,435.25 C 537.52,447.31 544.90,459.27 550.17,474.83 C 560.15,504.35 556.64,535.57 540.25,563.06 C 532.57,575.93 518.58,589.92 505.68,597.63 C 485.28,609.81 462.64,614.96 439.98,612.57 z M 333.09,445.57 C 326.99,441.05 322.03,437.01 322.07,436.58 C 322.11,436.15 324.00,430.04 326.27,423.01 C 328.54,415.97 330.40,409.82 330.40,409.35 C 330.41,408.79 330.90,408.61 331.78,408.85 C 336.91,410.25 345.03,410.75 350.25,409.99 C 353.28,409.56 356.20,409.03 356.72,408.83 C 357.45,408.55 358.66,411.56 362.06,422.13 C 364.47,429.65 366.56,436.10 366.71,436.48 C 366.91,437.00 349.02,450.85 344.95,453.32 C 344.51,453.59 339.56,450.36 333.09,445.57 z M 314.11,432.13 C 306.25,424.11 298.14,418.10 288.08,412.83 L 281.67,409.47 L 286.09,406.26 C 288.52,404.49 294.04,400.42 298.36,397.22 C 303.55,393.37 306.30,391.69 306.48,392.27 C 307.38,395.30 319.74,404.66 325.48,406.66 C 326.68,407.08 327.53,407.75 327.37,408.16 C 327.22,408.57 325.12,415.03 322.72,422.52 C 320.31,430.00 318.27,436.13 318.18,436.13 C 318.09,436.13 316.26,434.33 314.11,432.13 z M 365.69,421.91 C 363.16,414.06 361.15,407.62 361.23,407.59 C 361.30,407.57 363.62,406.42 366.39,405.04 C 371.95,402.28 379.49,396.42 381.29,393.46 L 382.44,391.56 L 394.69,400.52 L 406.93,409.48 L 400.48,412.86 C 391.30,417.66 384.77,422.37 377.03,429.76 L 370.29,436.19 L 365.69,421.91 z M 159.87,409.87 C 141.55,407.94 122.81,400.57 107.82,389.40 C 101.98,385.05 92.03,375.16 87.53,369.22 C 66.30,341.24 60.36,305.15 71.53,272.13 C 75.00,261.88 80.52,251.26 86.72,242.94 C 90.90,237.32 101.41,226.73 107.16,222.34 C 127.75,206.63 154.14,198.87 179.16,201.17 C 189.54,202.13 195.42,203.33 204.25,206.32 C 220.40,211.79 233.45,220.06 245.64,232.55 C 257.41,244.61 264.79,256.57 270.06,272.13 C 280.05,301.65 276.54,332.87 260.14,360.36 C 252.46,373.23 238.47,387.22 225.57,394.93 C 205.17,407.11 182.53,412.26 159.87,409.87 z M 506.23,409.87 C 487.91,407.94 469.17,400.57 454.18,389.40 C 448.34,385.05 438.39,375.16 433.89,369.22 C 412.66,341.24 406.72,305.15 417.89,272.13 C 421.36,261.88 426.88,251.26 433.08,242.94 C 437.26,237.32 447.77,226.73 453.52,222.34 C 474.11,206.63 500.50,198.87 525.52,201.17 C 535.90,202.13 541.78,203.33 550.61,206.32 C 566.76,211.79 579.81,220.06 592.00,232.55 C 603.77,244.61 611.15,256.57 616.42,272.13 C 626.41,301.65 622.90,332.87 606.50,360.36 C 598.83,373.23 584.83,387.22 571.93,394.93 C 551.53,407.11 528.89,412.26 506.23,409.87 z M 268.15,398.34 C 262.05,393.82 257.09,389.78 257.13,389.35 C 257.16,388.92 259.02,382.89 261.25,375.94 L 265.30,363.31 L 280.33,363.31 L 295.35,363.31 L 295.75,366.43 C 296.75,374.22 299.55,382.58 302.60,386.86 L 303.90,388.69 L 292.35,397.16 C 285.99,401.81 280.45,405.83 280.02,406.09 C 279.57,406.36 274.67,403.16 268.15,398.34 z M 337.42,405.97 C 320.59,403.47 306.16,391.05 300.82,374.47 C 298.54,367.36 298.54,355.33 300.82,348.21 C 305.39,334.03 316.66,322.76 330.84,318.19 C 337.96,315.91 349.99,315.91 357.11,318.19 C 371.29,322.76 382.56,334.03 387.13,348.21 C 388.46,352.35 388.71,354.47 388.71,361.34 C 388.71,368.22 388.46,370.34 387.13,374.47 C 382.57,388.63 371.11,400.11 357.26,404.38 C 351.87,406.05 342.80,406.77 337.42,405.97 z M 396.92,397.62 L 384.71,388.68 L 386.01,386.85 C 389.05,382.58 391.85,374.22 392.85,366.43 L 393.25,363.31 L 408.27,363.31 L 423.29,363.31 L 427.32,375.89 C 429.54,382.81 431.48,388.80 431.63,389.20 C 431.84,389.75 414.15,403.50 409.90,406.09 C 409.45,406.36 404.04,402.82 396.92,397.62 z M 268.02,354.50 C 273.04,344.52 276.23,334.54 278.53,321.56 L 279.36,316.86 L 291.64,325.75 L 303.91,334.64 L 302.60,336.48 C 299.65,340.63 296.80,348.88 295.79,356.24 L 295.36,359.33 L 280.38,359.52 L 265.41,359.70 L 268.02,354.50 z M 392.82,356.26 C 391.80,348.88 388.96,340.63 386.00,336.48 L 384.69,334.64 L 396.97,325.75 C 403.72,320.87 409.31,316.92 409.38,316.99 C 409.46,317.06 409.85,319.32 410.26,322.01 C 411.91,333.02 415.51,344.42 420.36,354.05 C 421.64,356.60 422.69,358.84 422.69,359.03 C 422.69,359.22 416.07,359.38 407.97,359.38 L 393.25,359.38 L 392.82,356.26 z M 294.07,322.92 C 287.42,318.04 282.02,313.69 282.05,313.26 C 282.09,312.83 283.94,306.79 286.17,299.85 L 290.23,287.22 L 304.28,287.22 L 318.33,287.22 L 322.92,301.46 C 325.45,309.30 327.45,315.73 327.38,315.75 C 327.31,315.78 324.98,316.93 322.21,318.30 C 316.65,321.06 309.12,326.92 307.32,329.88 L 306.16,331.79 L 294.07,322.92 z M 382.02,330.93 C 382.02,328.56 368.96,318.72 363.12,316.68 C 361.93,316.27 361.08,315.59 361.23,315.18 C 361.39,314.78 363.49,308.32 365.89,300.83 L 370.26,287.22 L 384.31,287.22 L 398.37,287.22 L 402.40,299.80 C 404.61,306.72 406.55,312.71 406.71,313.11 C 406.86,313.51 401.76,317.66 395.38,322.34 C 381.62,332.43 382.02,332.17 382.02,330.93 z M 330.29,312.66 C 325.89,298.77 322.39,286.94 322.62,286.70 C 322.78,286.55 325.51,286.81 328.69,287.29 C 336.19,288.42 353.31,288.42 360.24,287.29 C 363.23,286.80 365.81,286.53 365.97,286.69 C 366.13,286.85 365.11,290.67 363.70,295.18 C 362.30,299.68 360.38,305.88 359.45,308.95 L 357.75,314.52 L 352.99,313.69 C 345.89,312.44 337.51,312.74 332.16,314.44 C 331.25,314.73 330.81,314.32 330.29,312.66 z M 333.05,283.92 C 314.73,281.99 295.99,274.62 281.00,263.45 C 275.16,259.10 265.21,249.21 260.71,243.27 C 239.48,215.29 233.54,179.20 244.71,146.18 C 248.18,135.93 253.70,125.31 259.90,116.99 C 264.08,111.37 274.59,100.78 280.34,96.39 C 308.13,75.19 344.43,69.20 377.43,80.37 C 393.58,85.84 406.63,94.11 418.82,106.60 C 430.59,118.66 437.97,130.62 443.24,146.18 C 453.23,175.70 449.72,206.92 433.32,234.41 C 425.65,247.28 411.65,261.28 398.75,268.98 C 378.35,281.16 355.71,286.31 333.05,283.92 z"/>
+  </symbol>
+</svg>
+
+<div class="nav-wrap">
+  <nav class="primary" aria-label="Primary">
+    <span class="mark" aria-hidden="true"><svg><use href="#umebachi"/></svg></span>
+    <ul>
+      <li><a href="page-1.html" aria-current="page">Home</a></li>
+      <li><a href="page-2.html">Works</a></li>
+      <li><a href="page-3.html">Practice</a></li>
+      <li><a href="page-4.html">Materials</a></li>
+      <li><a href="page-5.html">Journal</a></li>
+      <li><a href="page-6.html">Studio</a></li>
+    </ul>
+  </nav>
+  <hr class="nav-rule">
+</div>
+
+<section class="hero">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-grid">
+    <div class="hero-meta">
+      <span class="num">壱</span> Nishijin · Kyoto · Est. 1998
+    </div>
+
+    <div class="vertical-title">
+      白梅工房
+      <div class="sub">HAKUBAI ATELIER</div>
+    </div>
+
+    <p class="hero-statement">
+      A studio in Nishijin, Kyoto. <em>Joinery, washi, and the architecture of small rooms.</em> Founded 1998 by Aiko Tachibana and Junpei Mori.
+    </p>
+  </div>
+</section>
+
+<div class="section-divider">
+  <span class="label">Current Works · Spring 2024</span>
+  <span class="rule"></span>
+  <svg class="keyfret" viewBox="0 0 600 600" aria-hidden="true">
+    <g fill="none" stroke="#0c0c0c" stroke-width="6">
+      <polygon points="501.6,301.2 551.1,251.7 500.8,201.4 451.3,250.9 300.9,100.5 350.4,51 300.1,0.7 250.6,50.2 201.1,0.7 150.3,51.5 500.3,401.5 551.1,350.7"/>
+      <polygon points="349.9,452.9 300.4,502.4 250.1,452.1 299.6,402.6 149.2,252.2 99.7,301.7 49.4,251.4 98.9,201.9 49.4,152.4 100.2,101.6 450.2,451.6 399.4,502.4"/>
+    </g>
+  </svg>
+</div>
+
+<section class="works">
+  <div class="works-grid">
+
+    <article class="work">
+      <span class="kamon-tr" aria-hidden="true"><svg><use href="#umebachi"/></svg></span>
+      <div class="img indigo"><div class="img-pat"></div></div>
+      <div class="work-index">No. 一</div>
+      <h3>Tea-Room Renovation, Kamigyō</h3>
+      <p>A four-and-a-half mat tea room reset within a Meiji-era machiya. New tokonoma in figured keyaki; replastered earthen walls in Jurakudai ochre; a single shoji rebuilt with hand-pulled Echizen washi.</p>
+      <div class="meta">2024 · Keyaki, Jurakudai earth · Private commission</div>
+    </article>
+
+    <article class="work">
+      <span class="kamon-tr" aria-hidden="true"><svg><use href="#umebachi"/></svg></span>
+      <div class="img sumi"><div class="img-pat"></div></div>
+      <div class="work-index">No. 二</div>
+      <h3>Andon Lamps for Ryokan Sasayuri</h3>
+      <p>A run of fourteen cedar floor lanterns for the corridor and entry of Sasayuri, an inn on the Kumano Kodō. Yoshino sugi frames with kōzo washi, oil-wax finish, low 2700K LED warm to the eye.</p>
+      <div class="meta">2023–24 · Yoshino sugi, kōzo washi · Ryokan Sasayuri</div>
+    </article>
+
+    <article class="work">
+      <span class="kamon-tr" aria-hidden="true"><svg><use href="#umebachi"/></svg></span>
+      <div class="img kraft"><div class="img-pat"></div></div>
+      <div class="work-index">No. 三</div>
+      <h3>Kumiko Screen, Mori Residence</h3>
+      <p>A 2,400 × 1,800 mm asa-no-ha kumiko partition for a Setagaya residence by architect K. Hasegawa. 1,184 hand-cut hinoki pieces, no fasteners; installed February in a single day on site.</p>
+      <div class="meta">2024 · Kiso hinoki · Mori family, Setagaya</div>
+    </article>
+
+  </div>
+</section>
+
+<section class="closing">
+  <div>
+    <h4>Studio Hours</h4>
+    <p class="display">Tuesday — Saturday<br>10:00 — 17:00</p>
+    <p>Closed Sunday, Monday, and the second week of August.</p>
+  </div>
+  <div>
+    <h4>Address</h4>
+    <p class="display">24 Shōkokuji-monzen-chō<br>Kamigyō-ku, Kyoto 602-0898</p>
+    <p>Five minutes on foot from Imadegawa station, exit 3.</p>
+  </div>
+  <div>
+    <h4>Correspondence</h4>
+    <p class="display">atelier@hakubai.kyoto<br>+81 75 411 2918</p>
+    <p>Commissions are reviewed on the first Friday of each month.</p>
+  </div>
+  <div class="open-studio">
+    <h4>Spring Open Studio</h4>
+    <p class="display"><strong>April 12 — 14, 2024</strong><br>11:00 — 18:00 daily</p>
+    <p>Three days of open doors: new andon, kumiko in progress, tea served at 15:00 by Aiko. No appointment required.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-seal" aria-hidden="true">
+    <svg><use href="#umebachi"/></svg>
+  </div>
+  <hr class="footer-rule">
+  <div class="footer-cols">
+    <div>
+      <h5>Studio</h5>
+      <p>Hakubai Atelier 白梅工房<br>
+      24 Shōkokuji-monzen-chō<br>
+      Kamigyō-ku, Kyoto 602-0898<br>
+      Japan</p>
+    </div>
+    <div>
+      <h5>Contact &amp; Hours</h5>
+      <p>atelier@hakubai.kyoto<br>
+      +81 75 411 2918<br>
+      Tue — Sat, 10:00 — 17:00<br>
+      Visits by prior arrangement.</p>
+    </div>
+    <div>
+      <h5>Colophon</h5>
+      <p>Set in Shippori Mincho and Inter.<br>
+      Kamon and seigaiha renderings<br>
+      adapted from public-domain sources<br>
+      via Wikimedia Commons, CC BY-SA 4.0.</p>
+    </div>
+  </div>
+  <div class="footer-coda">
+    <span>Founded 1998 — Aiko Tachibana &amp; Junpei Mori</span>
+    <span>© 2024 Hakubai Atelier · CC BY-SA 4.0 (motifs)</span>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="la">
+<head>
+<meta charset="UTF-8">
+<title>FUNDATIO AURELIA — Patronage for the Conservation of Roman Antiquity</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    font-size: 17px;
+    line-height: 1.65;
+    text-align: center;
+  }
+
+  /* ---------- TRAVERTINE TEXTURE BACKDROP ---------- */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 10%, rgba(201,162,58,0.05), transparent 40%),
+      radial-gradient(ellipse at 80% 60%, rgba(169,50,38,0.04), transparent 50%),
+      repeating-linear-gradient(45deg, rgba(0,0,0,0.012) 0 2px, transparent 2px 7px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ---------- TYPOGRAPHY ---------- */
+  h1, h2, h3, h4, .caps {
+    font-family: var(--font-display), "Times New Roman", serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--text);
+  }
+  h1 { font-size: 2.6rem; letter-spacing: 0.32em; line-height: 1.25; margin: 0; }
+  h2 { font-size: 1.55rem; letter-spacing: 0.28em; margin: 0 0 0.4em; }
+  h3 { font-size: 1.05rem; letter-spacing: 0.26em; margin: 0; }
+  p { margin: 0 0 1em; }
+
+  /* ---------- NAVIGATION FRIEZE ---------- */
+  .frieze {
+    position: relative;
+    background: var(--surface);
+    border-top: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+    padding: 0;
+    z-index: 5;
+  }
+  .frieze::before, .frieze::after {
+    content: "";
+    display: block;
+    height: 1px;
+    background: var(--ornament);
+    margin: 3px 0;
+    opacity: 0.55;
+  }
+  .frieze nav {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 14px 48px;
+    gap: 24px;
+  }
+  .frieze .nav-left, .frieze .nav-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .frieze .nav-left { justify-content: flex-end; }
+  .frieze .nav-right { justify-content: flex-start; }
+  .frieze a {
+    font-family: var(--font-display), serif;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    text-decoration: none;
+    color: var(--text);
+    padding: 4px 2px;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+  .frieze a:hover { border-bottom-color: var(--primary); }
+  .frieze a[aria-current="page"] {
+    color: var(--primary);
+    border-bottom-color: var(--primary);
+  }
+  .nav-leaf {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    color: var(--ornament);
+    opacity: 0.85;
+    vertical-align: middle;
+  }
+  .nav-leaf svg { width: 100%; height: 100%; fill: currentColor; }
+  .wordmark {
+    font-family: var(--font-display), serif;
+    font-size: 1.05rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border-left: 1px solid var(--ornament);
+    border-right: 1px solid var(--ornament);
+    padding: 6px 24px;
+    white-space: nowrap;
+  }
+  .wordmark .amp { color: var(--primary); margin: 0 0.15em; }
+
+  /* ---------- HERO PEDIMENT ---------- */
+  .hero {
+    position: relative;
+    padding: 88px 40px 72px;
+    text-align: center;
+  }
+  .pediment {
+    position: relative;
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 56px 48px 48px;
+    background: var(--surface);
+    border: 1px solid var(--ornament);
+    box-shadow:
+      inset 0 0 0 6px var(--surface),
+      inset 0 0 0 7px var(--ornament),
+      0 2px 0 rgba(0,0,0,0.04);
+  }
+  .pediment::before {
+    content: "";
+    position: absolute;
+    top: -38px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0; height: 0;
+    border-left: 440px solid transparent;
+    border-right: 440px solid transparent;
+    border-bottom: 38px solid var(--surface);
+    filter: drop-shadow(0 -1px 0 var(--ornament));
+  }
+  .hero-laurel {
+    position: absolute;
+    top: -24px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: auto;
+    z-index: 2;
+    opacity: 0.95;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-display), serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.46em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 18px;
+  }
+  .hero h1 {
+    color: var(--accent);
+  }
+  .hero h1 .amp { color: var(--primary); margin: 0 0.2em; font-style: italic; font-family: var(--font-body), serif; text-transform: lowercase; letter-spacing: 0; }
+  .charter {
+    margin: 30px auto 0;
+    max-width: 640px;
+    font-family: var(--font-body), serif;
+    font-size: 1.18rem;
+    line-height: 1.7;
+    font-style: italic;
+    color: #2a2a2a;
+  }
+  .charter::before, .charter::after {
+    display: block;
+    color: var(--ornament);
+    font-style: normal;
+    font-size: 1.4rem;
+    line-height: 1;
+    margin: 0.4em 0;
+  }
+  .charter::before { content: "❦"; }
+  .charter::after  { content: "❦"; }
+  .gold-rule {
+    width: 120px;
+    height: 1px;
+    background: var(--ornament);
+    margin: 28px auto;
+    position: relative;
+  }
+  .gold-rule::before, .gold-rule::after {
+    content: "";
+    position: absolute;
+    top: -2px;
+    width: 5px; height: 5px;
+    background: var(--ornament);
+    transform: rotate(45deg);
+  }
+  .gold-rule::before { left: -6px; }
+  .gold-rule::after  { right: -6px; }
+  .charter-attrib {
+    font-family: var(--font-display), serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+  .charter-attrib strong { color: var(--primary); font-weight: 600; }
+
+  /* ---------- MEANDER DIVIDER ---------- */
+  .meander {
+    display: block;
+    margin: 0 auto;
+    width: 70%;
+    max-width: 720px;
+    height: 28px;
+    color: var(--primary);
+    opacity: 0.85;
+  }
+  .meander svg { width: 100%; height: 100%; }
+  .section-divider {
+    padding: 36px 0 20px;
+    text-align: center;
+  }
+
+  /* ---------- PROGRAMMES ---------- */
+  .programmes {
+    padding: 24px 40px 72px;
+  }
+  .programmes-title {
+    margin-bottom: 8px;
+    color: var(--accent);
+  }
+  .programmes-sub {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    color: #4a3a2c;
+    margin-bottom: 48px;
+  }
+  .columns {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 36px;
+    max-width: 1240px;
+    margin: 0 auto;
+  }
+  .card {
+    position: relative;
+    background: #fbf7ee;
+    padding: 64px 30px 36px;
+    text-align: center;
+    border: 1px solid #d8c89e;
+  }
+  /* Greek-key tiled border */
+  .card::before {
+    content: "";
+    position: absolute;
+    inset: 8px;
+    border: 2px double var(--ornament);
+    pointer-events: none;
+  }
+  .card-key {
+    position: absolute;
+    left: 8px; right: 8px;
+    height: 14px;
+    color: var(--primary);
+    opacity: 0.7;
+    overflow: hidden;
+  }
+  .card-key.top { top: 8px; }
+  .card-key.bottom { bottom: 8px; transform: scaleY(-1); }
+  .card-key svg {
+    height: 14px;
+    width: auto;
+    display: block;
+    margin: 0 auto;
+  }
+  .laurel-plate {
+    position: absolute;
+    top: -34px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 180px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+  }
+  .laurel-plate svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .laurel-plate .plate-label {
+    position: relative;
+    background: var(--bg);
+    padding: 6px 14px;
+    font-family: var(--font-display), serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: var(--primary);
+    z-index: 2;
+  }
+  .roman-num {
+    font-family: var(--font-display), serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    color: var(--secondary);
+    margin: 8px 0 18px;
+  }
+  .card h3 { color: var(--accent); margin-bottom: 14px; font-size: 1rem; }
+  .card-body {
+    font-size: 0.98rem;
+    text-align: left;
+    line-height: 1.7;
+    color: #2a2a2a;
+    margin-bottom: 20px;
+  }
+  .card-body::first-letter {
+    font-family: var(--font-display), serif;
+    font-size: 3.2em;
+    float: left;
+    line-height: 0.85;
+    padding: 4px 8px 0 0;
+    color: var(--primary);
+    font-weight: 700;
+  }
+  .card-rule {
+    width: 70px;
+    height: 1px;
+    background: var(--ornament);
+    margin: 22px auto 18px;
+  }
+  .card-cta {
+    display: inline-block;
+    font-family: var(--font-display), serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: var(--primary);
+    text-decoration: none;
+    border-bottom: 1px solid var(--primary);
+    padding-bottom: 3px;
+  }
+  .card-cta:hover { color: var(--accent); border-color: var(--accent); }
+
+  /* ---------- DEDICATION STRIP ---------- */
+  .dedication {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 40px 40px;
+    text-align: center;
+  }
+  .dedication .small-caps {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.32em;
+    font-size: 0.78rem;
+    color: var(--primary);
+    margin-bottom: 16px;
+  }
+  .dedication blockquote {
+    margin: 0;
+    font-family: var(--font-body), serif;
+    font-size: 1.15rem;
+    font-style: italic;
+    line-height: 1.7;
+    color: #2a2a2a;
+  }
+  .dedication cite {
+    display: block;
+    margin-top: 16px;
+    font-family: var(--font-display), serif;
+    font-style: normal;
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    margin-top: 60px;
+    background: rgba(169, 50, 38, 0.88);
+    color: #f5e6c8;
+    position: relative;
+  }
+  .meander-strip {
+    background: var(--surface);
+    height: 30px;
+    overflow: hidden;
+    color: var(--ornament);
+  }
+  .meander-strip svg { height: 100%; width: 100%; display: block; }
+  .footer-seal-band {
+    text-align: center;
+    padding: 36px 24px 28px;
+    border-bottom: 1px solid rgba(245,230,200,0.25);
+  }
+  .footer-seal-band .row {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .footer-addr-l, .footer-addr-r {
+    font-family: var(--font-display), serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: #f5e6c8;
+    line-height: 1.8;
+  }
+  .footer-addr-l { text-align: right; }
+  .footer-addr-r { text-align: left; }
+  .footer-seal {
+    width: 130px;
+    height: 130px;
+    margin: 0 auto;
+    color: #f5e6c8;
+  }
+  .footer-seal svg { width: 100%; height: 100%; fill: currentColor; }
+  .footer-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 36px 40px 30px;
+    gap: 40px;
+    text-align: center;
+  }
+  .footer-cols h4 {
+    font-family: var(--font-display), serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin: 0 0 14px;
+  }
+  .footer-cols ul {
+    list-style: none;
+    margin: 0; padding: 0;
+    font-family: var(--font-display), serif;
+    font-size: 0.66rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    line-height: 2;
+    color: #f5e6c8;
+  }
+  .footer-cols a { color: inherit; text-decoration: none; }
+  .footer-cols a:hover { color: var(--secondary); }
+  .footer-coda {
+    text-align: center;
+    padding: 16px 24px 22px;
+    font-family: var(--font-display), serif;
+    font-size: 0.66rem;
+    letter-spacing: 0.34em;
+    color: #f5e6c8;
+    text-transform: uppercase;
+    border-top: 1px solid rgba(245,230,200,0.25);
+  }
+
+  /* ---------- LAUREL ROUNDEL (CARD) ---------- */
+  .laurel-svg path { fill: var(--secondary); }
+</style>
+</head>
+<body>
+
+<!-- Reusable inline SVGs -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="vine-leaf" viewBox="0 0 200 200">
+      <path d="M43.583 863.37c-1.79.03-3.58.13-5.34.31-7.05.74-13.94 2.79-19.16 7.47s-8.2 12-7.69 21c.51 9 4.3 16.14 10.19 20.34 5.89 4.2 13.31 5.53 21.03 5.19 15.45-.69 32.83-8 45.81-18.31 1.41-1.12 2.83-2.04 4.25-3.06 4.29 6.68 7.61 14.83 9.34 24.06-7.5-5.07-21.01-10.55-35.66 1.5-22.14 18.21-24.99 12.88-45.34-2.13-2.86 36.07 15.01 54.64 44.66 52.5 0 0-13.95 4.26-3.59 26.41 6.02 12.87 8.41 20.07 6.56 25.19-12.84 2.29-15.77 7.78-5.57 12.66 45.1 9.97 65.67-27.47 68.66-66.04 45.36 0 52.86-31.8 52.5-50.37-8.21 11.07-22.16 11.07-32.87 2.5-9.93-7.95-21.69-16.18-39-1.13-1.74-11.68-5.69-22.13-11.22-30.72 19.36-11.37 38.72-14.46 52.53-10.81 5.48 1.45 9.46 4.09 12.38 6.97-8.97 8.36-11.84 26.38 2.28 27.03 18.92.88 21.03-15.45 13.56-27.13-5.45-8.51-16.42-13.23-25.66-16.56-17.51-4.63-39.74-.57-61.28 12.5-5.17-5.72-11.13-10.22-17.72-12.97-7.08-2.95-17.54-5.73-28.28-6.31-1.79-.1-3.58-.13-5.37-.09zm.13 10.03c1.52-.02 3.09.03 4.66.13 9.41.59 19.26 3.06 25.03 5.47 4.63 1.93 9.05 5.23 13.06 9.44-1.42 1.04-2.84 1.98-4.25 3.09-11.3 8.98-27.54 15.6-40.03 16.16-6.25.28-11.38-.91-14.78-3.34s-5.65-6.04-6.03-12.75c-.38-6.72 1.42-10.3 4.41-12.97 2.98-2.67 7.74-4.37 13.5-4.97 1.44-.15 2.92-.23 4.44-.25zm62.28 64.81c1 .01 2.03.1 3.06.28 8.26 1.44 14 8.11 12.81 14.91-1.19 6.8-8.84 11.16-17.09 9.72-8.26-1.44-14-8.11-12.81-14.91 1.04-5.95 7.02-10.04 14.03-10z" transform="translate(0 -852.36)"/>
+    </symbol>
+
+    <symbol id="meander-tile" viewBox="0 0 80 28">
+      <g fill="none" stroke="currentColor" stroke-width="2.5">
+        <path d="M2 26 L2 2 L26 2 L26 18 L10 18 L10 10 L18 10"/>
+        <path d="M30 26 L30 2 L54 2 L54 18 L38 18 L38 10 L46 10"/>
+      </g>
+    </symbol>
+
+    <symbol id="laurel-roundel" viewBox="0 0 220 100">
+      <g fill="none" stroke="currentColor" stroke-width="1.2">
+        <path d="M30,50 Q60,10 110,8 Q160,10 190,50" />
+        <path d="M30,50 Q60,90 110,92 Q160,90 190,50" />
+      </g>
+      <g fill="currentColor">
+        <!-- left leaves -->
+        <ellipse cx="42" cy="40" rx="8" ry="3" transform="rotate(-30 42 40)"/>
+        <ellipse cx="55" cy="28" rx="8" ry="3" transform="rotate(-20 55 28)"/>
+        <ellipse cx="72" cy="20" rx="8" ry="3" transform="rotate(-10 72 20)"/>
+        <ellipse cx="92" cy="14" rx="8" ry="3" transform="rotate(-5 92 14)"/>
+        <ellipse cx="42" cy="60" rx="8" ry="3" transform="rotate(30 42 60)"/>
+        <ellipse cx="55" cy="72" rx="8" ry="3" transform="rotate(20 55 72)"/>
+        <ellipse cx="72" cy="80" rx="8" ry="3" transform="rotate(10 72 80)"/>
+        <ellipse cx="92" cy="86" rx="8" ry="3" transform="rotate(5 92 86)"/>
+        <!-- right leaves -->
+        <ellipse cx="178" cy="40" rx="8" ry="3" transform="rotate(30 178 40)"/>
+        <ellipse cx="165" cy="28" rx="8" ry="3" transform="rotate(20 165 28)"/>
+        <ellipse cx="148" cy="20" rx="8" ry="3" transform="rotate(10 148 20)"/>
+        <ellipse cx="128" cy="14" rx="8" ry="3" transform="rotate(5 128 14)"/>
+        <ellipse cx="178" cy="60" rx="8" ry="3" transform="rotate(-30 178 60)"/>
+        <ellipse cx="165" cy="72" rx="8" ry="3" transform="rotate(-20 165 72)"/>
+        <ellipse cx="148" cy="80" rx="8" ry="3" transform="rotate(-10 148 80)"/>
+        <ellipse cx="128" cy="86" rx="8" ry="3" transform="rotate(-5 128 86)"/>
+        <!-- ribbon ties -->
+        <path d="M28,46 L22,42 L22,58 L28,54 Z" opacity="0.85"/>
+        <path d="M192,46 L198,42 L198,58 L192,54 Z" opacity="0.85"/>
+      </g>
+    </symbol>
+
+    <symbol id="oak-seal" viewBox="0 0 160 160">
+      <circle cx="80" cy="80" r="74" fill="none" stroke="currentColor" stroke-width="1"/>
+      <circle cx="80" cy="80" r="68" fill="none" stroke="currentColor" stroke-width="0.5"/>
+      <g fill="currentColor" opacity="0.95">
+        <!-- oak leaves circling -->
+        <g id="oak-leaf-set">
+          <path d="M80 14 q-4 6 -2 12 q-6 -2 -10 2 q4 4 10 4 q-2 6 2 12 q4 -6 2 -12 q6 0 10 -4 q-4 -4 -10 -2 q2 -6 -2 -12 z"/>
+        </g>
+      </g>
+      <g fill="currentColor">
+        <use href="#oak-leaf-set" transform="rotate(30 80 80)"/>
+        <use href="#oak-leaf-set" transform="rotate(60 80 80)"/>
+        <use href="#oak-leaf-set" transform="rotate(90 80 80)"/>
+        <use href="#oak-leaf-set" transform="rotate(120 80 80)"/>
+        <use href="#oak-leaf-set" transform="rotate(150 80 80)"/>
+        <use href="#oak-leaf-set" transform="rotate(180 80 80)"/>
+        <use href="#oak-leaf-set" transform="rotate(210 80 80)"/>
+        <use href="#oak-leaf-set" transform="rotate(240 80 80)"/>
+        <use href="#oak-leaf-set" transform="rotate(270 80 80)"/>
+        <use href="#oak-leaf-set" transform="rotate(300 80 80)"/>
+        <use href="#oak-leaf-set" transform="rotate(330 80 80)"/>
+      </g>
+      <g fill="none" stroke="currentColor" stroke-width="0.8">
+        <circle cx="80" cy="80" r="34"/>
+      </g>
+      <g fill="currentColor" font-family="Cinzel, serif" text-anchor="middle">
+        <text x="80" y="74" font-size="9" letter-spacing="2">F · A</text>
+        <text x="80" y="90" font-size="6" letter-spacing="1.5">MMIX</text>
+      </g>
+    </symbol>
+
+    <symbol id="full-laurel" viewBox="0 0 220 200">
+      <g stroke="currentColor" stroke-width="1" fill="currentColor">
+        <path d="M110,18 Q40,30 30,110 Q40,180 110,188" fill="none" stroke-width="1.4"/>
+        <path d="M110,18 Q180,30 190,110 Q180,180 110,188" fill="none" stroke-width="1.4"/>
+        <g>
+          <ellipse cx="40" cy="60" rx="11" ry="4" transform="rotate(-50 40 60)"/>
+          <ellipse cx="34" cy="90" rx="11" ry="4" transform="rotate(-80 34 90)"/>
+          <ellipse cx="36" cy="120" rx="11" ry="4" transform="rotate(-100 36 120)"/>
+          <ellipse cx="50" cy="150" rx="11" ry="4" transform="rotate(-130 50 150)"/>
+          <ellipse cx="75" cy="172" rx="11" ry="4" transform="rotate(-160 75 172)"/>
+          <ellipse cx="60" cy="42" rx="11" ry="4" transform="rotate(-30 60 42)"/>
+          <ellipse cx="86" cy="28" rx="11" ry="4" transform="rotate(-15 86 28)"/>
+        </g>
+        <g>
+          <ellipse cx="180" cy="60" rx="11" ry="4" transform="rotate(50 180 60)"/>
+          <ellipse cx="186" cy="90" rx="11" ry="4" transform="rotate(80 186 90)"/>
+          <ellipse cx="184" cy="120" rx="11" ry="4" transform="rotate(100 184 120)"/>
+          <ellipse cx="170" cy="150" rx="11" ry="4" transform="rotate(130 170 150)"/>
+          <ellipse cx="145" cy="172" rx="11" ry="4" transform="rotate(160 145 172)"/>
+          <ellipse cx="160" cy="42" rx="11" ry="4" transform="rotate(30 160 42)"/>
+          <ellipse cx="134" cy="28" rx="11" ry="4" transform="rotate(15 134 28)"/>
+        </g>
+        <path d="M105,188 L95,196 L120,196 L115,188 Z" />
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ============== NAVIGATION FRIEZE ============== -->
+<header class="frieze" role="banner">
+  <nav aria-label="Primary">
+    <div class="nav-left">
+      <a href="page-1.html" aria-current="page">Domus</a>
+      <span class="nav-leaf" aria-hidden="true"><svg><use href="#vine-leaf"/></svg></span>
+      <a href="page-2.html">De Proposito</a>
+      <span class="nav-leaf" aria-hidden="true"><svg><use href="#vine-leaf"/></svg></span>
+      <a href="page-3.html">Opera</a>
+    </div>
+    <div class="wordmark">Fundatio<span class="amp">·</span>Aurelia</div>
+    <div class="nav-right">
+      <a href="page-4.html">Benefactores</a>
+      <span class="nav-leaf" aria-hidden="true"><svg><use href="#vine-leaf"/></svg></span>
+      <a href="page-5.html">Acta</a>
+      <span class="nav-leaf" aria-hidden="true"><svg><use href="#vine-leaf"/></svg></span>
+      <a href="page-6.html">Scribe Nobis</a>
+    </div>
+  </nav>
+</header>
+
+<!-- ============== HERO PEDIMENT ============== -->
+<section class="hero" role="region" aria-label="Charter">
+  <div class="pediment">
+    <div class="hero-laurel" aria-hidden="true">
+      <svg viewBox="0 0 220 200" width="200" height="180" style="color: var(--secondary)">
+        <use href="#full-laurel"/>
+      </svg>
+    </div>
+    <div class="hero-eyebrow">Anno Domini · MMIX</div>
+    <h1>Fundatio<span class="amp">et</span>Aurelia</h1>
+    <p class="charter">
+      Established at Rome in the consulship of two private citizens,
+      MMIX, for the safeguarding of stone, water, and inscription
+      across the former provinces of the Empire.
+    </p>
+    <div class="gold-rule" aria-hidden="true"></div>
+    <div class="charter-attrib">
+      Patronage <strong>·</strong> Conservation <strong>·</strong> Record
+    </div>
+  </div>
+</section>
+
+<!-- ============== MEANDER DIVIDER ============== -->
+<div class="section-divider" aria-hidden="true">
+  <svg class="meander" viewBox="0 0 720 28" preserveAspectRatio="xMidYMid meet">
+    <g fill="none" stroke="currentColor" stroke-width="2">
+      <!-- Greek key band -->
+      <g>
+        <path d="M0 26 L0 2 L24 2 L24 18 L8 18 L8 10 L16 10 L16 14 L12 14"/>
+        <path d="M28 26 L28 2 L52 2 L52 18 L36 18 L36 10 L44 10 L44 14 L40 14"/>
+        <path d="M56 26 L56 2 L80 2 L80 18 L64 18 L64 10 L72 10 L72 14 L68 14"/>
+        <path d="M84 26 L84 2 L108 2 L108 18 L92 18 L92 10 L100 10 L100 14 L96 14"/>
+        <path d="M112 26 L112 2 L136 2 L136 18 L120 18 L120 10 L128 10 L128 14 L124 14"/>
+        <path d="M140 26 L140 2 L164 2 L164 18 L148 18 L148 10 L156 10 L156 14 L152 14"/>
+        <path d="M168 26 L168 2 L192 2 L192 18 L176 18 L176 10 L184 10 L184 14 L180 14"/>
+        <path d="M196 26 L196 2 L220 2 L220 18 L204 18 L204 10 L212 10 L212 14 L208 14"/>
+        <path d="M224 26 L224 2 L248 2 L248 18 L232 18 L232 10 L240 10 L240 14 L236 14"/>
+        <path d="M252 26 L252 2 L276 2 L276 18 L260 18 L260 10 L268 10 L268 14 L264 14"/>
+        <path d="M280 26 L280 2 L304 2 L304 18 L288 18 L288 10 L296 10 L296 14 L292 14"/>
+        <path d="M308 26 L308 2 L332 2 L332 18 L316 18 L316 10 L324 10 L324 14 L320 14"/>
+        <path d="M336 26 L336 2 L360 2 L360 18 L344 18 L344 10 L352 10 L352 14 L348 14"/>
+        <path d="M364 26 L364 2 L388 2 L388 18 L372 18 L372 10 L380 10 L380 14 L376 14"/>
+        <path d="M392 26 L392 2 L416 2 L416 18 L400 18 L400 10 L408 10 L408 14 L404 14"/>
+        <path d="M420 26 L420 2 L444 2 L444 18 L428 18 L428 10 L436 10 L436 14 L432 14"/>
+        <path d="M448 26 L448 2 L472 2 L472 18 L456 18 L456 10 L464 10 L464 14 L460 14"/>
+        <path d="M476 26 L476 2 L500 2 L500 18 L484 18 L484 10 L492 10 L492 14 L488 14"/>
+        <path d="M504 26 L504 2 L528 2 L528 18 L512 18 L512 10 L520 10 L520 14 L516 14"/>
+        <path d="M532 26 L532 2 L556 2 L556 18 L540 18 L540 10 L548 10 L548 14 L544 14"/>
+        <path d="M560 26 L560 2 L584 2 L584 18 L568 18 L568 10 L576 10 L576 14 L572 14"/>
+        <path d="M588 26 L588 2 L612 2 L612 18 L596 18 L596 10 L604 10 L604 14 L600 14"/>
+        <path d="M616 26 L616 2 L640 2 L640 18 L624 18 L624 10 L632 10 L632 14 L628 14"/>
+        <path d="M644 26 L644 2 L668 2 L668 18 L652 18 L652 10 L660 10 L660 14 L656 14"/>
+        <path d="M672 26 L672 2 L696 2 L696 18 L680 18 L680 10 L688 10 L688 14 L684 14"/>
+      </g>
+      <line x1="0" y1="26" x2="720" y2="26"/>
+      <line x1="0" y1="2" x2="720" y2="2"/>
+    </g>
+  </svg>
+</div>
+
+<!-- ============== PROGRAMMES ============== -->
+<section class="programmes" aria-labelledby="programmes-heading">
+  <h2 id="programmes-heading" class="programmes-title">Tres Operae</h2>
+  <p class="programmes-sub">— The three programmes of the Foundation —</p>
+
+  <div class="columns">
+
+    <!-- CARD I — EPIGRAPHY -->
+    <article class="card">
+      <div class="card-key top" aria-hidden="true">
+        <svg viewBox="0 0 800 14" preserveAspectRatio="xMinYMid slice">
+          <g fill="none" stroke="currentColor" stroke-width="1.6">
+            <path d="M0 12 L0 2 L12 2 L12 9 L4 9 L4 6 L8 6"/>
+            <path d="M14 12 L14 2 L26 2 L26 9 L18 9 L18 6 L22 6"/>
+            <path d="M28 12 L28 2 L40 2 L40 9 L32 9 L32 6 L36 6"/>
+            <path d="M42 12 L42 2 L54 2 L54 9 L46 9 L46 6 L50 6"/>
+            <path d="M56 12 L56 2 L68 2 L68 9 L60 9 L60 6 L64 6"/>
+            <path d="M70 12 L70 2 L82 2 L82 9 L74 9 L74 6 L78 6"/>
+            <path d="M84 12 L84 2 L96 2 L96 9 L88 9 L88 6 L92 6"/>
+            <path d="M98 12 L98 2 L110 2 L110 9 L102 9 L102 6 L106 6"/>
+            <path d="M112 12 L112 2 L124 2 L124 9 L116 9 L116 6 L120 6"/>
+            <path d="M126 12 L126 2 L138 2 L138 9 L130 9 L130 6 L134 6"/>
+            <path d="M140 12 L140 2 L152 2 L152 9 L144 9 L144 6 L148 6"/>
+            <path d="M154 12 L154 2 L166 2 L166 9 L158 9 L158 6 L162 6"/>
+            <path d="M168 12 L168 2 L180 2 L180 9 L172 9 L172 6 L176 6"/>
+            <path d="M182 12 L182 2 L194 2 L194 9 L186 9 L186 6 L190 6"/>
+            <path d="M196 12 L196 2 L208 2 L208 9 L200 9 L200 6 L204 6"/>
+            <path d="M210 12 L210 2 L222 2 L222 9 L214 9 L214 6 L218 6"/>
+            <path d="M224 12 L224 2 L236 2 L236 9 L228 9 L228 6 L232 6"/>
+            <path d="M238 12 L238 2 L250 2 L250 9 L242 9 L242 6 L246 6"/>
+            <path d="M252 12 L252 2 L264 2 L264 9 L256 9 L256 6 L260 6"/>
+            <path d="M266 12 L266 2 L278 2 L278 9 L270 9 L270 6 L274 6"/>
+            <path d="M280 12 L280 2 L292 2 L292 9 L284 9 L284 6 L288 6"/>
+            <path d="M294 12 L294 2 L306 2 L306 9 L298 9 L298 6 L302 6"/>
+          </g>
+        </svg>
+      </div>
+      <div class="card-key bottom" aria-hidden="true">
+        <svg viewBox="0 0 800 14" preserveAspectRatio="xMinYMid slice">
+          <g fill="none" stroke="currentColor" stroke-width="1.6">
+            <path d="M0 12 L0 2 L12 2 L12 9 L4 9 L4 6 L8 6"/>
+            <path d="M14 12 L14 2 L26 2 L26 9 L18 9 L18 6 L22 6"/>
+            <path d="M28 12 L28 2 L40 2 L40 9 L32 9 L32 6 L36 6"/>
+            <path d="M42 12 L42 2 L54 2 L54 9 L46 9 L46 6 L50 6"/>
+            <path d="M56 12 L56 2 L68 2 L68 9 L60 9 L60 6 L64 6"/>
+            <path d="M70 12 L70 2 L82 2 L82 9 L74 9 L74 6 L78 6"/>
+            <path d="M84 12 L84 2 L96 2 L96 9 L88 9 L88 6 L92 6"/>
+            <path d="M98 12 L98 2 L110 2 L110 9 L102 9 L102 6 L106 6"/>
+            <path d="M112 12 L112 2 L124 2 L124 9 L116 9 L116 6 L120 6"/>
+            <path d="M126 12 L126 2 L138 2 L138 9 L130 9 L130 6 L134 6"/>
+            <path d="M140 12 L140 2 L152 2 L152 9 L144 9 L144 6 L148 6"/>
+            <path d="M154 12 L154 2 L166 2 L166 9 L158 9 L158 6 L162 6"/>
+            <path d="M168 12 L168 2 L180 2 L180 9 L172 9 L172 6 L176 6"/>
+            <path d="M182 12 L182 2 L194 2 L194 9 L186 9 L186 6 L190 6"/>
+            <path d="M196 12 L196 2 L208 2 L208 9 L200 9 L200 6 L204 6"/>
+            <path d="M210 12 L210 2 L222 2 L222 9 L214 9 L214 6 L218 6"/>
+            <path d="M224 12 L224 2 L236 2 L236 9 L228 9 L228 6 L232 6"/>
+            <path d="M238 12 L238 2 L250 2 L250 9 L242 9 L242 6 L246 6"/>
+            <path d="M252 12 L252 2 L264 2 L264 9 L256 9 L256 6 L260 6"/>
+            <path d="M266 12 L266 2 L278 2 L278 9 L270 9 L270 6 L274 6"/>
+            <path d="M280 12 L280 2 L292 2 L292 9 L284 9 L284 6 L288 6"/>
+            <path d="M294 12 L294 2 L306 2 L306 9 L298 9 L298 6 L302 6"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="laurel-plate" aria-hidden="true">
+        <svg viewBox="0 0 220 100"><use href="#laurel-roundel" style="color: var(--secondary)"/></svg>
+        <span class="plate-label">Programma I</span>
+      </div>
+
+      <div class="roman-num">·  I  ·</div>
+      <h3>Epigraphia</h3>
+      <p class="card-body">
+        Lapidary inscriptions are the spine of historical record. Our
+        epigraphic programme funds the cleaning, consolidation, and
+        photogrammetric recording of stone-cut texts from Hadrian's Wall
+        to Lepcis Magna — from the boundary cippi of Aquileia to the
+        tabulae of Volubilis. Each season we underwrite four field
+        campaigns and the publication of one fascicle in the
+        <em>Corpus Aurelium Inscriptionum</em>.
+      </p>
+      <div class="card-rule" aria-hidden="true"></div>
+      <a class="card-cta" href="page-3.html#epigraphia">Vide Programma →</a>
+    </article>
+
+    <!-- CARD II — HYDRAULICS -->
+    <article class="card">
+      <div class="card-key top" aria-hidden="true">
+        <svg viewBox="0 0 800 14" preserveAspectRatio="xMinYMid slice">
+          <g fill="none" stroke="currentColor" stroke-width="1.6">
+            <path d="M0 12 L0 2 L12 2 L12 9 L4 9 L4 6 L8 6"/>
+            <path d="M14 12 L14 2 L26 2 L26 9 L18 9 L18 6 L22 6"/>
+            <path d="M28 12 L28 2 L40 2 L40 9 L32 9 L32 6 L36 6"/>
+            <path d="M42 12 L42 2 L54 2 L54 9 L46 9 L46 6 L50 6"/>
+            <path d="M56 12 L56 2 L68 2 L68 9 L60 9 L60 6 L64 6"/>
+            <path d="M70 12 L70 2 L82 2 L82 9 L74 9 L74 6 L78 6"/>
+            <path d="M84 12 L84 2 L96 2 L96 9 L88 9 L88 6 L92 6"/>
+            <path d="M98 12 L98 2 L110 2 L110 9 L102 9 L102 6 L106 6"/>
+            <path d="M112 12 L112 2 L124 2 L124 9 L116 9 L116 6 L120 6"/>
+            <path d="M126 12 L126 2 L138 2 L138 9 L130 9 L130 6 L134 6"/>
+            <path d="M140 12 L140 2 L152 2 L152 9 L144 9 L144 6 L148 6"/>
+            <path d="M154 12 L154 2 L166 2 L166 9 L158 9 L158 6 L162 6"/>
+            <path d="M168 12 L168 2 L180 2 L180 9 L172 9 L172 6 L176 6"/>
+            <path d="M182 12 L182 2 L194 2 L194 9 L186 9 L186 6 L190 6"/>
+            <path d="M196 12 L196 2 L208 2 L208 9 L200 9 L200 6 L204 6"/>
+            <path d="M210 12 L210 2 L222 2 L222 9 L214 9 L214 6 L218 6"/>
+            <path d="M224 12 L224 2 L236 2 L236 9 L228 9 L228 6 L232 6"/>
+            <path d="M238 12 L238 2 L250 2 L250 9 L242 9 L242 6 L246 6"/>
+            <path d="M252 12 L252 2 L264 2 L264 9 L256 9 L256 6 L260 6"/>
+            <path d="M266 12 L266 2 L278 2 L278 9 L270 9 L270 6 L274 6"/>
+            <path d="M280 12 L280 2 L292 2 L292 9 L284 9 L284 6 L288 6"/>
+            <path d="M294 12 L294 2 L306 2 L306 9 L298 9 L298 6 L302 6"/>
+          </g>
+        </svg>
+      </div>
+      <div class="card-key bottom" aria-hidden="true">
+        <svg viewBox="0 0 800 14" preserveAspectRatio="xMinYMid slice">
+          <g fill="none" stroke="currentColor" stroke-width="1.6">
+            <path d="M0 12 L0 2 L12 2 L12 9 L4 9 L4 6 L8 6"/>
+            <path d="M14 12 L14 2 L26 2 L26 9 L18 9 L18 6 L22 6"/>
+            <path d="M28 12 L28 2 L40 2 L40 9 L32 9 L32 6 L36 6"/>
+            <path d="M42 12 L42 2 L54 2 L54 9 L46 9 L46 6 L50 6"/>
+            <path d="M56 12 L56 2 L68 2 L68 9 L60 9 L60 6 L64 6"/>
+            <path d="M70 12 L70 2 L82 2 L82 9 L74 9 L74 6 L78 6"/>
+            <path d="M84 12 L84 2 L96 2 L96 9 L88 9 L88 6 L92 6"/>
+            <path d="M98 12 L98 2 L110 2 L110 9 L102 9 L102 6 L106 6"/>
+            <path d="M112 12 L112 2 L124 2 L124 9 L116 9 L116 6 L120 6"/>
+            <path d="M126 12 L126 2 L138 2 L138 9 L130 9 L130 6 L134 6"/>
+            <path d="M140 12 L140 2 L152 2 L152 9 L144 9 L144 6 L148 6"/>
+            <path d="M154 12 L154 2 L166 2 L166 9 L158 9 L158 6 L162 6"/>
+            <path d="M168 12 L168 2 L180 2 L180 9 L172 9 L172 6 L176 6"/>
+            <path d="M182 12 L182 2 L194 2 L194 9 L186 9 L186 6 L190 6"/>
+            <path d="M196 12 L196 2 L208 2 L208 9 L200 9 L200 6 L204 6"/>
+            <path d="M210 12 L210 2 L222 2 L222 9 L214 9 L214 6 L218 6"/>
+            <path d="M224 12 L224 2 L236 2 L236 9 L228 9 L228 6 L232 6"/>
+            <path d="M238 12 L238 2 L250 2 L250 9 L242 9 L242 6 L246 6"/>
+            <path d="M252 12 L252 2 L264 2 L264 9 L256 9 L256 6 L260 6"/>
+            <path d="M266 12 L266 2 L278 2 L278 9 L270 9 L270 6 L274 6"/>
+            <path d="M280 12 L280 2 L292 2 L292 9 L284 9 L284 6 L288 6"/>
+            <path d="M294 12 L294 2 L306 2 L306 9 L298 9 L298 6 L302 6"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="laurel-plate" aria-hidden="true">
+        <svg viewBox="0 0 220 100"><use href="#laurel-roundel" style="color: var(--secondary)"/></svg>
+        <span class="plate-label">Programma II</span>
+      </div>
+
+      <div class="roman-num">·  II  ·</div>
+      <h3>Hydraulica</h3>
+      <p class="card-body">
+        Aqueducts, cisterns, nymphaea, bath-house calidaria — the
+        hydraulic legacy of Rome remains the most fragile of her
+        bequests. Our hydraulic programme presently supports works at
+        the Aqua Claudia near Capannelle, the cisterna of Ptolemais in
+        Cyrenaica, and the nymphaeum of Sagalassos. Average grant per
+        site: <em>thirty-eight thousand euro</em>, awarded over three
+        consecutive seasons.
+      </p>
+      <div class="card-rule" aria-hidden="true"></div>
+      <a class="card-cta" href="page-3.html#hydraulica">Vide Programma →</a>
+    </article>
+
+    <!-- CARD III — MOSAIC -->
+    <article class="card">
+      <div class="card-key top" aria-hidden="true">
+        <svg viewBox="0 0 800 14" preserveAspectRatio="xMinYMid slice">
+          <g fill="none" stroke="currentColor" stroke-width="1.6">
+            <path d="M0 12 L0 2 L12 2 L12 9 L4 9 L4 6 L8 6"/>
+            <path d="M14 12 L14 2 L26 2 L26 9 L18 9 L18 6 L22 6"/>
+            <path d="M28 12 L28 2 L40 2 L40 9 L32 9 L32 6 L36 6"/>
+            <path d="M42 12 L42 2 L54 2 L54 9 L46 9 L46 6 L50 6"/>
+            <path d="M56 12 L56 2 L68 2 L68 9 L60 9 L60 6 L64 6"/>
+            <path d="M70 12 L70 2 L82 2 L82 9 L74 9 L74 6 L78 6"/>
+            <path d="M84 12 L84 2 L96 2 L96 9 L88 9 L88 6 L92 6"/>
+            <path d="M98 12 L98 2 L110 2 L110 9 L102 9 L102 6 L106 6"/>
+            <path d="M112 12 L112 2 L124 2 L124 9 L116 9 L116 6 L120 6"/>
+            <path d="M126 12 L126 2 L138 2 L138 9 L130 9 L130 6 L134 6"/>
+            <path d="M140 12 L140 2 L152 2 L152 9 L144 9 L144 6 L148 6"/>
+            <path d="M154 12 L154 2 L166 2 L166 9 L158 9 L158 6 L162 6"/>
+            <path d="M168 12 L168 2 L180 2 L180 9 L172 9 L172 6 L176 6"/>
+            <path d="M182 12 L182 2 L194 2 L194 9 L186 9 L186 6 L190 6"/>
+            <path d="M196 12 L196 2 L208 2 L208 9 L200 9 L200 6 L204 6"/>
+            <path d="M210 12 L210 2 L222 2 L222 9 L214 9 L214 6 L218 6"/>
+            <path d="M224 12 L224 2 L236 2 L236 9 L228 9 L228 6 L232 6"/>
+            <path d="M238 12 L238 2 L250 2 L250 9 L242 9 L242 6 L246 6"/>
+            <path d="M252 12 L252 2 L264 2 L264 9 L256 9 L256 6 L260 6"/>
+            <path d="M266 12 L266 2 L278 2 L278 9 L270 9 L270 6 L274 6"/>
+            <path d="M280 12 L280 2 L292 2 L292 9 L284 9 L284 6 L288 6"/>
+            <path d="M294 12 L294 2 L306 2 L306 9 L298 9 L298 6 L302 6"/>
+          </g>
+        </svg>
+      </div>
+      <div class="card-key bottom" aria-hidden="true">
+        <svg viewBox="0 0 800 14" preserveAspectRatio="xMinYMid slice">
+          <g fill="none" stroke="currentColor" stroke-width="1.6">
+            <path d="M0 12 L0 2 L12 2 L12 9 L4 9 L4 6 L8 6"/>
+            <path d="M14 12 L14 2 L26 2 L26 9 L18 9 L18 6 L22 6"/>
+            <path d="M28 12 L28 2 L40 2 L40 9 L32 9 L32 6 L36 6"/>
+            <path d="M42 12 L42 2 L54 2 L54 9 L46 9 L46 6 L50 6"/>
+            <path d="M56 12 L56 2 L68 2 L68 9 L60 9 L60 6 L64 6"/>
+            <path d="M70 12 L70 2 L82 2 L82 9 L74 9 L74 6 L78 6"/>
+            <path d="M84 12 L84 2 L96 2 L96 9 L88 9 L88 6 L92 6"/>
+            <path d="M98 12 L98 2 L110 2 L110 9 L102 9 L102 6 L106 6"/>
+            <path d="M112 12 L112 2 L124 2 L124 9 L116 9 L116 6 L120 6"/>
+            <path d="M126 12 L126 2 L138 2 L138 9 L130 9 L130 6 L134 6"/>
+            <path d="M140 12 L140 2 L152 2 L152 9 L144 9 L144 6 L148 6"/>
+            <path d="M154 12 L154 2 L166 2 L166 9 L158 9 L158 6 L162 6"/>
+            <path d="M168 12 L168 2 L180 2 L180 9 L172 9 L172 6 L176 6"/>
+            <path d="M182 12 L182 2 L194 2 L194 9 L186 9 L186 6 L190 6"/>
+            <path d="M196 12 L196 2 L208 2 L208 9 L200 9 L200 6 L204 6"/>
+            <path d="M210 12 L210 2 L222 2 L222 9 L214 9 L214 6 L218 6"/>
+            <path d="M224 12 L224 2 L236 2 L236 9 L228 9 L228 6 L232 6"/>
+            <path d="M238 12 L238 2 L250 2 L250 9 L242 9 L242 6 L246 6"/>
+            <path d="M252 12 L252 2 L264 2 L264 9 L256 9 L256 6 L260 6"/>
+            <path d="M266 12 L266 2 L278 2 L278 9 L270 9 L270 6 L274 6"/>
+            <path d="M280 12 L280 2 L292 2 L292 9 L284 9 L284 6 L288 6"/>
+            <path d="M294 12 L294 2 L306 2 L306 9 L298 9 L298 6 L302 6"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="laurel-plate" aria-hidden="true">
+        <svg viewBox="0 0 220 100"><use href="#laurel-roundel" style="color: var(--secondary)"/></svg>
+        <span class="plate-label">Programma III</span>
+      </div>
+
+      <div class="roman-num">·  III  ·</div>
+      <h3>Musivum</h3>
+      <p class="card-body">
+        Civic mosaics — the floors of basilicas, the thresholds of
+        guild-halls, the marine pavements of provincial baths — survive
+        chiefly by the patient labour of conservators. We support the
+        in-situ stabilisation of polychrome floors at Piazza Armerina,
+        the Baths of Antoninus at Carthage, and the synagogue pavement
+        of Hammam Lif. Annual disbursement to the mosaic chair:
+        <em>one hundred forty-two thousand euro</em>.
+      </p>
+      <div class="card-rule" aria-hidden="true"></div>
+      <a class="card-cta" href="page-3.html#musivum">Vide Programma →</a>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============== DEDICATION ============== -->
+<section class="dedication" aria-label="Dedication">
+  <div class="small-caps">Verbum Fundatoris</div>
+  <blockquote>
+    “What the legions raised, the rains have softened; what the masons
+    cut, the centuries have blurred. It is no small office to set one's
+    hand against forgetting.”
+    <cite>— from the Charter, signed at Rome, the Kalends of October MMIX</cite>
+  </blockquote>
+</section>
+
+<!-- ============== FOOTER ============== -->
+<footer role="contentinfo">
+  <!-- top meander strip -->
+  <div class="meander-strip" aria-hidden="true">
+    <svg viewBox="0 0 720 28" preserveAspectRatio="xMidYMid slice">
+      <g fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M0 26 L0 2 L24 2 L24 18 L8 18 L8 10 L16 10"/>
+        <path d="M28 26 L28 2 L52 2 L52 18 L36 18 L36 10 L44 10"/>
+        <path d="M56 26 L56 2 L80 2 L80 18 L64 18 L64 10 L72 10"/>
+        <path d="M84 26 L84 2 L108 2 L108 18 L92 18 L92 10 L100 10"/>
+        <path d="M112 26 L112 2 L136 2 L136 18 L120 18 L120 10 L128 10"/>
+        <path d="M140 26 L140 2 L164 2 L164 18 L148 18 L148 10 L156 10"/>
+        <path d="M168 26 L168 2 L192 2 L192 18 L176 18 L176 10 L184 10"/>
+        <path d="M196 26 L196 2 L220 2 L220 18 L204 18 L204 10 L212 10"/>
+        <path d="M224 26 L224 2 L248 2 L248 18 L232 18 L232 10 L240 10"/>
+        <path d="M252 26 L252 2 L276 2 L276 18 L260 18 L260 10 L268 10"/>
+        <path d="M280 26 L280 2 L304 2 L304 18 L288 18 L288 10 L296 10"/>
+        <path d="M308 26 L308 2 L332 2 L332 18 L316 18 L316 10 L324 10"/>
+        <path d="M336 26 L336 2 L360 2 L360 18 L344 18 L344 10 L352 10"/>
+        <path d="M364 26 L364 2 L388 2 L388 18 L372 18 L372 10 L380 10"/>
+        <path d="M392 26 L392 2 L416 2 L416 18 L400 18 L400 10 L408 10"/>
+        <path d="M420 26 L420 2 L444 2 L444 18 L428 18 L428 10 L436 10"/>
+        <path d="M448 26 L448 2 L472 2 L472 18 L456 18 L456 10 L464 10"/>
+        <path d="M476 26 L476 2 L500 2 L500 18 L484 18 L484 10 L492 10"/>
+        <path d="M504 26 L504 2 L528 2 L528 18 L512 18 L512 10 L520 10"/>
+        <path d="M532 26 L532 2 L556 2 L556 18 L540 18 L540 10 L548 10"/>
+        <path d="M560 26 L560 2 L584 2 L584 18 L568 18 L568 10 L576 10"/>
+        <path d="M588 26 L588 2 L612 2 L612 18 L596 18 L596 10 L604 10"/>
+        <path d="M616 26 L616 2 L640 2 L640 18 L624 18 L624 10 L632 10"/>
+        <path d="M644 26 L644 2 L668 2 L668 18 L652 18 L652 10 L660 10"/>
+        <path d="M672 26 L672 2 L696 2 L696 18 L680 18 L680 10 L688 10"/>
+        <line x1="0" y1="26" x2="720" y2="26"/>
+        <line x1="0" y1="2" x2="720" y2="2"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="footer-seal-band">
+    <div class="row">
+      <div class="footer-addr-l">
+        Via dei Coronari<br>
+        clxiii<br>
+        Roma · Italia
+      </div>
+      <div class="footer-seal" aria-hidden="true">
+        <svg viewBox="0 0 160 160"><use href="#oak-seal"/></svg>
+      </div>
+      <div class="footer-addr-r">
+        Carta Concessa<br>
+        Anno · MMIX<br>
+        Sub Consulibus Privatis
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-cols">
+    <div>
+      <h4>Patroni</h4>
+      <ul>
+        <li><a href="page-4.html">Album Benefactorum</a></li>
+        <li><a href="page-4.html">Senatus Honoris</a></li>
+        <li><a href="page-4.html">Donatio Annua</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contactus</h4>
+      <ul>
+        <li><a href="page-6.html">Officina Romae</a></li>
+        <li><a href="page-6.html">Horae · IX–XVII</a></li>
+        <li><a href="page-6.html">Epistula Electronica</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Legalia</h4>
+      <ul>
+        <li>C.F. 97491·82·0588</li>
+        <li><a href="page-5.html">Acta &amp; Relationes</a></li>
+        <li>Privacy · Cookies</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-coda">
+    Fundatio Aurelia · Pro Saxo · Aqua · Inscriptione · MMIX—MMXXIV
+  </div>
+
+  <!-- bottom meander strip -->
+  <div class="meander-strip" aria-hidden="true">
+    <svg viewBox="0 0 720 28" preserveAspectRatio="xMidYMid slice">
+      <g fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M0 26 L0 2 L24 2 L24 18 L8 18 L8 10 L16 10"/>
+        <path d="M28 26 L28 2 L52 2 L52 18 L36 18 L36 10 L44 10"/>
+        <path d="M56 26 L56 2 L80 2 L80 18 L64 18 L64 10 L72 10"/>
+        <path d="M84 26 L84 2 L108 2 L108 18 L92 18 L92 10 L100 10"/>
+        <path d="M112 26 L112 2 L136 2 L136 18 L120 18 L120 10 L128 10"/>
+        <path d="M140 26 L140 2 L164 2 L164 18 L148 18 L148 10 L156 10"/>
+        <path d="M168 26 L168 2 L192 2 L192 18 L176 18 L176 10 L184 10"/>
+        <path d="M196 26 L196 2 L220 2 L220 18 L204 18 L204 10 L212 10"/>
+        <path d="M224 26 L224 2 L248 2 L248 18 L232 18 L232 10 L240 10"/>
+        <path d="M252 26 L252 2 L276 2 L276 18 L260 18 L260 10 L268 10"/>
+        <path d="M280 26 L280 2 L304 2 L304 18 L288 18 L288 10 L296 10"/>
+        <path d="M308 26 L308 2 L332 2 L332 18 L316 18 L316 10 L324 10"/>
+        <path d="M336 26 L336 2 L360 2 L360 18 L344 18 L344 10 L352 10"/>
+        <path d="M364 26 L364 2 L388 2 L388 18 L372 18 L372 10 L380 10"/>
+        <path d="M392 26 L392 2 L416 2 L416 18 L400 18 L400 10 L408 10"/>
+        <path d="M420 26 L420 2 L444 2 L444 18 L428 18 L428 10 L436 10"/>
+        <path d="M448 26 L448 2 L472 2 L472 18 L456 18 L456 10 L464 10"/>
+        <path d="M476 26 L476 2 L500 2 L500 18 L484 18 L484 10 L492 10"/>
+        <path d="M504 26 L504 2 L528 2 L528 18 L512 18 L512 10 L520 10"/>
+        <path d="M532 26 L532 2 L556 2 L556 18 L540 18 L540 10 L548 10"/>
+        <path d="M560 26 L560 2 L584 2 L584 18 L568 18 L568 10 L576 10"/>
+        <path d="M588 26 L588 2 L612 2 L612 18 L596 18 L596 10 L604 10"/>
+        <path d="M616 26 L616 2 L640 2 L640 18 L624 18 L624 10 L632 10"/>
+        <path d="M644 26 L644 2 L668 2 L668 18 L652 18 L652 10 L660 10"/>
+        <path d="M672 26 L672 2 L696 2 L696 18 L680 18 L680 10 L688 10"/>
+        <line x1="0" y1="26" x2="720" y2="26"/>
+        <line x1="0" y1="2" x2="720" y2="2"/>
+      </g>
+    </svg>
+  </div>
+</footer>
+
+</body>
+</html>

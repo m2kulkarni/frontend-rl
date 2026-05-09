@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Studio & Contact — Atelier Gaius Vedrani</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), "Inter", system-ui, sans-serif;
+    line-height: 1.65;
+    font-size: 16px;
+  }
+  a { color: inherit; text-decoration: none; }
+  em, .em { color: var(--text-emphasis); font-style: normal; }
+
+  /* ---------- Header / Nav ---------- */
+  .top-band {
+    border-bottom: 1px solid rgba(26,26,26,0.18);
+    padding: 14px 0 22px;
+    background: var(--surface);
+  }
+  .top-band .meta {
+    text-align: center;
+    font-family: var(--font-body);
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: rgba(26,26,26,0.55);
+    margin-bottom: 18px;
+  }
+  .sitename-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    margin-bottom: 14px;
+  }
+  .greek-strip {
+    width: 120px;
+    height: 22px;
+    flex: 0 0 120px;
+    color: var(--ornament);
+  }
+  .greek-strip svg { width: 100%; height: 100%; display: block; }
+  .sitename {
+    font-family: var(--font-display), serif;
+    font-size: 24px;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: var(--primary);
+    white-space: nowrap;
+  }
+  nav.primary {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 22px;
+    flex-wrap: wrap;
+    padding: 6px 0 0;
+  }
+  nav.primary a {
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--primary);
+    padding: 4px 2px;
+    border-bottom: 1px solid transparent;
+    transition: border-color .2s, color .2s;
+  }
+  nav.primary a:hover { border-bottom-color: var(--accent); color: var(--accent); }
+  nav.primary a[aria-current="page"] {
+    border-bottom: 1px solid var(--primary);
+  }
+  nav.primary .leaf {
+    width: 14px; height: 14px;
+    color: var(--secondary);
+    flex: 0 0 14px;
+    opacity: 0.85;
+  }
+  nav.primary .leaf svg { width: 100%; height: 100%; display:block; fill: currentColor; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    text-align: center;
+    padding: 70px 24px 50px;
+    position: relative;
+  }
+  .hero .eyebrow {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 18px;
+  }
+  .hero h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 54px;
+    line-height: 1.1;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin: 0 0 24px;
+    color: var(--primary);
+  }
+  .hero .subtitle {
+    max-width: 640px;
+    margin: 0 auto;
+    font-size: 16px;
+    color: rgba(26,26,26,0.78);
+    font-style: italic;
+  }
+  .hero-wreath {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 280px;
+    height: 256px;
+    opacity: 0.10;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .hero-wreath svg { width: 100%; height: 100%; }
+  .hero > * { position: relative; z-index: 1; }
+
+  /* ---------- Hairline rules ---------- */
+  .axis-rule {
+    width: 1px;
+    height: 64px;
+    background: var(--secondary);
+    margin: 0 auto;
+  }
+  .gold-hair {
+    height: 1px;
+    background: var(--secondary);
+    border: 0;
+    width: 80px;
+    margin: 24px auto;
+  }
+
+  /* ---------- Two-column composition ---------- */
+  .studio-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 60px 80px;
+  }
+  .columns {
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+  .col-divider {
+    background: rgba(26,26,26,0.16);
+    width: 1px;
+    height: 100%;
+    min-height: 720px;
+    align-self: stretch;
+    justify-self: center;
+  }
+  .col-head {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+  .col-head .roundel {
+    width: 110px;
+    height: 110px;
+    margin: 0 auto 14px;
+    color: var(--primary);
+    position: relative;
+  }
+  .col-head .roundel svg { width:100%; height:100%; display:block; }
+  .col-head .roundel .num {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    letter-spacing: 0.1em;
+    color: var(--primary);
+  }
+  .col-head h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 22px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    margin: 0 0 8px;
+  }
+  .col-head .latin {
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  /* Biography column */
+  .bio p {
+    margin: 0 0 18px;
+    text-align: justify;
+    hyphens: auto;
+  }
+  .bio p.lead::first-letter {
+    font-family: var(--font-display), serif;
+    float: left;
+    font-size: 54px;
+    line-height: 0.9;
+    padding: 6px 10px 0 0;
+    color: var(--accent);
+  }
+  .credentials {
+    margin: 28px 0;
+    padding: 22px 26px;
+    border: 1px solid rgba(26,26,26,0.15);
+    background: rgba(255,255,255,0.35);
+  }
+  .credentials .label {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  .credentials ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 14.5px;
+  }
+  .credentials li {
+    padding: 6px 0;
+    border-bottom: 1px dotted rgba(26,26,26,0.18);
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .credentials li:last-child { border-bottom: 0; }
+  .credentials li .yr {
+    font-family: var(--font-display), serif;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+  }
+
+  /* Team table */
+  .team-block {
+    margin-top: 36px;
+  }
+  .team-block .label {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-align: center;
+    margin-bottom: 18px;
+  }
+  .team {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .team li {
+    display: grid;
+    grid-template-columns: 1fr auto 1.2fr;
+    align-items: baseline;
+    gap: 14px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(26,26,26,0.10);
+    font-size: 14.5px;
+  }
+  .team li:last-child { border-bottom: 0; }
+  .team .name {
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-size: 13px;
+  }
+  .team .dot {
+    width: 6px; height: 6px;
+    background: var(--secondary);
+    border-radius: 50%;
+    align-self: center;
+    transform: rotate(45deg);
+  }
+  .team .role {
+    color: rgba(26,26,26,0.7);
+    font-style: italic;
+    font-size: 13.5px;
+  }
+
+  /* Contact column */
+  .contact-block {
+    margin-bottom: 28px;
+    text-align: center;
+  }
+  .contact-block .label {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+  .addresses {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin-bottom: 36px;
+  }
+  .address {
+    text-align: center;
+    padding: 24px 18px;
+  }
+  .address + .address {
+    border-left: 1px solid rgba(26,26,26,0.16);
+  }
+  .address .city {
+    font-family: var(--font-display), serif;
+    font-size: 16px;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 10px;
+  }
+  .address .city::before,
+  .address .city::after {
+    content: "·";
+    color: var(--secondary);
+    margin: 0 10px;
+  }
+  .address p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.7;
+    color: rgba(26,26,26,0.82);
+  }
+  .address .tel {
+    margin-top: 10px;
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    color: var(--text-emphasis);
+  }
+
+  .contact-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 28px;
+  }
+  .contact-list li {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 18px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(26,26,26,0.10);
+    font-size: 14.5px;
+  }
+  .contact-list li:last-child { border-bottom: 0; }
+  .contact-list .k {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding-top: 2px;
+  }
+  .contact-list .v { color: var(--primary); }
+  .contact-list .v.email {
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.06em;
+    color: var(--text-emphasis);
+  }
+
+  .hours-frame {
+    border-top: 1px solid var(--secondary);
+    border-bottom: 1px solid var(--secondary);
+    padding: 22px 24px;
+    text-align: center;
+    margin: 30px 0;
+  }
+  .hours-frame .label {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .hours-frame .hours {
+    font-family: var(--font-display), serif;
+    font-size: 18px;
+    letter-spacing: 0.18em;
+    color: var(--primary);
+  }
+  .hours-frame .note {
+    margin-top: 8px;
+    font-style: italic;
+    font-size: 13.5px;
+    color: rgba(26,26,26,0.7);
+  }
+
+  .languages {
+    text-align: center;
+    margin-top: 24px;
+    padding: 0 12px;
+  }
+  .languages .latin-line {
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .languages p {
+    font-style: italic;
+    color: rgba(26,26,26,0.85);
+    margin: 0;
+  }
+
+  /* ---------- Section divider band ---------- */
+  .divider-band {
+    text-align: center;
+    padding: 48px 0 30px;
+  }
+  .divider-band svg {
+    width: 280px;
+    height: auto;
+    color: var(--ornament);
+    opacity: 0.85;
+  }
+
+  /* ---------- Footer ---------- */
+  footer.frieze {
+    background: var(--surface);
+    border-top: 1px solid rgba(26,26,26,0.18);
+    margin-top: 30px;
+  }
+  .frieze-key {
+    height: 36px;
+    background-image: repeating-linear-gradient(
+      90deg,
+      var(--primary) 0 2px,
+      transparent 2px 28px
+    );
+    border-bottom: 1px solid var(--primary);
+    position: relative;
+    overflow: hidden;
+  }
+  .frieze-key svg {
+    width: 100%;
+    height: 36px;
+    display: block;
+    color: var(--primary);
+  }
+  .colophon {
+    text-align: center;
+    padding: 50px 24px 28px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .colophon .studio {
+    font-family: var(--font-display), serif;
+    font-size: 18px;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    color: var(--primary);
+  }
+  .colophon .addresses-foot {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin-bottom: 22px;
+    font-size: 13.5px;
+    color: rgba(26,26,26,0.78);
+    line-height: 1.6;
+  }
+  .colophon .addresses-foot div { min-width: 220px; }
+  .colophon .addresses-foot .place {
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    font-size: 11px;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .colophon .registry {
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    color: rgba(26,26,26,0.62);
+    padding-top: 18px;
+    border-top: 1px solid rgba(26,26,26,0.15);
+    margin-top: 8px;
+  }
+  .tailpiece {
+    text-align: center;
+    padding: 18px 0 32px;
+    color: var(--primary);
+  }
+  .tailpiece svg { width: 80px; height: 22px; }
+
+</style>
+</head>
+<body>
+
+<!-- ============ TOP BAND + NAV ============ -->
+<header class="top-band">
+  <div class="meta">MMXI · ROMA — NOVUM EBORACUM · ARCHITECTURA CLASSICA</div>
+  <div class="sitename-row">
+    <div class="greek-strip" aria-hidden="true">
+      <svg viewBox="0 0 240 22" xmlns="http://www.w3.org/2000/svg">
+        <g fill="none" stroke="currentColor" stroke-width="1.4">
+          <path d="M2 20 L2 4 L18 4 L18 14 L10 14 L10 8 L14 8 L14 12"/>
+          <path d="M22 20 L22 4 L38 4 L38 14 L30 14 L30 8 L34 8 L34 12"/>
+          <path d="M42 20 L42 4 L58 4 L58 14 L50 14 L50 8 L54 8 L54 12"/>
+          <path d="M62 20 L62 4 L78 4 L78 14 L70 14 L70 8 L74 8 L74 12"/>
+          <path d="M82 20 L82 4 L98 4 L98 14 L90 14 L90 8 L94 8 L94 12"/>
+          <path d="M102 20 L102 4 L118 4 L118 14 L110 14 L110 8 L114 8 L114 12"/>
+          <path d="M122 20 L122 4 L138 4 L138 14 L130 14 L130 8 L134 8 L134 12"/>
+          <path d="M142 20 L142 4 L158 4 L158 14 L150 14 L150 8 L154 8 L154 12"/>
+          <path d="M162 20 L162 4 L178 4 L178 14 L170 14 L170 8 L174 8 L174 12"/>
+          <path d="M182 20 L182 4 L198 4 L198 14 L190 14 L190 8 L194 8 L194 12"/>
+          <path d="M202 20 L202 4 L218 4 L218 14 L210 14 L210 8 L214 8 L214 12"/>
+          <path d="M222 20 L222 4 L238 4"/>
+        </g>
+      </svg>
+    </div>
+    <div class="sitename">Atelier Gaius Vedrani</div>
+    <div class="greek-strip" aria-hidden="true">
+      <svg viewBox="0 0 240 22" xmlns="http://www.w3.org/2000/svg">
+        <g fill="none" stroke="currentColor" stroke-width="1.4">
+          <path d="M2 20 L2 4 L18 4 L18 14 L10 14 L10 8 L14 8 L14 12"/>
+          <path d="M22 20 L22 4 L38 4 L38 14 L30 14 L30 8 L34 8 L34 12"/>
+          <path d="M42 20 L42 4 L58 4 L58 14 L50 14 L50 8 L54 8 L54 12"/>
+          <path d="M62 20 L62 4 L78 4 L78 14 L70 14 L70 8 L74 8 L74 12"/>
+          <path d="M82 20 L82 4 L98 4 L98 14 L90 14 L90 8 L94 8 L94 12"/>
+          <path d="M102 20 L102 4 L118 4 L118 14 L110 14 L110 8 L114 8 L114 12"/>
+          <path d="M122 20 L122 4 L138 4 L138 14 L130 14 L130 8 L134 8 L134 12"/>
+          <path d="M142 20 L142 4 L158 4 L158 14 L150 14 L150 8 L154 8 L154 12"/>
+          <path d="M162 20 L162 4 L178 4 L178 14 L170 14 L170 8 L174 8 L174 12"/>
+          <path d="M182 20 L182 4 L198 4 L198 14 L190 14 L190 8 L194 8 L194 12"/>
+          <path d="M202 20 L202 4 L218 4 L218 14 L210 14 L210 8 L214 8 L214 12"/>
+          <path d="M222 20 L222 4 L238 4"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+  <nav class="primary" aria-label="Primary">
+    <a href="page-1.html">Atelier</a>
+    <span class="leaf" aria-hidden="true">
+      <svg viewBox="0 0 200 200"><path d="M43.6 11c-1.8 0-3.6.1-5.4.3-7 .8-13.9 2.8-19.1 7.5s-8.2 12-7.7 21c.5 9 4.3 16.1 10.2 20.3 5.9 4.2 13.3 5.5 21 5.2 15.5-.7 32.8-8 45.8-18.3 1.4-1.1 2.8-2 4.3-3.1 4.3 6.7 7.6 14.8 9.3 24.1-7.5-5.1-21-10.6-35.7 1.5-22.1 18.2-25 12.9-45.3-2.1-2.9 36 15 54.6 44.6 52.5 0 0-13.9 4.3-3.6 26.4 6 12.9 8.4 20.1 6.6 25.2-12.8 2.3-15.8 7.8-5.6 12.7 45.1 10 65.7-27.5 68.7-66 45.4 0 52.9-31.8 52.5-50.4-8.2 11.1-22.2 11.1-32.9 2.5-9.9-7.9-21.7-16.2-39-1.1-1.7-11.7-5.7-22.1-11.2-30.7 19.4-11.4 38.7-14.5 52.5-10.8 5.5 1.4 9.5 4.1 12.4 7-9 8.4-11.8 26.4 2.3 27 18.9.9 21-15.5 13.6-27.1-5.4-8.5-16.4-13.2-25.7-16.6-17.5-4.6-39.7-.6-61.3 12.5-5.2-5.7-11.1-10.2-17.7-13-7.1-2.9-17.5-5.7-28.3-6.3z"/></svg>
+    </span>
+    <a href="page-2.html">Selected Works</a>
+    <span class="leaf" aria-hidden="true">
+      <svg viewBox="0 0 200 200"><path d="M43.6 11c-1.8 0-3.6.1-5.4.3-7 .8-13.9 2.8-19.1 7.5s-8.2 12-7.7 21c.5 9 4.3 16.1 10.2 20.3 5.9 4.2 13.3 5.5 21 5.2 15.5-.7 32.8-8 45.8-18.3 1.4-1.1 2.8-2 4.3-3.1 4.3 6.7 7.6 14.8 9.3 24.1-7.5-5.1-21-10.6-35.7 1.5-22.1 18.2-25 12.9-45.3-2.1-2.9 36 15 54.6 44.6 52.5 0 0-13.9 4.3-3.6 26.4 6 12.9 8.4 20.1 6.6 25.2-12.8 2.3-15.8 7.8-5.6 12.7 45.1 10 65.7-27.5 68.7-66 45.4 0 52.9-31.8 52.5-50.4-8.2 11.1-22.2 11.1-32.9 2.5-9.9-7.9-21.7-16.2-39-1.1-1.7-11.7-5.7-22.1-11.2-30.7 19.4-11.4 38.7-14.5 52.5-10.8 5.5 1.4 9.5 4.1 12.4 7-9 8.4-11.8 26.4 2.3 27 18.9.9 21-15.5 13.6-27.1-5.4-8.5-16.4-13.2-25.7-16.6-17.5-4.6-39.7-.6-61.3 12.5-5.2-5.7-11.1-10.2-17.7-13-7.1-2.9-17.5-5.7-28.3-6.3z"/></svg>
+    </span>
+    <a href="page-3.html">Villa Cassia</a>
+    <span class="leaf" aria-hidden="true">
+      <svg viewBox="0 0 200 200"><path d="M43.6 11c-1.8 0-3.6.1-5.4.3-7 .8-13.9 2.8-19.1 7.5s-8.2 12-7.7 21c.5 9 4.3 16.1 10.2 20.3 5.9 4.2 13.3 5.5 21 5.2 15.5-.7 32.8-8 45.8-18.3 1.4-1.1 2.8-2 4.3-3.1 4.3 6.7 7.6 14.8 9.3 24.1-7.5-5.1-21-10.6-35.7 1.5-22.1 18.2-25 12.9-45.3-2.1-2.9 36 15 54.6 44.6 52.5 0 0-13.9 4.3-3.6 26.4 6 12.9 8.4 20.1 6.6 25.2-12.8 2.3-15.8 7.8-5.6 12.7 45.1 10 65.7-27.5 68.7-66 45.4 0 52.9-31.8 52.5-50.4-8.2 11.1-22.2 11.1-32.9 2.5-9.9-7.9-21.7-16.2-39-1.1-1.7-11.7-5.7-22.1-11.2-30.7 19.4-11.4 38.7-14.5 52.5-10.8 5.5 1.4 9.5 4.1 12.4 7-9 8.4-11.8 26.4 2.3 27 18.9.9 21-15.5 13.6-27.1-5.4-8.5-16.4-13.2-25.7-16.6-17.5-4.6-39.7-.6-61.3 12.5-5.2-5.7-11.1-10.2-17.7-13-7.1-2.9-17.5-5.7-28.3-6.3z"/></svg>
+    </span>
+    <a href="page-4.html">Drawings &amp; Studies</a>
+    <span class="leaf" aria-hidden="true">
+      <svg viewBox="0 0 200 200"><path d="M43.6 11c-1.8 0-3.6.1-5.4.3-7 .8-13.9 2.8-19.1 7.5s-8.2 12-7.7 21c.5 9 4.3 16.1 10.2 20.3 5.9 4.2 13.3 5.5 21 5.2 15.5-.7 32.8-8 45.8-18.3 1.4-1.1 2.8-2 4.3-3.1 4.3 6.7 7.6 14.8 9.3 24.1-7.5-5.1-21-10.6-35.7 1.5-22.1 18.2-25 12.9-45.3-2.1-2.9 36 15 54.6 44.6 52.5 0 0-13.9 4.3-3.6 26.4 6 12.9 8.4 20.1 6.6 25.2-12.8 2.3-15.8 7.8-5.6 12.7 45.1 10 65.7-27.5 68.7-66 45.4 0 52.9-31.8 52.5-50.4-8.2 11.1-22.2 11.1-32.9 2.5-9.9-7.9-21.7-16.2-39-1.1-1.7-11.7-5.7-22.1-11.2-30.7 19.4-11.4 38.7-14.5 52.5-10.8 5.5 1.4 9.5 4.1 12.4 7-9 8.4-11.8 26.4 2.3 27 18.9.9 21-15.5 13.6-27.1-5.4-8.5-16.4-13.2-25.7-16.6-17.5-4.6-39.7-.6-61.3 12.5-5.2-5.7-11.1-10.2-17.7-13-7.1-2.9-17.5-5.7-28.3-6.3z"/></svg>
+    </span>
+    <a href="page-5.html">Writings</a>
+    <span class="leaf" aria-hidden="true">
+      <svg viewBox="0 0 200 200"><path d="M43.6 11c-1.8 0-3.6.1-5.4.3-7 .8-13.9 2.8-19.1 7.5s-8.2 12-7.7 21c.5 9 4.3 16.1 10.2 20.3 5.9 4.2 13.3 5.5 21 5.2 15.5-.7 32.8-8 45.8-18.3 1.4-1.1 2.8-2 4.3-3.1 4.3 6.7 7.6 14.8 9.3 24.1-7.5-5.1-21-10.6-35.7 1.5-22.1 18.2-25 12.9-45.3-2.1-2.9 36 15 54.6 44.6 52.5 0 0-13.9 4.3-3.6 26.4 6 12.9 8.4 20.1 6.6 25.2-12.8 2.3-15.8 7.8-5.6 12.7 45.1 10 65.7-27.5 68.7-66 45.4 0 52.9-31.8 52.5-50.4-8.2 11.1-22.2 11.1-32.9 2.5-9.9-7.9-21.7-16.2-39-1.1-1.7-11.7-5.7-22.1-11.2-30.7 19.4-11.4 38.7-14.5 52.5-10.8 5.5 1.4 9.5 4.1 12.4 7-9 8.4-11.8 26.4 2.3 27 18.9.9 21-15.5 13.6-27.1-5.4-8.5-16.4-13.2-25.7-16.6-17.5-4.6-39.7-.6-61.3 12.5-5.2-5.7-11.1-10.2-17.7-13-7.1-2.9-17.5-5.7-28.3-6.3z"/></svg>
+    </span>
+    <a href="page-6.html" aria-current="page">Studio &amp; Contact</a>
+  </nav>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-wreath" aria-hidden="true">
+    <svg viewBox="0 0 323 295" xmlns="http://www.w3.org/2000/svg">
+      <g fill="currentColor" opacity="0.7">
+        <ellipse cx="80" cy="150" rx="55" ry="100" transform="rotate(-15 80 150)"/>
+        <ellipse cx="243" cy="150" rx="55" ry="100" transform="rotate(15 243 150)"/>
+      </g>
+    </svg>
+  </div>
+  <div class="eyebrow">Liber Sextus · Studium et Epistula</div>
+  <h1>Studio &amp; Contact</h1>
+  <div class="axis-rule"></div>
+  <p class="subtitle" style="margin-top:24px;">
+    The atelier maintains practice in <em class="em">Rome</em> and <em class="em">New York</em>,
+    in the conviction that classical architecture remains the most generous
+    grammar by which to address the present.
+  </p>
+</section>
+
+<!-- ============ TWO COLUMNS ============ -->
+<main class="studio-section">
+  <div class="columns">
+
+    <!-- ============ LEFT: BIOGRAPHY ============ -->
+    <section class="bio">
+      <div class="col-head">
+        <div class="roundel" aria-hidden="true">
+          <svg viewBox="0 0 117 118" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="58.5" cy="59" r="48" fill="none" stroke="currentColor" stroke-width="1"/>
+            <circle cx="58.5" cy="59" r="44" fill="none" stroke="currentColor" stroke-width="0.6"/>
+            <g fill="currentColor" opacity="0.85">
+              <ellipse cx="58.5" cy="14" rx="3" ry="6"/>
+              <ellipse cx="58.5" cy="104" rx="3" ry="6"/>
+              <ellipse cx="14" cy="59" rx="6" ry="3"/>
+              <ellipse cx="103" cy="59" rx="6" ry="3"/>
+              <ellipse cx="27" cy="27" rx="5" ry="3" transform="rotate(-45 27 27)"/>
+              <ellipse cx="90" cy="27" rx="5" ry="3" transform="rotate(45 90 27)"/>
+              <ellipse cx="27" cy="91" rx="5" ry="3" transform="rotate(45 27 91)"/>
+              <ellipse cx="90" cy="91" rx="5" ry="3" transform="rotate(-45 90 91)"/>
+            </g>
+          </svg>
+          <div class="num">I</div>
+        </div>
+        <h2>Studium</h2>
+        <div class="latin">De Architecto et Sociis</div>
+      </div>
+
+      <p class="lead">
+        The atelier was founded in <em class="em">2011</em> by Gaius Vedrani in a
+        first-floor studio off the Via Giulia in Rome, with a stated commitment to
+        the continuity of classical and traditional architecture. Vedrani took his
+        Diploma di Laurea in Architettura at the Università di Roma "La Sapienza"
+        in <em class="em">2006</em>, and a Master of Architecture at the Yale
+        School of Architecture in <em class="em">2009</em>, where he studied
+        under Robert A. M. Stern and was awarded the Henry Adams Medal.
+      </p>
+
+      <p>
+        The practice now occupies two studios — one beside the Tiber, one above
+        Lafayette Street in lower Manhattan — and works on private houses,
+        institutional commissions, urban infill, and slow restorations of the
+        kind that resist the tempo of contemporary procurement.
+      </p>
+
+      <div class="credentials">
+        <div class="label">Curriculum · Architecto</div>
+        <ul>
+          <li><span>Diploma di Laurea, Università di Roma "La Sapienza"</span><span class="yr">MMVI</span></li>
+          <li><span>Master of Architecture, Yale University</span><span class="yr">MMIX</span></li>
+          <li><span>Prix de Rome, American Academy in Rome</span><span class="yr">MMX</span></li>
+          <li><span>Foundation of Atelier, Via Giulia</span><span class="yr">MMXI</span></li>
+          <li><span>New York studio established, Lafayette St.</span><span class="yr">MMXVII</span></li>
+        </ul>
+      </div>
+
+      <p>
+        We work as a small house, deliberately. Drawing is done at the board
+        before it is done at the screen; mouldings are detailed at full size; and
+        each project is led by a single architect from the first sketch to the
+        last site visit. The studio currently numbers <em class="em">five</em>,
+        named below.
+      </p>
+
+      <div class="team-block">
+        <div class="label">Familia Atelier · MMXXIV</div>
+        <ul class="team">
+          <li>
+            <span class="name">Livia Orsini</span>
+            <span class="dot" aria-hidden="true"></span>
+            <span class="role">Associate · senior partner, Rome studio</span>
+          </li>
+          <li>
+            <span class="name">Marco Petrucci</span>
+            <span class="dot" aria-hidden="true"></span>
+            <span class="role">Project Architect · institutional &amp; civic</span>
+          </li>
+          <li>
+            <span class="name">Elena Falconi</span>
+            <span class="dot" aria-hidden="true"></span>
+            <span class="role">Drawings · orders, mouldings, ornament</span>
+          </li>
+          <li>
+            <span class="name">Tomás Reyes</span>
+            <span class="dot" aria-hidden="true"></span>
+            <span class="role">Models · plaster, basswood, carved stone study</span>
+          </li>
+          <li>
+            <span class="name">Beatrice Lin</span>
+            <span class="dot" aria-hidden="true"></span>
+            <span class="role">Administration · accounts, contracts, archive</span>
+          </li>
+        </ul>
+      </div>
+
+      <hr class="gold-hair">
+
+      <p style="text-align:center; font-style:italic; color:rgba(26,26,26,0.7); margin-top:6px;">
+        "Non nobis solum nati sumus." — Cicero, <em>De Officiis</em> I, 22.
+      </p>
+    </section>
+
+    <div class="col-divider" aria-hidden="true"></div>
+
+    <!-- ============ RIGHT: CONTACT ============ -->
+    <section class="contact">
+      <div class="col-head">
+        <div class="roundel" aria-hidden="true">
+          <svg viewBox="0 0 117 118" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="58.5" cy="59" r="48" fill="none" stroke="currentColor" stroke-width="1"/>
+            <circle cx="58.5" cy="59" r="44" fill="none" stroke="currentColor" stroke-width="0.6"/>
+            <g fill="currentColor" opacity="0.85">
+              <ellipse cx="58.5" cy="14" rx="3" ry="6"/>
+              <ellipse cx="58.5" cy="104" rx="3" ry="6"/>
+              <ellipse cx="14" cy="59" rx="6" ry="3"/>
+              <ellipse cx="103" cy="59" rx="6" ry="3"/>
+              <ellipse cx="27" cy="27" rx="5" ry="3" transform="rotate(-45 27 27)"/>
+              <ellipse cx="90" cy="27" rx="5" ry="3" transform="rotate(45 90 27)"/>
+              <ellipse cx="27" cy="91" rx="5" ry="3" transform="rotate(45 27 91)"/>
+              <ellipse cx="90" cy="91" rx="5" ry="3" transform="rotate(-45 90 91)"/>
+            </g>
+          </svg>
+          <div class="num">II</div>
+        </div>
+        <h2>Epistula</h2>
+        <div class="latin">De Sedibus et Horis</div>
+      </div>
+
+      <div class="addresses">
+        <div class="address">
+          <div class="city">Roma</div>
+          <p>
+            Via Giulia 142<br>
+            00186 Roma RM<br>
+            Italia
+          </p>
+          <div class="tel">+39 06 6880 4412</div>
+        </div>
+        <div class="address">
+          <div class="city">New York</div>
+          <p>
+            372 Lafayette Street, 4th Fl.<br>
+            New York, NY 10012<br>
+            United States
+          </p>
+          <div class="tel">+1 212 555 0182</div>
+        </div>
+      </div>
+
+      <ul class="contact-list">
+        <li>
+          <span class="k">Correspondence</span>
+          <span class="v email">studio@vedrani-atelier.it</span>
+        </li>
+        <li>
+          <span class="k">Press &amp; Lecture</span>
+          <span class="v">press@vedrani-atelier.it</span>
+        </li>
+        <li>
+          <span class="k">Commissions</span>
+          <span class="v">Initial enquiries by letter; please describe site, programme, and intended date of works.</span>
+        </li>
+        <li>
+          <span class="k">Pupilage</span>
+          <span class="v">A single position is offered each spring to a graduate of a school of classical architecture.</span>
+        </li>
+      </ul>
+
+      <div class="hours-frame">
+        <div class="label">Horæ Visitandi · Visiting Hours</div>
+        <div class="hours">Tuesday — Friday · 10:00 — 17:00</div>
+        <div class="note">By appointment only. The atelier is closed on the feasts of Saints Peter and Paul (29 June) and the week of Ferragosto.</div>
+      </div>
+
+      <div class="languages">
+        <div class="latin-line">— Italice · Anglice · Latine —</div>
+        <p>
+          Correspondence is welcomed in <em class="em">Italian</em>,
+          <em class="em">English</em>, or <em class="em">Latin</em>.
+          We answer all serious letters within a fortnight.
+        </p>
+      </div>
+
+    </section>
+  </div>
+</main>
+
+<!-- ============ DIVIDER BAND (meander) ============ -->
+<div class="divider-band" aria-hidden="true">
+  <svg viewBox="1000 364 16511 4447" xmlns="http://www.w3.org/2000/svg">
+    <g fill="currentColor">
+      <path d="M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z"/>
+      <path d="M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z"/>
+      <path d="M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z"/>
+      <path d="M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z"/>
+      <path d="M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z"/>
+    </g>
+  </svg>
+</div>
+
+<!-- ============ FOOTER FRIEZE ============ -->
+<footer class="frieze">
+  <div class="frieze-key" aria-hidden="true">
+    <svg viewBox="0 0 1440 36" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <g fill="none" stroke="currentColor" stroke-width="1.6">
+        <!-- repeat key motif horizontally -->
+        <g>
+          <path d="M0 32 L0 6 L24 6 L24 22 L12 22 L12 12 L18 12 L18 18"/>
+          <path d="M28 32 L28 6 L52 6 L52 22 L40 22 L40 12 L46 12 L46 18"/>
+          <path d="M56 32 L56 6 L80 6 L80 22 L68 22 L68 12 L74 12 L74 18"/>
+          <path d="M84 32 L84 6 L108 6 L108 22 L96 22 L96 12 L102 12 L102 18"/>
+          <path d="M112 32 L112 6 L136 6 L136 22 L124 22 L124 12 L130 12 L130 18"/>
+          <path d="M140 32 L140 6 L164 6 L164 22 L152 22 L152 12 L158 12 L158 18"/>
+          <path d="M168 32 L168 6 L192 6 L192 22 L180 22 L180 12 L186 12 L186 18"/>
+          <path d="M196 32 L196 6 L220 6 L220 22 L208 22 L208 12 L214 12 L214 18"/>
+          <path d="M224 32 L224 6 L248 6 L248 22 L236 22 L236 12 L242 12 L242 18"/>
+          <path d="M252 32 L252 6 L276 6 L276 22 L264 22 L264 12 L270 12 L270 18"/>
+          <path d="M280 32 L280 6 L304 6 L304 22 L292 22 L292 12 L298 12 L298 18"/>
+          <path d="M308 32 L308 6 L332 6 L332 22 L320 22 L320 12 L326 12 L326 18"/>
+          <path d="M336 32 L336 6 L360 6 L360 22 L348 22 L348 12 L354 12 L354 18"/>
+          <path d="M364 32 L364 6 L388 6 L388 22 L376 22 L376 12 L382 12 L382 18"/>
+          <path d="M392 32 L392 6 L416 6 L416 22 L404 22 L404 12 L410 12 L410 18"/>
+          <path d="M420 32 L420 6 L444 6 L444 22 L432 22 L432 12 L438 12 L438 18"/>
+          <path d="M448 32 L448 6 L472 6 L472 22 L460 22 L460 12 L466 12 L466 18"/>
+          <path d="M476 32 L476 6 L500 6 L500 22 L488 22 L488 12 L494 12 L494 18"/>
+          <path d="M504 32 L504 6 L528 6 L528 22 L516 22 L516 12 L522 12 L522 18"/>
+          <path d="M532 32 L532 6 L556 6 L556 22 L544 22 L544 12 L550 12 L550 18"/>
+          <path d="M560 32 L560 6 L584 6 L584 22 L572 22 L572 12 L578 12 L578 18"/>
+          <path d="M588 32 L588 6 L612 6 L612 22 L600 22 L600 12 L606 12 L606 18"/>
+          <path d="M616 32 L616 6 L640 6 L640 22 L628 22 L628 12 L634 12 L634 18"/>
+          <path d="M644 32 L644 6 L668 6 L668 22 L656 22 L656 12 L662 12 L662 18"/>
+          <path d="M672 32 L672 6 L696 6 L696 22 L684 22 L684 12 L690 12 L690 18"/>
+          <path d="M700 32 L700 6 L724 6 L724 22 L712 22 L712 12 L718 12 L718 18"/>
+          <path d="M728 32 L728 6 L752 6 L752 22 L740 22 L740 12 L746 12 L746 18"/>
+          <path d="M756 32 L756 6 L780 6 L780 22 L768 22 L768 12 L774 12 L774 18"/>
+          <path d="M784 32 L784 6 L808 6 L808 22 L796 22 L796 12 L802 12 L802 18"/>
+          <path d="M812 32 L812 6 L836 6 L836 22 L824 22 L824 12 L830 12 L830 18"/>
+          <path d="M840 32 L840 6 L864 6 L864 22 L852 22 L852 12 L858 12 L858 18"/>
+          <path d="M868 32 L868 6 L892 6 L892 22 L880 22 L880 12 L886 12 L886 18"/>
+          <path d="M896 32 L896 6 L920 6 L920 22 L908 22 L908 12 L914 12 L914 18"/>
+          <path d="M924 32 L924 6 L948 6 L948 22 L936 22 L936 12 L942 12 L942 18"/>
+          <path d="M952 32 L952 6 L976 6 L976 22 L964 22 L964 12 L970 12 L970 18"/>
+          <path d="M980 32 L980 6 L1004 6 L1004 22 L992 22 L992 12 L998 12 L998 18"/>
+          <path d="M1008 32 L1008 6 L1032 6 L1032 22 L1020 22 L1020 12 L1026 12 L1026 18"/>
+          <path d="M1036 32 L1036 6 L1060 6 L1060 22 L1048 22 L1048 12 L1054 12 L1054 18"/>
+          <path d="M1064 32 L1064 6 L1088 6 L1088 22 L1076 22 L1076 12 L1082 12 L1082 18"/>
+          <path d="M1092 32 L1092 6 L1116 6 L1116 22 L1104 22 L1104 12 L1110 12 L1110 18"/>
+          <path d="M1120 32 L1120 6 L1144 6 L1144 22 L1132 22 L1132 12 L1138 12 L1138 18"/>
+          <path d="M1148 32 L1148 6 L1172 6 L1172 22 L1160 22 L1160 12 L1166 12 L1166 18"/>
+          <path d="M1176 32 L1176 6 L1200 6 L1200 22 L1188 22 L1188 12 L1194 12 L1194 18"/>
+          <path d="M1204 32 L1204 6 L1228 6 L1228 22 L1216 22 L1216 12 L1222 12 L1222 18"/>
+          <path d="M1232 32 L1232 6 L1256 6 L1256 22 L1244 22 L1244 12 L1250 12 L1250 18"/>
+          <path d="M1260 32 L1260 6 L1284 6 L1284 22 L1272 22 L1272 12 L1278 12 L1278 18"/>
+          <path d="M1288 32 L1288 6 L1312 6 L1312 22 L1300 22 L1300 12 L1306 12 L1306 18"/>
+          <path d="M1316 32 L1316 6 L1340 6 L1340 22 L1328 22 L1328 12 L1334 12 L1334 18"/>
+          <path d="M1344 32 L1344 6 L1368 6 L1368 22 L1356 22 L1356 12 L1362 12 L1362 18"/>
+          <path d="M1372 32 L1372 6 L1396 6 L1396 22 L1384 22 L1384 12 L1390 12 L1390 18"/>
+          <path d="M1400 32 L1400 6 L1424 6 L1424 22 L1412 22 L1412 12 L1418 12 L1418 18"/>
+          <path d="M1428 32 L1428 6 L1440 6"/>
+        </g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="colophon">
+    <div class="studio">Atelier Gaius Vedrani</div>
+    <div class="addresses-foot">
+      <div>
+        <div class="place">Rome Studio</div>
+        Via Giulia 142<br>
+        00186 Roma, Italia<br>
+        +39 06 6880 4412
+      </div>
+      <div>
+        <div class="place">New York Studio</div>
+        372 Lafayette St., 4th Fl.<br>
+        New York, NY 10012, USA<br>
+        +1 212 555 0182
+      </div>
+    </div>
+    <div class="registry">
+      ORCID 0000-0002-7418-3361 &nbsp;·&nbsp; AIA Reg. 41 02 779 &nbsp;·&nbsp; Ordine Architetti Roma N° 24 118
+      &nbsp;·&nbsp; © MMXI–MMXXIV
+    </div>
+  </div>
+
+  <div class="tailpiece" aria-hidden="true">
+    <svg viewBox="0 0 80 22" xmlns="http://www.w3.org/2000/svg">
+      <g fill="currentColor">
+        <circle cx="40" cy="11" r="2.4"/>
+        <path d="M14 11 H32" stroke="currentColor" stroke-width="0.8"/>
+        <path d="M48 11 H66" stroke="currentColor" stroke-width="0.8"/>
+        <path d="M10 11 q4 -6 8 0 q-4 6 -8 0z"/>
+        <path d="M62 11 q4 -6 8 0 q-4 6 -8 0z"/>
+        <circle cx="6" cy="11" r="1.2"/>
+        <circle cx="74" cy="11" r="1.2"/>
+      </g>
+    </svg>
+  </div>
+</footer>
+
+</body>
+</html>

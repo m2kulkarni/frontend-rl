@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="la">
+<head>
+<meta charset="UTF-8">
+<title>BENEFACTORES — Donors, Patrons, and the Album of Names</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    margin: 0;
+    font-family: var(--font-body), Georgia, serif;
+    font-size: 16px;
+    line-height: 1.65;
+    text-align: center;
+  }
+
+  /* ===== NAVIGATION FRIEZE ===== */
+  .frieze {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--surface);
+    border-top: 1px solid var(--secondary);
+    border-bottom: 1px solid var(--secondary);
+    box-shadow: 0 1px 0 var(--secondary), 0 -1px 0 var(--secondary);
+    padding: 14px 0 10px;
+  }
+  .frieze::before, .frieze::after {
+    content: "";
+    display: block;
+    height: 1px;
+    background: var(--secondary);
+    margin: 4px 0;
+    opacity: 0.55;
+  }
+  .frieze-inner {
+    max-width: 1320px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 24px;
+    padding: 0 32px;
+  }
+  .frieze nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .frieze nav.left ul { justify-content: flex-end; }
+  .frieze nav.right ul { justify-content: flex-start; }
+  .frieze a {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text);
+    text-decoration: none;
+    padding: 4px 2px;
+  }
+  .frieze a[aria-current="page"] {
+    color: var(--primary);
+    border-bottom: 1px solid var(--secondary);
+  }
+  .frieze a:hover { color: var(--primary); }
+  .vine {
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    vertical-align: middle;
+    fill: var(--secondary);
+    opacity: 0.85;
+  }
+  .wordmark {
+    font-family: var(--font-display), serif;
+    font-size: 17px;
+    letter-spacing: 0.32em;
+    color: var(--primary);
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .wordmark .small {
+    display: block;
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    color: var(--accent);
+    margin-top: 3px;
+  }
+
+  /* ===== HERO TABULA ===== */
+  .hero {
+    padding: 70px 32px 40px;
+    position: relative;
+  }
+  .tabula {
+    max-width: 880px;
+    margin: 0 auto;
+    background: var(--surface);
+    border: 2px solid var(--secondary);
+    outline: 1px solid var(--secondary);
+    outline-offset: 6px;
+    padding: 60px 60px 50px;
+    position: relative;
+  }
+  .seal-roundel {
+    width: 130px;
+    height: 130px;
+    margin: -120px auto 24px;
+    display: block;
+    background: var(--surface);
+    border-radius: 50%;
+    padding: 8px;
+    border: 2px solid var(--secondary);
+    box-shadow: 0 0 0 4px var(--surface), 0 0 0 5px var(--secondary);
+  }
+  .seal-roundel svg { width: 100%; height: 100%; display: block; }
+  .seal-roundel svg path { fill: var(--accent); }
+
+  .tabula-eyebrow {
+    font-family: var(--font-display), serif;
+    font-size: 10px;
+    letter-spacing: 0.5em;
+    color: var(--secondary);
+    text-transform: uppercase;
+    margin: 0 0 20px;
+  }
+  .tabula h1 {
+    font-family: var(--font-display), serif;
+    font-size: 38px;
+    letter-spacing: 0.18em;
+    color: var(--primary);
+    margin: 0 0 14px;
+    line-height: 1.25;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .tabula .sub {
+    font-style: italic;
+    color: var(--text);
+    margin: 0 auto;
+    max-width: 560px;
+    font-size: 15px;
+  }
+  .tabula .rule {
+    width: 120px;
+    height: 1px;
+    background: var(--secondary);
+    margin: 26px auto 0;
+    position: relative;
+  }
+  .tabula .rule::before, .tabula .rule::after {
+    content: "❦";
+    position: absolute;
+    top: -10px;
+    color: var(--secondary);
+    font-size: 12px;
+  }
+  .tabula .rule::before { left: -22px; }
+  .tabula .rule::after { right: -22px; }
+
+  /* ===== MEANDER DIVIDER ===== */
+  .meander {
+    width: 100%;
+    height: 36px;
+    margin: 30px auto;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 26'><g fill='none' stroke='%23c9a23a' stroke-width='1.5'><path d='M0 25 V5 H20 V18 H8 V11 H14'/><path d='M25 25 V5 H45 V18 H33 V11 H39'/><path d='M50 25 V5 H70 V18 H58 V11 H64'/><path d='M75 25 V5 H95 V18 H83 V11 H89'/></g></svg>");
+    background-repeat: repeat-x;
+    background-position: center;
+    background-size: auto 26px;
+  }
+  .meander.thin { height: 22px; }
+
+  /* ===== ALBUM TIERS ===== */
+  .album {
+    max-width: 1080px;
+    margin: 30px auto 60px;
+    padding: 0 32px;
+  }
+  .tier {
+    margin: 0 auto 56px;
+    background: var(--surface);
+    padding: 50px 60px 46px;
+    position: relative;
+    border: 1px solid var(--secondary);
+  }
+  /* Greek-key border simulation via repeating-linear-gradients on edges */
+  .tier::before, .tier::after {
+    content: "";
+    position: absolute;
+    left: 8px; right: 8px;
+    height: 14px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 14'><g fill='none' stroke='%23a93226' stroke-width='1.2'><path d='M0 13 V2 H14 V10 H6 V6 H10'/><path d='M16 13 V2 H30 V10 H22 V6 H26'/><path d='M32 13 V2 H46 V10 H38 V6 H42'/><path d='M48 13 V2 H62 V10 H54 V6 H58'/></g></svg>");
+    background-repeat: repeat-x;
+    background-size: auto 14px;
+  }
+  .tier::before { top: 8px; }
+  .tier::after { bottom: 8px; transform: scaleY(-1); }
+
+  .tier-plate {
+    display: inline-block;
+    margin: -82px auto 18px;
+    padding: 10px 60px 14px;
+    background: var(--bg);
+    position: relative;
+  }
+  .tier-plate svg.laurel {
+    position: absolute;
+    top: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 220px;
+    height: auto;
+    opacity: 0.85;
+  }
+  .tier-plate h2 {
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+    margin: 0;
+    text-transform: uppercase;
+    font-weight: 600;
+    line-height: 1.1;
+  }
+  .tier-plate .gift {
+    display: block;
+    font-family: var(--font-display), serif;
+    color: var(--accent);
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    margin-top: 6px;
+    text-transform: uppercase;
+  }
+
+  .tier .names {
+    list-style: none;
+    margin: 22px auto 0;
+    padding: 0;
+    max-width: 720px;
+    columns: 1;
+  }
+  .tier .names li {
+    font-family: var(--font-display), serif;
+    color: var(--text);
+    padding: 6px 0;
+    border-bottom: 1px dotted rgba(169,50,38,0.25);
+  }
+  .tier .names li:last-child { border-bottom: none; }
+  .tier .names li .loc {
+    display: block;
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--accent);
+    margin-top: 2px;
+    text-transform: none;
+  }
+
+  /* Tier-specific scaling */
+  .tier-magni h2 { font-size: 30px; letter-spacing: 0.32em; }
+  .tier-magni .names li { font-size: 22px; letter-spacing: 0.22em; }
+
+  .tier-patroni h2 { font-size: 24px; letter-spacing: 0.28em; }
+  .tier-patroni .names { columns: 2; column-gap: 60px; }
+  .tier-patroni .names li { font-size: 17px; letter-spacing: 0.18em; break-inside: avoid; }
+
+  .tier-sodales h2 { font-size: 19px; letter-spacing: 0.24em; }
+  .tier-sodales .names { columns: 3; column-gap: 40px; }
+  .tier-sodales .names li { font-size: 13px; letter-spacing: 0.14em; break-inside: avoid; }
+  .tier-sodales .names li .loc { font-size: 10px; }
+
+  .tier-amici h2 { font-size: 15px; letter-spacing: 0.2em; }
+  .tier-amici .names { columns: 4; column-gap: 32px; }
+  .tier-amici .names li { font-size: 11px; letter-spacing: 0.1em; break-inside: avoid; padding: 3px 0; }
+  .tier-amici .names li .loc { display: none; }
+
+  /* ===== BEQUEST ===== */
+  .bequest {
+    max-width: 760px;
+    margin: 60px auto 80px;
+    padding: 0 32px;
+    text-align: center;
+  }
+  .bequest h2 {
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+    font-size: 22px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    margin: 0 0 8px;
+    font-weight: 600;
+  }
+  .bequest .latin {
+    font-family: var(--font-display), serif;
+    color: var(--accent);
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    margin: 0 0 28px;
+  }
+  .bequest p {
+    text-align: justify;
+    text-align-last: center;
+    margin: 0 0 18px;
+    font-size: 15.5px;
+  }
+  .bequest p:first-of-type::first-letter {
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+    font-size: 56px;
+    line-height: 0.85;
+    float: left;
+    padding: 6px 10px 0 0;
+    font-weight: 600;
+  }
+  .bequest .signoff {
+    margin-top: 30px;
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  /* ===== FOOTER ===== */
+  footer.frieze-foot {
+    margin-top: 0;
+    background: #b85a4f;
+    background: linear-gradient(0deg, rgba(169,50,38,0.78), rgba(169,50,38,0.78));
+    color: var(--surface);
+    padding: 0;
+  }
+  .meander-strip {
+    height: 22px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 22'><g fill='none' stroke='%23c9a23a' stroke-width='1.4'><path d='M0 21 V3 H18 V15 H7 V9 H12'/><path d='M22 21 V3 H40 V15 H29 V9 H34'/><path d='M44 21 V3 H62 V15 H51 V9 H56'/><path d='M66 21 V3 H84 V15 H73 V9 H78'/><path d='M88 21 V3 H106 V15 H95 V9 H100'/></g></svg>");
+    background-repeat: repeat-x;
+    background-size: auto 22px;
+  }
+  .footer-center {
+    padding: 36px 32px 14px;
+    text-align: center;
+  }
+  .footer-seal {
+    width: 84px; height: 84px;
+    margin: 0 auto 14px;
+    background: rgba(245,240,230,0.08);
+    border: 1px solid var(--secondary);
+    border-radius: 50%;
+    padding: 6px;
+  }
+  .footer-seal svg { width: 100%; height: 100%; }
+  .footer-seal svg path { fill: var(--secondary); }
+  .footer-center .name {
+    font-family: var(--font-display), serif;
+    font-size: 16px;
+    letter-spacing: 0.36em;
+    color: var(--secondary);
+    text-transform: uppercase;
+  }
+  .footer-center .addr, .footer-center .charter {
+    font-family: var(--font-display), serif;
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    margin-top: 6px;
+    color: var(--surface);
+    opacity: 0.92;
+    text-transform: uppercase;
+  }
+  .footer-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+    max-width: 1080px;
+    margin: 24px auto 0;
+    padding: 24px 32px 36px;
+    border-top: 1px solid rgba(201,162,58,0.45);
+  }
+  .footer-cols section h4 {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    color: var(--secondary);
+    margin: 0 0 12px;
+    text-transform: uppercase;
+  }
+  .footer-cols section ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .footer-cols section li {
+    font-family: var(--font-display), serif;
+    font-size: 9.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 3px 0;
+    color: var(--surface);
+    opacity: 0.88;
+  }
+  .footer-cols section a { color: inherit; text-decoration: none; }
+
+  /* Reusable inline vine */
+  .vine-glyph {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    vertical-align: -2px;
+    margin: 0 2px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV FRIEZE ============ -->
+<header class="frieze" role="banner">
+  <div class="frieze-inner">
+    <nav class="left" aria-label="primary left">
+      <ul>
+        <li><a href="page-1.html">Domus</a></li>
+        <li><svg class="vine" viewBox="0 0 200 200"><path transform="translate(0 -852.36)" d="m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812z"/></svg></li>
+        <li><a href="page-2.html">De Proposito</a></li>
+        <li><svg class="vine" viewBox="0 0 200 200"><path transform="translate(0 -852.36)" d="m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625z"/></svg></li>
+        <li><a href="page-3.html">Opera</a></li>
+      </ul>
+    </nav>
+    <div class="wordmark">
+      Fundatio Aurelia
+      <span class="small">Patrocinium · Antiquitatis</span>
+    </div>
+    <nav class="right" aria-label="primary right">
+      <ul>
+        <li><a href="page-4.html" aria-current="page">Benefactores</a></li>
+        <li><svg class="vine" viewBox="0 0 200 200"><path transform="translate(0 -852.36)" d="m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625z"/></svg></li>
+        <li><a href="page-5.html">Acta</a></li>
+        <li><svg class="vine" viewBox="0 0 200 200"><path transform="translate(0 -852.36)" d="m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625z"/></svg></li>
+        <li><a href="page-6.html">Scribe Nobis</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ HERO TABULA ============ -->
+<section class="hero">
+  <div class="tabula">
+    <div class="seal-roundel" aria-hidden="true">
+      <svg viewBox="75 121 118 119" xmlns="http://www.w3.org/2000/svg">
+        <path d="M122.25603,238.99132 c -0.48833,-0.45902 -1.41476,-1.06914 -2.05872,-1.35581 c -1.36783,-0.60892 -1.82771,-1.02227 -2.6409,-2.37368 c -0.66188,-1.09995 -0.93388,-1.21174 -1.31056,-0.53865 c -0.36078,0.64469 -3.40378,0.53232 -3.99468,-0.14751 c -0.68244,-0.78515 -1.33406,-2.1652 -1.33406,-2.82539 c 0,-1.22765 -1.18069,-1.11172 -1.45627,0.14298 z M134,135 a 50,50 0 1,1 0,100 a 50,50 0 1,1 0,-100 z M 134,150 a 35,35 0 1,1 0,70 a 35,35 0 1,1 0,-70z"/>
+      </svg>
+    </div>
+    <p class="tabula-eyebrow">Album Benefactorum · MMXXIV</p>
+    <h1>Benefactoribus<br>Gratias Agimus</h1>
+    <p class="sub">In gratitude to those whose generosity preserves the stones, the waters, and the painted floors of the Roman world — that what was civic may remain civic.</p>
+    <div class="rule"></div>
+  </div>
+</section>
+
+<div class="meander" role="presentation" aria-hidden="true"></div>
+
+<!-- ============ ALBUM TIERS ============ -->
+<main class="album">
+
+  <!-- TIER I: PATRONI MAGNI -->
+  <section class="tier tier-magni">
+    <div class="tier-plate">
+      <h2>Patroni Magni</h2>
+      <span class="gift">Largitio · supra C M €</span>
+    </div>
+    <ul class="names">
+      <li>Cassia Veturius e Famiglia
+        <span class="loc">Verona — in memoriam Lucii Veturii Pictoris</span>
+      </li>
+      <li>Domus Aureliana di Milano
+        <span class="loc">Casa fondata anno MCMXII</span>
+      </li>
+      <li>Marcus Helvidius Caro
+        <span class="loc">Roma · Fondazione Helvidiana</span>
+      </li>
+      <li>Lavinia &amp; Tiberius Sergius Galba
+        <span class="loc">Aquileia — donatio aquaeductus</span>
+      </li>
+    </ul>
+  </section>
+
+  <div class="meander thin" role="presentation" aria-hidden="true"></div>
+
+  <!-- TIER II: PATRONI -->
+  <section class="tier tier-patroni">
+    <div class="tier-plate">
+      <h2>Patroni</h2>
+      <span class="gift">Largitio · supra XXV M €</span>
+    </div>
+    <ul class="names">
+      <li>Banca Lateranense, Roma <span class="loc">Sodalitas mercatorum</span></li>
+      <li>Quintilia Ahenobarba <span class="loc">Bologna</span></li>
+      <li>Fondazione Pertinax-Severo <span class="loc">Genova</span></li>
+      <li>Aulus Pomponius Atticus IV <span class="loc">Napoli — Villa Ponziana</span></li>
+      <li>Fulvia Manlia Aquilina <span class="loc">Firenze</span></li>
+      <li>Studio Legale Calpurnio &amp; Figli <span class="loc">Milano</span></li>
+      <li>Decimus Iunius Silanus Bracara <span class="loc">Braga, Portugal</span></li>
+      <li>Editrice Capitolina S.p.A. <span class="loc">Roma · Trastevere</span></li>
+      <li>Octavia Vibia Sabina <span class="loc">Trier, Germania</span></li>
+      <li>Fratelli Domiziano-Severi <span class="loc">Ravenna</span></li>
+      <li>Cornelia Scipionis Africana <span class="loc">Tunisi · in memoria del padre</span></li>
+      <li>Praetorium Real Estate Trust <span class="loc">Londinium</span></li>
+    </ul>
+  </section>
+
+  <div class="meander thin" role="presentation" aria-hidden="true"></div>
+
+  <!-- TIER III: SODALES -->
+  <section class="tier tier-sodales">
+    <div class="tier-plate">
+      <h2>Sodales</h2>
+      <span class="gift">Largitio · supra V M €</span>
+    </div>
+    <ul class="names">
+      <li>Gaius Antonius Saturninus <span class="loc">Padova</span></li>
+      <li>Hortensia Calva <span class="loc">Lione</span></li>
+      <li>Marcus Vipsanius Agrippinus <span class="loc">Vicenza</span></li>
+      <li>Famiglia Tullio-Cicerone <span class="loc">Arpino</span></li>
+      <li>Livia Drusilla Malatesta <span class="loc">Rimini</span></li>
+      <li>Publius Cornelius Lentulus <span class="loc">Bari</span></li>
+      <li>Studio Mosaico Ravennate s.r.l. <span class="loc">Ravenna</span></li>
+      <li>Aemilia Lepida Pulchra <span class="loc">Brescia</span></li>
+      <li>Tiberius Claudius Narcissus <span class="loc">Pompei</span></li>
+      <li>Fondo Capitolino per le Arti <span class="loc">Roma · Aventino</span></li>
+      <li>Servilia Caepionis Maior <span class="loc">Pisa</span></li>
+      <li>Lucius Annaeus Seneca-Pereira <span class="loc">Córdoba</span></li>
+      <li>Camilla Furia Bibula <span class="loc">Trento</span></li>
+      <li>Vittorio &amp; Marcella Quintili <span class="loc">Tivoli</span></li>
+      <li>Studio Architettura Vitruvio <span class="loc">Torino</span></li>
+      <li>Sextus Roscius Amerinus <span class="loc">Amelia</span></li>
+      <li>Claudia Octavia Marcellina <span class="loc">Spoleto</span></li>
+      <li>Gens Iulia Trust, Wien <span class="loc">Vindobona</span></li>
+      <li>Marcus Porcius Cato Censorinus <span class="loc">Tusculo</span></li>
+      <li>Pomponia Graecina Vetus <span class="loc">Catania</span></li>
+      <li>Confraternita di S. Lorenzo in Damaso <span class="loc">Roma</span></li>
+      <li>Aulus Persius Flaccus <span class="loc">Volterra</span></li>
+      <li>Iunia Tertia Calvina <span class="loc">Siena</span></li>
+      <li>Banco Cesarini-Ottaviani <span class="loc">Frascati</span></li>
+    </ul>
+  </section>
+
+  <div class="meander thin" role="presentation" aria-hidden="true"></div>
+
+  <!-- TIER IV: AMICI -->
+  <section class="tier tier-amici">
+    <div class="tier-plate">
+      <h2>Amici</h2>
+      <span class="gift">Largitio · supra D €</span>
+    </div>
+    <ul class="names">
+      <li>Aurelia Cotta</li>
+      <li>Marcus Tullius Tiro</li>
+      <li>Servius Sulpicius Rufus</li>
+      <li>Caecilia Metella Croesa</li>
+      <li>Lucius Munatius Plancus</li>
+      <li>Helena Faustina Minor</li>
+      <li>Quintus Curtius Rufus</li>
+      <li>Verginia Tricostina</li>
+      <li>Titus Labienus Macer</li>
+      <li>Fabia Numantina</li>
+      <li>Gnaeus Domitius Calvinus</li>
+      <li>Sulpicia Galbilla</li>
+      <li>Marcus Caelius Rufus</li>
+      <li>Antistia Pollitta</li>
+      <li>Numerius Fabius Pictor</li>
+      <li>Valeria Messalina Vetus</li>
+      <li>Quintus Hortensius Hortalus</li>
+      <li>Clodia Metelli Pulchra</li>
+      <li>Aulus Gabinius Capito</li>
+      <li>Iulia Procilla Severa</li>
+      <li>Lucius Calpurnius Piso</li>
+      <li>Domitia Lucilla Maior</li>
+      <li>Marcus Aurelius Cleander</li>
+      <li>Vipsania Agrippina</li>
+      <li>Spurius Postumius Albinus</li>
+      <li>Acilia Plecusa</li>
+      <li>Quintus Caecilius Niger</li>
+      <li>Plautia Urgulanilla</li>
+      <li>Titus Statilius Taurus</li>
+      <li>Fannia Thrasea</li>
+      <li>Lucius Verginius Rufus</li>
+      <li>Calpurnia Pisonis</li>
+      <li>Marcus Atilius Regulus</li>
+      <li>Aelia Paetina</li>
+      <li>Gaius Cassius Longinus</li>
+      <li>Sempronia Tuditana</li>
+      <li>Publius Ovidius Naso-Bertoli</li>
+      <li>Antonia Caenis</li>
+      <li>Lucius Aelius Seianus</li>
+      <li>Cornificia Faustina</li>
+      <li>Quintus Lutatius Catulus</li>
+      <li>Marcia Furnilla</li>
+      <li>Decius Mus Conservator</li>
+      <li>Tullia Ciceronis</li>
+      <li>Gnaeus Naevius Balbus</li>
+      <li>Iunilla Sabina Aurelia</li>
+      <li>Marcus Junius Brutus-Conti</li>
+      <li>Petronia Iusta</li>
+      <li>+ CCXIV nomina anonyma</li>
+    </ul>
+  </section>
+
+</main>
+
+<div class="meander" role="presentation" aria-hidden="true"></div>
+
+<!-- ============ BEQUEST ============ -->
+<section class="bequest">
+  <h2>De Hereditate</h2>
+  <p class="latin">Sub umbra legis · Ente Morale · D.P.R. CCCXXII / MCMLXI</p>
+  <p>Bequests to the Fundatio Aurelia are received under the Italian framework of the <em>ente morale di diritto privato</em>, recognised by Decree of the President of the Republic on the 14th of March, MCMLXI, and registered with the <em>Prefettura di Roma Capitale</em> at register number IV-1882. The Foundation may accept testamentary dispositions, donations <em>inter vivos</em>, life-tenancy transfers of real property, and gifts of cultural objects, in accordance with articles 14–35 of the Italian Civil Code and the provisions of Law 222/1985.</p>
+  <p>A standard testamentary clause is available in Italian, English, French, and German upon written request to the Cancelleria. All bequests above €25.000 are entered into the present album <em>in perpetuum</em>; testators may elect anonymity, dedication <em>in memoriam</em> of a named person, or association with a particular field campaign — the aqueduct of Aspendos, the mosaics of Piazza Armerina, or the Severan epigraphic survey at Lepcis Magna.</p>
+  <p>Notarial enquiries are answered by Dott.ssa Marcella Quintili and Avv. Aulus Pomponius the younger, in office at the Foundation's Roman seat, every Tuesday and Thursday from the third hour after dawn until the eleventh.</p>
+  <p class="signoff">— Acta · Cancellaria · Fundatio Aurelia —</p>
+</section>
+
+<!-- ============ FOOTER FRIEZE ============ -->
+<footer class="frieze-foot" role="contentinfo">
+  <div class="meander-strip" aria-hidden="true"></div>
+  <div class="footer-center">
+    <div class="footer-seal" aria-hidden="true">
+      <svg viewBox="75 121 118 119" xmlns="http://www.w3.org/2000/svg">
+        <path d="M134,135 a 50,50 0 1,1 0,100 a 50,50 0 1,1 0,-100 z M 134,150 a 35,35 0 1,1 0,70 a 35,35 0 1,1 0,-70 z M 134,165 a 20,20 0 1,1 0,40 a 20,20 0 1,1 0,-40z"/>
+      </svg>
+    </div>
+    <div class="name">Fundatio Aurelia</div>
+    <div class="addr">Via dei Fori Imperiali XLIV · Roma I · Italia</div>
+    <div class="charter">Charta Fundationis · A·D · MCMLXI</div>
+  </div>
+  <div class="footer-cols">
+    <section>
+      <h4>Patroni</h4>
+      <ul>
+        <li>Album Benefactorum</li>
+        <li>Sodalitas Annua</li>
+        <li>Hereditas &amp; Legata</li>
+        <li>Donatio in Memoriam</li>
+        <li>Fundus Mosaicorum</li>
+      </ul>
+    </section>
+    <section>
+      <h4>Contactus</h4>
+      <ul>
+        <li>cancellaria@aurelia.it</li>
+        <li>Telephonum +XXXIX VI 6788 4421</li>
+        <li>Horae · Mart · Iov · III–XI</li>
+        <li>Bibliotheca · Mer · IV–IX</li>
+        <li>Aedicula Romae I</li>
+      </ul>
+    </section>
+    <section>
+      <h4>Acta Iuris</h4>
+      <ul>
+        <li>Statuta Fundationis</li>
+        <li>Codex Privatus</li>
+        <li>Registrum Praefecturae</li>
+        <li>Rendiconto MMXXIII</li>
+        <li>© Fundatio Aurelia · MMXXIV</li>
+      </ul>
+    </section>
+  </div>
+  <div class="meander-strip" aria-hidden="true"></div>
+</footer>
+
+</body>
+</html>

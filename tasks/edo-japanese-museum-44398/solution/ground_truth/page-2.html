@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Collections — Hakubutsukan Yanaka</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), serif;
+    line-height: 1.85;
+    margin: 0;
+    padding: 0;
+    font-size: 15px;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* ---------- NAV ---------- */
+  .topbar {
+    display: grid;
+    grid-template-columns: 20% 1fr;
+    align-items: center;
+    padding: 28px 56px 22px 56px;
+    border-bottom: 1px solid rgba(12,12,12,0.35);
+  }
+  .brandmark {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .brandmark .kamon {
+    width: 46px; height: 46px;
+    flex-shrink: 0;
+  }
+  .brandmark .wordmark {
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    line-height: 1.3;
+    color: var(--primary);
+  }
+  .brandmark .wordmark small {
+    display: block;
+    font-family: var(--font-body), serif;
+    letter-spacing: 0.04em;
+    text-transform: none;
+    font-size: 10.5px;
+    color: var(--text);
+    opacity: 0.7;
+  }
+  nav.primary {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0;
+    align-items: center;
+  }
+  nav.primary a {
+    font-family: var(--font-body), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.16em;
+    font-size: 12.5px;
+    padding: 6px 22px;
+    border-right: 1px solid rgba(12,12,12,0.4);
+    color: var(--text);
+  }
+  nav.primary a:last-child { border-right: none; padding-right: 0; }
+  nav.primary a:first-child { padding-left: 0; }
+  nav.primary a[aria-current="page"] {
+    border-bottom: 2px solid var(--secondary);
+    color: var(--primary);
+  }
+
+  /* ---------- HEADER / HERO ---------- */
+  .page-header {
+    display: grid;
+    grid-template-columns: 20% 42% 38%;
+    padding: 80px 56px 60px 56px;
+    position: relative;
+  }
+  .page-header .meta {
+    grid-column: 1;
+    font-family: var(--font-body), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.22em;
+    font-size: 11px;
+    color: var(--primary);
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    align-self: start;
+    height: 240px;
+  }
+  .page-header h1 {
+    grid-column: 2;
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 84px;
+    line-height: 1.05;
+    margin: 0;
+    color: var(--primary);
+    letter-spacing: -0.01em;
+  }
+  .page-header h1 .accent {
+    color: var(--secondary);
+    font-size: 0.5em;
+    vertical-align: super;
+    margin-left: 0.2em;
+  }
+  .page-header .lede {
+    grid-column: 2;
+    margin-top: 36px;
+    max-width: 30ch;
+    font-size: 15px;
+    color: var(--text);
+  }
+  .page-header .lede::first-letter {
+    font-family: var(--font-display), serif;
+    font-size: 2.6em;
+    float: left;
+    line-height: 0.9;
+    margin: 4px 8px 0 0;
+    color: var(--primary);
+  }
+
+  /* ---------- DIVIDER ---------- */
+  .sayagata-divider {
+    height: 36px;
+    background-image: url('svg/sayagata-keyfret.svg');
+    background-repeat: repeat-x;
+    background-size: 110px 110px;
+    background-position: 56px center;
+    opacity: 0.13;
+    margin: 0 0 40px 0;
+  }
+
+  /* ---------- COLLECTIONS GRID ---------- */
+  .collections {
+    display: grid;
+    grid-template-columns: 20% 30% 30% 20%;
+    grid-template-rows: auto auto;
+    column-gap: 32px;
+    row-gap: 56px;
+    padding: 20px 56px 100px 56px;
+    position: relative;
+  }
+  .section-label {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    font-family: var(--font-body), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.24em;
+    font-size: 11px;
+    color: var(--primary);
+    border-top: 1px solid var(--text);
+    padding-top: 14px;
+    align-self: start;
+  }
+  .section-label .num {
+    display: block;
+    font-family: var(--font-display), serif;
+    font-size: 38px;
+    color: var(--secondary);
+    margin-top: 18px;
+    letter-spacing: 0;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid rgba(12,12,12,0.85);
+    padding: 38px 36px 34px 36px;
+    position: relative;
+    min-height: 380px;
+  }
+  .card .corner-mon {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 36px;
+    height: 36px;
+    opacity: 0.78;
+  }
+  .card .index {
+    font-family: var(--font-body), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.22em;
+    font-size: 10.5px;
+    color: var(--secondary);
+    margin-bottom: 20px;
+    display: block;
+  }
+  .card h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 1.08;
+    letter-spacing: -0.005em;
+    margin: 0 0 4px 0;
+    color: var(--primary);
+    max-width: 11ch;
+  }
+  .card .subtitle {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 13.5px;
+    color: var(--text);
+    opacity: 0.78;
+    margin-bottom: 22px;
+    display: block;
+  }
+  .card .body {
+    font-size: 13.5px;
+    line-height: 1.8;
+    max-width: 32ch;
+    margin: 0 0 18px 0;
+  }
+  .card dl.facts {
+    margin: 0 0 22px 0;
+    font-size: 12px;
+    line-height: 1.7;
+    border-top: 1px solid rgba(12,12,12,0.3);
+    padding-top: 12px;
+    max-width: 32ch;
+  }
+  .card dl.facts > div {
+    display: grid;
+    grid-template-columns: 38% 62%;
+    gap: 8px;
+    padding: 3px 0;
+  }
+  .card dl.facts dt {
+    font-variant: small-caps;
+    letter-spacing: 0.14em;
+    color: var(--primary);
+    font-size: 10.5px;
+    align-self: baseline;
+  }
+  .card dl.facts dd { margin: 0; }
+  .card .more {
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    font-size: 11.5px;
+    color: var(--text);
+    border-bottom: 1px solid var(--text);
+    padding-bottom: 2px;
+  }
+  .card .more::before {
+    content: "❯ ";
+    color: var(--secondary);
+    margin-right: 4px;
+    font-size: 10px;
+  }
+
+  /* card placement — asymmetric, kraft right-side */
+  .card.c1 { grid-column: 2; grid-row: 1; }
+  .card.c2 { grid-column: 3; grid-row: 1; margin-top: 64px; }
+  .card.c3 { grid-column: 2; grid-row: 2; }
+  .card.c4 { grid-column: 3; grid-row: 2; margin-top: 32px; }
+
+  /* big right-side sumi seal area = negative space */
+  .right-field {
+    grid-column: 4;
+    grid-row: 1 / span 2;
+    position: relative;
+    align-self: start;
+    padding-top: 60px;
+  }
+  .right-field .vertical-text {
+    writing-mode: vertical-rl;
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    line-height: 1.9;
+    color: var(--primary);
+    margin-left: 14px;
+    letter-spacing: 0.1em;
+  }
+  .right-field .vertical-text .red {
+    color: var(--secondary);
+  }
+  .right-field .standing-mark {
+    margin-top: 56px;
+    width: 78px;
+    height: 78px;
+    margin-left: 8px;
+    opacity: 0.85;
+  }
+  .right-field .caption {
+    font-size: 11px;
+    line-height: 1.7;
+    color: var(--text);
+    opacity: 0.7;
+    margin: 28px 0 0 8px;
+    max-width: 18ch;
+    font-style: italic;
+  }
+
+  /* background wagara behind grid — very low opacity */
+  .wagara-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('svg/seigaiha-waves.svg');
+    background-size: 280px 280px;
+    background-repeat: repeat;
+    opacity: 0.05;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .collections > * { position: relative; z-index: 1; }
+
+  /* ---------- PROVENANCE NOTE ---------- */
+  .provenance-note {
+    display: grid;
+    grid-template-columns: 20% 50% 30%;
+    padding: 20px 56px 80px 56px;
+    border-top: 1px solid rgba(12,12,12,0.3);
+    margin: 0 56px;
+    border-image: none;
+  }
+  .provenance-note .pn-label {
+    font-variant: small-caps;
+    letter-spacing: 0.22em;
+    font-size: 10.5px;
+    color: var(--primary);
+    padding-top: 28px;
+  }
+  .provenance-note .pn-body {
+    padding-top: 28px;
+    font-size: 13.5px;
+    max-width: 48ch;
+  }
+  .provenance-note .pn-body em {
+    color: var(--secondary);
+    font-style: normal;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer.site {
+    background: var(--bg);
+    position: relative;
+    margin-top: 40px;
+    padding: 80px 56px 36px 56px;
+    overflow: hidden;
+  }
+  footer.site::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url('svg/seigaiha-waves.svg');
+    background-size: 220px 220px;
+    background-repeat: repeat;
+    opacity: 0.12;
+    pointer-events: none;
+  }
+  footer.site .inner {
+    display: grid;
+    grid-template-columns: 20% 1fr 1fr 240px;
+    gap: 32px;
+    position: relative;
+    z-index: 1;
+  }
+  footer.site h3 {
+    font-family: var(--font-body), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.22em;
+    font-size: 11px;
+    color: var(--primary);
+    margin: 0 0 14px 0;
+    font-weight: 400;
+  }
+  footer.site p, footer.site address {
+    font-style: normal;
+    font-size: 12.5px;
+    line-height: 1.85;
+    margin: 0;
+    max-width: 28ch;
+  }
+  footer.site .seal {
+    text-align: right;
+    align-self: end;
+  }
+  footer.site .seal .kiri {
+    width: 84px;
+    height: 84px;
+    margin-bottom: 14px;
+    display: inline-block;
+  }
+  footer.site .seal .museum-name {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    line-height: 1.1;
+    color: var(--primary);
+    display: block;
+  }
+  footer.site .colophon {
+    grid-column: 1 / -1;
+    border-top: 1px solid rgba(12,12,12,0.4);
+    margin-top: 50px;
+    padding-top: 18px;
+    font-size: 10.5px;
+    line-height: 1.7;
+    color: var(--text);
+    opacity: 0.78;
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    position: relative;
+    z-index: 1;
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brandmark">
+    <svg class="kamon" viewBox="0 0 688 688" aria-hidden="true">
+      <circle cx="344" cy="344" r="338" fill="none" stroke="#1c3a5e" stroke-width="6"/>
+      <g transform="translate(344,344) scale(0.78) translate(-344,-344)">
+        <use href="#tsuru-paths"/>
+      </g>
+      <!-- simplified crane mark -->
+      <g fill="#1c3a5e">
+        <circle cx="344" cy="344" r="62" fill="none" stroke="#1c3a5e" stroke-width="10"/>
+        <path d="M344 200 a144 144 0 0 1 144 144 a144 144 0 0 1 -144 144 a144 144 0 0 1 -144 -144 a144 144 0 0 1 144 -144 z M344 240 a104 104 0 0 0 -104 104 a104 104 0 0 0 104 104 a104 104 0 0 0 104 -104 a104 104 0 0 0 -104 -104 z" />
+        <path d="M344 280 l8 12 l-8 4 l-8 -4 z M340 312 q4 -10 8 0 l-2 22 l-4 0 z"/>
+      </g>
+    </svg>
+    <span class="wordmark">
+      Hakubutsukan Yanaka
+      <small>Museum of Edo Townscape · est. 1978</small>
+    </span>
+  </div>
+  <nav class="primary" aria-label="Primary">
+    <a href="page-1.html">Museum</a>
+    <a href="page-2.html" aria-current="page">Collections</a>
+    <a href="page-3.html">Exhibition</a>
+    <a href="page-4.html">Machiya</a>
+    <a href="page-5.html">Visit</a>
+    <a href="page-6.html">About</a>
+  </nav>
+</header>
+
+<section class="page-header">
+  <div class="meta">Standing Collections · Yanaka, Tokyo · Catalogue II</div>
+  <h1>The Four<br>Standing<br>Collections<span class="accent">·</span></h1>
+  <p class="lede">Four bodies of material, accreted over four decades from the houses of Yanaka, Nezu, and Sendagi, and from the Mitsui archive at Surugachō. Together they describe the surface of Edo: its roads, its rooms, its ledgers, its cloth.</p>
+</section>
+
+<div class="sayagata-divider" aria-hidden="true"></div>
+
+<section class="collections">
+  <div class="wagara-bg" aria-hidden="true"></div>
+
+  <div class="section-label">
+    Catalogue<br>Holdings<br>2024
+    <span class="num">四</span>
+    Four collections
+  </div>
+
+  <!-- CARD 1 -->
+  <article class="card c1">
+    <svg class="corner-mon" viewBox="0 0 688 688" aria-hidden="true">
+      <rect width="688" height="688" fill="#1c3a5e"/>
+      <circle cx="344" cy="344" r="280" fill="#f5efde"/>
+      <g fill="#1c3a5e">
+        <circle cx="344" cy="120" r="74"/>
+        <circle cx="344" cy="568" r="74"/>
+        <circle cx="120" cy="344" r="74"/>
+        <circle cx="568" cy="344" r="74"/>
+        <circle cx="186" cy="186" r="74"/>
+        <circle cx="502" cy="186" r="74"/>
+        <circle cx="186" cy="502" r="74"/>
+        <circle cx="502" cy="502" r="74"/>
+        <circle cx="344" cy="344" r="92"/>
+      </g>
+    </svg>
+    <span class="index">Collection I · Prints</span>
+    <h2>Ukiyo-e of the Tōkaidō Road</h2>
+    <span class="subtitle">Hiroshige, Hokusai, and the road between two capitals</span>
+    <p class="body">A working library of woodblock prints depicting the fifty-three stations between Nihonbashi and Sanjō Ōhashi, anchored by a complete <em>Hoeidō</em>-edition Hiroshige issued in 1834 — fifty-five sheets in untrimmed ōban tate-e, acquired in 1981 from the estate of Ishikawa Naotarō.</p>
+    <dl class="facts">
+      <div><dt>Sheets held</dt><dd>412 prints, 38 surimono</dd></div>
+      <div><dt>Date span</dt><dd>1797 — 1858</dd></div>
+      <div><dt>Provenance</dt><dd>Ishikawa estate; Yanaka temple deposits</dd></div>
+      <div><dt>Gallery</dt><dd>Second floor, north wing</dd></div>
+    </dl>
+    <a class="more" href="page-3.html">Currently on view</a>
+  </article>
+
+  <!-- CARD 2 -->
+  <article class="card c2">
+    <svg class="corner-mon" viewBox="0 0 688 688" aria-hidden="true">
+      <rect width="688" height="688" fill="#1c3a5e"/>
+      <circle cx="344" cy="344" r="280" fill="#f5efde"/>
+      <g fill="#1c3a5e">
+        <circle cx="344" cy="120" r="74"/>
+        <circle cx="344" cy="568" r="74"/>
+        <circle cx="120" cy="344" r="74"/>
+        <circle cx="568" cy="344" r="74"/>
+        <circle cx="186" cy="186" r="74"/>
+        <circle cx="502" cy="186" r="74"/>
+        <circle cx="186" cy="502" r="74"/>
+        <circle cx="502" cy="502" r="74"/>
+        <circle cx="344" cy="344" r="92"/>
+      </g>
+    </svg>
+    <span class="index">Collection II · Architecture</span>
+    <h2>Machiya Fittings</h2>
+    <span class="subtitle">Shōji, fusuma, and kōshi grilles from the merchant quarters</span>
+    <p class="body">Salvaged carpentry from townhouses razed between 1962 and 2009 in Nishijin (Kyoto) and the slope-streets of Yanaka. Includes a complete bay of <em>misé-gōshi</em> shop-front lattice from a former kimono-jobber on Nezu-dōri, and four pairs of <em>fusuma</em> with under-paintings attributed to the studio of Maruyama Ōkyo.</p>
+    <dl class="facts">
+      <div><dt>Items</dt><dd>146 fittings, 9 full façades</dd></div>
+      <div><dt>Date span</dt><dd>c. 1780 — 1912</dd></div>
+      <div><dt>Provenance</dt><dd>Nishijin demolitions; Yanaka block grants</dd></div>
+      <div><dt>Gallery</dt><dd>Reconstructed machiya, ground floor</dd></div>
+    </dl>
+    <a class="more" href="page-4.html">See the reconstructed townhouse</a>
+  </article>
+
+  <!-- CARD 3 -->
+  <article class="card c3">
+    <svg class="corner-mon" viewBox="0 0 688 688" aria-hidden="true">
+      <rect width="688" height="688" fill="#1c3a5e"/>
+      <circle cx="344" cy="344" r="280" fill="#f5efde"/>
+      <g fill="#1c3a5e">
+        <circle cx="344" cy="120" r="74"/>
+        <circle cx="344" cy="568" r="74"/>
+        <circle cx="120" cy="344" r="74"/>
+        <circle cx="568" cy="344" r="74"/>
+        <circle cx="186" cy="186" r="74"/>
+        <circle cx="502" cy="186" r="74"/>
+        <circle cx="186" cy="502" r="74"/>
+        <circle cx="502" cy="502" r="74"/>
+        <circle cx="344" cy="344" r="92"/>
+      </g>
+    </svg>
+    <span class="index">Collection III · Documents</span>
+    <h2>Edo Ledgers &amp; Receipts</h2>
+    <span class="subtitle">The accounting hand of a great merchant house</span>
+    <p class="body">A continuous run of <em>daifukuchō</em> (great-fortune ledgers), tally slips, and receipts donated in 1986 by the Mitsui house from their Surugachō counting-rooms. The earliest folio records cotton sales for the third month of Hōreki 11 (1761); the latest, an oil-credit dispute settled in Ansei 5 (1858).</p>
+    <dl class="facts">
+      <div><dt>Folios</dt><dd>2,304 ledger pages</dd></div>
+      <div><dt>Date span</dt><dd>1761 — 1858</dd></div>
+      <div><dt>Provenance</dt><dd>Mitsui house, Surugachō</dd></div>
+      <div><dt>Access</dt><dd>By appointment, third Friday monthly</dd></div>
+    </dl>
+    <a class="more" href="page-5.html">Reading-room appointments</a>
+  </article>
+
+  <!-- CARD 4 -->
+  <article class="card c4">
+    <svg class="corner-mon" viewBox="0 0 688 688" aria-hidden="true">
+      <rect width="688" height="688" fill="#1c3a5e"/>
+      <circle cx="344" cy="344" r="280" fill="#f5efde"/>
+      <g fill="#1c3a5e">
+        <circle cx="344" cy="120" r="74"/>
+        <circle cx="344" cy="568" r="74"/>
+        <circle cx="120" cy="344" r="74"/>
+        <circle cx="568" cy="344" r="74"/>
+        <circle cx="186" cy="186" r="74"/>
+        <circle cx="502" cy="186" r="74"/>
+        <circle cx="186" cy="502" r="74"/>
+        <circle cx="502" cy="502" r="74"/>
+        <circle cx="344" cy="344" r="92"/>
+      </g>
+    </svg>
+    <span class="index">Collection IV · Textile</span>
+    <h2>Textile Wagara</h2>
+    <span class="subtitle">Katazome stencils &amp; shibori bolts of the late Edo years</span>
+    <p class="body">Ninety bolts of indigo-dyed cotton and bast fibre, recording the stencil and tied-resist patterns worn by townspeople and farmers. The collection emphasises pattern-vocabulary — <em>seigaiha</em>, <em>asanoha</em>, <em>shippō</em>, <em>kikkō</em> — rather than ceremonial silks, and so reads as a quiet companion to the prints upstairs.</p>
+    <dl class="facts">
+      <div><dt>Bolts</dt><dd>90 lengths, 22 katagami</dd></div>
+      <div><dt>Date span</dt><dd>c. 1810 — 1880</dd></div>
+      <div><dt>Provenance</dt><dd>Tanaka workshop, Aizu; private bequests</dd></div>
+      <div><dt>Gallery</dt><dd>Second floor, west alcove</dd></div>
+    </dl>
+    <a class="more" href="page-6.html">On the dyers of Aizu</a>
+  </article>
+
+  <!-- right negative-space field -->
+  <aside class="right-field">
+    <div class="vertical-text">
+      四つの蔵<br><span class="red">江戸の表面</span>
+    </div>
+    <svg class="standing-mark" viewBox="0 0 688 688" aria-hidden="true">
+      <circle cx="344" cy="344" r="320" fill="none" stroke="#1c3a5e" stroke-width="4"/>
+      <g fill="#1c3a5e">
+        <circle cx="344" cy="160" r="62"/>
+        <circle cx="344" cy="528" r="62"/>
+        <circle cx="160" cy="344" r="62"/>
+        <circle cx="528" cy="344" r="62"/>
+        <circle cx="344" cy="344" r="78"/>
+      </g>
+      <circle cx="344" cy="344" r="28" fill="#f5efde"/>
+    </svg>
+    <p class="caption">A single umebachi marks each holding; the four together form the museum's standing seal.</p>
+  </aside>
+</section>
+
+<section class="provenance-note">
+  <div class="pn-label">A note on<br>provenance</div>
+  <div class="pn-body">
+    <p>Every object on this page is held under a publication-and-research licence with the donating family or temple. Where prints retain the original publisher's seal — <em>Hoeidō</em>, <em>Tsutaya</em>, <em>Marusei</em> — the seal is reproduced beside the catalogue entry. Reproductions for academic publication are arranged through the curator's office; a fee of ¥4,200 per image applies for commercial use.</p>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="inner">
+    <div>
+      <h3>Address</h3>
+      <address>
+        Hakubutsukan Yanaka<br>
+        3-13-7 Yanaka, Taitō-ku<br>
+        Tokyo 110-0001<br>
+        +81 (0)3 3823 4419
+      </address>
+    </div>
+    <div>
+      <h3>Hours</h3>
+      <p>
+        Tuesday — Sunday<br>
+        10:00 — 17:00<br>
+        Closed Mondays &amp;<br>
+        the New Year week (Dec 28 — Jan 4)
+      </p>
+    </div>
+    <div>
+      <h3>Admission</h3>
+      <p>
+        Adults ¥800<br>
+        Students ¥500<br>
+        Under 12 free<br>
+        Members of the Friends of Yanaka, free.
+      </p>
+    </div>
+    <div class="seal">
+      <svg class="kiri" viewBox="0 0 345 326" aria-hidden="true">
+        <g fill="#1c3a5e" transform="translate(0,5)">
+          <ellipse cx="172" cy="155" rx="10" ry="10"/>
+          <path d="M172 60 q-22 -4 -22 -28 q0 -16 22 -22 q22 6 22 22 q0 24 -22 28 z"/>
+          <path d="M90 130 q-30 -10 -30 -40 q0 -22 28 -30 q26 6 30 28 q4 28 -28 42 z"/>
+          <path d="M254 130 q30 -10 30 -40 q0 -22 -28 -30 q-26 6 -30 28 q-4 28 28 42 z"/>
+          <path d="M172 170 q-60 24 -76 80 q-12 50 26 76 q24 -8 50 -8 q26 0 50 8 q38 -26 26 -76 q-16 -56 -76 -80 z"/>
+          <rect x="168" y="62" width="8" height="40"/>
+          <rect x="100" y="118" width="8" height="36"/>
+          <rect x="236" y="118" width="8" height="36"/>
+        </g>
+      </svg>
+      <span class="museum-name">博物館谷中<br>Hakubutsukan<br>Yanaka</span>
+    </div>
+  </div>
+  <div class="colophon">
+    <span>© 1978 — 2024 Hakubutsukan Yanaka. All ledger photography by the museum's reprographics studio.</span>
+    <span>Kamon renderings (tsuru-no-maru, umebachi, kiri, sayagata, seigaiha) drawn from Wikimedia Commons under <strong>CC BY-SA 4.0</strong>.</span>
+  </div>
+</footer>
+
+</body>
+</html>

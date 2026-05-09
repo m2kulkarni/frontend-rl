@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Dispatches from the Field — Acta Diurna</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    margin: 0;
+    font-family: var(--font-body), Georgia, serif;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+  a { color: inherit; }
+
+  /* ============ MASTHEAD ============ */
+  .masthead {
+    text-align: center;
+    padding: 56px 40px 0;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .masthead-rules {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    margin-bottom: 14px;
+  }
+  .masthead-rules .greek-key {
+    flex: 0 0 200px;
+    height: 22px;
+    opacity: 0.85;
+  }
+  .sitename {
+    font-family: var(--font-display), serif;
+    font-weight: 700;
+    font-size: 44px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    margin: 0;
+    color: var(--primary);
+  }
+  .masthead-tagline {
+    font-style: italic;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    color: var(--primary);
+    margin: 10px 0 0;
+    opacity: 0.85;
+  }
+
+  /* ============ NAV ============ */
+  nav.primary {
+    text-align: center;
+    margin: 26px auto 0;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--primary);
+    max-width: 1100px;
+  }
+  nav.primary ul {
+    list-style: none;
+    margin: 0; padding: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  nav.primary a {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    color: var(--primary);
+    padding: 4px 14px;
+    display: inline-block;
+  }
+  nav.primary a[aria-current="page"] {
+    border-bottom: 1px solid var(--secondary);
+    padding-bottom: 2px;
+  }
+  nav.primary .vine {
+    width: 12px; height: 12px;
+    display: inline-block;
+    opacity: 0.6;
+    fill: var(--accent);
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    text-align: center;
+    padding: 70px 40px 50px;
+    position: relative;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5em;
+    font-size: 11px;
+    color: var(--accent);
+    margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 56px;
+    line-height: 1.05;
+    margin: 0 auto 22px;
+    max-width: 900px;
+    color: var(--primary);
+  }
+  .hero-deck {
+    font-style: italic;
+    font-size: 18px;
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+  .hero-rule {
+    width: 60px;
+    height: 1px;
+    background: var(--accent);
+    margin: 28px auto;
+  }
+  .wreath-frame {
+    width: 220px;
+    margin: 36px auto 0;
+    display: block;
+  }
+
+  /* ============ DIVIDER ============ */
+  .divider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px auto 50px;
+    gap: 24px;
+    max-width: 720px;
+  }
+  .divider-line {
+    flex: 1;
+    height: 1px;
+    background: var(--primary);
+  }
+  .divider-mark {
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.4em;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  /* ============ DISPATCH GRID ============ */
+  .dispatch-grid {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 40px 40px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 44px 36px;
+  }
+  .dispatch {
+    background: var(--surface);
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+  .dispatch .key-strip {
+    width: 100%;
+    height: 18px;
+    display: block;
+  }
+  .dispatch .key-strip.bottom { transform: scaleY(-1); }
+  .dispatch-body {
+    padding: 26px 22px 24px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .dispatch-locus {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    font-size: 10px;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+  .dispatch h2 {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 19px;
+    line-height: 1.25;
+    font-weight: 700;
+    margin: 0 0 16px;
+    color: var(--primary);
+  }
+  .dispatch-deck {
+    font-style: italic;
+    font-size: 14.5px;
+    line-height: 1.6;
+    max-width: 22em;
+    margin: 0 auto 18px;
+    color: var(--text);
+  }
+  .dispatch-rule {
+    width: 36px;
+    height: 1px;
+    background: var(--accent);
+    margin: 0 auto 14px;
+  }
+  .dispatch-byline {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 10px;
+    color: var(--primary);
+    margin-top: auto;
+  }
+  .dispatch-byline em {
+    display: block;
+    font-style: italic;
+    font-family: var(--font-body), serif;
+    text-transform: none;
+    letter-spacing: 0.04em;
+    font-size: 12px;
+    margin-top: 4px;
+    color: var(--text);
+  }
+  .dispatch.featured {
+    grid-column: span 1;
+    position: relative;
+  }
+  .dispatch .seal {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 12px;
+    display: block;
+  }
+  .dispatch .dropcap {
+    font-family: var(--font-display), serif;
+    color: var(--accent);
+    float: left;
+    font-size: 38px;
+    line-height: 0.9;
+    padding: 4px 6px 0 0;
+    font-weight: 700;
+  }
+
+  /* ============ INTERSTITIAL QUOTE ============ */
+  .interstitial {
+    text-align: center;
+    padding: 70px 40px 40px;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .interstitial blockquote {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 26px;
+    line-height: 1.45;
+    color: var(--text-emphasis);
+    margin: 0;
+  }
+  .interstitial cite {
+    display: block;
+    font-style: normal;
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    font-size: 11px;
+    color: var(--primary);
+    margin-top: 22px;
+  }
+
+  /* ============ INDEX TABLE ============ */
+  .index-section {
+    max-width: 1000px;
+    margin: 30px auto 70px;
+    padding: 0 40px;
+    text-align: center;
+  }
+  .index-section h2 {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.32em;
+    font-size: 14px;
+    margin: 0 0 8px;
+  }
+  .index-section .subhead {
+    font-style: italic;
+    font-size: 13px;
+    margin-bottom: 30px;
+    color: var(--primary);
+    opacity: 0.8;
+  }
+  table.index {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+    text-align: left;
+    font-size: 13.5px;
+  }
+  table.index th, table.index td {
+    padding: 12px 14px;
+    border-bottom: 1px solid rgba(26,26,26,0.18);
+    vertical-align: top;
+  }
+  table.index thead th {
+    border-bottom: 1px solid var(--primary);
+    border-top: 1px solid var(--primary);
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 10.5px;
+    font-weight: 700;
+    text-align: left;
+  }
+  table.index td.date {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    color: var(--accent);
+    width: 120px;
+    white-space: nowrap;
+  }
+  table.index td.site {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 12px;
+    width: 180px;
+  }
+  table.index td.corr {
+    width: 180px;
+    font-style: italic;
+  }
+
+  /* ============ FOOTER ============ */
+  footer {
+    margin-top: 60px;
+    background: var(--bg);
+    border-top: 1px solid var(--primary);
+  }
+  .footer-frieze {
+    width: 100%;
+    height: 28px;
+    display: block;
+  }
+  .footer-cols {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 50px 40px 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    text-align: center;
+  }
+  .footer-cols h4 {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    font-size: 11px;
+    margin: 0 0 18px;
+    color: var(--primary);
+  }
+  .footer-cols ul {
+    list-style: none;
+    margin: 0; padding: 0;
+  }
+  .footer-cols li {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 10.5px;
+    margin: 8px 0;
+  }
+  .footer-cols a { text-decoration: none; }
+  .colophon {
+    text-align: center;
+    font-style: italic;
+    font-size: 13px;
+    padding: 0 40px 14px;
+    color: var(--primary);
+  }
+  .tailpiece {
+    text-align: center;
+    margin: 18px 0 8px;
+  }
+  .tailpiece svg {
+    width: 26px; height: 26px;
+    opacity: 0.85;
+  }
+  .copy {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.32em;
+    font-size: 10px;
+    padding: 14px 40px 50px;
+    color: var(--primary);
+  }
+
+  /* greek key strip used inline */
+  .key-strip svg, .footer-frieze svg, .masthead-rules svg {
+    width: 100%; height: 100%; display: block;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ MASTHEAD ============ -->
+<header class="masthead">
+  <div class="masthead-rules">
+    <div class="greek-key" aria-hidden="true">
+      <svg viewBox="1000 364 16511 4447" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+        <g fill="#1a1a1a">
+          <path d="M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z"/>
+          <path d="M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z"/>
+          <path d="M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z"/>
+          <path d="M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z"/>
+          <path d="M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z"/>
+        </g>
+      </svg>
+    </div>
+    <h1 class="sitename">Acta Diurna</h1>
+    <div class="greek-key" aria-hidden="true">
+      <svg viewBox="1000 364 16511 4447" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+        <g fill="#1a1a1a">
+          <path d="M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z"/>
+          <path d="M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z"/>
+          <path d="M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z"/>
+          <path d="M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z"/>
+          <path d="M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+  <p class="masthead-tagline">A Review of Antiquity &middot; Founded MMXIX &middot; Volume VII, Number III</p>
+
+  <nav class="primary" aria-label="Primary">
+    <ul>
+      <li><a href="page-1.html">Frontispiece</a></li>
+      <li aria-hidden="true"><svg class="vine" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path transform="translate(0 -852.36)" d="m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z"/></svg></li>
+      <li><a href="page-2.html">The Long Essay</a></li>
+      <li aria-hidden="true"><svg class="vine" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path transform="translate(0 -852.36)" d="m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z"/></svg></li>
+      <li><a href="page-3.html" aria-current="page">Dispatches</a></li>
+      <li aria-hidden="true"><svg class="vine" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path transform="translate(0 -852.36)" d="m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z"/></svg></li>
+      <li><a href="page-4.html">Letters</a></li>
+      <li aria-hidden="true"><svg class="vine" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path transform="translate(0 -852.36)" d="m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z"/></svg></li>
+      <li><a href="page-5.html">The Library</a></li>
+      <li aria-hidden="true"><svg class="vine" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path transform="translate(0 -852.36)" d="m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z"/></svg></li>
+      <li><a href="page-6.html">Colophon</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-eyebrow">Vol. VII &middot; No. III &middot; Spring MMXXIV</div>
+  <h1>Dispatches<br>from the Field</h1>
+  <div class="hero-rule"></div>
+  <p class="hero-deck">Six brief notices from trenches, archives, and conservation laboratories — read by candle, ledger, and X-ray fluorescence — gathered between November and March.</p>
+</section>
+
+<!-- ============ DIVIDER ============ -->
+<div class="divider">
+  <div class="divider-line"></div>
+  <div class="divider-mark">&mdash; Brevia Archaeologica &mdash;</div>
+  <div class="divider-line"></div>
+</div>
+
+<!-- ============ DISPATCH GRID ============ -->
+<section class="dispatch-grid">
+
+  <!-- 1 -->
+  <article class="dispatch featured">
+    <div class="key-strip" aria-hidden="true">
+      <svg viewBox="1000 364 16511 4447" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><g fill="#1a1a1a"><path d="M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z"/><path d="M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z"/><path d="M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z"/><path d="M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z"/><path d="M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z"/></g></svg>
+    </div>
+    <div class="dispatch-body">
+      <div class="dispatch-locus">Herculaneum &middot; Campania</div>
+      <svg class="seal" viewBox="75 121 118 119" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="134" cy="180" r="48" fill="none" stroke="#c9a23a" stroke-width="1.2"/>
+        <circle cx="134" cy="180" r="42" fill="none" stroke="#1a1a1a" stroke-width="0.6"/>
+        <text x="134" y="186" text-anchor="middle" font-family="Playfair Display" font-size="20" font-weight="700" fill="#a93226">SPQR</text>
+      </svg>
+      <h2>The Charred Library Yields Plato</h2>
+      <p class="dispatch-deck"><span class="dropcap">A</span>t the Officina dei Papiri, the Vesuvius Challenge team confirms a passage from the Academy in scroll PHerc. 1691 — read without unrolling.</p>
+      <div class="dispatch-rule"></div>
+      <div class="dispatch-byline">Filed by F. Vitale<em>14 March 2024 &middot; Naples</em></div>
+    </div>
+    <div class="key-strip bottom" aria-hidden="true">
+      <svg viewBox="1000 364 16511 4447" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><g fill="#1a1a1a"><path d="M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z"/><path d="M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z"/><path d="M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z"/><path d="M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z"/><path d="M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z"/></g></svg>
+    </div>
+  </article>
+
+  <!-- 2 -->
+  <article class="dispatch">
+    <div class="key-strip" aria-hidden="true">
+      <svg viewBox="1000 364 16511 4447" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><g fill="#1a1a1a"><path d="M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z"/><path d="M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z"/><path d="M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z"/><path d="M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z"/><path d="M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z"/></g></svg>
+    </div>
+    <div class="dispatch-body">
+      <div class="dispatch-locus">Oplontis &middot; Torre Annunziata</div>
+      <h2>A Fresco Quietly Reattributed</h2>
+      <p class="dispatch-deck">In the so-called Villa Poppaea, panel north-3 — long credited to a Pompeian II workshop — has been reassigned by Soprintendenza analysts to the hand of the Boscoreale Master.</p>
+      <div class="dispatch-rule"></div>
+      <div class="dispatch-byline">By M. Carbone<em>2 February 2024 &middot; Torre Annunziata</em></div>
+    </div>
+    <div class="key-strip bottom" aria-hidden="true">
+      <svg viewBox="1000 364 16511 4447" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><g fill="#1a1a1a"><path d="M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z"/><path d="M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z"/><path d="M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z"/><path d="M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z"/><path d="M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z"/></g></svg>
+    </div>
+  </article>
+
+  <!-- 3 -->
+  <article class="dispatch">
+    <div class="key-strip" aria-hidden="true">
+      <svg viewBox="1000 364 16511 4447" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><g fill="#1a1a1a"><path d="M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z"/><path d="M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z"/><path d="M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z"/><path d="M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z"/><path d="M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z"/></g></svg>
+    </div>
+    <div class="dispatch-body">
+      <div class="dispatch-locus">Vindolanda &middot; Northumberland</div>
+      <h2>An Inscription Dated 122 CE</h2>
+      <p class="dispatch-deck">A limestone slab unearthed beside the granary mentions one <em>Crispinus, centurio</em>, and the consular year of Aviola — a near-perfect synchrony with Hadrian's first northern progress.</p>
+      <div class="dispatch-rule"></div>
+      <div class="dispatch-byline">By A. Birley<em>27 November 2023 &middot; Hexham</em></div>
+    </div>
+    <div class="key-strip bottom" aria-hidden="true">
+      <svg viewBox="1000 364 16511 4447" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><g fill="#1a1a1a"><path d="M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z"/><path d="M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z"/><path d="M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z"/><path d="M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z"/><path d="M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z"/></g></svg>
+    </div>
+  </article>
+
+  <!-- 4 -->
+  <article class="dispatch">
+    <div class="key-strip" aria-hidden="true">
+      <svg viewBox="1000 364 16511 4447" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><g fill="#1a1a1a"><path d="M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z"/><path d="M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z"/><path d="M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z"/><path d="M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z"/><path d="M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z"/></g></svg>
+    </div>
+    <div class="dispatch-body">
+      <div class="dispatch-locus">Mérida &middot; Extremadura</div>
+      <h2>Forum Mosaic Beneath a Car Park</h2>
+      <p class="dispatch-deck">Workers extending Calle Almendralejo have laid bare 38 m² of polychrome <em>opus tessellatum</em> — a marine cortège — under what was, until October, parking space 47.</p>
+      <div class="dispatch-rule"></div>
+      <div class="dispatch-byline">By I. Méndez-Ríos<em>9 January 2024 &middot; Augusta Emerita</em></div>
+    </div>
+    <div class="key-strip bottom" aria-hidden="true">
+      <svg viewBox="1000 364 16511 4447" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><g fill="#1a1a1a"><path d="M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z"/><path d="M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z"/><path d="M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z"/><path d="M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z"/><path d="M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z"/></g></svg>
+    </div>
+  </article>
+
+  <!-- 5 -->
+  <article class="dispatch">
+    <div class="key-strip" aria-hidden="true">
+      <svg viewBox="1000 364 16511 4447" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><g fill="#1a1a1a"><path d="M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z"/><path d="M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z"/><path d="M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z"/><path d="M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z"/><path d="M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z"/></g></svg>
+    </div>
+    <div class="dispatch-body">
+      <div class="dispatch-locus">Aquileia &middot; Friuli</div>
+      <h2>A Patriarchal Lead Seal Surfaces</h2>
+      <p class="dispatch-deck">Dredging in the Natissa river has turned up a <em>bulla plumbea</em> bearing the name of Bishop Maximus, last attested in correspondence with Ambrose of Milan in 381 CE.</p>
+      <div class="dispatch-rule"></div>
+      <div class="dispatch-byline">By G. Tagliaferri<em>22 December 2023 &middot; Aquileia</em></div>
+    </div>
+    <div class="key-strip bottom" aria-hidden="true">
+      <svg viewBox="1000 364 16511 4447" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><g fill="#1a1a1a"><path d="M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z"/><path d="M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z"/><path d="M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z"/><path d="M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z"/><path d="M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z"/></g></svg>
+    </div>
+  </article>
+
+  <!-- 6 -->
+  <article class="dispatch">
+    <div class="key-strip" aria-hidden="true">
+      <svg viewBox="1000 364 16511 4447" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><g fill="#1a1a1a"><path d="M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z"/><path d="M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z"/><path d="M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z"/><path d="M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z"/><path d="M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z"/></g></svg>
+    </div>
+    <div class="dispatch-body">
+      <div class="dispatch-locus">Bath &middot; Aquae Sulis</div>
+      <h2>A Curse Tablet, Newly Read</h2>
+      <p class="dispatch-deck">Conservation under raking light has resolved twelve fresh lines of <em>defixio</em> Tab. Sulis 94 — a stolen cloak, a litany of suspects, and a goddess called to redress.</p>
+      <div class="dispatch-rule"></div>
+      <div class="dispatch-byline">By P. Hartwell<em>5 March 2024 &middot; Somerset</em></div>
+    </div>
+    <div class="key-strip bottom" aria-hidden="true">
+      <svg viewBox="1000 364 16511 4447" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><g fill="#1a1a1a"><path d="M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z"/><path d="M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z"/><path d="M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z"/><path d="M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z"/><path d="M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z"/></g></svg>
+    </div>
+  </article>
+
+</section>
+
+<!-- ============ INTERSTITIAL ============ -->
+<section class="interstitial">
+  <blockquote>&ldquo;Earth gives, and earth withholds. The spade is no priest, but it consecrates what it lifts.&rdquo;</blockquote>
+  <cite>&mdash; Field notebook, Vindolanda, 1973</cite>
+</section>
+
+<div class="divider">
+  <div class="divider-line"></div>
+  <div class="divider-mark">&mdash; Index of Sites &mdash;</div>
+  <div class="divider-line"></div>
+</div>
+
+<!-- ============ INDEX ============ -->
+<section class="index-section">
+  <h2>Calendar of Dispatches</h2>
+  <div class="subhead">Recent and forthcoming notices, in order of filing.</div>
+  <table class="index">
+    <thead>
+      <tr><th>Date</th><th>Site</th><th>Subject</th><th>Correspondent</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="date">XIV.III.MMXXIV</td>
+        <td class="site">Herculaneum</td>
+        <td>Reading of PHerc. 1691 by tomographic inference</td>
+        <td class="corr">F. Vitale</td>
+      </tr>
+      <tr>
+        <td class="date">V.III.MMXXIV</td>
+        <td class="site">Aquae Sulis</td>
+        <td>Tab. Sulis 94: twelve recovered lines of <em>defixio</em></td>
+        <td class="corr">P. Hartwell</td>
+      </tr>
+      <tr>
+        <td class="date">II.II.MMXXIV</td>
+        <td class="site">Oplontis</td>
+        <td>Reattribution of panel north-3, Villa Poppaea</td>
+        <td class="corr">M. Carbone</td>
+      </tr>
+      <tr>
+        <td class="date">IX.I.MMXXIV</td>
+        <td class="site">Augusta Emerita</td>
+        <td>Forum-floor mosaic recovered beneath car park</td>
+        <td class="corr">I. Méndez-Ríos</td>
+      </tr>
+      <tr>
+        <td class="date">XXII.XII.MMXXIII</td>
+        <td class="site">Aquileia</td>
+        <td><em>Bulla plumbea</em> of Bishop Maximus, c. 381 CE</td>
+        <td class="corr">G. Tagliaferri</td>
+      </tr>
+      <tr>
+        <td class="date">XXVII.XI.MMXXIII</td>
+        <td class="site">Vindolanda</td>
+        <td>Inscription of Crispinus, centurio (122 CE)</td>
+        <td class="corr">A. Birley</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="footer-frieze" aria-hidden="true">
+    <svg viewBox="1000 364 16511 4447" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <g fill="#1a1a1a">
+        <path d="M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z"/>
+        <path d="M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z"/>
+        <path d="M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z"/>
+        <path d="M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z"/>
+        <path d="M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z"/>
+      </g>
+    </svg>
+  </div>
+  <div class="footer-cols">
+    <div>
+      <h4>The Review</h4>
+      <ul>
+        <li><a href="page-1.html">Frontispiece</a></li>
+        <li><a href="page-2.html">The Long Essay</a></li>
+        <li><a href="page-3.html">Dispatches</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Departments</h4>
+      <ul>
+        <li><a href="page-4.html">Letters &amp; Marginalia</a></li>
+        <li><a href="page-5.html">The Library</a></li>
+        <li><a href="page-6.html">Colophon</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>House</h4>
+      <ul>
+        <li><a href="page-6.html">Subscriptions</a></li>
+        <li><a href="page-6.html">Submissions</a></li>
+        <li><a href="page-6.html">Editorial Office</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="tailpiece">
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path fill="#a93226" transform="translate(0 -852.36)" d="m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z"/>
+    </svg>
+  </div>
+  <div class="colophon">Published quarterly at 14, Via dei Coronari, Rome &middot; Editorial office, 8 Bedford Square, London WC1B 3RA</div>
+  <div class="copy">&copy; MMXXIV &middot; Acta Diurna &middot; All Rights Reserved</div>
+</footer>
+
+</body>
+</html>

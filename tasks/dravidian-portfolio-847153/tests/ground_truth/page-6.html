@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Visit the Studio — 14, Sannidhi Street, Kumbakonam</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    font-size: 16px;
+    line-height: 1.65;
+    margin: 0;
+    padding: 0;
+  }
+  .page-frame {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 24px 32px;
+  }
+
+  /* ---- Tilaka / Aum seal above arcade ---- */
+  .tilaka {
+    text-align: center;
+    padding: 24px 0 8px;
+    background:
+      repeating-linear-gradient(90deg,
+        transparent 0 8px, rgba(139,21,56,0.08) 8px 9px);
+  }
+  .tilaka svg {
+    width: 44px; height: 44px;
+    display: inline-block;
+  }
+  .tilaka .tilaka-rule {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), var(--primary), var(--accent), transparent);
+    margin: 8px auto 0;
+    max-width: 480px;
+  }
+
+  /* ---- Pillared arcade nav ---- */
+  nav.arcade {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    background: var(--surface);
+    border-top: 3px double var(--primary);
+    border-bottom: 3px double var(--primary);
+    box-shadow: 0 0 0 1px var(--accent) inset;
+  }
+  nav.arcade .bay {
+    position: relative;
+    padding: 18px 8px 14px;
+    text-align: center;
+    border-right: 1px solid var(--primary);
+    border-left: 1px solid var(--primary);
+    margin: 0 -1px;
+    background: var(--surface);
+  }
+  nav.arcade .bay::before,
+  nav.arcade .bay::after {
+    content: "";
+    position: absolute;
+    left: 4px; right: 4px;
+    height: 6px;
+    background: var(--accent);
+  }
+  nav.arcade .bay::before { top: 0; box-shadow: inset 0 -2px 0 var(--primary); }
+  nav.arcade .bay::after  { bottom: 0; box-shadow: inset 0 2px 0 var(--primary); }
+  nav.arcade .bay[aria-current="page"] {
+    background: var(--bg);
+  }
+  nav.arcade a {
+    text-decoration: none;
+    color: var(--text);
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    font-size: 11px;
+    line-height: 1.35;
+    display: block;
+  }
+  nav.arcade .bay[aria-current="page"] a { color: var(--text-emphasis); }
+  nav.arcade .role {
+    display: block;
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-variant: normal;
+    letter-spacing: 0.04em;
+    color: var(--secondary);
+    font-size: 10px;
+    margin-top: 4px;
+    text-transform: lowercase;
+  }
+
+  /* ---- Hero header ---- */
+  header.hero {
+    background: var(--surface);
+    margin-top: 0;
+    padding: 28px 32px 24px;
+    border-left: 6px double var(--primary);
+    border-right: 6px double var(--primary);
+    border-bottom: 1px solid var(--accent);
+    text-align: center;
+    position: relative;
+  }
+  header.hero h1 {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.22em;
+    color: var(--text-emphasis);
+    font-size: 30px;
+    margin: 0 0 6px;
+    font-weight: 600;
+  }
+  header.hero .subtitle {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    color: var(--secondary);
+    font-size: 16px;
+    margin: 0 0 14px;
+  }
+  header.hero .peacock-band {
+    display: block;
+    width: 100%;
+    height: 32px;
+    margin-top: 14px;
+    overflow: hidden;
+  }
+  header.hero .peacock-band svg {
+    width: 100%;
+    height: 32px;
+    display: block;
+  }
+  header.hero .breadcrumb {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.3em;
+    color: var(--primary);
+    font-size: 11px;
+    margin-bottom: 8px;
+  }
+
+  /* ---- Layout grid ---- */
+  main {
+    background: var(--bg);
+    padding: 28px 0 12px;
+  }
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 28px;
+    margin-bottom: 28px;
+  }
+  .grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 28px;
+  }
+
+  /* ---- Card with carved pillars + gopuram pediment ---- */
+  .card {
+    background: var(--surface);
+    position: relative;
+    margin: 0 22px;
+    box-shadow: 0 0 0 1px var(--accent);
+    padding: 0 0 36px;
+  }
+  /* paired carved pillars */
+  .card::before, .card::after {
+    content: "";
+    position: absolute;
+    top: 56px; bottom: 24px;
+    width: 14px;
+    background:
+      linear-gradient(var(--surface), var(--surface)) padding-box,
+      var(--primary);
+    border-left: 1px solid var(--primary);
+    border-right: 1px solid var(--primary);
+  }
+  .card::before { left: -22px; }
+  .card::after  { right: -22px; }
+
+  /* stepped gopuram pediment */
+  .pediment {
+    position: relative;
+    height: 56px;
+    margin: 0 -22px;
+  }
+  .pediment .tier {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--primary);
+    border-bottom: 2px solid var(--accent);
+  }
+  .pediment .t1 { width: 100%; height: 12px; bottom: 0; }
+  .pediment .t2 { width: 86%;  height: 12px; bottom: 12px; background: var(--secondary); }
+  .pediment .t3 { width: 70%;  height: 12px; bottom: 24px; background: var(--primary); }
+  .pediment .t4 { width: 50%;  height: 12px; bottom: 36px; background: var(--accent); border-bottom-color: var(--primary); }
+  .pediment .finial {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    bottom: 44px;
+    width: 14px; height: 14px;
+    background: var(--text-emphasis);
+    border: 1px solid var(--accent);
+  }
+
+  /* stepped capitals on pillars */
+  .cap {
+    position: absolute;
+    width: 22px; height: 18px;
+    background:
+      linear-gradient(var(--accent) 0 4px, transparent 4px 6px,
+                      var(--primary) 6px 10px, transparent 10px 12px,
+                      var(--accent) 12px 18px);
+    top: 56px;
+  }
+  .cap.left  { left: -26px; }
+  .cap.right { right: -26px; transform: scaleX(-1); }
+  .cap.foot { top: auto; bottom: 24px; transform: scaleY(-1); }
+  .cap.foot.right { transform: scale(-1,-1); }
+
+  .card-title {
+    background: var(--secondary);
+    color: var(--surface);
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.22em;
+    text-align: center;
+    font-size: 18px;
+    padding: 12px 16px;
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+    font-weight: 500;
+  }
+  .card-body {
+    padding: 22px 28px 4px;
+  }
+  .card-body p { margin: 0 0 12px; }
+  .card-body p:last-child { margin-bottom: 0; }
+
+  .colophon {
+    text-align: center;
+    margin-top: 20px;
+  }
+  .colophon svg {
+    width: 36px; height: 28px;
+    opacity: 0.85;
+  }
+
+  /* ---- Address block ---- */
+  .address-block {
+    text-align: center;
+    padding: 8px 24px 16px;
+  }
+  .address-block .line-1 {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    color: var(--text-emphasis);
+    font-size: 18px;
+    margin-bottom: 6px;
+  }
+  .address-block .line {
+    font-family: var(--font-body), serif;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+  .address-block .pin {
+    margin-top: 8px;
+    color: var(--secondary);
+    font-style: italic;
+  }
+
+  /* ---- Hours table ---- */
+  table.hours {
+    width: calc(100% - 56px);
+    margin: 8px 28px 0;
+    border-collapse: collapse;
+    font-size: 15px;
+  }
+  table.hours td {
+    padding: 6px 8px;
+    border-bottom: 1px dotted var(--accent);
+  }
+  table.hours td:first-child {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.1em;
+    color: var(--secondary);
+    width: 42%;
+  }
+  table.hours tr.closed td {
+    color: var(--text-emphasis);
+    font-style: italic;
+  }
+  table.hours tr:last-child td { border-bottom: none; }
+
+  /* ---- Travel notes ---- */
+  .travel {
+    list-style: none;
+    padding: 0 28px;
+    margin: 0;
+  }
+  .travel li {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 14px;
+    padding: 10px 0;
+    border-bottom: 1px dotted var(--accent);
+  }
+  .travel li:last-child { border-bottom: none; }
+  .travel .from {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.14em;
+    color: var(--text-emphasis);
+    font-size: 14px;
+  }
+  .travel .from .km {
+    display: block;
+    color: var(--accent);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    margin-top: 2px;
+  }
+  .travel .desc {
+    font-size: 14.5px;
+    line-height: 1.55;
+  }
+
+  /* ---- Block plan (CSS-drawn map) ---- */
+  .plan-card {
+    background: var(--surface);
+    margin: 0 22px 28px;
+    box-shadow: 0 0 0 1px var(--accent);
+    position: relative;
+  }
+  .plan-card .card-title { margin-top: 0; }
+  .plan-wrap {
+    padding: 24px 28px;
+    background:
+      repeating-linear-gradient(0deg, transparent 0 22px, rgba(193,154,107,0.10) 22px 23px),
+      repeating-linear-gradient(90deg, transparent 0 22px, rgba(193,154,107,0.10) 22px 23px),
+      var(--surface);
+  }
+  .plan {
+    position: relative;
+    height: 360px;
+    border: 2px solid var(--text);
+    background: #fbf7ee;
+  }
+  .plan::after {
+    content: "N";
+    position: absolute;
+    top: 8px; right: 10px;
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    color: var(--text-emphasis);
+    border: 1px solid var(--text-emphasis);
+    width: 22px; height: 22px;
+    line-height: 20px;
+    text-align: center;
+    background: var(--surface);
+  }
+  .plan-label {
+    position: absolute;
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.12em;
+    font-size: 11px;
+    color: var(--text);
+    background: var(--surface);
+    padding: 2px 6px;
+    border: 1px solid var(--text);
+  }
+  .lane {
+    position: absolute;
+    left: 0; right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 56px;
+    background: #efe6d2;
+    border-top: 1px dashed var(--text);
+    border-bottom: 1px dashed var(--text);
+  }
+  .lane-label {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.3em;
+    color: var(--secondary);
+    font-size: 13px;
+  }
+  .building {
+    position: absolute;
+    border: 1.5px solid var(--text);
+    background: var(--surface);
+    background-image:
+      repeating-linear-gradient(45deg,
+        transparent 0 6px,
+        rgba(7,107,136,0.10) 6px 7px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.1em;
+    font-size: 11px;
+    color: var(--text);
+    line-height: 1.2;
+    padding: 4px;
+  }
+  .courtyard {
+    position: absolute;
+    border: 1.5px solid var(--primary);
+    background: #fff;
+    background-image:
+      repeating-linear-gradient(0deg, transparent 0 14px, rgba(227,66,52,0.18) 14px 15px),
+      repeating-linear-gradient(90deg, transparent 0 14px, rgba(227,66,52,0.18) 14px 15px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.14em;
+    font-size: 12px;
+    color: var(--text-emphasis);
+  }
+  .well {
+    position: absolute;
+    border: 2px solid var(--secondary);
+    background: #e6eef2;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.1em;
+    font-size: 10px;
+    color: var(--secondary);
+  }
+  .gopuram-mark {
+    position: absolute;
+    width: 22px; height: 22px;
+    background:
+      linear-gradient(var(--primary) 0 4px, transparent 4px 6px,
+                      var(--accent) 6px 10px, transparent 10px 12px,
+                      var(--secondary) 12px 22px);
+  }
+  .arrow {
+    position: absolute;
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 11px;
+    color: var(--text-emphasis);
+  }
+  .plan-key {
+    margin-top: 12px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4px 24px;
+    font-size: 13px;
+  }
+  .plan-key span:first-child {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.12em;
+    color: var(--text-emphasis);
+    margin-right: 8px;
+  }
+
+  /* ---- Contact strip ---- */
+  .contact-strip {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+    margin: 0 22px 28px;
+    background: var(--surface);
+    box-shadow: 0 0 0 1px var(--accent);
+  }
+  .contact-cell {
+    padding: 22px 24px;
+    border-right: 1px double var(--primary);
+    text-align: center;
+  }
+  .contact-cell:last-child { border-right: none; }
+  .contact-cell .label {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.22em;
+    color: var(--secondary);
+    font-size: 12px;
+    margin-bottom: 8px;
+  }
+  .contact-cell .value {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.14em;
+    color: var(--text-emphasis);
+    font-size: 18px;
+    line-height: 1.4;
+  }
+  .contact-cell .note {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    color: var(--text);
+    font-size: 13px;
+    margin-top: 6px;
+  }
+
+  /* ---- Section divider band ---- */
+  .palmette-band {
+    text-align: center;
+    margin: 6px 0 24px;
+    overflow: hidden;
+    height: 36px;
+  }
+  .palmette-band svg {
+    height: 36px;
+    display: inline-block;
+  }
+
+  /* ---- Final notice card ---- */
+  .notice {
+    margin: 0 22px 36px;
+    background: var(--surface);
+    box-shadow: 0 0 0 1px var(--accent);
+    padding: 24px 36px;
+    text-align: center;
+    border-top: 4px double var(--primary);
+    border-bottom: 4px double var(--primary);
+  }
+  .notice h3 {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.22em;
+    color: var(--text-emphasis);
+    font-size: 18px;
+    margin: 0 0 10px;
+  }
+  .notice p {
+    margin: 0 auto;
+    max-width: 820px;
+    font-size: 15.5px;
+  }
+  .notice em.no-email {
+    color: var(--primary);
+    font-style: italic;
+    font-weight: 600;
+  }
+
+  /* ---- Footer ---- */
+  footer {
+    background: var(--surface);
+    border-top: 3px double var(--primary);
+    border-bottom: 3px double var(--primary);
+    margin-top: 12px;
+  }
+  footer .arcade-foot {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.2fr 1fr 1fr;
+    align-items: center;
+  }
+  footer .bay-foot {
+    padding: 22px 18px;
+    border-right: 1px solid var(--primary);
+    border-left: 1px solid var(--primary);
+    margin: 0 -1px;
+    text-align: center;
+    position: relative;
+    min-height: 130px;
+  }
+  footer .bay-foot::before,
+  footer .bay-foot::after {
+    content: "";
+    position: absolute;
+    left: 4px; right: 4px;
+    height: 4px;
+    background: var(--accent);
+  }
+  footer .bay-foot::before { top: 0; }
+  footer .bay-foot::after  { bottom: 0; }
+  footer .bay-foot h4 {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.2em;
+    color: var(--text-emphasis);
+    font-size: 12px;
+    margin: 0 0 8px;
+    font-weight: 500;
+  }
+  footer .bay-foot p {
+    font-size: 12.5px;
+    margin: 2px 0;
+    line-height: 1.45;
+  }
+  /* kolam mandala */
+  .kolam {
+    width: 130px;
+    height: 130px;
+    margin: 0 auto;
+    position: relative;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle, var(--primary) 0 4px, transparent 5px),
+      repeating-radial-gradient(circle at center,
+        transparent 0 14px,
+        rgba(139,21,56,0.0) 14px 15px),
+      conic-gradient(from 0deg,
+        var(--surface), var(--surface));
+  }
+  .kolam::before, .kolam::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 50% 8px,  var(--primary) 0 2.2px, transparent 3px),
+      radial-gradient(circle at 50% 24px, var(--accent) 0 2.2px, transparent 3px),
+      radial-gradient(circle at 50% 40px, var(--secondary) 0 2.2px, transparent 3px),
+      radial-gradient(circle at 50% 56px, var(--primary) 0 2.2px, transparent 3px);
+  }
+  .kolam::after {
+    transform: rotate(45deg);
+  }
+  .kolam-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle, var(--text-emphasis) 1px, transparent 1.6px);
+    background-size: 16px 16px;
+    background-position: center;
+    border-radius: 50%;
+    -webkit-mask: radial-gradient(circle, #000 58%, transparent 62%);
+            mask: radial-gradient(circle, #000 58%, transparent 62%);
+  }
+  .kolam-ring {
+    position: absolute;
+    inset: 8px;
+    border: 1px solid var(--primary);
+    border-radius: 50%;
+  }
+  .kolam-ring.inner {
+    inset: 22px;
+    border: 1px dashed var(--accent);
+  }
+
+  footer .double-rule {
+    height: 8px;
+    background:
+      linear-gradient(var(--primary) 0 3px, transparent 3px 5px, var(--accent) 5px 8px);
+  }
+  footer .colophon-line {
+    text-align: center;
+    padding: 14px 12px;
+    background: var(--surface);
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    color: var(--text-emphasis);
+    font-size: 13.5px;
+    letter-spacing: 0.04em;
+  }
+
+  /* small headings inside cards for sub-sections */
+  .sub-h {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    color: var(--secondary);
+    font-size: 13px;
+    margin: 18px 28px 6px;
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 4px;
+  }
+
+  /* twin-peacock svg color override (the SVG renders black; we wrap and tint via filter) */
+  .peacock-tint {
+    filter: invert(28%) sepia(89%) saturate(2200%) hue-rotate(343deg) brightness(86%) contrast(95%);
+  }
+</style>
+</head>
+<body>
+
+<div class="page-frame">
+
+  <!-- Aum tilaka above arcade -->
+  <div class="tilaka" aria-hidden="true">
+    <svg viewBox="0 0 356 367" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 90.456847,353.9498 C 51.797347,340.13485 23.72672,305.75839 12.612487,258.6184 C 7.5684267,237.22321 6.1421397,201.86984 10.323594,201.86984 C 11.712834,201.86984 15.42322,211.57056 18.568972,223.427 C 25.452892,249.37152 37.19436,273.76855 48.535988,285.69407 C 67.374717,305.50242 114.0356,313.26029 140.92106,301.05394 C 161.86409,291.54544 170.35697,268.94603 161.24995,246.95931 C 154.21242,229.96943 138.24701,224.28836 108.50834,228.19197 C 108.50834,228.19197 90.282834,208.57398 84.476417,173.73548 L 103.15738,175.42939 C 125.65731,177.46962 142.64532,172.49605 151.46236,161.28728 C 159.74765,150.75419 159.5685,146.68046 150.34841,135.96157 C 137.04396,120.49428 113.15511,124.41248 64.786577,149.99522 L 40.381632,109.08518 L 50.613137,101.2812 C 76.253387,81.724339 120.77357,71.947329 146.11011,80.309169 C 169.18841,87.925649 186.12724,118.14755 181.60247,143.63298 C 178.54327,160.86286 164.72752,184.99524 154.05369,191.75339 L 144.84862,197.58162 L 157.56351,203.31522 C 179.17018,213.05833 192.36061,205.61034 208.12001,174.76849 C 229.92949,132.0869 244.0745,121.0378 276.96658,120.99051 C 292.28176,120.96847 297.73268,122.57499 308.90312,130.4031 C 336.78213,149.94016 351.9622,190.39693 348.62804,236.27272 C 344.40474,294.37435 316.88374,329.61601 275.73415,329.61601 C 253.15086,329.61601 238.59451,321.69526 227.00729,303.10156 C 216.82976,286.76927 212.24334,254.42288 218.08805,240.19369 C 220.89208,233.36732 221.39892,233.13578 221.58223,238.59686 C 221.91916,248.63689 233.34159,264.95549 243.82827,270.37835 C 269.55794,283.68369 306.49479,266.96693 321.10832,235.4032 C 332.20339,211.4394 326.25105,165.21656 311.02084,157.06552 C 307.83453,155.36024 299.96089,153.96502 293.5244,153.96502 C 279.84214,153.96502 269.09709,163.80155 254.03263,190.11774 C 248.82442,199.21613 240.05943,210.97175 234.55486,216.24128 C 225.61134,224.80312 222.41769,225.82225 204.53067,225.82225 L 184.51412,225.82225 L 190.98415,240.19369 C 200.2451,260.76437 199.80694,294.18704 190.00976,314.53347 C 181.35272,332.51252 161.33618,350.71469 145.33374,355.16013 C 129.75572,359.4876 104.38789,358.9281 90.456847,353.9498 z M 165.8338,75.923739 C 156.97908,60.814399 151.52974,32.606158 157.46546,32.606158 C 164.43775,47.732319 178.73037,61.227101 194.03409,70.643259 C 221.52091,83.949329 249.39257,78.578529 279.84247,54.108239 C 286.54595,48.721279 292.48231,44.913138 293.0345,45.645698 C 300.4697,57.184233 313.331,66.613261 317.58219,80.021449 C 317.58219,85.678729 293.22867,101.96033 274.01214,109.15007 C 226.38264,122.8706 193.96598,117.44304 165.8338,75.923739 z M 189.83603,40.997228 L 220.84514,6.6137488 L 255.30593,38.514418 C 243.51876,48.222549 235.00994,63.289118 221.54391,70.930009 C 210.90372,63.086273 195.02308,53.837816 189.83603,40.997228 z" fill="#e34234"/>
+    </svg>
+    <div class="tilaka-rule"></div>
+  </div>
+
+  <!-- Pillared arcade nav: 6 pages = 6 bays -->
+  <nav class="arcade" aria-label="Primary">
+    <div class="bay"><a href="page-1.html">Atelier Sthapati<span class="role">home</span></a></div>
+    <div class="bay"><a href="page-2.html">Selected Works<span class="role">collection</span></a></div>
+    <div class="bay"><a href="page-3.html">Drawings &amp; Treatises<span class="role">writing</span></a></div>
+    <div class="bay"><a href="page-4.html">The Workshop<span class="role">about</span></a></div>
+    <div class="bay"><a href="page-5.html">Commissions<span class="role">services</span></a></div>
+    <div class="bay" aria-current="page"><a href="page-6.html">Visit the Studio<span class="role">visit</span></a></div>
+  </nav>
+
+  <!-- Hero header -->
+  <header class="hero">
+    <div class="breadcrumb">VI · Visit · Sannidhi Street</div>
+    <h1>Visit the Studio</h1>
+    <p class="subtitle">14, Sannidhi Street, Kumbakonam — by the east gopuram of Śrī Sārangapāni</p>
+    <div class="peacock-band peacock-tint" aria-hidden="true">
+      <svg viewBox="0 0 313.71717 29.540759" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <path transform="translate(54.572101,-91.176475)" d="m -45.203647,120.20506 c -2.080683,-0.59494 -3.600099,-1.33764 -4.88273,-2.38671 -1.667517,-1.36388 -2.894118,-2.64027 -2.893812,-3.0113 1.42e-4,-0.17364 -0.209138,-0.47237 -0.46507,-0.66382 -0.819614,-0.61314 -1.16478,-1.84791 -1.123557,-4.01931 0.07527,-3.96496 0.841997,-6.28592 3.359706,-10.170217 2.091957,-3.227467 6.669369,-6.452883 10.647663,-7.502765 2.252562,-0.594453 8.248778,-0.796292 11.003264,-0.370372 6.94812,1.074354 16.152972,4.460234 20.6562963,7.598128 0.8536092,0.594796 0.7949964,0.623336 1.3291143,-0.64739 0.2251847,-0.535733 0.8814684,-1.603973 1.4584084,-2.373871 0.8561927,-1.142535 1.457933,-1.600664 3.2740672,-2.492638 2.16210793,-1.06191 4.5637653,-1.779237 6.7277099,-2.009456 0.5824052,-0.06194 1.3990594,-0.240975 1.8147895,-0.397805 0.7738562,-0.291942 6.4810504,-0.196925 10.0927814,0.168029 2.264542,0.228828 9.60899,1.67773 11.219571,2.21338 1.156599,0.384661 1.203738,0.376381 3.086684,-0.542345 2.528472,-1.2337 4.016657,-1.480542 8.446835,-1.401064 3.61374,0.06486 4.290154,0.147139 6.742793,0.820538 0.653941,0.179545 1.719761,0.375692 2.368485,0.435889 0.648729,0.0602 1.838242,0.282073 2.643363,0.493076 1.333488,0.349469 1.625289,0.339432 3.276461,-0.112735 4.298701,-1.177186 16.775093,-2.487486 20.247754,-2.126478 0.82522,0.08579 2.552867,0.408475 3.839215,0.717074 2.046471,0.490964 2.518569,0.521833 3.776859,0.246952 3.038874,-0.663879 6.75683,-1.061515 11.128253,-1.190178 4.134196,-0.121667 4.707691,-0.08259 6.380251,0.434721 1.364622,0.422078 2.105892,0.83929 2.879252,1.620559 1.29673,1.309975 1.63,2.709456 1.6237,6.818148 -0.005,2.95745 0.2393,4.45137 0.62566,3.83325 0.10807,-0.17288 0.17855,-1.23469 0.15662,-2.35957 -0.10151,-5.20664 0.0689,-6.026385 1.66799,-8.024476 0.85063,-1.062863 2.64553,-2.128587 4.10167,-2.435363 2.81819,-0.59374 15.88977,0.302112 18.8453,1.291541 0.69822,0.23375 1.33752,0.188118 3.17619,-0.226686 4.44974,-1.003866 5.16179,-1.08168 9.66723,-1.056509 4.01601,0.0224 5.00432,0.121426 8.5084,0.852608 6.84995,1.42927 7.19777,1.434197 12.43469,0.175947 1.28482,-0.308696 3.07339,-0.450501 5.82325,-0.46168 3.55974,-0.01452 4.14585,0.04906 5.68548,0.615953 0.94414,0.347651 2.11528,0.863208 2.60253,1.145677 0.82461,0.478046 0.98936,0.487693 2.38057,0.139336 1.77908,-0.445477 5.29646,-1.019874 9.8354,-1.606151 3.88998,-0.502463 11.70287,-0.5191 15.08161,-0.03212 5.86054,0.844676 9.86323,3.110261 10.57122,5.983455 l 0.28701,1.164733 3.35851,-1.630478 c 3.17793,-1.542804 8.22537,-3.484656 11.44251,-4.402193 4.71613,-1.345036 12.68145,-1.710913 16.9375,-0.778008 4.93058,1.080764 10.02057,5.551052 11.64065,10.223444 0.65092,1.87732 1.01878,5.06928 0.79472,6.89574 -0.46904,3.82309 -3.07509,7.60889 -6.48471,9.42031 -0.51071,0.27132 -1.10781,0.62201 -1.32689,0.7793 -1.28176,0.92026 -3.99222,1.08281 -9.3957,0.5635 -4.226,-0.40615 -43.09412,-0.56404 -48.28608,-0.19612 -3.36622,0.23852 -9.71584,0.13599 -14.17646,-0.22893 -3.19042,-0.261 -11.4116,-2.46478 -14.96419,-4.01131 -0.53984,-0.23501 -1.10442,-0.42792 -1.25461,-0.42868 -0.43847,-0.002 -0.31926,0.66639 0.24899,1.3964 0.63886,0.82072 0.66215,1.46506 0.0825,2.28367 -0.41639,0.5881 -0.53812,0.60929 -2.4496,0.42635 -1.10627,-0.10587 -3.2008,-0.44095 -4.65448,-0.74463 -1.45369,-0.30368 -4.09201,-0.62284 -5.86295,-0.70924 -3.45491,-0.16856 -4.65649,0.0199 -8.93437,1.40162 -2.04956,0.66196 -2.15841,0.6695 -4.80352,0.33258 -1.68376,-0.21447 -5.04124,-0.32578 -8.88522,-0.29456 -6.04658,0.0491 -6.20383,0.0368 -7.34956,-0.57531 -1.32088,-0.70568 -2.86287,-0.66893 -5.04444,0.12022 -0.88229,0.31916 -2.15717,0.43295 -4.89707,0.43713 -4.79736,0.007 -5.58286,-0.16276 -6.13105,-1.32752 l -0.42264,-0.89802 -1.08755,0.85944 c -1.8674,1.47572 -2.94146,1.82323 -5.59703,1.81093 -1.313341,-0.006 -3.557388,-0.23736 -4.986775,-0.51393 -2.027573,-0.39234 -2.694777,-0.43476 -3.0351,-0.19299 -1.426504,1.01339 -5.2004,1.21652 -9.369876,0.50433 -2.342079,-0.40006 -4.350291,-0.35925 -10.118619,0.20564 -2.370926,0.23218 -2.390138,0.22923 -3.965706,-0.60953 l -1.583238,-0.84286 -4.76258,0.004 c -3.320233,0.003 -5.333694,0.12924 -6.648373,0.41833 -2.953758,0.64954 -5.182097,0.79482 -6.349714,0.41398 -1.394469,-0.45482 -2.213474,-1.26097 -2.208834,-2.17419 0.0021,-0.41118 -0.106632,-0.74818 -0.241605,-0.74887 -0.13497,-6.8e-4 -1.238115,0.35414 -2.451433,0.7885 -7.896638,2.82691 -18.009765,3.78342 -31.365341,2.96657 -7.1026623,-0.43441 -10.2556485,-0.47172 -22.841675,-0.27026 -5.166476,0.0827 -13.263451,0.2047 -17.993277,0.27111 -4.729825,0.0664 -9.671447,0.15763 -10.98138,0.20269 -1.516176,0.0522 -2.861762,-0.0553 -3.702712,-0.29577 z" fill="#000"/>
+      </svg>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Top grid: address card + hours card -->
+    <section class="grid-2">
+
+      <!-- Address card -->
+      <article class="card">
+        <div class="pediment" aria-hidden="true">
+          <div class="finial"></div>
+          <div class="tier t4"></div>
+          <div class="tier t3"></div>
+          <div class="tier t2"></div>
+          <div class="tier t1"></div>
+        </div>
+        <span class="cap left" aria-hidden="true"></span>
+        <span class="cap right" aria-hidden="true"></span>
+        <span class="cap left foot" aria-hidden="true"></span>
+        <span class="cap right foot" aria-hidden="true"></span>
+
+        <h2 class="card-title">The Studio Address</h2>
+        <div class="card-body">
+          <div class="address-block">
+            <div class="line-1">Atelier Sthapati</div>
+            <div class="line">14, Sannidhi Street</div>
+            <div class="line">(near the east gopuram of</div>
+            <div class="line">Śrī Sārangapāni Swāmy temple)</div>
+            <div class="line">Kumbakonam taluk</div>
+            <div class="line">Thanjavur district, Tamil Nadu</div>
+            <div class="line pin">Postal code &nbsp;·&nbsp; 612001</div>
+          </div>
+
+          <p style="text-align:center; padding:0 28px; font-style:italic; color:var(--secondary); margin-top:6px;">
+            The studio occupies the second house south of the temple's east tower; a vermilion door, a stone Nandi at the threshold, and the
+            name &ldquo;<strong style="color:var(--text-emphasis); font-style:normal;">Sthapati</strong>&rdquo; lettered in Tamil and English above the lintel.
+          </p>
+        </div>
+
+        <div class="colophon" aria-hidden="true">
+          <svg viewBox="0 0 383 301" xmlns="http://www.w3.org/2000/svg">
+            <g transform="translate(80,0)">
+              <ellipse cx="100" cy="170" rx="70" ry="18" fill="none" stroke="#e34234" stroke-width="2"/>
+              <ellipse cx="100" cy="170" rx="50" ry="13" fill="none" stroke="#c9a23a" stroke-width="1.5"/>
+              <ellipse cx="100" cy="170" rx="30" ry="8" fill="#ff8baa" stroke="#e34234" stroke-width="1"/>
+              <circle cx="100" cy="170" r="4" fill="#8b1538"/>
+            </g>
+          </svg>
+        </div>
+      </article>
+
+      <!-- Hours card -->
+      <article class="card">
+        <div class="pediment" aria-hidden="true">
+          <div class="finial"></div>
+          <div class="tier t4"></div>
+          <div class="tier t3"></div>
+          <div class="tier t2"></div>
+          <div class="tier t1"></div>
+        </div>
+        <span class="cap left" aria-hidden="true"></span>
+        <span class="cap right" aria-hidden="true"></span>
+        <span class="cap left foot" aria-hidden="true"></span>
+        <span class="cap right foot" aria-hidden="true"></span>
+
+        <h2 class="card-title">Hours of Reception</h2>
+        <div class="card-body">
+          <p style="text-align:center; margin: 0 12px 6px; font-style:italic;">
+            The proprietor receives visitors and patrons during the cool hours of the working day —
+            never during the midday glare, and never on dark-moon or full-moon days.
+          </p>
+        </div>
+
+        <table class="hours">
+          <tr><td>Tuesday</td><td>9.00 – 12.00 &nbsp;·&nbsp; 4.00 – 6.00</td></tr>
+          <tr><td>Wednesday</td><td>9.00 – 12.00 &nbsp;·&nbsp; 4.00 – 6.00</td></tr>
+          <tr><td>Thursday</td><td>9.00 – 12.00 &nbsp;·&nbsp; 4.00 – 6.00</td></tr>
+          <tr><td>Friday</td><td>9.00 – 12.00 &nbsp;·&nbsp; 4.00 – 6.00</td></tr>
+          <tr><td>Saturday</td><td>9.00 – 12.00 &nbsp;·&nbsp; 4.00 – 6.00</td></tr>
+          <tr class="closed"><td>Sunday &amp; Monday</td><td>Closed (workshop only)</td></tr>
+          <tr class="closed"><td>Amāvāsai (new moon)</td><td>Closed</td></tr>
+          <tr class="closed"><td>Pournami (full moon)</td><td>Closed</td></tr>
+        </table>
+
+        <p style="text-align:center; padding: 14px 28px 0; font-style:italic; color:var(--secondary);">
+          Patrons are requested to send word a day in advance; tea is offered after the eleven o'clock chime.
+        </p>
+
+        <div class="colophon" aria-hidden="true">
+          <svg viewBox="0 0 383 301" xmlns="http://www.w3.org/2000/svg">
+            <g transform="translate(80,0)">
+              <ellipse cx="100" cy="170" rx="70" ry="18" fill="none" stroke="#e34234" stroke-width="2"/>
+              <ellipse cx="100" cy="170" rx="50" ry="13" fill="none" stroke="#c9a23a" stroke-width="1.5"/>
+              <ellipse cx="100" cy="170" rx="30" ry="8" fill="#ff8baa" stroke="#e34234" stroke-width="1"/>
+              <circle cx="100" cy="170" r="4" fill="#8b1538"/>
+            </g>
+          </svg>
+        </div>
+      </article>
+
+    </section>
+
+    <!-- Palmette divider -->
+    <div class="palmette-band" aria-hidden="true">
+      <svg viewBox="60 220 600 30" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+        <g fill="#e34234">
+          <rect x="80" y="232" width="560" height="2"/>
+          <rect x="80" y="237" width="560" height="1"/>
+        </g>
+        <g fill="#c9a23a" transform="translate(360,232)">
+          <path d="M -8,0 L 0,-10 L 8,0 L 0,4 Z"/>
+          <circle cx="-22" cy="0" r="3"/>
+          <circle cx="22" cy="0" r="3"/>
+          <circle cx="-44" cy="0" r="2.4"/>
+          <circle cx="44" cy="0" r="2.4"/>
+        </g>
+      </svg>
+    </div>
+
+    <!-- Travel notes (3 columns) -->
+    <article class="card" style="margin-bottom:28px;">
+      <div class="pediment" aria-hidden="true">
+        <div class="finial"></div>
+        <div class="tier t4"></div>
+        <div class="tier t3"></div>
+        <div class="tier t2"></div>
+        <div class="tier t1"></div>
+      </div>
+      <span class="cap left" aria-hidden="true"></span>
+      <span class="cap right" aria-hidden="true"></span>
+      <span class="cap left foot" aria-hidden="true"></span>
+      <span class="cap right foot" aria-hidden="true"></span>
+
+      <h2 class="card-title">Reaching Kumbakonam</h2>
+
+      <p style="text-align:center; padding: 18px 60px 0; font-style: italic;">
+        Kumbakonam lies on the old Tanjore–Tiruchi line, watered by the Kāveri.
+        Trains from Chennai Egmore halt here twice each evening; buses run continually
+        from the Tanjore stand. Three principal approaches:
+      </p>
+
+      <ul class="travel" style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:0 28px; padding: 18px 28px 8px;">
+        <li style="display:block; border-bottom:none;">
+          <div class="from">From Tanjore<span class="km">·  40 km southwest  ·</span></div>
+          <div class="desc">
+            One hour by road along NH-36 via Papanasam. Town buses depart the Tanjore
+            New Bus Stand every twenty minutes between 5 a.m. and 9 p.m. Hire-cars from
+            the railway junction quote ₹900–1,200 one way. The river is crossed twice.
+          </div>
+        </li>
+        <li style="display:block; border-bottom:none;">
+          <div class="from">From Tiruchirapalli<span class="km">·  90 km west  ·</span></div>
+          <div class="desc">
+            Two hours by road via Lalgudi and Thiruvaiyāru, or by passenger train on the
+            Tiruchi–Mayiladuthurai section, alighting at Kumbakonam Junction. From the
+            station, an auto-rickshaw to Sannidhi Street is ₹60; ten minutes' walk through
+            the bazaar suffices for the unhurried.
+          </div>
+        </li>
+        <li style="display:block; border-bottom:none;">
+          <div class="from">From Chennai<span class="km">·  280 km via Villupuram  ·</span></div>
+          <div class="desc">
+            Six hours by the Cholan Express or the overnight Tiruchendur Express, both
+            from Egmore via the Villupuram line. By road, the East Coast highway as far
+            as Pondicherry, then inland through Chidambaram and Mayiladuthurai. Alight
+            at Kumbakonam Junction; the studio is a five-minute walk west.
+          </div>
+        </li>
+      </ul>
+
+      <div class="colophon" aria-hidden="true">
+        <svg viewBox="0 0 383 301" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(80,0)">
+            <ellipse cx="100" cy="170" rx="70" ry="18" fill="none" stroke="#e34234" stroke-width="2"/>
+            <ellipse cx="100" cy="170" rx="50" ry="13" fill="none" stroke="#c9a23a" stroke-width="1.5"/>
+            <ellipse cx="100" cy="170" rx="30" ry="8" fill="#ff8baa" stroke="#e34234" stroke-width="1"/>
+            <circle cx="100" cy="170" r="4" fill="#8b1538"/>
+          </g>
+        </svg>
+      </div>
+    </article>
+
+    <!-- Block plan -->
+    <article class="plan-card">
+      <div class="pediment" aria-hidden="true" style="margin: 0;">
+        <div class="finial"></div>
+        <div class="tier t4"></div>
+        <div class="tier t3"></div>
+        <div class="tier t2"></div>
+        <div class="tier t1"></div>
+      </div>
+      <h2 class="card-title">Block Plan of the Premises</h2>
+
+      <div class="plan-wrap">
+        <div class="plan" aria-label="Hand-drawn block plan of 14 Sannidhi Street">
+
+          <!-- the lane -->
+          <div class="lane" style="top: 26%;">
+            <div class="lane-label">Sannidhi Street &nbsp; ←  to East Gopuram</div>
+          </div>
+
+          <!-- east gopuram marker (off the right edge, indicated) -->
+          <div class="gopuram-mark" style="right: 8px; top: 14%;"></div>
+          <span class="plan-label" style="right: 38px; top: 8%;">East Gopuram, Sārangapāṇi</span>
+
+          <!-- Studio courtyard (central) -->
+          <div class="courtyard" style="left: 38%; top: 50%; width: 26%; height: 28%;">
+            Studio Courtyard
+          </div>
+          <span class="plan-label" style="left: 41%; top: 80%;">No. 14 — paved with granite slabs</span>
+
+          <!-- Drawing office (front room) -->
+          <div class="building" style="left: 38%; top: 38%; width: 26%; height: 10%;">
+            Drawing Office &amp; Reception
+          </div>
+
+          <!-- Carving shed (rear) -->
+          <div class="building" style="left: 30%; top: 80%; width: 42%; height: 14%;">
+            Carving Shed (open-sided, tiled roof)
+          </div>
+
+          <!-- Well (south-east of courtyard) -->
+          <div class="well" style="right: 18%; top: 60%; width: 60px; height: 60px;">
+            The Well
+          </div>
+
+          <!-- Neighbour buildings -->
+          <div class="building" style="left: 8%; top: 38%; width: 24%; height: 22%; opacity:.7;">
+            Neighbouring House<br>(Sri V. Iyer)
+          </div>
+          <div class="building" style="left: 8%; top: 64%; width: 18%; height: 22%; opacity:.7;">
+            Pavement<br>shrine
+          </div>
+          <div class="building" style="right: 6%; top: 38%; width: 18%; height: 16%; opacity:.7;">
+            Tea-stall
+          </div>
+          <div class="building" style="right: 6%; top: 78%; width: 22%; height: 16%; opacity:.7;">
+            Mason's yard
+          </div>
+
+          <!-- arrow to entrance -->
+          <span class="arrow" style="left: 41%; top: 30%;">↓ entrance door (vermilion)</span>
+
+        </div>
+
+        <div class="plan-key">
+          <div><span>A.</span> Vermilion entrance door, with stone Nandi threshold</div>
+          <div><span>B.</span> Drawing office: tracing-tables, the granite measure-stone</div>
+          <div><span>C.</span> Open courtyard: tulasī-tāḷam, banana plant, wash-stone</div>
+          <div><span>D.</span> Carving shed: chisels, mallets, rough blocks of Krishnaśilā</div>
+          <div><span>E.</span> The well, sweet-water, dug 1923 by R. K.'s grandfather</div>
+          <div><span>F.</span> The east gopuram of Sārangapāṇi — visible from the doorway</div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Contact strip -->
+    <section class="contact-strip" aria-label="Contact details">
+      <div class="contact-cell">
+        <div class="label">Telephone</div>
+        <div class="value">0435&nbsp;·&nbsp;242&nbsp;·&nbsp;1864</div>
+        <div class="note">Land-line &nbsp;·&nbsp; mornings best; the bell is in the carving shed.</div>
+      </div>
+      <div class="contact-cell">
+        <div class="label">Postal Enquiries</div>
+        <div class="value">By Letter, Indian Post</div>
+        <div class="note">Address envelopes to <em>R. Kalyanasundaram, Sthapati</em>, at the address opposite — replies in two posts.</div>
+      </div>
+      <div class="contact-cell">
+        <div class="label">Mobile (Workshop)</div>
+        <div class="value">+91&nbsp;94432&nbsp;·&nbsp;05716</div>
+        <div class="note">For commission enquiries from outside Tamil Nadu — ring between 10 a.m. and 4 p.m.</div>
+      </div>
+    </section>
+
+    <!-- Notice on no email -->
+    <aside class="notice">
+      <h3>A Note on Correspondence</h3>
+      <p>
+        The proprietor <em class="no-email">does not keep electronic mail</em>. Patrons, scholars, and temple
+        committees are asked to write by post, or to telephone in the working hours given above. Letters
+        are answered in the proprietor's own hand on the workshop's letter-paper, sealed with the
+        Atelier's vermilion stamp. Drawings, when requested, follow under separate cover by registered post.
+      </p>
+    </aside>
+
+  </main>
+
+  <!-- Footer arcade -->
+  <footer>
+    <div class="arcade-foot">
+      <div class="bay-foot">
+        <h4>Atelier Sthapati</h4>
+        <p>R. Kalyanasundaram</p>
+        <p style="font-style:italic; color:var(--secondary);">Draftsman &amp; Sculptor</p>
+        <p>Est. 1994</p>
+      </div>
+      <div class="bay-foot">
+        <h4>Studio</h4>
+        <p>14, Sannidhi Street</p>
+        <p>Kumbakonam 612001</p>
+        <p>Tamil Nadu, Bhārata</p>
+      </div>
+      <div class="bay-foot" style="display:flex; align-items:center; justify-content:center;">
+        <div class="kolam" aria-hidden="true">
+          <div class="kolam-grid"></div>
+          <div class="kolam-ring"></div>
+          <div class="kolam-ring inner"></div>
+        </div>
+      </div>
+      <div class="bay-foot">
+        <h4>Speak</h4>
+        <p>0435 · 242 · 1864</p>
+        <p>+91 94432 · 05716</p>
+        <p style="font-style:italic; color:var(--secondary);">no e-mail kept</p>
+      </div>
+      <div class="bay-foot">
+        <h4>Almanack</h4>
+        <p>Workshop closed on</p>
+        <p>Amāvāsai &amp; Pournami</p>
+        <p>and on the second of Āṭi</p>
+      </div>
+    </div>
+    <div class="double-rule" aria-hidden="true"></div>
+    <div class="colophon-line">
+      Drawn at the studio in the Tamil month of Mārkaḻi, year Krodhi · 1946 of the Śālivāhana Śaka · 22nd day · printed under the gaze of Sārangapāṇi.
+    </div>
+  </footer>
+
+</div>
+
+</body>
+</html>

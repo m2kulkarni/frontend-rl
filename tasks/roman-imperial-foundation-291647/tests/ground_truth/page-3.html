@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="la">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>OPERA — Programmes & Active Projects · Fundatio Aurelia</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    background:
+      radial-gradient(ellipse at top, rgba(245,240,230,0.6), transparent 60%),
+      var(--bg);
+    text-align: center;
+  }
+  a { color: var(--accent); text-decoration: none; }
+
+  /* ============ NAVIGATION FRIEZE ============ */
+  .frieze-nav {
+    position: sticky; top: 0; z-index: 50;
+    background: var(--surface);
+    border-top: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+    box-shadow: 0 1px 0 var(--ornament), 0 -1px 0 var(--ornament);
+    padding: 14px 0 10px;
+  }
+  .frieze-nav::before, .frieze-nav::after {
+    content: ""; display: block;
+    height: 1px; background: var(--ornament);
+    margin: 4px 0;
+  }
+  .nav-inner {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    max-width: 1320px;
+    margin: 0 auto;
+    gap: 28px;
+  }
+  .nav-list {
+    list-style: none; margin: 0; padding: 0;
+    display: flex; align-items: center; justify-content: center;
+    gap: 14px;
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+  .nav-list.left { justify-content: flex-end; }
+  .nav-list.right { justify-content: flex-start; }
+  .nav-list a {
+    color: var(--text);
+    padding: 4px 2px;
+    border-bottom: 1px solid transparent;
+    transition: border-color .2s, color .2s;
+  }
+  .nav-list a:hover { color: var(--primary); border-bottom-color: var(--ornament); }
+  .nav-list a[aria-current="page"] {
+    color: var(--primary);
+    border-bottom: 1px solid var(--primary);
+  }
+  .nav-list .vine {
+    width: 14px; height: 14px;
+    fill: var(--ornament);
+    opacity: 0.8;
+    flex-shrink: 0;
+  }
+  .wordmark {
+    font-family: var(--font-display), serif;
+    font-size: 18px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--primary);
+    white-space: nowrap;
+    padding: 0 18px;
+    position: relative;
+  }
+  .wordmark::before, .wordmark::after {
+    content: "·";
+    color: var(--ornament);
+    margin: 0 10px;
+  }
+
+  /* ============ PAGE HEADER ============ */
+  .page-head {
+    padding: 64px 24px 28px;
+    max-width: 980px; margin: 0 auto;
+  }
+  .eyebrow {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.5em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .page-title {
+    font-family: var(--font-display), serif;
+    font-weight: 600;
+    font-size: 56px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin: 0 0 10px;
+    line-height: 1.05;
+  }
+  .page-subtitle {
+    font-style: italic;
+    font-size: 19px;
+    color: var(--text);
+    margin: 0 auto 20px;
+    max-width: 720px;
+  }
+  .gold-rule {
+    width: 220px; height: 0;
+    margin: 24px auto 8px;
+    border-top: 1px solid var(--ornament);
+    position: relative;
+  }
+  .gold-rule::before {
+    content: "";
+    position: absolute; left: 50%; top: -4px;
+    width: 8px; height: 8px;
+    background: var(--ornament);
+    transform: translateX(-50%) rotate(45deg);
+  }
+  .lede {
+    max-width: 720px;
+    margin: 28px auto 0;
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--text);
+  }
+
+  /* ============ MEANDER DIVIDER ============ */
+  .meander-divider {
+    display: block;
+    width: 520px;
+    height: auto;
+    margin: 40px auto;
+    color: var(--primary);
+  }
+  .meander-divider svg { display: block; width: 100%; height: auto; }
+
+  /* ============ PROGRAMME CARDS ============ */
+  .programmes {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 8px 24px 56px;
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+  }
+  .card {
+    position: relative;
+    background: #fbf7ec;
+    padding: 88px 60px 56px;
+    border: 1px solid rgba(169,50,38,0.15);
+    box-shadow: 0 1px 0 rgba(0,0,0,0.04);
+  }
+  /* Greek-key tiled border on all four sides */
+  .card::before {
+    content: "";
+    position: absolute; inset: 12px;
+    border: 2px solid var(--text);
+    pointer-events: none;
+    background:
+      /* top */
+      linear-gradient(90deg, var(--text) 50%, transparent 50%) top left/24px 2px repeat-x,
+      /* bottom */
+      linear-gradient(90deg, var(--text) 50%, transparent 50%) bottom left/24px 2px repeat-x;
+    background-color: transparent;
+    border: none;
+  }
+  .card-inner-frame {
+    position: absolute; inset: 18px;
+    border: 1px solid var(--ornament);
+    pointer-events: none;
+  }
+  .card-inner-frame::before, .card-inner-frame::after {
+    content: ""; position: absolute;
+    left: 0; right: 0;
+    height: 14px;
+    background-image:
+      repeating-linear-gradient(90deg,
+        var(--primary) 0 14px, transparent 14px 16px,
+        var(--primary) 16px 18px, transparent 18px 32px);
+    opacity: 0.55;
+  }
+  .card-inner-frame::before { top: -1px; }
+  .card-inner-frame::after  { bottom: -1px; transform: scaleY(-1); }
+
+  /* Greek-key border using SVG pattern via inline SVG positioned absolutely */
+  .key-border {
+    position: absolute; inset: 6px;
+    pointer-events: none;
+  }
+  .key-border .side {
+    position: absolute;
+    color: var(--primary);
+    opacity: 0.85;
+  }
+  .key-border .top, .key-border .bottom {
+    left: 0; right: 0; height: 18px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 18' preserveAspectRatio='xMidYMid meet'><g fill='none' stroke='%23a93226' stroke-width='1.6'><path d='M0 17 V4 H12 V12 H4 V8 H8'/><path d='M16 17 V4 H28 V12 H20 V8 H24'/><path d='M32 17 V4 H44 V12 H36 V8 H40'/><path d='M48 17 V4 H60 V12 H52 V8 H56'/></g></svg>");
+    background-repeat: repeat-x;
+    background-size: 60px 18px;
+  }
+  .key-border .top { top: 0; }
+  .key-border .bottom { bottom: 0; transform: scaleY(-1); }
+  .key-border .left, .key-border .right {
+    top: 0; bottom: 0; width: 18px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 60' preserveAspectRatio='xMidYMid meet'><g fill='none' stroke='%23a93226' stroke-width='1.6'><path d='M17 0 H4 V12 H12 V4 H8 V8'/><path d='M17 16 H4 V28 H12 V20 H8 V24'/><path d='M17 32 H4 V44 H12 V36 H8 V40'/><path d='M17 48 H4 V60 H12 V52 H8 V56'/></g></svg>");
+    background-repeat: repeat-y;
+    background-size: 18px 60px;
+  }
+  .key-border .left { left: 0; }
+  .key-border .right { right: 0; transform: scaleX(-1); }
+
+  /* Laurel plate at top */
+  .laurel-plate {
+    position: absolute;
+    top: -32px; left: 50%;
+    transform: translateX(-50%);
+    width: 360px; height: 110px;
+    z-index: 3;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .laurel-plate svg.wreath {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    opacity: 0.85;
+  }
+  .laurel-plate .plate-bg {
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%,-50%);
+    width: 220px; height: 56px;
+    background: var(--surface);
+    border-top: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+  }
+  .programme-roman {
+    position: relative; z-index: 2;
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.4em;
+    color: var(--accent);
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.1;
+  }
+  .programme-roman .num {
+    display: block;
+    font-size: 22px;
+    color: var(--primary);
+    margin-top: 2px;
+    letter-spacing: 0.3em;
+  }
+
+  .card h2.card-title {
+    font-family: var(--font-display), serif;
+    font-weight: 600;
+    font-size: 26px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin: 0 0 6px;
+    text-align: center;
+  }
+  .card .partner {
+    font-style: italic;
+    color: var(--accent);
+    font-size: 15px;
+    margin: 0 auto 20px;
+    max-width: 560px;
+    text-align: center;
+  }
+  .card .body-rule {
+    width: 90px; margin: 0 auto 22px;
+    border-top: 1px solid var(--ornament);
+  }
+  .card-body {
+    font-size: 16px;
+    line-height: 1.65;
+    text-align: justify;
+    text-align-last: center;
+    max-width: 620px;
+    margin: 0 auto;
+    color: var(--text);
+  }
+  .card-body::first-letter {
+    font-family: var(--font-display), serif;
+    font-size: 56px;
+    float: left;
+    line-height: 0.9;
+    padding: 6px 10px 0 0;
+    color: var(--primary);
+    font-weight: 600;
+  }
+
+  /* dossier table */
+  .dossier {
+    margin: 26px auto 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    max-width: 640px;
+    border-top: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+  }
+  .dossier > div {
+    padding: 14px 10px;
+    text-align: center;
+    border-right: 1px solid rgba(201,162,58,0.4);
+  }
+  .dossier > div:last-child { border-right: none; }
+  .dossier dt {
+    font-family: var(--font-display), serif;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .dossier dd {
+    margin: 0;
+    font-family: var(--font-display), serif;
+    font-size: 15px;
+    letter-spacing: 0.06em;
+    color: var(--text);
+  }
+  .dossier dd .small {
+    display: block;
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 12px;
+    letter-spacing: 0;
+    color: var(--text);
+    margin-top: 2px;
+    opacity: 0.75;
+  }
+
+  /* gold rule + CTA */
+  .cta-rule {
+    width: 60px; margin: 28px auto 18px;
+    border-top: 2px solid var(--ornament);
+  }
+  .cta {
+    display: inline-block;
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--primary);
+    padding: 10px 28px;
+    border-top: 1px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
+    transition: background .2s, color .2s;
+  }
+  .cta:hover { background: var(--primary); color: var(--surface); }
+
+  .card-footnote {
+    margin: 24px auto 0;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--accent);
+    max-width: 540px;
+  }
+
+  /* ============ COLOPHON ============ */
+  .colophon {
+    max-width: 760px;
+    margin: 24px auto 60px;
+    padding: 28px 40px;
+    border-top: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+    text-align: center;
+  }
+  .colophon h3 {
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.4em;
+    color: var(--primary);
+    margin: 0 0 14px;
+    text-transform: uppercase;
+  }
+  .colophon p {
+    font-size: 14px; line-height: 1.7;
+    margin: 0 auto;
+    max-width: 620px;
+  }
+
+  /* ============ FOOTER ============ */
+  footer.frieze-foot {
+    margin-top: 40px;
+    background: rgba(169,50,38,0.85);
+    color: var(--surface);
+    position: relative;
+    text-align: center;
+  }
+  .meander-strip {
+    height: 22px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 22' preserveAspectRatio='xMidYMid meet'><g fill='none' stroke='%23c9a23a' stroke-width='2'><path d='M0 21 V4 H14 V14 H4 V8 H10'/><path d='M16 21 V4 H30 V14 H20 V8 H26'/><path d='M32 21 V4 H46 V14 H36 V8 H42'/><path d='M48 21 V4 H62 V14 H52 V8 H58'/></g></svg>");
+    background-repeat: repeat-x;
+    background-size: 60px 22px;
+    background-color: var(--surface);
+  }
+  .meander-strip.bottom { transform: scaleY(-1); }
+  .foot-center {
+    padding: 38px 24px 18px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .foot-center .seal {
+    grid-column: 2;
+    width: 110px; height: 110px;
+    color: var(--ornament);
+  }
+  .foot-center .addr-left { text-align: right; }
+  .foot-center .addr-right { text-align: left; }
+  .foot-center .addr {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--surface);
+    line-height: 1.7;
+  }
+  .foot-cols {
+    max-width: 1100px; margin: 0 auto;
+    padding: 12px 24px 34px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+  }
+  .foot-cols section { padding: 0 12px; }
+  .foot-cols h4 {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    color: var(--ornament);
+    margin: 0 0 12px;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(201,162,58,0.4);
+    padding-bottom: 8px;
+  }
+  .foot-cols ul {
+    list-style: none; margin: 0; padding: 0;
+    font-family: var(--font-display), serif;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    line-height: 2;
+    color: var(--surface);
+  }
+  .foot-cols a { color: var(--surface); }
+  .foot-cols a:hover { color: var(--ornament); }
+
+</style>
+</head>
+<body>
+
+<!-- ============ NAVIGATION ============ -->
+<nav class="frieze-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <ul class="nav-list left">
+      <li><a href="page-1.html">Limen</a></li>
+      <li aria-hidden="true"><svg class="vine" viewBox="0 0 200 200"><path d="M43.6 11c-1.8 0-3.6.1-5.4.3-7 .7-13.9 2.8-19.1 7.5s-8.2 12-7.7 21c.5 9 4.3 16.1 10.2 20.3 5.9 4.2 13.3 5.5 21 5.2 15.5-.7 32.8-8 45.8-18.3 1.4-1.1 2.8-2 4.3-3.1 4.3 6.7 7.6 14.8 9.3 24.1-7.5-5.1-21-10.5-35.7 1.5-22.1 18.2-25 12.9-45.3-2.1-2.9 36.1 15 54.6 44.7 52.5 0 0-14 4.3-3.6 26.4 6 12.9 8.4 20.1 6.6 25.2-12.8 2.3-15.8 7.8-5.6 12.7 45.1 10 65.7-27.5 68.7-66 45.4 0 52.9-31.8 52.5-50.4-8.2 11.1-22.2 11.1-32.9 2.5-9.9-7.9-21.7-16.2-39-1.1-1.7-11.7-5.7-22.1-11.2-30.7 19.4-11.4 38.7-14.5 52.5-10.8 5.5 1.4 9.5 4.1 12.4 7-9 8.4-11.8 26.4 2.3 27 18.9.9 21-15.4 13.6-27.1-5.4-8.5-16.4-13.2-25.7-16.6-17.5-4.6-39.7-.6-61.3 12.5-5.2-5.7-11.1-10.2-17.7-12.9-7.1-3-17.5-5.7-28.3-6.3-1.8-.1-3.6-.1-5.4-.1z"/></svg></li>
+      <li><a href="page-2.html">De Proposito</a></li>
+    </ul>
+    <a href="page-1.html" class="wordmark">Fundatio Aurelia</a>
+    <ul class="nav-list right">
+      <li><a href="page-3.html" aria-current="page">Opera</a></li>
+      <li aria-hidden="true"><svg class="vine" viewBox="0 0 200 200"><path d="M43.6 11c-1.8 0-3.6.1-5.4.3-7 .7-13.9 2.8-19.1 7.5s-8.2 12-7.7 21c.5 9 4.3 16.1 10.2 20.3 5.9 4.2 13.3 5.5 21 5.2 15.5-.7 32.8-8 45.8-18.3 1.4-1.1 2.8-2 4.3-3.1 4.3 6.7 7.6 14.8 9.3 24.1-7.5-5.1-21-10.5-35.7 1.5-22.1 18.2-25 12.9-45.3-2.1-2.9 36.1 15 54.6 44.7 52.5 0 0-14 4.3-3.6 26.4 6 12.9 8.4 20.1 6.6 25.2-12.8 2.3-15.8 7.8-5.6 12.7 45.1 10 65.7-27.5 68.7-66 45.4 0 52.9-31.8 52.5-50.4-8.2 11.1-22.2 11.1-32.9 2.5-9.9-7.9-21.7-16.2-39-1.1-1.7-11.7-5.7-22.1-11.2-30.7 19.4-11.4 38.7-14.5 52.5-10.8 5.5 1.4 9.5 4.1 12.4 7-9 8.4-11.8 26.4 2.3 27 18.9.9 21-15.4 13.6-27.1-5.4-8.5-16.4-13.2-25.7-16.6-17.5-4.6-39.7-.6-61.3 12.5-5.2-5.7-11.1-10.2-17.7-12.9-7.1-3-17.5-5.7-28.3-6.3-1.8-.1-3.6-.1-5.4-.1z"/></svg></li>
+      <li><a href="page-4.html">Benefactores</a></li>
+      <li aria-hidden="true"><svg class="vine" viewBox="0 0 200 200"><path d="M43.6 11c-1.8 0-3.6.1-5.4.3-7 .7-13.9 2.8-19.1 7.5s-8.2 12-7.7 21c.5 9 4.3 16.1 10.2 20.3 5.9 4.2 13.3 5.5 21 5.2 15.5-.7 32.8-8 45.8-18.3 1.4-1.1 2.8-2 4.3-3.1 4.3 6.7 7.6 14.8 9.3 24.1-7.5-5.1-21-10.5-35.7 1.5-22.1 18.2-25 12.9-45.3-2.1-2.9 36.1 15 54.6 44.7 52.5 0 0-14 4.3-3.6 26.4 6 12.9 8.4 20.1 6.6 25.2-12.8 2.3-15.8 7.8-5.6 12.7 45.1 10 65.7-27.5 68.7-66 45.4 0 52.9-31.8 52.5-50.4-8.2 11.1-22.2 11.1-32.9 2.5-9.9-7.9-21.7-16.2-39-1.1-1.7-11.7-5.7-22.1-11.2-30.7 19.4-11.4 38.7-14.5 52.5-10.8 5.5 1.4 9.5 4.1 12.4 7-9 8.4-11.8 26.4 2.3 27 18.9.9 21-15.4 13.6-27.1-5.4-8.5-16.4-13.2-25.7-16.6-17.5-4.6-39.7-.6-61.3 12.5-5.2-5.7-11.1-10.2-17.7-12.9-7.1-3-17.5-5.7-28.3-6.3-1.8-.1-3.6-.1-5.4-.1z"/></svg></li>
+      <li><a href="page-5.html">Acta</a></li>
+      <li aria-hidden="true"><svg class="vine" viewBox="0 0 200 200"><path d="M43.6 11c-1.8 0-3.6.1-5.4.3-7 .7-13.9 2.8-19.1 7.5s-8.2 12-7.7 21c.5 9 4.3 16.1 10.2 20.3 5.9 4.2 13.3 5.5 21 5.2 15.5-.7 32.8-8 45.8-18.3 1.4-1.1 2.8-2 4.3-3.1 4.3 6.7 7.6 14.8 9.3 24.1-7.5-5.1-21-10.5-35.7 1.5-22.1 18.2-25 12.9-45.3-2.1-2.9 36.1 15 54.6 44.7 52.5 0 0-14 4.3-3.6 26.4 6 12.9 8.4 20.1 6.6 25.2-12.8 2.3-15.8 7.8-5.6 12.7 45.1 10 65.7-27.5 68.7-66 45.4 0 52.9-31.8 52.5-50.4-8.2 11.1-22.2 11.1-32.9 2.5-9.9-7.9-21.7-16.2-39-1.1-1.7-11.7-5.7-22.1-11.2-30.7 19.4-11.4 38.7-14.5 52.5-10.8 5.5 1.4 9.5 4.1 12.4 7-9 8.4-11.8 26.4 2.3 27 18.9.9 21-15.4 13.6-27.1-5.4-8.5-16.4-13.2-25.7-16.6-17.5-4.6-39.7-.6-61.3 12.5-5.2-5.7-11.1-10.2-17.7-12.9-7.1-3-17.5-5.7-28.3-6.3-1.8-.1-3.6-.1-5.4-.1z"/></svg></li>
+      <li><a href="page-6.html">Scribe Nobis</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ============ PAGE HEADER ============ -->
+<header class="page-head">
+  <div class="eyebrow">Pars Tertia · Operum Index</div>
+  <h1 class="page-title">Opera</h1>
+  <p class="page-subtitle">Programmes &amp; Active Projects under the seal of the Foundation, anno MMXXIV</p>
+  <div class="gold-rule" aria-hidden="true"></div>
+  <p class="lede">
+    Of the seventy-eight applications received during the last quadrennium, the Council of Curators has elected to underwrite the three undertakings recorded below. Each programme is bound by deed of patronage to a named lead conservator, a fixed term in years, and a sum committed in euros from the endowment. Reports are deposited semi-annually at the Foundation's office in Rome and at the relevant superintendency.
+  </p>
+</header>
+
+<!-- meander divider -->
+<div class="meander-divider" aria-hidden="true">
+  <svg viewBox="1000 364 16511 4447" xmlns="http://www.w3.org/2000/svg">
+    <g fill="currentColor">
+      <path d="M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z"/>
+      <path d="M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z"/>
+      <path d="M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z"/>
+      <path d="M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z"/>
+      <path d="M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z"/>
+    </g>
+  </svg>
+</div>
+
+<!-- ============ PROGRAMMES ============ -->
+<main class="programmes">
+
+  <!-- ===== PROGRAMME I ===== -->
+  <article class="card">
+    <div class="key-border" aria-hidden="true">
+      <div class="side top"></div>
+      <div class="side bottom"></div>
+      <div class="side left"></div>
+      <div class="side right"></div>
+    </div>
+    <div class="laurel-plate" aria-hidden="true">
+      <div class="plate-bg"></div>
+      <svg class="wreath" viewBox="0 0 323 296" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+        <g fill="none" stroke="#c9a23a" stroke-width="1.6">
+          <ellipse cx="161" cy="148" rx="150" ry="100"/>
+          <path d="M30 148 q40 -50 80 -60 M293 148 q-40 -50 -80 -60 M30 148 q40 50 80 60 M293 148 q-40 50 -80 60"/>
+          <g fill="#c9a23a" opacity="0.7">
+            <ellipse cx="60" cy="100" rx="10" ry="4" transform="rotate(-30 60 100)"/>
+            <ellipse cx="90" cy="78" rx="10" ry="4" transform="rotate(-20 90 78)"/>
+            <ellipse cx="125" cy="65" rx="10" ry="4" transform="rotate(-10 125 65)"/>
+            <ellipse cx="161" cy="60" rx="10" ry="4"/>
+            <ellipse cx="197" cy="65" rx="10" ry="4" transform="rotate(10 197 65)"/>
+            <ellipse cx="232" cy="78" rx="10" ry="4" transform="rotate(20 232 78)"/>
+            <ellipse cx="262" cy="100" rx="10" ry="4" transform="rotate(30 262 100)"/>
+            <ellipse cx="60" cy="196" rx="10" ry="4" transform="rotate(30 60 196)"/>
+            <ellipse cx="90" cy="218" rx="10" ry="4" transform="rotate(20 90 218)"/>
+            <ellipse cx="125" cy="231" rx="10" ry="4" transform="rotate(10 125 231)"/>
+            <ellipse cx="197" cy="231" rx="10" ry="4" transform="rotate(-10 197 231)"/>
+            <ellipse cx="232" cy="218" rx="10" ry="4" transform="rotate(-20 232 218)"/>
+            <ellipse cx="262" cy="196" rx="10" ry="4" transform="rotate(-30 262 196)"/>
+          </g>
+        </g>
+      </svg>
+      <div class="programme-roman">Programma<span class="num">· I ·</span></div>
+    </div>
+
+    <h2 class="card-title">Inscriptiones Insulae Sacrae</h2>
+    <p class="partner">In partnership with the Soprintendenza Speciale Archeologia, Belle Arti e Paesaggio di Roma — Sede di Ostia Antica</p>
+    <div class="body-rule" aria-hidden="true"></div>
+
+    <p class="card-body">
+      Cataloguing, photogrammetric recording, and critical edition of four hundred and twelve unpublished funerary inscriptions recovered during the 1928–1939 and 1988–1994 campaigns at the necropolis of Isola Sacra, between Portus and Ostia. The corpus, presently held in the depositi at Via dei Romagnoli, contains stelae, columellae, and tabulae of freedmen, navicularii, and members of the collegia of the Tiber mouth. The Foundation underwrites the appointment of two full-time epigraphers, the digitisation of squeezes preserved at the Istituto di Epigrafia, and the publication of the resulting volumes in the series <em>Tituli Portuenses Inediti</em>, to appear with the Quasar press of Rome.
+    </p>
+
+    <dl class="dossier">
+      <div>
+        <dt>Sumptus</dt>
+        <dd>€ 486,000<span class="small">disbursed in four annuities</span></dd>
+      </div>
+      <div>
+        <dt>Spatium</dt>
+        <dd>IV anni<span class="small">2024 — 2028</span></dd>
+      </div>
+      <div>
+        <dt>Conservator</dt>
+        <dd>Dott.ssa L. Marcacci<span class="small">Lead epigrapher, Università di Pisa</span></dd>
+      </div>
+    </dl>
+
+    <div class="cta-rule" aria-hidden="true"></div>
+    <a class="cta" href="page-5.html">Read the Field Notebook</a>
+    <p class="card-footnote">Field season opens IV Idus Martias · Spring 2025</p>
+  </article>
+
+  <!-- ===== PROGRAMME II ===== -->
+  <article class="card">
+    <div class="key-border" aria-hidden="true">
+      <div class="side top"></div>
+      <div class="side bottom"></div>
+      <div class="side left"></div>
+      <div class="side right"></div>
+    </div>
+    <div class="laurel-plate" aria-hidden="true">
+      <div class="plate-bg"></div>
+      <svg class="wreath" viewBox="0 0 323 296" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+        <g fill="none" stroke="#c9a23a" stroke-width="1.6">
+          <ellipse cx="161" cy="148" rx="150" ry="100"/>
+          <path d="M30 148 q40 -50 80 -60 M293 148 q-40 -50 -80 -60 M30 148 q40 50 80 60 M293 148 q-40 50 -80 60"/>
+          <g fill="#c9a23a" opacity="0.7">
+            <ellipse cx="60" cy="100" rx="10" ry="4" transform="rotate(-30 60 100)"/>
+            <ellipse cx="90" cy="78" rx="10" ry="4" transform="rotate(-20 90 78)"/>
+            <ellipse cx="125" cy="65" rx="10" ry="4" transform="rotate(-10 125 65)"/>
+            <ellipse cx="161" cy="60" rx="10" ry="4"/>
+            <ellipse cx="197" cy="65" rx="10" ry="4" transform="rotate(10 197 65)"/>
+            <ellipse cx="232" cy="78" rx="10" ry="4" transform="rotate(20 232 78)"/>
+            <ellipse cx="262" cy="100" rx="10" ry="4" transform="rotate(30 262 100)"/>
+            <ellipse cx="60" cy="196" rx="10" ry="4" transform="rotate(30 60 196)"/>
+            <ellipse cx="90" cy="218" rx="10" ry="4" transform="rotate(20 90 218)"/>
+            <ellipse cx="125" cy="231" rx="10" ry="4" transform="rotate(10 125 231)"/>
+            <ellipse cx="197" cy="231" rx="10" ry="4" transform="rotate(-10 197 231)"/>
+            <ellipse cx="232" cy="218" rx="10" ry="4" transform="rotate(-20 232 218)"/>
+            <ellipse cx="262" cy="196" rx="10" ry="4" transform="rotate(-30 262 196)"/>
+          </g>
+        </g>
+      </svg>
+      <div class="programme-roman">Programma<span class="num">· II ·</span></div>
+    </div>
+
+    <h2 class="card-title">Arcus Aquae Claudiae</h2>
+    <p class="partner">Structural survey of the Aqua Claudia arcade at chilometro 14,2 of the Via Latina, between the localities of Capannelle and Roma Vecchia</p>
+    <div class="body-rule" aria-hidden="true"></div>
+
+    <p class="card-body">
+      Across a stretch of nine hundred and forty metres, sixty-three piers of the Claudian arcade — completed under the emperor in 52 of the Christian era and restored in part by Vespasian and Titus — present advancing micro-fissuration of the tufo and lime mortar core. The Foundation funds a photogrammetric and laser-scan campaign at sub-millimetre resolution, supplemented by ground-penetrating radar of the foundation pads, with the object of producing a structural atlas usable by the comune di Roma for any future stabilisation. No physical intervention upon the fabric is undertaken: this is a programme of measurement, drawing, and counsel only. Findings will be deposited with the Parco Archeologico dell'Appia Antica.
+    </p>
+
+    <dl class="dossier">
+      <div>
+        <dt>Sumptus</dt>
+        <dd>€ 312,500<span class="small">survey &amp; atlas only</span></dd>
+      </div>
+      <div>
+        <dt>Spatium</dt>
+        <dd>II anni<span class="small">2024 — 2026</span></dd>
+      </div>
+      <div>
+        <dt>Conservator</dt>
+        <dd>Ing. M. Vespignani<span class="small">Hydraulic engineer, ICR Roma</span></dd>
+      </div>
+    </dl>
+
+    <div class="cta-rule" aria-hidden="true"></div>
+    <a class="cta" href="page-5.html">Consult the Survey Atlas</a>
+    <p class="card-footnote">Pier no. XXIV under instrumentation since Kalendas Septembres MMXXIV</p>
+  </article>
+
+  <!-- ===== PROGRAMME III ===== -->
+  <article class="card">
+    <div class="key-border" aria-hidden="true">
+      <div class="side top"></div>
+      <div class="side bottom"></div>
+      <div class="side left"></div>
+      <div class="side right"></div>
+    </div>
+    <div class="laurel-plate" aria-hidden="true">
+      <div class="plate-bg"></div>
+      <svg class="wreath" viewBox="0 0 323 296" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+        <g fill="none" stroke="#c9a23a" stroke-width="1.6">
+          <ellipse cx="161" cy="148" rx="150" ry="100"/>
+          <path d="M30 148 q40 -50 80 -60 M293 148 q-40 -50 -80 -60 M30 148 q40 50 80 60 M293 148 q-40 50 -80 60"/>
+          <g fill="#c9a23a" opacity="0.7">
+            <ellipse cx="60" cy="100" rx="10" ry="4" transform="rotate(-30 60 100)"/>
+            <ellipse cx="90" cy="78" rx="10" ry="4" transform="rotate(-20 90 78)"/>
+            <ellipse cx="125" cy="65" rx="10" ry="4" transform="rotate(-10 125 65)"/>
+            <ellipse cx="161" cy="60" rx="10" ry="4"/>
+            <ellipse cx="197" cy="65" rx="10" ry="4" transform="rotate(10 197 65)"/>
+            <ellipse cx="232" cy="78" rx="10" ry="4" transform="rotate(20 232 78)"/>
+            <ellipse cx="262" cy="100" rx="10" ry="4" transform="rotate(30 262 100)"/>
+            <ellipse cx="60" cy="196" rx="10" ry="4" transform="rotate(30 60 196)"/>
+            <ellipse cx="90" cy="218" rx="10" ry="4" transform="rotate(20 90 218)"/>
+            <ellipse cx="125" cy="231" rx="10" ry="4" transform="rotate(10 125 231)"/>
+            <ellipse cx="197" cy="231" rx="10" ry="4" transform="rotate(-10 197 231)"/>
+            <ellipse cx="232" cy="218" rx="10" ry="4" transform="rotate(-20 232 218)"/>
+            <ellipse cx="262" cy="196" rx="10" ry="4" transform="rotate(-30 262 196)"/>
+          </g>
+        </g>
+      </svg>
+      <div class="programme-roman">Programma<span class="num">· III ·</span></div>
+    </div>
+
+    <h2 class="card-title">Triclinium Neptuni</h2>
+    <p class="partner">In-situ consolidation of the polychrome mosaic of the Triclinium of Neptune — Insula V, Herculaneum, under licence of the Parco Archeologico di Ercolano</p>
+    <div class="body-rule" aria-hidden="true"></div>
+
+    <p class="card-body">
+      The pavement, depicting Neptune charioted by hippocampi amid a frieze of marine thiasos, was uncovered in the 1932 campaign and has since lost approximately seventeen per cent of its tessellated surface to thermal cycling and saline efflorescence drawn from the buried tuff substrate. The Foundation's grant covers the construction of a microclimatic shelter of weathering steel and lime-rendered timber, the lifting and re-bedding of nine displaced panels onto a vapour-permeable lime-pozzolana matrix, and a five-year monitoring covenant. No tessera shall be replaced; only those already separated from the bed shall be re-set, and all interventions shall remain reversible per the Carta del Restauro of 1972.
+    </p>
+
+    <dl class="dossier">
+      <div>
+        <dt>Sumptus</dt>
+        <dd>€ 728,000<span class="small">incl. monitoring to 2030</span></dd>
+      </div>
+      <div>
+        <dt>Spatium</dt>
+        <dd>V anni<span class="small">2025 — 2030</span></dd>
+      </div>
+      <div>
+        <dt>Conservator</dt>
+        <dd>Dott. P. Castaldi<span class="small">Master mosaicist, Spoleto</span></dd>
+      </div>
+    </dl>
+
+    <div class="cta-rule" aria-hidden="true"></div>
+    <a class="cta" href="page-5.html">Examine the Restoration Dossier</a>
+    <p class="card-footnote">Shelter raised III Kalendas Iunias MMXXV · public viewings by appointment</p>
+  </article>
+
+</main>
+
+<!-- meander divider -->
+<div class="meander-divider" aria-hidden="true">
+  <svg viewBox="1000 364 16511 4447" xmlns="http://www.w3.org/2000/svg">
+    <g fill="currentColor">
+      <path d="M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z"/>
+      <path d="M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z"/>
+      <path d="M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z"/>
+      <path d="M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z"/>
+      <path d="M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z"/>
+    </g>
+  </svg>
+</div>
+
+<!-- ============ COLOPHON ============ -->
+<aside class="colophon">
+  <h3>· Concerning the Selection of Works ·</h3>
+  <p>
+    The Council convenes twice per annum, on the Ides of March and the Ides of October, to deliberate upon submitted dossiers. Preference is given to projects with explicit superintendency partnership, peer-reviewable methodology, and an obligation of open publication. Direct correspondence with the Secretary may be opened by writing to the office in Rome; see <a href="page-6.html">Scribe Nobis</a>.
+  </p>
+</aside>
+
+<!-- ============ FOOTER ============ -->
+<footer class="frieze-foot">
+  <div class="meander-strip top" aria-hidden="true"></div>
+
+  <div class="foot-center">
+    <div class="addr addr-left">
+      Officium Romanum<br>
+      Via dei Coronari, LXXII<br>
+      00186 Roma · Italia
+    </div>
+    <svg class="seal" viewBox="0 0 118 118" xmlns="http://www.w3.org/2000/svg" aria-label="Seal of the Foundation">
+      <g fill="none" stroke="currentColor" stroke-width="1.4">
+        <circle cx="59" cy="59" r="54"/>
+        <circle cx="59" cy="59" r="46"/>
+        <g fill="currentColor" opacity="0.85">
+          <ellipse cx="59" cy="14" rx="3.2" ry="6"/>
+          <ellipse cx="32" cy="22" rx="3" ry="5.5" transform="rotate(-30 32 22)"/>
+          <ellipse cx="14" cy="44" rx="3" ry="5.5" transform="rotate(-60 14 44)"/>
+          <ellipse cx="14" cy="74" rx="3" ry="5.5" transform="rotate(-120 14 74)"/>
+          <ellipse cx="32" cy="96" rx="3" ry="5.5" transform="rotate(-150 32 96)"/>
+          <ellipse cx="59" cy="104" rx="3.2" ry="6"/>
+          <ellipse cx="86" cy="96" rx="3" ry="5.5" transform="rotate(150 86 96)"/>
+          <ellipse cx="104" cy="74" rx="3" ry="5.5" transform="rotate(120 104 74)"/>
+          <ellipse cx="104" cy="44" rx="3" ry="5.5" transform="rotate(60 104 44)"/>
+          <ellipse cx="86" cy="22" rx="3" ry="5.5" transform="rotate(30 86 22)"/>
+        </g>
+        <text x="59" y="55" text-anchor="middle" font-family="Cinzel, serif" font-size="11" letter-spacing="2" fill="currentColor" stroke="none">F · A</text>
+        <text x="59" y="72" text-anchor="middle" font-family="Cinzel, serif" font-size="7" letter-spacing="1.5" fill="currentColor" stroke="none">CHARTA</text>
+        <text x="59" y="84" text-anchor="middle" font-family="Cinzel, serif" font-size="7" letter-spacing="1.5" fill="currentColor" stroke="none">MCMXCVII</text>
+      </g>
+    </svg>
+    <div class="addr addr-right">
+      Charta data<br>
+      A · D · MCMXCVII<br>
+      sub auspiciis Senatus
+    </div>
+  </div>
+
+  <div class="foot-cols">
+    <section>
+      <h4>Patroni</h4>
+      <ul>
+        <li><a href="page-4.html">Album Benefactorum</a></li>
+        <li><a href="page-4.html">Annual Bequests</a></li>
+        <li><a href="page-2.html">On the Purpose</a></li>
+      </ul>
+    </section>
+    <section>
+      <h4>Contactus</h4>
+      <ul>
+        <li><a href="page-6.html">Office &amp; Hours</a></li>
+        <li><a href="page-6.html">Correspondence</a></li>
+        <li><a href="page-5.html">Reports &amp; Acta</a></li>
+      </ul>
+    </section>
+    <section>
+      <h4>Notitiae Legales</h4>
+      <ul>
+        <li>C.F. 97-446-880-589</li>
+        <li>Reg. Pers. Giur. n. 312</li>
+        <li>© MMXXIV F·A·</li>
+      </ul>
+    </section>
+  </div>
+
+  <div class="meander-strip bottom" aria-hidden="true"></div>
+</footer>
+
+</body>
+</html>

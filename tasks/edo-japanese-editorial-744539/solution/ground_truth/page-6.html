@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Subscriptions & Editorial Office — Ukiyo Gazette</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), serif;
+    margin: 0;
+    line-height: 1.8;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Background pattern - low opacity asanoha */
+  .bg-pattern {
+    position: fixed;
+    inset: 0;
+    background-image: url("svg/asanoha-hempleaf.svg");
+    background-size: 380px;
+    opacity: 0.05;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 80px;
+  }
+
+  /* ====== Navigation ====== */
+  nav.masthead {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    padding: 28px 0 22px;
+    gap: 28px;
+    border-bottom: 1px solid var(--ornament);
+  }
+  nav.masthead .seal {
+    width: 36px;
+    height: 36px;
+    display: block;
+  }
+  nav.masthead .seal svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  nav.masthead .wordmark {
+    font-family: var(--font-display), serif;
+    font-size: 0.95rem;
+    letter-spacing: 0.18em;
+    color: var(--text);
+  }
+  nav.masthead ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0;
+    font-family: var(--font-body), serif;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+  }
+  nav.masthead li {
+    padding: 0 18px;
+    border-right: 1px solid rgba(12,12,12,0.35);
+  }
+  nav.masthead li:last-child { border-right: none; padding-right: 0; }
+  nav.masthead li:first-child { }
+  nav.masthead a {
+    color: var(--text);
+    text-decoration: none;
+    padding-bottom: 3px;
+  }
+  nav.masthead a[aria-current="page"] {
+    border-bottom: 1.5px solid var(--secondary);
+    color: var(--text);
+  }
+
+  /* ====== Hero / Page head ====== */
+  .pagehead {
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    padding: 90px 0 70px;
+    gap: 60px;
+    align-items: end;
+  }
+  .pagehead .kicker {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    color: var(--text);
+    margin: 0 0 18px;
+    opacity: 0.75;
+  }
+  .pagehead h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 4.4rem;
+    line-height: 1.05;
+    margin: 0;
+    color: var(--text);
+    letter-spacing: 0.01em;
+  }
+  .pagehead h1 .jp {
+    display: block;
+    font-size: 2.3rem;
+    margin-top: 18px;
+    color: var(--text);
+    opacity: 0.85;
+  }
+  .pagehead .stamp {
+    text-align: right;
+    font-family: var(--font-body), serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    line-height: 2;
+  }
+  .pagehead .stamp .ann {
+    color: var(--secondary);
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0.04em;
+    font-size: 0.95rem;
+    display: block;
+    margin-top: 10px;
+  }
+
+  /* ====== Section divider ====== */
+  .divider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 0 50px;
+  }
+  .divider svg {
+    width: 80px;
+    height: 80px;
+    opacity: 0.55;
+  }
+
+  /* ====== Card grid ====== */
+  .grid {
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    gap: 56px;
+    margin-bottom: 80px;
+  }
+
+  .card {
+    background: var(--surface);
+    padding: 3rem 3rem 3.2rem;
+    position: relative;
+  }
+  .card .kamon {
+    position: absolute;
+    top: 22px;
+    right: 22px;
+    width: 32px;
+    height: 32px;
+    opacity: 0.85;
+  }
+  .card .kamon svg { width:100%; height:100%; display:block; }
+  .card h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 2.1rem;
+    line-height: 1.15;
+    margin: 0 0 6px;
+    max-width: 16ch;
+  }
+  .card .subtitle {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 0.92rem;
+    margin: 0 0 26px;
+    color: var(--text);
+    opacity: 0.78;
+  }
+  .card p, .card li {
+    max-width: 60ch;
+    font-size: 0.98rem;
+  }
+  .card p { margin: 0 0 1.1em; }
+  .card .em {
+    color: var(--text-emphasis);
+    font-style: italic;
+  }
+
+  /* ====== Subscription terms / price block ====== */
+  .terms-card { padding: 3.2rem 3.2rem 3.5rem; }
+  .terms-card .price {
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+    margin: 18px 0 30px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid rgba(12,12,12,0.18);
+  }
+  .terms-card .price .mon {
+    font-family: var(--font-display), serif;
+    font-size: 2.6rem;
+    color: var(--secondary);
+    line-height: 1;
+  }
+  .terms-card .price .yen {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 1rem;
+    opacity: 0.8;
+  }
+  .terms-card dl {
+    margin: 0;
+    display: grid;
+    grid-template-columns: 11ch 1fr;
+    row-gap: 14px;
+    column-gap: 24px;
+    max-width: 58ch;
+  }
+  .terms-card dt {
+    font-family: var(--font-body), serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding-top: 4px;
+    opacity: 0.7;
+  }
+  .terms-card dd {
+    margin: 0;
+    font-size: 0.97rem;
+  }
+
+  /* ====== Office hours card ====== */
+  .hours-card {
+    padding: 3rem 2.6rem 3rem;
+  }
+  .hours-card .address {
+    font-family: var(--font-display), serif;
+    font-size: 1.15rem;
+    line-height: 1.5;
+    margin: 12px 0 28px;
+  }
+  .hours-card .address small {
+    display: block;
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 0.88rem;
+    opacity: 0.78;
+    margin-top: 4px;
+    letter-spacing: 0.01em;
+  }
+  .hours-card .hours-row {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dotted rgba(12,12,12,0.3);
+    padding: 8px 0;
+    font-size: 0.92rem;
+  }
+  .hours-card .hours-row span:first-child {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+  }
+  .hours-card .hours-row span:last-child {
+    letter-spacing: 0.05em;
+  }
+  .hours-card .closed { opacity: 0.5; }
+
+  /* ====== Submissions full-width card ====== */
+  .submissions {
+    background: var(--surface);
+    padding: 3.2rem 3.5rem 3.5rem;
+    position: relative;
+    margin-bottom: 80px;
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    gap: 70px;
+  }
+  .submissions .kamon {
+    position: absolute;
+    top: 22px;
+    right: 22px;
+    width: 32px;
+    height: 32px;
+    opacity: 0.85;
+  }
+  .submissions .kamon svg { width:100%; height:100%; display:block; }
+  .submissions h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 2.4rem;
+    margin: 0 0 28px;
+    line-height: 1.1;
+    max-width: 14ch;
+  }
+  .submissions p {
+    max-width: 58ch;
+    margin: 0 0 1.1em;
+    font-size: 0.98rem;
+  }
+  .submissions ol {
+    list-style: none;
+    counter-reset: step;
+    padding: 0;
+    margin: 24px 0 0;
+  }
+  .submissions ol li {
+    counter-increment: step;
+    padding: 14px 0 14px 48px;
+    border-top: 1px solid rgba(12,12,12,0.18);
+    position: relative;
+    font-size: 0.93rem;
+    max-width: 52ch;
+  }
+  .submissions ol li:last-child { border-bottom: 1px solid rgba(12,12,12,0.18); }
+  .submissions ol li::before {
+    content: counter(step, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 14px;
+    font-family: var(--font-display), serif;
+    color: var(--secondary);
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+  }
+
+  /* ====== Signature block ====== */
+  .signature {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 40px;
+    align-items: center;
+    margin: 80px 0 100px;
+    padding: 30px 0 30px;
+    border-top: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+  }
+  .signature .crane {
+    width: 96px;
+    height: 96px;
+  }
+  .signature .crane svg { width:100%; height:100%; display:block; }
+  .signature .text {
+    font-family: var(--font-body), serif;
+  }
+  .signature .text .name {
+    font-family: var(--font-display), serif;
+    font-size: 1.6rem;
+    margin: 0;
+    line-height: 1.2;
+  }
+  .signature .text .role {
+    font-style: italic;
+    font-size: 0.92rem;
+    opacity: 0.8;
+    margin: 4px 0 8px;
+  }
+  .signature .text .seal-line {
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--secondary);
+  }
+
+  /* ====== Footer ====== */
+  footer {
+    background: var(--bg);
+    border-top: 1px solid var(--ornament);
+    margin-top: 0;
+    padding: 60px 0 50px;
+    position: relative;
+    z-index: 1;
+  }
+  footer .inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+  }
+  footer .crane-seal {
+    width: 56px;
+    height: 56px;
+    margin-bottom: 18px;
+  }
+  footer .crane-seal svg { width:100%; height:100%; display:block; }
+  footer .colophon {
+    font-family: var(--font-body), serif;
+    font-size: 0.86rem;
+    line-height: 1.85;
+    max-width: 40ch;
+  }
+  footer .colophon .gz {
+    font-family: var(--font-display), serif;
+    font-size: 1.05rem;
+    display: block;
+    margin-bottom: 4px;
+  }
+  footer .right {
+    text-align: right;
+    font-family: var(--font-body), serif;
+    font-size: 0.82rem;
+    line-height: 1.85;
+  }
+  footer .right .issue {
+    font-family: var(--font-display), serif;
+    font-size: 1rem;
+    color: var(--secondary);
+    margin-bottom: 8px;
+    letter-spacing: 0.05em;
+  }
+  footer .right .attr {
+    font-style: italic;
+    margin-top: 22px;
+    opacity: 0.65;
+    font-size: 0.74rem;
+    letter-spacing: 0.02em;
+  }
+
+  /* small inline plum */
+  .inline-plum {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    vertical-align: -2px;
+    margin: 0 4px;
+  }
+  .inline-plum svg { width:100%; height:100%; display:block; }
+</style>
+</head>
+<body>
+<div class="bg-pattern" aria-hidden="true"></div>
+
+<div class="page">
+
+  <!-- ======= NAVIGATION ======= -->
+  <nav class="masthead" aria-label="Primary">
+    <span class="seal" aria-hidden="true">
+      <!-- umebachi plum mon, inverted to sumi on kraft -->
+      <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#0c0c0c" d="M226 612c-18-2-37-9-52-21-6-4-16-14-20-20-22-28-28-64-16-97 3-10 9-21 15-29 4-6 14-17 20-21 28-21 64-27 97-16 16 5 30 14 42 26 12 12 19 24 24 40 10 30 7 61-9 88-8 13-22 27-35 35-20 12-43 17-66 15zm214 0c-18-2-37-9-52-21-6-4-16-14-20-20-22-28-28-64-16-97 3-10 9-21 15-29 4-6 14-17 20-21 28-21 64-27 97-16 16 5 30 14 42 26 12 12 19 24 24 40 10 30 7 61-9 88-8 13-22 27-35 35-20 12-43 17-66 15zM333 446c-6-5-11-9-11-9 0-1 2-7 4-14 2-7 4-13 4-14 0-1 0-1 1-1 5 1 13 2 18 1 3 0 6-1 6-1 1 0 2 3 5 14 2 7 4 14 4 14 0 1-18 14-22 17-1 0-6-3-13-7zm-19-13c-8-8-16-14-26-19l-7-3 4-3c2-2 8-6 12-9 5-4 8-6 8-5 1 3 13 12 19 14 1 0 2 1 2 1 0 1-2 7-4 15-2 7-4 14-4 14 0 0-2-2-4-4zm51-10c-3-8-5-14-5-15 0-1 7-3 12-6 6-3 13-9 15-12l1-2 12 9 12 9-6 3c-9 5-16 10-23 17l-7 6-11-9z"/>
+      </svg>
+    </span>
+    <span class="wordmark">浮世瓦版 · Ukiyo Gazette</span>
+    <ul>
+      <li><a href="page-1.html">Front Page</a></li>
+      <li><a href="page-2.html">Hokusai</a></li>
+      <li><a href="page-3.html">Kisokaidō</a></li>
+      <li><a href="page-4.html">Nishijin</a></li>
+      <li><a href="page-5.html">Wagara</a></li>
+      <li><a href="page-6.html" aria-current="page">Subscribe</a></li>
+    </ul>
+  </nav>
+
+  <!-- ======= PAGE HEAD ======= -->
+  <header class="pagehead">
+    <div>
+      <p class="kicker">Bunsei 6 · Reissued Reiwa 6 — Quarterly</p>
+      <h1>Subscriptions &amp;<br>the Editorial Office<span class="jp">購読・編輯所のご案内</span></h1>
+    </div>
+    <div class="stamp">
+      Notices to Readers &nbsp;·&nbsp; No. Ⅵ
+      <span class="ann">— terms, hours, and submissions —</span>
+    </div>
+  </header>
+
+  <!-- divider -->
+  <div class="divider" aria-hidden="true">
+    <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+      <g fill="none" stroke="#0c0c0c" stroke-width="2">
+        <polygon points="501.6,301.2 551.1,251.7 500.8,201.4 451.3,250.9 300.9,100.5 350.4,51 300.1,0.7 250.6,50.2 201.1,0.7 150.3,51.5 500.3,401.5 551.1,350.7"/>
+        <polygon points="349.9,452.9 300.4,502.4 250.1,452.1 299.6,402.6 149.2,252.2 99.7,301.7 49.4,251.4 98.9,201.9 49.4,152.4 100.2,101.6 450.2,451.6 399.4,502.4"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- ======= GRID: TERMS + HOURS ======= -->
+  <section class="grid">
+    <article class="card terms-card">
+      <span class="kamon" aria-hidden="true">
+        <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="344" cy="344" r="320" fill="none" stroke="#0c0c0c" stroke-width="14"/>
+          <circle cx="344" cy="160" r="80" fill="#0c0c0c"/>
+          <circle cx="180" cy="290" r="80" fill="#0c0c0c"/>
+          <circle cx="508" cy="290" r="80" fill="#0c0c0c"/>
+          <circle cx="240" cy="490" r="80" fill="#0c0c0c"/>
+          <circle cx="448" cy="490" r="80" fill="#0c0c0c"/>
+        </svg>
+      </span>
+      <h2>Annual Subscription</h2>
+      <p class="subtitle">Four issues, posted by the third day of each season.</p>
+
+      <div class="price">
+        <span class="mon">2,400 mon</span>
+        <span class="yen">— or ¥4,800 in modern coin</span>
+      </div>
+
+      <dl>
+        <dt>Issues</dt><dd>Spring (立春), Summer (立夏), Autumn (立秋), Winter (立冬). Dispatched within three days of each season's commencement.</dd>
+        <dt>Within</dt><dd>The Three Capitals (Kyōto, Edo, Ōsaka): postage included. Posted by the second day where the rider permits.</dd>
+        <dt>Beyond</dt><dd>Provinces along the Tōkaidō and Nakasendō: add 240 mon for the road. Hokkaidō and Kyūshū: add 480 mon.</dd>
+        <dt>Payment</dt><dd>By postal coin, bank draft on Kyōto, or by arrangement with the office during open hours.</dd>
+        <dt>Renewal</dt><dd>Renewed at the winter solstice. A reminder sheet, sealed with the crane mark, is sent in the eleventh month.</dd>
+        <dt>Lapsed</dt><dd>Back issues from Bunsei 6 onward are held in the print room and may be requested at 800 mon each, while supply lasts.</dd>
+      </dl>
+    </article>
+
+    <article class="card hours-card">
+      <span class="kamon" aria-hidden="true">
+        <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="344" cy="344" r="320" fill="none" stroke="#0c0c0c" stroke-width="14"/>
+          <path d="M344 110 L420 280 L600 300 L460 420 L500 600 L344 510 L188 600 L228 420 L88 300 L268 280 Z" fill="#0c0c0c"/>
+        </svg>
+      </span>
+      <h2>Editorial Office</h2>
+      <p class="subtitle">Open Tuesday through Saturday.</p>
+
+      <p class="address">
+        二条通柳馬場東入<br>
+        中京区, 京都
+        <small>Nijō-dōri, Yanaginobanba higashi-iru,<br>Nakagyō-ku, Kyōto-shi 604-0000</small>
+      </p>
+
+      <div class="hours-row"><span>Tuesday — 火</span><span>Hour of the Snake → Monkey</span></div>
+      <div class="hours-row"><span>Wednesday — 水</span><span>Hour of the Snake → Monkey</span></div>
+      <div class="hours-row"><span>Thursday — 木</span><span>Hour of the Snake → Monkey</span></div>
+      <div class="hours-row"><span>Friday — 金</span><span>Hour of the Snake → Monkey</span></div>
+      <div class="hours-row"><span>Saturday — 土</span><span>Hour of the Snake → Horse</span></div>
+      <div class="hours-row closed"><span>Sunday — 日</span><span>closed</span></div>
+      <div class="hours-row closed"><span>Monday — 月</span><span>closed</span></div>
+
+      <p style="margin-top:24px; font-size:0.86rem; opacity:0.75; font-style:italic;">
+        The Hour of the Snake (巳の刻) falls roughly at modern ten o'clock; the Hour of the Monkey (申の刻) at four. Visitors are asked to enter through the side gate where the noren bears the plum mark.
+      </p>
+    </article>
+  </section>
+
+  <!-- ======= SUBMISSIONS ======= -->
+  <section class="submissions">
+    <span class="kamon" aria-hidden="true">
+      <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="344" cy="344" r="320" fill="none" stroke="#0c0c0c" stroke-width="14"/>
+        <path d="M344 130 C 250 220, 250 320, 344 400 C 438 320, 438 220, 344 130 Z" fill="#0c0c0c"/>
+        <path d="M344 280 C 280 360, 280 460, 344 540 C 408 460, 408 360, 344 280 Z" fill="#0c0c0c"/>
+      </svg>
+    </span>
+    <div>
+      <h2>On Submitting Essays</h2>
+      <p>
+        The <em>Gazette</em> reads submissions <span class="em">between issues</span>, in the slack weeks following each printing. We welcome essays on Edo-period print culture, textile and dye, the traveling roads, and the small material disciplines of machiya life — provided they are written with a particular eye and a willingness to be edited.
+      </p>
+      <p>
+        Manuscripts may be delivered in person at the office, or posted to the address opposite. The editor, <span class="em">Andō Rinpei</span><span class="inline-plum" aria-hidden="true"><svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg"><circle cx="344" cy="240" r="120" fill="#e34234"/><circle cx="200" cy="380" r="120" fill="#e34234"/><circle cx="488" cy="380" r="120" fill="#e34234"/><circle cx="260" cy="540" r="120" fill="#e34234"/><circle cx="428" cy="540" r="120" fill="#e34234"/></svg></span>reads through the season and replies, in his own hand, before the next issue closes.
+      </p>
+    </div>
+    <div>
+      <ol>
+        <li>One essay only, 1,800 — 4,800 characters, on a single subject, treated patiently.</li>
+        <li>Brushed or printed copy. Footnotes welcomed; bibliographies preferred over assertions.</li>
+        <li>Include a cover sheet with name, place of residence, and a sentence on why the subject was chosen.</li>
+        <li>Reading takes between thirty and sixty days. A reply is sent regardless of decision.</li>
+        <li>Accepted pieces are paid at the rate of one tan of fine paper, or 1,200 mon per thousand characters.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ======= SIGNATURE ======= -->
+  <section class="signature">
+    <span class="crane" aria-hidden="true">
+      <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="344" cy="344" r="318" fill="none" stroke="#0c0c0c" stroke-width="6"/>
+        <path d="M344 90 C 240 140, 200 220, 220 310 C 180 280, 140 290, 120 320 C 150 320, 175 340, 190 370 C 150 380, 130 410, 130 440 C 170 420, 210 430, 240 460 C 220 490, 230 530, 270 560 C 280 520, 310 500, 344 500 C 378 500, 408 520, 418 560 C 458 530, 468 490, 448 460 C 478 430, 518 420, 558 440 C 558 410, 538 380, 498 370 C 513 340, 538 320, 568 320 C 548 290, 508 280, 468 310 C 488 220, 448 140, 344 90 Z M 344 280 C 360 280, 372 268, 372 252 C 372 236, 360 224, 344 224 C 328 224, 316 236, 316 252 C 316 268, 328 280, 344 280 Z" fill="#0c0c0c"/>
+      </svg>
+    </span>
+    <div class="text">
+      <p class="name">Andō Rinpei — 安藤 林平</p>
+      <p class="role">Editor, Ukiyo Gazette · Reading-room above the print shop, Yanaginobanba</p>
+      <p class="seal-line">— sealed by the crane, fourth month, Reiwa 6 —</p>
+    </div>
+  </section>
+
+</div>
+
+<!-- ======= FOOTER ======= -->
+<footer>
+  <div class="inner">
+    <div>
+      <span class="crane-seal" aria-hidden="true">
+        <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="344" cy="344" r="318" fill="none" stroke="#0c0c0c" stroke-width="6"/>
+          <path d="M344 90 C 240 140, 200 220, 220 310 C 180 280, 140 290, 120 320 C 150 320, 175 340, 190 370 C 150 380, 130 410, 130 440 C 170 420, 210 430, 240 460 C 220 490, 230 530, 270 560 C 280 520, 310 500, 344 500 C 378 500, 408 520, 418 560 C 458 530, 468 490, 448 460 C 478 430, 518 420, 558 440 C 558 410, 538 380, 498 370 C 513 340, 538 320, 568 320 C 548 290, 508 280, 468 310 C 488 220, 448 140, 344 90 Z M 344 280 C 360 280, 372 268, 372 252 C 372 236, 360 224, 344 224 C 328 224, 316 236, 316 252 C 316 268, 328 280, 344 280 Z" fill="#0c0c0c"/>
+        </svg>
+      </span>
+      <p class="colophon">
+        <span class="gz">『浮世瓦版』 — Ukiyo Gazette</span>
+        Established Bunsei 6 (1823); reissued Reiwa 6 (2024). A quarterly editorial broadsheet on woodblock prints, machiya life, and the traveling roads of late-Edo Japan. Printed in Kyōto on washi from Kurotani.
+      </p>
+    </div>
+    <div class="right">
+      <p class="issue">Issue Ⅵ · Spring 2024</p>
+      <p>
+        Editorial office:<br>
+        二条通柳馬場東入, 中京区, 京都<br>
+        Nakagyō-ku, Kyōto-shi
+      </p>
+      <p class="attr">
+        Kamon SVG sources: umebachi, tsuru-no-maru, asanoha, sayagata, seigaiha — Wikimedia Commons, CC-BY-SA. All typography set in Yuji Syuku &amp; Shippori Mincho.
+      </p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

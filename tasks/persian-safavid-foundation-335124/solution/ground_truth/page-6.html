@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Visit & Contact — Isfahan Office</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), serif;
+    font-size: 16px;
+    line-height: 1.65;
+  }
+
+  /* ---------- Header strip ---------- */
+  .top-strip {
+    background: var(--primary);
+    height: 14px;
+    border-bottom: 1px solid var(--accent);
+  }
+
+  .brand-band {
+    background: var(--bg);
+    text-align: center;
+    padding: 28px 20px 14px;
+    border-bottom: 1px solid var(--accent);
+  }
+  .brand-band .eyebrow {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    color: var(--secondary);
+    font-size: 0.9rem;
+    letter-spacing: 0.18em;
+    margin: 0 0 6px;
+  }
+  .brand-band h1 {
+    font-family: var(--font-display), serif;
+    font-size: 2.2rem;
+    margin: 0;
+    letter-spacing: 0.08em;
+    color: var(--primary);
+    font-variant: small-caps;
+  }
+  .brand-band .sub {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    color: var(--text);
+    margin-top: 4px;
+    font-size: 0.95rem;
+  }
+
+  /* ---------- Navigation ---------- */
+  nav.main {
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+    background: var(--bg);
+    padding: 14px 0;
+  }
+  nav.main ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  nav.main li {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  nav.main a {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    color: var(--primary);
+    text-decoration: none;
+    padding: 4px 10px;
+    font-size: 0.9rem;
+  }
+  nav.main a[aria-current="page"] {
+    border-bottom: 2px solid var(--secondary);
+  }
+  nav.main .palmette {
+    color: var(--accent);
+    font-size: 0.7rem;
+    line-height: 1;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    background: var(--primary);
+    color: var(--bg);
+    padding: 70px 40px 90px;
+    text-align: center;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 12px;
+    border: 1px solid var(--accent);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 18px;
+    border: 1px solid rgba(201,162,58,0.4);
+    pointer-events: none;
+  }
+  .hero .arch-wrap {
+    position: relative;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .hero .arch-wrap svg.arch {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 360px;
+    height: auto;
+    opacity: 0.55;
+  }
+  .hero .arch-wrap svg.arch path {
+    stroke: var(--accent);
+  }
+  .hero h2 {
+    font-family: var(--font-display), serif;
+    font-size: 3rem;
+    color: var(--bg);
+    margin: 80px 0 14px;
+    font-variant: small-caps;
+    letter-spacing: 0.06em;
+    position: relative;
+  }
+  .hero p.lede {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    color: var(--accent);
+    font-size: 1.15rem;
+    margin: 0;
+    position: relative;
+  }
+  .hero .meta {
+    margin-top: 26px;
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.22em;
+    font-size: 0.85rem;
+    color: var(--bg);
+    position: relative;
+  }
+  .hero .meta span { margin: 0 18px; }
+  .hero .meta i { color: var(--accent); font-style: normal; }
+
+  /* ---------- Divider filet ---------- */
+  .filet {
+    display: flex;
+    justify-content: center;
+    padding: 28px 20px 10px;
+  }
+  .filet svg { width: 360px; height: auto; }
+  .filet svg path { fill: var(--accent); }
+
+  /* ---------- Main content ---------- */
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 40px 40px;
+  }
+
+  .section-title {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.16em;
+    color: var(--primary);
+    font-size: 1.6rem;
+    margin: 30px 0 6px;
+  }
+  .section-sub {
+    text-align: center;
+    font-style: italic;
+    color: var(--secondary);
+    margin: 0 0 30px;
+  }
+
+  /* ---------- Cards row ---------- */
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 28px;
+    margin-top: 20px;
+  }
+  .card {
+    position: relative;
+    padding: 70px 30px 50px;
+    background:
+      linear-gradient(var(--bg), var(--bg));
+    border: 1px solid var(--accent);
+    text-align: center;
+  }
+  .card::before {
+    /* pointed-arch ogee outline drawn with clip + cobalt border via pseudo */
+    content: "";
+    position: absolute;
+    top: 14px; left: 14px; right: 14px; bottom: 14px;
+    border: 2px solid var(--primary);
+    clip-path: path("M 0 100% L 0 50% Q 0 0, 50% 0 Q 100% 0, 100% 50% L 100% 100% Z");
+    pointer-events: none;
+  }
+  .card .spandrel-l, .card .spandrel-r {
+    position: absolute;
+    top: 14px;
+    width: 60px;
+    height: 60px;
+    opacity: 0.12;
+    overflow: hidden;
+  }
+  .card .spandrel-l { left: 14px; }
+  .card .spandrel-r { right: 14px; }
+  .card .spandrel-l svg, .card .spandrel-r svg { width: 200px; height: 200px; }
+  .card h3 {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.12em;
+    color: var(--primary);
+    margin: 0 0 14px;
+    font-size: 1.25rem;
+  }
+  .card .body {
+    font-size: 0.98rem;
+    color: var(--text);
+  }
+  .card .seal {
+    position: absolute;
+    bottom: 22px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 26px;
+    height: 26px;
+  }
+  .card .seal svg { width: 100%; height: 100%; }
+  .card .seal svg path { fill: var(--secondary) !important; stroke: var(--secondary) !important; }
+  .card .seal svg rect { fill: none; }
+
+  /* ---------- Hours table ---------- */
+  .hours-block {
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    padding: 40px 50px;
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+    position: relative;
+  }
+  .hours-block::before, .hours-block::after {
+    content: "✦";
+    position: absolute;
+    color: var(--accent);
+    font-size: 1rem;
+    top: -10px;
+    background: var(--bg);
+    padding: 0 12px;
+  }
+  .hours-block::before { left: 50%; transform: translateX(-50%); }
+  .hours-block::after { display: none; }
+
+  .hours-block h3 {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.14em;
+    color: var(--primary);
+    margin: 0 0 14px;
+    font-size: 1.2rem;
+    text-align: center;
+  }
+  .hours-block table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .hours-block td {
+    padding: 8px 0;
+    border-bottom: 1px dotted rgba(30,58,95,0.25);
+    font-size: 0.98rem;
+  }
+  .hours-block td:first-child {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.1em;
+    color: var(--primary);
+  }
+  .hours-block td:last-child {
+    text-align: right;
+    font-style: italic;
+  }
+  .hours-block .closed { color: var(--text-emphasis); }
+
+  .appt-note {
+    text-align: center;
+    font-style: italic;
+    color: var(--text-emphasis);
+    margin-top: 16px;
+    font-size: 0.95rem;
+  }
+
+  /* ---------- Map + addresses ---------- */
+  .map-section {
+    margin-top: 60px;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 50px;
+    align-items: start;
+  }
+  .map-frame {
+    background: var(--bg);
+    border: 1px solid var(--accent);
+    padding: 18px;
+    position: relative;
+  }
+  .map-frame::after {
+    content: "";
+    position: absolute;
+    inset: 8px;
+    border: 1px solid rgba(30,58,95,0.3);
+    pointer-events: none;
+  }
+  .map-caption {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    color: var(--primary);
+    font-size: 0.85rem;
+    margin-top: 14px;
+  }
+
+  .axial-map {
+    width: 100%;
+    height: 380px;
+    display: block;
+  }
+
+  .addresses h3 {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.14em;
+    color: var(--primary);
+    font-size: 1.15rem;
+    margin: 0 0 8px;
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 6px;
+  }
+  .addresses .office {
+    margin-bottom: 28px;
+  }
+  .addresses .office address {
+    font-style: normal;
+    line-height: 1.7;
+  }
+  .addresses .office .label {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.12em;
+    color: var(--secondary);
+    font-size: 0.85rem;
+    display: inline-block;
+    width: 80px;
+  }
+  .addresses .emphasis { color: var(--text-emphasis); }
+
+  /* ---------- Practical notes ---------- */
+  .practical {
+    margin-top: 60px;
+    padding: 40px;
+    background: rgba(42,138,138,0.06);
+    border-top: 2px solid var(--accent);
+    border-bottom: 2px solid var(--accent);
+    text-align: center;
+  }
+  .practical h3 {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.16em;
+    color: var(--primary);
+    margin: 0 0 20px;
+  }
+  .practical .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    text-align: left;
+  }
+  .practical .grid h4 {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.1em;
+    color: var(--primary);
+    margin: 0 0 6px;
+    font-size: 0.95rem;
+  }
+  .practical .grid p {
+    margin: 0;
+    font-size: 0.93rem;
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    margin-top: 60px;
+    background: var(--primary);
+    color: var(--bg);
+    position: relative;
+    padding: 50px 40px 30px;
+  }
+  footer .top-filet {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    display: flex;
+    justify-content: center;
+    transform: translateY(-50%);
+  }
+  footer .top-filet svg { width: 480px; height: auto; }
+  footer .top-filet svg path { fill: var(--bg); }
+
+  footer .cols {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    text-align: center;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  footer h4 {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    margin: 0 0 12px;
+    font-size: 0.95rem;
+  }
+  footer p, footer address {
+    font-style: normal;
+    color: var(--bg);
+    line-height: 1.7;
+    font-size: 0.92rem;
+    margin: 0;
+  }
+  footer .footseal {
+    width: 50px;
+    height: 50px;
+    margin: 36px auto 10px;
+  }
+  footer .footseal svg path { fill: var(--accent) !important; stroke: var(--accent) !important; }
+  footer .footseal svg rect { fill: none; }
+  footer .copyright {
+    text-align: center;
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    color: var(--bg);
+    font-size: 0.85rem;
+    border-top: 1px solid rgba(201,162,58,0.3);
+    padding-top: 16px;
+    margin-top: 14px;
+  }
+</style>
+</head>
+<body>
+
+<div class="top-strip"></div>
+
+<div class="brand-band">
+  <p class="eyebrow">EST. 1998 · ISFAHAN</p>
+  <h1>The Bagh-e Fin Foundation</h1>
+  <p class="sub">for the Conservation of Persian Arts</p>
+</div>
+
+<nav class="main" aria-label="Primary">
+  <ul>
+    <li><a href="page-1.html">Home</a><span class="palmette">❖</span></li>
+    <li><a href="page-2.html">Mission &amp; History</a><span class="palmette">❖</span></li>
+    <li><a href="page-3.html">Conservation Projects</a><span class="palmette">❖</span></li>
+    <li><a href="page-4.html">The Collection</a><span class="palmette">❖</span></li>
+    <li><a href="page-5.html">Grants &amp; Fellowships</a><span class="palmette">❖</span></li>
+    <li><a href="page-6.html" aria-current="page">Visit &amp; Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="arch-wrap">
+    <svg class="arch" viewBox="140 240 510 560" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <g transform="translate(8.199085,-11.874106)" fill="none" stroke-width="3.125" stroke-linecap="round">
+        <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+        <path d="m 250,430.58 24.75248,58.41585"/>
+        <path d="m 347.0297,342.46119 41.58416,23.76238 0.9901,35.64356"/>
+        <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+        <g transform="matrix(-1,0,0,1,777.88071,-0.2972181)">
+          <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+          <path d="m 250,430.58 24.75248,58.41585"/>
+          <path d="m 347.0297,342.46119 41.58416,23.76238 0.9901,35.64356"/>
+          <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+        </g>
+      </g>
+    </svg>
+    <h2>Visit &amp; Contact</h2>
+    <p class="lede">The Reading Room at 14 Khaqani Street — receiving guests by appointment</p>
+    <p class="meta">
+      <span>Jolfa Quarter <i>·</i> Isfahan</span>
+      <span><i>·</i></span>
+      <span>+98 31 3622 4118</span>
+    </p>
+  </div>
+</section>
+
+<div class="filet" aria-hidden="true">
+  <svg viewBox="0 0 437.999 18.893" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,9.445c0,0,37.005-0.063,73.998-0.829c18.495-0.386,36.989-0.949,50.831-1.785c6.919-0.414,12.677-0.906,16.663-1.46c1.99-0.28,3.539-0.582,4.535-0.878c0.502-0.146,0.844-0.297,1.049-0.405c0.157-0.107,0.238-0.162,0.238-0.162l0.42-0.287l0.656,0.656l-0.369,0.338c0,0-0.154,0.142-0.456,0.324c-0.291,0.154-0.714,0.331-1.256,0.484c-1.085,0.314-2.667,0.608-4.686,0.879c-4.037,0.533-9.811,0.985-16.745,1.354c-13.868,0.744-32.369,1.183-50.87,1.443C37.003,9.632,0,9.445,0,9.445z"/>
+    <path d="M437.999,9.445c0,0-37.004,0.187-74.007-0.329c-18.501-0.261-37.002-0.699-50.869-1.443c-6.935-0.368-12.708-0.82-16.745-1.354c-2.019-0.271-3.601-0.565-4.687-0.879c-0.541-0.153-0.965-0.33-1.256-0.484c-0.302-0.183-0.456-0.324-0.456-0.324l-0.369-0.338l0.656-0.656l0.42,0.287c0,0,0.081,0.055,0.238,0.162c0.204,0.108,0.546,0.26,1.048,0.405c0.996,0.296,2.545,0.598,4.535,0.878c3.986,0.554,9.744,1.046,16.663,1.46C327.011,7.667,345.506,8.23,364,8.616C400.994,9.382,437.999,9.445,437.999,9.445z"/>
+    <circle cx="219" cy="9.4" r="4" fill="currentColor" style="fill:var(--accent)"/>
+  </svg>
+</div>
+
+<main>
+
+  <h2 class="section-title">Plan Your Visit</h2>
+  <p class="section-sub">Three short notes for those who would call upon the reading room</p>
+
+  <div class="cards">
+
+    <article class="card">
+      <span class="spandrel-l" aria-hidden="true">
+        <svg viewBox="0 0 200 200"><circle cx="0" cy="200" r="180" fill="none" stroke="var(--primary)" stroke-width="0.5"/><circle cx="0" cy="200" r="140" fill="none" stroke="var(--primary)" stroke-width="0.5"/><circle cx="0" cy="200" r="100" fill="none" stroke="var(--primary)" stroke-width="0.5"/><circle cx="0" cy="200" r="60" fill="none" stroke="var(--primary)" stroke-width="0.5"/></svg>
+      </span>
+      <span class="spandrel-r" aria-hidden="true">
+        <svg viewBox="0 0 200 200"><circle cx="200" cy="200" r="180" fill="none" stroke="var(--primary)" stroke-width="0.5"/><circle cx="200" cy="200" r="140" fill="none" stroke="var(--primary)" stroke-width="0.5"/><circle cx="200" cy="200" r="100" fill="none" stroke="var(--primary)" stroke-width="0.5"/><circle cx="200" cy="200" r="60" fill="none" stroke="var(--primary)" stroke-width="0.5"/></svg>
+      </span>
+      <h3>By Appointment</h3>
+      <div class="body">
+        Readers, scholars, and conservation colleagues are received in the reading room only after written request. Please write at least fourteen days in advance, naming the manuscripts, tile fragments, or archival folders you wish to consult.
+      </div>
+      <span class="seal" aria-hidden="true">
+        <svg viewBox="0 0 1500 1500"><path d="M 750 100 L 900 600 L 1400 750 L 900 900 L 750 1400 L 600 900 L 100 750 L 600 600 Z"/></svg>
+      </span>
+    </article>
+
+    <article class="card">
+      <span class="spandrel-l" aria-hidden="true">
+        <svg viewBox="0 0 200 200"><circle cx="0" cy="200" r="180" fill="none" stroke="var(--primary)" stroke-width="0.5"/><circle cx="0" cy="200" r="140" fill="none" stroke="var(--primary)" stroke-width="0.5"/><circle cx="0" cy="200" r="100" fill="none" stroke="var(--primary)" stroke-width="0.5"/><circle cx="0" cy="200" r="60" fill="none" stroke="var(--primary)" stroke-width="0.5"/></svg>
+      </span>
+      <span class="spandrel-r" aria-hidden="true">
+        <svg viewBox="0 0 200 200"><circle cx="200" cy="200" r="180" fill="none" stroke="var(--primary)" stroke-width="0.5"/><circle cx="200" cy="200" r="140" fill="none" stroke="var(--primary)" stroke-width="0.5"/><circle cx="200" cy="200" r="100" fill="none" stroke="var(--primary)" stroke-width="0.5"/><circle cx="200" cy="200" r="60" fill="none" stroke="var(--primary)" stroke-width="0.5"/></svg>
+      </span>
+      <h3>How to Arrive</h3>
+      <div class="body">
+        The reading room sits two minutes' walk south-east of the Si-o-se-pol bridge, behind the small courtyard at the head of Khaqani Street. Look for the cobalt-tiled lintel and the brass plate marked simply <em>Bagh-e Fin</em>.
+      </div>
+      <span class="seal" aria-hidden="true">
+        <svg viewBox="0 0 1500 1500"><path d="M 750 100 L 900 600 L 1400 750 L 900 900 L 750 1400 L 600 900 L 100 750 L 600 600 Z"/></svg>
+      </span>
+    </article>
+
+    <article class="card">
+      <span class="spandrel-l" aria-hidden="true">
+        <svg viewBox="0 0 200 200"><circle cx="0" cy="200" r="180" fill="none" stroke="var(--primary)" stroke-width="0.5"/><circle cx="0" cy="200" r="140" fill="none" stroke="var(--primary)" stroke-width="0.5"/><circle cx="0" cy="200" r="100" fill="none" stroke="var(--primary)" stroke-width="0.5"/><circle cx="0" cy="200" r="60" fill="none" stroke="var(--primary)" stroke-width="0.5"/></svg>
+      </span>
+      <span class="spandrel-r" aria-hidden="true">
+        <svg viewBox="0 0 200 200"><circle cx="200" cy="200" r="180" fill="none" stroke="var(--primary)" stroke-width="0.5"/><circle cx="200" cy="200" r="140" fill="none" stroke="var(--primary)" stroke-width="0.5"/><circle cx="200" cy="200" r="100" fill="none" stroke="var(--primary)" stroke-width="0.5"/><circle cx="200" cy="200" r="60" fill="none" stroke="var(--primary)" stroke-width="0.5"/></svg>
+      </span>
+      <h3>In the Reading Room</h3>
+      <div class="body">
+        Pencils only; soft cotton gloves are provided for tile and manuscript handling. Photography is permitted without flash. The garden tea-room beyond the iwan is open to readers between sittings, with cardamom tea served at eleven and three.
+      </div>
+      <span class="seal" aria-hidden="true">
+        <svg viewBox="0 0 1500 1500"><path d="M 750 100 L 900 600 L 1400 750 L 900 900 L 750 1400 L 600 900 L 100 750 L 600 600 Z"/></svg>
+      </span>
+    </article>
+
+  </div>
+
+  <div class="hours-block" aria-labelledby="hours-h">
+    <div>
+      <h3 id="hours-h">Reading Room Hours</h3>
+      <table>
+        <tr><td>Sunday</td><td>10:00 — 16:30</td></tr>
+        <tr><td>Monday</td><td>10:00 — 16:30</td></tr>
+        <tr><td>Tuesday</td><td>10:00 — 16:30</td></tr>
+        <tr><td>Wednesday</td><td>10:00 — 16:30</td></tr>
+        <tr><td>Thursday</td><td>10:00 — 16:30</td></tr>
+        <tr><td>Friday</td><td class="closed">Closed</td></tr>
+        <tr><td>Saturday</td><td class="closed">Closed</td></tr>
+      </table>
+      <p class="appt-note">All visits by written appointment only.</p>
+    </div>
+    <div>
+      <h3>Seasonal Closures</h3>
+      <table>
+        <tr><td>Nowruz</td><td>20 March — 2 April</td></tr>
+        <tr><td>Tasua &amp; Ashura</td><td>observed annually</td></tr>
+        <tr><td>Summer recess</td><td>1 — 21 Mordad</td></tr>
+        <tr><td>Yalda</td><td>21 December</td></tr>
+        <tr><td>Conservators' retreat</td><td>last week of Aban</td></tr>
+        <tr><td>Tile-firing weeks</td><td>twice yearly, by notice</td></tr>
+      </table>
+      <p class="appt-note">A printed calendar is sent to fellows in Farvardin.</p>
+    </div>
+  </div>
+
+  <section class="map-section">
+
+    <div>
+      <div class="map-frame">
+        <svg class="axial-map" viewBox="0 0 600 380" xmlns="http://www.w3.org/2000/svg" aria-label="Axial sketch of the Foundation in relation to Si-o-se-pol bridge">
+          <!-- background -->
+          <rect width="600" height="380" fill="var(--bg)"/>
+
+          <!-- Zayandeh river -->
+          <path d="M 0 90 Q 150 70 300 95 Q 450 120 600 100 L 600 145 Q 450 165 300 140 Q 150 115 0 135 Z"
+                fill="var(--secondary)" opacity="0.25" stroke="var(--secondary)" stroke-width="0.8"/>
+          <text x="40" y="118" font-family="EB Garamond" font-style="italic" font-size="11" fill="var(--secondary)">Zayandeh-rud</text>
+
+          <!-- Si-o-se-pol bridge -->
+          <g stroke="var(--text-emphasis)" stroke-width="1.2" fill="none">
+            <line x1="245" y1="80" x2="245" y2="155"/>
+            <line x1="345" y1="80" x2="345" y2="155"/>
+            <!-- arches -->
+            <path d="M 248 100 Q 256 92 264 100 M 268 100 Q 276 92 284 100 M 288 100 Q 296 92 304 100 M 308 100 Q 316 92 324 100 M 328 100 Q 336 92 344 100"/>
+            <path d="M 248 130 Q 256 122 264 130 M 268 130 Q 276 122 284 130 M 288 130 Q 296 122 304 130 M 308 130 Q 316 122 324 130 M 328 130 Q 336 122 344 130"/>
+          </g>
+          <text x="248" y="74" font-family="Marcellus" font-size="10" fill="var(--primary)" letter-spacing="1.5">SI-O-SE-POL</text>
+
+          <!-- Central axis -->
+          <line x1="300" y1="155" x2="300" y2="340" stroke="var(--accent)" stroke-width="0.6" stroke-dasharray="3 4"/>
+
+          <!-- Khaqani Street -->
+          <path d="M 100 200 L 500 200" stroke="var(--text)" stroke-width="0.8" fill="none"/>
+          <path d="M 100 215 L 500 215" stroke="var(--text)" stroke-width="0.8" fill="none"/>
+          <text x="430" y="195" font-family="EB Garamond" font-style="italic" font-size="10" fill="var(--text)">Khaqani St.</text>
+
+          <!-- side lanes -->
+          <path d="M 200 200 L 200 340" stroke="var(--text)" stroke-width="0.5" fill="none"/>
+          <path d="M 400 200 L 400 340" stroke="var(--text)" stroke-width="0.5" fill="none"/>
+          <path d="M 100 280 L 500 280" stroke="var(--text)" stroke-width="0.5" fill="none" stroke-dasharray="2 3"/>
+
+          <!-- Foundation building (centered) -->
+          <rect x="270" y="240" width="60" height="60" fill="var(--bg)" stroke="var(--primary)" stroke-width="1.5"/>
+          <!-- pointed-arch entry -->
+          <path d="M 290 300 L 290 280 Q 290 270 300 270 Q 310 270 310 280 L 310 300 Z"
+                fill="var(--primary)"/>
+          <!-- garden courtyard behind -->
+          <rect x="270" y="305" width="60" height="35" fill="none" stroke="var(--secondary)" stroke-width="0.8" stroke-dasharray="2 2"/>
+          <line x1="300" y1="305" x2="300" y2="340" stroke="var(--secondary)" stroke-width="0.4"/>
+          <line x1="270" y1="322" x2="330" y2="322" stroke="var(--secondary)" stroke-width="0.4"/>
+          <circle cx="300" cy="322" r="3" fill="none" stroke="var(--secondary)" stroke-width="0.5"/>
+
+          <!-- Building label -->
+          <text x="300" y="232" font-family="Marcellus" font-size="9" fill="var(--primary)" text-anchor="middle" letter-spacing="1.2">№ 14 — THE FOUNDATION</text>
+
+          <!-- compass rose -->
+          <g transform="translate(540,310)">
+            <circle r="22" fill="none" stroke="var(--accent)" stroke-width="0.6"/>
+            <path d="M 0 -20 L 4 0 L 0 20 L -4 0 Z" fill="var(--accent)"/>
+            <text y="-26" text-anchor="middle" font-family="Marcellus" font-size="9" fill="var(--primary)">N</text>
+          </g>
+
+          <!-- distance marker -->
+          <line x1="300" y1="160" x2="300" y2="200" stroke="var(--text-emphasis)" stroke-width="0.5" stroke-dasharray="1 2"/>
+          <text x="305" y="183" font-family="EB Garamond" font-style="italic" font-size="9" fill="var(--text-emphasis)">≈ 180 m</text>
+
+          <!-- Decorative corner palmettes -->
+          <g fill="var(--accent)" opacity="0.7">
+            <circle cx="20" cy="20" r="2"/>
+            <circle cx="580" cy="20" r="2"/>
+            <circle cx="20" cy="360" r="2"/>
+            <circle cx="580" cy="360" r="2"/>
+          </g>
+        </svg>
+      </div>
+      <p class="map-caption">Axial Sketch · Si-o-se-pol &amp; the Reading Room</p>
+    </div>
+
+    <div class="addresses">
+
+      <div class="office">
+        <h3>Isfahan Office &amp; Reading Room</h3>
+        <address>
+          <span class="label">Postal —</span> The Bagh-e Fin Foundation<br>
+          <span class="label"></span> 14 Khaqani Street, Jolfa Quarter<br>
+          <span class="label"></span> Isfahan 81737, Islamic Republic of Iran<br>
+          <span class="label">Telephone —</span> <span class="emphasis">+98 31 3622 4118</span><br>
+          <span class="label">Facsimile —</span> +98 31 3622 4119<br>
+          <span class="label">Reader —</span> reader@baghefin-foundation.ir<br>
+          <span class="label">Director —</span> office@baghefin-foundation.ir
+        </address>
+      </div>
+
+      <div class="office">
+        <h3>London Liaison Office</h3>
+        <address>
+          <span class="label">Postal —</span> The Bagh-e Fin Foundation<br>
+          <span class="label"></span> c/o Hartshorn Chambers<br>
+          <span class="label"></span> 27 Devonshire Mews, Marylebone<br>
+          <span class="label"></span> London W1G 6BP, United Kingdom<br>
+          <span class="label">Telephone —</span> +44 20 7486 3902<br>
+          <span class="label">Liaison —</span> london@baghefin-foundation.ir
+        </address>
+      </div>
+
+      <div class="office">
+        <h3>Press &amp; Loan Inquiries</h3>
+        <address>
+          For exhibition loans, image rights to the tile fragments held at Ardabil, and press, please write to <em>Mme. Shirin Mortazavi-Khanjani, Registrar</em>, at <span class="emphasis">registrar@baghefin-foundation.ir</span>. Replies are issued within ten working days.
+        </address>
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="practical">
+    <h3>Practical Notes for Visitors</h3>
+    <div class="grid">
+      <div>
+        <h4>Nearest Stop</h4>
+        <p>Si-o-se-pol metro station, Line 1, exit B. From the bridge, walk south-east along the embankment for two minutes.</p>
+      </div>
+      <div>
+        <h4>Wheelchair Access</h4>
+        <p>The ground-floor reading room and tea-room are level. The upper tile study is reached only by stair; please notify us in advance and we will bring folios down.</p>
+      </div>
+      <div>
+        <h4>Languages</h4>
+        <p>Reading-room staff converse in Persian, English, and French. German correspondence is answered through the London office.</p>
+      </div>
+      <div>
+        <h4>Donations &amp; Endowments</h4>
+        <p>Gifts to the conservation programme may be directed to the Trustees through Coutts &amp; Co., London. Receipts are issued by the Registrar.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="top-filet" aria-hidden="true">
+    <svg viewBox="0 0 437.999 18.893" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,9.445c0,0,37.005-0.063,73.998-0.829c18.495-0.386,36.989-0.949,50.831-1.785c6.919-0.414,12.677-0.906,16.663-1.46c1.99-0.28,3.539-0.582,4.535-0.878c0.502-0.146,0.844-0.297,1.049-0.405c0.157-0.107,0.238-0.162,0.238-0.162l0.42-0.287l0.656,0.656l-0.369,0.338c0,0-0.154,0.142-0.456,0.324c-0.291,0.154-0.714,0.331-1.256,0.484c-1.085,0.314-2.667,0.608-4.686,0.879c-4.037,0.533-9.811,0.985-16.745,1.354c-13.868,0.744-32.369,1.183-50.87,1.443C37.003,9.632,0,9.445,0,9.445z"/>
+      <path d="M437.999,9.445c0,0-37.004,0.187-74.007-0.329c-18.501-0.261-37.002-0.699-50.869-1.443c-6.935-0.368-12.708-0.82-16.745-1.354c-2.019-0.271-3.601-0.565-4.687-0.879c-0.541-0.153-0.965-0.33-1.256-0.484c-0.302-0.183-0.456-0.324-0.456-0.324l-0.369-0.338l0.656-0.656l0.42,0.287c0,0,0.081,0.055,0.238,0.162c0.204,0.108,0.546,0.26,1.048,0.405c0.996,0.296,2.545,0.598,4.535,0.878c3.986,0.554,9.744,1.046,16.663,1.46C327.011,7.667,345.506,8.23,364,8.616C400.994,9.382,437.999,9.445,437.999,9.445z"/>
+    </svg>
+  </div>
+
+  <div class="cols">
+    <div>
+      <h4>Foundation Address</h4>
+      <address>
+        14 Khaqani Street<br>
+        Jolfa Quarter, Isfahan 81737<br>
+        Islamic Republic of Iran<br>
+        +98 31 3622 4118
+      </address>
+    </div>
+    <div>
+      <h4>The Trustees</h4>
+      <p>
+        Dr. Parviz Tanavoli-Ardakani, Chair<br>
+        Mme. Leila Sadr-Khorasani<br>
+        Prof. Sussan Babaie<br>
+        Dr. Mehdi Aghdashloo, FSA<br>
+        Sir Charles Pemberton-Yates, KCMG
+      </p>
+    </div>
+    <div>
+      <h4>Endowment Notice</h4>
+      <p>
+        The Foundation is sustained by the Bagh-e Fin Endowment, established 1998 in Isfahan, and by gifts from the Hartshorn Trust of London. Audited accounts are deposited annually with the Iranian Cultural Heritage Organisation and the Charity Commission for England and Wales.
+      </p>
+    </div>
+  </div>
+
+  <div class="footseal" aria-hidden="true">
+    <svg viewBox="0 0 1500 1500"><path d="M 750 80 L 870 580 L 1420 700 L 980 850 L 1100 1380 L 750 1080 L 400 1380 L 520 850 L 80 700 L 630 580 Z"/></svg>
+  </div>
+
+  <p class="copyright"><em>© MMXXIV The Bagh-e Fin Foundation for Persian Arts · all rights reserved · Isfahan &amp; London</em></p>
+</footer>
+
+</body>
+</html>

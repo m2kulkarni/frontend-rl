@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Watercourses & Conduits — Edo Bureau of Wards & Watercourses</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    margin: 0;
+    padding: 0;
+    line-height: 1.8;
+  }
+
+  /* ---------- NAV ---------- */
+  nav.topnav {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    padding: 28px 56px 24px 56px;
+    border-bottom: 1px solid var(--ornament);
+  }
+  nav.topnav .brand {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  nav.topnav .brand .seal {
+    width: 36px;
+    height: 36px;
+  }
+  nav.topnav .brand .name {
+    font-family: var(--font-body);
+    font-size: 14px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+  nav.topnav ul {
+    grid-column: 3;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+  nav.topnav ul li {
+    padding: 0 22px;
+    border-right: 1px solid var(--ornament);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  nav.topnav ul li:last-child { border-right: none; padding-right: 0; }
+  nav.topnav ul li:first-child { /* no extra */ }
+  nav.topnav ul li a {
+    text-decoration: none;
+    color: var(--text);
+  }
+  nav.topnav ul li a[aria-current="page"] {
+    color: var(--secondary);
+    text-decoration: underline;
+    text-decoration-color: var(--secondary);
+    text-underline-offset: 6px;
+    text-decoration-thickness: 1px;
+  }
+
+  /* ---------- HERO / OFF-AXIS TITLE ---------- */
+  .hero {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 520px;
+    overflow: hidden;
+  }
+  .hero .pattern {
+    position: absolute;
+    inset: 0;
+    background-image: url("svg/seigaiha-waves.svg");
+    background-size: 420px 420px;
+    opacity: 0.13;
+    pointer-events: none;
+  }
+  .hero .heavy {
+    position: relative;
+    grid-column: 1;
+    padding: 110px 60px 60px 96px;
+    z-index: 1;
+  }
+  .hero .heavy .kanji-stack {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 132px;
+    line-height: 0.95;
+    color: var(--primary);
+    margin: 0 0 24px 0;
+    letter-spacing: -0.01em;
+  }
+  .hero .heavy .kanji-stack .accent {
+    color: var(--secondary);
+  }
+  .hero .heavy .eyebrow {
+    font-family: var(--font-body);
+    font-size: 12px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin-bottom: 32px;
+    border-top: 1px solid var(--ornament);
+    padding-top: 18px;
+    width: 280px;
+  }
+  .hero .heavy .lede {
+    font-family: var(--font-body);
+    font-size: 17px;
+    color: var(--text);
+    max-width: 460px;
+    margin: 28px 0 0 0;
+  }
+  .hero .empty {
+    grid-column: 2;
+    /* deliberate emptiness */
+  }
+  .hero .vol-mark {
+    position: absolute;
+    right: 96px;
+    bottom: 64px;
+    text-align: right;
+    font-family: var(--font-body);
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--text);
+    z-index: 2;
+  }
+  .hero .vol-mark .num {
+    font-family: var(--font-display);
+    display: block;
+    font-size: 56px;
+    color: var(--primary);
+    line-height: 1;
+    margin-top: 10px;
+  }
+
+  /* ---------- DIVIDER ---------- */
+  .sumi-rule {
+    height: 1px;
+    background: var(--ornament);
+    margin: 0 56px;
+  }
+  .keyfret-band {
+    height: 36px;
+    background-image: url("svg/sayagata-keyfret.svg");
+    background-size: 120px 120px;
+    opacity: 0.14;
+    margin: 18px 56px;
+  }
+
+  /* ---------- ACCOUNT SECTION ---------- */
+  section.account {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    padding: 80px 96px 60px 96px;
+    gap: 72px;
+  }
+  section.account .label {
+    font-family: var(--font-body);
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    border-top: 1px solid var(--ornament);
+    padding-top: 14px;
+    color: var(--text);
+  }
+  section.account h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 44px;
+    line-height: 1.1;
+    color: var(--primary);
+    margin: 16px 0 24px 0;
+    max-width: 280px;
+  }
+  section.account .body {
+    max-width: 620px;
+  }
+  section.account .body p {
+    margin: 0 0 22px 0;
+    font-size: 16px;
+  }
+  section.account .body p .em {
+    color: var(--text-emphasis);
+    font-style: normal;
+  }
+
+  /* ---------- THREE CONDUIT CARDS ---------- */
+  .conduits {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    padding: 40px 96px 80px 96px;
+  }
+  .card {
+    background: var(--surface);
+    position: relative;
+    padding: 36px 36px 40px 36px;
+    border-top: 1px solid var(--ornament);
+  }
+  .card .mon {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 28px;
+    height: 28px;
+    opacity: 0.85;
+  }
+  .card .mon svg { width: 100%; height: 100%; display: block; }
+  .card h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 26px;
+    color: var(--primary);
+    margin: 24px 0 6px 0;
+    padding-left: 24px;
+  }
+  .card .romaji {
+    font-family: var(--font-body);
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--text);
+    padding-left: 24px;
+    margin-bottom: 24px;
+  }
+  .card p {
+    font-size: 14px;
+    margin: 0 0 14px 0;
+    padding-left: 24px;
+    padding-right: 8px;
+  }
+  .card dl {
+    margin: 18px 0 0 24px;
+    padding-top: 14px;
+    border-top: 1px solid var(--ornament);
+    font-size: 12px;
+  }
+  .card dl div {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 0;
+    letter-spacing: 0.04em;
+  }
+  .card dl dt {
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    color: var(--text);
+    opacity: 0.75;
+  }
+  .card dl dd { margin: 0; font-weight: 600; }
+
+  /* ---------- PULL QUOTE ---------- */
+  .pullquote-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 100px 96px;
+    gap: 0;
+    position: relative;
+  }
+  .pullquote-wrap .empty-side {
+    /* kraft-paper emptiness */
+  }
+  .pullquote {
+    grid-column: 1;
+    padding-right: 80px;
+    border-left: 1px solid var(--ornament);
+    padding-left: 40px;
+  }
+  .pullquote .source-tag {
+    font-family: var(--font-body);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+  .pullquote blockquote {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 38px;
+    line-height: 1.35;
+    color: var(--secondary);
+    letter-spacing: -0.005em;
+  }
+  .pullquote blockquote::before {
+    content: "「";
+    color: var(--secondary);
+    font-family: var(--font-display);
+  }
+  .pullquote blockquote::after {
+    content: "」";
+    color: var(--secondary);
+    font-family: var(--font-display);
+  }
+  .pullquote .attrib {
+    margin-top: 30px;
+    font-size: 13px;
+    line-height: 1.6;
+    max-width: 380px;
+    color: var(--text);
+  }
+  .pullquote .attrib .cite {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-top: 10px;
+    opacity: 0.75;
+  }
+
+  /* ---------- TABLE / REGISTER ---------- */
+  .register {
+    padding: 60px 96px 100px 96px;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 64px;
+  }
+  .register .heading-col h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 36px;
+    color: var(--primary);
+    margin: 16px 0 18px 0;
+    line-height: 1.15;
+  }
+  .register .heading-col .label {
+    font-family: var(--font-body);
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    border-top: 1px solid var(--ornament);
+    padding-top: 14px;
+  }
+  .register .heading-col p {
+    font-size: 13px;
+    margin-top: 18px;
+    max-width: 220px;
+  }
+  table.waterway {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  table.waterway thead th {
+    text-align: left;
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 10px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--ornament);
+    color: var(--text);
+  }
+  table.waterway tbody td {
+    padding: 18px 12px;
+    border-bottom: 1px solid rgba(12,12,12,0.18);
+    vertical-align: top;
+  }
+  table.waterway tbody tr:last-child td {
+    border-bottom: 1px solid var(--ornament);
+  }
+  table.waterway .way {
+    font-family: var(--font-display);
+    font-size: 20px;
+    color: var(--primary);
+    line-height: 1.2;
+  }
+  table.waterway .way small {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text);
+    opacity: 0.7;
+    margin-top: 4px;
+  }
+  table.waterway .era {
+    color: var(--text-emphasis);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  table.waterway .corvee {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---------- SCHEDULE NOTE ---------- */
+  .schedule-note {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    padding: 40px 96px 80px 96px;
+    align-items: start;
+    gap: 64px;
+  }
+  .schedule-note .note-mark {
+    font-family: var(--font-display);
+    font-size: 96px;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .schedule-note .note-body p {
+    font-size: 14px;
+    margin: 0 0 14px 0;
+  }
+  .schedule-note .note-body .stamp {
+    margin-top: 18px;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--text);
+    border-top: 1px solid var(--ornament);
+    padding-top: 12px;
+    display: inline-block;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    position: relative;
+    padding: 0 0 60px 0;
+    margin-top: 40px;
+  }
+  footer .wave-band {
+    height: 96px;
+    background-image: url("svg/seigaiha-waves.svg");
+    background-size: 220px 220px;
+    opacity: 0.18;
+  }
+  footer .foot-inner {
+    text-align: center;
+    padding: 60px 96px 0 96px;
+  }
+  footer .foot-seal {
+    width: 92px;
+    height: 92px;
+    margin: 0 auto 24px auto;
+  }
+  footer .foot-seal svg { width: 100%; height: 100%; }
+  footer .foot-name {
+    font-family: var(--font-display);
+    font-size: 22px;
+    color: var(--primary);
+    margin: 0 0 24px 0;
+  }
+  footer .addr {
+    font-size: 13px;
+    line-height: 1.7;
+    margin: 0 0 22px 0;
+  }
+  footer .compiled {
+    font-size: 12px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    margin-bottom: 32px;
+  }
+  footer .attrib {
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--text);
+    opacity: 0.8;
+    max-width: 620px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* small inline kiri kamon for nav */
+  .kiri-mini svg { width: 100%; height: 100%; display: block; }
+</style>
+</head>
+<body>
+
+<nav class="topnav" aria-label="Primary">
+  <div class="brand">
+    <span class="seal kiri-mini" aria-hidden="true">
+      <svg viewBox="0 0 345 326" xmlns="http://www.w3.org/2000/svg"><path fill="#1c3a5e" d="M172.6 8c-2 1.5-4 3-6 4.5-2 1.5-4 3.5-6 4-2 .5-4 1.5-5.5 3-1.5 1.5-2 3-2 5.5 0 5 1.5 7.5 8 14 7 7 7.5 8.5 8 18.5.5 8-.5 9-2 9.5-1.5.7-2.5.5-4.5-1-2-2-3-5-4.5-13-2-11-3.5-15-7-16.5-3-1.5-5 0-9 3.5-1.5 1.5-2 1.5-4 1.5-5 0-8 5-6 9.5 1 2-1 4-2 6-1 1.5 0 4 0 5.5 0 1 1 2 2 2.5 1 .5 2 .5 4.5.5 2 0 5-.5 6-1 .5-.5 4-1 7-1 6-.5 7 0 9 1 3 1.5 6.5 5 8 8 1 2 1 3 1 9 0 7-.5 9-3 9-3 .5-4.5-3-5-10-.5-3-1-5-2-7-1-2-1.5-2.5-4-3.5-4.5-2-5.5-2-11 1.5-2 1-3 1-6 1-4 .5-5 1-7 4-1.5 2.5-1.5 4 0 7.5 1.5 3 1.5 3 1 5-.5 3 0 5 2 7 2 2 5 3 9 3 2.5 0 3.5-.5 6.5-2 3-1.5 4-2 7.5-2 4 0 4.5.5 7.5 3 1 1 2 1 6.5 1 5 0 5-.5 7-2 4-3 5.5-3.5 11-3 6 .5 8 .5 10-.5 3.5-1.5 4.5-3 4.5-7.5 0-2.5 0-4 1-5.5 1.5-3 1.5-6.5 0-9-1.5-2-5.5-3.5-9-3.5-1.5 0-3-.5-5-1.5-2-1.5-3-1.5-4.5-1.5-2.5.5-5.5 2.5-7 5-1.5 2-2.5 7-2.5 12-.5 4.5-1 7-3.5 9-1 1-2 1.5-3 1.5-1.5 0-1.5-.5-2-2-.5-3-.5-15 0-17 1-2 4-5 6.5-7 1-1 3-3 4.5-5 2-3 2-3.5 2-6 0-3.5-1-5-5-7-1.5-1-3.5-2.5-4-3.5-2-3-4-4.5-6-5-3.5-1-5-.5-8.5 3.5-1 1.5-3 2.5-3.5 3z"/></svg>
+    </span>
+    <span class="name">Edo Bureau of Wards &amp; Watercourses</span>
+  </div>
+  <ul>
+    <li><a href="page-1.html">Notices</a></li>
+    <li><a href="page-2.html">Register</a></li>
+    <li><a href="page-3.html" aria-current="page">Watercourses</a></li>
+    <li><a href="page-4.html">Fire-Watch</a></li>
+    <li><a href="page-5.html">Office</a></li>
+    <li><a href="page-6.html">Origins</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="pattern" aria-hidden="true"></div>
+  <div class="heavy">
+    <div class="eyebrow">Volume the Third · Infrastructure</div>
+    <h1 class="kanji-stack">Water-<br>courses<br>&amp; <span class="accent">Conduits</span></h1>
+    <p class="lede">An account of the canals, aqueducts, and dredged rivers maintained by this Bureau on behalf of the eight-hundred-and-eight machi, with overseers, last dredgings, and the corvée labour reckoned upon each ward.</p>
+  </div>
+  <div class="empty" aria-hidden="true"></div>
+  <div class="vol-mark">
+    Compiled Kansei 10<span class="num">水之巻</span>
+  </div>
+</section>
+
+<div class="keyfret-band" aria-hidden="true"></div>
+
+<!-- ACCOUNT -->
+<section class="account">
+  <div>
+    <div class="label">Of the Two Aqueducts</div>
+    <h2>The Two Great Lines of Drinking-Water</h2>
+  </div>
+  <div class="body">
+    <p>The City of Edo, set upon reclaimed marsh and brackish bay, draws its sweet water by two great conduits brought down from the western hills at the cost of much earth and timber. The elder is the <span class="em">Kanda Aqueduct (神田上水)</span>, sourced at <span class="em">Inokashira Pond</span> in the Musashi uplands and conveyed by open ditch and covered wooden pipe through Sekiguchi, Koishikawa, and Yushima before issuing into the wells of Nihonbashi, Kanda, and the eastern Shitamachi.</p>
+    <p>The younger and longer is the <span class="em">Tamagawa Aqueduct (玉川上水)</span>, opened in Shōhō 4 by the brothers Shōuemon and Seiuemon of Hino, drawing from the Tama River at Hamura and running thirteen ri to Yotsuya Ōkido, whence wooden mains serve the western wards: Kōjimachi, Akasaka, Aoyama, Azabu, Shiba, and the lodgings of the daimyō.</p>
+    <p>Maintenance of conduit-stones, wooden joints, and intake-screens is reckoned a permanent charge upon the wards served. Each <span class="em">nanushi</span> shall furnish able men in number set forth in the table below, on the days appointed by this Bureau, or pay commutation in <span class="em">mon</span> at the standing rate of forty-eight per man per day.</p>
+  </div>
+</section>
+
+<!-- THREE CARDS -->
+<div class="conduits">
+
+  <article class="card">
+    <span class="mon" aria-hidden="true">
+      <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg"><circle cx="344" cy="344" r="338" fill="#1c3a5e"/><path fill="#f5efde" d="M226 612c-18-2-37-9-52-20-6-4-16-14-21-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-21 28-21 64-27 97-16 16 5 30 14 42 26 12 12 19 24 24 39 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 14zm214 0c-18-2-37-9-52-20-6-4-16-14-21-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-21 28-21 64-27 97-16 16 5 30 14 42 26 12 12 19 24 24 39 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 14zm-107-167c-6-4-11-8-11-9 0-1 2-7 4-14l5-13 15 0 15 0 1 3c1 8 3 16 6 20l1 2-12 8c-6 5-11 8-12 8-1 0-5-3-12-8zm60-23c-2-8-4-15-4-15 0 0 2-1 5-2 6-3 14-9 16-12l1-2 12 9 12 9-6 3c-9 5-15 10-23 17l-7 7-5-14zM160 410c-18-2-37-9-52-20-6-4-16-14-21-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-21 28-21 64-27 97-16 16 5 30 14 42 26 12 12 19 24 24 39 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 14zm346 0c-18-2-37-9-52-20-6-4-16-14-21-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-21 28-21 64-27 97-16 16 5 30 14 42 26 12 12 19 24 24 39 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 14zm-269-12c-6-4-11-8-11-9 0-1 2-7 4-14l4-13 15 0 15 0 1 3c1 8 3 16 6 20l1 2-12 9c-6 4-12 8-12 8-1 0-5-3-12-8zm100 8c-17-3-31-15-37-32-2-7-2-19 0-26 5-14 16-25 30-30 7-2 19-2 26 0 14 5 25 16 30 30 1 4 1 6 1 13 0 7 0 9-1 13-5 14-16 25-30 30-5 2-14 3-19 2zm60-9l-12-9 1-2c3-4 6-13 7-21l1-3 15 0 15 0 4 13 4 13-12 9c-7 5-12 8-13 8s-5-3-9-8z"/></svg>
+    </span>
+    <h3>Kanda Jōsui</h3>
+    <div class="romaji">神田上水 · Drinking-Water Line</div>
+    <p>The senior conduit, opened under Tokugawa Ieyasu in the closing years of the Tenshō era. Wooden mains of cypress and pine are inspected each spring at the joints in Sekiguchi.</p>
+    <dl>
+      <div><dt>Source</dt><dd>Inokashira Pond</dd></div>
+      <div><dt>Length</dt><dd>9 ri 14 chō</dd></div>
+      <div><dt>Wards Served</dt><dd>74</dd></div>
+      <div><dt>Overseer</dt><dd>Sekiguchi Hanbei</dd></div>
+    </dl>
+  </article>
+
+  <article class="card">
+    <span class="mon" aria-hidden="true">
+      <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg"><circle cx="344" cy="344" r="338" fill="#1c3a5e"/><path fill="#f5efde" d="M226 612c-18-2-37-9-52-20-6-4-16-14-21-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-21 28-21 64-27 97-16 16 5 30 14 42 26 12 12 19 24 24 39 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 14zm214 0c-18-2-37-9-52-20-6-4-16-14-21-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-21 28-21 64-27 97-16 16 5 30 14 42 26 12 12 19 24 24 39 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 14zM160 410c-18-2-37-9-52-20-6-4-16-14-21-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-21 28-21 64-27 97-16 16 5 30 14 42 26 12 12 19 24 24 39 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 14zm346 0c-18-2-37-9-52-20-6-4-16-14-21-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-21 28-21 64-27 97-16 16 5 30 14 42 26 12 12 19 24 24 39 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 14zM337 405c-17-3-31-15-37-32-2-7-2-19 0-26 5-14 16-25 30-30 7-2 19-2 26 0 14 5 25 16 30 30 1 4 1 6 1 13 0 7 0 9-1 13-5 14-16 25-30 30-5 2-14 3-19 2z"/></svg>
+    </span>
+    <h3>Tamagawa Jōsui</h3>
+    <div class="romaji">玉川上水 · Western Aqueduct</div>
+    <p>Cut by the Tamagawa brothers of Hino in Shōhō 4 at the Shōgun's command. Beginning at Hamura intake, it falls a single shaku for every chō, by the careful sighting of the level-cord.</p>
+    <dl>
+      <div><dt>Source</dt><dd>Tama River, Hamura</dd></div>
+      <div><dt>Length</dt><dd>13 ri 0 chō</dd></div>
+      <div><dt>Wards Served</dt><dd>61</dd></div>
+      <div><dt>Overseer</dt><dd>Tamagawa Seiuemon</dd></div>
+    </dl>
+  </article>
+
+  <article class="card">
+    <span class="mon" aria-hidden="true">
+      <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg"><circle cx="344" cy="344" r="338" fill="#1c3a5e"/><path fill="#f5efde" d="M226 612c-18-2-37-9-52-20-6-4-16-14-21-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-21 28-21 64-27 97-16 16 5 30 14 42 26 12 12 19 24 24 39 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 14zm214 0c-18-2-37-9-52-20-6-4-16-14-21-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-21 28-21 64-27 97-16 16 5 30 14 42 26 12 12 19 24 24 39 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 14zM160 410c-18-2-37-9-52-20-6-4-16-14-21-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-21 28-21 64-27 97-16 16 5 30 14 42 26 12 12 19 24 24 39 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 14zm346 0c-18-2-37-9-52-20-6-4-16-14-21-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-21 28-21 64-27 97-16 16 5 30 14 42 26 12 12 19 24 24 39 10 30 7 61-9 89-8 13-22 27-35 35-20 12-43 17-65 14zM337 405c-17-3-31-15-37-32-2-7-2-19 0-26 5-14 16-25 30-30 7-2 19-2 26 0 14 5 25 16 30 30 1 4 1 6 1 13 0 7 0 9-1 13-5 14-16 25-30 30-5 2-14 3-19 2z"/></svg>
+    </span>
+    <h3>Onagigawa</h3>
+    <div class="romaji">小名木川 · Cargo Canal, East</div>
+    <p>The salt-canal cut in Tenshō 18 from the lower Sumida to Nakagawa, conveying the salt of Gyōtoku and the rice of Shimōsa to the granaries of Fukagawa. Dredged by the wards of Honjo and Fukagawa.</p>
+    <dl>
+      <div><dt>Type</dt><dd>Tide-canal</dd></div>
+      <div><dt>Length</dt><dd>1 ri 18 chō</dd></div>
+      <div><dt>Wards Served</dt><dd>23</dd></div>
+      <div><dt>Overseer</dt><dd>Honjo Magistrate</dd></div>
+    </dl>
+  </article>
+
+</div>
+
+<div class="sumi-rule"></div>
+
+<!-- PULL QUOTE -->
+<section class="pullquote-wrap">
+  <div class="pullquote">
+    <div class="source-tag">From the Dredging Ordinance · Kansei 10 (1798)</div>
+    <blockquote>
+      Where the silt rises a sun above the stake, the ward shall send men; where it rises a shaku, the ward shall send all men.
+    </blockquote>
+    <div class="attrib">
+      Promulgated by the Town Magistrate's Office in the second month of Kansei 10, posted at the gates of every machi served by the conduits and inscribed upon the dredging-stake at each ri-marker along the Onagi and Nihonbashi rivers.
+      <span class="cite">— 寛政十年戊午二月 · Bureau Archive 三-丁-四</span>
+    </div>
+  </div>
+  <div class="empty-side" aria-hidden="true"></div>
+</section>
+
+<div class="keyfret-band" aria-hidden="true"></div>
+
+<!-- TABLE -->
+<section class="register">
+  <div class="heading-col">
+    <div class="label">Schedule of Dredgings</div>
+    <h2>Waterways under the Bureau's Charge</h2>
+    <p>Last dredging dates given in the era reckoning, with the corvée obligation reckoned per ward in able men per annum.</p>
+  </div>
+  <div>
+    <table class="waterway">
+      <thead>
+        <tr>
+          <th style="width:30%">Waterway</th>
+          <th>Overseer</th>
+          <th>Last Dredged</th>
+          <th>Corvée per Ward</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="way">Kanda-gawa<small>神田川</small></td>
+          <td>Sekiguchi Hanbei</td>
+          <td class="era">Kansei 9 · 7th month, 14th day</td>
+          <td class="corvee">6 men, 4 days</td>
+        </tr>
+        <tr>
+          <td class="way">Nihonbashi-gawa<small>日本橋川</small></td>
+          <td>Nihonbashi Nanushi-gumi</td>
+          <td class="era">Kansei 10 · 3rd month, 2nd day</td>
+          <td class="corvee">8 men, 5 days</td>
+        </tr>
+        <tr>
+          <td class="way">Onagigawa<small>小名木川</small></td>
+          <td>Honjo Magistrate</td>
+          <td class="era">Kansei 9 · 11th month, 9th day</td>
+          <td class="corvee">12 men, 6 days</td>
+        </tr>
+        <tr>
+          <td class="way">Tatekawa<small>竪川</small></td>
+          <td>Fukagawa Inspectorate</td>
+          <td class="era">Kansei 8 · 10th month, 21st day</td>
+          <td class="corvee">10 men, 5 days</td>
+        </tr>
+        <tr>
+          <td class="way">Sumida-gawa Lower Reach<small>隅田川下流</small></td>
+          <td>River-Watch Bureau</td>
+          <td class="era">Kansei 10 · 2nd month, 28th day</td>
+          <td class="corvee">14 men, 7 days</td>
+        </tr>
+        <tr>
+          <td class="way">Dōsanbori<small>道三堀</small></td>
+          <td>Ōtemachi Nanushi</td>
+          <td class="era">Kansei 7 · 9th month, 3rd day</td>
+          <td class="corvee">5 men, 3 days</td>
+        </tr>
+        <tr>
+          <td class="way">Kanda Jōsui Conduit<small>神田上水樋</small></td>
+          <td>Sekiguchi Hanbei</td>
+          <td class="era">Kansei 10 · 4th month, 11th day</td>
+          <td class="corvee">4 men, 2 days</td>
+        </tr>
+        <tr>
+          <td class="way">Tamagawa Jōsui Conduit<small>玉川上水樋</small></td>
+          <td>Tamagawa Seiuemon</td>
+          <td class="era">Kansei 10 · 4th month, 19th day</td>
+          <td class="corvee">4 men, 2 days</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- SCHEDULE NOTE -->
+<section class="schedule-note">
+  <div class="note-mark" aria-hidden="true">注</div>
+  <div class="note-body">
+    <p>Wards shall present their men at the appointed dredging-stake by the hour of the Dragon, with mattock, basket, and straw sandal. The overseer shall mark the attendance in the ledger and issue the wooden tally upon completion of the day's task.</p>
+    <p>Commutation in coin is permitted only by prior petition lodged with this Bureau seven days before the appointed work, at the rate of forty-eight mon per man per day, payable in <span style="color:var(--text-emphasis);">eiraku-sen</span> or current copper.</p>
+    <span class="stamp">— Posted at the Bureau, Kansei 10 · 4th month</span>
+  </div>
+  <div aria-hidden="true"></div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wave-band" aria-hidden="true"></div>
+  <div class="foot-inner">
+    <div class="foot-seal" aria-hidden="true">
+      <svg viewBox="0 0 345 326" xmlns="http://www.w3.org/2000/svg"><g fill="#1c3a5e"><circle cx="172.6" cy="155" r="9.9"/><path d="M172.6 8c-2 1.5-4 3-6 4.5-2 1.5-4 3.5-6 4-2 .5-4 1.5-5.5 3-1.5 1.5-2 3-2 5.5 0 5 1.5 7.5 8 14 7 7 7.5 8.5 8 18.5.5 8-.5 9-2 9.5-1.5.7-2.5.5-4.5-1-2-2-3-5-4.5-13-2-11-3.5-15-7-16.5-3-1.5-5 0-9 3.5-1.5 1.5-2 1.5-4 1.5-5 0-8 5-6 9.5 1 2-1 4-2 6-1 1.5 0 4 0 5.5 0 1 1 2 2 2.5 1 .5 2 .5 4.5.5 2 0 5-.5 6-1 .5-.5 4-1 7-1 6-.5 7 0 9 1 3 1.5 6.5 5 8 8 1 2 1 3 1 9 0 7-.5 9-3 9-3 .5-4.5-3-5-10-.5-3-1-5-2-7-1-2-1.5-2.5-4-3.5-4.5-2-5.5-2-11 1.5-2 1-3 1-6 1-4 .5-5 1-7 4-1.5 2.5-1.5 4 0 7.5 1.5 3 1.5 3 1 5-.5 3 0 5 2 7 2 2 5 3 9 3 2.5 0 3.5-.5 6.5-2 3-1.5 4-2 7.5-2 4 0 4.5.5 7.5 3 1 1 2 1 6.5 1 5 0 5-.5 7-2 4-3 5.5-3.5 11-3 6 .5 8 .5 10-.5 3.5-1.5 4.5-3 4.5-7.5 0-2.5 0-4 1-5.5 1.5-3 1.5-6.5 0-9-1.5-2-5.5-3.5-9-3.5-1.5 0-3-.5-5-1.5-2-1.5-3-1.5-4.5-1.5-2.5.5-5.5 2.5-7 5-1.5 2-2.5 7-2.5 12-.5 4.5-1 7-3.5 9-1 1-2 1.5-3 1.5-1.5 0-1.5-.5-2-2-.5-3-.5-15 0-17 1-2 4-5 6.5-7 1-1 3-3 4.5-5 2-3 2-3.5 2-6 0-3.5-1-5-5-7-1.5-1-3.5-2.5-4-3.5-2-3-4-4.5-6-5-3.5-1-5-.5-8.5 3.5z"/><path d="M175 166c-.3 4-.7 8-.8 11 16.5 9 32 20 43 35 11 17 19 37 16 57-1-7-2-15-3-22-7-30-29-53-56-67zm-5 30c-22 12-34 33-37 58-1 13 0 26 1 38-9-25-5-57 12-77 6-7 11-13 14-22 4-15 5-30 4-43-3 13-3 26 6 46zm-19 40c-12 13-16 30-15 47 1 9 3 17 4 26-12-25-8-57 9-78 3-4 2-9 2-13-14 7-25 21-28 37-3 13 1 26 4 39-10-19-10-43 0-62 5-12 16-22 27-29-1-5 0-10-1-15-22 11-34 33-38 58-1 13-1 26 2 39-9-22-6-47 6-66 9-14 21-25 35-33-.2-4-.2-8-.4-11-26 14-49 38-56 67-2 7-3 15-4 22-3-20 6-40 17-57 11-15 26-26 43-35-.3-4-.6-7-.9-11C125 182 95 230 96 276c1 6 6 10 11 14 3 2 3 5 5 8 5 13 21 21 35 17 7 6 16 12 25 12 10 0 18-6 25-12 14 4 30-4 35-17 1-3 2-6 5-8 5-4 10-8 11-14 1-46-29-94-74-110z"/></g></svg>
+    </div>
+    <div class="foot-name">Edo Bureau of Wards &amp; Watercourses</div>
+    <p class="addr">
+      Kita-machi Bugyō-sho, Goyō-beya<br>
+      Within Tokiwabashi-mon, Kanda-ku<br>
+      The City of Edo, Province of Musashi
+    </p>
+    <div class="compiled">Compiled · Kansei Ten · Fourth Month, the Twenty-Second Day</div>
+    <p class="attrib">
+      Kamon SVG renderings — paulownia (kiri), plum-blossom (umebachi), seigaiha waves and sayagata key-fret — released under Creative Commons Attribution-ShareAlike (CC-BY-SA 4.0). Documentary content of this register transcribed from the Bureau's official ledgers and posted herewith for the use of the residents of the eight-hundred-and-eight machi.
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>

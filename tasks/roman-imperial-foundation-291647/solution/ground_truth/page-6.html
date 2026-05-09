@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="la">
+<head>
+<meta charset="UTF-8">
+<title>SCRIBE NOBIS — Office, Hours, and Correspondence · Fundatio Aurelia</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  /* ============== PAGE-SPECIFIC STYLES ============== */
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    text-align: center;
+    line-height: 1.65;
+  }
+  a { color: var(--text-emphasis); text-decoration: none; }
+
+  /* ---------- NAVIGATION FRIEZE ---------- */
+  .nav-frieze {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--surface);
+    border-top: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+    box-shadow: 0 1px 0 var(--ornament) inset, 0 -1px 0 var(--ornament) inset;
+    padding: 14px 0 10px;
+  }
+  .nav-frieze::before, .nav-frieze::after {
+    content: "";
+    display: block;
+    height: 2px;
+    background: var(--ornament);
+    margin: 0 4%;
+    opacity: 0.4;
+  }
+  .nav-frieze::before { margin-bottom: 8px; }
+  .nav-frieze::after  { margin-top: 8px; }
+  .nav-inner {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 28px;
+    padding: 0 40px;
+  }
+  .nav-left, .nav-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+  .nav-left { justify-content: flex-end; }
+  .nav-right { justify-content: flex-start; }
+  .nav-frieze a {
+    color: var(--text);
+    padding: 2px 4px;
+  }
+  .nav-frieze a[aria-current="page"] {
+    color: var(--primary);
+    border-bottom: 1px solid var(--primary);
+  }
+  .nav-glyph {
+    color: var(--ornament);
+    font-size: 10px;
+    line-height: 1;
+    transform: translateY(-1px);
+  }
+  .wordmark {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--primary);
+    white-space: nowrap;
+    padding: 0 12px;
+  }
+  .wordmark small {
+    display: block;
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    color: var(--accent);
+    margin-top: 2px;
+  }
+
+  /* ---------- HEADINGS ---------- */
+  h1, h2, h3 {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    font-weight: 600;
+    color: var(--primary);
+    margin: 0;
+  }
+  h1 { font-size: 34px; letter-spacing: 0.42em; }
+  h2 { font-size: 18px; letter-spacing: 0.36em; color: var(--accent); }
+  h3 { font-size: 13px; letter-spacing: 0.3em; }
+
+  /* ---------- HERO / TITLE BLOCK ---------- */
+  .hero {
+    padding: 70px 40px 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .hero .eyebrow {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.5em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .hero p.lede {
+    font-size: 17px;
+    font-style: italic;
+    max-width: 640px;
+    margin: 22px auto 0;
+    color: #3a2a1a;
+  }
+  .gold-rule {
+    width: 220px;
+    height: 1px;
+    background: var(--ornament);
+    margin: 28px auto;
+    position: relative;
+  }
+  .gold-rule::before, .gold-rule::after {
+    content: "❦";
+    position: absolute;
+    top: -12px;
+    color: var(--ornament);
+    font-size: 14px;
+  }
+  .gold-rule::before { left: -22px; }
+  .gold-rule::after  { right: -22px; }
+
+  /* ---------- MEANDER DIVIDER ---------- */
+  .meander {
+    width: 100%;
+    max-width: 880px;
+    margin: 30px auto;
+    height: 38px;
+    display: block;
+  }
+  .meander svg { width: 100%; height: 100%; display: block; }
+
+  /* ---------- CONTACT TABLET ---------- */
+  .tablet-section {
+    padding: 20px 40px 40px;
+  }
+  .tablet-wrap {
+    position: relative;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 60px 80px;
+  }
+  .tablet-wreath {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .tablet-wreath svg {
+    width: 110%;
+    height: 110%;
+    opacity: 0.85;
+  }
+  .tablet {
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--ornament);
+    box-shadow:
+      0 0 0 6px var(--surface),
+      0 0 0 7px var(--ornament),
+      0 0 0 14px var(--surface),
+      0 0 0 15px rgba(201, 162, 58, 0.4);
+    padding: 50px 50px;
+  }
+  .tablet .inscription-tag {
+    font-family: var(--font-display), serif;
+    font-size: 10px;
+    letter-spacing: 0.5em;
+    color: var(--ornament);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .tablet h2 {
+    margin-bottom: 6px;
+  }
+  .tablet .latin {
+    font-style: italic;
+    color: var(--accent);
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    margin-bottom: 28px;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 28px;
+    margin-top: 22px;
+    text-align: center;
+  }
+  .contact-item h3 {
+    color: var(--primary);
+    margin-bottom: 8px;
+  }
+  .contact-item .value {
+    font-size: 17px;
+    line-height: 1.5;
+  }
+  .contact-item .value strong {
+    font-weight: 600;
+    color: var(--text);
+  }
+  .divider-thin {
+    width: 80px;
+    height: 1px;
+    background: var(--ornament);
+    margin: 0 auto;
+  }
+
+  /* ---------- HOURS PANEL ---------- */
+  .hours-section {
+    padding: 30px 40px 20px;
+  }
+  .hours-card {
+    max-width: 760px;
+    margin: 0 auto;
+    background: var(--surface);
+    padding: 44px 60px 38px;
+    position: relative;
+    border: 1px solid rgba(169, 50, 38, 0.2);
+  }
+  .hours-card::before, .hours-card::after,
+  .hours-card > .corner-tl, .hours-card > .corner-tr,
+  .hours-card > .corner-bl, .hours-card > .corner-br { display: none; }
+
+  /* Greek-key tiled border via background */
+  .greek-frame {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 18px;
+    background:
+      repeating-linear-gradient(90deg,
+        var(--ornament) 0 2px, transparent 2px 14px) top/100% 2px no-repeat,
+      repeating-linear-gradient(90deg,
+        var(--ornament) 0 2px, transparent 2px 14px) bottom/100% 2px no-repeat,
+      repeating-linear-gradient(0deg,
+        var(--ornament) 0 2px, transparent 2px 14px) left/2px 100% no-repeat,
+      repeating-linear-gradient(0deg,
+        var(--ornament) 0 2px, transparent 2px 14px) right/2px 100% no-repeat,
+      var(--bg);
+  }
+
+  .wreath-plate {
+    position: relative;
+    display: inline-block;
+    padding: 10px 36px 6px;
+    margin-bottom: 18px;
+  }
+  .wreath-plate::before, .wreath-plate::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 22px;
+    height: 22px;
+    transform: translateY(-50%);
+    background: radial-gradient(circle at center, transparent 30%, var(--ornament) 31%, transparent 60%);
+    opacity: 0.6;
+  }
+  .wreath-plate::before { left: -2px; transform: translateY(-50%) scaleX(-1); }
+  .wreath-plate::after  { right: -2px; }
+  .wreath-plate svg.laurel-mini {
+    position: absolute;
+    inset: -6px -8px;
+    width: calc(100% + 16px);
+    height: calc(100% + 12px);
+    z-index: 0;
+    opacity: 0.7;
+  }
+  .wreath-plate h2 {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hours-table {
+    width: 100%;
+    max-width: 560px;
+    margin: 22px auto 0;
+    border-collapse: collapse;
+    font-size: 16px;
+  }
+  .hours-table td {
+    padding: 9px 12px;
+    border-bottom: 1px dotted rgba(169, 50, 38, 0.25);
+  }
+  .hours-table td:first-child {
+    text-align: right;
+    width: 45%;
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding-right: 22px;
+  }
+  .hours-table td:last-child {
+    text-align: left;
+    padding-left: 22px;
+  }
+  .hours-table tr:last-child td {
+    border-bottom: none;
+  }
+  .latin-note {
+    font-style: italic;
+    color: var(--accent);
+    font-size: 14px;
+    margin-top: 18px;
+  }
+
+  /* ---------- KALENDS PANEL ---------- */
+  .kalends-section {
+    padding: 30px 40px 40px;
+  }
+  .kalends-card {
+    max-width: 820px;
+    margin: 0 auto;
+    background: var(--surface);
+    padding: 50px 60px;
+    position: relative;
+    border: 1px solid var(--ornament);
+  }
+  .kalends-card::before {
+    content: "";
+    position: absolute;
+    top: 8px; left: 8px; right: 8px; bottom: 8px;
+    border: 1px solid rgba(201, 162, 58, 0.5);
+    pointer-events: none;
+  }
+  .kalends-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    margin-top: 26px;
+  }
+  .kalend {
+    padding: 18px 10px;
+    border-right: 1px solid rgba(201, 162, 58, 0.4);
+  }
+  .kalend:last-child { border-right: none; }
+  .kalend .roman {
+    font-family: var(--font-display), serif;
+    font-size: 26px;
+    letter-spacing: 0.18em;
+    color: var(--primary);
+  }
+  .kalend .month {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-top: 8px;
+  }
+  .kalend .gloss {
+    font-style: italic;
+    font-size: 13px;
+    color: #444;
+    margin-top: 6px;
+  }
+  .kalends-card p {
+    max-width: 580px;
+    margin: 18px auto 0;
+    font-size: 15px;
+  }
+  .kalends-card p::first-letter {
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+    font-size: 38px;
+    float: left;
+    line-height: 0.9;
+    padding: 4px 8px 0 0;
+  }
+
+  /* ---------- DIRECT CORRESPONDENTS ---------- */
+  .scribes-section {
+    padding: 20px 40px 60px;
+  }
+  .scribes {
+    max-width: 880px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+  }
+  .scribe-card {
+    background: var(--surface);
+    padding: 30px 26px;
+    position: relative;
+    border: 1px solid rgba(201, 162, 58, 0.5);
+  }
+  .scribe-card::before {
+    content: "";
+    position: absolute;
+    inset: 5px;
+    border: 1px solid rgba(201, 162, 58, 0.3);
+    pointer-events: none;
+  }
+  .scribe-card .role {
+    font-family: var(--font-display), serif;
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .scribe-card .name {
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.18em;
+    color: var(--primary);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .scribe-card .gold-mini {
+    width: 40px;
+    height: 1px;
+    background: var(--ornament);
+    margin: 12px auto;
+  }
+  .scribe-card .email {
+    font-style: italic;
+    font-size: 13px;
+    color: var(--text);
+    word-break: break-word;
+  }
+  .scribe-card .email-cap {
+    font-family: var(--font-display), serif;
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    color: var(--text-emphasis);
+    text-transform: uppercase;
+    margin-top: 10px;
+  }
+
+  /* ---------- TAILPIECE ---------- */
+  .tailpiece {
+    text-align: center;
+    padding: 30px 0 60px;
+  }
+  .tailpiece svg {
+    width: 110px;
+    height: 110px;
+    opacity: 0.85;
+  }
+  .tailpiece .label {
+    font-family: var(--font-display), serif;
+    font-size: 9px;
+    letter-spacing: 0.45em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-top: 8px;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    background: #8a2a20;
+    color: #f5e6c4;
+    margin-top: 0;
+    position: relative;
+  }
+  footer::before, footer::after {
+    content: "";
+    display: block;
+    height: 18px;
+    background:
+      linear-gradient(var(--ornament), var(--ornament)) top/100% 2px no-repeat,
+      linear-gradient(var(--ornament), var(--ornament)) bottom/100% 2px no-repeat,
+      repeating-linear-gradient(90deg,
+        var(--ornament) 0 2px, transparent 2px 6px,
+        var(--ornament) 6px 8px, transparent 8px 14px) center/100% 8px no-repeat,
+      #8a2a20;
+  }
+  .footer-seal {
+    text-align: center;
+    padding: 36px 40px 14px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .footer-seal .seal-svg {
+    width: 100px;
+    height: 100px;
+  }
+  .footer-seal .seal-svg path { fill: #f5e6c4; }
+  .footer-meta-l { text-align: right; }
+  .footer-meta-r { text-align: left; }
+  .footer-meta-l, .footer-meta-r {
+    font-family: var(--font-display), serif;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    line-height: 1.9;
+    color: #f5e6c4;
+  }
+  .footer-meta-l strong, .footer-meta-r strong {
+    color: var(--secondary);
+    font-weight: 500;
+  }
+  .footer-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 50px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 30px 40px 50px;
+    text-align: center;
+  }
+  .footer-col h4 {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.36em;
+    color: var(--secondary);
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    font-weight: 500;
+  }
+  .footer-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-family: var(--font-display), serif;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    line-height: 2.1;
+    text-transform: uppercase;
+  }
+  .footer-col a { color: #f5e6c4; }
+</style>
+</head>
+<body>
+
+<!-- ============== NAVIGATION ============== -->
+<nav class="nav-frieze" aria-label="Primary">
+  <div class="nav-inner">
+    <div class="nav-left">
+      <a href="page-1.html">Domus</a>
+      <span class="nav-glyph">❦</span>
+      <a href="page-2.html">De Proposito</a>
+      <span class="nav-glyph">❦</span>
+      <a href="page-3.html">Opera</a>
+    </div>
+    <div class="wordmark">
+      Fundatio Aurelia
+      <small>· MMXIV ·</small>
+    </div>
+    <div class="nav-right">
+      <a href="page-4.html">Benefactores</a>
+      <span class="nav-glyph">❦</span>
+      <a href="page-5.html">Acta</a>
+      <span class="nav-glyph">❦</span>
+      <a href="page-6.html" aria-current="page">Scribe Nobis</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============== HERO ============== -->
+<header class="hero">
+  <div class="eyebrow">· Tabula VI · De Correspondentia ·</div>
+  <h1>Scribe Nobis</h1>
+  <div class="gold-rule"></div>
+  <h2>Office, Hours &amp; Correspondence</h2>
+  <p class="lede">
+    The chancery of the Fundatio Aurelia receives correspondence from
+    epigraphers, hydraulic engineers, custodians of provincial museums, and
+    private patrons. Address all letters by the manner set forth below.
+  </p>
+</header>
+
+<!-- ============== MEANDER DIVIDER ============== -->
+<div class="meander" aria-hidden="true">
+  <svg viewBox="1000 364 16511 4447" preserveAspectRatio="xMidYMid">
+    <path fill="none" stroke="#c9a23a" stroke-width="80" d="M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z"/>
+    <path fill="none" stroke="#c9a23a" stroke-width="80" d="M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z"/>
+    <path fill="none" stroke="#c9a23a" stroke-width="80" d="M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z"/>
+    <path fill="none" stroke="#c9a23a" stroke-width="80" d="M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z"/>
+    <path fill="none" stroke="#c9a23a" stroke-width="80" d="M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z"/>
+  </svg>
+</div>
+
+<!-- ============== CONTACT TABLET (laurel-framed) ============== -->
+<section class="tablet-section">
+  <div class="tablet-wrap">
+    <div class="tablet-wreath" aria-hidden="true">
+      <svg viewBox="0 0 323.7496 295.78787" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+        <path fill="#c9a23a" fill-opacity="0.55" stroke="#a87f1e" stroke-width="0.94"
+          d="m 141.69922,-18.574219 c -11.04494,4.854973 -23.40097,9.4683311 -30.06445,22.6386721 -4.68287,7.1205619 -4.80387,16.3913319 -8.10547,24.1464849 6.1158,-6.501993 15.58349,-13.160155 20.97851,-20.7246099 6.01849,-9.4997444 9.07864,-18.0112601 17.19141,-26.0605471 z m 164.51172,0 c 8.11277,8.049287 11.17487,16.5608027 17.19336,26.0605471 5.39502,7.5644549 14.86076,14.2226169 20.97656,20.7246099 -3.3016,-7.755152 -3.4226,-17.025923 -8.10547,-24.1464849 -6.66348,-13.170341 -19.01951,-17.7836991 -30.06445,-22.6386721 z M 111.91016,-1.609375 c -5.62925,1.6211189 -10.63239,5.4766012 -14.578129,11.03125 -9.091887,10.794409 -10.650938,24.955987 -6.882812,42.029297 1.29642,4.515656 -0.546937,8.745577 -0.285157,12.960937 2.670395,-6.196346 5.695046,-11.891942 11.576168,-15.880859 13.11411,-8.396211 16.72071,-12.842155 20.07618,-20.757812 3.94553,-9.307642 4.67865,-10.690112 4.76562,-19.0429692 -3.8045,12.0144002 -15.28958,17.0564642 -23.05273,25.1679692 -3.989646,4.42761 -7.185187,9.557822 -9.003909,14.990234 z m 223.7207,0 c 10.93041,8.4933807 10.21837,23.754939 13.68359,36.433594 1.10484,4.688712 3.02461,9.007765 3.98047,13.814453 -1.81872,-5.432412 -5.01426,-10.562624 -9.0039,-14.990234 -7.76315,-8.111504 -19.24824,-13.153569 -23.05274,-25.1679692 0.087,8.3528572 0.82205,9.7353272 4.76758,19.0429692 3.35547,7.915658 6.96011,12.361601 20.07422,20.757812 5.88113,3.988917 8.90578,9.684513 11.57617,15.880859 0.26178,-4.21536 -1.58157,-8.445281 -0.28515,-12.960937 3.76813,-17.07331 2.20907,-31.234888 -6.88282,-42.029297 -3.94574,-5.5546488 -8.94887,-9.4101311 -14.57812,-11.03125 z M 88.582031,21.103516 c -7.621928,10.996064 -14.276223,19.314775 -13.947266,34.09375 -1.026473,18.187407 10.514507,34.765271 11.671875,51.917971 1.750611,-13.130771 10.807487,-22.406215 18.300779,-32.583987 -0.98775,4.349179 -2.13436,8.562369 -4.115232,12.345703 -8.209219,14.068624 -16.380096,30.769014 -10.720703,48.769534 -2.27427,-5.94788 -2.663387,-12.7527 -4.253906,-19.08984 -3.80147,-16.94213 -15.388766,-31.041843 -12.027752,-50.572265 -1.773943,4.23768 -2.492139,9.020425 -3.431640,13.640625 -1.983204,11.940394 -3.039316,19.305723 -0.126953,30.27344 3.53927,13.75705 18.448306,28.93333 24.466796,41.53125 -0.876637,-6.83476 -1.323965,-14.19285 0.382812,-20.71094 2.59375,-10.43136 9.722618,-20.62507 11.718748,-31.37695 1.04045,-8.431763 -1.27928,-17.779819 -2.15625,-25.910156 2.70485,-3.676944 5.2104,-7.469552 7.08399,-11.609375 2.47318,-6.247039 1.43629,-15.135756 2.17773,-21.894531 -0.99633,2.877898 -2.71112,5.366165 -4.65039,7.816406 -9.081552,9.36475 -19.478768,18.977574 -21.455078,32.550782 -0.331541,1.92903 -0.437578,3.9336 -0.933593,5.808593 -0.389229,0.193565 -0.390205,-0.311196 -0.554688,-0.433593 l 1.107422,-16.830078 c 0.382341,-16.439189 -6.55998,-34.665617 1.830078,-49.107422 z m 270.746089,0 c 8.39005,14.441805 1.44969,32.668233 1.83204,49.107422 l 1.10546,16.830078 c -0.49601,-1.874993 -0.60401,-3.879563 -0.93555,-5.808593 -1.9763,-13.573208 -12.37352,-23.186032 -21.45507,-32.550782 -1.93927,-2.450241 -3.65406,-4.938508 -4.65039,-7.816406 0.74144,6.758775 -0.2935,15.647492 2.17968,21.894531 1.87359,4.139823 4.37719,7.932431 7.08203,11.609375 -0.87697,8.130337 -3.19474,17.478394 -2.15429,25.910156 1.99613,10.75188 9.125,20.94559 11.71875,31.37695 1.70678,6.51809 1.25749,13.87618 0.38086,20.71094 6.01849,-12.59792 20.92948,-27.7742 24.46875,-41.53125 2.91236,-10.967717 1.85431,-18.333046 -0.1289,-30.27344 -0.9395,-4.6202 -1.6577,-9.402945 -3.43164,-13.640625 3.36101,19.530422 -8.22629,33.630135 -12.02735,50.572265 -1.59052,6.33714 -1.97962,13.14196 -4.25391,19.08984 5.65939,-18.00052 -2.50953,-34.70091 -10.71875,-48.769534 -1.98087,-3.783334 -3.12944,-7.996524 -4.11719,-12.345703 7.4933,10.177772 16.55019,19.453217 18.30078,32.583987 1.15738,-17.152701 12.69836,-33.730564 11.67188,-51.917971 0.32896,-14.778975 -6.32338,-23.097686 -13.94531,-34.09375 z M 102.84375,113.50781 c 1.38902,13.9572 -3.957486,25.7937 -3.582031,39.80078 0.375454,8.46117 2.810341,15.95994 6.728511,22.70899 -5.29341,-7.87325 -9.426875,-16.2506 -15.613279,-23.74805 -9.602539,-10.48187 -21.854528,-21.22907 -23.115235,-35.79882 -1.630562,12.16681 0.562984,23.57309 5.390625,33.65625 4.82764,10.08317 12.289201,18.84243 21.19336,25.71093 l 4.148437,2.9043 c 7.340332,5.43365 13.122202,7.56579 20.175782,13.74609 -5.40191,-10.17041 -4.7081,-22.25194 -5.57031,-34.58985 -0.86221,-12.33788 -3.28109,-24.93288 -6.60938,-36.13085 z m 242.22266,0 -2.48243,7.50196 c -3.32829,11.19797 -5.74521,23.79297 -6.60742,36.13085 -0.86221,12.3379 -0.1684,24.41944 -5.57031,34.58985 7.05358,-6.1803 12.8335,-8.31244 20.17383,-13.74609 l 4.14844,-2.9043 c 8.90416,-6.8685 16.36572,-15.62776 21.19336,-25.71093 4.82763,-10.08316 7.02118,-21.48944 5.39062,-33.65625 -1.26071,14.56975 -13.51269,25.31695 -23.11523,35.79882 -6.1864,7.49745 -10.31988,15.8748 -15.61329,23.74805 3.91817,-6.74905 6.35502,-14.24782 6.73047,-22.70899 0.37546,-14.00708 -4.973,-25.84358 -3.58398,-39.80078 z m -232.94532,37.26758 c 6.747,15.28492 3.57909,35.16958 12.58399,49.38672 2.47319,4.69926 6.55942,8.83184 10.0918,12.46094 -3.19654,-1.69484 -6.16273,-4.11937 -8.99414,-6.9707 -15.38594,-14.3441 -38.33359,-16.33724 -47.496092,-39.86133 1.243053,8.63137 2.753739,17.29389 7.689453,24.54492 16.576719,24.26009 34.209669,24.68194 62.042969,31.15625 -12.7388,-11.66743 -14.84241,-29.06815 -20.34766,-44.48047 -3.70117,-9.44194 -9.27582,-18.09717 -15.40625,-26.42578 z m 223.66797,0 c -6.13043,8.32861 -11.70508,16.98384 -15.40625,26.42578 -5.50525,15.41232 -7.60885,32.81304 -20.34765,44.48047 28.78938,-6.10047 45.10756,-6.22279 62.04296,-31.15625 4.93571,-7.25103 6.4464,-15.91355 7.68946,-24.54492 -9.16251,23.52409 -32.1082,25.51723 -47.49414,39.86133 -2.83141,2.85133 -5.79956,5.27586 -8.9961,6.9707 3.53238,-3.6291 7.61861,-7.76168 10.0918,-12.46094 9.0049,-14.21714 5.83698,-34.1018 12.58398,-49.38672 z m -201.64258,37.26953 c 8.32719,12.71579 10.57854,31.5515 25.91797,37.69336 2.54638,1.52654 5.78241,1.35277 8.11524,3.03125 -2.9296,0.50394 -5.45842,-0.75816 -8.22266,-1.19141 -19.56934,-4.9979 -43.57462,1.27777 -58.26562,-17.69921 5.57586,12.39244 17.00981,22.35099 28.09179,26.33007 17.0462,6.59251 34.90259,-0.698 50.97657,-5.14843 2.30785,-0.68096 5.12709,-0.43007 7.27734,-1.31641 -8.94721,-2.08031 -17.43776,-5.33165 -24.49219,-12.35352 -9.81439,-10.48974 -18.75996,-21.31281 -29.39844,-29.3457 z m 179.61719,0 c -10.63848,8.03289 -19.58209,18.85597 -29.39648,29.3457 -7.05443,7.02187 -15.54693,10.27321 -24.49414,12.35352 2.15025,0.88634 4.96949,0.63545 7.27734,1.31641 16.07398,4.45043 33.93232,11.74094 50.97852,5.14843 11.08198,-3.97908 22.51593,-13.93763 28.09179,-26.33007 -14.691,18.97698 -38.69628,12.70131 -58.26562,17.69921 -2.76424,0.43325 -5.29501,1.69535 -8.22461,1.19141 2.33283,-1.67848 5.57081,-1.50471 8.11719,-3.03125 15.33943,-6.14186 17.58882,-24.97757 25.91601,-37.69336 z m -72.62305,41.16797 c -4.71825,-0.002 -9.42831,0.61862 -13.95117,1.94141 -2.87103,2.91616 -5.82433,-0.52139 -8.86328,-0.58789 -19.47289,-4.85516 -36.25695,5.18253 -52.41015,13.0957 -12.03784,5.34714 -27.80359,4.4488 -38.38868,-3.8418 5.23744,7.45769 12.24496,12.05396 19.47852,15.17969 13.4501,6.10684 29.45661,1.99934 40.58594,-6.79102 9.55087,-6.06107 17.76363,-17.99768 30.3457,-13.45312 -12.80424,6.72453 -24.50819,16.15192 -35.08984,28.26953 l 6.6289,6.2207 c 7.71579,-11.70339 17.979,-21.25504 28.35742,-28.67578 2.25102,-1.36663 4.62466,-3.06551 7.1211,-3.42773 12.74827,7.08786 24.1349,19.20415 34.41601,31.78711 2.19332,-2.00346 4.52226,-4.17741 6.32032,-6.50196 -10.66863,-11.70873 -22.33703,-20.87149 -34.89844,-27.52539 2.0874,-0.67943 4.45614,-0.8115 6.91211,-0.7539 6.77111,-0.46699 11.38429,4.9759 16.61914,8.75976 12.92997,11.14486 30.20722,18.50613 46.76172,11.53321 7.42128,-2.9989 14.60846,-8.3054 19.86914,-15.72071 -10.23202,8.22769 -25.66644,9.58236 -37.60352,4.55274 l -12.84179,-5.86328 c -8.5667,-5.17464 -18.98898,-8.19233 -29.36915,-8.19727 z"/>
+      </svg>
+    </div>
+
+    <div class="tablet">
+      <div class="inscription-tag">· Tabula Aenea ·</div>
+      <h2>Tabula Contactus</h2>
+      <div class="latin">Quae ad fundationem mittenda sunt</div>
+
+      <div class="contact-grid">
+
+        <div class="contact-item">
+          <h3>Sedes &amp; Officium</h3>
+          <div class="value">
+            <strong>Via dei Coronari, 142</strong><br>
+            00186 Roma · Rione VI · Parione<br>
+            Italia
+          </div>
+        </div>
+
+        <div class="divider-thin"></div>
+
+        <div class="contact-item">
+          <h3>Vox &amp; Telephonum</h3>
+          <div class="value">
+            <strong>+39 06 4521 8830</strong><br>
+            <em>centralino della cancelleria</em>
+          </div>
+        </div>
+
+        <div class="divider-thin"></div>
+
+        <div class="contact-item">
+          <h3>Epistulae Electronicae</h3>
+          <div class="value">
+            <a href="mailto:segreteria@fundatio-aurelia.it"><strong>segreteria@fundatio-aurelia.it</strong></a><br>
+            <em>per omnia officia generalia</em>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== HOURS ============== -->
+<section class="hours-section">
+  <div class="greek-frame">
+    <div class="hours-card">
+      <div class="wreath-plate">
+        <h2>Horae Officii</h2>
+      </div>
+      <p class="latin-note" style="margin-top:0;">
+        Hora secunda usque ad horam decimam — <span style="color:var(--text);font-style:normal;">that is, from the second hour after sunrise to the tenth.</span>
+      </p>
+
+      <table class="hours-table">
+        <tbody>
+          <tr><td>Dies Lunae</td><td>09:00 — 17:00</td></tr>
+          <tr><td>Dies Martis</td><td>09:00 — 17:00</td></tr>
+          <tr><td>Dies Mercurii</td><td>09:00 — 17:00</td></tr>
+          <tr><td>Dies Iovis</td><td>09:00 — 17:00</td></tr>
+          <tr><td>Dies Veneris</td><td>09:00 — 17:00</td></tr>
+          <tr><td>Sabbato &amp; Die Solis</td><td>Clausum · By appointment only</td></tr>
+        </tbody>
+      </table>
+
+      <p class="latin-note">
+        The chancery observes the Roman feriae publicae and closes for the
+        whole of August (mensis sextilis) for the summer recess.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============== KALENDS / GRANT REVIEW ============== -->
+<section class="kalends-section">
+  <div class="kalends-card">
+    <h2 style="text-align:center;">Kalendae Quattuor</h2>
+    <p style="text-align:center;color:var(--accent);font-style:italic;font-size:14px;margin-top:8px;">
+      The Four Reviewing Kalends
+    </p>
+
+    <div class="kalends-grid">
+      <div class="kalend">
+        <div class="roman">I · Ian</div>
+        <div class="month">Kalendis Ianuariis</div>
+        <div class="gloss">1 January</div>
+      </div>
+      <div class="kalend">
+        <div class="roman">I · Apr</div>
+        <div class="month">Kalendis Aprilibus</div>
+        <div class="gloss">1 April</div>
+      </div>
+      <div class="kalend">
+        <div class="roman">I · Iul</div>
+        <div class="month">Kalendis Iuliis</div>
+        <div class="gloss">1 July</div>
+      </div>
+      <div class="kalend">
+        <div class="roman">I · Oct</div>
+        <div class="month">Kalendis Octobribus</div>
+        <div class="gloss">1 October</div>
+      </div>
+    </div>
+
+    <p>
+      Grant inquiries — whether for the conservation of inscriptions, the
+      survey of aqueducts and cisterns, or the stabilisation of civic mosaics
+      in situ — are convened and reviewed by the College of Curators
+      quarterly, on the Kalends of January, April, July, and October.
+      Submissions received between sittings are docketed and held until the
+      next Kalend. Decisions are returned by sealed letter within thirty days
+      of the sitting.
+    </p>
+  </div>
+</section>
+
+<!-- ============== DIRECT CORRESPONDENTS ============== -->
+<section class="scribes-section">
+  <h2 style="margin-bottom: 22px;">Scribae &amp; Curatores</h2>
+  <p style="margin: 0 auto 32px; max-width: 600px; font-style:italic; color: var(--accent);">
+    For specific matters, address the appropriate office directly.
+  </p>
+  <div class="scribes">
+
+    <article class="scribe-card">
+      <div class="role">Cancellaria Generalis</div>
+      <div class="name">Livia Marcellina<br>Crispina</div>
+      <div class="gold-mini"></div>
+      <p style="margin:0;font-size:14px;">Secretary to the Council; receiver of all formal correspondence.</p>
+      <div class="gold-mini"></div>
+      <div class="email-cap">Per Litteras</div>
+      <div class="email">cancellaria@fundatio-aurelia.it</div>
+    </article>
+
+    <article class="scribe-card">
+      <div class="role">Officium Epigraphicum</div>
+      <div class="name">Quintus Fabius<br>Volusianus</div>
+      <div class="gold-mini"></div>
+      <p style="margin:0;font-size:14px;">Curator for inscriptions, lapidary work, and palaeographic survey.</p>
+      <div class="gold-mini"></div>
+      <div class="email-cap">Per Litteras</div>
+      <div class="email">epigraphia@fundatio-aurelia.it</div>
+    </article>
+
+    <article class="scribe-card">
+      <div class="role">Officium Hydraulicum</div>
+      <div class="name">Aelia Severina<br>Procula</div>
+      <div class="gold-mini"></div>
+      <p style="margin:0;font-size:14px;">Curator for aqueducts, cisterns, baths, and civic mosaics.</p>
+      <div class="gold-mini"></div>
+      <div class="email-cap">Per Litteras</div>
+      <div class="email">hydraulica@fundatio-aurelia.it</div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============== TAILPIECE ============== -->
+<div class="tailpiece" aria-label="Roma antica grotesque ornament">
+  <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <path fill="#a93226" d="m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z" transform="translate(0 -852.36)"/>
+  </svg>
+  <div class="label">· Roma Antica · Finis ·</div>
+</div>
+
+<!-- ============== FOOTER ============== -->
+<footer>
+  <div class="footer-seal">
+    <div class="footer-meta-l">
+      <strong>Sedes Charta</strong><br>
+      Via dei Coronari, 142<br>
+      00186 Roma · Italia
+    </div>
+
+    <svg class="seal-svg" viewBox="0 0 117.78949 118.25037" xmlns="http://www.w3.org/2000/svg" aria-label="Seal of Fundatio Aurelia">
+      <g transform="translate(-75.727539,-121.57078)">
+        <circle cx="134.6" cy="180.7" r="42" fill="none" stroke="#f5e6c4" stroke-width="1.5"/>
+        <circle cx="134.6" cy="180.7" r="36" fill="none" stroke="#f5e6c4" stroke-width="0.6"/>
+        <text x="134.6" y="178" text-anchor="middle" fill="#f5e6c4" font-family="Cinzel, serif" font-size="9" letter-spacing="2">F · A</text>
+        <text x="134.6" y="192" text-anchor="middle" fill="#f5e6c4" font-family="Cinzel, serif" font-size="5" letter-spacing="1.5">MMXIV</text>
+      </g>
+    </svg>
+
+    <div class="footer-meta-r">
+      <strong>Carta Fundata</strong><br>
+      Anno · MMXIV<br>
+      Sub Lege Italiana
+    </div>
+  </div>
+
+  <div class="footer-cols">
+    <div class="footer-col">
+      <h4>Patroni</h4>
+      <ul>
+        <li><a href="page-4.html">Album Benefactorum</a></li>
+        <li><a href="page-4.html">Tabulae Honoris</a></li>
+        <li><a href="page-2.html">De Proposito</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contactus</h4>
+      <ul>
+        <li><a href="page-6.html" aria-current="page">Scribe Nobis</a></li>
+        <li>+39 06 4521 8830</li>
+        <li>segreteria@fundatio-aurelia.it</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legalia</h4>
+      <ul>
+        <li>Codex Fiscalis · 97842310586</li>
+        <li>Reg. Persone Giuridiche · n. 412</li>
+        <li>Privacy &amp; Cookies</li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

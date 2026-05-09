@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="la">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>ACTA — Publications, Reports, and Field Notebooks · Fundatio Aurelia</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  /* ---------- Base ---------- */
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    font-size: 17px;
+    line-height: 1.65;
+    text-align: center;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+
+  a { color: var(--accent); text-decoration: none; }
+
+  /* ---------- Headings (Roman square capitals) ---------- */
+  h1, h2, h3, h4, .caps {
+    font-family: var(--font-display), "Trajan Pro", serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--text);
+  }
+
+  /* ---------- Navigation Frieze ---------- */
+  .frieze {
+    background: var(--surface);
+    border-top: 1px solid var(--secondary);
+    border-bottom: 1px solid var(--secondary);
+    padding: 18px 0 14px;
+    position: relative;
+  }
+  .frieze::before, .frieze::after {
+    content: "";
+    display: block;
+    height: 1px;
+    background: var(--secondary);
+    margin: 0 8%;
+    opacity: 0.55;
+  }
+  .frieze::before { position: absolute; top: 4px; left: 0; right: 0; }
+  .frieze::after  { position: absolute; bottom: 4px; left: 0; right: 0; }
+
+  .wordmark {
+    font-family: var(--font-display);
+    font-size: 22px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin: 6px 0 4px;
+  }
+  .wordmark .amp { color: var(--secondary); margin: 0 0.5em; font-size: 0.7em; vertical-align: 0.2em; }
+
+  nav.primary {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    flex-wrap: nowrap;
+    margin-top: 6px;
+    font-family: var(--font-display);
+    font-size: 11.5px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+  }
+  nav.primary a {
+    color: var(--text);
+    padding: 4px 14px;
+  }
+  nav.primary a[aria-current="page"] {
+    color: var(--primary);
+    border-bottom: 1px solid var(--secondary);
+  }
+  nav.primary .vine {
+    width: 14px; height: 14px;
+    fill: var(--secondary);
+    opacity: 0.7;
+    flex-shrink: 0;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    padding: 72px 0 48px;
+    position: relative;
+  }
+  .hero-frame {
+    position: relative;
+    width: 540px;
+    margin: 0 auto;
+    padding: 40px 60px;
+  }
+  .hero-frame .wreath {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.85;
+    z-index: 0;
+  }
+  .hero-frame .inner {
+    position: relative;
+    z-index: 1;
+  }
+  .hero h1 {
+    font-size: 40px;
+    letter-spacing: 0.22em;
+    margin: 0 0 8px;
+    color: var(--primary);
+  }
+  .hero .sub {
+    font-family: var(--font-display);
+    font-size: 13px;
+    letter-spacing: 0.32em;
+    color: var(--accent);
+    margin: 0 0 18px;
+  }
+  .hero p.lede {
+    font-style: italic;
+    font-size: 18px;
+    max-width: 460px;
+    margin: 0 auto;
+    color: #2b2b2b;
+  }
+  .hero .roman-numeral {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 14px;
+    letter-spacing: 0.4em;
+    color: var(--secondary);
+    margin-top: 22px;
+  }
+
+  /* ---------- Section divider (meander) ---------- */
+  .meander {
+    display: block;
+    margin: 36px auto;
+    width: 360px;
+    height: auto;
+  }
+  .meander svg { display: block; width: 100%; height: auto; }
+  .meander .key { fill: var(--secondary); }
+
+  /* ---------- Page heading ---------- */
+  .section-head {
+    margin: 24px auto 8px;
+    max-width: 760px;
+  }
+  .section-head h2 {
+    font-size: 22px;
+    margin: 0 0 6px;
+    color: var(--primary);
+  }
+  .section-head .epigraph {
+    font-style: italic;
+    color: #3a3a3a;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* ---------- Acta list ---------- */
+  .acta-wrap {
+    max-width: 980px;
+    margin: 32px auto 0;
+    padding: 0 20px;
+  }
+
+  .vine-divider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 22px 0;
+    gap: 18px;
+  }
+  .vine-divider .rule {
+    flex: 0 0 140px;
+    height: 1px;
+    background: var(--secondary);
+    opacity: 0.6;
+  }
+  .vine-divider svg {
+    width: 22px; height: 22px;
+    fill: var(--secondary);
+  }
+
+  /* ---------- Card (volume entry) ---------- */
+  .volume {
+    position: relative;
+    background: var(--surface);
+    padding: 44px 56px 36px;
+    margin: 0 auto;
+    text-align: center;
+    border: 1px solid rgba(169, 50, 38, 0.18);
+  }
+  /* Greek-key border simulated with stacked outlines */
+  .volume::before {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border: 1px solid var(--secondary);
+    pointer-events: none;
+  }
+  .volume::after {
+    content: "";
+    position: absolute;
+    inset: 10px;
+    border-top: 3px double var(--secondary);
+    border-bottom: 3px double var(--secondary);
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  .volume .laurel-plate {
+    position: relative;
+    width: 220px;
+    height: 80px;
+    margin: -10px auto 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .volume .laurel-plate svg.wreath-mini {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.7;
+  }
+  .volume .laurel-plate .vol-num {
+    position: relative;
+    font-family: var(--font-display);
+    font-size: 16px;
+    letter-spacing: 0.4em;
+    color: var(--primary);
+    background: var(--surface);
+    padding: 0 10px;
+  }
+
+  .volume h3 {
+    font-size: 16px;
+    letter-spacing: 0.22em;
+    color: var(--text);
+    margin: 0 0 4px;
+    line-height: 1.5;
+  }
+  .volume .latin-title {
+    font-family: var(--font-body);
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 17px;
+    color: var(--accent);
+    margin-bottom: 14px;
+    display: block;
+    font-weight: 500;
+  }
+  .volume .meta {
+    font-family: var(--font-display);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    color: #555;
+    margin: 0 0 18px;
+    text-transform: uppercase;
+  }
+  .volume .meta span + span::before {
+    content: "·";
+    color: var(--secondary);
+    margin: 0 0.7em;
+  }
+  .volume p.abstract {
+    max-width: 640px;
+    margin: 0 auto;
+    text-align: justify;
+    text-justify: inter-word;
+  }
+  .volume p.abstract::first-letter {
+    font-family: var(--font-display);
+    font-size: 2.7em;
+    float: left;
+    line-height: 0.9;
+    padding: 6px 10px 0 0;
+    color: var(--primary);
+    font-weight: 600;
+  }
+  .volume .gold-rule {
+    width: 90px;
+    height: 1px;
+    background: var(--secondary);
+    margin: 22px auto 14px;
+  }
+  .volume .cta {
+    font-family: var(--font-display);
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--primary);
+  }
+  .volume .cta a { color: var(--primary); }
+  .volume .cta a:hover { color: var(--accent); }
+
+  /* ---------- Ordering panel ---------- */
+  .ordering {
+    max-width: 880px;
+    margin: 56px auto 0;
+    padding: 48px 60px;
+    background: var(--surface);
+    position: relative;
+    border-top: 3px double var(--secondary);
+    border-bottom: 3px double var(--secondary);
+  }
+  .ordering h2 {
+    font-size: 18px;
+    margin: 0 0 6px;
+    color: var(--primary);
+  }
+  .ordering .sub {
+    font-family: var(--font-display);
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+  .ordering p {
+    max-width: 640px;
+    margin: 0 auto 14px;
+  }
+  .price-table {
+    margin: 24px auto;
+    border-collapse: collapse;
+    font-size: 15px;
+  }
+  .price-table th, .price-table td {
+    padding: 8px 22px;
+    border-bottom: 1px solid rgba(201, 162, 58, 0.45);
+  }
+  .price-table th {
+    font-family: var(--font-display);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    color: var(--primary);
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .price-table td.num {
+    font-family: var(--font-display);
+    color: var(--accent);
+    letter-spacing: 0.18em;
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    margin-top: 72px;
+    background: rgba(169, 50, 38, 0.82);
+    color: #f5efe2;
+    position: relative;
+  }
+  .meander-strip {
+    height: 28px;
+    background: var(--bg);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+  .meander-strip svg {
+    width: 100%; height: 22px;
+    display: block;
+  }
+  .meander-strip .key { fill: var(--secondary); }
+
+  footer .seal-block {
+    padding: 40px 0 24px;
+    text-align: center;
+  }
+  footer .seal-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 36px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  footer .seal-row .addr {
+    font-family: var(--font-display);
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: #f5efe2;
+    width: 240px;
+  }
+  footer .seal-row .addr.left  { text-align: right; }
+  footer .seal-row .addr.right { text-align: left; }
+  footer .seal-row .seal {
+    width: 96px; height: 96px;
+    flex-shrink: 0;
+  }
+  footer .seal-row .seal svg path { fill: #f5efe2; }
+
+  footer .columns {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 980px;
+    margin: 28px auto 0;
+    padding: 32px 40px 40px;
+    border-top: 1px solid rgba(245, 239, 226, 0.3);
+    gap: 40px;
+  }
+  footer .columns h4 {
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    color: var(--secondary);
+    margin: 0 0 14px;
+  }
+  footer .columns ul {
+    list-style: none;
+    padding: 0; margin: 0;
+    font-family: var(--font-display);
+    font-size: 10.5px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    line-height: 2.1;
+    color: #f5efe2;
+  }
+  footer .columns a { color: #f5efe2; }
+  footer .charter {
+    text-align: center;
+    padding: 14px 0 22px;
+    font-family: var(--font-display);
+    font-size: 10.5px;
+    letter-spacing: 0.4em;
+    color: var(--secondary);
+  }
+
+  /* shared inline vine glyph */
+  .vine-glyph {
+    display: inline-block;
+    width: 12px; height: 12px;
+    vertical-align: -2px;
+    fill: var(--secondary);
+  }
+</style>
+</head>
+<body>
+
+<!-- Reusable inline SVG: vine leaf glyph -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="vine" viewBox="0 0 200 200">
+      <path d="M43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z" transform="translate(0 -852.36)"/>
+    </symbol>
+
+    <symbol id="meander-strip" viewBox="0 0 1651 444" preserveAspectRatio="none">
+      <g class="key">
+        <path d="M0 417 L0 100 318 100 318 290 191 290 191 354 481 354 481 417 227 417 227 227 354 227 354 163 163 163 163 417 0 417 Z M481 417 L481 100 798 100 798 290 671 290 671 354 862 354 862 417 608 417 608 227 735 227 735 163 545 163 545 417 481 417 Z M862 417 L862 100 1180 100 1180 290 1052 290 1052 354 1243 354 1243 417 989 417 989 227 1116 227 1116 163 925 163 925 417 862 417 Z M1243 417 L1243 100 1561 100 1561 290 1433 290 1433 354 1624 354 1624 417 1370 417 1370 227 1497 227 1497 163 1306 163 1306 417 1243 417 Z M1624 417 L1624 100 1651 100 1651 163 1687 163 1687 417 1624 417 Z"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ============== NAV FRIEZE ============== -->
+<header class="frieze" role="banner">
+  <div class="wordmark">FUNDATIO <span class="amp">·</span> AURELIA</div>
+  <nav class="primary" aria-label="Primary">
+    <a href="page-1.html">Limen</a>
+    <svg class="vine" aria-hidden="true"><use href="#vine"/></svg>
+    <a href="page-2.html">De Proposito</a>
+    <svg class="vine" aria-hidden="true"><use href="#vine"/></svg>
+    <a href="page-3.html">Opera</a>
+    <svg class="vine" aria-hidden="true"><use href="#vine"/></svg>
+    <a href="page-4.html">Benefactores</a>
+    <svg class="vine" aria-hidden="true"><use href="#vine"/></svg>
+    <a href="page-5.html" aria-current="page">Acta</a>
+    <svg class="vine" aria-hidden="true"><use href="#vine"/></svg>
+    <a href="page-6.html">Scribe Nobis</a>
+  </nav>
+</header>
+
+<!-- ============== HERO ============== -->
+<section class="hero">
+  <div class="hero-frame">
+    <svg class="wreath" viewBox="0 0 323.75 295.79" aria-hidden="true">
+      <g transform="translate(-64.08 20.56)" fill="none" stroke="#c9a23a" stroke-width="1.2">
+        <ellipse cx="225" cy="125" rx="150" ry="135" fill="#c9a23a" fill-opacity="0.06"/>
+      </g>
+      <g fill="#c9a23a" opacity="0.85">
+        <path d="M40 100 Q60 70 90 70 Q75 90 75 110 Q60 105 40 100 Z"/>
+        <path d="M40 195 Q60 225 90 225 Q75 205 75 185 Q60 190 40 195 Z"/>
+        <path d="M283 100 Q263 70 233 70 Q248 90 248 110 Q263 105 283 100 Z"/>
+        <path d="M283 195 Q263 225 233 225 Q248 205 248 185 Q263 190 283 195 Z"/>
+        <path d="M60 130 Q40 145 50 165 Q70 158 80 145 Q70 138 60 130 Z"/>
+        <path d="M263 130 Q283 145 273 165 Q253 158 243 145 Q253 138 263 130 Z"/>
+        <path d="M120 50 Q140 35 160 40 Q150 55 145 70 Q132 62 120 50 Z"/>
+        <path d="M203 50 Q183 35 163 40 Q173 55 178 70 Q191 62 203 50 Z"/>
+        <path d="M120 245 Q140 260 160 255 Q150 240 145 225 Q132 233 120 245 Z"/>
+        <path d="M203 245 Q183 260 163 255 Q173 240 178 225 Q191 233 203 245 Z"/>
+      </g>
+    </svg>
+    <div class="inner">
+      <div class="sub">Volumen V · Pagina Quinta</div>
+      <h1>Acta</h1>
+      <p class="lede">Publications, technical reports, and field notebooks issued by the Fundatio Aurelia for the conservation of Roman epigraphy, hydraulic infrastructure, and civic mosaics.</p>
+      <span class="roman-numeral">MMXII — MMXXIV</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============== MEANDER DIVIDER ============== -->
+<div class="meander" aria-hidden="true">
+  <svg viewBox="0 0 1651 444" preserveAspectRatio="none" style="height:22px"><use href="#meander-strip"/></svg>
+</div>
+
+<div class="section-head">
+  <h2>The Reading Room</h2>
+  <p class="epigraph">Each volume of the Acta gathers the season's surveys, transcriptions, and conservation memoranda. Printed in octavo on Magnani laid paper at the Tipografia Sandron of Rome; bound in quarter-vellum over travertine boards. Issued one volume per civil year.</p>
+</div>
+
+<!-- ============== ACTA ENTRIES ============== -->
+<div class="acta-wrap">
+
+  <!-- VOL XIII -->
+  <article class="volume">
+    <div class="laurel-plate">
+      <svg class="wreath-mini" viewBox="0 0 220 80" aria-hidden="true">
+        <g fill="none" stroke="#c9a23a" stroke-width="1.1">
+          <path d="M30 40 Q50 18 110 18 Q170 18 190 40"/>
+          <path d="M30 40 Q50 62 110 62 Q170 62 190 40"/>
+        </g>
+        <g fill="#c9a23a" opacity="0.8">
+          <ellipse cx="50" cy="26" rx="6" ry="3" transform="rotate(-25 50 26)"/>
+          <ellipse cx="70" cy="22" rx="6" ry="3" transform="rotate(-15 70 22)"/>
+          <ellipse cx="90" cy="20" rx="6" ry="3" transform="rotate(-8 90 20)"/>
+          <ellipse cx="130" cy="20" rx="6" ry="3" transform="rotate(8 130 20)"/>
+          <ellipse cx="150" cy="22" rx="6" ry="3" transform="rotate(15 150 22)"/>
+          <ellipse cx="170" cy="26" rx="6" ry="3" transform="rotate(25 170 26)"/>
+          <ellipse cx="50" cy="54" rx="6" ry="3" transform="rotate(25 50 54)"/>
+          <ellipse cx="70" cy="58" rx="6" ry="3" transform="rotate(15 70 58)"/>
+          <ellipse cx="90" cy="60" rx="6" ry="3" transform="rotate(8 90 60)"/>
+          <ellipse cx="130" cy="60" rx="6" ry="3" transform="rotate(-8 130 60)"/>
+          <ellipse cx="150" cy="58" rx="6" ry="3" transform="rotate(-15 150 58)"/>
+          <ellipse cx="170" cy="54" rx="6" ry="3" transform="rotate(-25 170 54)"/>
+        </g>
+      </svg>
+      <span class="vol-num">VOL · XIII</span>
+    </div>
+    <h3>Acta XIII</h3>
+    <em class="latin-title">Pavimenta Civica: Conservation of the Mosaic Floors at Aquileia, Insula VI</em>
+    <p class="meta">
+      <span>MMXXIV</span>
+      <span>Editor: Dott.ssa Livia Fontana</span>
+      <span>284 pp · 47 plates</span>
+    </p>
+    <p class="abstract">The thirteenth volume documents three campaigns of consolidation conducted upon the marine-themed pavements of Insula VI at Aquileia, recording for the first time the full polychrome sequence of the Triton emblema after lifting and re-bedding. Appended are tessera inventories, lacuna maps at 1:20, and a revised chronology placing the workshop activity between A.D. 178 and 215.</p>
+    <div class="gold-rule"></div>
+    <p class="cta"><a href="page-6.html">Request Reading Copy ·  EUR 48</a></p>
+  </article>
+
+  <div class="vine-divider" aria-hidden="true">
+    <span class="rule"></span>
+    <svg><use href="#vine"/></svg>
+    <svg><use href="#vine"/></svg>
+    <svg><use href="#vine"/></svg>
+    <span class="rule"></span>
+  </div>
+
+  <!-- VOL XII -->
+  <article class="volume">
+    <div class="laurel-plate">
+      <svg class="wreath-mini" viewBox="0 0 220 80" aria-hidden="true">
+        <g fill="none" stroke="#c9a23a" stroke-width="1.1">
+          <path d="M30 40 Q50 18 110 18 Q170 18 190 40"/>
+          <path d="M30 40 Q50 62 110 62 Q170 62 190 40"/>
+        </g>
+        <g fill="#c9a23a" opacity="0.8">
+          <ellipse cx="50" cy="26" rx="6" ry="3" transform="rotate(-25 50 26)"/>
+          <ellipse cx="70" cy="22" rx="6" ry="3" transform="rotate(-15 70 22)"/>
+          <ellipse cx="90" cy="20" rx="6" ry="3" transform="rotate(-8 90 20)"/>
+          <ellipse cx="130" cy="20" rx="6" ry="3" transform="rotate(8 130 20)"/>
+          <ellipse cx="150" cy="22" rx="6" ry="3" transform="rotate(15 150 22)"/>
+          <ellipse cx="170" cy="26" rx="6" ry="3" transform="rotate(25 170 26)"/>
+          <ellipse cx="50" cy="54" rx="6" ry="3" transform="rotate(25 50 54)"/>
+          <ellipse cx="70" cy="58" rx="6" ry="3" transform="rotate(15 70 58)"/>
+          <ellipse cx="90" cy="60" rx="6" ry="3" transform="rotate(8 90 60)"/>
+          <ellipse cx="130" cy="60" rx="6" ry="3" transform="rotate(-8 130 60)"/>
+          <ellipse cx="150" cy="58" rx="6" ry="3" transform="rotate(-15 150 58)"/>
+          <ellipse cx="170" cy="54" rx="6" ry="3" transform="rotate(-25 170 54)"/>
+        </g>
+      </svg>
+      <span class="vol-num">VOL · XII</span>
+    </div>
+    <h3>Acta XII</h3>
+    <em class="latin-title">Rilievo idrologico dell'Aqua Marcia, settore suburbano</em>
+    <p class="meta">
+      <span>MMXXIII</span>
+      <span>Editor: Ing. Marco Severini</span>
+      <span>312 pp · 22 fold-out plates</span>
+    </p>
+    <p class="abstract">A complete hydrological survey of a 4.7 km suburban segment of the Aqua Marcia between Capannelle and Tor Fiscale, with manometric readings, calcareous deposit thickness measurements taken at 142 stations, and the first photogrammetric record of the opus quadratum specus interior. The volume concludes with conservation priorities for the four arch-bays at imminent structural risk.</p>
+    <div class="gold-rule"></div>
+    <p class="cta"><a href="page-6.html">Request Reading Copy ·  EUR 56</a></p>
+  </article>
+
+  <div class="vine-divider" aria-hidden="true">
+    <span class="rule"></span>
+    <svg><use href="#vine"/></svg>
+    <svg><use href="#vine"/></svg>
+    <svg><use href="#vine"/></svg>
+    <span class="rule"></span>
+  </div>
+
+  <!-- VOL XI -->
+  <article class="volume">
+    <div class="laurel-plate">
+      <svg class="wreath-mini" viewBox="0 0 220 80" aria-hidden="true">
+        <g fill="none" stroke="#c9a23a" stroke-width="1.1">
+          <path d="M30 40 Q50 18 110 18 Q170 18 190 40"/>
+          <path d="M30 40 Q50 62 110 62 Q170 62 190 40"/>
+        </g>
+        <g fill="#c9a23a" opacity="0.8">
+          <ellipse cx="50" cy="26" rx="6" ry="3" transform="rotate(-25 50 26)"/>
+          <ellipse cx="90" cy="20" rx="6" ry="3" transform="rotate(-8 90 20)"/>
+          <ellipse cx="150" cy="22" rx="6" ry="3" transform="rotate(15 150 22)"/>
+          <ellipse cx="50" cy="54" rx="6" ry="3" transform="rotate(25 50 54)"/>
+          <ellipse cx="90" cy="60" rx="6" ry="3" transform="rotate(8 90 60)"/>
+          <ellipse cx="150" cy="58" rx="6" ry="3" transform="rotate(-15 150 58)"/>
+        </g>
+      </svg>
+      <span class="vol-num">VOL · XI</span>
+    </div>
+    <h3>Acta XI</h3>
+    <em class="latin-title">Tabulae Castrenses: Garrison Inscriptions of Lambaesis Reconsidered</em>
+    <p class="meta">
+      <span>MMXXII</span>
+      <span>Editor: Prof. Hadrien Boucher</span>
+      <span>248 pp · 31 plates</span>
+    </p>
+    <p class="abstract">A re-edition of seventy-three military inscriptions from the principia and adjacent groma at Lambaesis, with new RTI imagery permitting the recovery of fourteen previously illegible cognomina and three centurial marks. Comparative tables align the corpus with the Numerus Hemesenorum diplomas of A.D. 167, prompting a revised garrison chronology.</p>
+    <div class="gold-rule"></div>
+    <p class="cta"><a href="page-6.html">Request Reading Copy ·  EUR 44</a></p>
+  </article>
+
+  <div class="vine-divider" aria-hidden="true">
+    <span class="rule"></span>
+    <svg><use href="#vine"/></svg>
+    <svg><use href="#vine"/></svg>
+    <svg><use href="#vine"/></svg>
+    <span class="rule"></span>
+  </div>
+
+  <!-- VOL X -->
+  <article class="volume">
+    <div class="laurel-plate">
+      <svg class="wreath-mini" viewBox="0 0 220 80" aria-hidden="true">
+        <g fill="none" stroke="#c9a23a" stroke-width="1.1">
+          <path d="M30 40 Q50 18 110 18 Q170 18 190 40"/>
+          <path d="M30 40 Q50 62 110 62 Q170 62 190 40"/>
+        </g>
+        <g fill="#c9a23a" opacity="0.8">
+          <ellipse cx="70" cy="22" rx="6" ry="3" transform="rotate(-15 70 22)"/>
+          <ellipse cx="110" cy="18" rx="6" ry="3"/>
+          <ellipse cx="150" cy="22" rx="6" ry="3" transform="rotate(15 150 22)"/>
+          <ellipse cx="70" cy="58" rx="6" ry="3" transform="rotate(15 70 58)"/>
+          <ellipse cx="110" cy="62" rx="6" ry="3"/>
+          <ellipse cx="150" cy="58" rx="6" ry="3" transform="rotate(-15 150 58)"/>
+        </g>
+      </svg>
+      <span class="vol-num">VOL · X</span>
+    </div>
+    <h3>Acta X</h3>
+    <em class="latin-title">Index Decennalis: A Cumulative Index to Acta I–IX</em>
+    <p class="meta">
+      <span>MMXXI</span>
+      <span>Editor: Dott. Paolo Renzi</span>
+      <span>196 pp</span>
+    </p>
+    <p class="abstract">A decennial index — onomastic, topographic, and material — to the first nine volumes of the Acta, prepared upon the occasion of the foundation's tenth anniversary. The work consolidates 4,712 epigraphic citations and provides concordances with the CIL, AE, and EDR databases for every inscription edited by foundation fellows since MMXII.</p>
+    <div class="gold-rule"></div>
+    <p class="cta"><a href="page-6.html">Request Reading Copy ·  EUR 36</a></p>
+  </article>
+
+  <div class="vine-divider" aria-hidden="true">
+    <span class="rule"></span>
+    <svg><use href="#vine"/></svg>
+    <svg><use href="#vine"/></svg>
+    <svg><use href="#vine"/></svg>
+    <span class="rule"></span>
+  </div>
+
+  <!-- VOL IX -->
+  <article class="volume">
+    <div class="laurel-plate">
+      <svg class="wreath-mini" viewBox="0 0 220 80" aria-hidden="true">
+        <g fill="none" stroke="#c9a23a" stroke-width="1.1">
+          <path d="M30 40 Q50 18 110 18 Q170 18 190 40"/>
+          <path d="M30 40 Q50 62 110 62 Q170 62 190 40"/>
+        </g>
+        <g fill="#c9a23a" opacity="0.8">
+          <ellipse cx="50" cy="26" rx="6" ry="3" transform="rotate(-25 50 26)"/>
+          <ellipse cx="70" cy="22" rx="6" ry="3" transform="rotate(-15 70 22)"/>
+          <ellipse cx="90" cy="20" rx="6" ry="3" transform="rotate(-8 90 20)"/>
+          <ellipse cx="130" cy="20" rx="6" ry="3" transform="rotate(8 130 20)"/>
+          <ellipse cx="150" cy="22" rx="6" ry="3" transform="rotate(15 150 22)"/>
+          <ellipse cx="170" cy="26" rx="6" ry="3" transform="rotate(25 170 26)"/>
+          <ellipse cx="50" cy="54" rx="6" ry="3" transform="rotate(25 50 54)"/>
+          <ellipse cx="70" cy="58" rx="6" ry="3" transform="rotate(15 70 58)"/>
+          <ellipse cx="90" cy="60" rx="6" ry="3" transform="rotate(8 90 60)"/>
+          <ellipse cx="130" cy="60" rx="6" ry="3" transform="rotate(-8 130 60)"/>
+          <ellipse cx="150" cy="58" rx="6" ry="3" transform="rotate(-15 150 58)"/>
+          <ellipse cx="170" cy="54" rx="6" ry="3" transform="rotate(-25 170 54)"/>
+        </g>
+      </svg>
+      <span class="vol-num">VOL · IX</span>
+    </div>
+    <h3>Acta IX</h3>
+    <em class="latin-title">Tre iscrizioni inedite dalla Via Appia antica</em>
+    <p class="meta">
+      <span>MMXX</span>
+      <span>Editor: Dott.ssa Chiara Veroli</span>
+      <span>208 pp · 18 plates</span>
+    </p>
+    <p class="abstract">The principal contribution of this volume is the first publication of three funerary inscriptions recovered during drainage works at the IV milestone of the Via Appia in November MMXIX, including a previously unknown dedication to a freedwoman of the Caecilii Metelli. Supplementary essays treat the laser-cleaning protocol applied to two of the stones and the orthographic peculiarities of the cutter.</p>
+    <div class="gold-rule"></div>
+    <p class="cta"><a href="page-6.html">Request Reading Copy ·  EUR 42</a></p>
+  </article>
+
+  <div class="vine-divider" aria-hidden="true">
+    <span class="rule"></span>
+    <svg><use href="#vine"/></svg>
+    <svg><use href="#vine"/></svg>
+    <svg><use href="#vine"/></svg>
+    <span class="rule"></span>
+  </div>
+
+  <!-- VOL VIII -->
+  <article class="volume">
+    <div class="laurel-plate">
+      <svg class="wreath-mini" viewBox="0 0 220 80" aria-hidden="true">
+        <g fill="none" stroke="#c9a23a" stroke-width="1.1">
+          <path d="M30 40 Q50 18 110 18 Q170 18 190 40"/>
+          <path d="M30 40 Q50 62 110 62 Q170 62 190 40"/>
+        </g>
+        <g fill="#c9a23a" opacity="0.8">
+          <ellipse cx="60" cy="24" rx="6" ry="3" transform="rotate(-20 60 24)"/>
+          <ellipse cx="100" cy="19" rx="6" ry="3" transform="rotate(-5 100 19)"/>
+          <ellipse cx="140" cy="21" rx="6" ry="3" transform="rotate(10 140 21)"/>
+          <ellipse cx="60" cy="56" rx="6" ry="3" transform="rotate(20 60 56)"/>
+          <ellipse cx="100" cy="61" rx="6" ry="3" transform="rotate(5 100 61)"/>
+          <ellipse cx="140" cy="59" rx="6" ry="3" transform="rotate(-10 140 59)"/>
+        </g>
+      </svg>
+      <span class="vol-num">VOL · VIII</span>
+    </div>
+    <h3>Acta VIII</h3>
+    <em class="latin-title">Castellum Aquae: The Distribution Tank at Pompeii, Region VII</em>
+    <p class="meta">
+      <span>MMXIX</span>
+      <span>Editor: Prof.ssa Renata Polverini</span>
+      <span>264 pp · 39 plates</span>
+    </p>
+    <p class="abstract">A monographic treatment of the Porta Vesuvio castellum aquae, presenting fresh measurements of the three cisterns and recalibrated flow estimates that revise downward by 22 percent the supply figures advanced by Eschebach in 1979. The volume includes the first cross-section drawings to register the Roman repair phase identifiable from the Severan fistula stamps.</p>
+    <div class="gold-rule"></div>
+    <p class="cta"><a href="page-6.html">Request Reading Copy ·  EUR 48</a></p>
+  </article>
+
+  <div class="vine-divider" aria-hidden="true">
+    <span class="rule"></span>
+    <svg><use href="#vine"/></svg>
+    <svg><use href="#vine"/></svg>
+    <svg><use href="#vine"/></svg>
+    <span class="rule"></span>
+  </div>
+
+  <!-- VOL VII -->
+  <article class="volume">
+    <div class="laurel-plate">
+      <svg class="wreath-mini" viewBox="0 0 220 80" aria-hidden="true">
+        <g fill="none" stroke="#c9a23a" stroke-width="1.1">
+          <path d="M30 40 Q50 18 110 18 Q170 18 190 40"/>
+          <path d="M30 40 Q50 62 110 62 Q170 62 190 40"/>
+        </g>
+        <g fill="#c9a23a" opacity="0.8">
+          <ellipse cx="50" cy="26" rx="6" ry="3" transform="rotate(-25 50 26)"/>
+          <ellipse cx="80" cy="20" rx="6" ry="3" transform="rotate(-12 80 20)"/>
+          <ellipse cx="140" cy="20" rx="6" ry="3" transform="rotate(12 140 20)"/>
+          <ellipse cx="170" cy="26" rx="6" ry="3" transform="rotate(25 170 26)"/>
+          <ellipse cx="50" cy="54" rx="6" ry="3" transform="rotate(25 50 54)"/>
+          <ellipse cx="80" cy="60" rx="6" ry="3" transform="rotate(12 80 60)"/>
+          <ellipse cx="140" cy="60" rx="6" ry="3" transform="rotate(-12 140 60)"/>
+          <ellipse cx="170" cy="54" rx="6" ry="3" transform="rotate(-25 170 54)"/>
+        </g>
+      </svg>
+      <span class="vol-num">VOL · VII</span>
+    </div>
+    <h3>Acta VII</h3>
+    <em class="latin-title">Inscriptiones Africae Proconsularis: Field Notebooks from Dougga and Bulla Regia</em>
+    <p class="meta">
+      <span>MMXVIII</span>
+      <span>Editor: Dott. Étienne Larrieu</span>
+      <span>296 pp · 54 plates</span>
+    </p>
+    <p class="abstract">Notebooks compiled across two seasons of survey at Dougga and Bulla Regia, transcribing 117 inscriptions encountered in situ, the great majority funerary, with squeezes deposited at the École française de Rome. A concluding chapter establishes a stone-by-stone protocol for biocidal treatment in the local microclimate.</p>
+    <div class="gold-rule"></div>
+    <p class="cta"><a href="page-6.html">Request Reading Copy ·  EUR 52</a></p>
+  </article>
+
+  <div class="vine-divider" aria-hidden="true">
+    <span class="rule"></span>
+    <svg><use href="#vine"/></svg>
+    <svg><use href="#vine"/></svg>
+    <svg><use href="#vine"/></svg>
+    <span class="rule"></span>
+  </div>
+
+  <!-- VOL VI -->
+  <article class="volume">
+    <div class="laurel-plate">
+      <svg class="wreath-mini" viewBox="0 0 220 80" aria-hidden="true">
+        <g fill="none" stroke="#c9a23a" stroke-width="1.1">
+          <path d="M30 40 Q50 18 110 18 Q170 18 190 40"/>
+          <path d="M30 40 Q50 62 110 62 Q170 62 190 40"/>
+        </g>
+        <g fill="#c9a23a" opacity="0.8">
+          <ellipse cx="70" cy="22" rx="6" ry="3" transform="rotate(-15 70 22)"/>
+          <ellipse cx="110" cy="18" rx="6" ry="3"/>
+          <ellipse cx="150" cy="22" rx="6" ry="3" transform="rotate(15 150 22)"/>
+          <ellipse cx="70" cy="58" rx="6" ry="3" transform="rotate(15 70 58)"/>
+          <ellipse cx="110" cy="62" rx="6" ry="3"/>
+          <ellipse cx="150" cy="58" rx="6" ry="3" transform="rotate(-15 150 58)"/>
+        </g>
+      </svg>
+      <span class="vol-num">VOL · VI</span>
+    </div>
+    <h3>Acta VI</h3>
+    <em class="latin-title">Mosaici di Piazza Armerina: Two Conservation Memoranda</em>
+    <p class="meta">
+      <span>MMXVII</span>
+      <span>Editor: Dott.ssa Anna Ricci</span>
+      <span>224 pp · 41 plates</span>
+    </p>
+    <p class="abstract">Two memoranda issued at the request of the Soprintendenza of Enna, addressing salt efflorescence on the Great Hunt corridor and proposing a reversible re-fixing protocol for forty-three lifted tessellatum panels in the southern apsidal hall. The volume publishes the calibration data underlying the new humidity-control regime adopted in MMXVII.</p>
+    <div class="gold-rule"></div>
+    <p class="cta"><a href="page-6.html">Request Reading Copy ·  EUR 44</a></p>
+  </article>
+
+  <div class="vine-divider" aria-hidden="true">
+    <span class="rule"></span>
+    <svg><use href="#vine"/></svg>
+    <svg><use href="#vine"/></svg>
+    <svg><use href="#vine"/></svg>
+    <span class="rule"></span>
+  </div>
+
+  <!-- VOL V -->
+  <article class="volume">
+    <div class="laurel-plate">
+      <svg class="wreath-mini" viewBox="0 0 220 80" aria-hidden="true">
+        <g fill="none" stroke="#c9a23a" stroke-width="1.1">
+          <path d="M30 40 Q50 18 110 18 Q170 18 190 40"/>
+          <path d="M30 40 Q50 62 110 62 Q170 62 190 40"/>
+        </g>
+        <g fill="#c9a23a" opacity="0.8">
+          <ellipse cx="60" cy="24" rx="6" ry="3" transform="rotate(-20 60 24)"/>
+          <ellipse cx="100" cy="19" rx="6" ry="3" transform="rotate(-5 100 19)"/>
+          <ellipse cx="140" cy="21" rx="6" ry="3" transform="rotate(10 140 21)"/>
+          <ellipse cx="60" cy="56" rx="6" ry="3" transform="rotate(20 60 56)"/>
+          <ellipse cx="100" cy="61" rx="6" ry="3" transform="rotate(5 100 61)"/>
+          <ellipse cx="140" cy="59" rx="6" ry="3" transform="rotate(-10 140 59)"/>
+        </g>
+      </svg>
+      <span class="vol-num">VOL · V</span>
+    </div>
+    <h3>Acta V</h3>
+    <em class="latin-title">De Aquaeductibus Hispaniae: Segovia, Tarragona, Mérida</em>
+    <p class="meta">
+      <span>MMXVI</span>
+      <span>Editor: Prof. Joan Ribas i Albareda</span>
+      <span>340 pp · 28 fold-out plates</span>
+    </p>
+    <p class="abstract">Three Iberian aqueducts surveyed under a single methodology of laser scanning combined with traditional theodolite control, allowing direct comparison of pier deformation rates over the past forty years. The Segovia chapter publishes the first complete elevation drawing accurate to ±4 mm across all 167 surviving arches.</p>
+    <div class="gold-rule"></div>
+    <p class="cta"><a href="page-6.html">Request Reading Copy ·  EUR 58</a></p>
+  </article>
+
+  <div class="vine-divider" aria-hidden="true">
+    <span class="rule"></span>
+    <svg><use href="#vine"/></svg>
+    <svg><use href="#vine"/></svg>
+    <svg><use href="#vine"/></svg>
+    <span class="rule"></span>
+  </div>
+
+  <!-- VOL IV -->
+  <article class="volume">
+    <div class="laurel-plate">
+      <svg class="wreath-mini" viewBox="0 0 220 80" aria-hidden="true">
+        <g fill="none" stroke="#c9a23a" stroke-width="1.1">
+          <path d="M30 40 Q50 18 110 18 Q170 18 190 40"/>
+          <path d="M30 40 Q50 62 110 62 Q170 62 190 40"/>
+        </g>
+        <g fill="#c9a23a" opacity="0.8">
+          <ellipse cx="50" cy="26" rx="6" ry="3" transform="rotate(-25 50 26)"/>
+          <ellipse cx="90" cy="20" rx="6" ry="3" transform="rotate(-8 90 20)"/>
+          <ellipse cx="130" cy="20" rx="6" ry="3" transform="rotate(8 130 20)"/>
+          <ellipse cx="170" cy="26" rx="6" ry="3" transform="rotate(25 170 26)"/>
+          <ellipse cx="50" cy="54" rx="6" ry="3" transform="rotate(25 50 54)"/>
+          <ellipse cx="90" cy="60" rx="6" ry="3" transform="rotate(8 90 60)"/>
+          <ellipse cx="130" cy="60" rx="6" ry="3" transform="rotate(-8 130 60)"/>
+          <ellipse cx="170" cy="54" rx="6" ry="3" transform="rotate(-25 170 54)"/>
+        </g>
+      </svg>
+      <span class="vol-num">VOL · IV</span>
+    </div>
+    <h3>Acta IV</h3>
+    <em class="latin-title">Tituli Sepulcrales Salonitani: Funerary Inscriptions from Salona</em>
+    <p class="meta">
+      <span>MMXV</span>
+      <span>Editor: Prof. Tomislav Brajić</span>
+      <span>252 pp · 33 plates</span>
+    </p>
+    <p class="abstract">Sixty-eight funerary stones from the cemeteries of Manastirine and Marusinac are presented with squeeze-derived photographs, palaeographic dating, and reconstructed family stemmata. The volume corrects six readings transmitted since the Salona III fascicles of 2000 and proposes the identification of two stones long thought lost.</p>
+    <div class="gold-rule"></div>
+    <p class="cta"><a href="page-6.html">Request Reading Copy ·  EUR 42</a></p>
+  </article>
+
+  <div class="vine-divider" aria-hidden="true">
+    <span class="rule"></span>
+    <svg><use href="#vine"/></svg>
+    <svg><use href="#vine"/></svg>
+    <svg><use href="#vine"/></svg>
+    <span class="rule"></span>
+  </div>
+
+  <!-- VOL III -->
+  <article class="volume">
+    <div class="laurel-plate">
+      <svg class="wreath-mini" viewBox="0 0 220 80" aria-hidden="true">
+        <g fill="none" stroke="#c9a23a" stroke-width="1.1">
+          <path d="M30 40 Q50 18 110 18 Q170 18 190 40"/>
+          <path d="M30 40 Q50 62 110 62 Q170 62 190 40"/>
+        </g>
+        <g fill="#c9a23a" opacity="0.8">
+          <ellipse cx="80" cy="20" rx="6" ry="3" transform="rotate(-12 80 20)"/>
+          <ellipse cx="140" cy="20" rx="6" ry="3" transform="rotate(12 140 20)"/>
+          <ellipse cx="80" cy="60" rx="6" ry="3" transform="rotate(12 80 60)"/>
+          <ellipse cx="140" cy="60" rx="6" ry="3" transform="rotate(-12 140 60)"/>
+        </g>
+      </svg>
+      <span class="vol-num">VOL · III</span>
+    </div>
+    <h3>Acta III</h3>
+    <em class="latin-title">De Foro Iulii Rudiarum: A Civic Forum Re-examined</em>
+    <p class="meta">
+      <span>MMXIV</span>
+      <span>Editor: Dott. Stefano Della Croce</span>
+      <span>188 pp · 21 plates</span>
+    </p>
+    <p class="abstract">A reassessment of the forum at Cividale del Friuli following two seasons of geophysical prospection, identifying the curia and a hitherto-unrecognised honorific arch in the south portico. The argument rests in part on the reading of three travertine fragments first published here, two of them bearing the consular date L · CEIONIO · COMMODO · COS.</p>
+    <div class="gold-rule"></div>
+    <p class="cta"><a href="page-6.html">Request Reading Copy ·  EUR 38</a></p>
+  </article>
+
+  <div class="vine-divider" aria-hidden="true">
+    <span class="rule"></span>
+    <svg><use href="#vine"/></svg>
+    <svg><use href="#vine"/></svg>
+    <svg><use href="#vine"/></svg>
+    <span class="rule"></span>
+  </div>
+
+  <!-- VOL II -->
+  <article class="volume">
+    <div class="laurel-plate">
+      <svg class="wreath-mini" viewBox="0 0 220 80" aria-hidden="true">
+        <g fill="none" stroke="#c9a23a" stroke-width="1.1">
+          <path d="M30 40 Q50 18 110 18 Q170 18 190 40"/>
+          <path d="M30 40 Q50 62 110 62 Q170 62 190 40"/>
+        </g>
+        <g fill="#c9a23a" opacity="0.8">
+          <ellipse cx="70" cy="22" rx="6" ry="3" transform="rotate(-15 70 22)"/>
+          <ellipse cx="150" cy="22" rx="6" ry="3" transform="rotate(15 150 22)"/>
+          <ellipse cx="70" cy="58" rx="6" ry="3" transform="rotate(15 70 58)"/>
+          <ellipse cx="150" cy="58" rx="6" ry="3" transform="rotate(-15 150 58)"/>
+        </g>
+      </svg>
+      <span class="vol-num">VOL · II</span>
+    </div>
+    <h3>Acta II</h3>
+    <em class="latin-title">Tegulae signatae: A Catalogue of Stamped Roof-tiles from the Tiber Workshops</em>
+    <p class="meta">
+      <span>MMXIII</span>
+      <span>Editor: Dott.ssa Maria Grazia Furlani</span>
+      <span>176 pp · 26 plates</span>
+    </p>
+    <p class="abstract">A catalogue of 412 stamped tegulae and bipedales recovered from the Trastevere kiln-sites and from secondary deposition along the lower Tiber, refined by petrographic analysis and arranged by the chronology of imperial estate administration. The introduction restates the case for a Domitianic origin for the figlinae Caepionianae.</p>
+    <div class="gold-rule"></div>
+    <p class="cta"><a href="page-6.html">Request Reading Copy ·  EUR 34</a></p>
+  </article>
+
+  <div class="vine-divider" aria-hidden="true">
+    <span class="rule"></span>
+    <svg><use href="#vine"/></svg>
+    <svg><use href="#vine"/></svg>
+    <svg><use href="#vine"/></svg>
+    <span class="rule"></span>
+  </div>
+
+  <!-- VOL I -->
+  <article class="volume">
+    <div class="laurel-plate">
+      <svg class="wreath-mini" viewBox="0 0 220 80" aria-hidden="true">
+        <g fill="none" stroke="#c9a23a" stroke-width="1.1">
+          <path d="M30 40 Q50 18 110 18 Q170 18 190 40"/>
+          <path d="M30 40 Q50 62 110 62 Q170 62 190 40"/>
+        </g>
+        <g fill="#c9a23a" opacity="0.8">
+          <ellipse cx="110" cy="18" rx="7" ry="3.5"/>
+          <ellipse cx="110" cy="62" rx="7" ry="3.5"/>
+        </g>
+      </svg>
+      <span class="vol-num">VOL · I</span>
+    </div>
+    <h3>Acta I</h3>
+    <em class="latin-title">Liber Inauguralis: Charter, Statutes, and the Programme of the Foundation</em>
+    <p class="meta">
+      <span>MMXII</span>
+      <span>Editor: Conte Giovanni-Battista Aurelio</span>
+      <span>144 pp · 8 plates</span>
+    </p>
+    <p class="abstract">The inaugural volume sets out the charter of the Fundatio Aurelia, ratified at Rome on the kalends of March MMXII, together with the founding statutes governing fellowships, conservation grants, and editorial policy. An appendix reproduces the four manifesto lectures delivered by the founder before the Accademia Nazionale dei Lincei in the same year.</p>
+    <div class="gold-rule"></div>
+    <p class="cta"><a href="page-6.html">Request Reading Copy ·  EUR 28</a></p>
+  </article>
+
+</div>
+
+<!-- ============== ORDERING ============== -->
+<div class="meander" aria-hidden="true" style="margin-top:64px">
+  <svg viewBox="0 0 1651 444" preserveAspectRatio="none" style="height:22px"><use href="#meander-strip"/></svg>
+</div>
+
+<section class="ordering">
+  <h2>De Libris Petendis</h2>
+  <div class="sub">On the Procurement of Printed Copies</div>
+  <p>Printed copies of any volume of the Acta may be requested by written correspondence addressed to the Office of the Editor at the foundation seat in Rome. Copies are dispatched by registered post within thirty days of receipt of payment; orders from institutional libraries enjoy a courtesy reduction of twenty percent.</p>
+  <p>Subscribers receive each new volume upon publication, accompanied by an offprint of the editor's preface bound in pompeian-red wrappers. The complete run from Acta I to Acta XIII may be acquired as a set in matched quarter-vellum binding for EUR 540, postage included within the European Union.</p>
+
+  <table class="price-table" align="center">
+    <thead>
+      <tr><th>Class</th><th>Annual Subscription</th><th>Single Volume</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Private subscriber</td><td class="num">EUR 60</td><td class="num">EUR 28 — 58</td></tr>
+      <tr><td>Institutional library</td><td class="num">EUR 48</td><td class="num">EUR 22 — 46</td></tr>
+      <tr><td>Foundation fellow</td><td class="num">gratis</td><td class="num">gratis</td></tr>
+    </tbody>
+  </table>
+
+  <p style="margin-top:24px">
+    <a href="page-6.html" style="font-family:var(--font-display); font-size:11px; letter-spacing:0.32em; text-transform:uppercase; color:var(--primary);">
+      Address Correspondence to the Office &nbsp;·&nbsp; Scribe Nobis
+    </a>
+  </p>
+</section>
+
+<!-- ============== FOOTER ============== -->
+<footer>
+  <div class="meander-strip" aria-hidden="true">
+    <svg viewBox="0 0 1651 444" preserveAspectRatio="none"><use href="#meander-strip"/></svg>
+  </div>
+
+  <div class="seal-block">
+    <div class="seal-row">
+      <div class="addr left">
+        Sedes Romana<br>
+        Via dei Coronari, XLIV<br>
+        00186 Roma · Italia
+      </div>
+      <div class="seal" aria-hidden="true">
+        <svg viewBox="0 0 117.79 118.25" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(-58.86 -59.13)">
+            <circle cx="117.76" cy="118.25" r="52" fill="none" stroke="#f5efe2" stroke-width="1.4"/>
+            <circle cx="117.76" cy="118.25" r="46" fill="none" stroke="#f5efe2" stroke-width="0.8" stroke-dasharray="2 3"/>
+            <g fill="#f5efe2">
+              <ellipse cx="80" cy="118" rx="9" ry="4" transform="rotate(-30 80 118)"/>
+              <ellipse cx="155" cy="118" rx="9" ry="4" transform="rotate(30 155 118)"/>
+              <ellipse cx="92" cy="92" rx="9" ry="4" transform="rotate(-55 92 92)"/>
+              <ellipse cx="143" cy="92" rx="9" ry="4" transform="rotate(55 143 92)"/>
+              <ellipse cx="92" cy="144" rx="9" ry="4" transform="rotate(55 92 144)"/>
+              <ellipse cx="143" cy="144" rx="9" ry="4" transform="rotate(-55 143 144)"/>
+              <ellipse cx="118" cy="80" rx="9" ry="4"/>
+              <ellipse cx="118" cy="156" rx="9" ry="4"/>
+            </g>
+            <text x="117.76" y="115" text-anchor="middle" font-family="Cinzel,serif" font-size="9" letter-spacing="2" fill="#f5efe2">F·A</text>
+            <text x="117.76" y="128" text-anchor="middle" font-family="Cinzel,serif" font-size="6" letter-spacing="1.5" fill="#c9a23a">MMXII</text>
+          </g>
+        </svg>
+      </div>
+      <div class="addr right">
+        Fundatio Aurelia<br>
+        Charta Concessa<br>
+        Anno · MMXII
+      </div>
+    </div>
+  </div>
+
+  <div class="columns">
+    <div>
+      <h4>Patroni</h4>
+      <ul>
+        <li>Album Patronorum</li>
+        <li>Sodales Honorarii</li>
+        <li>Legacy Bequests</li>
+        <li>Annual Benefaction</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Tabularium</h4>
+      <ul>
+        <li>Officium Editoris</li>
+        <li>+39 06 6880 4412</li>
+        <li>scriba@fundatio-aurelia.it</li>
+        <li>Lun — Ven · IX — XVII</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Notitiae Legales</h4>
+      <ul>
+        <li>Statuta Fundationis</li>
+        <li>Cod. Fisc. 97812450589</li>
+        <li>Registro Persone Giuridiche</li>
+        <li>Privacy &amp; Cookie</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="charter">
+    · ANNO · CHARTAE · MMXII ·  ROMAE ·
+  </div>
+
+  <div class="meander-strip" aria-hidden="true">
+    <svg viewBox="0 0 1651 444" preserveAspectRatio="none"><use href="#meander-strip"/></svg>
+  </div>
+</footer>
+
+</body>
+</html>

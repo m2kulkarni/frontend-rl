@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Visit & Hours — Hanazono Museum of Edo Life</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), sans-serif;
+    margin: 0;
+    line-height: 1.6;
+    font-size: 15px;
+    overflow-x: hidden;
+  }
+
+  /* ---------- Navigation ---------- */
+  .site-nav {
+    padding: 28px 64px 0 64px;
+    background: var(--bg);
+    position: relative;
+  }
+  .nav-row {
+    display: flex;
+    align-items: center;
+    gap: 56px;
+    padding-bottom: 22px;
+  }
+  .wordmark {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+    color: var(--text);
+    flex-shrink: 0;
+  }
+  .wordmark .crane-seal {
+    width: 44px; height: 44px;
+    border: 1px solid var(--primary);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .wordmark .crane-seal svg { width: 30px; height: 30px; }
+  .wordmark .name {
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.18em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+  .nav-links {
+    display: flex;
+    gap: 38px;
+    margin-left: auto;
+    list-style: none;
+    padding: 0;
+  }
+  .nav-links a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding-bottom: 4px;
+    border-bottom: 1px solid transparent;
+  }
+  .nav-links a[aria-current="page"] {
+    border-bottom: 1px solid var(--accent);
+  }
+  .nav-rule {
+    height: 1px;
+    background: var(--primary);
+    width: 100vw;
+    margin-left: calc(-64px);
+  }
+
+  /* ---------- Hero / page title ---------- */
+  .page-hero {
+    padding: 90px 64px 60px 64px;
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    gap: 64px;
+    position: relative;
+  }
+  .hero-left .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .eyebrow .bar {
+    display: inline-block;
+    width: 48px; height: 1px;
+    background: var(--accent);
+  }
+  .hero-left h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 500;
+    font-size: 84px;
+    line-height: 0.98;
+    letter-spacing: -0.01em;
+    margin: 0 0 36px 0;
+    color: var(--primary);
+  }
+  .hero-left h1 .ja {
+    display: block;
+    font-size: 32px;
+    letter-spacing: 0.2em;
+    color: var(--secondary);
+    margin-top: 18px;
+    font-weight: 400;
+  }
+  .hero-left .lede {
+    max-width: 460px;
+    font-size: 16px;
+    color: var(--text);
+  }
+  .hero-right {
+    position: relative;
+    min-height: 360px;
+  }
+  .hero-frame-wrap {
+    position: absolute;
+    right: -40px; top: -20px;
+    width: 360px; height: 360px;
+    opacity: 0.08;
+  }
+  .hero-frame-wrap svg { width: 100%; height: 100%; }
+
+  /* ---------- Section divider ---------- */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--primary);
+    margin: 0 64px;
+  }
+  .section-mark {
+    padding: 32px 64px 0 64px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--primary);
+  }
+  .section-mark .num {
+    color: var(--accent);
+    font-family: var(--font-display), serif;
+  }
+
+  /* ---------- Two-column visit info ---------- */
+  .visit-grid {
+    padding: 60px 64px 100px 64px;
+    display: grid;
+    grid-template-columns: 4fr 4fr 4fr;
+    gap: 80px;
+    position: relative;
+  }
+  .col h2 {
+    font-family: var(--font-display), serif;
+    font-size: 26px;
+    font-weight: 500;
+    margin: 0 0 8px 0;
+    color: var(--primary);
+    padding-top: 14px;
+    border-top: 1px solid var(--primary);
+    position: relative;
+  }
+  .col .col-meta {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 22px;
+    font-variant: small-caps;
+  }
+  .col p { margin: 0 0 18px 0; }
+
+  /* Hours table-style list */
+  .hours-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px 0;
+  }
+  .hours-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px dotted rgba(12,12,12,0.25);
+    font-size: 14px;
+  }
+  .hours-list .day { color: var(--secondary); }
+  .hours-list .time { font-family: var(--font-display), serif; }
+  .hours-list .closed { color: var(--accent); font-style: italic; }
+
+  .note {
+    font-size: 13px;
+    color: var(--secondary);
+    border-left: 2px solid var(--primary);
+    padding-left: 14px;
+    margin-top: 18px;
+    line-height: 1.55;
+  }
+
+  /* Admission */
+  .admission-list { list-style: none; padding: 0; margin: 0; }
+  .admission-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(12,12,12,0.15);
+  }
+  .admission-list .who {
+    font-size: 14px;
+  }
+  .admission-list .price {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    color: var(--primary);
+  }
+  .admission-list .free {
+    color: var(--accent);
+    font-family: var(--font-display), serif;
+    font-size: 18px;
+    letter-spacing: 0.04em;
+  }
+
+  /* Address column with seal */
+  .address-col {
+    position: relative;
+  }
+  .address-col .seal {
+    position: absolute;
+    top: 14px;
+    right: 0;
+    width: 38px; height: 38px;
+    opacity: 0.85;
+  }
+  .address-col .seal svg { width: 100%; height: 100%; }
+  address {
+    font-style: normal;
+    font-family: var(--font-display), serif;
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--primary);
+    margin-bottom: 28px;
+  }
+  .directions h3 {
+    font-family: var(--font-body), sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin: 22px 0 8px 0;
+    font-weight: 500;
+  }
+
+  /* Entrance callout — single cinnabar accent for the page */
+  .entrance-callout {
+    margin: 0 64px 80px 64px;
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: 64px;
+    align-items: center;
+    padding: 56px 0;
+    border-top: 1px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
+    position: relative;
+  }
+  .entrance-callout::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'><circle cx='0' cy='200' r='80' fill='none' stroke='%231c3a5e' stroke-width='1'/><circle cx='100' cy='200' r='80' fill='none' stroke='%231c3a5e' stroke-width='1'/><circle cx='200' cy='200' r='80' fill='none' stroke='%231c3a5e' stroke-width='1'/></svg>");
+    background-size: 200px 200px;
+    background-repeat: repeat-x;
+    background-position: bottom;
+    opacity: 0.05;
+    pointer-events: none;
+  }
+  .entrance-callout .label {
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+  .entrance-callout h2 {
+    font-family: var(--font-display), serif;
+    font-size: 36px;
+    line-height: 1.15;
+    margin: 0;
+    color: var(--primary);
+    font-weight: 500;
+  }
+  .entrance-callout p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--text);
+    max-width: 520px;
+  }
+  .entrance-callout .noren {
+    display: inline-block;
+    margin-top: 18px;
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 2px;
+  }
+
+  /* Quick reference strip */
+  .quickref {
+    padding: 60px 64px 40px 64px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 48px;
+    border-top: 1px solid var(--primary);
+  }
+  .quickref .item .k {
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 8px;
+    font-variant: small-caps;
+  }
+  .quickref .item .v {
+    font-family: var(--font-display), serif;
+    font-size: 17px;
+    color: var(--primary);
+    line-height: 1.4;
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    background: var(--surface);
+    border-top: 1px solid var(--primary);
+    margin-top: 60px;
+    padding: 70px 64px 0 64px;
+    position: relative;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 3fr 4fr 3fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .footer-col h4 {
+    font-family: var(--font-body), sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin: 0 0 14px 0;
+    font-weight: 500;
+  }
+  .footer-col p, .footer-col address {
+    font-size: 13px;
+    line-height: 1.7;
+    margin: 0;
+    font-style: normal;
+    font-family: var(--font-body), sans-serif;
+  }
+  .footer-center {
+    text-align: center;
+  }
+  .paulownia-seal {
+    width: 96px; height: 96px;
+    margin: 0 auto 18px auto;
+    opacity: 0.92;
+  }
+  .paulownia-seal svg { width: 100%; height: 100%; }
+  .footer-museum-name {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    letter-spacing: 0.06em;
+    color: var(--primary);
+    margin: 0 0 6px 0;
+  }
+  .footer-museum-sub {
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--secondary);
+  }
+  .seigaiha-band {
+    margin-top: 50px;
+    height: 70px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='100' viewBox='0 0 200 100'><g fill='none' stroke='%231c3a5e' stroke-width='1'><path d='M 0,100 V 50 A 50,50 0 0 1 50,0 50,50 0 0 1 100,50 V 100'/><path d='M 100,100 V 50 A 50,50 0 0 1 150,0 50,50 0 0 1 200,50 V 100'/><path d='M 0,100 V 75 A 25,25 0 0 1 25,50 25,25 0 0 1 50,75 V 100'/><path d='M 50,100 V 75 A 25,25 0 0 1 75,50 25,25 0 0 1 100,75 V 100'/><path d='M 100,100 V 75 A 25,25 0 0 1 125,50 25,25 0 0 1 150,75 V 100'/><path d='M 150,100 V 75 A 25,25 0 0 1 175,50 25,25 0 0 1 200,75 V 100'/></g></svg>");
+    background-repeat: repeat-x;
+    background-size: 200px 70px;
+    background-position: bottom;
+    opacity: 0.18;
+    margin-left: -64px;
+    margin-right: -64px;
+  }
+  .footer-credit {
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    padding: 18px 0 28px 0;
+  }
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="nav-row">
+    <a class="wordmark" href="page-1.html" aria-label="Hanazono Museum of Edo Life — home">
+      <span class="crane-seal" aria-hidden="true">
+        <!-- Crane kamon (simplified circular usage of tsuru-crane motif) -->
+        <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+          <circle cx="344" cy="344" r="320" fill="none" stroke="#0c0c0c" stroke-width="14"/>
+          <g transform="translate(40,40) scale(0.88)">
+            <path d="M344 120 c -55 30 -90 80 -95 140 c -3 36 12 70 38 92 c -22 6 -44 4 -64 -8 c -8 -6 -10 8 0 14 c 30 18 70 16 96 -6 c 6 50 36 92 80 116 c -12 28 -34 50 -64 58 c -10 4 -6 16 4 14 c 50 -8 92 -42 110 -88 c 18 46 60 80 110 88 c 10 2 14 -10 4 -14 c -30 -8 -52 -30 -64 -58 c 44 -24 74 -66 80 -116 c 26 22 66 24 96 6 c 10 -6 8 -20 0 -14 c -20 12 -42 14 -64 8 c 26 -22 41 -56 38 -92 c -5 -60 -40 -110 -95 -140 z" fill="#0c0c0c"/>
+          </g>
+        </svg>
+      </span>
+      <span class="name">Hanazono<br>Museum of Edo Life</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="page-1.html">Home</a></li>
+      <li><a href="page-2.html">Exhibition</a></li>
+      <li><a href="page-3.html">Collection</a></li>
+      <li><a href="page-4.html">The Machiya</a></li>
+      <li><a href="page-5.html" aria-current="page">Visit</a></li>
+      <li><a href="page-6.html">About</a></li>
+    </ul>
+  </div>
+  <div class="nav-rule"></div>
+</header>
+
+<section class="page-hero">
+  <div class="hero-left">
+    <div class="eyebrow"><span class="bar"></span> Plan your visit · 拝観案内</div>
+    <h1>
+      Visit &amp;<br>Hours
+      <span class="ja">拝観のご案内</span>
+    </h1>
+    <p class="lede">The museum occupies a restored Meiji-era machiya tucked along Aneyakōji-dōri in central Kyoto. Galleries, the inner garden and the workshop floor are open year-round to visitors arriving on foot from Karasuma-Oike subway.</p>
+  </div>
+  <div class="hero-right" aria-hidden="true">
+    <div class="hero-frame-wrap">
+      <!-- Tsuru crane mon as low-opacity hero ornament -->
+      <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="344" cy="344" r="338" fill="none" stroke="#0c0c0c" stroke-width="2"/>
+        <circle cx="344" cy="344" r="300" fill="none" stroke="#0c0c0c" stroke-width="1"/>
+        <g transform="translate(120,120) scale(0.65)">
+          <path d="M344 120 c -55 30 -90 80 -95 140 c -3 36 12 70 38 92 c -22 6 -44 4 -64 -8 c -8 -6 -10 8 0 14 c 30 18 70 16 96 -6 c 6 50 36 92 80 116 c -12 28 -34 50 -64 58 c -10 4 -6 16 4 14 c 50 -8 92 -42 110 -88 c 18 46 60 80 110 88 c 10 2 14 -10 4 -14 c -30 -8 -52 -30 -64 -58 c 44 -24 74 -66 80 -116 c 26 22 66 24 96 6 c 10 -6 8 -20 0 -14 c -20 12 -42 14 -64 8 c 26 -22 41 -56 38 -92 c -5 -60 -40 -110 -95 -140 z" fill="#0c0c0c"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<div class="section-mark"><span class="num">No. 05</span> · Practical information for the visitor</div>
+
+<section class="visit-grid">
+  <div class="col">
+    <div class="col-meta">I — Opening Hours</div>
+    <h2>Open Tuesday<br>through Sunday</h2>
+    <ul class="hours-list">
+      <li><span class="day">Tuesday</span><span class="time">09:30 — 17:00</span></li>
+      <li><span class="day">Wednesday</span><span class="time">09:30 — 17:00</span></li>
+      <li><span class="day">Thursday</span><span class="time">09:30 — 17:00</span></li>
+      <li><span class="day">Friday</span><span class="time">09:30 — 17:00</span></li>
+      <li><span class="day">Saturday</span><span class="time">09:30 — 17:00</span></li>
+      <li><span class="day">Sunday</span><span class="time">09:30 — 17:00</span></li>
+      <li><span class="day">Monday</span><span class="closed">closed</span></li>
+    </ul>
+    <p class="note">Last entry at 16:30. The museum is closed annually from 29 December through 3 January for the New Year period, and occasionally for installation between rotating exhibitions — please check the home page before travelling.</p>
+  </div>
+
+  <div class="col">
+    <div class="col-meta">II — Admission</div>
+    <h2>Tickets at<br>the genkan</h2>
+    <ul class="admission-list">
+      <li><span class="who">General admission</span><span class="price">¥1,200</span></li>
+      <li><span class="who">Students &amp; seniors (65+)</span><span class="price">¥800</span></li>
+      <li><span class="who">Children under 15</span><span class="free">free</span></li>
+      <li><span class="who">Kyoto residents · 1st Sunday of the month</span><span class="free">free</span></li>
+    </ul>
+    <p class="note">Tickets are sold at the genkan reception on arrival; cash and IC cards accepted. Group rates for parties of ten or more are available by written request to the curatorial office at least two weeks in advance.</p>
+  </div>
+
+  <div class="col address-col">
+    <div class="col-meta">III — Address &amp; access</div>
+    <div class="seal" aria-hidden="true">
+      <!-- Umebachi plum kamon as small seal -->
+      <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg">
+        <g fill="#0c0c0c">
+          <circle cx="344" cy="180" r="78"/>
+          <circle cx="180" cy="290" r="78"/>
+          <circle cx="510" cy="290" r="78"/>
+          <circle cx="240" cy="490" r="78"/>
+          <circle cx="450" cy="490" r="78"/>
+          <circle cx="344" cy="344" r="48"/>
+        </g>
+      </svg>
+    </div>
+    <h2>Aneyakōji-dōri,<br>Nakagyō-ku</h2>
+    <address>
+      218 Aneyakōji-dōri<br>
+      Nakagyō-ku, Kyoto<br>
+      604-8091 Japan
+    </address>
+    <div class="directions">
+      <h3>By subway</h3>
+      <p>Karasuma-Oike Station (Karasuma &amp; Tōzai lines) — exit 2, then eight minutes on foot southward along Karasuma-dōri, turning west onto Aneyakōji.</p>
+      <h3>By bus</h3>
+      <p>City Bus 15 or 51 to Karasuma-Oike; the museum sits a short block west of the stop.</p>
+      <h3>On foot from Nijō-jō</h3>
+      <p>A pleasant fifteen-minute walk east through the merchant lanes of Nakagyō.</p>
+    </div>
+  </div>
+</section>
+
+<aside class="entrance-callout">
+  <div>
+    <div class="label">A note on the entrance</div>
+    <h2>Enter through the noren-curtained doorway, not the side gate.</h2>
+  </div>
+  <div>
+    <p>The machiya presents two openings to the street. Visitors should pass beneath the indigo <em>noren</em> hung at the principal genkan — recognisable by the small crane seal on its left panel. The narrow side gate, set further down the lane behind a slatted lattice, leads only to the staff entrance and the kura storehouse and is kept closed during public hours.</p>
+    <span class="noren">暖簾より入る · enter beneath the noren</span>
+  </div>
+</aside>
+
+<section class="quickref" aria-label="Quick reference">
+  <div class="item">
+    <div class="k">Telephone</div>
+    <div class="v">+81 (0)75 — 231 — 0428</div>
+  </div>
+  <div class="item">
+    <div class="k">Accessibility</div>
+    <div class="v">Ground-floor galleries step-free; upper floor by traditional staircase only.</div>
+  </div>
+  <div class="item">
+    <div class="k">Photography</div>
+    <div class="v">Permitted without flash, except in the print gallery.</div>
+  </div>
+  <div class="item">
+    <div class="k">Tea room</div>
+    <div class="v">Open 11:00 — 16:00 on weekends; matcha and seasonal wagashi served.</div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>Address</h4>
+      <address>
+        Hanazono Museum of Edo Life<br>
+        218 Aneyakōji-dōri<br>
+        Nakagyō-ku, Kyoto 604-8091<br>
+        Japan
+      </address>
+    </div>
+    <div class="footer-col footer-center">
+      <div class="paulownia-seal" aria-hidden="true">
+        <!-- Paulownia kamon (kiri) signature seal -->
+        <svg viewBox="0 0 345 326" xmlns="http://www.w3.org/2000/svg">
+          <g fill="#0c0c0c" transform="translate(0,0)">
+            <ellipse cx="172" cy="50" rx="22" ry="44"/>
+            <ellipse cx="100" cy="80" rx="20" ry="40" transform="rotate(-25 100 80)"/>
+            <ellipse cx="244" cy="80" rx="20" ry="40" transform="rotate(25 244 80)"/>
+            <rect x="166" y="90" width="12" height="70"/>
+            <rect x="96" y="115" width="10" height="55" transform="rotate(-20 101 142)"/>
+            <rect x="240" y="115" width="10" height="55" transform="rotate(20 245 142)"/>
+            <path d="M172 160 C 110 200 90 260 100 320 L 244 320 C 254 260 234 200 172 160 z"/>
+          </g>
+        </svg>
+      </div>
+      <div class="footer-museum-name">花園江戸暮らし博物館</div>
+      <div class="footer-museum-sub">Hanazono Museum of Edo Life · Kyoto</div>
+    </div>
+    <div class="footer-col" style="text-align:right;">
+      <h4>Hours</h4>
+      <p>
+        Tue — Sun · 09:30 – 17:00<br>
+        Last entry 16:30<br>
+        Closed Mondays<br>
+        29 Dec – 3 Jan
+      </p>
+    </div>
+  </div>
+  <div class="seigaiha-band" aria-hidden="true"></div>
+  <div class="footer-credit">Kamon sources used on this site are reproduced under CC BY-SA · © Hanazono Museum of Edo Life</div>
+</footer>
+
+</body>
+</html>

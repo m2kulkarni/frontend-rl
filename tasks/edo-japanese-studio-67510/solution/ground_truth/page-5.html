@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Visit the Bench — Kuramae Sashimono</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), "Shippori Mincho", serif;
+    font-size: 15px;
+    line-height: 1.7;
+    position: relative;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("svg/asanoha-hempleaf.svg");
+    background-size: 380px 380px;
+    background-repeat: repeat;
+    opacity: 0.12;
+    pointer-events: none;
+    z-index: 0;
+  }
+  main, header, footer { position: relative; z-index: 1; }
+
+  /* ============ NAV ============ */
+  .topnav {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    align-items: center;
+    padding: 22px 64px 22px 40px;
+    border-bottom: 1px solid var(--ornament);
+  }
+  .topnav .roundel {
+    width: 52px;
+    height: 52px;
+    border: 1px solid var(--ornament);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: var(--surface);
+  }
+  .topnav .roundel svg {
+    width: 86%;
+    height: 86%;
+  }
+  .topnav nav {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0;
+  }
+  .topnav nav a {
+    font-family: var(--font-body), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.14em;
+    font-size: 12px;
+    color: var(--text);
+    text-decoration: none;
+    padding: 4px 22px;
+    border-right: 1px solid var(--ornament);
+    line-height: 1;
+  }
+  .topnav nav a:first-child { border-left: 1px solid var(--ornament); }
+  .topnav nav a[aria-current="page"] {
+    border-bottom: 2px solid var(--secondary);
+    padding-bottom: 2px;
+  }
+
+  /* ============ HERO / TITLE BLOCK ============ */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 560px;
+    padding: 80px 64px 60px 40px;
+  }
+  .hero .left { /* deliberately empty — ma */ }
+  .hero .anchor {
+    align-self: end;
+    padding-bottom: 30px;
+  }
+  .hero .kanji-mark {
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.4em;
+    color: var(--text);
+    margin-bottom: 24px;
+    writing-mode: vertical-rl;
+    height: 90px;
+  }
+  .hero h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 64px;
+    line-height: 1.05;
+    margin: 0 0 18px 0;
+    letter-spacing: 0.02em;
+  }
+  .hero .subtitle {
+    font-style: italic;
+    font-size: 17px;
+    color: var(--text);
+    margin: 0 0 28px 0;
+    max-width: 460px;
+  }
+  .hero .rule {
+    width: 88px;
+    height: 1px;
+    background: var(--secondary);
+    margin: 22px 0 18px 0;
+  }
+  .hero .meta {
+    font-size: 12px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+
+  /* ============ FRET DIVIDER ============ */
+  .fret-strip {
+    height: 28px;
+    background-image: url("svg/sayagata-keyfret.svg");
+    background-size: 180px 180px;
+    background-repeat: repeat-x;
+    opacity: 0.18;
+    margin: 0;
+  }
+
+  /* ============ ADDRESS / VERTICAL BLOCK ============ */
+  .visit-block {
+    display: grid;
+    grid-template-columns: 0.9fr 1.4fr 0.7fr;
+    gap: 60px;
+    padding: 90px 64px 90px 40px;
+  }
+  .vertical-address {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    gap: 18px;
+    align-items: flex-start;
+    padding-top: 12px;
+  }
+  .vcol {
+    writing-mode: vertical-rl;
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    line-height: 2.1;
+    letter-spacing: 0.18em;
+    color: var(--text);
+    height: 360px;
+  }
+  .vcol.small {
+    font-size: 14px;
+    font-family: var(--font-body), serif;
+    letter-spacing: 0.2em;
+    color: var(--text);
+    height: 360px;
+  }
+  .vcol .accent { color: var(--secondary); }
+
+  .info-column h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 28px;
+    margin: 0 0 4px 0;
+    letter-spacing: 0.04em;
+  }
+  .info-column .ja {
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.4em;
+    color: var(--secondary);
+    margin-bottom: 28px;
+  }
+  .info-column p {
+    margin: 0 0 18px 0;
+    max-width: 520px;
+  }
+  .info-column .lead {
+    font-size: 17px;
+    line-height: 1.75;
+  }
+  .info-column .hr {
+    width: 64px;
+    height: 1px;
+    background: var(--ornament);
+    margin: 28px 0;
+  }
+
+  .seal-column {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 30px;
+  }
+  .seal-column .seal {
+    width: 150px;
+    height: 150px;
+    border: 1px solid var(--ornament);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface);
+  }
+  .seal-column .seal svg { width: 78%; height: 78%; }
+  .seal-column .caption {
+    margin-top: 18px;
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+
+  /* ============ HOURS CARD GRID ============ */
+  .hours-section {
+    padding: 30px 64px 100px 40px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 60px;
+  }
+  .hours-section .label {
+    font-family: var(--font-display), serif;
+    font-size: 32px;
+    letter-spacing: 0.06em;
+    padding-top: 20px;
+  }
+  .hours-section .label small {
+    display: block;
+    font-family: var(--font-body), serif;
+    font-size: 11px;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    margin-top: 10px;
+    color: var(--text);
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px 50px;
+  }
+  .card {
+    position: relative;
+    background: var(--surface);
+    border-top: 1px solid var(--ornament);
+    border-left: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+    border-right: none;
+    padding: 28px 36px 32px 32px;
+  }
+  .card .ume {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 28px;
+    height: 28px;
+    opacity: 0.85;
+  }
+  .card .ume svg { width: 100%; height: 100%; }
+  .card h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 22px;
+    margin: 0 0 6px 0;
+    padding-right: 36px;
+    letter-spacing: 0.03em;
+  }
+  .card .meta-line {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin-bottom: 14px;
+  }
+  .card p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .card .figure {
+    font-family: var(--font-display), serif;
+    font-size: 17px;
+    color: var(--secondary);
+  }
+
+  /* ============ PLANING-DAY CALLOUT ============ */
+  .planing {
+    padding: 0 64px 90px 40px;
+    display: grid;
+    grid-template-columns: 1fr 1.6fr 1fr;
+    gap: 50px;
+    align-items: start;
+  }
+  .planing .empty { /* ma */ }
+  .planing .content {
+    border-left: 1px solid var(--ornament);
+    padding: 8px 0 8px 36px;
+  }
+  .planing .content h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 30px;
+    margin: 0 0 6px 0;
+    letter-spacing: 0.04em;
+  }
+  .planing .content .small-cap {
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 22px;
+  }
+  .planing .content p { margin: 0 0 14px 0; max-width: 520px; }
+  .planing .content .signoff {
+    font-style: italic;
+    margin-top: 22px;
+    color: var(--text);
+  }
+
+  /* ============ CORRESPONDENCE STRIP ============ */
+  .corr {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    border-top: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+    margin: 0 40px 90px 40px;
+  }
+  .corr > div {
+    padding: 32px 28px;
+    border-right: 1px solid var(--ornament);
+  }
+  .corr > div:last-child { border-right: none; }
+  .corr h4 {
+    font-family: var(--font-body), serif;
+    font-variant: small-caps;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    font-size: 12px;
+    margin: 0 0 14px 0;
+    color: var(--text);
+  }
+  .corr .num {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+  }
+  .corr p { margin: 0; font-size: 13px; }
+
+  /* ============ FOOTER ============ */
+  footer {
+    background: var(--bg);
+    margin-top: 0;
+  }
+  .footer-fret {
+    height: 26px;
+    background-image: url("svg/sayagata-keyfret.svg");
+    background-size: 160px 160px;
+    background-repeat: repeat-x;
+    opacity: 0.16;
+  }
+  .footer-body {
+    display: grid;
+    grid-template-columns: 1.1fr 1.4fr 1fr;
+    gap: 50px;
+    padding: 60px 64px 30px 40px;
+    min-height: 280px;
+  }
+  .footer-body .mark {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .footer-body .mark .seal {
+    width: 110px; height: 110px;
+    border: 1px solid var(--ornament);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--surface);
+  }
+  .footer-body .mark .seal svg { width: 80%; height: 80%; filter: invert(1); }
+  .footer-body .mark .vsig {
+    margin-top: 22px;
+    writing-mode: vertical-rl;
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.28em;
+    height: 220px;
+  }
+  .footer-body .center {
+    align-self: end;
+    font-family: var(--font-display), serif;
+    font-size: 18px;
+    line-height: 2;
+    letter-spacing: 0.06em;
+    font-style: normal;
+    max-width: 380px;
+    color: var(--text);
+  }
+  .footer-body .center em { color: var(--secondary); font-style: normal; }
+  .footer-body .right {
+    align-self: end;
+    text-align: right;
+  }
+  .footer-body .right .nav-mini {
+    display: flex; flex-direction: column; gap: 6px;
+    font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
+  }
+  .footer-body .right .nav-mini a { color: var(--text); text-decoration: none; }
+  .footer-body .right .nav-mini a[aria-current="page"] { color: var(--secondary); }
+  .attrib {
+    padding: 14px 64px 30px 40px;
+    border-top: 1px solid var(--ornament);
+    font-size: 11px;
+    color: var(--text);
+    display: flex;
+    justify-content: space-between;
+  }
+</style>
+</head>
+<body>
+
+<header class="topnav">
+  <div class="roundel" aria-hidden="true">
+    <!-- tsuru roundel reused as studio mark -->
+    <svg viewBox="0 0 688 688" preserveAspectRatio="xMidYMid meet"><circle cx="344" cy="344" r="320" fill="none" stroke="#0c0c0c" stroke-width="6"/><g transform="translate(344 344) scale(0.55) translate(-344 -344)" opacity="0.9"><circle cx="344" cy="344" r="290" fill="#f5efde"/><path d="M180 360 Q260 200 344 240 Q430 280 510 220 Q470 360 380 380 Q300 410 240 480 Q200 420 180 360 Z" fill="#0c0c0c"/></g></svg>
+  </div>
+  <nav aria-label="Primary">
+    <a href="page-1.html">Studio</a>
+    <a href="page-2.html">Commissions</a>
+    <a href="page-3.html">On Joinery</a>
+    <a href="page-4.html">Workshop</a>
+    <a href="page-5.html" aria-current="page">Visit</a>
+    <a href="page-6.html">Correspondence</a>
+  </nav>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="left" aria-hidden="true"></div>
+    <div class="anchor">
+      <div class="kanji-mark">蔵 前 指 物</div>
+      <h1>Visit the<br>Bench.</h1>
+      <p class="subtitle">A working sashimono studio in Kuramae, open by appointment to those who wish to see joinery cut by hand.</p>
+      <div class="rule"></div>
+      <div class="meta">Page Five &nbsp;·&nbsp; Of Six &nbsp;·&nbsp; 案内</div>
+    </div>
+  </section>
+
+  <div class="fret-strip" aria-hidden="true"></div>
+
+  <section class="visit-block">
+    <div class="vertical-address" aria-label="Studio address in vertical orientation">
+      <div class="vcol">大正通三ノ七ノ二</div>
+      <div class="vcol">台東區・東京</div>
+      <div class="vcol small">蔵前指物工房 &nbsp; 〒一一一</div>
+    </div>
+
+    <div class="info-column">
+      <div class="ja">所 在 地 ・ A D D R E S S</div>
+      <h2>Taishō-dōri 3-7-2, Taitō-ku</h2>
+      <p class="lead">The bench occupies the ground floor of a two-storey wood-frame house three minutes east of the Sumida embankment. A blue noren marked with the paulownia kamon hangs at the entrance from morning until close. There is no signboard; the noren is the sign.</p>
+      <div class="hr"></div>
+      <p>Visitors are received <strong>by appointment only</strong>, Tuesday through Saturday. We ask that letters of introduction precede a first visit by no fewer than seven days, so that work in progress may be set aside without strain on the joint.</p>
+      <p>The studio is closed during O-Bon (mid-August) and the New Year week (28 December — 4 January), and on the third Wednesday of each month for tool maintenance.</p>
+    </div>
+
+    <div class="seal-column">
+      <div>
+        <div class="seal" aria-hidden="true">
+          <svg viewBox="0 0 345.20605 326.25635" preserveAspectRatio="xMidYMid meet">
+            <g transform="matrix(0.9861902,0,0,0.9861902,2.3836171,5.3631323)" fill="#0c0c0c">
+              <circle cx="172.60352" cy="155.03467" r="9.9453125"/>
+              <path d="M175.15234,166.07861 C 174.81543,169.77197 174.48633,173.61865 174.33496,177.29736 C 190.88574,185.96729 206.31055,197.3335 217.36035,212.56689 C 228.23242,229.14404 236.83105,249.18896 234.12988,269.51904 C 232.72656,262.25049 232.2832,254.97607 230.68652,247.70752 C 223.35059,218.45654 201.30664,194.69482 174.75195,181.12549 C 174.59082,184.9585 174.625,188.78857 174.65723,192.62061 C 188.71387,200.74268 201.2627,211.93994 210.00195,225.84912 C 221.85547,245.48486 225.1377,270.93604 216.31836,292.66357 C 218.12695,280.00244 218.97461,267.15674 217.52637,254.5249 C 213.29297,229.84326 196.82227,208.146 174.69238,196.64307 C 174.54297,201.81982 174.58496,206.80029 174.4375,211.97412 C 174.31836,220.40381 173.02246,225.59033 176.11816,229.20166 C 193.9209,250.12744 197.45117,282.09326 185.78027,306.71533 C 186.66699,298.0874 189.08594,289.64014 189.01074,280.82373 C 190.20703,263.76416 185.83789,245.60107 174.23047,232.66846 C 174.03418,254.51221 174.60254,276.3501 174.4043,298.00146 C 174.24121,301.45166 173.69434,304.7124 172.76465,307.979 C 172.7002,307.69678 172.66309,307.4126 172.60449,307.12939 C 172.54492,307.4126 172.50977,307.69678 172.44531,307.979 C 171.5127,304.7124 170.96973,301.45166 170.80469,298.00146 C 170.60645,276.3501 171.17383,254.51221 170.97949,232.66846 C 159.37305,245.60107 155.00195,263.76416 156.19727,280.82373 C 156.12305,289.64014 158.54004,298.0874 159.42676,306.71533 C 147.75977,282.09326 151.28906,250.12744 169.09082,229.20166 C 172.18555,225.59033 170.89063,220.40381 171.11816,216.19287 C 157.07031,223.54736 146.22461,237.05811 142.83105,252.9292 C 137.90723,269.17139 141.97852,285.87646 144.71484,302.18701 C 135.10059,283.13623 135.11133,259.56885 143.70313,240.29053 C 149.1748,228.07568 159.41211,218.58252 170.77051,211.97412 C 170.62109,206.80029 170.66602,201.81982 170.51563,196.64307 C 148.38867,208.146 131.91602,229.84326 127.68066,254.5249 C 126.2334,267.15674 127.08203,280.00244 128.8916,292.66357 C 120.06934,270.93604 123.35352,245.48486 135.20508,225.84912 C 143.94824,211.93994 156.49707,200.74268 170.55078,192.62061 C 170.58496,188.78857 170.61523,184.9585 170.45605,181.12549 C 143.90234,194.69482 121.8584,218.45654 114.52246,247.70752 C 112.92773,254.97607 112.48438,262.25049 111.0791,269.51904 C 108.37695,249.18896 116.97461,229.14404 127.84863,212.56689 C 138.89941,197.3335 154.32324,185.96729 170.87598,177.29736 C 170.7207,173.61865 170.3916,169.77197 170.05859,166.07861 Z"/>
+            </g>
+          </svg>
+        </div>
+        <div class="caption">Studio Mark<br>桐 紋</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hours-section">
+    <div class="label">
+      Hours.
+      <small>営業時間 · By Appointment</small>
+    </div>
+
+    <div class="cards">
+
+      <article class="card">
+        <div class="ume" aria-hidden="true">
+          <svg viewBox="0 0 688 688" preserveAspectRatio="xMidYMid meet"><rect width="688" height="688" fill="#0c0c0c"/><path d="M226 612 C 207 610 189 603 174 592 C 168 587 158 577 153 571 C 132 543 126 507 137 474 C 141 464 146 453 152 445 C 157 440 167 429 173 425 C 201 403 237 397 270 409 C 286 414 299 422 311 435 C 323 447 331 459 336 474 C 346 504 342 535 326 563 C 318 575 304 589 291 597 C 271 609 248 614 226 612 Z M 439 612 C 421 610 402 603 387 592 C 382 587 372 577 367 571 C 346 543 340 507 351 474 C 355 464 360 453 366 445 C 371 440 381 429 387 425 C 415 403 451 397 484 409 C 500 414 513 422 525 435 C 537 447 544 459 550 474 C 560 504 556 535 540 563 C 532 575 518 589 505 597 C 485 609 462 614 439 612 Z M 159 409 C 141 407 122 400 107 389 C 101 385 92 375 87 369 C 66 341 60 305 71 272 C 75 261 80 251 86 242 C 90 237 101 226 107 222 C 127 206 154 198 179 201 C 189 202 195 203 204 206 C 220 211 233 220 245 232 C 257 244 264 256 270 272 C 280 301 276 332 260 360 C 252 373 238 387 225 394 C 205 407 182 412 159 409 Z M 506 409 C 487 407 469 400 454 389 C 448 385 438 375 433 369 C 412 341 406 305 417 272 C 421 261 426 251 433 242 C 437 237 447 226 453 222 C 474 206 500 198 525 201 C 535 202 541 203 550 206 C 566 211 579 220 592 232 C 603 244 611 256 616 272 C 626 301 622 332 606 360 C 598 373 584 387 571 394 C 551 407 528 412 506 409 Z M 333 283 C 314 281 295 274 281 263 C 275 259 265 249 260 243 C 239 215 233 179 244 146 C 248 135 253 125 259 116 C 264 111 274 100 280 96 C 308 75 344 69 377 80 C 393 85 406 94 418 106 C 430 118 437 130 443 146 C 453 175 449 206 433 234 C 425 247 411 261 398 268 C 378 281 355 286 333 283 Z" fill="#f5efde"/></svg>
+        </div>
+        <h3>Tuesday — Friday</h3>
+        <div class="meta-line">Open · Joinery in Progress</div>
+        <p><span class="figure">10:00 — 17:00</span><br>The plane bench is in use; visitors are received in the front matted room only. A pot of hōjicha is kept at all hours.</p>
+      </article>
+
+      <article class="card">
+        <div class="ume" aria-hidden="true">
+          <svg viewBox="0 0 688 688" preserveAspectRatio="xMidYMid meet"><rect width="688" height="688" fill="#0c0c0c"/><circle cx="344" cy="344" r="60" fill="#f5efde"/><circle cx="180" cy="240" r="80" fill="#f5efde"/><circle cx="500" cy="240" r="80" fill="#f5efde"/><circle cx="180" cy="460" r="80" fill="#f5efde"/><circle cx="500" cy="460" r="80" fill="#f5efde"/><circle cx="344" cy="120" r="80" fill="#f5efde"/></svg>
+        </div>
+        <h3>Saturday</h3>
+        <div class="meta-line">Open · Showings of Finished Work</div>
+        <p><span class="figure">10:00 — 17:00</span><br>Commissioned tansu and tea-utensil boxes awaiting collection may be inspected. Letter of introduction requested for first visits.</p>
+      </article>
+
+      <article class="card">
+        <div class="ume" aria-hidden="true">
+          <svg viewBox="0 0 688 688" preserveAspectRatio="xMidYMid meet"><rect width="688" height="688" fill="#0c0c0c"/><circle cx="344" cy="344" r="60" fill="#f5efde"/><circle cx="180" cy="240" r="80" fill="#f5efde"/><circle cx="500" cy="240" r="80" fill="#f5efde"/><circle cx="180" cy="460" r="80" fill="#f5efde"/><circle cx="500" cy="460" r="80" fill="#f5efde"/><circle cx="344" cy="120" r="80" fill="#f5efde"/></svg>
+        </div>
+        <h3>Sunday — Monday</h3>
+        <div class="meta-line">Closed · Sharpening &amp; Sweeping</div>
+        <p>The studio is closed to visitors. Stones are flattened; the floor is swept; correspondence is read and answered by hand.</p>
+      </article>
+
+      <article class="card">
+        <div class="ume" aria-hidden="true">
+          <svg viewBox="0 0 688 688" preserveAspectRatio="xMidYMid meet"><rect width="688" height="688" fill="#0c0c0c"/><circle cx="344" cy="344" r="60" fill="#f5efde"/><circle cx="180" cy="240" r="80" fill="#f5efde"/><circle cx="500" cy="240" r="80" fill="#f5efde"/><circle cx="180" cy="460" r="80" fill="#f5efde"/><circle cx="500" cy="460" r="80" fill="#f5efde"/><circle cx="344" cy="120" r="80" fill="#f5efde"/></svg>
+        </div>
+        <h3>Annual Closures</h3>
+        <div class="meta-line">O-Bon · New Year · Maintenance</div>
+        <p>Closed <span class="figure">13 — 17 August</span> for O-Bon, and <span class="figure">28 December — 4 January</span> for the New Year week. Letters received during these periods are answered upon return.</p>
+      </article>
+
+    </div>
+  </section>
+
+  <div class="fret-strip" aria-hidden="true"></div>
+
+  <section class="planing">
+    <div class="empty" aria-hidden="true"></div>
+    <div class="content">
+      <div class="small-cap>">Second Saturday · 鉋 削 り の 日</div>
+      <h2>Planing Day.</h2>
+      <p>On the second Saturday of each month, between <strong>13:00 and 16:00</strong>, the bench is opened to those who wish to observe the dressing of a board with a Japanese plane. No demonstration is staged for its own sake — work proceeds as it would on any other day, and visitors are asked to remain quiet, seated on the matted step, while the shaving runs.</p>
+      <p>Attendance is by prior letter only. We accept no more than four guests on a given day. Children above the age of ten are welcome if accompanied; younger children, regrettably, cannot be received, as the floor is hung with edged tools.</p>
+      <p>To request a place, please write at least three weeks in advance, naming the date you hope to attend and a brief reason for your interest. A reply will be sent by return post.</p>
+      <p class="signoff">— Iwakura Tōru, joiner-in-charge</p>
+    </div>
+    <div class="empty" aria-hidden="true"></div>
+  </section>
+
+  <section class="visit-block" style="padding-top:0; padding-bottom:60px;">
+    <div class="vertical-address">
+      <div class="vcol">蔵 前 駅</div>
+      <div class="vcol small">都営浅草線 ・ 徒歩四分</div>
+    </div>
+    <div class="info-column">
+      <div class="ja">交 通 ・ A C C E S S</div>
+      <h2>By foot from Kuramae station</h2>
+      <p class="lead">The nearest station is <strong>Kuramae</strong> on the Toei Asakusa line — exit A2, then four minutes on foot, walking east toward the river. From the Ōedo line concourse, the same exit is reached by an underground passage of roughly ninety paces.</p>
+      <p>Visitors arriving by bicycle may leave their machines along the wall opposite the noren; please do not lean them against the lattice. There is no parking for motor vehicles.</p>
+      <p>The studio sits between a dry-goods seller and a small printing works. If you reach the rice-cracker shop on the corner, you have walked one house too far.</p>
+    </div>
+    <div class="seal-column">
+      <div>
+        <div class="seal" aria-hidden="true">
+          <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="none" stroke="#0c0c0c"/><text x="50" y="44" text-anchor="middle" font-family="Yuji Syuku, serif" font-size="22" fill="#0c0c0c">蔵</text><text x="50" y="68" text-anchor="middle" font-family="Yuji Syuku, serif" font-size="22" fill="#e34234">前</text></svg>
+        </div>
+        <div class="caption">Kuramae<br>蔵 前</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="corr">
+    <div>
+      <h4>Telephone</h4>
+      <div class="num">03 · 3851 · XXXX</div>
+      <p>Tuesday through Saturday, 11:00 — 16:00. The bench is often unattended; please leave a message, and we shall return your call in the evening.</p>
+    </div>
+    <div>
+      <h4>By Post — Preferred</h4>
+      <div class="num">〒 111-0051</div>
+      <p>Kuramae Sashimono Kōbō<br>Taishō-dōri 3-7-2, Taitō-ku, Tōkyō. Letters are answered in the order received, by hand, on washi.</p>
+    </div>
+    <div>
+      <h4>First Visit</h4>
+      <div class="num">七 日 前 ま で に</div>
+      <p>A letter of introduction is asked for, sent at least seven days in advance, naming the work that has drawn you to enquire.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-fret" aria-hidden="true"></div>
+  <div class="footer-body">
+    <div class="mark">
+      <div class="seal" aria-hidden="true">
+        <svg viewBox="0 0 345.20605 326.25635" preserveAspectRatio="xMidYMid meet">
+          <g transform="matrix(0.9861902,0,0,0.9861902,2.3836171,5.3631323)" fill="#0c0c0c">
+            <circle cx="172.60352" cy="155.03467" r="9.9453125"/>
+            <path d="M170 175 Q170 220 150 260 Q160 295 175 320 Q190 295 200 260 Q180 220 180 175 Z"/>
+            <path d="M120 200 Q90 230 90 270 Q105 290 130 295 Q140 260 140 220 Z"/>
+            <path d="M225 200 Q255 230 255 270 Q240 290 215 295 Q205 260 205 220 Z"/>
+          </g>
+        </svg>
+      </div>
+      <div class="vsig">蔵前指物 ・ 大正通三ノ七ノ二 ・ 台東區 ・ 東京</div>
+    </div>
+    <div class="center">
+      Founded <em>Bunkyū 2</em> (1862).<br>
+      Rebuilt <em>Shōwa 24</em> (1949).<br>
+      Continued.
+    </div>
+    <div class="right">
+      <nav class="nav-mini" aria-label="Footer">
+        <a href="page-1.html">Studio</a>
+        <a href="page-2.html">Commissions</a>
+        <a href="page-3.html">On Joinery</a>
+        <a href="page-4.html">Workshop</a>
+        <a href="page-5.html" aria-current="page">Visit</a>
+        <a href="page-6.html">Correspondence</a>
+      </nav>
+    </div>
+  </div>
+  <div class="attrib">
+    <span>Kamon renderings (paulownia, plum, crane) sourced from Wikimedia Commons under CC-BY-SA. Used as seals; not reproduced as repeating ornament.</span>
+    <span>© Kuramae Sashimono Kōbō</span>
+  </div>
+</footer>
+
+</body>
+</html>

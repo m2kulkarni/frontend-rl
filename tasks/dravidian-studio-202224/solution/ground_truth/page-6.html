@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Studio & Contact — Sthapati Workshop</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* ============ NAVIGATION ============ */
+  .nav-band {
+    background: var(--bg);
+    padding: 18px 60px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+  }
+  .nav-band::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 6px;
+    background:
+      linear-gradient(var(--secondary), var(--secondary)) 0 0/100% 2px no-repeat,
+      linear-gradient(var(--accent), var(--accent)) 0 4px/100% 2px no-repeat;
+  }
+  .om-mark {
+    display: flex; align-items: center; gap: 14px;
+    text-decoration: none; color: var(--text);
+  }
+  .om-mark svg { width: 38px; height: 38px; display: block; }
+  .om-mark .mark-txt {
+    font-family: var(--font-display), serif;
+    font-size: 17px;
+    letter-spacing: 0.18em;
+    color: var(--primary);
+  }
+  .om-mark .mark-sub {
+    display: block;
+    font-size: 9px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    margin-top: 2px;
+  }
+  nav.primary { display: flex; gap: 36px; }
+  nav.primary a {
+    position: relative;
+    text-decoration: none;
+    color: var(--primary);
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    font-variant: small-caps;
+    padding: 4px 0 12px;
+  }
+  nav.primary a[aria-current="page"] {
+    color: var(--text-emphasis);
+  }
+  nav.primary a[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    left: 50%; bottom: -2px;
+    transform: translateX(-50%);
+    width: 14px; height: 14px;
+    background: radial-gradient(circle, var(--secondary) 25%, transparent 28%),
+                radial-gradient(circle, transparent 40%, var(--accent) 42%, var(--accent) 50%, transparent 52%);
+  }
+
+  /* ============ HERO TIER ============ */
+  .hero {
+    text-align: center;
+    padding: 56px 60px 30px;
+    background: var(--bg);
+    border-bottom: 2px solid var(--accent);
+    position: relative;
+  }
+  .hero-frame {
+    width: 80%;
+    max-width: 900px;
+    margin: 0 auto 28px;
+    opacity: 0.92;
+  }
+  .hero-frame svg { width: 100%; height: auto; display: block; }
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 18px;
+  }
+  .hero h1 {
+    font-family: var(--font-display), serif;
+    font-size: 56px;
+    line-height: 1.1;
+    letter-spacing: 0.08em;
+    color: var(--primary);
+    margin: 0 0 18px;
+  }
+  .hero h1 .em { color: var(--text-emphasis); }
+  .hero .lede {
+    max-width: 720px;
+    margin: 0 auto;
+    font-size: 16px;
+    color: var(--primary);
+  }
+  .tamil-line {
+    margin-top: 22px;
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.22em;
+    color: var(--accent);
+  }
+
+  /* ============ BAND DIVIDER ============ */
+  .band-divider {
+    background: var(--secondary);
+    padding: 10px 0;
+    text-align: center;
+    border-top: 2px solid var(--accent);
+    border-bottom: 2px solid var(--accent);
+  }
+  .band-divider svg {
+    height: 36px;
+    width: auto;
+    filter: invert(1) brightness(2);
+    opacity: 0.95;
+  }
+
+  /* ============ TIER: VISIT ============ */
+  .tier {
+    padding: 60px 80px;
+  }
+  .tier-title {
+    text-align: center;
+    margin-bottom: 44px;
+  }
+  .tier-title .kicker {
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    display: block;
+    margin-bottom: 12px;
+  }
+  .tier-title h2 {
+    font-family: var(--font-display), serif;
+    font-size: 36px;
+    letter-spacing: 0.14em;
+    color: var(--text-emphasis);
+    margin: 0;
+  }
+  .tier-title .rule {
+    width: 80px;
+    height: 2px;
+    background: var(--accent);
+    margin: 16px auto 0;
+    position: relative;
+  }
+  .tier-title .rule::before, .tier-title .rule::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 8px; height: 8px;
+    background: var(--secondary);
+    border-radius: 50%;
+    transform: translateY(-50%);
+  }
+  .tier-title .rule::before { left: -18px; }
+  .tier-title .rule::after { right: -18px; }
+
+  /* ============ CARD GRID ============ */
+  .card-row {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 36px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .card {
+    background: var(--surface);
+    padding: 56px 44px 40px;
+    position: relative;
+    margin: 0 14px;
+  }
+  /* pillars */
+  .card::before, .card::after {
+    content: "";
+    position: absolute;
+    top: 18px; bottom: 18px;
+    width: 2px;
+    background: var(--accent);
+  }
+  .card::before { left: -14px; }
+  .card::after  { right: -14px; }
+  /* lotus capitals via inner spans */
+  .card .pillar-cap {
+    position: absolute;
+    width: 22px; height: 8px;
+    background: var(--accent);
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  }
+  .card .pillar-cap.tl { top: 12px; left: -24px; }
+  .card .pillar-cap.tr { top: 12px; right: -24px; }
+  .card .pillar-cap.bl { bottom: 12px; left: -24px; transform: scaleY(-1); }
+  .card .pillar-cap.br { bottom: 12px; right: -24px; transform: scaleY(-1); }
+
+  /* kalasha finial */
+  .card .kalasha {
+    position: absolute;
+    top: -18px; left: 50%;
+    transform: translateX(-50%);
+    width: 24px; height: 32px;
+  }
+  .card .kalasha::before {
+    content: "";
+    position: absolute;
+    bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 22px; height: 10px;
+    background: var(--secondary);
+    border-radius: 0 0 50% 50% / 0 0 100% 100%;
+  }
+  .card .kalasha::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 50%; transform: translateX(-50%);
+    width: 6px; height: 24px;
+    background: var(--secondary);
+    clip-path: polygon(50% 0, 100% 30%, 100% 70%, 80% 80%, 80% 100%, 20% 100%, 20% 80%, 0 70%, 0 30%);
+  }
+
+  .card h3 {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    margin: 0 0 6px;
+    text-align: center;
+  }
+  .card .sub {
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 24px;
+  }
+
+  /* ----- Visit details card ----- */
+  .visit-grid {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 14px 20px;
+    font-size: 14px;
+  }
+  .visit-grid dt {
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    padding-top: 4px;
+  }
+  .visit-grid dd {
+    margin: 0;
+    color: var(--primary);
+  }
+  .visit-grid dd strong {
+    font-family: var(--font-display), serif;
+    font-weight: normal;
+    letter-spacing: 0.08em;
+    color: var(--text-emphasis);
+  }
+  .hours-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 4px;
+  }
+  .hours-table td {
+    padding: 4px 0;
+    font-size: 13px;
+    border-bottom: 1px dotted var(--accent);
+  }
+  .hours-table td:last-child {
+    text-align: right;
+    color: var(--text-emphasis);
+  }
+  .hours-table tr.closed td:last-child {
+    color: var(--secondary);
+    font-style: italic;
+  }
+
+  /* ----- Contact card ----- */
+  .contact-list { list-style: none; padding: 0; margin: 0; }
+  .contact-list li {
+    padding: 18px 0;
+    border-bottom: 1px solid var(--accent);
+    position: relative;
+  }
+  .contact-list li:last-child { border-bottom: none; }
+  .contact-list li::before {
+    content: "❋";
+    position: absolute;
+    left: -22px; top: 18px;
+    color: var(--secondary);
+    font-size: 12px;
+  }
+  .contact-list .role {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 4px;
+  }
+  .contact-list .name {
+    font-family: var(--font-display), serif;
+    font-size: 17px;
+    letter-spacing: 0.1em;
+    color: var(--text-emphasis);
+    margin-bottom: 6px;
+  }
+  .contact-list .lines {
+    font-size: 13px;
+    color: var(--primary);
+    line-height: 1.5;
+  }
+  .contact-list a { color: var(--primary); text-decoration: none; border-bottom: 1px dotted var(--accent); }
+
+  /* ============ COMMISSIONS TIER ============ */
+  .commissions {
+    background: var(--secondary);
+    color: var(--bg);
+    padding: 56px 80px;
+    text-align: center;
+    border-top: 2px solid var(--accent);
+    border-bottom: 2px solid var(--accent);
+  }
+  .commissions .kicker {
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+  .commissions h2 {
+    font-family: var(--font-display), serif;
+    font-size: 32px;
+    letter-spacing: 0.14em;
+    color: var(--bg);
+    margin: 0 0 22px;
+  }
+  .commissions p {
+    max-width: 780px;
+    margin: 0 auto 14px;
+    color: var(--bg);
+    font-size: 15px;
+  }
+  .commissions .quota {
+    display: inline-flex;
+    gap: 30px;
+    margin-top: 28px;
+    padding: 18px 40px;
+    border: 2px solid var(--accent);
+    background: rgba(0,0,0,0.05);
+  }
+  .commissions .quota div {
+    text-align: center;
+  }
+  .commissions .quota .num {
+    font-family: var(--font-display), serif;
+    font-size: 32px;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .commissions .quota .lbl {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--bg);
+    margin-top: 6px;
+  }
+  .commissions .pref-list {
+    list-style: none; padding: 0; margin: 26px 0 0;
+    display: inline-flex; gap: 28px;
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--accent);
+  }
+  .commissions .pref-list li::before { content: "◆ "; color: var(--bg); margin-right: 6px; }
+
+  /* ============ DIRECTIONS / NOTES STRIP ============ */
+  .notes-tier {
+    padding: 56px 80px;
+    background: var(--bg);
+  }
+  .notes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 36px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .note {
+    border-top: 2px solid var(--accent);
+    padding-top: 22px;
+    position: relative;
+  }
+  .note::before {
+    content: "";
+    position: absolute;
+    top: -7px; left: 0;
+    width: 12px; height: 12px;
+    background: var(--secondary);
+    transform: rotate(45deg);
+  }
+  .note h4 {
+    font-family: var(--font-display), serif;
+    font-size: 16px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    margin: 0 0 12px;
+  }
+  .note p { font-size: 13px; color: var(--primary); margin: 0 0 10px; }
+
+  /* ============ CLOSING SEAL ============ */
+  .closing-seal {
+    text-align: center;
+    padding: 70px 60px 60px;
+    background: var(--bg);
+    border-top: 2px solid var(--accent);
+    position: relative;
+  }
+  .seal-mandala {
+    width: 220px; height: 220px;
+    margin: 0 auto;
+    border-radius: 50%;
+    border: 2px dotted var(--secondary);
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .seal-mandala::before {
+    content: "";
+    position: absolute;
+    inset: 14px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+  }
+  .seal-mandala::after {
+    content: "";
+    position: absolute;
+    inset: 28px;
+    border-radius: 50%;
+    border: 1px dotted var(--accent);
+  }
+  .seal-mandala svg { width: 80px; height: 80px; position: relative; z-index: 2; }
+  .closing-seal .seal-caption {
+    margin-top: 22px;
+    font-family: var(--font-display), serif;
+    font-size: 15px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+  }
+  .closing-seal .seal-tagline {
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    color: var(--secondary);
+    margin-top: 6px;
+  }
+
+  /* ============ FOOTER ============ */
+  footer {
+    background: var(--bg);
+    border-top: 2px solid var(--accent);
+  }
+  .arcade {
+    background: var(--secondary);
+    height: 110px;
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: stretch;
+    padding: 0 60px;
+    border-bottom: 2px solid var(--accent);
+  }
+  .col {
+    width: 4px;
+    background: var(--accent);
+    position: relative;
+    margin-top: 16px; margin-bottom: 16px;
+  }
+  .col::before, .col::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 22px; height: 10px;
+    background: var(--accent);
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  }
+  .col::before { top: -10px; }
+  .col::after { bottom: -10px; transform: translateX(-50%) scaleY(-1); }
+
+  .footer-mandala {
+    background: var(--bg);
+    padding: 44px 60px;
+    text-align: center;
+    position: relative;
+  }
+  .kolam {
+    width: 180px; height: 180px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    border: 1px dotted var(--secondary);
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .kolam::before {
+    content: "";
+    position: absolute; inset: 12px;
+    border: 1px dotted var(--secondary);
+    border-radius: 50%;
+  }
+  .kolam::after {
+    content: "";
+    position: absolute; inset: 24px;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+  }
+  .kolam .addr {
+    position: relative; z-index: 2;
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    color: var(--text-emphasis);
+    line-height: 1.5;
+    max-width: 130px;
+  }
+  .footer-line {
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--primary);
+    padding: 0 60px 24px;
+  }
+  .footer-line .tamil {
+    color: var(--secondary);
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.22em;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAVIGATION ============ -->
+<header class="nav-band">
+  <a href="page-1.html" class="om-mark" aria-label="Sthapati Workshop home">
+    <svg viewBox="0 0 356 367" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path fill="#e34234" d="M 90.456847,353.9498 C 51.797347,340.13485 23.72672,305.75839 12.612487,258.6184 C 7.5684267,237.22321 6.1421397,201.86984 10.323594,201.86984 C 11.712834,201.86984 15.42322,211.57056 18.568972,223.427 C 25.452892,249.37152 37.19436,273.76855 48.535988,285.69407 C 67.374717,305.50242 114.0356,313.26029 140.92106,301.05394 C 161.86409,291.54544 170.35697,268.94603 161.24995,246.95931 C 154.21242,229.96943 138.24701,224.28836 108.50834,228.19197 C 108.50834,228.19197 90.282834,208.57398 84.476417,173.73548 L 103.15738,175.42939 C 125.65731,177.46962 142.64532,172.49605 151.46236,161.28728 C 159.74765,150.75419 159.5685,146.68046 150.34841,135.96157 C 137.04396,120.49428 113.15511,124.41248 64.786577,149.99522 L 40.381632,109.08518 L 50.613137,101.2812 C 76.253387,81.724339 120.77357,71.947329 146.11011,80.309169 C 169.18841,87.925649 186.12724,118.14755 181.60247,143.63298 C 178.54327,160.86286 164.72752,184.99524 154.05369,191.75339 L 144.84862,197.58162 L 157.56351,203.31522 C 179.17018,213.05833 192.36061,205.61034 208.12001,174.76849 C 229.92949,132.0869 244.0745,121.0378 276.96658,120.99051 C 292.28176,120.96847 297.73268,122.57499 308.90312,130.4031 C 336.78213,149.94016 351.9622,190.39693 348.62804,236.27272 C 344.40474,294.37435 316.88374,329.61601 275.73415,329.61601 C 253.15086,329.61601 238.59451,321.69526 227.00729,303.10156 C 216.82976,286.76927 212.24334,254.42288 218.08805,240.19369 C 220.89208,233.36732 221.39892,233.13578 221.58223,238.59686 C 221.91916,248.63689 233.34159,264.95549 243.82827,270.37835 C 269.55794,283.68369 306.49479,266.96693 321.10832,235.4032 C 332.20339,211.4394 326.25105,165.21656 311.02084,157.06552 C 307.83453,155.36024 299.96089,153.96502 293.5244,153.96502 C 279.84214,153.96502 269.09709,163.80155 254.03263,190.11774 C 248.82442,199.21613 240.05943,210.97175 234.55486,216.24128 C 225.61134,224.80312 222.41769,225.82225 204.53067,225.82225 L 184.51412,225.82225 L 190.98415,240.19369 C 200.2451,260.76437 199.80694,294.18704 190.00976,314.53347 C 181.35272,332.51252 161.33618,350.71469 145.33374,355.16013 C 129.75572,359.4876 104.38789,358.9281 90.456847,353.9498 z M 165.8338,75.923739 C 156.97908,60.814399 151.52974,32.606158 157.46546,32.606158 C 164.43775,47.732319 178.73037,61.227101 194.03409,70.643259 C 221.52091,83.949329 249.39257,78.578529 279.84247,54.108239 C 286.54595,48.721279 292.48231,44.913138 293.0345,45.645698 C 300.4697,57.184233 313.331,66.613261 317.58219,80.021449 C 317.58219,85.678729 293.22867,101.96033 274.01214,109.15007 C 226.38264,122.8706 193.96598,117.44304 165.8338,75.923739 z M 189.83603,40.997228 L 220.84514,6.6137488 L 255.30593,38.514418 C 243.51876,48.222549 235.00994,63.289118 221.54391,70.930009 C 210.90372,63.086273 195.02308,53.837816 189.83603,40.997228 z "/>
+    </svg>
+    <span>
+      <span class="mark-txt">STHAPATI WORKSHOP</span>
+      <span class="mark-sub">Madurai · Est. 2011</span>
+    </span>
+  </a>
+  <nav class="primary" aria-label="Primary">
+    <a href="page-1.html">Studio</a>
+    <a href="page-2.html">Practice</a>
+    <a href="page-3.html">Projects</a>
+    <a href="page-4.html">Workshop</a>
+    <a href="page-5.html">Writings</a>
+    <a href="page-6.html" aria-current="page">Visit</a>
+  </nav>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-frame" aria-hidden="true">
+    <svg viewBox="0 0 313.71717 29.540759" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#1a1a1a" d="m -45.203647,120.20506 c -2.080683,-0.59494 -3.600099,-1.33764 -4.88273,-2.38671 -1.667517,-1.36388 -2.894118,-2.64027 -2.893812,-3.0113 1.42e-4,-0.17364 -0.209138,-0.47237 -0.46507,-0.66382 -0.819614,-0.61314 -1.16478,-1.84791 -1.123557,-4.01931 0.07527,-3.96496 0.841997,-6.28592 3.359706,-10.170217 2.091957,-3.227467 6.669369,-6.452883 10.647663,-7.502765 2.252562,-0.594453 8.248778,-0.796292 11.003264,-0.370372 6.94812,1.074354 16.152972,4.460234 20.6562963,7.598128 0.8536092,0.594796 0.7949964,0.623336 1.3291143,-0.64739 0.2251847,-0.535733 0.8814684,-1.603973 1.4584084,-2.373871 0.8561927,-1.142535 1.457933,-1.600664 3.2740672,-2.492638 2.16210793,-1.06191 4.5637653,-1.779237 6.7277099,-2.009456 0.5824052,-0.06194 1.3990594,-0.240975 1.8147895,-0.397805 0.7738562,-0.291942 6.4810504,-0.196925 10.0927814,0.168029 2.264542,0.228828 9.60899,1.67773 11.219571,2.21338 1.156599,0.384661 1.203738,0.376381 3.086684,-0.542345 2.528472,-1.2337 4.016657,-1.480542 8.446835,-1.401064 3.61374,0.06486 4.290154,0.147139 6.742793,0.820538 0.653941,0.179545 1.719761,0.375692 2.368485,0.435889 0.648729,0.0602 1.838242,0.282073 2.643363,0.493076 1.333488,0.349469 1.625289,0.339432 3.276461,-0.112735 4.298701,-1.177186 16.775093,-2.487486 20.247754,-2.126478 0.82522,0.08579 2.552867,0.408475 3.839215,0.717074 2.046471,0.490964 2.518569,0.521833 3.776859,0.246952 3.038874,-0.663879 6.75683,-1.061515 11.128253,-1.190178 4.134196,-0.121667 4.707691,-0.08259 6.380251,0.434721 1.364622,0.422078 2.105892,0.83929 2.879252,1.620559 1.29673,1.309975 1.63,2.709456 1.6237,6.818148 -0.005,2.95745 0.2393,4.45137 0.62566,3.83325 0.10807,-0.17288 0.17855,-1.23469 0.15662,-2.35957 -0.10151,-5.20664 0.0689,-6.026385 1.66799,-8.024476 0.85063,-1.062863 2.64553,-2.128587 4.10167,-2.435363 2.81819,-0.59374 15.88977,0.302112 18.8453,1.291541 0.69822,0.23375 1.33752,0.188118 3.17619,-0.226686 4.44974,-1.003866 5.16179,-1.08168 9.66723,-1.056509 4.01601,0.0224 5.00432,0.121426 8.5084,0.852608 6.84995,1.42927 7.19777,1.434197 12.43469,0.175947 1.28482,-0.308696 3.07339,-0.450501 5.82325,-0.46168 3.55974,-0.01452 4.14585,0.04906 5.68548,0.615953 0.94414,0.347651 2.11528,0.863208 2.60253,1.145677 0.82461,0.478046 0.98936,0.487693 2.38057,0.139336 1.77908,-0.445477 5.29646,-1.019874 9.8354,-1.606151 3.88998,-0.502463 11.70287,-0.5191 15.08161,-0.03212 5.86054,0.844676 9.86323,3.110261 10.57122,5.983455 l 0.28701,1.164733 3.35851,-1.630478 c 3.17793,-1.542804 8.22537,-3.484656 11.44251,-4.402193 4.71613,-1.345036 12.68145,-1.710913 16.9375,-0.778008 4.93058,1.080764 10.02057,5.551052 11.64065,10.223444 0.65092,1.87732 1.01878,5.06928 0.79472,6.89574 -0.46904,3.82309 -3.07509,7.60889 -6.48471,9.42031 -0.51071,0.27132 -1.10781,0.62201 -1.32689,0.7793 -1.28176,0.92026 -3.99222,1.08281 -9.3957,0.5635 -4.226,-0.40615 -43.09412,-0.56404 -48.28608,-0.19612 -3.36622,0.23852 -9.71584,0.13599 -14.17646,-0.22893 -3.19042,-0.261 -11.4116,-2.46478 -14.96419,-4.01131 -0.53984,-0.23501 -1.10442,-0.42792 -1.25461,-0.42868 -0.43847,-0.002 -0.31926,0.66639 0.24899,1.3964 0.63886,0.82072 0.66215,1.46506 0.0825,2.28367 -0.41639,0.5881 -0.53812,0.60929 -2.4496,0.42635 -1.10627,-0.10587 -3.2008,-0.44095 -4.65448,-0.74463 -1.45369,-0.30368 -4.09201,-0.62284 -5.86295,-0.70924 -3.45491,-0.16856 -4.65649,0.0199 -8.93437,1.40162 -2.04956,0.66196 -2.15841,0.6695 -4.80352,0.33258 -1.68376,-0.21447 -5.04124,-0.32578 -8.88522,-0.29456 -6.04658,0.0491 -6.20383,0.0368 -7.34956,-0.57531 -1.32088,-0.70568 -2.86287,-0.66893 -5.04444,0.12022 -0.88229,0.31916 -2.15717,0.43295 -4.89707,0.43713 -4.79736,0.007 -5.58286,-0.16276 -6.13105,-1.32752 l -0.42264,-0.89802 -1.08755,0.85944 c -1.8674,1.47572 -2.94146,1.82323 -5.59703,1.81093 -1.313341,-0.006 -3.557388,-0.23736 -4.986775,-0.51393 -2.027573,-0.39234 -2.694777,-0.43476 -3.0351,-0.19299 -1.426504,1.01339 -5.2004,1.21652 -9.369876,0.50433 -2.342079,-0.40006 -4.350291,-0.35925 -10.118619,0.20564 -2.370926,0.23218 -2.390138,0.22923 -3.965706,-0.60953 l -1.583238,-0.84286 -4.76258,0.004 c -3.320233,0.003 -5.333694,0.12924 -6.648373,0.41833 -2.953758,0.64954 -5.182097,0.79482 -6.349714,0.41398 -1.394469,-0.45482 -2.213474,-1.26097 -2.208834,-2.17419 0.0021,-0.41118 -0.106632,-0.74818 -0.241605,-0.74887 -0.13497,-6.8e-4 -1.238115,0.35414 -2.451433,0.7885 -7.896638,2.82691 -18.009765,3.78342 -31.365341,2.96657 -7.1026623,-0.43441 -10.2556485,-0.47172 -22.841675,-0.27026 -5.166476,0.0827 -13.263451,0.2047 -17.993277,0.27111 -4.729825,0.0664 -9.671447,0.15763 -10.98138,0.20269 -1.516176,0.0522 -2.861762,-0.0553 -3.702712,-0.29577 z"/>
+    </svg>
+  </div>
+  <div class="hero-eyebrow">◆ Studio · Visit · Commissions ◆</div>
+  <h1>Find Us in <span class="em">Madurai</span><br>Beneath the North Gopuram</h1>
+  <p class="lede">The Sthapati Workshop occupies a restored merchant's house on East Avani Moola Street, three minutes' walk from the Meenakshi Amman temple's northern tower. The studio receives visitors by appointment, Tuesday through Saturday.</p>
+  <div class="tamil-line">வருக · வருக · WELCOME ALL WHO BUILD WITH INTENT</div>
+</section>
+
+<!-- ============ DIVIDER BAND ============ -->
+<div class="band-divider" aria-hidden="true">
+  <svg viewBox="0 0 313.71717 29.540759" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+    <path fill="#f8f4ec" d="m -45.203647,120.20506 c -2.080683,-0.59494 -3.600099,-1.33764 -4.88273,-2.38671 -1.667517,-1.36388 -2.894118,-2.64027 -2.893812,-3.0113 1.42e-4,-0.17364 -0.209138,-0.47237 -0.46507,-0.66382 -0.819614,-0.61314 -1.16478,-1.84791 -1.123557,-4.01931 0.07527,-3.96496 0.841997,-6.28592 3.359706,-10.170217 2.091957,-3.227467 6.669369,-6.452883 10.647663,-7.502765 2.252562,-0.594453 8.248778,-0.796292 11.003264,-0.370372 6.94812,1.074354 16.152972,4.460234 20.6562963,7.598128 0.8536092,0.594796 0.7949964,0.623336 1.3291143,-0.64739 0.2251847,-0.535733 0.8814684,-1.603973 1.4584084,-2.373871 0.8561927,-1.142535 1.457933,-1.600664 3.2740672,-2.492638 2.16210793,-1.06191 4.5637653,-1.779237 6.7277099,-2.009456"/>
+  </svg>
+</div>
+
+<!-- ============ TIER: VISIT + CONTACT ============ -->
+<section class="tier">
+  <div class="tier-title">
+    <span class="kicker">Tier I — The Studio</span>
+    <h2>HOURS &amp; ADDRESS</h2>
+    <div class="rule"></div>
+  </div>
+
+  <div class="card-row">
+    <!-- VISIT CARD -->
+    <article class="card">
+      <span class="kalasha" aria-hidden="true"></span>
+      <span class="pillar-cap tl"></span><span class="pillar-cap tr"></span>
+      <span class="pillar-cap bl"></span><span class="pillar-cap br"></span>
+      <h3>Visiting the Workshop</h3>
+      <div class="sub">By Appointment · East Avani Moola Street</div>
+
+      <dl class="visit-grid">
+        <dt>Address</dt>
+        <dd><strong>14, East Avani Moola Street</strong><br>
+          Near the North Gopuram, Meenakshi Amman Temple<br>
+          Madurai 625 001, Tamil Nadu, India</dd>
+
+        <dt>Coordinates</dt>
+        <dd>9.9197° N · 78.1194° E<br>
+          Three minutes on foot from the temple's north entrance; the street narrows past the brass-bell shop.</dd>
+
+        <dt>Hours</dt>
+        <dd>
+          <table class="hours-table">
+            <tr class="closed"><td>Monday</td><td>Closed</td></tr>
+            <tr><td>Tuesday</td><td>10:00 — 18:00</td></tr>
+            <tr><td>Wednesday</td><td>10:00 — 18:00</td></tr>
+            <tr><td>Thursday</td><td>10:00 — 18:00</td></tr>
+            <tr><td>Friday</td><td>10:00 — 18:00</td></tr>
+            <tr><td>Saturday</td><td>10:00 — 18:00</td></tr>
+            <tr class="closed"><td>Sunday</td><td>Closed (festival days excepted)</td></tr>
+          </table>
+        </dd>
+
+        <dt>Appointments</dt>
+        <dd>Drawing rooms and the model archive open only by prior appointment. Please write at least three working days in advance with the purpose of your visit, expected number of guests, and any drawings you wish us to prepare.</dd>
+
+        <dt>Reaching us</dt>
+        <dd>Madurai Junction railway station is 1.6 km away; from the airport, allow 30 minutes by car. The lane does not admit vehicles past the temple's outer prakaram — please walk the final two hundred metres.</dd>
+      </dl>
+    </article>
+
+    <!-- CONTACT CARD -->
+    <article class="card">
+      <span class="kalasha" aria-hidden="true"></span>
+      <span class="pillar-cap tl"></span><span class="pillar-cap tr"></span>
+      <span class="pillar-cap bl"></span><span class="pillar-cap br"></span>
+      <h3>Direct Contacts</h3>
+      <div class="sub">Three Lines · Three Hands</div>
+
+      <ul class="contact-list">
+        <li>
+          <div class="role">Press &amp; Exhibitions</div>
+          <div class="name">Lakshmi Raghavan</div>
+          <div class="lines">
+            <a href="mailto:lakshmi@sthapati-workshop.in">lakshmi@sthapati-workshop.in</a><br>
+            +91 452 234 1129 · ext. 2<br>
+            For interviews, image requests, lecture invitations, and exhibition loans.
+          </div>
+        </li>
+        <li>
+          <div class="role">Project &amp; Commission Inquiries</div>
+          <div class="name">Arun Sthapati</div>
+          <div class="lines">
+            <a href="mailto:arun@sthapati-workshop.in">arun@sthapati-workshop.in</a><br>
+            +91 452 234 1129 · ext. 1<br>
+            For new architectural and exhibition commissions, fee proposals, and site visits across South India.
+          </div>
+        </li>
+        <li>
+          <div class="role">General Line</div>
+          <div class="name">Studio Reception</div>
+          <div class="lines">
+            <a href="mailto:studio@sthapati-workshop.in">studio@sthapati-workshop.in</a><br>
+            +91 452 234 1129 · ext. 0<br>
+            For appointments, deliveries, vendor inquiries, and the workshop's quarterly print mailing list.
+          </div>
+        </li>
+      </ul>
+    </article>
+  </div>
+</section>
+
+<!-- ============ COMMISSIONS BAND ============ -->
+<section class="commissions">
+  <div class="kicker">Tier II — A Note on Commissions</div>
+  <h2>WHAT WE TAKE ON</h2>
+  <p>The studio accepts between three and five new architectural commissions in any given calendar year, in addition to ongoing exhibition and print work. We allocate carefully: each project is led by a principal and held to the slow, drawn pace our research demands.</p>
+  <p>Preference is given to public buildings, religious foundations, and cultural-institution work — sites where the Dravidian vocabulary can serve a civic congregation rather than a private interior. We are happy to discuss residential and commercial briefs but will rarely take them.</p>
+
+  <div class="quota">
+    <div><div class="num">3–5</div><div class="lbl">Commissions / Year</div></div>
+    <div><div class="num">14</div><div class="lbl">Years in Practice</div></div>
+    <div><div class="num">9</div><div class="lbl">Resident Craftspeople</div></div>
+  </div>
+
+  <ul class="pref-list">
+    <li>Public</li>
+    <li>Religious</li>
+    <li>Cultural</li>
+    <li>Conservation</li>
+  </ul>
+</section>
+
+<!-- ============ NOTES TIER ============ -->
+<section class="notes-tier">
+  <div class="tier-title">
+    <span class="kicker">Tier III — Practical Notes</span>
+    <h2>BEFORE YOU ARRIVE</h2>
+    <div class="rule"></div>
+  </div>
+
+  <div class="notes-grid">
+    <div class="note">
+      <h4>Festival Closures</h4>
+      <p>The studio is closed for Pongal (14–17 January), Tamil New Year, Aadi Pooram, and the ten days of the Chithirai festival in April–May, when the surrounding streets are given over to processions.</p>
+      <p>Please confirm dates by telephone if planning a journey around these weeks.</p>
+    </div>
+    <div class="note">
+      <h4>What to Bring</h4>
+      <p>If you are visiting on commission business, please bring a brief, the site address with cadastral details where available, and any heritage or planning documentation already in hand. Tea is provided; lunch can be arranged on a day's notice.</p>
+    </div>
+    <div class="note">
+      <h4>Photography &amp; Press</h4>
+      <p>Photography of working drawings and unbuilt models is restricted. Press visits are coordinated by Lakshmi Raghavan; a one-page brief sent in advance allows us to prepare the relevant material from the archive.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLOSING SEAL ============ -->
+<section class="closing-seal">
+  <div class="seal-mandala" aria-hidden="true">
+    <svg viewBox="0 0 356 367" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#076b88" d="M 90.456847,353.9498 C 51.797347,340.13485 23.72672,305.75839 12.612487,258.6184 C 7.5684267,237.22321 6.1421397,201.86984 10.323594,201.86984 C 11.712834,201.86984 15.42322,211.57056 18.568972,223.427 C 25.452892,249.37152 37.19436,273.76855 48.535988,285.69407 C 67.374717,305.50242 114.0356,313.26029 140.92106,301.05394 C 161.86409,291.54544 170.35697,268.94603 161.24995,246.95931 C 154.21242,229.96943 138.24701,224.28836 108.50834,228.19197 C 108.50834,228.19197 90.282834,208.57398 84.476417,173.73548 L 103.15738,175.42939 C 125.65731,177.46962 142.64532,172.49605 151.46236,161.28728 C 159.74765,150.75419 159.5685,146.68046 150.34841,135.96157 C 137.04396,120.49428 113.15511,124.41248 64.786577,149.99522 L 40.381632,109.08518 L 50.613137,101.2812 C 76.253387,81.724339 120.77357,71.947329 146.11011,80.309169 C 169.18841,87.925649 186.12724,118.14755 181.60247,143.63298 C 178.54327,160.86286 164.72752,184.99524 154.05369,191.75339 L 144.84862,197.58162 L 157.56351,203.31522 C 179.17018,213.05833 192.36061,205.61034 208.12001,174.76849 C 229.92949,132.0869 244.0745,121.0378 276.96658,120.99051 C 292.28176,120.96847 297.73268,122.57499 308.90312,130.4031 C 336.78213,149.94016 351.9622,190.39693 348.62804,236.27272 C 344.40474,294.37435 316.88374,329.61601 275.73415,329.61601 C 253.15086,329.61601 238.59451,321.69526 227.00729,303.10156 C 216.82976,286.76927 212.24334,254.42288 218.08805,240.19369 C 220.89208,233.36732 221.39892,233.13578 221.58223,238.59686 C 221.91916,248.63689 233.34159,264.95549 243.82827,270.37835 C 269.55794,283.68369 306.49479,266.96693 321.10832,235.4032 C 332.20339,211.4394 326.25105,165.21656 311.02084,157.06552 C 307.83453,155.36024 299.96089,153.96502 293.5244,153.96502 C 279.84214,153.96502 269.09709,163.80155 254.03263,190.11774 C 248.82442,199.21613 240.05943,210.97175 234.55486,216.24128 C 225.61134,224.80312 222.41769,225.82225 204.53067,225.82225 L 184.51412,225.82225 L 190.98415,240.19369 C 200.2451,260.76437 199.80694,294.18704 190.00976,314.53347 C 181.35272,332.51252 161.33618,350.71469 145.33374,355.16013 C 129.75572,359.4876 104.38789,358.9281 90.456847,353.9498 z M 165.8338,75.923739 C 156.97908,60.814399 151.52974,32.606158 157.46546,32.606158 C 164.43775,47.732319 178.73037,61.227101 194.03409,70.643259 C 221.52091,83.949329 249.39257,78.578529 279.84247,54.108239 C 286.54595,48.721279 292.48231,44.913138 293.0345,45.645698 C 300.4697,57.184233 313.331,66.613261 317.58219,80.021449 C 317.58219,85.678729 293.22867,101.96033 274.01214,109.15007 C 226.38264,122.8706 193.96598,117.44304 165.8338,75.923739 z M 189.83603,40.997228 L 220.84514,6.6137488 L 255.30593,38.514418 C 243.51876,48.222549 235.00994,63.289118 221.54391,70.930009 C 210.90372,63.086273 195.02308,53.837816 189.83603,40.997228 z "/>
+    </svg>
+  </div>
+  <div class="seal-caption">STHAPATI WORKSHOP · MADURAI</div>
+  <div class="seal-tagline">Drawn · Carved · Dedicated</div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="arcade" aria-hidden="true">
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+  </div>
+  <div class="footer-mandala">
+    <div class="kolam">
+      <div class="addr">
+        14 East Avani<br>Moola Street<br>· Madurai ·<br>625 001
+      </div>
+    </div>
+    <nav style="display:flex;justify-content:center;gap:28px;margin-bottom:18px;font-size:10px;letter-spacing:0.32em;text-transform:uppercase;">
+      <a href="page-1.html" style="color:var(--primary);text-decoration:none;">Studio</a>
+      <a href="page-2.html" style="color:var(--primary);text-decoration:none;">Practice</a>
+      <a href="page-3.html" style="color:var(--primary);text-decoration:none;">Projects</a>
+      <a href="page-4.html" style="color:var(--primary);text-decoration:none;">Workshop</a>
+      <a href="page-5.html" style="color:var(--primary);text-decoration:none;">Writings</a>
+      <a href="page-6.html" style="color:var(--text-emphasis);text-decoration:none;">Visit</a>
+    </nav>
+  </div>
+  <div class="footer-line">
+    © 2011–2025 Sthapati Workshop LLP &nbsp;·&nbsp; GSTIN 33AAFCS7421R1ZK &nbsp;·&nbsp; <span class="tamil">கல்லும் கதை சொல்லும்</span> &nbsp;— Even stones speak narrative.
+  </div>
+</footer>
+
+</body>
+</html>

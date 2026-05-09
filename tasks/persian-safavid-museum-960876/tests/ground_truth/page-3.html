@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Current Exhibition — Cobalt and Cream</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  /* ---------- Base ---------- */
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    font-size: 17px;
+    line-height: 1.65;
+  }
+  .page-wrap { max-width: 1280px; margin: 0 auto; padding: 0 48px; }
+
+  /* ---------- Wordmark / Header ---------- */
+  header.site-head { padding: 56px 0 0; text-align: center; }
+  .wordmark {
+    font-family: var(--font-display), serif;
+    font-size: 44px;
+    letter-spacing: 0.08em;
+    color: var(--primary);
+    margin: 0;
+    font-weight: 700;
+  }
+  .wordmark .amp { color: var(--accent); font-style: italic; padding: 0 0.3em; }
+  .subwordmark {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    color: var(--text);
+    font-size: 15px;
+    letter-spacing: 0.18em;
+    margin-top: 6px;
+    text-transform: uppercase;
+  }
+
+  /* ---------- Navigation ---------- */
+  nav.primary {
+    margin: 32px 0 0;
+    padding: 18px 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 22px;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  nav.primary a {
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--primary);
+    text-decoration: none;
+    padding: 18px 4px 10px;
+    position: relative;
+  }
+  nav.primary a:hover { color: var(--secondary); }
+  nav.primary a[aria-current="page"] {
+    color: var(--text-emphasis);
+  }
+  nav.primary a[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    left: 4px; right: 4px; bottom: 2px;
+    height: 2px;
+    background: var(--text-emphasis);
+  }
+  nav.primary a[aria-current="page"]::before {
+    content: "✦";
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    color: var(--accent);
+    font-size: 10px;
+  }
+  nav.primary .palmette {
+    display: inline-block;
+    width: 20px; height: 14px;
+    opacity: 0.85;
+  }
+  nav.primary .palmette svg {
+    width: 100%; height: 100%;
+    fill: var(--accent);
+  }
+  .nav-filet {
+    margin: 14px auto 0;
+    width: 100%;
+    max-width: 880px;
+    height: 18px;
+    color: var(--primary);
+    display: block;
+  }
+  .nav-filet svg { width: 100%; height: 100%; display: block; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    margin: 56px 0 24px;
+    text-align: center;
+    position: relative;
+  }
+  .hero-arch {
+    position: relative;
+    width: 540px;
+    height: 600px;
+    margin: 0 auto;
+    background:
+      radial-gradient(ellipse at center 35%, #fff8ea 0%, #f2e5cc 70%);
+    border: 1px solid var(--accent);
+    overflow: hidden;
+  }
+  .hero-arch svg.arch {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    color: var(--primary);
+  }
+  .hero-arch svg.arch path,
+  .hero-arch svg.arch g { stroke: currentColor !important; }
+  .hero-girih {
+    position: absolute;
+    inset: 0;
+    opacity: 0.07;
+    background-size: 480px 360px;
+    pointer-events: none;
+  }
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    padding: 130px 60px 60px;
+    text-align: center;
+  }
+  .eyebrow {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    color: var(--secondary);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .hero h1 {
+    font-family: var(--font-display), serif;
+    font-size: 38px;
+    line-height: 1.15;
+    color: var(--primary);
+    margin: 0 0 14px;
+    letter-spacing: 0.04em;
+  }
+  .hero h1 em {
+    color: var(--text-emphasis);
+    font-style: italic;
+  }
+  .hero .dates {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--text);
+    margin-top: 8px;
+  }
+  .hero .dates .sep { color: var(--accent); padding: 0 0.5em; }
+  .hero-seal {
+    width: 86px; height: 86px;
+    margin: 26px auto 0;
+  }
+  .hero-seal svg { width: 100%; height: 100%; display: block; }
+
+  /* ---------- Dividers ---------- */
+  .divider {
+    margin: 56px auto;
+    width: 100%;
+    max-width: 700px;
+    height: 22px;
+    color: var(--primary);
+    display: block;
+  }
+  .divider svg { width: 100%; height: 100%; display: block; }
+  .divider.gold { color: var(--accent); }
+
+  /* ---------- Section heads ---------- */
+  .section-title {
+    text-align: center;
+    margin: 0 0 8px;
+  }
+  .section-title .kicker {
+    display: block;
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .section-title h2 {
+    font-family: var(--font-display), serif;
+    font-size: 28px;
+    color: var(--primary);
+    letter-spacing: 0.04em;
+    margin: 0;
+  }
+  .section-title .lede {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--text);
+    max-width: 720px;
+    margin: 14px auto 0;
+  }
+
+  /* ---------- Curatorial Essay ---------- */
+  .essay {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  .essay .byline {
+    text-align: center;
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    color: var(--text);
+    margin-bottom: 28px;
+    font-size: 16px;
+  }
+  .essay .byline .who { color: var(--text-emphasis); }
+  .essay p {
+    margin: 0 0 18px;
+    text-align: justify;
+    hyphens: auto;
+  }
+  .essay p.lead {
+    font-size: 21px;
+    line-height: 1.55;
+    text-align: center;
+    margin-bottom: 28px;
+  }
+  .essay p.lead::first-letter {
+    font-family: var(--font-display), serif;
+    font-size: 56px;
+    float: left;
+    line-height: 0.9;
+    padding: 6px 10px 0 0;
+    color: var(--text-emphasis);
+  }
+  .essay em.term { color: var(--text-emphasis); font-style: italic; }
+  .essay .pullquote {
+    margin: 28px 40px;
+    padding: 18px 24px;
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+    text-align: center;
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 20px;
+    color: var(--primary);
+    line-height: 1.45;
+  }
+
+  /* ---------- Three-section reading ---------- */
+  .triptych {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 32px;
+    margin-top: 12px;
+  }
+  .panel {
+    background: #fbf3df;
+    border: 1px solid var(--accent);
+    padding: 0;
+    position: relative;
+  }
+  .panel-arch {
+    position: relative;
+    height: 180px;
+    border-bottom: 1px solid var(--accent);
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse at center 60%, #fff8ea 0%, #f2e5cc 80%);
+  }
+  .panel-arch svg.arch {
+    position: absolute;
+    inset: 8px;
+    width: calc(100% - 16px); height: calc(100% - 16px);
+    color: var(--primary);
+  }
+  .panel-arch svg.arch path { stroke: currentColor !important; }
+  .panel-arch .gold-line {
+    position: absolute; inset: 14px;
+    border: 1px solid var(--accent);
+    pointer-events: none;
+  }
+  .panel-arch .seal {
+    position: absolute; left: 50%; top: 52%;
+    transform: translate(-50%, -50%);
+    width: 72px; height: 72px;
+  }
+  .panel-arch .seal svg { width: 100%; height: 100%; display: block; }
+  .panel-body {
+    padding: 22px 24px 26px;
+    text-align: center;
+  }
+  .panel-body .num {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .panel-body h3 {
+    font-family: var(--font-display), serif;
+    font-size: 18px;
+    color: var(--primary);
+    letter-spacing: 0.05em;
+    margin: 0 0 12px;
+    text-transform: uppercase;
+  }
+  .panel-body p {
+    font-size: 15.5px;
+    line-height: 1.6;
+    margin: 0 0 12px;
+    text-align: justify;
+  }
+  .panel-corner {
+    position: absolute;
+    width: 22px; height: 22px;
+    color: var(--accent);
+    opacity: 0.7;
+  }
+  .panel-corner svg { width: 100%; height: 100%; display: block; }
+  .panel-corner.tl { top: 6px; left: 6px; }
+  .panel-corner.tr { top: 6px; right: 6px; transform: scaleX(-1); }
+  .panel-corner.bl { bottom: 6px; left: 6px; transform: scaleY(-1); }
+  .panel-corner.br { bottom: 6px; right: 6px; transform: scale(-1,-1); }
+
+  /* ---------- Sidebars row ---------- */
+  .sidebars {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 12px;
+  }
+  .sidebar {
+    border: 1px solid var(--primary);
+    padding: 28px 32px 32px;
+    background: #fbf3df;
+    position: relative;
+  }
+  .sidebar::before, .sidebar::after {
+    content: "";
+    position: absolute;
+    left: 12px; right: 12px;
+    height: 0;
+    border-top: 1px solid var(--accent);
+  }
+  .sidebar::before { top: 8px; }
+  .sidebar::after { bottom: 8px; }
+  .sidebar h3 {
+    font-family: var(--font-display), serif;
+    font-size: 16px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--primary);
+    text-align: center;
+    margin: 0 0 6px;
+  }
+  .sidebar .sub {
+    text-align: center;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--text);
+    margin-bottom: 18px;
+  }
+  .sidebar ol, .sidebar ul {
+    margin: 0; padding: 0; list-style: none;
+  }
+  .sidebar.loans li {
+    display: flex;
+    justify-content: space-between;
+    padding: 9px 0;
+    border-bottom: 1px dotted rgba(30,58,95,0.3);
+    font-size: 15px;
+  }
+  .sidebar.loans li:last-child { border-bottom: none; }
+  .sidebar.loans .city {
+    font-style: italic;
+    color: var(--secondary);
+  }
+  .sidebar.loans .num {
+    color: var(--accent);
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    margin-right: 10px;
+    letter-spacing: 0.1em;
+  }
+  .sidebar.talks li {
+    padding: 14px 0;
+    border-bottom: 1px dotted rgba(30,58,95,0.3);
+  }
+  .sidebar.talks li:last-child { border-bottom: none; }
+  .sidebar.talks .talk-date {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--text-emphasis);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .sidebar.talks .talk-title {
+    font-size: 16px;
+    color: var(--primary);
+    font-weight: 600;
+    display: block;
+  }
+  .sidebar.talks .talk-speaker {
+    font-style: italic;
+    font-size: 14px;
+    color: var(--text);
+  }
+
+  /* ---------- Closing block (audio + plan) ---------- */
+  .closing {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: stretch;
+  }
+  .closing-card {
+    border: 1px solid var(--primary);
+    background: #fbf3df;
+    padding: 36px 36px 40px;
+    text-align: center;
+    position: relative;
+  }
+  .closing-card .icon {
+    width: 56px; height: 56px;
+    margin: 0 auto 14px;
+    color: var(--secondary);
+  }
+  .closing-card .icon svg { width: 100%; height: 100%; }
+  .closing-card h3 {
+    font-family: var(--font-display), serif;
+    font-size: 16px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin: 0 0 6px;
+  }
+  .closing-card .meta {
+    font-style: italic;
+    font-size: 14px;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+  .closing-card p {
+    font-size: 15px;
+    margin: 0 0 20px;
+  }
+  .closing-card .action {
+    display: inline-block;
+    border: 1px solid var(--accent);
+    padding: 10px 22px;
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    text-decoration: none;
+    background: var(--bg);
+  }
+  .closing-card .action:hover {
+    background: var(--text-emphasis);
+    color: var(--bg);
+  }
+
+  /* ---------- Floorplan inline diagram ---------- */
+  .plan-svg {
+    width: 100%;
+    max-width: 280px;
+    height: 140px;
+    margin: 0 auto 16px;
+    display: block;
+  }
+
+  /* ---------- Footer ---------- */
+  footer.site-foot {
+    margin-top: 80px;
+    background: var(--primary);
+    color: var(--bg);
+    position: relative;
+  }
+  .foot-filet {
+    width: 100%;
+    height: 22px;
+    color: var(--accent);
+    display: block;
+  }
+  .foot-filet svg { width: 100%; height: 100%; display: block; }
+  .foot-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 50px 48px 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 60px;
+    text-align: center;
+  }
+  .foot-col h4 {
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.28em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin: 0 0 16px;
+  }
+  .foot-col p {
+    margin: 0 0 8px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #f2e5cc;
+  }
+  .foot-col em { color: #fff; font-style: italic; }
+  .tailpiece {
+    text-align: center;
+    padding: 14px 0 8px;
+  }
+  .tailpiece svg {
+    width: 220px; height: 30px;
+    fill: var(--accent);
+  }
+  .imprint {
+    text-align: center;
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 13px;
+    color: #f2e5cc;
+    padding: 0 0 30px;
+  }
+
+  /* Reusable palmette inline */
+  .palm-inline { display: inline-block; vertical-align: middle; width: 18px; height: 12px; color: var(--accent); }
+  .palm-inline svg { width: 100%; height: 100%; fill: currentColor; }
+</style>
+</head>
+<body>
+
+<!-- Reusable SVG defs -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- Palmette glyph (simplified) -->
+    <symbol id="palmette" viewBox="0 0 40 24">
+      <path d="M20 2 C 14 6, 8 6, 2 12 C 8 14, 14 14, 20 22 C 26 14, 32 14, 38 12 C 32 6, 26 6, 20 2 Z M20 8 C 17 11, 17 13, 20 16 C 23 13, 23 11, 20 8 Z" fill="currentColor"/>
+    </symbol>
+    <!-- Filet divider (simplified arabesque) -->
+    <symbol id="filet" viewBox="0 0 700 22" preserveAspectRatio="none">
+      <line x1="0" y1="11" x2="280" y2="11" stroke="currentColor" stroke-width="0.8"/>
+      <line x1="420" y1="11" x2="700" y2="11" stroke="currentColor" stroke-width="0.8"/>
+      <line x1="0" y1="8" x2="270" y2="8" stroke="currentColor" stroke-width="0.4" opacity="0.7"/>
+      <line x1="430" y1="8" x2="700" y2="8" stroke="currentColor" stroke-width="0.4" opacity="0.7"/>
+      <line x1="0" y1="14" x2="270" y2="14" stroke="currentColor" stroke-width="0.4" opacity="0.7"/>
+      <line x1="430" y1="14" x2="700" y2="14" stroke="currentColor" stroke-width="0.4" opacity="0.7"/>
+      <circle cx="350" cy="11" r="6" fill="none" stroke="currentColor" stroke-width="0.8"/>
+      <circle cx="350" cy="11" r="2.5" fill="currentColor"/>
+      <path d="M280 11 Q300 4, 320 11 Q335 18, 350 11" fill="none" stroke="currentColor" stroke-width="0.8"/>
+      <path d="M420 11 Q400 4, 380 11 Q365 18, 350 11" fill="none" stroke="currentColor" stroke-width="0.8"/>
+      <path d="M295 11 Q300 7, 305 11 Q300 15, 295 11 Z" fill="currentColor" opacity="0.8"/>
+      <path d="M395 11 Q400 7, 405 11 Q400 15, 395 11 Z" fill="currentColor" opacity="0.8"/>
+      <circle cx="180" cy="11" r="2" fill="currentColor"/>
+      <circle cx="520" cy="11" r="2" fill="currentColor"/>
+      <circle cx="80" cy="11" r="1.5" fill="currentColor" opacity="0.6"/>
+      <circle cx="620" cy="11" r="1.5" fill="currentColor" opacity="0.6"/>
+    </symbol>
+    <!-- Pointed ogee arch outline -->
+    <symbol id="ogee-arch" viewBox="0 0 200 240" preserveAspectRatio="none">
+      <!-- Outer arch -->
+      <path d="M20 230 L20 130 C 20 80, 50 50, 100 20 C 150 50, 180 80, 180 130 L180 230 Z"
+            fill="none" stroke="currentColor" stroke-width="1.4"/>
+      <!-- Inner arch (gold keyline applied via second use) -->
+      <path d="M30 220 L30 132 C 30 88, 56 60, 100 32 C 144 60, 170 88, 170 132 L170 220 Z"
+            fill="none" stroke="currentColor" stroke-width="0.6" opacity="0.5"/>
+      <!-- spandrel girih hint -->
+      <g opacity="0.18" stroke="currentColor" stroke-width="0.4" fill="none">
+        <path d="M22 28 L40 46 L22 64"/>
+        <path d="M178 28 L160 46 L178 64"/>
+        <path d="M40 46 L60 38 L60 56"/>
+        <path d="M160 46 L140 38 L140 56"/>
+      </g>
+    </symbol>
+    <!-- Star seal (centerpiece) -->
+    <symbol id="star-seal" viewBox="0 0 100 100">
+      <g stroke="currentColor" stroke-width="1" fill="none">
+        <circle cx="50" cy="50" r="46"/>
+        <circle cx="50" cy="50" r="38" opacity="0.5"/>
+      </g>
+      <g transform="translate(50 50)">
+        <g fill="currentColor">
+          <polygon points="0,-32 7,-10 30,-13 13,3 22,24 0,12 -22,24 -13,3 -30,-13 -7,-10"/>
+        </g>
+        <g stroke="currentColor" stroke-width="0.6" fill="none" opacity="0.7">
+          <polygon points="0,-22 5,-7 21,-9 9,2 15,17 0,8 -15,17 -9,2 -21,-9 -5,-7"/>
+        </g>
+        <circle cx="0" cy="0" r="3" fill="currentColor"/>
+      </g>
+    </symbol>
+    <!-- Corner palmette ornament -->
+    <symbol id="corner-palm" viewBox="0 0 24 24">
+      <path d="M2 22 L2 8 Q 2 2, 8 2 L 22 2" fill="none" stroke="currentColor" stroke-width="0.8"/>
+      <path d="M4 16 Q 8 12, 12 8 Q 14 6, 18 4" fill="none" stroke="currentColor" stroke-width="0.5"/>
+      <circle cx="6" cy="6" r="1.6" fill="currentColor"/>
+    </symbol>
+    <!-- Tailpiece (footer) -->
+    <symbol id="tailpiece" viewBox="0 0 220 30">
+      <g fill="currentColor">
+        <circle cx="110" cy="15" r="3.5"/>
+      </g>
+      <g fill="none" stroke="currentColor" stroke-width="1">
+        <path d="M110 15 Q 90 4, 70 15 Q 60 20, 50 15"/>
+        <path d="M110 15 Q 130 4, 150 15 Q 160 20, 170 15"/>
+        <path d="M50 15 Q 40 10, 30 15"/>
+        <path d="M170 15 Q 180 10, 190 15"/>
+        <circle cx="22" cy="15" r="2"/>
+        <circle cx="198" cy="15" r="2"/>
+        <path d="M70 15 q 5 -8 10 0 q -5 8 -10 0 Z" fill="currentColor"/>
+        <path d="M150 15 q 5 -8 10 0 q -5 8 -10 0 Z" fill="currentColor"/>
+        <path d="M105 15 q 5 -10 0 -10 q -5 0 0 10" fill="currentColor"/>
+        <path d="M115 15 q -5 -10 0 -10 q 5 0 0 10" fill="currentColor"/>
+      </g>
+    </symbol>
+    <!-- Audio glyph -->
+    <symbol id="audio" viewBox="0 0 56 56">
+      <circle cx="28" cy="28" r="26" fill="none" stroke="currentColor" stroke-width="1"/>
+      <path d="M22 18 L22 38 L34 28 Z" fill="currentColor"/>
+      <path d="M40 18 Q 48 28, 40 38" fill="none" stroke="currentColor" stroke-width="1.2"/>
+      <path d="M44 14 Q 54 28, 44 42" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.6"/>
+    </symbol>
+  </defs>
+</svg>
+
+<header class="site-head">
+  <div class="page-wrap">
+    <h1 class="wordmark">Dīvānkhāneh<span class="amp">·</span>دیوانخانه</h1>
+    <div class="subwordmark">Museum of Safavid Isfahan</div>
+
+    <nav class="primary" aria-label="Primary">
+      <a href="page-1.html">Entrance</a>
+      <span class="palmette" aria-hidden="true"><svg><use href="#palmette"/></svg></span>
+      <a href="page-2.html">Collection</a>
+      <span class="palmette" aria-hidden="true"><svg><use href="#palmette"/></svg></span>
+      <a href="page-3.html" aria-current="page">Current Exhibition</a>
+      <span class="palmette" aria-hidden="true"><svg><use href="#palmette"/></svg></span>
+      <a href="page-4.html">Reading Room</a>
+      <span class="palmette" aria-hidden="true"><svg><use href="#palmette"/></svg></span>
+      <a href="page-5.html">Visit</a>
+      <span class="palmette" aria-hidden="true"><svg><use href="#palmette"/></svg></span>
+      <a href="page-6.html">About</a>
+    </nav>
+
+    <div class="nav-filet" aria-hidden="true"><svg viewBox="0 0 700 22" preserveAspectRatio="none"><use href="#filet"/></svg></div>
+  </div>
+</header>
+
+<main class="page-wrap">
+
+  <!-- HERO -->
+  <section class="hero" aria-labelledby="exh-title">
+    <div class="hero-arch">
+      <svg class="arch" viewBox="0 0 200 240" preserveAspectRatio="none" aria-hidden="true"><use href="#ogee-arch"/></svg>
+      <div class="hero-inner">
+        <div class="eyebrow">On View · Gallery 4 &amp; 5 · Maydān Wing</div>
+        <h1 id="exh-title">Cobalt &amp; Cream<br><em>Tilework from the Maydān-i Naqsh-i Jahān</em></h1>
+        <div class="dates">14 Mehr<span class="sep">✦</span>22 Esfand 1403</div>
+        <div class="dates" style="font-size:14px;margin-top:2px;color:var(--secondary)">6 October 2024 — 12 March 2025</div>
+        <div class="hero-seal" aria-hidden="true">
+          <svg viewBox="0 0 100 100" style="color:var(--primary)"><use href="#star-seal"/></svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider gold" aria-hidden="true"><svg viewBox="0 0 700 22" preserveAspectRatio="none"><use href="#filet"/></svg></div>
+
+  <!-- CURATORIAL ESSAY -->
+  <section class="essay" aria-labelledby="essay-title">
+    <div class="section-title">
+      <span class="kicker">Curatorial Essay</span>
+      <h2 id="essay-title">From Seven Colours to a Single Mosaic</h2>
+      <div class="lede">An exhibition tracing the chromatic and architectural shift in Isfahan's tile workshops at the turn of the seventeenth century.</div>
+    </div>
+
+    <div class="byline">By <span class="who">Dr. Farzaneh Mostofi</span>, Chief Curator of Architecture &amp; Decorative Arts</div>
+
+    <p class="lead">When Shāh ʿAbbās I redrew the southern face of his capital between 1598 and 1629, he did not merely commission a square — he commissioned a palette. The Maydān-i Naqsh-i Jahān, that long sheet of brick and water at the heart of Isfahan, became the proving ground for a generation of tile-cutters who would refine, abandon, and finally reinvent the surfaces of Persian sacred architecture.</p>
+
+    <p>This exhibition gathers ninety-four objects — full revetment panels, fragments of dado, working sketches on gridded paper, and the rare surviving glaze-trial sherds from the royal kiln at Junbadhān — to ask a single question. Why, within roughly four decades, did the workshops of Isfahan move away from the swift, painterly economy of <em class="term">haft-rang</em> ("seven-colour") overglaze tiles, only to return to the slower, costlier, and structurally more demanding craft of <em class="term">muʿarraq</em> mosaic faience?</p>
+
+    <p>The conventional answer — that mosaic was simply prestigious, and the Shāh could afford prestige — flattens what the surviving evidence shows to have been a sustained, technically argumentative period. The cream-ground spandrels of the Sheikh Lotfollah Mosque (begun 1011 AH / 1602 CE) sit in dialogue, not opposition, with the haft-rang revetments of the Imam Mosque half a generation later. The two techniques shared masters; they shared cartoons; in at least three documented cases on view here, they shared a single wall.</p>
+
+    <div class="pullquote">
+      "The cobalt is never alone. It listens for a thread of cream beneath, and answers it."
+      <div style="font-size:13px;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);margin-top:10px;font-style:normal">— Ustād Ḥusayn Banna, attributed, c. 1614</div>
+    </div>
+
+    <p>The visitor will encounter, in the first gallery, the chromatic argument itself: ten panels arranged on a single ivory wall, ordered by date rather than provenance, so that the eye may track the slow draining of mustard-yellow and the steady ascendance of turquoise and that particular oxidised cobalt which Isfahani potters called <em class="term">lājvardī-yi shāhī</em>, "the royal lapis." The second gallery turns from colour to hand, and to a single hand in particular: that of Ustād Ḥusayn Banna (fl. 1597–1629), whose signature — three palmettes locked into a six-pointed star — appears on twenty-two of the works gathered here, and whose workshop training, we now believe, accounts for the unusual coherence of the south-east spandrel programme of the Imam Mosque.</p>
+
+    <p>The closing gallery is quieter, and deliberately so. It contains the fragments — what was broken in the 1722 siege, what was lifted by nineteenth-century travellers, what was returned in the late twentieth century, and what still waits, on the floor of a Tehran storeroom, for the next conservator. Cobalt and cream, it turns out, are also the colours of patience.</p>
+  </section>
+
+  <div class="divider" aria-hidden="true"><svg viewBox="0 0 700 22" preserveAspectRatio="none"><use href="#filet"/></svg></div>
+
+  <!-- THREE THEMATIC PANELS -->
+  <section aria-labelledby="sections-head">
+    <div class="section-title">
+      <span class="kicker">Three Readings</span>
+      <h2 id="sections-head">Walls, Spandrels, and a Workshop Hand</h2>
+      <div class="lede">The exhibition is divided into three gallery sequences, each anchored by a single monument and a single argument about technique.</div>
+    </div>
+
+    <div class="triptych">
+      <article class="panel">
+        <div class="panel-corner tl"><svg><use href="#corner-palm"/></svg></div>
+        <div class="panel-corner tr"><svg><use href="#corner-palm"/></svg></div>
+        <div class="panel-arch">
+          <svg class="arch" viewBox="0 0 200 240" preserveAspectRatio="none" aria-hidden="true"><use href="#ogee-arch"/></svg>
+          <div class="gold-line"></div>
+          <div class="seal" style="color:var(--primary)"><svg><use href="#star-seal"/></svg></div>
+        </div>
+        <div class="panel-body">
+          <div class="num">Gallery I</div>
+          <h3>The Sheikh Lotfollah Dome</h3>
+          <p>Twelve revetment fragments and a full quarter-cartoon, on loan from the Bonyād-i Mostazafān archive, allow the dome's interior to be read as a single contracting spiral. The cream ground is original; the cobalt has been retouched twice.</p>
+          <p style="font-size:13px;color:var(--secondary);font-style:italic">12 objects · 1011–1028 AH</p>
+        </div>
+        <div class="panel-corner bl"><svg><use href="#corner-palm"/></svg></div>
+        <div class="panel-corner br"><svg><use href="#corner-palm"/></svg></div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-corner tl"><svg><use href="#corner-palm"/></svg></div>
+        <div class="panel-corner tr"><svg><use href="#corner-palm"/></svg></div>
+        <div class="panel-arch">
+          <svg class="arch" viewBox="0 0 200 240" preserveAspectRatio="none" aria-hidden="true"><use href="#ogee-arch"/></svg>
+          <div class="gold-line"></div>
+          <div class="seal" style="color:var(--primary)"><svg><use href="#star-seal"/></svg></div>
+        </div>
+        <div class="panel-body">
+          <div class="num">Gallery II</div>
+          <h3>Spandrels of the Imam Mosque</h3>
+          <p>Four full spandrel reconstructions, set at original height and angle, frame the gallery's central axis. The visitor is asked to compare the haft-rang of the eastern īwān with the muʿarraq of the qibla, separated by some eleven years and a single chief tile-master.</p>
+          <p style="font-size:13px;color:var(--secondary);font-style:italic">23 objects · 1020–1040 AH</p>
+        </div>
+        <div class="panel-corner bl"><svg><use href="#corner-palm"/></svg></div>
+        <div class="panel-corner br"><svg><use href="#corner-palm"/></svg></div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-corner tl"><svg><use href="#corner-palm"/></svg></div>
+        <div class="panel-corner tr"><svg><use href="#corner-palm"/></svg></div>
+        <div class="panel-arch">
+          <svg class="arch" viewBox="0 0 200 240" preserveAspectRatio="none" aria-hidden="true"><use href="#ogee-arch"/></svg>
+          <div class="gold-line"></div>
+          <div class="seal" style="color:var(--primary)"><svg><use href="#star-seal"/></svg></div>
+        </div>
+        <div class="panel-body">
+          <div class="num">Gallery III</div>
+          <h3>The Hand of Ustād Ḥusayn Banna</h3>
+          <p>Twenty-two signed pieces, four sketchbooks (three on first public exhibition), and the kiln-list of 1024 AH document a single workshop's production cycle. The closing wall offers a side-by-side of master and apprentice palmette, distinguishable by half a millimetre of stem.</p>
+          <p style="font-size:13px;color:var(--secondary);font-style:italic">38 objects · 1006–1038 AH</p>
+        </div>
+        <div class="panel-corner bl"><svg><use href="#corner-palm"/></svg></div>
+        <div class="panel-corner br"><svg><use href="#corner-palm"/></svg></div>
+      </article>
+    </div>
+  </section>
+
+  <div class="divider gold" aria-hidden="true"><svg viewBox="0 0 700 22" preserveAspectRatio="none"><use href="#filet"/></svg></div>
+
+  <!-- SIDEBARS: LOANS + TALKS -->
+  <section aria-labelledby="programme-head">
+    <div class="section-title">
+      <span class="kicker">Loans &amp; Programme</span>
+      <h2 id="programme-head">Eight Institutions, Three Conversations</h2>
+    </div>
+
+    <div class="sidebars" style="margin-top:36px">
+      <aside class="sidebar loans" aria-labelledby="loans-head">
+        <h3 id="loans-head">Loan Institutions</h3>
+        <div class="sub">With gratitude for the cooperation of:</div>
+        <ol>
+          <li><span><span class="num">I.</span>National Museum of Iran</span><span class="city">Tehran</span></li>
+          <li><span><span class="num">II.</span>Chehel Sotoun Palace Archive</span><span class="city">Isfahan</span></li>
+          <li><span><span class="num">III.</span>Bonyād-i Mostazafān Tile Repository</span><span class="city">Isfahan</span></li>
+          <li><span><span class="num">IV.</span>Reza Abbasi Museum</span><span class="city">Tehran</span></li>
+          <li><span><span class="num">V.</span>Astan Quds Razavi Library</span><span class="city">Mashhad</span></li>
+          <li><span><span class="num">VI.</span>Victoria &amp; Albert Museum</span><span class="city">London</span></li>
+          <li><span><span class="num">VII.</span>Musée du Louvre, Section Islamique</span><span class="city">Paris</span></li>
+          <li><span><span class="num">VIII.</span>Aga Khan Museum</span><span class="city">Toronto</span></li>
+        </ol>
+      </aside>
+
+      <aside class="sidebar talks" aria-labelledby="talks-head">
+        <h3 id="talks-head">Gallery Talks</h3>
+        <div class="sub">Saturdays at 15:00 · Maydān Wing, Gallery 4 · admission included</div>
+        <ul>
+          <li>
+            <span class="talk-date">Saturday · 18 Āzar · 14:00 entry, 15:00 talk</span>
+            <span class="talk-title">Reading the Royal Lapis</span>
+            <span class="talk-speaker">Dr. Farzaneh Mostofi, Chief Curator. On the chemistry and politics of cobalt under Shāh ʿAbbās.</span>
+          </li>
+          <li>
+            <span class="talk-date">Saturday · 16 Dey · 15:00</span>
+            <span class="talk-title">Cutting the Cream</span>
+            <span class="talk-speaker">Ustād Mehrān Tabātabāʾī, master tile-cutter, Isfahan. A demonstration of muʿarraq technique with kiln-fired samples.</span>
+          </li>
+          <li>
+            <span class="talk-date">Saturday · 13 Esfand · 15:00</span>
+            <span class="talk-title">After the Siege</span>
+            <span class="talk-speaker">Dr. Pouya Ahmadi, Conservator. On the 1722 fractures and three centuries of repair.</span>
+          </li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"><svg viewBox="0 0 700 22" preserveAspectRatio="none"><use href="#filet"/></svg></div>
+
+  <!-- CLOSING BLOCK -->
+  <section aria-labelledby="resources-head">
+    <div class="section-title">
+      <span class="kicker">For Your Visit</span>
+      <h2 id="resources-head">Audio Guide &amp; Floorplan</h2>
+      <div class="lede">Two complimentary resources prepared by the curatorial department to accompany the galleries.</div>
+    </div>
+
+    <div class="closing" style="margin-top:36px">
+      <div class="closing-card">
+        <div class="icon" aria-hidden="true"><svg viewBox="0 0 56 56"><use href="#audio"/></svg></div>
+        <h3>Audio Guide</h3>
+        <div class="meta">42 stops · 1 h 18 min · narrated by the curator</div>
+        <p>Available in Persian, English, French, and Arabic. Recordings include workshop sounds gathered at the Junbadhān site in Mordad 1402, and a sung recitation of the Sheikh Lotfollah inscription band by Banafsheh Aṣghari.</p>
+        <a class="action" href="#download-audio">Download · 184 MB</a>
+      </div>
+
+      <div class="closing-card">
+        <svg class="plan-svg" viewBox="0 0 280 140" aria-hidden="true">
+          <rect x="2" y="2" width="276" height="136" fill="none" stroke="var(--primary)" stroke-width="1"/>
+          <rect x="10" y="10" width="80" height="120" fill="none" stroke="var(--accent)" stroke-width="0.6"/>
+          <rect x="100" y="10" width="80" height="120" fill="none" stroke="var(--accent)" stroke-width="0.6"/>
+          <rect x="190" y="10" width="80" height="120" fill="none" stroke="var(--accent)" stroke-width="0.6"/>
+          <text x="50" y="76" text-anchor="middle" font-family="Cinzel Decorative" font-size="10" fill="var(--primary)">I</text>
+          <text x="140" y="76" text-anchor="middle" font-family="Cinzel Decorative" font-size="10" fill="var(--primary)">II</text>
+          <text x="230" y="76" text-anchor="middle" font-family="Cinzel Decorative" font-size="10" fill="var(--primary)">III</text>
+          <circle cx="140" cy="76" r="4" fill="var(--text-emphasis)"/>
+          <path d="M 95 70 L 95 82 M 185 70 L 185 82" stroke="var(--bg)" stroke-width="2"/>
+          <text x="140" y="128" text-anchor="middle" font-family="Cormorant Garamond" font-style="italic" font-size="9" fill="var(--text)">Maydān Wing · Galleries 4 &amp; 5</text>
+        </svg>
+        <h3>Printable Floorplan</h3>
+        <div class="meta">A4 · 2 pp · with object key &amp; route</div>
+        <p>The recommended route enters from the eastern īwān-staircase and proceeds anti-clockwise. A high-contrast version, prepared with the museum's accessibility desk, is included in the same file.</p>
+        <a class="action" href="#download-plan">Download · PDF, 2.4 MB</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-foot">
+  <div class="foot-filet" aria-hidden="true"><svg viewBox="0 0 700 22" preserveAspectRatio="none"><use href="#filet"/></svg></div>
+
+  <div class="foot-inner">
+    <div class="foot-col">
+      <h4>Visit</h4>
+      <p>Dīvānkhāneh Museum</p>
+      <p>14 Khiābān-i Ostāndārī</p>
+      <p>Maydān-i Naqsh-i Jahān, Isfahan 8174643561</p>
+      <p><em>Saturday – Thursday · 09:00 – 18:00</em></p>
+      <p>Friday · 14:00 – 20:00</p>
+    </div>
+    <div class="foot-col">
+      <h4>Contact</h4>
+      <p>Telephone: +98 31 3222 4017</p>
+      <p>Curatorial: curatorial@divankhaneh.ir</p>
+      <p>Press: press@divankhaneh.ir</p>
+      <p><em>Postal correspondence:</em></p>
+      <p>P.O. Box 81465-1741, Isfahan</p>
+    </div>
+    <div class="foot-col">
+      <h4>Patronage</h4>
+      <p>Founded under the patronage of the</p>
+      <p><em>Cultural Heritage Endowment of Isfahan Province</em></p>
+      <p>with the cooperation of the</p>
+      <p>Bonyād-i Pazhūheshhā-yi Eslāmī</p>
+      <p>and private donors of the city.</p>
+    </div>
+  </div>
+
+  <div class="tailpiece" aria-hidden="true"><svg viewBox="0 0 220 30"><use href="#tailpiece"/></svg></div>
+  <div class="imprint">
+    <em>Dīvānkhāneh — Museum of Safavid Isfahan · published by the Curatorial Department · MMXXIV / 1403 AH · all rights reserved.</em>
+  </div>
+</footer>
+
+</body>
+</html>

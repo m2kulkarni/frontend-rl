@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Visit — Hours, Admission, and Access</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    font-size: 17px;
+    line-height: 1.65;
+  }
+
+  /* ---------- Masthead ---------- */
+  .masthead {
+    background: var(--surface);
+    padding: 48px 24px 28px;
+    text-align: center;
+    border-bottom: 1px solid rgba(169,50,38,0.18);
+  }
+  .masthead .spqr {
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.5em;
+    font-size: 13px;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+  .masthead h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 600;
+    font-size: 38px;
+    letter-spacing: 0.18em;
+    margin: 0 0 6px;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+  .masthead .latin {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 16px;
+    letter-spacing: 0.14em;
+    color: var(--primary);
+    margin-bottom: 18px;
+  }
+  .masthead .rule {
+    width: 280px;
+    height: 1px;
+    background: var(--primary);
+    margin: 16px auto 0;
+    position: relative;
+  }
+  .masthead .rule::before,
+  .masthead .rule::after {
+    content: "";
+    position: absolute;
+    top: -2px;
+    width: 5px; height: 5px;
+    background: var(--ornament);
+    transform: rotate(45deg);
+  }
+  .masthead .rule::before { left: -3px; }
+  .masthead .rule::after { right: -3px; }
+
+  /* ---------- Navigation ---------- */
+  nav.primary {
+    background: var(--surface);
+    text-align: center;
+    padding: 18px 0 14px;
+  }
+  nav.primary ul {
+    list-style: none;
+    margin: 0; padding: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+  }
+  nav.primary li {
+    display: inline-flex;
+    align-items: center;
+  }
+  nav.primary a {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 11.5px;
+    color: var(--text);
+    text-decoration: none;
+    padding: 4px 18px;
+  }
+  nav.primary a[aria-current="page"] {
+    color: var(--primary);
+  }
+  nav.primary .vine {
+    width: 14px; height: 14px;
+    fill: var(--ornament);
+    opacity: 0.85;
+  }
+
+  /* Greek-key meander strip */
+  .meander-strip {
+    width: 100%;
+    height: 28px;
+    background-color: var(--surface);
+    background-image:
+      linear-gradient(to bottom, transparent 0, transparent 4px, var(--primary) 4px, var(--primary) 5px, transparent 5px, transparent 23px, var(--primary) 23px, var(--primary) 24px, transparent 24px),
+      repeating-linear-gradient(90deg,
+        var(--ornament) 0 2px,
+        transparent 2px 6px,
+        var(--ornament) 6px 8px,
+        transparent 8px 12px,
+        var(--ornament) 12px 14px,
+        transparent 14px 22px,
+        var(--ornament) 22px 24px,
+        transparent 24px 28px);
+    background-position: 0 0, 0 7px;
+    background-repeat: no-repeat, repeat-x;
+    background-size: 100% 100%, 32px 14px;
+    border-top: 1px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
+    position: relative;
+  }
+  /* simpler readable meander using SVG */
+  .meander-strip {
+    background: var(--surface);
+    border-top: 1px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
+    height: 26px;
+    overflow: hidden;
+    position: relative;
+  }
+  .meander-strip::before {
+    content: "";
+    position: absolute;
+    inset: 4px 0;
+    background-image:
+      repeating-linear-gradient(90deg,
+        var(--ornament) 0 1.5px, transparent 1.5px 6px,
+        var(--ornament) 6px 7.5px, transparent 7.5px 12px,
+        var(--ornament) 12px 13.5px, transparent 13.5px 18px),
+      repeating-linear-gradient(0deg,
+        var(--ornament) 0 1.5px, transparent 1.5px 18px);
+    background-size: 36px 18px, 36px 18px;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    text-align: center;
+    padding: 56px 24px 28px;
+    background: var(--bg);
+    position: relative;
+  }
+  .pediment {
+    width: 720px;
+    height: 78px;
+    margin: 0 auto 24px;
+    position: relative;
+  }
+  .pediment::before,
+  .pediment::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    height: 1px;
+    background: var(--primary);
+  }
+  .pediment::before { left: 0; right: 50%; }
+  .pediment::after  { right: 0; left: 50%; }
+  .pediment svg.tri {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+  }
+  .hero-wreath {
+    position: relative;
+    width: 360px;
+    margin: 0 auto;
+  }
+  .hero-wreath .laurel {
+    width: 100%;
+    height: auto;
+    opacity: 0.95;
+  }
+  .hero-wreath .label {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .hero-wreath .eyebrow {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .hero-wreath h2 {
+    font-family: var(--font-display), serif;
+    font-size: 26px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin: 0;
+    line-height: 1.1;
+  }
+  .hero-wreath .roman-date {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--text);
+    margin-top: 10px;
+  }
+  .hero-deck {
+    max-width: 720px;
+    margin: 28px auto 0;
+    font-style: italic;
+    font-size: 18px;
+    color: #2a2a2a;
+  }
+
+  /* Section divider */
+  .divider {
+    text-align: center;
+    padding: 28px 0 16px;
+  }
+  .divider svg {
+    width: 220px;
+    height: auto;
+    fill: var(--ornament);
+    opacity: 0.85;
+  }
+
+  /* ---------- Tabular composition ---------- */
+  .visit-table {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 16px 24px 40px;
+  }
+  .visit-table h3.section-title {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    font-size: 18px;
+    color: var(--primary);
+    margin: 16px 0 28px;
+  }
+  .visit-table h3.section-title::before,
+  .visit-table h3.section-title::after {
+    content: "❦";
+    color: var(--ornament);
+    margin: 0 16px;
+    font-size: 14px;
+    vertical-align: middle;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-bottom: 32px;
+  }
+
+  /* Card */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--ornament);
+    padding: 4px;
+    position: relative;
+  }
+  .card-inner {
+    border: 1px solid var(--primary);
+    padding: 32px 36px 28px;
+    position: relative;
+  }
+  /* Greek-key corners (gold) — using before/after on outer card */
+  .card::before, .card::after {
+    content: "";
+    position: absolute;
+    width: 100%; height: 6px;
+    background-image: repeating-linear-gradient(90deg,
+      var(--ornament) 0 2px, transparent 2px 6px,
+      var(--ornament) 6px 8px, transparent 8px 14px);
+    left: 0;
+  }
+  .card::before { top: -1px; }
+  .card::after  { bottom: -1px; }
+
+  .card h4 {
+    font-family: var(--font-display), serif;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 17px;
+    color: var(--primary);
+    margin: 0 0 6px;
+  }
+  .card .subtitle {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    margin-bottom: 22px;
+  }
+  .card .roundel {
+    display: block;
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 10px;
+  }
+  .card dl {
+    margin: 0;
+    padding: 0 12px;
+  }
+  .card dl.tabular {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    row-gap: 10px;
+    column-gap: 18px;
+  }
+  .card dt {
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text);
+    padding-top: 2px;
+  }
+  .card dd {
+    margin: 0;
+    font-size: 16px;
+  }
+  .card dd .lat {
+    display: block;
+    font-style: italic;
+    color: #555;
+    font-size: 13.5px;
+    letter-spacing: 0.04em;
+  }
+
+  .price-list {
+    list-style: none;
+    margin: 0;
+    padding: 0 12px;
+  }
+  .price-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 8px 0;
+    border-bottom: 1px dotted rgba(169,50,38,0.3);
+  }
+  .price-list li:last-child { border-bottom: none; }
+  .price-list .item {
+    font-family: var(--font-body), serif;
+    font-size: 16px;
+  }
+  .price-list .item .lat {
+    display: block;
+    font-style: italic;
+    color: #555;
+    font-size: 13px;
+  }
+  .price-list .price {
+    font-family: var(--font-display), serif;
+    font-size: 16px;
+    color: var(--primary);
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+  .price-list .free {
+    color: var(--accent);
+  }
+
+  /* close-rule for cards */
+  .close-rule {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 22px;
+    gap: 10px;
+  }
+  .close-rule .line {
+    height: 1px;
+    background: var(--ornament);
+    width: 70px;
+  }
+  .close-rule svg {
+    width: 14px; height: 14px;
+    fill: var(--ornament);
+  }
+
+  /* Hours notice */
+  .closed-notice {
+    margin-top: 18px;
+    padding: 14px 18px;
+    background: rgba(169,50,38,0.05);
+    border-left: 2px solid var(--primary);
+    border-right: 2px solid var(--primary);
+    text-align: center;
+    font-style: italic;
+    font-size: 14.5px;
+  }
+  .closed-notice strong {
+    font-family: var(--font-display), serif;
+    font-style: normal;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-size: 11.5px;
+    color: var(--primary);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  /* Wide single card */
+  .wide {
+    grid-template-columns: 1fr;
+  }
+
+  /* Accessibility / contact card with two columns */
+  .access-grid {
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr;
+    gap: 28px;
+    align-items: stretch;
+  }
+  .access-grid .vline {
+    background: var(--ornament);
+    opacity: 0.5;
+  }
+  .access-grid h5 {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 13px;
+    color: var(--accent);
+    margin: 0 0 10px;
+    text-align: center;
+  }
+  .access-grid p { margin: 0 0 10px; }
+  .access-grid ul.langs {
+    list-style: none;
+    margin: 8px 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px 14px;
+  }
+  .access-grid ul.langs li {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text);
+    padding: 4px 10px;
+    border: 1px solid var(--ornament);
+  }
+
+  /* Inscription block — practical info */
+  .inscription {
+    text-align: center;
+    background: var(--surface);
+    padding: 32px 24px;
+    margin: 36px auto 0;
+    max-width: 900px;
+    border-top: 2px solid var(--primary);
+    border-bottom: 2px solid var(--primary);
+  }
+  .inscription .title {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.32em;
+    font-size: 12px;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+  .inscription p {
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.14em;
+    font-size: 15px;
+    line-height: 1.9;
+    margin: 0;
+    text-transform: uppercase;
+  }
+  .inscription p .small {
+    text-transform: none;
+    letter-spacing: 0.04em;
+    font-style: italic;
+    font-family: var(--font-body), serif;
+    font-size: 14px;
+    color: #444;
+  }
+
+  /* ---------- Footer frieze ---------- */
+  footer.frieze {
+    margin-top: 56px;
+    background: #d9c9aa;
+    border-top: 1px solid var(--primary);
+  }
+  footer .meander-strip {
+    background: #d9c9aa;
+    border-top: none;
+    border-bottom: 1px solid var(--primary);
+  }
+  footer .inner {
+    text-align: center;
+    padding: 36px 24px 28px;
+  }
+  footer .museum-name {
+    font-family: var(--font-display), serif;
+    font-size: 18px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  footer .address {
+    font-family: var(--font-body), serif;
+    font-size: 14px;
+    color: #2a2a2a;
+    margin-bottom: 6px;
+  }
+  footer .foundation {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    color: var(--primary);
+    margin-bottom: 14px;
+  }
+  footer .tailpiece {
+    font-family: var(--font-display), serif;
+    color: var(--ornament);
+    font-size: 22px;
+    letter-spacing: 0.6em;
+    padding-left: 0.6em;
+  }
+  footer .colophon {
+    margin-top: 14px;
+    font-size: 12px;
+    color: #555;
+    letter-spacing: 0.08em;
+  }
+
+  /* small inline vine svg helper */
+  .vine-inline {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    vertical-align: middle;
+    fill: var(--ornament);
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ MASTHEAD ============ -->
+<header class="masthead" role="banner">
+  <div class="spqr">S · P · Q · R</div>
+  <h1>Antiquarium Traianum</h1>
+  <div class="latin">Museum of the Imperial Forum &middot; Roma</div>
+  <div class="rule" aria-hidden="true"></div>
+</header>
+
+<!-- ============ NAV ============ -->
+<nav class="primary" aria-label="Primary">
+  <ul>
+    <li><a href="page-1.html">Home</a></li>
+    <li aria-hidden="true"><svg class="vine" viewBox="0 0 200 200"><path d="M43.583 863.37c-1.79.03-3.58.13-5.34.31-7.05.74-13.94 2.79-19.16 7.47-5.22 4.67-8.2 12-7.69 21 .51 9 4.3 16.14 10.19 20.34 5.89 4.2 13.31 5.53 21.03 5.19 15.45-.69 32.83-8 45.81-18.31z" transform="translate(-15 -858) scale(0.95)"/></svg></li>
+    <li><a href="page-2.html">Collection</a></li>
+    <li aria-hidden="true"><svg class="vine" viewBox="0 0 200 200"><path d="M43.583 863.37c-1.79.03-3.58.13-5.34.31-7.05.74-13.94 2.79-19.16 7.47-5.22 4.67-8.2 12-7.69 21 .51 9 4.3 16.14 10.19 20.34 5.89 4.2 13.31 5.53 21.03 5.19 15.45-.69 32.83-8 45.81-18.31z" transform="translate(-15 -858) scale(0.95)"/></svg></li>
+    <li><a href="page-3.html">Exhibition</a></li>
+    <li aria-hidden="true"><svg class="vine" viewBox="0 0 200 200"><path d="M43.583 863.37c-1.79.03-3.58.13-5.34.31-7.05.74-13.94 2.79-19.16 7.47-5.22 4.67-8.2 12-7.69 21 .51 9 4.3 16.14 10.19 20.34 5.89 4.2 13.31 5.53 21.03 5.19 15.45-.69 32.83-8 45.81-18.31z" transform="translate(-15 -858) scale(0.95)"/></svg></li>
+    <li><a href="page-4.html" aria-current="page">Visit</a></li>
+    <li aria-hidden="true"><svg class="vine" viewBox="0 0 200 200"><path d="M43.583 863.37c-1.79.03-3.58.13-5.34.31-7.05.74-13.94 2.79-19.16 7.47-5.22 4.67-8.2 12-7.69 21 .51 9 4.3 16.14 10.19 20.34 5.89 4.2 13.31 5.53 21.03 5.19 15.45-.69 32.83-8 45.81-18.31z" transform="translate(-15 -858) scale(0.95)"/></svg></li>
+    <li><a href="page-5.html">Scholarship</a></li>
+    <li aria-hidden="true"><svg class="vine" viewBox="0 0 200 200"><path d="M43.583 863.37c-1.79.03-3.58.13-5.34.31-7.05.74-13.94 2.79-19.16 7.47-5.22 4.67-8.2 12-7.69 21 .51 9 4.3 16.14 10.19 20.34 5.89 4.2 13.31 5.53 21.03 5.19 15.45-.69 32.83-8 45.81-18.31z" transform="translate(-15 -858) scale(0.95)"/></svg></li>
+    <li><a href="page-6.html">About</a></li>
+  </ul>
+</nav>
+<div class="meander-strip" aria-hidden="true"></div>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="pediment" aria-hidden="true">
+    <svg class="tri" width="120" height="60" viewBox="0 0 120 60">
+      <polygon points="60,4 116,56 4,56" fill="none" stroke="#a93226" stroke-width="1.2"/>
+      <circle cx="60" cy="40" r="4" fill="#c9a23a"/>
+    </svg>
+  </div>
+
+  <div class="hero-wreath">
+    <svg class="laurel" viewBox="0 0 324 296" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <g fill="none" stroke="#c9a23a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.95">
+        <!-- Two arched laurel branches forming a wreath -->
+        <path d="M 60 150 Q 80 60 162 30 Q 244 60 264 150" />
+        <path d="M 70 165 Q 90 80 162 50 Q 234 80 254 165"/>
+        <!-- Leaves left -->
+        <g fill="#c9a23a" stroke="none">
+          <ellipse cx="72" cy="130" rx="9" ry="4" transform="rotate(-50 72 130)"/>
+          <ellipse cx="82" cy="105" rx="9" ry="4" transform="rotate(-40 82 105)"/>
+          <ellipse cx="98" cy="82" rx="9" ry="4" transform="rotate(-30 98 82)"/>
+          <ellipse cx="118" cy="62" rx="9" ry="4" transform="rotate(-20 118 62)"/>
+          <ellipse cx="142" cy="48" rx="9" ry="4" transform="rotate(-10 142 48)"/>
+          <ellipse cx="86" cy="155" rx="9" ry="4" transform="rotate(-55 86 155)"/>
+          <ellipse cx="96" cy="130" rx="9" ry="4" transform="rotate(-45 96 130)"/>
+          <ellipse cx="112" cy="108" rx="9" ry="4" transform="rotate(-35 112 108)"/>
+          <ellipse cx="132" cy="90" rx="9" ry="4" transform="rotate(-25 132 90)"/>
+        </g>
+        <!-- Leaves right -->
+        <g fill="#c9a23a" stroke="none">
+          <ellipse cx="252" cy="130" rx="9" ry="4" transform="rotate(50 252 130)"/>
+          <ellipse cx="242" cy="105" rx="9" ry="4" transform="rotate(40 242 105)"/>
+          <ellipse cx="226" cy="82" rx="9" ry="4" transform="rotate(30 226 82)"/>
+          <ellipse cx="206" cy="62" rx="9" ry="4" transform="rotate(20 206 62)"/>
+          <ellipse cx="182" cy="48" rx="9" ry="4" transform="rotate(10 182 48)"/>
+          <ellipse cx="238" cy="155" rx="9" ry="4" transform="rotate(55 238 155)"/>
+          <ellipse cx="228" cy="130" rx="9" ry="4" transform="rotate(45 228 130)"/>
+          <ellipse cx="212" cy="108" rx="9" ry="4" transform="rotate(35 212 108)"/>
+          <ellipse cx="192" cy="90" rx="9" ry="4" transform="rotate(25 192 90)"/>
+        </g>
+        <!-- Ribbon/tie at bottom -->
+        <path d="M 150 190 Q 162 200 174 190" stroke="#a93226" stroke-width="1.4" fill="none"/>
+        <path d="M 148 192 L 138 215 L 146 210 L 144 222" stroke="#a93226" fill="none"/>
+        <path d="M 176 192 L 186 215 L 178 210 L 180 222" stroke="#a93226" fill="none"/>
+      </g>
+    </svg>
+    <div class="label">
+      <div class="eyebrow">Tabula Visitantium</div>
+      <h2>Visit</h2>
+      <div class="roman-date">Hours · Admission · Access</div>
+    </div>
+  </div>
+
+  <p class="hero-deck">
+    A practical guide for the visitor — set out, in the manner of a public
+    inscription, the days and hours of opening, the price of admission,
+    the reaching of the museum, and the provisions made for those whose
+    access requires assistance.
+  </p>
+</section>
+
+<!-- divider -->
+<div class="divider" aria-hidden="true">
+  <svg viewBox="0 0 200 30" xmlns="http://www.w3.org/2000/svg">
+    <line x1="0" y1="15" x2="80" y2="15" stroke="#c9a23a" stroke-width="1"/>
+    <line x1="120" y1="15" x2="200" y2="15" stroke="#c9a23a" stroke-width="1"/>
+    <path d="M100 6 C 92 12, 92 18, 100 24 C 108 18, 108 12, 100 6 Z" fill="#c9a23a"/>
+    <circle cx="100" cy="15" r="2" fill="#a93226"/>
+  </svg>
+</div>
+
+<!-- ============ MAIN TABULAR CONTENT ============ -->
+<main class="visit-table">
+
+  <h3 class="section-title">Horae &amp; Pretia</h3>
+
+  <div class="row">
+
+    <!-- Hours card -->
+    <article class="card">
+      <div class="card-inner">
+        <svg class="roundel" viewBox="0 0 118 118" aria-hidden="true">
+          <circle cx="59" cy="59" r="50" fill="none" stroke="#c9a23a" stroke-width="1.2"/>
+          <circle cx="59" cy="59" r="42" fill="none" stroke="#a93226" stroke-width="0.8"/>
+          <g fill="#c9a23a" stroke="none">
+            <circle cx="59" cy="14" r="2"/>
+            <circle cx="104" cy="59" r="2"/>
+            <circle cx="59" cy="104" r="2"/>
+            <circle cx="14" cy="59" r="2"/>
+          </g>
+          <line x1="59" y1="59" x2="59" y2="28" stroke="#a93226" stroke-width="1.4"/>
+          <line x1="59" y1="59" x2="82" y2="59" stroke="#a93226" stroke-width="1"/>
+          <circle cx="59" cy="59" r="2.5" fill="#a93226"/>
+        </svg>
+        <h4>Hours of Opening</h4>
+        <div class="subtitle">Horae Apertionis</div>
+        <dl class="tabular">
+          <dt>Tuesday — Sunday</dt>
+          <dd>09:00 — 18:30
+            <span class="lat">last entry 17:45</span>
+          </dd>
+          <dt>Monday</dt>
+          <dd>Closed
+            <span class="lat">dies lunae &mdash; clausum</span>
+          </dd>
+          <dt>1 January</dt>
+          <dd>Closed</dd>
+          <dt>1 May</dt>
+          <dd>Closed</dd>
+          <dt>25 December</dt>
+          <dd>Closed</dd>
+        </dl>
+
+        <div class="closed-notice">
+          <strong>Note Bene</strong>
+          The galleries of the upper porticus close fifteen minutes before
+          the hour of general closure. Cloakroom service ends at 18:00.
+        </div>
+
+        <div class="close-rule" aria-hidden="true">
+          <span class="line"></span>
+          <svg viewBox="0 0 200 200"><path d="M43.6 863.4c-1.8 0-3.6.1-5.3.3-7 .7-13.9 2.8-19.2 7.5-5.2 4.7-8.2 12-7.7 21 .5 9 4.3 16.1 10.2 20.3 5.9 4.2 13.3 5.5 21 5.2 15.5-.7 32.8-8 45.8-18.3z" transform="translate(0 -855)" fill="currentColor"/></svg>
+          <span class="line"></span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Admission card -->
+    <article class="card">
+      <div class="card-inner">
+        <svg class="roundel" viewBox="0 0 118 118" aria-hidden="true">
+          <circle cx="59" cy="59" r="50" fill="none" stroke="#c9a23a" stroke-width="1.2"/>
+          <circle cx="59" cy="59" r="36" fill="none" stroke="#a93226" stroke-width="0.8"/>
+          <text x="59" y="68" text-anchor="middle" font-family="Cinzel, serif" font-size="28" fill="#a93226" font-weight="600">€</text>
+        </svg>
+        <h4>Admission</h4>
+        <div class="subtitle">De Pretiis Aditus</div>
+
+        <ul class="price-list">
+          <li>
+            <span class="item">Full admission
+              <span class="lat">aditus integer</span>
+            </span>
+            <span class="price">12,00 €</span>
+          </li>
+          <li>
+            <span class="item">Reduced
+              <span class="lat">students, citizens 18–25, groups</span>
+            </span>
+            <span class="price">8,00 €</span>
+          </li>
+          <li>
+            <span class="item">Visitors under 18
+              <span class="lat">minores duodeviginti annorum</span>
+            </span>
+            <span class="price free">Gratis</span>
+          </li>
+          <li>
+            <span class="item">First Sunday of the month
+              <span class="lat">dominica prima cuiusque mensis</span>
+            </span>
+            <span class="price free">Gratis</span>
+          </li>
+          <li>
+            <span class="item">Audio guide
+              <span class="lat">in five languages</span>
+            </span>
+            <span class="price">4,00 €</span>
+          </li>
+        </ul>
+
+        <div class="close-rule" aria-hidden="true">
+          <span class="line"></span>
+          <svg viewBox="0 0 200 200"><path d="M43.6 863.4c-1.8 0-3.6.1-5.3.3-7 .7-13.9 2.8-19.2 7.5-5.2 4.7-8.2 12-7.7 21 .5 9 4.3 16.1 10.2 20.3 5.9 4.2 13.3 5.5 21 5.2 15.5-.7 32.8-8 45.8-18.3z" transform="translate(0 -855)" fill="currentColor"/></svg>
+          <span class="line"></span>
+        </div>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- divider between sections -->
+  <div class="divider" aria-hidden="true">
+    <svg viewBox="0 0 200 30" xmlns="http://www.w3.org/2000/svg">
+      <line x1="0" y1="15" x2="80" y2="15" stroke="#c9a23a" stroke-width="1"/>
+      <line x1="120" y1="15" x2="200" y2="15" stroke="#c9a23a" stroke-width="1"/>
+      <path d="M100 6 C 92 12, 92 18, 100 24 C 108 18, 108 12, 100 6 Z" fill="#c9a23a"/>
+      <circle cx="100" cy="15" r="2" fill="#a93226"/>
+    </svg>
+  </div>
+
+  <h3 class="section-title">Locus &amp; Aditus</h3>
+
+  <div class="row">
+
+    <!-- Address / contact -->
+    <article class="card">
+      <div class="card-inner">
+        <h4>How to Find Us</h4>
+        <div class="subtitle">Quomodo Adveniatur</div>
+        <dl class="tabular">
+          <dt>Address</dt>
+          <dd>Via dei Fori Imperiali, 47
+            <span class="lat">00184 Roma, Italia</span>
+          </dd>
+          <dt>Telephone</dt>
+          <dd>+39 06 6789 4412</dd>
+          <dt>Electronic post</dt>
+          <dd>visite@antiquariumtraianum.roma.it</dd>
+          <dt>Nearest Metro</dt>
+          <dd>Colosseo (Linea B)
+            <span class="lat">six minutes on foot, north along the Via dei Fori Imperiali</span>
+          </dd>
+          <dt>Bus lines</dt>
+          <dd>51 · 75 · 85 · 87 · 117
+            <span class="lat">stop: Fori Imperiali / Colosseo</span>
+          </dd>
+          <dt>On foot</dt>
+          <dd>Twelve minutes from the Piazza Venezia; eight from the Forum Romanum entrance.</dd>
+        </dl>
+
+        <div class="close-rule" aria-hidden="true">
+          <span class="line"></span>
+          <svg viewBox="0 0 200 200"><path d="M43.6 863.4c-1.8 0-3.6.1-5.3.3-7 .7-13.9 2.8-19.2 7.5-5.2 4.7-8.2 12-7.7 21 .5 9 4.3 16.1 10.2 20.3 5.9 4.2 13.3 5.5 21 5.2 15.5-.7 32.8-8 45.8-18.3z" transform="translate(0 -855)" fill="currentColor"/></svg>
+          <span class="line"></span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Accessibility -->
+    <article class="card">
+      <div class="card-inner">
+        <h4>Access for All</h4>
+        <div class="subtitle">De Aditu Universali</div>
+
+        <p style="margin: 0 12px 14px;">
+          The Antiquarium is committed to making the material culture of
+          the Empire legible to every visitor. The four floors of the
+          museum are reached by a lift situated to the right of the
+          atrium, with controls in raised characters. Wheelchairs are
+          available at the cloakroom without charge.
+        </p>
+        <p style="margin: 0 12px 14px;">
+          Tactile reproductions of three principal portraits — Augustus
+          of Prima Porta, Trajan in armour, and the empress Iulia Domna —
+          are mounted at convenient height in the central rotunda and
+          may be handled freely.
+        </p>
+
+        <h5 style="font-family:var(--font-display); text-transform:uppercase; letter-spacing:0.2em; font-size:12px; color:var(--accent); text-align:center; margin:18px 0 10px;">Audio Guides</h5>
+        <ul class="langs">
+          <li>Italiano</li>
+          <li>Latina</li>
+          <li>English</li>
+          <li>Français</li>
+          <li>Deutsch</li>
+        </ul>
+
+        <div class="close-rule" aria-hidden="true">
+          <span class="line"></span>
+          <svg viewBox="0 0 200 200"><path d="M43.6 863.4c-1.8 0-3.6.1-5.3.3-7 .7-13.9 2.8-19.2 7.5-5.2 4.7-8.2 12-7.7 21 .5 9 4.3 16.1 10.2 20.3 5.9 4.2 13.3 5.5 21 5.2 15.5-.7 32.8-8 45.8-18.3z" transform="translate(0 -855)" fill="currentColor"/></svg>
+          <span class="line"></span>
+        </div>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- Inscription block -->
+  <section class="inscription" aria-label="Visitor notice">
+    <div class="title">— Notitia Publica —</div>
+    <p>
+      Patet · Martis · Die · Ad · Solis · Diem<br>
+      Ab · Hora · Nona · Antemeridiana · Ad · Vesperum<br>
+      <span class="small">Open Tuesday through Sunday, 09:00 to 18:30. Closed on Mondays and on the public holidays of 1 January, 1 May, and 25 December. Last admission 17:45.</span>
+    </p>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER FRIEZE ============ -->
+<footer class="frieze" role="contentinfo">
+  <div class="meander-strip" aria-hidden="true"></div>
+  <div class="inner">
+    <div class="museum-name">Antiquarium Traianum</div>
+    <div class="address">Via dei Fori Imperiali 47 · 00184 Roma · Italia · Tel. +39 06 6789 4412</div>
+    <div class="foundation">Fundatum · A · D · MCMLXXIV — Founded in the year of our Lord 1974</div>
+    <div class="tailpiece" aria-hidden="true">❦ · ❦ · ❦</div>
+    <div class="colophon">Ex Senatus Consulto Populique Romani &middot; under the patronage of the Soprintendenza Speciale di Roma</div>
+  </div>
+</footer>
+
+</body>
+</html>

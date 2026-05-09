@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Atelier de Guillaume de Sancerre — Maître-Verrier</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  /* ============ BASE ============ */
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Garamond, serif;
+    font-size: 17px;
+    line-height: 1.55;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Faint quatrefoil-in-square diaper as the parchment wall */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 600 600'><g transform='translate(300,300)scale(0.87)rotate(45)' fill='%231e3a5f' fill-opacity='0.07'><circle cx='-195.16' r='163'/><circle cx='195.16' r='163'/><circle cy='195.16' r='163'/><circle cy='-195.16' r='163'/><rect x='-232' y='-232' width='464' height='464'/></g><g transform='translate(300,300)scale(0.87)rotate(45)' fill='%23f4ecd8'><circle cx='-195.16' r='157'/><circle cx='195.16' r='157'/><circle cy='195.16' r='157'/><circle cy='-195.16' r='157'/><rect x='-226' y='-226' width='452' height='452'/></g></svg>");
+    background-repeat: repeat;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.55;
+  }
+
+  a { color: var(--primary); text-decoration: none; }
+
+  /* ============ MASTHEAD ============ */
+  .masthead {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 38px 0 0;
+    border-bottom: 1px solid var(--ornament);
+  }
+  .wordmark {
+    font-family: var(--font-display), serif;
+    font-size: 54px;
+    color: var(--ornament);
+    letter-spacing: 0.02em;
+    line-height: 1;
+    margin: 0;
+  }
+  .wordmark .amp { color: var(--secondary); }
+  .wordmark-sub {
+    font-family: var(--font-body), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.45em;
+    color: var(--text);
+    font-size: 12px;
+    margin: 10px 0 26px;
+  }
+
+  /* ============ NAV ARCADE ============ */
+  .arcade {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 0;
+    margin: 0 auto;
+    padding: 0 0 4px;
+    border-top: 1px solid var(--ornament);
+    border-bottom: 3px double var(--ornament);
+    background: var(--bg);
+  }
+  .arcade a {
+    position: relative;
+    width: 200px;
+    height: 78px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    font-size: 12.5px;
+    color: var(--text);
+    border-left: 1px solid var(--ornament);
+    background:
+      radial-gradient(ellipse 100px 78px at 50% 100%, transparent 76px, var(--ornament) 76px, var(--ornament) 78px, transparent 78px);
+    padding-top: 18px;
+    box-sizing: border-box;
+  }
+  .arcade a:last-child { border-right: 1px solid var(--ornament); }
+  .arcade a::before {
+    content: "";
+    position: absolute;
+    left: 8px; right: 8px; top: 8px; bottom: 0;
+    border-radius: 50% 50% 0 0 / 70% 70% 0 0;
+    border: 1px solid var(--ornament);
+    border-bottom: none;
+    pointer-events: none;
+  }
+  .arcade a[aria-current="page"] {
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .arcade a[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    left: 9px; right: 9px; top: 9px; bottom: 0;
+    background: var(--primary);
+    border-radius: 50% 50% 0 0 / 70% 70% 0 0;
+    z-index: -1;
+  }
+  .arcade a[aria-current="page"] {
+    z-index: 1;
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    position: relative;
+    z-index: 1;
+    height: 760px;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    background:
+      linear-gradient(180deg, rgba(30,58,95,0.04) 0%, transparent 40%, transparent 60%, rgba(139,21,56,0.04) 100%);
+    border-bottom: 3px double var(--ornament);
+  }
+  .pier {
+    width: 90px;
+    background:
+      linear-gradient(180deg, var(--primary) 0%, var(--primary) 100%);
+    position: relative;
+  }
+  .pier::before, .pier::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    height: 28px;
+    background: var(--accent);
+    border-top: 2px solid var(--ornament);
+    border-bottom: 2px solid var(--ornament);
+  }
+  .pier::before { top: 80px; }
+  .pier::after { bottom: 80px; }
+  .pier .quat {
+    position: absolute;
+    left: 50%; transform: translateX(-50%);
+    width: 60px; height: 60px;
+    color: var(--accent);
+  }
+  .pier .quat.top { top: 18px; }
+  .pier .quat.bot { bottom: 18px; }
+
+  .hero-arch {
+    flex: 1;
+    max-width: 920px;
+    position: relative;
+    margin: 0 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 70px;
+  }
+  .hero-arch-frame {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .hero-arch-frame svg {
+    width: 100%;
+    height: 100%;
+  }
+  .rose {
+    position: relative;
+    width: 360px;
+    height: 360px;
+    margin-top: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+  }
+  .rose-bg {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 50% 50%,
+        var(--accent) 0,
+        var(--accent) 26px,
+        var(--secondary) 26px,
+        var(--secondary) 70px,
+        var(--bg) 70px,
+        var(--bg) 78px,
+        var(--primary) 78px,
+        var(--primary) 140px,
+        var(--accent) 140px,
+        var(--accent) 148px,
+        var(--secondary) 148px,
+        var(--secondary) 178px);
+    box-shadow: 0 0 0 4px var(--ornament), 0 0 0 8px var(--accent), 0 0 0 10px var(--ornament);
+  }
+  .rose-petals {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+  }
+  .rose-petals svg { width: 100%; height: 100%; }
+
+  .hero-titles {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    margin-top: 38px;
+  }
+  .hero-titles .estab {
+    font-variant: small-caps;
+    letter-spacing: 0.4em;
+    font-size: 11px;
+    color: var(--secondary);
+    margin: 0 0 10px;
+  }
+  .hero-titles h1 {
+    font-family: var(--font-display), serif;
+    color: var(--ornament);
+    font-size: 76px;
+    line-height: 0.95;
+    margin: 0 0 8px;
+    text-shadow: 1px 1px 0 var(--bg);
+  }
+  .hero-titles h1 .small { display: block; font-size: 28px; color: var(--secondary); margin-top: 4px; }
+  .hero-titles .lat {
+    font-style: italic;
+    color: var(--text);
+    margin: 14px 0 0;
+    font-size: 15px;
+  }
+
+  /* ============ DIVIDER ============ */
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    padding: 36px 0 28px;
+    color: var(--ornament);
+  }
+  .divider .rule {
+    flex: 0 0 360px;
+    height: 1px;
+    background: var(--ornament);
+    position: relative;
+  }
+  .divider .rule::before, .divider .rule::after {
+    content: "";
+    position: absolute; top: -2px;
+    width: 5px; height: 5px; background: var(--ornament);
+    border-radius: 50%;
+  }
+  .divider .rule::before { left: 0; }
+  .divider .rule::after  { right: 0; }
+  .divider .cross { width: 36px; height: 36px; color: var(--secondary); }
+
+  /* ============ PROSE COLUMN ============ */
+  .prose-wrap {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    padding: 14px 0 60px;
+  }
+  .prose {
+    width: 18em;
+    font-size: 17px;
+    line-height: 1.7;
+    text-align: justify;
+    hyphens: auto;
+  }
+  .prose h2 {
+    font-family: var(--font-display), serif;
+    font-weight: normal;
+    color: var(--primary);
+    text-align: center;
+    font-size: 34px;
+    line-height: 1.1;
+    margin: 0 0 20px;
+  }
+  .prose h2 .secondary { color: var(--secondary); }
+
+  .prose .dropcap::first-letter {
+    font-family: var(--font-display), serif;
+    font-size: 78px;
+    line-height: 0.85;
+    float: left;
+    color: var(--secondary);
+    background: var(--accent);
+    padding: 6px 10px 4px;
+    margin: 6px 10px 0 0;
+    border: 2px solid var(--ornament);
+    box-shadow: 2px 2px 0 var(--ornament);
+  }
+  .prose p + p { margin-top: 0.9em; text-indent: 1.4em; }
+  .prose .colophon {
+    margin-top: 28px;
+    text-align: center;
+    font-variant: small-caps;
+    letter-spacing: 0.22em;
+    font-size: 11px;
+    color: var(--secondary);
+  }
+
+  /* ============ COMMISSIONS / CARDS ============ */
+  .commissions {
+    position: relative;
+    z-index: 1;
+    padding: 30px 0 70px;
+    background: linear-gradient(180deg, transparent 0, rgba(30,58,95,0.05) 100%);
+    border-top: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+  }
+  .section-title {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    color: var(--ornament);
+    font-size: 44px;
+    line-height: 1;
+    margin: 0 0 6px;
+  }
+  .section-kicker {
+    text-align: center;
+    font-variant: small-caps;
+    letter-spacing: 0.42em;
+    font-size: 11.5px;
+    color: var(--secondary);
+    margin-bottom: 38px;
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(3, 380px);
+    justify-content: center;
+    gap: 36px;
+    padding: 0 40px;
+  }
+  .card {
+    position: relative;
+    height: 620px;
+    padding: 0 18px 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .card-frame {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .card-frame .arch-outline {
+    position: absolute;
+    inset: 0;
+    border: 4px solid var(--primary);
+    border-radius: 50% 50% 0 0 / 26% 26% 0 0;
+    box-shadow:
+      inset 0 0 0 2px var(--bg),
+      inset 0 0 0 3px var(--accent);
+  }
+  .card-title {
+    position: relative;
+    z-index: 3;
+    font-family: var(--font-display), serif;
+    color: var(--accent);
+    text-align: center;
+    font-size: 22px;
+    line-height: 1;
+    padding: 28px 32px 0;
+    text-shadow: 1px 1px 0 var(--ornament), -1px 0 0 var(--ornament), 0 1px 0 var(--ornament);
+    letter-spacing: 0.02em;
+  }
+  .plate {
+    position: relative;
+    margin: 22px 14px 0;
+    height: 360px;
+    border-radius: 50% 50% 0 0 / 38% 38% 0 0;
+    overflow: hidden;
+    border: 2px solid var(--ornament);
+    z-index: 1;
+  }
+  /* Stained-glass plates rendered as gradients & geometry per commission */
+  .plate-beauvais {
+    background:
+      radial-gradient(circle at 50% 75%, var(--accent) 0 30px, transparent 30px),
+      radial-gradient(circle at 50% 50%, var(--secondary) 0 60px, transparent 60px),
+      conic-gradient(from 0deg at 50% 70%,
+        var(--primary) 0deg 30deg,
+        var(--secondary) 30deg 60deg,
+        var(--primary) 60deg 90deg,
+        var(--accent) 90deg 110deg,
+        var(--primary) 110deg 140deg,
+        var(--secondary) 140deg 180deg,
+        var(--primary) 180deg 210deg,
+        var(--accent) 210deg 230deg,
+        var(--primary) 230deg 260deg,
+        var(--secondary) 260deg 290deg,
+        var(--primary) 290deg 320deg,
+        var(--accent) 320deg 360deg);
+  }
+  .plate-reims {
+    background:
+      linear-gradient(180deg, var(--primary) 0 40%, var(--secondary) 40% 65%, var(--accent) 65% 75%, var(--primary) 75% 100%),
+      var(--primary);
+  }
+  .plate-reims::before {
+    content:"";
+    position:absolute;
+    inset: 18px;
+    background:
+      radial-gradient(ellipse at 50% 30%, var(--accent) 0 22px, transparent 22px),
+      radial-gradient(ellipse at 50% 55%, var(--bg) 0 14px, transparent 14px),
+      linear-gradient(90deg, transparent 48%, var(--ornament) 48% 52%, transparent 52%),
+      linear-gradient(180deg, transparent 28%, var(--ornament) 28% 30%, transparent 30%, transparent 60%, var(--ornament) 60% 62%, transparent 62%);
+    border-radius: inherit;
+  }
+  .plate-radegonde {
+    background:
+      repeating-linear-gradient(90deg,
+        var(--primary) 0 33%,
+        var(--ornament) 33% 34%,
+        var(--secondary) 34% 66%,
+        var(--ornament) 66% 67%,
+        var(--primary) 67% 100%);
+  }
+  .plate-radegonde::before {
+    content:"";
+    position:absolute; inset:0;
+    background:
+      repeating-linear-gradient(0deg,
+        transparent 0 38px,
+        var(--ornament) 38px 40px),
+      radial-gradient(circle at 16.5% 35%, var(--accent) 0 14px, transparent 14px),
+      radial-gradient(circle at 50% 35%, var(--accent) 0 14px, transparent 14px),
+      radial-gradient(circle at 83.5% 35%, var(--accent) 0 14px, transparent 14px);
+  }
+  .plate-leads {
+    /* lead came overlay */
+    position:absolute; inset:0;
+    background:
+      linear-gradient(90deg, transparent 49.5%, var(--ornament) 49.5% 50.5%, transparent 50.5%),
+      linear-gradient(180deg, transparent 49.5%, var(--ornament) 49.5% 50.5%, transparent 50.5%);
+    pointer-events:none;
+  }
+
+  .card-body {
+    position: relative;
+    z-index: 1;
+    margin: 14px 22px 0;
+    padding: 6px 4px 0;
+    background: var(--bg);
+    flex: 1;
+  }
+  .card-body p {
+    font-size: 13.5px;
+    line-height: 1.5;
+    margin: 0;
+    text-align: justify;
+    hyphens: auto;
+  }
+  .card-body p::first-letter {
+    font-family: var(--font-display), serif;
+    font-size: 36px;
+    color: var(--bg);
+    background: var(--secondary);
+    padding: 2px 6px 0;
+    margin: 2px 6px 0 0;
+    float: left;
+    line-height: 1;
+    border: 1px solid var(--ornament);
+  }
+  .card-meta {
+    margin-top: 10px;
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    font-size: 10.5px;
+    color: var(--primary);
+    border-top: 1px solid var(--ornament);
+    padding-top: 6px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .card-meta .year { color: var(--secondary); }
+
+  /* gold quatrefoil in lower spandrel */
+  .spandrel {
+    position: absolute;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 36px;
+    height: 36px;
+    color: var(--accent);
+    z-index: 3;
+  }
+  .spandrel svg { width: 100%; height: 100%; }
+
+  /* ============ FOOTER ============ */
+  footer.workshop-foot {
+    position: relative;
+    z-index: 2;
+    margin-top: 0;
+  }
+  .foot-arcade {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    border-top: 3px double var(--ornament);
+    background: var(--bg);
+  }
+  .foot-arcade .niche {
+    height: 110px;
+    border-left: 1px solid var(--ornament);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .foot-arcade .niche:last-child { border-right: 1px solid var(--ornament); }
+  .foot-arcade .niche::before {
+    content: "";
+    position: absolute;
+    left: 12px; right: 12px; top: 12px; bottom: 0;
+    border: 1px solid var(--ornament);
+    border-bottom: none;
+    border-radius: 50% 50% 0 0 / 70% 70% 0 0;
+  }
+  .foot-arcade .fleur {
+    width: 38px; height: 60px;
+    color: var(--ornament);
+    position: relative;
+    z-index: 1;
+  }
+  .colophon {
+    background: var(--primary);
+    color: var(--accent);
+    text-align: center;
+    padding: 14px 20px;
+    font-variant: small-caps;
+    letter-spacing: 0.32em;
+    font-size: 11.5px;
+    border-top: 2px solid var(--ornament);
+  }
+  .colophon .sep { color: var(--bg); margin: 0 14px; }
+
+  /* small util */
+  .vine-rule {
+    display: flex; justify-content: center; padding: 12px 0;
+  }
+  .vine-rule svg { width: 70px; height: 70px; color: var(--secondary); }
+</style>
+</head>
+<body>
+
+<!-- ===================== MASTHEAD ===================== -->
+<header class="masthead">
+  <p class="wordmark">Atelier de Guillaume <span class="amp">&amp;</span> de Sancerre</p>
+  <p class="wordmark-sub">Maître-Verrier · Chartres · Fondé l'An MMVIII</p>
+
+  <nav class="arcade" aria-label="Principal">
+    <a href="page-1.html" aria-current="page">Atelier</a>
+    <a href="page-2.html">The Workshop</a>
+    <a href="page-3.html">Commissions</a>
+    <a href="page-4.html">Of Method</a>
+    <a href="page-5.html">Restoration</a>
+    <a href="page-6.html">Visit</a>
+  </nav>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" aria-label="Workshop hero">
+  <!-- Left pier -->
+  <div class="pier">
+    <svg class="quat top" viewBox="0 0 600 600" aria-hidden="true">
+      <g transform="translate(300,300)scale(0.65)rotate(45)" fill="currentColor">
+        <circle cx="-195" r="160"/><circle cx="195" r="160"/>
+        <circle cy="195" r="160"/><circle cy="-195" r="160"/>
+        <rect x="-225" y="-225" width="450" height="450"/>
+      </g>
+    </svg>
+    <svg class="quat bot" viewBox="0 0 600 600" aria-hidden="true">
+      <g transform="translate(300,300)scale(0.65)rotate(45)" fill="currentColor">
+        <circle cx="-195" r="160"/><circle cx="195" r="160"/>
+        <circle cy="195" r="160"/><circle cy="-195" r="160"/>
+        <rect x="-225" y="-225" width="450" height="450"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- Pointed-arch hero frame -->
+  <div class="hero-arch">
+    <div class="hero-arch-frame" aria-hidden="true">
+      <svg viewBox="0 0 500 720" preserveAspectRatio="none">
+        <!-- pointed arch outline -->
+        <path d="M 30 720 L 30 280 Q 30 30 250 30 Q 470 30 470 280 L 470 720"
+              fill="none" stroke="#0a0a0a" stroke-width="4"/>
+        <path d="M 50 720 L 50 290 Q 50 50 250 50 Q 450 50 450 290 L 450 720"
+              fill="none" stroke="#c9a23a" stroke-width="2"/>
+        <path d="M 60 720 L 60 295 Q 60 60 250 60 Q 440 60 440 295 L 440 720"
+              fill="none" stroke="#1e3a5f" stroke-width="1"/>
+        <!-- capitals -->
+        <line x1="30" y1="280" x2="60" y2="280" stroke="#0a0a0a" stroke-width="3"/>
+        <line x1="440" y1="280" x2="470" y2="280" stroke="#0a0a0a" stroke-width="3"/>
+        <rect x="20" y="276" width="50" height="14" fill="#c9a23a" stroke="#0a0a0a" stroke-width="2"/>
+        <rect x="430" y="276" width="50" height="14" fill="#c9a23a" stroke="#0a0a0a" stroke-width="2"/>
+        <!-- finial -->
+        <circle cx="250" cy="22" r="6" fill="#8b1538" stroke="#0a0a0a" stroke-width="2"/>
+        <line x1="250" y1="0" x2="250" y2="22" stroke="#0a0a0a" stroke-width="2"/>
+      </svg>
+    </div>
+
+    <!-- Rose window -->
+    <div class="rose" aria-hidden="true">
+      <div class="rose-bg"></div>
+      <div class="rose-petals">
+        <svg viewBox="0 0 360 360">
+          <g fill="none" stroke="#0a0a0a" stroke-width="2">
+            <circle cx="180" cy="180" r="178"/>
+            <circle cx="180" cy="180" r="148"/>
+            <circle cx="180" cy="180" r="78"/>
+            <circle cx="180" cy="180" r="32"/>
+            <!-- 12 spokes -->
+            <g>
+              <line x1="180" y1="32" x2="180" y2="328"/>
+              <line x1="32" y1="180" x2="328" y2="180"/>
+              <line x1="76" y1="76" x2="284" y2="284"/>
+              <line x1="284" y1="76" x2="76" y2="284"/>
+              <line x1="180" y1="32" x2="220" y2="80" />
+              <line x1="180" y1="32" x2="140" y2="80" />
+              <line x1="180" y1="328" x2="220" y2="280" />
+              <line x1="180" y1="328" x2="140" y2="280" />
+            </g>
+            <!-- 12 small lobes around center ring -->
+            <g>
+              <circle cx="180" cy="115" r="28"/>
+              <circle cx="180" cy="245" r="28"/>
+              <circle cx="115" cy="180" r="28"/>
+              <circle cx="245" cy="180" r="28"/>
+              <circle cx="135" cy="135" r="22"/>
+              <circle cx="225" cy="135" r="22"/>
+              <circle cx="135" cy="225" r="22"/>
+              <circle cx="225" cy="225" r="22"/>
+            </g>
+          </g>
+          <!-- center cross flory -->
+          <g transform="translate(180,180)scale(0.012)" fill="#c9a23a" stroke="#0a0a0a" stroke-width="40">
+            <path transform="translate(-2000,-2000)" d="M1778.9,3200A120.93,120.93 0 0,1 1657.97,3320.93A120.93,120.93 0 0,1 1537.04,3200A221.51,221.51 0 0,0 1456.32,3371.02A221.51,221.51 0 0,0 1677.83,3592.53A221.51,221.51 0 0,0 1818.61,3542.03A362.78,362.78 0 0,0 2000,3856.21A362.78,362.78 0 0,0 2181.39,3542.03A221.51,221.51 0 0,0 2322.17,3592.53A221.51,221.51 0 0,0 2543.68,3371.02A221.51,221.51 0 0,0 2462.96,3200A120.93,120.93 0 0,1 2342.03,3320.93A120.93,120.93 0 0,1 2221.1,3200V2221.1H3200A120.93,120.93 0 0,1 3320.93,2342.03A120.93,120.93 0 0,1 3200,2462.96A221.51,221.51 0 0,0 3371.02,2543.68A221.51,221.51 0 0,0 3592.53,2322.17A221.51,221.51 0 0,0 3542.03,2181.39A362.78,362.78 0 0,0 3856.21,2000A362.78,362.78 0 0,0 3542.03,1818.61A221.51,221.51 0 0,0 3592.53,1677.83A221.51,221.51 0 0,0 3371.02,1456.32A221.51,221.51 0 0,0 3200,1537.04A120.93,120.93 0 0,1 3320.93,1657.97A120.93,120.93 0 0,1 3200,1778.9H2221.1V800A120.93,120.93 0 0,1 2342.03,679.07A120.93,120.93 0 0,1 2462.96,800A221.51,221.51 0 0,0 2543.68,628.98A221.51,221.51 0 0,0 2322.17,407.48A221.51,221.51 0 0,0 2181.39,457.97A362.78,362.78 0 0,0 2000,143.79A362.78,362.78 0 0,0 1818.61,457.97A221.51,221.51 0 0,0 1677.83,407.48A221.51,221.51 0 0,0 1456.32,628.98A221.51,221.51 0 0,0 1537.04,800A120.93,120.93 0 0,1 1657.97,679.07A120.93,120.93 0 0,1 1778.9,800V1778.9H800A120.93,120.93 0 0,1 679.07,1657.97A120.93,120.93 0 0,1 800,1537.04A221.51,221.51 0 0,0 628.98,1456.32A221.51,221.51 0 0,0 407.48,1677.83A221.51,221.51 0 0,0 457.97,1818.61A362.78,362.78 0 0,0 143.79,2000A362.78,362.78 0 0,0 457.97,2181.39A221.51,221.51 0 0,0 407.48,2322.17A221.51,221.51 0 0,0 628.98,2543.68A221.51,221.51 0 0,0 800,2462.96A120.93,120.93 0 0,1 679.07,2342.03A120.93,120.93 0 0,1 800,2221.1H1778.9Z"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <div class="hero-titles">
+      <p class="estab">— Anno Domini MMVIII · Carnotum —</p>
+      <h1>
+        Atelier de Sancerre
+        <span class="small">Maître-Verrier &nbsp;·&nbsp; Pot-Metal &amp; Grisaille</span>
+      </h1>
+      <p class="lat">Lux per vitrum · Light borne through coloured glass, set in lead.</p>
+    </div>
+  </div>
+
+  <!-- Right pier -->
+  <div class="pier">
+    <svg class="quat top" viewBox="0 0 600 600" aria-hidden="true">
+      <g transform="translate(300,300)scale(0.65)rotate(45)" fill="currentColor">
+        <circle cx="-195" r="160"/><circle cx="195" r="160"/>
+        <circle cy="195" r="160"/><circle cy="-195" r="160"/>
+        <rect x="-225" y="-225" width="450" height="450"/>
+      </g>
+    </svg>
+    <svg class="quat bot" viewBox="0 0 600 600" aria-hidden="true">
+      <g transform="translate(300,300)scale(0.65)rotate(45)" fill="currentColor">
+        <circle cx="-195" r="160"/><circle cx="195" r="160"/>
+        <circle cy="195" r="160"/><circle cy="-195" r="160"/>
+        <rect x="-225" y="-225" width="450" height="450"/>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<!-- ===================== DIVIDER ===================== -->
+<div class="divider" aria-hidden="true">
+  <span class="rule"></span>
+  <svg class="cross" viewBox="0 0 4000 4000" fill="currentColor">
+    <path d="M1778.9,3200A120.9,120.9 0 0,1 1657.97,3320.93A120.9,120.9 0 0,1 1537.04,3200A221.5,221.5 0 0,0 1456.32,3371.02A221.5,221.5 0 0,0 1677.83,3592.53A221.5,221.5 0 0,0 1818.61,3542.03A362.78,362.78 0 0,0 2000,3856.21A362.78,362.78 0 0,0 2181.39,3542.03A221.5,221.5 0 0,0 2322.17,3592.53A221.5,221.5 0 0,0 2543.68,3371.02A221.5,221.5 0 0,0 2462.96,3200A120.9,120.9 0 0,1 2342.03,3320.93A120.9,120.9 0 0,1 2221.1,3200V2221.1H3200A120.9,120.9 0 0,1 3320.93,2342.03A120.9,120.9 0 0,1 3200,2462.96A221.5,221.5 0 0,0 3371.02,2543.68A221.5,221.5 0 0,0 3592.53,2322.17A221.5,221.5 0 0,0 3542.03,2181.39A362.78,362.78 0 0,0 3856.21,2000A362.78,362.78 0 0,0 3542.03,1818.61A221.5,221.5 0 0,0 3592.53,1677.83A221.5,221.5 0 0,0 3371.02,1456.32A221.5,221.5 0 0,0 3200,1537.04A120.9,120.9 0 0,1 3320.93,1657.97A120.9,120.9 0 0,1 3200,1778.9H2221.1V800A120.9,120.9 0 0,1 2342.03,679.07A120.9,120.9 0 0,1 2462.96,800A221.5,221.5 0 0,0 2543.68,628.98A221.5,221.5 0 0,0 2322.17,407.48A221.5,221.5 0 0,0 2181.39,457.97A362.78,362.78 0 0,0 2000,143.79A362.78,362.78 0 0,0 1818.61,457.97A221.5,221.5 0 0,0 1677.83,407.48A221.5,221.5 0 0,0 1456.32,628.98A221.5,221.5 0 0,0 1537.04,800A120.9,120.9 0 0,1 1657.97,679.07A120.9,120.9 0 0,1 1778.9,800V1778.9H800A120.9,120.9 0 0,1 679.07,1657.97A120.9,120.9 0 0,1 800,1537.04A221.5,221.5 0 0,0 628.98,1456.32A221.5,221.5 0 0,0 407.48,1677.83A221.5,221.5 0 0,0 457.97,1818.61A362.78,362.78 0 0,0 143.79,2000A362.78,362.78 0 0,0 457.97,2181.39A221.5,221.5 0 0,0 407.48,2322.17A221.5,221.5 0 0,0 628.98,2543.68A221.5,221.5 0 0,0 800,2462.96A120.9,120.9 0 0,1 679.07,2342.03A120.9,120.9 0 0,1 800,2221.1H1778.9Z"/>
+  </svg>
+  <span class="rule"></span>
+</div>
+
+<!-- ===================== PROSE ===================== -->
+<section class="prose-wrap">
+  <article class="prose">
+    <h2>Of the <span class="secondary">Workshop</span><br>at rue au Lin</h2>
+    <p class="dropcap">Founded in the year of our Lord two thousand and eight, in a courtyard off the rue au Lin in the shadow of the cathedral of Notre-Dame de Chartres, the atelier of Guillaume de Sancerre keeps to the manner of work set down by the master glaziers of the twelfth and thirteenth centuries. Every panel that leaves these benches has been cut from pot-metal glass blown to our specification at the verrerie of La Rochère, painted in iron-oxide grisaille, fired thrice in a brick-built kiln, and assembled with milled lead came of an H-section true to the medieval profile.</p>
+    <p>The workshop is small by intention: the master, two compagnons, and a single apprentice in his fourth of seven years. We accept no more than three commissions in any given season, and we keep a written record, in the old hand, of every cartoon drawn and every kiln-firing made — a discipline learned from the surviving pattern-books of Reims and from the fabric accounts of the cathedral chapter, MS. lat. 14410, which the master copied in his student years.</p>
+    <p>We work for chapels, for parish churches, for private oratories, and for the conservancy of the old glass wherever the bishops will have us. We do not undertake secular ornament, nor sandblasted glass, nor any process that would dishonour the lead.</p>
+    <p class="colophon">— Guillaume de Sancerre, mag. vitr. —</p>
+  </article>
+</section>
+
+<div class="vine-rule" aria-hidden="true">
+  <svg viewBox="0 0 200 200" fill="currentColor">
+    <path d="m43.6 11c-1.8 0-3.6 0.1-5.3 0.3-7 0.7-13.9 2.8-19.2 7.5s-8.2 12-7.7 21c0.5 9 4.3 16.1 10.2 20.3s13.3 5.5 21 5.2c15.5-0.7 32.8-8 45.8-18.3 1.4-1.1 2.8-2 4.3-3.1 4.3 6.7 7.6 14.8 9.3 24.1-7.5-5.1-21-10.5-35.7 1.5-22.1 18.2-25 12.9-45.3-2.1-2.9 36 15 54.6 44.6 52.5 0 0-13.9 4.3-3.6 26.4 6 12.9 8.4 20.1 6.6 25.2-12.8 2.3-15.8 7.8-5.6 12.7 45.1 10 65.7-27.5 68.7-66 45.4 0 52.9-31.8 52.5-50.4-8.2 11.1-22.2 11.1-32.9 2.5-9.9-7.9-21.7-16.2-39-1.1-1.7-11.7-5.7-22.1-11.2-30.7 19.4-11.4 38.7-14.5 52.5-10.8 5.5 1.4 9.5 4.1 12.4 7-9 8.4-11.8 26.4 2.3 27 18.9 0.9 21-15.5 13.6-27.1-5.4-8.5-16.4-13.2-25.7-16.6-17.5-4.6-39.7-0.6-61.3 12.5-5.2-5.7-11.1-10.2-17.7-13-7.1-2.9-17.5-5.7-28.3-6.3-1.8-0.1-3.6-0.1-5.4-0.1z"/>
+  </svg>
+</div>
+
+<!-- ===================== COMMISSIONS ===================== -->
+<section class="commissions" aria-label="Recent commissions">
+  <h2 class="section-title">Recent Commissions</h2>
+  <p class="section-kicker">Anno MMXXII — MMXXIV · Three Works of the Workshop</p>
+
+  <div class="cards">
+
+    <!-- CARD 1 : BEAUVAIS -->
+    <article class="card">
+      <div class="card-frame" aria-hidden="true"><div class="arch-outline"></div></div>
+      <h3 class="card-title">The Lady Chapel,<br>Saint-Pierre de Beauvais</h3>
+      <div class="plate plate-beauvais">
+        <div class="plate-leads"></div>
+      </div>
+      <div class="card-body">
+        <p>Five lancets of the south Lady Chapel, replacing nineteenth-century glazing of poor ferment. The central light bears the Coronation of the Virgin in cobalt and madder upon a ground of grisaille trellis; the flanking lights, four prophets named in our chapter accounts of October MMXXII. Twelve panels, 4,840 pieces of pot-metal cut by hand. Installed Whitsuntide MMXXIV.</p>
+        <div class="card-meta">
+          <span>Comm. of the Diocese</span>
+          <span class="year">MMXXII — MMXXIV</span>
+        </div>
+      </div>
+      <div class="spandrel" aria-hidden="true">
+        <svg viewBox="0 0 600 600" fill="currentColor">
+          <g transform="translate(300,300)scale(0.85)rotate(45)">
+            <circle cx="-195" r="160"/><circle cx="195" r="160"/>
+            <circle cy="195" r="160"/><circle cy="-195" r="160"/>
+            <rect x="-225" y="-225" width="450" height="450"/>
+          </g>
+        </svg>
+      </div>
+    </article>
+
+    <!-- CARD 2 : REIMS -->
+    <article class="card">
+      <div class="card-frame" aria-hidden="true"><div class="arch-outline"></div></div>
+      <h3 class="card-title">A Private Oratory<br>at Reims</h3>
+      <div class="plate plate-reims">
+        <div class="plate-leads"></div>
+      </div>
+      <div class="card-body">
+        <p>Single pointed-arch window, six feet by sixteen, for the oratory of the Maison Lavergne at Reims. The Tree of Jesse rendered in eleven medallions upon a deep-cobalt field; flesh tones in two firings of grisaille, the haloes back-painted with silver-stain and fired at six hundred degrees. Cartoons drawn from a Champenois book of hours, c. 1280, by gracious permission of the family.</p>
+        <div class="card-meta">
+          <span>Private Commission</span>
+          <span class="year">MMXXIII</span>
+        </div>
+      </div>
+      <div class="spandrel" aria-hidden="true">
+        <svg viewBox="0 0 600 600" fill="currentColor">
+          <g transform="translate(300,300)scale(0.85)rotate(45)">
+            <circle cx="-195" r="160"/><circle cx="195" r="160"/>
+            <circle cy="195" r="160"/><circle cy="-195" r="160"/>
+            <rect x="-225" y="-225" width="450" height="450"/>
+          </g>
+        </svg>
+      </div>
+    </article>
+
+    <!-- CARD 3 : SAINTE-RADEGONDE -->
+    <article class="card">
+      <div class="card-frame" aria-hidden="true"><div class="arch-outline"></div></div>
+      <h3 class="card-title">North-Aisle Lancets,<br>Sainte-Radegonde</h3>
+      <div class="plate plate-radegonde">
+        <div class="plate-leads"></div>
+      </div>
+      <div class="card-body">
+        <p>Restoration of the three north-aisle lancets of the parish church of Sainte-Radegonde, dating in their original ferment to the fourth quarter of the thirteenth century. Storm damage of February MMXXI required the dismantling of fourteen panels; eighty-three lights were releaded with new H-came drawn to the original profile, and forty-one missing pieces were reblown and repainted in our manner. Re-set Michaelmas MMXXIII.</p>
+        <div class="card-meta">
+          <span>Conservation</span>
+          <span class="year">MMXXI — MMXXIII</span>
+        </div>
+      </div>
+      <div class="spandrel" aria-hidden="true">
+        <svg viewBox="0 0 600 600" fill="currentColor">
+          <g transform="translate(300,300)scale(0.85)rotate(45)">
+            <circle cx="-195" r="160"/><circle cx="195" r="160"/>
+            <circle cy="195" r="160"/><circle cy="-195" r="160"/>
+            <rect x="-225" y="-225" width="450" height="450"/>
+          </g>
+        </svg>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="workshop-foot">
+  <div class="foot-arcade" aria-hidden="true">
+    <div class="niche">
+      <svg class="fleur" viewBox="0 0 40 60" fill="currentColor"><path d="M20 2 C 22 12, 30 14, 30 22 C 30 28, 24 30, 20 30 C 16 30, 10 28, 10 22 C 10 14, 18 12, 20 2 Z M 8 32 L 32 32 L 30 38 L 10 38 Z M 20 38 L 20 56 M 12 44 C 8 46, 6 50, 8 56 M 28 44 C 32 46, 34 50, 32 56"/></svg>
+    </div>
+    <div class="niche">
+      <svg class="fleur" viewBox="0 0 40 60" fill="currentColor"><path d="M20 2 C 22 12, 30 14, 30 22 C 30 28, 24 30, 20 30 C 16 30, 10 28, 10 22 C 10 14, 18 12, 20 2 Z M 8 32 L 32 32 L 30 38 L 10 38 Z M 20 38 L 20 56 M 12 44 C 8 46, 6 50, 8 56 M 28 44 C 32 46, 34 50, 32 56"/></svg>
+    </div>
+    <div class="niche">
+      <svg class="fleur" viewBox="0 0 40 60" fill="currentColor"><path d="M20 2 C 22 12, 30 14, 30 22 C 30 28, 24 30, 20 30 C 16 30, 10 28, 10 22 C 10 14, 18 12, 20 2 Z M 8 32 L 32 32 L 30 38 L 10 38 Z M 20 38 L 20 56 M 12 44 C 8 46, 6 50, 8 56 M 28 44 C 32 46, 34 50, 32 56"/></svg>
+    </div>
+    <div class="niche">
+      <svg class="fleur" viewBox="0 0 40 60" fill="currentColor"><path d="M20 2 C 22 12, 30 14, 30 22 C 30 28, 24 30, 20 30 C 16 30, 10 28, 10 22 C 10 14, 18 12, 20 2 Z M 8 32 L 32 32 L 30 38 L 10 38 Z M 20 38 L 20 56 M 12 44 C 8 46, 6 50, 8 56 M 28 44 C 32 46, 34 50, 32 56"/></svg>
+    </div>
+    <div class="niche">
+      <svg class="fleur" viewBox="0 0 40 60" fill="currentColor"><path d="M20 2 C 22 12, 30 14, 30 22 C 30 28, 24 30, 20 30 C 16 30, 10 28, 10 22 C 10 14, 18 12, 20 2 Z M 8 32 L 32 32 L 30 38 L 10 38 Z M 20 38 L 20 56 M 12 44 C 8 46, 6 50, 8 56 M 28 44 C 32 46, 34 50, 32 56"/></svg>
+    </div>
+    <div class="niche">
+      <svg class="fleur" viewBox="0 0 40 60" fill="currentColor"><path d="M20 2 C 22 12, 30 14, 30 22 C 30 28, 24 30, 20 30 C 16 30, 10 28, 10 22 C 10 14, 18 12, 20 2 Z M 8 32 L 32 32 L 30 38 L 10 38 Z M 20 38 L 20 56 M 12 44 C 8 46, 6 50, 8 56 M 28 44 C 32 46, 34 50, 32 56"/></svg>
+    </div>
+    <div class="niche">
+      <svg class="fleur" viewBox="0 0 40 60" fill="currentColor"><path d="M20 2 C 22 12, 30 14, 30 22 C 30 28, 24 30, 20 30 C 16 30, 10 28, 10 22 C 10 14, 18 12, 20 2 Z M 8 32 L 32 32 L 30 38 L 10 38 Z M 20 38 L 20 56 M 12 44 C 8 46, 6 50, 8 56 M 28 44 C 32 46, 34 50, 32 56"/></svg>
+    </div>
+  </div>
+  <div class="colophon">
+    Atelier de Guillaume de Sancerre <span class="sep">✦</span> 14, rue au Lin · 28000 Chartres · France <span class="sep">✦</span> Fondé l'An MMVIII
+  </div>
+</footer>
+
+</body>
+</html>

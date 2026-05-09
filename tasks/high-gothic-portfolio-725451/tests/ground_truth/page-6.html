@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Visit the Workshop — Chartres, rue au Lin</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Garamond, serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.55;
+    position: relative;
+  }
+
+  /* faint diaper background */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 600 600'><g transform='translate(300,300)scale(0.87)rotate(45)' fill='%231e3a5f' opacity='0.08'><circle cx='-195' r='163'/><circle cx='195' r='163'/><circle cy='195' r='163'/><circle cy='-195' r='163'/><rect x='-232' y='-232' width='464' height='464'/></g><g transform='translate(300,300)scale(0.87)rotate(45)' fill='%23f4ecd8'><circle cx='-195' r='157'/><circle cx='195' r='157'/><circle cy='195' r='157'/><circle cy='-195' r='157'/><rect x='-226' y='-226' width='452' height='452'/></g></svg>");
+    background-size: 120px 120px;
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  /* ===== Masthead ===== */
+  .masthead {
+    text-align: center;
+    padding: 48px 0 16px;
+    border-bottom: 1px solid var(--ornament);
+  }
+  .wordmark {
+    font-family: var(--font-display), "UnifrakturMaguntia", serif;
+    font-size: 56px;
+    color: var(--ornament);
+    margin: 0;
+    letter-spacing: 0.02em;
+    line-height: 1;
+  }
+  .wordmark .amp {
+    color: var(--secondary);
+  }
+  .sub-wordmark {
+    font-variant: small-caps;
+    letter-spacing: 0.32em;
+    color: var(--text);
+    margin-top: 14px;
+    font-size: 13px;
+  }
+
+  /* ===== Arcade Navigation ===== */
+  nav.arcade {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin: 18px 0 0;
+    padding-bottom: 0;
+  }
+  nav.arcade a {
+    position: relative;
+    width: 156px;
+    height: 96px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    text-decoration: none;
+    color: var(--text);
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    font-size: 12px;
+    padding-bottom: 16px;
+    box-sizing: border-box;
+    border-bottom: 2px solid var(--ornament);
+  }
+  nav.arcade a::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'><path d='M 4 100 L 4 50 Q 50 0 96 50 L 96 100' fill='none' stroke='%230a0a0a' stroke-width='1.5'/><path d='M 8 100 L 8 52 Q 50 6 92 52 L 92 100' fill='none' stroke='%23c9a23a' stroke-width='0.6'/></svg>");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+  }
+  nav.arcade a[aria-current="page"] {
+    color: var(--accent);
+  }
+  nav.arcade a[aria-current="page"]::before {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'><path d='M 4 100 L 4 50 Q 50 0 96 50 L 96 100 Z' fill='%231e3a5f' stroke='%230a0a0a' stroke-width='1.5'/><path d='M 8 100 L 8 52 Q 50 6 92 52 L 92 100' fill='none' stroke='%23c9a23a' stroke-width='0.8'/></svg>");
+  }
+  nav.arcade a[aria-current="page"] .label {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ===== Hero piers framing the page ===== */
+  .hero-frame {
+    display: grid;
+    grid-template-columns: 120px 1fr 120px;
+    gap: 0;
+    margin-top: 36px;
+    min-height: 1400px;
+  }
+  .pier {
+    position: relative;
+    border-left: 2px solid var(--ornament);
+    border-right: 2px solid var(--ornament);
+    background:
+      linear-gradient(to bottom,
+        var(--bg) 0%,
+        var(--bg) 100%);
+  }
+  .pier.left { border-right: none; }
+  .pier.right { border-left: none; }
+  .pier::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 8px; right: 8px; bottom: 0;
+    border-left: 1px solid var(--accent);
+    border-right: 1px solid var(--accent);
+  }
+  .pier::after {
+    /* capital ornament near top */
+    content: "";
+    position: absolute;
+    top: 80px;
+    left: 0; right: 0;
+    height: 24px;
+    background:
+      linear-gradient(var(--secondary), var(--secondary)) 0 0/100% 4px no-repeat,
+      linear-gradient(var(--accent), var(--accent)) 0 6px/100% 2px no-repeat,
+      linear-gradient(var(--ornament), var(--ornament)) 0 12px/100% 2px no-repeat,
+      linear-gradient(var(--accent), var(--accent)) 0 18px/100% 2px no-repeat;
+  }
+  .pier .pier-base {
+    position: absolute;
+    bottom: 0;
+    left: 0; right: 0;
+    height: 32px;
+    background:
+      linear-gradient(var(--ornament), var(--ornament)) 0 0/100% 2px no-repeat,
+      linear-gradient(var(--accent), var(--accent)) 0 6px/100% 2px no-repeat,
+      linear-gradient(var(--primary), var(--primary)) 0 12px/100% 8px no-repeat,
+      linear-gradient(var(--ornament), var(--ornament)) 0 24px/100% 2px no-repeat;
+  }
+  .pier .quatrefoils {
+    position: absolute;
+    top: 200px;
+    left: 0; right: 0;
+    bottom: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .pier .quatrefoils svg {
+    width: 56px;
+    height: 56px;
+  }
+
+  /* ===== Central content (single tall column) ===== */
+  .nave {
+    padding: 0 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* The hero arch */
+  .hero-arch {
+    width: 460px;
+    margin: 0 auto 24px;
+    position: relative;
+  }
+  .hero-arch svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .hero-arch .arch-title {
+    position: absolute;
+    top: 36%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 70%;
+  }
+  .hero-arch .arch-title h1 {
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+    font-size: 38px;
+    margin: 0 0 8px;
+    line-height: 1.05;
+  }
+  .hero-arch .arch-title .place {
+    font-variant: small-caps;
+    letter-spacing: 0.28em;
+    color: var(--secondary);
+    font-size: 13px;
+  }
+  .hero-arch .arch-title .ornament-rule {
+    margin: 14px auto 0;
+    width: 60%;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  /* Column of body text — narrow 18em */
+  .narrow-col {
+    width: 18em;
+    margin: 0 auto;
+  }
+  .narrow-col p {
+    margin: 0 0 1.1em;
+    text-align: justify;
+    font-size: 16px;
+    hyphens: auto;
+  }
+  .narrow-col p.lede {
+    text-align: center;
+    font-style: italic;
+    color: var(--primary);
+  }
+
+  /* Drop cap */
+  .dropcap::first-letter {
+    font-family: var(--font-display), serif;
+    color: var(--secondary);
+    font-size: 56px;
+    line-height: 0.85;
+    float: left;
+    padding: 6px 8px 0 0;
+    margin-top: 4px;
+  }
+
+  /* Section heads */
+  .section-head {
+    text-align: center;
+    margin: 36px 0 18px;
+  }
+  .section-head h2 {
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+    font-size: 28px;
+    margin: 0;
+    line-height: 1;
+  }
+  .section-head .small-rule {
+    display: inline-block;
+    margin-top: 10px;
+    font-variant: small-caps;
+    letter-spacing: 0.3em;
+    color: var(--text);
+    font-size: 11px;
+  }
+
+  /* Divider with trefoil */
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin: 28px auto;
+    width: 70%;
+  }
+  .divider .line {
+    flex: 1;
+    height: 1px;
+    background: var(--ornament);
+  }
+  .divider svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  /* Address block — illuminated */
+  .address-card {
+    width: 22em;
+    margin: 0 auto 12px;
+    border: 1px solid var(--ornament);
+    background: var(--bg);
+    padding: 22px 28px;
+    position: relative;
+    text-align: center;
+  }
+  .address-card::before, .address-card::after {
+    content: "";
+    position: absolute;
+    width: 14px; height: 14px;
+    border: 1px solid var(--accent);
+  }
+  .address-card::before { top: 4px; left: 4px; border-right: none; border-bottom: none; }
+  .address-card::after { bottom: 4px; right: 4px; border-left: none; border-top: none; }
+  .address-card .corner-tl, .address-card .corner-br {
+    position: absolute;
+    width: 14px; height: 14px;
+    border: 1px solid var(--accent);
+  }
+  .address-card .corner-tl { top: 4px; right: 4px; border-left: none; border-bottom: none; }
+  .address-card .corner-br { bottom: 4px; left: 4px; border-right: none; border-top: none; }
+
+  .address-card .label {
+    font-variant: small-caps;
+    letter-spacing: 0.28em;
+    color: var(--secondary);
+    font-size: 11px;
+    margin-bottom: 6px;
+  }
+  .address-card .line1 {
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+    font-size: 22px;
+    line-height: 1.15;
+  }
+  .address-card .line2 {
+    font-size: 15px;
+    margin-top: 4px;
+    color: var(--text);
+  }
+  .address-card .line3 {
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    color: var(--text);
+    font-size: 12px;
+    margin-top: 8px;
+  }
+
+  /* Hours table */
+  .hours {
+    width: 22em;
+    margin: 0 auto;
+    font-size: 15px;
+  }
+  .hours table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .hours th, .hours td {
+    padding: 6px 8px;
+    border-bottom: 1px dotted var(--ornament);
+    text-align: left;
+    font-weight: normal;
+  }
+  .hours th {
+    font-variant: small-caps;
+    letter-spacing: 0.16em;
+    color: var(--primary);
+    width: 50%;
+  }
+  .hours td {
+    text-align: right;
+    color: var(--text);
+  }
+  .hours .footnote {
+    font-style: italic;
+    font-size: 13px;
+    color: var(--text);
+    margin-top: 14px;
+    text-align: center;
+  }
+
+  /* Centerpiece seal */
+  .seal-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 36px 0 24px;
+    position: relative;
+  }
+  .seal-block svg {
+    width: 100px;
+    height: 100px;
+    fill: var(--secondary);
+  }
+  .seal-block::before, .seal-block::after {
+    content: "";
+    flex: 1;
+    max-width: 220px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--accent), var(--ornament), var(--accent), transparent);
+  }
+  .seal-block::before { margin-right: 24px; }
+  .seal-block::after { margin-left: 24px; }
+
+  /* Contact block */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px 36px;
+    width: 36em;
+    margin: 0 auto;
+  }
+  .contact-cell {
+    border-top: 2px solid var(--primary);
+    padding-top: 14px;
+    position: relative;
+  }
+  .contact-cell::before {
+    content: "";
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 10px;
+    background: var(--accent);
+    border: 1px solid var(--ornament);
+    rotate: 45deg;
+  }
+  .contact-cell .head {
+    font-variant: small-caps;
+    letter-spacing: 0.22em;
+    color: var(--secondary);
+    font-size: 11px;
+    margin-bottom: 6px;
+    text-align: center;
+  }
+  .contact-cell .body {
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .contact-cell .name {
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+    font-size: 18px;
+    margin-bottom: 2px;
+  }
+
+  /* Closing exhortation */
+  .colophon-note {
+    width: 22em;
+    margin: 36px auto 24px;
+    text-align: center;
+    font-style: italic;
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.6;
+    border-top: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+    padding: 18px 0;
+    background: rgba(201, 162, 58, 0.06);
+  }
+  .colophon-note .key {
+    font-style: normal;
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    color: var(--secondary);
+  }
+
+  .four-rule {
+    text-align: center;
+    margin: 18px 0 36px;
+    font-variant: small-caps;
+    letter-spacing: 0.3em;
+    font-size: 12px;
+    color: var(--primary);
+  }
+  .four-rule strong {
+    color: var(--secondary);
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    font-weight: normal;
+    letter-spacing: 0;
+    vertical-align: -3px;
+    margin: 0 6px;
+  }
+
+  /* ===== Footer ===== */
+  footer {
+    margin-top: 72px;
+    position: relative;
+    z-index: 1;
+  }
+  .footer-arcade {
+    display: flex;
+    justify-content: center;
+    border-top: 2px solid var(--ornament);
+    border-bottom: 2px solid var(--ornament);
+    background: var(--bg);
+  }
+  .footer-arcade .arch {
+    width: 140px;
+    height: 96px;
+    position: relative;
+    border-right: 1px solid var(--ornament);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .footer-arcade .arch:last-child { border-right: none; }
+  .footer-arcade .arch::before {
+    content: "";
+    position: absolute;
+    inset: 6px 8px 0 8px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'><path d='M 4 100 L 4 50 Q 50 0 96 50 L 96 100' fill='none' stroke='%230a0a0a' stroke-width='1'/></svg>");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+  }
+  .footer-arcade .fleur {
+    position: relative;
+    z-index: 2;
+    width: 28px;
+    height: 36px;
+    color: var(--ornament);
+  }
+  .colophon-strip {
+    background: var(--primary);
+    color: var(--accent);
+    padding: 14px 20px;
+    text-align: center;
+    font-variant: small-caps;
+    letter-spacing: 0.26em;
+    font-size: 11px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .colophon-strip span { color: var(--accent); }
+  .colophon-strip .dot {
+    color: var(--bg);
+    margin: 0 6px;
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- Masthead -->
+  <header class="masthead">
+    <h1 class="wordmark">Atelier de Guillaume <span class="amp">&amp;</span> de Sancerre</h1>
+    <div class="sub-wordmark">Maître-Verrier &middot; Chartres &middot; founded MCMLXXXVII</div>
+
+    <nav class="arcade" aria-label="Primary">
+      <a href="page-1.html"><span class="label">Atelier</span></a>
+      <a href="page-2.html"><span class="label">The Hand</span></a>
+      <a href="page-3.html"><span class="label">Catalogue</span></a>
+      <a href="page-4.html"><span class="label">Of Method</span></a>
+      <a href="page-5.html"><span class="label">Restoration</span></a>
+      <a href="page-6.html" aria-current="page"><span class="label">Visit</span></a>
+    </nav>
+  </header>
+
+  <!-- Hero frame: piers + nave -->
+  <div class="hero-frame">
+
+    <!-- LEFT PIER -->
+    <div class="pier left" aria-hidden="true">
+      <div class="quatrefoils">
+        <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(300,300)scale(0.87)rotate(45)" fill="#1e3a5f">
+            <circle cx="-195" r="163"/><circle cx="195" r="163"/>
+            <circle cy="195" r="163"/><circle cy="-195" r="163"/>
+            <rect x="-232" y="-232" width="464" height="464"/>
+          </g>
+          <g transform="translate(300,300)scale(0.87)rotate(45)" fill="#f4ecd8">
+            <circle cx="-195" r="138"/><circle cx="195" r="138"/>
+            <circle cy="195" r="138"/><circle cy="-195" r="138"/>
+            <rect x="-207" y="-207" width="414" height="414"/>
+          </g>
+          <g transform="translate(300,300)scale(0.87)rotate(45)" fill="#c9a23a">
+            <circle cx="-195" r="60"/><circle cx="195" r="60"/>
+            <circle cy="195" r="60"/><circle cy="-195" r="60"/>
+          </g>
+        </svg>
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <g fill="#8b1538">
+            <circle cx="50" cy="20" r="14"/>
+            <circle cx="50" cy="80" r="14"/>
+            <circle cx="20" cy="50" r="14"/>
+            <circle cx="80" cy="50" r="14"/>
+            <circle cx="50" cy="50" r="8"/>
+          </g>
+        </svg>
+        <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(300,300)scale(0.87)rotate(45)" fill="#1e3a5f">
+            <circle cx="-195" r="163"/><circle cx="195" r="163"/>
+            <circle cy="195" r="163"/><circle cy="-195" r="163"/>
+            <rect x="-232" y="-232" width="464" height="464"/>
+          </g>
+          <g transform="translate(300,300)scale(0.87)rotate(45)" fill="#f4ecd8">
+            <circle cx="-195" r="138"/><circle cx="195" r="138"/>
+            <circle cy="195" r="138"/><circle cy="-195" r="138"/>
+            <rect x="-207" y="-207" width="414" height="414"/>
+          </g>
+          <g transform="translate(300,300)scale(0.87)rotate(45)" fill="#c9a23a">
+            <circle cx="-195" r="60"/><circle cx="195" r="60"/>
+            <circle cy="195" r="60"/><circle cy="-195" r="60"/>
+          </g>
+        </svg>
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <g fill="#8b1538">
+            <circle cx="50" cy="20" r="14"/>
+            <circle cx="50" cy="80" r="14"/>
+            <circle cx="20" cy="50" r="14"/>
+            <circle cx="80" cy="50" r="14"/>
+            <circle cx="50" cy="50" r="8"/>
+          </g>
+        </svg>
+        <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(300,300)scale(0.87)rotate(45)" fill="#1e3a5f">
+            <circle cx="-195" r="163"/><circle cx="195" r="163"/>
+            <circle cy="195" r="163"/><circle cy="-195" r="163"/>
+            <rect x="-232" y="-232" width="464" height="464"/>
+          </g>
+          <g transform="translate(300,300)scale(0.87)rotate(45)" fill="#f4ecd8">
+            <circle cx="-195" r="138"/><circle cx="195" r="138"/>
+            <circle cy="195" r="138"/><circle cy="-195" r="138"/>
+            <rect x="-207" y="-207" width="414" height="414"/>
+          </g>
+          <g transform="translate(300,300)scale(0.87)rotate(45)" fill="#c9a23a">
+            <circle cx="-195" r="60"/><circle cx="195" r="60"/>
+            <circle cy="195" r="60"/><circle cy="-195" r="60"/>
+          </g>
+        </svg>
+      </div>
+      <div class="pier-base"></div>
+    </div>
+
+    <!-- NAVE -->
+    <main class="nave">
+
+      <!-- Hero arch with title -->
+      <div class="hero-arch">
+        <svg viewBox="120 240 500 560" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <g stroke="#0a0a0a" stroke-width="3" fill="none" stroke-linecap="round">
+            <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432" />
+            <path d="m 250,430.58 24.75248,58.41585" />
+            <path d="m 347.0297,342.46119 41.58416,23.76238 0.9901,35.64356" />
+            <path d="m 211.38614,583.05525 -1.48515,211.88119" />
+          </g>
+          <g stroke="#0a0a0a" stroke-width="3" fill="none" stroke-linecap="round" transform="matrix(-1,0,0,1,777.88071,-0.2972181)">
+            <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432" />
+            <path d="m 250,430.58 24.75248,58.41585" />
+            <path d="m 347.0297,342.46119 41.58416,23.76238 0.9901,35.64356" />
+            <path d="m 211.38614,583.05525 -1.48515,211.88119" />
+          </g>
+          <!-- Inner gold fillet -->
+          <g stroke="#c9a23a" stroke-width="1.2" fill="none">
+            <path d="M 220 590 Q 220 440 380 320 Q 540 440 540 590 L 540 780" />
+          </g>
+        </svg>
+        <div class="arch-title">
+          <h1>Visit the Workshop</h1>
+          <div class="place">Chartres &middot; rue au Lin</div>
+          <div class="ornament-rule"></div>
+        </div>
+      </div>
+
+      <p class="narrow-col lede">
+        Travellers who would see glass cut, painted, and leaded as it was in the
+        cathedral's own century are welcomed into the studio at the hours
+        appointed below.
+      </p>
+
+      <!-- Address card -->
+      <div class="address-card">
+        <span class="corner-tl"></span>
+        <span class="corner-br"></span>
+        <div class="label">The Workshop</div>
+        <div class="line1">14, rue au Lin</div>
+        <div class="line2">28000 Chartres &middot; Eure-et-Loir</div>
+        <div class="line3">France</div>
+      </div>
+
+      <!-- Section: Hours -->
+      <div class="section-head">
+        <h2>Hours of Opening</h2>
+        <div class="small-rule">— horarium artificis —</div>
+      </div>
+
+      <div class="hours">
+        <table>
+          <tr><th>Lundi</th><td>closed</td></tr>
+          <tr><th>Mardi</th><td>9h — 17h</td></tr>
+          <tr><th>Mercredi</th><td>9h — 17h</td></tr>
+          <tr><th>Jeudi</th><td>9h — 17h</td></tr>
+          <tr><th>Vendredi</th><td>9h — 17h</td></tr>
+          <tr><th>Samedi</th><td>9h — 17h</td></tr>
+          <tr><th>Dimanche</th><td>closed</td></tr>
+        </table>
+        <p class="footnote">Groups of more than four persons are received <em>par rendez-vous</em> only.</p>
+      </div>
+
+      <div class="divider" aria-hidden="true">
+        <span class="line"></span>
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <g fill="#8b1538">
+            <circle cx="50" cy="22" r="13"/>
+            <circle cx="50" cy="78" r="13"/>
+            <circle cx="22" cy="50" r="13"/>
+            <circle cx="78" cy="50" r="13"/>
+          </g>
+          <circle cx="50" cy="50" r="6" fill="#c9a23a"/>
+        </svg>
+        <span class="line"></span>
+      </div>
+
+      <!-- Narrative -->
+      <div class="narrow-col">
+        <p class="dropcap">
+          Visitors are welcome to climb to the gallery above the studio floor,
+          whence the cutting of pot-metal and the painting of grisaille upon
+          the bench may be observed without disturbing the hand of the workman.
+          The gallery is reached by a stair of seventeen steps; a bench is
+          provided for those who wish to remain.
+        </p>
+        <p>
+          The atelier lies four streets distant from the south porch of the
+          cathedral, in the lower town between the Place des Halles and the
+          river Eure. The nearest railway station is Chartres, whence the
+          walk is some twelve minutes by way of the rue du Bois-Merrain.
+        </p>
+        <p>
+          Those who would observe a particular operation — the firing of a
+          panel, the leading of a finished cartoon — are advised to write
+          beforehand, that the day of their coming may be matched to the work
+          then upon the bench.
+        </p>
+      </div>
+
+      <!-- Centerpiece seal -->
+      <div class="seal-block" aria-hidden="true">
+        <svg viewBox="0 0 592 592" xmlns="http://www.w3.org/2000/svg">
+          <path transform="translate(-4,-4)scale(0.15,0.15)" d="M1778.9,3200A120.9263,120.9263 0 0,1 1657.97,3320.93A120.9263,120.9263 0 0,1 1537.04,3200 A221.5096,221.5096 0 0,0 1456.32,3371.02A221.5096,221.5096 0 0,0 1677.83,3592.53A221.5096,221.5096 0 0,0 1818.61,3542.03 A362.779,362.779 0 0,0 2000,3856.21A362.779,362.779 0 0,0 2181.39,3542.03 A221.5096,221.5096 0 0,0 2322.17,3592.53A221.5096,221.5096 0 0,0 2543.68,3371.02A221.5096,221.5096 0 0,0 2462.96,3200 A120.9263,120.9263 0 0,1 2342.03,3320.93A120.9263,120.9263 0 0,1 2221.1,3200V2221.1H3200 A120.9263,120.9263 0 0,1 3320.93,2342.03A120.9263,120.9263 0 0,1 3200,2462.96 A221.5096,221.5096 0 0,0 3371.02,2543.68A221.5096,221.5096 0 0,0 3592.53,2322.17A221.5096,221.5096 0 0,0 3542.03,2181.39 A362.779,362.779 0 0,0 3856.21,2000A362.779,362.779 0 0,0 3542.03,1818.61 A221.5096,221.5096 0 0,0 3592.53,1677.83A221.5096,221.5096 0 0,0 3371.02,1456.32A221.5096,221.5096 0 0,0 3200,1537.04 A120.9263,120.9263 0 0,1 3320.93,1657.97A120.9263,120.9263 0 0,1 3200,1778.9H2221.1V800 A120.9263,120.9263 0 0,1 2342.03,679.073A120.9263,120.9263 0 0,1 2462.96,800 A221.5096,221.5096 0 0,0 2543.68,628.984A221.5096,221.5096 0 0,0 2322.17,407.475A221.5096,221.5096 0 0,0 2181.39,457.969 A362.779,362.779 0 0,0 2000,143.793A362.779,362.779 0 0,0 1818.61,457.969 A221.5096,221.5096 0 0,0 1677.83,407.475A221.5096,221.5096 0 0,0 1456.32,628.984A221.5096,221.5096 0 0,0 1537.04,800 A120.9263,120.9263 0 0,1 1657.97,679.073A120.9263,120.9263 0 0,1 1778.9,800V1778.9H800 A120.9263,120.9263 0 0,1 679.073,1657.97A120.9263,120.9263 0 0,1 800,1537.04 A221.5096,221.5096 0 0,0 628.984,1456.32A221.5096,221.5096 0 0,0 407.475,1677.83A221.5096,221.5096 0 0,0 457.969,1818.61 A362.779,362.779 0 0,0 143.793,2000A362.779,362.779 0 0,0 457.969,2181.39 A221.5096,221.5096 0 0,0 407.475,2322.17A221.5096,221.5096 0 0,0 628.984,2543.68A221.5096,221.5096 0 0,0 800,2462.96 A120.9263,120.9263 0 0,1 679.073,2342.03A120.9263,120.9263 0 0,1 800,2221.1H1778.9Z"/>
+        </svg>
+      </div>
+
+      <!-- Section: Contact -->
+      <div class="section-head">
+        <h2>To Address the Workshop</h2>
+        <div class="small-rule">— pour écrire à l'atelier —</div>
+      </div>
+
+      <div class="contact-grid">
+
+        <div class="contact-cell">
+          <div class="head">By Telephone</div>
+          <div class="body">
+            <div class="name">02 37 — — — —</div>
+            <div>Tuesday — Saturday<br>between 9h and 17h</div>
+          </div>
+        </div>
+
+        <div class="contact-cell">
+          <div class="head">By Letter</div>
+          <div class="body">
+            <div class="name">14, rue au Lin</div>
+            <div>F – 28000 Chartres<br>France</div>
+          </div>
+        </div>
+
+        <div class="contact-cell">
+          <div class="head">Studio Secretary</div>
+          <div class="body">
+            <div class="name">Mlle Hélène Boursault</div>
+            <div>receives all enquiries<br>regarding visits and groups</div>
+          </div>
+        </div>
+
+        <div class="contact-cell">
+          <div class="head">For New Commissions</div>
+          <div class="body">
+            <div class="name">Maître Guillaume</div>
+            <div>directly, by sealed letter<br>marked <em>« commande »</em></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Closing exhortation -->
+      <div class="colophon-note">
+        The atelier accepts no more than <span class="key">four major commissions</span>
+        in any one year, that each window may receive the patience and the
+        prayer it requires. Enquiries for the year MMXXVI are received from
+        Michaelmas onward.
+      </div>
+
+      <div class="four-rule">
+        I &middot; <strong>·</strong> &middot; II &middot; <strong>·</strong> &middot; III &middot; <strong>·</strong> &middot; IV
+      </div>
+
+      <div class="divider" aria-hidden="true">
+        <span class="line"></span>
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <path fill="#1e3a5f" d="m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625" transform="translate(0 -852.36)scale(0.5)"/>
+          <circle cx="100" cy="100" r="8" fill="#8b1538"/>
+        </svg>
+        <span class="line"></span>
+      </div>
+
+      <p class="narrow-col" style="text-align:center; font-style:italic; color:var(--primary); margin-top: 4px;">
+        <em>« Ad maiorem lucis gloriam — </em>that the light may be made larger,
+        and the colour true.<em> »</em>
+      </p>
+
+    </main>
+
+    <!-- RIGHT PIER -->
+    <div class="pier right" aria-hidden="true">
+      <div class="quatrefoils">
+        <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(300,300)scale(0.87)rotate(45)" fill="#1e3a5f">
+            <circle cx="-195" r="163"/><circle cx="195" r="163"/>
+            <circle cy="195" r="163"/><circle cy="-195" r="163"/>
+            <rect x="-232" y="-232" width="464" height="464"/>
+          </g>
+          <g transform="translate(300,300)scale(0.87)rotate(45)" fill="#f4ecd8">
+            <circle cx="-195" r="138"/><circle cx="195" r="138"/>
+            <circle cy="195" r="138"/><circle cy="-195" r="138"/>
+            <rect x="-207" y="-207" width="414" height="414"/>
+          </g>
+          <g transform="translate(300,300)scale(0.87)rotate(45)" fill="#c9a23a">
+            <circle cx="-195" r="60"/><circle cx="195" r="60"/>
+            <circle cy="195" r="60"/><circle cy="-195" r="60"/>
+          </g>
+        </svg>
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <g fill="#8b1538">
+            <circle cx="50" cy="20" r="14"/>
+            <circle cx="50" cy="80" r="14"/>
+            <circle cx="20" cy="50" r="14"/>
+            <circle cx="80" cy="50" r="14"/>
+            <circle cx="50" cy="50" r="8"/>
+          </g>
+        </svg>
+        <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(300,300)scale(0.87)rotate(45)" fill="#1e3a5f">
+            <circle cx="-195" r="163"/><circle cx="195" r="163"/>
+            <circle cy="195" r="163"/><circle cy="-195" r="163"/>
+            <rect x="-232" y="-232" width="464" height="464"/>
+          </g>
+          <g transform="translate(300,300)scale(0.87)rotate(45)" fill="#f4ecd8">
+            <circle cx="-195" r="138"/><circle cx="195" r="138"/>
+            <circle cy="195" r="138"/><circle cy="-195" r="138"/>
+            <rect x="-207" y="-207" width="414" height="414"/>
+          </g>
+          <g transform="translate(300,300)scale(0.87)rotate(45)" fill="#c9a23a">
+            <circle cx="-195" r="60"/><circle cx="195" r="60"/>
+            <circle cy="195" r="60"/><circle cy="-195" r="60"/>
+          </g>
+        </svg>
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <g fill="#8b1538">
+            <circle cx="50" cy="20" r="14"/>
+            <circle cx="50" cy="80" r="14"/>
+            <circle cx="20" cy="50" r="14"/>
+            <circle cx="80" cy="50" r="14"/>
+            <circle cx="50" cy="50" r="8"/>
+          </g>
+        </svg>
+        <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(300,300)scale(0.87)rotate(45)" fill="#1e3a5f">
+            <circle cx="-195" r="163"/><circle cx="195" r="163"/>
+            <circle cy="195" r="163"/><circle cy="-195" r="163"/>
+            <rect x="-232" y="-232" width="464" height="464"/>
+          </g>
+          <g transform="translate(300,300)scale(0.87)rotate(45)" fill="#f4ecd8">
+            <circle cx="-195" r="138"/><circle cx="195" r="138"/>
+            <circle cy="195" r="138"/><circle cy="-195" r="138"/>
+            <rect x="-207" y="-207" width="414" height="414"/>
+          </g>
+          <g transform="translate(300,300)scale(0.87)rotate(45)" fill="#c9a23a">
+            <circle cx="-195" r="60"/><circle cx="195" r="60"/>
+            <circle cy="195" r="60"/><circle cy="-195" r="60"/>
+          </g>
+        </svg>
+      </div>
+      <div class="pier-base"></div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-arcade" aria-hidden="true">
+      <div class="arch">
+        <svg class="fleur" viewBox="0 0 50 64" xmlns="http://www.w3.org/2000/svg">
+          <path fill="currentColor" d="M25 4 C20 14 8 18 8 28 C8 36 14 40 18 38 L18 44 L10 44 L10 50 L40 50 L40 44 L32 44 L32 38 C36 40 42 36 42 28 C42 18 30 14 25 4 Z M14 50 L36 50 L36 60 L14 60 Z"/>
+        </svg>
+      </div>
+      <div class="arch">
+        <svg class="fleur" viewBox="0 0 50 64" xmlns="http://www.w3.org/2000/svg">
+          <path fill="currentColor" d="M25 4 C20 14 8 18 8 28 C8 36 14 40 18 38 L18 44 L10 44 L10 50 L40 50 L40 44 L32 44 L32 38 C36 40 42 36 42 28 C42 18 30 14 25 4 Z M14 50 L36 50 L36 60 L14 60 Z"/>
+        </svg>
+      </div>
+      <div class="arch">
+        <svg class="fleur" viewBox="0 0 50 64" xmlns="http://www.w3.org/2000/svg">
+          <path fill="currentColor" d="M25 4 C20 14 8 18 8 28 C8 36 14 40 18 38 L18 44 L10 44 L10 50 L40 50 L40 44 L32 44 L32 38 C36 40 42 36 42 28 C42 18 30 14 25 4 Z M14 50 L36 50 L36 60 L14 60 Z"/>
+        </svg>
+      </div>
+      <div class="arch">
+        <svg class="fleur" viewBox="0 0 50 64" xmlns="http://www.w3.org/2000/svg">
+          <path fill="currentColor" d="M25 4 C20 14 8 18 8 28 C8 36 14 40 18 38 L18 44 L10 44 L10 50 L40 50 L40 44 L32 44 L32 38 C36 40 42 36 42 28 C42 18 30 14 25 4 Z M14 50 L36 50 L36 60 L14 60 Z"/>
+        </svg>
+      </div>
+      <div class="arch">
+        <svg class="fleur" viewBox="0 0 50 64" xmlns="http://www.w3.org/2000/svg">
+          <path fill="currentColor" d="M25 4 C20 14 8 18 8 28 C8 36 14 40 18 38 L18 44 L10 44 L10 50 L40 50 L40 44 L32 44 L32 38 C36 40 42 36 42 28 C42 18 30 14 25 4 Z M14 50 L36 50 L36 60 L14 60 Z"/>
+        </svg>
+      </div>
+      <div class="arch">
+        <svg class="fleur" viewBox="0 0 50 64" xmlns="http://www.w3.org/2000/svg">
+          <path fill="currentColor" d="M25 4 C20 14 8 18 8 28 C8 36 14 40 18 38 L18 44 L10 44 L10 50 L40 50 L40 44 L32 44 L32 38 C36 40 42 36 42 28 C42 18 30 14 25 4 Z M14 50 L36 50 L36 60 L14 60 Z"/>
+        </svg>
+      </div>
+      <div class="arch">
+        <svg class="fleur" viewBox="0 0 50 64" xmlns="http://www.w3.org/2000/svg">
+          <path fill="currentColor" d="M25 4 C20 14 8 18 8 28 C8 36 14 40 18 38 L18 44 L10 44 L10 50 L40 50 L40 44 L32 44 L32 38 C36 40 42 36 42 28 C42 18 30 14 25 4 Z M14 50 L36 50 L36 60 L14 60 Z"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="colophon-strip">
+      <span>Atelier de Guillaume de Sancerre</span>
+      <span class="dot">✦</span>
+      <span>14, rue au Lin &middot; Chartres</span>
+      <span class="dot">✦</span>
+      <span>fondé l'an de grâce MCMLXXXVII</span>
+    </div>
+  </footer>
+
+</div>
+
+</body>
+</html>

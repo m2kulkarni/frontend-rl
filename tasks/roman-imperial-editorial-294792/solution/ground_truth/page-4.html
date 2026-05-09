@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Letters & Marginalia — Acta Diurna</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    margin: 0;
+    line-height: 1.7;
+  }
+  a { color: inherit; }
+
+  /* ============ MASTHEAD / NAV ============ */
+  .masthead {
+    text-align: center;
+    padding: 48px 40px 0;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .masthead-meta {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    color: var(--primary);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    opacity: 0.7;
+  }
+  .masthead-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+  }
+  .greek-rule {
+    flex: 0 0 180px;
+    height: 28px;
+    color: var(--primary);
+  }
+  .greek-rule svg { display: block; width: 100%; height: 100%; }
+  h1.site-title {
+    font-family: var(--font-display), serif;
+    font-weight: 900;
+    font-size: 48px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin: 0;
+    color: var(--primary);
+  }
+  .masthead-sub {
+    margin-top: 14px;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--primary);
+    letter-spacing: 0.04em;
+  }
+  .gold-hairline {
+    width: 220px;
+    height: 1px;
+    background: var(--secondary);
+    margin: 22px auto 0;
+  }
+  .red-hairline {
+    width: 100px;
+    height: 1px;
+    background: var(--accent);
+    margin: 12px auto 0;
+  }
+
+  nav.primary {
+    margin: 28px auto 0;
+    text-align: center;
+    padding-bottom: 26px;
+  }
+  nav.primary ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: inline-flex;
+    gap: 0;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+  nav.primary li {
+    display: inline-flex;
+    align-items: center;
+  }
+  nav.primary a {
+    text-decoration: none;
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    color: var(--primary);
+    display: inline-block;
+  }
+  nav.primary a[aria-current="page"] {
+    border-bottom: 1px solid var(--secondary);
+    padding-bottom: 4px;
+  }
+  nav.primary .vine {
+    width: 14px;
+    height: 14px;
+    color: var(--accent);
+    opacity: 0.65;
+  }
+  nav.primary .vine svg { display: block; width: 100%; height: 100%; fill: currentColor; }
+
+  /* ============ HERO ============ */
+  .hero {
+    text-align: center;
+    padding: 60px 40px 40px;
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .hero-kicker {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 18px;
+  }
+  .hero-frame {
+    position: relative;
+    display: inline-block;
+    padding: 60px 80px;
+  }
+  .hero-frame .wreath {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 480px;
+    opacity: 0.85;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .hero-frame .wreath svg { width: 100%; height: auto; display:block; }
+  .hero h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 900;
+    font-size: 64px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin: 0;
+    line-height: 1.05;
+    color: var(--primary);
+    position: relative;
+    z-index: 1;
+  }
+  .hero h2 .amp {
+    font-style: italic;
+    font-weight: 400;
+    text-transform: lowercase;
+    letter-spacing: 0;
+    color: var(--text-emphasis);
+    padding: 0 8px;
+  }
+  .hero-deck {
+    max-width: 560px;
+    margin: 28px auto 0;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--primary);
+    position: relative;
+    z-index: 1;
+  }
+  .hero-issue {
+    margin-top: 22px;
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--primary);
+  }
+  .hero-issue .sep { color: var(--secondary); padding: 0 10px; }
+
+  /* ============ MEANDER DIVIDER ============ */
+  .meander {
+    width: 320px;
+    height: 22px;
+    margin: 30px auto;
+    color: var(--primary);
+    display: block;
+  }
+  .meander svg { width: 100%; height: 100%; display: block; }
+
+  /* ============ EDITOR'S PREAMBLE ============ */
+  .preamble {
+    max-width: 620px; /* golden ratio column */
+    margin: 0 auto;
+    padding: 20px 40px 50px;
+    text-align: center;
+  }
+  .preamble h3 {
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    margin: 0 0 18px;
+    color: var(--primary);
+  }
+  .preamble p {
+    font-size: 16px;
+    line-height: 1.85;
+    text-align: justify;
+    text-align-last: center;
+    margin: 0 0 14px;
+  }
+  .preamble .ref {
+    font-style: italic;
+    color: var(--text-emphasis);
+  }
+
+  /* ============ LETTERS ============ */
+  .letters-section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px 40px 80px;
+  }
+  .section-title {
+    text-align: center;
+    margin: 30px 0 50px;
+  }
+  .section-title h3 {
+    font-family: var(--font-display), serif;
+    font-size: 18px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    margin: 0;
+    color: var(--primary);
+  }
+  .section-title .red-hairline { margin-top: 14px; }
+
+  .letter {
+    max-width: 720px;
+    margin: 0 auto 70px;
+    position: relative;
+  }
+  .letter-meander-top, .letter-meander-bottom {
+    width: 100%;
+    height: 18px;
+    color: var(--primary);
+    display: block;
+  }
+  .letter-meander-top svg, .letter-meander-bottom svg {
+    width: 100%; height: 100%; display: block;
+  }
+  .letter-inner {
+    padding: 36px 56px 40px;
+    background: var(--surface);
+  }
+  .letter-head {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+  .roundel {
+    width: 86px;
+    height: 86px;
+    margin: 0 auto 14px;
+    color: var(--primary);
+  }
+  .roundel svg { width: 100%; height: 100%; display: block; }
+  .letter-number {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .letter-title {
+    font-family: var(--font-display), serif;
+    font-size: 26px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin: 0 0 6px;
+    color: var(--primary);
+    font-weight: 900;
+    line-height: 1.2;
+  }
+  .letter-city {
+    font-style: italic;
+    font-size: 14px;
+    color: var(--text-emphasis);
+    margin-bottom: 6px;
+  }
+  .letter-city::before, .letter-city::after {
+    content: "·";
+    color: var(--secondary);
+    padding: 0 10px;
+  }
+
+  .letter-body {
+    column-count: 1;
+    max-width: 560px; /* φ-ish line length */
+    margin: 0 auto;
+  }
+  .letter-body p {
+    font-size: 15.5px;
+    line-height: 1.85;
+    margin: 0 0 14px;
+    text-align: justify;
+  }
+  .letter-body p:first-of-type::first-letter {
+    font-family: var(--font-display), serif;
+    font-weight: 900;
+    font-size: 56px;
+    line-height: 0.9;
+    float: left;
+    padding: 6px 10px 0 0;
+    color: var(--accent);
+  }
+
+  .letter-byline {
+    text-align: center;
+    margin-top: 26px;
+    padding-top: 18px;
+    border-top: 1px solid var(--accent);
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--primary);
+  }
+  .letter-byline .affil {
+    display: block;
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: none;
+    color: var(--text-emphasis);
+    margin-top: 6px;
+  }
+
+  .reply {
+    max-width: 540px;
+    margin: 24px auto 0;
+    padding: 18px 24px;
+    border-top: 1px solid var(--secondary);
+    border-bottom: 1px solid var(--secondary);
+    text-align: center;
+  }
+  .reply-label {
+    font-family: var(--font-display), serif;
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .reply p {
+    font-style: italic;
+    font-size: 14.5px;
+    line-height: 1.75;
+    color: var(--text-emphasis);
+    margin: 0 0 8px;
+  }
+  .reply .sig {
+    font-family: var(--font-display), serif;
+    font-style: normal;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-top: 10px;
+    display: block;
+  }
+
+  .vine-divider {
+    text-align: center;
+    margin: 60px 0;
+    color: var(--accent);
+  }
+  .vine-divider .vine {
+    width: 22px;
+    height: 22px;
+    display: inline-block;
+    vertical-align: middle;
+    color: var(--accent);
+  }
+  .vine-divider .vine svg { width: 100%; height: 100%; fill: currentColor; }
+  .vine-divider .rule {
+    display: inline-block;
+    width: 120px;
+    height: 1px;
+    background: var(--secondary);
+    vertical-align: middle;
+    margin: 0 18px;
+  }
+
+  /* ============ SUBMIT BOX ============ */
+  .submit-box {
+    max-width: 620px;
+    margin: 0 auto 80px;
+    text-align: center;
+    padding: 36px 40px;
+    border-top: 1px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
+  }
+  .submit-box h3 {
+    font-family: var(--font-display), serif;
+    font-size: 16px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    margin: 0 0 16px;
+    color: var(--primary);
+  }
+  .submit-box p {
+    font-size: 14.5px;
+    font-style: italic;
+    color: var(--text-emphasis);
+    margin: 0 0 10px;
+  }
+  .submit-box .addr {
+    font-style: normal;
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-top: 14px;
+  }
+
+  /* ============ FOOTER ============ */
+  footer {
+    background: var(--bg);
+    margin-top: 40px;
+  }
+  .frieze {
+    width: 100%;
+    height: 32px;
+    color: var(--primary);
+    overflow: hidden;
+    display: block;
+  }
+  .frieze-inner {
+    display: flex;
+    width: 100%;
+    height: 100%;
+  }
+  .frieze-tile {
+    flex: 1 1 auto;
+    height: 100%;
+    color: var(--primary);
+  }
+  .frieze-tile svg { width: 100%; height: 100%; display: block; }
+
+  .footer-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    max-width: 1000px;
+    margin: 50px auto 0;
+    padding: 0 40px;
+    text-align: center;
+    gap: 40px;
+  }
+  .footer-cols h4 {
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    margin: 0 0 18px;
+    color: var(--primary);
+  }
+  .footer-cols ul { list-style: none; padding: 0; margin: 0; }
+  .footer-cols li {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .footer-cols a { text-decoration: none; color: var(--primary); }
+
+  .colophon {
+    text-align: center;
+    margin-top: 50px;
+    padding: 0 40px;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--text-emphasis);
+  }
+  .tailpiece {
+    width: 60px;
+    height: 60px;
+    margin: 30px auto 14px;
+    color: var(--accent);
+    opacity: 0.8;
+  }
+  .tailpiece svg { width: 100%; height: 100%; fill: currentColor; }
+  .copyright {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    padding: 20px 40px 60px;
+    color: var(--primary);
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ MASTHEAD ============ -->
+<header class="masthead">
+  <div class="masthead-meta">Anno MMXXIV · Fasciculus IX · Mensis Martius</div>
+  <div class="masthead-title-row">
+    <div class="greek-rule" aria-hidden="true">
+      <svg viewBox="0 0 16511 4447" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+        <path fill="currentColor" d="M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z"/>
+        <path fill="currentColor" d="M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z"/>
+        <path fill="currentColor" d="M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z"/>
+        <path fill="currentColor" d="M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z"/>
+        <path fill="currentColor" d="M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z"/>
+      </svg>
+    </div>
+    <h1 class="site-title">Acta Diurna</h1>
+    <div class="greek-rule" aria-hidden="true">
+      <svg viewBox="0 0 16511 4447" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+        <path fill="currentColor" d="M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z"/>
+        <path fill="currentColor" d="M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z"/>
+        <path fill="currentColor" d="M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z"/>
+        <path fill="currentColor" d="M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z"/>
+        <path fill="currentColor" d="M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z"/>
+      </svg>
+    </div>
+  </div>
+  <div class="masthead-sub">A Review of the Classical World</div>
+  <div class="gold-hairline"></div>
+
+  <nav class="primary" aria-label="Primary">
+    <ul>
+      <li><a href="page-1.html">Frontispiece</a></li>
+      <li aria-hidden="true" class="vine"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path d="M43.583 11.01c-1.79.03-3.58.13-5.34.31-7.05.74-13.94 2.79-19.16 7.47s-8.2 12-7.69 21c.51 9 4.3 16.14 10.19 20.34 5.89 4.2 13.31 5.53 21.03 5.19 15.45-.69 32.83-8 45.81-18.31 1.41-1.12 2.83-2.04 4.25-3.06 4.29 6.68 7.61 14.83 9.34 24.06-7.5-5.07-21.01-10.55-35.66 1.5-22.14 18.21-24.99 12.88-45.34-2.13-2.86 36.07 15.01 54.64 44.66 52.5 0 0-13.95 4.26-3.59 26.41 6.02 12.87 8.41 20.07 6.56 25.19-12.84 2.29-15.77 7.78-5.57 12.66 45.1 9.97 65.67-27.47 68.66-66.04 45.36 0 52.86-31.8 52.5-50.37-8.21 11.07-22.16 11.07-32.87 2.5-9.93-7.95-21.69-16.18-39-1.13-1.74-11.68-5.69-22.13-11.22-30.72 19.36-11.37 38.72-14.46 52.53-10.81 5.48 1.45 9.46 4.09 12.38 6.97-8.97 8.36-11.84 26.38 2.28 27.03 18.92.88 21.03-15.45 13.56-27.13-5.45-8.51-16.42-13.23-25.66-16.56-17.52-4.63-39.74-.57-61.28 12.5-5.17-5.72-11.13-10.22-17.72-12.97-7.08-2.95-17.54-5.73-28.28-6.31-1.79-.1-3.58-.13-5.38-.09zm.13 10.03c1.52-.02 3.09.03 4.66.13 9.41.59 19.26 3.06 25.03 5.47 4.63 1.93 9.05 5.23 13.06 9.44-1.42 1.04-2.84 1.98-4.25 3.09-11.3 8.98-27.54 15.6-40.03 16.16-6.25.28-11.38-.91-14.78-3.34-3.41-2.43-5.65-6.04-6.03-12.75-.38-6.72 1.42-10.3 4.41-12.97 2.98-2.67 7.74-4.37 13.5-4.97 1.44-.15 2.92-.23 4.44-.25zm62.28 64.81c1 .01 2.03.1 3.06.28 8.26 1.44 14 8.11 12.81 14.91-1.19 6.8-8.84 11.16-17.09 9.72-8.26-1.44-14-8.11-12.81-14.91 1.04-5.95 7.02-10.04 14.03-10z"/></svg></li>
+      <li><a href="page-2.html">The Long Essay</a></li>
+      <li aria-hidden="true" class="vine"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path d="M43.583 11.01c-1.79.03-3.58.13-5.34.31-7.05.74-13.94 2.79-19.16 7.47s-8.2 12-7.69 21c.51 9 4.3 16.14 10.19 20.34 5.89 4.2 13.31 5.53 21.03 5.19 15.45-.69 32.83-8 45.81-18.31 1.41-1.12 2.83-2.04 4.25-3.06 4.29 6.68 7.61 14.83 9.34 24.06-7.5-5.07-21.01-10.55-35.66 1.5-22.14 18.21-24.99 12.88-45.34-2.13-2.86 36.07 15.01 54.64 44.66 52.5 0 0-13.95 4.26-3.59 26.41 6.02 12.87 8.41 20.07 6.56 25.19-12.84 2.29-15.77 7.78-5.57 12.66 45.1 9.97 65.67-27.47 68.66-66.04 45.36 0 52.86-31.8 52.5-50.37-8.21 11.07-22.16 11.07-32.87 2.5-9.93-7.95-21.69-16.18-39-1.13-1.74-11.68-5.69-22.13-11.22-30.72 19.36-11.37 38.72-14.46 52.53-10.81 5.48 1.45 9.46 4.09 12.38 6.97-8.97 8.36-11.84 26.38 2.28 27.03 18.92.88 21.03-15.45 13.56-27.13-5.45-8.51-16.42-13.23-25.66-16.56-17.52-4.63-39.74-.57-61.28 12.5-5.17-5.72-11.13-10.22-17.72-12.97-7.08-2.95-17.54-5.73-28.28-6.31-1.79-.1-3.58-.13-5.38-.09z"/></svg></li>
+      <li><a href="page-3.html">Dispatches</a></li>
+      <li aria-hidden="true" class="vine"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path d="M43.583 11.01c-1.79.03-3.58.13-5.34.31-7.05.74-13.94 2.79-19.16 7.47s-8.2 12-7.69 21c.51 9 4.3 16.14 10.19 20.34 5.89 4.2 13.31 5.53 21.03 5.19 15.45-.69 32.83-8 45.81-18.31 1.41-1.12 2.83-2.04 4.25-3.06 4.29 6.68 7.61 14.83 9.34 24.06-7.5-5.07-21.01-10.55-35.66 1.5-22.14 18.21-24.99 12.88-45.34-2.13-2.86 36.07 15.01 54.64 44.66 52.5z"/></svg></li>
+      <li><a href="page-4.html" aria-current="page">Letters &amp; Marginalia</a></li>
+      <li aria-hidden="true" class="vine"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path d="M43.583 11.01c-1.79.03-3.58.13-5.34.31-7.05.74-13.94 2.79-19.16 7.47s-8.2 12-7.69 21c.51 9 4.3 16.14 10.19 20.34z"/></svg></li>
+      <li><a href="page-5.html">The Library</a></li>
+      <li aria-hidden="true" class="vine"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path d="M43.583 11.01c-1.79.03-3.58.13-5.34.31-7.05.74-13.94 2.79-19.16 7.47s-8.2 12-7.69 21c.51 9 4.3 16.14 10.19 20.34z"/></svg></li>
+      <li><a href="page-6.html">Colophon</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-kicker">Epistolae Lectorum · Volumen IV</div>
+  <div class="hero-frame">
+    <div class="wreath" aria-hidden="true">
+      <svg viewBox="0 0 323.75 295.79" xmlns="http://www.w3.org/2000/svg">
+        <g fill="#1a1a1a" opacity="0.18">
+          <path d="M141.7 -18.57c-11.04 4.85-23.4 9.47-30.06 22.64-4.68 7.12-4.8 16.39-8.1 24.15 6.11-6.5 15.58-13.16 20.97-20.72 6.02-9.5 9.08-18.01 17.19-26.06zm164.51 0c8.11 8.05 11.17 16.56 17.19 26.06 5.4 7.56 14.86 14.22 20.98 20.72-3.3-7.76-3.42-17.03-8.11-24.15-6.66-13.17-19.02-17.78-30.06-22.64z"/>
+        </g>
+      </svg>
+    </div>
+    <h2>Letters <span class="amp">&amp;</span> Marginalia</h2>
+  </div>
+  <p class="hero-deck">Five readers respond to <em>“The Honest Slanderer: Suetonius and the Truth of the Caesars”</em> from our previous fascicule. Editorial replies set in italics, signed L.A.P.</p>
+  <div class="hero-issue">From Issue VIII <span class="sep">❦</span> November MMXXIII <span class="sep">❦</span> Pages 42–61</div>
+  <div class="red-hairline"></div>
+</section>
+
+<!-- ============ MEANDER ============ -->
+<div class="meander" aria-hidden="true">
+  <svg viewBox="1000 364 16511 4447" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+    <path fill="currentColor" d="M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z"/>
+    <path fill="currentColor" d="M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z"/>
+    <path fill="currentColor" d="M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z"/>
+    <path fill="currentColor" d="M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z"/>
+    <path fill="currentColor" d="M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z"/>
+  </svg>
+</div>
+
+<!-- ============ EDITOR'S PREAMBLE ============ -->
+<section class="preamble">
+  <h3>From the Editor's Desk</h3>
+  <p>No essay we have published has produced a heavier post-bag than Dr. M. Tellier's broadside in our autumn number, <span class="ref">“The Honest Slanderer”</span> (Issue VIII, pp. 12–34). The argument — that Suetonius is to be trusted precisely because he traffics in gossip, and that the <em>De Vita Caesarum</em> is the most candid administrative document we possess from the Flavian chancery — has provoked five letters worth printing, and many we have, with reluctance, not.</p>
+  <p>What follows is a corrected and lightly edited selection. We are, as always, in our readers' debt.</p>
+  <p style="margin-top:24px;font-family:var(--font-display);font-size:11px;letter-spacing:0.32em;text-transform:uppercase;font-style:normal;color:var(--primary);">— L.A.P.</p>
+</section>
+
+<!-- ============ LETTERS ============ -->
+<section class="letters-section">
+  <div class="section-title">
+    <h3>Correspondence</h3>
+    <div class="red-hairline"></div>
+  </div>
+
+  <!-- LETTER I -->
+  <article class="letter">
+    <div class="letter-meander-top" aria-hidden="true">
+      <svg viewBox="1000 364 16511 4447" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill="currentColor" d="M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z"/>
+      </svg>
+    </div>
+    <div class="letter-inner">
+      <header class="letter-head">
+        <div class="roundel" aria-hidden="true">
+          <svg viewBox="0 0 117.79 118.25" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="58.9" cy="59.1" r="48" fill="none" stroke="currentColor" stroke-width="0.6"/>
+            <circle cx="58.9" cy="59.1" r="42" fill="none" stroke="currentColor" stroke-width="0.4"/>
+            <text x="58.9" y="64" text-anchor="middle" font-family="Playfair Display" font-size="22" font-weight="900" fill="currentColor">I</text>
+          </svg>
+        </div>
+        <div class="letter-number">Letter the First</div>
+        <h4 class="letter-title">On the Question of Sources</h4>
+        <div class="letter-city">Princeton, New Jersey</div>
+      </header>
+      <div class="letter-body">
+        <p>To the Editor — Dr. Tellier writes with the enthusiasm of a convert, and converts are seldom careful. To call Suetonius an "honest slanderer" is to grant him an honesty he does not seek and a slander too dignified for the rumour-collecting we actually find in his pages. The biographer of the Caesars was, by his own admission in the dedication to Septicius Clarus, a magistrate's secretary; he had access, briefly, to the imperial archives under Hadrian. The interesting question is not whether he is candid but whether he is comprehensive — and on that count the verdict has been settled since Wallace-Hadrill's monograph of 1983.</p>
+        <p>What troubles me in your contributor's argument is the implicit equation of <em>access</em> with <em>truth</em>. Suetonius reproduces the <em>acta</em> of the Senate when it suits the rhythm of his portrait and ignores them when it does not. The famous chapter on Tiberius at Capri (Tib. 43–45) is not a document; it is a literary set-piece that owes more to Tacitus's <em>Annals</em> 6 than to any chancery file. To treat it as administrative testimony is a category error.</p>
+        <p>That said, Dr. Tellier is right to insist that the gossip is not noise. Gossip is the sound a court makes when it cannot speak directly. I would ask only that we listen to it as gossip, and not pretend it is something graver.</p>
+      </div>
+      <div class="letter-byline">
+        Prof. Adriana Cole
+        <span class="affil">Department of Classics, Princeton University</span>
+      </div>
+      <div class="reply">
+        <div class="reply-label">The Editor Replies</div>
+        <p>Professor Cole's distinction between access and truth is the one we should have drawn ourselves. Dr. Tellier, who has read this letter in proof, concedes the point on Tib. 43–45 and asks us to record his agreement; he maintains, however, that the chancery hand is visible elsewhere — most clearly in the Vespasian, where the financial detail is too granular for invention. We shall return to the question in a future number.</p>
+        <span class="sig">— L.A.P.</span>
+      </div>
+    </div>
+    <div class="letter-meander-bottom" aria-hidden="true">
+      <svg viewBox="1000 364 16511 4447" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill="currentColor" d="M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z"/>
+      </svg>
+    </div>
+  </article>
+
+  <div class="vine-divider" aria-hidden="true">
+    <span class="rule"></span>
+    <span class="vine"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path d="M43.583 11.01c-1.79.03-3.58.13-5.34.31-7.05.74-13.94 2.79-19.16 7.47s-8.2 12-7.69 21c.51 9 4.3 16.14 10.19 20.34 5.89 4.2 13.31 5.53 21.03 5.19 15.45-.69 32.83-8 45.81-18.31 1.41-1.12 2.83-2.04 4.25-3.06 4.29 6.68 7.61 14.83 9.34 24.06-7.5-5.07-21.01-10.55-35.66 1.5-22.14 18.21-24.99 12.88-45.34-2.13-2.86 36.07 15.01 54.64 44.66 52.5 0 0-13.95 4.26-3.59 26.41 6.02 12.87 8.41 20.07 6.56 25.19-12.84 2.29-15.77 7.78-5.57 12.66 45.1 9.97 65.67-27.47 68.66-66.04 45.36 0 52.86-31.8 52.5-50.37-8.21 11.07-22.16 11.07-32.87 2.5-9.93-7.95-21.69-16.18-39-1.13-1.74-11.68-5.69-22.13-11.22-30.72 19.36-11.37 38.72-14.46 52.53-10.81 5.48 1.45 9.46 4.09 12.38 6.97-8.97 8.36-11.84 26.38 2.28 27.03 18.92.88 21.03-15.45 13.56-27.13-5.45-8.51-16.42-13.23-25.66-16.56-17.52-4.63-39.74-.57-61.28 12.5-5.17-5.72-11.13-10.22-17.72-12.97-7.08-2.95-17.54-5.73-28.28-6.31-1.79-.1-3.58-.13-5.38-.09z"/></svg></span>
+    <span class="rule"></span>
+  </div>
+
+  <!-- LETTER II -->
+  <article class="letter">
+    <div class="letter-meander-top" aria-hidden="true">
+      <svg viewBox="1000 364 16511 4447" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill="currentColor" d="M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z"/>
+      </svg>
+    </div>
+    <div class="letter-inner">
+      <header class="letter-head">
+        <div class="roundel" aria-hidden="true">
+          <svg viewBox="0 0 117.79 118.25" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="58.9" cy="59.1" r="48" fill="none" stroke="currentColor" stroke-width="0.6"/>
+            <circle cx="58.9" cy="59.1" r="42" fill="none" stroke="currentColor" stroke-width="0.4"/>
+            <text x="58.9" y="64" text-anchor="middle" font-family="Playfair Display" font-size="22" font-weight="900" fill="currentColor">II</text>
+          </svg>
+        </div>
+        <div class="letter-number">Letter the Second</div>
+        <h4 class="letter-title">A Provincial Defence</h4>
+        <div class="letter-city">Aix-en-Provence</div>
+      </header>
+      <div class="letter-body">
+        <p>Madame, Sir — I read Dr. Tellier's piece on the train from Marseille to Arles, and I confess I closed the journal feeling defended. Those of us who labour in the provinces — the literal Roman ones, I mean: Narbonensis, Lusitania, Mauretania Caesariensis — are accustomed to being told that Suetonius is unserious. But the lives of Galba and Otho contain almost the only continuous narrative we have of the events of A.D. 68–69 outside Tacitus, and the Galba in particular preserves a Spanish provincial perspective that the senatorial sources flatten.</p>
+        <p>Where I would gently differ with your contributor is in his treatment of the omens. Dr. Tellier dismisses the prodigies as "courtly weather-reporting." This is too tidy. In the epigraphic record from Tarraco I have catalogued seventeen inscriptions between 64 and 70 referring to portents — bulls speaking, statues sweating, the sea retreating at Carteia. Suetonius did not invent this material; he transcribed a register that was, for the people who lived under it, the news.</p>
+        <p>To strip the omens from the Lives is to read a newspaper with the front page torn off.</p>
+      </div>
+      <div class="letter-byline">
+        Dr. Yusuf el-Amrani
+        <span class="affil">Centre Camille Jullian, Aix-Marseille Université</span>
+      </div>
+      <div class="reply">
+        <div class="reply-label">The Editor Replies</div>
+        <p>Dr. el-Amrani's seventeen inscriptions are an argument we should very much like to see at length, and we have written to him by the same post to invite an essay on the prodigy-record from Tarraco for our summer number. The point about the front page is well taken: Suetonius's omens are not décor but data, and the modern reader's discomfort with them is the reader's problem, not the historian's.</p>
+        <span class="sig">— L.A.P.</span>
+      </div>
+    </div>
+    <div class="letter-meander-bottom" aria-hidden="true">
+      <svg viewBox="1000 364 16511 4447" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill="currentColor" d="M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z"/>
+      </svg>
+    </div>
+  </article>
+
+  <div class="vine-divider" aria-hidden="true">
+    <span class="rule"></span>
+    <span class="vine"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path d="M43.583 11.01c-1.79.03-3.58.13-5.34.31-7.05.74-13.94 2.79-19.16 7.47s-8.2 12-7.69 21c.51 9 4.3 16.14 10.19 20.34c5.89 4.2 13.31 5.53 21.03 5.19c15.45-.69 32.83-8 45.81-18.31z"/></svg></span>
+    <span class="rule"></span>
+  </div>
+
+  <!-- LETTER III -->
+  <article class="letter">
+    <div class="letter-meander-top" aria-hidden="true">
+      <svg viewBox="1000 364 16511 4447" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill="currentColor" d="M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z"/>
+      </svg>
+    </div>
+    <div class="letter-inner">
+      <header class="letter-head">
+        <div class="roundel" aria-hidden="true">
+          <svg viewBox="0 0 117.79 118.25" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="58.9" cy="59.1" r="48" fill="none" stroke="currentColor" stroke-width="0.6"/>
+            <circle cx="58.9" cy="59.1" r="42" fill="none" stroke="currentColor" stroke-width="0.4"/>
+            <text x="58.9" y="64" text-anchor="middle" font-family="Playfair Display" font-size="20" font-weight="900" fill="currentColor">III</text>
+          </svg>
+        </div>
+        <div class="letter-number">Letter the Third</div>
+        <h4 class="letter-title">From a General Reader</h4>
+        <div class="letter-city">Edinburgh</div>
+      </header>
+      <div class="letter-body">
+        <p>Dear Editor — I am not a classicist. I am a retired civil servant who reads your journal with the slow pleasure of someone who has time. I read Dr. Tellier's essay twice and then went and bought the Robert Graves translation of Suetonius from a shop on West Port for £8.50, and I have been reading Tiberius in bed for a fortnight.</p>
+        <p>What strikes me, as a reader and not a scholar, is how modern Suetonius feels — not because the gossip is modern, but because the <em>structure</em> is. He gives you the official career, then the private life, then the death, then the omens. It is the Wikipedia infobox. It is the obituary in <em>The Times</em>. He invented a form we still use.</p>
+        <p>I write only to say: please do not let your specialists talk us out of him. Some of us read him for pleasure, and the pleasure is also a kind of evidence.</p>
+      </div>
+      <div class="letter-byline">
+        Mr. Hamish Lindsay
+        <span class="affil">subscriber since MMXVI</span>
+      </div>
+      <div class="reply">
+        <div class="reply-label">The Editor Replies</div>
+        <p>Mr. Lindsay's observation about the infobox is, in fact, exactly the argument made by John Henderson in a very technical paper of 2014, which we shall not inflict upon him. We are delighted he found his Graves for £8.50; the same edition is presently £24 in our nearest London shop. The pleasure he describes is the reason any of this matters.</p>
+        <span class="sig">— L.A.P.</span>
+      </div>
+    </div>
+    <div class="letter-meander-bottom" aria-hidden="true">
+      <svg viewBox="1000 364 16511 4447" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill="currentColor" d="M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z"/>
+      </svg>
+    </div>
+  </article>
+
+  <div class="vine-divider" aria-hidden="true">
+    <span class="rule"></span>
+    <span class="vine"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path d="M43.583 11.01c-1.79.03-3.58.13-5.34.31-7.05.74-13.94 2.79-19.16 7.47s-8.2 12-7.69 21c.51 9 4.3 16.14 10.19 20.34z"/></svg></span>
+    <span class="rule"></span>
+  </div>
+
+  <!-- LETTER IV -->
+  <article class="letter">
+    <div class="letter-meander-top" aria-hidden="true">
+      <svg viewBox="1000 364 16511 4447" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill="currentColor" d="M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z"/>
+      </svg>
+    </div>
+    <div class="letter-inner">
+      <header class="letter-head">
+        <div class="roundel" aria-hidden="true">
+          <svg viewBox="0 0 117.79 118.25" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="58.9" cy="59.1" r="48" fill="none" stroke="currentColor" stroke-width="0.6"/>
+            <circle cx="58.9" cy="59.1" r="42" fill="none" stroke="currentColor" stroke-width="0.4"/>
+            <text x="58.9" y="64" text-anchor="middle" font-family="Playfair Display" font-size="20" font-weight="900" fill="currentColor">IV</text>
+          </svg>
+        </div>
+        <div class="letter-number">Letter the Fourth</div>
+        <h4 class="letter-title">A Translator's Quarrel</h4>
+        <div class="letter-city">Toronto, Ontario</div>
+      </header>
+      <div class="letter-body">
+        <p>Sir — I have been translating the Caligula for a small press in Halifax (publication, deo volente, in spring 2025), and I write to register a small but not trivial complaint. Dr. Tellier quotes Cal. 22 — <em>"oblitus hominem"</em> — as "forgetting himself a man." This is the Loeb's reading, and it is wrong. The phrase belongs to a longer participial construction, and the verb is better rendered "having put aside his humanity," which carries the legal sense of <em>oblivisci</em> in second-century Latin: not absent-mindedness but deliberate renunciation.</p>
+        <p>The distinction matters because Dr. Tellier's whole reading of Caligula's <em>theatrum</em> rests on the idea that the emperor was confused about his own nature. Suetonius's Latin says the opposite. The emperor knew exactly what he was doing. That is what makes the chapter terrifying.</p>
+        <p>I am perfectly willing to be wrong, and would welcome correction from a reader with better Latin than mine.</p>
+      </div>
+      <div class="letter-byline">
+        Ms. Eleni Vasilakis
+        <span class="affil">independent translator</span>
+      </div>
+      <div class="reply">
+        <div class="reply-label">The Editor Replies</div>
+        <p>We have submitted Ms. Vasilakis's reading to Dr. Tellier and to two further Latinists. The vote is two-to-one in her favour, with the dissenter (whose name we withhold) noting that the Loeb's solution has stood since 1914 and that there is something to be said for tradition. We agree with Ms. Vasilakis. Caligula knew. We look forward to the Halifax edition.</p>
+        <span class="sig">— L.A.P.</span>
+      </div>
+    </div>
+    <div class="letter-meander-bottom" aria-hidden="true">
+      <svg viewBox="1000 364 16511 4447" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill="currentColor" d="M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z"/>
+      </svg>
+    </div>
+  </article>
+
+  <div class="vine-divider" aria-hidden="true">
+    <span class="rule"></span>
+    <span class="vine"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path d="M43.583 11.01c-1.79.03-3.58.13-5.34.31-7.05.74-13.94 2.79-19.16 7.47s-8.2 12-7.69 21z"/></svg></span>
+    <span class="rule"></span>
+  </div>
+
+  <!-- LETTER V -->
+  <article class="letter">
+    <div class="letter-meander-top" aria-hidden="true">
+      <svg viewBox="1000 364 16511 4447" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill="currentColor" d="M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z"/>
+      </svg>
+    </div>
+    <div class="letter-inner">
+      <header class="letter-head">
+        <div class="roundel" aria-hidden="true">
+          <svg viewBox="0 0 117.79 118.25" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="58.9" cy="59.1" r="48" fill="none" stroke="currentColor" stroke-width="0.6"/>
+            <circle cx="58.9" cy="59.1" r="42" fill="none" stroke="currentColor" stroke-width="0.4"/>
+            <text x="58.9" y="64" text-anchor="middle" font-family="Playfair Display" font-size="22" font-weight="900" fill="currentColor">V</text>
+          </svg>
+        </div>
+        <div class="letter-number">Letter the Fifth</div>
+        <h4 class="letter-title">In Defence of Tacitus</h4>
+        <div class="letter-city">Cambridge, England</div>
+      </header>
+      <div class="letter-body">
+        <p>To the Editor — There is a phrase Dr. Tellier uses, near the end of his essay, that I have not been able to dislodge from my mind: "Tacitus is the great moralist; Suetonius is the great accountant." It is a fine sentence and entirely wrong.</p>
+        <p>Tacitus is not a moralist in the sense your contributor implies — that is, a thunderer in the Carlyle mode. Read the openings of <em>Annals</em> 1 and <em>Histories</em> 1 side by side: the moralism is structural, not rhetorical. Tacitus tells you what kind of book this is going to be by the syntax of the first sentence, and then he keeps that promise. Suetonius, by contrast, tells you nothing in advance and reserves the right to contradict himself. This is not the difference between a moralist and an accountant. It is the difference between a historian who has a thesis and a biographer who has a filing system.</p>
+        <p>Both are valuable. But let us not pretend the filing system is more honest than the thesis simply because it appears more neutral. Neutrality, in historiography, is a posture, not a virtue.</p>
+      </div>
+      <div class="letter-byline">
+        Mr. Daniel Okafor
+        <span class="affil">postgraduate, Faculty of Classics, Cambridge</span>
+      </div>
+      <div class="reply">
+        <div class="reply-label">The Editor Replies</div>
+        <p>Mr. Okafor's distinction between rhetorical and structural moralism is exactly the one Dr. Tellier should have made and did not. We confess ourselves persuaded. The accountant metaphor was, in our view too, a little too pleased with itself. We have asked Mr. Okafor to write us a thousand words on the first sentence of the Annals, and we hope to print it in the next number.</p>
+        <span class="sig">— L.A.P.</span>
+      </div>
+    </div>
+    <div class="letter-meander-bottom" aria-hidden="true">
+      <svg viewBox="1000 364 16511 4447" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill="currentColor" d="M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z"/>
+      </svg>
+    </div>
+  </article>
+</section>
+
+<!-- ============ SUBMIT BOX ============ -->
+<section class="submit-box">
+  <h3>Marginalia</h3>
+  <p>Letters of correction, dissent, or amplification are welcomed. We print under initials only by request, and reserve the customary right of the house to edit for length and the misuses of the comma.</p>
+  <p class="addr">Acta Diurna · 14 Lambs Conduit Passage · London WC1N</p>
+  <p class="addr" style="margin-top:6px;">letters@actadiurna.review</p>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="frieze" aria-hidden="true">
+    <div class="frieze-inner">
+      <div class="frieze-tile"><svg viewBox="1000 364 16511 4447" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z"/></svg></div>
+      <div class="frieze-tile"><svg viewBox="1000 364 16511 4447" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z"/></svg></div>
+      <div class="frieze-tile"><svg viewBox="1000 364 16511 4447" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z"/></svg></div>
+      <div class="frieze-tile"><svg viewBox="1000 364 16511 4447" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z"/></svg></div>
+      <div class="frieze-tile"><svg viewBox="1000 364 16511 4447" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z"/></svg></div>
+    </div>
+  </div>
+
+  <div class="footer-cols">
+    <div>
+      <h4>The Review</h4>
+      <ul>
+        <li><a href="page-1.html">Frontispiece</a></li>
+        <li><a href="page-2.html">The Long Essay</a></li>
+        <li><a href="page-3.html">Dispatches</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>The House</h4>
+      <ul>
+        <li><a href="page-4.html">Letters</a></li>
+        <li><a href="page-5.html">The Library</a></li>
+        <li><a href="page-6.html">Colophon</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Subscriptions</h4>
+      <ul>
+        <li><a href="page-6.html">Annual · £48</a></li>
+        <li><a href="page-6.html">Institutional</a></li>
+        <li><a href="page-6.html">Back Numbers</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="colophon">
+    Acta Diurna is set in Playfair Display and Lora and printed quarterly.<br>
+    The editor's name appears below; the rest of the masthead may be found in the Colophon.
+  </div>
+
+  <div class="tailpiece" aria-hidden="true">
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path d="M43.583 11.01c-1.79.03-3.58.13-5.34.31-7.05.74-13.94 2.79-19.16 7.47s-8.2 12-7.69 21c.51 9 4.3 16.14 10.19 20.34 5.89 4.2 13.31 5.53 21.03 5.19 15.45-.69 32.83-8 45.81-18.31 1.41-1.12 2.83-2.04 4.25-3.06 4.29 6.68 7.61 14.83 9.34 24.06-7.5-5.07-21.01-10.55-35.66 1.5-22.14 18.21-24.99 12.88-45.34-2.13-2.86 36.07 15.01 54.64 44.66 52.5 0 0-13.95 4.26-3.59 26.41 6.02 12.87 8.41 20.07 6.56 25.19-12.84 2.29-15.77 7.78-5.57 12.66 45.1 9.97 65.67-27.47 68.66-66.04 45.36 0 52.86-31.8 52.5-50.37-8.21 11.07-22.16 11.07-32.87 2.5-9.93-7.95-21.69-16.18-39-1.13-1.74-11.68-5.69-22.13-11.22-30.72 19.36-11.37 38.72-14.46 52.53-10.81 5.48 1.45 9.46 4.09 12.38 6.97-8.97 8.36-11.84 26.38 2.28 27.03 18.92.88 21.03-15.45 13.56-27.13-5.45-8.51-16.42-13.23-25.66-16.56-17.52-4.63-39.74-.57-61.28 12.5-5.17-5.72-11.13-10.22-17.72-12.97-7.08-2.95-17.54-5.73-28.28-6.31-1.79-.1-3.58-.13-5.38-.09z"/></svg>
+  </div>
+
+  <div class="copyright">
+    © MMXXIV · Acta Diurna · Lectoribus Salutem
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>The Four Faculties — Saint-Aubain de Vézelay</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    margin: 0;
+    line-height: 1.55;
+    font-size: 16px;
+  }
+
+  /* ---------- BACKGROUND DIAPER ---------- */
+  .page-bg::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='600'><g transform='translate(300,300)scale(0.87)rotate(45)' fill='%233a2618'><circle cx='-195.16' r='163'/><circle cx='195.16' r='163'/><circle cy='195.16' r='163'/><circle cy='-195.16' r='163'/><rect x='-232' y='-232' width='464' height='464'/><g fill='%23f4ecd8'><circle cx='-195.16' r='157'/><circle cx='195.16' r='157'/><circle cy='195.16' r='157'/><circle cy='-195.16' r='157'/><rect x='-226' y='-226' width='452' height='452'/></g><circle cx='-195.16' r='144'/><circle cx='195.16' r='144'/><circle cy='195.16' r='144'/><circle cy='-195.16' r='144'/><rect x='-213' y='-213' width='426' height='426'/><g fill='%23f4ecd8'><circle cx='-195.16' r='138'/><circle cx='195.16' r='138'/><circle cy='195.16' r='138'/><circle cy='-195.16' r='138'/><rect x='-207' y='-207' width='414' height='414'/></g></g></svg>");
+    background-size: 240px 240px;
+    opacity: 0.05;
+    pointer-events: none;
+    z-index: 0;
+  }
+  main, header, footer { position: relative; z-index: 1; }
+
+  /* ---------- MASTHEAD / NAV ARCADE ---------- */
+  .masthead {
+    padding: 36px 60px 0;
+    text-align: center;
+  }
+  .wordmark {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 22px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin: 0 0 8px;
+    font-variant: small-caps;
+  }
+  .wordmark .amp {
+    color: var(--accent);
+    font-style: italic;
+    letter-spacing: 0;
+  }
+  .cobalt-rule {
+    height: 1px;
+    background: var(--secondary);
+    width: 100%;
+    margin: 0 auto 0;
+  }
+
+  .arcade {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 0;
+    margin: 14px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .arcade li {
+    display: flex;
+    align-items: center;
+  }
+  .arcade .fleur {
+    width: 14px;
+    height: 14px;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+  .arch-link {
+    width: 150px;
+    height: 86px;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 14px;
+    text-decoration: none;
+    color: var(--primary);
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-variant: small-caps;
+    transition: color 0.2s;
+  }
+  .arch-link::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: transparent;
+    border: 1.2px solid var(--primary);
+    border-bottom: none;
+    border-radius: 75px 75px 0 0 / 80px 80px 0 0;
+    clip-path: polygon(0 100%, 0 40%, 50% 0, 100% 40%, 100% 100%);
+    -webkit-clip-path: polygon(0 100%, 0 40%, 50% 0, 100% 40%, 100% 100%);
+    transition: background 0.25s;
+  }
+  .arch-link:hover { color: var(--accent); }
+  .arch-link:hover::before { background: rgba(30,58,95,0.12); }
+  .arch-link[aria-current="page"] {
+    color: var(--accent);
+  }
+  .arch-link[aria-current="page"]::before {
+    background: rgba(30,58,95,0.18);
+    border-color: var(--secondary);
+  }
+  .arch-link[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px; height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px var(--bg), 0 0 0 3px var(--primary);
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    padding: 60px 60px 30px;
+    display: grid;
+    grid-template-columns: 1fr 360px 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+  .hero-side {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--text-emphasis);
+    line-height: 1.7;
+  }
+  .hero-side.left { text-align: right; }
+  .hero-side .marker {
+    display: block;
+    font-style: normal;
+    font-variant: small-caps;
+    letter-spacing: 0.3em;
+    color: var(--primary);
+    font-size: 11px;
+    margin-bottom: 8px;
+  }
+  .hero-center {
+    text-align: center;
+    position: relative;
+  }
+  .hero-arch {
+    width: 320px;
+    height: 360px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .hero-arch svg.frame {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .hero-arch .seal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-46%);
+    width: 110px;
+    height: 110px;
+    color: var(--secondary);
+  }
+  .hero-arch .seal svg { width:100%; height:100%; fill: currentColor; }
+  .hero h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 300;
+    font-size: 46px;
+    line-height: 1.05;
+    margin: 24px 0 8px;
+    color: var(--primary);
+    letter-spacing: 0.01em;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--text-emphasis);
+  }
+  .hero-kicker {
+    font-variant: small-caps;
+    letter-spacing: 0.3em;
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* ---------- INTRO ---------- */
+  .intro {
+    max-width: 760px;
+    margin: 10px auto 50px;
+    padding: 0 60px;
+    text-align: center;
+    font-size: 17px;
+    color: var(--text);
+    line-height: 1.75;
+  }
+  .intro::first-letter {
+    font-family: var(--font-display), serif;
+    font-size: 64px;
+    color: var(--accent);
+    float: left;
+    line-height: 0.85;
+    padding: 6px 10px 0 0;
+    font-weight: 500;
+    text-shadow: 1px 1px 0 var(--primary);
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 12px 60px 36px;
+  }
+  .divider .line {
+    flex: 1;
+    height: 1px;
+    background: var(--primary);
+    max-width: 380px;
+    opacity: 0.5;
+  }
+  .divider svg { width: 38px; height: 38px; }
+
+  /* ---------- FACULTY PANELS ---------- */
+  .faculties {
+    padding: 0 60px 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 70px;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  .faculty {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 50px;
+    align-items: start;
+  }
+  .faculty.flip {
+    grid-template-columns: 1fr 340px;
+  }
+  .faculty.flip .faculty-arch { order: 2; }
+  .faculty.flip .faculty-body { order: 1; }
+
+  .faculty-arch {
+    position: relative;
+    height: 460px;
+    background: var(--bg);
+  }
+  .faculty-arch .arch-shape {
+    position: absolute;
+    inset: 0;
+    border: 1.5px solid var(--primary);
+    background: #ede2c4;
+    clip-path: polygon(0 100%, 0 32%, 50% 0, 100% 32%, 100% 100%);
+    -webkit-clip-path: polygon(0 100%, 0 32%, 50% 0, 100% 32%, 100% 100%);
+  }
+  .faculty-arch .arch-inner {
+    position: absolute;
+    inset: 12px;
+    border: 1px solid var(--primary);
+    clip-path: polygon(0 100%, 0 30%, 50% 0, 100% 30%, 100% 100%);
+    -webkit-clip-path: polygon(0 100%, 0 30%, 50% 0, 100% 30%, 100% 100%);
+    padding: 60px 28px 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .quatrefoil-finial {
+    position: absolute;
+    top: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 32px;
+    height: 32px;
+    color: var(--accent);
+    background: var(--bg);
+    padding: 4px;
+  }
+  .quatrefoil-finial svg { width: 100%; height: 100%; }
+
+  .faculty-numeral {
+    font-family: var(--font-display), serif;
+    font-size: 56px;
+    color: var(--accent);
+    line-height: 1;
+    margin-top: 14px;
+    text-shadow: 1px 1px 0 var(--primary);
+  }
+  .faculty-arch .latin {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--text-emphasis);
+    margin: 12px 0 18px;
+    letter-spacing: 0.02em;
+  }
+  .faculty-arch .seal-mini {
+    width: 72px;
+    height: 72px;
+    color: var(--primary);
+    margin-top: auto;
+    margin-bottom: 20px;
+  }
+  .faculty-arch .seal-mini svg { width: 100%; height: 100%; fill: currentColor; }
+  .faculty-arch .footstamp {
+    font-variant: small-caps;
+    letter-spacing: 0.25em;
+    font-size: 10px;
+    color: var(--secondary);
+    border-top: 1px solid var(--primary);
+    padding-top: 8px;
+    width: 80%;
+  }
+
+  .faculty-body {
+    padding-top: 10px;
+  }
+  .faculty-body .eyebrow {
+    font-variant: small-caps;
+    letter-spacing: 0.3em;
+    font-size: 11px;
+    color: var(--secondary);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .faculty-body h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 300;
+    font-size: 38px;
+    line-height: 1.05;
+    margin: 0 0 6px;
+    color: var(--primary);
+  }
+  .faculty-body h2 em {
+    font-style: italic;
+    color: var(--text-emphasis);
+  }
+  .faculty-body .charter {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--text);
+    border-left: 2px solid var(--accent);
+    padding-left: 16px;
+    margin: 18px 0 22px;
+    line-height: 1.65;
+  }
+  .faculty-body .body-text {
+    font-size: 15.5px;
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+  .faculty-body .body-text::first-letter {
+    font-family: var(--font-display), serif;
+    font-size: 48px;
+    color: var(--accent);
+    float: left;
+    line-height: 0.85;
+    padding: 4px 8px 0 0;
+    font-weight: 500;
+    text-shadow: 1px 1px 0 var(--primary);
+  }
+
+  .chairs {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 18px;
+    border-top: 1px solid var(--primary);
+  }
+  .chairs li {
+    display: grid;
+    grid-template-columns: 32px 1fr auto;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(58,38,24,0.25);
+    align-items: baseline;
+  }
+  .chairs .roman {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    color: var(--accent);
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    font-weight: 600;
+  }
+  .chairs .chair-name {
+    font-family: var(--font-display), serif;
+    font-size: 16px;
+    color: var(--primary);
+  }
+  .chairs .chair-name span {
+    display: block;
+    font-family: var(--font-body), sans-serif;
+    font-size: 13px;
+    color: var(--text);
+    font-style: italic;
+    margin-top: 2px;
+  }
+  .chairs .holder {
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    color: var(--secondary);
+    font-size: 11px;
+  }
+
+  .faculty-meta {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
+    padding: 8px 0;
+    font-variant: small-caps;
+    letter-spacing: 0.22em;
+    font-size: 10.5px;
+    color: var(--secondary);
+    margin-top: 8px;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    margin-top: 40px;
+    border-top: 1px solid var(--primary);
+    padding-top: 0;
+  }
+  .foot-arcade {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    height: 90px;
+    border-bottom: 1px solid var(--primary);
+  }
+  .foot-arch {
+    border-right: 1px solid var(--primary);
+    position: relative;
+    background: var(--primary);
+    clip-path: polygon(0 100%, 0 40%, 50% 0, 100% 40%, 100% 100%);
+    -webkit-clip-path: polygon(0 100%, 0 40%, 50% 0, 100% 40%, 100% 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .foot-arch:last-child { border-right: none; }
+  .foot-arch .quatre {
+    width: 22px;
+    height: 22px;
+    color: var(--accent);
+    margin-top: 18px;
+  }
+  .foot-arch .quatre svg { width: 100%; height: 100%; }
+
+  .foot-cols {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 60px;
+    padding: 40px 60px;
+  }
+  .foot-cols h4 {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.25em;
+    font-size: 12px;
+    color: var(--primary);
+    margin: 0 0 14px;
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 6px;
+  }
+  .foot-cols p {
+    font-size: 13.5px;
+    line-height: 1.7;
+    margin: 0;
+  }
+  .foot-cols .motto {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    color: var(--secondary);
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  .foot-cols .motto small {
+    display: block;
+    font-style: normal;
+    font-variant: small-caps;
+    letter-spacing: 0.2em;
+    color: var(--text);
+    font-size: 10.5px;
+    margin-top: 8px;
+  }
+
+  .diaper-strip {
+    height: 60px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='600'><g transform='translate(300,300)scale(0.87)rotate(45)' fill='%230a0a0a'><circle cx='-195.16' r='163'/><circle cx='195.16' r='163'/><circle cy='195.16' r='163'/><circle cy='-195.16' r='163'/><rect x='-232' y='-232' width='464' height='464'/><g fill='%23f4ecd8'><circle cx='-195.16' r='157'/><circle cx='195.16' r='157'/><circle cy='195.16' r='157'/><circle cy='-195.16' r='157'/><rect x='-226' y='-226' width='452' height='452'/></g><circle cx='-195.16' r='144'/><circle cx='195.16' r='144'/><circle cy='195.16' r='144'/><circle cy='-195.16' r='144'/><rect x='-213' y='-213' width='426' height='426'/><g fill='%23f4ecd8'><circle cx='-195.16' r='138'/><circle cx='195.16' r='138'/><circle cy='195.16' r='138'/><circle cy='-195.16' r='138'/><rect x='-207' y='-207' width='414' height='414'/></g></g></svg>");
+    background-size: 80px 80px;
+    opacity: 0.18;
+    border-top: 1px solid var(--primary);
+  }
+
+  .colophon {
+    text-align: center;
+    padding: 14px;
+    font-variant: small-caps;
+    letter-spacing: 0.3em;
+    font-size: 10px;
+    color: var(--text);
+  }
+</style>
+</head>
+<body class="page-bg">
+
+<!-- =================== MASTHEAD =================== -->
+<header class="masthead">
+  <h1 class="wordmark">Université Saint&#8209;Aubain <span class="amp">de</span> Vézelay</h1>
+  <div class="cobalt-rule"></div>
+  <nav aria-label="Primary">
+    <ul class="arcade">
+      <li><a class="arch-link" href="page-1.html">Studium</a></li>
+      <li aria-hidden="true"><svg class="fleur" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 L13 8 L18 6 L14 11 L20 12 L14 13 L18 18 L13 16 L12 22 L11 16 L6 18 L10 13 L4 12 L10 11 L6 6 L11 8 Z"/></svg></li>
+      <li><a class="arch-link" href="page-2.html" aria-current="page">Faculties</a></li>
+      <li aria-hidden="true"><svg class="fleur" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 L13 8 L18 6 L14 11 L20 12 L14 13 L18 18 L13 16 L12 22 L11 16 L6 18 L10 13 L4 12 L10 11 L6 6 L11 8 Z"/></svg></li>
+      <li><a class="arch-link" href="page-3.html">Library</a></li>
+      <li aria-hidden="true"><svg class="fleur" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 L13 8 L18 6 L14 11 L20 12 L14 13 L18 18 L13 16 L12 22 L11 16 L6 18 L10 13 L4 12 L10 11 L6 6 L11 8 Z"/></svg></li>
+      <li><a class="arch-link" href="page-4.html">Admissions</a></li>
+      <li aria-hidden="true"><svg class="fleur" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 L13 8 L18 6 L14 11 L20 12 L14 13 L18 18 L13 16 L12 22 L11 16 L6 18 L10 13 L4 12 L10 11 L6 6 L11 8 Z"/></svg></li>
+      <li><a class="arch-link" href="page-5.html">Calendar</a></li>
+      <li aria-hidden="true"><svg class="fleur" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 L13 8 L18 6 L14 11 L20 12 L14 13 L18 18 L13 16 L12 22 L11 16 L6 18 L10 13 L4 12 L10 11 L6 6 L11 8 Z"/></svg></li>
+      <li><a class="arch-link" href="page-6.html">Visit</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- =================== HERO =================== -->
+<section class="hero">
+  <div class="hero-side left">
+    <span class="marker">— Foundation —</span>
+    Erected in the year of grace<br>
+    Mille deux cent quarante&#8209;sept,<br>
+    by bull of Pope Innocent IV,<br>
+    upon the hill of la Madeleine,<br>
+    for the increase of letters<br>
+    & the cure of souls.
+  </div>
+
+  <div class="hero-center">
+    <div class="hero-arch">
+      <svg class="frame" viewBox="0 0 500 800" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <!-- pointed arch outline -->
+        <path d="M40 780 L40 320 Q40 260 90 220 L240 60 Q250 50 260 60 L410 220 Q460 260 460 320 L460 780 Z"
+              fill="none" stroke="#0a0a0a" stroke-width="2"/>
+        <path d="M58 770 L58 326 Q58 272 100 236 L246 84 Q250 80 254 84 L400 236 Q442 272 442 326 L442 770 Z"
+              fill="none" stroke="#0a0a0a" stroke-width="1"/>
+        <!-- mullion -->
+        <line x1="250" y1="320" x2="250" y2="770" stroke="#0a0a0a" stroke-width="1"/>
+        <!-- impost line -->
+        <line x1="58" y1="326" x2="442" y2="326" stroke="#0a0a0a" stroke-width="1"/>
+        <!-- trefoil at apex -->
+        <circle cx="250" cy="180" r="14" fill="none" stroke="#1e3a5f" stroke-width="1.5"/>
+        <circle cx="232" cy="200" r="10" fill="none" stroke="#1e3a5f" stroke-width="1.5"/>
+        <circle cx="268" cy="200" r="10" fill="none" stroke="#1e3a5f" stroke-width="1.5"/>
+        <!-- cobalt fill -->
+        <path d="M70 770 L70 328 Q70 278 108 244 L246 100 Q250 96 254 100 L392 244 Q430 278 430 328 L430 770 Z"
+              fill="#1e3a5f" opacity="0.06"/>
+      </svg>
+      <div class="seal" aria-hidden="true">
+        <svg viewBox="0 0 600 600"><path transform="translate(0,0)scale(0.15)" d="M1778.9,3200A120.9263,120.9263 0 0,1 1657.97,3320.93A120.9263,120.9263 0 0,1 1537.04,3200A221.5096,221.5096 0 0,0 1456.32,3371.02A221.5096,221.5096 0 0,0 1677.83,3592.53A221.5096,221.5096 0 0,0 1818.61,3542.03A362.779,362.779 0 0,0 2000,3856.21A362.779,362.779 0 0,0 2181.39,3542.03A221.5096,221.5096 0 0,0 2322.17,3592.53A221.5096,221.5096 0 0,0 2543.68,3371.02A221.5096,221.5096 0 0,0 2462.96,3200A120.9263,120.9263 0 0,1 2342.03,3320.93A120.9263,120.9263 0 0,1 2221.1,3200V2221.1H3200A120.9263,120.9263 0 0,1 3320.93,2342.03A120.9263,120.9263 0 0,1 3200,2462.96A221.5096,221.5096 0 0,0 3371.02,2543.68A221.5096,221.5096 0 0,0 3592.53,2322.17A221.5096,221.5096 0 0,0 3542.03,2181.39A362.779,362.779 0 0,0 3856.21,2000A362.779,362.779 0 0,0 3542.03,1818.61A221.5096,221.5096 0 0,0 3592.53,1677.83A221.5096,221.5096 0 0,0 3371.02,1456.32A221.5096,221.5096 0 0,0 3200,1537.04A120.9263,120.9263 0 0,1 3320.93,1657.97A120.9263,120.9263 0 0,1 3200,1778.9H2221.1V800A120.9263,120.9263 0 0,1 2342.03,679.073A120.9263,120.9263 0 0,1 2462.96,800A221.5096,221.5096 0 0,0 2543.68,628.984A221.5096,221.5096 0 0,0 2322.17,407.475A221.5096,221.5096 0 0,0 2181.39,457.969A362.779,362.779 0 0,0 2000,143.793A362.779,362.779 0 0,0 1818.61,457.969A221.5096,221.5096 0 0,0 1677.83,407.475A221.5096,221.5096 0 0,0 1456.32,628.984A221.5096,221.5096 0 0,0 1537.04,800A120.9263,120.9263 0 0,1 1657.97,679.073A120.9263,120.9263 0 0,1 1778.9,800V1778.9H800A120.9263,120.9263 0 0,1 679.073,1657.97A120.9263,120.9263 0 0,1 800,1537.04A221.5096,221.5096 0 0,0 628.984,1456.32A221.5096,221.5096 0 0,0 407.475,1677.83A221.5096,221.5096 0 0,0 457.969,1818.61A362.779,362.779 0 0,0 143.793,2000A362.779,362.779 0 0,0 457.969,2181.39A221.5096,221.5096 0 0,0 407.475,2322.17A221.5096,221.5096 0 0,0 628.984,2543.68A221.5096,221.5096 0 0,0 800,2462.96A120.9263,120.9263 0 0,1 679.073,2342.03A120.9263,120.9263 0 0,1 800,2221.1H1778.9Z"/></svg>
+      </div>
+    </div>
+    <p class="hero-kicker">— Quatuor Facultates —</p>
+    <h1>The Four <em>Faculties</em></h1>
+  </div>
+
+  <div class="hero-side">
+    <span class="marker">— The Quadrivium —</span>
+    Theology, the queen of sciences;<br>
+    the Liberal Arts, her handmaids;<br>
+    Law, both civil and canon;<br>
+    & Natural Philosophy,<br>
+    that the works of creation<br>
+    might be read aright.
+  </div>
+</section>
+
+<!-- =================== INTRO =================== -->
+<p class="intro">
+  In the ordo studiorum of Saint-Aubain, instruction proceeds through four faculties, each housed within its own cloister or tower, each governed by a Doyen elected from among the senior Masters. The faculties hold their schools by common charter of 1247 and meet in plenary congregation at the feast of Saint Mary Magdalene, patroness of the abbey-church beneath which the studium first gathered. What follows is the present roll of chairs, with notes upon their lecture-halls and the masters who hold them in Hilary term, 2025.
+</p>
+
+<div class="divider" aria-hidden="true">
+  <span class="line"></span>
+  <svg viewBox="0 0 24 24" fill="var(--accent)" stroke="var(--primary)" stroke-width="0.5">
+    <path d="M12 2 L13 8 L18 6 L14 11 L20 12 L14 13 L18 18 L13 16 L12 22 L11 16 L6 18 L10 13 L4 12 L10 11 L6 6 L11 8 Z"/>
+  </svg>
+  <span class="line"></span>
+</div>
+
+<!-- =================== FACULTIES =================== -->
+<main class="faculties">
+
+  <!-- ============ I. THEOLOGY ============ -->
+  <article class="faculty">
+    <div class="faculty-arch">
+      <div class="arch-shape"></div>
+      <div class="quatrefoil-finial" aria-hidden="true">
+        <svg viewBox="0 0 600 600" fill="currentColor"><g transform="translate(300,300)scale(0.87)rotate(45)"><circle cx="-195" r="163"/><circle cx="195" r="163"/><circle cy="195" r="163"/><circle cy="-195" r="163"/><rect x="-232" y="-232" width="464" height="464"/></g></svg>
+      </div>
+      <div class="arch-inner">
+        <span class="faculty-numeral">I</span>
+        <p class="latin">Sacrae Paginae</p>
+        <div class="seal-mini" aria-hidden="true">
+          <svg viewBox="0 0 600 600"><path transform="translate(0,0)scale(0.15)" d="M1778.9,3200A120.9263,120.9263 0 0,1 1657.97,3320.93A120.9263,120.9263 0 0,1 1537.04,3200A221.5096,221.5096 0 0,0 1456.32,3371.02A221.5096,221.5096 0 0,0 1677.83,3592.53A221.5096,221.5096 0 0,0 1818.61,3542.03A362.779,362.779 0 0,0 2000,3856.21A362.779,362.779 0 0,0 2181.39,3542.03A221.5096,221.5096 0 0,0 2322.17,3592.53A221.5096,221.5096 0 0,0 2543.68,3371.02A221.5096,221.5096 0 0,0 2462.96,3200A120.9263,120.9263 0 0,1 2342.03,3320.93A120.9263,120.9263 0 0,1 2221.1,3200V2221.1H3200A120.9263,120.9263 0 0,1 3320.93,2342.03A120.9263,120.9263 0 0,1 3200,2462.96A221.5096,221.5096 0 0,0 3371.02,2543.68A221.5096,221.5096 0 0,0 3592.53,2322.17A221.5096,221.5096 0 0,0 3542.03,2181.39A362.779,362.779 0 0,0 3856.21,2000A362.779,362.779 0 0,0 3542.03,1818.61A221.5096,221.5096 0 0,0 3592.53,1677.83A221.5096,221.5096 0 0,0 3371.02,1456.32A221.5096,221.5096 0 0,0 3200,1537.04A120.9263,120.9263 0 0,1 3320.93,1657.97A120.9263,120.9263 0 0,1 3200,1778.9H2221.1V800A120.9263,120.9263 0 0,1 2342.03,679.073A120.9263,120.9263 0 0,1 2462.96,800A221.5096,221.5096 0 0,0 2543.68,628.984A221.5096,221.5096 0 0,0 2322.17,407.475A221.5096,221.5096 0 0,0 2181.39,457.969A362.779,362.779 0 0,0 2000,143.793A362.779,362.779 0 0,0 1818.61,457.969A221.5096,221.5096 0 0,0 1677.83,407.475A221.5096,221.5096 0 0,0 1456.32,628.984A221.5096,221.5096 0 0,0 1537.04,800A120.9263,120.9263 0 0,1 1657.97,679.073A120.9263,120.9263 0 0,1 1778.9,800V1778.9H800A120.9263,120.9263 0 0,1 679.073,1657.97A120.9263,120.9263 0 0,1 800,1537.04A221.5096,221.5096 0 0,0 628.984,1456.32A221.5096,221.5096 0 0,0 407.475,1677.83A221.5096,221.5096 0 0,0 457.969,1818.61A362.779,362.779 0 0,0 143.793,2000A362.779,362.779 0 0,0 457.969,2181.39A221.5096,221.5096 0 0,0 407.475,2322.17A221.5096,221.5096 0 0,0 628.984,2543.68A221.5096,221.5096 0 0,0 800,2462.96A120.9263,120.9263 0 0,1 679.073,2342.03A120.9263,120.9263 0 0,1 800,2221.1H1778.9Z"/></svg>
+        </div>
+        <p class="footstamp">Cloître Saint&#8209;Aubain</p>
+      </div>
+    </div>
+    <div class="faculty-body">
+      <p class="eyebrow">Facultas Prima · Senior Faculty</p>
+      <h2>The Faculty of <em>Sacred Theology</em></h2>
+      <blockquote class="charter">"Quod studium primum & maximum, fons & origo omnium aliarum scientiarum, hic in monte Vezeliacensi conservetur ad finem saeculi."<br><small style="font-style:normal; font-variant:small-caps; letter-spacing:0.2em; font-size:10px; color:var(--secondary);">— from the foundation charter, 1247</small></blockquote>
+      <p class="body-text">The senior of the four schools, the Faculty of Theology occupies the upper storey of the eastern cloister and the great hall above the chapter-house. Its lectures begin at the third hour of the morning, after Lauds, and conclude with disputation at None. Candidates for the licentiate must hold the Master of Arts and have heard the Sentences read in their entirety; the doctorate is conferred by the Chancellor only upon the public defence of a quaestio in the choir of the Madeleine.</p>
+      <ol class="chairs">
+        <li><span class="roman">i.</span><span class="chair-name">Chair of Sacred Scripture<span>The reading of the Vulgate with glossa ordinaria; Hebrew & Greek collation Tuesdays.</span></span><span class="holder">Prof. Mathilde Reynard</span></li>
+        <li><span class="roman">ii.</span><span class="chair-name">Chair of Patristics<span>Augustine, the Cappadocians, & the Latin Fathers to Bede.</span></span><span class="holder">vacat — visiting lectures</span></li>
+        <li><span class="roman">iii.</span><span class="chair-name">Chair of Dogmatic &amp; Speculative Theology<span>The Sentences of Peter Lombard, with commentary on Aquinas.</span></span><span class="holder">Père Anselme Voirin, O.S.B.</span></li>
+        <li><span class="roman">iv.</span><span class="chair-name">Chair of Moral Theology &amp; Casuistry<span>Conducted in conjunction with the canonists of Faculty III.</span></span><span class="holder">Dr. Geneviève Aubrac</span></li>
+      </ol>
+      <div class="faculty-meta">
+        <span>Doyen · M. Reynard</span>
+        <span>Hilary Term 2025</span>
+        <span>14 chairs · 47 students</span>
+      </div>
+    </div>
+  </article>
+
+  <!-- ============ II. LIBERAL ARTS ============ -->
+  <article class="faculty flip">
+    <div class="faculty-arch">
+      <div class="arch-shape"></div>
+      <div class="quatrefoil-finial" aria-hidden="true">
+        <svg viewBox="0 0 600 600" fill="currentColor"><g transform="translate(300,300)scale(0.87)rotate(45)"><circle cx="-195" r="163"/><circle cx="195" r="163"/><circle cy="195" r="163"/><circle cy="-195" r="163"/><rect x="-232" y="-232" width="464" height="464"/></g></svg>
+      </div>
+      <div class="arch-inner">
+        <span class="faculty-numeral">II</span>
+        <p class="latin">Septem Artes Liberales</p>
+        <div class="seal-mini" aria-hidden="true">
+          <svg viewBox="0 0 600 600"><path transform="translate(0,0)scale(0.15)" d="M1778.9,3200A120.9263,120.9263 0 0,1 1657.97,3320.93A120.9263,120.9263 0 0,1 1537.04,3200A221.5096,221.5096 0 0,0 1456.32,3371.02A221.5096,221.5096 0 0,0 1677.83,3592.53A221.5096,221.5096 0 0,0 1818.61,3542.03A362.779,362.779 0 0,0 2000,3856.21A362.779,362.779 0 0,0 2181.39,3542.03A221.5096,221.5096 0 0,0 2322.17,3592.53A221.5096,221.5096 0 0,0 2543.68,3371.02A221.5096,221.5096 0 0,0 2462.96,3200A120.9263,120.9263 0 0,1 2342.03,3320.93A120.9263,120.9263 0 0,1 2221.1,3200V2221.1H3200A120.9263,120.9263 0 0,1 3320.93,2342.03A120.9263,120.9263 0 0,1 3200,2462.96A221.5096,221.5096 0 0,0 3371.02,2543.68A221.5096,221.5096 0 0,0 3592.53,2322.17A221.5096,221.5096 0 0,0 3542.03,2181.39A362.779,362.779 0 0,0 3856.21,2000A362.779,362.779 0 0,0 3542.03,1818.61A221.5096,221.5096 0 0,0 3592.53,1677.83A221.5096,221.5096 0 0,0 3371.02,1456.32A221.5096,221.5096 0 0,0 3200,1537.04A120.9263,120.9263 0 0,1 3320.93,1657.97A120.9263,120.9263 0 0,1 3200,1778.9H2221.1V800A120.9263,120.9263 0 0,1 2342.03,679.073A120.9263,120.9263 0 0,1 2462.96,800A221.5096,221.5096 0 0,0 2543.68,628.984A221.5096,221.5096 0 0,0 2322.17,407.475A221.5096,221.5096 0 0,0 2181.39,457.969A362.779,362.779 0 0,0 2000,143.793A362.779,362.779 0 0,0 1818.61,457.969A221.5096,221.5096 0 0,0 1677.83,407.475A221.5096,221.5096 0 0,0 1456.32,628.984A221.5096,221.5096 0 0,0 1537.04,800A120.9263,120.9263 0 0,1 1657.97,679.073A120.9263,120.9263 0 0,1 1778.9,800V1778.9H800A120.9263,120.9263 0 0,1 679.073,1657.97A120.9263,120.9263 0 0,1 800,1537.04A221.5096,221.5096 0 0,0 628.984,1456.32A221.5096,221.5096 0 0,0 407.475,1677.83A221.5096,221.5096 0 0,0 457.969,1818.61A362.779,362.779 0 0,0 143.793,2000A362.779,362.779 0 0,0 457.969,2181.39A221.5096,221.5096 0 0,0 407.475,2322.17A221.5096,221.5096 0 0,0 628.984,2543.68A221.5096,221.5096 0 0,0 800,2462.96A120.9263,120.9263 0 0,1 679.073,2342.03A120.9263,120.9263 0 0,1 800,2221.1H1778.9Z"/></svg>
+        </div>
+        <p class="footstamp">Tour Bernard · West Range</p>
+      </div>
+    </div>
+    <div class="faculty-body">
+      <p class="eyebrow">Facultas Secunda · Propaedeutic</p>
+      <h2>The Faculty of <em>Liberal Arts</em></h2>
+      <blockquote class="charter">"Trivium fundamentum, quadrivium ascensus: per haec septem gradus anima ad sapientiam ducitur."</blockquote>
+      <p class="body-text">All matriculands of Saint-Aubain pass first through this faculty, completing the trivium — grammar, dialectic, rhetoric — within two years, before ascending to the quadrivium of arithmetic, geometry, music, and astronomy. The seminar in the quadrivium meets in the upper chamber of the Tour Bernard, where the astronomical instruments cast in 1689 by Le Bègue of Auxerre remain in continuous use; Dr. Étienne Caillet conducts the term's readings on the De Institutione Arithmetica of Boethius and the Theorica Planetarum.</p>
+      <ol class="chairs">
+        <li><span class="roman">i.</span><span class="chair-name">Chair of Grammar &amp; Latin Letters<span>Donatus, Priscian, & the auctores; daily oral disputation in Latin.</span></span><span class="holder">Prof. Lucien Daubigny</span></li>
+        <li><span class="roman">ii.</span><span class="chair-name">Chair of Dialectic &amp; Rhetoric<span>The Organon of Aristotle; ciceronian invention.</span></span><span class="holder">Dr. Hortense Pellan</span></li>
+        <li><span class="roman">iii.</span><span class="chair-name">Quadrivium Seminar<span>Held Tuesdays & Thursdays, Tour Bernard, fourth storey.</span></span><span class="holder">Dr. Étienne Caillet</span></li>
+        <li><span class="roman">iv.</span><span class="chair-name">Chair of Music &amp; Plainchant<span>Boethius, Guido, & the Solesmes restoration; participation in choir office.</span></span><span class="holder">Frère Roland Vasseur</span></li>
+      </ol>
+      <div class="faculty-meta">
+        <span>Doyen · L. Daubigny</span>
+        <span>Hilary Term 2025</span>
+        <span>9 chairs · 134 students</span>
+      </div>
+    </div>
+  </article>
+
+  <!-- ============ III. LAW ============ -->
+  <article class="faculty">
+    <div class="faculty-arch">
+      <div class="arch-shape"></div>
+      <div class="quatrefoil-finial" aria-hidden="true">
+        <svg viewBox="0 0 600 600" fill="currentColor"><g transform="translate(300,300)scale(0.87)rotate(45)"><circle cx="-195" r="163"/><circle cx="195" r="163"/><circle cy="195" r="163"/><circle cy="-195" r="163"/><rect x="-232" y="-232" width="464" height="464"/></g></svg>
+      </div>
+      <div class="arch-inner">
+        <span class="faculty-numeral">III</span>
+        <p class="latin">Ius Civile &amp; Canonicum</p>
+        <div class="seal-mini" aria-hidden="true">
+          <svg viewBox="0 0 600 600"><path transform="translate(0,0)scale(0.15)" d="M1778.9,3200A120.9263,120.9263 0 0,1 1657.97,3320.93A120.9263,120.9263 0 0,1 1537.04,3200A221.5096,221.5096 0 0,0 1456.32,3371.02A221.5096,221.5096 0 0,0 1677.83,3592.53A221.5096,221.5096 0 0,0 1818.61,3542.03A362.779,362.779 0 0,0 2000,3856.21A362.779,362.779 0 0,0 2181.39,3542.03A221.5096,221.5096 0 0,0 2322.17,3592.53A221.5096,221.5096 0 0,0 2543.68,3371.02A221.5096,221.5096 0 0,0 2462.96,3200A120.9263,120.9263 0 0,1 2342.03,3320.93A120.9263,120.9263 0 0,1 2221.1,3200V2221.1H3200A120.9263,120.9263 0 0,1 3320.93,2342.03A120.9263,120.9263 0 0,1 3200,2462.96A221.5096,221.5096 0 0,0 3371.02,2543.68A221.5096,221.5096 0 0,0 3592.53,2322.17A221.5096,221.5096 0 0,0 3542.03,2181.39A362.779,362.779 0 0,0 3856.21,2000A362.779,362.779 0 0,0 3542.03,1818.61A221.5096,221.5096 0 0,0 3592.53,1677.83A221.5096,221.5096 0 0,0 3371.02,1456.32A221.5096,221.5096 0 0,0 3200,1537.04A120.9263,120.9263 0 0,1 3320.93,1657.97A120.9263,120.9263 0 0,1 3200,1778.9H2221.1V800A120.9263,120.9263 0 0,1 2342.03,679.073A120.9263,120.9263 0 0,1 2462.96,800A221.5096,221.5096 0 0,0 2543.68,628.984A221.5096,221.5096 0 0,0 2322.17,407.475A221.5096,221.5096 0 0,0 2181.39,457.969A362.779,362.779 0 0,0 2000,143.793A362.779,362.779 0 0,0 1818.61,457.969A221.5096,221.5096 0 0,0 1677.83,407.475A221.5096,221.5096 0 0,0 1456.32,628.984A221.5096,221.5096 0 0,0 1537.04,800A120.9263,120.9263 0 0,1 1657.97,679.073A120.9263,120.9263 0 0,1 1778.9,800V1778.9H800A120.9263,120.9263 0 0,1 679.073,1657.97A120.9263,120.9263 0 0,1 800,1537.04A221.5096,221.5096 0 0,0 628.984,1456.32A221.5096,221.5096 0 0,0 407.475,1677.83A221.5096,221.5096 0 0,0 457.969,1818.61A362.779,362.779 0 0,0 143.793,2000A362.779,362.779 0 0,0 457.969,2181.39A221.5096,221.5096 0 0,0 407.475,2322.17A221.5096,221.5096 0 0,0 628.984,2543.68A221.5096,221.5096 0 0,0 800,2462.96A120.9263,120.9263 0 0,1 679.073,2342.03A120.9263,120.9263 0 0,1 800,2221.1H1778.9Z"/></svg>
+        </div>
+        <p class="footstamp">Salle Capitulaire</p>
+      </div>
+    </div>
+    <div class="faculty-body">
+      <p class="eyebrow">Facultas Tertia · Utrumque Ius</p>
+      <h2>The Faculty of <em>Civil &amp; Canon Law</em></h2>
+      <blockquote class="charter">"Incorporata fuit haec facultas per bullam apostolicam Innocentii Papae IV, anno Domini millesimo ducentesimo quadragesimo septimo, mense Junii."</blockquote>
+      <p class="body-text">Saint-Aubain is among the few studia north of the Alps to retain instruction in both laws under a single Doyen — a privilege confirmed by papal bull of June 1247 and never since revoked. The civilians read the Corpus iuris civilis in the morning hours; the canonists read the Decretals of Gregory IX and the Codex Iuris Canonici of 1983 in the afternoon. Joint disputation on questions of mixed jurisdiction is held the first Friday of each month in the Salle Capitulaire, before the Doyen and assembled Bachelors.</p>
+      <ol class="chairs">
+        <li><span class="roman">i.</span><span class="chair-name">Chair of Roman &amp; Civil Law<span>The Institutes &amp; Digest, with comparative readings in the Code Napoléon.</span></span><span class="holder">Prof. Théobald de Marsac</span></li>
+        <li><span class="roman">ii.</span><span class="chair-name">Chair of Canon Law<span>Decretum Gratiani, Liber Extra, & the 1983 Code.</span></span><span class="holder">Mgr. François Bonnefoy</span></li>
+        <li><span class="roman">iii.</span><span class="chair-name">Chair of Legal History &amp; Diplomatics<span>Reading of charters from the abbey archive, 11th–14th c.</span></span><span class="holder">Dr. Aliénor Costevin</span></li>
+      </ol>
+      <div class="faculty-meta">
+        <span>Doyen · T. de Marsac</span>
+        <span>Bull of 1247 · sigillum plumbum</span>
+        <span>11 chairs · 62 students</span>
+      </div>
+    </div>
+  </article>
+
+  <!-- ============ IV. NATURAL PHILOSOPHY ============ -->
+  <article class="faculty flip">
+    <div class="faculty-arch">
+      <div class="arch-shape"></div>
+      <div class="quatrefoil-finial" aria-hidden="true">
+        <svg viewBox="0 0 600 600" fill="currentColor"><g transform="translate(300,300)scale(0.87)rotate(45)"><circle cx="-195" r="163"/><circle cx="195" r="163"/><circle cy="195" r="163"/><circle cy="-195" r="163"/><rect x="-232" y="-232" width="464" height="464"/></g></svg>
+      </div>
+      <div class="arch-inner">
+        <span class="faculty-numeral">IV</span>
+        <p class="latin">Philosophia Naturalis</p>
+        <div class="seal-mini" aria-hidden="true">
+          <svg viewBox="0 0 600 600"><path transform="translate(0,0)scale(0.15)" d="M1778.9,3200A120.9263,120.9263 0 0,1 1657.97,3320.93A120.9263,120.9263 0 0,1 1537.04,3200A221.5096,221.5096 0 0,0 1456.32,3371.02A221.5096,221.5096 0 0,0 1677.83,3592.53A221.5096,221.5096 0 0,0 1818.61,3542.03A362.779,362.779 0 0,0 2000,3856.21A362.779,362.779 0 0,0 2181.39,3542.03A221.5096,221.5096 0 0,0 2322.17,3592.53A221.5096,221.5096 0 0,0 2543.68,3371.02A221.5096,221.5096 0 0,0 2462.96,3200A120.9263,120.9263 0 0,1 2342.03,3320.93A120.9263,120.9263 0 0,1 2221.1,3200V2221.1H3200A120.9263,120.9263 0 0,1 3320.93,2342.03A120.9263,120.9263 0 0,1 3200,2462.96A221.5096,221.5096 0 0,0 3371.02,2543.68A221.5096,221.5096 0 0,0 3592.53,2322.17A221.5096,221.5096 0 0,0 3542.03,2181.39A362.779,362.779 0 0,0 3856.21,2000A362.779,362.779 0 0,0 3542.03,1818.61A221.5096,221.5096 0 0,0 3592.53,1677.83A221.5096,221.5096 0 0,0 3371.02,1456.32A221.5096,221.5096 0 0,0 3200,1537.04A120.9263,120.9263 0 0,1 3320.93,1657.97A120.9263,120.9263 0 0,1 3200,1778.9H2221.1V800A120.9263,120.9263 0 0,1 2342.03,679.073A120.9263,120.9263 0 0,1 2462.96,800A221.5096,221.5096 0 0,0 2543.68,628.984A221.5096,221.5096 0 0,0 2322.17,407.475A221.5096,221.5096 0 0,0 2181.39,457.969A362.779,362.779 0 0,0 2000,143.793A362.779,362.779 0 0,0 1818.61,457.969A221.5096,221.5096 0 0,0 1677.83,407.475A221.5096,221.5096 0 0,0 1456.32,628.984A221.5096,221.5096 0 0,0 1537.04,800A120.9263,120.9263 0 0,1 1657.97,679.073A120.9263,120.9263 0 0,1 1778.9,800V1778.9H800A120.9263,120.9263 0 0,1 679.073,1657.97A120.9263,120.9263 0 0,1 800,1537.04A221.5096,221.5096 0 0,0 628.984,1456.32A221.5096,221.5096 0 0,0 407.475,1677.83A221.5096,221.5096 0 0,0 457.969,1818.61A362.779,362.779 0 0,0 143.793,2000A362.779,362.779 0 0,0 457.969,2181.39A221.5096,221.5096 0 0,0 407.475,2322.17A221.5096,221.5096 0 0,0 628.984,2543.68A221.5096,221.5096 0 0,0 800,2462.96A120.9263,120.9263 0 0,1 679.073,2342.03A120.9263,120.9263 0 0,1 800,2221.1H1778.9Z"/></svg>
+        </div>
+        <p class="footstamp">Cloître Sud · Laboratories</p>
+      </div>
+    </div>
+    <div class="faculty-body">
+      <p class="eyebrow">Facultas Quarta · Newest of the Four</p>
+      <h2>The Faculty of <em>Natural Philosophy</em></h2>
+      <blockquote class="charter">"Liber naturae duobus modis legitur: oculo simplici per observationem, ratione per demonstrationem."</blockquote>
+      <p class="body-text">Established in 1782 by lettre patente of Louis XVI and reformed under the Concordat of 1801, the youngest of the faculties retains its original charge: the patient reading of the book of nature, alongside the book of Scripture. Its laboratories — for chymistry, botany, and the cabinet of natural history — occupy the entire south range of the Cloître Sud, where the vaulted undercroft has been fitted since 1873 with copper benches, fume-hoods of stained oak, and the fine collection of Burgundian fossils given by the Comtesse de Montréal. The herbarium contains 18,400 mounted specimens.</p>
+      <ol class="chairs">
+        <li><span class="roman">i.</span><span class="chair-name">Chair of Physics &amp; Mechanics<span>Laboratory: Cloître Sud, salle 4. Pendulum gallery open to visitors Wednesdays.</span></span><span class="holder">Prof. Cosme Larivière</span></li>
+        <li><span class="roman">ii.</span><span class="chair-name">Chair of Chymistry<span>Laboratory: Cloître Sud, undercroft. Benches dating 1873.</span></span><span class="holder">Dr. Salomé Trémault</span></li>
+        <li><span class="roman">iii.</span><span class="chair-name">Chair of Botany &amp; the Herbarium<span>Garden of simples adjoining; specimen catalogue published quarterly.</span></span><span class="holder">Dr. Joachim Verlière</span></li>
+        <li><span class="roman">iv.</span><span class="chair-name">Chair of Astronomy &amp; Meteorology<span>Held jointly with the Quadrivium seminar; observations from Tour Bernard.</span></span><span class="holder">Dr. Étienne Caillet</span></li>
+      </ol>
+      <div class="faculty-meta">
+        <span>Doyen · C. Larivière</span>
+        <span>Founded 1782</span>
+        <span>16 chairs · 89 students</span>
+      </div>
+    </div>
+  </article>
+
+</main>
+
+<!-- =================== FOOTER =================== -->
+<footer>
+  <div class="foot-arcade" aria-hidden="true">
+    <div class="foot-arch"><div class="quatre"><svg viewBox="0 0 600 600" fill="currentColor"><g transform="translate(300,300)scale(0.87)rotate(45)"><circle cx="-195" r="163"/><circle cx="195" r="163"/><circle cy="195" r="163"/><circle cy="-195" r="163"/><rect x="-232" y="-232" width="464" height="464"/></g></svg></div></div>
+    <div class="foot-arch"><div class="quatre"><svg viewBox="0 0 600 600" fill="currentColor"><g transform="translate(300,300)scale(0.87)rotate(45)"><circle cx="-195" r="163"/><circle cx="195" r="163"/><circle cy="195" r="163"/><circle cy="-195" r="163"/><rect x="-232" y="-232" width="464" height="464"/></g></svg></div></div>
+    <div class="foot-arch"><div class="quatre"><svg viewBox="0 0 600 600" fill="currentColor"><g transform="translate(300,300)scale(0.87)rotate(45)"><circle cx="-195" r="163"/><circle cx="195" r="163"/><circle cy="195" r="163"/><circle cy="-195" r="163"/><rect x="-232" y="-232" width="464" height="464"/></g></svg></div></div>
+    <div class="foot-arch"><div class="quatre"><svg viewBox="0 0 600 600" fill="currentColor"><g transform="translate(300,300)scale(0.87)rotate(45)"><circle cx="-195" r="163"/><circle cx="195" r="163"/><circle cy="195" r="163"/><circle cy="-195" r="163"/><rect x="-232" y="-232" width="464" height="464"/></g></svg></div></div>
+    <div class="foot-arch"><div class="quatre"><svg viewBox="0 0 600 600" fill="currentColor"><g transform="translate(300,300)scale(0.87)rotate(45)"><circle cx="-195" r="163"/><circle cx="195" r="163"/><circle cy="195" r="163"/><circle cy="-195" r="163"/><rect x="-232" y="-232" width="464" height="464"/></g></svg></div></div>
+    <div class="foot-arch"><div class="quatre"><svg viewBox="0 0 600 600" fill="currentColor"><g transform="translate(300,300)scale(0.87)rotate(45)"><circle cx="-195" r="163"/><circle cx="195" r="163"/><circle cy="195" r="163"/><circle cy="-195" r="163"/><rect x="-232" y="-232" width="464" height="464"/></g></svg></div></div>
+    <div class="foot-arch"><div class="quatre"><svg viewBox="0 0 600 600" fill="currentColor"><g transform="translate(300,300)scale(0.87)rotate(45)"><circle cx="-195" r="163"/><circle cx="195" r="163"/><circle cy="195" r="163"/><circle cy="-195" r="163"/><rect x="-232" y="-232" width="464" height="464"/></g></svg></div></div>
+  </div>
+
+  <div class="foot-cols">
+    <div>
+      <h4>Address</h4>
+      <p>
+        Université Saint-Aubain<br>
+        Place de la Madeleine<br>
+        89450 Vézelay<br>
+        Bourgogne-Franche-Comté<br>
+        République française
+      </p>
+    </div>
+    <div>
+      <h4>Office of the Registrar</h4>
+      <p>
+        Mme. Geneviève Aubrac, Registrar<br>
+        Cloître Saint-Aubain, Salle 11<br>
+        Open Mon–Fri, 9h–12h &amp; 14h–17h<br>
+        Tél. +33 (0)3 86 33 24 71<br>
+        registrariat@saint-aubain.fr
+      </p>
+    </div>
+    <div>
+      <h4>Motto</h4>
+      <p class="motto">
+        Lux in tenebris lucet,<br>
+        et tenebrae eam non comprehenderunt.
+        <small>— foundation device, 1247</small>
+      </p>
+    </div>
+  </div>
+
+  <div class="diaper-strip" aria-hidden="true"></div>
+  <p class="colophon">MMXXV · Studium Generale de la Madeleine · sigillum universitatis</p>
+</footer>
+
+</body>
+</html>

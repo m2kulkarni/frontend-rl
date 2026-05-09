@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Visit — Hours, Tickets, Directions · Dīvānkhāneh</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  /* ---------- Reset-ish, page-local ---------- */
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), "Cormorant Garamond", Georgia, serif;
+    font-size: 18px;
+    line-height: 1.55;
+    text-align: center;
+  }
+  a { color: var(--primary); text-decoration: none; }
+  h1, h2, h3, h4 { font-family: var(--font-display), "Cinzel Decorative", serif; font-weight: 400; margin: 0; }
+
+  /* ---------- Page wrapper ---------- */
+  .page { max-width: 1180px; margin: 0 auto; padding: 0 60px; }
+
+  /* ---------- Wordmark + Nav ---------- */
+  .masthead { padding: 56px 0 18px; }
+  .wordmark {
+    font-family: var(--font-display);
+    font-size: 44px;
+    letter-spacing: 0.06em;
+    color: var(--primary);
+    margin-bottom: 4px;
+  }
+  .wordmark .amp { color: var(--accent); font-style: italic; }
+  .wordmark-sub {
+    font-family: var(--font-body);
+    font-style: italic;
+    color: var(--text);
+    font-size: 17px;
+    letter-spacing: 0.18em;
+    text-transform: lowercase;
+    margin-top: 2px;
+  }
+
+  nav.primary {
+    margin-top: 28px;
+    padding: 14px 0 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: nowrap;
+  }
+  nav.primary a {
+    font-family: var(--font-display);
+    font-size: 12.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--primary);
+    padding: 14px 10px 8px;
+    position: relative;
+    white-space: nowrap;
+  }
+  nav.primary a[aria-current="page"] {
+    color: var(--text-emphasis);
+  }
+  nav.primary a[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    left: 10px; right: 10px; bottom: 0;
+    height: 2px;
+    background: var(--text-emphasis);
+  }
+  nav.primary a[aria-current="page"]::before {
+    content: "✦";
+    position: absolute;
+    top: -2px; left: 50%;
+    transform: translateX(-50%);
+    color: var(--accent);
+    font-size: 11px;
+  }
+  nav.primary .palmette {
+    width: 22px; height: 14px;
+    opacity: 0.85;
+    flex: 0 0 auto;
+  }
+  nav.primary .palmette svg { width: 100%; height: 100%; display: block; }
+  nav.primary .palmette svg path { fill: var(--accent); }
+
+  .filet {
+    display: block;
+    margin: 14px auto 0;
+    width: 520px; height: 22px;
+  }
+  .filet svg { width: 100%; height: 100%; display: block; }
+  .filet svg path,
+  .filet svg polyline { fill: var(--primary); stroke: var(--accent); stroke-width: 0.6; }
+
+  .filet.gold svg path,
+  .filet.gold svg polyline { fill: var(--accent); stroke: var(--primary); }
+
+  /* ---------- Hero with arch ---------- */
+  .hero {
+    position: relative;
+    margin-top: 36px;
+    padding: 50px 0 60px;
+  }
+  .hero-arch {
+    position: relative;
+    width: 520px;
+    height: 560px;
+    margin: 0 auto;
+  }
+  .hero-arch .arch-svg {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+  }
+  .hero-arch .arch-svg svg { width: 100%; height: 100%; display: block; }
+  .hero-arch .arch-svg svg path {
+    stroke: var(--primary);
+    stroke-width: 3.5;
+    fill: none;
+  }
+  .hero-arch .arch-fill {
+    position: absolute;
+    left: 8%; right: 8%;
+    top: 6%;
+    bottom: 4%;
+    background:
+      radial-gradient(ellipse at 50% 20%, rgba(42,138,138,0.08), transparent 60%),
+      var(--bg);
+    border: 1px solid var(--accent);
+    z-index: 0;
+  }
+  .hero-inner {
+    position: absolute;
+    inset: 14% 14% 8% 14%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 16px;
+    z-index: 2;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-display);
+    font-size: 11.5px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .hero h1 {
+    font-size: 40px;
+    color: var(--primary);
+    line-height: 1.05;
+    letter-spacing: 0.04em;
+  }
+  .hero h1 .em { color: var(--text-emphasis); font-style: italic; }
+  .hero p.lede {
+    font-size: 18px;
+    font-style: italic;
+    color: var(--text);
+    max-width: 320px;
+    line-height: 1.5;
+  }
+  .seal-mini {
+    width: 64px; height: 64px;
+    margin-top: 6px;
+  }
+  .seal-mini svg { width: 100%; height: 100%; display: block; }
+
+  /* ---------- Section divider ---------- */
+  .threshold {
+    margin: 48px auto 36px;
+    width: 600px;
+    height: 26px;
+  }
+  .threshold svg { width: 100%; height: 100%; display: block; }
+  .threshold svg path,
+  .threshold svg polyline { fill: var(--primary); stroke: var(--accent); stroke-width: 0.5; }
+
+  /* ---------- Section heads ---------- */
+  .section-head {
+    margin-bottom: 28px;
+  }
+  .section-head .kicker {
+    font-family: var(--font-display);
+    font-size: 11px;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .section-head h2 {
+    font-size: 30px;
+    color: var(--primary);
+    letter-spacing: 0.05em;
+  }
+  .section-head h2 .em { color: var(--text-emphasis); font-style: italic; }
+  .section-head .sub {
+    margin-top: 8px;
+    font-style: italic;
+    color: var(--text);
+    font-size: 17px;
+  }
+
+  /* ---------- Tablet of facts (axial three columns) ---------- */
+  .tablet {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 0 50px;
+    align-items: stretch;
+    margin: 0 auto;
+    max-width: 1060px;
+    padding: 36px 30px;
+    background: var(--bg);
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+    position: relative;
+  }
+  .tablet::before, .tablet::after {
+    content: "";
+    position: absolute; left: 0; right: 0;
+    height: 1px;
+    background: var(--primary);
+  }
+  .tablet::before { top: -5px; }
+  .tablet::after { bottom: -5px; }
+
+  .tablet .col {
+    text-align: center;
+    padding: 0 8px;
+  }
+  .tablet .col h3 {
+    font-family: var(--font-display);
+    font-size: 14px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 14px;
+  }
+  .tablet .col .star {
+    color: var(--accent);
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  .tablet .col p {
+    margin: 0 0 8px;
+    font-size: 17px;
+  }
+  .tablet .col .em { color: var(--text-emphasis); font-style: italic; }
+  .tablet .axis {
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--accent) 12%, var(--accent) 88%, transparent);
+    position: relative;
+  }
+  .tablet .axis::before, .tablet .axis::after {
+    content: "✦";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--accent);
+    font-size: 12px;
+    background: var(--bg);
+    padding: 4px 0;
+  }
+  .tablet .axis::before { top: 30%; }
+  .tablet .axis::after { bottom: 30%; content: "✧"; }
+
+  /* ---------- Hours table ---------- */
+  .hours-frame {
+    margin: 0 auto;
+    max-width: 720px;
+    border: 1px solid var(--primary);
+    padding: 4px;
+    background: var(--bg);
+    position: relative;
+  }
+  .hours-frame::before {
+    content: "";
+    position: absolute;
+    inset: 4px;
+    border: 1px solid var(--accent);
+    pointer-events: none;
+  }
+  .hours-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0;
+  }
+  .hours-table caption {
+    font-family: var(--font-display);
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--primary);
+    padding: 14px 0 6px;
+  }
+  .hours-table th, .hours-table td {
+    padding: 11px 24px;
+    font-size: 17px;
+    border-bottom: 1px dotted var(--accent);
+  }
+  .hours-table th {
+    text-align: left;
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    color: var(--primary);
+    font-size: 14px;
+  }
+  .hours-table td {
+    text-align: right;
+    font-style: italic;
+    color: var(--text);
+  }
+  .hours-table tr:last-child th,
+  .hours-table tr:last-child td { border-bottom: none; }
+  .hours-table .closed { color: var(--text-emphasis); }
+  .hours-note {
+    font-size: 15px;
+    font-style: italic;
+    color: var(--text);
+    padding: 0 24px 14px;
+  }
+
+  /* ---------- Admission grid ---------- */
+  .admission {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 26px;
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+  .ticket {
+    position: relative;
+    padding: 28px 22px 26px;
+    background: var(--bg);
+    border: 1.5px solid var(--primary);
+    text-align: center;
+  }
+  .ticket::before {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border: 1px solid var(--accent);
+    pointer-events: none;
+  }
+  .ticket .corner {
+    position: absolute;
+    width: 22px; height: 22px;
+    color: var(--accent);
+    font-size: 18px;
+    line-height: 1;
+  }
+  .ticket .corner.tl { top: 8px; left: 8px; }
+  .ticket .corner.tr { top: 8px; right: 8px; }
+  .ticket .corner.bl { bottom: 8px; left: 8px; }
+  .ticket .corner.br { bottom: 8px; right: 8px; }
+  .ticket h3 {
+    font-family: var(--font-display);
+    font-size: 14px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 10px;
+  }
+  .ticket .price {
+    font-family: var(--font-display);
+    font-size: 26px;
+    color: var(--text-emphasis);
+    margin: 6px 0 10px;
+    letter-spacing: 0.04em;
+  }
+  .ticket .price .unit {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--text);
+    letter-spacing: 0;
+  }
+  .ticket p {
+    margin: 0;
+    font-size: 15px;
+    font-style: italic;
+    color: var(--text);
+    line-height: 1.45;
+  }
+
+  /* ---------- Practical info two-column axial ---------- */
+  .info-axis {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    max-width: 1060px;
+    margin: 0 auto;
+    text-align: left;
+  }
+  .info-card {
+    position: relative;
+    padding: 32px 30px 28px;
+    background: var(--bg);
+    border: 1px solid var(--primary);
+  }
+  .info-card::before {
+    content: "";
+    position: absolute;
+    inset: 5px;
+    border: 1px solid var(--accent);
+    pointer-events: none;
+  }
+  .info-card h3 {
+    font-family: var(--font-display);
+    font-size: 15px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--primary);
+    text-align: center;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px dotted var(--accent);
+  }
+  .info-card p {
+    margin: 0 0 12px;
+    font-size: 16.5px;
+    line-height: 1.55;
+  }
+  .info-card p:last-child { margin-bottom: 0; }
+  .info-card .em { color: var(--text-emphasis); font-style: italic; }
+  .info-card .label {
+    font-family: var(--font-display);
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  /* ---------- Notice strip ---------- */
+  .notice {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 26px 40px;
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+    position: relative;
+    font-style: italic;
+    color: var(--text);
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  .notice .seal {
+    color: var(--text-emphasis);
+    font-family: var(--font-display);
+    font-style: normal;
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  /* ---------- Footer ---------- */
+  footer.site {
+    margin-top: 80px;
+    background: var(--primary);
+    color: var(--bg);
+    padding: 0;
+    position: relative;
+  }
+  footer.site .filet svg path,
+  footer.site .filet svg polyline { fill: var(--accent); stroke: var(--bg); stroke-width: 0.4; }
+  footer.site .filet { margin: 0 auto; padding: 18px 0 8px; width: 600px; }
+
+  .foot-cols {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 30px 60px 20px;
+    text-align: center;
+  }
+  .foot-cols h4 {
+    font-family: var(--font-display);
+    color: var(--accent);
+    letter-spacing: 0.28em;
+    font-size: 13px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .foot-cols p {
+    margin: 4px 0;
+    font-size: 15.5px;
+    color: var(--bg);
+    line-height: 1.5;
+  }
+  .foot-tail {
+    text-align: center;
+    padding: 10px 0 30px;
+  }
+  .foot-tail .ornament {
+    font-family: var(--font-display);
+    color: var(--accent);
+    font-size: 18px;
+    letter-spacing: 0.5em;
+    margin-bottom: 10px;
+  }
+  .foot-tail .imprint {
+    font-style: italic;
+    font-size: 14px;
+    color: var(--bg);
+    opacity: 0.92;
+  }
+
+  /* ---------- Tiny utilities ---------- */
+  .axis-rule {
+    width: 1px;
+    height: 60px;
+    margin: 0 auto;
+    background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+  }
+  .star-glyph {
+    color: var(--accent);
+    font-size: 14px;
+    letter-spacing: 0.2em;
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ============ MASTHEAD ============ -->
+  <header class="masthead">
+    <div class="wordmark">Dīvānkhāneh</div>
+    <div class="wordmark-sub">museum of safavid isfahan</div>
+
+    <nav class="primary" aria-label="Primary">
+      <a href="page-1.html">Hall</a>
+      <span class="palmette" aria-hidden="true">
+        <svg viewBox="0 0 40 22"><path d="M20 2 C 12 2, 6 8, 4 14 C 8 11, 13 10, 20 14 C 27 10, 32 11, 36 14 C 34 8, 28 2, 20 2 Z M 20 14 L 20 20"/></svg>
+      </span>
+      <a href="page-2.html">Collection</a>
+      <span class="palmette" aria-hidden="true">
+        <svg viewBox="0 0 40 22"><path d="M20 2 C 12 2, 6 8, 4 14 C 8 11, 13 10, 20 14 C 27 10, 32 11, 36 14 C 34 8, 28 2, 20 2 Z M 20 14 L 20 20"/></svg>
+      </span>
+      <a href="page-3.html">Exhibition</a>
+      <span class="palmette" aria-hidden="true">
+        <svg viewBox="0 0 40 22"><path d="M20 2 C 12 2, 6 8, 4 14 C 8 11, 13 10, 20 14 C 27 10, 32 11, 36 14 C 34 8, 28 2, 20 2 Z M 20 14 L 20 20"/></svg>
+      </span>
+      <a href="page-4.html">Reading Room</a>
+      <span class="palmette" aria-hidden="true">
+        <svg viewBox="0 0 40 22"><path d="M20 2 C 12 2, 6 8, 4 14 C 8 11, 13 10, 20 14 C 27 10, 32 11, 36 14 C 34 8, 28 2, 20 2 Z M 20 14 L 20 20"/></svg>
+      </span>
+      <a href="page-5.html" aria-current="page">Visit</a>
+      <span class="palmette" aria-hidden="true">
+        <svg viewBox="0 0 40 22"><path d="M20 2 C 12 2, 6 8, 4 14 C 8 11, 13 10, 20 14 C 27 10, 32 11, 36 14 C 34 8, 28 2, 20 2 Z M 20 14 L 20 20"/></svg>
+      </span>
+      <a href="page-6.html">About</a>
+    </nav>
+
+    <div class="filet" aria-hidden="true">
+      <svg viewBox="0 0 437.999 18.893" preserveAspectRatio="xMidYMid meet">
+        <path d="M0,9.445c0,0,37.005-0.063,73.998-0.829c18.495-0.386,36.989-0.949,50.831-1.785c6.919-0.414,12.677-0.906,16.663-1.46c1.99-0.28,3.539-0.582,4.535-0.878c0.502-0.146,0.844-0.297,1.049-0.405c0.157-0.107,0.238-0.162,0.238-0.162l0.42-0.287l0.656,0.656l-0.369,0.338c0,0-0.154,0.142-0.456,0.324c-0.291,0.154-0.714,0.331-1.256,0.484c-1.085,0.314-2.667,0.608-4.686,0.879c-4.037,0.533-9.811,0.985-16.745,1.354c-13.868,0.744-32.369,1.183-50.87,1.443C37.003,9.632,0,9.445,0,9.445z"/>
+        <path d="M437.999,9.445c0,0-37.004,0.187-74.007-0.329c-18.501-0.261-37.002-0.699-50.869-1.443c-6.935-0.368-12.708-0.82-16.745-1.354c-2.019-0.271-3.601-0.565-4.687-0.879c-0.541-0.153-0.965-0.33-1.256-0.484c-0.302-0.183-0.456-0.324-0.456-0.324l-0.369-0.338l0.656-0.656l0.42,0.287c0,0,0.081,0.055,0.238,0.162c0.204,0.108,0.546,0.26,1.048,0.405c0.996,0.296,2.545,0.598,4.535,0.878c3.986,0.554,9.744,1.046,16.663,1.46C327.011,7.667,345.506,8.23,364,8.616C400.994,9.382,437.999,9.445,437.999,9.445z"/>
+        <polyline fill="none" stroke="currentColor" stroke-width="1.4" stroke-miterlimit="10" points="209.416,13.307 219,9.445 228.583,5.584"/>
+      </svg>
+    </div>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" aria-labelledby="page-title">
+    <div class="hero-arch">
+      <div class="arch-fill"></div>
+      <div class="arch-svg" aria-hidden="true">
+        <svg viewBox="140 240 510 555" preserveAspectRatio="xMidYMid meet">
+          <g transform="translate(8.199,-11.874)">
+            <path d="m 388.984,268.984 -57.342,98.846 c 0,0 -25.866,42.495 -83.142,62.818 -57.275,20.323 -100.760,86.775 -99.770,153.350 54.339,0.096 3.097,-0.096 62.468,0.254 0,0 -2.044,-66.404 63.168,-94.481 50.355,-21.680 83.142,-42.495 114.551,-88.684" fill="none"/>
+            <path d="m 250,430.58 24.752,58.416" fill="none"/>
+            <path d="m 347.030,342.461 41.584,23.762 0.990,35.644" fill="none"/>
+            <path d="m 211.386,583.055 -1.485,211.881" fill="none"/>
+          </g>
+          <g transform="matrix(-1,0,0,1,777.881,-12.171)">
+            <path d="m 388.984,268.984 -57.342,98.846 c 0,0 -25.866,42.495 -83.142,62.818 -57.275,20.323 -100.760,86.775 -99.770,153.350 54.339,0.096 3.097,-0.096 62.468,0.254 0,0 -2.044,-66.404 63.168,-94.481 50.355,-21.680 83.142,-42.495 114.551,-88.684" fill="none"/>
+            <path d="m 250,430.58 24.752,58.416" fill="none"/>
+            <path d="m 347.030,342.461 41.584,23.762 0.990,35.644" fill="none"/>
+            <path d="m 211.386,583.055 -1.485,211.881" fill="none"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="hero-inner">
+        <div class="hero-eyebrow">— Plan your visit —</div>
+        <h1>Hours, Tickets, <span class="em">Directions</span></h1>
+        <p class="lede">A practical guide to crossing the threshold of the Dīvānkhāneh — set on Khiyābān-i Chahār Bāgh, beneath the cobalt domes of Isfahan.</p>
+        <div class="seal-mini" aria-hidden="true">
+          <svg viewBox="0 0 1500 1500">
+            <g transform="translate(750,750)">
+              <g fill="none" stroke="#c9a23a" stroke-width="14">
+                <polygon points="0,-340 80,-80 340,0 80,80 0,340 -80,80 -340,0 -80,-80"/>
+                <polygon points="0,-340 80,-80 340,0 80,80 0,340 -80,80 -340,0 -80,-80" transform="rotate(45)"/>
+                <circle r="120"/>
+              </g>
+              <g fill="#7a1f2e">
+                <polygon points="0,-90 25,-25 90,0 25,25 0,90 -25,25 -90,0 -25,-25"/>
+              </g>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ THRESHOLD ============ -->
+  <div class="threshold" aria-hidden="true">
+    <svg viewBox="0 0 437.999 18.893" preserveAspectRatio="xMidYMid meet">
+      <path d="M0,9.445c0,0,37.005-0.063,73.998-0.829c18.495-0.386,36.989-0.949,50.831-1.785c6.919-0.414,12.677-0.906,16.663-1.46c1.99-0.28,3.539-0.582,4.535-0.878c0.502-0.146,0.844-0.297,1.049-0.405c0.157-0.107,0.238-0.162,0.238-0.162l0.42-0.287l0.656,0.656l-0.369,0.338c0,0-0.154,0.142-0.456,0.324c-0.291,0.154-0.714,0.331-1.256,0.484c-1.085,0.314-2.667,0.608-4.686,0.879c-4.037,0.533-9.811,0.985-16.745,1.354c-13.868,0.744-32.369,1.183-50.87,1.443C37.003,9.632,0,9.445,0,9.445z"/>
+      <path d="M437.999,9.445c0,0-37.004,0.187-74.007-0.329c-18.501-0.261-37.002-0.699-50.869-1.443c-6.935-0.368-12.708-0.82-16.745-1.354c-2.019-0.271-3.601-0.565-4.687-0.879c-0.541-0.153-0.965-0.33-1.256-0.484c-0.302-0.183-0.456-0.324-0.456-0.324l-0.369-0.338l0.656-0.656l0.42,0.287c0,0,0.081,0.055,0.238,0.162c0.204,0.108,0.546,0.26,1.048,0.405c0.996,0.296,2.545,0.598,4.535,0.878c3.986,0.554,9.744,1.046,16.663,1.46C327.011,7.667,345.506,8.23,364,8.616C400.994,9.382,437.999,9.445,437.999,9.445z"/>
+      <polyline fill="none" stroke="#c9a23a" stroke-width="1.4" points="209.416,13.307 219,9.445 228.583,5.584"/>
+    </svg>
+  </div>
+
+  <!-- ============ TABLET: ADDRESS / TELEPHONE / TRANSIT ============ -->
+  <section aria-label="Quick facts">
+    <div class="tablet">
+      <div class="col">
+        <div class="star">✦ ✧ ✦</div>
+        <h3>Address</h3>
+        <p><span class="em">Dīvānkhāneh Museum</span></p>
+        <p>14 Khiyābān-i Chahār Bāgh</p>
+        <p>Isfahan, Iran</p>
+      </div>
+      <div class="axis" aria-hidden="true"></div>
+      <div class="col">
+        <div class="star">✦ ✧ ✦</div>
+        <h3>Transit</h3>
+        <p>Isfahan Metro, <span class="em">Line 1</span></p>
+        <p>Imam Hossein Station</p>
+        <p>Six minutes' walk along the avenue</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ THRESHOLD ============ -->
+  <div class="threshold" aria-hidden="true">
+    <svg viewBox="0 0 437.999 18.893" preserveAspectRatio="xMidYMid meet">
+      <path d="M0,9.445c0,0,37.005-0.063,73.998-0.829c18.495-0.386,36.989-0.949,50.831-1.785c6.919-0.414,12.677-0.906,16.663-1.46c1.99-0.28,3.539-0.582,4.535-0.878c0.502-0.146,0.844-0.297,1.049-0.405c0.157-0.107,0.238-0.162,0.238-0.162l0.42-0.287l0.656,0.656l-0.369,0.338c0,0-0.154,0.142-0.456,0.324c-0.291,0.154-0.714,0.331-1.256,0.484c-1.085,0.314-2.667,0.608-4.686,0.879c-4.037,0.533-9.811,0.985-16.745,1.354c-13.868,0.744-32.369,1.183-50.87,1.443C37.003,9.632,0,9.445,0,9.445z"/>
+      <path d="M437.999,9.445c0,0-37.004,0.187-74.007-0.329c-18.501-0.261-37.002-0.699-50.869-1.443c-6.935-0.368-12.708-0.82-16.745-1.354c-2.019-0.271-3.601-0.565-4.687-0.879c-0.541-0.153-0.965-0.33-1.256-0.484c-0.302-0.183-0.456-0.324-0.456-0.324l-0.369-0.338l0.656-0.656l0.42,0.287c0,0,0.081,0.055,0.238,0.162c0.204,0.108,0.546,0.26,1.048,0.405c0.996,0.296,2.545,0.598,4.535,0.878c3.986,0.554,9.744,1.046,16.663,1.46C327.011,7.667,345.506,8.23,364,8.616C400.994,9.382,437.999,9.445,437.999,9.445z"/>
+      <polyline fill="none" stroke="#c9a23a" stroke-width="1.4" points="209.416,13.307 219,9.445 228.583,5.584"/>
+    </svg>
+  </div>
+
+  <!-- ============ HOURS ============ -->
+  <section aria-labelledby="hours-h">
+    <div class="section-head">
+      <div class="kicker">— I —</div>
+      <h2 id="hours-h">Opening <span class="em">Hours</span></h2>
+      <div class="sub">When the porter unbars the cypress doors</div>
+    </div>
+
+    <div class="hours-frame">
+      <table class="hours-table">
+        <caption>The week, by the museum's reckoning</caption>
+        <tbody>
+          <tr><th>Tuesday</th><td>10:00 — 17:30</td></tr>
+          <tr><th>Wednesday</th><td>10:00 — 17:30</td></tr>
+          <tr><th>Thursday</th><td>10:00 — 17:30</td></tr>
+          <tr><th>Friday</th><td>10:00 — 17:30</td></tr>
+          <tr><th>Saturday</th><td>10:00 — 17:30</td></tr>
+          <tr><th>Sunday</th><td>10:00 — 17:30</td></tr>
+          <tr><th>Monday</th><td class="closed"><em>Closed</em></td></tr>
+        </tbody>
+      </table>
+      <p class="hours-note">The galleries are also closed on the four days of <em>Nowruz</em> — 1 to 4 Farvardīn — when the staff observe the new year at home. The last entry to the manuscript room is at 17:00.</p>
+    </div>
+  </section>
+
+  <!-- ============ THRESHOLD ============ -->
+  <div class="threshold" aria-hidden="true">
+    <svg viewBox="0 0 437.999 18.893" preserveAspectRatio="xMidYMid meet">
+      <path d="M0,9.445c0,0,37.005-0.063,73.998-0.829c18.495-0.386,36.989-0.949,50.831-1.785c6.919-0.414,12.677-0.906,16.663-1.46c1.99-0.28,3.539-0.582,4.535-0.878c0.502-0.146,0.844-0.297,1.049-0.405c0.157-0.107,0.238-0.162,0.238-0.162l0.42-0.287l0.656,0.656l-0.369,0.338c0,0-0.154,0.142-0.456,0.324c-0.291,0.154-0.714,0.331-1.256,0.484c-1.085,0.314-2.667,0.608-4.686,0.879c-4.037,0.533-9.811,0.985-16.745,1.354c-13.868,0.744-32.369,1.183-50.87,1.443C37.003,9.632,0,9.445,0,9.445z"/>
+      <path d="M437.999,9.445c0,0-37.004,0.187-74.007-0.329c-18.501-0.261-37.002-0.699-50.869-1.443c-6.935-0.368-12.708-0.82-16.745-1.354c-2.019-0.271-3.601-0.565-4.687-0.879c-0.541-0.153-0.965-0.33-1.256-0.484c-0.302-0.183-0.456-0.324-0.456-0.324l-0.369-0.338l0.656-0.656l0.42,0.287c0,0,0.081,0.055,0.238,0.162c0.204,0.108,0.546,0.26,1.048,0.405c0.996,0.296,2.545,0.598,4.535,0.878c3.986,0.554,9.744,1.046,16.663,1.46C327.011,7.667,345.506,8.23,364,8.616C400.994,9.382,437.999,9.445,437.999,9.445z"/>
+      <polyline fill="none" stroke="#c9a23a" stroke-width="1.4" points="209.416,13.307 219,9.445 228.583,5.584"/>
+    </svg>
+  </div>
+
+  <!-- ============ ADMISSION ============ -->
+  <section aria-labelledby="admission-h">
+    <div class="section-head">
+      <div class="kicker">— II —</div>
+      <h2 id="admission-h">Admission &amp; <span class="em">Tickets</span></h2>
+      <div class="sub">Reckoned in rials at the porter's lodge</div>
+    </div>
+
+    <div class="admission">
+      <article class="ticket">
+        <span class="corner tl">❀</span><span class="corner tr">❀</span>
+        <span class="corner bl">❀</span><span class="corner br">❀</span>
+        <h3>General</h3>
+        <div class="price">850,000 <span class="unit">rials</span></div>
+        <p>Admits one adult to all permanent galleries and the current exhibition in the Pavilion of Cobalt and Cream.</p>
+      </article>
+      <article class="ticket">
+        <span class="corner tl">❀</span><span class="corner tr">❀</span>
+        <span class="corner bl">❀</span><span class="corner br">❀</span>
+        <h3>Concession</h3>
+        <div class="price">400,000 <span class="unit">rials</span></div>
+        <p>Reduced rate for students upon presentation of a valid card, and for visitors of sixty-five years and above.</p>
+      </article>
+      <article class="ticket">
+        <span class="corner tl">❀</span><span class="corner tr">❀</span>
+        <span class="corner bl">❀</span><span class="corner br">❀</span>
+        <h3>Free</h3>
+        <div class="price"><em>—</em></div>
+        <p>Children under twelve, accompanied by a guardian, and members of the Society of the Dīvānkhāneh, enter without charge.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ THRESHOLD ============ -->
+  <div class="threshold" aria-hidden="true">
+    <svg viewBox="0 0 437.999 18.893" preserveAspectRatio="xMidYMid meet">
+      <path d="M0,9.445c0,0,37.005-0.063,73.998-0.829c18.495-0.386,36.989-0.949,50.831-1.785c6.919-0.414,12.677-0.906,16.663-1.46c1.99-0.28,3.539-0.582,4.535-0.878c0.502-0.146,0.844-0.297,1.049-0.405c0.157-0.107,0.238-0.162,0.238-0.162l0.42-0.287l0.656,0.656l-0.369,0.338c0,0-0.154,0.142-0.456,0.324c-0.291,0.154-0.714,0.331-1.256,0.484c-1.085,0.314-2.667,0.608-4.686,0.879c-4.037,0.533-9.811,0.985-16.745,1.354c-13.868,0.744-32.369,1.183-50.87,1.443C37.003,9.632,0,9.445,0,9.445z"/>
+      <path d="M437.999,9.445c0,0-37.004,0.187-74.007-0.329c-18.501-0.261-37.002-0.699-50.869-1.443c-6.935-0.368-12.708-0.82-16.745-1.354c-2.019-0.271-3.601-0.565-4.687-0.879c-0.541-0.153-0.965-0.33-1.256-0.484c-0.302-0.183-0.456-0.324-0.456-0.324l-0.369-0.338l0.656-0.656l0.42,0.287c0,0,0.081,0.055,0.238,0.162c0.204,0.108,0.546,0.26,1.048,0.405c0.996,0.296,2.545,0.598,4.535,0.878c3.986,0.554,9.744,1.046,16.663,1.46C327.011,7.667,345.506,8.23,364,8.616C400.994,9.382,437.999,9.445,437.999,9.445z"/>
+      <polyline fill="none" stroke="#c9a23a" stroke-width="1.4" points="209.416,13.307 219,9.445 228.583,5.584"/>
+    </svg>
+  </div>
+
+  <!-- ============ DIRECTIONS & ACCESS ============ -->
+  <section aria-labelledby="getting-h">
+    <div class="section-head">
+      <div class="kicker">— III —</div>
+      <h2 id="getting-h">Getting <span class="em">There</span> &amp; Within</h2>
+      <div class="sub">By rail, on foot, and by gentle ramp</div>
+    </div>
+
+    <div class="info-axis">
+      <article class="info-card">
+        <h3>By Metro &amp; on Foot</h3>
+        <p><span class="label">Rail</span>The simplest passage is by the <span class="em">Isfahan Metro, Line 1</span>, alighting at <span class="em">Imam Hossein Station</span>. Take the southern exit and turn onto Khiyābān-i Chahār Bāgh.</p>
+        <p><span class="label">Walking</span>From the station the museum lies six minutes south, on the right side of the avenue, recognisable by its turquoise iwan and pair of cypress trees.</p>
+        <p><span class="label">By Carriage</span>Taxis from Naqsh-i Jahān and the bazaar quarters set down beside the porter's lodge.</p>
+      </article>
+
+      <article class="info-card">
+        <h3>Accessibility</h3>
+        <p><span class="label">Ramped Access</span>The Dīvānkhāneh offers <span class="em">full ramped access</span> to every public gallery, courtyard, and the tea-house. Thresholds have been levelled with stone wedges so that no passage requires steps.</p>
+        <p><span class="label">Wheelchairs</span>Two wheelchairs are kept ready at the <span class="em">porter's lodge</span> at the front gate, available without charge on a first-come basis. A staff attendant may be requested at the same desk.</p>
+        <p><span class="label">Seating</span>Cushioned benches are placed at every other bay, and a quiet rest-room adjoins the manuscript room.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ THRESHOLD ============ -->
+  <div class="threshold" aria-hidden="true">
+    <svg viewBox="0 0 437.999 18.893" preserveAspectRatio="xMidYMid meet">
+      <path d="M0,9.445c0,0,37.005-0.063,73.998-0.829c18.495-0.386,36.989-0.949,50.831-1.785c6.919-0.414,12.677-0.906,16.663-1.46c1.99-0.28,3.539-0.582,4.535-0.878c0.502-0.146,0.844-0.297,1.049-0.405c0.157-0.107,0.238-0.162,0.238-0.162l0.42-0.287l0.656,0.656l-0.369,0.338c0,0-0.154,0.142-0.456,0.324c-0.291,0.154-0.714,0.331-1.256,0.484c-1.085,0.314-2.667,0.608-4.686,0.879c-4.037,0.533-9.811,0.985-16.745,1.354c-13.868,0.744-32.369,1.183-50.87,1.443C37.003,9.632,0,9.445,0,9.445z"/>
+      <path d="M437.999,9.445c0,0-37.004,0.187-74.007-0.329c-18.501-0.261-37.002-0.699-50.869-1.443c-6.935-0.368-12.708-0.82-16.745-1.354c-2.019-0.271-3.601-0.565-4.687-0.879c-0.541-0.153-0.965-0.33-1.256-0.484c-0.302-0.183-0.456-0.324-0.456-0.324l-0.369-0.338l0.656-0.656l0.42,0.287c0,0,0.081,0.055,0.238,0.162c0.204,0.108,0.546,0.26,1.048,0.405c0.996,0.296,2.545,0.598,4.535,0.878c3.986,0.554,9.744,1.046,16.663,1.46C327.011,7.667,345.506,8.23,364,8.616C400.994,9.382,437.999,9.445,437.999,9.445z"/>
+      <polyline fill="none" stroke="#c9a23a" stroke-width="1.4" points="209.416,13.307 219,9.445 228.583,5.584"/>
+    </svg>
+  </div>
+
+  <!-- ============ TEA HOUSE & PHOTOGRAPHY ============ -->
+  <section aria-labelledby="extra-h">
+    <div class="section-head">
+      <div class="kicker">— IV —</div>
+      <h2 id="extra-h">The <span class="em">Tea-house</span> &amp; the Camera</h2>
+      <div class="sub">Two further matters for the considerate visitor</div>
+    </div>
+
+    <div class="info-axis">
+      <article class="info-card">
+        <h3>Qahveh-khāneh-yi Chahār Bāgh</h3>
+        <p>The museum's tea-house, <span class="em">Qahveh-khāneh-yi Chahār Bāgh</span>, opens off the second courtyard beneath a vault of painted muqarnas. It serves Persian tea drawn from a samovar, saffron sherbet, fresh dates, and small pastries from a Yazd kitchen.</p>
+        <p>It keeps the same hours as the galleries and welcomes visitors with or without a museum ticket; a small terrace overlooks the reflecting pool.</p>
+      </article>
+
+      <article class="info-card">
+        <h3>Photography</h3>
+        <p>Visitors may photograph freely <span class="em">without flash</span> in all permanent galleries, the courtyards, the iwan, and the tea-house. Tripods and selfie-poles are kept at the lodge.</p>
+        <p>Photography of any kind is <span class="em">not permitted in the manuscript room</span>, where the light levels are kept low to preserve the gold-illuminated folios. Notebooks and pencils are warmly encouraged in their place.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ NOTICE ============ -->
+  <div class="threshold" aria-hidden="true" style="margin-top:60px">
+    <svg viewBox="0 0 437.999 18.893" preserveAspectRatio="xMidYMid meet">
+      <path d="M0,9.445c0,0,37.005-0.063,73.998-0.829c18.495-0.386,36.989-0.949,50.831-1.785c6.919-0.414,12.677-0.906,16.663-1.46c1.99-0.28,3.539-0.582,4.535-0.878c0.502-0.146,0.844-0.297,1.049-0.405c0.157-0.107,0.238-0.162,0.238-0.162l0.42-0.287l0.656,0.656l-0.369,0.338c0,0-0.154,0.142-0.456,0.324c-0.291,0.154-0.714,0.331-1.256,0.484c-1.085,0.314-2.667,0.608-4.686,0.879c-4.037,0.533-9.811,0.985-16.745,1.354c-13.868,0.744-32.369,1.183-50.87,1.443C37.003,9.632,0,9.445,0,9.445z"/>
+      <path d="M437.999,9.445c0,0-37.004,0.187-74.007-0.329c-18.501-0.261-37.002-0.699-50.869-1.443c-6.935-0.368-12.708-0.82-16.745-1.354c-2.019-0.271-3.601-0.565-4.687-0.879c-0.541-0.153-0.965-0.33-1.256-0.484c-0.302-0.183-0.456-0.324-0.456-0.324l-0.369-0.338l0.656-0.656l0.42,0.287c0,0,0.081,0.055,0.238,0.162c0.204,0.108,0.546,0.26,1.048,0.405c0.996,0.296,2.545,0.598,4.535,0.878c3.986,0.554,9.744,1.046,16.663,1.46C327.011,7.667,345.506,8.23,364,8.616C400.994,9.382,437.999,9.445,437.999,9.445z"/>
+      <polyline fill="none" stroke="#c9a23a" stroke-width="1.4" points="209.416,13.307 219,9.445 228.583,5.584"/>
+    </svg>
+  </div>
+
+  <div class="notice">
+    <span class="seal">— A note for the visitor —</span>
+    Groups of more than ten persons are kindly asked to write ahead, that a docent of the museum may be appointed to accompany them through the galleries. The Dīvānkhāneh is, before all things, <em>a quiet house</em>; we ask that voices be kept low in the manuscript room and the chamber of the qiblah tiles.
+  </div>
+
+</div><!-- /.page -->
+
+<!-- ============ FOOTER ============ -->
+<footer class="site">
+  <div class="filet" aria-hidden="true">
+    <svg viewBox="0 0 437.999 18.893" preserveAspectRatio="xMidYMid meet">
+      <path d="M0,9.445c0,0,37.005-0.063,73.998-0.829c18.495-0.386,36.989-0.949,50.831-1.785c6.919-0.414,12.677-0.906,16.663-1.46c1.99-0.28,3.539-0.582,4.535-0.878c0.502-0.146,0.844-0.297,1.049-0.405c0.157-0.107,0.238-0.162,0.238-0.162l0.42-0.287l0.656,0.656l-0.369,0.338c0,0-0.154,0.142-0.456,0.324c-0.291,0.154-0.714,0.331-1.256,0.484c-1.085,0.314-2.667,0.608-4.686,0.879c-4.037,0.533-9.811,0.985-16.745,1.354c-13.868,0.744-32.369,1.183-50.87,1.443C37.003,9.632,0,9.445,0,9.445z"/>
+      <path d="M437.999,9.445c0,0-37.004,0.187-74.007-0.329c-18.501-0.261-37.002-0.699-50.869-1.443c-6.935-0.368-12.708-0.82-16.745-1.354c-2.019-0.271-3.601-0.565-4.687-0.879c-0.541-0.153-0.965-0.33-1.256-0.484c-0.302-0.183-0.456-0.324-0.456-0.324l-0.369-0.338l0.656-0.656l0.42,0.287c0,0,0.081,0.055,0.238,0.162c0.204,0.108,0.546,0.26,1.048,0.405c0.996,0.296,2.545,0.598,4.535,0.878c3.986,0.554,9.744,1.046,16.663,1.46C327.011,7.667,345.506,8.23,364,8.616C400.994,9.382,437.999,9.445,437.999,9.445z"/>
+      <polyline fill="none" stroke="#f2e5cc" stroke-width="1.4" points="209.416,13.307 219,9.445 228.583,5.584"/>
+    </svg>
+  </div>
+
+  <div class="foot-cols">
+    <div>
+      <h4>Visit</h4>
+      <p>14 Khiyābān-i Chahār Bāgh</p>
+      <p>Isfahan, Iran</p>
+      <p>Tuesday–Sunday · 10:00–17:30</p>
+      <p>Closed Mondays &amp; Nowruz</p>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <p>Telephone +98 (31) 3622 1736</p>
+      <p>Postal: P.O. Box 81465</p>
+      <p>Isfahan 81736-44991</p>
+      <p>correspondence@divankhaneh.ir</p>
+    </div>
+    <div>
+      <h4>Patronage</h4>
+      <p>The Dīvānkhāneh is sustained by the</p>
+      <p>Society of the Friends of Safavid Art</p>
+      <p>and the Bonyād-i Farhang-i Isfahan,</p>
+      <p>with thanks to its founding members.</p>
+    </div>
+  </div>
+
+  <div class="foot-tail">
+    <div class="ornament">✦ ❋ ✦ ❋ ✦</div>
+    <div class="imprint"><em>Imprint of the Dīvānkhāneh, Isfahan · MMXXIV · all matter herein © the Society of the Friends of Safavid Art</em></div>
+  </div>
+
+  <div class="filet" aria-hidden="true">
+    <svg viewBox="0 0 437.999 18.893" preserveAspectRatio="xMidYMid meet">
+      <path d="M0,9.445c0,0,37.005-0.063,73.998-0.829c18.495-0.386,36.989-0.949,50.831-1.785c6.919-0.414,12.677-0.906,16.663-1.46c1.99-0.28,3.539-0.582,4.535-0.878c0.502-0.146,0.844-0.297,1.049-0.405c0.157-0.107,0.238-0.162,0.238-0.162l0.42-0.287l0.656,0.656l-0.369,0.338c0,0-0.154,0.142-0.456,0.324c-0.291,0.154-0.714,0.331-1.256,0.484c-1.085,0.314-2.667,0.608-4.686,0.879c-4.037,0.533-9.811,0.985-16.745,1.354c-13.868,0.744-32.369,1.183-50.87,1.443C37.003,9.632,0,9.445,0,9.445z"/>
+      <path d="M437.999,9.445c0,0-37.004,0.187-74.007-0.329c-18.501-0.261-37.002-0.699-50.869-1.443c-6.935-0.368-12.708-0.82-16.745-1.354c-2.019-0.271-3.601-0.565-4.687-0.879c-0.541-0.153-0.965-0.33-1.256-0.484c-0.302-0.183-0.456-0.324-0.456-0.324l-0.369-0.338l0.656-0.656l0.42,0.287c0,0,0.081,0.055,0.238,0.162c0.204,0.108,0.546,0.26,1.048,0.405c0.996,0.296,2.545,0.598,4.535,0.878c3.986,0.554,9.744,1.046,16.663,1.46C327.011,7.667,345.506,8.23,364,8.616C400.994,9.382,437.999,9.445,437.999,9.445z"/>
+      <polyline fill="none" stroke="#f2e5cc" stroke-width="1.4" points="209.416,13.307 219,9.445 228.583,5.584"/>
+    </svg>
+  </div>
+</footer>
+
+</body>
+</html>

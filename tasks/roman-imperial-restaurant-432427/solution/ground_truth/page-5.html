@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Convivia Privata — Private Banquets · Triclinium Aureum</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  /* ============ BASE ============ */
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    margin: 0;
+    line-height: 1.65;
+    font-size: 17px;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display), serif;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 0;
+  }
+  a { color: var(--primary); text-decoration: none; }
+  p { margin: 0 0 1em; }
+
+  /* ============ GREEK KEY BORDER (CSS) ============ */
+  .greek-key-band {
+    height: 22px;
+    background-image:
+      linear-gradient(90deg, var(--ornament) 50%, transparent 50%),
+      linear-gradient(90deg, var(--ornament) 50%, transparent 50%);
+    background-size: 44px 4px;
+    background-position: 0 4px, 22px 14px;
+    background-repeat: repeat-x;
+    position: relative;
+  }
+  .greek-key-band::before,
+  .greek-key-band::after {
+    content: "";
+    position: absolute; left: 0; right: 0; height: 2px;
+    background: var(--ornament);
+  }
+  .greek-key-band::before { top: 0; }
+  .greek-key-band::after  { bottom: 0; }
+
+  /* Proper SVG Greek key (used as decorative inline) */
+  .meander {
+    display: block;
+    width: 100%;
+    height: 28px;
+    background:
+      repeating-linear-gradient(90deg,
+        var(--ornament) 0 2px, transparent 2px 8px,
+        var(--ornament) 8px 10px, transparent 10px 16px,
+        var(--ornament) 16px 18px, transparent 18px 24px,
+        var(--ornament) 24px 26px, transparent 26px 32px);
+  }
+
+  /* ============ NAVIGATION ============ */
+  nav.frieze {
+    background: var(--bg);
+    border-top: 0;
+    padding: 0;
+  }
+  .frieze-key-top, .frieze-key-bottom {
+    height: 14px;
+    background:
+      linear-gradient(var(--ornament), var(--ornament)) 0 0/100% 1px no-repeat,
+      linear-gradient(var(--ornament), var(--ornament)) 0 100%/100% 1px no-repeat,
+      repeating-linear-gradient(90deg,
+        var(--ornament) 0 3px, transparent 3px 9px,
+        var(--ornament) 9px 12px, transparent 12px 18px) center/auto 6px no-repeat;
+    background-color: var(--bg);
+  }
+  .frieze-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    padding: 22px 40px;
+    flex-wrap: nowrap;
+  }
+  .frieze-side {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex: 1;
+  }
+  .frieze-side.left  { justify-content: flex-end; }
+  .frieze-side.right { justify-content: flex-start; }
+  .frieze-link {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text);
+    position: relative;
+    padding: 6px 2px;
+  }
+  .frieze-link[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px; height: 6px;
+    background: var(--primary);
+    border-radius: 50%;
+  }
+  .frieze-vine {
+    width: 14px; height: 14px;
+    opacity: 0.7;
+    fill: var(--ornament);
+  }
+  .frieze-title {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--text);
+    padding: 0 28px;
+    white-space: nowrap;
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    position: relative;
+    padding: 90px 40px 80px;
+    text-align: center;
+    background: var(--bg);
+    overflow: hidden;
+  }
+  .hero-laurel {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 540px; height: 500px;
+    opacity: 0.18;
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.45em;
+    color: var(--primary);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .hero h1 {
+    font-size: 52px;
+    letter-spacing: 0.22em;
+    color: var(--text);
+    line-height: 1.1;
+    position: relative;
+  }
+  .hero h1 .latin {
+    display: block;
+    font-size: 26px;
+    letter-spacing: 0.32em;
+    color: var(--accent);
+    margin-bottom: 14px;
+    font-style: normal;
+  }
+  .hero-subtitle {
+    margin: 30px auto 0;
+    max-width: 640px;
+    font-size: 18px;
+    font-style: italic;
+    color: var(--text);
+    position: relative;
+  }
+  .hero-rule {
+    width: 220px;
+    height: 1px;
+    background: var(--ornament);
+    margin: 40px auto 0;
+    position: relative;
+  }
+  .hero-rule::before, .hero-rule::after {
+    content: "";
+    position: absolute;
+    top: -3px;
+    width: 7px; height: 7px;
+    background: var(--ornament);
+    transform: rotate(45deg);
+  }
+  .hero-rule::before { left: -10px; }
+  .hero-rule::after  { right: -10px; }
+
+  /* ============ SECTION ============ */
+  section {
+    padding: 70px 40px;
+  }
+  .section-head {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  .section-head h2 {
+    font-size: 30px;
+    letter-spacing: 0.28em;
+    color: var(--text);
+  }
+  .section-head .latin-sub {
+    display: block;
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 16px;
+    letter-spacing: 0.04em;
+    text-transform: none;
+    color: var(--accent);
+    margin-top: 12px;
+  }
+  .section-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin: 0 auto 36px;
+    max-width: 700px;
+  }
+  .section-divider .meander { flex: 1; max-width: 240px; }
+  .section-divider svg.vine {
+    width: 22px; height: 22px;
+    fill: var(--ornament);
+  }
+
+  /* ============ ROOMS / CARDS ============ */
+  .rooms {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  .card {
+    background: var(--surface);
+    position: relative;
+    padding: 0;
+    border: 1px solid rgba(201, 162, 58, 0.4);
+  }
+  .card-frame {
+    padding: 40px 32px 30px;
+    position: relative;
+    border: 6px double var(--ornament);
+    margin: 8px;
+  }
+  .card-frame::before {
+    /* greek key inner top */
+    content: "";
+    display: block;
+    height: 14px;
+    margin: -28px -16px 24px;
+    background:
+      repeating-linear-gradient(90deg,
+        var(--ornament) 0 2px, transparent 2px 6px,
+        var(--ornament) 6px 8px, transparent 8px 14px,
+        var(--ornament) 14px 16px, transparent 16px 22px) center/auto 8px no-repeat,
+      var(--surface);
+    border-top: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+  }
+  .card-laurel {
+    width: 54px; height: 54px;
+    margin: 0 auto 14px;
+    display: block;
+    opacity: 0.9;
+  }
+  .card h3 {
+    font-size: 18px;
+    letter-spacing: 0.24em;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .card .latin-name {
+    display: block;
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.32em;
+    color: var(--primary);
+    text-transform: uppercase;
+    margin-bottom: 22px;
+  }
+  .card .meta {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-size: 10.5px;
+    letter-spacing: 0.28em;
+    color: var(--primary);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    border-top: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+    padding: 8px 0;
+  }
+  .card p {
+    font-size: 15.5px;
+    color: var(--text);
+    text-align: justify;
+    hyphens: auto;
+  }
+  .card-foot {
+    margin-top: 22px;
+    height: 12px;
+    background:
+      repeating-linear-gradient(90deg,
+        var(--ornament) 0 2px, transparent 2px 6px,
+        var(--ornament) 6px 8px, transparent 8px 14px) center/auto 6px no-repeat;
+  }
+
+  /* ============ MENUS ============ */
+  .menus {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  .menu {
+    background: var(--surface);
+    padding: 44px 60px;
+    position: relative;
+    border-top: 2px solid var(--ornament);
+    border-bottom: 2px solid var(--ornament);
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+  .menu::before, .menu::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    height: 8px;
+    background:
+      repeating-linear-gradient(90deg,
+        var(--ornament) 0 2px, transparent 2px 6px,
+        var(--ornament) 6px 8px, transparent 8px 14px) center/auto 6px no-repeat;
+  }
+  .menu::before { top: 6px; }
+  .menu::after { bottom: 6px; }
+
+  .menu-title {
+    text-align: center;
+  }
+  .menu-title h3 {
+    font-size: 16px;
+    letter-spacing: 0.28em;
+    color: var(--text);
+    line-height: 1.3;
+  }
+  .menu-title .occ {
+    display: block;
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 14px;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    color: var(--accent);
+    margin-top: 10px;
+  }
+  .menu-courses {
+    border-left: 1px solid var(--ornament);
+    border-right: 1px solid var(--ornament);
+    padding: 0 30px;
+  }
+  .menu-courses ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    counter-reset: course;
+  }
+  .menu-courses li {
+    counter-increment: course;
+    padding: 8px 0;
+    font-size: 15px;
+    border-bottom: 1px dotted rgba(169, 50, 38, 0.25);
+  }
+  .menu-courses li:last-child { border-bottom: none; }
+  .menu-courses li::before {
+    content: counter(course, upper-roman) ". ";
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    margin-right: 10px;
+  }
+  .menu-courses .latin {
+    font-family: var(--font-display), serif;
+    font-size: 10.5px;
+    letter-spacing: 0.22em;
+    color: var(--primary);
+    text-transform: uppercase;
+    display: block;
+    margin-top: 2px;
+  }
+  .menu-price {
+    text-align: center;
+  }
+  .price-amount {
+    font-family: var(--font-display), serif;
+    font-size: 38px;
+    color: var(--primary);
+    letter-spacing: 0.06em;
+    line-height: 1;
+  }
+  .price-label {
+    display: block;
+    font-family: var(--font-display), serif;
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    color: var(--text);
+    text-transform: uppercase;
+    margin-top: 12px;
+  }
+  .price-min {
+    display: block;
+    margin-top: 18px;
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--accent);
+  }
+
+  /* ============ MUSICIANS NOTE ============ */
+  .musicians {
+    max-width: 760px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 60px 40px 50px;
+    position: relative;
+  }
+  .musicians-seal {
+    width: 110px; height: 110px;
+    margin: 0 auto 24px;
+    display: block;
+    opacity: 0.85;
+  }
+  .musicians h2 {
+    font-size: 22px;
+    letter-spacing: 0.3em;
+    margin-bottom: 8px;
+  }
+  .musicians .latin-sub {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    color: var(--accent);
+    font-size: 15px;
+    margin-bottom: 26px;
+    display: block;
+  }
+  .musicians p {
+    font-size: 16px;
+    line-height: 1.8;
+  }
+  .musicians .price-tag {
+    margin-top: 24px;
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.28em;
+    color: var(--primary);
+    text-transform: uppercase;
+  }
+
+  /* ============ BOOKING ============ */
+  .booking {
+    background: var(--surface);
+    text-align: center;
+    padding: 60px 40px;
+    border-top: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+    margin: 40px auto 0;
+    max-width: 1100px;
+  }
+  .booking h2 {
+    font-size: 20px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+  .booking p { font-size: 15px; }
+  .booking .lines {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin-top: 22px;
+    flex-wrap: wrap;
+  }
+  .booking .line {
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    color: var(--primary);
+    text-transform: uppercase;
+  }
+  .booking .line span {
+    display: block;
+    font-family: var(--font-body), serif;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    color: var(--text);
+    text-transform: none;
+    margin-top: 6px;
+  }
+
+  /* ============ FOOTER ============ */
+  footer {
+    margin-top: 80px;
+  }
+  .footer-frieze {
+    background: var(--primary);
+    color: var(--secondary);
+    padding: 32px 40px;
+    position: relative;
+    text-align: center;
+  }
+  .footer-frieze::before, .footer-frieze::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    height: 3px;
+    background: var(--secondary);
+  }
+  .footer-frieze::before { top: 8px; }
+  .footer-frieze::after  { bottom: 8px; }
+  .footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+  }
+  .footer-rosette {
+    width: 36px; height: 36px;
+    flex-shrink: 0;
+  }
+  .footer-rosette svg { width: 100%; height: 100%; fill: var(--secondary); }
+  .footer-text {
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--secondary);
+  }
+  .footer-text strong {
+    display: block;
+    font-size: 15px;
+    letter-spacing: 0.34em;
+    margin-bottom: 6px;
+  }
+  .footer-band {
+    background: var(--bg);
+    text-align: center;
+    padding: 14px;
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--text);
+    position: relative;
+  }
+  .footer-band .vine {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 18px;
+    width: 14px; height: 14px;
+    fill: var(--ornament);
+  }
+  .footer-corner {
+    position: relative;
+  }
+  .footer-corner::before,
+  .footer-corner::after {
+    content: "❦";
+    color: var(--secondary);
+    position: absolute;
+    bottom: 6px;
+    font-size: 22px;
+  }
+  .footer-corner::before { left: 18px; }
+  .footer-corner::after  { right: 18px; }
+
+  /* small helper */
+  .price-red {
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+    letter-spacing: 0.18em;
+    font-variant: small-caps;
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= NAVIGATION ================= -->
+<nav class="frieze" aria-label="Primary">
+  <div class="frieze-key-top"></div>
+  <div class="frieze-inner">
+    <div class="frieze-side left">
+      <a class="frieze-link" href="page-1.html">Domus</a>
+      <svg class="frieze-vine" viewBox="0 0 200 200" aria-hidden="true"><use href="#vine-leaf"/></svg>
+      <a class="frieze-link" href="page-2.html">Carta</a>
+      <svg class="frieze-vine" viewBox="0 0 200 200" aria-hidden="true"><use href="#vine-leaf"/></svg>
+      <a class="frieze-link" href="page-3.html">Cellarium</a>
+    </div>
+    <div class="frieze-title">Triclinium Aureum</div>
+    <div class="frieze-side right">
+      <a class="frieze-link" href="page-4.html">De Domo</a>
+      <svg class="frieze-vine" viewBox="0 0 200 200" aria-hidden="true"><use href="#vine-leaf"/></svg>
+      <a class="frieze-link" href="page-5.html" aria-current="page">Convivia</a>
+      <svg class="frieze-vine" viewBox="0 0 200 200" aria-hidden="true"><use href="#vine-leaf"/></svg>
+      <a class="frieze-link" href="page-6.html">Ad Nos</a>
+    </div>
+  </div>
+  <div class="frieze-key-bottom"></div>
+</nav>
+
+<!-- vine-leaf symbol -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="vine-leaf" viewBox="0 0 200 200">
+    <path transform="translate(0 -852.36)" d="m43.583 863.37c-1.79 0.03-3.58 0.13-5.34 0.31-7.05 0.74-13.94 2.79-19.16 7.47s-8.2 12-7.69 21c0.51 9 4.3 16.14 10.19 20.34 5.89 4.2 13.31 5.53 21.03 5.19 15.45-0.69 32.83-8 45.81-18.31 1.41-1.12 2.83-2.04 4.25-3.06 4.29 6.68 7.61 14.83 9.34 24.06-7.5-5.07-21.01-10.55-35.66 1.5-22.14 18.21-24.99 12.88-45.34-2.13-2.86 36.07 15.01 54.64 44.66 52.5 0 0-13.95 4.26-3.59 26.41 6.02 12.87 8.41 20.07 6.56 25.19-12.84 2.29-15.77 7.78-5.57 12.66 45.1 9.97 65.67-27.47 68.66-66.04 45.36 0 52.86-31.8 52.5-50.37-8.21 11.07-22.16 11.07-32.87 2.5-9.93-7.95-21.69-16.18-39-1.13-1.74-11.68-5.69-22.13-11.22-30.72 19.36-11.37 38.72-14.46 52.53-10.81 5.48 1.45 9.46 4.09 12.37 6.97-8.97 8.36-11.84 26.38 2.28 27.03 18.92 0.88 21.03-15.45 13.56-27.13-5.45-8.51-16.42-13.23-25.66-16.56-17.51-4.63-39.74-0.57-61.28 12.5-5.17-5.72-11.13-10.22-17.72-12.97-7.08-2.95-17.54-5.73-28.28-6.31-1.79-0.1-3.58-0.13-5.38-0.09zm0.13 10.03c1.52-0.02 3.09 0.03 4.66 0.13 9.41 0.59 19.26 3.06 25.03 5.47 4.63 1.93 9.05 5.23 13.06 9.44-1.42 1.04-2.84 1.98-4.25 3.09-11.3 8.98-27.54 15.6-40.03 16.16-6.25 0.28-11.38-0.91-14.78-3.34-3.41-2.43-5.65-6.04-6.03-12.75-0.38-6.72 1.42-10.3 4.41-12.97 2.98-2.67 7.74-4.37 13.5-4.97 1.44-0.15 2.92-0.23 4.44-0.25z"/>
+  </symbol>
+</svg>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <svg class="hero-laurel" viewBox="0 0 323 296" aria-hidden="true">
+    <g fill="none" stroke="#c9a23a" stroke-width="0.8" opacity="0.85">
+      <ellipse cx="161" cy="148" rx="150" ry="130"/>
+      <ellipse cx="161" cy="148" rx="142" ry="122"/>
+    </g>
+    <g fill="#c9a23a" opacity="0.5">
+      <path d="M30 100 q15 -25 35 -10 q-10 30 -35 10z"/>
+      <path d="M40 140 q10 -28 32 -16 q-7 30 -32 16z"/>
+      <path d="M50 180 q8 -28 30 -18 q-5 30 -30 18z"/>
+      <path d="M70 220 q10 -25 32 -12 q-8 28 -32 12z"/>
+      <path d="M293 100 q-15 -25 -35 -10 q10 30 35 10z"/>
+      <path d="M283 140 q-10 -28 -32 -16 q7 30 32 16z"/>
+      <path d="M273 180 q-8 -28 -30 -18 q5 30 30 18z"/>
+      <path d="M253 220 q-10 -25 -32 -12 q8 28 32 12z"/>
+    </g>
+  </svg>
+  <div class="hero-eyebrow">Pars Quinta · The Fifth Page</div>
+  <h1>
+    <span class="latin">Convivia Privata</span>
+    Private Banquets
+  </h1>
+  <p class="hero-subtitle">
+    Hire the house, in part or in whole, and dine as the consuls dined — reclining on couches dressed in linen, attended by lyre and tibia, beneath frescoes of Pompeian red.
+  </p>
+  <div class="hero-rule"></div>
+</section>
+
+<!-- ================= ROOMS ================= -->
+<section>
+  <div class="section-head">
+    <h2>The Three Rooms</h2>
+    <span class="latin-sub">— Loca Tria Convivii —</span>
+  </div>
+  <div class="section-divider">
+    <span class="meander"></span>
+    <svg class="vine" viewBox="0 0 200 200" aria-hidden="true"><use href="#vine-leaf"/></svg>
+    <span class="meander"></span>
+  </div>
+
+  <div class="rooms">
+    <!-- Room 1 -->
+    <article class="card">
+      <div class="card-frame">
+        <svg class="card-laurel" viewBox="0 0 100 100" aria-hidden="true">
+          <g fill="none" stroke="#c9a23a" stroke-width="1.4">
+            <circle cx="50" cy="50" r="34"/>
+            <path d="M20 50 q5 -14 18 -10 M20 50 q5 14 18 10 M80 50 q-5 -14 -18 -10 M80 50 q-5 14 -18 10"/>
+          </g>
+          <text x="50" y="56" text-anchor="middle" font-family="Cinzel" font-size="14" fill="#a93226" letter-spacing="2">I</text>
+        </svg>
+        <h3>Triclinium Rubrum</h3>
+        <span class="latin-name">The Red Dining Room</span>
+        <div class="meta">XII Lecti · IX Hospites</div>
+        <p>Our innermost room, frescoed throughout in cinnabar and panelled with garlands after the Villa of Mysteries. Twelve couches arrayed about three low tables in the proper Roman fashion, accommodating nine reclining guests. The seat of formal dinners; service is by lamp-light only.</p>
+        <p style="text-align:center;margin-top:18px;"><span class="price-red">Hire · €1,400 per evening</span></p>
+        <div class="card-foot"></div>
+      </div>
+    </article>
+
+    <!-- Room 2 -->
+    <article class="card">
+      <div class="card-frame">
+        <svg class="card-laurel" viewBox="0 0 100 100" aria-hidden="true">
+          <g fill="none" stroke="#c9a23a" stroke-width="1.4">
+            <circle cx="50" cy="50" r="34"/>
+            <path d="M20 50 q5 -14 18 -10 M20 50 q5 14 18 10 M80 50 q-5 -14 -18 -10 M80 50 q-5 14 -18 10"/>
+          </g>
+          <text x="50" y="56" text-anchor="middle" font-family="Cinzel" font-size="14" fill="#a93226" letter-spacing="2">II</text>
+        </svg>
+        <h3>Atrium</h3>
+        <span class="latin-name">The Reception Hall</span>
+        <div class="meta">Stantibus · XL Hospites</div>
+        <p>The marble-paved entrance hall, opened beneath an impluvium of running water and ringed by a colonnade of six fluted columns. Suited to standing receptions for as many as forty guests, with passed gustatio of olives, libum, and oysters, and a long table of cold meats and bread.</p>
+        <p style="text-align:center;margin-top:18px;"><span class="price-red">Hire · €1,800 per evening</span></p>
+        <div class="card-foot"></div>
+      </div>
+    </article>
+
+    <!-- Room 3 -->
+    <article class="card">
+      <div class="card-frame">
+        <svg class="card-laurel" viewBox="0 0 100 100" aria-hidden="true">
+          <g fill="none" stroke="#c9a23a" stroke-width="1.4">
+            <circle cx="50" cy="50" r="34"/>
+            <path d="M20 50 q5 -14 18 -10 M20 50 q5 14 18 10 M80 50 q-5 -14 -18 -10 M80 50 q-5 14 -18 10"/>
+          </g>
+          <text x="50" y="56" text-anchor="middle" font-family="Cinzel" font-size="14" fill="#a93226" letter-spacing="2">III</text>
+        </svg>
+        <h3>Hortus</h3>
+        <span class="latin-name">The Walled Garden</span>
+        <div class="meta">Aestate · XV Hospites</div>
+        <p>A small enclosed garden behind the house, set with a vine pergola, a stone fountain, and a long table of cypress wood. Available from May to September only, by reason of weather; supper is taken beneath the leaves with the city beyond the wall. Fifteen guests, seated in the modern manner.</p>
+        <p style="text-align:center;margin-top:18px;"><span class="price-red">Hire · €1,100 per evening</span></p>
+        <div class="card-foot"></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ================= MENUS ================= -->
+<section style="background:var(--bg);">
+  <div class="section-head">
+    <h2>The Three Banquets</h2>
+    <span class="latin-sub">— Cenae Sollemnes, Set Menus by the Occasion —</span>
+  </div>
+  <div class="section-divider">
+    <span class="meander"></span>
+    <svg class="vine" viewBox="0 0 200 200" aria-hidden="true"><use href="#vine-leaf"/></svg>
+    <span class="meander"></span>
+  </div>
+
+  <div class="menus">
+
+    <!-- Menu 1 -->
+    <article class="menu">
+      <div class="menu-title">
+        <h3>Cena<br>Saturnalia</h3>
+        <span class="occ">For the midwinter feast, candles and roasted meats</span>
+      </div>
+      <div class="menu-courses">
+        <ol>
+          <li>Olives in brine, smoked sturgeon roe with quail eggs <span class="latin">Gustatio</span></li>
+          <li>Stuffed dormice glazed with honey and poppy <span class="latin">Glires Mellis</span></li>
+          <li>Suckling kid roasted with laser and pine nuts <span class="latin">Haedus Assus</span></li>
+          <li>Roast pheasant in damson and date sauce <span class="latin">Phasianus in Salsa</span></li>
+          <li>Honeyed cheesecake of ricotta and fig <span class="latin">Libum cum Ficis</span></li>
+        </ol>
+      </div>
+      <div class="menu-price">
+        <span class="price-amount">€185</span>
+        <span class="price-label">per Hospes</span>
+        <span class="price-min">Minimum 12 guests · wine pairings €70</span>
+      </div>
+    </article>
+
+    <!-- Menu 2 -->
+    <article class="menu">
+      <div class="menu-title">
+        <h3>Cena<br>Nuptialis</h3>
+        <span class="occ">For weddings and betrothals, garlanded and white-robed</span>
+      </div>
+      <div class="menu-courses">
+        <ol>
+          <li>Oysters from Lucrine, sea-urchin with garum and pepper <span class="latin">Ostrea Lucrina</span></li>
+          <li>Cold sow's-belly with mustard and rue <span class="latin">Sumen Gelidum</span></li>
+          <li>Wild boar in the Apician manner, with damsons <span class="latin">Aper Apicianus</span></li>
+          <li>Capon stuffed with truffle, chestnut, and nepeta <span class="latin">Capus Tuberatus</span></li>
+          <li>Spelt cake with Hymettan honey and walnut <span class="latin">Mustaceum Nuptiale</span></li>
+        </ol>
+      </div>
+      <div class="menu-price">
+        <span class="price-amount">€225</span>
+        <span class="price-label">per Hospes</span>
+        <span class="price-min">Minimum 16 guests · Falernian pairing €110</span>
+      </div>
+    </article>
+
+    <!-- Menu 3 -->
+    <article class="menu">
+      <div class="menu-title">
+        <h3>Cena<br>Triumphalis</h3>
+        <span class="occ">The full Imperial table, in the manner of a returning consul</span>
+      </div>
+      <div class="menu-courses">
+        <ol>
+          <li>Sea-urchin, mussels, asparagus tips with garum <span class="latin">Promulsis Triplex</span></li>
+          <li>Flamingo tongues braised with leek (or roast guinea-fowl) <span class="latin">Linguae Phoenicopteri</span></li>
+          <li>Hare hunted in the Sabine hills, with damson and laser <span class="latin">Lepus Sabinus</span></li>
+          <li>Whole peacock dressed in its own plumage <span class="latin">Pavo Imperialis</span></li>
+          <li>Roasted suckling pig stuffed with thrushes and figs <span class="latin">Porcus Troianus</span></li>
+          <li>Cheese, fresh fruits, candied citron, and mulsum <span class="latin">Bellaria et Mulsum</span></li>
+        </ol>
+      </div>
+      <div class="menu-price">
+        <span class="price-amount">€340</span>
+        <span class="price-label">per Hospes</span>
+        <span class="price-min">Minimum 9 guests · Triclinium Rubrum only · pairings €160</span>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ================= MUSICIANS ================= -->
+<section class="musicians">
+  <svg class="musicians-seal" viewBox="0 0 100 100" aria-hidden="true">
+    <g fill="none" stroke="#c9a23a" stroke-width="1.2">
+      <circle cx="50" cy="50" r="42"/>
+      <circle cx="50" cy="50" r="36"/>
+    </g>
+    <g fill="#c9a23a" opacity="0.85">
+      <path d="M50 18 q-6 4 -6 12 q0 6 6 8 q6 -2 6 -8 q0 -8 -6 -12z"/>
+      <path d="M30 38 q-6 6 -4 14 q3 6 8 4 q4 -3 2 -10 q-2 -6 -6 -8z"/>
+      <path d="M70 38 q6 6 4 14 q-3 6 -8 4 q-4 -3 -2 -10 q2 -6 6 -8z"/>
+      <path d="M22 62 q-2 8 4 14 q6 4 10 -1 q2 -5 -3 -10 q-5 -5 -11 -3z"/>
+      <path d="M78 62 q2 8 -4 14 q-6 4 -10 -1 q-2 -5 3 -10 q5 -5 11 -3z"/>
+      <path d="M50 80 q-6 -4 -10 0 q-2 4 4 6 q6 2 10 -2 q-2 -2 -4 -4z"/>
+    </g>
+    <text x="50" y="55" text-anchor="middle" font-family="Cinzel" font-size="9" fill="#a93226" letter-spacing="1">MUSICA</text>
+  </svg>
+  <h2>De Lyra et Tibia</h2>
+  <span class="latin-sub">Musicians of the lyre and the double-flute, by arrangement</span>
+  <p>
+    For any private convivium, the house can summon a small <em>conventus musicorum</em>: a lyre-player and a tibicen of the double-reed pipe, both trained in the Roman modes by Maestro Lupo Cassini of the Conservatorio di Santa Cecilia. They will play during the gustatio and through the secundae mensae, and will fall silent for any toast or address. A third voice — soprano, in Latin — may be added for nuptial and triumphal banquets.
+  </p>
+  <p>
+    A fortnight's notice is required. The musicians take their meal in the kitchen, after the last course is cleared.
+  </p>
+  <div class="price-tag">Duo · €420 per evening &nbsp;·&nbsp; Trio · €620 per evening</div>
+</section>
+
+<!-- ================= BOOKING ================= -->
+<section style="padding-top:0;">
+  <div class="booking">
+    <h2>Ad Reservandum</h2>
+    <p>Private bookings are taken not less than three weeks in advance, with a deposit of one quarter of the room hire. Address all enquiries to the Maestro di Casa, Sig. Annibale Volterra.</p>
+    <div class="lines">
+      <div class="line">Telephonum<span>+39 06 5743 0119</span></div>
+      <div class="line">Per Litteras<span>convivia@tricliniumaureum.it</span></div>
+      <div class="line">In Persona<span>Via di Santa Sabina 14, Aventino · 10–18 daily</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="footer-frieze footer-corner">
+    <div class="footer-inner">
+      <div class="footer-rosette">
+        <svg viewBox="0 0 36 36" aria-hidden="true">
+          <g fill="#c9a23a">
+            <circle cx="18" cy="18" r="3"/>
+            <path d="M18 4 L20 14 L18 16 L16 14 z"/>
+            <path d="M18 32 L20 22 L18 20 L16 22 z"/>
+            <path d="M4 18 L14 16 L16 18 L14 20 z"/>
+            <path d="M32 18 L22 16 L20 18 L22 20 z"/>
+            <path d="M8 8 L15 13 L14 15 L13 14 z"/>
+            <path d="M28 28 L21 23 L22 21 L23 22 z"/>
+            <path d="M28 8 L21 13 L22 15 L23 14 z"/>
+            <path d="M8 28 L15 23 L14 21 L13 22 z"/>
+          </g>
+        </svg>
+      </div>
+      <div class="footer-text">
+        <strong>Triclinium Aureum</strong>
+        Via di Santa Sabina 14 · Aventino · Roma<br>
+        Open Cena · Martis ad Saturni · Hora XX ad Mediam Noctem
+      </div>
+      <div class="footer-rosette">
+        <svg viewBox="0 0 36 36" aria-hidden="true">
+          <g fill="#c9a23a">
+            <circle cx="18" cy="18" r="3"/>
+            <path d="M18 4 L20 14 L18 16 L16 14 z"/>
+            <path d="M18 32 L20 22 L18 20 L16 22 z"/>
+            <path d="M4 18 L14 16 L16 18 L14 20 z"/>
+            <path d="M32 18 L22 16 L20 18 L22 20 z"/>
+            <path d="M8 8 L15 13 L14 15 L13 14 z"/>
+            <path d="M28 28 L21 23 L22 21 L23 22 z"/>
+            <path d="M28 8 L21 13 L22 15 L23 14 z"/>
+            <path d="M8 28 L15 23 L14 21 L13 22 z"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div class="footer-band">
+    Marcus Aurelius Volterra, Proprietor
+    <svg class="vine" viewBox="0 0 200 200" aria-hidden="true"><use href="#vine-leaf"/></svg>
+    Founded MMXIX
+    <svg class="vine" viewBox="0 0 200 200" aria-hidden="true"><use href="#vine-leaf"/></svg>
+    Senatus Populusque Romanus
+  </div>
+</footer>
+
+</body>
+</html>

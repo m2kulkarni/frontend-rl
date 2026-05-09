@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Visit — Hours, Tickets, and Access</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  :root {
+    --cobalt: #1e3a5f;
+    --gold: #c9a23a;
+    --ink: #0a0a0a;
+    --parchment: #f4ecd8;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    margin: 0;
+    line-height: 1.7;
+    font-size: 17px;
+  }
+
+  /* ===== Masthead ===== */
+  .masthead {
+    padding: 48px 64px 16px;
+    text-align: center;
+    border-bottom: none;
+  }
+
+  .masthead .gold-rule {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    margin: 0 auto 28px;
+    max-width: 1100px;
+  }
+  .masthead .gold-rule::before,
+  .masthead .gold-rule::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--gold);
+  }
+  .vine-glyph {
+    width: 22px;
+    height: 22px;
+    flex: 0 0 auto;
+  }
+  .vine-glyph svg {
+    width: 100%;
+    height: 100%;
+    fill: var(--gold);
+  }
+
+  .masthead h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 38px;
+    letter-spacing: 0.08em;
+    color: var(--ink);
+    margin: 0 0 6px;
+    font-variant: small-caps;
+  }
+  .masthead .subtitle {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    color: var(--text-emphasis);
+    font-size: 15px;
+    letter-spacing: 0.04em;
+    margin: 0;
+  }
+
+  /* ===== Arcade Navigation ===== */
+  nav.arcade {
+    margin: 28px auto 0;
+    max-width: 1200px;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    background: var(--parchment);
+  }
+  nav.arcade a {
+    position: relative;
+    text-align: center;
+    padding: 28px 8px 14px;
+    text-decoration: none;
+    color: var(--ink);
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.12em;
+    font-size: 12.5px;
+    border-right: 1px solid var(--ink);
+    overflow: hidden;
+  }
+  nav.arcade a:last-child { border-right: none; }
+  nav.arcade a::before {
+    content: "";
+    position: absolute;
+    top: 6px; left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 36px;
+    border: 1px solid var(--ink);
+    border-bottom: none;
+    border-radius: 50% 50% 0 0 / 80% 80% 0 0;
+    clip-path: polygon(0 100%, 0 40%, 50% 0, 100% 40%, 100% 100%);
+    background: transparent;
+    z-index: 0;
+  }
+  nav.arcade a span {
+    position: relative;
+    z-index: 1;
+    display: block;
+    margin-top: 14px;
+  }
+  nav.arcade a[aria-current="page"] {
+    background: var(--cobalt);
+    color: var(--parchment);
+  }
+  nav.arcade a[aria-current="page"]::before {
+    background: var(--cobalt);
+    border-color: var(--gold);
+  }
+  nav.arcade a:hover:not([aria-current="page"]) {
+    color: var(--cobalt);
+  }
+
+  /* ===== Hero ===== */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 72px 64px 56px;
+    align-items: center;
+  }
+  .hero-arch {
+    position: relative;
+    aspect-ratio: 5/6;
+    max-height: 560px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  .hero-arch svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .hero-arch .inner {
+    position: absolute;
+    inset: 8% 16% 4% 16%;
+    background:
+      linear-gradient(180deg, rgba(30,58,95,0.92), rgba(30,58,95,0.78)),
+      url("svg/quatrefoil-in-square.svg");
+    background-size: cover, 180px 180px;
+    clip-path: polygon(0% 100%, 0% 38%, 50% 0%, 100% 38%, 100% 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 32px 24px 28px;
+    color: var(--parchment);
+    text-align: center;
+  }
+  .hero-arch .inner .seal {
+    position: absolute;
+    top: 22%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 56%;
+    aspect-ratio: 1/1;
+    opacity: 0.92;
+  }
+  .hero-arch .inner .seal svg {
+    width: 100%;
+    height: 100%;
+  }
+  .hero-arch .inner .seal-caption {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    color: var(--gold);
+    font-size: 13px;
+    margin: 0;
+  }
+
+  .hero-text .eyebrow {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.22em;
+    color: var(--gold);
+    font-size: 13px;
+    margin: 0 0 14px;
+  }
+  .hero-text h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 1.1;
+    color: var(--ink);
+    margin: 0 0 24px;
+    letter-spacing: 0.01em;
+  }
+  .hero-text h2 em {
+    font-style: italic;
+    color: var(--cobalt);
+  }
+  .hero-text p {
+    max-width: 18em;
+    margin: 0 0 18px;
+  }
+  .hero-text .dropcap::first-letter {
+    font-family: var(--font-display), serif;
+    font-size: 56px;
+    float: left;
+    line-height: 0.9;
+    padding: 6px 10px 0 0;
+    color: var(--cobalt);
+    font-weight: 500;
+  }
+
+  /* ===== Section divider ===== */
+  .divider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 22px;
+    margin: 16px auto 40px;
+    max-width: 1100px;
+    padding: 0 64px;
+  }
+  .divider::before,
+  .divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--ink);
+  }
+  .divider .glyph {
+    width: 44px;
+    height: 44px;
+  }
+  .divider .glyph svg { width: 100%; height: 100%; }
+
+  /* ===== Information panels ===== */
+  .panels {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 64px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 36px;
+  }
+  .panel {
+    position: relative;
+    border: 1.5px solid var(--ink);
+    background: var(--parchment);
+    padding: 64px 32px 40px;
+    text-align: center;
+    clip-path: polygon(0% 100%, 0% 22%, 50% 0%, 100% 22%, 100% 100%);
+  }
+  .panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("svg/quatrefoil-in-square.svg");
+    background-size: 220px 220px;
+    opacity: 0.06;
+    pointer-events: none;
+    clip-path: polygon(0% 100%, 0% 22%, 50% 0%, 100% 22%, 100% 100%);
+  }
+  .panel > * { position: relative; }
+  .panel .crown {
+    width: 26px;
+    height: 26px;
+    margin: 0 auto 12px;
+    color: var(--gold);
+  }
+  .panel .crown svg { width: 100%; height: 100%; fill: var(--gold); }
+  .panel h3 {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.16em;
+    color: var(--cobalt);
+    font-size: 17px;
+    margin: 0 0 6px;
+    font-weight: 500;
+  }
+  .panel .catalog {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    color: var(--gold);
+    letter-spacing: 0.06em;
+    font-size: 13px;
+    margin: 0 0 18px;
+  }
+  .panel dl {
+    margin: 0;
+    text-align: left;
+    max-width: 14em;
+    margin-inline: auto;
+    font-size: 15px;
+  }
+  .panel dt {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.08em;
+    color: var(--ink);
+    margin-top: 10px;
+    font-size: 13px;
+  }
+  .panel dt:first-child { margin-top: 0; }
+  .panel dd {
+    margin: 0 0 4px;
+    color: var(--text);
+  }
+  .panel .price-line {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dotted rgba(10,10,10,0.3);
+    padding: 4px 0;
+  }
+  .panel .price-line .amt {
+    color: var(--cobalt);
+    font-weight: 500;
+  }
+
+  /* ===== Body sections ===== */
+  .body-section {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 64px;
+  }
+
+  .two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 72px;
+    margin-top: 72px;
+  }
+  .two-column h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 30px;
+    color: var(--ink);
+    letter-spacing: 0.02em;
+    margin: 0 0 20px;
+    border-bottom: 1px solid var(--gold);
+    padding-bottom: 10px;
+    font-variant: small-caps;
+  }
+  .two-column p {
+    max-width: 18em;
+    margin: 0 0 16px;
+  }
+  .two-column .narrow { max-width: 18em; }
+
+  .access-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 16px;
+    max-width: 18em;
+  }
+  .access-list li {
+    padding: 10px 0 10px 28px;
+    border-bottom: 1px solid rgba(10,10,10,0.12);
+    position: relative;
+    font-size: 15.5px;
+  }
+  .access-list li::before {
+    content: "✠";
+    position: absolute;
+    left: 0;
+    top: 8px;
+    color: var(--gold);
+    font-size: 14px;
+  }
+  .access-list li.no::before { content: "✕"; color: var(--cobalt); }
+
+  /* ===== Booking strip ===== */
+  .booking {
+    margin: 80px auto 0;
+    max-width: 1100px;
+    padding: 40px 64px;
+    text-align: center;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    position: relative;
+    background: var(--parchment);
+  }
+  .booking::before, .booking::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    height: 1px;
+    background: var(--gold);
+  }
+  .booking::before { top: 4px; }
+  .booking::after { bottom: 4px; }
+  .booking .eyebrow {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.22em;
+    color: var(--gold);
+    font-size: 12px;
+    margin: 0 0 10px;
+  }
+  .booking h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 26px;
+    color: var(--ink);
+    margin: 0 0 12px;
+    font-variant: small-caps;
+    letter-spacing: 0.04em;
+  }
+  .booking p {
+    margin: 0 auto 8px;
+    max-width: 30em;
+  }
+  .booking a.email {
+    color: var(--cobalt);
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    border-bottom: 1px solid var(--gold);
+  }
+
+  /* ===== Footer ===== */
+  footer {
+    margin-top: 80px;
+    background: var(--cobalt);
+    color: var(--parchment);
+  }
+  footer .arcade-band {
+    height: 56px;
+    border-bottom: 1px solid rgba(201,162,58,0.4);
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  footer .arcade-band .mini-arch {
+    border-right: 1px solid rgba(201,162,58,0.5);
+    position: relative;
+  }
+  footer .arcade-band .mini-arch:last-child { border-right: none; }
+  footer .arcade-band .mini-arch::before {
+    content: "";
+    position: absolute;
+    inset: 10px 14px 0;
+    border: 1px solid var(--gold);
+    border-bottom: none;
+    clip-path: polygon(0% 100%, 0% 35%, 50% 0%, 100% 35%, 100% 100%);
+  }
+  footer .footer-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 48px 64px 32px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px;
+    text-align: center;
+  }
+  footer h4 {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    font-size: 13px;
+    color: var(--gold);
+    margin: 0 0 14px;
+    font-weight: 500;
+  }
+  footer p {
+    margin: 0 0 4px;
+    color: var(--parchment);
+    font-size: 14.5px;
+    line-height: 1.6;
+  }
+  footer .acknowledgement {
+    font-style: italic;
+    color: rgba(244,236,216,0.85);
+    font-size: 13px;
+  }
+  footer .fleur-rule {
+    border-top: 1px solid rgba(201,162,58,0.3);
+    text-align: center;
+    padding: 14px 0 22px;
+    font-size: 14px;
+    color: var(--gold);
+    letter-spacing: 0.6em;
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="gold-rule">
+    <span class="vine-glyph" aria-hidden="true">
+      <svg viewBox="0 0 200 200"><path d="m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187z" transform="translate(0 -852.36)"/></svg>
+    </span>
+    <h1>The Cloisters of Saint-Évroult</h1>
+    <span class="vine-glyph" aria-hidden="true">
+      <svg viewBox="0 0 200 200"><path d="m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062z" transform="translate(0 -852.36)"/></svg>
+    </span>
+  </div>
+  <p class="subtitle">Museum of Medieval Art &amp; Architectural Fragments — La Ferté-en-Ouche</p>
+</header>
+
+<nav class="arcade" aria-label="Primary">
+  <a href="page-1.html"><span>Cloister</span></a>
+  <a href="page-2.html"><span>Collection</span></a>
+  <a href="page-3.html"><span>Exhibition</span></a>
+  <a href="page-4.html"><span>History</span></a>
+  <a href="page-5.html" aria-current="page"><span>Visit</span></a>
+  <a href="page-6.html"><span>Library</span></a>
+  <a href="page-1.html#contact"><span>Contact</span></a>
+</nav>
+
+<section class="hero">
+  <div class="hero-arch" aria-hidden="true">
+    <svg viewBox="0 0 500 550" preserveAspectRatio="xMidYMid meet">
+      <g transform="translate(-147.13944,-244.9375)">
+        <g style="stroke:#0a0a0a;stroke-width:3.125;fill:none;stroke-linecap:round">
+          <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+          <path d="m 250,430.58 24.75248,58.41585"/>
+          <path d="m 347.0297,342.46119 41.58416,23.76238 0.9901,35.64356"/>
+          <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+        </g>
+        <g style="stroke:#0a0a0a;stroke-width:3.125;fill:none;stroke-linecap:round" transform="matrix(-1,0,0,1,777.88071,-0.2972181)">
+          <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+          <path d="m 250,430.58 24.75248,58.41585"/>
+          <path d="m 347.0297,342.46119 41.58416,23.76238 0.9901,35.64356"/>
+          <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+        </g>
+      </g>
+    </svg>
+    <div class="inner">
+      <div class="seal" aria-hidden="true">
+        <svg viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid meet">
+          <circle cx="500" cy="500" r="488" fill="#1e3a5f" stroke="#c9a23a" stroke-width="6"/>
+          <circle cx="500" cy="500" r="380" fill="none" stroke="#c9a23a" stroke-width="3"/>
+          <circle cx="500" cy="500" r="280" fill="none" stroke="#c9a23a" stroke-width="2"/>
+          <circle cx="500" cy="500" r="180" fill="none" stroke="#c9a23a" stroke-width="2"/>
+          <circle cx="500" cy="500" r="60" fill="#c9a23a"/>
+          <g stroke="#c9a23a" stroke-width="2" fill="none">
+            <line x1="500" y1="120" x2="500" y2="880"/>
+            <line x1="120" y1="500" x2="880" y2="500"/>
+            <line x1="231" y1="231" x2="769" y2="769"/>
+            <line x1="769" y1="231" x2="231" y2="769"/>
+          </g>
+          <g fill="#c9a23a">
+            <circle cx="500" cy="220" r="28"/>
+            <circle cx="500" cy="780" r="28"/>
+            <circle cx="220" cy="500" r="28"/>
+            <circle cx="780" cy="500" r="28"/>
+            <circle cx="302" cy="302" r="22"/>
+            <circle cx="698" cy="698" r="22"/>
+            <circle cx="698" cy="302" r="22"/>
+            <circle cx="302" cy="698" r="22"/>
+          </g>
+        </svg>
+      </div>
+      <p class="seal-caption">Visit · Hours · Access</p>
+    </div>
+  </div>
+
+  <div class="hero-text">
+    <p class="eyebrow">Practical Information</p>
+    <h2>Plan your <em>visit</em> to the priory</h2>
+    <p class="dropcap">The cloister-wing of the former Benedictine priory of Saint-Évroult opens its doors six days a week to receive visitors among the surviving capitals, fragments, and stained-glass panels assembled there since 1894. The information below — hours, ticketing, travel by rail, parking, and accessibility — is intended to make your visit straightforward.</p>
+    <p>Reservations are required only for guided tours and groups of ten persons or more. Individual visitors may purchase tickets at the porter's lodge upon arrival. Last admission is thirty minutes before closing.</p>
+  </div>
+</section>
+
+<div class="divider" aria-hidden="true">
+  <span class="glyph">
+    <svg viewBox="0 0 39 40" xmlns="http://www.w3.org/2000/svg"><circle cx="19.5" cy="20" r="6" fill="none" stroke="#0a0a0a" stroke-width="1.2"/><path d="M19.5 6 L24 14 L19.5 20 L15 14 Z" fill="#c9a23a" stroke="#0a0a0a" stroke-width="0.8"/><path d="M19.5 34 L24 26 L19.5 20 L15 26 Z" fill="none" stroke="#0a0a0a" stroke-width="0.8"/><circle cx="19.5" cy="20" r="2" fill="#1e3a5f"/></svg>
+  </span>
+</div>
+
+<section class="panels" aria-label="Hours, tickets, and location">
+
+  <article class="panel">
+    <div class="crown" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M12 2 L14 8 L20 8 L15 12 L17 18 L12 14 L7 18 L9 12 L4 8 L10 8 Z"/></svg>
+    </div>
+    <h3>Opening Hours</h3>
+    <p class="catalog">No. I — Horarium</p>
+    <dl>
+      <dt>Tuesday — Sunday</dt>
+      <dd>10h00 — 17h30</dd>
+      <dt>Monday</dt>
+      <dd>Closed</dd>
+      <dt>Annual closures</dt>
+      <dd>1 January</dd>
+      <dd>1 May</dd>
+      <dd>25 December</dd>
+      <dt>Last admission</dt>
+      <dd>17h00</dd>
+    </dl>
+  </article>
+
+  <article class="panel">
+    <div class="crown" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M12 2 L14 8 L20 8 L15 12 L17 18 L12 14 L7 18 L9 12 L4 8 L10 8 Z"/></svg>
+    </div>
+    <h3>Admission</h3>
+    <p class="catalog">No. II — Tariffa</p>
+    <dl>
+      <div class="price-line"><dt>General</dt><dd class="amt">9 €</dd></div>
+      <div class="price-line"><dt>Reduced</dt><dd class="amt">6 €</dd></div>
+      <div class="price-line"><dt>Under 18</dt><dd class="amt">Free</dd></div>
+      <div class="price-line"><dt>Students &lt; 26</dt><dd class="amt">Free</dd></div>
+      <div class="price-line"><dt>1st Sunday / month</dt><dd class="amt">Free</dd></div>
+    </dl>
+  </article>
+
+  <article class="panel">
+    <div class="crown" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M12 2 L14 8 L20 8 L15 12 L17 18 L12 14 L7 18 L9 12 L4 8 L10 8 Z"/></svg>
+    </div>
+    <h3>The Priory</h3>
+    <p class="catalog">No. III — Locus</p>
+    <dl>
+      <dt>Address</dt>
+      <dd>12 rue Saint-Évroult</dd>
+      <dd>61550 La Ferté-en-Ouche</dd>
+      <dd>Normandie, France</dd>
+      <dt>Telephone</dt>
+      <dd>+33 (0)2 33 34 56 78</dd>
+      <dt>Reception</dt>
+      <dd>Porter's lodge, west walk</dd>
+    </dl>
+  </article>
+
+</section>
+
+<section class="body-section">
+  <div class="two-column">
+    <div>
+      <h2>Reaching the Priory</h2>
+      <p>The most direct approach is by rail. Trains from <strong>Paris-Montparnasse</strong> reach the <em>Gare de L'Aigle</em> in approximately one hour and forty minutes, with onward connections via the regional line to L'Aigle station, the nearest stop to the priory.</p>
+      <p>From the Gare de L'Aigle, the museum is a fifteen-minute taxi journey east along the D930 toward La Ferté-en-Ouche; a seasonal shuttle (May to October, weekends only) departs the station forecourt at 10h15 and 14h15.</p>
+      <p>By road from Paris, take the A13 to Évreux, then the N13 and D930 — approximately two hours' drive. <strong>Free public parking</strong> is available at the place de l'Église, two minutes' walk from the porter's lodge. Coach parking is signposted along rue de la Chapelle.</p>
+    </div>
+
+    <div>
+      <h2>Access &amp; Mobility</h2>
+      <p class="narrow">The medieval fabric of the priory imposes certain limits on accessibility. The principal galleries and the historic <em>chapter house</em> remain open to all visitors without obstacle. Where stairs cannot be avoided, attendants are present.</p>
+      <ul class="access-list">
+        <li>The south walk of the cloister is fully step-free and paved in flat limestone.</li>
+        <li>The chapter house and lapidary gallery are accessible at ground level.</li>
+        <li>Wheelchairs are available on loan from the porter's lodge, without charge.</li>
+        <li>An accessible WC is located adjacent to the western entrance.</li>
+        <li class="no">The upper dorter is accessible only by a turning stair of forty-two steps.</li>
+        <li class="no">The bell-tower platform is closed to visitors with reduced mobility.</li>
+      </ul>
+      <p class="narrow">Service animals are welcome throughout. Large-print guides in French and English are available at reception, as are induction loops for guided tours.</p>
+    </div>
+  </div>
+</section>
+
+<section class="booking">
+  <p class="eyebrow">Groups &amp; Scholars</p>
+  <h3>Reservations for Group Visits</h3>
+  <p>Parties of ten or more, schools, and academic seminars must reserve in advance. Please indicate the date, the size of the party, the language of the tour, and any access requirements when writing to the curatorial office.</p>
+  <p style="margin-top:18px">Write to <a class="email" href="mailto:reservation@cloitres-st-evroult.fr">reservation@cloitres-st-evroult.fr</a></p>
+</section>
+
+<footer>
+  <div class="arcade-band" aria-hidden="true">
+    <span class="mini-arch"></span><span class="mini-arch"></span><span class="mini-arch"></span>
+    <span class="mini-arch"></span><span class="mini-arch"></span><span class="mini-arch"></span>
+    <span class="mini-arch"></span><span class="mini-arch"></span><span class="mini-arch"></span>
+  </div>
+  <div class="footer-grid">
+    <div>
+      <h4>Visiting Hours</h4>
+      <p>Tuesday — Sunday</p>
+      <p>10h00 — 17h30</p>
+      <p>Closed Mondays</p>
+    </div>
+    <div>
+      <h4>The Priory</h4>
+      <p>12 rue Saint-Évroult</p>
+      <p>61550 La Ferté-en-Ouche</p>
+      <p>Normandie</p>
+    </div>
+    <div>
+      <h4>Patronage</h4>
+      <p class="acknowledgement">With the support of the Direction régionale des affaires culturelles de Normandie.</p>
+    </div>
+  </div>
+  <div class="fleur-rule" aria-hidden="true">⚜ ⚜ ⚜ ⚜ ⚜ ⚜ ⚜ ⚜ ⚜</div>
+</footer>
+
+</body>
+</html>

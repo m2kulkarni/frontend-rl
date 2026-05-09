@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Reservations and Private Zashiki — Kiritsubo</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), serif;
+    margin: 0;
+    line-height: 1.75;
+    position: relative;
+    min-height: 100vh;
+  }
+
+  /* ===== Top frame: kamon at upper-left, nav at upper-right ===== */
+  .top-frame {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    padding: 38px 64px 0 64px;
+    min-height: 110px;
+  }
+  .house-mark {
+    width: 64px;
+    height: 64px;
+    opacity: 0.85;
+  }
+  .house-mark svg { width: 100%; height: 100%; display: block; }
+
+  nav.primary {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    padding-top: 12px;
+  }
+  nav.primary a {
+    font-family: var(--font-body), serif;
+    text-transform: uppercase;
+    font-variant: small-caps;
+    letter-spacing: 0.22em;
+    font-size: 11px;
+    color: var(--text);
+    text-decoration: none;
+    padding: 0 18px;
+    border-right: 1px solid rgba(12,12,12,0.45);
+    line-height: 1;
+  }
+  nav.primary a:last-child { border-right: none; padding-right: 0; }
+  nav.primary a:first-child { padding-left: 0; }
+  nav.primary a[aria-current="page"] {
+    color: var(--secondary);
+    font-weight: 600;
+  }
+
+  /* ===== Hero / page heading ===== */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 60px 64px 40px 64px;
+    position: relative;
+    min-height: 380px;
+  }
+  .hero-text {
+    grid-column: 2;
+    padding-left: 40px;
+    border-left: 1px solid rgba(12,12,12,0.35);
+  }
+  .eyebrow {
+    font-family: var(--font-body), serif;
+    text-transform: uppercase;
+    font-variant: small-caps;
+    letter-spacing: 0.35em;
+    font-size: 11px;
+    color: var(--primary);
+    margin-bottom: 22px;
+  }
+  h1.title {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 58px;
+    line-height: 1.05;
+    margin: 0 0 18px 0;
+    color: var(--text);
+  }
+  h1.title .accent {
+    color: var(--secondary);
+  }
+  .kanji-stack {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    line-height: 1.5;
+    color: var(--text);
+    letter-spacing: 0.1em;
+    margin-bottom: 24px;
+  }
+  .lede {
+    font-size: 15px;
+    max-width: 46ch;
+    color: var(--text);
+  }
+
+  /* hero seigaiha framing — small, in lower-left negative space corner */
+  .hero-seigaiha {
+    position: absolute;
+    left: 64px;
+    bottom: -20px;
+    width: 220px;
+    height: 220px;
+    opacity: 0.10;
+    pointer-events: none;
+  }
+  .hero-seigaiha svg { width: 100%; height: 100%; display: block; }
+
+  /* ===== Section divider (sayagata fragment) ===== */
+  .sayagata-rule {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 28px;
+    padding: 0 64px;
+    margin: 30px 0 50px 0;
+  }
+  .sayagata-rule::before,
+  .sayagata-rule::after {
+    content: "";
+    height: 1px;
+    background: rgba(12,12,12,0.55);
+  }
+  .sayagata-rule .glyph {
+    width: 46px; height: 46px; opacity: 0.7;
+  }
+  .sayagata-rule .glyph svg { width: 100%; height: 100%; display: block; }
+
+  /* ===== Policy section ===== */
+  .policy {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 80px;
+    padding: 0 64px;
+    margin-bottom: 90px;
+  }
+  .policy-aside {
+    grid-column: 1;
+    padding-top: 6px;
+  }
+  .policy-aside .label {
+    font-family: var(--font-body), serif;
+    text-transform: uppercase;
+    font-variant: small-caps;
+    letter-spacing: 0.3em;
+    font-size: 10px;
+    color: var(--primary);
+    margin-bottom: 12px;
+  }
+  .policy-aside .number {
+    font-family: var(--font-display), serif;
+    font-size: 38px;
+    line-height: 1;
+    color: var(--secondary);
+    margin-bottom: 14px;
+    letter-spacing: 0.04em;
+  }
+  .policy-aside p {
+    font-size: 13px;
+    margin: 0;
+    color: var(--text);
+  }
+  .policy-body {
+    grid-column: 2;
+    max-width: 62ch;
+  }
+  .policy-body h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 28px;
+    margin: 0 0 22px 0;
+    line-height: 1.2;
+  }
+  .policy-body p {
+    margin: 0 0 18px 0;
+    font-size: 15px;
+  }
+  .policy-body em.term {
+    font-style: normal;
+    color: var(--secondary);
+    font-weight: 600;
+  }
+
+  /* ===== Zashiki cards ===== */
+  .zashiki-section {
+    padding: 0 64px;
+    margin-bottom: 80px;
+    position: relative;
+  }
+  .zashiki-section::before {
+    /* asanoha low-opacity tile band as structural ground for this section's left margin */
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 70px;
+    width: 40px;
+    height: 480px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='503' height='501' viewBox='0 0 503 501'><defs><symbol id='g' viewBox='-50.5 -50.5 101 101'><line x1='0' y1='50' x2='0' y2='-15' stroke='%230c0c0c' fill='none'/><line x1='0' y1='50' x2='-50' y2='15' stroke='%230c0c0c' fill='none'/><line x1='0' y1='50' x2='50' y2='15' stroke='%230c0c0c' fill='none'/><line x1='0' y1='50' x2='-50' y2='-50' stroke='%230c0c0c' fill='none'/><line x1='0' y1='50' x2='50' y2='-50' stroke='%230c0c0c' fill='none'/></symbol></defs><use href='%23g' width='101' height='101' x='-50.5' y='-50.5' transform='translate(50.5 50.5)'/><use href='%23g' width='101' height='101' x='-50.5' y='-50.5' transform='translate(151 50.5)'/><use href='%23g' width='101' height='101' x='-50.5' y='-50.5' transform='translate(251.5 50.5)'/><use href='%23g' width='101' height='101' x='-50.5' y='-50.5' transform='translate(50.5 150.5)'/></svg>");
+    background-size: 80px;
+    opacity: 0.10;
+    pointer-events: none;
+  }
+
+  .section-heading {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 36px;
+  }
+  .section-heading h2 {
+    grid-column: 2;
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 36px;
+    margin: 0;
+    line-height: 1.15;
+  }
+  .section-heading .sub {
+    grid-column: 2;
+    font-size: 13px;
+    color: var(--primary);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-variant: small-caps;
+    margin-top: 8px;
+  }
+
+  .rooms {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+    margin-top: 20px;
+  }
+  .room {
+    background: var(--surface);
+    padding: 36px 40px 56px 40px;
+    position: relative;
+    border-top: 1px solid rgba(12,12,12,0.7);
+  }
+  .room.feature {
+    grid-column: span 2;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 50px;
+    align-items: start;
+  }
+  .room .room-name-jp {
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    color: var(--primary);
+    letter-spacing: 0.2em;
+    margin-bottom: 6px;
+  }
+  .room h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 26px;
+    margin: 0 0 4px 0;
+    line-height: 1.15;
+  }
+  .room h3 .accent { color: var(--accent); }
+  .room .meta {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-variant: small-caps;
+    color: var(--text);
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(12,12,12,0.18);
+  }
+  .room .meta span + span::before {
+    content: "·";
+    margin: 0 8px;
+    color: var(--accent);
+  }
+  .room p {
+    font-size: 14px;
+    margin: 0 0 12px 0;
+  }
+  .room .seats {
+    font-family: var(--font-display), serif;
+    font-size: 42px;
+    color: var(--primary);
+    line-height: 1;
+    margin-top: 6px;
+  }
+  .room .seats small {
+    font-family: var(--font-body), serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--text);
+    display: block;
+    margin-top: 6px;
+  }
+  /* umebachi corner mon */
+  .room::after {
+    content: "";
+    position: absolute;
+    right: 18px;
+    bottom: 18px;
+    width: 24px;
+    height: 24px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 688 688'><circle cx='256' cy='510' r='100' fill='none' stroke='%230c0c0c' stroke-width='14'/><circle cx='470' cy='510' r='100' fill='none' stroke='%230c0c0c' stroke-width='14'/><circle cx='363' cy='180' r='100' fill='none' stroke='%230c0c0c' stroke-width='14'/><circle cx='363' cy='363' r='52' fill='%230c0c0c'/></svg>");
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.55;
+  }
+
+  /* ===== Telephone block ===== */
+  .telephone {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    padding: 70px 64px 90px 64px;
+    align-items: center;
+  }
+  .tel-card {
+    background: var(--surface);
+    border-top: 1px solid rgba(12,12,12,0.7);
+    padding: 40px 44px 50px 44px;
+    position: relative;
+  }
+  .tel-card .label {
+    font-family: var(--font-body), serif;
+    text-transform: uppercase;
+    font-variant: small-caps;
+    letter-spacing: 0.3em;
+    font-size: 10px;
+    color: var(--primary);
+    margin-bottom: 14px;
+  }
+  .tel-card .number {
+    font-family: var(--font-display), serif;
+    font-size: 44px;
+    color: var(--text);
+    letter-spacing: 0.04em;
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+  .tel-card .number .accent { color: var(--secondary); }
+  .tel-card .hours {
+    font-size: 13px;
+    margin-top: 18px;
+    color: var(--text);
+  }
+  .tel-card::after {
+    content: "";
+    position: absolute;
+    right: 18px; bottom: 18px;
+    width: 24px; height: 24px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 688 688'><circle cx='256' cy='510' r='100' fill='none' stroke='%230c0c0c' stroke-width='14'/><circle cx='470' cy='510' r='100' fill='none' stroke='%230c0c0c' stroke-width='14'/><circle cx='363' cy='180' r='100' fill='none' stroke='%230c0c0c' stroke-width='14'/><circle cx='363' cy='363' r='52' fill='%230c0c0c'/></svg>");
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.55;
+  }
+  .tel-aside h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 24px;
+    margin: 0 0 14px 0;
+  }
+  .tel-aside p {
+    font-size: 14px;
+    margin: 0 0 12px 0;
+    max-width: 44ch;
+  }
+  .tel-aside .dress {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(12,12,12,0.3);
+    font-size: 13px;
+    color: var(--text);
+  }
+  .tel-aside .dress strong {
+    display: block;
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: var(--primary);
+    margin-bottom: 6px;
+    letter-spacing: 0.06em;
+  }
+
+  /* ===== Cancellation table ===== */
+  .cancellation {
+    padding: 0 64px 80px 64px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+  }
+  .cancellation h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 28px;
+    margin: 0 0 8px 0;
+  }
+  .cancellation .ko {
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    color: var(--primary);
+    letter-spacing: 0.2em;
+  }
+  .cancel-table {
+    border-top: 1px solid rgba(12,12,12,0.7);
+  }
+  .cancel-row {
+    display: grid;
+    grid-template-columns: 200px 1fr 120px;
+    gap: 24px;
+    padding: 18px 0;
+    border-bottom: 1px solid rgba(12,12,12,0.18);
+    align-items: baseline;
+  }
+  .cancel-row .when {
+    font-family: var(--font-display), serif;
+    font-size: 16px;
+    color: var(--text);
+  }
+  .cancel-row .desc {
+    font-size: 14px;
+  }
+  .cancel-row .pct {
+    text-align: right;
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    color: var(--secondary);
+  }
+
+  /* ===== Footer ===== */
+  footer.house {
+    background: var(--bg);
+    padding-top: 0;
+    margin-top: 40px;
+    position: relative;
+  }
+  .asanoha-band {
+    height: 64px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='503' height='501' viewBox='0 0 503 501'><defs><symbol id='g' viewBox='-50.5 -50.5 101 101'><line x1='0' y1='50' x2='0' y2='-15' stroke='%230c0c0c' fill='none'/><line x1='0' y1='50' x2='-50' y2='15' stroke='%230c0c0c' fill='none'/><line x1='0' y1='50' x2='50' y2='15' stroke='%230c0c0c' fill='none'/><line x1='0' y1='50' x2='-50' y2='-50' stroke='%230c0c0c' fill='none'/><line x1='0' y1='50' x2='50' y2='-50' stroke='%230c0c0c' fill='none'/><line x1='0' y1='-15' x2='-50' y2='-50' stroke='%230c0c0c' fill='none'/><line x1='0' y1='-15' x2='50' y2='-50' stroke='%230c0c0c' fill='none'/></symbol></defs><use href='%23g' width='101' height='101' x='-50.5' y='-50.5' transform='translate(50.5 50.5)'/><use href='%23g' width='101' height='101' x='-50.5' y='-50.5' transform='translate(151 50.5)'/><use href='%23g' width='101' height='101' x='-50.5' y='-50.5' transform='translate(251.5 50.5)'/><use href='%23g' width='101' height='101' x='-50.5' y='-50.5' transform='translate(352 50.5)'/><use href='%23g' width='101' height='101' x='-50.5' y='-50.5' transform='translate(452.5 50.5)'/></svg>");
+    background-size: 120px;
+    background-repeat: repeat-x;
+    opacity: 0.13;
+    border-bottom: 1px solid rgba(12,12,12,0.25);
+  }
+  .footer-seal {
+    text-align: center;
+    padding: 38px 0 14px 0;
+  }
+  .footer-seal svg {
+    width: 64px; height: 64px; opacity: 0.85;
+  }
+  .footer-signature {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-size: 18px;
+    letter-spacing: 0.1em;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .footer-signature .accent { color: var(--secondary); }
+  .footer-script {
+    text-align: center;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    font-variant: small-caps;
+    color: var(--primary);
+    margin-bottom: 36px;
+  }
+  .footer-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    padding: 0 200px 50px 200px;
+    font-size: 12px;
+  }
+  .footer-cols h4 {
+    font-family: var(--font-body), serif;
+    text-transform: uppercase;
+    font-variant: small-caps;
+    letter-spacing: 0.28em;
+    font-size: 10px;
+    margin: 0 0 10px 0;
+    color: var(--primary);
+    border-bottom: 1px solid rgba(12,12,12,0.3);
+    padding-bottom: 8px;
+  }
+  .footer-cols p { margin: 0 0 6px 0; }
+  .footer-cols .attribution {
+    margin-top: 14px;
+    font-size: 10px;
+    color: rgba(12,12,12,0.65);
+    line-height: 1.6;
+  }
+
+</style>
+</head>
+<body>
+
+  <header class="top-frame">
+    <div class="house-mark" aria-label="Tsuru-no-maru house mark">
+      <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="344" cy="344" r="320" fill="none" stroke="#0c0c0c" stroke-width="8"/>
+        <g transform="translate(344,344) scale(0.55) translate(-344,-344)" opacity="0.95">
+          <path d="M 344 100 C 240 160 200 280 240 380 C 260 430 320 470 344 540 C 368 470 428 430 448 380 C 488 280 448 160 344 100 Z M 344 200 C 380 240 400 300 384 360 C 374 396 354 414 344 444 C 334 414 314 396 304 360 C 288 300 308 240 344 200 Z" fill="#0c0c0c"/>
+          <circle cx="344" cy="320" r="14" fill="#e34234"/>
+        </g>
+      </svg>
+    </div>
+    <nav class="primary" aria-label="Primary">
+      <a href="page-1.html">Kiritsubo</a>
+      <a href="page-2.html">O-shinagaki</a>
+      <a href="page-3.html">The House</a>
+      <a href="page-4.html">Seasons</a>
+      <a href="page-5.html" aria-current="page">Reservations</a>
+      <a href="page-6.html">Visiting</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-text">
+      <div class="eyebrow">Goyoyaku &nbsp;·&nbsp; Fifth Page of Six</div>
+      <h1 class="title">Reservations &amp;<br>the Private <span class="accent">Zashiki</span></h1>
+      <div class="kanji-stack">御予約 ・ 御座敷</div>
+      <p class="lede">A small house. Four rooms only. Each evening's table is set in the morning, and so we ask for the courtesy of advance word — by telephone, if at all possible.</p>
+    </div>
+    <div class="hero-seigaiha" aria-hidden="true">
+      <svg viewBox="0 0 700 700" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <g id="c1">
+            <path d="M 1,210 V 100 A 98,98 0 0 1 100,1 98,98 0 0 1 199,100 V 210" fill="none" stroke="#1c3a5e" stroke-width="2"/>
+            <path d="M 175,210 V 100 A 75,75 0 0 0 100,25 75,75 0 0 0 25,100 V 210" fill="none" stroke="#1c3a5e" stroke-width="1"/>
+          </g>
+          <g id="c4">
+            <use href="#c1"/><use href="#c1" transform="translate(200,0)"/><use href="#c1" transform="translate(400,0)"/><use href="#c1" transform="translate(600,0)"/>
+          </g>
+        </defs>
+        <use href="#c4" transform="translate(-100,100)"/>
+        <use href="#c4" transform="translate(0,200)"/>
+        <use href="#c4" transform="translate(-100,300)"/>
+        <use href="#c4" transform="translate(0,400)"/>
+        <use href="#c4" transform="translate(-100,500)"/>
+      </svg>
+    </div>
+  </section>
+
+  <div class="sayagata-rule" aria-hidden="true">
+    <span class="glyph">
+      <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="501.6,301.2 551.1,251.7 500.8,201.4 451.3,250.9 300.9,100.5 350.4,51 300.1,0.7 250.6,50.2 201.1,0.7 150.3,51.5 500.3,401.5 551.1,350.7" fill="none" stroke="#0c0c0c" stroke-width="10"/>
+        <polygon points="349.9,452.9 300.4,502.4 250.1,452.1 299.6,402.6 149.2,252.2 99.7,301.7 49.4,251.4 98.9,201.9 49.4,152.4 100.2,101.6 450.2,451.6 399.4,502.4" fill="none" stroke="#0c0c0c" stroke-width="10"/>
+      </svg>
+    </span>
+  </div>
+
+  <section class="policy">
+    <aside class="policy-aside">
+      <div class="label">Notice Required</div>
+      <div class="number">三日 / 七日</div>
+      <p>Three days for the full kaiseki of seven courses. Seven days for parties of six or more, or for the whole house in private hire.</p>
+    </aside>
+    <div class="policy-body">
+      <h2>How a Booking is Made</h2>
+      <p>Reservations are taken by telephone, between the hours of ten in the morning and four in the afternoon, by the proprietress or her daughter. We do keep a written register, in the manner of the older houses, and we should like to know your name, the number in your party, and any allergies or fish you cannot take, at the time the booking is set down.</p>
+      <p>For the <em class="term">full kaiseki</em> — seven courses, drawn from that morning's market and from the recipe books of the Asakura family — we ask for <em class="term">three days' notice</em>, so that the fish and the first vegetables may be ordered properly. For parties of <em class="term">six guests or more</em>, or for the engagement of an entire room for the evening, please give us <em class="term">seven days</em>; this allows the kitchen and the staff to prepare without strain.</p>
+      <p>Walk-in guests are welcomed at the counter when seats remain, but on most evenings between mid-October and the close of cherry-blossom season the house is taken by reservation alone. Children above the age of ten are welcome in the zashiki rooms; we do not seat infants, with apologies.</p>
+    </div>
+  </section>
+
+  <section class="zashiki-section">
+    <div class="section-heading">
+      <h2>The Four <span style="color:var(--secondary)">Zashiki</span> Rooms</h2>
+      <div class="sub">座敷四間 &nbsp;·&nbsp; Yon-ma</div>
+    </div>
+
+    <div class="rooms">
+
+      <article class="room feature">
+        <div>
+          <div class="room-name-jp">鶴の間</div>
+          <h3>Tsuru-no-ma <span class="accent">— the Crane Room</span></h3>
+          <div class="meta"><span>First Floor</span><span>Eight Tatami</span><span>Tokonoma with Bunsei scroll</span></div>
+          <p>The largest of the four, opening southward onto the inner garden and the stone lantern given to the house by a Kanda lumber merchant in the second year of Kaei. A pair of cranes worked in gold thread, by a Kyōto craftsman of the Meiji thirties, hangs above the tokonoma. Suitable for formal kaiseki, family observances, and small wedding meals.</p>
+          <p>Reserved as a single party only — we do not seat two groups in the same room, in keeping with house custom.</p>
+        </div>
+        <div>
+          <div class="seats">十名様<small>Seats up to ten</small></div>
+        </div>
+      </article>
+
+      <article class="room">
+        <div class="room-name-jp">松の間</div>
+        <h3>Matsu-no-ma <span class="accent">— the Pine Room</span></h3>
+        <div class="meta"><span>First Floor</span><span>Six Tatami</span></div>
+        <p>A quieter, west-facing room, set behind a sliding fusuma painted with young pines in sumi wash. Favoured by regular guests for the evening meal in winter, when the brazier is brought in and the river wind is held off by the closed shōji.</p>
+        <div class="seats">六名様<small>Seats up to six</small></div>
+      </article>
+
+      <article class="room">
+        <div class="room-name-jp">梅の間</div>
+        <h3>Ume-no-ma <span class="accent">— the Plum Room</span></h3>
+        <div class="meta"><span>Second Floor</span><span>Six Tatami</span></div>
+        <p>Reached by the narrow staircase at the back of the entrance hall. Plum branches in old gold leaf decorate the ranma transom; the window opens to a view of the neighbouring storehouse roof and, on a clear night, the moon as it passes Kanda Myōjin.</p>
+        <div class="seats">六名様<small>Seats up to six</small></div>
+      </article>
+
+      <article class="room">
+        <div class="room-name-jp">蛍の間</div>
+        <h3>Hotaru-no-ma <span class="accent">— the Firefly Room</span></h3>
+        <div class="meta"><span>Riverside Annex</span><span>Four-and-a-half Tatami</span><span>Most intimate</span></div>
+        <p>The smallest room, in the riverside annex built upon the Asakura family's old kura foundations. Two latticed windows give onto the Kanda River; in the second week of June, the proprietress will, by old habit, set out a small lantern and a rush blind for those who book this room. Held only for parties of four — never more.</p>
+        <div class="seats">四名様<small>Seats four guests, no more</small></div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="telephone">
+    <div class="tel-card">
+      <div class="label">House Telephone &nbsp;·&nbsp; Otoiawase</div>
+      <div class="number">03 — 3251 — <span class="accent">XXXX</span></div>
+      <div class="hours">Bookings taken 10:00 — 16:00 daily, except the second and fourth Mondays of each month, when the house is closed for cleaning and provisioning.</div>
+    </div>
+    <div class="tel-aside">
+      <h3>A Word on the Manner of Things</h3>
+      <p>Kiritsubo keeps to the older usages where they remain practical. We do not take bookings by electronic mail; the telephone is preferred, and a written reply card may be sent by post on request.</p>
+      <p>Should you wish a particular dish from the seasonal kondate — the spring sweetfish, say, or the winter river-carp simmered in saké lees — please mention this when you telephone, and we will see what the morning market allows.</p>
+      <div class="dress">
+        <strong>On Dress &nbsp;·&nbsp; Yosoi</strong>
+        Relaxed but considered — no slippers, please. Yukata are welcome in summer; we ask gentlemen to remove hats at the genkan, and that mobile telephones be silenced at the threshold of the zashiki.
+      </div>
+    </div>
+  </section>
+
+  <section class="cancellation">
+    <div>
+      <div class="ko">解約之事</div>
+      <h2>Cancellation Terms</h2>
+      <p style="font-size:13px; max-width:32ch; margin-top:12px;">Charges apply to the agreed table cost, not to drink. Parties of six or more are bound by the longer notice.</p>
+    </div>
+    <div class="cancel-table">
+      <div class="cancel-row">
+        <div class="when">Up to four days prior</div>
+        <div class="desc">Free cancellation. A courtesy telephone call is appreciated.</div>
+        <div class="pct">—</div>
+      </div>
+      <div class="cancel-row">
+        <div class="when">Three days prior</div>
+        <div class="desc">Twenty per cent of the agreed kaiseki price per guest.</div>
+        <div class="pct">20%</div>
+      </div>
+      <div class="cancel-row">
+        <div class="when">Two days prior</div>
+        <div class="desc">Fifty per cent — the fish having been ordered from Toyosu.</div>
+        <div class="pct">50%</div>
+      </div>
+      <div class="cancel-row">
+        <div class="when">The day before, or absent without word</div>
+        <div class="desc">The full agreed cost, regrettably, as the kitchen will have prepared.</div>
+        <div class="pct">100%</div>
+      </div>
+      <div class="cancel-row">
+        <div class="when">Parties of six or more</div>
+        <div class="desc">The same scale, but counted from the seven-day notice line.</div>
+        <div class="pct">—</div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="house">
+    <div class="asanoha-band" aria-hidden="true"></div>
+    <div class="footer-seal" aria-hidden="true">
+      <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="344" cy="344" r="320" fill="none" stroke="#0c0c0c" stroke-width="6"/>
+        <g transform="translate(344,344) scale(0.5) translate(-344,-344)">
+          <path d="M 344 100 C 240 160 200 280 240 380 C 260 430 320 470 344 540 C 368 470 428 430 448 380 C 488 280 448 160 344 100 Z M 344 200 C 380 240 400 300 384 360 C 374 396 354 414 344 444 C 334 414 314 396 304 360 C 288 300 308 240 344 200 Z" fill="#0c0c0c"/>
+        </g>
+      </svg>
+    </div>
+    <div class="footer-signature">桐壺 &nbsp;<span class="accent">·</span>&nbsp; Kiritsubo</div>
+    <div class="footer-script">Ryōtei of the Kanda Riverbank &nbsp;·&nbsp; Kanda-ku, Tōkyō</div>
+
+    <div class="footer-cols">
+      <div>
+        <h4>Address &amp; Hours</h4>
+        <p>2-chōme 14-7, Kanda-Sudachō</p>
+        <p>Chiyoda-ku, Tōkyō 101-0041</p>
+        <p style="margin-top:10px;">Dinner — 17:30 to 22:00, last seating 20:30</p>
+        <p>Closed: 2nd &amp; 4th Mondays; Year-end 29 Dec — 4 Jan</p>
+        <p style="margin-top:10px;">Telephone: 03-3251-XXXX</p>
+      </div>
+      <div>
+        <h4>Notice</h4>
+        <p>This house has stood on the present site since the eleventh year of Bunsei (1828). The recipe books referenced in our seasonal kondate are held in the family library and are not for sale.</p>
+        <p class="attribution">Kamon renderings (tsuru-no-maru, umebachi) and pattern grounds (seigaiha, sayagata, asanoha) adapted from open-source vector files, used under CC BY-SA 4.0. Original Edo-period mon designs are themselves out of copyright.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

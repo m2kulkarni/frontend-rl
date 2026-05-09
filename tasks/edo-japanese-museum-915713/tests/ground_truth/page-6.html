@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>About the Museum — Hanazono Museum of Edo Life</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), "Inter", sans-serif;
+    margin: 0;
+    line-height: 1.6;
+    font-size: 15px;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* ---------- Navigation ---------- */
+  .nav-wrap {
+    border-bottom: 1px solid var(--primary);
+    background: var(--bg);
+  }
+  .nav {
+    display: flex;
+    align-items: center;
+    padding: 22px 64px 18px;
+    gap: 56px;
+  }
+  .wordmark {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-right: 32px;
+  }
+  .wordmark .crane {
+    width: 38px; height: 38px;
+    border: 1px solid var(--primary);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .wordmark .crane svg { width: 26px; height: 26px; }
+  .wordmark .name {
+    font-family: var(--font-display), serif;
+    font-size: 16px;
+    letter-spacing: 0.04em;
+    line-height: 1.1;
+  }
+  .wordmark .name small {
+    display: block;
+    font-family: var(--font-body), sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-top: 3px;
+  }
+  .nav ul {
+    list-style: none;
+    margin: 0; padding: 0;
+    display: flex;
+    gap: 38px;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .nav a { padding: 4px 0; }
+  .nav a[aria-current="page"] {
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 3px;
+  }
+
+  /* ---------- Page intro ---------- */
+  .intro {
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    padding: 90px 64px 60px;
+    gap: 80px;
+    position: relative;
+  }
+  .intro::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("svg/seigaiha-waves.svg");
+    background-size: 320px;
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .intro > * { position: relative; z-index: 1; }
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin: 0 0 28px;
+  }
+  .eyebrow .accent { color: var(--accent); }
+  .intro h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 76px;
+    line-height: 1.05;
+    margin: 0 0 36px;
+    letter-spacing: -0.01em;
+    max-width: 12ch;
+  }
+  .intro h1 em {
+    font-style: normal;
+    color: var(--secondary);
+    display: block;
+    font-size: 40px;
+    margin-top: 8px;
+    letter-spacing: 0.02em;
+  }
+  .lede {
+    font-family: var(--font-display), serif;
+    font-size: 19px;
+    line-height: 1.7;
+    color: var(--text);
+    max-width: 50ch;
+  }
+  .intro-meta {
+    border-top: 1px solid var(--primary);
+    padding-top: 24px;
+    align-self: end;
+  }
+  .intro-meta dl {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 14px 24px;
+    margin: 0;
+    font-size: 13px;
+  }
+  .intro-meta dt {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    padding-top: 2px;
+  }
+  .intro-meta dd { margin: 0; font-family: var(--font-display), serif; font-size: 15px; }
+
+  /* ---------- Section divider ---------- */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    padding: 0 64px;
+  }
+  .divider .line {
+    flex: 1; height: 1px; background: var(--primary);
+  }
+  .divider svg {
+    width: 56px; height: 56px;
+    opacity: 0.55;
+  }
+
+  /* ---------- History timeline ---------- */
+  .history {
+    padding: 80px 64px 40px;
+    display: grid;
+    grid-template-columns: 4fr 8fr;
+    gap: 80px;
+  }
+  .section-label {
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin: 0 0 22px;
+  }
+  .history h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 44px;
+    line-height: 1.15;
+    margin: 0 0 24px;
+    max-width: 14ch;
+  }
+  .history-aside p {
+    font-size: 14px;
+    color: var(--text);
+    max-width: 32ch;
+  }
+  .timeline {
+    position: relative;
+  }
+  .timeline-entry {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 40px;
+    padding: 28px 0 32px;
+    border-top: 1px solid var(--primary);
+  }
+  .timeline-entry:last-child { border-bottom: 1px solid var(--primary); }
+  .timeline-year {
+    font-family: var(--font-display), serif;
+    font-size: 32px;
+    line-height: 1;
+    color: var(--secondary);
+  }
+  .timeline-year span {
+    display: block;
+    font-family: var(--font-body), sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin-top: 8px;
+  }
+  .timeline-body h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 20px;
+    margin: 0 0 8px;
+  }
+  .timeline-body p {
+    margin: 0;
+    font-size: 14px;
+    max-width: 60ch;
+  }
+
+  /* ---------- People section ---------- */
+  .people {
+    padding: 80px 64px;
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: 80px;
+    position: relative;
+  }
+  .director-card {
+    background: var(--surface);
+    padding: 36px 40px 40px;
+    border-top: 1px solid var(--primary);
+    position: relative;
+  }
+  .director-card .seal {
+    position: absolute;
+    top: 18px; right: 22px;
+    width: 38px; height: 38px;
+    opacity: 0.85;
+  }
+  .director-card .role {
+    font-size: 10px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin: 0 0 14px;
+  }
+  .director-card h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 28px;
+    margin: 0 0 6px;
+    line-height: 1.2;
+  }
+  .director-card .han {
+    font-family: var(--font-display), serif;
+    font-size: 15px;
+    color: var(--secondary);
+    margin: 0 0 18px;
+  }
+  .director-card p {
+    font-size: 13.5px;
+    margin: 0 0 14px;
+    max-width: 38ch;
+  }
+  .director-card .read-on {
+    display: block;
+    text-align: right;
+    margin-top: 22px;
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .roster h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 1.2;
+    margin: 0 0 28px;
+    max-width: 18ch;
+  }
+  .roster-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 56px;
+  }
+  .roster-list {
+    list-style: none;
+    margin: 0; padding: 0;
+  }
+  .roster-list li {
+    padding: 14px 0;
+    border-top: 1px solid rgba(12,12,12,0.18);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 14px;
+    font-size: 13.5px;
+  }
+  .roster-list li:first-child { border-top: 1px solid var(--primary); }
+  .roster-list .who {
+    font-family: var(--font-display), serif;
+    font-size: 16px;
+  }
+  .roster-list .what {
+    font-size: 10.5px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    align-self: center;
+    text-align: right;
+  }
+  .roster-heading {
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin: 0 0 14px;
+    grid-column: 1 / -1;
+  }
+
+  /* ---------- Research band ---------- */
+  .research {
+    padding: 90px 64px 70px;
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    gap: 80px;
+    background: var(--bg);
+    position: relative;
+    overflow: hidden;
+  }
+  .research::after {
+    content: "";
+    position: absolute;
+    right: -120px; top: -80px;
+    width: 520px; height: 520px;
+    background-image: url("svg/sayagata-keyfret.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.05;
+    pointer-events: none;
+  }
+  .research h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 1.15;
+    margin: 0 0 26px;
+    max-width: 16ch;
+  }
+  .research h2 em {
+    font-style: italic;
+    color: var(--secondary);
+  }
+  .research p {
+    font-size: 15px;
+    max-width: 60ch;
+    margin: 0 0 18px;
+  }
+  .journal {
+    border-top: 1px solid var(--primary);
+    padding-top: 28px;
+    align-self: end;
+    position: relative;
+    z-index: 1;
+  }
+  .journal-label {
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 10px;
+  }
+  .journal h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 1.25;
+    margin: 0 0 10px;
+  }
+  .journal h3 em {
+    font-style: italic;
+    color: var(--secondary);
+    display: block;
+    font-size: 18px;
+  }
+  .journal-meta {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin: 16px 0 0;
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+  }
+  .journal-meta span::before {
+    content: "—";
+    margin-right: 8px;
+    color: var(--primary);
+  }
+  .journal-meta span:first-child::before { display: none; }
+
+  /* ---------- Acknowledgements ---------- */
+  .acks {
+    padding: 60px 64px 100px;
+    display: grid;
+    grid-template-columns: 4fr 8fr;
+    gap: 80px;
+  }
+  .acks .lead {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    line-height: 1.5;
+    margin: 0;
+    max-width: 22ch;
+  }
+  .acks-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    columns: 2;
+    column-gap: 56px;
+    font-size: 13.5px;
+  }
+  .acks-list li {
+    break-inside: avoid;
+    padding: 12px 0;
+    border-top: 1px solid rgba(12,12,12,0.2);
+  }
+  .acks-list li:first-child,
+  .acks-list li:nth-child(5) {
+    border-top: 1px solid var(--primary);
+  }
+  .acks-list strong {
+    display: block;
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 15px;
+    margin-bottom: 2px;
+  }
+  .acks-list em {
+    font-style: normal;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--secondary);
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    background: var(--bg);
+    border-top: 1px solid var(--primary);
+    padding: 72px 64px 0;
+    position: relative;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .footer-col {
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  .footer-col h4 {
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin: 0 0 14px;
+    font-weight: 400;
+  }
+  .footer-col.right { text-align: right; }
+  .footer-seal {
+    text-align: center;
+  }
+  .footer-seal .kiri {
+    width: 80px; height: 80px;
+    margin: 0 auto 18px;
+    display: block;
+  }
+  .footer-seal .museum-name {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    line-height: 1.3;
+    margin: 0;
+  }
+  .footer-seal .museum-sub {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin: 8px 0 0;
+  }
+  .footer-wave {
+    margin-top: 64px;
+    height: 70px;
+    background-image: url("svg/seigaiha-waves.svg");
+    background-size: 200px;
+    background-repeat: repeat-x;
+    opacity: 0.18;
+    border-top: 1px solid rgba(12,12,12,0.2);
+  }
+  .footer-credit {
+    text-align: center;
+    padding: 14px 0 24px;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--secondary);
+  }
+
+  /* small ornament glyph */
+  .umebachi-mini {
+    width: 14px; height: 14px;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 6px;
+  }
+</style>
+</head>
+<body>
+
+<div class="nav-wrap">
+  <nav class="nav" aria-label="Primary">
+    <a class="wordmark" href="page-1.html" aria-label="Hanazono Museum of Edo Life — home">
+      <span class="crane" aria-hidden="true">
+        <svg viewBox="0 0 688 688" preserveAspectRatio="xMidYMid meet"><g transform="matrix(1.25,0,0,-1.25,130.52945,976.02211)"><g transform="matrix(0.90805161,0,0,0.90805161,-98.479009,143.93972)"><path d="m 251.52,309.6816 c -16.32,0 -29.4,13.2 -29.4,29.4 0,3.96 0.72,7.8 2.22,11.4 6.9,-5.4 15.3,-8.4 24.06,-8.4 1.56,0 3.24,0.12 4.86,0.3 l -12.3,-8.46 c -0.96,-0.72 -1.56,-1.8 -1.56,-3.12 0,-2.04 1.56,-3.72 3.72,-3.72 0.72,0 1.44,0.24 2.04,0.66 l 9.78,6.6 c -0.06,-0.78 -0.06,-1.74 -0.06,-2.82 0,-7.2 1.92,-14.28 5.82,-20.34 -2.94,-0.9 -6.06,-1.5 -9.18,-1.5 z" fill="#0c0c0c"/><circle cx="345" cy="380" r="55" fill="none" stroke="#0c0c0c" stroke-width="6"/></g></g></svg>
+      </span>
+      <span class="name">Hanazono<small>Museum of Edo Life</small></span>
+    </a>
+    <ul>
+      <li><a href="page-1.html">Home</a></li>
+      <li><a href="page-2.html">Exhibition</a></li>
+      <li><a href="page-3.html">Collection</a></li>
+      <li><a href="page-4.html">The Machiya</a></li>
+      <li><a href="page-5.html">Visit</a></li>
+      <li><a href="page-6.html" aria-current="page">About</a></li>
+    </ul>
+  </nav>
+</div>
+
+<section class="intro">
+  <div>
+    <p class="eyebrow">Vol. VI <span class="accent">·</span> About the Museum <span class="accent">·</span> Aneyakōji, Nakagyō-ku</p>
+    <h1>A house of<br>quiet things.<em>花園江戸生活博物館</em></h1>
+    <p class="lede">Since 1968, the Hanazono Museum has gathered, studied, and shown the daily life of Edo — its tools, its prints, its wood and lacquer — under the eaves of a working Kyoto townhouse. We are small by design. We hold roughly four thousand objects, publish one journal a year, and open six rooms to the public.</p>
+  </div>
+  <aside class="intro-meta">
+    <dl>
+      <dt>Founded</dt><dd>1968 (incorporated)</dd>
+      <dt>Donation</dt><dd>Yoshida Family, 1962</dd>
+      <dt>Premises</dt><dd>Aneyakōji Machiya, since 2017</dd>
+      <dt>Director</dt><dd>Dr. Saitō Mariko</dd>
+      <dt>Staff</dt><dd>14 (7 curatorial)</dd>
+      <dt>Designation</dt><dd>Registered Museum, Kyoto Pref.</dd>
+    </dl>
+  </aside>
+</section>
+
+<div class="divider" aria-hidden="true">
+  <span class="line"></span>
+  <svg viewBox="0 0 600 600"><g fill="none" stroke="#0c0c0c" stroke-width="3"><polygon points="501.6,301.2 551.1,251.7 500.8,201.4 451.3,250.9 300.9,100.5 350.4,51 300.1,0.7 250.6,50.2 201.1,0.7 150.3,51.5 500.3,401.5 551.1,350.7 "/><polygon points="349.9,452.9 300.4,502.4 250.1,452.1 299.6,402.6 149.2,252.2 99.7,301.7 49.4,251.4 98.9,201.9 49.4,152.4 100.2,101.6 450.2,451.6 399.4,502.4 "/></g></svg>
+  <span class="line"></span>
+</div>
+
+<section class="history">
+  <aside class="history-aside">
+    <p class="section-label">§ I — Institutional History</p>
+    <h2>Six decades, three thresholds.</h2>
+    <p>The museum's history can be read in three movements: a private gift, a public charter, and a return to the wood-and-paper architecture for which the collection was originally made.</p>
+  </aside>
+  <ol class="timeline">
+    <li class="timeline-entry">
+      <div class="timeline-year">1962<span>The Donation</span></div>
+      <div class="timeline-body">
+        <h3>The Yoshida Family Donation</h3>
+        <p>On the death of the textile merchant Yoshida Heizaemon V, his widow Kimi and their son Tatsuo presented to the city of Kyoto some 1,840 household objects, woodblock prints, and account books accumulated by four generations of the Yoshida house in Nishijin. The collection had been kept, until then, in the family's storehouse on Higashi-no-tōin Street.</p>
+      </div>
+    </li>
+    <li class="timeline-entry">
+      <div class="timeline-year">1968<span>Incorporation</span></div>
+      <div class="timeline-body">
+        <h3>The Museum is Chartered</h3>
+        <p>Under founding director Yoshida Tatsuo (1921–2003), the Hanazono Museum of Edo Life was incorporated as a public-interest foundation on 14 March 1968. The first galleries occupied two rented floors above a kimono shop on Sanjō-dōri; admission was set at ¥80, and the museum opened with 312 catalogued items on view.</p>
+      </div>
+    </li>
+    <li class="timeline-entry">
+      <div class="timeline-year">1974<span>Research Begins</span></div>
+      <div class="timeline-body">
+        <h3>First Issue of <em>Edo Seikatsu Kenkyū</em></h3>
+        <p>The museum's annual journal of research into Edo-period daily life is published for the first time in October 1974, with contributions from Yoshida Tatsuo, Hayashi Kōichirō of Kyoto University, and the textile historian Nagai Sumiko.</p>
+      </div>
+    </li>
+    <li class="timeline-entry">
+      <div class="timeline-year">1991<span>Expansion</span></div>
+      <div class="timeline-body">
+        <h3>Acquisition of the Sano Print Archive</h3>
+        <p>A bequest from the print collector Sano Yoshirō adds 622 single-sheet ukiyo-e and twelve complete series, including a near-complete <em>Kisokaidō</em> by Hiroshige and Eisen — the spine of every print exhibition the museum has mounted since.</p>
+      </div>
+    </li>
+    <li class="timeline-entry">
+      <div class="timeline-year">2017<span>The Move</span></div>
+      <div class="timeline-body">
+        <h3>Removal to the Aneyakōji Machiya</h3>
+        <p>After a four-year restoration overseen by the architect Tanahashi Jirō, the museum reopens on 1 October 2017 in a 1908 merchant's townhouse on Aneyakōji-dōri. The new premises return the collection to the kind of building it was made for: low rooms, paper light, polished cedar floors.</p>
+      </div>
+    </li>
+  </ol>
+</section>
+
+<div class="divider" aria-hidden="true">
+  <span class="line"></span>
+  <svg viewBox="0 0 600 600"><g fill="none" stroke="#0c0c0c" stroke-width="3"><polygon points="501.6,301.2 551.1,251.7 500.8,201.4 451.3,250.9 300.9,100.5 350.4,51 300.1,0.7 250.6,50.2 201.1,0.7 150.3,51.5 500.3,401.5 551.1,350.7 "/></g></svg>
+  <span class="line"></span>
+</div>
+
+<section class="people">
+  <article class="director-card">
+    <svg class="seal" viewBox="0 0 688 688" aria-hidden="true">
+      <rect width="688" height="688" fill="#0c0c0c"/>
+      <path fill="#f5efde" d="M 226,612 C 207,610 189,603 174,592 C 168,587 158,577 153,571 C 132,543 126,507 137,474 C 141,464 146,453 152,445 C 157,440 167,429 173,425 C 201,403 237,397 270,409 C 286,414 299,422 311,435 C 323,447 331,459 336,474 C 346,504 342,535 326,563 C 318,575 304,589 291,597 C 271,609 248,614 226,612 z M 439,612 C 421,610 402,603 387,592 C 382,587 372,577 367,571 C 346,543 340,507 351,474 C 355,464 360,453 366,445 C 371,440 381,429 387,425 C 415,403 451,397 484,409 C 500,414 513,422 525,435 C 537,447 544,459 550,474 C 560,504 556,535 540,563 C 532,575 518,589 505,597 C 485,609 462,614 439,612 z M 333,283 C 314,281 295,274 281,263 C 275,259 265,249 260,243 C 239,215 233,179 244,146 C 248,135 253,125 259,116 C 264,111 274,100 280,96 C 308,75 344,69 377,80 C 393,85 406,94 418,106 C 430,118 437,130 443,146 C 453,175 449,206 433,234 C 425,247 411,261 398,268 C 378,281 355,286 333,283 z"/>
+    </svg>
+    <p class="role">Chief Curator</p>
+    <h3>Dr. Saitō Mariko</h3>
+    <p class="han">齋藤 真理子 — appointed 2019</p>
+    <p>Educated at Waseda and the École Pratique des Hautes Études, Saitō joined the museum in 2008 as associate curator of prints and was named chief curator in 2019. Her monograph on the publisher Tsutaya Jūzaburō (Iwanami Shoten, 2014) remains a standard reference.</p>
+    <p>She leads a curatorial team of seven and chairs the editorial committee of <em>Edo Seikatsu Kenkyū</em>.</p>
+    <a class="read-on" href="page-3.html">Curator's notes →</a>
+  </article>
+
+  <div class="roster">
+    <p class="section-label">§ II — Board, Staff &amp; Curatorial Team</p>
+    <h2>The people who keep the rooms.</h2>
+
+    <div class="roster-grid">
+      <h4 class="roster-heading">Board of Trustees</h4>
+      <ul class="roster-list">
+        <li><span class="who">Yoshida Hiroyuki</span><span class="what">Chair</span></li>
+        <li><span class="who">Prof. Hayashi Tomoe</span><span class="what">Vice-Chair</span></li>
+        <li><span class="who">Murakoshi Ken'ichi</span><span class="what">Treasurer</span></li>
+        <li><span class="who">Iwasaki Sayuri</span><span class="what">Secretary</span></li>
+        <li><span class="who">Ōsumi Tetsuo</span><span class="what">Trustee</span></li>
+      </ul>
+      <ul class="roster-list">
+        <li><span class="who">Watanabe Aki</span><span class="what">Trustee</span></li>
+        <li><span class="who">Fr. Patrick Doyle, S.J.</span><span class="what">Trustee</span></li>
+        <li><span class="who">Tanahashi Jirō</span><span class="what">Architect, ex officio</span></li>
+        <li><span class="who">Dr. Saitō Mariko</span><span class="what">Director, ex officio</span></li>
+      </ul>
+
+      <h4 class="roster-heading" style="margin-top:36px">Curatorial Staff</h4>
+      <ul class="roster-list">
+        <li><span class="who">Dr. Saitō Mariko</span><span class="what">Chief Curator</span></li>
+        <li><span class="who">Ogawa Riku</span><span class="what">Curator, Prints</span></li>
+        <li><span class="who">Dr. Nakamura Eri</span><span class="what">Curator, Textiles</span></li>
+        <li><span class="who">Funaki Shōtarō</span><span class="what">Curator, Lacquer &amp; Wood</span></li>
+      </ul>
+      <ul class="roster-list">
+        <li><span class="who">Kawabata Mio</span><span class="what">Assistant Curator</span></li>
+        <li><span class="who">Hori Tatsuya</span><span class="what">Conservator</span></li>
+        <li><span class="who">Yamashita Junko</span><span class="what">Registrar</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="divider" aria-hidden="true">
+  <span class="line"></span>
+  <svg viewBox="0 0 600 600"><g fill="none" stroke="#0c0c0c" stroke-width="3"><polygon points="501.6,301.2 551.1,251.7 500.8,201.4 451.3,250.9 300.9,100.5 350.4,51 300.1,0.7 250.6,50.2 201.1,0.7 150.3,51.5 500.3,401.5 551.1,350.7 "/></g></svg>
+  <span class="line"></span>
+</div>
+
+<section class="research">
+  <div>
+    <p class="section-label">§ III — Research &amp; Publications</p>
+    <h2>A small <em>scholarly</em> programme, run from the back room.</h2>
+    <p>Hanazono is a research museum first. Each year the curatorial team selects two or three sustained lines of inquiry — currently, the economy of single-sheet print publishing in Bunsei-era Edo, and the textile dyer's account book as historical source. Findings are reported, in long form, in the museum's annual journal.</p>
+    <p>The reading room on the second floor of the machiya holds approximately 6,200 reference volumes and is open to qualified researchers by appointment, Wednesday through Saturday. Visiting fellowships are offered each year to two early-career scholars, typically in residence from October through March.</p>
+  </div>
+  <aside class="journal">
+    <p class="journal-label">— The Annual Journal —</p>
+    <h3>Edo Seikatsu Kenkyū<em>江戸生活研究 · Studies in Edo Daily Life</em></h3>
+    <p style="font-size:13.5px;margin:0;">Published every November since 1974, the journal carries between eight and twelve peer-reviewed articles, a curatorial dossier, and short notes on recent acquisitions. Volume 50 is in preparation for autumn this year.</p>
+    <p class="journal-meta">
+      <span>ISSN 0389-6442</span>
+      <span>Annual, Nov.</span>
+      <span>¥3,200</span>
+      <span>50 vols. to date</span>
+    </p>
+  </aside>
+</section>
+
+<section class="acks">
+  <p class="lead">With the support of, and in gratitude to —</p>
+  <ul class="acks-list">
+    <li>
+      <strong>Kyoto Prefectural Cultural Affairs Division</strong>
+      <em>Operating subvention, since 1971</em>
+    </li>
+    <li>
+      <strong>Agency for Cultural Affairs (Bunkachō)</strong>
+      <em>Conservation grants, 2018 &amp; 2022</em>
+    </li>
+    <li>
+      <strong>The Yoshida Family</strong>
+      <em>Founding donors and continuing benefactors</em>
+    </li>
+    <li>
+      <strong>Sano Memorial Foundation</strong>
+      <em>Print acquisitions endowment</em>
+    </li>
+    <li>
+      <strong>Friends of the Hanazono</strong>
+      <em>1,140 members as of April this year</em>
+    </li>
+    <li>
+      <strong>Kyoto Institute of Technology</strong>
+      <em>Joint textile-research programme, since 2009</em>
+    </li>
+    <li>
+      <strong>Tanahashi &amp; Associates, Architects</strong>
+      <em>Restoration of the Aneyakōji machiya, 2013–17</em>
+    </li>
+    <li>
+      <strong>Open kamon sources</strong>
+      <em>CC-BY-SA contributors, Wikimedia Commons</em>
+    </li>
+  </ul>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>Visit</h4>
+      <p>
+        Hanazono Museum of Edo Life<br>
+        287 Aneyakōji-agaru<br>
+        Higashi-no-tōin-dōri<br>
+        Nakagyō-ku, Kyoto 604-8166<br>
+        Japan
+      </p>
+      <p style="margin-top:14px;">
+        Tel. +81 (0)75 231 4408<br>
+        kikaku@hanazono-edo.or.jp
+      </p>
+    </div>
+
+    <div class="footer-seal">
+      <svg class="kiri" viewBox="0 0 345 326" aria-hidden="true">
+        <g fill="#0c0c0c">
+          <circle cx="170" cy="155" r="10"/>
+          <path d="M 170,170 C 130,180 100,225 95,275 C 95,285 100,290 108,294 C 112,295 113,298 115,301 C 120,313 135,320 148,316 C 154,322 162,326 172,326 C 182,326 190,322 196,316 C 209,320 224,313 230,301 C 232,298 233,295 237,294 C 245,290 250,285 250,275 C 252,228 220,182 175,168 C 174,172 174,176 175,180 C 195,190 215,210 225,235 C 232,253 234,272 230,290 C 232,260 220,230 200,210 C 190,200 178,193 174,191 C 174,194 174,198 174,202 C 188,210 200,225 208,242 C 215,257 217,275 215,293 C 218,283 219,270 217,257 C 214,235 200,215 180,205 C 180,209 180,213 180,217 C 191,225 199,237 203,253 C 208,270 207,290 200,303 C 203,287 207,270 202,253 C 199,238 188,225 175,218 C 175,221 174,225 176,228 C 192,250 196,280 187,305 C 188,297 190,289 190,281 C 191,266 187,248 175,234 C 174,254 175,275 174,295 C 174,300 173,305 172,308 C 171,305 170,300 170,295 C 170,275 171,254 170,234 C 159,248 155,266 156,281 C 156,289 158,297 159,305 C 150,280 154,250 170,228 C 172,225 171,221 171,218 C 158,225 147,238 144,253 C 139,270 138,290 141,303 C 134,290 134,270 139,253 C 143,237 152,225 162,217 C 162,213 162,209 162,205 C 142,215 128,235 125,257 C 123,270 124,283 127,293 C 123,275 125,257 132,242 C 140,225 153,210 168,202 C 168,198 168,194 168,191 C 164,193 152,200 142,210 C 122,230 110,260 112,290 C 108,272 110,253 117,235 C 127,210 147,190 168,180 C 168,176 168,172 167,168 C 122,182 90,228 92,275 C 95,285 102,290 108,294"/>
+        </g>
+      </svg>
+      <p class="museum-name">Hanazono Museum<br>of Edo Life</p>
+      <p class="museum-sub">花園 · 江戸生活博物館 · Kyoto</p>
+    </div>
+
+    <div class="footer-col right">
+      <h4>Hours</h4>
+      <p>
+        Wednesday – Sunday<br>
+        10:00 – 17:00 (last entry 16:30)<br>
+        Closed Mondays &amp; Tuesdays<br>
+        Closed 28 Dec – 4 Jan
+      </p>
+      <p style="margin-top:14px;">
+        General ¥1,200<br>
+        Student ¥600 · Under 12 free<br>
+        Members admitted free
+      </p>
+    </div>
+  </div>
+
+  <div class="footer-wave" aria-hidden="true"></div>
+  <p class="footer-credit">
+    © Hanazono Museum of Edo Life, Kyoto · Kamon vector sources after Wikimedia Commons contributors, used under CC-BY-SA 4.0
+  </p>
+</footer>
+
+</body>
+</html>

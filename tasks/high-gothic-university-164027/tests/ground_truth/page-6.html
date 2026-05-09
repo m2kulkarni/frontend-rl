@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Visiting the University & the Hill of Vézelay — Saint-Aubain de Vézelay</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  a { color: var(--text-emphasis); text-decoration: none; }
+
+  /* ===== MASTHEAD ===== */
+  .masthead {
+    padding: 28px 64px 0;
+    text-align: center;
+    border-bottom: 1px solid var(--secondary);
+    background:
+      radial-gradient(ellipse at top, rgba(30,58,95,0.04), transparent 60%),
+      var(--bg);
+  }
+  .masthead .wordmark {
+    font-family: var(--font-display), serif;
+    font-weight: 500;
+    font-size: 22px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin: 0 0 6px;
+  }
+  .masthead .wordmark::before,
+  .masthead .wordmark::after {
+    content: "✦";
+    color: var(--accent);
+    margin: 0 18px;
+    font-size: 12px;
+    vertical-align: 4px;
+  }
+  .masthead .latin {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--secondary);
+    margin: 0 0 16px;
+    letter-spacing: 0.08em;
+  }
+
+  /* ===== ARCADE NAV ===== */
+  nav.arcade {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 0;
+    padding: 0 0 0;
+  }
+  nav.arcade ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    align-items: flex-end;
+  }
+  nav.arcade li {
+    display: flex;
+    align-items: flex-end;
+  }
+  nav.arcade .fleur {
+    color: var(--accent);
+    font-size: 11px;
+    padding: 0 4px 18px;
+    user-select: none;
+  }
+  nav.arcade a {
+    position: relative;
+    display: inline-block;
+    padding: 14px 22px 16px;
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--primary);
+    transition: color 0.2s;
+    z-index: 1;
+  }
+  nav.arcade a::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 100%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 36px;
+    background: var(--primary);
+    -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 36'><path d='M2,36 L2,18 Q2,2 30,2 Q58,2 58,18 L58,36 Z' fill='black'/></svg>") no-repeat center / contain;
+            mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 36'><path d='M2,36 L2,18 Q2,2 30,2 Q58,2 58,18 L58,36 Z' fill='black'/></svg>") no-repeat center / contain;
+    z-index: -1;
+    transition: background 0.2s;
+  }
+  nav.arcade a:hover::before { background: var(--secondary); opacity: 0.85; }
+  nav.arcade a:hover { color: var(--accent); }
+  nav.arcade a[aria-current="page"] {
+    color: var(--accent);
+  }
+  nav.arcade a[aria-current="page"]::before {
+    background: var(--secondary);
+  }
+  nav.arcade a[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 4px;
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 500px 1fr;
+    gap: 0;
+    padding: 60px 64px 40px;
+    align-items: center;
+    position: relative;
+  }
+  .hero::before, .hero::after {
+    content: "";
+    position: absolute;
+    top: 80px;
+    bottom: 40px;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--secondary) 12%, var(--secondary) 88%, transparent);
+    opacity: 0.4;
+  }
+  .hero::before { left: 64px; }
+  .hero::after { right: 64px; }
+
+  .hero-left, .hero-right {
+    padding: 0 40px;
+  }
+  .hero-left { text-align: right; }
+  .hero-right { text-align: left; }
+  .hero-eyebrow {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--secondary);
+    letter-spacing: 0.06em;
+    margin-bottom: 14px;
+  }
+  .hero-eyebrow .num {
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .hero-left p, .hero-right p {
+    font-family: var(--font-display), serif;
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--text);
+    margin: 0 0 14px;
+  }
+
+  .hero-arch {
+    position: relative;
+    height: 540px;
+    background: var(--surface);
+    overflow: hidden;
+  }
+  .hero-arch svg.frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .hero-arch .inner {
+    position: absolute;
+    top: 60px; left: 70px; right: 70px; bottom: 30px;
+    text-align: center;
+    padding: 30px 24px;
+  }
+  .hero-arch .quatrefoil {
+    width: 38px;
+    height: 38px;
+    margin: 0 auto 14px;
+    color: var(--accent);
+  }
+  .hero-arch h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 42px;
+    line-height: 1.05;
+    letter-spacing: 0.01em;
+    color: var(--primary);
+    margin: 0 0 18px;
+  }
+  .hero-arch h1 em {
+    font-style: italic;
+    color: var(--secondary);
+    display: block;
+    font-size: 28px;
+    margin-top: 6px;
+  }
+  .hero-arch .standfirst {
+    font-family: var(--font-body), serif;
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.7;
+    max-width: 280px;
+    margin: 0 auto 22px;
+  }
+  .hero-arch .crest {
+    color: var(--primary);
+    width: 72px;
+    height: 72px;
+    margin: 14px auto 0;
+    opacity: 0.85;
+  }
+  .hero-arch .coords {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 12px;
+    color: var(--secondary);
+    letter-spacing: 0.1em;
+    margin-top: 10px;
+  }
+
+  /* ===== DIVIDER ===== */
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    padding: 30px 64px;
+  }
+  .divider .rule {
+    flex: 1;
+    height: 1px;
+    background: var(--primary);
+    max-width: 420px;
+  }
+  .divider svg {
+    width: 44px; height: 44px;
+    color: var(--primary);
+  }
+
+  /* ===== JOURNEYS ===== */
+  .journeys {
+    padding: 30px 64px 60px;
+  }
+  .section-head {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  .section-head h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 38px;
+    color: var(--primary);
+    margin: 0 0 8px;
+    letter-spacing: 0.01em;
+  }
+  .section-head .kicker {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--secondary);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .section-head .sub {
+    font-size: 14px;
+    color: var(--text);
+    max-width: 580px;
+    margin: 12px auto 0;
+    font-style: italic;
+  }
+
+  .arch-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  .arch-card {
+    position: relative;
+    height: 540px;
+    background: var(--surface);
+    padding: 0;
+  }
+  .arch-card .arch-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    color: var(--primary);
+  }
+  .arch-card .finial {
+    position: absolute;
+    top: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 22px; height: 22px;
+    color: var(--accent);
+    z-index: 2;
+  }
+  .arch-card-body {
+    position: absolute;
+    top: 70px; left: 56px; right: 56px; bottom: 50px;
+    display: flex;
+    flex-direction: column;
+  }
+  .arch-card .mode {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--secondary);
+    text-align: center;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .arch-card h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 26px;
+    color: var(--primary);
+    text-align: center;
+    margin: 0 0 18px;
+    line-height: 1.15;
+  }
+  .arch-card .body-text {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--text);
+  }
+  .arch-card .body-text::first-letter {
+    font-family: var(--font-display), serif;
+    font-size: 48px;
+    float: left;
+    line-height: 0.9;
+    padding: 6px 8px 0 0;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .arch-card dl {
+    margin: auto 0 0;
+    padding-top: 14px;
+    border-top: 1px solid rgba(10,10,10,0.18);
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 6px 12px;
+    font-size: 12px;
+  }
+  .arch-card dt {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    color: var(--secondary);
+  }
+  .arch-card dd {
+    margin: 0;
+    color: var(--text);
+  }
+  .arch-card .meta {
+    position: absolute;
+    bottom: 14px; left: 56px; right: 56px;
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    font-family: var(--font-display), serif;
+  }
+
+  /* ===== PRACTICAL TWO-COL ===== */
+  .practical {
+    padding: 60px 64px;
+    background:
+      linear-gradient(to bottom, transparent, rgba(30,58,95,0.03) 50%, transparent);
+  }
+  .practical-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 60px;
+    max-width: 1280px;
+    margin: 0 auto;
+    align-items: start;
+  }
+  .lodge {
+    border: 1px solid var(--primary);
+    padding: 36px 40px 32px;
+    position: relative;
+    background: var(--surface);
+  }
+  .lodge::before {
+    content: "";
+    position: absolute;
+    top: -1px; left: -1px; right: -1px;
+    height: 36px;
+    background:
+      linear-gradient(135deg, var(--primary) 25%, transparent 25%) -8px 0 / 16px 16px,
+      linear-gradient(225deg, var(--primary) 25%, transparent 25%) -8px 0 / 16px 16px;
+    opacity: 0;
+  }
+  .lodge h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 26px;
+    color: var(--primary);
+    margin: 0 0 4px;
+  }
+  .lodge .addr {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    color: var(--secondary);
+    font-size: 14px;
+    margin-bottom: 22px;
+  }
+  .hours-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+  .hours-table th, .hours-table td {
+    text-align: left;
+    padding: 9px 0;
+    border-bottom: 1px dotted rgba(10,10,10,0.25);
+  }
+  .hours-table th {
+    font-family: var(--font-display), serif;
+    font-weight: 500;
+    color: var(--primary);
+    width: 38%;
+  }
+  .hours-table td {
+    color: var(--text);
+  }
+  .hours-table tr:last-child th, .hours-table tr:last-child td { border-bottom: none; }
+  .hours-table .accent { color: var(--accent); font-weight: 600; }
+
+  .tours {
+    background: var(--bg);
+    padding: 22px 24px;
+    border-left: 3px solid var(--accent);
+    margin-top: 14px;
+  }
+  .tours h4 {
+    font-family: var(--font-display), serif;
+    font-size: 17px;
+    margin: 0 0 8px;
+    color: var(--primary);
+    font-weight: 500;
+  }
+  .tours p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .tours .price {
+    color: var(--secondary);
+    font-style: italic;
+    margin-top: 8px;
+    display: block;
+  }
+
+  .map-side {
+    position: relative;
+    padding-top: 8px;
+  }
+  .map-side h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 26px;
+    color: var(--primary);
+    margin: 0 0 4px;
+  }
+  .map-side .kicker {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    color: var(--secondary);
+    margin-bottom: 18px;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+  }
+  .schematic {
+    border: 1px solid var(--primary);
+    background: var(--surface);
+    height: 360px;
+    position: relative;
+    overflow: hidden;
+  }
+  .schematic svg { width: 100%; height: 100%; display: block; }
+  .schematic-caption {
+    margin-top: 12px;
+    font-size: 12px;
+    color: var(--secondary);
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    text-align: center;
+    letter-spacing: 0.06em;
+  }
+  .legend {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px 20px;
+    margin-top: 22px;
+    font-size: 12px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .legend-item .num {
+    width: 22px; height: 22px;
+    border: 1px solid var(--primary);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center; justify-content: center;
+    font-family: var(--font-display), serif;
+    color: var(--accent);
+    font-size: 12px;
+    flex: 0 0 auto;
+  }
+  .legend-item span.lbl {
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+  }
+  .legend-item small {
+    display: block;
+    color: var(--text);
+    font-style: italic;
+  }
+
+  /* ===== STAY / LODGINGS ===== */
+  .lodgings {
+    padding: 50px 64px 70px;
+  }
+  .lodgings-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    max-width: 1280px;
+    margin: 30px auto 0;
+  }
+  .lodge-card {
+    border: 1px solid var(--primary);
+    padding: 22px 22px 18px;
+    background: var(--surface);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .lodge-card .stars {
+    color: var(--accent);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    margin-bottom: 6px;
+  }
+  .lodge-card h4 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 19px;
+    margin: 0 0 4px;
+    color: var(--primary);
+    line-height: 1.2;
+  }
+  .lodge-card .type {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    color: var(--secondary);
+    font-size: 12px;
+    margin-bottom: 12px;
+  }
+  .lodge-card p {
+    font-size: 13px;
+    line-height: 1.55;
+    margin: 0 0 14px;
+  }
+  .lodge-card .price-row {
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px dotted rgba(10,10,10,0.25);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 11px;
+    color: var(--secondary);
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+  }
+  .lodge-card .price-row strong {
+    color: var(--accent);
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  /* ===== CALENDAR / SEASON STRIP ===== */
+  .season {
+    padding: 30px 64px 60px;
+  }
+  .season-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    border-top: 1px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
+    padding: 28px 0;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 50px;
+    align-items: center;
+  }
+  .season h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 28px;
+    margin: 0 0 4px;
+    color: var(--primary);
+  }
+  .season .lat {
+    font-style: italic;
+    color: var(--secondary);
+    font-family: var(--font-display), serif;
+  }
+  .calendar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+  .month {
+    text-align: center;
+    padding: 14px 8px;
+    border-left: 1px solid rgba(10,10,10,0.2);
+  }
+  .month:first-child { border-left: none; }
+  .month .label {
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    color: var(--primary);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .month .note {
+    font-size: 11px;
+    color: var(--secondary);
+    font-style: italic;
+    line-height: 1.4;
+  }
+  .month.open .label { color: var(--accent); }
+  .month.open::after {
+    content: "";
+    display: block;
+    width: 6px; height: 6px;
+    background: var(--accent);
+    margin: 8px auto 0;
+    border-radius: 50%;
+  }
+
+  /* ===== FAQ / EPISTOLARY ===== */
+  .faq {
+    padding: 30px 64px 80px;
+  }
+  .faq-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px 60px;
+    max-width: 1100px;
+    margin: 30px auto 0;
+  }
+  .faq-item {
+    border-left: 2px solid var(--secondary);
+    padding-left: 22px;
+  }
+  .faq-item h4 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--primary);
+    margin: 0 0 8px;
+  }
+  .faq-item h4::before {
+    content: "Q.";
+    color: var(--accent);
+    font-style: normal;
+    margin-right: 8px;
+    font-weight: 500;
+  }
+  .faq-item p {
+    font-size: 13px;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  /* ===== FOOTER ===== */
+  footer.site {
+    margin-top: 30px;
+    background: var(--bg);
+    border-top: 1px solid var(--primary);
+    position: relative;
+  }
+  .footer-arcade {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0;
+    padding: 0 64px;
+    height: 90px;
+  }
+  .footer-arch {
+    position: relative;
+    border-right: 1px solid rgba(10,10,10,0.2);
+  }
+  .footer-arch:last-child { border-right: none; }
+  .footer-arch::before {
+    content: "";
+    position: absolute;
+    inset: 12px 18% 0 18%;
+    background: var(--primary);
+    -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 80'><path d='M2,80 L2,40 Q2,2 30,2 Q58,2 58,40 L58,80 Z' fill='black'/></svg>") no-repeat center / contain;
+            mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 80'><path d='M2,80 L2,40 Q2,2 30,2 Q58,2 58,40 L58,80 Z' fill='black'/></svg>") no-repeat center / contain;
+  }
+  .footer-arch .quatre {
+    position: absolute;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 16px; height: 16px;
+    color: var(--accent);
+    z-index: 2;
+  }
+  .footer-cols {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 60px;
+    padding: 40px 64px 30px;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  .footer-cols h5 {
+    font-family: var(--font-display), serif;
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    color: var(--primary);
+  }
+  .footer-cols p, .footer-cols address {
+    font-size: 13px;
+    line-height: 1.7;
+    font-style: normal;
+    margin: 0;
+    color: var(--text);
+  }
+  .footer-cols .motto {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    color: var(--secondary);
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .footer-cols .motto small {
+    display: block;
+    font-style: normal;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin-top: 10px;
+  }
+  .diaper {
+    height: 36px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 600 600'><g transform='translate(300,300)scale(0.87)rotate(45)'><circle cx='-195' r='163' fill='%231e3a5f'/><circle cx='195' r='163' fill='%231e3a5f'/><circle cy='195' r='163' fill='%231e3a5f'/><circle cy='-195' r='163' fill='%231e3a5f'/><rect x='-232' y='-232' width='464' height='464' fill='%231e3a5f'/><g fill='%23f4ecd8'><circle cx='-195' r='157'/><circle cx='195' r='157'/><circle cy='195' r='157'/><circle cy='-195' r='157'/><rect x='-226' y='-226' width='452' height='452'/></g></g></svg>");
+    background-repeat: repeat;
+    opacity: 0.18;
+    border-top: 1px solid rgba(10,10,10,0.2);
+  }
+  .colophon {
+    text-align: center;
+    padding: 14px 0 22px;
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 11px;
+    color: var(--secondary);
+    letter-spacing: 0.1em;
+  }
+
+  /* shared svg helpers */
+  .qf {
+    fill: currentColor;
+  }
+</style>
+</head>
+<body>
+
+<!-- Reusable inline SVGs as symbols -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="quatrefoil" viewBox="-100 -100 200 200">
+      <g fill="currentColor">
+        <circle cx="-65" r="54"/>
+        <circle cx="65" r="54"/>
+        <circle cy="-65" r="54"/>
+        <circle cy="65" r="54"/>
+        <rect x="-77" y="-77" width="154" height="154"/>
+      </g>
+    </symbol>
+
+    <symbol id="arch-frame" viewBox="0 0 500 600" preserveAspectRatio="none">
+      <path d="M 12,598 L 12,260 Q 12,12 250,12 Q 488,12 488,260 L 488,598 Z"
+            fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <path d="M 24,598 L 24,262 Q 24,24 250,24 Q 476,24 476,262 L 476,598"
+            fill="none" stroke="currentColor" stroke-width="0.6" opacity="0.5"/>
+    </symbol>
+
+    <symbol id="cross-flory-mini" viewBox="0 0 400 400">
+      <g transform="translate(200 200) scale(0.45)" fill="currentColor">
+        <path d="M-50,-200 L50,-200 L50,-50 L200,-50 L200,50 L50,50 L50,200 L-50,200 L-50,50 L-200,50 L-200,-50 L-50,-50 Z"/>
+        <circle cx="0" cy="-200" r="22"/>
+        <circle cx="0" cy="200" r="22"/>
+        <circle cx="-200" cy="0" r="22"/>
+        <circle cx="200" cy="0" r="22"/>
+      </g>
+    </symbol>
+
+    <symbol id="oak-divider" viewBox="0 0 60 60">
+      <g fill="currentColor">
+        <circle cx="30" cy="30" r="3"/>
+        <path d="M30,8 Q24,18 22,28 Q26,26 30,26 Q34,26 38,28 Q36,18 30,8 Z"/>
+        <path d="M30,52 Q24,42 22,32 Q26,34 30,34 Q34,34 38,32 Q36,42 30,52 Z"/>
+        <ellipse cx="10" cy="30" rx="6" ry="4"/>
+        <ellipse cx="50" cy="30" rx="6" ry="4"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<header class="masthead">
+  <p class="wordmark">Université Saint-Aubain de Vézelay</p>
+  <p class="latin">Studium Generale Morvanense · Fundata Anno Domini MCXLII</p>
+  <nav class="arcade" aria-label="Primary">
+    <ul>
+      <li><a href="page-1.html">Studium</a></li>
+      <li class="fleur" aria-hidden="true">❦</li>
+      <li><a href="page-2.html">Faculties</a></li>
+      <li class="fleur" aria-hidden="true">❦</li>
+      <li><a href="page-3.html">Library</a></li>
+      <li class="fleur" aria-hidden="true">❦</li>
+      <li><a href="page-4.html">Admissions</a></li>
+      <li class="fleur" aria-hidden="true">❦</li>
+      <li><a href="page-5.html">Calendar</a></li>
+      <li class="fleur" aria-hidden="true">❦</li>
+      <li><a href="page-6.html" aria-current="page">Visit</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow"><span class="num">VI.</span> &nbsp;De Itinere — Of the Journey</div>
+    <p>The University occupies four buildings on the southern flank of the Vézelay hill, immediately below the Basilique Sainte-Marie-Madeleine.</p>
+    <p style="font-size:14px; color:var(--secondary); font-style:italic;">Visitors are received daily; the porter's lodge at 2 Place Saint-Aubain is staffed from seven of the morning to ten of the evening.</p>
+  </div>
+
+  <div class="hero-arch">
+    <svg class="frame" viewBox="0 0 500 540" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M 8,540 L 8,240 Q 8,8 250,8 Q 492,8 492,240 L 492,540 Z"
+            fill="none" stroke="var(--primary)" stroke-width="1.5"/>
+      <path d="M 22,540 L 22,242 Q 22,22 250,22 Q 478,22 478,242 L 478,540"
+            fill="none" stroke="var(--primary)" stroke-width="0.6" opacity="0.55"/>
+      <path d="M 36,540 L 36,244 Q 36,36 250,36 Q 464,36 464,244 L 464,540"
+            fill="none" stroke="var(--accent)" stroke-width="0.6" opacity="0.6"/>
+    </svg>
+    <div class="inner">
+      <svg class="quatrefoil" viewBox="-100 -100 200 200" aria-hidden="true">
+        <use href="#quatrefoil"/>
+      </svg>
+      <h1>Visiting the Hill <em>of Vézelay</em></h1>
+      <p class="standfirst">A practical guide for prospective students, scholars in residence, parents, and the merely pilgrim. Approach the Morvan in any season; the cloister is open through the Octave.</p>
+      <svg class="crest" viewBox="0 0 400 400" aria-hidden="true">
+        <use href="#cross-flory-mini"/>
+      </svg>
+      <p class="coords">47°27′58″N · 3°44′53″E · Alt. 302m</p>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-eyebrow">Hilary Term &middot; <span class="num">MMXXV</span></div>
+    <p>By rail from Paris-Bercy: TER to Sermizelles-Vézelay in 3h 10, thence the navette bus.</p>
+    <p style="font-size:14px; color:var(--secondary); font-style:italic;">By road: A6 motorway to Avallon, then the D957 westward through Pontaubert. Allow two hours from Dijon.</p>
+  </div>
+</section>
+
+<div class="divider" aria-hidden="true">
+  <span class="rule"></span>
+  <svg viewBox="0 0 60 60"><use href="#oak-divider"/></svg>
+  <span class="rule"></span>
+</div>
+
+<!-- THREE JOURNEYS -->
+<section class="journeys">
+  <header class="section-head">
+    <div class="kicker">Tres Viae &mdash; Three Approaches</div>
+    <h2>How One May Come</h2>
+    <p class="sub">Vézelay is a hill town reached by patience. The pilgrim road, the rail, and the highway each meet at the foot of the basilica; the University lies a hundred paces below.</p>
+  </header>
+
+  <div class="arch-grid">
+
+    <!-- CARD 1 — RAIL -->
+    <article class="arch-card">
+      <svg class="arch-svg" aria-hidden="true"><use href="#arch-frame"/></svg>
+      <svg class="finial" viewBox="-100 -100 200 200" aria-hidden="true"><use href="#quatrefoil"/></svg>
+      <div class="arch-card-body">
+        <p class="mode">I &middot; By Rail</p>
+        <h3>From Paris-Bercy<br>to Sermizelles</h3>
+        <div class="body-text">
+          Twelve trains daily depart Paris-Bercy on the TER Bourgogne line. The principal service leaves at 07:42 and reaches Sermizelles-Vézelay at 10:53 — three hours and eleven minutes through the Yonne valley. From the platform, the navette n°451 climbs the seven kilometres to Place du Champ-de-Foire.
+        </div>
+        <dl>
+          <dt>Departures</dt><dd>07:42 · 11:14 · 14:38 · 17:52</dd>
+          <dt>Journey</dt><dd>3h 10 (Paris) · 1h 28 (Auxerre)</dd>
+          <dt>Fare</dt><dd>€38.40 second class</dd>
+          <dt>Navette</dt><dd>Hourly, €2.50, 14 min</dd>
+        </dl>
+      </div>
+      <p class="meta">SNCF · TER 891 · Yonne</p>
+    </article>
+
+    <!-- CARD 2 — ROAD -->
+    <article class="arch-card">
+      <svg class="arch-svg" aria-hidden="true"><use href="#arch-frame"/></svg>
+      <svg class="finial" viewBox="-100 -100 200 200" aria-hidden="true"><use href="#quatrefoil"/></svg>
+      <div class="arch-card-body">
+        <p class="mode">II &middot; By Road</p>
+        <h3>The A6 and<br>the D957</h3>
+        <div class="body-text">
+          Quit the A6 at sortie 22 (Avallon); follow the D957 westward eleven kilometres, through Pontaubert and the Cure valley. Vézelay rises into view at the long bend before Saint-Père. Visitor parking is provided at the Champ-de-Foire (€4 for the day, free after 19:00); the University courtyards are pedestrian.
+        </div>
+        <dl>
+          <dt>From Paris</dt><dd>2h 40 · 232 km</dd>
+          <dt>From Dijon</dt><dd>1h 55 · 154 km</dd>
+          <dt>From Lyon</dt><dd>3h 20 · 285 km</dd>
+          <dt>Parking</dt><dd>Champ-de-Foire · €4/day</dd>
+        </dl>
+      </div>
+      <p class="meta">A6 · Sortie 22 · Avallon</p>
+    </article>
+
+    <!-- CARD 3 — FOOT -->
+    <article class="arch-card">
+      <svg class="arch-svg" aria-hidden="true"><use href="#arch-frame"/></svg>
+      <svg class="finial" viewBox="-100 -100 200 200" aria-hidden="true"><use href="#quatrefoil"/></svg>
+      <div class="arch-card-body">
+        <p class="mode">III &middot; On Foot</p>
+        <h3>By the Pilgrim's<br>Way</h3>
+        <div class="body-text">
+          Vézelay is one of the four starting-points of the Camino de Santiago. The GR-654 from Asquins climbs the western flank in forty minutes; the GR-13 enters from the Morvan in the east. Walkers presenting a credencial at the porter's lodge may consult the library reading-rooms without appointment, and are entitled to a stamp (sceau de pèlerin).
+        </div>
+        <dl>
+          <dt>From Asquins</dt><dd>2.4 km · 40 min</dd>
+          <dt>From Saint-Père</dt><dd>3.1 km · 55 min</dd>
+          <dt>Pilgrim stamp</dt><dd>Porter's lodge, gratis</dd>
+          <dt>Refuge</dt><dd>Maison Béthanie · 18 places</dd>
+        </dl>
+      </div>
+      <p class="meta">GR-13 · GR-654 · Compostela</p>
+    </article>
+
+  </div>
+</section>
+
+<!-- PRACTICAL: LODGE & MAP -->
+<section class="practical">
+  <div class="practical-grid">
+
+    <div class="lodge">
+      <h3>The Porter's Lodge</h3>
+      <p class="addr">2, Place Saint-Aubain &mdash; 89450 Vézelay</p>
+      <table class="hours-table">
+        <tbody>
+          <tr><th>Monday — Friday</th><td>07:00 &mdash; 22:00</td></tr>
+          <tr><th>Saturday</th><td>08:00 &mdash; 22:00</td></tr>
+          <tr><th>Sunday &amp; Feast-days</th><td>09:00 &mdash; 20:00</td></tr>
+          <tr><th>Telephone</th><td><span class="accent">+33 (0)3 86 33 24 17</span></td></tr>
+          <tr><th>Visites</th><td>visites@saintaubain-vezelay.fr</td></tr>
+        </tbody>
+      </table>
+
+      <div class="tours">
+        <h4>Guided Tours of the Cloître Nord</h4>
+        <p>The North Cloister and the chapter-house of Saint-Aubain may be visited in the company of a member of the Faculty of Arts. Tours run <strong>Tuesdays and Thursdays at 14:30, April through October</strong>, in French; an English tour is offered the first Saturday of each month at 11:00.</p>
+        <span class="price">€7 adult · €4 student · gratis for matriculated members</span>
+      </div>
+    </div>
+
+    <div class="map-side">
+      <h3>The Four Buildings</h3>
+      <p class="kicker">Plan of the precinct, southern flank of the hill</p>
+
+      <div class="schematic">
+        <svg viewBox="0 0 500 360" aria-hidden="true">
+          <!-- contour lines representing the hill -->
+          <g fill="none" stroke="var(--secondary)" stroke-width="0.5" opacity="0.35">
+            <path d="M 0,80 Q 250,30 500,80"/>
+            <path d="M 0,120 Q 250,75 500,120"/>
+            <path d="M 0,160 Q 250,120 500,160"/>
+            <path d="M 0,200 Q 250,165 500,200"/>
+          </g>
+          <!-- Basilica silhouette at top -->
+          <g fill="none" stroke="var(--primary)" stroke-width="1">
+            <rect x="210" y="40" width="80" height="40"/>
+            <path d="M 220,40 L 220,20 L 240,10 L 260,20 L 260,40"/>
+            <path d="M 250,40 L 250,20 L 270,10 L 290,20 L 290,40"/>
+            <line x1="230" y1="20" x2="230" y2="0"/>
+            <line x1="280" y1="20" x2="280" y2="0"/>
+          </g>
+          <text x="250" y="92" text-anchor="middle" font-family="Fraunces" font-style="italic" font-size="9" fill="var(--secondary)">Basilique Sainte-Marie-Madeleine</text>
+
+          <!-- Place Saint-Aubain (square) -->
+          <rect x="190" y="170" width="120" height="35" fill="none" stroke="var(--primary)" stroke-dasharray="2 2"/>
+          <text x="250" y="192" text-anchor="middle" font-family="Fraunces" font-style="italic" font-size="9" fill="var(--secondary)">Place Saint-Aubain</text>
+
+          <!-- Building 1 — Collège Saint-Aubain -->
+          <rect x="80" y="220" width="90" height="60" fill="var(--surface)" stroke="var(--primary)" stroke-width="1.2"/>
+          <text x="125" y="252" text-anchor="middle" font-family="Fraunces" font-size="11" fill="var(--primary)">Collège</text>
+          <text x="125" y="266" text-anchor="middle" font-family="Fraunces" font-size="9" fill="var(--secondary)">St-Aubain</text>
+          <circle cx="170" cy="220" r="9" fill="var(--accent)"/>
+          <text x="170" y="224" text-anchor="middle" font-family="Fraunces" font-size="11" fill="var(--primary)" font-weight="600">1</text>
+
+          <!-- Building 2 — Bibliothèque -->
+          <rect x="190" y="220" width="80" height="60" fill="var(--surface)" stroke="var(--primary)" stroke-width="1.2"/>
+          <text x="230" y="252" text-anchor="middle" font-family="Fraunces" font-size="11" fill="var(--primary)">Biblio-</text>
+          <text x="230" y="266" text-anchor="middle" font-family="Fraunces" font-size="11" fill="var(--primary)">thèque</text>
+          <circle cx="270" cy="220" r="9" fill="var(--accent)"/>
+          <text x="270" y="224" text-anchor="middle" font-family="Fraunces" font-size="11" fill="var(--primary)" font-weight="600">2</text>
+
+          <!-- Building 3 — Cloître Nord -->
+          <rect x="290" y="220" width="80" height="60" fill="var(--surface)" stroke="var(--primary)" stroke-width="1.2"/>
+          <text x="330" y="252" text-anchor="middle" font-family="Fraunces" font-size="11" fill="var(--primary)">Cloître</text>
+          <text x="330" y="266" text-anchor="middle" font-family="Fraunces" font-size="9" fill="var(--secondary)">Nord</text>
+          <circle cx="370" cy="220" r="9" fill="var(--accent)"/>
+          <text x="370" y="224" text-anchor="middle" font-family="Fraunces" font-size="11" fill="var(--primary)" font-weight="600">3</text>
+
+          <!-- Building 4 — Maison Béthanie -->
+          <rect x="120" y="295" width="160" height="44" fill="var(--surface)" stroke="var(--primary)" stroke-width="1.2"/>
+          <text x="200" y="320" text-anchor="middle" font-family="Fraunces" font-size="11" fill="var(--primary)">Maison Béthanie</text>
+          <text x="200" y="332" text-anchor="middle" font-family="Fraunces" font-size="8" fill="var(--secondary)">(student residence)</text>
+          <circle cx="280" cy="295" r="9" fill="var(--accent)"/>
+          <text x="280" y="299" text-anchor="middle" font-family="Fraunces" font-size="11" fill="var(--primary)" font-weight="600">4</text>
+
+          <!-- north arrow -->
+          <g transform="translate(450,40)">
+            <line x1="0" y1="20" x2="0" y2="-10" stroke="var(--primary)" stroke-width="1"/>
+            <polygon points="0,-14 -4,-6 4,-6" fill="var(--primary)"/>
+            <text x="0" y="32" text-anchor="middle" font-family="Fraunces" font-size="10" fill="var(--primary)">N</text>
+          </g>
+
+          <!-- Porter's lodge marker -->
+          <circle cx="250" cy="187" r="4" fill="var(--secondary)"/>
+        </svg>
+      </div>
+      <p class="schematic-caption">Schematic, not to scale &mdash; the basilica lies due north, the Cure valley to the south.</p>
+
+      <div class="legend">
+        <div class="legend-item">
+          <span class="num">1</span>
+          <div><span class="lbl">Collège Saint-Aubain</span><small>Lecture halls &amp; chapter house</small></div>
+        </div>
+        <div class="legend-item">
+          <span class="num">2</span>
+          <div><span class="lbl">Bibliothèque</span><small>Manuscripts, reading rooms</small></div>
+        </div>
+        <div class="legend-item">
+          <span class="num">3</span>
+          <div><span class="lbl">Cloître Nord</span><small>1147; tours Tu &amp; Th</small></div>
+        </div>
+        <div class="legend-item">
+          <span class="num">4</span>
+          <div><span class="lbl">Maison Béthanie</span><small>Residence &amp; refectory</small></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider" aria-hidden="true">
+  <span class="rule"></span>
+  <svg viewBox="0 0 60 60"><use href="#oak-divider"/></svg>
+  <span class="rule"></span>
+</div>
+
+<!-- LODGINGS -->
+<section class="lodgings">
+  <header class="section-head">
+    <div class="kicker">Hospitium &mdash; Where to Lodge</div>
+    <h2>Houses of Hospitality</h2>
+    <p class="sub">Four establishments on or beneath the hill, recommended by the Office of Visiting Scholars and bookable in advance.</p>
+  </header>
+
+  <div class="lodgings-grid">
+
+    <article class="lodge-card">
+      <p class="stars">✦ ✦ ✦ ✦</p>
+      <h4>Hôtel de la Poste<br>et du Lion d'Or</h4>
+      <p class="type">Place du Champ-de-Foire</p>
+      <p>The historic coaching inn at the foot of the hill, restored 2019. Thirty-eight rooms, oak-panelled dining-room, terrace overlooking the Cure.</p>
+      <div class="price-row">
+        <span>From</span>
+        <strong>€148 / night</strong>
+      </div>
+    </article>
+
+    <article class="lodge-card">
+      <p class="stars">✦ ✦ ✦</p>
+      <h4>Le Compostelle</h4>
+      <p class="type">Rue Saint-Pierre</p>
+      <p>Eighteen rooms in a 17th-century townhouse, thirty paces from the basilica. Faculty rate available on production of a letter from the registrar.</p>
+      <div class="price-row">
+        <span>From</span>
+        <strong>€92 / night</strong>
+      </div>
+    </article>
+
+    <article class="lodge-card">
+      <p class="stars">✦ ✦</p>
+      <h4>La Maison<br>Jeanne d'Arc</h4>
+      <p class="type">Rue Saint-Étienne</p>
+      <p>A guest-house run by the Sisters of the Présentation, with a quiet inner garden. Twelve simple rooms, breakfast at seven, no key after eleven.</p>
+      <div class="price-row">
+        <span>From</span>
+        <strong>€58 / night</strong>
+      </div>
+    </article>
+
+    <article class="lodge-card">
+      <p class="stars">PILGRIM</p>
+      <h4>Refuge<br>Maison Béthanie</h4>
+      <p class="type">University residence</p>
+      <p>Eighteen places in dormitory beds, reserved for credentialled pilgrims and matriculated visiting scholars. Booking through the porter's lodge only.</p>
+      <div class="price-row">
+        <span>Donation</span>
+        <strong>€18 suggested</strong>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- SEASON STRIP -->
+<section class="season">
+  <div class="season-inner">
+    <div>
+      <h3>Visiting by Season</h3>
+      <p class="lat">Per annum &mdash; the cloister and the lectures.</p>
+      <p style="font-size:13px; margin-top:14px;">The University is open to visitors year-round, but the Cloître Nord tours run only April–October, and the basilica's tympanum is best seen at the equinoxes, when light enters the central portal at dawn.</p>
+    </div>
+    <div class="calendar">
+      <div class="month"><div class="label">Jan – Mar</div><div class="note">Hilary term · cloister closed to public</div></div>
+      <div class="month open"><div class="label">Apr – Jun</div><div class="note">Tours resume · Pentecost pilgrimage</div></div>
+      <div class="month open"><div class="label">Jul – Sep</div><div class="note">Summer schools · Magdalene feast 22 July</div></div>
+      <div class="month open"><div class="label">Oct</div><div class="note">Last tours · Michaelmas opening</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <header class="section-head">
+    <div class="kicker">Quaestiones &mdash; A Few Replies</div>
+    <h2>Practical Matters</h2>
+  </header>
+  <div class="faq-grid">
+    <div class="faq-item">
+      <h4>May I attend a public lecture without booking?</h4>
+      <p>Yes &mdash; the Hilary lectures in the Salle Capitulaire are open to all, without charge or reservation, until the hall is filled. Doors open thirty minutes before the hour. The schedule for Hilary 2025 is given on the Calendar page.</p>
+    </div>
+    <div class="faq-item">
+      <h4>Are the buildings accessible to those with limited mobility?</h4>
+      <p>The Bibliothèque and the Collège ground floor are fully accessible by lift; the Cloître Nord, by virtue of its 12th-century stone steps, is regrettably not. The porter's lodge will arrange a private viewing of the cloister gardens upon request.</p>
+    </div>
+    <div class="faq-item">
+      <h4>Is the chapel open for prayer?</h4>
+      <p>The Chapelle Saint-Aubain is open from 07:30 to 18:30 for silent prayer and study; Mass is celebrated by the Fraternités Monastiques de Jérusalem at the basilica above. The University does not maintain a separate liturgy.</p>
+    </div>
+    <div class="faq-item">
+      <h4>May I bring a dog, or a child?</h4>
+      <p>Children are warmly welcomed in the precinct and on the cloister tour from age eight. Dogs on lead are permitted in the outer courtyards but not in the Bibliothèque or the chapel. The University cat, Origène, takes precedence in all matters.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site">
+  <div class="footer-arcade" aria-hidden="true">
+    <div class="footer-arch"><svg class="quatre" viewBox="-100 -100 200 200"><use href="#quatrefoil"/></svg></div>
+    <div class="footer-arch"><svg class="quatre" viewBox="-100 -100 200 200"><use href="#quatrefoil"/></svg></div>
+    <div class="footer-arch"><svg class="quatre" viewBox="-100 -100 200 200"><use href="#quatrefoil"/></svg></div>
+    <div class="footer-arch"><svg class="quatre" viewBox="-100 -100 200 200"><use href="#quatrefoil"/></svg></div>
+    <div class="footer-arch"><svg class="quatre" viewBox="-100 -100 200 200"><use href="#quatrefoil"/></svg></div>
+    <div class="footer-arch"><svg class="quatre" viewBox="-100 -100 200 200"><use href="#quatrefoil"/></svg></div>
+    <div class="footer-arch"><svg class="quatre" viewBox="-100 -100 200 200"><use href="#quatrefoil"/></svg></div>
+  </div>
+
+  <div class="footer-cols">
+    <div>
+      <h5>Address</h5>
+      <address>
+        Université Saint-Aubain de Vézelay<br>
+        2, Place Saint-Aubain<br>
+        89450 Vézelay &mdash; Yonne, Bourgogne<br>
+        France
+      </address>
+    </div>
+    <div>
+      <h5>Registrar &amp; Visites</h5>
+      <p>
+        Registrar: M. Gilbert Aumont<br>
+        registraire@saintaubain-vezelay.fr<br>
+        +33 (0)3 86 33 24 12<br><br>
+        Visites: visites@saintaubain-vezelay.fr<br>
+        +33 (0)3 86 33 24 17
+      </p>
+    </div>
+    <div>
+      <h5>Motto</h5>
+      <p class="motto">
+        « Lux in collem ascendit,<br>
+        et docti in luce ambulant. »
+        <small>Founded MCXLII &middot; Restored MDCCCXCI</small>
+      </p>
+    </div>
+  </div>
+
+  <div class="diaper" aria-hidden="true"></div>
+  <p class="colophon">Anno Domini MMXXV &middot; Omnia opera ad maiorem scientiae gloriam</p>
+</footer>
+
+</body>
+</html>

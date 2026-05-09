@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>The Cloisters of Saint-Évroult — Museum of Medieval Art</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  :root {
+    --rule: #0a0a0a;
+    --cobalt: #1e3a5f;
+    --gold: #c9a23a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    font-size: 17px;
+    line-height: 1.7;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* ============ MASTHEAD ============ */
+  .masthead {
+    padding: 48px 80px 0;
+    text-align: center;
+  }
+  .gold-rule {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin: 0 auto 22px;
+    max-width: 1100px;
+  }
+  .gold-rule::before,
+  .gold-rule::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--gold);
+  }
+  .gold-rule svg {
+    width: 22px;
+    height: 22px;
+    fill: var(--gold);
+    flex-shrink: 0;
+  }
+  .wordmark {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 38px;
+    letter-spacing: 0.04em;
+    color: var(--primary);
+    margin: 0 0 4px;
+    font-variant: small-caps;
+  }
+  .wordmark em {
+    font-style: italic;
+    color: var(--cobalt);
+    font-variant: normal;
+  }
+  .establishment {
+    font-family: var(--font-body), sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--text);
+    opacity: 0.7;
+    margin: 0 0 28px;
+  }
+
+  /* ============ ARCADE NAV ============ */
+  nav.arcade {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    padding: 0 0 18px;
+    border-bottom: 1px solid var(--rule);
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  nav.arcade a {
+    width: 162px;
+    height: 78px;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 14px;
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.14em;
+    font-size: 12px;
+    color: var(--primary);
+    border-left: 1px solid var(--rule);
+  }
+  nav.arcade a:last-child { border-right: 1px solid var(--rule); }
+  nav.arcade a::before {
+    content: "";
+    position: absolute;
+    inset: 0 6px 0 6px;
+    border: 1.5px solid var(--rule);
+    border-bottom: none;
+    border-radius: 75px 75px 0 0 / 60px 60px 0 0;
+    clip-path: polygon(0 100%, 0 50%, 50% 0, 100% 50%, 100% 100%);
+    background: transparent;
+    z-index: 0;
+  }
+  nav.arcade a span { position: relative; z-index: 1; }
+  nav.arcade a[aria-current="page"] {
+    color: var(--bg);
+  }
+  nav.arcade a[aria-current="page"]::before {
+    background: var(--cobalt);
+    border-color: var(--cobalt);
+  }
+  nav.arcade a:hover:not([aria-current="page"])::before {
+    background: rgba(201, 162, 58, 0.12);
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    padding: 60px 80px 40px;
+    text-align: center;
+    position: relative;
+  }
+  .hero-arch {
+    width: 460px;
+    height: 600px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .hero-arch-frame {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .hero-arch-frame svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .hero-image {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    clip-path: path("M 230,0 C 230,0 130,80 80,180 C 50,240 40,320 40,420 L 40,600 L 420,600 L 420,420 C 420,320 410,240 380,180 C 330,80 230,0 230,0 Z");
+  }
+  .hero-image-inner {
+    width: 100%;
+    height: 100%;
+    background:
+      linear-gradient(180deg, rgba(30,58,95,0.18) 0%, rgba(30,58,95,0.05) 30%, rgba(58,38,24,0.25) 100%),
+      repeating-linear-gradient(85deg, #6b7a6e 0px, #6b7a6e 2px, #7a8978 2px, #7a8978 8px),
+      linear-gradient(180deg, #a8b3a4 0%, #6f7d6b 50%, #4a5048 100%);
+    position: relative;
+  }
+  /* Painted cloister-walk impression */
+  .hero-image-inner::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      /* arches of the walk, receding */
+      radial-gradient(ellipse 60px 130px at 18% 60%, rgba(244,236,216,0.55) 0%, rgba(244,236,216,0.55) 35%, transparent 36%),
+      radial-gradient(ellipse 50px 110px at 32% 60%, rgba(244,236,216,0.45) 0%, rgba(244,236,216,0.45) 35%, transparent 36%),
+      radial-gradient(ellipse 42px 95px at 44% 60%, rgba(244,236,216,0.38) 0%, rgba(244,236,216,0.38) 35%, transparent 36%),
+      radial-gradient(ellipse 36px 82px at 54% 60%, rgba(244,236,216,0.32) 0%, rgba(244,236,216,0.32) 35%, transparent 36%),
+      radial-gradient(ellipse 30px 70px at 62% 60%, rgba(244,236,216,0.28) 0%, rgba(244,236,216,0.28) 35%, transparent 36%),
+      radial-gradient(ellipse 26px 60px at 69% 60%, rgba(244,236,216,0.24) 0%, rgba(244,236,216,0.24) 35%, transparent 36%),
+      /* floor */
+      linear-gradient(180deg, transparent 70%, rgba(58,38,24,0.4) 80%, rgba(30,15,10,0.7) 100%),
+      /* sky/ceiling glow at top */
+      linear-gradient(180deg, rgba(244,236,216,0.35) 0%, transparent 28%);
+  }
+  .hero-image-inner::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      /* columns between arches */
+      repeating-linear-gradient(90deg,
+        transparent 0%, transparent 17%,
+        rgba(40,28,18,0.45) 17%, rgba(40,28,18,0.45) 18%,
+        transparent 18%, transparent 30%,
+        rgba(40,28,18,0.40) 30%, rgba(40,28,18,0.40) 31%,
+        transparent 31%, transparent 42%,
+        rgba(40,28,18,0.35) 42%, rgba(40,28,18,0.35) 43%,
+        transparent 43%, transparent 53%,
+        rgba(40,28,18,0.30) 53%, rgba(40,28,18,0.30) 54%,
+        transparent 54%, transparent 62%,
+        rgba(40,28,18,0.25) 62%, rgba(40,28,18,0.25) 63%,
+        transparent 63%, transparent 100%);
+    mix-blend-mode: multiply;
+  }
+  .hero-caption {
+    margin-top: 28px;
+    font-family: var(--font-body), sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--text);
+    opacity: 0.7;
+  }
+  .hero-subtitle {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 19px;
+    color: var(--cobalt);
+    margin: 14px auto 0;
+    max-width: 640px;
+    line-height: 1.5;
+  }
+
+  /* ============ DIVIDER ============ */
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    margin: 50px auto;
+    max-width: 800px;
+  }
+  .divider::before, .divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+    opacity: 0.55;
+  }
+  .divider svg {
+    width: 36px;
+    height: 36px;
+    fill: var(--rule);
+  }
+
+  /* ============ ANNOUNCEMENT PANELS ============ */
+  .panels-wrap {
+    padding: 0 80px;
+  }
+  .panels-heading {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    font-size: 13px;
+    color: var(--cobalt);
+    margin: 0 0 36px;
+  }
+  .panels {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 36px;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  .panel {
+    position: relative;
+    padding: 56px 32px 36px;
+    text-align: center;
+  }
+  .panel-arch {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  .panel-arch svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+  .panel:hover .panel-arch .diaper {
+    opacity: 0.08;
+  }
+  .panel-arch .diaper {
+    opacity: 0;
+    transition: opacity 240ms ease;
+  }
+  .panel-spandrel {
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 26px;
+    height: 26px;
+    color: var(--gold);
+    z-index: 2;
+  }
+  .panel-eyebrow {
+    font-family: var(--font-body), sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 0 0 8px;
+    position: relative;
+  }
+  .panel-title {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.06em;
+    font-size: 22px;
+    color: var(--cobalt);
+    margin: 0 0 4px;
+    line-height: 1.2;
+    position: relative;
+  }
+  .panel-meta {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--gold);
+    margin: 0 0 20px;
+    letter-spacing: 0.04em;
+    position: relative;
+  }
+  .panel-body {
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: var(--text);
+    margin: 0 0 22px;
+    position: relative;
+    text-align: left;
+  }
+  .panel-link {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    font-size: 12px;
+    color: var(--cobalt);
+    border-bottom: 1px solid var(--gold);
+    padding-bottom: 2px;
+    position: relative;
+  }
+
+  /* ============ DIRECTOR ============ */
+  .director {
+    max-width: 720px;
+    margin: 80px auto 100px;
+    padding: 0 40px;
+    text-align: center;
+  }
+  .director-eyebrow {
+    font-family: var(--font-body), sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 0 0 18px;
+  }
+  .director-text {
+    font-family: var(--font-display), serif;
+    font-size: 18px;
+    line-height: 1.75;
+    color: var(--text);
+    font-style: italic;
+    margin: 0 0 24px;
+  }
+  .director-text::first-letter {
+    font-family: var(--font-display), serif;
+    font-size: 56px;
+    font-style: normal;
+    font-weight: 500;
+    float: left;
+    line-height: 0.85;
+    padding: 6px 10px 0 0;
+    color: var(--cobalt);
+  }
+  .director-sig {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    font-size: 13px;
+    color: var(--cobalt);
+  }
+  .director-sig em {
+    display: block;
+    font-style: italic;
+    font-variant: normal;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--text);
+    opacity: 0.7;
+    margin-top: 4px;
+  }
+
+  /* ============ FOOTER ============ */
+  footer {
+    background: var(--cobalt);
+    color: #f4ecd8;
+    padding: 0 0 28px;
+    margin-top: 40px;
+  }
+  .footer-arcade {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    height: 54px;
+    border-bottom: 1px solid rgba(201, 162, 58, 0.4);
+  }
+  .footer-arcade svg {
+    width: 100%;
+    max-width: 1280px;
+    height: 100%;
+    display: block;
+  }
+  .footer-cols {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 60px 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 48px;
+    color: #f4ecd8;
+  }
+  .footer-col h4 {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    font-size: 12px;
+    color: var(--gold);
+    margin: 0 0 14px;
+    font-weight: 500;
+  }
+  .footer-col p, .footer-col li {
+    font-size: 14px;
+    line-height: 1.65;
+    margin: 0 0 6px;
+    color: #e8dec3;
+  }
+  .footer-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .footer-col strong {
+    font-weight: 500;
+    color: #f4ecd8;
+  }
+  .fleur-rule {
+    margin: 24px auto 0;
+    max-width: 1100px;
+    padding: 0 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+  }
+  .fleur-rule .glyphs {
+    font-family: var(--font-display), serif;
+    color: var(--gold);
+    font-size: 14px;
+    letter-spacing: 0.6em;
+    opacity: 0.85;
+  }
+  .colophon {
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(232, 222, 195, 0.65);
+    margin-top: 16px;
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="gold-rule" aria-hidden="true">
+    <svg viewBox="0 0 200 200"><path d="m43.583 863.37c-1.79 0.03-3.58 0.13-5.34 0.31-7.05 0.74-13.94 2.79-19.16 7.47s-8.2 12-7.69 21c0.51 9 4.3 16.14 10.19 20.34s13.31 5.53 21.03 5.19c15.45-0.69 32.83-8 45.81-18.31 1.41-1.12 2.83-2.04 4.25-3.06 4.3 6.68 7.61 14.83 9.34 24.06-7.5-5.07-21.01-10.55-35.66 1.5-22.14 18.21-24.99 12.88-45.34-2.13-2.86 36.07 15.01 54.64 44.66 52.5 0 0-13.95 4.26-3.59 26.41 6.02 12.87 8.41 20.07 6.56 25.19-12.84 2.29-15.77 7.78-5.57 12.66 45.1 9.97 65.67-27.47 68.66-66.04 45.36 0 52.86-31.8 52.5-50.37-8.21 11.07-22.16 11.07-32.87 2.5-9.93-7.95-21.69-16.18-39-1.13-1.74-11.68-5.69-22.13-11.22-30.72 19.36-11.37 38.72-14.46 52.53-10.81 5.48 1.45 9.46 4.09 12.37 6.97-8.97 8.36-11.84 26.38 2.28 27.03 18.92 0.88 21.03-15.45 13.56-27.13-5.45-8.51-16.42-13.23-25.66-16.56-17.51-4.63-39.74-0.57-61.28 12.5-5.17-5.72-11.13-10.22-17.72-12.97-7.08-2.95-17.54-5.73-28.28-6.31-1.79-0.1-3.58-0.13-5.37-0.09z" transform="translate(0 -852.36)"/></svg>
+    <svg viewBox="0 0 200 200" style="transform:scaleX(-1)"><path d="m43.583 863.37c-1.79 0.03-3.58 0.13-5.34 0.31-7.05 0.74-13.94 2.79-19.16 7.47s-8.2 12-7.69 21c0.51 9 4.3 16.14 10.19 20.34s13.31 5.53 21.03 5.19c15.45-0.69 32.83-8 45.81-18.31 1.41-1.12 2.83-2.04 4.25-3.06 4.3 6.68 7.61 14.83 9.34 24.06-7.5-5.07-21.01-10.55-35.66 1.5-22.14 18.21-24.99 12.88-45.34-2.13-2.86 36.07 15.01 54.64 44.66 52.5 0 0-13.95 4.26-3.59 26.41 6.02 12.87 8.41 20.07 6.56 25.19-12.84 2.29-15.77 7.78-5.57 12.66 45.1 9.97 65.67-27.47 68.66-66.04 45.36 0 52.86-31.8 52.5-50.37-8.21 11.07-22.16 11.07-32.87 2.5-9.93-7.95-21.69-16.18-39-1.13-1.74-11.68-5.69-22.13-11.22-30.72 19.36-11.37 38.72-14.46 52.53-10.81 5.48 1.45 9.46 4.09 12.37 6.97-8.97 8.36-11.84 26.38 2.28 27.03 18.92 0.88 21.03-15.45 13.56-27.13-5.45-8.51-16.42-13.23-25.66-16.56-17.51-4.63-39.74-0.57-61.28 12.5-5.17-5.72-11.13-10.22-17.72-12.97-7.08-2.95-17.54-5.73-28.28-6.31-1.79-0.1-3.58-0.13-5.37-0.09z" transform="translate(0 -852.36)"/></svg>
+  </div>
+  <h1 class="wordmark">The Cloisters of <em>Saint-Évroult</em></h1>
+  <p class="establishment">Musée municipal d'art médiéval &middot; La Ferté-en-Ouche</p>
+
+  <nav class="arcade" aria-label="Primary">
+    <a href="page-1.html" aria-current="page"><span>Home</span></a>
+    <a href="page-2.html"><span>Collection</span></a>
+    <a href="page-3.html"><span>Exhibition</span></a>
+    <a href="page-4.html"><span>History</span></a>
+    <a href="page-5.html"><span>Visit</span></a>
+    <a href="page-6.html"><span>Library</span></a>
+    <a href="mailto:contact@cloitres-saintevroult.fr"><span>Contact</span></a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-arch">
+    <div class="hero-image">
+      <div class="hero-image-inner"></div>
+    </div>
+    <div class="hero-arch-frame">
+      <svg viewBox="0 0 460 600" preserveAspectRatio="none">
+        <!-- pointed-arch outline -->
+        <path d="M 230,0 C 230,0 130,80 80,180 C 50,240 40,320 40,420 L 40,600 L 30,600 L 30,420 C 30,320 40,235 70,175 C 122,72 230,-10 230,-10 C 230,-10 338,72 390,175 C 420,235 430,320 430,420 L 430,600 L 420,600 L 420,420 C 420,320 410,240 380,180 C 330,80 230,0 230,0 Z"
+              fill="none" stroke="#0a0a0a" stroke-width="2"/>
+        <!-- inner reveal -->
+        <path d="M 230,18 C 230,18 138,92 92,188 C 64,246 54,322 54,420 L 54,592 L 406,592 L 406,420 C 406,322 396,246 368,188 C 322,92 230,18 230,18 Z"
+              fill="none" stroke="#0a0a0a" stroke-width="1" opacity="0.6"/>
+        <!-- spandrel cross-flory -->
+        <g transform="translate(230,46)" fill="#c9a23a">
+          <path d="M 0,-12 L 3,-3 L 12,0 L 3,3 L 0,12 L -3,3 L -12,0 L -3,-3 Z"/>
+          <circle r="2" fill="#1e3a5f"/>
+        </g>
+        <!-- keystone marker at apex inner -->
+        <circle cx="230" cy="22" r="3" fill="#1e3a5f"/>
+      </svg>
+    </div>
+  </div>
+  <p class="hero-caption">The North Walk &middot; West Bay, looking East</p>
+  <p class="hero-subtitle">Founded 1873 in the priory walls of Saint-Évroult,<br>La Ferté-en-Ouche.</p>
+</section>
+
+<div class="divider" aria-hidden="true">
+  <svg viewBox="0 0 39 40"><path d="M14.66 39.72c-0.03-0.03-0.69-0.08-1.46-0.11-1.81-0.06-2.37-0.54-2.63-2.21-0.11-0.73-0.18-6.09-0.14-11.91 0.03-5.82 0.07-12.76 0.09-15.41 0.02-3.93 0.1-4.83 0.39-4.83 0.2 0 0.41 0.14 0.47 0.31 0.17 0.51 0.73-0.03 0.73-0.69 0-0.71-0.65-1.39-0.92-0.96 0.5 0.34 0.18 2.16-0.54 2.74-0.54 0.44-1.46 0.47-13.7 0.44-7.22 0.02-15.44-0.05-18.28-0.14-4.83-0.16-5.2-0.14-5.74 0.33-0.58 0.5-0.58 0.51-0.53 10.58-0.03 5.93-0.15 10.02-0.29 9.93z" transform="translate(20 -124)"/></svg>
+</div>
+
+<section class="panels-wrap">
+  <h2 class="panels-heading">— Within the Cloister Walls —</h2>
+  <div class="panels">
+
+    <!-- Panel 1: Current Exhibition -->
+    <article class="panel">
+      <div class="panel-arch">
+        <svg viewBox="0 0 320 460" preserveAspectRatio="none">
+          <defs>
+            <pattern id="diaper1" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+              <rect width="40" height="40" fill="none"/>
+              <circle cx="0" cy="20" r="9" fill="#1e3a5f"/>
+              <circle cx="40" cy="20" r="9" fill="#1e3a5f"/>
+              <circle cx="20" cy="0" r="9" fill="#1e3a5f"/>
+              <circle cx="20" cy="40" r="9" fill="#1e3a5f"/>
+              <rect x="11" y="11" width="18" height="18" fill="#1e3a5f"/>
+            </pattern>
+          </defs>
+          <path class="diaper" d="M 160,8 C 160,8 80,70 50,140 C 30,190 22,260 22,340 L 22,452 L 298,452 L 298,340 C 298,260 290,190 270,140 C 240,70 160,8 160,8 Z"
+                fill="url(#diaper1)"/>
+          <path d="M 160,8 C 160,8 80,70 50,140 C 30,190 22,260 22,340 L 22,452 L 298,452 L 298,340 C 298,260 290,190 270,140 C 240,70 160,8 160,8 Z"
+                fill="none" stroke="#0a0a0a" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <svg class="panel-spandrel" viewBox="-15 -15 30 30">
+        <path d="M 0,-12 L 3,-3 L 12,0 L 3,3 L 0,12 L -3,3 L -12,0 L -3,-3 Z" fill="currentColor"/>
+        <circle r="2" fill="#1e3a5f"/>
+      </svg>
+      <p class="panel-eyebrow">Now on view</p>
+      <h3 class="panel-title">The Light of Chartres</h3>
+      <p class="panel-meta">Glass Fragments, 1194–1260</p>
+      <p class="panel-body">Forty-seven panels and shards recovered from the Atelier Lorin archive trace the cobalt and ruby palette that defined the High Gothic. The exhibition closes 14 March; admission is included with the priory ticket.</p>
+      <a class="panel-link" href="page-3.html">Enter the Exhibition →</a>
+    </article>
+
+    <!-- Panel 2: Permanent Galleries -->
+    <article class="panel">
+      <div class="panel-arch">
+        <svg viewBox="0 0 320 460" preserveAspectRatio="none">
+          <defs>
+            <pattern id="diaper2" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+              <rect width="40" height="40" fill="none"/>
+              <circle cx="0" cy="20" r="9" fill="#1e3a5f"/>
+              <circle cx="40" cy="20" r="9" fill="#1e3a5f"/>
+              <circle cx="20" cy="0" r="9" fill="#1e3a5f"/>
+              <circle cx="20" cy="40" r="9" fill="#1e3a5f"/>
+              <rect x="11" y="11" width="18" height="18" fill="#1e3a5f"/>
+            </pattern>
+          </defs>
+          <path class="diaper" d="M 160,8 C 160,8 80,70 50,140 C 30,190 22,260 22,340 L 22,452 L 298,452 L 298,340 C 298,260 290,190 270,140 C 240,70 160,8 160,8 Z"
+                fill="url(#diaper2)"/>
+          <path d="M 160,8 C 160,8 80,70 50,140 C 30,190 22,260 22,340 L 22,452 L 298,452 L 298,340 C 298,260 290,190 270,140 C 240,70 160,8 160,8 Z"
+                fill="none" stroke="#0a0a0a" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <svg class="panel-spandrel" viewBox="-15 -15 30 30">
+        <path d="M 0,-12 L 3,-3 L 12,0 L 3,3 L 0,12 L -3,3 L -12,0 L -3,-3 Z" fill="currentColor"/>
+        <circle r="2" fill="#1e3a5f"/>
+      </svg>
+      <p class="panel-eyebrow">Permanent Galleries</p>
+      <h3 class="panel-title">Stones of the Priory</h3>
+      <p class="panel-meta">Salles I–VI, eleventh to fifteenth centuries</p>
+      <p class="panel-body">Capitals from the demolished chapter house, a near-complete sequence of Norman tympana, polychrome wood saints, and the Carrouges reliquary cross. Six rooms run the length of the surviving north walk.</p>
+      <a class="panel-link" href="page-2.html">Browse the Collection →</a>
+    </article>
+
+    <!-- Panel 3: Visiting Essentials -->
+    <article class="panel">
+      <div class="panel-arch">
+        <svg viewBox="0 0 320 460" preserveAspectRatio="none">
+          <defs>
+            <pattern id="diaper3" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+              <rect width="40" height="40" fill="none"/>
+              <circle cx="0" cy="20" r="9" fill="#1e3a5f"/>
+              <circle cx="40" cy="20" r="9" fill="#1e3a5f"/>
+              <circle cx="20" cy="0" r="9" fill="#1e3a5f"/>
+              <circle cx="20" cy="40" r="9" fill="#1e3a5f"/>
+              <rect x="11" y="11" width="18" height="18" fill="#1e3a5f"/>
+            </pattern>
+          </defs>
+          <path class="diaper" d="M 160,8 C 160,8 80,70 50,140 C 30,190 22,260 22,340 L 22,452 L 298,452 L 298,340 C 298,260 290,190 270,140 C 240,70 160,8 160,8 Z"
+                fill="url(#diaper3)"/>
+          <path d="M 160,8 C 160,8 80,70 50,140 C 30,190 22,260 22,340 L 22,452 L 298,452 L 298,340 C 298,260 290,190 270,140 C 240,70 160,8 160,8 Z"
+                fill="none" stroke="#0a0a0a" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <svg class="panel-spandrel" viewBox="-15 -15 30 30">
+        <path d="M 0,-12 L 3,-3 L 12,0 L 3,3 L 0,12 L -3,3 L -12,0 L -3,-3 Z" fill="currentColor"/>
+        <circle r="2" fill="#1e3a5f"/>
+      </svg>
+      <p class="panel-eyebrow">To plan your visit</p>
+      <h3 class="panel-title">Hours &amp; Tickets</h3>
+      <p class="panel-meta">Tuesday–Sunday, 10h–17h30</p>
+      <p class="panel-body">Full admission 8 €, reduced 5 €, free for visitors under eighteen and on the first Sunday of each month. The priory is closed Mondays, 1 January, 1 May, and 25 December. Group tours by appointment.</p>
+      <a class="panel-link" href="page-5.html">Plan a Visit →</a>
+    </article>
+
+  </div>
+</section>
+
+<div class="divider" aria-hidden="true">
+  <svg viewBox="0 0 39 40"><path d="M14.66 39.72c-0.03-0.03-0.69-0.08-1.46-0.11-1.81-0.06-2.37-0.54-2.63-2.21-0.11-0.73-0.18-6.09-0.14-11.91 0.03-5.82 0.07-12.76 0.09-15.41 0.02-3.93 0.1-4.83 0.39-4.83 0.2 0 0.41 0.14 0.47 0.31 0.17 0.51 0.73-0.03 0.73-0.69 0-0.71-0.65-1.39-0.92-0.96 0.5 0.34 0.18 2.16-0.54 2.74-0.54 0.44-1.46 0.47-13.7 0.44-7.22 0.02-15.44-0.05-18.28-0.14-4.83-0.16-5.2-0.14-5.74 0.33-0.58 0.5-0.58 0.51-0.53 10.58-0.03 5.93-0.15 10.02-0.29 9.93z" transform="translate(20 -124)"/></svg>
+</div>
+
+<section class="director">
+  <p class="director-eyebrow">A word from the director</p>
+  <p class="director-text">The priory of Saint-Évroult was never one of the great names — Bec, Jumièges, Mont-Saint-Michel — and that is, I think, why it has so much to teach us. What survived here is the daily fabric of a Norman religious house: the cloister walk a community circled four times a day for five hundred years, the corbels carved by craftsmen whose names we will never know, the glass that lit the chapter house when the brothers gathered to read the Rule. Our task, since 1873, has been to keep that fabric legible. We hope you will find, in these galleries, something of the patience the stones themselves require.</p>
+  <p class="director-sig">Mme Aliénor Carrouges<em>Director, since 2019</em></p>
+</section>
+
+<footer>
+  <div class="footer-arcade" aria-hidden="true">
+    <svg viewBox="0 0 1280 54" preserveAspectRatio="none">
+      <g fill="none" stroke="#c9a23a" stroke-width="1">
+        <!-- nine miniature pointed arches -->
+        <path d="M 20,54 L 20,30 C 20,18 50,4 70,4 C 90,4 120,18 120,30 L 120,54"/>
+        <path d="M 160,54 L 160,30 C 160,18 190,4 210,4 C 230,4 260,18 260,30 L 260,54"/>
+        <path d="M 300,54 L 300,30 C 300,18 330,4 350,4 C 370,4 400,18 400,30 L 400,54"/>
+        <path d="M 440,54 L 440,30 C 440,18 470,4 490,4 C 510,4 540,18 540,30 L 540,54"/>
+        <path d="M 580,54 L 580,30 C 580,18 610,4 630,4 C 650,4 680,18 680,30 L 680,54"/>
+        <path d="M 720,54 L 720,30 C 720,18 750,4 770,4 C 790,4 820,18 820,30 L 820,54"/>
+        <path d="M 860,54 L 860,30 C 860,18 890,4 910,4 C 930,4 960,18 960,30 L 960,54"/>
+        <path d="M 1000,54 L 1000,30 C 1000,18 1030,4 1050,4 C 1070,4 1100,18 1100,30 L 1100,54"/>
+        <path d="M 1140,54 L 1140,30 C 1140,18 1170,4 1190,4 C 1210,4 1240,18 1240,30 L 1240,54"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="footer-cols">
+    <div class="footer-col">
+      <h4>Visiting Hours</h4>
+      <ul>
+        <li>Tuesday – Friday &nbsp; <strong>10h – 17h30</strong></li>
+        <li>Saturday – Sunday &nbsp; <strong>10h – 18h</strong></li>
+        <li>Closed Mondays &amp; principal holidays</li>
+        <li>Last admission 45 minutes before close</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>The Priory</h4>
+      <p>Les Cloîtres de Saint-Évroult<br>
+      12 rue Saint-Évroult<br>
+      61550 La Ferté-en-Ouche<br>
+      Orne, Normandie</p>
+      <p>+33 (0)2 33 34 18 90</p>
+    </div>
+    <div class="footer-col">
+      <h4>Acknowledgement</h4>
+      <p>The museum operates with the support of the Direction régionale des affaires culturelles de Normandie.</p>
+    </div>
+  </div>
+
+  <div class="fleur-rule" aria-hidden="true">
+    <span class="glyphs">⚜ ⚜ ⚜ ⚜ ⚜ ⚜ ⚜ ⚜ ⚜ ⚜ ⚜</span>
+  </div>
+  <p class="colophon">© MMXXV &middot; Musée Municipal d'Art Médiéval</p>
+</footer>
+
+</body>
+</html>

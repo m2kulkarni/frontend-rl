@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Works — Hangiten Yashiro</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), serif;
+    font-size: 15px;
+    line-height: 1.8;
+    position: relative;
+  }
+
+  /* Wagara background tile */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='280' height='280' viewBox='0 0 700 700'><defs><g id='C1'><path d='M 1,210 V 100 A 98,98 0 0 1 100,1 98,98 0 0 1 199,100 V 210' fill='none' stroke='%230c0c0c' stroke-width='2'/><path d='M 175,210 V 100 A 75,75 0 0 0 100,25 75,75 0 0 0 25,100 V 210' fill='none' stroke='%230c0c0c' stroke-width='1'/></g><g id='C4'><use href='%23C1'/><use href='%23C1' transform='translate(200,0)'/><use href='%23C1' transform='translate(400,0)'/><use href='%23C1' transform='translate(600,0)'/></g></defs><use href='%23C4'/><use href='%23C4' transform='translate(-100,100)'/><use href='%23C4' transform='translate(0,200)'/><use href='%23C4' transform='translate(-100,300)'/><use href='%23C4' transform='translate(0,400)'/><use href='%23C4' transform='translate(-100,500)'/><use href='%23C4' transform='translate(0,600)'/></svg>");
+    background-size: 280px 280px;
+    opacity: 0.08;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  main, header, footer { position: relative; z-index: 1; }
+
+  /* ============ NAVIGATION ============ */
+  .nav-band {
+    background: var(--surface);
+    padding: 22px 56px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-studio {
+    font-family: var(--font-display), serif;
+    font-size: 26px;
+    color: var(--text);
+    letter-spacing: 0.02em;
+  }
+  .nav-studio .ja { display: block; font-size: 15px; letter-spacing: 0.4em; color: var(--primary); margin-bottom: 2px; }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    font-family: var(--font-body), serif;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+  }
+  .nav-links a {
+    color: var(--text);
+    text-decoration: none;
+    padding: 0 18px;
+    border-right: 1px solid rgba(12,12,12,0.4);
+    transition: color 0.2s;
+  }
+  .nav-links a:last-of-type { border-right: none; }
+  .nav-links a[aria-current="page"] {
+    color: var(--secondary);
+    font-style: italic;
+  }
+  .nav-links a:hover { color: var(--secondary); }
+  .nav-seal {
+    width: 26px; height: 26px;
+    margin-left: 18px;
+    opacity: 0.85;
+  }
+  .nav-seal svg { width: 100%; height: 100%; display: block; }
+
+  .threshold {
+    height: 14px;
+    border-top: 1px solid var(--text);
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='100' viewBox='0 0 200 100'><g fill='none' stroke='%231c3a5e' stroke-width='1.2'><path d='M 0,50 A 25,25 0 0 1 50,50'/><path d='M 50,50 A 25,25 0 0 1 100,50'/><path d='M 100,50 A 25,25 0 0 1 150,50'/><path d='M 150,50 A 25,25 0 0 1 200,50'/></g></svg>");
+    background-size: 100px 50px;
+    background-repeat: repeat-x;
+    background-position: left top;
+    opacity: 0.55;
+  }
+
+  /* ============ PAGE HEAD ============ */
+  .page-head {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 90px 56px 60px;
+    gap: 40px;
+    align-items: end;
+  }
+  .page-head .label {
+    font-size: 10px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 12px;
+  }
+  .page-head h1 {
+    grid-column: 2 / 4;
+    font-family: var(--font-display), serif;
+    font-size: 78px;
+    line-height: 1.05;
+    margin: 0;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+  .page-head h1 .ja {
+    display: block;
+    font-size: 36px;
+    color: var(--primary);
+    margin-bottom: 14px;
+    letter-spacing: 0.15em;
+  }
+  .page-head .lede {
+    grid-column: 2 / 3;
+    margin-top: 38px;
+    font-size: 14.5px;
+    max-width: 32ch;
+    color: var(--text);
+  }
+  .page-head .lede em {
+    color: var(--text-emphasis);
+    font-style: italic;
+  }
+
+  /* ============ COLLECTION META BAR ============ */
+  .meta-bar {
+    margin: 0 56px 70px;
+    padding: 18px 0;
+    border-top: 1px solid var(--text);
+    border-bottom: 1px solid var(--text);
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 30px;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .meta-bar dt { color: var(--primary); margin-bottom: 4px; }
+  .meta-bar dd { margin: 0; font-family: var(--font-display), serif; font-size: 18px; letter-spacing: 0.05em; text-transform: none; color: var(--text); }
+
+  /* ============ WORKS GRID ============ */
+  .works {
+    padding: 0 56px 90px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 80px;
+    row-gap: 70px;
+  }
+  /* asymmetric stagger */
+  .works > * { position: relative; }
+  .works > *:nth-child(odd)  { margin-top: 0; }
+  .works > *:nth-child(even) { margin-top: 90px; }
+
+  .card {
+    background: var(--surface);
+    padding: 42px 44px 44px;
+    position: relative;
+    width: 86%;
+  }
+  .card.right-set { margin-left: auto; width: 88%; }
+  .card.left-set  { margin-right: auto; width: 84%; }
+
+  .card .kamon-corner {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 56px; height: 56px;
+    opacity: 0.10;
+    pointer-events: none;
+  }
+  .card .kamon-corner svg { width: 100%; height: 100%; }
+
+  .card .number {
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.4em;
+    color: var(--primary);
+    margin-bottom: 14px;
+  }
+  .card h3 {
+    font-family: var(--font-display), serif;
+    font-size: 26px;
+    line-height: 1.25;
+    margin: 0 0 4px;
+    color: var(--text);
+    max-width: 22ch;
+  }
+  .card.featured h3 {
+    border-bottom: 1.5px solid var(--secondary);
+    padding-bottom: 8px;
+    display: inline-block;
+  }
+  .card .ja-title {
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.18em;
+    color: var(--primary);
+    margin-bottom: 18px;
+  }
+  .card .subtitle {
+    font-style: italic;
+    font-size: 13px;
+    color: var(--primary);
+    margin-bottom: 22px;
+    letter-spacing: 0.04em;
+  }
+  .card p.body {
+    font-size: 14px;
+    line-height: 1.75;
+    margin: 0 0 22px;
+  }
+  .card .specs {
+    margin: 0;
+    border-top: 1px solid rgba(12,12,12,0.25);
+    padding-top: 16px;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    row-gap: 6px;
+    column-gap: 18px;
+    font-size: 12px;
+    line-height: 1.55;
+  }
+  .card .specs dt {
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 10px;
+    align-self: center;
+  }
+  .card .specs dd {
+    margin: 0;
+    color: var(--text);
+  }
+  .card .price {
+    margin-top: 22px;
+    font-family: var(--font-display), serif;
+    font-size: 18px;
+    color: var(--text);
+    letter-spacing: 0.04em;
+  }
+  .card .price .yen { color: var(--secondary); margin-right: 6px; }
+  .card .featured-tag {
+    position: absolute;
+    top: 42px;
+    left: -14px;
+    background: var(--secondary);
+    color: var(--surface);
+    padding: 4px 14px 5px;
+    font-size: 9px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+  }
+
+  /* ============ SECTION DIVIDER ============ */
+  .divider {
+    margin: 30px 56px 40px;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+  }
+  .divider .ornament {
+    width: 90px; height: 90px;
+    opacity: 0.5;
+    flex-shrink: 0;
+  }
+  .divider .ornament svg { width: 100%; height: 100%; }
+  .divider .text {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    color: var(--primary);
+    letter-spacing: 0.1em;
+  }
+  .divider .text small {
+    display: block;
+    font-family: var(--font-body), serif;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin-top: 4px;
+  }
+  .divider .rule {
+    flex: 1;
+    height: 1px;
+    background: var(--text);
+    opacity: 0.4;
+  }
+
+  /* ============ COLOPHON CALLOUT ============ */
+  .colophon-callout {
+    margin: 0 56px 100px;
+    padding: 60px 80px 60px 0;
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .colophon-callout .seal-frame {
+    position: relative;
+    aspect-ratio: 1/1;
+    width: 70%;
+    margin-left: auto;
+    background: var(--surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .colophon-callout .seal-frame svg {
+    width: 70%; height: 70%;
+    opacity: 0.92;
+  }
+  .colophon-callout h2 {
+    font-family: var(--font-display), serif;
+    font-size: 38px;
+    line-height: 1.15;
+    margin: 0 0 22px;
+    max-width: 18ch;
+  }
+  .colophon-callout p {
+    font-size: 14px;
+    max-width: 46ch;
+    margin: 0 0 14px;
+  }
+  .colophon-callout .pricing-note {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(12,12,12,0.3);
+    font-size: 12px;
+    color: var(--primary);
+    font-style: italic;
+    letter-spacing: 0.04em;
+  }
+
+  /* ============ FOOTER ============ */
+  footer {
+    background: var(--bg);
+    margin-top: 40px;
+    border-top: 1px solid var(--text);
+    position: relative;
+  }
+  footer::before {
+    content: "";
+    display: block;
+    height: 18px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='600' viewBox='0 0 600 600'><g fill='none' stroke='%230c0c0c' stroke-width='2'><polygon points='501.6,301.2 551.1,251.7 500.8,201.4 451.3,250.9 300.9,100.5 350.4,51 300.1,0.7 250.6,50.2 201.1,0.7 150.3,51.5 500.3,401.5 551.1,350.7'/><polygon points='600.9,199.9 551.6,150.7 601.2,101 550.7,50.4 501,100.1 450.4,150.7 400.8,200.3 451.3,250.9 501,201.2 550.3,250.5'/><polyline points='600,0 400.8,200.3 351,150.5 501.5,0'/><polygon points='349.9,452.9 300.4,502.4 250.1,452.1 299.6,402.6 149.2,252.2 99.7,301.7 49.4,251.4 98.9,201.9 49.4,152.4 100.2,101.6 450.2,451.6 399.4,502.4'/></g></svg>");
+    background-size: 180px 180px;
+    background-repeat: repeat-x;
+    opacity: 0.18;
+  }
+  .foot-upper {
+    padding: 50px 56px 30px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 60px;
+  }
+  .foot-upper .addr-ja {
+    font-family: var(--font-display), serif;
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--text);
+  }
+  .foot-upper .addr-en {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    line-height: 1.7;
+    color: var(--primary);
+    margin-top: 14px;
+  }
+  .foot-lower {
+    padding: 30px 56px 50px;
+    border-top: 1px solid rgba(12,12,12,0.3);
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 40px;
+  }
+  .foot-lower .colophon-line {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+  .foot-lower .center-seal {
+    width: 78px; height: 78px;
+    opacity: 0.85;
+  }
+  .foot-lower .center-seal svg { width: 100%; height: 100%; }
+  .foot-lower .right-col {
+    text-align: right;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    line-height: 1.8;
+    color: var(--text);
+  }
+  .foot-lower .right-col em {
+    color: var(--primary);
+    font-style: italic;
+  }
+
+  /* tsuru reusable inline */
+  .ic-tsuru { display: inline-block; }
+</style>
+</head>
+<body>
+
+<!-- =================== NAV =================== -->
+<header class="nav-band" role="banner">
+  <div class="nav-studio">
+    <span class="ja">浅草版木店</span>
+    Asakusa Hangiten
+  </div>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="page-1.html">Studio</a>
+    <a href="page-2.html" aria-current="page">Works</a>
+    <a href="page-3.html">Process</a>
+    <a href="page-4.html">Lineage</a>
+    <a href="page-5.html">Commissions</a>
+    <a href="page-6.html">Visit</a>
+    <span class="nav-seal" aria-hidden="true">
+      <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg">
+        <rect width="688" height="688" fill="#0c0c0c"/>
+        <path fill="#f5efde" d="M226 612c-18-2-37-9-52-20-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 15-17 20-21 28-21 64-27 97-16 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 88-8 13-22 27-35 35-20 12-43 17-65 14zm214 0c-18-2-37-9-52-20-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 15-17 20-21 28-21 64-27 97-16 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 88-8 13-22 27-35 35-20 12-43 17-65 14zM333 284c-18-2-37-9-52-20-6-4-16-14-20-20-21-28-27-64-16-97 3-10 9-21 15-29 4-6 15-17 20-21 28-21 64-27 97-16 16 5 29 14 41 26 12 12 19 24 24 40 10 30 7 61-9 88-8 13-22 27-35 35-20 12-43 17-65 14z"/>
+      </svg>
+    </span>
+  </nav>
+</header>
+<div class="threshold" aria-hidden="true"></div>
+
+<main>
+
+  <!-- =================== PAGE HEAD =================== -->
+  <section class="page-head">
+    <div>
+      <div class="label">Catalogue · 二</div>
+      <p style="font-size:13px; max-width:24ch; margin:0; color:var(--primary);">Fifteen works currently held in studio inventory, ranging from chūban miniatures to ōban yoko-e panoramas.</p>
+    </div>
+    <h1>
+      <span class="ja">作品集</span>
+      Works of the<br>Eighth Generation
+    </h1>
+    <p class="lede">A working catalogue of editioned hanga produced at the Nishijin atelier between Heisei 31 and Reiwa 6. Each impression is pulled by hand on a kentō-aligned cherry block, on <em>Echizen kōzo</em> or Iwano Heizaburō hōsho, with sumi rubbed at the bench and pigments ground that morning.</p>
+  </section>
+
+  <!-- =================== META BAR =================== -->
+  <dl class="meta-bar">
+    <div><dt>Active editions</dt><dd>fifteen</dd></div>
+    <div><dt>Standard run</dt><dd>80 + 10 AP</dd></div>
+    <div><dt>Median blocks</dt><dd>six</dd></div>
+    <div><dt>Sōfubi paper</dt><dd>Echizen kōzo</dd></div>
+  </dl>
+
+  <!-- =================== WORKS GRID =================== -->
+  <section class="works" aria-label="Portfolio works">
+
+    <!-- 1 -->
+    <article class="card right-set featured">
+      <span class="featured-tag">Featured · 名作</span>
+      <span class="kamon-corner" aria-hidden="true">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="48" fill="none" stroke="#0c0c0c" stroke-width="1"/><circle cx="50" cy="50" r="34" fill="none" stroke="#0c0c0c" stroke-width="1"/><path d="M50 16 C 30 36, 30 64, 50 84 C 70 64, 70 36, 50 16 Z" fill="none" stroke="#0c0c0c" stroke-width="1"/><circle cx="50" cy="50" r="6" fill="#0c0c0c"/></svg>
+      </span>
+      <div class="number">No. 一 — 2024</div>
+      <h3>Cormorant Fishers, Uji River</h3>
+      <div class="ja-title">宇治川鵜飼</div>
+      <div class="subtitle">Uji-gawa Ukai · summer impression, third state</div>
+      <p class="body">A nocturne pulled from eight blocks, including a final pass of <em>kira</em> mica across the river surface. The cormorant master's torch is carried as a single vermilion impression, intentionally mis-registered by half a sun for the suggestion of flame-flicker.</p>
+      <dl class="specs">
+        <dt>Format</dt><dd>Ōban yoko-e</dd>
+        <dt>Dimensions</dt><dd>1尺2寸 × 8寸 · 364 × 242 mm</dd>
+        <dt>Blocks</dt><dd>eight (incl. kira-mica)</dd>
+        <dt>Edition</dt><dd>80 + 10 AP · 14 remaining</dd>
+        <dt>Paper</dt><dd>Iwano Heizaburō hōsho</dd>
+        <dt>Pulled</dt><dd>Reiwa 6 · summer 2024</dd>
+      </dl>
+      <div class="price"><span class="yen">¥</span>184,000</div>
+    </article>
+
+    <!-- 2 -->
+    <article class="card left-set">
+      <span class="kamon-corner" aria-hidden="true">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="48" fill="none" stroke="#0c0c0c" stroke-width="1"/><circle cx="50" cy="50" r="34" fill="none" stroke="#0c0c0c" stroke-width="1"/><path d="M50 16 C 30 36, 30 64, 50 84 C 70 64, 70 36, 50 16 Z" fill="none" stroke="#0c0c0c" stroke-width="1"/><circle cx="50" cy="50" r="6" fill="#0c0c0c"/></svg>
+      </span>
+      <div class="number">No. 二 — 2022</div>
+      <h3>Twelve Bridges of the Kamogawa, no. 4 — Sanjō at Dusk</h3>
+      <div class="ja-title">鴨川十二橋之内 三條暮色</div>
+      <div class="subtitle">From the suite begun in Reiwa 3, plate four of twelve</div>
+      <p class="body">Sanjō Bridge in the violet hour, with swallows passing low over the eastern bank. The graded sky (<em>bokashi</em>) was pulled wet-on-wet across two passes; the lanterns are a final inkpoint pricked by hand.</p>
+      <dl class="specs">
+        <dt>Format</dt><dd>Ōban tate-e</dd>
+        <dt>Dimensions</dt><dd>1尺2寸6分 × 8寸4分 · 382 × 255 mm</dd>
+        <dt>Blocks</dt><dd>six</dd>
+        <dt>Edition</dt><dd>80 + 10 AP · 31 remaining</dd>
+        <dt>Paper</dt><dd>Echizen kōzo, double-sized</dd>
+        <dt>Pulled</dt><dd>Reiwa 4 · autumn 2022</dd>
+      </dl>
+      <div class="price"><span class="yen">¥</span>132,000</div>
+    </article>
+
+    <!-- 3 -->
+    <article class="card right-set">
+      <span class="kamon-corner" aria-hidden="true">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="48" fill="none" stroke="#0c0c0c" stroke-width="1"/><circle cx="50" cy="50" r="34" fill="none" stroke="#0c0c0c" stroke-width="1"/><path d="M50 16 C 30 36, 30 64, 50 84 C 70 64, 70 36, 50 16 Z" fill="none" stroke="#0c0c0c" stroke-width="1"/><circle cx="50" cy="50" r="6" fill="#0c0c0c"/></svg>
+      </span>
+      <div class="number">No. 三 — 2019</div>
+      <h3>Snow on the Kitano Plum Grove</h3>
+      <div class="ja-title">北野梅林雪中</div>
+      <div class="subtitle">Winter morning, Tenmangū shrine grounds</div>
+      <p class="body">The white of the snow is the unprinted paper itself. Four blocks supply only the plum branches, the trunk shadow, the pale grey of the roof tiles, and a faint sumi sky. A study in restraint.</p>
+      <dl class="specs">
+        <dt>Format</dt><dd>Chūban</dd>
+        <dt>Dimensions</dt><dd>8寸6分 × 6寸 · 261 × 182 mm</dd>
+        <dt>Blocks</dt><dd>four</dd>
+        <dt>Edition</dt><dd>80 + 10 AP · sold out</dd>
+        <dt>Paper</dt><dd>Echizen kōzo</dd>
+        <dt>Pulled</dt><dd>Heisei 31 · spring 2019</dd>
+      </dl>
+      <div class="price" style="opacity:0.55"><span class="yen">¥</span>96,000 · waitlist</div>
+    </article>
+
+    <!-- 4 -->
+    <article class="card left-set featured">
+      <span class="featured-tag">Featured · 名作</span>
+      <span class="kamon-corner" aria-hidden="true">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="48" fill="none" stroke="#0c0c0c" stroke-width="1"/><circle cx="50" cy="50" r="34" fill="none" stroke="#0c0c0c" stroke-width="1"/><path d="M50 16 C 30 36, 30 64, 50 84 C 70 64, 70 36, 50 16 Z" fill="none" stroke="#0c0c0c" stroke-width="1"/><circle cx="50" cy="50" r="6" fill="#0c0c0c"/></svg>
+      </span>
+      <div class="number">No. 四 — 2023</div>
+      <h3>Nishijin Loom at First Light</h3>
+      <div class="ja-title">西陣機屋暁</div>
+      <div class="subtitle">After a sketch made at the Watabun atelier, Kamigyō-ku</div>
+      <p class="body">Five blocks describe the warp threads alone, struck in a graded sequence of tea-greens. The weaver's silhouette is a single sumi pull. Composed deliberately to leave the right two-fifths of the sheet empty — the silence of the workshop before the shuttle moves.</p>
+      <dl class="specs">
+        <dt>Format</dt><dd>Ōban tate-e</dd>
+        <dt>Dimensions</dt><dd>1尺2寸6分 × 8寸4分 · 382 × 255 mm</dd>
+        <dt>Blocks</dt><dd>seven</dd>
+        <dt>Edition</dt><dd>80 + 10 AP · 47 remaining</dd>
+        <dt>Paper</dt><dd>Iwano Heizaburō hōsho</dd>
+        <dt>Pulled</dt><dd>Reiwa 5 · spring 2023</dd>
+      </dl>
+      <div class="price"><span class="yen">¥</span>148,000</div>
+    </article>
+
+    <!-- 5 -->
+    <article class="card right-set">
+      <span class="kamon-corner" aria-hidden="true">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="48" fill="none" stroke="#0c0c0c" stroke-width="1"/><circle cx="50" cy="50" r="34" fill="none" stroke="#0c0c0c" stroke-width="1"/><path d="M50 16 C 30 36, 30 64, 50 84 C 70 64, 70 36, 50 16 Z" fill="none" stroke="#0c0c0c" stroke-width="1"/><circle cx="50" cy="50" r="6" fill="#0c0c0c"/></svg>
+      </span>
+      <div class="number">No. 五 — 2021</div>
+      <h3>Twelve Bridges of the Kamogawa, no. 7 — Demachi after Rain</h3>
+      <div class="ja-title">鴨川十二橋之内 出町雨後</div>
+      <div class="subtitle">Plate seven · the confluence at Demachiyanagi</div>
+      <p class="body">The Takano and Kamo rivers join under cleared sky. A single passage of indigo carries the wet flagstones; the willows are pulled twice, once with a mineral green, once with sumi tooth.</p>
+      <dl class="specs">
+        <dt>Format</dt><dd>Ōban tate-e</dd>
+        <dt>Dimensions</dt><dd>1尺2寸6分 × 8寸4分 · 382 × 255 mm</dd>
+        <dt>Blocks</dt><dd>six</dd>
+        <dt>Edition</dt><dd>80 + 10 AP · 22 remaining</dd>
+        <dt>Paper</dt><dd>Echizen kōzo</dd>
+        <dt>Pulled</dt><dd>Reiwa 3 · autumn 2021</dd>
+      </dl>
+      <div class="price"><span class="yen">¥</span>132,000</div>
+    </article>
+
+    <!-- 6 -->
+    <article class="card left-set">
+      <span class="kamon-corner" aria-hidden="true">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="48" fill="none" stroke="#0c0c0c" stroke-width="1"/><circle cx="50" cy="50" r="34" fill="none" stroke="#0c0c0c" stroke-width="1"/><path d="M50 16 C 30 36, 30 64, 50 84 C 70 64, 70 36, 50 16 Z" fill="none" stroke="#0c0c0c" stroke-width="1"/><circle cx="50" cy="50" r="6" fill="#0c0c0c"/></svg>
+      </span>
+      <div class="number">No. 六 — 2020</div>
+      <h3>Carp Beneath the Stone Lantern</h3>
+      <div class="ja-title">石燈籠下緋鯉</div>
+      <div class="subtitle">Murin-an garden, late summer</div>
+      <p class="body">A single nishiki-goi rendered in three reds, with the lantern face left as an unprinted oval. The pond's surface is a lacquer-black flat, baren-burnished to a sheen.</p>
+      <dl class="specs">
+        <dt>Format</dt><dd>Chūban</dd>
+        <dt>Dimensions</dt><dd>8寸6分 × 6寸 · 261 × 182 mm</dd>
+        <dt>Blocks</dt><dd>five</dd>
+        <dt>Edition</dt><dd>80 + 10 AP · 9 remaining</dd>
+        <dt>Paper</dt><dd>Echizen kōzo</dd>
+        <dt>Pulled</dt><dd>Reiwa 2 · summer 2020</dd>
+      </dl>
+      <div class="price"><span class="yen">¥</span>88,000</div>
+    </article>
+
+    <!-- 7 -->
+    <article class="card right-set">
+      <span class="kamon-corner" aria-hidden="true">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="48" fill="none" stroke="#0c0c0c" stroke-width="1"/><circle cx="50" cy="50" r="34" fill="none" stroke="#0c0c0c" stroke-width="1"/><path d="M50 16 C 30 36, 30 64, 50 84 C 70 64, 70 36, 50 16 Z" fill="none" stroke="#0c0c0c" stroke-width="1"/><circle cx="50" cy="50" r="6" fill="#0c0c0c"/></svg>
+      </span>
+      <div class="number">No. 七 — 2024</div>
+      <h3>Heron at the Sluicegate, Takase Canal</h3>
+      <div class="ja-title">高瀬川樋口鷺</div>
+      <div class="subtitle">Sketched at the Kiyamachi reach, dawn watch</div>
+      <p class="body">A lone shirasagi in profile against the canal's wooden sluice. The white feathering is held by the paper; only the leg and beak carry sumi. A study in ma — the active emptiness — at the lower edge.</p>
+      <dl class="specs">
+        <dt>Format</dt><dd>Hosoban (vertical pillar)</dd>
+        <dt>Dimensions</dt><dd>1尺2寸 × 5寸 · 364 × 152 mm</dd>
+        <dt>Blocks</dt><dd>three</dd>
+        <dt>Edition</dt><dd>80 + 10 AP · 58 remaining</dd>
+        <dt>Paper</dt><dd>Echizen kōzo</dd>
+        <dt>Pulled</dt><dd>Reiwa 6 · spring 2024</dd>
+      </dl>
+      <div class="price"><span class="yen">¥</span>74,000</div>
+    </article>
+
+    <!-- 8 -->
+    <article class="card left-set">
+      <span class="kamon-corner" aria-hidden="true">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="48" fill="none" stroke="#0c0c0c" stroke-width="1"/><circle cx="50" cy="50" r="34" fill="none" stroke="#0c0c0c" stroke-width="1"/><path d="M50 16 C 30 36, 30 64, 50 84 C 70 64, 70 36, 50 16 Z" fill="none" stroke="#0c0c0c" stroke-width="1"/><circle cx="50" cy="50" r="6" fill="#0c0c0c"/></svg>
+      </span>
+      <div class="number">No. 八 — 2018</div>
+      <h3>Arashiyama, the Hozu Boats Returning</h3>
+      <div class="ja-title">嵐山保津舟帰</div>
+      <div class="subtitle">An autumn view from the Togetsukyō embankment</div>
+      <p class="body">Six blocks; the maple band is laid in three sequential reds graded from cinnabar through madder to a near-black. The boats are sumi alone — the figures inside, three flecks of unprinted paper.</p>
+      <dl class="specs">
+        <dt>Format</dt><dd>Ōban yoko-e</dd>
+        <dt>Dimensions</dt><dd>1尺2寸 × 8寸 · 364 × 242 mm</dd>
+        <dt>Blocks</dt><dd>six</dd>
+        <dt>Edition</dt><dd>80 + 10 AP · sold out</dd>
+        <dt>Paper</dt><dd>Iwano Heizaburō hōsho</dd>
+        <dt>Pulled</dt><dd>Heisei 30 · autumn 2018</dd>
+      </dl>
+      <div class="price" style="opacity:0.55"><span class="yen">¥</span>128,000 · waitlist</div>
+    </article>
+
+  </section>
+
+  <!-- =================== DIVIDER =================== -->
+  <div class="divider" aria-hidden="false">
+    <div class="ornament">
+      <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+        <g fill="none" stroke="#1c3a5e" stroke-width="2">
+          <polygon points="501.6,301.2 551.1,251.7 500.8,201.4 451.3,250.9 300.9,100.5 350.4,51 300.1,0.7 250.6,50.2 201.1,0.7 150.3,51.5 500.3,401.5 551.1,350.7"/>
+          <polygon points="600.9,199.9 551.6,150.7 601.2,101 550.7,50.4 501,100.1 450.4,150.7 400.8,200.3 451.3,250.9 501,201.2 550.3,250.5"/>
+          <polyline points="600,0 400.8,200.3 351,150.5 501.5,0"/>
+          <polygon points="349.9,452.9 300.4,502.4 250.1,452.1 299.6,402.6 149.2,252.2 99.7,301.7 49.4,251.4 98.9,201.9 49.4,152.4 100.2,101.6 450.2,451.6 399.4,502.4"/>
+        </g>
+      </svg>
+    </div>
+    <div class="text">
+      続 ・ 後期作
+      <small>Continued · Recent Works</small>
+    </div>
+    <div class="rule"></div>
+  </div>
+
+  <!-- =================== WORKS GRID PART II =================== -->
+  <section class="works" aria-label="Recent works">
+
+    <!-- 9 -->
+    <article class="card right-set">
+      <span class="kamon-corner" aria-hidden="true">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="48" fill="none" stroke="#0c0c0c" stroke-width="1"/><circle cx="50" cy="50" r="34" fill="none" stroke="#0c0c0c" stroke-width="1"/><path d="M50 16 C 30 36, 30 64, 50 84 C 70 64, 70 36, 50 16 Z" fill="none" stroke="#0c0c0c" stroke-width="1"/><circle cx="50" cy="50" r="6" fill="#0c0c0c"/></svg>
+      </span>
+      <div class="number">No. 九 — 2022</div>
+      <h3>Inari, the Thousand Vermilion Gates</h3>
+      <div class="ja-title">伏見稲荷千鳥居</div>
+      <div class="subtitle">Fushimi Inari, an ascending view at the Senbon torii</div>
+      <p class="body">A single cinnabar pulled four times in graduated overlays — the deepest pass at the lower frame, the palest where the path bends out of sight. The black calligraphy on the pillars is half-deliberately illegible.</p>
+      <dl class="specs">
+        <dt>Format</dt><dd>Ōban tate-e</dd>
+        <dt>Dimensions</dt><dd>1尺2寸6分 × 8寸4分 · 382 × 255 mm</dd>
+        <dt>Blocks</dt><dd>five</dd>
+        <dt>Edition</dt><dd>80 + 10 AP · 18 remaining</dd>
+        <dt>Paper</dt><dd>Echizen kōzo</dd>
+        <dt>Pulled</dt><dd>Reiwa 4 · winter 2022</dd>
+      </dl>
+      <div class="price"><span class="yen">¥</span>118,000</div>
+    </article>
+
+    <!-- 10 -->
+    <article class="card left-set">
+      <span class="kamon-corner" aria-hidden="true">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="48" fill="none" stroke="#0c0c0c" stroke-width="1"/><circle cx="50" cy="50" r="34" fill="none" stroke="#0c0c0c" stroke-width="1"/><path d="M50 16 C 30 36, 30 64, 50 84 C 70 64, 70 36, 50 16 Z" fill="none" stroke="#0c0c0c" stroke-width="1"/><circle cx="50" cy="50" r="6" fill="#0c0c0c"/></svg>
+      </span>
+      <div class="number">No. 十 — 2023</div>
+      <h3>Crow on a Pine Bough, Gion</h3>
+      <div class="ja-title">祇園松枝鴉</div>
+      <div class="subtitle">After a sumi sketch made on Yasaka's western slope</div>
+      <p class="body">Two blocks only: the bough in a single bone-grey, the bird in a single ink-black. A homage to the Rinpa simplifications. Pulled on smaller paper for an intimate viewing distance.</p>
+      <dl class="specs">
+        <dt>Format</dt><dd>Chūban</dd>
+        <dt>Dimensions</dt><dd>8寸6分 × 6寸 · 261 × 182 mm</dd>
+        <dt>Blocks</dt><dd>two</dd>
+        <dt>Edition</dt><dd>80 + 10 AP · 41 remaining</dd>
+        <dt>Paper</dt><dd>Echizen kōzo, single-sized</dd>
+        <dt>Pulled</dt><dd>Reiwa 5 · winter 2023</dd>
+      </dl>
+      <div class="price"><span class="yen">¥</span>62,000</div>
+    </article>
+
+    <!-- 11 -->
+    <article class="card right-set featured">
+      <span class="featured-tag">Featured · 名作</span>
+      <span class="kamon-corner" aria-hidden="true">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="48" fill="none" stroke="#0c0c0c" stroke-width="1"/><circle cx="50" cy="50" r="34" fill="none" stroke="#0c0c0c" stroke-width="1"/><path d="M50 16 C 30 36, 30 64, 50 84 C 70 64, 70 36, 50 16 Z" fill="none" stroke="#0c0c0c" stroke-width="1"/><circle cx="50" cy="50" r="6" fill="#0c0c0c"/></svg>
+      </span>
+      <div class="number">No. 十一 — 2024</div>
+      <h3>Twelve Bridges of the Kamogawa, no. 11 — Shijō, Festival Eve</h3>
+      <div class="ja-title">鴨川十二橋之内 四條祭宵</div>
+      <div class="subtitle">Plate eleven · the night before Gion matsuri</div>
+      <p class="body">The most heavily printed sheet in the suite — nine blocks, including a final mica pass for the lanterns. Figures crossing the bridge are rendered in profile only, in five graded reds. The river beneath remains unprinted.</p>
+      <dl class="specs">
+        <dt>Format</dt><dd>Ōban tate-e</dd>
+        <dt>Dimensions</dt><dd>1尺2寸6分 × 8寸4分 · 382 × 255 mm</dd>
+        <dt>Blocks</dt><dd>nine (incl. kira-mica)</dd>
+        <dt>Edition</dt><dd>80 + 10 AP · 36 remaining</dd>
+        <dt>Paper</dt><dd>Iwano Heizaburō hōsho</dd>
+        <dt>Pulled</dt><dd>Reiwa 6 · early summer 2024</dd>
+      </dl>
+      <div class="price"><span class="yen">¥</span>168,000</div>
+    </article>
+
+    <!-- 12 -->
+    <article class="card left-set">
+      <span class="kamon-corner" aria-hidden="true">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="48" fill="none" stroke="#0c0c0c" stroke-width="1"/><circle cx="50" cy="50" r="34" fill="none" stroke="#0c0c0c" stroke-width="1"/><path d="M50 16 C 30 36, 30 64, 50 84 C 70 64, 70 36, 50 16 Z" fill="none" stroke="#0c0c0c" stroke-width="1"/><circle cx="50" cy="50" r="6" fill="#0c0c0c"/></svg>
+      </span>
+      <div class="number">No. 十二 — 2017</div>
+      <h3>The Bell of Chion-in</h3>
+      <div class="ja-title">知恩院大鐘</div>
+      <div class="subtitle">New Year's eve · the seventeen monks at the rope</div>
+      <p class="body">A near-square composition unusual for the studio. The bronze bell is achieved through a single gofun ground overprinted with sumi, then a fine pass of yellow ochre to suggest its weight in the lamplight.</p>
+      <dl class="specs">
+        <dt>Format</dt><dd>Shikishi-ban (square)</dd>
+        <dt>Dimensions</dt><dd>9寸 × 9寸 · 273 × 273 mm</dd>
+        <dt>Blocks</dt><dd>five</dd>
+        <dt>Edition</dt><dd>80 + 10 AP · sold out</dd>
+        <dt>Paper</dt><dd>Echizen kōzo</dd>
+        <dt>Pulled</dt><dd>Heisei 29 · winter 2017</dd>
+      </dl>
+      <div class="price" style="opacity:0.55"><span class="yen">¥</span>104,000 · waitlist</div>
+    </article>
+
+    <!-- 13 -->
+    <article class="card right-set">
+      <span class="kamon-corner" aria-hidden="true">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="48" fill="none" stroke="#0c0c0c" stroke-width="1"/><circle cx="50" cy="50" r="34" fill="none" stroke="#0c0c0c" stroke-width="1"/><path d="M50 16 C 30 36, 30 64, 50 84 C 70 64, 70 36, 50 16 Z" fill="none" stroke="#0c0c0c" stroke-width="1"/><circle cx="50" cy="50" r="6" fill="#0c0c0c"/></svg>
+      </span>
+      <div class="number">No. 十三 — 2021</div>
+      <h3>Iris and Plank Bridge, Heian-jingū</h3>
+      <div class="ja-title">平安神宮杜若八橋</div>
+      <div class="subtitle">An iris view answering the Ogata Kōrin tradition</div>
+      <p class="body">Indigo blossoms in three saturations against a low-grade bokashi water-band. The wooden plank bridge is rendered in unprinted relief, scored only by the kentō register marks at the corners.</p>
+      <dl class="specs">
+        <dt>Format</dt><dd>Ōban yoko-e</dd>
+        <dt>Dimensions</dt><dd>1尺2寸 × 8寸 · 364 × 242 mm</dd>
+        <dt>Blocks</dt><dd>seven</dd>
+        <dt>Edition</dt><dd>80 + 10 AP · 12 remaining</dd>
+        <dt>Paper</dt><dd>Iwano Heizaburō hōsho</dd>
+        <dt>Pulled</dt><dd>Reiwa 3 · early summer 2021</dd>
+      </dl>
+      <div class="price"><span class="yen">¥</span>142,000</div>
+    </article>
+
+    <!-- 14 -->
+    <article class="card left-set">
+      <span class="kamon-corner" aria-hidden="true">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="48" fill="none" stroke="#0c0c0c" stroke-width="1"/><circle cx="50" cy="50" r="34" fill="none" stroke="#0c0c0c" stroke-width="1"/><path d="M50 16 C 30 36, 30 64, 50 84 C 70 64, 70 36, 50 16 Z" fill="none" stroke="#0c0c0c" stroke-width="1"/><circle cx="50" cy="50" r="6" fill="#0c0c0c"/></svg>
+      </span>
+      <div class="number">No. 十四 — 2020</div>
+      <h3>Shimogamo Forest in Rain</h3>
+      <div class="ja-title">下鴨糺の森雨</div>
+      <div class="subtitle">Tadasu-no-mori · the unbroken grove</div>
+      <p class="body">A near-monochrome study. Four blocks of graded sumi describe the trunks, with a final almost-imperceptible pass of pale moss-green at the foot of the canopy. The rain is paper-grain alone.</p>
+      <dl class="specs">
+        <dt>Format</dt><dd>Ōban tate-e</dd>
+        <dt>Dimensions</dt><dd>1尺2寸6分 × 8寸4分 · 382 × 255 mm</dd>
+        <dt>Blocks</dt><dd>four</dd>
+        <dt>Edition</dt><dd>80 + 10 AP · 24 remaining</dd>
+        <dt>Paper</dt><dd>Echizen kōzo, double-sized</dd>
+        <dt>Pulled</dt><dd>Reiwa 2 · autumn 2020</dd>
+      </dl>
+      <div class="price"><span class="yen">¥</span>108,000</div>
+    </article>
+
+    <!-- 15 -->
+    <article class="card right-set">
+      <span class="kamon-corner" aria-hidden="true">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="48" fill="none" stroke="#0c0c0c" stroke-width="1"/><circle cx="50" cy="50" r="34" fill="none" stroke="#0c0c0c" stroke-width="1"/><path d="M50 16 C 30 36, 30 64, 50 84 C 70 64, 70 36, 50 16 Z" fill="none" stroke="#0c0c0c" stroke-width="1"/><circle cx="50" cy="50" r="6" fill="#0c0c0c"/></svg>
+      </span>
+      <div class="number">No. 十五 — 2019</div>
+      <h3>Otowa Waterfall, Kiyomizu</h3>
+      <div class="ja-title">音羽瀧</div>
+      <div class="subtitle">The three streams of Kiyomizu-dera, dawn</div>
+      <p class="body">Six blocks. The water itself is the unprinted paper, struck only with three thin sumi lines pulled almost dry, in the manner of the late Edo Toba-e. The temple posts in the upper right form the only chromatic mass — burnt sienna, deepened twice.</p>
+      <dl class="specs">
+        <dt>Format</dt><dd>Hosoban (vertical pillar)</dd>
+        <dt>Dimensions</dt><dd>1尺2寸 × 5寸 · 364 × 152 mm</dd>
+        <dt>Blocks</dt><dd>six</dd>
+        <dt>Edition</dt><dd>80 + 10 AP · 7 remaining</dd>
+        <dt>Paper</dt><dd>Iwano Heizaburō hōsho</dd>
+        <dt>Pulled</dt><dd>Heisei 31 · spring 2019</dd>
+      </dl>
+      <div class="price"><span class="yen">¥</span>92,000</div>
+    </article>
+
+  </section>
+
+  <!-- =================== COLOPHON CALLOUT =================== -->
+  <section class="colophon-callout">
+    <div class="seal-frame">
+      <svg viewBox="0 0 345 326" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(2.4,5.4)" fill="#1c3a5e">
+          <circle cx="170" cy="153" r="9.8"/>
+          <path d="M 50 30 Q 80 10 110 30 L 110 90 Q 80 70 50 90 Z M 145 18 Q 175 -2 205 18 L 205 78 Q 175 58 145 78 Z M 240 30 Q 270 10 300 30 L 300 90 Q 270 70 240 90 Z" opacity="0.6"/>
+          <path d="M 60 110 Q 90 90 130 110 L 130 170 Q 90 150 60 170 Z M 215 110 Q 245 90 285 110 L 285 170 Q 245 150 215 170 Z" opacity="0.4"/>
+          <path d="M 170 175 Q 130 195 110 250 Q 130 290 170 310 Q 210 290 230 250 Q 210 195 170 175 Z" opacity="0.7"/>
+        </g>
+      </svg>
+    </div>
+    <div>
+      <h2>Acquiring a print<br><span style="color:var(--text-emphasis);">求印之事</span></h2>
+      <p>Each impression is signed in pencil at the lower-left margin and embossed at the lower-right with the eighth-generation Yashiro seal. The colophon block (<em>oku-zuke</em>) on the verso records the edition number, paper-mill, and date of pulling. Editions sold out in the studio occasionally re-emerge through Tokyo Bunsendō and Kyoto Hyōgu Sasaki — please write for current trace.</p>
+      <p>Standard editions ship rolled in paulownia tubes; collector impressions on hōsho are flat-shipped between cherry boards. Domestic delivery within Japan is included; international shipping is quoted at cost.</p>
+      <div class="pricing-note">All prices in Japanese yen, exclusive of consumption tax. Studio inquiries answered in the order received — current backlog approximately three weeks.</div>
+    </div>
+  </section>
+
+</main>
+
+<!-- =================== FOOTER =================== -->
+<footer>
+  <div class="foot-upper">
+    <div></div>
+    <div>
+      <div class="addr-ja">京都市上京区西陣<br>武者小路通油小路東入 千本筋三軒目</div>
+      <div class="addr-en">Kyōto-shi · Kamigyō-ku · Nishijin<br>Mushanokōji-dōri Aburanokōji higashi-iru, Sembon-suji san-gen-me</div>
+    </div>
+  </div>
+  <div class="foot-lower">
+    <div class="colophon-line">
+      Hangiten Yashiro · founded Bunkyū 2 / 1862<br>
+      current proprietor 8th generation
+    </div>
+    <div class="center-seal" aria-hidden="true">
+      <svg viewBox="0 0 345 326" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(2.4,5.4)" fill="none" stroke="#0c0c0c" stroke-width="1.4">
+          <circle cx="170" cy="153" r="9.8" fill="#0c0c0c"/>
+          <path d="M 50 30 Q 80 10 110 30 L 110 90 Q 80 70 50 90 Z"/>
+          <path d="M 145 18 Q 175 -2 205 18 L 205 78 Q 175 58 145 78 Z"/>
+          <path d="M 240 30 Q 270 10 300 30 L 300 90 Q 270 70 240 90 Z"/>
+          <path d="M 60 110 Q 90 90 130 110 L 130 170 Q 90 150 60 170 Z"/>
+          <path d="M 215 110 Q 245 90 285 110 L 285 170 Q 245 150 215 170 Z"/>
+          <path d="M 170 175 Q 130 195 110 250 Q 130 290 170 310 Q 210 290 230 250 Q 210 195 170 175 Z"/>
+          <line x1="170" y1="175" x2="170" y2="310"/>
+          <line x1="120" y1="200" x2="220" y2="200"/>
+        </g>
+      </svg>
+    </div>
+    <div class="right-col">
+      © Reiwa 6 · Tomé Yashiro 八代目 矢代登明<br>
+      <em>Kamon SVG renderings · CC-BY-SA via Wikimedia Commons</em>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

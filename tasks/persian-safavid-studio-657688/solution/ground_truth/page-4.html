@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Crafts & Methods — Atelier Naqsh-e Jahan</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--font-body),Georgia,serif;
+    font-size:17px;
+    line-height:1.55;
+  }
+  a{color:inherit;text-decoration:none;}
+
+  /* ---------- TOP RULE & NAV ---------- */
+  .topRule{
+    height:6px;
+    background:var(--primary);
+    border-bottom:1px solid var(--accent);
+  }
+  .topRule::after{
+    content:"";
+    display:block;
+    height:1px;
+    background:var(--accent);
+    margin-top:2px;
+  }
+  nav.primary{
+    background:var(--bg);
+    border-bottom:1px solid rgba(30,58,95,0.2);
+    padding:18px 0 16px;
+    text-align:center;
+  }
+  nav.primary ul{
+    list-style:none;
+    margin:0;padding:0;
+    display:inline-flex;
+    align-items:center;
+    gap:0;
+  }
+  nav.primary li{display:inline-flex;align-items:center;}
+  nav.primary a{
+    font-family:var(--font-display),serif;
+    font-size:11px;
+    letter-spacing:0.32em;
+    text-transform:uppercase;
+    color:var(--primary);
+    padding:4px 18px;
+    display:inline-block;
+    position:relative;
+  }
+  nav.primary a[aria-current="page"]{
+    border-bottom:2px solid var(--accent);
+    padding-bottom:2px;
+  }
+  nav.primary .palmette{
+    display:inline-block;
+    width:14px;height:14px;
+    color:var(--accent);
+  }
+  nav.primary .palmette svg{width:100%;height:100%;display:block;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    background:var(--primary);
+    color:var(--bg);
+    padding:70px 0 90px;
+    overflow:hidden;
+    text-align:center;
+    border-bottom:3px double var(--accent);
+  }
+  .hero::before,.hero::after{
+    content:"";
+    position:absolute;top:0;bottom:0;width:120px;
+    background-image:
+      repeating-linear-gradient(45deg,transparent 0 10px,rgba(201,162,58,0.18) 10px 11px),
+      repeating-linear-gradient(-45deg,transparent 0 10px,rgba(42,138,138,0.15) 10px 11px);
+  }
+  .hero::before{left:0;border-right:1px solid var(--accent);}
+  .hero::after{right:0;border-left:1px solid var(--accent);}
+  .hero .arch{
+    position:absolute;top:30px;left:50%;transform:translateX(-50%);
+    width:420px;height:460px;opacity:0.18;
+    pointer-events:none;
+  }
+  .hero .arch svg{width:100%;height:100%;}
+  .hero .arch svg path{stroke:var(--accent)!important;}
+  .hero h1{
+    position:relative;
+    font-family:var(--font-display),serif;
+    font-size:46px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin:0 0 12px;
+    text-shadow:0 0 20px rgba(0,0,0,0.4);
+  }
+  .hero .kicker{
+    position:relative;
+    font-family:var(--font-display),serif;
+    font-size:11px;
+    letter-spacing:0.5em;
+    text-transform:uppercase;
+    color:var(--secondary);
+    margin-bottom:24px;
+  }
+  .hero .lede{
+    position:relative;
+    max-width:680px;
+    margin:0 auto;
+    font-style:italic;
+    font-size:20px;
+    line-height:1.6;
+    color:var(--bg);
+  }
+  .hero .lede em{color:var(--accent);font-style:normal;}
+
+  /* ---------- DIVIDERS ---------- */
+  .divider{
+    display:flex;justify-content:center;align-items:center;
+    padding:36px 0;
+  }
+  .divider svg{height:24px;width:auto;}
+  .divider svg path,.divider svg polyline{fill:var(--accent);stroke:var(--accent);}
+
+  /* ---------- MAIN ---------- */
+  main{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 60px;
+  }
+  .intro{
+    text-align:center;
+    max-width:780px;
+    margin:50px auto 10px;
+    font-size:18px;
+    line-height:1.7;
+  }
+  .intro p{margin:0 0 14px;}
+
+  /* ---------- CRAFT SECTION ---------- */
+  .craft{
+    display:grid;
+    grid-template-columns:1fr 1.4fr;
+    gap:50px;
+    align-items:start;
+    padding:30px 0;
+  }
+  .craft.flip{grid-template-columns:1.4fr 1fr;}
+  .craft.flip .panel{order:2;}
+  .craft.flip .body{order:1;}
+
+  .panel{
+    background:#faf2dd;
+    border:1.5px solid var(--primary);
+    box-shadow:inset 0 0 0 6px var(--bg),inset 0 0 0 7px var(--accent);
+    padding:36px 28px 28px;
+    position:relative;
+    text-align:center;
+  }
+  .panel .arch-wrap{
+    position:relative;
+    width:100%;
+    height:240px;
+    margin-bottom:14px;
+  }
+  .panel .arch-wrap svg{
+    width:100%;height:100%;
+    display:block;
+  }
+  .panel .arch-wrap svg path{stroke:var(--primary)!important;stroke-width:4!important;}
+  .panel .arch-inner{
+    position:absolute;
+    top:14px;left:50%;transform:translateX(-50%);
+    width:62%;height:88%;
+    background:
+      radial-gradient(circle at 50% 18%, rgba(42,138,138,0.18), transparent 60%),
+      repeating-linear-gradient(45deg, rgba(30,58,95,0.08) 0 6px, transparent 6px 12px);
+    border-bottom:1px solid var(--accent);
+  }
+  .panel .medallion{
+    position:absolute;
+    top:24px;left:50%;transform:translateX(-50%);
+    width:38px;height:38px;
+    background:var(--secondary);
+    border:2px solid var(--accent);
+    border-radius:50%;
+    box-shadow:0 0 0 3px var(--bg),0 0 0 4px var(--secondary);
+    z-index:3;
+  }
+  .panel .medallion::after{
+    content:"";
+    position:absolute;inset:6px;
+    background:var(--text-emphasis);
+    border-radius:50%;
+    border:1px solid var(--accent);
+  }
+  .panel h3{
+    font-family:var(--font-display),serif;
+    font-size:18px;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:var(--primary);
+    margin:6px 0 4px;
+  }
+  .panel .farsi{
+    font-family:var(--font-body),serif;
+    font-style:italic;
+    color:var(--text-emphasis);
+    font-size:15px;
+    margin-bottom:14px;
+  }
+  .panel .swatches{
+    display:flex;justify-content:center;gap:10px;
+    margin:8px 0 4px;
+  }
+  .panel .swatches span{
+    display:inline-block;width:22px;height:22px;
+    border:1px solid var(--accent);
+  }
+
+  /* body of craft */
+  .body h2{
+    font-family:var(--font-display),serif;
+    font-size:30px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--primary);
+    margin:0 0 4px;
+  }
+  .body .sub{
+    font-family:var(--font-display),serif;
+    font-size:11px;
+    letter-spacing:0.4em;
+    text-transform:uppercase;
+    color:var(--secondary);
+    margin-bottom:18px;
+  }
+  .body p{margin:0 0 14px;text-align:justify;}
+  .body p:first-letter{
+    font-family:var(--font-display),serif;
+    font-size:42px;
+    float:left;
+    line-height:0.9;
+    padding:6px 8px 0 0;
+    color:var(--text-emphasis);
+  }
+  .body .specs{
+    display:grid;grid-template-columns:1fr 1fr;
+    gap:6px 24px;
+    margin:18px 0;
+    padding:14px 18px;
+    border-top:1px solid var(--accent);
+    border-bottom:1px solid var(--accent);
+    background:rgba(201,162,58,0.06);
+  }
+  .body .specs dt{
+    font-family:var(--font-display),serif;
+    font-size:10px;
+    letter-spacing:0.25em;
+    text-transform:uppercase;
+    color:var(--primary);
+  }
+  .body .specs dd{margin:0 0 6px;font-style:italic;color:var(--text-emphasis);}
+
+  .rate{
+    margin-top:18px;
+    padding:16px 20px;
+    background:var(--primary);
+    color:var(--bg);
+    border-left:4px solid var(--accent);
+    border-right:4px solid var(--accent);
+  }
+  .rate h4{
+    font-family:var(--font-display),serif;
+    font-size:11px;
+    letter-spacing:0.35em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin:0 0 8px;
+  }
+  .rate ul{
+    list-style:none;margin:0;padding:0;
+    font-size:15px;
+  }
+  .rate li{
+    display:flex;justify-content:space-between;
+    padding:3px 0;
+    border-bottom:1px dotted rgba(201,162,58,0.4);
+  }
+  .rate li:last-child{border-bottom:none;}
+  .rate li span:last-child{color:var(--accent);font-style:italic;}
+  .commission{
+    margin-top:14px;
+    font-size:14px;
+    color:var(--text-emphasis);
+    font-style:italic;
+    text-align:right;
+  }
+  .commission strong{
+    font-style:normal;
+    font-family:var(--font-display),serif;
+    color:var(--primary);
+    letter-spacing:0.15em;
+    font-size:11px;
+    text-transform:uppercase;
+  }
+
+  /* ---------- CLOSING NOTE ---------- */
+  .closing{
+    text-align:center;
+    max-width:760px;
+    margin:30px auto 60px;
+    padding:30px;
+    border:1px solid var(--accent);
+    background:#f7eccf;
+    position:relative;
+  }
+  .closing::before,.closing::after{
+    content:"❖";
+    color:var(--accent);
+    font-size:18px;
+    position:absolute;top:-12px;background:var(--bg);padding:0 8px;
+  }
+  .closing::before{left:30px;}
+  .closing::after{right:30px;}
+  .closing h3{
+    font-family:var(--font-display),serif;
+    letter-spacing:0.25em;
+    text-transform:uppercase;
+    font-size:14px;
+    color:var(--primary);
+    margin:0 0 10px;
+  }
+  .closing p{margin:0;font-style:italic;}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--primary);
+    color:var(--bg);
+    margin-top:40px;
+    border-top:2px solid var(--secondary);
+    border-bottom:2px solid var(--secondary);
+    position:relative;
+  }
+  footer .topfilet,footer .botfilet{
+    height:3px;background:var(--secondary);
+  }
+  .foot-inner{
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    align-items:center;
+    gap:40px;
+    padding:50px 80px 30px;
+  }
+  .foot-col{font-size:14px;line-height:1.7;}
+  .foot-col h4{
+    font-family:var(--font-display),serif;
+    font-size:10px;
+    letter-spacing:0.4em;
+    color:var(--accent);
+    text-transform:uppercase;
+    margin:0 0 8px;
+  }
+  .foot-col.right{text-align:right;}
+  .seal{
+    width:140px;height:140px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .seal svg{width:100%;height:100%;}
+  .copyright{
+    text-align:center;
+    padding:14px 0 18px;
+    font-family:var(--font-display),serif;
+    font-size:10px;
+    letter-spacing:0.4em;
+    text-transform:uppercase;
+    color:var(--bg);
+    border-top:1px solid rgba(201,162,58,0.3);
+  }
+  .attribution{
+    text-align:center;
+    font-style:italic;
+    font-size:13px;
+    color:var(--accent);
+    padding:0 0 6px;
+  }
+</style>
+</head>
+<body>
+
+<div class="topRule"></div>
+
+<nav class="primary" aria-label="Primary">
+  <ul>
+    <li><a href="page-1.html">Atelier</a></li>
+    <li class="palmette" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M10 2 L12 8 L18 10 L12 12 L10 18 L8 12 L2 10 L8 8 Z" fill="currentColor"/></svg></li>
+    <li><a href="page-2.html">Workshop</a></li>
+    <li class="palmette" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M10 2 L12 8 L18 10 L12 12 L10 18 L8 12 L2 10 L8 8 Z" fill="currentColor"/></svg></li>
+    <li><a href="page-3.html">Commissions</a></li>
+    <li class="palmette" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M10 2 L12 8 L18 10 L12 12 L10 18 L8 12 L2 10 L8 8 Z" fill="currentColor"/></svg></li>
+    <li><a href="page-4.html" aria-current="page">Crafts &amp; Methods</a></li>
+    <li class="palmette" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M10 2 L12 8 L18 10 L12 12 L10 18 L8 12 L2 10 L8 8 Z" fill="currentColor"/></svg></li>
+    <li><a href="page-5.html">Apprenticeship</a></li>
+    <li class="palmette" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M10 2 L12 8 L18 10 L12 12 L10 18 L8 12 L2 10 L8 8 Z" fill="currentColor"/></svg></li>
+    <li><a href="page-6.html">Visit</a></li>
+  </ul>
+</nav>
+
+<header class="hero">
+  <div class="arch" aria-hidden="true">
+    <svg viewBox="0 0 500 550" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(8.2,-12)">
+        <g style="fill:none;stroke:#c9a23a;stroke-width:3.125;stroke-linecap:round;">
+          <path d="m 388.984,268.984 -57.342,98.846 c 0,0 -25.866,42.495 -83.142,62.818 -57.275,20.323 -100.760,86.775 -99.770,153.350 54.339,0.096 3.097,-0.096 62.468,0.254 0,0 -2.044,-66.404 63.168,-94.481 50.355,-21.680 83.142,-42.495 114.551,-88.684"/>
+          <path d="m 250,430.58 24.752,58.416"/>
+          <path d="m 347.030,342.461 41.584,23.762 0.990,35.644"/>
+          <path d="m 211.386,583.055 -1.485,211.881"/>
+        </g>
+        <g style="fill:none;stroke:#c9a23a;stroke-width:3.125;stroke-linecap:round;" transform="matrix(-1,0,0,1,777.881,-0.297)">
+          <path d="m 388.984,268.984 -57.342,98.846 c 0,0 -25.866,42.495 -83.142,62.818 -57.275,20.323 -100.760,86.775 -99.770,153.350 54.339,0.096 3.097,-0.096 62.468,0.254 0,0 -2.044,-66.404 63.168,-94.481 50.355,-21.680 83.142,-42.495 114.551,-88.684"/>
+          <path d="m 250,430.58 24.752,58.416"/>
+          <path d="m 347.030,342.461 41.584,23.762 0.990,35.644"/>
+          <path d="m 211.386,583.055 -1.485,211.881"/>
+        </g>
+      </g>
+    </svg>
+  </div>
+  <div class="kicker">Pīshe-hā va Ravesh-hā</div>
+  <h1>Crafts &amp; Methods</h1>
+  <p class="lede">Four <em>disciplines</em> practised under one courtyard sky — cut tile, painted glaze, brick set in calligraphy, and the measured hand that records what time has forgotten.</p>
+</header>
+
+<main>
+
+  <section class="intro">
+    <p>The Atelier accepts commissions in four hereditary practices, each carried forward from the workshops that adorned the Masjid-e Shāh and the Masjid-e Sheikh Lotfollāh between 1611 and 1629. Below, we describe the method, the material, and the rate at which our masters undertake new work in the year 1403 (2024–25).</p>
+  </section>
+
+  <div class="divider" aria-hidden="true">
+    <svg viewBox="0 0 437.999 18.893" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,9.445c0,0,37.005-0.063,73.998-0.829c18.495-0.386,36.989-0.949,50.831-1.785c6.919-0.414,12.677-0.906,16.663-1.46c1.99-0.28,3.539-0.582,4.535-0.878c0.502-0.146,0.844-0.297,1.049-0.405c0.157-0.107,0.238-0.162,0.238-0.162l0.42-0.287l0.656,0.656l-0.369,0.338c0,0-0.154,0.142-0.456,0.324c-0.291,0.154-0.714,0.331-1.256,0.484c-1.085,0.314-2.667,0.608-4.686,0.879c-4.037,0.533-9.811,0.985-16.745,1.354c-13.868,0.744-32.369,1.183-50.870,1.443C37.003,9.632,0,9.445,0,9.445z"/>
+      <path d="M437.999,9.445c0,0-37.004,0.187-74.007-0.329c-18.501-0.261-37.002-0.699-50.869-1.443c-6.935-0.368-12.708-0.820-16.745-1.354c-2.019-0.271-3.601-0.565-4.687-0.879c-0.541-0.153-0.965-0.330-1.256-0.484c-0.302-0.183-0.456-0.324-0.456-0.324l-0.369-0.338l0.656-0.656l0.420,0.287c0,0,0.081,0.055,0.238,0.162c0.204,0.108,0.546,0.260,1.048,0.405c0.996,0.296,2.545,0.598,4.535,0.878c3.986,0.554,9.744,1.046,16.663,1.460C327.011,7.667,345.506,8.230,364,8.616C400.994,9.382,437.999,9.445,437.999,9.445z"/>
+      <polyline fill="none" stroke="#c9a23a" stroke-width="2" points="209.416,13.307 219,9.445 228.583,5.584"/>
+      <circle cx="219" cy="9.445" r="4" fill="#c9a23a"/>
+    </svg>
+  </div>
+
+  <!-- CRAFT 1: MO'ARRAQ -->
+  <section class="craft">
+    <aside class="panel">
+      <div class="medallion" aria-hidden="true"></div>
+      <div class="arch-wrap" aria-hidden="true">
+        <div class="arch-inner"></div>
+        <svg viewBox="0 0 500 550" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(8.2,-12)">
+            <g style="fill:none;stroke:#1e3a5f;stroke-width:4;stroke-linecap:round;">
+              <path d="m 388.984,268.984 -57.342,98.846 c 0,0 -25.866,42.495 -83.142,62.818 -57.275,20.323 -100.760,86.775 -99.770,153.350 54.339,0.096 3.097,-0.096 62.468,0.254 0,0 -2.044,-66.404 63.168,-94.481 50.355,-21.680 83.142,-42.495 114.551,-88.684"/>
+            </g>
+            <g style="fill:none;stroke:#1e3a5f;stroke-width:4;stroke-linecap:round;" transform="matrix(-1,0,0,1,777.881,-0.297)">
+              <path d="m 388.984,268.984 -57.342,98.846 c 0,0 -25.866,42.495 -83.142,62.818 -57.275,20.323 -100.760,86.775 -99.770,153.350 54.339,0.096 3.097,-0.096 62.468,0.254 0,0 -2.044,-66.404 63.168,-94.481 50.355,-21.680 83.142,-42.495 114.551,-88.684"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <h3>Mo'arraq</h3>
+      <div class="farsi">معرّق &mdash; cut-tile mosaic</div>
+      <div class="swatches" aria-hidden="true">
+        <span style="background:#1e3a5f"></span>
+        <span style="background:#2a8a8a"></span>
+        <span style="background:#c9a23a"></span>
+        <span style="background:#7a1f2e"></span>
+        <span style="background:#f2e5cc"></span>
+      </div>
+    </aside>
+    <div class="body">
+      <h2>Mo'arraq</h2>
+      <div class="sub">Cut-Tile Mosaic &middot; Cartoon &amp; Pincer</div>
+      <p>The cartoon (<em>tarh</em>) is laid full-scale on the workshop's plaster floor, then traced in red ochre. Each colour is fired separately — cobalt slabs at 980 °C, turquoise at 920 °C, oxblood manganese at 940 °C — and only after cooling are the tiles broken to shape with the curved-jaw <em>kalbatān</em>. A single spandrel of one square metre demands roughly 2,400 individual cuts. The fragments are then set face-down in the cartoon and a thin gypsum-and-lime backing is poured; when cured, the panel is reversed and the figure lives.</p>
+      <p>Our glazes follow the receipts kept by Ustad Ali-Reza of the Masjid-e Sheikh Lotfollāh atelier, refreshed only by modest substitutions of lead with bismuth-frit. The cobalt is still the Qamsar ore, ground in walnut oil; the turquoise still draws from copper-carbonate fluxed with potash from tamarisk ash.</p>
+
+      <dl class="specs">
+        <dt>Kiln</dt><dd>wood-fired, 920–980 °C</dd>
+        <dt>Body</dt><dd>siliceous fritware</dd>
+        <dt>Glazes</dt><dd>Qamsar cobalt, copper turquoise</dd>
+        <dt>Cut</dt><dd>kalbatān pincer, by hand</dd>
+      </dl>
+
+      <div class="rate">
+        <h4>Rate Guide &mdash; 1403</h4>
+        <ul>
+          <li><span>Spandrel panel, 1 m²</span><span>48,000,000 toman</span></li>
+          <li><span>Mihrab niche, full</span><span>from 320,000,000</span></li>
+          <li><span>Inscription band (Thuluth), per linear metre</span><span>22,500,000</span></li>
+          <li><span>Replacement tile, single piece</span><span>180,000</span></li>
+        </ul>
+      </div>
+      <p class="commission"><strong>Commission &mdash;</strong> moarraq@naqsh-e-jahan.ir &middot; Ustad Hossein Tabrizi, +98 31 3220 4471</p>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true">
+    <svg viewBox="0 0 437.999 18.893" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,9.445c0,0,37.005-0.063,73.998-0.829c18.495-0.386,36.989-0.949,50.831-1.785c6.919-0.414,12.677-0.906,16.663-1.46c1.99-0.28,3.539-0.582,4.535-0.878c0.502-0.146,0.844-0.297,1.049-0.405c0.157-0.107,0.238-0.162,0.238-0.162l0.42-0.287l0.656,0.656l-0.369,0.338c0,0-0.154,0.142-0.456,0.324c-0.291,0.154-0.714,0.331-1.256,0.484c-1.085,0.314-2.667,0.608-4.686,0.879c-4.037,0.533-9.811,0.985-16.745,1.354c-13.868,0.744-32.369,1.183-50.870,1.443C37.003,9.632,0,9.445,0,9.445z"/>
+      <path d="M437.999,9.445c0,0-37.004,0.187-74.007-0.329c-18.501-0.261-37.002-0.699-50.869-1.443c-6.935-0.368-12.708-0.820-16.745-1.354c-2.019-0.271-3.601-0.565-4.687-0.879c-0.541-0.153-0.965-0.330-1.256-0.484c-0.302-0.183-0.456-0.324-0.456-0.324l-0.369-0.338l0.656-0.656l0.420,0.287c0,0,0.081,0.055,0.238,0.162c0.204,0.108,0.546,0.260,1.048,0.405c0.996,0.296,2.545,0.598,4.535,0.878c3.986,0.554,9.744,1.046,16.663,1.460C327.011,7.667,345.506,8.230,364,8.616C400.994,9.382,437.999,9.445,437.999,9.445z"/>
+      <circle cx="219" cy="9.445" r="4" fill="#c9a23a"/>
+    </svg>
+  </div>
+
+  <!-- CRAFT 2: HAFT-RANG -->
+  <section class="craft flip">
+    <aside class="panel">
+      <div class="medallion" aria-hidden="true"></div>
+      <div class="arch-wrap" aria-hidden="true">
+        <div class="arch-inner" style="background:radial-gradient(circle at 50% 30%, rgba(122,31,46,0.25), transparent 60%),repeating-linear-gradient(90deg, rgba(201,162,58,0.15) 0 8px, transparent 8px 16px);"></div>
+        <svg viewBox="0 0 500 550" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(8.2,-12)">
+            <g style="fill:none;stroke:#1e3a5f;stroke-width:4;stroke-linecap:round;">
+              <path d="m 388.984,268.984 -57.342,98.846 c 0,0 -25.866,42.495 -83.142,62.818 -57.275,20.323 -100.760,86.775 -99.770,153.350 54.339,0.096 3.097,-0.096 62.468,0.254 0,0 -2.044,-66.404 63.168,-94.481 50.355,-21.680 83.142,-42.495 114.551,-88.684"/>
+            </g>
+            <g style="fill:none;stroke:#1e3a5f;stroke-width:4;stroke-linecap:round;" transform="matrix(-1,0,0,1,777.881,-0.297)">
+              <path d="m 388.984,268.984 -57.342,98.846 c 0,0 -25.866,42.495 -83.142,62.818 -57.275,20.323 -100.760,86.775 -99.770,153.350 54.339,0.096 3.097,-0.096 62.468,0.254 0,0 -2.044,-66.404 63.168,-94.481 50.355,-21.680 83.142,-42.495 114.551,-88.684"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <h3>Haft-Rang</h3>
+      <div class="farsi">هفت‌رنگ &mdash; seven-colour overglaze</div>
+      <div class="swatches" aria-hidden="true">
+        <span style="background:#1e3a5f"></span>
+        <span style="background:#2a8a8a"></span>
+        <span style="background:#c9a23a"></span>
+        <span style="background:#7a1f2e"></span>
+        <span style="background:#f2e5cc"></span>
+        <span style="background:#0f1f3d"></span>
+        <span style="background:#c5824a"></span>
+      </div>
+    </aside>
+    <div class="body">
+      <h2>Haft-Rang</h2>
+      <div class="sub">Seven-Colour Overglaze &middot; Painted Tile</div>
+      <p>Where mo'arraq cuts the figure from coloured ground, haft-rang paints it. The square biscuit-tile, dipped in opaque white tin-glaze, becomes the surface upon which the painter lays seven oxide colours in a single firing. The savings in labour are considerable; the hazards are equal — colours volatile at 880 °C will fight one another for the same space, and the muffle must rise and fall on a slow curve over thirty-six hours.</p>
+      <p>This method is suited to floral fields, garden scenes, and the figural medallions our patrons request for private rooms. The atelier's workhorse panel is 22 cm square, joined in grids of nine to eighty-one tiles. Cobalt, turquoise, manganese-purple, antimony-yellow, iron-red, copper-green, and a single black drawn from chromium make the seven.</p>
+
+      <dl class="specs">
+        <dt>Kiln</dt><dd>muffle-fired, 860–880 °C</dd>
+        <dt>Tile</dt><dd>22 × 22 cm biscuit, tin-glazed</dd>
+        <dt>Palette</dt><dd>seven oxides, single firing</dd>
+        <dt>Schedule</dt><dd>36-hour rise &amp; cool</dd>
+      </dl>
+
+      <div class="rate">
+        <h4>Rate Guide &mdash; 1403</h4>
+        <ul>
+          <li><span>Floral panel, 9-tile (66 × 66 cm)</span><span>14,800,000 toman</span></li>
+          <li><span>Figural medallion, 25-tile</span><span>62,000,000</span></li>
+          <li><span>Garden field, 81-tile (2 × 2 m)</span><span>from 240,000,000</span></li>
+          <li><span>Single test tile, by appointment</span><span>950,000</span></li>
+        </ul>
+      </div>
+      <p class="commission"><strong>Commission &mdash;</strong> haftrang@naqsh-e-jahan.ir &middot; Banu Maryam Esfahani, +98 31 3220 4472</p>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true">
+    <svg viewBox="0 0 437.999 18.893" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,9.445c0,0,37.005-0.063,73.998-0.829c18.495-0.386,36.989-0.949,50.831-1.785c6.919-0.414,12.677-0.906,16.663-1.46c1.99-0.28,3.539-0.582,4.535-0.878c0.502-0.146,0.844-0.297,1.049-0.405c0.157-0.107,0.238-0.162,0.238-0.162l0.42-0.287l0.656,0.656l-0.369,0.338c0,0-0.154,0.142-0.456,0.324c-0.291,0.154-0.714,0.331-1.256,0.484c-1.085,0.314-2.667,0.608-4.686,0.879c-4.037,0.533-9.811,0.985-16.745,1.354c-13.868,0.744-32.369,1.183-50.870,1.443C37.003,9.632,0,9.445,0,9.445z"/>
+      <path d="M437.999,9.445c0,0-37.004,0.187-74.007-0.329c-18.501-0.261-37.002-0.699-50.869-1.443c-6.935-0.368-12.708-0.820-16.745-1.354c-2.019-0.271-3.601-0.565-4.687-0.879c-0.541-0.153-0.965-0.330-1.256-0.484c-0.302-0.183-0.456-0.324-0.456-0.324l-0.369-0.338l0.656-0.656l0.420,0.287c0,0,0.081,0.055,0.238,0.162c0.204,0.108,0.546,0.260,1.048,0.405c0.996,0.296,2.545,0.598,4.535,0.878c3.986,0.554,9.744,1.046,16.663,1.460C327.011,7.667,345.506,8.230,364,8.616C400.994,9.382,437.999,9.445,437.999,9.445z"/>
+      <circle cx="219" cy="9.445" r="4" fill="#c9a23a"/>
+    </svg>
+  </div>
+
+  <!-- CRAFT 3: BANNA'I -->
+  <section class="craft">
+    <aside class="panel">
+      <div class="medallion" aria-hidden="true"></div>
+      <div class="arch-wrap" aria-hidden="true">
+        <div class="arch-inner" style="background:repeating-linear-gradient(0deg, rgba(30,58,95,0.18) 0 9px, rgba(201,162,58,0.18) 9px 18px);"></div>
+        <svg viewBox="0 0 500 550" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(8.2,-12)">
+            <g style="fill:none;stroke:#1e3a5f;stroke-width:4;stroke-linecap:round;">
+              <path d="m 388.984,268.984 -57.342,98.846 c 0,0 -25.866,42.495 -83.142,62.818 -57.275,20.323 -100.760,86.775 -99.770,153.350 54.339,0.096 3.097,-0.096 62.468,0.254 0,0 -2.044,-66.404 63.168,-94.481 50.355,-21.680 83.142,-42.495 114.551,-88.684"/>
+            </g>
+            <g style="fill:none;stroke:#1e3a5f;stroke-width:4;stroke-linecap:round;" transform="matrix(-1,0,0,1,777.881,-0.297)">
+              <path d="m 388.984,268.984 -57.342,98.846 c 0,0 -25.866,42.495 -83.142,62.818 -57.275,20.323 -100.760,86.775 -99.770,153.350 54.339,0.096 3.097,-0.096 62.468,0.254 0,0 -2.044,-66.404 63.168,-94.481 50.355,-21.680 83.142,-42.495 114.551,-88.684"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <h3>Banna'i</h3>
+      <div class="farsi">بنّایی &mdash; brick-set calligraphy</div>
+      <div class="swatches" aria-hidden="true">
+        <span style="background:#c5824a"></span>
+        <span style="background:#1e3a5f"></span>
+        <span style="background:#2a8a8a"></span>
+        <span style="background:#f2e5cc"></span>
+      </div>
+    </aside>
+    <div class="body">
+      <h2>Banna'i</h2>
+      <div class="sub">Brick-Set Calligraphy &middot; Geometric Kufic</div>
+      <p>The most architectural of the four crafts: words are written not by ink but by the alternation of glazed and unglazed brick across a wall. The script — square Kufic, called <em>Banna'i</em> after the masons themselves — must be planned on a strict square grid where every letter, ligature, and ground space resolves to whole bricks. Our standard course uses a 22 cm fired-clay brick, half-glazed turquoise on the visible face.</p>
+      <p>The discipline asks more of the architect than of the painter. The atelier composes the inscription on graph paper at 1:10, returns it to the patron for review, then cuts and glazes the bricks to order. Names of the Twelve Imams, the <em>Shahāda</em>, and Quranic phrases are the most often requested; we maintain forty-seven approved templates in our drawing-room.</p>
+
+      <dl class="specs">
+        <dt>Brick</dt><dd>22 × 22 × 5 cm, fired clay</dd>
+        <dt>Grid</dt><dd>square Kufic, 1:1 modular</dd>
+        <dt>Glaze</dt><dd>turquoise on biscuit ground</dd>
+        <dt>Templates</dt><dd>47 approved phrases</dd>
+      </dl>
+
+      <div class="rate">
+        <h4>Rate Guide &mdash; 1403</h4>
+        <ul>
+          <li><span>Single name medallion (~1.5 m²)</span><span>34,000,000 toman</span></li>
+          <li><span>Quranic band, per linear metre</span><span>11,200,000</span></li>
+          <li><span>Full façade course (Shahāda)</span><span>from 180,000,000</span></li>
+          <li><span>Drawing-only, scaled cartoon</span><span>4,500,000</span></li>
+        </ul>
+      </div>
+      <p class="commission"><strong>Commission &mdash;</strong> bannai@naqsh-e-jahan.ir &middot; Ustad Mohsen Kāshī, +98 31 3220 4473</p>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true">
+    <svg viewBox="0 0 437.999 18.893" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,9.445c0,0,37.005-0.063,73.998-0.829c18.495-0.386,36.989-0.949,50.831-1.785c6.919-0.414,12.677-0.906,16.663-1.46c1.99-0.28,3.539-0.582,4.535-0.878c0.502-0.146,0.844-0.297,1.049-0.405c0.157-0.107,0.238-0.162,0.238-0.162l0.42-0.287l0.656,0.656l-0.369,0.338c0,0-0.154,0.142-0.456,0.324c-0.291,0.154-0.714,0.331-1.256,0.484c-1.085,0.314-2.667,0.608-4.686,0.879c-4.037,0.533-9.811,0.985-16.745,1.354c-13.868,0.744-32.369,1.183-50.870,1.443C37.003,9.632,0,9.445,0,9.445z"/>
+      <path d="M437.999,9.445c0,0-37.004,0.187-74.007-0.329c-18.501-0.261-37.002-0.699-50.869-1.443c-6.935-0.368-12.708-0.820-16.745-1.354c-2.019-0.271-3.601-0.565-4.687-0.879c-0.541-0.153-0.965-0.330-1.256-0.484c-0.302-0.183-0.456-0.324-0.456-0.324l-0.369-0.338l0.656-0.656l0.420,0.287c0,0,0.081,0.055,0.238,0.162c0.204,0.108,0.546,0.260,1.048,0.405c0.996,0.296,2.545,0.598,4.535,0.878c3.986,0.554,9.744,1.046,16.663,1.460C327.011,7.667,345.506,8.230,364,8.616C400.994,9.382,437.999,9.445,437.999,9.445z"/>
+      <circle cx="219" cy="9.445" r="4" fill="#c9a23a"/>
+    </svg>
+  </div>
+
+  <!-- CRAFT 4: TARRAHI -->
+  <section class="craft flip">
+    <aside class="panel">
+      <div class="medallion" aria-hidden="true"></div>
+      <div class="arch-wrap" aria-hidden="true">
+        <div class="arch-inner" style="background:
+          linear-gradient(transparent 49%, rgba(30,58,95,0.25) 49% 50%, transparent 50%),
+          linear-gradient(90deg, transparent 49%, rgba(30,58,95,0.25) 49% 50%, transparent 50%),
+          repeating-linear-gradient(0deg, rgba(201,162,58,0.12) 0 14px, transparent 14px 28px),
+          repeating-linear-gradient(90deg, rgba(201,162,58,0.12) 0 14px, transparent 14px 28px);"></div>
+        <svg viewBox="0 0 500 550" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(8.2,-12)">
+            <g style="fill:none;stroke:#1e3a5f;stroke-width:4;stroke-linecap:round;">
+              <path d="m 388.984,268.984 -57.342,98.846 c 0,0 -25.866,42.495 -83.142,62.818 -57.275,20.323 -100.760,86.775 -99.770,153.350 54.339,0.096 3.097,-0.096 62.468,0.254 0,0 -2.044,-66.404 63.168,-94.481 50.355,-21.680 83.142,-42.495 114.551,-88.684"/>
+            </g>
+            <g style="fill:none;stroke:#1e3a5f;stroke-width:4;stroke-linecap:round;" transform="matrix(-1,0,0,1,777.881,-0.297)">
+              <path d="m 388.984,268.984 -57.342,98.846 c 0,0 -25.866,42.495 -83.142,62.818 -57.275,20.323 -100.760,86.775 -99.770,153.350 54.339,0.096 3.097,-0.096 62.468,0.254 0,0 -2.044,-66.404 63.168,-94.481 50.355,-21.680 83.142,-42.495 114.551,-88.684"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <h3>Tarrahi</h3>
+      <div class="farsi">طرّاحی &mdash; measured drawing</div>
+      <div class="swatches" aria-hidden="true">
+        <span style="background:#1e3a5f"></span>
+        <span style="background:#c9a23a"></span>
+        <span style="background:#f2e5cc"></span>
+        <span style="background:#7a1f2e"></span>
+      </div>
+    </aside>
+    <div class="body">
+      <h2>Tarrahi</h2>
+      <div class="sub">Measured Drawing &middot; Heritage Survey</div>
+      <p>The fourth practice is the quietest. Before any restoration may begin, a building must be drawn — every dado, spandrel, and muqarnas pendant recorded at scale on hand-stretched paper. The Atelier's drawing-room offers this service to the Ministry of Cultural Heritage, to private waqf trusts, and to architects undertaking sympathetic new work. Three of our draughtsmen hold the <em>Sazmān-e Mirās</em> certification of 2019.</p>
+      <p>Survey drawings are issued in three sets: pencil original on Arches 300 gsm, ink fair-copy on linen, and a digital archive at 600 dpi. Field campaigns of up to four weeks are quoted by the day, including transport from Isfahan to anywhere within the historic provinces. We have surveyed in Yazd, Mashhad, Kāshān, and twice in Samarkand under joint commission.</p>
+
+      <dl class="specs">
+        <dt>Paper</dt><dd>Arches 300 gsm, hand-stretched</dd>
+        <dt>Scales</dt><dd>1:50 plans, 1:10 details</dd>
+        <dt>Archive</dt><dd>600 dpi digital + linen ink</dd>
+        <dt>Certification</dt><dd>Sazmān-e Mirās, 2019</dd>
+      </dl>
+
+      <div class="rate">
+        <h4>Rate Guide &mdash; 1403</h4>
+        <ul>
+          <li><span>Façade survey, single elevation</span><span>28,000,000 toman</span></li>
+          <li><span>Full courtyard building, plans + sections</span><span>from 165,000,000</span></li>
+          <li><span>Daily field rate, two draughtsmen</span><span>6,800,000 / day</span></li>
+          <li><span>Detail sheet, muqarnas pendant</span><span>3,400,000</span></li>
+        </ul>
+      </div>
+      <p class="commission"><strong>Commission &mdash;</strong> tarrahi@naqsh-e-jahan.ir &middot; Mohandes Reza Sharifi, +98 31 3220 4474</p>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true">
+    <svg viewBox="0 0 437.999 18.893" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,9.445c0,0,37.005-0.063,73.998-0.829c18.495-0.386,36.989-0.949,50.831-1.785c6.919-0.414,12.677-0.906,16.663-1.46c1.99-0.28,3.539-0.582,4.535-0.878c0.502-0.146,0.844-0.297,1.049-0.405c0.157-0.107,0.238-0.162,0.238-0.162l0.42-0.287l0.656,0.656l-0.369,0.338c0,0-0.154,0.142-0.456,0.324c-0.291,0.154-0.714,0.331-1.256,0.484c-1.085,0.314-2.667,0.608-4.686,0.879c-4.037,0.533-9.811,0.985-16.745,1.354c-13.868,0.744-32.369,1.183-50.870,1.443C37.003,9.632,0,9.445,0,9.445z"/>
+      <path d="M437.999,9.445c0,0-37.004,0.187-74.007-0.329c-18.501-0.261-37.002-0.699-50.869-1.443c-6.935-0.368-12.708-0.820-16.745-1.354c-2.019-0.271-3.601-0.565-4.687-0.879c-0.541-0.153-0.965-0.330-1.256-0.484c-0.302-0.183-0.456-0.324-0.456-0.324l-0.369-0.338l0.656-0.656l0.420,0.287c0,0,0.081,0.055,0.238,0.162c0.204,0.108,0.546,0.260,1.048,0.405c0.996,0.296,2.545,0.598,4.535,0.878c3.986,0.554,9.744,1.046,16.663,1.460C327.011,7.667,345.506,8.230,364,8.616C400.994,9.382,437.999,9.445,437.999,9.445z"/>
+      <circle cx="219" cy="9.445" r="4" fill="#c9a23a"/>
+    </svg>
+  </div>
+
+  <section class="closing">
+    <h3>A Note to Patrons</h3>
+    <p>All quoted figures hold for the year 1403 and exclude shipping, scaffolding, and the architect's site-visits beyond Isfahan province. Deposits of one-third secure a place in the kiln calendar; the remainder falls due upon delivery of the finished panel to your masons. We do not undertake commissions whose iconography conflicts with the dignity of the building.</p>
+  </section>
+
+</main>
+
+<footer>
+  <div class="topfilet"></div>
+  <div class="foot-inner">
+    <div class="foot-col">
+      <h4>Address</h4>
+      Atelier Naqsh-e Jahan<br>
+      Kūche-ye Hammām-e Khosrow Āghā<br>
+      Bazaar-e Bozorg, Isfahan 8146613441<br>
+      Iran
+    </div>
+    <div class="seal" aria-hidden="true">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <g fill="none" stroke="#c9a23a" stroke-width="1.2">
+          <circle cx="50" cy="50" r="44"/>
+          <circle cx="50" cy="50" r="38"/>
+          <polygon points="50,12 58,38 86,38 63,54 72,82 50,66 28,82 37,54 14,38 42,38"/>
+          <polygon points="50,22 56,42 76,42 60,54 66,74 50,62 34,74 40,54 24,42 44,42" fill="#c9a23a" fill-opacity="0.4"/>
+          <circle cx="50" cy="50" r="6" fill="#c9a23a"/>
+        </g>
+      </svg>
+    </div>
+    <div class="foot-col right">
+      <h4>Hours</h4>
+      Saturday — Wednesday<br>
+      08:30 — 17:00<br>
+      Thursday: drawing-room only, 09:00 — 13:00<br>
+      Friday: closed
+    </div>
+  </div>
+  <p class="attribution">Drawn, fired, and set by hand in the courtyard since 1387 (2008).</p>
+  <div class="copyright">© 1403 Atelier Naqsh-e Jahan &middot; All Crafts Reserved</div>
+  <div class="botfilet"></div>
+</footer>
+
+</body>
+</html>

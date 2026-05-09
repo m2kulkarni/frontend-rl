@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="la">
+<head>
+<meta charset="UTF-8">
+<title>Forum et Macellum — Markets and Weights</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--font-body),Georgia,serif;
+    font-size:17px;
+    line-height:1.65;
+  }
+  a{color:var(--text-emphasis);text-decoration:none}
+
+  /* ---------- WORDMARK / NAV ---------- */
+  .pediment-band{
+    text-align:center;
+    padding:38px 20px 0;
+    background:var(--surface);
+    border-bottom:1px solid rgba(169,50,38,0.15);
+  }
+  .pediment{
+    position:relative;
+    display:inline-block;
+    padding:30px 80px 18px;
+    margin:0 auto;
+  }
+  .pediment::before{
+    content:"";
+    position:absolute;
+    top:-2px;left:50%;
+    transform:translateX(-50%);
+    width:0;height:0;
+    border-left:240px solid transparent;
+    border-right:240px solid transparent;
+    border-bottom:54px solid var(--surface);
+    filter:drop-shadow(0 -2px 0 var(--primary));
+    z-index:0;
+  }
+  .pediment::after{
+    content:"";
+    position:absolute;
+    top:50px;left:50%;
+    transform:translateX(-50%);
+    width:520px;
+    height:2px;
+    background:var(--primary);
+  }
+  .wordmark{
+    position:relative;
+    z-index:1;
+    font-family:var(--font-display),serif;
+    font-weight:700;
+    font-size:26px;
+    letter-spacing:0.32em;
+    color:var(--text);
+    text-transform:uppercase;
+  }
+  .wordmark-sub{
+    position:relative;
+    z-index:1;
+    margin-top:6px;
+    font-style:italic;
+    font-size:14px;
+    letter-spacing:0.18em;
+    color:var(--accent);
+  }
+  nav.primary{
+    text-align:center;
+    padding:18px 0 14px;
+    background:var(--surface);
+  }
+  nav.primary ul{
+    list-style:none;
+    display:inline-flex;
+    align-items:center;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:0;
+  }
+  nav.primary li{display:inline-flex;align-items:center}
+  nav.primary a{
+    font-family:var(--font-display),serif;
+    font-size:12.5px;
+    letter-spacing:0.28em;
+    text-transform:uppercase;
+    color:var(--text);
+    padding:6px 18px;
+  }
+  nav.primary a[aria-current="page"]{
+    color:var(--primary);
+    border-bottom:2px solid var(--secondary);
+  }
+  nav.primary .vine{
+    width:14px;height:14px;
+    color:var(--secondary);
+    flex-shrink:0;
+  }
+
+  /* greek key strip */
+  .key-strip{
+    width:100%;
+    height:22px;
+    background:
+      linear-gradient(var(--primary),var(--primary)) center/100% 1px no-repeat,
+      repeating-linear-gradient(90deg,
+        var(--secondary) 0 8px, transparent 8px 10px,
+        var(--secondary) 10px 12px, transparent 12px 20px);
+    border-top:1px solid var(--primary);
+    border-bottom:1px solid var(--primary);
+  }
+
+  /* ---------- PAGE HEAD ---------- */
+  .page-head{
+    text-align:center;
+    padding:60px 20px 30px;
+  }
+  .page-head .eyebrow{
+    font-family:var(--font-display),serif;
+    letter-spacing:0.42em;
+    font-size:12px;
+    color:var(--accent);
+    text-transform:uppercase;
+  }
+  .page-head h1{
+    font-family:var(--font-display),serif;
+    font-weight:700;
+    font-size:44px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    margin:14px 0 10px;
+    color:var(--text);
+  }
+  .page-head .lat{
+    font-style:italic;
+    color:var(--primary);
+    letter-spacing:0.05em;
+    font-size:18px;
+  }
+  .rule-ornament{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    margin:22px auto 0;
+    max-width:520px;
+    color:var(--secondary);
+  }
+  .rule-ornament .line{
+    flex:1;height:1px;
+    background:linear-gradient(90deg,transparent,var(--primary),transparent);
+  }
+  .rule-ornament svg{width:22px;height:22px}
+
+  /* ---------- CENTERPIECE SEAL ---------- */
+  .centerpiece{
+    text-align:center;
+    padding:30px 20px 60px;
+    position:relative;
+  }
+  .seal-frame{
+    position:relative;
+    width:560px;
+    margin:0 auto;
+    padding:30px 30px;
+  }
+  .seal-frame .wreath{
+    position:absolute;
+    inset:0;
+    width:100%;height:100%;
+    pointer-events:none;
+  }
+  .seal-content{
+    position:relative;
+    padding:60px 70px;
+    text-align:center;
+  }
+  .seal-content .label{
+    font-family:var(--font-display),serif;
+    font-size:12px;
+    letter-spacing:0.4em;
+    color:var(--accent);
+    text-transform:uppercase;
+  }
+  .seal-content h2{
+    font-family:var(--font-display),serif;
+    font-size:22px;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:var(--primary);
+    margin:8px 0 18px;
+  }
+  .equiv-table{
+    margin:0 auto;
+    border-collapse:collapse;
+    font-family:var(--font-body),serif;
+    font-size:15px;
+  }
+  .equiv-table td{
+    padding:5px 14px;
+    border-bottom:1px dotted rgba(169,50,38,0.4);
+  }
+  .equiv-table td:first-child{
+    text-align:right;
+    font-variant:small-caps;
+    letter-spacing:0.06em;
+    color:var(--accent);
+  }
+  .equiv-table td:last-child{
+    text-align:left;
+    font-style:italic;
+  }
+  .seal-foot{
+    margin-top:18px;
+    font-size:13px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    font-family:var(--font-display),serif;
+    color:var(--text-emphasis);
+  }
+
+  /* ---------- DIVIDER ---------- */
+  .divider{
+    text-align:center;
+    padding:20px 0 30px;
+  }
+  .divider svg{
+    width:520px;
+    height:auto;
+    color:var(--primary);
+  }
+
+  /* ---------- SECTION TITLE ---------- */
+  .section-title{
+    text-align:center;
+    margin:30px auto 28px;
+    max-width:820px;
+  }
+  .section-title h2{
+    font-family:var(--font-display),serif;
+    font-size:28px;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:var(--text);
+  }
+  .section-title p{
+    margin-top:10px;
+    font-style:italic;
+    color:var(--accent);
+    letter-spacing:0.04em;
+  }
+
+  /* ---------- CARDS ---------- */
+  .cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:28px;
+    max-width:1240px;
+    margin:0 auto;
+    padding:0 40px 60px;
+  }
+  .card{
+    position:relative;
+    background:var(--surface);
+    padding:14px;
+    /* gold meander tile border */
+    background-image:
+      repeating-linear-gradient(90deg,var(--secondary) 0 6px,transparent 6px 9px,var(--secondary) 9px 12px,transparent 12px 18px),
+      repeating-linear-gradient(90deg,var(--secondary) 0 6px,transparent 6px 9px,var(--secondary) 9px 12px,transparent 12px 18px),
+      repeating-linear-gradient(0deg,var(--secondary) 0 6px,transparent 6px 9px,var(--secondary) 9px 12px,transparent 12px 18px),
+      repeating-linear-gradient(0deg,var(--secondary) 0 6px,transparent 6px 9px,var(--secondary) 9px 12px,transparent 12px 18px),
+      linear-gradient(var(--surface),var(--surface));
+    background-position:top left,bottom left,top left,top right;
+    background-size:100% 6px,100% 6px,6px 100%,6px 100%;
+    background-repeat:no-repeat;
+  }
+  .card-inner{
+    border:1px solid var(--primary);
+    padding:30px 28px 28px;
+    position:relative;
+  }
+  .card h3{
+    text-align:center;
+    font-family:var(--font-display),serif;
+    font-size:17px;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:var(--text);
+    margin-bottom:6px;
+  }
+  .card .lat-sub{
+    text-align:center;
+    font-style:italic;
+    color:var(--primary);
+    font-size:13px;
+    letter-spacing:0.06em;
+    margin-bottom:18px;
+  }
+  .card hr{
+    border:0;
+    height:1px;
+    background:var(--secondary);
+    width:60px;
+    margin:0 auto 18px;
+  }
+  .card p{
+    text-align:left;
+    font-size:15px;
+    line-height:1.7;
+    margin-bottom:12px;
+  }
+  .card p:first-of-type::first-letter{
+    font-family:var(--font-display),serif;
+    font-size:42px;
+    line-height:0.9;
+    float:left;
+    color:var(--primary);
+    padding:6px 8px 0 0;
+    font-weight:700;
+  }
+  .card dl{
+    margin-top:12px;
+    font-size:14px;
+  }
+  .card dt{
+    font-variant:small-caps;
+    letter-spacing:0.1em;
+    color:var(--accent);
+    margin-top:8px;
+  }
+  .card dd{
+    margin-left:0;
+    border-bottom:1px dotted rgba(169,50,38,0.3);
+    padding-bottom:6px;
+  }
+
+  /* ---------- NOTICE / PENALTIES ---------- */
+  .notice-wrap{
+    max-width:980px;
+    margin:30px auto 80px;
+    padding:0 40px;
+  }
+  .notice{
+    border:3px double var(--primary);
+    background:var(--surface);
+    padding:36px 50px 40px;
+    position:relative;
+  }
+  .notice::before,
+  .notice::after{
+    content:"";
+    position:absolute;
+    left:18px;right:18px;height:1px;
+    background:var(--secondary);
+  }
+  .notice::before{top:8px}
+  .notice::after{bottom:8px}
+  .notice-head{
+    text-align:center;
+    margin-bottom:22px;
+  }
+  .notice-head .stamp{
+    display:inline-block;
+    padding:6px 18px;
+    border:1px solid var(--accent);
+    color:var(--accent);
+    font-family:var(--font-display),serif;
+    font-size:11px;
+    letter-spacing:0.4em;
+    text-transform:uppercase;
+    margin-bottom:14px;
+  }
+  .notice-head h2{
+    font-family:var(--font-display),serif;
+    font-size:24px;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:var(--primary);
+  }
+  .notice-head .lat{
+    font-style:italic;
+    color:var(--text);
+    margin-top:6px;
+    letter-spacing:0.04em;
+  }
+  .notice ol{
+    list-style:none;
+    counter-reset:pen;
+    max-width:760px;
+    margin:18px auto 0;
+  }
+  .notice ol li{
+    counter-increment:pen;
+    padding:14px 0 14px 60px;
+    border-bottom:1px solid rgba(169,50,38,0.2);
+    position:relative;
+    text-align:left;
+  }
+  .notice ol li:last-child{border-bottom:none}
+  .notice ol li::before{
+    content:counter(pen,upper-roman) ".";
+    position:absolute;left:0;top:14px;
+    font-family:var(--font-display),serif;
+    color:var(--secondary);
+    font-size:18px;
+    letter-spacing:0.1em;
+    width:50px;
+    text-align:right;
+  }
+  .notice ol li strong{
+    display:block;
+    font-family:var(--font-display),serif;
+    font-size:14px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--text);
+    margin-bottom:4px;
+  }
+  .notice-foot{
+    text-align:center;
+    margin-top:24px;
+    font-style:italic;
+    color:var(--accent);
+  }
+
+  /* ---------- SCHEDULE OF MARKET DAYS ---------- */
+  .schedule{
+    max-width:980px;
+    margin:0 auto 70px;
+    padding:0 40px;
+    text-align:center;
+  }
+  .schedule table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+    background:var(--surface);
+    border:1px solid var(--primary);
+  }
+  .schedule th{
+    background:var(--primary);
+    color:var(--surface);
+    font-family:var(--font-display),serif;
+    font-size:12px;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    padding:12px 10px;
+    font-weight:400;
+  }
+  .schedule td{
+    padding:10px 14px;
+    border-bottom:1px solid rgba(169,50,38,0.18);
+    font-size:15px;
+  }
+  .schedule td:first-child{
+    font-family:var(--font-display),serif;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    font-size:12px;
+    color:var(--accent);
+  }
+  .schedule tr:last-child td{border-bottom:none}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    margin-top:40px;
+    background:var(--surface);
+    border-top:1px solid var(--primary);
+  }
+  .rosette-row{
+    height:34px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:22px;
+    border-bottom:1px solid var(--secondary);
+    background:var(--bg);
+  }
+  .rosette-row .rosette{
+    width:18px;height:18px;
+    color:var(--secondary);
+  }
+  .footer-cols{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+    max-width:1100px;
+    margin:0 auto;
+    padding:46px 40px 30px;
+    text-align:center;
+  }
+  .footer-cols h4{
+    font-family:var(--font-display),serif;
+    font-size:13px;
+    letter-spacing:0.3em;
+    text-transform:uppercase;
+    color:var(--primary);
+    margin-bottom:14px;
+  }
+  .footer-cols p{
+    font-variant:small-caps;
+    letter-spacing:0.06em;
+    font-size:14px;
+    line-height:1.7;
+  }
+  .tailpiece{
+    text-align:center;
+    padding:0 0 20px;
+    color:var(--secondary);
+  }
+  .tailpiece svg{width:30px;height:30px}
+  .spqr{
+    text-align:center;
+    padding:18px 0 26px;
+    border-top:1px solid var(--primary);
+    font-family:var(--font-display),serif;
+    letter-spacing:0.5em;
+    font-size:13px;
+    text-transform:uppercase;
+    color:var(--text);
+  }
+  .spqr span{color:var(--secondary);margin:0 14px}
+
+</style>
+</head>
+<body>
+
+<!-- Vine leaf glyph (reused) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="vine" viewBox="0 0 200 200">
+      <path fill="currentColor" d="M43.583 863.37c-1.79.03-3.58.13-5.34.31-7.05.74-13.94 2.79-19.16 7.47s-8.2 12-7.69 21c.51 9 4.3 16.14 10.19 20.34 5.89 4.2 13.31 5.53 21.03 5.19 15.45-.69 32.83-8 45.81-18.31 1.41-1.12 2.83-2.04 4.25-3.06 4.29 6.68 7.61 14.83 9.34 24.06-7.5-5.07-21.01-10.55-35.66 1.5-22.14 18.21-24.99 12.88-45.34-2.13-2.86 36.07 15.01 54.64 44.66 52.5 0 0-13.95 4.26-3.59 26.41 6.02 12.87 8.41 20.07 6.56 25.19-12.84 2.29-15.77 7.78-5.57 12.66 45.1 9.97 65.67-27.47 68.66-66.04 45.36 0 52.86-31.8 52.5-50.37-8.21 11.07-22.16 11.07-32.87 2.5-9.93-7.95-21.69-16.18-39-1.13-1.74-11.68-5.69-22.13-11.22-30.72 19.36-11.37 38.72-14.46 52.53-10.81 5.48 1.45 9.46 4.09 12.38 6.97-8.97 8.36-11.84 26.38 2.28 27.03 18.92.88 21.03-15.45 13.56-27.13-5.45-8.51-16.42-13.23-25.66-16.56-17.51-4.63-39.74-.57-61.28 12.5-5.17-5.72-11.13-10.22-17.72-12.97-7.08-2.95-17.54-5.73-28.28-6.31-1.79-.1-3.58-.13-5.37-.09zm.13 10.03c1.52-.02 3.09.03 4.66.13 9.41.59 19.26 3.06 25.03 5.47 4.63 1.93 9.05 5.23 13.06 9.44-1.42 1.04-2.84 1.98-4.25 3.09-11.3 8.98-27.54 15.6-40.03 16.16-6.25.28-11.38-.91-14.78-3.34-3.41-2.43-5.65-6.04-6.03-12.75-.38-6.72 1.42-10.3 4.41-12.97 2.98-2.67 7.74-4.37 13.5-4.97 1.44-.15 2.92-.23 4.44-.25z" transform="translate(0 -852.36)"/>
+    </symbol>
+
+    <symbol id="rosette" viewBox="0 0 100 100">
+      <g fill="currentColor">
+        <circle cx="50" cy="50" r="6"/>
+        <ellipse cx="50" cy="20" rx="6" ry="14"/>
+        <ellipse cx="50" cy="80" rx="6" ry="14"/>
+        <ellipse cx="20" cy="50" rx="14" ry="6"/>
+        <ellipse cx="80" cy="50" rx="14" ry="6"/>
+        <ellipse cx="29" cy="29" rx="5" ry="11" transform="rotate(-45 29 29)"/>
+        <ellipse cx="71" cy="29" rx="5" ry="11" transform="rotate(45 71 29)"/>
+        <ellipse cx="29" cy="71" rx="5" ry="11" transform="rotate(45 29 71)"/>
+        <ellipse cx="71" cy="71" rx="5" ry="11" transform="rotate(-45 71 71)"/>
+      </g>
+    </symbol>
+
+    <symbol id="tail" viewBox="0 0 100 100">
+      <g fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M50 20 V80"/>
+        <path d="M30 50 Q50 30 70 50"/>
+        <path d="M30 50 Q50 70 70 50"/>
+        <circle cx="50" cy="50" r="4" fill="currentColor"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- HEADER -->
+<header>
+  <div class="pediment-band">
+    <div class="pediment">
+      <div class="wordmark">Curia Aedilium Ostiensis</div>
+      <div class="wordmark-sub">Officium Aedilium · Portus Ostiae</div>
+    </div>
+  </div>
+  <nav class="primary" aria-label="Primary">
+    <ul>
+      <li><a href="page-1.html">Officium</a></li>
+      <li><svg class="vine" aria-hidden="true"><use href="#vine"/></svg></li>
+      <li><a href="page-2.html">Edicta</a></li>
+      <li><svg class="vine" aria-hidden="true"><use href="#vine"/></svg></li>
+      <li><a href="page-3.html">Magistratus</a></li>
+      <li><svg class="vine" aria-hidden="true"><use href="#vine"/></svg></li>
+      <li><a href="page-4.html" aria-current="page">Forum &amp; Macellum</a></li>
+      <li><svg class="vine" aria-hidden="true"><use href="#vine"/></svg></li>
+      <li><a href="page-5.html">Aquae &amp; Thermae</a></li>
+      <li><svg class="vine" aria-hidden="true"><use href="#vine"/></svg></li>
+      <li><a href="page-6.html">Petitiones</a></li>
+    </ul>
+  </nav>
+  <div class="key-strip" aria-hidden="true"></div>
+</header>
+
+<!-- PAGE HEAD -->
+<section class="page-head">
+  <div class="eyebrow">Tabula IV · De Mensuris et Mercatibus</div>
+  <h1>Forum et Macellum</h1>
+  <div class="lat">Markets, Weights &amp; Measures of the Port-City</div>
+  <div class="rule-ornament" aria-hidden="true">
+    <span class="line"></span>
+    <svg><use href="#vine"/></svg>
+    <svg><use href="#rosette"/></svg>
+    <svg><use href="#vine"/></svg>
+    <span class="line"></span>
+  </div>
+</section>
+
+<!-- CENTERPIECE: oak-wreath seal of standard measures -->
+<section class="centerpiece">
+  <div class="seal-frame">
+    <svg class="wreath" viewBox="0 0 323.75 295.79" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <g transform="translate(-64.08 20.56)" fill="#c9a23a" stroke="#8a6a14" stroke-width="0.7">
+        <path d="M141.7-18.57c-11.04 4.85-23.4 9.47-30.06 22.64-4.68 7.12-4.8 16.39-8.11 24.15 6.12-6.5 15.58-13.16 20.98-20.72 6.02-9.5 9.08-18.01 17.19-26.06zm164.51 0c8.11 8.05 11.17 16.56 17.19 26.06 5.4 7.56 14.86 14.22 20.98 20.72-3.3-7.76-3.42-17.03-8.11-24.15-6.66-13.17-19.02-17.79-30.06-22.64zM111.91-1.61c-5.63 1.62-10.63 5.48-14.58 11.03-9.09 10.79-10.65 24.96-6.88 42.03 1.3 4.52-.55 8.75-.29 12.96 2.67-6.2 5.7-11.89 11.58-15.88 13.11-8.4 16.72-12.84 20.08-20.76 3.95-9.31 4.68-10.69 4.77-19.04-3.81 12.01-15.29 17.06-23.06 25.17-3.99 4.43-7.18 9.56-9 14.99l-.28-.25c.96-4.81 2.88-9.13 3.98-13.81 3.47-12.68 2.76-27.94 13.68-36.43zm223.72 0c10.93 8.49 10.22 23.75 13.68 36.43 1.1 4.69 3.03 9.01 3.98 13.81l-.28.25c-1.82-5.43-5.01-10.56-9-14.99-7.76-8.11-19.25-13.15-23.05-25.17.09 8.35.82 9.74 4.77 19.04 3.36 7.92 6.96 12.36 20.07 20.76 5.88 3.99 8.91 9.68 11.58 15.88.26-4.21-1.58-8.45-.29-12.96 3.77-17.07 2.21-31.23-6.88-42.03-3.95-5.55-8.95-9.41-14.58-11.03zM88.58 21.1c-.29-.06-.44.19-.66.31-7.62 11-14.28 19.31-13.95 34.09-1.03 18.19 10.51 34.77 11.67 51.92 1.75-13.13 10.81-22.41 18.3-32.58-.99 4.35-2.13 8.56-4.12 12.35-8.21 14.07-16.38 30.77-10.72 48.77-.13.19-.32.44-.53.31-2.27-5.95-2.66-12.75-4.25-19.09-3.45-16.95-15.04-31.05-11.68-50.58-1.77 4.24-2.49 9.02-3.43 13.64-1.98 11.94-3.04 19.31-.13 30.27 3.54 13.76 18.45 28.93 24.47 41.53l.82.75c-.88-6.83-1.32-14.19.38-20.71 2.59-10.43 9.72-20.63 11.72-31.38 1.04-8.43-1.28-17.78-2.16-25.91 2.7-3.68 5.21-7.47 7.08-11.61 2.47-6.25 1.44-15.14 2.18-21.89-1 2.88-2.71 5.37-4.65 7.82-9.08 9.36-19.48 18.98-21.45 32.55-.33 1.93-.44 3.93-.93 5.81-.39.19-.39-.31-.55-.43l1.1-16.83c.39-16.44-6.56-34.67 1.83-49.11zm270.75 0c8.39 14.44 1.45 32.67 1.83 49.11l1.11 16.83c-.16.12-.16.63-.55.43-.5-1.87-.6-3.88-.94-5.81-1.97-13.57-12.37-23.19-21.45-32.55-1.94-2.45-3.65-4.94-4.65-7.82.74 6.76-.29 15.65 2.18 21.89 1.87 4.14 4.38 7.93 7.08 11.61-.88 8.13-3.19 17.48-2.15 25.91 1.99 10.75 9.12 20.95 11.72 31.38 1.7 6.52 1.25 13.88.38 20.71l.82-.75c6.02-12.6 20.93-27.77 24.47-41.53 2.91-10.97 1.85-18.33-.13-30.27-.94-4.62-1.66-9.4-3.43-13.64 3.36 19.53-8.23 33.63-12.03 50.57-1.59 6.34-1.98 13.14-4.25 19.09-.21.13-.4-.12-.53-.31 5.66-18-2.51-34.7-10.72-48.77-1.98-3.78-3.13-8-4.12-12.35 7.49 10.18 16.55 19.45 18.3 32.58 1.16-17.15 12.7-33.73 11.67-51.92.33-14.78-6.32-23.1-13.95-34.09-.22-.13-.38-.38-.66-.31zM102.84 113.5c1.39 13.96-3.96 25.79-3.58 39.8.38 8.46 2.81 15.96 6.73 22.71l-.66.01c-5.29-7.87-9.43-16.25-15.61-23.75-9.6-10.48-21.85-21.23-23.12-35.8-1.63 12.17.56 23.57 5.39 33.66 4.83 10.08 12.29 18.84 21.19 25.71l4.15 2.9c7.34 5.43 13.12 7.57 20.18 13.75v-.76c-5.4-10.17-4.71-22.25-5.57-34.59-.86-12.34-3.28-24.93-6.61-36.13zm242.22 0l-2.48 7.5c-3.33 11.2-5.75 23.79-6.61 36.13-.86 12.34-.17 24.42-5.57 34.59v.76c7.05-6.18 12.83-8.32 20.17-13.75l4.15-2.9c8.9-6.87 16.37-15.63 21.19-25.71 4.83-10.08 7.02-21.49 5.39-33.66-1.26 14.57-13.51 25.32-23.12 35.8-6.19 7.5-10.32 15.88-15.61 23.75l-.66-.01c3.92-6.75 6.36-14.25 6.73-22.71.38-14.01-4.97-25.84-3.58-39.8zm-232.95 37.27c6.75 15.28 3.58 35.17 12.58 49.39 2.47 4.7 6.56 8.83 10.09 12.46l-.16.19c-3.2-1.69-6.16-4.12-9-6.97-15.39-14.34-38.33-16.34-47.5-39.86 1.24 8.63 2.75 17.29 7.69 24.55 16.58 24.26 34.21 24.68 62.04 31.16-12.74-11.67-14.84-29.07-20.35-44.48-3.7-9.44-9.27-18.1-15.4-26.43zm223.67 0c-6.13 8.33-11.71 16.99-15.41 26.43-5.5 15.41-7.61 32.81-20.35 44.48 28.79-6.1 45.11-6.22 62.04-31.16 4.94-7.25 6.45-15.91 7.69-24.55-9.16 23.52-32.11 25.52-47.49 39.86-2.83 2.85-5.8 5.28-9 6.97l-.16-.19c3.53-3.63 7.62-7.76 10.09-12.46 9.01-14.21 5.84-34.1 12.59-49.39zm-201.65 37.27c8.33 12.72 10.58 31.55 25.92 37.69 2.55 1.53 5.78 1.35 8.12 3.03-2.93.5-5.46-.75-8.22-1.19-19.57-5-43.57 1.28-58.27-17.7 5.58 12.39 17.01 22.35 28.09 26.33 17.05 6.6 34.9-.7 50.98-5.15 2.31-.68 5.13-.43 7.28-1.32-8.95-2.08-17.44-5.33-24.49-12.35-9.81-10.49-18.76-21.31-29.4-29.35zm179.62 0c-10.64 8.04-19.58 18.86-29.4 29.35-7.05 7.02-15.55 10.27-24.49 12.35 2.15.89 4.97.64 7.28 1.32 16.07 4.45 33.93 11.74 50.98 5.15 11.08-3.98 22.52-13.94 28.09-26.33-14.69 18.98-38.7 12.7-58.27 17.7-2.76.43-5.29 1.69-8.22 1.19 2.33-1.68 5.57-1.5 8.12-3.03 15.34-6.14 17.59-24.97 25.92-37.69zm-72.62 41.17c-4.72 0-9.43.62-13.95 1.94-2.87 2.92-5.82-.52-8.86-.59-19.47-4.85-36.26 5.18-52.41 13.1-12.04 5.35-27.8 4.45-38.39-3.84 5.24 7.46 12.24 12.05 19.48 15.18 13.45 6.11 29.46 2 40.59-6.79 9.55-6.06 17.76-18 30.34-13.45-12.8 6.72-24.51 16.15-35.09 28.27l6.63 6.22c7.72-11.7 17.98-21.26 28.36-28.68 2.25-1.37 4.62-3.06 7.12-3.43 12.75 7.09 24.13 19.21 34.42 31.79 2.19-2 4.52-4.18 6.32-6.5-10.67-11.71-22.34-20.87-34.9-27.53 2.09-.68 4.46-.81 6.91-.75 6.77-.47 11.39 4.97 16.62 8.76 12.93 11.14 30.21 18.5 46.76 11.53 7.42-3 14.61-8.31 19.87-15.72-10.23 8.23-25.67 9.58-37.6 4.55l-12.84-5.86c-8.57-5.18-18.99-8.19-29.37-8.2z"/>
+      </g>
+    </svg>
+    <div class="seal-content">
+      <div class="label">Sigillum Aedilium · A.U.C. MMDCCLXXVII</div>
+      <h2>Mensurae Publicae</h2>
+      <table class="equiv-table" aria-label="Standard equivalences">
+        <tr><td>Modius</td><td>= XVI sextarii (≈ 8.73 litrae)</td></tr>
+        <tr><td>Sextarius</td><td>= II heminae · XII cyathi</td></tr>
+        <tr><td>Hemina</td><td>= 0.273 litrae frumenti</td></tr>
+        <tr><td>Congius</td><td>= VI sextarii vini aut olei</td></tr>
+        <tr><td>Amphora</td><td>= VIII congii (≈ 26.2 litrae)</td></tr>
+        <tr><td>Libra</td><td>= XII unciae (≈ 327 grammata)</td></tr>
+      </table>
+      <div class="seal-foot">Patronus mensurarum: Q. Calpurnius Verus</div>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="divider" aria-hidden="true">
+  <svg viewBox="1000 364 16511 4447" preserveAspectRatio="xMidYMid meet">
+    <g fill="currentColor">
+      <path d="M1000 4175V1000h3175v1905H2905v635h1905v635H2270V2270h1270v-635H1635v2540z"/>
+      <path d="M4810 4175V1000h3175v1905H6715v635h1905v635H6080V2270h1270v-635H5445v2540z"/>
+      <path d="M8620 4175V1000h3175v1905h-1270v635h1905v635H9890V2270h1270v-635H9255v2540z"/>
+      <path d="M12430 4175V1000h3175v1905h-1270v635h1905v635h-2540V2270h1270v-635h-1905v2540z"/>
+      <path d="M16240 4175V1000h1270v635h-635v2540z"/>
+    </g>
+  </svg>
+</div>
+
+<!-- INSPECTION CARDS -->
+<section class="section-title">
+  <h2>Inspectiones Mercatuum</h2>
+  <p>Three principal markets under the daily eye of the curule aediles &amp; their lictors</p>
+</section>
+
+<div class="cards">
+
+  <!-- Card 1: Macellum -->
+  <article class="card">
+    <div class="card-inner">
+      <h3>Macellum Magnum</h3>
+      <div class="lat-sub">The Great Provision Market</div>
+      <hr>
+      <p>Standing east of the Forum on the Decumanus Maximus, the Macellum houses one hundred and twelve stalls of grain, oil, garum, smoked meat, and Campanian cheese. Inspectors of the aediles attend at the third hour of every day excepting the Kalends.</p>
+      <dl>
+        <dt>Inspectio cotidiana</dt>
+        <dd>Hora III · weights tested against the bronze libra fixed in the central pier</dd>
+        <dt>Mensae numerus</dt>
+        <dd>CXII tabernae · 9 colonnaded aisles</dd>
+        <dt>Aedilis praesidens</dt>
+        <dd>L. Vibius Sabinus, aedilis curulis</dd>
+        <dt>Mulcta minima</dt>
+        <dd>XXV sestertii pro libra falsa</dd>
+      </dl>
+    </div>
+  </article>
+
+  <!-- Card 2: Fish stalls -->
+  <article class="card">
+    <div class="card-inner">
+      <h3>Forum Piscarium</h3>
+      <div class="lat-sub">Fish Stalls at the Tiber Mouth</div>
+      <hr>
+      <p>Beneath the warehouses of the Horrea Epagathiana, the fish-mongers' tables stretch one hundred paces along the river quay. Catch from the Tyrrhenian and the lagoons of Portus is sold from dawn until the sixth hour, after which all unsold flesh is removed under penalty of confiscation.</p>
+      <dl>
+        <dt>Hora venalis</dt>
+        <dd>Prima ad sextam · daily, including market-day</dd>
+        <dt>Inspectio salubritatis</dt>
+        <dd>Twice daily by the curator piscium, M. Annius Faustus</dd>
+        <dt>Mensa locatio</dt>
+        <dd>II sestertii in diem · per tabula salsamentaria</dd>
+        <dt>Pretium statutum</dt>
+        <dd>Mullus barbatus: III sestertii libra · Sardina: I as semis</dd>
+      </dl>
+    </div>
+  </article>
+
+  <!-- Card 3: Wool market -->
+  <article class="card">
+    <div class="card-inner">
+      <h3>Macellum Lanarium</h3>
+      <div class="lat-sub">The Wool Market on the Decumanus</div>
+      <hr>
+      <p>Held in the porticus opposite the Baths of Mithras, the wool-mongers gather thrice in the month: on the Nones, the Ides, and the day before the Kalends. Fleeces from Tarentum, Pollentia, and the Apennine flocks are weighed by the public statera before sale is permitted.</p>
+      <dl>
+        <dt>Dies mercati</dt>
+        <dd>Nonae · Idus · Pridie Kalendas</dd>
+        <dt>Hora apertionis</dt>
+        <dd>Hora secunda ad nonam</dd>
+        <dt>Statera publica</dt>
+        <dd>Bronze, fixed at the SE pier · sealed annually</dd>
+        <dt>Vectigal</dt>
+        <dd>I quadrans per libram lanae · paid to the quaestor mercatus</dd>
+      </dl>
+    </div>
+  </article>
+
+</div>
+
+<!-- MARKET DAYS SCHEDULE -->
+<section class="schedule">
+  <div class="section-title">
+    <h2>Calendarium Nundinarum</h2>
+    <p>Order of the eight-day cycle as observed within the city walls</p>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Dies</th>
+        <th>Macellum Magnum</th>
+        <th>Forum Piscarium</th>
+        <th>Macellum Lanarium</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>A — Nundinae</td><td>Closed (cleansing)</td><td>Open · Hora I–IV</td><td>—</td></tr>
+      <tr><td>B</td><td>Open · Hora III</td><td>Open · Hora I–VI</td><td>—</td></tr>
+      <tr><td>C</td><td>Open · Hora III</td><td>Open · Hora I–VI</td><td>Open if Nonae</td></tr>
+      <tr><td>D</td><td>Open · Hora III</td><td>Open · Hora I–VI</td><td>—</td></tr>
+      <tr><td>E</td><td>Open · Hora III</td><td>Open · Hora I–VI</td><td>—</td></tr>
+      <tr><td>F</td><td>Open · Hora III</td><td>Open · Hora I–VI</td><td>Open if Idus</td></tr>
+      <tr><td>G</td><td>Open · Hora III</td><td>Open · Hora I–VI</td><td>—</td></tr>
+      <tr><td>H — Pridie Kalendas</td><td>Open · extended</td><td>Open · extended</td><td>Open · Hora II–IX</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- PENALTIES NOTICE -->
+<div class="notice-wrap">
+  <div class="notice" role="region" aria-labelledby="penalties">
+    <div class="notice-head">
+      <span class="stamp">Edictum · Affixum in Foro</span>
+      <h2 id="penalties">De Mensura Falsa</h2>
+      <div class="lat">Penalties for Fraudulent Weight or Measure</div>
+    </div>
+
+    <ol>
+      <li>
+        <strong>Mulcta Pecuniaria</strong>
+        Upon a first conviction before the aediles, the offender shall pay a fine of <em>one hundred sesterces</em> (HS C) into the treasury of the temple of Ceres. Sums are receipted by the quaestor mercatus and posted in the public ledger before sundown.
+      </li>
+      <li>
+        <strong>Confiscatio Mercium</strong>
+        The whole stock present at the offending stall — grain, oil, fish, wool, or wine — shall be confiscated by the lictors of the magistracy and either distributed to the corn-dole or destroyed, according to its nature.
+      </li>
+      <li>
+        <strong>Affixio Publica</strong>
+        The name of the offender, his trade, and the nature of his fraud shall be inscribed upon a wooden tabula and affixed for thirty days at the rostra of the Forum, that all citizens and visitors of Ostia may know him.
+      </li>
+      <li>
+        <strong>Iteratum Crimen</strong>
+        Should the offence be repeated within one year, the fine is doubled to two hundred sesterces, the licence to trade revoked for the remainder of the magistrates' term, and the offender excluded from all three markets named above.
+      </li>
+    </ol>
+
+    <div class="notice-foot">Sealed by the order of the Curule Aediles · L. Vibius Sabinus &amp; Q. Calpurnius Verus</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="rosette-row" aria-hidden="true">
+    <svg class="rosette"><use href="#rosette"/></svg>
+    <svg class="rosette"><use href="#vine"/></svg>
+    <svg class="rosette"><use href="#rosette"/></svg>
+    <svg class="rosette"><use href="#vine"/></svg>
+    <svg class="rosette"><use href="#rosette"/></svg>
+    <svg class="rosette"><use href="#vine"/></svg>
+    <svg class="rosette"><use href="#rosette"/></svg>
+    <svg class="rosette"><use href="#vine"/></svg>
+    <svg class="rosette"><use href="#rosette"/></svg>
+  </div>
+
+  <div class="footer-cols">
+    <div>
+      <h4>Iurisdictio</h4>
+      <p>Curia Aedilium<br>Forum Ostiense, Reg. I<br>Insula VIII · ad templum Romae<br>Portus Ostiensis</p>
+    </div>
+    <div>
+      <h4>Horae Officii</h4>
+      <p>Hora I ad VII · cotidie<br>Closed: Saturnalia, Parilia,<br>Vinalia rustica<br>Audientiae: Hora IV</p>
+    </div>
+    <div>
+      <h4>Contactus</h4>
+      <p>Tabularium Aedilium<br>per scribam M. Petronium<br>Litterae per cursorem publicum<br>aut tabula in Foro affixa</p>
+    </div>
+  </div>
+
+  <div class="tailpiece" aria-hidden="true">
+    <svg><use href="#tail"/></svg>
+  </div>
+
+  <div class="spqr">SPQR <span>·</span> OSTIA</div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Visit the Campus — Universitas Aquilana</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Inter, sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+  }
+  a { color: var(--text); text-decoration: none; }
+
+  /* ---------- HEADER / SEAL / NAV ---------- */
+  .masthead {
+    text-align: center;
+    padding: 48px 40px 0 40px;
+    background: var(--bg);
+  }
+  .seal {
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 18px;
+    display: block;
+  }
+  .seal svg { width: 100%; height: 100%; }
+  .institution {
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    margin: 0 0 4px 0;
+    color: var(--primary);
+  }
+  .motto {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    margin: 0 0 28px 0;
+    text-transform: uppercase;
+  }
+  nav.primary {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    max-width: 1200px;
+    padding-bottom: 22px;
+  }
+  nav.primary a {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 12.5px;
+    padding: 6px 14px;
+    color: var(--primary);
+    position: relative;
+  }
+  nav.primary a[aria-current="page"] {
+    color: var(--accent);
+    border-bottom: 2px solid var(--secondary);
+  }
+  nav.primary .vine {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    opacity: 0.55;
+  }
+  nav.primary .vine svg { width: 100%; height: 100%; fill: var(--secondary); }
+
+  /* Greek-key cornice strip below nav */
+  .meander-strip {
+    width: 100%;
+    height: 28px;
+    background-image:
+      linear-gradient(var(--primary), var(--primary)),
+      linear-gradient(var(--primary), var(--primary));
+    background-size: 100% 1px, 100% 1px;
+    background-position: top, bottom;
+    background-repeat: no-repeat;
+    position: relative;
+    overflow: hidden;
+  }
+  .meander-strip svg {
+    position: absolute;
+    left: 0; top: 0;
+    height: 28px;
+    width: auto;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    text-align: center;
+    padding: 70px 40px 60px;
+    position: relative;
+  }
+  .pediment {
+    width: 1100px;
+    max-width: 100%;
+    height: 60px;
+    margin: 0 auto 0;
+    position: relative;
+  }
+  .pediment::before {
+    content: "";
+    position: absolute;
+    left: 50%; top: 0;
+    transform: translateX(-50%);
+    width: 0; height: 0;
+    border-left: 550px solid transparent;
+    border-right: 550px solid transparent;
+    border-bottom: 60px solid var(--primary);
+  }
+  .pediment::after {
+    content: "";
+    position: absolute;
+    left: 50%; top: 3px;
+    transform: translateX(-50%);
+    width: 0; height: 0;
+    border-left: 545px solid transparent;
+    border-right: 545px solid transparent;
+    border-bottom: 57px solid var(--bg);
+  }
+  .hero-inner {
+    border-left: 2px solid var(--primary);
+    border-right: 2px solid var(--primary);
+    padding: 50px 60px 56px;
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .hero-laurel {
+    width: 180px;
+    height: 165px;
+    margin: 0 auto 24px;
+    display: block;
+  }
+  .hero-laurel svg { width: 100%; height: 100%; }
+  .hero h1 {
+    font-family: var(--font-display), serif;
+    font-size: 56px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin: 0 0 14px 0;
+    color: var(--primary);
+    line-height: 1.05;
+  }
+  .hero .latin {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 18px;
+    letter-spacing: 0.06em;
+    color: var(--accent);
+    margin: 0 0 22px 0;
+  }
+  .hero-rule {
+    width: 120px;
+    height: 2px;
+    background: var(--secondary);
+    margin: 0 auto 22px;
+  }
+  .hero p.lede {
+    max-width: 640px;
+    margin: 0 auto;
+    font-size: 16px;
+    color: var(--text);
+  }
+  .stelae {
+    display: flex;
+    justify-content: center;
+    gap: 64px;
+    margin-top: 38px;
+    padding-top: 28px;
+    border-top: 1px solid var(--primary);
+  }
+  .stela {
+    text-align: center;
+  }
+  .stela .num {
+    font-family: var(--font-display), serif;
+    font-size: 28px;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    display: block;
+  }
+  .stela .lbl {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 11px;
+    color: var(--primary);
+    margin-top: 4px;
+    display: block;
+  }
+
+  /* ---------- SECTION HEADER ---------- */
+  .section-head {
+    text-align: center;
+    padding: 70px 40px 30px;
+  }
+  .section-head h2 {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    font-size: 26px;
+    margin: 14px 0 10px;
+    color: var(--primary);
+  }
+  .section-head .sub {
+    font-family: var(--font-body);
+    font-style: italic;
+    color: var(--accent);
+    font-size: 14px;
+    letter-spacing: 0.08em;
+  }
+  .roundel {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto;
+    display: block;
+  }
+  .roundel svg { width: 100%; height: 100%; }
+
+  /* ---------- TOURS GRID ---------- */
+  .tours {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 10px 40px 30px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 36px;
+  }
+  .card {
+    background: var(--surface);
+    padding: 36px 40px 36px;
+    border-top: 2px solid var(--primary);
+    border-bottom: 2px solid var(--primary);
+    position: relative;
+  }
+  .card::before, .card::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    height: 6px;
+    background-image: repeating-linear-gradient(
+      90deg,
+      var(--primary) 0 8px,
+      transparent 8px 12px,
+      var(--primary) 12px 20px,
+      transparent 20px 28px
+    );
+  }
+  .card::before { top: -8px; }
+  .card::after { bottom: -8px; }
+  .card .seal-mini {
+    width: 42px;
+    height: 42px;
+    margin: 0 auto 12px;
+    display: block;
+  }
+  .card .seal-mini svg { width: 100%; height: 100%; }
+  .card h3 {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 17px;
+    text-align: center;
+    margin: 0 0 6px;
+    font-variant: small-caps;
+    color: var(--primary);
+  }
+  .card .latin-sub {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--accent);
+    text-align: center;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    margin: 0 0 18px;
+  }
+  .card .gold-rule {
+    width: 60px;
+    height: 1px;
+    background: var(--secondary);
+    margin: 0 auto 20px;
+  }
+  .card .body {
+    max-width: 380px;
+    margin: 0 auto;
+    font-size: 15px;
+  }
+  .card .schedule {
+    margin: 18px 0 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--primary);
+  }
+  .card .schedule li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(26,26,26,0.18);
+    font-size: 14px;
+  }
+  .card .schedule .day {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 12px;
+  }
+  .card .schedule .time {
+    font-family: var(--font-display);
+    color: var(--accent);
+    letter-spacing: 0.08em;
+  }
+
+  /* ---------- DIRECTIONS ---------- */
+  .directions-wrap {
+    background: var(--bg);
+    padding: 60px 40px 30px;
+  }
+  .directions {
+    max-width: 1240px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+    border-top: 2px solid var(--primary);
+    border-bottom: 2px solid var(--primary);
+  }
+  .direction {
+    padding: 36px 32px;
+    border-right: 1px solid var(--primary);
+    text-align: left;
+  }
+  .direction:last-child { border-right: none; }
+  .direction .roman {
+    font-family: var(--font-display);
+    color: var(--accent);
+    font-size: 22px;
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: 6px;
+  }
+  .direction h4 {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 14px;
+    margin: 0 0 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--secondary);
+    color: var(--primary);
+  }
+  .direction p {
+    margin: 0 0 10px;
+    font-size: 14.5px;
+  }
+  .direction .meta {
+    font-style: italic;
+    font-size: 13px;
+    color: var(--text-emphasis);
+  }
+
+  /* ---------- TWO-COL ADDRESS / ACCESS ---------- */
+  .info-grid {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 60px 40px;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 60px;
+  }
+  .info-block {
+    border-left: 2px solid var(--primary);
+    padding-left: 32px;
+  }
+  .info-block .eyebrow {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    font-size: 11px;
+    color: var(--accent);
+    margin-bottom: 8px;
+    display: block;
+  }
+  .info-block h3 {
+    font-family: var(--font-display);
+    font-size: 28px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin: 0 0 22px;
+    color: var(--primary);
+  }
+  .info-block .dropcap {
+    float: left;
+    font-family: var(--font-display);
+    font-size: 64px;
+    line-height: 0.85;
+    color: var(--accent);
+    padding: 6px 12px 0 0;
+  }
+  .info-block ul.access {
+    list-style: none;
+    padding: 0;
+    margin: 18px 0 0;
+  }
+  .info-block ul.access li {
+    padding: 12px 0 12px 28px;
+    border-bottom: 1px solid rgba(26,26,26,0.2);
+    position: relative;
+    font-size: 14.5px;
+  }
+  .info-block ul.access li::before {
+    content: "❦";
+    position: absolute;
+    left: 0; top: 11px;
+    color: var(--secondary);
+    font-size: 14px;
+  }
+
+  /* ---------- CONTACT BLOCK ---------- */
+  .contact-band {
+    background: var(--primary);
+    color: var(--bg);
+    padding: 56px 40px;
+  }
+  .contact-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .contact-inner h2 {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    font-size: 22px;
+    margin: 0 0 8px;
+    color: var(--bg);
+  }
+  .contact-inner .latin {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--secondary);
+    letter-spacing: 0.08em;
+    font-size: 14px;
+    margin-bottom: 28px;
+  }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    margin-top: 28px;
+    padding-top: 28px;
+    border-top: 1px solid var(--secondary);
+  }
+  .contact-cell .lbl {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 11px;
+    color: var(--secondary);
+    display: block;
+    margin-bottom: 8px;
+  }
+  .contact-cell .val {
+    font-family: var(--font-display);
+    font-size: 17px;
+    letter-spacing: 0.06em;
+    color: var(--bg);
+  }
+
+  /* ---------- CALENDAR / NOTICE ---------- */
+  .notice {
+    max-width: 1100px;
+    margin: 60px auto;
+    padding: 0 40px;
+    text-align: center;
+  }
+  .notice .frame {
+    border: 2px solid var(--primary);
+    padding: 36px 50px;
+    position: relative;
+  }
+  .notice .seal-stamp {
+    width: 70px; height: 70px;
+    background: var(--accent);
+    color: var(--bg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-align: center;
+    line-height: 1.1;
+    position: absolute;
+    top: -35px; left: 50%;
+    transform: translateX(-50%);
+    border: 3px solid var(--bg);
+    box-shadow: 0 0 0 1px var(--accent);
+  }
+  .notice h3 {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 0.24em;
+    font-size: 18px;
+    margin: 18px 0 12px;
+  }
+  .notice p {
+    max-width: 620px;
+    margin: 0 auto;
+    font-size: 14.5px;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer.frieze {
+    background: var(--primary);
+    color: var(--bg);
+    margin-top: 0;
+    position: relative;
+  }
+  .footer-meander {
+    height: 24px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--primary);
+    overflow: hidden;
+    position: relative;
+  }
+  .footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 38px 60px;
+    max-width: 1300px;
+    margin: 0 auto;
+    gap: 40px;
+  }
+  .rosette {
+    width: 56px; height: 56px;
+    flex-shrink: 0;
+    opacity: 0.85;
+  }
+  .rosette svg { width: 100%; height: 100%; fill: var(--bg); }
+  .colophon {
+    text-align: center;
+    flex-grow: 1;
+  }
+  .colophon .name {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 0.32em;
+    font-size: 16px;
+    color: var(--bg);
+  }
+  .colophon .roman-date {
+    font-family: var(--font-display);
+    color: var(--secondary);
+    letter-spacing: 0.18em;
+    font-size: 12px;
+    margin: 6px 0 8px;
+  }
+  .colophon .addr {
+    font-family: var(--font-body);
+    font-size: 12px;
+    color: rgba(245,240,230,0.7);
+    letter-spacing: 0.05em;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ MASTHEAD ============ -->
+<header class="masthead">
+  <div class="seal" aria-hidden="true">
+    <svg viewBox="0 0 117.79 118.25" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(-75.73 -121.57)">
+        <circle cx="134.6" cy="180.7" r="44" fill="none" stroke="#1a1a1a" stroke-width="1.4"/>
+        <circle cx="134.6" cy="180.7" r="38" fill="none" stroke="#c9a23a" stroke-width="0.8"/>
+        <text x="134.6" y="186" text-anchor="middle" font-family="Marcellus" font-size="22" fill="#1a1a1a" letter-spacing="2">UA</text>
+        <text x="134.6" y="148" text-anchor="middle" font-family="Marcellus" font-size="6" fill="#a93226" letter-spacing="2">MCMXXVIII</text>
+      </g>
+    </svg>
+  </div>
+  <p class="institution">Universitas Aquilana</p>
+  <p class="motto">Schola Romana Studiorum · Founded MCMXXVIII</p>
+
+  <nav class="primary" aria-label="Primary">
+    <a href="page-1.html">Schola</a>
+    <span class="vine" aria-hidden="true"><svg viewBox="0 0 200 200"><path d="M43.6 863.4c-1.8 0-3.6.1-5.3.3-7 .7-13.9 2.8-19.2 7.5s-8.2 12-7.7 21c.5 9 4.3 16.1 10.2 20.3 5.9 4.2 13.3 5.5 21 5.2 15.5-.7 32.8-8 45.8-18.3 1.4-1.1 2.8-2 4.3-3.1 4.3 6.7 7.6 14.8 9.3 24.1-7.5-5.1-21-10.5-35.7 1.5-22.1 18.2-25 12.9-45.3-2.1-2.9 36.1 15 54.6 44.7 52.5z" transform="translate(0 -852)"/></svg></span>
+    <a href="page-2.html">Faculties</a>
+    <span class="vine" aria-hidden="true"><svg viewBox="0 0 200 200"><path d="M43.6 863.4c-1.8 0-3.6.1-5.3.3-7 .7-13.9 2.8-19.2 7.5s-8.2 12-7.7 21c.5 9 4.3 16.1 10.2 20.3 5.9 4.2 13.3 5.5 21 5.2 15.5-.7 32.8-8 45.8-18.3 1.4-1.1 2.8-2 4.3-3.1 4.3 6.7 7.6 14.8 9.3 24.1-7.5-5.1-21-10.5-35.7 1.5-22.1 18.2-25 12.9-45.3-2.1-2.9 36.1 15 54.6 44.7 52.5z" transform="translate(0 -852)"/></svg></span>
+    <a href="page-3.html">Admissions</a>
+    <span class="vine" aria-hidden="true"><svg viewBox="0 0 200 200"><path d="M43.6 863.4c-1.8 0-3.6.1-5.3.3-7 .7-13.9 2.8-19.2 7.5s-8.2 12-7.7 21c.5 9 4.3 16.1 10.2 20.3 5.9 4.2 13.3 5.5 21 5.2 15.5-.7 32.8-8 45.8-18.3 1.4-1.1 2.8-2 4.3-3.1 4.3 6.7 7.6 14.8 9.3 24.1-7.5-5.1-21-10.5-35.7 1.5-22.1 18.2-25 12.9-45.3-2.1-2.9 36.1 15 54.6 44.7 52.5z" transform="translate(0 -852)"/></svg></span>
+    <a href="page-4.html">Library</a>
+    <span class="vine" aria-hidden="true"><svg viewBox="0 0 200 200"><path d="M43.6 863.4c-1.8 0-3.6.1-5.3.3-7 .7-13.9 2.8-19.2 7.5s-8.2 12-7.7 21c.5 9 4.3 16.1 10.2 20.3 5.9 4.2 13.3 5.5 21 5.2 15.5-.7 32.8-8 45.8-18.3 1.4-1.1 2.8-2 4.3-3.1 4.3 6.7 7.6 14.8 9.3 24.1-7.5-5.1-21-10.5-35.7 1.5-22.1 18.2-25 12.9-45.3-2.1-2.9 36.1 15 54.6 44.7 52.5z" transform="translate(0 -852)"/></svg></span>
+    <a href="page-5.html">Research</a>
+    <span class="vine" aria-hidden="true"><svg viewBox="0 0 200 200"><path d="M43.6 863.4c-1.8 0-3.6.1-5.3.3-7 .7-13.9 2.8-19.2 7.5s-8.2 12-7.7 21c.5 9 4.3 16.1 10.2 20.3 5.9 4.2 13.3 5.5 21 5.2 15.5-.7 32.8-8 45.8-18.3 1.4-1.1 2.8-2 4.3-3.1 4.3 6.7 7.6 14.8 9.3 24.1-7.5-5.1-21-10.5-35.7 1.5-22.1 18.2-25 12.9-45.3-2.1-2.9 36.1 15 54.6 44.7 52.5z" transform="translate(0 -852)"/></svg></span>
+    <a href="page-6.html" aria-current="page">Visit</a>
+  </nav>
+</header>
+
+<!-- Greek-key meander cornice -->
+<div class="meander-strip" aria-hidden="true">
+  <svg viewBox="0 0 16511 4447" preserveAspectRatio="xMinYMid meet" width="3500" height="28">
+    <g transform="translate(0 0)">
+      <path fill="#1a1a1a" d="M1000 4175L1000 1000 4175 1000 4175 2905 2905 2905 2905 3540 4810 3540 4810 4175 2270 4175 2270 2270 3540 2270 3540 1635 1635 1635 1635 4175 1000 4175Z"/>
+      <path fill="#1a1a1a" d="M4810 4175L4810 1000 7985 1000 7985 2905 6715 2905 6715 3540 8620 3540 8620 4175 6080 4175 6080 2270 7350 2270 7350 1635 5445 1635 5445 4175 4810 4175Z"/>
+      <path fill="#1a1a1a" d="M8620 4175L8620 1000 11795 1000 11795 2905 10525 2905 10525 3540 12430 3540 12430 4175 9890 4175 9890 2270 11160 2270 11160 1635 9255 1635 9255 4175 8620 4175Z"/>
+      <path fill="#1a1a1a" d="M12430 4175L12430 1000 15605 1000 15605 2905 14335 2905 14335 3540 16240 3540 16240 4175 13700 4175 13700 2270 14970 2270 14970 1635 13065 1635 13065 4175 12430 4175Z"/>
+      <path fill="#1a1a1a" d="M16240 4175L16240 1000 17510 1000 17510 1635 16875 1635 16875 4175 16240 4175Z"/>
+    </g>
+  </svg>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="pediment" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <div class="hero-laurel" aria-hidden="true">
+      <svg viewBox="0 0 323.75 295.79" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(-64 20.6)" stroke="#1a1a1a" stroke-width="1.5" fill="none">
+          <path d="M141.7-18.6c-11 4.9-23.4 9.5-30.1 22.6-4.7 7.1-4.8 16.4-8.1 24.2 6.1-6.5 15.6-13.2 21-20.7 6-9.5 9.1-18 17.2-26.1zm164.5 0c8.1 8 11.2 16.6 17.2 26.1 5.4 7.6 14.9 14.2 21 20.7-3.3-7.8-3.4-17-8.1-24.2-6.7-13.2-19-17.8-30.1-22.6zM111.9-1.6c-5.6 1.6-10.6 5.5-14.6 11-9.1 10.8-10.7 25-6.9 42 1.3 4.5-.5 8.7-.3 13 2.7-6.2 5.7-11.9 11.6-15.9 13.1-8.4 16.7-12.8 20.1-20.8 3.9-9.3 4.7-10.7 4.8-19-3.8 12-15.3 17.1-23.1 25.2-4 4.4-7.2 9.6-9 15l-.3-.3c1-4.8 2.9-9.1 4-13.8 3.5-12.7 2.8-27.9 13.7-36.4zm223.7 0c10.9 8.5 10.2 23.8 13.7 36.4 1.1 4.7 3 9 4 13.8l-.3.3c-1.8-5.4-5-10.6-9-15-7.8-8.1-19.2-13.2-23.1-25.2.1 8.4.8 9.7 4.8 19 3.4 7.9 7 12.4 20.1 20.8 5.9 4 8.9 9.7 11.6 15.9.3-4.2-1.6-8.4-.3-13 3.8-17.1 2.2-31.2-6.9-42-3.9-5.6-9-9.4-14.6-11z"/>
+          <ellipse cx="195" cy="148" rx="120" ry="115"/>
+          <ellipse cx="195" cy="148" rx="100" ry="95" stroke="#c9a23a" stroke-width="0.8"/>
+        </g>
+      </svg>
+    </div>
+    <h1>Visit the Campus</h1>
+    <p class="latin">Veni, Vide, Disce — Come, See, Learn</p>
+    <div class="hero-rule"></div>
+    <p class="lede">The gates of the Universitas Aquilana stand open to the curious traveller, the prospective student, and the scholar of antiquity. Discover the coffered halls, marble courtyards, and quiet libraries that have shaped a century of Roman learning.</p>
+
+    <div class="stelae">
+      <div class="stela"><span class="num">II</span><span class="lbl">Tour Days</span></div>
+      <div class="stela"><span class="num">XI · XV</span><span class="lbl">Daily Departures</span></div>
+      <div class="stela"><span class="num">MCMXXVIII</span><span class="lbl">Aula Magna</span></div>
+      <div class="stela"><span class="num">90′</span><span class="lbl">Tour Duration</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TOURS ============ -->
+<section class="section-head">
+  <div class="roundel" aria-hidden="true">
+    <svg viewBox="0 0 117.79 118.25" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="58.9" cy="59.1" r="50" fill="none" stroke="#1a1a1a" stroke-width="1.4"/>
+      <circle cx="58.9" cy="59.1" r="42" fill="none" stroke="#c9a23a" stroke-width="0.8"/>
+      <circle cx="58.9" cy="59.1" r="6" fill="#a93226"/>
+      <g stroke="#1a1a1a" stroke-width="1" fill="none">
+        <path d="M30 35 Q40 25 50 32"/>
+        <path d="M88 35 Q78 25 68 32"/>
+        <path d="M30 83 Q40 93 50 86"/>
+        <path d="M88 83 Q78 93 68 86"/>
+      </g>
+    </svg>
+  </div>
+  <p class="sub">Itinera Cum Magistro</p>
+  <h2>Guided Tours of the Campus</h2>
+</section>
+
+<div class="tours">
+  <article class="card">
+    <div class="seal-mini" aria-hidden="true">
+      <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="24" fill="none" stroke="#1a1a1a" stroke-width="1.2"/><circle cx="30" cy="30" r="18" fill="none" stroke="#c9a23a" stroke-width="0.8"/><text x="30" y="34" text-anchor="middle" font-family="Marcellus" font-size="10" fill="#a93226">II</text></svg>
+    </div>
+    <h3>Aula Magna</h3>
+    <p class="latin-sub">The Great Hall · Coffered Vault MCMXXVIII</p>
+    <div class="gold-rule"></div>
+    <div class="body">
+      <p>The principal ceremonial chamber of the University, completed in 1928 by the architect Marcello Severi after the model of the Pantheon. Its coffered vault, gilded oculus, and marble floor of opus sectile remain among the finest examples of Italian neoclassical interior in Rome.</p>
+      <p>Tours depart from the Porta Aquilana and proceed through the Cortile dei Filosofi to the Hall, returning by way of the Loggia Vitruviana.</p>
+      <ul class="schedule">
+        <li><span class="day">Tuesday</span><span class="time">XI:00 · XV:00</span></li>
+        <li><span class="day">Thursday</span><span class="time">XI:00 · XV:00</span></li>
+        <li><span class="day">Departure</span><span class="time">Porta Aquilana</span></li>
+        <li><span class="day">Duration</span><span class="time">90 minutes</span></li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="seal-mini" aria-hidden="true">
+      <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="24" fill="none" stroke="#1a1a1a" stroke-width="1.2"/><circle cx="30" cy="30" r="18" fill="none" stroke="#c9a23a" stroke-width="0.8"/><text x="30" y="34" text-anchor="middle" font-family="Marcellus" font-size="10" fill="#a93226">III</text></svg>
+    </div>
+    <h3>Library &amp; Cloisters</h3>
+    <p class="latin-sub">Bibliotheca Pantheonis · Ad Libitum</p>
+    <div class="gold-rule"></div>
+    <div class="body">
+      <p>A self-directed promenade of the Library of the Pantheon, the inner cloisters of philosophy and law, and the open-air epigraphic gallery beneath the eastern colonnade. Printed itineraries are available without charge from the Porter's Lodge.</p>
+      <p>Visitors are invited to read in the Sala dei Codici between 10:00 and 17:00 upon presentation of valid identification.</p>
+      <ul class="schedule">
+        <li><span class="day">Mon — Fri</span><span class="time">IX:00 — XVIII:00</span></li>
+        <li><span class="day">Saturday</span><span class="time">X:00 — XIV:00</span></li>
+        <li><span class="day">Sunday</span><span class="time">Closed</span></li>
+        <li><span class="day">Admission</span><span class="time">Gratis</span></li>
+      </ul>
+    </div>
+  </article>
+</div>
+
+<!-- ============ DIRECTIONS ============ -->
+<section class="section-head" style="padding-top:80px;">
+  <p class="sub">Viae &amp; Itinera</p>
+  <h2>Directions to the Campus</h2>
+</section>
+
+<div class="directions-wrap">
+  <div class="directions">
+    <div class="direction">
+      <span class="roman">I.</span>
+      <h4>From Roma Termini</h4>
+      <p>Take Metro Line B (Laurentina direction) two stops to Cavour. From Cavour, proceed on foot south-west along Via dei Serpenti and Via dei Fori Imperiali for approximately twelve minutes to Via dei Fori Severiani.</p>
+      <p class="meta">Approx. 18 min · €1.50</p>
+    </div>
+    <div class="direction">
+      <span class="roman">II.</span>
+      <h4>From Fiumicino Airport</h4>
+      <p>Board the Leonardo Express to Roma Termini (32 min, hourly), then connect as above. Alternatively, the FL1 regional service to Roma Tiburtina permits a direct Metro B connection to Cavour.</p>
+      <p class="meta">Approx. 70 min · €14.00</p>
+    </div>
+    <div class="direction">
+      <span class="roman">III.</span>
+      <h4>By Foot from the Forum</h4>
+      <p>From the Arch of Titus, follow Via di San Bonaventura eastward to Largo Corrado Ricci; cross into Via dei Fori Severiani. The Porta Aquilana is the iron gate marked by twin marble eagles at number XIV.</p>
+      <p class="meta">Approx. 8 min on foot</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ ADDRESS / ACCESSIBILITY ============ -->
+<div class="info-grid">
+  <div class="info-block">
+    <span class="eyebrow">Sedes · The Address</span>
+    <h3>The Porta Aquilana</h3>
+    <p><span class="dropcap">T</span>he campus of the Universitas Aquilana occupies a single contiguous block bounded by the Via dei Fori Severiani to the north, the ancient wall of the Suburra to the east, and the gardens of the Palazzo Cornaro to the south. Visitors arrive at the Porta Aquilana, an iron gate flanked by twin Carrara-marble eagles sculpted by Pietro Canonica in 1931.</p>
+    <p>The Porter's Lodge, immediately within the gate, offers printed maps, audio devices in six languages, and complimentary cloakroom service. A small caffè under the eastern colonnade serves espresso and pastries from 07:30 until 19:00 on weekdays.</p>
+    <p style="margin-top:18px; font-family: var(--font-display); letter-spacing: 0.08em;">
+      Universitas Aquilana<br>
+      Via dei Fori Severiani XIV<br>
+      00184 Roma · Italia
+    </p>
+  </div>
+  <div class="info-block">
+    <span class="eyebrow">Accessus · Accessibility</span>
+    <h3>Provisions for Visitors</h3>
+    <p>The University is committed to welcoming all guests. The principal historic buildings have been adapted with discretion, preserving their architectural integrity while providing dignified access for visitors with reduced mobility.</p>
+    <ul class="access">
+      <li>Step-free entrance via the Porta Carracci on the western flank, opened upon request at the Porter's Lodge.</li>
+      <li>Lifts to all floors of the Aula Magna and the Library of the Pantheon; tactile maps available at reception.</li>
+      <li>Induction loops fitted in the Aula Magna and the Sala dei Codici; large-print itineraries on request.</li>
+      <li>Service animals welcomed throughout the campus, including reading rooms.</li>
+      <li>Reserved seating for guided tours; please notify the Office of Public Engagement at least 48 hours in advance.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ NOTICE ============ -->
+<section class="notice">
+  <div class="frame">
+    <div class="seal-stamp">SIGILLVM<br>CVRIAE</div>
+    <h3>Closures &amp; Festal Days</h3>
+    <p>The campus is closed to public visitors on the Feast of Saints Peter and Paul (29 June), Ferragosto (15 August), and from 23 December to 6 January inclusive. Tours do not operate during graduation week (typically the second week of July, dates announced annually). Confirmation by post or telephone is recommended for travellers from afar.</p>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="contact-band">
+  <div class="contact-inner">
+    <h2>Office of Public Engagement</h2>
+    <p class="latin">Officium Hospitium · For all enquiries concerning visits, tours, and group bookings</p>
+    <div class="contact-grid">
+      <div class="contact-cell">
+        <span class="lbl">By Letter</span>
+        <span class="val">visitatores@aquilana.edu</span>
+      </div>
+      <div class="contact-cell">
+        <span class="lbl">By Telephone</span>
+        <span class="val">+39 06 4429 1812</span>
+      </div>
+      <div class="contact-cell">
+        <span class="lbl">In Person</span>
+        <span class="val">Porter's Lodge, IX:00 — XVIII:00</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="frieze">
+  <div class="footer-meander" aria-hidden="true">
+    <svg viewBox="0 0 16511 4447" preserveAspectRatio="xMinYMid meet" width="3500" height="24">
+      <g>
+        <path fill="#1a1a1a" d="M1000 4175L1000 1000 4175 1000 4175 2905 2905 2905 2905 3540 4810 3540 4810 4175 2270 4175 2270 2270 3540 2270 3540 1635 1635 1635 1635 4175 1000 4175Z"/>
+        <path fill="#1a1a1a" d="M4810 4175L4810 1000 7985 1000 7985 2905 6715 2905 6715 3540 8620 3540 8620 4175 6080 4175 6080 2270 7350 2270 7350 1635 5445 1635 5445 4175 4810 4175Z"/>
+        <path fill="#1a1a1a" d="M8620 4175L8620 1000 11795 1000 11795 2905 10525 2905 10525 3540 12430 3540 12430 4175 9890 4175 9890 2270 11160 2270 11160 1635 9255 1635 9255 4175 8620 4175Z"/>
+        <path fill="#1a1a1a" d="M12430 4175L12430 1000 15605 1000 15605 2905 14335 2905 14335 3540 16240 3540 16240 4175 13700 4175 13700 2270 14970 2270 14970 1635 13065 1635 13065 4175 12430 4175Z"/>
+        <path fill="#1a1a1a" d="M16240 4175L16240 1000 17510 1000 17510 1635 16875 1635 16875 4175 16240 4175Z"/>
+      </g>
+    </svg>
+  </div>
+  <div class="footer-inner">
+    <div class="rosette" aria-hidden="true">
+      <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="38" fill="none" stroke="#f5f0e6" stroke-width="1"/><circle cx="50" cy="50" r="6" fill="#f5f0e6"/><g stroke="#f5f0e6" stroke-width="1.2" fill="none"><path d="M50 12 L52 38 L70 28 L58 46 L86 50 L58 54 L70 72 L52 62 L50 88 L48 62 L30 72 L42 54 L14 50 L42 46 L30 28 L48 38 Z"/></g></svg>
+    </div>
+    <div class="colophon">
+      <div class="name">Universitas Aquilana</div>
+      <div class="roman-date">CONDITA · MCMXXVIII</div>
+      <div class="addr">Via dei Fori Severiani XIV · 00184 Roma · Italia · visitatores@aquilana.edu · +39 06 4429 1812</div>
+    </div>
+    <div class="rosette" aria-hidden="true">
+      <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="38" fill="none" stroke="#f5f0e6" stroke-width="1"/><circle cx="50" cy="50" r="6" fill="#f5f0e6"/><g stroke="#f5f0e6" stroke-width="1.2" fill="none"><path d="M50 12 L52 38 L70 28 L58 46 L86 50 L58 54 L70 72 L52 62 L50 88 L48 62 L30 72 L42 54 L14 50 L42 46 L30 28 L48 38 Z"/></g></svg>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

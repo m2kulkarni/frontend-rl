@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Reservations — Naqsh-e Jahan Saffron House</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), sans-serif;
+    line-height: 1.6;
+  }
+
+  /* ---------- NAV ---------- */
+  .nav-band {
+    background: #f7eedc;
+    padding: 28px 0 0;
+    border-bottom: 1px solid rgba(30,58,95,0.15);
+  }
+  .nav-wordmark-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 36px;
+  }
+  .palmette {
+    width: 96px;
+    height: 38px;
+    color: var(--ornament);
+    opacity: 0.85;
+  }
+  .palmette.flip { transform: scaleX(-1); }
+  .wordmark {
+    font-family: var(--font-display), serif;
+    font-size: 26px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--primary);
+    font-variant: small-caps;
+    font-weight: 600;
+    text-align: center;
+  }
+  .wordmark .amp {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.5em;
+    color: var(--accent);
+    margin-top: 4px;
+    font-weight: 400;
+  }
+  .nav-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 22px;
+    list-style: none;
+    padding: 18px 0 14px;
+    margin: 0;
+    font-size: 12px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+  }
+  .nav-links a {
+    color: var(--primary);
+    text-decoration: none;
+    padding-bottom: 4px;
+  }
+  .nav-links a[aria-current="page"] {
+    border-bottom: 1px solid var(--accent);
+    color: var(--text-emphasis);
+  }
+  .nav-links .diamond {
+    width: 6px; height: 6px;
+    background: var(--primary);
+    transform: rotate(45deg);
+    display: inline-block;
+  }
+  .filet {
+    width: 100%;
+    height: 22px;
+    display: block;
+    color: var(--ornament);
+  }
+  .filet svg { width: 100%; height: 100%; display: block; }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    text-align: center;
+    padding: 60px 20px 30px;
+    position: relative;
+  }
+  .hero h1 {
+    font-family: var(--font-display), serif;
+    font-size: 56px;
+    font-weight: 500;
+    margin: 0 0 12px;
+    color: var(--primary);
+    letter-spacing: 0.04em;
+  }
+  .hero .kicker {
+    font-size: 11px;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 18px;
+  }
+  .hero p.lede {
+    max-width: 620px;
+    margin: 0 auto;
+    font-size: 16px;
+    color: var(--text-emphasis);
+    font-style: italic;
+  }
+
+  /* ---------- BOOKING PANEL ---------- */
+  .booking-section {
+    padding: 50px 0 70px;
+    position: relative;
+  }
+  .arch-frame {
+    width: 720px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .arch-frame::before {
+    content: "";
+    position: absolute;
+    inset: -10px;
+    background:
+      radial-gradient(circle at 50% 0%, transparent 0, transparent 360px, transparent 361px);
+    pointer-events: none;
+  }
+  .ogee-arch {
+    position: relative;
+    background: #fbf3e0;
+    border: 1px solid var(--ornament);
+    border-radius: 360px 360px 8px 8px;
+    padding: 90px 70px 60px;
+    box-shadow: inset 0 0 0 8px #fbf3e0, inset 0 0 0 9px var(--ornament), inset 0 0 0 14px #fbf3e0;
+  }
+  .ogee-arch::before {
+    /* keystone star at apex */
+    content: "";
+    position: absolute;
+    top: -42px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 84px; height: 84px;
+    background: #fbf3e0;
+    border: 1px solid var(--ornament);
+    transform: translateX(-50%) rotate(45deg);
+    z-index: 1;
+  }
+  .keystone-star {
+    position: absolute;
+    top: -32px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 64px; height: 64px;
+    z-index: 2;
+    color: var(--accent);
+  }
+  .keystone-star svg { width: 100%; height: 100%; }
+
+  .panel-title {
+    font-family: var(--font-display), serif;
+    text-align: center;
+    font-size: 32px;
+    color: var(--primary);
+    margin: 0 0 6px;
+    font-weight: 500;
+  }
+  .panel-sub {
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 28px;
+  }
+
+  form.booking {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px 24px;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+  form.booking .full { grid-column: 1 / -1; }
+  form.booking label {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    margin-bottom: 6px;
+  }
+  form.booking input,
+  form.booking select,
+  form.booking textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--ornament);
+    padding: 8px 2px;
+    font-family: var(--font-body), sans-serif;
+    font-size: 14px;
+    color: var(--primary);
+    outline: none;
+  }
+  form.booking textarea {
+    border: 1px solid var(--ornament);
+    padding: 10px;
+    min-height: 70px;
+    resize: vertical;
+  }
+  .submit-row {
+    grid-column: 1 / -1;
+    text-align: center;
+    margin-top: 12px;
+  }
+  button.book-btn {
+    background: var(--primary);
+    color: #f7eedc;
+    border: none;
+    padding: 14px 42px;
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    cursor: pointer;
+    position: relative;
+  }
+  button.book-btn::before,
+  button.book-btn::after {
+    content: "✦";
+    color: var(--accent);
+    margin: 0 14px;
+    font-size: 10px;
+  }
+
+  /* ---------- POLICY GRID ---------- */
+  .policy-section {
+    max-width: 1180px;
+    margin: 30px auto 60px;
+    padding: 0 40px;
+  }
+  .seam {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    margin: 40px 0 50px;
+  }
+  .seam .filet-mini { width: 320px; height: 18px; color: var(--ornament); }
+  .seam .seam-star {
+    width: 28px; height: 28px;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+  .policy-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid rgba(30,58,95,0.2);
+    border-bottom: 1px solid rgba(30,58,95,0.2);
+  }
+  .policy-card {
+    padding: 36px 32px;
+    text-align: center;
+    border-right: 1px solid rgba(30,58,95,0.2);
+    position: relative;
+  }
+  .policy-card:last-child { border-right: none; }
+  .policy-card .pc-num {
+    font-family: var(--font-display), serif;
+    color: var(--accent);
+    font-size: 14px;
+    letter-spacing: 0.3em;
+    margin-bottom: 12px;
+  }
+  .policy-card h3 {
+    font-family: var(--font-display), serif;
+    font-size: 20px;
+    color: var(--primary);
+    margin: 0 0 14px;
+    font-weight: 500;
+  }
+  .policy-card p {
+    font-size: 14px;
+    color: var(--text);
+    margin: 0;
+  }
+
+  /* ---------- TASTING / CHEF'S TABLE FEATURED ROW ---------- */
+  .feature-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    max-width: 1100px;
+    margin: 80px auto;
+    padding: 0 40px;
+  }
+  .feature-card {
+    border: 1px solid var(--ornament);
+    border-radius: 200px 200px 4px 4px;
+    padding: 60px 40px 40px;
+    background: #fbf3e0;
+    text-align: center;
+    position: relative;
+  }
+  .feature-card .star-seal {
+    position: absolute;
+    top: -24px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 46px; height: 46px;
+    background: #fbf3e0;
+    border-radius: 50%;
+    padding: 6px;
+    color: var(--accent);
+  }
+  .feature-card .star-seal svg { width: 100%; height: 100%; display: block; }
+  .feature-card h3 {
+    font-family: var(--font-display), serif;
+    font-size: 26px;
+    margin: 8px 0 6px;
+    color: var(--primary);
+    font-weight: 500;
+  }
+  .feature-card .price {
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .feature-card p {
+    font-size: 14px;
+    color: var(--text);
+    margin: 0 0 10px;
+  }
+
+  /* ---------- CONTACT STRIP ---------- */
+  .contact-strip {
+    background: #fbf3e0;
+    border-top: 1px solid rgba(30,58,95,0.15);
+    border-bottom: 1px solid rgba(30,58,95,0.15);
+    padding: 50px 40px;
+    text-align: center;
+  }
+  .contact-strip h2 {
+    font-family: var(--font-display), serif;
+    font-size: 28px;
+    color: var(--primary);
+    margin: 0 0 8px;
+    font-weight: 500;
+  }
+  .contact-strip .phone {
+    font-family: var(--font-display), serif;
+    font-size: 36px;
+    color: var(--text-emphasis);
+    letter-spacing: 0.08em;
+    margin: 16px 0 8px;
+  }
+  .contact-strip .email {
+    font-size: 14px;
+    color: var(--secondary);
+    letter-spacing: 0.15em;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    background: var(--primary);
+    color: #f7eedc;
+    padding: 0 0 30px;
+    margin-top: 30px;
+    position: relative;
+  }
+  .footer-top-filet {
+    width: 100%; height: 8px;
+    background: var(--secondary);
+    display: block;
+  }
+  .footer-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 60px 40px 20px;
+    gap: 40px;
+    text-align: center;
+    position: relative;
+  }
+  .footer-cols::before,
+  .footer-cols::after {
+    content: "";
+    position: absolute;
+    top: 70px; bottom: 30px;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, rgba(201,162,58,0.6), transparent);
+  }
+  .footer-cols::before { left: 36.66%; }
+  .footer-cols::after  { left: 63.33%; }
+  .footer-cols h4 {
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.4em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin: 0 0 16px;
+    font-weight: 500;
+  }
+  .footer-cols p, .footer-cols a {
+    color: #f7eedc;
+    font-size: 14px;
+    line-height: 1.7;
+    text-decoration: none;
+    margin: 0;
+  }
+  .copyright {
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(247,238,220,0.7);
+    margin-top: 30px;
+  }
+  .tailpiece {
+    display: block;
+    width: 120px;
+    height: 30px;
+    margin: 14px auto 0;
+    color: var(--accent);
+  }
+  .tailpiece svg { width: 100%; height: 100%; }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav-band">
+  <div class="nav-wordmark-row">
+    <svg class="palmette" viewBox="0 0 200 60" aria-hidden="true">
+      <g fill="none" stroke="currentColor" stroke-width="1.2">
+        <path d="M10 30 Q 50 30 80 30"/>
+        <path d="M80 30 Q 90 10 110 10 Q 130 10 130 30 Q 130 50 110 50 Q 90 50 80 30 Z" fill="currentColor" fill-opacity="0.08"/>
+        <path d="M95 30 Q 105 20 115 30 Q 105 40 95 30 Z" fill="currentColor" fill-opacity="0.4"/>
+        <circle cx="155" cy="30" r="3" fill="currentColor"/>
+        <path d="M165 30 L 195 30"/>
+        <path d="M170 25 L 175 30 L 170 35"/>
+      </g>
+    </svg>
+    <div class="wordmark">
+      Naqsh-e Jahan
+      <span class="amp">— Saffron House —</span>
+    </div>
+    <svg class="palmette flip" viewBox="0 0 200 60" aria-hidden="true">
+      <g fill="none" stroke="currentColor" stroke-width="1.2">
+        <path d="M10 30 Q 50 30 80 30"/>
+        <path d="M80 30 Q 90 10 110 10 Q 130 10 130 30 Q 130 50 110 50 Q 90 50 80 30 Z" fill="currentColor" fill-opacity="0.08"/>
+        <path d="M95 30 Q 105 20 115 30 Q 105 40 95 30 Z" fill="currentColor" fill-opacity="0.4"/>
+        <circle cx="155" cy="30" r="3" fill="currentColor"/>
+        <path d="M165 30 L 195 30"/>
+        <path d="M170 25 L 175 30 L 170 35"/>
+      </g>
+    </svg>
+  </div>
+  <nav>
+    <ul class="nav-links">
+      <li><a href="page-1.html">Tablehouse</a></li>
+      <li><span class="diamond"></span></li>
+      <li><a href="page-2.html">The Menu</a></li>
+      <li><span class="diamond"></span></li>
+      <li><a href="page-3.html">Cellar &amp; Tea</a></li>
+      <li><span class="diamond"></span></li>
+      <li><a href="page-4.html">Our Story</a></li>
+      <li><span class="diamond"></span></li>
+      <li><a href="page-5.html" aria-current="page">Reservations</a></li>
+      <li><span class="diamond"></span></li>
+      <li><a href="page-6.html">Visit</a></li>
+    </ul>
+  </nav>
+  <span class="filet" aria-hidden="true">
+    <svg viewBox="0 0 437.999 18.893" preserveAspectRatio="none">
+      <g fill="currentColor">
+        <path d="M0,9.445c0,0,37.005-0.063,73.998-0.829c18.495-0.386,36.989-0.949,50.831-1.785c6.919-0.414,12.677-0.906,16.663-1.46c1.99-0.28,3.539-0.582,4.535-0.878c0.502-0.146,0.844-0.297,1.049-0.405c0.157-0.107,0.238-0.162,0.238-0.162l0.42-0.287l0.656,0.656l-0.369,0.338c0,0-0.154,0.142-0.456,0.324c-0.291,0.154-0.714,0.331-1.256,0.484c-1.085,0.314-2.667,0.608-4.686,0.879c-4.037,0.533-9.811,0.985-16.745,1.354c-13.868,0.744-32.369,1.183-50.87,1.443C37.003,9.632,0,9.445,0,9.445z"/>
+        <path d="M437.999,9.445c0,0-37.004,0.187-74.007-0.329c-18.501-0.261-37.002-0.699-50.869-1.443c-6.935-0.368-12.708-0.82-16.745-1.354c-2.019-0.271-3.601-0.565-4.687-0.879c-0.541-0.153-0.965-0.33-1.256-0.484c-0.302-0.183-0.456-0.324-0.456-0.324l-0.369-0.338l0.656-0.656l0.42,0.287c0,0,0.081,0.055,0.238,0.162c0.204,0.108,0.546,0.26,1.048,0.405c0.996,0.296,2.545,0.598,4.535,0.878c3.986,0.554,9.744,1.046,16.663,1.46c13.842,0.836,32.336,1.399,50.83,1.785C400.994,9.382,437.999,9.445,437.999,9.445z"/>
+        <circle cx="219" cy="9.5" r="5" fill="none" stroke="currentColor" stroke-width="1"/>
+        <circle cx="219" cy="9.5" r="2"/>
+      </g>
+    </svg>
+  </span>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="kicker">— Reservations —</div>
+  <h1>A Table Beneath the Vault</h1>
+  <p class="lede">Eight seatings each evening, candles caught in the cobalt tilework. We hold every booking with care; please arrive a few minutes before your hour so the rosewater may be brought.</p>
+</section>
+
+<!-- ============ BOOKING PANEL ============ -->
+<section class="booking-section">
+  <div class="arch-frame">
+    <div class="ogee-arch">
+      <span class="keystone-star" aria-hidden="true">
+        <svg viewBox="0 0 100 100">
+          <g fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="50,8 60,30 84,30 66,46 74,70 50,56 26,70 34,46 16,30 40,30"/>
+            <polygon points="50,22 56,38 72,38 60,48 64,64 50,55 36,64 40,48 28,38 44,38" fill="currentColor" fill-opacity="0.15"/>
+          </g>
+        </svg>
+      </span>
+
+      <h2 class="panel-title">Book a Table</h2>
+      <div class="panel-sub">— Parties of one to eight —</div>
+
+      <form class="booking" action="#" method="post">
+        <div>
+          <label for="name">Name</label>
+          <input id="name" type="text" placeholder="Full name">
+        </div>
+        <div>
+          <label for="party">Guests</label>
+          <select id="party">
+            <option>1 guest</option>
+            <option>2 guests</option>
+            <option>3 guests</option>
+            <option>4 guests</option>
+            <option>5 guests</option>
+            <option>6 guests</option>
+            <option>7 guests</option>
+            <option selected>8 guests</option>
+          </select>
+        </div>
+        <div>
+          <label for="date">Date</label>
+          <input id="date" type="text" placeholder="Friday, 14 March 2025">
+        </div>
+        <div>
+          <label for="time">Sitting</label>
+          <select id="time">
+            <option>18:00 — first sitting</option>
+            <option>18:45</option>
+            <option>19:30</option>
+            <option selected>20:15 — second sitting</option>
+            <option>21:00</option>
+          </select>
+        </div>
+        <div>
+          <label for="phone">Telephone</label>
+          <input id="phone" type="tel" placeholder="020 0000 0000">
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input id="email" type="email" placeholder="you@example.com">
+        </div>
+        <div class="full">
+          <label for="notes">Dietary &amp; occasion notes</label>
+          <textarea id="notes" placeholder="Allergies, vegetarian or halal requests, anniversaries — Chef Mehrabani prepares each plate to order."></textarea>
+        </div>
+        <div class="submit-row">
+          <button class="book-btn" type="submit">Reserve</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SEAM ============ -->
+<div class="seam" aria-hidden="true">
+  <span class="filet-mini">
+    <svg viewBox="0 0 437.999 18.893" preserveAspectRatio="none">
+      <path fill="currentColor" d="M0,9.445c0,0,37,0,73-1c18-1,37-1,50-2c6-1,12-1,16-1c2,0,3,0,4-1c0,0,1,0,1,0l0,0l1,1l0,0c0,0,0,0,0,0c-1,0-1,0-2,0c-1,0-2,0-4,1c-4,1-9,1-16,1c-13,1-32,2-50,2c-37,1-73,1-73,1z"/>
+    </svg>
+  </span>
+  <span class="seam-star">
+    <svg viewBox="0 0 100 100">
+      <polygon points="50,5 61,39 96,39 68,60 78,94 50,73 22,94 32,60 4,39 39,39" fill="currentColor"/>
+    </svg>
+  </span>
+  <span class="filet-mini">
+    <svg viewBox="0 0 437.999 18.893" preserveAspectRatio="none">
+      <path fill="currentColor" d="M437.999,9.445c0,0-37,0-73-1c-18-1-37-1-50-2c-6-1-12-1-16-1c-2,0-3,0-4-1c0,0-1,0-1,0l0,0l-1,1l0,0c0,0,0,0,0,0c1,0,1,0,2,0c1,0,2,0,4,1c4,1,9,1,16,1c13,1,32,2,50,2c37,1,73,1,73,1z"/>
+    </svg>
+  </span>
+</div>
+
+<!-- ============ POLICY GRID ============ -->
+<section class="policy-section">
+  <div class="policy-grid">
+    <article class="policy-card">
+      <div class="pc-num">— I —</div>
+      <h3>Parties &amp; Groups</h3>
+      <p>Tables for one to eight guests are booked online through the panel above. For parties of nine or more — wedding lunches, corporate hosting, or festive Nowruz gatherings — please write to <strong>bookings@naqsh-saffron.co.uk</strong> with your preferred date and we will reserve a private section of the dining room.</p>
+    </article>
+    <article class="policy-card">
+      <div class="pc-num">— II —</div>
+      <h3>Dietary Accommodation</h3>
+      <p>Vegetarian, vegan, halal, gluten-free and nut-free menus are prepared by Chef Mehrabani when noted in your booking. Many Safavid recipes are naturally suited to such requests. Please give us 24 hours' notice for full substitution of the tasting menu.</p>
+    </article>
+    <article class="policy-card">
+      <div class="pc-num">— III —</div>
+      <h3>Cancellation Window</h3>
+      <p>We hold tables for fifteen minutes past the booked hour. Cancellations made within 24 hours of the sitting are charged at £25 per guest, the cost of the produce already drawn from the larder. Outside that window, cancellation is without fee.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ============ FEATURE ROW ============ -->
+<section class="feature-row">
+  <article class="feature-card">
+    <span class="star-seal" aria-hidden="true">
+      <svg viewBox="0 0 100 100">
+        <polygon points="50,8 60,30 84,30 66,46 74,70 50,56 26,70 34,46 16,30 40,30" fill="currentColor"/>
+      </svg>
+    </span>
+    <h3>The Tasting Menu</h3>
+    <div class="price">£95 · Seven Courses</div>
+    <p>A walk through the royal kitchens of Shah Abbas — saffron-cured trout, lamb with sour cherry, the celebrated <em>fesenjān</em> of pomegranate and walnut, finishing with rosewater sorbet beneath gold leaf. Wine pairing £55 supplement.</p>
+    <p><em>Requires 48 hours' notice. Available Wednesday through Saturday.</em></p>
+  </article>
+  <article class="feature-card">
+    <span class="star-seal" aria-hidden="true">
+      <svg viewBox="0 0 100 100">
+        <polygon points="50,8 60,30 84,30 66,46 74,70 50,56 26,70 34,46 16,30 40,30" fill="currentColor"/>
+      </svg>
+    </span>
+    <h3>The Chef's Table</h3>
+    <div class="price">For Six · By Request</div>
+    <p>Set within the tile alcove beside the open kitchen, our chef's table seats six in the company of Chef Mehrabani himself. A bespoke nine-course menu is prepared, drawn from his archive of Isfahani manuscripts, served from copper trays at the table.</p>
+    <p><em>Reserve via bookings@naqsh-saffron.co.uk — three weeks ahead.</em></p>
+  </article>
+</section>
+
+<!-- ============ CONTACT STRIP ============ -->
+<section class="contact-strip">
+  <h2>Or speak with our maître d'</h2>
+  <p style="font-size:13px; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent); margin:6px 0 0;">— Tuesday through Sunday, eleven until late —</p>
+  <div class="phone">020 7946 0188</div>
+  <div class="email">bookings@naqsh-saffron.co.uk</div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <span class="footer-top-filet" aria-hidden="true"></span>
+  <div class="footer-cols">
+    <div>
+      <h4>Address</h4>
+      <p>14 Cloak Lane<br>Farringdon, London<br>EC1R 4QE</p>
+    </div>
+    <div>
+      <h4>Hours</h4>
+      <p>Tuesday — Thursday · 18:00–22:30<br>
+      Friday — Saturday · 12:00–23:00<br>
+      Sunday · 12:00–21:00<br>
+      Closed Mondays</p>
+    </div>
+    <div>
+      <h4>Reservations</h4>
+      <p>020 7946 0188<br>
+      bookings@naqsh-saffron.co.uk<br>
+      <a href="page-5.html" style="color:var(--accent);">Book online →</a></p>
+    </div>
+  </div>
+  <div class="copyright">© 2025 Naqsh-e Jahan Saffron House · A house of Isfahan in London</div>
+  <span class="tailpiece" aria-hidden="true">
+    <svg viewBox="0 0 200 50">
+      <g fill="none" stroke="currentColor" stroke-width="1.2">
+        <path d="M10 25 L 70 25"/>
+        <path d="M130 25 L 190 25"/>
+        <circle cx="100" cy="25" r="6" fill="currentColor"/>
+        <circle cx="100" cy="25" r="12"/>
+        <path d="M85 25 Q 100 5 115 25 Q 100 45 85 25 Z"/>
+        <circle cx="78" cy="25" r="2" fill="currentColor"/>
+        <circle cx="122" cy="25" r="2" fill="currentColor"/>
+      </g>
+    </svg>
+  </span>
+</footer>
+
+</body>
+</html>

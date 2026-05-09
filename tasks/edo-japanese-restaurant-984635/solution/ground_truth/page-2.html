@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Honjitsu no O-shinagaki — Today's Menu | Kiritsubo</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  html, body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* ---------- PAGE FRAME ---------- */
+  .page {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 56px 80px 0 80px;
+    position: relative;
+    min-height: 900px;
+  }
+
+  /* ---------- HEADER / NAV ---------- */
+  .masthead {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: flex-start;
+    margin-bottom: 96px;
+    min-height: 88px;
+  }
+  .house-mark {
+    width: 64px;
+    height: 64px;
+    opacity: 0.92;
+  }
+  .house-mark svg { width: 100%; height: 100%; display: block; }
+
+  nav.primary {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    font-family: var(--font-body), serif;
+    font-variant: small-caps;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    color: var(--text);
+  }
+  nav.primary a {
+    color: var(--text);
+    text-decoration: none;
+    padding: 4px 18px;
+    transition: color 0.2s;
+  }
+  nav.primary a + a {
+    border-left: 1px solid rgba(12,12,12,0.5);
+  }
+  nav.primary a[aria-current="page"] {
+    color: var(--secondary);
+  }
+  nav.primary a:hover { color: var(--secondary); }
+
+  /* ---------- DOCUMENT HEAD ---------- */
+  .doc-head {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+    margin-bottom: 72px;
+  }
+  .doc-head .left {
+    /* deliberate negative space; carry only date + meta */
+    padding-top: 12px;
+  }
+  .doc-head .date-block {
+    font-family: var(--font-body), serif;
+    font-size: 12px;
+    line-height: 2;
+    letter-spacing: 0.18em;
+    color: var(--text);
+    border-top: 1px solid var(--ornament);
+    padding-top: 14px;
+    width: 220px;
+  }
+  .doc-head .date-block .era {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    letter-spacing: 0.05em;
+    display: block;
+    margin-bottom: 6px;
+    color: var(--primary);
+  }
+  .doc-head .right h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 64px;
+    line-height: 1.1;
+    margin: 0 0 18px 0;
+    color: var(--primary);
+    letter-spacing: 0.02em;
+  }
+  .doc-head .right h1 .kanji {
+    display: block;
+    font-size: 38px;
+    color: var(--ornament);
+    margin-bottom: 18px;
+    letter-spacing: 0.18em;
+  }
+  .doc-head .right .lede {
+    font-size: 15px;
+    line-height: 1.85;
+    max-width: 540px;
+    color: var(--text);
+  }
+  .doc-head .right .lede em {
+    color: var(--secondary);
+    font-style: normal;
+  }
+
+  /* ---------- DIVIDER ---------- */
+  .sayagata-divider {
+    width: 100%;
+    height: 36px;
+    overflow: hidden;
+    opacity: 0.12;
+    margin: 8px 0 56px 0;
+  }
+  .sayagata-divider svg {
+    width: 100%;
+    height: 36px;
+    display: block;
+  }
+
+  /* ---------- COURSE LIST ---------- */
+  .menu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 0;
+    position: relative;
+    margin-bottom: 96px;
+  }
+  /* asanoha low-opacity ground confined to right column gutter */
+  .menu-grid::before {
+    content: "";
+    position: absolute;
+    left: 38%;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: rgba(12,12,12,0.35);
+  }
+
+  .courses {
+    grid-column: 2 / 3;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .course {
+    display: grid;
+    grid-template-columns: 64px 1fr 120px;
+    gap: 28px;
+    padding: 28px 0 26px 32px;
+    border-top: 1px solid var(--ornament);
+    align-items: baseline;
+    position: relative;
+  }
+  .course:last-child {
+    border-bottom: 1px solid var(--ornament);
+  }
+  .course .num {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    line-height: 1;
+    padding-top: 4px;
+  }
+  .course .body h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 26px;
+    margin: 0 0 4px 0;
+    color: var(--primary);
+    letter-spacing: 0.04em;
+  }
+  .course .body h3 .kana {
+    font-family: var(--font-body), serif;
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    color: var(--ornament);
+    margin-left: 12px;
+    font-variant: small-caps;
+  }
+  .course .body p.dish {
+    margin: 6px 0 6px 0;
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--text);
+  }
+  .course .body p.prov {
+    margin: 0;
+    font-size: 11.5px;
+    line-height: 1.7;
+    color: rgba(12,12,12,0.7);
+    font-style: italic;
+    letter-spacing: 0.04em;
+  }
+  .course .price {
+    text-align: right;
+    font-family: var(--font-display), serif;
+    font-size: 18px;
+    color: var(--ornament);
+    letter-spacing: 0.05em;
+    padding-top: 6px;
+  }
+  .course .price .yen {
+    color: var(--secondary);
+    font-size: 14px;
+    margin-left: 2px;
+  }
+
+  /* left column: aside notes */
+  .aside-notes {
+    grid-column: 1 / 2;
+    padding-right: 60px;
+    padding-top: 4px;
+  }
+  .aside-notes .seal-frame {
+    width: 130px;
+    height: 130px;
+    margin-bottom: 36px;
+    opacity: 0.85;
+  }
+  .aside-notes .seal-frame svg { width: 100%; height: 100%; display: block; }
+  .aside-notes h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 22px;
+    color: var(--primary);
+    margin: 0 0 14px 0;
+    letter-spacing: 0.06em;
+  }
+  .aside-notes p {
+    font-size: 13px;
+    line-height: 1.85;
+    color: var(--text);
+    margin: 0 0 18px 0;
+    max-width: 280px;
+  }
+  .aside-notes .meta-row {
+    border-top: 1px solid var(--ornament);
+    margin-top: 28px;
+    padding-top: 14px;
+    font-size: 11px;
+    line-height: 1.9;
+    letter-spacing: 0.12em;
+    font-variant: small-caps;
+    color: var(--text);
+    max-width: 260px;
+  }
+  .aside-notes .meta-row strong {
+    color: var(--secondary);
+    font-weight: 400;
+  }
+
+  /* ---------- LIST CLOSE ---------- */
+  .list-close {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 32px;
+    margin: 64px 0 80px 0;
+    padding: 0 80px;
+  }
+  .list-close .rule {
+    height: 1px;
+    background: var(--ornament);
+    opacity: 0.5;
+  }
+  .list-close .seal {
+    width: 56px;
+    height: 56px;
+  }
+  .list-close .seal svg { width:100%; height:100%; display:block; }
+  .list-close .colophon {
+    grid-column: 1 / -1;
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-size: 16px;
+    color: var(--primary);
+    letter-spacing: 0.4em;
+    margin-top: 18px;
+  }
+  .list-close .colophon span {
+    display: block;
+    font-family: var(--font-body), serif;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    font-variant: small-caps;
+    color: var(--ornament);
+    margin-top: 8px;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer.site-foot {
+    background: var(--bg);
+    margin-top: 60px;
+    position: relative;
+    padding: 0 80px 56px 80px;
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .asanoha-band {
+    height: 56px;
+    width: 100%;
+    overflow: hidden;
+    opacity: 0.12;
+    margin-bottom: 48px;
+    border-top: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+  }
+  .asanoha-band svg {
+    width: 100%;
+    height: 56px;
+    display: block;
+  }
+  .foot-seal {
+    text-align: center;
+    margin-bottom: 18px;
+  }
+  .foot-seal svg {
+    width: 72px;
+    height: 72px;
+    display: inline-block;
+  }
+  .foot-sig {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-size: 18px;
+    color: var(--primary);
+    letter-spacing: 0.24em;
+    margin-bottom: 56px;
+  }
+  .foot-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    max-width: 720px;
+    margin: 0 auto;
+    font-size: 11px;
+    line-height: 1.9;
+    letter-spacing: 0.06em;
+    color: var(--text);
+  }
+  .foot-cols h4 {
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    color: var(--secondary);
+    margin: 0 0 8px 0;
+  }
+  .foot-cols p { margin: 0 0 8px 0; }
+
+  /* small umebachi corner mark for the list block */
+  .list-mark {
+    position: absolute;
+    right: 0;
+    bottom: -28px;
+    width: 28px;
+    height: 28px;
+    opacity: 0.7;
+  }
+  .list-mark svg { width: 100%; height: 100%; }
+
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <header class="masthead">
+    <div class="house-mark" aria-label="Tsuru-no-maru house mark">
+      <!-- tsuru-no-maru kamon (single seal) -->
+      <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="344" cy="344" r="338" fill="none" stroke="#0c0c0c" stroke-width="6"/>
+        <g transform="translate(344,344) scale(0.62) translate(-344,-344)" fill="#0c0c0c">
+          <circle cx="344" cy="344" r="240" fill="none" stroke="#0c0c0c" stroke-width="4"/>
+          <path d="M 344 140 C 240 200, 180 300, 200 420 C 230 380, 280 360, 330 360 C 300 380, 280 420, 290 470 C 320 440, 360 430, 400 440 C 380 470, 380 500, 410 520 C 430 490, 470 480, 510 490 C 480 460, 470 420, 490 380 C 450 400, 410 390, 380 360 C 440 350, 490 310, 500 240 C 460 280, 410 290, 370 270 C 410 250, 440 210, 430 160 C 400 190, 370 200, 344 190 Z"/>
+        </g>
+      </svg>
+    </div>
+    <nav class="primary" aria-label="Primary">
+      <a href="page-1.html">Honke</a>
+      <a href="page-2.html" aria-current="page">O-shinagaki</a>
+      <a href="page-3.html">Yuisho</a>
+      <a href="page-4.html">Shun</a>
+      <a href="page-5.html">Yoyaku</a>
+      <a href="page-6.html">Annai</a>
+    </nav>
+  </header>
+
+  <section class="doc-head">
+    <div class="left">
+      <div class="date-block">
+        <span class="era">令和六年 神無月 十二日</span>
+        Reiwa 6 · Kannazuki · 12<br>
+        Saturday, October 12<br>
+        Hand-set by the okami at dawn.
+      </div>
+    </div>
+    <div class="right">
+      <h1>
+        <span class="kanji">本日のお品書</span>
+        Honjitsu no<br>O-shinagaki.
+      </h1>
+      <p class="lede">
+        Seven courses, set out in the order the kitchen serves them, drawn from this morning's
+        market at Tsukiji and the Tama river fishermen who come to our gate before five.
+        The list changes by the day; what is written here will be served tonight only.
+        Reservations close at <em>four in the afternoon</em>.
+      </p>
+    </div>
+  </section>
+
+  <div class="sayagata-divider" aria-hidden="true">
+    <svg viewBox="0 0 1280 36" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="saya" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+          <g fill="none" stroke="#0c0c0c" stroke-width="1.2">
+            <polyline points="0,30 15,15 0,0"/>
+            <polyline points="15,15 30,15 30,30 45,30 45,45 60,45"/>
+            <polyline points="30,0 30,15"/>
+            <polyline points="60,30 45,15 60,0"/>
+            <polyline points="0,60 15,45 30,60"/>
+          </g>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#saya)"/>
+    </svg>
+  </div>
+
+  <section class="menu-grid" aria-label="Today's seven courses">
+
+    <aside class="aside-notes">
+      <div class="seal-frame" aria-hidden="true">
+        <!-- seigaiha small panel as a contemplative sigil -->
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <g id="wv">
+              <path d="M 0,60 A 30,30 0 0 1 60,60" fill="none" stroke="#1c3a5e" stroke-width="1.2"/>
+              <path d="M 8,60 A 22,22 0 0 1 52,60" fill="none" stroke="#1c3a5e" stroke-width="0.8"/>
+              <path d="M 16,60 A 14,14 0 0 1 44,60" fill="none" stroke="#1c3a5e" stroke-width="0.6"/>
+            </g>
+          </defs>
+          <g opacity="0.85">
+            <use href="#wv" x="0" y="0"/><use href="#wv" x="60" y="0"/><use href="#wv" x="120" y="0"/>
+            <use href="#wv" x="-30" y="40"/><use href="#wv" x="30" y="40"/><use href="#wv" x="90" y="40"/><use href="#wv" x="150" y="40"/>
+            <use href="#wv" x="0" y="80"/><use href="#wv" x="60" y="80"/><use href="#wv" x="120" y="80"/>
+            <use href="#wv" x="-30" y="120"/><use href="#wv" x="30" y="120"/><use href="#wv" x="90" y="120"/><use href="#wv" x="150" y="120"/>
+          </g>
+        </svg>
+      </div>
+      <h2>On Reading the List</h2>
+      <p>
+        Each course is named first in kanji as it appears on the kitchen slip, then in roman letters
+        for our guests from abroad. A one-line note records the river or hill from which the
+        principal ingredient was taken this morning.
+      </p>
+      <p>
+        Sake pairings (three pours, 2,800 yen) are chosen by the okami after the second course
+        and brought without announcement.
+      </p>
+      <div class="meta-row">
+        Total set price · <strong>22,400 yen</strong><br>
+        Service · 10%<br>
+        Tax included
+      </div>
+    </aside>
+
+    <div class="courses">
+
+      <article class="course">
+        <div class="num">一</div>
+        <div class="body">
+          <h3>Sakizuke <span class="kana">先附</span></h3>
+          <p class="dish">Vinegared kohada with kikurage, dressed in a thin tosa-zu and bedded on a single shiso leaf.</p>
+          <p class="prov">— Kohada landed before dawn at Tsukiji; kikurage from the Chichibu hills.</p>
+        </div>
+        <div class="price">2,200<span class="yen"> 円</span></div>
+      </article>
+
+      <article class="course">
+        <div class="num">二</div>
+        <div class="body">
+          <h3>Suimono <span class="kana">吸物</span></h3>
+          <p class="dish">Clear matsutake broth, with a single yuzu peel and a sliver of seasonal hamo.</p>
+          <p class="prov">— Matsutake from Tamba; first picking of the season, arrived October 9.</p>
+        </div>
+        <div class="price">2,800<span class="yen"> 円</span></div>
+      </article>
+
+      <article class="course">
+        <div class="num">三</div>
+        <div class="body">
+          <h3>Mukōzuke <span class="kana">向附</span></h3>
+          <p class="dish">Tai sashimi, four slices, with fresh-grated wasabi and a drop of murasaki shōyu.</p>
+          <p class="prov">— Tai from the Sagami bay; wasabi grated to order from Izu, Amagi-yama.</p>
+        </div>
+        <div class="price">3,400<span class="yen"> 円</span></div>
+      </article>
+
+      <article class="course">
+        <div class="num">四</div>
+        <div class="body">
+          <h3>Takiawase <span class="kana">炊合せ</span></h3>
+          <p class="dish">Simmered satoimo and ginnan, finished with a brushing of yuzu and a thread of katsuo.</p>
+          <p class="prov">— Satoimo from Saitama, Kawagoe; ginnan gathered at Yushima Tenjin.</p>
+        </div>
+        <div class="price">2,600<span class="yen"> 円</span></div>
+      </article>
+
+      <article class="course">
+        <div class="num">五</div>
+        <div class="body">
+          <h3>Yakimono <span class="kana">焼物</span></h3>
+          <p class="dish">Salt-grilled ayu, whole, set on a bamboo leaf, with tade-zu vinegar in a small dish.</p>
+          <p class="prov">— Ayu from the Tama river above Ōme; brought to the gate at half past four.</p>
+        </div>
+        <div class="price">3,800<span class="yen"> 円</span></div>
+      </article>
+
+      <article class="course">
+        <div class="num">六</div>
+        <div class="body">
+          <h3>Gohan <span class="kana">御飯</span></h3>
+          <p class="dish">New-rice with chestnut, simmered in donabe, served with red miso shiru and three pickles.</p>
+          <p class="prov">— Shinmai from Niigata, Uonuma; chestnuts from Tanba, peeled by hand at noon.</p>
+        </div>
+        <div class="price">2,400<span class="yen"> 円</span></div>
+      </article>
+
+      <article class="course">
+        <div class="num">七</div>
+        <div class="body">
+          <h3>Mizumono <span class="kana">水物</span></h3>
+          <p class="dish">Persimmon and kuzukiri, with a thin black-sugar syrup and a leaf of mint.</p>
+          <p class="prov">— Persimmon from Gifu, fuyu variety; kuzu from Yoshino, Nara.</p>
+        </div>
+        <div class="price">2,200<span class="yen"> 円</span></div>
+      </article>
+
+      <div class="list-mark" aria-hidden="true">
+        <!-- umebachi -->
+        <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="344" cy="344" r="340" fill="#0c0c0c"/>
+          <g fill="#f5efde">
+            <circle cx="344" cy="180" r="86"/>
+            <circle cx="200" cy="290" r="86"/>
+            <circle cx="488" cy="290" r="86"/>
+            <circle cx="252" cy="470" r="86"/>
+            <circle cx="436" cy="470" r="86"/>
+            <circle cx="344" cy="356" r="42"/>
+          </g>
+        </svg>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="list-close" aria-label="Close of list">
+    <div class="rule"></div>
+    <div class="seal" aria-hidden="true">
+      <!-- final umebachi seal -->
+      <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="344" cy="344" r="340" fill="#e34234"/>
+        <g fill="#f5efde">
+          <circle cx="344" cy="180" r="86"/>
+          <circle cx="200" cy="290" r="86"/>
+          <circle cx="488" cy="290" r="86"/>
+          <circle cx="252" cy="470" r="86"/>
+          <circle cx="436" cy="470" r="86"/>
+          <circle cx="344" cy="356" r="42"/>
+        </g>
+      </svg>
+    </div>
+    <div class="rule"></div>
+    <div class="colophon">
+      以上、七品。
+      <span>End of the seven courses · written by the okami</span>
+    </div>
+  </section>
+
+</div>
+
+<footer class="site-foot">
+  <div class="asanoha-band" aria-hidden="true">
+    <svg viewBox="0 0 1280 56" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="asa" x="0" y="0" width="56" height="56" patternUnits="userSpaceOnUse">
+          <g fill="none" stroke="#0c0c0c" stroke-width="0.9">
+            <polygon points="28,4 52,18 52,38 28,52 4,38 4,18"/>
+            <line x1="28" y1="4" x2="28" y2="52"/>
+            <line x1="4" y1="18" x2="52" y2="38"/>
+            <line x1="52" y1="18" x2="4" y2="38"/>
+            <line x1="28" y1="28" x2="52" y2="18"/>
+            <line x1="28" y1="28" x2="52" y2="38"/>
+            <line x1="28" y1="28" x2="4" y2="18"/>
+            <line x1="28" y1="28" x2="4" y2="38"/>
+            <line x1="28" y1="28" x2="28" y2="4"/>
+            <line x1="28" y1="28" x2="28" y2="52"/>
+          </g>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#asa)"/>
+    </svg>
+  </div>
+
+  <div class="foot-seal" aria-hidden="true">
+    <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="344" cy="344" r="338" fill="none" stroke="#0c0c0c" stroke-width="8"/>
+      <g transform="translate(344,344) scale(0.62) translate(-344,-344)" fill="#0c0c0c">
+        <circle cx="344" cy="344" r="240" fill="none" stroke="#0c0c0c" stroke-width="5"/>
+        <path d="M 344 140 C 240 200, 180 300, 200 420 C 230 380, 280 360, 330 360 C 300 380, 280 420, 290 470 C 320 440, 360 430, 400 440 C 380 470, 380 500, 410 520 C 430 490, 470 480, 510 490 C 480 460, 470 420, 490 380 C 450 400, 410 390, 380 360 C 440 350, 490 310, 500 240 C 460 280, 410 290, 370 270 C 410 250, 440 210, 430 160 C 400 190, 370 200, 344 190 Z"/>
+      </g>
+    </svg>
+  </div>
+  <div class="foot-sig">桐 壺 ・ Kiritsubo — Kanda-ku, Tōkyō</div>
+
+  <div class="foot-cols">
+    <div>
+      <h4>Address &amp; Hours</h4>
+      <p>2-chōme 14-7, Kanda-Sudachō,<br>Chiyoda-ku, Tōkyō 101-0041</p>
+      <p>Dinner only · 17:30 — 22:30<br>Closed Sunday and the second Monday</p>
+      <p>Telephone: 03 — 3251 — XXXX</p>
+    </div>
+    <div>
+      <h4>Notes &amp; Attribution</h4>
+      <p>The kamon renderings (tsuru-no-maru, umebachi) and the asanoha and seigaiha grounds shown on this page are redrawn from public-domain plates and are released under CC BY-SA 4.0.</p>
+      <p>Prices include 10% service and consumption tax. Allergies: please advise at reservation.</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

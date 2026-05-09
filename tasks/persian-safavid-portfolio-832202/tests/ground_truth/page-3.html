@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>The Ardestan Hammam Spandrels — Case Study</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    font-size: 17px;
+    line-height: 1.55;
+  }
+  a { color: inherit; }
+
+  /* ===== HEADER STRIP ===== */
+  .ivory-header {
+    background: #faf2e1;
+    border-bottom: 1px solid rgba(30,58,95,0.12);
+    padding: 14px 0 8px;
+    text-align: center;
+  }
+  .atelier-mark {
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.42em;
+    color: var(--primary);
+    text-transform: uppercase;
+  }
+  .atelier-mark .dot {
+    display: inline-block;
+    width: 6px; height: 6px;
+    background: var(--accent);
+    transform: rotate(45deg);
+    margin: 0 14px;
+    vertical-align: middle;
+  }
+
+  /* ===== NAVIGATION ===== */
+  nav.primary {
+    background: #faf2e1;
+    padding: 10px 0 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    border-bottom: 2px solid var(--primary);
+    position: relative;
+  }
+  nav.primary::before, nav.primary::after {
+    content: "";
+    width: 70px; height: 28px;
+    background-image: radial-gradient(circle at center, var(--accent) 0, var(--accent) 2px, transparent 3px);
+    background-size: 8px 8px;
+    opacity: 0.55;
+  }
+  nav.primary .tail {
+    width: 80px; height: 32px;
+    flex: 0 0 auto;
+    color: var(--accent);
+  }
+  nav.primary ul {
+    list-style: none;
+    margin: 0; padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+  nav.primary li {
+    display: flex;
+    align-items: center;
+  }
+  nav.primary a {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--primary);
+    text-decoration: none;
+    padding: 6px 14px;
+    position: relative;
+  }
+  nav.primary a[aria-current="page"] {
+    color: var(--text-emphasis);
+  }
+  nav.primary a[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    left: 14px; right: 14px;
+    bottom: -2px;
+    height: 6px;
+    background-image:
+      radial-gradient(circle at 25% 50%, var(--text-emphasis) 1.5px, transparent 2px),
+      radial-gradient(circle at 75% 50%, var(--text-emphasis) 1.5px, transparent 2px);
+    border-bottom: 1.5px solid var(--text-emphasis);
+  }
+  nav.primary .palmette {
+    color: var(--accent);
+    font-size: 14px;
+    line-height: 1;
+    transform: translateY(-1px);
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    text-align: center;
+    padding: 60px 40px 30px;
+    position: relative;
+  }
+  .eyebrow {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 18px;
+  }
+  h1.case-title {
+    font-family: var(--font-display), serif;
+    font-size: 44px;
+    line-height: 1.15;
+    color: var(--primary);
+    margin: 0 auto 12px;
+    max-width: 900px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  .subtitle {
+    font-style: italic;
+    color: var(--text);
+    font-size: 20px;
+    margin: 0 auto 4px;
+    max-width: 760px;
+  }
+  .meta-line {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    color: var(--surface);
+    margin-top: 18px;
+  }
+  .meta-line span { margin: 0 14px; }
+
+  /* ===== IWAN PLATE ===== */
+  .iwan-plate {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 30px 0 50px;
+    position: relative;
+  }
+  .iwan-frame {
+    position: relative;
+    width: 560px;
+    height: 700px;
+  }
+  .iwan-frame svg.arch {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    overflow: visible;
+  }
+  .iwan-frame svg.arch path {
+    stroke: var(--primary);
+    fill: none;
+  }
+  .iwan-content {
+    position: absolute;
+    inset: 60px 90px 30px 90px;
+    background: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .iwan-content::before {
+    content: "";
+    position: absolute;
+    inset: 8px;
+    border: 1.5px solid var(--accent);
+    pointer-events: none;
+  }
+  .iwan-spandrel-pattern {
+    width: 80%;
+    height: 80%;
+    opacity: 0.95;
+  }
+  .iwan-caption {
+    position: absolute;
+    left: 0; right: 0;
+    bottom: -30px;
+    text-align: center;
+    font-style: italic;
+    color: var(--surface);
+    font-size: 14px;
+  }
+
+  /* ===== DIVIDER ===== */
+  .divider {
+    display: flex;
+    justify-content: center;
+    margin: 18px 0 30px;
+    color: var(--accent);
+  }
+  .divider svg { width: 360px; height: 18px; }
+  .divider svg path { fill: currentColor; }
+  .divider svg polyline { stroke: currentColor; }
+
+  /* ===== BODY LAYOUT ===== */
+  .case-body {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 60px;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 20px 60px 80px;
+  }
+  .case-body article h2 {
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+    font-size: 26px;
+    text-align: center;
+    margin: 40px 0 6px;
+    letter-spacing: 0.02em;
+  }
+  .case-body article h2:first-child { margin-top: 0; }
+  .h2-mark {
+    display: block;
+    text-align: center;
+    color: var(--accent);
+    font-size: 13px;
+    letter-spacing: 0.4em;
+    margin-bottom: 18px;
+    font-family: var(--font-display), serif;
+  }
+  .case-body article p {
+    margin: 0 0 18px;
+    text-align: justify;
+    hyphens: auto;
+  }
+  .case-body article p .drop {
+    font-family: var(--font-display), serif;
+    color: var(--text-emphasis);
+    font-size: 44px;
+    float: left;
+    line-height: 0.9;
+    padding: 6px 10px 0 0;
+  }
+  .pull {
+    text-align: center;
+    font-style: italic;
+    color: var(--primary);
+    font-size: 22px;
+    line-height: 1.4;
+    margin: 30px auto;
+    max-width: 90%;
+    padding: 18px 0;
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+  }
+
+  /* ===== SIDEBAR ===== */
+  aside.materials {
+    background: #faf2e1;
+    border: 1px solid var(--accent);
+    padding: 28px 26px;
+    position: sticky;
+    top: 20px;
+    align-self: start;
+    position: relative;
+  }
+  aside.materials::before, aside.materials::after {
+    content: "";
+    position: absolute;
+    width: 14px; height: 14px;
+    background: var(--secondary);
+    transform: rotate(45deg);
+  }
+  aside.materials::before { top: -8px; left: 50%; margin-left: -7px; }
+  aside.materials::after { bottom: -8px; left: 50%; margin-left: -7px; }
+  aside.materials h3 {
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.3em;
+    text-align: center;
+    color: var(--primary);
+    text-transform: uppercase;
+    margin: 0 0 6px;
+  }
+  aside.materials .sub {
+    text-align: center;
+    font-style: italic;
+    color: var(--surface);
+    font-size: 13px;
+    margin-bottom: 22px;
+  }
+  aside.materials dl {
+    margin: 0;
+    border-top: 1px solid rgba(30,58,95,0.2);
+  }
+  aside.materials dt {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-top: 16px;
+    margin-bottom: 4px;
+  }
+  aside.materials dd {
+    margin: 0 0 14px;
+    font-size: 15px;
+    line-height: 1.45;
+    border-bottom: 1px dotted rgba(30,58,95,0.2);
+    padding-bottom: 14px;
+  }
+  aside.materials dd:last-child { border-bottom: none; }
+  aside.materials .firing {
+    color: var(--text-emphasis);
+    font-weight: 600;
+  }
+  aside.materials .seal {
+    margin: 22px auto 0;
+    width: 80px; height: 80px;
+    display: block;
+  }
+
+  /* ===== FACT STRIP ===== */
+  .factstrip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    text-align: center;
+    max-width: 1180px;
+    margin: 20px auto 40px;
+    padding: 0 60px;
+    gap: 20px;
+  }
+  .fact {
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+    padding: 18px 8px;
+  }
+  .fact .num {
+    font-family: var(--font-display), serif;
+    font-size: 30px;
+    color: var(--text-emphasis);
+    display: block;
+    line-height: 1;
+  }
+  .fact .lbl {
+    font-family: var(--font-display), serif;
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-top: 10px;
+    display: block;
+  }
+
+  /* ===== TIMELINE ===== */
+  .timeline-section {
+    max-width: 1060px;
+    margin: 0 auto 60px;
+    padding: 0 60px;
+  }
+  .timeline-section h2 {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+    font-size: 24px;
+    margin-bottom: 6px;
+  }
+  .timeline-section .sub {
+    text-align: center;
+    font-style: italic;
+    color: var(--surface);
+    margin-bottom: 30px;
+  }
+  ol.timeline {
+    list-style: none;
+    margin: 0; padding: 0;
+    position: relative;
+  }
+  ol.timeline::before {
+    content: "";
+    position: absolute;
+    left: 50%; top: 0; bottom: 0;
+    width: 2px;
+    background: var(--accent);
+    transform: translateX(-1px);
+  }
+  ol.timeline li {
+    display: grid;
+    grid-template-columns: 1fr 60px 1fr;
+    gap: 0;
+    margin-bottom: 24px;
+    align-items: center;
+  }
+  ol.timeline li .marker {
+    width: 18px; height: 18px;
+    background: var(--secondary);
+    border: 2px solid var(--bg);
+    box-shadow: 0 0 0 2px var(--accent);
+    transform: rotate(45deg);
+    margin: 0 auto;
+  }
+  ol.timeline li .date {
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    color: var(--text-emphasis);
+    margin-bottom: 4px;
+  }
+  ol.timeline li .body {
+    font-size: 15px;
+  }
+  ol.timeline li.left .left-cell { text-align: right; padding-right: 20px; }
+  ol.timeline li.left .right-cell { visibility: hidden; }
+  ol.timeline li.right .right-cell { text-align: left; padding-left: 20px; }
+  ol.timeline li.right .left-cell { visibility: hidden; }
+
+  /* ===== FOOTER ===== */
+  footer.site {
+    background: var(--primary);
+    color: #faf2e1;
+    text-align: center;
+    padding: 50px 20px 0;
+    margin-top: 40px;
+    position: relative;
+  }
+  footer.site .filet {
+    color: var(--accent);
+    margin: 0 auto 30px;
+    width: 420px;
+  }
+  footer.site .filet svg { width: 100%; height: 18px; }
+  footer.site .filet svg path { fill: currentColor; }
+  footer.site .filet svg polyline { stroke: currentColor; }
+  footer.site .monogram {
+    font-family: var(--font-display), serif;
+    font-size: 36px;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+    margin: 12px 0;
+  }
+  footer.site address {
+    font-style: normal;
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+  footer.site .contact {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+  }
+  footer.site .tile-stripe {
+    height: 18px;
+    margin-top: 20px;
+    background:
+      repeating-linear-gradient(
+        135deg,
+        var(--secondary) 0 12px,
+        #1e6e6e 12px 24px,
+        var(--accent) 24px 28px,
+        var(--secondary) 28px 40px
+      );
+  }
+  footer.site .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    max-width: 1100px;
+    margin: 0 auto 30px;
+    gap: 40px;
+  }
+  footer.site .footer-grid > div {
+    border-left: 1px solid rgba(201,162,58,0.3);
+    padding: 0 20px;
+    text-align: center;
+  }
+  footer.site .footer-grid > div:first-child { border-left: none; }
+  footer.site h4 {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    margin: 0 0 10px;
+    text-transform: uppercase;
+  }
+  footer.site .footer-grid p { margin: 0; font-size: 14px; line-height: 1.6; }
+
+  /* SVG Spandrel pattern */
+  .spandrel-svg path { stroke: var(--accent); stroke-width: 1.4; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .spandrel-svg .field { stroke: var(--secondary); }
+  .spandrel-svg .vine { stroke: var(--accent); stroke-width: 1; }
+  .spandrel-svg circle { fill: var(--accent); }
+  .spandrel-svg rect.bg { fill: var(--primary); stroke: none; }
+</style>
+</head>
+<body>
+
+<header class="ivory-header">
+  <div class="atelier-mark">Atelier<span class="dot"></span>Naqsh-e Jahan<span class="dot"></span>Est. MMXII</div>
+</header>
+
+<nav class="primary" aria-label="Primary">
+  <svg class="tail" viewBox="0 0 80 32" aria-hidden="true">
+    <path d="M2 16 Q 20 4 38 16 Q 30 22 22 16 Q 14 10 6 16 Z" fill="currentColor" opacity="0.85"/>
+    <circle cx="44" cy="16" r="2" fill="currentColor"/>
+    <path d="M52 16 Q 60 8 70 16 Q 64 22 58 18" fill="none" stroke="currentColor" stroke-width="1.2"/>
+    <circle cx="76" cy="16" r="1.5" fill="currentColor"/>
+  </svg>
+  <ul>
+    <li><a href="page-1.html">Atelier</a></li>
+    <li class="palmette" aria-hidden="true">❖</li>
+    <li><a href="page-2.html">Selected Works</a></li>
+    <li class="palmette" aria-hidden="true">❖</li>
+    <li><a href="page-3.html" aria-current="page">Ardestan Case Study</a></li>
+    <li class="palmette" aria-hidden="true">❖</li>
+    <li><a href="page-4.html">Workshop &amp; Method</a></li>
+    <li class="palmette" aria-hidden="true">❖</li>
+    <li><a href="page-5.html">Biography</a></li>
+    <li class="palmette" aria-hidden="true">❖</li>
+    <li><a href="page-6.html">Commissions</a></li>
+  </ul>
+  <svg class="tail" viewBox="0 0 80 32" aria-hidden="true" style="transform:scaleX(-1);">
+    <path d="M2 16 Q 20 4 38 16 Q 30 22 22 16 Q 14 10 6 16 Z" fill="currentColor" opacity="0.85"/>
+    <circle cx="44" cy="16" r="2" fill="currentColor"/>
+    <path d="M52 16 Q 60 8 70 16 Q 64 22 58 18" fill="none" stroke="currentColor" stroke-width="1.2"/>
+    <circle cx="76" cy="16" r="1.5" fill="currentColor"/>
+  </svg>
+</nav>
+
+<section class="hero">
+  <div class="eyebrow">Case Study&nbsp;·&nbsp;Commission №&nbsp;XVII</div>
+  <h1 class="case-title">The Ardestan Hammam Spandrels</h1>
+  <p class="subtitle">A recovered seventeenth-century cartoon, returned to the bathhouse vault in four thousand two hundred shards of cobalt, turquoise and gold.</p>
+  <div class="meta-line">
+    <span>Ardestan, Isfahan Province</span>·<span>2018 — 2019</span>·<span>Commissioned by the Ardestan Heritage Council</span>
+  </div>
+</section>
+
+<section class="iwan-plate" aria-label="Central spandrel plate">
+  <div class="iwan-frame">
+    <svg class="arch" viewBox="0 0 560 700" preserveAspectRatio="none" aria-hidden="true">
+      <!-- outer ogee arch (mirrored) -->
+      <path d="M 30 690 L 30 360 Q 30 220 160 130 Q 220 90 250 50 Q 270 20 280 20 Q 290 20 310 50 Q 340 90 400 130 Q 530 220 530 360 L 530 690 Z" stroke-width="3"/>
+      <path d="M 50 685 L 50 365 Q 50 235 175 150 Q 232 110 260 70 Q 275 50 280 50 Q 285 50 300 70 Q 328 110 385 150 Q 510 235 510 365 L 510 685" stroke-width="1.2" stroke="var(--accent)"/>
+      <!-- spandrel ornament corners -->
+      <path d="M 30 360 Q 80 360 110 320 Q 130 290 130 250" stroke-width="1" stroke="var(--accent)" fill="none"/>
+      <path d="M 530 360 Q 480 360 450 320 Q 430 290 430 250" stroke-width="1" stroke="var(--accent)" fill="none"/>
+    </svg>
+    <div class="iwan-content">
+      <svg class="iwan-spandrel-pattern spandrel-svg" viewBox="0 0 400 500" aria-hidden="true">
+        <!-- arabesque vines -->
+        <g class="vine">
+          <path d="M200 30 Q 240 80 220 140 Q 200 200 240 240 Q 280 280 240 340 Q 200 400 220 470" />
+          <path d="M200 30 Q 160 80 180 140 Q 200 200 160 240 Q 120 280 160 340 Q 200 400 180 470" />
+          <path d="M120 100 Q 160 130 180 180 M280 100 Q 240 130 220 180" />
+          <path d="M100 220 Q 150 230 180 260 M300 220 Q 250 230 220 260" />
+          <path d="M110 360 Q 160 370 180 400 M290 360 Q 240 370 220 400" />
+        </g>
+        <!-- palmettes -->
+        <g>
+          <path d="M200 90 Q 180 110 195 130 Q 200 140 200 150 Q 200 140 205 130 Q 220 110 200 90 Z" fill="var(--accent)" stroke="none" opacity="0.8"/>
+          <path d="M200 230 Q 175 255 195 285 Q 200 295 200 305 Q 200 295 205 285 Q 225 255 200 230 Z" fill="var(--accent)" stroke="none" opacity="0.85"/>
+          <path d="M200 380 Q 180 400 195 420 Q 200 430 200 440 Q 200 430 205 420 Q 220 400 200 380 Z" fill="var(--accent)" stroke="none" opacity="0.8"/>
+        </g>
+        <!-- 8-point central star -->
+        <g transform="translate(200 250)">
+          <path d="M 0 -50 L 14 -14 L 50 0 L 14 14 L 0 50 L -14 14 L -50 0 L -14 -14 Z" fill="var(--accent)" stroke="var(--bg)" stroke-width="1"/>
+          <path d="M 0 -35 L 10 -10 L 35 0 L 10 10 L 0 35 L -10 10 L -35 0 L -10 -10 Z" fill="var(--text-emphasis)" stroke="none"/>
+          <circle cx="0" cy="0" r="6"/>
+        </g>
+        <!-- inscription band -->
+        <g class="field" stroke="var(--accent)" stroke-width="0.8">
+          <line x1="40" y1="470" x2="360" y2="470"/>
+          <line x1="40" y1="490" x2="360" y2="490"/>
+          <path d="M55 480 q 6 -8 12 0 t 12 0 t 12 0 t 12 0 t 12 0 t 12 0 t 12 0 t 12 0 t 12 0 t 12 0 t 12 0 t 12 0 t 12 0 t 12 0 t 12 0 t 12 0 t 12 0 t 12 0 t 12 0 t 12 0 t 12 0 t 12 0 t 12 0 t 12 0 t 12 0" fill="none"/>
+        </g>
+        <!-- corner girih nodes -->
+        <g fill="var(--accent)" stroke="none">
+          <circle cx="40" cy="40" r="4"/>
+          <circle cx="360" cy="40" r="4"/>
+          <circle cx="40" cy="440" r="4"/>
+          <circle cx="360" cy="440" r="4"/>
+        </g>
+      </svg>
+    </div>
+    <div class="iwan-caption">Plate I — Central spandrel field, north-east bay (reconstruction)</div>
+  </div>
+</section>
+
+<div class="divider" aria-hidden="true">
+  <svg viewBox="0 0 437 18" preserveAspectRatio="xMidYMid meet">
+    <path d="M0 9 H 200 M 237 9 H 437" stroke="currentColor" stroke-width="0.6" fill="none"/>
+    <circle cx="218" cy="9" r="5" fill="none" stroke="currentColor" stroke-width="1"/>
+    <circle cx="218" cy="9" r="2" fill="currentColor"/>
+    <path d="M180 9 q 10 -8 18 0 t 18 0 M 220 9 q 10 -8 18 0 t 18 0" fill="none" stroke="currentColor" stroke-width="0.8"/>
+  </svg>
+</div>
+
+<section class="factstrip" aria-label="Project facts">
+  <div class="fact"><span class="num">4,200</span><span class="lbl">Tile Shards Cut</span></div>
+  <div class="fact"><span class="num">XI</span><span class="lbl">Months Of Work</span></div>
+  <div class="fact"><span class="num">940°C</span><span class="lbl">Glaze Firing</span></div>
+  <div class="fact"><span class="num">17</span><span class="lbl">Square Metres</span></div>
+</section>
+
+<div class="case-body">
+  <article>
+
+    <h2>The Brief</h2>
+    <span class="h2-mark">❖&nbsp;&nbsp;❖&nbsp;&nbsp;❖</span>
+    <p><span class="drop">I</span>n the spring of 2018 the Ardestan Heritage Council, presided over by Dr. Mahnaz Khorasani, addressed a sealed letter to this atelier requesting that the four ruined spandrels of the Hammam-e Vakil — the small Vakil bathhouse on Kuche-ye Sangtarashan, west of the Friday Mosque — be returned to their original Safavid scheme. The bathhouse, in continuous use from 1668 until its closure in 1973, had suffered three successive whitewashings, a partial roof collapse in the winter of 1981, and an unfortunate cement infill in 1994. Of the original tilework only forty-one shards remained <em>in situ</em>, all of them in the lower register of the eastern wall.</p>
+
+    <p>The council's brief was unusually specific. We were not to invent. We were to recover. A budget of 1,420,000,000 rials was allocated against an eighteen-month schedule, with a clause permitting a three-month extension at the discretion of the supervising mason. The contract was signed at the council offices on 14 Khordad 1397 (4 June 2018) in the presence of Dr. Khorasani, the council's secretary Mr. Reza Tabatabai, and the master-mason Hossein Tabrizi, who would oversee installation.</p>
+
+    <h2>The Cartoon</h2>
+    <span class="h2-mark">❖&nbsp;&nbsp;❖&nbsp;&nbsp;❖</span>
+    <p>Recovery began not at a drawing board but in the bathhouse archive itself — a low vaulted store-room tucked beside the cold chamber, where some twenty-three rolls of paper had lain undisturbed since the building's closure. Working with the archivist Soraya Esfahani over nine days in July 2018, we identified, among water-damaged ledgers and a 1924 inventory, a fragmentary cartoon on linen-backed paper, drawn in iron-gall ink and corrected in red ochre. It bore the partial signature of one <em>ʿAli ibn Muhammad-Riza, tilemaker of Yazd</em>, and a date which, by the surviving digits, can only be read as 1083 AH — that is, 1672 of the common era.</p>
+
+    <p>The cartoon described, in unbroken passages and in shorthand for the missing ones, the four spandrels of the central iwan: two cobalt grounds bearing a saz-leaf vine drawn in turquoise, with palmettes opening at the spring of the arch, and an inscription band running the inner curve in gold-leaf reserved on a deep oxblood field. The verse, identified by Dr. Khorasani as the seventh distich of Saʿdi's <em>Bustan</em>, had been partially erased; the missing characters were reconstructed by comparing extant sister hammams at Kashan and Naʾin.</p>
+
+    <div class="pull">
+      &ldquo;The hand that drew this cartoon in 1672 set down every joint between every shard. Three centuries later, the same joints met our blade.&rdquo;
+    </div>
+
+    <h2>The Cutting</h2>
+    <span class="h2-mark">❖&nbsp;&nbsp;❖&nbsp;&nbsp;❖</span>
+    <p>Cutting commenced on 9 September 2018 and concluded on 22 July 2019. Across those eleven months the atelier produced 4,200 individual <em>moʿaraq</em> shards: 1,860 in cobalt, 1,290 in copper-turquoise, 760 in ivory, 220 in oxblood, and 70 reserved for the gold-leaf inlay of the inscription band. Each shard was struck from biscuit-fired tile blanks of 22 mm thickness, scored with a tungsten-tipped wheel, and cleaved over the edge of a carved boxwood block — the same technique recorded by Riyahi in his 1937 survey of the Yazd workshops, and the technique to which the original 1672 shards still bore witness.</p>
+
+    <p>The most exacting passage was the inner inscription band, where the gold-leaf inlay required that each oxblood shard be ground on its bevel to within 0.4 mm of the cartoon's intended kerf. Two apprentices, Niloufar Ranjbar and Behrouz Salimi, worked solely on the inscription for fourteen weeks. Of the 70 inscription shards, 64 survived the fire; the remaining six were re-cut and re-fired in February 2019.</p>
+
+    <h2>Installation</h2>
+    <span class="h2-mark">❖&nbsp;&nbsp;❖&nbsp;&nbsp;❖</span>
+    <p>Installation was supervised on site by master-mason Hossein Tabrizi, then in his sixty-eighth year, with whom this atelier has now collaborated on five commissions. Tabrizi's method — a lime-gypsum bedding mortar at 3:1, struck flush and burnished with a leather pad before the shards are laid face-down into the cartoon and the back-bedding poured — is recorded in his own monograph of 2011 and was followed without alteration. The eastern spandrel was set first, on 14 August 2019, and the four were complete by the morning of 9 October 2019. The site was opened to the public, with a small ceremony attended by the council and by the surviving daughter of the bathhouse's last keeper, on 21 October 2019.</p>
+
+    <h2>Coda</h2>
+    <span class="h2-mark">❖&nbsp;&nbsp;❖&nbsp;&nbsp;❖</span>
+    <p>The Ardestan spandrels are not a copy. They are a continuation: the same cartoon, the same kerf, the same fire. Whatever was lost in the three whitewashings has now been answered in cobalt, turquoise and gold, and the verse of Saʿdi runs once more across the inner curve of the arch. The ledger is closed. The bath is open again on Wednesdays and Fridays.</p>
+
+  </article>
+
+  <aside class="materials" aria-label="Materials and method">
+    <h3>Materials</h3>
+    <p class="sub">A reckoning of pigments, glazes and metals</p>
+    <dl>
+      <dt>Cobalt Oxide</dt>
+      <dd>Sourced from the historic deposits at Qamsar, near Kashan, ground in this atelier's mortar to 220 mesh. The cobalt yields the deep night-blue of the spandrel ground; 38 kg were consumed across the commission.</dd>
+
+      <dt>Copper-Turquoise Glaze</dt>
+      <dd>Compounded in the workshop from copper carbonate, soda ash and a quartz frit at a 6 : 19 : 75 ratio. Applied at 1.4 mm thickness and fired in a downdraft kiln to <span class="firing">940 °C</span>, held for three hours, cooled over forty.</dd>
+
+      <dt>Ivory Slip</dt>
+      <dd>A tin-opacified white, drawn from the Yazd quarry tradition. Used for the calmed interior fields and for the highlights of the saz-leaf vine.</dd>
+
+      <dt>Gold-Leaf Inlay</dt>
+      <dd>Reserved exclusively for the inscription band along the inner curve of the arch. Beaten leaf at 22-carat, laid into oxblood ground, sealed beneath a low-fired transparent glaze. 70 shards in total; 7.4 grams of leaf consumed.</dd>
+
+      <dt>Oxblood Ground</dt>
+      <dd>An iron-rich slip stabilised with manganese, used only as a setting for the gold inscription and at one cartouche over the western spandrel — the single emphatic note in an otherwise restrained palette.</dd>
+
+      <dt>Lime-Gypsum Bedding</dt>
+      <dd>Mixed on site at 3 : 1 by Hossein Tabrizi, burnished before laying. Curing time observed at fourteen days per spandrel.</dd>
+    </dl>
+    <svg class="seal" viewBox="0 0 100 100" aria-hidden="true">
+      <g transform="translate(50 50)">
+        <path d="M 0 -38 L 11 -11 L 38 0 L 11 11 L 0 38 L -11 11 L -38 0 L -11 -11 Z" fill="var(--secondary)" stroke="var(--primary)" stroke-width="1.2"/>
+        <path d="M 0 -22 L 7 -7 L 22 0 L 7 7 L 0 22 L -7 7 L -22 0 L -7 -7 Z" fill="var(--accent)" stroke="none"/>
+        <circle cx="0" cy="0" r="5" fill="var(--text-emphasis)"/>
+      </g>
+    </svg>
+  </aside>
+</div>
+
+<section class="timeline-section" aria-label="Project chronology">
+  <h2>Chronology</h2>
+  <p class="sub">Eleven months from cartoon to setting</p>
+  <ol class="timeline">
+    <li class="left">
+      <div class="left-cell"><div class="date">04 JUNE 2018</div><div class="body">Contract signed in the council offices, Ardestan, by Dr. Khorasani, secretary Tabatabai, master-mason Tabrizi.</div></div>
+      <div class="marker" aria-hidden="true"></div>
+      <div class="right-cell"></div>
+    </li>
+    <li class="right">
+      <div class="left-cell"></div>
+      <div class="marker" aria-hidden="true"></div>
+      <div class="right-cell"><div class="date">11 — 19 JULY 2018</div><div class="body">Recovery of the 1672 cartoon from the bathhouse archive with archivist Soraya Esfahani.</div></div>
+    </li>
+    <li class="left">
+      <div class="left-cell"><div class="date">09 SEPT 2018</div><div class="body">First biscuit-firing of cobalt blanks. Cutting begins.</div></div>
+      <div class="marker" aria-hidden="true"></div>
+      <div class="right-cell"></div>
+    </li>
+    <li class="right">
+      <div class="left-cell"></div>
+      <div class="marker" aria-hidden="true"></div>
+      <div class="right-cell"><div class="date">FEBRUARY 2019</div><div class="body">Six inscription shards re-cut and re-fired after kiln loss.</div></div>
+    </li>
+    <li class="left">
+      <div class="left-cell"><div class="date">22 JULY 2019</div><div class="body">Last shard cut. 4,200 pieces complete and racked for the journey south.</div></div>
+      <div class="marker" aria-hidden="true"></div>
+      <div class="right-cell"></div>
+    </li>
+    <li class="right">
+      <div class="left-cell"></div>
+      <div class="marker" aria-hidden="true"></div>
+      <div class="right-cell"><div class="date">14 AUG 2019</div><div class="body">Eastern spandrel set first by Hossein Tabrizi, lime-gypsum bedding at 3:1.</div></div>
+    </li>
+    <li class="left">
+      <div class="left-cell"><div class="date">09 OCT 2019</div><div class="body">All four spandrels complete. Curing under canvas for fourteen days.</div></div>
+      <div class="marker" aria-hidden="true"></div>
+      <div class="right-cell"></div>
+    </li>
+    <li class="right">
+      <div class="left-cell"></div>
+      <div class="marker" aria-hidden="true"></div>
+      <div class="right-cell"><div class="date">21 OCT 2019</div><div class="body">Hammam-e Vakil reopened to the public. Wednesdays and Fridays.</div></div>
+    </li>
+  </ol>
+</section>
+
+<div class="divider" aria-hidden="true">
+  <svg viewBox="0 0 437 18" preserveAspectRatio="xMidYMid meet">
+    <path d="M0 9 H 200 M 237 9 H 437" stroke="currentColor" stroke-width="0.6" fill="none"/>
+    <circle cx="218" cy="9" r="5" fill="none" stroke="currentColor" stroke-width="1"/>
+    <circle cx="218" cy="9" r="2" fill="currentColor"/>
+    <path d="M180 9 q 10 -8 18 0 t 18 0 M 220 9 q 10 -8 18 0 t 18 0" fill="none" stroke="currentColor" stroke-width="0.8"/>
+  </svg>
+</div>
+
+<footer class="site">
+  <div class="filet" aria-hidden="true">
+    <svg viewBox="0 0 437 18" preserveAspectRatio="xMidYMid meet">
+      <path d="M0 9 H 200 M 237 9 H 437" stroke="currentColor" stroke-width="0.8" fill="none"/>
+      <circle cx="218" cy="9" r="6" fill="none" stroke="currentColor" stroke-width="1.2"/>
+      <circle cx="218" cy="9" r="2.5" fill="currentColor"/>
+    </svg>
+  </div>
+
+  <div class="footer-grid">
+    <div>
+      <h4>The Atelier</h4>
+      <address>
+        Atelier Naqsh-e Jahan<br>
+        №&nbsp;14, Kuche-ye Mostowfi<br>
+        Bazaar District, Isfahan<br>
+        Iran 8136917651
+      </address>
+    </div>
+    <div>
+      <h4>Correspondence</h4>
+      <p class="contact" style="letter-spacing:0.2em; font-size:13px;">
+        darius@naqshejahan.ir<br>
+        +98 31 3220 4467<br>
+        Wed — Sun, 9h — 17h
+      </p>
+    </div>
+    <div>
+      <h4>Visit</h4>
+      <address>
+        Studio open by appointment.<br>
+        Hammam-e Vakil, Ardestan,<br>
+        Wednesdays &amp; Fridays.
+      </address>
+    </div>
+  </div>
+
+  <div class="monogram" aria-label="Atelier monogram">N&middot;J</div>
+  <p class="contact">Tilework &amp; Ornamental Design&nbsp;·&nbsp;Est. MMXII</p>
+
+  <div class="tile-stripe" aria-hidden="true"></div>
+</footer>
+
+</body>
+</html>

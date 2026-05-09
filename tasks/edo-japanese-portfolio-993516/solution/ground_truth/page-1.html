@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Hangiten Yashiro — Woodblock Studio, Nishijin Kyoto</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), serif;
+    line-height: 1.8;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Background tiled wagara - low opacity seigaiha on body */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("svg/seigaiha-waves.svg");
+    background-size: 280px 280px;
+    background-repeat: repeat;
+    opacity: 0.06;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ===== NAVIGATION ===== */
+  .nav-band {
+    position: relative;
+    background: var(--surface);
+    padding: 22px 64px 18px 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 5;
+  }
+  .nav-band .studio-name {
+    font-family: var(--font-display), serif;
+    font-size: 28px;
+    color: var(--text);
+    letter-spacing: 0.04em;
+    line-height: 1;
+  }
+  .nav-band .studio-name .jp {
+    display: inline-block;
+    margin-right: 14px;
+    font-size: 32px;
+  }
+  .nav-band nav {
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+  .nav-band nav a {
+    font-family: var(--font-body), serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.32em;
+    color: var(--text);
+    text-decoration: none;
+    padding: 4px 22px;
+    border-right: 1px solid rgba(12,12,12,0.35);
+    line-height: 1;
+  }
+  .nav-band nav a:last-of-type { border-right: none; }
+  .nav-band nav a[aria-current="page"] {
+    color: var(--secondary);
+    font-style: italic;
+  }
+  .nav-band .nav-seal {
+    width: 28px;
+    height: 28px;
+    margin-left: 22px;
+    opacity: 0.85;
+  }
+  .nav-band .nav-seal svg { width: 100%; height: 100%; display: block; }
+
+  /* Threshold rule under nav */
+  .threshold {
+    position: relative;
+    height: 22px;
+    border-top: 1px solid var(--text);
+    background: var(--surface);
+    overflow: hidden;
+  }
+  .threshold::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("svg/seigaiha-waves.svg");
+    background-size: 140px 140px;
+    background-repeat: repeat-x;
+    background-position: 0 -8px;
+    opacity: 0.18;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    position: relative;
+    padding: 110px 80px 90px 80px;
+    min-height: 620px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    z-index: 2;
+  }
+  .hero-meta {
+    grid-column: 1;
+    align-self: start;
+    padding-top: 18px;
+  }
+  .hero-meta .kicker {
+    font-family: var(--font-body), serif;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin: 0 0 28px 0;
+  }
+  .hero-meta .season {
+    font-family: var(--font-display), serif;
+    font-size: 20px;
+    color: var(--text);
+    line-height: 1.5;
+    margin: 0;
+  }
+  .hero-meta .season em {
+    color: var(--secondary);
+    font-style: normal;
+  }
+
+  .hero-seal {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: end;
+    width: 220px;
+    height: 220px;
+    margin-top: 200px;
+    opacity: 0.55;
+    position: relative;
+  }
+  .hero-seal svg { width: 100%; height: 100%; display: block; }
+  .hero-seal::after {
+    content: "鶴丸 — tsuru no maru";
+    position: absolute;
+    left: 240px;
+    bottom: 16px;
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--text);
+    white-space: nowrap;
+    opacity: 0.7;
+  }
+
+  .hero-title {
+    grid-column: 3;
+    align-self: start;
+    text-align: right;
+    padding-right: 20px;
+  }
+  .hero-title .vertical {
+    font-family: var(--font-display), serif;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    font-size: 92px;
+    line-height: 1.05;
+    color: var(--text);
+    margin: 0;
+    display: inline-block;
+    letter-spacing: 0.05em;
+  }
+  .hero-title .secondary-stripe {
+    writing-mode: vertical-rl;
+    font-family: var(--font-display), serif;
+    font-size: 28px;
+    color: var(--secondary);
+    display: inline-block;
+    margin-right: 14px;
+    letter-spacing: 0.18em;
+    vertical-align: top;
+    padding-top: 60px;
+  }
+  .hero-title .latin {
+    margin-top: 28px;
+    font-family: var(--font-body), serif;
+    font-size: 12px;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+  .hero-title .latin .dash {
+    display: inline-block;
+    width: 40px;
+    height: 1px;
+    background: var(--text);
+    vertical-align: middle;
+    margin: 0 10px;
+  }
+
+  /* ===== INTRO ===== */
+  .intro {
+    position: relative;
+    padding: 60px 80px 90px 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 60px;
+    z-index: 2;
+  }
+  .intro .label {
+    grid-column: 1;
+    font-family: var(--font-body), serif;
+    font-size: 11px;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: var(--text);
+    border-top: 1px solid var(--text);
+    padding-top: 14px;
+  }
+  .intro .label .num {
+    display: block;
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    letter-spacing: 0;
+    text-transform: none;
+    margin-top: 6px;
+    color: var(--secondary);
+  }
+  .intro-prose {
+    grid-column: 2 / span 2;
+    max-width: 560px;
+  }
+  .intro-prose p {
+    font-size: 16px;
+    line-height: 1.85;
+    margin: 0 0 22px 0;
+    color: var(--text);
+  }
+  .intro-prose p:first-child::first-letter {
+    font-family: var(--font-display), serif;
+    font-size: 56px;
+    float: left;
+    line-height: 0.9;
+    padding: 6px 14px 0 0;
+    color: var(--secondary);
+  }
+  .intro-prose .signoff {
+    margin-top: 30px;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--text);
+    opacity: 0.78;
+  }
+
+  /* ===== DIVIDER ===== */
+  .sayagata-divider {
+    height: 38px;
+    background-image: url("svg/sayagata-keyfret.svg");
+    background-size: 140px 140px;
+    background-repeat: repeat-x;
+    background-position: center;
+    opacity: 0.18;
+    margin: 0 80px;
+  }
+
+  /* ===== PANELS ===== */
+  .panels-section {
+    position: relative;
+    padding: 80px 80px 60px 80px;
+    z-index: 2;
+  }
+  .panels-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-bottom: 50px;
+  }
+  .panels-header h2 {
+    grid-column: 2;
+    font-family: var(--font-display), serif;
+    font-size: 38px;
+    margin: 0;
+    color: var(--text);
+    line-height: 1.1;
+  }
+  .panels-header .subheading {
+    grid-column: 2;
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-top: 12px;
+    color: var(--text);
+    opacity: 0.7;
+  }
+
+  .panels {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+  .card {
+    position: relative;
+    background: var(--surface);
+    padding: 42px 38px 46px 38px;
+    overflow: hidden;
+  }
+  .card.offset-left { margin-right: 30px; }
+  .card.offset-center { margin-top: 40px; }
+  .card.offset-right { margin-left: 30px; }
+
+  .card .kamon-corner {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 64px;
+    height: 64px;
+    opacity: 0.10;
+    pointer-events: none;
+  }
+  .card .kamon-corner svg { width: 100%; height: 100%; display: block; }
+
+  .card .card-kicker {
+    font-size: 10px;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin: 0 0 18px 0;
+    opacity: 0.72;
+  }
+  .card h3 {
+    font-family: var(--font-display), serif;
+    font-size: 26px;
+    line-height: 1.2;
+    margin: 0 0 6px 0;
+    color: var(--text);
+    display: inline-block;
+  }
+  .card.featured h3 {
+    border-bottom: 1.5px solid var(--secondary);
+    padding-bottom: 4px;
+  }
+  .card .dated {
+    font-style: italic;
+    font-size: 12px;
+    color: var(--text);
+    opacity: 0.7;
+    margin: 4px 0 22px 0;
+    display: block;
+  }
+  .card .body {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--text);
+    margin: 0 0 18px 0;
+  }
+  .card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 18px 0;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  .card ul li {
+    padding: 6px 0;
+    border-bottom: 1px dotted rgba(12,12,12,0.25);
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .card ul li:last-child { border-bottom: none; }
+  .card ul li .right {
+    font-style: italic;
+    opacity: 0.72;
+    white-space: nowrap;
+  }
+  .card .meta-line {
+    margin-top: 22px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(12,12,12,0.25);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+  .card .meta-line a {
+    color: var(--secondary);
+    text-decoration: none;
+    border-bottom: 1px solid var(--secondary);
+  }
+
+  .card .price {
+    color: var(--secondary);
+    font-family: var(--font-display), serif;
+    font-size: 18px;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    position: relative;
+    margin-top: 100px;
+    background: var(--bg);
+    padding: 0 0 30px 0;
+    z-index: 2;
+  }
+  .footer-sayagata {
+    height: 32px;
+    background-image: url("svg/sayagata-keyfret.svg");
+    background-size: 120px 120px;
+    background-repeat: repeat-x;
+    opacity: 0.22;
+  }
+  .footer-upper {
+    padding: 60px 80px 40px 80px;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 40px;
+  }
+  .footer-upper .address {
+    font-family: var(--font-body), serif;
+    font-size: 14px;
+    line-height: 1.9;
+  }
+  .footer-upper .address .jp {
+    font-size: 16px;
+    display: block;
+    margin-bottom: 8px;
+  }
+  .footer-upper .address .latin {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    opacity: 0.78;
+    font-style: italic;
+  }
+  .footer-upper .hours h4,
+  .footer-upper .corresp h4 {
+    font-family: var(--font-display), serif;
+    font-size: 16px;
+    margin: 0 0 8px 0;
+  }
+  .footer-upper .hours p,
+  .footer-upper .corresp p {
+    font-size: 12px;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .footer-lower {
+    position: relative;
+    padding: 40px 80px 0 80px;
+    border-top: 1px solid rgba(12,12,12,0.4);
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+  .footer-seal {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto;
+    opacity: 0.85;
+  }
+  .footer-seal svg { width: 100%; height: 100%; display: block; }
+  .footer-colophon-left {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    line-height: 1.7;
+    text-align: right;
+  }
+  .footer-colophon-right {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    line-height: 1.7;
+    opacity: 0.7;
+  }
+  .footer-colophon-right .cc {
+    font-style: italic;
+  }
+
+  /* SVG inline shrunk umebachi default fill is dark — invert backdrop */
+  .umebachi-inline {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: inline-block;
+  }
+  .umebachi-inline svg { width: 100%; height: 100%; display: block; }
+</style>
+</head>
+<body>
+
+<!-- ==== NAV ==== -->
+<header class="nav-band">
+  <div class="studio-name">
+    <span class="jp">版木店 八代</span>
+    <span style="font-family:var(--font-body); font-size:11px; letter-spacing:0.3em; text-transform:uppercase; opacity:0.72;">Hangiten Yashiro · Kyōto</span>
+  </div>
+  <nav aria-label="Primary">
+    <a href="page-1.html" aria-current="page">Studio</a>
+    <a href="page-2.html">Works</a>
+    <a href="page-3.html">Process</a>
+    <a href="page-4.html">Lineage</a>
+    <a href="page-5.html">Commissions</a>
+    <a href="page-6.html">Visit</a>
+    <span class="nav-seal" aria-hidden="true">
+      <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg"><circle cx="344" cy="344" r="344" fill="#1c3a5e"/><path transform="translate(0,0) scale(1)" d="M226 612c-18-2-37-9-52-20-6-4-16-14-20-20-22-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-21 28-21 64-27 97-16 16 5 29 13 41 26 12 12 19 24 24 39 10 30 7 61-9 89-7 13-21 27-34 35-20 12-43 17-66 14z M440 612c-18-2-37-9-52-20-6-4-16-14-20-20-22-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-21 28-21 64-27 97-16 16 5 29 13 41 26 12 12 19 24 24 39 10 30 7 61-9 89-7 13-21 27-34 35-20 12-43 17-66 14z M333 283c-18-2-37-9-52-20-6-4-16-14-20-20-22-28-27-64-16-97 3-10 9-21 15-29 4-6 14-16 20-21 28-21 64-27 97-16 16 5 29 13 41 26 12 12 19 24 24 39 10 30 7 61-9 89-7 13-21 27-34 35-20 12-43 17-66 14z" fill="#f5efde"/></svg>
+    </span>
+  </nav>
+</header>
+<div class="threshold" aria-hidden="true"></div>
+
+<!-- ==== HERO ==== -->
+<section class="hero">
+  <div class="hero-meta">
+    <p class="kicker">Bunkyū 2 · 1862 — Reiwa 6 · 2024</p>
+    <p class="season">
+      Late autumn opening, the<br>
+      <em>maple-block</em> series cut<br>
+      and pulled in editions of<br>
+      forty-eight impressions.
+    </p>
+  </div>
+
+  <div class="hero-seal" aria-hidden="true">
+    <!-- tsuru no maru, hero frame -->
+    <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="344" cy="344" r="320" fill="none" stroke="#0c0c0c" stroke-width="2"/>
+      <circle cx="344" cy="344" r="290" fill="none" stroke="#0c0c0c" stroke-width="1"/>
+      <g transform="translate(344,344)" fill="#0c0c0c" stroke="#0c0c0c" stroke-width="1.5">
+        <path d="M -180,-40 Q -120,-130 -20,-110 Q 30,-100 60,-150 Q 80,-180 60,-210 Q 30,-230 0,-220 Q -20,-210 -10,-190 Q 0,-170 20,-180 Q 30,-185 25,-195" fill="none" stroke-width="3"/>
+        <circle cx="40" cy="-200" r="6" fill="#e34234"/>
+        <path d="M -180,-40 Q -200,40 -150,90 Q -80,140 0,120 Q 80,100 140,30 Q 180,-30 160,-100 Q 140,-150 90,-160" fill="none" stroke-width="2.5"/>
+        <path d="M -100,-20 Q -60,-60 0,-50 Q 40,-40 80,-70" fill="none" stroke-width="1.5"/>
+        <path d="M -50,30 Q 0,60 60,40 Q 100,30 130,-10" fill="none" stroke-width="1.5"/>
+        <path d="M -160,-30 L -190,-50 L -180,-20 Z" fill="#0c0c0c"/>
+        <path d="M -150,-50 L -185,-75 L -170,-45 Z" fill="#0c0c0c"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="hero-title">
+    <span class="secondary-stripe">京 西陣</span>
+    <h1 class="vertical">版木店<br>八代屋</h1>
+    <p class="latin"><span class="dash"></span>Hangiten Yashiro</p>
+  </div>
+</section>
+
+<!-- ==== INTRO ==== -->
+<section class="intro">
+  <div class="label">
+    Studio Note
+    <span class="num">序</span>
+  </div>
+  <div class="intro-prose">
+    <p>Yashiro Tomé carves and prints in the Edo hanga manner — cherry block, sumi ink, hand-pulled bokashi gradients — from a machiya on Sengen-dōri in Kyoto's Nishijin quarter. The shop has stood at the same address since the second year of Bunkyū, when Yashiro Kichigorō took the signboard from his teacher and hung it above the entrance facing south.</p>
+    <p>The work is slow. A single sheet of Echizen kōzo passes the baren between five and twenty-two times, depending on the design; pigments are ground each morning in a stone suribachi; the cherry blocks come from a grove in Yoshino that the studio has used since the third generation. Visitors are received by appointment and asked to write ahead by post.</p>
+    <p class="signoff">— 八代 留, eighth-generation proprietor, autumn 2024</p>
+  </div>
+</section>
+
+<div class="sayagata-divider" aria-hidden="true"></div>
+
+<!-- ==== PANELS ==== -->
+<section class="panels-section">
+  <div class="panels-header">
+    <h2>Three notes from the workshop</h2>
+    <p class="subheading">Latest series · Open commissions · Studio day</p>
+  </div>
+
+  <div class="panels">
+
+    <!-- Card 1: Latest series — featured -->
+    <article class="card featured offset-left">
+      <span class="kamon-corner" aria-hidden="true">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="48" fill="none" stroke="#0c0c0c" stroke-width="1"/>
+          <circle cx="50" cy="50" r="40" fill="none" stroke="#0c0c0c" stroke-width="0.7"/>
+          <path d="M 20,50 Q 35,20 50,40 Q 65,20 80,50 Q 65,80 50,60 Q 35,80 20,50 Z" fill="#0c0c0c"/>
+        </svg>
+      </span>
+      <p class="card-kicker">Latest Series — featured</p>
+      <h3>Kamigyō Twelve Bridges</h3>
+      <span class="dated">Reiwa 6 · pulled Ōkimi 14, 2024</span>
+      <p class="body">A set of twelve ōban-yoko prints following the small bridges of the Horikawa and Kamiya canals from Kuramaguchi south to Marutamachi. Sumi keyblock with two bokashi colours — indigo for water, sayagata-cinnabar for the bridge planks. Edition of forty-eight, signed and sealed; numbered 1/48 through 48/48 with three artist's proofs retained by the studio.</p>
+      <ul>
+        <li><span>No. 1 · Imadegawa-bashi</span><span class="right">¥38,000</span></li>
+        <li><span>No. 7 · Demachi-yanagi</span><span class="right">¥38,000</span></li>
+        <li><span>Full set, kiri box</span><span class="price">¥420,000</span></li>
+      </ul>
+      <p class="meta-line">See all twelve · <a href="page-2.html">page-2</a></p>
+    </article>
+
+    <!-- Card 2: Commissions -->
+    <article class="card offset-center">
+      <span class="kamon-corner" aria-hidden="true">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="48" fill="none" stroke="#0c0c0c" stroke-width="1"/>
+          <circle cx="50" cy="50" r="40" fill="none" stroke="#0c0c0c" stroke-width="0.7"/>
+          <path d="M 20,50 Q 35,20 50,40 Q 65,20 80,50 Q 65,80 50,60 Q 35,80 20,50 Z" fill="#0c0c0c"/>
+        </svg>
+      </span>
+      <p class="card-kicker">Open Commissions — autumn waitlist</p>
+      <h3>Currently on the bench</h3>
+      <span class="dated">As of the 1st day, 11th month, Reiwa 6</span>
+      <ul>
+        <li><span>Tea-house signboard, Pontochō</span><span class="right">in carving</span></li>
+        <li><span>Family kamon — Kuroda house</span><span class="right">block 2 of 3</span></li>
+        <li><span>Wedding announcement, 80 sheets</span><span class="right">printing Dec.</span></li>
+        <li><span>Bookplate, Kyōdai library</span><span class="right">accepted</span></li>
+        <li><span>Memorial portrait — Onishi-ke</span><span class="right">design stage</span></li>
+      </ul>
+      <p class="body" style="font-size:13px; margin-top:10px;">Two slots remain for the spring 2025 cycle. Carving is booked through Bunkyō (May); printing through Minatsuki (June).</p>
+      <p class="meta-line">Enquire by post · <a href="page-5.html">page-5</a></p>
+    </article>
+
+    <!-- Card 3: Studio day -->
+    <article class="card offset-right">
+      <span class="kamon-corner" aria-hidden="true">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="48" fill="none" stroke="#0c0c0c" stroke-width="1"/>
+          <circle cx="50" cy="50" r="40" fill="none" stroke="#0c0c0c" stroke-width="0.7"/>
+          <path d="M 20,50 Q 35,20 50,40 Q 65,20 80,50 Q 65,80 50,60 Q 35,80 20,50 Z" fill="#0c0c0c"/>
+        </svg>
+      </span>
+      <p class="card-kicker">Open Studio Day</p>
+      <h3>The fifteenth, by appointment</h3>
+      <span class="dated">15 December, Reiwa 6 · 13:00 — 17:00</span>
+      <p class="body">The workshop opens to four visitors on the fifteenth of each month. A demonstration of registration (kentō) and bokashi pulling is given at 14:00. Tea is served afterwards in the kura room. Children welcome if accompanied; please remove footwear at the genkan.</p>
+      <ul>
+        <li><span>Reservation</span><span class="right">by postcard, 7 days ahead</span></li>
+        <li><span>Address</span><span class="right">Sengen-dōri, Nishijin</span></li>
+        <li><span>Fee</span><span class="right">none — donation box</span></li>
+      </ul>
+      <p class="meta-line">Directions · <a href="page-6.html">page-6</a></p>
+    </article>
+
+  </div>
+</section>
+
+<!-- ==== FOOTER ==== -->
+<footer>
+  <div class="footer-sayagata" aria-hidden="true"></div>
+
+  <div class="footer-upper">
+    <div class="address">
+      <span class="jp">京都市上京区西陣</span>
+      <span class="jp">武者小路通油小路東入　千本筋三軒目</span>
+      <span class="latin">Nishijin, Kamigyō-ku, Kyōto-shi · Mushanokōji-dōri Aburanokōji higashi-iru, third house on Sembon-suji</span>
+    </div>
+    <div class="hours">
+      <h4>Correspondence</h4>
+      <p>By post only.<br>
+      Replies in two to three weeks.<br>
+      No telephone, no e-mail.</p>
+    </div>
+    <div class="corresp">
+      <h4>Studio Day</h4>
+      <p>The 15th of each month<br>
+      13:00 — 17:00<br>
+      Closed New Year through Setsubun.</p>
+    </div>
+  </div>
+
+  <div class="footer-lower">
+    <div class="footer-colophon-left">
+      Hangiten Yashiro · founded Bunkyū 2 / 1862<br>
+      Current proprietor, 8th generation — Yashiro Tomé
+    </div>
+    <div class="footer-seal" aria-hidden="true">
+      <!-- goshichi no kiri (paulownia) seal centred -->
+      <svg viewBox="0 0 345 326" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="172" cy="163" r="160" fill="#1c3a5e"/>
+        <g transform="translate(0,0)" fill="#f5efde">
+          <ellipse cx="172" cy="180" rx="14" ry="44"/>
+          <ellipse cx="120" cy="170" rx="11" ry="36" transform="rotate(-22 120 170)"/>
+          <ellipse cx="224" cy="170" rx="11" ry="36" transform="rotate(22 224 170)"/>
+          <circle cx="172" cy="120" r="8"/>
+          <circle cx="115" cy="130" r="6"/>
+          <circle cx="229" cy="130" r="6"/>
+          <path d="M 90,225 Q 172,260 254,225 L 250,245 Q 172,275 94,245 Z"/>
+        </g>
+      </svg>
+    </div>
+    <div class="footer-colophon-right">
+      © Reiwa 6 / 2024, Yashiro Tomé. All blocks and impressions remain<br>
+      property of the studio. <span class="cc">Kamon SVG renderings — CC-BY-SA, Wikimedia Commons.</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

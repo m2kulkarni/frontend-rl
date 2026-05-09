@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>The Long Essay — Acta Diurna</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  :root {
+    --rule: 1px solid var(--primary);
+    --hairline-red: 1px solid var(--accent);
+    --hairline-gold: 1px solid var(--secondary);
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    margin: 0;
+    line-height: 1.7;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* ---------- MASTHEAD + NAV ---------- */
+  .masthead {
+    padding: 56px 0 0 0;
+    text-align: center;
+    border-bottom: var(--rule);
+  }
+  .masthead .eyebrow {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    color: var(--primary);
+    margin-bottom: 14px;
+  }
+  .masthead-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+  }
+  .masthead-title-row .keyrule {
+    flex: 0 0 220px;
+    height: 14px;
+  }
+  .masthead h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 900;
+    font-size: 58px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    margin: 0;
+    color: var(--primary);
+  }
+  .masthead .latin {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    margin: 12px 0 22px 0;
+    color: var(--primary);
+  }
+  .masthead .latin::before, .masthead .latin::after {
+    content: "·"; margin: 0 14px; color: var(--accent);
+  }
+
+  nav.primary {
+    border-top: var(--hairline-gold);
+    border-bottom: var(--hairline-gold);
+    padding: 14px 0;
+    margin-top: 4px;
+  }
+  nav.primary ul {
+    list-style: none;
+    margin: 0; padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    flex-wrap: wrap;
+  }
+  nav.primary li {
+    display: flex;
+    align-items: center;
+    font-family: var(--font-display);
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--primary);
+  }
+  nav.primary li a {
+    padding: 4px 18px;
+    display: inline-block;
+  }
+  nav.primary li[aria-current="page"] a {
+    border-bottom: 1px solid var(--secondary);
+    color: var(--primary);
+  }
+  nav.primary .vine {
+    display: inline-block;
+    width: 14px; height: 14px;
+    opacity: 0.7;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    text-align: center;
+    padding: 70px 0 50px;
+    border-bottom: var(--hairline-red);
+    position: relative;
+  }
+  .hero .kicker {
+    font-family: var(--font-display);
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 22px;
+  }
+  .hero h2 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 56px;
+    line-height: 1.05;
+    margin: 0 auto 18px auto;
+    max-width: 1000px;
+    color: var(--primary);
+  }
+  .hero h2 em {
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    display: block;
+    font-size: 28px;
+    margin-top: 16px;
+    color: var(--text-emphasis);
+  }
+  .hero .deck {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 19px;
+    max-width: 560px;
+    margin: 22px auto 30px auto;
+    line-height: 1.55;
+  }
+  .hero .byline {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 0.32em;
+    font-size: 11px;
+    padding-top: 18px;
+    border-top: var(--hairline-red);
+    width: 320px;
+    margin: 0 auto;
+  }
+  .hero .byline .author { color: var(--primary); }
+  .hero .byline .meta { font-style: italic; text-transform: none; letter-spacing: 0.05em; font-family: var(--font-body); margin-top: 8px; font-size: 12px; }
+
+  .wreath-frame {
+    position: relative;
+    width: 240px;
+    height: 220px;
+    margin: 0 auto 26px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .wreath-frame svg { width: 100%; height: 100%; }
+  .wreath-frame .vol {
+    position: absolute;
+    inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column;
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--primary);
+  }
+  .wreath-frame .vol .num { font-size: 30px; font-weight: 900; letter-spacing: 0.1em; }
+  .wreath-frame .vol .lbl { font-size: 9px; margin-top: 2px; }
+  .wreath-frame .vol .sep { width: 24px; border-top: 1px solid var(--accent); margin: 6px 0; }
+
+  /* ---------- ARTICLE ---------- */
+  .article-wrap {
+    display: grid;
+    grid-template-columns: 1fr 620px 1fr;
+    gap: 40px;
+    padding: 70px 60px;
+  }
+  .article-wrap aside.left,
+  .article-wrap aside.right {
+    font-family: var(--font-body);
+    font-size: 12px;
+    line-height: 1.6;
+  }
+  .article-wrap aside .label {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    font-size: 10px;
+    color: var(--accent);
+    border-bottom: var(--hairline-red);
+    padding-bottom: 8px;
+    margin-bottom: 14px;
+  }
+  .article-wrap aside h4 {
+    font-family: var(--font-display);
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    margin: 22px 0 8px 0;
+  }
+  .article-wrap aside p {
+    font-style: italic;
+    font-size: 12.5px;
+    color: var(--primary);
+    margin: 0 0 12px 0;
+  }
+  aside.right.toc ol {
+    list-style: none;
+    margin: 0; padding: 0;
+    counter-reset: roman;
+  }
+  aside.right.toc li {
+    counter-increment: roman;
+    padding: 9px 0;
+    border-bottom: 1px dotted rgba(26,26,26,0.3);
+    font-family: var(--font-display);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    display: flex;
+    gap: 14px;
+    align-items: baseline;
+  }
+  aside.right.toc li::before {
+    content: counter(roman, upper-roman) ".";
+    color: var(--accent);
+    font-weight: 700;
+    flex: 0 0 30px;
+  }
+
+  article.essay {
+    font-size: 17px;
+    line-height: 1.78;
+    color: var(--primary);
+  }
+  article.essay h3 {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 17px;
+    text-align: center;
+    margin: 0 0 8px 0;
+    font-weight: 900;
+  }
+  article.essay h3 .num {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    color: var(--accent);
+    font-weight: 400;
+    margin-bottom: 14px;
+  }
+
+  article.essay p { margin: 0 0 1.1em 0; text-align: justify; hyphens: auto; }
+  article.essay p + p { text-indent: 2em; }
+  article.essay p.no-indent + p { text-indent: 2em; }
+  article.essay p:first-of-type, article.essay h3 + p { text-indent: 0; }
+
+  .dropcap::first-letter {
+    font-family: var(--font-display);
+    font-weight: 900;
+    float: left;
+    font-size: 88px;
+    line-height: 0.85;
+    padding: 8px 12px 0 0;
+    color: var(--accent);
+    margin-top: 6px;
+  }
+
+  blockquote.pulled {
+    margin: 36px -30px;
+    padding: 26px 30px;
+    border-top: var(--hairline-gold);
+    border-bottom: var(--hairline-gold);
+    color: var(--text-emphasis);
+    font-style: italic;
+    font-family: var(--font-display);
+    font-size: 24px;
+    line-height: 1.4;
+    text-align: center;
+    letter-spacing: 0.005em;
+  }
+  blockquote.pulled cite {
+    display: block;
+    margin-top: 14px;
+    font-family: var(--font-body);
+    font-style: normal;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--primary);
+  }
+
+  .meander-divider {
+    margin: 50px auto;
+    text-align: center;
+    width: 320px;
+    height: 28px;
+  }
+  .meander-divider svg { width: 100%; height: 100%; display: block; }
+
+  /* small caps inline */
+  .sc { font-variant: small-caps; letter-spacing: 0.06em; }
+
+  /* footnote-style table */
+  .figure-stat {
+    margin: 26px 0;
+    border-top: var(--rule);
+    border-bottom: var(--rule);
+    padding: 16px 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    text-align: center;
+    font-family: var(--font-display);
+  }
+  .figure-stat div .n {
+    font-size: 26px;
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    color: var(--primary);
+    display: block;
+  }
+  .figure-stat div .l {
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-top: 6px;
+    font-family: var(--font-body);
+    font-style: italic;
+  }
+
+  /* end mark */
+  .end-mark {
+    text-align: center;
+    margin: 50px 0 0 0;
+    font-family: var(--font-display);
+    font-size: 12px;
+    letter-spacing: 0.5em;
+    color: var(--accent);
+  }
+  .end-mark::before, .end-mark::after { content: "·"; margin: 0 18px; }
+
+  /* ---------- FOOTER ---------- */
+  footer.site {
+    margin-top: 60px;
+    border-top: var(--rule);
+    background: var(--surface);
+  }
+  .footer-frieze {
+    height: 36px;
+    border-bottom: var(--rule);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .footer-frieze svg { height: 100%; display: block; }
+  .footer-cols {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    padding: 50px 60px 30px;
+    text-align: center;
+  }
+  .footer-cols h5 {
+    font-family: var(--font-display);
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    margin: 0 0 18px 0;
+    color: var(--accent);
+  }
+  .footer-cols ul { list-style: none; padding: 0; margin: 0; }
+  .footer-cols li {
+    font-family: var(--font-display);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 5px 0;
+  }
+  .colophon {
+    text-align: center;
+    font-style: italic;
+    font-size: 13px;
+    border-top: var(--hairline-gold);
+    margin: 0 60px;
+    padding: 22px 0 8px;
+    line-height: 1.6;
+  }
+  .tailpiece {
+    width: 60px; height: 60px; margin: 18px auto 6px auto;
+    display: block;
+    color: var(--primary);
+  }
+  .copyright {
+    text-align: center;
+    font-family: var(--font-display);
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    padding: 0 0 40px 0;
+  }
+
+  /* greek-key svg color use */
+  svg .gk-fill { fill: var(--primary); }
+
+</style>
+</head>
+<body>
+
+<!-- ============ MASTHEAD ============ -->
+<header class="masthead">
+  <div class="eyebrow">EX URBE · NUMERO QUINTO · MMXXIV</div>
+  <div class="masthead-title-row">
+    <svg class="keyrule" viewBox="0 0 16511 4447" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path fill="currentColor" d="M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z"/>
+    </svg>
+    <h1>Acta Diurna</h1>
+    <svg class="keyrule" viewBox="0 0 16511 4447" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path fill="currentColor" d="M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z"/>
+    </svg>
+  </div>
+  <p class="latin">A Review of Antiquity, Archaeology &amp; the Long Shadow of Rome</p>
+
+  <nav class="primary" aria-label="Primary">
+    <ul>
+      <li><a href="page-1.html">Frontispiece</a></li>
+      <li aria-hidden="true"><svg class="vine" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" transform="translate(0 -852.36)" d="m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5z"/></svg></li>
+      <li aria-current="page"><a href="page-2.html">The Long Essay</a></li>
+      <li aria-hidden="true"><svg class="vine" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" transform="translate(0 -852.36)" d="m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5z"/></svg></li>
+      <li><a href="page-3.html">Dispatches</a></li>
+      <li aria-hidden="true"><svg class="vine" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" transform="translate(0 -852.36)" d="m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5z"/></svg></li>
+      <li><a href="page-4.html">Letters</a></li>
+      <li aria-hidden="true"><svg class="vine" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" transform="translate(0 -852.36)" d="m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5z"/></svg></li>
+      <li><a href="page-5.html">The Library</a></li>
+      <li aria-hidden="true"><svg class="vine" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" transform="translate(0 -852.36)" d="m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5z"/></svg></li>
+      <li><a href="page-6.html">Colophon</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wreath-frame" aria-hidden="true">
+    <svg viewBox="0 0 323 295" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(-64,20)" fill="#1a1a1a" fill-opacity="0.92">
+        <path d="m 141.69922,-18.574219 c -11.04494,4.854973 -23.40097,9.4683311 -30.06445,22.6386721 -4.68287,7.1205619 -4.80387,16.3913319 -8.10547,24.1464849 6.1158,-6.501993 15.58349,-13.160155 20.97851,-20.7246099 6.01849,-9.4997444 9.07864,-18.0112601 17.19141,-26.0605471 z m 164.51172,0 c 8.11277,8.049287 11.17487,16.5608027 17.19336,26.0605471 5.39502,7.5644549 14.86076,14.2226169 20.97656,20.7246099 -3.3016,-7.755152 -3.4226,-17.025923 -8.10547,-24.1464849 -6.66348,-13.170341 -19.01951,-17.7836991 -30.06445,-22.6386721 z M 111.91016,-1.609375 c -5.62925,1.6211189 -10.63239,5.4766012 -14.578129,11.03125 -9.091887,10.794409 -10.650938,24.955987 -6.882812,42.029297 1.29642,4.515656 -0.546937,8.745577 -0.285157,12.960937 2.670395,-6.196346 5.695046,-11.891942 11.576168,-15.880859 13.11411,-8.396211 16.72071,-12.842155 20.07618,-20.757812 3.94553,-9.307642 4.67865,-10.690112 4.76562,-19.0429692 -3.8045,12.0144002 -15.28958,17.0564642 -23.05273,25.1679692 -3.989646,4.42761 -7.185187,9.557822 -9.003909,14.990234 l -0.279297,-0.25 c 0.955858,-4.806688 2.87563,-9.125741 3.980468,-13.814453 3.465218,-12.678655 2.753188,-27.9402133 13.683598,-36.433594 z m 223.7207,0 c 10.93041,8.4933807 10.21837,23.754939 13.68359,36.433594 1.10484,4.688712 3.02461,9.007765 3.98047,13.814453 l -0.2793,0.25 c -1.81872,-5.432412 -5.01426,-10.562624 -9.0039,-14.990234 -7.76315,-8.111504 -19.24824,-13.153569 -23.05274,-25.1679692 0.087,8.3528572 0.82205,9.7353272 4.76758,19.0429692 3.35547,7.915658 6.96011,12.361601 20.07422,20.757812 5.88113,3.988917 8.90578,9.684513 11.57617,15.880859 0.26178,-4.21536 -1.58157,-8.445281 -0.28515,-12.960937 3.76813,-17.07331 2.20907,-31.234888 -6.88282,-42.029297 -3.94574,-5.5546488 -8.94887,-9.4101311 -14.57812,-11.03125 z M 88.582031,21.103516 c -0.285043,-0.06111 -0.440803,0.189404 -0.662109,0.314453 -7.621928,10.996064 -14.276223,19.314775 -13.947266,34.09375 -1.026473,18.187407 10.514507,34.765271 11.671875,51.917971 1.750611,-13.130771 10.807487,-22.406215 18.300779,-32.583987 -0.98775,4.349179 -2.13436,8.562369 -4.115232,12.345703 -8.209219,14.068624 -16.380096,30.769014 -10.720703,48.769534 -0.130895,0.19017 -0.315508,0.44085 -0.527344,0.31054 -2.27427,-5.94788 -2.663387,-12.7527 -4.253906,-19.08984 C 80.527063,100.23951 68.939767,86.139797 72.300781,66.609375 70.526838,70.847055 69.808642,75.6298 68.869141,80.25 c -1.983204,11.940394 -3.039316,19.305723 -0.126953,30.27344 3.53927,13.75705 18.448306,28.93333 24.466796,41.53125 l 0.822266,0.74609 c -0.876637,-6.83476 -1.323965,-14.19285 0.382812,-20.71094 2.59375,-10.43136 9.722618,-20.62507 11.718748,-31.37695 1.04045,-8.431763 -1.27928,-17.779819 -2.15625,-25.910156 2.70485,-3.676944 5.2104,-7.469552 7.08399,-11.609375 2.47318,-6.247039 1.43629,-15.135756 2.17773,-21.894531 -0.99633,2.877898 -2.71112,5.366165 -4.65039,7.816406 -9.081552,9.36475 -19.478768,18.977574 -21.455078,32.550782 -0.331541,1.92903 -0.437578,3.9336 -0.933593,5.808593 -0.389229,0.193565 -0.390205,-0.311196 -0.554688,-0.433593 l 1.107422,-16.830078 c 0.382341,-16.439189 -6.55998,-34.665617 1.830078,-49.107422 z m 270.746089,0 c 8.39005,14.441805 1.44969,32.668233 1.83204,49.107422 l 1.10546,16.830078 c -0.16448,0.122397 -0.1635,0.627158 -0.55273,0.433593 -0.49601,-1.874993 -0.60401,-3.879563 -0.93555,-5.808593 -1.9763,-13.573208 -12.37352,-23.186032 -21.45507,-32.550782 -1.93927,-2.450241 -3.65406,-4.938508 -4.65039,-7.816406 0.74144,6.758775 -0.2935,15.647492 2.17968,21.894531 1.87359,4.139823 4.37719,7.932431 7.08203,11.609375 -0.87697,8.130337 -3.19474,17.478394 -2.15429,25.910156 1.99613,10.75188 9.125,20.94559 11.71875,31.37695 1.70678,6.51809 1.25749,13.87618 0.38086,20.71094 l 0.82226,-0.74609 c 6.01849,-12.59792 20.92948,-27.7742 24.46875,-41.53125 2.91236,-10.967717 1.85431,-18.333046 -0.1289,-30.27344 -0.9395,-4.6202 -1.6577,-9.402945 -3.43164,-13.640625 3.36101,19.530422 -8.22629,33.630135 -12.02735,50.572265 -1.59052,6.33714 -1.97962,13.14196 -4.25391,19.08984 -0.21183,0.13031 -0.39645,-0.12037 -0.52734,-0.31054 5.65939,-18.00052 -2.50953,-34.70091 -10.71875,-48.769534 -1.98087,-3.783334 -3.12944,-7.996524 -4.11719,-12.345703 7.4933,10.177772 16.55019,19.453217 18.30078,32.583987 1.15738,-17.152701 12.69836,-33.730564 11.67188,-51.917971 0.32896,-14.778975 -6.32338,-23.097686 -13.94531,-34.09375 -0.2213,-0.125049 -0.37903,-0.375561 -0.66407,-0.314453 z M 102.84375,113.50781 c 1.38902,13.9572 -3.957486,25.7937 -3.582031,39.80078 0.375454,8.46117 2.810341,15.95994 6.728511,22.70899 l -0.66406,0.002 c -5.29341,-7.87325 -9.426875,-16.2506 -15.613279,-23.74805 -9.602539,-10.48187 -21.854528,-21.22907 -23.115235,-35.79882 -1.630562,12.16681 0.562984,23.57309 5.390625,33.65625 4.82764,10.08317 12.289201,18.84243 21.19336,25.71093 l 4.148437,2.9043 c 7.340332,5.43365 13.122202,7.56579 20.175782,13.74609 v -0.75976 c -5.40191,-10.17041 -4.7081,-22.25194 -5.57031,-34.58985 -0.86221,-12.33788 -3.28109,-24.93288 -6.60938,-36.13085 z m 242.22266,0 -2.48243,7.50196 c -3.32829,11.19797 -5.74521,23.79297 -6.60742,36.13085 -0.86221,12.3379 -0.1684,24.41944 -5.57031,34.58985 v 0.75976 c 7.05358,-6.1803 12.8335,-8.31244 20.17383,-13.74609 l 4.14844,-2.9043 c 8.90416,-6.8685 16.36572,-15.62776 21.19336,-25.71093 4.82763,-10.08316 7.02118,-21.48944 5.39062,-33.65625 -1.26071,14.56975 -13.51269,25.31695 -23.11523,35.79882 -6.1864,7.49745 -10.31988,15.8748 -15.61329,23.74805 l -0.66406,-0.002 c 3.91817,-6.74905 6.35502,-14.24782 6.73047,-22.70899 0.37546,-14.00708 -4.973,-25.84358 -3.58398,-39.80078 z m -232.94532,37.26758 c 6.747,15.28492 3.57909,35.16958 12.58399,49.38672 2.47319,4.69926 6.55942,8.83184 10.0918,12.46094 l -0.16407,0.18945 c -3.19654,-1.69484 -6.16273,-4.11937 -8.99414,-6.9707 -15.38594,-14.3441 -38.33359,-16.33724 -47.496092,-39.86133 1.243053,8.63137 2.753739,17.29389 7.689453,24.54492 16.576719,24.26009 34.209669,24.68194 62.042969,31.15625 -12.7388,-11.66743 -14.84241,-29.06815 -20.34766,-44.48047 -3.70117,-9.44194 -9.27582,-18.09717 -15.40625,-26.42578 z m 223.66797,0 c -6.13043,8.32861 -11.70508,16.98384 -15.40625,26.42578 -5.50525,15.41232 -7.60885,32.81304 -20.34765,44.48047 28.78938,-6.10047 45.10756,-6.22279 62.04296,-31.15625 4.93571,-7.25103 6.4464,-15.91355 7.68946,-24.54492 -9.16251,23.52409 -32.1082,25.51723 -47.49414,39.86133 -2.83141,2.85133 -5.79956,5.27586 -8.9961,6.9707 l -0.16406,-0.18945 c 3.53238,-3.6291 7.61861,-7.76168 10.0918,-12.46094 9.0049,-14.21714 5.83698,-34.1018 12.58398,-49.38672 z m -201.64258,37.26953 c 8.32719,12.71579 10.57854,31.5515 25.91797,37.69336 2.54638,1.52654 5.78241,1.35277 8.11524,3.03125 -2.9296,0.50394 -5.45842,-0.75816 -8.22266,-1.19141 -19.56934,-4.9979 -43.57462,1.27777 -58.26562,-17.69921 5.57586,12.39244 17.00981,22.35099 28.09179,26.33007 17.0462,6.59251 34.90259,-0.698 50.97657,-5.14843 2.30785,-0.68096 5.12709,-0.43007 7.27734,-1.31641 -8.94721,-2.08031 -17.43776,-5.33165 -24.49219,-12.35352 -9.81439,-10.48974 -18.75996,-21.31281 -29.39844,-29.3457 z m 179.61719,0 c -10.63848,8.03289 -19.58209,18.85597 -29.39648,29.3457 -7.05443,7.02187 -15.54693,10.27321 -24.49414,12.35352 2.15025,0.88634 4.96949,0.63545 7.27734,1.31641 16.07398,4.45043 33.93232,11.74094 50.97852,5.14843 11.08198,-3.97908 22.51593,-13.93763 28.09179,-26.33007 -14.691,18.97698 -38.69628,12.70131 -58.26562,17.69921 -2.76424,0.43325 -5.29501,1.69535 -8.22461,1.19141 2.33283,-1.67848 5.57081,-1.50471 8.11719,-3.03125 15.33943,-6.14186 17.58882,-24.97757 25.91601,-37.69336 z m -72.62305,41.16797 c -4.71825,-0.002 -9.42831,0.61862 -13.95117,1.94141 -2.87103,2.91616 -5.82433,-0.52139 -8.86328,-0.58789 -19.47289,-4.85516 -36.25695,5.18253 -52.41015,13.0957 -12.03784,5.34714 -27.80359,4.4488 -38.38868,-3.8418 5.23744,7.45769 12.24496,12.05396 19.47852,15.17969 13.4501,6.10684 29.45661,1.99934 40.58594,-6.79102 9.55087,-6.06107 17.76363,-17.99768 30.3457,-13.45312 -12.80424,6.72453 -24.50819,16.15192 -35.08984,28.26953 l 6.6289,6.2207 c 7.71579,-11.70339 17.979,-21.25504 28.35742,-28.67578 2.25102,-1.36663 4.62466,-3.06551 7.1211,-3.42773 12.74827,7.08786 24.1349,19.20415 34.41601,31.78711 2.19332,-2.00346 4.52226,-4.17741 6.32032,-6.50196 -10.66863,-11.70873 -22.33703,-20.87149 -34.89844,-27.52539 2.0874,-0.67943 4.45614,-0.8115 6.91211,-0.7539 6.77111,-0.46699 11.38429,4.9759 16.61914,8.75976 12.92997,11.14486 30.20722,18.50613 46.76172,11.53321 7.42128,-2.9989 14.60846,-8.3054 19.86914,-15.72071 -10.23202,8.22769 -25.66644,9.58236 -37.60352,4.55274 l -12.84179,-5.86328 c -8.5667,-5.17464 -18.98898,-8.19233 -29.36915,-8.19727 z"/>
+      </g>
+    </svg>
+    <div class="vol">
+      <span class="num">II</span>
+      <span class="sep"></span>
+      <span class="lbl">The Long Essay</span>
+    </div>
+  </div>
+
+  <div class="kicker">Vol. V · Essay II · 4,200 Words</div>
+  <h2>Concrete &amp; Empire
+    <em>Opus Caementicium as Political Argument</em>
+  </h2>
+  <p class="deck">On the political grammar of Roman pozzolana — how a grey paste of volcanic ash, lime, and seawater carried the weight of an empire and rewrote the architectural sentence of the Mediterranean.</p>
+  <div class="byline">
+    <div class="author">By Marcus Reiner</div>
+    <div class="meta">Senior Editor at Large &middot; Filed from Rome, the XIV. Kalends of November</div>
+  </div>
+</section>
+
+<!-- ============ ARTICLE ============ -->
+<div class="article-wrap">
+
+  <aside class="left">
+    <div class="label">Editor's Note</div>
+    <p>Mr. Reiner's essay is the second in our continuing series, <em>The Long Republic</em>, which examines the material vocabularies of imperial argument.</p>
+
+    <h4>In This Essay</h4>
+    <p>Vitruvius &middot; Pozzolana &middot; The Markets of Trajan &middot; The Baths of Caracalla &middot; Apollodorus of Damascus &middot; The Bay of Naples trade routes</p>
+
+    <h4>Reading Time</h4>
+    <p>Approximately 32 minutes at the pace of an attentive reader; longer, the editors hope, with a glass of Falernian beside.</p>
+
+    <h4>Cited Inscriptions</h4>
+    <p><span class="sc">CIL</span> VI 967 &middot; <span class="sc">CIL</span> X 1614 &middot; <span class="sc">AE</span> 1959, 254 &middot; the Lex Puteolana of 105 <span class="sc">b.c.</span></p>
+
+    <h4>Companion Pieces</h4>
+    <p>See also Helena Voss on the Pantheon's caisson, in our previous number, and the field report from Baia in <a href="page-3.html" style="border-bottom:1px solid var(--secondary);">Dispatches</a>.</p>
+  </aside>
+
+  <article class="essay">
+
+    <h3><span class="num">§ I.</span> The Markets at Mid-Morning</h3>
+    <p class="dropcap no-indent">Stand on the Via Quattro Novembre at half past ten on a clear October morning, with the wind off the Quirinal moving the umbrella pines, and the Markets of Trajan present themselves not as ruin but as argument. Six tiers of brick-faced concrete climb the hillside above the forum, vaulted, recessed, hollow, populated still — after nineteen centuries — by the geometry of commerce. The architect, the Damascene Apollodorus, did not build a monument. He built a sentence, and its grammar was concrete.</p>
+
+    <p>I have come here often, and I have come here this morning, because I want to insist on something that the Italian guidebooks treat as a footnote: that the material we glibly call <em>Roman concrete</em> — properly <span class="sc">opus caementicium</span> — is not a technology in the modern sense, not a product, not even, exactly, a recipe. It is a political argument, advanced over four centuries, in grey paste and aggregate, by a state that had decided early on that the built environment was a legitimate instrument of governance. The Markets are the argument's clearest paragraph.</p>
+
+    <p>Consider what is being said here. A hillside on the lip of the Imperial Forum, awkward, irregular, geologically unloved, has been carved into 150 <span class="sc">tabernae</span> — shops, offices, administrative cells — arranged across an artificial topography that no temple-and-column architecture could have produced. The vaults are shallow, the corridors curve to follow the slope, the great hall on the upper level (the so-called Aula Traiana) spans 8 metres clear and roofs itself with cross-vaults that would not be matched in stone for a thousand years. None of this is decorative. All of it is structural prose.</p>
+
+    <blockquote class="pulled">
+      Concrete did for Rome what the alphabet had done for Phoenicia: it lowered, by an order of magnitude, the cost of being articulate.
+      <cite>— M. R.</cite>
+    </blockquote>
+
+    <p>To grasp why this matters one must first abandon the modern association of concrete with the cheap, the hasty, the brutal. The Romans did not think of <span class="sc">caementicium</span> in those terms. Vitruvius, writing in the 20s <span class="sc">b.c.</span> in the second book of <em>De Architectura</em>, treats the material with the reverence a vintner gives to a soil. He describes its components — lime burnt from the limestone of the Sabine hills, sand of three named qualities, and above all the <span class="sc">pulvis puteolanus</span>, the powder of Puteoli — with the precision of a man who knows that a single substitution will collapse the wall.</p>
+
+    <div class="figure-stat">
+      <div><span class="n">1 : 3</span><span class="l">Lime to pozzolana, Vitruvian ratio</span></div>
+      <div><span class="n">100,000</span><span class="l">m³ of concrete, Caracalla's Baths</span></div>
+      <div><span class="n">38 m</span><span class="l">free span, Basilica of Maxentius</span></div>
+    </div>
+
+    <p>And here we must pause on the substance itself, because the politics begin in the chemistry.</p>
+
+    <div class="meander-divider" aria-hidden="true">
+      <svg viewBox="0 0 16511 4447" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#1a1a1a" d="M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z"/>
+      </svg>
+    </div>
+
+    <h3><span class="num">§ II.</span> Pozzolana, or, the Volcano as Civil Servant</h3>
+
+    <p class="no-indent">Some 220 kilometres south of Rome, on the western flank of the Bay of Naples, the earth has spent the past forty thousand years vomiting glass. The Phlegraean Fields are a volcanic complex of low intensity and high persistence: not the catastrophic eruptions of Vesuvius but a slow, multimillennial spitting of fine, silicic ash. That ash, oxidised and weathered, lying in beds tens of metres deep around Pozzuoli — the Roman <span class="sc">Puteoli</span> — is <em>pozzolana</em>. The Romans did not invent it. The Romans noticed it.</p>
+
+    <p>What they noticed, and what no other Mediterranean people had thought to systematise, is that pozzolana mixed with slaked lime undergoes a pozzolanic reaction: the amorphous silica and alumina in the ash bind chemically with the calcium hydroxide of the lime to form calcium-aluminium-silicate hydrates, a cementitious gel that hardens not by drying but by chemistry. The reaction proceeds underwater. It accelerates in the presence of seawater. It continues, slowly, for centuries. The harbour mole at Caesarea Maritima, poured by Herod's engineers in the 20s <span class="sc">b.c.</span> using imported Italian pozzolana, is — as a consortium led by Marie Jackson at Berkeley demonstrated in 2017 — still gaining strength two thousand years later.</p>
+
+    <p>This is the part of the story that the engineers like to tell, and it is the right story, but it is not yet the political story. The political story is that pozzolana, unlike marble, unlike granite, unlike the prestigious imported stones with which the Republic had decorated itself, was not a luxury good. It was a bulk commodity, and the Romans organised its trade as a state concern.</p>
+
+    <p>The numbers, where we have them, are striking. By the reign of Trajan a single <span class="sc">navis lapidaria</span> out of Puteoli could carry 350 tonnes of pozzolana to Ostia in a four-day passage. The Lex Puteolana of 105 <span class="sc">b.c.</span> — preserved on a bronze tablet now in the Naples museum — fixes the price of a <span class="sc">modius</span> of <em>pulvis</em> at 4 <span class="sc">asses</span>, which after correction for the second-century inflation comes to roughly the cost of a day's bread for a labourer. A cubic metre of finished concrete, ready to pour, cost the Roman state about 80 <span class="sc">sestertii</span> in materials and roughly the same again in labour. For comparison: a single column drum of Carystian marble for the Pantheon cost the imperial fisc 3,200 <span class="sc">sestertii</span> at the quarry, before transport.</p>
+
+    <blockquote class="pulled">
+      The Republic spoke in marble. The Empire learned to speak in paste — and discovered that it could write longer sentences.
+    </blockquote>
+
+    <p>Cheap material, abundant material, transportable material — and a material that hardened in water. The Roman state, which in the late Republic had begun to understand itself as a Mediterranean rather than an Italian project, suddenly possessed a substance that could build harbours, breakwaters, bridge piers, aqueduct channels, military camps, and basilicas, in any province where lime was available and pozzolana could be shipped. The fleet, the legions, and the cement barges constituted a single logistical organism.</p>
+
+    <p>Vitruvius understood this. In a passage that is normally read as antiquarian curiosity (II.6.1) he writes: <em>Est etiam genus pulveris quod naturaliter efficit res admirandas. Nascitur in regionibus Baianis et in agris municipiorum quae sunt circa Vesuvium montem.</em> "There is a kind of powder that naturally produces marvellous results. It is found in the regions of Baia and in the territories of the municipalities around Vesuvius." But he then adds, with a politician's instinct, that this powder, mixed with lime and rubble, hardens "not only in ordinary buildings, but also in piers built into the sea." Vitruvius is not describing a material. He is describing a strategic asset.</p>
+
+    <h3><span class="num">§ III.</span> The Logistics of Caracalla</h3>
+
+    <p class="no-indent">If the Markets of Trajan are the argument's clearest paragraph, the Baths of Caracalla, dedicated in <span class="sc">a.d.</span> 216, are its longest and most exhausting sentence. They are also the place where the political reading of <span class="sc">opus caementicium</span> becomes inescapable.</p>
+
+    <p>The bathing complex covers eleven hectares. The central block alone — the <span class="sc">caldarium</span>, <span class="sc">tepidarium</span>, <span class="sc">frigidarium</span>, and <span class="sc">natatio</span> — required, by the careful estimate of Janet DeLaine in her 1997 monograph for the British School at Rome, approximately 100,000 cubic metres of concrete. The vaults of the central hall span 24 metres clear. The ceiling of the <span class="sc">frigidarium</span>, before its sixth-century collapse, rose 33 metres above the marble pavement. To pour these vaults the imperial works department mobilised, between roughly <span class="sc">a.d.</span> 211 and 216, what DeLaine reconstructs as a workforce of around 9,000 men working in continuous shifts: lime-burners in the Sabine quarries, bargemen on the Tiber, pozzolana-carriers at Puteoli, scaffolders, brick-makers at the figlinae of the Salarian estates, mortar-mixers, vault-formers, and the small army of skilled <span class="sc">structores</span> who actually placed the <em>caementa</em> — the rubble lumps of tufa, brick, and travertine — into the wet mortar.</p>
+
+    <p>Read the supply chain backwards. The bricks bear stamps: <span class="sc">CIL</span> XV preserves more than two thousand of them from the Caracallan strata, naming the brickworks of the Domitii Afri at the third milestone of the Via Salaria, and the figlinae of Sulpicius Maximus on the Tiber's right bank. The lime came from the Sabine hills above Tivoli, where the limestone of the Aniene valley produces an unusually pure quicklime when burnt at 900°C — a temperature the Romans achieved with oak charcoal in beehive kilns, four of which have been excavated at the site of Bagni di Tivoli since 1981. The pozzolana, for the great vaults, was specifically the <em>pulvis puteolanus</em> of the Phlegraean Fields, shipped via the maritime route Misenum–Ostia and barged up the Tiber to the <span class="sc">portus</span> below the Aventine, then carted overland to the building site.</p>
+
+    <p>This is not the supply chain of a private patron, however wealthy. This is the supply chain of a state. The Severan dynasty maintained, through the office of the <span class="sc">curator operum publicorum</span>, a permanent cadre of imperial freedmen and military engineers whose job was the procurement of building materials at provincial scale. The same office that supplied Caracalla's vaults supplied, in those same years, the legionary fortresses on the Rhine and the harbour repairs at Leptis Magna. <span class="sc">Opus caementicium</span> had become an instrument of imperial coordination — a way of converting the tax revenues of Egypt and the Spanish silver mines into vaults, basilicas, and bath-houses that could be experienced bodily by the urban plebs.</p>
+
+    <blockquote class="pulled">
+      The bath-house was the bread and circus made architecture: a daily, somatic encounter between the citizen and the fiscal apparatus that had bought him his hot water.
+    </blockquote>
+
+    <p>And the citizen, walking through the great vaulted halls under their now-vanished mosaic ceilings, was meant to feel exactly what the architect intended him to feel. Concrete vaults, unlike trabeated stone, can be enormous. They can be hollow. They can admit light from clerestories that no post-and-lintel system would tolerate. They can roof a space without a single internal column. The frigidarium of Caracalla was, in <span class="sc">a.d.</span> 220, the largest covered interior in the world, and it had been built — and the citizen knew it had been built — for him, free of charge, by the Emperor.</p>
+
+    <h3><span class="num">§ IV.</span> The Argument from Vitruvius</h3>
+
+    <p class="no-indent">It is worth returning, before we close, to the strange figure of Vitruvius. He is our only sustained ancient theorist of architecture, and he is — as every reader of him soon discovers — a peculiar guide. He is conservative where we expect him to be radical; he praises Greek precedent at the moment when his contemporaries were inventing a new vocabulary; he treats <span class="sc">opus caementicium</span> as a technique rather than as the revolution we now know it to be.</p>
+
+    <p>But read him politically and the picture clarifies. <em>De Architectura</em> was dedicated to Augustus around 25 <span class="sc">b.c.</span>, in the years immediately following the settlement at Actium. Augustus had inherited a city, in his own famous boast, of brick, and intended to leave it of marble. Vitruvius's job, in the treatise, is to articulate a building programme that can match this ambition without — and this is the crucial point — abandoning the structural advantages that the Republic's engineers had developed over the previous century.</p>
+
+    <p>The compromise he proposes is the one we now recognise as classical Roman architecture: a marble or stuccoed surface applied over a concrete core. The Pantheon, finished a century and a half later, is the masterpiece of the formula. From outside it presents a Greek temple front; from inside it is a single concrete dome, 43.3 metres in diameter, lightened by graduated aggregates (travertine in the foundations, tufa lower down, scoria and pumice at the crown), poured around a wooden centring that must itself have been one of the great carpentry projects of the second century.</p>
+
+    <p>The Pantheon, like the Markets, like the Baths, is an argument. It says: <em>the state can do this. The state, and only the state, can do this.</em> No private patron in Rome, however rich, could have mobilised the pozzolana fleets, the lime kilns, the bronze-clad oculus, the Egyptian granite columns, the imperial brickworks, the shipwrights and the carpenters, in a single coordinated act. Concrete made the state visible. The Pantheon's coffered dome is, in this sense, a balance sheet, rendered in volume.</p>
+
+    <h3><span class="num">§ V.</span> Coda — The Long Shadow</h3>
+
+    <p class="no-indent">The technique faded. Pozzolana continued to be used through Late Antiquity, in the great fifth-century basilicas of Ravenna and Constantinople, but the supply chains decayed with the western empire's tax base. By the time of Theodoric the figlinae of the Salarian estates had largely closed; the Tiber barges no longer ran; the lime kilns of Tivoli were burning church marble for agricultural lime. The recipe was not lost, exactly — Justinian's engineers used it at Hagia Sophia in 537 — but the political organism that had made it cheap, abundant, and ubiquitous had ceased to exist.</p>
+
+    <p>It returned slowly. The eighteenth-century engineers of the Bourbon court at Naples, faced with the harbour problems at Mergellina, rediscovered pozzolana in the Phlegraean beds and began to publish on it. John Smeaton, building the third Eddystone lighthouse in 1756, used Italian pozzolana in his lime mortar after reading Vitruvius in a 1684 Latin edition. Joseph Aspdin's Portland cement of 1824 is, in a sense, the industrial revolution's attempt to manufacture pozzolana from materials that did not require a volcano next door.</p>
+
+    <p>But the political argument that the Romans made — that a state can express its legitimacy through the systematic, fiscal, infrastructural production of public space — has had a more chequered modern history. The Markets of Trajan are now a museum. The Baths of Caracalla are an opera house in the summer and a romantic ruin the rest of the year. The Pantheon, alone of the great concrete monuments, still functions as it was meant to: as a covered public space, free of charge, where any citizen of any standing may walk in off the street and stand under the sky.</p>
+
+    <p>That, in the end, is the argument that <span class="sc">opus caementicium</span> was always making. Concrete is the cheapest way the state has ever found to give its citizens a roof. The Romans understood this, and built accordingly, for four hundred years. Whether anyone since has fully understood it — whether we, in our age of cement and steel, understand it now — is the question this essay has not quite dared to answer, and to which I shall return, the editors permitting, in the spring.</p>
+
+    <p style="text-align:right; font-style:italic; margin-top:30px; font-size:14px;">— Rome, the XIV. Kalends of November, <span class="sc">mmxxiv</span>.</p>
+
+    <div class="end-mark">FINIS</div>
+
+  </article>
+
+  <aside class="right toc">
+    <div class="label">Argumentum</div>
+    <ol>
+      <li>The Markets at Mid-Morning</li>
+      <li>Pozzolana, or, The Volcano as Civil Servant</li>
+      <li>The Logistics of Caracalla</li>
+      <li>The Argument from Vitruvius</li>
+      <li>Coda — The Long Shadow</li>
+    </ol>
+
+    <h4>About the Author</h4>
+    <p>Marcus Reiner is Senior Editor at Large for <em>Acta Diurna</em> and the author of <em>The Long Republic</em> (Yale, 2019). He divides his year between Rome and a farmhouse in the Sabine hills.</p>
+
+    <h4>Next in the Series</h4>
+    <p>Helena Voss returns in our spring number with <em>The Aqueduct as Constitution: Water, Law, and the Politics of the Aqua Marcia</em>.</p>
+
+    <h4>Subscribe</h4>
+    <p>Six numbers per annum, posted from Rome. <a href="page-6.html" style="border-bottom:1px solid var(--secondary);">Particulars &amp; rates</a>.</p>
+  </aside>
+
+</div>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site">
+  <div class="footer-frieze" aria-hidden="true">
+    <svg viewBox="0 0 16511 4447" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" style="width:100%;">
+      <path fill="#1a1a1a" d="M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z"/>
+    </svg>
+  </div>
+
+  <div class="footer-cols">
+    <div>
+      <h5>The Review</h5>
+      <ul>
+        <li><a href="page-1.html">Frontispiece</a></li>
+        <li><a href="page-2.html">The Long Essay</a></li>
+        <li><a href="page-3.html">Dispatches</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Departments</h5>
+      <ul>
+        <li><a href="page-4.html">Letters &amp; Marginalia</a></li>
+        <li><a href="page-5.html">The Library</a></li>
+        <li><a href="page-6.html">Colophon</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Editorial Office</h5>
+      <ul>
+        <li>Via dei Fori 14, Roma</li>
+        <li>By Post: Casella 197</li>
+        <li>Founded MMXIX</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="colophon">
+    <em>Acta Diurna</em> is set in Playfair Display and Lora, printed on cream wove,<br>
+    and posted by sea-mail from Civitavecchia six times in the year.
+  </p>
+
+  <svg class="tailpiece" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path fill="currentColor" transform="translate(0 -852.36)" d="m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5z"/>
+  </svg>
+
+  <p class="copyright">© <span class="sc">MMXXIV</span> · ACTA DIURNA · OMNIA IURA RESERVATA</p>
+</footer>
+
+</body>
+</html>

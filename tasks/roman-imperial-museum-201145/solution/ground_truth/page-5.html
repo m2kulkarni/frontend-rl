@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Scholarship & Library — Bibliotheca Traiani</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    font-size: 17px;
+    line-height: 1.65;
+  }
+  a { color: var(--text); text-decoration: none; }
+
+  /* ===== MASTHEAD ===== */
+  .masthead {
+    background: var(--surface);
+    text-align: center;
+    padding: 56px 40px 28px;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    position: relative;
+  }
+  .masthead .pediment {
+    width: 0;
+    height: 0;
+    border-left: 220px solid transparent;
+    border-right: 220px solid transparent;
+    border-bottom: 36px solid var(--primary);
+    margin: 0 auto 0;
+    opacity: 0.92;
+  }
+  .masthead .pediment-base {
+    width: 520px;
+    height: 8px;
+    background: var(--primary);
+    margin: 0 auto 24px;
+  }
+  .masthead h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 600;
+    font-size: 38px;
+    letter-spacing: 0.22em;
+    margin: 0 0 8px;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+  .masthead .latin {
+    font-family: var(--font-display), serif;
+    font-size: 16px;
+    letter-spacing: 0.4em;
+    color: var(--text-emphasis);
+    text-transform: uppercase;
+    margin: 0 0 14px;
+  }
+  .masthead .tagline {
+    font-style: italic;
+    font-size: 15px;
+    color: #444;
+    margin: 0 auto;
+    max-width: 640px;
+  }
+  .masthead .seal-mini {
+    position: absolute;
+    top: 28px;
+    width: 64px;
+    height: 64px;
+    opacity: 0.85;
+  }
+  .masthead .seal-mini.left { left: 56px; }
+  .masthead .seal-mini.right { right: 56px; }
+
+  /* ===== NAV ===== */
+  nav.primary {
+    background: var(--surface);
+    text-align: center;
+    padding: 18px 0 16px;
+  }
+  nav.primary ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0;
+  }
+  nav.primary li {
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+  }
+  nav.primary a {
+    padding: 4px 18px;
+    color: var(--text);
+  }
+  nav.primary a[aria-current="page"] {
+    color: var(--text-emphasis);
+    border-bottom: 2px solid var(--secondary);
+    padding-bottom: 2px;
+  }
+  nav.primary .vine-sep {
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    vertical-align: middle;
+    fill: var(--secondary);
+  }
+
+  /* ===== MEANDER STRIP ===== */
+  .meander {
+    width: 100%;
+    height: 28px;
+    background-color: var(--surface);
+    border-top: 1px solid var(--secondary);
+    border-bottom: 1px solid var(--secondary);
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 20' preserveAspectRatio='xMidYMid'><g fill='none' stroke='%23a93226' stroke-width='1.6'><path d='M0 18 V6 H14 V14 H6 V10 H10'/><path d='M20 18 V6 H34 V14 H26 V10 H30'/><path d='M40 18 V6 H54 V14 H46 V10 H50'/><path d='M60 18 V6 H74 V14 H66 V10 H70'/></g></svg>");
+    background-repeat: repeat-x;
+    background-size: 80px 20px;
+    background-position: center;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: var(--surface);
+    text-align: center;
+    padding: 60px 40px 70px;
+    position: relative;
+  }
+  .hero .wreath-wrap {
+    position: relative;
+    width: 460px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero .wreath-wrap svg.wreath {
+    width: 460px;
+    height: auto;
+    display: block;
+  }
+  .hero .hero-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 320px;
+  }
+  .hero .eyebrow {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    margin: 0 0 12px;
+  }
+  .hero h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 600;
+    font-size: 30px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin: 0 0 8px;
+    line-height: 1.15;
+  }
+  .hero .latin-sub {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 14px;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    margin: 0;
+  }
+  .hero .hero-blurb {
+    max-width: 720px;
+    margin: 36px auto 0;
+    font-size: 17px;
+    line-height: 1.75;
+    color: #2a2a2a;
+  }
+  .hero .hero-blurb::first-letter {
+    font-family: var(--font-display), serif;
+    font-size: 52px;
+    float: left;
+    line-height: 0.9;
+    padding: 6px 10px 0 0;
+    color: var(--primary);
+  }
+
+  /* ===== SECTION DIVIDERS ===== */
+  .divider {
+    text-align: center;
+    padding: 28px 0 20px;
+    background: var(--bg);
+  }
+  .divider .rule {
+    display: inline-flex;
+    align-items: center;
+    gap: 18px;
+    width: 60%;
+    justify-content: center;
+  }
+  .divider .rule::before,
+  .divider .rule::after {
+    content: "";
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--secondary), transparent);
+  }
+  .divider .vine {
+    width: 22px;
+    height: 22px;
+    fill: var(--secondary);
+  }
+  .divider h3 {
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    margin: 12px 0 0;
+  }
+
+  /* ===== HOLDINGS GRID ===== */
+  .holdings {
+    background: var(--bg);
+    padding: 30px 80px 60px;
+  }
+  .holdings .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 1240px;
+    margin: 0 auto;
+  }
+  .card {
+    background: #faf6ec;
+    border: 1px solid var(--secondary);
+    padding: 6px;
+    position: relative;
+  }
+  .card-inner {
+    border: 1px solid var(--primary);
+    padding: 30px 28px 28px;
+    position: relative;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='10' viewBox='0 0 40 10'><g fill='none' stroke='%23c9a23a' stroke-width='0.7'><path d='M0 8 V2 H8 V6 H4'/><path d='M12 8 V2 H20 V6 H16'/><path d='M24 8 V2 H32 V6 H28'/></g></svg>");
+    background-repeat: repeat-x;
+    background-position: top;
+    background-size: 40px 10px;
+    padding-top: 36px;
+  }
+  .card h4 {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--primary);
+    letter-spacing: 0.18em;
+    font-size: 17px;
+    font-weight: 600;
+    margin: 0 0 4px;
+  }
+  .card .latin-name {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    font-size: 12px;
+    margin: 0 0 18px;
+  }
+  .card .figure {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-size: 36px;
+    color: var(--text-emphasis);
+    margin: 12px 0 4px;
+    letter-spacing: 0.05em;
+  }
+  .card .figure-label {
+    text-align: center;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: #555;
+    margin: 0 0 14px;
+  }
+  .card p {
+    margin: 0 14px 0;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+  .card .closer {
+    margin: 24px auto 0;
+    width: 60%;
+    text-align: center;
+  }
+  .card .closer-rule {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .card .closer-rule::before,
+  .card .closer-rule::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--secondary);
+  }
+  .card .closer svg {
+    width: 14px;
+    height: 14px;
+    fill: var(--secondary);
+  }
+
+  /* ===== FELLOWS ===== */
+  .fellows {
+    background: var(--surface);
+    padding: 50px 80px 60px;
+  }
+  .fellows-wrap {
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+  .fellows-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    margin-top: 30px;
+  }
+  .fellow {
+    background: #faf6ec;
+    border: 1px solid var(--secondary);
+    padding: 5px;
+  }
+  .fellow-inner {
+    border: 1px solid var(--primary);
+    padding: 26px 24px;
+    text-align: left;
+  }
+  .fellow .seal {
+    display: block;
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 8px;
+  }
+  .fellow h5 {
+    font-family: var(--font-display), serif;
+    text-align: center;
+    color: var(--primary);
+    font-size: 15px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin: 4px 0 2px;
+    font-weight: 600;
+  }
+  .fellow .institution {
+    text-align: center;
+    font-style: italic;
+    color: var(--accent);
+    font-size: 13px;
+    margin: 0 0 14px;
+  }
+  .fellow .topic-label {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: #666;
+    text-transform: uppercase;
+    margin: 0 0 8px;
+  }
+  .fellow .topic {
+    font-size: 15px;
+    line-height: 1.65;
+    margin: 0;
+    text-align: center;
+  }
+
+  /* ===== JOURNAL & CONTACT (two-col) ===== */
+  .twocol {
+    background: var(--bg);
+    padding: 50px 80px 70px;
+  }
+  .twocol-wrap {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+  .panel {
+    background: var(--surface);
+    border: 1px solid var(--secondary);
+    padding: 6px;
+  }
+  .panel-inner {
+    border: 1px solid var(--primary);
+    padding: 36px 40px;
+  }
+  .panel h3 {
+    font-family: var(--font-display), serif;
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--primary);
+    letter-spacing: 0.18em;
+    font-size: 18px;
+    margin: 0 0 4px;
+    font-weight: 600;
+  }
+  .panel .panel-latin {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    color: var(--accent);
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    margin: 0 0 22px;
+  }
+  .panel dl {
+    margin: 16px 0 0;
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 8px 18px;
+    font-size: 15px;
+  }
+  .panel dt {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    align-self: baseline;
+    padding-top: 3px;
+  }
+  .panel dd { margin: 0; }
+  .panel p {
+    margin: 0 0 14px;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+  .panel ol {
+    padding-left: 22px;
+    margin: 10px 0 0;
+  }
+  .panel ol li {
+    margin-bottom: 8px;
+    font-size: 15px;
+    padding-left: 6px;
+  }
+  .panel .seal-block {
+    text-align: center;
+    margin-top: 20px;
+  }
+  .panel .seal-block svg {
+    width: 56px;
+    height: 56px;
+    fill: var(--secondary);
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: #d8c9ad;
+    margin-top: 0;
+    padding: 0;
+  }
+  footer .meander-top {
+    height: 28px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 20' preserveAspectRatio='xMidYMid'><g fill='none' stroke='%23c9a23a' stroke-width='1.6'><path d='M0 18 V6 H14 V14 H6 V10 H10'/><path d='M20 18 V6 H34 V14 H26 V10 H30'/><path d='M40 18 V6 H54 V14 H46 V10 H50'/><path d='M60 18 V6 H74 V14 H66 V10 H70'/></g></svg>");
+    background-repeat: repeat-x;
+    background-size: 80px 20px;
+    background-position: center;
+    border-bottom: 1px solid var(--secondary);
+  }
+  footer .frieze {
+    text-align: center;
+    padding: 36px 40px 30px;
+  }
+  footer .frieze .name {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.32em;
+    font-size: 16px;
+    color: var(--text);
+    margin: 0 0 10px;
+    font-weight: 600;
+  }
+  footer .frieze .addr {
+    font-family: var(--font-body), serif;
+    font-size: 14px;
+    color: #333;
+    margin: 0 0 6px;
+    letter-spacing: 0.04em;
+  }
+  footer .frieze .latin-date {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    color: var(--text-emphasis);
+    font-size: 13px;
+    letter-spacing: 0.22em;
+    margin: 8px 0 14px;
+  }
+  footer .tailpiece {
+    margin: 6px auto 0;
+    width: 220px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  footer .tailpiece::before,
+  footer .tailpiece::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--secondary);
+  }
+  footer .tailpiece svg {
+    width: 18px;
+    height: 18px;
+    fill: var(--accent);
+  }
+
+  /* small SVG vine helper */
+  .vine-svg {
+    fill: var(--secondary);
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ MASTHEAD ============ -->
+<header class="masthead">
+  <svg class="seal-mini left" viewBox="0 0 200 200" aria-hidden="true">
+    <circle cx="100" cy="100" r="76" fill="none" stroke="#c9a23a" stroke-width="1.5"/>
+    <circle cx="100" cy="100" r="62" fill="none" stroke="#a93226" stroke-width="1"/>
+    <text x="100" y="108" text-anchor="middle" font-family="Cinzel" font-size="38" fill="#a93226" font-weight="600">SPQR</text>
+  </svg>
+  <svg class="seal-mini right" viewBox="0 0 200 200" aria-hidden="true">
+    <circle cx="100" cy="100" r="76" fill="none" stroke="#c9a23a" stroke-width="1.5"/>
+    <circle cx="100" cy="100" r="62" fill="none" stroke="#a93226" stroke-width="1"/>
+    <text x="100" y="108" text-anchor="middle" font-family="Cinzel" font-size="38" fill="#a93226" font-weight="600">MMV</text>
+  </svg>
+  <div class="pediment"></div>
+  <div class="pediment-base"></div>
+  <h1>Antiquarium Traianum</h1>
+  <p class="latin">Museo del Foro di Traiano · Romae</p>
+  <p class="tagline">A civic museum presenting the material culture, inscriptions, and architecture of the Roman Empire from the Augustan settlement to the Severan dynasty.</p>
+</header>
+
+<!-- ============ NAV ============ -->
+<nav class="primary" aria-label="Primary">
+  <ul>
+    <li><a href="page-1.html">Home</a></li>
+    <li><svg class="vine-sep" viewBox="0 0 200 200" aria-hidden="true"><path d="M43 11c-1.8 0-3.6 0.1-5.3 0.3-7 0.7-13.9 2.8-19.2 7.5s-8.2 12-7.7 21c0.5 9 4.3 16.1 10.2 20.3 5.9 4.2 13.3 5.5 21 5.2 15.5-0.7 32.8-8 45.8-18.3 1.4-1.1 2.8-2 4.3-3.1 4.3 6.7 7.6 14.8 9.3 24.1-7.5-5.1-21-10.5-35.7 1.5-22.1 18.2-25 12.9-45.3-2.1-2.9 36.1 15 54.6 44.7 52.5 0 0-14 4.3-3.6 26.4 6 12.9 8.4 20.1 6.6 25.2-12.8 2.3-15.8 7.8-5.6 12.7 45.1 10 65.7-27.5 68.7-66 45.4 0 52.9-31.8 52.5-50.4-8.2 11.1-22.2 11.1-32.9 2.5-9.9-7.9-21.7-16.2-39-1.1-1.7-11.7-5.7-22.1-11.2-30.7 19.4-11.4 38.7-14.5 52.5-10.8 5.5 1.4 9.5 4.1 12.4 7-9 8.4-11.8 26.4 2.3 27 18.9 0.9 21-15.5 13.6-27.1-5.4-8.5-16.4-13.2-25.7-16.6-17.5-4.6-39.7-0.6-61.3 12.5-5.2-5.7-11.1-10.2-17.7-13-7.1-3-17.5-5.7-28.3-6.3-1.8-0.1-3.6-0.1-5.4-0.1z" fill="#c9a23a"/></svg></li>
+    <li><a href="page-2.html">Collection</a></li>
+    <li><svg class="vine-sep" viewBox="0 0 200 200" aria-hidden="true"><path d="M43 11c-1.8 0-3.6 0.1-5.3 0.3-7 0.7-13.9 2.8-19.2 7.5s-8.2 12-7.7 21c0.5 9 4.3 16.1 10.2 20.3 5.9 4.2 13.3 5.5 21 5.2 15.5-0.7 32.8-8 45.8-18.3 1.4-1.1 2.8-2 4.3-3.1 4.3 6.7 7.6 14.8 9.3 24.1-7.5-5.1-21-10.5-35.7 1.5-22.1 18.2-25 12.9-45.3-2.1z" fill="#c9a23a"/></svg></li>
+    <li><a href="page-3.html">Exhibition</a></li>
+    <li><svg class="vine-sep" viewBox="0 0 200 200" aria-hidden="true"><path d="M43 11c-1.8 0-3.6 0.1-5.3 0.3-7 0.7-13.9 2.8-19.2 7.5s-8.2 12-7.7 21c0.5 9 4.3 16.1 10.2 20.3 5.9 4.2 13.3 5.5 21 5.2z" fill="#c9a23a"/></svg></li>
+    <li><a href="page-4.html">Visit</a></li>
+    <li><svg class="vine-sep" viewBox="0 0 200 200" aria-hidden="true"><path d="M43 11c-1.8 0-3.6 0.1-5.3 0.3-7 0.7-13.9 2.8-19.2 7.5s-8.2 12-7.7 21z" fill="#c9a23a"/></svg></li>
+    <li><a href="page-5.html" aria-current="page">Scholarship</a></li>
+    <li><svg class="vine-sep" viewBox="0 0 200 200" aria-hidden="true"><path d="M43 11c-1.8 0-3.6 0.1-5.3 0.3z" fill="#c9a23a"/></svg></li>
+    <li><a href="page-6.html">About</a></li>
+  </ul>
+</nav>
+
+<div class="meander" role="presentation"></div>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wreath-wrap">
+    <svg class="wreath" viewBox="0 0 323.75 295.79" aria-hidden="true">
+      <g fill="#c9a23a" stroke="#a8862c" stroke-width="0.6" opacity="0.85">
+        <path d="M141.7-18.6c-11 4.9-23.4 9.5-30 22.6-4.7 7.1-4.8 16.4-8.1 24.1 6.1-6.5 15.6-13.2 21-20.7 6-9.5 9.1-18 17.2-26z M306.2-18.6c8.1 8 11.2 16.6 17.2 26 5.4 7.6 14.9 14.2 21 20.7-3.3-7.8-3.4-17-8.1-24.1-6.7-13.2-19-17.8-30.1-22.6z M111.9-1.6c-5.6 1.6-10.6 5.5-14.6 11-9.1 10.8-10.7 25-6.9 42 1.3 4.5-0.5 8.7-0.3 13 2.7-6.2 5.7-11.9 11.6-15.9 13.1-8.4 16.7-12.8 20.1-20.8 3.9-9.3 4.7-10.7 4.8-19-3.8 12-15.3 17.1-23.1 25.2-4 4.4-7.2 9.6-9 15l-0.3-0.3c1-4.8 2.9-9.1 4-13.8 3.5-12.7 2.8-27.9 13.7-36.4z M335.6-1.6c10.9 8.5 10.2 23.7 13.7 36.4 1.1 4.7 3 9 4 13.8l-0.3 0.3c-1.8-5.4-5-10.6-9-15-7.8-8.1-19.2-13.2-23-25.2 0.1 8.4 0.8 9.7 4.8 19 3.4 7.9 7 12.4 20.1 20.8 5.9 4 8.9 9.7 11.6 15.9 0.3-4.2-1.6-8.4-0.3-13 3.8-17.1 2.2-31.2-6.9-42-3.9-5.6-8.9-9.4-14.6-11z"/>
+        <path d="M88.6 21.1c-7.6 11-14.3 19.3-13.9 34.1-1 18.2 10.5 34.8 11.7 51.9 1.7-13.1 10.8-22.4 18.3-32.6-1 4.3-2.1 8.6-4.1 12.3-8.2 14.1-16.4 30.8-10.7 48.8-2.3-5.9-2.7-12.7-4.3-19.1-3.1-13.7-14.7-27.8-11.3-47.3-1.8 4.2-2.5 9-3.4 13.6-2 11.9-3 19.3-0.1 30.3 3.5 13.8 18.4 28.9 24.5 41.5 0.3 0.2 0.5 0.5 0.8 0.7-0.9-6.8-1.3-14.2 0.4-20.7 2.6-10.4 9.7-20.6 11.7-31.4 1-8.4-1.3-17.8-2.2-25.9 2.7-3.7 5.2-7.5 7.1-11.6 2.5-6.2 1.4-15.1 2.2-21.9-1 2.9-2.7 5.4-4.7 7.8z M359.3 21.1c8.4 14.4 1.4 32.7 1.8 49.1l1.1 16.8c-0.5-1.9-0.6-3.9-0.9-5.8-2-13.6-12.4-23.2-21.5-32.6-1.9-2.5-3.7-4.9-4.7-7.8 0.7 6.8-0.3 15.6 2.2 21.9 1.9 4.1 4.4 7.9 7.1 11.6-0.9 8.1-3.2 17.5-2.2 25.9 2 10.8 9.1 21 11.7 31.4 1.7 6.5 1.3 13.9 0.4 20.7l0.8-0.7c6-12.6 20.9-27.8 24.5-41.5 2.9-11 1.9-18.3-0.1-30.3-0.9-4.6-1.7-9.4-3.4-13.6 3.4 19.5-8.2 33.6-12 50.6-1.6 6.3-2 13.1-4.3 19.1z"/>
+      </g>
+    </svg>
+    <div class="hero-text">
+      <p class="eyebrow">Page V</p>
+      <h2>Scholarship<br>& Library</h2>
+      <p class="latin-sub">Bibliotheca Traiani</p>
+    </div>
+  </div>
+  <p class="hero-blurb">The Bibliotheca Traiani exists to serve scholars, curators, and qualified students engaged in the close study of the Roman Empire. Founded as the museum's research arm in MCMXXIII, the library now combines a substantial reference collection, a digital squeeze archive of Latin and Greek inscriptions, an annual fellowship programme, and the editorial seat of the journal <em>Acta Antiquaria</em>. Reading-rooms occupy the museum's upper west wing and may be entered by appointment.</p>
+</section>
+
+<!-- ============ DIVIDER ============ -->
+<div class="divider">
+  <div class="rule">
+    <svg class="vine" viewBox="0 0 200 200" aria-hidden="true"><path d="M43 11c-1.8 0-3.6 0.1-5.3 0.3-7 0.7-13.9 2.8-19.2 7.5s-8.2 12-7.7 21c0.5 9 4.3 16.1 10.2 20.3 5.9 4.2 13.3 5.5 21 5.2 15.5-0.7 32.8-8 45.8-18.3 1.4-1.1 2.8-2 4.3-3.1 4.3 6.7 7.6 14.8 9.3 24.1-7.5-5.1-21-10.5-35.7 1.5-22.1 18.2-25 12.9-45.3-2.1-2.9 36.1 15 54.6 44.7 52.5 0 0-14 4.3-3.6 26.4 6 12.9 8.4 20.1 6.6 25.2-12.8 2.3-15.8 7.8-5.6 12.7 45.1 10 65.7-27.5 68.7-66 45.4 0 52.9-31.8 52.5-50.4-8.2 11.1-22.2 11.1-32.9 2.5-9.9-7.9-21.7-16.2-39-1.1-1.7-11.7-5.7-22.1-11.2-30.7 19.4-11.4 38.7-14.5 52.5-10.8 5.5 1.4 9.5 4.1 12.4 7-9 8.4-11.8 26.4 2.3 27 18.9 0.9 21-15.5 13.6-27.1-5.4-8.5-16.4-13.2-25.7-16.6-17.5-4.6-39.7-0.6-61.3 12.5-5.2-5.7-11.1-10.2-17.7-13-7.1-3-17.5-5.7-28.3-6.3z"/></svg>
+  </div>
+  <h3>Holdings & Resources</h3>
+</div>
+
+<!-- ============ HOLDINGS CARDS ============ -->
+<section class="holdings">
+  <div class="grid">
+    <article class="card">
+      <div class="card-inner">
+        <h4>Reference Library</h4>
+        <p class="latin-name">Bibliotheca Manuscripta</p>
+        <p class="figure">18,000</p>
+        <p class="figure-label">Bound Volumes</p>
+        <p>The reference collection comprises approximately eighteen thousand volumes covering Latin and Greek epigraphy, Roman provincial archaeology, numismatics, the early Imperial historians, and the architectural treatises of Vitruvius, Serlio, and Palladio. Holdings are non-circulating; consultation is by appointment in the Sala Traianea.</p>
+        <div class="closer">
+          <div class="closer-rule">
+            <svg viewBox="0 0 200 200" aria-hidden="true"><path d="M43 11c-1.8 0-3.6 0.1-5.3 0.3-7 0.7-13.9 2.8-19.2 7.5s-8.2 12-7.7 21c0.5 9 4.3 16.1 10.2 20.3 5.9 4.2 13.3 5.5 21 5.2 15.5-0.7 32.8-8 45.8-18.3z"/></svg>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-inner">
+        <h4>Squeeze Archive</h4>
+        <p class="latin-name">Tabularium Inscriptionum</p>
+        <p class="figure">3,200</p>
+        <p class="figure-label">Digital Inscriptions</p>
+        <p>The museum's epigraphic squeeze archive holds three thousand two hundred high-resolution digital impressions of Roman inscriptions, drawn principally from the Forum Traiani, Ostia Antica, and the African provinces. Each entry is catalogued by CIL number, find-site, and metric profile; access is granted to credentialed researchers.</p>
+        <div class="closer">
+          <div class="closer-rule">
+            <svg viewBox="0 0 200 200" aria-hidden="true"><path d="M43 11c-1.8 0-3.6 0.1-5.3 0.3-7 0.7-13.9 2.8-19.2 7.5s-8.2 12-7.7 21c0.5 9 4.3 16.1 10.2 20.3z"/></svg>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-inner">
+        <h4>Fellowship Programme</h4>
+        <p class="latin-name">Sodalitas Annua</p>
+        <p class="figure">III</p>
+        <p class="figure-label">Resident Fellows · MMXXIV</p>
+        <p>Three competitive fellowships are awarded each year to scholars of established standing or advanced doctoral candidates. Fellows reside in Rome for terms of four to nine months, hold reading privileges throughout the museum, and contribute a public lecture and a paper to <em>Acta Antiquaria</em>. The next call for applications closes on the Kalends of March.</p>
+        <div class="closer">
+          <div class="closer-rule">
+            <svg viewBox="0 0 200 200" aria-hidden="true"><path d="M43 11c-1.8 0-3.6 0.1-5.3 0.3-7 0.7-13.9 2.8-19.2 7.5z"/></svg>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ DIVIDER ============ -->
+<div class="divider">
+  <div class="rule">
+    <svg class="vine" viewBox="0 0 200 200" aria-hidden="true"><path d="M43 11c-1.8 0-3.6 0.1-5.3 0.3-7 0.7-13.9 2.8-19.2 7.5s-8.2 12-7.7 21c0.5 9 4.3 16.1 10.2 20.3 5.9 4.2 13.3 5.5 21 5.2 15.5-0.7 32.8-8 45.8-18.3 1.4-1.1 2.8-2 4.3-3.1 4.3 6.7 7.6 14.8 9.3 24.1-7.5-5.1-21-10.5-35.7 1.5-22.1 18.2-25 12.9-45.3-2.1-2.9 36.1 15 54.6 44.7 52.5z"/></svg>
+  </div>
+  <h3>Fellows in Residence · MMXXIV</h3>
+</div>
+
+<!-- ============ FELLOWS ============ -->
+<section class="fellows">
+  <div class="fellows-wrap">
+    <div class="fellows-list">
+
+      <article class="fellow">
+        <div class="fellow-inner">
+          <svg class="seal" viewBox="0 0 200 200" aria-hidden="true">
+            <circle cx="100" cy="100" r="78" fill="none" stroke="#c9a23a" stroke-width="2"/>
+            <circle cx="100" cy="100" r="64" fill="none" stroke="#a93226" stroke-width="1"/>
+            <text x="100" y="92" text-anchor="middle" font-family="Cinzel" font-size="22" fill="#a93226" font-weight="600">A·O</text>
+            <text x="100" y="118" text-anchor="middle" font-family="Cinzel" font-size="10" fill="#4d1c5e" letter-spacing="2">MONACI</text>
+          </svg>
+          <h5>Dr. Aurelia Ostendorf</h5>
+          <p class="institution">Ludwig-Maximilians-Universität, München</p>
+          <p class="topic-label">Subject of Research</p>
+          <p class="topic">Trajanic brickstamps from the kilns of the Tiber valley: re-attribution and chronology, A.D. 98–117.</p>
+        </div>
+      </article>
+
+      <article class="fellow">
+        <div class="fellow-inner">
+          <svg class="seal" viewBox="0 0 200 200" aria-hidden="true">
+            <circle cx="100" cy="100" r="78" fill="none" stroke="#c9a23a" stroke-width="2"/>
+            <circle cx="100" cy="100" r="64" fill="none" stroke="#a93226" stroke-width="1"/>
+            <text x="100" y="92" text-anchor="middle" font-family="Cinzel" font-size="22" fill="#a93226" font-weight="600">J·H</text>
+            <text x="100" y="118" text-anchor="middle" font-family="Cinzel" font-size="10" fill="#4d1c5e" letter-spacing="2">ANDREA</text>
+          </svg>
+          <h5>Prof. James Holloway</h5>
+          <p class="institution">University of St Andrews</p>
+          <p class="topic-label">Subject of Research</p>
+          <p class="topic">The rhetoric of imperial coinage: legend, image, and audience from Vespasian to Commodus.</p>
+        </div>
+      </article>
+
+      <article class="fellow">
+        <div class="fellow-inner">
+          <svg class="seal" viewBox="0 0 200 200" aria-hidden="true">
+            <circle cx="100" cy="100" r="78" fill="none" stroke="#c9a23a" stroke-width="2"/>
+            <circle cx="100" cy="100" r="64" fill="none" stroke="#a93226" stroke-width="1"/>
+            <text x="100" y="92" text-anchor="middle" font-family="Cinzel" font-size="22" fill="#a93226" font-weight="600">T·R</text>
+            <text x="100" y="118" text-anchor="middle" font-family="Cinzel" font-size="10" fill="#4d1c5e" letter-spacing="2">BONONIA</text>
+          </svg>
+          <h5>Dott. Tito Ranieri</h5>
+          <p class="institution">Università di Bologna</p>
+          <p class="topic-label">Subject of Research</p>
+          <p class="topic">Severan building inscriptions in Africa Proconsularis: patronage, formulae, and provincial style.</p>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ DIVIDER ============ -->
+<div class="divider">
+  <div class="rule">
+    <svg class="vine" viewBox="0 0 200 200" aria-hidden="true"><path d="M43 11c-1.8 0-3.6 0.1-5.3 0.3-7 0.7-13.9 2.8-19.2 7.5s-8.2 12-7.7 21c0.5 9 4.3 16.1 10.2 20.3 5.9 4.2 13.3 5.5 21 5.2 15.5-0.7 32.8-8 45.8-18.3z"/></svg>
+  </div>
+  <h3>Acta Antiquaria & Correspondence</h3>
+</div>
+
+<!-- ============ JOURNAL & CONTACT ============ -->
+<section class="twocol">
+  <div class="twocol-wrap">
+
+    <div class="panel">
+      <div class="panel-inner">
+        <h3>The Annual Journal</h3>
+        <p class="panel-latin">Acta Antiquaria · Founded MCMXXIII</p>
+        <p><em>Acta Antiquaria</em> is the museum's peer-reviewed annual journal, in continuous publication since 1923. The volume comprises eight to ten studies of original scholarship in Roman archaeology, epigraphy, history, and material culture, with a standing section devoted to short editions of unpublished inscriptions in the museum's keeping.</p>
+        <dl>
+          <dt>Founded</dt><dd>A.D. MCMXXIII (1923)</dd>
+          <dt>Frequency</dt><dd>One volume yearly, issued at the Ides of October</dd>
+          <dt>Languages</dt><dd>Italian, English, French, German, Latin</dd>
+          <dt>Length</dt><dd>Articles 6,000–12,000 words; notes 1,500–3,000</dd>
+        </dl>
+        <p style="margin-top:18px;"><strong>Submission terms.</strong> Manuscripts are received on a rolling basis until the Kalends of February for the volume of that year. Authors should submit a single PDF, double-spaced, conforming to the journal's house style (available on request) and a separate anonymised version for double-blind review. Photographs of inscriptions must be accompanied by squeeze impressions where possible. The editorial committee notifies authors of decisions before the Kalends of June.</p>
+        <ol>
+          <li>Address submissions to the Editorial Secretary, marked <em>Acta Antiquaria · Vol. CII</em>.</li>
+          <li>Include institutional affiliation and a 150-word abstract in English and Italian.</li>
+          <li>Authors of accepted papers receive twenty offprints and one bound volume.</li>
+        </ol>
+        <div class="seal-block">
+          <svg viewBox="0 0 200 200" aria-hidden="true"><path d="M100 20 L120 80 L180 80 L132 116 L150 176 L100 140 L50 176 L68 116 L20 80 L80 80 Z"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-inner">
+        <h3>Head Librarian</h3>
+        <p class="panel-latin">Custos Bibliothecae</p>
+        <p>All matters concerning reader admission, fellowship enquiries, the squeeze archive, and editorial correspondence for <em>Acta Antiquaria</em> are addressed in the first instance to the head librarian.</p>
+        <dl>
+          <dt>Custodian</dt><dd>Dott.ssa Beatrice Conti</dd>
+          <dt>Office</dt><dd>Sala Traianea, second floor, west wing</dd>
+          <dt>Hours</dt><dd>Tuesday – Friday, IX – XIII &amp; XV – XVII</dd>
+          <dt>Telephone</dt><dd>+39 06 4782 1923</dd>
+          <dt>Post</dt><dd>Bibliotheca Traiani<br>Antiquarium Traianum<br>Via dei Fori Imperiali 17<br>00184 Roma · Italia</dd>
+          <dt>Electronic</dt><dd>biblioteca@antiquariumtraianum.it</dd>
+          <dt>Editorial</dt><dd>acta@antiquariumtraianum.it</dd>
+        </dl>
+        <p style="margin-top:18px;"><strong>Reader admission.</strong> First-time readers should write at least fourteen days in advance, enclosing a letter of introduction from a recognised institution and a brief statement of research. A reader's card valid for one calendar year is issued without charge upon presentation of identification at the librarian's desk.</p>
+        <p><strong>Fellowship enquiries.</strong> The annual call is published in November; applications close on the Kalends of March. Awards are announced at the spring equinox.</p>
+        <div class="seal-block">
+          <svg viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="80" fill="none" stroke="#c9a23a" stroke-width="3"/><circle cx="100" cy="100" r="64" fill="none" stroke="#c9a23a" stroke-width="1"/><path d="M60 100 L140 100 M100 60 L100 140" stroke="#c9a23a" stroke-width="2"/></svg>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="meander-top" role="presentation"></div>
+  <div class="frieze">
+    <p class="name">Museum of the Imperial Forum · Antiquarium Traianum</p>
+    <p class="addr">Via dei Fori Imperiali 17 · 00184 Roma · Italia · Tel. +39 06 4782 1900</p>
+    <p class="latin-date">Fundatum Anno Domini MCMXXIII</p>
+    <div class="tailpiece">
+      <svg viewBox="0 0 200 200" aria-hidden="true"><path d="M43 11c-1.8 0-3.6 0.1-5.3 0.3-7 0.7-13.9 2.8-19.2 7.5s-8.2 12-7.7 21c0.5 9 4.3 16.1 10.2 20.3 5.9 4.2 13.3 5.5 21 5.2 15.5-0.7 32.8-8 45.8-18.3 1.4-1.1 2.8-2 4.3-3.1 4.3 6.7 7.6 14.8 9.3 24.1-7.5-5.1-21-10.5-35.7 1.5-22.1 18.2-25 12.9-45.3-2.1-2.9 36.1 15 54.6 44.7 52.5 0 0-14 4.3-3.6 26.4 6 12.9 8.4 20.1 6.6 25.2-12.8 2.3-15.8 7.8-5.6 12.7 45.1 10 65.7-27.5 68.7-66 45.4 0 52.9-31.8 52.5-50.4-8.2 11.1-22.2 11.1-32.9 2.5-9.9-7.9-21.7-16.2-39-1.1-1.7-11.7-5.7-22.1-11.2-30.7 19.4-11.4 38.7-14.5 52.5-10.8 5.5 1.4 9.5 4.1 12.4 7-9 8.4-11.8 26.4 2.3 27 18.9 0.9 21-15.5 13.6-27.1-5.4-8.5-16.4-13.2-25.7-16.6-17.5-4.6-39.7-0.6-61.3 12.5-5.2-5.7-11.1-10.2-17.7-13-7.1-3-17.5-5.7-28.3-6.3z"/></svg>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

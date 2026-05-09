@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>On Joinery — Notes from the Bench</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--text);font-family:var(--font-body),serif;font-size:15px;line-height:1.7}
+  a{color:inherit;text-decoration:none}
+
+  /* ====== NAV ====== */
+  .nav{
+    display:grid;
+    grid-template-columns:64px 1fr;
+    align-items:center;
+    padding:18px 56px 16px 32px;
+    border-bottom:1px solid rgba(12,12,12,.6);
+    background:var(--bg);
+  }
+  .nav .mark{
+    width:48px;height:48px;
+    border:1px solid var(--text);
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--surface);
+  }
+  .nav .mark svg{width:38px;height:38px}
+  .nav ul{
+    list-style:none;
+    display:flex;
+    justify-content:flex-end;
+    gap:0;
+    font-variant:small-caps;
+    letter-spacing:.14em;
+    font-size:12px;
+  }
+  .nav li{padding:0 22px;border-right:1px solid var(--text)}
+  .nav li:last-child{border-right:none;padding-right:0}
+  .nav li:first-child{}
+  .nav a[aria-current="page"]{
+    border-bottom:2px solid var(--secondary);
+    padding-bottom:2px;
+  }
+
+  /* ====== BACKGROUND PATTERN WASH ====== */
+  .asanoha-wash{
+    position:fixed;inset:0;
+    pointer-events:none;
+    background-image:url("svg/asanoha-hempleaf.svg");
+    background-size:360px 360px;
+    background-repeat:repeat;
+    opacity:.12;
+    z-index:0;
+  }
+
+  main{position:relative;z-index:1}
+
+  /* ====== TITLE BLOCK ====== */
+  .title-block{
+    display:grid;
+    grid-template-columns:1fr 580px 1fr;
+    padding:88px 56px 56px;
+  }
+  .title-block .col-left{}
+  .title-block .col-anchor{
+    border-left:1px solid var(--text);
+    padding:18px 0 18px 28px;
+  }
+  .title-block .eyebrow{
+    font-variant:small-caps;
+    letter-spacing:.32em;
+    font-size:11px;
+    color:var(--text);
+    margin-bottom:18px;
+  }
+  .title-block h1{
+    font-family:var(--font-display),serif;
+    font-weight:400;
+    font-size:54px;
+    line-height:1.1;
+    letter-spacing:.02em;
+    color:var(--text);
+  }
+  .title-block h1 .em{color:var(--secondary)}
+  .title-block .lede{
+    margin-top:24px;
+    font-size:14px;
+    max-width:460px;
+    color:#1a1a1a;
+  }
+  .title-block .meta{
+    margin-top:34px;
+    font-size:11px;
+    font-variant:small-caps;
+    letter-spacing:.22em;
+    color:#3a3a3a;
+  }
+
+  /* ====== ESSAY COLUMN ====== */
+  .essay{
+    display:grid;
+    grid-template-columns:1fr 580px 320px 1fr;
+    column-gap:48px;
+    padding:48px 56px 96px;
+    position:relative;
+  }
+  .essay .column{
+    grid-column:2 / 3;
+  }
+  .essay .margin-note{
+    grid-column:3 / 4;
+    align-self:start;
+    padding-top:120px;
+  }
+
+  .entry{
+    padding:36px 0 48px;
+    border-top:1px solid var(--text);
+  }
+  .entry:first-child{border-top:none;padding-top:0}
+  .entry .date{
+    font-variant:small-caps;
+    letter-spacing:.22em;
+    font-size:11px;
+    color:var(--secondary);
+    margin-bottom:8px;
+  }
+  .entry h2{
+    font-family:var(--font-display),serif;
+    font-weight:400;
+    font-size:28px;
+    line-height:1.25;
+    margin-bottom:22px;
+    letter-spacing:.01em;
+  }
+  .entry .dropcap::first-letter{
+    font-family:var(--font-display),serif;
+    font-size:54px;
+    float:left;
+    line-height:.9;
+    padding:6px 10px 0 0;
+    color:var(--secondary);
+  }
+  .entry p{margin-bottom:14px;text-align:justify}
+  .entry .signoff{
+    margin-top:18px;
+    font-variant:small-caps;
+    letter-spacing:.18em;
+    font-size:11px;
+    color:#3a3a3a;
+  }
+
+  /* ====== PULL QUOTE (vertical) ====== */
+  .pullquote{
+    grid-column:3 / 4;
+    grid-row:2 / 3;
+    align-self:start;
+    margin-top:80px;
+    padding:24px 0 24px 28px;
+    border-left:1px solid var(--secondary);
+    writing-mode:vertical-rl;
+    text-orientation:upright;
+    font-family:var(--font-display),serif;
+    font-size:22px;
+    line-height:1.4;
+    letter-spacing:.08em;
+    color:var(--text);
+    height:480px;
+  }
+  .pullquote .attrib{
+    font-family:var(--font-body),serif;
+    font-size:11px;
+    letter-spacing:.18em;
+    color:var(--secondary);
+  }
+
+  /* margin notes (small, beside each entry) */
+  .mnote{
+    font-size:11px;
+    line-height:1.6;
+    color:#3a3a3a;
+    font-variant:small-caps;
+    letter-spacing:.14em;
+    padding-left:16px;
+    border-left:1px solid var(--text);
+    margin-bottom:280px;
+  }
+  .mnote .num{
+    display:block;
+    font-family:var(--font-display),serif;
+    font-size:22px;
+    color:var(--secondary);
+    letter-spacing:0;
+    margin-bottom:8px;
+  }
+
+  /* umebachi seal beside title */
+  .seal-corner{
+    position:absolute;
+    right:96px;top:96px;
+    width:88px;height:88px;
+    opacity:.92;
+  }
+  .seal-corner svg{width:100%;height:100%}
+
+  /* ====== FOOTER ====== */
+  .keyfret{
+    height:48px;
+    background-image:url("svg/sayagata-keyfret.svg");
+    background-size:240px 240px;
+    background-repeat:repeat-x;
+    opacity:.18;
+  }
+  footer{
+    background:var(--bg);
+    padding:56px 56px 36px;
+    display:grid;
+    grid-template-columns:160px 1fr 1fr;
+    gap:48px;
+    align-items:start;
+    border-top:1px solid var(--text);
+  }
+  footer .kiri{width:96px;height:96px}
+  footer .kiri svg{width:100%;height:100%}
+  footer .kiri svg path,footer .kiri svg circle{fill:var(--accent)!important}
+  footer .kiri svg rect{fill:none!important}
+  footer .sig{
+    writing-mode:vertical-rl;
+    font-family:var(--font-display),serif;
+    font-size:14px;
+    letter-spacing:.18em;
+    line-height:1.8;
+    height:200px;
+    margin-top:8px;
+  }
+  footer .lineage{
+    font-family:var(--font-display),serif;
+    font-size:18px;
+    line-height:1.6;
+    letter-spacing:.04em;
+    color:var(--text);
+    max-width:380px;
+    justify-self:end;
+  }
+  footer .lineage .em{color:var(--secondary)}
+  footer .attrib{
+    grid-column:1 / -1;
+    margin-top:36px;
+    font-size:11px;
+    color:#3a3a3a;
+    letter-spacing:.08em;
+    border-top:1px solid rgba(12,12,12,.4);
+    padding-top:14px;
+  }
+</style>
+</head>
+<body>
+
+<div class="asanoha-wash" aria-hidden="true"></div>
+
+<nav class="nav">
+  <a href="page-1.html" class="mark" aria-label="Kuramae Sashimono mark">
+    <svg viewBox="0 0 688 688" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <use href="#tsuru-fallback"/>
+      <g transform="translate(344 344)">
+        <circle r="300" fill="none" stroke="#0c0c0c" stroke-width="6"/>
+        <circle r="220" fill="none" stroke="#0c0c0c" stroke-width="2"/>
+        <path d="M -120 0 Q 0 -140 120 0 Q 0 60 -120 0 Z" fill="#0c0c0c"/>
+        <circle r="14" fill="#e34234"/>
+      </g>
+    </svg>
+  </a>
+  <ul>
+    <li><a href="page-1.html">Studio</a></li>
+    <li><a href="page-2.html">Commissions</a></li>
+    <li><a href="page-3.html" aria-current="page">Notes from the Bench</a></li>
+    <li><a href="page-4.html">Workshop</a></li>
+    <li><a href="page-5.html">Visit</a></li>
+    <li><a href="page-6.html">Correspondence</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <section class="title-block">
+    <div class="col-left"></div>
+    <div class="col-anchor">
+      <div class="eyebrow">Journal · 帳面 · Vol. XII</div>
+      <h1>On Joinery —<br>Notes <span class="em">from</span><br>the Bench.</h1>
+      <p class="lede">
+        Three entries set down in the order they were thought, between the cutting of one
+        dovetail and the rough fitting of the next. The discipline observed here admits
+        no nails, no metal fasteners, no modern adhesive beyond rice paste and nikawa
+        hide-glue warmed over the bench-stove.
+      </p>
+      <div class="meta">Kuramae · 蔵前 · Reiwa 6 · entries by the bench-master Ogata</div>
+    </div>
+
+    <div class="seal-corner" aria-hidden="true">
+      <svg viewBox="0 0 688 688" preserveAspectRatio="xMidYMid meet">
+        <rect width="688" height="688" fill="none"/>
+        <g transform="translate(344 344) scale(0.78) translate(-344 -344)">
+          <circle cx="344" cy="344" r="320" fill="none" stroke="#0c0c0c" stroke-width="3"/>
+        </g>
+        <g transform="translate(0 0) scale(1)">
+          <g style="opacity:.95">
+            <use href=""/>
+          </g>
+        </g>
+        <g>
+          <path transform="translate(60 60) scale(0.83)" d="M226,612 C207,610 189,603 174,592 C168,587 158,577 153,571 C132,543 126,507 137,474 C141,464 146,453 152,445 C157,440 167,429 173,425 C201,403 237,397 270,409 C286,414 299,422 311,435 C323,447 331,459 336,474 C346,504 342,535 326,563 C318,575 304,589 291,597 C271,609 248,614 226,612 Z M439,612 C421,610 402,603 387,592 C381,587 372,577 367,571 C346,543 340,507 351,474 C355,464 360,453 366,445 C371,440 381,429 387,425 C415,403 451,397 484,409 C500,414 513,422 525,435 C537,447 544,459 550,474 C560,504 556,535 540,563 C532,575 518,589 505,597 C485,609 462,614 439,612 Z M333,283 C314,281 295,274 281,263 C275,259 265,249 260,243 C239,215 233,179 244,146 C248,135 253,125 259,116 C264,111 274,100 280,96 C308,75 344,69 377,80 C393,85 406,94 418,106 C430,118 437,130 443,146 C453,175 449,206 433,234 C425,247 411,261 398,268 C378,281 355,286 333,283 Z" fill="#0c0c0c"/>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <section class="essay">
+
+    <div class="column">
+
+      <article class="entry">
+        <div class="date">Ninth month, third day · 九月三日</div>
+        <h2>On the seasoning of paulownia.</h2>
+        <p class="dropcap">Kiri arrives from the Aizu yards in the ninth month, sawn into rough boards a shaku and four sun wide, and we set it standing in the back lean-to where the river air comes through the slats. It must not be hurried. A board pulled inside before the equinox will cup within the first winter; one left out past the rains of the sixth month following will check at the ends and lose its singing weight. The merchant Hayashi-san of Sumida ward sends six boards each autumn at thirty-eight thousand yen the bundle, and of those six perhaps four become drawer-fronts for tansu and two are quietly returned to firewood.</p>
+        <p>The test is by ear and by palm. A seasoned kiri board, struck once with the knuckle, answers in a dry low note — not the hollow tap of green wood, not the brittle click of timber dried too fierce in a kiln. The grain, run under the thumb, should feel like fine paper laid over a still pond. When such a board is found, it is marked in sumi on the end-grain with the year-character and set aside until the commission calls for it.</p>
+        <p>The old apprentices were taught: kiri is the wood that breathes for the kimono. Build the chest tight and the silk dies inside. Build it true and the chest itself does the breathing — opening a hair in the rains, closing again in the dry of winter, keeping the inside at one quiet humour the year through.</p>
+        <div class="signoff">— set down at the eighth hour, by lamplight</div>
+      </article>
+
+      <article class="entry">
+        <div class="date">Eleventh month, eleventh day · 十一月十一日</div>
+        <h2>On the geometry of the shippō-tsugi joint.</h2>
+        <p class="dropcap">The shippō-tsugi — the seven-treasures joint — is not difficult to cut, only difficult to draw. Once the lines are set down faithfully on the end-grain, the saw and the chisel will follow. I use a marking-gauge of boxwood, the blade ground to a flat lance, and lay out the four interlocking circles which the joint takes its name from. The tangent points must fall at exactly one-third and two-thirds of the board's thickness; a hair off and the male and female faces will refuse one another, or worse, will close with a gap one cannot see but the wood will know.</p>
+        <p>This joint goes into the carcase corner of a tea-utensil box (chabako) where no fastener may show and where the lid, sliding, must not bind on the warmth of a summer afternoon. I cut three this morning for the commission of Mori-sensei of Yanaka, due at the new year. The first I rejected — the inner circle ran shallow by half a bu. The second held. The third I cut to keep the second honest.</p>
+        <p>One does not glue this joint. Rice-paste at the shoulders, nothing in the pins. The wood, swelling against itself across forty winters, makes the bond. Nails would shame it.</p>
+        <div class="signoff">— bench-master Ogata, evening</div>
+      </article>
+
+      <article class="entry">
+        <div class="date">Second month, nineteenth day · 二月十九日</div>
+        <h2>On sharpening the kanna in winter water.</h2>
+        <p class="dropcap">The water in the trough behind the bench freezes at the rim by the second month, and one must break the skin of ice with the back of the hand before laying the stone. This is right and proper. A kanna blade sharpened in summer water comes off the stone too easily; the steel has not been made to argue for its edge. In the cold of February, the stone bites slow, the slurry runs thick, and the angle one finds is the angle one has earned.</p>
+        <p>I keep three stones: an Amakusa for the rough, an Aoto from Kameoka for the middle, and a natural Nakayama awasedo bought at thirty years' apprentice's wages, on which the final edge is laid. The Nakayama is the colour of rained-on tile and asks for ten minutes at least. The blade — a Chiyozuru Sadahide forged in 1962 — must come off it able to take a shaving of three hundredths of a millimetre off Yoshino cypress without tearing the spring grain.</p>
+        <p>One tests the edge against the back of the thumbnail, never against the pad. If the steel bites, work begins. If it slides, the stones are gone back to. The kanna does not forgive a hurried morning, and the winter does not forgive a kanna unsharpened. I have learned this twice; once is not enough.</p>
+        <div class="signoff">— before the morning shutters were opened</div>
+      </article>
+
+    </div>
+
+    <aside class="pullquote">
+      Build it true — and the chest itself does the breathing.
+      <span class="attrib">— Ogata, ninth month</span>
+    </aside>
+
+  </section>
+
+</main>
+
+<div class="keyfret" aria-hidden="true"></div>
+
+<footer>
+  <div class="kiri" aria-hidden="true">
+    <svg viewBox="0 0 345 326" preserveAspectRatio="xMidYMid meet">
+      <g fill="#c9a23a" stroke="none">
+        <circle cx="172.6" cy="155" r="9.9"/>
+        <path d="M172,166 C172,170 172,174 173,177 C190,186 206,197 217,212 C228,229 236,249 234,269 C232,262 232,254 230,247 C223,218 201,194 174,181 C174,184 174,188 174,192 C188,200 201,211 210,225 C221,245 225,270 216,292 C218,280 218,267 217,254 C213,229 196,208 174,196 C174,201 174,206 174,211 C185,218 196,228 201,240 C210,259 210,283 200,302 C203,285 207,269 202,252 C198,237 188,223 174,216 C174,220 173,225 176,229 C193,250 197,282 185,306 C186,298 189,289 189,280 C190,263 185,245 174,232 C174,254 174,276 174,298 C174,301 173,304 172,307 C172,307 172,307 172,307 C171,304 170,301 170,298 C170,276 171,254 170,232 C159,245 155,263 156,280 C156,289 158,298 159,306 C147,282 151,250 169,229 C172,225 170,220 171,216 C157,223 146,237 142,252 C137,269 141,285 144,302 C135,283 135,259 143,240 C149,228 159,218 170,211 C170,206 170,201 170,196 C148,208 131,229 127,254 C126,267 127,280 128,292 C120,270 123,245 135,225 C143,211 156,200 170,192 C170,188 170,184 170,181 C143,194 121,218 114,247 C112,254 112,262 111,269 C108,249 116,229 127,212 C138,197 154,185 170,177 C170,173 170,169 170,166 C125,181 94,229 96,275 C97,282 102,286 107,289 C110,291 110,295 112,298 C117,311 134,318 147,314 C154,320 162,326 172,326 C182,326 190,320 197,314 C211,318 227,311 233,298 C234,295 234,291 237,289 C242,286 247,282 248,275 C250,229 219,181 175,166 Z"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="sig">
+    Kuramae Sashimono · Taishō-dōri 3-7-2 · Taitō-ku · Tōkyō
+  </div>
+
+  <div class="lineage">
+    Founded <span class="em">Bunkyū 2</span> (1862) ·<br>
+    Rebuilt <span class="em">Shōwa 24</span> (1949) ·<br>
+    Continued.
+  </div>
+
+  <div class="attrib">
+    Kamon renderings (tsuru-no-maru, kiri, umebachi) sourced from Wikimedia Commons under CC-BY-SA. Set in Yuji Syuku and Shippori Mincho. Page composed at the bench, Reiwa 6.
+  </div>
+</footer>
+
+</body>
+</html>

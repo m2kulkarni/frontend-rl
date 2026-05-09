@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>The Nishijin Loom — Notes from a Kyoto Weaver | Ukiyo Gazette</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), serif;
+    margin: 0;
+    line-height: 1.8;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* faint asanoha field on body, very low opacity */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("svg/asanoha-hempleaf.svg");
+    background-size: 360px 360px;
+    opacity: 0.05;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 80px;
+  }
+
+  /* ---------- NAV ---------- */
+  .masthead {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    padding: 28px 0 18px;
+    border-bottom: 1px solid var(--ornament);
+  }
+  .masthead .seal {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .seal-mark {
+    width: 36px; height: 36px;
+    display: inline-block;
+    background: var(--ornament);
+    -webkit-mask: url("svg/umebachi-plum-mon.svg") center/contain no-repeat;
+            mask: url("svg/umebachi-plum-mon.svg") center/contain no-repeat;
+  }
+  .masthead .gazette-name {
+    font-family: var(--font-display), serif;
+    font-size: 0.95rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+  nav.primary {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0;
+    font-family: var(--font-body), serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+  nav.primary a {
+    color: var(--text);
+    text-decoration: none;
+    padding: 4px 18px;
+    border-right: 1px solid var(--ornament);
+    position: relative;
+  }
+  nav.primary a:last-child { border-right: none; padding-right: 0; }
+  nav.primary a:first-child { padding-left: 0; }
+  nav.primary a[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    left: 18px; right: 18px;
+    bottom: -2px;
+    height: 1.5px;
+    background: var(--secondary);
+  }
+  nav.primary a:first-child[aria-current="page"]::after { left: 0; }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 80px;
+    padding: 80px 0 60px;
+    position: relative;
+  }
+  .hero .kicker {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 22px;
+  }
+  .hero h1 {
+    font-family: var(--font-display), serif;
+    font-size: 4.4rem;
+    line-height: 1.05;
+    margin: 0 0 32px;
+    font-weight: 400;
+    letter-spacing: -0.005em;
+  }
+  .hero h1 .jp {
+    display: block;
+    font-size: 1.6rem;
+    letter-spacing: 0.3em;
+    color: var(--ornament);
+    margin-top: 18px;
+    opacity: 0.7;
+  }
+  .hero .dek {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--text);
+    max-width: 52ch;
+    line-height: 1.7;
+  }
+  .hero .byline {
+    margin-top: 36px;
+    font-style: italic;
+    font-size: 0.9rem;
+    letter-spacing: 0.04em;
+  }
+  .hero .byline strong { font-style: normal; font-weight: 400; letter-spacing: 0.16em; text-transform: uppercase; color: var(--secondary); }
+
+  .hero-frame {
+    position: relative;
+    align-self: end;
+    aspect-ratio: 1 / 1.05;
+    overflow: hidden;
+    background: var(--surface);
+  }
+  .hero-frame svg {
+    width: 100%; height: 100%;
+    display: block;
+    opacity: 0.85;
+  }
+  .hero-frame::after {
+    content: "圖一";
+    position: absolute;
+    bottom: 14px; right: 18px;
+    font-family: var(--font-display), serif;
+    color: var(--secondary);
+    font-size: 0.95rem;
+    letter-spacing: 0.2em;
+    background: var(--surface);
+    padding: 2px 8px;
+  }
+
+  /* ---------- DIVIDER ---------- */
+  .divider {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 24px;
+    padding: 24px 0 40px;
+  }
+  .divider hr {
+    border: none;
+    border-top: 1px solid var(--ornament);
+    margin: 0;
+  }
+  .divider .glyph {
+    font-family: var(--font-display), serif;
+    font-size: 1rem;
+    letter-spacing: 0.4em;
+    color: var(--ornament);
+  }
+
+  /* ---------- INTERVIEW ---------- */
+  .interview {
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    gap: 80px;
+    padding-top: 32px;
+  }
+
+  .qa-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+  }
+
+  .qa {
+    position: relative;
+    background: var(--surface);
+    padding: 3rem 3.2rem 3rem 3.2rem;
+  }
+  .qa .kamon {
+    position: absolute;
+    top: 22px; right: 22px;
+    width: 32px; height: 32px;
+    background: var(--ornament);
+    -webkit-mask: url("svg/umebachi-plum-mon.svg") center/contain no-repeat;
+            mask: url("svg/umebachi-plum-mon.svg") center/contain no-repeat;
+    opacity: 0.85;
+  }
+  .qa .q-label {
+    font-family: var(--font-display), serif;
+    font-size: 1.1rem;
+    color: var(--secondary);
+    letter-spacing: 0.18em;
+    margin-bottom: 8px;
+  }
+  .qa .question {
+    font-family: var(--font-display), serif;
+    font-size: 1.5rem;
+    line-height: 1.4;
+    margin: 0 0 24px;
+    max-width: 32ch;
+    color: var(--text);
+  }
+  .qa .answer {
+    max-width: 58ch;
+    font-size: 1.02rem;
+  }
+  .qa .answer p { margin: 0 0 1.1em; }
+  .qa .answer p:first-child::first-letter {
+    font-family: var(--font-display), serif;
+    font-size: 3.2rem;
+    float: left;
+    line-height: 0.9;
+    padding: 6px 10px 0 0;
+    color: var(--secondary);
+  }
+  .qa .answer-close {
+    display: inline-block;
+    width: 18px; height: 18px;
+    margin-left: 6px;
+    vertical-align: -3px;
+    background: var(--ornament);
+    -webkit-mask: url("svg/umebachi-plum-mon.svg") center/contain no-repeat;
+            mask: url("svg/umebachi-plum-mon.svg") center/contain no-repeat;
+    opacity: 0.85;
+  }
+
+  /* ---------- ASIDE ---------- */
+  aside.column {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    padding-top: 8px;
+  }
+
+  .plate {
+    background: var(--surface);
+    padding: 2.6rem 2.4rem;
+    position: relative;
+  }
+  .plate .plate-label {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 14px;
+  }
+  .plate h3 {
+    font-family: var(--font-display), serif;
+    font-size: 1.45rem;
+    margin: 0 0 18px;
+    font-weight: 400;
+  }
+  .plate .descriptive {
+    font-style: italic;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--text);
+    border-left: 1.5px solid var(--ornament);
+    padding-left: 16px;
+    margin: 0;
+  }
+
+  .sidebar-dye {
+    background: var(--surface);
+    padding: 2.6rem 2.4rem;
+    position: relative;
+  }
+  .sidebar-dye .kamon-corner {
+    position: absolute;
+    top: 18px; right: 18px;
+    width: 28px; height: 28px;
+    background: var(--ornament);
+    -webkit-mask: url("svg/umebachi-plum-mon.svg") center/contain no-repeat;
+            mask: url("svg/umebachi-plum-mon.svg") center/contain no-repeat;
+    opacity: 0.8;
+  }
+  .sidebar-dye .eyebrow {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 12px;
+  }
+  .sidebar-dye h3 {
+    font-family: var(--font-display), serif;
+    font-size: 1.5rem;
+    margin: 0 0 22px;
+    font-weight: 400;
+    line-height: 1.3;
+  }
+  .dye-list {
+    list-style: none;
+    padding: 0; margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .dye-list li {
+    display: grid;
+    grid-template-columns: 18px 1fr;
+    gap: 14px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+  .dye-list .swatch {
+    width: 12px; height: 12px;
+    margin-top: 8px;
+    border: 1px solid var(--ornament);
+  }
+  .dye-list .ai      { background: #2a4a6b; }
+  .dye-list .beni    { background: #c4524a; }
+  .dye-list .kuchinashi { background: #c9a23a; }
+  .dye-list strong {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    display: block;
+    margin-bottom: 2px;
+  }
+  .dye-list em {
+    font-size: 0.78rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    font-style: normal;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  /* gold leaf — used once */
+  .gold-leaf {
+    position: relative;
+    background: var(--surface);
+    padding: 2.6rem 2.4rem;
+    overflow: hidden;
+  }
+  .gold-leaf::before {
+    content: "";
+    position: absolute;
+    top: -20px; right: -30px;
+    width: 140px; height: 140px;
+    background: var(--accent);
+    opacity: 0.85;
+    transform: rotate(12deg);
+    clip-path: polygon(8% 22%, 92% 4%, 88% 90%, 14% 96%);
+  }
+  .gold-leaf > * { position: relative; z-index: 1; }
+  .gold-leaf .pull {
+    font-family: var(--font-display), serif;
+    font-size: 1.5rem;
+    line-height: 1.45;
+    margin: 0;
+    max-width: 22ch;
+    color: var(--text);
+  }
+  .gold-leaf .attrib {
+    margin-top: 18px;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--text);
+    opacity: 0.85;
+  }
+
+  /* ---------- WAGARA STRIP ---------- */
+  .wagara-strip {
+    margin: 90px 0 40px;
+    padding: 48px 0 40px;
+    border-top: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+  }
+  .wagara-strip .head {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 60px;
+    margin-bottom: 36px;
+  }
+  .wagara-strip h2 {
+    font-family: var(--font-display), serif;
+    font-size: 2.2rem;
+    margin: 0;
+    font-weight: 400;
+    line-height: 1.2;
+  }
+  .wagara-strip .head p {
+    font-style: italic;
+    margin: 0;
+    max-width: 56ch;
+    line-height: 1.7;
+  }
+  .wagara-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 28px;
+  }
+  .wagara-grid .cell {
+    border-top: 1px solid var(--ornament);
+    padding-top: 18px;
+  }
+  .wagara-grid .num {
+    font-family: var(--font-display), serif;
+    color: var(--secondary);
+    font-size: 0.9rem;
+    letter-spacing: 0.2em;
+  }
+  .wagara-grid .name {
+    font-family: var(--font-display), serif;
+    font-size: 1.25rem;
+    margin: 6px 0 4px;
+  }
+  .wagara-grid .kanji {
+    font-family: var(--font-display), serif;
+    font-size: 0.85rem;
+    color: var(--ornament);
+    opacity: 0.7;
+    letter-spacing: 0.2em;
+    margin-bottom: 10px;
+  }
+  .wagara-grid .desc {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    font-style: italic;
+  }
+
+  /* ---------- WORKSHOP NOTE ---------- */
+  .workshop-note {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+    padding: 60px 0 80px;
+  }
+  .workshop-note .label {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 0.82rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--secondary);
+  }
+  .workshop-note .label::before {
+    content: "";
+    display: block;
+    width: 36px;
+    border-top: 1.5px solid var(--secondary);
+    margin-bottom: 14px;
+  }
+  .workshop-note .body {
+    max-width: 62ch;
+    font-size: 1rem;
+  }
+  .workshop-note .body p { margin: 0 0 1em; }
+  .workshop-note .body .meta {
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--text);
+    opacity: 0.85;
+    margin-top: 18px;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer.colophon {
+    margin-top: 40px;
+    border-top: 1px solid var(--ornament);
+    padding: 50px 0 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+  }
+  .crane {
+    width: 56px; height: 56px;
+    background: var(--ornament);
+    -webkit-mask: url("svg/tsuru-crane-mon.svg") center/contain no-repeat;
+            mask: url("svg/tsuru-crane-mon.svg") center/contain no-repeat;
+    margin-bottom: 18px;
+  }
+  .colophon-text {
+    font-style: italic;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    max-width: 36ch;
+  }
+  .colophon-text strong {
+    font-family: var(--font-display), serif;
+    font-style: normal;
+    display: block;
+    font-size: 1.05rem;
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+  }
+  .colophon-right {
+    text-align: right;
+    font-size: 0.85rem;
+    line-height: 1.7;
+  }
+  .colophon-right .issue {
+    font-family: var(--font-display), serif;
+    font-size: 1.05rem;
+    color: var(--secondary);
+    letter-spacing: 0.18em;
+    margin-bottom: 14px;
+  }
+  .colophon-right .addr {
+    font-style: italic;
+    margin-bottom: 14px;
+  }
+  .colophon-right .attrib {
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    opacity: 0.75;
+    max-width: 38ch;
+    margin-left: auto;
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <header class="masthead">
+    <div class="seal">
+      <span class="seal-mark" aria-hidden="true"></span>
+      <span class="gazette-name">Ukiyo Gazette &middot; 浮世瓦版</span>
+    </div>
+    <nav class="primary" aria-label="Primary">
+      <a href="page-1.html">Front Page</a>
+      <a href="page-2.html">Hokusai</a>
+      <a href="page-3.html">Kisokaidō</a>
+      <a href="page-4.html" aria-current="page">Nishijin</a>
+      <a href="page-5.html">Wagara</a>
+      <a href="page-6.html">Subscribe</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div>
+      <div class="kicker">Interview &mdash; Volume IV, no. 2</div>
+      <h1>
+        The Nishijin Loom
+        <span class="jp">西陣機 ・ 京都織匠覚書</span>
+      </h1>
+      <p class="dek">
+        Hosokawa Kiku, fourth-generation weaver of the Nishijin district, on patience,
+        provincial dye, and the five canonical patterns that pass under her shuttle. A
+        morning conversation, conducted on Imadegawa-dōri, in a workshop that has not
+        moved since 1887.
+      </p>
+      <p class="byline">
+        <strong>Interview</strong> &nbsp; by Tachibana Sōsuke &nbsp;&middot;&nbsp;
+        <em>Photographs withheld at the weaver&rsquo;s request; replaced herein by descriptive plates.</em>
+      </p>
+    </div>
+    <figure class="hero-frame" aria-label="Seigaiha pattern field">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 700" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <g id="hC1">
+            <path d="M 1,210 V 100 A 98,98 0 0 1 100,1 98,98 0 0 1 199,100 V 210" fill="none" stroke="#0c0c0c" stroke-width="1.4"/>
+            <path d="M 175,210 V 100 A 75,75 0 0 0 100,25 75,75 0 0 0 25,100 V 210" fill="none" stroke="#0c0c0c" stroke-width="0.8"/>
+          </g>
+          <g id="hC4">
+            <use href="#hC1"/>
+            <use href="#hC1" transform="translate(200,0)"/>
+            <use href="#hC1" transform="translate(400,0)"/>
+            <use href="#hC1" transform="translate(600,0)"/>
+          </g>
+        </defs>
+        <use href="#hC4" transform="translate(-100,100)"/>
+        <use href="#hC4" transform="translate(0,200)"/>
+        <use href="#hC4" transform="translate(-100,300)"/>
+        <use href="#hC4" transform="translate(0,400)"/>
+        <use href="#hC4" transform="translate(-100,500)"/>
+        <use href="#hC4" transform="translate(0,600)"/>
+      </svg>
+    </figure>
+  </section>
+
+  <div class="divider" role="separator">
+    <hr>
+    <span class="glyph">三 ・ 問 ・ 三</span>
+    <hr>
+  </div>
+
+  <section class="interview">
+
+    <div class="qa-stack">
+
+      <article class="qa">
+        <span class="kamon" aria-hidden="true"></span>
+        <div class="q-label">問 &middot; Q.I</div>
+        <h2 class="question">Your loom is a Jacquard from 1893 — older than this neighbourhood&rsquo;s electricity. Why keep it?</h2>
+        <div class="answer">
+          <p>
+            Because it remembers. The mechanism was assembled here in Nishijin in the
+            twenty-sixth year of Meiji, after my great-grandfather returned from Lyon
+            with three crates of punched cards and a head full of new ideas. Newer
+            looms can do what this one does — faster, with fewer broken threads — but
+            they do not produce the same fabric. There is a hesitation in the shed of
+            an old loom, a half-second of slack as the harness settles, and that
+            hesitation is what makes the silk hold light the way it does.
+          </p>
+          <p>
+            Four generations have set it up: my great-grandfather Hosokawa Tsunejirō,
+            my grandfather Saburō, my father Akira, and now myself. We have replaced
+            the heddles, the reed, the breast-beam, almost everything that wears. The
+            frame is still oak from Tanba. I would no more discard it than a calligrapher
+            would discard her father&rsquo;s brush.<span class="answer-close" aria-hidden="true"></span>
+          </p>
+        </div>
+      </article>
+
+      <article class="qa">
+        <span class="kamon" aria-hidden="true"></span>
+        <div class="q-label">問 &middot; Q.II</div>
+        <h2 class="question">Walk me through setting up <em>seigaiha</em> on the Jacquard.</h2>
+        <div class="answer">
+          <p>
+            Seigaiha — the blue-ocean wave — is the simplest of the five and therefore
+            the most exposed. Any clumsiness shows. The pattern repeats on a unit of
+            two-hundred warp ends and one-hundred-forty wefts; we punch four-hundred
+            and eighty cards for one full vertical course. I prepare them on a Friday
+            and I prefer to be alone in the workshop, because miscounting a single
+            hole shifts every wave thereafter by half a hand.
+          </p>
+          <p>
+            The warp is silk from Tango, dressed with a thin rice-paste sizing. For a
+            traditional kimono fabric we run twenty-eight-hundred warp ends across
+            thirty-eight centimetres — fine, but not the finest. The shuttle carries
+            indigo-dyed weft on the figured rows and a slightly darker indigo on the
+            ground. The trick of seigaiha is that it must look like water at rest:
+            you should not see the weaver&rsquo;s hand at all.<span class="answer-close" aria-hidden="true"></span>
+          </p>
+        </div>
+      </article>
+
+      <article class="qa">
+        <span class="kamon" aria-hidden="true"></span>
+        <div class="q-label">問 &middot; Q.III</div>
+        <h2 class="question">And <em>asanoha</em> — the hemp-leaf — is famously a child&rsquo;s pattern. Does that change how you weave it?</h2>
+        <div class="answer">
+          <p>
+            It changes the colour, mostly. For an infant&rsquo;s under-kimono I will
+            weave asanoha in safflower red on a cream ground; the red is from
+            Yamagata, three days&rsquo; soak, and it is paid for by the gram, not by
+            the bolt. For an adult&rsquo;s obi I take the same pattern down to indigo
+            on indigo, and the eye reads it as almost geometrical, almost severe. The
+            point of asanoha was always protection — its six-fold symmetry was
+            thought to ward off illness — and a baby in safflower asanoha is, in the
+            old reading, hedged by six small prayers per square inch.
+          </p>
+          <p>
+            The setup is unforgiving. The repeat is small, only forty-eight wefts,
+            and a single broken warp end will bisect a leaflet so cleanly that you
+            cannot mend it; you must cut back and rerun the course. I lost an
+            afternoon to it last Tuesday.<span class="answer-close" aria-hidden="true"></span>
+          </p>
+        </div>
+      </article>
+
+      <article class="qa">
+        <span class="kamon" aria-hidden="true"></span>
+        <div class="q-label">問 &middot; Q.IV</div>
+        <h2 class="question"><em>Shippō</em>, <em>sayagata</em>, <em>kikkō</em> — the three remaining canonicals. Which is the hardest?</h2>
+        <div class="answer">
+          <p>
+            Sayagata, without question. The interlocked key-fret is mathematically
+            simple but optically merciless: any drift in the beat of the weft, any
+            slackness in the warp tension, will produce a visible curve in what is
+            supposed to be a straight line. I do not weave sayagata in summer. The
+            humidity in Kyoto from the seventh through the ninth month makes the
+            silk too lively; the figure goes soft. We commission sayagata bolts in
+            late autumn or in the deep cold of the second month.
+          </p>
+          <p>
+            Shippō — the seven-treasure circles — is the kindest pattern. Forgiving
+            of error, generous to the eye. Kikkō, the tortoise-shell, sits between
+            the two: hexagonal, demanding of the harness, but the symmetry hides a
+            multitude of small sins.<span class="answer-close" aria-hidden="true"></span>
+          </p>
+        </div>
+      </article>
+
+      <article class="qa">
+        <span class="kamon" aria-hidden="true"></span>
+        <div class="q-label">問 &middot; Q.V</div>
+        <h2 class="question">A bolt of figured silk from your workshop sells, I am told, for between three-hundred-and-sixty-thousand and eight-hundred-thousand yen. How do you decide?</h2>
+        <div class="answer">
+          <p>
+            By the dye, mostly. A bolt in Awa indigo with safflower accents and a
+            small amount of gardenia yellow — three plant dyes, three soakings — runs
+            to seven-hundred-twenty-thousand. The same pattern in chemical dye, which
+            we still produce for theatrical clients and for export, is offered at
+            three-hundred-and-eighty. The weaving labour is identical; the difference
+            is the time and the provenance of the colour.
+          </p>
+          <p>
+            A bolt is twelve-and-a-half metres. At our pace — between forty and
+            sixty centimetres a day, depending on the figure — that is roughly a
+            month at the loom. We complete twenty-two bolts a year. Last year we
+            completed nineteen, because of a punched-card error in March that cost
+            us a whole bolt of sayagata.<span class="answer-close" aria-hidden="true"></span>
+          </p>
+        </div>
+      </article>
+
+    </div>
+
+    <aside class="column">
+
+      <section class="plate" aria-label="Descriptive plate I">
+        <div class="plate-label">Plate I &middot; in lieu of photograph</div>
+        <h3>The Workshop, 7:40 a.m.</h3>
+        <p class="descriptive">
+          A long, low room facing north onto Imadegawa-dōri. Two looms, one in use,
+          one shrouded under unbleached cotton. The morning enters through paper
+          shōji at a low angle, falling first on a tray of bobbins wound in three
+          shades of indigo, then on the weaver&rsquo;s hands. Tea cooling on a
+          lacquer tray. The smell of rice-paste sizing, faint, clean.
+        </p>
+      </section>
+
+      <section class="sidebar-dye" aria-label="Sidebar: Dye Sources">
+        <span class="kamon-corner" aria-hidden="true"></span>
+        <div class="eyebrow">Sidebar &middot; 染料覚</div>
+        <h3>The Three Provincial Dyes</h3>
+        <ul class="dye-list">
+          <li>
+            <span class="swatch ai" aria-hidden="true"></span>
+            <div>
+              <em>Ai &middot; Indigo</em>
+              <strong>Awa Province</strong>
+              Fermented in the Yoshino river basin since the Muromachi period. Our
+              house buys from the Furushō workshop in Tokushima, eight kilograms of
+              <em>sukumo</em> per quarter. Six successive baths bring silk to its
+              full midnight; three baths, the colour of a clear evening sky.
+            </div>
+          </li>
+          <li>
+            <span class="swatch beni" aria-hidden="true"></span>
+            <div>
+              <em>Beni &middot; Safflower</em>
+              <strong>Yamagata, Mogami River</strong>
+              Picked at dawn in the sixth month, when the dew is still on the
+              petal. The yellow is washed out with cold water; what remains is the
+              red. Twelve-thousand yen per ten grams in the spring market of 2024;
+              enough, with care, for a quarter-bolt of accent.
+            </div>
+          </li>
+          <li>
+            <span class="swatch kuchinashi" aria-hidden="true"></span>
+            <div>
+              <em>Kuchinashi &middot; Gardenia</em>
+              <strong>Kii Peninsula</strong>
+              The dried fruit, soaked overnight, gives a clear and durable yellow
+              that does not bleed in the rinse. We use it for the figure in
+              shippō and, sparingly, for the sun-warmed cream of an infant&rsquo;s
+              asanoha.
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section class="gold-leaf" aria-label="Pull quote">
+        <p class="pull">
+          &ldquo;The loom hesitates &mdash; that half-second is what makes the silk hold light.&rdquo;
+        </p>
+        <p class="attrib">— Hosokawa Kiku, Imadegawa-dōri, Kyōto</p>
+      </section>
+
+      <section class="plate" aria-label="Descriptive plate II">
+        <div class="plate-label">Plate II &middot; in lieu of photograph</div>
+        <h3>A Bolt in Progress</h3>
+        <p class="descriptive">
+          Sayagata, second month. Indigo on cream. The figure has advanced
+          forty-two centimetres since the previous Friday. A wooden ruler, marked
+          in <em>sun</em>, lies across the breast-beam. To the right, a tray of
+          punched cards in the order they will be played; to the left, the
+          discarded cards of the previous course, stacked face-down out of habit.
+        </p>
+      </section>
+
+    </aside>
+
+  </section>
+
+  <section class="wagara-strip" aria-label="Five canonical wagara">
+    <div class="head">
+      <h2>The Five Canonical Wagara</h2>
+      <p>
+        Hosokawa-san returns to the same five figures throughout the conversation.
+        For the reader&rsquo;s convenience, a brief schedule follows; a fuller
+        treatment is given in our companion <a href="page-5.html" style="color:var(--secondary);">Pattern Library</a>.
+      </p>
+    </div>
+    <div class="wagara-grid">
+      <div class="cell">
+        <div class="num">一</div>
+        <div class="name">Seigaiha</div>
+        <div class="kanji">青海波</div>
+        <div class="desc">Concentric arcs evoking still water. The simplest unit, the most exposed.</div>
+      </div>
+      <div class="cell">
+        <div class="num">二</div>
+        <div class="name">Asanoha</div>
+        <div class="kanji">麻の葉</div>
+        <div class="desc">Six-fold hemp-leaf. Worn by infants for protection; by adults for restraint.</div>
+      </div>
+      <div class="cell">
+        <div class="num">三</div>
+        <div class="name">Shippō</div>
+        <div class="kanji">七宝</div>
+        <div class="desc">Interlocking circles, the seven Buddhist treasures. The most forgiving figure.</div>
+      </div>
+      <div class="cell">
+        <div class="num">四</div>
+        <div class="name">Sayagata</div>
+        <div class="kanji">紗綾形</div>
+        <div class="desc">Linked key-fret. Geometric, demanding; not woven in summer humidity.</div>
+      </div>
+      <div class="cell">
+        <div class="num">五</div>
+        <div class="name">Kikkō</div>
+        <div class="kanji">亀甲</div>
+        <div class="desc">Tortoise-shell hexagon. A symbol of longevity, kind to the harness.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="workshop-note">
+    <div class="label">Editor&rsquo;s Note</div>
+    <div class="body">
+      <p>
+        The Hosokawa workshop occupies the second and third buildings on the south
+        side of Imadegawa-dōri, west of the Horikawa intersection. Visits are by
+        prior arrangement only; the loom in use is not a demonstration piece.
+        Hosokawa Kiku-san accepts apprentices irregularly, and never more than one
+        at a time. A small showroom on the ground floor is open to the public on
+        the second and fourth Saturday of each month, from ten until three.
+      </p>
+      <p>
+        Conducted in the workshop on the morning of the seventh day of the third
+        month, 2024. Translated from the Kyōto dialect by the interviewer.
+        The umebachi seal that closes each answer is the household mark of the
+        Hosokawa line.
+      </p>
+      <p class="meta">
+        Forthcoming in our autumn issue: a pattern library of the same five wagara,
+        rendered as printable cards. See <a href="page-5.html" style="color:var(--secondary);">page&nbsp;5</a> for a preview, or
+        <a href="page-6.html" style="color:var(--secondary);">page&nbsp;6</a> to subscribe.
+      </p>
+    </div>
+  </section>
+
+  <footer class="colophon">
+    <div>
+      <div class="crane" aria-hidden="true"></div>
+      <p class="colophon-text">
+        <strong>『浮世瓦版』 Ukiyo Gazette</strong>
+        Established Bunsei 6 (1823). Reissued 2024 from a small editorial room
+        in Nakagyō-ku, Kyōto. A quarterly broadsheet on woodblock prints,
+        machiya life, and the traveling roads of late-Edo Japan.
+      </p>
+    </div>
+    <div class="colophon-right">
+      <div class="issue">Volume IV &middot; Number 2 &middot; Spring 2024</div>
+      <div class="addr">
+        Editorial Office<br>
+        Sanjō-agaru, Tominokōji-dōri<br>
+        Nakagyō-ku, Kyōto 604-8091
+      </div>
+      <p class="attrib">
+        Kamon &amp; wagara SVG sources adapted under CC-BY-SA from
+        Wikimedia Commons; attribution preserved in the source.
+      </p>
+    </div>
+  </footer>
+
+</div>
+
+</body>
+</html>

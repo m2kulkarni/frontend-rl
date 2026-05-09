@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Faculties & Programs — Madrasa-yi Naqsh-i Jahān</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  /* ---------- Base ---------- */
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    font-size: 18px;
+    line-height: 1.65;
+    margin: 0;
+    padding: 0;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+    letter-spacing: 0.08em;
+    margin: 0;
+  }
+  a { color: var(--primary); text-decoration: none; }
+  p { margin: 0 0 1em 0; }
+
+  /* ---------- Header / Navigation ---------- */
+  .topband {
+    background: var(--primary);
+    color: #f6ecd6;
+    padding: 14px 0 12px 0;
+    border-bottom: 2px solid var(--accent);
+    position: relative;
+  }
+  .topband::before, .topband::after {
+    content: "";
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 28px;
+    background-image:
+      repeating-linear-gradient(0deg,
+        var(--accent) 0 6px,
+        var(--primary) 6px 14px,
+        var(--secondary) 14px 20px,
+        var(--primary) 20px 28px);
+    opacity: 0.7;
+  }
+  .topband::before { left: 0; }
+  .topband::after { right: 0; }
+  .nav-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 28px;
+    padding: 0 60px;
+    position: relative;
+    z-index: 1;
+  }
+  .nav-side {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .nav-side a {
+    color: #f6ecd6;
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+  .nav-side a[aria-current="page"] {
+    color: var(--accent);
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 2px;
+  }
+  .nav-star {
+    color: var(--accent);
+    font-size: 10px;
+    line-height: 1;
+  }
+  .nav-title {
+    text-align: center;
+    color: var(--accent);
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    font-size: 20px;
+    letter-spacing: 0.18em;
+    white-space: nowrap;
+  }
+  .nav-title small {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    color: #f6ecd6;
+    margin-top: 4px;
+  }
+
+  /* gold filet under header */
+  .filet {
+    width: 100%;
+    height: 24px;
+    background: var(--bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+  .filet svg {
+    width: 880px;
+    height: 22px;
+    fill: var(--accent);
+  }
+  .filet svg path { fill: var(--accent); }
+  .filet svg polyline { stroke: var(--accent); }
+
+  /* ---------- Page frame ---------- */
+  .page-frame {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 28px;
+    position: relative;
+  }
+  .page-frame::before, .page-frame::after {
+    content: "";
+    position: absolute;
+    top: 24px; bottom: 24px;
+    width: 22px;
+    background-image:
+      repeating-linear-gradient(0deg,
+        var(--primary) 0 8px,
+        var(--accent) 8px 12px,
+        var(--secondary) 12px 16px,
+        var(--accent) 16px 20px,
+        var(--primary) 20px 28px);
+    border: 1px solid var(--primary);
+  }
+  .page-frame::before { left: 0; }
+  .page-frame::after { right: 0; }
+
+  .page-inner {
+    background: #faf1da;
+    margin: 24px 38px;
+    padding: 40px 56px 56px;
+    border: 1px solid var(--primary);
+    box-shadow: inset 0 0 0 6px var(--bg), inset 0 0 0 7px var(--accent);
+    position: relative;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    text-align: center;
+    padding: 30px 0 10px;
+  }
+  .hero .eyebrow {
+    font-family: var(--font-display), serif;
+    color: var(--text-emphasis);
+    letter-spacing: 0.4em;
+    font-size: 11px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .hero h1 {
+    font-size: 44px;
+    color: var(--primary);
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+  }
+  .hero .subtitle {
+    color: var(--text-emphasis);
+    font-style: italic;
+    font-size: 22px;
+    margin-bottom: 18px;
+  }
+  .hero-arch {
+    position: relative;
+    width: 460px;
+    height: 360px;
+    margin: 18px auto 8px;
+  }
+  .hero-arch svg.frame-svg {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+  }
+  .hero-arch .arch-fill {
+    position: absolute;
+    left: 18%; right: 18%;
+    top: 8%;
+    bottom: 14%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero-arch .arch-fill svg {
+    width: 160px; height: 160px;
+  }
+
+  /* ---------- Section dividers ---------- */
+  .divider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 36px 0;
+  }
+  .divider svg {
+    width: 540px;
+    height: 24px;
+  }
+  .divider svg path { fill: var(--primary); }
+  .divider svg polyline { stroke: var(--primary); }
+
+  /* ---------- Section heading ---------- */
+  .section-head {
+    text-align: center;
+    margin: 8px 0 24px;
+  }
+  .section-head h2 {
+    font-size: 28px;
+    color: var(--primary);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .section-head .ar {
+    color: var(--text-emphasis);
+    font-style: italic;
+    font-size: 18px;
+    margin-top: 4px;
+  }
+
+  /* ---------- Programs grid ---------- */
+  .programs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px 40px;
+    margin: 0 auto;
+    max-width: 1080px;
+  }
+  .program-card {
+    position: relative;
+    padding: 0 28px 28px;
+    background: #fbf2db;
+  }
+  .arch-card {
+    position: relative;
+    padding-top: 220px;
+  }
+  .arch-card .arch-svg {
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 320px; height: 230px;
+    pointer-events: none;
+  }
+  .arch-card .arch-svg svg { width: 100%; height: 100%; }
+  .arch-card .arch-svg svg path { stroke: var(--primary); stroke-width: 4; }
+
+  .spandrel {
+    position: absolute;
+    top: 8px;
+    width: 60px; height: 60px;
+    color: var(--accent);
+    opacity: 0.55;
+  }
+  .spandrel.left  { left: 18px; }
+  .spandrel.right { right: 18px; transform: scaleX(-1); }
+  .spandrel svg { width: 100%; height: 100%; fill: currentColor; }
+
+  .program-card h3 {
+    text-align: center;
+    font-size: 19px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 4px;
+  }
+  .program-card .meta {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    color: var(--secondary);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .program-card p {
+    text-align: center;
+    line-height: 1.7;
+    font-size: 16.5px;
+  }
+  .program-card p.body::first-letter {
+    font-family: var(--font-display), serif;
+    color: var(--text-emphasis);
+    font-size: 38px;
+    float: left;
+    line-height: 0.9;
+    padding: 6px 8px 0 0;
+    font-weight: 700;
+  }
+  .program-card .specs {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--accent);
+    text-align: center;
+    font-size: 14.5px;
+    color: var(--primary);
+  }
+  .program-card .specs strong {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--text-emphasis);
+    display: block;
+    margin-bottom: 2px;
+  }
+  .specs-row {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .specs-row > div { min-width: 120px; }
+
+  /* ---------- Faculty section ---------- */
+  .faculty-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .faculty-card {
+    background: #fbf2db;
+    border: 1px solid var(--primary);
+    padding: 24px 22px;
+    position: relative;
+    text-align: center;
+  }
+  .faculty-card::before {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border: 1px solid var(--accent);
+    pointer-events: none;
+  }
+  .faculty-seal {
+    width: 70px; height: 70px;
+    margin: 0 auto 10px;
+  }
+  .faculty-seal svg { width: 100%; height: 100%; }
+  .faculty-card h4 {
+    font-size: 16px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 4px;
+  }
+  .faculty-card .role {
+    color: var(--text-emphasis);
+    font-style: italic;
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+  .faculty-card p {
+    font-size: 15px;
+    line-height: 1.65;
+    text-align: justify;
+    text-align-last: center;
+  }
+
+  /* ---------- Calendar strip ---------- */
+  .calendar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    max-width: 1080px;
+    margin: 0 auto;
+    border: 1px solid var(--primary);
+    background: var(--primary);
+  }
+  .calendar > div {
+    background: #fbf2db;
+    padding: 18px 16px;
+    text-align: center;
+    border-right: 1px solid var(--accent);
+  }
+  .calendar > div:last-child { border-right: none; }
+  .calendar h5 {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    color: var(--text-emphasis);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .calendar p { font-size: 15px; margin: 0; }
+  .calendar strong { color: var(--primary); }
+
+  /* ---------- Footer ---------- */
+  .pre-footer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 1100px;
+    margin: 40px auto 20px;
+    padding: 0 24px;
+    color: var(--primary);
+  }
+  .pre-footer h6 {
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.28em;
+    color: var(--text-emphasis);
+    text-transform: uppercase;
+    margin: 0 0 8px;
+  }
+  .pre-footer p { font-size: 15px; margin: 0 0 6px; line-height: 1.55; }
+
+  .tailpiece {
+    margin: 30px auto 0;
+    width: 320px; height: 56px;
+    color: var(--accent);
+    display: flex; justify-content: center; align-items: center;
+  }
+  .tailpiece svg { width: 100%; height: 100%; }
+  .tailpiece svg path { fill: var(--accent); }
+  .tailpiece svg polyline { stroke: var(--accent); }
+
+  .footer-band {
+    background: var(--primary);
+    color: var(--accent);
+    padding: 20px 0;
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 15px;
+    letter-spacing: 0.14em;
+    border-top: 2px solid var(--accent);
+    border-bottom: 2px solid var(--accent);
+    position: relative;
+  }
+  .footer-band::before, .footer-band::after {
+    content: "✦";
+    margin: 0 18px;
+    color: var(--accent);
+  }
+
+  /* SVG default coloring for inline ornaments */
+  .ink-cobalt path, .ink-cobalt polyline { fill: var(--primary); stroke: var(--primary); }
+  .ink-gold path, .ink-gold polyline { fill: var(--accent); stroke: var(--accent); }
+</style>
+</head>
+<body>
+
+<!-- ===================== HEADER / NAV ===================== -->
+<header class="topband">
+  <div class="nav-inner">
+    <nav class="nav-side" aria-label="Primary left">
+      <a href="page-1.html">Institute</a>
+      <span class="nav-star">✦</span>
+      <a href="page-2.html" aria-current="page">Programs</a>
+      <span class="nav-star">✦</span>
+      <a href="page-3.html">Faculty</a>
+    </nav>
+    <div class="nav-title">
+      Madrasa-yi Naqsh-i Jahān
+      <small>University of Isfahan Studies</small>
+    </div>
+    <nav class="nav-side" aria-label="Primary right">
+      <a href="page-4.html">Library</a>
+      <span class="nav-star">✦</span>
+      <a href="page-5.html">Admissions</a>
+      <span class="nav-star">✦</span>
+      <a href="page-6.html">Visit</a>
+    </nav>
+  </div>
+</header>
+
+<div class="filet" aria-hidden="true">
+  <svg viewBox="0 0 437.999 18.893" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,9.445c0,0,37.005-0.063,73.998-0.829c18.495-0.386,36.989-0.949,50.831-1.785c6.919-0.414,12.677-0.906,16.663-1.46c1.99-0.28,3.539-0.582,4.535-0.878c0.502-0.146,0.844-0.297,1.049-0.405c0.157-0.107,0.238-0.162,0.238-0.162l0.42-0.287l0.656,0.656l-0.369,0.338c0,0-0.154,0.142-0.456,0.324c-0.291,0.154-0.714,0.331-1.256,0.484c-1.085,0.314-2.667,0.608-4.686,0.879c-4.037,0.533-9.811,0.985-16.745,1.354c-13.868,0.744-32.369,1.183-50.87,1.443C37.003,9.632,0,9.445,0,9.445z"/>
+    <path d="M437.999,9.445c0,0-37.004,0.187-74.007-0.329c-18.501-0.261-37.002-0.699-50.869-1.443c-6.935-0.368-12.708-0.82-16.745-1.354c-2.019-0.271-3.601-0.565-4.687-0.879c-0.541-0.153-0.965-0.33-1.256-0.484c-0.302-0.183-0.456-0.324-0.456-0.324l-0.369-0.338l0.656-0.656l0.42,0.287c0,0,0.081,0.055,0.238,0.162c0.204,0.108,0.546,0.26,1.048,0.405c0.996,0.296,2.545,0.598,4.535,0.878c3.986,0.554,9.744,1.046,16.663,1.46C327.011,7.667,345.506,8.23,364,8.616C400.994,9.382,437.999,9.445,437.999,9.445z"/>
+    <circle cx="219" cy="9.4" r="4.6" fill="none" stroke="currentColor" stroke-width="1.6" style="stroke:#c9a23a;"/>
+    <polyline fill="none" stroke="#c9a23a" stroke-width="2" points="209.416,13.307 219,9.445 228.583,5.584"/>
+  </svg>
+</div>
+
+<!-- ===================== MAIN ===================== -->
+<main class="page-frame">
+  <div class="page-inner">
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="eyebrow">✦ Faculties & Programs · Anno MMXXIV ✦</div>
+      <h1>Faculties & Programs</h1>
+      <div class="subtitle">Four courses of study under the dome of the Naqsh-i Jahān</div>
+
+      <div class="hero-arch" aria-hidden="true">
+        <svg class="frame-svg" viewBox="140 240 520 570" preserveAspectRatio="xMidYMid meet">
+          <g fill="none" stroke="#1e3a5f" stroke-width="3.5" stroke-linecap="round">
+            <path d="m 397.18402,257.10979 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+            <path d="m 258.19608,418.70579 24.75248,58.41585"/>
+            <path d="m 355.2257,330.58698 41.58416,23.76238 0.9901,35.64356"/>
+            <path d="m 219.58214,571.18104 -1.48515,211.88119"/>
+          </g>
+          <g fill="none" stroke="#1e3a5f" stroke-width="3.5" stroke-linecap="round" transform="matrix(-1,0,0,1,794.27671,-0.2972181)">
+            <path d="m 397.18402,257.10979 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+            <path d="m 258.19608,418.70579 24.75248,58.41585"/>
+            <path d="m 355.2257,330.58698 41.58416,23.76238 0.9901,35.64356"/>
+            <path d="m 219.58214,571.18104 -1.48515,211.88119"/>
+          </g>
+        </svg>
+        <div class="arch-fill">
+          <svg viewBox="0 0 1500 1500" xmlns="http://www.w3.org/2000/svg">
+            <g transform="translate(750,750)">
+              <g fill="#c9a23a" stroke="#1e3a5f" stroke-width="14">
+                <polygon points="0,-360 90,-90 360,0 90,90 0,360 -90,90 -360,0 -90,-90"/>
+                <polygon points="0,-260 65,-65 260,0 65,65 0,260 -65,65 -260,0 -65,-65" fill="#7a1f2e" transform="rotate(22.5)"/>
+              </g>
+              <circle r="60" fill="#1e3a5f" stroke="#c9a23a" stroke-width="6"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <p style="max-width:760px;margin:18px auto 0;text-align:center;font-size:17.5px;color:var(--text);">
+        The Madrasa offers four sustained courses of study, each shaped by the conviction
+        that the geometric, calligraphic, and architectural sciences of Safavid Persia
+        remain a living discipline. Instruction is conducted in the workshops of the
+        Maydān, in the manuscript rooms of the library, and on the scaffolding of
+        Isfahan's monuments themselves.
+      </p>
+    </section>
+
+    <div class="divider" aria-hidden="true">
+      <svg viewBox="0 0 437.999 18.893" xmlns="http://www.w3.org/2000/svg" class="ink-cobalt">
+        <path d="M0,9.445c0,0,37.005-0.063,73.998-0.829c18.495-0.386,36.989-0.949,50.831-1.785c6.919-0.414,12.677-0.906,16.663-1.46c1.99-0.28,3.539-0.582,4.535-0.878c0.502-0.146,0.844-0.297,1.049-0.405l0.42-0.287l0.656,0.656l-0.369,0.338c0,0-0.154,0.142-0.456,0.324c-0.291,0.154-0.714,0.331-1.256,0.484c-1.085,0.314-2.667,0.608-4.686,0.879c-4.037,0.533-9.811,0.985-16.745,1.354c-13.868,0.744-32.369,1.183-50.87,1.443C37.003,9.632,0,9.445,0,9.445z"/>
+        <path d="M437.999,9.445c0,0-37.004,0.187-74.007-0.329c-18.501-0.261-37.002-0.699-50.869-1.443c-6.935-0.368-12.708-0.82-16.745-1.354c-2.019-0.271-3.601-0.565-4.687-0.879c-0.541-0.153-0.965-0.33-1.256-0.484c-0.302-0.183-0.456-0.324-0.456-0.324l-0.369-0.338l0.656-0.656l0.42,0.287c0,0,0.081,0.055,0.238,0.162c0.204,0.108,0.546,0.26,1.048,0.405c0.996,0.296,2.545,0.598,4.535,0.878c3.986,0.554,9.744,1.046,16.663,1.46C327.011,7.667,345.506,8.23,364,8.616C400.994,9.382,437.999,9.445,437.999,9.445z"/>
+        <polygon points="219,2 226,9.4 219,17 212,9.4" fill="#c9a23a"/>
+        <circle cx="219" cy="9.4" r="2.5" fill="#7a1f2e"/>
+      </svg>
+    </div>
+
+    <!-- Section: degree programs -->
+    <section>
+      <div class="section-head">
+        <h2>Degrees of the House</h2>
+        <div class="ar">— Four scholarly tracks, taught by master and apprentice —</div>
+      </div>
+
+      <div class="programs">
+
+        <!-- Program 1 -->
+        <article class="program-card arch-card">
+          <div class="arch-svg" aria-hidden="true">
+            <svg viewBox="0 0 320 230" xmlns="http://www.w3.org/2000/svg">
+              <path d="M 20 220 L 20 130 Q 20 90 60 60 Q 110 20 160 20 Q 210 20 260 60 Q 300 90 300 130 L 300 220 Z"
+                    fill="#fbf2db" stroke="#1e3a5f" stroke-width="3"/>
+              <path d="M 32 218 L 32 132 Q 32 96 68 70 Q 116 32 160 32 Q 204 32 252 70 Q 288 96 288 132 L 288 218"
+                    fill="none" stroke="#c9a23a" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <div class="spandrel left" aria-hidden="true">
+            <svg viewBox="0 0 100 100"><path d="M0,0 L100,0 Q60,8 40,28 Q20,48 12,80 Q8,92 0,100 Z M30,50 a8,8 0 1,1 0,1 z M55,30 a6,6 0 1,1 0,1 z"/></svg>
+          </div>
+          <div class="spandrel right" aria-hidden="true">
+            <svg viewBox="0 0 100 100"><path d="M0,0 L100,0 Q60,8 40,28 Q20,48 12,80 Q8,92 0,100 Z M30,50 a8,8 0 1,1 0,1 z M55,30 a6,6 0 1,1 0,1 z"/></svg>
+          </div>
+
+          <h3>Master in Tile Mosaic Conservation</h3>
+          <div class="meta">✦ M.A. · Two Academic Years ✦</div>
+          <p class="body">
+            Conducted within the restoration ateliers adjoining the Masjid-i Shāh, this
+            degree trains conservators in the haft-rang and muʿarraq techniques: the
+            cutting, glazing, and re-bedding of cobalt and turquoise tile-work as
+            practised by the kāshī-tarāsh masters of the seventeenth century. Students
+            spend the second year on a sanctioned restoration site under the
+            Cultural Heritage Organisation.
+          </p>
+          <div class="specs">
+            <div class="specs-row">
+              <div><strong>Duration</strong>24 months</div>
+              <div><strong>Language</strong>Persian & English</div>
+              <div><strong>Cycle</strong>Admits September</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Program 2 -->
+        <article class="program-card arch-card">
+          <div class="arch-svg" aria-hidden="true">
+            <svg viewBox="0 0 320 230" xmlns="http://www.w3.org/2000/svg">
+              <path d="M 20 220 L 20 130 Q 20 90 60 60 Q 110 20 160 20 Q 210 20 260 60 Q 300 90 300 130 L 300 220 Z"
+                    fill="#fbf2db" stroke="#1e3a5f" stroke-width="3"/>
+              <path d="M 32 218 L 32 132 Q 32 96 68 70 Q 116 32 160 32 Q 204 32 252 70 Q 288 96 288 132 L 288 218"
+                    fill="none" stroke="#c9a23a" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <div class="spandrel left" aria-hidden="true">
+            <svg viewBox="0 0 100 100"><path d="M0,0 L100,0 Q60,8 40,28 Q20,48 12,80 Q8,92 0,100 Z M30,50 a8,8 0 1,1 0,1 z M55,30 a6,6 0 1,1 0,1 z"/></svg>
+          </div>
+          <div class="spandrel right" aria-hidden="true">
+            <svg viewBox="0 0 100 100"><path d="M0,0 L100,0 Q60,8 40,28 Q20,48 12,80 Q8,92 0,100 Z M30,50 a8,8 0 1,1 0,1 z M55,30 a6,6 0 1,1 0,1 z"/></svg>
+          </div>
+
+          <h3>Doctorate in Persian Codicology</h3>
+          <div class="meta">✦ Ph.D. · Four to Six Years ✦</div>
+          <p class="body">
+            Devoted to the material study of Safavid manuscripts: paper-fibres, gallnut
+            inks, gold-flecked illumination, and the binding traditions of Tabrīz,
+            Qazvīn and Iṣfahān. Doctoral candidates work directly with codices in the
+            Naqsh-i Jahān library, including the celebrated Shāhnāma fragments of 1614,
+            and present an original critical edition as their final defence.
+          </p>
+          <div class="specs">
+            <div class="specs-row">
+              <div><strong>Duration</strong>48–72 months</div>
+              <div><strong>Language</strong>Persian, English, Arabic</div>
+              <div><strong>Cycle</strong>Admits February</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Program 3 -->
+        <article class="program-card arch-card">
+          <div class="arch-svg" aria-hidden="true">
+            <svg viewBox="0 0 320 230" xmlns="http://www.w3.org/2000/svg">
+              <path d="M 20 220 L 20 130 Q 20 90 60 60 Q 110 20 160 20 Q 210 20 260 60 Q 300 90 300 130 L 300 220 Z"
+                    fill="#fbf2db" stroke="#1e3a5f" stroke-width="3"/>
+              <path d="M 32 218 L 32 132 Q 32 96 68 70 Q 116 32 160 32 Q 204 32 252 70 Q 288 96 288 132 L 288 218"
+                    fill="none" stroke="#c9a23a" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <div class="spandrel left" aria-hidden="true">
+            <svg viewBox="0 0 100 100"><path d="M0,0 L100,0 Q60,8 40,28 Q20,48 12,80 Q8,92 0,100 Z M30,50 a8,8 0 1,1 0,1 z M55,30 a6,6 0 1,1 0,1 z"/></svg>
+          </div>
+          <div class="spandrel right" aria-hidden="true">
+            <svg viewBox="0 0 100 100"><path d="M0,0 L100,0 Q60,8 40,28 Q20,48 12,80 Q8,92 0,100 Z M30,50 a8,8 0 1,1 0,1 z M55,30 a6,6 0 1,1 0,1 z"/></svg>
+          </div>
+
+          <h3>Diploma in Geometric Construction</h3>
+          <div class="meta">✦ Girih · One Academic Year ✦</div>
+          <p class="body">
+            A practical diploma in girih: the line-and-compass construction of the
+            five-, seven-, ten- and twelvefold star polygons that govern Safavid
+            ornament. Pupils proceed from straightedge drafting through cardboard
+            tessellation to a final cartoon executed at full architectural scale.
+            No prior mathematical training is presumed beyond Euclidean geometry.
+          </p>
+          <div class="specs">
+            <div class="specs-row">
+              <div><strong>Duration</strong>10 months</div>
+              <div><strong>Language</strong>Persian & English</div>
+              <div><strong>Cycle</strong>Admits September & January</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Program 4 -->
+        <article class="program-card arch-card">
+          <div class="arch-svg" aria-hidden="true">
+            <svg viewBox="0 0 320 230" xmlns="http://www.w3.org/2000/svg">
+              <path d="M 20 220 L 20 130 Q 20 90 60 60 Q 110 20 160 20 Q 210 20 260 60 Q 300 90 300 130 L 300 220 Z"
+                    fill="#fbf2db" stroke="#1e3a5f" stroke-width="3"/>
+              <path d="M 32 218 L 32 132 Q 32 96 68 70 Q 116 32 160 32 Q 204 32 252 70 Q 288 96 288 132 L 288 218"
+                    fill="none" stroke="#c9a23a" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <div class="spandrel left" aria-hidden="true">
+            <svg viewBox="0 0 100 100"><path d="M0,0 L100,0 Q60,8 40,28 Q20,48 12,80 Q8,92 0,100 Z M30,50 a8,8 0 1,1 0,1 z M55,30 a6,6 0 1,1 0,1 z"/></svg>
+          </div>
+          <div class="spandrel right" aria-hidden="true">
+            <svg viewBox="0 0 100 100"><path d="M0,0 L100,0 Q60,8 40,28 Q20,48 12,80 Q8,92 0,100 Z M30,50 a8,8 0 1,1 0,1 z M55,30 a6,6 0 1,1 0,1 z"/></svg>
+          </div>
+
+          <h3>Sorbonne–Isfahan Certificate</h3>
+          <div class="meta">✦ Safavid Urbanism · Joint Programme ✦</div>
+          <p class="body">
+            A joint certificate co-conferred with the Université Paris-Sorbonne,
+            examining the Maydān-i Naqsh-i Jahān as a paradigmatic act of imperial
+            urbanism: the alignment of mosque, palace, bazaar and caravanserai under
+            ʿAbbās I. Candidates spend one term in Paris and two in Isfahan, with
+            field studies in Qazvīn and Mashhad on the via regia.
+          </p>
+          <div class="specs">
+            <div class="specs-row">
+              <div><strong>Duration</strong>18 months</div>
+              <div><strong>Language</strong>French, Persian, English</div>
+              <div><strong>Cycle</strong>Admits October (biennial)</div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <div class="divider" aria-hidden="true">
+      <svg viewBox="0 0 437.999 18.893" xmlns="http://www.w3.org/2000/svg" class="ink-cobalt">
+        <path d="M0,9.445c0,0,37.005-0.063,73.998-0.829c18.495-0.386,36.989-0.949,50.831-1.785c6.919-0.414,12.677-0.906,16.663-1.46c1.99-0.28,3.539-0.582,4.535-0.878c0.502-0.146,0.844-0.297,1.049-0.405l0.42-0.287l0.656,0.656l-0.369,0.338c0,0-0.154,0.142-0.456,0.324c-0.291,0.154-0.714,0.331-1.256,0.484c-1.085,0.314-2.667,0.608-4.686,0.879c-4.037,0.533-9.811,0.985-16.745,1.354c-13.868,0.744-32.369,1.183-50.87,1.443C37.003,9.632,0,9.445,0,9.445z"/>
+        <path d="M437.999,9.445c0,0-37.004,0.187-74.007-0.329c-18.501-0.261-37.002-0.699-50.869-1.443c-6.935-0.368-12.708-0.82-16.745-1.354c-2.019-0.271-3.601-0.565-4.687-0.879c-0.541-0.153-0.965-0.33-1.256-0.484c-0.302-0.183-0.456-0.324-0.456-0.324l-0.369-0.338l0.656-0.656l0.42,0.287c0,0,0.081,0.055,0.238,0.162c0.204,0.108,0.546,0.26,1.048,0.405c0.996,0.296,2.545,0.598,4.535,0.878c3.986,0.554,9.744,1.046,16.663,1.46C327.011,7.667,345.506,8.23,364,8.616C400.994,9.382,437.999,9.445,437.999,9.445z"/>
+        <polygon points="219,2 226,9.4 219,17 212,9.4" fill="#c9a23a"/>
+        <circle cx="219" cy="9.4" r="2.5" fill="#7a1f2e"/>
+      </svg>
+    </div>
+
+    <!-- Faculty leads -->
+    <section>
+      <div class="section-head">
+        <h2>Faculty Leads & Their Pedagogy</h2>
+        <div class="ar">— Three masters who hold the seal of each programme —</div>
+      </div>
+
+      <div class="faculty-grid">
+
+        <article class="faculty-card">
+          <div class="faculty-seal" aria-hidden="true">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="50" r="46" fill="#1e3a5f" stroke="#c9a23a" stroke-width="2"/>
+              <polygon points="50,10 60,40 92,40 66,58 76,90 50,72 24,90 34,58 8,40 40,40"
+                       fill="#c9a23a" stroke="#7a1f2e" stroke-width="1"/>
+              <circle cx="50" cy="55" r="9" fill="#7a1f2e"/>
+            </svg>
+          </div>
+          <h4>Prof. Mahin Daneshvar</h4>
+          <div class="role">Chair, Tile Mosaic Conservation</div>
+          <p>
+            "We do not teach the restoration of tile as the patching of an injured
+            surface, but as the slow re-learning of a craft language. Each student
+            cuts a thousand tesserae before lifting one from the wall — for only the
+            hand that has made the mosaic is fit to repair it."
+          </p>
+        </article>
+
+        <article class="faculty-card">
+          <div class="faculty-seal" aria-hidden="true">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="50" r="46" fill="#1e3a5f" stroke="#c9a23a" stroke-width="2"/>
+              <g transform="translate(50,50)" fill="#c9a23a" stroke="#7a1f2e" stroke-width="1">
+                <polygon points="0,-38 11,-11 38,0 11,11 0,38 -11,11 -38,0 -11,-11"/>
+                <polygon points="0,-26 7,-7 26,0 7,7 0,26 -7,7 -26,0 -7,-7" fill="#2a8a8a" transform="rotate(22.5)"/>
+              </g>
+              <circle cx="50" cy="50" r="6" fill="#f2e5cc"/>
+            </svg>
+          </div>
+          <h4>Dr. Hossein Aghazadeh</h4>
+          <div class="role">Director, Persian Codicology</div>
+          <p>
+            "A manuscript is a body. Before reading its words we read its skin —
+            the burnish of paper, the grain of the gallnut, the tremor of a scribe's
+            wrist on a winter morning in Tabrīz. Doctoral work here begins where
+            philology ends: in the materials themselves."
+          </p>
+        </article>
+
+        <article class="faculty-card">
+          <div class="faculty-seal" aria-hidden="true">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="50" r="46" fill="#1e3a5f" stroke="#c9a23a" stroke-width="2"/>
+              <g transform="translate(50,50)" stroke="#c9a23a" stroke-width="2" fill="none">
+                <polygon points="0,-36 31,-18 31,18 0,36 -31,18 -31,-18"/>
+                <polygon points="0,-30 26,-15 26,15 0,30 -26,15 -26,-15"/>
+                <line x1="-31" y1="-18" x2="31" y2="18"/>
+                <line x1="31" y1="-18" x2="-31" y2="18"/>
+                <line x1="0" y1="-36" x2="0" y2="36"/>
+              </g>
+              <circle cx="50" cy="50" r="5" fill="#7a1f2e"/>
+            </svg>
+          </div>
+          <h4>Prof. Eleanor Whitcombe</h4>
+          <div class="role">Co-Chair, Sorbonne–Isfahan Urbanism</div>
+          <p>
+            "The Maydān is not a square but an argument — drawn in stone between
+            sovereign, merchant, and worshipper. Our students learn to read this
+            argument as a Parisian reads Haussmann: with the same rigour, but with
+            an ear for a different polity and a different sky."
+          </p>
+        </article>
+
+      </div>
+    </section>
+
+    <div class="divider" aria-hidden="true">
+      <svg viewBox="0 0 437.999 18.893" xmlns="http://www.w3.org/2000/svg" class="ink-cobalt">
+        <path d="M0,9.445c0,0,37.005-0.063,73.998-0.829c18.495-0.386,36.989-0.949,50.831-1.785c6.919-0.414,12.677-0.906,16.663-1.46c1.99-0.28,3.539-0.582,4.535-0.878c0.502-0.146,0.844-0.297,1.049-0.405l0.42-0.287l0.656,0.656l-0.369,0.338c0,0-0.154,0.142-0.456,0.324c-0.291,0.154-0.714,0.331-1.256,0.484c-1.085,0.314-2.667,0.608-4.686,0.879c-4.037,0.533-9.811,0.985-16.745,1.354c-13.868,0.744-32.369,1.183-50.87,1.443C37.003,9.632,0,9.445,0,9.445z"/>
+        <path d="M437.999,9.445c0,0-37.004,0.187-74.007-0.329c-18.501-0.261-37.002-0.699-50.869-1.443c-6.935-0.368-12.708-0.82-16.745-1.354c-2.019-0.271-3.601-0.565-4.687-0.879c-0.541-0.153-0.965-0.33-1.256-0.484c-0.302-0.183-0.456-0.324-0.456-0.324l-0.369-0.338l0.656-0.656l0.42,0.287c0,0,0.081,0.055,0.238,0.162c0.204,0.108,0.546,0.26,1.048,0.405c0.996,0.296,2.545,0.598,4.535,0.878c3.986,0.554,9.744,1.046,16.663,1.46C327.011,7.667,345.506,8.23,364,8.616C400.994,9.382,437.999,9.445,437.999,9.445z"/>
+        <polygon points="219,2 226,9.4 219,17 212,9.4" fill="#c9a23a"/>
+        <circle cx="219" cy="9.4" r="2.5" fill="#7a1f2e"/>
+      </svg>
+    </div>
+
+    <!-- Calendar strip -->
+    <section>
+      <div class="section-head">
+        <h2>Admissions Cycle, MMXXV</h2>
+        <div class="ar">— A single calendar across all four faculties —</div>
+      </div>
+
+      <div class="calendar">
+        <div>
+          <h5>Autumn Intake</h5>
+          <p><strong>15 Mihr — 30 Ābān</strong><br>(7 Oct — 21 Nov)<br>Mosaic & Girih</p>
+        </div>
+        <div>
+          <h5>Winter Intake</h5>
+          <p><strong>10 Bahman — 20 Esfand</strong><br>(30 Jan — 11 Mar)<br>Codicology</p>
+        </div>
+        <div>
+          <h5>Spring Review</h5>
+          <p><strong>1 Khordād — 15 Khordād</strong><br>(22 May — 5 Jun)<br>Portfolio defence</p>
+        </div>
+        <div>
+          <h5>Joint Cohort</h5>
+          <p><strong>Biennial · 1 Mihr</strong><br>(23 Sep)<br>Sorbonne–Isfahan</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pre-footer -->
+    <div class="pre-footer">
+      <div>
+        <h6>✦ Address ✦</h6>
+        <p>Madrasa-yi Naqsh-i Jahān</p>
+        <p>Maydān-i Naqsh-i Jahān, Eastern Īwān</p>
+        <p>Isfahan 8174673441, Islamic Republic of Iran</p>
+      </div>
+      <div>
+        <h6>✦ Term Dates ✦</h6>
+        <p>Pā'īz · 22 Sep — 20 Dec</p>
+        <p>Zemestān · 6 Jan — 19 Mar</p>
+        <p>Bahār · 5 Apr — 21 Jun</p>
+      </div>
+      <div>
+        <h6>✦ Faculties ✦</h6>
+        <p>Tile Mosaic Conservation</p>
+        <p>Persian Codicology</p>
+        <p>Geometric Construction</p>
+        <p>Joint Sorbonne–Isfahan Urbanism</p>
+      </div>
+    </div>
+
+    <div class="tailpiece" aria-hidden="true">
+      <svg viewBox="0 0 437.999 18.893" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,9.445c0,0,37.005-0.063,73.998-0.829c18.495-0.386,36.989-0.949,50.831-1.785c6.919-0.414,12.677-0.906,16.663-1.46c1.99-0.28,3.539-0.582,4.535-0.878l1.049-0.405l0.42-0.287l0.656,0.656l-0.369,0.338l-0.456,0.324c-0.291,0.154-0.714,0.331-1.256,0.484c-1.085,0.314-2.667,0.608-4.686,0.879c-4.037,0.533-9.811,0.985-16.745,1.354c-13.868,0.744-32.369,1.183-50.87,1.443C37.003,9.632,0,9.445,0,9.445z"/>
+        <path d="M437.999,9.445c0,0-37.004,0.187-74.007-0.329c-18.501-0.261-37.002-0.699-50.869-1.443c-6.935-0.368-12.708-0.82-16.745-1.354c-2.019-0.271-3.601-0.565-4.687-0.879l-1.256-0.484l-0.456-0.324l-0.369-0.338l0.656-0.656l0.42,0.287l0.238,0.162l1.048,0.405c0.996,0.296,2.545,0.598,4.535,0.878c3.986,0.554,9.744,1.046,16.663,1.46C327.011,7.667,345.506,8.23,364,8.616C400.994,9.382,437.999,9.445,437.999,9.445z"/>
+        <polygon points="219,1 228,9.4 219,18 210,9.4"/>
+        <circle cx="219" cy="9.4" r="3.2" fill="#1e3a5f"/>
+      </svg>
+    </div>
+
+  </div>
+</main>
+
+<footer class="footer-band" role="contentinfo">
+  Madrasa-yi Naqsh-i Jahān · Founded MMVII · Maydān-i Naqsh-i Jahān, Isfahan
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Permanent Collection — Museo Aureliano</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  /* ============================================================
+     PAGE-SPECIFIC STYLES — Roman Imperial / Modern
+     ============================================================ */
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Inter, system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.65;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display), "Marcellus", serif;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  /* ---------- NAVIGATION ---------- */
+  .topbar {
+    background: var(--surface);
+    border-top: 2px solid var(--secondary);
+    padding-top: 14px;
+  }
+  .topbar nav {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 4px 40px 18px;
+    gap: 24px;
+  }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .nav-links.left  { justify-content: flex-end; }
+  .nav-links.right { justify-content: flex-start; }
+  .nav-links li { display: inline-flex; align-items: center; }
+  .nav-links a {
+    padding: 6px 2px;
+    color: var(--primary);
+  }
+  .nav-links a[aria-current="page"] {
+    border-bottom: 2px solid var(--accent);
+    color: var(--accent);
+  }
+  .vine-sep {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin: 0 14px;
+    opacity: 0.65;
+  }
+  .vine-sep svg { width: 100%; height: 100%; fill: var(--ornament); }
+  .wordmark {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--primary);
+    white-space: nowrap;
+  }
+  .meander-strip {
+    height: 26px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='1000 800 16511 3600' preserveAspectRatio='xMidYMid meet'><g fill='%231a1a1a'><path d='M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z'/><path d='M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z'/><path d='M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z'/><path d='M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z'/><path d='M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z'/></g></svg>");
+    background-repeat: repeat-x;
+    background-size: auto 100%;
+    background-position: center;
+    border-top: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    text-align: center;
+    padding: 70px 40px 50px;
+    position: relative;
+  }
+  .hero-pediment {
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto 22px;
+    display: block;
+  }
+  .hero-pediment svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .hero h1 {
+    font-size: 52px;
+    line-height: 1.05;
+    color: var(--primary);
+    margin-bottom: 8px;
+  }
+  .hero .eyebrow {
+    font-family: var(--font-body);
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 22px;
+  }
+  .hero .roman-date {
+    font-family: var(--font-display), serif;
+    color: var(--text-emphasis);
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    margin-top: 14px;
+  }
+
+  /* ---------- CURATOR'S NOTE WITH OAK ROUNDEL ---------- */
+  .curator {
+    max-width: 1100px;
+    margin: 30px auto 60px;
+    padding: 0 40px;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .roundel {
+    width: 220px;
+    height: 220px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .roundel svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .roundel-mark {
+    font-family: var(--font-display), serif;
+    font-size: 28px;
+    letter-spacing: 0.18em;
+    color: var(--primary);
+    text-align: center;
+    line-height: 1;
+  }
+  .roundel-mark small {
+    display: block;
+    font-size: 9px;
+    letter-spacing: 0.32em;
+    margin-top: 6px;
+    color: var(--accent);
+  }
+  .curator-text h2 {
+    font-size: 22px;
+    margin-bottom: 4px;
+    color: var(--primary);
+  }
+  .curator-text .by {
+    font-family: var(--font-body);
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 18px;
+  }
+  .curator-text p {
+    margin: 0 0 12px;
+    max-width: 680px;
+  }
+  .curator-text blockquote {
+    font-family: var(--font-display), serif;
+    color: var(--text-emphasis);
+    margin: 18px 0 0;
+    padding-left: 18px;
+    border-left: 2px solid var(--secondary);
+    font-size: 14px;
+    letter-spacing: 0.04em;
+  }
+
+  /* ---------- DIVIDER ---------- */
+  .divider {
+    height: 36px;
+    margin: 30px auto;
+    max-width: 1320px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='1000 800 16511 3600' preserveAspectRatio='xMidYMid meet'><g fill='%231a1a1a'><path d='M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z'/><path d='M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z'/><path d='M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z'/><path d='M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z'/><path d='M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z'/></g></svg>");
+    background-repeat: repeat-x;
+    background-size: auto 100%;
+    background-position: center;
+  }
+
+  /* ---------- HALL SECTIONS ---------- */
+  .hall {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 30px 40px 20px;
+  }
+  .hall-header {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+  .hall-header .roman {
+    font-family: var(--font-display), serif;
+    color: var(--text-emphasis);
+    font-size: 13px;
+    letter-spacing: 0.4em;
+    margin-bottom: 6px;
+  }
+  .hall-header h2 {
+    font-size: 30px;
+    color: var(--primary);
+  }
+  .hall-header .laurel {
+    display: block;
+    width: 90px;
+    height: 1px;
+    background: var(--secondary);
+    margin: 14px auto 10px;
+    position: relative;
+  }
+  .hall-header .laurel::before,
+  .hall-header .laurel::after {
+    content: "";
+    position: absolute;
+    top: -3px;
+    width: 7px;
+    height: 7px;
+    background: var(--secondary);
+    transform: rotate(45deg);
+  }
+  .hall-header .laurel::before { left: -10px; }
+  .hall-header .laurel::after  { right: -10px; }
+  .hall-header .summary {
+    max-width: 680px;
+    margin: 8px auto 0;
+    font-size: 14px;
+    color: var(--text);
+  }
+
+  /* ---------- CARD GRID ---------- */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--ornament);
+    padding: 4px;
+    position: relative;
+  }
+  .card-inner {
+    border: 4px solid var(--secondary);
+    padding: 26px 22px 22px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .card .accession {
+    font-family: var(--font-display), serif;
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  .card h3 {
+    font-size: 17px;
+    text-align: center;
+    line-height: 1.25;
+    color: var(--primary);
+    margin-bottom: 10px;
+    font-variant: small-caps;
+    letter-spacing: 0.06em;
+  }
+  .card .laurel-mark {
+    display: block;
+    width: 60px;
+    height: 1px;
+    background: var(--ornament);
+    margin: 0 auto 14px;
+    position: relative;
+  }
+  .card .laurel-mark::before,
+  .card .laurel-mark::after {
+    content: "";
+    position: absolute;
+    top: -2px;
+    width: 5px;
+    height: 5px;
+    background: var(--ornament);
+    transform: rotate(45deg);
+  }
+  .card .laurel-mark::before { left: -7px; }
+  .card .laurel-mark::after  { right: -7px; }
+  .card .meta {
+    font-size: 13px;
+    color: var(--text);
+    flex: 1;
+  }
+  .card .meta dt {
+    font-family: var(--font-display), serif;
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--ornament);
+    opacity: 0.7;
+    margin-top: 8px;
+  }
+  .card .meta dd {
+    margin: 2px 0 0;
+    font-size: 13px;
+  }
+  .card .meta dd.date {
+    color: var(--text-emphasis);
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.04em;
+  }
+  .card .desc {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(26,26,26,0.18);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  /* ---------- VISIT TABLE ---------- */
+  .reading-room {
+    max-width: 1100px;
+    margin: 60px auto 30px;
+    padding: 0 40px;
+    text-align: center;
+  }
+  .reading-room h2 {
+    font-size: 22px;
+    color: var(--primary);
+    margin-bottom: 12px;
+  }
+  .reading-room p {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    margin-top: 80px;
+    background: var(--surface);
+    border-top: 1px solid var(--ornament);
+  }
+  .footer-frieze {
+    height: 40px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='1000 800 16511 3600' preserveAspectRatio='xMidYMid meet'><g fill='%231a1a1a'><path d='M 1000,4175 L 1000,1000 4175,1000 4175,2905 2905,2905 2905,3540 4810,3540 4810,4175 2270,4175 2270,2270 3540,2270 3540,1635 1635,1635 1635,4175 1000,4175 Z'/><path d='M 4810,4175 L 4810,1000 7985,1000 7985,2905 6715,2905 6715,3540 8620,3540 8620,4175 6080,4175 6080,2270 7350,2270 7350,1635 5445,1635 5445,4175 4810,4175 Z'/><path d='M 8620,4175 L 8620,1000 11795,1000 11795,2905 10525,2905 10525,3540 12430,3540 12430,4175 9890,4175 9890,2270 11160,2270 11160,1635 9255,1635 9255,4175 8620,4175 Z'/><path d='M 12430,4175 L 12430,1000 15605,1000 15605,2905 14335,2905 14335,3540 16240,3540 16240,4175 13700,4175 13700,2270 14970,2270 14970,1635 13065,1635 13065,4175 12430,4175 Z'/><path d='M 16240,4175 L 16240,1000 17510,1000 17510,1635 16875,1635 16875,4175 16240,4175 Z'/></g></svg>");
+    background-repeat: repeat-x;
+    background-size: auto 100%;
+    background-position: center;
+    border-bottom: 1px solid var(--ornament);
+  }
+  .footer-cols {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 50px 40px 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 48px;
+  }
+  .footer-cols h4 {
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    margin-bottom: 14px;
+    text-align: center;
+  }
+  .footer-cols .col {
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    line-height: 1.9;
+    text-transform: uppercase;
+  }
+  .tailpiece {
+    text-align: center;
+    padding: 6px 0 16px;
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    color: var(--ornament);
+    letter-spacing: 0.4em;
+  }
+  .founding {
+    text-align: center;
+    padding: 0 0 26px;
+    font-family: var(--font-display), serif;
+    color: var(--text-emphasis);
+    font-size: 12px;
+    letter-spacing: 0.4em;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAVIGATION ============ -->
+<header class="topbar">
+  <nav aria-label="Primary">
+    <ul class="nav-links left">
+      <li><a href="page-1.html">Atrium</a></li>
+      <li><span class="vine-sep" aria-hidden="true"><svg viewBox="0 0 200 200"><path transform="translate(0 -852.36)" d="m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z"/></svg></span></li>
+      <li><a href="page-2.html" aria-current="page">Collection</a></li>
+      <li><span class="vine-sep" aria-hidden="true"><svg viewBox="0 0 200 200"><path transform="translate(0 -852.36)" d="m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125z"/></svg></span></li>
+      <li><a href="page-3.html">Exhibition</a></li>
+    </ul>
+    <div class="wordmark">MVSEO AVRELIANO</div>
+    <ul class="nav-links right">
+      <li><a href="page-4.html">Visit</a></li>
+      <li><span class="vine-sep" aria-hidden="true"><svg viewBox="0 0 200 200"><path transform="translate(0 -852.36)" d="m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375z"/></svg></span></li>
+      <li><a href="page-5.html">History</a></li>
+      <li><span class="vine-sep" aria-hidden="true"><svg viewBox="0 0 200 200"><path transform="translate(0 -852.36)" d="m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312z"/></svg></span></li>
+      <li><a href="page-6.html">Scholarship</a></li>
+    </ul>
+  </nav>
+  <div class="meander-strip" role="presentation"></div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-pediment" aria-hidden="true">
+    <svg viewBox="0 0 600 110" preserveAspectRatio="xMidYMid meet">
+      <!-- pediment outline -->
+      <polygon points="20,100 580,100 480,30 120,30" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+      <polygon points="60,90 540,90 460,42 140,42" fill="none" stroke="#c9a23a" stroke-width="1"/>
+      <!-- central rosette -->
+      <circle cx="300" cy="68" r="9" fill="none" stroke="#a93226" stroke-width="1.4"/>
+      <circle cx="300" cy="68" r="3" fill="#a93226"/>
+      <!-- acroteria -->
+      <circle cx="20" cy="100" r="4" fill="#1a1a1a"/>
+      <circle cx="580" cy="100" r="4" fill="#1a1a1a"/>
+      <circle cx="300" cy="30" r="4" fill="#1a1a1a"/>
+    </svg>
+  </div>
+  <div class="eyebrow">Sala I — Sala IV · Four Halls of the Aventine</div>
+  <h1>The Permanent Collection</h1>
+  <div class="roman-date">MMXXV · Open Daily Save Lunedì</div>
+</section>
+
+<!-- ============ CURATOR'S NOTE ============ -->
+<section class="curator">
+  <div class="roundel" aria-hidden="true">
+    <svg viewBox="0 0 117.78949 118.25037" preserveAspectRatio="xMidYMid meet">
+      <g transform="translate(-58.83 -62.6)" fill="#1a1a1a">
+        <circle cx="117.7" cy="121.7" r="55" fill="none" stroke="#1a1a1a" stroke-width="0.6"/>
+        <circle cx="117.7" cy="121.7" r="50" fill="none" stroke="#c9a23a" stroke-width="0.5"/>
+        <!-- stylized oak leaves around perimeter -->
+        <g stroke="#1a1a1a" stroke-width="0.5" fill="none">
+          <path d="M117.7 67 q-6 4 -4 12 q2 6 8 4 q-2 -8 -4 -16 z"/>
+          <path d="M168 121.7 q-4 -6 -12 -4 q-6 2 -4 8 q8 -2 16 -4 z"/>
+          <path d="M117.7 176 q6 -4 4 -12 q-2 -6 -8 -4 q2 8 4 16 z"/>
+          <path d="M67 121.7 q4 6 12 4 q6 -2 4 -8 q-8 2 -16 4 z"/>
+          <path d="M154 86 q-7 1 -10 8 q-2 6 4 8 q4 -6 6 -16 z"/>
+          <path d="M154 158 q-7 -1 -10 -8 q-2 -6 4 -8 q4 6 6 16 z"/>
+          <path d="M82 86 q7 1 10 8 q2 6 -4 8 q-4 -6 -6 -16 z"/>
+          <path d="M82 158 q7 -1 10 -8 q2 -6 -4 -8 q-4 6 -6 16 z"/>
+        </g>
+        <!-- acorns -->
+        <g fill="#a93226">
+          <circle cx="117.7" cy="73" r="2"/>
+          <circle cx="162" cy="121.7" r="2"/>
+          <circle cx="117.7" cy="170" r="2"/>
+          <circle cx="73" cy="121.7" r="2"/>
+        </g>
+      </g>
+    </svg>
+    <div class="roundel-mark">L · C<small>Curatrix</small></div>
+  </div>
+  <div class="curator-text">
+    <h2>A Note from the Chief Curator</h2>
+    <div class="by">Dott.ssa Livia Carnelos</div>
+    <p>Three hundred and forty-two objects rest within these four halls — every one of them recovered, conserved, or bequeathed within the past century. We arrange them not by reign or by emperor's hand, but by the four registers of imperial life: the face, the inscribed word, the painted wall, and the coined treasury. Together, they describe a republic that learned to wear a crown.</p>
+    <p>Our most recent acquisition, a fragment of the <em>Acta Diurna</em> in carved limestone, joined Sala II in March of this year. It is displayed beside its conservator's notebook.</p>
+    <blockquote>« Roma non perit; Roma se recordatur. »</blockquote>
+  </div>
+</section>
+
+<div class="divider" role="presentation"></div>
+
+<!-- ============ SALA I — SCULPTURE ============ -->
+<section class="hall" id="sala-i">
+  <div class="hall-header">
+    <div class="roman">SALA · I</div>
+    <h2>Sculpture &amp; Portraiture</h2>
+    <span class="laurel" aria-hidden="true"></span>
+    <p class="summary">Marble and bronze likenesses spanning the principate from Augustus to the Severans, including civic dedications recovered from Ostia, Tibur, and the Esquiline.</p>
+  </div>
+  <div class="grid">
+    <article class="card">
+      <div class="card-inner">
+        <div class="accession">INV. MA-1138</div>
+        <h3>Portrait Bust of Antoninus Pius</h3>
+        <span class="laurel-mark" aria-hidden="true"></span>
+        <dl class="meta">
+          <dt>Material</dt><dd>Parian marble, traces of pigment</dd>
+          <dt>Provenance</dt><dd>Ostia Antica, Decumanus Maximus</dd>
+          <dt>Date</dt><dd class="date">c. 150 CE</dd>
+        </dl>
+        <p class="desc">Recovered 1923 during the drainage works of the Tiber estuary. The hairline retains the diadem-channel typical of late Hadrianic workshops.</p>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card-inner">
+        <div class="accession">INV. MA-0421</div>
+        <h3>Cuirassed Statue of a Magistrate</h3>
+        <span class="laurel-mark" aria-hidden="true"></span>
+        <dl class="meta">
+          <dt>Material</dt><dd>Luna marble, restored left arm</dd>
+          <dt>Provenance</dt><dd>Tibur, Villa of Q. Hortensius</dd>
+          <dt>Date</dt><dd class="date">c. 75 CE</dd>
+        </dl>
+        <p class="desc">The breastplate bears a relief of two griffins flanking a candelabrum — an iconography rare outside the Flavian period.</p>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card-inner">
+        <div class="accession">INV. MA-0907</div>
+        <h3>Bronze Head of a Youth (Genius?)</h3>
+        <span class="laurel-mark" aria-hidden="true"></span>
+        <dl class="meta">
+          <dt>Material</dt><dd>Cast bronze, copper inlay</dd>
+          <dt>Provenance</dt><dd>Esquiline, Horti Lamiani</dd>
+          <dt>Date</dt><dd class="date">c. 30 BCE — 14 CE</dd>
+        </dl>
+        <p class="desc">Eyes hollowed for paste inlay, now lost. Compare to the Vatican <em>Genius Augusti</em> for stylistic kinship.</p>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card-inner">
+        <div class="accession">INV. MA-1402</div>
+        <h3>Funerary Relief of the Vibii</h3>
+        <span class="laurel-mark" aria-hidden="true"></span>
+        <dl class="meta">
+          <dt>Material</dt><dd>Travertine</dd>
+          <dt>Provenance</dt><dd>Via Latina, third milestone</dd>
+          <dt>Date</dt><dd class="date">c. 40 BCE</dd>
+        </dl>
+        <p class="desc">Three freedmen of the Vibia gens: Lucius the baker, Marcus the weaver, and the matron Vibia Prima. Names retained in original cutting.</p>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card-inner">
+        <div class="accession">INV. MA-1660</div>
+        <h3>Veiled Head of a Vestal</h3>
+        <span class="laurel-mark" aria-hidden="true"></span>
+        <dl class="meta">
+          <dt>Material</dt><dd>Pentelic marble</dd>
+          <dt>Provenance</dt><dd>Forum Romanum, Atrium Vestae</dd>
+          <dt>Date</dt><dd class="date">c. 200 CE</dd>
+        </dl>
+        <p class="desc">The infula is carved with unusual depth; the back of the head is unfinished, suggesting placement against a wall niche.</p>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card-inner">
+        <div class="accession">INV. MA-2011</div>
+        <h3>Equestrian Fragment — Hoof &amp; Plinth</h3>
+        <span class="laurel-mark" aria-hidden="true"></span>
+        <dl class="meta">
+          <dt>Material</dt><dd>Gilt bronze on travertine</dd>
+          <dt>Provenance</dt><dd>Capitoline slope, sondage 4</dd>
+          <dt>Date</dt><dd class="date">c. 175 CE</dd>
+        </dl>
+        <p class="desc">All that remains of a colossal equestrian honorific — likely Marcus Aurelius or a kindred ruler. The plinth retains an iron tang for fixing.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<div class="divider" role="presentation"></div>
+
+<!-- ============ SALA II — INSCRIPTIONS ============ -->
+<section class="hall" id="sala-ii">
+  <div class="hall-header">
+    <div class="roman">SALA · II</div>
+    <h2>Inscriptions &amp; Epigraphy</h2>
+    <span class="laurel" aria-hidden="true"></span>
+    <p class="summary">Stone-cut testimonies of decree, dedication, and daily commerce. Texts are presented with squeezes and letter-by-letter transcription.</p>
+  </div>
+  <div class="grid">
+    <article class="card">
+      <div class="card-inner">
+        <div class="accession">INV. MA-0033</div>
+        <h3>Decree of the Aventine Curia</h3>
+        <span class="laurel-mark" aria-hidden="true"></span>
+        <dl class="meta">
+          <dt>Material</dt><dd>Carrara marble tabula</dd>
+          <dt>Provenance</dt><dd>Aventinus, Templum Cereris</dd>
+          <dt>Date</dt><dd class="date">19 March 78 CE</dd>
+        </dl>
+        <p class="desc">Records a grain ration for the plebs urbana under Vespasian. Twenty-three lines, complete; the bronze fixing pins survive in situ.</p>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card-inner">
+        <div class="accession">INV. MA-0512</div>
+        <h3>Boundary Stone of the Pomerium</h3>
+        <span class="laurel-mark" aria-hidden="true"></span>
+        <dl class="meta">
+          <dt>Material</dt><dd>Tufa</dd>
+          <dt>Provenance</dt><dd>Via Salaria, near Porta Pinciana</dd>
+          <dt>Date</dt><dd class="date">c. 49 CE</dd>
+        </dl>
+        <p class="desc">Inscribed: <em>« CLAVDIVS · CAESAR · POMERIVM · AMPLIAVIT »</em>. One of seven cippi from Claudius's enlargement of the sacred boundary.</p>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card-inner">
+        <div class="accession">INV. MA-0844</div>
+        <h3>Funerary Stele of Aurelia Crispina</h3>
+        <span class="laurel-mark" aria-hidden="true"></span>
+        <dl class="meta">
+          <dt>Material</dt><dd>Limestone</dd>
+          <dt>Provenance</dt><dd>Via Appia, sixth milestone</dd>
+          <dt>Date</dt><dd class="date">c. 215 CE</dd>
+        </dl>
+        <p class="desc">Aurelia Crispina, freedwoman, lived twenty-two years, three months. The dedication is by her husband, the wine-merchant Crescens.</p>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card-inner">
+        <div class="accession">INV. MA-1029</div>
+        <h3>Fragment of the Acta Diurna</h3>
+        <span class="laurel-mark" aria-hidden="true"></span>
+        <dl class="meta">
+          <dt>Material</dt><dd>Travertine</dd>
+          <dt>Provenance</dt><dd>Forum, near the Curia Iulia</dd>
+          <dt>Date</dt><dd class="date">c. 60 CE</dd>
+        </dl>
+        <p class="desc">Acquired March 2025. Reads: <em>« HODIE · DICTATA · LEX · DE · ANNONA · POPVLVS · ASSENTITVR »</em>. A rare epigraphic echo of the daily gazette.</p>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card-inner">
+        <div class="accession">INV. MA-1181</div>
+        <h3>Bronze Military Diploma</h3>
+        <span class="laurel-mark" aria-hidden="true"></span>
+        <dl class="meta">
+          <dt>Material</dt><dd>Bronze, two leaves bound</dd>
+          <dt>Provenance</dt><dd>Pannonia Inferior (gift, 1962)</dd>
+          <dt>Date</dt><dd class="date">7 January 138 CE</dd>
+        </dl>
+        <p class="desc">Grant of citizenship to Tiberius Claudius Dossenus, auxiliary cavalry, upon honorable discharge. Witnessed by seven citizens of Rome.</p>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card-inner">
+        <div class="accession">INV. MA-1597</div>
+        <h3>Tabella Defixionis (Curse Tablet)</h3>
+        <span class="laurel-mark" aria-hidden="true"></span>
+        <dl class="meta">
+          <dt>Material</dt><dd>Lead, rolled and pierced</dd>
+          <dt>Provenance</dt><dd>Anio, Sanctuary of Anna Perenna</dd>
+          <dt>Date</dt><dd class="date">c. 110 CE</dd>
+        </dl>
+        <p class="desc">The petitioner Septimia binds the tongue and the hand of one Caecilius before the courts. Letters cut in mirror script.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<div class="divider" role="presentation"></div>
+
+<!-- ============ SALA III — DOMESTIC FRESCOES ============ -->
+<section class="hall" id="sala-iii">
+  <div class="hall-header">
+    <div class="roman">SALA · III</div>
+    <h2>Domestic Frescoes</h2>
+    <span class="laurel" aria-hidden="true"></span>
+    <p class="summary">Wall paintings detached and restored from Pompeii, Herculaneum, and the suburban villas of Latium. Works are displayed in muted light and at original elevation.</p>
+  </div>
+  <div class="grid">
+    <article class="card">
+      <div class="card-inner">
+        <div class="accession">INV. MA-0277</div>
+        <h3>Garden Wall — House of the Pomegranates</h3>
+        <span class="laurel-mark" aria-hidden="true"></span>
+        <dl class="meta">
+          <dt>Material</dt><dd>Fresco on lime plaster</dd>
+          <dt>Provenance</dt><dd>Pompeii, Regio I, Insula 9</dd>
+          <dt>Date</dt><dd class="date">c. 50 CE</dd>
+        </dl>
+        <p class="desc">A continuous viridarium with pomegranate, oleander, and hooded songbirds. Detached 1957 in a single panel of 3.10 metres.</p>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card-inner">
+        <div class="accession">INV. MA-0633</div>
+        <h3>Cubiculum Panel — Cupid &amp; Psyche</h3>
+        <span class="laurel-mark" aria-hidden="true"></span>
+        <dl class="meta">
+          <dt>Material</dt><dd>Fourth-style fresco</dd>
+          <dt>Provenance</dt><dd>Herculaneum, Casa del Bicentenario</dd>
+          <dt>Date</dt><dd class="date">c. 65 CE</dd>
+        </dl>
+        <p class="desc">A small mythological vignette set within an architectural aedicula. The pigment yellow ochre was sourced from Sinope.</p>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card-inner">
+        <div class="accession">INV. MA-0951</div>
+        <h3>Dining Frieze with Theatre Masks</h3>
+        <span class="laurel-mark" aria-hidden="true"></span>
+        <dl class="meta">
+          <dt>Material</dt><dd>Fresco fragment</dd>
+          <dt>Provenance</dt><dd>Boscoreale, Villa of P. Fannius</dd>
+          <dt>Date</dt><dd class="date">c. 30 BCE</dd>
+        </dl>
+        <p class="desc">Tragic and comic masks alternate above garlands of laurel. Cinnabar red is preserved with rare luminosity.</p>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card-inner">
+        <div class="accession">INV. MA-1156</div>
+        <h3>Lararium Panel of the Praetorian</h3>
+        <span class="laurel-mark" aria-hidden="true"></span>
+        <dl class="meta">
+          <dt>Material</dt><dd>Fresco on tufa-mortar</dd>
+          <dt>Provenance</dt><dd>Rome, Caelian Hill (Castra Nova)</dd>
+          <dt>Date</dt><dd class="date">c. 200 CE</dd>
+        </dl>
+        <p class="desc">Genius of the household flanked by twin lares. Inscribed beneath: <em>« GENIO · LOCI · SACRVM »</em>.</p>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card-inner">
+        <div class="accession">INV. MA-1340</div>
+        <h3>Black-Ground Panel with Egret</h3>
+        <span class="laurel-mark" aria-hidden="true"></span>
+        <dl class="meta">
+          <dt>Material</dt><dd>Third-style fresco</dd>
+          <dt>Provenance</dt><dd>Stabiae, Villa Arianna</dd>
+          <dt>Date</dt><dd class="date">c. 20 CE</dd>
+        </dl>
+        <p class="desc">A solitary white egret upon a velvet-black field. The most-requested image in our 2024 study-room reservation log.</p>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card-inner">
+        <div class="accession">INV. MA-1818</div>
+        <h3>Ceiling Coffer with Rosette</h3>
+        <span class="laurel-mark" aria-hidden="true"></span>
+        <dl class="meta">
+          <dt>Material</dt><dd>Stucco &amp; fresco composite</dd>
+          <dt>Provenance</dt><dd>Rome, Domus Transitoria</dd>
+          <dt>Date</dt><dd class="date">c. 64 CE</dd>
+        </dl>
+        <p class="desc">A single coffer recovered from the ruins beneath Nero's Domus Aurea. Gilt traces remain in the rosette's central boss.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<div class="divider" role="presentation"></div>
+
+<!-- ============ SALA IV — COINS & CAMEOS ============ -->
+<section class="hall" id="sala-iv">
+  <div class="hall-header">
+    <div class="roman">SALA · IV</div>
+    <h2>Coins &amp; Cameos</h2>
+    <span class="laurel" aria-hidden="true"></span>
+    <p class="summary">The cabinet of small treasures: sestertii, denarii, glass paste, and carved sardonyx. Magnification stands are provided at every case.</p>
+  </div>
+  <div class="grid">
+    <article class="card">
+      <div class="card-inner">
+        <div class="accession">INV. MA-N-0114</div>
+        <h3>Aureus of Augustus — Capricorn Reverse</h3>
+        <span class="laurel-mark" aria-hidden="true"></span>
+        <dl class="meta">
+          <dt>Material</dt><dd>Gold, 7.92 g</dd>
+          <dt>Provenance</dt><dd>Lugdunum mint (acq. 1971)</dd>
+          <dt>Date</dt><dd class="date">15 — 13 BCE</dd>
+        </dl>
+        <p class="desc">Obverse: bare head of Augustus. Reverse: Capricorn with cornucopia and globe — the natal sign of the princeps.</p>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card-inner">
+        <div class="accession">INV. MA-N-0388</div>
+        <h3>Sestertius of Nero — Port of Ostia</h3>
+        <span class="laurel-mark" aria-hidden="true"></span>
+        <dl class="meta">
+          <dt>Material</dt><dd>Orichalcum, 26.4 g</dd>
+          <dt>Provenance</dt><dd>Rome mint</dd>
+          <dt>Date</dt><dd class="date">c. 64 CE</dd>
+        </dl>
+        <p class="desc">Reverse: a bird's-eye view of the harbour with seven ships and a colossal Neptune. One of the finest known specimens.</p>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card-inner">
+        <div class="accession">INV. MA-N-0541</div>
+        <h3>Denarius of the Liberators</h3>
+        <span class="laurel-mark" aria-hidden="true"></span>
+        <dl class="meta">
+          <dt>Material</dt><dd>Silver, 3.71 g</dd>
+          <dt>Provenance</dt><dd>Travelling mint, Greece</dd>
+          <dt>Date</dt><dd class="date">42 BCE</dd>
+        </dl>
+        <p class="desc">Brutus on the obverse; <em>« EID · MAR »</em> beneath two daggers and the cap of liberty on the reverse. Fewer than one hundred examples are recorded.</p>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card-inner">
+        <div class="accession">INV. MA-G-0042</div>
+        <h3>Sardonyx Cameo — Livia as Ceres</h3>
+        <span class="laurel-mark" aria-hidden="true"></span>
+        <dl class="meta">
+          <dt>Material</dt><dd>Three-layer sardonyx, 41 mm</dd>
+          <dt>Provenance</dt><dd>Bequest, Carnelos collection</dd>
+          <dt>Date</dt><dd class="date">c. 14 — 29 CE</dd>
+        </dl>
+        <p class="desc">Profile bust crowned with wheat. The reverse retains the antique gold setting prepared for a finger ring.</p>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card-inner">
+        <div class="accession">INV. MA-G-0129</div>
+        <h3>Glass Paste Intaglio — Eagle &amp; Standard</h3>
+        <span class="laurel-mark" aria-hidden="true"></span>
+        <dl class="meta">
+          <dt>Material</dt><dd>Cobalt-blue glass</dd>
+          <dt>Provenance</dt><dd>Aquileia (acq. 1939)</dd>
+          <dt>Date</dt><dd class="date">c. 90 CE</dd>
+        </dl>
+        <p class="desc">A legionary aquila clutching thunderbolts between two vexilla. Probably a soldier's seal-stone.</p>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card-inner">
+        <div class="accession">INV. MA-N-0772</div>
+        <h3>Antoninianus of Gallienus — Soli Invicto</h3>
+        <span class="laurel-mark" aria-hidden="true"></span>
+        <dl class="meta">
+          <dt>Material</dt><dd>Billon, 3.10 g</dd>
+          <dt>Provenance</dt><dd>Rome mint</dd>
+          <dt>Date</dt><dd class="date">c. 265 CE</dd>
+        </dl>
+        <p class="desc">Radiate bust of Gallienus. Reverse: Sol standing left, raising hand, with whip — a coin of the crisis decades.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ READING ROOM NOTE ============ -->
+<section class="reading-room">
+  <h2>Object Study by Appointment</h2>
+  <p>Researchers, students, and conservators may request handling sessions in the Sala di Studio, third floor. Applications are received through the registrar at <strong>studio@mvseo-aureliano.it</strong>; permission is generally granted within fourteen days. A magnifying lamp, white-cotton gloves, and a graphite pencil are provided; ink is forbidden.</p>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="footer-frieze" role="presentation"></div>
+  <div class="footer-cols">
+    <div class="col">
+      <h4>Visit</h4>
+      Via di Santa Sabina, 14<br>
+      00153 Roma · Aventino<br>
+      Mart — Dom · 09.30 — 18.30<br>
+      Closed Lunedì &amp; 1 Gennaio
+    </div>
+    <div class="col">
+      <h4>Contact</h4>
+      +39 06 4744 0182<br>
+      info@mvseo-aureliano.it<br>
+      Press · ufficio.stampa<br>
+      Studio · studio
+    </div>
+    <div class="col">
+      <h4>Credits</h4>
+      Direzione · L. Carnelos<br>
+      Conservazione · M. Voltini<br>
+      Architettura · Studio Pierantoni<br>
+      Photographs · A. Bertelli
+    </div>
+  </div>
+  <div class="tailpiece" aria-hidden="true">❦ · ❦ · ❦</div>
+  <div class="founding">FUNDATA · ANNO · MCMLXXIV</div>
+</footer>
+
+</body>
+</html>

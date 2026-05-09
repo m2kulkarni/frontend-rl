@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Pattern Library — The Five Wagara | Ukiyo Gazette</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), serif;
+    margin: 0;
+    line-height: 1.7;
+  }
+
+  /* ——— Navigation ——— */
+  .masthead {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    padding: 1.4rem 4rem 1.4rem 3rem;
+    border-bottom: 1px solid rgba(12,12,12,0.35);
+  }
+  .masthead .seal {
+    width: 38px;
+    height: 38px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .masthead .wordmark {
+    font-family: var(--font-display), serif;
+    font-size: 1.05rem;
+    letter-spacing: 0.18em;
+    margin-left: 1rem;
+    color: var(--text);
+  }
+  nav.primary {
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+  nav.primary a {
+    font-family: var(--font-body), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.12em;
+    font-size: 0.78rem;
+    color: var(--text);
+    text-decoration: none;
+    padding: 0 1.1rem;
+    border-right: 1px solid rgba(12,12,12,0.45);
+    line-height: 1;
+    position: relative;
+  }
+  nav.primary a:last-child { border-right: none; padding-right: 0; }
+  nav.primary a:first-child { padding-left: 0; }
+  nav.primary a[aria-current="page"] {
+    color: var(--text);
+  }
+  nav.primary a[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    left: 1.1rem;
+    right: 1.1rem;
+    bottom: -0.55rem;
+    height: 1px;
+    background: var(--secondary);
+  }
+
+  /* ——— Hero ——— */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 5rem 4rem 4rem 6rem;
+    gap: 4rem;
+    position: relative;
+  }
+  .hero-text {
+    max-width: 30rem;
+  }
+  .kicker {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 0.82rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin-bottom: 2.2rem;
+    display: block;
+  }
+  .kicker .cinnabar { color: var(--secondary); font-style: normal; }
+  h1.title {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 3.6rem;
+    line-height: 1.05;
+    margin: 0 0 1.8rem 0;
+    letter-spacing: 0.01em;
+  }
+  h1.title .ja {
+    display: block;
+    font-size: 1.45rem;
+    letter-spacing: 0.4em;
+    margin-top: 1.1rem;
+    color: var(--text);
+    opacity: 0.85;
+  }
+  .lede {
+    font-family: var(--font-body), serif;
+    font-size: 1.02rem;
+    line-height: 1.85;
+    max-width: 56ch;
+  }
+  .lede em { color: var(--secondary); font-style: normal; }
+
+  .hero-frame {
+    position: relative;
+    align-self: start;
+    height: 360px;
+    overflow: hidden;
+    opacity: 0.18;
+    margin-top: 1rem;
+  }
+  .hero-frame svg { width: 100%; height: auto; display:block;}
+
+  /* ——— Section divider ——— */
+  .divider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem 0 2rem 0;
+    gap: 1.5rem;
+  }
+  .divider .rule {
+    flex: 0 0 280px;
+    height: 1px;
+    background: var(--text);
+  }
+  .divider .glyph {
+    width: 26px;
+    height: 26px;
+    opacity: 0.7;
+  }
+  .divider .glyph svg { width: 100%; height: 100%; }
+
+  /* ——— Pattern entries ——— */
+  .library {
+    padding: 2rem 4rem 3rem 6rem;
+  }
+  .library-head {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 4rem;
+  }
+  .library-head h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 1.95rem;
+    margin: 0;
+    line-height: 1.2;
+  }
+  .library-head p {
+    font-size: 0.95rem;
+    max-width: 54ch;
+    line-height: 1.85;
+    margin: 0;
+  }
+
+  .pattern-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2.4rem;
+    align-items: stretch;
+  }
+  .pattern {
+    background: var(--surface);
+    padding: 2.5rem 1.8rem 2.6rem 1.8rem;
+    position: relative;
+    overflow: hidden;
+    min-height: 520px;
+    display: flex;
+    flex-direction: column;
+  }
+  .pattern .tile-bg {
+    position: absolute;
+    inset: 0;
+    opacity: 0.07;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .pattern .tile-bg svg {
+    width: 140%;
+    height: 140%;
+    position: absolute;
+    top: -10%;
+    left: -10%;
+  }
+  .pattern .corner-mon {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.2rem;
+    width: 22px;
+    height: 22px;
+    opacity: 0.85;
+  }
+  .pattern .num {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    color: var(--secondary);
+    margin-bottom: 1rem;
+    position: relative;
+  }
+  .pattern h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 1.55rem;
+    margin: 0 0 0.2rem 0;
+    line-height: 1.1;
+    position: relative;
+  }
+  .pattern .ja-name {
+    font-family: var(--font-display), serif;
+    font-size: 1.05rem;
+    letter-spacing: 0.2em;
+    margin-bottom: 1.4rem;
+    position: relative;
+    opacity: 0.85;
+  }
+  .pattern .meta {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 0.78rem;
+    line-height: 1.6;
+    margin-bottom: 1.4rem;
+    position: relative;
+    border-top: 1px solid rgba(12,12,12,0.3);
+    border-bottom: 1px solid rgba(12,12,12,0.3);
+    padding: 0.6rem 0;
+  }
+  .pattern .meta dt {
+    display: inline;
+    font-style: normal;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-size: 0.66rem;
+  }
+  .pattern .meta dd { display: inline; margin: 0 0 0 0.3rem; }
+  .pattern .meta dd::after { content: ""; display: block; height: 0.2rem; }
+  .pattern .body {
+    font-size: 0.86rem;
+    line-height: 1.75;
+    position: relative;
+    max-width: 28ch;
+  }
+  .pattern .body p { margin: 0 0 0.9rem 0; }
+  .pattern .body p:last-child { margin-bottom: 0; }
+
+  /* Pattern-specific tile drawings (low-opacity backgrounds) */
+  .tile-bg.seigaiha { transform: scale(0.6); transform-origin: top left; }
+
+  /* ——— Bibliography ——— */
+  .biblio {
+    margin: 6rem 4rem 5rem 6rem;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 5rem;
+    padding-top: 3rem;
+    border-top: 1px solid rgba(12,12,12,0.5);
+    position: relative;
+  }
+  .biblio-head {
+    position: relative;
+  }
+  .biblio-head h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 2rem;
+    margin: 0 0 0.6rem 0;
+    line-height: 1.1;
+  }
+  .biblio-head .ja {
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.4em;
+    font-size: 1rem;
+    opacity: 0.7;
+  }
+  .biblio-head .gold-leaf {
+    position: absolute;
+    top: -0.6rem;
+    left: -2.2rem;
+    width: 14px;
+    height: 14px;
+    background: var(--accent);
+    transform: rotate(45deg);
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.15);
+  }
+  .biblio-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    counter-reset: bib;
+    max-width: 62ch;
+  }
+  .biblio-list li {
+    counter-increment: bib;
+    padding: 1.1rem 0 1.1rem 3.2rem;
+    border-bottom: 1px solid rgba(12,12,12,0.18);
+    font-size: 0.92rem;
+    line-height: 1.8;
+    position: relative;
+  }
+  .biblio-list li:last-child { border-bottom: none; }
+  .biblio-list li::before {
+    content: counter(bib, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 1.25rem;
+    font-family: var(--font-display), serif;
+    font-size: 0.95rem;
+    color: var(--secondary);
+    letter-spacing: 0.05em;
+  }
+  .biblio-list cite {
+    font-style: italic;
+    color: var(--text);
+  }
+
+  /* ——— Footer ——— */
+  footer {
+    margin-top: 5rem;
+    padding: 3rem 4rem 3rem 6rem;
+    border-top: 1px solid rgba(12,12,12,0.55);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+  footer .crane {
+    width: 56px;
+    height: 56px;
+    margin-bottom: 1rem;
+    display: block;
+  }
+  footer .colophon {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 0.82rem;
+    line-height: 1.7;
+    max-width: 36ch;
+  }
+  footer .colophon strong {
+    font-style: normal;
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+  }
+  footer .right {
+    text-align: right;
+    font-size: 0.82rem;
+    line-height: 1.8;
+  }
+  footer .right .label {
+    font-variant: small-caps;
+    letter-spacing: 0.15em;
+    color: var(--secondary);
+    display: block;
+    margin-top: 0.6rem;
+  }
+  footer .right address {
+    font-style: normal;
+  }
+  footer .attribution {
+    margin-top: 1.6rem;
+    font-size: 0.72rem;
+    opacity: 0.7;
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div>
+    <!-- Umebachi seal -->
+    <svg class="seal" viewBox="0 0 688 688" aria-hidden="true">
+      <circle cx="344" cy="344" r="340" fill="#0c0c0c"/>
+      <g transform="translate(0,0)" fill="#f5efde">
+        <circle cx="344" cy="180" r="78"/>
+        <circle cx="216" cy="290" r="78"/>
+        <circle cx="472" cy="290" r="78"/>
+        <circle cx="260" cy="450" r="78"/>
+        <circle cx="428" cy="450" r="78"/>
+        <circle cx="344" cy="344" r="46" fill="#0c0c0c"/>
+      </g>
+    </svg>
+    <span class="wordmark">浮世瓦版 · UKIYO GAZETTE</span>
+  </div>
+  <nav class="primary" aria-label="Primary">
+    <a href="page-1.html">Front Page</a>
+    <a href="page-2.html">Feature</a>
+    <a href="page-3.html">Travelogue</a>
+    <a href="page-4.html">Interview</a>
+    <a href="page-5.html" aria-current="page">Pattern Library</a>
+    <a href="page-6.html">Subscribe</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-text">
+    <span class="kicker">Reference No. 5 &nbsp;·&nbsp; <span class="cinnabar">Bunsei 6 — Reissued 2024</span></span>
+    <h1 class="title">
+      Pattern Library
+      <span class="ja">五つの和柄</span>
+    </h1>
+    <p class="lede">
+      Five canonical textile patterns — <em>wagara</em> — recur through the printed and woven matter of late-Edo Japan with such persistence that they functioned, in effect, as a shared visual vocabulary. Each carries a name, a date of first record, and a settled emblematic meaning. What follows is a brief catalogue: origins, symbolism, and the trades and stations of life in which the pattern was customarily used.
+    </p>
+  </div>
+  <div class="hero-frame" aria-hidden="true">
+    <!-- Seigaiha hero motif -->
+    <svg viewBox="0 0 700 700" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <g id="C1h">
+          <path d="M 1,210 V 100 A 98,98 0 0 1 100,1 98,98 0 0 1 199,100 V 210" fill="none" stroke="#0c0c0c" stroke-width="2"/>
+          <path d="M 175,210 V 100 A 75,75 0 0 0 100,25 75,75 0 0 0 25,100 V 210" fill="none" stroke="#0c0c0c" stroke-width="1"/>
+        </g>
+        <g id="C4h">
+          <use href="#C1h"/>
+          <use href="#C1h" transform="translate(200,0)"/>
+          <use href="#C1h" transform="translate(400,0)"/>
+          <use href="#C1h" transform="translate(600,0)"/>
+        </g>
+      </defs>
+      <use href="#C4h" transform="translate(-100,100)"/>
+      <use href="#C4h" transform="translate(0,200)"/>
+      <use href="#C4h" transform="translate(-100,300)"/>
+      <use href="#C4h" transform="translate(0,400)"/>
+      <use href="#C4h" transform="translate(-100,500)"/>
+      <use href="#C4h" transform="translate(0,600)"/>
+    </svg>
+  </div>
+</section>
+
+<div class="divider" aria-hidden="true">
+  <span class="rule"></span>
+  <span class="glyph">
+    <svg viewBox="0 0 600 600">
+      <polygon points="501.6,301.2 551.1,251.7 500.8,201.4 451.3,250.9 300.9,100.5 350.4,51 300.1,0.7 250.6,50.2 201.1,0.7 150.3,51.5 500.3,401.5 551.1,350.7" fill="none" stroke="#0c0c0c" stroke-width="14"/>
+    </svg>
+  </span>
+  <span class="rule"></span>
+</div>
+
+<section class="library">
+  <div class="library-head">
+    <h2>The Five Canonical<br>Wagara, in Order of<br>First Recorded Use.</h2>
+    <p>
+      The names below are drawn principally from the <em>Hinagata Kikō</em> of Kanbun 6 (1666) — the earliest surviving kimono pattern book — and from Hishikawa Moronobu's twelve illustrated pattern books of Jōkyō 1 (1684). Where dates appear, they refer to the first appearance of the pattern in dyed or woven textiles, not to the underlying geometric form, several of which are far older and travel from Tang China through Heian-period court robes before settling into the merchant wardrobes of Edo.
+    </p>
+  </div>
+
+  <div class="pattern-grid">
+
+    <!-- 1. Seigaiha -->
+    <article class="pattern">
+      <div class="tile-bg" aria-hidden="true">
+        <svg viewBox="0 0 700 700">
+          <defs>
+            <g id="C1a">
+              <path d="M 1,210 V 100 A 98,98 0 0 1 100,1 98,98 0 0 1 199,100 V 210" fill="none" stroke="#0c0c0c" stroke-width="3"/>
+              <path d="M 175,210 V 100 A 75,75 0 0 0 100,25 75,75 0 0 0 25,100 V 210" fill="none" stroke="#0c0c0c" stroke-width="2"/>
+            </g>
+            <g id="C4a">
+              <use href="#C1a"/><use href="#C1a" transform="translate(200,0)"/><use href="#C1a" transform="translate(400,0)"/><use href="#C1a" transform="translate(600,0)"/>
+            </g>
+          </defs>
+          <use href="#C4a" transform="translate(-100,100)"/>
+          <use href="#C4a" transform="translate(0,200)"/>
+          <use href="#C4a" transform="translate(-100,300)"/>
+          <use href="#C4a" transform="translate(0,400)"/>
+          <use href="#C4a" transform="translate(-100,500)"/>
+        </svg>
+      </div>
+      <svg class="corner-mon" viewBox="0 0 100 100" aria-hidden="true">
+        <circle cx="50" cy="50" r="48" fill="none" stroke="#0c0c0c" stroke-width="2"/>
+        <path d="M 10,80 A 40,40 0 0 1 90,80" fill="none" stroke="#0c0c0c" stroke-width="2"/>
+        <path d="M 25,80 A 25,25 0 0 1 75,80" fill="none" stroke="#0c0c0c" stroke-width="2"/>
+      </svg>
+      <span class="num">— I —</span>
+      <h3>Seigaiha</h3>
+      <span class="ja-name">青海波</span>
+      <dl class="meta">
+        <dt>Symbol:</dt><dd>calm seas, fortune unending</dd>
+        <dt>First record:</dt><dd>Heian gagaku robe, c. 794</dd>
+        <dt>Usage:</dt><dd>fishermen, court music, summer kosode</dd>
+      </dl>
+      <div class="body">
+        <p>The name — "blue-sea waves" — descends from a piece of Tang-derived court music whose dancers wore the pattern. As a textile motif it spread south from the Heian court to the fishing villages of Settsu and Sagami, where it was understood as a quiet petition for safe return.</p>
+        <p>By the Genroku era it had been thoroughly absorbed into civilian dress and is the wagara most often seen in Hokusai's marginalia.</p>
+      </div>
+    </article>
+
+    <!-- 2. Asanoha -->
+    <article class="pattern">
+      <div class="tile-bg" aria-hidden="true">
+        <svg viewBox="0 0 200 200">
+          <g fill="none" stroke="#0c0c0c" stroke-width="1.2">
+            <g id="hex">
+              <polygon points="50,0 100,28 100,72 50,100 0,72 0,28"/>
+              <line x1="50" y1="0" x2="50" y2="100"/>
+              <line x1="0" y1="28" x2="100" y2="72"/>
+              <line x1="100" y1="28" x2="0" y2="72"/>
+              <line x1="50" y1="50" x2="0" y2="28"/>
+              <line x1="50" y1="50" x2="100" y2="28"/>
+              <line x1="50" y1="50" x2="0" y2="72"/>
+              <line x1="50" y1="50" x2="100" y2="72"/>
+            </g>
+            <use href="#hex" x="100"/>
+            <use href="#hex" x="50" y="72"/>
+            <use href="#hex" x="-50" y="72"/>
+            <use href="#hex" x="150" y="72"/>
+            <use href="#hex" y="144"/>
+            <use href="#hex" x="100" y="144"/>
+          </g>
+        </svg>
+      </div>
+      <svg class="corner-mon" viewBox="0 0 100 100" aria-hidden="true">
+        <g fill="none" stroke="#0c0c0c" stroke-width="2">
+          <circle cx="50" cy="50" r="48"/>
+          <polygon points="50,15 80,32 80,68 50,85 20,68 20,32"/>
+          <line x1="50" y1="15" x2="50" y2="85"/>
+          <line x1="20" y1="32" x2="80" y2="68"/>
+          <line x1="80" y1="32" x2="20" y2="68"/>
+        </g>
+      </svg>
+      <span class="num">— II —</span>
+      <h3>Asanoha</h3>
+      <span class="ja-name">麻の葉</span>
+      <dl class="meta">
+        <dt>Symbol:</dt><dd>vigorous growth, a child's health</dd>
+        <dt>First record:</dt><dd>Buddhist statuary, Kamakura era</dd>
+        <dt>Usage:</dt><dd>infant swaddling, undyed bleached linen</dd>
+      </dl>
+      <div class="body">
+        <p>A six-pointed star inscribed in a hexagon, taken from the leaf of the hemp plant — itself the fastest-growing fibre known to Edo households. Custom held that the first cloth wrapped about a newborn should bear this pattern so that the child might grow as straight and as quickly as the hemp itself.</p>
+        <p>Rendered, by the late eighteenth century, in cinnabar against indigo for women, indigo against bleached white for boys.</p>
+      </div>
+    </article>
+
+    <!-- 3. Shippo -->
+    <article class="pattern">
+      <div class="tile-bg" aria-hidden="true">
+        <svg viewBox="0 0 200 200">
+          <g fill="none" stroke="#0c0c0c" stroke-width="1.2">
+            <circle cx="0" cy="0" r="40"/>
+            <circle cx="80" cy="0" r="40"/>
+            <circle cx="160" cy="0" r="40"/>
+            <circle cx="40" cy="40" r="40"/>
+            <circle cx="120" cy="40" r="40"/>
+            <circle cx="200" cy="40" r="40"/>
+            <circle cx="0" cy="80" r="40"/>
+            <circle cx="80" cy="80" r="40"/>
+            <circle cx="160" cy="80" r="40"/>
+            <circle cx="40" cy="120" r="40"/>
+            <circle cx="120" cy="120" r="40"/>
+            <circle cx="0" cy="160" r="40"/>
+            <circle cx="80" cy="160" r="40"/>
+            <circle cx="160" cy="160" r="40"/>
+            <circle cx="40" cy="200" r="40"/>
+            <circle cx="120" cy="200" r="40"/>
+          </g>
+        </svg>
+      </div>
+      <svg class="corner-mon" viewBox="0 0 100 100" aria-hidden="true">
+        <g fill="none" stroke="#0c0c0c" stroke-width="2">
+          <circle cx="50" cy="50" r="48"/>
+          <circle cx="35" cy="50" r="20"/>
+          <circle cx="65" cy="50" r="20"/>
+          <circle cx="50" cy="35" r="20"/>
+          <circle cx="50" cy="65" r="20"/>
+        </g>
+      </svg>
+      <span class="num">— III —</span>
+      <h3>Shippō</h3>
+      <span class="ja-name">七宝</span>
+      <dl class="meta">
+        <dt>Symbol:</dt><dd>harmony, the seven Buddhist treasures</dd>
+        <dt>First record:</dt><dd>Hinagata Kikō, 1666</dd>
+        <dt>Usage:</dt><dd>brocade obi, temple-banner silks</dd>
+      </dl>
+      <div class="body">
+        <p>Four overlapping circles produce a continuous lattice of four-petaled stars and pointed ovals. The seven treasures of which the name speaks are gold, silver, lapis, agate, coral, crystal, and pearl — listed in the Lotus Sūtra and recited at New Year by every Kyōto weaver of consequence.</p>
+        <p>Rendered most carefully by the workshops of Nishijin in gold-leaf and indigo silk; Karaori robes of the Nō stage almost invariably carry it.</p>
+      </div>
+    </article>
+
+    <!-- 4. Sayagata -->
+    <article class="pattern">
+      <div class="tile-bg" aria-hidden="true">
+        <svg viewBox="0 0 600 600">
+          <g fill="none" stroke="#0c0c0c" stroke-width="2">
+            <polygon points="501.6,301.2 551.1,251.7 500.8,201.4 451.3,250.9 300.9,100.5 350.4,51 300.1,0.7 250.6,50.2 201.1,0.7 150.3,51.5 500.3,401.5 551.1,350.7"/>
+            <polygon points="600.9,199.9 551.6,150.7 601.2,101 550.7,50.4 501,100.1 450.4,150.7 400.8,200.3 451.3,250.9 501,201.2 550.3,250.5"/>
+            <polyline points="600,0 400.8,200.3 351,150.5 501.5,0"/>
+            <polygon points="349.9,452.9 300.4,502.4 250.1,452.1 299.6,402.6 149.2,252.2 99.7,301.7 49.4,251.4 98.9,201.9 49.4,152.4 100.2,101.6 450.2,451.6 399.4,502.4"/>
+            <polygon points="248.7,552.1 199.4,502.9 149.7,552.5 99.2,501.9 148.8,452.3 199.4,401.7 249,352.1 299.6,402.6 250,452.3 299.2,501.6"/>
+            <polygon points="-0.9,302.6 48.4,351.9 -1.2,401.5 49.3,452.1 99,402.5 149.6,351.9 199.2,302.2 148.7,251.7 99,301.3 49.7,252"/>
+          </g>
+        </svg>
+      </div>
+      <svg class="corner-mon" viewBox="0 0 100 100" aria-hidden="true">
+        <g fill="none" stroke="#0c0c0c" stroke-width="2">
+          <circle cx="50" cy="50" r="48"/>
+          <path d="M 25,30 L 50,30 L 50,55 L 75,55 L 75,75 L 25,75 Z M 35,40 L 35,65 L 65,65 L 65,55"/>
+        </g>
+      </svg>
+      <span class="num">— IV —</span>
+      <h3>Sayagata</h3>
+      <span class="ja-name">紗綾形</span>
+      <dl class="meta">
+        <dt>Symbol:</dt><dd>longevity, an unbroken way</dd>
+        <dt>First record:</dt><dd>Ming damask imports, c. 1570</dd>
+        <dt>Usage:</dt><dd>samurai under-robes, mounting-paper</dd>
+      </dl>
+      <div class="body">
+        <p>Interlinked manji-fret. The form arrived from Ming-dynasty saya damask in the late sixteenth century and was at once adopted by warrior households for the under-robes worn beneath formal kamishimo. Its appeal was the unbroken line: a path that turns without ever ending.</p>
+        <p>Hand-mounters of woodblock prints used a finer version of the same pattern as backing-paper, where it survives still on the verso of every well-kept Hokusai sheet.</p>
+      </div>
+    </article>
+
+    <!-- 5. Kikko -->
+    <article class="pattern">
+      <div class="tile-bg" aria-hidden="true">
+        <svg viewBox="0 0 200 240">
+          <g fill="none" stroke="#0c0c0c" stroke-width="1.2">
+            <g id="kh">
+              <polygon points="30,0 60,17 60,52 30,69 0,52 0,17"/>
+            </g>
+            <use href="#kh"/>
+            <use href="#kh" x="60"/>
+            <use href="#kh" x="120"/>
+            <use href="#kh" x="30" y="52"/>
+            <use href="#kh" x="90" y="52"/>
+            <use href="#kh" x="150" y="52"/>
+            <use href="#kh" y="103"/>
+            <use href="#kh" x="60" y="103"/>
+            <use href="#kh" x="120" y="103"/>
+            <use href="#kh" x="30" y="155"/>
+            <use href="#kh" x="90" y="155"/>
+            <use href="#kh" x="150" y="155"/>
+            <use href="#kh" y="207"/>
+            <use href="#kh" x="60" y="207"/>
+            <use href="#kh" x="120" y="207"/>
+          </g>
+        </svg>
+      </div>
+      <svg class="corner-mon" viewBox="0 0 100 100" aria-hidden="true">
+        <g fill="none" stroke="#0c0c0c" stroke-width="2">
+          <circle cx="50" cy="50" r="48"/>
+          <polygon points="50,18 76,33 76,67 50,82 24,67 24,33"/>
+          <polygon points="50,32 64,40 64,60 50,68 36,60 36,40"/>
+        </g>
+      </svg>
+      <span class="num">— V —</span>
+      <h3>Kikkō</h3>
+      <span class="ja-name">亀甲</span>
+      <dl class="meta">
+        <dt>Symbol:</dt><dd>endurance, ten thousand years</dd>
+        <dt>First record:</dt><dd>Shōsō-in textiles, c. 756</dd>
+        <dt>Usage:</dt><dd>Nō costume, ceremonial obi</dd>
+      </dl>
+      <div class="body">
+        <p>The hexagon of the tortoise's shell. The proverb — <em>tsuru wa sen-nen, kame wa man-nen</em>, the crane a thousand years, the tortoise ten thousand — fixes the pattern's meaning to the longest-lived creature the language knows.</p>
+        <p>Found among the eighth-century textiles preserved at Tōdai-ji's Shōsō-in repository, it is the oldest of the five wagara still in continuous use, and the most reserved: kikkō belongs to ceremony, not the street.</p>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<section class="biblio">
+  <div class="biblio-head">
+    <span class="gold-leaf" aria-hidden="true"></span>
+    <h2>A Short<br>Bibliography</h2>
+    <span class="ja">參考書目</span>
+  </div>
+  <ol class="biblio-list">
+    <li>
+      Hishikawa Moronobu (菱川師宣). <cite>On-hiinakata</cite> [御雛形] — twelve illustrated pattern books. Edo: Yamagataya Ichirōbei, Jōkyō 1 (1684). The foundational corpus for civilian wagara; held in fragments at the Tōkyō National Museum and complete at the Spencer Collection, NYPL.
+    </li>
+    <li>
+      Anonymous compiler. <cite>Hinagata Kikō</cite> [雛形菊慕] — pattern book of women's kosode. Kyōto: undocumented publisher, Kanbun 6 (1666). Earliest known printed kimono-pattern manual; the source for the canonical names of Shippō and Sayagata as set down here.
+    </li>
+    <li>
+      Hayashi Yoshikazu, ed. <cite>Edo Sarasa: Some-iro no Hyakka</cite> [江戸更紗 染色の百花]. Kyōto: Nigensha, reprint 1972. A standard reference for dye-recipes and pattern dating across the Bunsei and Tenpō eras.
+    </li>
+    <li>
+      Nishijin Textile Industrial Association, ed. <cite>Nishijin Ori no Rekishi to Bunken</cite> [西陣織の歴史と文献]. Kyōto: 1968 ; consulted at the Nishijin Textile Centre archive, Imadegawa-Horikawa.
+    </li>
+    <li>
+      Tanaka Atsuko. "On the Provenance of the Asanoha Hexagram in Kamakura Sculpture," <cite>Bulletin of the Kyōto National Museum</cite> 14 (1992), pp. 47–73.
+    </li>
+  </ol>
+</section>
+
+<footer>
+  <div>
+    <svg class="crane" viewBox="0 0 688 688" aria-hidden="true">
+      <circle cx="344" cy="344" r="338" fill="none" stroke="#0c0c0c" stroke-width="6"/>
+      <g transform="translate(344,344)" stroke="#0c0c0c" stroke-width="4" fill="none">
+        <circle r="240"/>
+        <path d="M -180,40 Q -90,-160 0,-200 Q 90,-160 180,40 Q 90,140 0,160 Q -90,140 -180,40 Z"/>
+        <circle r="60" fill="#0c0c0c"/>
+        <path d="M -120,-80 L 0,40 L 120,-80" stroke-width="3"/>
+      </g>
+    </svg>
+    <p class="colophon">
+      <strong>『浮世瓦版』 Ukiyo Gazette</strong><br>
+      Established Bunsei 6 (1823),<br>
+      reissued in the present form, 2024.<br>
+      A quarterly broadsheet on woodblock prints, machiya life,<br>and the traveling roads of late-Edo Japan.
+    </p>
+  </div>
+  <div class="right">
+    <address>
+      Editorial Office<br>
+      二条通烏丸西入 · Nijō-dōri, Karasuma nishi-iru<br>
+      Nakagyō-ku, Kyōto-shi 604-0857<br>
+      Japan
+    </address>
+    <span class="label">Issue №&nbsp;XLIV · Autumn 2024</span>
+    <p class="attribution">
+      Kamon and pattern SVGs after public-domain sources<br>
+      via Wikimedia Commons (CC-BY-SA 4.0): Mukai, Kazumasa;<br>
+      Mon-yō no Kai; and the Open Heraldry Project.
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>

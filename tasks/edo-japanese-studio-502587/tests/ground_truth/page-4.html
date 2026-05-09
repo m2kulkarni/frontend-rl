@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Materials — Wood, Paper, Iron · Hakubai Atelier</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), sans-serif;
+    font-size: 14px;
+    line-height: 1.7;
+    margin: 0;
+    padding: 0;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* ---------- NAVIGATION ---------- */
+  .topbar {
+    padding: 36px 64px 0 64px;
+    display: flex;
+    align-items: center;
+    gap: 56px;
+  }
+  .mark {
+    width: 28px; height: 28px;
+    flex-shrink: 0;
+  }
+  .mark svg { width: 100%; height: 100%; display: block; }
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+    margin: 0; padding: 0;
+    font-size: 10.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+  .nav-links a { padding: 4px 0; display: inline-block; }
+  .nav-links a[aria-current="page"] {
+    border-bottom: 1px solid var(--primary);
+  }
+  .nav-rule {
+    height: 1px;
+    background: var(--primary);
+    margin: 24px 64px 0 64px;
+  }
+
+  /* ---------- PAGE WRAP ---------- */
+  main {
+    padding: 80px 64px 0 64px;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    position: relative;
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: 80px;
+    padding: 60px 0 100px 0;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("svg/seigaiha-waves.svg");
+    background-size: 350px 350px;
+    background-repeat: repeat;
+    opacity: 0.08;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .hero > * { position: relative; z-index: 1; }
+
+  .hero-eyebrow {
+    font-size: 10.5px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    color: var(--text);
+  }
+  .hero-eyebrow .num {
+    color: var(--accent);
+    margin-right: 14px;
+    font-feature-settings: "tnum";
+  }
+  .hero h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 64px;
+    line-height: 1.15;
+    margin: 0 0 0 0;
+    letter-spacing: 0.01em;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--secondary);
+  }
+  .hero-lede {
+    font-size: 15px;
+    line-height: 1.8;
+    max-width: 52ch;
+  }
+  .hero-lede p + p { margin-top: 1.2em; }
+  .hero-meta {
+    margin-top: 48px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    border-top: 1px solid var(--primary);
+    padding-top: 18px;
+  }
+  .hero-meta dt { color: var(--secondary); margin-bottom: 4px; }
+  .hero-meta dd { margin: 0; letter-spacing: 0.05em; text-transform: none; font-size: 12.5px; }
+
+  /* ---------- SECTION ---------- */
+  .section {
+    padding: 90px 0;
+    position: relative;
+  }
+  .section + .section { border-top: 1px solid var(--primary); }
+
+  .section-head {
+    display: grid;
+    grid-template-columns: 2fr 5fr 5fr;
+    gap: 48px;
+    margin-bottom: 64px;
+    align-items: start;
+  }
+  .section-num {
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.4em;
+  }
+  .section-title {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 38px;
+    line-height: 1.1;
+    margin: 0;
+  }
+  .section-title small {
+    display: block;
+    font-family: var(--font-body), sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-top: 14px;
+    font-weight: 500;
+  }
+  .section-intro {
+    font-size: 13.5px;
+    line-height: 1.8;
+    max-width: 44ch;
+  }
+
+  /* ---------- ENTRY GRID (asymmetric, every 3rd cell empty) ---------- */
+  .entries {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 56px 40px;
+  }
+  .entry {
+    grid-column: span 4;
+    position: relative;
+    padding-top: 8px;
+  }
+  .entry-empty {
+    grid-column: span 4;
+  }
+  .entry .kamon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 12px;
+    height: 12px;
+    opacity: 0.85;
+  }
+  .entry .kamon svg { width: 100%; height: 100%; display: block; }
+
+  .swatch {
+    height: 200px;
+    background: var(--bg);
+    margin-bottom: 22px;
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid var(--primary);
+  }
+  .swatch-grain {
+    position: absolute; inset: 0;
+    opacity: 0.9;
+  }
+  /* hinoki — pale layered grain */
+  .grain-hinoki {
+    background:
+      repeating-linear-gradient(180deg,
+        rgba(12,12,12,0.05) 0px, rgba(12,12,12,0.05) 1px,
+        transparent 1px, transparent 9px),
+      repeating-linear-gradient(180deg,
+        rgba(28,58,94,0.04) 0px, rgba(28,58,94,0.04) 1px,
+        transparent 1px, transparent 24px),
+      linear-gradient(180deg, #ece4cf 0%, #e2d8be 100%);
+  }
+  /* sugi — denser brown */
+  .grain-sugi {
+    background:
+      repeating-linear-gradient(180deg,
+        rgba(12,12,12,0.10) 0px, rgba(12,12,12,0.10) 1px,
+        transparent 1px, transparent 6px),
+      linear-gradient(180deg, #d8c8a6 0%, #c8b48a 100%);
+  }
+  /* yakusugi — dark, dramatic */
+  .grain-yaku {
+    background:
+      repeating-linear-gradient(178deg,
+        rgba(12,12,12,0.18) 0px, rgba(12,12,12,0.18) 1px,
+        transparent 1px, transparent 5px),
+      repeating-linear-gradient(180deg,
+        rgba(12,12,12,0.10) 0px, rgba(12,12,12,0.10) 2px,
+        transparent 2px, transparent 14px),
+      linear-gradient(180deg, #8a7558 0%, #5c4a36 100%);
+  }
+  /* paulownia — very pale */
+  .grain-paulownia {
+    background:
+      repeating-linear-gradient(180deg,
+        rgba(12,12,12,0.04) 0px, rgba(12,12,12,0.04) 1px,
+        transparent 1px, transparent 14px),
+      linear-gradient(180deg, #f1e9d4 0%, #e8dec5 100%);
+  }
+  /* kozo — washi fibers */
+  .swatch-kozo {
+    background: #f0e9d6;
+    background-image:
+      radial-gradient(rgba(12,12,12,0.10) 1px, transparent 1.5px),
+      radial-gradient(rgba(12,12,12,0.06) 1px, transparent 1.5px);
+    background-size: 8px 22px, 14px 9px;
+  }
+  .swatch-aizu {
+    background: var(--secondary);
+    background-image:
+      radial-gradient(rgba(245,239,222,0.18) 1px, transparent 1.5px),
+      radial-gradient(rgba(245,239,222,0.08) 1px, transparent 1.5px);
+    background-size: 7px 19px, 13px 8px;
+  }
+  .swatch-iron {
+    background: #1c1a17;
+    background-image:
+      repeating-linear-gradient(45deg,
+        rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 1px,
+        transparent 1px, transparent 6px);
+  }
+  .swatch-iron-pull {
+    background: #2a2723;
+    background-image:
+      radial-gradient(circle at 30% 40%, rgba(255,255,255,0.08), transparent 60%),
+      repeating-linear-gradient(135deg,
+        rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px,
+        transparent 1px, transparent 4px);
+  }
+
+  .swatch-label {
+    position: absolute;
+    bottom: 10px;
+    left: 12px;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(245,239,222,0.85);
+    background: rgba(12,12,12,0.55);
+    padding: 4px 8px;
+  }
+  .swatch-label.dark {
+    color: var(--primary);
+    background: rgba(245,239,222,0.75);
+  }
+
+  .entry h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 1.25;
+    margin: 0 0 4px 0;
+  }
+  .entry .latin {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 14px;
+  }
+  .entry p {
+    font-size: 13px;
+    line-height: 1.7;
+    margin: 0 0 16px 0;
+  }
+  .entry .meta {
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    color: var(--primary);
+    border-top: 1px solid var(--primary);
+    padding-top: 10px;
+    margin-top: 18px;
+  }
+  .entry .meta span + span::before {
+    content: " · ";
+    color: var(--primary);
+  }
+
+  /* season ribbon, only one per page accent — none here, accent reserved for hero numeral */
+  .season {
+    margin-top: 12px;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--secondary);
+  }
+
+  /* divider with sayagata */
+  .divider {
+    display: flex;
+    justify-content: flex-start;
+    padding: 24px 0;
+    opacity: 0.45;
+  }
+  .divider svg { width: 120px; height: 24px; }
+
+  /* ---------- PROVENANCE TABLE ---------- */
+  .provenance {
+    margin-top: 40px;
+    grid-column: span 12;
+    display: grid;
+    grid-template-columns: 2fr 3fr 3fr 2fr 2fr;
+    gap: 0;
+    border-top: 1px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
+    font-size: 11.5px;
+  }
+  .provenance > div {
+    padding: 14px 16px 14px 0;
+  }
+  .provenance .head {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    border-bottom: 1px solid var(--primary);
+  }
+  .provenance .row {
+    border-bottom: 1px dotted rgba(12,12,12,0.25);
+  }
+  .provenance .row:last-of-type { border-bottom: none; }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    margin-top: 120px;
+    padding: 80px 64px 48px 64px;
+    text-align: center;
+  }
+  .seal {
+    width: 36px; height: 36px;
+    margin: 0 auto 24px auto;
+  }
+  .seal svg { width: 100%; height: 100%; display: block; }
+  .footer-rule {
+    height: 1px;
+    background: var(--primary);
+    margin: 0 0 48px 0;
+  }
+  .footer-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 64px;
+    text-align: left;
+    font-size: 12px;
+    line-height: 1.8;
+  }
+  .footer-cols h4 {
+    font-family: var(--font-body), sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    margin: 0 0 14px 0;
+    color: var(--secondary);
+    font-weight: 500;
+  }
+  .footer-foot {
+    margin-top: 56px;
+    padding-top: 18px;
+    border-top: 1px solid var(--primary);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+  }
+</style>
+</head>
+<body>
+
+<!-- Inline SVG umebachi (used for kamon marks) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="umebachi" viewBox="0 0 688 688">
+      <g>
+        <path d="M226.13,612.58C207.81,610.65 189.07,603.28 174.08,592.11C168.24,587.75 158.29,577.86 153.79,571.92C132.56,543.94 126.62,507.85 137.79,474.83C141.26,464.59 146.78,453.97 152.98,445.64C157.16,440.02 167.67,429.44 173.42,425.04C201.21,403.85 237.51,397.86 270.51,409.03C286.66,414.49 299.71,422.76 311.90,435.25C323.67,447.31 331.05,459.28 336.32,474.83C346.31,504.35 342.80,535.57 326.40,563.06C318.72,575.94 304.73,589.93 291.83,597.63C271.43,609.81 248.79,614.96 226.13,612.58ZM439.98,612.58C421.66,610.65 402.92,603.28 387.93,592.11C382.09,587.75 372.14,577.86 367.64,571.92C346.41,543.94 340.47,507.85 351.64,474.83C355.11,464.59 360.63,453.97 366.83,445.64C371.01,440.02 381.52,429.44 387.28,425.04C415.06,403.85 451.36,397.86 484.36,409.03C500.52,414.49 513.56,422.76 525.76,435.25C537.53,447.31 544.91,459.28 550.17,474.83C560.16,504.35 556.65,535.57 540.25,563.06C532.58,575.94 518.58,589.93 505.68,597.63C485.28,609.81 462.65,614.96 439.98,612.58ZM159.88,409.88C141.55,407.95 122.82,400.58 107.83,389.41C101.98,385.05 92.04,375.16 87.53,369.22C66.31,341.24 60.36,305.15 71.54,272.14C75.00,261.89 80.53,251.27 86.72,242.94C90.91,237.32 101.41,226.74 107.17,222.34C127.76,206.63 154.15,198.88 179.16,201.18C189.55,202.13 195.43,203.34 204.26,206.33C220.41,211.79 233.46,220.06 245.65,232.55C257.42,244.61 264.80,256.58 270.06,272.14C280.05,301.65 276.54,332.87 260.15,360.37C252.47,373.24 238.48,387.23 225.57,394.93C205.18,407.11 182.54,412.26 159.88,409.88ZM506.24,409.88C487.91,407.95 469.18,400.58 454.19,389.41C448.34,385.05 438.40,375.16 433.89,369.22C412.67,341.24 406.72,305.15 417.90,272.14C421.36,261.89 426.89,251.27 433.08,242.94C437.27,237.32 447.77,226.74 453.53,222.34C474.12,206.63 500.51,198.88 525.52,201.18C535.91,202.13 541.79,203.34 550.62,206.33C566.77,211.79 579.82,220.06 592.01,232.55C603.78,244.61 611.16,256.58 616.42,272.14C626.41,301.65 622.90,332.87 606.51,360.37C598.83,373.24 584.84,387.23 571.94,394.93C551.54,407.11 528.90,412.26 506.24,409.88ZM337.42,405.98C320.59,403.48 306.16,391.06 300.83,374.48C298.54,367.37 298.54,355.33 300.83,348.22C305.39,334.03 316.67,322.76 330.85,318.20C337.96,315.91 350.00,315.91 357.11,318.20C371.29,322.76 382.57,334.03 387.13,348.22C388.46,352.35 388.72,354.47 388.72,361.35C388.72,368.23 388.46,370.35 387.13,374.48C382.58,388.63 371.11,400.12 357.27,404.39C351.88,406.05 342.81,406.78 337.42,405.98ZM333.06,283.93C314.73,282.00 295.99,274.63 281.00,263.46C275.16,259.10 265.22,249.21 260.71,243.27C239.49,215.30 233.54,179.20 244.72,146.19C248.18,135.94 253.71,125.32 259.90,116.99C264.09,111.37 274.59,100.79 280.35,96.40C308.13,75.20 344.43,69.21 377.44,80.38C393.59,85.84 406.64,94.11 418.83,106.60C430.60,118.66 437.98,130.63 443.24,146.19C453.23,175.70 449.72,206.92 433.33,234.42C425.65,247.29 411.66,261.28 398.75,268.99C378.36,281.17 355.72,286.31 333.06,283.93Z" fill="currentColor"/>
+      </g>
+    </symbol>
+    <symbol id="sayagata" viewBox="0 0 600 600">
+      <g fill="none" stroke="currentColor" stroke-width="3">
+        <polygon points="501.6,301.2 551.1,251.7 500.8,201.4 451.3,250.9 300.9,100.5 350.4,51 300.1,0.7 250.6,50.2 201.1,0.7 150.3,51.5 500.3,401.5 551.1,350.7"/>
+        <polygon points="600.9,199.9 551.6,150.7 601.2,101 550.7,50.4 501,100.1 450.4,150.7 400.8,200.3 451.3,250.9 501,201.2 550.3,250.5"/>
+        <polyline points="600,0 400.8,200.3 351,150.5 501.5,0"/>
+        <polygon points="349.9,452.9 300.4,502.4 250.1,452.1 299.6,402.6 149.2,252.2 99.7,301.7 49.4,251.4 98.9,201.9 49.4,152.4 100.2,101.6 450.2,451.6 399.4,502.4"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<header class="topbar">
+  <a href="page-1.html" class="mark" aria-label="Hakubai Atelier">
+    <svg viewBox="0 0 688 688" style="color: var(--primary);"><use href="#umebachi"/></svg>
+  </a>
+  <nav>
+    <ul class="nav-links">
+      <li><a href="page-1.html">Atelier</a></li>
+      <li><a href="page-2.html">Works</a></li>
+      <li><a href="page-3.html">Practice</a></li>
+      <li><a href="page-4.html" aria-current="page">Materials</a></li>
+      <li><a href="page-5.html">Journal</a></li>
+      <li><a href="page-6.html">Studio</a></li>
+    </ul>
+  </nav>
+</header>
+<div class="nav-rule"></div>
+
+<main>
+
+  <!-- ============= HERO ============= -->
+  <section class="hero">
+    <div>
+      <div class="hero-eyebrow"><span class="num">04</span>Materials Reference</div>
+      <h1>Wood, Paper,<br>and <em>Iron.</em></h1>
+    </div>
+    <div class="hero-lede">
+      <p>The studio holds a small standing palette. Most commissions are built from materials we have used since 1998, sourced from a handful of suppliers we visit each season. We do not specify a material until we have held that batch in the workshop and watched it move for at least a fortnight.</p>
+      <p>What follows is a working register — current as of the autumn 2024 inventory — naming the timber yards, paper houses, and the single forge in Kameoka that supplies our hardware. Prices on request; lead times reflect what is honest, not what is marketed.</p>
+      <dl class="hero-meta">
+        <div><dt>Register</dt><dd>Autumn 2024</dd></div>
+        <div><dt>Suppliers</dt><dd>Seven, all named</dd></div>
+        <div><dt>Compiled by</dt><dd>N. Tsujimura</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ============= I. WOOD ============= -->
+  <section class="section" id="wood">
+    <div class="section-head">
+      <div class="section-num">一 · I</div>
+      <h2 class="section-title">Wood<small>Ki — Four Standing Species</small></h2>
+      <p class="section-intro">All timber arrives air-dried at the supplier and is stickered for a further nine to eighteen months in our Nishijin store. We work no kiln-dried stock. Boards are selected board-by-board at the yard; we do not buy by photograph.</p>
+    </div>
+
+    <div class="entries">
+
+      <!-- Hinoki -->
+      <article class="entry">
+        <span class="kamon"><svg viewBox="0 0 688 688" style="color:var(--primary);"><use href="#umebachi"/></svg></span>
+        <div class="swatch">
+          <div class="swatch-grain grain-hinoki"></div>
+          <div class="swatch-label dark">Hinoki · Kiso</div>
+        </div>
+        <h3>Kiso Hinoki</h3>
+        <div class="latin">Chamaecyparis obtusa</div>
+        <p>Pale, fragrant cypress from the Akasawa forest reserve in Nagano. Our standing supplier is the Itō yard in Agematsu, who release small quartersawn lots each March and October. Used for shōji frames, tokonoma posts, and the thin lid panels of our stationery boxes.</p>
+        <div class="season">Allocation released: Mar · Oct</div>
+        <div class="meta"><span>Grade: jōhin (上品)</span><span>140-yr min.</span><span>¥ on application</span></div>
+      </article>
+
+      <!-- Sugi -->
+      <article class="entry">
+        <span class="kamon"><svg viewBox="0 0 688 688" style="color:var(--primary);"><use href="#umebachi"/></svg></span>
+        <div class="swatch">
+          <div class="swatch-grain grain-sugi"></div>
+          <div class="swatch-label dark">Sugi · Yoshino</div>
+        </div>
+        <h3>Yoshino Sugi</h3>
+        <div class="latin">Cryptomeria japonica</div>
+        <p>Tight-ringed cedar from the Kawakami valley in Nara, supplied by Nakai Mokuzai (est. 1907). The growth rings are exceptionally fine — twenty per centimetre is ordinary — owing to the dense planting tradition of Yoshino. We use it for cabinet carcasses, ceiling battens, and bath surrounds.</p>
+        <div class="season">Mill cut: Nov–Feb only</div>
+        <div class="meta"><span>Grade: itame &amp; masame</span><span>80–120 yr</span><span>Lead 6–14 wks</span></div>
+      </article>
+
+      <!-- empty -->
+      <div class="entry-empty" aria-hidden="true"></div>
+
+      <!-- Yakusugi -->
+      <article class="entry">
+        <span class="kamon"><svg viewBox="0 0 688 688" style="color:var(--primary);"><use href="#umebachi"/></svg></span>
+        <div class="swatch">
+          <div class="swatch-grain grain-yaku"></div>
+          <div class="swatch-label">Yakusugi · Yakushima</div>
+        </div>
+        <h3>Yakusugi (Reserved)</h3>
+        <div class="latin">Cryptomeria japonica · sub-alpine</div>
+        <p>Dark, resinous, and irreplaceable. We hold a small reserve of doctored stumpwood — legally salvaged Edo-period felling waste, certified through the Yakushima Ringyō union. Reserved exclusively for screen frames and the framing of singular tea-room commissions. We do not cut it for cabinetry.</p>
+        <div class="season">No new allocation 2024</div>
+        <div class="meta"><span>Provenance: edo-bokken</span><span>Cert. YR-2019/04</span><span>Reserved stock</span></div>
+      </article>
+
+      <!-- Paulownia -->
+      <article class="entry">
+        <span class="kamon"><svg viewBox="0 0 688 688" style="color:var(--primary);"><use href="#umebachi"/></svg></span>
+        <div class="swatch">
+          <div class="swatch-grain grain-paulownia"></div>
+          <div class="swatch-label dark">Kiri · Aizu</div>
+        </div>
+        <h3>Aizu Kiri (Paulownia)</h3>
+        <div class="latin">Paulownia tomentosa</div>
+        <p>The lightest cabinet wood in regular use, hygroscopic and almost odourless. Sourced from the Hasegawa mill in Aizu-Wakamatsu, who still hand-stack their boards under the eaves for two summers. We reserve it for drawers — chest interiors, document drawers, and the inner trays of bridal tansu.</p>
+        <div class="season">Boards available year-round</div>
+        <div class="meta"><span>Use: drawer linings</span><span>Air-dried 24 mo</span><span>Lead 4–8 wks</span></div>
+      </article>
+
+      <!-- empty -->
+      <div class="entry-empty" aria-hidden="true"></div>
+
+    </div>
+
+    <div class="divider" aria-hidden="true">
+      <svg viewBox="0 0 600 120" style="color:var(--primary);" preserveAspectRatio="xMinYMid meet">
+        <use href="#sayagata" x="0" y="-240"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ============= II. PAPER ============= -->
+  <section class="section" id="paper">
+    <div class="section-head">
+      <div class="section-num">二 · II</div>
+      <h2 class="section-title">Paper<small>Kami — Three Standing Sheets</small></h2>
+      <p class="section-intro">All washi in the studio is hand-formed (tesuki) and bears the maker's signature stamp. We do not work machine-made paper. Sheets are stored flat in cedar drawers at 55–60% relative humidity.</p>
+    </div>
+
+    <div class="entries">
+
+      <!-- Kozo -->
+      <article class="entry">
+        <span class="kamon"><svg viewBox="0 0 688 688" style="color:var(--primary);"><use href="#umebachi"/></svg></span>
+        <div class="swatch">
+          <div class="swatch-kozo"></div>
+          <div class="swatch-label dark">Kōzo · Echizen</div>
+        </div>
+        <h3>Echizen Kōzo</h3>
+        <div class="latin">Broussonetia kazinoki — long fibre</div>
+        <p>The studio's standard lampshade and shōji paper. Made by the workshop of Iwano Ichibei IX in Imadate, Fukui — a household designated Living National Treasure for paper-making. We order the 2.4-momme weight, undyed, in 88×178 cm sheets. The fibre is left long, giving the sheet its quiet cloud when lit.</p>
+        <div class="season">Vat months: Jan–Mar</div>
+        <div class="meta"><span>Iwano Ichibei kōbō</span><span>Stamp: 岩野市兵衛</span><span>¥6,400 / sheet</span></div>
+      </article>
+
+      <!-- Gampi -->
+      <article class="entry">
+        <span class="kamon"><svg viewBox="0 0 688 688" style="color:var(--primary);"><use href="#umebachi"/></svg></span>
+        <div class="swatch">
+          <div class="swatch-kozo" style="background-color:#ebe2c6;"></div>
+          <div class="swatch-label dark">Gampi · Echizen</div>
+        </div>
+        <h3>Echizen Gampi</h3>
+        <div class="latin">Diplomorpha sikokiana — wild-harvested</div>
+        <p>A finer, glassier sheet than kōzo, with the faint sheen of mica. Used for the inner panels of folding screens, conservation linings, and the sliding panels of our document cabinets. Gampi cannot be cultivated; the bast is harvested wild from the hills above Echizen and supply is therefore irregular.</p>
+        <div class="season">Variable — confirm by season</div>
+        <div class="meta"><span>Iwano Ichibei kōbō</span><span>Wild bast</span><span>¥11,200 / sheet</span></div>
+      </article>
+
+      <!-- empty -->
+      <div class="entry-empty" aria-hidden="true"></div>
+
+      <!-- Aizu indigo -->
+      <article class="entry">
+        <span class="kamon"><svg viewBox="0 0 688 688" style="color:var(--primary);"><use href="#umebachi"/></svg></span>
+        <div class="swatch">
+          <div class="swatch-aizu"></div>
+          <div class="swatch-label">Aizome washi · Aizu</div>
+        </div>
+        <h3>Aizu Aizome Washi</h3>
+        <div class="latin">Kōzo base · fermented indigo</div>
+        <p>Indigo-dyed paper from the Hoshina workshop in Aizu-Bange, dipped six to twelve times in a sukumo vat that has been alive in the same shed since the Meiji era. The depth of blue varies by dip count; we record it on the back of every sheet. Used as a backing paper in lighting, and as a singular accent in screen panels.</p>
+        <div class="season">Dipping: May–Sep</div>
+        <div class="meta"><span>Hoshina kōbō, Aizu</span><span>6–12 dip grades</span><span>¥8,800–14,000</span></div>
+      </article>
+
+      <!-- empty -->
+      <div class="entry-empty" aria-hidden="true"></div>
+      <div class="entry-empty" aria-hidden="true"></div>
+    </div>
+
+    <div class="divider" aria-hidden="true">
+      <svg viewBox="0 0 600 120" style="color:var(--primary);" preserveAspectRatio="xMinYMid meet">
+        <use href="#sayagata" x="0" y="-240"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ============= III. IRON ============= -->
+  <section class="section" id="iron">
+    <div class="section-head">
+      <div class="section-num">三 · III</div>
+      <h2 class="section-title">Iron<small>Tetsu — A Single Forge</small></h2>
+      <p class="section-intro">All hardware in the studio's work — every nail-head, pull, hinge plate, and lock-keep — is made by one smith. We have used no other forge since 2006.</p>
+    </div>
+
+    <div class="entries">
+
+      <!-- Iron nail-heads -->
+      <article class="entry">
+        <span class="kamon"><svg viewBox="0 0 688 688" style="color:var(--primary);"><use href="#umebachi"/></svg></span>
+        <div class="swatch">
+          <div class="swatch-iron"></div>
+          <div class="swatch-label">Wakugi · Kameoka</div>
+        </div>
+        <h3>Hand-Forged Nail-Heads</h3>
+        <div class="latin">Wa-kugi · charcoal-forged</div>
+        <p>Square-shanked nails forged from tamahagane-grade bar iron at the Kawabata forge in Kameoka, west of Kyoto. Heads are hammered cold to the four standard studio profiles: round, square, chrysanthemum, and flat. We commission roughly 1,400 nails a year; the forge holds our pattern set.</p>
+        <div class="season">Forge open: Tues–Sat</div>
+        <div class="meta"><span>Ren Kawabata, smith</span><span>Forge est. 1962</span><span>4 head profiles</span></div>
+      </article>
+
+      <!-- Iron pulls -->
+      <article class="entry">
+        <span class="kamon"><svg viewBox="0 0 688 688" style="color:var(--primary);"><use href="#umebachi"/></svg></span>
+        <div class="swatch">
+          <div class="swatch-iron-pull"></div>
+          <div class="swatch-label">Hikite · Kameoka</div>
+        </div>
+        <h3>Drawer Pulls &amp; Hikite</h3>
+        <div class="latin">Forged plate · waxed black finish</div>
+        <p>Recessed sliding-door pulls (hikite) and drop-ring drawer pulls. Each is forged to drawing, filed by hand, and finished in beeswax over heat-blackened oxide. Kawabata-san signs the back of every plate with a single chiselled mark — a habit since his apprenticeship under Kuroda Tetsuzō.</p>
+        <div class="season">Lead time 8–16 wks</div>
+        <div class="meta"><span>Ren Kawabata, smith</span><span>To-drawing</span><span>Signed verso</span></div>
+      </article>
+
+      <!-- empty -->
+      <div class="entry-empty" aria-hidden="true"></div>
+
+      <!-- Provenance summary spans full row -->
+      <div class="provenance" role="table" aria-label="Supplier register">
+        <div class="head">Material</div>
+        <div class="head">Supplier</div>
+        <div class="head">Address</div>
+        <div class="head">Since</div>
+        <div class="head">Lead</div>
+
+        <div class="row">Kiso Hinoki</div>
+        <div class="row">Itō Mokuzai</div>
+        <div class="row">Agematsu, Nagano</div>
+        <div class="row">1998</div>
+        <div class="row">8–12 wks</div>
+
+        <div class="row">Yoshino Sugi</div>
+        <div class="row">Nakai Mokuzai (est. 1907)</div>
+        <div class="row">Kawakami, Nara</div>
+        <div class="row">2001</div>
+        <div class="row">6–14 wks</div>
+
+        <div class="row">Aizu Kiri</div>
+        <div class="row">Hasegawa Mill</div>
+        <div class="row">Aizu-Wakamatsu, Fukushima</div>
+        <div class="row">2003</div>
+        <div class="row">4–8 wks</div>
+
+        <div class="row">Kōzo · Gampi</div>
+        <div class="row">Iwano Ichibei IX kōbō</div>
+        <div class="row">Imadate, Echizen, Fukui</div>
+        <div class="row">1999</div>
+        <div class="row">3–10 wks</div>
+
+        <div class="row">Aizome Washi</div>
+        <div class="row">Hoshina Kōbō</div>
+        <div class="row">Aizu-Bange, Fukushima</div>
+        <div class="row">2011</div>
+        <div class="row">12–20 wks</div>
+
+        <div class="row" style="border-bottom:none;">Iron hardware</div>
+        <div class="row" style="border-bottom:none;">Kawabata Tankō</div>
+        <div class="row" style="border-bottom:none;">Kameoka, Kyoto</div>
+        <div class="row" style="border-bottom:none;">2006</div>
+        <div class="row" style="border-bottom:none;">8–16 wks</div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="seal" aria-hidden="true">
+    <svg viewBox="0 0 688 688" style="color:var(--primary);"><use href="#umebachi"/></svg>
+  </div>
+  <div class="footer-rule"></div>
+  <div class="footer-cols">
+    <div>
+      <h4>Atelier</h4>
+      Hakubai Atelier<br>
+      Nishijin 2-chōme 14-7<br>
+      Kamigyō-ku, Kyoto 602-8226<br>
+      Japan
+    </div>
+    <div>
+      <h4>Contact &amp; Hours</h4>
+      atelier@hakubai.kyoto<br>
+      Tel · 075-432-1188<br>
+      Tue–Sat, 10:00–17:30<br>
+      Closed mid-Aug, late Dec
+    </div>
+    <div>
+      <h4>Colophon</h4>
+      Set in Shippori Mincho &amp; Inter.<br>
+      Kamon &amp; pattern renderings<br>
+      after public-domain sources, CC BY-SA.<br>
+      Site hand-built, no trackers.
+    </div>
+  </div>
+  <div class="footer-foot">
+    <span>Founded 1998 · Kyoto</span>
+    <span>Kamon CC BY-SA · 2024</span>
+  </div>
+</footer>
+
+</body>
+</html>

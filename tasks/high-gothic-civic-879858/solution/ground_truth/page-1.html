@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Commune de Saint-Loup-sur-Aisne — Accueil</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  /* ---------- Base ---------- */
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  a { color: var(--text-emphasis); }
+  h1, h2, h3, h4 { font-family: var(--font-display), serif; font-weight: 500; color: var(--primary); }
+
+  /* ---------- Diaper background pattern (used in hero & footer only) ---------- */
+  .diaper-bg {
+    position: relative;
+  }
+  .diaper-bg::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 600 600'><g transform='translate(300,300)scale(0.87)rotate(45)'><circle cx='-195.16' r='163'/><circle cx='195.16' r='163'/><circle cy='195.16' r='163'/><circle cy='-195.16' r='163'/><rect x='-232' y='-232' width='464' height='464'/><g fill='%23f4ecd8'><circle cx='-195.16' r='157'/><circle cx='195.16' r='157'/><circle cy='195.16' r='157'/><circle cy='-195.16' r='157'/><rect x='-226' y='-226' width='452' height='452'/></g><circle cx='-195.16' r='144'/><circle cx='195.16' r='144'/><circle cy='195.16' r='144'/><circle cy='-195.16' r='144'/><rect x='-213' y='-213' width='426' height='426'/><g fill='%23f4ecd8'><circle cx='-195.16' r='138'/><circle cx='195.16' r='138'/><circle cy='195.16' r='138'/><circle cy='-195.16' r='138'/><rect x='-207' y='-207' width='414' height='414'/></g></g></svg>");
+    background-repeat: repeat;
+    opacity: 0.08;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .diaper-bg > * { position: relative; z-index: 1; }
+
+  /* ---------- Navigation arcade ---------- */
+  .arcade-nav {
+    border-bottom: 1px solid var(--accent);
+    background: var(--bg);
+    padding: 1.5rem 3rem 0;
+  }
+  .arcade-nav-inner {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: end;
+    max-width: 1280px;
+    margin: 0 auto;
+    gap: 2rem;
+  }
+  .nav-cluster {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: end;
+  }
+  .nav-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: var(--primary);
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.08em;
+    font-size: 0.78rem;
+    padding: 0 0.4rem 0.6rem;
+  }
+  .nav-arch {
+    width: 28px; height: 44px;
+    margin-bottom: 0.3rem;
+    display: block;
+  }
+  .nav-arch path {
+    fill: none;
+    stroke: var(--primary);
+    stroke-width: 1.5;
+  }
+  .nav-link[aria-current="page"] .nav-arch path {
+    fill: var(--secondary);
+    stroke: var(--secondary);
+  }
+  .nav-link[aria-current="page"] {
+    color: var(--secondary);
+  }
+  .nav-center-mark {
+    width: 36px; height: 36px;
+    fill: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    padding: 4rem 2rem 5rem;
+    text-align: center;
+    overflow: hidden;
+  }
+  .hero-seal {
+    width: 64px; height: 64px;
+    fill: var(--accent);
+    margin: 0 auto 1.5rem;
+    display: block;
+  }
+  .hero-arch-wrap {
+    position: relative;
+    width: 560px;
+    margin: 0 auto;
+    padding: 3rem 4rem 2.5rem;
+  }
+  .hero-arch-wrap svg.arch-frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+  .hero-arch-wrap svg.arch-frame path {
+    stroke: var(--primary);
+    stroke-width: 2.5;
+    fill: none;
+  }
+  .hero-content { position: relative; z-index: 1; }
+  .hero h1 {
+    font-size: 2.6rem;
+    line-height: 1.1;
+    margin: 0 0 0.4rem;
+    letter-spacing: 0.01em;
+  }
+  .hero .subtitle {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    color: var(--text-emphasis);
+    font-size: 1.05rem;
+    margin: 0 0 1.5rem;
+  }
+  .hero-rule {
+    width: 80px; height: 1px;
+    background: var(--accent);
+    margin: 0 auto 1.5rem;
+    border: 0;
+  }
+  .hero-lead {
+    max-width: 18em;
+    margin: 0 auto;
+    text-align: left;
+    font-size: 1rem;
+  }
+  .hero-lead .dropcap {
+    float: left;
+    font-family: var(--font-display), serif;
+    color: var(--secondary);
+    font-size: 4rem;
+    line-height: 0.85;
+    padding: 0.3rem 0.6rem 0 0;
+    font-weight: 500;
+  }
+  .hero-signature {
+    margin-top: 1.5rem;
+    text-align: right;
+    font-style: italic;
+    font-family: var(--font-display), serif;
+    color: var(--text-emphasis);
+  }
+  .hero-signature small {
+    display: block;
+    font-style: normal;
+    color: var(--text);
+    font-family: var(--font-body), serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    margin-top: 0.2rem;
+  }
+
+  /* ---------- Section heading ---------- */
+  .section-head {
+    text-align: center;
+    padding: 3rem 2rem 1rem;
+  }
+  .section-head h2 {
+    font-size: 1.6rem;
+    margin: 0 0 0.6rem;
+    font-variant: small-caps;
+    letter-spacing: 0.1em;
+  }
+  .section-head .divider-leaf {
+    width: 38px; height: 38px;
+    fill: var(--ornament);
+    display: inline-block;
+    margin: 0.5rem auto;
+  }
+
+  /* ---------- Notice cards ---------- */
+  .notices {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+    max-width: 1200px;
+    margin: 1rem auto 4rem;
+    padding: 0 3rem;
+  }
+  .notice-card {
+    position: relative;
+    padding: 3rem 2rem 2rem;
+    background: var(--surface);
+  }
+  .notice-frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .notice-frame path {
+    stroke: var(--primary);
+    stroke-width: 1;
+    fill: none;
+  }
+  .notice-watermark {
+    position: absolute;
+    top: 1.5rem; left: 50%;
+    transform: translateX(-50%);
+    width: 110px; height: 110px;
+    opacity: 0.06;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .notice-content {
+    position: relative;
+    z-index: 1;
+    max-width: 18em;
+    margin: 0 auto;
+  }
+  .notice-tag {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.15em;
+    font-size: 0.75rem;
+    color: var(--text-emphasis);
+    margin-bottom: 0.4rem;
+  }
+  .notice-card h3 {
+    font-size: 1.2rem;
+    text-align: center;
+    margin: 0 0 1rem;
+    line-height: 1.25;
+  }
+  .notice-body {
+    font-size: 0.92rem;
+  }
+  .notice-body .dropcap {
+    float: left;
+    font-family: var(--font-display), serif;
+    color: var(--secondary);
+    font-size: 2.6rem;
+    line-height: 0.85;
+    padding: 0.25rem 0.4rem 0 0;
+    font-weight: 500;
+  }
+  .notice-meta {
+    margin-top: 1rem;
+    font-size: 0.82rem;
+    color: var(--text-emphasis);
+    font-style: italic;
+    text-align: center;
+  }
+  .notice-vine {
+    width: 36px; height: 36px;
+    fill: var(--ornament);
+    display: block;
+    margin: 1.2rem auto 0.6rem;
+  }
+  .notice-cta {
+    text-align: center;
+    margin: 0;
+  }
+  .notice-cta a {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.1em;
+    font-size: 0.85rem;
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-underline-offset: 4px;
+  }
+  .notice-card.archived { opacity: 0.85; }
+  .notice-card.archived .notice-tag { color: #6b5a3d; }
+
+  /* ---------- Footer ---------- */
+  footer.site-foot {
+    margin-top: 2rem;
+    padding: 3rem 2rem 1rem;
+    color: var(--text);
+    overflow: hidden;
+  }
+  .foot-arcade {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1rem;
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+  .foot-col {
+    position: relative;
+    padding: 3rem 0.6rem 1rem;
+    text-align: center;
+  }
+  .foot-arch {
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .foot-arch path {
+    stroke: var(--primary);
+    stroke-width: 1.2;
+    fill: none;
+  }
+  .foot-col-content {
+    position: relative; z-index: 1;
+  }
+  .foot-col h4 {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.08em;
+    font-size: 0.78rem;
+    margin: 0 0 0.6rem;
+    color: var(--primary);
+  }
+  .foot-col p, .foot-col address {
+    font-size: 0.78rem;
+    line-height: 1.4;
+    font-style: normal;
+    margin: 0;
+    color: var(--text);
+  }
+  .cross-band {
+    margin: 2.5rem auto 1rem;
+    height: 22px;
+    max-width: 1100px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='22' viewBox='0 0 40 22'><g fill='%23c9a23a'><rect x='18' y='2' width='4' height='18'/><rect x='10' y='9' width='20' height='4'/><circle cx='20' cy='2' r='2.5'/><circle cx='20' cy='20' r='2.5'/><circle cx='10' cy='11' r='2.5'/><circle cx='30' cy='11' r='2.5'/></g></svg>");
+    background-repeat: repeat-x;
+    background-position: center;
+  }
+  .seal-line {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--text);
+    padding-bottom: 1.5rem;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- ======================== NAVIGATION ARCADE ======================== -->
+<header class="arcade-nav">
+  <div class="arcade-nav-inner">
+    <div class="nav-cluster">
+      <a class="nav-link" href="page-1.html" aria-current="page">
+        <svg class="nav-arch" viewBox="0 0 28 44"><path d="M2 42 L2 18 Q14 -2 26 18 L26 42 Z"/></svg>
+        Accueil
+      </a>
+      <a class="nav-link" href="page-2.html">
+        <svg class="nav-arch" viewBox="0 0 28 44"><path d="M2 42 L2 18 Q14 -2 26 18 L26 42 Z"/></svg>
+        Conseil
+      </a>
+      <a class="nav-link" href="page-3.html">
+        <svg class="nav-arch" viewBox="0 0 28 44"><path d="M2 42 L2 18 Q14 -2 26 18 L26 42 Z"/></svg>
+        Démarches
+      </a>
+    </div>
+
+    <svg class="nav-center-mark" viewBox="0 0 4000 4000" aria-hidden="true">
+      <path transform="translate(-4,-4)scale(0.15,0.15)" d="M1778.9,3200A120.9263,120.9263 0 0,1 1657.97,3320.93A120.9263,120.9263 0 0,1 1537.04,3200A221.5096,221.5096 0 0,0 1456.32,3371.02A221.5096,221.5096 0 0,0 1677.83,3592.53A221.5096,221.5096 0 0,0 1818.61,3542.03A362.779,362.779 0 0,0 2000,3856.21A362.779,362.779 0 0,0 2181.39,3542.03A221.5096,221.5096 0 0,0 2322.17,3592.53A221.5096,221.5096 0 0,0 2543.68,3371.02A221.5096,221.5096 0 0,0 2462.96,3200A120.9263,120.9263 0 0,1 2342.03,3320.93A120.9263,120.9263 0 0,1 2221.1,3200V2221.1H3200A120.9263,120.9263 0 0,1 3320.93,2342.03A120.9263,120.9263 0 0,1 3200,2462.96A221.5096,221.5096 0 0,0 3371.02,2543.68A221.5096,221.5096 0 0,0 3592.53,2322.17A221.5096,221.5096 0 0,0 3542.03,2181.39A362.779,362.779 0 0,0 3856.21,2000A362.779,362.779 0 0,0 3542.03,1818.61A221.5096,221.5096 0 0,0 3592.53,1677.83A221.5096,221.5096 0 0,0 3371.02,1456.32A221.5096,221.5096 0 0,0 3200,1537.04A120.9263,120.9263 0 0,1 3320.93,1657.97A120.9263,120.9263 0 0,1 3200,1778.9H2221.1V800A120.9263,120.9263 0 0,1 2342.03,679.073A120.9263,120.9263 0 0,1 2462.96,800A221.5096,221.5096 0 0,0 2543.68,628.984A221.5096,221.5096 0 0,0 2322.17,407.475A221.5096,221.5096 0 0,0 2181.39,457.969A362.779,362.779 0 0,0 2000,143.793A362.779,362.779 0 0,0 1818.61,457.969A221.5096,221.5096 0 0,0 1677.83,407.475A221.5096,221.5096 0 0,0 1456.32,628.984A221.5096,221.5096 0 0,0 1537.04,800A120.9263,120.9263 0 0,1 1657.97,679.073A120.9263,120.9263 0 0,1 1778.9,800V1778.9H800A120.9263,120.9263 0 0,1 679.073,1657.97A120.9263,120.9263 0 0,1 800,1537.04A221.5096,221.5096 0 0,0 628.984,1456.32A221.5096,221.5096 0 0,0 407.475,1677.83A221.5096,221.5096 0 0,0 457.969,1818.61A362.779,362.779 0 0,0 143.793,2000A362.779,362.779 0 0,0 457.969,2181.39A221.5096,221.5096 0 0,0 407.475,2322.17A221.5096,221.5096 0 0,0 628.984,2543.68A221.5096,221.5096 0 0,0 800,2462.96A120.9263,120.9263 0 0,1 679.073,2342.03A120.9263,120.9263 0 0,1 800,2221.1H1778.9Z"/>
+    </svg>
+
+    <div class="nav-cluster">
+      <a class="nav-link" href="page-4.html">
+        <svg class="nav-arch" viewBox="0 0 28 44"><path d="M2 42 L2 18 Q14 -2 26 18 L26 42 Z"/></svg>
+        Patrimoine
+      </a>
+      <a class="nav-link" href="page-5.html">
+        <svg class="nav-arch" viewBox="0 0 28 44"><path d="M2 42 L2 18 Q14 -2 26 18 L26 42 Z"/></svg>
+        Visiter
+      </a>
+      <a class="nav-link" href="page-6.html">
+        <svg class="nav-arch" viewBox="0 0 28 44"><path d="M2 42 L2 18 Q14 -2 26 18 L26 42 Z"/></svg>
+        Contact
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- ======================== HERO ======================== -->
+<section class="hero diaper-bg">
+  <svg class="hero-seal" viewBox="0 0 4000 4000" aria-hidden="true">
+    <path transform="translate(-4,-4)scale(0.15,0.15)" d="M1778.9,3200A120.9263,120.9263 0 0,1 1657.97,3320.93A120.9263,120.9263 0 0,1 1537.04,3200A221.5096,221.5096 0 0,0 1456.32,3371.02A221.5096,221.5096 0 0,0 1677.83,3592.53A221.5096,221.5096 0 0,0 1818.61,3542.03A362.779,362.779 0 0,0 2000,3856.21A362.779,362.779 0 0,0 2181.39,3542.03A221.5096,221.5096 0 0,0 2322.17,3592.53A221.5096,221.5096 0 0,0 2543.68,3371.02A221.5096,221.5096 0 0,0 2462.96,3200A120.9263,120.9263 0 0,1 2342.03,3320.93A120.9263,120.9263 0 0,1 2221.1,3200V2221.1H3200A120.9263,120.9263 0 0,1 3320.93,2342.03A120.9263,120.9263 0 0,1 3200,2462.96A221.5096,221.5096 0 0,0 3371.02,2543.68A221.5096,221.5096 0 0,0 3592.53,2322.17A221.5096,221.5096 0 0,0 3542.03,2181.39A362.779,362.779 0 0,0 3856.21,2000A362.779,362.779 0 0,0 3542.03,1818.61A221.5096,221.5096 0 0,0 3592.53,1677.83A221.5096,221.5096 0 0,0 3371.02,1456.32A221.5096,221.5096 0 0,0 3200,1537.04A120.9263,120.9263 0 0,1 3320.93,1657.97A120.9263,120.9263 0 0,1 3200,1778.9H2221.1V800A120.9263,120.9263 0 0,1 2342.03,679.073A120.9263,120.9263 0 0,1 2462.96,800A221.5096,221.5096 0 0,0 2543.68,628.984A221.5096,221.5096 0 0,0 2322.17,407.475A221.5096,221.5096 0 0,0 2181.39,457.969A362.779,362.779 0 0,0 2000,143.793A362.779,362.779 0 0,0 1818.61,457.969A221.5096,221.5096 0 0,0 1677.83,407.475A221.5096,221.5096 0 0,0 1456.32,628.984A221.5096,221.5096 0 0,0 1537.04,800A120.9263,120.9263 0 0,1 1657.97,679.073A120.9263,120.9263 0 0,1 1778.9,800V1778.9H800A120.9263,120.9263 0 0,1 679.073,1657.97A120.9263,120.9263 0 0,1 800,1537.04A221.5096,221.5096 0 0,0 628.984,1456.32A221.5096,221.5096 0 0,0 407.475,1677.83A221.5096,221.5096 0 0,0 457.969,1818.61A362.779,362.779 0 0,0 143.793,2000A362.779,362.779 0 0,0 457.969,2181.39A221.5096,221.5096 0 0,0 407.475,2322.17A221.5096,221.5096 0 0,0 628.984,2543.68A221.5096,221.5096 0 0,0 800,2462.96A120.9263,120.9263 0 0,1 679.073,2342.03A120.9263,120.9263 0 0,1 800,2221.1H1778.9Z"/>
+  </svg>
+
+  <div class="hero-arch-wrap">
+    <!-- Pointed-arch frame, simplified path -->
+    <svg class="arch-frame" viewBox="0 0 560 520" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M40 510 L40 230 Q280 -40 520 230 L520 510" />
+      <path d="M60 510 L60 240 Q280 -10 500 240 L500 510" opacity="0.55"/>
+    </svg>
+    <div class="hero-content">
+      <h1>Commune de<br>Saint-Loup-sur-Aisne</h1>
+      <p class="subtitle">Portail civique &amp; paroissial · Département de l'Aisne</p>
+      <hr class="hero-rule">
+      <div class="hero-lead">
+        <p>
+          <span class="dropcap">A</span>ux résidentes et résidents de notre bonne commune, ainsi qu'aux pèlerins, marchands et voyageurs de passage : soyez les bienvenus sur le portail officiel de la mairie. Vous y trouverez les délibérations du conseil, les démarches d'état civil, les notices de la fabrique paroissiale, et les avis affichés sous l'arcade de la halle.
+        </p>
+        <p>
+          La mairie tient permanence du lundi au vendredi, et reçoit les administrés sans rendez-vous le samedi matin. Que la lecture vous soit utile, et la cloche fidèle.
+        </p>
+        <p class="hero-signature">
+          Hélène Boudreaux, Maire
+          <small>Saint-Loup-sur-Aisne, le 14 octobre 2024</small>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== NOTICES ======================== -->
+<div class="section-head">
+  <h2>Avis &amp; Annonces de la Halle</h2>
+  <svg class="divider-leaf" viewBox="0 0 200 200" aria-hidden="true">
+    <path d="M43.583 11.011c-1.79.033-3.58.128-5.343.312-7.054.737-13.935 2.795-19.156 7.469s-8.198 12.003-7.687 21c.511 9.001 4.297 16.144 10.187 20.344 5.89 4.2 13.306 5.533 21.031 5.187 15.451-.691 32.83-8.003 45.812-18.312 1.408-1.118 2.83-2.039 4.25-3.062 4.295 6.677 7.612 14.826 9.343 24.062-7.498-5.072-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.857 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.263-3.593 26.406 6.018 12.866 8.408 20.075 6.562 25.187-12.84 2.292-15.771 7.781-5.567 12.665 45.098 9.975 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.214 11.071-22.161 11.071-32.875 2.5-9.932-7.945-21.687-16.177-39-1.125-1.736-11.676-5.689-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.478 1.447 9.46 4.092 12.375 6.969-8.975 8.357-11.843 26.377 2.281 27.031 18.922.876 21.031-15.451 13.562-27.125-5.446-8.513-16.417-13.229-25.656-16.562-17.515-4.626-39.736-.566-61.281 12.5-5.171-5.723-11.132-10.224-17.719-12.969-7.08-2.95-17.539-5.734-28.281-6.312-1.79-.097-3.584-.127-5.375-.094z"/>
+  </svg>
+</div>
+
+<section class="notices">
+
+  <!-- Notice 1 -->
+  <article class="notice-card">
+    <svg class="notice-frame" viewBox="0 0 300 460" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M10 455 L10 140 Q150 -10 290 140 L290 455 Z"/>
+      <path d="M22 455 L22 148 Q150 5 278 148 L278 455" opacity="0.5"/>
+    </svg>
+    <svg class="notice-watermark" viewBox="0 0 600 600" aria-hidden="true">
+      <g transform="translate(300,300)scale(0.87)rotate(45)" fill="#3a2618">
+        <circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/>
+        <circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/>
+        <rect x="-232" y="-232" width="464" height="464"/>
+        <g fill="#f4ecd8">
+          <circle cx="-195.16" r="157"/><circle cx="195.16" r="157"/>
+          <circle cy="195.16" r="157"/><circle cy="-195.16" r="157"/>
+          <rect x="-226" y="-226" width="452" height="452"/>
+        </g>
+      </g>
+    </svg>
+    <div class="notice-content">
+      <p class="notice-tag">Marché · Place Saint-Loup</p>
+      <h3>Foire d'automne &amp; marché aux pommes</h3>
+      <div class="notice-body">
+        <p>
+          <span class="dropcap">L</span>e marché d'automne se tiendra sous la halle et sur le pavé de la place Saint-Loup le samedi 26 octobre, de 7h à 14h. Maraîchers de la vallée, fromagers du plateau, et apiculteurs du bois Saint-Macre y tiendront étal.
+        </p>
+        <p>
+          Animation de tonneliers et démonstration de pressoir à cidre dès 10h. Soupe de potimarron offerte par la confrérie à midi sonnant.
+        </p>
+        <p class="notice-meta">Samedi 26 octobre 2024 — Place Saint-Loup</p>
+      </div>
+      <svg class="notice-vine" viewBox="0 0 200 200" aria-hidden="true">
+        <path d="M43.583 11.011c-1.79.033-3.58.128-5.343.312-7.054.737-13.935 2.795-19.156 7.469s-8.198 12.003-7.687 21c.511 9.001 4.297 16.144 10.187 20.344 5.89 4.2 13.306 5.533 21.031 5.187 15.451-.691 32.83-8.003 45.812-18.312 1.408-1.118 2.83-2.039 4.25-3.062 4.295 6.677 7.612 14.826 9.343 24.062-7.498-5.072-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.857 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.263-3.593 26.406 6.018 12.866 8.408 20.075 6.562 25.187-12.84 2.292-15.771 7.781-5.567 12.665 45.098 9.975 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.214 11.071-22.161 11.071-32.875 2.5-9.932-7.945-21.687-16.177-39-1.125-1.736-11.676-5.689-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.478 1.447 9.46 4.092 12.375 6.969-8.975 8.357-11.843 26.377 2.281 27.031 18.922.876 21.031-15.451 13.562-27.125-5.446-8.513-16.417-13.229-25.656-16.562-17.515-4.626-39.736-.566-61.281 12.5-5.171-5.723-11.132-10.224-17.719-12.969-7.08-2.95-17.539-5.734-28.281-6.312-1.79-.097-3.584-.127-5.375-.094z"/>
+      </svg>
+      <p class="notice-cta"><a href="page-5.html">Voir le programme complet</a></p>
+    </div>
+  </article>
+
+  <!-- Notice 2 -->
+  <article class="notice-card">
+    <svg class="notice-frame" viewBox="0 0 300 460" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M10 455 L10 140 Q150 -10 290 140 L290 455 Z"/>
+      <path d="M22 455 L22 148 Q150 5 278 148 L278 455" opacity="0.5"/>
+    </svg>
+    <svg class="notice-watermark" viewBox="0 0 600 600" aria-hidden="true">
+      <g transform="translate(300,300)scale(0.87)rotate(45)" fill="#3a2618">
+        <circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/>
+        <circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/>
+        <rect x="-232" y="-232" width="464" height="464"/>
+        <g fill="#f4ecd8">
+          <circle cx="-195.16" r="157"/><circle cx="195.16" r="157"/>
+          <circle cy="195.16" r="157"/><circle cy="-195.16" r="157"/>
+          <rect x="-226" y="-226" width="452" height="452"/>
+        </g>
+      </g>
+    </svg>
+    <div class="notice-content">
+      <p class="notice-tag">Travaux · Voirie communale</p>
+      <h3>Réfection de la conduite, rue des Tisserands</h3>
+      <div class="notice-body">
+        <p>
+          <span class="dropcap">L</span>e Syndicat des Eaux de la basse Aisne entreprendra le remplacement de la conduite principale rue des Tisserands à compter du lundi 4 novembre, pour une durée prévisionnelle de trois semaines.
+        </p>
+        <p>
+          La circulation sera déviée par la rue du Chapitre. Une coupure d'eau est annoncée le jeudi 7 novembre, de 9h à 16h, sur les numéros 3 à 41 impairs et 2 à 38 pairs.
+        </p>
+        <p class="notice-meta">Début lundi 4 novembre 2024</p>
+      </div>
+      <svg class="notice-vine" viewBox="0 0 200 200" aria-hidden="true">
+        <path d="M43.583 11.011c-1.79.033-3.58.128-5.343.312-7.054.737-13.935 2.795-19.156 7.469s-8.198 12.003-7.687 21c.511 9.001 4.297 16.144 10.187 20.344 5.89 4.2 13.306 5.533 21.031 5.187 15.451-.691 32.83-8.003 45.812-18.312 1.408-1.118 2.83-2.039 4.25-3.062 4.295 6.677 7.612 14.826 9.343 24.062-7.498-5.072-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.857 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.263-3.593 26.406 6.018 12.866 8.408 20.075 6.562 25.187-12.84 2.292-15.771 7.781-5.567 12.665 45.098 9.975 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.214 11.071-22.161 11.071-32.875 2.5-9.932-7.945-21.687-16.177-39-1.125-1.736-11.676-5.689-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.478 1.447 9.46 4.092 12.375 6.969-8.975 8.357-11.843 26.377 2.281 27.031 18.922.876 21.031-15.451 13.562-27.125-5.446-8.513-16.417-13.229-25.656-16.562-17.515-4.626-39.736-.566-61.281 12.5-5.171-5.723-11.132-10.224-17.719-12.969-7.08-2.95-17.539-5.734-28.281-6.312-1.79-.097-3.584-.127-5.375-.094z"/>
+      </svg>
+      <p class="notice-cta"><a href="page-3.html">Détails &amp; déviations</a></p>
+    </div>
+  </article>
+
+  <!-- Notice 3 (archived) -->
+  <article class="notice-card archived">
+    <svg class="notice-frame" viewBox="0 0 300 460" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M10 455 L10 140 Q150 -10 290 140 L290 455 Z"/>
+      <path d="M22 455 L22 148 Q150 5 278 148 L278 455" opacity="0.5"/>
+    </svg>
+    <svg class="notice-watermark" viewBox="0 0 600 600" aria-hidden="true">
+      <g transform="translate(300,300)scale(0.87)rotate(45)" fill="#3a2618">
+        <circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/>
+        <circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/>
+        <rect x="-232" y="-232" width="464" height="464"/>
+        <g fill="#f4ecd8">
+          <circle cx="-195.16" r="157"/><circle cx="195.16" r="157"/>
+          <circle cy="195.16" r="157"/><circle cy="-195.16" r="157"/>
+          <rect x="-226" y="-226" width="452" height="452"/>
+        </g>
+      </g>
+    </svg>
+    <div class="notice-content">
+      <p class="notice-tag">Archivé · Paroisse Saint-Loup</p>
+      <h3>Vêpres &amp; Fête patronale de Saint Loup</h3>
+      <div class="notice-body">
+        <p>
+          <span class="dropcap">L</span>a fête annuelle de saint Loup, patron de la commune et premier abbé du lieu, a été célébrée le dimanche 1ᵉʳ septembre 2024 par les vêpres solennelles à l'église paroissiale, suivies de la procession au reliquaire jusqu'au jardin du chapitre.
+        </p>
+        <p>
+          Le sermon a été prononcé par le doyen Jean-Marie Estèves. Les comptes de la quête au profit de la restauration des fonts baptismaux sont consultables aux archives.
+        </p>
+        <p class="notice-meta">Dimanche 1ᵉʳ septembre 2024 — Archivé</p>
+      </div>
+      <svg class="notice-vine" viewBox="0 0 200 200" aria-hidden="true">
+        <path d="M43.583 11.011c-1.79.033-3.58.128-5.343.312-7.054.737-13.935 2.795-19.156 7.469s-8.198 12.003-7.687 21c.511 9.001 4.297 16.144 10.187 20.344 5.89 4.2 13.306 5.533 21.031 5.187 15.451-.691 32.83-8.003 45.812-18.312 1.408-1.118 2.83-2.039 4.25-3.062 4.295 6.677 7.612 14.826 9.343 24.062-7.498-5.072-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.857 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.263-3.593 26.406 6.018 12.866 8.408 20.075 6.562 25.187-12.84 2.292-15.771 7.781-5.567 12.665 45.098 9.975 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.214 11.071-22.161 11.071-32.875 2.5-9.932-7.945-21.687-16.177-39-1.125-1.736-11.676-5.689-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.478 1.447 9.46 4.092 12.375 6.969-8.975 8.357-11.843 26.377 2.281 27.031 18.922.876 21.031-15.451 13.562-27.125-5.446-8.513-16.417-13.229-25.656-16.562-17.515-4.626-39.736-.566-61.281 12.5-5.171-5.723-11.132-10.224-17.719-12.969-7.08-2.95-17.539-5.734-28.281-6.312-1.79-.097-3.584-.127-5.375-.094z"/>
+      </svg>
+      <p class="notice-cta"><a href="page-4.html">Consulter les archives</a></p>
+    </div>
+  </article>
+
+</section>
+
+<!-- ======================== FOOTER ARCADE ======================== -->
+<footer class="site-foot diaper-bg">
+  <div class="foot-arcade">
+
+    <div class="foot-col">
+      <svg class="foot-arch" viewBox="0 0 140 220" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M8 218 L8 80 Q70 -8 132 80 L132 218 Z"/>
+      </svg>
+      <div class="foot-col-content">
+        <h4>Mairie</h4>
+        <address>
+          Hôtel de Ville<br>
+          3 rue du Chapitre<br>
+          02340 Saint-Loup-<br>sur-Aisne
+        </address>
+      </div>
+    </div>
+
+    <div class="foot-col">
+      <svg class="foot-arch" viewBox="0 0 140 220" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M8 218 L8 80 Q70 -8 132 80 L132 218 Z"/>
+      </svg>
+      <div class="foot-col-content">
+        <h4>Permanences</h4>
+        <p>
+          Lun – Ven<br>9h – 12h, 14h – 17h<br>
+          Sam 9h – 12h<br>
+          (sans rendez-vous)
+        </p>
+      </div>
+    </div>
+
+    <div class="foot-col">
+      <svg class="foot-arch" viewBox="0 0 140 220" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M8 218 L8 80 Q70 -8 132 80 L132 218 Z"/>
+      </svg>
+      <div class="foot-col-content">
+        <h4>Conseil Municipal</h4>
+        <p>
+          Mme Hélène Boudreaux,<br>Maire<br>
+          M. Théo Vasseur,<br>1ᵉʳ adjoint<br>
+          conseil@st-loup.fr
+        </p>
+      </div>
+    </div>
+
+    <div class="foot-col">
+      <svg class="foot-arch" viewBox="0 0 140 220" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M8 218 L8 80 Q70 -8 132 80 L132 218 Z"/>
+      </svg>
+      <div class="foot-col-content">
+        <h4>Paroisse</h4>
+        <p>
+          Liaison fabrique :<br>
+          Doyen J.-M. Estèves<br>
+          Presbytère, place<br>de l'Église<br>
+          03 23 41 18 02
+        </p>
+      </div>
+    </div>
+
+    <div class="foot-col">
+      <svg class="foot-arch" viewBox="0 0 140 220" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M8 218 L8 80 Q70 -8 132 80 L132 218 Z"/>
+      </svg>
+      <div class="foot-col-content">
+        <h4>Accessibilité</h4>
+        <p>
+          Site conforme<br>RGAA 4.1<br>(partiel).<br>
+          Mairie accessible<br>par la cour pavée.
+        </p>
+      </div>
+    </div>
+
+    <div class="foot-col">
+      <svg class="foot-arch" viewBox="0 0 140 220" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M8 218 L8 80 Q70 -8 132 80 L132 218 Z"/>
+      </svg>
+      <div class="foot-col-content">
+        <h4>Archives</h4>
+        <p>
+          Fonds communal<br>déposé aux Archives<br>départementales<br>de l'Aisne, série E.<br>
+          Crédit : F. Lemaire.
+        </p>
+      </div>
+    </div>
+
+    <div class="foot-col">
+      <svg class="foot-arch" viewBox="0 0 140 220" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M8 218 L8 80 Q70 -8 132 80 L132 218 Z"/>
+      </svg>
+      <div class="foot-col-content">
+        <h4>Révision</h4>
+        <p>
+          Dernière mise<br>à jour :<br>
+          14 octobre 2024<br>
+          par le secrétariat<br>de mairie.
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="cross-band" role="presentation"></div>
+  <p class="seal-line">Sceau de la Commune, MCMXLIV — révisé 2024</p>
+</footer>
+
+</body>
+</html>

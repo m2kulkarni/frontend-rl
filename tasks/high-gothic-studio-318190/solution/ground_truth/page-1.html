@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Atelier Saint-Sévrin — Architecture & Sacred Conservation</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    margin: 0;
+    line-height: 1.55;
+  }
+
+  /* ─── ARCADE NAVIGATION ─────────────────────────────── */
+  .arcade {
+    padding: 28px 64px 0;
+    background: var(--bg);
+  }
+  .arcade-row {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0;
+    align-items: end;
+  }
+  .arch-link {
+    position: relative;
+    height: 92px;
+    text-decoration: none;
+    color: var(--primary);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 14px;
+    font-family: var(--font-display), serif;
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .arch-link::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 1.4px solid var(--primary);
+    border-bottom: none;
+    border-radius: 50% 50% 0 0 / 70% 70% 0 0;
+    z-index: 0;
+  }
+  .arch-link span { position: relative; z-index: 2; }
+  .arch-link[aria-current="page"] {
+    color: var(--bg);
+  }
+  .arch-link[aria-current="page"]::before {
+    background: var(--secondary);
+    border-color: var(--secondary);
+  }
+  .arch-link[aria-current="page"]::after {
+    content: "✦";
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--accent);
+    font-size: 9px;
+    z-index: 2;
+  }
+  .arcade-rule {
+    height: 2px;
+    background: var(--accent);
+    margin: 0 -64px;
+    margin-top: -1px;
+    position: relative;
+  }
+  .arcade-rule::before, .arcade-rule::after {
+    content: "";
+    position: absolute;
+    top: -2px;
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+  .arcade-rule::before { left: 64px; }
+  .arcade-rule::after { right: 64px; }
+
+  /* ─── HERO ──────────────────────────────────────────── */
+  .hero {
+    padding: 56px 64px 40px;
+    display: grid;
+    grid-template-columns: 1fr 580px 1fr;
+    gap: 0;
+    align-items: start;
+  }
+  .hero-side {
+    padding-top: 80px;
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+  .hero-side.left { text-align: right; padding-right: 40px; }
+  .hero-side.right { padding-left: 40px; }
+  .hero-side .marker {
+    display: block;
+    font-style: normal;
+    font-variant: small-caps;
+    letter-spacing: 0.22em;
+    color: var(--secondary);
+    font-size: 10px;
+    margin-bottom: 8px;
+  }
+
+  .hero-arch {
+    position: relative;
+    width: 580px;
+    height: 640px;
+  }
+  .hero-arch svg.frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .hero-arch .inner {
+    position: absolute;
+    top: 30px;
+    left: 70px;
+    right: 70px;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0 12px;
+  }
+  .quatrefoil-cap {
+    width: 44px;
+    height: 44px;
+    margin-top: 28px;
+  }
+  .quatrefoil-cap circle, .quatrefoil-cap rect {
+    fill: var(--secondary);
+  }
+  .hero-tag {
+    margin-top: 18px;
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.32em;
+    font-size: 11px;
+    color: var(--accent);
+  }
+  .hero-name {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 62px;
+    line-height: 0.95;
+    color: var(--primary);
+    margin: 26px 0 0;
+    letter-spacing: -0.01em;
+  }
+  .hero-name em {
+    display: block;
+    font-style: italic;
+    font-size: 0.78em;
+    color: var(--secondary);
+    margin-top: 4px;
+  }
+  .hero-rule {
+    width: 60px;
+    height: 1px;
+    background: var(--primary);
+    margin: 28px 0 22px;
+    position: relative;
+  }
+  .hero-rule::before, .hero-rule::after {
+    content: "◆";
+    position: absolute;
+    top: -8px;
+    color: var(--accent);
+    font-size: 9px;
+  }
+  .hero-rule::before { left: -14px; }
+  .hero-rule::after { right: -14px; }
+  .hero-tagline {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--text);
+    line-height: 1.45;
+    max-width: 22em;
+  }
+  .hero-meta {
+    margin-top: 22px;
+    font-variant: small-caps;
+    letter-spacing: 0.3em;
+    font-size: 10px;
+    color: var(--secondary);
+  }
+
+  /* ─── SECTION DIVIDER ───────────────────────────────── */
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    padding: 24px 64px;
+    color: var(--ornament);
+  }
+  .divider .line {
+    flex: 1;
+    height: 1px;
+    background: var(--primary);
+    position: relative;
+  }
+  .divider .line::before {
+    content: "";
+    position: absolute;
+    top: -1px; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(to right, transparent, var(--accent) 50%, transparent);
+    opacity: 0.4;
+  }
+  .divider svg { width: 38px; height: 38px; flex-shrink: 0; }
+
+  /* ─── MANIFESTO ─────────────────────────────────────── */
+  .manifesto {
+    padding: 40px 64px 60px;
+    display: grid;
+    grid-template-columns: 1fr 22em 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+  .manifesto-heading {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 13px;
+    font-variant: small-caps;
+    letter-spacing: 0.32em;
+    color: var(--secondary);
+    text-align: right;
+    padding-top: 8px;
+    line-height: 1.6;
+  }
+  .manifesto-heading::after {
+    content: "";
+    display: block;
+    width: 30px;
+    height: 1px;
+    background: var(--accent);
+    margin: 14px 0 0 auto;
+  }
+  .manifesto-text {
+    font-family: var(--font-display), serif;
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--text);
+    max-width: 22em;
+  }
+  .manifesto-text .lead::first-letter {
+    font-family: var(--font-display), serif;
+    font-size: 4.4em;
+    float: left;
+    line-height: 0.86;
+    padding: 6px 10px 0 0;
+    color: var(--secondary);
+    font-weight: 500;
+  }
+  .manifesto-text p + p { margin-top: 1em; }
+  .departments {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-left: 1px solid var(--primary);
+    padding-left: 22px;
+  }
+  .departments li {
+    margin-bottom: 22px;
+  }
+  .dept-name {
+    display: block;
+    font-family: var(--font-display), serif;
+    font-size: 16px;
+    color: var(--primary);
+    letter-spacing: 0.04em;
+  }
+  .dept-num {
+    color: var(--accent);
+    font-style: italic;
+    margin-right: 6px;
+  }
+  .dept-desc {
+    font-size: 12.5px;
+    font-style: italic;
+    color: var(--text);
+    line-height: 1.5;
+    display: block;
+    margin-top: 3px;
+  }
+
+  /* ─── COMMISSIONS ───────────────────────────────────── */
+  .commissions {
+    padding: 30px 64px 80px;
+  }
+  .section-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 50px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--primary);
+    position: relative;
+  }
+  .section-head::after {
+    content: "";
+    position: absolute;
+    bottom: -3px; left: 0; right: 0;
+    height: 1px;
+    background: var(--accent);
+  }
+  .section-head h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 32px;
+    margin: 0;
+    color: var(--primary);
+    letter-spacing: -0.005em;
+  }
+  .section-head h2 em {
+    font-style: italic;
+    color: var(--secondary);
+  }
+  .section-head .eyebrow {
+    font-variant: small-caps;
+    letter-spacing: 0.3em;
+    font-size: 10.5px;
+    color: var(--secondary);
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 36px;
+  }
+  .card {
+    position: relative;
+    padding: 0 4px;
+  }
+  .card-arch {
+    position: relative;
+    height: 460px;
+    border: 1.4px solid var(--primary);
+    border-radius: 50% 50% 0 0 / 32% 32% 0 0;
+    background: var(--surface);
+    padding: 36px 28px 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+  }
+  .card-arch::before {
+    content: "";
+    position: absolute;
+    inset: 6px 6px auto 6px;
+    height: 220px;
+    border: 0.8px solid var(--primary);
+    border-bottom: none;
+    border-radius: 50% 50% 0 0 / 38% 38% 0 0;
+    opacity: 0.45;
+  }
+  .card-quatrefoil {
+    width: 28px; height: 28px;
+    margin-top: 6px;
+    margin-bottom: 18px;
+  }
+  .card-quatrefoil circle, .card-quatrefoil rect { fill: var(--secondary); }
+
+  .card-num {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    margin-bottom: 4px;
+  }
+  .card h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 1.15;
+    text-align: center;
+    margin: 0 0 12px;
+    color: var(--primary);
+  }
+  .card .meta {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 12px;
+    color: var(--text);
+    text-align: center;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--primary);
+    width: 80%;
+    position: relative;
+  }
+  .card .meta::after {
+    content: "✦";
+    position: absolute;
+    bottom: -7px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--surface);
+    padding: 0 6px;
+    color: var(--accent);
+    font-size: 8px;
+  }
+  .card .excerpt {
+    font-size: 13.5px;
+    line-height: 1.6;
+    text-align: center;
+    color: var(--text);
+    margin: 0;
+  }
+  .card-foot {
+    margin-top: auto;
+    padding-top: 18px;
+    font-variant: small-caps;
+    letter-spacing: 0.25em;
+    font-size: 10px;
+    color: var(--secondary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-foot::before, .card-foot::after {
+    content: "";
+    width: 16px; height: 1px;
+    background: var(--accent);
+  }
+
+  /* ─── FOOTER ────────────────────────────────────────── */
+  footer {
+    margin-top: 60px;
+    position: relative;
+  }
+  .seal-wrap {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    height: 0;
+    z-index: 5;
+  }
+  .seal {
+    width: 92px; height: 92px;
+    background: var(--bg);
+    border: 1.4px solid var(--primary);
+    border-radius: 50%;
+    transform: translateY(-46px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+  }
+  .seal svg { width: 100%; height: 100%; fill: var(--primary); }
+  .heraldic-band {
+    height: 96px;
+    background-color: var(--bg);
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 600 600'><g transform='translate(300,300)scale(0.87)rotate(45)'><circle cx='-195.16' r='163' fill='%230a0a0a'/><circle cx='195.16' r='163' fill='%230a0a0a'/><circle cy='195.16' r='163' fill='%230a0a0a'/><circle cy='-195.16' r='163' fill='%230a0a0a'/><rect x='-232' y='-232' width='464' height='464' fill='%230a0a0a'/><circle cx='-195.16' r='157' fill='%23f4ecd8'/><circle cx='195.16' r='157' fill='%23f4ecd8'/><circle cy='195.16' r='157' fill='%23f4ecd8'/><circle cy='-195.16' r='157' fill='%23f4ecd8'/><rect x='-226' y='-226' width='452' height='452' fill='%23f4ecd8'/><circle cx='-195.16' r='144' fill='%230a0a0a'/><circle cx='195.16' r='144' fill='%230a0a0a'/><circle cy='195.16' r='144' fill='%230a0a0a'/><circle cy='-195.16' r='144' fill='%230a0a0a'/><rect x='-213' y='-213' width='426' height='426' fill='%230a0a0a'/><circle cx='-195.16' r='138' fill='%23f4ecd8'/><circle cx='195.16' r='138' fill='%23f4ecd8'/><circle cy='195.16' r='138' fill='%23f4ecd8'/><circle cy='-195.16' r='138' fill='%23f4ecd8'/><rect x='-207' y='-207' width='414' height='414' fill='%23f4ecd8'/></g></svg>");
+    background-size: 80px 80px;
+    background-repeat: repeat;
+    border-top: 2px solid var(--primary);
+    border-bottom: 2px solid var(--primary);
+  }
+  .footer-info {
+    background: var(--bg);
+    padding: 28px 64px 36px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+    border-top: 1px solid var(--accent);
+  }
+  .footer-info > div h4 {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.25em;
+    font-size: 10px;
+    color: var(--secondary);
+    margin: 0 0 10px;
+    font-weight: 500;
+  }
+  .footer-info p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.6;
+    font-family: var(--font-display), serif;
+  }
+  .attribution {
+    text-align: center;
+    padding: 4px 64px 28px;
+    font-variant: small-caps;
+    letter-spacing: 0.32em;
+    font-size: 10px;
+    color: var(--text);
+    background: var(--bg);
+  }
+
+  /* ─── inline ornaments ──────────────────────────────── */
+  .vine-cap {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 8px;
+    fill: var(--primary);
+    opacity: 0.85;
+  }
+</style>
+</head>
+<body>
+
+<header class="arcade" role="banner">
+  <nav class="arcade-row" aria-label="Primary">
+    <a class="arch-link" href="page-1.html" aria-current="page"><span>Atelier</span></a>
+    <a class="arch-link" href="page-2.html"><span>Works</span></a>
+    <a class="arch-link" href="page-3.html"><span>Studio</span></a>
+    <a class="arch-link" href="page-4.html"><span>Method</span></a>
+    <a class="arch-link" href="page-5.html"><span>Journal</span></a>
+    <a class="arch-link" href="page-6.html"><span>Commissions</span></a>
+    <a class="arch-link" href="page-6.html"><span>Contact</span></a>
+  </nav>
+  <div class="arcade-rule" aria-hidden="true"></div>
+</header>
+
+<section class="hero" aria-label="Atelier Saint-Sévrin">
+  <aside class="hero-side left" aria-hidden="true">
+    <span class="marker">Est. MCMLXXXVI</span>
+    Reims · Champagne-Ardenne<br>
+    <em>Architectes du long terme,</em><br>
+    œuvres civiques, liturgiques<br>
+    et de conservation.
+  </aside>
+
+  <div class="hero-arch">
+    <svg class="frame" viewBox="0 0 580 640" preserveAspectRatio="none" aria-hidden="true">
+      <!-- outer pointed arch -->
+      <path d="M 30 640 L 30 320 Q 30 30 290 30 Q 550 30 550 320 L 550 640 Z"
+            fill="none" stroke="var(--primary)" stroke-width="1.6"/>
+      <path d="M 46 640 L 46 322 Q 46 46 290 46 Q 534 46 534 322 L 534 640"
+            fill="none" stroke="var(--primary)" stroke-width="0.7" opacity="0.55"/>
+      <!-- crockets -->
+      <g stroke="var(--primary)" stroke-width="1" fill="none">
+        <path d="M 290 12 L 286 30 L 294 30 Z" fill="var(--accent)"/>
+        <circle cx="290" cy="8" r="3" fill="var(--secondary)"/>
+        <path d="M 90 180 q 8 -10 18 0"/>
+        <path d="M 490 180 q -8 -10 -18 0"/>
+        <path d="M 60 280 q 10 -10 22 0"/>
+        <path d="M 520 280 q -10 -10 -22 0"/>
+      </g>
+      <!-- thin gold inner line -->
+      <path d="M 60 640 L 60 326 Q 60 60 290 60 Q 520 60 520 326 L 520 640"
+            fill="none" stroke="var(--accent)" stroke-width="0.6" opacity="0.7"/>
+      <!-- tracery springers -->
+      <line x1="30" y1="320" x2="60" y2="320" stroke="var(--primary)" stroke-width="1"/>
+      <line x1="550" y1="320" x2="520" y2="320" stroke="var(--primary)" stroke-width="1"/>
+    </svg>
+    <div class="inner">
+      <svg class="quatrefoil-cap" viewBox="0 0 600 600" aria-hidden="true">
+        <g transform="translate(300,300)scale(0.87)rotate(45)">
+          <circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/>
+          <circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/>
+          <rect x="-232" y="-232" width="464" height="464"/>
+          <g fill="#f4ecd8">
+            <circle cx="-195.16" r="138"/><circle cx="195.16" r="138"/>
+            <circle cy="195.16" r="138"/><circle cy="-195.16" r="138"/>
+            <rect x="-207" y="-207" width="414" height="414"/>
+          </g>
+        </g>
+      </svg>
+      <div class="hero-tag">— Atelier —</div>
+      <h1 class="hero-name">Saint-Sévrin<em>& Confrères</em></h1>
+      <div class="hero-rule" aria-hidden="true"></div>
+      <p class="hero-tagline">Architects of the long span — civic, liturgical, and conservation work since 1986.</p>
+      <div class="hero-meta">Reims · Cluny · Soissons · Beauvais</div>
+    </div>
+  </div>
+
+  <aside class="hero-side right" aria-hidden="true">
+    <span class="marker">Bureau Principal</span>
+    14 rue des Tournelles<br>
+    51100 Reims, France<br>
+    <em>+33 (0)3 26 47 18 02</em><br><br>
+    Hours by appointment;<br>
+    site visits Tuesday & Friday.
+  </aside>
+</section>
+
+<div class="divider" aria-hidden="true">
+  <span class="line"></span>
+  <svg viewBox="0 0 200 200"><path fill="var(--primary)" transform="translate(0 -852.36)" d="m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937z"/></svg>
+  <span class="line"></span>
+</div>
+
+<section class="manifesto" aria-label="Manifesto">
+  <div class="manifesto-heading">
+    Of the<br>Practice
+  </div>
+  <div class="manifesto-text">
+    <p class="lead">For thirty-eight years our drawings have been measured against limestone, against memory, and against the patient arithmetic of the vault. The Atelier maintains three departments under a single roof in Reims, each charged with a distinct register of work yet bound to a shared discipline of <em>slow building</em>.</p>
+    <p>We accept perhaps nine commissions in any given year — chapels, libraries, civic interiors, the occasional new house — and we conduct each as a conversation between mason, draughtsman, and place. Stone is never asked to act as veneer.</p>
+  </div>
+  <ul class="departments" aria-label="Departments">
+    <li>
+      <span class="dept-name"><span class="dept-num">i.</span>Sacred Fabric</span>
+      <span class="dept-desc">Conservation of liturgical interiors, vault stabilisation, and the repair of historic glass under the direction of M. Aubertin.</span>
+    </li>
+    <li>
+      <span class="dept-name"><span class="dept-num">ii.</span>Civic Stone</span>
+      <span class="dept-desc">Mairies, libraries, and small museums — masonry-led civic commissions, often in collaboration with municipal preservation offices.</span>
+    </li>
+    <li>
+      <span class="dept-name"><span class="dept-num">iii.</span>New Build</span>
+      <span class="dept-desc">Ground-up architecture in the long-span tradition: chapels, reading pavilions, and private commissions of liturgical character.</span>
+    </li>
+  </ul>
+</section>
+
+<div class="divider" aria-hidden="true">
+  <span class="line"></span>
+  <svg viewBox="0 0 600 600" aria-hidden="true">
+    <g transform="translate(300,300)scale(0.6)rotate(45)" fill="var(--primary)">
+      <circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/>
+      <circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/>
+      <rect x="-232" y="-232" width="464" height="464"/>
+      <g fill="#f4ecd8">
+        <circle cx="-195.16" r="138"/><circle cx="195.16" r="138"/>
+        <circle cy="195.16" r="138"/><circle cy="-195.16" r="138"/>
+        <rect x="-207" y="-207" width="414" height="414"/>
+      </g>
+    </g>
+  </svg>
+  <span class="line"></span>
+</div>
+
+<section class="commissions" aria-label="Featured commissions">
+  <div class="section-head">
+    <span class="eyebrow">— Three works in hand —</span>
+    <h2>Featured <em>Commissions</em></h2>
+    <span class="eyebrow">MMXXII – MMXXIV</span>
+  </div>
+
+  <div class="card-grid">
+
+    <article class="card">
+      <div class="card-arch">
+        <svg class="card-quatrefoil" viewBox="0 0 600 600" aria-hidden="true">
+          <g transform="translate(300,300)scale(0.87)rotate(45)">
+            <circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/>
+            <circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/>
+            <rect x="-232" y="-232" width="464" height="464"/>
+            <g fill="#f4ecd8">
+              <circle cx="-195.16" r="138"/><circle cx="195.16" r="138"/>
+              <circle cy="195.16" r="138"/><circle cy="-195.16" r="138"/>
+              <rect x="-207" y="-207" width="414" height="414"/>
+            </g>
+          </g>
+        </svg>
+        <div class="card-num">— No. I —</div>
+        <h3>Reims Chapter House Re-roofing</h3>
+        <p class="meta">2022 · Reims · Sacred Fabric</p>
+        <p class="excerpt">Replacement of the thirteenth-century timber roof above the canons' chapter, executed in seasoned French oak under traditional draw-bored joinery. Lead returned to the spire flèches; rainwater redirected from buttress crowns.</p>
+        <div class="card-foot">Completed</div>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-arch">
+        <svg class="card-quatrefoil" viewBox="0 0 600 600" aria-hidden="true">
+          <g transform="translate(300,300)scale(0.87)rotate(45)">
+            <circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/>
+            <circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/>
+            <rect x="-232" y="-232" width="464" height="464"/>
+            <g fill="#f4ecd8">
+              <circle cx="-195.16" r="138"/><circle cx="195.16" r="138"/>
+              <circle cy="195.16" r="138"/><circle cy="-195.16" r="138"/>
+              <rect x="-207" y="-207" width="414" height="414"/>
+            </g>
+          </g>
+        </svg>
+        <div class="card-num">— No. II —</div>
+        <h3>Cluny Reading Pavilion</h3>
+        <p class="meta">2023 · Saône-et-Loire · New Build</p>
+        <p class="excerpt">A small civic library set into the ruined precinct of the abbey: a single tall nave of Bourgogne limestone, eleven oak desks, clerestory glazing in mouth-blown antique. Commissioned by the Commune de Cluny.</p>
+        <div class="card-foot">Opened May ’24</div>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-arch">
+        <svg class="card-quatrefoil" viewBox="0 0 600 600" aria-hidden="true">
+          <g transform="translate(300,300)scale(0.87)rotate(45)">
+            <circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/>
+            <circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/>
+            <rect x="-232" y="-232" width="464" height="464"/>
+            <g fill="#f4ecd8">
+              <circle cx="-195.16" r="138"/><circle cx="195.16" r="138"/>
+              <circle cy="195.16" r="138"/><circle cy="-195.16" r="138"/>
+              <rect x="-207" y="-207" width="414" height="414"/>
+            </g>
+          </g>
+        </svg>
+        <div class="card-num">— No. III —</div>
+        <h3>Saint-Léger-de-Soissons Nave Vault</h3>
+        <p class="meta">Ongoing · Aisne · Sacred Fabric</p>
+        <p class="excerpt">Stabilisation of the twelfth-century quadripartite vaulting above the nave, following structural movement first recorded in 1893. Scaffold campaign in three phases; new tie-irons forged in Laon by the Pellerin forge.</p>
+        <div class="card-foot">Phase II of III</div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<footer>
+  <div class="seal-wrap" aria-hidden="true">
+    <div class="seal">
+      <svg viewBox="0 0 592 592"><path transform="translate(-4,-4)scale(0.15,0.15)" d="M1778.9,3200A120.9263,120.9263 0 0,1 1657.97,3320.93A120.9263,120.9263 0 0,1 1537.04,3200A221.5096,221.5096 0 0,0 1456.32,3371.02A221.5096,221.5096 0 0,0 1677.83,3592.53A221.5096,221.5096 0 0,0 1818.61,3542.03A362.779,362.779 0 0,0 2000,3856.21A362.779,362.779 0 0,0 2181.39,3542.03A221.5096,221.5096 0 0,0 2322.17,3592.53A221.5096,221.5096 0 0,0 2543.68,3371.02A221.5096,221.5096 0 0,0 2462.96,3200A120.9263,120.9263 0 0,1 2342.03,3320.93A120.9263,120.9263 0 0,1 2221.1,3200V2221.1H3200A120.9263,120.9263 0 0,1 3320.93,2342.03A120.9263,120.9263 0 0,1 3200,2462.96A221.5096,221.5096 0 0,0 3371.02,2543.68A221.5096,221.5096 0 0,0 3592.53,2322.17A221.5096,221.5096 0 0,0 3542.03,2181.39A362.779,362.779 0 0,0 3856.21,2000A362.779,362.779 0 0,0 3542.03,1818.61A221.5096,221.5096 0 0,0 3592.53,1677.83A221.5096,221.5096 0 0,0 3371.02,1456.32A221.5096,221.5096 0 0,0 3200,1537.04A120.9263,120.9263 0 0,1 3320.93,1657.97A120.9263,120.9263 0 0,1 3200,1778.9H2221.1V800A120.9263,120.9263 0 0,1 2342.03,679.073A120.9263,120.9263 0 0,1 2462.96,800A221.5096,221.5096 0 0,0 2543.68,628.984A221.5096,221.5096 0 0,0 2322.17,407.475A221.5096,221.5096 0 0,0 2181.39,457.969A362.779,362.779 0 0,0 2000,143.793A362.779,362.779 0 0,0 1818.61,457.969A221.5096,221.5096 0 0,0 1677.83,407.475A221.5096,221.5096 0 0,0 1456.32,628.984A221.5096,221.5096 0 0,0 1537.04,800A120.9263,120.9263 0 0,1 1657.97,679.073A120.9263,120.9263 0 0,1 1778.9,800V1778.9H800A120.9263,120.9263 0 0,1 679.073,1657.97A120.9263,120.9263 0 0,1 800,1537.04A221.5096,221.5096 0 0,0 628.984,1456.32A221.5096,221.5096 0 0,0 407.475,1677.83A221.5096,221.5096 0 0,0 457.969,1818.61A362.779,362.779 0 0,0 143.793,2000A362.779,362.779 0 0,0 457.969,2181.39A221.5096,221.5096 0 0,0 407.475,2322.17A221.5096,221.5096 0 0,0 628.984,2543.68A221.5096,221.5096 0 0,0 800,2462.96A120.9263,120.9263 0 0,1 679.073,2342.03A120.9263,120.9263 0 0,1 800,2221.1H1778.9Z"/></svg>
+    </div>
+  </div>
+  <div class="heraldic-band" role="presentation"></div>
+  <div class="footer-info">
+    <div>
+      <h4>— Studio —</h4>
+      <p>Atelier Saint-Sévrin<br>
+      14, rue des Tournelles<br>
+      51100 Reims, France</p>
+    </div>
+    <div>
+      <h4>— Correspondence —</h4>
+      <p>Telephone +33 (0)3 26 47 18 02<br>
+      Telecopy +33 (0)3 26 47 18 11<br>
+      bureau@saint-sevrin.fr</p>
+    </div>
+    <div>
+      <h4>— Charter —</h4>
+      <p>Inscribed at the Ordre des Architectes<br>
+      Région Grand-Est, № 086-1986.<br>
+      Member, Fédération Européenne du Patrimoine.</p>
+    </div>
+  </div>
+  <div class="attribution">
+    Atelier Saint-Sévrin · MCMLXXXVI – MMXXIV · Drawn by hand, set in Fraunces and Source Sans · All works held in copyright
+  </div>
+</footer>
+
+</body>
+</html>

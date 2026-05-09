@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Ukiyo Gazette — A Quarterly of the Floating World</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), serif;
+    margin: 0;
+    line-height: 1.7;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* ——— NAVIGATION ——— */
+  .nav-bar {
+    background: var(--bg);
+    padding: 1.6rem 4rem 1.4rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0;
+    border-bottom: 1px solid rgba(12,12,12,0.35);
+    position: relative;
+  }
+  .nav-seal {
+    position: absolute;
+    left: 3rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 28px;
+    height: 28px;
+    display: block;
+  }
+  .nav-seal svg { width: 100%; height: 100%; display: block; }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-right: 2rem;
+  }
+  .nav-links a {
+    font-family: var(--font-body), serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text);
+    text-decoration: none;
+    padding: 0 1.4rem;
+    border-right: 1px solid rgba(12,12,12,0.4);
+    line-height: 1;
+  }
+  .nav-links a:last-child { border-right: none; padding-right: 0; }
+  .nav-links a[aria-current="page"] {
+    position: relative;
+  }
+  .nav-links a[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    left: 1.4rem;
+    right: 1.4rem;
+    bottom: -8px;
+    height: 1px;
+    background: var(--secondary);
+  }
+
+  /* ——— MASTHEAD / HERO ——— */
+  .masthead {
+    position: relative;
+    min-height: 620px;
+    padding: 5rem 4rem 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3rem;
+    overflow: hidden;
+  }
+  .seigaiha-field {
+    position: absolute;
+    top: 80px;
+    right: -120px;
+    width: 720px;
+    height: 720px;
+    opacity: 0.14;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .seigaiha-field svg { width: 100%; height: 100%; display: block; }
+
+  .vertical-title {
+    position: relative;
+    z-index: 2;
+    grid-column: 1;
+    writing-mode: vertical-rl;
+    font-family: var(--font-display), serif;
+    font-size: 6.4rem;
+    line-height: 1.05;
+    letter-spacing: 0.08em;
+    color: var(--text);
+    margin-left: 1rem;
+    margin-top: 1rem;
+    height: 480px;
+  }
+  .vertical-title .accent-mark {
+    color: var(--secondary);
+    display: inline-block;
+  }
+  .roman-title {
+    position: relative;
+    z-index: 2;
+    grid-column: 2;
+    align-self: end;
+    padding-bottom: 2rem;
+  }
+  .roman-title .kicker {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(12,12,12,0.6);
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .roman-title h1 {
+    font-family: var(--font-display), serif;
+    font-size: 3.2rem;
+    line-height: 1.1;
+    margin: 0 0 1rem;
+    font-weight: 400;
+  }
+  .roman-title .issue-line {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--text);
+    border-top: 1px solid rgba(12,12,12,0.4);
+    padding-top: 1rem;
+    max-width: 22rem;
+  }
+  .roman-title .issue-line strong {
+    font-style: normal;
+    color: var(--secondary);
+  }
+
+  .masthead-meta {
+    grid-column: 3;
+    align-self: end;
+    padding-bottom: 2rem;
+    position: relative;
+    z-index: 2;
+    text-align: right;
+    font-family: var(--font-body), serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.05em;
+    color: var(--text);
+  }
+  .masthead-meta dl { margin: 0; display: grid; grid-template-columns: auto auto; gap: 0.4rem 1.2rem; justify-content: end; }
+  .masthead-meta dt { font-style: italic; color: rgba(12,12,12,0.6); }
+  .masthead-meta dd { margin: 0; }
+
+  /* ——— DIVIDER ——— */
+  .sayagata-divider {
+    height: 56px;
+    background: var(--bg);
+    overflow: hidden;
+    position: relative;
+    border-top: 1px solid rgba(12,12,12,0.5);
+    border-bottom: 1px solid rgba(12,12,12,0.5);
+  }
+  .sayagata-divider svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    opacity: 0.55;
+  }
+
+  /* ——— LEAD EDITORIAL ——— */
+  .lead-editorial {
+    background: var(--surface);
+    margin: 4rem 6rem 4rem 4rem;
+    padding: 4rem 5rem 4rem 4.5rem;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr 1fr;
+    gap: 3rem;
+  }
+  .lead-editorial .corner-mon {
+    position: absolute;
+    top: 1.6rem;
+    right: 1.6rem;
+    width: 32px;
+    height: 32px;
+  }
+  .lead-editorial .corner-mon svg { width: 100%; height: 100%; }
+  .lead-editorial .corner-mon rect { fill: transparent !important; }
+  .lead-editorial .corner-mon path { fill: var(--text) !important; }
+
+  .lead-dateline {
+    grid-column: 1;
+    border-right: 1px solid rgba(12,12,12,0.25);
+    padding-right: 2rem;
+  }
+  .lead-dateline .label {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(12,12,12,0.55);
+    display: block;
+    margin-bottom: 0.6rem;
+  }
+  .lead-dateline h2 {
+    font-family: var(--font-display), serif;
+    font-size: 1.9rem;
+    font-weight: 400;
+    line-height: 1.25;
+    margin: 0 0 1.4rem;
+  }
+  .lead-dateline .signed {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    margin-top: 2rem;
+    line-height: 1.5;
+  }
+  .lead-dateline .signed .name {
+    display: block;
+    color: var(--secondary);
+    font-style: normal;
+    margin-top: 0.4rem;
+  }
+
+  .lead-body {
+    grid-column: 2;
+    max-width: 62ch;
+    font-size: 1.02rem;
+    line-height: 1.85;
+  }
+  .lead-body p { margin: 0 0 1.2rem; }
+  .lead-body p:first-child::first-letter {
+    font-family: var(--font-display), serif;
+    font-size: 3.4rem;
+    float: left;
+    line-height: 0.9;
+    padding: 0.3rem 0.6rem 0 0;
+    color: var(--secondary);
+  }
+  .lead-body em { color: var(--text); font-style: italic; }
+  .lead-body .gold-rule {
+    display: inline-block;
+    width: 48px;
+    height: 2px;
+    background: var(--accent);
+    vertical-align: middle;
+    margin: 0 0.4rem;
+  }
+
+  /* ——— FEATURED CARDS ——— */
+  .features-section {
+    padding: 2rem 4rem 5rem;
+    position: relative;
+  }
+  .features-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 2.5rem;
+    padding: 0 0.5rem;
+  }
+  .features-heading h3 {
+    font-family: var(--font-display), serif;
+    font-size: 2rem;
+    font-weight: 400;
+    margin: 0;
+    letter-spacing: 0.04em;
+  }
+  .features-heading h3 .jp {
+    font-size: 1.2rem;
+    color: rgba(12,12,12,0.55);
+    margin-left: 1rem;
+    letter-spacing: 0.2em;
+  }
+  .features-heading .folio {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: rgba(12,12,12,0.6);
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr 1fr;
+    gap: 2rem;
+  }
+  .feature-card {
+    background: var(--surface);
+    padding: 3rem 3rem 3rem 2.6rem;
+    position: relative;
+    min-height: 380px;
+    display: flex;
+    flex-direction: column;
+  }
+  .feature-card .corner-mon {
+    position: absolute;
+    top: 1.4rem;
+    right: 1.4rem;
+    width: 32px;
+    height: 32px;
+  }
+  .feature-card .corner-mon svg { width: 100%; height: 100%; }
+  .feature-card .corner-mon rect { fill: transparent !important; }
+  .feature-card .corner-mon path { fill: var(--text) !important; }
+
+  .feature-card .tag {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 0.75rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 1rem;
+  }
+  .feature-card h4 {
+    font-family: var(--font-display), serif;
+    font-size: 1.55rem;
+    font-weight: 400;
+    line-height: 1.3;
+    margin: 0 0 0.4rem;
+    max-width: 22ch;
+  }
+  .feature-card .byline {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: rgba(12,12,12,0.65);
+    margin-bottom: 1.4rem;
+  }
+  .feature-card p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin: 0 0 1.4rem;
+    max-width: 32ch;
+  }
+  .feature-card .read-on {
+    margin-top: auto;
+    font-family: var(--font-body), serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: 1px solid var(--text);
+    padding-bottom: 2px;
+    align-self: flex-start;
+  }
+  .feature-card .folio-num {
+    position: absolute;
+    bottom: 1.6rem;
+    right: 1.8rem;
+    font-family: var(--font-display), serif;
+    font-size: 0.9rem;
+    color: rgba(12,12,12,0.45);
+    letter-spacing: 0.1em;
+  }
+
+  /* ——— STANDING COLOPHON ——— */
+  .standing-colophon {
+    margin: 3rem 4rem 4rem;
+    padding: 2.4rem 3rem;
+    border-top: 1px solid rgba(12,12,12,0.4);
+    border-bottom: 1px solid rgba(12,12,12,0.4);
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 3rem;
+    align-items: center;
+    background: transparent;
+  }
+  .standing-colophon .label {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(12,12,12,0.6);
+  }
+  .standing-colophon p {
+    font-family: var(--font-body), serif;
+    font-size: 0.92rem;
+    line-height: 1.75;
+    margin: 0;
+    max-width: 60ch;
+  }
+  .standing-colophon .gold-seal {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display), serif;
+    color: var(--surface);
+    font-size: 1.2rem;
+  }
+
+  /* ——— FOOTER ——— */
+  footer {
+    background: var(--bg);
+    border-top: 1px solid rgba(12,12,12,0.6);
+    padding: 3.5rem 4rem 3rem;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 4rem;
+    align-items: start;
+  }
+  .crane-seal {
+    width: 56px;
+    height: 56px;
+  }
+  .crane-seal svg { width: 100%; height: 100%; display: block; }
+  .crane-seal rect { fill: transparent !important; }
+  .crane-seal path { fill: var(--text) !important; }
+
+  .colophon-text {
+    font-family: var(--font-body), serif;
+    font-size: 0.86rem;
+    line-height: 1.7;
+  }
+  .colophon-text .title-jp {
+    font-family: var(--font-display), serif;
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+  .colophon-text em { font-style: italic; color: rgba(12,12,12,0.65); }
+
+  .footer-right {
+    text-align: right;
+    font-family: var(--font-body), serif;
+    font-size: 0.82rem;
+    line-height: 1.7;
+    color: var(--text);
+  }
+  .footer-right .issue-no {
+    font-family: var(--font-display), serif;
+    font-size: 1rem;
+    color: var(--secondary);
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+  .footer-right .attribution {
+    margin-top: 1rem;
+    font-style: italic;
+    font-size: 0.72rem;
+    color: rgba(12,12,12,0.55);
+    letter-spacing: 0.04em;
+  }
+
+  /* hide rect backgrounds on inline svgs uniformly */
+  .mon-inline rect[style*="fill:#ffffff"] { fill: transparent !important; }
+</style>
+</head>
+<body>
+
+<nav class="nav-bar" aria-label="Primary">
+  <span class="nav-seal" aria-hidden="true">
+    <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#0c0c0c" d="M 226.13364,612.57579 C 207.8052,610.64503 189.07085,603.27797 174.07991,592.10629 C 168.2372,587.75214 158.29322,577.8608 153.78698,571.9208 C 132.5626,543.94339 126.61588,507.85248 137.79008,474.83496 C 141.25861,464.58614 146.78359,453.9662 152.97675,445.64361 C 157.16039,440.02149 167.66572,429.43802 173.42393,425.04434 C 201.20575,403.84602 237.50693,397.85655 270.50977,409.02578 C 286.664,414.49289 299.71221,422.76016 311.9042,435.25303 C 323.67395,447.31324 331.05394,459.27791 336.31895,474.83496 C 346.30781,504.35006 342.79857,535.57031 326.40165,563.06499 C 318.72451,575.93817 304.73233,589.92909 291.82929,597.63424 C 271.43302,609.81403 248.79421,614.96291 226.13364,612.57579 z M 439.98488,612.57579 C 421.65644,610.64503 402.9221,603.27797 387.93116,592.10629 C 382.08845,587.75214 372.14446,577.8608 367.63822,571.9208 C 346.41385,543.94339 340.46712,507.85248 351.64132,474.83496 C 355.10985,464.58614 360.63483,453.9662 366.828,445.64361 C 371.01163,440.02149 381.51696,429.43802 387.27517,425.04434 C 415.05699,403.84602 451.35818,397.85655 484.36101,409.02578 C 500.51524,414.49289 513.56346,422.76016 525.75544,435.25303 C 537.52519,447.31324 544.90518,459.27791 550.17019,474.83496 C 560.15906,504.35006 556.64982,535.57031 540.25289,563.06499 C 532.57575,575.93817 518.58357,589.92909 505.68054,597.63424 C 485.28426,609.81403 462.64546,614.96291 439.98488,612.57579 z M 159.87911,409.8763 C 141.55067,407.94553 122.81632,400.57848 107.82539,389.4068 C 101.98268,385.05265 92.038692,375.16131 87.532453,369.22131 C 66.308078,341.2439 60.361354,305.15299 71.535554,272.13546 C 75.004083,261.88664 80.529061,251.26671 86.722226,242.94411 C 90.905865,237.322 101.4112,226.73853 107.1694,222.34485 C 127.75958,206.63396 154.14627,198.87562 179.1638,201.17674 C 189.54676,202.13177 195.42739,203.33865 204.25524,206.32629 C 220.40947,211.7934 233.45769,220.06067 245.64967,232.55353 C 257.41942,244.61375 264.79941,256.57842 270.06442,272.13546 C 280.05329,301.65056 276.54405,332.87082 260.14712,360.3655 C 252.46998,373.23868 238.4778,387.2296 225.57477,394.93475 C 205.17849,407.11454 182.53968,412.26341 159.87911,409.8763 z M 506.23941,409.8763 C 487.91097,407.94553 469.17662,400.57848 454.18568,389.4068 C 448.34297,385.05265 438.39899,375.16131 433.89275,369.22131 C 412.66837,341.2439 406.72165,305.15299 417.89585,272.13546 C 421.36438,261.88664 426.88936,251.26671 433.08252,242.94411 C 437.26616,237.322 447.77149,226.73853 453.5297,222.34485 C 474.11988,206.63396 500.50657,198.87562 525.5241,201.17674 C 535.90705,202.13177 541.78769,203.33865 550.61554,206.32629 C 566.76977,211.7934 579.81798,220.06067 592.00997,232.55353 C 603.77972,244.61375 611.15971,256.57842 616.42472,272.13546 C 626.4136,301.65056 622.90434,332.87082 606.50742,360.3655 C 598.83028,373.23868 584.8381,387.2296 571.93506,394.93475 C 551.53879,407.11454 528.89998,412.26341 506.23941,409.8763 z M 333.05926,283.9271 C 314.73082,281.99634 295.99647,274.62928 281.00554,263.4576 C 275.16282,259.10345 265.21884,249.21211 260.7126,243.27211 C 239.48823,215.2947 233.5415,179.20379 244.7157,146.18627 C 248.18423,135.93744 253.70921,125.31751 259.90237,116.99491 C 264.08601,111.3728 274.59134,100.78933 280.34955,96.395647 C 308.13137,75.197328 344.43255,69.207858 377.43539,80.377088 C 393.58962,85.844198 406.63783,94.111468 418.82982,106.60433 C 430.59957,118.66455 437.97956,130.62922 443.24457,146.18627 C 453.23344,175.70137 449.7242,206.92162 433.32727,234.4163 C 425.65013,247.28948 411.65795,261.2804 398.75492,268.98555 C 378.35864,281.16534 355.71983,286.31422 333.05926,283.9271 z"/>
+    </svg>
+  </span>
+  <div class="nav-links">
+    <a href="page-1.html" aria-current="page">Gazette</a>
+    <a href="page-2.html">Hokusai</a>
+    <a href="page-3.html">Kisokaidō</a>
+    <a href="page-4.html">Nishijin</a>
+    <a href="page-5.html">Wagara</a>
+    <a href="page-6.html">Subscribe</a>
+  </div>
+</nav>
+
+<section class="masthead">
+  <div class="seigaiha-field" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 700">
+      <defs>
+        <g id="C1m">
+          <path d="M 1,210 V 100 A 98,98 0 0 1 100,1 98,98 0 0 1 199,100 V 210" style="fill:none;stroke:#1c3a5e;stroke-width:1.5"/>
+          <path d="M 175,210 V 100 A 75,75 0 0 0 100,25 75,75 0 0 0 25,100 V 210" style="fill:none;stroke:#1c3a5e;stroke-width:1"/>
+        </g>
+        <g id="C4m">
+          <use href="#C1m"/>
+          <use href="#C1m" transform="translate(200,0)"/>
+          <use href="#C1m" transform="translate(400,0)"/>
+          <use href="#C1m" transform="translate(600,0)"/>
+        </g>
+      </defs>
+      <use href="#C4m" transform="translate(-100,-100)"/>
+      <use href="#C4m" transform="translate(0,0)"/>
+      <use href="#C4m" transform="translate(-100,100)"/>
+      <use href="#C4m" transform="translate(0,200)"/>
+      <use href="#C4m" transform="translate(-100,300)"/>
+      <use href="#C4m" transform="translate(0,400)"/>
+      <use href="#C4m" transform="translate(-100,500)"/>
+      <use href="#C4m" transform="translate(0,600)"/>
+    </svg>
+  </div>
+
+  <div class="vertical-title" aria-label="Ukiyo Gazette">
+    浮<span class="accent-mark">世</span>瓦版
+  </div>
+
+  <div class="roman-title">
+    <span class="kicker">A Quarterly of the Floating World</span>
+    <h1>Ukiyo<br>Gazette</h1>
+    <p class="issue-line"><strong>Winter № XXVII</strong> — Bunsei 6, Eleventh Month, sent to press at the Nakagyō workshop, Kyōto.</p>
+  </div>
+
+  <div class="masthead-meta">
+    <dl>
+      <dt>Issued</dt><dd>文政六年 霜月</dd>
+      <dt>Reissued</dt><dd>2024 / Reiwa 6</dd>
+      <dt>Folio</dt><dd>iv. of iv. annual</dd>
+      <dt>Paper</dt><dd>Echizen kōzo</dd>
+      <dt>Price</dt><dd>四百文 · ¥1,800</dd>
+    </dl>
+  </div>
+</section>
+
+<div class="sayagata-divider" aria-hidden="true">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 200 600 200" preserveAspectRatio="xMidYMid slice">
+    <g style="fill:none;stroke:#0c0c0c;stroke-width:1.5">
+      <polygon points="501.6,301.2 551.1,251.7 500.8,201.4 451.3,250.9 300.9,100.5 350.4,51 300.1,0.7 250.6,50.2 201.1,0.7 150.3,51.5 500.3,401.5 551.1,350.7 "/>
+      <polygon points="600.9,199.9 551.6,150.7 601.2,101 550.7,50.4 501,100.1 450.4,150.7 400.8,200.3 451.3,250.9 501,201.2 550.3,250.5 "/>
+      <polyline points="600,0 400.8,200.3 351,150.5 501.5,0 "/>
+      <polygon points="349.9,452.9 300.4,502.4 250.1,452.1 299.6,402.6 149.2,252.2 99.7,301.7 49.4,251.4 98.9,201.9 49.4,152.4 100.2,101.6 450.2,451.6 399.4,502.4 "/>
+      <polygon points="248.7,552.1 199.4,502.9 149.7,552.5 99.2,501.9 148.8,452.3 199.4,401.7 249,352.1 299.6,402.6 250,452.3 299.2,501.6 "/>
+      <polygon points="-0.9,302.6 48.4,351.9 -1.2,401.5 49.3,452.1 99,402.5 149.6,351.9 199.2,302.2 148.7,251.7 99,301.3 49.7,252 "/>
+      <rect x="86.2" y="284.6" transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 -96.6059 819.6381)" width="70.5" height="290.4"/>
+      <polyline points="551.1,350.7 501.6,301.2 551.1,251.7 600.6,301.2 "/>
+      <polyline points="49.4,152.4 99.4,202.4 49.7,252 -0.2,202.1 "/>
+      <polyline points="399.4,502.4 349.4,452.4 299.8,502.1 349.7,552.1 299.2,602.6 "/>
+    </g>
+  </svg>
+</div>
+
+<article class="lead-editorial">
+  <span class="corner-mon mon-inline" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 688 688">
+      <path d="M 226.13364,612.57579 C 207.8052,610.64503 189.07085,603.27797 174.07991,592.10629 C 168.2372,587.75214 158.29322,577.8608 153.78698,571.9208 C 132.5626,543.94339 126.61588,507.85248 137.79008,474.83496 C 141.25861,464.58614 146.78359,453.9662 152.97675,445.64361 C 157.16039,440.02149 167.66572,429.43802 173.42393,425.04434 C 201.20575,403.84602 237.50693,397.85655 270.50977,409.02578 C 286.664,414.49289 299.71221,422.76016 311.9042,435.25303 C 323.67395,447.31324 331.05394,459.27791 336.31895,474.83496 C 346.30781,504.35006 342.79857,535.57031 326.40165,563.06499 C 318.72451,575.93817 304.73233,589.92909 291.82929,597.63424 C 271.43302,609.81403 248.79421,614.96291 226.13364,612.57579 z M 439.98488,612.57579 C 421.65644,610.64503 402.9221,603.27797 387.93116,592.10629 C 382.08845,587.75214 372.14446,577.8608 367.63822,571.9208 C 346.41385,543.94339 340.46712,507.85248 351.64132,474.83496 C 355.10985,464.58614 360.63483,453.9662 366.828,445.64361 C 371.01163,440.02149 381.51696,429.43802 387.27517,425.04434 C 415.05699,403.84602 451.35818,397.85655 484.36101,409.02578 C 500.51524,414.49289 513.56346,422.76016 525.75544,435.25303 C 537.52519,447.31324 544.90518,459.27791 550.17019,474.83496 C 560.15906,504.35006 556.64982,535.57031 540.25289,563.06499 C 532.57575,575.93817 518.58357,589.92909 505.68054,597.63424 C 485.28426,609.81403 462.64546,614.96291 439.98488,612.57579 z M 159.87911,409.8763 C 141.55067,407.94553 122.81632,400.57848 107.82539,389.4068 C 101.98268,385.05265 92.038692,375.16131 87.532453,369.22131 C 66.308078,341.2439 60.361354,305.15299 71.535554,272.13546 C 75.004083,261.88664 80.529061,251.26671 86.722226,242.94411 C 90.905865,237.322 101.4112,226.73853 107.1694,222.34485 C 127.75958,206.63396 154.14627,198.87562 179.1638,201.17674 C 189.54676,202.13177 195.42739,203.33865 204.25524,206.32629 C 220.40947,211.7934 233.45769,220.06067 245.64967,232.55353 C 257.41942,244.61375 264.79941,256.57842 270.06442,272.13546 C 280.05329,301.65056 276.54405,332.87082 260.14712,360.3655 C 252.46998,373.23868 238.4778,387.2296 225.57477,394.93475 C 205.17849,407.11454 182.53968,412.26341 159.87911,409.8763 z M 506.23941,409.8763 C 487.91097,407.94553 469.17662,400.57848 454.18568,389.4068 C 448.34297,385.05265 438.39899,375.16131 433.89275,369.22131 C 412.66837,341.2439 406.72165,305.15299 417.89585,272.13546 C 421.36438,261.88664 426.88936,251.26671 433.08252,242.94411 C 437.26616,237.322 447.77149,226.73853 453.5297,222.34485 C 474.11988,206.63396 500.50657,198.87562 525.5241,201.17674 C 535.90705,202.13177 541.78769,203.33865 550.61554,206.32629 C 566.76977,211.7934 579.81798,220.06067 592.00997,232.55353 C 603.77972,244.61375 611.15971,256.57842 616.42472,272.13546 C 626.4136,301.65056 622.90434,332.87082 606.50742,360.3655 C 598.83028,373.23868 584.8381,387.2296 571.93506,394.93475 C 551.53879,407.11454 528.89998,412.26341 506.23941,409.8763 z M 333.05926,283.9271 C 314.73082,281.99634 295.99647,274.62928 281.00554,263.4576 C 275.16282,259.10345 265.21884,249.21211 260.7126,243.27211 C 239.48823,215.2947 233.5415,179.20379 244.7157,146.18627 C 248.18423,135.93744 253.70921,125.31751 259.90237,116.99491 C 264.08601,111.3728 274.59134,100.78933 280.34955,96.395647 C 308.13137,75.197328 344.43255,69.207858 377.43539,80.377088 C 393.58962,85.844198 406.63783,94.111468 418.82982,106.60433 C 430.59957,118.66455 437.97956,130.62922 443.24457,146.18627 C 453.23344,175.70137 449.7242,206.92162 433.32727,234.4163 C 425.65013,247.28948 411.65795,261.2804 398.75492,268.98555 C 378.35864,281.16534 355.71983,286.31422 333.05926,283.9271 z"/>
+    </svg>
+  </span>
+
+  <div class="lead-dateline">
+    <span class="label">From the Desk of the Editor</span>
+    <h2>Bunsei 6,<br>Eleventh Month —<br>a Winter Letter</h2>
+    <p class="signed">
+      Set down at the Nakagyō workshop with the brazier lit and the Kamo running grey;
+      the kōzo deliveries from Imadate arrived on the seventh.
+      <span class="name">— Ono Sumiko, Editor</span>
+    </p>
+  </div>
+
+  <div class="lead-body">
+    <p>The winter issue arrives, as is our custom, with the first frost on the Higashiyama tiles. Our concerns this quarter are three, and they are quiet ones. We return, first, to <em>Hokusai</em> in his old age — to the late Fuji prints of 1834 and to the spare, almost trembling line of <em>One Hundred Views</em>, where the master, by his own admission, had at last begun to learn how to draw.</p>
+    <p>We then take to the road. The contributor Yamashina Tōkichi has walked the Kisokaidō from Itabashi to Otsu in eleven days, eating badly and sleeping worse, and his notebook — passed to us at Kuwana — is reproduced here in full, with its observations on packhorse fees, post-station prices, and the snow at Magome.<span class="gold-rule" aria-hidden="true"></span></p>
+    <p>Last, we sit a long afternoon with the Nishijin weaver Tatsumura Heizō at his loom in Kamigyō-ku; his notes on the <em>karaori</em> commission for the Yasaka shrine, and on the slow disappearance of certain indigo dyes, close the issue. May the gazette warm a tea-room hour.</p>
+  </div>
+
+  <div></div>
+</article>
+
+<section class="features-section">
+  <header class="features-heading">
+    <h3>Featured Essays<span class="jp">特集三篇</span></h3>
+    <span class="folio">folios xvii — xliv</span>
+  </header>
+
+  <div class="features-grid">
+
+    <article class="feature-card">
+      <span class="corner-mon mon-inline" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 688 688">
+          <circle cx="344" cy="344" r="240" fill="none" stroke="#0c0c0c" stroke-width="14"/>
+          <path d="M344 140 L380 300 L540 320 L400 380 L440 540 L344 440 L248 540 L288 380 L148 320 L308 300 Z"/>
+        </svg>
+      </span>
+      <span class="tag">— Print Studies / Hokusai —</span>
+      <h4>Thirty-Six Views, Reconsidered</h4>
+      <p class="byline">by Asano Hiroko · folios xvii–xxiv</p>
+      <p>On the late Fuji series and what changes when an old man, working in Edo's Honjō ward, finally permits the mountain to be small. With notes on the cobalt blue of 1831 and the price-cut of the second edition.</p>
+      <a class="read-on" href="page-2.html">Continue reading</a>
+      <span class="folio-num">№ 02</span>
+    </article>
+
+    <article class="feature-card">
+      <span class="corner-mon mon-inline" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 688 688">
+          <circle cx="344" cy="344" r="240" fill="none" stroke="#0c0c0c" stroke-width="14"/>
+          <path d="M344 160 C260 240 260 360 344 440 C428 360 428 240 344 160 Z M344 200 C300 260 300 340 344 400 C388 340 388 260 344 200 Z"/>
+          <circle cx="344" cy="344" r="36"/>
+        </svg>
+      </span>
+      <span class="tag">— Travelogue / Kiso Road —</span>
+      <h4>On the Kisokaidō — A Traveler's Notebook</h4>
+      <p class="byline">by Yamashina Tōkichi · folios xxv–xxxvi</p>
+      <p>Eleven days on foot from Itabashi to Otsu, with packhorse at three hundred mon the league. Snow at Magome, a quarrel at Tsumago, and the lacquered bowls of Narai. Reproduced from the original Mino-paper notebook.</p>
+      <a class="read-on" href="page-3.html">Continue reading</a>
+      <span class="folio-num">№ 03</span>
+    </article>
+
+    <article class="feature-card">
+      <span class="corner-mon mon-inline" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 688 688">
+          <circle cx="344" cy="344" r="240" fill="none" stroke="#0c0c0c" stroke-width="14"/>
+          <path d="M200 344 L344 200 L488 344 L344 488 Z M260 344 L344 260 L428 344 L344 428 Z"/>
+          <circle cx="344" cy="344" r="28"/>
+        </svg>
+      </span>
+      <span class="tag">— Interview / Nishijin —</span>
+      <h4>The Nishijin Loom</h4>
+      <p class="byline">with Tatsumura Heizō · folios xxxvii–xliv</p>
+      <p>An afternoon in Kamigyō-ku with a karaori weaver of the eighth generation, on the Yasaka commission, the disappearance of true ai indigo, and why a kimono should weigh four hundred monme and not a momme more.</p>
+      <a class="read-on" href="page-4.html">Continue reading</a>
+      <span class="folio-num">№ 04</span>
+    </article>
+
+  </div>
+</section>
+
+<aside class="standing-colophon">
+  <span class="label">Standing Colophon</span>
+  <p>『浮世瓦版』 is printed in Kyōto on Echizen kōzo paper, hand-pulled at the Iwano atelier in Imadate; impressions are taken from cherry-wood blocks at the Takezasa-dō workshop, Nakagyō-ku. Issued four times yearly — Risshun, Risshū, Risshū second, and the present winter folio — at four hundred mon (¥1,800) the copy. A Pattern Library of <a href="page-5.html" style="color:var(--secondary);text-decoration:none;border-bottom:1px solid var(--secondary)">five wagara</a> accompanies this issue; subscriptions are received at the editorial office, see <a href="page-6.html" style="color:var(--secondary);text-decoration:none;border-bottom:1px solid var(--secondary)">page vi</a>.</p>
+  <span class="gold-seal" aria-hidden="true">印</span>
+</aside>
+
+<footer>
+  <div class="crane-seal" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 688 688">
+      <circle cx="344" cy="344" r="300" fill="none" stroke="#0c0c0c" stroke-width="6"/>
+      <path d="M344 120 C260 180 220 260 240 360 C260 440 320 480 344 540 C368 480 428 440 448 360 C468 260 428 180 344 120 Z M344 180 C300 220 280 280 290 350 C300 410 330 440 344 480 C358 440 388 410 398 350 C408 280 388 220 344 180 Z"/>
+      <circle cx="344" cy="320" r="14"/>
+      <path d="M180 360 Q260 320 344 360 Q428 320 508 360" fill="none" stroke="#0c0c0c" stroke-width="4"/>
+    </svg>
+  </div>
+
+  <div class="colophon-text">
+    <span class="title-jp">『浮世瓦版』</span>
+    <strong>Ukiyo Gazette</strong> — established Bunsei 6 (1823), reissued 2024.<br>
+    A quarterly broadsheet of woodblock prints, machiya life, and the traveling roads of late-Edo Japan. <em>Printed on Echizen kōzo, four times yearly.</em>
+  </div>
+
+  <div class="footer-right">
+    <span class="issue-no">No. XXVII · 文政六年</span>
+    Editorial Office<br>
+    Sanjō-agaru, Tominokōji-dōri,<br>
+    Nakagyō-ku, Kyōto-shi 604-8091<br>
+    <span class="attribution">Kamon SVG sources: Mitsubishi-mon, Tsuru-no-maru, Umebachi — Wikimedia Commons, CC-BY-SA 3.0. All ornament reset by hand for the present folio.</span>
+  </div>
+</footer>
+
+</body>
+</html>

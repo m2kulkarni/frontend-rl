@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Hakuro Library & Archives — Rikuō University</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), serif;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* ---------- Navigation ---------- */
+  .site-nav {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    padding: 2rem 4rem 1.25rem;
+    border-bottom: 1px solid var(--primary);
+  }
+  .wordmark {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    font-family: var(--font-display), serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.08em;
+    color: var(--primary);
+    text-decoration: none;
+  }
+  .wordmark .kamon-mini {
+    width: 28px; height: 28px;
+    display: block;
+  }
+  .nav-links {
+    justify-self: end;
+    display: flex;
+    gap: 2.5em;
+    font-size: 14px;
+    list-style: none;
+    margin: 0; padding: 0;
+  }
+  .nav-links a {
+    color: var(--primary);
+    text-decoration: none;
+    position: relative;
+    padding: 0.25rem 0;
+    letter-spacing: 0.05em;
+  }
+  .nav-links a[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 5rem 4rem 6rem;
+    gap: 4rem;
+    position: relative;
+    min-height: 540px;
+  }
+  .hero-eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    margin-bottom: 2rem;
+  }
+  .hero-eyebrow::before {
+    content: "";
+    display: inline-block;
+    width: 28px;
+    height: 1px;
+    background: var(--primary);
+    vertical-align: middle;
+    margin-right: 1rem;
+  }
+  .hero h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 4rem;
+    line-height: 1.15;
+    margin: 0 0 2rem;
+    color: var(--primary);
+  }
+  .hero h1 .accent-char {
+    color: var(--accent);
+  }
+  .hero-lede {
+    max-width: 28rem;
+    font-size: 1.0625rem;
+    line-height: 1.85;
+    color: var(--primary);
+  }
+  .hero-meta {
+    margin-top: 3rem;
+    font-size: 13px;
+    color: var(--text-emphasis);
+    letter-spacing: 0.08em;
+  }
+  .hero-right {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  .hero-figure-caption {
+    border-left: 1px solid var(--primary);
+    padding: 0.5rem 0 0.5rem 1.5rem;
+    max-width: 22rem;
+    font-size: 0.875rem;
+    line-height: 1.7;
+    color: var(--text-emphasis);
+    margin-left: auto;
+  }
+  .hero-figure-caption .label {
+    font-family: var(--font-display), serif;
+    font-size: 1rem;
+    color: var(--primary);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  /* ---------- Divider ---------- */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 0 4rem;
+    margin: 0 0 5rem;
+  }
+  .divider .line {
+    flex: 1;
+    height: 1px;
+    background: var(--primary);
+  }
+  .divider .sayagata {
+    width: 80px;
+    height: 24px;
+    overflow: hidden;
+    opacity: 0.55;
+  }
+  .divider .label {
+    font-family: var(--font-display), serif;
+    font-size: 0.875rem;
+    letter-spacing: 0.4em;
+    color: var(--text-emphasis);
+    text-transform: uppercase;
+  }
+
+  /* ---------- Holdings Grid ---------- */
+  .holdings {
+    padding: 0 4rem;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 4rem;
+    margin-bottom: 6rem;
+  }
+  .section-head {
+    position: sticky;
+    top: 2rem;
+  }
+  .section-head .num {
+    font-family: var(--font-display), serif;
+    font-size: 0.875rem;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    margin-bottom: 1rem;
+  }
+  .section-head h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 2.25rem;
+    margin: 0 0 1.5rem;
+    line-height: 1.25;
+    color: var(--primary);
+  }
+  .section-head p {
+    font-size: 0.95rem;
+    line-height: 1.85;
+    color: var(--text-emphasis);
+    max-width: 22rem;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+  }
+  .card {
+    position: relative;
+    background: var(--surface);
+    border-top: 1px solid var(--primary);
+    border-left: 1px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
+    padding: 2.5rem;
+    padding-right: 3rem;
+  }
+  .card .umebachi {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 24px;
+    height: 24px;
+    opacity: 0.85;
+  }
+  .card h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 1.5rem;
+    margin: 0 0 0.5rem;
+    color: var(--primary);
+    line-height: 1.3;
+  }
+  .card .meta {
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    margin-bottom: 1.25rem;
+  }
+  .card p {
+    font-size: 1rem;
+    line-height: 1.75;
+    margin: 0;
+    color: var(--primary);
+  }
+  .card .figure {
+    font-family: var(--font-display), serif;
+    font-size: 2.5rem;
+    color: var(--text-emphasis);
+    display: block;
+    margin-bottom: 0.5rem;
+    line-height: 1;
+  }
+  .card.tall {
+    grid-column: span 2;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  /* ---------- Hours / Application strip ---------- */
+  .info-strip {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr;
+    gap: 3rem;
+    padding: 4rem 4rem;
+    margin: 0 4rem 6rem;
+    position: relative;
+    border-top: 1px solid var(--primary);
+  }
+  .info-strip::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 80px;
+    height: 3px;
+    background: var(--accent);
+  }
+  .info-strip h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 2rem;
+    margin: 0 0 1rem;
+    line-height: 1.3;
+  }
+  .info-strip h2 .vrule {
+    display: inline-block;
+    width: 2px;
+    height: 0.85em;
+    background: var(--primary);
+    margin: 0 0.6rem 0 0;
+    vertical-align: -2px;
+  }
+  .info-strip p {
+    color: var(--text-emphasis);
+    line-height: 1.85;
+    max-width: 24rem;
+  }
+  .info-block h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 1.125rem;
+    margin: 0 0 1rem;
+    letter-spacing: 0.05em;
+  }
+  .info-block dl {
+    margin: 0;
+    font-size: 0.95rem;
+  }
+  .info-block dt {
+    color: var(--text-emphasis);
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+  }
+  .info-block dd {
+    margin: 0 0 1.25rem 0;
+    font-family: var(--font-display), serif;
+    font-size: 1.0625rem;
+    line-height: 1.5;
+  }
+
+  /* ---------- Building note (asymmetric) ---------- */
+  .building {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    padding: 0 4rem;
+    margin-bottom: 7rem;
+    gap: 5rem;
+    position: relative;
+  }
+  .building-seal {
+    width: 180px;
+    height: 180px;
+    margin-bottom: 2rem;
+    opacity: 0.92;
+  }
+  .building-eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    margin-bottom: 1rem;
+  }
+  .building h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 2.5rem;
+    line-height: 1.3;
+    margin: 0 0 2rem;
+  }
+  .building-body {
+    columns: 2;
+    column-gap: 3rem;
+    font-size: 1rem;
+    line-height: 1.85;
+  }
+  .building-body p {
+    margin: 0 0 1.25rem;
+    break-inside: avoid;
+  }
+
+  /* ---------- Special Collections list ---------- */
+  .speccol {
+    padding: 0 4rem;
+    margin-bottom: 7rem;
+  }
+  .speccol h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 2rem;
+    margin: 0 0 3rem;
+    max-width: 36rem;
+    line-height: 1.3;
+  }
+  .speccol-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+  }
+  .speccol-table th,
+  .speccol-table td {
+    text-align: left;
+    padding: 1.25rem 1rem;
+    border-bottom: 1px solid var(--primary);
+    vertical-align: top;
+  }
+  .speccol-table th {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    border-bottom: 1px solid var(--primary);
+    padding-bottom: 0.75rem;
+  }
+  .speccol-table .title-cell {
+    font-family: var(--font-display), serif;
+    font-size: 1.125rem;
+    color: var(--primary);
+  }
+  .speccol-table .acc {
+    color: var(--text-emphasis);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---------- Seigaiha background band (footer) ---------- */
+  .seigaiha-band {
+    position: absolute;
+    inset: 0;
+    background-image: url('svg/seigaiha-waves.svg');
+    background-size: 220px;
+    opacity: 0.08;
+    pointer-events: none;
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    position: relative;
+    padding: 4rem 4rem 3rem;
+    border-top: 1px solid var(--primary);
+  }
+  footer .inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr;
+    gap: 4rem;
+  }
+  .foot-brand .kiri {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 1.5rem;
+    display: block;
+  }
+  .foot-brand h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 1.25rem;
+    line-height: 1.4;
+    margin: 0 0 0.5rem;
+    letter-spacing: 0.05em;
+  }
+  .foot-brand .founded {
+    font-family: var(--font-display), serif;
+    font-size: 0.95rem;
+    color: var(--text-emphasis);
+  }
+  .foot-address {
+    font-size: 0.875rem;
+    line-height: 1.85;
+    max-width: 18rem;
+    color: var(--primary);
+  }
+  .foot-address h4 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 0.875rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    margin: 0 0 1rem;
+  }
+  .foot-attrib {
+    font-size: 0.75rem;
+    line-height: 1.7;
+    color: var(--text-emphasis);
+  }
+  .foot-attrib a { color: inherit; }
+
+  /* small util */
+  .accent-dot {
+    display: inline-block;
+    width: 7px; height: 7px;
+    background: var(--accent);
+    border-radius: 50%;
+    vertical-align: middle;
+    margin: 0 0.5rem;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="site-nav" aria-label="Primary">
+  <a href="page-1.html" class="wordmark">
+    <svg class="kamon-mini" viewBox="0 0 345 326" aria-hidden="true">
+      <use href="#kiri-paulownia-symbol"></use>
+    </svg>
+    Rikuō University of the Eastern Capital
+  </a>
+  <ul class="nav-links">
+    <li><a href="page-1.html">Home</a></li>
+    <li><a href="page-2.html">Faculties</a></li>
+    <li><a href="page-3.html">Admissions</a></li>
+    <li><a href="page-4.html" aria-current="page">Library</a></li>
+    <li><a href="page-5.html">Visiting</a></li>
+    <li><a href="page-6.html">About</a></li>
+  </ul>
+</nav>
+
+<!-- Hidden symbol defs -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="kiri-paulownia-symbol" viewBox="0 0 345.20605 326.25635">
+      <g transform="matrix(0.9861902,0,0,0.9861902,2.3836171,5.3631323)">
+        <circle cx="172.60352" cy="155.03467" r="9.9453125"/>
+        <path d="M 175.15234,166.07861 C 174.81543,169.77197 174.48633,173.61865 174.33496,177.29736 C 190.88574,185.96729 206.31055,197.3335 217.36035,212.56689 C 228.23242,229.14404 236.83105,249.18896 234.12988,269.51904 C 232.72656,262.25049 232.2832,254.97607 230.68652,247.70752 C 223.35059,218.45654 201.30664,194.69482 174.75195,181.12549 C 174.59082,184.9585 174.625,188.78857 174.65723,192.62061 C 188.71387,200.74268 201.2627,211.93994 210.00195,225.84912 C 221.85547,245.48486 225.1377,270.93604 216.31836,292.66357 C 218.12695,280.00244 218.97461,267.15674 217.52637,254.5249 C 213.29297,229.84326 196.82227,208.146 174.69238,196.64307 C 174.54297,201.81982 174.58496,206.80029 174.4375,211.97412 C 185.79785,218.58252 196.03223,228.07568 201.50391,240.29053 C 210.09766,259.56885 210.10645,283.13623 200.49512,302.18701 C 203.23047,285.87646 207.30273,269.17139 202.37598,252.9292 C 198.9834,237.05811 188.13965,223.54736 174.08984,216.19287 C 174.31836,220.40381 173.02246,225.59033 176.11816,229.20166 C 193.9209,250.12744 197.45117,282.09326 185.78027,306.71533 C 186.66699,298.0874 189.08594,289.64014 189.01074,280.82373 C 190.20703,263.76416 185.83789,245.60107 174.23047,232.66846 C 174.03418,254.51221 174.60254,276.3501 174.4043,298.00146 C 174.24121,301.45166 173.69434,304.7124 172.76465,307.979 C 172.7002,307.69678 172.66309,307.4126 172.60449,307.12939 C 172.54492,307.4126 172.50977,307.69678 172.44531,307.979 C 171.5127,304.7124 170.96973,301.45166 170.80469,298.00146 C 170.60645,276.3501 171.17383,254.51221 170.97949,232.66846 C 159.37305,245.60107 155.00195,263.76416 156.19727,280.82373 C 156.12305,289.64014 158.54004,298.0874 159.42676,306.71533 C 147.75977,282.09326 151.28906,250.12744 169.09082,229.20166 C 172.18555,225.59033 170.89063,220.40381 171.11816,216.19287 C 157.07031,223.54736 146.22461,237.05811 142.83105,252.9292 C 137.90723,269.17139 141.97852,285.87646 144.71484,302.18701 C 135.10059,283.13623 135.11133,259.56885 143.70313,240.29053 C 149.1748,228.07568 159.41211,218.58252 170.77051,211.97412 C 170.62109,206.80029 170.66602,201.81982 170.51563,196.64307 C 148.38867,208.146 131.91602,229.84326 127.68066,254.5249 C 126.2334,267.15674 127.08203,280.00244 128.8916,292.66357 C 120.06934,270.93604 123.35352,245.48486 135.20508,225.84912 C 143.94824,211.93994 156.49707,200.74268 170.55078,192.62061 C 170.58496,188.78857 170.61523,184.9585 170.45605,181.12549 C 143.90234,194.69482 121.8584,218.45654 114.52246,247.70752 C 112.92773,254.97607 112.48438,262.25049 111.0791,269.51904 C 108.37695,249.18896 116.97461,229.14404 127.84863,212.56689 C 138.89941,197.3335 154.32324,185.96729 170.87598,177.29736 C 170.7207,173.61865 170.3916,169.77197 170.05859,166.07861 C 125.35254,181.64502 94.945313,229.19287 96.655273,275.9126 C 97.368164,282.23779 102.50098,286.50049 107.45508,289.79736 C 110.50977,291.35791 110.66406,295.19092 112.18066,298.07764 C 117.42773,311.53467 134.03418,318.57275 147.48145,314.47314 C 154.41797,320.59814 162.94531,326.54639 172.60449,326.24561 C 182.2627,326.54639 190.79199,320.59814 197.72559,314.47314 C 211.17285,318.57275 227.78125,311.53467 233.03125,298.07764 C 234.54102,295.19092 234.7002,291.35791 237.75195,289.79736 C 242.70605,286.50049 247.8418,282.23779 248.55469,275.9126 C 250.2627,229.19287 219.85547,181.64502 175.15234,166.07861 z"/>
+      </g>
+    </symbol>
+
+    <symbol id="umebachi-symbol" viewBox="0 0 688 688">
+      <path style="fill:currentColor" d="M 226.13364,612.57579 C 207.8052,610.64503 189.07085,603.27797 174.07991,592.10629 C 168.2372,587.75214 158.29322,577.8608 153.78698,571.9208 C 132.5626,543.94339 126.61588,507.85248 137.79008,474.83496 C 141.25861,464.58614 146.78359,453.9662 152.97675,445.64361 C 157.16039,440.02149 167.66572,429.43802 173.42393,425.04434 C 201.20575,403.84602 237.50693,397.85655 270.50977,409.02578 C 286.664,414.49289 299.71221,422.76016 311.9042,435.25303 C 323.67395,447.31324 331.05394,459.27791 336.31895,474.83496 C 346.30781,504.35006 342.79857,535.57031 326.40165,563.06499 C 318.72451,575.93817 304.73233,589.92909 291.82929,597.63424 C 271.43302,609.81403 248.79421,614.96291 226.13364,612.57579 z M 439.98488,612.57579 C 421.65644,610.64503 402.9221,603.27797 387.93116,592.10629 C 382.08845,587.75214 372.14446,577.8608 367.63822,571.9208 C 346.41385,543.94339 340.46712,507.85248 351.64132,474.83496 C 355.10985,464.58614 360.63483,453.9662 366.828,445.64361 C 371.01163,440.02149 381.51696,429.43802 387.27517,425.04434 C 415.05699,403.84602 451.35818,397.85655 484.36101,409.02578 C 500.51524,414.49289 513.56346,422.76016 525.75544,435.25303 C 537.52519,447.31324 544.90518,459.27791 550.17019,474.83496 C 560.15906,504.35006 556.64982,535.57031 540.25289,563.06499 C 532.57575,575.93817 518.58357,589.92909 505.68054,597.63424 C 485.28426,609.81403 462.64546,614.96291 439.98488,612.57579 z M 159.87911,409.8763 C 141.55067,407.94553 122.81632,400.57848 107.82539,389.4068 C 101.98268,385.05265 92.038692,375.16131 87.532453,369.22131 C 66.308078,341.2439 60.361354,305.15299 71.535554,272.13546 C 75.004083,261.88664 80.529061,251.26671 86.722226,242.94411 C 90.905865,237.322 101.4112,226.73853 107.1694,222.34485 C 127.75958,206.63396 154.14627,198.87562 179.1638,201.17674 C 189.54676,202.13177 195.42739,203.33865 204.25524,206.32629 C 220.40947,211.7934 233.45769,220.06067 245.64967,232.55353 C 257.41942,244.61375 264.79941,256.57842 270.06442,272.13546 C 280.05329,301.65056 276.54405,332.87082 260.14712,360.3655 C 252.46998,373.23868 238.4778,387.2296 225.57477,394.93475 C 205.17849,407.11454 182.53968,412.26341 159.87911,409.8763 z M 506.23941,409.8763 C 487.91097,407.94553 469.17662,400.57848 454.18568,389.4068 C 448.34297,385.05265 438.39899,375.16131 433.89275,369.22131 C 412.66837,341.2439 406.72165,305.15299 417.89585,272.13546 C 421.36438,261.88664 426.88936,251.26671 433.08252,242.94411 C 437.26616,237.322 447.77149,226.73853 453.5297,222.34485 C 474.11988,206.63396 500.50657,198.87562 525.5241,201.17674 C 535.90705,202.13177 541.78769,203.33865 550.61554,206.32629 C 566.76977,211.7934 579.81798,220.06067 592.00997,232.55353 C 603.77972,244.61375 611.15971,256.57842 616.42472,272.13546 C 626.4136,301.65056 622.90434,332.87082 606.50742,360.3655 C 598.83028,373.23868 584.8381,387.2296 571.93506,394.93475 C 551.53879,407.11454 528.89998,412.26341 506.23941,409.8763 z M 333.05926,283.9271 C 314.73082,281.99634 295.99647,274.62928 281.00554,263.4576 C 275.16282,259.10345 265.21884,249.21211 260.7126,243.27211 C 239.48823,215.2947 233.5415,179.20379 244.7157,146.18627 C 248.18423,135.93744 253.70921,125.31751 259.90237,116.99491 C 264.08601,111.3728 274.59134,100.78933 280.34955,96.395647 C 308.13137,75.197328 344.43255,69.207858 377.43539,80.377088 C 393.58962,85.844198 406.63783,94.111468 418.82982,106.60433 C 430.59957,118.66455 437.97956,130.62922 443.24457,146.18627 C 453.23344,175.70137 449.7242,206.92162 433.32727,234.4163 C 425.65013,247.28948 411.65795,261.2804 398.75492,268.98555 C 378.35864,281.16534 355.71983,286.31422 333.05926,283.9271 z"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div>
+    <div class="hero-eyebrow">Hakuro Library &nbsp;·&nbsp; 白鷺文庫</div>
+    <h1>The <span class="accent-char">白</span><br>White-Heron<br>Reading&nbsp;Room.</h1>
+    <p class="hero-lede">
+      Hakuro Library and Archives is the principal repository of Rikuō University,
+      housing 184,000 volumes across general circulation, rare books, and the
+      university's growing collection of Edo-period maps, almanacs, and
+      printed ephemera.
+    </p>
+    <div class="hero-meta">FOUNDED 1902 &nbsp;/&nbsp; YANAKA, BUNKYŌ-ADJACENT &nbsp;/&nbsp; OPEN TUE–SAT</div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-figure-caption">
+      <span class="label">A note on the building</span>
+      The reading room occupies the second storey of a 1902 reinforced-concrete
+      adaptation of a kura storehouse — one of the earliest such conversions
+      in Tokyo. The shōji-screened mezzanine was added in 1957.
+    </div>
+  </div>
+</section>
+
+<!-- ============ DIVIDER ============ -->
+<div class="divider" aria-hidden="true">
+  <span class="label">I&nbsp;·&nbsp;Holdings</span>
+  <svg class="sayagata" viewBox="0 200 600 200" preserveAspectRatio="xMidYMid slice">
+    <g style="fill:none;stroke:#0c0c0c;stroke-width:2">
+      <polygon points="501.6,301.2 551.1,251.7 500.8,201.4 451.3,250.9 300.9,100.5 350.4,51 300.1,0.7 250.6,50.2 201.1,0.7 150.3,51.5 500.3,401.5 551.1,350.7 "/>
+      <polygon points="349.9,452.9 300.4,502.4 250.1,452.1 299.6,402.6 149.2,252.2 99.7,301.7 49.4,251.4 98.9,201.9 49.4,152.4 100.2,101.6 450.2,451.6 399.4,502.4 "/>
+      <polygon points="-0.9,302.6 48.4,351.9 -1.2,401.5 49.3,452.1 99,402.5 149.6,351.9 199.2,302.2 148.7,251.7 99,301.3 49.7,252 "/>
+    </g>
+  </svg>
+  <div class="line"></div>
+</div>
+
+<!-- ============ HOLDINGS ============ -->
+<section class="holdings">
+  <div class="section-head">
+    <div class="num">§ 01 &nbsp;/&nbsp; HOLDINGS</div>
+    <h2>Three pillars of the collection.</h2>
+    <p>
+      Beyond general circulation, three named gifts and one continuous
+      acquisition define the character of the library. Each has its own
+      catalog volume, available in printed form at the reference desk.
+    </p>
+  </div>
+
+  <div class="card-grid">
+
+    <article class="card">
+      <svg class="umebachi" viewBox="0 0 688 688" aria-hidden="true"><use href="#umebachi-symbol"/></svg>
+      <span class="figure">184,000</span>
+      <h3>General Holdings</h3>
+      <div class="meta">CIRC. &nbsp;·&nbsp; OPEN STACKS</div>
+      <p>
+        Across literature, history, philosophy, and the applied crafts —
+        weighted toward Japanese-language scholarship of the long nineteenth
+        century. Open stacks on floors one and two; closed stacks below grade.
+      </p>
+    </article>
+
+    <article class="card">
+      <svg class="umebachi" viewBox="0 0 688 688" aria-hidden="true"><use href="#umebachi-symbol"/></svg>
+      <span class="figure">312</span>
+      <h3>Bunka–Bunsei Almanacs</h3>
+      <div class="meta">WOODBLOCK &nbsp;·&nbsp; 1804–1830</div>
+      <p>
+        A complete sequence of woodblock-printed daijō-goyomi covering the
+        Bunka and Bunsei eras, including civic and farmers' calendars from
+        Edo, Kyoto, and Osaka publishers. Cataloged 2011–2014.
+      </p>
+    </article>
+
+    <article class="card tall">
+      <svg class="umebachi" viewBox="0 0 688 688" aria-hidden="true"><use href="#umebachi-symbol"/></svg>
+      <div>
+        <span class="figure">山村</span>
+        <h3>The Yamamura Collection</h3>
+        <div class="meta">DONATED 1958 &nbsp;·&nbsp; 1,470 SHEETS</div>
+      </div>
+      <p>
+        Donated in the spring of 1958 by the family of the cartographer
+        Yamamura Sōkichi (1881–1956), the collection comprises 1,470 sheet
+        maps, fold-out plates, and ward-level ezu of Edo and the surrounding
+        provinces, dating from the late seventeenth century to the eve of the
+        Meiji Restoration. Highlights include three intact copies of the
+        <em>Bushū-toshima-gun-ezu</em> (1745) and a hand-coloured presentation
+        scroll of the Shitamachi waterways prepared for Tokugawa Ieyoshi.
+        A bilingual finding aid is available; viewing is by appointment only.
+      </p>
+    </article>
+
+    <article class="card">
+      <svg class="umebachi" viewBox="0 0 688 688" aria-hidden="true"><use href="#umebachi-symbol"/></svg>
+      <span class="figure">江戸名所図会</span>
+      <h3>Edo meisho zue</h3>
+      <div class="meta">COMPLETE RUN &nbsp;·&nbsp; ORIGINAL PRINTING</div>
+      <p>
+        All seven books and twenty fascicles of Saitō Gesshin's
+        topographical compendium of 1834–1836, in original printing with
+        the Hasegawa Settan illustrations intact. Acquired piecemeal
+        between 1923 and 1971.
+      </p>
+    </article>
+
+    <article class="card">
+      <svg class="umebachi" viewBox="0 0 688 688" aria-hidden="true"><use href="#umebachi-symbol"/></svg>
+      <span class="figure">04</span>
+      <h3>Periodicals &amp; Continuations</h3>
+      <div class="meta">MEIJI &nbsp;·&nbsp; TAISHŌ &nbsp;·&nbsp; SHŌWA</div>
+      <p>
+        Continuous runs of <em>Taiyō</em> (1895–1928), <em>Bungakukai</em>
+        (1893–1898), and the <em>Tōkyō nichi-nichi shimbun</em> on microfilm
+        and bound volume, supporting research in late-Edo and early-modern
+        print culture.
+      </p>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============ INFO STRIP ============ -->
+<section class="info-strip" aria-label="Hours and visiting">
+  <div>
+    <h2><span class="vrule"></span>Reading-room hours<br>and access.</h2>
+    <p>
+      The principal reading room is open to currently registered students,
+      faculty, alumni in good standing, and visiting scholars holding a
+      letter of introduction from a recognised institution. Same-day
+      day-passes are issued at the porter's lodge.
+    </p>
+  </div>
+
+  <div class="info-block">
+    <h3>Opening hours</h3>
+    <dl>
+      <dt>Term &amp; vacation</dt>
+      <dd>Tuesday – Saturday<br>09:30 — 17:30</dd>
+      <dt>Closed</dt>
+      <dd>Sunday, Monday<br>National holidays<br>28 Dec – 4 Jan</dd>
+    </dl>
+  </div>
+
+  <div class="info-block">
+    <h3>Access &amp; fees</h3>
+    <dl>
+      <dt>Day pass (visitors)</dt>
+      <dd>¥600</dd>
+      <dt>Reproduction (per page)</dt>
+      <dd>¥40 monochrome<br>¥120 colour</dd>
+      <dt>Reference enquiries</dt>
+      <dd>library@rikuo.ac.jp<br>+81 (0)3 3823 0000</dd>
+    </dl>
+  </div>
+</section>
+
+<!-- ============ BUILDING NOTE ============ -->
+<section class="building">
+  <div>
+    <svg class="building-seal" viewBox="0 0 345.20605 326.25635" aria-hidden="true">
+      <use href="#kiri-paulownia-symbol"/>
+    </svg>
+    <div class="building-eyebrow">§ 02 &nbsp;/&nbsp; THE BUILDING</div>
+    <h2>A kura, recast<br>in concrete.</h2>
+  </div>
+  <div class="building-body">
+    <p>
+      The library occupies a free-standing block on the eastern edge of the
+      Yanaka campus, completed in 1902 to plans by the Hokkaidō-trained
+      engineer Yanagisawa Kichizō. The structure was conceived as a
+      reinforced-concrete adaptation of a traditional kura storehouse —
+      thick-walled, narrow-windowed, raised half a storey above grade for
+      flood protection — and is among the earliest surviving examples of
+      that hybrid in Tokyo.
+    </p>
+    <p>
+      The exterior plaster, refreshed in 1968 and again in 2004, retains the
+      original namako-kabe lattice on the north and east elevations. Inside,
+      the principal reading room runs the full length of the building's
+      upper floor: forty paces north to south, with clerestory windows
+      glazed in pale rolled glass and a pair of original lanterns, electrified
+      in 1924, suspended from the central beam.
+    </p>
+    <p>
+      Below grade, three vault rooms hold the closed stacks at a controlled
+      18 °C and 52% relative humidity. The Yamamura maps are kept here in
+      shallow cedar drawers commissioned from the Suzuki workshop of Asakusa
+      in 1959, and rotated annually for inspection.
+    </p>
+    <p>
+      Visitors enter from the courtyard side, passing beneath a small
+      paulownia carving by the sculptor Hirano Tarō — a gift from the
+      class of 1934, and the only piece of figurative ornament permitted
+      on the building.
+    </p>
+  </div>
+</section>
+
+<!-- ============ SPECIAL COLLECTIONS ============ -->
+<section class="speccol">
+  <h2>Special-collections viewing — by written application.</h2>
+  <p style="max-width:46rem;color:var(--text-emphasis);line-height:1.85;margin-bottom:3rem;">
+    Items in the categories below may be consulted in the dedicated
+    reading alcove, by appointment. Requests should be addressed in
+    writing to <strong style="color:var(--primary);font-weight:500;">Head Librarian Mori Akiko</strong>,
+    enclosing a brief statement of research and an institutional reference.
+    Replies are issued within ten working days.
+  </p>
+
+  <table class="speccol-table">
+    <thead>
+      <tr>
+        <th style="width:32%;">Material</th>
+        <th style="width:18%;">Period</th>
+        <th style="width:14%;">Accession</th>
+        <th>Notice required</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="title-cell">Yamamura Collection — sheet maps</td>
+        <td>1684 – 1867</td>
+        <td class="acc">YM 0001 – 1470</td>
+        <td>10 working days</td>
+      </tr>
+      <tr>
+        <td class="title-cell">Bunka–Bunsei almanacs</td>
+        <td>1804 – 1830</td>
+        <td class="acc">ALM 001 – 312</td>
+        <td>5 working days</td>
+      </tr>
+      <tr>
+        <td class="title-cell"><em>Edo meisho zue</em>, original printing</td>
+        <td>1834 – 1836</td>
+        <td class="acc">EMZ I – VII</td>
+        <td>10 working days</td>
+      </tr>
+      <tr>
+        <td class="title-cell">Saitō family correspondence</td>
+        <td>1841 – 1878</td>
+        <td class="acc">SAI 1 – 88</td>
+        <td>15 working days</td>
+      </tr>
+      <tr>
+        <td class="title-cell">Hokusai-school sketchbook fragments</td>
+        <td>c. 1820 – 1849</td>
+        <td class="acc">HKS 01 – 14</td>
+        <td>15 working days</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="seigaiha-band" aria-hidden="true"></div>
+  <div class="inner">
+    <div class="foot-brand">
+      <svg class="kiri" viewBox="0 0 345.20605 326.25635" aria-hidden="true">
+        <use href="#kiri-paulownia-symbol"/>
+      </svg>
+      <h3>Rikuō University<br>of the Eastern Capital</h3>
+      <div class="founded">Founded 千八百九十一年 &nbsp;·&nbsp; 1891</div>
+    </div>
+
+    <div class="foot-address">
+      <h4>Hakuro Library</h4>
+      3-14-2 Yanaka, Taitō-ku<br>
+      Tokyo 110-0001, Japan<br><br>
+      Tue – Sat &nbsp; 09:30 – 17:30<br>
+      +81 (0)3 3823 0000<br>
+      library@rikuo.ac.jp
+    </div>
+
+    <div class="foot-attrib">
+      <h4 style="font-family:var(--font-display);font-weight:400;font-size:0.875rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-emphasis);margin:0 0 1rem;">Credits</h4>
+      Kamon line drawings (kiri-paulownia, umebachi-plum) and the
+      seigaiha wave pattern are adapted from public-domain heraldic
+      sources via Wikimedia Commons. Original contributors retain
+      attribution under <a href="#">CC-BY-SA 4.0</a>.<br><br>
+      Photography of the 1902 building is by the University Archive.
+      © Rikuō University, 1891–2025.
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

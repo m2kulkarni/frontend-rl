@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>The Workshop — Atelier Naqsh-e Jahan</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    margin: 0;
+    line-height: 1.55;
+  }
+  /* ============ TOP RULE & NAV ============ */
+  .top-rule {
+    height: 4px;
+    background: var(--primary);
+    border-bottom: 1px solid var(--accent);
+    border-top: 1px solid var(--accent);
+  }
+  .masthead {
+    text-align: center;
+    padding: 28px 40px 8px;
+    background: var(--bg);
+  }
+  .masthead .kunya {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.42em;
+    color: var(--text-emphasis);
+    text-transform: uppercase;
+  }
+  .masthead h1.studio {
+    font-family: var(--font-display), serif;
+    font-size: 30px;
+    letter-spacing: 0.18em;
+    color: var(--primary);
+    margin: 6px 0 4px;
+    text-transform: uppercase;
+  }
+  .masthead .tagline {
+    font-style: italic;
+    font-size: 16px;
+    color: var(--text);
+    margin: 0;
+  }
+  nav.primary {
+    border-top: 1px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
+    margin: 18px 0 0;
+    padding: 14px 0;
+    background: var(--bg);
+    text-align: center;
+    position: relative;
+  }
+  nav.primary::before, nav.primary::after {
+    content: "";
+    display: block;
+    height: 1px;
+    background: var(--accent);
+    position: absolute;
+    left: 6%;
+    right: 6%;
+  }
+  nav.primary::before { top: 4px; }
+  nav.primary::after  { bottom: 4px; }
+  nav.primary ul {
+    display: inline-flex;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 0;
+  }
+  nav.primary li {
+    display: inline-flex;
+    align-items: center;
+  }
+  nav.primary a {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    color: var(--primary);
+    text-decoration: none;
+    padding: 6px 18px;
+    position: relative;
+  }
+  nav.primary a[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    left: 18px; right: 18px;
+    bottom: -2px;
+    height: 2px;
+    background: var(--accent);
+    box-shadow: 0 2px 0 var(--accent);
+  }
+  nav.primary .palmette {
+    color: var(--accent);
+    font-size: 14px;
+    line-height: 1;
+    transform: translateY(-1px);
+  }
+
+  /* ============ HERO / ARCH SECTION ============ */
+  .hero {
+    position: relative;
+    padding: 60px 80px 40px;
+    text-align: center;
+    background:
+      radial-gradient(ellipse at top, rgba(42,138,138,0.05), transparent 60%),
+      var(--bg);
+    overflow: hidden;
+  }
+  .hero::before, .hero::after {
+    content: "";
+    position: absolute;
+    top: 80px; bottom: 60px;
+    width: 14px;
+    background:
+      repeating-linear-gradient(0deg,
+        var(--primary) 0 14px,
+        var(--accent) 14px 18px,
+        var(--secondary) 18px 32px,
+        var(--accent) 32px 36px);
+  }
+  .hero::before { left: 30px; }
+  .hero::after  { right: 30px; }
+
+  .arch-wrap {
+    position: relative;
+    width: 880px;
+    margin: 0 auto;
+    padding: 50px 70px 40px;
+  }
+  .arch-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  .arch-svg .ogee-outer { stroke: var(--primary); stroke-width: 4; fill: none; }
+  .arch-svg .ogee-inner { stroke: var(--accent); stroke-width: 1.4; fill: none; }
+  .arch-svg .ogee-fill  { fill: #fbf3df; }
+  .arch-svg .spandrel-fill { fill: var(--primary); }
+  .arch-svg .spandrel-orn  { fill: var(--accent); opacity: 0.85; }
+  .arch-svg .keystone { fill: var(--secondary); stroke: var(--accent); stroke-width: 1.5; }
+  .arch-svg .keystar  { fill: var(--accent); }
+
+  .arch-content {
+    position: relative;
+    padding: 30px 40px 10px;
+    text-align: center;
+  }
+  .arch-content .eyebrow {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.36em;
+    font-size: 11px;
+    color: var(--text-emphasis);
+  }
+  .arch-content h2 {
+    font-family: var(--font-display), serif;
+    font-size: 44px;
+    color: var(--primary);
+    margin: 14px 0 6px;
+    letter-spacing: 0.06em;
+  }
+  .arch-content .arabic {
+    font-style: italic;
+    color: var(--text-emphasis);
+    font-size: 18px;
+    margin: 0 0 22px;
+  }
+  .arch-content .lede {
+    font-size: 19px;
+    max-width: 580px;
+    margin: 0 auto;
+    color: var(--text);
+  }
+
+  /* ============ FILET DIVIDER ============ */
+  .filet {
+    margin: 36px auto;
+    width: 720px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    color: var(--accent);
+  }
+  .filet .line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent) 15%, var(--accent) 85%, transparent);
+  }
+  .filet .knot {
+    width: 28px; height: 28px;
+    color: var(--accent);
+  }
+
+  /* ============ STANZAS / HISTORY ============ */
+  .history {
+    padding: 10px 120px 30px;
+  }
+  .history h3 {
+    font-family: var(--font-display), serif;
+    text-align: center;
+    font-size: 22px;
+    letter-spacing: 0.22em;
+    color: var(--primary);
+    text-transform: uppercase;
+    margin: 0 0 8px;
+  }
+  .history .sub {
+    text-align: center;
+    color: var(--text-emphasis);
+    font-style: italic;
+    font-size: 16px;
+    margin: 0 0 36px;
+  }
+  .stanzas {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 36px;
+  }
+  .stanza {
+    background: #fbf3df;
+    position: relative;
+    padding: 56px 28px 32px;
+    border: 1px solid var(--primary);
+    box-shadow: inset 0 0 0 4px var(--bg), inset 0 0 0 5px var(--accent);
+  }
+  .stanza .medallion {
+    position: absolute;
+    top: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 44px; height: 44px;
+    background: var(--secondary);
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--bg);
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.05em;
+  }
+  .stanza .year {
+    font-family: var(--font-display), serif;
+    text-align: center;
+    color: var(--text-emphasis);
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .stanza h4 {
+    font-family: var(--font-display), serif;
+    text-align: center;
+    color: var(--primary);
+    font-size: 20px;
+    margin: 0 0 16px;
+    letter-spacing: 0.06em;
+  }
+  .stanza p {
+    text-align: justify;
+    font-size: 15.5px;
+    margin: 0 0 12px;
+    hyphens: auto;
+  }
+  .stanza p:last-child { margin-bottom: 0; }
+
+  /* ============ PRINCIPLES ============ */
+  .principles {
+    margin: 60px auto 30px;
+    width: 760px;
+    text-align: center;
+    padding: 50px 60px;
+    background: #fbf3df;
+    border: 1px solid var(--primary);
+    position: relative;
+  }
+  .principles::before, .principles::after {
+    content: "";
+    position: absolute;
+    left: 18px; right: 18px;
+    height: 6px;
+    background: repeating-linear-gradient(90deg,
+      var(--primary) 0 8px,
+      var(--accent) 8px 10px,
+      var(--secondary) 10px 18px,
+      var(--accent) 18px 20px);
+  }
+  .principles::before { top: 8px; }
+  .principles::after  { bottom: 8px; }
+
+  .principles h3 {
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+    font-size: 22px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    margin: 0 0 6px;
+  }
+  .principles .sub {
+    color: var(--text-emphasis);
+    font-style: italic;
+    margin: 0 0 28px;
+  }
+  .principles ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    text-align: left;
+  }
+  .principles li {
+    padding: 12px 0;
+    font-size: 18px;
+    border-bottom: 1px dotted var(--accent);
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+  }
+  .principles li:last-child { border-bottom: none; }
+  .principles li .glyph {
+    color: var(--accent);
+    font-size: 16px;
+    flex: 0 0 auto;
+    transform: translateY(-1px);
+  }
+  .principles li .name {
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+    font-size: 14px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-right: 4px;
+  }
+  .principles li em {
+    color: var(--text-emphasis);
+  }
+
+  /* ============ ARTISANS ROSTER ============ */
+  .roster {
+    padding: 40px 100px 60px;
+  }
+  .roster h3 {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    font-size: 22px;
+    margin: 0 0 6px;
+  }
+  .roster .sub {
+    text-align: center;
+    color: var(--text-emphasis);
+    font-style: italic;
+    margin: 0 0 32px;
+  }
+  .disciplines {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .discipline {
+    text-align: center;
+    border: 1px solid var(--accent);
+    background: #fbf3df;
+    padding: 22px 18px 20px;
+    position: relative;
+  }
+  .discipline::before {
+    content: "";
+    position: absolute;
+    inset: 4px;
+    border: 1px solid var(--primary);
+    pointer-events: none;
+  }
+  .discipline h4 {
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 14px;
+    margin: 0 0 4px;
+    position: relative;
+  }
+  .discipline .count {
+    font-family: var(--font-display), serif;
+    color: var(--text-emphasis);
+    font-size: 28px;
+    margin: 4px 0 8px;
+    position: relative;
+  }
+  .discipline ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 14.5px;
+    position: relative;
+  }
+  .discipline li {
+    padding: 3px 0;
+    color: var(--text);
+  }
+
+  /* ============ FOOTER ============ */
+  footer {
+    margin-top: 40px;
+    background: var(--primary);
+    color: var(--bg);
+    text-align: center;
+    padding: 36px 0 22px;
+    border-top: 2px solid var(--secondary);
+    border-bottom: 2px solid var(--secondary);
+    position: relative;
+  }
+  footer::before, footer::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    height: 1px;
+    background: var(--secondary);
+  }
+  footer::before { top: 6px; }
+  footer::after  { bottom: 6px; }
+
+  footer .seal {
+    width: 80px; height: 80px;
+    margin: 0 auto 14px;
+    display: block;
+  }
+  footer .info {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 30px;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 60px;
+  }
+  footer .info > div {
+    font-size: 14px;
+  }
+  footer .info .label {
+    font-family: var(--font-display), serif;
+    color: var(--accent);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    display: block;
+  }
+  footer .info .left  { text-align: right; }
+  footer .info .right { text-align: left; }
+  footer .info .center {
+    border-left: 1px solid var(--secondary);
+    border-right: 1px solid var(--secondary);
+    padding: 0 28px;
+  }
+  footer .attribution {
+    font-style: italic;
+    color: var(--bg);
+    margin-top: 22px;
+    font-size: 13.5px;
+    opacity: 0.92;
+  }
+  footer .copy {
+    margin-top: 14px;
+    font-family: var(--font-display), serif;
+    color: var(--bg);
+    letter-spacing: 0.32em;
+    font-size: 10.5px;
+    text-transform: uppercase;
+    opacity: 0.85;
+  }
+</style>
+</head>
+<body>
+
+<div class="top-rule"></div>
+
+<header class="masthead">
+  <div class="kunya">بسم الله ✦ Established 1387 / 2008</div>
+  <h1 class="studio">Atelier Naqsh-e Jahan</h1>
+  <p class="tagline">A working courtyard of tile-cutters, calligraphers, and draughtsmen — Isfahan</p>
+</header>
+
+<nav class="primary" aria-label="Primary">
+  <ul>
+    <li><a href="page-1.html">Threshold</a></li>
+    <li aria-hidden="true" class="palmette">❖</li>
+    <li><a href="page-2.html" aria-current="page">The Workshop</a></li>
+    <li aria-hidden="true" class="palmette">❖</li>
+    <li><a href="page-3.html">Commissions</a></li>
+    <li aria-hidden="true" class="palmette">❖</li>
+    <li><a href="page-4.html">Crafts &amp; Methods</a></li>
+    <li aria-hidden="true" class="palmette">❖</li>
+    <li><a href="page-5.html">Apprenticeship</a></li>
+    <li aria-hidden="true" class="palmette">❖</li>
+    <li><a href="page-6.html">Visit</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="arch-wrap">
+    <svg class="arch-svg" viewBox="0 0 880 360" preserveAspectRatio="none" aria-hidden="true">
+      <!-- spandrel field -->
+      <path class="spandrel-fill" d="M0,0 H880 V360 H0 Z
+        M40,40 L40,360 L840,360 L840,40
+        C 840,40 720,40 560,40
+        C 520,40 500,80 440,80
+        C 380,80 360,40 320,40
+        C 160,40 40,40 40,40 Z" fill-rule="evenodd"/>
+      <!-- spandrel ornament dots -->
+      <g class="spandrel-orn">
+        <circle cx="120" cy="60" r="3"/>
+        <circle cx="160" cy="48" r="2"/>
+        <circle cx="200" cy="58" r="3"/>
+        <circle cx="240" cy="50" r="2"/>
+        <circle cx="760" cy="60" r="3"/>
+        <circle cx="720" cy="48" r="2"/>
+        <circle cx="680" cy="58" r="3"/>
+        <circle cx="640" cy="50" r="2"/>
+        <path d="M100,90 Q140,70 180,90 T260,90" stroke="#c9a23a" stroke-width="1.2" fill="none"/>
+        <path d="M620,90 Q660,70 700,90 T780,90" stroke="#c9a23a" stroke-width="1.2" fill="none"/>
+      </g>
+      <!-- ogee arch ivory fill -->
+      <path class="ogee-fill" d="M40,360 L40,80
+        C 40,80 160,80 280,80
+        C 340,80 360,120 410,120
+        C 430,120 435,110 440,100
+        C 445,110 450,120 470,120
+        C 520,120 540,80 600,80
+        C 720,80 840,80 840,80
+        L 840,360 Z"/>
+      <!-- ogee arch outer cobalt -->
+      <path class="ogee-outer" d="M40,360 L40,80
+        C 40,80 160,80 280,80
+        C 340,80 360,120 410,120
+        C 430,120 435,110 440,100
+        C 445,110 450,120 470,120
+        C 520,120 540,80 600,80
+        C 720,80 840,80 840,80
+        L 840,360"/>
+      <!-- ogee arch inner gold filet -->
+      <path class="ogee-inner" d="M52,360 L52,92
+        C 52,92 168,92 286,92
+        C 344,92 366,130 414,130
+        C 432,130 437,120 440,112
+        C 443,120 448,130 466,130
+        C 514,130 536,92 594,92
+        C 712,92 828,92 828,92
+        L 828,360"/>
+      <!-- keystone medallion at apex -->
+      <circle class="keystone" cx="440" cy="92" r="14"/>
+      <path class="keystar" d="M440,82 L443,89 L450,90 L445,95 L446,102 L440,99 L434,102 L435,95 L430,90 L437,89 Z"/>
+    </svg>
+    <div class="arch-content">
+      <div class="eyebrow">Page Two ✦ The Workshop</div>
+      <h2>Of Hand &amp; House</h2>
+      <p class="arabic">کارگاه ما — a courtyard, a kiln, an unhurried hand</p>
+      <p class="lede">Behind a timber-columned façade off Chahar Bagh Avenue, eleven artisans practise the four ornamental disciplines of the Safavid masters: cut-tile mosaic, naskh and thuluth calligraphy, geometric draughtsmanship, and the patient gilding of borders.</p>
+    </div>
+  </div>
+</section>
+
+<div class="filet" aria-hidden="true">
+  <span class="line"></span>
+  <svg class="knot" viewBox="0 0 24 24"><path d="M12 2 L14 8 L20 9 L15 13 L17 20 L12 16 L7 20 L9 13 L4 9 L10 8 Z" fill="currentColor"/></svg>
+  <span class="line"></span>
+</div>
+
+<section class="history">
+  <h3>A History in Three Stanzas</h3>
+  <p class="sub">from a borrowed kiln in 2008 to a courtyard of eleven hands</p>
+
+  <div class="stanzas">
+    <article class="stanza">
+      <div class="medallion">I</div>
+      <div class="year">MMVIII ✦ The Founding</div>
+      <h4>A Borrowed Kiln</h4>
+      <p>The atelier was founded in the spring of 2008 by master tile-cutter Mehrdad Saffar and the calligrapher Roya Tabatabai, who together leased a half-derelict timber-columned house in the lanes off Chahar Bagh Avenue and persuaded its octogenarian owner to let them clear the rear courtyard for a kiln.</p>
+      <p>For the first eighteen months they worked at two benches and shared a single firing chamber with a neighbouring potter. The earliest commission — a four-metre <em>mihrab</em> spandrel for a private oratory in Najafabad — was cut, glazed, and assembled almost entirely on the brick floor of that courtyard.</p>
+    </article>
+
+    <article class="stanza">
+      <div class="medallion">II</div>
+      <div class="year">MMXV ✦ The Drawing Room</div>
+      <h4>Measure &amp; Compass</h4>
+      <p>By 2015 the workshop's commissions had begun to require survey work and full-scale cartoons — particularly after the conservation of a Qajar bath-house in Kashan — and a measured-drawing room was added in the upper storey, fitted with eight inclined boards and a long zinc-topped table for unrolling tracings.</p>
+      <p>The draughtsman Bijan Esfandiari joined that autumn from the Faculty of Fine Arts at Tehran University, and the studio's discipline of <em>tarrahi</em> — the geometric setting-out that precedes any cut tile — was formally established as the third leg of the practice, beside cutting and writing.</p>
+    </article>
+
+    <article class="stanza">
+      <div class="medallion">III</div>
+      <div class="year">Today ✦ Eleven Hands</div>
+      <h4>The Present Courtyard</h4>
+      <p>The atelier today numbers eleven artisans across four disciplines — five tile-cutters and glaziers, two calligraphers, two draughtsmen, and two gilders — supported by an apprentice intake of three each Mehr (October). Saffar and Tabatabai remain the principals; daily oversight of the kiln rests with master Hossein Mokhtari.</p>
+      <p>We accept between fourteen and eighteen commissions a year, ranging from a single carved cartouche to the full ornamental envelope of a small shrine. The original courtyard, the kiln, and the timber columns are unchanged; only the hands at the benches have grown more numerous.</p>
+    </article>
+  </div>
+</section>
+
+<section class="principles">
+  <h3>Four Principles of the House</h3>
+  <p class="sub">recited by every apprentice on the first morning</p>
+  <ul>
+    <li>
+      <span class="glyph">❖</span>
+      <span><span class="name">Axial Composition</span> — every surface must declare a centre, and every ornament must answer to it. <em>No motif is permitted to drift.</em></span>
+    </li>
+    <li>
+      <span class="glyph">❖</span>
+      <span><span class="name">Mosaic Logic</span> — colour is set by the cut of the tile, never by the brush. A line begun in cobalt ends in cobalt, or it ends.</span>
+    </li>
+    <li>
+      <span class="glyph">❖</span>
+      <span><span class="name">Restrained Palette</span> — cobalt, turquoise, gold, oxblood, ivory. <em>Five voices, no chorus.</em> Other pigments are kept in the cabinet for restoration only.</span>
+    </li>
+    <li>
+      <span class="glyph">❖</span>
+      <span><span class="name">No Figurative Imagery in Religious Commissions</span> — the geometry and the word suffice. Animal and human forms are reserved for secular, domestic, and garden work.</span>
+    </li>
+  </ul>
+</section>
+
+<section class="roster">
+  <h3>Eleven Artisans, Four Disciplines</h3>
+  <p class="sub">the present roster of the atelier — Esfand 1402 / March 2024</p>
+
+  <div class="disciplines">
+    <article class="discipline">
+      <h4>Tile &amp; Mosaic</h4>
+      <div class="count">V</div>
+      <ul>
+        <li>Mehrdad Saffar — Master</li>
+        <li>Hossein Mokhtari — Kiln</li>
+        <li>Parisa Yazdani</li>
+        <li>Reza Daneshvar</li>
+        <li>Sina Khorrami</li>
+      </ul>
+    </article>
+    <article class="discipline">
+      <h4>Calligraphy</h4>
+      <div class="count">II</div>
+      <ul>
+        <li>Roya Tabatabai — Master</li>
+        <li>Yusef Karimpour</li>
+      </ul>
+    </article>
+    <article class="discipline">
+      <h4>Draughtsmanship</h4>
+      <div class="count">II</div>
+      <ul>
+        <li>Bijan Esfandiari</li>
+        <li>Mahsa Pourjavadi</li>
+      </ul>
+    </article>
+    <article class="discipline">
+      <h4>Gilding &amp; Border</h4>
+      <div class="count">II</div>
+      <ul>
+        <li>Naser Shahidi</li>
+        <li>Leila Mahmoudi</li>
+      </ul>
+    </article>
+  </div>
+</section>
+
+<footer>
+  <svg class="seal" viewBox="0 0 100 100" aria-hidden="true">
+    <circle cx="50" cy="50" r="46" fill="none" stroke="#c9a23a" stroke-width="1"/>
+    <circle cx="50" cy="50" r="40" fill="none" stroke="#2a8a8a" stroke-width="0.8"/>
+    <g fill="#c9a23a">
+      <polygon points="50,16 56,38 78,38 60,52 67,74 50,60 33,74 40,52 22,38 44,38"/>
+    </g>
+    <circle cx="50" cy="50" r="6" fill="#2a8a8a" stroke="#c9a23a" stroke-width="0.8"/>
+  </svg>
+
+  <div class="info">
+    <div class="left">
+      <span class="label">Address</span>
+      No. 14, Kucheh-ye Golha<br>
+      off Chahar Bagh Avenue<br>
+      Isfahan 8175693114, Iran
+    </div>
+    <div class="center">
+      <span class="label">Hours</span>
+      Saturday — Wednesday<br>
+      9.00 — 17.30<br>
+      Thursday by appointment
+    </div>
+    <div class="right">
+      <span class="label">Correspondence</span>
+      atelier@naqsh-e-jahan.ir<br>
+      +98 (31) 3622 1408<br>
+      Telegram: @naqshejahan
+    </div>
+  </div>
+
+  <p class="attribution">All ornament drawn, cut, fired, and set by hand within these walls — no template is ever twice the same.</p>
+  <p class="copy">© 1387–1402 ✦ Atelier Naqsh-e Jahan ✦ Isfahan</p>
+</footer>
+
+</body>
+</html>

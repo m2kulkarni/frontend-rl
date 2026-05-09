@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="ja-en">
+<head>
+<meta charset="UTF-8">
+<title>Fire-Watch Towers & Hikeshi Stations — Edo Bureau of Wards & Watercourses</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    margin: 0;
+    line-height: 1.8;
+    overflow-x: hidden;
+  }
+
+  /* ------- Navigation ------- */
+  .topnav {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    padding: 28px 64px 22px 64px;
+    border-bottom: 1px solid var(--ornament);
+    background: var(--bg);
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .brand-mark {
+    width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
+  }
+  .brand-name {
+    font-family: var(--font-body);
+    font-size: 13px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .brand-name small {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: #4a4a4a;
+    margin-top: 2px;
+    text-transform: none;
+  }
+  .navlinks {
+    grid-column: 3;
+    display: flex;
+    gap: 0;
+    align-items: center;
+    justify-self: end;
+  }
+  .navlinks a {
+    color: var(--text);
+    text-decoration: none;
+    font-family: var(--font-body);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 4px 26px;
+    border-right: 1px solid var(--ornament);
+    line-height: 1.2;
+  }
+  .navlinks a:last-child { border-right: none; padding-right: 0; }
+  .navlinks a:first-child { padding-left: 0; }
+  .navlinks a[aria-current="page"] {
+    color: var(--secondary);
+    border-bottom: 1px solid var(--secondary);
+    padding-bottom: 2px;
+  }
+
+  /* ------- Hero / Off-axis title ------- */
+  .hero {
+    position: relative;
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    min-height: 520px;
+    padding: 90px 64px 70px 64px;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("svg/seigaiha-waves.svg");
+    background-size: 360px 360px;
+    background-repeat: repeat;
+    opacity: 0.13;
+    pointer-events: none;
+  }
+  .hero-title {
+    position: relative;
+    grid-column: 1;
+    align-self: end;
+    z-index: 2;
+  }
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .hero-eyebrow::before {
+    content: "";
+    width: 64px;
+    height: 1px;
+    background: var(--ornament);
+    display: inline-block;
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 92px;
+    line-height: 0.98;
+    margin: 0;
+    letter-spacing: -0.01em;
+    color: var(--primary);
+  }
+  .hero h1 .accent {
+    color: var(--secondary);
+    display: block;
+    font-size: 56px;
+    margin-top: 14px;
+    letter-spacing: 0.04em;
+  }
+  .hero-meta {
+    grid-column: 2;
+    align-self: end;
+    justify-self: end;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-align: right;
+    max-width: 280px;
+    z-index: 2;
+    position: relative;
+  }
+  .hero-meta strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 16px;
+    color: var(--secondary);
+    margin-top: 6px;
+    letter-spacing: 0.1em;
+  }
+
+  /* ------- Standing orders block ------- */
+  .standing {
+    display: grid;
+    grid-template-columns: 1fr 7fr 4fr;
+    padding: 80px 64px;
+    gap: 0;
+    border-top: 1px solid var(--ornament);
+  }
+  .standing-label {
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    align-self: start;
+    color: #555;
+  }
+  .standing-body {
+    grid-column: 2;
+    padding-right: 80px;
+  }
+  .standing-body h2 {
+    font-family: var(--font-display);
+    font-size: 38px;
+    font-weight: 700;
+    margin: 0 0 28px 0;
+    color: var(--primary);
+    line-height: 1.15;
+  }
+  .standing-body p {
+    margin: 0 0 18px 0;
+    font-size: 15px;
+    max-width: 560px;
+  }
+  .standing-aside {
+    grid-column: 3;
+    align-self: start;
+    border-top: 1px solid var(--ornament);
+    padding-top: 18px;
+    font-size: 13px;
+    color: #2a2a2a;
+  }
+  .standing-aside dt {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #666;
+    margin-top: 14px;
+  }
+  .standing-aside dd {
+    margin: 4px 0 0 0;
+    font-family: var(--font-display);
+    font-size: 16px;
+    color: var(--primary);
+  }
+
+  /* ------- Section header ornament ------- */
+  .section-head {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 32px;
+    padding: 30px 64px 0 64px;
+  }
+  .section-head .rule {
+    height: 1px;
+    background: var(--ornament);
+  }
+  .section-head h2 {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--primary);
+    margin: 0;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+  .section-head .kamon {
+    width: 36px;
+    height: 36px;
+    margin: 0 12px;
+  }
+
+  /* ------- Tower roster (cards) ------- */
+  .roster {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    padding: 50px 64px 80px 64px;
+  }
+  .tower-card {
+    background: var(--surface);
+    padding: 36px 36px 36px 64px;
+    position: relative;
+    border-top: 1px solid var(--ornament);
+    margin-right: 1px;
+    min-height: 360px;
+  }
+  .tower-card .seal {
+    position: absolute;
+    top: 22px;
+    right: 22px;
+    width: 28px;
+    height: 28px;
+    opacity: 0.85;
+  }
+  .tower-card .ordinal {
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: #777;
+    margin-bottom: 10px;
+  }
+  .tower-card h3 {
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 700;
+    margin: 0 0 6px 0;
+    color: var(--primary);
+    line-height: 1.1;
+  }
+  .tower-card .sub {
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    color: var(--secondary);
+    text-transform: uppercase;
+    margin-bottom: 22px;
+  }
+  .tower-card dl {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  .tower-card dt {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #666;
+    margin-top: 12px;
+  }
+  .tower-card dd {
+    margin: 2px 0 0 0;
+    color: var(--text);
+  }
+  .tower-card .matoi {
+    font-family: var(--font-display);
+    color: var(--primary);
+    font-size: 15px;
+  }
+
+  /* ------- Brigade captains: pull-quote / off-axis ------- */
+  .captains {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    padding: 90px 64px 100px 64px;
+    border-top: 1px solid var(--ornament);
+    position: relative;
+  }
+  .captains::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("svg/seigaiha-waves.svg");
+    background-size: 280px 280px;
+    background-repeat: repeat;
+    opacity: 0.12;
+    pointer-events: none;
+  }
+  .captains-quote {
+    position: relative;
+    z-index: 2;
+    padding-right: 60px;
+  }
+  .captains-quote .mark {
+    font-family: var(--font-display);
+    font-size: 140px;
+    color: var(--secondary);
+    line-height: 0.8;
+    margin-bottom: -10px;
+  }
+  .captains-quote blockquote {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 26px;
+    line-height: 1.45;
+    color: var(--primary);
+    font-weight: 600;
+  }
+  .captains-quote cite {
+    display: block;
+    margin-top: 28px;
+    font-style: normal;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #444;
+  }
+  .captains-list {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .captain-row {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--ornament);
+    align-items: baseline;
+    gap: 24px;
+  }
+  .captain-row:first-child { border-top: 1px solid var(--ornament); }
+  .captain-row .iroha {
+    font-family: var(--font-display);
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--secondary);
+    line-height: 1;
+  }
+  .captain-row .body strong {
+    font-family: var(--font-display);
+    font-size: 18px;
+    display: block;
+    color: var(--primary);
+  }
+  .captain-row .body span {
+    font-size: 12px;
+    color: #444;
+    letter-spacing: 0.08em;
+  }
+  .captain-row .num {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #666;
+    text-align: right;
+  }
+  .captain-row .num em {
+    font-style: normal;
+    display: block;
+    font-family: var(--font-display);
+    font-size: 16px;
+    color: var(--text);
+    margin-top: 2px;
+  }
+
+  /* ------- Karakaze orders ------- */
+  .karakaze {
+    display: grid;
+    grid-template-columns: 4fr 8fr;
+    padding: 80px 64px;
+    border-top: 1px solid var(--ornament);
+  }
+  .karakaze .left {
+    padding-right: 60px;
+  }
+  .karakaze .left h2 {
+    font-family: var(--font-display);
+    font-size: 44px;
+    line-height: 1.05;
+    color: var(--primary);
+    margin: 0 0 18px 0;
+  }
+  .karakaze .left h2 em {
+    font-style: normal;
+    color: var(--secondary);
+    display: block;
+    font-size: 22px;
+    letter-spacing: 0.1em;
+    margin-top: 10px;
+  }
+  .karakaze .left p {
+    font-size: 13px;
+    color: #333;
+    max-width: 320px;
+  }
+  .karakaze ol {
+    counter-reset: order;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+  .karakaze ol li {
+    counter-increment: order;
+    padding: 22px 28px 22px 60px;
+    position: relative;
+    border-top: 1px solid var(--ornament);
+    border-left: 1px solid var(--ornament);
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  .karakaze ol li:nth-child(odd) { border-left: none; padding-left: 50px; }
+  .karakaze ol li::before {
+    content: "第 " counter(order, decimal-leading-zero) " 條";
+    position: absolute;
+    top: 22px;
+    left: 0;
+    font-family: var(--font-display);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--secondary);
+  }
+  .karakaze ol li strong {
+    font-family: var(--font-display);
+    font-size: 16px;
+    color: var(--primary);
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  /* ------- Divider ------- */
+  .sayagata-band {
+    height: 60px;
+    background-image: url("svg/sayagata-keyfret.svg");
+    background-size: 200px 200px;
+    background-repeat: repeat-x;
+    background-position: center;
+    opacity: 0.18;
+  }
+
+  /* ------- Footer ------- */
+  footer {
+    position: relative;
+    padding: 0 0 60px 0;
+    margin-top: 30px;
+  }
+  .wave-band {
+    height: 70px;
+    background-image: url("svg/seigaiha-waves.svg");
+    background-size: 280px 280px;
+    background-repeat: repeat-x;
+    background-position: center top;
+    opacity: 0.22;
+    margin-bottom: 50px;
+  }
+  .footer-inner {
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.9;
+    color: var(--text);
+  }
+  .footer-seal {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 22px auto;
+    display: block;
+  }
+  .footer-inner .addr {
+    font-family: var(--font-display);
+    font-size: 14px;
+    color: var(--primary);
+    letter-spacing: 0.08em;
+  }
+  .footer-inner .era {
+    margin-top: 14px;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #555;
+  }
+  .footer-inner .attrib {
+    margin-top: 28px;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: #666;
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== Navigation ===== -->
+<header class="topnav">
+  <div class="brand">
+    <svg class="brand-mark" viewBox="0 0 345 326" aria-hidden="true">
+      <use href="#paulownia-mark" />
+    </svg>
+    <div class="brand-name">
+      Edo Bureau of Wards & Watercourses
+      <small>江戸町水道方役所</small>
+    </div>
+  </div>
+  <nav class="navlinks" aria-label="Primary">
+    <a href="page-1.html">Notices</a>
+    <a href="page-2.html">Wards</a>
+    <a href="page-3.html">Watercourses</a>
+    <a href="page-4.html" aria-current="page">Fire-Watch</a>
+    <a href="page-5.html">Office</a>
+    <a href="page-6.html">Origins</a>
+  </nav>
+</header>
+
+<!-- Hidden symbol library for the small paulownia kamon -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="paulownia-mark" viewBox="0 0 345.20605 326.25635">
+    <g transform="matrix(0.9861902,0,0,0.9861902,2.3836171,5.3631323)" fill="currentColor">
+      <circle cx="172.60352" cy="155.03467" r="9.9453125"/>
+      <path d="M73.011719,128.88232 C77.337891,125.58008 78.869141,125.07227 84.107422,125.20264 C86.730957,125.26807 89.115723,125.51953 89.406738,125.76123 C90.76416,126.88672 99.507812,128.34912 102.36328,127.92773 C104.5752,127.6001 107.11035,125.8208 108.41797,123.67529 C109.50928,121.88525 109.61035,118.38281 108.61865,116.65039 C107.7041,115.0498 107.72607,113.04053 108.68604,110.35938 C109.69775,107.53809 109.33057,106.09912 106.93652,103.50098 C105.51611,101.96143 104.3374,101.23486 102.21191,100.5918 C99.430176,99.749024 99.334961,99.751953 96.662109,100.75147 C93.297363,102.01074 92.507324,102.01758 90.138672,100.80957 C86.432617,98.918457 81.161621,99.989258 78.477539,103.17773 C77.022461,104.90772 76.878906,106.36523 77.679199,111.3042 C78.435547,115.96143 76.785645,119.7373 73.135742,121.70361 C 69.910156,123.43945 69.023438,121.06787 69.018555,110.70557 C69.016113,102.31885 69.451172,100.48633 72.109863,97.685547 C74.991211,94.650879 78.435547,93.452637 83.258789,93.806641 C94.922363,94.665039 96.503418,94.632325 98.749512,93.490723 C102.08887,91.79541 102.81104,90.45459 102.72266,86.1167 C102.6665,83.372559 102.88525,81.931153 103.59424,80.376953 C104.93652,77.429688 104.84033,74.112793 103.34717,71.916504 C101.94971,69.858399 98.05957,68.167481 94.721191,68.167481 C93.314453,68.167481 91.653809,67.672364 89.687012,66.666016 C87.406738,65.499024 86.345703,65.21875 84.924805,65.40918 C82.559082,65.726563 79.312012,67.790528 78.135254,69.726563 C76.782715,71.950684 75.739258,77.140137 75.725586,81.702637 C75.715332,86.222168 74.853027,88.670411 72.493164,90.886231 z M 173,160 a 6,6 0 1 1 0,-12 a 6,6 0 1 1 0,12 z"/>
+    </g>
+  </symbol>
+</svg>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-title">
+    <div class="hero-eyebrow">Service IV · 火消之部</div>
+    <h1>
+      Fire-Watch Towers
+      <span class="accent">& Hikeshi Stations.</span>
+    </h1>
+  </div>
+  <div class="hero-meta">
+    Compiled by the Bureau<br>
+    Lower City Office, Nihonbashi<br>
+    <strong>Bunsei 9 · Spring</strong>
+  </div>
+</section>
+
+<!-- ===== Standing intro ===== -->
+<section class="standing">
+  <div class="standing-label">緒言 — Preamble</div>
+  <div class="standing-body">
+    <h2>Of the yagura watchtowers and the townsmen's brigades that keep them.</h2>
+    <p>By edict of the magistrate's office, every district of the lower city maintains a timber yagura of three storeys, surmounted by a hangarane bell of brass and a wooden hyōshigi clapper. The watchman ascends at the hour of the dog and descends at the hour of the rabbit; in the dry-wind months he does not descend at all.</p>
+    <p>Forty-eight machi-bikeshi companies are registered with this Bureau, lettered after the iroha and grouped by river-quarter. Their captains, addresses, and standard motifs are published below for the benefit of householders, innkeepers, and the wardens of the seven gates.</p>
+  </div>
+  <dl class="standing-aside">
+    <dt>Companies registered</dt>
+    <dd>48 of the iroha · 16 honjo-fukagawa</dd>
+    <dt>Towers in current service</dt>
+    <dd>Twenty-three (23)</dd>
+    <dt>Bells & clappers issued</dt>
+    <dd>Bunsei 8 · winter inspection</dd>
+    <dt>Compiled under</dt>
+    <dd>Inspector Tōyama Kageyu</dd>
+  </dl>
+</section>
+
+<!-- ===== Section: Tower roster ===== -->
+<div class="section-head">
+  <div class="rule"></div>
+  <h2>Roster of Yagura — 櫓 番 附</h2>
+  <svg class="kamon" viewBox="0 0 688 688" aria-hidden="true">
+    <rect width="688" height="688" fill="var(--ornament)"/>
+    <use href="#umebachi-glyph"/>
+  </svg>
+  <div class="rule"></div>
+</div>
+
+<!-- Hidden plum kamon glyph -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="umebachi-glyph" viewBox="0 0 688 688">
+    <path fill="#f5efde" d="M 226,612 C 207,610 189,603 174,592 C 168,587 158,577 153,571 C 132,543 126,507 137,474 C 141,464 146,453 152,445 C 157,440 167,429 173,425 C 201,403 237,397 270,409 C 286,414 299,422 311,435 C 323,447 331,459 336,474 C 346,504 342,535 326,563 C 318,575 304,589 291,597 C 271,609 248,614 226,612 z M 439,612 C 421,610 402,603 387,592 C 382,587 372,577 367,571 C 346,543 340,507 351,474 C 355,464 360,453 366,445 C 371,440 381,429 387,425 C 415,403 451,397 484,409 C 500,414 513,422 525,435 C 537,447 544,459 550,474 C 560,504 556,535 540,563 C 532,575 518,589 505,597 C 485,609 462,614 439,612 z M 159,409 C 141,407 122,400 107,389 C 101,385 92,375 87,369 C 66,341 60,305 71,272 C 75,261 80,251 86,242 C 90,237 101,226 107,222 C 127,206 154,198 179,201 C 189,202 195,203 204,206 C 220,211 233,220 245,232 C 257,244 264,256 270,272 C 280,301 276,332 260,360 C 252,373 238,387 225,394 C 205,407 182,412 159,409 z M 506,409 C 487,407 469,400 454,389 C 448,385 438,375 433,369 C 412,341 406,305 417,272 C 421,261 426,251 433,242 C 437,237 447,226 453,222 C 474,206 500,198 525,201 C 535,202 541,203 550,206 C 566,211 579,220 592,232 C 603,244 611,256 616,272 C 626,301 622,332 606,360 C 598,373 584,387 571,394 C 551,407 528,412 506,409 z M 333,283 C 314,281 295,274 281,263 C 275,259 265,249 260,243 C 239,215 233,179 244,146 C 248,135 253,125 259,116 C 264,111 274,100 280,96 C 308,75 344,69 377,80 C 393,85 406,94 418,106 C 430,118 437,130 443,146 C 453,175 449,206 433,234 C 425,247 411,261 398,268 C 378,281 355,286 333,283 z"/>
+  </symbol>
+</svg>
+
+<!-- ===== Tower cards ===== -->
+<section class="roster" aria-label="Yagura watchtowers">
+
+  <article class="tower-card">
+    <svg class="seal" viewBox="0 0 688 688" aria-hidden="true"><rect width="688" height="688" fill="var(--secondary)"/><use href="#umebachi-glyph"/></svg>
+    <div class="ordinal">No. 一 · Yagura I</div>
+    <h3>Hon-Sukiyabashi Tower</h3>
+    <div class="sub">本数寄屋橋櫓 · Nihonbashi quarter</div>
+    <dl>
+      <dt>Address</dt>
+      <dd>Sukiyabashi-mon, north-east corner; opposite the gold-merchant Mitsui's ward.</dd>
+      <dt>Companies attached</dt>
+      <dd>I-gumi, Ro-gumi, Ha-gumi (i, ro, ha)</dd>
+      <dt>Bell</dt>
+      <dd>Brass hangarane, cast Hōreki 4. Three short, one long.</dd>
+      <dt>Watchman</dt>
+      <dd>Daily roster of two; relieved at the hour of the rabbit.</dd>
+    </dl>
+  </article>
+
+  <article class="tower-card">
+    <svg class="seal" viewBox="0 0 688 688" aria-hidden="true"><rect width="688" height="688" fill="var(--secondary)"/><use href="#umebachi-glyph"/></svg>
+    <div class="ordinal">No. 二 · Yagura II</div>
+    <h3>Kanda-Myōjin Tower</h3>
+    <div class="sub">神田明神下櫓 · Kanda quarter</div>
+    <dl>
+      <dt>Address</dt>
+      <dd>Below the shrine, on the slope of Yushima; west of the Kanda watercourse.</dd>
+      <dt>Companies attached</dt>
+      <dd>Ni-gumi, Ho-gumi, He-gumi</dd>
+      <dt>Bell</dt>
+      <dd>Iron clapper-bell, recast Tenmei 2 after the great fire.</dd>
+      <dt>Watchman</dt>
+      <dd>One man and one apprentice; binoculars from the Bureau on loan.</dd>
+    </dl>
+  </article>
+
+  <article class="tower-card">
+    <svg class="seal" viewBox="0 0 688 688" aria-hidden="true"><rect width="688" height="688" fill="var(--secondary)"/><use href="#umebachi-glyph"/></svg>
+    <div class="ordinal">No. 三 · Yagura III</div>
+    <h3>Yotsuya-Ōkido Tower</h3>
+    <div class="sub">四谷大木戸櫓 · Yotsuya quarter</div>
+    <dl>
+      <dt>Address</dt>
+      <dd>At the great gate, hard by the conduit-head of the Tamagawa supply.</dd>
+      <dt>Companies attached</dt>
+      <dd>To-gumi, Chi-gumi, Ri-gumi</dd>
+      <dt>Bell</dt>
+      <dd>Hyōshigi only; no brass bell — the gate-bell suffices.</dd>
+      <dt>Watchman</dt>
+      <dd>Single watch; doubled on west-wind nights.</dd>
+    </dl>
+  </article>
+
+  <article class="tower-card">
+    <svg class="seal" viewBox="0 0 688 688" aria-hidden="true"><rect width="688" height="688" fill="var(--secondary)"/><use href="#umebachi-glyph"/></svg>
+    <div class="ordinal">No. 四 · Yagura IV</div>
+    <h3>Asakusa-Tawara Tower</h3>
+    <div class="sub">浅草田原町櫓 · Asakusa quarter</div>
+    <dl>
+      <dt>Address</dt>
+      <dd>Tawara-machi, two blocks south of the Sensō-ji approach.</dd>
+      <dt>Companies attached</dt>
+      <dd>Nu-gumi, Ru-gumi, O-gumi</dd>
+      <dt>Bell</dt>
+      <dd>Brass; struck twice for distant fire, six for fire within the ward.</dd>
+      <dt>Watchman</dt>
+      <dd>Three by night during festival weeks.</dd>
+    </dl>
+  </article>
+
+  <article class="tower-card">
+    <svg class="seal" viewBox="0 0 688 688" aria-hidden="true"><rect width="688" height="688" fill="var(--secondary)"/><use href="#umebachi-glyph"/></svg>
+    <div class="ordinal">No. 五 · Yagura V</div>
+    <h3>Shiba-Akabane Tower</h3>
+    <div class="sub">芝赤羽根櫓 · Shiba quarter</div>
+    <dl>
+      <dt>Address</dt>
+      <dd>By the Akabane bridge, overlooking the timber-yards of the Tōkaidō verge.</dd>
+      <dt>Companies attached</dt>
+      <dd>Wa-gumi, Ka-gumi, Yo-gumi</dd>
+      <dt>Bell</dt>
+      <dd>Iron, double-rim. Inspected each first day of the eleventh month.</dd>
+      <dt>Watchman</dt>
+      <dd>Two; assisted by the timber-merchants' guild during dry season.</dd>
+    </dl>
+  </article>
+
+  <article class="tower-card">
+    <svg class="seal" viewBox="0 0 688 688" aria-hidden="true"><rect width="688" height="688" fill="var(--secondary)"/><use href="#umebachi-glyph"/></svg>
+    <div class="ordinal">No. 六 · Yagura VI</div>
+    <h3>Fukagawa-Eitai Tower</h3>
+    <div class="sub">深川永代櫓 · Fukagawa quarter</div>
+    <dl>
+      <dt>Address</dt>
+      <dd>East end of the Eitai bridge; serves the boatmen and the Tomioka shrine ward.</dd>
+      <dt>Companies attached</dt>
+      <dd>Honjo Ichi-bangumi, Ni-bangumi, San-bangumi</dd>
+      <dt>Bell</dt>
+      <dd>Brass; rope-pulled from the second storey, struck only by the foreman.</dd>
+      <dt>Watchman</dt>
+      <dd>Doubled in summer for typhoon notice as well as fire.</dd>
+    </dl>
+  </article>
+
+</section>
+
+<!-- ===== Captains / iroha ===== -->
+<section class="captains">
+  <div class="captains-quote">
+    <div class="mark">「</div>
+    <blockquote>
+      A good hikeshi runs toward the wind, not from it; he wets the matoi before he wets himself, for if the standard falls the company is lost.
+    </blockquote>
+    <cite>— Standing instruction of the Nihonbashi I-gumi, copied at the Bureau, Bunsei 7</cite>
+  </div>
+
+  <div class="captains-list" aria-label="Iroha company captains">
+
+    <div class="captain-row">
+      <div class="iroha">い</div>
+      <div class="body">
+        <strong>I-gumi · Captain Yamashita Genzaburō</strong>
+        <span>Hon-machi 1-chōme, Nihonbashi · 64 men on the rolls</span>
+      </div>
+      <div class="num">Matoi<em>White gourd, red tassel</em></div>
+    </div>
+
+    <div class="captain-row">
+      <div class="iroha">ろ</div>
+      <div class="body">
+        <strong>Ro-gumi · Captain Aoki Heihachi</strong>
+        <span>Tōri-Aburachō, Nihonbashi · 58 men on the rolls</span>
+      </div>
+      <div class="num">Matoi<em>Black square, gold rim</em></div>
+    </div>
+
+    <div class="captain-row">
+      <div class="iroha">は</div>
+      <div class="body">
+        <strong>Ha-gumi · Captain Kuroda Sōkichi</strong>
+        <span>Muromachi 3-chōme, Nihonbashi · 71 men on the rolls</span>
+      </div>
+      <div class="num">Matoi<em>Half-moon over a fan</em></div>
+    </div>
+
+    <div class="captain-row">
+      <div class="iroha">に</div>
+      <div class="body">
+        <strong>Ni-gumi · Captain Hosokawa Jūzō</strong>
+        <span>Sudachō, Kanda · 49 men on the rolls</span>
+      </div>
+      <div class="num">Matoi<em>Twin pine boughs</em></div>
+    </div>
+
+    <div class="captain-row">
+      <div class="iroha">ほ</div>
+      <div class="body">
+        <strong>Ho-gumi · Captain Iwasaki Tetsugorō</strong>
+        <span>Iwamotochō, Kanda · 53 men on the rolls</span>
+      </div>
+      <div class="num">Matoi<em>Cinnabar diamond</em></div>
+    </div>
+
+    <div class="captain-row">
+      <div class="iroha">へ</div>
+      <div class="body">
+        <strong>He-gumi · Captain Sasaki Yaheiji</strong>
+        <span>Konyachō, Kanda · 44 men on the rolls</span>
+      </div>
+      <div class="num">Matoi<em>Indigo paddle</em></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== Sayagata divider ===== -->
+<div class="sayagata-band" aria-hidden="true"></div>
+
+<!-- ===== Karakaze standing orders ===== -->
+<section class="karakaze">
+  <div class="left">
+    <h2>Standing Orders<em>during the Karakaze months</em></h2>
+    <p>Issued from the eleventh day of the tenth month to the last day of the second month, when the dry winds descend from the west and the city is most apt to burn. Householders shall observe these orders without exception.</p>
+  </div>
+  <ol>
+    <li>
+      <strong>Cisterns full at sundown</strong>
+      Every wooden cistern in the ward shall be drawn full from the conduit by the closing of the gates. The water-runner of the ward will inspect at lamp-lighting.
+    </li>
+    <li>
+      <strong>No fires beyond the hour of the dog</strong>
+      Charcoal braziers must be banked, hibachi lids closed, and lanterns of paper extinguished save those required by the watchman of the gate.
+    </li>
+    <li>
+      <strong>Roof-buckets readied</strong>
+      Households of two storeys shall keep two buckets of sand and one of water on the upper roof-line; tenement landlords are answerable for the same.
+    </li>
+    <li>
+      <strong>Matoi standards displayed</strong>
+      Each company's standard shall stand at the door of the captain's house from dusk to dawn, that runners may find it without inquiry.
+    </li>
+    <li>
+      <strong>Bell-signal observed</strong>
+      Three short strokes — distant fire. Six strokes — within the ward. A continuous peal — abandon the block and gather at the appointed open ground.
+    </li>
+    <li>
+      <strong>Roof-breakers given right of way</strong>
+      Tobi-ninsoku of the brigades shall pass freely through any door, and may break any wall to halt a fire, without warrant or fee. Damages claimed at this Bureau within thirty days.
+    </li>
+  </ol>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer>
+  <div class="wave-band" aria-hidden="true"></div>
+  <div class="footer-inner">
+    <svg class="footer-seal" viewBox="0 0 345.20605 326.25635" aria-hidden="true">
+      <use href="#paulownia-mark"/>
+    </svg>
+    <div class="addr">
+      Edo Bureau of Wards & Watercourses<br>
+      Lower City Office, Nihonbashi Hon-machi 2-chōme<br>
+      Opposite the gate-bell, by the conduit-head
+    </div>
+    <div class="era">Compiled · Bunsei 9, second month, eighth day</div>
+    <div class="attrib">Kamon SVG renderings (paulownia, plum-blossom, seigaiha, sayagata) used under CC-BY-SA · Bureau notation © by office of the magistrate</div>
+  </div>
+</footer>
+
+</body>
+</html>

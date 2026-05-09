@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Contact & Permanences de la Mairie — Commune de Saint-Loup-sur-Aisne</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    margin: 0;
+    line-height: 1.6;
+  }
+  a { color: var(--text-emphasis); }
+
+  /* ---------- Diaper background pattern ---------- */
+  .diaper-bg {
+    background-color: var(--bg);
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 600 600'><g transform='translate(300,300)scale(0.87)rotate(45)' fill='%233a2618' opacity='0.08'><circle cx='-195.16' r='163'/><circle cx='195.16' r='163'/><circle cy='195.16' r='163'/><circle cy='-195.16' r='163'/><rect x='-232' y='-232' width='464' height='464'/><g fill='%23f4ecd8'><circle cx='-195.16' r='157'/><circle cx='195.16' r='157'/><circle cy='195.16' r='157'/><circle cy='-195.16' r='157'/><rect x='-226' y='-226' width='452' height='452'/></g><circle cx='-195.16' r='144'/><circle cx='195.16' r='144'/><circle cy='195.16' r='144'/><circle cy='-195.16' r='144'/><rect x='-213' y='-213' width='426' height='426'/><g fill='%23f4ecd8'><circle cx='-195.16' r='138'/><circle cx='195.16' r='138'/><circle cy='195.16' r='138'/><circle cy='-195.16' r='138'/><rect x='-207' y='-207' width='414' height='414'/></g></g></svg>");
+    background-repeat: repeat;
+  }
+
+  /* ---------- Navigation arcade ---------- */
+  .arcade {
+    background: var(--surface);
+    border-bottom: 1px solid var(--accent);
+    padding: 1.4rem 3rem 0.6rem;
+  }
+  .arcade-inner {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: end;
+    max-width: 1320px;
+    margin: 0 auto;
+    gap: 2rem;
+  }
+  .arcade ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 1.6rem;
+    justify-content: center;
+  }
+  .arcade .left  { justify-content: flex-end; }
+  .arcade .right { justify-content: flex-start; }
+  .arcade li { text-align: center; }
+  .arcade a {
+    display: block;
+    text-decoration: none;
+    color: var(--primary);
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.08em;
+    font-size: 0.78rem;
+    line-height: 1.1;
+    padding-top: 0.4rem;
+  }
+  .arch-icon {
+    display: block;
+    width: 28px;
+    height: 36px;
+    margin: 0 auto 0.35rem;
+  }
+  .arch-icon svg { display: block; width: 100%; height: 100%; }
+  .arcade a[aria-current="page"] .arch-fill { fill: var(--secondary); }
+  .arcade a[aria-current="page"] {
+    color: var(--secondary);
+  }
+  .arcade-center {
+    width: 38px;
+    height: 38px;
+    color: var(--accent);
+    margin-bottom: 0.2rem;
+  }
+  .arcade-center svg { display: block; width: 100%; height: 100%; fill: var(--accent); }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    padding: 4rem 2rem 3rem;
+    text-align: center;
+    overflow: hidden;
+  }
+  .hero-frame {
+    position: relative;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 4.5rem 3rem 2rem;
+  }
+  .hero-arch {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .hero-arch svg { width: 100%; height: 100%; }
+  .hero-eyebrow {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.25em;
+    font-size: 0.85rem;
+    color: var(--secondary);
+    margin: 0 0 0.5rem;
+  }
+  .hero h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 500;
+    font-size: 3.1rem;
+    line-height: 1.05;
+    margin: 0 0 1rem;
+    color: var(--primary);
+    letter-spacing: -0.01em;
+  }
+  .hero-sub {
+    font-size: 1.05rem;
+    max-width: 32em;
+    margin: 0 auto;
+    color: var(--text);
+  }
+
+  /* ---------- Layout ---------- */
+  main {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 3rem 2rem 4rem;
+  }
+
+  .section-title {
+    font-family: var(--font-display), serif;
+    font-weight: 500;
+    font-size: 1.9rem;
+    color: var(--primary);
+    text-align: center;
+    margin: 3rem 0 0.4rem;
+    letter-spacing: 0.01em;
+  }
+  .section-title::first-letter {
+    color: var(--secondary);
+  }
+  .section-rule {
+    text-align: center;
+    margin: 0.4rem 0 2rem;
+  }
+  .section-rule svg {
+    width: 42px;
+    height: 42px;
+    fill: var(--ornament);
+    opacity: 0.85;
+  }
+
+  /* ---------- Coordinates row ---------- */
+  .coord-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+    margin-top: 1rem;
+  }
+  .arch-card {
+    position: relative;
+    background: var(--surface);
+    padding: 3.5rem 2rem 2rem;
+    width: 18em;
+    margin: 0 auto;
+  }
+  .arch-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='600'><g transform='translate(300,300)scale(0.87)rotate(45)' fill='%233a2618' opacity='0.06'><circle cx='-195.16' r='163'/><circle cx='195.16' r='163'/><circle cy='195.16' r='163'/><circle cy='-195.16' r='163'/><rect x='-232' y='-232' width='464' height='464'/><g fill='%23f4ecd8'><circle cx='-195.16' r='157'/><circle cx='195.16' r='157'/><circle cy='195.16' r='157'/><circle cy='-195.16' r='157'/><rect x='-226' y='-226' width='452' height='452'/></g></g></svg>");
+    background-position: center 1.5rem;
+    background-repeat: no-repeat;
+    background-size: 180px 180px;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .arch-card-frame {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .arch-card-frame svg { width: 100%; height: 100%; }
+  .arch-card-inner {
+    position: relative;
+    z-index: 2;
+  }
+  .arch-card h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 500;
+    font-size: 1.25rem;
+    text-align: center;
+    margin: 0 0 1rem;
+    color: var(--primary);
+    letter-spacing: 0.02em;
+  }
+  .arch-card p {
+    margin: 0.4rem 0;
+    text-align: center;
+    font-size: 0.95rem;
+  }
+  .arch-card .label {
+    font-variant: small-caps;
+    letter-spacing: 0.12em;
+    color: var(--secondary);
+    font-size: 0.78rem;
+    display: block;
+    margin-top: 0.6rem;
+  }
+  .arch-card .big {
+    font-family: var(--font-display), serif;
+    font-size: 1.4rem;
+    color: var(--primary);
+    margin: 0.2rem 0;
+  }
+  .arch-card .drop::first-letter {
+    font-family: var(--font-display), serif;
+    color: var(--secondary);
+    font-size: 2.4rem;
+    float: left;
+    line-height: 0.9;
+    padding: 0.3rem 0.4rem 0 0;
+  }
+  .vine-end {
+    text-align: center;
+    margin-top: 1rem;
+  }
+  .vine-end svg {
+    width: 38px;
+    height: 38px;
+    fill: var(--ornament);
+    opacity: 0.7;
+  }
+  .arch-card .cta {
+    display: block;
+    text-align: center;
+    margin-top: 0.6rem;
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    font-variant: small-caps;
+    letter-spacing: 0.12em;
+    font-size: 0.82rem;
+  }
+
+  /* ---------- Permanences table ---------- */
+  .permanences {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 4rem;
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+  .perm-entry {
+    border-top: 1px solid rgba(58,38,24,0.25);
+    padding: 1.2rem 0;
+    display: grid;
+    grid-template-columns: 1fr 14em;
+    gap: 1.5rem;
+  }
+  .perm-entry:last-child,
+  .perm-entry:nth-last-child(2) {
+    border-bottom: 1px solid rgba(58,38,24,0.25);
+  }
+  .perm-name {
+    font-family: var(--font-display), serif;
+    font-size: 1.1rem;
+    color: var(--primary);
+    margin: 0 0 0.2rem;
+  }
+  .perm-role {
+    font-variant: small-caps;
+    letter-spacing: 0.1em;
+    font-size: 0.78rem;
+    color: var(--secondary);
+    margin: 0 0 0.4rem;
+  }
+  .perm-portfolio {
+    font-size: 0.92rem;
+    margin: 0;
+    color: var(--text);
+  }
+  .perm-time {
+    font-family: var(--font-display), serif;
+    font-size: 0.95rem;
+    color: var(--text-emphasis);
+    text-align: right;
+    border-left: 1px solid var(--accent);
+    padding-left: 1.2rem;
+  }
+  .perm-time strong {
+    display: block;
+    font-weight: 500;
+    color: var(--primary);
+  }
+
+  /* ---------- Emergency strip ---------- */
+  .emergency {
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.4rem;
+  }
+  .emerg-card {
+    border: 1px solid var(--ornament);
+    background: var(--surface);
+    padding: 1.4rem 1.2rem;
+    position: relative;
+  }
+  .emerg-card::before {
+    content: "";
+    position: absolute;
+    top: -1px; left: -1px;
+    width: 14px; height: 14px;
+    border-top: 2px solid var(--accent);
+    border-left: 2px solid var(--accent);
+  }
+  .emerg-card::after {
+    content: "";
+    position: absolute;
+    bottom: -1px; right: -1px;
+    width: 14px; height: 14px;
+    border-bottom: 2px solid var(--accent);
+    border-right: 2px solid var(--accent);
+  }
+  .emerg-card h4 {
+    font-family: var(--font-display), serif;
+    font-size: 1rem;
+    margin: 0 0 0.3rem;
+    color: var(--primary);
+    font-variant: small-caps;
+    letter-spacing: 0.1em;
+  }
+  .emerg-card .num {
+    font-family: var(--font-display), serif;
+    font-size: 1.8rem;
+    color: var(--secondary);
+    margin: 0.2rem 0;
+  }
+  .emerg-card p {
+    margin: 0.2rem 0 0;
+    font-size: 0.85rem;
+    color: var(--text);
+  }
+
+  /* ---------- Two columns: accessibility + legal ---------- */
+  .twocol {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-top: 1rem;
+  }
+  .twocol section {
+    width: 18em;
+    margin: 0 auto;
+  }
+  .twocol h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 500;
+    font-size: 1.3rem;
+    color: var(--primary);
+    margin: 0 0 0.8rem;
+  }
+  .twocol h3::first-letter { color: var(--secondary); }
+  .twocol p {
+    font-size: 0.95rem;
+    margin: 0 0 0.9rem;
+  }
+  .twocol p::first-letter {
+    /* nothing — only first paragraph drop-cap below */
+  }
+  .twocol .lead::first-letter {
+    font-family: var(--font-display), serif;
+    color: var(--secondary);
+    font-size: 3rem;
+    float: left;
+    line-height: 0.85;
+    padding: 0.25rem 0.5rem 0 0;
+  }
+
+  /* ---------- Footer arcade ---------- */
+  footer {
+    margin-top: 4rem;
+    position: relative;
+    padding: 3rem 2rem 1.5rem;
+  }
+  .footer-arcade {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1rem;
+    max-width: 1320px;
+    margin: 0 auto;
+  }
+  .foot-arch {
+    position: relative;
+    padding: 3rem 0.7rem 1rem;
+    text-align: center;
+  }
+  .foot-arch::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 78%;
+    height: 100%;
+    border: 1px solid var(--ornament);
+    border-bottom: none;
+    border-radius: 50% 50% 0 0 / 35% 35% 0 0;
+    pointer-events: none;
+  }
+  .foot-arch h5 {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.12em;
+    font-size: 0.78rem;
+    margin: 0 0 0.5rem;
+    color: var(--primary);
+  }
+  .foot-arch p, .foot-arch address {
+    font-size: 0.78rem;
+    line-height: 1.45;
+    margin: 0;
+    font-style: normal;
+    color: var(--text);
+  }
+  .footer-band {
+    margin-top: 2rem;
+    height: 22px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='22' viewBox='0 0 40 22'><path fill='%23c9a23a' d='M20 3 L23 8 L28 8 L28 14 L23 14 L20 19 L17 14 L12 14 L12 8 L17 8 Z'/></svg>");
+    background-repeat: repeat-x;
+    background-position: center;
+    border-top: 1px solid rgba(201,162,58,0.4);
+    border-bottom: 1px solid rgba(201,162,58,0.4);
+  }
+  .footer-seal {
+    text-align: center;
+    margin-top: 1rem;
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    font-size: 0.8rem;
+    color: var(--text);
+  }
+</style>
+</head>
+<body>
+
+<!-- =============== NAV =============== -->
+<header class="arcade">
+  <div class="arcade-inner">
+    <ul class="left">
+      <li>
+        <a href="page-1.html">
+          <span class="arch-icon" aria-hidden="true">
+            <svg viewBox="0 0 28 36"><path class="arch-fill" fill="none" stroke="#0a0a0a" stroke-width="1.5" d="M2 34 V18 C2 8 14 2 14 2 C14 2 26 8 26 18 V34 Z"/></svg>
+          </span>
+          Accueil
+        </a>
+      </li>
+      <li>
+        <a href="page-2.html">
+          <span class="arch-icon" aria-hidden="true">
+            <svg viewBox="0 0 28 36"><path class="arch-fill" fill="none" stroke="#0a0a0a" stroke-width="1.5" d="M2 34 V18 C2 8 14 2 14 2 C14 2 26 8 26 18 V34 Z"/></svg>
+          </span>
+          Conseil
+        </a>
+      </li>
+      <li>
+        <a href="page-3.html">
+          <span class="arch-icon" aria-hidden="true">
+            <svg viewBox="0 0 28 36"><path class="arch-fill" fill="none" stroke="#0a0a0a" stroke-width="1.5" d="M2 34 V18 C2 8 14 2 14 2 C14 2 26 8 26 18 V34 Z"/></svg>
+          </span>
+          Démarches
+        </a>
+      </li>
+    </ul>
+    <div class="arcade-center" aria-hidden="true">
+      <svg viewBox="0 0 592 592"><path transform="translate(-4,-4)scale(0.15,0.15)" d="M1778.9,3200A120.9263,120.9263 0 0,1 1657.97,3320.93A120.9263,120.9263 0 0,1 1537.04,3200A221.5096,221.5096 0 0,0 1456.32,3371.02A221.5096,221.5096 0 0,0 1677.83,3592.53A221.5096,221.5096 0 0,0 1818.61,3542.03A362.779,362.779 0 0,0 2000,3856.21A362.779,362.779 0 0,0 2181.39,3542.03A221.5096,221.5096 0 0,0 2322.17,3592.53A221.5096,221.5096 0 0,0 2543.68,3371.02A221.5096,221.5096 0 0,0 2462.96,3200A120.9263,120.9263 0 0,1 2342.03,3320.93A120.9263,120.9263 0 0,1 2221.1,3200V2221.1H3200A120.9263,120.9263 0 0,1 3320.93,2342.03A120.9263,120.9263 0 0,1 3200,2462.96A221.5096,221.5096 0 0,0 3371.02,2543.68A221.5096,221.5096 0 0,0 3592.53,2322.17A221.5096,221.5096 0 0,0 3542.03,2181.39A362.779,362.779 0 0,0 3856.21,2000A362.779,362.779 0 0,0 3542.03,1818.61A221.5096,221.5096 0 0,0 3592.53,1677.83A221.5096,221.5096 0 0,0 3371.02,1456.32A221.5096,221.5096 0 0,0 3200,1537.04A120.9263,120.9263 0 0,1 3320.93,1657.97A120.9263,120.9263 0 0,1 3200,1778.9H2221.1V800A120.9263,120.9263 0 0,1 2342.03,679.073A120.9263,120.9263 0 0,1 2462.96,800A221.5096,221.5096 0 0,0 2543.68,628.984A221.5096,221.5096 0 0,0 2322.17,407.475A221.5096,221.5096 0 0,0 2181.39,457.969A362.779,362.779 0 0,0 2000,143.793A362.779,362.779 0 0,0 1818.61,457.969A221.5096,221.5096 0 0,0 1677.83,407.475A221.5096,221.5096 0 0,0 1456.32,628.984A221.5096,221.5096 0 0,0 1537.04,800A120.9263,120.9263 0 0,1 1657.97,679.073A120.9263,120.9263 0 0,1 1778.9,800V1778.9H800A120.9263,120.9263 0 0,1 679.073,1657.97A120.9263,120.9263 0 0,1 800,1537.04A221.5096,221.5096 0 0,0 628.984,1456.32A221.5096,221.5096 0 0,0 407.475,1677.83A221.5096,221.5096 0 0,0 457.969,1818.61A362.779,362.779 0 0,0 143.793,2000A362.779,362.779 0 0,0 457.969,2181.39A221.5096,221.5096 0 0,0 407.475,2322.17A221.5096,221.5096 0 0,0 628.984,2543.68A221.5096,221.5096 0 0,0 800,2462.96A120.9263,120.9263 0 0,1 679.073,2342.03A120.9263,120.9263 0 0,1 800,2221.1H1778.9Z"/></svg>
+    </div>
+    <ul class="right">
+      <li>
+        <a href="page-4.html">
+          <span class="arch-icon" aria-hidden="true">
+            <svg viewBox="0 0 28 36"><path class="arch-fill" fill="none" stroke="#0a0a0a" stroke-width="1.5" d="M2 34 V18 C2 8 14 2 14 2 C14 2 26 8 26 18 V34 Z"/></svg>
+          </span>
+          Patrimoine
+        </a>
+      </li>
+      <li>
+        <a href="page-5.html">
+          <span class="arch-icon" aria-hidden="true">
+            <svg viewBox="0 0 28 36"><path class="arch-fill" fill="none" stroke="#0a0a0a" stroke-width="1.5" d="M2 34 V18 C2 8 14 2 14 2 C14 2 26 8 26 18 V34 Z"/></svg>
+          </span>
+          Visiter
+        </a>
+      </li>
+      <li>
+        <a href="page-6.html" aria-current="page">
+          <span class="arch-icon" aria-hidden="true">
+            <svg viewBox="0 0 28 36"><path class="arch-fill" fill="#1e3a5f" stroke="#0a0a0a" stroke-width="1.5" d="M2 34 V18 C2 8 14 2 14 2 C14 2 26 8 26 18 V34 Z"/></svg>
+          </span>
+          Contact
+        </a>
+      </li>
+    </ul>
+  </div>
+</header>
+
+<!-- =============== HERO =============== -->
+<section class="hero diaper-bg">
+  <div class="hero-frame">
+    <div class="hero-arch" aria-hidden="true">
+      <svg viewBox="147 244 500 550" preserveAspectRatio="none">
+        <g transform="translate(-147.13944,-244.9375)" fill="none" stroke="#0a0a0a" stroke-width="2.5">
+          <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+          <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+          <g transform="matrix(-1,0,0,1,777.88071,-0.2972181)">
+            <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+            <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+    <p class="hero-eyebrow">Mairie de Saint-Loup-sur-Aisne</p>
+    <h1>Contact &amp;<br>Permanences</h1>
+    <p class="hero-sub">Adresses, horaires d'ouverture du guichet, permanences du Maire et de ses adjoints, contacts d'urgence et mentions légales du présent site communal.</p>
+  </div>
+</section>
+
+<main>
+
+  <!-- =============== COORDS =============== -->
+  <h2 class="section-title">Coordonnées de la Mairie</h2>
+  <div class="section-rule" aria-hidden="true">
+    <svg viewBox="0 0 200 200"><path d="M43.583 11.011c-1.79.033-3.58.128-5.344.313-7.054.737-13.935 2.794-19.156 7.469s-8.198 12.003-7.687 21c.511 9.001 4.297 16.144 10.187 20.344 5.89 4.2 13.306 5.533 21.031 5.187 15.451-.691 32.83-8.003 45.812-18.312 1.408-1.118 2.831-2.039 4.25-3.062 4.295 6.677 7.612 14.826 9.344 24.062-7.498-5.072-21.012-10.546-35.656 1.5C44.84 87.726 41.997 82.387 21.64 67.387c-2.857 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.263-3.594 26.406 6.018 12.866 8.408 20.075 6.563 25.187-12.84 2.292-15.771 7.781-5.567 12.665 45.098 9.975 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.214 11.071-22.161 11.071-32.875 2.5-9.932-7.946-21.687-16.177-39-1.125-1.736-11.676-5.689-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812"/></svg>
+  </div>
+
+  <div class="coord-row">
+    <div class="arch-card">
+      <div class="arch-card-frame" aria-hidden="true">
+        <svg viewBox="0 0 100 140" preserveAspectRatio="none">
+          <path d="M2 138 V60 C2 25 50 2 50 2 C50 2 98 25 98 60 V138 Z" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+        </svg>
+      </div>
+      <div class="arch-card-inner">
+        <h3>Adresse postale</h3>
+        <p class="drop">Mairie de Saint-Loup-sur-Aisne, sise au cœur du bourg, face à l'église collégiale Saint-Loup.</p>
+        <p class="big">3, rue du Chapitre</p>
+        <p>02440 Saint-Loup-sur-Aisne<br>Département de l'Aisne</p>
+        <span class="label">Canton de Vailly-sur-Aisne</span>
+        <div class="vine-end" aria-hidden="true">
+          <svg viewBox="0 0 200 200"><path d="M43.583 11.011c-1.79.033-3.58.128-5.344.313-7.054.737-13.935 2.794-19.156 7.469s-8.198 12.003-7.687 21c.511 9.001 4.297 16.144 10.187 20.344 5.89 4.2 13.306 5.533 21.031 5.187 15.451-.691 32.83-8.003 45.812-18.312 1.408-1.118 2.831-2.039 4.25-3.062 4.295 6.677 7.612 14.826 9.344 24.062-7.498-5.072-21.012-10.546-35.656 1.5C44.84 87.726 41.997 82.387 21.64 67.387c-2.857 36.071 15.013 54.643 44.656 52.5"/></svg>
+        </div>
+        <a class="cta" href="https://www.openstreetmap.org/" >Voir le plan d'accès</a>
+      </div>
+    </div>
+
+    <div class="arch-card">
+      <div class="arch-card-frame" aria-hidden="true">
+        <svg viewBox="0 0 100 140" preserveAspectRatio="none">
+          <path d="M2 138 V60 C2 25 50 2 50 2 C50 2 98 25 98 60 V138 Z" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+        </svg>
+      </div>
+      <div class="arch-card-inner">
+        <h3>Téléphone &amp; courriel</h3>
+        <p class="drop">Le secrétariat répond aux administrés du lundi au vendredi, hors jours fériés et hors fermeture estivale.</p>
+        <p class="big">03 23 74 19 28</p>
+        <p>mairie@saint-loup-sur-aisne.fr</p>
+        <span class="label">Télécopie · 03 23 74 19 30</span>
+        <div class="vine-end" aria-hidden="true">
+          <svg viewBox="0 0 200 200"><path d="M43.583 11.011c-1.79.033-3.58.128-5.344.313-7.054.737-13.935 2.794-19.156 7.469s-8.198 12.003-7.687 21c.511 9.001 4.297 16.144 10.187 20.344 5.89 4.2 13.306 5.533 21.031 5.187 15.451-.691 32.83-8.003 45.812-18.312 1.408-1.118 2.831-2.039 4.25-3.062 4.295 6.677 7.612 14.826 9.344 24.062-7.498-5.072-21.012-10.546-35.656 1.5C44.84 87.726 41.997 82.387 21.64 67.387c-2.857 36.071 15.013 54.643 44.656 52.5"/></svg>
+        </div>
+        <a class="cta" href="mailto:mairie@saint-loup-sur-aisne.fr">Adresser un courriel</a>
+      </div>
+    </div>
+
+    <div class="arch-card">
+      <div class="arch-card-frame" aria-hidden="true">
+        <svg viewBox="0 0 100 140" preserveAspectRatio="none">
+          <path d="M2 138 V60 C2 25 50 2 50 2 C50 2 98 25 98 60 V138 Z" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+        </svg>
+      </div>
+      <div class="arch-card-inner">
+        <h3>Heures d'ouverture</h3>
+        <p class="drop">Guichet ouvert au public quatre demi-journées chaque semaine, et le samedi matin sur convocation.</p>
+        <p>Lundi, mardi, jeudi · 9 h – 12 h</p>
+        <p>Vendredi · 14 h – 17 h</p>
+        <p>Samedi · 10 h – 12 h <em>(état civil)</em></p>
+        <span class="label">Fermé le mercredi</span>
+        <div class="vine-end" aria-hidden="true">
+          <svg viewBox="0 0 200 200"><path d="M43.583 11.011c-1.79.033-3.58.128-5.344.313-7.054.737-13.935 2.794-19.156 7.469s-8.198 12.003-7.687 21c.511 9.001 4.297 16.144 10.187 20.344 5.89 4.2 13.306 5.533 21.031 5.187 15.451-.691 32.83-8.003 45.812-18.312 1.408-1.118 2.831-2.039 4.25-3.062 4.295 6.677 7.612 14.826 9.344 24.062-7.498-5.072-21.012-10.546-35.656 1.5C44.84 87.726 41.997 82.387 21.64 67.387c-2.857 36.071 15.013 54.643 44.656 52.5"/></svg>
+        </div>
+        <a class="cta" href="page-3.html">Démarches sur place</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- =============== PERMANENCES =============== -->
+  <h2 class="section-title">Permanences des Élus</h2>
+  <div class="section-rule" aria-hidden="true">
+    <svg viewBox="0 0 200 200"><path d="M43.583 11.011c-1.79.033-3.58.128-5.344.313-7.054.737-13.935 2.794-19.156 7.469s-8.198 12.003-7.687 21c.511 9.001 4.297 16.144 10.187 20.344 5.89 4.2 13.306 5.533 21.031 5.187 15.451-.691 32.83-8.003 45.812-18.312 1.408-1.118 2.831-2.039 4.25-3.062 4.295 6.677 7.612 14.826 9.344 24.062-7.498-5.072-21.012-10.546-35.656 1.5C44.84 87.726 41.997 82.387 21.64 67.387c-2.857 36.071 15.013 54.643 44.656 52.5"/></svg>
+  </div>
+
+  <div class="permanences">
+    <div class="perm-entry">
+      <div>
+        <p class="perm-name">M. Aubin Carcassonne-Vidal</p>
+        <p class="perm-role">Maire</p>
+        <p class="perm-portfolio">Affaires générales, finances, représentation à la communauté de communes du Val de l'Aisne.</p>
+      </div>
+      <div class="perm-time">
+        <strong>Mardi · 17 h – 19 h</strong>
+        sur rendez-vous, bureau du Maire, 1<sup>er</sup> étage
+      </div>
+    </div>
+
+    <div class="perm-entry">
+      <div>
+        <p class="perm-name">M<sup>me</sup> Eugénie Pradel-Sourdeau</p>
+        <p class="perm-role">Première adjointe</p>
+        <p class="perm-portfolio">Urbanisme, voirie communale, entretien des chemins ruraux et lavoirs.</p>
+      </div>
+      <div class="perm-time">
+        <strong>Jeudi · 10 h – 12 h</strong>
+        permanence libre, salle du conseil
+      </div>
+    </div>
+
+    <div class="perm-entry">
+      <div>
+        <p class="perm-name">M. Théodore Hennequin</p>
+        <p class="perm-role">Deuxième adjoint</p>
+        <p class="perm-portfolio">État civil, cimetière, registre paroissial, jumelage avec Wolfsburg-am-Lahn.</p>
+      </div>
+      <div class="perm-time">
+        <strong>Lundi · 9 h – 11 h</strong>
+        sur rendez-vous
+      </div>
+    </div>
+
+    <div class="perm-entry">
+      <div>
+        <p class="perm-name">M<sup>me</sup> Solange Béthune-Levert</p>
+        <p class="perm-role">Troisième adjointe</p>
+        <p class="perm-portfolio">Affaires scolaires (RPI Saint-Loup–Brécy), restauration, transport scolaire.</p>
+      </div>
+      <div class="perm-time">
+        <strong>Vendredi · 16 h – 18 h</strong>
+        école communale, bureau de la directrice
+      </div>
+    </div>
+
+    <div class="perm-entry">
+      <div>
+        <p class="perm-name">M. Bertrand Coulonges</p>
+        <p class="perm-role">Quatrième adjoint</p>
+        <p class="perm-portfolio">Patrimoine bâti, restauration de la collégiale, fêtes et cérémonies, fleurissement.</p>
+      </div>
+      <div class="perm-time">
+        <strong>Samedi · 10 h – 12 h</strong>
+        deuxième samedi du mois
+      </div>
+    </div>
+
+    <div class="perm-entry">
+      <div>
+        <p class="perm-name">M<sup>me</sup> Hortense Vauclair</p>
+        <p class="perm-role">Conseillère déléguée</p>
+        <p class="perm-portfolio">Action sociale, CCAS, portage de repas, liaison avec la maison de retraite Saint-Joseph de Vailly.</p>
+      </div>
+      <div class="perm-time">
+        <strong>Mardi · 14 h – 16 h</strong>
+        bureau du CCAS, rez-de-chaussée
+      </div>
+    </div>
+  </div>
+
+  <!-- =============== EMERGENCY =============== -->
+  <h2 class="section-title">Numéros d'Urgence</h2>
+  <div class="section-rule" aria-hidden="true">
+    <svg viewBox="0 0 200 200"><path d="M43.583 11.011c-1.79.033-3.58.128-5.344.313-7.054.737-13.935 2.794-19.156 7.469s-8.198 12.003-7.687 21c.511 9.001 4.297 16.144 10.187 20.344 5.89 4.2 13.306 5.533 21.031 5.187 15.451-.691 32.83-8.003 45.812-18.312 1.408-1.118 2.831-2.039 4.25-3.062 4.295 6.677 7.612 14.826 9.344 24.062-7.498-5.072-21.012-10.546-35.656 1.5C44.84 87.726 41.997 82.387 21.64 67.387c-2.857 36.071 15.013 54.643 44.656 52.5"/></svg>
+  </div>
+
+  <div class="emergency">
+    <div class="emerg-card">
+      <h4>Police municipale</h4>
+      <p class="num">03 23 74 19 31</p>
+      <p>Local du beffroi, place du Marché. Patrouille du jeudi au dimanche, 14 h – 22 h.</p>
+    </div>
+    <div class="emerg-card">
+      <h4>Gendarmerie</h4>
+      <p class="num">17</p>
+      <p>Brigade territoriale de Vailly-sur-Aisne, 12 rue de Soissons — 03 23 54 60 17.</p>
+    </div>
+    <div class="emerg-card">
+      <h4>Sapeurs-pompiers</h4>
+      <p class="num">18</p>
+      <p>Centre d'incendie et de secours de Bourg-et-Comin. Caserne avancée à Presles-et-Boves.</p>
+    </div>
+    <div class="emerg-card">
+      <h4>Médecin de garde</h4>
+      <p class="num">15</p>
+      <p>SAMU de l'Aisne, régulation au 15. Médecin de garde Vailly-Bazoches dispatché par cette voie.</p>
+    </div>
+  </div>
+
+  <!-- =============== ACCESSIBILITY + LEGAL =============== -->
+  <h2 class="section-title">Accessibilité &amp; Mentions Légales</h2>
+  <div class="section-rule" aria-hidden="true">
+    <svg viewBox="0 0 200 200"><path d="M43.583 11.011c-1.79.033-3.58.128-5.344.313-7.054.737-13.935 2.794-19.156 7.469s-8.198 12.003-7.687 21c.511 9.001 4.297 16.144 10.187 20.344 5.89 4.2 13.306 5.533 21.031 5.187 15.451-.691 32.83-8.003 45.812-18.312 1.408-1.118 2.831-2.039 4.25-3.062 4.295 6.677 7.612 14.826 9.344 24.062-7.498-5.072-21.012-10.546-35.656 1.5C44.84 87.726 41.997 82.387 21.64 67.387c-2.857 36.071 15.013 54.643 44.656 52.5"/></svg>
+  </div>
+
+  <div class="twocol">
+    <section>
+      <h3>Accueil des publics</h3>
+      <p class="lead">Le guichet du rez-de-chaussée de la mairie est accessible aux personnes à mobilité réduite : seuil aplani en 2017, porte battante de 92 cm, banque d'accueil abaissée à 80 cm, boucle magnétique pour appareillage auditif.</p>
+      <p>La salle du conseil municipal, située au premier étage du logis ancien (1844), est desservie par un ascenseur installé en 2019 dans l'ancienne cage d'escalier de service. La cabine accepte un fauteuil roulant standard (charge utile 630 kg, dimensions 110 × 140 cm).</p>
+      <p>Pour toute demande d'accompagnement à un rendez-vous, ou pour la traduction en langue des signes française, prière d'avertir le secrétariat au moins 72 heures à l'avance au 03 23 74 19 28.</p>
+    </section>
+    <section>
+      <h3>Hébergement &amp; responsabilité éditoriale</h3>
+      <p class="lead">Le présent site est édité par la Commune de Saint-Loup-sur-Aisne, personne morale de droit public, dont le siège est en mairie, 3 rue du Chapitre, 02440. Directeur de la publication : M. Aubin Carcassonne-Vidal, en sa qualité de Maire.</p>
+      <p>Hébergement assuré par le syndicat mixte Aisne Numérique, 14 rue du Champ Bouillant, 02000 Laon, dans le cadre de la mutualisation des sites des communes rurales du département.</p>
+      <p>Conformément au RGPD et à la loi Informatique et Libertés, vous pouvez exercer vos droits d'accès, de rectification et d'opposition par courrier adressé au délégué à la protection des données de la commune, à l'adresse ci-dessus.</p>
+    </section>
+  </div>
+
+</main>
+
+<!-- =============== FOOTER =============== -->
+<footer class="diaper-bg">
+  <div class="footer-arcade">
+    <div class="foot-arch">
+      <h5>Mairie</h5>
+      <address>3 rue du Chapitre<br>02440 Saint-Loup-sur-Aisne<br>Aisne</address>
+    </div>
+    <div class="foot-arch">
+      <h5>Horaires</h5>
+      <p>Lun · Mar · Jeu : 9–12<br>Ven : 14–17<br>Sam : 10–12</p>
+    </div>
+    <div class="foot-arch">
+      <h5>Conseil</h5>
+      <p>03 23 74 19 28<br>conseil@saint-loup-sur-aisne.fr</p>
+    </div>
+    <div class="foot-arch">
+      <h5>Paroisse</h5>
+      <p>Père Anselme Roussard<br>Presbytère, 7 rue de l'Église<br>03 23 54 18 04</p>
+    </div>
+    <div class="foot-arch">
+      <h5>Accessibilité</h5>
+      <p>Guichet PMR au rez-de-chaussée. Ascenseur installé en 2019.</p>
+    </div>
+    <div class="foot-arch">
+      <h5>Archives</h5>
+      <p>Fonds communal coté 4 E 723, déposé aux Archives départementales de l'Aisne, Laon.</p>
+    </div>
+    <div class="foot-arch">
+      <h5>Révision</h5>
+      <p>Dernière mise à jour<br>du présent feuillet :<br>14 mars 2024</p>
+    </div>
+  </div>
+  <div class="footer-band" aria-hidden="true"></div>
+  <p class="footer-seal">Sceau de la Commune, MCMXLIV — révisé 2024</p>
+</footer>
+
+</body>
+</html>

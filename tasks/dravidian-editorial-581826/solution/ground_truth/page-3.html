@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Field Notes — The Outer Prakaras of Srirangam | The Prakara Quarterly</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* ============ MASTHEAD BAND ============ */
+  .masthead {
+    background: var(--surface);
+    padding: 18px 48px 14px;
+    position: relative;
+    border-top: 6px solid var(--primary);
+  }
+  .masthead-inner {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 24px;
+  }
+  .om-seal {
+    width: 54px;
+    height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid var(--primary);
+    border-radius: 50%;
+    background: var(--surface);
+    padding: 6px;
+  }
+  .om-seal svg { width: 100%; height: 100%; }
+  .om-seal svg path { fill: var(--accent); }
+  .masthead-title {
+    font-family: var(--font-display), serif;
+    font-weight: 600;
+    font-size: 32px;
+    letter-spacing: 0.42em;
+    text-align: center;
+    color: var(--text-emphasis);
+    text-transform: uppercase;
+    margin: 0;
+  }
+  .masthead-title .small {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--secondary);
+    margin-top: 4px;
+    font-weight: 400;
+  }
+  .masthead-meta {
+    text-align: right;
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: var(--secondary);
+    text-transform: uppercase;
+  }
+  .masthead-meta em {
+    color: var(--text-emphasis);
+    font-style: normal;
+    display: block;
+    margin-top: 4px;
+  }
+
+  /* Vermilion-and-gold double line */
+  .double-rule {
+    height: 6px;
+    background:
+      linear-gradient(to bottom,
+        var(--primary) 0,
+        var(--primary) 2px,
+        var(--surface) 2px,
+        var(--surface) 4px,
+        var(--accent) 4px,
+        var(--accent) 6px);
+    width: 100%;
+  }
+
+  /* ============ NAV STRIP ============ */
+  nav.primary {
+    background: var(--secondary);
+    padding: 14px 48px;
+  }
+  nav.primary ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0;
+  }
+  nav.primary li {
+    display: flex;
+    align-items: center;
+  }
+  nav.primary a {
+    font-family: var(--font-display), serif;
+    color: var(--surface);
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    padding: 4px 18px;
+    transition: color 0.2s;
+  }
+  nav.primary a:hover { color: var(--accent); }
+  nav.primary a[aria-current="page"] {
+    color: var(--accent);
+    border-bottom: 1.5px solid var(--accent);
+  }
+  .lotus-glyph {
+    width: 14px;
+    height: 14px;
+    opacity: 0.85;
+    flex-shrink: 0;
+  }
+  .lotus-glyph svg { width: 100%; height: 100%; }
+
+  /* ============ TIER FRIEZE (palmette divider) ============ */
+  .frieze {
+    background: var(--primary);
+    padding: 6px 0;
+    overflow: hidden;
+    height: 22px;
+    position: relative;
+  }
+  .frieze::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 18px,
+      var(--accent) 18px,
+      var(--accent) 19px,
+      transparent 19px,
+      transparent 38px,
+      var(--surface) 38px,
+      var(--surface) 39px,
+      transparent 39px,
+      transparent 58px
+    );
+  }
+  .frieze-svg {
+    height: 22px;
+    overflow: hidden;
+    background: var(--primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .frieze-svg svg {
+    height: 60px;
+    width: auto;
+    filter: invert(73%) sepia(56%) saturate(420%) hue-rotate(5deg) brightness(95%);
+    opacity: 0.95;
+  }
+
+  /* ============ HERO TIER (peacock band) ============ */
+  .hero-band {
+    background: var(--bg);
+    padding: 0;
+    position: relative;
+  }
+  .twin-peacocks {
+    height: 64px;
+    background: var(--surface);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+  }
+  .twin-peacocks svg {
+    height: 50px;
+    width: auto;
+  }
+  .twin-peacocks svg path { fill: var(--text-emphasis); }
+
+  .hero-tier {
+    background: var(--surface);
+    padding: 42px 64px 48px;
+    text-align: center;
+    border-bottom: 1px solid rgba(227, 66, 52, 0.25);
+  }
+  .kicker {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.5em;
+    color: var(--secondary);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .kicker::before, .kicker::after {
+    content: " ❖ ";
+    color: var(--accent);
+    margin: 0 12px;
+  }
+  h1.hero-title {
+    font-family: var(--font-display), serif;
+    font-weight: 600;
+    font-size: 44px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    line-height: 1.2;
+    margin: 0 0 16px;
+  }
+  .hero-dek {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--text);
+    max-width: 820px;
+    margin: 0 auto 18px;
+    line-height: 1.55;
+  }
+  .gold-rule {
+    width: 220px;
+    height: 1.5px;
+    background: var(--accent);
+    margin: 18px auto;
+    position: relative;
+  }
+  .gold-rule::before, .gold-rule::after {
+    content: "";
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: var(--primary);
+    transform: rotate(45deg);
+    top: -2px;
+  }
+  .gold-rule::before { left: -3px; }
+  .gold-rule::after { right: -3px; }
+
+  .byline {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--secondary);
+  }
+  .byline strong {
+    font-style: normal;
+    color: var(--text-emphasis);
+    letter-spacing: 0.1em;
+    font-family: var(--font-display), serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 12px;
+  }
+
+  /* ============ MAIN CONTENT TIER ============ */
+  .content-tier {
+    background: var(--bg);
+    padding: 48px 64px 56px;
+  }
+  .content-grid {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 36px;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  /* Pillared panel for body */
+  .pillared-panel {
+    background: var(--surface);
+    position: relative;
+    padding: 44px 64px 48px;
+    border-top: 4px solid var(--primary);
+    border-bottom: 4px solid var(--primary);
+  }
+  /* Carved pillar columns - left */
+  .pillared-panel::before,
+  .pillared-panel::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 26px;
+    background:
+      /* base block (yali) */
+      linear-gradient(to top,
+        var(--primary) 0,
+        var(--primary) 36px,
+        transparent 36px),
+      /* shaft */
+      linear-gradient(to right,
+        transparent 0,
+        transparent 10px,
+        var(--primary) 10px,
+        var(--primary) 11px,
+        transparent 11px,
+        transparent 15px,
+        var(--primary) 15px,
+        var(--primary) 16px,
+        transparent 16px);
+  }
+  .pillared-panel::before { left: 0; }
+  .pillared-panel::after { right: 0; }
+
+  /* Capital + base ornaments via inner spans */
+  .pillar-cap {
+    position: absolute;
+    width: 26px;
+    height: 28px;
+    background:
+      linear-gradient(to bottom,
+        var(--primary) 0, var(--primary) 4px,
+        transparent 4px, transparent 8px,
+        var(--primary) 8px, var(--primary) 11px,
+        transparent 11px, transparent 16px,
+        var(--accent) 16px, var(--accent) 17px,
+        transparent 17px);
+  }
+  .pillar-cap.tl { top: 0; left: 0; }
+  .pillar-cap.tr { top: 0; right: 0; }
+  .pillar-cap.bl {
+    bottom: 36px; left: 0;
+    transform: scaleY(-1);
+  }
+  .pillar-cap.br {
+    bottom: 36px; right: 0;
+    transform: scaleY(-1);
+  }
+
+  .panel-inner h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 600;
+    font-size: 22px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    margin: 32px 0 14px;
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 8px;
+  }
+  .panel-inner h2:first-child { margin-top: 0; }
+
+  .panel-inner p {
+    font-family: var(--font-body), serif;
+    font-size: 16px;
+    line-height: 1.75;
+    margin: 0 0 16px;
+    text-align: justify;
+  }
+  .panel-inner p.dek {
+    font-style: italic;
+    font-size: 17px;
+    color: var(--secondary);
+    border-bottom: 1.5px solid var(--accent);
+    padding-bottom: 18px;
+    margin-bottom: 22px;
+  }
+  .drop::first-letter {
+    font-family: var(--font-display), serif;
+    font-size: 58px;
+    float: left;
+    line-height: 0.9;
+    padding: 6px 10px 0 0;
+    color: var(--primary);
+    font-weight: 600;
+  }
+
+  blockquote.field {
+    margin: 24px 0;
+    padding: 18px 24px;
+    background: rgba(201, 162, 58, 0.12);
+    border-left: 3px solid var(--primary);
+    border-right: 3px solid var(--primary);
+    font-style: italic;
+    font-family: var(--font-body), serif;
+    color: var(--text);
+  }
+  blockquote.field cite {
+    display: block;
+    margin-top: 8px;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-style: normal;
+    color: var(--text-emphasis);
+    font-family: var(--font-display), serif;
+  }
+
+  .day-log {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 8px 18px;
+    margin: 22px 0 18px;
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+    padding: 14px 0;
+  }
+  .day-log dt {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    padding-top: 2px;
+  }
+  .day-log dd {
+    margin: 0;
+    font-family: var(--font-body), serif;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .read-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 18px;
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--primary);
+    text-decoration: none;
+  }
+  .read-more .lotus-glyph {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* ============ SIDEBAR (Gopuram register) ============ */
+  aside.sidebar {
+    background: var(--surface);
+    border-top: 4px solid var(--secondary);
+    border-bottom: 4px solid var(--secondary);
+    position: relative;
+    padding: 28px 26px 32px;
+  }
+  aside.sidebar::before {
+    content: "";
+    position: absolute;
+    top: 4px; bottom: 4px; left: 4px; right: 4px;
+    border: 1px solid var(--accent);
+    pointer-events: none;
+  }
+  aside.sidebar h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--text-emphasis);
+    margin: 0 0 4px;
+  }
+  aside.sidebar .sub {
+    text-align: center;
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 12px;
+    color: var(--secondary);
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--accent);
+  }
+  .prakara-group {
+    margin-bottom: 18px;
+  }
+  .prakara-group h4 {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin: 12px 0 8px;
+    padding: 4px 8px;
+    background: rgba(7, 107, 136, 0.08);
+    border-left: 3px solid var(--primary);
+  }
+  .prakara-group table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-body), serif;
+    font-size: 13px;
+  }
+  .prakara-group td {
+    padding: 4px 6px;
+    border-bottom: 1px dotted rgba(7, 107, 136, 0.3);
+    vertical-align: top;
+  }
+  .prakara-group td.name { color: var(--text); }
+  .prakara-group td.ht {
+    text-align: right;
+    color: var(--text-emphasis);
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    width: 56px;
+  }
+  .prakara-group td.date {
+    text-align: right;
+    color: var(--secondary);
+    font-style: italic;
+    font-size: 11px;
+    width: 76px;
+  }
+
+  .sidebar-footer {
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid var(--accent);
+    text-align: center;
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 11px;
+    color: var(--secondary);
+  }
+
+  /* ============ FOOTER (pillared arcade) ============ */
+  footer.arcade {
+    background: var(--secondary);
+    padding: 0;
+    margin-top: 0;
+    color: var(--surface);
+  }
+  .arcade-band {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0;
+    padding: 36px 48px 24px;
+    position: relative;
+  }
+  .arch-bay {
+    position: relative;
+    height: 140px;
+    border-left: 2px solid var(--primary);
+    border-right: 2px solid var(--primary);
+    margin: 0 -1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% 0%,
+        rgba(227, 66, 52, 0.18) 0%,
+        transparent 70%);
+  }
+  .arch-bay::before {
+    /* arch top */
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 4px;
+    right: 4px;
+    height: 36px;
+    border: 2px solid var(--primary);
+    border-bottom: none;
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  }
+  /* kolam rosette */
+  .kolam {
+    width: 60px;
+    height: 60px;
+    position: relative;
+  }
+  .kolam .sq {
+    position: absolute;
+    inset: 0;
+    border: 1px solid var(--accent);
+    transform: rotate(45deg);
+  }
+  .kolam .sq.s2 { inset: 8px; border-color: var(--surface); transform: rotate(45deg); }
+  .kolam .sq.s3 { inset: 16px; border-color: var(--accent); }
+  .kolam .sq.s4 { inset: 22px; background: var(--primary); border: none; transform: rotate(45deg); }
+  .kolam .dot {
+    position: absolute;
+    width: 4px; height: 4px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+  .kolam .dot.t { top: -2px; left: 50%; transform: translateX(-50%); }
+  .kolam .dot.b { bottom: -2px; left: 50%; transform: translateX(-50%); }
+  .kolam .dot.l { left: -2px; top: 50%; transform: translateY(-50%); }
+  .kolam .dot.r { right: -2px; top: 50%; transform: translateY(-50%); }
+
+  /* central mandala bay */
+  .arch-bay.center {
+    background:
+      radial-gradient(ellipse 80% 50% at 50% 0%,
+        rgba(201, 162, 58, 0.30) 0%,
+        transparent 70%);
+  }
+  .mandala {
+    width: 92px;
+    height: 92px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    background: var(--secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 0 0 0 4px var(--secondary), 0 0 0 5px var(--primary);
+  }
+  .mandala::before {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border: 1px dashed var(--accent);
+    border-radius: 50%;
+  }
+  .mandala svg {
+    width: 50px; height: 50px;
+    position: relative;
+    z-index: 2;
+  }
+  .mandala svg path { fill: var(--accent); }
+
+  .colophon {
+    background: var(--secondary);
+    padding: 22px 48px 14px;
+    text-align: center;
+    font-family: var(--font-body), serif;
+    font-size: 12px;
+    color: var(--surface);
+    border-top: 1px solid rgba(201, 162, 58, 0.4);
+  }
+  .colophon .addr {
+    font-style: italic;
+    margin-bottom: 6px;
+    color: rgba(248, 244, 236, 0.85);
+  }
+  .colophon .name {
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.4em;
+    font-size: 13px;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+
+  /* tiny utility */
+  .smallcaps {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.92em;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ MASTHEAD ============ -->
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="om-seal" aria-hidden="true">
+      <svg viewBox="0 0 356 367" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 90.456847,353.9498 C 51.797347,340.13485 23.72672,305.75839 12.612487,258.6184 C 7.5684267,237.22321 6.1421397,201.86984 10.323594,201.86984 C 11.712834,201.86984 15.42322,211.57056 18.568972,223.427 C 25.452892,249.37152 37.19436,273.76855 48.535988,285.69407 C 67.374717,305.50242 114.0356,313.26029 140.92106,301.05394 C 161.86409,291.54544 170.35697,268.94603 161.24995,246.95931 C 154.21242,229.96943 138.24701,224.28836 108.50834,228.19197 C 108.50834,228.19197 90.282834,208.57398 84.476417,173.73548 L 103.15738,175.42939 C 125.65731,177.46962 142.64532,172.49605 151.46236,161.28728 C 159.74765,150.75419 159.5685,146.68046 150.34841,135.96157 C 137.04396,120.49428 113.15511,124.41248 64.786577,149.99522 L 40.381632,109.08518 L 50.613137,101.2812 C 76.253387,81.724339 120.77357,71.947329 146.11011,80.309169 C 169.18841,87.925649 186.12724,118.14755 181.60247,143.63298 C 178.54327,160.86286 164.72752,184.99524 154.05369,191.75339 L 144.84862,197.58162 L 157.56351,203.31522 C 179.17018,213.05833 192.36061,205.61034 208.12001,174.76849 C 229.92949,132.0869 244.0745,121.0378 276.96658,120.99051 C 292.28176,120.96847 297.73268,122.57499 308.90312,130.4031 C 336.78213,149.94016 351.9622,190.39693 348.62804,236.27272 C 344.40474,294.37435 316.88374,329.61601 275.73415,329.61601 C 253.15086,329.61601 238.59451,321.69526 227.00729,303.10156 C 216.82976,286.76927 212.24334,254.42288 218.08805,240.19369 C 220.89208,233.36732 221.39892,233.13578 221.58223,238.59686 C 221.91916,248.63689 233.34159,264.95549 243.82827,270.37835 C 269.55794,283.68369 306.49479,266.96693 321.10832,235.4032 C 332.20339,211.4394 326.25105,165.21656 311.02084,157.06552 C 307.83453,155.36024 299.96089,153.96502 293.5244,153.96502 C 279.84214,153.96502 269.09709,163.80155 254.03263,190.11774 C 248.82442,199.21613 240.05943,210.97175 234.55486,216.24128 C 225.61134,224.80312 222.41769,225.82225 204.53067,225.82225 L 184.51412,225.82225 L 190.98415,240.19369 C 200.2451,260.76437 199.80694,294.18704 190.00976,314.53347 C 181.35272,332.51252 161.33618,350.71469 145.33374,355.16013 C 129.75572,359.4876 104.38789,358.9281 90.456847,353.9498 z M 165.8338,75.923739 C 156.97908,60.814399 151.52974,32.606158 157.46546,32.606158 C 164.43775,47.732319 178.73037,61.227101 194.03409,70.643259 C 221.52091,83.949329 249.39257,78.578529 279.84247,54.108239 C 286.54595,48.721279 292.48231,44.913138 293.0345,45.645698 C 300.4697,57.184233 313.331,66.613261 317.58219,80.021449 C 317.58219,85.678729 293.22867,101.96033 274.01214,109.15007 C 226.38264,122.8706 193.96598,117.44304 165.8338,75.923739 z M 189.83603,40.997228 L 220.84514,6.6137488 L 255.30593,38.514418 C 243.51876,48.222549 235.00994,63.289118 221.54391,70.930009 C 210.90372,63.086273 195.02308,53.837816 189.83603,40.997228 z "/>
+      </svg>
+    </div>
+    <h1 class="masthead-title">
+      The Prakara Quarterly
+      <span class="small">An Editorial Review of Dravidian Sacred Architecture</span>
+    </h1>
+    <div class="masthead-meta">
+      Vol. XII · No. 3
+      <em>Aippasi · 1947</em>
+    </div>
+  </div>
+</header>
+
+<div class="double-rule"></div>
+
+<!-- ============ NAV ============ -->
+<nav class="primary" aria-label="Primary">
+  <ul>
+    <li><a href="page-1.html">Issue Cover</a></li>
+    <li aria-hidden="true" class="lotus-glyph"><svg viewBox="0 0 14 14"><circle cx="7" cy="7" r="2" fill="#c9a23a"/><circle cx="7" cy="7" r="5" fill="none" stroke="#c9a23a" stroke-width="0.8"/></svg></li>
+    <li><a href="page-2.html">Lead Essay</a></li>
+    <li aria-hidden="true" class="lotus-glyph"><svg viewBox="0 0 14 14"><circle cx="7" cy="7" r="2" fill="#c9a23a"/><circle cx="7" cy="7" r="5" fill="none" stroke="#c9a23a" stroke-width="0.8"/></svg></li>
+    <li><a href="page-3.html" aria-current="page">Field Notes</a></li>
+    <li aria-hidden="true" class="lotus-glyph"><svg viewBox="0 0 14 14"><circle cx="7" cy="7" r="2" fill="#c9a23a"/><circle cx="7" cy="7" r="5" fill="none" stroke="#c9a23a" stroke-width="0.8"/></svg></li>
+    <li><a href="page-4.html">On the Craft</a></li>
+    <li aria-hidden="true" class="lotus-glyph"><svg viewBox="0 0 14 14"><circle cx="7" cy="7" r="2" fill="#c9a23a"/><circle cx="7" cy="7" r="5" fill="none" stroke="#c9a23a" stroke-width="0.8"/></svg></li>
+    <li><a href="page-5.html">Archive</a></li>
+    <li aria-hidden="true" class="lotus-glyph"><svg viewBox="0 0 14 14"><circle cx="7" cy="7" r="2" fill="#c9a23a"/><circle cx="7" cy="7" r="5" fill="none" stroke="#c9a23a" stroke-width="0.8"/></svg></li>
+    <li><a href="page-6.html">Colophon</a></li>
+  </ul>
+</nav>
+
+<div class="double-rule"></div>
+
+<!-- ============ HERO TIER ============ -->
+<section class="hero-band">
+  <div class="twin-peacocks" aria-hidden="true">
+    <svg viewBox="0 0 313.71717 29.540759" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+      <path transform="translate(54.572101,-91.176475)" d="m -45.203647,120.20506 c -2.080683,-0.59494 -3.600099,-1.33764 -4.88273,-2.38671 -1.667517,-1.36388 -2.894118,-2.64027 -2.893812,-3.0113 1.42e-4,-0.17364 -0.209138,-0.47237 -0.46507,-0.66382 -0.819614,-0.61314 -1.16478,-1.84791 -1.123557,-4.01931 0.07527,-3.96496 0.841997,-6.28592 3.359706,-10.170217 2.091957,-3.227467 6.669369,-6.452883 10.647663,-7.502765 2.252562,-0.594453 8.248778,-0.796292 11.003264,-0.370372 6.94812,1.074354 16.152972,4.460234 20.6562963,7.598128 0.8536092,0.594796 0.7949964,0.623336 1.3291143,-0.64739 0.2251847,-0.535733 0.8814684,-1.603973 1.4584084,-2.373871 0.8561927,-1.142535 1.457933,-1.600664 3.2740672,-2.492638 2.16210793,-1.06191 4.5637653,-1.779237 6.7277099,-2.009456 0.5824052,-0.06194 1.3990594,-0.240975 1.8147895,-0.397805 0.7738562,-0.291942 6.4810504,-0.196925 10.0927814,0.168029 2.264542,0.228828 9.60899,1.67773 11.219571,2.21338 1.156599,0.384661 1.203738,0.376381 3.086684,-0.542345 2.528472,-1.2337 4.016657,-1.480542 8.446835,-1.401064 3.61374,0.06486 4.290154,0.147139 6.742793,0.820538 0.653941,0.179545 1.719761,0.375692 2.368485,0.435889 0.648729,0.0602 1.838242,0.282073 2.643363,0.493076 1.333488,0.349469 1.625289,0.339432 3.276461,-0.112735 4.298701,-1.177186 16.775093,-2.487486 20.247754,-2.126478 0.82522,0.08579 2.552867,0.408475 3.839215,0.717074 2.046471,0.490964 2.518569,0.521833 3.776859,0.246952 3.038874,-0.663879 6.75683,-1.061515 11.128253,-1.190178 4.134196,-0.121667 4.707691,-0.08259 6.380251,0.434721 1.364622,0.422078 2.105892,0.83929 2.879252,1.620559 1.29673,1.309975 1.63,2.709456 1.6237,6.818148 -0.005,2.95745 0.2393,4.45137 0.62566,3.83325 0.10807,-0.17288 0.17855,-1.23469 0.15662,-2.35957 -0.10151,-5.20664 0.0689,-6.026385 1.66799,-8.024476 0.85063,-1.062863 2.64553,-2.128587 4.10167,-2.435363 2.81819,-0.59374 15.88977,0.302112 18.8453,1.291541 0.69822,0.23375 1.33752,0.188118 3.17619,-0.226686 4.44974,-1.003866 5.16179,-1.08168 9.66723,-1.056509 4.01601,0.0224 5.00432,0.121426 8.5084,0.852608 6.84995,1.42927 7.19777,1.434197 12.43469,0.175947 1.28482,-0.308696 3.07339,-0.450501 5.82325,-0.46168 3.55974,-0.01452 4.14585,0.04906 5.68548,0.615953 0.94414,0.347651 2.11528,0.863208 2.60253,1.145677 0.82461,0.478046 0.98936,0.487693 2.38057,0.139336 1.77908,-0.445477 5.29646,-1.019874 9.8354,-1.606151 3.88998,-0.502463 11.70287,-0.5191 15.08161,-0.03212 5.86054,0.844676 9.86323,3.110261 10.57122,5.983455 l 0.28701,1.164733 3.35851,-1.630478 c 3.17793,-1.542804 8.22537,-3.484656 11.44251,-4.402193 4.71613,-1.345036 12.68145,-1.710913 16.9375,-0.778008 4.93058,1.080764 10.02057,5.551052 11.64065,10.223444 0.65092,1.87732 1.01878,5.06928 0.79472,6.89574 -0.46904,3.82309 -3.07509,7.60889 -6.48471,9.42031 -0.51071,0.27132 -1.10781,0.62201 -1.32689,0.7793 -1.28176,0.92026 -3.99222,1.08281 -9.3957,0.5635 -4.226,-0.40615 -43.09412,-0.56404 -48.28608,-0.19612 -3.36622,0.23852 -9.71584,0.13599 -14.17646,-0.22893 -3.19042,-0.261 -11.4116,-2.46478 -14.96419,-4.01131 -0.53984,-0.23501 -1.10442,-0.42792 -1.25461,-0.42868 -0.43847,-0.002 -0.31926,0.66639 0.24899,1.3964 0.63886,0.82072 0.66215,1.46506 0.0825,2.28367 -0.41639,0.5881 -0.53812,0.60929 -2.4496,0.42635 -1.10627,-0.10587 -3.2008,-0.44095 -4.65448,-0.74463 -1.45369,-0.30368 -4.09201,-0.62284 -5.86295,-0.70924 -3.45491,-0.16856 -4.65649,0.0199 -8.93437,1.40162 -2.04956,0.66196 -2.15841,0.6695 -4.80352,0.33258 -1.68376,-0.21447 -5.04124,-0.32578 -8.88522,-0.29456 -6.04658,0.0491 -6.20383,0.0368 -7.34956,-0.57531 -1.32088,-0.70568 -2.86287,-0.66893 -5.04444,0.12022 -0.88229,0.31916 -2.15717,0.43295 -4.89707,0.43713 -4.79736,0.007 -5.58286,-0.16276 -6.13105,-1.32752 l -0.42264,-0.89802 -1.08755,0.85944 c -1.8674,1.47572 -2.94146,1.82323 -5.59703,1.81093 -1.313341,-0.006 -3.557388,-0.23736 -4.986775,-0.51393 -2.027573,-0.39234 -2.694777,-0.43476 -3.0351,-0.19299 -1.426504,1.01339 -5.2004,1.21652 -9.369876,0.50433 -2.342079,-0.40006 -4.350291,-0.35925 -10.118619,0.20564 -2.370926,0.23218 -2.390138,0.22923 -3.965706,-0.60953 l -1.583238,-0.84286 -4.76258,0.004 c -3.320233,0.003 -5.333694,0.12924 -6.648373,0.41833 -2.953758,0.64954 -5.182097,0.79482 -6.349714,0.41398 -1.394469,-0.45482 -2.213474,-1.26097 -2.208834,-2.17419 0.0021,-0.41118 -0.106632,-0.74818 -0.241605,-0.74887 -0.13497,-6.8e-4 -1.238115,0.35414 -2.451433,0.7885 -7.896638,2.82691 -18.009765,3.78342 -31.365341,2.96657 -7.1026623,-0.43441 -10.2556485,-0.47172 -22.841675,-0.27026 -5.166476,0.0827 -13.263451,0.2047 -17.993277,0.27111 -4.729825,0.0664 -9.671447,0.15763 -10.98138,0.20269 -1.516176,0.0522 -2.861762,-0.0553 -3.702712,-0.29577 z"/>
+    </svg>
+  </div>
+
+  <div class="hero-tier">
+    <div class="kicker">Field Report · Six Days at Tiruvarangam</div>
+    <h1 class="hero-title">The Outer Prakaras of Srirangam</h1>
+    <p class="hero-dek">A walk through the seven concentric enclosures of the Ranganatha temple during Panguni Uttiram — taking the measure of an unfinished Rajagopuram, the rearing yalis of the Sesharaya Mandapa, and a kolam refreshed before each dawn.</p>
+    <div class="gold-rule"></div>
+    <p class="byline"><strong>By Sarojini Krishnaswamy</strong> &nbsp;·&nbsp; <em>Visiting Correspondent, Tiruchirappalli District &nbsp;·&nbsp; Phalguna–Chaitra, Saka 1869</em></p>
+  </div>
+</section>
+
+<div class="double-rule"></div>
+
+<!-- ============ MAIN CONTENT TIER ============ -->
+<section class="content-tier">
+  <div class="content-grid">
+
+    <!-- ARTICLE PANEL -->
+    <article class="pillared-panel">
+      <span class="pillar-cap tl"></span>
+      <span class="pillar-cap tr"></span>
+      <span class="pillar-cap bl"></span>
+      <span class="pillar-cap br"></span>
+
+      <div class="panel-inner">
+        <p class="dek">From the bullock-cart road north of the Kollidam, the great horizontal city of Tiruvarangam announces itself first as a sequence of pale walls receding into haze, and only afterward as gopurams. One counts seven enclosures, twenty-one towers, and — the bus driver insists, gravely — a single uncompleted ambition four centuries old.</p>
+
+        <p class="drop">I arrived at Srirangam on the second day of Panguni, with letters of introduction from the editor of this Quarterly addressed to Sri R. Doraiswami Iyengar, the senior <span class="smallcaps">archaka</span> of the Sesharaya shrine. The festival of Panguni Uttiram was four days off; the streets within the fourth prakara were already being washed at dusk by a relay of boys with copper pots, and the painted lines of the kolams at every threshold were thicker than usual, as though the women of the household meant the design to last till dawn even if no one were to walk the lane.</p>
+
+        <p>The temple is famously laid out in seven concentric rectangles, the outermost almost a mile across, the innermost no larger than a courtyard. To enter is to pass, in turn, through walls and bazaars, walls and houses, walls and pillared corridors, walls and a hall of jewellers, until at last the granite plinth of the Ranganatha vimana lifts itself up under its gilded roof. There are twenty-one gopurams in all, of which one — the Rajagopuram in the southern wall of the seventh prakara — has only this past decade come to its consecrated height of two hundred and thirty-six feet, the work of the present <span class="smallcaps">jeeyar</span> after four hundred years of arrest.</p>
+
+        <h2>I. The Unfinished Tower, or What Was Finished in 1987</h2>
+
+        <p>The Rajagopuram, when I last passed beneath it in 1934, was a brick stump some seventy-two feet high, faced raggedly with stone at the base and capped with grass. Old guidebooks of the South Indian Railway used the photograph as a picturesque ruin. The brickwork dated, by the inscription on the southern jamb, from the reign of Achyuta Deva Raya of Vijayanagara (c. 1539); the stoppage was attributed locally to the sack of Hampi nineteen years later, after which neither funds nor sanction ever returned to the project.</p>
+
+        <p>It is now — though the painted plaster is still drying — the tallest temple gopuram in South India. The <span class="smallcaps">sthapatis</span> of the Ahobila Mutt have raised eleven new tiers above the Vijayanagara stump, faithful in proportion to the original four, and have populated the niches with some four thousand stucco figures. I climbed, by permission, to the level of the sixth tier. From that height the seven prakaras are a single map: one sees plainly that the eastern half of the outermost wall is residential, with its own bazaars and streets named for chariots, while the western half is dense with mandapas. The roof of the Ranganatha shrine, gold-leafed and shaped like a recumbent <span class="smallcaps">vimana</span>, sits low at the centre as if the towers had agreed in advance to defer to it.</p>
+
+        <blockquote class="field">
+          The mason Ramanujan, who has worked here twenty-eight years, told me: "The old courses are different stone — harder, darker. We have matched the carving but not the colour. In a hundred years the rains will agree." He had no quarrel with the joining; he was only describing it.
+          <cite>— Field interview, third day, beneath the southern stair</cite>
+        </blockquote>
+
+        <h2>II. The Sesharaya Mandapa & Its Reared Yalis</h2>
+
+        <p>Of the seventeenth-century mandapas Srirangam holds in such number, the Sesharaya — sometimes called the Hall of a Thousand Pillars, though the actual count is nine hundred and forty — is the most formidable. It stands in the fourth prakara, north-east of the Ranganatha shrine, and was endowed by the Nayaka governors of Madurai in the years between 1635 and 1652. Its capitals are not the calm padma-cushions of the Chola era but the rearing <span class="smallcaps">yali</span>: a leonine-equine composite, jaws agape, forelegs lifted clear of the shaft, with armed warriors astride or beneath.</p>
+
+        <p>What is striking, on close reading, is that no two yalis are identical. Of the eighty-eight in the central nave, I counted eleven distinct postures. Some carry a deer in the jaws; some swallow an elephant whole, the trunk and tail emerging from opposite sides of the maw. The heaviest blocks — three of them weigh upwards of nine tons each — are dressed from a single piece of granite, the rider and beast and base extending continuously down to the kumbha-base as though grown rather than carved.</p>
+
+        <p>Sri Doraiswami Iyengar walked me along the western colonnade after the noon offering. The light at that hour is not generous; it falls in narrow stripes between the piers, and the yalis are mostly shadow. He pointed out a peculiarity I had not seen in earlier visits: along the lower register of three pillars in the southern bay, the chisel-marks of the Madurai workshop have been overwritten in the eighteenth century by a smaller, finer hand — apparently a restoration after the French occupation of 1751. The newer carving is half a finger shallower than the older, and the mason has signed his work with a small lotus glyph at the base.</p>
+
+        <h2>III. The Kolam at the Vellai Gopuram</h2>
+
+        <p>Each morning at four, before the temple opens for the <span class="smallcaps">viswarupa</span> darshan, an old woman named Kamalathammal Pillai — she gives her age as seventy-three — sweeps the threshold of the Vellai Gopuram, the white tower in the third prakara, and lays out a fresh kolam in rice-flour. She has done this, by her own account, since 1899, the year of her marriage. Her mother-in-law did it before her, and her mother-in-law's mother before that.</p>
+
+        <p>The design is not arbitrary. It is a thirty-six-dot kolam in the <span class="smallcaps">pulli</span> tradition, a single unbroken line that loops around all the dots and returns to its start without crossing itself. Drawn correctly, it takes about eleven minutes; drawn perfectly, perhaps fourteen. It is erased by feet within the hour. I asked her why she does not, as some now do, use a paste that would last two days.</p>
+
+        <blockquote class="field">
+          "If it lasts two days, who will draw the second day's? My granddaughter must learn. The line is not for the gopuram. The gopuram is two hundred years older than my house. The line is for tomorrow morning."
+          <cite>— Smt. K. Pillai, fifth day, before sunrise</cite>
+        </blockquote>
+
+        <h2>IV. A Working Log of the Six Days</h2>
+
+        <dl class="day-log">
+          <dt>Day I — Phalguna 26</dt>
+          <dd>Arrival from Tiruchirappalli by 5 p.m. bus. Lodging at the Vaishnava Choultry, Mada Veedhi north. Walked the seventh prakara at dusk; counted four functioning bazaars and one defunct (the salt market, closed 1942).</dd>
+
+          <dt>Day II — Phalguna 27</dt>
+          <dd>Climb of the Rajagopuram by introduction. Photographed (with Mr. V. Subramaniam, six plates, half-plate camera) the southern face from the third tier. Notes on stucco palette: ochre, vermilion, peacock-blue, white. Gilding limited to the kalasa-finials.</dd>
+
+          <dt>Day III — Phalguna 28</dt>
+          <dd>Sesharaya Mandapa, full survey of the central nave. Identified eleven yali postures. Inscriptions partially legible on three plinths; copies taken in pencil rubbing. Lunch with Sri Doraiswami Iyengar.</dd>
+
+          <dt>Day IV — Phalguna 29</dt>
+          <dd>Vellai Gopuram and Akhilandeswari shrine. Interview with Smt. K. Pillai, 4:20 a.m. Pradakshina of the fourth prakara, noting twenty-three subsidiary shrines.</dd>
+
+          <dt>Day V — Phalguna 30</dt>
+          <dd>Panguni Uttiram festival. Garuda Sevai procession through the third prakara, attended by an estimated forty thousand devotees. Photography forbidden after 6 a.m. inside the second prakara.</dd>
+
+          <dt>Day VI — Chaitra 1</dt>
+          <dd>Closing inspections of the unfinished northern Karpaga Vinayaka gopuram (only the basement and one tier extant; brick, undated, abandoned). Departure by the 4:15 p.m. mail to Madras.</dd>
+        </dl>
+
+        <h2>V. A Note on What Is Living</h2>
+
+        <p>One leaves Srirangam suspecting that the seven prakaras are less an architectural diagram than a calendar. The outer rings are the noisy present, where buses arrive and rice is sold and the salt market is or is not still open. The inner rings are deeper time: the seventeenth-century yalis, the twelfth-century shrines, the granite plinth of the central vimana whose lowest courses precede record. Between these two — between the present and the deep — runs the daily, ephemeral work: the kolam at the threshold, the camphor lit before the deity, the line of rice-flour drawn each dawn, walked over by noon, drawn again. It is this middle register, and not the towers, that holds the place together.</p>
+
+        <p>To photograph the gopurams, one needs only a camera. To photograph the kolam one would need to come back at four every morning for fifty years, and one would still have less than half of the work.</p>
+
+        <a href="page-4.html" class="read-more">
+          <span>Continue · Sthapatis of the Mamallapuram School</span>
+          <span class="lotus-glyph" aria-hidden="true">
+            <svg viewBox="0 0 14 14"><circle cx="7" cy="7" r="2.2" fill="#e34234"/><circle cx="7" cy="7" r="5" fill="none" stroke="#e34234" stroke-width="1"/></svg>
+          </span>
+        </a>
+      </div>
+    </article>
+
+    <!-- SIDEBAR: GOPURAM REGISTER -->
+    <aside class="sidebar">
+      <h3>The Twenty-One Gopurams</h3>
+      <p class="sub">A register by prakara · heights in feet · approx. dates of consecration</p>
+
+      <div class="prakara-group">
+        <h4>VII · Outer Prakara (Tiruvikraman)</h4>
+        <table>
+          <tr><td class="name">Rajagopuram (S)</td><td class="ht">236′</td><td class="date">1539 / 1987</td></tr>
+          <tr><td class="name">Karpaga Vinayaka (N)</td><td class="ht">42′</td><td class="date">unfinished</td></tr>
+          <tr><td class="name">Tiruvikraman (E)</td><td class="ht">118′</td><td class="date">c. 1564</td></tr>
+          <tr><td class="name">Aryabhattal (W)</td><td class="ht">96′</td><td class="date">c. 1588</td></tr>
+        </table>
+      </div>
+
+      <div class="prakara-group">
+        <h4>VI · Chitra Veedhi</h4>
+        <table>
+          <tr><td class="name">Anjaneya Gopuram (S)</td><td class="ht">152′</td><td class="date">c. 1605</td></tr>
+          <tr><td class="name">Aryabhattal (N)</td><td class="ht">144′</td><td class="date">c. 1612</td></tr>
+          <tr><td class="name">Tiruvanaikkaval (E)</td><td class="ht">131′</td><td class="date">c. 1597</td></tr>
+        </table>
+      </div>
+
+      <div class="prakara-group">
+        <h4>V · Uttara Veedhi</h4>
+        <table>
+          <tr><td class="name">Vellai Gopuram (S)</td><td class="ht">104′</td><td class="date">c. 1493</td></tr>
+          <tr><td class="name">Kambattadi (N)</td><td class="ht">88′</td><td class="date">c. 1511</td></tr>
+          <tr><td class="name">Tirumangai (E)</td><td class="ht">96′</td><td class="date">c. 1522</td></tr>
+        </table>
+      </div>
+
+      <div class="prakara-group">
+        <h4>IV · Aalwar Veedhi</h4>
+        <table>
+          <tr><td class="name">Nazhikettan (S)</td><td class="ht">77′</td><td class="date">c. 1416</td></tr>
+          <tr><td class="name">Kulasekara (N)</td><td class="ht">82′</td><td class="date">c. 1432</td></tr>
+          <tr><td class="name">Sundarapandyan (E)</td><td class="ht">71′</td><td class="date">c. 1268</td></tr>
+        </table>
+      </div>
+
+      <div class="prakara-group">
+        <h4>III · Akalanka Veedhi</h4>
+        <table>
+          <tr><td class="name">Tirumamani (S)</td><td class="ht">58′</td><td class="date">c. 1335</td></tr>
+          <tr><td class="name">Periya Tirumandapam (N)</td><td class="ht">54′</td><td class="date">c. 1351</td></tr>
+          <tr><td class="name">Garuda Mandapam (E)</td><td class="ht">62′</td><td class="date">c. 1346</td></tr>
+        </table>
+      </div>
+
+      <div class="prakara-group">
+        <h4>II · Rajamahendran</h4>
+        <table>
+          <tr><td class="name">Aryabhattal Inner (S)</td><td class="ht">44′</td><td class="date">c. 1145</td></tr>
+          <tr><td class="name">Dhanvantari (N)</td><td class="ht">41′</td><td class="date">c. 1167</td></tr>
+        </table>
+      </div>
+
+      <div class="prakara-group">
+        <h4>I · Inner / Sanctum</h4>
+        <table>
+          <tr><td class="name">Nadu Tirukkavanam (E)</td><td class="ht">38′</td><td class="date">c. 1031</td></tr>
+          <tr><td class="name">Tirumanjana (W)</td><td class="ht">36′</td><td class="date">c. 1038</td></tr>
+        </table>
+      </div>
+
+      <p class="sidebar-footer">Heights compiled after the field measurements of T. Subbaraya Sastri (1923) and the Madras Archaeological Survey, 1941.</p>
+    </aside>
+
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<div class="double-rule"></div>
+
+<footer class="arcade">
+  <div class="arcade-band" aria-hidden="true">
+    <div class="arch-bay">
+      <div class="kolam"><span class="dot t"></span><span class="dot b"></span><span class="dot l"></span><span class="dot r"></span><span class="sq"></span><span class="sq s2"></span><span class="sq s3"></span><span class="sq s4"></span></div>
+    </div>
+    <div class="arch-bay">
+      <div class="kolam"><span class="dot t"></span><span class="dot b"></span><span class="dot l"></span><span class="dot r"></span><span class="sq"></span><span class="sq s2"></span><span class="sq s3"></span><span class="sq s4"></span></div>
+    </div>
+    <div class="arch-bay">
+      <div class="kolam"><span class="dot t"></span><span class="dot b"></span><span class="dot l"></span><span class="dot r"></span><span class="sq"></span><span class="sq s2"></span><span class="sq s3"></span><span class="sq s4"></span></div>
+    </div>
+    <div class="arch-bay center">
+      <div class="mandala">
+        <svg viewBox="0 0 356 367" xmlns="http://www.w3.org/2000/svg">
+          <path d="M 90.456847,353.9498 C 51.797347,340.13485 23.72672,305.75839 12.612487,258.6184 C 7.5684267,237.22321 6.1421397,201.86984 10.323594,201.86984 C 11.712834,201.86984 15.42322,211.57056 18.568972,223.427 C 25.452892,249.37152 37.19436,273.76855 48.535988,285.69407 C 67.374717,305.50242 114.0356,313.26029 140.92106,301.05394 C 161.86409,291.54544 170.35697,268.94603 161.24995,246.95931 C 154.21242,229.96943 138.24701,224.28836 108.50834,228.19197 C 108.50834,228.19197 90.282834,208.57398 84.476417,173.73548 L 103.15738,175.42939 C 125.65731,177.46962 142.64532,172.49605 151.46236,161.28728 C 159.74765,150.75419 159.5685,146.68046 150.34841,135.96157 C 137.04396,120.49428 113.15511,124.41248 64.786577,149.99522 L 40.381632,109.08518 L 50.613137,101.2812 C 76.253387,81.724339 120.77357,71.947329 146.11011,80.309169 C 169.18841,87.925649 186.12724,118.14755 181.60247,143.63298 C 178.54327,160.86286 164.72752,184.99524 154.05369,191.75339 L 144.84862,197.58162 L 157.56351,203.31522 C 179.17018,213.05833 192.36061,205.61034 208.12001,174.76849 C 229.92949,132.0869 244.0745,121.0378 276.96658,120.99051 C 292.28176,120.96847 297.73268,122.57499 308.90312,130.4031 C 336.78213,149.94016 351.9622,190.39693 348.62804,236.27272 C 344.40474,294.37435 316.88374,329.61601 275.73415,329.61601 C 253.15086,329.61601 238.59451,321.69526 227.00729,303.10156 C 216.82976,286.76927 212.24334,254.42288 218.08805,240.19369 C 220.89208,233.36732 221.39892,233.13578 221.58223,238.59686 C 221.91916,248.63689 233.34159,264.95549 243.82827,270.37835 C 269.55794,283.68369 306.49479,266.96693 321.10832,235.4032 C 332.20339,211.4394 326.25105,165.21656 311.02084,157.06552 C 307.83453,155.36024 299.96089,153.96502 293.5244,153.96502 C 279.84214,153.96502 269.09709,163.80155 254.03263,190.11774 C 248.82442,199.21613 240.05943,210.97175 234.55486,216.24128 C 225.61134,224.80312 222.41769,225.82225 204.53067,225.82225 L 184.51412,225.82225 L 190.98415,240.19369 C 200.2451,260.76437 199.80694,294.18704 190.00976,314.53347 C 181.35272,332.51252 161.33618,350.71469 145.33374,355.16013 C 129.75572,359.4876 104.38789,358.9281 90.456847,353.9498 z M 165.8338,75.923739 C 156.97908,60.814399 151.52974,32.606158 157.46546,32.606158 C 164.43775,47.732319 178.73037,61.227101 194.03409,70.643259 C 221.52091,83.949329 249.39257,78.578529 279.84247,54.108239 C 286.54595,48.721279 292.48231,44.913138 293.0345,45.645698 C 300.4697,57.184233 313.331,66.613261 317.58219,80.021449 C 317.58219,85.678729 293.22867,101.96033 274.01214,109.15007 C 226.38264,122.8706 193.96598,117.44304 165.8338,75.923739 z M 189.83603,40.997228 L 220.84514,6.6137488 L 255.30593,38.514418 C 243.51876,48.222549 235.00994,63.289118 221.54391,70.930009 C 210.90372,63.086273 195.02308,53.837816 189.83603,40.997228 z "/>
+        </svg>
+      </div>
+    </div>
+    <div class="arch-bay">
+      <div class="kolam"><span class="dot t"></span><span class="dot b"></span><span class="dot l"></span><span class="dot r"></span><span class="sq"></span><span class="sq s2"></span><span class="sq s3"></span><span class="sq s4"></span></div>
+    </div>
+    <div class="arch-bay">
+      <div class="kolam"><span class="dot t"></span><span class="dot b"></span><span class="dot l"></span><span class="dot r"></span><span class="sq"></span><span class="sq s2"></span><span class="sq s3"></span><span class="sq s4"></span></div>
+    </div>
+    <div class="arch-bay">
+      <div class="kolam"><span class="dot t"></span><span class="dot b"></span><span class="dot l"></span><span class="dot r"></span><span class="sq"></span><span class="sq s2"></span><span class="sq s3"></span><span class="sq s4"></span></div>
+    </div>
+  </div>
+
+  <div class="colophon">
+    <div class="addr">Editorial offices · No. 47, Mada Veedhi · Mylapore · Madras 600004 · Telephone Mylapore 4127</div>
+    <div class="name">The Prakara Quarterly</div>
+    <div style="font-size:11px; color:rgba(248,244,236,0.7); letter-spacing:0.12em; margin-top:6px;">Published quarterly · Aippasi, Thai, Panguni, Aadi · Annual subscription Rs. 12 inland</div>
+  </div>
+  <div class="double-rule"></div>
+</footer>
+
+</body>
+</html>

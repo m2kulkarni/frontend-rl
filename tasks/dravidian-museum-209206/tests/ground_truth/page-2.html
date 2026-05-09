@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Permanent Collection — Gallery Catalogue | The Tanjavur Museum of Sacred Stone</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  /* ============ BASE ============ */
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    font-size: 17px;
+    line-height: 1.65;
+  }
+  a { color: var(--secondary); text-decoration: none; }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display), serif;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    margin: 0;
+  }
+
+  /* ============ MASTHEAD / GOPURAM SILHOUETTE ============ */
+  .masthead {
+    background: var(--surface);
+    border-top: 8px solid var(--primary);
+    border-bottom: 1px solid var(--accent);
+    padding: 0;
+    position: relative;
+  }
+  .gopuram {
+    width: 100%;
+    height: 132px;
+    display: block;
+    background:
+      linear-gradient(180deg, var(--surface) 0%, var(--surface) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  /* Tiered gopuram silhouette via stacked elements */
+  .gopuram::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 320px solid transparent;
+    border-right: 320px solid transparent;
+    border-bottom: 132px solid var(--primary);
+    opacity: 0.92;
+  }
+  .gopuram::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 540px;
+    height: 16px;
+    background: var(--accent);
+    box-shadow:
+      0 -28px 0 -2px var(--secondary),
+      0 -56px 0 -8px var(--accent),
+      0 -84px 0 -14px var(--text-emphasis),
+      0 -110px 0 -22px var(--accent);
+  }
+  .gopuram-finial {
+    position: absolute;
+    left: 50%;
+    top: 4px;
+    transform: translateX(-50%);
+    width: 14px;
+    height: 14px;
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow:
+      0 -10px 0 -3px var(--accent),
+      0 8px 0 2px var(--primary);
+    z-index: 4;
+  }
+  .institution {
+    text-align: center;
+    padding: 18px 20px 6px;
+    background: var(--surface);
+  }
+  .institution .small {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.42em;
+    color: var(--secondary);
+    text-transform: uppercase;
+  }
+  .institution h1 {
+    font-size: 30px;
+    letter-spacing: 0.22em;
+    color: var(--text-emphasis);
+    margin: 6px 0 4px;
+  }
+  .institution .tagline {
+    font-style: italic;
+    font-size: 14px;
+    color: var(--text);
+    letter-spacing: 0.04em;
+  }
+
+  .twin-peacock-band {
+    display: block;
+    margin: 8px auto 0;
+    width: 80%;
+    height: 28px;
+    opacity: 0.85;
+  }
+
+  /* ============ NAV / PILLARED ARCADE ============ */
+  nav.arcade {
+    background: var(--surface);
+    border-top: 2px solid var(--primary);
+    border-bottom: 2px solid var(--primary);
+    padding: 0;
+    position: relative;
+  }
+  nav.arcade::before, nav.arcade::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    height: 4px;
+    background: repeating-linear-gradient(90deg,
+      var(--accent) 0 14px,
+      var(--text-emphasis) 14px 16px,
+      var(--accent) 16px 30px,
+      var(--secondary) 30px 32px);
+  }
+  nav.arcade::before { top: -6px; }
+  nav.arcade::after { bottom: -6px; }
+  nav.arcade ul {
+    list-style: none;
+    margin: 0;
+    padding: 14px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0;
+  }
+  nav.arcade li {
+    display: flex;
+    align-items: center;
+  }
+  nav.arcade a {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--text);
+    padding: 6px 18px;
+    position: relative;
+    display: inline-block;
+  }
+  nav.arcade a[aria-current="page"] {
+    color: var(--text-emphasis);
+    background: rgba(139, 21, 56, 0.08);
+    border-bottom: 3px solid var(--accent);
+  }
+  nav.arcade a:hover {
+    color: var(--primary);
+  }
+  nav.arcade .lotus-bud {
+    color: var(--primary);
+    font-size: 10px;
+    user-select: none;
+  }
+
+  /* ============ PAGE TITLE BAND ============ */
+  .title-band {
+    background: linear-gradient(180deg, var(--bg) 0%, #b48a5a 100%);
+    padding: 36px 20px 28px;
+    text-align: center;
+    border-bottom: 6px double var(--accent);
+    position: relative;
+  }
+  .title-band h2 {
+    font-size: 38px;
+    letter-spacing: 0.32em;
+    color: var(--surface);
+    text-shadow: 2px 2px 0 var(--text-emphasis), 4px 4px 0 rgba(0,0,0,0.15);
+  }
+  .title-band .sub {
+    font-family: var(--font-display), serif;
+    color: var(--accent);
+    font-size: 12px;
+    letter-spacing: 0.42em;
+    margin-top: 10px;
+    text-transform: uppercase;
+  }
+  .title-band .ornament-row {
+    margin-top: 14px;
+    color: var(--surface);
+    letter-spacing: 0.6em;
+    font-size: 14px;
+  }
+
+  /* ============ CONTAINER ============ */
+  main {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+    background: var(--bg);
+  }
+
+  /* ============ DIVIDER ============ */
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 36px 0 24px;
+    gap: 18px;
+  }
+  .divider .rule {
+    flex: 1;
+    height: 0;
+    border-top: 2px solid var(--text-emphasis);
+    box-shadow: 0 4px 0 -1px var(--accent);
+  }
+  .divider .seal {
+    width: 56px;
+    height: 56px;
+    flex: 0 0 auto;
+  }
+  .divider .seal svg { width: 100%; height: 100%; }
+
+  /* ============ NOTICE ============ */
+  .standing-notice {
+    margin: 24px auto 8px;
+    background: var(--surface);
+    border: 2px solid var(--text-emphasis);
+    border-left: 10px solid var(--primary);
+    border-right: 10px solid var(--primary);
+    padding: 16px 24px;
+    text-align: center;
+    position: relative;
+  }
+  .standing-notice .label {
+    font-family: var(--font-display), serif;
+    color: var(--text-emphasis);
+    letter-spacing: 0.36em;
+    font-size: 11px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 6px;
+  }
+  .standing-notice p {
+    margin: 0;
+    font-size: 15px;
+    font-style: italic;
+  }
+
+  /* ============ DYNASTY REGISTERS ============ */
+  .register {
+    margin: 40px 0;
+    padding: 0;
+  }
+  .register-header {
+    text-align: center;
+    background: var(--text-emphasis);
+    color: var(--surface);
+    padding: 14px 20px;
+    border-top: 4px solid var(--accent);
+    border-bottom: 4px solid var(--accent);
+    position: relative;
+  }
+  .register-header h3 {
+    color: var(--surface);
+    font-size: 22px;
+    letter-spacing: 0.36em;
+  }
+  .register-header .period {
+    font-family: var(--font-display), serif;
+    color: var(--accent);
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    margin-top: 6px;
+    display: block;
+  }
+  .register-header::before, .register-header::after {
+    content: "❋";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--accent);
+    font-size: 16px;
+  }
+  .register-header::before { left: 24px; }
+  .register-header::after { right: 24px; }
+
+  /* ============ CARD GRID ============ */
+  .catalogue-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+    margin-top: 28px;
+    padding: 0 8px;
+  }
+  .catalogue-grid.three { grid-template-columns: repeat(3, 1fr); }
+
+  /* ============ EXHIBIT CARD WITH PILLAR PAIR ============ */
+  .card {
+    position: relative;
+    background: var(--surface);
+    padding: 22px 44px 0 44px;
+    margin: 0 8px;
+    box-shadow: 0 2px 0 var(--accent), 0 4px 0 var(--text-emphasis);
+  }
+  /* Pillars */
+  .card::before, .card::after {
+    content: "";
+    position: absolute;
+    top: -8px;
+    bottom: -8px;
+    width: 28px;
+    background:
+      linear-gradient(180deg,
+        var(--accent) 0 8px,
+        var(--text-emphasis) 8px 14px,
+        var(--accent) 14px 18px,
+        var(--surface) 18px 26px,
+        var(--secondary) 26px 30px,
+        var(--surface) 30px calc(100% - 30px),
+        var(--secondary) calc(100% - 30px) calc(100% - 26px),
+        var(--surface) calc(100% - 26px) calc(100% - 18px),
+        var(--accent) calc(100% - 18px) calc(100% - 14px),
+        var(--text-emphasis) calc(100% - 14px) calc(100% - 8px),
+        var(--accent) calc(100% - 8px) 100%);
+    border: 1px solid var(--text-emphasis);
+  }
+  .card::before { left: 4px; }
+  .card::after { right: 4px; }
+  /* Inner shaft pattern */
+  .card .shaft-l, .card .shaft-r {
+    position: absolute;
+    top: 30px;
+    bottom: 30px;
+    width: 18px;
+    background:
+      repeating-linear-gradient(0deg,
+        transparent 0 14px,
+        var(--accent) 14px 15px);
+    border-left: 2px solid var(--text-emphasis);
+    border-right: 2px solid var(--text-emphasis);
+    z-index: 1;
+  }
+  .card .shaft-l { left: 9px; }
+  .card .shaft-r { right: 9px; }
+
+  .card-inner {
+    position: relative;
+    z-index: 2;
+    padding-bottom: 16px;
+  }
+  .card h4 {
+    font-size: 17px;
+    letter-spacing: 0.16em;
+    color: var(--text-emphasis);
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .card .double-rule {
+    border: 0;
+    height: 6px;
+    margin: 8px 0 14px;
+    background:
+      linear-gradient(180deg,
+        var(--primary) 0 2px,
+        transparent 2px 4px,
+        var(--accent) 4px 6px);
+  }
+  .card .accession {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--secondary);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .card .lotus-rosette {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+  .card .dimensions {
+    font-size: 13px;
+    font-style: italic;
+    color: #555;
+    margin-bottom: 6px;
+  }
+  .card .donor {
+    font-size: 13px;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+  .card .donor strong {
+    font-family: var(--font-display), serif;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    display: block;
+  }
+  .card .note {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--text);
+    margin-bottom: 14px;
+  }
+  .card .caption {
+    background: var(--secondary);
+    color: var(--surface);
+    margin: 0 -44px -16px;
+    padding: 10px 44px;
+    font-family: var(--font-display), serif;
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    text-align: center;
+    border-top: 3px solid var(--accent);
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ============ FOOTER ============ */
+  footer {
+    margin-top: 60px;
+    background: var(--secondary);
+    color: var(--surface);
+    position: relative;
+  }
+  .footer-arcade {
+    background: var(--secondary);
+    padding: 40px 24px 24px;
+    border-top: 6px solid var(--accent);
+    position: relative;
+  }
+  .footer-arcade::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0; right: 0;
+    height: 14px;
+    background: repeating-linear-gradient(90deg,
+      var(--accent) 0 24px,
+      var(--text-emphasis) 24px 28px,
+      var(--accent) 28px 52px,
+      var(--surface) 52px 54px);
+  }
+  .footer-arcade .pillars {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 16px;
+  }
+  .footer-pillar {
+    width: 40px;
+    height: 80px;
+    background:
+      linear-gradient(180deg,
+        var(--accent) 0 10px,
+        var(--surface) 10px 14px,
+        var(--accent) 14px 20px,
+        var(--secondary) 20px calc(100% - 20px),
+        var(--accent) calc(100% - 20px) calc(100% - 14px),
+        var(--surface) calc(100% - 14px) calc(100% - 10px),
+        var(--accent) calc(100% - 10px) 100%);
+    border: 1px solid var(--accent);
+  }
+  .seal-mandala {
+    width: 110px;
+    height: 110px;
+    background: var(--surface);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 4px double var(--accent);
+    box-shadow: 0 0 0 6px var(--secondary), 0 0 0 8px var(--accent);
+  }
+  .seal-mandala svg { width: 70%; height: 70%; }
+
+  .colophon {
+    background: var(--surface);
+    color: var(--text);
+    padding: 22px 32px 14px;
+    text-align: center;
+    border-top: 4px solid var(--accent);
+  }
+  .colophon .row {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 12px;
+  }
+  .colophon .col {
+    flex: 1;
+    min-width: 220px;
+  }
+  .colophon h5 {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    margin-bottom: 6px;
+  }
+  .colophon p {
+    margin: 2px 0;
+    font-size: 13px;
+    font-variant: small-caps;
+    letter-spacing: 0.04em;
+  }
+  .tailpiece {
+    text-align: center;
+    color: var(--primary);
+    font-size: 22px;
+    letter-spacing: 0.6em;
+    padding: 8px 0 14px;
+    background: var(--surface);
+    border-top: 1px solid var(--accent);
+  }
+
+  /* ============ INTRO PROSE ============ */
+  .intro {
+    max-width: 880px;
+    margin: 28px auto 0;
+    text-align: center;
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--text);
+    padding: 0 20px;
+  }
+  .intro::first-letter {
+    font-family: var(--font-display), serif;
+    font-size: 56px;
+    float: left;
+    line-height: 0.9;
+    color: var(--text-emphasis);
+    padding: 6px 10px 0 0;
+  }
+
+  .lotus-petal-frame {
+    border: 1px solid var(--accent);
+    padding: 18px;
+    background: rgba(248, 244, 236, 0.55);
+    position: relative;
+    margin: 16px 0;
+  }
+  .lotus-petal-frame::before,
+  .lotus-petal-frame::after {
+    content: "";
+    position: absolute;
+    width: 24px; height: 24px;
+    background: radial-gradient(circle, var(--primary) 30%, transparent 32%),
+                radial-gradient(circle, var(--accent) 50%, transparent 52%);
+  }
+  .lotus-petal-frame::before { top: -12px; left: -12px; }
+  .lotus-petal-frame::after { bottom: -12px; right: -12px; }
+
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="gopuram" aria-hidden="true">
+    <div class="gopuram-finial"></div>
+  </div>
+  <div class="institution">
+    <div class="small">Established MCMLXII · Thanjavur, Tamil Nadu</div>
+    <h1>The Tanjavur Museum of Sacred Stone</h1>
+    <div class="tagline">Granite, Bronze, and Polychrome Traditions of the Dravidian South</div>
+    <svg class="twin-peacock-band" viewBox="0 0 313.71717 29.540759" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <use href="#peacock-path"/>
+      <path style="fill:var(--text-emphasis)" id="peacock-path" d="M 0,14 L 313,14 M 156,4 a 8,8 0 1,0 0.1,0 M 156,24 a 8,8 0 1,0 0.1,0" />
+    </svg>
+  </div>
+</header>
+
+<nav class="arcade" aria-label="Primary">
+  <ul>
+    <li><a href="page-1.html">Hall of the Vimana</a></li>
+    <li class="lotus-bud" aria-hidden="true">❖</li>
+    <li><a href="page-2.html" aria-current="page">Permanent Collection</a></li>
+    <li class="lotus-bud" aria-hidden="true">❖</li>
+    <li><a href="page-3.html">On the Gopuram</a></li>
+    <li class="lotus-bud" aria-hidden="true">❖</li>
+    <li><a href="page-4.html">The Painted Tiers</a></li>
+    <li class="lotus-bud" aria-hidden="true">❖</li>
+    <li><a href="page-5.html">Visit</a></li>
+    <li class="lotus-bud" aria-hidden="true">❖</li>
+    <li><a href="page-6.html">Patrons &amp; Trustees</a></li>
+  </ul>
+</nav>
+
+<section class="title-band">
+  <h2>Permanent Collection</h2>
+  <div class="sub">Gallery Catalogue · Arranged by Dynasty</div>
+  <div class="ornament-row" aria-hidden="true">❋ ✦ ❋ ✦ ❋</div>
+</section>
+
+<main>
+
+  <p class="intro">
+    The permanent holdings of the Museum, comprising one thousand two hundred and seven catalogued objects, are arranged across nine ground-floor galleries in chronological sequence from the rock-cut Pallava workshop of the seventh century to the polychrome timber-work of the late Nayak court. The catalogue below records the principal works on continuous display. Loan items, study fragments, and the bronze reserve are documented separately in the registrar's handlist, available to readers in the Saraswati Reading Room upon written application.
+  </p>
+
+  <div class="standing-notice" role="note">
+    <span class="label">❖  Standing Notice  ❖</span>
+    <p>The Bronze Gallery (Hall IV — Cholamandalam) is closed every Tuesday for routine conservation, climatic monitoring, and the rotation of textile mounts. Visitors holding Tuesday-dated tickets may exchange them at the front desk without surcharge.</p>
+  </div>
+
+  <!-- ============ PALLAVA ============ -->
+  <div class="divider" aria-hidden="true">
+    <span class="rule"></span>
+    <span class="seal">
+      <svg viewBox="0 0 356 367" xmlns="http://www.w3.org/2000/svg"><path d="M 90.456847,353.9498 C 51.797347,340.13485 23.72672,305.75839 12.612487,258.6184 C 7.5684267,237.22321 6.1421397,201.86984 10.323594,201.86984 C 11.712834,201.86984 15.42322,211.57056 18.568972,223.427 C 25.452892,249.37152 37.19436,273.76855 48.535988,285.69407 C 67.374717,305.50242 114.0356,313.26029 140.92106,301.05394 C 161.86409,291.54544 170.35697,268.94603 161.24995,246.95931 C 154.21242,229.96943 138.24701,224.28836 108.50834,228.19197 C 108.50834,228.19197 90.282834,208.57398 84.476417,173.73548 L 103.15738,175.42939 C 125.65731,177.46962 142.64532,172.49605 151.46236,161.28728 C 159.74765,150.75419 159.5685,146.68046 150.34841,135.96157 C 137.04396,120.49428 113.15511,124.41248 64.786577,149.99522 L 40.381632,109.08518 L 50.613137,101.2812 C 76.253387,81.724339 120.77357,71.947329 146.11011,80.309169 C 169.18841,87.925649 186.12724,118.14755 181.60247,143.63298 C 178.54327,160.86286 164.72752,184.99524 154.05369,191.75339 L 144.84862,197.58162 L 157.56351,203.31522 C 179.17018,213.05833 192.36061,205.61034 208.12001,174.76849 C 229.92949,132.0869 244.0745,121.0378 276.96658,120.99051 C 292.28176,120.96847 297.73268,122.57499 308.90312,130.4031 C 336.78213,149.94016 351.9622,190.39693 348.62804,236.27272 C 344.40474,294.37435 316.88374,329.61601 275.73415,329.61601 C 253.15086,329.61601 238.59451,321.69526 227.00729,303.10156 C 216.82976,286.76927 212.24334,254.42288 218.08805,240.19369 C 220.89208,233.36732 221.39892,233.13578 221.58223,238.59686 C 221.91916,248.63689 233.34159,264.95549 243.82827,270.37835 C 269.55794,283.68369 306.49479,266.96693 321.10832,235.4032 C 332.20339,211.4394 326.25105,165.21656 311.02084,157.06552 C 307.83453,155.36024 299.96089,153.96502 293.5244,153.96502 C 279.84214,153.96502 269.09709,163.80155 254.03263,190.11774 C 248.82442,199.21613 240.05943,210.97175 234.55486,216.24128 C 225.61134,224.80312 222.41769,225.82225 204.53067,225.82225 L 184.51412,225.82225 L 190.98415,240.19369 C 200.2451,260.76437 199.80694,294.18704 190.00976,314.53347 C 181.35272,332.51252 161.33618,350.71469 145.33374,355.16013 C 129.75572,359.4876 104.38789,358.9281 90.456847,353.9498 z M 165.8338,75.923739 C 156.97908,60.814399 151.52974,32.606158 157.46546,32.606158 C 164.43775,47.732319 178.73037,61.227101 194.03409,70.643259 C 221.52091,83.949329 249.39257,78.578529 279.84247,54.108239 C 286.54595,48.721279 292.48231,44.913138 293.0345,45.645698 C 300.4697,57.184233 313.331,66.613261 317.58219,80.021449 C 317.58219,85.678729 293.22867,101.96033 274.01214,109.15007 C 226.38264,122.8706 193.96598,117.44304 165.8338,75.923739 z M 189.83603,40.997228 L 220.84514,6.6137488 L 255.30593,38.514418 C 243.51876,48.222549 235.00994,63.289118 221.54391,70.930009 C 210.90372,63.086273 195.02308,53.837816 189.83603,40.997228 z" style="fill:var(--primary)"/></svg>
+    </span>
+    <span class="rule"></span>
+  </div>
+
+  <section class="register">
+    <div class="register-header">
+      <h3>I · Pallava Workshop</h3>
+      <span class="period">Mahabalipuram &amp; Kanchi · 7th–9th Century</span>
+    </div>
+    <div class="catalogue-grid">
+
+      <article class="card">
+        <span class="shaft-l" aria-hidden="true"></span>
+        <span class="shaft-r" aria-hidden="true"></span>
+        <div class="card-inner">
+          <h4>Fragment of a Rock-Cut Lion Pilaster</h4>
+          <hr class="double-rule" aria-hidden="true">
+          <div class="accession">
+            <svg class="lotus-rosette" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="var(--primary)"/><circle cx="12" cy="4" r="2.2" fill="var(--accent)"/><circle cx="12" cy="20" r="2.2" fill="var(--accent)"/><circle cx="4" cy="12" r="2.2" fill="var(--accent)"/><circle cx="20" cy="12" r="2.2" fill="var(--accent)"/><circle cx="6.5" cy="6.5" r="1.8" fill="var(--secondary)"/><circle cx="17.5" cy="6.5" r="1.8" fill="var(--secondary)"/><circle cx="6.5" cy="17.5" r="1.8" fill="var(--secondary)"/><circle cx="17.5" cy="17.5" r="1.8" fill="var(--secondary)"/></svg>
+            TMS.1962.114
+          </div>
+          <div class="dimensions">Granite, 84 × 36 × 28 cm. Recovered from the Shore Temple precinct, 1958.</div>
+          <div class="donor"><strong>Donor</strong>Gift of the Archaeological Survey of India, Madras Circle</div>
+          <p class="note">Carved from coarse Pallava granite, this pilaster fragment preserves the standing yali whose forepaws once flanked a doorway in the Mahishasuramardini cave-complex. The lion's mane is rendered in stylised flame-curls, and traces of red ochre wash survive in the recessed channels — a rare witness to the polychrome finish that Pallava rock-cut work originally bore.</p>
+          <div class="caption">Hall I · Pallava Court · Vitrine A-3</div>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="shaft-l" aria-hidden="true"></span>
+        <span class="shaft-r" aria-hidden="true"></span>
+        <div class="card-inner">
+          <h4>Capital of the Five-Rathas Type</h4>
+          <hr class="double-rule" aria-hidden="true">
+          <div class="accession">
+            <svg class="lotus-rosette" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="var(--primary)"/><circle cx="12" cy="4" r="2.2" fill="var(--accent)"/><circle cx="12" cy="20" r="2.2" fill="var(--accent)"/><circle cx="4" cy="12" r="2.2" fill="var(--accent)"/><circle cx="20" cy="12" r="2.2" fill="var(--accent)"/><circle cx="6.5" cy="6.5" r="1.8" fill="var(--secondary)"/><circle cx="17.5" cy="6.5" r="1.8" fill="var(--secondary)"/><circle cx="6.5" cy="17.5" r="1.8" fill="var(--secondary)"/><circle cx="17.5" cy="17.5" r="1.8" fill="var(--secondary)"/></svg>
+            TMS.1965.022
+          </div>
+          <div class="dimensions">Granite, 52 × 48 × 48 cm. Field-find from the Mahabalipuram littoral, 1962.</div>
+          <div class="donor"><strong>Donor</strong>Bequest of Sir Arthur S. Crawford, K.C.I.E.</div>
+          <p class="note">A lotus-bell capital with stepped abacus, exhibiting the characteristic Pallava transition from cubical brackets to the cushion-form found on the Dharmaraja Ratha. The undercut petals retain crisp tooling marks from the iron point-chisel; the abacus bears a faint masons' graffito reading <em>Sri Narasimha</em> in early Grantha characters.</p>
+          <div class="caption">Hall I · Pallava Court · Pedestal 7</div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ CHOLA ============ -->
+  <div class="divider" aria-hidden="true">
+    <span class="rule"></span>
+    <span class="seal">
+      <svg viewBox="0 0 356 367" xmlns="http://www.w3.org/2000/svg"><path d="M 90.456847,353.9498 C 51.797347,340.13485 23.72672,305.75839 12.612487,258.6184 C 7.5684267,237.22321 6.1421397,201.86984 10.323594,201.86984 C 11.712834,201.86984 15.42322,211.57056 18.568972,223.427 C 25.452892,249.37152 37.19436,273.76855 48.535988,285.69407 C 67.374717,305.50242 114.0356,313.26029 140.92106,301.05394 C 161.86409,291.54544 170.35697,268.94603 161.24995,246.95931 C 154.21242,229.96943 138.24701,224.28836 108.50834,228.19197 C 108.50834,228.19197 90.282834,208.57398 84.476417,173.73548 L 103.15738,175.42939 C 125.65731,177.46962 142.64532,172.49605 151.46236,161.28728 C 159.74765,150.75419 159.5685,146.68046 150.34841,135.96157 C 137.04396,120.49428 113.15511,124.41248 64.786577,149.99522 L 40.381632,109.08518 L 50.613137,101.2812 C 76.253387,81.724339 120.77357,71.947329 146.11011,80.309169 C 169.18841,87.925649 186.12724,118.14755 181.60247,143.63298 C 178.54327,160.86286 164.72752,184.99524 154.05369,191.75339 L 144.84862,197.58162 L 157.56351,203.31522 C 179.17018,213.05833 192.36061,205.61034 208.12001,174.76849 C 229.92949,132.0869 244.0745,121.0378 276.96658,120.99051 C 292.28176,120.96847 297.73268,122.57499 308.90312,130.4031 C 336.78213,149.94016 351.9622,190.39693 348.62804,236.27272 C 344.40474,294.37435 316.88374,329.61601 275.73415,329.61601 C 253.15086,329.61601 238.59451,321.69526 227.00729,303.10156 C 216.82976,286.76927 212.24334,254.42288 218.08805,240.19369 Z" style="fill:var(--primary)"/></svg>
+    </span>
+    <span class="rule"></span>
+  </div>
+
+  <section class="register">
+    <div class="register-header">
+      <h3>II · Imperial Chola</h3>
+      <span class="period">Tanjavur &amp; Gangaikondacholapuram · 9th–13th Century</span>
+    </div>
+    <div class="catalogue-grid three">
+
+      <article class="card">
+        <span class="shaft-l" aria-hidden="true"></span>
+        <span class="shaft-r" aria-hidden="true"></span>
+        <div class="card-inner">
+          <h4>Granite Base-Moulding, <em>Adhisthana</em> Section</h4>
+          <hr class="double-rule" aria-hidden="true">
+          <div class="accession">
+            <svg class="lotus-rosette" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="var(--primary)"/><circle cx="12" cy="4" r="2.2" fill="var(--accent)"/><circle cx="12" cy="20" r="2.2" fill="var(--accent)"/><circle cx="4" cy="12" r="2.2" fill="var(--accent)"/><circle cx="20" cy="12" r="2.2" fill="var(--accent)"/></svg>
+            TMS.1971.308
+          </div>
+          <div class="dimensions">Granite, 116 × 44 × 38 cm. From a dismantled subsidiary shrine, Tiruvaiyaru.</div>
+          <div class="donor"><strong>Donor</strong>Gift of the Tiruvaiyaru Devasthanam, 1969</div>
+          <p class="note">A complete vertical section through a Chola temple plinth, exhibiting the classical sequence of <em>upapitha</em>, <em>jagati</em>, <em>kumuda</em>, and <em>kantha</em>. The torus moulding is finely dressed, and an inscribed band records a grant of three <em>veli</em> of land for daily lamp-oil. Of exceptional value as a teaching specimen for students of Dravidian moulding-grammar.</p>
+          <div class="caption">Hall III · Chola Stonework</div>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="shaft-l" aria-hidden="true"></span>
+        <span class="shaft-r" aria-hidden="true"></span>
+        <div class="card-inner">
+          <h4>Miniature Vimana Model in Granite</h4>
+          <hr class="double-rule" aria-hidden="true">
+          <div class="accession">
+            <svg class="lotus-rosette" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="var(--primary)"/><circle cx="12" cy="4" r="2.2" fill="var(--accent)"/><circle cx="12" cy="20" r="2.2" fill="var(--accent)"/><circle cx="4" cy="12" r="2.2" fill="var(--accent)"/><circle cx="20" cy="12" r="2.2" fill="var(--accent)"/></svg>
+            TMS.1968.501
+          </div>
+          <div class="dimensions">Granite, 64 × 24 × 24 cm. Three diminishing storeys with crowning <em>shikhara</em>.</div>
+          <div class="donor"><strong>Donor</strong>Acquired from the estate of Pandit V. Subrahmanya Sastri</div>
+          <p class="note">A votive vimana model, almost certainly a sculptor's exemplar from the Rajaraja-Brihadisvara workshop, carved in three precisely diminishing storeys with all the Chola elements in correct proportion: corner <em>karnakuta</em>, central <em>panjara</em>, and a domical <em>shikhara</em> crowned by an octagonal finial. Surface tooling consistent with the early eleventh century.</p>
+          <div class="caption">Hall III · Vitrine C-2</div>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="shaft-l" aria-hidden="true"></span>
+        <span class="shaft-r" aria-hidden="true"></span>
+        <div class="card-inner">
+          <h4>Bronze-Casting Moulds (Set of Four)</h4>
+          <hr class="double-rule" aria-hidden="true">
+          <div class="accession">
+            <svg class="lotus-rosette" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="var(--primary)"/><circle cx="12" cy="4" r="2.2" fill="var(--accent)"/><circle cx="12" cy="20" r="2.2" fill="var(--accent)"/><circle cx="4" cy="12" r="2.2" fill="var(--accent)"/><circle cx="20" cy="12" r="2.2" fill="var(--accent)"/></svg>
+            TMS.1974.117
+          </div>
+          <div class="dimensions">Fired clay with wax residue, largest 38 × 22 cm. Swamimalai workshop find, 1973.</div>
+          <div class="donor"><strong>Donor</strong>Gift of the Sthapati K. Devasenapathi &amp; Family</div>
+          <p class="note">A rare survival of the <em>cire-perdue</em> process: four investment moulds for an Uma-Sahita bronze, each broken away from the cast image yet retaining the negative impressions of the goddess's coiffure, tribhanga torsion, and lotus pedestal. The carbonised wax-residue has been radiocarbon-dated to AD 1042 ± 35.</p>
+          <div class="caption">Hall IV · Bronze Gallery (closed Tuesdays)</div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ PANDYA ============ -->
+  <div class="divider" aria-hidden="true">
+    <span class="rule"></span>
+    <span class="seal">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="6" fill="none" stroke="var(--primary)" stroke-width="1.5"/><circle cx="12" cy="12" r="3" fill="var(--accent)"/></svg>
+    </span>
+    <span class="rule"></span>
+  </div>
+
+  <section class="register">
+    <div class="register-header">
+      <h3>III · The Pandya Continuation</h3>
+      <span class="period">Madurai &amp; Tirunelveli · 13th–14th Century</span>
+    </div>
+    <div class="catalogue-grid">
+
+      <article class="card">
+        <span class="shaft-l" aria-hidden="true"></span>
+        <span class="shaft-r" aria-hidden="true"></span>
+        <div class="card-inner">
+          <h4>Door-Jamb with Dvarapala Niche</h4>
+          <hr class="double-rule" aria-hidden="true">
+          <div class="accession">
+            <svg class="lotus-rosette" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="var(--primary)"/><circle cx="12" cy="4" r="2.2" fill="var(--accent)"/><circle cx="12" cy="20" r="2.2" fill="var(--accent)"/><circle cx="4" cy="12" r="2.2" fill="var(--accent)"/><circle cx="20" cy="12" r="2.2" fill="var(--accent)"/></svg>
+            TMS.1979.044
+          </div>
+          <div class="dimensions">Granite, 192 × 48 × 32 cm. From a dismantled mandapa, Tirunelveli district.</div>
+          <div class="donor"><strong>Donor</strong>Transferred from the Madurai District Collectorate, 1978</div>
+          <p class="note">A Pandya jamb of the late thirteenth century, displaying the characteristic deep-cut creeper-scroll along the inner edge and a niched dvarapala carved almost in the round, his trident raised and his lower garment falling in cascading folds. The Pandya manner here is unmistakably more linear and attenuated than its Chola precursor.</p>
+          <div class="caption">Hall V · Pandya Passage</div>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="shaft-l" aria-hidden="true"></span>
+        <span class="shaft-r" aria-hidden="true"></span>
+        <div class="card-inner">
+          <h4>Lintel Fragment with Fish Emblem</h4>
+          <hr class="double-rule" aria-hidden="true">
+          <div class="accession">
+            <svg class="lotus-rosette" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="var(--primary)"/><circle cx="12" cy="4" r="2.2" fill="var(--accent)"/><circle cx="12" cy="20" r="2.2" fill="var(--accent)"/><circle cx="4" cy="12" r="2.2" fill="var(--accent)"/><circle cx="20" cy="12" r="2.2" fill="var(--accent)"/></svg>
+            TMS.1981.213
+          </div>
+          <div class="dimensions">Granite, 78 × 36 × 22 cm. Surface find, Madurai-Alagarkoil road, 1980.</div>
+          <div class="donor"><strong>Donor</strong>Gift of Smt. Lakshmi Sundaresan, Madurai</div>
+          <p class="note">A finely chamfered lintel fragment bearing the twin-fish device of the Pandya house in low relief, flanked by a pair of conventional <em>makara</em> heads disgorging foliate scrolls. The carving has been read by Prof. R. Champakalakshmi as a foundation marker for a minor shrine commissioned under Maravarman Sundara Pandya II.</p>
+          <div class="caption">Hall V · Lintel Wall</div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ VIJAYANAGARA ============ -->
+  <div class="divider" aria-hidden="true">
+    <span class="rule"></span>
+    <span class="seal">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,2 14,9 22,12 14,15 12,22 10,15 2,12 10,9" fill="var(--primary)"/></svg>
+    </span>
+    <span class="rule"></span>
+  </div>
+
+  <section class="register">
+    <div class="register-header">
+      <h3>IV · Vijayanagara at Hampi</h3>
+      <span class="period">Tungabhadra Court · 14th–16th Century</span>
+    </div>
+    <div class="catalogue-grid three">
+
+      <article class="card">
+        <span class="shaft-l" aria-hidden="true"></span>
+        <span class="shaft-r" aria-hidden="true"></span>
+        <div class="card-inner">
+          <h4>Yali-Pillar Capital</h4>
+          <hr class="double-rule" aria-hidden="true">
+          <div class="accession">
+            <svg class="lotus-rosette" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="var(--primary)"/><circle cx="12" cy="4" r="2.2" fill="var(--accent)"/><circle cx="12" cy="20" r="2.2" fill="var(--accent)"/><circle cx="4" cy="12" r="2.2" fill="var(--accent)"/><circle cx="20" cy="12" r="2.2" fill="var(--accent)"/></svg>
+            TMS.1984.077
+          </div>
+          <div class="dimensions">Granite, 142 × 62 × 56 cm. Dated by inscription c. 1520. Hampi region.</div>
+          <div class="donor"><strong>Donor</strong>On long loan from the Government of Karnataka</div>
+          <p class="note">A composite yali-pillar capital from a thousand-pillared mandapa in the Hampi region, exhibiting the rampant leogryph trampling an elephant — a virtuoso conceit of the late Krishnadevaraya workshops. The mounted rider on the yali's back, though weather-worn, retains the characteristic Vijayanagara turban and stirruped foot. Inscription dates the piece to c. 1520.</p>
+          <div class="caption">Hall VI · The Hampi Pillared Court</div>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="shaft-l" aria-hidden="true"></span>
+        <span class="shaft-r" aria-hidden="true"></span>
+        <div class="card-inner">
+          <h4>Composite Pillar with Musical Notes</h4>
+          <hr class="double-rule" aria-hidden="true">
+          <div class="accession">
+            <svg class="lotus-rosette" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="var(--primary)"/><circle cx="12" cy="4" r="2.2" fill="var(--accent)"/><circle cx="12" cy="20" r="2.2" fill="var(--accent)"/><circle cx="4" cy="12" r="2.2" fill="var(--accent)"/><circle cx="20" cy="12" r="2.2" fill="var(--accent)"/></svg>
+            TMS.1986.092
+          </div>
+          <div class="dimensions">Granite (single block), 268 × 38 × 38 cm. Cluster-shaft type with seven engaged colonnettes.</div>
+          <div class="donor"><strong>Donor</strong>Gift of the Indian National Trust for Art &amp; Cultural Heritage</div>
+          <p class="note">A composite musical pillar of the type found at the Vitthala temple precinct, in which the seven engaged colonnettes are tuned to ring at progressive pitches when struck. Acoustic analysis conducted in 1991 confirms the surviving five colonnettes preserve intervals corresponding to the Carnatic <em>Mayamalavagaula</em> mode. Display protected by acoustic baffle.</p>
+          <div class="caption">Hall VI · Vitthala Annex</div>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="shaft-l" aria-hidden="true"></span>
+        <span class="shaft-r" aria-hidden="true"></span>
+        <div class="card-inner">
+          <h4>Carved Ceiling Panel — Garuda Roundel</h4>
+          <hr class="double-rule" aria-hidden="true">
+          <div class="accession">
+            <svg class="lotus-rosette" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="var(--primary)"/><circle cx="12" cy="4" r="2.2" fill="var(--accent)"/><circle cx="12" cy="20" r="2.2" fill="var(--accent)"/><circle cx="4" cy="12" r="2.2" fill="var(--accent)"/><circle cx="20" cy="12" r="2.2" fill="var(--accent)"/></svg>
+            TMS.1989.155
+          </div>
+          <div class="dimensions">Schist, 88 × 88 × 14 cm. Dismantled ceiling slab, Hospet vicinity.</div>
+          <div class="donor"><strong>Donor</strong>Gift of the Hospet Heritage Trust, 1988</div>
+          <p class="note">A square ceiling slab carved with a deeply undercut Garuda within a sixteen-petalled lotus, the mandala framed by a rinceau of swans and creeper-scroll. The composition exemplifies the Vijayanagara taste for centralised mandala-ceilings, in which mythic narrative is subordinated to geometric order. Mounted overhead in the gallery for correct viewing.</p>
+          <div class="caption">Hall VI · Ceiling Vault</div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ NAYAK ============ -->
+  <div class="divider" aria-hidden="true">
+    <span class="rule"></span>
+    <span class="seal">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="var(--primary)" stroke-width="1.5"/><circle cx="12" cy="12" r="5" fill="none" stroke="var(--accent)" stroke-width="1.2"/><circle cx="12" cy="12" r="1.6" fill="var(--text-emphasis)"/></svg>
+    </span>
+    <span class="rule"></span>
+  </div>
+
+  <section class="register">
+    <div class="register-header">
+      <h3>V · Nayak Polychromy</h3>
+      <span class="period">Madurai, Tanjavur &amp; Senji · 16th–17th Century</span>
+    </div>
+    <div class="catalogue-grid three">
+
+      <article class="card">
+        <span class="shaft-l" aria-hidden="true"></span>
+        <span class="shaft-r" aria-hidden="true"></span>
+        <div class="card-inner">
+          <h4>Polychrome Ceiling Rosette</h4>
+          <hr class="double-rule" aria-hidden="true">
+          <div class="accession">
+            <svg class="lotus-rosette" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="var(--primary)"/><circle cx="12" cy="4" r="2.2" fill="var(--accent)"/><circle cx="12" cy="20" r="2.2" fill="var(--accent)"/><circle cx="4" cy="12" r="2.2" fill="var(--accent)"/><circle cx="20" cy="12" r="2.2" fill="var(--accent)"/></svg>
+            TMS.1992.041
+          </div>
+          <div class="dimensions">Plastered timber with mineral pigments, diam. 96 cm, depth 12 cm. c. 1640.</div>
+          <div class="donor"><strong>Donor</strong>Removed from a collapsed mandapa at Srivilliputtur and conserved in situ, 1991</div>
+          <p class="note">A spectacular sixteen-petalled ceiling rosette painted in vermilion, peacock-blue, malachite green, and gold-leaf, with a central Vishnu reclining upon Ananta. The Nayak palette here is at its most uncompromising; recent pigment analysis identifies indigo, cinnabar, and orpiment among the original mineral grounds, all bound in tamarind-seed gum.</p>
+          <div class="caption">Hall VIII · The Painted Tiers</div>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="shaft-l" aria-hidden="true"></span>
+        <span class="shaft-r" aria-hidden="true"></span>
+        <div class="card-inner">
+          <h4>Painted Timber Bracket — Krishna Lila</h4>
+          <hr class="double-rule" aria-hidden="true">
+          <div class="accession">
+            <svg class="lotus-rosette" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="var(--primary)"/><circle cx="12" cy="4" r="2.2" fill="var(--accent)"/><circle cx="12" cy="20" r="2.2" fill="var(--accent)"/><circle cx="4" cy="12" r="2.2" fill="var(--accent)"/><circle cx="20" cy="12" r="2.2" fill="var(--accent)"/></svg>
+            TMS.1995.118
+          </div>
+          <div class="dimensions">Carved teak with polychrome, 72 × 28 × 18 cm. c. 1640.</div>
+          <div class="donor"><strong>Donor</strong>Gift of Mr &amp; Mrs C. Rajagopalan, in memory of their son</div>
+          <p class="note">An angled Nayak corbel-bracket of the curved-volute type, carved in teak and polychromed with a continuous frieze of Krishna-lila episodes — the lifting of Govardhana, the butter-theft, and the dance with Radha. The pigment survives at near-eighty percent, an unusually high figure for exposed timber, and the gilding of the figures' jewellery has not been re-applied.</p>
+          <div class="caption">Hall VIII · Bracket Wall</div>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="shaft-l" aria-hidden="true"></span>
+        <span class="shaft-r" aria-hidden="true"></span>
+        <div class="card-inner">
+          <h4>Ivory-Inlaid Sandalwood Doorframe</h4>
+          <hr class="double-rule" aria-hidden="true">
+          <div class="accession">
+            <svg class="lotus-rosette" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="var(--primary)"/><circle cx="12" cy="4" r="2.2" fill="var(--accent)"/><circle cx="12" cy="20" r="2.2" fill="var(--accent)"/><circle cx="4" cy="12" r="2.2" fill="var(--accent)"/><circle cx="20" cy="12" r="2.2" fill="var(--accent)"/></svg>
+            TMS.2001.063
+          </div>
+          <div class="dimensions">Sandalwood with ivory and tortoiseshell inlay, 218 × 142 × 14 cm. Late seventeenth century.</div>
+          <div class="donor"><strong>Donor</strong>Acquired with funds from the Chettinad Heritage Endowment, 2000</div>
+          <p class="note">A complete Nayak palace doorframe of considerable luxury, the sandalwood ground inlaid with ivory and tortoiseshell in interlaced lotus medallions and parrot-pairs. The lower panels depict a Tanjavur court procession with palanquins, war-elephants, and Portuguese visitors — a rare iconographic record of the cosmopolitan Nayak court at its zenith.</p>
+          <div class="caption">Hall IX · Late Nayak Cabinet</div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-arcade">
+    <div class="pillars">
+      <div class="footer-pillar"></div>
+      <div class="footer-pillar"></div>
+      <div class="seal-mandala" aria-hidden="true">
+        <svg viewBox="0 0 356 367" xmlns="http://www.w3.org/2000/svg">
+          <path d="M 90.456847,353.9498 C 51.797347,340.13485 23.72672,305.75839 12.612487,258.6184 C 7.5684267,237.22321 6.1421397,201.86984 10.323594,201.86984 C 11.712834,201.86984 15.42322,211.57056 18.568972,223.427 C 25.452892,249.37152 37.19436,273.76855 48.535988,285.69407 C 67.374717,305.50242 114.0356,313.26029 140.92106,301.05394 C 161.86409,291.54544 170.35697,268.94603 161.24995,246.95931 C 154.21242,229.96943 138.24701,224.28836 108.50834,228.19197 C 108.50834,228.19197 90.282834,208.57398 84.476417,173.73548 L 103.15738,175.42939 C 125.65731,177.46962 142.64532,172.49605 151.46236,161.28728 C 159.74765,150.75419 159.5685,146.68046 150.34841,135.96157 C 137.04396,120.49428 113.15511,124.41248 64.786577,149.99522 L 40.381632,109.08518 L 50.613137,101.2812 C 76.253387,81.724339 120.77357,71.947329 146.11011,80.309169 C 169.18841,87.925649 186.12724,118.14755 181.60247,143.63298 C 178.54327,160.86286 164.72752,184.99524 154.05369,191.75339 L 144.84862,197.58162 L 157.56351,203.31522 C 179.17018,213.05833 192.36061,205.61034 208.12001,174.76849 C 229.92949,132.0869 244.0745,121.0378 276.96658,120.99051 C 292.28176,120.96847 297.73268,122.57499 308.90312,130.4031 C 336.78213,149.94016 351.9622,190.39693 348.62804,236.27272 C 344.40474,294.37435 316.88374,329.61601 275.73415,329.61601 C 253.15086,329.61601 238.59451,321.69526 227.00729,303.10156 Z" style="fill:var(--primary)"/>
+        </svg>
+      </div>
+      <div class="footer-pillar"></div>
+      <div class="footer-pillar"></div>
+    </div>
+  </div>
+  <div class="colophon">
+    <div class="row">
+      <div class="col">
+        <h5>Address</h5>
+        <p>14, East Main Street</p>
+        <p>Karanthai, Thanjavur 613 002</p>
+        <p>Tamil Nadu, India</p>
+      </div>
+      <div class="col">
+        <h5>Hours</h5>
+        <p>Wed–Mon · 09:30 to 17:30</p>
+        <p>Bronze Gallery closed Tuesdays</p>
+        <p>Last admission 16:45</p>
+      </div>
+      <div class="col">
+        <h5>Trustee Colophon</h5>
+        <p>Founded MCMLXII by the</p>
+        <p>Tanjavur Sacred-Stone Society</p>
+        <p>Reg. Trust no. 318 / 1962</p>
+      </div>
+    </div>
+  </div>
+  <div class="tailpiece" aria-hidden="true">❦ ❋ ❦ ❋ ❦</div>
+</footer>
+
+</body>
+</html>

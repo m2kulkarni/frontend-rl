@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Workshop & Correspondence — Atelier Sthapati</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.55;
+  }
+
+  /* ============ MASTHEAD - GOPURAM TIERS ============ */
+  .masthead {
+    background: var(--bg);
+    padding: 0;
+    border-bottom: 4px solid var(--text);
+  }
+  .gopuram-tier {
+    margin: 0 auto;
+    background: var(--primary);
+    color: var(--surface);
+    text-align: center;
+    border-top: 2px solid var(--accent);
+    border-bottom: 2px solid var(--accent);
+    position: relative;
+    padding: 8px 0;
+  }
+  .gopuram-tier.t1 { width: 100%; background: var(--secondary); padding: 6px 0; }
+  .gopuram-tier.t2 { width: 88%; background: var(--primary); padding: 10px 0; }
+  .gopuram-tier.t3 { width: 72%; background: var(--secondary); padding: 12px 0; }
+  .gopuram-tier.t4 { width: 56%; background: var(--primary); padding: 18px 0; }
+  .gopuram-tier.t5 { width: 40%; background: var(--accent); color: var(--text); padding: 14px 0; border-color: var(--text-emphasis); }
+
+  .gopuram-tier .band-text {
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .gopuram-tier.t4 .band-text { font-size: 26px; letter-spacing: 0.25em; }
+  .gopuram-tier.t3 .band-text { font-size: 14px; }
+  .gopuram-tier.t5 .band-text { font-size: 13px; letter-spacing: 0.4em; color: var(--text-emphasis); }
+
+  .gopuram-tier::before, .gopuram-tier::after {
+    content: "✦";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--accent);
+    font-size: 14px;
+  }
+  .gopuram-tier::before { left: 12px; }
+  .gopuram-tier::after { right: 12px; }
+  .gopuram-tier.t5::before, .gopuram-tier.t5::after { color: var(--text-emphasis); }
+
+  .peacock-frieze {
+    background: var(--surface);
+    padding: 6px 0;
+    border-top: 2px solid var(--text-emphasis);
+    border-bottom: 2px solid var(--text-emphasis);
+  }
+  .peacock-frieze svg {
+    display: block;
+    width: 100%;
+    height: 26px;
+  }
+
+  /* ============ NAVIGATION - PILLARED ARCADE ============ */
+  nav.arcade {
+    background: var(--bg);
+    padding: 0;
+    border-bottom: 4px double var(--text);
+    border-top: 1px solid var(--text);
+  }
+  .arcade-row {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0;
+  }
+  .bay {
+    position: relative;
+    text-align: center;
+    background: var(--surface);
+    border-right: 1px solid var(--text);
+    padding: 0;
+  }
+  .bay:last-child { border-right: none; }
+  .bay a {
+    display: block;
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text);
+    text-decoration: none;
+    padding: 18px 28px;
+    position: relative;
+  }
+  .bay a:hover {
+    border-bottom: 2px solid var(--secondary);
+  }
+  .bay[aria-current="page"] {
+    background: var(--primary);
+  }
+  .bay[aria-current="page"] a {
+    color: var(--surface);
+  }
+  .bay .pillar {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 10px;
+    pointer-events: none;
+  }
+  .bay .pillar.left { left: 2px; }
+  .bay .pillar.right { right: 2px; }
+  .bay .pillar svg { width: 100%; height: 100%; }
+  .lotus-bullet {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    vertical-align: middle;
+    margin: 0 4px;
+  }
+
+  /* ============ MAIN CONTENT ============ */
+  main {
+    background: var(--bg);
+    padding: 0;
+  }
+
+  .inscription-band {
+    background: var(--text-emphasis);
+    color: var(--surface);
+    text-align: center;
+    padding: 14px 0;
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    font-size: 12px;
+    border-top: 3px solid var(--accent);
+    border-bottom: 3px solid var(--accent);
+  }
+
+  .page-title-block {
+    text-align: center;
+    padding: 40px 80px 24px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--text);
+    position: relative;
+  }
+  .page-title-block .eyebrow {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.6em;
+    color: var(--secondary);
+    font-size: 11px;
+    margin-bottom: 12px;
+  }
+  .page-title-block h1 {
+    font-family: var(--font-display), serif;
+    font-size: 44px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 6px;
+    color: var(--text);
+    font-weight: 600;
+  }
+  .page-title-block .subtitle {
+    font-style: italic;
+    color: var(--text-emphasis);
+    font-size: 17px;
+    margin-top: 8px;
+  }
+  .page-title-block .double-rule {
+    height: 6px;
+    margin: 18px auto 0;
+    width: 240px;
+    background:
+      linear-gradient(to bottom,
+        var(--primary) 0, var(--primary) 2px,
+        transparent 2px, transparent 3px,
+        var(--accent) 3px, var(--accent) 5px,
+        transparent 5px);
+  }
+
+  .divider-band {
+    background: var(--surface);
+    padding: 14px 0;
+    text-align: center;
+    border-top: 2px solid var(--primary);
+    border-bottom: 2px solid var(--primary);
+    color: var(--text-emphasis);
+    letter-spacing: 0.4em;
+  }
+
+  /* ============ CONTENT GRID ============ */
+  .content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    background: var(--surface);
+  }
+
+  .panel {
+    background: var(--surface);
+    padding: 38px 44px;
+    position: relative;
+    border-right: 1px solid var(--text);
+    border-bottom: 1px solid var(--text);
+  }
+  .panel:nth-child(2n) { border-right: none; }
+
+  .panel::before {
+    content: "";
+    display: block;
+    height: 5px;
+    background:
+      linear-gradient(to bottom,
+        var(--primary) 0, var(--primary) 2px,
+        transparent 2px, transparent 3px,
+        var(--accent) 3px, var(--accent) 5px);
+    margin-bottom: 20px;
+  }
+  .panel::after {
+    content: "";
+    display: block;
+    height: 5px;
+    background:
+      linear-gradient(to bottom,
+        var(--accent) 0, var(--accent) 2px,
+        transparent 2px, transparent 3px,
+        var(--primary) 3px, var(--primary) 5px);
+    margin-top: 20px;
+  }
+
+  .pillar-cap {
+    position: absolute;
+    top: 30px;
+    bottom: 30px;
+    width: 18px;
+  }
+  .pillar-cap.left { left: 14px; }
+  .pillar-cap.right { right: 14px; }
+  .pillar-cap::before, .pillar-cap::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    height: 14px;
+    background: var(--primary);
+    border: 2px solid var(--accent);
+  }
+  .pillar-cap::before { top: 0; }
+  .pillar-cap::after { bottom: 0; }
+  .pillar-cap .shaft {
+    position: absolute;
+    top: 14px; bottom: 14px;
+    left: 6px; right: 6px;
+    background: var(--secondary);
+    border-left: 1px solid var(--accent);
+    border-right: 1px solid var(--accent);
+  }
+
+  .panel h2 {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    margin: 0 0 6px;
+    color: var(--text);
+    font-weight: 600;
+    padding-left: 36px;
+    padding-right: 36px;
+    text-align: center;
+  }
+  .panel .dateline {
+    font-style: italic;
+    color: var(--text-emphasis);
+    font-size: 13px;
+    text-align: center;
+    margin-bottom: 18px;
+    padding-left: 36px;
+    padding-right: 36px;
+    letter-spacing: 0.05em;
+  }
+  .panel .body {
+    padding-left: 36px;
+    padding-right: 36px;
+    font-size: 15px;
+  }
+  .panel .body p { margin: 0 0 12px; }
+  .panel .body p:last-child::after {
+    content: "";
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin-left: 6px;
+    vertical-align: middle;
+    background: radial-gradient(circle, var(--primary) 30%, var(--accent) 32%, var(--accent) 50%, transparent 52%);
+  }
+
+  .panel .body dl {
+    margin: 0;
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    row-gap: 8px;
+    column-gap: 14px;
+    font-size: 14px;
+  }
+  .panel .body dt {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-size: 11px;
+    color: var(--secondary);
+    padding-top: 2px;
+  }
+  .panel .body dd { margin: 0; }
+  .panel .body address {
+    font-style: normal;
+    line-height: 1.7;
+  }
+
+  .panel.full {
+    grid-column: 1 / -1;
+    border-right: none;
+  }
+
+  .hours-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 0 12px;
+    font-size: 14px;
+  }
+  .hours-table th, .hours-table td {
+    padding: 7px 10px;
+    text-align: left;
+    border-bottom: 1px dotted var(--text-emphasis);
+  }
+  .hours-table th {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--secondary);
+    background: var(--bg);
+    border-bottom: 2px solid var(--primary);
+  }
+  .hours-table tr:last-child td { border-bottom: none; }
+
+  .closure-note {
+    background: var(--bg);
+    border-left: 4px solid var(--primary);
+    border-right: 4px solid var(--primary);
+    padding: 12px 16px;
+    margin: 14px 0;
+    font-style: italic;
+    font-size: 14px;
+  }
+
+  /* CENTERPIECE OM */
+  .centerpiece-band {
+    background: var(--text-emphasis);
+    padding: 36px 0;
+    text-align: center;
+    border-top: 4px solid var(--accent);
+    border-bottom: 4px solid var(--accent);
+    color: var(--surface);
+  }
+  .centerpiece-band .om {
+    width: 110px;
+    height: 110px;
+    margin: 0 auto 14px;
+    background: var(--surface);
+    border: 4px double var(--accent);
+    padding: 12px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .centerpiece-band .om svg { width: 100%; height: 100%; }
+  .centerpiece-band .verse {
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    font-size: 13px;
+  }
+  .centerpiece-band .verse-sub {
+    font-style: italic;
+    margin-top: 6px;
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+  }
+
+  /* RESTHOUSE LIST */
+  .resthouse-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    counter-reset: rh;
+  }
+  .resthouse-list li {
+    padding: 14px 0 14px 56px;
+    border-bottom: 1px dotted var(--text-emphasis);
+    position: relative;
+    counter-increment: rh;
+    font-size: 14px;
+  }
+  .resthouse-list li::before {
+    content: counter(rh, upper-roman);
+    position: absolute;
+    left: 0;
+    top: 14px;
+    width: 40px;
+    text-align: center;
+    font-family: var(--font-display), serif;
+    color: var(--surface);
+    background: var(--secondary);
+    padding: 4px 0;
+    letter-spacing: 0.1em;
+    font-size: 12px;
+    border: 1px solid var(--accent);
+  }
+  .resthouse-list li:last-child { border-bottom: none; }
+  .resthouse-list .rh-name {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 13px;
+    color: var(--text-emphasis);
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  /* ============ FOOTER - PILLARED ARCADE ============ */
+  footer.arcade-footer {
+    background: var(--bg);
+    padding: 0;
+    margin-top: 0;
+  }
+  .lotus-petal-row {
+    background: var(--surface);
+    padding: 10px 0;
+    text-align: center;
+    border-top: 3px solid var(--accent);
+    border-bottom: 1px solid var(--text);
+    letter-spacing: 1.2em;
+    color: var(--primary);
+    font-size: 14px;
+  }
+  .seven-bays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    background: var(--secondary);
+    border-top: 2px solid var(--accent);
+    border-bottom: 2px solid var(--accent);
+  }
+  .footer-bay {
+    border-right: 1px solid var(--accent);
+    padding: 28px 14px;
+    color: var(--surface);
+    text-align: center;
+    font-size: 12px;
+    position: relative;
+    min-height: 140px;
+  }
+  .footer-bay:last-child { border-right: none; }
+  .footer-bay.center {
+    background: var(--primary);
+    padding: 18px 10px;
+  }
+  .footer-bay .mandala {
+    width: 90px;
+    height: 90px;
+    margin: 0 auto;
+    background: var(--surface);
+    border: 3px double var(--accent);
+    border-radius: 50%;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .footer-bay .mandala svg { width: 100%; height: 100%; }
+  .footer-bay h4 {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 10px;
+    color: var(--accent);
+    margin: 0 0 8px;
+    font-weight: 600;
+  }
+  .footer-bay p { margin: 0; line-height: 1.5; font-size: 11px; }
+  .footer-bay::before, .footer-bay::after {
+    content: "";
+    position: absolute;
+    top: 8px; bottom: 8px;
+    width: 3px;
+    background: var(--accent);
+  }
+  .footer-bay::before { left: 4px; }
+  .footer-bay::after { right: 4px; }
+  .footer-bay:last-child::after, .footer-bay:first-child::before { display: none; }
+
+  .footer-register {
+    background: var(--bg);
+    padding: 14px 60px;
+    text-align: center;
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    letter-spacing: 0.4em;
+    font-size: 11px;
+    color: var(--text);
+    border-top: 1px solid var(--text);
+  }
+  .copyright-baseline {
+    background: var(--text-emphasis);
+    color: var(--surface);
+    text-align: center;
+    padding: 8px 0;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    font-style: italic;
+  }
+
+  /* MOTIF UTILITIES */
+  .palmette-divider {
+    background: var(--surface);
+    padding: 12px 60px;
+    border-top: 1px solid var(--text);
+    border-bottom: 1px solid var(--text);
+    text-align: center;
+  }
+  .palmette-divider svg { width: 320px; height: 28px; }
+
+  .pillar-svg {
+    width: 100%; height: 100%;
+    display: block;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ MASTHEAD ============ -->
+<header class="masthead" role="banner">
+  <div class="gopuram-tier t1"><span class="band-text">Atelier Sthapati · Kumbakonam · Thanjavur Mandalam</span></div>
+  <div class="gopuram-tier t2"><span class="band-text">Studio of R. Kalyanasundaram, Sthapati</span></div>
+  <div class="gopuram-tier t3"><span class="band-text">Stone · Line · Measured Plan · Dravidian Tradition</span></div>
+  <div class="gopuram-tier t4"><span class="band-text">Workshop &amp; Correspondence</span></div>
+  <div class="gopuram-tier t5"><span class="band-text">page the sixth</span></div>
+
+  <div class="peacock-frieze" aria-hidden="true">
+    <svg viewBox="0 0 313.71717 29.540759" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(54.572101,-91.176475)">
+        <path style="fill:#8b1538" d="m -45.203647,120.20506 c -2.080683,-0.59494 -3.600099,-1.33764 -4.88273,-2.38671 -1.667517,-1.36388 -2.894118,-2.64027 -2.893812,-3.0113 1.42e-4,-0.17364 -0.209138,-0.47237 -0.46507,-0.66382 -0.819614,-0.61314 -1.16478,-1.84791 -1.123557,-4.01931 0.07527,-3.96496 0.841997,-6.28592 3.359706,-10.170217 2.091957,-3.227467 6.669369,-6.452883 10.647663,-7.502765 2.252562,-0.594453 8.248778,-0.796292 11.003264,-0.370372 6.94812,1.074354 16.152972,4.460234 20.6562963,7.598128 0.8536092,0.594796 0.7949964,0.623336 1.3291143,-0.64739 0.2251847,-0.535733 0.8814684,-1.603973 1.4584084,-2.373871 0.8561927,-1.142535 1.457933,-1.600664 3.2740672,-2.492638 2.16210793,-1.06191 4.5637653,-1.779237 6.7277099,-2.009456 0.5824052,-0.06194 1.3990594,-0.240975 1.8147895,-0.397805 0.7738562,-0.291942 6.4810504,-0.196925 10.0927814,0.168029 2.264542,0.228828 9.60899,1.67773 11.219571,2.21338 1.156599,0.384661 1.203738,0.376381 3.086684,-0.542345 2.528472,-1.2337 4.016657,-1.480542 8.446835,-1.401064 3.61374,0.06486 4.290154,0.147139 6.742793,0.820538 0.653941,0.179545 1.719761,0.375692 2.368485,0.435889 0.648729,0.0602 1.838242,0.282073 2.643363,0.493076 1.333488,0.349469 1.625289,0.339432 3.276461,-0.112735 4.298701,-1.177186 16.775093,-2.487486 20.247754,-2.126478 0.82522,0.08579 2.552867,0.408475 3.839215,0.717074 2.046471,0.490964 2.518569,0.521833 3.776859,0.246952 3.038874,-0.663879 6.75683,-1.061515 11.128253,-1.190178 4.134196,-0.121667 4.707691,-0.08259 6.380251,0.434721 1.364622,0.422078 2.105892,0.83929 2.879252,1.620559 1.29673,1.309975 1.63,2.709456 1.6237,6.818148 -0.005,2.95745 0.2393,4.45137 0.62566,3.83325 0.10807,-0.17288 0.17855,-1.23469 0.15662,-2.35957 -0.10151,-5.20664 0.0689,-6.026385 1.66799,-8.024476 0.85063,-1.062863 2.64553,-2.128587 4.10167,-2.435363 2.81819,-0.59374 15.88977,0.302112 18.8453,1.291541 0.69822,0.23375 1.33752,0.188118 3.17619,-0.226686 4.44974,-1.003866 5.16179,-1.08168 9.66723,-1.056509 4.01601,0.0224 5.00432,0.121426 8.5084,0.852608 6.84995,1.42927 7.19777,1.434197 12.43469,0.175947 1.28482,-0.308696 3.07339,-0.450501 5.82325,-0.46168 3.55974,-0.01452 4.14585,0.04906 5.68548,0.615953 0.94414,0.347651 2.11528,0.863208 2.60253,1.145677 0.82461,0.478046 0.98936,0.487693 2.38057,0.139336 1.77908,-0.445477 5.29646,-1.019874 9.8354,-1.606151 3.88998,-0.502463 11.70287,-0.5191 15.08161,-0.03212 5.86054,0.844676 9.86323,3.110261 10.57122,5.983455 l 0.28701,1.164733 3.35851,-1.630478 c 3.17793,-1.542804 8.22537,-3.484656 11.44251,-4.402193 4.71613,-1.345036 12.68145,-1.710913 16.9375,-0.778008 4.93058,1.080764 10.02057,5.551052 11.64065,10.223444 0.65092,1.87732 1.01878,5.06928 0.79472,6.89574 -0.46904,3.82309 -3.07509,7.60889 -6.48471,9.42031 -0.51071,0.27132 -1.10781,0.62201 -1.32689,0.7793 -1.28176,0.92026 -3.99222,1.08281 -9.3957,0.5635 -4.226,-0.40615 -43.09412,-0.56404 -48.28608,-0.19612 -3.36622,0.23852 -9.71584,0.13599 -14.17646,-0.22893 -3.19042,-0.261 -11.4116,-2.46478 -14.96419,-4.01131 -0.53984,-0.23501 -1.10442,-0.42792 -1.25461,-0.42868 -0.43847,-0.002 -0.31926,0.66639 0.24899,1.3964 0.63886,0.82072 0.66215,1.46506 0.0825,2.28367 -0.41639,0.5881 -0.53812,0.60929 -2.4496,0.42635 -1.10627,-0.10587 -3.2008,-0.44095 -4.65448,-0.74463 -1.45369,-0.30368 -4.09201,-0.62284 -5.86295,-0.70924 -3.45491,-0.16856 -4.65649,0.0199 -8.93437,1.40162 -2.04956,0.66196 -2.15841,0.6695 -4.80352,0.33258 -1.68376,-0.21447 -5.04124,-0.32578 -8.88522,-0.29456 -6.04658,0.0491 -6.20383,0.0368 -7.34956,-0.57531 -1.32088,-0.70568 -2.86287,-0.66893 -5.04444,0.12022 -0.88229,0.31916 -2.15717,0.43295 -4.89707,0.43713 -4.79736,0.007 -5.58286,-0.16276 -6.13105,-1.32752 l -0.42264,-0.89802 -1.08755,0.85944 c -1.8674,1.47572 -2.94146,1.82323 -5.59703,1.81093 -1.313341,-0.006 -3.557388,-0.23736 -4.986775,-0.51393 -2.027573,-0.39234 -2.694777,-0.43476 -3.0351,-0.19299 -1.426504,1.01339 -5.2004,1.21652 -9.369876,0.50433 -2.342079,-0.40006 -4.350291,-0.35925 -10.118619,0.20564 -2.370926,0.23218 -2.390138,0.22923 -3.965706,-0.60953 l -1.583238,-0.84286 -4.76258,0.004 c -3.320233,0.003 -5.333694,0.12924 -6.648373,0.41833 -2.953758,0.64954 -5.182097,0.79482 -6.349714,0.41398 -1.394469,-0.45482 -2.213474,-1.26097 -2.208834,-2.17419 0.0021,-0.41118 -0.106632,-0.74818 -0.241605,-0.74887 -0.13497,-6.8e-4 -1.238115,0.35414 -2.451433,0.7885 -7.896638,2.82691 -18.009765,3.78342 -31.365341,2.96657 -7.1026623,-0.43441 -10.2556485,-0.47172 -22.841675,-0.27026 -5.166476,0.0827 -13.263451,0.2047 -17.993277,0.27111 -4.729825,0.0664 -9.671447,0.15763 -10.98138,0.20269 -1.516176,0.0522 -2.861762,-0.0553 -3.702712,-0.29577 z"/>
+      </g>
+    </svg>
+  </div>
+</header>
+
+<!-- ============ NAVIGATION ============ -->
+<nav class="arcade" aria-label="Primary navigation">
+  <div class="arcade-row">
+    <div class="bay">
+      <div class="pillar left" aria-hidden="true"><svg class="pillar-svg" viewBox="0 0 10 100" preserveAspectRatio="none"><rect x="3" y="0" width="4" height="100" fill="#076b88"/><rect x="0" y="0" width="10" height="6" fill="#c9a23a"/><rect x="0" y="94" width="10" height="6" fill="#c9a23a"/><rect x="1" y="10" width="8" height="3" fill="#e34234"/><rect x="1" y="87" width="8" height="3" fill="#e34234"/></svg></div>
+      <div class="pillar right" aria-hidden="true"><svg class="pillar-svg" viewBox="0 0 10 100" preserveAspectRatio="none"><rect x="3" y="0" width="4" height="100" fill="#076b88"/><rect x="0" y="0" width="10" height="6" fill="#c9a23a"/><rect x="0" y="94" width="10" height="6" fill="#c9a23a"/><rect x="1" y="10" width="8" height="3" fill="#e34234"/><rect x="1" y="87" width="8" height="3" fill="#e34234"/></svg></div>
+      <a href="page-1.html">Sanctum</a>
+    </div>
+    <div class="bay">
+      <div class="pillar left" aria-hidden="true"><svg class="pillar-svg" viewBox="0 0 10 100" preserveAspectRatio="none"><rect x="3" y="0" width="4" height="100" fill="#076b88"/><rect x="0" y="0" width="10" height="6" fill="#c9a23a"/><rect x="0" y="94" width="10" height="6" fill="#c9a23a"/><rect x="1" y="10" width="8" height="3" fill="#e34234"/><rect x="1" y="87" width="8" height="3" fill="#e34234"/></svg></div>
+      <div class="pillar right" aria-hidden="true"><svg class="pillar-svg" viewBox="0 0 10 100" preserveAspectRatio="none"><rect x="3" y="0" width="4" height="100" fill="#076b88"/><rect x="0" y="0" width="10" height="6" fill="#c9a23a"/><rect x="0" y="94" width="10" height="6" fill="#c9a23a"/><rect x="1" y="10" width="8" height="3" fill="#e34234"/><rect x="1" y="87" width="8" height="3" fill="#e34234"/></svg></div>
+      <a href="page-2.html">Selected Works</a>
+    </div>
+    <div class="bay">
+      <div class="pillar left" aria-hidden="true"><svg class="pillar-svg" viewBox="0 0 10 100" preserveAspectRatio="none"><rect x="3" y="0" width="4" height="100" fill="#076b88"/><rect x="0" y="0" width="10" height="6" fill="#c9a23a"/><rect x="0" y="94" width="10" height="6" fill="#c9a23a"/><rect x="1" y="10" width="8" height="3" fill="#e34234"/><rect x="1" y="87" width="8" height="3" fill="#e34234"/></svg></div>
+      <div class="pillar right" aria-hidden="true"><svg class="pillar-svg" viewBox="0 0 10 100" preserveAspectRatio="none"><rect x="3" y="0" width="4" height="100" fill="#076b88"/><rect x="0" y="0" width="10" height="6" fill="#c9a23a"/><rect x="0" y="94" width="10" height="6" fill="#c9a23a"/><rect x="1" y="10" width="8" height="3" fill="#e34234"/><rect x="1" y="87" width="8" height="3" fill="#e34234"/></svg></div>
+      <a href="page-3.html">Patteeswaram</a>
+    </div>
+    <div class="bay">
+      <div class="pillar left" aria-hidden="true"><svg class="pillar-svg" viewBox="0 0 10 100" preserveAspectRatio="none"><rect x="3" y="0" width="4" height="100" fill="#076b88"/><rect x="0" y="0" width="10" height="6" fill="#c9a23a"/><rect x="0" y="94" width="10" height="6" fill="#c9a23a"/><rect x="1" y="10" width="8" height="3" fill="#e34234"/><rect x="1" y="87" width="8" height="3" fill="#e34234"/></svg></div>
+      <div class="pillar right" aria-hidden="true"><svg class="pillar-svg" viewBox="0 0 10 100" preserveAspectRatio="none"><rect x="3" y="0" width="4" height="100" fill="#076b88"/><rect x="0" y="0" width="10" height="6" fill="#c9a23a"/><rect x="0" y="94" width="10" height="6" fill="#c9a23a"/><rect x="1" y="10" width="8" height="3" fill="#e34234"/><rect x="1" y="87" width="8" height="3" fill="#e34234"/></svg></div>
+      <a href="page-4.html">Drawings</a>
+    </div>
+    <div class="bay">
+      <div class="pillar left" aria-hidden="true"><svg class="pillar-svg" viewBox="0 0 10 100" preserveAspectRatio="none"><rect x="3" y="0" width="4" height="100" fill="#076b88"/><rect x="0" y="0" width="10" height="6" fill="#c9a23a"/><rect x="0" y="94" width="10" height="6" fill="#c9a23a"/><rect x="1" y="10" width="8" height="3" fill="#e34234"/><rect x="1" y="87" width="8" height="3" fill="#e34234"/></svg></div>
+      <div class="pillar right" aria-hidden="true"><svg class="pillar-svg" viewBox="0 0 10 100" preserveAspectRatio="none"><rect x="3" y="0" width="4" height="100" fill="#076b88"/><rect x="0" y="0" width="10" height="6" fill="#c9a23a"/><rect x="0" y="94" width="10" height="6" fill="#c9a23a"/><rect x="1" y="10" width="8" height="3" fill="#e34234"/><rect x="1" y="87" width="8" height="3" fill="#e34234"/></svg></div>
+      <a href="page-5.html">The Practice</a>
+    </div>
+    <div class="bay" aria-current="page">
+      <div class="pillar left" aria-hidden="true"><svg class="pillar-svg" viewBox="0 0 10 100" preserveAspectRatio="none"><rect x="3" y="0" width="4" height="100" fill="#c9a23a"/><rect x="0" y="0" width="10" height="6" fill="#076b88"/><rect x="0" y="94" width="10" height="6" fill="#076b88"/></svg></div>
+      <div class="pillar right" aria-hidden="true"><svg class="pillar-svg" viewBox="0 0 10 100" preserveAspectRatio="none"><rect x="3" y="0" width="4" height="100" fill="#c9a23a"/><rect x="0" y="0" width="10" height="6" fill="#076b88"/><rect x="0" y="94" width="10" height="6" fill="#076b88"/></svg></div>
+      <a href="page-6.html">Workshop</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ MAIN CONTENT ============ -->
+<main>
+
+  <div class="inscription-band">श्री · By the favour of Sthapati Viswakarma · श्री</div>
+
+  <!-- Title block -->
+  <div class="page-title-block">
+    <div class="eyebrow">The Sixth Folio · A Letter to the Patron</div>
+    <h1>Workshop &amp; Correspondence</h1>
+    <p class="subtitle">Practical particulars for trusts, conservators, &amp; private patrons who seek the work of the chisel</p>
+    <div class="double-rule"></div>
+  </div>
+
+  <!-- Address & Telephone Row -->
+  <section class="content-grid">
+    <article class="panel">
+      <div class="pillar-cap left" aria-hidden="true"><div class="shaft"></div></div>
+      <div class="pillar-cap right" aria-hidden="true"><div class="shaft"></div></div>
+      <h2>The Studio Address</h2>
+      <p class="dateline">established Vaikasi 1962, in the lane behind the Sarangapani temple chariot-yard</p>
+      <div class="body">
+        <address>
+          <strong>Atelier Sthapati</strong><br>
+          14, Big Street (Periya Theru)<br>
+          Kumbakonam &mdash; 612 001<br>
+          Thanjavur District, Tamil Nadu<br>
+          South India
+        </address>
+        <p style="margin-top:14px;">The workshop occupies the rear court of an old <em>agraharam</em> house, two doors east of the Mahamaham tank approach. Visitors are received in the front verandah; the carving floor lies under a tiled roof beyond the small inner courtyard, where the apprentices sit at their stones from first light.</p>
+      </div>
+    </article>
+
+    <article class="panel">
+      <div class="pillar-cap left" aria-hidden="true"><div class="shaft"></div></div>
+      <div class="pillar-cap right" aria-hidden="true"><div class="shaft"></div></div>
+      <h2>By Telephone &amp; Post</h2>
+      <p class="dateline">letters answered weekly, on the Monday following receipt</p>
+      <div class="body">
+        <dl>
+          <dt>Telephone</dt>
+          <dd>+91 (0435) 242 1879<br><span style="font-style:italic;color:var(--text-emphasis);font-size:13px;">accepted between 16:00 and 18:30 only</span></dd>
+          <dt>Trunk-call</dt>
+          <dd>+91 94862 30714<br><span style="font-style:italic;color:var(--text-emphasis);font-size:13px;">for trustees travelling from outside the district</span></dd>
+          <dt>By Post</dt>
+          <dd>The Sthapati,<br>Atelier Sthapati,<br>P.B. No. 47, Head Post Office,<br>Kumbakonam 612 001</dd>
+          <dt>Telegraphic</dt>
+          <dd>SILPA · KUMBAKONAM</dd>
+        </dl>
+        <p style="margin-top:14px;font-size:13px;">All correspondence is read by Sri Kalyanasundaram himself; replies are written in a fair hand by Sri P. Murugesan, senior draughtsman, in Tamil or in English, as the patron prefers.</p>
+      </div>
+    </article>
+
+    <!-- Hours panel - full width -->
+    <article class="panel full">
+      <div class="pillar-cap left" aria-hidden="true"><div class="shaft"></div></div>
+      <div class="pillar-cap right" aria-hidden="true"><div class="shaft"></div></div>
+      <h2>Hours of the Workshop</h2>
+      <p class="dateline">according to the old observance of the carvers' guild of the Cauvery delta</p>
+      <div class="body">
+        <table class="hours-table">
+          <thead>
+            <tr>
+              <th>Day</th>
+              <th>Forenoon Sitting</th>
+              <th>Evening Sitting</th>
+              <th>Note</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Tuesday</td><td>7:00 &mdash; 11:30</td><td>15:30 &mdash; 19:00</td><td>chisel work; patrons received</td></tr>
+            <tr><td>Wednesday</td><td>7:00 &mdash; 11:30</td><td>15:30 &mdash; 19:00</td><td>drawing-board only</td></tr>
+            <tr><td>Thursday</td><td>7:00 &mdash; 11:30</td><td>15:30 &mdash; 19:00</td><td>open to apprentices &amp; scholars</td></tr>
+            <tr><td>Friday</td><td>7:00 &mdash; 11:30</td><td>15:30 &mdash; 19:00</td><td>chisel work</td></tr>
+            <tr><td>Saturday</td><td>7:00 &mdash; 11:30</td><td>15:30 &mdash; 19:00</td><td>measured-plan reviews</td></tr>
+            <tr><td>Sunday &amp; Monday</td><td colspan="2" style="text-align:center;font-style:italic;">Workshop closed &mdash; the Sthapati attends to temple visits &amp; site work</td><td>by appointment only</td></tr>
+          </tbody>
+        </table>
+        <div class="closure-note">
+          The workshop is also closed on every <strong>Amavasya</strong> (new moon) and every <strong>Pournami</strong> (full moon) day, in observance of the household tradition. On these days no chisel is laid to stone, no ink to paper. Patrons are kindly requested to consult the Tamil panchangam before fixing a visit.
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- Centerpiece -->
+  <div class="centerpiece-band">
+    <div class="om">
+      <svg viewBox="0 0 356 367" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 90.456847,353.9498 C 51.797347,340.13485 23.72672,305.75839 12.612487,258.6184 C 7.5684267,237.22321 6.1421397,201.86984 10.323594,201.86984 C 11.712834,201.86984 15.42322,211.57056 18.568972,223.427 C 25.452892,249.37152 37.19436,273.76855 48.535988,285.69407 C 67.374717,305.50242 114.0356,313.26029 140.92106,301.05394 C 161.86409,291.54544 170.35697,268.94603 161.24995,246.95931 C 154.21242,229.96943 138.24701,224.28836 108.50834,228.19197 C 108.50834,228.19197 90.282834,208.57398 84.476417,173.73548 L 103.15738,175.42939 C 125.65731,177.46962 142.64532,172.49605 151.46236,161.28728 C 159.74765,150.75419 159.5685,146.68046 150.34841,135.96157 C 137.04396,120.49428 113.15511,124.41248 64.786577,149.99522 L 40.381632,109.08518 L 50.613137,101.2812 C 76.253387,81.724339 120.77357,71.947329 146.11011,80.309169 C 169.18841,87.925649 186.12724,118.14755 181.60247,143.63298 C 178.54327,160.86286 164.72752,184.99524 154.05369,191.75339 L 144.84862,197.58162 L 157.56351,203.31522 C 179.17018,213.05833 192.36061,205.61034 208.12001,174.76849 C 229.92949,132.0869 244.0745,121.0378 276.96658,120.99051 C 292.28176,120.96847 297.73268,122.57499 308.90312,130.4031 C 336.78213,149.94016 351.9622,190.39693 348.62804,236.27272 C 344.40474,294.37435 316.88374,329.61601 275.73415,329.61601 C 253.15086,329.61601 238.59451,321.69526 227.00729,303.10156 C 216.82976,286.76927 212.24334,254.42288 218.08805,240.19369 C 220.89208,233.36732 221.39892,233.13578 221.58223,238.59686 C 221.91916,248.63689 233.34159,264.95549 243.82827,270.37835 C 269.55794,283.68369 306.49479,266.96693 321.10832,235.4032 C 332.20339,211.4394 326.25105,165.21656 311.02084,157.06552 C 307.83453,155.36024 299.96089,153.96502 293.5244,153.96502 C 279.84214,153.96502 269.09709,163.80155 254.03263,190.11774 C 248.82442,199.21613 240.05943,210.97175 234.55486,216.24128 C 225.61134,224.80312 222.41769,225.82225 204.53067,225.82225 L 184.51412,225.82225 L 190.98415,240.19369 C 200.2451,260.76437 199.80694,294.18704 190.00976,314.53347 C 181.35272,332.51252 161.33618,350.71469 145.33374,355.16013 C 129.75572,359.4876 104.38789,358.9281 90.456847,353.9498 z M 165.8338,75.923739 C 156.97908,60.814399 151.52974,32.606158 157.46546,32.606158 C 164.43775,47.732319 178.73037,61.227101 194.03409,70.643259 C 221.52091,83.949329 249.39257,78.578529 279.84247,54.108239 C 286.54595,48.721279 292.48231,44.913138 293.0345,45.645698 C 300.4697,57.184233 313.331,66.613261 317.58219,80.021449 C 317.58219,85.678729 293.22867,101.96033 274.01214,109.15007 C 226.38264,122.8706 193.96598,117.44304 165.8338,75.923739 z M 189.83603,40.997228 L 220.84514,6.6137488 L 255.30593,38.514418 C 243.51876,48.222549 235.00994,63.289118 221.54391,70.930009 C 210.90372,63.086273 195.02308,53.837816 189.83603,40.997228 z" fill="#e34234"/>
+      </svg>
+    </div>
+    <div class="verse">Asato mā sad gamaya · Tamaso mā jyotir gamaya</div>
+    <div class="verse-sub">— inscribed above the workshop lintel, after the manner of the Brihadaranyaka</div>
+  </div>
+
+  <!-- Conditions of Engagement, Site Visit, Directions -->
+  <section class="content-grid">
+    <article class="panel">
+      <div class="pillar-cap left" aria-hidden="true"><div class="shaft"></div></div>
+      <div class="pillar-cap right" aria-hidden="true"><div class="shaft"></div></div>
+      <h2>Of Drawings &amp; Site Visits</h2>
+      <p class="dateline">a long-standing convention of the studio, not lightly set aside</p>
+      <div class="body">
+        <p>It is the firm practice of this atelier that <em>no drawing, plan, or elevation is dispatched until the Sthapati has himself walked the site, taken the soil in hand, and noted the orientation by sun and pole-star</em>. A measured site-visit is therefore the necessary preliminary to all commissions, whether for a new mandapa, the restoration of a vimana, or the carving of a single dvarapala.</p>
+        <p>Site visits are arranged for the second and fourth Tuesdays of each month. The journey, lodging, and a modest honorarium of ₹4,500 per day are borne by the trust or patron. Within the Cauvery delta the visit ordinarily occupies one day; for sites beyond Madurai or Tirunelveli, three days should be reckoned.</p>
+        <p>Drawings are rendered upon hand-laid Wadhwan paper, in india ink with vermilion notation, and are delivered rolled in a cloth-bound bamboo cylinder by registered post within ninety days of the site visit.</p>
+      </div>
+    </article>
+
+    <article class="panel">
+      <div class="pillar-cap left" aria-hidden="true"><div class="shaft"></div></div>
+      <div class="pillar-cap right" aria-hidden="true"><div class="shaft"></div></div>
+      <h2>Direction from the Junction</h2>
+      <p class="dateline">for visiting trustees alighting at Kumbakonam railway station</p>
+      <div class="body">
+        <p>From the Kumbakonam Junction (Southern Railway, Mayiladuthurai &mdash; Tiruchirappalli line), proceed on foot or by cycle-rickshaw eastward along Railway Feeder Road for some four hundred yards, until the road meets the Sarangapani temple chariot street. Turn south, passing the eastern gopuram of the Sarangapani temple on your right.</p>
+        <p>Continue for two short blocks. Where the chariot-street narrows and the brass-merchants' stalls begin, Big Street (Periya Theru) opens to the left. The fourteenth doorway, marked by a vermilion-painted threshold and a small inscribed lintel reading <em>SILPASTHANAM</em>, is the workshop.</p>
+        <p>Total distance from the railway platform: approximately one kilometre. The walk is shaded for the greater part of the year. Auto-rickshaws will not enter the lane; trustees arriving by motor-car may set down at the chariot-street corner.</p>
+      </div>
+    </article>
+  </section>
+
+  <div class="palmette-divider" aria-hidden="true">
+    <svg viewBox="0 0 600 60" xmlns="http://www.w3.org/2000/svg">
+      <line x1="0" y1="30" x2="600" y2="30" stroke="#8b1538" stroke-width="1"/>
+      <line x1="0" y1="26" x2="600" y2="26" stroke="#c9a23a" stroke-width="0.6"/>
+      <line x1="0" y1="34" x2="600" y2="34" stroke="#c9a23a" stroke-width="0.6"/>
+      <g fill="#e34234">
+        <circle cx="100" cy="30" r="5"/>
+        <circle cx="200" cy="30" r="5"/>
+        <circle cx="300" cy="30" r="7"/>
+        <circle cx="400" cy="30" r="5"/>
+        <circle cx="500" cy="30" r="5"/>
+      </g>
+      <g fill="#c9a23a">
+        <circle cx="100" cy="30" r="2"/>
+        <circle cx="200" cy="30" r="2"/>
+        <circle cx="300" cy="30" r="3"/>
+        <circle cx="400" cy="30" r="2"/>
+        <circle cx="500" cy="30" r="2"/>
+      </g>
+      <g fill="#076b88">
+        <path d="M 270 30 L 280 22 L 290 30 L 280 38 Z"/>
+        <path d="M 320 30 L 310 22 L 300 30 L 310 38 Z"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- Resthouses -->
+  <section class="content-grid">
+    <article class="panel full">
+      <div class="pillar-cap left" aria-hidden="true"><div class="shaft"></div></div>
+      <div class="pillar-cap right" aria-hidden="true"><div class="shaft"></div></div>
+      <h2>Three Resthouses for Visiting Trustees</h2>
+      <p class="dateline">all within walking distance of the workshop, listed in the order of the studio's preference</p>
+      <div class="body">
+        <ol class="resthouse-list">
+          <li>
+            <span class="rh-name">Pandian Hotel &amp; Choultry</span>
+            52, Sarangapani East Sannadhi Street &middot; Kumbakonam 612 001 &middot; Tel. (0435) 242 0397.<br>
+            A modest establishment of fourteen rooms above the proprietor's brass shop. Vegetarian meals are served on plantain leaf at half past eleven and at eight; the upper rooms look directly onto the Sarangapani temple gopuram. Single room ₹850 per night; trustees' suite (two beds, writing-desk, attached bath) ₹1,400. Telegraphic address: PANDIAN.
+          </li>
+          <li>
+            <span class="rh-name">Sri Mahamaham Lodge</span>
+            7, T.S.R. Big Street &middot; Kumbakonam 612 001 &middot; Tel. (0435) 243 1156.<br>
+            Recommended for parties of three or more. The proprietor, Sri V. Subramaniam, is himself a trustee of the Adi Kumbeshwarar temple and is well acquainted with the customs of visiting devasthanam delegations. Filtered coffee is brought to the room at six in the morning without request. Rooms ₹1,100; family suite ₹1,950.
+          </li>
+          <li>
+            <span class="rh-name">The Raya's Bungalow Guest House</span>
+            Sannadhi Street, opposite Nageswaran temple tank &middot; Kumbakonam 612 001 &middot; Tel. (0435) 242 8821.<br>
+            A converted nineteenth-century zamindari residence with six rooms set about a tiled inner court. Quieter than the foregoing two, and favoured by scholars from the École française d'Extrême-Orient and the Archaeological Survey. ₹1,650 per night, including a simple south-Indian breakfast. Advance booking by post is essential during the Mahamaham year.
+          </li>
+        </ol>
+      </div>
+    </article>
+  </section>
+
+  <div class="inscription-band">May the work prosper · May the patron prosper · May the stone speak truly</div>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="arcade-footer" role="contentinfo">
+  <div class="lotus-petal-row" aria-hidden="true">❀ ❀ ❀ ❀ ❀ ❀ ❀ ❀ ❀ ❀ ❀ ❀ ❀ ❀ ❀</div>
+
+  <div class="seven-bays">
+    <div class="footer-bay">
+      <h4>I · The Studio</h4>
+      <p>Atelier Sthapati<br>14 Big Street<br>Kumbakonam 612 001</p>
+    </div>
+    <div class="footer-bay">
+      <h4>II · Telephone</h4>
+      <p>(0435) 242 1879<br>16:00 — 18:30<br>Tuesday — Saturday</p>
+    </div>
+    <div class="footer-bay">
+      <h4>III · Post</h4>
+      <p>P.B. No. 47<br>Head Post Office<br>Kumbakonam 612 001</p>
+    </div>
+    <div class="footer-bay center">
+      <div class="mandala" aria-hidden="true">
+        <svg viewBox="0 0 356 367" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="178" cy="183" r="170" fill="none" stroke="#c9a23a" stroke-width="3"/>
+          <circle cx="178" cy="183" r="140" fill="none" stroke="#c9a23a" stroke-width="1"/>
+          <path d="M 90.456847,353.9498 C 51.797347,340.13485 23.72672,305.75839 12.612487,258.6184 C 7.5684267,237.22321 6.1421397,201.86984 10.323594,201.86984 C 11.712834,201.86984 15.42322,211.57056 18.568972,223.427 C 25.452892,249.37152 37.19436,273.76855 48.535988,285.69407 C 67.374717,305.50242 114.0356,313.26029 140.92106,301.05394 C 161.86409,291.54544 170.35697,268.94603 161.24995,246.95931 C 154.21242,229.96943 138.24701,224.28836 108.50834,228.19197 C 108.50834,228.19197 90.282834,208.57398 84.476417,173.73548 L 103.15738,175.42939 C 125.65731,177.46962 142.64532,172.49605 151.46236,161.28728 C 159.74765,150.75419 159.5685,146.68046 150.34841,135.96157 C 137.04396,120.49428 113.15511,124.41248 64.786577,149.99522 L 40.381632,109.08518 L 50.613137,101.2812 C 76.253387,81.724339 120.77357,71.947329 146.11011,80.309169 C 169.18841,87.925649 186.12724,118.14755 181.60247,143.63298 C 178.54327,160.86286 164.72752,184.99524 154.05369,191.75339 L 144.84862,197.58162 L 157.56351,203.31522 C 179.17018,213.05833 192.36061,205.61034 208.12001,174.76849 C 229.92949,132.0869 244.0745,121.0378 276.96658,120.99051 C 292.28176,120.96847 297.73268,122.57499 308.90312,130.4031 C 336.78213,149.94016 351.9622,190.39693 348.62804,236.27272 C 344.40474,294.37435 316.88374,329.61601 275.73415,329.61601 C 253.15086,329.61601 238.59451,321.69526 227.00729,303.10156 C 216.82976,286.76927 212.24334,254.42288 218.08805,240.19369 C 220.89208,233.36732 221.39892,233.13578 221.58223,238.59686 C 221.91916,248.63689 233.34159,264.95549 243.82827,270.37835 C 269.55794,283.68369 306.49479,266.96693 321.10832,235.4032 C 332.20339,211.4394 326.25105,165.21656 311.02084,157.06552 C 307.83453,155.36024 299.96089,153.96502 293.5244,153.96502 C 279.84214,153.96502 269.09709,163.80155 254.03263,190.11774 C 248.82442,199.21613 240.05943,210.97175 234.55486,216.24128 C 225.61134,224.80312 222.41769,225.82225 204.53067,225.82225 L 184.51412,225.82225 L 190.98415,240.19369 C 200.2451,260.76437 199.80694,294.18704 190.00976,314.53347 C 181.35272,332.51252 161.33618,350.71469 145.33374,355.16013 C 129.75572,359.4876 104.38789,358.9281 90.456847,353.9498 z M 165.8338,75.923739 C 156.97908,60.814399 151.52974,32.606158 157.46546,32.606158 C 164.43775,47.732319 178.73037,61.227101 194.03409,70.643259 C 221.52091,83.949329 249.39257,78.578529 279.84247,54.108239 C 286.54595,48.721279 292.48231,44.913138 293.0345,45.645698 C 300.4697,57.184233 313.331,66.613261 317.58219,80.021449 C 317.58219,85.678729 293.22867,101.96033 274.01214,109.15007 C 226.38264,122.8706 193.96598,117.44304 165.8338,75.923739 z M 189.83603,40.997228 L 220.84514,6.6137488 L 255.30593,38.514418 C 243.51876,48.222549 235.00994,63.289118 221.54391,70.930009 C 210.90372,63.086273 195.02308,53.837816 189.83603,40.997228 z" fill="#c9a23a"/>
+        </svg>
+      </div>
+    </div>
+    <div class="footer-bay">
+      <h4>IV · Hours</h4>
+      <p>Tue — Sat<br>7:00 — 11:30<br>15:30 — 19:00</p>
+    </div>
+    <div class="footer-bay">
+      <h4>V · Closed</h4>
+      <p>Sun &amp; Mon<br>Amavasya days<br>Pournami days</p>
+    </div>
+    <div class="footer-bay">
+      <h4>VI · Sthapati</h4>
+      <p>R. Kalyanasundaram<br>fifth in descent<br>of the Cauvery line</p>
+    </div>
+  </div>
+
+  <div class="footer-register">
+    Atelier Sthapati &middot; Studio of R. Kalyanasundaram &middot; Stone, Line &amp; Measured Plan &middot; Kumbakonam in the Thanjavur Mandalam &middot; The Dravidian Tradition Continued
+  </div>
+  <div class="copyright-baseline">
+    © Saka 1946 &middot; Kali 5125 &middot; A.D. 2024 &mdash; All drawings, plans &amp; carved designs remain the property of the atelier &mdash; Reproduction without leave is forbidden
+  </div>
+</footer>
+
+</body>
+</html>

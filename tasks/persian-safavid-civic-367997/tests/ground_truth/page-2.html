@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Council & Mandate — Maydān-i Naqsh</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  /* ---------- Base ---------- */
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), sans-serif;
+    margin: 0;
+    line-height: 1.65;
+  }
+  .axis {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 64px;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+  p { margin: 0 0 1.1em 0; }
+
+  /* ---------- Top filet ---------- */
+  .top-filet {
+    height: 2px;
+    background: var(--accent);
+    width: 100%;
+  }
+
+  /* ---------- Navigation ---------- */
+  .masthead {
+    text-align: center;
+    padding: 28px 0 18px;
+    background: var(--bg);
+  }
+  .sitename {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    font-size: 1.35rem;
+    letter-spacing: 0.18em;
+    color: var(--primary);
+    display: inline-flex;
+    align-items: center;
+    gap: 22px;
+  }
+  .palmette {
+    width: 38px;
+    height: 18px;
+    display: inline-block;
+    color: var(--ornament);
+  }
+  .palmette svg { width: 100%; height: 100%; }
+  .sitename-sub {
+    display: block;
+    font-family: var(--font-body), sans-serif;
+    font-variant: normal;
+    font-size: 0.7rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-top: 6px;
+  }
+  nav.primary {
+    text-align: center;
+    padding: 14px 0 20px;
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--ornament);
+    margin-top: 14px;
+  }
+  nav.primary ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  nav.primary a {
+    font-family: var(--font-body), sans-serif;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    letter-spacing: 0.22em;
+    color: var(--primary);
+    text-decoration: none;
+    padding: 4px 2px;
+    position: relative;
+  }
+  nav.primary a:hover { color: var(--secondary); }
+  nav.primary li.sep {
+    width: 7px; height: 7px;
+    background: var(--primary);
+    transform: rotate(45deg);
+    display: inline-block;
+  }
+  nav.primary a[aria-current="page"] {
+    color: var(--text-emphasis);
+    border-bottom: 2px solid var(--secondary);
+    padding-bottom: 6px;
+  }
+  nav.primary a[aria-current="page"]::after {
+    content: "✦";
+    color: var(--accent);
+    position: absolute;
+    bottom: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.7rem;
+  }
+
+  /* ---------- Hero / page heading ---------- */
+  .page-hero {
+    text-align: center;
+    padding: 70px 0 30px;
+    position: relative;
+  }
+  .page-hero .arch {
+    width: 240px;
+    margin: 0 auto 18px;
+    color: var(--primary);
+    display: block;
+  }
+  .page-hero .arch svg { width: 100%; height: auto; display:block; }
+  .page-hero .kicker {
+    font-size: 0.72rem;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 12px;
+  }
+  .page-hero h1 {
+    font-size: 3.1rem;
+    margin: 0 0 10px;
+    line-height: 1.1;
+  }
+  .page-hero .lede {
+    max-width: 640px;
+    margin: 18px auto 0;
+    font-size: 1.05rem;
+    color: var(--text-emphasis);
+    font-style: italic;
+  }
+
+  /* ---------- Divider ---------- */
+  .divider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 36px 0;
+    color: var(--ornament);
+  }
+  .divider svg {
+    width: 360px;
+    height: auto;
+    fill: var(--ornament);
+  }
+
+  /* ---------- Two-column prose ---------- */
+  .prose {
+    max-width: 760px;
+    margin: 0 auto;
+    text-align: justify;
+    font-size: 1rem;
+  }
+  .prose .first-letter::first-letter {
+    font-family: var(--font-display), serif;
+    font-size: 4.2rem;
+    float: left;
+    line-height: 0.9;
+    padding: 6px 12px 0 0;
+    color: var(--secondary);
+  }
+  .section-title {
+    text-align: center;
+    margin: 0 0 8px;
+  }
+  .section-title h2 {
+    font-size: 2rem;
+    margin: 0;
+  }
+  .section-title .ksub {
+    font-size: 0.7rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 6px;
+  }
+
+  /* ---------- Council table / cards ---------- */
+  .council-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 26px;
+    margin: 30px 0 10px;
+  }
+  .council-card {
+    background: var(--surface);
+    border: 1px solid var(--primary);
+    box-shadow: inset 0 0 0 4px var(--bg), inset 0 0 0 5px var(--accent);
+    padding: 28px 22px 22px;
+    text-align: center;
+    position: relative;
+  }
+  .council-card:hover {
+    box-shadow: inset 0 0 0 4px var(--bg), inset 0 0 0 5px var(--secondary);
+  }
+  .council-card .arch-mini {
+    width: 56px;
+    height: 56px;
+    margin: -10px auto 8px;
+    color: var(--primary);
+    position: relative;
+  }
+  .council-card .seal-num {
+    position: absolute;
+    top: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-display), serif;
+    font-size: 0.95rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+  }
+  .council-card h3 {
+    font-size: 1.15rem;
+    margin: 6px 0 4px;
+    line-height: 1.25;
+  }
+  .council-card .role {
+    font-size: 0.7rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--secondary);
+  }
+  .council-card .filet {
+    width: 40px;
+    height: 1px;
+    background: var(--secondary);
+    margin: 12px auto;
+  }
+  .council-card p {
+    font-size: 0.88rem;
+    color: var(--text);
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  .arch-mini svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* ---------- History panel ---------- */
+  .history {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: start;
+    margin-top: 20px;
+  }
+  .history h3 {
+    font-size: 1.4rem;
+    margin: 0 0 8px;
+  }
+  .history .yearline {
+    border-left: 2px solid var(--accent);
+    padding-left: 18px;
+  }
+  .history dl {
+    margin: 0;
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    row-gap: 14px;
+    column-gap: 18px;
+  }
+  .history dt {
+    font-family: var(--font-display), serif;
+    color: var(--secondary);
+    font-size: 1.05rem;
+  }
+  .history dd {
+    margin: 0;
+    font-size: 0.92rem;
+    color: var(--text);
+  }
+
+  /* ---------- Commitments + portrait panel ---------- */
+  .commitments {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 60px;
+    align-items: center;
+    margin: 20px 0 60px;
+  }
+  .portrait-panel {
+    position: relative;
+    height: 460px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+      repeating-linear-gradient(45deg, rgba(30,58,95,0.05) 0 6px, transparent 6px 12px),
+      var(--bg);
+    border: 1px solid var(--primary);
+    box-shadow: inset 0 0 0 6px var(--bg), inset 0 0 0 7px var(--accent);
+  }
+  .portrait-panel .arch-bg {
+    position: absolute;
+    inset: 30px;
+    color: var(--primary);
+    opacity: 0.95;
+  }
+  .portrait-panel .arch-bg svg {
+    width: 100%;
+    height: 100%;
+  }
+  .portrait-panel .portrait-inner {
+    position: relative;
+    width: 60%;
+    text-align: center;
+    z-index: 2;
+    padding: 30px 18px;
+  }
+  .portrait-panel .seal {
+    width: 110px;
+    height: 110px;
+    margin: 0 auto 14px;
+    color: var(--accent);
+  }
+  .portrait-panel .seal svg { width: 100%; height: 100%; }
+  .portrait-panel .chair-name {
+    font-family: var(--font-display), serif;
+    font-size: 1.25rem;
+    color: var(--primary);
+    margin-bottom: 4px;
+  }
+  .portrait-panel .chair-role {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    color: var(--secondary);
+  }
+  .portrait-panel .signature {
+    margin-top: 18px;
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    color: var(--text-emphasis);
+    font-size: 1.05rem;
+  }
+  .commitments-list h2 {
+    font-size: 2rem;
+    margin: 0 0 8px;
+  }
+  .commitments-list .ksub {
+    font-size: 0.7rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 16px;
+    display: block;
+  }
+  .commitments-list ol {
+    list-style: none;
+    padding: 0;
+    margin: 18px 0 0;
+    counter-reset: cmt;
+  }
+  .commitments-list ol li {
+    counter-increment: cmt;
+    padding: 16px 0 16px 70px;
+    position: relative;
+    border-top: 1px solid rgba(30,58,95,0.18);
+  }
+  .commitments-list ol li:last-child {
+    border-bottom: 1px solid rgba(30,58,95,0.18);
+  }
+  .commitments-list ol li::before {
+    content: counter(cmt, upper-roman) ".";
+    position: absolute;
+    left: 12px;
+    top: 16px;
+    font-family: var(--font-display), serif;
+    font-size: 1.4rem;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+  }
+  .commitments-list ol li h4 {
+    margin: 0 0 4px;
+    font-size: 1.1rem;
+    color: var(--primary);
+  }
+  .commitments-list ol li p {
+    margin: 0;
+    font-size: 0.92rem;
+    color: var(--text);
+  }
+
+  /* ---------- Council seat block ---------- */
+  .seat-block {
+    text-align: center;
+    margin: 50px auto 30px;
+    max-width: 720px;
+    padding: 28px 30px;
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+    position: relative;
+  }
+  .seat-block .ksub {
+    font-size: 0.7rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 8px;
+  }
+  .seat-block .addr {
+    font-family: var(--font-display), serif;
+    font-size: 1.2rem;
+    color: var(--primary);
+    line-height: 1.4;
+  }
+  .seat-block .meta {
+    margin-top: 10px;
+    font-size: 0.85rem;
+    color: var(--text-emphasis);
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    background: var(--primary);
+    color: var(--bg);
+    margin-top: 70px;
+    position: relative;
+    overflow: hidden;
+  }
+  footer .girih-bg {
+    position: absolute;
+    inset: 0;
+    opacity: 0.08;
+    pointer-events: none;
+  }
+  footer .girih-bg svg { width: 100%; height: 100%; }
+  footer .footer-inner {
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 60px 64px 30px;
+  }
+  footer .cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 50px;
+    text-align: center;
+  }
+  footer h4 {
+    color: var(--bg);
+    font-family: var(--font-display), serif;
+    font-size: 1rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    font-weight: 400;
+  }
+  footer h4::after {
+    content: "";
+    display: block;
+    width: 30px;
+    height: 1px;
+    background: var(--accent);
+    margin: 8px auto 0;
+  }
+  footer p {
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: var(--bg);
+    opacity: 0.92;
+    margin: 0;
+  }
+  footer .tailpiece {
+    margin: 40px auto 14px;
+    text-align: center;
+    color: var(--accent);
+    font-size: 1.4rem;
+    letter-spacing: 0.4em;
+  }
+  footer .filet-rule {
+    border-top: 1px solid rgba(242,229,204,0.4);
+    text-align: center;
+    padding-top: 14px;
+    font-size: 0.72rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--bg);
+    opacity: 0.85;
+  }
+
+  /* arch silhouettes for cards (mini cobalt ogee) */
+  .arch-glyph {
+    width: 54px; height: 56px;
+    margin: 0 auto;
+  }
+</style>
+</head>
+<body>
+
+<div class="top-filet"></div>
+
+<header class="masthead">
+  <div class="sitename">
+    <span class="palmette" aria-hidden="true">
+      <svg viewBox="0 0 40 18" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 9 L8 9 M8 9 C 8 4, 14 2, 20 9 C 26 2, 32 4, 32 9 L40 9" stroke="currentColor" stroke-width="1.2" fill="none"/>
+        <circle cx="20" cy="9" r="1.6" fill="currentColor"/>
+      </svg>
+    </span>
+    Maydān-i Naqsh
+    <span class="palmette" aria-hidden="true">
+      <svg viewBox="0 0 40 18" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 9 L8 9 M8 9 C 8 4, 14 2, 20 9 C 26 2, 32 4, 32 9 L40 9" stroke="currentColor" stroke-width="1.2" fill="none"/>
+        <circle cx="20" cy="9" r="1.6" fill="currentColor"/>
+      </svg>
+    </span>
+  </div>
+  <span class="sitename-sub">Civic Bureau of Isfahan Heritage</span>
+
+  <nav class="primary" aria-label="Primary">
+    <ul>
+      <li><a href="page-1.html">Bureau</a></li>
+      <li class="sep" aria-hidden="true"></li>
+      <li><a href="page-2.html" aria-current="page">Council &amp; Mandate</a></li>
+      <li class="sep" aria-hidden="true"></li>
+      <li><a href="page-3.html">Permits</a></li>
+      <li class="sep" aria-hidden="true"></li>
+      <li><a href="page-4.html">Notices</a></li>
+      <li class="sep" aria-hidden="true"></li>
+      <li><a href="page-5.html">Calendar</a></li>
+      <li class="sep" aria-hidden="true"></li>
+      <li><a href="page-6.html">Visit</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section class="page-hero axis">
+    <div class="arch" aria-hidden="true">
+      <svg viewBox="140 240 510 560" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(8.2,-11.87)">
+          <g stroke="currentColor" stroke-width="3.125" fill="none" stroke-linecap="round">
+            <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+            <path d="m 250,430.58 24.75248,58.41585"/>
+            <path d="m 347.0297,342.46119 41.58416,23.76238 0.9901,35.64356"/>
+            <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+          </g>
+          <g stroke="currentColor" stroke-width="3.125" fill="none" stroke-linecap="round" transform="matrix(-1,0,0,1,777.88071,-0.297)">
+            <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+            <path d="m 250,430.58 24.75248,58.41585"/>
+            <path d="m 347.0297,342.46119 41.58416,23.76238 0.9901,35.64356"/>
+            <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+    <div class="kicker">Folio II · About the Bureau</div>
+    <h1>Council &amp; Mandate</h1>
+    <p class="lede">Nine seats, four stewardships, and one charter — the form by which Isfahan's quiet preservation is undertaken, debated, and recorded.</p>
+  </section>
+
+  <div class="divider" aria-hidden="true">
+    <svg viewBox="0 0 438 19" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,9.4c0,0,37-0.06,74-0.83c18.5-0.39,37-0.95,50.8-1.79c6.9-0.41,12.7-0.91,16.7-1.46c2-0.28,3.5-0.58,4.5-0.88c0.5-0.15,0.85-0.3,1.05-0.4l0.24-0.16l0.42-0.29l0.66,0.66l-0.37,0.34l-0.46,0.32c-0.29,0.15-0.71,0.33-1.26,0.48c-1.08,0.31-2.66,0.61-4.68,0.88c-4.04,0.53-9.81,0.99-16.75,1.35C111.05,8.36,74,9.4,74,9.4z"/>
+      <circle cx="219" cy="9.4" r="4" fill="none" stroke="currentColor" stroke-width="1.2"/>
+      <path d="M438,9.4c0,0-37-0.06-74-0.83c-18.5-0.39-37-0.95-50.8-1.79c-6.9-0.41-12.7-0.91-16.7-1.46c-2-0.28-3.5-0.58-4.5-0.88c-0.5-0.15-0.85-0.3-1.05-0.4l-0.24-0.16l-0.42-0.29l-0.66,0.66l0.37,0.34l0.46,0.32c0.29,0.15,0.71,0.33,1.26,0.48c1.08,0.31,2.66,0.61,4.68,0.88c4.04,0.53,9.81,0.99,16.75,1.35C326.95,8.36,364,9.4,364,9.4z"/>
+      <circle cx="178" cy="9.4" r="2" fill="currentColor"/>
+      <circle cx="260" cy="9.4" r="2" fill="currentColor"/>
+    </svg>
+  </div>
+
+  <section class="axis">
+    <div class="prose">
+      <p class="first-letter">The Bureau is a small body by ordinance and by intention. Its work is to keep what Isfahan has already perfected — domes, water-courses, gardens, and the long-standing methods of their care — and to refuse, where the city's fabric is concerned, the impulse toward novelty for its own sake. Membership is fixed at nine: a Chair, two Deputies, and six Stewards drawn in rotation from the four standing chambers of Tilework, Hydraulics, Gardens, and Archives. Each seat carries a four-year term, staggered so that no chamber is ever wholly renewed at once.</p>
+
+      <p>Sessions of the full Council are held on the second and fourth Tuesday of each month at the Old Customs House on Ostandari Street, beginning at 14:30 and concluding by sunset. Eight of the nine annual deliberations are open to the public; minutes from all sessions are deposited within ten working days in the Bureau's reading room and republished in the Folio of Notices. The Council does not legislate. It advises the Office of the Governor, issues binding heritage-permits within the historic precincts, and arbitrates restoration disputes between contracting parties and licensed ateliers.</p>
+    </div>
+  </section>
+
+  <section class="axis" style="margin-top:60px;">
+    <div class="section-title">
+      <div class="ksub">The Nine Seats</div>
+      <h2>Composition of the Council</h2>
+    </div>
+
+    <div class="council-grid">
+      <article class="council-card">
+        <div class="seal-num">No. I</div>
+        <div class="arch-mini" aria-hidden="true">
+          <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+            <path d="M30 6 C 14 6, 6 22, 6 38 L 6 54 L 54 54 L 54 38 C 54 22, 46 6, 30 6 Z" fill="none" stroke="currentColor" stroke-width="1.6"/>
+            <circle cx="30" cy="34" r="3" fill="var(--accent)"/>
+          </svg>
+        </div>
+        <h3>Reza Forouzān</h3>
+        <div class="role">Chair · Tilework Chamber</div>
+        <div class="filet"></div>
+        <p>Master tile-setter from the workshops of Khaju. Elected to the Chair in 2021; previously Deputy for Tilework, 2014–2020.</p>
+      </article>
+
+      <article class="council-card">
+        <div class="seal-num">No. II</div>
+        <div class="arch-mini" aria-hidden="true">
+          <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+            <path d="M30 6 C 14 6, 6 22, 6 38 L 6 54 L 54 54 L 54 38 C 54 22, 46 6, 30 6 Z" fill="none" stroke="currentColor" stroke-width="1.6"/>
+            <circle cx="30" cy="34" r="3" fill="var(--accent)"/>
+          </svg>
+        </div>
+        <h3>Soraya Mostafavi</h3>
+        <div class="role">First Deputy · Archives</div>
+        <div class="filet"></div>
+        <p>Historian of the Safavid municipal record. Custodian of the Bureau's manuscript collection and convenor of the Permit Review.</p>
+      </article>
+
+      <article class="council-card">
+        <div class="seal-num">No. III</div>
+        <div class="arch-mini" aria-hidden="true">
+          <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+            <path d="M30 6 C 14 6, 6 22, 6 38 L 6 54 L 54 54 L 54 38 C 54 22, 46 6, 30 6 Z" fill="none" stroke="currentColor" stroke-width="1.6"/>
+            <circle cx="30" cy="34" r="3" fill="var(--accent)"/>
+          </svg>
+        </div>
+        <h3>Hossein Ardalān</h3>
+        <div class="role">Second Deputy · Hydraulics</div>
+        <div class="filet"></div>
+        <p>Civil engineer, qanāt specialist. Oversees the Madi water-channels and the Bureau's seasonal flow inspections.</p>
+      </article>
+
+      <article class="council-card">
+        <div class="seal-num">No. IV</div>
+        <div class="arch-mini" aria-hidden="true">
+          <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+            <path d="M30 6 C 14 6, 6 22, 6 38 L 6 54 L 54 54 L 54 38 C 54 22, 46 6, 30 6 Z" fill="none" stroke="currentColor" stroke-width="1.6"/>
+            <circle cx="30" cy="34" r="3" fill="var(--accent)"/>
+          </svg>
+        </div>
+        <h3>Maryam Khorrami</h3>
+        <div class="role">Steward · Gardens</div>
+        <div class="filet"></div>
+        <p>Landscape architect responsible for the Chahār Bāgh axis and the seven civic gardens within the inner precinct.</p>
+      </article>
+
+      <article class="council-card">
+        <div class="seal-num">No. V</div>
+        <div class="arch-mini" aria-hidden="true">
+          <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+            <path d="M30 6 C 14 6, 6 22, 6 38 L 6 54 L 54 54 L 54 38 C 54 22, 46 6, 30 6 Z" fill="none" stroke="currentColor" stroke-width="1.6"/>
+            <circle cx="30" cy="34" r="3" fill="var(--accent)"/>
+          </svg>
+        </div>
+        <h3>Davoud Ne'matī</h3>
+        <div class="role">Steward · Tilework</div>
+        <div class="filet"></div>
+        <p>Heir to the Ne'matī atelier; conducts the annual condition survey of the Maydān's seven tiled façades.</p>
+      </article>
+
+      <article class="council-card">
+        <div class="seal-num">No. VI</div>
+        <div class="arch-mini" aria-hidden="true">
+          <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+            <path d="M30 6 C 14 6, 6 22, 6 38 L 6 54 L 54 54 L 54 38 C 54 22, 46 6, 30 6 Z" fill="none" stroke="currentColor" stroke-width="1.6"/>
+            <circle cx="30" cy="34" r="3" fill="var(--accent)"/>
+          </svg>
+        </div>
+        <h3>Parvīn Sāberī</h3>
+        <div class="role">Steward · Hydraulics</div>
+        <div class="filet"></div>
+        <p>Hydrologist seconded from Isfahan University. Reports quarterly on the Zāyandeh-Rūd's seasonal allocation to civic fountains.</p>
+      </article>
+
+      <article class="council-card">
+        <div class="seal-num">No. VII</div>
+        <div class="arch-mini" aria-hidden="true">
+          <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+            <path d="M30 6 C 14 6, 6 22, 6 38 L 6 54 L 54 54 L 54 38 C 54 22, 46 6, 30 6 Z" fill="none" stroke="currentColor" stroke-width="1.6"/>
+            <circle cx="30" cy="34" r="3" fill="var(--accent)"/>
+          </svg>
+        </div>
+        <h3>Bahman Tavakkolī</h3>
+        <div class="role">Steward · Gardens</div>
+        <div class="filet"></div>
+        <p>Arboriculturist, keeper of the historical plane-tree register. Coordinates pruning licenses across all listed precincts.</p>
+      </article>
+
+      <article class="council-card">
+        <div class="seal-num">No. VIII</div>
+        <div class="arch-mini" aria-hidden="true">
+          <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+            <path d="M30 6 C 14 6, 6 22, 6 38 L 6 54 L 54 54 L 54 38 C 54 22, 46 6, 30 6 Z" fill="none" stroke="currentColor" stroke-width="1.6"/>
+            <circle cx="30" cy="34" r="3" fill="var(--accent)"/>
+          </svg>
+        </div>
+        <h3>Leyla Hāshemī</h3>
+        <div class="role">Steward · Archives</div>
+        <div class="filet"></div>
+        <p>Conservator of paper and bound records. Directs the digitisation of the 1934–1979 ordinance series, ongoing since 2018.</p>
+      </article>
+
+      <article class="council-card">
+        <div class="seal-num">No. IX</div>
+        <div class="arch-mini" aria-hidden="true">
+          <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+            <path d="M30 6 C 14 6, 6 22, 6 38 L 6 54 L 54 54 L 54 38 C 54 22, 46 6, 30 6 Z" fill="none" stroke="currentColor" stroke-width="1.6"/>
+            <circle cx="30" cy="34" r="3" fill="var(--accent)"/>
+          </svg>
+        </div>
+        <h3>Cyrus Esfandiyārī</h3>
+        <div class="role">Steward · Public Liaison</div>
+        <div class="filet"></div>
+        <p>Rotating seat held by a citizen of the Old Quarter, drawn by lot for a two-year term. Voice for residents in permit hearings.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="axis">
+    <div class="seat-block">
+      <div class="ksub">Seat of the Council</div>
+      <div class="addr">The Old Customs House<br>Ostandari Street, Naqsh-i Jahān Precinct, Isfahan</div>
+      <div class="meta">Council convenes 2nd &amp; 4th Tuesday · 14:30 · Public gallery seats 24</div>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true">
+    <svg viewBox="0 0 438 19" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,9.4c0,0,37-0.06,74-0.83c18.5-0.39,37-0.95,50.8-1.79c6.9-0.41,12.7-0.91,16.7-1.46c2-0.28,3.5-0.58,4.5-0.88c0.5-0.15,0.85-0.3,1.05-0.4l0.24-0.16l0.42-0.29l0.66,0.66l-0.37,0.34l-0.46,0.32c-0.29,0.15-0.71,0.33-1.26,0.48c-1.08,0.31-2.66,0.61-4.68,0.88c-4.04,0.53-9.81,0.99-16.75,1.35C111.05,8.36,74,9.4,74,9.4z"/>
+      <circle cx="219" cy="9.4" r="4" fill="none" stroke="currentColor" stroke-width="1.2"/>
+      <path d="M438,9.4c0,0-37-0.06-74-0.83c-18.5-0.39-37-0.95-50.8-1.79c-6.9-0.41-12.7-0.91-16.7-1.46c-2-0.28-3.5-0.58-4.5-0.88c-0.5-0.15-0.85-0.3-1.05-0.4l-0.24-0.16l-0.42-0.29l-0.66,0.66l0.37,0.34l0.46,0.32c0.29,0.15,0.71,0.33,1.26,0.48c1.08,0.31,2.66,0.61,4.68,0.88c4.04,0.53,9.81,0.99,16.75,1.35C326.95,8.36,364,9.4,364,9.4z"/>
+      <circle cx="178" cy="9.4" r="2" fill="currentColor"/>
+      <circle cx="260" cy="9.4" r="2" fill="currentColor"/>
+    </svg>
+  </div>
+
+  <section class="axis">
+    <div class="section-title">
+      <div class="ksub">A Brief History</div>
+      <h2>From Charter to Reorganisation</h2>
+    </div>
+
+    <div class="history" style="margin-top:30px;">
+      <div>
+        <p>The Bureau traces its present form to the Municipal Charter of 21 Ordibehesht 1313 (May 1934), under which the Office of Heritage Stewardship was first separated from the general Public Works Directorate. The original mandate was narrow: to record and protect the surviving Safavid monuments of the Maydān, the Chahār Bāgh, and the bridges of the Zāyandeh-Rūd. A staff of seven, including two surveyors and a single tile-restorer, was deemed sufficient.</p>
+        <p>By the late 1970s the Bureau had grown unwieldy and dispersed; restoration files were held in three different buildings and the chain of authority between the Bureau, the Governor's office, and the national antiquities service was no longer legible. In Mehr 1390 (October 2011) the Council was formally reconstituted under Ordinance 1390/IX-44, which established the present nine-seat structure, the four standing chambers, and the rotating Public Liaison seat.</p>
+      </div>
+      <div class="yearline">
+        <h3>Principal Dates</h3>
+        <dl>
+          <dt>1934</dt>
+          <dd>Municipal Charter establishes the Office of Heritage Stewardship within Isfahan's town hall.</dd>
+          <dt>1956</dt>
+          <dd>Old Customs House on Ostandari Street is assigned as the Bureau's permanent seat.</dd>
+          <dt>1979</dt>
+          <dd>The Council suspended for sixteen months; archives sealed and later restored intact.</dd>
+          <dt>1994</dt>
+          <dd>Naqsh-i Jahān inscribed on the UNESCO list; the Bureau becomes the local liaison body.</dd>
+          <dt>2011</dt>
+          <dd>Reorganisation under Ordinance 1390/IX-44 — the present nine-seat Council is constituted.</dd>
+          <dt>2018</dt>
+          <dd>Digitisation of the 1934–1979 ordinance series commences under Steward Hāshemī.</dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true">
+    <svg viewBox="0 0 438 19" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,9.4c0,0,37-0.06,74-0.83c18.5-0.39,37-0.95,50.8-1.79c6.9-0.41,12.7-0.91,16.7-1.46c2-0.28,3.5-0.58,4.5-0.88c0.5-0.15,0.85-0.3,1.05-0.4l0.24-0.16l0.42-0.29l0.66,0.66l-0.37,0.34l-0.46,0.32c-0.29,0.15-0.71,0.33-1.26,0.48c-1.08,0.31-2.66,0.61-4.68,0.88c-4.04,0.53-9.81,0.99-16.75,1.35C111.05,8.36,74,9.4,74,9.4z"/>
+      <circle cx="219" cy="9.4" r="4" fill="none" stroke="currentColor" stroke-width="1.2"/>
+      <path d="M438,9.4c0,0-37-0.06-74-0.83c-18.5-0.39-37-0.95-50.8-1.79c-6.9-0.41-12.7-0.91-16.7-1.46c-2-0.28-3.5-0.58-4.5-0.88c-0.5-0.15-0.85-0.3-1.05-0.4l-0.24-0.16l-0.42-0.29l-0.66,0.66l0.37,0.34l0.46,0.32c0.29,0.15,0.71,0.33,1.26,0.48c1.08,0.31,2.66,0.61,4.68,0.88c4.04,0.53,9.81,0.99,16.75,1.35C326.95,8.36,364,9.4,364,9.4z"/>
+      <circle cx="178" cy="9.4" r="2" fill="currentColor"/>
+      <circle cx="260" cy="9.4" r="2" fill="currentColor"/>
+    </svg>
+  </div>
+
+  <section class="axis">
+    <div class="commitments">
+      <div class="commitments-list">
+        <span class="ksub">The Bureau's Pledge</span>
+        <h2>Three Commitments</h2>
+        <p style="font-size:0.95rem; color:var(--text-emphasis);">Set down at the close of the 2011 reorganisation and reaffirmed at every fourth-year transfer of the Chair. They are read aloud at the opening of each Council year.</p>
+        <ol>
+          <li>
+            <h4>Symmetry</h4>
+            <p>That works of restoration shall preserve the central axis of every façade, courtyard, and water-channel; that no addition shall be undertaken which the eye cannot read as balanced from the principal vantage.</p>
+          </li>
+          <li>
+            <h4>Durability</h4>
+            <p>That methods and materials shall favour the lifespan of generations rather than the convenience of a season; that traditional techniques shall be specified wherever a documented precedent exists.</p>
+          </li>
+          <li>
+            <h4>Public Access</h4>
+            <p>That the records, hearings, and physical precincts under the Bureau's care shall remain open to the citizens of Isfahan, save where conservation or safety requires temporary closure published in advance.</p>
+          </li>
+        </ol>
+      </div>
+
+      <div class="portrait-panel">
+        <div class="arch-bg" aria-hidden="true">
+          <svg viewBox="140 240 510 560" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+            <g transform="translate(8.2,-11.87)">
+              <g stroke="currentColor" stroke-width="3.125" fill="none" stroke-linecap="round">
+                <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+                <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+              </g>
+              <g stroke="currentColor" stroke-width="3.125" fill="none" stroke-linecap="round" transform="matrix(-1,0,0,1,777.88071,-0.297)">
+                <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+                <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+              </g>
+            </g>
+          </svg>
+        </div>
+        <div class="portrait-inner">
+          <div class="seal" aria-hidden="true">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <g fill="none" stroke="currentColor" stroke-width="1.6">
+                <polygon points="50,8 58,28 80,28 64,42 70,64 50,52 30,64 36,42 20,28 42,28"/>
+                <circle cx="50" cy="50" r="14"/>
+                <circle cx="50" cy="50" r="22"/>
+                <polygon points="50,28 56,46 74,46 60,56 66,72 50,62 34,72 40,56 26,46 44,46"/>
+              </g>
+            </svg>
+          </div>
+          <div class="chair-name">Reza Forouzān</div>
+          <div class="chair-role">Chair of the Council</div>
+          <div class="signature">— in office since 1400 —</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="girih-bg" aria-hidden="true">
+    <svg viewBox="0 0 1600 1200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <g fill="none" stroke="#f2e5cc" stroke-width="2">
+        <path d="M193,732 L300,656 L339,780 L444,857 L339,932 L299,812 Z"/>
+        <path d="M948,579 L909,456 L805,380 L673,380 L715,503 L820,579 Z"/>
+        <path d="M296,809 L337,931 L297,1054 L191,1131 L153,1007 L193,884 Z"/>
+        <path d="M571,704 L441,705 L337,629 L295,506 L336,380 L437,305 L570,305 L676,380 L717,506 L675,628 Z"/>
+        <path d="M1243,225 L1241,149 L1169,176 L1126,111 L1080,174 L1008,151 L1007,228 L1080,203 L1124,265 L1168,203 Z"/>
+        <path d="M1455,834 L1335,796 L1264,696 L1192,795 L1075,834 L1146,934 L1147,1059 L1264,1021 L1383,1059 L1383,936 Z"/>
+        <path d="M64,180 L104,303 L208,379 L339,379 L297,256 L193,180 Z"/>
+        <path d="M954,191 L915,314 L811,390 L679,390 L721,267 L826,191 Z"/>
+      </g>
+    </svg>
+  </div>
+  <div class="footer-inner">
+    <div class="cols">
+      <div>
+        <h4>Bureau Address</h4>
+        <p>The Old Customs House<br>
+          Ostandari Street<br>
+          Naqsh-i Jahān Precinct<br>
+          Isfahan, 8174634441</p>
+      </div>
+      <div>
+        <h4>Public Hours</h4>
+        <p>Saturday – Wednesday<br>
+          08:30 – 14:30<br>
+          Thursday · Reading Room only<br>
+          09:00 – 12:00<br>
+          Friday · closed</p>
+      </div>
+      <div>
+        <h4>Contacts</h4>
+        <p>Permits Desk · +98 31 3220 4471<br>
+          Council Secretariat · +98 31 3220 4488<br>
+          Archives Reading Room · +98 31 3220 4490<br>
+          bureau@maydan-naqsh.isf.ir</p>
+      </div>
+    </div>
+
+    <div class="tailpiece" aria-hidden="true">✦ ❖ ✦</div>
+
+    <div class="filet-rule">
+      Issued 14 Ābān 1403 · Ordinance Reference 1390/IX-44 · Folio II of VI
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

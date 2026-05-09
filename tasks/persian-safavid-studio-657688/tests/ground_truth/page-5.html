@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Apprenticeship Programme — Atelier Naqsh-e Jahan</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  /* ============ BASE ============ */
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    font-size: 17px;
+    line-height: 1.55;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* ============ ORNAMENT BACKGROUND ============ */
+  .vellum {
+    background-image:
+      radial-gradient(circle at 0 0, rgba(201,162,58,0.08) 0 2px, transparent 3px),
+      radial-gradient(circle at 24px 24px, rgba(30,58,95,0.06) 0 2px, transparent 3px);
+    background-size: 48px 48px;
+  }
+
+  /* ============ NAV ============ */
+  .topband {
+    border-top: 6px solid var(--primary);
+    border-bottom: 1px solid var(--accent);
+    background: var(--bg);
+  }
+  .nav-rule {
+    height: 2px;
+    background: var(--primary);
+    margin: 0;
+  }
+  nav.primary {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 18px 24px;
+    gap: 0;
+  }
+  nav.primary a {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--primary);
+    padding: 4px 14px;
+    position: relative;
+  }
+  nav.primary a[aria-current="page"] {
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 2px;
+  }
+  nav.primary .palmette {
+    color: var(--accent);
+    font-size: 10px;
+    margin: 0 2px;
+  }
+  .siteline {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.4em;
+    color: var(--text-emphasis);
+    padding: 14px 0 6px;
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    position: relative;
+    background: var(--primary);
+    color: var(--bg);
+    padding: 56px 40px 80px;
+    text-align: center;
+    overflow: hidden;
+    border-bottom: 4px solid var(--accent);
+  }
+  .hero::before, .hero::after {
+    content: "";
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 160px;
+    background-image:
+      repeating-linear-gradient(0deg, var(--secondary) 0 6px, transparent 6px 14px),
+      repeating-linear-gradient(90deg, var(--accent) 0 2px, transparent 2px 22px);
+    opacity: 0.35;
+  }
+  .hero::before { left: 0; }
+  .hero::after { right: 0; }
+  .hero-arch {
+    width: 380px;
+    height: 420px;
+    margin: 0 auto 18px;
+    display: block;
+    position: relative;
+    z-index: 2;
+  }
+  .hero-arch svg { width: 100%; height: 100%; }
+  .hero-arch svg path { stroke: var(--accent); }
+  .hero-eyebrow {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.5em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .hero h1 {
+    font-family: var(--font-display), serif;
+    font-size: 44px;
+    margin: 0 0 14px;
+    color: var(--bg);
+    letter-spacing: 0.06em;
+    line-height: 1.15;
+  }
+  .hero-sub {
+    max-width: 680px;
+    margin: 0 auto;
+    font-size: 19px;
+    font-style: italic;
+    color: var(--bg);
+    position: relative;
+    z-index: 2;
+  }
+  .hero-medallion {
+    position: absolute;
+    top: 24px; left: 50%;
+    transform: translateX(-50%);
+    width: 64px; height: 64px;
+    z-index: 3;
+  }
+
+  /* ============ DIVIDER ============ */
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 56px auto 36px;
+    max-width: 720px;
+    color: var(--accent);
+  }
+  .divider svg {
+    width: 100%;
+    height: 22px;
+    fill: var(--accent);
+  }
+
+  /* ============ MAIN ============ */
+  main {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 40px 40px;
+  }
+
+  .section-head {
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  .section-head .kicker {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    color: var(--text-emphasis);
+    text-transform: uppercase;
+  }
+  .section-head h2 {
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+    font-size: 32px;
+    margin: 8px 0 6px;
+    letter-spacing: 0.04em;
+  }
+  .section-head p.lede {
+    max-width: 760px;
+    margin: 0 auto;
+    font-style: italic;
+    color: var(--text);
+  }
+
+  /* ============ YEAR CARDS ============ */
+  .years {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-top: 36px;
+  }
+  .year-card {
+    position: relative;
+    background: var(--bg);
+    padding: 64px 28px 36px;
+    text-align: center;
+    border: 1px solid var(--accent);
+  }
+  .year-card::before {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border: 2px solid var(--primary);
+    border-radius: 50% 50% 6px 6px / 38% 38% 6px 6px;
+    pointer-events: none;
+  }
+  .year-card::after {
+    content: "";
+    position: absolute;
+    inset: 12px;
+    border: 1px solid var(--accent);
+    border-radius: 50% 50% 4px 4px / 36% 36% 4px 4px;
+    pointer-events: none;
+  }
+  .year-medallion {
+    position: absolute;
+    top: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 44px; height: 44px;
+    background: var(--secondary);
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--bg);
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    z-index: 3;
+  }
+  .year-card .ord {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    color: var(--text-emphasis);
+    text-transform: uppercase;
+    position: relative;
+    z-index: 2;
+  }
+  .year-card h3 {
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+    font-size: 20px;
+    margin: 6px 0 4px;
+    letter-spacing: 0.04em;
+    position: relative;
+    z-index: 2;
+  }
+  .year-card .master {
+    font-style: italic;
+    color: var(--text-emphasis);
+    margin-bottom: 14px;
+    font-size: 15px;
+    position: relative;
+    z-index: 2;
+  }
+  .year-card p {
+    text-align: justify;
+    font-size: 15px;
+    margin: 8px 18px;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ============ TWO-COL: REQUIREMENTS / TERMS ============ */
+  .twocol {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 40px;
+  }
+  .panel {
+    background: var(--bg);
+    border: 1px solid var(--accent);
+    padding: 32px 32px 28px;
+    position: relative;
+  }
+  .panel::before {
+    content: "";
+    position: absolute;
+    inset: 8px;
+    border: 1px solid var(--secondary);
+    pointer-events: none;
+  }
+  .panel h3 {
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+    margin: 0 0 4px;
+    font-size: 22px;
+    letter-spacing: 0.05em;
+    text-align: center;
+  }
+  .panel .pre {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    color: var(--text-emphasis);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .panel hr.gold {
+    border: none;
+    height: 1px;
+    background: var(--accent);
+    margin: 18px 30px;
+  }
+  ul.requirements {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0 0;
+  }
+  ul.requirements li {
+    padding: 10px 0 10px 32px;
+    border-bottom: 1px dotted rgba(30,58,95,0.25);
+    position: relative;
+  }
+  ul.requirements li:last-child { border-bottom: none; }
+  ul.requirements li::before {
+    content: "✦";
+    position: absolute;
+    left: 8px;
+    top: 9px;
+    color: var(--accent);
+    font-size: 14px;
+  }
+  ul.requirements strong {
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    display: block;
+    margin-bottom: 2px;
+  }
+  .terms-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px 24px;
+    margin-top: 14px;
+  }
+  .terms-grid dt {
+    font-family: var(--font-display), serif;
+    color: var(--text-emphasis);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .terms-grid dd {
+    margin: 0 0 10px;
+    font-size: 15px;
+  }
+  .terms-grid dd .figure {
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+    font-size: 18px;
+  }
+
+  /* ============ TESTIMONIALS ============ */
+  .testimonials {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    margin-top: 36px;
+  }
+  .testimony {
+    position: relative;
+    background: var(--bg);
+    padding: 36px 26px 26px;
+    border: 1px solid var(--primary);
+  }
+  .testimony::before {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border: 1px solid var(--accent);
+    pointer-events: none;
+  }
+  .testimony .qmark {
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 36px; height: 36px;
+    background: var(--text-emphasis);
+    color: var(--bg);
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display), serif;
+    font-size: 20px;
+    z-index: 2;
+  }
+  .testimony blockquote {
+    margin: 0;
+    font-style: italic;
+    text-align: justify;
+    font-size: 15px;
+    position: relative;
+    z-index: 2;
+  }
+  .testimony figcaption {
+    margin-top: 16px;
+    text-align: center;
+    border-top: 1px solid var(--accent);
+    padding-top: 12px;
+    position: relative;
+    z-index: 2;
+  }
+  .testimony .alum {
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+    font-size: 14px;
+    letter-spacing: 0.06em;
+  }
+  .testimony .place {
+    font-size: 13px;
+    color: var(--text-emphasis);
+    font-style: italic;
+    margin-top: 2px;
+  }
+
+  /* ============ CALENDAR STRIP ============ */
+  .calendar-strip {
+    margin-top: 40px;
+    background: var(--primary);
+    color: var(--bg);
+    padding: 28px 40px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 24px;
+    border-top: 2px solid var(--accent);
+    border-bottom: 2px solid var(--accent);
+  }
+  .calendar-strip .label {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+  .calendar-strip .date {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    letter-spacing: 0.04em;
+    margin-top: 6px;
+  }
+  .calendar-strip .center {
+    text-align: center;
+    font-style: italic;
+    color: var(--bg);
+    max-width: 320px;
+    border-left: 1px solid var(--accent);
+    border-right: 1px solid var(--accent);
+    padding: 0 24px;
+  }
+  .calendar-strip .right { text-align: right; }
+
+  /* ============ FOOTER ============ */
+  footer {
+    margin-top: 64px;
+    background: var(--primary);
+    color: var(--bg);
+    border-top: 2px solid var(--secondary);
+    border-bottom: 2px solid var(--secondary);
+    position: relative;
+  }
+  .foot-fliet-top, .foot-fliet-bot {
+    height: 1px;
+    background: var(--secondary);
+  }
+  .foot-inner {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 32px;
+    align-items: center;
+    padding: 36px 60px 24px;
+  }
+  .foot-seal {
+    width: 110px; height: 110px;
+    margin: 0 auto;
+  }
+  .foot-col h4 {
+    font-family: var(--font-display), serif;
+    color: var(--accent);
+    font-size: 11px;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    margin: 0 0 8px;
+  }
+  .foot-col p { margin: 2px 0; font-size: 15px; }
+  .foot-col.left { text-align: right; }
+  .foot-col.right { text-align: left; }
+  .foot-attrib {
+    text-align: center;
+    font-style: italic;
+    font-size: 13px;
+    padding: 0 60px 14px;
+    color: var(--bg);
+    opacity: 0.85;
+  }
+  .copy {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--bg);
+    padding: 14px 0 22px;
+    border-top: 1px solid var(--accent);
+    margin: 0 60px;
+  }
+
+  /* small palmette inline SVG container */
+  .palmette-glyph {
+    display: inline-block;
+    width: 14px;
+    height: 8px;
+    vertical-align: middle;
+    background:
+      radial-gradient(circle at 50% 100%, var(--accent) 0 3px, transparent 3.5px),
+      radial-gradient(circle at 20% 100%, var(--accent) 0 1.5px, transparent 2px),
+      radial-gradient(circle at 80% 100%, var(--accent) 0 1.5px, transparent 2px);
+  }
+</style>
+</head>
+<body class="vellum">
+
+<header class="topband">
+  <div class="siteline">Atelier Naqsh-e Jahan &nbsp;·&nbsp; Isfahan</div>
+  <div class="nav-rule"></div>
+  <nav class="primary" aria-label="Primary">
+    <a href="page-1.html">Threshold</a>
+    <span class="palmette">❖</span>
+    <a href="page-2.html">The Workshop</a>
+    <span class="palmette">❖</span>
+    <a href="page-3.html">Commissions</a>
+    <span class="palmette">❖</span>
+    <a href="page-4.html">Crafts &amp; Methods</a>
+    <span class="palmette">❖</span>
+    <a href="page-5.html" aria-current="page">Apprenticeship</a>
+    <span class="palmette">❖</span>
+    <a href="page-6.html">Visit</a>
+  </nav>
+  <div class="nav-rule"></div>
+</header>
+
+<section class="hero">
+  <div class="hero-medallion" aria-hidden="true">
+    <svg viewBox="0 0 100 100" width="64" height="64">
+      <circle cx="50" cy="50" r="46" fill="none" stroke="#c9a23a" stroke-width="2"/>
+      <circle cx="50" cy="50" r="36" fill="#2a8a8a" stroke="#c9a23a" stroke-width="1"/>
+      <polygon points="50,18 58,42 82,42 62,57 70,82 50,67 30,82 38,57 18,42 42,42" fill="#c9a23a"/>
+    </svg>
+  </div>
+  <div class="hero-arch" aria-hidden="true">
+    <svg viewBox="100 240 510 560" preserveAspectRatio="xMidYMid meet">
+      <g transform="translate(-147.13944,-244.9375)">
+        <g transform="translate(8.199085,-11.874106)">
+          <g style="stroke:#c9a23a;stroke-width:3.5;fill:none;stroke-linecap:round;">
+            <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+            <path d="m 250,430.58 24.75248,58.41585"/>
+            <path d="m 347.0297,342.46119 41.58416,23.76238 0.9901,35.64356"/>
+            <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+          </g>
+          <g style="stroke:#c9a23a;stroke-width:3.5;fill:none;stroke-linecap:round;" transform="matrix(-1,0,0,1,777.88071,-0.2972181)">
+            <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+            <path d="m 250,430.58 24.75248,58.41585"/>
+            <path d="m 347.0297,342.46119 41.58416,23.76238 0.9901,35.64356"/>
+            <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+          </g>
+        </g>
+      </g>
+    </svg>
+  </div>
+  <div class="hero-eyebrow">Programme of Study · Established 1387 SH</div>
+  <h1>The Three-Year Apprenticeship</h1>
+  <p class="hero-sub">A binding covenant of hand and pattern, taken under the masters of the courtyard for thirty-six months from the autumnal equinox, in the manner of the Isfahan ateliers.</p>
+</section>
+
+<main>
+
+  <div class="divider" aria-hidden="true">
+    <svg viewBox="0 0 437.999 18.893" preserveAspectRatio="xMidYMid meet">
+      <use href="#divider"/>
+    </svg>
+  </div>
+
+  <section>
+    <div class="section-head">
+      <div class="kicker">The Course of Years</div>
+      <h2>Three Stations of the Apprentice</h2>
+      <p class="lede">Each year carries its own master, its own discipline, and its own examination. Progression is not assumed — it is granted at the threshold of Mehr by the council of the workshop.</p>
+    </div>
+
+    <div class="years">
+      <article class="year-card">
+        <div class="year-medallion">I</div>
+        <div class="ord">First Station</div>
+        <h3>Cartoon &amp; Pattern</h3>
+        <div class="master">under Roya Tabatabai</div>
+        <p>The opening twelvemonth is given wholly to the drawing-board. The novice copies historic cartoons from the Sheikh Lutfollah and the Imam Mosque, learning the geometric constructions of the eight-pointed and ten-pointed girih, the laying of palmette and saz on a knotted grid, and the discipline of the compass before the brush.</p>
+        <p>By the close of Esfand the apprentice must produce two full repeat-patterns at scale of 1:1, drawn in red ochre on linen-rag paper, ready for transfer to clay. No glaze is touched in this year.</p>
+      </article>
+
+      <article class="year-card">
+        <div class="year-medallion">II</div>
+        <div class="ord">Second Station</div>
+        <h3>Glaze &amp; Kiln</h3>
+        <div class="master">under Mehrdad Saffar</div>
+        <p>The second year removes the apprentice from paper to the firing yard. Mornings are spent grinding cobalt from Kashan ore, weighing copper for the turquoise, and learning the lead-alkaline frits proper to haft-rang and to underglaze. Afternoons are spent at the bisque kiln and the glaze kiln, charting cones and reductions in a bound day-book.</p>
+        <p>Each month the candidate fires a single tile of their own composition. The twelve tiles are bound at year's end into a personal palette — the apprentice's first patrimony.</p>
+      </article>
+
+      <article class="year-card">
+        <div class="year-medallion">III</div>
+        <div class="ord">Third Station</div>
+        <h3>Independent Commission</h3>
+        <div class="master">under shared supervision</div>
+        <p>In the third year the apprentice is given over to a real commission of the house — a spandrel, a mihrab cartouche, a stair-riser, or a tomb-frieze — chosen from the standing book of orders. Both Roya khanum and Mehrdad agha attend the work, but the hand is the apprentice's own from cartoon to setting.</p>
+        <p>The completed work is signed in the lower-right cornerstone in the apprentice's own seal-name and installed in the patron's building. With its placement the apprentice is named ostad-shagerd and admitted to the workshop's roll.</p>
+      </article>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true">
+    <svg viewBox="0 0 437.999 18.893" preserveAspectRatio="xMidYMid meet">
+      <use href="#divider"/>
+    </svg>
+  </div>
+
+  <section>
+    <div class="section-head">
+      <div class="kicker">Conditions of Entry</div>
+      <h2>Requirements &amp; Terms</h2>
+      <p class="lede">The atelier admits a maximum of four apprentices each Mehr. Candidates are interviewed in person in the courtyard over two days; no decision is taken by post.</p>
+    </div>
+
+    <div class="twocol">
+      <section class="panel">
+        <div class="pre">Required of the Candidate</div>
+        <h3>Entry Requirements</h3>
+        <hr class="gold">
+        <ul class="requirements">
+          <li>
+            <strong>A Drawing Portfolio</strong>
+            Not fewer than twenty original sheets, of which at least eight must be measured architectural studies executed in pencil or ink. Photocopies are not received. The portfolio is returned at interview's end.
+          </li>
+          <li>
+            <strong>Working Knowledge of Persian</strong>
+            Sufficient to follow instruction at the bench, to read the historical cartoon-books of the workshop, and to address the kiln-master. Calligraphic Persian is welcomed but not required at entry.
+          </li>
+          <li>
+            <strong>Fluency in Farsi or English</strong>
+            Either tongue is accepted for the formal correspondence and the year-end examinations. Foreign candidates whose Persian is still developing may write their day-books in English for the first year only.
+          </li>
+          <li>
+            <strong>Sound of Hand and Eye</strong>
+            A short bench-test is set on the second day of interview: the copying of a single quarter-repeat from a presented cartoon, in two hours, with compass and ruling pen.
+          </li>
+        </ul>
+      </section>
+
+      <section class="panel">
+        <div class="pre">Calendar &amp; Maintenance</div>
+        <h3>Terms of the Programme</h3>
+        <hr class="gold">
+        <dl class="terms-grid">
+          <dt>Application Deadline</dt>
+          <dd><span class="figure">15 Mehr</span><br>(7 October, each year)</dd>
+
+          <dt>Interview Days</dt>
+          <dd>Last Thursday &amp; Friday of Mehr, in the courtyard</dd>
+
+          <dt>Term Begins</dt>
+          <dd>1 Aban (23 October), with the laying-on of the apron</dd>
+
+          <dt>Stipend</dt>
+          <dd><span class="figure">Modest</span><br>Sufficient for board, materials, and one return journey home each year</dd>
+
+          <dt>Housing</dt>
+          <dd>Shared rooms in the workshop's upper storey, above the firing yard. Two to a room. Linen and brazier provided.</dd>
+
+          <dt>Hours of Bench</dt>
+          <dd>Saturday through Wednesday, 7 to 13 and 15 to 18. Thursdays for the kiln. Friday is closed.</dd>
+
+          <dt>Holidays Observed</dt>
+          <dd>Nowruz (13 days), Yalda eve, Ashura, and the workshop's founding feast on 4 Tir</dd>
+
+          <dt>Roll of Admission</dt>
+          <dd>Four apprentices each year, never more</dd>
+        </dl>
+      </section>
+    </div>
+  </section>
+
+  <aside class="calendar-strip" aria-label="Application key dates">
+    <div>
+      <div class="label">Letters Open</div>
+      <div class="date">1 Tir &nbsp;/&nbsp; 22 June</div>
+    </div>
+    <div class="center">
+      Applications by hand or by registered post to the workshop's address in the Bazaar-e Bozorg, sealed with the candidate's tugra.
+    </div>
+    <div class="right">
+      <div class="label">Letters Close</div>
+      <div class="date">15 Mehr &nbsp;/&nbsp; 7 October</div>
+    </div>
+  </aside>
+
+  <div class="divider" aria-hidden="true" style="margin-top:56px">
+    <svg viewBox="0 0 437.999 18.893" preserveAspectRatio="xMidYMid meet">
+      <use href="#divider"/>
+    </svg>
+  </div>
+
+  <section>
+    <div class="section-head">
+      <div class="kicker">Voices of Former Apprentices</div>
+      <h2>From Those Now Practising Abroad</h2>
+      <p class="lede">Three letters, lightly edited, from alumni who completed the third station between 1394 and 1401. Their workshops keep correspondence with our own.</p>
+    </div>
+
+    <div class="testimonials">
+      <figure class="testimony">
+        <div class="qmark">❝</div>
+        <blockquote>
+          I came to Isfahan with a draughtsman's hand and no glaze in me at all. Mehrdad agha taught me to weigh cobalt by feel before by scale, and Roya khanum sent back my first six cartoons unmarked, telling me only to draw them again, slower. I count those returned sheets among the gifts of my life. The frieze I now keep beneath the dome of the Vakil bath in Shiraz is the third year's child.
+        </blockquote>
+        <figcaption>
+          <div class="alum">Soraya Mostofi</div>
+          <div class="place">Atelier of the Vakil quarter, Shiraz · Year of intake 1394</div>
+        </figcaption>
+      </figure>
+
+      <figure class="testimony">
+        <div class="qmark">❝</div>
+        <blockquote>
+          The upper rooms above the firing yard are not luxurious — in winter the brazier is your only argument with the air — but they are where the apprenticeship truly happens, after the bench is closed and four students argue a single quarter-repeat past midnight. Half of what I know of the seven-colour technique I learned from a Tabrizi roommate, not from any master. The atelier knows this and lets it be.
+        </blockquote>
+        <figcaption>
+          <div class="alum">Behnam Aharī</div>
+          <div class="place">Kāshī-kārī Aharī, Tabriz · Year of intake 1397</div>
+        </figcaption>
+      </figure>
+
+      <figure class="testimony">
+        <div class="qmark">❝</div>
+        <blockquote>
+          My third-year commission was a stair-riser of forty tiles for a private house in the Avlabari district of Tbilisi. I was a foreign apprentice and had been warned the third year would press hard on my Persian; in fact it pressed hard on my patience. The masters did not correct my hand — they corrected my hours. I now run a small workshop of two benches here, and I write to Isfahan every Nowruz.
+        </blockquote>
+        <figcaption>
+          <div class="alum">Nino Q'ip'iani</div>
+          <div class="place">Avlabari Tile Workshop, Tbilisi · Year of intake 1401</div>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+</main>
+
+<!-- shared divider symbol -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="divider" viewBox="0 0 437.999 18.893">
+    <path d="M0,9.445c0,0,37.005-0.063,73.998-0.829c18.495-0.386,36.989-0.949,50.831-1.785c6.919-0.414,12.677-0.906,16.663-1.46 c1.99-0.28,3.539-0.582,4.535-0.878c0.502-0.146,0.844-0.297,1.049-0.405c0.157-0.107,0.238-0.162,0.238-0.162l0.42-0.287 l0.656,0.656l-0.369,0.338c0,0-0.154,0.142-0.456,0.324c-0.291,0.154-0.714,0.331-1.256,0.484 c-1.085,0.314-2.667,0.608-4.686,0.879c-4.037,0.533-9.811,0.985-16.745,1.354c-13.868,0.744-32.369,1.183-50.87,1.443 C37.003,9.632,0,9.445,0,9.445z"/>
+    <path d="M437.999,9.445c0,0-37.004,0.187-74.007-0.329c-18.501-0.261-37.002-0.699-50.869-1.443 c-6.935-0.368-12.708-0.82-16.745-1.354c-2.019-0.271-3.601-0.565-4.687-0.879c-0.541-0.153-0.965-0.33-1.256-0.484 c-0.302-0.183-0.456-0.324-0.456-0.324l-0.369-0.338l0.656-0.656l0.42,0.287c0,0,0.081,0.055,0.238,0.162 c0.204,0.108,0.546,0.26,1.048,0.405c0.996,0.296,2.545,0.598,4.535,0.878c3.986,0.554,9.744,1.046,16.663,1.46 C327.011,7.667,345.506,8.23,364,8.616C400.994,9.382,437.999,9.445,437.999,9.445z"/>
+    <circle cx="219" cy="9.445" r="6" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <circle cx="219" cy="9.445" r="2.5"/>
+    <circle cx="169" cy="9.445" r="2"/>
+    <circle cx="269" cy="9.445" r="2"/>
+  </symbol>
+</svg>
+
+<footer>
+  <div class="foot-fliet-top"></div>
+  <div class="foot-inner">
+    <div class="foot-col left">
+      <h4>Address</h4>
+      <p>Atelier Naqsh-e Jahan</p>
+      <p>Kucheh-ye Saraye Saraf, off Bazaar-e Bozorg</p>
+      <p>Isfahan 8146963113, Iran</p>
+    </div>
+    <div class="foot-seal" aria-hidden="true">
+      <svg viewBox="0 0 1500 1500" width="110" height="110">
+        <g transform="translate(750,750)">
+          <g fill="#c9a23a" stroke="#f2e5cc" stroke-width="6">
+            <polygon points="0,-380 89,-89 380,0 89,89 0,380 -89,89 -380,0 -89,-89"/>
+            <polygon points="0,-280 50,-50 280,0 50,50 0,280 -50,50 -280,0 -50,-50" transform="rotate(22.5)"/>
+          </g>
+          <circle r="120" fill="#2a8a8a" stroke="#c9a23a" stroke-width="6"/>
+          <circle r="60" fill="#7a1f2e" stroke="#c9a23a" stroke-width="3"/>
+          <circle r="14" fill="#c9a23a"/>
+        </g>
+      </svg>
+    </div>
+    <div class="foot-col right">
+      <h4>Hours of the Courtyard</h4>
+      <p>Saturday — Wednesday · 09:00 — 18:00</p>
+      <p>Thursday · 09:00 — 13:00 (kiln day)</p>
+      <p>Friday · closed to visitors</p>
+    </div>
+  </div>
+  <p class="foot-attrib">Patterns drawn by hand in the Safavid manner; tiles fired and cut in the Isfahan tradition. The atelier is registered with the Provincial Council of Crafts, Esfahan.</p>
+  <div class="copy">© 1402 SH &nbsp;·&nbsp; Atelier Naqsh-e Jahan &nbsp;·&nbsp; All Patterns Held In The Workshop's Hand</div>
+  <div class="foot-fliet-bot"></div>
+</footer>
+
+</body>
+</html>

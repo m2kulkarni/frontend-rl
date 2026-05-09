@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Biography — Darius Farahani</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    font-size: 17px;
+    line-height: 1.65;
+  }
+
+  /* ---------- HEADER ---------- */
+  .ivory-header {
+    background: #faf3e3;
+    padding: 18px 0 10px;
+    text-align: center;
+    border-bottom: 1px solid rgba(201, 162, 58, 0.35);
+  }
+  .ivory-header .studio-mark {
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--primary);
+  }
+  .ivory-header .studio-mark .dot {
+    color: var(--accent);
+    margin: 0 0.6em;
+  }
+  .ivory-header .arabic {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--secondary);
+    margin-top: 4px;
+    letter-spacing: 0.08em;
+  }
+
+  /* ---------- NAV ---------- */
+  nav.primary {
+    background: #faf3e3;
+    padding: 10px 0 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 22px;
+    position: relative;
+  }
+  nav.primary .tailpiece {
+    width: 70px;
+    height: 28px;
+    flex-shrink: 0;
+    color: var(--accent);
+  }
+  nav.primary ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+  nav.primary li {
+    display: flex;
+    align-items: center;
+  }
+  nav.primary a {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--primary);
+    text-decoration: none;
+    padding: 4px 14px;
+    position: relative;
+  }
+  nav.primary a[aria-current="page"] {
+    color: var(--text-emphasis);
+  }
+  nav.primary a[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    left: 14px;
+    right: 14px;
+    bottom: -4px;
+    height: 4px;
+    background-image:
+      radial-gradient(circle at 25% 50%, var(--text-emphasis) 0 1.3px, transparent 1.5px),
+      radial-gradient(circle at 75% 50%, var(--text-emphasis) 0 1.3px, transparent 1.5px),
+      linear-gradient(to right, transparent 0, var(--text-emphasis) 20%, var(--text-emphasis) 80%, transparent 100%);
+    background-size: 100% 100%, 100% 100%, 100% 1px;
+    background-repeat: no-repeat;
+    background-position: center, center, center 50%;
+  }
+  nav.primary .palmette {
+    width: 14px;
+    height: 14px;
+    color: var(--accent);
+    opacity: 0.85;
+  }
+
+  /* ---------- HERO TITLE BAND ---------- */
+  .title-band {
+    text-align: center;
+    padding: 56px 0 32px;
+    position: relative;
+  }
+  .title-band .eyebrow {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 18px;
+  }
+  .title-band h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 52px;
+    color: var(--primary);
+    margin: 0 0 6px;
+    letter-spacing: 0.04em;
+  }
+  .title-band .subname {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--text-emphasis);
+    margin-bottom: 22px;
+  }
+  .filet {
+    width: 440px;
+    max-width: 80%;
+    height: 22px;
+    margin: 0 auto;
+    color: var(--accent);
+    display: block;
+  }
+  .filet svg { width: 100%; height: 100%; display: block; fill: currentColor; }
+
+  /* ---------- MAIN COLUMN ---------- */
+  .biography-wrap {
+    position: relative;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 0 80px;
+  }
+
+  /* Ornamental side margins — mirrored arches */
+  .side-ornament {
+    position: absolute;
+    top: 40px;
+    width: 230px;
+    height: 720px;
+    color: var(--primary);
+    opacity: 0.42;
+    pointer-events: none;
+  }
+  .side-ornament svg { width: 100%; height: 100%; display: block; }
+  .side-ornament.left  { left: 30px; }
+  .side-ornament.right { right: 30px; transform: scaleX(-1); }
+
+  .bio-column {
+    width: 720px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .bio-column .lead {
+    font-size: 22px;
+    line-height: 1.55;
+    text-align: center;
+    font-style: italic;
+    color: var(--primary);
+    margin: 28px 0 44px;
+    padding: 0 30px;
+  }
+  .bio-column .lead .drop {
+    font-family: var(--font-display), serif;
+    font-style: normal;
+    font-size: 56px;
+    float: left;
+    line-height: 0.85;
+    margin: 8px 12px 0 0;
+    color: var(--text-emphasis);
+  }
+
+  .section-head {
+    text-align: center;
+    margin: 48px 0 18px;
+  }
+  .section-head h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 22px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin: 0 0 8px;
+  }
+  .section-head .filet { width: 280px; height: 16px; }
+
+  .bio-column p {
+    margin: 0 0 18px;
+    text-align: justify;
+    hyphens: auto;
+  }
+  .bio-column p .smallcaps {
+    font-variant: small-caps;
+    letter-spacing: 0.06em;
+    color: var(--primary);
+  }
+  .bio-column p .em {
+    color: var(--text-emphasis);
+    font-style: italic;
+  }
+
+  /* Exhibitions list */
+  .exhibitions {
+    list-style: none;
+    padding: 0;
+    margin: 14px 0 0;
+  }
+  .exhibitions li {
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    gap: 18px;
+    padding: 10px 0;
+    border-bottom: 1px dashed rgba(30, 58, 95, 0.22);
+  }
+  .exhibitions li:last-child { border-bottom: none; }
+  .exhibitions .yr {
+    font-family: var(--font-display), serif;
+    color: var(--accent);
+    font-size: 15px;
+    letter-spacing: 0.1em;
+    padding-top: 2px;
+  }
+  .exhibitions .ex-title {
+    font-style: italic;
+    color: var(--primary);
+    font-size: 18px;
+  }
+  .exhibitions .ex-venue {
+    display: block;
+    font-style: normal;
+    font-size: 14px;
+    color: var(--text);
+    opacity: 0.75;
+    margin-top: 2px;
+  }
+
+  /* Centerpiece + statement */
+  .statement-block {
+    margin-top: 60px;
+    text-align: center;
+    position: relative;
+    padding: 40px 30px 20px;
+  }
+  .statement-seal {
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 24px;
+    display: block;
+  }
+  .statement-seal svg { width: 100%; height: 100%; display: block; }
+
+  .statement-block blockquote {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.55;
+    color: var(--primary);
+    margin: 0 auto;
+    max-width: 600px;
+    quotes: "\201C" "\201D";
+  }
+  .statement-block blockquote::before {
+    content: open-quote;
+    font-family: var(--font-display), serif;
+    font-size: 44px;
+    color: var(--accent);
+    line-height: 0;
+    vertical-align: -0.2em;
+    margin-right: 4px;
+  }
+  .statement-block blockquote::after {
+    content: close-quote;
+    font-family: var(--font-display), serif;
+    font-size: 44px;
+    color: var(--accent);
+    line-height: 0;
+    vertical-align: -0.4em;
+    margin-left: 2px;
+  }
+  .statement-block .signature {
+    margin-top: 26px;
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+  }
+
+  /* Facts strip */
+  .facts {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    margin: 56px 0 30px;
+    border-top: 1px solid rgba(201, 162, 58, 0.45);
+    border-bottom: 1px solid rgba(201, 162, 58, 0.45);
+    padding: 22px 0;
+  }
+  .facts > div {
+    text-align: center;
+    border-right: 1px solid rgba(201, 162, 58, 0.3);
+    padding: 0 14px;
+  }
+  .facts > div:last-child { border-right: none; }
+  .facts .fact-label {
+    font-family: var(--font-display), serif;
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--secondary);
+  }
+  .facts .fact-value {
+    font-family: var(--font-display), serif;
+    font-size: 18px;
+    color: var(--primary);
+    margin-top: 6px;
+    letter-spacing: 0.06em;
+  }
+  .facts .fact-detail {
+    font-style: italic;
+    font-size: 13px;
+    color: var(--text);
+    opacity: 0.78;
+    margin-top: 4px;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    background: var(--primary);
+    color: #faf3e3;
+    padding: 54px 0 0;
+    text-align: center;
+    margin-top: 40px;
+    position: relative;
+  }
+  footer .gold-divider {
+    width: 540px;
+    max-width: 70%;
+    margin: 0 auto 28px;
+    color: var(--accent);
+  }
+  footer .gold-divider svg { width:100%; height: 22px; display: block; fill: currentColor;}
+  footer .monogram {
+    font-family: var(--font-display), serif;
+    font-size: 36px;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  footer .atelier-name {
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: #faf3e3;
+    margin-bottom: 14px;
+  }
+  footer address {
+    font-style: normal;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #faf3e3;
+    opacity: 0.92;
+  }
+  footer .contact-line {
+    font-style: italic;
+    color: #faf3e3;
+    opacity: 0.85;
+    margin-top: 6px;
+  }
+  .turquoise-stripe {
+    margin-top: 36px;
+    height: 14px;
+    background:
+      repeating-linear-gradient(45deg,
+        var(--secondary) 0 10px,
+        #1f6e6e 10px 20px,
+        var(--accent) 20px 22px,
+        var(--secondary) 22px 32px);
+  }
+</style>
+</head>
+<body>
+
+<!-- =================== HEADER =================== -->
+<header class="ivory-header">
+  <div class="studio-mark">Atelier <span class="dot">✦</span> Naqsh-e Jahan</div>
+  <div class="arabic">— tilework &amp; ornamental design, est. 2011 —</div>
+</header>
+
+<!-- =================== NAV =================== -->
+<nav class="primary" aria-label="Primary">
+  <!-- left tailpiece -->
+  <svg class="tailpiece" viewBox="0 0 70 28" aria-hidden="true">
+    <g fill="none" stroke="currentColor" stroke-width="1.2">
+      <path d="M2 14 H46"/>
+      <path d="M46 14 c4-6 10-6 12 0 c-2 6 -8 6 -12 0 z" fill="currentColor"/>
+      <circle cx="60" cy="14" r="2" fill="currentColor"/>
+      <path d="M64 14 h4"/>
+      <path d="M30 14 c2-4 6-4 8 0 c-2 4 -6 4 -8 0" fill="currentColor" opacity="0.6"/>
+    </g>
+  </svg>
+
+  <ul>
+    <li><a href="page-1.html">Home</a></li>
+    <li><svg class="palmette" viewBox="0 0 14 14" aria-hidden="true"><path fill="currentColor" d="M7 1 C8 4 10 5 13 7 C10 9 8 10 7 13 C6 10 4 9 1 7 C4 5 6 4 7 1 z"/></svg></li>
+    <li><a href="page-2.html">Works</a></li>
+    <li><svg class="palmette" viewBox="0 0 14 14" aria-hidden="true"><path fill="currentColor" d="M7 1 C8 4 10 5 13 7 C10 9 8 10 7 13 C6 10 4 9 1 7 C4 5 6 4 7 1 z"/></svg></li>
+    <li><a href="page-3.html">Case&nbsp;Study</a></li>
+    <li><svg class="palmette" viewBox="0 0 14 14" aria-hidden="true"><path fill="currentColor" d="M7 1 C8 4 10 5 13 7 C10 9 8 10 7 13 C6 10 4 9 1 7 C4 5 6 4 7 1 z"/></svg></li>
+    <li><a href="page-4.html">Method</a></li>
+    <li><svg class="palmette" viewBox="0 0 14 14" aria-hidden="true"><path fill="currentColor" d="M7 1 C8 4 10 5 13 7 C10 9 8 10 7 13 C6 10 4 9 1 7 C4 5 6 4 7 1 z"/></svg></li>
+    <li><a href="page-5.html" aria-current="page">Biography</a></li>
+    <li><svg class="palmette" viewBox="0 0 14 14" aria-hidden="true"><path fill="currentColor" d="M7 1 C8 4 10 5 13 7 C10 9 8 10 7 13 C6 10 4 9 1 7 C4 5 6 4 7 1 z"/></svg></li>
+    <li><a href="page-6.html">Commissions</a></li>
+  </ul>
+
+  <!-- right tailpiece (mirrored) -->
+  <svg class="tailpiece" viewBox="0 0 70 28" aria-hidden="true" style="transform:scaleX(-1)">
+    <g fill="none" stroke="currentColor" stroke-width="1.2">
+      <path d="M2 14 H46"/>
+      <path d="M46 14 c4-6 10-6 12 0 c-2 6 -8 6 -12 0 z" fill="currentColor"/>
+      <circle cx="60" cy="14" r="2" fill="currentColor"/>
+      <path d="M64 14 h4"/>
+      <path d="M30 14 c2-4 6-4 8 0 c-2 4 -6 4 -8 0" fill="currentColor" opacity="0.6"/>
+    </g>
+  </svg>
+</nav>
+
+<!-- =================== TITLE BAND =================== -->
+<section class="title-band">
+  <div class="eyebrow">A Biography in Cut Tile</div>
+  <h1>Darius Farahani</h1>
+  <div class="subname">tile-cutter, ornamental designer, founder of the atelier</div>
+  <div class="filet" aria-hidden="true">
+    <svg viewBox="0 0 438 18" preserveAspectRatio="xMidYMid meet">
+      <g fill="currentColor">
+        <path d="M0,9 C90,9 130,5 150,5 L155,5 C160,5 162,7 165,9 C162,11 160,13 155,13 L150,13 C130,13 90,9 0,9 z" opacity="0.85"/>
+        <circle cx="169" cy="9" r="5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="169" cy="9" r="2"/>
+        <path d="M438,9 C348,9 308,5 288,5 L283,5 C278,5 276,7 273,9 C276,11 278,13 283,13 L288,13 C308,13 348,9 438,9 z" opacity="0.85"/>
+        <circle cx="269" cy="9" r="5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="269" cy="9" r="2"/>
+        <path d="M180,9 C200,3 220,1 219,9 C220,17 200,15 180,9 z" opacity="0.7"/>
+        <path d="M258,9 C238,3 218,1 219,9 C218,17 238,15 258,9 z" opacity="0.7"/>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<!-- =================== BIOGRAPHY =================== -->
+<div class="biography-wrap">
+
+  <!-- left ornamental margin: ogee arches -->
+  <div class="side-ornament left" aria-hidden="true">
+    <svg viewBox="0 0 230 720">
+      <g fill="none" stroke="currentColor" stroke-width="1.2">
+        <!-- arch 1 -->
+        <g transform="translate(15,40)">
+          <path d="M100 0 C100 60 60 80 30 100 C0 130 0 170 0 200 L200 200 C200 170 200 130 170 100 C140 80 100 60 100 0 z"/>
+          <path d="M100 16 C100 70 64 88 38 108 C16 134 16 168 16 188 L184 188 C184 168 184 134 162 108 C136 88 100 70 100 16 z" stroke-width="0.7"/>
+          <circle cx="100" cy="120" r="14"/>
+          <circle cx="100" cy="120" r="6" fill="currentColor" opacity="0.4"/>
+        </g>
+        <!-- arch 2 -->
+        <g transform="translate(15,260)">
+          <path d="M100 0 C100 60 60 80 30 100 C0 130 0 170 0 200 L200 200 C200 170 200 130 170 100 C140 80 100 60 100 0 z"/>
+          <path d="M100 16 C100 70 64 88 38 108 C16 134 16 168 16 188 L184 188 C184 168 184 134 162 108 C136 88 100 70 100 16 z" stroke-width="0.7"/>
+          <path d="M70 130 Q100 110 130 130 Q100 150 70 130 z" fill="currentColor" opacity="0.35"/>
+        </g>
+        <!-- arch 3 -->
+        <g transform="translate(15,480)">
+          <path d="M100 0 C100 60 60 80 30 100 C0 130 0 170 0 200 L200 200 C200 170 200 130 170 100 C140 80 100 60 100 0 z"/>
+          <path d="M100 16 C100 70 64 88 38 108 C16 134 16 168 16 188 L184 188 C184 168 184 134 162 108 C136 88 100 70 100 16 z" stroke-width="0.7"/>
+          <g transform="translate(100,120)" fill="currentColor" opacity="0.45">
+            <path d="M0 -16 L4 -4 L16 0 L4 4 L0 16 L-4 4 L-16 0 L-4 -4 z"/>
+          </g>
+        </g>
+      </g>
+    </svg>
+  </div>
+
+  <!-- right ornamental margin -->
+  <div class="side-ornament right" aria-hidden="true">
+    <svg viewBox="0 0 230 720">
+      <g fill="none" stroke="currentColor" stroke-width="1.2">
+        <g transform="translate(15,40)">
+          <path d="M100 0 C100 60 60 80 30 100 C0 130 0 170 0 200 L200 200 C200 170 200 130 170 100 C140 80 100 60 100 0 z"/>
+          <path d="M100 16 C100 70 64 88 38 108 C16 134 16 168 16 188 L184 188 C184 168 184 134 162 108 C136 88 100 70 100 16 z" stroke-width="0.7"/>
+          <circle cx="100" cy="120" r="14"/>
+          <circle cx="100" cy="120" r="6" fill="currentColor" opacity="0.4"/>
+        </g>
+        <g transform="translate(15,260)">
+          <path d="M100 0 C100 60 60 80 30 100 C0 130 0 170 0 200 L200 200 C200 170 200 130 170 100 C140 80 100 60 100 0 z"/>
+          <path d="M100 16 C100 70 64 88 38 108 C16 134 16 168 16 188 L184 188 C184 168 184 134 162 108 C136 88 100 70 100 16 z" stroke-width="0.7"/>
+          <path d="M70 130 Q100 110 130 130 Q100 150 70 130 z" fill="currentColor" opacity="0.35"/>
+        </g>
+        <g transform="translate(15,480)">
+          <path d="M100 0 C100 60 60 80 30 100 C0 130 0 170 0 200 L200 200 C200 170 200 130 170 100 C140 80 100 60 100 0 z"/>
+          <path d="M100 16 C100 70 64 88 38 108 C16 134 16 168 16 188 L184 188 C184 168 184 134 162 108 C136 88 100 70 100 16 z" stroke-width="0.7"/>
+          <g transform="translate(100,120)" fill="currentColor" opacity="0.45">
+            <path d="M0 -16 L4 -4 L16 0 L4 4 L0 16 L-4 4 L-16 0 L-4 -4 z"/>
+          </g>
+        </g>
+      </g>
+    </svg>
+  </div>
+
+  <article class="bio-column">
+
+    <p class="lead">
+      <span class="drop">D</span>arius Farahani works in a tradition that does not hurry.
+      Each square metre of his haft-rang and mosaic-faïence panels is the
+      record of perhaps a thousand small decisions — about angle, about glaze,
+      about the patience of geometry.
+    </p>
+
+    <!-- Facts strip -->
+    <div class="facts" aria-label="At a glance">
+      <div>
+        <div class="fact-label">Born</div>
+        <div class="fact-value">Tehran, 1978</div>
+        <div class="fact-detail">Persian-Iranian</div>
+      </div>
+      <div>
+        <div class="fact-label">Trained</div>
+        <div class="fact-value">Isfahan, 2003</div>
+        <div class="fact-detail">University of Art — BFA Tilework</div>
+      </div>
+      <div>
+        <div class="fact-label">Atelier</div>
+        <div class="fact-value">Founded 2011</div>
+        <div class="fact-detail">Yazd workshop &amp; studio</div>
+      </div>
+    </div>
+
+    <div class="section-head">
+      <h2>Early Years &amp; Training</h2>
+      <div class="filet" aria-hidden="true">
+        <svg viewBox="0 0 280 16" preserveAspectRatio="xMidYMid meet">
+          <g fill="currentColor">
+            <path d="M0 8 L120 8" stroke="currentColor" stroke-width="1" fill="none"/>
+            <circle cx="140" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1"/>
+            <circle cx="140" cy="8" r="1.6"/>
+            <path d="M280 8 L160 8" stroke="currentColor" stroke-width="1" fill="none"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <p>
+      <span class="smallcaps">Darius Farahani</span> was born in Tehran in
+      1978, the third child of a family of bookbinders whose shop sat at the
+      edge of the Grand Bazaar. He has often said that his first instinct for
+      pattern came not from the tiled walls of the city's mosques but from the
+      gilded rule-borders his father pressed into the spines of books — small,
+      exact, repeating things made by hand.
+    </p>
+
+    <p>
+      He left Tehran for Isfahan in 1998 and entered the
+      <span class="smallcaps">Isfahan University of Art</span>, taking the
+      Bachelor of Fine Arts in Tilework in 2003. His undergraduate years were
+      spent loosely within the circle of <span class="em">Ostad Mahmoud
+      Farshchian</span>, whose insistence on the slow study of vegetal scroll
+      and palmette would shape Darius's later vocabulary. A 2002 thesis on the
+      spandrel ornaments of the Sheikh Lotfollah Mosque — researched on
+      foot, with a folding rule and a sketchbook — remains, in his own
+      account, the foundation for everything that came after.
+    </p>
+
+    <div class="section-head">
+      <h2>The Vakil Mosque, Shiraz</h2>
+      <div class="filet" aria-hidden="true">
+        <svg viewBox="0 0 280 16" preserveAspectRatio="xMidYMid meet">
+          <g fill="currentColor">
+            <path d="M0 8 L120 8" stroke="currentColor" stroke-width="1" fill="none"/>
+            <circle cx="140" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1"/>
+            <circle cx="140" cy="8" r="1.6"/>
+            <path d="M280 8 L160 8" stroke="currentColor" stroke-width="1" fill="none"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <p>
+      From 2004 to 2009, Darius was based in Shiraz as a junior — and later
+      lead — restorer on the long conservation programme of the
+      <span class="em">Vakil Mosque</span>'s Zand-period haft-rang panels.
+      Five seasons on scaffolding, with brushes the width of a fingernail and a
+      kiln two streets away, taught what no university can: that a tile is
+      first an object and only afterwards an idea. The cracks of two and a half
+      centuries do not negotiate.
+    </p>
+
+    <p>
+      He took from Shiraz a working method — quietly heretical inside Iranian
+      conservation orthodoxy — of cutting replacement tesserae oversized and
+      grinding them in place to the original tolerance, a habit borrowed from
+      the wood-mosaicists of the city's marquetry workshops.
+    </p>
+
+    <div class="section-head">
+      <h2>The Atelier, 2011 —</h2>
+      <div class="filet" aria-hidden="true">
+        <svg viewBox="0 0 280 16" preserveAspectRatio="xMidYMid meet">
+          <g fill="currentColor">
+            <path d="M0 8 L120 8" stroke="currentColor" stroke-width="1" fill="none"/>
+            <circle cx="140" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1"/>
+            <circle cx="140" cy="8" r="1.6"/>
+            <path d="M280 8 L160 8" stroke="currentColor" stroke-width="1" fill="none"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <p>
+      In the spring of 2011 he founded
+      <span class="smallcaps">Atelier Naqsh-e Jahan</span> — named, with
+      affectionate hubris, for the great square of Isfahan — in a converted
+      ice-house in the old quarter of Yazd. The atelier began with three
+      workbenches and a single coal-fired kiln; it now employs four
+      tile-cutters, two glaze-mixers, and a draughtsman, and accepts roughly
+      eight commissions a year. The work divides, in his own description, into
+      three streams: <span class="em">restoration</span> (mosques, hammams,
+      private houses on the Iranian conservation register),
+      <span class="em">contemporary architectural ornament</span> for new
+      buildings willing to accept slow craft, and the small body of
+      <span class="em">exhibited panels</span> through which the atelier
+      argues, publicly, for the seriousness of the discipline.
+    </p>
+
+    <div class="section-head">
+      <h2>Selected Exhibitions</h2>
+      <div class="filet" aria-hidden="true">
+        <svg viewBox="0 0 280 16" preserveAspectRatio="xMidYMid meet">
+          <g fill="currentColor">
+            <path d="M0 8 L120 8" stroke="currentColor" stroke-width="1" fill="none"/>
+            <circle cx="140" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1"/>
+            <circle cx="140" cy="8" r="1.6"/>
+            <path d="M280 8 L160 8" stroke="currentColor" stroke-width="1" fill="none"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <ul class="exhibitions">
+      <li>
+        <span class="yr">2016</span>
+        <span class="ex-title">Geometry, Slowly: Six Panels in Haft-Rang
+          <span class="ex-venue">Tehran Museum of Contemporary Art — solo presentation, Spring Programme</span>
+        </span>
+      </li>
+      <li>
+        <span class="yr">2021</span>
+        <span class="ex-title">Epic Iran — Adjunct Programme
+          <span class="ex-venue">Victoria &amp; Albert Museum, London — invited contemporary tilework demonstration</span>
+        </span>
+      </li>
+      <li>
+        <span class="yr">2024</span>
+        <span class="ex-title">The Argument of the Tile
+          <span class="ex-venue">Aga Khan Museum, Toronto — group exhibition with three commissioned spandrel panels</span>
+        </span>
+      </li>
+    </ul>
+
+    <!-- =================== STATEMENT =================== -->
+    <div class="statement-block">
+
+      <div class="statement-seal" aria-hidden="true">
+        <svg viewBox="0 0 100 100">
+          <g>
+            <circle cx="50" cy="50" r="48" fill="none" stroke="var(--accent)" stroke-width="0.8"/>
+            <circle cx="50" cy="50" r="42" fill="none" stroke="var(--accent)" stroke-width="0.8"/>
+            <!-- 8-point girih star -->
+            <g transform="translate(50,50)" fill="var(--primary)" stroke="var(--accent)" stroke-width="0.6">
+              <path d="M0 -36 L9 -9 L36 0 L9 9 L0 36 L-9 9 L-36 0 L-9 -9 z"/>
+              <path d="M-25.5 -25.5 L0 -10 L25.5 -25.5 L10 0 L25.5 25.5 L0 10 L-25.5 25.5 L-10 0 z" fill="var(--secondary)" opacity="0.85"/>
+              <circle r="5" fill="var(--text-emphasis)"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+
+      <blockquote>
+        Cut tile is a slow argument with geometry. The kiln has its opinions,
+        the clay has its own; one negotiates, again and again, until the
+        pattern that was drawn at midnight in ink consents, by morning, to
+        live in glaze.
+      </blockquote>
+
+      <div class="signature">— D. Farahani, Yazd, 2023</div>
+
+    </div>
+
+  </article>
+</div>
+
+<!-- =================== FOOTER =================== -->
+<footer>
+  <div class="gold-divider" aria-hidden="true">
+    <svg viewBox="0 0 438 18" preserveAspectRatio="xMidYMid meet">
+      <g fill="currentColor">
+        <path d="M0,9 C90,9 130,5 150,5 L155,5 C160,5 162,7 165,9 C162,11 160,13 155,13 L150,13 C130,13 90,9 0,9 z"/>
+        <circle cx="169" cy="9" r="5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="169" cy="9" r="2"/>
+        <path d="M438,9 C348,9 308,5 288,5 L283,5 C278,5 276,7 273,9 C276,11 278,13 283,13 L288,13 C308,13 348,9 438,9 z"/>
+        <circle cx="269" cy="9" r="5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="269" cy="9" r="2"/>
+        <path d="M180,9 C200,3 220,1 219,9 C220,17 200,15 180,9 z"/>
+        <path d="M258,9 C238,3 218,1 219,9 C218,17 238,15 258,9 z"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="monogram">N&middot;J</div>
+  <div class="atelier-name">Atelier Naqsh-e Jahan</div>
+
+  <address>
+    Workshop No. 14, Kucheh-ye Yakhchāl<br>
+    Fahadan Quarter, Yazd 89139, Iran
+  </address>
+  <div class="contact-line">studio@naqsh-e-jahan.atelier &middot; +98 35 3623 4112 &middot; visits by appointment, Saturday–Wednesday</div>
+
+  <div class="turquoise-stripe" aria-hidden="true"></div>
+</footer>
+
+</body>
+</html>

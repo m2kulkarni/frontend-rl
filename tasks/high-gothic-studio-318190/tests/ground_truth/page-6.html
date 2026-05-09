@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Commissions & Contact — Atelier Saint-Sévrin</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    margin: 0;
+    line-height: 1.55;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* ============ NAV ARCADE ============ */
+  .arcade-wrap {
+    border-bottom: 1px solid var(--accent);
+    padding: 22px 60px 0;
+    background: var(--bg);
+  }
+  .arcade {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0;
+    max-width: 1320px;
+    margin: 0 auto;
+  }
+  .arcade a {
+    position: relative;
+    height: 92px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 14px;
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--primary);
+    -webkit-clip-path: path("M 0 92 L 0 46 Q 0 0 60 0 Q 120 0 120 46 L 120 92 Z");
+            clip-path: path("M 0 92 L 0 46 Q 0 0 60 0 Q 120 0 120 46 L 120 92 Z");
+    background:
+      linear-gradient(var(--bg), var(--bg)) padding-box,
+      var(--primary) border-box;
+    border: 1.5px solid var(--primary);
+    margin: 0 -0.75px;
+  }
+  .arcade a::before {
+    content: "";
+    position: absolute;
+    inset: 1.5px;
+    -webkit-clip-path: path("M 0 92 L 0 46 Q 0 0 60 0 Q 120 0 120 46 L 120 92 Z");
+            clip-path: path("M 0 90.5 L 0 46 Q 0 1.5 60 1.5 Q 120 1.5 120 46 L 120 90.5 Z");
+    background: var(--bg);
+    z-index: -1;
+  }
+  .arcade a[aria-current="page"] {
+    color: var(--bg);
+    background: var(--secondary);
+  }
+  .arcade a[aria-current="page"]::before { background: var(--secondary); }
+  .arcade a[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    top: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px; height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow:
+      0 -7px 0 -3px var(--accent),
+      0 7px 0 -3px var(--accent),
+      -7px 0 0 -3px var(--accent),
+      7px 0 0 -3px var(--accent);
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 60px 60px 40px;
+    display: grid;
+    grid-template-columns: 1fr 460px 1fr;
+    align-items: end;
+    gap: 40px;
+  }
+  .hero-side {
+    font-family: var(--font-body), serif;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--text);
+    border-top: 1px solid var(--primary);
+    padding-top: 14px;
+  }
+  .hero-side.right { text-align: right; }
+  .hero-arch {
+    position: relative;
+    height: 440px;
+  }
+  .hero-arch svg.frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .hero-arch .inner {
+    position: absolute;
+    top: 60px;
+    left: 50px;
+    right: 50px;
+    bottom: 30px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 30px;
+  }
+  .eyebrow {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    color: var(--secondary);
+    font-size: 14px;
+    letter-spacing: 0.05em;
+    margin-bottom: 18px;
+  }
+  .hero h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 1.02;
+    margin: 0 0 22px;
+    color: var(--primary);
+    letter-spacing: -0.01em;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--secondary);
+  }
+  .hero-lede {
+    max-width: 22em;
+    font-size: 14.5px;
+    color: var(--text);
+  }
+  .quatrefoil {
+    width: 28px; height: 28px;
+    fill: var(--secondary);
+    margin-bottom: 14px;
+  }
+
+  /* ============ DIVIDER ============ */
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    max-width: 1320px;
+    margin: 12px auto 0;
+    padding: 0 60px;
+  }
+  .divider .rule {
+    flex: 1;
+    height: 1px;
+    background: var(--primary);
+    position: relative;
+  }
+  .divider .rule::before {
+    content: "";
+    position: absolute;
+    top: -2px; bottom: -2px;
+    left: 0; right: 0;
+    border-top: 1px solid var(--primary);
+    transform: translateY(4px);
+  }
+  .divider .leaf {
+    width: 44px; height: 44px;
+  }
+
+  /* ============ COMMISSION COLUMNS ============ */
+  .commissions {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 70px 60px 60px;
+  }
+  .section-head {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+  .section-head .small {
+    font-family: var(--font-body), serif;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .section-head h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 38px;
+    color: var(--primary);
+    margin: 0 0 14px;
+  }
+  .section-head p {
+    max-width: 36em;
+    margin: 0 auto;
+    font-size: 14.5px;
+    font-style: italic;
+    color: var(--text);
+  }
+
+  .three-col {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 36px;
+  }
+  .col-arch {
+    position: relative;
+    padding: 0 8px;
+  }
+  .col-arch .crown {
+    position: relative;
+    height: 130px;
+    margin-bottom: 18px;
+  }
+  .col-arch .crown svg.mini-arch {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .col-arch .crown .quat {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 38px; height: 38px;
+    fill: var(--secondary);
+  }
+  .col-arch .roman {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    color: var(--accent);
+    font-size: 14px;
+    letter-spacing: 0.2em;
+  }
+  .col-arch h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 1.2;
+    color: var(--primary);
+    margin: 0 0 8px;
+    text-align: center;
+    max-width: 14em;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .col-arch .meta {
+    text-align: center;
+    font-style: italic;
+    color: var(--text);
+    font-size: 12.5px;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--primary);
+    max-width: 22em;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .col-arch .body {
+    max-width: 22em;
+    margin: 0 auto;
+    font-size: 14px;
+  }
+  .col-arch .body p { margin: 0 0 12px; }
+  .col-arch .body ul {
+    list-style: none;
+    padding: 0;
+    margin: 14px 0 0;
+    border-top: 1px solid var(--primary);
+    padding-top: 14px;
+  }
+  .col-arch .body li {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 13px;
+    padding: 5px 0 5px 18px;
+    position: relative;
+    color: var(--text-emphasis);
+  }
+  .col-arch .body li::before {
+    content: "✦";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 10px;
+    top: 7px;
+  }
+  .col-arch .fee {
+    margin-top: 18px;
+    text-align: center;
+    font-family: var(--font-body), serif;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--secondary);
+  }
+
+  /* ============ CONTACT / RHYTHM ============ */
+  .rhythm-band {
+    background: var(--primary);
+    color: var(--bg);
+    padding: 56px 0;
+    margin-top: 30px;
+    position: relative;
+  }
+  .rhythm-band::before, .rhythm-band::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    height: 6px;
+    background:
+      linear-gradient(var(--accent), var(--accent)) center/100% 1px no-repeat,
+      linear-gradient(var(--accent), var(--accent)) center/100% 1px no-repeat;
+    background-position: top, bottom;
+  }
+  .rhythm-band::before { top: 0; }
+  .rhythm-band::after { bottom: 0; }
+  .rhythm {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .rhythm h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 1.15;
+    margin: 0 0 18px;
+    color: var(--bg);
+    max-width: 16em;
+  }
+  .rhythm h3 em { color: var(--accent); font-style: italic; }
+  .rhythm p {
+    max-width: 22em;
+    font-size: 14px;
+    color: var(--bg);
+    opacity: 0.86;
+    margin: 0 0 10px;
+  }
+  .calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    max-width: 380px;
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+  }
+  .calendar .dh {
+    text-align: center;
+    color: var(--accent);
+    font-style: italic;
+    padding: 6px 0 10px;
+    border-bottom: 1px solid var(--accent);
+    margin-bottom: 6px;
+  }
+  .calendar .d {
+    text-align: center;
+    padding: 8px 0;
+    color: var(--bg);
+    opacity: 0.55;
+    font-size: 13px;
+  }
+  .calendar .d.review {
+    opacity: 1;
+    background: var(--secondary);
+    color: var(--bg);
+    border-radius: 50%;
+    position: relative;
+  }
+  .calendar .d.review::after {
+    content: "";
+    position: absolute;
+    inset: 3px;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+  }
+  .calendar-caption {
+    grid-column: 1 / -1;
+    margin-top: 14px;
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+  }
+
+  /* ============ ADDRESS BLOCKS ============ */
+  .address-section {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 80px 60px 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 50px;
+  }
+  .addr-card {
+    border-top: 2px solid var(--primary);
+    padding-top: 22px;
+    position: relative;
+  }
+  .addr-card::before {
+    content: "";
+    position: absolute;
+    top: -2px; left: 0;
+    width: 60px;
+    height: 6px;
+    background: var(--accent);
+  }
+  .addr-card .label {
+    font-family: var(--font-body), serif;
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+  .addr-card h4 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 22px;
+    margin: 0 0 14px;
+    color: var(--primary);
+  }
+  .addr-card p {
+    font-size: 14px;
+    margin: 0 0 8px;
+    max-width: 22em;
+  }
+  .addr-card .em {
+    color: var(--secondary);
+    font-style: italic;
+    font-family: var(--font-display), serif;
+  }
+  .addr-card .big {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    color: var(--primary);
+    letter-spacing: 0.02em;
+    margin: 6px 0;
+  }
+
+  /* ============ ENQUIRY PROTOCOL ============ */
+  .protocol {
+    background: var(--bg);
+    border-top: 1px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
+    padding: 70px 0;
+    position: relative;
+  }
+  .protocol::before, .protocol::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; height: 1px;
+    background: var(--accent);
+  }
+  .protocol::before { top: 5px; }
+  .protocol::after { bottom: 5px; }
+  .protocol-inner {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 60px;
+  }
+  .protocol h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 32px;
+    text-align: center;
+    margin: 0 0 8px;
+    color: var(--primary);
+  }
+  .protocol .sub {
+    text-align: center;
+    font-style: italic;
+    color: var(--text);
+    margin-bottom: 50px;
+    font-family: var(--font-display), serif;
+  }
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-left: 1px solid var(--primary);
+  }
+  .step {
+    border-right: 1px solid var(--primary);
+    padding: 24px 26px 30px;
+    position: relative;
+  }
+  .step .num {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.18em;
+    margin-bottom: 10px;
+  }
+  .step h4 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 18px;
+    margin: 0 0 10px;
+    color: var(--primary);
+    line-height: 1.2;
+  }
+  .step p {
+    font-size: 13.5px;
+    margin: 0;
+    max-width: 22em;
+  }
+  .step .tag {
+    display: block;
+    margin-top: 14px;
+    font-family: var(--font-body), serif;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--secondary);
+  }
+
+  /* ============ NOT ACCEPTED ============ */
+  .scope {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 70px 60px;
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 60px;
+  }
+  .scope-head h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 30px;
+    margin: 0 0 12px;
+    color: var(--primary);
+  }
+  .scope-head p {
+    font-size: 13.5px;
+    font-style: italic;
+    color: var(--text);
+    max-width: 18em;
+  }
+  .scope-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px 40px;
+  }
+  .scope-list div {
+    border-top: 1px solid var(--primary);
+    padding-top: 12px;
+    font-size: 13.5px;
+    max-width: 22em;
+  }
+  .scope-list div b {
+    display: block;
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 15px;
+    color: var(--secondary);
+    margin-bottom: 4px;
+  }
+
+  /* ============ FOOTER ============ */
+  footer {
+    margin-top: 30px;
+    position: relative;
+  }
+  .heraldic-band {
+    height: 96px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 600 600'><g transform='translate(300,300)scale(0.87)rotate(45)'><circle cx='-195' r='163'/><circle cx='195' r='163'/><circle cy='195' r='163'/><circle cy='-195' r='163'/><rect x='-232' y='-232' width='464' height='464'/><g fill='%23f4ecd8'><circle cx='-195' r='157'/><circle cx='195' r='157'/><circle cy='195' r='157'/><circle cy='-195' r='157'/><rect x='-226' y='-226' width='452' height='452'/></g><circle cx='-195' r='144'/><circle cx='195' r='144'/><circle cy='195' r='144'/><circle cy='-195' r='144'/><rect x='-213' y='-213' width='426' height='426'/><g fill='%23f4ecd8'><circle cx='-195' r='138'/><circle cx='195' r='138'/><circle cy='195' r='138'/><circle cy='-195' r='138'/><rect x='-207' y='-207' width='414' height='414'/></g></g></svg>");
+    background-size: 80px 80px;
+    background-repeat: repeat-x;
+    background-position: center;
+    background-color: var(--bg);
+    border-top: 1px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
+  }
+  .seal {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90px;
+    height: 90px;
+    background: var(--bg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--primary);
+    box-shadow: 0 0 0 4px var(--bg), 0 0 0 5px var(--accent);
+  }
+  .seal svg { width: 56px; height: 56px; fill: var(--primary); }
+  .footer-meta {
+    background: var(--bg);
+    padding: 30px 60px 36px;
+    text-align: center;
+  }
+  .footer-meta .addr {
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    color: var(--primary);
+    margin-bottom: 6px;
+  }
+  .footer-meta .tel {
+    font-style: italic;
+    font-family: var(--font-display), serif;
+    color: var(--secondary);
+    margin-bottom: 14px;
+  }
+  .footer-meta .attr {
+    font-family: var(--font-body), serif;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== NAV ARCADE ===================== -->
+<div class="arcade-wrap">
+  <nav class="arcade" aria-label="Primary">
+    <a href="page-1.html">Atelier</a>
+    <a href="page-2.html">Works</a>
+    <a href="page-3.html">Studio</a>
+    <a href="page-4.html">Method</a>
+    <a href="page-5.html">Journal</a>
+    <a href="page-6.html" aria-current="page">Commissions</a>
+    <a href="page-1.html#colophon">Colophon</a>
+  </nav>
+</div>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+  <div class="hero-side">
+    <div>Reims · Marne</div>
+    <div style="margin-top:4px;">Established MMVII</div>
+  </div>
+
+  <div class="hero-arch">
+    <svg class="frame" viewBox="0 0 500 550" preserveAspectRatio="none" aria-hidden="true">
+      <g transform="translate(-147.13944,-244.9375)">
+        <g stroke="#0a0a0a" stroke-width="3.125" fill="none">
+          <g>
+            <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432" stroke-linecap="round"/>
+            <path d="m 250,430.58 24.75248,58.41585"/>
+            <path d="m 347.0297,342.46119 41.58416,23.76238 0.9901,35.64356"/>
+            <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+          </g>
+          <g transform="matrix(-1,0,0,1,777.88071,-0.2972181)">
+            <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432" stroke-linecap="round"/>
+            <path d="m 250,430.58 24.75248,58.41585"/>
+            <path d="m 347.0297,342.46119 41.58416,23.76238 0.9901,35.64356"/>
+            <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+          </g>
+        </g>
+      </g>
+    </svg>
+    <div class="inner">
+      <svg class="quatrefoil" viewBox="0 0 600 600" aria-hidden="true">
+        <g transform="translate(300,300)scale(0.87)rotate(45)">
+          <circle cx="-195" r="163"/><circle cx="195" r="163"/>
+          <circle cy="195" r="163"/><circle cy="-195" r="163"/>
+          <rect x="-232" y="-232" width="464" height="464"/>
+        </g>
+      </svg>
+      <div class="eyebrow">— page the sixth —</div>
+      <h1>Commissions<br>&amp; <em>Correspondence</em></h1>
+      <p class="hero-lede">An invitation to address the studio. We accept three forms of work and read all enquiries on the first Monday of each month.</p>
+    </div>
+  </div>
+
+  <div class="hero-side right">
+    <div>Anno MMXXIV</div>
+    <div style="margin-top:4px;">Page VI of VI</div>
+  </div>
+</section>
+
+<!-- ===================== DIVIDER ===================== -->
+<div class="divider" aria-hidden="true">
+  <span class="rule"></span>
+  <svg class="leaf" viewBox="0 0 200 200">
+    <path transform="translate(0 -852.36)scale(0.9)translate(10 940)" fill="#0a0a0a" d="M43.6 11c-1.8 0-3.6.1-5.4.3-7 .7-13.9 2.8-19.1 7.5s-8.2 12-7.7 21c.5 9 4.3 16.1 10.2 20.3 5.9 4.2 13.3 5.5 21 5.2 15.5-.7 32.8-8 45.8-18.3 1.4-1.1 2.8-2 4.3-3.1 4.3 6.7 7.6 14.8 9.3 24-7.5-5-21-10.5-35.6 1.5-22.1 18.2-25 12.9-45.4-2.1-2.9 36.1 15 54.6 44.7 52.5 0 0-14 4.3-3.6 26.4 6 12.9 8.4 20.1 6.6 25.2-12.8 2.3-15.8 7.8-5.6 12.7 45.1 10 65.7-27.5 68.7-66 45.4 0 52.9-31.8 52.5-50.4-8.2 11.1-22.2 11.1-32.9 2.5-9.9-7.9-21.7-16.2-39-1.1-1.7-11.7-5.7-22.1-11.2-30.7 19.4-11.4 38.7-14.5 52.5-10.8 5.5 1.4 9.5 4.1 12.4 7-9 8.4-11.8 26.4 2.3 27 18.9.9 21-15.5 13.6-27.1-5.4-8.5-16.4-13.2-25.7-16.6-17.5-4.6-39.7-.6-61.3 12.5-5.2-5.7-11.1-10.2-17.7-12.9-7.1-3-17.5-5.7-28.3-6.3-1.8-.1-3.6-.1-5.4-.1z"/>
+  </svg>
+  <span class="rule"></span>
+</div>
+
+<!-- ===================== COMMISSIONS ===================== -->
+<section class="commissions">
+  <div class="section-head">
+    <div class="small">— The Three Offices of the Studio —</div>
+    <h2>Forms of Engagement</h2>
+    <p>The atelier accepts commissions under three distinct rubrics. Each is governed by its own protocol, fee structure, and expected duration. We do not undertake speculative work, competition entries without honoraria, or commissions whose programme conflicts with the conservation of consecrated fabric.</p>
+  </div>
+
+  <div class="three-col">
+    <!-- COL I -->
+    <div class="col-arch">
+      <div class="crown">
+        <svg class="mini-arch" viewBox="0 0 300 130" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M 20 130 L 20 60 Q 20 8 150 8 Q 280 8 280 60 L 280 130" fill="none" stroke="#0a0a0a" stroke-width="1.2"/>
+          <path d="M 30 130 L 30 60 Q 30 18 150 18 Q 270 18 270 60 L 270 130" fill="none" stroke="#0a0a0a" stroke-width="1.2"/>
+          <path d="M 30 60 L 270 60" stroke="#c9a23a" stroke-width="0.8"/>
+        </svg>
+        <svg class="quat" viewBox="0 0 600 600" aria-hidden="true">
+          <g transform="translate(300,300)scale(0.87)rotate(45)">
+            <circle cx="-195" r="163"/><circle cx="195" r="163"/>
+            <circle cy="195" r="163"/><circle cy="-195" r="163"/>
+            <rect x="-232" y="-232" width="464" height="464"/>
+          </g>
+        </svg>
+        <div class="roman">— I —</div>
+      </div>
+      <h3>Full Architectural Service</h3>
+      <div class="meta">From feasibility to handover · 18–60 months · ecclesiastical &amp; civic</div>
+      <div class="body">
+        <p>The complete architectural commission, undertaken from initial feasibility through detailed design, tender, contract administration, and the issuing of the final certificate. Reserved chiefly for sacred fabric, civic interiors, and projects involving the conservation of listed stone.</p>
+        <p>Camille Roussel coordinates programme; Father-Architect Henri Vernier signs the drawings.</p>
+        <ul>
+          <li>RIBA / OAR full stages 1–6</li>
+          <li>Stone, lime &amp; lead schedules</li>
+          <li>Glazing &amp; liturgical furnishings</li>
+          <li>Site presence: weekly</li>
+        </ul>
+        <div class="fee">— Fee: 9 – 12 % of works value —</div>
+      </div>
+    </div>
+
+    <!-- COL II -->
+    <div class="col-arch">
+      <div class="crown">
+        <svg class="mini-arch" viewBox="0 0 300 130" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M 20 130 L 20 60 Q 20 8 150 8 Q 280 8 280 60 L 280 130" fill="none" stroke="#0a0a0a" stroke-width="1.2"/>
+          <path d="M 30 130 L 30 60 Q 30 18 150 18 Q 270 18 270 60 L 270 130" fill="none" stroke="#0a0a0a" stroke-width="1.2"/>
+          <path d="M 30 60 L 270 60" stroke="#c9a23a" stroke-width="0.8"/>
+        </svg>
+        <svg class="quat" viewBox="0 0 600 600" aria-hidden="true">
+          <g transform="translate(300,300)scale(0.87)rotate(45)">
+            <circle cx="-195" r="163"/><circle cx="195" r="163"/>
+            <circle cy="195" r="163"/><circle cy="-195" r="163"/>
+            <rect x="-232" y="-232" width="464" height="464"/>
+          </g>
+        </svg>
+        <div class="roman">— II —</div>
+      </div>
+      <h3>Conservation Reports &amp; Condition Surveys</h3>
+      <div class="meta">Standalone document · 8–14 weeks · single fixed fee</div>
+      <div class="body">
+        <p>A bound conservation report, drawn from on-site survey, archival research, and structural-stone assay. Suitable for parishes preparing diocesan returns, owners of monuments historiques, and trustees commissioning quinquennial inspections.</p>
+        <p>Reports are delivered in two leather-bound copies and a digital archive, with a defects schedule, photographic plates, and a ten-year fabric forecast.</p>
+        <ul>
+          <li>Quinquennial &amp; decennial surveys</li>
+          <li>Stone petrography commissioned externally</li>
+          <li>Mortar analysis (Reims, Châlons)</li>
+          <li>Photogrammetric record included</li>
+        </ul>
+        <div class="fee">— Fee: € 14,500 – € 38,000 —</div>
+      </div>
+    </div>
+
+    <!-- COL III -->
+    <div class="col-arch">
+      <div class="crown">
+        <svg class="mini-arch" viewBox="0 0 300 130" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M 20 130 L 20 60 Q 20 8 150 8 Q 280 8 280 60 L 280 130" fill="none" stroke="#0a0a0a" stroke-width="1.2"/>
+          <path d="M 30 130 L 30 60 Q 30 18 150 18 Q 270 18 270 60 L 270 130" fill="none" stroke="#0a0a0a" stroke-width="1.2"/>
+          <path d="M 30 60 L 270 60" stroke="#c9a23a" stroke-width="0.8"/>
+        </svg>
+        <svg class="quat" viewBox="0 0 600 600" aria-hidden="true">
+          <g transform="translate(300,300)scale(0.87)rotate(45)">
+            <circle cx="-195" r="163"/><circle cx="195" r="163"/>
+            <circle cy="195" r="163"/><circle cy="-195" r="163"/>
+            <rect x="-232" y="-232" width="464" height="464"/>
+          </g>
+        </svg>
+        <div class="roman">— III —</div>
+      </div>
+      <h3>Expert-Witness &amp; Tribunal Work</h3>
+      <div class="meta">Testimony &amp; written opinion · 4–20 weeks · per instruction</div>
+      <div class="body">
+        <p>Expert testimony before ecclesiastical chapters, the Commission Régionale du Patrimoine, and civil heritage tribunals concerned with disputed conservation works, demolition orders, or contested attributions of medieval fabric.</p>
+        <p>The studio gives evidence in French and English. Three matters per annum are accepted; further requests are placed on a waiting list reviewed each Michaelmas.</p>
+        <ul>
+          <li>Written expert opinion (rapport)</li>
+          <li>Cross-examination at hearing</li>
+          <li>Site re-inspection where required</li>
+          <li>Bilingual: FR / EN</li>
+        </ul>
+        <div class="fee">— Fee: € 480 / hour, day-rate € 3,200 —</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== RHYTHM BAND ===================== -->
+<section class="rhythm-band">
+  <div class="rhythm">
+    <div>
+      <h3>The studio reads new enquiries on the <em>first Monday</em> of each month.</h3>
+      <p>Letters and emails received between Mondays are gathered, read in chapter, and distributed amongst the architects on the morning of the first Monday. A reply is dispatched within three weeks of that reading.</p>
+      <p style="margin-top:18px;">If your enquiry is urgent — a structural collapse, a stone fall, a flood within consecrated fabric — telephone the studio directly and say so to Mme. Roussel.</p>
+    </div>
+    <div class="calendar" aria-label="A typical month at the atelier">
+      <div class="dh">L</div><div class="dh">M</div><div class="dh">M</div><div class="dh">J</div><div class="dh">V</div><div class="dh">S</div><div class="dh">D</div>
+      <div class="d review">1</div><div class="d">2</div><div class="d">3</div><div class="d">4</div><div class="d">5</div><div class="d">6</div><div class="d">7</div>
+      <div class="d">8</div><div class="d">9</div><div class="d">10</div><div class="d">11</div><div class="d">12</div><div class="d">13</div><div class="d">14</div>
+      <div class="d">15</div><div class="d">16</div><div class="d">17</div><div class="d">18</div><div class="d">19</div><div class="d">20</div><div class="d">21</div>
+      <div class="d">22</div><div class="d">23</div><div class="d">24</div><div class="d">25</div><div class="d">26</div><div class="d">27</div><div class="d">28</div>
+      <div class="calendar-caption">— First Monday: chapter of enquiries —</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ADDRESS / CORRESPONDENCE / TELEPHONE ===================== -->
+<section class="address-section">
+
+  <div class="addr-card">
+    <div class="label">— I · The Studio —</div>
+    <h4>Atelier Saint-Sévrin</h4>
+    <p class="big">14 rue des Tapissiers</p>
+    <p class="big">51100 Reims</p>
+    <p>Marne · Grand Est · France</p>
+    <p class="em" style="margin-top:14px;">Open by appointment, Tuesdays through Fridays, between Nones and Vespers (14h00 – 18h00).</p>
+    <p style="margin-top:10px;">Visitors are received in the antechamber. The drawing-room is reserved for clients on commission.</p>
+  </div>
+
+  <div class="addr-card">
+    <div class="label">— II · Correspondence —</div>
+    <h4>Mme. Camille Roussel</h4>
+    <p class="em">Studio secretary &amp; first reader</p>
+    <p style="margin-top:14px;">All enquiries — postal or electronic — should be addressed to Mme. Roussel by name. She acknowledges receipt within five working days and circulates the matter in chapter on the first Monday following.</p>
+    <p style="margin-top:14px;" class="big">c.roussel@saint‑sevrin.fr</p>
+    <p>secretariat@saint‑sevrin.fr</p>
+  </div>
+
+  <div class="addr-card">
+    <div class="label">— III · By Telephone —</div>
+    <h4>+33 3 26 47 82 19</h4>
+    <p class="em">Standard hours, Tuesday – Friday</p>
+    <p style="margin-top:14px;">The studio line is answered in person by Mme. Roussel. Out of hours, a written message is preferred to a recorded one; the studio does not retrieve voicemail with regularity.</p>
+    <p style="margin-top:14px;">For urgent fabric emergencies, the duty-architect may be reached via the diocesan switchboard at Reims (<span class="em">demander l'architecte de garde</span>).</p>
+  </div>
+</section>
+
+<!-- ===================== ENQUIRY PROTOCOL ===================== -->
+<section class="protocol">
+  <div class="protocol-inner">
+    <h2>How to Address the Atelier</h2>
+    <p class="sub">— a brief protocol for those writing to the studio for the first time —</p>
+    <div class="steps">
+      <div class="step">
+        <div class="num">— STEP I —</div>
+        <h4>Name the fabric</h4>
+        <p>Identify the building, its dedication, its parish or commune, and — if known — its protection status (classé, inscrit, MH, or none).</p>
+        <span class="tag">e.g. St-Étienne-le-Vieux, classé 1875</span>
+      </div>
+      <div class="step">
+        <div class="num">— STEP II —</div>
+        <h4>State the office</h4>
+        <p>Indicate which of the three offices applies: full service, conservation report, or expert witness. If you are uncertain, say so plainly.</p>
+        <span class="tag">Office I, II or III</span>
+      </div>
+      <div class="step">
+        <div class="num">— STEP III —</div>
+        <h4>Enclose the matter</h4>
+        <p>Brief description, anticipated timetable, and a single contact. Photographs welcome but not required; we shall ask for what we need.</p>
+        <span class="tag">One letter, one matter</span>
+      </div>
+      <div class="step">
+        <div class="num">— STEP IV —</div>
+        <h4>Await the chapter</h4>
+        <p>The first Monday after receipt brings your letter to chapter. A written reply follows within three weeks, accepting, declining, or proposing terms.</p>
+        <span class="tag">Reply within XXI days</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SCOPE / NOT ACCEPTED ===================== -->
+<section class="scope">
+  <div class="scope-head">
+    <h2>What the Studio Does Not Undertake</h2>
+    <p>For honesty's sake — to spare both your time and ours.</p>
+  </div>
+  <div class="scope-list">
+    <div><b>Speculative competitions</b>Entries without honoraria or paid second stages.</div>
+    <div><b>New-build housing</b>Domestic dwellings, save those attached to existing sacred or civic complexes.</div>
+    <div><b>Retail interiors</b>Including hospitality, food &amp; beverage, and short-let conversion of monuments.</div>
+    <div><b>Demolition consents</b>The atelier will not author petitions for the removal of medieval fabric.</div>
+    <div><b>Replica work</b>Pastiche reconstruction in the absence of documentary or archaeological evidence.</div>
+    <div><b>Cement-based repair</b>Portland-cement renders or pointing on stone of pre-1900 date.</div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="heraldic-band" aria-hidden="true"></div>
+  <div class="seal" aria-hidden="true">
+    <svg viewBox="0 0 4000 4000">
+      <path transform="scale(1)" d="M1778.9,3200A120.9,120.9 0 0,1 1657.97,3320.93A120.9,120.9 0 0,1 1537.04,3200A221.5,221.5 0 0,0 1456.32,3371.02A221.5,221.5 0 0,0 1677.83,3592.53A221.5,221.5 0 0,0 1818.61,3542.03A362.8,362.8 0 0,0 2000,3856.21A362.8,362.8 0 0,0 2181.39,3542.03A221.5,221.5 0 0,0 2322.17,3592.53A221.5,221.5 0 0,0 2543.68,3371.02A221.5,221.5 0 0,0 2462.96,3200A120.9,120.9 0 0,1 2342.03,3320.93A120.9,120.9 0 0,1 2221.1,3200V2221.1H3200A120.9,120.9 0 0,1 3320.93,2342.03A120.9,120.9 0 0,1 3200,2462.96A221.5,221.5 0 0,0 3371.02,2543.68A221.5,221.5 0 0,0 3592.53,2322.17A221.5,221.5 0 0,0 3542.03,2181.39A362.8,362.8 0 0,0 3856.21,2000A362.8,362.8 0 0,0 3542.03,1818.61A221.5,221.5 0 0,0 3592.53,1677.83A221.5,221.5 0 0,0 3371.02,1456.32A221.5,221.5 0 0,0 3200,1537.04A120.9,120.9 0 0,1 3320.93,1657.97A120.9,120.9 0 0,1 3200,1778.9H2221.1V800A120.9,120.9 0 0,1 2342.03,679.07A120.9,120.9 0 0,1 2462.96,800A221.5,221.5 0 0,0 2543.68,628.98A221.5,221.5 0 0,0 2322.17,407.48A221.5,221.5 0 0,0 2181.39,457.97A362.8,362.8 0 0,0 2000,143.79A362.8,362.8 0 0,0 1818.61,457.97A221.5,221.5 0 0,0 1677.83,407.48A221.5,221.5 0 0,0 1456.32,628.98A221.5,221.5 0 0,0 1537.04,800A120.9,120.9 0 0,1 1657.97,679.07A120.9,120.9 0 0,1 1778.9,800V1778.9H800A120.9,120.9 0 0,1 679.07,1657.97A120.9,120.9 0 0,1 800,1537.04A221.5,221.5 0 0,0 628.98,1456.32A221.5,221.5 0 0,0 407.48,1677.83A221.5,221.5 0 0,0 457.97,1818.61A362.8,362.8 0 0,0 143.79,2000A362.8,362.8 0 0,0 457.97,2181.39A221.5,221.5 0 0,0 407.48,2322.17A221.5,221.5 0 0,0 628.98,2543.68A221.5,221.5 0 0,0 800,2462.96A120.9,120.9 0 0,1 679.07,2342.03A120.9,120.9 0 0,1 800,2221.1H1778.9Z"/>
+    </svg>
+  </div>
+  <div class="footer-meta">
+    <div class="addr">Atelier Saint-Sévrin · 14 rue des Tapissiers · 51100 Reims · France</div>
+    <div class="tel">Téléphone +33 3 26 47 82 19 · c.roussel@saint-sevrin.fr</div>
+    <div class="attr">Set in Fraunces &amp; Source Sans · Drawn at the Studio · Anno Domini MMXXIV</div>
+  </div>
+</footer>
+
+</body>
+</html>

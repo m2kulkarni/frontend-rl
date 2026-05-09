@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>The Master's Hand — Drawings from the Tracing-Floor</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  :root {
+    --came: #0a0a0a;
+    --gold: #c9a23a;
+    --cobalt: #1e3a5f;
+    --madder: #8b1538;
+    --parchment: #f4ecd8;
+    --parchment-deep: #e8dcc0;
+    --ink: #3a2618;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), "EB Garamond", Garamond, serif;
+    font-size: 16px;
+    line-height: 1.55;
+    background-image:
+      radial-gradient(ellipse at top, rgba(30,58,95,0.04), transparent 60%),
+      radial-gradient(ellipse at bottom, rgba(139,21,56,0.03), transparent 60%);
+  }
+
+  /* Diaper background helper */
+  .diaper {
+    position: relative;
+  }
+  .diaper::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("svg/quatrefoil-in-square.svg");
+    background-size: 120px 120px;
+    background-repeat: repeat;
+    opacity: 0.07;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .diaper > * { position: relative; z-index: 1; }
+
+  /* ======== HEADER ======== */
+  header.site-head {
+    text-align: center;
+    padding: 36px 20px 0;
+    border-bottom: 2px solid var(--came);
+    background: linear-gradient(180deg, var(--parchment) 0%, var(--parchment-deep) 100%);
+    position: relative;
+  }
+  header.site-head::after {
+    content: "";
+    display: block;
+    height: 4px;
+    background: var(--gold);
+    margin-top: 14px;
+    box-shadow: 0 1px 0 var(--came), 0 -1px 0 var(--came);
+  }
+
+  .sitename {
+    font-family: var(--font-display), "UnifrakturMaguntia", serif;
+    font-size: 54px;
+    color: var(--cobalt);
+    letter-spacing: 0.02em;
+    margin: 0 0 4px;
+    text-shadow: 1px 1px 0 rgba(201,162,58,0.3);
+  }
+  .sitemotto {
+    font-style: italic;
+    color: var(--madder);
+    font-size: 15px;
+    letter-spacing: 0.18em;
+    text-transform: lowercase;
+    margin-bottom: 22px;
+  }
+
+  /* Arcade nav */
+  nav.arcade {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    padding: 0 0 18px;
+  }
+  nav.arcade a {
+    position: relative;
+    width: 188px;
+    height: 110px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 18px;
+    text-decoration: none;
+    color: var(--ink);
+    font-variant: small-caps;
+    letter-spacing: 0.14em;
+    font-size: 14px;
+    font-weight: 600;
+    border-left: 1.5px solid var(--came);
+    background:
+      radial-gradient(ellipse 90px 110px at 50% 110px, var(--parchment) 0 60%, transparent 62%);
+    transition: background 0.2s;
+  }
+  nav.arcade a:last-child { border-right: 1.5px solid var(--came); }
+  nav.arcade a::before {
+    /* pointed arch outline */
+    content: "";
+    position: absolute;
+    left: 8px; right: 8px; top: 6px; bottom: 0;
+    border: 1.5px solid var(--came);
+    border-bottom: none;
+    border-radius: 50% 50% 0 0 / 80% 80% 0 0;
+    clip-path: polygon(0% 100%, 0% 40%, 50% 0%, 100% 40%, 100% 100%);
+    background: transparent;
+  }
+  nav.arcade a:hover::before {
+    background: var(--cobalt);
+  }
+  nav.arcade a:hover { color: var(--parchment); }
+
+  nav.arcade a[aria-current="page"] {
+    color: var(--madder);
+  }
+  nav.arcade a[aria-current="page"]::after {
+    content: "⚜";
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--gold);
+    font-size: 22px;
+    text-shadow: 0 0 2px var(--came);
+  }
+
+  /* ======== HERO ======== */
+  .hero {
+    text-align: center;
+    padding: 50px 40px 30px;
+    position: relative;
+  }
+  .hero h1 {
+    font-family: var(--font-display), "UnifrakturMaguntia", serif;
+    font-size: 64px;
+    color: var(--cobalt);
+    margin: 24px 0 8px;
+    line-height: 1;
+  }
+  .hero .subtitle {
+    font-style: italic;
+    font-size: 19px;
+    color: var(--madder);
+    margin: 0 0 12px;
+  }
+  .hero .folio-mark {
+    font-variant: small-caps;
+    letter-spacing: 0.3em;
+    font-size: 13px;
+    color: var(--ink);
+    margin-top: 14px;
+  }
+  .hero-arch {
+    width: 280px;
+    margin: 0 auto;
+    display: block;
+  }
+  .hero-arch svg { width: 100%; height: auto; }
+
+  /* gold rule */
+  .gold-rule {
+    width: 60%;
+    margin: 28px auto 0;
+    height: 0;
+    border: none;
+    border-top: 1.5px solid var(--gold);
+    box-shadow: 0 2px 0 -1px var(--gold);
+    position: relative;
+  }
+  .gold-rule::before, .gold-rule::after {
+    content: "❦";
+    position: absolute;
+    top: -12px;
+    color: var(--gold);
+    font-size: 18px;
+    background: var(--bg);
+    padding: 0 10px;
+  }
+  .gold-rule::before { left: -18px; }
+  .gold-rule::after { right: -18px; }
+
+  /* ======== PROLOGUE ======== */
+  .prologue {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 30px 40px 50px;
+    text-align: justify;
+    column-count: 2;
+    column-gap: 40px;
+    column-rule: 1px dotted rgba(58,38,24,0.3);
+    font-size: 16px;
+  }
+  .prologue p { margin: 0 0 14px; }
+  .prologue .dropcap::first-letter {
+    font-family: var(--font-display), serif;
+    font-size: 64px;
+    color: var(--madder);
+    float: left;
+    line-height: 0.85;
+    padding: 6px 8px 0 0;
+    text-shadow: 1px 1px 0 var(--gold);
+  }
+
+  /* ======== PLATES — main grid ======== */
+  .plates-section {
+    background: var(--parchment-deep);
+    padding: 50px 0 70px;
+    border-top: 2px solid var(--came);
+    border-bottom: 2px solid var(--came);
+  }
+  .section-title {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    color: var(--cobalt);
+    font-size: 42px;
+    margin: 0 0 6px;
+  }
+  .section-sub {
+    text-align: center;
+    font-style: italic;
+    color: var(--madder);
+    margin: 0 0 36px;
+    letter-spacing: 0.05em;
+  }
+
+  .plates-grid {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 44px;
+  }
+
+  /* Plate Card — pointed arch frame */
+  .plate {
+    background: var(--parchment);
+    border: 1.5px solid var(--came);
+    border-radius: 50% 50% 0 0 / 18% 18% 0 0;
+    padding: 0;
+    position: relative;
+    box-shadow:
+      0 2px 0 var(--gold),
+      0 0 0 4px var(--parchment-deep),
+      0 0 0 5px var(--came),
+      4px 6px 18px rgba(58,38,24,0.18);
+    overflow: hidden;
+  }
+
+  /* quatrefoil seal */
+  .seal {
+    position: absolute;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 64px;
+    height: 64px;
+    z-index: 4;
+  }
+  .seal svg { width: 100%; height: 100%; display: block; }
+  .seal .roman {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display), serif;
+    color: var(--gold);
+    font-size: 13px;
+    text-shadow: 0 0 2px var(--came), 0 0 1px var(--came);
+    letter-spacing: 0.05em;
+  }
+
+  .plate-head {
+    text-align: center;
+    padding: 90px 40px 16px;
+    background: linear-gradient(180deg, rgba(30,58,95,0.06) 0%, transparent 100%);
+  }
+  .plate-head h3 {
+    font-family: var(--font-display), serif;
+    font-size: 30px;
+    color: var(--cobalt);
+    margin: 0 0 4px;
+    line-height: 1.05;
+  }
+  .plate-head .lat {
+    font-style: italic;
+    color: var(--madder);
+    font-size: 14px;
+    letter-spacing: 0.06em;
+  }
+
+  .plate-rule {
+    height: 2px;
+    margin: 8px 30px 0;
+    background: var(--gold);
+    position: relative;
+  }
+  .plate-rule::before,
+  .plate-rule::after {
+    content: "";
+    position: absolute;
+    top: -3px;
+    width: 8px; height: 8px;
+    background: var(--madder);
+    transform: rotate(45deg);
+    border: 1px solid var(--came);
+  }
+  .plate-rule::before { left: -4px; }
+  .plate-rule::after { right: -4px; }
+
+  /* plate drawing area */
+  .drawing {
+    background: #f8f1de;
+    border-top: 1px solid rgba(58,38,24,0.2);
+    border-bottom: 1px solid rgba(58,38,24,0.2);
+    margin: 14px 0 0;
+    padding: 18px 0;
+    position: relative;
+    background-image:
+      linear-gradient(to right, rgba(30,58,95,0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(30,58,95,0.06) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+  .drawing svg {
+    display: block;
+    margin: 0 auto;
+    width: 92%;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .plate-body {
+    padding: 18px 28px 28px;
+    position: relative;
+  }
+  .plate-body p {
+    margin: 0 0 12px;
+    text-align: justify;
+    font-size: 15.5px;
+  }
+  .plate-body .has-dropcap::first-letter {
+    font-family: var(--font-display), serif;
+    font-size: 48px;
+    color: var(--madder);
+    float: left;
+    line-height: 0.8;
+    padding: 4px 7px 0 0;
+    text-shadow: 1px 1px 0 var(--gold);
+  }
+
+  .plate-meta {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 14px;
+    font-size: 12px;
+    font-variant: small-caps;
+    letter-spacing: 0.15em;
+    color: var(--ink);
+    border-top: 1px dotted rgba(58,38,24,0.4);
+    padding-top: 10px;
+  }
+  .plate-meta span strong {
+    color: var(--cobalt);
+    font-weight: 600;
+  }
+
+  .marginalia {
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: rgba(201,162,58,0.10);
+    border-left: 3px double var(--gold);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink);
+  }
+  .marginalia::before {
+    content: "❧ ";
+    color: var(--madder);
+    font-style: normal;
+    font-weight: 700;
+  }
+
+  /* ======== LODGE PRINCIPLES ======== */
+  .lodge {
+    max-width: 1100px;
+    margin: 60px auto 0;
+    padding: 0 40px 40px;
+  }
+  .lodge h2 {
+    font-family: var(--font-display), serif;
+    color: var(--cobalt);
+    text-align: center;
+    font-size: 38px;
+    margin: 0 0 10px;
+  }
+  .lodge .lat {
+    text-align: center;
+    font-style: italic;
+    color: var(--madder);
+    margin-bottom: 30px;
+  }
+  .principles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+  .principle {
+    background: var(--parchment);
+    border: 1px solid var(--came);
+    padding: 22px 22px 20px;
+    border-top: 4px double var(--gold);
+    position: relative;
+  }
+  .principle h4 {
+    font-family: var(--font-display), serif;
+    font-size: 24px;
+    color: var(--madder);
+    margin: 0 0 6px;
+  }
+  .principle .num {
+    position: absolute;
+    top: -16px;
+    right: -10px;
+    width: 38px;
+    height: 38px;
+    background: var(--cobalt);
+    color: var(--gold);
+    border: 1.5px solid var(--came);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display), serif;
+    font-size: 16px;
+  }
+  .principle p {
+    margin: 0;
+    font-size: 14.5px;
+    text-align: justify;
+  }
+
+  /* ======== TRACING-FLOOR PROVENANCE ======== */
+  .provenance {
+    max-width: 1100px;
+    margin: 50px auto 60px;
+    padding: 0 40px;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 50px;
+    align-items: center;
+  }
+  .provenance .vine {
+    width: 90px;
+    margin: 0 auto 14px;
+    display: block;
+  }
+  .provenance .vine svg { width: 100%; height: auto; fill: var(--cobalt); }
+  .provenance h2 {
+    font-family: var(--font-display), serif;
+    color: var(--cobalt);
+    font-size: 36px;
+    margin: 0 0 10px;
+    text-align: center;
+  }
+  .provenance .lat {
+    color: var(--madder);
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  .provenance p {
+    text-align: justify;
+    font-size: 15.5px;
+  }
+  .provenance p.has-dropcap::first-letter {
+    font-family: var(--font-display), serif;
+    font-size: 56px;
+    color: var(--madder);
+    float: left;
+    line-height: 0.85;
+    padding: 6px 8px 0 0;
+    text-shadow: 1px 1px 0 var(--gold);
+  }
+  .rose-mark {
+    width: 280px;
+    margin: 0 auto;
+    display: block;
+    border: 6px double var(--came);
+    padding: 10px;
+    background: var(--parchment);
+    box-shadow: 0 6px 22px rgba(30,58,95,0.25);
+  }
+  .rose-mark svg { display: block; width: 100%; height: auto; }
+  .rose-caption {
+    text-align: center;
+    margin-top: 12px;
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    font-size: 12px;
+    color: var(--ink);
+  }
+
+  /* ======== FOOTER ======== */
+  footer.site-foot {
+    background: var(--parchment-deep);
+    border-top: 2px solid var(--came);
+    padding: 36px 20px 28px;
+    text-align: center;
+    margin-top: 30px;
+  }
+  nav.foot-arcade {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 24px;
+  }
+  nav.foot-arcade .arch {
+    width: 70px;
+    height: 90px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    color: var(--cobalt);
+  }
+  nav.foot-arcade .arch::before {
+    content: "";
+    position: absolute;
+    inset: 6px 4px 0 4px;
+    border: 1.5px solid var(--cobalt);
+    border-bottom: none;
+    border-radius: 50% 50% 0 0 / 80% 80% 0 0;
+    clip-path: polygon(0% 100%, 0% 40%, 50% 0%, 100% 40%, 100% 100%);
+  }
+  .foot-address {
+    font-size: 15px;
+    color: var(--ink);
+    line-height: 1.7;
+  }
+  .foot-address strong {
+    color: var(--cobalt);
+    font-variant: small-caps;
+    letter-spacing: 0.1em;
+  }
+  .colophon {
+    font-style: italic;
+    color: var(--madder);
+    margin: 12px 0 16px;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+  }
+  .cross-flory {
+    font-size: 36px;
+    color: var(--ink);
+    line-height: 1;
+  }
+
+  /* ===== Drawing primitives ===== */
+  .draw {
+    stroke: var(--came);
+    fill: none;
+    stroke-width: 1.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .draw-thin { stroke-width: 0.8; stroke-dasharray: 3 3; opacity: 0.7; }
+  .draw-light { stroke-width: 0.6; opacity: 0.5; }
+  .draw-axis { stroke: var(--madder); stroke-width: 0.6; stroke-dasharray: 2 2; }
+  .draw-gold { stroke: var(--gold); stroke-width: 1.2; }
+  .draw-label {
+    fill: var(--ink);
+    font-family: "EB Garamond", serif;
+    font-style: italic;
+    font-size: 9px;
+    stroke: none;
+  }
+  .draw-roman {
+    fill: var(--cobalt);
+    font-family: "UnifrakturMaguntia", serif;
+    font-size: 10px;
+    stroke: none;
+  }
+</style>
+</head>
+<body>
+
+<header class="site-head">
+  <h1 class="sitename">The Atelier of Guillaume de Sens</h1>
+  <div class="sitemotto">tracery · stone · glass · gilded metal</div>
+  <nav class="arcade" aria-label="Primary">
+    <a href="page-1.html">Atelier</a>
+    <a href="page-2.html">Stone</a>
+    <a href="page-3.html">Glass</a>
+    <a href="page-4.html" aria-current="page">Drawings</a>
+    <a href="page-5.html">The Master</a>
+    <a href="page-6.html">Petition</a>
+  </nav>
+</header>
+
+<section class="hero diaper">
+  <div class="hero-arch" aria-hidden="true">
+    <!-- Inline arch motif (hero_frame) -->
+    <svg viewBox="0 0 500 550" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(-147.14,-244.94)">
+        <g style="stroke:#0a0a0a;stroke-width:3.125;fill:none;stroke-linecap:round;">
+          <path d="m 388.984,268.984 -57.342,98.846 c 0,0 -25.866,42.495 -83.142,62.818 -57.275,20.323 -100.760,86.775 -99.770,153.350 54.339,0.096 3.097,-0.096 62.468,0.254 0,0 -2.044,-66.404 63.168,-94.481 50.355,-21.680 83.142,-42.495 114.551,-88.684" />
+          <path d="m 250,430.58 24.752,58.416" />
+          <path d="m 347.030,342.461 41.584,23.762 0.990,35.644" />
+          <path d="m 211.386,583.055 -1.485,211.881" />
+        </g>
+        <g style="stroke:#0a0a0a;stroke-width:3.125;fill:none;stroke-linecap:round;" transform="matrix(-1,0,0,1,777.881,-0.297)">
+          <path d="m 388.984,268.984 -57.342,98.846 c 0,0 -25.866,42.495 -83.142,62.818 -57.275,20.323 -100.760,86.775 -99.770,153.350 54.339,0.096 3.097,-0.096 62.468,0.254 0,0 -2.044,-66.404 63.168,-94.481 50.355,-21.680 83.142,-42.495 114.551,-88.684" />
+          <path d="m 250,430.58 24.752,58.416" />
+          <path d="m 347.030,342.461 41.584,23.762 0.990,35.644" />
+          <path d="m 211.386,583.055 -1.485,211.881" />
+        </g>
+      </g>
+    </svg>
+  </div>
+  <div class="folio-mark">Folio IV · Liber Tractoris</div>
+  <h1>The Master&#8217;s Hand</h1>
+  <p class="subtitle">Drawings from the Tracing-Floor at Sens</p>
+  <hr class="gold-rule">
+</section>
+
+<section class="prologue">
+  <p class="dropcap">In the great loft above the south aisle of the cathedral at Sens, where the floor is laid in a thin coat of plaster fresh-troweled at each new commission, the master sets down with iron stylus and lead-tipped string the figures by which stone shall afterward be cut. These leaves are taken from that floor: scraped, transferred to vellum at one-twelfth the working scale, and bound here for the instruction of those who would learn the discipline of proportion <em>ad triangulum</em> — the geometry of the equilateral triangle, by which Vitruvius and the Lombard masters before us drew every elevation, every section, every moulding of consequence.</p>
+  <p>What the apprentice must understand is this: nothing in the wall is invented. Every crocket, every voussoir, every moulding profile descends from a figure first laid down by compass and straight-edge upon the tracing-floor. The hand of the cutter follows the line; the line follows the geometry; the geometry follows a single root-square or root-three rectangle proportioned at the very beginning of the work. To depart from this discipline is to ruin the fabric. To keep it is to build for three centuries.</p>
+</section>
+
+<section class="plates-section diaper">
+  <h2 class="section-title">The Four Plates</h2>
+  <p class="section-sub">drawn between Lent of the Year of Our Lord MCCXCVII and the Feast of S. Michael MCCCI</p>
+
+  <div class="plates-grid">
+
+    <!-- ============== PLATE I ============== -->
+    <article class="plate">
+      <div class="seal" aria-hidden="true">
+        <svg viewBox="0 0 64 64">
+          <path d="M32 4 C40 14, 50 14, 60 32 C50 50, 40 50, 32 60 C24 50, 14 50, 4 32 C14 14, 24 14, 32 4 Z"
+                fill="#1e3a5f" stroke="#0a0a0a" stroke-width="1.5"/>
+          <path d="M32 10 C38 18, 46 18, 54 32 C46 46, 38 46, 32 54 C26 46, 18 46, 10 32 C18 18, 26 18, 32 10 Z"
+                fill="none" stroke="#c9a23a" stroke-width="1"/>
+        </svg>
+        <div class="roman">MCCXCVII</div>
+      </div>
+
+      <div class="plate-head">
+        <h3>Section of the Compound Pier</h3>
+        <div class="lat">Sectio columnae fasciculatae · 14 ft. across the choir</div>
+      </div>
+      <div class="plate-rule"></div>
+
+      <div class="drawing" aria-label="Plate I: pier section">
+        <svg viewBox="0 0 460 240" xmlns="http://www.w3.org/2000/svg">
+          <!-- Construction circle -->
+          <circle cx="230" cy="120" r="92" class="draw draw-thin"/>
+          <circle cx="230" cy="120" r="68" class="draw draw-light"/>
+          <!-- Axes -->
+          <line x1="230" y1="20" x2="230" y2="220" class="draw draw-axis"/>
+          <line x1="120" y1="120" x2="340" y2="120" class="draw draw-axis"/>
+          <!-- Central core (square) -->
+          <rect x="206" y="96" width="48" height="48" class="draw"/>
+          <!-- Eight engaged shafts arranged on circle -->
+          <g class="draw">
+            <circle cx="230" cy="42" r="14"/>
+            <circle cx="230" cy="198" r="14"/>
+            <circle cx="152" cy="120" r="14"/>
+            <circle cx="308" cy="120" r="14"/>
+            <circle cx="285" cy="65" r="11"/>
+            <circle cx="175" cy="65" r="11"/>
+            <circle cx="285" cy="175" r="11"/>
+            <circle cx="175" cy="175" r="11"/>
+          </g>
+          <!-- Hollow chamfers -->
+          <g class="draw draw-thin">
+            <path d="M214 96 L214 80 Q230 76 246 80 L246 96"/>
+            <path d="M214 144 L214 160 Q230 164 246 160 L246 144"/>
+            <path d="M206 104 L190 104 Q186 120 190 136 L206 136"/>
+            <path d="M254 104 L270 104 Q274 120 270 136 L254 136"/>
+          </g>
+          <!-- Compass center -->
+          <circle cx="230" cy="120" r="2" fill="#8b1538" stroke="none"/>
+          <!-- Labels -->
+          <text x="230" y="32" class="draw-label" text-anchor="middle">a</text>
+          <text x="138" y="124" class="draw-label" text-anchor="end">b</text>
+          <text x="322" y="124" class="draw-label">c</text>
+          <text x="230" y="214" class="draw-label" text-anchor="middle">d</text>
+          <text x="232" y="124" class="draw-label">noyau</text>
+          <!-- Scale bar -->
+          <g class="draw">
+            <line x1="60" y1="220" x2="120" y2="220"/>
+            <line x1="60" y1="216" x2="60" y2="224"/>
+            <line x1="90" y1="217" x2="90" y2="223"/>
+            <line x1="120" y1="216" x2="120" y2="224"/>
+          </g>
+          <text x="90" y="234" class="draw-label" text-anchor="middle">II pedes Senonenses</text>
+          <!-- Roman ordinal -->
+          <text x="410" y="30" class="draw-roman" text-anchor="end">Plate I</text>
+        </svg>
+      </div>
+
+      <div class="plate-body">
+        <p class="has-dropcap">Drawn for the third bay of the new choir at S. Étienne, the pier is set out from a single circle of two pieds-de-Sens, divided into eight upon the diameter to give the centres of the engaged shafts. The cardinal four shafts stand a la nue against the cardinal axes; the four lesser, between, take the diagonal rib and wall-rib. The square noyau at the heart receives no thrust but holds the bond — it is for the masonry, not for the eye.</p>
+        <div class="marginalia">Note that the diagonal shafts are made smaller by one third, lest they crowd the principal four and confound the springing of the vault. — G. de S.</div>
+        <div class="plate-meta">
+          <span><strong>Drawn:</strong> Lent, MCCXCVII</span>
+          <span><strong>Vellum:</strong> 14 × 22 in.</span>
+          <span><strong>Built:</strong> Choir of S. Étienne, Sens, bay III</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- ============== PLATE II ============== -->
+    <article class="plate">
+      <div class="seal" aria-hidden="true">
+        <svg viewBox="0 0 64 64">
+          <path d="M32 4 C40 14, 50 14, 60 32 C50 50, 40 50, 32 60 C24 50, 14 50, 4 32 C14 14, 24 14, 32 4 Z"
+                fill="#1e3a5f" stroke="#0a0a0a" stroke-width="1.5"/>
+          <path d="M32 10 C38 18, 46 18, 54 32 C46 46, 38 46, 32 54 C26 46, 18 46, 10 32 C18 18, 26 18, 32 10 Z"
+                fill="none" stroke="#c9a23a" stroke-width="1"/>
+        </svg>
+        <div class="roman">MCCXCIX</div>
+      </div>
+
+      <div class="plate-head">
+        <h3>Setting-Out of the Equilateral Arch</h3>
+        <div class="lat">Arcus ad triangulum · super spatium 14 pedum</div>
+      </div>
+      <div class="plate-rule"></div>
+
+      <div class="drawing" aria-label="Plate II: equilateral arch geometry">
+        <svg viewBox="0 0 460 240" xmlns="http://www.w3.org/2000/svg">
+          <!-- Springing line -->
+          <line x1="60" y1="200" x2="400" y2="200" class="draw"/>
+          <!-- Arch span: A to B -->
+          <circle cx="60" cy="200" r="3" fill="#8b1538" stroke="none"/>
+          <circle cx="400" cy="200" r="3" fill="#8b1538" stroke="none"/>
+          <text x="56" y="220" class="draw-label" text-anchor="end">A</text>
+          <text x="404" y="220" class="draw-label">B</text>
+          <!-- Triangle (equilateral) -->
+          <path d="M60 200 L400 200 L230 5 Z" class="draw draw-axis"/>
+          <text x="232" y="14" class="draw-label" text-anchor="middle">apex</text>
+          <!-- The two arcs forming the arch -->
+          <path d="M60 200 A 340 340 0 0 1 230 5" class="draw"/>
+          <path d="M230 5 A 340 340 0 0 1 400 200" class="draw"/>
+          <!-- Compass arcs (constructions) -->
+          <path d="M60 200 A 60 60 0 0 1 90 148" class="draw draw-thin"/>
+          <path d="M400 200 A 60 60 0 0 0 370 148" class="draw draw-thin"/>
+          <!-- Plumb -->
+          <line x1="230" y1="5" x2="230" y2="200" class="draw draw-axis"/>
+          <!-- Chord radii indicators -->
+          <line x1="60" y1="200" x2="230" y2="5" class="draw draw-light"/>
+          <line x1="400" y1="200" x2="230" y2="5" class="draw draw-light"/>
+          <!-- Span dimension -->
+          <g class="draw">
+            <line x1="60" y1="222" x2="400" y2="222"/>
+            <line x1="60" y1="218" x2="60" y2="226"/>
+            <line x1="400" y1="218" x2="400" y2="226"/>
+          </g>
+          <text x="230" y="234" class="draw-label" text-anchor="middle">XIV pedes (= span)</text>
+          <!-- Voussoir lines (radial) -->
+          <g class="draw draw-light">
+            <line x1="60" y1="200" x2="92" y2="93"/>
+            <line x1="60" y1="200" x2="135" y2="48"/>
+            <line x1="60" y1="200" x2="186" y2="18"/>
+            <line x1="400" y1="200" x2="368" y2="93"/>
+            <line x1="400" y1="200" x2="325" y2="48"/>
+            <line x1="400" y1="200" x2="274" y2="18"/>
+          </g>
+          <text x="155" y="100" class="draw-label">r = span</text>
+          <text x="410" y="30" class="draw-roman" text-anchor="end">Plate II</text>
+        </svg>
+      </div>
+
+      <div class="plate-body">
+        <p class="has-dropcap">Of all arches the equilateral is the most honest. The radius is the span itself: each compass-foot fixed at A and B sweeps an arc whose meeting at the apex completes a triangle of three equal sides. The rise is then necessarily the half-span multiplied by root-three — for a span of fourteen pieds, the rise is twelve and one-eighth, less the thickness of the keystone. The voussoirs are radiated from A for the dexter half, from B for the sinister; the joints will never want, for they obey the centre.</p>
+        <div class="marginalia">The apprentice who cannot draw this figure with chalked string in the open air is not yet ready for the chisel. — G. de S.</div>
+        <div class="plate-meta">
+          <span><strong>Drawn:</strong> Octave of Easter, MCCXCIX</span>
+          <span><strong>For:</strong> Nave arcade, Bourges Lady-Chapel</span>
+          <span><strong>Span:</strong> XIV pedes Senonenses</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- ============== PLATE III ============== -->
+    <article class="plate">
+      <div class="seal" aria-hidden="true">
+        <svg viewBox="0 0 64 64">
+          <path d="M32 4 C40 14, 50 14, 60 32 C50 50, 40 50, 32 60 C24 50, 14 50, 4 32 C14 14, 24 14, 32 4 Z"
+                fill="#1e3a5f" stroke="#0a0a0a" stroke-width="1.5"/>
+          <path d="M32 10 C38 18, 46 18, 54 32 C46 46, 38 46, 32 54 C26 46, 18 46, 10 32 C18 18, 26 18, 32 10 Z"
+                fill="none" stroke="#c9a23a" stroke-width="1"/>
+        </svg>
+        <div class="roman">MCCC</div>
+      </div>
+
+      <div class="plate-head">
+        <h3>Profile of the Crocket and Finial</h3>
+        <div class="lat">Crocchetum cum florone · pinaculum boreale</div>
+      </div>
+      <div class="plate-rule"></div>
+
+      <div class="drawing" aria-label="Plate III: crocket profile">
+        <svg viewBox="0 0 460 240" xmlns="http://www.w3.org/2000/svg">
+          <!-- Vertical pinnacle axis -->
+          <line x1="230" y1="20" x2="230" y2="220" class="draw draw-axis"/>
+          <!-- Pinnacle gable line -->
+          <path d="M180 220 L230 30 L280 220" class="draw"/>
+          <!-- Crockets up the right side -->
+          <g class="draw">
+            <path d="M250 180 q 18 -8 22 -22 q -2 14 -16 22 z"/>
+            <path d="M242 140 q 22 -10 26 -28 q -2 18 -20 28 z"/>
+            <path d="M236 100 q 26 -12 30 -34 q -2 22 -24 34 z"/>
+          </g>
+          <!-- Crockets up the left side (mirrored) -->
+          <g class="draw">
+            <path d="M210 180 q -18 -8 -22 -22 q 2 14 16 22 z"/>
+            <path d="M218 140 q -22 -10 -26 -28 q 2 18 20 28 z"/>
+            <path d="M224 100 q -26 -12 -30 -34 q 2 22 24 34 z"/>
+          </g>
+          <!-- Finial -->
+          <g class="draw">
+            <path d="M230 30 q -10 -4 -14 -16 q 4 -14 14 -16 q 10 2 14 16 q -4 12 -14 16 z"/>
+            <circle cx="230" cy="14" r="3"/>
+          </g>
+          <!-- Construction grid -->
+          <g class="draw draw-thin">
+            <line x1="180" y1="100" x2="280" y2="100"/>
+            <line x1="180" y1="140" x2="280" y2="140"/>
+            <line x1="180" y1="180" x2="280" y2="180"/>
+          </g>
+          <!-- Compass arcs forming each crocket -->
+          <g class="draw draw-light">
+            <circle cx="248" cy="180" r="22"/>
+            <circle cx="240" cy="140" r="26"/>
+            <circle cx="234" cy="100" r="30"/>
+          </g>
+          <!-- Side: crocket profile detail (large) -->
+          <g transform="translate(330,40)">
+            <path d="M0 160 Q 20 140 30 100 Q 40 50 90 30 Q 50 60 50 110 Q 50 150 30 165 Z" class="draw"/>
+            <path d="M0 160 Q 20 140 30 100 Q 40 50 90 30" class="draw draw-axis"/>
+            <text x="45" y="185" class="draw-label" text-anchor="middle">profile detail · ×3</text>
+          </g>
+          <!-- Labels -->
+          <text x="230" y="248" class="draw-label" text-anchor="middle">axis of pinnacle</text>
+          <text x="288" y="105" class="draw-label">i.</text>
+          <text x="294" y="145" class="draw-label">ii.</text>
+          <text x="300" y="185" class="draw-label">iii.</text>
+          <text x="50" y="30" class="draw-roman">Plate III</text>
+        </svg>
+      </div>
+
+      <div class="plate-body">
+        <p class="has-dropcap">Each crocket grows from a single arc swept by the compass at three successive radii — i, ii, iii — increasing as the pinnacle ascends, that the eye from below shall see them at one apparent size. The leaf-bract is then carved free of the gable to a depth equal to one-third its own height, no more. The finial is laid out as a bud of four lobes upon a sphere; its proportion is taken from the half-diameter of the gable&#8217;s base, divided in three. To make the crocket equal at top and bottom is the error of the country mason.</p>
+        <div class="marginalia">Foreshortening is not vanity — it is a debt the carver pays to the eye that looks up. — G. de S.</div>
+        <div class="plate-meta">
+          <span><strong>Drawn:</strong> Feast of S. John, MCCC</span>
+          <span><strong>For:</strong> North pinnacle, Sens transept</span>
+          <span><strong>Stone:</strong> Tonnerre limestone</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- ============== PLATE IV ============== -->
+    <article class="plate">
+      <div class="seal" aria-hidden="true">
+        <svg viewBox="0 0 64 64">
+          <path d="M32 4 C40 14, 50 14, 60 32 C50 50, 40 50, 32 60 C24 50, 14 50, 4 32 C14 14, 24 14, 32 4 Z"
+                fill="#1e3a5f" stroke="#0a0a0a" stroke-width="1.5"/>
+          <path d="M32 10 C38 18, 46 18, 54 32 C46 46, 38 46, 32 54 C26 46, 18 46, 10 32 C18 18, 26 18, 32 10 Z"
+                fill="none" stroke="#c9a23a" stroke-width="1"/>
+        </svg>
+        <div class="roman">MCCCI</div>
+      </div>
+
+      <div class="plate-head">
+        <h3>Geometry of the Six-foiled Rose</h3>
+        <div class="lat">Rosa sexfoliata · ad circulum</div>
+      </div>
+      <div class="plate-rule"></div>
+
+      <div class="drawing" aria-label="Plate IV: six-foil rose geometry">
+        <svg viewBox="0 0 460 240" xmlns="http://www.w3.org/2000/svg">
+          <!-- Outer circle of rose -->
+          <circle cx="230" cy="120" r="100" class="draw"/>
+          <!-- Inner construction circle -->
+          <circle cx="230" cy="120" r="50" class="draw draw-thin"/>
+          <!-- Hexagonal centres for the six lobes -->
+          <g class="draw draw-light">
+            <line x1="230" y1="20" x2="230" y2="220"/>
+            <line x1="143.4" y1="70" x2="316.6" y2="170"/>
+            <line x1="143.4" y1="170" x2="316.6" y2="70"/>
+          </g>
+          <!-- Six small foils, centres on r=50 from middle -->
+          <g class="draw">
+            <circle cx="230" cy="70" r="34"/>
+            <circle cx="230" cy="170" r="34"/>
+            <circle cx="186.7" cy="95" r="34"/>
+            <circle cx="273.3" cy="95" r="34"/>
+            <circle cx="186.7" cy="145" r="34"/>
+            <circle cx="273.3" cy="145" r="34"/>
+          </g>
+          <!-- Central hub -->
+          <circle cx="230" cy="120" r="14" class="draw"/>
+          <circle cx="230" cy="120" r="6" class="draw draw-gold"/>
+          <!-- Six radial points marked -->
+          <g fill="#8b1538" stroke="none">
+            <circle cx="230" cy="70" r="2"/>
+            <circle cx="230" cy="170" r="2"/>
+            <circle cx="186.7" cy="95" r="2"/>
+            <circle cx="273.3" cy="95" r="2"/>
+            <circle cx="186.7" cy="145" r="2"/>
+            <circle cx="273.3" cy="145" r="2"/>
+          </g>
+          <!-- Labels -->
+          <text x="230" y="118" class="draw-label" text-anchor="middle">centrum</text>
+          <text x="340" y="120" class="draw-label">R</text>
+          <text x="232" y="76" class="draw-label">r = R/2</text>
+          <!-- Scale arc -->
+          <path d="M335 120 A 105 105 0 0 0 335 119" class="draw" />
+          <line x1="332" y1="118" x2="338" y2="118" class="draw"/>
+          <line x1="332" y1="122" x2="338" y2="122" class="draw"/>
+          <!-- Outer hexagonal layout (faint) -->
+          <path d="M230 20 L316.6 70 L316.6 170 L230 220 L143.4 170 L143.4 70 Z" class="draw draw-axis"/>
+          <text x="64" y="220" class="draw-label">spatium = 6 ped.</text>
+          <text x="410" y="30" class="draw-roman" text-anchor="end">Plate IV</text>
+        </svg>
+      </div>
+
+      <div class="plate-body">
+        <p class="has-dropcap">Six foils, neither five nor seven, for the six is the perfect figure of nature — the bee&#8217;s cell, the snowflake, the lily of the field. From a single great circle of six pieds we strike, with the same opening of the compass, six points upon the circumference; from these we draw inward circles of half the radius, and where each meets its neighbour, a foil is born. The hexagonal star at the centre is gratuitous: it falls of itself out of the construction, and the leadwork follows it without contrivance.</p>
+        <div class="marginalia">The rose is not designed; it is uncovered. The compass merely lifts the veil. — G. de S.</div>
+        <div class="plate-meta">
+          <span><strong>Drawn:</strong> Feast of S. Michael, MCCCI</span>
+          <span><strong>For:</strong> West rose, Chapelle de la Vierge</span>
+          <span><strong>Glazier:</strong> Robert d&#8217;Auxerre</span>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<section class="lodge">
+  <h2>Three Disciplines of the Lodge</h2>
+  <div class="lat">Tres regulae loggiae · which the apprentice shall recite at his admission</div>
+  <div class="principles">
+    <div class="principle">
+      <div class="num">I</div>
+      <h4>Ad Triangulum</h4>
+      <p>Every elevation of consequence — pier to capital, capital to springing, springing to apex — shall be proportioned by the equilateral triangle. No measure shall be set upon the floor without first being confirmed by the compass against this figure. The eye knows what the rule has refused to invent.</p>
+    </div>
+    <div class="principle">
+      <div class="num">II</div>
+      <h4>Of the Compass</h4>
+      <p>The compass is the master&#8217;s authority. It is set down before sunrise upon the floor, lifted only at the bell of nones, and never touched by an apprentice in his first year. Every line not struck from a pricked centre is an opinion, and opinions do not bear stone.</p>
+    </div>
+    <div class="principle">
+      <div class="num">III</div>
+      <h4>Silence in the Loft</h4>
+      <p>While the master draws, no man speaks above the breath. The plaster takes the line in the moment of striking; a jolted hand cannot be unstruck. He who breaks this rule loses his place at the loft and pays five sous to the chapter of works.</p>
+    </div>
+  </div>
+</section>
+
+<section class="provenance">
+  <div>
+    <div class="vine" aria-hidden="true">
+      <svg viewBox="0 0 200 200">
+        <path d="M43.6 11c-1.8 0-3.6 0.1-5.4 0.3-7 0.7-13.9 2.8-19.1 7.5-5.2 4.6-8.2 12-7.7 21 0.5 9 4.3 16.1 10.2 20.3 5.9 4.2 13.3 5.5 21 5.2 15.5-0.7 32.8-8 45.8-18.3 1.4-1.1 2.8-2 4.3-3.1 4.3 6.7 7.6 14.8 9.3 24.1-7.5-5.1-21-10.5-35.7 1.5-22.1 18.2-25 12.9-45.3-2.1-2.9 36.1 15 54.6 44.7 52.5 0 0-14 4.3-3.6 26.4 6 12.9 8.4 20.1 6.6 25.2-12.8 2.3-15.8 7.8-5.6 12.7 45.1 10 65.7-27.5 68.7-66 45.4 0 52.9-31.8 52.5-50.4-8.2 11.1-22.2 11.1-32.9 2.5-9.9-7.9-21.7-16.2-39-1.1-1.7-11.7-5.7-22.1-11.2-30.7 19.4-11.4 38.7-14.5 52.5-10.8 5.5 1.4 9.5 4.1 12.4 7-9 8.4-11.8 26.4 2.3 27 18.9 0.9 21-15.5 13.6-27.1-5.4-8.5-16.4-13.2-25.7-16.6-17.5-4.6-39.7-0.6-61.3 12.5-5.2-5.7-11.1-10.2-17.7-13-7.1-2.9-17.5-5.7-28.3-6.3-1.8-0.1-3.6-0.1-5.4-0.1z"/>
+      </svg>
+    </div>
+    <h2>The Tracing-Floor at Sens</h2>
+    <div class="lat">Pavimentum tractoris · super basilicam Senonensem</div>
+    <p class="has-dropcap">The loft above the south-aisle vault was first plastered for our use in the year MCCLXXXIX, by leave of the Chapter of S. Étienne and at the cost of the Bishop, Étienne Bécard. It measures seventy-two pieds in length and twenty-three across, and bears at this day the half-effaced lines of seven full traceries, three pier-sections, and the great wheel of the south transept of Auxerre, drawn there in the summer of MCCXCIV by my own hand and the hand of Master Pierre de Chelles, who came to consult upon the rib-vault.</p>
+    <p>The plates here published are the first that have been drawn from that floor at reduced scale; the originals remain, and shall remain, where they were struck. To remove them would be to break a chain of testimony that runs from the elder masters of Laon and Reims directly into the present work.</p>
+  </div>
+  <div>
+    <div class="rose-mark" aria-hidden="true">
+      <svg viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid meet">
+        <circle cx="500" cy="500" r="488" fill="#1e3a5f"/>
+        <circle cx="500" cy="500" r="450" fill="none" stroke="#c9a23a" stroke-width="3"/>
+        <circle cx="500" cy="500" r="380" fill="none" stroke="#0a0a0a" stroke-width="2"/>
+        <circle cx="500" cy="500" r="280" fill="none" stroke="#0a0a0a" stroke-width="2"/>
+        <circle cx="500" cy="500" r="160" fill="none" stroke="#c9a23a" stroke-width="2"/>
+        <circle cx="500" cy="500" r="60" fill="#8b1538" stroke="#0a0a0a" stroke-width="2"/>
+        <g fill="none" stroke="#c9a23a" stroke-width="2">
+          <g id="petal-set">
+            <circle cx="500" cy="220" r="80"/>
+            <circle cx="500" cy="780" r="80"/>
+            <circle cx="220" cy="500" r="80"/>
+            <circle cx="780" cy="500" r="80"/>
+            <circle cx="302" cy="302" r="80"/>
+            <circle cx="698" cy="302" r="80"/>
+            <circle cx="302" cy="698" r="80"/>
+            <circle cx="698" cy="698" r="80"/>
+          </g>
+        </g>
+        <g stroke="#c9a23a" stroke-width="1.5" fill="none" opacity="0.6">
+          <line x1="500" y1="60" x2="500" y2="940"/>
+          <line x1="60" y1="500" x2="940" y2="500"/>
+          <line x1="190" y1="190" x2="810" y2="810"/>
+          <line x1="190" y1="810" x2="810" y2="190"/>
+        </g>
+        <g fill="none" stroke="#0a0a0a" stroke-width="1.5">
+          <circle cx="500" cy="380" r="40"/>
+          <circle cx="500" cy="620" r="40"/>
+          <circle cx="380" cy="500" r="40"/>
+          <circle cx="620" cy="500" r="40"/>
+        </g>
+        <circle cx="500" cy="500" r="20" fill="#c9a23a"/>
+      </svg>
+    </div>
+    <p class="rose-caption">study of the west rose · chapelle de la vierge</p>
+  </div>
+</section>
+
+<footer class="site-foot">
+  <nav class="foot-arcade" aria-label="Footer ornament">
+    <div class="arch">✠</div>
+    <div class="arch">⚜</div>
+    <div class="arch">✠</div>
+    <div class="arch">⚜</div>
+    <div class="arch">✠</div>
+    <div class="arch">⚜</div>
+    <div class="arch">✠</div>
+  </nav>
+  <div class="foot-address">
+    <strong>Atelier de Guillaume de Sens</strong><br>
+    Rue des Tonneliers, à l&#8217;ombre de la cathédrale Saint-Étienne<br>
+    Sens, en l&#8217;archevêché de Sens · Royaume de France
+  </div>
+  <div class="colophon">
+    Anno Domini MCCCI · Opus inceptum sub patrocinio Sancti Stephani Protomartyris · Soli Deo Gloria
+  </div>
+  <div class="cross-flory" aria-hidden="true">☩</div>
+</footer>
+
+</body>
+</html>

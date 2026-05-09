@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Architecture & Ornament — A Reading Room</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    font-size: 17px;
+    line-height: 1.65;
+    margin: 0;
+    padding: 0;
+  }
+  a { color: var(--primary); text-decoration: none; }
+  a:hover { color: var(--text-emphasis); }
+
+  /* ─── HEAD MATTER ────────────────────────────── */
+  .pageframe {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 60px;
+  }
+  .wordmark {
+    text-align: center;
+    padding: 48px 0 8px;
+  }
+  .wordmark .arabic {
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.45em;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+  .wordmark h1 {
+    font-family: var(--font-display), serif;
+    font-size: 38px;
+    color: var(--primary);
+    margin: 6px 0 4px;
+    letter-spacing: 0.06em;
+  }
+  .wordmark .sub {
+    font-style: italic;
+    font-size: 16px;
+    color: var(--text);
+    letter-spacing: 0.08em;
+  }
+
+  /* ─── NAV ────────────────────────────── */
+  nav.principal {
+    text-align: center;
+    padding: 18px 0 6px;
+    position: relative;
+  }
+  nav.principal ul {
+    list-style: none;
+    margin: 0; padding: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+  }
+  nav.principal li {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  nav.principal a {
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--primary);
+    padding: 14px 22px 10px;
+    display: inline-block;
+    position: relative;
+  }
+  nav.principal a[aria-current="page"] {
+    color: var(--text-emphasis);
+  }
+  nav.principal a[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    left: 22px; right: 22px; bottom: 4px;
+    height: 2px;
+    background: var(--text-emphasis);
+  }
+  nav.principal a[aria-current="page"]::before {
+    content: "✦";
+    position: absolute;
+    top: -8px; left: 50%;
+    transform: translateX(-50%);
+    color: var(--accent);
+    font-size: 9px;
+  }
+  nav.principal .palmette {
+    width: 14px; height: 14px;
+    color: var(--accent);
+    opacity: 0.85;
+  }
+  .filet {
+    display: block;
+    margin: 4px auto 0;
+    width: 100%;
+    height: 18px;
+    color: var(--primary);
+  }
+  .filet svg { display:block; width:100%; height:100%; }
+  .filet-gold { color: var(--accent); }
+
+  /* ─── HERO / TITLE ────────────────────────────── */
+  .reading-hero {
+    text-align: center;
+    padding: 56px 0 32px;
+    position: relative;
+  }
+  .reading-hero .eyebrow {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.5em;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+  .reading-hero h2 {
+    font-family: var(--font-display), serif;
+    font-size: 52px;
+    color: var(--primary);
+    margin: 18px 0 14px;
+    letter-spacing: 0.04em;
+    line-height: 1.1;
+  }
+  .reading-hero .lede {
+    max-width: 640px;
+    margin: 0 auto;
+    font-style: italic;
+    font-size: 19px;
+    color: var(--text);
+  }
+  .reading-hero .meta {
+    margin-top: 22px;
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    color: var(--text-emphasis);
+    text-transform: uppercase;
+  }
+  .reading-hero .meta span { margin: 0 18px; }
+
+  /* ─── ESSAY SECTION ────────────────────────────── */
+  .essay {
+    margin: 56px 0;
+    position: relative;
+  }
+  .essay-head {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+  .essay-head .num {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.5em;
+    color: var(--accent);
+  }
+  .essay-head h3 {
+    font-family: var(--font-display), serif;
+    font-size: 32px;
+    color: var(--primary);
+    margin: 12px 0 6px;
+    letter-spacing: 0.05em;
+  }
+  .essay-head .byline {
+    font-style: italic;
+    font-size: 14px;
+    color: var(--text-emphasis);
+  }
+  .essay-body {
+    display: grid;
+    grid-template-columns: 200px 1fr 200px;
+    gap: 36px;
+    align-items: start;
+  }
+  .column {
+    grid-column: 2;
+    column-count: 1;
+    text-align: justify;
+    hyphens: auto;
+  }
+  .column p {
+    margin: 0 0 16px;
+  }
+  .column p:first-of-type::first-letter {
+    font-family: var(--font-display), serif;
+    float: left;
+    font-size: 64px;
+    line-height: 0.9;
+    padding: 6px 10px 0 0;
+    color: var(--text-emphasis);
+  }
+  .column p:first-of-type {
+    text-indent: 0;
+  }
+  .column em.term {
+    color: var(--text-emphasis);
+    font-style: normal;
+    font-variant: small-caps;
+    letter-spacing: 0.06em;
+  }
+  .marginalia {
+    font-size: 13px;
+    line-height: 1.5;
+    font-style: italic;
+    color: var(--text);
+    padding: 10px;
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+  }
+  .marginalia.left { grid-column: 1; text-align: right; }
+  .marginalia.right { grid-column: 3; text-align: left; }
+  .marginalia .label {
+    display: block;
+    font-family: var(--font-display), serif;
+    font-style: normal;
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    color: var(--text-emphasis);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+
+  .diagram {
+    width: 100%;
+    height: 180px;
+    margin: 14px 0;
+    color: var(--primary);
+  }
+  .diagram svg { width: 100%; height: 100%; display: block; }
+
+  .pull {
+    margin: 28px 60px;
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-size: 19px;
+    color: var(--primary);
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+  }
+  .pull::before, .pull::after {
+    content: "❦";
+    color: var(--accent);
+    display: block;
+    font-size: 14px;
+    margin: 8px 0;
+  }
+
+  /* ─── ESSAY DIVIDER ────────────────────────────── */
+  .essay-sep {
+    text-align: center;
+    margin: 28px 0 8px;
+  }
+  .essay-sep .filet { width: 60%; margin: 0 auto; }
+
+  /* ─── BIBLIOGRAPHY ────────────────────────────── */
+  .biblio {
+    margin: 80px 0 60px;
+    padding: 50px 80px;
+    border: 1px solid var(--accent);
+    background: rgba(255,255,255,0.18);
+    position: relative;
+  }
+  .biblio h3 {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-size: 26px;
+    color: var(--primary);
+    letter-spacing: 0.08em;
+    margin: 0 0 8px;
+  }
+  .biblio .sub {
+    text-align: center;
+    font-style: italic;
+    color: var(--text-emphasis);
+    margin-bottom: 28px;
+  }
+  .biblio ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  .biblio li {
+    padding: 14px 0;
+    border-bottom: 1px dotted rgba(30,58,95,0.3);
+    font-size: 16px;
+  }
+  .biblio li:last-child { border-bottom: none; }
+  .biblio .author {
+    font-variant: small-caps;
+    letter-spacing: 0.06em;
+    color: var(--text-emphasis);
+  }
+  .biblio .title { font-style: italic; }
+
+  /* ─── SEAL ────────────────────────────── */
+  .seal {
+    width: 90px; height: 90px;
+    margin: 0 auto;
+    display: block;
+  }
+  .seal-row {
+    text-align: center;
+    margin: 30px 0;
+  }
+
+  /* ─── FOOTER ────────────────────────────── */
+  footer.cobalt {
+    margin-top: 80px;
+    background: var(--primary);
+    color: var(--bg);
+    padding: 0;
+    position: relative;
+  }
+  footer.cobalt .filet { color: var(--accent); }
+  footer.cobalt .inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 56px 60px 36px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px;
+    text-align: center;
+  }
+  footer h4 {
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.36em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin: 0 0 18px;
+  }
+  footer p {
+    margin: 4px 0;
+    font-size: 15px;
+    color: var(--bg);
+  }
+  footer .tailpiece {
+    text-align: center;
+    color: var(--accent);
+    font-size: 22px;
+    letter-spacing: 0.5em;
+    padding: 12px 0 6px;
+  }
+  footer .imprint {
+    text-align: center;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--bg);
+    padding-bottom: 36px;
+    opacity: 0.85;
+  }
+
+  /* ─── SVG SHAPES ────────────────────────────── */
+  .girih-bg {
+    position: absolute;
+    inset: 0;
+    opacity: 0.05;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- Inline filet divider as a reusable symbol -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="filet" viewBox="0 0 437.999 18.893">
+      <g fill="currentColor">
+        <path d="M0,9.445c0,0,37.005-0.063,73.998-0.829c18.495-0.386,36.989-0.949,50.831-1.785c6.919-0.414,12.677-0.906,16.663-1.46c1.99-0.28,3.539-0.582,4.535-0.878c0.502-0.146,0.844-0.297,1.049-0.405c0.157-0.107,0.238-0.162,0.238-0.162l0.42-0.287l0.656,0.656l-0.369,0.338c0,0-0.154,0.142-0.456,0.324c-0.291,0.154-0.714,0.331-1.256,0.484c-1.085,0.314-2.667,0.608-4.686,0.879c-4.037,0.533-9.811,0.985-16.745,1.354c-13.868,0.744-32.369,1.183-50.87,1.443C37.003,9.632,0,9.445,0,9.445z"/>
+        <path d="M0,9.445c0,0,37.003-0.312,74.011,0.079c18.504,0.198,37.009,0.574,50.89,1.271c6.941,0.346,12.724,0.779,16.785,1.302c2.033,0.267,3.633,0.556,4.762,0.879c0.562,0.156,1.026,0.347,1.36,0.523c0.367,0.218,0.571,0.418,0.565,0.405l0.46,0.953l-0.85,0.851l-1.025-0.39c-0.011-0.004-0.022-0.003-0.129-0.081c-0.162-0.085-0.463-0.224-0.944-0.365c-0.952-0.288-2.484-0.594-4.459-0.879c-3.961-0.564-9.711-1.076-16.623-1.514c-13.828-0.882-32.319-1.508-50.811-1.956C37.006,9.634,0,9.445,0,9.445z"/>
+        <path d="M437.999,9.445c0,0-37.004,0.187-74.007-0.329c-18.501-0.261-37.002-0.699-50.869-1.443c-6.935-0.368-12.708-0.82-16.745-1.354c-2.019-0.271-3.601-0.565-4.687-0.879c-0.541-0.153-0.965-0.33-1.256-0.484c-0.302-0.183-0.456-0.324-0.456-0.324l-0.369-0.338l0.656-0.656l0.42,0.287c0,0,0.081,0.055,0.238,0.162c0.204,0.108,0.546,0.26,1.048,0.405c0.996,0.296,2.545,0.598,4.535,0.878c3.986,0.554,9.744,1.046,16.663,1.46C327.011,7.667,345.506,8.23,364,8.616C400.994,9.382,437.999,9.445,437.999,9.445z"/>
+        <path d="M437.999,9.445c0,0-37.006,0.188-73.993,1.079c-18.492,0.448-36.983,1.074-50.812,1.956c-6.911,0.438-12.661,0.949-16.622,1.514c-1.976,0.285-3.507,0.591-4.459,0.879c-0.481,0.142-0.782,0.28-0.944,0.365c-0.106,0.078-0.117,0.077-0.129,0.081l-1.024,0.39l-0.851-0.851l0.461-0.953c-0.006,0.013,0.198-0.188,0.564-0.405c0.334-0.177,0.799-0.367,1.36-0.523c1.13-0.323,2.729-0.612,4.763-0.879c4.062-0.522,9.844-0.956,16.785-1.302c13.881-0.697,32.386-1.073,50.89-1.271C400.996,9.134,437.999,9.445,437.999,9.445z"/>
+        <circle cx="219" cy="9.445" r="5.5" fill="none" stroke="currentColor" stroke-width="1.4"/>
+        <circle cx="219" cy="9.445" r="2"/>
+        <circle cx="169" cy="9.445" r="3" fill="none" stroke="currentColor" stroke-width="1"/>
+        <circle cx="269" cy="9.445" r="3" fill="none" stroke="currentColor" stroke-width="1"/>
+      </g>
+    </symbol>
+
+    <symbol id="palmette" viewBox="0 0 24 24">
+      <g fill="currentColor">
+        <path d="M12 2 C 13 6, 16 8, 19 9 C 16 10, 13 12, 12 16 C 11 12, 8 10, 5 9 C 8 8, 11 6, 12 2 Z"/>
+        <circle cx="12" cy="20" r="1.6"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="pageframe">
+
+  <!-- Wordmark -->
+  <header class="wordmark">
+    <div class="arabic">دیوانخانه</div>
+    <h1>Dīvānkhāneh</h1>
+    <div class="sub">Museum of Safavid Isfahan</div>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="principal" aria-label="Primary">
+    <ul>
+      <li><a href="page-1.html">Entrance</a></li>
+      <li><svg class="palmette"><use href="#palmette"/></svg></li>
+      <li><a href="page-2.html">Collection</a></li>
+      <li><svg class="palmette"><use href="#palmette"/></svg></li>
+      <li><a href="page-3.html">Exhibition</a></li>
+      <li><svg class="palmette"><use href="#palmette"/></svg></li>
+      <li><a href="page-4.html" aria-current="page">Reading Room</a></li>
+      <li><svg class="palmette"><use href="#palmette"/></svg></li>
+      <li><a href="page-5.html">Visit</a></li>
+      <li><svg class="palmette"><use href="#palmette"/></svg></li>
+      <li><a href="page-6.html">About</a></li>
+    </ul>
+  </nav>
+
+  <div class="filet"><svg><use href="#filet"/></svg></div>
+
+  <!-- HERO -->
+  <section class="reading-hero">
+    <div class="eyebrow">A Reading Room · Vol. IV</div>
+    <h2>Architecture &amp; Ornament</h2>
+    <p class="lede">Four illustrated essays drawn from the Museum's bench of curators &amp; visiting scholars, on the geometry, vegetal grammar, and epigraphic skin of the Safavid building.</p>
+    <div class="meta"><span>Isfahan · 1501–1736</span><span>Edited by N. Farahmand</span><span>Spring 1402 / 2024</span></div>
+    <div class="seal-row">
+      <svg class="seal" viewBox="0 0 100 100" aria-hidden="true">
+        <circle cx="50" cy="50" r="44" fill="none" stroke="var(--accent)" stroke-width="1"/>
+        <circle cx="50" cy="50" r="34" fill="none" stroke="var(--primary)" stroke-width="1.4"/>
+        <g transform="translate(50,50)" fill="var(--primary)">
+          <g id="star8">
+            <polygon points="0,-28 6,-12 22,-18 14,-4 28,0 14,4 22,18 6,12 0,28 -6,12 -22,18 -14,4 -28,0 -14,-4 -22,-18 -6,-12"/>
+          </g>
+        </g>
+        <circle cx="50" cy="50" r="6" fill="var(--text-emphasis)"/>
+      </svg>
+    </div>
+  </section>
+
+  <div class="filet filet-gold"><svg><use href="#filet"/></svg></div>
+
+  <!-- ESSAY I -->
+  <article class="essay" id="essay-1">
+    <header class="essay-head">
+      <div class="num">— Essay the First —</div>
+      <h3>The Two-Centred Arch and the Iwan</h3>
+      <div class="byline">by Dr. Mahdi Tabrīzī, Curator of Architecture</div>
+    </header>
+
+    <div class="essay-body">
+      <aside class="marginalia left">
+        <span class="label">Diagram I</span>
+        <svg class="diagram" viewBox="0 0 200 200" aria-hidden="true">
+          <g fill="none" stroke="currentColor" stroke-width="1.4">
+            <line x1="20" y1="180" x2="180" y2="180"/>
+            <line x1="40" y1="180" x2="40" y2="100"/>
+            <line x1="160" y1="180" x2="160" y2="100"/>
+            <path d="M 40 100 Q 40 40 100 40 Q 160 40 160 100" stroke-dasharray="2 3"/>
+            <path d="M 40 100 A 120 120 0 0 1 100 30 A 120 120 0 0 1 160 100" stroke="var(--text-emphasis)" stroke-width="1.8"/>
+            <circle cx="60" cy="100" r="2" fill="currentColor"/>
+            <circle cx="140" cy="100" r="2" fill="currentColor"/>
+            <line x1="60" y1="100" x2="100" y2="30" stroke-dasharray="1 2"/>
+            <line x1="140" y1="100" x2="100" y2="30" stroke-dasharray="1 2"/>
+          </g>
+          <text x="100" y="195" font-size="9" text-anchor="middle" fill="currentColor" font-style="italic">two-centred construction · r = ⅔ span</text>
+        </svg>
+        The points of striking, set inward of the jambs by one-third the clear span, give the arch its slow rise and broken apex.
+      </aside>
+
+      <div class="column">
+        <p>The Safavid arch is not a half-circle; nor is it the squat pointed arch of the early Saljūq mosques. It is a <em class="term">qaws-i dū-markazī</em> — a two-centred arch — drawn from two compass points set inside the jambs of the opening, each striking an arc that meets its companion at a sharp apex. To the eye it reads as composure rather than as thrust. The weight comes down softly; the silhouette inscribes itself against the sky.</p>
+
+        <p>The form had ancestors in the Ilkhānid and Tīmūrid bays, but it was at the Maydān-i Naqsh-i Jahān, between 1602 and 1638, that the geometry was disciplined into a building grammar. Shāh ʿAbbās I and his master-builder ʿAli Akbar Iṣfahānī worked the arch into three registers: the colossal <em class="term">pīshṭāq</em> portal, the iwan that recesses behind it, and the smaller arcaded niches that relieve the flanking walls.</p>
+
+        <p>The iwan is the deeper figure. A barrel-vaulted hall open on one face, it is at once threshold and room, oriented to the courtyard rather than to the street. In the Masjid-i Shāh the four iwans are not symmetrical in function — the qibla iwan swells into a domed sanctuary — but they are symmetrical in proportion, each rising to the same shoulder line, each crowned by the same stalactite muqarnas hood.</p>
+
+        <p>What modern photographs flatten, the visitor's body recovers: the iwan is a sectioned tunnel of cool air, its rear wall withdrawn into shadow, its tilework reading not as flat ornament but as weather — as a sky pulled down over the head. The two-centred arch is the instrument by which this is made.</p>
+
+        <div class="pull">"The pīshṭāq does not announce the building; it postpones it. One enters not a mosque but the idea of a mosque, three times over."</div>
+
+        <p>It is worth saying that the arch was also a constructive economy. Its lower haunches, being nearly vertical, allowed the masons to corbel inward with brick laid on edge before any centering was struck; the upper arcs, springing from a higher impost, could be turned over a light wooden form. The geometry served both the mind and the wage.</p>
+      </div>
+
+      <aside class="marginalia right">
+        <span class="label">In situ</span>
+        Masjid-i Shāh, Isfahan: clear span of the qibla iwan, 22.4 m. Apex height above pavement, 33 m. Centring points struck 7.5 m within the jambs.
+        <svg class="diagram" viewBox="0 0 200 200" aria-hidden="true" style="margin-top:14px">
+          <g fill="none" stroke="currentColor" stroke-width="1.2">
+            <rect x="30" y="40" width="140" height="150" stroke="var(--accent)"/>
+            <path d="M 50 190 L 50 110 Q 50 60 100 60 Q 150 60 150 110 L 150 190 Z" fill="rgba(30,58,95,0.12)"/>
+            <path d="M 65 190 L 65 115 Q 65 75 100 75 Q 135 75 135 115 L 135 190 Z" fill="rgba(30,58,95,0.18)"/>
+            <path d="M 80 190 L 80 120 Q 80 90 100 90 Q 120 90 120 120 L 120 190 Z" fill="var(--primary)"/>
+          </g>
+        </svg>
+      </aside>
+    </div>
+
+    <div class="essay-sep"><div class="filet filet-gold"><svg><use href="#filet"/></svg></div></div>
+  </article>
+
+  <!-- ESSAY II -->
+  <article class="essay" id="essay-2">
+    <header class="essay-head">
+      <div class="num">— Essay the Second —</div>
+      <h3>Girih: Five Tiles &amp; Their Permutations</h3>
+      <div class="byline">by Prof. Shīrīn Behzādī, Department of Geometry &amp; Pattern</div>
+    </header>
+
+    <div class="essay-body">
+      <aside class="marginalia left">
+        <span class="label">The Five</span>
+        <svg class="diagram" viewBox="0 0 200 220" aria-hidden="true">
+          <g fill="none" stroke="currentColor" stroke-width="1.2">
+            <polygon points="100,15 122,30 122,55 100,70 78,55 78,30" />
+            <polygon points="40,90 60,75 80,90 80,115 60,130 40,115"/>
+            <polygon points="120,90 140,75 160,75 160,100 140,115 120,100"/>
+            <polygon points="50,150 70,140 90,150 80,170 60,170"/>
+            <polygon points="120,160 140,145 160,160 150,180 130,180"/>
+          </g>
+          <text x="100" y="210" font-size="9" text-anchor="middle" fill="currentColor" font-style="italic">decagon · pentagon · hexagon · bow-tie · rhombus</text>
+        </svg>
+        Each tile carries a fixed arrangement of internal strapwork at 36°/72° angles; matched edge-to-edge, the strapwork joins to give the apparent star-and-polygon field.
+      </aside>
+
+      <div class="column">
+        <p>Girih, from the Persian for <em class="term">knot</em>, is the name given by craftsmen to the family of geometric patterns generated by a small kit of polygonal tiles, each one inscribed with internal strap-lines at precise angles. The patterns appear, to the casual eye, to be drawn as a single continuous web of stars and zig-zag belts; in fact they are tiled.</p>
+
+        <p>The kit, as recovered by Necipoğlu's reading of the Topkapı Scroll (MS H. 1956) and corroborated by the patterns at the Friday Mosque of Isfahan, comprises five shapes: the regular decagon, the regular pentagon, the elongated hexagon, the rhombus, and the bow-tie. Their interior angles are all multiples of 36°. The moment one accepts this, what had looked like inspired complication reveals itself as combinatorial discipline.</p>
+
+        <p>The decoration on a Safavid spandrel — the half-arch field above the haunches — typically reads as a ten-pointed star surrounded by a rotating cluster of five-pointed stars and irregular hexagonal cells. The underlying tiling is invisible. The masons did not paint the tile-edges; they painted only the strapwork that crosses them. Erase the strapwork and you would see the tile-grid; erase the tile-grid (as the eye does) and you see only the knot.</p>
+
+        <p>This concealment is, I think, the argument of the pattern. It is not a demonstration of geometry; it is a <em class="term">veil</em> drawn over geometry. The viewer is invited to suspect a hidden order without being given its key. The instinct is theological as well as aesthetic: the visible world as a cipher of the invisible.</p>
+
+        <div class="pull">"Five tiles, infinite walls. The Topkapı Scroll teaches the kit; the workshop teaches forgetfulness of the kit."</div>
+
+        <p>One technical note. The Safavid girih sometimes admits a sixth, "sub-girih" tile at smaller scale, fitted within the larger cells to produce a self-similar second pattern — a feature noticed by Lu and Steinhardt (2007) at the Darb-i Imām in Isfahan, and read by them as a quasi-crystalline tiling avant la lettre. Whether the masons knew this in our terms, or in theirs, is a question that lies outside what the brick will tell us.</p>
+      </div>
+
+      <aside class="marginalia right">
+        <span class="label">Diagram II</span>
+        <svg class="diagram" viewBox="0 0 200 200" aria-hidden="true">
+          <g fill="none" stroke="currentColor" stroke-width="0.9">
+            <g transform="translate(100 100)">
+              <g id="ten">
+                <polygon points="0,-60 18,-55 35,-35 55,-18 60,0 55,18 35,35 18,55 0,60 -18,55 -35,35 -55,18 -60,0 -55,-18 -35,-35 -18,-55"/>
+              </g>
+            </g>
+            <g stroke="var(--text-emphasis)" stroke-width="1.3">
+              <polygon points="100,40 120,55 130,80 120,105 100,115 80,105 70,80 80,55"/>
+              <line x1="100" y1="40" x2="100" y2="20"/>
+              <line x1="130" y1="80" x2="155" y2="80"/>
+              <line x1="100" y1="115" x2="100" y2="140"/>
+              <line x1="70" y1="80" x2="45" y2="80"/>
+            </g>
+          </g>
+        </svg>
+        Strapwork (oxblood) crossing the decagonal tile boundary. The eye reads continuity; the workshop laid two units.
+      </aside>
+    </div>
+
+    <div class="essay-sep"><div class="filet filet-gold"><svg><use href="#filet"/></svg></div></div>
+  </article>
+
+  <!-- ESSAY III -->
+  <article class="essay" id="essay-3">
+    <header class="essay-head">
+      <div class="num">— Essay the Third —</div>
+      <h3>Arabesque as Argument: Vine, Lotus, Palmette</h3>
+      <div class="byline">by Dr. Yāsamīn Pāyandeh, Curator of Tilework</div>
+    </header>
+
+    <div class="essay-body">
+      <aside class="marginalia left">
+        <span class="label">Three Stems</span>
+        <svg class="diagram" viewBox="0 0 200 220" aria-hidden="true">
+          <g fill="none" stroke="currentColor" stroke-width="1.3">
+            <path d="M 30 200 C 30 140, 80 140, 80 100 C 80 60, 30 60, 30 20"/>
+            <path d="M 30 200 C 50 180, 70 180, 80 160"/>
+            <path d="M 30 100 C 10 90, 10 70, 30 60"/>
+          </g>
+          <g fill="var(--text-emphasis)" opacity="0.85">
+            <circle cx="100" cy="40" r="10"/>
+            <ellipse cx="100" cy="40" rx="4" ry="10"/>
+          </g>
+          <g fill="none" stroke="var(--accent)" stroke-width="1.4">
+            <path d="M 150 60 C 165 75, 165 95, 150 110 C 135 95, 135 75, 150 60"/>
+            <path d="M 150 130 C 168 145, 168 170, 150 185 C 132 170, 132 145, 150 130"/>
+          </g>
+          <text x="100" y="215" font-size="9" text-anchor="middle" fill="currentColor" font-style="italic">vine · lotus · palmette</text>
+        </svg>
+      </aside>
+
+      <div class="column">
+        <p>The arabesque is often described, even by sympathetic commentators, as decoration. It is not. It is an argument made in plant-form about the nature of growth — and, by extension, about the relation of the made world to its making.</p>
+
+        <p>Three vegetal motives carry the argument in the Safavid scheme. The <em class="term">spiralling vine</em>, or <em class="term">islīmī</em>, is the structural ground: a continuous stem that turns back on itself, throws subsidiary stems into the field, and never closes as a finite figure. The <em class="term">lotus</em>, imported by way of Yuan and Ming porcelains and naturalised in Tabrīz under Shāh Ismāʿīl, supplies the bloom — frontal, flat, eight- or twelve-petalled, often in cobalt against ivory ground. The <em class="term">palmette</em>, the half-fan of leaves splayed against an axis, supplies the cadence: it is the figure to which the stem returns when it needs to rest.</p>
+
+        <p>The argument these three together advance is that growth has no termini, only stations. Look at the spandrel of a Safavid tile-revetment: the vine enters the field at its lower corner, climbs, throws a palmette at the spring of the arch, climbs again, throws a lotus at the apex, descends. Where it meets the boundary of the field it does not stop; it folds back, turns, and re-enters the same space at a new angle.</p>
+
+        <div class="pull">"The vine is not painted to fill the panel. The panel is laid out to receive the vine."</div>
+
+        <p>This is the deep difference between a Safavid arabesque and, for instance, a Renaissance grotesque, with which it is sometimes superficially compared. The grotesque is heraldic and centred; it has a top and a bottom, a place where the eye is meant to rest. The arabesque has neither. The eye is taught to follow, not to settle. One critic has called this an <em class="term">infinity in the second person</em> — addressed, not abstract.</p>
+
+        <p>Colour reinforces the lesson. The Safavid palette restricts the vine to a single hue (most often a dark cobalt or a turquoise), so that the eye cannot use colour to single out a hierarchy of stems. Every part of the plant is the plant.</p>
+      </div>
+
+      <aside class="marginalia right">
+        <span class="label">A note on date</span>
+        The mature islīmī of Isfahan is anticipated in the cuerda seca tiles of the shrine of Shaykh Ṣafī al-Dīn at Ardabīl (c. 1540). By the construction of the Lutfullāh Mosque (1603–1619) the vocabulary is settled.
+      </aside>
+    </div>
+
+    <div class="essay-sep"><div class="filet filet-gold"><svg><use href="#filet"/></svg></div></div>
+  </article>
+
+  <!-- ESSAY IV -->
+  <article class="essay" id="essay-4">
+    <header class="essay-head">
+      <div class="num">— Essay the Fourth —</div>
+      <h3>The Calligraphic Band as Architecture</h3>
+      <div class="byline">by Dr. Reza Ḥājj-Sayyid, Reader in Epigraphy</div>
+    </header>
+
+    <div class="essay-body">
+      <aside class="marginalia left">
+        <span class="label">Diagram IV</span>
+        <svg class="diagram" viewBox="0 0 200 220" aria-hidden="true">
+          <g fill="none" stroke="currentColor" stroke-width="1.2">
+            <rect x="20" y="30" width="160" height="40"/>
+            <path d="M 30 60 Q 40 35 50 60 T 70 60 T 90 60 T 110 60 T 130 60 T 150 60 T 170 60" stroke="var(--text-emphasis)" stroke-width="1.6"/>
+            <line x1="30" y1="60" x2="170" y2="60" stroke-dasharray="2 3"/>
+            <rect x="20" y="100" width="160" height="40"/>
+            <g stroke="var(--primary)" stroke-width="1.4">
+              <path d="M 30 130 L 38 110 L 38 130 L 50 110 L 50 130 L 62 110 L 62 130 L 78 130"/>
+              <path d="M 90 130 L 102 108 L 110 130 L 122 110 L 130 130 L 145 110 L 152 130 L 168 130"/>
+            </g>
+            <text x="100" y="160" font-size="9" text-anchor="middle" fill="currentColor" font-style="italic">thuluth (above) · kūfic (below)</text>
+            <rect x="20" y="180" width="160" height="30" stroke="var(--accent)"/>
+            <text x="100" y="200" font-size="9" text-anchor="middle" fill="currentColor" font-style="italic">band as structural string-course</text>
+          </g>
+        </svg>
+      </aside>
+
+      <div class="column">
+        <p>The Safavid building is read as much as it is seen. A continuous calligraphic band — sometimes a single line of <em class="term">thuluth</em> in white on cobalt, sometimes a doubled register with a square <em class="term">kūfic</em> running below — encircles the drum of the dome, the spring of the iwan, and the threshold of the portal. These bands are not labels. They are structural members in the building's argument.</p>
+
+        <p>Consider the great inscription of the Masjid-i Shāh, signed by ʿAli-Riżā ʿAbbāsī in 1025 AH / 1616 CE, that runs round the interior of the qibla iwan. Its content is a Qurʾānic citation: the Throne Verse (II:255) and the opening of Sūrat al-Fatḥ. Its placement, however, is architectural. It marks the precise horizon at which the wall begins to curve into vault. The eye, which has been climbing the tiled dado, the spandrel, and the arch, meets the band as it would meet a cornice in a classical building: as the line at which weight is gathered and turned.</p>
+
+        <p>The band thus performs a double office. To the literate it delivers a text; to the illiterate it delivers a string-course. Neither office is decorative. The text consecrates the building (<em class="term">"and his Throne extends over the heavens and the earth"</em> — placed at the line where the heavens of the dome begin); the string-course knits the storeys.</p>
+
+        <div class="pull">"What the architrave is to a Greek temple, the thuluth band is to the Isfahan iwan: not an addition to the tectonics, but their utterance."</div>
+
+        <p>It is also worth remarking what the band is not. It is not a frieze in the antique sense — it does not represent action — and it is not a <em class="term">tabula</em> in the medieval Latin sense, set apart from its surround by a frame. It is continuous with the field. The same cobalt that fills the ground of the band fills the ground of the spandrel adjacent; the same gold rule-work that keylines the band keylines the arch.</p>
+
+        <p>One reads, finally, by walking. The Safavid inscription is too long to be taken in from a single station; the visitor must move, and the architecture moves the visitor — round the iwan, into the sanctuary, beneath the dome — at a tempo set by the rhythm of the script.</p>
+      </div>
+
+      <aside class="marginalia right">
+        <span class="label">Hands</span>
+        ʿAli-Riżā ʿAbbāsī (d. c. 1628) is the chief calligrapher of the period; his rival, Mīr ʿImād al-Ḥasanī, kept primarily to manuscript work. The architectural hand is broader, more interlocked, designed to read at thirty paces.
+      </aside>
+    </div>
+  </article>
+
+  <div class="filet filet-gold"><svg><use href="#filet"/></svg></div>
+
+  <!-- BIBLIOGRAPHY -->
+  <section class="biblio">
+    <h3>A Select Bibliography</h3>
+    <div class="sub">For the visitor who would carry the reading further</div>
+    <ul>
+      <li><span class="author">Necipoğlu, Gülru.</span> <span class="title">The Topkapı Scroll — Geometry and Ornament in Islamic Architecture.</span> Getty Center for the History of Art and the Humanities, Santa Monica, 1995. <em>The indispensable study of MS H. 1956 and of the polygonal-tile method that underlies girih.</em></li>
+      <li><span class="author">Blair, Sheila S., and Jonathan M. Bloom.</span> <span class="title">The Art and Architecture of Islam, 1250–1800.</span> Pelican History of Art, Yale University Press, New Haven &amp; London, 1994. <em>Chapters 7 and 8 remain the standard English-language survey of the Safavid building programme at Isfahan.</em></li>
+      <li><span class="author">Pope, Arthur Upham, and Phyllis Ackerman, eds.</span> <span class="title">A Survey of Persian Art from Prehistoric Times to the Present.</span> 6 vols. Oxford University Press, London &amp; New York, 1938–39 (suppl. vols. 1960–67). <em>Volumes II and IV gather the foundational documentation of Safavid architecture and tilework; the photographic record alone repays a week's reading.</em></li>
+      <li><span class="author">Lu, Peter J., and Paul J. Steinhardt.</span> <span class="title">"Decagonal and Quasi-Crystalline Tilings in Medieval Islamic Architecture."</span> Science 315 (23 Feb. 2007): 1106–1110.</li>
+      <li><span class="author">Hillenbrand, Robert.</span> <span class="title">Islamic Architecture: Form, Function and Meaning.</span> Edinburgh University Press, 1994.</li>
+      <li><span class="author">Babaie, Sussan.</span> <span class="title">Isfahan and Its Palaces — Statecraft, Shiʿism and the Architecture of Conviviality in Early Modern Iran.</span> Edinburgh University Press, 2008.</li>
+      <li><span class="author">Soucek, Priscilla P.</span> <span class="title">"The Arts of Calligraphy,"</span> in <em>The Arts of the Book in Central Asia</em>, ed. B. Gray, UNESCO/Shambhala, 1979.</li>
+    </ul>
+  </section>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="cobalt">
+  <div class="filet" style="color:var(--accent)"><svg><use href="#filet"/></svg></div>
+  <div class="inner">
+    <div>
+      <h4>Visit</h4>
+      <p>Khiyābān-i Chahār Bāgh</p>
+      <p>Naqsh-i Jahān Quarter, Isfahan</p>
+      <p>Open Saturday – Thursday, 09:00 – 17:00</p>
+      <p>Closed on official holidays</p>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <p>Telephone · +98 31 3220 4411</p>
+      <p>Reading Room enquiries · library@divankhaneh.ir</p>
+      <p>Postal · P.O. Box 81465-117, Isfahan</p>
+    </div>
+    <div>
+      <h4>Patronage</h4>
+      <p>Founded under the Endowment of the</p>
+      <p>Sadr-i Iṣfahānī Family, 1387 / 2008</p>
+      <p>Acknowledging the Bonyād-i Farhang</p>
+      <p>and the Friends of the Maydān</p>
+    </div>
+  </div>
+  <div class="tailpiece">✦ ❦ ✦ ❦ ✦</div>
+  <div class="filet" style="color:var(--accent)"><svg><use href="#filet"/></svg></div>
+  <div class="imprint">Dīvānkhāneh — Museum of Safavid Isfahan · imprint &amp; copyright © 1402 / 2024 · all rights reserved to the Endowment</div>
+</footer>
+
+</body>
+</html>

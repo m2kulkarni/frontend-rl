@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Lineage — Eight Generations of Hangiten Yashiro</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  /* ---------- Page-level base ---------- */
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), serif;
+    font-size: 15px;
+    line-height: 1.8;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* faint wagara wash, ≤15% sumi on kraft */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'><g fill='none' stroke='%230c0c0c' stroke-width='0.6' opacity='0.11'><path d='M0 110 Q55 55 110 110 T220 110'/><path d='M0 55 Q55 0 110 55 T220 55'/><path d='M0 165 Q55 110 110 165 T220 165'/><path d='M-110 110 Q-55 55 0 110'/><path d='M110 110 Q165 55 220 110'/></g></svg>");
+    background-size: 220px 220px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* ---------- Top nav ---------- */
+  .nav-band {
+    position: relative;
+    background: var(--surface);
+    padding: 22px 56px 18px 56px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 40px;
+    z-index: 2;
+  }
+  .nav-brand {
+    font-family: var(--font-display), serif;
+    font-size: 30px;
+    line-height: 1;
+    letter-spacing: 0.04em;
+    color: var(--text);
+  }
+  .nav-brand small {
+    display: block;
+    font-family: var(--font-body), serif;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    margin-top: 8px;
+    color: #4a4a4a;
+    font-weight: 400;
+  }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    font-variant: small-caps;
+  }
+  .nav-links a {
+    padding: 0 18px;
+    border-right: 1px solid rgba(12,12,12,0.45);
+    color: #2a2a2a;
+  }
+  .nav-links a:last-of-type { border-right: none; padding-right: 26px; }
+  .nav-links a[aria-current="page"] {
+    color: var(--secondary);
+  }
+  .nav-seal {
+    width: 28px; height: 28px;
+    margin-left: 4px;
+    opacity: 0.85;
+  }
+  .nav-seal svg { width: 100%; height: 100%; }
+
+  .nav-threshold {
+    position: relative;
+    height: 14px;
+    border-top: 1px solid var(--ornament);
+    background: var(--bg);
+    overflow: hidden;
+    z-index: 2;
+  }
+  .nav-threshold::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; top: 1px;
+    height: 12px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='14' viewBox='0 0 100 14'><g fill='none' stroke='%230c0c0c' stroke-width='0.6' opacity='0.18'><path d='M0 14 Q12.5 2 25 14 T50 14 T75 14 T100 14'/><path d='M0 14 Q12.5 6 25 14 T50 14 T75 14 T100 14'/></g></svg>");
+    background-size: 100px 14px;
+    background-repeat: repeat-x;
+  }
+
+  /* ---------- Page wrapper ---------- */
+  main {
+    position: relative;
+    z-index: 1;
+    padding: 0 0 80px 0;
+  }
+
+  /* ---------- Hero / title block ---------- */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 460px 1fr;
+    align-items: start;
+    padding: 90px 80px 60px 80px;
+  }
+  .hero-meta {
+    grid-column: 1;
+    padding-top: 30px;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: #555;
+    line-height: 2.2;
+  }
+  .hero-meta .rule {
+    display: block;
+    width: 60px; height: 1px;
+    background: var(--ornament);
+    margin: 14px 0 16px 0;
+  }
+  .hero-title {
+    grid-column: 2;
+    text-align: left;
+  }
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 26px;
+  }
+  .hero-title h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 76px;
+    line-height: 1.05;
+    margin: 0 0 22px 0;
+    letter-spacing: -0.005em;
+  }
+  .hero-title h1 .kanji {
+    display: block;
+    font-size: 44px;
+    margin-top: 18px;
+    color: #2a2a2a;
+  }
+  .hero-title p.lede {
+    font-size: 14px;
+    line-height: 1.9;
+    max-width: 380px;
+    color: #1a1a1a;
+    margin: 30px 0 0 0;
+  }
+  .hero-crane {
+    grid-column: 3;
+    justify-self: end;
+    width: 220px;
+    height: 220px;
+    opacity: 0.16;
+    margin-top: -10px;
+  }
+  .hero-crane svg { width: 100%; height: 100%; }
+
+  /* ---------- Divider ---------- */
+  .divider {
+    height: 80px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='80' viewBox='0 0 600 80'><g fill='none' stroke='%230c0c0c' stroke-width='1' opacity='0.4'><polygon points='100,40 130,10 160,40 130,70'/><polygon points='200,40 230,10 260,40 230,70'/><polygon points='300,40 330,10 360,40 330,70'/><polygon points='400,40 430,10 460,40 430,70'/><polygon points='500,40 530,10 560,40 530,70'/><line x1='0' y1='40' x2='100' y2='40'/><line x1='160' y1='40' x2='200' y2='40'/><line x1='260' y1='40' x2='300' y2='40'/><line x1='360' y1='40' x2='400' y2='40'/><line x1='460' y1='40' x2='500' y2='40'/><line x1='560' y1='40' x2='600' y2='40'/></g></svg>");
+    background-repeat: repeat-x;
+    background-position: center;
+    background-size: 600px 80px;
+    margin: 20px 0 40px 0;
+  }
+
+  /* ---------- Biographical column ---------- */
+  .bio-section {
+    display: grid;
+    grid-template-columns: 1fr 420px 200px 1fr;
+    gap: 0;
+    padding: 0 80px;
+  }
+  .bio-col {
+    grid-column: 2;
+    max-width: 420px;
+  }
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 14px;
+  }
+  .bio-col h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 38px;
+    line-height: 1.15;
+    margin: 0 0 32px 0;
+  }
+  .bio-col p {
+    margin: 0 0 22px 0;
+    font-size: 14.5px;
+    line-height: 1.85;
+  }
+  .bio-col p:first-of-type::first-letter {
+    font-family: var(--font-display), serif;
+    font-size: 54px;
+    float: left;
+    line-height: 0.9;
+    padding: 6px 10px 0 0;
+    color: var(--text);
+  }
+  .bio-aside {
+    grid-column: 3;
+    padding-left: 40px;
+    margin-top: 80px;
+    border-left: 1px solid rgba(12,12,12,0.25);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    line-height: 2.2;
+    text-transform: uppercase;
+    color: #3a3a3a;
+  }
+  .bio-aside strong {
+    display: block;
+    font-family: var(--font-display), serif;
+    font-size: 16px;
+    letter-spacing: 0.04em;
+    text-transform: none;
+    color: var(--text);
+    margin-bottom: 4px;
+    margin-top: 18px;
+    font-weight: 400;
+  }
+  .bio-aside strong:first-child { margin-top: 0; }
+
+  /* ---------- Lineage table ---------- */
+  .lineage-section {
+    margin-top: 110px;
+    padding: 0 80px;
+    display: grid;
+    grid-template-columns: 280px 1fr 1fr;
+    gap: 60px;
+  }
+  .lineage-head h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 44px;
+    line-height: 1.1;
+    margin: 18px 0 24px 0;
+  }
+  .lineage-head .kanji-vert {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    letter-spacing: 0.3em;
+    color: #444;
+    margin-bottom: 30px;
+    display: block;
+  }
+  .lineage-head p {
+    font-size: 13px;
+    line-height: 1.85;
+    color: #2a2a2a;
+    max-width: 240px;
+  }
+  .lineage-seal {
+    grid-column: 3;
+    grid-row: 1 / 3;
+    align-self: start;
+    justify-self: end;
+    width: 180px;
+    height: 180px;
+    opacity: 0.7;
+    margin-top: 10px;
+  }
+  .lineage-seal svg { width:100%; height:100%; }
+
+  .lineage-table {
+    grid-column: 2;
+    border-top: 2px solid var(--ornament);
+    margin-top: 40px;
+  }
+  .lineage-row {
+    display: grid;
+    grid-template-columns: 38px 110px 1fr 90px;
+    gap: 14px;
+    padding: 16px 0 14px 0;
+    border-bottom: 1px solid rgba(12,12,12,0.18);
+    align-items: baseline;
+  }
+  .lineage-row.current {
+    background: rgba(227,66,52,0.04);
+    margin: 0 -8px;
+    padding: 16px 8px 14px 8px;
+  }
+  .gen {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    line-height: 1;
+    color: var(--secondary);
+  }
+  .era {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #444;
+    line-height: 1.5;
+  }
+  .era em {
+    display: block;
+    font-style: normal;
+    color: #777;
+    font-size: 10px;
+    margin-top: 2px;
+    letter-spacing: 0.12em;
+  }
+  .name {
+    font-family: var(--font-display), serif;
+    font-size: 17px;
+    line-height: 1.4;
+  }
+  .name span {
+    display: block;
+    font-family: var(--font-body), serif;
+    font-size: 12px;
+    color: #555;
+    font-style: italic;
+    margin-top: 3px;
+    letter-spacing: 0.02em;
+  }
+  .specialty {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #444;
+    text-align: right;
+    line-height: 1.5;
+  }
+
+  /* ---------- Three-column lower band: awards / apprentice / certifications ---------- */
+  .lower-band {
+    margin-top: 120px;
+    padding: 0 80px;
+    display: grid;
+    grid-template-columns: 1fr 60px 1fr 60px 1fr 1fr;
+    gap: 0;
+    align-items: start;
+  }
+  .panel {
+    position: relative;
+    background: var(--surface);
+    padding: 36px 32px 40px 32px;
+    min-height: 260px;
+  }
+  .panel .corner-mon {
+    position: absolute;
+    top: 14px; right: 14px;
+    width: 38px; height: 38px;
+    opacity: 0.10;
+  }
+  .panel .corner-mon svg { width: 100%; height: 100%; }
+  .panel-label {
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 12px;
+  }
+  .panel h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 1.2;
+    margin: 0 0 18px 0;
+    border-bottom: 1px solid var(--secondary);
+    padding-bottom: 10px;
+    display: inline-block;
+  }
+  .panel.featured h3 { border-bottom-color: var(--secondary); }
+  .panel:not(.featured) h3 { border-bottom: none; }
+  .panel-date {
+    font-style: italic;
+    color: #555;
+    font-size: 12px;
+    margin-bottom: 16px;
+  }
+  .panel p {
+    font-size: 13.5px;
+    line-height: 1.75;
+    margin: 0 0 14px 0;
+  }
+  .award-list { list-style: none; margin: 0; padding: 0; }
+  .award-list li {
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(12,12,12,0.15);
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  .award-list li:last-child { border-bottom: none; }
+  .award-list .yr {
+    font-family: var(--font-display), serif;
+    font-size: 18px;
+    color: var(--secondary);
+    display: block;
+    margin-bottom: 2px;
+  }
+  /* offsets to break mirroring */
+  .panel.shift-down { margin-top: 30px; }
+  .panel.shift-up   { margin-top: -10px; }
+
+  .lower-band .gap { display: block; }
+
+  /* span fix: panels occupy odd columns 1,3,5; col 6 left as negative space */
+  .panel-1 { grid-column: 1; }
+  .panel-2 { grid-column: 3; }
+  .panel-3 { grid-column: 5; }
+
+  /* ---------- Footer ---------- */
+  footer {
+    margin-top: 120px;
+    background: var(--bg);
+    position: relative;
+    border-top: 1px solid var(--ornament);
+    padding: 60px 80px 36px 80px;
+    z-index: 1;
+  }
+  footer::before {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; top: 0;
+    height: 22px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='22' viewBox='0 0 80 22'><g fill='none' stroke='%230c0c0c' stroke-width='0.7' opacity='0.28'><polygon points='10,11 20,1 30,11 20,21'/><polygon points='30,11 40,1 50,11 40,21'/><polygon points='50,11 60,1 70,11 60,21'/><line x1='0' y1='11' x2='10' y2='11'/><line x1='70' y1='11' x2='80' y2='11'/></g></svg>");
+    background-size: 80px 22px;
+    background-repeat: repeat-x;
+  }
+  .footer-upper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    padding-top: 18px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(12,12,12,0.2);
+  }
+  .footer-addr-jp {
+    font-family: var(--font-display), serif;
+    font-size: 18px;
+    line-height: 2;
+    letter-spacing: 0.05em;
+  }
+  .footer-addr-rom {
+    font-size: 12px;
+    line-height: 1.9;
+    color: #333;
+    letter-spacing: 0.06em;
+    padding-top: 6px;
+  }
+  .footer-lower {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 40px;
+    align-items: center;
+    padding-top: 30px;
+  }
+  .footer-colophon {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    line-height: 1.9;
+    text-transform: uppercase;
+    color: #2a2a2a;
+  }
+  .footer-attr {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    line-height: 1.9;
+    color: #555;
+    text-transform: uppercase;
+    text-align: right;
+  }
+  .footer-seal {
+    width: 76px; height: 76px;
+    opacity: 0.92;
+  }
+  .footer-seal svg { width: 100%; height: 100%; }
+</style>
+</head>
+<body>
+
+<!-- ============== NAV ============== -->
+<header class="nav-band">
+  <div class="nav-brand">
+    浅草版木店
+    <small>Asakusa Hangiten · Studio of Tomé Yashiro</small>
+  </div>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="page-1.html">Studio</a>
+    <a href="page-2.html">Works</a>
+    <a href="page-3.html">Process</a>
+    <a href="page-4.html" aria-current="page">Lineage</a>
+    <a href="page-5.html">Commissions</a>
+    <a href="page-6.html">Visit</a>
+    <span class="nav-seal" aria-hidden="true">
+      <svg viewBox="0 0 688 688" preserveAspectRatio="xMidYMid meet"><rect width="688" height="688" fill="#0c0c0c"/><path fill="#f5efde" d="M226.13 612.58c-18.33-1.93-37.06-9.3-52.05-20.47-5.84-4.36-15.79-14.25-20.29-20.19-21.23-27.97-27.17-64.07-16-97.08 3.47-10.25 8.99-20.87 15.19-29.19 4.18-5.62 14.69-16.21 20.45-20.6 27.78-21.2 64.08-27.19 97.08-16.02 16.16 5.47 29.21 13.74 41.4 26.23 11.77 12.06 19.15 24.02 24.42 39.58 9.99 29.52 6.48 60.74-9.92 88.23-7.68 12.87-21.67 26.86-34.57 34.57-20.4 12.18-43.04 17.33-65.7 14.94zm213.85 0c-18.33-1.93-37.06-9.3-52.05-20.47-5.84-4.36-15.79-14.25-20.29-20.19-21.23-27.97-27.18-64.07-16-97.08 3.47-10.25 8.99-20.87 15.19-29.19 4.18-5.62 14.69-16.21 20.45-20.6 27.78-21.2 64.08-27.19 97.08-16.02 16.15 5.47 29.2 13.74 41.39 26.23 11.77 12.06 19.15 24.02 24.42 39.58 9.99 29.52 6.48 60.74-9.92 88.23-7.68 12.87-21.67 26.86-34.57 34.57-20.4 12.18-43.04 17.33-65.7 14.94z"/></svg>
+    </span>
+  </nav>
+</header>
+<div class="nav-threshold"></div>
+
+<main>
+
+  <!-- ============== HERO ============== -->
+  <section class="hero">
+    <div class="hero-meta">
+      Page IV / VI<span class="rule"></span>
+      Lineage<br>
+      Eight Generations<br>
+      Bunkyū 2 — Reiwa 6<br>
+      1862 — 2024
+    </div>
+
+    <div class="hero-title">
+      <div class="hero-eyebrow">— About the Studio</div>
+      <h1>
+        Eight Generations
+        <span class="kanji">八代の系譜</span>
+      </h1>
+      <p class="lede">
+        From a Nishijin machiya whose roof tiles still bear the kiri crest of the second proprietor, the Yashiro family has cut, inked and pulled woodblock prints without interruption since the second year of Bunkyū. Six masters, two mistresses, one workshop.
+      </p>
+    </div>
+
+    <div class="hero-crane" aria-hidden="true">
+      <svg viewBox="0 0 688 688" preserveAspectRatio="xMidYMid meet">
+        <circle cx="344" cy="344" r="300" fill="none" stroke="#0c0c0c" stroke-width="2"/>
+        <circle cx="344" cy="344" r="260" fill="none" stroke="#0c0c0c" stroke-width="0.5"/>
+        <path fill="#0c0c0c" d="M344 120c-50 0-90 30-110 70 -20 -10 -50 -10 -70 10 -20 20 -20 50 -10 70 -30 10 -50 40 -50 80 0 50 40 90 90 90h160c50 0 90-40 90-90 0-50-40-90-90-90 -10-40-50-70-100-70zm0 30c40 0 70 30 70 70 0 5 0 10-1 15 5-1 10-2 16-2 30 0 55 25 55 55s-25 55-55 55h-170c-30 0-55-25-55-55s25-55 55-55c5 0 10 1 15 2 -1-5-1-10-1-15 0-40 30-70 71-70z"/>
+      </svg>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <!-- ============== BIO COLUMN ============== -->
+  <section class="bio-section">
+    <div class="bio-col">
+      <div class="section-label">— Proprietor</div>
+      <h2>Yashiro Tomé,<br>Eighth of the Line</h2>
+      <p>
+        Born in the spring of Shōwa 51 (1976) above the workshop she now directs, Yashiro Tomé took up the smaller carving knives at fourteen under her father, the late seventh master Yashiro Kanjirō (1934 — 2018). For nine years she cut only key blocks, never colour, before being permitted to register a print of her own.
+      </p>
+      <p>
+        She received certification from the Kyoto Hanga Association in 2003, the year her father retired from active carving but continued at the printing bench. She assumed the family name as eighth proprietor at his death in the summer of Heisei 30 (2018), keeping the shop's two presses, four baren and the Bunkyū-era cherry-block plane that her ancestor brought from Edo.
+      </p>
+      <p>
+        Tomé works in the meisho-e tradition of her line, but the studio under her direction has expanded the catalogue to include night-scenes of the Kamogawa, fan-shape editions, and small private commissions of family crests — for which the shop has, since 1862, kept a register of more than four thousand kamon and their authorised cuttings.
+      </p>
+    </div>
+
+    <aside class="bio-aside">
+      <strong>Born</strong>
+      Shōwa 51 / 1976, Kyoto
+
+      <strong>Apprenticed</strong>
+      1990 — 2003, to her father
+
+      <strong>Certified</strong>
+      Kyoto Hanga Association, 2003
+
+      <strong>Succeeded</strong>
+      As 8th master, Heisei 30 / 2018
+
+      <strong>Workshop est.</strong>
+      Bunkyū 2 / 1862
+    </aside>
+  </section>
+
+  <!-- ============== LINEAGE TABLE ============== -->
+  <section class="lineage-section">
+    <div class="lineage-head">
+      <div class="section-label">— The Eight Masters</div>
+      <span class="kanji-vert">八代記</span>
+      <h2>From Bun'emon to Tomé</h2>
+      <p>The unbroken roll of proprietors who have signed the shop's seal-register and pressed the first proof of each year's New Year print.</p>
+    </div>
+
+    <div class="lineage-table" role="table" aria-label="Generations of Hangiten Yashiro">
+      <div class="lineage-row">
+        <div class="gen">一</div>
+        <div class="era">Bunkyū 2 — Meiji 11<em>1862 — 1878</em></div>
+        <div class="name">Yashiro Bun'emon<span>founder · arrived from Edo, 1861</span></div>
+        <div class="specialty">Tōkaidō meisho-e</div>
+      </div>
+
+      <div class="lineage-row">
+        <div class="gen">二</div>
+        <div class="era">Meiji 11 — Meiji 34<em>1878 — 1901</em></div>
+        <div class="name">Yashiro Bunjirō<span>second son of Bun'emon</span></div>
+        <div class="specialty">Kachō-ga</div>
+      </div>
+
+      <div class="lineage-row">
+        <div class="gen">三</div>
+        <div class="era">Meiji 34 — Taishō 13<em>1901 — 1924</em></div>
+        <div class="name">Yashiro Sōgorō<span>adopted son-in-law</span></div>
+        <div class="specialty">Map editions</div>
+      </div>
+
+      <div class="lineage-row">
+        <div class="gen">四</div>
+        <div class="era">Taishō 13 — Shōwa 12<em>1924 — 1937</em></div>
+        <div class="name">Yashiro Sōkichi<span>elder son of Sōgorō</span></div>
+        <div class="specialty">Fan-shape sheets</div>
+      </div>
+
+      <div class="lineage-row">
+        <div class="gen">五</div>
+        <div class="era">Shōwa 12 — Shōwa 28<em>1937 — 1953</em></div>
+        <div class="name">Yashiro Sumiko<span>daughter of Sōkichi · first mistress</span></div>
+        <div class="specialty">Wartime austerity prints</div>
+      </div>
+
+      <div class="lineage-row">
+        <div class="gen">六</div>
+        <div class="era">Shōwa 28 — Shōwa 47<em>1953 — 1972</em></div>
+        <div class="name">Yashiro Tarōbei<span>nephew of Sumiko</span></div>
+        <div class="specialty">Kamon register</div>
+      </div>
+
+      <div class="lineage-row">
+        <div class="gen">七</div>
+        <div class="era">Shōwa 47 — Heisei 30<em>1972 — 2018</em></div>
+        <div class="name">Yashiro Kanjirō<span>1934 — 2018 · son of Tarōbei</span></div>
+        <div class="specialty">Night-scene editions</div>
+      </div>
+
+      <div class="lineage-row current">
+        <div class="gen">八</div>
+        <div class="era">Heisei 30 — present<em>2018 —</em></div>
+        <div class="name">Yashiro Tomé<span>b. 1976 · current proprietor</span></div>
+        <div class="specialty">Kamogawa series</div>
+      </div>
+    </div>
+
+    <div class="lineage-seal" aria-hidden="true">
+      <svg viewBox="0 0 345 326" preserveAspectRatio="xMidYMid meet">
+        <circle cx="172" cy="163" r="155" fill="none" stroke="#0c0c0c" stroke-width="1"/>
+        <circle cx="172" cy="163" r="138" fill="none" stroke="#0c0c0c" stroke-width="0.5"/>
+        <text x="172" y="120" text-anchor="middle" font-family="Yuji Syuku" font-size="40" fill="#0c0c0c">八代</text>
+        <text x="172" y="175" text-anchor="middle" font-family="Yuji Syuku" font-size="28" fill="#0c0c0c">屋代</text>
+        <text x="172" y="220" text-anchor="middle" font-family="Yuji Syuku" font-size="24" fill="#0c0c0c">版木</text>
+        <line x1="60" y1="245" x2="284" y2="245" stroke="#0c0c0c" stroke-width="0.5"/>
+        <text x="172" y="265" text-anchor="middle" font-family="Shippori Mincho" font-size="11" letter-spacing="3" fill="#0c0c0c">SINCE 1862</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ============== LOWER PANELS ============== -->
+  <section class="lower-band">
+    <div class="panel panel-1 featured shift-down">
+      <span class="corner-mon" aria-hidden="true">
+        <svg viewBox="0 0 688 688"><circle cx="344" cy="344" r="320" fill="#0c0c0c"/></svg>
+      </span>
+      <div class="panel-label">— Recognition</div>
+      <h3>Awards & Honours</h3>
+      <ul class="award-list">
+        <li>
+          <span class="yr">2017</span>
+          Kyoto Prefecture Traditional Craft Recognition (京都府伝統工芸認定) — for sustained contribution to the woodblock-print craft of the Nishijin district.
+        </li>
+        <li>
+          <span class="yr">2009</span>
+          Japan Print Association Newcomer Prize (日本版画協会新人賞) — awarded for the four-sheet edition <em>Kamogawa, Twelve Months</em>.
+        </li>
+        <li>
+          <span class="yr">2003</span>
+          Certification, Kyoto Hanga Association.
+        </li>
+      </ul>
+    </div>
+
+    <div class="panel panel-2 shift-up">
+      <span class="corner-mon" aria-hidden="true">
+        <svg viewBox="0 0 688 688"><circle cx="344" cy="344" r="320" fill="#0c0c0c"/></svg>
+      </span>
+      <div class="panel-label">— In Residence</div>
+      <h3>Apprentice</h3>
+      <p class="panel-date">Mori Hisako · fourth year of training</p>
+      <p>
+        Mori-san entered the workshop in the autumn of Reiwa 2 (2020) following six years at the Kyoto City University of Arts. She is presently entrusted with secondary colour blocks and is registered with the Hanga Association as an apprentice in good standing.
+      </p>
+      <p>
+        Her training-piece, a single-block <em>sumi-zuri</em> view of Kitano shrine in winter, will be released as a limited edition of forty in spring 2026.
+      </p>
+    </div>
+
+    <div class="panel panel-3 shift-down">
+      <span class="corner-mon" aria-hidden="true">
+        <svg viewBox="0 0 688 688"><circle cx="344" cy="344" r="320" fill="#0c0c0c"/></svg>
+      </span>
+      <div class="panel-label">— Affiliations</div>
+      <h3>Memberships</h3>
+      <p>
+        <strong>Kyoto Hanga Association</strong> — full member since 2003; council seat 2014 — present.
+      </p>
+      <p>
+        <strong>Japan Print Association</strong> (日本版画協会) — member since 2009.
+      </p>
+      <p>
+        <strong>Nishijin Traditional Crafts Cooperative</strong> — member-shop since founding registration of 1956.
+      </p>
+      <p>
+        Workshop registered with the Kyoto City Cultural Properties office as a designated machiya, dwelling no. 千本筋三軒目, since 1971.
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============== FOOTER ============== -->
+<footer>
+  <div class="footer-upper">
+    <div class="footer-addr-jp">
+      京都市上京区西陣<br>
+      武者小路通油小路東入<br>
+      千本筋三軒目
+    </div>
+    <div class="footer-addr-rom">
+      Hangiten Yashiro<br>
+      Mushanokōji-dōri Aburanokōji higashi-iru<br>
+      Senbon-suji san-gen-me, Nishijin,<br>
+      Kamigyō-ku, Kyoto-shi
+    </div>
+  </div>
+  <div class="footer-lower">
+    <div class="footer-colophon">
+      Hangiten Yashiro · founded Bunkyū 2 / 1862<br>
+      Current proprietor: 8th generation<br>
+      © Reiwa 6 / 2024 · all impressions reserved
+    </div>
+    <div class="footer-seal" aria-hidden="true">
+      <svg viewBox="0 0 345 326" preserveAspectRatio="xMidYMid meet">
+        <rect x="20" y="20" width="305" height="286" fill="none" stroke="#0c0c0c" stroke-width="2"/>
+        <rect x="32" y="32" width="281" height="262" fill="none" stroke="#0c0c0c" stroke-width="0.5"/>
+        <text x="172" y="130" text-anchor="middle" font-family="Yuji Syuku" font-size="56" fill="#0c0c0c">五七</text>
+        <text x="172" y="200" text-anchor="middle" font-family="Yuji Syuku" font-size="56" fill="#0c0c0c">の桐</text>
+        <line x1="55" y1="240" x2="290" y2="240" stroke="#0c0c0c" stroke-width="0.5"/>
+        <text x="172" y="265" text-anchor="middle" font-family="Shippori Mincho" font-size="14" letter-spacing="4" fill="#0c0c0c">YASHIRO</text>
+      </svg>
+    </div>
+    <div class="footer-attr">
+      Kamon SVG renderings<br>
+      after Wikimedia Commons,<br>
+      CC-BY-SA · used with thanks
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

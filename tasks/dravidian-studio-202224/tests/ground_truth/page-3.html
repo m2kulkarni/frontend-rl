@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Projects — Sthapati Workshop</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), sans-serif;
+    margin: 0;
+    line-height: 1.55;
+  }
+
+  /* ---------- NAVIGATION ---------- */
+  .topnav {
+    background: var(--surface);
+    padding: 18px 60px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+  }
+  .topnav::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 6px;
+    background:
+      linear-gradient(var(--secondary), var(--secondary)) top/100% 2px no-repeat,
+      linear-gradient(var(--accent), var(--accent)) bottom/100% 2px no-repeat;
+  }
+  .mark {
+    display: flex; align-items: center; gap: 14px;
+  }
+  .mark svg { width: 38px; height: 38px; display: block; }
+  .mark-text {
+    font-family: var(--font-display);
+    font-size: 15px;
+    letter-spacing: 0.18em;
+    color: var(--primary);
+    line-height: 1.1;
+  }
+  .mark-text small {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 9px;
+    letter-spacing: 0.32em;
+    color: var(--text-emphasis);
+    text-transform: uppercase;
+    margin-top: 3px;
+  }
+  .navlinks {
+    display: flex; gap: 34px;
+    list-style: none; padding: 0; margin: 0;
+  }
+  .navlinks a {
+    font-family: var(--font-body);
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--primary);
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 10px;
+    font-weight: 700;
+  }
+  .navlinks a:hover { color: var(--secondary); }
+  .navlinks a[aria-current="page"] { color: var(--secondary); }
+  .navlinks a[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    bottom: -2px; left: 50%;
+    width: 14px; height: 14px;
+    transform: translateX(-50%);
+    background:
+      radial-gradient(circle, var(--secondary) 2px, transparent 2.5px),
+      radial-gradient(circle, var(--accent) 5px, transparent 5.5px);
+  }
+
+  /* ---------- TIERED HEADER (gopuram) ---------- */
+  .gopuram-header {
+    background: var(--surface);
+    padding-top: 30px;
+  }
+  .tier {
+    margin: 0 auto;
+    background: var(--secondary);
+    color: var(--bg);
+    text-align: center;
+    position: relative;
+    border-top: 2px solid var(--accent);
+    border-bottom: 2px solid var(--accent);
+  }
+  .tier-1 { width: 100%; padding: 22px 0; }
+  .tier-2 { width: 80%; padding: 18px 0; background: #b8331f; }
+  .tier-3 { width: 60%; padding: 14px 0; background: #8a2515; }
+  .tier-1 h1 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 56px;
+    letter-spacing: 0.22em;
+    color: var(--bg);
+    text-transform: uppercase;
+  }
+  .tier-2 .sanskrit {
+    font-family: var(--font-display);
+    font-size: 22px;
+    letter-spacing: 0.4em;
+    color: var(--accent);
+  }
+  .tier-3 .meta {
+    font-family: var(--font-body);
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--bg);
+  }
+  .peacock-band {
+    background: var(--surface);
+    padding: 22px 0 10px;
+    text-align: center;
+    border-bottom: 2px double var(--accent);
+  }
+  .peacock-band svg {
+    width: 78%;
+    max-width: 1100px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+
+  /* ---------- INTRO BAND ---------- */
+  .intro {
+    background: var(--surface);
+    padding: 50px 80px 40px;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 40px;
+    border-bottom: 2px solid var(--accent);
+    position: relative;
+  }
+  .intro::before, .intro::after {
+    content: "";
+    position: absolute;
+    bottom: -2px; height: 2px;
+    background: var(--secondary);
+  }
+  .intro::before { left: 0; right: 50%; }
+  .intro::after  { right: 0; left: 50%; top: auto; bottom: -5px; }
+  .intro-side {
+    font-family: var(--font-body);
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    line-height: 2;
+  }
+  .intro-side.right { text-align: right; }
+  .intro-main h2 {
+    font-family: var(--font-display);
+    font-size: 28px;
+    letter-spacing: 0.14em;
+    color: var(--text-emphasis);
+    text-transform: uppercase;
+    margin: 0 0 18px;
+    text-align: center;
+  }
+  .intro-main p {
+    font-size: 14.5px;
+    text-align: center;
+    margin: 0;
+    color: var(--text);
+  }
+  .intro-main p + p { margin-top: 10px; }
+
+  /* ---------- DIVIDER ---------- */
+  .palmette-divider {
+    background: var(--surface);
+    padding: 18px 0;
+    text-align: center;
+  }
+  .palmette-divider svg {
+    width: 70%; max-width: 900px; height: 50px;
+    display: block; margin: 0 auto;
+  }
+
+  /* ---------- PROJECT GRID ---------- */
+  .grid-wrap {
+    background: var(--surface);
+    padding: 30px 60px 70px;
+  }
+  .section-label {
+    text-align: center;
+    font-family: var(--font-display);
+    font-size: 20px;
+    letter-spacing: 0.5em;
+    color: var(--secondary);
+    text-transform: uppercase;
+    margin: 0 0 36px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--accent);
+  }
+  .section-label::after {
+    content: "❋";
+    display: block;
+    color: var(--accent);
+    font-size: 14px;
+    letter-spacing: normal;
+    margin-top: 8px;
+  }
+
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 38px 32px;
+  }
+  .project-card {
+    position: relative;
+    padding: 38px 22px 22px;
+    background: var(--bg);
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+  }
+  /* gold pillars */
+  .project-card::before,
+  .project-card::after {
+    content: "";
+    position: absolute;
+    top: -6px; bottom: -6px;
+    width: 2px;
+    background: var(--accent);
+  }
+  .project-card::before { left: 6px; }
+  .project-card::after  { right: 6px; }
+  /* lotus capitals on pillars */
+  .pillar-cap {
+    position: absolute;
+    width: 18px; height: 8px;
+    background: var(--accent);
+    border-radius: 50% 50% 0 0;
+  }
+  .pillar-cap.tl { top: -10px; left: -2px; }
+  .pillar-cap.tr { top: -10px; right: -2px; }
+  .pillar-cap.bl { bottom: -10px; left: -2px; transform: rotate(180deg); }
+  .pillar-cap.br { bottom: -10px; right: -2px; transform: rotate(180deg); }
+
+  /* kalasha (pot finial) */
+  .kalasha {
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 14px; height: 22px;
+  }
+  .kalasha::before {
+    content: "";
+    position: absolute;
+    bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 14px; height: 10px;
+    background: var(--secondary);
+    border-radius: 50% 50% 20% 20%;
+  }
+  .kalasha::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 50%; transform: translateX(-50%);
+    width: 2px; height: 14px;
+    background: var(--secondary);
+  }
+  .kalasha .ring {
+    position: absolute;
+    bottom: 9px; left: 50%; transform: translateX(-50%);
+    width: 10px; height: 3px;
+    background: var(--accent);
+  }
+
+  .project-index {
+    font-family: var(--font-display);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .project-card h3 {
+    font-family: var(--font-display);
+    font-size: 17px;
+    letter-spacing: 0.1em;
+    color: var(--text-emphasis);
+    text-transform: uppercase;
+    margin: 0 0 12px;
+    line-height: 1.35;
+    min-height: 46px;
+  }
+  .project-meta {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 4px 10px;
+    font-size: 11px;
+    margin-bottom: 14px;
+    padding: 10px 0;
+    border-top: 1px dotted var(--secondary);
+    border-bottom: 1px dotted var(--secondary);
+  }
+  .project-meta dt {
+    font-family: var(--font-body);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--secondary);
+    font-size: 9.5px;
+    padding-top: 1px;
+  }
+  .project-meta dd {
+    margin: 0;
+    color: var(--text);
+    font-size: 11.5px;
+  }
+  .project-card p {
+    font-size: 12.5px;
+    margin: 0;
+    color: var(--text);
+    line-height: 1.55;
+  }
+  .project-card .status {
+    margin-top: 12px;
+    font-family: var(--font-body);
+    font-size: 9.5px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    text-align: right;
+    border-top: 1px solid var(--accent);
+    padding-top: 8px;
+  }
+
+  /* ---------- INDEX TABLE ---------- */
+  .index-strip {
+    background: var(--secondary);
+    color: var(--bg);
+    padding: 36px 60px;
+    margin-top: 50px;
+  }
+  .index-strip h2 {
+    font-family: var(--font-display);
+    font-size: 22px;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 0 0 26px;
+    color: var(--accent);
+  }
+  .index-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+  .index-table th, .index-table td {
+    padding: 9px 10px;
+    text-align: left;
+    border-bottom: 1px solid rgba(248,244,236,0.18);
+  }
+  .index-table th {
+    font-family: var(--font-body);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 10px;
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent);
+  }
+  .index-table td.year { font-family: var(--font-display); color: var(--accent); width: 60px; }
+  .index-table td.title { font-weight: 700; letter-spacing: 0.05em; }
+
+  /* ---------- ENQUIRY BAND ---------- */
+  .enquiry {
+    background: var(--surface);
+    padding: 50px 80px;
+    text-align: center;
+    border-top: 2px solid var(--accent);
+    border-bottom: 2px solid var(--accent);
+  }
+  .enquiry h2 {
+    font-family: var(--font-display);
+    font-size: 26px;
+    letter-spacing: 0.18em;
+    color: var(--text-emphasis);
+    text-transform: uppercase;
+    margin: 0 0 14px;
+  }
+  .enquiry p {
+    max-width: 720px;
+    margin: 0 auto 18px;
+    font-size: 14px;
+  }
+  .enquiry .cta {
+    display: inline-block;
+    padding: 12px 36px;
+    background: var(--secondary);
+    color: var(--bg);
+    text-decoration: none;
+    font-family: var(--font-body);
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    font-weight: 700;
+    border: 2px solid var(--accent);
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer.arcade {
+    background: var(--secondary);
+    padding: 50px 0 0;
+    color: var(--bg);
+    position: relative;
+  }
+  .arcade-pillars {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0;
+    padding: 0 60px;
+    height: 90px;
+    position: relative;
+  }
+  .arcade-pillar {
+    border-left: 2px solid var(--accent);
+    height: 100%;
+    position: relative;
+  }
+  .arcade-pillar:last-child {
+    border-right: 2px solid var(--accent);
+  }
+  .arcade-pillar::before,
+  .arcade-pillar::after {
+    content: "";
+    position: absolute;
+    width: 22px; height: 8px;
+    background: var(--accent);
+    left: -12px;
+    border-radius: 50% 50% 0 0;
+  }
+  .arcade-pillar::before { top: 0; }
+  .arcade-pillar::after { bottom: 0; transform: rotate(180deg); }
+
+  .kolam {
+    text-align: center;
+    padding: 36px 40px 30px;
+    position: relative;
+  }
+  .kolam-mandala {
+    width: 220px; height: 220px;
+    margin: 0 auto 20px;
+    position: relative;
+    border: 2px dotted var(--accent);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .kolam-mandala::before {
+    content: "";
+    position: absolute;
+    inset: 14px;
+    border: 1px dotted var(--accent);
+    border-radius: 50%;
+  }
+  .kolam-mandala::after {
+    content: "";
+    position: absolute;
+    inset: 30px;
+    border: 1px dashed var(--bg);
+    border-radius: 50%;
+  }
+  .kolam-inner {
+    position: relative;
+    z-index: 2;
+    font-family: var(--font-display);
+    color: var(--bg);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    line-height: 1.6;
+    text-align: center;
+    padding: 0 20px;
+  }
+  .kolam-inner strong {
+    display: block;
+    color: var(--accent);
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    margin-bottom: 6px;
+  }
+  .footer-rule {
+    height: 6px;
+    background:
+      linear-gradient(var(--accent), var(--accent)) top/100% 2px no-repeat,
+      linear-gradient(var(--bg), var(--bg)) bottom/100% 2px no-repeat;
+    margin-top: 10px;
+  }
+  .footer-line {
+    background: #8a2515;
+    text-align: center;
+    padding: 14px 20px;
+    font-family: var(--font-body);
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    color: var(--bg);
+    text-transform: uppercase;
+  }
+  .footer-line .tamil {
+    font-family: var(--font-display);
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: none;
+    margin: 0 12px;
+  }
+
+  /* ---------- BREADCRUMB SIDE ORNAMENT ---------- */
+  .breadcrumb {
+    text-align: center;
+    background: var(--surface);
+    padding: 14px 0;
+    font-family: var(--font-body);
+    font-size: 10px;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+  }
+  .breadcrumb span { color: var(--secondary); margin: 0 14px; }
+
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="topnav" aria-label="Primary">
+  <a class="mark" href="page-1.html" aria-label="Sthapati Workshop home">
+    <!-- Om seal in vermilion -->
+    <svg viewBox="0 0 356 367" aria-hidden="true">
+      <path d="M 90.46,353.95 C 51.80,340.13 23.73,305.76 12.61,258.62 C 7.57,237.22 6.14,201.87 10.32,201.87 C 11.71,201.87 15.42,211.57 18.57,223.43 C 25.45,249.37 37.19,273.77 48.54,285.69 C 67.37,305.50 114.04,313.26 140.92,301.05 C 161.86,291.55 170.36,268.95 161.25,246.96 C 154.21,229.97 138.25,224.29 108.51,228.19 C 108.51,228.19 90.28,208.57 84.48,173.74 L 103.16,175.43 C 125.66,177.47 142.65,172.50 151.46,161.29 C 159.75,150.75 159.57,146.68 150.35,135.96 C 137.04,120.49 113.16,124.41 64.79,149.99 L 40.38,109.09 L 50.61,101.28 C 76.25,81.72 120.77,71.95 146.11,80.31 C 169.19,87.93 186.13,118.15 181.60,143.63 C 178.54,160.86 164.73,184.99 154.05,191.75 L 144.85,197.58 L 157.56,203.32 C 179.17,213.06 192.36,205.61 208.12,174.77 C 229.93,132.09 244.07,121.04 276.97,120.99 C 292.28,120.97 297.73,122.57 308.90,130.40 C 336.78,149.94 351.96,190.40 348.63,236.27 C 344.40,294.37 316.88,329.62 275.73,329.62 C 253.15,329.62 238.59,321.70 227.01,303.10 C 216.83,286.77 212.24,254.42 218.09,240.19 C 220.89,233.37 221.40,233.14 221.58,238.60 C 221.92,248.64 233.34,264.96 243.83,270.38 C 269.56,283.68 306.49,266.97 321.11,235.40 C 332.20,211.44 326.25,165.22 311.02,157.07 C 307.83,155.36 299.96,153.97 293.52,153.97 C 279.84,153.97 269.10,163.80 254.03,190.12 C 248.82,199.22 240.06,210.97 234.55,216.24 C 225.61,224.80 222.42,225.82 204.53,225.82 L 184.51,225.82 L 190.98,240.19 C 200.25,260.76 199.81,294.19 190.01,314.53 C 181.35,332.51 161.34,350.71 145.33,355.16 C 129.76,359.49 104.39,358.93 90.46,353.95 z M 165.83,75.92 C 156.98,60.81 151.53,32.61 157.47,32.61 C 164.44,47.73 178.73,61.23 194.03,70.64 C 221.52,83.95 249.39,78.58 279.84,54.11 C 286.55,48.72 292.48,44.91 293.03,45.65 C 300.47,57.18 313.33,66.61 317.58,80.02 C 317.58,85.68 293.23,101.96 274.01,109.15 C 226.38,122.87 193.97,117.44 165.83,75.92 z M 189.84,41.00 L 220.85,6.61 L 255.31,38.51 C 243.52,48.22 235.01,63.29 221.54,70.93 C 210.90,63.09 195.02,53.84 189.84,41.00 z" fill="#e34234"/>
+    </svg>
+    <span class="mark-text">Sthapati Workshop<small>Madurai · Est. 2014</small></span>
+  </a>
+  <ul class="navlinks">
+    <li><a href="page-1.html">Sanctum</a></li>
+    <li><a href="page-2.html">Practice</a></li>
+    <li><a href="page-3.html" aria-current="page">Projects</a></li>
+    <li><a href="page-4.html">Workshop</a></li>
+    <li><a href="page-5.html">Writings</a></li>
+    <li><a href="page-6.html">Studio</a></li>
+    <li><a href="page-1.html#commission">Commission</a></li>
+  </ul>
+</nav>
+
+<!-- ============ GOPURAM HEADER ============ -->
+<header class="gopuram-header">
+  <div class="tier tier-1">
+    <h1>Projects</h1>
+  </div>
+  <div class="tier tier-2">
+    <span class="sanskrit">⟡ க ட் ட ட ங் க ள் ⟡ B U I L T   W O R K   ⟡</span>
+  </div>
+  <div class="tier tier-3">
+    <span class="meta">Nine Commissions · 2019 — 2025 · Tamil Nadu &amp; Karnataka</span>
+  </div>
+
+  <div class="peacock-band" aria-hidden="true">
+    <svg viewBox="0 0 313.71717 29.540759" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(54.572101,-91.176475)" fill="#1a1a1a">
+        <path d="m -45.203647,120.20506 c -2.080683,-0.59494 -3.600099,-1.33764 -4.88273,-2.38671 -1.667517,-1.36388 -2.894118,-2.64027 -2.893812,-3.0113 1.42e-4,-0.17364 -0.209138,-0.47237 -0.46507,-0.66382 -0.819614,-0.61314 -1.16478,-1.84791 -1.123557,-4.01931 0.07527,-3.96496 0.841997,-6.28592 3.359706,-10.170217 2.091957,-3.227467 6.669369,-6.452883 10.647663,-7.502765 2.252562,-0.594453 8.248778,-0.796292 11.003264,-0.370372 6.94812,1.074354 16.152972,4.460234 20.6562963,7.598128 0.8536092,0.594796 0.7949964,0.623336 1.3291143,-0.64739 0.2251847,-0.535733 0.8814684,-1.603973 1.4584084,-2.373871 0.8561927,-1.142535 1.457933,-1.600664 3.2740672,-2.492638 2.16210793,-1.06191 4.5637653,-1.779237 6.7277099,-2.009456 0.5824052,-0.06194 1.3990594,-0.240975 1.8147895,-0.397805 0.7738562,-0.291942 6.4810504,-0.196925 10.0927814,0.168029 2.264542,0.228828 9.60899,1.67773 11.219571,2.21338 1.156599,0.384661 1.203738,0.376381 3.086684,-0.542345 2.528472,-1.2337 4.016657,-1.480542 8.446835,-1.401064 3.61374,0.06486 4.290154,0.147139 6.742793,0.820538 0.653941,0.179545 1.719761,0.375692 2.368485,0.435889 0.648729,0.0602 1.838242,0.282073 2.643363,0.493076 1.333488,0.349469 1.625289,0.339432 3.276461,-0.112735 4.298701,-1.177186 16.775093,-2.487486 20.247754,-2.126478 0.82522,0.08579 2.552867,0.408475 3.839215,0.717074 2.046471,0.490964 2.518569,0.521833 3.776859,0.246952 3.038874,-0.663879 6.75683,-1.061515 11.128253,-1.190178 4.134196,-0.121667 4.707691,-0.08259 6.380251,0.434721 1.364622,0.422078 2.105892,0.83929 2.879252,1.620559 1.29673,1.309975 1.63,2.709456 1.6237,6.818148 -0.005,2.95745 0.2393,4.45137 0.62566,3.83325 0.10807,-0.17288 0.17855,-1.23469 0.15662,-2.35957 -0.10151,-5.20664 0.0689,-6.026385 1.66799,-8.024476 0.85063,-1.062863 2.64553,-2.128587 4.10167,-2.435363 2.81819,-0.59374 15.88977,0.302112 18.8453,1.291541 0.69822,0.23375 1.33752,0.188118 3.17619,-0.226686 4.44974,-1.003866 5.16179,-1.08168 9.66723,-1.056509 4.01601,0.0224 5.00432,0.121426 8.5084,0.852608 6.84995,1.42927 7.19777,1.434197 12.43469,0.175947 1.28482,-0.308696 3.07339,-0.450501 5.82325,-0.46168 3.55974,-0.01452 4.14585,0.04906 5.68548,0.615953 0.94414,0.347651 2.11528,0.863208 2.60253,1.145677 0.82461,0.478046 0.98936,0.487693 2.38057,0.139336 1.77908,-0.445477 5.29646,-1.019874 9.8354,-1.606151 3.88998,-0.502463 11.70287,-0.5191 15.08161,-0.03212 5.86054,0.844676 9.86323,3.110261 10.57122,5.983455 l 0.28701,1.164733 3.35851,-1.630478 c 3.17793,-1.542804 8.22537,-3.484656 11.44251,-4.402193 4.71613,-1.345036 12.68145,-1.710913 16.9375,-0.778008 4.93058,1.080764 10.02057,5.551052 11.64065,10.223444 0.65092,1.87732 1.01878,5.06928 0.79472,6.89574 -0.46904,3.82309 -3.07509,7.60889 -6.48471,9.42031 -0.51071,0.27132 -1.10781,0.62201 -1.32689,0.7793 -1.28176,0.92026 -3.99222,1.08281 -9.3957,0.5635 -4.226,-0.40615 -43.09412,-0.56404 -48.28608,-0.19612 -3.36622,0.23852 -9.71584,0.13599 -14.17646,-0.22893 -3.19042,-0.261 -11.4116,-2.46478 -14.96419,-4.01131 -0.53984,-0.23501 -1.10442,-0.42792 -1.25461,-0.42868 -0.43847,-0.002 -0.31926,0.66639 0.24899,1.3964 0.63886,0.82072 0.66215,1.46506 0.0825,2.28367 -0.41639,0.5881 -0.53812,0.60929 -2.4496,0.42635 -1.10627,-0.10587 -3.2008,-0.44095 -4.65448,-0.74463 -1.45369,-0.30368 -4.09201,-0.62284 -5.86295,-0.70924 -3.45491,-0.16856 -4.65649,0.0199 -8.93437,1.40162 -2.04956,0.66196 -2.15841,0.6695 -4.80352,0.33258 -1.68376,-0.21447 -5.04124,-0.32578 -8.88522,-0.29456 -6.04658,0.0491 -6.20383,0.0368 -7.34956,-0.57531 -1.32088,-0.70568 -2.86287,-0.66893 -5.04444,0.12022 -0.88229,0.31916 -2.15717,0.43295 -4.89707,0.43713 -4.79736,0.007 -5.58286,-0.16276 -6.13105,-1.32752 l -0.42264,-0.89802 -1.08755,0.85944 c -1.8674,1.47572 -2.94146,1.82323 -5.59703,1.81093 -1.313341,-0.006 -3.557388,-0.23736 -4.986775,-0.51393 -2.027573,-0.39234 -2.694777,-0.43476 -3.0351,-0.19299 -1.426504,1.01339 -5.2004,1.21652 -9.369876,0.50433 -2.342079,-0.40006 -4.350291,-0.35925 -10.118619,0.20564 -2.370926,0.23218 -2.390138,0.22923 -3.965706,-0.60953 l -1.583238,-0.84286 -4.76258,0.004 c -3.320233,0.003 -5.333694,0.12924 -6.648373,0.41833 -2.953758,0.64954 -5.182097,0.79482 -6.349714,0.41398 -1.394469,-0.45482 -2.213474,-1.26097 -2.208834,-2.17419 0.0021,-0.41118 -0.106632,-0.74818 -0.241605,-0.74887 -0.13497,-6.8e-4 -1.238115,0.35414 -2.451433,0.7885 -7.896638,2.82691 -18.009765,3.78342 -31.365341,2.96657 -7.1026623,-0.43441 -10.2556485,-0.47172 -22.841675,-0.27026 -5.166476,0.0827 -13.263451,0.2047 -17.993277,0.27111 -4.729825,0.0664 -9.671447,0.15763 -10.98138,0.20269 -1.516176,0.0522 -2.861762,-0.0553 -3.702712,-0.29577 z"/>
+      </g>
+    </svg>
+  </div>
+</header>
+
+<!-- ============ BREADCRUMB ============ -->
+<div class="breadcrumb">
+  Sanctum <span>❋</span> Practice <span>❋</span> Projects <span>❋</span> 2019 — 2025
+</div>
+
+<!-- ============ INTRO ============ -->
+<section class="intro">
+  <div class="intro-side">
+    <div>Catalogue</div>
+    <div>2019 / 2025</div>
+    <div>9 Works</div>
+    <div>4 Locations</div>
+  </div>
+  <div class="intro-main">
+    <h2>Stone, Lime, Pigment, Plan</h2>
+    <p>Selected commissions from the Workshop's eleven-year practice — civic mandapas, restored chettiar houses, libraries laid out as concentric prakara, and exhibition design that returns Nayak vocabulary to the gallery wall. Each project below records the year of completion, the seat of the work, the commissioning party, and a short note on the architectural argument.</p>
+    <p>Works are arranged in reverse chronology of completion. Two are presently on the drawing board; one closes this year.</p>
+  </div>
+  <div class="intro-side right">
+    <div>Granite · Lime</div>
+    <div>Teak · Brass</div>
+    <div>Vermilion · Indigo</div>
+    <div>Gold-leaf</div>
+  </div>
+</section>
+
+<!-- ============ DIVIDER ============ -->
+<div class="palmette-divider" aria-hidden="true">
+  <svg viewBox="0 0 1000 60" xmlns="http://www.w3.org/2000/svg">
+    <line x1="0" y1="20" x2="1000" y2="20" stroke="#c9a23a" stroke-width="2"/>
+    <line x1="0" y1="40" x2="1000" y2="40" stroke="#e34234" stroke-width="1"/>
+    <g fill="#c9a23a">
+      <circle cx="500" cy="30" r="6"/>
+      <circle cx="470" cy="30" r="3"/>
+      <circle cx="530" cy="30" r="3"/>
+      <circle cx="440" cy="30" r="2"/>
+      <circle cx="560" cy="30" r="2"/>
+    </g>
+    <path d="M 480 30 Q 500 5 520 30 Q 500 55 480 30 Z" fill="#e34234"/>
+  </svg>
+</div>
+
+<!-- ============ PROJECT GRID ============ -->
+<section class="grid-wrap">
+  <h2 class="section-label">Nine Built &amp; Ongoing Works</h2>
+
+  <div class="project-grid">
+
+    <!-- 01 -->
+    <article class="project-card">
+      <span class="kalasha"><span class="ring"></span></span>
+      <span class="pillar-cap tl"></span><span class="pillar-cap tr"></span>
+      <span class="pillar-cap bl"></span><span class="pillar-cap br"></span>
+      <div class="project-index">PROJECT — 01</div>
+      <h3>Tiruchendur Visitor Pavilion</h3>
+      <dl class="project-meta">
+        <dt>Year</dt><dd>2023</dd>
+        <dt>Place</dt><dd>Tiruchendur, Tamil Nadu</dd>
+        <dt>Client</dt><dd>Tamil Nadu Tourism Development Corporation</dd>
+        <dt>Scale</dt><dd>1,180 sq.m, ₹3.4 Cr</dd>
+      </dl>
+      <p>A forty-metre granite mandapa receiving pilgrims at the seaward approach to the Murugan temple. Twelve yali-base columns carry a flat lime-and-shellac ceiling; a kolam-incised plinth marks the line between footwear and bare foot. Built with stonework from Kanchipuram and Mamallapuram ateliers.</p>
+      <div class="status">★ Completed</div>
+    </article>
+
+    <!-- 02 -->
+    <article class="project-card">
+      <span class="kalasha"><span class="ring"></span></span>
+      <span class="pillar-cap tl"></span><span class="pillar-cap tr"></span>
+      <span class="pillar-cap bl"></span><span class="pillar-cap br"></span>
+      <div class="project-index">PROJECT — 02</div>
+      <h3>Vermilion &amp; Gold — Exhibition Design</h3>
+      <dl class="project-meta">
+        <dt>Year</dt><dd>2022</dd>
+        <dt>Place</dt><dd>Kala Bhavan, Chennai</dd>
+        <dt>Client</dt><dd>Tamil Nadu Department of Art &amp; Culture</dd>
+        <dt>Scale</dt><dd>620 sq.m, four halls</dd>
+      </dl>
+      <p>A 14-week exhibition on Nayak-period painted ceilings. The plan unfolded as a miniature temple: outer prakara of object-cases, inner mandapa of lit panels, garbha-griha of a single restored ceiling fragment. Walls finished in unpolished red-oxide; cases trimmed in beaten brass.</p>
+      <div class="status">★ Completed</div>
+    </article>
+
+    <!-- 03 -->
+    <article class="project-card">
+      <span class="kalasha"><span class="ring"></span></span>
+      <span class="pillar-cap tl"></span><span class="pillar-cap tr"></span>
+      <span class="pillar-cap bl"></span><span class="pillar-cap br"></span>
+      <div class="project-index">PROJECT — 03</div>
+      <h3>Chettinad House Revival</h3>
+      <dl class="project-meta">
+        <dt>Year</dt><dd>2021</dd>
+        <dt>Place</dt><dd>Karaikudi, Sivaganga district</dd>
+        <dt>Client</dt><dd>Private — Meenakshi &amp; R. Alagappan</dd>
+        <dt>Scale</dt><dd>2,400 sq.m residence</dd>
+      </dl>
+      <p>A century-old Chettiar mansion brought back from collapse: Athangudi tile floors relaid by the original family of makers, Burma-teak columns scarfed and re-pegged, and the rear thinnai opened as a reading court. The work strictly avoided new structural intervention behind the street façade.</p>
+      <div class="status">★ Completed</div>
+    </article>
+
+    <!-- 04 -->
+    <article class="project-card">
+      <span class="kalasha"><span class="ring"></span></span>
+      <span class="pillar-cap tl"></span><span class="pillar-cap tr"></span>
+      <span class="pillar-cap bl"></span><span class="pillar-cap br"></span>
+      <div class="project-index">PROJECT — 04</div>
+      <h3>Sangam Library</h3>
+      <dl class="project-meta">
+        <dt>Year</dt><dd>2019</dd>
+        <dt>Place</dt><dd>West Masi Street, Madurai</dd>
+        <dt>Client</dt><dd>Madurai District Literary Trust</dd>
+        <dt>Scale</dt><dd>1,800 sq.m on three floors</dd>
+      </dl>
+      <p>A reading house on the temple's outer street, planned in three concentric prakara: the periphery for periodicals and children, a middle ring for the Tamil canon, and a central rotunda holding palm-leaf and early printed manuscripts. A high clerestory in carved teak admits indirect north light to the manuscript core.</p>
+      <div class="status">★ Completed</div>
+    </article>
+
+    <!-- 05 -->
+    <article class="project-card">
+      <span class="kalasha"><span class="ring"></span></span>
+      <span class="pillar-cap tl"></span><span class="pillar-cap tr"></span>
+      <span class="pillar-cap bl"></span><span class="pillar-cap br"></span>
+      <div class="project-index">PROJECT — 05</div>
+      <h3>Brindavan Temple Garden</h3>
+      <dl class="project-meta">
+        <dt>Year</dt><dd>2025 (in progress)</dd>
+        <dt>Place</dt><dd>Outskirts of Mysore, Karnataka</dd>
+        <dt>Client</dt><dd>Sri Brindavan Seva Samiti</dd>
+        <dt>Scale</dt><dd>3.6 ha walled garden</dd>
+      </dl>
+      <p>A walled landscape framing a small Krishna shrine: nine quadrants laid on a tank-and-channel kolam, planted with tulasi, parijata and red hibiscus. The compound wall is built in laterite with a granite coping; gopuram-form gateway on the eastern axis is presently under stonecutting.</p>
+      <div class="status">⟡ Site work, May 2025</div>
+    </article>
+
+    <!-- 06 -->
+    <article class="project-card">
+      <span class="kalasha"><span class="ring"></span></span>
+      <span class="pillar-cap tl"></span><span class="pillar-cap tr"></span>
+      <span class="pillar-cap bl"></span><span class="pillar-cap br"></span>
+      <div class="project-index">PROJECT — 06</div>
+      <h3>Aazhi Mandapa, Rameswaram</h3>
+      <dl class="project-meta">
+        <dt>Year</dt><dd>2024</dd>
+        <dt>Place</dt><dd>Agni Theertham foreshore</dd>
+        <dt>Client</dt><dd>Hindu Religious &amp; Charitable Endowments Dept.</dd>
+        <dt>Scale</dt><dd>320 sq.m open hall</dd>
+      </dl>
+      <p>An ablution mandapa on the eastern beach, set on a stepped granite plinth that takes the morning tide. Six pillars in black charnockite, lotus-bracketed; salt-resistant lime plaster developed with the Tamil Nadu Building Centre. Used by some 4,000 pilgrims daily during the Aadi season.</p>
+      <div class="status">★ Completed</div>
+    </article>
+
+    <!-- 07 -->
+    <article class="project-card">
+      <span class="kalasha"><span class="ring"></span></span>
+      <span class="pillar-cap tl"></span><span class="pillar-cap tr"></span>
+      <span class="pillar-cap bl"></span><span class="pillar-cap br"></span>
+      <div class="project-index">PROJECT — 07</div>
+      <h3>Kolam — Small-Press Imprint</h3>
+      <dl class="project-meta">
+        <dt>Year</dt><dd>2020</dd>
+        <dt>Place</dt><dd>Madurai &amp; Pondicherry</dd>
+        <dt>Client</dt><dd>Cre-A: Publishers, Chennai</dd>
+        <dt>Scale</dt><dd>14-title imprint, ongoing</dd>
+      </dl>
+      <p>The Workshop's print arm: a fourteen-title series on temple craft, set in metal Tamil and Latin types and printed letterpress in Sivakasi. Bindings in marbled paper from Auroville; covers blocked in vermilion and gold-leaf to reference the Nayak ceiling palette.</p>
+      <div class="status">★ Five titles in print</div>
+    </article>
+
+    <!-- 08 -->
+    <article class="project-card">
+      <span class="kalasha"><span class="ring"></span></span>
+      <span class="pillar-cap tl"></span><span class="pillar-cap tr"></span>
+      <span class="pillar-cap bl"></span><span class="pillar-cap br"></span>
+      <div class="project-index">PROJECT — 08</div>
+      <h3>Srivilliputhur School Wing</h3>
+      <dl class="project-meta">
+        <dt>Year</dt><dd>2022</dd>
+        <dt>Place</dt><dd>Srivilliputhur, Virudhunagar</dd>
+        <dt>Client</dt><dd>Andal Memorial Higher Secondary School</dd>
+        <dt>Scale</dt><dd>14 classrooms, 1,950 sq.m</dd>
+      </dl>
+      <p>A new wing for an existing 1962 campus, set behind a colonnaded verandah on the model of the temple's outer mandapa. Classrooms are paired across a shaded central court; roofs in country-tile over teak rafters, clear-storey ventilation drawn from temple section drawings.</p>
+      <div class="status">★ Completed</div>
+    </article>
+
+    <!-- 09 -->
+    <article class="project-card">
+      <span class="kalasha"><span class="ring"></span></span>
+      <span class="pillar-cap tl"></span><span class="pillar-cap tr"></span>
+      <span class="pillar-cap bl"></span><span class="pillar-cap br"></span>
+      <div class="project-index">PROJECT — 09</div>
+      <h3>Thanjavur Bronze Atelier</h3>
+      <dl class="project-meta">
+        <dt>Year</dt><dd>2024 (closing 2025)</dd>
+        <dt>Place</dt><dd>Swamimalai road, Thanjavur</dd>
+        <dt>Client</dt><dd>Sthapati family of Sri Devasenapathy</dd>
+        <dt>Scale</dt><dd>540 sq.m foundry &amp; museum</dd>
+      </dl>
+      <p>A working bronze foundry for a sixth-generation icon-casting family, with a small public gallery showing the lost-wax sequence step by step. The plan separates the wax-room from the casting yard with a thick laterite wall pierced by a single ornamented opening — a working version of an antarala.</p>
+      <div class="status">⟡ Closing November 2025</div>
+    </article>
+
+  </div>
+
+  <!-- ============ INDEX TABLE ============ -->
+  <div class="index-strip">
+    <h2>Index of Works</h2>
+    <table class="index-table">
+      <thead>
+        <tr>
+          <th>Year</th>
+          <th>Title</th>
+          <th>Location</th>
+          <th>Client</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="year">2025</td><td class="title">Brindavan Temple Garden</td><td>Mysore, Karnataka</td><td>Sri Brindavan Seva Samiti</td><td>In progress</td></tr>
+        <tr><td class="year">2024</td><td class="title">Thanjavur Bronze Atelier</td><td>Thanjavur, Tamil Nadu</td><td>Devasenapathy Sthapati family</td><td>Closing 2025</td></tr>
+        <tr><td class="year">2024</td><td class="title">Aazhi Mandapa</td><td>Rameswaram, Tamil Nadu</td><td>HR &amp; CE Department</td><td>Completed</td></tr>
+        <tr><td class="year">2023</td><td class="title">Tiruchendur Visitor Pavilion</td><td>Tiruchendur, Tamil Nadu</td><td>Tamil Nadu Tourism</td><td>Completed</td></tr>
+        <tr><td class="year">2022</td><td class="title">Vermilion &amp; Gold — exhibition</td><td>Kala Bhavan, Chennai</td><td>TN Art &amp; Culture Dept.</td><td>Completed</td></tr>
+        <tr><td class="year">2022</td><td class="title">Srivilliputhur School Wing</td><td>Virudhunagar, Tamil Nadu</td><td>Andal Memorial HSS</td><td>Completed</td></tr>
+        <tr><td class="year">2021</td><td class="title">Chettinad House Revival</td><td>Karaikudi, Sivaganga</td><td>Private</td><td>Completed</td></tr>
+        <tr><td class="year">2020</td><td class="title">Kolam — small-press imprint</td><td>Madurai &amp; Pondicherry</td><td>Cre-A: Publishers</td><td>Ongoing</td></tr>
+        <tr><td class="year">2019</td><td class="title">Sangam Library</td><td>Madurai, Tamil Nadu</td><td>Madurai District Literary Trust</td><td>Completed</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ ENQUIRY ============ -->
+<section class="enquiry">
+  <h2>To Commission a Work</h2>
+  <p>The Workshop accepts a small number of new commissions each year — chiefly civic, devotional, and cultural projects in Tamil Nadu and the southern states. Initial enquiries should describe site, programme, and the patron body, and may be directed to the Madurai studio.</p>
+  <a class="cta" href="page-6.html">Visit the Studio →</a>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="arcade">
+  <div class="arcade-pillars" aria-hidden="true">
+    <div class="arcade-pillar"></div>
+    <div class="arcade-pillar"></div>
+    <div class="arcade-pillar"></div>
+    <div class="arcade-pillar"></div>
+    <div class="arcade-pillar"></div>
+    <div class="arcade-pillar"></div>
+    <div class="arcade-pillar"></div>
+  </div>
+  <div class="kolam">
+    <div class="kolam-mandala">
+      <div class="kolam-inner">
+        <strong>STHAPATI WORKSHOP</strong>
+        37 / 4 East Veli Street<br>
+        Madurai 625 001<br>
+        Tamil Nadu, India<br>
+        +91 452 2347 109
+      </div>
+    </div>
+  </div>
+  <div class="footer-rule"></div>
+  <div class="footer-line">
+    © 2014 — 2025 Sthapati Workshop LLP &nbsp; · &nbsp; GSTIN 33AAFCS7821K1ZP &nbsp;
+    <span class="tamil">கல்லும் சொல்லும் — of stone &amp; speech</span>
+  </div>
+</footer>
+
+</body>
+</html>

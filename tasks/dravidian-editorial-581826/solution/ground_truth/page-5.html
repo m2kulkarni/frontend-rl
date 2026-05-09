@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Archive — A Folio from the Mackenzie Collection · The Prakara Quarterly</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  /* ===========================
+     PAGE-5 :: ARCHIVE FOLIO
+     Stratified gopuram tiers
+     =========================== */
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  a { color: var(--secondary); text-decoration: none; }
+  a:hover { color: var(--primary); }
+
+  /* ---------- Tier banding ---------- */
+  .tier {
+    border-top: 3px double var(--primary);
+    border-bottom: 3px double var(--primary);
+    position: relative;
+  }
+  .tier + .tier { margin-top: 0; }
+
+  .double-rule {
+    height: 6px;
+    background:
+      linear-gradient(to bottom,
+        var(--primary) 0,
+        var(--primary) 1px,
+        transparent 1px,
+        transparent 2px,
+        var(--accent) 2px,
+        var(--accent) 4px,
+        transparent 4px,
+        transparent 5px,
+        var(--primary) 5px,
+        var(--primary) 6px);
+  }
+
+  /* ---------- Masthead banner ---------- */
+  .masthead {
+    background: var(--surface);
+    padding: 14px 40px 10px;
+    display: grid;
+    grid-template-columns: 120px 1fr 220px;
+    align-items: center;
+  }
+  .masthead .om-seal {
+    width: 56px; height: 56px;
+    display: block;
+  }
+  .masthead .om-seal svg { width: 100%; height: 100%; }
+  .masthead h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 600;
+    font-size: 28px;
+    letter-spacing: 0.42em;
+    text-align: center;
+    margin: 0;
+    color: var(--text);
+    text-transform: uppercase;
+  }
+  .masthead h1 .amp {
+    color: var(--primary);
+    margin: 0 0.3em;
+  }
+  .masthead .issue-meta {
+    text-align: right;
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    line-height: 1.7;
+  }
+  .masthead .issue-meta .accent { color: var(--accent); }
+
+  /* ---------- Navigation strip ---------- */
+  nav.primary {
+    background: var(--secondary);
+    padding: 14px 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    flex-wrap: nowrap;
+  }
+  nav.primary a {
+    font-family: var(--font-display), serif;
+    color: var(--surface);
+    font-size: 11.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    white-space: nowrap;
+  }
+  nav.primary a[aria-current="page"] {
+    color: var(--accent);
+    border-bottom: 1px solid var(--accent);
+  }
+  nav.primary a:hover { color: var(--accent); }
+  nav.primary .lotus-glyph {
+    color: var(--accent);
+    font-size: 10px;
+    opacity: 0.85;
+  }
+
+  /* ---------- Hero / title tier ---------- */
+  .archive-head {
+    background: var(--bg);
+    padding: 36px 60px 28px;
+    text-align: center;
+    position: relative;
+  }
+  .archive-head .kicker {
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    margin: 0 0 14px;
+  }
+  .archive-head .kicker .accent { color: var(--accent); }
+  .archive-head h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 600;
+    font-size: 38px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin: 0 auto 16px;
+    max-width: 900px;
+    line-height: 1.25;
+  }
+  .archive-head h2 .swash { color: var(--primary); }
+  .archive-head .deck {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--text);
+    max-width: 760px;
+    margin: 0 auto 18px;
+  }
+  .archive-head .byline {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--text-emphasis);
+    letter-spacing: 0.04em;
+  }
+
+  /* peacock frieze */
+  .peacock-frieze {
+    width: 100%;
+    height: 38px;
+    margin: 18px auto 0;
+    display: block;
+    opacity: 0.85;
+  }
+  .peacock-frieze svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* ---------- Folio plate tier ---------- */
+  .folio-tier {
+    background: var(--surface);
+    padding: 40px 60px;
+  }
+  .folio-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 40px;
+    max-width: 1240px;
+    margin: 0 auto;
+    align-items: start;
+  }
+
+  /* Pillared frame */
+  .pillared {
+    position: relative;
+    padding: 28px 56px;
+    background: var(--surface);
+  }
+  .pillared::before, .pillared::after {
+    content: "";
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 38px;
+    background:
+      /* capital steps top */
+      linear-gradient(var(--surface), var(--surface)) 0 0/100% 8px no-repeat,
+      linear-gradient(var(--primary), var(--primary)) 0 0/100% 2px no-repeat,
+      linear-gradient(var(--surface), var(--surface)) 0 10px/100% 4px no-repeat,
+      linear-gradient(var(--primary), var(--primary)) 4px 14px/calc(100% - 8px) 2px no-repeat,
+      linear-gradient(var(--surface), var(--surface)) 0 16px/100% 4px no-repeat,
+      linear-gradient(var(--primary), var(--primary)) 8px 20px/calc(100% - 16px) 2px no-repeat,
+      /* shaft */
+      linear-gradient(to right,
+        transparent 0, transparent 17px,
+        var(--primary) 17px, var(--primary) 19px,
+        transparent 19px, transparent 21px,
+        var(--primary) 21px, var(--primary) 23px,
+        transparent 23px) 0 0/100% 100% no-repeat,
+      /* base block bottom */
+      linear-gradient(var(--primary), var(--primary)) 0 calc(100% - 22px)/100% 2px no-repeat,
+      linear-gradient(var(--primary), var(--primary)) 4px calc(100% - 14px)/calc(100% - 8px) 2px no-repeat,
+      linear-gradient(var(--primary), var(--primary)) 0 calc(100% - 4px)/100% 2px no-repeat;
+  }
+  .pillared::before { left: 0; }
+  .pillared::after { right: 0; transform: scaleX(-1); }
+
+  /* CSS-drawn pillar (cleaner approach) */
+  .pillar {
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 32px;
+    pointer-events: none;
+  }
+  .pillar.left { left: 8px; }
+  .pillar.right { right: 8px; }
+  .pillar .capital {
+    height: 22px;
+    background:
+      linear-gradient(var(--primary), var(--primary)) 0 0/100% 2px no-repeat,
+      linear-gradient(var(--primary), var(--primary)) 3px 6px/calc(100% - 6px) 2px no-repeat,
+      linear-gradient(var(--primary), var(--primary)) 6px 12px/calc(100% - 12px) 2px no-repeat,
+      linear-gradient(var(--primary), var(--primary)) 9px 18px/calc(100% - 18px) 2px no-repeat;
+  }
+  .pillar .shaft {
+    height: calc(100% - 44px);
+    background:
+      linear-gradient(to right,
+        transparent 11px,
+        var(--primary) 11px, var(--primary) 12px,
+        transparent 12px, transparent 15px,
+        var(--accent) 15px, var(--accent) 17px,
+        transparent 17px, transparent 20px,
+        var(--primary) 20px, var(--primary) 21px,
+        transparent 21px);
+  }
+  .pillar .base {
+    height: 22px;
+    background:
+      linear-gradient(var(--primary), var(--primary)) 9px 0/calc(100% - 18px) 2px no-repeat,
+      linear-gradient(var(--primary), var(--primary)) 6px 6px/calc(100% - 12px) 2px no-repeat,
+      linear-gradient(var(--primary), var(--primary)) 3px 12px/calc(100% - 6px) 2px no-repeat,
+      linear-gradient(var(--primary), var(--primary)) 0 18px/100% 4px no-repeat;
+  }
+
+  /* override: kill the pseudo-element columns, use real .pillar */
+  .pillared::before, .pillared::after { display: none; }
+
+  /* ---------- The plate (ink-line drawing of stone chariot) ---------- */
+  .plate-frame {
+    border: 1px solid var(--text-emphasis);
+    background: #fbf6ec;
+    padding: 18px;
+    position: relative;
+  }
+  .plate-frame::before {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border: 1px solid var(--accent);
+    pointer-events: none;
+  }
+  .plate-caption {
+    margin-top: 16px;
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--text);
+    text-align: center;
+    line-height: 1.5;
+  }
+  .plate-caption strong {
+    font-family: var(--font-display), serif;
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .chariot-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* ---------- Editorial column ---------- */
+  .editorial h3 {
+    font-family: var(--font-display), serif;
+    font-size: 16px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    margin: 0 0 6px;
+    font-weight: 600;
+  }
+  .editorial .dek-rule {
+    height: 2px;
+    background: var(--accent);
+    width: 64px;
+    margin: 10px 0 16px;
+  }
+  .editorial p {
+    margin: 0 0 14px;
+    font-size: 15px;
+    text-align: justify;
+    hyphens: auto;
+  }
+  .editorial p:first-of-type::first-letter {
+    font-family: var(--font-display), serif;
+    float: left;
+    font-size: 54px;
+    line-height: 0.9;
+    padding: 4px 8px 0 0;
+    color: var(--primary);
+    font-weight: 600;
+  }
+  .editorial .pull {
+    border-left: 3px double var(--primary);
+    padding: 6px 0 6px 16px;
+    margin: 18px 0;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--text-emphasis);
+    line-height: 1.45;
+  }
+  .editorial .signoff {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--text-emphasis);
+    margin-top: 16px;
+    text-align: right;
+  }
+
+  /* ---------- Manuscript transcription tier ---------- */
+  .transcript-tier {
+    background: var(--bg);
+    padding: 40px 60px;
+  }
+  .transcript-grid {
+    max-width: 1240px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 200px 1fr 200px;
+    gap: 32px;
+    align-items: start;
+  }
+  .tier-label {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    text-align: center;
+    padding-top: 30px;
+  }
+  .tier-label .lotus-mini {
+    display: block;
+    width: 26px;
+    height: 26px;
+    margin: 10px auto;
+    color: var(--primary);
+  }
+  .tier-label .shelfmark {
+    display: block;
+    margin-top: 14px;
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 12px;
+    letter-spacing: 0.02em;
+    text-transform: none;
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  .transcript {
+    background: var(--surface);
+    padding: 30px 38px;
+    border: 1px solid var(--primary);
+    position: relative;
+  }
+  .transcript::before, .transcript::after {
+    content: "";
+    position: absolute;
+    left: 4px; right: 4px;
+    height: 2px;
+    background: var(--accent);
+  }
+  .transcript::before { top: 4px; }
+  .transcript::after { bottom: 4px; }
+
+  .transcript h4 {
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    margin: 0 0 4px;
+    color: var(--text);
+    font-weight: 600;
+  }
+  .transcript .source-line {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 12px;
+    color: var(--text-emphasis);
+    margin-bottom: 18px;
+  }
+  .transcript .ms-text {
+    font-family: var(--font-body), serif;
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: var(--text);
+    column-count: 2;
+    column-gap: 32px;
+    column-rule: 1px solid var(--accent);
+  }
+  .transcript .ms-text p { margin: 0 0 12px; }
+  .transcript .ms-text sup {
+    color: var(--primary);
+    font-weight: 600;
+    font-family: var(--font-display), serif;
+  }
+  .transcript .ms-text em.placename {
+    font-style: italic;
+    color: var(--text-emphasis);
+  }
+
+  /* ---------- Sidebar: Draughtsmen ---------- */
+  .draughtsmen-tier {
+    background: var(--surface);
+    padding: 40px 60px;
+  }
+  .draughtsmen-grid {
+    max-width: 1240px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  .draught-card {
+    background: var(--surface);
+    border-top: 4px double var(--primary);
+    border-bottom: 4px double var(--primary);
+    padding: 22px 26px 26px;
+    position: relative;
+  }
+  .draught-card .panel-rule {
+    height: 2px;
+    background: var(--accent);
+    margin: 10px 0 16px;
+    width: 50%;
+  }
+  .draught-card h4 {
+    font-family: var(--font-display), serif;
+    font-size: 15px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin: 0;
+    color: var(--text);
+    font-weight: 600;
+  }
+  .draught-card .role-line {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--text-emphasis);
+    margin: 4px 0 0;
+  }
+  .draught-card p {
+    font-size: 14px;
+    margin: 0 0 10px;
+    text-align: justify;
+    hyphens: auto;
+  }
+  .draught-card .read-more {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--primary);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .draught-card .read-more .lotus-mini {
+    width: 14px; height: 14px; display: inline-block;
+  }
+
+  /* ---------- Footnotes tier ---------- */
+  .footnotes-tier {
+    background: var(--bg);
+    padding: 36px 60px 44px;
+  }
+  .footnotes-wrap {
+    max-width: 1240px;
+    margin: 0 auto;
+    background: var(--surface);
+    padding: 30px 44px;
+    border: 1px solid var(--primary);
+  }
+  .footnotes-wrap h3 {
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    margin: 0 0 6px;
+    text-align: center;
+    font-weight: 600;
+  }
+  .footnotes-wrap .accent-rule {
+    height: 1px;
+    background: var(--accent);
+    width: 80px;
+    margin: 0 auto 20px;
+  }
+  .footnotes-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    columns: 2;
+    column-gap: 40px;
+    font-size: 13px;
+    line-height: 1.55;
+  }
+  .footnotes-list li {
+    break-inside: avoid;
+    margin-bottom: 12px;
+    padding-left: 28px;
+    position: relative;
+    text-align: justify;
+  }
+  .footnotes-list li .num {
+    position: absolute;
+    left: 0; top: 0;
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 12px;
+  }
+  .footnotes-list li em { color: var(--text-emphasis); }
+
+  /* ---------- Cross-archive related ---------- */
+  .related-tier {
+    background: var(--surface);
+    padding: 36px 60px;
+    text-align: center;
+  }
+  .related-tier h3 {
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    margin: 0 0 6px;
+    font-weight: 600;
+  }
+  .related-tier .accent-rule {
+    width: 80px;
+    height: 1px;
+    background: var(--accent);
+    margin: 6px auto 22px;
+  }
+  .related-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+  .related-grid a {
+    display: block;
+    padding: 14px 16px;
+    border: 1px solid var(--primary);
+    background: var(--surface);
+    color: var(--text);
+    text-align: left;
+  }
+  .related-grid a:hover { background: #fbeee0; }
+  .related-grid .vol {
+    font-family: var(--font-display), serif;
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--primary);
+  }
+  .related-grid .ttl {
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 6px;
+    line-height: 1.4;
+  }
+  .related-grid .auth {
+    font-style: italic;
+    font-size: 12px;
+    color: var(--text-emphasis);
+    margin-top: 6px;
+  }
+
+  /* ---------- Footer / pillared arcade ---------- */
+  footer.arcade {
+    background: var(--secondary);
+    color: var(--surface);
+    padding: 0;
+    margin-top: 0;
+  }
+  .arcade-frieze {
+    height: 16px;
+    background:
+      linear-gradient(var(--primary), var(--primary)) 0 0/100% 2px no-repeat,
+      linear-gradient(var(--accent), var(--accent)) 0 4px/100% 1px no-repeat,
+      linear-gradient(var(--accent), var(--accent)) 0 11px/100% 1px no-repeat,
+      linear-gradient(var(--primary), var(--primary)) 0 14px/100% 2px no-repeat,
+      var(--secondary);
+  }
+  .arcade-row {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0;
+    padding: 30px 40px 24px;
+    position: relative;
+  }
+  .arch-bay {
+    position: relative;
+    padding: 18px 8px 26px;
+    text-align: center;
+    border-left: 1px solid rgba(227,66,52,0.55);
+  }
+  .arch-bay:first-child { border-left: none; }
+  .arch-bay::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 12%; right: 12%;
+    height: 32px;
+    border: 1.5px solid var(--primary);
+    border-bottom: none;
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  }
+  .rosette {
+    width: 56px;
+    height: 56px;
+    margin: 26px auto 0;
+    position: relative;
+  }
+  .rosette .sq {
+    position: absolute;
+    inset: 0;
+    border: 1px solid var(--accent);
+    transform: rotate(45deg);
+  }
+  .rosette .sq.s2 { inset: 8px; border-color: var(--surface); opacity: 0.7; }
+  .rosette .sq.s3 { inset: 16px; border-color: var(--accent); }
+  .rosette .sq.s4 { inset: 22px; border-color: var(--primary); transform: rotate(0deg); }
+  .rosette .dot {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .arch-bay.center { padding: 0; border-left: none; }
+  .arch-bay.center::before { display: none; }
+  .seal {
+    width: 130px;
+    height: 130px;
+    margin: 0 auto;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 3px double var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .seal::before {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border: 1px solid var(--primary);
+    border-radius: 50%;
+  }
+  .seal svg { width: 70px; height: 70px; }
+
+  .footer-meta {
+    background: var(--secondary);
+    color: var(--surface);
+    text-align: center;
+    padding: 22px 40px 8px;
+    font-family: var(--font-body), serif;
+  }
+  .footer-meta .editorial-addr {
+    font-style: italic;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    margin: 0 0 8px;
+  }
+  .footer-meta .footer-mast {
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    margin: 12px 0 6px;
+    color: var(--surface);
+  }
+  .footer-meta .footer-mast .accent { color: var(--accent); }
+  .footer-meta .colophon {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-family: var(--font-display), serif;
+    color: var(--accent);
+    margin: 4px 0 18px;
+  }
+
+  /* lotus glyph helper */
+  .lotus-mini { display: inline-block; vertical-align: middle; }
+
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     TIER 1  ::  MASTHEAD BANNER
+     ============================================================ -->
+<header class="tier">
+  <div class="masthead">
+    <div class="om-seal" aria-hidden="true">
+      <!-- Om seal in vermilion -->
+      <svg viewBox="0 0 356 367" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="178" cy="183" r="172" fill="none" stroke="#e34234" stroke-width="3"/>
+        <circle cx="178" cy="183" r="160" fill="none" stroke="#c9a23a" stroke-width="1"/>
+        <g transform="translate(0,0)">
+          <path d="M 90.456847,353.9498 C 51.797347,340.13485 23.72672,305.75839 12.612487,258.6184 C 7.5684267,237.22321 6.1421397,201.86984 10.323594,201.86984 C 11.712834,201.86984 15.42322,211.57056 18.568972,223.427 C 25.452892,249.37152 37.19436,273.76855 48.535988,285.69407 C 67.374717,305.50242 114.0356,313.26029 140.92106,301.05394 C 161.86409,291.54544 170.35697,268.94603 161.24995,246.95931 C 154.21242,229.96943 138.24701,224.28836 108.50834,228.19197 C 108.50834,228.19197 90.282834,208.57398 84.476417,173.73548 L 103.15738,175.42939 C 125.65731,177.46962 142.64532,172.49605 151.46236,161.28728 C 159.74765,150.75419 159.5685,146.68046 150.34841,135.96157 C 137.04396,120.49428 113.15511,124.41248 64.786577,149.99522 L 40.381632,109.08518 L 50.613137,101.2812 C 76.253387,81.724339 120.77357,71.947329 146.11011,80.309169 C 169.18841,87.925649 186.12724,118.14755 181.60247,143.63298 C 178.54327,160.86286 164.72752,184.99524 154.05369,191.75339 L 144.84862,197.58162 L 157.56351,203.31522 C 179.17018,213.05833 192.36061,205.61034 208.12001,174.76849 C 229.92949,132.0869 244.0745,121.0378 276.96658,120.99051 C 292.28176,120.96847 297.73268,122.57499 308.90312,130.4031 C 336.78213,149.94016 351.9622,190.39693 348.62804,236.27272 C 344.40474,294.37435 316.88374,329.61601 275.73415,329.61601 C 253.15086,329.61601 238.59451,321.69526 227.00729,303.10156 C 216.82976,286.76927 212.24334,254.42288 218.08805,240.19369 C 220.89208,233.36732 221.39892,233.13578 221.58223,238.59686 C 221.91916,248.63689 233.34159,264.95549 243.82827,270.37835 C 269.55794,283.68369 306.49479,266.96693 321.10832,235.4032 C 332.20339,211.4394 326.25105,165.21656 311.02084,157.06552 C 307.83453,155.36024 299.96089,153.96502 293.5244,153.96502 C 279.84214,153.96502 269.09709,163.80155 254.03263,190.11774 C 248.82442,199.21613 240.05943,210.97175 234.55486,216.24128 C 225.61134,224.80312 222.41769,225.82225 204.53067,225.82225 L 184.51412,225.82225 L 190.98415,240.19369 C 200.2451,260.76437 199.80694,294.18704 190.00976,314.53347 C 181.35272,332.51252 161.33618,350.71469 145.33374,355.16013 C 129.75572,359.4876 104.38789,358.9281 90.456847,353.9498 z M 165.8338,75.923739 C 156.97908,60.814399 151.52974,32.606158 157.46546,32.606158 C 164.43775,47.732319 178.73037,61.227101 194.03409,70.643259 C 221.52091,83.949329 249.39257,78.578529 279.84247,54.108239 C 286.54595,48.721279 292.48231,44.913138 293.0345,45.645698 C 300.4697,57.184233 313.331,66.613261 317.58219,80.021449 C 317.58219,85.678729 293.22867,101.96033 274.01214,109.15007 C 226.38264,122.8706 193.96598,117.44304 165.8338,75.923739 z M 189.83603,40.997228 L 220.84514,6.6137488 L 255.30593,38.514418 C 243.51876,48.222549 235.00994,63.289118 221.54391,70.930009 C 210.90372,63.086273 195.02308,53.837816 189.83603,40.997228 z" fill="#e34234"/>
+        </g>
+      </svg>
+    </div>
+    <h1>The Prakara <span class="amp">·</span> Quarterly</h1>
+    <div class="issue-meta">
+      Vol. <span class="accent">XII</span> &middot; No. 3<br>
+      Aippasi 1947 &middot; Madras<br>
+      <span class="accent">Price: Rs. 2 / 8 As.</span>
+    </div>
+  </div>
+  <div class="double-rule"></div>
+
+  <nav class="primary" aria-label="Primary">
+    <a href="page-1.html">Frontispiece</a>
+    <span class="lotus-glyph">❋</span>
+    <a href="page-2.html">Lead Essay</a>
+    <span class="lotus-glyph">❋</span>
+    <a href="page-3.html">Field Notes</a>
+    <span class="lotus-glyph">❋</span>
+    <a href="page-4.html">On the Craft</a>
+    <span class="lotus-glyph">❋</span>
+    <a href="page-5.html" aria-current="page">Archive</a>
+    <span class="lotus-glyph">❋</span>
+    <a href="page-6.html">Masthead &amp; Subscriptions</a>
+  </nav>
+</header>
+
+<!-- ============================================================
+     TIER 2  ::  ARCHIVE TITLE
+     ============================================================ -->
+<section class="tier archive-head" aria-labelledby="archive-title">
+  <p class="kicker">The Archive <span class="accent">·</span> Folio Five <span class="accent">·</span> Reprinted by Permission</p>
+  <h2 id="archive-title">A Folio from the <span class="swash">Mackenzie</span> Collection</h2>
+  <p class="deck">Colin Mackenzie's notes from the Vijayanagara survey of 1799, with the ink-line plate of the Vitthala temple's stone chariot — and a re-examination of the draughtsmen, those Telugu brothers Kistnaji and Lakshmaiah, by whose hand the British Empire saw what it claimed to see.</p>
+  <p class="byline">Edited &amp; introduced by P. Sundaresan, Madras Record Office, Egmore</p>
+
+  <!-- Twin peacocks frieze -->
+  <div class="peacock-frieze" aria-hidden="true">
+    <svg viewBox="0 0 313.71717 29.540759" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+      <g transform="translate(54.572101,-91.176475)" fill="#8b1538">
+        <path d="m -45.203647,120.20506 c -2.080683,-0.59494 -3.600099,-1.33764 -4.88273,-2.38671 -1.667517,-1.36388 -2.894118,-2.64027 -2.893812,-3.0113 1.42e-4,-0.17364 -0.209138,-0.47237 -0.46507,-0.66382 -0.819614,-0.61314 -1.16478,-1.84791 -1.123557,-4.01931 0.07527,-3.96496 0.841997,-6.28592 3.359706,-10.170217 2.091957,-3.227467 6.669369,-6.452883 10.647663,-7.502765 2.252562,-0.594453 8.248778,-0.796292 11.003264,-0.370372 6.94812,1.074354 16.152972,4.460234 20.6562963,7.598128 0.8536092,0.594796 0.7949964,0.623336 1.3291143,-0.64739 0.2251847,-0.535733 0.8814684,-1.603973 1.4584084,-2.373871 0.8561927,-1.142535 1.457933,-1.600664 3.2740672,-2.492638 2.16210793,-1.06191 4.5637653,-1.779237 6.7277099,-2.009456 0.5824052,-0.06194 1.3990594,-0.240975 1.8147895,-0.397805 0.7738562,-0.291942 6.4810504,-0.196925 10.0927814,0.168029 2.264542,0.228828 9.60899,1.67773 11.219571,2.21338 1.156599,0.384661 1.203738,0.376381 3.086684,-0.542345 2.528472,-1.2337 4.016657,-1.480542 8.446835,-1.401064 3.61374,0.06486 4.290154,0.147139 6.742793,0.820538 0.653941,0.179545 1.719761,0.375692 2.368485,0.435889 0.648729,0.0602 1.838242,0.282073 2.643363,0.493076 1.333488,0.349469 1.625289,0.339432 3.276461,-0.112735 4.298701,-1.177186 16.775093,-2.487486 20.247754,-2.126478 0.82522,0.08579 2.552867,0.408475 3.839215,0.717074 2.046471,0.490964 2.518569,0.521833 3.776859,0.246952 3.038874,-0.663879 6.75683,-1.061515 11.128253,-1.190178 4.134196,-0.121667 4.707691,-0.08259 6.380251,0.434721 1.364622,0.422078 2.105892,0.83929 2.879252,1.620559 1.29673,1.309975 1.63,2.709456 1.6237,6.818148 -0.005,2.95745 0.2393,4.45137 0.62566,3.83325 0.10807,-0.17288 0.17855,-1.23469 0.15662,-2.35957 -0.10151,-5.20664 0.0689,-6.026385 1.66799,-8.024476 0.85063,-1.062863 2.64553,-2.128587 4.10167,-2.435363 2.81819,-0.59374 15.88977,0.302112 18.8453,1.291541 0.69822,0.23375 1.33752,0.188118 3.17619,-0.226686 4.44974,-1.003866 5.16179,-1.08168 9.66723,-1.056509 4.01601,0.0224 5.00432,0.121426 8.5084,0.852608 6.84995,1.42927 7.19777,1.434197 12.43469,0.175947 1.28482,-0.308696 3.07339,-0.450501 5.82325,-0.46168 3.55974,-0.01452 4.14585,0.04906 5.68548,0.615953 0.94414,0.347651 2.11528,0.863208 2.60253,1.145677 0.82461,0.478046 0.98936,0.487693 2.38057,0.139336 1.77908,-0.445477 5.29646,-1.019874 9.8354,-1.606151 3.88998,-0.502463 11.70287,-0.5191 15.08161,-0.03212 5.86054,0.844676 9.86323,3.110261 10.57122,5.983455 l 0.28701,1.164733 3.35851,-1.630478 c 3.17793,-1.542804 8.22537,-3.484656 11.44251,-4.402193 4.71613,-1.345036 12.68145,-1.710913 16.9375,-0.778008 4.93058,1.080764 10.02057,5.551052 11.64065,10.223444 0.65092,1.87732 1.01878,5.06928 0.79472,6.89574 -0.46904,3.82309 -3.07509,7.60889 -6.48471,9.42031 z"/>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<div class="double-rule"></div>
+
+<!-- ============================================================
+     TIER 3  ::  THE PLATE + EDITORIAL COMMENTARY
+     ============================================================ -->
+<section class="tier folio-tier">
+  <div class="folio-grid">
+
+    <!-- LEFT: the plate, set in carved-pillar frame -->
+    <article class="pillared">
+      <span class="pillar left" aria-hidden="true">
+        <span class="capital"></span>
+        <span class="shaft"></span>
+        <span class="base"></span>
+      </span>
+      <span class="pillar right" aria-hidden="true">
+        <span class="capital"></span>
+        <span class="shaft"></span>
+        <span class="base"></span>
+      </span>
+
+      <figure class="plate-frame">
+        <svg class="chariot-svg" viewBox="0 0 540 380" xmlns="http://www.w3.org/2000/svg">
+          <!-- ground line -->
+          <line x1="20" y1="320" x2="520" y2="320" stroke="#1a1a1a" stroke-width="1"/>
+          <line x1="20" y1="324" x2="520" y2="324" stroke="#1a1a1a" stroke-width="0.5"/>
+
+          <!-- stone chariot platform / plinth -->
+          <rect x="100" y="240" width="340" height="80" fill="none" stroke="#1a1a1a" stroke-width="1.2"/>
+          <line x1="100" y1="252" x2="440" y2="252" stroke="#1a1a1a" stroke-width="0.5"/>
+          <line x1="100" y1="308" x2="440" y2="308" stroke="#1a1a1a" stroke-width="0.5"/>
+          <!-- plinth frieze panels -->
+          <g stroke="#1a1a1a" stroke-width="0.4" fill="none">
+            <rect x="110" y="258" width="32" height="44"/>
+            <rect x="146" y="258" width="32" height="44"/>
+            <rect x="182" y="258" width="32" height="44"/>
+            <rect x="218" y="258" width="32" height="44"/>
+            <rect x="254" y="258" width="32" height="44"/>
+            <rect x="290" y="258" width="32" height="44"/>
+            <rect x="326" y="258" width="32" height="44"/>
+            <rect x="362" y="258" width="32" height="44"/>
+            <rect x="398" y="258" width="32" height="44"/>
+            <!-- tiny figural marks inside panels -->
+            <circle cx="126" cy="280" r="6"/>
+            <circle cx="162" cy="280" r="6"/>
+            <circle cx="198" cy="280" r="6"/>
+            <circle cx="234" cy="280" r="6"/>
+            <circle cx="270" cy="280" r="6"/>
+            <circle cx="306" cy="280" r="6"/>
+            <circle cx="342" cy="280" r="6"/>
+            <circle cx="378" cy="280" r="6"/>
+            <circle cx="414" cy="280" r="6"/>
+          </g>
+
+          <!-- stone wheels (two visible) -->
+          <g stroke="#1a1a1a" stroke-width="1" fill="none">
+            <circle cx="160" cy="320" r="36"/>
+            <circle cx="160" cy="320" r="28"/>
+            <circle cx="160" cy="320" r="6"/>
+            <!-- spokes -->
+            <line x1="160" y1="284" x2="160" y2="356"/>
+            <line x1="124" y1="320" x2="196" y2="320"/>
+            <line x1="135" y1="295" x2="185" y2="345"/>
+            <line x1="135" y1="345" x2="185" y2="295"/>
+            <line x1="142" y1="288" x2="178" y2="352"/>
+            <line x1="142" y1="352" x2="178" y2="288"/>
+
+            <circle cx="380" cy="320" r="36"/>
+            <circle cx="380" cy="320" r="28"/>
+            <circle cx="380" cy="320" r="6"/>
+            <line x1="380" y1="284" x2="380" y2="356"/>
+            <line x1="344" y1="320" x2="416" y2="320"/>
+            <line x1="355" y1="295" x2="405" y2="345"/>
+            <line x1="355" y1="345" x2="405" y2="295"/>
+            <line x1="362" y1="288" x2="398" y2="352"/>
+            <line x1="362" y1="352" x2="398" y2="288"/>
+          </g>
+
+          <!-- shrine atop the chariot (stepped vimana-like) -->
+          <g stroke="#1a1a1a" stroke-width="1" fill="none">
+            <rect x="180" y="180" width="180" height="60"/>
+            <line x1="180" y1="195" x2="360" y2="195"/>
+            <line x1="180" y1="225" x2="360" y2="225"/>
+            <!-- columns of mini-niches -->
+            <rect x="194" y="200" width="20" height="22"/>
+            <rect x="222" y="200" width="20" height="22"/>
+            <rect x="250" y="200" width="20" height="22"/>
+            <rect x="278" y="200" width="20" height="22"/>
+            <rect x="306" y="200" width="20" height="22"/>
+            <rect x="334" y="200" width="20" height="22"/>
+            <!-- tier 2 -->
+            <path d="M 200 180 L 200 150 L 340 150 L 340 180"/>
+            <line x1="200" y1="160" x2="340" y2="160"/>
+            <rect x="216" y="162" width="14" height="16"/>
+            <rect x="240" y="162" width="14" height="16"/>
+            <rect x="264" y="162" width="14" height="16"/>
+            <rect x="288" y="162" width="14" height="16"/>
+            <rect x="312" y="162" width="14" height="16"/>
+            <!-- tier 3 -->
+            <path d="M 220 150 L 220 124 L 320 124 L 320 150"/>
+            <line x1="220" y1="134" x2="320" y2="134"/>
+            <!-- finial / kalasha -->
+            <path d="M 270 124 L 270 100 M 260 110 Q 270 96 280 110 M 270 100 L 270 90 M 264 90 L 276 90 M 268 88 L 272 88 M 270 88 L 270 78"/>
+            <circle cx="270" cy="80" r="3"/>
+          </g>
+
+          <!-- horses pulling chariot (two stylised) -->
+          <g stroke="#1a1a1a" stroke-width="0.9" fill="none">
+            <path d="M 460 270 Q 478 256 488 268 L 496 264 Q 502 268 498 274 L 492 282 L 494 296 L 488 320 L 484 320 L 482 300 L 472 300 L 470 320 L 466 320 L 466 296 L 460 282 Z"/>
+            <path d="M 480 240 Q 490 230 498 234 Q 506 224 512 230 L 510 236 L 506 240"/>
+            <line x1="460" y1="276" x2="442" y2="266"/>
+            <line x1="460" y1="284" x2="442" y2="280"/>
+            <!-- second horse outlined behind -->
+            <path d="M 446 274 Q 462 262 472 272 L 478 270" stroke-dasharray="2,2"/>
+          </g>
+
+          <!-- yali / lion bracket flanking shrine -->
+          <g stroke="#1a1a1a" stroke-width="0.8" fill="none">
+            <path d="M 168 240 L 168 220 Q 162 210 168 202 Q 178 198 184 208 L 184 240 Z"/>
+            <path d="M 356 240 L 356 220 Q 362 210 356 202 Q 346 198 340 208 L 340 240 Z"/>
+          </g>
+
+          <!-- title cartouche bottom centre -->
+          <g>
+            <rect x="180" y="340" width="180" height="30" fill="none" stroke="#1a1a1a" stroke-width="0.6"/>
+            <text x="270" y="354" text-anchor="middle" font-family="Cinzel, serif" font-size="8.5" letter-spacing="2" fill="#1a1a1a">THE STONE CAR. VITTALA SWAMI.</text>
+            <text x="270" y="365" text-anchor="middle" font-family="Eczar, serif" font-style="italic" font-size="7.5" fill="#1a1a1a">drawn upon the spot, A.D. 1799 — C. Mackenzie, Engr.</text>
+          </g>
+
+          <!-- numbered references in margin -->
+          <g font-family="Eczar, serif" font-size="9" fill="#1a1a1a">
+            <text x="30" y="170">A.</text>
+            <text x="30" y="195">B.</text>
+            <text x="30" y="220">C.</text>
+            <text x="30" y="245">D.</text>
+            <line x1="42" y1="167" x2="216" y2="160" stroke="#1a1a1a" stroke-width="0.3"/>
+            <line x1="42" y1="192" x2="194" y2="208" stroke="#1a1a1a" stroke-width="0.3"/>
+            <line x1="42" y1="217" x2="160" y2="220" stroke="#1a1a1a" stroke-width="0.3"/>
+            <line x1="42" y1="242" x2="124" y2="260" stroke="#1a1a1a" stroke-width="0.3"/>
+          </g>
+        </svg>
+
+        <figcaption class="plate-caption">
+          <strong>Plate XIV &mdash; Folio 47 r.</strong>
+          The Stone Car of Vitthala-svāmi, Vijaya-nagara &mdash; ink and reed-pen on hand-laid paper, <em>circa</em> October 1799. Inscribed in the lower margin in the hand of Lakshmaiah; references A&ndash;D added later in graphite, probably at Calcutta in 1812.
+        </figcaption>
+      </figure>
+    </article>
+
+    <!-- RIGHT: Editorial commentary -->
+    <article class="editorial">
+      <h3>Editor's Commentary</h3>
+      <div class="dek-rule"></div>
+
+      <p>The folio reproduced opposite came into the keeping of the Madras Record Office in the autumn of 1944, returned from the India Office Library at Whitehall as part of a larger transfer of triplicate survey papers. It is one of three nearly identical drawings of the stone chariot at the Vitthala temple, ruined Vijayanagara, executed during Colin Mackenzie's first private survey of the Tungabhadra ruins in October and November of 1799 &mdash; six years before he was confirmed Surveyor-General of Madras.</p>
+
+      <p>The plate is, by any honest accounting, a beautiful object and a poor record. The wheels are too small; the niches of the plinth too even; the four registers of the shrine compressed by perhaps a fifth. The yali brackets are present but mute, their snarling faces softened into the bracket-stops of an English garden temple. What is missing &mdash; what no draughtsman of 1799 was given the means to render &mdash; is the fact that the chariot does not stand alone, but is the visual hinge of a long axial composition that begins at the eastern gopuram and resolves in the kalyāna-mandapa beyond. Mackenzie surveyed; he did not see.</p>
+
+      <div class="pull">
+        &ldquo;The stone Car is of one block, very curious in its workmanship, drawn (as is said) by Two Horses also of stone. The Brahmins assured me it had once moved upon its wheels, but this I cannot believe.&rdquo;<br>
+        <span style="display:block;text-align:right;font-size:13px;margin-top:6px;color:var(--text);">— Mackenzie, MS. journal, 14 Octr. 1799</span>
+      </div>
+
+      <p>That last sentence &mdash; <em>this I cannot believe</em> &mdash; is the whole of the matter. The stone wheels of the Vitthala chariot do, of course, turn; the priests were not lying; the temple's traditions of festival processional movement are recorded in epigraphical sources Mackenzie never read because they were not translated. The limit was not the eye but the frame.</p>
+
+      <p>It is in this gap &mdash; between what was drawn and what was there to be drawn &mdash; that the work of the Telugu draughtsmen Kistnaji and Lakshmaiah, brothers from Niduvrolu in the Krishna delta, becomes visible in our own century as the more interesting historical fact. They did the seeing. The signed Mackenzie folios &mdash; perhaps four hundred sheets, by Lakshmaiah's own count submitted to the Asiatic Society in 1818 &mdash; were drawn either entirely by them or, more often, drawn by them and then laboriously re-inked by a European hand for the despatch copy.</p>
+
+      <p class="signoff">— P.S., Egmore, the 11th of Aippasi.</p>
+    </article>
+  </div>
+</section>
+
+<div class="double-rule"></div>
+
+<!-- ============================================================
+     TIER 4  ::  MANUSCRIPT TRANSCRIPTION
+     ============================================================ -->
+<section class="tier transcript-tier">
+  <div class="transcript-grid">
+    <aside class="tier-label">
+      Original<br>Shelfmark
+      <span class="lotus-mini" aria-hidden="true">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <g fill="none" stroke="#e34234" stroke-width="2">
+            <ellipse cx="50" cy="50" rx="22" ry="8"/>
+            <ellipse cx="50" cy="50" rx="22" ry="8" transform="rotate(45 50 50)"/>
+            <ellipse cx="50" cy="50" rx="22" ry="8" transform="rotate(90 50 50)"/>
+            <ellipse cx="50" cy="50" rx="22" ry="8" transform="rotate(135 50 50)"/>
+            <circle cx="50" cy="50" r="4" fill="#c9a23a" stroke="none"/>
+          </g>
+        </svg>
+      </span>
+      <span class="shelfmark">India Office Library<br>Mackenzie Mss.<br>General, vol. 17,<br>ff. 46v–48r</span>
+    </aside>
+
+    <article class="transcript">
+      <h4>From the Survey Journal of Colin Mackenzie</h4>
+      <div class="source-line">Vijaya-nagara &middot; Octr. 14th–17th, 1799 &middot; transcribed verbatim, original spelling preserved</div>
+      <div class="ms-text">
+        <p><sup>1</sup>This day rode out to the ruined Pagoda of <em class="placename">Vittala-Sami</em>, situate about a mile to the Northeast of the bazaar of <em class="placename">Hampee</em>, the country between being broken with great masses of granite and certain enclosed gardens of plantain belonging to the Mahomedan Killadar.</p>
+
+        <p>The Pagoda is of a very superior workmanship, far exceeding any thing seen by me in the Carnatic. <sup>2</sup>The principal court is entered by a Gopuram now much decayed, its upper stories fallen; within is a Mantapam of fifty-six pillars, each pillar carved into a cluster of slender colonnettes which, when struck with the hand, return distinct musical tones. The Brahmin guide named one cluster Sa-ri-ga-ma; another, the seven notes of the <em class="placename">vīna</em>.</p>
+
+        <p>Before the inner sanctuary stands the Stone Car &mdash; <em>vide</em> the drawing made this day by <em class="placename">Lakshmiah</em> &mdash; which is the principal curiosity of the place. <sup>3</sup>It is of one block, or so I at first supposed; on closer inspection finding it to be assembled of perhaps fourteen courses of granite so finely jointed as to deceive the eye at twelve paces. The wheels are pierced in the manner of a chakra, and are said by the priests to have formerly turned. This I cannot believe, though the axles bear the wear of motion.</p>
+
+        <p>Two stone horses, much defaced by Mahomedan iconoclasm of the year 1565 (so the Brahmins reckon it), draw the car. <sup>4</sup>The car itself bears upon its plinth a frieze of the ten avatars; that of the Boar (<em class="placename">Varāha</em>) is the most perfectly preserved, the others having lost their upper members.</p>
+
+        <p>I caused <em class="placename">Kistnaji</em> to take the dimensions, which he records as: length of plinth, fourteen feet two inches; height to the finial, twenty-three feet six; diameter of wheel, three feet eleven. <sup>5</sup>These I have verified with my own chain. The drawing is taken from the South-West, the morning light falling oblique upon the East face, which is the principal.</p>
+
+        <p>I am told by the head Brahmin, one Vēnkata-rāma Sastri, that an annual festival was formerly held at which the car was drawn around the inner enclosure by ropes &mdash; but this practice was discontinued in the time of the Sultan, no festivals being now performed at the place. <sup>6</sup>He shew'd me also certain inscriptions in the Cannada character upon the basement of the East Gopuram, of which Lakshmiah took copies to be translated at our return to <em class="placename">Bellary</em>.</p>
+      </div>
+    </article>
+
+    <aside class="tier-label">
+      Counter-foil<br>Reference
+      <span class="lotus-mini" aria-hidden="true">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <g fill="none" stroke="#e34234" stroke-width="2">
+            <ellipse cx="50" cy="50" rx="22" ry="8"/>
+            <ellipse cx="50" cy="50" rx="22" ry="8" transform="rotate(45 50 50)"/>
+            <ellipse cx="50" cy="50" rx="22" ry="8" transform="rotate(90 50 50)"/>
+            <ellipse cx="50" cy="50" rx="22" ry="8" transform="rotate(135 50 50)"/>
+            <circle cx="50" cy="50" r="4" fill="#c9a23a" stroke="none"/>
+          </g>
+        </svg>
+      </span>
+      <span class="shelfmark">Madras Record Office<br>Mackenzie Translns.,<br>Class XII (Local),<br>Bundle 9, item 14</span>
+    </aside>
+  </div>
+</section>
+
+<div class="double-rule"></div>
+
+<!-- ============================================================
+     TIER 5  ::  THE DRAUGHTSMEN
+     ============================================================ -->
+<section class="tier draughtsmen-tier">
+  <div class="draughtsmen-grid">
+
+    <article class="draught-card">
+      <h4>Kistnaji of Niduvrolu</h4>
+      <p class="role-line">Senior draughtsman, c. 1796 – 1818</p>
+      <div class="panel-rule"></div>
+      <p>Born to a family of Niyogi Brahmins of the Krishna delta, Kistnaji entered Mackenzie's service in March 1796 at Cumbum, having previously been employed as a karanam-clerk under the Nizam's revenue. He was the elder of the two brothers and the more architecturally exact &mdash; his measured drawings of the Tirumala temple, made over four months of 1803, are still the working reference for the conservation works at that site.</p>
+      <p>He died at Madras in February 1818, aged about forty-six, of fever; his half-finished plan of the Lepakshi mandapa is filed at I.O.L. Mackenzie Drawings, vol. 5, f. 112.</p>
+      <a class="read-more" href="page-3.html">
+        <span class="lotus-mini" aria-hidden="true">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#e34234" stroke-width="3"><ellipse cx="50" cy="50" rx="22" ry="8"/><ellipse cx="50" cy="50" rx="22" ry="8" transform="rotate(60 50 50)"/><ellipse cx="50" cy="50" rx="22" ry="8" transform="rotate(120 50 50)"/></g></svg>
+        </span>
+        See Field Notes &rsaquo;
+      </a>
+    </article>
+
+    <article class="draught-card">
+      <h4>Lakshmaiah, his brother</h4>
+      <p class="role-line">Translator-draughtsman, 1797 – 1841</p>
+      <div class="panel-rule"></div>
+      <p>The younger brother by some four years, Lakshmaiah survived the Colonel by twenty years and rose, after Mackenzie's death in 1821, to be Native Head of the Survey Office at Madras &mdash; the first Indian to hold that station. The Vitthala chariot folio is in his hand throughout: drawing, lettering, and the Telugu marginal note (excised from the despatch copy but visible on the second triplicate) which reads, simply, <em>idi nā cēta vrāyabaḍinadi</em> &mdash; <em>this was written by my hand</em>.</p>
+      <p>His memorial volume, <em>An Account of the Antiquities of Vijayanagara</em> (Madras, 1836), remains uncited in every standard British survey of the ruins.</p>
+      <a class="read-more" href="page-2.html">
+        <span class="lotus-mini" aria-hidden="true">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#e34234" stroke-width="3"><ellipse cx="50" cy="50" rx="22" ry="8"/><ellipse cx="50" cy="50" rx="22" ry="8" transform="rotate(60 50 50)"/><ellipse cx="50" cy="50" rx="22" ry="8" transform="rotate(120 50 50)"/></g></svg>
+        </span>
+        See Lead Essay &rsaquo;
+      </a>
+    </article>
+
+    <article class="draught-card">
+      <h4>The Limits of the Frame</h4>
+      <p class="role-line">A note on antiquarian recording</p>
+      <div class="panel-rule"></div>
+      <p>The Mackenzie folios were drawn for a particular kind of looking: the elevation, the plan, the section, the picturesque view. None of these conventions was suited to a Dravidian temple, whose architectural grammar is processional, axial, and ritually performed &mdash; understood by the body that walks the prakara, not by the eye that stations itself at thirty paces South-West.</p>
+      <p>This is no fault of Kistnaji or Lakshmaiah, who knew perfectly well what they were leaving out. It is the fault of the frame they were given, and of the patrons who never asked them to draw differently.</p>
+      <a class="read-more" href="page-4.html">
+        <span class="lotus-mini" aria-hidden="true">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#e34234" stroke-width="3"><ellipse cx="50" cy="50" rx="22" ry="8"/><ellipse cx="50" cy="50" rx="22" ry="8" transform="rotate(60 50 50)"/><ellipse cx="50" cy="50" rx="22" ry="8" transform="rotate(120 50 50)"/></g></svg>
+        </span>
+        On the Craft &rsaquo;
+      </a>
+    </article>
+
+  </div>
+</section>
+
+<div class="double-rule"></div>
+
+<!-- ============================================================
+     TIER 6  ::  FOOTNOTES & SHELFMARKS
+     ============================================================ -->
+<section class="tier footnotes-tier">
+  <div class="footnotes-wrap">
+    <h3>Footnotes &amp; Manuscript Shelfmarks</h3>
+    <div class="accent-rule"></div>
+    <ol class="footnotes-list">
+      <li><span class="num">1.</span> India Office Library, London &mdash; <em>Mackenzie Manuscripts, General, vol. 17</em>, ff. 46v–48r. Original journal entry, paper 23 × 18 cm, watermark: <em>Whatman 1796</em>.</li>
+      <li><span class="num">2.</span> The musical pillars of the Vitthala mandapa are noted independently by Sewell (<em>A Forgotten Empire</em>, 1900, p. 162) and earlier by Captain Newbold, <em>J.A.S.B.</em> XV (1846), p. 391.</li>
+      <li><span class="num">3.</span> Mackenzie was mistaken in this. Subsequent examination by the Archæological Survey under Longhurst (1917) confirmed the chariot to be of seventeen, not fourteen, courses. See <em>A.S.I. Annual Report</em>, 1916–17, p. 24.</li>
+      <li><span class="num">4.</span> The frieze of avatars is cited in the original <em>sthala-purāṇa</em> of the temple, of which a palm-leaf copy survives at the Sarasvati Mahal Library, Tanjavur, MS. D. 4419.</li>
+      <li><span class="num">5.</span> Mackenzie's measurements are within two inches of those re-taken by S. Krishnaswami Aiyangar's team in March 1934. The figures are reproduced in Aiyangar, <em>Sources of Vijayanagara History</em> (Madras, 1919), Appendix III.</li>
+      <li><span class="num">6.</span> The Kannada inscriptions on the eastern gopuram base were finally edited by B. L. Rice in <em>Epigraphia Carnatica</em>, vol. XI (1903), nos. Hp. 47–52, dating the present structure to the reign of Krishnadeva Raya (r. 1509–1529).</li>
+      <li><span class="num">7.</span> For the Lakshmaiah marginalia preserved on the second triplicate (currently held at the Madras Record Office, Class XII, Bundle 9), see N. Venkata Ramanayya's note in <em>Q.J.M.S.</em>, vol. XXXIV (1943), pp. 218–221.</li>
+      <li><span class="num">8.</span> The 1818 list submitted by Lakshmaiah to the Asiatic Society of Bengal claiming authorship of 2,630 separate items in the Mackenzie Collection is preserved at I.O.L., <em>Asiatic Society Letters</em>, B. 14, ff. 88–93. Its contents have never been independently verified, but the present editor has found no reason to doubt them.</li>
+    </ol>
+  </div>
+</section>
+
+<div class="double-rule"></div>
+
+<!-- ============================================================
+     TIER 7  ::  RELATED FROM THE ARCHIVE
+     ============================================================ -->
+<section class="tier related-tier">
+  <h3>Elsewhere in this Issue</h3>
+  <div class="accent-rule"></div>
+  <div class="related-grid">
+    <a href="page-2.html">
+      <div class="vol">Vol. XII / 3 &middot; Lead Essay</div>
+      <div class="ttl">The Granite Vimana at Tanjavur</div>
+      <div class="auth">by V. Ramaswami Sastri</div>
+    </a>
+    <a href="page-3.html">
+      <div class="vol">Vol. XII / 3 &middot; Field Notes</div>
+      <div class="ttl">The Outer Prakaras of Srirangam</div>
+      <div class="auth">by Kamala Subramaniam</div>
+    </a>
+    <a href="page-4.html">
+      <div class="vol">Vol. XII / 3 &middot; On the Craft</div>
+      <div class="ttl">Sthapatis of the Mamallapuram School</div>
+      <div class="auth">by S. Ganapati Sthapati</div>
+    </a>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER  ::  PILLARED ARCADE
+     ============================================================ -->
+<footer class="arcade">
+  <div class="arcade-frieze"></div>
+  <div class="arcade-row">
+    <div class="arch-bay">
+      <div class="rosette"><div class="sq"></div><div class="sq s2"></div><div class="sq s3"></div><div class="sq s4"></div><div class="dot"></div></div>
+    </div>
+    <div class="arch-bay">
+      <div class="rosette"><div class="sq"></div><div class="sq s2"></div><div class="sq s3"></div><div class="sq s4"></div><div class="dot"></div></div>
+    </div>
+    <div class="arch-bay">
+      <div class="rosette"><div class="sq"></div><div class="sq s2"></div><div class="sq s3"></div><div class="sq s4"></div><div class="dot"></div></div>
+    </div>
+    <div class="arch-bay center">
+      <div class="seal" aria-label="Om">
+        <svg viewBox="0 0 356 367" xmlns="http://www.w3.org/2000/svg">
+          <path d="M 90.456847,353.9498 C 51.797347,340.13485 23.72672,305.75839 12.612487,258.6184 C 7.5684267,237.22321 6.1421397,201.86984 10.323594,201.86984 C 11.712834,201.86984 15.42322,211.57056 18.568972,223.427 C 25.452892,249.37152 37.19436,273.76855 48.535988,285.69407 C 67.374717,305.50242 114.0356,313.26029 140.92106,301.05394 C 161.86409,291.54544 170.35697,268.94603 161.24995,246.95931 C 154.21242,229.96943 138.24701,224.28836 108.50834,228.19197 C 108.50834,228.19197 90.282834,208.57398 84.476417,173.73548 L 103.15738,175.42939 C 125.65731,177.46962 142.64532,172.49605 151.46236,161.28728 C 159.74765,150.75419 159.5685,146.68046 150.34841,135.96157 C 137.04396,120.49428 113.15511,124.41248 64.786577,149.99522 L 40.381632,109.08518 L 50.613137,101.2812 C 76.253387,81.724339 120.77357,71.947329 146.11011,80.309169 C 169.18841,87.925649 186.12724,118.14755 181.60247,143.63298 C 178.54327,160.86286 164.72752,184.99524 154.05369,191.75339 L 144.84862,197.58162 L 157.56351,203.31522 C 179.17018,213.05833 192.36061,205.61034 208.12001,174.76849 C 229.92949,132.0869 244.0745,121.0378 276.96658,120.99051 C 292.28176,120.96847 297.73268,122.57499 308.90312,130.4031 C 336.78213,149.94016 351.9622,190.39693 348.62804,236.27272 C 344.40474,294.37435 316.88374,329.61601 275.73415,329.61601 C 253.15086,329.61601 238.59451,321.69526 227.00729,303.10156 C 216.82976,286.76927 212.24334,254.42288 218.08805,240.19369 C 220.89208,233.36732 221.39892,233.13578 221.58223,238.59686 C 221.91916,248.63689 233.34159,264.95549 243.82827,270.37835 C 269.55794,283.68369 306.49479,266.96693 321.10832,235.4032 C 332.20339,211.4394 326.25105,165.21656 311.02084,157.06552 C 307.83453,155.36024 299.96089,153.96502 293.5244,153.96502 C 279.84214,153.96502 269.09709,163.80155 254.03263,190.11774 C 248.82442,199.21613 240.05943,210.97175 234.55486,216.24128 C 225.61134,224.80312 222.41769,225.82225 204.53067,225.82225 L 184.51412,225.82225 L 190.98415,240.19369 C 200.2451,260.76437 199.80694,294.18704 190.00976,314.53347 C 181.35272,332.51252 161.33618,350.71469 145.33374,355.16013 C 129.75572,359.4876 104.38789,358.9281 90.456847,353.9498 z M 165.8338,75.923739 C 156.97908,60.814399 151.52974,32.606158 157.46546,32.606158 C 164.43775,47.732319 178.73037,61.227101 194.03409,70.643259 C 221.52091,83.949329 249.39257,78.578529 279.84247,54.108239 C 286.54595,48.721279 292.48231,44.913138 293.0345,45.645698 C 300.4697,57.184233 313.331,66.613261 317.58219,80.021449 C 317.58219,85.678729 293.22867,101.96033 274.01214,109.15007 C 226.38264,122.8706 193.96598,117.44304 165.8338,75.923739 z M 189.83603,40.997228 L 220.84514,6.6137488 L 255.30593,38.514418 C 243.51876,48.222549 235.00994,63.289118 221.54391,70.930009 C 210.90372,63.086273 195.02308,53.837816 189.83603,40.997228 z" fill="#c9a23a"/>
+        </svg>
+      </div>
+    </div>
+    <div class="arch-bay">
+      <div class="rosette"><div class="sq"></div><div class="sq s2"></div><div class="sq s3"></div><div class="sq s4"></div><div class="dot"></div></div>
+    </div>
+    <div class="arch-bay">
+      <div class="rosette"><div class="sq"></div><div class="sq s2"></div><div class="sq s3"></div><div class="sq s4"></div><div class="dot"></div></div>
+    </div>
+    <div class="arch-bay">
+      <div class="rosette"><div class="sq"></div><div class="sq s2"></div><div class="sq s3"></div><div class="sq s4"></div><div class="dot"></div></div>
+    </div>
+  </div>
+
+  <div class="footer-meta">
+    <p class="editorial-addr">Editorial &amp; subscription office &mdash; No. 47, Mada Veedhi, Mylapore, Madras 600004</p>
+    <p class="footer-mast">The Prakara <span class="accent">·</span> Quarterly</p>
+    <p class="colophon">Vol. XII &middot; No. 3 &middot; Aippasi 1947 &middot; Printed at the Kalakshetra Press, Adyar</p>
+  </div>
+  <div class="double-rule"></div>
+</footer>
+
+</body>
+</html>

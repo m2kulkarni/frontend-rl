@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Seasonal Courses — Shun no Kondate · Kiritsubo</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), serif;
+    margin: 0;
+    line-height: 1.75;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Background asanoha tile, very low opacity */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("svg/asanoha-hempleaf.svg");
+    background-size: 280px 280px;
+    background-repeat: repeat;
+    opacity: 0.06;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  main, header, footer { position: relative; z-index: 1; }
+
+  /* ===== Header / Nav ===== */
+  .site-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    padding: 38px 64px 24px 64px;
+  }
+
+  .house-mark {
+    width: 64px;
+    height: 64px;
+    display: block;
+  }
+  .house-mark svg { width: 100%; height: 100%; display: block; }
+
+  nav.site-nav {
+    margin-top: 14px;
+    text-align: right;
+  }
+  nav.site-nav ul {
+    list-style: none;
+    margin: 0; padding: 0;
+    display: inline-flex;
+    align-items: center;
+  }
+  nav.site-nav li {
+    padding: 0 18px;
+    border-right: 1px solid var(--ornament);
+    font-variant: small-caps;
+    letter-spacing: 0.22em;
+    font-size: 11.5px;
+  }
+  nav.site-nav li:last-child { border-right: none; padding-right: 0; }
+  nav.site-nav li:first-child { padding-left: 0; }
+  nav.site-nav a {
+    color: var(--text);
+    text-decoration: none;
+  }
+  nav.site-nav a[aria-current="page"] {
+    color: var(--secondary);
+    border-bottom: 1px solid var(--secondary);
+    padding-bottom: 2px;
+  }
+
+  /* ===== Title block ===== */
+  .page-title {
+    padding: 70px 64px 48px 64px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: end;
+  }
+  .page-title .kanji {
+    font-family: var(--font-display), serif;
+    font-size: 92px;
+    line-height: 1;
+    color: var(--primary);
+    letter-spacing: 0.04em;
+    margin: 0;
+  }
+  .page-title .romaji {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    color: var(--text);
+    margin: 0 0 8px 0;
+    letter-spacing: 0.18em;
+  }
+  .page-title p.lede {
+    font-size: 14px;
+    max-width: 44ch;
+    margin: 0 0 6px 0;
+    color: var(--text);
+  }
+  .page-title .pricerange {
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    color: var(--secondary);
+    letter-spacing: 0.2em;
+    margin-top: 14px;
+  }
+
+  /* Sayagata divider */
+  .divider {
+    height: 28px;
+    background-image: url("svg/sayagata-keyfret.svg");
+    background-size: 120px 120px;
+    background-repeat: repeat-x;
+    background-position: center;
+    opacity: 0.12;
+    margin: 0 64px;
+  }
+
+  /* ===== Seasons grid ===== */
+  .seasons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+    padding: 64px 64px 56px 64px;
+  }
+
+  .season {
+    background: var(--surface);
+    border-top: 1px solid var(--ornament);
+    padding: 32px 26px 56px 26px;
+    position: relative;
+    min-height: 580px;
+  }
+
+  /* offset stagger to break symmetry */
+  .season:nth-child(1) { transform: translateY(0); }
+  .season:nth-child(2) { transform: translateY(36px); }
+  .season:nth-child(3) { transform: translateY(12px); }
+  .season:nth-child(4) { transform: translateY(48px); }
+
+  .season .stamp {
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    color: var(--secondary);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin: 0 0 4px 0;
+  }
+  .season h2 {
+    font-family: var(--font-display), serif;
+    font-size: 56px;
+    line-height: 1;
+    color: var(--primary);
+    margin: 0 0 4px 0;
+    font-weight: 400;
+  }
+  .season h2 .small {
+    display: block;
+    font-size: 14px;
+    color: var(--text);
+    letter-spacing: 0.2em;
+    margin-top: 6px;
+    font-family: var(--font-body), serif;
+  }
+
+  .season .ornament-rule {
+    width: 36px;
+    height: 1px;
+    background: var(--ornament);
+    margin: 22px 0 22px 0;
+  }
+
+  .season h3.course {
+    font-family: var(--font-display), serif;
+    font-size: 16px;
+    color: var(--primary);
+    margin: 18px 0 6px 0;
+    letter-spacing: 0.06em;
+  }
+  .season ul.dishes {
+    list-style: none;
+    margin: 0; padding: 0;
+    font-size: 13px;
+  }
+  .season ul.dishes li {
+    padding: 6px 0;
+    border-bottom: 1px dotted rgba(12,12,12,0.25);
+  }
+  .season ul.dishes li:last-child { border-bottom: none; }
+  .season ul.dishes .jp {
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+    margin-right: 6px;
+  }
+
+  .season .meta {
+    margin-top: 26px;
+    font-size: 12px;
+    line-height: 1.7;
+  }
+  .season .meta .label {
+    font-variant: small-caps;
+    letter-spacing: 0.2em;
+    color: var(--text);
+    display: block;
+    margin-bottom: 2px;
+  }
+  .season .meta .dates {
+    font-family: var(--font-display), serif;
+    color: var(--text);
+    font-size: 13px;
+  }
+  .season .price {
+    margin-top: 18px;
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    color: var(--secondary);
+    letter-spacing: 0.04em;
+  }
+  .season .price .per {
+    font-family: var(--font-body), serif;
+    font-size: 11px;
+    color: var(--text);
+    letter-spacing: 0.2em;
+    display: block;
+    margin-top: 2px;
+  }
+
+  /* gold-leaf accent dot */
+  .season .gold-accent {
+    position: absolute;
+    top: 28px;
+    right: 28px;
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+
+  /* umebachi mon at lower-right of each card */
+  .season .ume {
+    position: absolute;
+    bottom: 14px;
+    right: 14px;
+    width: 30px;
+    height: 30px;
+    opacity: 0.55;
+  }
+  .season .ume svg { width: 100%; height: 100%; display: block; }
+
+  /* ===== Hero seigaiha frame on the right side, decorative ===== */
+  .seigaiha-band {
+    position: absolute;
+    top: 120px;
+    right: -80px;
+    width: 360px;
+    height: 360px;
+    background-image: url("svg/seigaiha-waves.svg");
+    background-size: 240px 240px;
+    background-repeat: repeat;
+    opacity: 0.07;
+    pointer-events: none;
+  }
+
+  /* ===== Aside note ===== */
+  .aside-note {
+    padding: 24px 64px 64px 64px;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 32px;
+    font-size: 13px;
+  }
+  .aside-note .colophon {
+    grid-column: 2;
+    border-left: 1px solid var(--ornament);
+    padding-left: 28px;
+  }
+  .aside-note .colophon .heading {
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+    font-size: 18px;
+    margin: 0 0 8px 0;
+  }
+  .aside-note .colophon p { margin: 0 0 10px 0; }
+  .aside-note .cinnabar {
+    color: var(--secondary);
+    font-family: var(--font-display), serif;
+  }
+
+  /* ===== Footer ===== */
+  footer.site-footer {
+    background: var(--bg);
+    padding: 0 64px 40px 64px;
+    margin-top: 40px;
+  }
+  .asanoha-band {
+    height: 42px;
+    background-image: url("svg/asanoha-hempleaf.svg");
+    background-size: 110px 110px;
+    background-repeat: repeat-x;
+    opacity: 0.18;
+    margin-bottom: 36px;
+  }
+  .footer-seal {
+    text-align: center;
+    margin-bottom: 18px;
+  }
+  .footer-seal svg {
+    width: 70px; height: 70px;
+    display: inline-block;
+  }
+  .signature {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-size: 18px;
+    color: var(--primary);
+    letter-spacing: 0.18em;
+    margin-bottom: 32px;
+  }
+  .footer-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    max-width: 720px;
+    margin: 0 auto;
+    font-size: 12px;
+  }
+  .footer-cols h4 {
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    color: var(--primary);
+    margin: 0 0 8px 0;
+    letter-spacing: 0.2em;
+    font-variant: small-caps;
+    font-weight: 400;
+  }
+  .footer-cols p { margin: 0 0 6px 0; }
+  .footer-cols .attribution {
+    margin-top: 16px;
+    color: rgba(12,12,12,0.7);
+    font-size: 11px;
+    line-height: 1.6;
+  }
+
+  /* simplified inline ume mon for cards (smaller version) */
+  .ume-svg-circle {
+    width: 100%; height: 100%;
+    background: var(--secondary);
+    border-radius: 50%;
+    position: relative;
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="page-1.html" class="house-mark" aria-label="Kiritsubo house mark">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="46" fill="none" stroke="#1c3a5e" stroke-width="1.4"/>
+      <circle cx="50" cy="50" r="38" fill="none" stroke="#1c3a5e" stroke-width="0.6"/>
+      <path d="M50 22 C 38 36, 38 46, 50 52 C 62 46, 62 36, 50 22 Z" fill="#1c3a5e" opacity="0.85"/>
+      <path d="M30 58 Q 50 70 70 58 Q 60 76 50 76 Q 40 76 30 58 Z" fill="#1c3a5e" opacity="0.85"/>
+      <circle cx="50" cy="50" r="3" fill="#e34234"/>
+    </svg>
+  </a>
+  <nav class="site-nav" aria-label="Primary">
+    <ul>
+      <li><a href="page-1.html">Ryōtei</a></li>
+      <li><a href="page-2.html">O-shinagaki</a></li>
+      <li><a href="page-3.html">House &amp; Lineage</a></li>
+      <li><a href="page-4.html" aria-current="page">Shun no Kondate</a></li>
+      <li><a href="page-5.html">Reservations</a></li>
+      <li><a href="page-6.html">Visiting</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="page-title">
+  <div>
+    <p class="romaji">Shun no Kondate</p>
+    <h1 class="kanji">旬の献立</h1>
+    <div class="seigaiha-band" aria-hidden="true"></div>
+  </div>
+  <div>
+    <p class="lede">Four kaiseki courses, set to the four seasons of the Kanda riverbank. Each menu is composed weekly from the recipe books of the Kiritsubo house — handed down since the Bunsei era — and adjusted to what the morning's deliveries allow.</p>
+    <p class="lede">The dishes named below are those presently in rotation. Substitutions are made silently when the river or the weather requires.</p>
+    <p class="pricerange">¥18,000 — ¥32,000 / per person</p>
+  </div>
+</section>
+
+<div class="divider" aria-hidden="true"></div>
+
+<section class="seasons">
+
+  <article class="season">
+    <span class="gold-accent" aria-hidden="true"></span>
+    <p class="stamp">— I —</p>
+    <h2>春<span class="small">Haru · Spring</span></h2>
+    <div class="ornament-rule"></div>
+
+    <h3 class="course">Sakizuke &amp; Mukōzuke</h3>
+    <ul class="dishes">
+      <li><span class="jp">先附</span>Wakatake-ni — fresh takenoko from Rakusai, Kyōto, simmered with wakame in first-pressed dashi</li>
+      <li><span class="jp">向附</span>Sakura-tai no kobujime — Akashi sea bream cured between sheets of Rausu kombu, plum vinegar</li>
+      <li><span class="jp">椀</span>Hamaguri to nanohana no suimono — clam and rape-blossom clear broth</li>
+      <li><span class="jp">焼物</span>Sawara no saikyō-yaki — Spanish mackerel in white miso of Saikyō, charcoal-grilled</li>
+      <li><span class="jp">飯</span>Sakura-meshi — rice steamed with cherry blossoms preserved in salt</li>
+    </ul>
+
+    <div class="meta">
+      <span class="label">Served</span>
+      <span class="dates">3rd Day, 3rd Month — 25th Day, 4th Month<br>(Mar 3 — Apr 25)</span>
+    </div>
+    <p class="price">¥22,000<span class="per">per guest, ten courses</span></p>
+
+    <div class="ume" aria-hidden="true">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="28" r="14" fill="#e34234"/>
+        <circle cx="26" cy="44" r="14" fill="#e34234"/>
+        <circle cx="74" cy="44" r="14" fill="#e34234"/>
+        <circle cx="34" cy="72" r="14" fill="#e34234"/>
+        <circle cx="66" cy="72" r="14" fill="#e34234"/>
+        <circle cx="50" cy="52" r="6" fill="#c9a23a"/>
+      </svg>
+    </div>
+  </article>
+
+  <article class="season">
+    <span class="gold-accent" aria-hidden="true"></span>
+    <p class="stamp">— II —</p>
+    <h2>夏<span class="small">Natsu · Summer</span></h2>
+    <div class="ornament-rule"></div>
+
+    <h3 class="course">Suzushisa no kondate</h3>
+    <ul class="dishes">
+      <li><span class="jp">向附</span>Hamo no otoshi — pike conger from the Seto Inland Sea, bone-cut, served with ume-niku</li>
+      <li><span class="jp">椀</span>Hamo to matsutake no shinjō-wan — though young hamo and the season's first matsutake meet only in late summer</li>
+      <li><span class="jp">冷</span>Hiyashi sōmen — hand-stretched Miwa noodles, iced spring water, with pickled myōga and shiso</li>
+      <li><span class="jp">焼物</span>Ayu no shio-yaki — sweetfish from the Nagara, salt-grilled on river-stone</li>
+      <li><span class="jp">水菓子</span>Kuzu-kiri — arrowroot ribbons in dark kuromitsu</li>
+    </ul>
+
+    <div class="meta">
+      <span class="label">Served</span>
+      <span class="dates">10th Day, 6th Month — 31st Day, 8th Month<br>(Jun 10 — Aug 31)</span>
+    </div>
+    <p class="price">¥18,000<span class="per">per guest, nine courses</span></p>
+
+    <div class="ume" aria-hidden="true">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="28" r="14" fill="#e34234"/>
+        <circle cx="26" cy="44" r="14" fill="#e34234"/>
+        <circle cx="74" cy="44" r="14" fill="#e34234"/>
+        <circle cx="34" cy="72" r="14" fill="#e34234"/>
+        <circle cx="66" cy="72" r="14" fill="#e34234"/>
+        <circle cx="50" cy="52" r="6" fill="#c9a23a"/>
+      </svg>
+    </div>
+  </article>
+
+  <article class="season">
+    <span class="gold-accent" aria-hidden="true"></span>
+    <p class="stamp">— III —</p>
+    <h2>秋<span class="small">Aki · Autumn</span></h2>
+    <div class="ornament-rule"></div>
+
+    <h3 class="course">Tsukimi no kondate</h3>
+    <ul class="dishes">
+      <li><span class="jp">先附</span>Matsutake no dobin-mushi — pine mushrooms from Tanba in earthenware steam-pot, with hamo and sudachi</li>
+      <li><span class="jp">向附</span>Modori-gatsuo — autumn-returning bonito, lightly seared, with ginger and chives</li>
+      <li><span class="jp">焼物</span>Ko-ayu no nare-zushi — preserved sweetfish, in the old riverbank style</li>
+      <li><span class="jp">煮物</span>Kabu to kamo-rōsu — kabu turnip simmered with smoked duck breast</li>
+      <li><span class="jp">飯</span>Kuri-gohan — rice with chestnuts from Iyama, sesame salt</li>
+    </ul>
+
+    <div class="meta">
+      <span class="label">Served</span>
+      <span class="dates">15th Day, 9th Month — 30th Day, 11th Month<br>(Sep 15 — Nov 30)</span>
+    </div>
+    <p class="price">¥26,000<span class="per">per guest, eleven courses</span></p>
+
+    <div class="ume" aria-hidden="true">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="28" r="14" fill="#e34234"/>
+        <circle cx="26" cy="44" r="14" fill="#e34234"/>
+        <circle cx="74" cy="44" r="14" fill="#e34234"/>
+        <circle cx="34" cy="72" r="14" fill="#e34234"/>
+        <circle cx="66" cy="72" r="14" fill="#e34234"/>
+        <circle cx="50" cy="52" r="6" fill="#c9a23a"/>
+      </svg>
+    </div>
+  </article>
+
+  <article class="season">
+    <span class="gold-accent" aria-hidden="true"></span>
+    <p class="stamp">— IV —</p>
+    <h2>冬<span class="small">Fuyu · Winter</span></h2>
+    <div class="ornament-rule"></div>
+
+    <h3 class="course">Fugu &amp; yuzu no kondate</h3>
+    <ul class="dishes">
+      <li><span class="jp">向附</span>Tora-fugu tessa — paper-thin tiger pufferfish, ponzu of Tosa-su and momiji-oroshi</li>
+      <li><span class="jp">鍋</span>Fugu-chiri — pufferfish hotpot with kombu, tōfu, and seri at the table</li>
+      <li><span class="jp">蒸物</span>Kabura-mushi — grated turnip steamed over white-flesh fish, ankake of yuzu and dashi</li>
+      <li><span class="jp">器</span>Yuzu-gama — yuzu-rind vessel filled with crab, mountain yam, and gold-leaf flake</li>
+      <li><span class="jp">雑炊</span>Fugu zōsui — closing rice-porridge in the broth of the hotpot</li>
+    </ul>
+
+    <div class="meta">
+      <span class="label">Served</span>
+      <span class="dates">1st Day, 12th Month — 28th Day, 2nd Month<br>(Dec 1 — Feb 28)</span>
+    </div>
+    <p class="price">¥32,000<span class="per">per guest, twelve courses</span></p>
+
+    <div class="ume" aria-hidden="true">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="28" r="14" fill="#e34234"/>
+        <circle cx="26" cy="44" r="14" fill="#e34234"/>
+        <circle cx="74" cy="44" r="14" fill="#e34234"/>
+        <circle cx="34" cy="72" r="14" fill="#e34234"/>
+        <circle cx="66" cy="72" r="14" fill="#e34234"/>
+        <circle cx="50" cy="52" r="6" fill="#c9a23a"/>
+      </svg>
+    </div>
+  </article>
+
+</section>
+
+<section class="aside-note">
+  <div class="colophon">
+    <p class="heading">A note on the kondate</p>
+    <p>Each course is composed by the third-generation proprietor, <span class="cinnabar">Tachibana Mosuke</span>, in the manner set down in the Kiritsubo recipe book of Bunsei 8 (1825) and continued, with revisions, into the Meiji period. Where the old text calls for fish no longer drawn from the Kanda river, we substitute from coastal markets — <em>Toyosu in the dawn, Kanda by the breakfast bell</em>.</p>
+    <p>Allergies, dietary observances, and abstentions are accommodated when notice is given at the time of reservation. Please see <a href="page-5.html" style="color:var(--primary);">Reservations &amp; Private Zashiki</a>.</p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="asanoha-band" aria-hidden="true"></div>
+  <div class="footer-seal" aria-hidden="true">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="46" fill="none" stroke="#1c3a5e" stroke-width="1.2"/>
+      <circle cx="50" cy="50" r="38" fill="none" stroke="#1c3a5e" stroke-width="0.5"/>
+      <path d="M50 22 C 38 36, 38 46, 50 52 C 62 46, 62 36, 50 22 Z" fill="#1c3a5e"/>
+      <path d="M30 58 Q 50 70 70 58 Q 60 76 50 76 Q 40 76 30 58 Z" fill="#1c3a5e"/>
+      <circle cx="50" cy="50" r="3" fill="#e34234"/>
+    </svg>
+  </div>
+  <p class="signature">桐壺 — 神田区、東京</p>
+  <p class="signature" style="font-size:11px; letter-spacing:0.3em; color:var(--text); margin-top:-22px;">Kiritsubo — Kanda-ku, Tōkyō</p>
+
+  <div class="footer-cols">
+    <div>
+      <h4>Address &amp; Hours</h4>
+      <p>2-chōme 14-7, Kanda-Awajichō<br>Chiyoda-ku, Tōkyō 101-0063</p>
+      <p>Telephone · 03-3252-XXXX</p>
+      <p>Lunch · 12:00 — 14:00 (last seating 13:00)<br>Dinner · 17:30 — 22:00 (last seating 20:00)<br>Closed · Sundays &amp; the second Monday</p>
+    </div>
+    <div>
+      <h4>Colophon</h4>
+      <p>Tsuru-no-maru and umebachi kamon rendered after public-domain sources; vector reconstructions by the house, released CC BY-SA 4.0.</p>
+      <p>Wagara grounds — seigaiha, asanoha, sayagata — drawn from Wikimedia Commons originals.</p>
+      <p class="attribution">© Kiritsubo, Bunsei 8 — Reiwa. All recipes remain the property of the house.</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

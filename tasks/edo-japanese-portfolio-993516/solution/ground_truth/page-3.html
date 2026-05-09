@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>The Process — Block, Brush, and Baren · Hangiten Yashiro</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--font-body),serif;
+    margin:0;
+    line-height:1.8;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none;}
+
+  /* faint wagara wash */
+  .wagara-bg{
+    position:fixed;inset:0;
+    background-image:url("svg/seigaiha-waves.svg");
+    background-size:280px 280px;
+    opacity:0.06;
+    pointer-events:none;
+    z-index:0;
+    mix-blend-mode:multiply;
+  }
+
+  /* ─────────────  NAV  ───────────── */
+  .nav-band{
+    position:relative;
+    background:var(--surface);
+    padding:22px 56px 18px 56px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    z-index:5;
+  }
+  .nav-mark{
+    font-family:var(--font-display),serif;
+    font-size:22px;
+    color:var(--primary);
+    letter-spacing:.04em;
+    line-height:1.1;
+  }
+  .nav-mark small{
+    display:block;
+    font-family:var(--font-body),serif;
+    font-size:10.5px;
+    letter-spacing:.32em;
+    text-transform:uppercase;
+    color:var(--text);
+    opacity:.65;
+    margin-top:2px;
+  }
+  .nav-links{
+    display:flex;
+    align-items:center;
+    gap:0;
+    font-size:11px;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    font-variant:small-caps;
+  }
+  .nav-links a{
+    padding:0 18px;
+    border-right:1px solid rgba(12,12,12,.35);
+    color:var(--text);
+    transition:color .2s;
+  }
+  .nav-links a:first-child{padding-left:0;}
+  .nav-links a:last-of-type{border-right:none;padding-right:18px;}
+  .nav-links a[aria-current="page"]{
+    color:var(--secondary);
+    font-weight:600;
+  }
+  .nav-seal{
+    width:26px;height:26px;
+    margin-left:8px;
+    opacity:.85;
+  }
+  .nav-seal svg{width:100%;height:100%;display:block;}
+
+  .nav-threshold{
+    height:14px;
+    border-top:1px solid var(--ornament);
+    background-image:url("svg/seigaiha-waves.svg");
+    background-size:160px 160px;
+    background-position:0 -4px;
+    opacity:.18;
+  }
+
+  /* ─────────────  HERO  ───────────── */
+  .hero{
+    position:relative;
+    display:grid;
+    grid-template-columns:1fr 520px 360px;
+    gap:0;
+    padding:90px 56px 120px 56px;
+    z-index:1;
+  }
+  .hero-eyebrow{
+    grid-column:2;
+    font-size:11px;
+    letter-spacing:.42em;
+    text-transform:uppercase;
+    color:var(--secondary);
+    margin-bottom:26px;
+  }
+  .hero-eyebrow::before{
+    content:"參 — ";
+    font-family:var(--font-display),serif;
+    color:var(--primary);
+    margin-right:6px;
+    letter-spacing:0;
+  }
+  .hero-title{
+    grid-column:2;
+    font-family:var(--font-display),serif;
+    font-size:78px;
+    line-height:1.05;
+    color:var(--primary);
+    margin:0 0 28px 0;
+    letter-spacing:-.01em;
+  }
+  .hero-title .ja{
+    display:block;
+    font-size:34px;
+    color:var(--text);
+    margin-bottom:14px;
+    letter-spacing:.06em;
+  }
+  .hero-lede{
+    grid-column:2;
+    max-width:430px;
+    font-size:15.5px;
+    line-height:1.85;
+  }
+  .hero-lede em{
+    color:var(--text-emphasis);
+    font-style:normal;
+    font-weight:600;
+  }
+  .hero-frame{
+    grid-column:3;
+    align-self:start;
+    margin-top:-30px;
+    margin-left:40px;
+    width:300px;
+    height:300px;
+    opacity:.92;
+  }
+  .hero-frame svg{width:100%;height:100%;display:block;}
+
+  /* ─────────────  STAGES  ───────────── */
+  .stages{
+    position:relative;
+    padding:0 56px 80px 56px;
+    z-index:1;
+  }
+  .divider{
+    position:relative;
+    height:64px;
+    margin:0 0 80px 0;
+    overflow:hidden;
+  }
+  .divider svg{
+    position:absolute;
+    top:-260px;left:50%;
+    transform:translateX(-50%);
+    width:600px;height:600px;
+    opacity:.42;
+  }
+  .divider::after{
+    content:"";
+    position:absolute;left:0;right:0;bottom:0;
+    height:1px;background:var(--ornament);opacity:.55;
+  }
+
+  .stage{
+    display:grid;
+    grid-template-columns:120px 1fr 1fr 1fr;
+    gap:48px;
+    padding:48px 0 64px 0;
+    border-bottom:1px solid rgba(12,12,12,.18);
+  }
+  .stage:last-of-type{border-bottom:none;}
+  .stage-num{
+    font-family:var(--font-display),serif;
+    font-size:88px;
+    line-height:1;
+    color:var(--accent);
+  }
+  .stage-num small{
+    display:block;
+    font-family:var(--font-body),serif;
+    font-size:10px;
+    letter-spacing:.32em;
+    text-transform:uppercase;
+    color:var(--text);
+    opacity:.6;
+    margin-top:10px;
+  }
+  .stage-title{
+    grid-column:2;
+  }
+  .stage-title h2{
+    font-family:var(--font-display),serif;
+    font-size:34px;
+    line-height:1.15;
+    color:var(--primary);
+    margin:0 0 8px 0;
+  }
+  .stage-title .romaji{
+    font-style:italic;
+    font-size:13.5px;
+    color:var(--secondary);
+    letter-spacing:.05em;
+  }
+  .stage-title .meta{
+    margin-top:18px;
+    font-size:12px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--text);
+    opacity:.7;
+  }
+  .stage-body{
+    grid-column:3 / span 2;
+    font-size:14.5px;
+    line-height:1.85;
+    column-count:2;
+    column-gap:38px;
+  }
+  .stage-body p{margin:0 0 1em 0;}
+  .stage-body p:first-child::first-letter{
+    font-family:var(--font-display),serif;
+    color:var(--secondary);
+    font-size:42px;
+    float:left;
+    line-height:.9;
+    margin:6px 8px 0 0;
+  }
+
+  /* offset variants */
+  .stage--offset-r{grid-template-columns:1fr 120px 1fr 1fr;}
+  .stage--offset-r .stage-num{grid-column:2;}
+  .stage--offset-r .stage-title{grid-column:1;text-align:right;padding-right:8px;}
+  .stage--offset-r .stage-body{grid-column:3 / span 2;}
+
+  /* ─────────────  PULL QUOTE  ───────────── */
+  .pullquote{
+    position:relative;
+    margin:80px 56px 80px auto;
+    max-width:780px;
+    padding:60px 80px 60px 80px;
+    background:var(--surface);
+    z-index:1;
+  }
+  .pullquote::before{
+    content:"";
+    position:absolute;
+    left:0;top:24px;bottom:24px;
+    width:3px;
+    background:var(--secondary);
+  }
+  .pullquote p{
+    font-family:var(--font-display),serif;
+    font-size:38px;
+    line-height:1.45;
+    color:var(--primary);
+    margin:0 0 24px 0;
+    letter-spacing:.01em;
+  }
+  .pullquote cite{
+    font-style:normal;
+    font-size:11px;
+    letter-spacing:.32em;
+    text-transform:uppercase;
+    color:var(--text);
+    opacity:.7;
+  }
+  .pullquote .seal{
+    position:absolute;
+    top:34px;right:36px;
+    width:54px;height:54px;
+    opacity:.10;
+  }
+
+  /* ─────────────  MATERIALS  ───────────── */
+  .materials{
+    position:relative;
+    padding:80px 56px 120px 56px;
+    z-index:1;
+  }
+  .materials-head{
+    display:grid;
+    grid-template-columns:1fr 2fr 1fr;
+    margin-bottom:60px;
+  }
+  .materials-head .label{
+    grid-column:2;
+    font-size:11px;
+    letter-spacing:.42em;
+    text-transform:uppercase;
+    color:var(--secondary);
+    margin-bottom:14px;
+  }
+  .materials-head h2{
+    grid-column:2;
+    font-family:var(--font-display),serif;
+    font-size:54px;
+    line-height:1.1;
+    color:var(--primary);
+    margin:0 0 18px 0;
+  }
+  .materials-head p{
+    grid-column:2;
+    max-width:540px;
+    font-size:14.5px;
+  }
+
+  .pigments{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:48px;
+  }
+  .pigment{
+    position:relative;
+    background:var(--surface);
+    padding:40px 36px 44px 36px;
+  }
+  .pigment:nth-child(1){margin-top:0;margin-right:24px;}
+  .pigment:nth-child(2){margin-top:64px;}
+  .pigment:nth-child(3){margin-top:24px;margin-left:24px;}
+  .pigment .kamon-corner{
+    position:absolute;
+    top:14px;right:14px;
+    width:42px;height:42px;
+    opacity:.10;
+  }
+  .pigment .swatch{
+    width:64px;height:64px;
+    margin-bottom:22px;
+    border:1px solid rgba(12,12,12,.2);
+  }
+  .pigment h3{
+    font-family:var(--font-display),serif;
+    font-size:26px;
+    line-height:1.15;
+    color:var(--primary);
+    margin:0 0 4px 0;
+  }
+  .pigment .sub{
+    font-style:italic;
+    font-size:12.5px;
+    color:var(--text);
+    opacity:.7;
+    letter-spacing:.04em;
+    margin-bottom:16px;
+    display:block;
+  }
+  .pigment p{
+    font-size:13.5px;
+    line-height:1.75;
+    margin:0 0 14px 0;
+  }
+  .pigment .source{
+    font-size:11px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--secondary);
+    border-top:1px solid rgba(12,12,12,.2);
+    padding-top:14px;
+    margin-top:18px;
+  }
+  .pigment.featured h3{
+    border-bottom:1px solid var(--secondary);
+    padding-bottom:6px;
+    display:inline-block;
+  }
+
+  /* ─────────────  TOOLS PLATE  ───────────── */
+  .tools{
+    position:relative;
+    padding:60px 56px 140px 56px;
+    z-index:1;
+  }
+  .tools-grid{
+    display:grid;
+    grid-template-columns:1fr 480px;
+    gap:80px;
+    align-items:start;
+  }
+  .tools-figure{
+    position:relative;
+    background:var(--surface);
+    padding:50px 50px 30px 50px;
+    margin-left:120px;
+  }
+  .tools-figure .frame-svg{
+    width:100%;
+    aspect-ratio:1/1;
+    background:var(--bg);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .tools-figure .frame-svg svg{width:78%;height:78%;opacity:.95;}
+  .tools-figure figcaption{
+    margin-top:22px;
+    font-size:11.5px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--text);
+    opacity:.75;
+    line-height:1.7;
+  }
+  .tools-figure figcaption em{
+    font-style:italic;
+    color:var(--secondary);
+    text-transform:none;
+    letter-spacing:.04em;
+    display:block;
+    margin-top:4px;
+  }
+  .tools-text .label{
+    font-size:11px;
+    letter-spacing:.42em;
+    text-transform:uppercase;
+    color:var(--secondary);
+    margin-bottom:14px;
+  }
+  .tools-text h2{
+    font-family:var(--font-display),serif;
+    font-size:46px;
+    line-height:1.1;
+    color:var(--primary);
+    margin:0 0 24px 0;
+  }
+  .tools-text p{
+    font-size:14.5px;
+    margin:0 0 1.2em 0;
+    max-width:380px;
+  }
+  .tools-text dl{
+    margin-top:30px;
+    border-top:1px solid rgba(12,12,12,.25);
+  }
+  .tools-text dl > div{
+    display:grid;
+    grid-template-columns:140px 1fr;
+    padding:14px 0;
+    border-bottom:1px solid rgba(12,12,12,.15);
+    gap:20px;
+    font-size:13.5px;
+  }
+  .tools-text dt{
+    font-family:var(--font-display),serif;
+    color:var(--primary);
+    font-size:16px;
+  }
+  .tools-text dt small{
+    display:block;
+    font-family:var(--font-body),serif;
+    font-style:italic;
+    font-size:10.5px;
+    color:var(--text);
+    opacity:.65;
+    letter-spacing:.04em;
+    margin-top:2px;
+  }
+  .tools-text dd{margin:0;line-height:1.7;}
+
+  /* ─────────────  COLOPHON STRIP  ───────────── */
+  .colophon{
+    position:relative;
+    padding:80px 56px 100px 56px;
+    z-index:1;
+  }
+  .colophon-grid{
+    display:grid;
+    grid-template-columns:340px 1fr;
+    gap:80px;
+  }
+  .colophon h2{
+    font-family:var(--font-display),serif;
+    font-size:32px;
+    line-height:1.2;
+    color:var(--primary);
+    margin:0;
+  }
+  .colophon h2 small{
+    display:block;
+    font-family:var(--font-body),serif;
+    font-style:italic;
+    font-size:13px;
+    color:var(--secondary);
+    margin-top:8px;
+    letter-spacing:.04em;
+  }
+  .colophon ol{
+    list-style:none;
+    counter-reset:step;
+    margin:0;padding:0;
+    columns:2;
+    column-gap:48px;
+  }
+  .colophon ol li{
+    counter-increment:step;
+    break-inside:avoid;
+    padding:14px 0 14px 56px;
+    border-top:1px solid rgba(12,12,12,.2);
+    font-size:13.5px;
+    line-height:1.7;
+    position:relative;
+  }
+  .colophon ol li::before{
+    content:counter(step,cjk-ideographic);
+    position:absolute;left:0;top:14px;
+    font-family:var(--font-display),serif;
+    font-size:22px;
+    color:var(--accent);
+  }
+  .colophon ol li strong{
+    display:block;
+    font-family:var(--font-display),serif;
+    color:var(--primary);
+    font-weight:400;
+    font-size:16px;
+    margin-bottom:2px;
+  }
+
+  /* ─────────────  FOOTER  ───────────── */
+  footer{
+    position:relative;
+    background:var(--bg);
+    padding:60px 56px 40px 56px;
+    margin-top:40px;
+    border-top:1px solid var(--ornament);
+    z-index:1;
+  }
+  .footer-sayagata{
+    position:absolute;
+    top:0;left:0;right:0;
+    height:36px;
+    background-image:url("svg/sayagata-keyfret.svg");
+    background-size:200px 200px;
+    opacity:.13;
+    pointer-events:none;
+  }
+  .footer-upper{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    padding-top:30px;
+    padding-bottom:50px;
+    border-bottom:1px solid rgba(12,12,12,.25);
+  }
+  .footer-upper .addr{
+    font-family:var(--font-display),serif;
+    font-size:22px;
+    line-height:1.7;
+    color:var(--primary);
+  }
+  .footer-upper .addr-latin{
+    font-family:var(--font-body),serif;
+    font-style:italic;
+    font-size:12.5px;
+    color:var(--text);
+    opacity:.75;
+    margin-top:14px;
+    letter-spacing:.04em;
+    line-height:1.7;
+  }
+  .footer-upper .hours{
+    font-size:12.5px;
+    line-height:1.9;
+  }
+  .footer-upper .hours h4{
+    font-family:var(--font-display),serif;
+    font-size:18px;
+    color:var(--primary);
+    margin:0 0 12px 0;
+    font-weight:400;
+  }
+  .footer-lower{
+    display:grid;
+    grid-template-columns:1fr 160px 1fr;
+    gap:40px;
+    align-items:center;
+    padding-top:36px;
+  }
+  .footer-lower .colophon-line{
+    font-size:11.5px;
+    letter-spacing:.12em;
+    line-height:1.8;
+  }
+  .footer-lower .colophon-line.right{
+    text-align:right;
+    font-size:10.5px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    opacity:.7;
+  }
+  .footer-seal{
+    justify-self:center;
+    width:130px;height:130px;
+    opacity:.85;
+  }
+  .footer-seal svg{width:100%;height:100%;display:block;}
+</style>
+</head>
+<body>
+<div class="wagara-bg" aria-hidden="true"></div>
+
+<!-- ─────────  NAV  ───────── -->
+<header class="nav-band">
+  <div class="nav-mark">
+    淺草版木店
+    <small>Hangiten Yashiro · Nishijin</small>
+  </div>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="page-1.html">Studio</a>
+    <a href="page-2.html">Works</a>
+    <a href="page-3.html" aria-current="page">Process</a>
+    <a href="page-4.html">Lineage</a>
+    <a href="page-5.html">Commissions</a>
+    <a href="page-6.html">Visit</a>
+    <span class="nav-seal" aria-hidden="true">
+      <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg">
+        <rect width="688" height="688" fill="#1c3a5e"/>
+        <path d="M 226.13364,612.57579 C 207.8052,610.64503 189.07085,603.27797 174.07991,592.10629 C 168.2372,587.75214 158.29322,577.8608 153.78698,571.9208 C 132.5626,543.94339 126.61588,507.85248 137.79008,474.83496 C 152.97675,445.64361 173.42393,425.04434 226.13364,612.57579 z M 439.98488,612.57579 C 421.65644,610.64503 402.9221,603.27797 387.93116,592.10629 C 367.63822,571.9208 346.41385,543.94339 351.64132,474.83496 C 366.828,445.64361 387.27517,425.04434 439.98488,612.57579 z M 333.05926,283.9271 C 314.73082,281.99634 295.99647,274.62928 281.00554,263.4576 C 275.16282,259.10345 265.21884,249.21211 260.7126,243.27211 C 239.48823,215.2947 233.5415,179.20379 244.7157,146.18627 C 259.90237,116.99491 280.34955,96.395647 333.05926,283.9271 z" fill="#f5efde"/>
+      </svg>
+    </span>
+  </nav>
+</header>
+<div class="nav-threshold" aria-hidden="true"></div>
+
+<!-- ─────────  HERO  ───────── -->
+<section class="hero">
+  <p class="hero-eyebrow">The Process</p>
+  <h1 class="hero-title">
+    <span class="ja">板・筆・馬連</span>
+    Block, Brush,<br>and Baren.
+  </h1>
+  <div class="hero-lede">
+    <p>Seven stages, four hands, one breath. From the first <em>hanshita</em> drawing brushed in Nara sumi to the final <em>suri</em> impression pressed by horse-tail baren — a single edition of forty prints can occupy the bench for ninety-six working days. What follows is the route the paper takes through this machiya in Nishijin.</p>
+  </div>
+  <div class="hero-frame" aria-hidden="true">
+    <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg">
+      <rect width="688" height="688" fill="none"/>
+      <g transform="translate(344,344)">
+        <circle r="280" fill="none" stroke="#1c3a5e" stroke-width="1.2"/>
+        <circle r="240" fill="none" stroke="#1c3a5e" stroke-width="0.6"/>
+        <circle r="160" fill="none" stroke="#e34234" stroke-width="0.8"/>
+        <text y="14" text-anchor="middle" font-family="Yuji Syuku" font-size="120" fill="#1c3a5e">摺</text>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<!-- ─────────  STAGES  ───────── -->
+<section class="stages">
+  <div class="divider" aria-hidden="true">
+    <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="501.6,301.2 551.1,251.7 500.8,201.4 451.3,250.9 300.9,100.5 350.4,51 300.1,0.7 250.6,50.2 201.1,0.7 150.3,51.5 500.3,401.5 551.1,350.7" fill="none" stroke="#0c0c0c" stroke-width="2"/>
+      <polygon points="600.9,199.9 551.6,150.7 601.2,101 550.7,50.4 501,100.1 450.4,150.7 400.8,200.3 451.3,250.9 501,201.2 550.3,250.5" fill="none" stroke="#0c0c0c" stroke-width="2"/>
+      <polygon points="349.9,452.9 300.4,502.4 250.1,452.1 299.6,402.6 149.2,252.2 99.7,301.7 49.4,251.4 98.9,201.9 49.4,152.4 100.2,101.6 450.2,451.6 399.4,502.4" fill="none" stroke="#0c0c0c" stroke-width="2"/>
+      <polygon points="248.7,552.1 199.4,502.9 149.7,552.5 99.2,501.9 148.8,452.3 199.4,401.7 249,352.1 299.6,402.6 250,452.3 299.2,501.6" fill="none" stroke="#0c0c0c" stroke-width="2"/>
+      <polygon points="-0.9,302.6 48.4,351.9 -1.2,401.5 49.3,452.1 99,402.5 149.6,351.9 199.2,302.2 148.7,251.7 99,301.3 49.7,252" fill="none" stroke="#0c0c0c" stroke-width="2"/>
+    </svg>
+  </div>
+
+  <article class="stage">
+    <div class="stage-num">壹<small>Stage I</small></div>
+    <div class="stage-title">
+      <h2>Hanshita</h2>
+      <div class="romaji">下絵 — the underdrawing</div>
+      <div class="meta">8–14 days · sumi on minogami</div>
+    </div>
+    <div class="stage-body">
+      <p>The hanshita is the master drawing — a single brushed sheet that determines every key line and every colour separation that will follow. Yashiro draws it twice: once on rough paper for composition, then again, more slowly, on a thin minogami sheet from Iwano Heizaburō's mill in Echizen. The second drawing is the one that will be sacrificed, pasted face-down to the cherrywood and abraded away to leave only its sumi traces.</p>
+      <p>Pigment for this stage is always Kobaien <em>shōen-boku</em>, a pinewood-soot ink stick ground fresh on a Tankei suzuri stone. Nothing else holds a clean line under the chisel.</p>
+    </div>
+  </article>
+
+  <article class="stage stage--offset-r">
+    <div class="stage-num">貳<small>Stage II</small></div>
+    <div class="stage-title">
+      <h2>Hanshita-bari</h2>
+      <div class="romaji">版下貼り — pasting the drawing</div>
+      <div class="meta">a single afternoon · nori paste, patience</div>
+    </div>
+    <div class="stage-body">
+      <p>The drawing is brushed, face-down, onto a planed block of yamazakura — wild mountain cherry harvested from the southern slopes of Yoshino, kiln-dried for a minimum of four winters. The paste is shōfu-nori, wheat starch cooked thin enough to release the paper but strong enough to hold it overnight.</p>
+      <p>Once the paste sets, Yashiro rubs the back of the sheet with a fingertip soaked in camellia oil. The minogami fibres lift away in tiny rolls. What remains, ghost-clear on the wood, is the line the chisel will follow.</p>
+    </div>
+  </article>
+
+  <article class="stage">
+    <div class="stage-num">參<small>Stage III</small></div>
+    <div class="stage-title">
+      <h2>Hori — keyblock</h2>
+      <div class="romaji">彫り（主版） — carving the line</div>
+      <div class="meta">22–40 days · 9 chisels, 1 hangi-tō</div>
+    </div>
+    <div class="stage-body">
+      <p>The keyblock — <em>omohan</em> — carries the drawing's black line and nothing else. Yashiro carves it with a hangi-tō knife held like a writing brush, supported by the second knuckle of the index finger. Around the line, the wood is cleared with five widths of <em>aisuki</em> flat chisel and three U-gouges (<em>marunomi</em>) for the broad fields.</p>
+      <p>Two registration marks are cut at this stage: a right-angled <em>kagi</em> in the lower right corner of the block, and a straight <em>hikitsuke</em> bar along the bottom edge. Every subsequent block in the edition will be cut to receive these same two marks. They are the difference between a print and a smudge.</p>
+    </div>
+  </article>
+
+  <article class="stage stage--offset-r">
+    <div class="stage-num">肆<small>Stage IV</small></div>
+    <div class="stage-title">
+      <h2>Kyōgō-zuri</h2>
+      <div class="romaji">校合摺り — proof impressions</div>
+      <div class="meta">3–6 days · 12 to 18 proofs pulled</div>
+    </div>
+    <div class="stage-body">
+      <p>From the finished keyblock, twelve to eighteen proofs are pulled in sumi onto thin gampi. These are not for sale; they are working drawings. Yashiro brushes each proof with a single colour intention — one for the indigo plate, one for the cinnabar, one for the soft pale yellow of <em>kihada</em> bark — marking out the area each separation block will need to carry.</p>
+      <p>Each marked proof is then pasted to its own block of yamazakura. A print of forty colours requires forty kyōgō and at least twenty-two blocks, since most blocks are carved on both faces.</p>
+    </div>
+  </article>
+
+  <article class="stage">
+    <div class="stage-num">伍<small>Stage V</small></div>
+    <div class="stage-title">
+      <h2>Hori — colour blocks</h2>
+      <div class="romaji">色版彫り — carving the separations</div>
+      <div class="meta">35–70 days · the longest bench</div>
+    </div>
+    <div class="stage-body">
+      <p>This is where the months go. Each colour block is cleared so that only the area that will print remains in relief — sometimes a leaf, sometimes a single eyelash. The two registration marks are cut last, with a square and a steel rule, never by eye.</p>
+      <p>For graduated washes — <em>bokashi</em> — a shallow channel is gouged at the colour edge to hold a reservoir of water. The pigment is brushed into it; the gradient happens on the block, not on the paper.</p>
+    </div>
+  </article>
+
+  <article class="stage stage--offset-r">
+    <div class="stage-num">陸<small>Stage VI</small></div>
+    <div class="stage-title">
+      <h2>Kami-shime</h2>
+      <div class="romaji">紙締め — sizing &amp; conditioning the paper</div>
+      <div class="meta">2 days · dōsa (gelatine + alum)</div>
+    </div>
+    <div class="stage-body">
+      <p>The edition paper is hōsho from Iwano's mill — 100% kōzo, 64 g/m², deckle-edged. Before printing, each sheet is brushed with <em>dōsa</em>, a thin solution of nikawa gelatine and alum, to set the surface so pigment sits where it is laid rather than wicking through the fibre.</p>
+      <p>The sized paper is then damped in stacks between two sheets of soaked newsprint and pressed under a flat board for a full night. By morning, every sheet in the stack has reached the same humidity. A drier sheet will refuse the colour; a wetter one will cockle.</p>
+    </div>
+  </article>
+
+  <article class="stage">
+    <div class="stage-num">柒<small>Stage VII</small></div>
+    <div class="stage-title">
+      <h2>Suri</h2>
+      <div class="romaji">摺り — the impression</div>
+      <div class="meta">9–18 days · baren, brush, breath</div>
+    </div>
+    <div class="stage-body">
+      <p>The damp sheet is laid into the kentō registration and pressed. Pigment is brushed onto the block with a circular <em>maru-bake</em> of deer hair, mixed wet with a touch of nori paste so that it holds where it is placed. The baren — a coiled cord of horse-tail wrapped in a fresh bamboo sheath — is pulled across the back of the paper in long arcs from the centre out.</p>
+      <p>One block, one colour, one pull. Then the sheet is lifted, hung to rest, returned to its damp stack, and the next block is inked. A print of forty colours is touched by Yashiro's hand at least eighty times before it is signed.</p>
+    </div>
+  </article>
+</section>
+
+<!-- ─────────  PULL QUOTE  ───────── -->
+<aside class="pullquote">
+  <div class="seal" aria-hidden="true">
+    <svg viewBox="0 0 345 326" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="172" cy="155" r="9.9" fill="#1c3a5e"/>
+      <path d="M 73,128 C 77,125 78,125 84,125 C 89,125 99,128 102,127 C 104,127 107,125 108,123 C 109,121 109,118 108,116 C 107,115 107,113 108,110 C 109,107 109,106 106,103 C 105,101 104,101 102,100 C 99,99 99,99 96,100 C 93,102 92,102 90,100 C 86,98 81,99 78,103 C 77,104 76,106 77,111 C 78,115 76,119 73,121 C 69,123 69,121 69,110 C 69,102 69,100 72,97 C 74,94 78,93 83,93 C 94,94 96,94 98,93 C 102,91 102,90 102,86 Z" fill="#1c3a5e"/>
+    </svg>
+  </div>
+  <p>"The block remembers the hand. The paper remembers the block."</p>
+  <cite>— Tomé Yashiro, studio notebook, autumn 2019</cite>
+</aside>
+
+<!-- ─────────  MATERIALS / PIGMENTS  ───────── -->
+<section class="materials">
+  <div class="materials-head">
+    <div class="label">Pigment &amp; Provenance</div>
+    <h2>Three colours, three colourmen.</h2>
+    <p>The studio buys from three houses only. None of them have websites; two are reached by letter. Their materials are what makes a Hangiten print look the way it does, and they are the reason a five-colour edition cannot be hurried.</p>
+  </div>
+
+  <div class="pigments">
+    <article class="pigment featured">
+      <span class="kamon-corner" aria-hidden="true">
+        <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg"><circle cx="344" cy="344" r="280" fill="none" stroke="#0c0c0c" stroke-width="14"/><circle cx="344" cy="344" r="180" fill="none" stroke="#0c0c0c" stroke-width="10"/></svg>
+      </span>
+      <div class="swatch" style="background:#0c0c0c;"></div>
+      <h3>Sumi</h3>
+      <span class="sub">墨 — pinewood-soot ink, ground fresh</span>
+      <p>Stick ink from <strong>Kobaien</strong> of Nara, founded Tenshō 5 (1577). Yashiro keeps three grades on the bench: an <em>aoboku</em> for crisp keylines, a warmer <em>chaboku</em> for shadow, and a sōen pinewood stick reserved for proofing.</p>
+      <div class="source">Kobaien · Nara · est. 1577</div>
+    </article>
+
+    <article class="pigment featured">
+      <span class="kamon-corner" aria-hidden="true">
+        <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg"><circle cx="344" cy="344" r="280" fill="none" stroke="#0c0c0c" stroke-width="14"/><circle cx="344" cy="344" r="180" fill="none" stroke="#0c0c0c" stroke-width="10"/></svg>
+      </span>
+      <div class="swatch" style="background:#1c3a5e;"></div>
+      <h3>Ai — indigo</h3>
+      <span class="sub">藍 — fermented sukumo, Awa province</span>
+      <p>Sukumo paste from <strong>Watanabe Yoshio</strong>, ai-shi of Tokushima — one of four remaining masters certified by the prefecture. The studio buys 1.8 kg each November, fermented in a cedar vat for one hundred days. The blue deepens with each impression; a single edition will draw down half a kilogram.</p>
+      <div class="source">Watanabe Aizome · Tokushima</div>
+    </article>
+
+    <article class="pigment featured">
+      <span class="kamon-corner" aria-hidden="true">
+        <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg"><circle cx="344" cy="344" r="280" fill="none" stroke="#0c0c0c" stroke-width="14"/><circle cx="344" cy="344" r="180" fill="none" stroke="#0c0c0c" stroke-width="10"/></svg>
+      </span>
+      <div class="swatch" style="background:#e34234;"></div>
+      <h3>Shu — cinnabar</h3>
+      <span class="sub">朱 — mercuric sulphide, levigated by hand</span>
+      <p>True cinnabar from the last colourman in Osaka's Doshōmachi quarter, <strong>Nakamura Enogu-ten</strong>, working since Bunkyū 3 (1863). Twelve grams per year, in a glass vial sealed with red wax. Synthetic cadmium is refused; the difference shows in raking light, twenty years on.</p>
+      <div class="source">Nakamura Enogu-ten · Ōsaka · est. 1863</div>
+    </article>
+  </div>
+</section>
+
+<!-- ─────────  TOOLS  ───────── -->
+<section class="tools">
+  <div class="tools-grid">
+    <figure class="tools-figure">
+      <div class="frame-svg">
+        <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+          <g fill="none" stroke="#1c3a5e" stroke-width="1.5">
+            <circle cx="300" cy="300" r="240"/>
+            <circle cx="300" cy="300" r="180"/>
+            <circle cx="300" cy="300" r="120"/>
+            <circle cx="300" cy="300" r="60"/>
+            <path d="M 300,60 L 300,540 M 60,300 L 540,300" stroke-dasharray="3,6"/>
+          </g>
+          <g stroke="#e34234" stroke-width="2" fill="none">
+            <path d="M 80,420 L 140,420 L 140,460"/>
+            <path d="M 80,460 L 220,460"/>
+          </g>
+          <text x="300" y="316" text-anchor="middle" font-family="Yuji Syuku" font-size="80" fill="#0c0c0c" opacity=".85">見當</text>
+        </svg>
+      </div>
+      <figcaption>
+        Plate IV · The Kentō registration system
+        <em>kagi (right-angle) and hikitsuke (bar), cut into every block</em>
+      </figcaption>
+    </figure>
+
+    <div class="tools-text">
+      <div class="label">The bench</div>
+      <h2>Tools the studio still uses daily.</h2>
+      <p>Most are older than the printer. The hangi-tō was inherited from the sixth generation. The baren is rewrapped in fresh bamboo every nineteen impressions — a count the eighth generation marks in pencil on the studio wall.</p>
+
+      <dl>
+        <div>
+          <dt>Hangi-tō<small>版木刀 · the carving knife</small></dt>
+          <dd>Single-bevel, sharpened on Aoto and Awasedo stones. Six in rotation; the oldest dates to 1908.</dd>
+        </div>
+        <div>
+          <dt>Aisuki<small>合透き · flat clearing chisels</small></dt>
+          <dd>Five widths from 3 mm to 24 mm, by Tasai of Sanjō, forged 1971.</dd>
+        </div>
+        <div>
+          <dt>Maru-bake<small>丸刷毛 · pigment brushes</small></dt>
+          <dd>Deer-belly hair, set in cherry handles by Hosoido of Tokyo. Re-haired every fourth edition.</dd>
+        </div>
+        <div>
+          <dt>Hon-baren<small>本馬連 · horse-tail baren</small></dt>
+          <dd>Coiled hon-zuru core wrapped in <em>takenokawa</em> bamboo sheath, replaced ~every 19 pulls.</dd>
+        </div>
+        <div>
+          <dt>Yamazakura<small>山桜 · wild mountain cherry blocks</small></dt>
+          <dd>Yoshino-grown, kiln-dried four winters minimum. Standard plate 36 × 24 × 2.4 cm.</dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────  COLOPHON STRIP  ───────── -->
+<section class="colophon">
+  <div class="colophon-grid">
+    <div>
+      <h2>The seven stages, in summary.
+        <small>One edition · forty prints · ninety-six working days.</small>
+      </h2>
+    </div>
+    <ol>
+      <li><strong>Hanshita</strong>The master drawing in Kobaien sumi on Echizen minogami.</li>
+      <li><strong>Hanshita-bari</strong>The drawing pasted, face-down, to the cherrywood.</li>
+      <li><strong>Hori — omohan</strong>The keyblock carved with hangi-tō and aisuki.</li>
+      <li><strong>Kyōgō-zuri</strong>Proof impressions, marked for separation.</li>
+      <li><strong>Hori — irohan</strong>Each colour cut on its own block face.</li>
+      <li><strong>Kami-shime</strong>Hōsho sized with dōsa and damped overnight.</li>
+      <li><strong>Suri</strong>One block, one colour, one pull. Repeat.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ─────────  FOOTER  ───────── -->
+<footer>
+  <div class="footer-sayagata" aria-hidden="true"></div>
+
+  <div class="footer-upper">
+    <div>
+      <div class="addr">京都市上京区西陣<br>武者小路通油小路東入<br>千本筋三軒目</div>
+      <div class="addr-latin">Kyōto-shi, Kamigyō-ku, Nishijin —<br>Mushanokōji-dōri Aburanokōji higashi-iru,<br>Senbon-suji san-gen-me · 〒602-8226</div>
+    </div>
+    <div class="hours">
+      <h4>Studio &amp; Bench</h4>
+      <p>Tuesday – Saturday · 10:00 – 17:00<br>
+      Closed Sunday, Monday, and during the Gion-matsuri week.<br>
+      Visits by written appointment only — see <a href="page-6.html" style="border-bottom:1px solid var(--secondary);color:var(--secondary);">Visit the Studio</a>.</p>
+    </div>
+  </div>
+
+  <div class="footer-lower">
+    <div class="colophon-line">
+      Hangiten Yashiro · founded Bunkyū 2 / 1862<br>
+      Current proprietor — 8th generation, Tomé Yashiro<br>
+      © 2024 Hangiten Yashiro. All blocks &amp; impressions reserved.
+    </div>
+    <div class="footer-seal" aria-hidden="true">
+      <svg viewBox="0 0 345 326" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(0,0)" fill="#1c3a5e">
+          <circle cx="172.6" cy="155" r="9.9"/>
+          <path d="M 175,166 C 174,170 174,174 174,177 C 190,186 206,197 217,212 C 228,229 236,249 234,269 C 232,262 232,255 230,247 C 223,218 201,194 174,181 C 174,185 174,188 174,192 C 188,200 201,212 210,225 C 221,245 225,270 216,292 C 218,280 218,267 217,254 C 213,229 196,208 174,196 C 174,201 174,206 174,211 C 185,218 196,228 201,240 C 210,259 210,283 200,302 C 203,285 207,269 202,252 C 198,237 188,223 174,216 C 174,220 173,225 176,229 C 193,250 197,282 185,306 C 186,298 189,289 189,280 C 190,263 185,245 174,232 C 174,254 174,276 174,298 C 174,301 173,304 172,307 C 171,304 170,301 170,298 C 170,276 171,254 170,232 C 159,245 155,263 156,280 C 156,289 158,298 159,306 C 147,282 151,250 169,229 C 172,225 170,220 171,216 C 157,223 146,237 142,252 C 137,269 141,285 144,302 C 135,283 135,259 143,240 C 149,228 159,218 170,211 C 170,206 170,201 170,196 C 148,208 131,229 127,254 C 126,267 127,280 128,292 C 120,270 123,245 135,225 C 143,211 156,200 170,192 C 170,188 170,184 170,181 C 143,194 121,218 114,247 C 112,255 112,262 110,269 C 108,249 116,229 127,212 C 138,197 154,185 170,177 C 170,173 170,169 170,166 C 125,181 94,229 96,275 C 97,282 102,286 107,289 C 110,291 110,295 112,298 C 117,311 134,318 147,314 C 154,320 162,326 172,326 C 182,326 190,320 197,314 C 211,318 227,311 233,298 C 234,295 234,291 237,289 C 242,286 247,282 248,275 C 250,229 219,181 175,166 z"/>
+        </g>
+      </svg>
+    </div>
+    <div class="colophon-line right">
+      Kamon SVG renderings — Tsuru-no-maru, Kiri,<br>
+      Umebachi, Sayagata, Seigaiha — drawn from<br>
+      Wikimedia Commons, CC-BY-SA 4.0.
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

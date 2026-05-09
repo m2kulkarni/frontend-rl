@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Journal — Atelier Saint-Sévrin</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    line-height: 1.55;
+  }
+
+  /* ---------- NAVIGATION ARCADE ---------- */
+  .arcade {
+    background: var(--bg);
+    padding: 28px 48px 0;
+    border-bottom: 1px solid var(--accent);
+  }
+  .arcade-inner {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    max-width: 1340px;
+    margin: 0 auto;
+  }
+  .arch-link {
+    position: relative;
+    display: block;
+    height: 92px;
+    text-align: center;
+    text-decoration: none;
+    color: var(--primary);
+  }
+  .arch-link svg.arch-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+  .arch-link .arch-shape {
+    fill: transparent;
+    stroke: var(--primary);
+    stroke-width: 1.5;
+  }
+  .arch-link[aria-current="page"] .arch-shape {
+    fill: var(--secondary);
+    stroke: var(--secondary);
+  }
+  .arch-link span {
+    position: relative;
+    z-index: 1;
+    display: block;
+    padding-top: 52px;
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--primary);
+  }
+  .arch-link[aria-current="page"] span { color: var(--bg); }
+  .arcade-rule {
+    height: 0;
+    border-top: 1px solid var(--accent);
+    margin: 0 auto;
+    max-width: 1340px;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    position: relative;
+    padding: 64px 48px 48px;
+    text-align: center;
+  }
+  .hero-arch {
+    position: relative;
+    width: 460px;
+    height: 506px;
+    margin: 0 auto;
+  }
+  .hero-arch svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .hero-arch .hero-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 60px;
+  }
+  .eyebrow {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.32em;
+    font-size: 12px;
+    color: var(--secondary);
+    margin-bottom: 18px;
+  }
+  .hero h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 56px;
+    line-height: 1;
+    margin: 0 0 18px;
+    color: var(--primary);
+    letter-spacing: 0.01em;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--secondary);
+  }
+  .hero .lede {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--text);
+    max-width: 22em;
+    margin: 0 auto;
+  }
+  .hero .quatrefoil {
+    width: 28px;
+    height: 28px;
+    margin: 18px auto 0;
+    fill: var(--accent);
+  }
+
+  /* ---------- DIVIDER ---------- */
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    padding: 16px 48px 32px;
+  }
+  .divider .line {
+    flex: 0 0 240px;
+    height: 1px;
+    background: var(--primary);
+  }
+  .divider .leaf {
+    width: 36px;
+    height: 36px;
+  }
+  .divider .leaf svg { width: 100%; height: 100%; }
+
+  /* ---------- INDEX BAR ---------- */
+  .indexbar {
+    max-width: 1100px;
+    margin: 0 auto 36px;
+    padding: 16px 32px;
+    border-top: 1px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    color: var(--primary);
+  }
+  .indexbar .accent { color: var(--secondary); }
+  .indexbar .dot {
+    display: inline-block;
+    width: 6px; height: 6px;
+    background: var(--accent);
+    transform: rotate(45deg);
+    margin: 0 10px;
+    vertical-align: middle;
+  }
+
+  /* ---------- ENTRIES ---------- */
+  .entries {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 48px 80px;
+  }
+  .entry {
+    display: grid;
+    grid-template-columns: 200px 1fr 120px;
+    gap: 56px;
+    padding: 40px 0;
+    border-bottom: 1px solid var(--primary);
+    position: relative;
+  }
+  .entry:first-child { border-top: 1px solid var(--primary); }
+
+  .entry-meta {
+    font-family: var(--font-display), serif;
+    text-align: right;
+  }
+  .entry-meta .num {
+    display: block;
+    font-size: 11px;
+    font-variant: small-caps;
+    letter-spacing: 0.28em;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .entry-meta .date {
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--primary);
+    line-height: 1.1;
+    margin-bottom: 4px;
+  }
+  .entry-meta .date em {
+    display: block;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--text);
+    margin-top: 4px;
+  }
+  .entry-meta .reading {
+    font-style: italic;
+    font-size: 12px;
+    color: var(--text);
+    margin-top: 12px;
+  }
+
+  .entry-body {
+    max-width: 22em;
+  }
+  .entry-body .kind {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.24em;
+    font-size: 10px;
+    color: var(--secondary);
+    margin-bottom: 10px;
+  }
+  .entry-body h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 1.12;
+    margin: 0 0 10px;
+    color: var(--primary);
+  }
+  .entry-body h2 a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+  .entry-body h2 a:hover { border-bottom-color: var(--accent); }
+  .entry-body .author {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--text-emphasis);
+    margin: 0 0 14px;
+  }
+  .entry-body .author::before {
+    content: "—";
+    margin-right: 6px;
+    color: var(--accent);
+    font-style: normal;
+  }
+  .entry-body p.abstract {
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: var(--text);
+    margin: 0;
+  }
+  .entry-body .read {
+    display: inline-block;
+    margin-top: 14px;
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.22em;
+    font-size: 10px;
+    color: var(--secondary);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 2px;
+  }
+
+  .entry-folio {
+    position: relative;
+    border-left: 1px solid var(--primary);
+    padding-left: 24px;
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    color: var(--text);
+  }
+  .entry-folio .quatre {
+    width: 22px; height: 22px;
+    fill: var(--secondary);
+    margin-bottom: 14px;
+  }
+  .entry-folio dt {
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    font-size: 9.5px;
+    color: var(--accent);
+    margin-top: 10px;
+  }
+  .entry-folio dd {
+    margin: 2px 0 0;
+    font-style: italic;
+    color: var(--text);
+  }
+  .entry-folio dl { margin: 0; }
+
+  /* drop cap on first entry */
+  .entry.lead .entry-body p.abstract::first-letter {
+    font-family: var(--font-display), serif;
+    font-size: 46px;
+    line-height: 0.9;
+    float: left;
+    padding: 4px 8px 0 0;
+    color: var(--secondary);
+    font-style: italic;
+  }
+
+  /* ---------- ARCHIVE TAILBAND ---------- */
+  .tailband {
+    max-width: 1100px;
+    margin: 0 auto 80px;
+    padding: 28px 48px;
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.26em;
+    font-size: 11px;
+    color: var(--text);
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+  }
+  .tailband a { color: var(--secondary); text-decoration: none; }
+  .tailband .sep {
+    display: inline-block;
+    width: 5px; height: 5px;
+    background: var(--accent);
+    transform: rotate(45deg);
+    margin: 0 14px;
+    vertical-align: middle;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    position: relative;
+    margin-top: 0;
+  }
+  .seal {
+    position: absolute;
+    top: -38px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 76px;
+    height: 76px;
+    background: var(--bg);
+    border-radius: 50%;
+    padding: 8px;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--accent);
+  }
+  .seal svg { width: 100%; height: 100%; fill: var(--secondary); }
+  .heraldic-band {
+    height: 96px;
+    width: 100%;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 600 600'><g transform='translate(300,300)scale(0.87)rotate(45)'><circle cx='-195.1614716' r='163'/><circle cx='195.1614716' r='163'/><circle cy='195.1614716' r='163'/><circle cy='-195.1614716' r='163'/><rect x='-232' y='-232' width='464' height='464'/><g fill='%23f4ecd8'><circle cx='-195.1614716' r='157'/><circle cx='195.1614716' r='157'/><circle cy='195.1614716' r='157'/><circle cy='-195.1614716' r='157'/><rect x='-226' y='-226' width='452' height='452'/></g><circle cx='-195.1614716' r='144'/><circle cx='195.1614716' r='144'/><circle cy='195.1614716' r='144'/><circle cy='-195.1614716' r='144'/><rect x='-213' y='-213' width='426' height='426'/><g fill='%23f4ecd8'><circle cx='-195.1614716' r='138'/><circle cx='195.1614716' r='138'/><circle cy='195.1614716' r='138'/><circle cy='-195.1614716' r='138'/><rect x='-207' y='-207' width='414' height='414'/></g></g></svg>");
+    background-color: var(--bg);
+    background-repeat: repeat-x;
+    background-size: 80px 80px;
+    background-position: center;
+  }
+  .footer-text {
+    background: var(--bg);
+    text-align: center;
+    padding: 28px 48px 36px;
+    border-top: 1px solid var(--accent);
+  }
+  .footer-text .addr {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--primary);
+    margin-bottom: 6px;
+  }
+  .footer-text .tel {
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    color: var(--text);
+    margin-bottom: 14px;
+  }
+  .footer-text .attrib {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.28em;
+    font-size: 10px;
+    color: var(--text);
+  }
+</style>
+</head>
+<body>
+
+<!-- ============== NAV ARCADE ============== -->
+<nav class="arcade" aria-label="Primary">
+  <div class="arcade-inner">
+    <a class="arch-link" href="page-1.html">
+      <svg class="arch-bg" viewBox="0 0 100 100" preserveAspectRatio="none"><path class="arch-shape" d="M 4 96 L 4 42 Q 50 0 96 42 L 96 96 Z"/></svg>
+      <span>Atelier</span>
+    </a>
+    <a class="arch-link" href="page-2.html">
+      <svg class="arch-bg" viewBox="0 0 100 100" preserveAspectRatio="none"><path class="arch-shape" d="M 4 96 L 4 42 Q 50 0 96 42 L 96 96 Z"/></svg>
+      <span>Works</span>
+    </a>
+    <a class="arch-link" href="page-3.html">
+      <svg class="arch-bg" viewBox="0 0 100 100" preserveAspectRatio="none"><path class="arch-shape" d="M 4 96 L 4 42 Q 50 0 96 42 L 96 96 Z"/></svg>
+      <span>The Studio</span>
+    </a>
+    <a class="arch-link" href="page-4.html">
+      <svg class="arch-bg" viewBox="0 0 100 100" preserveAspectRatio="none"><path class="arch-shape" d="M 4 96 L 4 42 Q 50 0 96 42 L 96 96 Z"/></svg>
+      <span>Method &amp; Craft</span>
+    </a>
+    <a class="arch-link" href="page-5.html" aria-current="page">
+      <svg class="arch-bg" viewBox="0 0 100 100" preserveAspectRatio="none"><path class="arch-shape" d="M 4 96 L 4 42 Q 50 0 96 42 L 96 96 Z"/></svg>
+      <span>Journal</span>
+    </a>
+    <a class="arch-link" href="page-6.html">
+      <svg class="arch-bg" viewBox="0 0 100 100" preserveAspectRatio="none"><path class="arch-shape" d="M 4 96 L 4 42 Q 50 0 96 42 L 96 96 Z"/></svg>
+      <span>Commissions</span>
+    </a>
+    <a class="arch-link" href="page-6.html#contact">
+      <svg class="arch-bg" viewBox="0 0 100 100" preserveAspectRatio="none"><path class="arch-shape" d="M 4 96 L 4 42 Q 50 0 96 42 L 96 96 Z"/></svg>
+      <span>Contact</span>
+    </a>
+  </div>
+</nav>
+<div class="arcade-rule"></div>
+
+<!-- ============== HERO ============== -->
+<header class="hero">
+  <div class="hero-arch">
+    <svg viewBox="140 244 500 555" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <g transform="translate(8.199085,-11.874106)" stroke="#0a0a0a" stroke-width="3.125" fill="none" stroke-linecap="round">
+        <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+        <path d="m 250,430.58 24.75248,58.41585"/>
+        <path d="m 347.0297,342.46119 41.58416,23.76238 0.9901,35.64356"/>
+        <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+      </g>
+      <g transform="matrix(-1,0,0,1,786.07978,-12.171279)" stroke="#0a0a0a" stroke-width="3.125" fill="none" stroke-linecap="round">
+        <path d="m 388.98402,268.98399 -57.3416,98.84607 c 0,0 -25.86626,42.49457 -83.14155,62.81806 -57.2753,20.32349 -100.75997,86.77489 -99.76987,153.34998 54.33924,0.0963 3.09748,-0.0963 62.46781,0.25394 0,0 -2.0441,-66.40358 63.16832,-94.48104 50.35451,-21.68032 83.14155,-42.49457 114.55058,-88.68432"/>
+        <path d="m 250,430.58 24.75248,58.41585"/>
+        <path d="m 347.0297,342.46119 41.58416,23.76238 0.9901,35.64356"/>
+        <path d="m 211.38614,583.05525 -1.48515,211.88119"/>
+      </g>
+    </svg>
+    <div class="hero-content">
+      <div class="eyebrow">Folio V · Studio Writings</div>
+      <h1>The <em>Journal</em></h1>
+      <p class="lede">Field notes, essays, and quiet arguments from the drawing-rooms and quarry yards of the atelier — 2022 through 2024.</p>
+      <svg class="quatrefoil" viewBox="0 0 600 600" aria-hidden="true">
+        <g transform="translate(300,300)scale(0.5)rotate(45)">
+          <circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/>
+          <circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/>
+          <rect x="-232" y="-232" width="464" height="464"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<!-- ============== DIVIDER ============== -->
+<div class="divider" aria-hidden="true">
+  <span class="line"></span>
+  <span class="leaf">
+    <svg viewBox="110 124 40 40" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(-110.42237,-124.36839)">
+        <path fill="#1e3a5f" d="M 130 130 L 130 160 M 120 145 L 140 145 M 124 138 L 136 152 M 124 152 L 136 138" stroke="#1e3a5f" stroke-width="0.6"/>
+        <circle cx="130" cy="145" r="3" fill="#c9a23a"/>
+      </g>
+    </svg>
+  </span>
+  <span class="line"></span>
+</div>
+
+<!-- ============== INDEX BAR ============== -->
+<div class="indexbar">
+  <span>Eight Pieces <span class="dot"></span> <span class="accent">MMXXII — MMXXIV</span></span>
+  <span>Edited at Reims <span class="dot"></span> Set in Fraunces &amp; Source</span>
+  <span><span class="accent">Reverse Chronological</span></span>
+</div>
+
+<!-- ============== ENTRIES ============== -->
+<main class="entries">
+
+  <!-- I -->
+  <article class="entry lead">
+    <div class="entry-meta">
+      <span class="num">No. I</span>
+      <div class="date">March<em>14 · 2024</em></div>
+      <div class="reading">12 min. reading</div>
+    </div>
+    <div class="entry-body">
+      <div class="kind">Essay · On Geometry</div>
+      <h2><a href="#">On the geometry of plate tracery at Soissons</a></h2>
+      <p class="author">Hélène Vaucresson, principal architect</p>
+      <p class="abstract">The clerestory at Soissons offers a rare unaltered passage from plate to bar tracery, and its proportions still resist easy diagramming after eight centuries. Drawing from the chapter archive and three weeks of rope-access survey, this essay reconstructs the masons' compass-and-string method and considers what its slight imprecisions tell us about workshop authority.</p>
+      <a class="read" href="#">Read the piece →</a>
+    </div>
+    <aside class="entry-folio">
+      <svg class="quatre" viewBox="0 0 600 600"><g transform="translate(300,300)scale(0.7)rotate(45)"><circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/><circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/><rect x="-232" y="-232" width="464" height="464"/></g></svg>
+      <dl>
+        <dt>Filed under</dt><dd>Tracery</dd>
+        <dt>Plates</dt><dd>14 drawings</dd>
+        <dt>Folio</dt><dd>v. III, no. 8</dd>
+      </dl>
+    </aside>
+  </article>
+
+  <!-- II -->
+  <article class="entry">
+    <div class="entry-meta">
+      <span class="num">No. II</span>
+      <div class="date">January<em>22 · 2024</em></div>
+      <div class="reading">8 min. reading</div>
+    </div>
+    <div class="entry-body">
+      <div class="kind">Field Note · Civic Work</div>
+      <h2><a href="#">Threshold and porch: rethinking the new town hall at Laon</a></h2>
+      <p class="author">M. Aubrac &amp; J. Berthier, project architects</p>
+      <p class="abstract">A civic threshold has obligations a private one does not — to weather, to crowds, to a shared idea of arrival. Notes from the competition entry for Laon's hôtel-de-ville extension, in which a deep limestone porch is asked to mediate between the medieval ramparts and a 1970s annexe nobody quite loves.</p>
+      <a class="read" href="#">Read the piece →</a>
+    </div>
+    <aside class="entry-folio">
+      <svg class="quatre" viewBox="0 0 600 600"><g transform="translate(300,300)scale(0.7)rotate(45)"><circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/><circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/><rect x="-232" y="-232" width="464" height="464"/></g></svg>
+      <dl>
+        <dt>Filed under</dt><dd>Civic</dd>
+        <dt>Plates</dt><dd>6 drawings</dd>
+        <dt>Folio</dt><dd>v. III, no. 6</dd>
+      </dl>
+    </aside>
+  </article>
+
+  <!-- III -->
+  <article class="entry">
+    <div class="entry-meta">
+      <span class="num">No. III</span>
+      <div class="date">November<em>09 · 2023</em></div>
+      <div class="reading">10 min. reading</div>
+    </div>
+    <div class="entry-body">
+      <div class="kind">Field Note · Materials</div>
+      <h2><a href="#">Quarry-fresh limestone: sourcing notes from Saint-Maximin</a></h2>
+      <p class="author">Jérôme Berthier, materials lead</p>
+      <p class="abstract">A morning at the Saint-Maximin quarry, where the upper bed is again being worked after a forty-year pause, and a stone of remarkable consistency emerges in slabs the colour of cold cream. We discuss matching, weathering rates, and the small heresy of preferring quarry-fresh stone to careful salvage.</p>
+      <a class="read" href="#">Read the piece →</a>
+    </div>
+    <aside class="entry-folio">
+      <svg class="quatre" viewBox="0 0 600 600"><g transform="translate(300,300)scale(0.7)rotate(45)"><circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/><circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/><rect x="-232" y="-232" width="464" height="464"/></g></svg>
+      <dl>
+        <dt>Filed under</dt><dd>Stone</dd>
+        <dt>Plates</dt><dd>9 photographs</dd>
+        <dt>Folio</dt><dd>v. III, no. 4</dd>
+      </dl>
+    </aside>
+  </article>
+
+  <!-- IV -->
+  <article class="entry">
+    <div class="entry-meta">
+      <span class="num">No. IV</span>
+      <div class="date">September<em>02 · 2023</em></div>
+      <div class="reading">6 min. reading</div>
+    </div>
+    <div class="entry-body">
+      <div class="kind">Essay · Liturgy &amp; Light</div>
+      <h2><a href="#">Glazing the eastern chapel of Saint-Vaast</a></h2>
+      <p class="author">Camille Roussel, conservation associate</p>
+      <p class="abstract">After three years of trials with the Reims atelier of Simon Marq, we have settled on a dichroic blue that reads cool at sunrise and almost violet at vespers. This piece records the colour decisions, the failed first cartoons, and what the chaplains said when the scaffold finally came down.</p>
+      <a class="read" href="#">Read the piece →</a>
+    </div>
+    <aside class="entry-folio">
+      <svg class="quatre" viewBox="0 0 600 600"><g transform="translate(300,300)scale(0.7)rotate(45)"><circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/><circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/><rect x="-232" y="-232" width="464" height="464"/></g></svg>
+      <dl>
+        <dt>Filed under</dt><dd>Glass</dd>
+        <dt>Plates</dt><dd>11 cartoons</dd>
+        <dt>Folio</dt><dd>v. III, no. 2</dd>
+      </dl>
+    </aside>
+  </article>
+
+  <!-- V -->
+  <article class="entry">
+    <div class="entry-meta">
+      <span class="num">No. V</span>
+      <div class="date">July<em>11 · 2023</em></div>
+      <div class="reading">9 min. reading</div>
+    </div>
+    <div class="entry-body">
+      <div class="kind">Polemic · Conservation Ethics</div>
+      <h2><a href="#">A short defence of the unfinished west front</a></h2>
+      <p class="author">Margaux Aubrac, partner</p>
+      <p class="abstract">There is a quiet movement to "complete" the western towers of half-a-dozen French cathedrals, and we should resist it. The unfinished west front is not a wound; it is a document, and the impulse to plaster it over is the impulse to forget the centuries that left it that way.</p>
+      <a class="read" href="#">Read the piece →</a>
+    </div>
+    <aside class="entry-folio">
+      <svg class="quatre" viewBox="0 0 600 600"><g transform="translate(300,300)scale(0.7)rotate(45)"><circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/><circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/><rect x="-232" y="-232" width="464" height="464"/></g></svg>
+      <dl>
+        <dt>Filed under</dt><dd>Ethics</dd>
+        <dt>Plates</dt><dd>3 drawings</dd>
+        <dt>Folio</dt><dd>v. II, no. 12</dd>
+      </dl>
+    </aside>
+  </article>
+
+  <!-- VI -->
+  <article class="entry">
+    <div class="entry-meta">
+      <span class="num">No. VI</span>
+      <div class="date">April<em>28 · 2023</em></div>
+      <div class="reading">7 min. reading</div>
+    </div>
+    <div class="entry-body">
+      <div class="kind">Field Note · Survey</div>
+      <h2><a href="#">A photogrammetric survey of the chapter house at Noyon</a></h2>
+      <p class="author">Étienne Lambert, surveyor</p>
+      <p class="abstract">Six days, 3,840 photographs, and a point cloud of 1.2 billion vertices later, we have a model of the Noyon chapter house accurate to within 4 mm. The drawings reveal a barely perceptible bowing of the south wall that the eye had been quietly correcting for years.</p>
+      <a class="read" href="#">Read the piece →</a>
+    </div>
+    <aside class="entry-folio">
+      <svg class="quatre" viewBox="0 0 600 600"><g transform="translate(300,300)scale(0.7)rotate(45)"><circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/><circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/><rect x="-232" y="-232" width="464" height="464"/></g></svg>
+      <dl>
+        <dt>Filed under</dt><dd>Survey</dd>
+        <dt>Plates</dt><dd>22 sections</dd>
+        <dt>Folio</dt><dd>v. II, no. 9</dd>
+      </dl>
+    </aside>
+  </article>
+
+  <!-- VII -->
+  <article class="entry">
+    <div class="entry-meta">
+      <span class="num">No. VII</span>
+      <div class="date">December<em>15 · 2022</em></div>
+      <div class="reading">11 min. reading</div>
+    </div>
+    <div class="entry-body">
+      <div class="kind">Essay · Sacred Space</div>
+      <h2><a href="#">On the patience of cold churches</a></h2>
+      <p class="author">Hélène Vaucresson, principal architect</p>
+      <p class="abstract">The case against heating a medieval church is, briefly: the stone does not want it, the timber does not want it, and the windows will tell you so within a winter. A meditation on under-floor air systems, hand-warmers, and the dignity of a building permitted to remain itself.</p>
+      <a class="read" href="#">Read the piece →</a>
+    </div>
+    <aside class="entry-folio">
+      <svg class="quatre" viewBox="0 0 600 600"><g transform="translate(300,300)scale(0.7)rotate(45)"><circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/><circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/><rect x="-232" y="-232" width="464" height="464"/></g></svg>
+      <dl>
+        <dt>Filed under</dt><dd>Climate</dd>
+        <dt>Plates</dt><dd>5 diagrams</dd>
+        <dt>Folio</dt><dd>v. II, no. 6</dd>
+      </dl>
+    </aside>
+  </article>
+
+  <!-- VIII -->
+  <article class="entry">
+    <div class="entry-meta">
+      <span class="num">No. VIII</span>
+      <div class="date">August<em>03 · 2022</em></div>
+      <div class="reading">5 min. reading</div>
+    </div>
+    <div class="entry-body">
+      <div class="kind">Inaugural Note</div>
+      <h2><a href="#">Why we are starting a journal</a></h2>
+      <p class="author">The partners</p>
+      <p class="abstract">A short letter from the rue de Vesle, written on the day the studio's name was inscribed above the door. We mean to publish four to six pieces a year — modestly, slowly — about the buildings that pass through our hands and the questions they leave behind.</p>
+      <a class="read" href="#">Read the piece →</a>
+    </div>
+    <aside class="entry-folio">
+      <svg class="quatre" viewBox="0 0 600 600"><g transform="translate(300,300)scale(0.7)rotate(45)"><circle cx="-195.16" r="163"/><circle cx="195.16" r="163"/><circle cy="195.16" r="163"/><circle cy="-195.16" r="163"/><rect x="-232" y="-232" width="464" height="464"/></g></svg>
+      <dl>
+        <dt>Filed under</dt><dd>Studio</dd>
+        <dt>Plates</dt><dd>1 photograph</dd>
+        <dt>Folio</dt><dd>v. I, no. 1</dd>
+      </dl>
+    </aside>
+  </article>
+
+</main>
+
+<!-- ============== TAILBAND ============== -->
+<div class="tailband">
+  <a href="#">Subscribe by Post</a>
+  <span class="sep"></span>
+  Issued thrice yearly
+  <span class="sep"></span>
+  <a href="page-6.html">Submit a Letter</a>
+  <span class="sep"></span>
+  ISSN 2823-7714
+</div>
+
+<!-- ============== FOOTER ============== -->
+<footer>
+  <div class="seal" aria-hidden="true">
+    <svg viewBox="0 0 592 592"><path d="M1778.9,3200A120.9263,120.9263 0 0,1 1657.97,3320.93A120.9263,120.9263 0 0,1 1537.04,3200 A221.5096,221.5096 0 0,0 1456.32,3371.02A221.5096,221.5096 0 0,0 1677.83,3592.53A221.5096,221.5096 0 0,0 1818.61,3542.03 A362.779,362.779 0 0,0 2000,3856.21A362.779,362.779 0 0,0 2181.39,3542.03 A221.5096,221.5096 0 0,0 2322.17,3592.53A221.5096,221.5096 0 0,0 2543.68,3371.02A221.5096,221.5096 0 0,0 2462.96,3200 A120.9263,120.9263 0 0,1 2342.03,3320.93A120.9263,120.9263 0 0,1 2221.1,3200V2221.1H3200 A120.9263,120.9263 0 0,1 3320.93,2342.03A120.9263,120.9263 0 0,1 3200,2462.96 A221.5096,221.5096 0 0,0 3371.02,2543.68A221.5096,221.5096 0 0,0 3592.53,2322.17A221.5096,221.5096 0 0,0 3542.03,2181.39 A362.779,362.779 0 0,0 3856.21,2000A362.779,362.779 0 0,0 3542.03,1818.61 A221.5096,221.5096 0 0,0 3592.53,1677.83A221.5096,221.5096 0 0,0 3371.02,1456.32A221.5096,221.5096 0 0,0 3200,1537.04 A120.9263,120.9263 0 0,1 3320.93,1657.97A120.9263,120.9263 0 0,1 3200,1778.9H2221.1V800 A120.9263,120.9263 0 0,1 2342.03,679.073A120.9263,120.9263 0 0,1 2462.96,800 A221.5096,221.5096 0 0,0 2543.68,628.984A221.5096,221.5096 0 0,0 2322.17,407.475A221.5096,221.5096 0 0,0 2181.39,457.969 A362.779,362.779 0 0,0 2000,143.793A362.779,362.779 0 0,0 1818.61,457.969 A221.5096,221.5096 0 0,0 1677.83,407.475A221.5096,221.5096 0 0,0 1456.32,628.984A221.5096,221.5096 0 0,0 1537.04,800 A120.9263,120.9263 0 0,1 1657.97,679.073A120.9263,120.9263 0 0,1 1778.9,800V1778.9H800 A120.9263,120.9263 0 0,1 679.073,1657.97A120.9263,120.9263 0 0,1 800,1537.04 A221.5096,221.5096 0 0,0 628.984,1456.32A221.5096,221.5096 0 0,0 407.475,1677.83A221.5096,221.5096 0 0,0 457.969,1818.61 A362.779,362.779 0 0,0 143.793,2000A362.779,362.779 0 0,0 457.969,2181.39 A221.5096,221.5096 0 0,0 407.475,2322.17A221.5096,221.5096 0 0,0 628.984,2543.68A221.5096,221.5096 0 0,0 800,2462.96 A120.9263,120.9263 0 0,1 679.073,2342.03A120.9263,120.9263 0 0,1 800,2221.1H1778.9Z" transform="translate(-4,-4)scale(0.15,0.15)"/></svg>
+  </div>
+  <div class="heraldic-band" aria-hidden="true"></div>
+  <div class="footer-text">
+    <div class="addr">Atelier Saint-Sévrin · 14, rue de Vesle · 51100 Reims · France</div>
+    <div class="tel">Telephone +33 (0)3 26 47 18 22 · journal@saint-sevrin.fr</div>
+    <div class="attrib">Drawn, written &amp; set by the partners — © MMXXIV</div>
+  </div>
+</footer>
+
+</body>
+</html>

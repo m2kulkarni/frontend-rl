@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Selected Works — Atelier Naqsh-e Jahan</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    font-size: 17px;
+    line-height: 1.55;
+  }
+
+  /* ---------- HEADER ---------- */
+  .top-strip {
+    background: #faf2e0;
+    border-bottom: 1px solid var(--accent);
+    padding: 14px 0 8px;
+    text-align: center;
+  }
+  .top-strip .atelier-mark {
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.45em;
+    color: var(--primary);
+    text-transform: uppercase;
+  }
+  .top-strip .arabic-line {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--text-emphasis);
+    letter-spacing: 0.08em;
+    margin-top: 2px;
+  }
+
+  /* ---------- NAV ---------- */
+  nav.primary {
+    background: #faf2e0;
+    border-bottom: 1px solid var(--accent);
+    padding: 10px 0 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+  }
+  nav.primary .tail {
+    flex: 0 0 auto;
+    color: var(--accent);
+    display: inline-flex;
+    align-items: center;
+  }
+  nav.primary .tail svg { display: block; }
+  nav.primary ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+  nav.primary li {
+    display: flex;
+    align-items: center;
+  }
+  nav.primary a {
+    font-family: var(--font-display), serif;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    color: var(--primary);
+    text-decoration: none;
+    padding: 6px 14px;
+    position: relative;
+  }
+  nav.primary a[aria-current="page"] {
+    color: var(--text-emphasis);
+  }
+  nav.primary a[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    left: 14px;
+    right: 14px;
+    bottom: -4px;
+    height: 6px;
+    background-image: radial-gradient(ellipse at center, var(--text-emphasis) 0 1px, transparent 2px),
+                      linear-gradient(to right, transparent 0, var(--text-emphasis) 20%, var(--text-emphasis) 80%, transparent 100%);
+    background-size: 6px 6px, 100% 1px;
+    background-position: center 2px, center 4px;
+    background-repeat: repeat-x, no-repeat;
+  }
+  nav.primary .sep {
+    color: var(--accent);
+    font-size: 9px;
+    line-height: 1;
+    user-select: none;
+  }
+
+  /* ---------- HERO / TITLE BLOCK ---------- */
+  .page-title {
+    text-align: center;
+    padding: 56px 40px 28px;
+    position: relative;
+  }
+  .page-title .eyebrow {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.5em;
+    color: var(--secondary);
+    text-transform: uppercase;
+  }
+  .page-title h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    color: var(--primary);
+    font-size: 44px;
+    letter-spacing: 0.08em;
+    margin: 14px 0 8px;
+  }
+  .page-title .subtitle {
+    font-style: italic;
+    color: var(--text-emphasis);
+    font-size: 19px;
+    letter-spacing: 0.04em;
+  }
+  .filet {
+    display: flex;
+    justify-content: center;
+    margin: 22px auto 0;
+    color: var(--accent);
+  }
+  .filet svg { width: 360px; height: auto; }
+  .filet svg path { fill: var(--accent); }
+
+  /* ---------- INTRO ---------- */
+  .intro {
+    max-width: 760px;
+    margin: 30px auto 50px;
+    padding: 0 40px;
+    text-align: center;
+    font-size: 18.5px;
+    line-height: 1.7;
+    color: var(--text);
+  }
+  .intro p { margin: 0 0 14px; }
+  .intro .lead-mark {
+    color: var(--text-emphasis);
+    font-style: italic;
+  }
+  .intro-meta {
+    margin-top: 22px;
+    display: flex;
+    justify-content: center;
+    gap: 36px;
+    font-family: var(--font-display), serif;
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    color: var(--secondary);
+    text-transform: uppercase;
+  }
+  .intro-meta span strong {
+    color: var(--primary);
+    font-size: 13px;
+    display: block;
+    letter-spacing: 0.18em;
+    margin-top: 4px;
+  }
+
+  /* ---------- GRID ---------- */
+  .works-grid {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 20px 40px 60px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px 24px;
+  }
+
+  /* ---------- CARD ---------- */
+  .card {
+    position: relative;
+    aspect-ratio: 1 / 1.08;
+    background: #faf2e0;
+    overflow: hidden;
+    padding: 0;
+  }
+  .card .arch-frame {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .card .arch-frame svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .card .inner {
+    position: absolute;
+    inset: 24px 26px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .card .index-mark {
+    font-family: var(--font-display), serif;
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    color: var(--secondary);
+    margin-top: 18px;
+  }
+  .card h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    color: var(--primary);
+    font-size: 18px;
+    letter-spacing: 0.06em;
+    line-height: 1.25;
+    margin: 14px 14px 8px;
+    text-transform: uppercase;
+  }
+  .card .caption {
+    font-style: italic;
+    color: var(--text-emphasis);
+    font-size: 15px;
+    margin: 0 8px 14px;
+    line-height: 1.4;
+  }
+  .card .meta {
+    margin-top: auto;
+    font-size: 12.5px;
+    letter-spacing: 0.04em;
+    color: var(--text);
+  }
+  .card .meta .yr-loc {
+    font-family: var(--font-display), serif;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--primary);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 6px;
+  }
+  .card .meta .medium {
+    font-style: italic;
+    color: var(--secondary);
+    font-size: 13px;
+  }
+  .card .seal {
+    position: absolute;
+    bottom: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 38px;
+    height: 38px;
+    color: var(--secondary);
+  }
+  .card .seal svg { width: 100%; height: 100%; display: block; }
+
+  /* tiny vine accent inside top */
+  .card .vine {
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 8px;
+    color: var(--accent);
+    opacity: 0.85;
+  }
+
+  /* ---------- CLOSING NOTE ---------- */
+  .closing-note {
+    max-width: 720px;
+    margin: 30px auto 70px;
+    padding: 0 40px;
+    text-align: center;
+    color: var(--text);
+  }
+  .closing-note .filet { margin-bottom: 24px; }
+  .closing-note p {
+    font-size: 16px;
+    font-style: italic;
+    color: var(--text);
+    margin: 0;
+  }
+  .closing-note p strong {
+    font-style: normal;
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    color: var(--primary);
+    text-transform: uppercase;
+    display: block;
+    margin-top: 10px;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer.site {
+    background: var(--primary);
+    color: #faf2e0;
+    padding: 48px 40px 0;
+    text-align: center;
+    position: relative;
+  }
+  footer.site .filet svg path { fill: var(--accent); }
+  footer.site .monogram {
+    font-family: var(--font-display), serif;
+    font-size: 26px;
+    letter-spacing: 0.16em;
+    color: var(--accent);
+    margin: 26px 0 8px;
+  }
+  footer.site .studio-name {
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.4em;
+    color: #faf2e0;
+    text-transform: uppercase;
+  }
+  footer.site address {
+    font-style: normal;
+    margin: 18px 0 6px;
+    line-height: 1.7;
+    font-size: 15px;
+    color: #faf2e0;
+  }
+  footer.site .contact {
+    font-style: italic;
+    color: var(--secondary);
+    font-size: 14px;
+    margin-bottom: 28px;
+  }
+  footer.site .mosaic-stripe {
+    margin-top: 32px;
+    height: 14px;
+    background:
+      repeating-linear-gradient(
+        90deg,
+        var(--secondary) 0 18px,
+        var(--accent) 18px 20px,
+        var(--secondary) 20px 38px,
+        var(--primary) 38px 40px
+      );
+    border-top: 1px solid var(--accent);
+  }
+  footer.site .footer-cols {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 40px;
+    align-items: start;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding-top: 8px;
+  }
+  footer.site .col-l, footer.site .col-r {
+    font-size: 12.5px;
+    color: #e7d8b8;
+    line-height: 1.7;
+    letter-spacing: 0.04em;
+  }
+  footer.site .col-l { text-align: right; }
+  footer.site .col-r { text-align: left; }
+  footer.site .col-c { padding: 0 12px; }
+  footer.site .col-l span, footer.site .col-r span {
+    display: block;
+    font-family: var(--font-display), serif;
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  /* ---------- BACKGROUND ORNAMENT ---------- */
+  .bg-corner {
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 80px;
+    pointer-events: none;
+    opacity: 0.18;
+    color: var(--accent);
+  }
+  .bg-corner.left  { left: 0; }
+  .bg-corner.right { right: 0; transform: scaleX(-1); }
+
+  .ornament-band {
+    position: relative;
+    height: 36px;
+    margin: 10px auto 0;
+    max-width: 720px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color: var(--accent);
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP STRIP -->
+<div class="top-strip">
+  <div class="atelier-mark">Atelier Naqsh-e Jahan</div>
+  <div class="arabic-line">— Tilework &amp; Ornamental Design, est. 2010 —</div>
+</div>
+
+<!-- NAV -->
+<nav class="primary" aria-label="Primary">
+  <span class="tail" aria-hidden="true">
+    <svg width="46" height="22" viewBox="0 0 46 22">
+      <path d="M2 11 Q 10 2 18 11 Q 22 14 26 11 Q 34 2 44 11" fill="none" stroke="currentColor" stroke-width="1.2"/>
+      <circle cx="22" cy="11" r="2.4" fill="currentColor"/>
+      <path d="M2 11 Q 10 20 18 11" fill="none" stroke="currentColor" stroke-width="1.2"/>
+      <path d="M26 11 Q 34 20 44 11" fill="none" stroke="currentColor" stroke-width="1.2"/>
+    </svg>
+  </span>
+  <ul>
+    <li><a href="page-1.html">Atelier</a></li>
+    <li><span class="sep" aria-hidden="true">❖</span></li>
+    <li><a href="page-2.html" aria-current="page">Selected Works</a></li>
+    <li><span class="sep" aria-hidden="true">❖</span></li>
+    <li><a href="page-3.html">Ardestan Case Study</a></li>
+    <li><span class="sep" aria-hidden="true">❖</span></li>
+    <li><a href="page-4.html">Workshop &amp; Method</a></li>
+    <li><span class="sep" aria-hidden="true">❖</span></li>
+    <li><a href="page-5.html">Biography</a></li>
+    <li><span class="sep" aria-hidden="true">❖</span></li>
+    <li><a href="page-6.html">Commissions &amp; Visit</a></li>
+  </ul>
+  <span class="tail" aria-hidden="true">
+    <svg width="46" height="22" viewBox="0 0 46 22" style="transform:scaleX(-1)">
+      <path d="M2 11 Q 10 2 18 11 Q 22 14 26 11 Q 34 2 44 11" fill="none" stroke="currentColor" stroke-width="1.2"/>
+      <circle cx="22" cy="11" r="2.4" fill="currentColor"/>
+      <path d="M2 11 Q 10 20 18 11" fill="none" stroke="currentColor" stroke-width="1.2"/>
+      <path d="M26 11 Q 34 20 44 11" fill="none" stroke="currentColor" stroke-width="1.2"/>
+    </svg>
+  </span>
+</nav>
+
+<!-- TITLE -->
+<section class="page-title">
+  <div class="eyebrow">Portfolio &mdash; II</div>
+  <h1>Selected Works</h1>
+  <div class="subtitle">fourteen years of cut tile, cobalt, and patient geometry</div>
+  <div class="filet" aria-hidden="true">
+    <svg viewBox="0 0 437.999 18.893" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,9.445s37,0,74-0.8c18.5-0.4,37-1,50.8-1.8c6.9-0.4,12.7-0.9,16.7-1.5c2-0.3,3.5-0.6,4.5-0.9c0.5-0.1,0.8-0.3,1-0.4c0.2-0.1,0.2-0.2,0.2-0.2l0.4-0.3l0.7,0.7l-0.4,0.3s-0.2,0.1-0.5,0.3c-0.3,0.2-0.7,0.3-1.3,0.5c-1.1,0.3-2.7,0.6-4.7,0.9c-4,0.5-9.8,1-16.7,1.4c-13.9,0.7-32.4,1.2-50.9,1.4C37,9.6,0,9.4,0,9.4z"/>
+      <circle cx="219" cy="9.4" r="6" fill="none" stroke="currentColor" stroke-width="1.2"/>
+      <circle cx="219" cy="9.4" r="2"/>
+      <path d="M438,9.445s-37,0-74-0.8c-18.5-0.4-37-1-50.9-1.8c-6.9-0.4-12.7-0.9-16.7-1.5c-2-0.3-3.5-0.6-4.7-0.9c-0.5-0.1-1-0.3-1.3-0.5c-0.3-0.2-0.5-0.3-0.5-0.3l-0.4-0.3l0.7-0.7l0.4,0.3s0.1,0.1,0.2,0.2c0.2,0.1,0.5,0.3,1,0.4c1,0.3,2.5,0.6,4.5,0.9c4,0.6,9.7,1,16.7,1.5c13.9,0.8,32.3,1.4,50.8,1.8C401,9.4,438,9.4,438,9.4z"/>
+    </svg>
+  </div>
+</section>
+
+<!-- INTRO -->
+<section class="intro">
+  <p><span class="lead-mark">Fourteen years of work</span>, ordered by site rather than by date — for I have come to believe a tile remembers the wall it was set against more readily than the year it was cut. What follows is a register of nine projects between 2014 and 2024: hammam spandrels, mihrabs, dome interiors, garden pavilions, a private library, two exterior courtyard cycles, and a memorial niche.</p>
+  <p>Each was made in the workshop on Chahar Bagh Lane, Isfahan, in either <em>haft-rang</em> (the seven-colour overglaze technique), <em>moarraq kāshi</em> (cut mosaic-faïence), or <em>cuerda seca</em>, and installed on site by the studio.</p>
+  <div class="intro-meta" aria-hidden="true">
+    <span>Span<strong>2014 — 2024</strong></span>
+    <span>Projects<strong>Nine selected</strong></span>
+    <span>Techniques<strong>Three principal</strong></span>
+  </div>
+</section>
+
+<!-- GRID -->
+<main class="works-grid" aria-label="Project grid">
+
+  <!-- Card 1 -->
+  <article class="card">
+    <div class="arch-frame" aria-hidden="true">
+      <svg viewBox="0 0 300 320" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 14 310 L 14 130 Q 14 60 80 30 Q 130 10 150 60 Q 170 10 220 30 Q 286 60 286 130 L 286 310 Z"
+              fill="none" stroke="var(--primary)" stroke-width="2"/>
+        <path d="M 22 304 L 22 132 Q 22 68 84 40 Q 132 22 150 68 Q 168 22 216 40 Q 278 68 278 132 L 278 304 Z"
+              fill="none" stroke="var(--accent)" stroke-width="1"/>
+      </svg>
+    </div>
+    <div class="vine" aria-hidden="true">
+      <svg viewBox="0 0 60 8"><path d="M0 4 Q 15 -2 30 4 Q 45 10 60 4" fill="none" stroke="currentColor" stroke-width="1"/><circle cx="30" cy="4" r="1.5" fill="currentColor"/></svg>
+    </div>
+    <div class="inner">
+      <div class="index-mark">No. I</div>
+      <h3>Spandrel Cycle for the Ardestan Hammam</h3>
+      <p class="caption">eight cobalt-and-saffron spandrels above the cold pool</p>
+      <div class="meta">
+        <span class="yr-loc">2019 · Ardestan, Iran</span>
+        <span class="medium">moarraq kāshi (cut mosaic-faïence)</span>
+      </div>
+    </div>
+    <div class="seal" aria-hidden="true">
+      <svg viewBox="0 0 100 100"><polygon points="50,6 61,30 87,33 67,52 73,80 50,66 27,80 33,52 13,33 39,30" fill="var(--secondary)" stroke="var(--accent)" stroke-width="1"/><circle cx="50" cy="50" r="6" fill="var(--accent)"/></svg>
+    </div>
+  </article>
+
+  <!-- Card 2 -->
+  <article class="card">
+    <div class="arch-frame" aria-hidden="true">
+      <svg viewBox="0 0 300 320" preserveAspectRatio="none">
+        <path d="M 14 310 L 14 130 Q 14 60 80 30 Q 130 10 150 60 Q 170 10 220 30 Q 286 60 286 130 L 286 310 Z"
+              fill="none" stroke="var(--primary)" stroke-width="2"/>
+        <path d="M 22 304 L 22 132 Q 22 68 84 40 Q 132 22 150 68 Q 168 22 216 40 Q 278 68 278 132 L 278 304 Z"
+              fill="none" stroke="var(--accent)" stroke-width="1"/>
+      </svg>
+    </div>
+    <div class="vine" aria-hidden="true">
+      <svg viewBox="0 0 60 8"><path d="M0 4 Q 15 -2 30 4 Q 45 10 60 4" fill="none" stroke="currentColor" stroke-width="1"/><circle cx="30" cy="4" r="1.5" fill="currentColor"/></svg>
+    </div>
+    <div class="inner">
+      <div class="index-mark">No. II</div>
+      <h3>Mihrab in Cobalt and Ivory</h3>
+      <p class="caption">a private oratory for a Genevan collector</p>
+      <div class="meta">
+        <span class="yr-loc">2022 · Geneva, Switzerland</span>
+        <span class="medium">haft-rang on hand-pressed bisque</span>
+      </div>
+    </div>
+    <div class="seal" aria-hidden="true">
+      <svg viewBox="0 0 100 100"><polygon points="50,6 61,30 87,33 67,52 73,80 50,66 27,80 33,52 13,33 39,30" fill="var(--secondary)" stroke="var(--accent)" stroke-width="1"/><circle cx="50" cy="50" r="6" fill="var(--accent)"/></svg>
+    </div>
+  </article>
+
+  <!-- Card 3 -->
+  <article class="card">
+    <div class="arch-frame" aria-hidden="true">
+      <svg viewBox="0 0 300 320" preserveAspectRatio="none">
+        <path d="M 14 310 L 14 130 Q 14 60 80 30 Q 130 10 150 60 Q 170 10 220 30 Q 286 60 286 130 L 286 310 Z"
+              fill="none" stroke="var(--primary)" stroke-width="2"/>
+        <path d="M 22 304 L 22 132 Q 22 68 84 40 Q 132 22 150 68 Q 168 22 216 40 Q 278 68 278 132 L 278 304 Z"
+              fill="none" stroke="var(--accent)" stroke-width="1"/>
+      </svg>
+    </div>
+    <div class="vine" aria-hidden="true">
+      <svg viewBox="0 0 60 8"><path d="M0 4 Q 15 -2 30 4 Q 45 10 60 4" fill="none" stroke="currentColor" stroke-width="1"/><circle cx="30" cy="4" r="1.5" fill="currentColor"/></svg>
+    </div>
+    <div class="inner">
+      <div class="index-mark">No. III</div>
+      <h3>Reading-Room Dome, Qom Public Library</h3>
+      <p class="caption">a turquoise net of stars over the periodicals desk</p>
+      <div class="meta">
+        <span class="yr-loc">2023 · Qom, Iran</span>
+        <span class="medium">moarraq kāshi with gilt cartouches</span>
+      </div>
+    </div>
+    <div class="seal" aria-hidden="true">
+      <svg viewBox="0 0 100 100"><polygon points="50,6 61,30 87,33 67,52 73,80 50,66 27,80 33,52 13,33 39,30" fill="var(--secondary)" stroke="var(--accent)" stroke-width="1"/><circle cx="50" cy="50" r="6" fill="var(--accent)"/></svg>
+    </div>
+  </article>
+
+  <!-- Card 4 -->
+  <article class="card">
+    <div class="arch-frame" aria-hidden="true">
+      <svg viewBox="0 0 300 320" preserveAspectRatio="none">
+        <path d="M 14 310 L 14 130 Q 14 60 80 30 Q 130 10 150 60 Q 170 10 220 30 Q 286 60 286 130 L 286 310 Z"
+              fill="none" stroke="var(--primary)" stroke-width="2"/>
+        <path d="M 22 304 L 22 132 Q 22 68 84 40 Q 132 22 150 68 Q 168 22 216 40 Q 278 68 278 132 L 278 304 Z"
+              fill="none" stroke="var(--accent)" stroke-width="1"/>
+      </svg>
+    </div>
+    <div class="vine" aria-hidden="true">
+      <svg viewBox="0 0 60 8"><path d="M0 4 Q 15 -2 30 4 Q 45 10 60 4" fill="none" stroke="currentColor" stroke-width="1"/><circle cx="30" cy="4" r="1.5" fill="currentColor"/></svg>
+    </div>
+    <div class="inner">
+      <div class="index-mark">No. IV</div>
+      <h3>Garden Pavilion Tilework, Bagh-e Eram</h3>
+      <p class="caption">restoration of the south kiosk facing the cypress walk</p>
+      <div class="meta">
+        <span class="yr-loc">2017 · Shiraz, Iran</span>
+        <span class="medium">cuerda seca, replacement &amp; conservation</span>
+      </div>
+    </div>
+    <div class="seal" aria-hidden="true">
+      <svg viewBox="0 0 100 100"><polygon points="50,6 61,30 87,33 67,52 73,80 50,66 27,80 33,52 13,33 39,30" fill="var(--secondary)" stroke="var(--accent)" stroke-width="1"/><circle cx="50" cy="50" r="6" fill="var(--accent)"/></svg>
+    </div>
+  </article>
+
+  <!-- Card 5 -->
+  <article class="card">
+    <div class="arch-frame" aria-hidden="true">
+      <svg viewBox="0 0 300 320" preserveAspectRatio="none">
+        <path d="M 14 310 L 14 130 Q 14 60 80 30 Q 130 10 150 60 Q 170 10 220 30 Q 286 60 286 130 L 286 310 Z"
+              fill="none" stroke="var(--primary)" stroke-width="2"/>
+        <path d="M 22 304 L 22 132 Q 22 68 84 40 Q 132 22 150 68 Q 168 22 216 40 Q 278 68 278 132 L 278 304 Z"
+              fill="none" stroke="var(--accent)" stroke-width="1"/>
+      </svg>
+    </div>
+    <div class="vine" aria-hidden="true">
+      <svg viewBox="0 0 60 8"><path d="M0 4 Q 15 -2 30 4 Q 45 10 60 4" fill="none" stroke="currentColor" stroke-width="1"/><circle cx="30" cy="4" r="1.5" fill="currentColor"/></svg>
+    </div>
+    <div class="inner">
+      <div class="index-mark">No. V</div>
+      <h3>Courtyard Frieze, House of the Three Pomegranates</h3>
+      <p class="caption">a continuous vine running 32 metres around a private courtyard</p>
+      <div class="meta">
+        <span class="yr-loc">2014 · Yazd, Iran</span>
+        <span class="medium">haft-rang, oxblood &amp; cobalt on ivory</span>
+      </div>
+    </div>
+    <div class="seal" aria-hidden="true">
+      <svg viewBox="0 0 100 100"><polygon points="50,6 61,30 87,33 67,52 73,80 50,66 27,80 33,52 13,33 39,30" fill="var(--secondary)" stroke="var(--accent)" stroke-width="1"/><circle cx="50" cy="50" r="6" fill="var(--accent)"/></svg>
+    </div>
+  </article>
+
+  <!-- Card 6 -->
+  <article class="card">
+    <div class="arch-frame" aria-hidden="true">
+      <svg viewBox="0 0 300 320" preserveAspectRatio="none">
+        <path d="M 14 310 L 14 130 Q 14 60 80 30 Q 130 10 150 60 Q 170 10 220 30 Q 286 60 286 130 L 286 310 Z"
+              fill="none" stroke="var(--primary)" stroke-width="2"/>
+        <path d="M 22 304 L 22 132 Q 22 68 84 40 Q 132 22 150 68 Q 168 22 216 40 Q 278 68 278 132 L 278 304 Z"
+              fill="none" stroke="var(--accent)" stroke-width="1"/>
+      </svg>
+    </div>
+    <div class="vine" aria-hidden="true">
+      <svg viewBox="0 0 60 8"><path d="M0 4 Q 15 -2 30 4 Q 45 10 60 4" fill="none" stroke="currentColor" stroke-width="1"/><circle cx="30" cy="4" r="1.5" fill="currentColor"/></svg>
+    </div>
+    <div class="inner">
+      <div class="index-mark">No. VI</div>
+      <h3>Memorial Niche for the Poet Sohrab Karimi</h3>
+      <p class="caption">a small wall-shrine of three lines, in turquoise and gold</p>
+      <div class="meta">
+        <span class="yr-loc">2016 · Kashan, Iran</span>
+        <span class="medium">moarraq kāshi, calligraphic inlay</span>
+      </div>
+    </div>
+    <div class="seal" aria-hidden="true">
+      <svg viewBox="0 0 100 100"><polygon points="50,6 61,30 87,33 67,52 73,80 50,66 27,80 33,52 13,33 39,30" fill="var(--secondary)" stroke="var(--accent)" stroke-width="1"/><circle cx="50" cy="50" r="6" fill="var(--accent)"/></svg>
+    </div>
+  </article>
+
+  <!-- Card 7 -->
+  <article class="card">
+    <div class="arch-frame" aria-hidden="true">
+      <svg viewBox="0 0 300 320" preserveAspectRatio="none">
+        <path d="M 14 310 L 14 130 Q 14 60 80 30 Q 130 10 150 60 Q 170 10 220 30 Q 286 60 286 130 L 286 310 Z"
+              fill="none" stroke="var(--primary)" stroke-width="2"/>
+        <path d="M 22 304 L 22 132 Q 22 68 84 40 Q 132 22 150 68 Q 168 22 216 40 Q 278 68 278 132 L 278 304 Z"
+              fill="none" stroke="var(--accent)" stroke-width="1"/>
+      </svg>
+    </div>
+    <div class="vine" aria-hidden="true">
+      <svg viewBox="0 0 60 8"><path d="M0 4 Q 15 -2 30 4 Q 45 10 60 4" fill="none" stroke="currentColor" stroke-width="1"/><circle cx="30" cy="4" r="1.5" fill="currentColor"/></svg>
+    </div>
+    <div class="inner">
+      <div class="index-mark">No. VII</div>
+      <h3>Entrance Iwan, Madrasa-ye Now</h3>
+      <p class="caption">restoration of the lower band and reconstruction of the eastern jamb</p>
+      <div class="meta">
+        <span class="yr-loc">2020 · Isfahan, Iran</span>
+        <span class="medium">moarraq kāshi, partial cuerda seca</span>
+      </div>
+    </div>
+    <div class="seal" aria-hidden="true">
+      <svg viewBox="0 0 100 100"><polygon points="50,6 61,30 87,33 67,52 73,80 50,66 27,80 33,52 13,33 39,30" fill="var(--secondary)" stroke="var(--accent)" stroke-width="1"/><circle cx="50" cy="50" r="6" fill="var(--accent)"/></svg>
+    </div>
+  </article>
+
+  <!-- Card 8 -->
+  <article class="card">
+    <div class="arch-frame" aria-hidden="true">
+      <svg viewBox="0 0 300 320" preserveAspectRatio="none">
+        <path d="M 14 310 L 14 130 Q 14 60 80 30 Q 130 10 150 60 Q 170 10 220 30 Q 286 60 286 130 L 286 310 Z"
+              fill="none" stroke="var(--primary)" stroke-width="2"/>
+        <path d="M 22 304 L 22 132 Q 22 68 84 40 Q 132 22 150 68 Q 168 22 216 40 Q 278 68 278 132 L 278 304 Z"
+              fill="none" stroke="var(--accent)" stroke-width="1"/>
+      </svg>
+    </div>
+    <div class="vine" aria-hidden="true">
+      <svg viewBox="0 0 60 8"><path d="M0 4 Q 15 -2 30 4 Q 45 10 60 4" fill="none" stroke="currentColor" stroke-width="1"/><circle cx="30" cy="4" r="1.5" fill="currentColor"/></svg>
+    </div>
+    <div class="inner">
+      <div class="index-mark">No. VIII</div>
+      <h3>Fountain Court, Villa al-Diwan</h3>
+      <p class="caption">octagonal basin, eight palmette panels, four corner roundels</p>
+      <div class="meta">
+        <span class="yr-loc">2021 · Muscat, Oman</span>
+        <span class="medium">haft-rang on frost-resistant body</span>
+      </div>
+    </div>
+    <div class="seal" aria-hidden="true">
+      <svg viewBox="0 0 100 100"><polygon points="50,6 61,30 87,33 67,52 73,80 50,66 27,80 33,52 13,33 39,30" fill="var(--secondary)" stroke="var(--accent)" stroke-width="1"/><circle cx="50" cy="50" r="6" fill="var(--accent)"/></svg>
+    </div>
+  </article>
+
+  <!-- Card 9 -->
+  <article class="card">
+    <div class="arch-frame" aria-hidden="true">
+      <svg viewBox="0 0 300 320" preserveAspectRatio="none">
+        <path d="M 14 310 L 14 130 Q 14 60 80 30 Q 130 10 150 60 Q 170 10 220 30 Q 286 60 286 130 L 286 310 Z"
+              fill="none" stroke="var(--primary)" stroke-width="2"/>
+        <path d="M 22 304 L 22 132 Q 22 68 84 40 Q 132 22 150 68 Q 168 22 216 40 Q 278 68 278 132 L 278 304 Z"
+              fill="none" stroke="var(--accent)" stroke-width="1"/>
+      </svg>
+    </div>
+    <div class="vine" aria-hidden="true">
+      <svg viewBox="0 0 60 8"><path d="M0 4 Q 15 -2 30 4 Q 45 10 60 4" fill="none" stroke="currentColor" stroke-width="1"/><circle cx="30" cy="4" r="1.5" fill="currentColor"/></svg>
+    </div>
+    <div class="inner">
+      <div class="index-mark">No. IX</div>
+      <h3>Antechamber Vault, Maison Farahani</h3>
+      <p class="caption">a private commission for the artist's mother, completed in mourning</p>
+      <div class="meta">
+        <span class="yr-loc">2024 · Isfahan, Iran</span>
+        <span class="medium">cuerda seca with cobalt seal-medallion</span>
+      </div>
+    </div>
+    <div class="seal" aria-hidden="true">
+      <svg viewBox="0 0 100 100"><polygon points="50,6 61,30 87,33 67,52 73,80 50,66 27,80 33,52 13,33 39,30" fill="var(--secondary)" stroke="var(--accent)" stroke-width="1"/><circle cx="50" cy="50" r="6" fill="var(--accent)"/></svg>
+    </div>
+  </article>
+
+</main>
+
+<!-- CLOSING NOTE -->
+<section class="closing-note">
+  <div class="filet" aria-hidden="true">
+    <svg viewBox="0 0 437.999 18.893" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,9.445s37,0,74-0.8c18.5-0.4,37-1,50.8-1.8c6.9-0.4,12.7-0.9,16.7-1.5c2-0.3,3.5-0.6,4.5-0.9c0.5-0.1,0.8-0.3,1-0.4c0.2-0.1,0.2-0.2,0.2-0.2l0.4-0.3l0.7,0.7l-0.4,0.3s-0.2,0.1-0.5,0.3c-0.3,0.2-0.7,0.3-1.3,0.5c-1.1,0.3-2.7,0.6-4.7,0.9c-4,0.5-9.8,1-16.7,1.4c-13.9,0.7-32.4,1.2-50.9,1.4C37,9.6,0,9.4,0,9.4z"/>
+      <circle cx="219" cy="9.4" r="6" fill="none" stroke="currentColor" stroke-width="1.2"/>
+      <circle cx="219" cy="9.4" r="2"/>
+      <path d="M438,9.445s-37,0-74-0.8c-18.5-0.4-37-1-50.9-1.8c-6.9-0.4-12.7-0.9-16.7-1.5c-2-0.3-3.5-0.6-4.7-0.9c-0.5-0.1-1-0.3-1.3-0.5c-0.3-0.2-0.5-0.3-0.5-0.3l-0.4-0.3l0.7-0.7l0.4,0.3s0.1,0.1,0.2,0.2c0.2,0.1,0.5,0.3,1,0.4c1,0.3,2.5,0.6,4.5,0.9c4,0.6,9.7,1,16.7,1.5c13.9,0.8,32.3,1.4,50.8,1.8C401,9.4,438,9.4,438,9.4z"/>
+    </svg>
+  </div>
+  <p>For an annotated reading of the Ardestan spandrels — the eight figures, the four blue grounds, the misjoined panel above the women's entrance — see the case study that follows.
+  <strong><a href="page-3.html" style="color:var(--text-emphasis);text-decoration:none;border-bottom:1px solid var(--accent);padding-bottom:1px;">Continue to The Ardestan Hammam Spandrels &rarr;</a></strong></p>
+</section>
+
+<!-- FOOTER -->
+<footer class="site">
+  <div class="filet" aria-hidden="true">
+    <svg viewBox="0 0 437.999 18.893" xmlns="http://www.w3.org/2000/svg" style="width:380px;">
+      <path d="M0,9.445s37,0,74-0.8c18.5-0.4,37-1,50.8-1.8c6.9-0.4,12.7-0.9,16.7-1.5c2-0.3,3.5-0.6,4.5-0.9c0.5-0.1,0.8-0.3,1-0.4c0.2-0.1,0.2-0.2,0.2-0.2l0.4-0.3l0.7,0.7l-0.4,0.3s-0.2,0.1-0.5,0.3c-0.3,0.2-0.7,0.3-1.3,0.5c-1.1,0.3-2.7,0.6-4.7,0.9c-4,0.5-9.8,1-16.7,1.4c-13.9,0.7-32.4,1.2-50.9,1.4C37,9.6,0,9.4,0,9.4z"/>
+      <circle cx="219" cy="9.4" r="6" fill="none" stroke="var(--accent)" stroke-width="1.2"/>
+      <circle cx="219" cy="9.4" r="2" fill="var(--accent)"/>
+      <path d="M438,9.445s-37,0-74-0.8c-18.5-0.4-37-1-50.9-1.8c-6.9-0.4-12.7-0.9-16.7-1.5c-2-0.3-3.5-0.6-4.7-0.9c-0.5-0.1-1-0.3-1.3-0.5c-0.3-0.2-0.5-0.3-0.5-0.3l-0.4-0.3l0.7-0.7l0.4,0.3s0.1,0.1,0.2,0.2c0.2,0.1,0.5,0.3,1,0.4c1,0.3,2.5,0.6,4.5,0.9c4,0.6,9.7,1,16.7,1.5c13.9,0.8,32.3,1.4,50.8,1.8C401,9.4,438,9.4,438,9.4z"/>
+    </svg>
+  </div>
+
+  <div class="monogram" aria-label="Atelier monogram">ﻧ&middot;ج</div>
+  <div class="studio-name">Atelier Naqsh-e Jahan</div>
+
+  <div class="footer-cols">
+    <div class="col-l">
+      <span>Studio</span>
+      14 Chahar Bagh Lane<br>
+      Jolfa Quarter, Isfahan 81746<br>
+      Islamic Republic of Iran
+    </div>
+    <div class="col-c">
+      <address>
+        Visits by appointment<br>
+        Tuesdays &amp; Thursdays, 10h–16h
+      </address>
+      <div class="contact">studio@naqsh-e-jahan.atelier &middot; +98 31 3627 4419</div>
+    </div>
+    <div class="col-r">
+      <span>Correspondence</span>
+      Darius Farahani, master tile-cutter<br>
+      &amp; the workshop apprentices<br>
+      <a href="page-6.html" style="color:var(--accent);text-decoration:none;">Commission enquiries &rarr;</a>
+    </div>
+  </div>
+
+  <div class="mosaic-stripe" aria-hidden="true"></div>
+</footer>
+
+</body>
+</html>

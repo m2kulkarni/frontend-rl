@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Thirty-Six Views, Reconsidered — On Hokusai's Late Fuji · Ukiyo Gazette</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), serif;
+    margin: 0;
+    line-height: 1.8;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* ---------- ambient asanoha field ---------- */
+  .field {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.06;
+    background-image: url("svg/asanoha-hempleaf.svg");
+    background-size: 280px 280px;
+  }
+
+  main, header, footer { position: relative; z-index: 1; }
+
+  /* ---------- masthead / navigation ---------- */
+  .masthead {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    padding: 2.4rem 4rem 1.2rem 4rem;
+    border-bottom: 1px solid var(--ornament);
+  }
+  .masthead-left {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+  }
+  .seal-mark {
+    width: 28px; height: 28px;
+    background: var(--ornament);
+    -webkit-mask: url("svg/umebachi-plum-mon.svg") center/contain no-repeat;
+            mask: url("svg/umebachi-plum-mon.svg") center/contain no-repeat;
+    flex-shrink: 0;
+  }
+  .masthead-title {
+    font-family: var(--font-display), serif;
+    font-size: 1.05rem;
+    letter-spacing: 0.18em;
+    color: var(--text);
+  }
+  .masthead-title .ja { font-size: 0.92rem; opacity: 0.7; margin-left: 0.6rem; }
+
+  nav {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0;
+    align-items: baseline;
+  }
+  nav a {
+    font-family: var(--font-body), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.14em;
+    font-size: 0.78rem;
+    text-decoration: none;
+    color: var(--text);
+    padding: 0 1.1rem;
+    border-right: 1px solid rgba(12,12,12,0.45);
+    line-height: 1;
+    position: relative;
+  }
+  nav a:last-child { border-right: none; padding-right: 0; }
+  nav a[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    left: 1.1rem; right: 1.1rem;
+    bottom: -6px;
+    height: 1.5px;
+    background: var(--secondary);
+  }
+
+  /* ---------- title plate ---------- */
+  .title-plate {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 5rem 4rem 4rem 4rem;
+    gap: 4rem;
+    position: relative;
+  }
+  .title-plate::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("svg/seigaiha-waves.svg");
+    background-size: 420px 420px;
+    background-position: right -120px top -80px;
+    background-repeat: no-repeat;
+    opacity: 0.07;
+    pointer-events: none;
+  }
+  .kicker {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text);
+    opacity: 0.7;
+    margin-bottom: 1.4rem;
+  }
+  .feature-title {
+    font-family: var(--font-display), serif;
+    font-size: 3.6rem;
+    line-height: 1.18;
+    font-weight: 400;
+    margin: 0 0 2rem 0;
+    color: var(--text);
+    max-width: 14ch;
+  }
+  .feature-title em {
+    font-style: normal;
+    color: var(--secondary);
+  }
+  .deck {
+    font-family: var(--font-body), serif;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    max-width: 38ch;
+    margin: 0;
+    color: var(--text);
+  }
+  .byline {
+    margin-top: 2.8rem;
+    font-style: italic;
+    font-size: 0.92rem;
+    line-height: 1.6;
+    opacity: 0.85;
+  }
+  .byline .rule {
+    display: inline-block;
+    width: 28px;
+    height: 1px;
+    background: var(--ornament);
+    vertical-align: middle;
+    margin-right: 0.8rem;
+  }
+
+  .title-plate-right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    padding-top: 1rem;
+  }
+  .vertical-meta {
+    writing-mode: vertical-rl;
+    font-family: var(--font-display), serif;
+    font-size: 0.95rem;
+    letter-spacing: 0.4em;
+    color: var(--text);
+    border-left: 1px solid var(--ornament);
+    padding-left: 1.2rem;
+    margin-right: 4rem;
+    height: 320px;
+  }
+  .issue-stamp {
+    width: 84px; height: 84px;
+    background: var(--ornament);
+    -webkit-mask: url("svg/umebachi-plum-mon.svg") center/contain no-repeat;
+            mask: url("svg/umebachi-plum-mon.svg") center/contain no-repeat;
+    align-self: flex-start;
+    margin-top: 0.4rem;
+  }
+
+  /* ---------- essay body ---------- */
+  .essay {
+    display: grid;
+    grid-template-columns: 1fr 5fr 4fr;
+    gap: 3rem;
+    padding: 3rem 4rem 5rem 4rem;
+  }
+  .essay aside.gutter {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text);
+    opacity: 0.55;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    height: 220px;
+    align-self: start;
+    border-right: 1px solid var(--ornament);
+    padding-right: 0.6rem;
+    margin-left: auto;
+  }
+  .essay-column {
+    max-width: 62ch;
+    font-size: 1.02rem;
+    line-height: 1.85;
+  }
+  .essay-column .dropcap::first-letter {
+    font-family: var(--font-display), serif;
+    float: left;
+    font-size: 4.6rem;
+    line-height: 0.9;
+    padding: 0.4rem 0.7rem 0 0;
+    color: var(--secondary);
+  }
+  .essay-column p { margin: 0 0 1.4rem 0; }
+  .essay-column p + p { text-indent: 1.6em; }
+
+  h2.section-head {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 1.55rem;
+    margin: 3.2rem 0 1.4rem 0;
+    color: var(--text);
+    position: relative;
+    padding-left: 2.6rem;
+  }
+  h2.section-head::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 18px;
+    height: 18px;
+    background: var(--ornament);
+    -webkit-mask: url("svg/umebachi-plum-mon.svg") center/contain no-repeat;
+            mask: url("svg/umebachi-plum-mon.svg") center/contain no-repeat;
+  }
+
+  /* divider ornament between sections */
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 3rem 0 2rem 0;
+    gap: 1.4rem;
+  }
+  .divider .line {
+    flex: 1;
+    height: 1px;
+    background: var(--ornament);
+    opacity: 0.4;
+  }
+  .divider .glyph {
+    width: 22px; height: 22px;
+    background: var(--secondary);
+    -webkit-mask: url("svg/umebachi-plum-mon.svg") center/contain no-repeat;
+            mask: url("svg/umebachi-plum-mon.svg") center/contain no-repeat;
+  }
+
+  /* ---------- side rail (margin notes / pullquotes) ---------- */
+  .siderail {
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3.2rem;
+  }
+  .pullquote {
+    font-family: var(--font-display), serif;
+    color: var(--secondary);
+    font-size: 1.65rem;
+    line-height: 1.45;
+    border-top: 1px solid var(--secondary);
+    border-bottom: 1px solid var(--secondary);
+    padding: 1.4rem 0 1.4rem 0;
+    max-width: 28ch;
+    position: relative;
+  }
+  .pullquote::before {
+    content: "「";
+    position: absolute;
+    left: -0.7em;
+    top: 0.4rem;
+    font-size: 1.4rem;
+    color: var(--secondary);
+    opacity: 0.7;
+  }
+  .pullquote cite {
+    display: block;
+    margin-top: 0.9rem;
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 0.78rem;
+    color: var(--text);
+    letter-spacing: 0.1em;
+  }
+  .margin-note {
+    font-family: var(--font-body), serif;
+    font-size: 0.84rem;
+    line-height: 1.7;
+    border-left: 2px solid var(--ornament);
+    padding-left: 1rem;
+    max-width: 30ch;
+    color: var(--text);
+  }
+  .margin-note h4 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 0.92rem;
+    margin: 0 0 0.5rem 0;
+    letter-spacing: 0.08em;
+  }
+
+  /* ---------- plate III, full bleed ---------- */
+  .plate {
+    margin: 4rem 0;
+    background: var(--surface);
+    padding: 3rem 4rem 3rem 4rem;
+    position: relative;
+    border-top: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+  }
+  .plate-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  .plate-image {
+    height: 360px;
+    background: linear-gradient(
+      180deg,
+      #efe6cf 0%,
+      #efe6cf 32%,
+      #c9d8e3 32%,
+      #b9cdde 60%,
+      #1c3a5e 100%
+    );
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--ornament);
+  }
+  .plate-image::before {
+    /* the wave field */
+    content: "";
+    position: absolute;
+    inset: 32% 0 0 0;
+    background-image: url("svg/seigaiha-waves.svg");
+    background-size: 280px 280px;
+    background-repeat: repeat;
+    opacity: 0.55;
+    filter: hue-rotate(180deg) saturate(1.2);
+  }
+  .plate-image::after {
+    /* fuji silhouette, off-axis right */
+    content: "";
+    position: absolute;
+    left: 64%;
+    top: 18%;
+    width: 0;
+    height: 0;
+    border-left: 70px solid transparent;
+    border-right: 70px solid transparent;
+    border-bottom: 70px solid #f5efde;
+    opacity: 0.92;
+  }
+  .plate-cap {
+    font-family: var(--font-body), serif;
+    font-size: 0.9rem;
+    line-height: 1.75;
+  }
+  .plate-cap .label {
+    font-family: var(--font-display), serif;
+    font-size: 1.05rem;
+    letter-spacing: 0.3em;
+    color: var(--secondary);
+    display: block;
+    margin-bottom: 0.6rem;
+  }
+  .plate-cap .title-line {
+    font-style: italic;
+    font-size: 0.95rem;
+    margin: 0 0 1rem 0;
+  }
+  .plate-cap dl {
+    margin: 1.2rem 0 0 0;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.4rem 1rem;
+    font-size: 0.82rem;
+  }
+  .plate-cap dt {
+    font-style: italic;
+    opacity: 0.7;
+  }
+  .plate-cap dd { margin: 0; }
+
+  /* ---------- ledger / endnote panel ---------- */
+  .ledger {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3rem;
+    padding: 3rem 4rem 4rem 4rem;
+    background: var(--surface);
+    margin-top: 0;
+    position: relative;
+  }
+  .ledger::after {
+    content: "";
+    position: absolute;
+    top: 1.6rem; right: 1.6rem;
+    width: 32px; height: 32px;
+    background: var(--ornament);
+    -webkit-mask: url("svg/umebachi-plum-mon.svg") center/contain no-repeat;
+            mask: url("svg/umebachi-plum-mon.svg") center/contain no-repeat;
+  }
+  .ledger h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 1.1rem;
+    margin: 0 0 1.2rem 0;
+    letter-spacing: 0.08em;
+  }
+  .ledger p, .ledger li {
+    font-size: 0.88rem;
+    line-height: 1.75;
+  }
+  .ledger ol { padding-left: 1.2rem; margin: 0; }
+  .ledger li { margin-bottom: 0.7rem; }
+
+  /* ---------- footer ---------- */
+  footer {
+    border-top: 1px solid var(--ornament);
+    padding: 3rem 4rem 3rem 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    background: var(--bg);
+  }
+  .colophon {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 1.4rem;
+    align-items: start;
+  }
+  .crane {
+    width: 56px; height: 56px;
+    background: var(--ornament);
+    -webkit-mask: url("svg/tsuru-crane-mon.svg") center/contain no-repeat;
+            mask: url("svg/tsuru-crane-mon.svg") center/contain no-repeat;
+  }
+  .colophon-text {
+    font-size: 0.85rem;
+    line-height: 1.7;
+  }
+  .colophon-text strong {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 1rem;
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+  .footer-right {
+    text-align: right;
+    font-size: 0.85rem;
+    line-height: 1.7;
+  }
+  .footer-right h4 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 0.95rem;
+    margin: 0 0 0.4rem 0;
+    letter-spacing: 0.1em;
+  }
+  .footer-right .attr {
+    margin-top: 1.4rem;
+    font-style: italic;
+    font-size: 0.75rem;
+    opacity: 0.7;
+    max-width: 42ch;
+    margin-left: auto;
+  }
+</style>
+</head>
+<body>
+
+<div class="field" aria-hidden="true"></div>
+
+<header class="masthead">
+  <div class="masthead-left">
+    <span class="seal-mark" aria-hidden="true"></span>
+    <span class="masthead-title">UKIYO GAZETTE <span class="ja">浮世瓦版</span></span>
+  </div>
+  <nav aria-label="Primary">
+    <a href="page-1.html">Front Page</a>
+    <a href="page-2.html" aria-current="page">Feature</a>
+    <a href="page-3.html">Travelogue</a>
+    <a href="page-4.html">Interview</a>
+    <a href="page-5.html">Pattern Library</a>
+    <a href="page-6.html">Subscribe</a>
+  </nav>
+</header>
+
+<main>
+
+  <section class="title-plate" aria-labelledby="feature-title">
+    <div>
+      <p class="kicker">Feature Essay · Volume XII · Autumn, Reiwa 6</p>
+      <h1 id="feature-title" class="feature-title">
+        Thirty-Six Views, <em>Reconsidered</em>
+      </h1>
+      <p class="deck">
+        Two centuries on, Katsushika Hokusai's <i>Fugaku Sanjūrokkei</i> remains
+        less a series of landscapes than a sustained argument about looking —
+        about the geometry of attention, the colour of distance, and the
+        particular silence a mountain holds when surrounded by water.
+      </p>
+      <p class="byline">
+        <span class="rule"></span>By Tachibana Sōen, Contributing Editor<br>
+        <span style="margin-left:44px;">Filed from Nakagyō-ku, Kyōto · 9th of the Long Moon</span>
+      </p>
+    </div>
+    <div class="title-plate-right">
+      <div class="vertical-meta">FUGAKU · 三十六景 · 1830 — 1832</div>
+      <div class="issue-stamp" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <article class="essay">
+
+    <aside class="gutter" aria-hidden="true">Part I · The Argument of Foam</aside>
+
+    <div class="essay-column">
+
+      <p class="dropcap">
+        It is tempting, after so many reproductions on tea-tins and umbrella
+        sleeves, to believe that one has already seen the Great Wave. One has
+        not. <i>Kanagawa-oki Nami-ura</i> — the Wave Off the Coast of Kanagawa —
+        was published by Nishimuraya Yohachi sometime between the second and
+        fourth years of Tenpō, in an edition that almost certainly numbered
+        between five and eight thousand impressions. To stand before a first
+        printing today, as I did this past spring at the Hosomi Museum, is to
+        understand abruptly that the print is not an image of a wave at all.
+        It is an image of a sky that happens to be intruded upon by water.
+      </p>
+
+      <p>
+        The compositional argument is laid out with an architect's coldness.
+        Hokusai gives roughly two thirds of his block to negative space — the
+        pale lower atmosphere, the grey-white above — and into that emptiness
+        he places, off-axis and miniaturised, the cone of Fuji. The mountain,
+        the ostensible subject of the entire series, is rendered no larger
+        than a thumbnail. A cresting wave, by contrast, occupies the whole
+        upper-left quadrant. The visual hierarchy is inverted: the immortal
+        peak is dwarfed by a transient column of foam that, in life, would
+        collapse within seconds.
+      </p>
+
+      <p>
+        This inversion is not playfulness. It is, I would argue, the entire
+        point of the late series. Hokusai had begun the <i>Fugaku</i> in his
+        seventieth year, and would issue the supplementary ten plates only in
+        1834. The sequence is the work of an artist who had outlived his own
+        first reputation and was returning to landscape with the patience of
+        someone who knows he will not have time to do it twice.
+      </p>
+
+      <h2 class="section-head">On the matter of bero-ai</h2>
+
+      <p>
+        Much of the print's strange modernity rests on a single pigment.
+        <i>Bero-ai</i> — Berlin blue, Prussian blue, ferric ferrocyanide — had
+        been imported through Nagasaki in small quantities since the 1820s,
+        but only became affordable to commercial publishers around 1829, when
+        a Chinese-manufactured equivalent reached Edo at a fraction of the
+        Dutch price. Hokusai and his publisher were among the very first to
+        use it at scale. The deep, almost violent blue of the wave's hollow,
+        and the cooler wash of the receding sky, are both bero-ai, applied in
+        gradations of hand-printed <i>bokashi</i> that no earlier indigo could
+        have sustained without bleeding.
+      </p>
+
+      <p>
+        The pigment matters because it is what allows the print to argue. An
+        indigo wave would have spread, softened, become atmospheric. Bero-ai
+        holds an edge. The foam-claws against the dark trough are crisp
+        enough to read as drawing rather than as weather. Hokusai is not
+        depicting a wave; he is diagramming one, and bero-ai is the ink of
+        diagrams.
+      </p>
+    </div>
+
+    <div class="siderail">
+
+      <figure class="pullquote">
+        The mountain is dwarfed by a column of foam that, in life, would
+        collapse within seconds. This is not playfulness. It is the entire
+        point.
+        <cite>— T. Sōen, on Plate I</cite>
+      </figure>
+
+      <div class="margin-note">
+        <h4>Note on Pigment</h4>
+        Prussian blue first appears in Japanese commercial woodblock printing
+        c. 1829, in fan-prints by Keisai Eisen. By 1831, Hokusai's publisher
+        Nishimuraya was advertising the <i>Fugaku</i> at 16 mon per sheet —
+        roughly a bowl of soba — making the series, despite its imported
+        pigment, a popular rather than aristocratic object.
+      </div>
+
+      <div class="margin-note">
+        <h4>Edition &amp; State</h4>
+        First-state impressions are distinguished by the unbroken outline
+        block, a cleaner key around the boatmen's heads, and the publisher's
+        mark <i>Eijudō</i> 永寿堂 in the lower margin. Of the surviving
+        impressions worldwide, fewer than one hundred and twenty are
+        considered first-state.
+      </div>
+    </div>
+  </article>
+
+  <div style="padding: 0 4rem;">
+    <div class="divider" aria-hidden="true">
+      <span class="line"></span>
+      <span class="glyph"></span>
+      <span class="line"></span>
+    </div>
+  </div>
+
+  <section class="plate" aria-labelledby="plate-iii-cap">
+    <div class="plate-grid">
+      <div class="plate-image" role="img" aria-label="Schematic reconstruction of the Great Wave composition, showing Mount Fuji off-axis to the right beneath a cresting wave."></div>
+      <div class="plate-cap" id="plate-iii-cap">
+        <span class="label">PLATE III</span>
+        <p class="title-line">Kanagawa-oki Nami-ura — The Wave Off Kanagawa, schematic reconstruction.</p>
+        <p>
+          Note the placement of the peak: not centred, not even on the
+          golden section, but at roughly five-eighths of the horizontal
+          field, sitting low in a band of pale sky. The cresting foam
+          enters from the upper left and is balanced not by another mass
+          but by absence — by the long pale interval to its right.
+        </p>
+        <dl>
+          <dt>Block</dt><dd>Cherry, hand-cut by Egawa Tomekichi</dd>
+          <dt>Pigments</dt><dd>Bero-ai, sumi, light indigo, sumi-zumi grey</dd>
+          <dt>Sheet</dt><dd>ōban yoko-e, 25.7 × 37.9 cm</dd>
+          <dt>Publisher</dt><dd>Nishimuraya Yohachi (Eijudō), Edo</dd>
+          <dt>Issued</dt><dd>Tenpō 2–4 (1831–1833)</dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <article class="essay">
+    <aside class="gutter" aria-hidden="true">Part II · Silence as Composition</aside>
+
+    <div class="essay-column">
+
+      <h2 class="section-head">The off-axis Fuji</h2>
+
+      <p>
+        Western landscape, by long convention, places its subject near the
+        centre and balances it with secondary masses. Hokusai's Fuji, in plate
+        after plate of the <i>Fugaku</i>, refuses this. In the <i>Red Fuji</i>
+        (<i>Gaifū Kaisei</i>) the mountain pushes hard into the right edge.
+        In <i>Kōshū Kajikazawa</i> a fisherman on a rock outweighs the
+        mountain entirely. In <i>Sundai, Edo</i>, the peak is glimpsed through
+        a gap in the rooftops as a casual incident of geography.
+      </p>
+
+      <p>
+        The argument here is theological as much as compositional. Fuji is
+        sacred precisely because it does not require centring. The mountain
+        organises the world by being in it; the artist's task is to find the
+        angle from which that organising fact becomes visible without being
+        announced. To place Fuji on axis would be to flatter the viewer's
+        attention. Hokusai prefers to ambush it.
+      </p>
+
+      <p>
+        In <i>Kanagawa-oki</i> this strategy reaches its limit. The wave is
+        the visual event; the mountain is what the wave is failing to
+        obscure. Fuji is small because eternity is small in any given moment
+        of weather. And the negative sky between them — that long, almost
+        embarrassing band of nothing — is the medium through which the
+        argument is conducted.
+      </p>
+
+      <h2 class="section-head">Negative sky, balanced foam</h2>
+
+      <p>
+        Consider what occupies the right two-thirds of the upper register: a
+        thinly graded wash, no horizon line, no birds, no cloud-script of the
+        kind a Kanō-school painter would have felt obliged to provide. It is
+        empty, and the emptiness is doing structural work. Cover it with a
+        sheet of paper and the print collapses; the wave becomes hectic, the
+        boats becomes legible only as ornament. The composition lives in the
+        tension between the foam's busyness and the sky's refusal.
+      </p>
+
+      <p>
+        This is, I think, what makes the <i>Fugaku</i> feel so durable. They
+        are prints that know the value of what they leave out. A century
+        later, one finds the same instinct in the screen-paintings of
+        Higashiyama Kaii, and in certain photographs by Domon Ken, and in the
+        opening shots of Ozu Yasujirō. It is, at the risk of sounding
+        provincial, a very Japanese argument: that depiction is mostly the
+        management of absence.
+      </p>
+
+      <p>
+        Hokusai signed the print, in his seventy-second year, with the
+        sobriquet <i>Hokusai aratame Iitsu hitsu</i> — "from the brush of
+        Iitsu, formerly Hokusai." He would change his name twice more before
+        he died at eighty-nine, claiming, famously, that everything he had
+        produced before the age of seventy was not worth counting. The
+        <i>Fugaku</i> are the work of someone still becoming. That, too, is
+        part of the argument.
+      </p>
+
+    </div>
+
+    <div class="siderail">
+      <figure class="pullquote">
+        Depiction is mostly the management of absence. The negative sky is
+        not background. It is the sentence in which the wave is spoken.
+        <cite>— T. Sōen</cite>
+      </figure>
+
+      <div class="margin-note">
+        <h4>Further Viewing</h4>
+        First-state impressions are held in the British Museum (1906,1220,0.534);
+        the Metropolitan Museum, New York (JP1847); the Tokyo National Museum;
+        and the Sumida Hokusai Museum, which holds two. The Museum of Fine
+        Arts, Boston, holds a state with weakened key-block — useful for
+        comparing wear in the foam contour.
+      </div>
+
+      <div class="margin-note">
+        <h4>On the boatmen</h4>
+        Three <i>oshiokuri-bune</i>, the fast cargo boats that ran fresh
+        bonito and live fish from Bōsō to Edo's Nihonbashi market. Eight
+        oarsmen per boat. They are not figures of terror so much as of work:
+        the wave is their ordinary weather.
+      </div>
+    </div>
+  </article>
+
+  <section class="ledger" aria-label="Endnotes and provenance">
+    <div>
+      <h3>Sources Consulted</h3>
+      <ol>
+        <li>Smith, H. D. <i>Hokusai: One Hundred Views of Mt. Fuji.</i> George Braziller, 1988.</li>
+        <li>Forrer, M. <i>Hokusai: Prints and Drawings.</i> Royal Academy of Arts, London, 1991.</li>
+        <li>Asano, S. &amp; Clark, T. <i>The Passionate Art of Kitagawa Utamaro</i> (for context on Eijudō's house style).</li>
+        <li>Nagata, S. <i>Bero-ai: The Importation of Prussian Blue, 1820–1840.</i> Kyōto Shoin, 1998.</li>
+      </ol>
+    </div>
+    <div>
+      <h3>Provenance Notes</h3>
+      <p>
+        The schematic in Plate III was traced from the Hosomi Museum first-state
+        impression on loan to the Kyoto National Museum, autumn exhibition
+        ‹The Wave at Two Hundred›, 14 September – 3 November of this year.
+        Admission ¥1,800; concession ¥1,400. Catalogue available from the
+        museum shop at ¥3,200, in Japanese with English captions.
+      </p>
+    </div>
+    <div>
+      <h3>A Note from the Editor</h3>
+      <p>
+        Tachibana Sōen has written for the Gazette since the spring number of
+        Reiwa 4. She is presently completing a monograph on the late landscape
+        prints of Andō Hiroshige, to be issued by Heibonsha in the autumn of
+        Reiwa 7. Correspondence may be sent to the editorial office below.
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="colophon">
+    <span class="crane" aria-hidden="true"></span>
+    <div class="colophon-text">
+      <strong>『浮世瓦版』 Ukiyo Gazette</strong>
+      Established Bunsei 6 (1823).<br>
+      Reissued in the present series, 2024.<br>
+      A quarterly broadsheet of the Floating World.
+    </div>
+  </div>
+  <div class="footer-right">
+    <h4>Editorial Office</h4>
+    Ukiyo Gazette Henshūshitsu<br>
+    2-chōme 14, Sanjō-agaru, Tominokōji-dōri<br>
+    Nakagyō-ku, Kyōto 604-8091<br>
+    Issue No. XII · Autumn, Reiwa 6
+    <p class="attr">
+      Kamon and wagara SVGs after Wikimedia Commons sources, used under
+      CC-BY-SA 3.0. Tsuru-no-maru, umebachi, seigaiha, sayagata and asanoha
+      attributions on file with the editor.
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>On the Practice — R. Kalyanasundaram</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.55;
+  }
+
+  /* ====== MASTHEAD: gopuram silhouette ====== */
+  .masthead {
+    background: var(--secondary);
+    color: var(--surface);
+    text-align: center;
+    padding: 0;
+    border-bottom: 6px solid var(--accent);
+  }
+  .gopuram-tier {
+    background: var(--secondary);
+    border-bottom: 3px solid var(--accent);
+    padding: 14px 0 12px;
+    position: relative;
+  }
+  .gopuram-tier.t1 { background: #053f55; }
+  .gopuram-tier.t2 { background: #065776; width: 88%; margin: 0 auto; border-left: 3px solid var(--accent); border-right: 3px solid var(--accent); }
+  .gopuram-tier.t3 { background: var(--primary); width: 72%; margin: 0 auto; border-left: 3px solid var(--accent); border-right: 3px solid var(--accent); padding: 18px 0 16px; }
+  .gopuram-tier.t4 { background: #8b1538; width: 56%; margin: 0 auto; border-left: 3px solid var(--accent); border-right: 3px solid var(--accent); padding: 22px 0 20px; }
+
+  .masthead .eyebrow {
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.45em;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0;
+  }
+  .masthead h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 700;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    font-size: 28px;
+    margin: 6px 0 4px;
+    color: var(--surface);
+  }
+  .masthead .sanskrit {
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.6em;
+    font-size: 10px;
+    color: var(--accent);
+    margin: 0;
+  }
+  .masthead h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    font-size: 14px;
+    margin: 0;
+    color: var(--surface);
+  }
+  .masthead .pagetitle {
+    font-family: var(--font-display), serif;
+    font-weight: 700;
+    letter-spacing: 0.38em;
+    text-transform: uppercase;
+    font-size: 22px;
+    margin: 0;
+    color: var(--surface);
+  }
+  .masthead .pagetitle-sub {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--accent);
+    margin-top: 6px;
+    letter-spacing: 0.05em;
+  }
+
+  /* peacock frieze under masthead */
+  .frieze {
+    background: var(--primary);
+    padding: 8px 0;
+    border-top: 2px solid var(--accent);
+    border-bottom: 2px solid var(--accent);
+    text-align: center;
+    line-height: 0;
+  }
+  .frieze svg { height: 26px; width: auto; fill: #1a0a05; }
+
+  /* ====== PILLARED ARCADE NAV ====== */
+  nav.arcade {
+    background: var(--bg);
+    border-bottom: 4px double var(--text-emphasis);
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+  }
+  nav.arcade ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: stretch;
+  }
+  nav.arcade li {
+    display: flex;
+    align-items: center;
+  }
+  nav.arcade .bay {
+    display: flex;
+    align-items: center;
+    background: var(--bg);
+    border-top: 3px solid var(--accent);
+    border-bottom: 3px solid var(--accent);
+  }
+  nav.arcade .bay a {
+    display: inline-block;
+    padding: 18px 22px 16px;
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+  }
+  nav.arcade .bay a:hover {
+    border-bottom-color: var(--secondary);
+  }
+  nav.arcade .bay[aria-current="page"],
+  nav.arcade .bay.active {
+    background: var(--primary);
+  }
+  nav.arcade .bay[aria-current="page"] a,
+  nav.arcade .bay.active a {
+    color: var(--surface);
+  }
+  .pillar {
+    width: 14px;
+    background: linear-gradient(to right,
+      transparent 0, transparent 2px,
+      var(--text-emphasis) 2px, var(--text-emphasis) 3px,
+      var(--accent) 3px, var(--accent) 4px,
+      var(--surface) 4px, var(--surface) 10px,
+      var(--accent) 10px, var(--accent) 11px,
+      var(--text-emphasis) 11px, var(--text-emphasis) 12px,
+      transparent 12px);
+    position: relative;
+  }
+  .pillar::before, .pillar::after {
+    content: "";
+    position: absolute;
+    left: -2px;
+    right: -2px;
+    height: 8px;
+    background: var(--text-emphasis);
+    border-top: 2px solid var(--accent);
+    border-bottom: 2px solid var(--accent);
+  }
+  .pillar::before { top: 0; }
+  .pillar::after { bottom: 0; }
+  .rosette {
+    width: 16px;
+    height: 16px;
+    background: var(--accent);
+    border-radius: 50%;
+    align-self: center;
+    margin: 0 -2px;
+    box-shadow: 0 0 0 2px var(--primary), 0 0 0 4px var(--accent);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ====== MAIN LAYOUT ====== */
+  main {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 36px 40px 0;
+  }
+
+  .banner-rule {
+    height: 22px;
+    background:
+      repeating-linear-gradient(90deg,
+        var(--primary) 0 12px,
+        var(--accent) 12px 14px,
+        var(--secondary) 14px 26px,
+        var(--accent) 26px 28px);
+    border-top: 2px solid var(--text);
+    border-bottom: 2px solid var(--text);
+  }
+
+  /* divider with motif */
+  .divider {
+    text-align: center;
+    margin: 28px 0;
+    line-height: 0;
+    color: var(--text-emphasis);
+  }
+  .divider svg {
+    height: 38px;
+    width: auto;
+    opacity: 0.85;
+  }
+
+  /* Section heading inscription block */
+  .inscription {
+    text-align: center;
+    background: var(--surface);
+    border-top: 3px solid var(--text-emphasis);
+    border-bottom: 3px solid var(--text-emphasis);
+    padding: 14px 20px;
+    position: relative;
+    margin-bottom: 28px;
+  }
+  .inscription::before, .inscription::after {
+    content: "";
+    position: absolute; left: 0; right: 0; height: 2px;
+    background: var(--accent);
+  }
+  .inscription::before { top: -8px; }
+  .inscription::after { bottom: -8px; }
+  .inscription h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 700;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    margin: 0;
+    font-size: 18px;
+    color: var(--text-emphasis);
+  }
+  .inscription .tamil {
+    font-family: var(--font-display), serif;
+    font-size: 10px;
+    letter-spacing: 0.5em;
+    color: var(--secondary);
+    margin-top: 6px;
+  }
+
+  /* ====== ABOUT GRID ====== */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 36px;
+    margin-top: 12px;
+  }
+
+  /* Portrait / seal panel */
+  .portrait-panel {
+    background: var(--surface);
+    border: 2px solid var(--text-emphasis);
+    box-shadow: 0 0 0 4px var(--bg), 0 0 0 6px var(--accent);
+    padding: 22px 18px;
+    text-align: center;
+    position: relative;
+  }
+  .portrait-panel::before, .portrait-panel::after {
+    content: "";
+    position: absolute;
+    left: 8px; right: 8px;
+    height: 4px;
+    background: repeating-linear-gradient(90deg, var(--primary) 0 6px, var(--accent) 6px 8px);
+  }
+  .portrait-panel::before { top: 8px; }
+  .portrait-panel::after { bottom: 8px; }
+
+  .seal-frame {
+    background: var(--primary);
+    padding: 18px;
+    border: 3px double var(--accent);
+    margin: 8px 0 16px;
+    display: flex;
+    justify-content: center;
+  }
+  .seal-frame svg { width: 130px; height: auto; }
+
+  .portrait-panel .name {
+    font-family: var(--font-display), serif;
+    font-weight: 700;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    font-size: 15px;
+    color: var(--text-emphasis);
+    margin: 6px 0 2px;
+  }
+  .portrait-panel .style {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--text);
+    margin: 0 0 14px;
+  }
+  .portrait-panel dl {
+    text-align: left;
+    margin: 14px 6px 0;
+    font-size: 13px;
+    border-top: 1px solid var(--text-emphasis);
+    padding-top: 12px;
+  }
+  .portrait-panel dt {
+    font-family: var(--font-display), serif;
+    font-size: 9px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-top: 8px;
+  }
+  .portrait-panel dd {
+    margin: 2px 0 8px;
+    color: var(--text);
+  }
+
+  /* Body content panel */
+  .body-panel {
+    background: var(--surface);
+    padding: 32px 38px;
+    border-top: 3px solid var(--primary);
+    border-bottom: 3px solid var(--primary);
+    box-shadow: inset 0 4px 0 var(--accent), inset 0 -4px 0 var(--accent);
+    position: relative;
+  }
+
+  .body-panel h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    font-size: 14px;
+    color: var(--text-emphasis);
+    margin: 28px 0 6px;
+    border-bottom: 1px dashed var(--secondary);
+    padding-bottom: 6px;
+  }
+  .body-panel h3:first-child { margin-top: 0; }
+  .body-panel p {
+    font-size: 15px;
+    margin: 10px 0 14px;
+  }
+  .body-panel .dropcap::first-letter {
+    font-family: var(--font-display), serif;
+    font-size: 56px;
+    float: left;
+    line-height: 0.9;
+    padding: 6px 10px 0 0;
+    color: var(--primary);
+    font-weight: 700;
+  }
+
+  /* Three-column band: training / membership / teaching */
+  .pillar-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin: 18px 0 6px;
+  }
+  .pcard {
+    background: var(--bg);
+    border-top: 2px solid var(--primary);
+    border-bottom: 2px solid var(--primary);
+    padding: 14px 16px;
+    position: relative;
+  }
+  .pcard::before, .pcard::after {
+    content: "";
+    position: absolute;
+    top: -2px; bottom: -2px;
+    width: 6px;
+    background: var(--accent);
+  }
+  .pcard::before { left: 0; }
+  .pcard::after  { right: 0; }
+  .pcard h4 {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    margin: 0 0 4px;
+  }
+  .pcard .meta {
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    color: var(--text-emphasis);
+    font-size: 12px;
+    margin-bottom: 8px;
+  }
+  .pcard ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 13px;
+  }
+  .pcard li {
+    padding: 4px 0 4px 14px;
+    position: relative;
+    border-bottom: 1px dotted rgba(26,26,26,0.3);
+  }
+  .pcard li:last-child { border-bottom: none; }
+  .pcard li::before {
+    content: "✦";
+    color: var(--primary);
+    position: absolute;
+    left: 0;
+    font-size: 10px;
+    top: 6px;
+  }
+
+  /* Credo block */
+  .credo {
+    margin: 30px 0 8px;
+    background: var(--secondary);
+    color: var(--surface);
+    padding: 28px 36px;
+    text-align: center;
+    border: 3px double var(--accent);
+    position: relative;
+  }
+  .credo::before, .credo::after {
+    content: "";
+    position: absolute;
+    width: 28px; height: 28px;
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 4px var(--secondary), inset 0 0 0 6px var(--accent);
+  }
+  .credo::before { top: -14px; left: 50%; transform: translateX(-50%); }
+  .credo::after  { bottom: -14px; left: 50%; transform: translateX(-50%); }
+  .credo blockquote {
+    font-family: var(--font-display), serif;
+    font-size: 19px;
+    letter-spacing: 0.06em;
+    line-height: 1.5;
+    margin: 0;
+    font-style: italic;
+    color: var(--surface);
+  }
+  .credo cite {
+    display: block;
+    margin-top: 12px;
+    font-family: var(--font-display), serif;
+    font-style: normal;
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+
+  /* small inline lotus */
+  .lotus-inline {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    vertical-align: -2px;
+    margin: 0 4px;
+  }
+
+  /* Chronology ribbon */
+  .chronology {
+    margin: 28px 0 0;
+    background: var(--surface);
+    border: 2px solid var(--text-emphasis);
+    padding: 18px 24px;
+  }
+  .chronology h3 {
+    margin-top: 0;
+  }
+  .chrono-list {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    row-gap: 8px;
+    column-gap: 18px;
+    font-size: 14px;
+    margin: 4px 0 0;
+  }
+  .chrono-year {
+    font-family: var(--font-display), serif;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: 0.1em;
+  }
+  .chrono-event {
+    border-left: 2px solid var(--accent);
+    padding-left: 14px;
+  }
+
+  /* ====== FOOTER ====== */
+  footer.arcade-footer {
+    margin-top: 60px;
+    background: var(--secondary);
+    color: var(--surface);
+    border-top: 6px solid var(--accent);
+  }
+  .arcade-bays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    border-bottom: 3px solid var(--accent);
+  }
+  .arcade-bays .bay-cell {
+    padding: 22px 14px;
+    text-align: center;
+    border-right: 1px solid rgba(201, 162, 58, 0.4);
+    font-family: var(--font-display), serif;
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--accent);
+    position: relative;
+  }
+  .arcade-bays .bay-cell:last-child { border-right: none; }
+  .arcade-bays .bay-cell.center {
+    grid-column: 4;
+    background: var(--primary);
+    padding: 14px;
+  }
+  .arcade-bays .bay-cell.center svg {
+    width: 64px; height: 64px;
+  }
+  .arcade-bays .bay-cell .arch {
+    border-top: 2px solid var(--accent);
+    border-left: 2px solid var(--accent);
+    border-right: 2px solid var(--accent);
+    border-radius: 50% 50% 0 0 / 80% 80% 0 0;
+    height: 38px;
+    margin-bottom: 10px;
+  }
+  .arcade-bays .bay-cell span.glyph {
+    display: block;
+    font-size: 18px;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+  .lotus-row {
+    background: var(--primary);
+    padding: 8px 0;
+    text-align: center;
+    letter-spacing: 4px;
+    color: var(--accent);
+    font-size: 14px;
+    border-bottom: 2px solid var(--text-emphasis);
+  }
+  .footer-info {
+    padding: 18px 40px 12px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--surface);
+  }
+  .footer-info .col h5 {
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    color: var(--accent);
+    margin: 0 0 6px;
+    font-weight: 400;
+  }
+  .footer-info .col p {
+    margin: 0;
+    font-family: var(--font-body), serif;
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    font-size: 13px;
+    color: var(--surface);
+  }
+  .copyline {
+    background: #5b0e26;
+    color: var(--accent);
+    text-align: center;
+    padding: 10px;
+    font-family: var(--font-display), serif;
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============== MASTHEAD (gopuram tiers) ============== -->
+<header class="masthead">
+  <div class="gopuram-tier t1">
+    <p class="eyebrow">Estd. Kumbakonam · MCMLXXVIII</p>
+  </div>
+  <div class="gopuram-tier t2">
+    <h1>Atelier Sthapati</h1>
+    <p class="sanskrit">· शिल्प · आगम · वास्तु ·</p>
+  </div>
+  <div class="gopuram-tier t3">
+    <h2>Studio of R. Kalyanasundaram</h2>
+  </div>
+  <div class="gopuram-tier t4">
+    <p class="pagetitle">On the Practice</p>
+    <p class="pagetitle-sub">— a biographical statement, set down by the carver himself —</p>
+  </div>
+</header>
+
+<!-- twin-peacocks frieze -->
+<div class="frieze" aria-hidden="true">
+  <svg viewBox="0 0 313.71717 29.540759" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+    <g transform="translate(54.572101,-91.176475)">
+      <path d="m -45.203647,120.20506 c -2.080683,-0.59494 -3.600099,-1.33764 -4.88273,-2.38671 -1.667517,-1.36388 -2.894118,-2.64027 -2.893812,-3.0113 1.42e-4,-0.17364 -0.209138,-0.47237 -0.46507,-0.66382 -0.819614,-0.61314 -1.16478,-1.84791 -1.123557,-4.01931 0.07527,-3.96496 0.841997,-6.28592 3.359706,-10.170217 2.091957,-3.227467 6.669369,-6.452883 10.647663,-7.502765 2.252562,-0.594453 8.248778,-0.796292 11.003264,-0.370372 6.94812,1.074354 16.152972,4.460234 20.6562963,7.598128 0.8536092,0.594796 0.7949964,0.623336 1.3291143,-0.64739 0.2251847,-0.535733 0.8814684,-1.603973 1.4584084,-2.373871 0.8561927,-1.142535 1.457933,-1.600664 3.2740672,-2.492638 2.16210793,-1.06191 4.5637653,-1.779237 6.7277099,-2.009456 0.5824052,-0.06194 1.3990594,-0.240975 1.8147895,-0.397805 0.7738562,-0.291942 6.4810504,-0.196925 10.0927814,0.168029 2.264542,0.228828 9.60899,1.67773 11.219571,2.21338 1.156599,0.384661 1.203738,0.376381 3.086684,-0.542345 2.528472,-1.2337 4.016657,-1.480542 8.446835,-1.401064 3.61374,0.06486 4.290154,0.147139 6.742793,0.820538 0.653941,0.179545 1.719761,0.375692 2.368485,0.435889 0.648729,0.0602 1.838242,0.282073 2.643363,0.493076 1.333488,0.349469 1.625289,0.339432 3.276461,-0.112735 4.298701,-1.177186 16.775093,-2.487486 20.247754,-2.126478 0.82522,0.08579 2.552867,0.408475 3.839215,0.717074 2.046471,0.490964 2.518569,0.521833 3.776859,0.246952 3.038874,-0.663879 6.75683,-1.061515 11.128253,-1.190178 4.134196,-0.121667 4.707691,-0.08259 6.380251,0.434721 1.364622,0.422078 2.105892,0.83929 2.879252,1.620559 1.29673,1.309975 1.63,2.709456 1.6237,6.818148 -0.005,2.95745 0.2393,4.45137 0.62566,3.83325 0.10807,-0.17288 0.17855,-1.23469 0.15662,-2.35957 -0.10151,-5.20664 0.0689,-6.026385 1.66799,-8.024476 0.85063,-1.062863 2.64553,-2.128587 4.10167,-2.435363 2.81819,-0.59374 15.88977,0.302112 18.8453,1.291541 0.69822,0.23375 1.33752,0.188118 3.17619,-0.226686 4.44974,-1.003866 5.16179,-1.08168 9.66723,-1.056509 4.01601,0.0224 5.00432,0.121426 8.5084,0.852608 6.84995,1.42927 7.19777,1.434197 12.43469,0.175947 1.28482,-0.308696 3.07339,-0.450501 5.82325,-0.46168 3.55974,-0.01452 4.14585,0.04906 5.68548,0.615953 0.94414,0.347651 2.11528,0.863208 2.60253,1.145677 0.82461,0.478046 0.98936,0.487693 2.38057,0.139336 1.77908,-0.445477 5.29646,-1.019874 9.8354,-1.606151 3.88998,-0.502463 11.70287,-0.5191 15.08161,-0.03212 5.86054,0.844676 9.86323,3.110261 10.57122,5.983455 l 0.28701,1.164733 3.35851,-1.630478 c 3.17793,-1.542804 8.22537,-3.484656 11.44251,-4.402193 4.71613,-1.345036 12.68145,-1.710913 16.9375,-0.778008 4.93058,1.080764 10.02057,5.551052 11.64065,10.223444 0.65092,1.87732 1.01878,5.06928 0.79472,6.89574 -0.46904,3.82309 -3.07509,7.60889 -6.48471,9.42031 -0.51071,0.27132 -1.10781,0.62201 -1.32689,0.7793 -1.28176,0.92026 -3.99222,1.08281 -9.3957,0.5635 -4.226,-0.40615 -43.09412,-0.56404 -48.28608,-0.19612 -3.36622,0.23852 -9.71584,0.13599 -14.17646,-0.22893 -3.19042,-0.261 -11.4116,-2.46478 -14.96419,-4.01131 z" fill="#1a0a05"/>
+    </g>
+  </svg>
+</div>
+
+<!-- ============== NAVIGATION (pillared arcade) ============== -->
+<nav class="arcade" aria-label="Primary">
+  <ul>
+    <li><span class="pillar" aria-hidden="true"></span><span class="bay"><a href="page-1.html">Sanctum</a></span><span class="pillar" aria-hidden="true"></span></li>
+    <li><span class="rosette" aria-hidden="true"></span></li>
+    <li><span class="pillar" aria-hidden="true"></span><span class="bay"><a href="page-2.html">Selected Works</a></span><span class="pillar" aria-hidden="true"></span></li>
+    <li><span class="rosette" aria-hidden="true"></span></li>
+    <li><span class="pillar" aria-hidden="true"></span><span class="bay"><a href="page-3.html">Patteeswaram Mandapa</a></span><span class="pillar" aria-hidden="true"></span></li>
+    <li><span class="rosette" aria-hidden="true"></span></li>
+    <li><span class="pillar" aria-hidden="true"></span><span class="bay"><a href="page-4.html">Drawings</a></span><span class="pillar" aria-hidden="true"></span></li>
+    <li><span class="rosette" aria-hidden="true"></span></li>
+    <li><span class="pillar" aria-hidden="true"></span><span class="bay" aria-current="page"><a href="page-5.html">On the Practice</a></span><span class="pillar" aria-hidden="true"></span></li>
+    <li><span class="rosette" aria-hidden="true"></span></li>
+    <li><span class="pillar" aria-hidden="true"></span><span class="bay"><a href="page-6.html">Workshop &amp; Letters</a></span><span class="pillar" aria-hidden="true"></span></li>
+  </ul>
+</nav>
+
+<div class="banner-rule" aria-hidden="true"></div>
+
+<main>
+
+  <div class="divider" aria-hidden="true">
+    <svg viewBox="0 0 660 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+      <line x1="0" y1="40" x2="280" y2="40" stroke="#8b1538" stroke-width="2"/>
+      <line x1="380" y1="40" x2="660" y2="40" stroke="#8b1538" stroke-width="2"/>
+      <line x1="0" y1="46" x2="280" y2="46" stroke="#c9a23a" stroke-width="1"/>
+      <line x1="380" y1="46" x2="660" y2="46" stroke="#c9a23a" stroke-width="1"/>
+      <g transform="translate(330,40)">
+        <circle r="20" fill="none" stroke="#8b1538" stroke-width="2"/>
+        <circle r="14" fill="#e34234"/>
+        <circle r="6" fill="#c9a23a"/>
+        <g stroke="#c9a23a" stroke-width="1" fill="none">
+          <path d="M -28 0 L -50 0 M 28 0 L 50 0 M 0 -28 L 0 -38 M 0 28 L 0 38"/>
+        </g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="inscription">
+    <h2>· The Hand · The Line · The Stone ·</h2>
+    <div class="tamil">கையும் · கோடும் · கல்லும்</div>
+  </div>
+
+  <div class="about-grid">
+
+    <!-- ===== Portrait / seal column ===== -->
+    <aside class="portrait-panel">
+      <div class="seal-frame" aria-hidden="true">
+        <svg viewBox="0 0 356 367" xmlns="http://www.w3.org/2000/svg">
+          <path d="M 90.456847,353.9498 C 51.797347,340.13485 23.72672,305.75839 12.612487,258.6184 C 7.5684267,237.22321 6.1421397,201.86984 10.323594,201.86984 C 11.712834,201.86984 15.42322,211.57056 18.568972,223.427 C 25.452892,249.37152 37.19436,273.76855 48.535988,285.69407 C 67.374717,305.50242 114.0356,313.26029 140.92106,301.05394 C 161.86409,291.54544 170.35697,268.94603 161.24995,246.95931 C 154.21242,229.96943 138.24701,224.28836 108.50834,228.19197 C 108.50834,228.19197 90.282834,208.57398 84.476417,173.73548 L 103.15738,175.42939 C 125.65731,177.46962 142.64532,172.49605 151.46236,161.28728 C 159.74765,150.75419 159.5685,146.68046 150.34841,135.96157 C 137.04396,120.49428 113.15511,124.41248 64.786577,149.99522 L 40.381632,109.08518 L 50.613137,101.2812 C 76.253387,81.724339 120.77357,71.947329 146.11011,80.309169 C 169.18841,87.925649 186.12724,118.14755 181.60247,143.63298 C 178.54327,160.86286 164.72752,184.99524 154.05369,191.75339 L 144.84862,197.58162 L 157.56351,203.31522 C 179.17018,213.05833 192.36061,205.61034 208.12001,174.76849 C 229.92949,132.0869 244.0745,121.0378 276.96658,120.99051 C 292.28176,120.96847 297.73268,122.57499 308.90312,130.4031 C 336.78213,149.94016 351.9622,190.39693 348.62804,236.27272 C 344.40474,294.37435 316.88374,329.61601 275.73415,329.61601 C 253.15086,329.61601 238.59451,321.69526 227.00729,303.10156 C 216.82976,286.76927 212.24334,254.42288 218.08805,240.19369 C 220.89208,233.36732 221.39892,233.13578 221.58223,238.59686 C 221.91916,248.63689 233.34159,264.95549 243.82827,270.37835 C 269.55794,283.68369 306.49479,266.96693 321.10832,235.4032 C 332.20339,211.4394 326.25105,165.21656 311.02084,157.06552 C 307.83453,155.36024 299.96089,153.96502 293.5244,153.96502 C 279.84214,153.96502 269.09709,163.80155 254.03263,190.11774 C 248.82442,199.21613 240.05943,210.97175 234.55486,216.24128 C 225.61134,224.80312 222.41769,225.82225 204.53067,225.82225 L 184.51412,225.82225 L 190.98415,240.19369 C 200.2451,260.76437 199.80694,294.18704 190.00976,314.53347 C 181.35272,332.51252 161.33618,350.71469 145.33374,355.16013 C 129.75572,359.4876 104.38789,358.9281 90.456847,353.9498 z M 165.8338,75.923739 C 156.97908,60.814399 151.52974,32.606158 157.46546,32.606158 C 164.43775,47.732319 178.73037,61.227101 194.03409,70.643259 C 221.52091,83.949329 249.39257,78.578529 279.84247,54.108239 C 286.54595,48.721279 292.48231,44.913138 293.0345,45.645698 C 300.4697,57.184233 313.331,66.613261 317.58219,80.021449 C 317.58219,85.678729 293.22867,101.96033 274.01214,109.15007 C 226.38264,122.8706 193.96598,117.44304 165.8338,75.923739 z M 189.83603,40.997228 L 220.84514,6.6137488 L 255.30593,38.514418 C 243.51876,48.222549 235.00994,63.289118 221.54391,70.930009 C 210.90372,63.086273 195.02308,53.837816 189.83603,40.997228 z" fill="#f8f4ec"/>
+        </svg>
+      </div>
+
+      <p class="name">R. Kalyanasundaram</p>
+      <p class="style">— Sthapati of the Dravida tradition —</p>
+
+      <dl>
+        <dt>Born</dt>
+        <dd>Tiruvaiyaru, Thanjavur Dist., 1956</dd>
+        <dt>Apprenticed</dt>
+        <dd>To V. Ramaswamy Sthapati (father), 1968&ndash;1978</dd>
+        <dt>Atelier</dt>
+        <dd>Founded Kumbakonam workshop, 1978</dd>
+        <dt>Discipline</dt>
+        <dd>Āgama-Śilpa &amp; Vāstu-Śāstra</dd>
+        <dt>Sangam</dt>
+        <dd>Tamil Nadu Sthapati Sangam, member since 1985</dd>
+        <dt>Hand</dt>
+        <dd>Granite, sandstone, charnockite; ink &amp; lampblack on tracing cloth</dd>
+      </dl>
+    </aside>
+
+    <!-- ===== Body content column ===== -->
+    <section class="body-panel">
+
+      <h3>I · Provenance &amp; Apprenticeship</h3>
+      <p class="dropcap">
+        I was born in the agraharam of Tiruvaiyaru in the year 1956, on the bank of the Kaveri,
+        within walking distance of the Pancha-nadeeswarar shrine whose pillared corridors taught
+        me to count before I could read. My father, V. Ramaswamy Sthapati, was the seventh
+        generation of carvers in our line; in 1968, when I was twelve, he placed a chisel in my
+        hand and a slab of Krishnashila in front of me, and said only that the stone already
+        knew its capital — my task was to remove what was not the capital.
+        <span class="lotus-inline" aria-hidden="true">
+          <svg viewBox="0 0 384 302" xmlns="http://www.w3.org/2000/svg"><circle cx="192" cy="151" r="100" fill="#e34234"/><circle cx="192" cy="151" r="40" fill="#c9a23a"/></svg>
+        </span>
+      </p>
+      <p>
+        For ten years I worked beside him, first dressing rough blocks, then drawing the
+        tāla-māna grids onto stone in red ochre, and at last cutting the lower mouldings of
+        the adhiṣṭhāna under his correction. By 1976 he had me carving full pilaster capitals
+        for the renovation of the Sri Adi Kumbeswarar temple at Kumbakonam, and on his
+        seventieth birthday in 1978 he gave me his measuring rod, his copy of the
+        Mānasāra-Śilpa-Śāstra annotated in his own hand, and the small workshop on
+        Nageswaran North Street, where I have remained.
+      </p>
+
+      <h3>II · The Studio &amp; Its Compass</h3>
+      <p>
+        The Kumbakonam atelier accepts work in three departments: the cutting of new temple
+        stone for kumbhābhiṣekam-bound shrines; the measured drawing of existing structures
+        for restoration; and the consultation of agama-prescribed proportion for trustees,
+        architects, and the Hindu Religious &amp; Charitable Endowments Department of Tamil Nadu.
+        I work to the orthodox Dravida canon as transmitted through the Mayamatam and the
+        Kāśyapa-Śilpa, and refuse, politely, the polished granite of the export-temple style.
+      </p>
+
+      <div class="pillar-cards">
+        <div class="pcard">
+          <h4>Training</h4>
+          <p class="meta">Āgama-Śilpa lineage</p>
+          <ul>
+            <li>Āgama-Śilpa under V. Ramaswamy, 1968–78</li>
+            <li>Mānasāra recitation, completed 1974</li>
+            <li>Bronze-casting summer at Swamimalai, 1981</li>
+            <li>Survey-drawing under T.N. Ramachandran, ASI</li>
+          </ul>
+        </div>
+        <div class="pcard">
+          <h4>Membership</h4>
+          <p class="meta">Sangams &amp; Councils</p>
+          <ul>
+            <li>Tamil Nadu Sthapati Sangam (since 1985)</li>
+            <li>South Indian Temple Renovation Trust, advisor</li>
+            <li>Indian Heritage Cities Network, corresponding</li>
+            <li>HR &amp; CE Dept., empanelled consultant, 1996</li>
+          </ul>
+        </div>
+        <div class="pcard">
+          <h4>Teaching</h4>
+          <p class="meta">Government engagements</p>
+          <ul>
+            <li>Govt. College of Architecture &amp; Sculpture, Mamallapuram — visiting fellow, since 1992</li>
+            <li>Annual seminar on adhiṣṭhāna mouldings</li>
+            <li>Studio masterclass, third-year students, fortnightly</li>
+            <li>External examiner, Diploma in Stapathya, since 2004</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>III · Method</h3>
+      <p>
+        Every commission begins on paper, never on stone. A measured plan is drawn at
+        1:48 in ink and lampblack on linen tracing cloth; the elevations are set out by
+        the tāla system, the unit being the height of the principal deity divided into
+        nine equal parts. Only when the trustee, the chief priest, and I have signed the
+        sheet in vermilion does the stone enter the yard. The chisels themselves are
+        forged for us each season at a smithy in Swamimalai, and are dedicated, with the
+        first cut of the year, to Vishvakarma.
+      </p>
+      <p>
+        The atelier does not employ power tools beyond a single diamond saw used for the
+        rough quartering of blocks. A capital, once roughed, is finished entirely with the
+        hand chisel and the wooden mallet — twenty-two grades of cut, from the
+        bhañjana (breaker) to the niśāna (polisher) — over a period of between three and
+        eleven weeks, depending on order.
+      </p>
+
+      <!-- Chronology -->
+      <div class="chronology">
+        <h3>IV · A Brief Chronology</h3>
+        <dl class="chrono-list">
+          <dt class="chrono-year">1956</dt>
+          <dd class="chrono-event">Born, Tiruvaiyaru, Thanjavur District.</dd>
+          <dt class="chrono-year">1968</dt>
+          <dd class="chrono-event">Begins apprenticeship under V. Ramaswamy Sthapati.</dd>
+          <dt class="chrono-year">1976</dt>
+          <dd class="chrono-event">First independent capital cut for Sri Adi Kumbeswarar renovation.</dd>
+          <dt class="chrono-year">1978</dt>
+          <dd class="chrono-event">Founds Atelier Sthapati on Nageswaran North Street, Kumbakonam.</dd>
+          <dt class="chrono-year">1985</dt>
+          <dd class="chrono-event">Admitted to the Tamil Nadu Sthapati Sangam.</dd>
+          <dt class="chrono-year">1992</dt>
+          <dd class="chrono-event">First teaching engagement, Govt. College of Architecture and Sculpture, Mamallapuram.</dd>
+          <dt class="chrono-year">1998</dt>
+          <dd class="chrono-event">Patteeswaram Mandapa restoration commences (twelve years).</dd>
+          <dt class="chrono-year">2007</dt>
+          <dd class="chrono-event">Awarded the Kalaimamani by the Government of Tamil Nadu.</dd>
+        </dl>
+      </div>
+
+      <!-- Credo -->
+      <div class="credo">
+        <blockquote>
+          “The line of a capital is not invented; it is remembered, measured, and cut again.”
+        </blockquote>
+        <cite>— R. Kalyanasundaram, Kumbakonam, Āvaṇi 2018</cite>
+      </div>
+
+    </section>
+  </div>
+
+  <div class="divider" aria-hidden="true">
+    <svg viewBox="0 0 660 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+      <line x1="0" y1="40" x2="280" y2="40" stroke="#8b1538" stroke-width="2"/>
+      <line x1="380" y1="40" x2="660" y2="40" stroke="#8b1538" stroke-width="2"/>
+      <g transform="translate(330,40)" fill="none" stroke="#c9a23a" stroke-width="1.5">
+        <circle r="22"/>
+        <path d="M-22 0 L-12 -10 L0 -22 L12 -10 L22 0 L12 10 L0 22 L-12 10 Z" fill="#e34234" stroke="#c9a23a"/>
+        <circle r="6" fill="#c9a23a"/>
+      </g>
+    </svg>
+  </div>
+
+</main>
+
+<!-- ============== FOOTER (pillared arcade) ============== -->
+<footer class="arcade-footer">
+  <div class="arcade-bays">
+    <div class="bay-cell"><div class="arch"></div><span class="glyph">✦</span>Sanctum</div>
+    <div class="bay-cell"><div class="arch"></div><span class="glyph">✦</span>Works</div>
+    <div class="bay-cell"><div class="arch"></div><span class="glyph">✦</span>Mandapa</div>
+    <div class="bay-cell center" aria-hidden="true">
+      <svg viewBox="0 0 356 367" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="178" cy="183" r="170" fill="none" stroke="#c9a23a" stroke-width="3"/>
+        <circle cx="178" cy="183" r="130" fill="none" stroke="#c9a23a" stroke-width="1"/>
+        <path d="M 90.456847,353.9498 C 51.797347,340.13485 23.72672,305.75839 12.612487,258.6184 C 7.5684267,237.22321 6.1421397,201.86984 10.323594,201.86984 C 11.712834,201.86984 15.42322,211.57056 18.568972,223.427 C 25.452892,249.37152 37.19436,273.76855 48.535988,285.69407 C 67.374717,305.50242 114.0356,313.26029 140.92106,301.05394 C 161.86409,291.54544 170.35697,268.94603 161.24995,246.95931 C 154.21242,229.96943 138.24701,224.28836 108.50834,228.19197 C 108.50834,228.19197 90.282834,208.57398 84.476417,173.73548 L 103.15738,175.42939 C 125.65731,177.46962 142.64532,172.49605 151.46236,161.28728 C 159.74765,150.75419 159.5685,146.68046 150.34841,135.96157 C 137.04396,120.49428 113.15511,124.41248 64.786577,149.99522 L 40.381632,109.08518 L 50.613137,101.2812 C 76.253387,81.724339 120.77357,71.947329 146.11011,80.309169 C 169.18841,87.925649 186.12724,118.14755 181.60247,143.63298 C 178.54327,160.86286 164.72752,184.99524 154.05369,191.75339 L 144.84862,197.58162 L 157.56351,203.31522 C 179.17018,213.05833 192.36061,205.61034 208.12001,174.76849 C 229.92949,132.0869 244.0745,121.0378 276.96658,120.99051 C 292.28176,120.96847 297.73268,122.57499 308.90312,130.4031 C 336.78213,149.94016 351.9622,190.39693 348.62804,236.27272 C 344.40474,294.37435 316.88374,329.61601 275.73415,329.61601 C 253.15086,329.61601 238.59451,321.69526 227.00729,303.10156 C 216.82976,286.76927 212.24334,254.42288 218.08805,240.19369 z" fill="#c9a23a"/>
+      </svg>
+    </div>
+    <div class="bay-cell"><div class="arch"></div><span class="glyph">✦</span>Drawings</div>
+    <div class="bay-cell"><div class="arch"></div><span class="glyph">✦</span>Practice</div>
+    <div class="bay-cell"><div class="arch"></div><span class="glyph">✦</span>Letters</div>
+  </div>
+
+  <div class="lotus-row" aria-hidden="true">
+    ❀ ✦ ❀ ✦ ❀ ✦ ❀ ✦ ❀ ✦ ❀ ✦ ❀ ✦ ❀ ✦ ❀ ✦ ❀ ✦ ❀ ✦ ❀ ✦ ❀ ✦ ❀ ✦ ❀ ✦ ❀ ✦ ❀
+  </div>
+
+  <div class="footer-info">
+    <div class="col">
+      <h5>Atelier</h5>
+      <p>Atelier Sthapati,<br>14, Nageswaran North Street,<br>Kumbakonam 612 001,<br>Thanjavur District, Tamil Nadu.</p>
+    </div>
+    <div class="col">
+      <h5>Telephone &amp; Post</h5>
+      <p>+91 (0435) 242 1978<br>kalyanasundaram.sthapati@<br>atelier-sthapati.in<br>Letters answered each Friday.</p>
+    </div>
+    <div class="col">
+      <h5>Attribution</h5>
+      <p>Drawings, photographs &amp; carved work © R. Kalyanasundaram, Sthapati. The line of the lineage continues from V. Ramaswamy Sthapati (1908–1989).</p>
+    </div>
+  </div>
+
+  <div class="copyline">
+    © MMXXIV · Atelier Sthapati · Kumbakonam · The line is remembered, measured, and cut again
+  </div>
+</footer>
+
+</body>
+</html>

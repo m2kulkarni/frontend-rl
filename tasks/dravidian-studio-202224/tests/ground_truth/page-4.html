@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Workshop & Crafts — Sthapati Workshop</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), serif;
+    margin: 0;
+    line-height: 1.55;
+  }
+
+  /* ============ NAVIGATION ============ */
+  .topbar {
+    background: var(--surface);
+    padding: 22px 56px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .om-mark {
+    display: flex; align-items: center; gap: 14px;
+  }
+  .om-mark svg { width: 38px; height: 38px; }
+  .om-mark .wordmark {
+    font-family: var(--font-display);
+    font-size: 18px;
+    letter-spacing: 0.18em;
+    color: var(--primary);
+    line-height: 1;
+  }
+  .om-mark .wordmark small {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 9.5px;
+    letter-spacing: 0.32em;
+    color: var(--text-emphasis);
+    text-transform: uppercase;
+    margin-top: 4px;
+    font-weight: 400;
+  }
+  nav.primary { display: flex; gap: 34px; align-items: flex-end; }
+  nav.primary a {
+    position: relative;
+    text-decoration: none;
+    font-family: var(--font-body);
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--primary);
+    font-weight: 700;
+    padding-bottom: 14px;
+  }
+  nav.primary a[aria-current="page"] { color: var(--secondary); }
+  nav.primary a[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    bottom: -2px; left: 50%;
+    width: 14px; height: 14px;
+    transform: translateX(-50%);
+    background-image: radial-gradient(var(--secondary) 22%, transparent 24%),
+                      radial-gradient(var(--accent) 14%, transparent 16%);
+    background-size: 6px 6px, 14px 14px;
+    background-repeat: no-repeat;
+    background-position: center, center;
+  }
+  .nav-rule {
+    height: 6px;
+    border-top: 2px solid var(--secondary);
+    border-bottom: 2px solid var(--accent);
+    background: var(--surface);
+  }
+
+  /* ============ TIER 1: TITLE BAND ============ */
+  .tier-title {
+    background: var(--surface);
+    text-align: center;
+    padding: 54px 56px 40px;
+    position: relative;
+    border-bottom: 1px solid var(--accent);
+  }
+  .tier-title .kicker {
+    font-family: var(--font-body);
+    font-size: 11px;
+    letter-spacing: 0.5em;
+    color: var(--text-emphasis);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .tier-title h1 {
+    font-family: var(--font-display);
+    font-size: 64px;
+    letter-spacing: 0.14em;
+    color: var(--primary);
+    margin: 0 0 18px;
+    line-height: 1;
+  }
+  .tier-title h1 em {
+    color: var(--secondary);
+    font-style: normal;
+  }
+  .tier-title .deck {
+    max-width: 760px;
+    margin: 0 auto;
+    font-size: 15px;
+    color: var(--primary);
+  }
+  .peacock-frame {
+    width: 100%;
+    max-width: 1100px;
+    margin: 26px auto 0;
+    display: block;
+  }
+  .peacock-frame svg { width: 100%; height: auto; display: block; }
+
+  /* ============ TIER 2: VERMILION INTRO BAND ============ */
+  .tier-vermilion {
+    background: var(--secondary);
+    color: var(--bg);
+    padding: 56px 56px 64px;
+    position: relative;
+  }
+  .tier-vermilion::before, .tier-vermilion::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    height: 8px;
+    background:
+      repeating-linear-gradient(90deg,
+        var(--accent) 0 14px, transparent 14px 22px);
+  }
+  .tier-vermilion::before { top: 0; }
+  .tier-vermilion::after  { bottom: 0; }
+  .tier-vermilion .inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 48px;
+  }
+  .tier-vermilion h2 {
+    grid-column: 1 / -1;
+    font-family: var(--font-display);
+    font-size: 30px;
+    letter-spacing: 0.16em;
+    margin: 0 0 8px;
+    color: var(--bg);
+    text-align: center;
+  }
+  .tier-vermilion h2::after {
+    content: "";
+    display: block;
+    width: 80px; height: 2px;
+    background: var(--accent);
+    margin: 16px auto 0;
+  }
+  .tier-vermilion .yard {
+    border-left: 1px solid var(--accent);
+    border-right: 1px solid var(--accent);
+    padding: 10px 22px;
+  }
+  .tier-vermilion .yard:first-of-type { border-left: none; padding-left: 0; }
+  .tier-vermilion .yard:last-of-type  { border-right: none; padding-right: 0; }
+  .tier-vermilion .yard h3 {
+    font-family: var(--font-display);
+    font-size: 17px;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    margin: 0 0 10px;
+  }
+  .tier-vermilion .yard p {
+    font-size: 13.5px;
+    margin: 0 0 10px;
+    color: #fbeede;
+  }
+  .yard-meta {
+    font-family: var(--font-body);
+    font-size: 10.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-top: 14px;
+  }
+
+  /* ============ DIVIDER (palmette) ============ */
+  .palmette-divider {
+    background: var(--bg);
+    padding: 28px 56px 14px;
+    text-align: center;
+    border-bottom: 2px solid var(--accent);
+  }
+  .palmette-divider svg {
+    width: 100%;
+    max-width: 900px;
+    height: 42px;
+    display: block;
+    margin: 0 auto;
+  }
+  .palmette-divider .label {
+    font-family: var(--font-display);
+    font-size: 14px;
+    letter-spacing: 0.35em;
+    color: var(--text-emphasis);
+    margin-top: 12px;
+  }
+
+  /* ============ TIER 3: FOUR ESSAYS ============ */
+  .tier-essays {
+    background: var(--bg);
+    padding: 56px 56px 72px;
+  }
+  .tier-essays > h2 {
+    font-family: var(--font-display);
+    font-size: 30px;
+    letter-spacing: 0.18em;
+    text-align: center;
+    color: var(--text-emphasis);
+    margin: 0 0 8px;
+  }
+  .tier-essays > .subtitle {
+    text-align: center;
+    font-size: 12.5px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 44px;
+  }
+  .essays-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 38px;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  /* CARD with pillars + kalasha */
+  .card {
+    position: relative;
+    background: var(--surface);
+    padding: 46px 36px 32px;
+    margin-top: 22px;
+  }
+  /* Pillars */
+  .card::before, .card::after {
+    content: "";
+    position: absolute;
+    top: 14px; bottom: 14px;
+    width: 1px;
+    background: var(--accent);
+  }
+  .card::before { left: 14px; }
+  .card::after  { right: 14px; }
+  /* Lotus capitals on pillars (top + bottom) */
+  .card .pillar-cap {
+    position: absolute;
+    width: 18px; height: 8px;
+    background: var(--accent);
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  }
+  .card .pillar-cap.tl { top: 6px; left: 5px; }
+  .card .pillar-cap.tr { top: 6px; right: 5px; }
+  .card .pillar-cap.bl { bottom: 6px; left: 5px; transform: rotate(180deg); }
+  .card .pillar-cap.br { bottom: 6px; right: 5px; transform: rotate(180deg); }
+  /* Kalasha (vermilion finial) */
+  .card .kalasha {
+    position: absolute;
+    top: -16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 22px;
+    height: 30px;
+  }
+  .card .kalasha::before {
+    content: "";
+    position: absolute;
+    bottom: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 22px; height: 12px;
+    background: var(--secondary);
+    border-radius: 50% 50% 30% 30% / 60% 60% 40% 40%;
+  }
+  .card .kalasha::after {
+    content: "";
+    position: absolute;
+    bottom: 10px; left: 50%;
+    transform: translateX(-50%);
+    width: 4px; height: 20px;
+    background: var(--secondary);
+    border-radius: 2px 2px 0 0;
+    box-shadow: 0 -3px 0 -1px var(--accent);
+  }
+
+  .card .essay-num {
+    font-family: var(--font-display);
+    font-size: 12px;
+    letter-spacing: 0.4em;
+    color: var(--secondary);
+    text-align: center;
+    margin: 0 0 4px;
+  }
+  .card h3 {
+    font-family: var(--font-display);
+    font-size: 26px;
+    letter-spacing: 0.16em;
+    color: var(--text-emphasis);
+    text-transform: uppercase;
+    text-align: center;
+    margin: 0 0 6px;
+  }
+  .card .place {
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--primary);
+    text-transform: uppercase;
+    margin-bottom: 22px;
+  }
+  .card p {
+    font-size: 13.5px;
+    margin: 0 0 12px;
+  }
+
+  /* PROCESS DIAGRAMS */
+  .diagram {
+    margin: 18px 0 18px;
+    padding: 18px 14px;
+    background: #fcf8ef;
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+  }
+  .diagram-title {
+    font-family: var(--font-display);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--secondary);
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  .diagram svg { display: block; margin: 0 auto; }
+
+  /* QUOTE BLOCK */
+  blockquote.craft {
+    margin: 18px 0 0;
+    padding: 14px 0 6px;
+    border-top: 1px dashed var(--accent);
+    text-align: center;
+  }
+  blockquote.craft p {
+    font-family: var(--font-display);
+    font-size: 14.5px;
+    line-height: 1.5;
+    color: var(--secondary);
+    letter-spacing: 0.04em;
+    margin: 0 0 10px;
+  }
+  blockquote.craft cite {
+    font-style: normal;
+    font-size: 10.5px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+  }
+
+  /* ============ TIER 4: APPRENTICESHIP ============ */
+  .tier-apprentice {
+    background: var(--text-emphasis);
+    color: var(--bg);
+    padding: 60px 56px 70px;
+    text-align: center;
+    position: relative;
+  }
+  .tier-apprentice::before {
+    content: "";
+    display: block;
+    height: 4px;
+    background:
+      repeating-linear-gradient(90deg,
+        var(--accent) 0 10px, transparent 10px 18px);
+    position: absolute;
+    top: 0; left: 0; right: 0;
+  }
+  .tier-apprentice .seal {
+    width: 60px;
+    margin: 0 auto 18px;
+    display: block;
+  }
+  .tier-apprentice h2 {
+    font-family: var(--font-display);
+    font-size: 32px;
+    letter-spacing: 0.18em;
+    margin: 0 0 8px;
+    color: var(--bg);
+  }
+  .tier-apprentice .tag {
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 28px;
+  }
+  .tier-apprentice .body {
+    max-width: 780px;
+    margin: 0 auto;
+    font-size: 14.5px;
+    color: #f3e8d4;
+  }
+  .tier-apprentice .body p { margin: 0 0 12px; }
+  .apprentice-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    max-width: 880px;
+    margin: 36px auto 0;
+    padding-top: 28px;
+    border-top: 1px solid var(--accent);
+  }
+  .apprentice-stats .stat .num {
+    font-family: var(--font-display);
+    font-size: 32px;
+    color: var(--accent);
+    letter-spacing: 0.06em;
+  }
+  .apprentice-stats .stat .lbl {
+    font-size: 10.5px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--bg);
+    margin-top: 4px;
+  }
+
+  /* ============ TIER 5: SCHEDULE TABLE ============ */
+  .tier-schedule {
+    background: var(--surface);
+    padding: 54px 56px 64px;
+  }
+  .tier-schedule h2 {
+    font-family: var(--font-display);
+    font-size: 26px;
+    letter-spacing: 0.18em;
+    text-align: center;
+    color: var(--text-emphasis);
+    margin: 0 0 6px;
+  }
+  .tier-schedule .subtitle {
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 0.34em;
+    color: var(--secondary);
+    text-transform: uppercase;
+    margin-bottom: 30px;
+  }
+  table.schedule {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  table.schedule th {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    border-bottom: 2px solid var(--accent);
+    padding: 10px 14px;
+    text-align: left;
+  }
+  table.schedule td {
+    padding: 14px;
+    border-bottom: 1px solid #e5d9b5;
+    vertical-align: top;
+  }
+  table.schedule td:first-child {
+    font-family: var(--font-display);
+    color: var(--text-emphasis);
+    letter-spacing: 0.1em;
+    width: 130px;
+  }
+  table.schedule td:last-child {
+    text-align: right;
+    color: var(--secondary);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+
+  /* ============ FOOTER ============ */
+  footer.pillared {
+    background: var(--secondary);
+    color: var(--bg);
+    padding: 0;
+    position: relative;
+  }
+  .arcade {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    height: 60px;
+    border-top: 4px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+  }
+  .arcade .col {
+    border-right: 1px solid var(--accent);
+    position: relative;
+  }
+  .arcade .col:last-child { border-right: none; }
+  .arcade .col::before, .arcade .col::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 22px; height: 8px;
+    background: var(--accent);
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  }
+  .arcade .col::before { top: 0; }
+  .arcade .col::after  { bottom: 0; transform: translateX(-50%) rotate(180deg); }
+
+  .footer-body {
+    padding: 50px 56px 30px;
+    text-align: center;
+  }
+  .kolam {
+    width: 180px;
+    height: 180px;
+    margin: 0 auto 24px;
+    position: relative;
+    border-radius: 50%;
+  }
+  .kolam::before, .kolam::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 2px dotted var(--accent);
+  }
+  .kolam::after {
+    inset: 22px;
+    border: 1px dotted var(--bg);
+  }
+  .kolam .ring3 {
+    position: absolute;
+    inset: 44px;
+    border-radius: 50%;
+    border: 2px dotted var(--accent);
+  }
+  .kolam .center {
+    position: absolute;
+    inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    font-family: var(--font-display);
+    color: var(--bg);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    line-height: 1.6;
+    text-align: center;
+    padding: 0 28px;
+  }
+  .kolam .center strong {
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 0.22em;
+    margin-bottom: 4px;
+  }
+  .footer-nav {
+    display: flex; justify-content: center; gap: 22px;
+    margin: 14px 0 22px;
+    flex-wrap: wrap;
+  }
+  .footer-nav a {
+    color: var(--bg);
+    text-decoration: none;
+    font-size: 10.5px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+  }
+  .footer-nav a:hover { color: var(--accent); }
+  .footer-meta {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    border-top: 1px solid var(--accent);
+    padding-top: 18px;
+    margin-top: 8px;
+  }
+  .footer-meta .tamil {
+    font-family: var(--font-display);
+    font-size: 13px;
+    color: var(--bg);
+    margin-bottom: 4px;
+    letter-spacing: 0.08em;
+  }
+</style>
+</head>
+<body>
+
+<!-- =========== TOP NAV =========== -->
+<header class="topbar">
+  <div class="om-mark">
+    <svg viewBox="0 0 356 367" aria-hidden="true">
+      <path fill="#e34234" d="M 90.456847,353.9498 C 51.797347,340.13485 23.72672,305.75839 12.612487,258.6184 C 7.5684267,237.22321 6.1421397,201.86984 10.323594,201.86984 C 11.712834,201.86984 15.42322,211.57056 18.568972,223.427 C 25.452892,249.37152 37.19436,273.76855 48.535988,285.69407 C 67.374717,305.50242 114.0356,313.26029 140.92106,301.05394 C 161.86409,291.54544 170.35697,268.94603 161.24995,246.95931 C 154.21242,229.96943 138.24701,224.28836 108.50834,228.19197 C 108.50834,228.19197 90.282834,208.57398 84.476417,173.73548 L 103.15738,175.42939 C 125.65731,177.46962 142.64532,172.49605 151.46236,161.28728 C 159.74765,150.75419 159.5685,146.68046 150.34841,135.96157 C 137.04396,120.49428 113.15511,124.41248 64.786577,149.99522 L 40.381632,109.08518 L 50.613137,101.2812 C 76.253387,81.724339 120.77357,71.947329 146.11011,80.309169 C 169.18841,87.925649 186.12724,118.14755 181.60247,143.63298 C 178.54327,160.86286 164.72752,184.99524 154.05369,191.75339 L 144.84862,197.58162 L 157.56351,203.31522 C 179.17018,213.05833 192.36061,205.61034 208.12001,174.76849 C 229.92949,132.0869 244.0745,121.0378 276.96658,120.99051 C 292.28176,120.96847 297.73268,122.57499 308.90312,130.4031 C 336.78213,149.94016 351.9622,190.39693 348.62804,236.27272 C 344.40474,294.37435 316.88374,329.61601 275.73415,329.61601 C 253.15086,329.61601 238.59451,321.69526 227.00729,303.10156 C 216.82976,286.76927 212.24334,254.42288 218.08805,240.19369 C 220.89208,233.36732 221.39892,233.13578 221.58223,238.59686 C 221.91916,248.63689 233.34159,264.95549 243.82827,270.37835 C 269.55794,283.68369 306.49479,266.96693 321.10832,235.4032 C 332.20339,211.4394 326.25105,165.21656 311.02084,157.06552 C 307.83453,155.36024 299.96089,153.96502 293.5244,153.96502 C 279.84214,153.96502 269.09709,163.80155 254.03263,190.11774 C 248.82442,199.21613 240.05943,210.97175 234.55486,216.24128 C 225.61134,224.80312 222.41769,225.82225 204.53067,225.82225 L 184.51412,225.82225 L 190.98415,240.19369 C 200.2451,260.76437 199.80694,294.18704 190.00976,314.53347 C 181.35272,332.51252 161.33618,350.71469 145.33374,355.16013 C 129.75572,359.4876 104.38789,358.9281 90.456847,353.9498 z M 165.8338,75.923739 C 156.97908,60.814399 151.52974,32.606158 157.46546,32.606158 C 164.43775,47.732319 178.73037,61.227101 194.03409,70.643259 C 221.52091,83.949329 249.39257,78.578529 279.84247,54.108239 C 286.54595,48.721279 292.48231,44.913138 293.0345,45.645698 C 300.4697,57.184233 313.331,66.613261 317.58219,80.021449 C 317.58219,85.678729 293.22867,101.96033 274.01214,109.15007 C 226.38264,122.8706 193.96598,117.44304 165.8338,75.923739 z M 189.83603,40.997228 L 220.84514,6.6137488 L 255.30593,38.514418 C 243.51876,48.222549 235.00994,63.289118 221.54391,70.930009 C 210.90372,63.086273 195.02308,53.837816 189.83603,40.997228 z"/>
+    </svg>
+    <div class="wordmark">
+      Sthapati Workshop
+      <small>Madurai · Est. 2009</small>
+    </div>
+  </div>
+  <nav class="primary" aria-label="Primary">
+    <a href="page-1.html">Home</a>
+    <a href="page-2.html">Practice</a>
+    <a href="page-3.html">Projects</a>
+    <a href="page-4.html" aria-current="page">Workshop</a>
+    <a href="page-5.html">Writings</a>
+    <a href="page-6.html">Studio</a>
+    <a href="mailto:office@sthapati.in">Contact</a>
+  </nav>
+</header>
+<div class="nav-rule"></div>
+
+<!-- =========== TIER 1: TITLE =========== -->
+<section class="tier-title">
+  <div class="kicker">Process · Material · Hand</div>
+  <h1>Workshop &amp; <em>Crafts</em></h1>
+  <p class="deck">
+    Three rooms, three rhythms, one inheritance. The granite yard at Pillaiyarpatti, the colour studio on West Masi Street, and the digital atelier above the courtyard all answer to the same temple plan — only the medium changes.
+  </p>
+  <div class="peacock-frame">
+    <svg viewBox="0 0 313.71717 29.540759" aria-hidden="true">
+      <g transform="translate(54.572101,-91.176475)">
+        <path fill="#e34234" d="m -45.203647,120.20506 c -2.080683,-0.59494 -3.600099,-1.33764 -4.88273,-2.38671 -1.667517,-1.36388 -2.894118,-2.64027 -2.893812,-3.0113 1.42e-4,-0.17364 -0.209138,-0.47237 -0.46507,-0.66382 -0.819614,-0.61314 -1.16478,-1.84791 -1.123557,-4.01931 0.07527,-3.96496 0.841997,-6.28592 3.359706,-10.170217 2.091957,-3.227467 6.669369,-6.452883 10.647663,-7.502765 2.252562,-0.594453 8.248778,-0.796292 11.003264,-0.370372 6.94812,1.074354 16.152972,4.460234 20.6562963,7.598128 0.8536092,0.594796 0.7949964,0.623336 1.3291143,-0.64739 0.2251847,-0.535733 0.8814684,-1.603973 1.4584084,-2.373871 0.8561927,-1.142535 1.457933,-1.600664 3.2740672,-2.492638 2.16210793,-1.06191 4.5637653,-1.779237 6.7277099,-2.009456 0.5824052,-0.06194 1.3990594,-0.240975 1.8147895,-0.397805 0.7738562,-0.291942 6.4810504,-0.196925 10.0927814,0.168029 2.264542,0.228828 9.60899,1.67773 11.219571,2.21338 1.156599,0.384661 1.203738,0.376381 3.086684,-0.542345 2.528472,-1.2337 4.016657,-1.480542 8.446835,-1.401064 3.61374,0.06486 4.290154,0.147139 6.742793,0.820538 0.653941,0.179545 1.719761,0.375692 2.368485,0.435889 0.648729,0.0602 1.838242,0.282073 2.643363,0.493076 1.333488,0.349469 1.625289,0.339432 3.276461,-0.112735 4.298701,-1.177186 16.775093,-2.487486 20.247754,-2.126478 0.82522,0.08579 2.552867,0.408475 3.839215,0.717074 2.046471,0.490964 2.518569,0.521833 3.776859,0.246952 3.038874,-0.663879 6.75683,-1.061515 11.128253,-1.190178 4.134196,-0.121667 4.707691,-0.08259 6.380251,0.434721 1.364622,0.422078 2.105892,0.83929 2.879252,1.620559 1.29673,1.309975 1.63,2.709456 1.6237,6.818148 -0.005,2.95745 0.2393,4.45137 0.62566,3.83325 0.10807,-0.17288 0.17855,-1.23469 0.15662,-2.35957 -0.10151,-5.20664 0.0689,-6.026385 1.66799,-8.024476 0.85063,-1.062863 2.64553,-2.128587 4.10167,-2.435363 2.81819,-0.59374 15.88977,0.302112 18.8453,1.291541 0.69822,0.23375 1.33752,0.188118 3.17619,-0.226686 4.44974,-1.003866 5.16179,-1.08168 9.66723,-1.056509 4.01601,0.0224 5.00432,0.121426 8.5084,0.852608 6.84995,1.42927 7.19777,1.434197 12.43469,0.175947 1.28482,-0.308696 3.07339,-0.450501 5.82325,-0.46168 3.55974,-0.01452 4.14585,0.04906 5.68548,0.615953 0.94414,0.347651 2.11528,0.863208 2.60253,1.145677 0.82461,0.478046 0.98936,0.487693 2.38057,0.139336 1.77908,-0.445477 5.29646,-1.019874 9.8354,-1.606151 3.88998,-0.502463 11.70287,-0.5191 15.08161,-0.03212 5.86054,0.844676 9.86323,3.110261 10.57122,5.983455 l 0.28701,1.164733 3.35851,-1.630478 c 3.17793,-1.542804 8.22537,-3.484656 11.44251,-4.402193 4.71613,-1.345036 12.68145,-1.710913 16.9375,-0.778008 4.93058,1.080764 10.02057,5.551052 11.64065,10.223444 0.65092,1.87732 1.01878,5.06928 0.79472,6.89574 -0.46904,3.82309 -3.07509,7.60889 -6.48471,9.42031 -0.51071,0.27132 -1.10781,0.62201 -1.32689,0.7793 -1.28176,0.92026 -3.99222,1.08281 -9.3957,0.5635 -4.226,-0.40615 -43.09412,-0.56404 -48.28608,-0.19612 -3.36622,0.23852 -9.71584,0.13599 -14.17646,-0.22893 -3.19042,-0.261 -11.4116,-2.46478 -14.96419,-4.01131 -0.53984,-0.23501 -1.10442,-0.42792 -1.25461,-0.42868 -0.43847,-0.002 -0.31926,0.66639 0.24899,1.3964 0.63886,0.82072 0.66215,1.46506 0.0825,2.28367 -0.41639,0.5881 -0.53812,0.60929 -2.4496,0.42635 -1.10627,-0.10587 -3.2008,-0.44095 -4.65448,-0.74463 -1.45369,-0.30368 -4.09201,-0.62284 -5.86295,-0.70924 -3.45491,-0.16856 -4.65649,0.0199 -8.93437,1.40162 -2.04956,0.66196 -2.15841,0.6695 -4.80352,0.33258 -1.68376,-0.21447 -5.04124,-0.32578 -8.88522,-0.29456 -6.04658,0.0491 -6.20383,0.0368 -7.34956,-0.57531 -1.32088,-0.70568 -2.86287,-0.66893 -5.04444,0.12022 -0.88229,0.31916 -2.15717,0.43295 -4.89707,0.43713 -4.79736,0.007 -5.58286,-0.16276 -6.13105,-1.32752 l -0.42264,-0.89802 -1.08755,0.85944 c -1.8674,1.47572 -2.94146,1.82323 -5.59703,1.81093 -1.313341,-0.006 -3.557388,-0.23736 -4.986775,-0.51393 -2.027573,-0.39234 -2.694777,-0.43476 -3.0351,-0.19299 -1.426504,1.01339 -5.2004,1.21652 -9.369876,0.50433 -2.342079,-0.40006 -4.350291,-0.35925 -10.118619,0.20564 -2.370926,0.23218 -2.390138,0.22923 -3.965706,-0.60953 l -1.583238,-0.84286 -4.76258,0.004 c -3.320233,0.003 -5.333694,0.12924 -6.648373,0.41833 -2.953758,0.64954 -5.182097,0.79482 -6.349714,0.41398 -1.394469,-0.45482 -2.213474,-1.26097 -2.208834,-2.17419 0.0021,-0.41118 -0.106632,-0.74818 -0.241605,-0.74887 -0.13497,-6.8e-4 -1.238115,0.35414 -2.451433,0.7885 -7.896638,2.82691 -18.009765,3.78342 -31.365341,2.96657 -7.1026623,-0.43441 -10.2556485,-0.47172 -22.841675,-0.27026 -5.166476,0.0827 -13.263451,0.2047 -17.993277,0.27111 -4.729825,0.0664 -9.671447,0.15763 -10.98138,0.20269 -1.516176,0.0522 -2.861762,-0.0553 -3.702712,-0.29577 z"/>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<!-- =========== TIER 2: VERMILION INTRO =========== -->
+<section class="tier-vermilion">
+  <div class="inner">
+    <h2>Three Rooms, One Plan</h2>
+    <div class="yard">
+      <h3>Stone Yard</h3>
+      <p>Twelve kilometres east of Madurai, behind the Karpaga Vinayagar temple at Pillaiyarpatti, our yard receives raw black granite (<em>karunkal</em>) from quarries at Kanjamalai. Blocks are roughed out by four masons under Sthapati K. Muthukumarasamy.</p>
+      <div class="yard-meta">Open Mon–Sat · 06:00–13:00</div>
+    </div>
+    <div class="yard">
+      <h3>Colour Studio</h3>
+      <p>Above the studio courtyard on West Masi Street, three muller-tables grind oxide and earth pigments into linseed and shellac binders. We follow Vijayanagara-Nayaka recipes catalogued by V. Ranganathan in his 1974 monograph for the Madurai Kamaraj University.</p>
+      <div class="yard-meta">By appointment · ₹600 site fee</div>
+    </div>
+    <div class="yard">
+      <h3>Digital Atelier</h3>
+      <p>A converted thinnai loft, six workstations, two plotters. Mandala plans are reconstructed in Grasshopper from the <em>Mayamata</em> and <em>Mānasāra</em> texts, then output as 1:50 templates for the masons below.</p>
+      <div class="yard-meta">Internal use · 24-hour access</div>
+    </div>
+  </div>
+</section>
+
+<!-- =========== PALMETTE DIVIDER =========== -->
+<div class="palmette-divider">
+  <svg viewBox="0 0 800 60" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+    <g fill="#c9a23a">
+      <path d="M0,30 L320,30" stroke="#c9a23a" stroke-width="0.5"/>
+      <path d="M480,30 L800,30" stroke="#c9a23a" stroke-width="0.5"/>
+      <path d="M400,12 C390,18 384,26 384,32 C384,40 392,46 400,46 C408,46 416,40 416,32 C416,26 410,18 400,12 Z M400,18 C406,24 410,28 410,32 C410,38 405,42 400,42 C395,42 390,38 390,32 C390,28 394,24 400,18 Z"/>
+      <circle cx="400" cy="32" r="3" fill="#e34234"/>
+      <path d="M340,30 L370,22 L370,38 Z M460,30 L430,22 L430,38 Z"/>
+      <circle cx="320" cy="30" r="3"/>
+      <circle cx="480" cy="30" r="3"/>
+      <circle cx="280" cy="30" r="2"/>
+      <circle cx="520" cy="30" r="2"/>
+      <circle cx="240" cy="30" r="1.5"/>
+      <circle cx="560" cy="30" r="1.5"/>
+    </g>
+  </svg>
+  <div class="label">— Four Photo-Essays —</div>
+</div>
+
+<!-- =========== TIER 3: FOUR ESSAYS =========== -->
+<section class="tier-essays">
+  <h2>The Four Crafts</h2>
+  <div class="subtitle">Quarry · Carving · Polychrome · Kolam</div>
+
+  <div class="essays-grid">
+
+    <!-- 01 QUARRY -->
+    <article class="card">
+      <span class="kalasha"></span>
+      <span class="pillar-cap tl"></span><span class="pillar-cap tr"></span>
+      <span class="pillar-cap bl"></span><span class="pillar-cap br"></span>
+      <p class="essay-num">— ०१ · Essay One —</p>
+      <h3>Quarry</h3>
+      <p class="place">Kanjamalai · Pillaiyarpatti Yard</p>
+      <p>The block is chosen at dawn, when the angle of light reveals the grain (<em>nāḷam</em>) running through the stone. A 1.8-tonne column shaft for the Trichy gopuram restoration takes nine days to rough-cut by hand: feathers and wedges driven into a chalk line, then split clean along the bedding plane.</p>
+      <p>We refuse machine-sawn faces for any visible surface. The slight unevenness of a hand-split face holds shadow the way a polished slab cannot.</p>
+
+      <div class="diagram" aria-label="Quarry process diagram">
+        <div class="diagram-title">Splitting Sequence — Feather & Wedge</div>
+        <svg viewBox="0 0 320 90" width="280" height="80">
+          <rect x="10" y="20" width="300" height="50" fill="none" stroke="#1a1a1a" stroke-width="1"/>
+          <line x1="10" y1="45" x2="310" y2="45" stroke="#c9a23a" stroke-width="0.5" stroke-dasharray="3 3"/>
+          <g fill="#e34234">
+            <polygon points="40,10 35,20 45,20"/>
+            <polygon points="80,10 75,20 85,20"/>
+            <polygon points="120,10 115,20 125,20"/>
+            <polygon points="160,10 155,20 165,20"/>
+            <polygon points="200,10 195,20 205,20"/>
+            <polygon points="240,10 235,20 245,20"/>
+            <polygon points="280,10 275,20 285,20"/>
+          </g>
+          <text x="160" y="85" font-family="Lato" font-size="8" fill="#076b88" text-anchor="middle" letter-spacing="2">7 WEDGES @ 40 mm CENTRES · BEDDING PLANE BELOW</text>
+        </svg>
+      </div>
+
+      <blockquote class="craft">
+        <p>“The stone tells you where to strike. We only listen — the wedge does the speaking.”</p>
+        <cite>K. Muthukumarasamy · Master Mason, 41 years</cite>
+      </blockquote>
+    </article>
+
+    <!-- 02 CARVING -->
+    <article class="card">
+      <span class="kalasha"></span>
+      <span class="pillar-cap tl"></span><span class="pillar-cap tr"></span>
+      <span class="pillar-cap bl"></span><span class="pillar-cap br"></span>
+      <p class="essay-num">— ०२ · Essay Two —</p>
+      <h3>Carving</h3>
+      <p class="place">Pillaiyarpatti Carving Shed</p>
+      <p>From rough block to finished image is a journey of seven tools and an average of 280 working hours for a half-life-size figure. The progression — <em>uli, kuruvāḷ, sīṟi, vaṭṭam, varai, polishing-bone, beeswax</em> — is fixed by guild custom.</p>
+      <p>Each carver works to a chalked grid taken directly from the <em>Mānasāra</em>'s nine-tāla canon: head, neck, chest, navel, knee, ankle, all proportioned to the same fundamental unit drawn from the figure's own face.</p>
+
+      <div class="diagram" aria-label="Carving tāla diagram">
+        <div class="diagram-title">Nine-Tāla Proportional Grid</div>
+        <svg viewBox="0 0 220 130" width="200" height="120">
+          <g stroke="#076b88" stroke-width="0.5" fill="none">
+            <line x1="80" y1="10" x2="80" y2="120"/>
+            <line x1="140" y1="10" x2="140" y2="120"/>
+            <line x1="80" y1="10" x2="140" y2="10"/>
+            <line x1="80" y1="22" x2="140" y2="22"/>
+            <line x1="80" y1="36" x2="140" y2="36"/>
+            <line x1="80" y1="50" x2="140" y2="50"/>
+            <line x1="80" y1="64" x2="140" y2="64"/>
+            <line x1="80" y1="78" x2="140" y2="78"/>
+            <line x1="80" y1="92" x2="140" y2="92"/>
+            <line x1="80" y1="106" x2="140" y2="106"/>
+            <line x1="80" y1="120" x2="140" y2="120"/>
+          </g>
+          <g font-family="Lato" font-size="7" fill="#e34234" text-anchor="end">
+            <text x="74" y="18">śiras</text>
+            <text x="74" y="32">grīvā</text>
+            <text x="74" y="46">vakṣas</text>
+            <text x="74" y="60">udara</text>
+            <text x="74" y="74">nābhi</text>
+            <text x="74" y="88">jaṅghā</text>
+            <text x="74" y="102">jānu</text>
+            <text x="74" y="116">pāda</text>
+          </g>
+          <ellipse cx="110" cy="16" rx="7" ry="6" fill="none" stroke="#e34234"/>
+          <line x1="110" y1="22" x2="110" y2="78" stroke="#e34234" stroke-width="0.7"/>
+          <line x1="98" y1="40" x2="122" y2="40" stroke="#e34234" stroke-width="0.7"/>
+          <line x1="110" y1="78" x2="100" y2="118" stroke="#e34234" stroke-width="0.7"/>
+          <line x1="110" y1="78" x2="120" y2="118" stroke="#e34234" stroke-width="0.7"/>
+        </svg>
+      </div>
+
+      <blockquote class="craft">
+        <p>“The chisel removes nothing. It simply shows what was already inside the stone.”</p>
+        <cite>R. Selvi · Carver, Lead Sculptor</cite>
+      </blockquote>
+    </article>
+
+    <!-- 03 POLYCHROME -->
+    <article class="card">
+      <span class="kalasha"></span>
+      <span class="pillar-cap tl"></span><span class="pillar-cap tr"></span>
+      <span class="pillar-cap bl"></span><span class="pillar-cap br"></span>
+      <p class="essay-num">— ०३ · Essay Three —</p>
+      <h3>Polychrome</h3>
+      <p class="place">Colour Studio · West Masi Street</p>
+      <p>Six pigments form the basis of the studio's palette: vermilion (<em>iṅgilikam</em>) from cinnabar imported via Tuticorin; yellow ochre from Sittannavasal; lamp-black from sesame-oil soot; lapis-derived peacock-blue; gold-leaf from Vellore; and the chalk-white ground (<em>geru</em>) made from local kaolin.</p>
+      <p>Pigments are mulled by hand on Cuddapah-stone slabs for forty-five minutes per batch. Linseed oil is cold-pressed in Sivaganga; shellac flakes are sourced from Jhalda. No commercial binders enter the studio.</p>
+
+      <div class="diagram" aria-label="Pigment chart">
+        <div class="diagram-title">Studio Palette · 6 Pigments</div>
+        <svg viewBox="0 0 280 70" width="260" height="60">
+          <g>
+            <rect x="10"  y="15" width="36" height="36" fill="#e34234"/>
+            <rect x="54"  y="15" width="36" height="36" fill="#c9a23a"/>
+            <rect x="98"  y="15" width="36" height="36" fill="#1a1a1a"/>
+            <rect x="142" y="15" width="36" height="36" fill="#076b88"/>
+            <rect x="186" y="15" width="36" height="36" fill="#d4af37" stroke="#c9a23a"/>
+            <rect x="230" y="15" width="36" height="36" fill="#f8f4ec" stroke="#1a1a1a" stroke-width="0.5"/>
+          </g>
+          <g font-family="Lato" font-size="6.5" fill="#1a1a1a" text-anchor="middle" letter-spacing="1">
+            <text x="28"  y="62">VERMILION</text>
+            <text x="72"  y="62">OCHRE</text>
+            <text x="116" y="62">LAMP-BLACK</text>
+            <text x="160" y="62">PEACOCK</text>
+            <text x="204" y="62">GOLD-LEAF</text>
+            <text x="248" y="62">GERU</text>
+          </g>
+          <g font-family="Yatra One" font-size="7" fill="#e34234" text-anchor="middle">
+            <text x="28"  y="11">०१</text>
+            <text x="72"  y="11">०२</text>
+            <text x="116" y="11">०३</text>
+            <text x="160" y="11">०४</text>
+            <text x="204" y="11">०५</text>
+            <text x="248" y="11">०६</text>
+          </g>
+        </svg>
+      </div>
+
+      <blockquote class="craft">
+        <p>“A vermilion that has been mulled for twenty minutes is a different colour from one mulled for forty-five. The eye knows, even when the mind cannot say why.”</p>
+        <cite>Lakshmi Subbaraman · Colourist & Pigment Master</cite>
+      </blockquote>
+    </article>
+
+    <!-- 04 KOLAM -->
+    <article class="card">
+      <span class="kalasha"></span>
+      <span class="pillar-cap tl"></span><span class="pillar-cap tr"></span>
+      <span class="pillar-cap bl"></span><span class="pillar-cap br"></span>
+      <p class="essay-num">— ०४ · Essay Four —</p>
+      <h3>Kolam</h3>
+      <p class="place">Digital Atelier · Sthapati Loft</p>
+      <p>The kolam — the daily threshold-drawing of Tamil households — is, structurally, a parametric system. A grid of <em>puḷḷi</em> (dots) is set out, then a continuous line is drawn looping each dot exactly once. The studio uses these rules to generate large-scale floor plans for exhibition pavilions and temple-precinct paving.</p>
+      <p>Our 2023 pavilion at the Chettinad Heritage Festival used a 21×21 <em>sikku-kolam</em> grid expanded to 14 metres, hand-laid in white granite chip set into red oxide.</p>
+
+      <div class="diagram" aria-label="Kolam parametric grid">
+        <div class="diagram-title">Sikku-Kolam · 7×7 Generative Grid</div>
+        <svg viewBox="0 0 140 140" width="130" height="130">
+          <g fill="#1a1a1a">
+            <circle cx="20" cy="20" r="1.4"/><circle cx="40" cy="20" r="1.4"/><circle cx="60" cy="20" r="1.4"/><circle cx="80" cy="20" r="1.4"/><circle cx="100" cy="20" r="1.4"/><circle cx="120" cy="20" r="1.4"/>
+            <circle cx="20" cy="40" r="1.4"/><circle cx="40" cy="40" r="1.4"/><circle cx="60" cy="40" r="1.4"/><circle cx="80" cy="40" r="1.4"/><circle cx="100" cy="40" r="1.4"/><circle cx="120" cy="40" r="1.4"/>
+            <circle cx="20" cy="60" r="1.4"/><circle cx="40" cy="60" r="1.4"/><circle cx="60" cy="60" r="1.4"/><circle cx="80" cy="60" r="1.4"/><circle cx="100" cy="60" r="1.4"/><circle cx="120" cy="60" r="1.4"/>
+            <circle cx="20" cy="80" r="1.4"/><circle cx="40" cy="80" r="1.4"/><circle cx="60" cy="80" r="1.4"/><circle cx="80" cy="80" r="1.4"/><circle cx="100" cy="80" r="1.4"/><circle cx="120" cy="80" r="1.4"/>
+            <circle cx="20" cy="100" r="1.4"/><circle cx="40" cy="100" r="1.4"/><circle cx="60" cy="100" r="1.4"/><circle cx="80" cy="100" r="1.4"/><circle cx="100" cy="100" r="1.4"/><circle cx="120" cy="100" r="1.4"/>
+            <circle cx="20" cy="120" r="1.4"/><circle cx="40" cy="120" r="1.4"/><circle cx="60" cy="120" r="1.4"/><circle cx="80" cy="120" r="1.4"/><circle cx="100" cy="120" r="1.4"/><circle cx="120" cy="120" r="1.4"/>
+          </g>
+          <path d="M 20,40 Q 30,30 40,40 Q 50,50 60,40 Q 70,30 80,40 Q 90,50 100,40 Q 110,30 120,40
+                   Q 130,60 120,80 Q 110,90 100,80 Q 90,70 80,80 Q 70,90 60,80 Q 50,70 40,80 Q 30,90 20,80
+                   Q 10,60 20,40 Z"
+                fill="none" stroke="#e34234" stroke-width="1.4"/>
+          <circle cx="70" cy="60" r="6" fill="none" stroke="#076b88" stroke-width="1"/>
+          <circle cx="70" cy="60" r="2" fill="#c9a23a"/>
+        </svg>
+      </div>
+
+      <blockquote class="craft">
+        <p>“The kolam is a programme. The hand executes it, but the rule is older than any of us — older even than the threshold it crosses.”</p>
+        <cite>Padma Anantharaman · Kolam Designer & Geometer</cite>
+      </blockquote>
+    </article>
+
+  </div>
+</section>
+
+<!-- =========== TIER 4: APPRENTICESHIP =========== -->
+<section class="tier-apprentice">
+  <svg class="seal" viewBox="0 0 356 367" aria-hidden="true">
+    <path fill="#c9a23a" d="M 90.456847,353.9498 C 51.797347,340.13485 23.72672,305.75839 12.612487,258.6184 C 7.5684267,237.22321 6.1421397,201.86984 10.323594,201.86984 C 11.712834,201.86984 15.42322,211.57056 18.568972,223.427 C 25.452892,249.37152 37.19436,273.76855 48.535988,285.69407 C 67.374717,305.50242 114.0356,313.26029 140.92106,301.05394 C 161.86409,291.54544 170.35697,268.94603 161.24995,246.95931 C 154.21242,229.96943 138.24701,224.28836 108.50834,228.19197 C 108.50834,228.19197 90.282834,208.57398 84.476417,173.73548 L 103.15738,175.42939 C 125.65731,177.46962 142.64532,172.49605 151.46236,161.28728 C 159.74765,150.75419 159.5685,146.68046 150.34841,135.96157 C 137.04396,120.49428 113.15511,124.41248 64.786577,149.99522 L 40.381632,109.08518 L 50.613137,101.2812 C 76.253387,81.724339 120.77357,71.947329 146.11011,80.309169 C 169.18841,87.925649 186.12724,118.14755 181.60247,143.63298 C 178.54327,160.86286 164.72752,184.99524 154.05369,191.75339 L 144.84862,197.58162 L 157.56351,203.31522 C 179.17018,213.05833 192.36061,205.61034 208.12001,174.76849 C 229.92949,132.0869 244.0745,121.0378 276.96658,120.99051 C 292.28176,120.96847 297.73268,122.57499 308.90312,130.4031 C 336.78213,149.94016 351.9622,190.39693 348.62804,236.27272 C 344.40474,294.37435 316.88374,329.61601 275.73415,329.61601 C 253.15086,329.61601 238.59451,321.69526 227.00729,303.10156 C 216.82976,286.76927 212.24334,254.42288 218.08805,240.19369 C 220.89208,233.36732 221.39892,233.13578 221.58223,238.59686 C 221.91916,248.63689 233.34159,264.95549 243.82827,270.37835 C 269.55794,283.68369 306.49479,266.96693 321.10832,235.4032 C 332.20339,211.4394 326.25105,165.21656 311.02084,157.06552 C 307.83453,155.36024 299.96089,153.96502 293.5244,153.96502 C 279.84214,153.96502 269.09709,163.80155 254.03263,190.11774 C 248.82442,199.21613 240.05943,210.97175 234.55486,216.24128 C 225.61134,224.80312 222.41769,225.82225 204.53067,225.82225 L 184.51412,225.82225 L 190.98415,240.19369 C 200.2451,260.76437 199.80694,294.18704 190.00976,314.53347 C 181.35272,332.51252 161.33618,350.71469 145.33374,355.16013 C 129.75572,359.4876 104.38789,358.9281 90.456847,353.9498 z"/>
+  </svg>
+  <h2>On Apprenticeship</h2>
+  <div class="tag">— Pārampariyam · Through the Hand —</div>
+  <div class="body">
+    <p>The studio takes <strong>two trainees per year</strong>, selected through the <em>Tamil Nadu State Craft Council</em>'s annual examination held each March at the Government Museum, Chennai. Candidates must be between 18 and 26 years of age and demonstrate basic competence in either freehand drawing, stone-tool use, or pigment-grinding.</p>
+    <p>Apprentices receive a monthly stipend of ₹18,500, full board at our Madurai residence, and rotate through all three workshops over a 24-month cycle. They graduate with a stone or polychrome panel of their own design, exhibited at the studio's January open-house.</p>
+    <p>The next intake closes on <strong>15 February 2025</strong>. Application forms are available at the council office, Egmore, or by post on request.</p>
+  </div>
+  <div class="apprentice-stats">
+    <div class="stat"><div class="num">02</div><div class="lbl">Trainees / Year</div></div>
+    <div class="stat"><div class="num">24</div><div class="lbl">Month Cycle</div></div>
+    <div class="stat"><div class="num">₹18,500</div><div class="lbl">Monthly Stipend</div></div>
+    <div class="stat"><div class="num">2009</div><div class="lbl">Programme Est.</div></div>
+  </div>
+</section>
+
+<!-- =========== TIER 5: SCHEDULE =========== -->
+<section class="tier-schedule">
+  <h2>Open Workshop Days · 2024–25</h2>
+  <div class="subtitle">Visits & Demonstrations · By Appointment</div>
+  <table class="schedule">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Workshop</th>
+        <th>Demonstration</th>
+        <th>Master</th>
+        <th>Fee</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>14 Dec 2024</td>
+        <td>Stone Yard, Pillaiyarpatti</td>
+        <td>Granite splitting · feathers & wedges; pillar shaft layout</td>
+        <td>K. Muthukumarasamy</td>
+        <td>₹600</td>
+      </tr>
+      <tr>
+        <td>11 Jan 2025</td>
+        <td>Colour Studio, Madurai</td>
+        <td>Vermilion mulling in linseed; gold-leaf application on prepared gesso</td>
+        <td>Lakshmi Subbaraman</td>
+        <td>₹900</td>
+      </tr>
+      <tr>
+        <td>08 Feb 2025</td>
+        <td>Carving Shed, Pillaiyarpatti</td>
+        <td>Nine-tāla grid layout; the seven traditional chisels in sequence</td>
+        <td>R. Selvi</td>
+        <td>₹600</td>
+      </tr>
+      <tr>
+        <td>15 Mar 2025</td>
+        <td>Digital Atelier, Madurai</td>
+        <td>Mānasāra mandala in Grasshopper; output to mason templates</td>
+        <td>P. Anantharaman</td>
+        <td>₹1,200</td>
+      </tr>
+      <tr>
+        <td>12 Apr 2025</td>
+        <td>All Three Sites · Full Day</td>
+        <td>Quarry to polychrome — the complete sequence in twelve hours</td>
+        <td>The Studio</td>
+        <td>₹3,500</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- =========== FOOTER =========== -->
+<footer class="pillared">
+  <div class="arcade">
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+  </div>
+  <div class="footer-body">
+    <div class="kolam">
+      <div class="ring3"></div>
+      <div class="center">
+        <strong>STHAPATI WORKSHOP</strong>
+        17 West Masi Street<br>
+        Madurai 625001<br>
+        Tamil Nadu · India
+      </div>
+    </div>
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="page-1.html">Home</a>
+      <a href="page-2.html">Practice</a>
+      <a href="page-3.html">Projects</a>
+      <a href="page-4.html">Workshop</a>
+      <a href="page-5.html">Writings</a>
+      <a href="page-6.html">Studio</a>
+    </nav>
+    <div class="footer-meta">
+      <div class="tamil">கல்லில் கதை · The story is in the stone</div>
+      © 2009–2025 Sthapati Workshop LLP · GSTIN 33AAJFS4419K1Z2 · office@sthapati.in · +91 452 234 0991
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

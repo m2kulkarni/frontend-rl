@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Visit the Studio — Nishijin, Kyoto</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  /* ============ BASE ============ */
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), serif;
+    line-height: 1.8;
+    font-size: 15px;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* ============ WAGARA BG (subtle seigaiha) ============ */
+  .wagara-bg {
+    position: fixed;
+    inset: 0;
+    background-image: url("svg/seigaiha-waves.svg");
+    background-size: 280px 280px;
+    opacity: 0.06;
+    pointer-events: none;
+    z-index: 0;
+    mix-blend-mode: multiply;
+  }
+
+  /* ============ NAV ============ */
+  .nav-band {
+    position: relative;
+    background: var(--surface);
+    padding: 22px 64px 18px 64px;
+    display: grid;
+    grid-template-columns: minmax(280px, 1fr) auto auto;
+    align-items: center;
+    gap: 40px;
+    z-index: 5;
+  }
+  .studio-mark {
+    font-family: var(--font-display), serif;
+    font-size: 26px;
+    line-height: 1;
+    color: var(--primary);
+    letter-spacing: 0.04em;
+  }
+  .studio-mark .jp { display: block; font-size: 14px; color: var(--text); margin-top: 6px; letter-spacing: 0.3em; }
+  .nav-links {
+    display: flex;
+    gap: 0;
+    font-family: var(--font-body), serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.32em;
+  }
+  .nav-links a {
+    padding: 0 22px;
+    border-right: 1px solid rgba(12,12,12,0.35);
+    color: var(--text);
+  }
+  .nav-links a:first-child { padding-left: 0; }
+  .nav-links a:last-child { padding-right: 22px; border-right: none; }
+  .nav-links a[aria-current="page"] {
+    color: var(--secondary);
+    font-weight: 600;
+  }
+  .nav-seal {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: var(--secondary);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--surface);
+    font-family: var(--font-display), serif;
+    font-size: 18px;
+    line-height: 1;
+  }
+  .nav-seal svg {
+    width: 26px; height: 26px;
+    filter: invert(1);
+    opacity: 0.92;
+  }
+  .nav-threshold {
+    height: 14px;
+    background: var(--bg);
+    position: relative;
+    border-top: 1px solid var(--ornament);
+    overflow: hidden;
+    z-index: 4;
+  }
+  .nav-threshold::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("svg/seigaiha-waves.svg");
+    background-size: 90px 90px;
+    background-position: 0 -55px;
+    opacity: 0.18;
+  }
+
+  /* ============ MAIN ============ */
+  main {
+    position: relative;
+    z-index: 2;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 64px;
+  }
+
+  /* ============ HERO / TITLE ============ */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+    padding: 80px 0 96px 0;
+    position: relative;
+  }
+  .hero .eyebrow {
+    grid-column: 1 / 2;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    padding-top: 18px;
+    border-top: 1px solid var(--ornament);
+    align-self: start;
+  }
+  .hero h1 {
+    grid-column: 2 / 4;
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 88px;
+    line-height: 1.02;
+    letter-spacing: 0.01em;
+    margin: 0;
+    color: var(--primary);
+    align-self: end;
+  }
+  .hero h1 .jp {
+    display: block;
+    font-size: 30px;
+    color: var(--text);
+    letter-spacing: 0.18em;
+    margin-bottom: 18px;
+    line-height: 1;
+  }
+  .hero .lede {
+    grid-column: 2 / 3;
+    margin-top: 56px;
+    font-size: 16px;
+    line-height: 1.85;
+    max-width: 38ch;
+    color: var(--text);
+  }
+  .hero-crane {
+    position: absolute;
+    top: 40px;
+    right: -20px;
+    width: 220px;
+    height: 220px;
+    opacity: 0.08;
+    pointer-events: none;
+  }
+  .hero-crane svg { width: 100%; height: 100%; }
+
+  /* ============ ADDRESS BLOCK ============ */
+  .address-section {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 80px;
+    padding: 60px 0 100px 0;
+    border-top: 1px solid rgba(12,12,12,0.35);
+    position: relative;
+  }
+  .section-tag {
+    font-family: var(--font-body), serif;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--text);
+    padding-top: 18px;
+  }
+  .section-tag .num {
+    font-family: var(--font-display), serif;
+    color: var(--secondary);
+    font-size: 22px;
+    display: block;
+    margin-bottom: 8px;
+    letter-spacing: 0;
+  }
+  .address-card {
+    background: var(--surface);
+    padding: 64px 72px 64px 72px;
+    width: 78%;
+    margin-left: auto;
+    margin-right: 0;
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 64px;
+  }
+  .address-vertical {
+    writing-mode: vertical-rl;
+    font-family: var(--font-body), serif;
+    font-size: 22px;
+    line-height: 2.4;
+    letter-spacing: 0.3em;
+    color: var(--primary);
+    height: 360px;
+    border-right: 1px solid rgba(12,12,12,0.4);
+    padding-right: 28px;
+  }
+  .address-vertical .small {
+    font-size: 14px;
+    color: var(--text);
+    letter-spacing: 0.4em;
+  }
+  .address-latin {
+    padding-top: 12px;
+  }
+  .address-latin h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 28px;
+    margin: 0 0 4px 0;
+    color: var(--primary);
+    letter-spacing: 0.02em;
+  }
+  .address-latin .romaji {
+    font-style: italic;
+    font-size: 13px;
+    color: var(--secondary);
+    letter-spacing: 0.06em;
+    margin-bottom: 28px;
+  }
+  .address-latin p {
+    margin: 0 0 20px 0;
+    max-width: 32ch;
+    font-size: 15px;
+  }
+  .postal {
+    display: inline-block;
+    padding: 4px 12px;
+    border: 1px solid var(--ornament);
+    font-family: var(--font-display), serif;
+    font-size: 16px;
+    letter-spacing: 0.15em;
+    color: var(--primary);
+    margin-top: 8px;
+  }
+  .tsuru-corner {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 80px;
+    height: 80px;
+    opacity: 0.10;
+    pointer-events: none;
+  }
+  .tsuru-corner svg { width: 100%; height: 100%; }
+
+  /* ============ DIVIDER ============ */
+  .sayagata-divider {
+    height: 36px;
+    background-image: url("svg/sayagata-keyfret.svg");
+    background-size: 120px 120px;
+    background-repeat: repeat-x;
+    background-position: center;
+    opacity: 0.22;
+    margin: 0;
+  }
+
+  /* ============ HOURS / APPOINTMENT ============ */
+  .hours-section {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 80px;
+    padding: 100px 0 100px 0;
+    align-items: start;
+  }
+  .hours-headline {
+    padding-left: 60px;
+  }
+  .hours-headline .section-tag { margin-bottom: 36px; }
+  .hours-headline h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 56px;
+    line-height: 1.1;
+    margin: 0 0 32px 0;
+    color: var(--primary);
+    letter-spacing: 0.01em;
+  }
+  .hours-headline h2 .em {
+    color: var(--secondary);
+    display: block;
+    font-size: 36px;
+    margin-top: 12px;
+  }
+  .hours-headline p {
+    max-width: 30ch;
+    font-size: 15px;
+    color: var(--text);
+  }
+
+  .hours-detail {
+    background: var(--surface);
+    padding: 56px 64px;
+    margin-right: 12%;
+    position: relative;
+  }
+  .hours-detail::before {
+    content: "";
+    position: absolute;
+    left: -1px; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--secondary);
+  }
+  .hours-row {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 28px;
+    padding: 18px 0;
+    border-bottom: 1px solid rgba(12,12,12,0.18);
+  }
+  .hours-row:last-child { border-bottom: none; }
+  .hours-row dt {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    color: var(--primary);
+    line-height: 1.2;
+  }
+  .hours-row dt .sub {
+    display: block;
+    font-family: var(--font-body), serif;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin-top: 6px;
+  }
+  .hours-row dd {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.8;
+  }
+  .hours-row dd strong {
+    font-weight: 400;
+    color: var(--secondary);
+    font-style: italic;
+  }
+  .appointment-note {
+    margin-top: 28px;
+    padding: 24px 28px;
+    border: 1px solid var(--ornament);
+    background: var(--bg);
+    font-size: 14px;
+    line-height: 1.85;
+  }
+  .appointment-note .label {
+    display: block;
+    font-family: var(--font-display), serif;
+    font-size: 18px;
+    color: var(--primary);
+    margin-bottom: 6px;
+  }
+
+  /* ============ ACCESS / TRANSIT ============ */
+  .access-section {
+    padding: 80px 0 100px 0;
+    border-top: 1px solid rgba(12,12,12,0.35);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+  }
+  .access-section .section-tag {
+    grid-column: 3;
+    text-align: right;
+    padding-right: 40px;
+  }
+  .access-section h2 {
+    grid-column: 1 / 3;
+    grid-row: 1;
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 64px;
+    line-height: 1;
+    color: var(--primary);
+    margin: 0;
+    letter-spacing: 0.02em;
+  }
+  .access-section h2 .jp {
+    display: block;
+    font-size: 22px;
+    color: var(--text);
+    letter-spacing: 0.3em;
+    margin-bottom: 14px;
+  }
+  .access-list {
+    grid-column: 1 / 4;
+    grid-row: 2;
+    margin-top: 56px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    column-gap: 80px;
+  }
+  .access-item {
+    padding: 32px 0;
+    border-top: 2px solid var(--primary);
+    position: relative;
+  }
+  .access-item:first-child { margin-right: 12%; }
+  .access-item:last-child { margin-left: 8%; margin-top: 60px; }
+  .access-item .mark {
+    font-family: var(--font-display), serif;
+    font-size: 64px;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 18px;
+    display: block;
+  }
+  .access-item h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 26px;
+    color: var(--primary);
+    margin: 0 0 4px 0;
+  }
+  .access-item .stop {
+    font-style: italic;
+    font-size: 13px;
+    color: var(--secondary);
+    margin-bottom: 18px;
+    display: block;
+  }
+  .access-item p {
+    margin: 0;
+    font-size: 14.5px;
+    line-height: 1.85;
+    max-width: 36ch;
+  }
+  .walk-time {
+    display: inline-block;
+    margin-top: 14px;
+    padding: 3px 12px;
+    background: var(--primary);
+    color: var(--surface);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+  }
+
+  /* ============ ETIQUETTE ============ */
+  .etiquette {
+    background: var(--surface);
+    padding: 88px 0 100px 0;
+    margin: 0 -64px;
+    position: relative;
+  }
+  .etiquette-inner {
+    max-width: 1312px;
+    margin: 0 auto;
+    padding: 0 64px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+  }
+  .etiquette-mark {
+    position: relative;
+    padding-top: 20px;
+  }
+  .etiquette-mark .seal {
+    width: 160px;
+    height: 160px;
+    opacity: 0.5;
+  }
+  .etiquette-mark .seal svg { width: 100%; height: 100%; }
+  .etiquette-mark .label {
+    margin-top: 28px;
+    font-family: var(--font-display), serif;
+    font-size: 36px;
+    color: var(--primary);
+    line-height: 1.15;
+  }
+  .etiquette-mark .label .jp {
+    display: block;
+    font-size: 14px;
+    letter-spacing: 0.4em;
+    color: var(--secondary);
+    margin-bottom: 8px;
+  }
+  .etiquette-list {
+    counter-reset: rule;
+    padding-right: 14%;
+  }
+  .etiquette-list .lede {
+    font-size: 16px;
+    line-height: 1.9;
+    margin-bottom: 40px;
+    max-width: 50ch;
+  }
+  .rule {
+    counter-increment: rule;
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 24px;
+    padding: 22px 0;
+    border-bottom: 1px solid rgba(12,12,12,0.2);
+  }
+  .rule:last-child { border-bottom: none; }
+  .rule::before {
+    content: counter(rule, decimal-leading-zero);
+    font-family: var(--font-display), serif;
+    font-size: 26px;
+    color: var(--secondary);
+    line-height: 1;
+    padding-top: 4px;
+  }
+  .rule h4 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 20px;
+    color: var(--primary);
+    margin: 0 0 4px 0;
+  }
+  .rule p {
+    margin: 0;
+    font-size: 14.5px;
+    line-height: 1.85;
+    max-width: 52ch;
+  }
+
+  /* ============ COLOPHON STRIP ============ */
+  .closing {
+    padding: 80px 0 100px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 60px;
+    align-items: end;
+  }
+  .closing .salutation {
+    grid-column: 2 / 4;
+    font-family: var(--font-display), serif;
+    font-size: 40px;
+    line-height: 1.25;
+    color: var(--primary);
+    letter-spacing: 0.02em;
+  }
+  .closing .salutation .jp {
+    display: block;
+    font-size: 18px;
+    color: var(--secondary);
+    letter-spacing: 0.3em;
+    margin-bottom: 16px;
+  }
+  .closing .signature {
+    grid-column: 3;
+    margin-top: 28px;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--text);
+    border-top: 1px solid var(--ornament);
+    padding-top: 14px;
+    max-width: 28ch;
+  }
+
+  /* ============ FOOTER ============ */
+  footer {
+    background: #c8b48a;
+    position: relative;
+    color: var(--text);
+    padding: 0 64px;
+  }
+  .sayagata-band {
+    height: 22px;
+    background-image: url("svg/sayagata-keyfret.svg");
+    background-size: 80px 80px;
+    background-repeat: repeat-x;
+    background-position: center top;
+    opacity: 0.22;
+  }
+  .footer-upper {
+    padding: 48px 0 36px 0;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr;
+    gap: 60px;
+    border-bottom: 1px solid rgba(12,12,12,0.3);
+  }
+  .footer-address .jp {
+    font-family: var(--font-body), serif;
+    font-size: 16px;
+    line-height: 1.9;
+    letter-spacing: 0.18em;
+    color: var(--primary);
+    margin: 0 0 8px 0;
+  }
+  .footer-address .romaji {
+    font-style: italic;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--text);
+    max-width: 38ch;
+  }
+  .footer-meta h5 {
+    font-family: var(--font-body), serif;
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    margin: 0 0 12px 0;
+    color: var(--secondary);
+  }
+  .footer-meta p { margin: 0 0 6px 0; font-size: 13px; }
+  .footer-lower {
+    padding: 36px 0 48px 0;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 60px;
+  }
+  .footer-colophon {
+    font-size: 12px;
+    line-height: 1.8;
+    font-style: italic;
+    color: var(--text);
+  }
+  .footer-seal {
+    width: 88px;
+    height: 88px;
+    opacity: 0.7;
+    margin: 0 auto;
+  }
+  .footer-seal svg { width: 100%; height: 100%; }
+  .footer-attrib {
+    font-size: 11px;
+    text-align: right;
+    line-height: 1.7;
+    color: var(--text);
+  }
+  .footer-attrib a { text-decoration: underline; text-decoration-color: rgba(12,12,12,0.3); }
+
+</style>
+</head>
+<body>
+
+<div class="wagara-bg" aria-hidden="true"></div>
+
+<header class="nav-band">
+  <div class="studio-mark">
+    Asakusa Hangiten
+    <span class="jp">浅草版木店 ・ 八代屋代</span>
+  </div>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="page-1.html">Studio</a>
+    <a href="page-2.html">Works</a>
+    <a href="page-3.html">Process</a>
+    <a href="page-4.html">Lineage</a>
+    <a href="page-5.html">Commissions</a>
+    <a href="page-6.html" aria-current="page">Visit</a>
+  </nav>
+  <div class="nav-seal" aria-hidden="true">
+    <svg viewBox="0 0 688 688"><use href="#umebachi-seal"/></svg>
+  </div>
+</header>
+<div class="nav-threshold" aria-hidden="true"></div>
+
+<!-- Hidden defs for inline SVG reuse -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="umebachi-seal" viewBox="0 0 688 688">
+      <circle cx="344" cy="344" r="340" fill="currentColor"/>
+      <g fill="#f5efde">
+        <circle cx="344" cy="180" r="80"/>
+        <circle cx="490" cy="290" r="80"/>
+        <circle cx="430" cy="470" r="80"/>
+        <circle cx="258" cy="470" r="80"/>
+        <circle cx="198" cy="290" r="80"/>
+        <circle cx="344" cy="344" r="46"/>
+      </g>
+    </symbol>
+    <symbol id="tsuru-mon" viewBox="0 0 688 688">
+      <circle cx="344" cy="344" r="320" fill="none" stroke="currentColor" stroke-width="6"/>
+      <circle cx="344" cy="344" r="260" fill="none" stroke="currentColor" stroke-width="2"/>
+      <path d="M 344 120 Q 200 220 220 380 Q 240 480 344 520 Q 448 480 468 380 Q 488 220 344 120 Z" fill="none" stroke="currentColor" stroke-width="3"/>
+      <path d="M 344 200 Q 270 280 290 380 Q 310 440 344 460 Q 378 440 398 380 Q 418 280 344 200 Z" fill="currentColor" opacity="0.5"/>
+      <circle cx="344" cy="344" r="14" fill="currentColor"/>
+    </symbol>
+    <symbol id="kiri-mon" viewBox="0 0 345 326">
+      <g fill="currentColor">
+        <ellipse cx="172" cy="60" rx="22" ry="55"/>
+        <ellipse cx="100" cy="100" rx="20" ry="45" transform="rotate(-25 100 100)"/>
+        <ellipse cx="244" cy="100" rx="20" ry="45" transform="rotate(25 244 100)"/>
+        <path d="M 172 130 Q 140 200 172 280 Q 204 200 172 130 Z"/>
+        <path d="M 110 160 Q 80 220 110 290 Q 140 220 110 160 Z"/>
+        <path d="M 234 160 Q 264 220 234 290 Q 204 220 234 160 Z"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-crane" aria-hidden="true">
+      <svg viewBox="0 0 688 688" style="color: var(--primary)"><use href="#tsuru-mon"/></svg>
+    </div>
+    <div class="eyebrow">Vol. VI &nbsp;·&nbsp; Visit</div>
+    <h1>
+      <span class="jp">工房を訪ねる</span>
+      Visit the<br>Studio.
+    </h1>
+    <p class="lede">
+      The hangiten opens its sliding door once each month. The
+      machiya is small, the workbench narrower still, and the carved
+      cherry-blocks rest where the eighth proprietor left them at
+      nightfall. Tea will be offered. Please arrive on foot, and please
+      write ahead.
+    </p>
+  </section>
+
+  <!-- ADDRESS -->
+  <section class="address-section">
+    <div class="section-tag">
+      <span class="num">壱</span>
+      Where to find us
+    </div>
+    <div class="address-card">
+      <div class="tsuru-corner" aria-hidden="true">
+        <svg viewBox="0 0 688 688" style="color: var(--primary)"><use href="#tsuru-mon"/></svg>
+      </div>
+      <div class="address-vertical" aria-hidden="true">
+        京都市上京区西陣<br>
+        武者小路通油小路東入<br>
+        <span class="small">千本筋三軒目</span>
+      </div>
+      <div class="address-latin">
+        <h3>Hangiten Yashiro</h3>
+        <div class="romaji">— Nishijin, Kamigyō-ku —</div>
+        <p>
+          Three doors east of Senbon-suji on Mushanokōji-dōri,
+          Nishijin, Kamigyō-ku, Kyoto.
+        </p>
+        <p>
+          Look for the indigo half-curtain hung above a
+          weather-blackened lattice door. The signboard, carved in
+          1908, is unlit by daylight.
+        </p>
+        <span class="postal">〒 602-8305</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="sayagata-divider" aria-hidden="true"></div>
+
+  <!-- HOURS -->
+  <section class="hours-section">
+    <div class="hours-headline">
+      <div class="section-tag">
+        <span class="num">弐</span>
+        Open days
+      </div>
+      <h2>
+        The fifteenth
+        <span class="em">of each month.</span>
+      </h2>
+      <p>
+        A single afternoon. Four hours. By written appointment only —
+        no telephone, no email arrangements, no walk-ins.
+      </p>
+    </div>
+    <div class="hours-detail">
+      <dl>
+        <div class="hours-row">
+          <dt>毎月十五日<span class="sub">Open day</span></dt>
+          <dd>The <strong>15th</strong> of each calendar month, without fail save for typhoon and the New Year week (Dec 28 – Jan 6).</dd>
+        </div>
+        <div class="hours-row">
+          <dt>十三時<span class="sub">Doors</span></dt>
+          <dd><strong>13:00</strong> — the half-curtain is raised. Earlier callers wait at the well across the lane.</dd>
+        </div>
+        <div class="hours-row">
+          <dt>十七時<span class="sub">Close</span></dt>
+          <dd><strong>17:00</strong> — last visitor admitted at 16:30. The proprietor returns to the press at sundown.</dd>
+        </div>
+      </dl>
+      <div class="appointment-note">
+        <span class="label">Writing ahead</span>
+        Postcard or letter, please. Address as printed above; do not
+        write to a hotel concierge or a forwarding service. State the
+        month requested, the names of those calling, and the language
+        in which you would prefer to be received. A reply postcard
+        will follow within a fortnight.
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCESS -->
+  <section class="access-section">
+    <h2>
+      <span class="jp">交通の便</span>
+      Getting here.
+    </h2>
+    <div class="section-tag">
+      <span class="num">参</span>
+      Nearest stops
+    </div>
+    <div class="access-list">
+      <div class="access-item">
+        <span class="mark">市</span>
+        <h3>Kyoto City Bus 9</h3>
+        <span class="stop">— alight at Ichijō-Modoribashi —</span>
+        <p>
+          From Kyoto Station via Horikawa-dōri. The bus halts at the
+          old Returning Bridge; turn west along Mushanokōji-dōri,
+          past the kimono dyers' guildhall, and the studio is the
+          third lattice door on the right.
+        </p>
+        <span class="walk-time">4 min on foot</span>
+      </div>
+      <div class="access-item">
+        <span class="mark">地</span>
+        <h3>Imadegawa Station</h3>
+        <span class="stop">— Karasuma subway line, exit 6 —</span>
+        <p>
+          A flatter walk for those carrying portfolios. West along
+          Imadegawa-dōri, then south at Senbon-dōri for two blocks;
+          turn east into Mushanokōji-dōri. The studio sits opposite
+          a small Inari shrine.
+        </p>
+        <span class="walk-time">12 min on foot</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ETIQUETTE -->
+  <section class="etiquette">
+    <div class="etiquette-inner">
+      <div class="etiquette-mark">
+        <div class="seal" style="color: var(--primary)" aria-hidden="true">
+          <svg viewBox="0 0 345 326"><use href="#kiri-mon"/></svg>
+        </div>
+        <div class="label">
+          <span class="jp">町家の作法</span>
+          A note on the<br>machiya.
+        </div>
+      </div>
+      <div class="etiquette-list">
+        <p class="lede">
+          The building is timber, paper, and packed earth, three
+          hundred years older than any of us. It asks for slowness.
+          Three small courtesies make the visit possible.
+        </p>
+        <div class="rule">
+          <div>
+            <h4>Shoes at the genkan</h4>
+            <p>Step out of your shoes at the sunken stone threshold and place them, toes outward, on the right-hand flagstone. House slippers are provided; socks are welcome.</p>
+          </div>
+        </div>
+        <div class="rule">
+          <div>
+            <h4>The blocks are not to be touched</h4>
+            <p>The carved cherry blocks resting on the workbench — some inked, some still drying from a morning's pulling — are alive in their fibres. Skin oil ruins them. Look closely; do not lay a finger.</p>
+          </div>
+        </div>
+        <div class="rule">
+          <div>
+            <h4>Tea will be offered</h4>
+            <p>Bancha, brewed in an iron kettle on the irori. Receiving the cup with both hands is the only ceremony asked. Conversation in low voices is encouraged; the printers next door will be working.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <section class="closing">
+    <div class="salutation">
+      <span class="jp">御来訪を心よりお待ち申し上げます</span>
+      We await your<br>visit with quiet care.
+    </div>
+    <div class="signature">
+      — Tomé Yashiro, eighth proprietor, written from the back room of the hangiten on a damp evening of the early autumn rains.
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="sayagata-band" aria-hidden="true"></div>
+  <div class="footer-upper">
+    <div class="footer-address">
+      <p class="jp">京都市上京区西陣 / 武者小路通油小路東入 千本筋三軒目</p>
+      <p class="romaji">3 doors east of Senbon-suji on Mushanokōji-dōri, Nishijin, Kamigyō-ku, Kyoto 602-8305 — Japan.</p>
+    </div>
+    <div class="footer-meta">
+      <h5>Correspondence</h5>
+      <p>Postcard or letter only.</p>
+      <p>No telephone, no email.</p>
+      <p>Reply within a fortnight.</p>
+    </div>
+    <div class="footer-meta">
+      <h5>Open day</h5>
+      <p>The 15th of every month.</p>
+      <p>13:00 — 17:00.</p>
+      <p>By written appointment.</p>
+    </div>
+  </div>
+  <div class="footer-lower">
+    <div class="footer-colophon">
+      Hangiten Yashiro · founded Bunkyū 2 / 1862<br>
+      current proprietor 8th generation, Tomé Yashiro<br>
+      © 2024 Asakusa Hangiten — all printed works pulled by hand.
+    </div>
+    <div class="footer-seal" style="color: var(--primary)" aria-hidden="true">
+      <svg viewBox="0 0 345 326"><use href="#kiri-mon"/></svg>
+    </div>
+    <div class="footer-attrib">
+      Goshichi-no-kiri, tsuru-no-maru &amp;<br>
+      umebachi kamon SVG renderings:<br>
+      <a href="#">CC-BY-SA, Wikimedia Commons</a>.<br>
+      Set in Yuji Syuku &amp; Shippori Mincho.
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

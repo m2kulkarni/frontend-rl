@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Visit — Hours, Tickets, and Directions · Hakubutsukan Yanaka</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  *,*::before,*::after { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), "Shippori Mincho", serif;
+    line-height: 1.85;
+    margin: 0;
+    font-size: 15px;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* ---------- Top nav ---------- */
+  .topbar {
+    display: grid;
+    grid-template-columns: 20% 1fr;
+    align-items: center;
+    padding: 28px 56px 22px 56px;
+    border-bottom: 1px solid rgba(12,12,12,0.45);
+  }
+  .brand-mark {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .brand-mark svg {
+    width: 44px; height: 44px;
+    display: block;
+  }
+  .brand-mark .brand-text {
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    line-height: 1.2;
+    letter-spacing: 0.04em;
+    color: var(--text);
+  }
+  nav.primary {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0;
+  }
+  nav.primary a {
+    font-family: var(--font-body), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    font-size: 12px;
+    padding: 4px 18px;
+    border-right: 1px solid rgba(12,12,12,0.45);
+    color: var(--text);
+  }
+  nav.primary a:first-child { padding-left: 0; }
+  nav.primary a:last-child  { padding-right: 0; border-right: none; }
+  nav.primary a[aria-current="page"] {
+    border-bottom: 2px solid var(--secondary);
+    color: var(--text);
+  }
+
+  /* ---------- Page hero ---------- */
+  .hero {
+    display: grid;
+    grid-template-columns: 20% 38% 1fr;
+    padding: 90px 56px 80px 56px;
+    align-items: start;
+    gap: 0;
+    position: relative;
+  }
+  .hero .eyebrow {
+    grid-column: 1;
+    font-variant: small-caps;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    color: var(--text);
+    padding-top: 30px;
+    border-top: 1px solid var(--ornament);
+    width: 80%;
+  }
+  .hero h1 {
+    grid-column: 2;
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 78px;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin: 0;
+    color: var(--text);
+  }
+  .hero h1 .accent {
+    color: var(--secondary);
+  }
+  .hero .lede {
+    grid-column: 3;
+    align-self: end;
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: 0;
+    font-size: 14px;
+    color: var(--text);
+    padding-bottom: 8px;
+  }
+  .hero .lede::before {
+    content: "";
+    display: block;
+    width: 36px;
+    height: 1px;
+    background: var(--secondary);
+    margin-bottom: 18px;
+  }
+
+  /* ---------- Two narrow columns of practical info ---------- */
+  .practical {
+    display: grid;
+    grid-template-columns: 20% 1fr 1fr 20%;
+    padding: 40px 56px 100px 56px;
+    column-gap: 64px;
+    row-gap: 0;
+  }
+  .practical .col {
+    grid-column: span 1;
+    max-width: 320px;
+  }
+  .practical .col.first  { grid-column: 2 / 3; }
+  .practical .col.second { grid-column: 3 / 4; }
+
+  .info-block { margin-bottom: 56px; position: relative; }
+  .info-block:last-child { margin-bottom: 0; }
+  .info-block h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 1.2;
+    margin: 0 0 6px 0;
+    color: var(--primary);
+  }
+  .info-block .kanji-mark {
+    position: absolute;
+    top: -2px;
+    right: 0;
+    width: 18px;
+    height: 18px;
+    opacity: 0.85;
+  }
+  .info-block .rule {
+    width: 56px;
+    height: 1px;
+    background: var(--ornament);
+    margin: 14px 0 18px;
+  }
+  .info-block p {
+    margin: 0 0 14px 0;
+  }
+  .info-block .price-row {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dotted rgba(12,12,12,0.4);
+    padding: 10px 0;
+    font-size: 14px;
+  }
+  .info-block .price-row .price {
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+    letter-spacing: 0.03em;
+  }
+  .info-block .price-row .price.free {
+    color: var(--secondary);
+  }
+  .info-block .schedule {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .info-block .schedule li {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px dotted rgba(12,12,12,0.4);
+  }
+  .info-block .schedule li.closed {
+    color: var(--secondary);
+  }
+  .info-block .schedule .day {
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    font-size: 12px;
+  }
+  .info-block .schedule .hours {
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+  }
+
+  /* ---------- Section divider band ---------- */
+  .divider {
+    display: grid;
+    grid-template-columns: 20% 1fr 20%;
+    padding: 0 56px;
+    align-items: center;
+    margin: 0 0 60px 0;
+  }
+  .divider .line {
+    grid-column: 2;
+    height: 36px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='36' viewBox='0 0 600 36'><g fill='none' stroke='%230c0c0c' stroke-width='1'><polyline points='0,18 30,2 60,18 90,2 120,18 150,2 180,18 210,2 240,18 270,2 300,18 330,2 360,18 390,2 420,18 450,2 480,18 510,2 540,18 570,2 600,18'/><polyline points='0,34 30,18 60,34 90,18 120,34 150,18 180,34 210,18 240,34 270,18 300,34 330,18 360,34 390,18 420,34 450,18 480,34 510,18 540,34 570,18 600,34'/></g></svg>");
+    background-repeat: repeat-x;
+    background-position: left center;
+    opacity: 0.55;
+  }
+
+  /* ---------- Map sketch section ---------- */
+  .map-section {
+    display: grid;
+    grid-template-columns: 20% 30% 1fr 6%;
+    padding: 0 56px 110px;
+    column-gap: 56px;
+    align-items: start;
+  }
+  .map-section .label-col { grid-column: 2; }
+  .map-section .label-col h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 38px;
+    line-height: 1.1;
+    margin: 0 0 18px 0;
+    color: var(--text);
+  }
+  .map-section .label-col h2 em {
+    font-style: normal;
+    color: var(--secondary);
+  }
+  .map-section .label-col .rule {
+    width: 56px; height:1px; background: var(--ornament);
+    margin: 18px 0;
+  }
+  .map-section .label-col p {
+    margin: 0 0 14px 0;
+    font-size: 14px;
+  }
+  .map-section .label-col .station {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dotted rgba(12,12,12,0.4);
+    padding: 8px 0;
+    font-size: 13px;
+  }
+  .map-section .label-col .station .walk {
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+  }
+
+  .map-figure {
+    grid-column: 3;
+    background: var(--surface);
+    border: 1px solid var(--ornament);
+    padding: 28px 32px 22px;
+    position: relative;
+  }
+  .map-figure svg.map {
+    width: 100%;
+    height: 360px;
+    display: block;
+  }
+  .map-figure figcaption {
+    margin-top: 14px;
+    font-variant: small-caps;
+    letter-spacing: 0.22em;
+    font-size: 11px;
+    color: var(--text);
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid var(--ornament);
+    padding-top: 10px;
+  }
+  .map-figure .corner-mon {
+    position: absolute;
+    top: 14px; right: 14px;
+    width: 22px; height: 22px;
+    opacity: 0.85;
+  }
+
+  /* ---------- Notice strip ---------- */
+  .notice {
+    display: grid;
+    grid-template-columns: 20% 1fr 20%;
+    padding: 0 56px 90px;
+  }
+  .notice .inner {
+    grid-column: 2;
+    border-top: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+    padding: 28px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 48px;
+  }
+  .notice h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 16px;
+    margin: 0 0 8px;
+    color: var(--primary);
+  }
+  .notice p {
+    margin: 0;
+    font-size: 13px;
+  }
+  .notice .caret {
+    color: var(--secondary);
+    font-family: var(--font-display), serif;
+    margin-right: 4px;
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    position: relative;
+    background: var(--bg);
+    padding: 72px 56px 28px 56px;
+    margin-top: 40px;
+    overflow: hidden;
+    border-top: 1px solid var(--ornament);
+  }
+  footer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'><g fill='none' stroke='%230c0c0c' stroke-width='1'><circle cx='0' cy='0' r='100'/><circle cx='0' cy='0' r='80'/><circle cx='0' cy='0' r='60'/><circle cx='0' cy='0' r='40'/><circle cx='0' cy='0' r='20'/><circle cx='100' cy='0' r='100'/><circle cx='100' cy='0' r='80'/><circle cx='100' cy='0' r='60'/><circle cx='100' cy='0' r='40'/><circle cx='100' cy='0' r='20'/><circle cx='200' cy='0' r='100'/><circle cx='200' cy='0' r='80'/><circle cx='200' cy='0' r='60'/><circle cx='50' cy='86' r='100'/><circle cx='50' cy='86' r='80'/><circle cx='50' cy='86' r='60'/><circle cx='50' cy='86' r='40'/><circle cx='50' cy='86' r='20'/><circle cx='150' cy='86' r='100'/><circle cx='150' cy='86' r='80'/><circle cx='150' cy='86' r='60'/><circle cx='150' cy='86' r='40'/><circle cx='150' cy='86' r='20'/><circle cx='0' cy='172' r='100'/><circle cx='0' cy='172' r='80'/><circle cx='0' cy='172' r='60'/><circle cx='100' cy='172' r='100'/><circle cx='100' cy='172' r='80'/><circle cx='100' cy='172' r='60'/><circle cx='200' cy='172' r='100'/><circle cx='200' cy='172' r='80'/></g></svg>");
+    background-size: 200px 200px;
+    opacity: 0.12;
+    pointer-events: none;
+  }
+  footer .foot-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: 20% 1fr 1fr 280px;
+    gap: 48px;
+    align-items: start;
+  }
+  footer .addr-col {
+    grid-column: 2;
+    max-width: 280px;
+    font-size: 13px;
+  }
+  footer .addr-col h4,
+  footer .hours-col h4 {
+    font-variant: small-caps;
+    letter-spacing: 0.24em;
+    font-size: 11px;
+    margin: 0 0 10px;
+    color: var(--text);
+    border-bottom: 1px solid var(--ornament);
+    padding-bottom: 6px;
+  }
+  footer .hours-col {
+    grid-column: 3;
+    max-width: 280px;
+    font-size: 13px;
+  }
+  footer .seal-col {
+    grid-column: 4;
+    text-align: right;
+  }
+  footer .seal-col svg {
+    width: 70px; height: 70px;
+    display: inline-block;
+  }
+  footer .seal-col .museum-name {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    line-height: 1.25;
+    margin-top: 10px;
+    color: var(--text);
+  }
+  footer .seal-col .museum-name small {
+    display: block;
+    font-family: var(--font-body), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.2em;
+    font-size: 10px;
+    margin-top: 4px;
+    color: var(--text);
+  }
+  .colophon {
+    position: relative;
+    margin-top: 44px;
+    padding-top: 18px;
+    border-top: 1px solid var(--ornament);
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    color: var(--text);
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= TOP BAR ================= -->
+<header class="topbar">
+  <div class="brand-mark" aria-label="Tsuru-no-maru kamon">
+    <svg viewBox="0 0 688 688" aria-hidden="true">
+      <circle cx="344" cy="344" r="338" fill="none" stroke="#0c0c0c" stroke-width="6"/>
+      <g transform="translate(344,344) scale(0.62) translate(-344,-344)">
+        <circle cx="344" cy="344" r="300" fill="#0c0c0c"/>
+        <g fill="#f5efde" transform="translate(344,344)">
+          <path d="M -180,40 C -120,-40 -40,-90 40,-90 C 120,-90 180,-40 200,40 C 180,30 140,-20 80,-30 C 20,-40 -40,-30 -80,10 C -120,40 -160,60 -180,40 Z"/>
+          <circle cx="120" cy="-50" r="14"/>
+          <path d="M 0,-20 L 30,-50 L 60,-30 L 50,0 Z" />
+        </g>
+      </g>
+    </svg>
+    <div class="brand-text">
+      博物館谷中<br>
+      <small style="font-variant:small-caps;letter-spacing:.18em;font-size:10px;">Hakubutsukan Yanaka</small>
+    </div>
+  </div>
+  <nav class="primary" aria-label="Primary">
+    <a href="page-1.html">Home</a>
+    <a href="page-2.html">Collections</a>
+    <a href="page-3.html">Exhibition</a>
+    <a href="page-4.html">Machiya</a>
+    <a href="page-5.html" aria-current="page">Visit</a>
+    <a href="page-6.html">About</a>
+  </nav>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="eyebrow">第五 — Visiting Notes</div>
+  <h1>Visit.<br>Hours, tickets,<br>and the lane <em class="accent">in.</em></h1>
+  <p class="lede">
+    The museum keeps the unhurried pace of a Yanaka backstreet. Allow ninety minutes to wander the machiya, the print room, and the small kura beyond the courtyard. Tea is poured in the eaves at three.
+  </p>
+</section>
+
+<!-- ================= DIVIDER ================= -->
+<div class="divider" aria-hidden="true"><div class="line"></div></div>
+
+<!-- ================= PRACTICAL INFO (two narrow columns) ================= -->
+<section class="practical">
+
+  <!-- Column 1 -->
+  <div class="col first">
+
+    <div class="info-block">
+      <svg class="kanji-mark" viewBox="0 0 688 688" aria-hidden="true"><circle cx="344" cy="344" r="320" fill="none" stroke="#0c0c0c" stroke-width="14"/><circle cx="344" cy="344" r="120" fill="#0c0c0c"/></svg>
+      <h2>Hours</h2>
+      <div class="rule"></div>
+      <p>The galleries are open five days a week, with a single afternoon closing. Last entry is half an hour before closing so that visitors may take the full circuit through the reconstructed townhouse without being hurried.</p>
+      <ul class="schedule">
+        <li><span class="day">Monday</span><span class="hours" style="color:var(--secondary)">closed</span></li>
+        <li><span class="day">Tuesday</span><span class="hours" style="color:var(--secondary)">closed</span></li>
+        <li><span class="day">Wednesday</span><span class="hours">10:00 — 17:00</span></li>
+        <li><span class="day">Thursday</span><span class="hours">10:00 — 17:00</span></li>
+        <li><span class="day">Friday</span><span class="hours">10:00 — 17:00</span></li>
+        <li><span class="day">Saturday</span><span class="hours">10:00 — 17:00</span></li>
+        <li><span class="day">Sunday</span><span class="hours">10:00 — 17:00</span></li>
+      </ul>
+      <p style="margin-top:14px;font-size:12px;color:var(--text);">Last entry 16:30. Closed for the New Year period, 28 December — 4 January, when the print storage is rotated.</p>
+    </div>
+
+    <div class="info-block">
+      <svg class="kanji-mark" viewBox="0 0 688 688" aria-hidden="true"><rect x="40" y="40" width="608" height="608" fill="none" stroke="#0c0c0c" stroke-width="14"/><line x1="40" y1="344" x2="648" y2="344" stroke="#0c0c0c" stroke-width="10"/><line x1="344" y1="40" x2="344" y2="648" stroke="#0c0c0c" stroke-width="10"/></svg>
+      <h2>Tickets</h2>
+      <div class="rule"></div>
+      <p>Admission supports the conservation of the woodblock collection and the upkeep of the timber frame. Members of the Yanaka Preservation Circle enter without charge.</p>
+      <div class="price-row"><span class="day" style="font-variant:small-caps;letter-spacing:.18em;font-size:12px;">Adult</span><span class="price">¥1,200</span></div>
+      <div class="price-row"><span class="day" style="font-variant:small-caps;letter-spacing:.18em;font-size:12px;">Student</span><span class="price">¥600</span></div>
+      <div class="price-row"><span class="day" style="font-variant:small-caps;letter-spacing:.18em;font-size:12px;">Under 12</span><span class="price free">free</span></div>
+      <div class="price-row" style="border-bottom:none;"><span class="day" style="font-variant:small-caps;letter-spacing:.18em;font-size:12px;">Members</span><span class="price free">free</span></div>
+      <p style="margin-top:14px;font-size:12px;">Cash and IC cards are accepted at the genkan desk. Group rates are arranged in advance by post.</p>
+    </div>
+
+  </div>
+
+  <!-- Column 2 -->
+  <div class="col second">
+
+    <div class="info-block">
+      <svg class="kanji-mark" viewBox="0 0 688 688" aria-hidden="true"><circle cx="344" cy="344" r="320" fill="none" stroke="#0c0c0c" stroke-width="14"/><path d="M 200,344 L 488,344 M 344,200 L 344,488" stroke="#0c0c0c" stroke-width="14" fill="none"/></svg>
+      <h2>Address</h2>
+      <div class="rule"></div>
+      <p style="font-family:var(--font-display);font-size:18px;line-height:1.5;color:var(--primary);margin-bottom:6px;">
+        〒110-0001<br>
+        東京都台東区谷中三丁目七番十二号
+      </p>
+      <p>3-7-12 Yanaka, Taitō-ku, Tokyo 110-0001</p>
+      <p style="font-size:12px;">Telephone (03) 3823-XXXX · post@hakubutsukan-yanaka.jp</p>
+    </div>
+
+    <div class="info-block">
+      <svg class="kanji-mark" viewBox="0 0 688 688" aria-hidden="true"><polygon points="344,60 580,500 108,500" fill="none" stroke="#0c0c0c" stroke-width="14"/><circle cx="344" cy="380" r="40" fill="#0c0c0c"/></svg>
+      <h2>Quiet Notes</h2>
+      <div class="rule"></div>
+      <p>Photography is permitted in the courtyard but not in the print room, where light levels are kept at fifty lux. Footwear is removed at the genkan; slippers are provided.</p>
+      <p>The reconstructed second floor is reached by a steep wooden stair with a single rope rail. A ground-floor circuit is available for visitors who prefer level passage.</p>
+      <p style="font-size:12px;">An umbrella stand and small lockers are at the entrance. Strollers may be left in the genkan.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= DIVIDER ================= -->
+<div class="divider" aria-hidden="true"><div class="line"></div></div>
+
+<!-- ================= MAP SECTION ================= -->
+<section class="map-section">
+  <div class="label-col">
+    <h2>The lane <em>in.</em></h2>
+    <p>From Yanaka Ginza, walk east along the slope, past the cooper and the persimmon tree, then take the second narrow turning. The museum sits behind a low cedar fence, marked by a single paper lantern.</p>
+    <div class="rule"></div>
+    <div class="station"><span style="font-variant:small-caps;letter-spacing:.18em;font-size:12px;">Nippori — JR Yamanote</span><span class="walk">8 min</span></div>
+    <div class="station"><span style="font-variant:small-caps;letter-spacing:.18em;font-size:12px;">Sendagi — Chiyoda line</span><span class="walk">6 min</span></div>
+    <div class="station"><span style="font-variant:small-caps;letter-spacing:.18em;font-size:12px;">Nezu — Chiyoda line</span><span class="walk">12 min</span></div>
+    <p style="margin-top:24px;font-size:12px;">Bicycle parking is available at the corner of the lane. There is no on-site car park; the nearest pay garage is on Kototoi-dōri.</p>
+    <p style="margin-top:14px;"><span style="color:var(--secondary);font-family:var(--font-display);">›</span> See the architecture of the machiya in detail on the <a href="page-4.html" style="border-bottom:1px solid var(--secondary);">reconstruction page</a>.</p>
+  </div>
+
+  <figure class="map-figure">
+    <svg class="corner-mon" viewBox="0 0 688 688" aria-hidden="true"><circle cx="344" cy="344" r="320" fill="none" stroke="#0c0c0c" stroke-width="20"/><circle cx="344" cy="344" r="120" fill="#0c0c0c"/></svg>
+    <svg class="map" viewBox="0 0 600 360" xmlns="http://www.w3.org/2000/svg" aria-label="Hand-drawn map of the lane from Yanaka Ginza to the museum">
+      <!-- background tone -->
+      <rect width="600" height="360" fill="none"/>
+
+      <!-- Yamanote line (double hairline) -->
+      <g stroke="#1c3a5e" fill="none">
+        <path d="M 30,40 C 90,90 80,180 130,260 C 170,320 220,340 290,340" stroke-width="1.2"/>
+        <path d="M 36,40 C 96,92 86,182 136,262 C 176,322 224,346 290,346" stroke-width="1.2" stroke-dasharray="3 3"/>
+      </g>
+      <text x="44" y="36" font-family="Shippori Mincho" font-size="9" fill="#1c3a5e" letter-spacing="2">JR YAMANOTE</text>
+
+      <!-- Nippori station -->
+      <rect x="120" y="252" width="22" height="14" fill="none" stroke="#0c0c0c"/>
+      <text x="148" y="263" font-family="Yuji Syuku" font-size="11" fill="#0c0c0c">Nippori</text>
+      <text x="148" y="275" font-family="Shippori Mincho" font-size="8" fill="#0c0c0c" letter-spacing="1.5">日暮里</text>
+
+      <!-- Sendagi station -->
+      <circle cx="430" cy="80" r="7" fill="none" stroke="#0c0c0c"/>
+      <circle cx="430" cy="80" r="2.5" fill="#0c0c0c"/>
+      <text x="444" y="76" font-family="Yuji Syuku" font-size="11" fill="#0c0c0c">Sendagi</text>
+      <text x="444" y="88" font-family="Shippori Mincho" font-size="8" fill="#0c0c0c" letter-spacing="1.5">千駄木</text>
+
+      <!-- Chiyoda line -->
+      <path d="M 430,80 C 460,140 480,180 470,240 C 460,290 430,320 380,330" fill="none" stroke="#1c3a5e" stroke-width="1" stroke-dasharray="4 4"/>
+      <text x="486" y="180" font-family="Shippori Mincho" font-size="9" fill="#1c3a5e" letter-spacing="2">CHIYODA</text>
+
+      <!-- Yanaka Ginza street -->
+      <path d="M 150,260 C 210,240 250,210 280,180" fill="none" stroke="#0c0c0c" stroke-width="0.8"/>
+      <text x="170" y="232" font-family="Yuji Syuku" font-size="11" fill="#0c0c0c">Yanaka Ginza</text>
+      <text x="170" y="244" font-family="Shippori Mincho" font-size="8" fill="#0c0c0c" letter-spacing="1.5">谷中銀座</text>
+
+      <!-- the slope -->
+      <path d="M 280,180 L 340,160" fill="none" stroke="#0c0c0c" stroke-width="0.8"/>
+      <text x="284" y="170" font-family="Shippori Mincho" font-size="8" fill="#0c0c0c" letter-spacing="1">yūyake-dandan</text>
+
+      <!-- main lane to museum (the route) -->
+      <path d="M 340,160 L 360,170 L 360,135 L 380,130" fill="none" stroke="#e34234" stroke-width="1.6"/>
+      <!-- arrow tip -->
+      <path d="M 380,130 l -6,-3 l 0,6 z" fill="#e34234"/>
+
+      <!-- minor lanes (hairline grid) -->
+      <g stroke="#0c0c0c" stroke-width="0.5" fill="none" opacity="0.7">
+        <path d="M 300,100 L 420,140"/>
+        <path d="M 320,200 L 440,180"/>
+        <path d="M 360,80 L 360,250"/>
+        <path d="M 300,260 L 460,250"/>
+      </g>
+
+      <!-- persimmon tree marker -->
+      <circle cx="352" cy="158" r="3" fill="#0c0c0c"/>
+      <text x="296" y="152" font-family="Shippori Mincho" font-size="8" fill="#0c0c0c">persimmon</text>
+
+      <!-- Museum site (cinnabar seal square) -->
+      <rect x="372" y="122" width="18" height="18" fill="#e34234"/>
+      <text x="372" y="118" font-family="Yuji Syuku" font-size="9" fill="#e34234" text-anchor="start">博</text>
+      <text x="396" y="135" font-family="Yuji Syuku" font-size="11" fill="#0c0c0c">Hakubutsukan</text>
+      <text x="396" y="147" font-family="Yuji Syuku" font-size="11" fill="#0c0c0c">Yanaka</text>
+
+      <!-- Compass -->
+      <g transform="translate(540,300)">
+        <circle r="20" fill="none" stroke="#0c0c0c" stroke-width="0.6"/>
+        <path d="M 0,-18 L 4,0 L 0,4 L -4,0 Z" fill="#0c0c0c"/>
+        <text x="-3" y="-22" font-family="Shippori Mincho" font-size="9" fill="#0c0c0c">N</text>
+      </g>
+
+      <!-- Scale bar -->
+      <g transform="translate(40,330)">
+        <line x1="0" y1="0" x2="80" y2="0" stroke="#0c0c0c" stroke-width="0.8"/>
+        <line x1="0" y1="-3" x2="0" y2="3" stroke="#0c0c0c" stroke-width="0.8"/>
+        <line x1="40" y1="-3" x2="40" y2="3" stroke="#0c0c0c" stroke-width="0.8"/>
+        <line x1="80" y1="-3" x2="80" y2="3" stroke="#0c0c0c" stroke-width="0.8"/>
+        <text x="0" y="14" font-family="Shippori Mincho" font-size="8" fill="#0c0c0c" letter-spacing="1">0    100m   200m</text>
+      </g>
+    </svg>
+    <figcaption>
+      <span>Sketch — lane from Yanaka Ginza</span>
+      <span>fig. v.</span>
+    </figcaption>
+  </figure>
+</section>
+
+<!-- ================= NOTICE ================= -->
+<section class="notice">
+  <div class="inner">
+    <div>
+      <h3>Accessibility</h3>
+      <p><span class="caret">›</span> A ramp at the rear gate gives level access to the courtyard and the ground-floor galleries. Please write ahead so that the cedar gate is opened.</p>
+    </div>
+    <div>
+      <h3>School Visits</h3>
+      <p><span class="caret">›</span> Groups of fifteen or more receive guided tours by request. Reservations open three months in advance; correspond by post or telephone.</p>
+    </div>
+    <div>
+      <h3>Tea on the Eaves</h3>
+      <p><span class="caret">›</span> Sencha is served at three o'clock in the engawa, weather permitting, at no charge to ticket-holders. A small confection is included.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="foot-grid">
+    <div class="addr-col">
+      <h4>Address</h4>
+      <p style="margin:0 0 4px;font-family:var(--font-display);color:var(--primary);font-size:15px;">3-7-12 Yanaka</p>
+      <p style="margin:0;">Taitō-ku, Tokyo 110-0001<br>Japan</p>
+      <p style="margin-top:14px;font-size:11px;letter-spacing:.1em;">tel (03) 3823-XXXX</p>
+    </div>
+    <div class="hours-col">
+      <h4>Hours</h4>
+      <p style="margin:0;">Wednesday — Sunday<br>10:00 — 17:00 <span style="color:var(--secondary);">·</span> last entry 16:30</p>
+      <p style="margin-top:10px;font-size:11px;">Closed Mon, Tue, and 28 Dec — 4 Jan.</p>
+    </div>
+    <div class="seal-col">
+      <svg viewBox="0 0 345 326" aria-hidden="true">
+        <g transform="scale(1)" fill="#0c0c0c">
+          <ellipse cx="172" cy="155" rx="10" ry="10"/>
+          <path d="M 172,165 C 150,180 130,210 122,250 C 116,280 120,305 140,318 C 156,326 188,326 204,318 C 224,305 228,280 222,250 C 214,210 194,180 172,165 Z" fill="none" stroke="#0c0c0c" stroke-width="3"/>
+          <path d="M 172,170 L 172,300" stroke="#0c0c0c" stroke-width="1.5"/>
+          <path d="M 158,200 L 158,290 M 186,200 L 186,290" stroke="#0c0c0c" stroke-width="1"/>
+          <!-- left wing -->
+          <path d="M 90,130 C 70,135 55,150 55,170 C 55,185 65,195 80,195 C 95,195 105,185 110,170 C 105,160 100,145 90,130 Z" fill="none" stroke="#0c0c0c" stroke-width="2"/>
+          <path d="M 78,160 L 78,190 M 88,155 L 88,193 M 98,160 L 98,188" stroke="#0c0c0c" stroke-width="0.8"/>
+          <!-- right wing -->
+          <path d="M 254,130 C 274,135 289,150 289,170 C 289,185 279,195 264,195 C 249,195 239,185 234,170 C 239,160 244,145 254,130 Z" fill="none" stroke="#0c0c0c" stroke-width="2"/>
+          <path d="M 266,160 L 266,190 M 256,155 L 256,193 M 246,160 L 246,188" stroke="#0c0c0c" stroke-width="0.8"/>
+          <!-- crest leaves top -->
+          <path d="M 172,5 C 165,30 160,55 165,90 L 180,90 C 185,55 180,30 172,5 Z" fill="none" stroke="#0c0c0c" stroke-width="2"/>
+          <path d="M 130,30 C 130,55 135,80 145,100 L 158,98 C 152,75 145,50 130,30 Z" fill="none" stroke="#0c0c0c" stroke-width="2"/>
+          <path d="M 214,30 C 214,55 209,80 199,100 L 186,98 C 192,75 199,50 214,30 Z" fill="none" stroke="#0c0c0c" stroke-width="2"/>
+        </g>
+      </svg>
+      <div class="museum-name">
+        Hakubutsukan<br>Yanaka
+        <small>Museum of Edo Townscape</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="colophon">
+    <span>© Hakubutsukan Yanaka · Est. 1978</span>
+    <span>Kamon renderings · Wikimedia Commons · CC BY-SA</span>
+    <span>Yanaka · Taitō · Tōkyō</span>
+  </div>
+</footer>
+
+</body>
+</html>

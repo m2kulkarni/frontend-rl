@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Visit — Hours & Address | Chehel Sotoun</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    font-size: 17px;
+    line-height: 1.65;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* ===== TOP BAND ===== */
+  .topband {
+    border-top: 6px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
+    padding-top: 28px;
+  }
+  .wordmark {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+  }
+  .wordmark .name {
+    font-size: 38px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+  .wordmark .sub {
+    margin-top: 8px;
+    font-size: 12px;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: var(--secondary);
+  }
+  nav.primary {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0;
+    padding: 22px 0 18px;
+  }
+  nav.primary a {
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--primary);
+    padding: 6px 22px;
+    position: relative;
+  }
+  nav.primary .glyph {
+    color: var(--accent);
+    font-size: 10px;
+    user-select: none;
+  }
+  nav.primary a[aria-current="page"] {
+    color: var(--text-emphasis);
+    position: relative;
+  }
+  nav.primary a[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    left: 18px; right: 18px; bottom: -6px;
+    height: 8px;
+    background:
+      radial-gradient(ellipse at 25% 0%, transparent 60%, var(--text-emphasis) 60%, var(--text-emphasis) 64%, transparent 65%),
+      radial-gradient(ellipse at 75% 100%, transparent 60%, var(--text-emphasis) 60%, var(--text-emphasis) 64%, transparent 65%);
+  }
+
+  /* ===== PAGE FRAME ===== */
+  main {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 80px;
+  }
+
+  /* ===== HERO IWAN ===== */
+  .hero {
+    text-align: center;
+    padding: 70px 0 40px;
+    position: relative;
+  }
+  .hero .eyebrow {
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.55em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 18px;
+  }
+  .hero h1 {
+    font-family: var(--font-display), serif;
+    font-size: 58px;
+    color: var(--primary);
+    margin: 0 0 14px;
+    letter-spacing: 0.04em;
+    font-weight: 400;
+  }
+  .hero h1 em {
+    color: var(--text-emphasis);
+    font-style: italic;
+    font-family: var(--font-body), serif;
+  }
+  .hero .lede {
+    max-width: 620px;
+    margin: 16px auto 0;
+    font-size: 19px;
+    color: var(--text);
+    font-style: italic;
+  }
+
+  /* Iwan ogee frame around the hero map area */
+  .iwan {
+    position: relative;
+    margin: 30px auto 0;
+    width: 760px;
+    height: 480px;
+  }
+  .iwan svg.frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 3;
+  }
+  .iwan .field {
+    position: absolute;
+    inset: 0;
+    background: var(--bg);
+    overflow: hidden;
+    -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 760 480'><path d='M 60 470 L 60 240 Q 60 60 380 30 Q 700 60 700 240 L 700 470 Z' fill='black'/></svg>");
+            mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 760 480'><path d='M 60 470 L 60 240 Q 60 60 380 30 Q 700 60 700 240 L 700 470 Z' fill='black'/></svg>");
+    -webkit-mask-size: 100% 100%;
+            mask-size: 100% 100%;
+  }
+
+  /* ===== HAND-DRAWN MAP ===== */
+  .map {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* ===== SECTION DIVIDER ===== */
+  .divider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 64px 0 40px;
+  }
+  .divider svg {
+    width: 460px;
+    height: 22px;
+    color: var(--accent);
+  }
+  .divider svg path { fill: var(--accent); }
+  .divider svg polyline { stroke: var(--accent); }
+
+  /* ===== SECTION TITLE ===== */
+  .section-title {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-size: 32px;
+    color: var(--primary);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin: 0 0 8px;
+    font-weight: 400;
+  }
+  .section-sub {
+    text-align: center;
+    font-style: italic;
+    color: var(--secondary);
+    margin-bottom: 36px;
+  }
+
+  /* ===== TWO-COLUMN: ADDRESS + TUBE ===== */
+  .address-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+    margin-bottom: 30px;
+  }
+
+  /* ===== CARD (pointed-arch) ===== */
+  .card {
+    background: var(--bg);
+    position: relative;
+    padding: 56px 38px 40px;
+    border: 2px solid var(--primary);
+    border-top-left-radius: 50% 22%;
+    border-top-right-radius: 50% 22%;
+    box-shadow: inset 0 0 0 6px var(--bg), inset 0 0 0 7px var(--accent);
+  }
+  .card::before {
+    /* peak point of arch */
+    content: "";
+    position: absolute;
+    top: -14px; left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 26px; height: 26px;
+    background: var(--bg);
+    border-top: 2px solid var(--primary);
+    border-right: 2px solid var(--primary);
+    box-shadow: inset -2px 2px 0 0 var(--accent);
+  }
+  .card .seal {
+    width: 54px; height: 54px;
+    margin: 0 auto 18px;
+    border: 2px solid var(--secondary);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--bg);
+  }
+  .card .seal svg { width: 38px; height: 38px; }
+  .card h3 {
+    font-family: var(--font-display), serif;
+    font-size: 18px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--primary);
+    text-align: center;
+    margin: 0 0 18px;
+    font-weight: 400;
+  }
+  .card .body { color: var(--text); }
+  .card .body p { margin: 0 0 12px; }
+  .card .body strong { color: var(--text-emphasis); font-weight: 400; }
+  .card .body .label {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    display: block;
+    margin-top: 8px;
+  }
+
+  /* corner palmettes */
+  .corner {
+    position: absolute;
+    width: 22px; height: 22px;
+    color: var(--accent);
+    opacity: 0.85;
+  }
+  .corner svg { width: 100%; height: 100%; fill: currentColor; }
+  .corner.tl { top: 6px; left: 6px; }
+  .corner.tr { top: 6px; right: 6px; transform: scaleX(-1); }
+  .corner.bl { bottom: 6px; left: 6px; transform: scaleY(-1); }
+  .corner.br { bottom: 6px; right: 6px; transform: scale(-1,-1); }
+
+  /* ===== HOURS TABLE ===== */
+  .hours-wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    background: var(--bg);
+    border: 1px solid var(--primary);
+    padding: 44px 56px;
+    position: relative;
+  }
+  .hours-wrap::before, .hours-wrap::after {
+    content: "";
+    position: absolute;
+    left: 14px; right: 14px;
+    height: 1px;
+    background: var(--accent);
+  }
+  .hours-wrap::before { top: 8px; }
+  .hours-wrap::after { bottom: 8px; }
+
+  .hours {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .hours th, .hours td {
+    padding: 14px 8px;
+    text-align: left;
+    border-bottom: 1px dotted rgba(30,58,95,0.3);
+  }
+  .hours tr:last-child th, .hours tr:last-child td { border-bottom: none; }
+  .hours th {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 14px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--primary);
+    width: 30%;
+  }
+  .hours td.service {
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    width: 22%;
+  }
+  .hours td.time { font-variant-numeric: tabular-nums; font-size: 18px; color: var(--text); }
+  .hours td.closed { color: var(--text-emphasis); font-style: italic; }
+
+  .closures {
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid var(--accent);
+    text-align: center;
+    font-style: italic;
+    color: var(--text);
+  }
+  .closures strong { color: var(--text-emphasis); font-weight: 400; }
+
+  /* ===== NOTES (dress + children) ===== */
+  .notes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+    margin-top: 50px;
+  }
+  .note {
+    background: var(--surface);
+    color: #fff5e3;
+    padding: 36px 32px;
+    position: relative;
+    border: 1px solid #6a3d1e;
+  }
+  .note::before {
+    content: "";
+    position: absolute; inset: 6px;
+    border: 1px solid var(--accent);
+    pointer-events: none;
+    opacity: 0.6;
+  }
+  .note h4 {
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 14px;
+    font-weight: 400;
+  }
+  .note p { margin: 0; color: #fbf0d8; line-height: 1.7; }
+  .note p em { color: #f2e5cc; font-style: italic; }
+
+  /* ===== FOOTER ===== */
+  footer {
+    margin-top: 100px;
+    background: var(--primary);
+    color: #e9d9b6;
+    position: relative;
+    overflow: hidden;
+  }
+  footer .girih {
+    position: absolute;
+    inset: 0;
+    background-image: url("svg/girih-tessellation-2.svg");
+    background-size: 600px;
+    background-repeat: repeat;
+    opacity: 0.08;
+    filter: sepia(1) hue-rotate(20deg) saturate(2);
+    pointer-events: none;
+  }
+  footer .inner {
+    position: relative;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 60px 80px 30px;
+  }
+  footer .cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+    text-align: center;
+  }
+  footer h5 {
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 14px;
+    font-weight: 400;
+  }
+  footer p { margin: 0; line-height: 1.7; font-size: 15px; }
+  footer .filet {
+    margin-top: 40px;
+    display: flex; align-items: center; justify-content: center;
+    gap: 16px;
+  }
+  footer .filet .rule {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent) 20%, var(--accent) 80%, transparent);
+  }
+  footer .finial {
+    width: 18px; height: 18px;
+    transform: rotate(45deg);
+    border: 1px solid var(--secondary);
+    background: var(--secondary);
+    position: relative;
+  }
+  footer .attrib {
+    text-align: center;
+    margin-top: 24px;
+    font-size: 12px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(233, 217, 182, 0.7);
+  }
+
+  /* small palmette helper paths used as glyph */
+  .palmette-glyph { display: inline-block; transform: translateY(-2px); }
+</style>
+</head>
+<body>
+
+<header class="topband">
+  <div class="wordmark">
+    <div class="name">Chehel Sotoun</div>
+    <div class="sub">Hall of Forty Columns &middot; Mayfair</div>
+  </div>
+  <nav class="primary" aria-label="Primary">
+    <a href="page-1.html">Hall</a>
+    <span class="glyph">❖</span>
+    <a href="page-2.html">Sofreh</a>
+    <span class="glyph">❖</span>
+    <a href="page-3.html">The Rooms</a>
+    <span class="glyph">❖</span>
+    <a href="page-4.html">Lineage</a>
+    <span class="glyph">❖</span>
+    <a href="page-5.html">Reservations</a>
+    <span class="glyph">❖</span>
+    <a href="page-6.html" aria-current="page">Visit</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="eyebrow">Visit &middot; Pollen Street &middot; W1</div>
+    <h1>Finding the <em>Iwan</em></h1>
+    <p class="lede">A narrow lane off Hanover Square, a turquoise lantern at the door, and the courtly table of seventeenth-century Isfahan, four minutes from the underground.</p>
+
+    <div class="iwan" aria-hidden="false">
+      <!-- field that will host the map; clipped to ogee silhouette -->
+      <div class="field">
+        <svg class="map" viewBox="0 0 760 480" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(35)">
+              <line x1="0" y1="0" x2="0" y2="6" stroke="#1e3a5f" stroke-width="0.6" opacity="0.18"/>
+            </pattern>
+          </defs>
+
+          <!-- background blocks -->
+          <rect x="0" y="0" width="760" height="480" fill="#f2e5cc"/>
+          <rect x="40" y="60" width="180" height="120" fill="url(#hatch)" stroke="#1e3a5f" stroke-width="1.2"/>
+          <rect x="240" y="60" width="200" height="80" fill="url(#hatch)" stroke="#1e3a5f" stroke-width="1.2"/>
+          <rect x="460" y="60" width="240" height="120" fill="url(#hatch)" stroke="#1e3a5f" stroke-width="1.2"/>
+          <rect x="40" y="320" width="220" height="120" fill="url(#hatch)" stroke="#1e3a5f" stroke-width="1.2"/>
+          <rect x="280" y="300" width="180" height="140" fill="url(#hatch)" stroke="#1e3a5f" stroke-width="1.2"/>
+          <rect x="480" y="320" width="220" height="120" fill="url(#hatch)" stroke="#1e3a5f" stroke-width="1.2"/>
+
+          <!-- Streets (cobalt linework, hand-drawn feel via slight curves) -->
+          <g fill="none" stroke="#1e3a5f" stroke-width="2.4" stroke-linecap="round">
+            <!-- Regent Street (curved spine) -->
+            <path d="M 30 30 Q 380 20 600 80 T 740 240" stroke-width="3"/>
+            <!-- Oxford Street top -->
+            <path d="M 30 60 Q 220 50 450 56 T 740 60" stroke-width="2.8"/>
+            <!-- Hanover Sq oval -->
+            <ellipse cx="370" cy="220" rx="80" ry="50" stroke-width="2"/>
+            <!-- Pollen St (the prize) -->
+            <path d="M 320 230 Q 305 250 290 280" stroke="#7a1f2e" stroke-width="2.6"/>
+            <!-- Brook Street -->
+            <path d="M 30 280 Q 240 270 460 282 T 740 280"/>
+            <!-- Maddox / connectors -->
+            <path d="M 230 180 Q 240 230 250 300"/>
+            <path d="M 460 200 Q 470 240 480 300"/>
+            <path d="M 600 200 Q 610 240 620 300"/>
+            <!-- Bond Street -->
+            <path d="M 150 60 Q 158 220 162 440"/>
+          </g>
+
+          <!-- Street labels -->
+          <g font-family="EB Garamond, serif" font-style="italic" font-size="11" fill="#1e3a5f">
+            <text x="220" y="42" transform="rotate(-2 220 42)">Oxford Street</text>
+            <text x="540" y="100" transform="rotate(12 540 100)">Regent Street</text>
+            <text x="170" y="200" transform="rotate(88 170 200)">Bond Street</text>
+            <text x="340" y="222" font-size="10">Hanover Sq.</text>
+            <text x="240" y="306">Brook Street</text>
+            <text x="300" y="270" fill="#7a1f2e" font-weight="700">Pollen St.</text>
+          </g>
+
+          <!-- Oxford Circus tube marker -->
+          <g transform="translate(610,72)">
+            <circle r="11" fill="#f2e5cc" stroke="#7a1f2e" stroke-width="3"/>
+            <circle r="4.5" fill="#7a1f2e"/>
+            <text x="16" y="4" font-family="Marcellus, serif" font-size="11" fill="#1e3a5f" letter-spacing="1.2">OXFORD CIRCUS</text>
+          </g>
+
+          <!-- Restaurant marker (ogee pin) -->
+          <g transform="translate(295,300)">
+            <path d="M 0 -28 C 12 -28 18 -18 18 -8 C 18 4 0 24 0 24 C 0 24 -18 4 -18 -8 C -18 -18 -12 -28 0 -28 Z"
+                  fill="#c9a23a" stroke="#1e3a5f" stroke-width="1.6"/>
+            <circle r="5" cy="-10" fill="#2a8a8a" stroke="#1e3a5f" stroke-width="1"/>
+            <text x="24" y="-4" font-family="Marcellus, serif" font-size="12" fill="#7a1f2e" letter-spacing="1.4">CHEHEL SOTOUN</text>
+            <text x="24" y="10" font-family="EB Garamond, serif" font-style="italic" font-size="11" fill="#1e3a5f">14 Pollen Street</text>
+          </g>
+
+          <!-- Walking dotted line -->
+          <path d="M 610 80 Q 540 130 460 180 Q 380 230 320 270 Q 305 285 295 295"
+                fill="none" stroke="#7a1f2e" stroke-width="1.8" stroke-dasharray="2 6" stroke-linecap="round"/>
+          <text x="430" y="172" font-family="EB Garamond, serif" font-style="italic" font-size="11" fill="#7a1f2e">≈ 4 min on foot</text>
+
+          <!-- Compass -->
+          <g transform="translate(70,400)">
+            <circle r="22" fill="none" stroke="#1e3a5f" stroke-width="1"/>
+            <path d="M 0 -20 L 4 0 L 0 20 L -4 0 Z" fill="#1e3a5f"/>
+            <text x="-4" y="-26" font-family="Marcellus, serif" font-size="10" fill="#1e3a5f">N</text>
+          </g>
+        </svg>
+      </div>
+
+      <!-- Ogee frame outline drawn over -->
+      <svg class="frame" viewBox="0 0 760 480" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 60 470 L 60 240 Q 60 60 380 30 Q 700 60 700 240 L 700 470"
+              fill="none" stroke="#1e3a5f" stroke-width="3"/>
+        <path d="M 70 460 L 70 244 Q 70 70 380 42 Q 690 70 690 244 L 690 460"
+              fill="none" stroke="#c9a23a" stroke-width="1"/>
+        <!-- spandrel ornaments -->
+        <g fill="#c9a23a" opacity="0.85">
+          <path d="M 60 60 Q 130 70 150 130 Q 130 90 60 90 Z"/>
+          <path d="M 700 60 Q 630 70 610 130 Q 630 90 700 90 Z"/>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ============ DIVIDER ============ -->
+  <div class="divider" aria-hidden="true">
+    <svg viewBox="0 0 437.999 18.893" xmlns="http://www.w3.org/2000/svg">
+      <use href="#__filet"/>
+      <g>
+        <path d="M0,9.445c0,0,37.005-0.063,73.998-0.829c18.495-0.386,36.989-0.949,50.831-1.785c6.919-0.414,12.677-0.906,16.663-1.46c1.99-0.28,3.539-0.582,4.535-0.878c0.502-0.146,0.844-0.297,1.049-0.405c0.157-0.107,0.238-0.162,0.238-0.162l0.42-0.287l0.656,0.656l-0.369,0.338c0,0-0.154,0.142-0.456,0.324c-0.291,0.154-0.714,0.331-1.256,0.484c-1.085,0.314-2.667,0.608-4.686,0.879c-4.037,0.533-9.811,0.985-16.745,1.354c-13.868,0.744-32.369,1.183-50.87,1.443C37.003,9.632,0,9.445,0,9.445z"/>
+        <path d="M437.999,9.445c0,0-37.004,0.187-74.007-0.329c-18.501-0.261-37.002-0.699-50.869-1.443c-6.935-0.368-12.708-0.82-16.745-1.354c-2.019-0.271-3.601-0.565-4.687-0.879c-0.541-0.153-0.965-0.33-1.256-0.484c-0.302-0.183-0.456-0.324-0.456-0.324l-0.369-0.338l0.656-0.656l0.42,0.287c0,0,0.081,0.055,0.238,0.162c0.204,0.108,0.546,0.26,1.048,0.405c0.996,0.296,2.545,0.598,4.535,0.878c3.986,0.554,9.744,1.046,16.663,1.46C327.011,7.667,345.506,8.23,364,8.616C400.994,9.382,437.999,9.445,437.999,9.445z"/>
+        <circle cx="219" cy="9.5" r="5" fill="none" stroke="currentColor" stroke-width="1.4"/>
+        <circle cx="219" cy="9.5" r="1.8"/>
+        <polyline fill="none" stroke="currentColor" stroke-width="1.6" points="170,9.5 195,4 219,9.5 243,15 268,9.5"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- ============ ADDRESS / TUBE ============ -->
+  <h2 class="section-title">Direction &amp; Approach</h2>
+  <p class="section-sub">Mayfair, between Hanover Square and Maddox Street</p>
+
+  <section class="address-grid">
+    <article class="card">
+      <span class="corner tl"><svg viewBox="0 0 20 20"><path d="M 0 0 L 20 0 Q 14 6 10 10 Q 6 14 0 20 Z"/></svg></span>
+      <span class="corner tr"><svg viewBox="0 0 20 20"><path d="M 0 0 L 20 0 Q 14 6 10 10 Q 6 14 0 20 Z"/></svg></span>
+      <span class="corner bl"><svg viewBox="0 0 20 20"><path d="M 0 0 L 20 0 Q 14 6 10 10 Q 6 14 0 20 Z"/></svg></span>
+      <span class="corner br"><svg viewBox="0 0 20 20"><path d="M 0 0 L 20 0 Q 14 6 10 10 Q 6 14 0 20 Z"/></svg></span>
+
+      <div class="seal" aria-hidden="true">
+        <svg viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="19" cy="19" r="17" fill="none" stroke="#2a8a8a" stroke-width="1.4"/>
+          <g transform="translate(19,19)" fill="#1e3a5f">
+            <path d="M 0 -10 L 2.5 -2.5 L 10 0 L 2.5 2.5 L 0 10 L -2.5 2.5 L -10 0 L -2.5 -2.5 Z"/>
+          </g>
+          <g transform="translate(19,19) rotate(45)" fill="#c9a23a" opacity="0.8">
+            <path d="M 0 -10 L 2 -2 L 10 0 L 2 2 L 0 10 L -2 2 L -10 0 L -2 -2 Z"/>
+          </g>
+        </svg>
+      </div>
+      <h3>The Address</h3>
+      <div class="body">
+        <p><strong>Chehel Sotoun</strong><br>
+        14 Pollen Street<br>
+        Mayfair, London<br>
+        W1S 1NE</p>
+        <span class="label">By Telephone</span>
+        <p>+44 (0)20 7493 1648<br>
+        <em>reservations from 10:00</em></p>
+        <span class="label">By Hand</span>
+        <p>The turquoise lantern marks the door; the bell is brass and small.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <span class="corner tl"><svg viewBox="0 0 20 20"><path d="M 0 0 L 20 0 Q 14 6 10 10 Q 6 14 0 20 Z"/></svg></span>
+      <span class="corner tr"><svg viewBox="0 0 20 20"><path d="M 0 0 L 20 0 Q 14 6 10 10 Q 6 14 0 20 Z"/></svg></span>
+      <span class="corner bl"><svg viewBox="0 0 20 20"><path d="M 0 0 L 20 0 Q 14 6 10 10 Q 6 14 0 20 Z"/></svg></span>
+      <span class="corner br"><svg viewBox="0 0 20 20"><path d="M 0 0 L 20 0 Q 14 6 10 10 Q 6 14 0 20 Z"/></svg></span>
+
+      <div class="seal" aria-hidden="true">
+        <svg viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="19" cy="19" r="17" fill="none" stroke="#2a8a8a" stroke-width="1.4"/>
+          <circle cx="19" cy="19" r="9" fill="none" stroke="#7a1f2e" stroke-width="2"/>
+          <rect x="6" y="17" width="26" height="4" fill="#1e3a5f"/>
+        </svg>
+      </div>
+      <h3>By Underground</h3>
+      <div class="body">
+        <p><strong>Oxford Circus</strong> — Bakerloo, Central, Victoria.<br>
+        Four minutes on foot: south down Regent Street, then west into Hanover Square and out by the lane at its south-west corner.</p>
+        <span class="label">Also Within Reach</span>
+        <p><em>Bond Street</em> (Elizabeth, Jubilee &amp; Central), seven minutes east along Brook Street.<br>
+        <em>Piccadilly Circus</em>, eight minutes south.</p>
+        <span class="label">By Cab</span>
+        <p>Pollen Street is one-way; ask for the Maddox Street end and walk the last fifty paces.</p>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ DIVIDER ============ -->
+  <div class="divider" aria-hidden="true">
+    <svg viewBox="0 0 437.999 18.893" xmlns="http://www.w3.org/2000/svg">
+      <g>
+        <path d="M0,9.445c0,0,37.005-0.063,73.998-0.829c18.495-0.386,36.989-0.949,50.831-1.785c6.919-0.414,12.677-0.906,16.663-1.46c1.99-0.28,3.539-0.582,4.535-0.878c0.502-0.146,0.844-0.297,1.049-0.405c0.157-0.107,0.238-0.162,0.238-0.162l0.42-0.287l0.656,0.656l-0.369,0.338c0,0-0.154,0.142-0.456,0.324c-0.291,0.154-0.714,0.331-1.256,0.484c-1.085,0.314-2.667,0.608-4.686,0.879c-4.037,0.533-9.811,0.985-16.745,1.354c-13.868,0.744-32.369,1.183-50.87,1.443C37.003,9.632,0,9.445,0,9.445z"/>
+        <path d="M437.999,9.445c0,0-37.004,0.187-74.007-0.329c-18.501-0.261-37.002-0.699-50.869-1.443c-6.935-0.368-12.708-0.82-16.745-1.354c-2.019-0.271-3.601-0.565-4.687-0.879c-0.541-0.153-0.965-0.33-1.256-0.484c-0.302-0.183-0.456-0.324-0.456-0.324l-0.369-0.338l0.656-0.656l0.42,0.287c0,0,0.081,0.055,0.238,0.162c0.204,0.108,0.546,0.26,1.048,0.405c0.996,0.296,2.545,0.598,4.535,0.878c3.986,0.554,9.744,1.046,16.663,1.46C327.011,7.667,345.506,8.23,364,8.616C400.994,9.382,437.999,9.445,437.999,9.445z"/>
+        <circle cx="219" cy="9.5" r="5" fill="none" stroke="currentColor" stroke-width="1.4"/>
+        <circle cx="219" cy="9.5" r="1.8"/>
+        <polyline fill="none" stroke="currentColor" stroke-width="1.6" points="170,9.5 195,4 219,9.5 243,15 268,9.5"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- ============ HOURS ============ -->
+  <h2 class="section-title">Hours of Service</h2>
+  <p class="section-sub">The kitchen keeps two services: a quiet midday, and the long evening</p>
+
+  <section class="hours-wrap">
+    <table class="hours">
+      <tbody>
+        <tr>
+          <th>Monday</th>
+          <td class="service">—</td>
+          <td class="time closed">Closed all day</td>
+        </tr>
+        <tr>
+          <th>Tuesday</th>
+          <td class="service">Dinner</td>
+          <td class="time">18:00 — 23:00</td>
+        </tr>
+        <tr>
+          <th>Wednesday</th>
+          <td class="service">Dinner</td>
+          <td class="time">18:00 — 23:00</td>
+        </tr>
+        <tr>
+          <th>Thursday</th>
+          <td class="service">Dinner</td>
+          <td class="time">18:00 — 23:00</td>
+        </tr>
+        <tr>
+          <th>Friday</th>
+          <td class="service">Lunch &middot; Dinner</td>
+          <td class="time">12:30 — 14:30 &nbsp;&middot;&nbsp; 18:00 — 23:00</td>
+        </tr>
+        <tr>
+          <th>Saturday</th>
+          <td class="service">Lunch &middot; Dinner</td>
+          <td class="time">12:30 — 14:30 &nbsp;&middot;&nbsp; 18:00 — 23:00</td>
+        </tr>
+        <tr>
+          <th>Sunday</th>
+          <td class="service">Dinner</td>
+          <td class="time">18:00 — 23:00</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="closures">
+      <p><strong>Closed Mondays</strong>, and the <strong>first week of August</strong> (the kitchen's annual journey to Isfahan, when the brigade walks the bazaar of Naqsh-e Jahan and brings back the year's saffron, dried limes and rosewater).</p>
+    </div>
+  </section>
+
+  <!-- ============ NOTES ============ -->
+  <section class="notes-grid">
+    <article class="note">
+      <h4>On Dress</h4>
+      <p>Considered, unfussed. We have no jacket rule and no list of forbidden things; we ask only that what you wear feels like care taken. <em>The room is candlelit and tiled — most guests dress for the room rather than against it.</em></p>
+    </article>
+    <article class="note">
+      <h4>On Children</h4>
+      <p>Welcome at lunch on Friday and Saturday, where they tend to be happiest among the platters of rice and herbs. <em>At dinner, by quiet arrangement only</em> — please mention them when you reserve, and we will set the corner banquette aside.</p>
+    </article>
+  </section>
+
+</main>
+
+<footer>
+  <div class="girih" aria-hidden="true"></div>
+  <div class="inner">
+    <div class="cols">
+      <div>
+        <h5>Address</h5>
+        <p>14 Pollen Street<br>Mayfair, London<br>W1S 1NE</p>
+      </div>
+      <div>
+        <h5>Hours</h5>
+        <p>Lunch &middot; Fri &amp; Sat &middot; 12:30—14:30<br>
+        Dinner &middot; Tue—Sun &middot; 18:00—23:00<br>
+        Closed Mondays</p>
+      </div>
+      <div>
+        <h5>Attribution</h5>
+        <p>Chehel Sotoun &middot; named for the pavilion of Shah Abbas II, Isfahan, 1647</p>
+      </div>
+    </div>
+    <div class="filet" aria-hidden="true">
+      <span class="finial"></span>
+      <span class="rule"></span>
+      <span class="finial"></span>
+    </div>
+    <p class="attrib">© Chehel Sotoun &middot; The Hall of Forty Columns</p>
+  </div>
+</footer>
+
+</body>
+</html>

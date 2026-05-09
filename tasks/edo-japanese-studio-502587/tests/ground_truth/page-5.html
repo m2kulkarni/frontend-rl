@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Journal — Notes from the Workshop · Hakubai Atelier</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), sans-serif;
+    margin: 0;
+    padding: 0;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* ---------- NAV ---------- */
+  .topbar {
+    padding: 36px 80px 0 80px;
+    display: flex;
+    align-items: center;
+    gap: 48px;
+  }
+  .mark {
+    width: 28px; height: 28px;
+    flex-shrink: 0;
+  }
+  .mark svg { width: 100%; height: 100%; display: block; }
+  nav.primary {
+    display: flex;
+    gap: 36px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-weight: 500;
+  }
+  nav.primary a { padding-bottom: 4px; color: var(--primary); }
+  nav.primary a[aria-current="page"] {
+    border-bottom: 1px solid var(--primary);
+  }
+  .nav-rule {
+    margin: 24px 80px 0 80px;
+    height: 1px;
+    background: var(--primary);
+  }
+
+  /* ---------- HEADER ---------- */
+  .page-head {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 96px 80px 64px 80px;
+    gap: 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .page-head::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("svg/seigaiha-waves.svg");
+    background-size: 420px;
+    background-repeat: repeat;
+    opacity: 0.08;
+    pointer-events: none;
+  }
+  .eyebrow {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: var(--text-emphasis);
+    margin-bottom: 28px;
+    position: relative;
+  }
+  .page-head h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 500;
+    font-size: 64px;
+    line-height: 1.08;
+    margin: 0;
+    letter-spacing: -0.01em;
+    position: relative;
+  }
+  .page-head h1 em {
+    font-style: normal;
+    color: var(--text-emphasis);
+  }
+  .head-meta {
+    align-self: end;
+    position: relative;
+    font-size: 14px;
+    line-height: 1.8;
+    max-width: 420px;
+    color: var(--primary);
+  }
+  .head-meta .label {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  /* ---------- INDEX BAR ---------- */
+  .index-bar {
+    display: grid;
+    grid-template-columns: 200px 1fr 200px;
+    align-items: center;
+    padding: 0 80px;
+    margin-top: 24px;
+    margin-bottom: 80px;
+    gap: 32px;
+  }
+  .index-bar .count {
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  .index-bar .count b {
+    color: var(--accent);
+    font-weight: 500;
+    font-family: var(--font-display);
+    font-size: 18px;
+  }
+  .index-bar .divider {
+    height: 32px;
+    overflow: hidden;
+    opacity: 0.7;
+  }
+  .index-bar .divider svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .index-bar .filter {
+    text-align: right;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--text-emphasis);
+  }
+
+  /* ---------- ENTRIES ---------- */
+  .journal {
+    padding: 0 80px;
+    display: grid;
+    grid-template-columns: 220px 1fr 220px;
+    column-gap: 80px;
+  }
+
+  .entry {
+    grid-column: 1 / 4;
+    display: grid;
+    grid-template-columns: 220px 1fr 220px;
+    column-gap: 80px;
+    padding: 40px 0 48px 0;
+    border-top: 1px solid rgba(12,12,12,0.18);
+  }
+  .entry:first-child { border-top: none; padding-top: 0; }
+
+  .entry .date {
+    font-family: var(--font-display), serif;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--text-emphasis);
+    letter-spacing: 0.02em;
+  }
+  .entry .date .day {
+    display: block;
+    font-size: 42px;
+    line-height: 1;
+    color: var(--primary);
+    margin-bottom: 8px;
+  }
+  .entry .date .my {
+    display: block;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-family: var(--font-body);
+  }
+
+  .entry .body h2 {
+    font-family: var(--font-display), serif;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 1.3;
+    margin: 0 0 16px 0;
+    letter-spacing: -0.005em;
+  }
+  .entry .body p {
+    font-size: 15px;
+    line-height: 1.75;
+    margin: 0;
+    max-width: 60ch;
+  }
+  .entry .body p + p { margin-top: 14px; }
+
+  .entry .tag {
+    text-align: right;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    align-self: start;
+    padding-top: 8px;
+  }
+  .entry .tag .num {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 14px;
+    color: var(--primary);
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+  }
+
+  /* feature: cinnabar accent on first entry's rule */
+  .entry.feature {
+    position: relative;
+  }
+  .entry.feature::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 64px;
+    height: 2px;
+    background: var(--accent);
+    margin-top: -1px;
+  }
+  .entry:first-child.feature::before { display: none; }
+  .entry.feature .body h2 {
+    color: var(--text-emphasis);
+  }
+
+  /* ornament inline between groups */
+  .interlude {
+    grid-column: 1 / 4;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 28px 0;
+    color: var(--text-emphasis);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+  }
+  .interlude .line {
+    flex: 1;
+    height: 1px;
+    background: var(--primary);
+    opacity: 0.4;
+  }
+  .interlude .gly {
+    width: 18px; height: 18px;
+    opacity: 0.55;
+  }
+  .interlude .gly svg { width: 100%; height: 100%; display: block; }
+
+  /* ---------- SUBSCRIBE ---------- */
+  .subscribe {
+    margin: 120px 80px 80px 80px;
+    display: grid;
+    grid-template-columns: 1fr 480px;
+    gap: 96px;
+    padding: 56px 0;
+    border-top: 1px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
+  }
+  .subscribe h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 1.2;
+    margin: 0 0 16px 0;
+    max-width: 18ch;
+  }
+  .subscribe p { margin: 0; max-width: 50ch; line-height: 1.7; }
+  .subscribe aside {
+    align-self: center;
+    font-size: 13px;
+    line-height: 1.8;
+  }
+  .subscribe aside .label {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    padding: 96px 80px 56px 80px;
+  }
+  .seal-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+  .seal {
+    width: 36px; height: 36px;
+  }
+  .seal svg { width: 100%; height: 100%; display: block; }
+  .footer-rule {
+    height: 1px;
+    background: var(--primary);
+    margin-bottom: 40px;
+  }
+  .footer-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 64px;
+    font-size: 13px;
+    line-height: 1.75;
+  }
+  .footer-cols h4 {
+    font-family: var(--font-body);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    margin: 0 0 12px 0;
+    color: var(--text-emphasis);
+    font-weight: 600;
+  }
+  .footer-cols .col-mid { text-align: left; }
+  .footer-cols .col-right { text-align: left; }
+  .footer-base {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(12,12,12,0.4);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    display: flex;
+    justify-content: space-between;
+    color: var(--primary);
+  }
+
+  /* SVG inline kamon helper */
+  .mon-svg { width: 100%; height: 100%; display: block; }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="topbar">
+  <a href="page-1.html" class="mark" aria-label="Hakubai Atelier — home">
+    <!-- Umebachi kamon, recoloured to sumi on field -->
+    <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="344" cy="344" r="344" fill="#0c0c0c"/>
+      <path fill="#f5efde" d="M 226.13364,612.57579 C 207.8052,610.64503 189.07085,603.27797 174.07991,592.10629 C 168.2372,587.75214 158.29322,577.8608 153.78698,571.9208 C 132.5626,543.94339 126.61588,507.85248 137.79008,474.83496 C 141.25861,464.58614 146.78359,453.9662 152.97675,445.64361 C 157.16039,440.02149 167.66572,429.43802 173.42393,425.04434 C 201.20575,403.84602 237.50693,397.85655 270.50977,409.02578 C 286.664,414.49289 299.71221,422.76016 311.9042,435.25303 C 323.67395,447.31324 331.05394,459.27791 336.31895,474.83496 C 346.30781,504.35006 342.79857,535.57031 326.40165,563.06499 C 318.72451,575.93817 304.73233,589.92909 291.82929,597.63424 C 271.43302,609.81403 248.79421,614.96291 226.13364,612.57579 z M 439.98488,612.57579 C 421.65644,610.64503 402.9221,603.27797 387.93116,592.10629 C 382.08845,587.75214 372.14446,577.8608 367.63822,571.9208 C 346.41385,543.94339 340.46712,507.85248 351.64132,474.83496 C 355.10985,464.58614 360.63483,453.9662 366.828,445.64361 C 371.01163,440.02149 381.51696,429.43802 387.27517,425.04434 C 415.05699,403.84602 451.35818,397.85655 484.36101,409.02578 C 500.51524,414.49289 513.56346,422.76016 525.75544,435.25303 C 537.52519,447.31324 544.90518,459.27791 550.17019,474.83496 C 560.15906,504.35006 556.64982,535.57031 540.25289,563.06499 C 532.57575,575.93817 518.58357,589.92909 505.68054,597.63424 C 485.28426,609.81403 462.64546,614.96291 439.98488,612.57579 z M 159.87911,409.8763 C 141.55067,407.94553 122.81632,400.57848 107.82539,389.4068 C 101.98268,385.05265 92.038692,375.16131 87.532453,369.22131 C 66.308078,341.2439 60.361354,305.15299 71.535554,272.13546 C 75.004083,261.88664 80.529061,251.26671 86.722226,242.94411 C 90.905865,237.322 101.4112,226.73853 107.1694,222.34485 C 127.75958,206.63396 154.14627,198.87562 179.1638,201.17674 C 189.54676,202.13177 195.42739,203.33865 204.25524,206.32629 C 220.40947,211.7934 233.45769,220.06067 245.64967,232.55353 C 257.41942,244.61375 264.79941,256.57842 270.06442,272.13546 C 280.05329,301.65056 276.54405,332.87082 260.14712,360.3655 C 252.46998,373.23868 238.4778,387.2296 225.57477,394.93475 C 205.17849,407.11454 182.53968,412.26341 159.87911,409.8763 z M 506.23941,409.8763 C 487.91097,407.94553 469.17662,400.57848 454.18568,389.4068 C 448.34297,385.05265 438.39899,375.16131 433.89275,369.22131 C 412.66837,341.2439 406.72165,305.15299 417.89585,272.13546 C 421.36438,261.88664 426.88936,251.26671 433.08252,242.94411 C 437.26616,237.322 447.77149,226.73853 453.5297,222.34485 C 474.11988,206.63396 500.50657,198.87562 525.5241,201.17674 C 535.90705,202.13177 541.78769,203.33865 550.61554,206.32629 C 566.76977,211.7934 579.81798,220.06067 592.00997,232.55353 C 603.77972,244.61375 611.15971,256.57842 616.42472,272.13546 C 626.4136,301.65056 622.90434,332.87082 606.50742,360.3655 C 598.83028,373.23868 584.8381,387.2296 571.93506,394.93475 C 551.53879,407.11454 528.89998,412.26341 506.23941,409.8763 z M 333.05926,283.9271 C 314.73082,281.99634 295.99647,274.62928 281.00554,263.4576 C 275.16282,259.10345 265.21884,249.21211 260.7126,243.27211 C 239.48823,215.2947 233.5415,179.20379 244.7157,146.18627 C 248.18423,135.93744 253.70921,125.31751 259.90237,116.99491 C 264.08601,111.3728 274.59134,100.78933 280.34955,96.395647 C 308.13137,75.197328 344.43255,69.207858 377.43539,80.377088 C 393.58962,85.844198 406.63783,94.111468 418.82982,106.60433 C 430.59957,118.66455 437.97956,130.62922 443.24457,146.18627 C 453.23344,175.70137 449.7242,206.92162 433.32727,234.4163 C 425.65013,247.28948 411.65795,261.2804 398.75492,268.98555 C 378.35864,281.16534 355.71983,286.31422 333.05926,283.9271 z"/>
+    </svg>
+  </a>
+  <nav class="primary">
+    <a href="page-1.html">Atelier</a>
+    <a href="page-2.html">Works</a>
+    <a href="page-3.html">Practice</a>
+    <a href="page-4.html">Materials</a>
+    <a href="page-5.html" aria-current="page">Journal</a>
+    <a href="page-6.html">Studio</a>
+  </nav>
+</header>
+<div class="nav-rule"></div>
+
+<!-- ============ HEAD ============ -->
+<section class="page-head">
+  <div>
+    <div class="eyebrow">Vol. V — Notes from the Workshop</div>
+    <h1>Sawdust, gampi,<br>and the slow <em>turn of the year.</em></h1>
+  </div>
+  <div class="head-meta">
+    <span class="label">About this journal</span>
+    Brief, dated entries kept by the studio principals between visits to clients and suppliers. We post when something is worth noting — a sample arriving, a jig being cut, a week closed for festival. No commentary, no photography, no hurry.
+  </div>
+</section>
+
+<div class="index-bar">
+  <div class="count"><b>08</b> &nbsp; entries · 2023 — 2024</div>
+  <div class="divider" aria-hidden="true">
+    <svg viewBox="0 0 600 60" preserveAspectRatio="none">
+      <line x1="0" y1="30" x2="600" y2="30" stroke="#0c0c0c" stroke-width="1"/>
+    </svg>
+  </div>
+  <div class="filter">All · Workshop · Materials</div>
+</div>
+
+<!-- ============ ENTRIES ============ -->
+<section class="journal">
+
+  <article class="entry feature">
+    <div class="date">
+      <span class="day">14</span>
+      <span class="my">March 2024</span>
+    </div>
+    <div class="body">
+      <h2>The Kamigyō ranma is too dense; reducing kumiko from 144 to 96.</h2>
+      <p>First mock-up arrived on the bench yesterday and the screen reads as a wall — light cannot pass. Counted the cells and we were at 144, twice what the original 1962 drawing called for. We will retool the jig tonight and try 96, with the asanoha pattern loosened at the upper register only. The client is patient; the room, north-facing, is not.</p>
+    </div>
+    <div class="tag">
+      <span class="num">№ 008</span>
+      Workshop
+    </div>
+  </article>
+
+  <article class="entry">
+    <div class="date">
+      <span class="day">02</span>
+      <span class="my">February 2024</span>
+    </div>
+    <div class="body">
+      <h2>Hinoki billets from Kiso arrived — the grain is closer than last spring's lot.</h2>
+      <p>Three bundles, 38 pieces total, milled to 24 × 24 × 1820 mm by Tanihata Lumber. Moisture meter reads 11.4% on average; we will rest them on the south wall for six weeks before any cutting. The pale band near the sapwood is wider than I would have liked — likely a younger stand. Suitable for interior frames, not for the andon shoulders.</p>
+    </div>
+    <div class="tag">
+      <span class="num">№ 007</span>
+      Materials
+    </div>
+  </article>
+
+  <article class="entry">
+    <div class="date">
+      <span class="day">11</span>
+      <span class="my">January 2024</span>
+    </div>
+    <div class="body">
+      <h2>Hatsu-shigoto: the first cut of the year is a small box for Mrs. Yoshikawa.</h2>
+      <p>Tradition holds that the first work of the year sets the year's tone, so we keep it small and exact. A walnut document box, 280 × 190 × 60 mm, mitred with hidden splines, finished in two coats of raw lacquer. Delivered on foot to Teramachi by mid-afternoon. The lid closes with the soft sound one hopes for.</p>
+    </div>
+    <div class="tag">
+      <span class="num">№ 006</span>
+      Workshop
+    </div>
+  </article>
+
+  <div class="interlude">
+    <span class="line"></span>
+    <span class="gly" aria-hidden="true">
+      <svg viewBox="0 0 600 600"><polygon points="300,60 540,300 300,540 60,300" fill="none" stroke="#0c0c0c" stroke-width="14"/><polygon points="300,170 430,300 300,430 170,300" fill="none" stroke="#0c0c0c" stroke-width="14"/></svg>
+    </span>
+    <span>2023</span>
+    <span class="line"></span>
+  </div>
+
+  <article class="entry">
+    <div class="date">
+      <span class="day">02</span>
+      <span class="my">December 2023</span>
+    </div>
+    <div class="body">
+      <h2>Iwano-san sent the gampi sheets for the andon shades.</h2>
+      <p>Forty-eight sheets, 630 × 940 mm, hand-couched at the Echizen workshop. The winter batch is paler than autumn's, as expected — the bark stripped in October still carries a touch of the leaf colour. We will use the lighter sheets for the upper panels of the four floor lanterns destined for the Nishijin teahouse, and reserve the warmer ones for the lower registers.</p>
+    </div>
+    <div class="tag">
+      <span class="num">№ 005</span>
+      Materials
+    </div>
+  </article>
+
+  <article class="entry">
+    <div class="date">
+      <span class="day">28</span>
+      <span class="my">October 2023</span>
+    </div>
+    <div class="body">
+      <h2>Visited Nakagawa Mokkougei in Sakyō to discuss the kiri tansu commission.</h2>
+      <p>Three hours over tea looking at drawer fronts. Their position on book-matched paulownia is firm and persuasive; we will take their counsel and abandon the quartersawn proposal. The client's drawing of his grandmother's cabinet is on the wall above my bench. We are not copying it; we are answering it.</p>
+    </div>
+    <div class="tag">
+      <span class="num">№ 004</span>
+      Workshop
+    </div>
+  </article>
+
+  <article class="entry">
+    <div class="date">
+      <span class="day">19</span>
+      <span class="my">August 2023</span>
+    </div>
+    <div class="body">
+      <h2>Closed for obon week.</h2>
+      <p>The studio is shut from 13 to 20 August. We are at the family graves in Ōhara. Correspondence will resume on the 21st; nothing in the workshop is on a clamp.</p>
+    </div>
+    <div class="tag">
+      <span class="num">№ 003</span>
+      Studio
+    </div>
+  </article>
+
+  <article class="entry">
+    <div class="date">
+      <span class="day">06</span>
+      <span class="my">June 2023</span>
+    </div>
+    <div class="body">
+      <h2>The Murin-an commission is delivered and installed.</h2>
+      <p>Two folding screens of kumiko backed with usuyō washi, each 1700 × 900 mm, completed over fourteen months and 312 logged workshop hours. The garden side carries an asanoha; the room side, a plain goma-gara. Final fee: ¥2,840,000 inclusive of installation. The screens will outlast everyone who saw them today.</p>
+    </div>
+    <div class="tag">
+      <span class="num">№ 002</span>
+      Workshop
+    </div>
+  </article>
+
+  <article class="entry">
+    <div class="date">
+      <span class="day">22</span>
+      <span class="my">April 2023</span>
+    </div>
+    <div class="body">
+      <h2>A new apprentice: Sora Hayashida joins us from the Takayama programme.</h2>
+      <p>Two-year placement, beginning Monday. She has good hands and a steady eye on the marking knife — both are rarer than they should be. Her first task will be sharpening the studio's twenty-three chisels in sequence, a week's work, after which she will rebuild the planing beam. We pay ¥220,000 monthly with lodging in the Imadegawa annex.</p>
+    </div>
+    <div class="tag">
+      <span class="num">№ 001</span>
+      Studio
+    </div>
+  </article>
+
+</section>
+
+<!-- ============ SUBSCRIBE ============ -->
+<section class="subscribe">
+  <div>
+    <h3>The journal is also sent by post, four times a year.</h3>
+    <p>A folded letter on Iwano gampi, set in Shippori Mincho, hand-addressed and stamped. No digital edition, no archive online beyond this page. To be added to the list, write to the studio at the address opposite. The mailing is small; we keep it that way.</p>
+  </div>
+  <aside>
+    <span class="label">To request the postal edition</span>
+    Hakubai Atelier<br>
+    Attn. Journal · 27-3 Demizu-chō<br>
+    Kamigyō-ku, Kyoto 602-0853<br><br>
+    journal@hakubai-atelier.jp<br>
+    Issued: Risshun · Rikka · Risshū · Rittō
+  </aside>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="seal-wrap">
+    <span class="seal" aria-hidden="true">
+      <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="344" cy="344" r="344" fill="#0c0c0c"/>
+        <path fill="#f5efde" d="M 226.13364,612.57579 C 207.8052,610.64503 189.07085,603.27797 174.07991,592.10629 C 168.2372,587.75214 158.29322,577.8608 153.78698,571.9208 C 132.5626,543.94339 126.61588,507.85248 137.79008,474.83496 C 141.25861,464.58614 146.78359,453.9662 152.97675,445.64361 C 157.16039,440.02149 167.66572,429.43802 173.42393,425.04434 C 201.20575,403.84602 237.50693,397.85655 270.50977,409.02578 C 286.664,414.49289 299.71221,422.76016 311.9042,435.25303 C 323.67395,447.31324 331.05394,459.27791 336.31895,474.83496 C 346.30781,504.35006 342.79857,535.57031 326.40165,563.06499 C 318.72451,575.93817 304.73233,589.92909 291.82929,597.63424 C 271.43302,609.81403 248.79421,614.96291 226.13364,612.57579 z M 439.98488,612.57579 C 421.65644,610.64503 402.9221,603.27797 387.93116,592.10629 C 382.08845,587.75214 372.14446,577.8608 367.63822,571.9208 C 346.41385,543.94339 340.46712,507.85248 351.64132,474.83496 C 355.10985,464.58614 360.63483,453.9662 366.828,445.64361 C 371.01163,440.02149 381.51696,429.43802 387.27517,425.04434 C 415.05699,403.84602 451.35818,397.85655 484.36101,409.02578 C 500.51524,414.49289 513.56346,422.76016 525.75544,435.25303 C 537.52519,447.31324 544.90518,459.27791 550.17019,474.83496 C 560.15906,504.35006 556.64982,535.57031 540.25289,563.06499 C 532.57575,575.93817 518.58357,589.92909 505.68054,597.63424 C 485.28426,609.81403 462.64546,614.96291 439.98488,612.57579 z M 159.87911,409.8763 C 141.55067,407.94553 122.81632,400.57848 107.82539,389.4068 C 101.98268,385.05265 92.038692,375.16131 87.532453,369.22131 C 66.308078,341.2439 60.361354,305.15299 71.535554,272.13546 C 75.004083,261.88664 80.529061,251.26671 86.722226,242.94411 C 90.905865,237.322 101.4112,226.73853 107.1694,222.34485 C 127.75958,206.63396 154.14627,198.87562 179.1638,201.17674 C 189.54676,202.13177 195.42739,203.33865 204.25524,206.32629 C 220.40947,211.7934 233.45769,220.06067 245.64967,232.55353 C 257.41942,244.61375 264.79941,256.57842 270.06442,272.13546 C 280.05329,301.65056 276.54405,332.87082 260.14712,360.3655 C 252.46998,373.23868 238.4778,387.2296 225.57477,394.93475 C 205.17849,407.11454 182.53968,412.26341 159.87911,409.8763 z M 506.23941,409.8763 C 487.91097,407.94553 469.17662,400.57848 454.18568,389.4068 C 448.34297,385.05265 438.39899,375.16131 433.89275,369.22131 C 412.66837,341.2439 406.72165,305.15299 417.89585,272.13546 C 421.36438,261.88664 426.88936,251.26671 433.08252,242.94411 C 437.26616,237.322 447.77149,226.73853 453.5297,222.34485 C 474.11988,206.63396 500.50657,198.87562 525.5241,201.17674 C 535.90705,202.13177 541.78769,203.33865 550.61554,206.32629 C 566.76977,211.7934 579.81798,220.06067 592.00997,232.55353 C 603.77972,244.61375 611.15971,256.57842 616.42472,272.13546 C 626.4136,301.65056 622.90434,332.87082 606.50742,360.3655 C 598.83028,373.23868 584.8381,387.2296 571.93506,394.93475 C 551.53879,407.11454 528.89998,412.26341 506.23941,409.8763 z M 333.05926,283.9271 C 314.73082,281.99634 295.99647,274.62928 281.00554,263.4576 C 275.16282,259.10345 265.21884,249.21211 260.7126,243.27211 C 239.48823,215.2947 233.5415,179.20379 244.7157,146.18627 C 248.18423,135.93744 253.70921,125.31751 259.90237,116.99491 C 264.08601,111.3728 274.59134,100.78933 280.34955,96.395647 C 308.13137,75.197328 344.43255,69.207858 377.43539,80.377088 C 393.58962,85.844198 406.63783,94.111468 418.82982,106.60433 C 430.59957,118.66455 437.97956,130.62922 443.24457,146.18627 C 453.23344,175.70137 449.7242,206.92162 433.32727,234.4163 C 425.65013,247.28948 411.65795,261.2804 398.75492,268.98555 C 378.35864,281.16534 355.71983,286.31422 333.05926,283.9271 z"/>
+      </svg>
+    </span>
+  </div>
+  <div class="footer-rule"></div>
+
+  <div class="footer-cols">
+    <div class="col-left">
+      <h4>Studio</h4>
+      Hakubai Atelier<br>
+      27-3 Demizu-chō<br>
+      Kamigyō-ku, Kyoto 602-0853<br>
+      Japan
+    </div>
+    <div class="col-mid">
+      <h4>Contact &amp; Hours</h4>
+      hello@hakubai-atelier.jp<br>
+      +81 75 432 1198<br><br>
+      Tue — Fri · 10:00 — 17:00<br>
+      Saturday by appointment<br>
+      Closed Sunday &amp; Monday
+    </div>
+    <div class="col-right">
+      <h4>Colophon</h4>
+      Set in Shippori Mincho<br>
+      and Inter, on a kraft field.<br><br>
+      Kamon renderings adapted from<br>
+      Wikimedia Commons contributors,<br>
+      released under CC BY-SA 4.0.
+    </div>
+  </div>
+
+  <div class="footer-base">
+    <span>Founded 1998 · Kyoto</span>
+    <span>Kamon &amp; ornament · CC BY-SA 4.0</span>
+    <span>© 2024 Hakubai Atelier</span>
+  </div>
+</footer>
+
+</body>
+</html>

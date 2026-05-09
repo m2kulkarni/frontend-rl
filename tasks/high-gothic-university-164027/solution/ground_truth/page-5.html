@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>The Calendar & Public Lectures, Hilary 2025 — Université Saint-Aubain de Vézelay</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  /* ---------- Base ---------- */
+  body{
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    margin:0;
+    line-height:1.55;
+    font-size:16px;
+  }
+  *{box-sizing:border-box;}
+  a{color:inherit;text-decoration:none;}
+
+  /* Diaper background watermark */
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background-image:url("svg/quatrefoil-in-square.svg");
+    background-size:280px 280px;
+    opacity:0.04;
+    pointer-events:none;
+    z-index:0;
+  }
+
+  /* ---------- Header / Nav ---------- */
+  header.masthead{
+    position:relative;
+    z-index:2;
+    padding:28px 60px 0;
+    text-align:center;
+  }
+  .wordmark{
+    font-family:var(--font-display), serif;
+    font-weight:500;
+    font-size:22px;
+    letter-spacing:0.32em;
+    text-transform:uppercase;
+    color:var(--primary);
+  }
+  .wordmark .amp{ color:var(--accent); font-style:italic; letter-spacing:0; }
+  .sub-mark{
+    font-family:var(--font-display), serif;
+    font-style:italic;
+    font-size:13px;
+    color:var(--secondary);
+    letter-spacing:0.08em;
+    margin-top:4px;
+  }
+  .cobalt-rule{
+    height:1px;
+    background:var(--secondary);
+    margin:18px auto 0;
+    max-width:1280px;
+  }
+
+  nav.arcade{
+    display:flex;
+    justify-content:center;
+    align-items:flex-end;
+    gap:0;
+    padding:14px 0 0;
+    max-width:1280px;
+    margin:0 auto;
+  }
+  nav.arcade .bay{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:0 22px 10px;
+    position:relative;
+  }
+  nav.arcade .bay + .bay::before{
+    content:"";
+    position:absolute;
+    left:-4px; top:32px;
+    width:8px; height:8px;
+    background:var(--accent);
+    transform:rotate(45deg);
+    box-shadow:0 0 0 1px var(--primary);
+  }
+  nav.arcade .arch{
+    width:42px; height:30px;
+    margin-bottom:4px;
+    position:relative;
+  }
+  nav.arcade .arch svg{ width:100%; height:100%; display:block; }
+  nav.arcade a{
+    font-family:var(--font-display),serif;
+    font-variant:small-caps;
+    font-size:14px;
+    letter-spacing:0.12em;
+    color:var(--primary);
+    padding:4px 2px;
+    transition:color 0.2s;
+    position:relative;
+  }
+  nav.arcade .bay:hover .arch-fill{ opacity:0.18; }
+  nav.arcade .bay:hover a{ color:var(--accent); }
+  nav.arcade a[aria-current="page"]{
+    color:var(--secondary);
+    border-bottom:1px solid var(--accent);
+  }
+  nav.arcade .bay[data-current="true"] .arch-fill{ opacity:0.18; }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    z-index:2;
+    padding:60px 60px 30px;
+    text-align:center;
+  }
+  .hero-frame{
+    max-width:760px;
+    margin:0 auto;
+    position:relative;
+    padding:80px 60px 60px;
+  }
+  .hero-frame::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:url("svg/arch-pointed.svg") center top / contain no-repeat;
+    opacity:0.85;
+    pointer-events:none;
+  }
+  .hero-eyebrow{
+    font-family:var(--font-display),serif;
+    font-variant:small-caps;
+    letter-spacing:0.4em;
+    color:var(--secondary);
+    font-size:13px;
+    margin-bottom:18px;
+  }
+  .hero h1{
+    font-family:var(--font-display), serif;
+    font-weight:400;
+    font-size:54px;
+    line-height:1.05;
+    color:var(--primary);
+    margin:0 0 24px;
+    letter-spacing:0.005em;
+  }
+  .hero h1 em{
+    font-style:italic;
+    color:var(--secondary);
+  }
+  .hero-lede{
+    font-family:var(--font-display),serif;
+    font-style:italic;
+    font-size:18px;
+    color:var(--text);
+    max-width:560px;
+    margin:0 auto;
+  }
+  .hero-seal{
+    width:64px; height:64px;
+    margin:30px auto 0;
+    opacity:0.85;
+  }
+  .hero-seal svg{ width:100%; height:100%; fill:var(--primary); }
+
+  /* ---------- Section divider ---------- */
+  .divider{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:24px;
+    margin:50px auto 30px;
+    max-width:1100px;
+    position:relative;
+    z-index:2;
+  }
+  .divider .line{
+    flex:1;
+    height:1px;
+    background:var(--primary);
+  }
+  .divider .ornament{
+    width:48px; height:48px;
+    flex-shrink:0;
+  }
+  .divider .ornament svg{ width:100%; height:100%; }
+  .divider .label{
+    font-family:var(--font-display),serif;
+    font-variant:small-caps;
+    letter-spacing:0.32em;
+    color:var(--secondary);
+    font-size:13px;
+  }
+
+  /* ---------- Term meta strip ---------- */
+  .term-strip{
+    position:relative;
+    z-index:2;
+    max-width:1100px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    border-top:1px solid var(--primary);
+    border-bottom:1px solid var(--primary);
+    padding:18px 0;
+  }
+  .term-strip .cell{
+    text-align:center;
+    border-right:1px solid rgba(10,10,10,0.18);
+    padding:0 16px;
+  }
+  .term-strip .cell:last-child{ border-right:none; }
+  .term-strip dt{
+    font-family:var(--font-display),serif;
+    font-variant:small-caps;
+    font-size:11px;
+    letter-spacing:0.28em;
+    color:var(--secondary);
+    margin-bottom:6px;
+  }
+  .term-strip dd{
+    margin:0;
+    font-family:var(--font-display),serif;
+    font-size:18px;
+    color:var(--primary);
+  }
+
+  /* ---------- Schedule ---------- */
+  main{
+    position:relative;
+    z-index:2;
+    padding:0 60px 60px;
+  }
+  .schedule{
+    max-width:1280px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:36px;
+    align-items:start;
+  }
+  .lecture{
+    position:relative;
+    background:var(--surface);
+    padding:54px 32px 36px;
+    text-align:center;
+    border-bottom:1px solid var(--primary);
+  }
+  .lecture::before{
+    /* arched silhouette via a thin pointed frame using clip-path */
+    content:"";
+    position:absolute;
+    inset:0;
+    border:1px solid var(--primary);
+    border-bottom:none;
+    clip-path: polygon(
+      0 18%, 6% 12%, 14% 7%, 25% 3%, 38% 0.5%, 50% 0, 62% 0.5%,
+      75% 3%, 86% 7%, 94% 12%, 100% 18%, 100% 100%, 0 100%
+    );
+    pointer-events:none;
+  }
+  .lecture .finial{
+    position:absolute;
+    top:-14px; left:50%;
+    transform:translateX(-50%);
+    width:28px; height:28px;
+  }
+  .lecture .finial svg{
+    width:100%; height:100%;
+    fill:var(--accent);
+    stroke:var(--primary);
+    stroke-width:8;
+  }
+  .lecture .month{
+    font-family:var(--font-display),serif;
+    font-variant:small-caps;
+    letter-spacing:0.3em;
+    color:var(--secondary);
+    font-size:12px;
+    margin-bottom:6px;
+  }
+  .lecture .day{
+    font-family:var(--font-display),serif;
+    font-size:64px;
+    line-height:1;
+    color:var(--primary);
+    margin-bottom:4px;
+    font-weight:400;
+  }
+  .lecture .weekday{
+    font-family:var(--font-display),serif;
+    font-style:italic;
+    color:var(--text);
+    font-size:14px;
+    margin-bottom:18px;
+  }
+  .lecture h2{
+    font-family:var(--font-display),serif;
+    font-weight:400;
+    font-size:22px;
+    line-height:1.25;
+    color:var(--primary);
+    margin:0 0 14px;
+    text-wrap:balance;
+  }
+  .lecture h2 em{ font-style:italic; color:var(--secondary); }
+  .lecture .body{
+    font-size:14px;
+    text-align:left;
+    color:var(--text);
+    margin-top:14px;
+    padding-top:14px;
+    border-top:1px dashed rgba(10,10,10,0.28);
+  }
+  .lecture .body::first-letter{
+    font-family:var(--font-display),serif;
+    font-size:42px;
+    float:left;
+    line-height:0.85;
+    padding:6px 8px 0 0;
+    color:var(--accent);
+    font-weight:500;
+  }
+  .lecture .speaker{
+    font-family:var(--font-display),serif;
+    font-style:italic;
+    color:var(--text-emphasis);
+    margin-top:14px;
+    font-size:15px;
+  }
+  .lecture .meta{
+    margin-top:22px;
+    padding-top:14px;
+    border-top:1px solid rgba(10,10,10,0.28);
+    font-family:var(--font-display),serif;
+    font-variant:small-caps;
+    letter-spacing:0.18em;
+    color:var(--secondary);
+    font-size:11px;
+    line-height:1.6;
+  }
+
+  /* ---------- Disputatio (centerpiece) ---------- */
+  .disputatio{
+    grid-column:2 / 3;
+  }
+  .disputatio .seal{
+    position:absolute;
+    bottom:24px; right:24px;
+    width:34px; height:34px;
+    opacity:0.3;
+  }
+  .disputatio .seal svg{ width:100%; height:100%; fill:var(--secondary); }
+
+  /* ---------- Calendar grid table ---------- */
+  .term-calendar{
+    max-width:1280px;
+    margin:80px auto 0;
+    display:grid;
+    grid-template-columns:1.4fr 1fr;
+    gap:60px;
+    align-items:start;
+  }
+  .term-calendar h3{
+    font-family:var(--font-display),serif;
+    font-weight:400;
+    font-size:30px;
+    color:var(--primary);
+    margin:0 0 18px;
+    border-bottom:1px solid var(--primary);
+    padding-bottom:10px;
+  }
+  .term-calendar h3 em{ font-style:italic; color:var(--secondary); }
+  .term-calendar p{ font-size:15px; color:var(--text); margin:0 0 14px; }
+  .term-calendar p.dropcap::first-letter{
+    font-family:var(--font-display),serif;
+    font-size:56px;
+    float:left;
+    line-height:0.85;
+    padding:8px 10px 0 0;
+    color:var(--accent);
+  }
+  .ordo{
+    list-style:none;
+    margin:0; padding:0;
+  }
+  .ordo li{
+    display:grid;
+    grid-template-columns:120px 1fr auto;
+    gap:18px;
+    padding:12px 0;
+    border-bottom:1px dotted rgba(10,10,10,0.3);
+    font-size:14px;
+    align-items:baseline;
+  }
+  .ordo li .when{
+    font-family:var(--font-display),serif;
+    font-variant:small-caps;
+    letter-spacing:0.16em;
+    color:var(--secondary);
+    font-size:12px;
+  }
+  .ordo li .what{ color:var(--text); }
+  .ordo li .what em{ color:var(--text-emphasis); font-style:italic; }
+  .ordo li .where{
+    font-family:var(--font-display),serif;
+    font-style:italic;
+    font-size:12px;
+    color:var(--text);
+    text-align:right;
+    white-space:nowrap;
+  }
+
+  /* ---------- Notice ---------- */
+  .notice{
+    max-width:1100px;
+    margin:80px auto 0;
+    text-align:center;
+    padding:30px;
+    border:1px solid var(--primary);
+    border-top-width:2px;
+    border-bottom-width:2px;
+    position:relative;
+  }
+  .notice::before, .notice::after{
+    content:"";
+    position:absolute;
+    width:30px; height:30px;
+    background:url("svg/cross-flory.svg") center / contain no-repeat;
+    opacity:0.5;
+  }
+  .notice::before{ top:-15px; left:-15px; }
+  .notice::after{ bottom:-15px; right:-15px; }
+  .notice .latin{
+    font-family:var(--font-display),serif;
+    font-style:italic;
+    color:var(--secondary);
+    letter-spacing:0.04em;
+    font-size:18px;
+    margin-bottom:6px;
+  }
+  .notice .gloss{
+    font-family:var(--font-body),serif;
+    color:var(--text);
+    font-size:15px;
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    position:relative;
+    z-index:2;
+    margin-top:80px;
+  }
+  .foot-arcade{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    max-width:1280px;
+    margin:0 auto;
+    padding:0 60px;
+  }
+  .foot-arcade .bay{
+    height:60px;
+    position:relative;
+  }
+  .foot-arcade .bay svg{ width:100%; height:100%; display:block; }
+  .foot-arcade .bay .quatre{
+    position:absolute;
+    top:32px; left:50%;
+    transform:translate(-50%,-50%);
+    width:14px; height:14px;
+    background:var(--accent);
+    border:1px solid var(--primary);
+    border-radius:50%;
+  }
+  .foot-cols{
+    max-width:1100px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:60px;
+    padding:30px 60px 40px;
+    border-top:1px solid var(--primary);
+  }
+  .foot-cols h4{
+    font-family:var(--font-display),serif;
+    font-variant:small-caps;
+    letter-spacing:0.24em;
+    font-size:12px;
+    color:var(--secondary);
+    margin:0 0 12px;
+    font-weight:500;
+  }
+  .foot-cols p{
+    margin:0 0 6px;
+    font-size:13px;
+    color:var(--text);
+    line-height:1.55;
+  }
+  .foot-cols .motto{
+    font-family:var(--font-display),serif;
+    font-style:italic;
+    color:var(--secondary);
+    font-size:15px;
+    line-height:1.5;
+  }
+  .diaper{
+    height:34px;
+    background-image:url("svg/quatrefoil-in-square.svg");
+    background-size:60px 60px;
+    opacity:0.18;
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wordmark">Université Saint&#8209;Aubain <span class="amp">de</span> Vézelay</div>
+  <div class="sub-mark">Studium Generale of the Morvan · founded MCXXXVII</div>
+  <div class="cobalt-rule"></div>
+
+  <nav class="arcade" aria-label="Primary">
+    <div class="bay">
+      <span class="arch" aria-hidden="true">
+        <svg viewBox="0 0 42 30"><path d="M1 29 L1 18 Q1 4 21 1 Q41 4 41 18 L41 29" fill="none" stroke="#0a0a0a" stroke-width="1.4"/><path class="arch-fill" d="M1 29 L1 18 Q1 4 21 1 Q41 4 41 18 L41 29 Z" fill="#1e3a5f" opacity="0"/></svg>
+      </span>
+      <a href="page-1.html">Studium</a>
+    </div>
+    <div class="bay">
+      <span class="arch" aria-hidden="true">
+        <svg viewBox="0 0 42 30"><path d="M1 29 L1 18 Q1 4 21 1 Q41 4 41 18 L41 29" fill="none" stroke="#0a0a0a" stroke-width="1.4"/><path class="arch-fill" d="M1 29 L1 18 Q1 4 21 1 Q41 4 41 18 L41 29 Z" fill="#1e3a5f" opacity="0"/></svg>
+      </span>
+      <a href="page-2.html">Faculties</a>
+    </div>
+    <div class="bay">
+      <span class="arch" aria-hidden="true">
+        <svg viewBox="0 0 42 30"><path d="M1 29 L1 18 Q1 4 21 1 Q41 4 41 18 L41 29" fill="none" stroke="#0a0a0a" stroke-width="1.4"/><path class="arch-fill" d="M1 29 L1 18 Q1 4 21 1 Q41 4 41 18 L41 29 Z" fill="#1e3a5f" opacity="0"/></svg>
+      </span>
+      <a href="page-3.html">Library</a>
+    </div>
+    <div class="bay">
+      <span class="arch" aria-hidden="true">
+        <svg viewBox="0 0 42 30"><path d="M1 29 L1 18 Q1 4 21 1 Q41 4 41 18 L41 29" fill="none" stroke="#0a0a0a" stroke-width="1.4"/><path class="arch-fill" d="M1 29 L1 18 Q1 4 21 1 Q41 4 41 18 L41 29 Z" fill="#1e3a5f" opacity="0"/></svg>
+      </span>
+      <a href="page-4.html">Admissions</a>
+    </div>
+    <div class="bay" data-current="true">
+      <span class="arch" aria-hidden="true">
+        <svg viewBox="0 0 42 30"><path d="M1 29 L1 18 Q1 4 21 1 Q41 4 41 18 L41 29" fill="none" stroke="#0a0a0a" stroke-width="1.4"/><path class="arch-fill" d="M1 29 L1 18 Q1 4 21 1 Q41 4 41 18 L41 29 Z" fill="#1e3a5f" opacity="0"/></svg>
+      </span>
+      <a href="page-5.html" aria-current="page">Calendar</a>
+    </div>
+    <div class="bay">
+      <span class="arch" aria-hidden="true">
+        <svg viewBox="0 0 42 30"><path d="M1 29 L1 18 Q1 4 21 1 Q41 4 41 18 L41 29" fill="none" stroke="#0a0a0a" stroke-width="1.4"/><path class="arch-fill" d="M1 29 L1 18 Q1 4 21 1 Q41 4 41 18 L41 29 Z" fill="#1e3a5f" opacity="0"/></svg>
+      </span>
+      <a href="page-6.html">Visiting</a>
+    </div>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-frame">
+    <div class="hero-eyebrow">Hilary Term · Anno Domini MMXXV</div>
+    <h1>The Calendar &amp; <em>Public Lectures</em></h1>
+    <p class="hero-lede">A reckoning of the disputations, ordinary readings, and inaugural addresses appointed for Hilary Term, between the Octave of the Epiphany and the Vigil of Palm Sunday — open to scholars and townspeople alike, without charge.</p>
+    <div class="hero-seal" aria-hidden="true">
+      <svg viewBox="0 0 592 592"><path transform="translate(-4,-4)scale(0.15,0.15)" d="M1778.9,3200A120.9263,120.9263 0 0,1 1657.97,3320.93A120.9263,120.9263 0 0,1 1537.04,3200A221.5096,221.5096 0 0,0 1456.32,3371.02A221.5096,221.5096 0 0,0 1677.83,3592.53A221.5096,221.5096 0 0,0 1818.61,3542.03A362.779,362.779 0 0,0 2000,3856.21A362.779,362.779 0 0,0 2181.39,3542.03A221.5096,221.5096 0 0,0 2322.17,3592.53A221.5096,221.5096 0 0,0 2543.68,3371.02A221.5096,221.5096 0 0,0 2462.96,3200A120.9263,120.9263 0 0,1 2342.03,3320.93A120.9263,120.9263 0 0,1 2221.1,3200V2221.1H3200A120.9263,120.9263 0 0,1 3320.93,2342.03A120.9263,120.9263 0 0,1 3200,2462.96A221.5096,221.5096 0 0,0 3371.02,2543.68A221.5096,221.5096 0 0,0 3592.53,2322.17A221.5096,221.5096 0 0,0 3542.03,2181.39A362.779,362.779 0 0,0 3856.21,2000A362.779,362.779 0 0,0 3542.03,1818.61A221.5096,221.5096 0 0,0 3592.53,1677.83A221.5096,221.5096 0 0,0 3371.02,1456.32A221.5096,221.5096 0 0,0 3200,1537.04A120.9263,120.9263 0 0,1 3320.93,1657.97A120.9263,120.9263 0 0,1 3200,1778.9H2221.1V800A120.9263,120.9263 0 0,1 2342.03,679.073A120.9263,120.9263 0 0,1 2462.96,800A221.5096,221.5096 0 0,0 2543.68,628.984A221.5096,221.5096 0 0,0 2322.17,407.475A221.5096,221.5096 0 0,0 2181.39,457.969A362.779,362.779 0 0,0 2000,143.793A362.779,362.779 0 0,0 1818.61,457.969A221.5096,221.5096 0 0,0 1677.83,407.475A221.5096,221.5096 0 0,0 1456.32,628.984A221.5096,221.5096 0 0,0 1537.04,800A120.9263,120.9263 0 0,1 1657.97,679.073A120.9263,120.9263 0 0,1 1778.9,800V1778.9H800A120.9263,120.9263 0 0,1 679.073,1657.97A120.9263,120.9263 0 0,1 800,1537.04A221.5096,221.5096 0 0,0 628.984,1456.32A221.5096,221.5096 0 0,0 407.475,1677.83A221.5096,221.5096 0 0,0 457.969,1818.61A362.779,362.779 0 0,0 143.793,2000A362.779,362.779 0 0,0 457.969,2181.39A221.5096,221.5096 0 0,0 407.475,2322.17A221.5096,221.5096 0 0,0 628.984,2543.68A221.5096,221.5096 0 0,0 800,2462.96A120.9263,120.9263 0 0,1 679.073,2342.03A120.9263,120.9263 0 0,1 800,2221.1H1778.9Z"/></svg>
+    </div>
+  </div>
+
+  <dl class="term-strip">
+    <div class="cell"><dt>Term Begins</dt><dd>13 January 2025</dd></div>
+    <div class="cell"><dt>Term Ends</dt><dd>12 April 2025</dd></div>
+    <div class="cell"><dt>Public Lectures</dt><dd>Three Principal</dd></div>
+    <div class="cell"><dt>Admission</dt><dd>Gratis &amp; Open</dd></div>
+  </dl>
+</section>
+
+<div class="divider" role="presentation">
+  <div class="line"></div>
+  <span class="label">Three Principal Lectures</span>
+  <div class="ornament" aria-hidden="true">
+    <svg viewBox="0 0 200 200"><path transform="translate(0 -852.36) scale(0.95) translate(5 5)" d="m43.583 863.37c-1.79 0.03-3.58 0.13-5.34 0.31-7.06 0.74-13.94 2.79-19.16 7.47s-8.2 12-7.69 21c0.51 9 4.3 16.14 10.19 20.34 5.89 4.2 13.31 5.53 21.03 5.19 15.45-0.7 32.83-8 45.81-18.31 1.41-1.12 2.83-2.04 4.25-3.06 4.29 6.68 7.61 14.83 9.34 24.06-7.5-5.07-21.01-10.55-35.66 1.5-22.14 18.21-24.99 12.88-45.34-2.13-2.86 36.07 15.01 54.64 44.66 52.5 0 0-13.95 4.26-3.59 26.41 6.02 12.87 8.41 20.07 6.56 25.19" fill="#0a0a0a"/></svg>
+  </div>
+  <div class="line"></div>
+</div>
+
+<main>
+  <div class="schedule">
+
+    <!-- LECTURE I -->
+    <article class="lecture">
+      <span class="finial" aria-hidden="true">
+        <svg viewBox="0 0 600 600"><g transform="translate(300,300)scale(0.45)rotate(45)"><circle cx="-195" r="160"/><circle cx="195" r="160"/><circle cy="195" r="160"/><circle cy="-195" r="160"/><rect x="-230" y="-230" width="460" height="460"/></g></svg>
+      </span>
+      <div class="month">January · Januarii</div>
+      <div class="day">XVI</div>
+      <div class="weekday">Thursday — Feria Quinta</div>
+      <h2>Boethius and the <em>Music of the Spheres</em></h2>
+      <p class="speaker">Prof. Inge Holm — University of Uppsala</p>
+      <div class="body">
+        Inscribed in the calendar as the term's inaugural reading, this lecture traces the lineage of Boethian musica mundana from the De Institutione Musica to the cosmologies of the Chartrian masters, with a digression upon the silent harmonies legible in Carolingian psaltery diagrams.
+      </div>
+      <div class="meta">
+        18h00 · Salle Capitulaire<br>
+        Faculty of Liberal Arts · Open to Townspeople
+      </div>
+    </article>
+
+    <!-- DISPUTATIO (centre) -->
+    <article class="lecture disputatio">
+      <span class="finial" aria-hidden="true">
+        <svg viewBox="0 0 600 600"><g transform="translate(300,300)scale(0.45)rotate(45)"><circle cx="-195" r="160"/><circle cx="195" r="160"/><circle cy="195" r="160"/><circle cy="-195" r="160"/><rect x="-230" y="-230" width="460" height="460"/></g></svg>
+      </span>
+      <div class="month">February · Februarii</div>
+      <div class="day">IV</div>
+      <div class="weekday">Tuesday — Feria Tertia</div>
+      <h2>Disputatio Quodlibetalis: <em>Whether memory is a passion of the soul</em></h2>
+      <p class="speaker">Faculty of Theology contra Faculty of Liberal Arts</p>
+      <div class="body">
+        The annual quodlibetal disputation, held in the high choir of the Aula Magna, places the Theologians (respondents) against the Artists (opponents) upon the question whether memoria be properly a passio animae, after the manner set forth in Aristotle's De Memoria et Reminiscentia and the corresponding question of Aquinas. Magister Jean-Baptiste Roussel will preside; refutations are heard in Latin, with a vernacular gloss provided.
+      </div>
+      <div class="meta">
+        15h00 — 18h30 · Aula Magna<br>
+        Faculties of Theology &amp; Liberal Arts
+      </div>
+      <span class="seal" aria-hidden="true">
+        <svg viewBox="0 0 592 592"><path transform="translate(-4,-4)scale(0.15,0.15)" d="M1778.9,3200A120.9263,120.9263 0 0,1 1657.97,3320.93A120.9263,120.9263 0 0,1 1537.04,3200A221.5096,221.5096 0 0,0 1456.32,3371.02A221.5096,221.5096 0 0,0 1677.83,3592.53A221.5096,221.5096 0 0,0 1818.61,3542.03A362.779,362.779 0 0,0 2000,3856.21A362.779,362.779 0 0,0 2181.39,3542.03A221.5096,221.5096 0 0,0 2322.17,3592.53A221.5096,221.5096 0 0,0 2543.68,3371.02A221.5096,221.5096 0 0,0 2462.96,3200A120.9263,120.9263 0 0,1 2342.03,3320.93A120.9263,120.9263 0 0,1 2221.1,3200V2221.1H3200A120.9263,120.9263 0 0,1 3320.93,2342.03A120.9263,120.9263 0 0,1 3200,2462.96A221.5096,221.5096 0 0,0 3371.02,2543.68A221.5096,221.5096 0 0,0 3592.53,2322.17A221.5096,221.5096 0 0,0 3542.03,2181.39A362.779,362.779 0 0,0 3856.21,2000A362.779,362.779 0 0,0 3542.03,1818.61A221.5096,221.5096 0 0,0 3592.53,1677.83A221.5096,221.5096 0 0,0 3371.02,1456.32A221.5096,221.5096 0 0,0 3200,1537.04A120.9263,120.9263 0 0,1 3320.93,1657.97A120.9263,120.9263 0 0,1 3200,1778.9H2221.1V800A120.9263,120.9263 0 0,1 2342.03,679.073A120.9263,120.9263 0 0,1 2462.96,800A221.5096,221.5096 0 0,0 2543.68,628.984A221.5096,221.5096 0 0,0 2322.17,407.475A221.5096,221.5096 0 0,0 2181.39,457.969A362.779,362.779 0 0,0 2000,143.793A362.779,362.779 0 0,0 1818.61,457.969A221.5096,221.5096 0 0,0 1677.83,407.475A221.5096,221.5096 0 0,0 1456.32,628.984A221.5096,221.5096 0 0,0 1537.04,800A120.9263,120.9263 0 0,1 1657.97,679.073A120.9263,120.9263 0 0,1 1778.9,800V1778.9H800A120.9263,120.9263 0 0,1 679.073,1657.97A120.9263,120.9263 0 0,1 800,1537.04A221.5096,221.5096 0 0,0 628.984,1456.32A221.5096,221.5096 0 0,0 407.475,1677.83A221.5096,221.5096 0 0,0 457.969,1818.61A362.779,362.779 0 0,0 143.793,2000A362.779,362.779 0 0,0 457.969,2181.39A221.5096,221.5096 0 0,0 407.475,2322.17A221.5096,221.5096 0 0,0 628.984,2543.68A221.5096,221.5096 0 0,0 800,2462.96A120.9263,120.9263 0 0,1 679.073,2342.03A120.9263,120.9263 0 0,1 800,2221.1H1778.9Z"/></svg>
+      </span>
+    </article>
+
+    <!-- LECTURE III -->
+    <article class="lecture">
+      <span class="finial" aria-hidden="true">
+        <svg viewBox="0 0 600 600"><g transform="translate(300,300)scale(0.45)rotate(45)"><circle cx="-195" r="160"/><circle cx="195" r="160"/><circle cy="195" r="160"/><circle cy="-195" r="160"/><rect x="-230" y="-230" width="460" height="460"/></g></svg>
+      </span>
+      <div class="month">February · Februarii</div>
+      <div class="day">XXVII</div>
+      <div class="weekday">Thursday — Feria Quinta</div>
+      <h2>The Annual Lecture on <em>Civil Law</em></h2>
+      <p class="speaker">Prof. Anouk Veldkamp — University of Leiden</p>
+      <div class="body">
+        Delivered each year on the Thursday before the first Sunday of Lent, this is the principal address of the Faculty of Law. Prof. Veldkamp will treat the survival of Justinianic forms in the customary law of Burgundy, drawing on charters from the Vézelay scriptorium and from the comital archives of Mâcon.
+      </div>
+      <div class="meta">
+        17h30 · Salle des Décrets<br>
+        Faculty of Civil &amp; Canon Law
+      </div>
+    </article>
+
+  </div>
+
+  <!-- SECONDARY ORDINATIONS -->
+  <section class="term-calendar">
+    <div>
+      <h3>Ordo <em>Lectionum</em> · Hilary 2025</h3>
+      <p class="dropcap">Beyond the three principal occasions above, the studium keeps its ordinary readings throughout Hilary Term. The townspeople of Vézelay and pilgrims passing toward Saint-Mary-Magdalene are received without ticket; benches are reserved for the matriculated until the half hour before each reading, after which all places are common.</p>
+      <p>The full ordinary calendar of disputations, ferial readings, and the Lenten exercises of the four faculties is posted upon the great north door of the Aula Magna, and copied weekly into the porter's register.</p>
+    </div>
+
+    <ul class="ordo">
+      <li><span class="when">21 Jan · Tue</span><span class="what">Magister Pierre Aubertin — <em>Reading on the Sentences, Bk. III</em></span><span class="where">Salle Capitulaire</span></li>
+      <li><span class="when">28 Jan · Tue</span><span class="what">Dr. Caterina Donati (Padua) — <em>On the Pseudo-Dionysius</em></span><span class="where">Aula Magna</span></li>
+      <li><span class="when">06 Feb · Thu</span><span class="what">Magistra Élise Vannier — <em>Aristotle, Physics II</em></span><span class="where">Salle Capitulaire</span></li>
+      <li><span class="when">13 Feb · Thu</span><span class="what">Prof. Henri Lallemant — <em>The Decretum of Gratian, Causa XII</em></span><span class="where">Salle des Décrets</span></li>
+      <li><span class="when">20 Feb · Thu</span><span class="what">Lenten Address by the Rector — <em>De Vita Studiosa</em></span><span class="where">Aula Magna</span></li>
+      <li><span class="when">06 Mar · Thu</span><span class="what">Br. Anselm Kenrick (Glasgow) — <em>Augustine on Time</em></span><span class="where">Crypte de Saint-Aubain</span></li>
+      <li><span class="when">13 Mar · Thu</span><span class="what">Prof. Margit Eriksson (Lund) — <em>Old Frisian Lawbooks</em></span><span class="where">Salle des Décrets</span></li>
+      <li><span class="when">20 Mar · Thu</span><span class="what">Magister Jean-Baptiste Roussel — <em>Quaestio de Anima Mundi</em></span><span class="where">Aula Magna</span></li>
+      <li><span class="when">27 Mar · Thu</span><span class="what">Faculty of Medicine — <em>On the Humors in Springtime</em></span><span class="where">Salle Capitulaire</span></li>
+      <li><span class="when">03 Apr · Thu</span><span class="what">Closing Disputation — <em>De Termino Hilarii</em></span><span class="where">Aula Magna</span></li>
+    </ul>
+  </section>
+
+  <div class="notice">
+    <div class="latin">Audientibus omnibus, gratis et sine pretio, propter laudem disciplinarum.</div>
+    <div class="gloss">All such readings stand open to citizens and pilgrims, without charge or matriculation, for the honour of the disciplines. Doors at the half hour; admittance ceases at the third striking of the chapter bell.</div>
+  </div>
+</main>
+
+<footer>
+  <div class="foot-arcade" aria-hidden="true">
+    <div class="bay"><svg viewBox="0 0 100 60" preserveAspectRatio="none"><path d="M2 60 L2 30 Q2 4 50 2 Q98 4 98 30 L98 60 Z" fill="#0a0a0a"/></svg><span class="quatre"></span></div>
+    <div class="bay"><svg viewBox="0 0 100 60" preserveAspectRatio="none"><path d="M2 60 L2 30 Q2 4 50 2 Q98 4 98 30 L98 60 Z" fill="#0a0a0a"/></svg><span class="quatre"></span></div>
+    <div class="bay"><svg viewBox="0 0 100 60" preserveAspectRatio="none"><path d="M2 60 L2 30 Q2 4 50 2 Q98 4 98 30 L98 60 Z" fill="#0a0a0a"/></svg><span class="quatre"></span></div>
+    <div class="bay"><svg viewBox="0 0 100 60" preserveAspectRatio="none"><path d="M2 60 L2 30 Q2 4 50 2 Q98 4 98 30 L98 60 Z" fill="#0a0a0a"/></svg><span class="quatre"></span></div>
+    <div class="bay"><svg viewBox="0 0 100 60" preserveAspectRatio="none"><path d="M2 60 L2 30 Q2 4 50 2 Q98 4 98 30 L98 60 Z" fill="#0a0a0a"/></svg><span class="quatre"></span></div>
+    <div class="bay"><svg viewBox="0 0 100 60" preserveAspectRatio="none"><path d="M2 60 L2 30 Q2 4 50 2 Q98 4 98 30 L98 60 Z" fill="#0a0a0a"/></svg><span class="quatre"></span></div>
+    <div class="bay"><svg viewBox="0 0 100 60" preserveAspectRatio="none"><path d="M2 60 L2 30 Q2 4 50 2 Q98 4 98 30 L98 60 Z" fill="#0a0a0a"/></svg><span class="quatre"></span></div>
+  </div>
+
+  <div class="foot-cols">
+    <div>
+      <h4>Address</h4>
+      <p>Université Saint-Aubain de Vézelay</p>
+      <p>Place de l'Aula Magna</p>
+      <p>89450 Vézelay, Bourgogne</p>
+      <p>France</p>
+    </div>
+    <div>
+      <h4>Office of the Registrar</h4>
+      <p>Bureau du Bedeau, Cloître Sud</p>
+      <p>Mon–Fri · 09h00 — 16h30</p>
+      <p>+33 (0)3 86 33 27 14</p>
+      <p>registrarius@saint-aubain.fr</p>
+    </div>
+    <div>
+      <h4>Motto</h4>
+      <p class="motto">In lumine vetustatis, lumen novum.</p>
+      <p style="margin-top:10px; font-size:12px; color:var(--text);">— from the foundation charter of Hugues de Vézelay, A.D. MCXXXVII</p>
+    </div>
+  </div>
+
+  <div class="diaper" aria-hidden="true"></div>
+</footer>
+
+</body>
+</html>

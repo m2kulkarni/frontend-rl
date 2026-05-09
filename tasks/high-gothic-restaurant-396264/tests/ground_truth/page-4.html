@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>The House and Its Cooks — Maison Saint-Vrain</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), serif;
+    font-size: 15px;
+    line-height: 1.7;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Diaper background field */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 600 600'><g transform='translate(300,300)scale(0.87)rotate(45)' fill='%230a0a0a' opacity='0.07'><circle cx='-195.16' r='163'/><circle cx='195.16' r='163'/><circle cy='195.16' r='163'/><circle cy='-195.16' r='163'/><rect x='-232' y='-232' width='464' height='464'/><g fill='%23f4ecd8'><circle cx='-195.16' r='157'/><circle cx='195.16' r='157'/><circle cy='195.16' r='157'/><circle cy='-195.16' r='157'/><rect x='-226' y='-226' width='452' height='452'/></g><g fill='%230a0a0a'><circle cx='-195.16' r='144'/><circle cx='195.16' r='144'/><circle cy='195.16' r='144'/><circle cy='-195.16' r='144'/><rect x='-213' y='-213' width='426' height='426'/></g><g fill='%23f4ecd8'><circle cx='-195.16' r='138'/><circle cx='195.16' r='138'/><circle cy='195.16' r='138'/><circle cy='-195.16' r='138'/><rect x='-207' y='-207' width='414' height='414'/></g></g></svg>");
+    background-size: 120px 120px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ============ NAV ============ */
+  .arcade-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bg);
+    border-bottom: 1px solid var(--accent);
+    padding: 0;
+  }
+  .arcade-nav::after {
+    content: "";
+    display: block;
+    height: 1px;
+    background: var(--accent);
+    margin-top: 0;
+  }
+  .arcade-nav ul {
+    list-style: none;
+    margin: 0 auto;
+    padding: 14px 40px 0;
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    max-width: 1280px;
+  }
+  .arcade-nav li {
+    flex: 0 0 auto;
+  }
+  .arcade-nav a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 170px;
+    padding: 0 6px 10px;
+    text-decoration: none;
+    color: var(--text);
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    position: relative;
+  }
+  .arcade-nav .arch {
+    width: 80px;
+    height: 64px;
+    margin-bottom: 4px;
+  }
+  .arcade-nav .arch path {
+    fill: none;
+    stroke: var(--ornament);
+    stroke-width: 2;
+  }
+  .arcade-nav a[aria-current="page"] .arch path {
+    fill: var(--secondary);
+    stroke: var(--ornament);
+  }
+  .arcade-nav a[aria-current="page"] .label {
+    color: var(--accent);
+  }
+  .arcade-nav a:hover .arch path:first-child {
+    fill: rgba(30,58,95,0.08);
+  }
+
+  /* ============ MAIN ============ */
+  main {
+    position: relative;
+    z-index: 1;
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 60px 40px 80px;
+  }
+
+  /* Page head with arch silhouette */
+  .page-head {
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+  }
+  .page-head .eyebrow {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.32em;
+    color: var(--accent);
+    font-size: 13px;
+    margin-bottom: 8px;
+  }
+  .page-head h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 500;
+    font-size: 54px;
+    line-height: 1.05;
+    color: var(--primary);
+    margin: 0 auto 18px;
+    max-width: 640px;
+    letter-spacing: 0.01em;
+  }
+  .page-head .subhead {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 19px;
+    color: var(--text-emphasis);
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .head-arch {
+    width: 110px;
+    height: 90px;
+    margin: 0 auto 18px;
+    display: block;
+  }
+  .head-arch path {
+    fill: none;
+    stroke: var(--ornament);
+    stroke-width: 2;
+  }
+  .head-arch .quat {
+    fill: var(--accent);
+  }
+
+  /* Parchment column for prose */
+  .scroll {
+    background: var(--surface);
+    border: 1px solid var(--ornament);
+    position: relative;
+    padding: 70px 70px 60px;
+    box-shadow: 0 0 0 6px var(--bg), 0 0 0 7px var(--ornament);
+  }
+  .scroll::before, .scroll::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    height: 8px;
+    background: repeating-linear-gradient(90deg, var(--ornament) 0, var(--ornament) 8px, transparent 8px, transparent 18px);
+  }
+  .scroll::before { top: -1px; }
+  .scroll::after  { bottom: -1px; }
+
+  /* Drop cap */
+  .opener {
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--text);
+  }
+  .opener::first-letter {
+    font-family: var(--font-display), serif;
+    font-weight: 700;
+    color: var(--secondary);
+    font-size: 86px;
+    line-height: 0.85;
+    float: left;
+    padding: 8px 14px 0 0;
+    margin-top: 6px;
+    text-transform: uppercase;
+  }
+  .opener p {
+    margin: 0 0 18px;
+  }
+
+  /* Section heads */
+  h2.minor {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    font-weight: 500;
+    font-size: 26px;
+    color: var(--primary);
+    letter-spacing: 0.06em;
+    margin: 0 0 6px;
+    text-align: center;
+  }
+  h2.minor .lead {
+    color: var(--accent);
+    display: block;
+    font-size: 12px;
+    letter-spacing: 0.4em;
+    margin-bottom: 4px;
+  }
+  .rule-hairline {
+    width: 90px;
+    height: 1px;
+    background: var(--accent);
+    margin: 0 auto 26px;
+  }
+
+  /* Section divider with oak-leaf */
+  .divider {
+    margin: 56px 0 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+  }
+  .divider .bar {
+    flex: 1;
+    height: 1px;
+    background: var(--ornament);
+    max-width: 240px;
+    position: relative;
+  }
+  .divider .bar::before {
+    content: "";
+    position: absolute;
+    top: -2px; left: 0;
+    width: 8px; height: 5px;
+    background: var(--accent);
+  }
+  .divider .bar.right::before {
+    left: auto; right: 0;
+  }
+  .divider .leaf {
+    width: 44px;
+    height: 44px;
+  }
+  .divider .leaf path {
+    fill: var(--ornament);
+  }
+
+  /* Brigade — pointed-arch portrait frames */
+  .brigade {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .cook {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 36px;
+    padding: 30px 0;
+    border-top: 1px solid rgba(10,10,10,0.18);
+    align-items: start;
+  }
+  .cook:first-of-type { border-top: none; padding-top: 10px; }
+
+  .cook-portrait {
+    width: 200px;
+    height: 280px;
+    position: relative;
+  }
+  .cook-portrait svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .cook-portrait .frame { fill: none; stroke: var(--ornament); stroke-width: 2; }
+  .cook-portrait .field { fill: var(--secondary); }
+  .cook-portrait .quat { fill: var(--accent); }
+  .cook-portrait .initial {
+    font-family: var(--font-display), serif;
+    fill: var(--accent);
+    font-size: 88px;
+    font-weight: 500;
+  }
+
+  .cook-body h3 {
+    font-family: var(--font-display), serif;
+    font-weight: 500;
+    font-size: 32px;
+    color: var(--primary);
+    margin: 0 0 4px;
+    letter-spacing: 0.01em;
+  }
+  .cook-body .role {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.28em;
+    color: var(--accent);
+    font-size: 12px;
+    margin-bottom: 14px;
+    display: block;
+  }
+  .cook-body p {
+    margin: 0 0 12px;
+  }
+  .cook-body .lineage {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    color: var(--text-emphasis);
+    font-size: 16px;
+    border-left: 2px solid var(--accent);
+    padding-left: 14px;
+    margin-top: 14px;
+  }
+
+  /* Closing seal & signature */
+  .closing {
+    text-align: center;
+    margin-top: 60px;
+    padding-top: 40px;
+  }
+  .closing .seal {
+    width: 110px;
+    height: 110px;
+    margin: 0 auto 20px;
+    display: block;
+  }
+  .closing .seal path {
+    fill: var(--ornament);
+  }
+  .closing .signature {
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    font-size: 32px;
+    color: var(--secondary);
+    margin: 4px 0 6px;
+    letter-spacing: 0.02em;
+  }
+  .closing .attrib {
+    font-variant: small-caps;
+    letter-spacing: 0.32em;
+    color: var(--text);
+    font-size: 11px;
+    font-family: var(--font-display), serif;
+  }
+
+  /* ============ FOOTER ============ */
+  footer {
+    position: relative;
+    z-index: 1;
+    margin-top: 80px;
+    background: var(--bg);
+    border-top: 1px solid var(--accent);
+    padding: 40px 40px 30px;
+  }
+  .foot-arcade {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 30px;
+  }
+  .foot-arcade svg {
+    width: 70px;
+    height: 90px;
+  }
+  .foot-arcade .frame { fill: none; stroke: var(--ornament); stroke-width: 1.6; }
+  .foot-arcade .ornament { fill: var(--ornament); }
+  .foot-cols {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr 1px 1fr;
+    gap: 30px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--text);
+  }
+  .foot-cols .vrule {
+    background: var(--accent);
+    width: 1px;
+  }
+  .foot-cols h4 {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    letter-spacing: 0.28em;
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 500;
+    margin: 0 0 10px;
+  }
+  .foot-cols p { margin: 2px 0; line-height: 1.6; }
+  .foot-seal {
+    margin: 36px auto 8px;
+    width: 50px;
+    height: 50px;
+    display: block;
+  }
+  .foot-seal path { fill: var(--ornament); }
+  .copyright {
+    text-align: center;
+    font-size: 11px;
+    color: var(--text);
+    font-variant: small-caps;
+    letter-spacing: 0.24em;
+    font-family: var(--font-display), serif;
+  }
+
+  /* Bordered ornamental band beneath section heads */
+  .gilt-band {
+    text-align: center;
+    margin: 30px 0 20px;
+  }
+  .gilt-band span {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    color: var(--accent);
+    letter-spacing: 0.4em;
+    font-size: 11px;
+    padding: 0 14px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAVIGATION ============ -->
+<nav class="arcade-nav" aria-label="Primary">
+  <ul>
+    <li><a href="page-1.html">
+      <svg class="arch" viewBox="0 0 80 64" preserveAspectRatio="xMidYMax meet"><path d="M2 62 L2 32 Q2 4 40 4 Q78 4 78 32 L78 62 Z"/></svg>
+      <span class="label">The House</span>
+    </a></li>
+    <li><a href="page-2.html">
+      <svg class="arch" viewBox="0 0 80 64" preserveAspectRatio="xMidYMax meet"><path d="M2 62 L2 32 Q2 4 40 4 Q78 4 78 32 L78 62 Z"/></svg>
+      <span class="label">The Supper</span>
+    </a></li>
+    <li><a href="page-3.html">
+      <svg class="arch" viewBox="0 0 80 64" preserveAspectRatio="xMidYMax meet"><path d="M2 62 L2 32 Q2 4 40 4 Q78 4 78 32 L78 62 Z"/></svg>
+      <span class="label">The Cellar</span>
+    </a></li>
+    <li><a href="page-4.html" aria-current="page">
+      <svg class="arch" viewBox="0 0 80 64" preserveAspectRatio="xMidYMax meet"><path d="M2 62 L2 32 Q2 4 40 4 Q78 4 78 32 L78 62 Z"/></svg>
+      <span class="label">House &amp; Cooks</span>
+    </a></li>
+    <li><a href="page-5.html">
+      <svg class="arch" viewBox="0 0 80 64" preserveAspectRatio="xMidYMax meet"><path d="M2 62 L2 32 Q2 4 40 4 Q78 4 78 32 L78 62 Z"/></svg>
+      <span class="label">Visit</span>
+    </a></li>
+    <li><a href="page-6.html">
+      <svg class="arch" viewBox="0 0 80 64" preserveAspectRatio="xMidYMax meet"><path d="M2 62 L2 32 Q2 4 40 4 Q78 4 78 32 L78 62 Z"/></svg>
+      <span class="label">Reservations</span>
+    </a></li>
+  </ul>
+</nav>
+
+<!-- ============ MAIN ============ -->
+<main>
+
+  <header class="page-head">
+    <svg class="head-arch" viewBox="0 0 110 90" preserveAspectRatio="xMidYMax meet">
+      <path d="M4 88 L4 46 Q4 4 55 4 Q106 4 106 46 L106 88 Z"/>
+      <circle class="quat" cx="55" cy="22" r="4"/>
+      <circle class="quat" cx="49" cy="28" r="3"/>
+      <circle class="quat" cx="61" cy="28" r="3"/>
+      <circle class="quat" cx="55" cy="34" r="3"/>
+    </svg>
+    <div class="eyebrow">Maison Saint-Vrain · Anno MMXIX</div>
+    <h1>The House &amp; Its Cooks</h1>
+    <div class="subhead">A 14th-century cloth merchant's lodging restored to candlelight; a brigade of three at its hearth.</div>
+  </header>
+
+  <article class="scroll">
+
+    <section class="opener">
+      <p>Long before the kitchen was a kitchen, the house at 14 rue des Drapiers was a counting-room. The first stones were laid in 1378 by Hugues le Mercier, a draper who traded fine Picard worsted as far as Bruges and the Hansa towns. The cellar — the same cellar in which our wines now rest — held bales of cloth then, sealed against damp by oak boards he is said to have cut himself. By 1426 his grandson had widened the street frontage and added the carved stone lintel, still in place above our door, bearing the merchant's mark and the words <em>Deus providebit</em>.</p>
+
+      <p>The house passed through six generations of cloth-merchants, two notaries, a wig-maker, and, between 1894 and 2017, a quiet ironmongery. When the last ironmonger closed his shutters, the building was structurally sound but exhausted: the timbers brown with coal-smoke, the plaster fallen in three rooms, the cellar half-filled with rusted hinges. The diocesan archives held the original 1378 notarial deed, and the front-elevation drawings from 1426 survived nearly intact. From these, the architect Élise Moreau drew the restoration that ran from October 2017 to the spring of 2019.</p>
+
+      <p>Nothing was added that could not have been there in 1426. The ceiling beams in the dining room are the originals, cleaned by hand over four months. The oak refectory table seats fourteen and was made in Amiens, by Atelier Verluise, from a single Picard oak felled in 2018. The candles are beeswax, set in iron stands forged at Compiègne. The diaper tile underfoot — a quatrefoil-in-square pattern — was cut to a 14th-century model held in the Musée de Picardie. Only the kitchen, hidden behind the rear wall, is wholly modern, and that by necessity.</p>
+    </section>
+
+    <div class="divider" aria-hidden="true">
+      <div class="bar"></div>
+      <svg class="leaf" viewBox="0 0 39.26 39.90" preserveAspectRatio="xMidYMid meet"><path d="M19.6 4 C 13 6 8 11 8 18 C 8 24 12 28 18 30 L 18 36 L 21 36 L 21 30 C 27 28 31 24 31 18 C 31 11 26 6 19.6 4 Z M 19.6 9 C 24 10 27 13 27 18 C 27 22 24 25 19.6 26 C 15 25 12 22 12 18 C 12 13 15 10 19.6 9 Z"/></svg>
+      <div class="bar right"></div>
+    </div>
+
+    <h2 class="minor"><span class="lead">II</span>The Brigade</h2>
+    <div class="rule-hairline"></div>
+
+    <div class="brigade">
+
+      <!-- Aurélien -->
+      <article class="cook">
+        <div class="cook-portrait">
+          <svg viewBox="0 0 200 280" preserveAspectRatio="xMidYMid meet">
+            <path class="frame" d="M6 274 L6 100 Q6 6 100 6 Q194 6 194 100 L194 274 Z"/>
+            <path class="field" d="M14 270 L14 102 Q14 14 100 14 Q186 14 186 102 L186 270 Z"/>
+            <circle class="quat" cx="100" cy="40" r="4"/>
+            <circle class="quat" cx="92" cy="48" r="3.2"/>
+            <circle class="quat" cx="108" cy="48" r="3.2"/>
+            <circle class="quat" cx="100" cy="56" r="3.2"/>
+            <text class="initial" x="100" y="190" text-anchor="middle">A.B.</text>
+            <line x1="60" y1="220" x2="140" y2="220" stroke="#c9a23a" stroke-width="1"/>
+          </svg>
+        </div>
+        <div class="cook-body">
+          <h3>Aurélien Brescot</h3>
+          <span class="role">Chef de Cuisine · since 2019</span>
+          <p>Born in 1978 in Saint-Quentin, two streets from the Basilica, Aurélien Brescot grew up in the kitchen of his grandmother Renée — a Picard cook of the old persuasion, who kept her hutspot recipe in a notebook bound with cloth tape. He left for Paris at nineteen, and over the next two decades cooked his way through kitchens that taught him, in turn, restraint, ferocity, and silence.</p>
+          <p>At Maison Saint-Vrain he sets a single supper of seven courses each evening, six nights a week. The menu changes by the moon, never by the calendar. He cooks on a hearth and on induction; he writes the menu by hand on parchment paper each afternoon at four. He answers the telephone himself when the line is quiet.</p>
+          <div class="lineage">Formerly chef de partie at L'Arpège (Paris, 2003–2008) under Alain Passard; sous-chef at Le Chapon Fin (Bordeaux, 2008–2014); head chef at the Hôtel de la Cathédrale, Amiens (2014–2018).</div>
+        </div>
+      </article>
+
+      <!-- Margaux -->
+      <article class="cook">
+        <div class="cook-portrait">
+          <svg viewBox="0 0 200 280" preserveAspectRatio="xMidYMid meet">
+            <path class="frame" d="M6 274 L6 100 Q6 6 100 6 Q194 6 194 100 L194 274 Z"/>
+            <path class="field" d="M14 270 L14 102 Q14 14 100 14 Q186 14 186 102 L186 270 Z"/>
+            <circle class="quat" cx="100" cy="40" r="4"/>
+            <circle class="quat" cx="92" cy="48" r="3.2"/>
+            <circle class="quat" cx="108" cy="48" r="3.2"/>
+            <circle class="quat" cx="100" cy="56" r="3.2"/>
+            <text class="initial" x="100" y="190" text-anchor="middle">M.V.</text>
+            <line x1="60" y1="220" x2="140" y2="220" stroke="#c9a23a" stroke-width="1"/>
+          </svg>
+        </div>
+        <div class="cook-body">
+          <h3>Margaux Vinet</h3>
+          <span class="role">Pâtissière · since 2020</span>
+          <p>Margaux Vinet came to the house in February 2020, four weeks before the world shut its doors, and stayed. She trained at the École Ferrandi in Paris and read history of medicine on the side; she keeps both shelves of books in the pantry, the herbal beside Lenôtre. Her sweets are the supper's quiet conclusion: walnut tarts steeped in vin de noix, rose-petal flummeries, a single pear in spiced wine, the medlar fool that has appeared on the menu in November every year since she arrived.</p>
+          <p>She bakes the suppers' bread before service — a sourdough miche of Picard <em>blé de la Saint-Pierre</em>, a rye for the cheese — and grinds her own spices on a small marble in the corner of the kitchen.</p>
+          <div class="lineage">École Ferrandi, 2014. Pâtissière at La Grenouillère (La Madelaine-sous-Montreuil, 2015–2019). Stagiaire at Tortoreto, Rome, summer 2017.</div>
+        </div>
+      </article>
+
+      <!-- Tobie -->
+      <article class="cook">
+        <div class="cook-portrait">
+          <svg viewBox="0 0 200 280" preserveAspectRatio="xMidYMid meet">
+            <path class="frame" d="M6 274 L6 100 Q6 6 100 6 Q194 6 194 100 L194 274 Z"/>
+            <path class="field" d="M14 270 L14 102 Q14 14 100 14 Q186 14 186 102 L186 270 Z"/>
+            <circle class="quat" cx="100" cy="40" r="4"/>
+            <circle class="quat" cx="92" cy="48" r="3.2"/>
+            <circle class="quat" cx="108" cy="48" r="3.2"/>
+            <circle class="quat" cx="100" cy="56" r="3.2"/>
+            <text class="initial" x="100" y="190" text-anchor="middle">T.L.</text>
+            <line x1="60" y1="220" x2="140" y2="220" stroke="#c9a23a" stroke-width="1"/>
+          </svg>
+        </div>
+        <div class="cook-body">
+          <h3>Tobie Lemerre</h3>
+          <span class="role">Sommelier · Cellar-keeper · since 2019</span>
+          <p>Tobie Lemerre keeps the cellar — the same vaulted room that, six hundred years ago, held Hugues le Mercier's worsted. He came to the house from a small négoce in Beaune and brought with him a sense, unfashionable in his trade, that the bottle should stand back from the food. His list runs to four hundred and twelve labels, weighted toward the Île-de-France, the Champagne, and the mead of the abbeys; he buys, also, from three growers in the Aisne whom he visits every spring on a bicycle.</p>
+          <p>He decants every red older than fifteen years, on principle, and pours into pewter cups for the medieval pairings. He will, if asked, recite the cellar inventory from memory.</p>
+          <div class="lineage">Diplôme de l'Université du Vin de Suze-la-Rousse, 2011. Caviste at Maison Champy, Beaune (2012–2019).</div>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="divider" aria-hidden="true">
+      <div class="bar"></div>
+      <svg class="leaf" viewBox="0 0 39.26 39.90" preserveAspectRatio="xMidYMid meet"><path d="M19.6 4 C 13 6 8 11 8 18 C 8 24 12 28 18 30 L 18 36 L 21 36 L 21 30 C 27 28 31 24 31 18 C 31 11 26 6 19.6 4 Z M 19.6 9 C 24 10 27 13 27 18 C 27 22 24 25 19.6 26 C 15 25 12 22 12 18 C 12 13 15 10 19.6 9 Z"/></svg>
+      <div class="bar right"></div>
+    </div>
+
+    <h2 class="minor"><span class="lead">III</span>The House at Table</h2>
+    <div class="rule-hairline"></div>
+
+    <p>There are seats for fourteen at the long table and four at a smaller side table, eighteen suppers in all. Service begins at half past seven and ends, ordinarily, near midnight. We have no menu choice. The supper is what it is, and it changes with the season, the weather, the catch of M. Delavigne at the Saturday market. We ask that you come hungry, with three free hours, and with a willingness to be cooked for.</p>
+
+    <p>The brigade numbers three. There is no maître d'; Aurélien greets you at the door, Margaux pours the first wine, Tobie tells you what is in the glass. Plates come from the kitchen carried by whichever of the three is freest. We have found, over five years, that this is the way the house wishes to be run.</p>
+
+    <!-- Closing seal & signature -->
+    <div class="closing">
+      <svg class="seal" viewBox="-4 -4 600 600" preserveAspectRatio="xMidYMid meet">
+        <g transform="scale(0.15)">
+          <path d="M1778.9,3200A120.9,120.9 0 0,1 1657.97,3320.93A120.9,120.9 0 0,1 1537.04,3200A221.5,221.5 0 0,0 1456.32,3371.02A221.5,221.5 0 0,0 1677.83,3592.53A221.5,221.5 0 0,0 1818.61,3542.03A362.7,362.7 0 0,0 2000,3856.21A362.7,362.7 0 0,0 2181.39,3542.03A221.5,221.5 0 0,0 2322.17,3592.53A221.5,221.5 0 0,0 2543.68,3371.02A221.5,221.5 0 0,0 2462.96,3200A120.9,120.9 0 0,1 2342.03,3320.93A120.9,120.9 0 0,1 2221.1,3200V2221.1H3200A120.9,120.9 0 0,1 3320.93,2342.03A120.9,120.9 0 0,1 3200,2462.96A221.5,221.5 0 0,0 3371.02,2543.68A221.5,221.5 0 0,0 3592.53,2322.17A221.5,221.5 0 0,0 3542.03,2181.39A362.7,362.7 0 0,0 3856.21,2000A362.7,362.7 0 0,0 3542.03,1818.61A221.5,221.5 0 0,0 3592.53,1677.83A221.5,221.5 0 0,0 3371.02,1456.32A221.5,221.5 0 0,0 3200,1537.04A120.9,120.9 0 0,1 3320.93,1657.97A120.9,120.9 0 0,1 3200,1778.9H2221.1V800A120.9,120.9 0 0,1 2342.03,679.07A120.9,120.9 0 0,1 2462.96,800A221.5,221.5 0 0,0 2543.68,628.98A221.5,221.5 0 0,0 2322.17,407.47A221.5,221.5 0 0,0 2181.39,457.97A362.7,362.7 0 0,0 2000,143.79A362.7,362.7 0 0,0 1818.61,457.97A221.5,221.5 0 0,0 1677.83,407.47A221.5,221.5 0 0,0 1456.32,628.98A221.5,221.5 0 0,0 1537.04,800A120.9,120.9 0 0,1 1657.97,679.07A120.9,120.9 0 0,1 1778.9,800V1778.9H800A120.9,120.9 0 0,1 679.07,1657.97A120.9,120.9 0 0,1 800,1537.04A221.5,221.5 0 0,0 628.98,1456.32A221.5,221.5 0 0,0 407.47,1677.83A221.5,221.5 0 0,0 457.97,1818.61A362.7,362.7 0 0,0 143.79,2000A362.7,362.7 0 0,0 457.97,2181.39A221.5,221.5 0 0,0 407.47,2322.17A221.5,221.5 0 0,0 628.98,2543.68A221.5,221.5 0 0,0 800,2462.96A120.9,120.9 0 0,1 679.07,2342.03A120.9,120.9 0 0,1 800,2221.1H1778.9Z"/>
+        </g>
+      </svg>
+      <div class="signature">Aurélien Brescot</div>
+      <div class="attrib">By his hand · rue des Drapiers</div>
+    </div>
+
+  </article>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="foot-arcade" aria-hidden="true">
+    <!-- 7 arches alternating fleur-de-lis / cross -->
+    <svg viewBox="0 0 70 90"><path class="frame" d="M4 86 L4 38 Q4 4 35 4 Q66 4 66 38 L66 86 Z"/><path class="ornament" d="M35 30 C 30 38 30 46 35 50 C 40 46 40 38 35 30 Z M 24 46 C 28 50 32 50 35 48 C 38 50 42 50 46 46 C 42 48 38 46 35 44 C 32 46 28 48 24 46 Z M 33 50 L 37 50 L 37 64 L 33 64 Z M 26 56 L 44 56 L 44 60 L 26 60 Z"/></svg>
+    <svg viewBox="0 0 70 90"><path class="frame" d="M4 86 L4 38 Q4 4 35 4 Q66 4 66 38 L66 86 Z"/><path class="ornament" d="M32 28 L38 28 L38 42 L52 42 L52 48 L38 48 L38 70 L32 70 L32 48 L18 48 L18 42 L32 42 Z"/></svg>
+    <svg viewBox="0 0 70 90"><path class="frame" d="M4 86 L4 38 Q4 4 35 4 Q66 4 66 38 L66 86 Z"/><path class="ornament" d="M35 30 C 30 38 30 46 35 50 C 40 46 40 38 35 30 Z M 24 46 C 28 50 32 50 35 48 C 38 50 42 50 46 46 C 42 48 38 46 35 44 C 32 46 28 48 24 46 Z M 33 50 L 37 50 L 37 64 L 33 64 Z M 26 56 L 44 56 L 44 60 L 26 60 Z"/></svg>
+    <svg viewBox="0 0 70 90"><path class="frame" d="M4 86 L4 38 Q4 4 35 4 Q66 4 66 38 L66 86 Z"/><path class="ornament" d="M32 28 L38 28 L38 42 L52 42 L52 48 L38 48 L38 70 L32 70 L32 48 L18 48 L18 42 L32 42 Z"/></svg>
+    <svg viewBox="0 0 70 90"><path class="frame" d="M4 86 L4 38 Q4 4 35 4 Q66 4 66 38 L66 86 Z"/><path class="ornament" d="M35 30 C 30 38 30 46 35 50 C 40 46 40 38 35 30 Z M 24 46 C 28 50 32 50 35 48 C 38 50 42 50 46 46 C 42 48 38 46 35 44 C 32 46 28 48 24 46 Z M 33 50 L 37 50 L 37 64 L 33 64 Z M 26 56 L 44 56 L 44 60 L 26 60 Z"/></svg>
+    <svg viewBox="0 0 70 90"><path class="frame" d="M4 86 L4 38 Q4 4 35 4 Q66 4 66 38 L66 86 Z"/><path class="ornament" d="M32 28 L38 28 L38 42 L52 42 L52 48 L38 48 L38 70 L32 70 L32 48 L18 48 L18 42 L32 42 Z"/></svg>
+    <svg viewBox="0 0 70 90"><path class="frame" d="M4 86 L4 38 Q4 4 35 4 Q66 4 66 38 L66 86 Z"/><path class="ornament" d="M35 30 C 30 38 30 46 35 50 C 40 46 40 38 35 30 Z M 24 46 C 28 50 32 50 35 48 C 38 50 42 50 46 46 C 42 48 38 46 35 44 C 32 46 28 48 24 46 Z M 33 50 L 37 50 L 37 64 L 33 64 Z M 26 56 L 44 56 L 44 60 L 26 60 Z"/></svg>
+  </div>
+
+  <div class="foot-cols">
+    <div>
+      <h4>The House</h4>
+      <p>14, rue des Drapiers</p>
+      <p>80000 Amiens</p>
+      <p>Picardy, France</p>
+    </div>
+    <div class="vrule"></div>
+    <div>
+      <h4>The Hours</h4>
+      <p>Tuesday — Sunday</p>
+      <p>Supper at 19h30</p>
+      <p>Closed all of August</p>
+    </div>
+    <div class="vrule"></div>
+    <div>
+      <h4>Reservations</h4>
+      <p>+33 (0)3 22 41 86 14</p>
+      <p>table@maison-saintvrain.fr</p>
+      <p>Booking opens 60 days hence</p>
+    </div>
+  </div>
+
+  <svg class="foot-seal" viewBox="-4 -4 600 600" preserveAspectRatio="xMidYMid meet">
+    <g transform="scale(0.15)">
+      <path d="M1778.9,3200A120.9,120.9 0 0,1 1657.97,3320.93A120.9,120.9 0 0,1 1537.04,3200A221.5,221.5 0 0,0 1456.32,3371.02A221.5,221.5 0 0,0 1677.83,3592.53A221.5,221.5 0 0,0 1818.61,3542.03A362.7,362.7 0 0,0 2000,3856.21A362.7,362.7 0 0,0 2181.39,3542.03A221.5,221.5 0 0,0 2322.17,3592.53A221.5,221.5 0 0,0 2543.68,3371.02A221.5,221.5 0 0,0 2462.96,3200A120.9,120.9 0 0,1 2342.03,3320.93A120.9,120.9 0 0,1 2221.1,3200V2221.1H3200A120.9,120.9 0 0,1 3320.93,2342.03A120.9,120.9 0 0,1 3200,2462.96A221.5,221.5 0 0,0 3371.02,2543.68A221.5,221.5 0 0,0 3592.53,2322.17A221.5,221.5 0 0,0 3542.03,2181.39A362.7,362.7 0 0,0 3856.21,2000A362.7,362.7 0 0,0 3542.03,1818.61A221.5,221.5 0 0,0 3592.53,1677.83A221.5,221.5 0 0,0 3371.02,1456.32A221.5,221.5 0 0,0 3200,1537.04A120.9,120.9 0 0,1 3320.93,1657.97A120.9,120.9 0 0,1 3200,1778.9H2221.1V800A120.9,120.9 0 0,1 2342.03,679.07A120.9,120.9 0 0,1 2462.96,800A221.5,221.5 0 0,0 2543.68,628.98A221.5,221.5 0 0,0 2322.17,407.47A221.5,221.5 0 0,0 2181.39,457.97A362.7,362.7 0 0,0 2000,143.79A362.7,362.7 0 0,0 1818.61,457.97A221.5,221.5 0 0,0 1677.83,407.47A221.5,221.5 0 0,0 1456.32,628.98A221.5,221.5 0 0,0 1537.04,800A120.9,120.9 0 0,1 1657.97,679.07A120.9,120.9 0 0,1 1778.9,800V1778.9H800A120.9,120.9 0 0,1 679.07,1657.97A120.9,120.9 0 0,1 800,1537.04A221.5,221.5 0 0,0 628.98,1456.32A221.5,221.5 0 0,0 407.47,1677.83A221.5,221.5 0 0,0 457.97,1818.61A362.7,362.7 0 0,0 143.79,2000A362.7,362.7 0 0,0 457.97,2181.39A221.5,221.5 0 0,0 407.47,2322.17A221.5,221.5 0 0,0 628.98,2543.68A221.5,221.5 0 0,0 800,2462.96A120.9,120.9 0 0,1 679.07,2342.03A120.9,120.9 0 0,1 800,2221.1H1778.9Z"/>
+    </g>
+  </svg>
+  <div class="copyright">© Maison Saint-Vrain · MMXXV · All rights reserved</div>
+</footer>
+
+</body>
+</html>

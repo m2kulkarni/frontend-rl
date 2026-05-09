@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Faculties & Schools — Rikuō University</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), "Hiragino Mincho ProN", serif;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* ---------- Navigation ---------- */
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.75rem 4rem 1.5rem;
+    border-bottom: 1px solid var(--primary);
+    background: var(--bg);
+  }
+  .wordmark {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    font-family: var(--font-display), serif;
+    font-size: 1.15rem;
+    letter-spacing: 0.08em;
+    color: var(--primary);
+    text-decoration: none;
+  }
+  .wordmark .kamon {
+    width: 28px;
+    height: 28px;
+    fill: var(--primary);
+  }
+  .wordmark .en {
+    font-size: 0.78rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-left: 0.4rem;
+    color: var(--text-emphasis);
+    font-family: var(--font-body), sans-serif;
+  }
+  .nav-links {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .nav-links li { margin-left: 2.5em; }
+  .nav-links a {
+    font-family: var(--font-body), sans-serif;
+    font-size: 14px;
+    color: var(--primary);
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 0.4rem;
+    letter-spacing: 0.04em;
+  }
+  .nav-links a[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -4px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    transform: translateX(-50%);
+  }
+
+  /* ---------- Page header ---------- */
+  .page-head {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 6rem 4rem 4rem 4rem;
+    gap: 4rem;
+    position: relative;
+  }
+  .page-head .label {
+    font-family: var(--font-body), sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    margin-bottom: 1.5rem;
+  }
+  .page-head h1 {
+    font-family: var(--font-display), serif;
+    font-size: 4.25rem;
+    line-height: 1.1;
+    margin: 0;
+    font-weight: 500;
+    color: var(--primary);
+  }
+  .page-head h1 .ja {
+    display: block;
+    font-size: 1.4rem;
+    letter-spacing: 0.5em;
+    color: var(--text-emphasis);
+    margin-top: 1.5rem;
+    font-weight: 400;
+  }
+  .page-head .lead {
+    align-self: end;
+    font-size: 0.98rem;
+    line-height: 1.85;
+    max-width: 32rem;
+    color: var(--primary);
+    padding-left: 2rem;
+    border-left: 2px solid var(--accent);
+  }
+  .page-head .lead .marker {
+    display: block;
+    font-family: var(--font-display), serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.3em;
+    color: var(--text-emphasis);
+    margin-bottom: 0.8rem;
+    text-transform: uppercase;
+  }
+
+  /* ---------- Divider ---------- */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 0 4rem;
+    margin-top: 3rem;
+  }
+  .divider .rule {
+    flex: 1;
+    height: 1px;
+    background: var(--primary);
+  }
+  .divider .keyfret {
+    width: 64px;
+    height: 64px;
+    opacity: 0.85;
+  }
+  .divider .label {
+    font-family: var(--font-body), sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+  }
+
+  /* ---------- Faculties grid ---------- */
+  .faculties {
+    padding: 5rem 4rem 6rem;
+    position: relative;
+  }
+  .faculties::before {
+    content: "";
+    position: absolute;
+    top: 8rem;
+    right: 0;
+    width: 420px;
+    height: 240px;
+    background-image: url("svg/seigaiha-waves.svg");
+    background-size: 280px;
+    opacity: 0.07;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3.5rem 4rem;
+    position: relative;
+    z-index: 1;
+  }
+  /* Asymmetric rhythm — second column offset */
+  .grid > article:nth-child(even) {
+    margin-top: 5rem;
+  }
+  .card {
+    position: relative;
+    background: var(--surface);
+    padding: 2.5rem;
+    border-top: 1px solid var(--primary);
+    border-left: 1px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
+    border-right: none;
+  }
+  .card .umebachi {
+    position: absolute;
+    top: 1.4rem;
+    right: 1.4rem;
+    width: 24px;
+    height: 24px;
+    opacity: 0.85;
+  }
+  .card .index {
+    font-family: var(--font-body), sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    color: var(--text-emphasis);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .card h2 {
+    font-family: var(--font-display), serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.3;
+    margin: 0 0 0.5rem;
+    color: var(--primary);
+    max-width: 90%;
+  }
+  .card .ja {
+    font-family: var(--font-display), serif;
+    font-size: 0.95rem;
+    letter-spacing: 0.25em;
+    color: var(--text-emphasis);
+    margin-bottom: 1.75rem;
+    display: block;
+  }
+  .card p {
+    font-size: 1rem;
+    line-height: 1.75;
+    margin: 0 0 1.75rem;
+    color: var(--primary);
+  }
+  .card .meta {
+    border-top: 1px solid rgba(12,12,12,0.18);
+    padding-top: 1.25rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem 1.5rem;
+    font-family: var(--font-body), sans-serif;
+    font-size: 0.82rem;
+    line-height: 1.5;
+  }
+  .card .meta dt {
+    color: var(--text-emphasis);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-size: 0.68rem;
+    margin-bottom: 0.15rem;
+  }
+  .card .meta dd {
+    margin: 0;
+    color: var(--primary);
+  }
+  .card .meta .row {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Single accent card — first one bears cinnabar marker */
+  .card.accent .index::before {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    margin-right: 0.75rem;
+    vertical-align: middle;
+  }
+
+  /* ---------- Section: Cross-faculty studies ---------- */
+  .interlude {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 5rem;
+    padding: 6rem 4rem 5rem;
+    align-items: start;
+  }
+  .interlude .seal-wrap {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-left: 3rem;
+  }
+  .interlude .seal-wrap svg {
+    width: 200px;
+    height: 200px;
+    opacity: 0.92;
+  }
+  .interlude .copy h3 {
+    font-family: var(--font-display), serif;
+    font-size: 2.25rem;
+    font-weight: 500;
+    margin: 0 0 1.25rem;
+    line-height: 1.25;
+  }
+  .interlude .copy h3 .ja {
+    display: block;
+    font-size: 1.05rem;
+    letter-spacing: 0.3em;
+    color: var(--text-emphasis);
+    margin-bottom: 1rem;
+  }
+  .interlude .copy p {
+    font-size: 1rem;
+    line-height: 1.85;
+    max-width: 30rem;
+    color: var(--primary);
+  }
+  .interlude .copy .signature {
+    margin-top: 2rem;
+    font-family: var(--font-display), serif;
+    font-size: 0.95rem;
+    letter-spacing: 0.2em;
+    color: var(--text-emphasis);
+  }
+
+  /* ---------- Footer ---------- */
+  .footer-wrap {
+    position: relative;
+    margin-top: 2rem;
+    border-top: 1px solid var(--primary);
+  }
+  .footer-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url("svg/seigaiha-waves.svg");
+    background-size: 320px;
+    opacity: 0.08;
+    pointer-events: none;
+  }
+  footer {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 4rem;
+    padding: 4rem 4rem 3rem;
+  }
+  footer .col-left .kiri {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 1.25rem;
+    fill: var(--primary);
+  }
+  footer .col-left .uni {
+    font-family: var(--font-display), serif;
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: var(--primary);
+  }
+  footer .col-left .uni span {
+    display: block;
+  }
+  footer .col-left .founded {
+    margin-top: 1rem;
+    font-family: var(--font-display), serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.3em;
+    color: var(--text-emphasis);
+  }
+  footer .col-center {
+    font-size: 0.85rem;
+    line-height: 1.85;
+    max-width: 16rem;
+  }
+  footer .col-center h4 {
+    font-family: var(--font-display), serif;
+    font-size: 0.95rem;
+    margin: 0 0 0.75rem;
+    letter-spacing: 0.15em;
+  }
+  footer .col-right {
+    font-size: 0.78rem;
+    line-height: 1.75;
+    color: var(--text-emphasis);
+    text-align: right;
+  }
+  footer .col-right h4 {
+    font-family: var(--font-display), serif;
+    font-size: 0.95rem;
+    margin: 0 0 0.75rem;
+    letter-spacing: 0.15em;
+    color: var(--primary);
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== NAV ===================== -->
+<nav class="nav" aria-label="Primary">
+  <a class="wordmark" href="page-1.html">
+    <svg class="kamon" viewBox="0 0 345 326" aria-hidden="true">
+      <use href="#kiri-mini"/>
+    </svg>
+    陸央大學
+    <span class="en">Rikuō University</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="page-1.html">Home</a></li>
+    <li><a href="page-2.html" aria-current="page">Faculties</a></li>
+    <li><a href="page-3.html">Admissions</a></li>
+    <li><a href="page-4.html">Library</a></li>
+    <li><a href="page-5.html">Visit</a></li>
+    <li><a href="page-6.html">About</a></li>
+  </ul>
+</nav>
+
+<!-- Hidden symbol defs for kamon reuse -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="kiri-mini" viewBox="0 0 345 326">
+    <path d="M172.6 155c0-5.5 4.4-9.9 9.9-9.9s9.9 4.4 9.9 9.9-4.4 9.9-9.9 9.9-9.9-4.4-9.9-9.9zm-30-50c4-3 5.3-3.5 10-3.4 2.4 0 4.6.2 4.9.4 1.2 1 9.2 2.4 11.8 2 2-.3 4.4-2 5.5-3.9 1-1.6 1.1-4.9.2-6.5-.8-1.5-.8-3.3 0-5.7 1-2.6 0.6-3.9-1.6-6.3-1.3-1.4-2.4-2.1-4.4-2.7-2.5-0.8-2.6-0.8-5.1 0.1-3 1.1-3.7 1.1-5.9 0-3.3-1.7-8.1-0.7-10.5 2.1-1.3 1.5-1.4 2.8-0.7 7.3 0.7 4.2-0.8 7.6-4.1 9.4-3 1.6-3.8-0.6-3.8-9.9 0-7.6 0.4-9.2 2.8-11.7 2.6-2.7 5.7-3.8 10.1-3.5 10.6 0.8 12 0.8 14.1-0.3 3-1.5 3.7-2.7 3.6-6.7 0-2.5 0.1-3.8 0.8-5.2 1.2-2.7 1.1-5.7-0.2-7.7-1.3-1.9-4.8-3.4-7.8-3.4-1.3 0-2.8-0.4-4.6-1.4-2.1-1-3.1-1.3-4.4-1.1-2.2 0.3-5.1 2.2-6.2 4-1.2 2-2.2 6.7-2.2 10.8 0 4.1-0.8 6.3-2.9 8.3-1 0.9-1.7 1.2-2.6 1.1-1.1-0.1-1.3-0.4-1.6-1.9-0.5-2.9-0.3-14.3 0.3-15.8 0.7-1.8 3.5-4.9 5.9-6.4 1.1-0.7 2.7-2.5 4-4.4 2-2.9 2.2-3.5 2.2-5.8 0-3.3-1.2-5-4.5-6.8-1.4-0.7-3-2-3.7-2.9-1.9-2.4-3.7-3.9-5.4-4.4-3.4-0.9-4.9-0.3-8 3.3-1.2 1.4-2.6 2.6-3.3 2.7-4.5 1.1-8.2 7.2-6.7 11.1 0.7 1.7 4.6 5.8 7.3 7.6 5.7 3.8 7.6 8.3 7.6 17.7 0 6.7-0.6 7.4-3.8 4.6-2.4-2-3.5-4.5-4.1-9-0.6-4.8-1.5-8.2-2.7-9.5-0.5-0.6-1.9-1.6-3-2.1-2.6-1.3-4.3-1.1-8.4 0.9-2.2 1-3.8 1.5-5.9 1.6-2.3 0.1-3.1 0.4-4.1 1.3-2.7 2.6-3.1 4.9-1.3 8.6 1.2 2.4 1.2 2.4 0.4 4.2-0.8 1.7-0.8 1.8-0.1 3.5 0.5 1 1.6 2.3 2.8 3.2 1.7 1.3 2.3 1.5 4.4 1.4 1.3 0 3-0.2 3.6-0.5 0.7-0.2 3.6-0.6 6.5-0.7 4.9-0.3 5.5-0.2 7.5 0.6 2.6 1.2 5.9 4.6 7.1 7.4 0.7 1.8 0.8 3 0.8 8.5 0 7.3-0.4 8.8-2.4 9.1-2.6 0.3-4.2-2.8-4.7-9.2-0.3-3.1-0.7-5.1-1.5-6.7-1-2.1-1.3-2.5-3.9-3.7-4.1-2-5-1.8-10.2 1.5-1.9 1.2-2.7 1.5-5.6 1.6-3.7 0.2-4.9 0.9-6.4 3.5-1.3 2.2-1.2 3.8 0.4 7 1.3 2.6 1.4 2.8 0.8 4.8-0.7 2.8-0.3 4.7 1.5 6.5 1.8 1.8 4.7 2.7 8.6 2.6 2.4 0 3.4-0.3 6.1-1.7 3-1.5 3.6-1.7 6.8-1.7 3.6-0.1 4.3 0.2 7.2 2.6 1 0.8 1.7 0.9 5.8 0.9 4.5 0 4.7-0.1 6.5-1.5z"/>
+  </symbol>
+</svg>
+
+<!-- ===================== HEADER ===================== -->
+<header class="page-head">
+  <div>
+    <div class="label">Section II · Academics</div>
+    <h1>
+      Faculties<br>&amp; Schools
+      <span class="ja">学部 ・ 大學院</span>
+    </h1>
+  </div>
+  <div class="lead">
+    <span class="marker">— Editor's preface</span>
+    Rikuō teaches six disciplines under one tile-roofed quadrangle in Yanaka. Each faculty is small by design — fewer than two hundred students — and convenes around a single dean, a single workshop, and a single library wing. The list below records each faculty's founding year, its present dean, and the question that animates its research.
+  </div>
+</header>
+
+<!-- ===================== KEYFRET DIVIDER ===================== -->
+<div class="divider" aria-hidden="true">
+  <span class="label">六 学部</span>
+  <span class="rule"></span>
+  <svg class="keyfret" viewBox="0 0 600 600">
+    <g fill="none" stroke="#0c0c0c" stroke-width="3">
+      <polygon points="501.6,301.2 551.1,251.7 500.8,201.4 451.3,250.9 300.9,100.5 350.4,51 300.1,0.7 250.6,50.2 201.1,0.7 150.3,51.5 500.3,401.5 551.1,350.7"/>
+      <polygon points="349.9,452.9 300.4,502.4 250.1,452.1 299.6,402.6 149.2,252.2 99.7,301.7 49.4,251.4 98.9,201.9 49.4,152.4 100.2,101.6 450.2,451.6 399.4,502.4"/>
+    </g>
+  </svg>
+  <span class="rule"></span>
+  <span class="label">Six Faculties</span>
+</div>
+
+<!-- ===================== FACULTIES GRID ===================== -->
+<section class="faculties">
+  <div class="grid">
+
+    <!-- 1 Letters (accent card) -->
+    <article class="card accent">
+      <svg class="umebachi" viewBox="0 0 688 688" aria-hidden="true">
+        <circle cx="344" cy="344" r="344" fill="#0c0c0c"/>
+        <g fill="#f5efde">
+          <circle cx="344" cy="180" r="78"/>
+          <circle cx="216" cy="276" r="78"/>
+          <circle cx="472" cy="276" r="78"/>
+          <circle cx="262" cy="438" r="78"/>
+          <circle cx="426" cy="438" r="78"/>
+          <circle cx="344" cy="344" r="46"/>
+        </g>
+      </svg>
+      <div class="index">I · Faculty</div>
+      <h2>Faculty of Letters</h2>
+      <span class="ja">文 学 部</span>
+      <p>The original faculty of the university. Studies in classical Japanese, kanbun composition, the philology of waka, and the editorial culture of Edo-period woodblock prints — from kibyōshi pamphlets to Hiroshige's late series.</p>
+      <dl class="meta">
+        <div class="row"><dt>Dean</dt><dd>Prof. Tachibana Sugako</dd></div>
+        <div class="row"><dt>Founded</dt><dd>1887 (Meiji 20)</dd></div>
+        <div class="row"><dt>Emphasis</dt><dd>Edo print culture &amp; the kanbun tradition</dd></div>
+        <div class="row"><dt>Students</dt><dd>184 enrolled</dd></div>
+      </dl>
+    </article>
+
+    <!-- 2 Fine Crafts -->
+    <article class="card">
+      <svg class="umebachi" viewBox="0 0 688 688" aria-hidden="true">
+        <circle cx="344" cy="344" r="344" fill="#0c0c0c"/>
+        <g fill="#f5efde">
+          <circle cx="344" cy="180" r="78"/>
+          <circle cx="216" cy="276" r="78"/>
+          <circle cx="472" cy="276" r="78"/>
+          <circle cx="262" cy="438" r="78"/>
+          <circle cx="426" cy="438" r="78"/>
+          <circle cx="344" cy="344" r="46"/>
+        </g>
+      </svg>
+      <div class="index">II · Faculty</div>
+      <h2>Faculty of Fine Crafts</h2>
+      <span class="ja">工 芸 学 部</span>
+      <p>Three workshops housed in the old Kanda annex: urushi lacquerware under Master Inoue, the woodblock-cutting atelier of the late Shimizu line, and the indigo-dye vats kept warm by the dyeing collective since 1923.</p>
+      <dl class="meta">
+        <div class="row"><dt>Dean</dt><dd>Prof. Inoue Hanjirō</dd></div>
+        <div class="row"><dt>Founded</dt><dd>1903 (Meiji 36)</dd></div>
+        <div class="row"><dt>Emphasis</dt><dd>Urushi · woodblock · aizome indigo</dd></div>
+        <div class="row"><dt>Students</dt><dd>96 enrolled</dd></div>
+      </dl>
+    </article>
+
+    <!-- 3 Architecture & Carpentry -->
+    <article class="card">
+      <svg class="umebachi" viewBox="0 0 688 688" aria-hidden="true">
+        <circle cx="344" cy="344" r="344" fill="#0c0c0c"/>
+        <g fill="#f5efde">
+          <circle cx="344" cy="180" r="78"/>
+          <circle cx="216" cy="276" r="78"/>
+          <circle cx="472" cy="276" r="78"/>
+          <circle cx="262" cy="438" r="78"/>
+          <circle cx="426" cy="438" r="78"/>
+          <circle cx="344" cy="344" r="46"/>
+        </g>
+      </svg>
+      <div class="index">III · Faculty</div>
+      <h2>Faculty of Architecture &amp; Carpentry</h2>
+      <span class="ja">建 築 ・ 大 工 学 部</span>
+      <p>Drawing tables and timber benches stand side by side. Curriculum spans sukiya-zukuri composition, traditional joinery without metal fasteners, and the mathematics of the kiwari proportional system as set down in eighteenth-century treatises.</p>
+      <dl class="meta">
+        <div class="row"><dt>Dean</dt><dd>Prof. Sakamoto Kenji</dd></div>
+        <div class="row"><dt>Founded</dt><dd>1921 (Taishō 10)</dd></div>
+        <div class="row"><dt>Emphasis</dt><dd>Sukiya-zukuri &amp; traditional joinery</dd></div>
+        <div class="row"><dt>Students</dt><dd>142 enrolled</dd></div>
+      </dl>
+    </article>
+
+    <!-- 4 History -->
+    <article class="card">
+      <svg class="umebachi" viewBox="0 0 688 688" aria-hidden="true">
+        <circle cx="344" cy="344" r="344" fill="#0c0c0c"/>
+        <g fill="#f5efde">
+          <circle cx="344" cy="180" r="78"/>
+          <circle cx="216" cy="276" r="78"/>
+          <circle cx="472" cy="276" r="78"/>
+          <circle cx="262" cy="438" r="78"/>
+          <circle cx="426" cy="438" r="78"/>
+          <circle cx="344" cy="344" r="46"/>
+        </g>
+      </svg>
+      <div class="index">IV · Faculty</div>
+      <h2>Faculty of History</h2>
+      <span class="ja">史 学 部</span>
+      <p>A focused programme in Tokugawa-era political and economic history. Special emphasis is placed on the rice-stipend system, the bakufu-han balance of power, and the merchant ledgers of late-Edo Osaka, of which Hakuro Library holds 3,200 volumes.</p>
+      <dl class="meta">
+        <div class="row"><dt>Dean</dt><dd>Prof. Watanabe Mitsuko</dd></div>
+        <div class="row"><dt>Founded</dt><dd>1894 (Meiji 27)</dd></div>
+        <div class="row"><dt>Emphasis</dt><dd>Tokugawa political &amp; economic history</dd></div>
+        <div class="row"><dt>Students</dt><dd>118 enrolled</dd></div>
+      </dl>
+    </article>
+
+    <!-- 5 Philosophy -->
+    <article class="card">
+      <svg class="umebachi" viewBox="0 0 688 688" aria-hidden="true">
+        <circle cx="344" cy="344" r="344" fill="#0c0c0c"/>
+        <g fill="#f5efde">
+          <circle cx="344" cy="180" r="78"/>
+          <circle cx="216" cy="276" r="78"/>
+          <circle cx="472" cy="276" r="78"/>
+          <circle cx="262" cy="438" r="78"/>
+          <circle cx="426" cy="438" r="78"/>
+          <circle cx="344" cy="344" r="46"/>
+        </g>
+      </svg>
+      <div class="index">V · Faculty</div>
+      <h2>Faculty of Philosophy</h2>
+      <span class="ja">哲 学 部</span>
+      <p>Reading-room culture rather than lecture culture. Confucian classics are read alongside Tendai and Zen Buddhist commentaries; the Faculty maintains a continuing seminar on the Hayashi school and on the writings of Itō Jinsai and Ogyū Sorai.</p>
+      <dl class="meta">
+        <div class="row"><dt>Dean</dt><dd>Prof. Ōmori Tetsurō</dd></div>
+        <div class="row"><dt>Founded</dt><dd>1899 (Meiji 32)</dd></div>
+        <div class="row"><dt>Emphasis</dt><dd>Confucian &amp; Buddhist traditions</dd></div>
+        <div class="row"><dt>Students</dt><dd>74 enrolled</dd></div>
+      </dl>
+    </article>
+
+    <!-- 6 Graduate School of Conservation -->
+    <article class="card">
+      <svg class="umebachi" viewBox="0 0 688 688" aria-hidden="true">
+        <circle cx="344" cy="344" r="344" fill="#0c0c0c"/>
+        <g fill="#f5efde">
+          <circle cx="344" cy="180" r="78"/>
+          <circle cx="216" cy="276" r="78"/>
+          <circle cx="472" cy="276" r="78"/>
+          <circle cx="262" cy="438" r="78"/>
+          <circle cx="426" cy="438" r="78"/>
+          <circle cx="344" cy="344" r="46"/>
+        </g>
+      </svg>
+      <div class="index">VI · Graduate School</div>
+      <h2>Graduate School of Conservation</h2>
+      <span class="ja">保 存 修 復 大 學 院</span>
+      <p>Two-year and four-year programmes in the conservation of paper, lacquer, polychrome wood, and silk-mounted hanging scrolls. Students work directly with objects on loan from temple collections in Ueno, Asakusa, and Nikkō.</p>
+      <dl class="meta">
+        <div class="row"><dt>Dean</dt><dd>Prof. Fujita Naoko</dd></div>
+        <div class="row"><dt>Founded</dt><dd>1968 (Shōwa 43)</dd></div>
+        <div class="row"><dt>Emphasis</dt><dd>Paper, lacquer &amp; scroll conservation</dd></div>
+        <div class="row"><dt>Students</dt><dd>38 enrolled</dd></div>
+      </dl>
+    </article>
+
+  </div>
+</section>
+
+<!-- ===================== INTERLUDE / CHARTER NOTE ===================== -->
+<section class="interlude">
+  <div class="seal-wrap" aria-hidden="true">
+    <!-- Centerpiece kiri seal -->
+    <svg viewBox="0 0 345 326">
+      <use href="#kiri-mini"/>
+    </svg>
+  </div>
+  <div class="copy">
+    <h3>
+      A single course of study, six gates of entry
+      <span class="ja">六 門 一 學</span>
+    </h3>
+    <p>Every undergraduate at Rikuō, regardless of faculty, completes four common modules in the first year: classical reading, brushwork, the history of Edo Tokyo, and material observation. The intention is plain — that a future conservator should be able to read a carpenter's drawing, and a future historian should know the weight of an indigo-dyed thread.</p>
+    <p>Cross-faculty seminars convene each Tuesday afternoon in the Hakuro reading hall. Attendance is unfailing.</p>
+    <div class="signature">— The Office of the Provost, Yanaka, 2024</div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<div class="footer-wrap">
+  <div class="footer-bg" aria-hidden="true"></div>
+  <footer>
+    <div class="col-left">
+      <svg class="kiri" viewBox="0 0 345 326" aria-hidden="true">
+        <use href="#kiri-mini"/>
+      </svg>
+      <div class="uni">
+        <span>陸央大學</span>
+        <span>Rikuō University</span>
+        <span style="font-size:0.85rem; color:var(--text-emphasis); letter-spacing:0.15em;">of the Eastern Capital</span>
+      </div>
+      <div class="founded">FOUNDED 1887 · 明 治 二 十 年</div>
+    </div>
+    <div class="col-center">
+      <h4>Yanaka Campus</h4>
+      3-chōme 17-4 Yanaka<br>
+      Taitō-ku, Tokyo 110-0001<br>
+      Japan<br><br>
+      Office of Faculties<br>
+      +81 (0)3 3821 0000<br>
+      faculties@rikuo.ac.jp
+    </div>
+    <div class="col-right">
+      <h4>Acknowledgements</h4>
+      Kamon line-art (kiri paulownia, umebachi plum) drawn from the public-domain heraldry archives of Wikimedia Commons, used and adapted under CC&nbsp;BY-SA&nbsp;4.0. Seigaiha wave field redrawn after the 2014 W3C reference plate. Set in Shippori Mincho &amp; Inter.<br><br>
+      © 2024 Rikuō University.
+    </div>
+  </footer>
+</div>
+
+</body>
+</html>

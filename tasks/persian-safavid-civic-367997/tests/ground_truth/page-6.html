@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Visit the Bureau — Maydān-i Naqsh</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), sans-serif;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* ---------- TOP BAR ---------- */
+  .top-filet {
+    height: 2px;
+    background: var(--accent);
+    margin: 0 80px;
+  }
+  .masthead {
+    text-align: center;
+    padding: 26px 0 6px;
+  }
+  .masthead .palmettes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 28px;
+  }
+  .palmette {
+    width: 38px;
+    height: 22px;
+    color: var(--ornament);
+  }
+  .palmette svg { width: 100%; height: 100%; display: block; }
+  .sitename {
+    font-family: var(--font-display), serif;
+    font-variant: small-caps;
+    font-size: 1.65rem;
+    color: var(--primary);
+    letter-spacing: 0.16em;
+    font-weight: 600;
+  }
+  .sitename .dot {
+    color: var(--accent);
+    margin: 0 14px;
+  }
+  .subtitle {
+    font-family: var(--font-body), sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.32em;
+    font-size: 0.66rem;
+    color: var(--text-emphasis);
+    margin-top: 6px;
+  }
+
+  /* ---------- NAVIGATION ---------- */
+  nav.primary {
+    margin: 18px 80px 0;
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+    padding: 14px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+  }
+  nav.primary a {
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.78rem;
+    color: var(--primary);
+    text-decoration: none;
+    position: relative;
+    padding: 4px 2px;
+  }
+  nav.primary a:hover { color: var(--secondary); }
+  nav.primary a[aria-current="page"] {
+    color: var(--text-emphasis);
+    border-bottom: 2px solid var(--secondary);
+    padding-bottom: 8px;
+  }
+  nav.primary a[aria-current="page"]::after {
+    content: "✦";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -18px;
+    color: var(--accent);
+    font-size: 0.7rem;
+  }
+  nav.primary .diamond {
+    color: var(--primary);
+    font-size: 0.55rem;
+    transform: translateY(-1px);
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    margin: 56px 80px 0;
+    text-align: center;
+    position: relative;
+    padding: 36px 0 24px;
+  }
+  .hero-arch {
+    position: relative;
+    width: 460px;
+    height: 360px;
+    margin: 0 auto 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero-arch svg.arch {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    color: var(--ornament);
+  }
+  .hero-arch .arch-inner {
+    width: 64%;
+    text-align: center;
+    z-index: 2;
+    padding-top: 60px;
+  }
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.36em;
+    font-size: 0.72rem;
+    color: var(--secondary);
+    margin-bottom: 12px;
+  }
+  h1 {
+    font-family: var(--font-display), serif;
+    font-size: 2.9rem;
+    color: var(--primary);
+    margin: 0 0 14px;
+    font-weight: 600;
+    line-height: 1.1;
+  }
+  .hero p.lede {
+    max-width: 720px;
+    margin: 14px auto 0;
+    font-size: 1.05rem;
+    color: var(--text-emphasis);
+  }
+  .seal-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    margin-top: 22px;
+  }
+  .seal-row .gold-rule {
+    width: 120px;
+    height: 1px;
+    background: var(--accent);
+  }
+  .seal-row .seal {
+    width: 22px;
+    height: 22px;
+    color: var(--accent);
+  }
+
+  /* ---------- DIVIDER ---------- */
+  .divider {
+    margin: 50px auto 30px;
+    width: 440px;
+    color: var(--ornament);
+    display: block;
+  }
+  .divider svg { width: 100%; height: auto; display: block; }
+
+  /* ---------- SECTION HEADERS ---------- */
+  .section-title {
+    text-align: center;
+    margin: 0 0 6px;
+  }
+  .section-title h2 {
+    font-family: var(--font-display), serif;
+    font-size: 2rem;
+    color: var(--primary);
+    margin: 0;
+    font-weight: 600;
+  }
+  .section-title .kicker {
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    font-size: 0.7rem;
+    color: var(--secondary);
+    margin-bottom: 8px;
+  }
+  .section-title .turq-rule {
+    width: 80px;
+    height: 1px;
+    background: var(--secondary);
+    margin: 12px auto 0;
+  }
+
+  /* ---------- ADDRESS BLOCK ---------- */
+  .address-block {
+    margin: 0 auto;
+    max-width: 760px;
+    padding: 32px 40px;
+    text-align: center;
+  }
+  .address-block .ledger {
+    border-top: 1px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
+    padding: 22px 0;
+    position: relative;
+  }
+  .address-block .ledger::before,
+  .address-block .ledger::after {
+    content: "";
+    display: block;
+    height: 2px;
+    background: var(--accent);
+    margin: 4px 0;
+  }
+  .address-block .ledger::before { margin-bottom: 18px; }
+  .address-block .ledger::after  { margin-top: 18px; }
+  .address-block .placard {
+    font-family: var(--font-display), serif;
+    font-size: 1.5rem;
+    color: var(--primary);
+    line-height: 1.4;
+  }
+  .address-block .placard small {
+    display: block;
+    font-family: var(--font-body), sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    font-size: 0.7rem;
+    color: var(--secondary);
+    margin-bottom: 10px;
+  }
+  .address-block .coords {
+    margin-top: 14px;
+    font-size: 0.85rem;
+    color: var(--text-emphasis);
+    letter-spacing: 0.08em;
+  }
+
+  /* ---------- CARD ROW ---------- */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    margin: 0 80px;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--primary);
+    padding: 6px;
+    position: relative;
+  }
+  .card-inner {
+    border: 1px solid var(--accent);
+    padding: 26px 24px 28px;
+    transition: border-color 200ms;
+    height: 100%;
+    box-sizing: border-box;
+  }
+  .card:hover .card-inner { border-color: var(--secondary); }
+  .card .arch-cap {
+    position: absolute;
+    top: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 56px;
+    height: 44px;
+    background: var(--bg);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 0 6px;
+  }
+  .card .arch-cap svg {
+    width: 44px;
+    height: 38px;
+    overflow: visible;
+  }
+  .card .arch-cap .seal-num {
+    position: absolute;
+    top: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-display), serif;
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+  .card h3 {
+    font-family: var(--font-display), serif;
+    font-size: 1.2rem;
+    color: var(--primary);
+    margin: 22px 0 10px;
+    text-align: center;
+  }
+  .card .turq-filet {
+    width: 50px;
+    height: 1px;
+    background: var(--secondary);
+    margin: 0 auto 14px;
+  }
+  .card .meta {
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.66rem;
+    color: var(--secondary);
+    text-align: center;
+    margin-bottom: 14px;
+  }
+  .card p {
+    font-size: 0.9rem;
+    color: var(--text);
+    margin: 0;
+  }
+  .card dl {
+    margin: 0;
+    font-size: 0.88rem;
+  }
+  .card dt {
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.65rem;
+    color: var(--secondary);
+    margin-top: 10px;
+  }
+  .card dd {
+    margin: 2px 0 0;
+    color: var(--text-emphasis);
+    font-weight: 500;
+  }
+
+  /* ---------- HOURS TABLE ---------- */
+  .hours-section {
+    margin: 70px 80px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+  .hours-section .prose {
+    font-size: 0.95rem;
+  }
+  .hours-section .prose p {
+    margin: 0 0 14px;
+  }
+  .hours-section .prose .drop {
+    float: left;
+    font-family: var(--font-display), serif;
+    font-size: 3.4rem;
+    line-height: 0.9;
+    color: var(--accent);
+    padding: 6px 10px 0 0;
+    font-weight: 600;
+  }
+  table.hours {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--surface);
+    border: 1px solid var(--primary);
+  }
+  table.hours caption {
+    font-family: var(--font-display), serif;
+    font-size: 1.2rem;
+    color: var(--primary);
+    padding: 14px 0 6px;
+    border-bottom: 1px solid var(--accent);
+    margin-bottom: 0;
+    text-align: center;
+    caption-side: top;
+    background: var(--bg);
+  }
+  table.hours th, table.hours td {
+    padding: 11px 18px;
+    border-bottom: 1px solid rgba(15, 31, 61, 0.15);
+    font-size: 0.88rem;
+    text-align: left;
+  }
+  table.hours th {
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 0.7rem;
+    color: var(--secondary);
+    font-weight: 600;
+  }
+  table.hours td.closed {
+    color: rgba(15, 31, 61, 0.55);
+    font-style: italic;
+  }
+  table.hours tr:last-child td,
+  table.hours tr:last-child th { border-bottom: none; }
+  .hours-note {
+    margin-top: 14px;
+    font-size: 0.78rem;
+    color: var(--text-emphasis);
+    text-align: center;
+    letter-spacing: 0.06em;
+  }
+
+  /* ---------- TRANSIT / ACCESSIBILITY DOUBLE PANEL ---------- */
+  .panel-grid {
+    margin: 70px 80px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+  .panel {
+    background: var(--surface);
+    border: 1px solid var(--primary);
+    padding: 6px;
+  }
+  .panel-in {
+    border: 1px solid var(--accent);
+    padding: 30px 32px 32px;
+  }
+  .panel h3 {
+    font-family: var(--font-display), serif;
+    font-size: 1.35rem;
+    color: var(--primary);
+    margin: 0 0 4px;
+  }
+  .panel .panel-kicker {
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    font-size: 0.66rem;
+    color: var(--secondary);
+    margin-bottom: 12px;
+  }
+  .panel hr {
+    border: none;
+    border-top: 1px solid var(--secondary);
+    width: 60px;
+    margin: 14px 0 18px 0;
+  }
+  .panel ol, .panel ul {
+    padding-left: 22px;
+    margin: 10px 0 0;
+  }
+  .panel li {
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+  }
+  .panel li::marker { color: var(--accent); font-weight: 700; }
+
+  /* ---------- CENTERPIECE ---------- */
+  .centerpiece-block {
+    text-align: center;
+    margin: 80px 80px 0;
+    padding: 40px 60px 30px;
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+    position: relative;
+  }
+  .centerpiece-block .star {
+    width: 86px;
+    height: 86px;
+    margin: 0 auto 18px;
+    color: var(--primary);
+  }
+  .centerpiece-block .star svg { width: 100%; height: 100%; display: block; }
+  .centerpiece-block h2 {
+    font-family: var(--font-display), serif;
+    font-size: 1.8rem;
+    color: var(--primary);
+    margin: 0 0 12px;
+    font-weight: 600;
+  }
+  .centerpiece-block p {
+    max-width: 720px;
+    margin: 0 auto;
+    font-size: 0.98rem;
+    color: var(--text-emphasis);
+  }
+  .centerpiece-block .signoff {
+    margin-top: 22px;
+    font-family: var(--font-display), serif;
+    font-style: italic;
+    color: var(--primary);
+    font-size: 1.05rem;
+  }
+
+  /* ---------- CONTACT STRIP ---------- */
+  .contact-strip {
+    margin: 60px 80px 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid var(--primary);
+    background: var(--surface);
+  }
+  .contact-strip > div {
+    padding: 28px 36px;
+    border-right: 1px solid var(--accent);
+  }
+  .contact-strip > div:last-child { border-right: none; }
+  .contact-strip h4 {
+    text-transform: uppercase;
+    letter-spacing: 0.24em;
+    font-size: 0.75rem;
+    color: var(--secondary);
+    margin: 0 0 8px;
+    font-weight: 600;
+  }
+  .contact-strip .big {
+    font-family: var(--font-display), serif;
+    font-size: 1.55rem;
+    color: var(--primary);
+    margin: 0 0 4px;
+  }
+  .contact-strip .small {
+    font-size: 0.85rem;
+    color: var(--text-emphasis);
+  }
+  .contact-strip a { color: var(--text-emphasis); text-decoration: none; border-bottom: 1px solid var(--accent); }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    margin-top: 60px;
+    background: var(--primary);
+    color: var(--bg);
+    position: relative;
+    overflow: hidden;
+  }
+  footer .girih-bg {
+    position: absolute;
+    inset: 0;
+    opacity: 0.08;
+    pointer-events: none;
+    background-image: url("svg/girih-tessellation-2.svg");
+    background-size: 800px auto;
+    background-repeat: repeat;
+  }
+  footer .footer-inner {
+    position: relative;
+    padding: 60px 80px 30px;
+  }
+  footer .cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+    text-align: center;
+  }
+  footer h5 {
+    font-family: var(--font-body), sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    font-size: 0.72rem;
+    color: var(--accent);
+    margin: 0 0 14px;
+    font-weight: 600;
+  }
+  footer p {
+    margin: 0 0 6px;
+    font-size: 0.88rem;
+    color: var(--bg);
+    line-height: 1.55;
+  }
+  footer a {
+    color: var(--bg);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(201, 162, 58, 0.6);
+  }
+  footer .tailpiece {
+    text-align: center;
+    margin: 40px auto 14px;
+    color: var(--accent);
+    font-size: 1.6rem;
+    letter-spacing: 0.3em;
+  }
+  footer .ivory-rule {
+    border: none;
+    border-top: 1px solid var(--bg);
+    width: 280px;
+    margin: 6px auto 14px;
+    opacity: 0.6;
+  }
+  footer .colophon {
+    text-align: center;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.24em;
+    color: var(--bg);
+    opacity: 0.85;
+  }
+</style>
+</head>
+<body>
+
+<div class="top-filet"></div>
+
+<header class="masthead">
+  <div class="palmettes">
+    <span class="palmette" aria-hidden="true">
+      <svg viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg">
+        <path d="M30 4 C 22 4, 14 10, 6 15 C 14 20, 22 26, 30 26 C 38 26, 46 20, 54 15 C 46 10, 38 4, 30 4 Z M30 10 C 26 10, 22 13, 18 15 C 22 17, 26 20, 30 20 C 34 20, 38 17, 42 15 C 38 13, 34 10, 30 10 Z" fill="currentColor"/>
+        <circle cx="30" cy="15" r="2" fill="currentColor"/>
+      </svg>
+    </span>
+    <span class="sitename">Maydān-i Naqsh<span class="dot">✦</span>Civic Bureau of Isfahan Heritage</span>
+    <span class="palmette" aria-hidden="true">
+      <svg viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg">
+        <path d="M30 4 C 22 4, 14 10, 6 15 C 14 20, 22 26, 30 26 C 38 26, 46 20, 54 15 C 46 10, 38 4, 30 4 Z M30 10 C 26 10, 22 13, 18 15 C 22 17, 26 20, 30 20 C 34 20, 38 17, 42 15 C 38 13, 34 10, 30 10 Z" fill="currentColor"/>
+        <circle cx="30" cy="15" r="2" fill="currentColor"/>
+      </svg>
+    </span>
+  </div>
+  <div class="subtitle">Ostandari Quarter · Established by Municipal Ordinance 1382/04</div>
+</header>
+
+<nav class="primary" aria-label="Primary">
+  <a href="page-1.html">Home</a>
+  <span class="diamond">◆</span>
+  <a href="page-2.html">Council &amp; Mandate</a>
+  <span class="diamond">◆</span>
+  <a href="page-3.html">Permits &amp; Restoration</a>
+  <span class="diamond">◆</span>
+  <a href="page-4.html">Notices &amp; Minutes</a>
+  <span class="diamond">◆</span>
+  <a href="page-5.html">Civic Calendar</a>
+  <span class="diamond">◆</span>
+  <a href="page-6.html" aria-current="page">Visit the Bureau</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-arch" aria-hidden="true">
+    <svg class="arch" viewBox="0 0 500 400" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+      <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M 60 380 L 60 260 C 60 170, 140 80, 250 80 C 360 80, 440 170, 440 260 L 440 380" />
+        <path d="M 80 380 L 80 260 C 80 180, 155 100, 250 100 C 345 100, 420 180, 420 260 L 420 380" />
+        <path d="M 250 80 L 250 50" />
+        <path d="M 235 50 L 265 50" />
+        <path d="M 250 60 L 245 70 L 250 80 L 255 70 Z" fill="currentColor" stroke="none"/>
+        <path d="M 60 260 L 440 260" stroke-dasharray="2 6"/>
+      </g>
+    </svg>
+    <div class="arch-inner">
+      <div class="eyebrow">Visitor's Threshold · Ostandari Street</div>
+      <h1>Visit the Bureau</h1>
+    </div>
+  </div>
+  <p class="lede">The doors of the Bureau open onto a small courtyard set back from the boulevard, shaded by two old plane trees and signposted in cobalt enamel. All citizens, scholars, and craft-trade representatives are welcome to call during public hours, or to write ahead in Persian or English.</p>
+  <div class="seal-row">
+    <span class="gold-rule"></span>
+    <span class="seal" aria-hidden="true">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="12,2 14.5,9 22,9 16,14 18,21 12,17 6,21 8,14 2,9 9.5,9" fill="none" stroke="currentColor" stroke-width="1.4"/>
+      </svg>
+    </span>
+    <span class="gold-rule"></span>
+  </div>
+</section>
+
+<div class="divider" aria-hidden="true">
+  <svg viewBox="0 0 437.999 18.893" xmlns="http://www.w3.org/2000/svg">
+    <g fill="currentColor">
+      <path d="M0,9.445s37.005-0.063,73.998-0.829c18.495-0.386,36.989-0.949,50.831-1.785c6.919-0.414,12.677-0.906,16.663-1.46c1.99-0.28,3.539-0.582,4.535-0.878c0.502-0.146,0.844-0.297,1.049-0.405c0.157-0.107,0.238-0.162,0.238-0.162l0.42-0.287l0.656,0.656l-0.369,0.338s-0.154,0.142-0.456,0.324c-0.291,0.154-0.714,0.331-1.256,0.484c-1.085,0.314-2.667,0.608-4.686,0.879c-4.037,0.533-9.811,0.985-16.745,1.354c-13.868,0.744-32.369,1.183-50.87,1.443C37.003,9.632,0,9.445,0,9.445z"/>
+      <path d="M437.999,9.445s-37.004,0.187-74.007-0.329c-18.501-0.261-37.002-0.699-50.869-1.443c-6.935-0.368-12.708-0.82-16.745-1.354c-2.019-0.271-3.601-0.565-4.687-0.879c-0.541-0.153-0.965-0.33-1.256-0.484c-0.302-0.183-0.456-0.324-0.456-0.324l-0.369-0.338l0.656-0.656l0.42,0.287s0.081,0.055,0.238,0.162c0.204,0.108,0.546,0.26,1.048,0.405c0.996,0.296,2.545,0.598,4.535,0.878c3.986,0.554,9.744,1.046,16.663,1.46c13.842,0.836,32.337,1.399,50.831,1.785C400.994,9.382,437.999,9.445,437.999,9.445z"/>
+      <circle cx="219" cy="9.4" r="3.4" fill="none" stroke="currentColor" stroke-width="1.2"/>
+      <circle cx="219" cy="9.4" r="1.4"/>
+    </g>
+  </svg>
+</div>
+
+<div class="address-block">
+  <div class="ledger">
+    <div class="placard">
+      <small>The Bureau Resides At</small>
+      No. 12 Ostandari Street<br>
+      Isfahan, 81746-73441 · Islamic Republic of Iran
+    </div>
+    <div class="coords">32°39′24″ N · 51°40′47″ E · Plot Reference IS-OST-012-A</div>
+  </div>
+</div>
+
+<div class="card-grid" style="margin-top:46px;">
+
+  <div class="card">
+    <div class="arch-cap" aria-hidden="true">
+      <svg viewBox="0 0 60 50" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 6 50 L 6 30 C 6 16, 18 4, 30 4 C 42 4, 54 16, 54 30 L 54 50" fill="var(--bg)" stroke="var(--primary)" stroke-width="1.5"/>
+      </svg>
+      <span class="seal-num">I</span>
+    </div>
+    <div class="card-inner">
+      <h3>Reception &amp; Records</h3>
+      <div class="turq-filet"></div>
+      <div class="meta">Ground Floor · East Iwan</div>
+      <p>Walk-in queries, document lodgement, and copies of public registers are handled at the Reception Desk in the eastern iwan, immediately past the courtyard ramp. No appointment is needed for short enquiries.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="arch-cap" aria-hidden="true">
+      <svg viewBox="0 0 60 50" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 6 50 L 6 30 C 6 16, 18 4, 30 4 C 42 4, 54 16, 54 30 L 54 50" fill="var(--bg)" stroke="var(--primary)" stroke-width="1.5"/>
+      </svg>
+      <span class="seal-num">II</span>
+    </div>
+    <div class="card-inner">
+      <h3>Permits Counter</h3>
+      <div class="turq-filet"></div>
+      <div class="meta">Upper Hall · Northern Wing</div>
+      <p>Restoration permits, façade interventions, and craftspersons' registration are managed in the Upper Hall. Submitted dossiers are read into the Council ledger on the same working day before 13:00.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="arch-cap" aria-hidden="true">
+      <svg viewBox="0 0 60 50" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 6 50 L 6 30 C 6 16, 18 4, 30 4 C 42 4, 54 16, 54 30 L 54 50" fill="var(--bg)" stroke="var(--primary)" stroke-width="1.5"/>
+      </svg>
+      <span class="seal-num">III</span>
+    </div>
+    <div class="card-inner">
+      <h3>Reading Room</h3>
+      <div class="turq-filet"></div>
+      <div class="meta">Courtyard Pavilion · By Card</div>
+      <p>The Reading Room holds 1,840 catalogued plans, surveys, and tilework studies dating from 1308 SH onward. Researchers should request a one-day card from Reception, presenting one form of photographic identification.</p>
+    </div>
+  </div>
+
+</div>
+
+<section class="hours-section">
+  <div class="prose">
+    <div class="section-title" style="text-align:left;">
+      <div class="kicker" style="text-align:left;">Article II</div>
+      <h2 style="text-align:left;">Public Hours &amp; Closures</h2>
+      <div class="turq-rule" style="margin-left:0;"></div>
+    </div>
+    <p style="margin-top:22px;"><span class="drop">T</span>he public counters are open from Saturday through Wednesday, between 08:30 and 14:00 local time, with the records desk closing fifteen minutes earlier to allow ledgers to be sealed and returned to the safe. Thursday mornings are reserved for internal Council deliberations and are not open to the public; on these mornings, written submissions left in the brass slot beside the gatehouse will be received and date-stamped at 09:00.</p>
+    <p>The Bureau observes all national holidays of the Islamic Republic of Iran, and additionally closes for the Bureau's own founding observance on 7 Mehr each year. Visitors travelling from outside the province are encouraged to telephone Reception in advance to confirm that no unscheduled closure is in force.</p>
+    <p>The Reading Room operates on a narrower window, 09:00–13:00, Saturday through Tuesday; Wednesday afternoons are devoted to reshelving and the conservator's weekly humidity inspection.</p>
+  </div>
+
+  <div>
+    <table class="hours">
+      <caption>Bureau Public Hours</caption>
+      <thead>
+        <tr><th scope="col">Day</th><th scope="col">Counters</th><th scope="col">Reading Room</th></tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">Saturday</th><td>08:30 — 14:00</td><td>09:00 — 13:00</td></tr>
+        <tr><th scope="row">Sunday</th><td>08:30 — 14:00</td><td>09:00 — 13:00</td></tr>
+        <tr><th scope="row">Monday</th><td>08:30 — 14:00</td><td>09:00 — 13:00</td></tr>
+        <tr><th scope="row">Tuesday</th><td>08:30 — 14:00</td><td>09:00 — 13:00</td></tr>
+        <tr><th scope="row">Wednesday</th><td>08:30 — 14:00</td><td class="closed">closed (P.M.)</td></tr>
+        <tr><th scope="row">Thursday</th><td class="closed">internal session</td><td class="closed">closed</td></tr>
+        <tr><th scope="row">Friday</th><td class="closed">closed</td><td class="closed">closed</td></tr>
+      </tbody>
+    </table>
+    <div class="hours-note">All times Iran Standard Time (UTC + 03:30) · Public ledger closes 13:45</div>
+  </div>
+</section>
+
+<section class="panel-grid">
+
+  <div class="panel">
+    <div class="panel-in">
+      <div class="panel-kicker">Article III</div>
+      <h3>Accessibility &amp; the Courtyard</h3>
+      <hr>
+      <p style="font-size:0.92rem;">A stone-and-bronze ramp, installed in 2022 to replace the original three-step threshold, runs the full eastern flank of the courtyard at a 1:14 gradient. The ramp is laid in dressed sandstone with a cobalt enamel guide-strip and is wide enough for two abreast.</p>
+      <ul>
+        <li>Step-free access from Ostandari Street through the gatehouse to all ground-floor counters.</li>
+        <li>One accessible W.C. adjacent to Reception, signed in Persian, English, and pictogram.</li>
+        <li>The Upper Hall is reached by a small lift (capacity 320 kg); on lift outage, an officer will receive papers downstairs.</li>
+        <li>Two reserved parking bays on Kucheh Bagh-e Vali, fifty metres west of the gatehouse.</li>
+        <li>Assistance dogs are welcomed; please notify the gatekeeper on arrival.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-in">
+      <div class="panel-kicker">Article IV</div>
+      <h3>Transit from Imam Hossein Square</h3>
+      <hr>
+      <p style="font-size:0.92rem;">The Bureau is most easily reached by the Bus Rapid Transit (BRT) line which terminates a short walk from the gatehouse. The journey from Imam Hossein Square takes approximately eleven minutes outside peak hours.</p>
+      <ol>
+        <li>Board <strong>BRT Line 1</strong> (Naghshe-Jahan corridor) at Imam Hossein Square, southbound platform, towards Soffeh.</li>
+        <li>Travel four stops to <strong>Ostandari</strong> station; the carriage announces stops in Persian and English.</li>
+        <li>Alight on the western side and walk 220 metres along Ostandari Street, keeping the iron railings to your left.</li>
+        <li>The Bureau gatehouse stands beneath two plane trees, opposite the Public Works Annex.</li>
+        <li>Single fare 15,000 rials; concession card holders board free before 10:00.</li>
+      </ol>
+    </div>
+  </div>
+
+</section>
+
+<section class="centerpiece-block">
+  <div class="star" aria-hidden="true">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <g fill="none" stroke="currentColor" stroke-width="1.4">
+        <polygon points="50,6 60,28 84,30 66,46 72,70 50,58 28,70 34,46 16,30 40,28"/>
+        <polygon points="50,18 56,33 72,35 60,46 64,62 50,54 36,62 40,46 28,35 44,33"/>
+        <circle cx="50" cy="44" r="6" fill="currentColor"/>
+      </g>
+    </svg>
+  </div>
+  <h2>A Note to Correspondents</h2>
+  <p>The Bureau receives written correspondence in either Persian or English, and considers both equally official under Article 11 of the founding ordinance. Letters may be addressed to the Records Desk and should bear, where possible, the parcel number or street segment in question. Replies are issued within fourteen working days; matters touching on permits in active review may be acknowledged the same week.</p>
+  <div class="signoff">— Bureau of Heritage Stewardship, Ostandari Quarter</div>
+</section>
+
+<section class="contact-strip">
+  <div>
+    <h4>Reception · Telephone</h4>
+    <p class="big">+98 31 3222 7401</p>
+    <p class="small">Direct line to the gatehouse, attended Saturday–Wednesday during public hours. After 14:00, an answering ledger records the caller and number for next-day reply.</p>
+  </div>
+  <div>
+    <h4>Records Desk · Electronic Post</h4>
+    <p class="big"><a href="mailto:records@maydan-naqsh.ir">records@maydan-naqsh.ir</a></p>
+    <p class="small">For dossier submissions, ledger queries, and accessibility requests. Encrypted attachments accepted; please indicate parcel reference and preferred reply language in the subject line.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="girih-bg" aria-hidden="true"></div>
+  <div class="footer-inner">
+    <div class="cols">
+      <div>
+        <h5>Bureau Address</h5>
+        <p>No. 12 Ostandari Street</p>
+        <p>Isfahan 81746-73441</p>
+        <p>Islamic Republic of Iran</p>
+        <p style="margin-top:8px;">Plot IS-OST-012-A</p>
+      </div>
+      <div>
+        <h5>Public Hours</h5>
+        <p>Saturday — Wednesday</p>
+        <p>08:30 — 14:00 IRST</p>
+        <p>Reading Room 09:00 — 13:00</p>
+        <p style="margin-top:8px;">Closed Thursday &amp; Friday</p>
+      </div>
+      <div>
+        <h5>Contacts</h5>
+        <p>Reception · +98 31 3222 7401</p>
+        <p><a href="mailto:records@maydan-naqsh.ir">records@maydan-naqsh.ir</a></p>
+        <p>Persian or English accepted</p>
+        <p style="margin-top:8px;">BRT Line 1 · Ostandari Stop</p>
+      </div>
+    </div>
+    <div class="tailpiece" aria-hidden="true">✦ ❖ ✦</div>
+    <hr class="ivory-rule">
+    <div class="colophon">Issued 14 Aban 1403 · Ordinance 1382/04 · Folio VI of VI</div>
+  </div>
+</footer>
+
+</body>
+</html>

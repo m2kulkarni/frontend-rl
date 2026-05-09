@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Visit — Hours, Address, and the Quarter</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), serif;
+    font-size: 15px;
+    line-height: 1.7;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='600'><g transform='translate(300,300)scale(0.87)rotate(45)' fill='%23000000' fill-opacity='0.05'><circle cx='-195.16' r='163'/><circle cx='195.16' r='163'/><circle cy='195.16' r='163'/><circle cy='-195.16' r='163'/><rect x='-232' y='-232' width='464' height='464'/><g fill='%23f4ecd8'><circle cx='-195.16' r='157'/><circle cx='195.16' r='157'/><circle cy='195.16' r='157'/><circle cy='-195.16' r='157'/><rect x='-226' y='-226' width='452' height='452'/></g><g fill='%23000000' fill-opacity='1'><circle cx='-195.16' r='144'/><circle cx='195.16' r='144'/><circle cy='195.16' r='144'/><circle cy='-195.16' r='144'/><rect x='-213' y='-213' width='426' height='426'/></g><g fill='%23f4ecd8'><circle cx='-195.16' r='138'/><circle cx='195.16' r='138'/><circle cy='195.16' r='138'/><circle cy='-195.16' r='138'/><rect x='-207' y='-207' width='414' height='414'/></g></g></svg>");
+    background-size: 180px 180px;
+    background-repeat: repeat;
+  }
+
+  /* ---------- Navigation ---------- */
+  .arcade-nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--bg);
+    border-bottom: 1px solid var(--accent);
+    padding: 0 48px;
+  }
+  .arcade-nav-inner {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    max-width: 1344px;
+    margin: 0 auto;
+  }
+  .nav-mark {
+    font-family: var(--font-display), serif;
+    font-size: 18px;
+    letter-spacing: 0.08em;
+    color: var(--primary);
+    padding: 22px 0 16px;
+    text-transform: uppercase;
+  }
+  .nav-mark span { color: var(--accent); }
+  .nav-links {
+    display: flex;
+    gap: 6px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .nav-links a {
+    position: relative;
+    display: block;
+    width: 110px;
+    padding: 38px 6px 12px;
+    text-align: center;
+    text-decoration: none;
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+  .nav-arch {
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 56px;
+    height: 36px;
+    overflow: visible;
+  }
+  .nav-arch path {
+    fill: none;
+    stroke: var(--ornament);
+    stroke-width: 1.4;
+  }
+  .nav-links a[aria-current="page"] .nav-arch path.fill {
+    fill: var(--secondary);
+    stroke: var(--ornament);
+  }
+  .nav-links a[aria-current="page"] {
+    color: var(--accent);
+  }
+  .nav-links a:hover { color: var(--secondary); }
+
+  /* ---------- Page heading ---------- */
+  .page-head {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 56px 48px 24px;
+    text-align: center;
+  }
+  .page-eyebrow {
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.32em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin: 0 0 12px;
+  }
+  .page-title {
+    font-family: var(--font-display), serif;
+    font-size: 56px;
+    line-height: 1.05;
+    color: var(--primary);
+    margin: 0 0 14px;
+    letter-spacing: 0.02em;
+  }
+  .page-sub {
+    max-width: 720px;
+    margin: 0 auto;
+    color: var(--text);
+    font-style: italic;
+    font-size: 16px;
+  }
+  .head-divider {
+    display: flex;
+    justify-content: center;
+    margin: 28px auto 0;
+  }
+  .head-divider svg { width: 44px; height: 44px; }
+
+  /* ---------- Two columns within arches ---------- */
+  .visit-grid {
+    max-width: 1180px;
+    margin: 24px auto 64px;
+    padding: 0 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+  }
+  .arch-card {
+    position: relative;
+    padding: 56px 44px 44px;
+    background: var(--surface);
+  }
+  .arch-frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  .arch-frame svg {
+    width: 100%;
+    height: 100%;
+  }
+  .arch-card-inner {
+    position: relative;
+    padding: 32px 28px 12px;
+  }
+  .quatrefoil-spandrel {
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 38px;
+    height: 38px;
+  }
+  .col-label {
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-align: center;
+    margin: 0 0 10px;
+  }
+  .col-title {
+    font-family: var(--font-display), serif;
+    font-size: 30px;
+    color: var(--primary);
+    text-align: center;
+    margin: 0 0 6px;
+    letter-spacing: 0.02em;
+  }
+  .hairline {
+    width: 70%;
+    height: 1px;
+    background: var(--ornament);
+    margin: 18px auto 26px;
+    position: relative;
+  }
+  .hairline::before, .hairline::after {
+    content: "";
+    position: absolute;
+    top: -2px;
+    width: 5px;
+    height: 5px;
+    background: var(--accent);
+    transform: rotate(45deg);
+  }
+  .hairline::before { left: -3px; }
+  .hairline::after  { right: -3px; }
+
+  .info-block { margin-bottom: 26px; }
+  .info-block h3 {
+    font-family: var(--font-display), serif;
+    font-size: 16px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+    margin: 0 0 6px;
+  }
+  .info-block p { margin: 0 0 8px; }
+
+  .hours-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 8px;
+  }
+  .hours-list li {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dotted rgba(58,38,24,0.35);
+    padding: 7px 0;
+    font-family: var(--font-body), serif;
+    font-size: 15px;
+  }
+  .hours-list .day {
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--primary);
+    font-size: 13px;
+  }
+  .hours-list .time { color: var(--secondary); font-feature-settings: "tnum"; }
+  .hours-list .closed { color: var(--text); font-style: italic; }
+
+  .note {
+    margin-top: 18px;
+    padding: 14px 18px;
+    border-left: 2px solid var(--accent);
+    background: rgba(201,162,58,0.08);
+    font-style: italic;
+    color: var(--text);
+  }
+  .note strong {
+    font-style: normal;
+    color: var(--secondary);
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-size: 13px;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .closures {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .closures li {
+    padding: 6px 0 6px 22px;
+    position: relative;
+  }
+  .closures li::before {
+    content: "✠";
+    position: absolute;
+    left: 0;
+    top: 4px;
+    color: var(--accent);
+    font-size: 14px;
+  }
+  .closures .when {
+    font-family: var(--font-display), serif;
+    color: var(--secondary);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 12px;
+    display: block;
+  }
+
+  .step {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+  .step-num {
+    flex: 0 0 36px;
+    height: 36px;
+    border: 1.5px solid var(--ornament);
+    color: var(--accent);
+    font-family: var(--font-display), serif;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px 18px 4px 4px;
+    background: var(--surface);
+  }
+  .step-body { flex: 1; }
+  .step-body strong {
+    display: block;
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 2px;
+  }
+
+  /* ---------- Map block ---------- */
+  .map-band {
+    max-width: 1180px;
+    margin: 0 auto 64px;
+    padding: 0 48px;
+  }
+  .map-frame {
+    position: relative;
+    border: 1.5px solid var(--ornament);
+    background: var(--surface);
+    padding: 26px 32px;
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: 36px;
+    align-items: center;
+  }
+  .map-frame::before, .map-frame::after {
+    content: "";
+    position: absolute;
+    width: 14px; height: 14px;
+    border: 1.5px solid var(--ornament);
+    background: var(--accent);
+    transform: rotate(45deg);
+  }
+  .map-frame::before { top: -8px; left: -8px; }
+  .map-frame::after  { bottom: -8px; right: -8px; }
+  .corner-tr, .corner-bl {
+    position: absolute;
+    width: 14px; height: 14px;
+    border: 1.5px solid var(--ornament);
+    background: var(--accent);
+    transform: rotate(45deg);
+  }
+  .corner-tr { top: -8px; right: -8px; }
+  .corner-bl { bottom: -8px; left: -8px; }
+
+  .map-svg {
+    width: 100%;
+    height: 320px;
+    background: #ebe1c4;
+    border: 1px solid var(--ornament);
+  }
+  .address-stack h3 {
+    font-family: var(--font-display), serif;
+    font-size: 28px;
+    margin: 0 0 12px;
+    color: var(--primary);
+  }
+  .address-stack .lines p {
+    margin: 4px 0;
+    font-size: 15px;
+  }
+  .address-stack .lines .em {
+    color: var(--secondary);
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-size: 13px;
+    margin-top: 12px;
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    margin-top: 32px;
+    border-top: 1px solid var(--accent);
+    background: var(--bg);
+    padding: 36px 48px 28px;
+  }
+  .footer-arcade {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 24px;
+  }
+  .footer-arch {
+    width: 90px;
+    height: 80px;
+  }
+  .footer-cols {
+    max-width: 920px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr 1px 1fr;
+    gap: 28px;
+    text-align: center;
+  }
+  .footer-cols .rule {
+    background: var(--accent);
+    width: 1px;
+    margin: 8px 0;
+  }
+  .footer-cols h4 {
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 8px;
+  }
+  .footer-cols p {
+    margin: 2px 0;
+    font-size: 13px;
+    color: var(--text);
+  }
+  .footer-seal {
+    display: flex;
+    justify-content: center;
+    margin: 28px 0 10px;
+  }
+  .footer-seal svg {
+    width: 38px;
+    height: 38px;
+    fill: var(--ornament);
+  }
+  .copy {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== NAV ========== -->
+<nav class="arcade-nav" aria-label="Primary">
+  <div class="arcade-nav-inner">
+    <div class="nav-mark">Maison <span>·</span> Saint-Vrain</div>
+    <ul class="nav-links">
+      <li><a href="page-1.html">
+        <svg class="nav-arch" viewBox="0 0 56 36"><path d="M4 36 L4 18 Q4 4 28 2 Q52 4 52 18 L52 36"/></svg>
+        House
+      </a></li>
+      <li><a href="page-2.html">
+        <svg class="nav-arch" viewBox="0 0 56 36"><path d="M4 36 L4 18 Q4 4 28 2 Q52 4 52 18 L52 36"/></svg>
+        Supper
+      </a></li>
+      <li><a href="page-3.html">
+        <svg class="nav-arch" viewBox="0 0 56 36"><path d="M4 36 L4 18 Q4 4 28 2 Q52 4 52 18 L52 36"/></svg>
+        Cellar
+      </a></li>
+      <li><a href="page-4.html">
+        <svg class="nav-arch" viewBox="0 0 56 36"><path d="M4 36 L4 18 Q4 4 28 2 Q52 4 52 18 L52 36"/></svg>
+        The House
+      </a></li>
+      <li><a href="page-5.html" aria-current="page">
+        <svg class="nav-arch" viewBox="0 0 56 36"><path class="fill" d="M4 36 L4 18 Q4 4 28 2 Q52 4 52 18 L52 36 Z"/></svg>
+        Visit
+      </a></li>
+      <li><a href="page-6.html">
+        <svg class="nav-arch" viewBox="0 0 56 36"><path d="M4 36 L4 18 Q4 4 28 2 Q52 4 52 18 L52 36"/></svg>
+        Reserve
+      </a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ========== HEADING ========== -->
+<header class="page-head">
+  <p class="page-eyebrow">— V — Visit & Quarter —</p>
+  <h1 class="page-title">Hours, Address,<br>& the Quarter</h1>
+  <p class="page-sub">A long supper kept slowly, behind a low door on the rue des Drapiers — eight minutes south-east of the cathedral, four centuries from the boulevard.</p>
+  <div class="head-divider" aria-hidden="true">
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="var(--ornament)">
+      <path d="M100 20 L110 90 L180 100 L110 110 L100 180 L90 110 L20 100 L90 90 Z"/>
+      <circle cx="100" cy="100" r="6" fill="var(--accent)"/>
+    </svg>
+  </div>
+</header>
+
+<!-- ========== TWO ARCHED COLUMNS ========== -->
+<section class="visit-grid">
+
+  <!-- LEFT COLUMN: Hours & Closures -->
+  <article class="arch-card">
+    <div class="arch-frame" aria-hidden="true">
+      <svg viewBox="0 0 400 600" preserveAspectRatio="none">
+        <path d="M 12 590 L 12 200 Q 12 30 200 18 Q 388 30 388 200 L 388 590"
+              fill="none" stroke="var(--ornament)" stroke-width="1.5"/>
+        <path d="M 24 590 L 24 200 Q 24 42 200 30 Q 376 42 376 200 L 376 590"
+              fill="none" stroke="var(--ornament)" stroke-width="0.7"/>
+      </svg>
+    </div>
+    <svg class="quatrefoil-spandrel" viewBox="-300 -300 600 600" aria-hidden="true">
+      <g transform="scale(0.6)" fill="var(--ornament)">
+        <circle cx="-195" r="120"/><circle cx="195" r="120"/>
+        <circle cy="195" r="120"/><circle cy="-195" r="120"/>
+      </g>
+      <circle r="14" fill="var(--accent)"/>
+    </svg>
+
+    <div class="arch-card-inner">
+      <p class="col-label">First Column</p>
+      <h2 class="col-title">The Calendar of the Table</h2>
+      <div class="hairline"></div>
+
+      <div class="info-block">
+        <h3>Opening Nights</h3>
+        <p>The dining room admits twenty-two guests at a single seating. Doors open at 19h00; supper is served at 19h30 sharp, and runs until midnight or thereabouts.</p>
+        <ul class="hours-list">
+          <li><span class="day">Sun — Wed</span><span class="closed">Closed — kitchen at rest</span></li>
+          <li><span class="day">Thursday</span><span class="time">19h30 — 23h30</span></li>
+          <li><span class="day">Friday</span><span class="time">19h30 — 24h00</span></li>
+          <li><span class="day">Saturday</span><span class="time">19h30 — 24h00</span></li>
+        </ul>
+      </div>
+
+      <div class="info-block">
+        <h3>Closure Dates</h3>
+        <ul class="closures">
+          <li>
+            <span class="when">August Recess</span>
+            From Saturday, the 2nd of August through Tuesday, the 2nd of September. Chef Brescot returns to the orchards of the Somme; the cellar is rebuilt in his absence.
+          </li>
+          <li>
+            <span class="when">Christmas Week</span>
+            From the 22nd of December through the 2nd of January. The hearth is doused on the eve of the Nativity and re-lit at Epiphany.
+          </li>
+          <li>
+            <span class="when">Toussaint</span>
+            Closed Friday the 31st of October and Saturday the 1st of November.
+          </li>
+        </ul>
+      </div>
+
+      <div class="note">
+        <strong>A word on the cobbles</strong>
+        The rue des Drapiers is closed to vehicles after 18h00. Taxis and private cars must set down at the corner of the rue des Trois-Cailloux; the remaining sixty paces are on foot, over cobbles. Stout shoes are kindly suggested when the weather turns.
+      </div>
+    </div>
+  </article>
+
+  <!-- RIGHT COLUMN: Directions & Quarter -->
+  <article class="arch-card">
+    <div class="arch-frame" aria-hidden="true">
+      <svg viewBox="0 0 400 600" preserveAspectRatio="none">
+        <path d="M 12 590 L 12 200 Q 12 30 200 18 Q 388 30 388 200 L 388 590"
+              fill="none" stroke="var(--ornament)" stroke-width="1.5"/>
+        <path d="M 24 590 L 24 200 Q 24 42 200 30 Q 376 42 376 200 L 376 590"
+              fill="none" stroke="var(--ornament)" stroke-width="0.7"/>
+      </svg>
+    </div>
+    <svg class="quatrefoil-spandrel" viewBox="-300 -300 600 600" aria-hidden="true">
+      <g transform="scale(0.6)" fill="var(--ornament)">
+        <circle cx="-195" r="120"/><circle cx="195" r="120"/>
+        <circle cy="195" r="120"/><circle cy="-195" r="120"/>
+      </g>
+      <circle r="14" fill="var(--accent)"/>
+    </svg>
+
+    <div class="arch-card-inner">
+      <p class="col-label">Second Column</p>
+      <h2 class="col-title">Approaching the House</h2>
+      <div class="hairline"></div>
+
+      <div class="info-block">
+        <h3>From the Cathédrale Notre-Dame</h3>
+
+        <div class="step">
+          <div class="step-num">I</div>
+          <div class="step-body">
+            <strong>Quit the West Front</strong>
+            With the great rose window at your back, take the rue Robert de Luzarches eastward, past the chapter-house wall.
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">II</div>
+          <div class="step-body">
+            <strong>Cross the Place Saint-Michel</strong>
+            Bear south. The square narrows into the rue des Trois-Cailloux; keep to the shaded side.
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">III</div>
+          <div class="step-body">
+            <strong>Turn at the iron lantern</strong>
+            A black wrought lantern marks the mouth of the rue des Drapiers. Twenty paces in, on the left, beneath a carved oak lintel — Maison Saint-Vrain.
+          </div>
+        </div>
+        <p style="margin-top:14px;font-style:italic;color:var(--text-emphasis);">Eight minutes on foot, at an unhurried pace.</p>
+      </div>
+
+      <div class="info-block">
+        <h3>Taxi Rank</h3>
+        <p>The nearest stand is on <strong>place Gambetta</strong>, a 200-metre walk from our door. Taxis Bleus d'Amiens may be summoned at <strong>03 22 91 30 03</strong>, and arrive within ten minutes most evenings. After supper, our maître d'hôtel will gladly telephone on your behalf.</p>
+      </div>
+
+      <div class="info-block">
+        <h3>Before Supper — The Quarter</h3>
+        <p>The cloth-merchants' quarter has, against the run of the centuries, kept its trade. Within three streets of the house you will find <strong>Atelier Cousu-Main</strong> at no. 14 rue des Drapiers (hand-stitched linen and shrouds for table) open until 18h30; the bookbinder <strong>Périlleux et Fils</strong> on the rue de la Hotoie, who works in calf and gold-leaf as his great-grandfather did; and the chandler <strong>Cire d'Abeille</strong>, whose tapers light our own tables. The wine merchant <strong>Caves Madeleine</strong>, on the corner of the place du Don, opens his vaulted cellar to visitors who knock politely before 19h00.</p>
+      </div>
+    </div>
+  </article>
+</section>
+
+<!-- ========== MAP & ADDRESS ========== -->
+<section class="map-band">
+  <div class="map-frame">
+    <span class="corner-tr"></span><span class="corner-bl"></span>
+
+    <svg class="map-svg" viewBox="0 0 500 320" xmlns="http://www.w3.org/2000/svg">
+      <!-- streets -->
+      <g stroke="#3a2618" stroke-opacity="0.35" fill="none" stroke-width="1">
+        <path d="M0 80 L500 60"/>
+        <path d="M0 220 L500 240"/>
+        <path d="M120 0 L140 320"/>
+        <path d="M340 0 L320 320"/>
+        <path d="M0 150 L500 160"/>
+      </g>
+      <!-- Place Gambetta -->
+      <circle cx="90" cy="180" r="22" fill="none" stroke="#3a2618" stroke-width="1"/>
+      <text x="90" y="184" text-anchor="middle" font-family="Cormorant Unicase" font-size="9" fill="#1e3a5f">PL. GAMBETTA</text>
+      <!-- Cathedral -->
+      <g transform="translate(380,90)">
+        <rect x="-14" y="-22" width="28" height="34" fill="#1e3a5f" opacity="0.85"/>
+        <polygon points="-14,-22 0,-40 14,-22" fill="#1e3a5f"/>
+        <rect x="-3" y="-8" width="6" height="14" fill="#f4ecd8"/>
+        <text x="0" y="30" text-anchor="middle" font-family="Cormorant Unicase" font-size="9" fill="#1e3a5f">CATHÉDRALE</text>
+      </g>
+      <!-- Maison Saint-Vrain -->
+      <g transform="translate(220,180)">
+        <circle r="14" fill="#c9a23a" stroke="#0a0a0a" stroke-width="1.5"/>
+        <path d="M-5 4 L-5 -3 Q-5 -8 0 -10 Q5 -8 5 -3 L5 4 Z" fill="#0a0a0a"/>
+        <text x="0" y="34" text-anchor="middle" font-family="Cormorant Unicase" font-size="10" fill="#0a0a0a" font-weight="700">MAISON ST-VRAIN</text>
+        <text x="0" y="46" text-anchor="middle" font-family="Cormorant Unicase" font-size="8" fill="#3a2618">RUE DES DRAPIERS</text>
+      </g>
+      <!-- footpath dotted -->
+      <path d="M380 100 Q310 130 260 160 Q240 170 230 178" fill="none" stroke="#c9a23a" stroke-width="1.5" stroke-dasharray="3 4"/>
+      <text x="305" y="125" font-family="Cormorant Unicase" font-size="9" fill="#1e3a5f" font-style="italic">8 min</text>
+      <!-- compass -->
+      <g transform="translate(465,30)">
+        <circle r="14" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+        <polygon points="0,-12 3,0 0,12 -3,0" fill="#0a0a0a"/>
+        <text x="0" y="-18" text-anchor="middle" font-family="Cormorant Unicase" font-size="8" fill="#0a0a0a">N</text>
+      </g>
+    </svg>
+
+    <div class="address-stack">
+      <h3>The House</h3>
+      <div class="lines">
+        <p><strong>Maison Saint-Vrain</strong></p>
+        <p>17, rue des Drapiers</p>
+        <p>80000 Amiens — Picardie</p>
+        <p class="em">Reservations</p>
+        <p>+33 (0)3 22 14 06 80</p>
+        <p>reserver@maison-saintvrain.fr</p>
+        <p class="em">Maître d'Hôtel</p>
+        <p>Madame Hélène Charpentier</p>
+        <p style="margin-top:14px;font-style:italic;">A handwritten card of confirmation is sent within two days of your booking.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div class="footer-arcade" aria-hidden="true">
+    <!-- 7 arches alternating fleur-de-lis and cross -->
+    <svg class="footer-arch" viewBox="0 0 90 80">
+      <path d="M8 78 L8 36 Q8 8 45 4 Q82 8 82 36 L82 78" fill="none" stroke="var(--ornament)" stroke-width="1.5"/>
+      <g transform="translate(45,42)" fill="var(--ornament)">
+        <path d="M0 -16 L4 -6 L0 4 L-4 -6 Z M-10 -2 Q-4 -2 0 -8 Q4 -2 10 -2 Q4 2 0 -2 Q-4 2 -10 -2 Z"/>
+        <rect x="-8" y="6" width="16" height="2"/>
+      </g>
+    </svg>
+    <svg class="footer-arch" viewBox="0 0 90 80">
+      <path d="M8 78 L8 36 Q8 8 45 4 Q82 8 82 36 L82 78" fill="none" stroke="var(--ornament)" stroke-width="1.5"/>
+      <g transform="translate(45,42)" fill="var(--ornament)">
+        <rect x="-2" y="-16" width="4" height="28"/>
+        <rect x="-12" y="-6" width="24" height="4"/>
+      </g>
+    </svg>
+    <svg class="footer-arch" viewBox="0 0 90 80">
+      <path d="M8 78 L8 36 Q8 8 45 4 Q82 8 82 36 L82 78" fill="none" stroke="var(--ornament)" stroke-width="1.5"/>
+      <g transform="translate(45,42)" fill="var(--ornament)">
+        <path d="M0 -16 L4 -6 L0 4 L-4 -6 Z M-10 -2 Q-4 -2 0 -8 Q4 -2 10 -2 Q4 2 0 -2 Q-4 2 -10 -2 Z"/>
+        <rect x="-8" y="6" width="16" height="2"/>
+      </g>
+    </svg>
+    <svg class="footer-arch" viewBox="0 0 90 80">
+      <path d="M8 78 L8 36 Q8 8 45 4 Q82 8 82 36 L82 78" fill="none" stroke="var(--ornament)" stroke-width="1.5"/>
+      <g transform="translate(45,42)" fill="var(--ornament)">
+        <rect x="-2" y="-16" width="4" height="28"/>
+        <rect x="-12" y="-6" width="24" height="4"/>
+      </g>
+    </svg>
+    <svg class="footer-arch" viewBox="0 0 90 80">
+      <path d="M8 78 L8 36 Q8 8 45 4 Q82 8 82 36 L82 78" fill="none" stroke="var(--ornament)" stroke-width="1.5"/>
+      <g transform="translate(45,42)" fill="var(--ornament)">
+        <path d="M0 -16 L4 -6 L0 4 L-4 -6 Z M-10 -2 Q-4 -2 0 -8 Q4 -2 10 -2 Q4 2 0 -2 Q-4 2 -10 -2 Z"/>
+        <rect x="-8" y="6" width="16" height="2"/>
+      </g>
+    </svg>
+    <svg class="footer-arch" viewBox="0 0 90 80">
+      <path d="M8 78 L8 36 Q8 8 45 4 Q82 8 82 36 L82 78" fill="none" stroke="var(--ornament)" stroke-width="1.5"/>
+      <g transform="translate(45,42)" fill="var(--ornament)">
+        <rect x="-2" y="-16" width="4" height="28"/>
+        <rect x="-12" y="-6" width="24" height="4"/>
+      </g>
+    </svg>
+    <svg class="footer-arch" viewBox="0 0 90 80">
+      <path d="M8 78 L8 36 Q8 8 45 4 Q82 8 82 36 L82 78" fill="none" stroke="var(--ornament)" stroke-width="1.5"/>
+      <g transform="translate(45,42)" fill="var(--ornament)">
+        <path d="M0 -16 L4 -6 L0 4 L-4 -6 Z M-10 -2 Q-4 -2 0 -8 Q4 -2 10 -2 Q4 2 0 -2 Q-4 2 -10 -2 Z"/>
+        <rect x="-8" y="6" width="16" height="2"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="footer-cols">
+    <div>
+      <h4>Address</h4>
+      <p>17, rue des Drapiers</p>
+      <p>80000 Amiens</p>
+      <p>Picardie — France</p>
+    </div>
+    <div class="rule"></div>
+    <div>
+      <h4>Hours</h4>
+      <p>Thursday — Saturday</p>
+      <p>One seating · 19h30</p>
+      <p>Closed August & Christmas</p>
+    </div>
+    <div class="rule"></div>
+    <div>
+      <h4>Reservations</h4>
+      <p>+33 (0)3 22 14 06 80</p>
+      <p>reserver@maison-saintvrain.fr</p>
+      <p>Mme Charpentier, maîtresse d'hôtel</p>
+    </div>
+  </div>
+
+  <div class="footer-seal" aria-hidden="true">
+    <svg viewBox="0 0 592 592" xmlns="http://www.w3.org/2000/svg">
+      <path transform="translate(-4,-4)scale(0.15,0.15)" d="M1778.9,3200A120.9263,120.9263 0 0,1 1657.97,3320.93A120.9263,120.9263 0 0,1 1537.04,3200A221.5096,221.5096 0 0,0 1456.32,3371.02A221.5096,221.5096 0 0,0 1677.83,3592.53A221.5096,221.5096 0 0,0 1818.61,3542.03A362.779,362.779 0 0,0 2000,3856.21A362.779,362.779 0 0,0 2181.39,3542.03A221.5096,221.5096 0 0,0 2322.17,3592.53A221.5096,221.5096 0 0,0 2543.68,3371.02A221.5096,221.5096 0 0,0 2462.96,3200A120.9263,120.9263 0 0,1 2342.03,3320.93A120.9263,120.9263 0 0,1 2221.1,3200V2221.1H3200A120.9263,120.9263 0 0,1 3320.93,2342.03A120.9263,120.9263 0 0,1 3200,2462.96A221.5096,221.5096 0 0,0 3371.02,2543.68A221.5096,221.5096 0 0,0 3592.53,2322.17A221.5096,221.5096 0 0,0 3542.03,2181.39A362.779,362.779 0 0,0 3856.21,2000A362.779,362.779 0 0,0 3542.03,1818.61A221.5096,221.5096 0 0,0 3592.53,1677.83A221.5096,221.5096 0 0,0 3371.02,1456.32A221.5096,221.5096 0 0,0 3200,1537.04A120.9263,120.9263 0 0,1 3320.93,1657.97A120.9263,120.9263 0 0,1 3200,1778.9H2221.1V800A120.9263,120.9263 0 0,1 2342.03,679.073A120.9263,120.9263 0 0,1 2462.96,800A221.5096,221.5096 0 0,0 2543.68,628.984A221.5096,221.5096 0 0,0 2322.17,407.475A221.5096,221.5096 0 0,0 2181.39,457.969A362.779,362.779 0 0,0 2000,143.793A362.779,362.779 0 0,0 1818.61,457.969A221.5096,221.5096 0 0,0 1677.83,407.475A221.5096,221.5096 0 0,0 1456.32,628.984A221.5096,221.5096 0 0,0 1537.04,800A120.9263,120.9263 0 0,1 1657.97,679.073A120.9263,120.9263 0 0,1 1778.9,800V1778.9H800A120.9263,120.9263 0 0,1 679.073,1657.97A120.9263,120.9263 0 0,1 800,1537.04A221.5096,221.5096 0 0,0 628.984,1456.32A221.5096,221.5096 0 0,0 407.475,1677.83A221.5096,221.5096 0 0,0 457.969,1818.61A362.779,362.779 0 0,0 143.793,2000A362.779,362.779 0 0,0 457.969,2181.39A221.5096,221.5096 0 0,0 407.475,2322.17A221.5096,221.5096 0 0,0 628.984,2543.68A221.5096,221.5096 0 0,0 800,2462.96A120.9263,120.9263 0 0,1 679.073,2342.03A120.9263,120.9263 0 0,1 800,2221.1H1778.9Z"/>
+    </svg>
+  </div>
+  <p class="copy">© MMXXIV · Maison Saint-Vrain · Amiens</p>
+</footer>
+
+</body>
+</html>

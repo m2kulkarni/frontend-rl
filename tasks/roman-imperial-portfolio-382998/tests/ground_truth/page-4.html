@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Drawings & Studies — Atelier Gaius Vedrani</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    font-size: 16px;
+    line-height: 1.65;
+  }
+  a { color: inherit; text-decoration: none; }
+  .display, h1, h2, h3, h4 {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  /* ---------- TOP BAND + NAV ---------- */
+  .topband {
+    background: var(--surface);
+    border-bottom: 1px solid var(--ornament);
+    padding: 14px 0 6px;
+  }
+  .siteid {
+    text-align: center;
+    font-family: var(--font-display);
+    font-size: 13px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+  }
+  .siteid .keystrip {
+    flex: 0 0 140px;
+    height: 18px;
+    opacity: 0.85;
+  }
+  .siteid .name { color: var(--primary); }
+  .siteid .name em {
+    font-style: normal;
+    color: var(--accent);
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    display: block;
+    margin-top: 2px;
+  }
+
+  nav.primary {
+    text-align: center;
+    padding: 18px 0 14px;
+    border-bottom: 1px solid var(--ornament);
+  }
+  nav.primary ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+  }
+  nav.primary a {
+    font-family: var(--font-display);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 4px 22px;
+    color: var(--primary);
+    border-bottom: 1px solid transparent;
+    transition: border-color .2s;
+  }
+  nav.primary a[aria-current="page"] {
+    border-bottom: 1px solid var(--primary);
+  }
+  nav.primary a:hover {
+    border-bottom: 1px solid var(--accent);
+    color: var(--accent);
+  }
+  nav.primary .vine {
+    width: 14px; height: 14px;
+    fill: var(--secondary);
+    opacity: 0.9;
+    flex: 0 0 14px;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    text-align: center;
+    padding: 70px 40px 50px;
+    position: relative;
+  }
+  .hero .wreath {
+    width: 220px;
+    margin: 0 auto 24px;
+    display: block;
+    opacity: 0.92;
+  }
+  .hero .eyebrow {
+    font-family: var(--font-display);
+    font-size: 11px;
+    letter-spacing: 0.5em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin: 0 0 18px;
+  }
+  .hero h1 {
+    font-size: 52px;
+    margin: 0 0 22px;
+    letter-spacing: 0.16em;
+    color: var(--primary);
+  }
+  .hero .deck {
+    max-width: 720px;
+    margin: 0 auto;
+    font-size: 15.5px;
+    color: var(--primary);
+  }
+  .hero .deck em {
+    font-style: italic;
+    color: var(--text-emphasis);
+  }
+  .hero .rule {
+    width: 1px;
+    height: 60px;
+    background: var(--ornament);
+    margin: 36px auto 0;
+  }
+
+  /* ---------- INTRO PARAGRAPH ---------- */
+  .intro {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 50px 40px 30px;
+    text-align: center;
+  }
+  .intro p {
+    font-size: 16px;
+    line-height: 1.75;
+    margin: 0 0 18px;
+  }
+  .intro .smallcaps {
+    font-family: var(--font-display);
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    color: var(--accent);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 14px;
+  }
+
+  /* ---------- DIVIDER ---------- */
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    margin: 30px auto 60px;
+    max-width: 720px;
+  }
+  .divider .line {
+    flex: 1;
+    height: 1px;
+    background: var(--secondary);
+  }
+  .divider .keystrip {
+    width: 200px;
+    height: 28px;
+  }
+
+  /* ---------- GALLERY GRID ---------- */
+  .gallery {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 40px 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px 48px;
+  }
+  .plate {
+    background: var(--surface);
+    padding: 28px 28px 26px;
+    position: relative;
+    /* Greek-key border via layered borders */
+    border: 1px solid var(--ornament);
+    outline: 1px solid var(--ornament);
+    outline-offset: 4px;
+  }
+  .plate::before {
+    /* meander-key strip top */
+    content: "";
+    display: block;
+    position: absolute;
+    top: -1px; left: 28px; right: 28px;
+    height: 8px;
+    background-image:
+      repeating-linear-gradient(90deg,
+        var(--bg) 0, var(--bg) 6px,
+        var(--ornament) 6px, var(--ornament) 7px,
+        var(--bg) 7px, var(--bg) 12px);
+  }
+  .plate .roundel {
+    width: 92px;
+    height: 92px;
+    margin: -56px auto 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface);
+    position: relative;
+  }
+  .plate .roundel svg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+  }
+  .plate .roundel .num {
+    font-family: var(--font-display);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    color: var(--primary);
+    position: relative;
+    z-index: 2;
+    background: var(--bg);
+    padding: 4px 8px;
+  }
+
+  .plate h3 {
+    text-align: center;
+    font-size: 15px;
+    margin: 6px 0 4px;
+    letter-spacing: 0.14em;
+    color: var(--primary);
+    line-height: 1.4;
+  }
+  .plate .subtitle {
+    text-align: center;
+    font-family: var(--font-display);
+    font-size: 10.5px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 18px;
+  }
+
+  /* the "image plate" — a stylized inked drawing surface */
+  .plate .sheet {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background: #efe7d6;
+    border: 1px solid var(--ornament);
+    position: relative;
+    overflow: hidden;
+    margin: 0 0 18px;
+  }
+  .plate .sheet svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .plate .caption {
+    text-align: center;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--primary);
+  }
+  .plate .caption .project {
+    display: block;
+    font-style: italic;
+    margin-bottom: 2px;
+  }
+  .plate .caption .meta {
+    display: block;
+    color: var(--primary);
+    opacity: 0.78;
+    font-size: 12.5px;
+  }
+
+  .plate .goldrule {
+    width: 60%;
+    height: 1px;
+    background: var(--secondary);
+    margin: 16px auto 14px;
+  }
+  .plate .view {
+    text-align: center;
+    font-family: var(--font-display);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text-emphasis);
+  }
+  .plate .view a:hover { color: var(--accent); }
+
+  /* ---------- METHOD NOTE ---------- */
+  .method {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 30px 40px 80px;
+    text-align: center;
+    border-top: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+    position: relative;
+  }
+  .method .seal {
+    width: 90px;
+    margin: -52px auto 20px;
+    background: var(--bg);
+    padding: 0 20px;
+    display: block;
+  }
+  .method h2 {
+    font-size: 22px;
+    letter-spacing: 0.24em;
+    margin: 0 0 18px;
+  }
+  .method p {
+    margin: 0 auto 14px;
+    max-width: 700px;
+  }
+  .method dl {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 8px 32px;
+    max-width: 580px;
+    margin: 28px auto 0;
+    text-align: left;
+    font-size: 14px;
+  }
+  .method dt {
+    font-family: var(--font-display);
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding-top: 3px;
+  }
+  .method dd { margin: 0; }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    margin-top: 70px;
+    background: var(--surface);
+  }
+  .frieze {
+    width: 100%;
+    height: 32px;
+    background-image:
+      repeating-linear-gradient(90deg,
+        var(--bg) 0, var(--bg) 14px,
+        var(--ornament) 14px, var(--ornament) 16px,
+        var(--bg) 16px, var(--bg) 22px,
+        var(--ornament) 22px, var(--ornament) 24px,
+        var(--bg) 24px, var(--bg) 38px);
+    border-top: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+  }
+  .colophon {
+    text-align: center;
+    padding: 44px 40px 24px;
+  }
+  .colophon .name {
+    font-family: var(--font-display);
+    font-size: 16px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 18px;
+  }
+  .colophon .addresses {
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    margin-bottom: 22px;
+    font-size: 13px;
+  }
+  .colophon .addresses .city {
+    font-family: var(--font-display);
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .colophon .creds {
+    font-size: 12.5px;
+    color: var(--primary);
+    opacity: 0.85;
+  }
+  .colophon .creds span { margin: 0 14px; }
+  .tailpiece {
+    text-align: center;
+    padding: 18px 0 30px;
+  }
+  .tailpiece svg {
+    width: 32px;
+    height: 32px;
+    fill: var(--secondary);
+    opacity: 0.85;
+  }
+
+  /* ---------- emphasis ---------- */
+  em.imp { color: var(--text-emphasis); font-style: italic; }
+</style>
+</head>
+<body>
+
+<!-- Reusable Greek-key strip for inline use -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="key-strip" viewBox="0 0 165 18">
+      <g fill="currentColor">
+        <path d="M0,1 H165 V17 H0 Z" fill="none"/>
+        <path d="M2,2 h14 v6 h-10 v3 h12 v4 h-16 v-9 h10 v-2 h-12 z M18,2 h14 v6 h-10 v3 h12 v4 h-16 v-9 h10 v-2 h-12 z M34,2 h14 v6 h-10 v3 h12 v4 h-16 v-9 h10 v-2 h-12 z M50,2 h14 v6 h-10 v3 h12 v4 h-16 v-9 h10 v-2 h-12 z M66,2 h14 v6 h-10 v3 h12 v4 h-16 v-9 h10 v-2 h-12 z M82,2 h14 v6 h-10 v3 h12 v4 h-16 v-9 h10 v-2 h-12 z M98,2 h14 v6 h-10 v3 h12 v4 h-16 v-9 h10 v-2 h-12 z M114,2 h14 v6 h-10 v3 h12 v4 h-16 v-9 h10 v-2 h-12 z M130,2 h14 v6 h-10 v3 h12 v4 h-16 v-9 h10 v-2 h-12 z M146,2 h14 v6 h-10 v3 h12 v4 h-16 v-9 h10 v-2 h-12 z"/>
+      </g>
+    </symbol>
+    <symbol id="vine-leaf" viewBox="0 0 200 200">
+      <path d="m43.583 863.37c-1.7912 0.0327-3.58 0.12813-5.3438 0.3125-7.0549 0.73745-13.935 2.7947-19.156 7.4688s-8.1987 12.003-7.6875 21c0.51142 9.0009 4.2973 16.144 10.188 20.344 5.8902 4.2002 13.306 5.533 21.031 5.1875 15.451-0.6911 32.83-8.0032 45.812-18.312 1.4085-1.1185 2.8305-2.0391 4.25-3.0625 4.2948 6.6778 7.6121 14.826 9.3437 24.062-7.4983-5.0725-21.012-10.546-35.656 1.5-22.143 18.214-24.987 12.875-45.344-2.125-2.8571 36.071 15.013 54.643 44.656 52.5 0 0-13.951 4.2634-3.5938 26.406 6.018 12.866 8.4084 20.075 6.5625 25.187-12.84 2.2919-15.771 7.7809-5.567 12.665 45.098 9.9746 65.669-27.473 68.661-66.04 45.357 0 52.857-31.804 52.5-50.375-8.2143 11.071-22.161 11.071-32.875 2.5-9.9319-7.9455-21.687-16.177-39-1.125-1.7356-11.676-5.6888-22.127-11.219-30.719 19.361-11.371 38.722-14.46 52.531-10.812 5.4781 1.447 9.4601 4.0921 12.375 6.9688-8.9749 8.3574-11.843 26.377 2.2812 27.031 18.922 0.8765 21.031-15.451 13.562-27.125-5.4461-8.5129-16.417-13.229-25.656-16.562-17.515-4.6265-39.736-0.56573-61.281 12.5-5.1712-5.7228-11.132-10.224-17.719-12.969-7.0806-2.9502-17.539-5.7342-28.281-6.3125-1.7903-0.0964-3.5838-0.12649-5.375-0.0937v-5e-5zm0.125 10.031c1.5215-0.018 3.0879 0.0275 4.6562 0.125 9.4103 0.58517 19.255 3.0619 25.031 5.4688 4.6328 1.9303 9.045 5.2264 13.062 9.4375-1.4215 1.0354-2.8424 1.9759-4.25 3.0938-11.304 8.9764-27.536 15.597-40.031 16.156-6.2477 0.27945-11.375-0.9145-14.781-3.3438-3.4067-2.4292-5.6498-6.0366-6.0312-12.75-0.38168-6.7176 1.4242-10.299 4.4062-12.969 2.9821-2.6697 7.7424-4.3669 13.5-4.9688 1.4394-0.15046 2.916-0.23198 4.4375-0.25zm62.281 64.812c1.002 6e-3 2.0302 0.10121 3.0625 0.28125 8.2582 1.4403 13.999 8.1054 12.812 14.906-1.1861 6.8009-8.8355 11.159-17.094 9.7188-8.2582-1.4403-13.999-8.1054-12.812-14.906 1.0379-5.9508 7.0172-10.04 14.031-10z" transform="translate(0 -852.36)"/>
+    </symbol>
+    <!-- simple oak roundel ring -->
+    <symbol id="oak-ring" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="44" fill="none" stroke="#1a1a1a" stroke-width="0.6"/>
+      <circle cx="50" cy="50" r="42" fill="none" stroke="#c9a23a" stroke-width="0.5"/>
+      <g fill="#1a1a1a">
+        <!-- 24 small leaves around -->
+        <g id="oak-leaves">
+          <ellipse cx="50" cy="6" rx="2.2" ry="4"/>
+        </g>
+        <g transform="rotate(15 50 50)"><ellipse cx="50" cy="6" rx="2" ry="3.6"/></g>
+        <g transform="rotate(30 50 50)"><ellipse cx="50" cy="6" rx="2.2" ry="4"/></g>
+        <g transform="rotate(45 50 50)"><ellipse cx="50" cy="6" rx="2" ry="3.6"/></g>
+        <g transform="rotate(60 50 50)"><ellipse cx="50" cy="6" rx="2.2" ry="4"/></g>
+        <g transform="rotate(75 50 50)"><ellipse cx="50" cy="6" rx="2" ry="3.6"/></g>
+        <g transform="rotate(90 50 50)"><ellipse cx="50" cy="6" rx="2.2" ry="4"/></g>
+        <g transform="rotate(105 50 50)"><ellipse cx="50" cy="6" rx="2" ry="3.6"/></g>
+        <g transform="rotate(120 50 50)"><ellipse cx="50" cy="6" rx="2.2" ry="4"/></g>
+        <g transform="rotate(135 50 50)"><ellipse cx="50" cy="6" rx="2" ry="3.6"/></g>
+        <g transform="rotate(150 50 50)"><ellipse cx="50" cy="6" rx="2.2" ry="4"/></g>
+        <g transform="rotate(165 50 50)"><ellipse cx="50" cy="6" rx="2" ry="3.6"/></g>
+        <g transform="rotate(180 50 50)"><ellipse cx="50" cy="6" rx="2.2" ry="4"/></g>
+        <g transform="rotate(195 50 50)"><ellipse cx="50" cy="6" rx="2" ry="3.6"/></g>
+        <g transform="rotate(210 50 50)"><ellipse cx="50" cy="6" rx="2.2" ry="4"/></g>
+        <g transform="rotate(225 50 50)"><ellipse cx="50" cy="6" rx="2" ry="3.6"/></g>
+        <g transform="rotate(240 50 50)"><ellipse cx="50" cy="6" rx="2.2" ry="4"/></g>
+        <g transform="rotate(255 50 50)"><ellipse cx="50" cy="6" rx="2" ry="3.6"/></g>
+        <g transform="rotate(270 50 50)"><ellipse cx="50" cy="6" rx="2.2" ry="4"/></g>
+        <g transform="rotate(285 50 50)"><ellipse cx="50" cy="6" rx="2" ry="3.6"/></g>
+        <g transform="rotate(300 50 50)"><ellipse cx="50" cy="6" rx="2.2" ry="4"/></g>
+        <g transform="rotate(315 50 50)"><ellipse cx="50" cy="6" rx="2" ry="3.6"/></g>
+        <g transform="rotate(330 50 50)"><ellipse cx="50" cy="6" rx="2.2" ry="4"/></g>
+        <g transform="rotate(345 50 50)"><ellipse cx="50" cy="6" rx="2" ry="3.6"/></g>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<header class="topband">
+  <div class="siteid">
+    <svg class="keystrip" style="color:var(--ornament)"><use href="#key-strip"/></svg>
+    <div class="name">
+      Atelier Gaius Vedrani
+      <em>Architectura Classica · Roma · Novum Eboracum</em>
+    </div>
+    <svg class="keystrip" style="color:var(--ornament)"><use href="#key-strip"/></svg>
+  </div>
+</header>
+
+<nav class="primary" aria-label="Primary">
+  <ul>
+    <li><a href="page-1.html">Atelier</a></li>
+    <li><svg class="vine"><use href="#vine-leaf"/></svg></li>
+    <li><a href="page-2.html">Selected Works</a></li>
+    <li><svg class="vine"><use href="#vine-leaf"/></svg></li>
+    <li><a href="page-3.html">Villa Cassia</a></li>
+    <li><svg class="vine"><use href="#vine-leaf"/></svg></li>
+    <li><a href="page-4.html" aria-current="page">Drawings &amp; Studies</a></li>
+    <li><svg class="vine"><use href="#vine-leaf"/></svg></li>
+    <li><a href="page-5.html">Writings</a></li>
+    <li><svg class="vine"><use href="#vine-leaf"/></svg></li>
+    <li><a href="page-6.html">Studio &amp; Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <svg class="wreath" viewBox="0 0 100 100" aria-hidden="true">
+    <circle cx="50" cy="50" r="40" fill="none" stroke="#1a1a1a" stroke-width="0.4"/>
+    <g fill="#1a1a1a" opacity="0.85">
+      <path d="M50,10 C46,18 44,24 46,32 C48,28 50,24 50,18 Z"/>
+      <path d="M50,10 C54,18 56,24 54,32 C52,28 50,24 50,18 Z"/>
+      <g transform="rotate(45 50 50)">
+        <path d="M50,10 C46,18 44,24 46,32 C48,28 50,24 50,18 Z"/>
+        <path d="M50,10 C54,18 56,24 54,32 C52,28 50,24 50,18 Z"/>
+      </g>
+      <g transform="rotate(90 50 50)">
+        <path d="M50,10 C46,18 44,24 46,32 C48,28 50,24 50,18 Z"/>
+        <path d="M50,10 C54,18 56,24 54,32 C52,28 50,24 50,18 Z"/>
+      </g>
+      <g transform="rotate(135 50 50)">
+        <path d="M50,10 C46,18 44,24 46,32 C48,28 50,24 50,18 Z"/>
+        <path d="M50,10 C54,18 56,24 54,32 C52,28 50,24 50,18 Z"/>
+      </g>
+      <g transform="rotate(180 50 50)">
+        <path d="M50,10 C46,18 44,24 46,32 C48,28 50,24 50,18 Z"/>
+        <path d="M50,10 C54,18 56,24 54,32 C52,28 50,24 50,18 Z"/>
+      </g>
+      <g transform="rotate(225 50 50)">
+        <path d="M50,10 C46,18 44,24 46,32 C48,28 50,24 50,18 Z"/>
+        <path d="M50,10 C54,18 56,24 54,32 C52,28 50,24 50,18 Z"/>
+      </g>
+      <g transform="rotate(270 50 50)">
+        <path d="M50,10 C46,18 44,24 46,32 C48,28 50,24 50,18 Z"/>
+        <path d="M50,10 C54,18 56,24 54,32 C52,28 50,24 50,18 Z"/>
+      </g>
+      <g transform="rotate(315 50 50)">
+        <path d="M50,10 C46,18 44,24 46,32 C48,28 50,24 50,18 Z"/>
+        <path d="M50,10 C54,18 56,24 54,32 C52,28 50,24 50,18 Z"/>
+      </g>
+    </g>
+    <text x="50" y="54" text-anchor="middle" font-family="Marcellus" font-size="9" letter-spacing="2" fill="#1a1a1a">IV</text>
+  </svg>
+  <p class="eyebrow">Liber Quartus · Folio IV</p>
+  <h1>Drawings &amp; Studies</h1>
+  <p class="deck">A working archive of measured drawings, comparative plates, and analytical studies produced at the studio. Each sheet is the residue of a long looking — at <em>the antique</em>, at the orders, at the geometry that survives in stone.</p>
+  <div class="rule"></div>
+</section>
+
+<section class="intro">
+  <span class="smallcaps">— Practica Hebdomadalis —</span>
+  <p>The studio reserves <em class="imp">one full day each week</em> for drawing from the antique. It is, in our view, the only durable form of architectural education: the silent measurement of cornice and column, the patient transcription of profile and proportion. The folios collected here span seven years of such Saturdays, undertaken in Rome, Tivoli, Pompeii, and on the drawing tables of West 22nd Street.</p>
+  <p>What follows is a small selection. The originals are kept in flat files and may be consulted by appointment.</p>
+</section>
+
+<div class="divider">
+  <span class="line"></span>
+  <svg class="keystrip" style="color:var(--ornament)"><use href="#key-strip"/></svg>
+  <span class="line"></span>
+</div>
+
+<section class="gallery" aria-label="Drawings and studies">
+
+  <!-- PLATE I -->
+  <article class="plate">
+    <div class="roundel" aria-hidden="true">
+      <svg viewBox="0 0 100 100"><use href="#oak-ring"/></svg>
+      <span class="num">PL · I</span>
+    </div>
+    <h3>Reconstruction of the Basilica Ulpia</h3>
+    <p class="subtitle">Axonometric · MMXVII</p>
+    <div class="sheet">
+      <svg viewBox="0 0 300 300" preserveAspectRatio="xMidYMid meet">
+        <rect width="300" height="300" fill="#efe7d6"/>
+        <!-- axonometric basilica reconstruction -->
+        <g stroke="#1a1a1a" stroke-width="0.6" fill="none">
+          <!-- base platform -->
+          <path d="M40,220 L150,260 L260,220 L150,180 Z" fill="#e6dcc6"/>
+          <!-- column rows -->
+          <g>
+            <line x1="60" y1="215" x2="60" y2="120"/>
+            <line x1="80" y1="222" x2="80" y2="127"/>
+            <line x1="100" y1="229" x2="100" y2="134"/>
+            <line x1="120" y1="236" x2="120" y2="141"/>
+            <line x1="140" y1="243" x2="140" y2="148"/>
+            <line x1="160" y1="250" x2="160" y2="155"/>
+            <line x1="180" y1="243" x2="180" y2="148"/>
+            <line x1="200" y1="236" x2="200" y2="141"/>
+            <line x1="220" y1="229" x2="220" y2="134"/>
+            <line x1="240" y1="222" x2="240" y2="127"/>
+          </g>
+          <!-- entablature -->
+          <path d="M55,120 L150,158 L245,120 L150,82 Z" fill="#e6dcc6"/>
+          <line x1="55" y1="115" x2="245" y2="115" opacity="0"/>
+          <!-- coffered roof slope -->
+          <path d="M55,82 L150,40 L245,82 L150,120 Z" fill="#dccfb2"/>
+          <line x1="55" y1="82" x2="150" y2="120"/>
+          <line x1="245" y1="82" x2="150" y2="120"/>
+          <line x1="150" y1="40" x2="150" y2="120" stroke-dasharray="2,2"/>
+          <!-- column capitals -->
+          <g stroke-width="0.4">
+            <circle cx="60" cy="120" r="2"/><circle cx="80" cy="127" r="2"/>
+            <circle cx="100" cy="134" r="2"/><circle cx="120" cy="141" r="2"/>
+            <circle cx="140" cy="148" r="2"/><circle cx="160" cy="155" r="2"/>
+            <circle cx="180" cy="148" r="2"/><circle cx="200" cy="141" r="2"/>
+            <circle cx="220" cy="134" r="2"/><circle cx="240" cy="127" r="2"/>
+          </g>
+          <!-- ground tick marks -->
+          <g stroke-width="0.3">
+            <line x1="40" y1="220" x2="40" y2="225"/>
+            <line x1="150" y1="260" x2="150" y2="265"/>
+            <line x1="260" y1="220" x2="260" y2="225"/>
+          </g>
+          <!-- scale bar -->
+          <g stroke-width="0.4">
+            <line x1="40" y1="285" x2="120" y2="285"/>
+            <line x1="40" y1="282" x2="40" y2="288"/>
+            <line x1="80" y1="282" x2="80" y2="288"/>
+            <line x1="120" y1="282" x2="120" y2="288"/>
+          </g>
+          <text x="40" y="278" font-family="Marcellus" font-size="5" fill="#1a1a1a">0</text>
+          <text x="115" y="278" font-family="Marcellus" font-size="5" fill="#1a1a1a">20 M</text>
+          <text x="150" y="20" text-anchor="middle" font-family="Marcellus" font-size="6" letter-spacing="2" fill="#a93226">BASILICA · ULPIA</text>
+        </g>
+      </svg>
+    </div>
+    <div class="caption">
+      <span class="project">Reconstruction of the Basilica Ulpia, Forum of Trajan</span>
+      <span class="meta">Graphite and ink on Fabriano · 84 × 59 cm · 2017</span>
+    </div>
+    <div class="goldrule"></div>
+    <div class="view"><a href="#plate-1">View Plate →</a></div>
+  </article>
+
+  <!-- PLATE II -->
+  <article class="plate">
+    <div class="roundel" aria-hidden="true">
+      <svg viewBox="0 0 100 100"><use href="#oak-ring"/></svg>
+      <span class="num">PL · II</span>
+    </div>
+    <h3>The Ionic Order, A Comparative Plate</h3>
+    <p class="subtitle">After Vignola &amp; Palladio · MMXV</p>
+    <div class="sheet">
+      <svg viewBox="0 0 300 300" preserveAspectRatio="xMidYMid meet">
+        <rect width="300" height="300" fill="#efe7d6"/>
+        <g stroke="#1a1a1a" stroke-width="0.5" fill="none">
+          <!-- Two columns side by side -->
+          <!-- Column A: Vignola -->
+          <g transform="translate(70,0)">
+            <!-- entablature -->
+            <rect x="-30" y="40" width="60" height="8"/>
+            <rect x="-32" y="48" width="64" height="6"/>
+            <rect x="-34" y="54" width="68" height="10"/>
+            <!-- volute capital -->
+            <path d="M-22,64 Q-22,72 -14,72 L14,72 Q22,72 22,64"/>
+            <circle cx="-16" cy="68" r="4"/>
+            <circle cx="16" cy="68" r="4"/>
+            <circle cx="-16" cy="68" r="2"/>
+            <circle cx="16" cy="68" r="2"/>
+            <line x1="-22" y1="72" x2="22" y2="72"/>
+            <!-- shaft -->
+            <line x1="-12" y1="72" x2="-12" y2="240"/>
+            <line x1="12" y1="72" x2="12" y2="240"/>
+            <!-- flutes -->
+            <line x1="-8" y1="80" x2="-8" y2="235" stroke-width="0.25"/>
+            <line x1="-4" y1="80" x2="-4" y2="235" stroke-width="0.25"/>
+            <line x1="0" y1="80" x2="0" y2="235" stroke-width="0.25"/>
+            <line x1="4" y1="80" x2="4" y2="235" stroke-width="0.25"/>
+            <line x1="8" y1="80" x2="8" y2="235" stroke-width="0.25"/>
+            <!-- base -->
+            <rect x="-16" y="240" width="32" height="4"/>
+            <ellipse cx="0" cy="248" rx="18" ry="3"/>
+            <rect x="-20" y="252" width="40" height="6"/>
+            <text x="0" y="278" text-anchor="middle" font-family="Marcellus" font-size="6" fill="#1a1a1a">VIGNOLA</text>
+          </g>
+          <!-- Column B: Palladio -->
+          <g transform="translate(220,0)">
+            <rect x="-30" y="38" width="60" height="9"/>
+            <rect x="-32" y="47" width="64" height="5"/>
+            <rect x="-34" y="52" width="68" height="11"/>
+            <path d="M-22,63 Q-22,72 -14,72 L14,72 Q22,72 22,63"/>
+            <circle cx="-16" cy="68" r="4.5"/>
+            <circle cx="16" cy="68" r="4.5"/>
+            <circle cx="-16" cy="68" r="1.8"/>
+            <circle cx="16" cy="68" r="1.8"/>
+            <line x1="-22" y1="72" x2="22" y2="72"/>
+            <line x1="-11" y1="72" x2="-11" y2="240"/>
+            <line x1="11" y1="72" x2="11" y2="240"/>
+            <line x1="-7" y1="80" x2="-7" y2="235" stroke-width="0.25"/>
+            <line x1="-3.5" y1="80" x2="-3.5" y2="235" stroke-width="0.25"/>
+            <line x1="0" y1="80" x2="0" y2="235" stroke-width="0.25"/>
+            <line x1="3.5" y1="80" x2="3.5" y2="235" stroke-width="0.25"/>
+            <line x1="7" y1="80" x2="7" y2="235" stroke-width="0.25"/>
+            <rect x="-15" y="240" width="30" height="3"/>
+            <ellipse cx="0" cy="248" rx="17" ry="3.5"/>
+            <rect x="-19" y="252" width="38" height="6"/>
+            <text x="0" y="278" text-anchor="middle" font-family="Marcellus" font-size="6" fill="#1a1a1a">PALLADIO</text>
+          </g>
+          <!-- module marks -->
+          <g stroke-width="0.3">
+            <line x1="20" y1="60" x2="30" y2="60"/>
+            <line x1="20" y1="120" x2="30" y2="120"/>
+            <line x1="20" y1="180" x2="30" y2="180"/>
+            <line x1="20" y1="240" x2="30" y2="240"/>
+            <line x1="25" y1="60" x2="25" y2="240"/>
+          </g>
+          <text x="12" y="62" font-family="Marcellus" font-size="4" fill="#1a1a1a">M.IX</text>
+          <text x="12" y="122" font-family="Marcellus" font-size="4" fill="#1a1a1a">M.VI</text>
+          <text x="12" y="182" font-family="Marcellus" font-size="4" fill="#1a1a1a">M.III</text>
+          <text x="12" y="242" font-family="Marcellus" font-size="4" fill="#1a1a1a">M.0</text>
+          <text x="150" y="20" text-anchor="middle" font-family="Marcellus" font-size="6" letter-spacing="2" fill="#a93226">ORDO · IONICUS</text>
+        </g>
+      </svg>
+    </div>
+    <div class="caption">
+      <span class="project">The Ionic Order, comparative plate after Vignola and Palladio</span>
+      <span class="meta">Ink and grey wash on laid paper · 70 × 50 cm · 2015</span>
+    </div>
+    <div class="goldrule"></div>
+    <div class="view"><a href="#plate-2">View Plate →</a></div>
+  </article>
+
+  <!-- PLATE III -->
+  <article class="plate">
+    <div class="roundel" aria-hidden="true">
+      <svg viewBox="0 0 100 100"><use href="#oak-ring"/></svg>
+      <span class="num">PL · III</span>
+    </div>
+    <h3>Coffer Geometries of the Pantheon Dome</h3>
+    <p class="subtitle">Analytical Study · MMXIX</p>
+    <div class="sheet">
+      <svg viewBox="0 0 300 300" preserveAspectRatio="xMidYMid meet">
+        <rect width="300" height="300" fill="#efe7d6"/>
+        <g stroke="#1a1a1a" stroke-width="0.5" fill="none">
+          <!-- Pantheon dome plan view -->
+          <circle cx="150" cy="150" r="120"/>
+          <circle cx="150" cy="150" r="100"/>
+          <circle cx="150" cy="150" r="78"/>
+          <circle cx="150" cy="150" r="56"/>
+          <circle cx="150" cy="150" r="34"/>
+          <circle cx="150" cy="150" r="14" fill="#dccfb2"/>
+          <!-- 28 radial divisions -->
+          <g stroke-width="0.35">
+            <g id="rays">
+              <line x1="150" y1="30" x2="150" y2="270"/>
+            </g>
+            <line x1="150" y1="30" x2="150" y2="270" transform="rotate(12.857 150 150)"/>
+            <line x1="150" y1="30" x2="150" y2="270" transform="rotate(25.714 150 150)"/>
+            <line x1="150" y1="30" x2="150" y2="270" transform="rotate(38.571 150 150)"/>
+            <line x1="150" y1="30" x2="150" y2="270" transform="rotate(51.428 150 150)"/>
+            <line x1="150" y1="30" x2="150" y2="270" transform="rotate(64.285 150 150)"/>
+            <line x1="150" y1="30" x2="150" y2="270" transform="rotate(77.142 150 150)"/>
+            <line x1="150" y1="30" x2="150" y2="270" transform="rotate(90 150 150)"/>
+            <line x1="150" y1="30" x2="150" y2="270" transform="rotate(102.857 150 150)"/>
+            <line x1="150" y1="30" x2="150" y2="270" transform="rotate(115.714 150 150)"/>
+            <line x1="150" y1="30" x2="150" y2="270" transform="rotate(128.571 150 150)"/>
+            <line x1="150" y1="30" x2="150" y2="270" transform="rotate(141.428 150 150)"/>
+            <line x1="150" y1="30" x2="150" y2="270" transform="rotate(154.285 150 150)"/>
+            <line x1="150" y1="30" x2="150" y2="270" transform="rotate(167.142 150 150)"/>
+          </g>
+          <!-- coffer accents in red on a few rings -->
+          <g stroke="#a93226" stroke-width="0.4" fill="none">
+            <path d="M150,50 a100,100 0 0,1 22,2.5" />
+            <path d="M150,72 a78,78 0 0,1 17,2" />
+            <path d="M150,94 a56,56 0 0,1 12,1.5" />
+          </g>
+          <!-- oculus tick -->
+          <circle cx="150" cy="150" r="2" fill="#1a1a1a"/>
+          <!-- corner annotations -->
+          <text x="20" y="22" font-family="Marcellus" font-size="6" fill="#1a1a1a">OCVLVS · IX BRAC.</text>
+          <text x="220" y="22" font-family="Marcellus" font-size="6" fill="#1a1a1a">D = CXLII P.R.</text>
+          <text x="20" y="290" font-family="Marcellus" font-size="5" fill="#1a1a1a">5 ORDINES · 28 LACVNARIA</text>
+          <text x="150" y="295" text-anchor="middle" font-family="Marcellus" font-size="6" letter-spacing="2" fill="#a93226">PANTHEON · ROMA</text>
+          <!-- diagonal construction lines -->
+          <g stroke-width="0.2" stroke-dasharray="2,2">
+            <line x1="30" y1="30" x2="270" y2="270"/>
+            <line x1="270" y1="30" x2="30" y2="270"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+    <div class="caption">
+      <span class="project">Coffer geometries of the Pantheon dome</span>
+      <span class="meta">Digital line on calibrated print · 60 × 60 cm · 2019</span>
+    </div>
+    <div class="goldrule"></div>
+    <div class="view"><a href="#plate-3">View Plate →</a></div>
+  </article>
+
+  <!-- PLATE IV -->
+  <article class="plate">
+    <div class="roundel" aria-hidden="true">
+      <svg viewBox="0 0 100 100"><use href="#oak-ring"/></svg>
+      <span class="num">PL · IV</span>
+    </div>
+    <h3>Studies for a Civic Fountain</h3>
+    <p class="subtitle">Piazza Mazzini, Trieste · MMXXII</p>
+    <div class="sheet">
+      <svg viewBox="0 0 300 300" preserveAspectRatio="xMidYMid meet">
+        <rect width="300" height="300" fill="#efe7d6"/>
+        <g stroke="#1a1a1a" stroke-width="0.5" fill="none">
+          <!-- Fountain elevation -->
+          <!-- ground line -->
+          <line x1="20" y1="250" x2="280" y2="250" stroke-width="0.7"/>
+          <!-- lower basin -->
+          <path d="M40,250 L60,238 L240,238 L260,250 Z" fill="#e6dcc6"/>
+          <line x1="60" y1="238" x2="240" y2="238"/>
+          <!-- pedestal -->
+          <rect x="120" y="200" width="60" height="38" fill="#e6dcc6"/>
+          <line x1="120" y1="208" x2="180" y2="208"/>
+          <line x1="120" y1="232" x2="180" y2="232"/>
+          <!-- middle bowl -->
+          <path d="M100,200 Q150,180 200,200 Q150,210 100,200 Z" fill="#dccfb2"/>
+          <!-- column shaft of fountain -->
+          <line x1="146" y1="180" x2="146" y2="120"/>
+          <line x1="154" y1="180" x2="154" y2="120"/>
+          <!-- upper bowl -->
+          <path d="M125,120 Q150,108 175,120 Q150,128 125,120 Z" fill="#dccfb2"/>
+          <!-- finial -->
+          <path d="M150,108 L144,90 L156,90 Z" fill="#e6dcc6"/>
+          <circle cx="150" cy="84" r="4" fill="#a93226" fill-opacity="0.6"/>
+          <!-- water jets -->
+          <g stroke="#4d1c5e" stroke-width="0.4" stroke-dasharray="1,2">
+            <path d="M150,108 Q140,115 132,128"/>
+            <path d="M150,108 Q160,115 168,128"/>
+            <path d="M150,128 Q135,140 118,170"/>
+            <path d="M150,128 Q165,140 182,170"/>
+          </g>
+          <!-- inscription block on pedestal -->
+          <rect x="128" y="214" width="44" height="14" stroke-width="0.3"/>
+          <text x="150" y="223" text-anchor="middle" font-family="Marcellus" font-size="4" letter-spacing="1" fill="#1a1a1a">S · P · Q · T</text>
+          <!-- plan below -->
+          <g transform="translate(0,0)">
+            <circle cx="150" cy="278" r="14" stroke-width="0.35"/>
+            <circle cx="150" cy="278" r="9" stroke-width="0.3"/>
+            <circle cx="150" cy="278" r="4" stroke-width="0.3"/>
+          </g>
+          <!-- side annotations -->
+          <g stroke-width="0.3">
+            <line x1="40" y1="250" x2="30" y2="250"/>
+            <line x1="40" y1="200" x2="30" y2="200"/>
+            <line x1="40" y1="150" x2="30" y2="150"/>
+            <line x1="30" y1="250" x2="30" y2="150"/>
+          </g>
+          <text x="14" y="252" font-family="Marcellus" font-size="4" fill="#1a1a1a">±0.0</text>
+          <text x="14" y="202" font-family="Marcellus" font-size="4" fill="#1a1a1a">+1.6</text>
+          <text x="14" y="152" font-family="Marcellus" font-size="4" fill="#1a1a1a">+3.2</text>
+          <text x="150" y="20" text-anchor="middle" font-family="Marcellus" font-size="6" letter-spacing="2" fill="#a93226">FONS · CIVITATIS · TERGESTINAE</text>
+          <text x="284" y="296" text-anchor="end" font-family="Marcellus" font-size="4" fill="#1a1a1a">STUDIVM · III</text>
+        </g>
+      </svg>
+    </div>
+    <div class="caption">
+      <span class="project">Studies for a civic fountain, Piazza Mazzini, Trieste</span>
+      <span class="meta">Graphite with red chalk on toned paper · 50 × 70 cm · 2022</span>
+    </div>
+    <div class="goldrule"></div>
+    <div class="view"><a href="#plate-4">View Plate →</a></div>
+  </article>
+
+</section>
+
+<section class="method">
+  <svg class="seal" viewBox="0 0 100 100" aria-hidden="true"><use href="#oak-ring"/></svg>
+  <h2>Method of the Drawing Day</h2>
+  <p>Every Saturday, beginning at the hour of nine, the studio convenes in person — in Rome at the long oak table on Via dei Coronari, in New York in the third-floor room overlooking 22nd Street. <em class="imp">No screens are admitted.</em> The week's chosen subject is set on the wall as a folio plate or photograph, and the drawing proceeds in graphite or ink to a fixed module.</p>
+  <p>The discipline is intentionally slow. A single capital may absorb a full morning; a complete order, two days. We hold that the architect's hand is the instrument by which proportion becomes intelligible — and that no rendered image can substitute for the steady transcription of an antique profile, line by careful line.</p>
+  <dl>
+    <dt>Tuition</dt><dd>Open to the four atelier apprentices and, by application, to one visiting fellow per term.</dd>
+    <dt>Instruments</dt><dd>Faber-Castell 9000 series, Pilot Parallel inks, Fabriano Roma 285 g/m² laid paper.</dd>
+    <dt>Archive</dt><dd>Originals deposited with the Bibliotheca Hertziana, Rome, and the Avery Drawings Collection, Columbia University.</dd>
+    <dt>Access</dt><dd>By written request to the studio archivist; reproductions available for scholarly use.</dd>
+  </dl>
+</section>
+
+<footer>
+  <div class="frieze" aria-hidden="true"></div>
+  <div class="colophon">
+    <div class="name">Atelier Gaius Vedrani</div>
+    <div class="addresses">
+      <div>
+        <div class="city">Roma</div>
+        Via dei Coronari 142<br>
+        00186 Roma RM, Italia<br>
+        +39 06 6880 4417
+      </div>
+      <div>
+        <div class="city">Novum Eboracum</div>
+        Studio 3-N, 218 W 22nd Street<br>
+        New York, NY 10011, USA<br>
+        +1 212 555 0184
+      </div>
+    </div>
+    <div class="creds">
+      <span>ORCID 0000-0002-7841-3309</span>·<span>AIA Reg. №&nbsp;A-44291</span>·<span>Ordine APPC Roma №&nbsp;18 776</span>
+    </div>
+  </div>
+  <div class="tailpiece" aria-hidden="true">
+    <svg viewBox="0 0 100 100">
+      <g fill="currentColor">
+        <path d="M50,10 C40,30 30,40 20,42 C30,46 40,56 50,80 C60,56 70,46 80,42 C70,40 60,30 50,10 Z"/>
+        <circle cx="50" cy="88" r="3"/>
+      </g>
+    </svg>
+  </div>
+</footer>
+
+</body>
+</html>

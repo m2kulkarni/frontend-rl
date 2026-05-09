@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Triclinium Aureum — Cenae More Romano</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    font-size: 17px;
+    line-height: 1.6;
+  }
+
+  /* ============ GREEK KEY BORDER (CSS pattern) ============ */
+  .greek-key-strip {
+    height: 18px;
+    background-color: transparent;
+    background-image:
+      repeating-linear-gradient(90deg,
+        var(--ornament) 0 2px, transparent 2px 4px);
+    background-size: 4px 18px;
+    position: relative;
+  }
+  .greek-key-band {
+    height: 22px;
+    background:
+      linear-gradient(var(--ornament), var(--ornament)) left top/100% 2px no-repeat,
+      linear-gradient(var(--ornament), var(--ornament)) left bottom/100% 2px no-repeat,
+      conic-gradient(from 0deg at 50% 50%, transparent 0 25%, var(--ornament) 25% 50%, transparent 50% 75%, var(--ornament) 75% 100%);
+    background-color: var(--bg);
+  }
+  /* Cleaner SVG-based meander rendered via inline data */
+  .meander {
+    height: 24px;
+    width: 100%;
+    background-color: var(--bg);
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='24' viewBox='0 0 48 24'><g fill='none' stroke='%23c9a23a' stroke-width='2'><path d='M0 22 L0 4 L20 4 L20 16 L8 16 L8 10 L14 10'/><path d='M24 22 L24 4 L44 4 L44 16 L32 16 L32 10 L38 10'/></g></svg>");
+    background-repeat: repeat-x;
+    background-position: center;
+  }
+  .meander-thin {
+    height: 16px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='16' viewBox='0 0 32 16'><g fill='none' stroke='%23c9a23a' stroke-width='1.4'><path d='M0 14 L0 2 L14 2 L14 11 L5 11 L5 7 L9 7'/><path d='M16 14 L16 2 L30 2 L30 11 L21 11 L21 7 L25 7'/></g></svg>");
+    background-repeat: repeat-x;
+    background-position: center;
+  }
+
+  /* ============ NAVIGATION ============ */
+  nav.frieze {
+    background: var(--bg);
+    padding: 0;
+    border-top: 1px solid rgba(169, 50, 38, 0.15);
+  }
+  nav.frieze .nav-inner {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 22px 60px;
+    background: var(--bg);
+    gap: 40px;
+  }
+  nav.frieze ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+  nav.frieze ul.nav-left { justify-content: flex-end; }
+  nav.frieze ul.nav-right { justify-content: flex-start; }
+  nav.frieze li {
+    display: flex;
+    align-items: center;
+  }
+  nav.frieze li + li::before {
+    content: "";
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin: 0 14px;
+    background-color: var(--ornament);
+    -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2 C8 6 4 8 4 12 C4 16 8 18 12 22 C16 18 20 16 20 12 C20 8 16 6 12 2 Z M12 6 C14 9 16 10 16 12 C16 14 14 16 12 18 C10 16 8 14 8 12 C8 10 10 9 12 6 Z' fill='black'/></svg>") center/contain no-repeat;
+            mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2 C8 6 4 8 4 12 C4 16 8 18 12 22 C16 18 20 16 20 12 C20 8 16 6 12 2 Z M12 6 C14 9 16 10 16 12 C16 14 14 16 12 18 C10 16 8 14 8 12 C8 10 10 9 12 6 Z' fill='black'/></svg>") center/contain no-repeat;
+    opacity: 0.7;
+  }
+  nav.frieze a {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text);
+    text-decoration: none;
+    padding: 6px 2px;
+    position: relative;
+    white-space: nowrap;
+  }
+  nav.frieze a:hover { color: var(--text-emphasis); }
+  nav.frieze a[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -8px;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--primary);
+  }
+  nav.frieze .sitemark {
+    font-family: var(--font-display), serif;
+    font-size: 20px;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--text);
+    text-align: center;
+    padding: 0 24px;
+    border-left: 1px solid rgba(0,0,0,0.12);
+    border-right: 1px solid rgba(0,0,0,0.12);
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    padding: 70px 60px 80px;
+    text-align: center;
+    background: var(--bg);
+    position: relative;
+  }
+  .hero-inner {
+    max-width: 980px;
+    margin: 0 auto;
+    background: var(--surface);
+    padding: 70px 60px 60px;
+    position: relative;
+    border: 1px solid rgba(169,50,38,0.18);
+  }
+  .hero-inner::before,
+  .hero-inner::after {
+    content: "";
+    position: absolute;
+    left: 24px;
+    right: 24px;
+    height: 14px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='14' viewBox='0 0 32 14'><g fill='none' stroke='%23c9a23a' stroke-width='1.3'><path d='M0 12 L0 2 L13 2 L13 10 L5 10 L5 6 L9 6'/><path d='M16 12 L16 2 L29 2 L29 10 L21 10 L21 6 L25 6'/></g></svg>");
+    background-repeat: repeat-x;
+    background-position: center;
+  }
+  .hero-inner::before { top: 14px; }
+  .hero-inner::after { bottom: 14px; }
+
+  .laurel-wrap {
+    position: relative;
+    width: 480px;
+    height: 280px;
+    margin: 0 auto 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .laurel-wrap svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .laurel-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 60px;
+  }
+  .hero h1 {
+    font-family: var(--font-display), serif;
+    font-weight: 600;
+    font-size: 46px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    color: var(--text);
+    line-height: 1.1;
+  }
+  .hero .tagline {
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin: 0;
+  }
+  .hero-prose {
+    max-width: 660px;
+    margin: 36px auto 0;
+    font-size: 17px;
+    line-height: 1.75;
+    color: var(--text);
+    font-style: normal;
+  }
+  .hero-prose .latin {
+    font-variant: small-caps;
+    color: var(--primary);
+    letter-spacing: 0.04em;
+  }
+  .hero-rule {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    margin-top: 36px;
+    color: var(--ornament);
+  }
+  .hero-rule .line {
+    height: 1px;
+    width: 120px;
+    background: var(--ornament);
+  }
+  .hero-rule .vine {
+    width: 28px;
+    height: 28px;
+  }
+  .hero-rule .vine svg { width: 100%; height: 100%; fill: var(--ornament); }
+
+  /* ============ SECTION DIVIDER ============ */
+  .section-divider {
+    padding: 30px 60px;
+    background: var(--bg);
+    text-align: center;
+  }
+  .section-title {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin: 0 0 6px;
+  }
+  .section-sub {
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin: 0 0 24px;
+  }
+
+  /* ============ CARDS ============ */
+  .cards {
+    padding: 20px 60px 80px;
+    background: var(--bg);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 36px;
+    max-width: 1320px;
+    margin: 0 auto;
+  }
+  .card {
+    background: var(--surface);
+    padding: 14px;
+    position: relative;
+    border: 1px solid rgba(201,162,58,0.55);
+    box-shadow: inset 0 0 0 1px rgba(201,162,58,0.25);
+  }
+  .card-inner {
+    border: 1px solid var(--ornament);
+    padding: 36px 32px 28px;
+    text-align: center;
+    position: relative;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='14' viewBox='0 0 32 14'><g fill='none' stroke='%23c9a23a' stroke-width='1.2' opacity='0.9'><path d='M0 12 L0 2 L13 2 L13 10 L5 10 L5 6 L9 6'/><path d='M16 12 L16 2 L29 2 L29 10 L21 10 L21 6 L25 6'/></g></svg>"),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='14' viewBox='0 0 32 14'><g fill='none' stroke='%23c9a23a' stroke-width='1.2' opacity='0.9'><path d='M0 12 L0 2 L13 2 L13 10 L5 10 L5 6 L9 6'/><path d='M16 12 L16 2 L29 2 L29 10 L21 10 L21 6 L25 6'/></g></svg>");
+    background-repeat: repeat-x, repeat-x;
+    background-position: top 8px center, bottom 8px center;
+  }
+  .card-roundel {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 14px;
+  }
+  .card-roundel svg { width: 100%; height: 100%; }
+  .card h3 {
+    font-family: var(--font-display), serif;
+    font-size: 17px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    margin: 0 0 6px;
+    color: var(--text);
+  }
+  .card .latin-sub {
+    font-family: var(--font-display), serif;
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin: 0 0 18px;
+  }
+  .card p {
+    font-size: 15px;
+    line-height: 1.7;
+    margin: 0 0 14px;
+    color: var(--text);
+  }
+  .card .price,
+  .card .label {
+    font-variant: small-caps;
+    color: var(--primary);
+    letter-spacing: 0.06em;
+    font-weight: 600;
+  }
+  .card .card-link {
+    display: inline-block;
+    margin-top: 14px;
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 3px;
+  }
+  .card .card-link:hover { color: var(--primary); border-color: var(--primary); }
+  .card-foot {
+    margin-top: 22px;
+    height: 14px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='14' viewBox='0 0 32 14'><g fill='none' stroke='%23c9a23a' stroke-width='1.2'><path d='M0 12 L0 2 L13 2 L13 10 L5 10 L5 6 L9 6'/><path d='M16 12 L16 2 L29 2 L29 10 L21 10 L21 6 L25 6'/></g></svg>");
+    background-repeat: repeat-x;
+    background-position: center;
+  }
+
+  /* ============ FOOTER ============ */
+  footer.frieze {
+    background: var(--bg);
+    margin-top: 20px;
+  }
+  .footer-band {
+    background: var(--primary);
+    color: var(--secondary);
+    padding: 30px 60px;
+    position: relative;
+    display: grid;
+    grid-template-columns: 80px 1fr 80px;
+    align-items: center;
+    gap: 24px;
+  }
+  .footer-band .rosette {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+  }
+  .footer-band .rosette span {
+    width: 14px;
+    height: 14px;
+    background-color: var(--secondary);
+    -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><circle cx='12' cy='12' r='3' fill='black'/><path d='M12 2 L13 9 L20 6 L15 12 L20 18 L13 15 L12 22 L11 15 L4 18 L9 12 L4 6 L11 9 Z' fill='black'/></svg>") center/contain no-repeat;
+            mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><circle cx='12' cy='12' r='3' fill='black'/><path d='M12 2 L13 9 L20 6 L15 12 L20 18 L13 15 L12 22 L11 15 L4 18 L9 12 L4 6 L11 9 Z' fill='black'/></svg>") center/contain no-repeat;
+  }
+  .footer-band .footer-center {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-size: 12px;
+    color: var(--secondary);
+    line-height: 1.9;
+  }
+  .footer-band .footer-center .big {
+    font-size: 14px;
+    letter-spacing: 0.32em;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .footer-strip {
+    background: var(--bg);
+    padding: 18px 60px;
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+  }
+  .footer-strip .vine-mini {
+    width: 16px; height: 16px;
+  }
+  .footer-strip .vine-mini svg { width: 100%; height: 100%; fill: var(--ornament); }
+  .footer-corners {
+    position: relative;
+  }
+  .corner-laurel {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    bottom: 0;
+    opacity: 0.55;
+    pointer-events: none;
+  }
+  .corner-laurel.left { left: 16px; transform: scaleX(-1); }
+  .corner-laurel.right { right: 16px; }
+  .corner-laurel svg { width: 100%; height: 100%; }
+
+</style>
+</head>
+<body>
+
+<!-- ========== TOP FRIEZE NAV ========== -->
+<div class="meander-thin" aria-hidden="true"></div>
+<nav class="frieze" aria-label="Primary">
+  <div class="nav-inner">
+    <ul class="nav-left">
+      <li><a href="page-1.html" aria-current="page">Domus</a></li>
+      <li><a href="page-2.html">Carta</a></li>
+      <li><a href="page-4.html">De Domo</a></li>
+    </ul>
+    <div class="sitemark">Triclinium&nbsp;Aureum</div>
+    <ul class="nav-right">
+      <li><a href="page-3.html">Cellarium</a></li>
+      <li><a href="page-5.html">Convivia</a></li>
+      <li><a href="page-6.html">Ad&nbsp;Nos</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="meander-thin" aria-hidden="true"></div>
+
+<!-- ========== HERO ========== -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="laurel-wrap" aria-hidden="true">
+      <svg viewBox="0 0 323.7496 295.78787" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <radialGradient id="laurelGrad" cx="50%" cy="50%" r="60%">
+            <stop offset="0%" stop-color="#e8c557"/>
+            <stop offset="60%" stop-color="#c9a23a"/>
+            <stop offset="100%" stop-color="#8b6a1f"/>
+          </radialGradient>
+        </defs>
+        <path fill="url(#laurelGrad)" stroke="#8b6a1f" stroke-width="0.6" d="m 141.69922,-18.574219 c -11.04494,4.854973 -23.40097,9.4683311 -30.06445,22.6386721 -4.68287,7.1205619 -4.80387,16.3913319 -8.10547,24.1464849 6.1158,-6.501993 15.58349,-13.160155 20.97851,-20.7246099 6.01849,-9.4997444 9.07864,-18.0112601 17.19141,-26.0605471 z m 164.51172,0 c 8.11277,8.049287 11.17487,16.5608027 17.19336,26.0605471 5.39502,7.5644549 14.86076,14.2226169 20.97656,20.7246099 -3.3016,-7.755152 -3.4226,-17.025923 -8.10547,-24.1464849 -6.66348,-13.170341 -19.01951,-17.7836991 -30.06445,-22.6386721 z M 111.91016,-1.609375 c -5.62925,1.6211189 -10.63239,5.4766012 -14.578129,11.03125 -9.091887,10.794409 -10.650938,24.955987 -6.882812,42.029297 1.29642,4.515656 -0.546937,8.745577 -0.285157,12.960937 2.670395,-6.196346 5.695046,-11.891942 11.576168,-15.880859 13.11411,-8.396211 16.72071,-12.842155 20.07618,-20.757812 3.94553,-9.307642 4.67865,-10.690112 4.76562,-19.0429692 -3.8045,12.0144002 -15.28958,17.0564642 -23.05273,25.1679692 -3.989646,4.42761 -7.185187,9.557822 -9.003909,14.990234 l -0.279297,-0.25 c 0.955858,-4.806688 2.87563,-9.125741 3.980468,-13.814453 3.465218,-12.678655 2.753188,-27.9402133 13.683598,-36.433594 z m 223.7207,0 c 10.93041,8.4933807 10.21837,23.754939 13.68359,36.433594 1.10484,4.688712 3.02461,9.007765 3.98047,13.814453 l -0.2793,0.25 c -1.81872,-5.432412 -5.01426,-10.562624 -9.0039,-14.990234 -7.76315,-8.111504 -19.24824,-13.153569 -23.05274,-25.1679692 0.087,8.3528572 0.82205,9.7353272 4.76758,19.0429692 3.35547,7.915658 6.96011,12.361601 20.07422,20.757812 5.88113,3.988917 8.90578,9.684513 11.57617,15.880859 0.26178,-4.21536 -1.58157,-8.445281 -0.28515,-12.960937 3.76813,-17.07331 2.20907,-31.234888 -6.88282,-42.029297 -3.94574,-5.5546488 -8.94887,-9.4101311 -14.57812,-11.03125 z M 88.582031,21.103516 c -0.285043,-0.06111 -0.440803,0.189404 -0.662109,0.314453 -7.621928,10.996064 -14.276223,19.314775 -13.947266,34.09375 -1.026473,18.187407 10.514507,34.765271 11.671875,51.917971 1.750611,-13.130771 10.807487,-22.406215 18.300779,-32.583987 -0.98775,4.349179 -2.13436,8.562369 -4.115232,12.345703 -8.209219,14.068624 -16.380096,30.769014 -10.720703,48.769534 -0.130895,0.19017 -0.315508,0.44085 -0.527344,0.31054 -2.27427,-5.94788 -2.663387,-12.7527 -4.253906,-19.08984 C 80.527063,100.23951 68.939767,86.139797 72.300781,66.609375 70.526838,70.847055 69.808642,75.6298 68.869141,80.25 c -1.983204,11.940394 -3.039316,19.305723 -0.126953,30.27344 3.53927,13.75705 18.448306,28.93333 24.466796,41.53125 l 0.822266,0.74609 c -0.876637,-6.83476 -1.323965,-14.19285 0.382812,-20.71094 2.59375,-10.43136 9.722618,-20.62507 11.718748,-31.37695 1.04045,-8.431763 -1.27928,-17.779819 -2.15625,-25.910156 2.70485,-3.676944 5.2104,-7.469552 7.08399,-11.609375 2.47318,-6.247039 1.43629,-15.135756 2.17773,-21.894531 -0.99633,2.877898 -2.71112,5.366165 -4.65039,7.816406 -9.081552,9.36475 -19.478768,18.977574 -21.455078,32.550782 -0.331541,1.92903 -0.437578,3.9336 -0.933593,5.808593 -0.389229,0.193565 -0.390205,-0.311196 -0.554688,-0.433593 l 1.107422,-16.830078 c 0.382341,-16.439189 -6.55998,-34.665617 1.830078,-49.107422 z m 270.746089,0 c 8.39005,14.441805 1.44969,32.668233 1.83204,49.107422 l 1.10546,16.830078 c -0.16448,0.122397 -0.1635,0.627158 -0.55273,0.433593 -0.49601,-1.874993 -0.60401,-3.879563 -0.93555,-5.808593 -1.9763,-13.573208 -12.37352,-23.186032 -21.45507,-32.550782 -1.93927,-2.450241 -3.65406,-4.938508 -4.65039,-7.816406 0.74144,6.758775 -0.2935,15.647492 2.17968,21.894531 1.87359,4.139823 4.37719,7.932431 7.08203,11.609375 -0.87697,8.130337 -3.19474,17.478394 -2.15429,25.910156 1.99613,10.75188 9.125,20.94559 11.71875,31.37695 1.70678,6.51809 1.25749,13.87618 0.38086,20.71094 l 0.82226,-0.74609 c 6.01849,-12.59792 20.92948,-27.7742 24.46875,-41.53125 2.91236,-10.967717 1.85431,-18.333046 -0.1289,-30.27344 -0.9395,-4.6202 -1.6577,-9.402945 -3.43164,-13.640625 3.36101,19.530422 -8.22629,33.630135 -12.02735,50.572265 -1.59052,6.33714 -1.97962,13.14196 -4.25391,19.08984 -0.21183,0.13031 -0.39645,-0.12037 -0.52734,-0.31054 5.65939,-18.00052 -2.50953,-34.70091 -10.71875,-48.769534 -1.98087,-3.783334 -3.12944,-7.996524 -4.11719,-12.345703 7.4933,10.177772 16.55019,19.453217 18.30078,32.583987 1.15738,-17.152701 12.69836,-33.730564 11.67188,-51.917971 0.32896,-14.778975 -6.32338,-23.097686 -13.94531,-34.09375 -0.2213,-0.125049 -0.37903,-0.375561 -0.66407,-0.314453 z M 102.84375,113.50781 c 1.38902,13.9572 -3.957486,25.7937 -3.582031,39.80078 0.375454,8.46117 2.810341,15.95994 6.728511,22.70899 l -0.66406,0.002 c -5.29341,-7.87325 -9.426875,-16.2506 -15.613279,-23.74805 -9.602539,-10.48187 -21.854528,-21.22907 -23.115235,-35.79882 -1.630562,12.16681 0.562984,23.57309 5.390625,33.65625 4.82764,10.08317 12.289201,18.84243 21.19336,25.71093 l 4.148437,2.9043 c 7.340332,5.43365 13.122202,7.56579 20.175782,13.74609 v -0.75976 c -5.40191,-10.17041 -4.7081,-22.25194 -5.57031,-34.58985 -0.86221,-12.33788 -3.28109,-24.93288 -6.60938,-36.13085 z m 242.22266,0 -2.48243,7.50196 c -3.32829,11.19797 -5.74521,23.79297 -6.60742,36.13085 -0.86221,12.3379 -0.1684,24.41944 -5.57031,34.58985 v 0.75976 c 7.05358,-6.1803 12.8335,-8.31244 20.17383,-13.74609 l 4.14844,-2.9043 c 8.90416,-6.8685 16.36572,-15.62776 21.19336,-25.71093 4.82763,-10.08316 7.02118,-21.48944 5.39062,-33.65625 -1.26071,14.56975 -13.51269,25.31695 -23.11523,35.79882 -6.1864,7.49745 -10.31988,15.8748 -15.61329,23.74805 l -0.66406,-0.002 c 3.91817,-6.74905 6.35502,-14.24782 6.73047,-22.70899 0.37546,-14.00708 -4.973,-25.84358 -3.58398,-39.80078 z m -232.94532,37.26758 c 6.747,15.28492 3.57909,35.16958 12.58399,49.38672 2.47319,4.69926 6.55942,8.83184 10.0918,12.46094 l -0.16407,0.18945 c -3.19654,-1.69484 -6.16273,-4.11937 -8.99414,-6.9707 -15.38594,-14.3441 -38.33359,-16.33724 -47.496092,-39.86133 1.243053,8.63137 2.753739,17.29389 7.689453,24.54492 16.576719,24.26009 34.209669,24.68194 62.042969,31.15625 -12.7388,-11.66743 -14.84241,-29.06815 -20.34766,-44.48047 -3.70117,-9.44194 -9.27582,-18.09717 -15.40625,-26.42578 z m 223.66797,0 c -6.13043,8.32861 -11.70508,16.98384 -15.40625,26.42578 -5.50525,15.41232 -7.60885,32.81304 -20.34765,44.48047 28.78938,-6.10047 45.10756,-6.22279 62.04296,-31.15625 4.93571,-7.25103 6.4464,-15.91355 7.68946,-24.54492 -9.16251,23.52409 -32.1082,25.51723 -47.49414,39.86133 -2.83141,2.85133 -5.79956,5.27586 -8.9961,6.9707 l -0.16406,-0.18945 c 3.53238,-3.6291 7.61861,-7.76168 10.0918,-12.46094 9.0049,-14.21714 5.83698,-34.1018 12.58398,-49.38672 z m -201.64258,37.26953 c 8.32719,12.71579 10.57854,31.5515 25.91797,37.69336 2.54638,1.52654 5.78241,1.35277 8.11524,3.03125 -2.9296,0.50394 -5.45842,-0.75816 -8.22266,-1.19141 -19.56934,-4.9979 -43.57462,1.27777 -58.26562,-17.69921 5.57586,12.39244 17.00981,22.35099 28.09179,26.33007 17.0462,6.59251 34.90259,-0.698 50.97657,-5.14843 2.30785,-0.68096 5.12709,-0.43007 7.27734,-1.31641 -8.94721,-2.08031 -17.43776,-5.33165 -24.49219,-12.35352 -9.81439,-10.48974 -18.75996,-21.31281 -29.39844,-29.3457 z m 179.61719,0 c -10.63848,8.03289 -19.58209,18.85597 -29.39648,29.3457 -7.05443,7.02187 -15.54693,10.27321 -24.49414,12.35352 2.15025,0.88634 4.96949,0.63545 7.27734,1.31641 16.07398,4.45043 33.93232,11.74094 50.97852,5.14843 11.08198,-3.97908 22.51593,-13.93763 28.09179,-26.33007 -14.691,18.97698 -38.69628,12.70131 -58.26562,17.69921 -2.76424,0.43325 -5.29501,1.69535 -8.22461,1.19141 2.33283,-1.67848 5.57081,-1.50471 8.11719,-3.03125 15.33943,-6.14186 17.58882,-24.97757 25.91601,-37.69336 z"/>
+      </svg>
+    </div>
+
+    <div class="laurel-content">
+      <h1>Triclinium Aureum</h1>
+      <p class="tagline">Cenae More Romano · Suppers in the Roman Manner</p>
+    </div>
+
+    <p class="hero-prose">
+      Upon the slope of the <span class="latin">Clivus Publicius</span> on the Aventine,
+      a frescoed supper-room revives the cookery of <span class="latin">Apicius</span> for
+      a modern table. Here are dressed garum and honeyed dormice, suckling kid in laser,
+      and the dark Falernian poured warm against the November rain. The proprietor,
+      Lucius Varro Severus, receives guests from the <span class="latin">hora undecima</span>
+      &mdash; the eleventh hour, by our reckoning half past four &mdash; until the
+      <span class="latin">secunda vigilia</span>, the second watch of the night.
+    </p>
+
+    <div class="hero-rule" aria-hidden="true">
+      <span class="line"></span>
+      <span class="vine">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <path d="m43.583 863.37c-1.79 0.03-3.58 0.13-5.34 0.31-7.05 0.74-13.94 2.79-19.16 7.47s-8.2 12-7.69 21c0.51 9 4.3 16.14 10.19 20.34 5.89 4.2 13.31 5.53 21.03 5.19 15.45-0.69 32.83-8 45.81-18.31 1.41-1.12 2.83-2.04 4.25-3.06 4.29 6.68 7.61 14.83 9.34 24.06-7.5-5.07-21.01-10.55-35.66 1.5-22.14 18.21-24.99 12.88-45.34-2.13-2.86 36.07 15.01 54.64 44.66 52.5 0 0-13.95 4.26-3.59 26.41 6.02 12.87 8.41 20.07 6.56 25.19-12.84 2.29-15.77 7.78-5.57 12.66 45.1 9.97 65.67-27.47 68.66-66.04 45.36 0 52.86-31.8 52.5-50.37-8.21 11.07-22.16 11.07-32.87 2.5-9.93-7.95-21.69-16.18-39-1.13-1.74-11.68-5.69-22.13-11.22-30.72 19.36-11.37 38.72-14.46 52.53-10.81 5.48 1.45 9.46 4.09 12.38 6.97-8.97 8.36-11.84 26.38 2.28 27.03 18.92 0.88 21.03-15.45 13.56-27.13-5.45-8.51-16.42-13.23-25.66-16.56-17.51-4.63-39.74-0.57-61.28 12.5-5.17-5.72-11.13-10.22-17.72-12.97-7.08-2.95-17.54-5.73-28.28-6.31-1.79-0.1-3.58-0.13-5.38-0.09zm0.13 10.03c1.52-0.02 3.09 0.03 4.66 0.13 9.41 0.59 19.26 3.06 25.03 5.47 4.63 1.93 9.05 5.23 13.06 9.44-1.42 1.04-2.84 1.98-4.25 3.09-11.3 8.98-27.54 15.6-40.03 16.16-6.25 0.28-11.38-0.91-14.78-3.34-3.41-2.43-5.65-6.04-6.03-12.75-0.38-6.72 1.42-10.3 4.41-12.97 2.98-2.67 7.74-4.37 13.5-4.97 1.44-0.15 2.92-0.23 4.44-0.25zm62.28 64.81c1-0.01 2.03 0.1 3.06 0.28 8.26 1.44 14 8.11 12.81 14.91-1.19 6.8-8.84 11.16-17.09 9.72-8.26-1.44-14-8.11-12.81-14.91 1.04-5.95 7.02-10.04 14.03-10z"
+                transform="translate(0 -852.36)"/>
+        </svg>
+      </span>
+      <span class="line"></span>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SECTION DIVIDER ========== -->
+<section class="section-divider">
+  <h2 class="section-title">Of the House</h2>
+  <p class="section-sub">De Domo Triclinii</p>
+  <div class="meander" aria-hidden="true" style="max-width:880px;margin:0 auto;"></div>
+</section>
+
+<!-- ========== CARDS ========== -->
+<section class="cards" aria-label="House offerings">
+
+  <article class="card">
+    <div class="card-inner">
+      <div class="card-roundel" aria-hidden="true">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="10" fill="none" stroke="#c9a23a" stroke-width="0.8"/>
+          <circle cx="12" cy="12" r="7.5" fill="none" stroke="#c9a23a" stroke-width="0.5"/>
+          <path d="M12 5 C 9 8, 9 11, 12 14 C 15 11, 15 8, 12 5 Z" fill="#c9a23a" opacity="0.85"/>
+          <path d="M7 10 C 9 12, 11 12, 12 14 C 11 13, 9 13, 7 10 Z" fill="#c9a23a"/>
+          <path d="M17 10 C 15 12, 13 12, 12 14 C 13 13, 15 13, 17 10 Z" fill="#c9a23a"/>
+          <circle cx="12" cy="14.5" r="1" fill="#a93226"/>
+        </svg>
+      </div>
+      <h3>Tonight's Menu</h3>
+      <p class="latin-sub">Carta Hodierna</p>
+      <p>
+        Eight courses dressed by the kitchen of <span class="label">Magister Coquus</span>
+        Tertius: stuffed dormice rolled in poppy and honey, oysters of Lucrine,
+        suckling kid in <span class="latin">laser</span>, and pear patina with
+        rose-petal cream.
+      </p>
+      <p>
+        Set price <span class="price">CXL Sestertii</span> &nbsp;·&nbsp;
+        served from the <span class="latin">hora undecima</span>.
+      </p>
+      <a class="card-link" href="page-2.html">Read the Carta &rarr;</a>
+      <div class="card-foot" aria-hidden="true"></div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="card-inner">
+      <div class="card-roundel" aria-hidden="true">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="10" fill="none" stroke="#c9a23a" stroke-width="0.8"/>
+          <circle cx="12" cy="12" r="7.5" fill="none" stroke="#c9a23a" stroke-width="0.5"/>
+          <path d="M9 5 L9 12 C 9 14, 10.5 15, 12 15 C 13.5 15, 15 14, 15 12 L15 5 Z" fill="#a93226"/>
+          <rect x="11.4" y="15" width="1.2" height="3.5" fill="#c9a23a"/>
+          <rect x="10" y="18" width="4" height="0.8" fill="#c9a23a"/>
+          <path d="M10 7 L14 7" stroke="#c9a23a" stroke-width="0.4"/>
+        </svg>
+      </div>
+      <h3>The Cellar</h3>
+      <p class="latin-sub">Vina Nobilia</p>
+      <p>
+        Forty amphorae rest in our cool vault: dark <span class="label">Falernum</span>
+        of the <span class="latin">consulship of Opimius</span>, sweet
+        <span class="label">Caecubum</span>, resined Chian, and the rough
+        Sabine which Horace himself praised.
+      </p>
+      <p>
+        From <span class="price">XII Sestertii</span> the cup &nbsp;·&nbsp;
+        flights of three by request.
+      </p>
+      <a class="card-link" href="page-3.html">Enter the Cellar &rarr;</a>
+      <div class="card-foot" aria-hidden="true"></div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="card-inner">
+      <div class="card-roundel" aria-hidden="true">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="10" fill="none" stroke="#c9a23a" stroke-width="0.8"/>
+          <circle cx="12" cy="12" r="7.5" fill="none" stroke="#c9a23a" stroke-width="0.5"/>
+          <rect x="5" y="13" width="14" height="3" fill="#a93226"/>
+          <rect x="5" y="13" width="14" height="0.6" fill="#c9a23a"/>
+          <path d="M6 13 L6 10 C 6 9, 7 9, 7 10 L7 13 Z" fill="#c9a23a"/>
+          <path d="M17 13 L17 10 C 17 9, 18 9, 18 10 L18 13 Z" fill="#c9a23a"/>
+          <path d="M5 16 L5 18 M19 16 L19 18" stroke="#c9a23a" stroke-width="0.6"/>
+        </svg>
+      </div>
+      <h3>Reserving a Couch</h3>
+      <p class="latin-sub">Lectum Reservare</p>
+      <p>
+        Three triclinia receive guests, each set with nine couches in the old
+        manner. <span class="label">Summus, medius, imus</span> &mdash; choose
+        your place. Reservations are kept by tablet or messenger up to thirty
+        days hence.
+      </p>
+      <p>
+        Couch deposit <span class="price">XXX Sestertii</span> &nbsp;·&nbsp;
+        parties of nine welcomed entire.
+      </p>
+      <a class="card-link" href="page-5.html">Reserve a Couch &rarr;</a>
+      <div class="card-foot" aria-hidden="true"></div>
+    </div>
+  </article>
+
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="frieze">
+  <div class="meander" aria-hidden="true"></div>
+  <div class="footer-band">
+    <div class="rosette" aria-hidden="true">
+      <span></span><span></span><span></span>
+    </div>
+    <div class="footer-center">
+      <span class="big">Triclinium Aureum</span>
+      Clivus Publicius IX · Mons Aventinus · Roma
+      <br>
+      Open Tuesday through Saturday · Hora XI ad Vigiliam Secundam
+    </div>
+    <div class="rosette" aria-hidden="true">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+  <div class="footer-corners">
+    <div class="footer-strip">
+      <span class="vine-mini" aria-hidden="true">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <path d="m43.583 863.37c-1.79 0.03-3.58 0.13-5.34 0.31-7.05 0.74-13.94 2.79-19.16 7.47s-8.2 12-7.69 21c0.51 9 4.3 16.14 10.19 20.34 5.89 4.2 13.31 5.53 21.03 5.19 15.45-0.69 32.83-8 45.81-18.31 1.41-1.12 2.83-2.04 4.25-3.06 4.29 6.68 7.61 14.83 9.34 24.06-7.5-5.07-21.01-10.55-35.66 1.5-22.14 18.21-24.99 12.88-45.34-2.13-2.86 36.07 15.01 54.64 44.66 52.5 0 0-13.95 4.26-3.59 26.41 6.02 12.87 8.41 20.07 6.56 25.19-12.84 2.29-15.77 7.78-5.57 12.66 45.1 9.97 65.67-27.47 68.66-66.04 45.36 0 52.86-31.8 52.5-50.37-8.21 11.07-22.16 11.07-32.87 2.5-9.93-7.95-21.69-16.18-39-1.13-1.74-11.68-5.69-22.13-11.22-30.72 19.36-11.37 38.72-14.46 52.53-10.81 5.48 1.45 9.46 4.09 12.38 6.97-8.97 8.36-11.84 26.38 2.28 27.03 18.92 0.88 21.03-15.45 13.56-27.13-5.45-8.51-16.42-13.23-25.66-16.56-17.51-4.63-39.74-0.57-61.28 12.5-5.17-5.72-11.13-10.22-17.72-12.97-7.08-2.95-17.54-5.73-28.28-6.31-1.79-0.1-3.58-0.13-5.38-0.09z" transform="translate(0 -852.36)"/>
+        </svg>
+      </span>
+      <span>Lucius Varro Severus, Proprietor &nbsp;·&nbsp; Founded MMXIX</span>
+      <span class="vine-mini" aria-hidden="true">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <path d="m43.583 863.37c-1.79 0.03-3.58 0.13-5.34 0.31-7.05 0.74-13.94 2.79-19.16 7.47s-8.2 12-7.69 21c0.51 9 4.3 16.14 10.19 20.34 5.89 4.2 13.31 5.53 21.03 5.19 15.45-0.69 32.83-8 45.81-18.31 1.41-1.12 2.83-2.04 4.25-3.06 4.29 6.68 7.61 14.83 9.34 24.06-7.5-5.07-21.01-10.55-35.66 1.5-22.14 18.21-24.99 12.88-45.34-2.13-2.86 36.07 15.01 54.64 44.66 52.5 0 0-13.95 4.26-3.59 26.41 6.02 12.87 8.41 20.07 6.56 25.19-12.84 2.29-15.77 7.78-5.57 12.66 45.1 9.97 65.67-27.47 68.66-66.04 45.36 0 52.86-31.8 52.5-50.37-8.21 11.07-22.16 11.07-32.87 2.5-9.93-7.95-21.69-16.18-39-1.13-1.74-11.68-5.69-22.13-11.22-30.72 19.36-11.37 38.72-14.46 52.53-10.81 5.48 1.45 9.46 4.09 12.38 6.97-8.97 8.36-11.84 26.38 2.28 27.03 18.92 0.88 21.03-15.45 13.56-27.13-5.45-8.51-16.42-13.23-25.66-16.56-17.51-4.63-39.74-0.57-61.28 12.5-5.17-5.72-11.13-10.22-17.72-12.97-7.08-2.95-17.54-5.73-28.28-6.31-1.79-0.1-3.58-0.13-5.38-0.09z" transform="translate(0 -852.36)"/>
+        </svg>
+      </span>
+    </div>
+    <div class="corner-laurel left" aria-hidden="true">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <g fill="#c9a23a" opacity="0.8">
+          <path d="M10 90 Q 30 70, 50 60 Q 30 75, 15 95 Z"/>
+          <ellipse cx="22" cy="78" rx="6" ry="3" transform="rotate(-30 22 78)"/>
+          <ellipse cx="32" cy="70" rx="6" ry="3" transform="rotate(-30 32 70)"/>
+          <ellipse cx="42" cy="62" rx="6" ry="3" transform="rotate(-30 42 62)"/>
+          <ellipse cx="18" cy="86" rx="5" ry="2.5" transform="rotate(60 18 86)"/>
+          <ellipse cx="28" cy="78" rx="5" ry="2.5" transform="rotate(60 28 78)"/>
+        </g>
+      </svg>
+    </div>
+    <div class="corner-laurel right" aria-hidden="true">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <g fill="#c9a23a" opacity="0.8">
+          <path d="M10 90 Q 30 70, 50 60 Q 30 75, 15 95 Z"/>
+          <ellipse cx="22" cy="78" rx="6" ry="3" transform="rotate(-30 22 78)"/>
+          <ellipse cx="32" cy="70" rx="6" ry="3" transform="rotate(-30 32 70)"/>
+          <ellipse cx="42" cy="62" rx="6" ry="3" transform="rotate(-30 42 62)"/>
+          <ellipse cx="18" cy="86" rx="5" ry="2.5" transform="rotate(60 18 86)"/>
+          <ellipse cx="28" cy="78" rx="5" ry="2.5" transform="rotate(60 28 78)"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

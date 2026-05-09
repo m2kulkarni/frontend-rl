@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>The Workshop — Lineage and Tools · Kuramae Sashimono</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), "Shippori Mincho", serif;
+    font-size: 15px;
+    line-height: 1.7;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Asanoha background wash */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("svg/asanoha-hempleaf.svg");
+    background-size: 280px 280px;
+    background-repeat: repeat;
+    opacity: 0.12;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  main, header, footer { position: relative; z-index: 1; }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* ---------- NAV ---------- */
+  .nav-band {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    align-items: center;
+    padding: 22px 56px 18px 36px;
+    border-bottom: 1px solid var(--ornament);
+    background: transparent;
+  }
+  .nav-mark {
+    width: 54px; height: 54px;
+    border: 1px solid var(--ornament);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+    background: var(--surface);
+  }
+  .nav-mark svg { width: 78%; height: 78%; }
+  .nav-links {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0;
+    align-items: baseline;
+    width: 40%;
+    margin-left: auto;
+    font-family: var(--font-body), serif;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .nav-links a {
+    padding: 4px 18px;
+    border-right: 1px solid var(--ornament);
+    color: var(--text);
+  }
+  .nav-links a:first-child { border-left: 1px solid var(--ornament); }
+  .nav-links a[aria-current="page"] {
+    border-bottom: 2px solid var(--secondary);
+    color: var(--text);
+  }
+
+  /* ---------- HERO / TITLE BLOCK ---------- */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 520px;
+    padding: 90px 80px 60px 80px;
+    position: relative;
+  }
+  .hero-empty { /* deliberate ma */ }
+  .hero-block {
+    grid-column: 2;
+    align-self: end;
+    max-width: 520px;
+    border-left: 1px solid var(--ornament);
+    padding: 14px 0 14px 36px;
+  }
+  .hero-kicker {
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin-bottom: 18px;
+  }
+  .hero-title {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    font-size: 54px;
+    line-height: 1.15;
+    margin: 0 0 24px;
+    letter-spacing: 0.02em;
+  }
+  .hero-title em {
+    font-style: normal;
+    color: var(--secondary);
+  }
+  .hero-sub {
+    font-size: 14px;
+    line-height: 1.85;
+    margin: 0;
+    max-width: 460px;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 28px;
+    margin-top: 28px;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .hero-meta span { border-top: 1px solid var(--ornament); padding-top: 6px; }
+
+  /* Crane seal floating off-center upper-left */
+  .crane-seal {
+    position: absolute;
+    top: 80px;
+    left: 80px;
+    width: 220px;
+    height: 220px;
+    opacity: 0.92;
+  }
+  .crane-seal svg { width: 100%; height: 100%; }
+
+  /* ---------- DIVIDER ---------- */
+  .sayagata-divider {
+    height: 28px;
+    background-image: url("svg/sayagata-keyfret.svg");
+    background-size: 200px 200px;
+    background-repeat: repeat-x;
+    opacity: 0.18;
+    margin: 40px 0 0;
+  }
+
+  /* ---------- SECTION HEADERS ---------- */
+  .section {
+    padding: 80px 80px 40px;
+    position: relative;
+  }
+  .section-head {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 60px;
+    margin-bottom: 50px;
+  }
+  .section-num {
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text);
+    border-top: 1px solid var(--ornament);
+    padding-top: 10px;
+  }
+  .section-num em {
+    display: block;
+    font-style: normal;
+    color: var(--secondary);
+    font-size: 11px;
+    margin-top: 4px;
+  }
+  .section-title {
+    font-family: var(--font-display), serif;
+    font-size: 36px;
+    line-height: 1.2;
+    margin: 0;
+    font-weight: 400;
+    max-width: 600px;
+  }
+
+  /* ---------- LINEAGE ---------- */
+  .lineage-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 0;
+    margin-top: 40px;
+  }
+  .lineage-card {
+    background: var(--surface);
+    border-top: 1px solid var(--ornament);
+    border-left: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+    /* right edge open */
+    padding: 32px 28px 36px 28px;
+    position: relative;
+    min-height: 360px;
+  }
+  .lineage-card:last-child {
+    border-right: 1px solid var(--ornament);
+  }
+  .lineage-card .seal {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 30px;
+    height: 30px;
+    opacity: 0.85;
+  }
+  .lineage-card .seal svg { width: 100%; height: 100%; }
+  .gen-num {
+    font-family: var(--font-display), serif;
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 10px;
+  }
+  .gen-name {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    line-height: 1.25;
+    margin: 0 0 6px;
+    font-weight: 400;
+  }
+  .gen-meta {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--text);
+    margin-bottom: 16px;
+    border-bottom: 1px solid var(--ornament);
+    padding-bottom: 10px;
+  }
+  .gen-meta span { display: block; }
+  .gen-body {
+    font-size: 13px;
+    line-height: 1.75;
+    margin: 0;
+  }
+
+  /* ---------- TOOLS SECTION ---------- */
+  .tools-wrap {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 60px;
+    margin-top: 30px;
+  }
+  .tools-aside {
+    border-top: 1px solid var(--ornament);
+    padding-top: 18px;
+    font-size: 13px;
+    line-height: 1.8;
+  }
+  .tools-aside h3 {
+    font-family: var(--font-display), serif;
+    font-size: 16px;
+    margin: 0 0 14px;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+  }
+  .tools-aside p { margin: 0 0 14px; font-size: 13px; }
+  .smith {
+    margin-top: 22px;
+    border-left: 2px solid var(--secondary);
+    padding: 4px 0 4px 14px;
+    font-size: 12px;
+    line-height: 1.7;
+  }
+  .smith strong {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    color: var(--secondary);
+    display: block;
+    font-size: 14px;
+  }
+
+  .tool-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+  .tool-group {
+    background: var(--surface);
+    border-top: 1px solid var(--ornament);
+    border-left: 1px solid var(--ornament);
+    border-bottom: 1px solid var(--ornament);
+    padding: 26px 28px;
+  }
+  .tool-group:nth-child(2n) { border-right: 1px solid var(--ornament); }
+  .tool-group h4 {
+    font-family: var(--font-display), serif;
+    font-size: 18px;
+    margin: 0 0 4px;
+    font-weight: 400;
+  }
+  .tool-group .count {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 14px;
+    display: block;
+  }
+  .tool-group dl {
+    margin: 0;
+    font-size: 12.5px;
+    line-height: 1.6;
+  }
+  .tool-group dt {
+    font-family: var(--font-display), serif;
+    font-size: 13.5px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dotted var(--ornament);
+    padding-bottom: 2px;
+  }
+  .tool-group dt span {
+    font-family: var(--font-body), serif;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    align-self: flex-end;
+  }
+  .tool-group dt span.inh { color: var(--text); }
+  .tool-group dd {
+    margin: 4px 0 0;
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--text);
+  }
+
+  /* ---------- TRAINING / CLOSING ---------- */
+  .training {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 100px 80px 120px;
+    gap: 80px;
+    position: relative;
+  }
+  .training-seal {
+    position: absolute;
+    top: 60px;
+    right: 80px;
+    width: 180px;
+    height: 180px;
+    opacity: 0.55;
+  }
+  .training-seal svg { width: 100%; height: 100%; }
+  .training-empty {}
+  .training-block {
+    border-left: 1px solid var(--ornament);
+    padding-left: 36px;
+    max-width: 520px;
+  }
+  .training-block .kicker {
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .training-block h2 {
+    font-family: var(--font-display), serif;
+    font-size: 38px;
+    line-height: 1.2;
+    margin: 0 0 24px;
+    font-weight: 400;
+  }
+  .training-block p { font-size: 14px; line-height: 1.85; margin: 0 0 14px; }
+  .training-block .signed {
+    margin-top: 28px;
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    color: var(--secondary);
+    letter-spacing: 0.08em;
+  }
+  .training-rules {
+    list-style: none;
+    margin: 24px 0 0;
+    padding: 0;
+    font-size: 13px;
+  }
+  .training-rules li {
+    border-top: 1px solid var(--ornament);
+    padding: 10px 0 10px 28px;
+    position: relative;
+  }
+  .training-rules li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--secondary);
+  }
+  .training-rules li:last-child { border-bottom: 1px solid var(--ornament); }
+
+  /* ---------- FOOTER ---------- */
+  .footer-frets {
+    height: 32px;
+    background-image: url("svg/sayagata-keyfret.svg");
+    background-size: 180px 180px;
+    background-repeat: repeat-x;
+    opacity: 0.18;
+  }
+  footer.site-footer {
+    background: var(--bg);
+    padding: 60px 80px 40px;
+    display: grid;
+    grid-template-columns: 200px 1fr 1fr;
+    gap: 60px;
+    border-top: 1px solid var(--ornament);
+  }
+  .foot-mark {
+    width: 110px;
+    height: 110px;
+    background: var(--surface);
+    border: 1px solid var(--ornament);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .foot-mark svg { width: 80%; height: 80%; filter: invert(1); }
+  /* paulownia kamon: original svg has black bg, white motif. invert to render dark on kraft */
+  .foot-mark { color: var(--accent); }
+  .foot-sig {
+    writing-mode: vertical-rl;
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    letter-spacing: 0.18em;
+    line-height: 1.8;
+    margin-top: 6px;
+    height: 220px;
+  }
+  .foot-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    text-align: right;
+  }
+  .foot-brushy {
+    font-family: var(--font-display), serif;
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--secondary);
+    max-width: 320px;
+  }
+  .foot-attr {
+    font-size: 11px;
+    line-height: 1.6;
+    color: var(--text);
+    opacity: 0.78;
+    margin-top: 30px;
+  }
+  .foot-mid {
+    font-size: 12px;
+    line-height: 1.8;
+  }
+  .foot-mid h4 {
+    font-family: var(--font-display), serif;
+    font-size: 14px;
+    margin: 0 0 10px;
+    font-weight: 400;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  .foot-mid a { display: block; color: var(--text); border-bottom: 1px solid transparent; }
+
+</style>
+</head>
+<body>
+
+<header class="nav-band" role="banner">
+  <a class="nav-mark" href="page-1.html" aria-label="Kuramae Sashimono — home">
+    <!-- tsuru-no-maru roundel -->
+    <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="344" cy="344" r="320" fill="none" stroke="currentColor" stroke-width="6"/>
+      <g transform="translate(344 344) scale(0.62) translate(-344 -344)">
+        <circle cx="344" cy="344" r="300" fill="#f5efde"/>
+        <path d="M344 120 c -50 60 -90 110 -110 170 c -10 30 -10 60 10 90 c 20 30 60 50 100 50 c 40 0 80 -20 100 -50 c 20 -30 20 -60 10 -90 c -20 -60 -60 -110 -110 -170 z M260 380 c -40 20 -80 40 -100 80 c -20 40 -20 80 10 110 c 30 30 80 30 130 10 c 30 -10 60 -30 80 -60 M428 380 c 40 20 80 40 100 80 c 20 40 20 80 -10 110 c -30 30 -80 30 -130 10 c -30 -10 -60 -30 -80 -60 M344 460 v 120 M310 590 h 68" fill="none" stroke="#0c0c0c" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+    </svg>
+  </a>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="page-1.html">Studio</a>
+    <a href="page-2.html">Commissions</a>
+    <a href="page-3.html">Journal</a>
+    <a href="page-4.html" aria-current="page">Workshop</a>
+    <a href="page-5.html">Visit</a>
+    <a href="page-6.html">Correspondence</a>
+  </nav>
+</header>
+
+<main>
+
+  <section class="hero" aria-labelledby="page-title">
+    <div class="crane-seal" aria-hidden="true">
+      <!-- inline tsuru crane mon: simplified, abstract circular composition -->
+      <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="344" cy="344" r="332" fill="none" stroke="#0c0c0c" stroke-width="2"/>
+        <circle cx="344" cy="344" r="300" fill="none" stroke="#0c0c0c" stroke-width="1"/>
+        <g fill="#0c0c0c">
+          <path d="M344 90 c -30 50 -60 95 -90 130 c -25 30 -55 50 -90 60 c 20 5 45 0 70 -10 c 30 -12 55 -32 75 -58 c 5 18 5 38 -2 58 c -8 22 -22 40 -42 52 c 25 -2 50 -12 70 -32 c 18 -18 28 -42 30 -68 c 4 26 14 50 32 68 c 20 20 45 30 70 32 c -20 -12 -34 -30 -42 -52 c -7 -20 -7 -40 -2 -58 c 20 26 45 46 75 58 c 25 10 50 15 70 10 c -35 -10 -65 -30 -90 -60 c -30 -35 -60 -80 -90 -130 z"/>
+          <path d="M180 360 c 30 20 65 30 100 28 c -10 14 -16 30 -18 46 c 18 -10 36 -18 54 -22 c -6 18 -8 36 -6 54 c 12 -16 26 -28 42 -38 c -2 18 -2 36 0 54 c 8 -16 18 -32 30 -44 c -2 18 -2 36 2 54 c 6 -18 16 -34 28 -48 c 0 18 4 36 10 52 c 4 -18 12 -34 22 -48 c 4 16 12 30 22 42 c -2 -18 -2 -36 2 -54 c 14 14 30 24 48 30 c -14 -12 -24 -28 -32 -44 c 18 4 36 4 54 0 c -18 -8 -34 -18 -48 -32 c 20 -2 38 -8 54 -18 c -20 -2 -38 -8 -54 -18 c 16 -10 30 -22 40 -36 c -22 8 -44 12 -66 12 c 12 -14 22 -30 28 -48 c -20 16 -42 28 -64 36 c -22 -8 -44 -20 -64 -36 c 6 18 16 34 28 48 c -22 0 -44 -4 -66 -12 c 10 14 24 26 40 36 c -16 10 -34 16 -54 18 c 16 10 34 16 54 18 c -14 14 -30 24 -48 32 c 18 4 36 4 54 0 c -8 16 -18 32 -32 44 c 18 -6 34 -16 48 -30 c 4 18 4 36 2 54 c 10 -12 18 -26 22 -42 c 10 14 18 30 22 48 c 6 -16 10 -34 10 -52 c 12 14 22 30 28 48 c 4 -18 4 -36 2 -54 c 12 12 22 28 30 44 c 2 -18 2 -36 0 -54 c 16 10 30 22 42 38 c 2 -18 0 -36 -6 -54 c 18 4 36 12 54 22 c -2 -16 -8 -32 -18 -46 c 35 2 70 -8 100 -28 c -40 0 -78 -12 -110 -34 c -32 -22 -56 -54 -68 -90 c -8 -24 -10 -48 -6 -72 c -20 28 -34 60 -40 94 c -6 -34 -20 -66 -40 -94 c 4 24 2 48 -6 72 c -12 36 -36 68 -68 90 c -32 22 -70 34 -110 34 z"/>
+          <circle cx="344" cy="382" r="14"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="hero-empty"></div>
+    <div class="hero-block">
+      <div class="hero-kicker">第四 · About the Bench</div>
+      <h1 class="hero-title" id="page-title">The Workshop —<br><em>Lineage</em> &amp; Tools</h1>
+      <p class="hero-sub">
+        Four generations have stood at this bench in Kuramae. The room has
+        been rebuilt twice — once after the great fire of Meiji 14, and once
+        after the bombings of Shōwa 20 — but the bench itself, the Itō family
+        bench, was carried out both times before the flames reached it. It
+        remains the oldest tool in the shop.
+      </p>
+      <div class="hero-meta">
+        <span>Founded&nbsp;&nbsp;Bunkyū 2 · 1862</span>
+        <span>Generations&nbsp;&nbsp;Four</span>
+        <span>Apprentices&nbsp;&nbsp;Two</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="sayagata-divider" aria-hidden="true"></div>
+
+  <!-- LINEAGE -->
+  <section class="section" aria-labelledby="lineage-title">
+    <div class="section-head">
+      <div class="section-num">
+        I · Lineage of the Bench
+        <em>四代の系譜</em>
+      </div>
+      <h2 class="section-title" id="lineage-title">
+        Itō Tōkichi opened the shop in Kuramae in the second year of Bunkyū. His great-grandson stands at the same bench today.
+      </h2>
+    </div>
+
+    <div class="lineage-grid">
+
+      <article class="lineage-card">
+        <div class="seal" aria-hidden="true">
+          <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg"><circle cx="344" cy="344" r="320" fill="#0c0c0c"/><circle cx="344" cy="344" r="180" fill="#f5efde"/><circle cx="344" cy="344" r="60" fill="#0c0c0c"/></svg>
+        </div>
+        <div class="gen-num">First Generation</div>
+        <h3 class="gen-name">Itō Tōkichi<br>伊藤 藤吉</h3>
+        <div class="gen-meta">
+          <span>b. Bunsei 9 (1826), Echizen</span>
+          <span>d. Meiji 18 (1885), Tōkyō</span>
+        </div>
+        <p class="gen-body">
+          Apprenticed at thirteen to the joiner Sakuma of Fukui. Walked to Edo
+          in Ansei 4 and worked nine years for a tansu maker near Asakusa
+          bridge before opening his own shop on Taishō-dōri in Bunkyū 2 (1862).
+          The lacquered cherry plane stamped <em>藤</em> at the heel is his.
+        </p>
+      </article>
+
+      <article class="lineage-card">
+        <div class="seal" aria-hidden="true">
+          <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg"><circle cx="344" cy="344" r="320" fill="#0c0c0c"/><circle cx="344" cy="344" r="180" fill="#f5efde"/><circle cx="344" cy="344" r="60" fill="#0c0c0c"/></svg>
+        </div>
+        <div class="gen-num">Second Generation</div>
+        <h3 class="gen-name">Itō Tōzaburō<br>伊藤 藤三郎</h3>
+        <div class="gen-meta">
+          <span>b. Keiō 1 (1865), Kuramae</span>
+          <span>d. Shōwa 7 (1932), Kuramae</span>
+        </div>
+        <p class="gen-body">
+          Inherited the shop at twenty. Survived the fire of Meiji 14 by
+          carrying the bench, the four largest planes, and his father's
+          chest of nomi out through the rear lane. Took the first commissions
+          for the Mitsui household — six paulownia tea-utensil boxes, three
+          extant.
+        </p>
+      </article>
+
+      <article class="lineage-card">
+        <div class="seal" aria-hidden="true">
+          <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg"><circle cx="344" cy="344" r="320" fill="#0c0c0c"/><circle cx="344" cy="344" r="180" fill="#f5efde"/><circle cx="344" cy="344" r="60" fill="#0c0c0c"/></svg>
+        </div>
+        <div class="gen-num">Third Generation</div>
+        <h3 class="gen-name">Itō Kōzō<br>伊藤 幸三</h3>
+        <div class="gen-meta">
+          <span>b. Meiji 36 (1903), Kuramae</span>
+          <span>d. Heisei 4 (1992), Kuramae</span>
+        </div>
+        <p class="gen-body">
+          Trained under his father from age nine. Drafted in Shōwa 13; returned
+          in Shōwa 21 to find the workshop burnt and the bench buried under a
+          tin roof in the back garden, untouched. Rebuilt the shop in Shōwa
+          24 (1949) on the original footprint — eight tatami, north light.
+        </p>
+      </article>
+
+      <article class="lineage-card">
+        <div class="seal" aria-hidden="true">
+          <svg viewBox="0 0 688 688" xmlns="http://www.w3.org/2000/svg"><circle cx="344" cy="344" r="320" fill="#e34234"/><circle cx="344" cy="344" r="180" fill="#f5efde"/><circle cx="344" cy="344" r="60" fill="#e34234"/></svg>
+        </div>
+        <div class="gen-num">Fourth · Present</div>
+        <h3 class="gen-name">Itō Kōichirō<br>伊藤 幸一郎</h3>
+        <div class="gen-meta">
+          <span>b. Shōwa 41 (1966), Kuramae</span>
+          <span>Master since Heisei 14 (2002)</span>
+        </div>
+        <p class="gen-body">
+          Began at the bench at fifteen under his father and grandfather both.
+          Six years on stock preparation before being allowed to cut a single
+          dovetail. Took commissions independently from Heisei 6, became
+          shōnin in Heisei 14. Trains two apprentices: Sasaki Wataru (4th yr)
+          and Mori Hisashi (2nd yr).
+        </p>
+      </article>
+
+    </div>
+  </section>
+
+  <div class="sayagata-divider" aria-hidden="true"></div>
+
+  <!-- TOOLS -->
+  <section class="section" aria-labelledby="tools-title">
+    <div class="section-head">
+      <div class="section-num">
+        II · The Tools of the Bench
+        <em>道具帳</em>
+      </div>
+      <h2 class="section-title" id="tools-title">
+        Twelve named planes, nine chisels, two saws. Most inherited; the rest forged for this studio in Sanjō.
+      </h2>
+    </div>
+
+    <div class="tools-wrap">
+      <aside class="tools-aside">
+        <h3>On the catalog</h3>
+        <p>
+          The list below is the working set kept on the bench, not the full
+          inventory. Tools held in reserve, ceremonial planes, and the boxed
+          collection of the second generation are not listed.
+        </p>
+        <p>
+          Each entry notes whether the tool was inherited (<em>相伝</em>) or
+          forged for the studio (<em>誂え</em>). Inherited tools are not used
+          for commissioned work; they are taken down once a year, in the first
+          week of the new year, sharpened, and returned to their wrappings.
+        </p>
+        <div class="smith">
+          <strong>Funahiro of Sanjō</strong>
+          舟弘 — fourth-generation blacksmith of Sanjō, Niigata. Has forged
+          irons for this studio since Heisei 9. Steel is white-paper No. 1;
+          lamination, soft iron jigane sourced from a salvaged Meiji-era
+          anchor chain.
+        </div>
+      </aside>
+
+      <div class="tool-list">
+
+        <div class="tool-group">
+          <h4>Kanna · Planes</h4>
+          <span class="count">十二挺 · Twelve</span>
+          <dl>
+            <dt>荒仕子 Ara-shiko <span class="inh">相伝 · 1st gen.</span></dt>
+            <dd>The roughing plane. 70 mm iron; oak dai, blackened with age. Reserved.</dd>
+            <dt>中仕子 Naka-shiko <span>誂え · Funahiro 1998</span></dt>
+            <dd>Daily intermediate plane. Used on every commission since Heisei 10.</dd>
+            <dt>仕上 Shiage <span>誂え · Funahiro 2003</span></dt>
+            <dd>Finishing plane. 65 mm. Cuts a shaving 8 microns at the centerline.</dd>
+            <dt>長台 Naga-dai <span class="inh">相伝 · 3rd gen.</span></dt>
+            <dd>Long-soled jointer, 380 mm. Reset by the present master in Heisei 18.</dd>
+            <dt>豆鉋 Mame <span>誂え · Funahiro 2011</span></dt>
+            <dd>Miniature plane for box-lid edges. Three in the set.</dd>
+            <dt>南京 Nanking <span class="inh">相伝 · 2nd gen.</span></dt>
+            <dd>Spokeshave-form. Used on curved chair stretchers and tansu pulls.</dd>
+            <dt>際鉋 Kiwa (L &amp; R) <span>誂え · Funahiro 2009</span></dt>
+            <dd>Edge planes, paired. For shoji rebates and tansu carcase rabbets.</dd>
+            <dt>四方反 Shihō-zori <span class="inh">相伝 · 1st gen.</span></dt>
+            <dd>Compass plane, four-way curved sole. The oldest active iron in the shop.</dd>
+            <dt>溝鉋 Mizo <span>誂え · Funahiro 2014</span></dt>
+            <dd>Grooving plane, 4.5 mm and 6 mm. For drawer-bottom housings.</dd>
+            <dt>面取 Mentori <span>誂え · Funahiro 2016</span></dt>
+            <dd>Chamfer plane, 45°. Single iron, oak dai.</dd>
+          </dl>
+        </div>
+
+        <div class="tool-group">
+          <h4>Nomi · Chisels</h4>
+          <span class="count">九本 · Nine</span>
+          <dl>
+            <dt>追入 Oire (set of 6) <span>誂え · Funahiro 2001</span></dt>
+            <dd>Bench chisels: 3, 6, 9, 12, 18, 24 mm. Re-handled in red oak.</dd>
+            <dt>叩鑿 Tataki <span class="inh">相伝 · 3rd gen.</span></dt>
+            <dd>Striking chisel, 30 mm. Hooped in iron. For mortise pares on tansu carcases.</dd>
+            <dt>薄鑿 Usu <span>誂え · Funahiro 2007</span></dt>
+            <dd>Paring chisel, 24 mm. Long blade for shouldered through-tenons.</dd>
+            <dt>鎬鑿 Shinogi <span>誂え · Funahiro 2012</span></dt>
+            <dd>Bevel-edge chisel, 9 mm. For half-blind dovetails in paulownia.</dd>
+          </dl>
+        </div>
+
+        <div class="tool-group">
+          <h4>Nokogiri · Saws</h4>
+          <span class="count">二挺 · Two</span>
+          <dl>
+            <dt>胴付 Dōzuki <span>誂え · Nakaya, Miki 2010</span></dt>
+            <dd>Backed crosscut, 240 mm. 25 teeth per sun. Re-toothed every third year by Nakaya himself.</dd>
+            <dt>両刃 Ryōba <span class="inh">相伝 · 2nd gen.</span></dt>
+            <dd>Double-edged saw, 270 mm. Unused since Shōwa 58; held as record. A working ryōba (誂え, 2018) sits beside it.</dd>
+          </dl>
+        </div>
+
+        <div class="tool-group">
+          <h4>Sumitsubo &amp; Sashigane</h4>
+          <span class="count">Marking · 墨付け</span>
+          <dl>
+            <dt>墨壺 Sumitsubo <span class="inh">相伝 · 1st gen.</span></dt>
+            <dd>Inkpot of carved zelkova. Dated by inscription Bunkyū 3 (1863). Refilled with Nara-zumi twice yearly.</dd>
+            <dt>差金 Sashigane <span>誂え · Tajima of Sanjō 2005</span></dt>
+            <dd>Carpenter's square, 50 sun × 25 sun. Engraved with the kane-jaku scale on one face, the maru-jaku on the other.</dd>
+            <dt>毛引 Kebiki <span class="inh">相伝 · 3rd gen.</span></dt>
+            <dd>Marking gauge, ebony stem. Two pins, one knife. Used only for shoji frame layout.</dd>
+          </dl>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="sayagata-divider" aria-hidden="true"></div>
+
+  <!-- TRAINING -->
+  <section class="training" aria-labelledby="training-title">
+    <div class="training-seal" aria-hidden="true">
+      <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="250" cy="250" r="240" fill="none" stroke="#0c0c0c" stroke-width="2"/>
+        <g fill="#c9a23a">
+          <path d="M250 60 c -8 40 -8 80 0 110 c -30 -20 -60 -30 -90 -30 c 20 24 36 50 46 80 c -34 -10 -68 -10 -100 0 c 26 18 50 40 70 64 c -34 4 -66 16 -94 36 c 30 4 58 14 84 30 c -22 22 -38 48 -48 78 c 28 -16 56 -28 84 -36 c -8 30 -10 60 -4 90 c 18 -22 38 -42 60 -58 c 4 30 14 58 30 84 c -2 -28 0 -56 6 -82 c 6 26 8 54 6 82 c 16 -26 26 -54 30 -84 c 22 16 42 36 60 58 c 6 -30 4 -60 -4 -90 c 28 8 56 20 84 36 c -10 -30 -26 -56 -48 -78 c 26 -16 54 -26 84 -30 c -28 -20 -60 -32 -94 -36 c 20 -24 44 -46 70 -64 c -32 -10 -66 -10 -100 0 c 10 -30 26 -56 46 -80 c -30 0 -60 10 -90 30 c 8 -30 8 -70 0 -110 z"/>
+          <circle cx="250" cy="270" r="14" fill="#0c0c0c"/>
+        </g>
+      </svg>
+    </div>
+    <div class="training-empty"></div>
+    <div class="training-block">
+      <div class="kicker">III · Training Policy · 修業の規</div>
+      <h2 id="training-title">Six years. No shortcuts.</h2>
+      <p>
+        The studio accepts one apprentice every three years. The term is six
+        years; no exceptions have been made since Shōwa 24. The first three
+        years are spent on stock preparation, sharpening, and the rebuilding
+        of three of the studio's planes from rough castings. No commissioned
+        work is touched.
+      </p>
+      <p>
+        In the fourth year the apprentice is permitted to cut joints in scrap
+        for inspection. In the fifth, to rough-prepare components for the
+        master's commissions. In the sixth, and only if the work merits, to
+        complete a commission alone, signed jointly with the master's seal.
+      </p>
+      <ul class="training-rules">
+        <li>Stipend, room, and one set of tools provided. Tools remain studio property until the sixth year.</li>
+        <li>One day off per ten. No outside work permitted during the term.</li>
+        <li>Applications by handwritten letter only. No formal interview; a single day at the bench.</li>
+        <li>Next opening: Reiwa 9 (2027). Currently full.</li>
+      </ul>
+      <div class="signed">— Itō Kōichirō, fourth master</div>
+    </div>
+  </section>
+
+</main>
+
+<div class="footer-frets" aria-hidden="true"></div>
+<footer class="site-footer" role="contentinfo">
+  <div>
+    <div class="foot-mark" aria-hidden="true">
+      <!-- Paulownia kamon, simplified inline -->
+      <svg viewBox="0 0 345 326" xmlns="http://www.w3.org/2000/svg">
+        <g fill="#c9a23a">
+          <path d="M172 0 c -10 14 -22 22 -36 26 c -10 4 -18 12 -20 24 c -2 12 4 22 14 28 c 8 4 12 14 10 24 c -2 12 -10 18 -22 18 c -10 0 -18 6 -22 16 c -4 12 0 22 10 28 c 12 6 18 18 16 30 c -2 14 -14 22 -28 20 c -2 30 8 60 30 80 c 24 22 60 30 92 16 c -4 14 -2 28 6 40 c 12 16 32 20 48 10 c -8 16 -8 36 4 50 c 14 18 38 20 54 6 c -2 -10 -2 -20 2 -30 c 8 -16 24 -24 40 -22 c -10 -14 -10 -32 -2 -46 c 10 -18 32 -24 50 -16 c -8 -14 -8 -32 2 -46 c 12 -16 32 -22 50 -16 c -8 -14 -8 -30 0 -44 c -16 4 -32 0 -42 -10 c -14 -14 -14 -36 0 -50 c -14 0 -28 -8 -34 -22 c -8 -16 -2 -34 12 -42 c -16 -4 -28 -16 -28 -32 c 0 -14 10 -26 24 -28 c -16 -10 -22 -30 -14 -46 c -20 -2 -36 -16 -38 -34 c -22 0 -42 14 -50 34 z"/>
+        </g>
+      </svg>
+    </div>
+    <div class="foot-sig">
+      Kuramae Sashimono · Taishō-dōri 3-7-2 · Taitō-ku · Tōkyō
+    </div>
+  </div>
+
+  <div class="foot-mid">
+    <h4>Pages</h4>
+    <a href="page-1.html">Studio</a>
+    <a href="page-2.html">Commissions</a>
+    <a href="page-3.html">Journal — On Joinery</a>
+    <a href="page-4.html">Workshop &amp; Lineage</a>
+    <a href="page-5.html">Visit the Bench</a>
+    <a href="page-6.html">Correspondence</a>
+  </div>
+
+  <div class="foot-right">
+    <div class="foot-brushy">
+      Founded Bunkyū 2 (1862)<br>
+      Rebuilt Shōwa 24 (1949)<br>
+      Continued.
+    </div>
+    <div class="foot-attr">
+      Kamon renderings (tsuru-no-maru, kiri, umebachi, sayagata, asanoha)
+      adapted under CC&nbsp;BY-SA from sources on Wikimedia Commons.
+      Site composed and maintained by the studio.
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

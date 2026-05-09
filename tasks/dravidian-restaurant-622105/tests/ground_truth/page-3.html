@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>The Chettinad Hearth — Annapurna Bhavan</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), Georgia, serif;
+    font-size: 17px;
+    line-height: 1.6;
+  }
+
+  /* ===== NAVIGATION ===== */
+  .topband {
+    background: var(--bg);
+    border-top: 4px solid var(--primary);
+    border-bottom: 4px solid var(--primary);
+    box-shadow: inset 0 6px 0 var(--accent), inset 0 -6px 0 var(--accent);
+    padding: 18px 0 14px;
+  }
+  .sitemark {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-size: 32px;
+    letter-spacing: 0.32em;
+    color: var(--text-emphasis);
+    text-transform: uppercase;
+    margin: 0 0 6px;
+  }
+  .sitemark small {
+    display: block;
+    font-family: var(--font-body), serif;
+    font-size: 12px;
+    letter-spacing: 0.5em;
+    color: var(--secondary);
+    margin-top: 4px;
+    font-weight: 400;
+  }
+  .navrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    padding: 8px 40px 0;
+  }
+  .navgroup {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex: 1;
+  }
+  .navgroup.left { justify-content: flex-end; }
+  .navgroup.right { justify-content: flex-start; }
+  .navrow a {
+    font-family: var(--font-display), serif;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    color: var(--text);
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 4px 2px;
+    border-bottom: 2px solid transparent;
+  }
+  .navrow a[aria-current="page"] {
+    color: var(--text-emphasis);
+    border-bottom-color: var(--accent);
+  }
+  .navrow a:hover {
+    color: var(--text-emphasis);
+    border-bottom-color: var(--accent);
+  }
+  .lotusdot {
+    width: 14px; height: 14px;
+    flex-shrink: 0;
+    opacity: 0.85;
+  }
+  .omseal {
+    width: 54px; height: 54px;
+    flex-shrink: 0;
+  }
+
+  /* ===== LOTUS PETAL DIVIDER BAND ===== */
+  .petalband {
+    height: 28px;
+    background:
+      radial-gradient(circle at 14px 0, var(--primary) 12px, transparent 13px) 0 0/28px 28px repeat-x,
+      radial-gradient(circle at 14px 28px, var(--accent) 10px, transparent 11px) 0 0/28px 28px repeat-x,
+      var(--bg);
+    border-top: 2px solid var(--text-emphasis);
+    border-bottom: 2px solid var(--text-emphasis);
+    position: relative;
+  }
+  .petalband::before, .petalband::after {
+    content: "";
+    position: absolute; left: 0; right: 0; height: 3px;
+    background: var(--secondary);
+  }
+  .petalband::before { top: -7px; }
+  .petalband::after { bottom: -7px; }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: var(--surface);
+    padding: 50px 60px 40px;
+    position: relative;
+    border-top: 6px double var(--text-emphasis);
+    border-bottom: 6px double var(--text-emphasis);
+  }
+  .peacockframe {
+    width: 100%;
+    height: 60px;
+    display: block;
+  }
+  .peacockframe svg { width: 100%; height: 100%; }
+  .peacockframe path { fill: var(--text-emphasis); }
+  .hero-title {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-size: 52px;
+    letter-spacing: 0.18em;
+    color: var(--text-emphasis);
+    text-transform: uppercase;
+    margin: 28px 0 8px;
+    line-height: 1.1;
+  }
+  .hero-sub {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-size: 18px;
+    letter-spacing: 0.4em;
+    color: var(--secondary);
+    text-transform: uppercase;
+    margin: 0 0 18px;
+  }
+  .hero-lede {
+    max-width: 880px;
+    margin: 18px auto 0;
+    text-align: center;
+    font-size: 18px;
+    color: var(--text);
+  }
+  .hero-lede em {
+    color: var(--text-emphasis);
+    font-style: normal;
+    font-weight: 600;
+  }
+
+  /* ===== SECTION GENERIC ===== */
+  section {
+    padding: 56px 60px;
+  }
+  .section-title {
+    text-align: center;
+    font-family: var(--font-display), serif;
+    font-size: 30px;
+    letter-spacing: 0.28em;
+    color: var(--text-emphasis);
+    text-transform: uppercase;
+    margin: 0 0 8px;
+  }
+  .section-kicker {
+    text-align: center;
+    font-family: var(--font-body), serif;
+    font-size: 14px;
+    letter-spacing: 0.32em;
+    color: var(--secondary);
+    text-transform: uppercase;
+    margin: 0 0 36px;
+  }
+
+  /* ===== PARTNERSHIP NOTE ===== */
+  .partnership {
+    background: var(--surface);
+    border-top: 4px solid var(--primary);
+    border-bottom: 4px solid var(--primary);
+  }
+  .partnership-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: var(--bg);
+    padding: 36px 50px;
+    border: 2px solid var(--accent);
+    box-shadow: inset 0 0 0 6px var(--surface), inset 0 0 0 8px var(--text-emphasis);
+    position: relative;
+  }
+  .partnership-inner p {
+    font-size: 17px;
+    margin: 0 0 14px;
+  }
+  .partnership-inner p:last-child { margin-bottom: 0; }
+  .partnership-inner strong {
+    color: var(--text-emphasis);
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.08em;
+  }
+  .seal-row {
+    display: flex; justify-content: center; gap: 30px;
+    margin: 0 0 22px;
+    align-items: center;
+  }
+  .seal-row .omseal { width: 48px; height: 48px; }
+  .seal-row .ruleline {
+    flex: 0 0 200px; height: 2px; background: var(--text-emphasis);
+    position: relative;
+  }
+  .seal-row .ruleline::before, .seal-row .ruleline::after {
+    content: ""; position: absolute; top: -3px;
+    width: 8px; height: 8px; background: var(--accent); transform: rotate(45deg);
+  }
+  .seal-row .ruleline::before { left: -4px; }
+  .seal-row .ruleline::after { right: -4px; }
+
+  /* ===== DISH CARDS ===== */
+  .dishes {
+    background: var(--bg);
+  }
+  .dishgrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+    max-width: 1240px;
+    margin: 0 auto;
+  }
+  .card {
+    background: var(--surface);
+    position: relative;
+    padding: 28px 64px 28px 64px;
+    border-bottom: 3px solid var(--text-emphasis);
+  }
+  /* gopuram top */
+  .card::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: -22px; left: 50%; transform: translateX(-50%);
+    width: 80%;
+    height: 22px;
+    background:
+      linear-gradient(var(--primary), var(--primary)) 0 18px/100% 4px no-repeat,
+      linear-gradient(var(--accent), var(--accent)) 10% 12px/80% 4px no-repeat,
+      linear-gradient(var(--primary), var(--primary)) 20% 6px/60% 4px no-repeat,
+      linear-gradient(var(--accent), var(--accent)) 30% 0/40% 4px no-repeat;
+  }
+  /* pillars */
+  .card .pillar {
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 28px;
+    background:
+      linear-gradient(to bottom,
+        var(--text-emphasis) 0, var(--text-emphasis) 8px,
+        var(--accent) 8px, var(--accent) 12px,
+        var(--surface) 12px, var(--surface) 18px,
+        var(--text-emphasis) 18px, var(--text-emphasis) 22px,
+        var(--surface) 22px, var(--surface) calc(100% - 22px),
+        var(--text-emphasis) calc(100% - 22px), var(--text-emphasis) calc(100% - 18px),
+        var(--surface) calc(100% - 18px), var(--surface) calc(100% - 12px),
+        var(--accent) calc(100% - 12px), var(--accent) calc(100% - 8px),
+        var(--text-emphasis) calc(100% - 8px), var(--text-emphasis) 100%);
+    border-left: 2px solid var(--text-emphasis);
+    border-right: 2px solid var(--text-emphasis);
+  }
+  .card .pillar.left { left: 8px; }
+  .card .pillar.right { right: 8px; }
+  /* center column shaft pattern */
+  .card .pillar::after {
+    content: "";
+    position: absolute;
+    top: 24px; bottom: 24px; left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    background: repeating-linear-gradient(
+      to bottom,
+      var(--accent) 0 6px,
+      var(--surface) 6px 10px
+    );
+  }
+
+  .dishhead {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    border-bottom: 1px dashed var(--accent);
+    padding-bottom: 8px;
+    margin-bottom: 12px;
+  }
+  .dishname {
+    font-family: var(--font-display), serif;
+    font-size: 22px;
+    letter-spacing: 0.1em;
+    color: var(--primary);
+    text-transform: uppercase;
+    margin: 0;
+    line-height: 1.2;
+    flex: 1;
+  }
+  .dishprice {
+    font-family: var(--font-body), serif;
+    font-size: 20px;
+    color: var(--secondary);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .dishdesc {
+    color: var(--text);
+    font-size: 16px;
+    margin: 0 0 14px;
+  }
+  .dishmeta {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 4px 12px;
+    font-size: 14px;
+    margin: 0 0 14px;
+    padding: 10px 14px;
+    background: var(--bg);
+    border-left: 4px solid var(--accent);
+    border-right: 4px solid var(--accent);
+  }
+  .dishmeta dt {
+    font-family: var(--font-display), serif;
+    color: var(--text-emphasis);
+    letter-spacing: 0.12em;
+    font-size: 11px;
+    text-transform: uppercase;
+    padding-top: 3px;
+  }
+  .dishmeta dd { margin: 0; color: var(--text); }
+  .dishmeta dd em {
+    font-style: italic;
+    color: var(--secondary);
+  }
+
+  .tailpiece {
+    text-align: center;
+    margin-top: 8px;
+    color: var(--text-emphasis);
+    font-size: 18px;
+    letter-spacing: 0.6em;
+  }
+
+  /* ===== SPICE LEDGER ===== */
+  .ledger {
+    background: var(--surface);
+    border-top: 6px double var(--text-emphasis);
+    border-bottom: 6px double var(--text-emphasis);
+  }
+  .ledger-grid {
+    max-width: 1240px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  .spicecard {
+    background: var(--bg);
+    padding: 26px 22px 18px;
+    border: 2px solid var(--text-emphasis);
+    position: relative;
+  }
+  .spicecard::before {
+    content: "";
+    position: absolute;
+    inset: 4px;
+    border: 1px solid var(--accent);
+    pointer-events: none;
+  }
+  .spicecard h4 {
+    font-family: var(--font-display), serif;
+    color: var(--text-emphasis);
+    font-size: 19px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin: 0 0 4px;
+  }
+  .spicecard .vern {
+    font-family: var(--font-body), serif;
+    color: var(--secondary);
+    font-style: italic;
+    font-size: 14px;
+    margin: 0 0 10px;
+  }
+  .spicecard p {
+    font-size: 15px;
+    margin: 0 0 10px;
+  }
+  .spicecard .origin {
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border-top: 1px solid var(--accent);
+    padding-top: 8px;
+    margin: 12px 0 0;
+  }
+
+  /* ===== HOURS / NOTE STRIP ===== */
+  .servicestrip {
+    background: var(--text-emphasis);
+    color: var(--surface);
+    padding: 30px 60px;
+    text-align: center;
+  }
+  .servicestrip h3 {
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.32em;
+    font-size: 22px;
+    margin: 0 0 8px;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+  .servicestrip p {
+    margin: 0;
+    color: var(--surface);
+    font-size: 16px;
+    letter-spacing: 0.04em;
+  }
+  .servicestrip strong { color: #fff; }
+
+  /* ===== ARABESQUE DIVIDER ===== */
+  .arabesque {
+    background: var(--bg);
+    padding: 28px 60px;
+    text-align: center;
+  }
+  .arabesque svg {
+    width: 90%;
+    max-width: 1100px;
+    height: 70px;
+    display: inline-block;
+  }
+  .arabesque svg path { fill: var(--text-emphasis); }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--bg);
+    border-top: 4px solid var(--primary);
+    border-bottom: 4px solid var(--primary);
+    box-shadow: inset 0 6px 0 var(--accent), inset 0 -6px 0 var(--accent);
+    padding: 50px 60px 40px;
+    position: relative;
+  }
+  .arcade {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    height: 130px;
+    max-width: 1100px;
+    margin: 0 auto 24px;
+    position: relative;
+  }
+  .pillar-col {
+    width: 90px;
+    height: 130px;
+    background:
+      linear-gradient(to bottom,
+        var(--text-emphasis) 0 10px,
+        var(--accent) 10px 16px,
+        transparent 16px 22px,
+        var(--text-emphasis) 22px 28px,
+        transparent 28px calc(100% - 28px),
+        var(--text-emphasis) calc(100% - 28px) calc(100% - 22px),
+        transparent calc(100% - 22px) calc(100% - 16px),
+        var(--accent) calc(100% - 16px) calc(100% - 10px),
+        var(--text-emphasis) calc(100% - 10px) 100%);
+    position: relative;
+  }
+  .pillar-col::before {
+    content: "";
+    position: absolute;
+    top: 28px; bottom: 28px; left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    background: repeating-linear-gradient(to bottom,
+      var(--text-emphasis) 0 4px,
+      transparent 4px 10px);
+  }
+  .pillar-col::after {
+    content: "";
+    position: absolute;
+    top: 20px;
+    left: -10px; right: -10px;
+    height: 16px;
+    background: linear-gradient(to bottom, transparent 50%, var(--text-emphasis) 50%);
+    clip-path: polygon(0 100%, 50% 0, 100% 100%);
+  }
+  .kolam {
+    width: 130px; height: 130px;
+    flex-shrink: 0;
+    position: relative;
+  }
+  .kolam svg { width: 100%; height: 100%; }
+  .conch {
+    width: 50px; height: 50px;
+    align-self: center;
+    color: var(--text-emphasis);
+    font-family: var(--font-display), serif;
+    font-size: 40px;
+    text-align: center;
+    line-height: 1;
+  }
+
+  .footinfo {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .footinfo h4 {
+    font-family: var(--font-display), serif;
+    letter-spacing: 0.32em;
+    color: var(--text-emphasis);
+    font-size: 22px;
+    margin: 0 0 12px;
+    text-transform: uppercase;
+  }
+  .footinfo p {
+    margin: 4px 0;
+    color: var(--text);
+    font-size: 15px;
+  }
+  .footinfo .tel {
+    font-family: var(--font-display), serif;
+    color: var(--primary);
+    font-size: 22px;
+    letter-spacing: 0.2em;
+    margin: 14px 0 6px;
+  }
+  .footinfo .copyright {
+    margin-top: 18px;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--secondary);
+  }
+
+  /* Inline lotus glyph */
+  .miniLotus { display: inline-block; vertical-align: middle; width: 12px; height: 12px; }
+  .miniLotus svg { width: 100%; height: 100%; }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="topband" role="banner">
+  <h1 class="sitemark">Annapurna Bhavan<small>Tanjore Kitchens · Est. Mylapore 1947</small></h1>
+  <nav class="navrow" aria-label="Primary">
+    <div class="navgroup left">
+      <a href="page-1.html">Home</a>
+      <span class="lotusdot" aria-hidden="true">
+        <svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="3" fill="#e34234"/><circle cx="10" cy="10" r="7" fill="none" stroke="#c9a23a" stroke-width="1"/></svg>
+      </span>
+      <a href="page-2.html">The Thali</a>
+      <span class="lotusdot" aria-hidden="true">
+        <svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="3" fill="#e34234"/><circle cx="10" cy="10" r="7" fill="none" stroke="#c9a23a" stroke-width="1"/></svg>
+      </span>
+      <a href="page-3.html" aria-current="page">Chettinad Hearth</a>
+    </div>
+    <span class="omseal" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 356 367"><path d="M 90.456847,353.9498 C 51.797347,340.13485 23.72672,305.75839 12.612487,258.6184 C 7.5684267,237.22321 6.1421397,201.86984 10.323594,201.86984 C 11.712834,201.86984 15.42322,211.57056 18.568972,223.427 C 25.452892,249.37152 37.19436,273.76855 48.535988,285.69407 C 67.374717,305.50242 114.0356,313.26029 140.92106,301.05394 C 161.86409,291.54544 170.35697,268.94603 161.24995,246.95931 C 154.21242,229.96943 138.24701,224.28836 108.50834,228.19197 C 108.50834,228.19197 90.282834,208.57398 84.476417,173.73548 L 103.15738,175.42939 C 125.65731,177.46962 142.64532,172.49605 151.46236,161.28728 C 159.74765,150.75419 159.5685,146.68046 150.34841,135.96157 C 137.04396,120.49428 113.15511,124.41248 64.786577,149.99522 L 40.381632,109.08518 L 50.613137,101.2812 C 76.253387,81.724339 120.77357,71.947329 146.11011,80.309169 C 169.18841,87.925649 186.12724,118.14755 181.60247,143.63298 C 178.54327,160.86286 164.72752,184.99524 154.05369,191.75339 L 144.84862,197.58162 L 157.56351,203.31522 C 179.17018,213.05833 192.36061,205.61034 208.12001,174.76849 C 229.92949,132.0869 244.0745,121.0378 276.96658,120.99051 C 292.28176,120.96847 297.73268,122.57499 308.90312,130.4031 C 336.78213,149.94016 351.9622,190.39693 348.62804,236.27272 C 344.40474,294.37435 316.88374,329.61601 275.73415,329.61601 C 253.15086,329.61601 238.59451,321.69526 227.00729,303.10156 C 216.82976,286.76927 212.24334,254.42288 218.08805,240.19369 C 220.89208,233.36732 221.39892,233.13578 221.58223,238.59686 C 221.91916,248.63689 233.34159,264.95549 243.82827,270.37835 C 269.55794,283.68369 306.49479,266.96693 321.10832,235.4032 C 332.20339,211.4394 326.25105,165.21656 311.02084,157.06552 C 307.83453,155.36024 299.96089,153.96502 293.5244,153.96502 C 279.84214,153.96502 269.09709,163.80155 254.03263,190.11774 C 248.82442,199.21613 240.05943,210.97175 234.55486,216.24128 C 225.61134,224.80312 222.41769,225.82225 204.53067,225.82225 L 184.51412,225.82225 L 190.98415,240.19369 C 200.2451,260.76437 199.80694,294.18704 190.00976,314.53347 C 181.35272,332.51252 161.33618,350.71469 145.33374,355.16013 C 129.75572,359.4876 104.38789,358.9281 90.456847,353.9498 z M 165.8338,75.923739 C 156.97908,60.814399 151.52974,32.606158 157.46546,32.606158 C 164.43775,47.732319 178.73037,61.227101 194.03409,70.643259 C 221.52091,83.949329 249.39257,78.578529 279.84247,54.108239 C 286.54595,48.721279 292.48231,44.913138 293.0345,45.645698 C 300.4697,57.184233 313.331,66.613261 317.58219,80.021449 C 317.58219,85.678729 293.22867,101.96033 274.01214,109.15007 C 226.38264,122.8706 193.96598,117.44304 165.8338,75.923739 z M 189.83603,40.997228 L 220.84514,6.6137488 L 255.30593,38.514418 C 243.51876,48.222549 235.00994,63.289118 221.54391,70.930009 C 210.90372,63.086273 195.02308,53.837816 189.83603,40.997228 z " fill="#e34234"/></svg>
+    </span>
+    <div class="navgroup right">
+      <a href="page-4.html">Hall &amp; Hours</a>
+      <span class="lotusdot" aria-hidden="true">
+        <svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="3" fill="#e34234"/><circle cx="10" cy="10" r="7" fill="none" stroke="#c9a23a" stroke-width="1"/></svg>
+      </span>
+      <a href="page-5.html">Lineage</a>
+      <span class="lotusdot" aria-hidden="true">
+        <svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="3" fill="#e34234"/><circle cx="10" cy="10" r="7" fill="none" stroke="#c9a23a" stroke-width="1"/></svg>
+      </span>
+      <a href="page-6.html">Festivals &amp; Reservations</a>
+    </div>
+  </nav>
+</header>
+
+<div class="petalband" role="presentation"></div>
+
+<!-- ============ HERO ============ -->
+<section class="hero" aria-label="Hero">
+  <div class="peacockframe" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -54 1185 112" preserveAspectRatio="xMidYMid meet"><g transform="translate(54.5721,-91.1764)"><path d="m -45.20 120.20 c -2.08 -0.59 -3.6 -1.34 -4.88 -2.39 -1.67 -1.36 -2.89 -2.64 -2.89 -3.01 0 -0.17 -0.21 -0.47 -0.47 -0.66 -0.82 -0.61 -1.16 -1.85 -1.12 -4.02 0.07 -3.96 0.84 -6.29 3.36 -10.17 2.09 -3.23 6.67 -6.45 10.65 -7.5 2.25 -0.59 8.25 -0.8 11 -0.37 6.95 1.07 16.15 4.46 20.66 7.6 0.85 0.59 0.79 0.62 1.33 -0.65 0.23 -0.54 0.88 -1.6 1.46 -2.37 0.86 -1.14 1.46 -1.6 3.27 -2.49 2.16 -1.06 4.56 -1.78 6.73 -2.01 0.58 -0.06 1.4 -0.24 1.81 -0.4 0.77 -0.29 6.48 -0.2 10.09 0.17 2.26 0.23 9.61 1.68 11.22 2.21 1.16 0.38 1.2 0.38 3.09 -0.54 2.53 -1.23 4.02 -1.48 8.45 -1.4 3.61 0.06 4.29 0.15 6.74 0.82 0.65 0.18 1.72 0.38 2.37 0.44 0.65 0.06 1.84 0.28 2.64 0.49 1.33 0.35 1.63 0.34 3.28 -0.11 4.3 -1.18 16.78 -2.49 20.25 -2.13 0.83 0.09 2.55 0.41 3.84 0.72 2.05 0.49 2.52 0.52 3.78 0.25 3.04 -0.66 6.76 -1.06 11.13 -1.19 4.13 -0.12 4.71 -0.08 6.38 0.43 1.36 0.42 2.11 0.84 2.88 1.62 1.3 1.31 1.63 2.71 1.62 6.82 0 2.96 0.24 4.45 0.63 3.83 0.11 -0.17 0.18 -1.23 0.16 -2.36 -0.1 -5.21 0.07 -6.03 1.67 -8.02 0.85 -1.06 2.65 -2.13 4.1 -2.44 2.82 -0.59 15.89 0.3 18.85 1.29 0.7 0.23 1.34 0.19 3.18 -0.23 4.45 -1 5.16 -1.08 9.67 -1.06 4.02 0.02 5 0.12 8.51 0.85 6.85 1.43 7.2 1.43 12.43 0.18 1.28 -0.31 3.07 -0.45 5.82 -0.46 3.56 -0.01 4.15 0.05 5.69 0.62 0.94 0.35 2.12 0.86 2.6 1.15 0.82 0.48 0.99 0.49 2.38 0.14 1.78 -0.45 5.3 -1.02 9.84 -1.61 3.89 -0.5 11.7 -0.52 15.08 -0.03 5.86 0.84 9.86 3.11 10.57 5.98 l 0.29 1.16 3.36 -1.63 c 3.18 -1.54 8.23 -3.48 11.44 -4.4 4.72 -1.35 12.68 -1.71 16.94 -0.78 4.93 1.08 10.02 5.55 11.64 10.22 0.65 1.88 1.02 5.07 0.79 6.9 -0.47 3.82 -3.08 7.61 -6.48 9.42 -0.51 0.27 -1.11 0.62 -1.33 0.78 -1.28 0.92 -3.99 1.08 -9.4 0.56 -4.23 -0.41 -43.1 -0.56 -48.29 -0.2 -3.37 0.24 -9.72 0.14 -14.18 -0.23 -3.19 -0.26 -11.41 -2.46 -14.96 -4.01 -0.54 -0.24 -1.1 -0.43 -1.25 -0.43 -0.44 0 -0.32 0.67 0.25 1.4 0.64 0.82 0.66 1.47 0.08 2.28 -0.42 0.59 -0.54 0.61 -2.45 0.43 -1.11 -0.11 -3.2 -0.44 -4.65 -0.74 -1.45 -0.3 -4.09 -0.62 -5.86 -0.71 -3.45 -0.17 -4.66 0.02 -8.93 1.4 -2.05 0.66 -2.16 0.67 -4.8 0.33 -1.68 -0.21 -5.04 -0.33 -8.89 -0.29 -6.05 0.05 -6.2 0.04 -7.35 -0.58 -1.32 -0.71 -2.86 -0.67 -5.04 0.12 -0.88 0.32 -2.16 0.43 -4.9 0.44 -4.8 0.01 -5.58 -0.16 -6.13 -1.33 l -0.42 -0.9 -1.09 0.86 c -1.87 1.48 -2.94 1.82 -5.6 1.81 -1.31 -0.01 -3.56 -0.24 -4.99 -0.51 -2.03 -0.39 -2.69 -0.43 -3.04 -0.19 -1.43 1.01 -5.2 1.22 -9.37 0.5 -2.34 -0.4 -4.35 -0.36 -10.12 0.21 -2.37 0.23 -2.39 0.23 -3.97 -0.61 l -1.58 -0.84 -4.76 0 c -3.32 0 -5.33 0.13 -6.65 0.42 -2.95 0.65 -5.18 0.79 -6.35 0.41 -1.39 -0.45 -2.21 -1.26 -2.21 -2.17 0 -0.41 -0.11 -0.75 -0.24 -0.75 -0.13 0 -1.24 0.35 -2.45 0.79 -7.9 2.83 -18.01 3.78 -31.37 2.97 -7.1 -0.43 -10.26 -0.47 -22.84 -0.27 -5.17 0.08 -13.26 0.2 -17.99 0.27 -4.73 0.07 -9.67 0.16 -10.98 0.2 -1.52 0.05 -2.86 -0.06 -3.7 -0.3 z" stroke-width="0.26"/></g></svg>
+  </div>
+
+  <h2 class="hero-title">The Chettinad Hearth</h2>
+  <p class="hero-sub">Mandapa Two · Karaikudi Fire-Kitchen</p>
+
+  <p class="hero-lede">
+    Across the inner courtyard, beyond the temple-tank well, lies our second mandapa — the
+    <em>aduppu adi</em>, the foot of the hearth — where stone mortars crush peppercorn at dawn,
+    seer-fish arrives by 5:14 AM Pondicherry train, and a single recipe ledger from
+    <em>1962</em> still governs every spice ratio served. Here we cook only Chettinad.
+  </p>
+
+  <div class="peacockframe" aria-hidden="true" style="margin-top:32px; transform:scaleY(-1);">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -54 1185 112" preserveAspectRatio="xMidYMid meet"><g transform="translate(54.5721,-91.1764)"><path d="m -45.20 120.20 c -2.08 -0.59 -3.6 -1.34 -4.88 -2.39 -1.67 -1.36 -2.89 -2.64 -2.89 -3.01 0 -0.17 -0.21 -0.47 -0.47 -0.66 -0.82 -0.61 -1.16 -1.85 -1.12 -4.02 0.07 -3.96 0.84 -6.29 3.36 -10.17 2.09 -3.23 6.67 -6.45 10.65 -7.5 2.25 -0.59 8.25 -0.8 11 -0.37 6.95 1.07 16.15 4.46 20.66 7.6 0.85 0.59 0.79 0.62 1.33 -0.65 0.23 -0.54 0.88 -1.6 1.46 -2.37 0.86 -1.14 1.46 -1.6 3.27 -2.49 2.16 -1.06 4.56 -1.78 6.73 -2.01 0.58 -0.06 1.4 -0.24 1.81 -0.4 0.77 -0.29 6.48 -0.2 10.09 0.17 2.26 0.23 9.61 1.68 11.22 2.21 1.16 0.38 1.2 0.38 3.09 -0.54 2.53 -1.23 4.02 -1.48 8.45 -1.4 3.61 0.06 4.29 0.15 6.74 0.82 0.65 0.18 1.72 0.38 2.37 0.44 0.65 0.06 1.84 0.28 2.64 0.49 1.33 0.35 1.63 0.34 3.28 -0.11 4.3 -1.18 16.78 -2.49 20.25 -2.13 0.83 0.09 2.55 0.41 3.84 0.72 2.05 0.49 2.52 0.52 3.78 0.25 3.04 -0.66 6.76 -1.06 11.13 -1.19 4.13 -0.12 4.71 -0.08 6.38 0.43 1.36 0.42 2.11 0.84 2.88 1.62 1.3 1.31 1.63 2.71 1.62 6.82 0 2.96 0.24 4.45 0.63 3.83 0.11 -0.17 0.18 -1.23 0.16 -2.36 -0.1 -5.21 0.07 -6.03 1.67 -8.02 0.85 -1.06 2.65 -2.13 4.1 -2.44 2.82 -0.59 15.89 0.3 18.85 1.29 0.7 0.23 1.34 0.19 3.18 -0.23 4.45 -1 5.16 -1.08 9.67 -1.06 4.02 0.02 5 0.12 8.51 0.85 6.85 1.43 7.2 1.43 12.43 0.18 1.28 -0.31 3.07 -0.45 5.82 -0.46 3.56 -0.01 4.15 0.05 5.69 0.62 0.94 0.35 2.12 0.86 2.6 1.15 0.82 0.48 0.99 0.49 2.38 0.14 1.78 -0.45 5.3 -1.02 9.84 -1.61 3.89 -0.5 11.7 -0.52 15.08 -0.03 5.86 0.84 9.86 3.11 10.57 5.98 l 0.29 1.16 3.36 -1.63 c 3.18 -1.54 8.23 -3.48 11.44 -4.4 4.72 -1.35 12.68 -1.71 16.94 -0.78 4.93 1.08 10.02 5.55 11.64 10.22 0.65 1.88 1.02 5.07 0.79 6.9 -0.47 3.82 -3.08 7.61 -6.48 9.42 -0.51 0.27 -1.11 0.62 -1.33 0.78 -1.28 0.92 -3.99 1.08 -9.4 0.56 -4.23 -0.41 -43.1 -0.56 -48.29 -0.2 -3.37 0.24 -9.72 0.14 -14.18 -0.23 -3.19 -0.26 -11.41 -2.46 -14.96 -4.01 -0.54 -0.24 -1.1 -0.43 -1.25 -0.43 -0.44 0 -0.32 0.67 0.25 1.4 0.64 0.82 0.66 1.47 0.08 2.28 -0.42 0.59 -0.54 0.61 -2.45 0.43 -1.11 -0.11 -3.2 -0.44 -4.65 -0.74 -1.45 -0.3 -4.09 -0.62 -5.86 -0.71 -3.45 -0.17 -4.66 0.02 -8.93 1.4 -2.05 0.66 -2.16 0.67 -4.8 0.33 -1.68 -0.21 -5.04 -0.33 -8.89 -0.29 -6.05 0.05 -6.2 0.04 -7.35 -0.58 -1.32 -0.71 -2.86 -0.67 -5.04 0.12 -0.88 0.32 -2.16 0.43 -4.9 0.44 -4.8 0.01 -5.58 -0.16 -6.13 -1.33 l -0.42 -0.9 -1.09 0.86 c -1.87 1.48 -2.94 1.82 -5.6 1.81 -1.31 -0.01 -3.56 -0.24 -4.99 -0.51 -2.03 -0.39 -2.69 -0.43 -3.04 -0.19 -1.43 1.01 -5.2 1.22 -9.37 0.5 -2.34 -0.4 -4.35 -0.36 -10.12 0.21 -2.37 0.23 -2.39 0.23 -3.97 -0.61 l -1.58 -0.84 -4.76 0 c -3.32 0 -5.33 0.13 -6.65 0.42 -2.95 0.65 -5.18 0.79 -6.35 0.41 -1.39 -0.45 -2.21 -1.26 -2.21 -2.17 0 -0.41 -0.11 -0.75 -0.24 -0.75 -0.13 0 -1.24 0.35 -2.45 0.79 -7.9 2.83 -18.01 3.78 -31.37 2.97 -7.1 -0.43 -10.26 -0.47 -22.84 -0.27 -5.17 0.08 -13.26 0.2 -17.99 0.27 -4.73 0.07 -9.67 0.16 -10.98 0.2 -1.52 0.05 -2.86 -0.06 -3.7 -0.3 z" stroke-width="0.26"/></g></svg>
+  </div>
+</section>
+
+<div class="petalband" role="presentation"></div>
+
+<!-- ============ PARTNERSHIP NOTE ============ -->
+<section class="partnership">
+  <div class="partnership-inner">
+    <div class="seal-row">
+      <span class="ruleline" aria-hidden="true"></span>
+      <span class="omseal" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 356 367"><path d="M 90.456847,353.9498 C 51.797347,340.13485 23.72672,305.75839 12.612487,258.6184 C 7.5684267,237.22321 6.1421397,201.86984 10.323594,201.86984 C 11.712834,201.86984 15.42322,211.57056 18.568972,223.427 C 25.452892,249.37152 37.19436,273.76855 48.535988,285.69407 C 67.374717,305.50242 114.0356,313.26029 140.92106,301.05394 C 161.86409,291.54544 170.35697,268.94603 161.24995,246.95931 C 154.21242,229.96943 138.24701,224.28836 108.50834,228.19197 C 108.50834,228.19197 90.282834,208.57398 84.476417,173.73548 L 103.15738,175.42939 C 125.65731,177.46962 142.64532,172.49605 151.46236,161.28728 C 159.74765,150.75419 159.5685,146.68046 150.34841,135.96157 C 137.04396,120.49428 113.15511,124.41248 64.786577,149.99522 L 40.381632,109.08518 L 50.613137,101.2812 C 76.253387,81.724339 120.77357,71.947329 146.11011,80.309169 C 169.18841,87.925649 186.12724,118.14755 181.60247,143.63298 C 178.54327,160.86286 164.72752,184.99524 154.05369,191.75339 L 144.84862,197.58162 L 157.56351,203.31522 C 179.17018,213.05833 192.36061,205.61034 208.12001,174.76849 C 229.92949,132.0869 244.0745,121.0378 276.96658,120.99051 C 292.28176,120.96847 297.73268,122.57499 308.90312,130.4031 C 336.78213,149.94016 351.9622,190.39693 348.62804,236.27272 C 344.40474,294.37435 316.88374,329.61601 275.73415,329.61601 C 253.15086,329.61601 238.59451,321.69526 227.00729,303.10156 C 216.82976,286.76927 212.24334,254.42288 218.08805,240.19369 C 220.89208,233.36732 221.39892,233.13578 221.58223,238.59686 C 221.91916,248.63689 233.34159,264.95549 243.82827,270.37835 C 269.55794,283.68369 306.49479,266.96693 321.10832,235.4032 C 332.20339,211.4394 326.25105,165.21656 311.02084,157.06552 C 307.83453,155.36024 299.96089,153.96502 293.5244,153.96502 C 279.84214,153.96502 269.09709,163.80155 254.03263,190.11774 C 248.82442,199.21613 240.05943,210.97175 234.55486,216.24128 C 225.61134,224.80312 222.41769,225.82225 204.53067,225.82225 L 184.51412,225.82225 L 190.98415,240.19369 C 200.2451,260.76437 199.80694,294.18704 190.00976,314.53347 C 181.35272,332.51252 161.33618,350.71469 145.33374,355.16013 C 129.75572,359.4876 104.38789,358.9281 90.456847,353.9498 z" fill="#8b1538"/></svg>
+      </span>
+      <span class="ruleline" aria-hidden="true"></span>
+    </div>
+    <h3 class="section-title" style="margin-bottom:6px;">A Charter of 1962</h3>
+    <p class="section-kicker" style="margin-bottom:24px;">The Annamalai Compact, Kanadukathan</p>
+    <p>
+      In the monsoon of <strong>1962</strong>, our founder Sri Subbaiyer Krishnamoorthy travelled by
+      bullock-cart from Mylapore to the Chettinad village of <strong>Kanadukathan</strong>, where he
+      sat for forty-one days at the kitchen of the Annamalai household — a Nattukottai Chettiar lineage
+      whose grand-aunt Smt. Meenakshi Achi was reputed to crush her own peppercorn against a
+      black-granite <em>ammikkal</em> brought from Pillaiyarpatti.
+    </p>
+    <p>
+      Their compact, signed in palm-leaf and witnessed by the village <em>kalyana mandapam</em>
+      committee, granted Annapurna Bhavan the right — and the obligation — to cook the Annamalai
+      household's recipes faithfully, in their original spice ratios, in any city the kitchen should
+      travel to. The recipes below are kept in a single bound ledger, opened each morning at 4:30 AM
+      by our hearth-keeper, Sri Murugan Annamalai, great-nephew of Smt. Meenakshi.
+    </p>
+    <p>
+      Because the Chettinad fire is non-vegetarian, it sits in its own mandapa — separate stone, separate
+      copper, separate water-pot, separate cook. The thali kitchen and the hearth do not share a knife.
+    </p>
+  </div>
+</section>
+
+<!-- ============ ARABESQUE DIVIDER ============ -->
+<div class="arabesque" aria-hidden="true">
+  <svg viewBox="0 200 1100 50" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(0,0)">
+      <path d="M 0 222 L 1100 222 L 1100 218 L 0 218 Z"/>
+      <path d="M 0 232 L 1100 232 L 1100 228 L 0 228 Z"/>
+      <circle cx="80" cy="225" r="6"/>
+      <circle cx="200" cy="225" r="6"/>
+      <circle cx="320" cy="225" r="6"/>
+      <circle cx="440" cy="225" r="6"/>
+      <circle cx="550" cy="225" r="9"/>
+      <circle cx="660" cy="225" r="6"/>
+      <circle cx="780" cy="225" r="6"/>
+      <circle cx="900" cy="225" r="6"/>
+      <circle cx="1020" cy="225" r="6"/>
+      <path d="M 530 215 Q 550 200 570 215 Q 550 230 530 215 Z"/>
+      <path d="M 540 235 Q 550 245 560 235 Z"/>
+    </g>
+  </svg>
+</div>
+
+<!-- ============ DISH CARDS ============ -->
+<section class="dishes">
+  <h3 class="section-title">The Five Dishes of the Hearth</h3>
+  <p class="section-kicker">Carried from Karaikudi · Cooked at 11 AM &amp; 7 PM Daily</p>
+
+  <div class="dishgrid">
+
+    <!-- 1 -->
+    <article class="card">
+      <span class="pillar left" aria-hidden="true"></span>
+      <span class="pillar right" aria-hidden="true"></span>
+      <div class="dishhead">
+        <h4 class="dishname">Kozhi Chettinad</h4>
+        <span class="dishprice">₹ 480</span>
+      </div>
+      <p class="dishdesc">
+        Country chicken simmered in a roasted masala of crushed black peppercorn, star anise, and
+        roasted coconut. Finished with curry-leaf tempering in cold-pressed gingelly oil. Served
+        with two parottas or three idiappams.
+      </p>
+      <dl class="dishmeta">
+        <dt>Dry-spice profile</dt>
+        <dd>Marathi moggu, kalpasi (black stone-flower), anasipoo (star anise), peppercorn ×3</dd>
+        <dt>Recipe origin</dt>
+        <dd><em>Karaikudi · Annamalai household, 1962 ledger fol. 4r</em></dd>
+        <dt>Cooked in</dt>
+        <dd>Tinned copper <em>uruli</em>, wood-fire only</dd>
+      </dl>
+      <div class="tailpiece" aria-hidden="true">❦ ❖ ❦</div>
+    </article>
+
+    <!-- 2 -->
+    <article class="card">
+      <span class="pillar left" aria-hidden="true"></span>
+      <span class="pillar right" aria-hidden="true"></span>
+      <div class="dishhead">
+        <h4 class="dishname">Meen Kuzhambu</h4>
+        <span class="dishprice">₹ 540</span>
+      </div>
+      <p class="dishdesc">
+        Seer fish (<em>vanjaram</em>) from Rameswaram, slow-stewed in a tamarind and gingelly-oil
+        gravy darkened with shallot, fenugreek, and the small dry red chilli of Ramanathapuram. The
+        gravy thickens overnight; we serve only the second-day pot.
+      </p>
+      <dl class="dishmeta">
+        <dt>Dry-spice profile</dt>
+        <dd>Fenugreek, kalpasi, Marathi moggu, dry chilli (Ramnad gundu)</dd>
+        <dt>Recipe origin</dt>
+        <dd><em>Devakottai · received from Smt. Visalakshi Achi, 1968 addendum</em></dd>
+        <dt>Fish arrival</dt>
+        <dd>5:14 AM Pondicherry Express, daily except Tuesday</dd>
+      </dl>
+      <div class="tailpiece" aria-hidden="true">❦ ❖ ❦</div>
+    </article>
+
+    <!-- 3 -->
+    <article class="card">
+      <span class="pillar left" aria-hidden="true"></span>
+      <span class="pillar right" aria-hidden="true"></span>
+      <div class="dishhead">
+        <h4 class="dishname">Nandu Masala</h4>
+        <span class="dishprice">₹ 720</span>
+      </div>
+      <p class="dishdesc">
+        Mud-crab from the Pichavaram backwaters, cracked in the shell and smothered in a Karaikudi
+        masala of roasted poppy, cashew, and anasipoo. Eaten by hand with steamed kuzhi paniyaram.
+        Limited to nine portions per service.
+      </p>
+      <dl class="dishmeta">
+        <dt>Dry-spice profile</dt>
+        <dd>Anasipoo, kalpasi, white poppy, fennel, Marathi moggu</dd>
+        <dt>Recipe origin</dt>
+        <dd><em>Kanadukathan · Annamalai kitchen, original 1962 ledger fol. 11v</em></dd>
+        <dt>Service note</dt>
+        <dd>Pre-order by 4 PM · finger-bowl with lime served</dd>
+      </dl>
+      <div class="tailpiece" aria-hidden="true">❦ ❖ ❦</div>
+    </article>
+
+    <!-- 4 -->
+    <article class="card">
+      <span class="pillar left" aria-hidden="true"></span>
+      <span class="pillar right" aria-hidden="true"></span>
+      <div class="dishhead">
+        <h4 class="dishname">Aattukal Paya</h4>
+        <span class="dishprice">₹ 420</span>
+      </div>
+      <p class="dishdesc">
+        Goat-trotter broth, set on the hearth at midnight and drawn at 8 AM the following morning,
+        thickened with roasted coconut milk and a delicate aniseed tempering. Served with appam at
+        breakfast and with idiappam at dinner. The Sunday version is darker, with extra peppercorn.
+      </p>
+      <dl class="dishmeta">
+        <dt>Dry-spice profile</dt>
+        <dd>Fennel, peppercorn, cinnamon, kalpasi (light hand)</dd>
+        <dt>Recipe origin</dt>
+        <dd><em>Pallathur · Sri R. Annamalai's grandmother, 1971 transcription</em></dd>
+        <dt>Cook time</dt>
+        <dd>Eight hours, slow charcoal, never aluminium</dd>
+      </dl>
+      <div class="tailpiece" aria-hidden="true">❦ ❖ ❦</div>
+    </article>
+
+    <!-- 5 - full row -->
+    <article class="card" style="grid-column: 1 / -1;">
+      <span class="pillar left" aria-hidden="true"></span>
+      <span class="pillar right" aria-hidden="true"></span>
+      <div class="dishhead">
+        <h4 class="dishname">The Varuval Platter</h4>
+        <span class="dishprice">₹ 880</span>
+      </div>
+      <p class="dishdesc">
+        A dry-fry tasting board — three meats finished without gravy, plated on a banana leaf with
+        small heaps of Chettinad podis. <strong>Kozhi Varuval</strong> (chicken, crushed pepper),
+        <strong>Aattirachi Varuval</strong> (mutton, fennel and curry-leaf), and
+        <strong>Eral Varuval</strong> (Tuticorin prawn, anasipoo and coconut shavings). Served with
+        a small lacquered bowl of kuzhipaniyaram and a wedge of country lime.
+      </p>
+      <dl class="dishmeta">
+        <dt>Dry-spice profile</dt>
+        <dd>Kalpasi, Marathi moggu, anasipoo, fennel, peppercorn, dry chilli — <em>all six pillars of the Chettinad masala</em></dd>
+        <dt>Recipe origin</dt>
+        <dd><em>Composite · Kanadukathan, Devakottai &amp; Pallathur · ledger fol. 19r–20v</em></dd>
+        <dt>Service</dt>
+        <dd>One platter feeds two · banana leaf served only after ritual washing of the leaf</dd>
+      </dl>
+      <div class="tailpiece" aria-hidden="true">❦ ❖ ❀ ❖ ❦</div>
+    </article>
+
+  </div>
+</section>
+
+<div class="petalband" role="presentation"></div>
+
+<!-- ============ SPICE LEDGER ============ -->
+<section class="ledger">
+  <h3 class="section-title">The Three Pillars of Karaikudi</h3>
+  <p class="section-kicker">A Reader's Note on the Dry-Spice Cabinet</p>
+
+  <div class="ledger-grid">
+    <article class="spicecard">
+      <h4>Marathi Moggu</h4>
+      <p class="vern">Kapok bud · <em>Bombax ceiba</em></p>
+      <p>
+        A small, woody flower-bud, dark and clove-like in appearance but bitterer on the tongue. We
+        receive 4 kg every fortnight from a single supplier in Theni district. Bloomed in hot oil
+        before the onion is added; never powdered.
+      </p>
+      <p class="origin">Theni · Tamil Nadu</p>
+    </article>
+
+    <article class="spicecard">
+      <h4>Kalpasi</h4>
+      <p class="vern">Black stone-flower · <em>Parmotrema perlatum</em></p>
+      <p>
+        A papery lichen scraped from boulders in the Eastern Ghats. Smoky and almost charred when
+        toasted, it is the secret behind the deep colour of every Chettinad gravy. The Annamalai
+        ledger calls it <em>"the breath of the rock"</em>.
+      </p>
+      <p class="origin">Kolli Hills · Salem district</p>
+    </article>
+
+    <article class="spicecard">
+      <h4>Anasipoo</h4>
+      <p class="vern">Star anise · <em>Illicium verum</em></p>
+      <p>
+        Eight-pointed and aromatic, used sparingly — one whole flower per kilogram of meat. The
+        ledger insists on the smaller, darker variety brought down from Coorg, never the large
+        Vietnamese type. Crushed by hand at the moment of tempering.
+      </p>
+      <p class="origin">Madikeri · Coorg / Kodagu</p>
+    </article>
+  </div>
+</section>
+
+<!-- ============ SERVICE STRIP ============ -->
+<section class="servicestrip">
+  <h3>The Hearth's Service Hours</h3>
+  <p>
+    Lunch <strong>11:30 AM – 2:45 PM</strong> &nbsp;·&nbsp; Dinner <strong>7:00 PM – 10:30 PM</strong>
+    &nbsp;·&nbsp; Closed Tuesdays &amp; on Tamil New Year (Puthandu)
+  </p>
+  <p style="margin-top:6px; font-size:14px; letter-spacing:0.18em; text-transform:uppercase;">
+    Pre-order Nandu Masala &amp; Varuval Platter on <strong>+91 44 2491 4762</strong>
+  </p>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="arcade" aria-hidden="true">
+    <div class="pillar-col"></div>
+    <span class="conch">𑀰</span>
+    <div class="pillar-col"></div>
+    <div class="kolam">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+        <g fill="none" stroke="#8b1538" stroke-width="1.2">
+          <rect x="10" y="10" width="80" height="80"/>
+          <rect x="20" y="20" width="60" height="60" transform="rotate(45 50 50)"/>
+          <circle cx="50" cy="50" r="32"/>
+          <circle cx="50" cy="50" r="24"/>
+          <circle cx="50" cy="50" r="16"/>
+          <circle cx="50" cy="50" r="8"/>
+        </g>
+        <g fill="#e34234">
+          <circle cx="50" cy="18" r="3"/>
+          <circle cx="82" cy="50" r="3"/>
+          <circle cx="50" cy="82" r="3"/>
+          <circle cx="18" cy="50" r="3"/>
+        </g>
+        <g fill="#c9a23a">
+          <circle cx="50" cy="50" r="3"/>
+          <circle cx="30" cy="30" r="2"/>
+          <circle cx="70" cy="30" r="2"/>
+          <circle cx="30" cy="70" r="2"/>
+          <circle cx="70" cy="70" r="2"/>
+        </g>
+        <g fill="none" stroke="#076b88" stroke-width="0.8">
+          <path d="M 50 26 Q 58 34 50 42 Q 42 34 50 26 Z"/>
+          <path d="M 74 50 Q 66 58 58 50 Q 66 42 74 50 Z"/>
+          <path d="M 50 74 Q 42 66 50 58 Q 58 66 50 74 Z"/>
+          <path d="M 26 50 Q 34 42 42 50 Q 34 58 26 50 Z"/>
+        </g>
+      </svg>
+    </div>
+    <div class="pillar-col"></div>
+    <span class="conch">𑀰</span>
+    <div class="pillar-col"></div>
+  </div>
+
+  <div class="footinfo">
+    <h4>Annapurna Bhavan</h4>
+    <p>14 North Mada Street, Mylapore, Chennai – 600 004 · Tamil Nadu, India</p>
+    <p>Opposite the East Tower of Sri Kapaleeswarar Temple</p>
+    <p class="tel">☎ +91 44 2491 4762</p>
+    <p>Lunch 11:30–14:45 &nbsp;·&nbsp; Dinner 19:00–22:30 &nbsp;·&nbsp; Closed Tuesdays</p>
+    <p class="copyright">Est. 1947 · Tanjore Kitchens Trust · Annamalai Compact, 1962</p>
+  </div>
+</footer>
+
+</body>
+</html>
