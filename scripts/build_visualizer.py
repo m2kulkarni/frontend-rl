@@ -307,21 +307,29 @@ def render_task_html(task: dict) -> str:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__,
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("run_dir", type=Path,
-                        help="path to a jobs/<run-id> directory")
+    parser.add_argument("run_dir", type=Path, nargs="+",
+                        help="one or more jobs/<run-id> directories. "
+                             "Multiple dirs are merged — useful for k>1 evals "
+                             "split across runs.")
     parser.add_argument("--out", type=Path, default=Path("viewer"),
                         help="output viewer directory (default: viewer/)")
     parser.add_argument("--workers", type=int, default=6,
                         help="parallel render workers (default: 6).")
     args = parser.parse_args()
 
-    if not args.run_dir.is_dir():
-        print(f"error: {args.run_dir} is not a directory", file=sys.stderr)
-        return 2
+    for d in args.run_dir:
+        if not d.is_dir():
+            print(f"error: {d} is not a directory", file=sys.stderr)
+            return 2
 
     args.out.mkdir(parents=True, exist_ok=True)
 
-    trials = find_trial_dirs(args.run_dir)
+    # Merge trials from every run dir. Each run lives in its own jobs/<run-id>/
+    # so trial keys (slug__hash) don't collide; if two runs ever happen to use
+    # the same hash, the second wins.
+    trials: list[tuple[str, Path]] = []
+    for d in args.run_dir:
+        trials.extend(find_trial_dirs(d))
     if not trials:
         print(f"no trials found under {args.run_dir}", file=sys.stderr)
         return 1
