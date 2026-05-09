@@ -108,15 +108,20 @@ def main() -> int:
                         default=None,
                         help="If set, override the sampled variant on every point. "
                              "Useful for batching a single variant (e.g., bold).")
+    parser.add_argument("--framework", choices=["vanilla", "react"],
+                        default=None,
+                        help="If set, lock all sampled points to this framework. "
+                             "If omitted, the sampler mixes across all FRAMEWORKS.")
     args = parser.parse_args()
 
     args.out.mkdir(parents=True, exist_ok=True)
 
     sampler = sample_stratified_animated if args.animated else sample_stratified
-    points = sampler(args.n, rng_seed=args.seed)
+    points = sampler(args.n, rng_seed=args.seed, framework=args.framework)
     if args.variant:
         points = [
-            TaxonomyPoint(p.style, args.variant, p.purpose, p.seed, p.animated)
+            TaxonomyPoint(p.style, args.variant, p.purpose, p.seed, p.animated,
+                          framework=p.framework)
             for p in points
         ]
 
