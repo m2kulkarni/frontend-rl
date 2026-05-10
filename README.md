@@ -19,7 +19,7 @@ Decision log lives in `docs/`:
 - [`docs/eval_report.md`](docs/eval_report.md) — **30 × 2 trial eval results**
 - [`docs/rubric_audit.md`](docs/rubric_audit.md) — reward-hack audit + decomposition plan for RL use
 
-> **Bonus 2 (multi-framework)** lives on the [`bonus-2-multi-framework`](https://github.com/m2kulkarni/frontend-rl/tree/bonus-2-multi-framework) branch. Tier A proof of concept: React+Vite as a second framework, with full pipeline support (taxonomy → generator → render → Harbor packaging → grader). 5 React tasks × 10 attempts = **50 trials evaluated** on Modal, mean overall **0.773**. See [`docs/bonus_2.md`](https://github.com/m2kulkarni/frontend-rl/blob/bonus-2-multi-framework/docs/bonus_2.md) for the design doc and [`docs/eval_report_react.md`](https://github.com/m2kulkarni/frontend-rl/blob/bonus-2-multi-framework/docs/eval_report_react.md) for the results.
+> **Bonus 2** is on the [`bonus-2-multi-framework`](https://github.com/m2kulkarni/frontend-rl/tree/bonus-2-multi-framework) branch and supports React+Vite as a framework. See [`docs/bonus_2.md`](https://github.com/m2kulkarni/frontend-rl/blob/bonus-2-multi-framework/docs/bonus_2.md) and [`docs/eval_report_react.md`](https://github.com/m2kulkarni/frontend-rl/blob/bonus-2-multi-framework/docs/eval_report_react.md).
 
 ## Design Choices i made
 - **Architectural Style Diversity** - Five Styles (roman, gothic, south-indian, japanese and persian) for the website design. Along with different palettes and targetting different industries. I wanted the websites to be visually tough to reproduce, while also being diverse enough. This is also easy to extend, because we can add more styles, more industries, more palettes etc.
