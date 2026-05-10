@@ -1,14 +1,14 @@
 # Bonus 2 — React eval report (5 tasks × 10 attempts)
 
-**Date:** 2026-05-09
+**Date:** 2026-05-10
 
-**Runs:** `jobs/2026-05-09__21-35-08/` (k=2) + `jobs/2026-05-09__22-04-50/` (k=8)
+**Run:** `jobs/2026-05-10__14-03-59/`
 
 **Agent:** claude-code v2.1.138 with `claude-opus-4-7`
 
 **Environment:** Modal (parallel sandboxes, custom React Dockerfile w/ Node 20 + cached node_modules)
 
-**Total trials:** 50 (5 unique tasks × 10 attempts each, 0 failures)
+**Total trials:** 50 (50 OK, 0 failed)
 
 
 Each trial: agent edits `/app/src/pages/Page<N>.tsx` (one component per page); 
@@ -19,90 +19,90 @@ verifier runs `npm run build`, dumps each route to vanilla-shape HTML + screensh
 
 | Rubric | Mean | Median | Stdev | Min | Max |
 |---|---|---|---|---|---|
-| Overall (= visual) | 0.773 | 0.744 | 0.090 | 0.625 | 1.000 |
-| Visual (SSIM) | 0.773 | 0.744 | 0.090 | 0.625 | 1.000 |
-| Palette | 0.895 | 0.914 | 0.097 | 0.702 | 1.000 |
-| Structural | 0.684 | 0.659 | 0.107 | 0.532 | 1.000 |
-| Typography | 0.999 | 1.000 | 0.007 | 0.958 | 1.000 |
-| Consistency | 0.922 | 0.923 | 0.022 | 0.862 | 0.990 |
+| Overall (= visual) | 0.754 | 0.742 | 0.070 | 0.636 | 0.837 |
+| Visual (SSIM) | 0.754 | 0.742 | 0.070 | 0.636 | 0.837 |
+| Palette | 0.875 | 0.861 | 0.105 | 0.696 | 0.989 |
+| Structural | 0.660 | 0.661 | 0.065 | 0.461 | 0.774 |
+| Typography | 1.000 | 1.000 | 0.000 | 1.000 | 1.000 |
+| Consistency | 0.926 | 0.926 | 0.013 | 0.891 | 0.963 |
 | Coverage | 1.000 | 1.000 | 0.000 | 1.000 | 1.000 |
 
 ## Per-task aggregates (mean of 10 attempts)
 
-| # | Task | Overall | Visual | Palette | Struct | Typo | Cons |
-|---|---|---|---|---|---|---|---|
-| 1 | `react-edo-japanese-restaurant-23` | **0.847** | 0.85 | 0.98 | 0.76 | 1.00 | 0.94 |
-| 2 | `react-roman-imperial-portfolio-5` | **0.826** | 0.83 | 0.99 | 0.64 | 1.00 | 0.91 |
-| 3 | `react-persian-safavid-civic-1738` | **0.776** | 0.78 | 0.81 | 0.71 | 1.00 | 0.91 |
-| 4 | `react-high-gothic-museum-458726` | **0.732** | 0.73 | 0.86 | 0.58 | 1.00 | 0.93 |
-| 5 | `react-dravidian-studio-136645` | **0.682** | 0.68 | 0.83 | 0.73 | 1.00 | 0.93 |
+| # | Task | n | Overall | Visual | Palette | Struct | Typo | Cons |
+|---|---|---|---|---|---|---|---|---|
+| 1 | `react-edo-japanese-restaurant-23` | 10 | **0.832** | 0.83 | 0.98 | 0.74 | 1.00 | 0.94 |
+| 2 | `react-roman-imperial-portfolio-5` | 10 | **0.825** | 0.82 | 0.99 | 0.66 | 1.00 | 0.92 |
+| 3 | `react-persian-safavid-civic-1738` | 10 | **0.739** | 0.74 | 0.74 | 0.63 | 1.00 | 0.92 |
+| 4 | `react-high-gothic-museum-458726` | 10 | **0.729** | 0.73 | 0.84 | 0.59 | 1.00 | 0.92 |
+| 5 | `react-dravidian-studio-136645` | 10 | **0.645** | 0.65 | 0.82 | 0.69 | 1.00 | 0.93 |
 
 ## Comparison to vanilla 10×10 (animated)
 
 | Rubric | React 5×10 | Vanilla animated 10×10 | Δ |
 |---|---|---|---|
-| Overall | 0.773 | 0.558 | +0.215 |
-| Visual | 0.773 | 0.721 | +0.052 |
-| Palette | 0.895 | 0.673 | +0.222 |
-| Structural | 0.684 | 0.587 | +0.097 |
-| Typography | 0.999 | 0.371 | +0.628 |
-| Consistency | 0.922 | 0.673 | +0.249 |
+| Overall | 0.754 | 0.558 | +0.196 |
+| Visual | 0.754 | 0.721 | +0.033 |
+| Palette | 0.875 | 0.673 | +0.202 |
+| Structural | 0.660 | 0.587 | +0.073 |
+| Typography | 1.000 | 0.371 | +0.629 |
+| Consistency | 0.926 | 0.673 | +0.253 |
 
-**Caveat.** React variant scores higher across every rubric, but this is *eval-design* not *model capability*. The React env supplies substantially more scaffolding than the vanilla env: pre-built `Nav.tsx` and `Footer.tsx` components, design-system CSS already loaded with all tokens, fonts wired through CSS variables. The agent has strictly less surface area to mess up. Typography is near-perfect because the agent literally can't pick the wrong font — `var(--font-display)` always points at whatever the design system declares. To make a fair head-to-head, the React variant would need to give the agent the same level of control as vanilla (let them edit `index.html`, `App.tsx`, `package.json`) — but that defeats the framework-knowledge test.
+**Caveat.** React variant scores higher across every rubric, but this is *eval-design* not *model capability*. The React env supplies more scaffolding than vanilla: pre-built `Nav.tsx`, `Footer.tsx`, design-system CSS already loaded, fonts wired through CSS variables. The agent has strictly less surface area to mess up. Typography is perfect because the agent can't pick the wrong font — `var(--font-display)` always points at whatever the design system declares.
 
-## Per-trial scores + GitHub URLs
+## Per-trial scores + viewer links
 
-Click any trial's **task ID** to view the rendered React app via githack:
+Click **view** to jump to that trial's GT-vs-agent comparison in the side-by-side visualizer (open `viewer/index.html` first).
 
-| # | Task | Trial | Overall | Visual | Palette | Struct | Typo | Cons | Build |
+| # | Task | Trial id | Overall | Visual | Palette | Struct | Typo | Cons | View |
 |---|---|---|---|---|---|---|---|---|---|
-| 1 | `react-dravidian-studio-136645` | `85bKXxD` | **1.000** | 1.00 | 1.00 | 1.00 | 1.00 | 0.95 | 1.0 |
-| 2 | `react-dravidian-studio-136645` | `8PBynUp` | **0.664** | 0.66 | 0.82 | 0.70 | 1.00 | 0.93 | 1.0 |
-| 3 | `react-dravidian-studio-136645` | `sXCKJpt` | **0.657** | 0.66 | 0.83 | 0.66 | 1.00 | 0.94 | 1.0 |
-| 4 | `react-dravidian-studio-136645` | `gQgTF4m` | **0.655** | 0.65 | 0.83 | 0.72 | 1.00 | 0.94 | 1.0 |
-| 5 | `react-dravidian-studio-136645` | `FHLh8tp` | **0.653** | 0.65 | 0.80 | 0.68 | 1.00 | 0.92 | 1.0 |
-| 6 | `react-dravidian-studio-136645` | `Trgk6ib` | **0.646** | 0.65 | 0.77 | 0.70 | 1.00 | 0.94 | 1.0 |
-| 7 | `react-dravidian-studio-136645` | `zoMVDAA` | **0.645** | 0.65 | 0.76 | 0.70 | 1.00 | 0.86 | 1.0 |
-| 8 | `react-dravidian-studio-136645` | `qdKVHKc` | **0.642** | 0.64 | 0.80 | 0.71 | 1.00 | 0.94 | 1.0 |
-| 9 | `react-dravidian-studio-136645` | `4UpDRE7` | **0.631** | 0.63 | 0.83 | 0.68 | 1.00 | 0.91 | 1.0 |
-| 10 | `react-dravidian-studio-136645` | `n96Nw6f` | **0.625** | 0.63 | 0.82 | 0.72 | 1.00 | 0.93 | 1.0 |
-| 11 | `react-edo-japanese-restaurant-23` | `iMahFj6` | **1.000** | 1.00 | 1.00 | 1.00 | 1.00 | 0.95 | 1.0 |
-| 12 | `react-edo-japanese-restaurant-23` | `L4t6eAG` | **0.838** | 0.84 | 0.98 | 0.75 | 1.00 | 0.94 | 1.0 |
-| 13 | `react-edo-japanese-restaurant-23` | `wwUtyTK` | **0.836** | 0.84 | 0.98 | 0.74 | 1.00 | 0.94 | 1.0 |
-| 14 | `react-edo-japanese-restaurant-23` | `drKV6qm` | **0.833** | 0.83 | 0.98 | 0.75 | 1.00 | 0.94 | 1.0 |
-| 15 | `react-edo-japanese-restaurant-23` | `SDVShRm` | **0.831** | 0.83 | 0.98 | 0.72 | 1.00 | 0.94 | 1.0 |
-| 16 | `react-edo-japanese-restaurant-23` | `ibatJ4K` | **0.831** | 0.83 | 0.98 | 0.65 | 1.00 | 0.93 | 1.0 |
-| 17 | `react-edo-japanese-restaurant-23` | `J3cDuMN` | **0.829** | 0.83 | 0.98 | 0.75 | 0.98 | 0.93 | 1.0 |
-| 18 | `react-edo-japanese-restaurant-23` | `shn5xqx` | **0.828** | 0.83 | 0.98 | 0.72 | 1.00 | 0.93 | 1.0 |
-| 19 | `react-edo-japanese-restaurant-23` | `srbheBm` | **0.828** | 0.83 | 0.98 | 0.72 | 1.00 | 0.94 | 1.0 |
-| 20 | `react-edo-japanese-restaurant-23` | `nudiAkH` | **0.811** | 0.81 | 0.98 | 0.77 | 1.00 | 0.93 | 1.0 |
-| 21 | `react-high-gothic-museum-458726` | `pMCMEU3` | **0.744** | 0.74 | 0.89 | 0.56 | 1.00 | 0.92 | 1.0 |
-| 22 | `react-high-gothic-museum-458726` | `XohkXN4` | **0.744** | 0.74 | 0.92 | 0.63 | 1.00 | 0.92 | 1.0 |
-| 23 | `react-high-gothic-museum-458726` | `XZz6Mne` | **0.740** | 0.74 | 0.92 | 0.61 | 1.00 | 0.99 | 1.0 |
-| 24 | `react-high-gothic-museum-458726` | `BihHdbA` | **0.737** | 0.74 | 0.82 | 0.55 | 1.00 | 0.93 | 1.0 |
-| 25 | `react-high-gothic-museum-458726` | `aSCuevo` | **0.735** | 0.74 | 0.91 | 0.63 | 1.00 | 0.92 | 1.0 |
-| 26 | `react-high-gothic-museum-458726` | `YmuR3q4` | **0.735** | 0.73 | 0.91 | 0.55 | 1.00 | 0.92 | 1.0 |
-| 27 | `react-high-gothic-museum-458726` | `iiDwy8m` | **0.733** | 0.73 | 0.86 | 0.57 | 1.00 | 0.92 | 1.0 |
-| 28 | `react-high-gothic-museum-458726` | `Lufsqbh` | **0.731** | 0.73 | 0.80 | 0.59 | 1.00 | 0.91 | 1.0 |
-| 29 | `react-high-gothic-museum-458726` | `FLmHrcB` | **0.718** | 0.72 | 0.83 | 0.53 | 1.00 | 0.90 | 1.0 |
-| 30 | `react-high-gothic-museum-458726` | `ZtAnyva` | **0.707** | 0.71 | 0.78 | 0.57 | 1.00 | 0.93 | 1.0 |
-| 31 | `react-persian-safavid-civic-1738` | `qvNbcgf` | **1.000** | 1.00 | 1.00 | 1.00 | 1.00 | 0.87 | 1.0 |
-| 32 | `react-persian-safavid-civic-1738` | `6RBn3v4` | **0.870** | 0.87 | 0.99 | 0.96 | 1.00 | 0.87 | 1.0 |
-| 33 | `react-persian-safavid-civic-1738` | `2bNaNjY` | **0.753** | 0.75 | 0.70 | 0.64 | 1.00 | 0.91 | 1.0 |
-| 34 | `react-persian-safavid-civic-1738` | `cqjhGcH` | **0.741** | 0.74 | 0.82 | 0.70 | 1.00 | 0.92 | 1.0 |
-| 35 | `react-persian-safavid-civic-1738` | `xpPtqM3` | **0.738** | 0.74 | 0.79 | 0.62 | 1.00 | 0.92 | 1.0 |
-| 36 | `react-persian-safavid-civic-1738` | `hMKDyT3` | **0.738** | 0.74 | 0.70 | 0.69 | 1.00 | 0.92 | 1.0 |
-| 37 | `react-persian-safavid-civic-1738` | `GRYpVKi` | **0.736** | 0.74 | 0.80 | 0.63 | 1.00 | 0.91 | 1.0 |
-| 38 | `react-persian-safavid-civic-1738` | `cqUxTmW` | **0.735** | 0.74 | 0.78 | 0.64 | 1.00 | 0.93 | 1.0 |
-| 39 | `react-persian-safavid-civic-1738` | `xCSAt7x` | **0.735** | 0.73 | 0.81 | 0.65 | 1.00 | 0.92 | 1.0 |
-| 40 | `react-persian-safavid-civic-1738` | `5VM9frL` | **0.718** | 0.72 | 0.70 | 0.63 | 1.00 | 0.92 | 1.0 |
-| 41 | `react-roman-imperial-portfolio-5` | `kGzoXxM` | **0.831** | 0.83 | 0.99 | 0.63 | 1.00 | 0.88 | 1.0 |
-| 42 | `react-roman-imperial-portfolio-5` | `jMZJuvB` | **0.831** | 0.83 | 0.98 | 0.71 | 1.00 | 0.89 | 1.0 |
-| 43 | `react-roman-imperial-portfolio-5` | `uNKpcwj` | **0.830** | 0.83 | 0.99 | 0.64 | 1.00 | 0.93 | 1.0 |
-| 44 | `react-roman-imperial-portfolio-5` | `YEFRmCG` | **0.827** | 0.83 | 0.99 | 0.66 | 0.96 | 0.92 | 1.0 |
-| 45 | `react-roman-imperial-portfolio-5` | `xpUhvjV` | **0.826** | 0.83 | 0.99 | 0.65 | 1.00 | 0.92 | 1.0 |
-| 46 | `react-roman-imperial-portfolio-5` | `mvGN2Dn` | **0.825** | 0.82 | 0.99 | 0.60 | 1.00 | 0.90 | 1.0 |
-| 47 | `react-roman-imperial-portfolio-5` | `8wjXdM9` | **0.824** | 0.82 | 0.99 | 0.64 | 1.00 | 0.92 | 1.0 |
-| 48 | `react-roman-imperial-portfolio-5` | `MmBuYTY` | **0.823** | 0.82 | 0.99 | 0.65 | 1.00 | 0.90 | 1.0 |
-| 49 | `react-roman-imperial-portfolio-5` | `Rp2EkV2` | **0.823** | 0.82 | 0.99 | 0.64 | 1.00 | 0.92 | 1.0 |
-| 50 | `react-roman-imperial-portfolio-5` | `3wHmSPT` | **0.818** | 0.82 | 0.99 | 0.63 | 1.00 | 0.93 | 1.0 |
+| 1 | `react-dravidian-studio-136645` | `VDAUeRF` | **0.656** | 0.66 | 0.80 | 0.72 | 1.00 | 0.94 | [view](../viewer/index.html#react-dravidian-studio-136645__VDAUeRF) |
+| 2 | `react-dravidian-studio-136645` | `mmFVLVT` | **0.654** | 0.65 | 0.82 | 0.69 | 1.00 | 0.93 | [view](../viewer/index.html#react-dravidian-studio-136645__mmFVLVT) |
+| 3 | `react-dravidian-studio-136645` | `dvRHojx` | **0.651** | 0.65 | 0.87 | 0.72 | 1.00 | 0.92 | [view](../viewer/index.html#react-dravidian-studio-136645__dvRHojx) |
+| 4 | `react-dravidian-studio-136645` | `wkLkWbh` | **0.647** | 0.65 | 0.81 | 0.70 | 1.00 | 0.94 | [view](../viewer/index.html#react-dravidian-studio-136645__wkLkWbh) |
+| 5 | `react-dravidian-studio-136645` | `WgyVX5N` | **0.647** | 0.65 | 0.79 | 0.73 | 1.00 | 0.93 | [view](../viewer/index.html#react-dravidian-studio-136645__WgyVX5N) |
+| 6 | `react-dravidian-studio-136645` | `RKNU3ki` | **0.644** | 0.64 | 0.83 | 0.65 | 1.00 | 0.94 | [view](../viewer/index.html#react-dravidian-studio-136645__RKNU3ki) |
+| 7 | `react-dravidian-studio-136645` | `zBVWc6D` | **0.640** | 0.64 | 0.86 | 0.66 | 1.00 | 0.93 | [view](../viewer/index.html#react-dravidian-studio-136645__zBVWc6D) |
+| 8 | `react-dravidian-studio-136645` | `6nfJHgU` | **0.638** | 0.64 | 0.79 | 0.65 | 1.00 | 0.94 | [view](../viewer/index.html#react-dravidian-studio-136645__6nfJHgU) |
+| 9 | `react-dravidian-studio-136645` | `PQ6TZzS` | **0.637** | 0.64 | 0.84 | 0.67 | 1.00 | 0.93 | [view](../viewer/index.html#react-dravidian-studio-136645__PQ6TZzS) |
+| 10 | `react-dravidian-studio-136645` | `S3UehHb` | **0.636** | 0.64 | 0.82 | 0.67 | 1.00 | 0.93 | [view](../viewer/index.html#react-dravidian-studio-136645__S3UehHb) |
+| 11 | `react-edo-japanese-restaurant-23` | `fkeGNN7` | **0.837** | 0.84 | 0.98 | 0.75 | 1.00 | 0.94 | [view](../viewer/index.html#react-edo-japanese-restaurant-23__fkeGNN7) |
+| 12 | `react-edo-japanese-restaurant-23` | `yQn8CX8` | **0.836** | 0.84 | 0.98 | 0.72 | 1.00 | 0.94 | [view](../viewer/index.html#react-edo-japanese-restaurant-23__yQn8CX8) |
+| 13 | `react-edo-japanese-restaurant-23` | `3sem4NR` | **0.835** | 0.83 | 0.99 | 0.77 | 1.00 | 0.93 | [view](../viewer/index.html#react-edo-japanese-restaurant-23__3sem4NR) |
+| 14 | `react-edo-japanese-restaurant-23` | `GhrcrJM` | **0.834** | 0.83 | 0.98 | 0.71 | 1.00 | 0.94 | [view](../viewer/index.html#react-edo-japanese-restaurant-23__GhrcrJM) |
+| 15 | `react-edo-japanese-restaurant-23` | `fnxGPQM` | **0.833** | 0.83 | 0.98 | 0.73 | 1.00 | 0.94 | [view](../viewer/index.html#react-edo-japanese-restaurant-23__fnxGPQM) |
+| 16 | `react-edo-japanese-restaurant-23` | `Ua5xonT` | **0.831** | 0.83 | 0.98 | 0.75 | 1.00 | 0.94 | [view](../viewer/index.html#react-edo-japanese-restaurant-23__Ua5xonT) |
+| 17 | `react-edo-japanese-restaurant-23` | `HECfJ4c` | **0.831** | 0.83 | 0.98 | 0.71 | 1.00 | 0.94 | [view](../viewer/index.html#react-edo-japanese-restaurant-23__HECfJ4c) |
+| 18 | `react-edo-japanese-restaurant-23` | `RsRiQu7` | **0.830** | 0.83 | 0.98 | 0.76 | 1.00 | 0.93 | [view](../viewer/index.html#react-edo-japanese-restaurant-23__RsRiQu7) |
+| 19 | `react-edo-japanese-restaurant-23` | `R63xZ3N` | **0.828** | 0.83 | 0.98 | 0.76 | 1.00 | 0.94 | [view](../viewer/index.html#react-edo-japanese-restaurant-23__R63xZ3N) |
+| 20 | `react-edo-japanese-restaurant-23` | `9sYagsL` | **0.826** | 0.83 | 0.98 | 0.70 | 1.00 | 0.94 | [view](../viewer/index.html#react-edo-japanese-restaurant-23__9sYagsL) |
+| 21 | `react-high-gothic-museum-458726` | `rnuvPLM` | **0.752** | 0.75 | 0.90 | 0.63 | 1.00 | 0.92 | [view](../viewer/index.html#react-high-gothic-museum-458726__rnuvPLM) |
+| 22 | `react-high-gothic-museum-458726` | `qQfMjQL` | **0.747** | 0.75 | 0.92 | 0.55 | 1.00 | 0.92 | [view](../viewer/index.html#react-high-gothic-museum-458726__qQfMjQL) |
+| 23 | `react-high-gothic-museum-458726` | `8fi6Pef` | **0.743** | 0.74 | 0.89 | 0.63 | 1.00 | 0.92 | [view](../viewer/index.html#react-high-gothic-museum-458726__8fi6Pef) |
+| 24 | `react-high-gothic-museum-458726` | `5yrpZGj` | **0.733** | 0.73 | 0.92 | 0.55 | 1.00 | 0.91 | [view](../viewer/index.html#react-high-gothic-museum-458726__5yrpZGj) |
+| 25 | `react-high-gothic-museum-458726` | `Z6JMEkU` | **0.733** | 0.73 | 0.83 | 0.59 | 1.00 | 0.92 | [view](../viewer/index.html#react-high-gothic-museum-458726__Z6JMEkU) |
+| 26 | `react-high-gothic-museum-458726` | `PuvAPKs` | **0.730** | 0.73 | 0.81 | 0.59 | 1.00 | 0.93 | [view](../viewer/index.html#react-high-gothic-museum-458726__PuvAPKs) |
+| 27 | `react-high-gothic-museum-458726` | `cxwy7Vp` | **0.728** | 0.73 | 0.81 | 0.54 | 1.00 | 0.92 | [view](../viewer/index.html#react-high-gothic-museum-458726__cxwy7Vp) |
+| 28 | `react-high-gothic-museum-458726` | `2atFWPq` | **0.716** | 0.72 | 0.79 | 0.57 | 1.00 | 0.92 | [view](../viewer/index.html#react-high-gothic-museum-458726__2atFWPq) |
+| 29 | `react-high-gothic-museum-458726` | `sBTX8mn` | **0.713** | 0.71 | 0.79 | 0.58 | 1.00 | 0.91 | [view](../viewer/index.html#react-high-gothic-museum-458726__sBTX8mn) |
+| 30 | `react-high-gothic-museum-458726` | `gR2B6PD` | **0.699** | 0.70 | 0.76 | 0.61 | 1.00 | 0.96 | [view](../viewer/index.html#react-high-gothic-museum-458726__gR2B6PD) |
+| 31 | `react-persian-safavid-civic-1738` | `qKsBsZL` | **0.758** | 0.76 | 0.70 | 0.65 | 1.00 | 0.93 | [view](../viewer/index.html#react-persian-safavid-civic-1738__qKsBsZL) |
+| 32 | `react-persian-safavid-civic-1738` | `mudMuSz` | **0.752** | 0.75 | 0.83 | 0.61 | 1.00 | 0.92 | [view](../viewer/index.html#react-persian-safavid-civic-1738__mudMuSz) |
+| 33 | `react-persian-safavid-civic-1738` | `2QH4i2s` | **0.741** | 0.74 | 0.70 | 0.69 | 1.00 | 0.92 | [view](../viewer/index.html#react-persian-safavid-civic-1738__2QH4i2s) |
+| 34 | `react-persian-safavid-civic-1738` | `KtVsM5r` | **0.739** | 0.74 | 0.81 | 0.69 | 1.00 | 0.91 | [view](../viewer/index.html#react-persian-safavid-civic-1738__KtVsM5r) |
+| 35 | `react-persian-safavid-civic-1738` | `vm9xDdZ` | **0.738** | 0.74 | 0.70 | 0.64 | 1.00 | 0.92 | [view](../viewer/index.html#react-persian-safavid-civic-1738__vm9xDdZ) |
+| 36 | `react-persian-safavid-civic-1738` | `gMbw35U` | **0.735** | 0.74 | 0.71 | 0.63 | 1.00 | 0.93 | [view](../viewer/index.html#react-persian-safavid-civic-1738__gMbw35U) |
+| 37 | `react-persian-safavid-civic-1738` | `66SSxqZ` | **0.734** | 0.73 | 0.82 | 0.63 | 1.00 | 0.91 | [view](../viewer/index.html#react-persian-safavid-civic-1738__66SSxqZ) |
+| 38 | `react-persian-safavid-civic-1738` | `EsAn6rd` | **0.733** | 0.73 | 0.70 | 0.60 | 1.00 | 0.91 | [view](../viewer/index.html#react-persian-safavid-civic-1738__EsAn6rd) |
+| 39 | `react-persian-safavid-civic-1738` | `PLZCkaJ` | **0.733** | 0.73 | 0.71 | 0.46 | 1.00 | 0.92 | [view](../viewer/index.html#react-persian-safavid-civic-1738__PLZCkaJ) |
+| 40 | `react-persian-safavid-civic-1738` | `TrZUYGP` | **0.725** | 0.73 | 0.70 | 0.72 | 1.00 | 0.92 | [view](../viewer/index.html#react-persian-safavid-civic-1738__TrZUYGP) |
+| 41 | `react-roman-imperial-portfolio-5` | `KNzZ7WL` | **0.829** | 0.83 | 0.99 | 0.65 | 1.00 | 0.93 | [view](../viewer/index.html#react-roman-imperial-portfolio-5__KNzZ7WL) |
+| 42 | `react-roman-imperial-portfolio-5` | `3brgkzc` | **0.829** | 0.83 | 0.99 | 0.66 | 1.00 | 0.93 | [view](../viewer/index.html#react-roman-imperial-portfolio-5__3brgkzc) |
+| 43 | `react-roman-imperial-portfolio-5` | `ofYGCiZ` | **0.828** | 0.83 | 0.99 | 0.68 | 1.00 | 0.93 | [view](../viewer/index.html#react-roman-imperial-portfolio-5__ofYGCiZ) |
+| 44 | `react-roman-imperial-portfolio-5` | `EgenC4w` | **0.827** | 0.83 | 0.99 | 0.62 | 1.00 | 0.90 | [view](../viewer/index.html#react-roman-imperial-portfolio-5__EgenC4w) |
+| 45 | `react-roman-imperial-portfolio-5` | `c9LyuVf` | **0.826** | 0.83 | 0.99 | 0.67 | 1.00 | 0.92 | [view](../viewer/index.html#react-roman-imperial-portfolio-5__c9LyuVf) |
+| 46 | `react-roman-imperial-portfolio-5` | `HRYCFgH` | **0.826** | 0.83 | 0.99 | 0.66 | 1.00 | 0.90 | [view](../viewer/index.html#react-roman-imperial-portfolio-5__HRYCFgH) |
+| 47 | `react-roman-imperial-portfolio-5` | `3TpR9BE` | **0.822** | 0.82 | 0.99 | 0.73 | 1.00 | 0.92 | [view](../viewer/index.html#react-roman-imperial-portfolio-5__3TpR9BE) |
+| 48 | `react-roman-imperial-portfolio-5` | `9Zv94Po` | **0.821** | 0.82 | 0.99 | 0.67 | 1.00 | 0.92 | [view](../viewer/index.html#react-roman-imperial-portfolio-5__9Zv94Po) |
+| 49 | `react-roman-imperial-portfolio-5` | `8xmmJkw` | **0.821** | 0.82 | 0.99 | 0.63 | 1.00 | 0.89 | [view](../viewer/index.html#react-roman-imperial-portfolio-5__8xmmJkw) |
+| 50 | `react-roman-imperial-portfolio-5` | `JyRR4Vx` | **0.819** | 0.82 | 0.99 | 0.65 | 1.00 | 0.93 | [view](../viewer/index.html#react-roman-imperial-portfolio-5__JyRR4Vx) |

@@ -66,6 +66,14 @@ EOF
     exit 0
 fi
 
+# Mirror /app/_candidate/* into /app/output/* so Harbor captures the
+# rendered React output as the trial artifact. Without this, artifacts/output/
+# is empty for React trials (the agent edits src/pages/, not output/) and
+# downstream tools — the visualizer especially — have nothing to compare
+# against ground truth.
+mkdir -p /app/output
+cp -r /app/_candidate/. /app/output/ 2>/dev/null || true
+
 # 3. Run the grader against the vanilla-shaped candidate dir.
 if python3 /tests/grader/run_grader.py /tests/ground_truth /app/_candidate \
         > /logs/verifier/reward.json 2>/logs/verifier/grader-stderr.log; then
